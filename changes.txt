@@ -1,0 +1,69 @@
+v2.1
+Major changes/additions are indicated by ***
+
+DATE		PORTION		DESCRIPTION
+-------------------------------------------
+2009-01-28	(all)		Fixed: palette colors weren't being read correctly
+2009-01-28	Stats		Fixed: issue with level-up bonus controls
+2009-01-28	Stats		Fixed: saving issue with inflict element for spells
+2009-01-31	Sprites		Added: Font characters not usable by default are now usable, except '[' (Character #59)
+2009-02-02	Levels		Fixed: problem drawing molds outside of the mold index range for NPC's
+2009-02-02	Stats		Fixed: starting coins/frog coins were being read as bytes instead of ushorts
+2009-02-06	Stats		Fixed: reading effect type for spells was incorrect; label texts weren't updating
+2009-02-06	Levels		Added: graphic set exporting; go to File > Export > Graphic Sets...
+2009-02-06	Sprites		Fixed: inserting a new tile to molds listed after null molds caused a crash
+2009-02-06	Scripts		Added: a quick jump to dialogue editor - right click "Run dlg" commands
+2009-02-06	Levels		Added: a quick jump to event and action script editor from NPC's - click the buttons
+2009-02-06	(all)		Added: export/import features remember last used directory
+2009-02-07	Levels		Added: graphic set painting in 16x16 tile editor
+2009-02-07	Levels		Added: graphic set importing for .gif/.jpg/.png files
+2009-02-08	Levels		Added: 16x16 tile editor is now a panel that can be easily accessed through toggle
+2009-02-09	Sprites		Added: pop-up window for dialogue "Delay..." and "Variable..." is now a panel
+2009-02-14	Sprites		Fixed: IMAGE GRAPHICS Offset wasn't changing when changing IMAGE #
+2009-03-29	Stats		Fixed: psychopath message was being saved to the item description and vice versa
+2009-03-30	Stats		Fixed: NEW LINE and END button functions for item descriptions were reversed
+
+***
+2009-03-30	Sprites		Added: a spell effect editor
+***
+
+2009-04-06	Levels		Fixed: doing Undo/Redo while moving a tile selection had unorthodox results
+2009-04-06	Levels		Added: edit all layers (ie. cut, copy, paste, delete all layers simultaneously)
+2009-04-06	Levels		Added: option to clear all unused tilesets, tilemaps, and physical maps
+2009-04-08	Levels		Added: overlaps are now drawn on the level image when toggled on
+2009-04-08	Main		Added: "Load Last Used ROM" in "Settings" menu loads the last used ROM if checked
+2009-04-08	Scripts		Fixed: adding new command in battle scripts placed it before the selected node
+2009-04-08	Levels		Added: a quick jump to event editor from entrance event and event field event
+2009-04-11	Levels		Added: a template system for inserting objects composed of 3 layers and a physical layer
+2009-04-25	Stats		Added: search function for Formation Packs with formation(s) containing a certain monster
+2009-04-26	Stats		Added: target arrow cursor positioning for monsters in battle
+2009-04-26	Levels		Added: inserting new NPCs/fields sets coords near top-left visible bounds of level image
+2009-06-01	Stats		Fixed: item names wouldn't save if the icon value was >= 0x18
+2009-06-18	Stats		Added: preview for item and spell descriptions (like the dialogue preview)
+2009-06-18	Stats		Added: name lists are drawn with the game's font
+2009-06-18	Scripts		Added: event and action scripts can be assigned labels for easy ID'ing
+
+***
+2009-06-18	Scripts		Added: animation script editor for several types of animations
+***
+
+2009-06-18	Stats		Added: target cursor (the red arrow) position editing for monsters
+2009-06-18	Stats		Added: formation pack searching
+2009-06-18	Sprites		Added: can mirror/invert font characters
+2009-06-18	(all)		Added: an optional Help Tip label that shows when the mouse moves over a control
+2009-06-23	Levels		Added: zoom pan box for level image
+2009-07-09	Levels		Fixed: changing destination type for exit might crash if index above item count
+2009-08-01	Levels		Added: copy/paste NPC's between levels with C and V keys
+2009-08-01	Levels		Added: color math can be applied to battlefield palettes
+2009-08-01	Levels		Added: importing/exporting arrays
+2009-08-01	Sprites		Added: color math commands for sprite and effect palettes
+2009-08-01	Sprites		Fixed: inserting/deleting molds wasn't optimized
+2009-08-01	Sprites		Added: dialogue buttons are drawn from ROM data instead of embedded .gifs
+2009-08-01	Stats		Added: spells learned on level-up can now be edited
+2009-08-01	Stats		Fixed: some timing controls and variables were redundant, so they were removed
+2009-08-16	Sprites		Added: user can now add a keystroke assignment to each font character
+2009-08-17	Stats		Fixed: starting items weren't even saving!
+2009-08-29	Sprites		Added: user can now edit battle messages (e.g. "Hit Y repeatedly!", etc...)
+2009-09-05	Scripts		Added: scrollbar position of command trees now stays fixed when modifying commands
+2009-09-22	Sprites		Added: removed all dialogue character buttons, can insert by right-clicking font table
+2009-11-20	Sprites		Added: effects - import an external image file into the tileset
