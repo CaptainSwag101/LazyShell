@@ -48,6 +48,7 @@ namespace SMRPGED
 
             RefreshDialogueEditor();
             SetDialogueTextImage();
+            dialogueMemory.SelectedIndex = 0;
 
             updatingDialogue = false;
         }
@@ -873,24 +874,6 @@ namespace SMRPGED
                         InsertIntoDialogueText("[delay]");
                     break;
                 case 8:
-                    panelDialogueInsert.BringToFront();
-                    dialogueByteValue.BringToFront();
-                    dialogueByteValue.Enabled = true;
-                    labelDialogueInsert.Text = "Frame delay";
-                    panelDialogueMemory.Enabled = false;
-                    panelDialogueInsert.Visible = true;
-                    break;
-                case 9:
-                    panelDialogueInsert.BringToFront();
-                    panelDialogueMemory.BringToFront();
-                    panelDialogueMemory.Enabled = true;
-                    if (dialogueMemory.SelectedIndex == -1)
-                        dialogueMemory.SelectedIndex = 0;
-                    labelDialogueInsert.Text = "Variable";
-                    dialogueByteValue.Enabled = false;
-                    panelDialogueInsert.Visible = true;
-                    break;
-                case 10:
                     if (textCodeFormat)
                         InsertIntoDialogueText("[7]");
                     else
@@ -901,43 +884,36 @@ namespace SMRPGED
         }
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            int variable = 0;
-
-            if (listBox1.SelectedIndex == 8)
-            {
-                if (textCodeFormat)
-                    InsertIntoDialogueText("[13][" + this.dialogueByteValue.Value.ToString() + "]");
-                else
-                    InsertIntoDialogueText("[FRAME DELAY][ " + this.dialogueByteValue.Value.ToString() + "]");
-            }
-            else if (listBox1.SelectedIndex == 9)
-            {
-                variable = this.dialogueMemory.SelectedIndex;
-                if (textCodeFormat)
-                {
-                    if (variable > 0)
-                    {
-                        variable--;
-                        InsertIntoDialogueText("[28][" + variable.ToString() + "]");
-                    }
-                    else
-                        InsertIntoDialogueText("[26]");
-                }
-                else
-                {
-                    if (variable > 0)
-                    {
-                        variable--;
-                        InsertIntoDialogueText("[NUMBER FROM EVENT MEMORY][ " + variable.ToString() + "]");
-                    }
-                    else
-                        InsertIntoDialogueText("[ITEM VARIABLE FROM EVENT MEMORY 00:70A7]");
-                }
-            }
+            if (textCodeFormat)
+                InsertIntoDialogueText("[13][" + this.dialogueByteValue.Value.ToString() + "]");
+            else
+                InsertIntoDialogueText("[FRAME DELAY][ " + this.dialogueByteValue.Value.ToString() + "]");
+            dialogueTextBox.Focus();
         }
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonInsertVAR_Click(object sender, EventArgs e)
         {
-            panelDialogueInsert.Visible = false;
+            int variable = this.dialogueMemory.SelectedIndex;
+            if (textCodeFormat)
+            {
+                if (variable > 0)
+                {
+                    variable--;
+                    InsertIntoDialogueText("[28][" + variable.ToString() + "]");
+                }
+                else
+                    InsertIntoDialogueText("[26]");
+            }
+            else
+            {
+                if (variable > 0)
+                {
+                    variable--;
+                    InsertIntoDialogueText("[NUMBER FROM EVENT MEMORY][ " + variable.ToString() + "]");
+                }
+                else
+                    InsertIntoDialogueText("[ITEM VARIABLE FROM EVENT MEMORY 00:70A7]");
+            }
+            dialogueTextBox.Focus();
         }
         private void textBoxSearch_KeyDown(object sender, KeyEventArgs e)
         {

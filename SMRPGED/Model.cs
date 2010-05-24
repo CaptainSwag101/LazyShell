@@ -29,6 +29,8 @@ namespace SMRPGED
         private LSCompression LSCompression = null;
         private LCDecomp lcDecomp;
 
+        private NotesDB notes; public NotesDB Notes { get { return this.notes; } set { this.notes = value; } }
+
         private StatsModel statsModel; public StatsModel StatsModel { get { return this.statsModel; } }
         private LevelModel levelModel; public LevelModel LevelModel { get { return this.levelModel; } }
         private ScriptsModel scriptsModel; public ScriptsModel ScriptsModel { get { return this.scriptsModel; } }
@@ -101,7 +103,7 @@ namespace SMRPGED
                 if (BitManager.Compare(origional, BitManager.GetByteArray(data, 0xF800, 32)))
                     return true;
             }
-            return MessageBox.Show("This file does not appear to be a Super Mario RPG rom. Use it anyways?", "Use unverified rom?", MessageBoxButtons.YesNo) == DialogResult.Yes;
+            return MessageBox.Show("This file does not appear to be a Super Mario RPG rom. Use it anyways?", "LAZY SHELL", MessageBoxButtons.YesNo) == DialogResult.Yes;
         }
         public bool HeaderPresent()
         {
@@ -128,7 +130,7 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("Error removing header, please remove manually");
+                MessageBox.Show("Error removing header, please remove manually", "LAZY SHELL");
                 return false;
             }
         }
@@ -270,7 +272,7 @@ namespace SMRPGED
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + e.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + e.Message, "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                 fileName = "Invalid File";
                 return false;
@@ -288,7 +290,7 @@ namespace SMRPGED
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + e.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + e.Message, "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                 fileName = "Invalid File";
                 return false;

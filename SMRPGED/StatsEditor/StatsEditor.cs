@@ -13,63 +13,11 @@ namespace SMRPGED.StatsEditor
 {
     public partial class StatsEditor : Form
     {
-        /* Aug 3, 2008 updates
-         * 
-         * STATS
-         * 
-         * 1. added "updatingFormations" around code in InitializeFormationStrings method
-         * because it would call the "formationNameList_SelectedIndexChanged" delegate and update
-         * when it shouldn't (it does it later anyways)
-         * 
-         * 2. also finished the formations tab, the conditionals at the beginning are probably only 
-         * necessary for some eventhandlers, but I put them there anyways. it doesn't reflect the
-         * code that you've already done for the rest of the stats editor, but it's clean, so if 
-         * you're not ok with it then let me know
-         * 
-         * 3. am thinking of putting zoom and pixel grid options for the formation image (to help with
-         * dragging the sprites)
-         * 
-         * 4. haven't done anything to the formation packs so theyre still unfinished
-         * 
-         * 5. used paint event to draw psychopath bg and text images and formation image to controls
-         * so now everything in all editors uses the paint event
-         * 
-         * 6. change the code in the levelNum_ValueChanged delegate from:         
-         *    statsModel.Characters[(int)this.characterNum.Value].CurrentLevel = (byte)this.levelNum.Value;         
-         *    to:         
-         *    RefreshCharacterLevel();
-         * 
-         * 7. added formationSet_SelectedIndexChanged eventhandler for formation packs
-         * 
-         * 8. created a "RefreshFormationPackStrings" for when changing formation #'s in a formation pack
-         * since it only needs to update the textboxes instead of updating the whole pack with 
-         * RefreshFormationPacks()
-         * 
-         * 9. finished the formation packs, changed some code in FormationPack.cs to make it easier
-         * to integrate into the controls and eventhandlers
-         * 
-         * LEVELS
-         * 
-         * 1. coded the priorities 1 button into the level editor, took like 10min
-         * 
-         * 2. added a drag/resize for the image graphics and mold image panels in sprites editor.
-         * double-click the header label to maximize into window (do it again to reset location/size)
-         * 
-         * 3. ...same for the battlefield tileset image, you can drag it
-         * 
-         * 4. ...same thing for the tilesets tab in the level editor, except you can only maximize/minimize
-         * 
-         * essentially you can maximize the tilesets tabcontrol to make it appear as if the
-         * battlefields has its own editor
-         * 
-         * still left: timing tab
-         */
-
         private byte[] data; public byte[] Data { get { return this.data; } set { this.data = value; } }
 
         private Model model;
         private StatsModel statsModel;
-        private Notes notes;
+        //private Notes notes;
         private State state;
         private Settings settings;
         private UniversalVariables universal;
@@ -90,29 +38,32 @@ namespace SMRPGED.StatsEditor
 
         private bool textCodeFormat = true;
 
-        // gngrglo - these are used with the pictureBoxFormation
         private bool waitBothCoords = false;
         private int overFM = 0;
         private int diffX = 0;
         private int diffY = 0;
         private bool overTarget = false;
 
+        public TabControl TabControl1 { get { return tabControl1; } set { tabControl1 = value; } }
+        public NumericUpDown MonsterNum { get { return MonsterNumber; } set { MonsterNumber = value; } }
+        public NumericUpDown FormationNum { get { return formationNum; } set { formationNum = value; } }
+        public NumericUpDown PackNum { get { return packNum; } set { packNum = value; } }
+        public NumericUpDown SpellNum { get { return spellNum; } set { spellNum = value; } }
+        public NumericUpDown AttackNum { get { return attackNum; } set { attackNum = value; } }
+        public NumericUpDown ItemNum { get { return itemNum; } set { itemNum = value; } }
+        public NumericUpDown ShopNum { get { return shopNum; } set { shopNum = value; } }
+
         public StatsEditor(Model model)
         {
             this.model = model;
             this.data = model.Data;
-            this.notes = Notes.Instance;
             this.state = State.Instance;
             this.settings = Settings.Default;
             this.universal = state.Universal;
 
             settings.Keystrokes[0x20] = "\x20";
-            
-            //if (model.StatsModel == null)
-            model.CreateStatsModel();
-            //if (model.LevelModel == null)
-            //    model.CreateLevelModel(); // why do we need the level model?
 
+            model.CreateStatsModel();
             this.statsModel = model.StatsModel;
 
             InitializeComponent();
@@ -342,44 +293,9 @@ namespace SMRPGED.StatsEditor
         }
         private void LoadNotes()
         {
-            if (!notes.GetLoadNotes())
-            {
-                return;
-            }
-            try
-            {
-                // note packages to load
-                this.monsterNotesTextBox.LoadFile(notes.GetPath() + "main-stats-monsters.rtf");
-                this.richTextBox8.LoadFile(notes.GetPath() + "main-stats-formations.rtf");
-                this.richTextBox9.LoadFile(notes.GetPath() + "main-stats-spells.rtf");
-                this.textBoxAttackNotes.LoadFile(notes.GetPath() + "main-stats-attacks.rtf");
-
-            }
-            catch
-            {
-
-
-                if (MessageBox.Show("Could not load notes for this ROM, would you like to create a set of notes for it?\nThis will not overwrite any existing notes", "Create Notes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    if (notes.CreateNoteSet())
-                        LoadNotes();
-                }
-                else
-                {
-                    notes.SetLoadNotes(false);
-                }
-
-            }
         }
         private void SaveNotes()
         {
-            if (notes.GetLoadNotes())
-            {
-                SaveAttackNotes();
-                SaveFormationNotes();
-                SaveMonsterNotes();
-                SaveSpellNotes();
-            }
         }
         private Bitmap DrawImageFromIntArr(int[] arr, int width, int height)
         {
@@ -696,16 +612,16 @@ namespace SMRPGED.StatsEditor
                 "alone. Only the Bowser, Kinlink formation has this value set\n" +
                 "by default.");
             this.toolTip1.SetToolTip(this.formationMusic,
-                "The music assigned to the formation that plays in battle.\n\n" + 
-                "The music can be selected from 8 indexes or set to\n"+
-                "{CURRENT}, which continues to play the current music\n"+
-                "track in the overworld when the battle begins. To edit the\n"+
-                "actual track that is assigned to the index, change the\n"+
+                "The music assigned to the formation that plays in battle.\n\n" +
+                "The music can be selected from 8 indexes or set to\n" +
+                "{CURRENT}, which continues to play the current music\n" +
+                "track in the overworld when the battle begins. To edit the\n" +
+                "actual track that is assigned to the index, change the\n" +
                 "\"Music Track\" property to the right.");
             this.toolTip1.SetToolTip(this.musicTrack,
-                "The music track assigned to the currently selected \"INDEX\"\n"+
-                "to the left. Note that changing this value will affect the music\n"+
-                "for all formations that use the same \"INDEX\" as the currently\n"+
+                "The music track assigned to the currently selected \"INDEX\"\n" +
+                "to the left. Note that changing this value will affect the music\n" +
+                "for all formations that use the same \"INDEX\" as the currently\n" +
                 "selected formation.");
             this.toolTip1.SetToolTip(this.formationCantRun,
                 "If checked, it is impossible to run away from the formation\n" +
@@ -1588,39 +1504,148 @@ namespace SMRPGED.StatsEditor
 
         private void controlMouseMove(object sender, MouseEventArgs e)
         {
-            if (sender == this || !enableHelpTipsToolStripMenuItem.Checked)
-            {
-                labelToolTip.Visible = false;
-                return;
-            }
+            if (sender == this) return;
 
             Control control = (Control)sender;
 
-            if (toolTip1.GetToolTip(control) != "")
+            if (enableHelpTipsToolStripMenuItem.Checked)
             {
-                Control parent = (Control)control.Parent;
-                Point p = control.Location;
-                Point l = new Point();
-                while (parent.Parent != this)
+                if (toolTip1.GetToolTip(control) != "")
                 {
-                    p.X += parent.Location.X;
-                    p.Y += parent.Location.Y;
-                    parent = parent.Parent;
-                }
+                    Control parent = (Control)control.Parent;
+                    Point p = control.Location;
+                    Point l = new Point();
+                    while (parent.Parent != this)
+                    {
+                        p.X += parent.Location.X;
+                        p.Y += parent.Location.Y;
+                        parent = parent.Parent;
+                    }
 
-                labelToolTip.Text = toolTip1.GetToolTip(control);
-                l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
-                if (l.X + labelToolTip.Width + 50 > this.Width)
-                    l.X -= labelToolTip.Width + 75;
-                if (l.Y + labelToolTip.Height + 50 > this.Height)
-                    l.Y -= labelToolTip.Height + 50;
-                labelToolTip.Location = l;
-                labelToolTip.BringToFront();
-                labelToolTip.Visible = true;
+                    labelToolTip.Text = toolTip1.GetToolTip(control);
+                    l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
+                    if (l.X + labelToolTip.Width + 50 > this.Width)
+                        l.X -= labelToolTip.Width + 75;
+                    if (l.Y + labelToolTip.Height + 50 > this.Height)
+                        l.Y -= labelToolTip.Height + 50;
+                    labelToolTip.Location = l;
+                    labelToolTip.BringToFront();
+                    labelToolTip.Visible = true;
+                }
+                else
+                    labelToolTip.Visible = false;
+            }
+            else
+                labelToolTip.Visible = false;
+
+            if (showDecHexToolStripMenuItem.Checked)
+            {
+                if (control.GetType().Name == "UpDownEdit" || control.GetType().Name == "NumericUpDown")
+                {
+                    Control parent = (Control)control.Parent;
+                    Point p = control.Location;
+                    Point l = new Point();
+                    while (parent.Parent != this)
+                    {
+                        p.X += parent.Location.X;
+                        p.Y += parent.Location.Y;
+                        parent = parent.Parent;
+                    }
+
+                    NumericUpDown numericUpDown;
+                    if (control.GetType().Name == "UpDownEdit")
+                    {
+                        Control temp = GetNextControl(control, false);
+                        numericUpDown = (NumericUpDown)GetNextControl(temp, false);
+                    }
+                    else
+                        numericUpDown = (NumericUpDown)control;
+
+                    if (numericUpDown.Hexadecimal)
+                        labelConvertor.Text = "DEC:  " + ((int)numericUpDown.Value).ToString("d");
+                    else
+                        labelConvertor.Text = "HEX:  0x" + ((int)numericUpDown.Value).ToString("X4");
+
+                    l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
+                    if (l.X + labelConvertor.Width + 50 > this.Width)
+                        l.X -= labelConvertor.Width + 75;
+                    if (l.Y + labelConvertor.Height + 50 > this.Height)
+                        l.Y -= labelConvertor.Height + 50;
+                    labelConvertor.Location = l;
+                    labelConvertor.BringToFront();
+                    labelConvertor.Visible = true;
+                }
+                else
+                    labelConvertor.Visible = false;
+            }
+            else
+                labelConvertor.Visible = false;
+        }
+
+        private void addThisToNotesDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int type = 0;
+            int index = 0;
+            string label = "";
+            if (contextMenuStrip1.SourceControl.Name == "monsterName")
+            {
+                type = 14;
+                index = (int)MonsterNumber.Value;
+                label = monsterName.Text;
+            }
+            if (contextMenuStrip1.SourceControl.Name == "formationNameList")
+            {
+                type = 15;
+                index = (int)formationNameList.SelectedIndex;
+                label = formationNameList.Text;
+            }
+            if (contextMenuStrip1.SourceControl.Name == "packNum")
+            {
+                type = 16;
+                index = (int)packNum.Value;
+                label = "Pack #" + ((int)packNum.Value).ToString("d3");
+            }
+            if (contextMenuStrip1.SourceControl.Name == "spellName")
+            {
+                type = 17;
+                index = (int)spellNum.Value;
+                label = spellName.Text;
+            }
+            if (contextMenuStrip1.SourceControl.Name == "attackName")
+            {
+                type = 18;
+                index = (int)attackNum.Value;
+                label = attackName.Text;
+            }
+            if (contextMenuStrip1.SourceControl.Name == "itemName")
+            {
+                type = 19;
+                index = (int)itemNum.Value;
+                label = itemName.Text;
+            }
+            if (contextMenuStrip1.SourceControl.Name == "shopName")
+            {
+                type = 20;
+                index = (int)shopNum.Value;
+                label = shopName.Text;
+            }
+
+            if (type == 0) return;
+
+            if (model.Program.Notes == null || !model.Program.Notes.Visible)
+                model.Program.CreateNotesWindow();
+            Notes temp = model.Program.Notes;
+            if (temp.ThisNotes == null)
+                temp.LoadNotes();
+            if (temp.ThisNotes != null)
+            {
+                temp.AddingFromEditor(type, index, label, label);
+                temp.BringToFront();
             }
             else
             {
-                labelToolTip.Visible = false;
+                MessageBox.Show("Could not add element to notes database.", "LAZY SHELL",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

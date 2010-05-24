@@ -14,7 +14,7 @@ namespace SMRPGED.Encryption
         private Model model;
         private Stamp stamp;
         private Cipher cipher;
-        
+
         public AuthorStamp(Model model, Stamp stamp)
         {
             this.model = model;
@@ -22,18 +22,15 @@ namespace SMRPGED.Encryption
             this.stamp = stamp;
             stamp.Invalidated = true;
 
-
             InitializeComponent();
-
 
             cipher = new Cipher(model.Data, model);
         }
-        
+
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void okButton_Click(object sender, EventArgs e)
         {
             // Save
@@ -41,7 +38,7 @@ namespace SMRPGED.Encryption
 
             if (this.passwordTextBox.Text == "")
             {
-                MessageBox.Show("Enter a password to publish rom");
+                MessageBox.Show("Enter a password to publish rom", "LAZY SHELL");
                 stamp.Invalidated = true;
                 return;
             }
@@ -59,25 +56,11 @@ namespace SMRPGED.Encryption
 
         private void publishedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.publishedCheckBox.Checked)
-                this.publishedCheckBox.ForeColor = Color.FromArgb(0, 0, 0xCC);
-            else
-                this.publishedCheckBox.ForeColor = Color.FromKnownColor(KnownColor.Control);
+            publishedCheckBox.ForeColor = publishedCheckBox.Checked ? Color.Black : Color.Gray;
         }
-
         private void dateStampCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.dateStampCheckBox.Checked)
-            {
-                this.dateStampCheckBox.ForeColor = Color.FromArgb(0, 0, 0xCC);
-            }
-            else
-            {
-                this.dateStampCheckBox.ForeColor = Color.FromKnownColor(KnownColor.Control);
-            }
+            dateStampCheckBox.ForeColor = dateStampCheckBox.Checked ? Color.Black : Color.Gray;
         }
-
-
-
     }
 }

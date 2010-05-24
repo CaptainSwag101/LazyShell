@@ -131,11 +131,11 @@ namespace SMRPGED
             updatingLevel = false;
         }
 
-        public bool CalculateFreeOverlapSpace()
+        public bool CalculateFreeOverlapSpace(bool showMessageBox)
         {
             int used = 0;
 
-            for (int i = 0; i < 512; i++)
+            for (int i = 0; i < 510; i++)
             {
                 for (int j = 0; j < levels[i].LevelOverlaps.NumberOfOverlaps; j++)
                 {
@@ -143,7 +143,8 @@ namespace SMRPGED
 
                     if ((used + 4) > 0x11B8)
                     {
-                        MessageBox.Show("WARNING: Cannot insert the field. The total number of overlaps for all levels has exceeded the maximum allotted space.", "TOTAL OVERLAPS LENGTH EXCEEDED", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        if (showMessageBox)
+                            MessageBox.Show("WARNING: Cannot insert the field. The total number of overlaps for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return true;
                     }
                 }
@@ -193,7 +194,7 @@ namespace SMRPGED
         {
             Point o = new Point(Math.Abs(pictureBoxLevel.Left), Math.Abs(pictureBoxLevel.Top));
             Point p = new Point(physicalMap.OrthCoordsX[o.Y * 1024 + o.X] + 2, physicalMap.OrthCoordsY[o.Y * 1024 + o.X] + 4);
-            if (!CalculateFreeOverlapSpace())
+            if (!CalculateFreeOverlapSpace(true))
             {
                 this.overlapFieldTree.Focus();
                 if (overlaps.NumberOfOverlaps < 28)
@@ -220,7 +221,7 @@ namespace SMRPGED
                     overlapFieldTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("WARNING: Cannot insert anymore overlaps. The maximum number of overlaps allowed is 28.", "WARNING: Cannot insert any more overlaps", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("WARNING: Cannot insert anymore overlaps. The maximum number of overlaps allowed is 28.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         private void overlapFieldDelete_Click(object sender, EventArgs e)

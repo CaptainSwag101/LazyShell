@@ -116,10 +116,13 @@ namespace SMRPGED.Encryption
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HashCheckFail";
-            this.Text = "Signature Check Failed";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "SIGNATURE CHECK FAILED";
             this.TopMost = true;
             this.panel64.ResumeLayout(false);
             this.panel64.PerformLayout();

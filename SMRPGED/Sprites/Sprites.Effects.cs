@@ -19,7 +19,8 @@ namespace SMRPGED
         private bool updatingEffect = false;
 
         private Effect[] effects;
-        private E_Animation[] e_animations;
+        private E_Animation[] e_animations; 
+        public E_Animation[] E_animations { get { return e_animations; } set { e_animations = value; } }
         private E_Tileset e_tileset;
 
         private ArrayList e_sequenceImages = new ArrayList();
@@ -193,11 +194,8 @@ namespace SMRPGED
         private void InitializeE_Tiles()
         {
             updatingEffect = true;
-
             e_tiles.BeginUpdate();
-
             e_currentTile = 0;
-
             this.e_tiles.Items.Clear();
             for (int i = 0; i < e_animations[e_currentAnimation].Tiles.Count; i++)
             {
@@ -205,15 +203,13 @@ namespace SMRPGED
                 e_animations[e_currentAnimation].CurrentTile = i;
             }
             if (this.e_tiles.Items.Count != 0)
+            {
                 this.e_tiles.SelectedIndex = 0;
-
-            e_animations[e_currentAnimation].CurrentTile = e_currentTile;
-            e_currentTileOffset = e_animations[e_currentAnimation].TileOffset;
-
-            RefreshE_Tiles();
-
+                e_animations[e_currentAnimation].CurrentTile = e_currentTile;
+                e_currentTileOffset = e_animations[e_currentAnimation].TileOffset;
+                RefreshE_Tiles();
+            }
             e_tiles.EndUpdate();
-
             updatingEffect = false;
         }
         private void InitializeE_Frames()
@@ -736,7 +732,7 @@ namespace SMRPGED
         private void ExportE_GraphicBlock()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = "effectGraphicBlock." + e_currentAnimation.ToString("X2") + ".bin";
+            saveFileDialog.FileName = "effectGraphicBlock." + e_currentAnimation.ToString("d3") + ".bin";
             saveFileDialog.Filter = "Binary files (*.bin)|*.bin|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.RestoreDirectory = true;
@@ -817,87 +813,8 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem loading the file.");
+                MessageBox.Show("There was a problem loading the file.", "LAZY SHELL");
                 return;
-            }
-        }
-        private void ExportE_Animation(int start, int count, string path)
-        {
-            AssembleAllE_Animations();
-
-            path += "\\" + model.GetFileNameWithoutPath() + " - Effect Animations\\";
-
-            if (!CreateDir(path))
-                return;
-
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
-            s = File.Create(path + "Do Not Modify This Directory Or Files Contained Within.txt");
-            s.Close();
-
-            try
-            {
-                for (int i = start; i < start + count; i++)
-                {
-                    s = File.Create(path + "effectAnimation." + i.ToString("X3") + ".dat"); // Create data file
-
-                    e_animations[i].Data = null;
-
-                    // Serialize object
-                    b.Serialize(s, e_animations[i]);
-                    s.Close();
-
-                    e_animations[i].Data = model.Data;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("There was a problem exporting");
-            }
-        }
-        private void ImportE_Animation(int start, int count, string path)
-        {
-
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
-
-            if (count == 1)
-            {
-                try
-                {
-                    s = File.OpenRead(path);
-
-                    e_animations[start] = (E_Animation)b.Deserialize(s);
-                    s.Close();
-
-                    e_animations[start].Data = model.Data;
-
-                    e_animation_ValueChanged(null, null);
-                }
-                catch
-                {
-                    MessageBox.Show("There was a problem loading Effect Animation data.");
-                    return;
-                }
-            }
-            else
-            {
-                try
-                {
-                    for (int i = start; i < start + count; i++)
-                    {
-                        s = File.OpenRead(path + "effectAnimation." + i.ToString("X3") + ".dat");
-                        e_animations[i] = (E_Animation)b.Deserialize(s);
-                        s.Close();
-                        e_animations[i].Data = model.Data;
-                    }
-                    e_animation_ValueChanged(null, null);
-                }
-                catch
-                {
-                    MessageBox.Show("There was a problem loading Effect Animation data. Verify that the " +
-                    "Effect Animation data files are correctly named and present.");
-                }
             }
         }
         private void LoadEffectNameSearch()
@@ -913,7 +830,7 @@ namespace SMRPGED
             listBoxEffectNames.EndUpdate();
         }
 
-        private void AssembleAllE_Animations()
+        public void AssembleAllE_Animations()
         {
             e_animations[e_currentAnimation].Assemble(e_tileset);
 
@@ -1226,7 +1143,7 @@ namespace SMRPGED
             //}
             //catch
             //{
-            //    MessageBox.Show("There was a problem loading the file.");
+            //    MessageBox.Show("There was a problem loading the file.", "LAZY SHELL");
             //    return;
             //}
             fs.Close();
@@ -1433,6 +1350,10 @@ namespace SMRPGED
 
             e_availableBytesNum -= delta;
             e_availableBytes.Text = "AVAILABLE BYTES: " + e_availableBytesNum.ToString();
+
+            e_currentFrameOffset = e_animations[e_currentAnimation].FrameOffset;
+            e_currentMoldOffset = e_animations[e_currentAnimation].MoldOffset;
+            e_currentTileOffset = e_animations[e_currentAnimation].TileOffset;
         }
         private void e_deleteFrame_Click(object sender, EventArgs e)
         {
@@ -1460,6 +1381,10 @@ namespace SMRPGED
 
             e_availableBytesNum -= delta;
             e_availableBytes.Text = "AVAILABLE BYTES: " + e_availableBytesNum.ToString();
+
+            e_currentFrameOffset = e_animations[e_currentAnimation].FrameOffset;
+            e_currentMoldOffset = e_animations[e_currentAnimation].MoldOffset;
+            e_currentTileOffset = e_animations[e_currentAnimation].TileOffset;
         }
         private void e_frameMold_ValueChanged(object sender, EventArgs e)
         {
@@ -1582,7 +1507,7 @@ namespace SMRPGED
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (e_availableBytesNum - 5 < 0)
+            if (e_availableBytesNum - 2 < 0)
             {
                 int bank = effects[currentEffect].AnimationPacket < 39 ? 0x330000 : 0x340000;
                 MessageBox.Show(
@@ -1590,25 +1515,25 @@ namespace SMRPGED
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             int index = e_currentMold + 1;
-
-            delta = 1;
-            e_animations[e_currentAnimation].UpdateOffsets(delta, e_animations[e_currentAnimation].TilePacketPointer);
-
+            e_animations[e_currentAnimation].AddNewMold(index, e_currentMoldOffset);
             delta = 2;
             e_animations[e_currentAnimation].UpdateOffsets(delta, e_currentMoldOffset);
-            e_animations[e_currentAnimation].AddNewMold(index, e_currentMoldOffset);
-
+            // if adding to only one mold, the mold packet pointer will need to be set back to normal
+            if (e_animations[e_currentAnimation].Molds.Count == 2)
+                e_animations[e_currentAnimation].MoldPacketPointer = e_currentMoldOffset;
             InitializeE_Molds();
             InitializeE_Frames();
             SetE_SequenceFrameImages();
-
             e_molds.SelectedIndex = index;
-            e_tiles.SelectedIndex = 0;
-
-            e_availableBytesNum -= 3;
+            e_availableBytesNum -= delta;
             e_availableBytes.Text = "AVAILABLE BYTES: " + e_availableBytesNum.ToString();
+
+            moldInsertTile_Click(null, null);
+
+            e_currentFrameOffset = e_animations[e_currentAnimation].FrameOffset;
+            e_currentMoldOffset = e_animations[e_currentAnimation].MoldOffset;
+            e_currentTileOffset = e_animations[e_currentAnimation].TileOffset;
         }
         private void e_deleteMold_Click(object sender, EventArgs e)
         {
@@ -1619,16 +1544,16 @@ namespace SMRPGED
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             int index = e_currentMold;
-
-            delta = (short)(0 - e_animations[e_currentAnimation].MoldSize);
-            e_animations[e_currentAnimation].UpdateOffsets(delta, e_animations[e_currentAnimation].TilePacketPointer);
-
             delta = -2;
             e_animations[e_currentAnimation].UpdateOffsets(delta, e_currentMoldOffset);
+            delta = (short)-e_animations[e_currentAnimation].MoldSize;
+            e_animations[e_currentAnimation].UpdateOffsets(delta, e_animations[e_currentAnimation].TilePacketPointer);
             e_animations[e_currentAnimation].RemoveCurrentMold();
 
+            e_availableBytesNum += 2 + e_animations[e_currentAnimation].MoldSize;
+            e_availableBytes.Text = "AVAILABLE BYTES: " + e_availableBytesNum.ToString();
+            
             InitializeE_Molds();
             InitializeE_Frames();
             SetE_MoldImage();
@@ -1638,8 +1563,9 @@ namespace SMRPGED
                 index--;
             e_molds.SelectedIndex = index;
 
-            e_availableBytesNum -= delta;
-            e_availableBytes.Text = "AVAILABLE BYTES: " + e_availableBytesNum.ToString();
+            e_currentFrameOffset = e_animations[e_currentAnimation].FrameOffset;
+            e_currentMoldOffset = e_animations[e_currentAnimation].MoldOffset;
+            e_currentTileOffset = e_animations[e_currentAnimation].TileOffset;
         }
         private void pictureBoxE_Mold_Paint(object sender, PaintEventArgs e)
         {
@@ -1742,7 +1668,7 @@ namespace SMRPGED
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (e_availableBytesNum - 2 < 0)
+            if (e_availableBytesNum - 1 < 0)
             {
                 int bank = effects[currentEffect].AnimationPacket < 39 ? 0x330000 : 0x340000;
                 MessageBox.Show(
@@ -1750,43 +1676,56 @@ namespace SMRPGED
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            int index = e_currentTile + 1;
-
-            delta = 1;
-            e_animations[e_currentAnimation].UpdateOffsets(delta, e_currentTileOffset);
-            e_animations[e_currentAnimation].AddNewTile(index, e_currentTileOffset);
-
+            int index;
+            if (e_animations[e_currentAnimation].Tiles.Count == 0)
+            {
+                e_currentTileOffset = e_animations[e_currentAnimation].TilePacketPointer;
+                index = e_currentTile = 0;
+                e_animations[e_currentAnimation].AddNewTile(index, e_currentTileOffset);
+                delta = 1;
+                e_animations[e_currentAnimation].UpdateOffsets(delta, e_currentTileOffset);
+                // after updating, set back to normal
+                e_animations[e_currentAnimation].TilePacketPointer = e_currentTileOffset;
+                ((E_Mold.Tile)e_animations[e_currentAnimation].Tiles[0]).TileOffset = e_currentTileOffset;
+            }
+            else
+            {
+                index = e_currentTile + 1;
+                e_animations[e_currentAnimation].AddNewTile(index, e_currentTileOffset);
+                delta = 1;
+                e_animations[e_currentAnimation].UpdateOffsets(delta, e_currentTileOffset);
+                if (e_animations[e_currentAnimation].Tiles.Count == 2)
+                    e_animations[e_currentAnimation].TilePacketPointer = e_currentTileOffset;
+            }
             InitializeE_Tiles();
             SetE_MoldImage();
             UpdateE_SequenceFrameImage();
-
             e_tiles.SelectedIndex = index;
-
             e_availableBytesNum -= delta;
             e_availableBytes.Text = "AVAILABLE BYTES: " + e_availableBytesNum.ToString();
-
             CalculateTotalTiles(moldInsertTile, 7);
+
+            e_currentFrameOffset = e_animations[e_currentAnimation].FrameOffset;
+            e_currentMoldOffset = e_animations[e_currentAnimation].MoldOffset;
+            e_currentTileOffset = e_animations[e_currentAnimation].TileOffset;
         }
         private void moldDeleteTile_Click(object sender, EventArgs e)
         {
             if (e_animations[e_currentAnimation].Tiles.Count == 1)
             {
                 MessageBox.Show(
-                    "Molds must contain at least one tiles.", "CANNOT DELETE TILE",
+                    "Molds must contain at least one tile.", "CANNOT DELETE TILE",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             int index = e_currentTile;
-
+            e_animations[e_currentAnimation].RemoveCurrentTile();
             if (e_animations[e_currentAnimation].Filler)
                 delta = -3;
             else
                 delta = -1;
-
             e_animations[e_currentAnimation].UpdateOffsets(delta, e_currentTileOffset);
-            e_animations[e_currentAnimation].RemoveCurrentTile();
 
             InitializeE_Tiles();
             SetE_MoldImage();
@@ -1800,6 +1739,10 @@ namespace SMRPGED
             e_availableBytes.Text = "AVAILABLE BYTES: " + e_availableBytesNum.ToString();
 
             CalculateTotalTiles(moldDeleteTile, 7);
+
+            e_currentFrameOffset = e_animations[e_currentAnimation].FrameOffset;
+            e_currentMoldOffset = e_animations[e_currentAnimation].MoldOffset;
+            e_currentTileOffset = e_animations[e_currentAnimation].TileOffset;
         }
         private void e_moveTileUp_Click(object sender, EventArgs e)
         {

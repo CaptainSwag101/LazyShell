@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace SMRPGED
 {
-    class TileMap
+    public class TileMap
     {
         private Model model;
         private Tileset tileset;
@@ -1079,7 +1079,7 @@ namespace SMRPGED
             catch
             {
                 // invalid layer/tile
-                System.Windows.Forms.MessageBox.Show("MAKE EDIT PROBLEM");
+                System.Windows.Forms.MessageBox.Show("MAKE EDIT PROBLEM", "LAZY SHELL");
                 throw new Exception();
             }
         }

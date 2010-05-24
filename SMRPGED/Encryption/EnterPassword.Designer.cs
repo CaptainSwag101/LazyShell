@@ -91,10 +91,14 @@ namespace SMRPGED.Encryption
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EnterPassword";
-            this.Text = "Enter Author Password";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "ENTER AUTHOR PASSWORD";
+            this.TopMost = true;
             this.panel64.ResumeLayout(false);
             this.panel64.PerformLayout();
             this.ResumeLayout(false);

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{71AABC1D-6183-4308-84E2-ADFD6DB2C881}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -68,6 +68,12 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\BaseConvertor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\BaseConvertor.Designer.cs">
+      <DependentUpon>BaseConvertor.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataStructures\StreamBuf.cs" />
     <Compile Include="Compression\LSCompression.cs" />
     <Compile Include="Encryption\AuthorStamp.cs">
@@ -97,11 +103,23 @@
       <DependentUpon>SignatureViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Encryption\Stamp.cs" />
+    <Compile Include="Features\FixPointers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\FixPointers.Designer.cs">
+      <DependentUpon>FixPointers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ImportExportElements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\ImportExportElements.Designer.cs">
+      <DependentUpon>ImportExportElements.cs</DependentUpon>
     </Compile>
     <Compile Include="Levels\Levels.Battlefields.cs">
       <SubType>Form</SubType>
@@ -198,7 +216,13 @@
     <Compile Include="Levels\LevelTemplate.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="MRUManager.cs" />
-    <Compile Include="Notes.cs" />
+    <Compile Include="Features\Notes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\Notes.Designer.cs">
+      <DependentUpon>Notes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\NotesDB.cs" />
     <Compile Include="Patches\GamePatches.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,10 +240,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgramController.cs" />
-    <Compile Include="ProgressBar.cs">
+    <Compile Include="Features\ProgressBar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProgressBar.Designer.cs">
+    <Compile Include="Features\ProgressBar.Designer.cs">
       <DependentUpon>ProgressBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -268,6 +292,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Encryption\Cipher.cs" />
+    <Compile Include="Features\Restore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\Restore.Designer.cs">
+      <DependentUpon>Restore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Scripts\ActionQueue.cs" />
     <Compile Include="Scripts\Animations\AnimationScript.cs" />
     <Compile Include="Scripts\Animations\AnimationScriptCommand.cs" />
@@ -310,6 +340,12 @@
     </Compile>
     <Compile Include="Scripts\ScriptsModel.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Features\ClearElements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\ClearElements.Designer.cs">
+      <DependentUpon>ClearElements.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sprites\Dialogue\BattleDialogueTileset.cs" />
     <Compile Include="Sprites\Dialogue\DialogueTileset.cs" />
     <Compile Include="Sprites\Effects\Effect.cs" />
@@ -434,6 +470,9 @@
     <Compile Include="UniversalVariables.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Features\BaseConvertor.resx">
+      <DependentUpon>BaseConvertor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Encryption\AuthorStamp.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AuthorStamp.cs</DependentUpon>
@@ -452,6 +491,12 @@
       <SubType>Designer</SubType>
       <DependentUpon>SignatureViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\FixPointers.resx">
+      <DependentUpon>FixPointers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\ImportExportElements.resx">
+      <DependentUpon>ImportExportElements.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Levels\Forms\OpenNPCSpritePartitions.resx">
       <SubType>Designer</SubType>
       <DependentUpon>OpenNPCSpritePartitions.cs</DependentUpon>
@@ -468,6 +513,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>SpaceAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\Notes.resx">
+      <DependentUpon>Notes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Patches\GamePatches.resx">
       <DependentUpon>GamePatches.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -476,7 +524,7 @@
       <DependentUpon>Previewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProgressBar.resx">
+    <EmbeddedResource Include="Features\ProgressBar.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProgressBar.cs</DependentUpon>
     </EmbeddedResource>
@@ -487,6 +535,12 @@
     <EmbeddedResource Include="CursorDropper.cur" />
     <EmbeddedResource Include="CursorZoomIn.cur" />
     <EmbeddedResource Include="CursorZoomOut.cur" />
+    <EmbeddedResource Include="Features\Restore.resx">
+      <DependentUpon>Restore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\ClearElements.resx">
+      <DependentUpon>ClearElements.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StatsEditor\StatsEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>StatsEditor.cs</DependentUpon>

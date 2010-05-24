@@ -28,6 +28,7 @@ namespace SMRPGED
         private byte acuteAxis; public byte AcuteAxis { get { return acuteAxis; } set { acuteAxis = value; } }
         private byte obtuseAxis; public byte ObtuseAxis { get { return obtuseAxis; } set { obtuseAxis = value; } }
         private byte height; public byte Height { get { return height; } set { height = value; } }
+        private byte shadow; public byte Shadow { get { return shadow; } set { shadow = value; } }
         private bool b1b2; public bool B1b2 { get { return b1b2; } set { b1b2 = value; } }
         private bool b1b3; public bool B1b3 { get { return b1b3; } set { b1b3 = value; } }
         private bool b1b4; public bool B1b4 { get { return b1b4; } set { b1b4 = value; } }
@@ -39,8 +40,6 @@ namespace SMRPGED
         private bool b2b2; public bool B2b2 { get { return b2b2; } set { b2b2 = value; } }
         private bool b2b3; public bool B2b3 { get { return b2b3; } set { b2b3 = value; } }
         private bool b2b4; public bool B2b4 { get { return b2b4; } set { b2b4 = value; } }
-        private bool b3b5; public bool B3b5 { get { return b3b5; } set { b3b5 = value; } }
-        private bool b3b6; public bool B3b6 { get { return b3b6; } set { b3b6 = value; } }
         private bool b3b7; public bool B3b7 { get { return b3b7; } set { b3b7 = value; } }
         private bool b5b5; public bool B5b5 { get { return b5b5; } set { b5b5 = value; } }
         private bool b5b6; public bool B5b6 { get { return b5b6; } set { b5b6 = value; } }
@@ -84,8 +83,7 @@ namespace SMRPGED
 
             yPixelShiftUp = (byte)(data[offset] & 0x0F);
             shift16pxDown = (data[offset] & 0x10) == 0x10;
-            b3b5 = (data[offset] & 0x20) == 0x20;
-            b3b6 = (data[offset] & 0x40) == 0x40;
+            shadow = (byte)((data[offset] & 0x60) >> 5);
             b3b7 = (data[offset] & 0x80) == 0x80;
             offset++;
 
@@ -126,8 +124,8 @@ namespace SMRPGED
 
             data[offset] = yPixelShiftUp;
             BitManager.SetBit(data, offset, 4, shift16pxDown);
-            BitManager.SetBit(data, offset, 5, b3b5);
-            BitManager.SetBit(data, offset, 6, b3b6);
+            data[offset] &= 0x9F;
+            data[offset] |= (byte)(shadow << 5);
             BitManager.SetBit(data, offset, 7, b3b7);
             offset++;
 

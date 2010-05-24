@@ -20,8 +20,8 @@ namespace SMRPGED
         private int animationOffset; public int AnimationOffset { get { return animationOffset; } set { animationNum = value; } }
 
         private int animationLength; public int AnimationLength { get { return animationLength; } set { animationLength = value; } }
-        private ushort sequencePacketPointer;   // top pointer to the set of sequences
-        private ushort moldPacketPointer; // top pointer to the set of molds
+        private ushort sequencePacketPointer; public ushort SequencePacketPointer { get { return sequencePacketPointer; } set { sequencePacketPointer = value; } }
+        private ushort moldPacketPointer; public ushort MoldPacketPointer { get { return moldPacketPointer; } set { moldPacketPointer = value; } }
         private byte sequenceCount = 0;
         private byte moldCount = 0;
         private ushort vramAllocation; public ushort VramAllocation { get { return vramAllocation; } set { vramAllocation = value; } }
@@ -53,9 +53,9 @@ namespace SMRPGED
         public void AddNewSequence(int index, ushort newOffset)
         {
             Sequence tSequence = new Sequence();
-            Sequence zSequence = (Sequence)sequences[0];    // for setting an initial framePacketPointer
+            Sequence zSequence = (Sequence)sequences[index - 1];    // for setting an initial framePacketPointer
             tSequence.SequenceOffset = newOffset;
-            tSequence.FramePacketPointer = zSequence.FramePacketPointer;
+            tSequence.FramePacketPointer = (ushort)(zSequence.FramePacketPointer + (zSequence.Frames.Count * 2) + 1);
             sequences.Insert(index, tSequence);
         }
         public void RemoveCurrentSequence()
@@ -108,15 +108,10 @@ namespace SMRPGED
         public void AddNewMold(int index, ushort newOffset)
         {
             Mold tMold = new Mold();
-            Mold zMold = (Mold)molds[currentMold];
-            tMold.MoldOffset = (ushort)(newOffset + 2);
+            Mold zMold = (Mold)molds[index - 1];
+            tMold.MoldOffset = newOffset;
             tMold.TilePacketPointer = (ushort)(zMold.TilePacketPointer + zMold.MoldSize + 1);
             molds.Insert(index, tMold);
-
-            mold = (Mold)molds[index];
-            currentMold = index;
-
-            AddNewTile(0, tMold.TilePacketPointer);
         }
         public void RemoveCurrentMold()
         {
@@ -189,6 +184,42 @@ namespace SMRPGED
 
             InitializeAnimationOffset(data);
         }
+        public void Refresh()
+        {
+            animationLength = sm.Length;
+
+            sequences = new ArrayList();
+            molds = new ArrayList();
+            
+            Sequence tSequence;
+            Mold tMold;
+            
+            int offset = 2;
+            sequencePacketPointer = BitManager.GetShort(sm, offset); offset += 2;
+            moldPacketPointer = BitManager.GetShort(sm, offset); offset += 2;
+            sequenceCount = BitManager.GetByte(sm, offset); offset++;
+            moldCount = BitManager.GetByte(sm, offset); offset++;
+            vramAllocation = (ushort)(BitManager.GetByte(sm, offset) << 8); offset += 2;
+            unknown = BitManager.GetShort(sm, offset);
+
+            offset = sequencePacketPointer;
+            for (int i = 0; i < sequenceCount; i++)
+            {
+                tSequence = new Sequence();
+                tSequence.InitializeSequence(sm, offset);
+                sequences.Add(tSequence);
+                offset += 2;
+            }
+
+            offset = moldPacketPointer;
+            for (int i = 0; i < moldCount; i++)
+            {
+                tMold = new Mold();
+                tMold.InitializeMold(sm, offset);
+                molds.Add(tMold);
+                offset += 2;
+            }
+        }
         private void InitializeAnimationOffset(byte[] data)
         {
             Sequence tSequence;
@@ -237,7 +268,7 @@ namespace SMRPGED
             foreach (Sequence s in sequences)
                 s.UpdateOffsets(delta, current);
 
-            if (moldPacketPointer > current)
+            if (moldPacketPointer >= current)
                 moldPacketPointer = (ushort)(moldPacketPointer + delta);
 
             foreach (Mold m in molds)
@@ -283,6 +314,10 @@ namespace SMRPGED
                     sOffset += 2;
                 }
             }
+            // make sure the last sequence is normally followed by 0x0000
+            if (((Sequence)sequences[0]).FramePacketPointer != sOffset)
+                BitManager.SetShort(sm, sOffset, 0);
+
             int mOffset = moldPacketPointer;
             foreach (Mold m in molds)
             {
@@ -404,6 +439,9 @@ namespace SMRPGED
                 if (mOffset < sm.Length)
                     BitManager.SetByte(sm, mOffset, 0);
             }
+            // make sure the last sequence is normally followed by 0x0000
+            if (((Mold)molds[0]).TilePacketPointer != mOffset)
+                BitManager.SetShort(sm, mOffset, 0);
 
             BitManager.SetShort(sm, offset, sequenceCount); offset++;
             BitManager.SetShort(sm, offset, moldCount); offset++;

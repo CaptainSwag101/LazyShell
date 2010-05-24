@@ -53,7 +53,7 @@ namespace SMRPGED.Encryption
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Password"); // Notify user some other way
+                    MessageBox.Show("Invalid Password", "LAZY SHELL"); // Notify user some other way
                 }
 
             }

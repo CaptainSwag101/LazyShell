@@ -929,16 +929,16 @@ namespace SMRPGED
             switch (tabControl2.SelectedIndex)
             {
                 case 0:
-                    saveFileDialog.FileName = "tileset." + (levelMap.TileSetL1 + 0x20).ToString("X2") + ".png";
+                    saveFileDialog.FileName = "tileset." + (levelMap.TileSetL1 + 0x20).ToString("d3") + ".png";
                     break;
                 case 1:
-                    saveFileDialog.FileName = "tileset." + (levelMap.TileSetL2 + 0x20).ToString("X2") + ".png";
+                    saveFileDialog.FileName = "tileset." + (levelMap.TileSetL2 + 0x20).ToString("d3") + ".png";
                     break;
                 case 2:
-                    saveFileDialog.FileName = "tileset." + levelMap.TileSetL3.ToString("X2") + ".png";
+                    saveFileDialog.FileName = "tileset." + levelMap.TileSetL3.ToString("d3") + ".png";
                     break;
                 case 4:
-                    saveFileDialog.FileName = "battlefield." + levelMap.Battlefield.ToString("X2") + ".png";
+                    saveFileDialog.FileName = "battlefield." + levelMap.Battlefield.ToString("d3") + ".png";
                     break;
                 default: break;
             }

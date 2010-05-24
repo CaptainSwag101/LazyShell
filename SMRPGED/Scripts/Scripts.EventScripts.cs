@@ -17,8 +17,9 @@ namespace SMRPGED.ScriptsEditor
     public partial class Scripts : Form
     {
         #region Variables
-        TreeViewWrapper treeViewWrapper;
+        TreeViewWrapper treeViewWrapper; public TreeViewWrapper TreeViewWrapper { get { return treeViewWrapper; } }
         EventScript[] eventScripts;
+        public EventScript[] EventScripts { get { return eventScripts; } set { eventScripts = value; } }
         EventScriptCommand esc;
         ActionQueueCommand aqc;
         TreeNode editedNode;
@@ -95,10 +96,10 @@ namespace SMRPGED.ScriptsEditor
             {
                 0x37,0x38,0x55,0x58,0xA3,0xA7,0xAC,0xAD,
                 0xAE,0xAF,0xB4,0xB6,0xB8,0xB9,0xBA,0xC0,
-                0xC1,0xC3,0xC6,0xCA,0xCB,0xDB,0xDF,0xE2,
-                0xE3,0xE6,0xE7,0xEA,0xEB,0xEC,0xED,0xEE,
-                0xEF,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,
-                0xFD,0xFD,0xFD,0xFD,0xFD
+                0xC1,0xC3,0xC4,0xC5,0xC6,0xCA,0xCB,0xDB,
+                0xDF,0xE2,0xE3,0xE6,0xE7,0xEA,0xEB,0xEC,
+                0xED,0xEE,0xEF,0xFD,0xFD,0xFD,0xFD,0xFD,
+                0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD
             },
             new int[]   // 15
             {
@@ -115,7 +116,7 @@ namespace SMRPGED.ScriptsEditor
         };
         private int[][] eventListBoxFDOpcodes = new int[][]
         {
-            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x32,0x33,0x34,0x3D,0x3E,0xF9},
+            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x32,0x33,0x34,0x3D,0x3E,0xF9},
             new int[0x02],
             new int[]{0,0,0,0x4B,0x5B,0x64},
             new int[]{0,0,0,0,0,0x50,0x51,0x52,0x53,0x54,0x55,0x56,0x57,0x5C},
@@ -130,7 +131,7 @@ namespace SMRPGED.ScriptsEditor
             new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0xB6,0xB7},
             new int[]
             {
-                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                 0x58,0x59,0x5A,0x5D,0x5E,0xAC,0xB0,0xB1,0xB2,0xB3,0xB4,0xB5
             },
             new int[]{0,0,0x60,0x61},
@@ -212,7 +213,7 @@ namespace SMRPGED.ScriptsEditor
         { 
             "L1", "L2", "L3", "L4", "Sprites", "BG", "½ intensity", "Minus sub" 
         };
-        private static string[] MusicNames = new string[]
+        public static string[] MusicNames = new string[]
             {
             "[00]  {CURRENT}",
             "[01]  Dodo\'s Coming",
@@ -224,78 +225,78 @@ namespace SMRPGED.ScriptsEditor
             "[07]  Pipe Vault",
             "[08]  Invincible Star",
             "[09]  Victory",
-            "[0A]  In The Flower Garden",
-            "[0B]  Bowser\'s Castle (1st time)",
-            "[0C]  Fight Against Bowser",
-            "[0D]  Road Is Full Of Dangers",
-            "[0E]  Mario\'s Pad",
-            "[0F]  Here\'s Some Weapons",
-            "[10]  Let\'s Race",
-            "[11]  Tadpole Pond",
-            "[12]  Rose Town",
-            "[13]  Race Training",
-            "[14]  Shock!",
-            "[15]  Sad Song",
-            "[16]  Midas River",
-            "[17]  Got A Star Piece (part 1)",
-            "[18]  Got A Star Piece (part 2)",
-            "[19]  Fight Against An Armed Boss",
-            "[1A]  Forest Maze",
-            "[1B]  Dungeon Is Full Of Monsters",
-            "[1C]  Let\'s Play Geno",
-            "[1D]  Start Slot Menu",
-            "[1E]  Long Long Ago",
-            "[1F]  Booster\'s Tower",
-            "[20]  And My Name\'s Booster",
-            "[21]  Moleville",
-            "[22]  Star Hill",
-            "[23]  Mountain Railroad",
-            "[24]  Explanation",
-            "[25]  Booster Hill (start)",
-            "[26]  Booster Hill",
-            "[27]  Marrymore",
-            "[28]  New Partner",
-            "[29]  Sunken Ship",
-            "[2A]  Still The Road Is Full Of Monsters",
-            "[2B]  {SILENCE}",
-            "[2C]  Sea",
-            "[2D]  Heart Beating A Little Faster (part 1)",
-            "[2E]  Heart Beating A Little Faster (part 2)",
-            "[2F]  Grate Guy\'s Casino",
-            "[30]  Geno Awakens",
-            "[31]  Celebrational",
-            "[32]  Nimbus Land",
-            "[33]  Monstro Town",
-            "[34]  Toadofsky",
-            "[35]  {SILENCE}",
-            "[36]  Happy Adventure, Delighful Adventure",
-            "[37]  World Map",
-            "[38]  Factory",
-            "[39]  Sword Crashes And Stars Scatter",
-            "[3A]  Conversation With Culex",
-            "[3B]  Fight Against Culex",
-            "[3C]  Victory Against Culex",
-            "[3D]  Valentina",
-            "[3E]  Barrel Volcano",
-            "[3F]  Axem Rangers Drop In",
-            "[40]  The End",
-            "[41]  Gate",
-            "[42]  Bowser\'s Castle (2nd time)",
-            "[43]  Weapons Factory",
-            "[44]  Fight Against Smithy 1",
-            "[45]  Fight Against Smithy 2",
-            "[46]  Ending Part 1",
-            "[47]  Ending Part 2",
-            "[48]  Ending Part 3",
-            "[49]  Ending Part 4",
-            "[4A]  {SILENCE}",
-            "[4B]  {SILENCE}",
-            "[4C]  {SILENCE}",
-            "[4D]  {SILENCE}",
-            "[4E]  {SILENCE}",
-            "[4F]  {SILENCE}"
+            "[10]  In The Flower Garden",
+            "[11]  Bowser\'s Castle (1st time)",
+            "[12]  Fight Against Bowser",
+            "[13]  Road Is Full Of Dangers",
+            "[14]  Mario\'s Pad",
+            "[15]  Here\'s Some Weapons",
+            "[16]  Let\'s Race",
+            "[17]  Tadpole Pond",
+            "[18]  Rose Town",
+            "[19]  Race Training",
+            "[20]  Shock!",
+            "[21]  Sad Song",
+            "[22]  Midas River",
+            "[23]  Got A Star Piece (part 1)",
+            "[24]  Got A Star Piece (part 2)",
+            "[25]  Fight Against An Armed Boss",
+            "[26]  Forest Maze",
+            "[27]  Dungeon Is Full Of Monsters",
+            "[28]  Let\'s Play Geno",
+            "[29]  Start Slot Menu",
+            "[30]  Long Long Ago",
+            "[31]  Booster\'s Tower",
+            "[32]  And My Name\'s Booster",
+            "[33]  Moleville",
+            "[34]  Star Hill",
+            "[35]  Mountain Railroad",
+            "[36]  Explanation",
+            "[37]  Booster Hill (start)",
+            "[38]  Booster Hill",
+            "[39]  Marrymore",
+            "[40]  New Partner",
+            "[41]  Sunken Ship",
+            "[42]  Still The Road Is Full Of Monsters",
+            "[43]  {SILENCE}",
+            "[44]  Sea",
+            "[45]  Heart Beating A Little Faster (part 1)",
+            "[46]  Heart Beating A Little Faster (part 2)",
+            "[47]  Grate Guy\'s Casino",
+            "[48]  Geno Awakens",
+            "[49]  Celebrational",
+            "[50]  Nimbus Land",
+            "[51]  Monstro Town",
+            "[52]  Toadofsky",
+            "[53]  {SILENCE}",
+            "[54]  Happy Adventure, Delighful Adventure",
+            "[55]  World Map",
+            "[56]  Factory",
+            "[57]  Sword Crashes And Stars Scatter",
+            "[58]  Conversation With Culex",
+            "[59]  Fight Against Culex",
+            "[60]  Victory Against Culex",
+            "[61]  Valentina",
+            "[62]  Barrel Volcano",
+            "[63]  Axem Rangers Drop In",
+            "[64]  The End",
+            "[65]  Gate",
+            "[66]  Bowser\'s Castle (2nd time)",
+            "[67]  Weapons Factory",
+            "[68]  Fight Against Smithy 1",
+            "[69]  Fight Against Smithy 2",
+            "[70]  Ending Part 1",
+            "[71]  Ending Part 2",
+            "[72]  Ending Part 3",
+            "[73]  Ending Part 4",
+            "[74]  {SILENCE}",
+            "[75]  {SILENCE}",
+            "[76]  {SILENCE}",
+            "[77]  {SILENCE}",
+            "[78]  {SILENCE}",
+            "[79]  {SILENCE}"
          };
-        private static string[] SoundNames = new string[]
+        public static string[] SoundNames = new string[]
             {
             "[000]  nothing",
             "[001]  menu select",
@@ -611,6 +612,7 @@ namespace SMRPGED.ScriptsEditor
         #endregion
 
         #region Methods
+
         private void InitializeEventScriptsEditor()
         {
             if (settings.EventLabels.Count == 0)
@@ -618,14 +620,18 @@ namespace SMRPGED.ScriptsEditor
                 settings.EventLabels = new System.Collections.Specialized.StringCollection();
                 for (int i = 0; i < 4096; i++)
                     settings.EventLabels.Add("EVENT #" + i);
-                settings.EventLabels[16] = "DEFAULT: Engage in battle";
-                settings.EventLabels[24] = "DEFAULT: Post-battle, check if lost/won, etc.";
-                settings.EventLabels[32] = "DEFAULT: Hit a treasure with a mushroom/star/flower";
-                settings.EventLabels[33] = "DEFAULT: Hit a treasure with an item (item bag sprite)";
-                settings.EventLabels[34] = "DEFAULT: Hit a treasure with coins";
-                settings.EventLabels[65] = "DEFAULT: Jump on trampoline";
-                settings.EventLabels[269] = "DEFAULT: Come up from tree trunk";
-                settings.EventLabels[1556] = "DEFAULT: Jump on wiggler";
+                settings.EventLabels[16] = "Engage in battle (remove permanently after defeat)";
+                settings.EventLabels[17] = "Engage in battle (remove temporarily after defeat)";
+                settings.EventLabels[18] = "Engage in battle (do not remove after defeat)";
+                settings.EventLabels[19] = "Engage in battle (remove permanently after defeat, if ran away, walk through while blinking)";
+                settings.EventLabels[20] = "Engage in battle (remove temporarily after defeat, if ran away, walk through while blinking)";
+                settings.EventLabels[24] = "Post-battle, check if lost/won, etc.";
+                settings.EventLabels[32] = "Hit a treasure with a mushroom/star/flower";
+                settings.EventLabels[33] = "Hit a treasure with an item (item bag sprite)";
+                settings.EventLabels[34] = "Hit a treasure with coins";
+                settings.EventLabels[65] = "Jump on trampoline";
+                settings.EventLabels[269] = "Come up from tree trunk";
+                settings.EventLabels[1556] = "Jump on wiggler";
             }
             if (settings.ActionLabels.Count == 0)
             {
@@ -648,7 +654,7 @@ namespace SMRPGED.ScriptsEditor
         {
             try
             {
-                this.EventScriptNotes.SaveFile(notes.GetPath() + "main-scripts-event.rtf");
+                //this.EventScriptNotes.SaveFile(notes.GetPath() + "main-scripts-event.rtf");
             }
             catch
             {
@@ -919,6 +925,8 @@ namespace SMRPGED.ScriptsEditor
                     "Mem 00:7000 compare to...",			// 0xC0
                     "Mem 00:7000 compare to mem...",			// 0xC1
                     "Mem 00:7000 = current level",			// 0xC3
+                    "Mem 00:7000 = object X coord...",			// 0xC4
+                    "Mem 00:7000 = object Y coord...",			// 0xC5
                     "Mem 00:7000 = object Z coord...",			// 0xC6
                     "Mem 00:7000 = held joypad register",			// 0xCA
                     "Mem 00:7000 = tapped joypad register",			// 0xCB
@@ -1086,7 +1094,7 @@ namespace SMRPGED.ScriptsEditor
                     labelEvtB.Text = "for object";
                     evtNameA.Items.AddRange(LevelNames()); evtNameA.Enabled = true;
                     evtNameB.Items.AddRange(ObjectNames); evtNameB.Enabled = true;
-                    evtNumA.Enabled = true; evtNumA.Maximum = 511; evtNumA.Hexadecimal = true;
+                    evtNumA.Enabled = true; evtNumA.Maximum = 511;
                     evtEffects.Items.AddRange(new object[] { "true" }); evtEffects.Enabled = true;
                     if (esc.Opcode == 0xF8)
                         evtNumE.Enabled = true; evtNumE.Hexadecimal = true; evtNumE.Maximum = 0xFFFF;
@@ -1183,7 +1191,7 @@ namespace SMRPGED.ScriptsEditor
                     labelEvtB.Text = "battlefield";
                     labelEvtC.Text = "pack";
                     evtNameB.Items.AddRange(BattlefieldNames); evtNameB.Enabled = true;
-                    evtNumB.Maximum = 63; evtNumB.Enabled = true; evtNumB.Hexadecimal = true;
+                    evtNumB.Maximum = 63; evtNumB.Enabled = true;
                     evtNumC.Enabled = true;
 
                     evtNumB.Value = esc.EventData[3];
@@ -1216,7 +1224,7 @@ namespace SMRPGED.ScriptsEditor
                     labelEvtD.Text = "Y";
                     evtNameA.Items.AddRange(LevelNames()); evtNameA.Enabled = true;
                     evtNameB.Items.AddRange(Directions); evtNameB.Enabled = true;
-                    evtNumA.Enabled = true; evtNumA.Maximum = 511; evtNumA.Hexadecimal = true;
+                    evtNumA.Enabled = true; evtNumA.Maximum = 511;
                     evtNumB.Enabled = true; evtNumB.Maximum = 31;
                     evtNumC.Enabled = true;
                     evtNumD.Enabled = true;
@@ -1932,12 +1940,16 @@ namespace SMRPGED.ScriptsEditor
 
                     evtNumC.Value = (esc.Option * 2) + 0x7000;
                     break;
+                case 0xC4: labelTitleA.Text = "Mem 00:7000 = object X coord..."; goto case 0xC6;
+                case 0xC5: labelTitleA.Text = "Mem 00:7000 = object Y coord..."; goto case 0xC6;
                 case 0xC6:
-                    labelTitleA.Text = "Mem 00:7000 = object Z coord...";
+                    if (esc.Opcode == 0xC6) labelTitleA.Text = "Mem 00:7000 = object Z coord...";
                     labelEvtA.Text = "object";
                     evtNameA.Items.AddRange(ObjectNames); evtNameA.Enabled = true;
+                    evtEffects.Items.Add("isometric"); evtEffects.Enabled = true;
 
                     evtNameA.SelectedIndex = esc.Option & 0x3F;
+                    evtEffects.SetItemChecked(0, (esc.Option & 0x80) == 0x80);
                     break;
                 case 0xDB: labelTitleA.Text = "If mem 00:7000 bit(s) set, jump to..."; goto case 0xDF;
                 case 0xDF:
@@ -2641,8 +2653,11 @@ namespace SMRPGED.ScriptsEditor
                 case 0xC1:
                     esc.Option = (byte)((evtNumC.Value - 0x7000) / 2);
                     break;
+                case 0xC4:
+                case 0xC5:
                 case 0xC6:
                     esc.Option = (byte)evtNameA.SelectedIndex;
+                    BitManager.SetBit(esc.EventData, 1, 7, evtEffects.GetItemChecked(0));
                     break;
                 case 0xDB:
                 case 0xDF:
@@ -2792,7 +2807,7 @@ namespace SMRPGED.ScriptsEditor
 
             for (int i = 0; i < levelNames.Count; i++)
             {
-                names[i] = "[" + i.ToString("X3") + "]  " + levelNames[i];
+                names[i] = "[" + i.ToString("d3") + "]  " + levelNames[i];
             }
             return names;
         }
@@ -2818,7 +2833,7 @@ namespace SMRPGED.ScriptsEditor
         {
 
         }
-        private void UpdateScriptOffsets()
+        public void UpdateScriptOffsets()
         {
             int delta = treeViewWrapper.ScriptDelta;
             int eventNum = treeViewWrapper.Script.EventNum;
@@ -3235,105 +3250,6 @@ namespace SMRPGED.ScriptsEditor
             updatingControls = true;
         }
 
-        // Importing / Exporting
-        private void ExportEventScript(int start, int count, string path)
-        {
-            this.scriptsModel.AssembleAllEventScripts();
-
-            path += "\\" + model.GetFileNameWithoutPath() + " - Event Scripts\\";
-
-            if (!CreateDir(path))
-                return;
-
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
-            s = File.Create(path + "Do Not Modify This Directory Or Files Contained Within.txt");
-            s.Close();
-
-            try
-            {
-                for (int i = start; i < start + count; i++)
-                {
-                    // Create the file to store the level data
-                    s = File.Create(path + "eventScript." + i.ToString("X3") + ".dat"); // Create data file
-
-                    eventScripts[i].Data = null;
-
-                    // Serialize object
-                    b.Serialize(s, eventScripts[i]);
-                    s.Close();
-
-                    eventScripts[i].Data = model.Data;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("There was a problem exporting");
-            }
-        }
-        private void ImportEventScript(int start, int count, string path)
-        {
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
-            int baseOffset, len;
-            EventActionCommand eac;
-
-            if (count == 1)
-            {
-                try
-                {
-                    s = File.OpenRead(path);
-
-                    baseOffset = eventScripts[start].BaseOffset;
-                    len = eventScripts[start].ScriptLength;
-
-                    eventScripts[start] = (EventScript)b.Deserialize(s);
-                    s.Close();
-
-                    this.treeViewWrapper.ScriptDelta = eventScripts[start].ScriptLength - len;
-                    eventScripts[start].Data = model.Data;
-
-                    ScriptIterator it = new ScriptIterator(eventScripts[start]);
-                    while (!it.IsDone)
-                    {
-                        eac = it.Next();
-                        eac.Offset = (eac.Offset - eventScripts[start].BaseOffset) + baseOffset;
-                        eac.OriginalOffset = eac.Offset;
-                    }
-
-                    eventScripts[start].BaseOffset = baseOffset;
-
-                    EventNumber_ValueChanged(null, null);
-                }
-                catch
-                {
-                    MessageBox.Show("There was a problem loading Event Script data.");
-                    return;
-                }
-            }
-            else
-            {
-                try
-                {
-                    for (int i = start; i < start + count; i++)
-                    {
-                        s = File.OpenRead(path + "eventScript." + i.ToString("X3") + ".dat");
-                        eventScripts[i] = (EventScript)b.Deserialize(s);
-                        s.Close();
-                        eventScripts[i].Data = model.Data;
-                    }
-                    this.treeViewWrapper.ScriptDelta = 0;
-
-                    EventNumber_ValueChanged(null, null);
-                }
-                catch
-                {
-                    MessageBox.Show("There was a problem loading Event Script data. Verify that the " +
-                    "Event Script data files are correctly named and present.");
-                }
-            }
-
-        }
         #endregion
 
         #region Event Handlers
@@ -3407,10 +3323,10 @@ namespace SMRPGED.ScriptsEditor
 
             UpdateCommandData();
 
-            //if (!actionScript)
-            //    eventLabel.Text = settings.EventLabels[currentScript];
-            //else
-            //    eventLabel.Text = settings.ActionLabels[currentScript];
+            if (!actionScript)
+                eventLabel.Text = settings.EventLabels[currentScript];
+            else
+                eventLabel.Text = settings.ActionLabels[currentScript];
 
             updatingScript = true;
         }
@@ -3483,17 +3399,48 @@ namespace SMRPGED.ScriptsEditor
             EventScriptTree.SelectedNode = e.Node;
             if (e.Button == MouseButtons.Right)
             {
-                if (e.Node.Parent == null && !actionScript)
+                if (EventScriptTree.SelectedNode.Tag.GetType() == typeof(EventScriptCommand))
                 {
-                    EventScriptCommand temp = (EventScriptCommand)eventScripts[currentScript].Commands[GetFullNodeIndex(e.Node, EventScriptTree.Nodes)];
-
+                    EventScriptCommand temp = (EventScriptCommand)EventScriptTree.SelectedNode.Tag;
                     if (temp.Opcode == 0x60 || temp.Opcode == 0x62)
                     {
                         e.Node.ContextMenuStrip = contextMenuStripGoto;
                         goToToolStripMenuItem.Text = "Edit dialogue...";
                         goToToolStripMenuItem.Click += new EventHandler(goToDialogue_Click);
-
-                        e.Node.Tag = (int)(BitManager.GetShort(temp.EventData, 1) & 0xFFF);
+                    }
+                    // 0xa0 - 0xa6  // 0xd8 - 0xde
+                    if (temp.Opcode == 0xA0 || temp.Opcode == 0xA1 || temp.Opcode == 0xA2 ||
+                        temp.Opcode == 0xA4 || temp.Opcode == 0xA5 || temp.Opcode == 0xA6 ||
+                        temp.Opcode == 0xD8 || temp.Opcode == 0xD9 || temp.Opcode == 0xDA ||
+                        temp.Opcode == 0xDC || temp.Opcode == 0xDD || temp.Opcode == 0xDE)
+                    {
+                        e.Node.ContextMenuStrip = contextMenuStripGoto;
+                        goToToolStripMenuItem.Text = "Add to notes database...";
+                        goToToolStripMenuItem.Click += new EventHandler(addMemoryToNotesDatabase_Click);
+                    }
+                    if (temp.Opcode == 0xFD)
+                    {
+                        if (temp.Option == 0xD8 || temp.Option == 0xD9 || temp.Option == 0xDA ||
+                            temp.Option == 0xDC || temp.Option == 0xDD || temp.Option == 0xDE)
+                        {
+                            e.Node.ContextMenuStrip = contextMenuStripGoto;
+                            goToToolStripMenuItem.Text = "Add to notes database...";
+                            goToToolStripMenuItem.Click += new EventHandler(addMemoryToNotesDatabase_Click);
+                        }
+                    }
+                }
+                else
+                {
+                    ActionQueueCommand temp = (ActionQueueCommand)EventScriptTree.SelectedNode.Tag;
+                    // 0xa0 - 0xa6  // 0xd8 - 0xde
+                    if (temp.Opcode == 0xA0 || temp.Opcode == 0xA1 || temp.Opcode == 0xA2 ||
+                        temp.Opcode == 0xA4 || temp.Opcode == 0xA5 || temp.Opcode == 0xA6 ||
+                        temp.Opcode == 0xD8 || temp.Opcode == 0xD9 || temp.Opcode == 0xDA ||
+                        temp.Opcode == 0xDC || temp.Opcode == 0xDD || temp.Opcode == 0xDE)
+                    {
+                        e.Node.ContextMenuStrip = contextMenuStripGoto;
+                        goToToolStripMenuItem.Text = "Add to notes database...";
+                        goToToolStripMenuItem.Click += new EventHandler(addMemoryToNotesDatabase_Click);
                     }
                 }
             }
@@ -4036,7 +3983,8 @@ namespace SMRPGED.ScriptsEditor
         {
             if (EventScriptTree.SelectedNode == null) return;
 
-            int num = (int)EventScriptTree.SelectedNode.Tag;
+            EventScriptCommand temp = (EventScriptCommand)EventScriptTree.SelectedNode.Tag;
+            int num = BitManager.GetShort(temp.EventData, 1) & 0xFFF;
 
             if (model.Program.Sprites == null)
                 model.Program.CreateSpritesWindow();
@@ -4044,6 +3992,71 @@ namespace SMRPGED.ScriptsEditor
             model.Program.Sprites.TabControl1.SelectedIndex = 2;
             model.Program.Sprites.DialogueNum.Value = num;
             model.Program.Sprites.BringToFront();
+        }
+        private void addMemoryToNotesDatabase_Click(object sender, EventArgs e)
+        {
+            if (EventScriptTree.SelectedNode == null) return;
+
+            int address = 0x7000;
+            int addressBit = 0;
+            string label = "";
+            string description = "";
+            if (EventScriptTree.SelectedNode.Tag.GetType() == typeof(EventScriptCommand))
+            {
+                EventScriptCommand temp = (EventScriptCommand)EventScriptTree.SelectedNode.Tag;
+                if (temp.Opcode >= 0xA0 && temp.Opcode <= 0xA2)
+                    address = ((((temp.Opcode * 0x100) + temp.Option) - 0xA000) / 8) + 0x7040;
+                if (temp.Opcode >= 0xA4 && temp.Opcode <= 0xA6)
+                    address = ((((temp.Opcode * 0x100) + temp.Option) - 0xA400) / 8) + 0x7040;
+                if (temp.Opcode >= 0xD8 && temp.Opcode <= 0xDA)
+                    address = ((((temp.Opcode * 0x100) + temp.Option) - 0xD800) / 8) + 0x7040;
+                if (temp.Opcode >= 0xDC && temp.Opcode <= 0xDE)
+                    address = ((((temp.Opcode * 0x100) + temp.Option) - 0xDC00) / 8) + 0x7040;
+                addressBit = temp.Option & 0x07;
+                if (temp.Option == 0xFD)
+                {
+                    if (temp.Option >= 0xA0 && temp.Option <= 0xA2)
+                        address = ((((temp.Option * 0x100) + temp.EventData[2]) - 0xA000) / 8) + 0x7040;
+                    if (temp.Option >= 0xA4 && temp.Option <= 0xA6)
+                        address = ((((temp.Option * 0x100) + temp.EventData[2]) - 0xA400) / 8) + 0x7040;
+                    if (temp.Option >= 0xD8 && temp.Option <= 0xDA)
+                        address = ((((temp.Option * 0x100) + temp.EventData[2]) - 0xD800) / 8) + 0x7040;
+                    if (temp.Option >= 0xDC && temp.Option <= 0xDE)
+                        address = ((((temp.Option * 0x100) + temp.EventData[2]) - 0xDC00) / 8) + 0x7040;
+                    addressBit = temp.EventData[2] & 0x07;
+                }
+            }
+            else
+            {
+                ActionQueueCommand temp = (ActionQueueCommand)EventScriptTree.SelectedNode.Tag;
+                if (temp.Opcode >= 0xA0 && temp.Opcode <= 0xA2)
+                    address = ((((temp.Opcode * 0x100) + temp.Option) - 0xA000) / 8) + 0x7040;
+                if (temp.Opcode >= 0xA4 && temp.Opcode <= 0xA6)
+                    address = ((((temp.Opcode * 0x100) + temp.Option) - 0xA400) / 8) + 0x7040;
+                if (temp.Opcode >= 0xD8 && temp.Opcode <= 0xDA)
+                    address = ((((temp.Opcode * 0x100) + temp.Option) - 0xD800) / 8) + 0x7040;
+                if (temp.Opcode >= 0xDC && temp.Opcode <= 0xDE)
+                    address = ((((temp.Opcode * 0x100) + temp.Option) - 0xDC00) / 8) + 0x7040;
+                addressBit = temp.Option & 0x07;
+            }
+
+            label = description = "[" + address.ToString("X4") + ", bit: " + addressBit.ToString() + "]";
+
+            if (model.Program.Notes == null || !model.Program.Notes.Visible)
+                model.Program.CreateNotesWindow();
+            Notes note = model.Program.Notes;
+            if (note.ThisNotes == null)
+                note.LoadNotes();
+            if (note.ThisNotes != null)
+            {
+                note.AddingFromEditor(7, address, addressBit, label, description);
+                note.BringToFront();
+            }
+            else
+            {
+                MessageBox.Show("Could not add element to notes database.", "LAZY SHELL",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
     }

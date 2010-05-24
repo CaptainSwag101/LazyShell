@@ -131,7 +131,7 @@ namespace SMRPGED
             {
                 offsetChange = 0;
                 graphicSets = null;
-                System.Windows.Forms.MessageBox.Show("Problem with Tileset Data: graphicSetIndex invalid, Please report this");
+                System.Windows.Forms.MessageBox.Show("Problem with Tileset Data: graphicSetIndex invalid, Please report this", "LAZY SHELL");
             }
             //else if (graphicSetIndex == 5) graphicSetData = graphicSet5; // only for layer 3
 

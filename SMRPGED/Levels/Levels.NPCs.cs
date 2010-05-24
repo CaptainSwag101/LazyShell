@@ -11,7 +11,7 @@ namespace SMRPGED
         #region Variables
 
         private LevelNPCs npcs;
-        private Object npcCopy;
+        private Object copyNPC;
 
         private NPCSpritePartitions[] npcSpritePartitions;
         private NPCProperties[] npcProperties;
@@ -77,11 +77,10 @@ namespace SMRPGED
                     this.npcsZCoordPlusHalf.Enabled = true;
 
                     this.npcAttributes.Enabled = false;
-                    this.npcAttributesBattle.Enabled = false;
+                    this.npcAfterBattle.Enabled = false;
                     this.npcEngageTrigger.Enabled = false;
                     this.npcMovement.Enabled = false;
                     this.npcID.Enabled = false;
-                    this.npcPaletteIndexPlus.Enabled = false;
                     this.npcEventORPack.Enabled = false;
                     this.npcSpeedPlus.Enabled = false;
 
@@ -105,12 +104,12 @@ namespace SMRPGED
                     }
                     else if (this.npcEngageType.SelectedIndex == 1)
                     {
-                        this.label104.Text = "Star XP";
-                        this.label31.Text = "Treasure";
+                        this.label104.Text = "00:70A7 = ";
+                        this.label31.Text = "{N/A}";
                         this.buttonGotoA.Text = "Event #";
                         this.label116.Text = "{N/A}";
-                        this.npcPropertyA.Maximum = 15;
-                        this.npcPropertyB.Maximum = 15;
+                        this.npcPropertyA.Maximum = 255;
+                        this.npcPropertyB.Enabled = false;
                         this.npcPropertyC.Enabled = false;
                         this.npcEventORPack.Maximum = 4095;
                     }
@@ -151,11 +150,10 @@ namespace SMRPGED
                     this.npcsZCoordPlusHalf.Enabled = true;
 
                     this.npcAttributes.Enabled = true;
-                    this.npcAttributesBattle.Enabled = npcs.EngageType == 2;
+                    this.npcAfterBattle.Enabled = npcs.EngageType == 2;
                     this.npcEngageTrigger.Enabled = true;
                     this.npcMovement.Enabled = true;
                     this.npcID.Enabled = true;
-                    this.npcPaletteIndexPlus.Enabled = true;
                     this.npcEventORPack.Enabled = true;
                     this.npcSpeedPlus.Enabled = true;
 
@@ -179,15 +177,14 @@ namespace SMRPGED
                     this.npcAttributes.SetItemChecked(10, npcs.B3b5);
                     this.npcAttributes.SetItemChecked(11, npcs.B3b6);
                     this.npcAttributes.SetItemChecked(12, npcs.B3b7);
-                    this.npcAttributesBattle.SetItemChecked(0, npcs.B8b0);
-                    this.npcAttributesBattle.SetItemChecked(1, npcs.B8b1);
-                    this.npcAttributesBattle.SetItemChecked(2, npcs.B8b2);
-                    this.npcAttributesBattle.SetItemChecked(3, npcs.B8b3);
+                    this.npcAttributes.SetItemChecked(13, npcs.B4b0);
+                    this.npcAttributes.SetItemChecked(14, npcs.B4b1);
+
+                    this.npcAfterBattle.SelectedIndex = npcs.AfterBattle;
 
                     this.npcEngageTrigger.SelectedIndex = npcs.EngageTrigger;
                     this.npcMovement.Value = npcs.Movement;
                     this.npcID.Value = npcs.NPCID;
-                    this.npcPaletteIndexPlus.Value = npcs.PaletteIndexPlus;
                     this.npcSpeedPlus.Value = npcs.SpeedPlus;
 
                     if (this.npcEngageType.SelectedIndex == 0)
@@ -203,12 +200,12 @@ namespace SMRPGED
                     }
                     else if (this.npcEngageType.SelectedIndex == 1)
                     {
-                        this.label104.Text = "Star XP";
-                        this.label31.Text = "Treasure";
+                        this.label104.Text = "00:70A7 = ";
+                        this.label31.Text = "{N/A}";
                         this.buttonGotoA.Text = "Event #";
                         this.label116.Text = "{N/A}";
-                        this.npcPropertyA.Maximum = 15;
-                        this.npcPropertyB.Maximum = 15;
+                        this.npcPropertyA.Maximum = 255;
+                        this.npcPropertyB.Enabled = false;
                         this.npcPropertyC.Enabled = false;
                         this.npcEventORPack.Maximum = 4095;
                     }
@@ -252,11 +249,10 @@ namespace SMRPGED
                 this.npcsZCoordPlusHalf.Enabled = false;
 
                 this.npcAttributes.Enabled = false;
-                this.npcAttributesBattle.Enabled = false;
+                this.npcAfterBattle.Enabled = false;
                 this.npcEngageTrigger.Enabled = false;
                 this.npcMovement.Enabled = false;
                 this.npcID.Enabled = false;
-                this.npcPaletteIndexPlus.Enabled = false;
                 this.npcEventORPack.Enabled = false;
                 this.npcSpeedPlus.Enabled = false;
 
@@ -269,13 +265,11 @@ namespace SMRPGED
 
                 for (int i = 0; i < npcAttributes.Items.Count; i++)
                     npcAttributes.SetItemChecked(i, false);
-                for (int i = 0; i < npcAttributesBattle.Items.Count; i++)
-                    npcAttributesBattle.SetItemChecked(i, false);
+                npcAfterBattle.SelectedIndex = 0;
 
                 this.npcEngageTrigger.SelectedIndex = 0;
                 this.npcMovement.Value = 0;
                 this.npcID.Value = 0;
-                this.npcPaletteIndexPlus.Value = 0;
                 this.npcSpeedPlus.Value = 0;
 
                 this.label104.Text = "";
@@ -323,11 +317,10 @@ namespace SMRPGED
                     this.npcsZCoordPlusHalf.Enabled = true;
 
                     this.npcAttributes.Enabled = false;
-                    this.npcAttributesBattle.Enabled = false;
+                    this.npcAfterBattle.Enabled = false;
                     this.npcEngageTrigger.Enabled = false;
                     this.npcMovement.Enabled = false;
                     this.npcID.Enabled = false;
-                    this.npcPaletteIndexPlus.Enabled = false;
                     this.npcEventORPack.Enabled = false;
                     this.npcSpeedPlus.Enabled = false;
 
@@ -351,12 +344,12 @@ namespace SMRPGED
                     }
                     else if (this.npcEngageType.SelectedIndex == 1)
                     {
-                        this.label104.Text = "Star XP";
-                        this.label31.Text = "Treasure";
+                        this.label104.Text = "00:70A7 = ";
+                        this.label31.Text = "{N/A}";
                         this.buttonGotoA.Text = "Event #";
                         this.label116.Text = "{N/A}";
-                        this.npcPropertyA.Maximum = 15;
-                        this.npcPropertyB.Maximum = 15;
+                        this.npcPropertyA.Maximum = 255;
+                        this.npcPropertyB.Enabled = false;
                         this.npcPropertyC.Enabled = false;
                         this.npcEventORPack.Maximum = 4095;
                     }
@@ -399,11 +392,10 @@ namespace SMRPGED
                     this.npcsZCoordPlusHalf.Enabled = true;
 
                     this.npcAttributes.Enabled = true;
-                    this.npcAttributesBattle.Enabled = npcs.EngageType == 2;
+                    this.npcAfterBattle.Enabled = npcs.EngageType == 2;
                     this.npcEngageTrigger.Enabled = true;
                     this.npcMovement.Enabled = true;
                     this.npcID.Enabled = true;
-                    this.npcPaletteIndexPlus.Enabled = true;
                     this.npcEventORPack.Enabled = true;
                     this.npcSpeedPlus.Enabled = true;
 
@@ -427,15 +419,13 @@ namespace SMRPGED
                     this.npcAttributes.SetItemChecked(10, npcs.B3b5);
                     this.npcAttributes.SetItemChecked(11, npcs.B3b6);
                     this.npcAttributes.SetItemChecked(12, npcs.B3b7);
-                    this.npcAttributesBattle.SetItemChecked(0, npcs.B8b0);
-                    this.npcAttributesBattle.SetItemChecked(1, npcs.B8b1);
-                    this.npcAttributesBattle.SetItemChecked(2, npcs.B8b2);
-                    this.npcAttributesBattle.SetItemChecked(3, npcs.B8b3);
+                    this.npcAttributes.SetItemChecked(13, npcs.B4b0);
+                    this.npcAttributes.SetItemChecked(14, npcs.B4b1);
+                    this.npcAfterBattle.SelectedIndex = npcs.AfterBattle;
 
                     this.npcEngageTrigger.SelectedIndex = npcs.EngageTrigger;
                     this.npcMovement.Value = npcs.Movement;
                     this.npcID.Value = npcs.NPCID;
-                    this.npcPaletteIndexPlus.Value = npcs.PaletteIndexPlus;
                     this.npcSpeedPlus.Value = npcs.SpeedPlus;
 
                     if (this.npcEngageType.SelectedIndex == 0)
@@ -451,12 +441,12 @@ namespace SMRPGED
                     }
                     else if (this.npcEngageType.SelectedIndex == 1)
                     {
-                        this.label104.Text = "Star XP";
-                        this.label31.Text = "Treasure";
+                        this.label104.Text = "00:70A7 = ";
+                        this.label31.Text = "{N/A}";
                         this.buttonGotoA.Text = "Event #";
                         this.label116.Text = "{N/A}";
-                        this.npcPropertyA.Maximum = 15;
-                        this.npcPropertyB.Maximum = 15;
+                        this.npcPropertyA.Maximum = 255;
+                        this.npcPropertyB.Enabled = false;
                         this.npcPropertyC.Enabled = false;
                         this.npcEventORPack.Maximum = 4095;
                     }
@@ -500,11 +490,10 @@ namespace SMRPGED
                 this.npcsZCoordPlusHalf.Enabled = false;
 
                 this.npcAttributes.Enabled = false;
-                this.npcAttributesBattle.Enabled = false;
+                this.npcAfterBattle.Enabled = false;
                 this.npcEngageTrigger.Enabled = false;
                 this.npcMovement.Enabled = false;
                 this.npcID.Enabled = false;
-                this.npcPaletteIndexPlus.Enabled = false;
                 this.npcEventORPack.Enabled = false;
                 this.npcSpeedPlus.Enabled = false;
 
@@ -517,13 +506,11 @@ namespace SMRPGED
 
                 for (int i = 0; i < npcAttributes.Items.Count; i++)
                     npcAttributes.SetItemChecked(i, false);
-                for (int i = 0; i < npcAttributesBattle.Items.Count; i++)
-                    npcAttributesBattle.SetItemChecked(i, false);
+                npcAfterBattle.SelectedIndex = 0;
 
                 this.npcEngageTrigger.SelectedIndex = 0;
                 this.npcMovement.Value = 0;
                 this.npcID.Value = 0;
-                this.npcPaletteIndexPlus.Value = 0;
                 this.npcSpeedPlus.Value = 0;
 
                 this.label104.Text = "";
@@ -542,11 +529,11 @@ namespace SMRPGED
             updatingLevel = false;
         }
 
-        private bool CalculateFreeNPCSpace(int amt)
+        private bool CalculateFreeNPCSpace(int amt, bool showMessageBox)
         {
             int used = 0;
 
-            for (int i = 0; i < 512; i++)
+            for (int i = 0; i < 510; i++)
             {
                 if (levels[i].LevelNPCs.NumberOfNPCs > 0) used++;   // for the map header
                 for (int j = 0; j < levels[i].LevelNPCs.NumberOfNPCs; j++)
@@ -559,7 +546,8 @@ namespace SMRPGED
 
                     if ((used + amt) > 0x7BFF)
                     {
-                        MessageBox.Show("WARNING: Cannot insert the NPC. The total number of NPCs for all levels has exceeded the maximum allotted space.", "TOTAL NPCS LENGTH EXCEEDED", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        if (showMessageBox)
+                            MessageBox.Show("WARNING: Cannot insert the NPC. The total number of NPCs for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return true;
                     }
                 }
@@ -624,7 +612,7 @@ namespace SMRPGED
         {
             Point o = new Point(Math.Abs(pictureBoxLevel.Left), Math.Abs(pictureBoxLevel.Top));
             Point p = new Point(physicalMap.OrthCoordsX[o.Y * 1024 + o.X] + 2, physicalMap.OrthCoordsY[o.Y * 1024 + o.X] + 4);
-            if (!CalculateFreeNPCSpace(12))
+            if (!CalculateFreeNPCSpace(12, true))
             {
                 if (npcObjectTree.GetNodeCount(true) < 28)
                 {
@@ -658,14 +646,14 @@ namespace SMRPGED
                     npcObjectTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("WARNING: Cannot insert anymore NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.", "WARNING: Cannot insert any more NPCs", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("WARNING: Cannot insert anymore NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         private void AddNewInstance()
         {
             Point o = new Point(Math.Abs(pictureBoxLevel.Left), Math.Abs(pictureBoxLevel.Top));
             Point p = new Point(physicalMap.OrthCoordsX[o.Y * 1024 + o.X] + 2, physicalMap.OrthCoordsY[o.Y * 1024 + o.X] + 4);
-            if (!CalculateFreeNPCSpace(4))
+            if (!CalculateFreeNPCSpace(4, true))
             {
                 if (npcObjectTree.SelectedNode.Parent != null)
                     npcs.CurrentNPC = npcObjectTree.SelectedNode.Parent.Index;
@@ -705,14 +693,14 @@ namespace SMRPGED
                     npcObjectTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("WARNING: Cannot insert anymore NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.", "WARNING: Cannot insert any more NPCs", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("WARNING: Cannot insert anymore NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         private void AddNewNPC(LevelNPCs.NPC e)
         {
             Point o = new Point(Math.Abs(pictureBoxLevel.Left), Math.Abs(pictureBoxLevel.Top));
             Point p = new Point(physicalMap.OrthCoordsX[o.Y * 1024 + o.X] + 2, physicalMap.OrthCoordsY[o.Y * 1024 + o.X] + 4);
-            if (!CalculateFreeNPCSpace(12))
+            if (!CalculateFreeNPCSpace(12, true))
             {
                 if (npcObjectTree.GetNodeCount(true) < 28)
                 {
@@ -746,14 +734,14 @@ namespace SMRPGED
                     npcObjectTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("WARNING: Cannot insert anymore NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.", "WARNING: Cannot insert any more NPCs", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("WARNING: Cannot insert anymore NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         private void AddNewInstance(LevelNPCs.NPC.Instance e)
         {
             Point o = new Point(Math.Abs(pictureBoxLevel.Left), Math.Abs(pictureBoxLevel.Top));
             Point p = new Point(physicalMap.OrthCoordsX[o.Y * 1024 + o.X] + 2, physicalMap.OrthCoordsY[o.Y * 1024 + o.X] + 4);
-            if (!CalculateFreeNPCSpace(4))
+            if (!CalculateFreeNPCSpace(4, true))
             {
                 if (npcObjectTree.SelectedNode.Parent != null)
                     npcs.CurrentNPC = npcObjectTree.SelectedNode.Parent.Index;
@@ -793,7 +781,7 @@ namespace SMRPGED
                     npcObjectTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("WARNING: Cannot insert anymore NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.", "WARNING: Cannot insert any more NPCs", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("WARNING: Cannot insert anymore NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         #endregion
@@ -831,32 +819,6 @@ namespace SMRPGED
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
 
             RefreshNPCProperties();
-        }
-        private void npcObjectTree_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyData)
-            {
-                case Keys.C:
-                    if (npcObjectTree.SelectedNode != null)
-                    {
-                        if (npcObjectTree.SelectedNode.Parent != null)
-                            npcCopy = npcs.Npc.INSTANCE;
-                        else
-                            npcCopy = npcs.Npc;
-                    }
-                    break;
-                case Keys.V:
-                    switch (npcCopy.GetType().ToString())
-                    {
-                        case "SMRPGED.LevelNPCs+NPC":
-                            AddNewNPC((LevelNPCs.NPC)npcCopy);
-                            break;
-                        //case "SMRPGED.LevelNPCs+NPC+Instance":
-                        //    AddNewInstance((LevelNPCs.NPC.Instance)npcCopy);
-                        //    break;
-                    }
-                    break;
-            }
         }
         private void npcInsertObject_Click(object sender, System.EventArgs e)
         {
@@ -941,15 +903,15 @@ namespace SMRPGED
                 this.npcObjectTree.EndUpdate();
             }
         }
-        
+
         private void openPartitions_Click(object sender, System.EventArgs e)
         {
-            Form openSpritePartitions = new OpenNPCSpritePartitions(npcSpritePartitions, npcs.MapHeader);
+            Form openSpritePartitions = new OpenNPCSpritePartitions(this, npcSpritePartitions);
             openSpritePartitions.Show();
         }
         private void findNPCNum_Click(object sender, EventArgs e)
         {
-            Form findNPCNumber = new SearchNPC(npcProperties, this);
+            Form findNPCNumber = new SearchNPC(npcProperties, this, npcID.Value);
             findNPCNumber.Show();
         }
 
@@ -964,12 +926,6 @@ namespace SMRPGED
             if (updatingLevel) return;
 
             npcs.EventORpack = (ushort)this.npcEventORPack.Value;
-        }
-        private void npcPaletteIndexPlus_ValueChanged(object sender, System.EventArgs e)
-        {
-            if (updatingLevel) return;
-
-            npcs.PaletteIndexPlus = (byte)this.npcPaletteIndexPlus.Value;
         }
         public void npcID_ValueChanged(object sender, System.EventArgs e)
         {
@@ -1222,19 +1178,19 @@ namespace SMRPGED
                 this.npcPropertyB.Maximum = 7;
                 this.npcPropertyC.Enabled = true;
                 this.npcEventORPack.Maximum = 4095;
-                this.npcAttributesBattle.Enabled = false;
+                this.npcAfterBattle.Enabled = false;
             }
             else if (this.npcEngageType.SelectedIndex == 1)
             {
-                this.label104.Text = "Star XP"; //propertyA
-                this.label31.Text = "Treasure"; //propertyB
+                this.label104.Text = "00:70A7 = "; //propertyA
+                this.label31.Text = "{N/A}"; //propertyB
                 this.buttonGotoA.Text = "Event #"; //eventorpack
                 this.label116.Text = "<...>";   //propertyC
-                this.npcPropertyA.Maximum = 15;
-                this.npcPropertyB.Maximum = 15;
+                this.npcPropertyA.Maximum = 255;
+                this.npcPropertyB.Enabled = false;
                 this.npcPropertyC.Enabled = false;
                 this.npcEventORPack.Maximum = 4095;
-                this.npcAttributesBattle.Enabled = false;
+                this.npcAfterBattle.Enabled = false;
             }
             else if (this.npcEngageType.SelectedIndex == 2)
             {
@@ -1246,7 +1202,7 @@ namespace SMRPGED
                 this.npcPropertyB.Maximum = 15;
                 this.npcPropertyC.Enabled = false;
                 this.npcEventORPack.Maximum = 255;
-                this.npcAttributesBattle.Enabled = true;
+                this.npcAfterBattle.Enabled = true;
             }
             updatingProperties = false;
             if (!updatingLevel && state.Objects)
@@ -1284,13 +1240,8 @@ namespace SMRPGED
             npcs.B3b5 = this.npcAttributes.GetItemChecked(10);
             npcs.B3b6 = this.npcAttributes.GetItemChecked(11);
             npcs.B3b7 = this.npcAttributes.GetItemChecked(12);
-        }
-        private void npcAttributesBattle_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            npcs.B8b0 = this.npcAttributesBattle.GetItemChecked(0);
-            npcs.B8b1 = this.npcAttributesBattle.GetItemChecked(1);
-            npcs.B8b2 = this.npcAttributesBattle.GetItemChecked(2);
-            npcs.B8b3 = this.npcAttributesBattle.GetItemChecked(3);
+            npcs.B4b0 = this.npcAttributes.GetItemChecked(13);
+            npcs.B4b1 = this.npcAttributes.GetItemChecked(14);
         }
 
         private void npcMoveUp_Click(object sender, EventArgs e)
@@ -1379,6 +1330,20 @@ namespace SMRPGED
 
             this.npcObjectTree.EndUpdate();
         }
+        private void npcCopy_Click(object sender, EventArgs e)
+        {
+            if (npcObjectTree.SelectedNode != null)
+            {
+                if (npcObjectTree.SelectedNode.Parent != null)
+                    copyNPC = npcs.Npc.INSTANCE;
+                else
+                    copyNPC = npcs.Npc;
+            }
+        }
+        private void npcPaste_Click(object sender, EventArgs e)
+        {
+            AddNewNPC((LevelNPCs.NPC)copyNPC);
+        }
 
         private void buttonGotoA_Click(object sender, EventArgs e)
         {
@@ -1399,6 +1364,13 @@ namespace SMRPGED
             model.Program.Scripts.EventName.SelectedIndex = 1;
             model.Program.Scripts.EventNum.Value = npcMovement.Value;
             model.Program.Scripts.BringToFront();
+        }
+
+        private void npcAfterBattle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updatingLevel) return;
+
+            npcs.AfterBattle = (byte)npcAfterBattle.SelectedIndex;
         }
 
         #endregion

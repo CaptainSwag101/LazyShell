@@ -322,11 +322,11 @@ namespace SMRPGED
             exits.CurrentExit = currentExit;
         }
 
-        public bool CalculateFreeExitSpace()
+        public bool CalculateFreeExitSpace(bool showMessageBox)
         {
             int used = 0;
 
-            for (int i = 0; i < 512; i++)
+            for (int i = 0; i < 510; i++)
             {
                 for (int j = 0; j < levels[i].LevelExits.NumberOfExits; j++)
                 {
@@ -335,7 +335,8 @@ namespace SMRPGED
 
                     if ((used + 8) > 0x179F)
                     {
-                        MessageBox.Show("WARNING: Cannot insert the field. The total number of exits for all levels has exceeded the maximum allotted space.", "TOTAL EXITS LENGTH EXCEEDED", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        if (showMessageBox)
+                            MessageBox.Show("WARNING: Cannot insert the field. The total number of exits for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return true;
                     }
                 }
@@ -366,7 +367,7 @@ namespace SMRPGED
 
             if (updatingLevel) return;
 
-            if (!CalculateFreeExitSpace())
+            if (!CalculateFreeExitSpace(true))
             {
                 exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
                 exits.LengthOverOne = this.exitsLengthOverOne.Checked;
@@ -417,8 +418,9 @@ namespace SMRPGED
         {
             if (updatingLevel) return;
 
-            if (!CalculateFreeExitSpace())
+            if (!CalculateFreeExitSpace(true))
             {
+                exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
                 exits.ExitType = (byte)this.exitsType.SelectedIndex;
 
                 if (exits.Destination > exitsType.Items.Count)
@@ -559,7 +561,7 @@ namespace SMRPGED
         {
             Point o = new Point(Math.Abs(pictureBoxLevel.Left), Math.Abs(pictureBoxLevel.Top));
             Point p = new Point(physicalMap.OrthCoordsX[o.Y * 1024 + o.X] + 2, physicalMap.OrthCoordsY[o.Y * 1024 + o.X] + 4);
-            if (!CalculateFreeExitSpace())
+            if (!CalculateFreeExitSpace(true))
             {
                 this.exitsFieldTree.Focus();
                 if (exits.NumberOfExits < 28)
@@ -586,7 +588,7 @@ namespace SMRPGED
                     exitsFieldTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("WARNING: Cannot insert anymore exit fields. The maximum number of exit fields allowed is 28.", "WARNING: Cannot insert any more exit fields", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("WARNING: Cannot insert anymore exit fields. The maximum number of exit fields allowed is 28.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         private void exitsDeleteField_Click(object sender, EventArgs e)

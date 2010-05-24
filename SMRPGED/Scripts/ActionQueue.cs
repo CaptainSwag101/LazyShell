@@ -62,7 +62,7 @@ namespace SMRPGED.ScriptsEditor
 
             ParseActionQueue(actionQueueData);
         }
-        private void ParseActionQueue(byte[] aq)
+        public void ParseActionQueue(byte[] aq)
         {
             int offset = 0, len;
 

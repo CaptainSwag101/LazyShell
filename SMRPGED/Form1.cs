@@ -18,7 +18,7 @@ namespace SMRPGED
         #region Variables
 
         private ProgramController AppControl;
-        private Notes notes;
+        //private Notes notes;
         private Settings settings;
         private bool cancelAnotherLoad;
 
@@ -32,12 +32,14 @@ namespace SMRPGED
         bool invalidExe = false;
         //SMRPGED.Encryption.VerifyBeta vBeta;
 
+        private ImportElements importElements;
+
         #endregion
 
         public Form1(ProgramController controls)
         {
             this.AppControl = controls;
-            notes = Notes.Instance;
+            //notes = Notes.Instance;
             settings = Settings.Default;
 
             InitializeComponent();
@@ -57,7 +59,7 @@ namespace SMRPGED
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("ERROR: " + e.Message);
+                    MessageBox.Show("ERROR: " + e.Message, "LAZY SHELL");
                 }
             }
         }
@@ -77,38 +79,12 @@ namespace SMRPGED
         private void LoadInitialSettings()
         {
             this.loadLastUsedROMToolStripMenuItem.Checked = settings.LoadLastUsedROM;
-            this.loadNotesToolStripMenuItem.Checked = settings.LoadNotes;
-            this.romLocationToolStripMenuItem.Checked = false;
-            this.ediToolStripMenuItem.Checked = false;
-            this.profileLocationToolStripMenuItem.Checked = false;
-            this.customNotePathMenuItem.Checked = false;
-
-            this.romLocationToolStripMenuItem.ToolTipText = null;
-            this.ediToolStripMenuItem.ToolTipText = null;
-            this.profileLocationToolStripMenuItem.ToolTipText = null;
-            this.customNotePathMenuItem.ToolTipText = null;
 
             this.undoStackSizeTextBox.Text = this.settings.UndoStackSize.ToString();
             this.serverToolStripTextBox1.Text = this.settings.patchServerURL;
             this.ignoreInvalidRomWarningToolStripMenuItem.Checked = this.settings.UnverifiedRomWarning;
             this.showEncryptionWarningsToolStripMenuItem.Checked = settings.ShowEncryptionWarnings;
 
-            if (settings.NotesPath == 0)
-            {
-                this.romLocationToolStripMenuItem.Checked = true;
-            }
-            else if (settings.NotesPath == 1)
-            {
-                this.ediToolStripMenuItem.Checked = true;
-            }
-            else if (settings.NotesPath == 2)
-            {
-                this.profileLocationToolStripMenuItem.Checked = true;
-            }
-            else if (settings.NotesPath == 3)
-            {
-                this.customNotePathMenuItem.Checked = true;
-            }
             if (settings.VisualThemeSystem)
             {
                 systemToolStripMenuItem.Checked = true;
@@ -121,37 +97,12 @@ namespace SMRPGED
                 systemToolStripMenuItem.Checked = false;
                 Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
             }
-
-            if (AppControl.GetFileName() != null && AppControl.GetFileName() != "")
-            {
-                // Set our notes path based on settings                
-                if (settings.NotesPath == 0)
-                {
-                    notes.SetPath(AppControl.GetPathWithoutFileName(), AppControl.GetFileNameWithoutPath());
-                    this.romLocationToolStripMenuItem.ToolTipText = notes.GetPath();
-                }
-                else if (settings.NotesPath == 1)
-                {
-                    notes.SetPath(Application.ExecutablePath.Substring(0, Application.ExecutablePath.LastIndexOf('\\') + 1), AppControl.GetFileNameWithoutPath());
-                    this.ediToolStripMenuItem.ToolTipText = notes.GetPath();
-                }
-                else if (settings.NotesPath == 2)
-                {
-                    notes.SetPath(Application.CommonAppDataPath, AppControl.GetFileNameWithoutPath());
-                    this.profileLocationToolStripMenuItem.ToolTipText = notes.GetPath();
-                }
-                else if (settings.NotesPath == 3)
-                {
-                    notes.SetPath(settings.NotePathCustom, AppControl.GetFileNameWithoutPath());
-                    this.customNotePathMenuItem.ToolTipText = settings.NotePathCustom;
-                }
-            }
         }
         private void Open(string filename)
         {
             if (AppControl.AssembleAndCloseWindows())
             {
-                MessageBox.Show("All of the editor's windows must be closed before loading a new ROM.", "WARNING: CLOSE EDITOR WINDOWS", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("All of the editor's windows must be closed before loading a new ROM.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             bool ret;
@@ -165,7 +116,7 @@ namespace SMRPGED
             {
                 if (AppControl.GameCode() != "ARWE")
                 {
-                    MessageBox.Show("The game code for this ROM is invalid. There would likely be problems editing the ROM.", "WARNING: CANNOT LOAD ROM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("The game code for this ROM is invalid. There would likely be problems editing the ROM.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
@@ -176,10 +127,12 @@ namespace SMRPGED
                     this.openLevels.Enabled = true;
                     this.openScripts.Enabled = true;
                     this.openPatches.Enabled = true;
+                    this.openNotes.Enabled = true;
                     this.removeHeader.Enabled = false;
                     this.removeHeader.Visible = false;
                     this.saveToolStripMenuItem.Enabled = true;
                     this.saveAsToolStripMenuItem.Enabled = true;
+                    this.restoreElementsToolStripMenuItem.Enabled = true;
                     this.publishRomToolStripMenuItem.Enabled = true;
                     this.viewRomSignatureToolStripMenuItem.Enabled = true;
 
@@ -192,6 +145,7 @@ namespace SMRPGED
                     this.openLevels.Enabled = false;
                     this.openScripts.Enabled = false;
                     this.openPatches.Enabled = false;
+                    this.openNotes.Enabled = false;
 
                     this.removeHeader.Enabled = true;
                     this.removeHeader.BackColor = Color.LightPink;
@@ -211,6 +165,7 @@ namespace SMRPGED
                 {
                     this.saveToolStripMenuItem.Enabled = true;
                     this.saveAsToolStripMenuItem.Enabled = true;
+                    this.restoreElementsToolStripMenuItem.Enabled = true;
                     this.publishRomToolStripMenuItem.Enabled = true;
                     this.viewRomSignatureToolStripMenuItem.Enabled = true;
 
@@ -225,6 +180,7 @@ namespace SMRPGED
                 this.openLevels.Enabled = false;
                 this.openScripts.Enabled = false;
                 this.openPatches.Enabled = false;
+                this.openNotes.Enabled = false;
                 this.removeHeader.Visible = false;
             }
             if (ret)
@@ -258,17 +214,17 @@ namespace SMRPGED
             if (!AppControl.VerifyMD5Checksum())
             {
                 if (assembleFlag == 1)
-                    result = MessageBox.Show("There are changes to the rom that have not been saved. Would you like to save them now and quit?", "Save Changes and quit?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    result = MessageBox.Show("There are changes to the rom that have not been saved. Would you like to save them now and quit?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 else
-                    result = MessageBox.Show("There are changes to the rom that have not been saved. Would you like to save them now?", "Save Changes?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    result = MessageBox.Show("There are changes to the rom that have not been saved. Would you like to save them now?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    if (notes.GetLoadNotes())
-                        SaveNotes();
+                    //if (notes.GetLoadNotes())
+                    //    SaveNotes();
                     if (!AppControl.SaveRomFile())
                     {
-                        MessageBox.Show("There was an error saving to : " + AppControl.GetFileName());
+                        MessageBox.Show("There was an error saving to : " + AppControl.GetFileName(), "LAZY SHELL");
                         return;
                     }
                 }
@@ -300,55 +256,9 @@ namespace SMRPGED
         // Notes
         private void LoadNotes()
         {
-            if (!settings.LoadNotes)
-            {
-                return;
-            }
-            try
-            {
-
-                this.notesPrevious.LoadFile(notes.GetPath() + "main-changes.rtf");
-
-                this.notesModifications.LoadFile(notes.GetPath() + "main-modification.rtf");
-
-            }
-            catch
-            {
-
-
-                if (MessageBox.Show("Could not load notes for this ROM, would you like to create a set of notes for it?\nThis will not overwrite any existing notes", "Create Notes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    if (notes.CreateNoteSet())
-                        LoadNotes();
-                }
-                else
-                {
-                    notes.SetLoadNotes(false);
-                }
-
-            }
         }
         private void SaveNotes()
         {
-            if (notes.GetLoadNotes())
-            {
-                try
-                {
-                    this.notesPrevious.SaveFile(notes.GetPath() + "main-changes.rtf");
-                }
-                catch
-                {
-                    MessageBox.Show("ERROR saving main-changes.rtf, please report this if it presists");
-                }
-                try
-                {
-                    this.notesModifications.SaveFile(notes.GetPath() + "main-modification.rtf");
-                }
-                catch
-                {
-                    MessageBox.Show("ERROR saving main-modification.rtf, please report this if it presists");
-                }
-            }
         }
         private string GetDirectoryPath(string caption)
         {
@@ -378,7 +288,7 @@ namespace SMRPGED
             }
             catch (Exception e)
             {
-                MessageBox.Show("ERROR: " + e.Message);
+                MessageBox.Show("ERROR: " + e.Message, "LAZY SHELL");
             }
         }
         private void LoadSettingsFromRegistry()
@@ -443,6 +353,7 @@ namespace SMRPGED
                 this.openLevels.Enabled = true;
                 this.openScripts.Enabled = true;
                 this.openPatches.Enabled = true;
+                this.openNotes.Enabled = true;
                 // Disable/hide the remove header button
                 this.removeHeader.Enabled = false;
                 this.removeHeader.Visible = false;
@@ -471,7 +382,7 @@ namespace SMRPGED
             if (AppControl.SaveRomFileAs())
                 UpdateRomInfo();
             else
-                MessageBox.Show("There was an error saving, try again");
+                MessageBox.Show("There was an error saving, try again", "LAZY SHELL");
         }
         private void publishRomToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -488,90 +399,6 @@ namespace SMRPGED
         }
 
         // toolstripmenuitems : Settings
-        private void loadNotesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            notes.SetLoadNotes(loadNotesToolStripMenuItem.Checked);
-        }
-        private void romLocationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.romLocationToolStripMenuItem.Checked = false;
-            this.ediToolStripMenuItem.Checked = false;
-            this.profileLocationToolStripMenuItem.Checked = false;
-            this.customNotePathMenuItem.Checked = false;
-
-            this.romLocationToolStripMenuItem.ToolTipText = null;
-            this.ediToolStripMenuItem.ToolTipText = null;
-            this.profileLocationToolStripMenuItem.ToolTipText = null;
-            this.customNotePathMenuItem.ToolTipText = null;
-
-            settings.NotesPath = 0;
-            settings.Save();
-
-            notes.SetPath(AppControl.GetPathWithoutFileName(), AppControl.GetFileNameWithoutPath());
-            this.romLocationToolStripMenuItem.ToolTipText = notes.GetPath();
-            this.romLocationToolStripMenuItem.Checked = true;
-
-        }
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.romLocationToolStripMenuItem.Checked = false;
-            this.ediToolStripMenuItem.Checked = false;
-            this.profileLocationToolStripMenuItem.Checked = false;
-            this.customNotePathMenuItem.Checked = false;
-
-            this.romLocationToolStripMenuItem.ToolTipText = null;
-            this.ediToolStripMenuItem.ToolTipText = null;
-            this.profileLocationToolStripMenuItem.ToolTipText = null;
-            this.customNotePathMenuItem.ToolTipText = null;
-
-            settings.NotesPath = 1;
-            settings.Save();
-
-            notes.SetPath(Application.ExecutablePath.Substring(0, Application.ExecutablePath.LastIndexOf('\\') + 1), AppControl.GetFileNameWithoutPath());
-            this.ediToolStripMenuItem.Checked = true;
-            this.ediToolStripMenuItem.ToolTipText = notes.GetPath();
-        }
-        private void profileLocationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.romLocationToolStripMenuItem.Checked = false;
-            this.ediToolStripMenuItem.Checked = false;
-            this.profileLocationToolStripMenuItem.Checked = false;
-            this.customNotePathMenuItem.Checked = false;
-
-            this.romLocationToolStripMenuItem.ToolTipText = null;
-            this.ediToolStripMenuItem.ToolTipText = null;
-            this.profileLocationToolStripMenuItem.ToolTipText = null;
-            this.customNotePathMenuItem.ToolTipText = null;
-
-            settings.NotesPath = 2;
-            settings.Save();
-
-            notes.SetPath(Application.CommonAppDataPath, AppControl.GetFileNameWithoutPath());
-            this.profileLocationToolStripMenuItem.ToolTipText = notes.GetPath();
-            this.profileLocationToolStripMenuItem.Checked = true;
-
-        }
-        private void customNotePathMenuItem_Click(object sender, EventArgs e)
-        {
-            this.romLocationToolStripMenuItem.Checked = false;
-            this.ediToolStripMenuItem.Checked = false;
-            this.profileLocationToolStripMenuItem.Checked = false;
-            this.customNotePathMenuItem.Checked = false;
-
-            this.romLocationToolStripMenuItem.ToolTipText = null;
-            this.ediToolStripMenuItem.ToolTipText = null;
-            this.profileLocationToolStripMenuItem.ToolTipText = null;
-            this.customNotePathMenuItem.ToolTipText = null;
-
-            string path = GetDirectoryPath("Select Location for Notes Package") + "\\";
-            settings.NotesPath = 3;
-            settings.NotePathCustom = path;
-            settings.Save();
-            notes.SetPath(path, AppControl.GetFileNameWithoutPath());
-            this.customNotePathMenuItem.Checked = true;
-            this.customNotePathMenuItem.ToolTipText = notes.GetPath();
-
-        }
         private void systemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             settings.VisualThemeSystem = true;
@@ -627,7 +454,7 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("ERROR: Could not load the index help file. Try unzipping the program's files again.", "ERROR: Could not load help topics.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("ERROR: Could not load the index help file. Try unzipping the program's files again.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         private void aboutToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -640,6 +467,7 @@ namespace SMRPGED
         private void Form1_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
             FinalizeAndSave(e, true, 1);
+            Settings.Default.Save();
         }
 
         #endregion
@@ -647,6 +475,40 @@ namespace SMRPGED
         private void loadLastUsedROMToolStripMenuItem_Click(object sender, EventArgs e)
         {
             settings.LoadLastUsedROM = loadLastUsedROMToolStripMenuItem.Checked;
+            settings.Save();
+        }
+
+        private void restoreElementsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            importElements = new ImportElements(AppControl.Model);
+            importElements.Show();
+        }
+
+        BaseConvertor baseConvertor;
+        private void baseConvertorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            baseConvertor = new BaseConvertor();
+            baseConvertor.Show();
+        }
+
+        private void resetSettingsToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "You are about to reset the application's settings. You will lose all custom settings such as\n" +
+                "level name labels, event script labels, and the last used ROM path.\n\n" +
+                "Are you sure you want to do this?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+                settings.Reset();
+        }
+
+        private void saveCurrentSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            settings.Save();
+        }
+
+        private void openNotes_Click(object sender, EventArgs e)
+        {
+            AppControl.Notes();
         }
     }
 }

@@ -132,7 +132,8 @@ namespace SMRPGED
 
             AddWorldMapPoints();
             MapPoint temp;
-            if (worldMapPoints[currentWorldMap] != null)
+            if (worldMapPoints[currentWorldMap] != null &&
+                worldMapPoints[currentWorldMap].Count > 0)
             {
                 temp = (MapPoint)worldMapPoints[currentWorldMap][0];
                 mapPointNum.Value = temp.MapPointNum;
@@ -522,7 +523,7 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem loading the file.");
+                MessageBox.Show("There was a problem loading the file.", "LAZY SHELL");
                 return;
             }
         }

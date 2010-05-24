@@ -136,7 +136,7 @@ namespace SMRPGED.ScriptsEditor.Commands
             "Face northwest",			// 0x75
             "Face north",			// 0x76
             "Face northeast",			// 0x77
-            "Face south",			// 0x78
+            "Face Mario",			// 0x78
             "Turn clockwise 45°",			// 0x79
             "Face random direction",			// 0x7A
             "Turn clockwise 45° x",			// 0x7B
@@ -175,7 +175,7 @@ namespace SMRPGED.ScriptsEditor.Commands
             "UNKAQCMD 0x9A",			// 0x9A
             "Playback stop, sound",			// 0x9B
             "Playback start, sound = ",			// 0x9C
-            "Playback start, sound: ",			// 0x9D
+            "Playback start, sound = ",			// 0x9D
             "Playback fade-out sound, duration: ",			// 0x9E
             "UNKAQCMD 0x9F",			// 0x9F
             			
@@ -217,9 +217,9 @@ namespace SMRPGED.ScriptsEditor.Commands
             "Compare mem 00:700C to mem 00:",			// 0xC1
             "Compare mem 00:",			// 0xC2
             "Mem 00:700C = current level",			// 0xC3
-            "UNKCMD 0xC4",			// 0xC4
-            "UNKCMD 0xC5",			// 0xC5
-            "Mem 00:700C = mem obj: ",			// 0xC6
+            "Mem 00:700C = X coord of obj: ",			// 0xC4
+            "Mem 00:700C = Y coord of obj: ",			// 0xC5
+            "Mem 00:700C = Z coord of obj: ",			// 0xC6
             "UNKCMD 0xC7",			// 0xC7
             "UNKCMD 0xC8",			// 0xC8
             "UNKCMD 0xC9",			// 0xC9
@@ -627,9 +627,11 @@ namespace SMRPGED.ScriptsEditor.Commands
                 case 0x6A:
                 case 0x6B:
                 case 0x7B:
-                case 0x9C:
                 case 0xF0:
                     sb.Append(aqc.Option.ToString());
+                    break;
+                case 0x9C:
+                    sb.Append(Scripts.SoundNames[Math.Min(aqc.Option, (byte)0xA2)]);
                     break;
                 case 0x7E:
                 case 0x7F:
@@ -640,33 +642,36 @@ namespace SMRPGED.ScriptsEditor.Commands
                 case 0x82:
                 case 0x83:
                 case 0x84:
-                    sb.Append(
-                        aqc.Option.ToString() +
-                        ", y=" + aqc.QueueData[2].ToString() + ")");
+                    if (aqc.Opcode != 0x80 || aqc.Opcode != 0x82)
+                        sb.Append(((sbyte)aqc.Option).ToString() + ", y=" + ((sbyte)aqc.QueueData[2]).ToString() + ")");
+                    else
+                        sb.Append(aqc.Option.ToString() + ", y=" + aqc.QueueData[2].ToString() + ")");
                     break;
                 case 0x87:
                     sb.Append(ObjectNames[aqc.Option]);
                     break;
                 case 0x90:
                 case 0x91:
-                    sb.Append(
-                        aqc.Option.ToString() +
-                        ", y=" + aqc.QueueData[2].ToString() +
-                        "), archHeight = " + aqc.QueueData[3].ToString());
+                    if (aqc.Opcode != 0x90)
+                        sb.Append(((sbyte)aqc.Option).ToString() + ", y=" + ((sbyte)aqc.QueueData[2]).ToString());
+                    else
+                        sb.Append(aqc.Option.ToString() + ", y=" + aqc.QueueData[2].ToString());
+                    sb.Append("), archHeight = " + aqc.QueueData[3].ToString());
                     break;
                 case 0x92:
                 case 0x93:
                 case 0x94:
-                    sb.Append(
-                       aqc.Option.ToString() +
-                       ", y=" + aqc.QueueData[2].ToString() +
-                       ", z=" + aqc.QueueData[3].ToString() + ")");
+                    if (aqc.Opcode != 0x92)
+                        sb.Append(((sbyte)aqc.Option).ToString() + ", y=" + ((sbyte)aqc.QueueData[2]).ToString());
+                    else
+                        sb.Append(aqc.Option.ToString() + ", y=" + aqc.QueueData[2].ToString());
+                    sb.Append(", z=" + aqc.QueueData[3].ToString() + ")");
                     break;
                 case 0x95:
                     sb.Append(ObjectNames[aqc.Option]);
                     break;
                 case 0x9D:
-                    sb.Append(aqc.Option.ToString() + ", speaker balance: " +
+                    sb.Append(Scripts.SoundNames[aqc.Option] + ", speaker balance: " +
                         aqc.QueueData[2].ToString());
                     break;
                 case 0x9E:
@@ -757,6 +762,8 @@ namespace SMRPGED.ScriptsEditor.Commands
                     sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " <=> mem 00:" +
                         ((aqc.QueueData[2] * 2) + 0x7000).ToString("X4"));
                     break;
+                case 0xC4:
+                case 0xC5:
                 case 0xC6:
                     sb.Append(ObjectNames[aqc.Option & 0x3F]);
                     break;
@@ -830,19 +837,19 @@ namespace SMRPGED.ScriptsEditor.Commands
                 case 0xF2:
                     a = (aqc.QueueData[2] & 0x80) == 0x80 ? "true" : "false";
                     sb.Append(ObjectNames[((aqc.QueueData[2] >> 1) & 0x3F)] +
-                        ", in level: [" + (BitManager.GetShort(aqc.QueueData, 1) & 0x1FF).ToString("X3") +
+                        ", in level: [" + (BitManager.GetShort(aqc.QueueData, 1) & 0x1FF).ToString("d3") +
                         "], presence = " + a);
                     break;
                 case 0xF3:
                     a = (aqc.QueueData[2] & 0x80) == 0x80 ? "true" : "false";
                     sb.Append(ObjectNames[((aqc.QueueData[2] >> 1) & 0x3F)] +
-                        ", in level: [" + (BitManager.GetShort(aqc.QueueData, 1) & 0x1FF).ToString("X3") +
+                        ", in level: [" + (BitManager.GetShort(aqc.QueueData, 1) & 0x1FF).ToString("d3") +
                         "], event trigger = " + a);
                     break;
                 case 0xF8:
                     a = (aqc.QueueData[2] & 0x80) == 0x80 ? "true" : "false";
                     sb.Append(ObjectNames[((aqc.QueueData[2] >> 1) & 0x3F)] +
-                        ", in level: [" + (BitManager.GetShort(aqc.QueueData, 1) & 0x1FF).ToString("X3") +
+                        ", in level: [" + (BitManager.GetShort(aqc.QueueData, 1) & 0x1FF).ToString("d3") +
                         "], presence = " + a +
                         ", jump to $" + BitManager.GetShort(aqc.QueueData, 3).ToString("X4"));
                     break;
@@ -866,7 +873,7 @@ namespace SMRPGED.ScriptsEditor.Commands
                     sb.Append(aqc.QueueData[2].ToString());
                     break;
                 case 0x9E:
-                    sb.Append(aqc.QueueData[2].ToString());
+                    sb.Append(Scripts.SoundNames[aqc.QueueData[2]]);
                     break;
                 case 0xB0:
                 case 0xB1:

@@ -56,6 +56,7 @@ namespace SMRPGED.StatsEditor
             this.CheckboxMonsterProp = new System.Windows.Forms.CheckedListBox();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableHelpTipsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showDecHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemAttack = new System.Windows.Forms.NumericUpDown();
             this.itemAttackRange = new System.Windows.Forms.NumericUpDown();
             this.itemCoinValue = new System.Windows.Forms.NumericUpDown();
@@ -147,21 +148,30 @@ namespace SMRPGED.StatsEditor
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveStatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.importAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.monsterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formationPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.spellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.attackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.characterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.weaponToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.allComponentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.importAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem18 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem20 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem21 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem24 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem25 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.monstersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -171,8 +181,6 @@ namespace SMRPGED.StatsEditor
             this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shopsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.battleDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spellTimingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.allComponentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -229,6 +237,8 @@ namespace SMRPGED.StatsEditor
             this.TextboxMonsterName = new System.Windows.Forms.TextBox();
             this.panel63 = new System.Windows.Forms.Panel();
             this.monsterName = new System.Windows.Forms.ComboBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addThisToNotesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel55 = new System.Windows.Forms.Panel();
             this.MonsterValFlowerOdds = new System.Windows.Forms.NumericUpDown();
             this.label34 = new System.Windows.Forms.Label();
@@ -236,7 +246,6 @@ namespace SMRPGED.StatsEditor
             this.label1 = new System.Windows.Forms.Label();
             this.panel66 = new System.Windows.Forms.Panel();
             this.MonsterFlowerBonus = new System.Windows.Forms.ComboBox();
-            this.label209 = new System.Windows.Forms.Label();
             this.label87 = new System.Windows.Forms.Label();
             this.label96 = new System.Windows.Forms.Label();
             this.label169 = new System.Windows.Forms.Label();
@@ -244,8 +253,6 @@ namespace SMRPGED.StatsEditor
             this.LabelMonsterName = new System.Windows.Forms.Label();
             this.panel42 = new System.Windows.Forms.Panel();
             this.TextboxMonsterPsychoMsg = new System.Windows.Forms.RichTextBox();
-            this.panel41 = new System.Windows.Forms.Panel();
-            this.monsterNotesTextBox = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.buttonPreviousFrame = new System.Windows.Forms.Button();
             this.label126 = new System.Windows.Forms.Label();
@@ -327,9 +334,6 @@ namespace SMRPGED.StatsEditor
             this.battlefieldName = new System.Windows.Forms.ComboBox();
             this.panel37 = new System.Windows.Forms.Panel();
             this.formationNameList = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.panel34 = new System.Windows.Forms.Panel();
-            this.richTextBox8 = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.formationNum = new System.Windows.Forms.NumericUpDown();
@@ -397,11 +401,16 @@ namespace SMRPGED.StatsEditor
             this.pictureBoxFormation = new System.Windows.Forms.PictureBox();
             this.panel52 = new System.Windows.Forms.Panel();
             this.formationCantRun = new System.Windows.Forms.CheckBox();
+            this.label140 = new System.Windows.Forms.Label();
+            this.panel74 = new System.Windows.Forms.Panel();
+            this.musicTrack = new System.Windows.Forms.ComboBox();
             this.panel82 = new System.Windows.Forms.Panel();
             this.formationMusic = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.formationBattleEvent = new System.Windows.Forms.NumericUpDown();
             this.formationUnknown = new System.Windows.Forms.NumericUpDown();
             this.label176 = new System.Windows.Forms.Label();
+            this.label150 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label199 = new System.Windows.Forms.Label();
             this.panel45 = new System.Windows.Forms.Panel();
@@ -430,16 +439,6 @@ namespace SMRPGED.StatsEditor
             this.spellStatusChange = new System.Windows.Forms.CheckedListBox();
             this.spellTargetting = new System.Windows.Forms.CheckedListBox();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.panel218 = new System.Windows.Forms.Panel();
-            this.panel219 = new System.Windows.Forms.Panel();
-            this.panel171 = new System.Windows.Forms.Panel();
-            this.label18 = new System.Windows.Forms.Label();
-            this.panelSpellNotes = new System.Windows.Forms.Panel();
-            this.textBoxAttackNotes = new System.Windows.Forms.RichTextBox();
-            this.panel170 = new System.Windows.Forms.Panel();
-            this.label68 = new System.Windows.Forms.Label();
-            this.panel30 = new System.Windows.Forms.Panel();
-            this.richTextBox9 = new System.Windows.Forms.RichTextBox();
             this.panel169 = new System.Windows.Forms.Panel();
             this.panel166 = new System.Windows.Forms.Panel();
             this.panel168 = new System.Windows.Forms.Panel();
@@ -540,10 +539,6 @@ namespace SMRPGED.StatsEditor
             this.panelItemDesc = new System.Windows.Forms.Panel();
             this.label195 = new System.Windows.Forms.Label();
             this.pictureBoxItemDesc = new System.Windows.Forms.PictureBox();
-            this.panel228 = new System.Windows.Forms.Panel();
-            this.panel229 = new System.Windows.Forms.Panel();
-            this.panel226 = new System.Windows.Forms.Panel();
-            this.panel227 = new System.Windows.Forms.Panel();
             this.panel195 = new System.Windows.Forms.Panel();
             this.panel192 = new System.Windows.Forms.Panel();
             this.shopDiscounts = new System.Windows.Forms.CheckedListBox();
@@ -658,10 +653,6 @@ namespace SMRPGED.StatsEditor
             this.panel48 = new System.Windows.Forms.Panel();
             this.panel43 = new System.Windows.Forms.Panel();
             this.label136 = new System.Windows.Forms.Label();
-            this.panel125 = new System.Windows.Forms.Panel();
-            this.panel126 = new System.Windows.Forms.Panel();
-            this.panel224 = new System.Windows.Forms.Panel();
-            this.panel225 = new System.Windows.Forms.Panel();
             this.panel199 = new System.Windows.Forms.Panel();
             this.panel198 = new System.Windows.Forms.Panel();
             this.panel197 = new System.Windows.Forms.Panel();
@@ -683,8 +674,6 @@ namespace SMRPGED.StatsEditor
             this.label156 = new System.Windows.Forms.Label();
             this.label177 = new System.Windows.Forms.Label();
             this.panel19 = new System.Windows.Forms.Panel();
-            this.panel220 = new System.Windows.Forms.Panel();
-            this.panel221 = new System.Windows.Forms.Panel();
             this.panel211 = new System.Windows.Forms.Panel();
             this.panel21 = new System.Windows.Forms.Panel();
             this.label184 = new System.Windows.Forms.Label();
@@ -741,13 +730,7 @@ namespace SMRPGED.StatsEditor
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel33 = new System.Windows.Forms.Panel();
-            this.panel214 = new System.Windows.Forms.Panel();
-            this.panel215 = new System.Windows.Forms.Panel();
-            this.panel212 = new System.Windows.Forms.Panel();
-            this.panel213 = new System.Windows.Forms.Panel();
             this.panel141 = new System.Windows.Forms.Panel();
-            this.panel140 = new System.Windows.Forms.Panel();
-            this.panel139 = new System.Windows.Forms.Panel();
             this.panel138 = new System.Windows.Forms.Panel();
             this.panel133 = new System.Windows.Forms.Panel();
             this.listBox3 = new System.Windows.Forms.ListBox();
@@ -776,7 +759,6 @@ namespace SMRPGED.StatsEditor
             this.panel142 = new System.Windows.Forms.Panel();
             this.panel150 = new System.Windows.Forms.Panel();
             this.panel149 = new System.Windows.Forms.Panel();
-            this.panel148 = new System.Windows.Forms.Panel();
             this.panel147 = new System.Windows.Forms.Panel();
             this.panel146 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -795,13 +777,7 @@ namespace SMRPGED.StatsEditor
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.labelToolTip = new System.Windows.Forms.Label();
-            this.formationBattleEvent = new System.Windows.Forms.NumericUpDown();
-            this.label140 = new System.Windows.Forms.Label();
-            this.label150 = new System.Windows.Forms.Label();
-            this.panel74 = new System.Windows.Forms.Panel();
-            this.musicTrack = new System.Windows.Forms.ComboBox();
-            this.panel216 = new System.Windows.Forms.Panel();
-            this.panel217 = new System.Windows.Forms.Panel();
+            this.labelConvertor = new System.Windows.Forms.Label();
             this.panelSearchFormationNames.SuspendLayout();
             this.panel200.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attackAtkLevel)).BeginInit();
@@ -860,11 +836,11 @@ namespace SMRPGED.StatsEditor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).BeginInit();
             this.panel64.SuspendLayout();
             this.panel63.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.panel55.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValFlowerOdds)).BeginInit();
             this.panel66.SuspendLayout();
             this.panel42.SuspendLayout();
-            this.panel41.SuspendLayout();
             this.panel29.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValAtk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValMgDef)).BeginInit();
@@ -898,7 +874,6 @@ namespace SMRPGED.StatsEditor
             this.panel5.SuspendLayout();
             this.panel39.SuspendLayout();
             this.panel37.SuspendLayout();
-            this.panel34.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.formationNum)).BeginInit();
             this.panel36.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -937,7 +912,9 @@ namespace SMRPGED.StatsEditor
             ((System.ComponentModel.ISupportInitialize)(this.formationCoordX4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFormation)).BeginInit();
             this.panel52.SuspendLayout();
+            this.panel74.SuspendLayout();
             this.panel82.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.formationBattleEvent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.formationUnknown)).BeginInit();
             this.panel45.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpellDesc)).BeginInit();
@@ -952,11 +929,6 @@ namespace SMRPGED.StatsEditor
             ((System.ComponentModel.ISupportInitialize)(this.spellFPCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spellMagPower)).BeginInit();
             this.panel8.SuspendLayout();
-            this.panel218.SuspendLayout();
-            this.panel171.SuspendLayout();
-            this.panelSpellNotes.SuspendLayout();
-            this.panel170.SuspendLayout();
-            this.panel30.SuspendLayout();
             this.panel169.SuspendLayout();
             this.panel166.SuspendLayout();
             this.panel168.SuspendLayout();
@@ -1007,8 +979,6 @@ namespace SMRPGED.StatsEditor
             this.panel2.SuspendLayout();
             this.panelItemDesc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxItemDesc)).BeginInit();
-            this.panel228.SuspendLayout();
-            this.panel226.SuspendLayout();
             this.panel195.SuspendLayout();
             this.panel192.SuspendLayout();
             this.panel193.SuspendLayout();
@@ -1065,8 +1035,6 @@ namespace SMRPGED.StatsEditor
             this.panel44.SuspendLayout();
             this.panel48.SuspendLayout();
             this.panel43.SuspendLayout();
-            this.panel125.SuspendLayout();
-            this.panel224.SuspendLayout();
             this.panel199.SuspendLayout();
             this.panel198.SuspendLayout();
             this.panel197.SuspendLayout();
@@ -1081,7 +1049,6 @@ namespace SMRPGED.StatsEditor
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
             this.panel19.SuspendLayout();
-            this.panel220.SuspendLayout();
             this.panel211.SuspendLayout();
             this.panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown102)).BeginInit();
@@ -1122,11 +1089,7 @@ namespace SMRPGED.StatsEditor
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel33.SuspendLayout();
-            this.panel214.SuspendLayout();
-            this.panel212.SuspendLayout();
             this.panel141.SuspendLayout();
-            this.panel140.SuspendLayout();
-            this.panel139.SuspendLayout();
             this.panel138.SuspendLayout();
             this.panel133.SuspendLayout();
             this.panel137.SuspendLayout();
@@ -1151,7 +1114,6 @@ namespace SMRPGED.StatsEditor
             this.panel142.SuspendLayout();
             this.panel150.SuspendLayout();
             this.panel149.SuspendLayout();
-            this.panel148.SuspendLayout();
             this.panel147.SuspendLayout();
             this.panel146.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -1165,9 +1127,6 @@ namespace SMRPGED.StatsEditor
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.formationBattleEvent)).BeginInit();
-            this.panel74.SuspendLayout();
-            this.panel216.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSearchFormationNames
@@ -1218,7 +1177,7 @@ namespace SMRPGED.StatsEditor
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -1396,20 +1355,27 @@ namespace SMRPGED.StatsEditor
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.enableHelpTipsToolStripMenuItem,
+            this.showDecHexToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(36, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // enableHelpTipsToolStripMenuItem
             // 
-            this.enableHelpTipsToolStripMenuItem.AutoSize = false;
             this.enableHelpTipsToolStripMenuItem.CheckOnClick = true;
             this.enableHelpTipsToolStripMenuItem.Name = "enableHelpTipsToolStripMenuItem";
             this.enableHelpTipsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.enableHelpTipsToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
+            this.enableHelpTipsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.enableHelpTipsToolStripMenuItem.Text = "Enable Help Tips";
+            // 
+            // showDecHexToolStripMenuItem
+            // 
+            this.showDecHexToolStripMenuItem.CheckOnClick = true;
+            this.showDecHexToolStripMenuItem.Name = "showDecHexToolStripMenuItem";
+            this.showDecHexToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.showDecHexToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.showDecHexToolStripMenuItem.Text = "Show Dec <> Hex";
             // 
             // itemAttack
             // 
@@ -2460,24 +2426,20 @@ namespace SMRPGED.StatsEditor
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveStatsToolStripMenuItem,
             this.toolStripSeparator1,
-            this.importAllToolStripMenuItem,
             this.exportAllToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.clearToolStripMenuItem,
+            this.importAllToolStripMenuItem,
             this.toolStripMenuItem1,
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(31, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveStatsToolStripMenuItem
             // 
-            this.saveStatsToolStripMenuItem.AutoSize = false;
             this.saveStatsToolStripMenuItem.Name = "saveStatsToolStripMenuItem";
             this.saveStatsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveStatsToolStripMenuItem.Size = new System.Drawing.Size(164, 20);
+            this.saveStatsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.saveStatsToolStripMenuItem.Text = "Save Stats";
             this.saveStatsToolStripMenuItem.Click += new System.EventHandler(this.saveStatsToolStripMenuItem_Click);
             // 
@@ -2486,123 +2448,194 @@ namespace SMRPGED.StatsEditor
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
             // 
-            // importAllToolStripMenuItem
-            // 
-            this.importAllToolStripMenuItem.AutoSize = false;
-            this.importAllToolStripMenuItem.Name = "importAllToolStripMenuItem";
-            this.importAllToolStripMenuItem.Size = new System.Drawing.Size(164, 20);
-            this.importAllToolStripMenuItem.Text = "Import All...";
-            this.importAllToolStripMenuItem.Click += new System.EventHandler(this.importAllToolStripMenuItem_Click);
-            // 
             // exportAllToolStripMenuItem
             // 
-            this.exportAllToolStripMenuItem.AutoSize = false;
-            this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
-            this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(164, 20);
-            this.exportAllToolStripMenuItem.Text = "Export All...";
-            this.exportAllToolStripMenuItem.Click += new System.EventHandler(this.exportAllToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(161, 6);
-            // 
-            // clearToolStripMenuItem
-            // 
-            this.clearToolStripMenuItem.AutoSize = false;
-            this.clearToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.monsterToolStripMenuItem,
-            this.formationToolStripMenuItem,
-            this.formationPackToolStripMenuItem,
-            this.spellToolStripMenuItem,
-            this.attackToolStripMenuItem,
-            this.itemToolStripMenuItem,
-            this.shopToolStripMenuItem,
-            this.characterToolStripMenuItem,
-            this.weaponToolStripMenuItem,
+            this.exportAllToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem4,
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem6,
+            this.toolStripMenuItem7,
+            this.toolStripMenuItem8,
+            this.toolStripMenuItem9,
+            this.toolStripMenuItem12,
             this.toolStripSeparator4,
-            this.allComponentsToolStripMenuItem1});
-            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(164, 20);
-            this.clearToolStripMenuItem.Text = "Clear Current";
+            this.toolStripMenuItem13});
+            this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
+            this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.exportAllToolStripMenuItem.Text = "Export";
             // 
-            // monsterToolStripMenuItem
+            // toolStripMenuItem2
             // 
-            this.monsterToolStripMenuItem.AutoSize = false;
-            this.monsterToolStripMenuItem.Name = "monsterToolStripMenuItem";
-            this.monsterToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.monsterToolStripMenuItem.Text = "Monster";
+            this.toolStripMenuItem2.Enabled = false;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem2.Text = "Monsters...";
             // 
-            // formationToolStripMenuItem
+            // toolStripMenuItem3
             // 
-            this.formationToolStripMenuItem.AutoSize = false;
-            this.formationToolStripMenuItem.Name = "formationToolStripMenuItem";
-            this.formationToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.formationToolStripMenuItem.Text = "Formation";
+            this.toolStripMenuItem3.Enabled = false;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem3.Text = "Formations...";
             // 
-            // formationPackToolStripMenuItem
+            // toolStripMenuItem4
             // 
-            this.formationPackToolStripMenuItem.AutoSize = false;
-            this.formationPackToolStripMenuItem.Name = "formationPackToolStripMenuItem";
-            this.formationPackToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.formationPackToolStripMenuItem.Text = "Pack";
+            this.toolStripMenuItem4.Enabled = false;
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem4.Text = "Packs...";
             // 
-            // spellToolStripMenuItem
+            // toolStripMenuItem5
             // 
-            this.spellToolStripMenuItem.AutoSize = false;
-            this.spellToolStripMenuItem.Name = "spellToolStripMenuItem";
-            this.spellToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.spellToolStripMenuItem.Text = "Spell";
+            this.toolStripMenuItem5.Enabled = false;
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem5.Text = "Spells...";
             // 
-            // attackToolStripMenuItem
+            // toolStripMenuItem6
             // 
-            this.attackToolStripMenuItem.AutoSize = false;
-            this.attackToolStripMenuItem.Name = "attackToolStripMenuItem";
-            this.attackToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.attackToolStripMenuItem.Text = "Attack";
+            this.toolStripMenuItem6.Enabled = false;
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem6.Text = "Attacks...";
             // 
-            // itemToolStripMenuItem
+            // toolStripMenuItem7
             // 
-            this.itemToolStripMenuItem.AutoSize = false;
-            this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
-            this.itemToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.itemToolStripMenuItem.Text = "Item";
+            this.toolStripMenuItem7.Enabled = false;
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem7.Text = "Items...";
             // 
-            // shopToolStripMenuItem
+            // toolStripMenuItem8
             // 
-            this.shopToolStripMenuItem.AutoSize = false;
-            this.shopToolStripMenuItem.Name = "shopToolStripMenuItem";
-            this.shopToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.shopToolStripMenuItem.Text = "Shop";
+            this.toolStripMenuItem8.Enabled = false;
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem8.Text = "Shops...";
             // 
-            // characterToolStripMenuItem
+            // toolStripMenuItem9
             // 
-            this.characterToolStripMenuItem.AutoSize = false;
-            this.characterToolStripMenuItem.Name = "characterToolStripMenuItem";
-            this.characterToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.characterToolStripMenuItem.Text = "Character";
+            this.toolStripMenuItem9.Enabled = false;
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem9.Text = "Characters/Inventories...";
             // 
-            // weaponToolStripMenuItem
+            // toolStripMenuItem12
             // 
-            this.weaponToolStripMenuItem.AutoSize = false;
-            this.weaponToolStripMenuItem.Name = "weaponToolStripMenuItem";
-            this.weaponToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.weaponToolStripMenuItem.Text = "Weapon Timing";
+            this.toolStripMenuItem12.Enabled = false;
+            this.toolStripMenuItem12.Name = "toolStripMenuItem12";
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem12.Text = "Weapon/Spell Timings...";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(195, 6);
             // 
-            // allComponentsToolStripMenuItem1
+            // toolStripMenuItem13
             // 
-            this.allComponentsToolStripMenuItem1.Name = "allComponentsToolStripMenuItem1";
-            this.allComponentsToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
-            this.allComponentsToolStripMenuItem1.Text = "All Components";
+            this.toolStripMenuItem13.Name = "toolStripMenuItem13";
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem13.Text = "All Components...";
+            this.toolStripMenuItem13.Click += new System.EventHandler(this.exportAllToolStripMenuItem_Click);
+            // 
+            // importAllToolStripMenuItem
+            // 
+            this.importAllToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem14,
+            this.toolStripMenuItem15,
+            this.toolStripMenuItem16,
+            this.toolStripMenuItem17,
+            this.toolStripMenuItem18,
+            this.toolStripMenuItem19,
+            this.toolStripMenuItem20,
+            this.toolStripMenuItem21,
+            this.toolStripMenuItem24,
+            this.toolStripSeparator5,
+            this.toolStripMenuItem25});
+            this.importAllToolStripMenuItem.Name = "importAllToolStripMenuItem";
+            this.importAllToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.importAllToolStripMenuItem.Text = "Import";
+            // 
+            // toolStripMenuItem14
+            // 
+            this.toolStripMenuItem14.Enabled = false;
+            this.toolStripMenuItem14.Name = "toolStripMenuItem14";
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem14.Text = "Monsters...";
+            // 
+            // toolStripMenuItem15
+            // 
+            this.toolStripMenuItem15.Enabled = false;
+            this.toolStripMenuItem15.Name = "toolStripMenuItem15";
+            this.toolStripMenuItem15.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem15.Text = "Formations...";
+            // 
+            // toolStripMenuItem16
+            // 
+            this.toolStripMenuItem16.Enabled = false;
+            this.toolStripMenuItem16.Name = "toolStripMenuItem16";
+            this.toolStripMenuItem16.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem16.Text = "Packs...";
+            // 
+            // toolStripMenuItem17
+            // 
+            this.toolStripMenuItem17.Enabled = false;
+            this.toolStripMenuItem17.Name = "toolStripMenuItem17";
+            this.toolStripMenuItem17.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem17.Text = "Spells...";
+            // 
+            // toolStripMenuItem18
+            // 
+            this.toolStripMenuItem18.Enabled = false;
+            this.toolStripMenuItem18.Name = "toolStripMenuItem18";
+            this.toolStripMenuItem18.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem18.Text = "Attacks...";
+            // 
+            // toolStripMenuItem19
+            // 
+            this.toolStripMenuItem19.Enabled = false;
+            this.toolStripMenuItem19.Name = "toolStripMenuItem19";
+            this.toolStripMenuItem19.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem19.Text = "Items...";
+            // 
+            // toolStripMenuItem20
+            // 
+            this.toolStripMenuItem20.Enabled = false;
+            this.toolStripMenuItem20.Name = "toolStripMenuItem20";
+            this.toolStripMenuItem20.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem20.Text = "Shops...";
+            // 
+            // toolStripMenuItem21
+            // 
+            this.toolStripMenuItem21.Enabled = false;
+            this.toolStripMenuItem21.Name = "toolStripMenuItem21";
+            this.toolStripMenuItem21.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem21.Text = "Characters/Inventories...";
+            // 
+            // toolStripMenuItem24
+            // 
+            this.toolStripMenuItem24.Enabled = false;
+            this.toolStripMenuItem24.Name = "toolStripMenuItem24";
+            this.toolStripMenuItem24.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem24.Text = "Weapon/Spell Timings...";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(195, 6);
+            // 
+            // toolStripMenuItem25
+            // 
+            this.toolStripMenuItem25.Name = "toolStripMenuItem25";
+            this.toolStripMenuItem25.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem25.Text = "All Components...";
+            this.toolStripMenuItem25.Click += new System.EventHandler(this.importAllToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.AutoSize = false;
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.monstersToolStripMenuItem,
             this.formationsToolStripMenuItem,
@@ -2612,102 +2645,78 @@ namespace SMRPGED.StatsEditor
             this.itemsToolStripMenuItem,
             this.shopsToolStripMenuItem,
             this.charactersToolStripMenuItem,
-            this.dialoguesToolStripMenuItem,
-            this.battleDialoguesToolStripMenuItem,
             this.spellTimingsToolStripMenuItem,
             this.toolStripSeparator3,
             this.allComponentsToolStripMenuItem});
+            this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(164, 20);
-            this.toolStripMenuItem1.Text = "Clear All";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.toolStripMenuItem1.Text = "Clear";
             // 
             // monstersToolStripMenuItem
             // 
-            this.monstersToolStripMenuItem.AutoSize = false;
             this.monstersToolStripMenuItem.Name = "monstersToolStripMenuItem";
-            this.monstersToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.monstersToolStripMenuItem.Text = "Monsters";
+            this.monstersToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.monstersToolStripMenuItem.Text = "Monsters...";
             // 
             // formationsToolStripMenuItem
             // 
-            this.formationsToolStripMenuItem.AutoSize = false;
             this.formationsToolStripMenuItem.Name = "formationsToolStripMenuItem";
-            this.formationsToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.formationsToolStripMenuItem.Text = "Formations";
+            this.formationsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.formationsToolStripMenuItem.Text = "Formations...";
             // 
             // packsToolStripMenuItem
             // 
-            this.packsToolStripMenuItem.AutoSize = false;
             this.packsToolStripMenuItem.Name = "packsToolStripMenuItem";
-            this.packsToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.packsToolStripMenuItem.Text = "Packs";
+            this.packsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.packsToolStripMenuItem.Text = "Packs...";
             // 
             // spellsToolStripMenuItem
             // 
-            this.spellsToolStripMenuItem.AutoSize = false;
             this.spellsToolStripMenuItem.Name = "spellsToolStripMenuItem";
-            this.spellsToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.spellsToolStripMenuItem.Text = "Spells";
+            this.spellsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.spellsToolStripMenuItem.Text = "Spells...";
             // 
             // attacksToolStripMenuItem
             // 
-            this.attacksToolStripMenuItem.AutoSize = false;
             this.attacksToolStripMenuItem.Name = "attacksToolStripMenuItem";
-            this.attacksToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.attacksToolStripMenuItem.Text = "Attacks";
+            this.attacksToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.attacksToolStripMenuItem.Text = "Attacks...";
             // 
             // itemsToolStripMenuItem
             // 
-            this.itemsToolStripMenuItem.AutoSize = false;
             this.itemsToolStripMenuItem.Name = "itemsToolStripMenuItem";
-            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.itemsToolStripMenuItem.Text = "Items";
+            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.itemsToolStripMenuItem.Text = "Items...";
             // 
             // shopsToolStripMenuItem
             // 
-            this.shopsToolStripMenuItem.AutoSize = false;
             this.shopsToolStripMenuItem.Name = "shopsToolStripMenuItem";
-            this.shopsToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.shopsToolStripMenuItem.Text = "Shops";
+            this.shopsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.shopsToolStripMenuItem.Text = "Shops...";
             // 
             // charactersToolStripMenuItem
             // 
-            this.charactersToolStripMenuItem.AutoSize = false;
             this.charactersToolStripMenuItem.Name = "charactersToolStripMenuItem";
-            this.charactersToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.charactersToolStripMenuItem.Text = "Characters/Inventories";
-            // 
-            // dialoguesToolStripMenuItem
-            // 
-            this.dialoguesToolStripMenuItem.AutoSize = false;
-            this.dialoguesToolStripMenuItem.Name = "dialoguesToolStripMenuItem";
-            this.dialoguesToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.dialoguesToolStripMenuItem.Text = "Dialogues";
-            // 
-            // battleDialoguesToolStripMenuItem
-            // 
-            this.battleDialoguesToolStripMenuItem.AutoSize = false;
-            this.battleDialoguesToolStripMenuItem.Name = "battleDialoguesToolStripMenuItem";
-            this.battleDialoguesToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.battleDialoguesToolStripMenuItem.Text = "Battle Dialogues";
+            this.charactersToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.charactersToolStripMenuItem.Text = "Characters/Inventories...";
             // 
             // spellTimingsToolStripMenuItem
             // 
-            this.spellTimingsToolStripMenuItem.AutoSize = false;
             this.spellTimingsToolStripMenuItem.Name = "spellTimingsToolStripMenuItem";
-            this.spellTimingsToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.spellTimingsToolStripMenuItem.Text = "Weapon/Spell Timings";
+            this.spellTimingsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.spellTimingsToolStripMenuItem.Text = "Weapon/Spell Timings...";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(183, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
             // 
             // allComponentsToolStripMenuItem
             // 
             this.allComponentsToolStripMenuItem.Name = "allComponentsToolStripMenuItem";
-            this.allComponentsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.allComponentsToolStripMenuItem.Text = "All Components";
+            this.allComponentsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.allComponentsToolStripMenuItem.Text = "All Components...";
             // 
             // toolStripSeparator2
             // 
@@ -3472,6 +3481,7 @@ namespace SMRPGED.StatsEditor
             // monsterName
             // 
             this.monsterName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.monsterName.ContextMenuStrip = this.contextMenuStrip1;
             this.monsterName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.monsterName.DropDownHeight = 522;
             this.monsterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3484,6 +3494,22 @@ namespace SMRPGED.StatsEditor
             this.monsterName.TabIndex = 0;
             this.monsterName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.monsterName_DrawItem);
             this.monsterName.SelectedIndexChanged += new System.EventHandler(this.monsterName_SelectedIndexChanged);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addThisToNotesDatabaseToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextMenuStrip1.ShowImageMargin = false;
+            this.contextMenuStrip1.Size = new System.Drawing.Size(192, 26);
+            // 
+            // addThisToNotesDatabaseToolStripMenuItem
+            // 
+            this.addThisToNotesDatabaseToolStripMenuItem.Name = "addThisToNotesDatabaseToolStripMenuItem";
+            this.addThisToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.addThisToNotesDatabaseToolStripMenuItem.Text = "Add this to notes database...";
+            this.addThisToNotesDatabaseToolStripMenuItem.Click += new System.EventHandler(this.addThisToNotesDatabaseToolStripMenuItem_Click);
             // 
             // panel55
             // 
@@ -3572,21 +3598,6 @@ namespace SMRPGED.StatsEditor
             this.MonsterFlowerBonus.TabIndex = 0;
             this.MonsterFlowerBonus.SelectedIndexChanged += new System.EventHandler(this.MonsterFlowerBonus_SelectedIndexChanged);
             // 
-            // label209
-            // 
-            this.label209.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label209.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label209.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label209.ForeColor = System.Drawing.SystemColors.Control;
-            this.label209.Location = new System.Drawing.Point(0, 0);
-            this.label209.Name = "label209";
-            this.label209.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label209.Size = new System.Drawing.Size(256, 17);
-            this.label209.TabIndex = 406;
-            this.label209.Text = "MONSTER NOTES...";
-            this.label209.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label87
             // 
             this.label87.BackColor = System.Drawing.SystemColors.Control;
@@ -3669,30 +3680,6 @@ namespace SMRPGED.StatsEditor
             this.TextboxMonsterPsychoMsg.TabIndex = 35;
             this.TextboxMonsterPsychoMsg.Text = "";
             this.TextboxMonsterPsychoMsg.TextChanged += new System.EventHandler(this.TextboxMonsterPsychoMsg_TextChanged);
-            // 
-            // panel41
-            // 
-            this.panel41.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel41.BackColor = System.Drawing.SystemColors.Window;
-            this.panel41.Controls.Add(this.monsterNotesTextBox);
-            this.panel41.Location = new System.Drawing.Point(0, 19);
-            this.panel41.Name = "panel41";
-            this.panel41.Size = new System.Drawing.Size(256, 73);
-            this.panel41.TabIndex = 42;
-            // 
-            // monsterNotesTextBox
-            // 
-            this.monsterNotesTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.monsterNotesTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.monsterNotesTextBox.Location = new System.Drawing.Point(4, 4);
-            this.monsterNotesTextBox.Name = "monsterNotesTextBox";
-            this.monsterNotesTextBox.Size = new System.Drawing.Size(248, 65);
-            this.monsterNotesTextBox.TabIndex = 42;
-            this.monsterNotesTextBox.Text = "";
             // 
             // button2
             // 
@@ -4544,6 +4531,7 @@ namespace SMRPGED.StatsEditor
             // 
             this.packNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.packNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.packNum.ContextMenuStrip = this.contextMenuStrip1;
             this.packNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.packNum.ForeColor = System.Drawing.SystemColors.Control;
             this.packNum.Location = new System.Drawing.Point(135, 21);
@@ -4765,6 +4753,7 @@ namespace SMRPGED.StatsEditor
             // formationNameList
             // 
             this.formationNameList.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.formationNameList.ContextMenuStrip = this.contextMenuStrip1;
             this.formationNameList.DropDownHeight = 522;
             this.formationNameList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formationNameList.DropDownWidth = 650;
@@ -4776,45 +4765,6 @@ namespace SMRPGED.StatsEditor
             this.formationNameList.Size = new System.Drawing.Size(206, 21);
             this.formationNameList.TabIndex = 43;
             this.formationNameList.SelectedIndexChanged += new System.EventHandler(this.formationNameList_SelectedIndexChanged);
-            // 
-            // label19
-            // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.SystemColors.Control;
-            this.label19.Location = new System.Drawing.Point(2, 2);
-            this.label19.Name = "label19";
-            this.label19.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label19.Size = new System.Drawing.Size(256, 17);
-            this.label19.TabIndex = 451;
-            this.label19.Text = "FORMATION NOTES...";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel34
-            // 
-            this.panel34.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel34.BackColor = System.Drawing.SystemColors.Window;
-            this.panel34.Controls.Add(this.richTextBox8);
-            this.panel34.Location = new System.Drawing.Point(2, 21);
-            this.panel34.Name = "panel34";
-            this.panel34.Size = new System.Drawing.Size(256, 279);
-            this.panel34.TabIndex = 98;
-            // 
-            // richTextBox8
-            // 
-            this.richTextBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox8.Location = new System.Drawing.Point(4, 4);
-            this.richTextBox8.Name = "richTextBox8";
-            this.richTextBox8.Size = new System.Drawing.Size(248, 271);
-            this.richTextBox8.TabIndex = 99;
-            this.richTextBox8.Text = "";
             // 
             // label5
             // 
@@ -5753,6 +5703,124 @@ namespace SMRPGED.StatsEditor
             this.formationCantRun.UseVisualStyleBackColor = true;
             this.formationCantRun.CheckedChanged += new System.EventHandler(this.formationCantRun_CheckedChanged);
             // 
+            // label140
+            // 
+            this.label140.BackColor = System.Drawing.SystemColors.Control;
+            this.label140.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label140.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label140.Location = new System.Drawing.Point(0, 38);
+            this.label140.Name = "label140";
+            this.label140.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.label140.Size = new System.Drawing.Size(398, 17);
+            this.label140.TabIndex = 288;
+            this.label140.Text = "FORMATION MUSIC";
+            this.label140.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel74
+            // 
+            this.panel74.BackColor = System.Drawing.SystemColors.Control;
+            this.panel74.Controls.Add(this.musicTrack);
+            this.panel74.Location = new System.Drawing.Point(233, 57);
+            this.panel74.Name = "panel74";
+            this.panel74.Size = new System.Drawing.Size(166, 17);
+            this.panel74.TabIndex = 80;
+            // 
+            // musicTrack
+            // 
+            this.musicTrack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.musicTrack.BackColor = System.Drawing.SystemColors.Window;
+            this.musicTrack.DropDownHeight = 262;
+            this.musicTrack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.musicTrack.DropDownWidth = 250;
+            this.musicTrack.IntegralHeight = false;
+            this.musicTrack.Items.AddRange(new object[] {
+            "[00]  {CURRENT}",
+            "[01]  Dodo\'s Coming",
+            "[02]  Mushroom Kingdom",
+            "[03]  Fight Against Stronger Monster",
+            "[04]  Yo\'ster Island",
+            "[05]  Seaside Town",
+            "[06]  Fight Against Monsters",
+            "[07]  Pipe Vault",
+            "[08]  Invincible Star",
+            "[09]  Victory",
+            "[10]  In The Flower Garden",
+            "[11]  Bowser\'s Castle (1st time)",
+            "[12]  Fight Against Bowser",
+            "[13]  Road Is Full Of Dangers",
+            "[14]  Mario\'s Pad",
+            "[15]  Here\'s Some Weapons",
+            "[16]  Let\'s Race",
+            "[17]  Tadpole Pond",
+            "[18]  Rose Town",
+            "[19]  Race Training",
+            "[20]  Shock!",
+            "[21]  Sad Song",
+            "[22]  Midas River",
+            "[23]  Got A Star Piece (part 1)",
+            "[24]  Got A Star Piece (part 2)",
+            "[25]  Fight Against An Armed Boss",
+            "[26]  Forest Maze",
+            "[27]  Dungeon Is Full Of Monsters",
+            "[28]  Let\'s Play Geno",
+            "[29]  Start Slot Menu",
+            "[30]  Long Long Ago",
+            "[31]  Booster\'s Tower",
+            "[32]  And My Name\'s Booster",
+            "[33]  Moleville",
+            "[34]  Star Hill",
+            "[35]  Mountain Railroad",
+            "[36]  Explanation",
+            "[37]  Booster Hill (start)",
+            "[38]  Booster Hill",
+            "[39]  Marrymore",
+            "[40]  New Partner",
+            "[41]  Sunken Ship",
+            "[42]  Still The Road Is Full Of Monsters",
+            "[43]  {SILENCE}",
+            "[44]  Sea",
+            "[45]  Heart Beating A Little Faster (part 1)",
+            "[46]  Heart Beating A Little Faster (part 2)",
+            "[47]  Grate Guy\'s Casino",
+            "[48]  Geno Awakens",
+            "[49]  Celebrational",
+            "[50]  Nimbus Land",
+            "[51]  Monstro Town",
+            "[52]  Toadofsky",
+            "[53]  {SILENCE}",
+            "[54]  Happy Adventure, Delighful Adventure",
+            "[55]  World Map",
+            "[56]  Factory",
+            "[57]  Sword Crashes And Stars Scatter",
+            "[58]  Conversation With Culex",
+            "[59]  Fight Against Culex",
+            "[60]  Victory Against Culex",
+            "[61]  Valentina",
+            "[62]  Barrel Volcano",
+            "[63]  Axem Rangers Drop In",
+            "[64]  The End",
+            "[65]  Gate",
+            "[66]  Bowser\'s Castle (2nd time)",
+            "[67]  Weapons Factory",
+            "[68]  Fight Against Smithy 1",
+            "[69]  Fight Against Smithy 2",
+            "[70]  Ending Part 1",
+            "[71]  Ending Part 2",
+            "[72]  Ending Part 3",
+            "[73]  Ending Part 4",
+            "[74]  {SILENCE}",
+            "[75]  {SILENCE}",
+            "[76]  {SILENCE}",
+            "[77]  {SILENCE}",
+            "[78]  {SILENCE}",
+            "[79]  {SILENCE}"});
+            this.musicTrack.Location = new System.Drawing.Point(-2, -2);
+            this.musicTrack.Name = "musicTrack";
+            this.musicTrack.Size = new System.Drawing.Size(170, 21);
+            this.musicTrack.TabIndex = 80;
+            this.musicTrack.SelectedIndexChanged += new System.EventHandler(this.musicTrack_SelectedIndexChanged);
+            // 
             // panel82
             // 
             this.panel82.BackColor = System.Drawing.SystemColors.Control;
@@ -5797,6 +5865,22 @@ namespace SMRPGED.StatsEditor
             this.label6.TabIndex = 501;
             this.label6.Text = "??????";
             // 
+            // formationBattleEvent
+            // 
+            this.formationBattleEvent.BackColor = System.Drawing.SystemColors.Window;
+            this.formationBattleEvent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.formationBattleEvent.Location = new System.Drawing.Point(77, 19);
+            this.formationBattleEvent.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.formationBattleEvent.Name = "formationBattleEvent";
+            this.formationBattleEvent.Size = new System.Drawing.Size(78, 17);
+            this.formationBattleEvent.TabIndex = 81;
+            this.formationBattleEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.formationBattleEvent.ValueChanged += new System.EventHandler(this.formationBattleEvent_ValueChanged);
+            // 
             // formationUnknown
             // 
             this.formationUnknown.BackColor = System.Drawing.SystemColors.Window;
@@ -5822,6 +5906,16 @@ namespace SMRPGED.StatsEditor
             this.label176.Size = new System.Drawing.Size(76, 17);
             this.label176.TabIndex = 499;
             this.label176.Text = "Initial Event";
+            // 
+            // label150
+            // 
+            this.label150.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label150.Location = new System.Drawing.Point(156, 57);
+            this.label150.Name = "label150";
+            this.label150.Padding = new System.Windows.Forms.Padding(1, 1, 0, 2);
+            this.label150.Size = new System.Drawing.Size(76, 17);
+            this.label150.TabIndex = 500;
+            this.label150.Text = "Music Track";
             // 
             // label16
             // 
@@ -5947,6 +6041,7 @@ namespace SMRPGED.StatsEditor
             // attackName
             // 
             this.attackName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.attackName.ContextMenuStrip = this.contextMenuStrip1;
             this.attackName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.attackName.DropDownHeight = 522;
             this.attackName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -6004,6 +6099,7 @@ namespace SMRPGED.StatsEditor
             // spellName
             // 
             this.spellName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.spellName.ContextMenuStrip = this.contextMenuStrip1;
             this.spellName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.spellName.DropDownHeight = 522;
             this.spellName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -6179,9 +6275,6 @@ namespace SMRPGED.StatsEditor
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel8.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panel8.Controls.Add(this.panel218);
-            this.panel8.Controls.Add(this.panel171);
-            this.panel8.Controls.Add(this.panel170);
             this.panel8.Controls.Add(this.panel169);
             this.panel8.Controls.Add(this.panel168);
             this.panel8.Controls.Add(this.panel167);
@@ -6199,119 +6292,6 @@ namespace SMRPGED.StatsEditor
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(681, 580);
             this.panel8.TabIndex = 483;
-            // 
-            // panel218
-            // 
-            this.panel218.Controls.Add(this.panel219);
-            this.panel218.Location = new System.Drawing.Point(548, 6);
-            this.panel218.Name = "panel218";
-            this.panel218.Size = new System.Drawing.Size(126, 450);
-            this.panel218.TabIndex = 542;
-            // 
-            // panel219
-            // 
-            this.panel219.BackColor = System.Drawing.SystemColors.Control;
-            this.panel219.Location = new System.Drawing.Point(2, 2);
-            this.panel219.Name = "panel219";
-            this.panel219.Size = new System.Drawing.Size(122, 446);
-            this.panel219.TabIndex = 540;
-            // 
-            // panel171
-            // 
-            this.panel171.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel171.Controls.Add(this.label18);
-            this.panel171.Controls.Add(this.panelSpellNotes);
-            this.panel171.Location = new System.Drawing.Point(343, 462);
-            this.panel171.Name = "panel171";
-            this.panel171.Size = new System.Drawing.Size(331, 112);
-            this.panel171.TabIndex = 14;
-            // 
-            // label18
-            // 
-            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label18.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.SystemColors.Control;
-            this.label18.Location = new System.Drawing.Point(2, 2);
-            this.label18.Name = "label18";
-            this.label18.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label18.Size = new System.Drawing.Size(327, 17);
-            this.label18.TabIndex = 449;
-            this.label18.Text = "ATTACK NOTES...";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panelSpellNotes
-            // 
-            this.panelSpellNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelSpellNotes.BackColor = System.Drawing.SystemColors.Window;
-            this.panelSpellNotes.Controls.Add(this.textBoxAttackNotes);
-            this.panelSpellNotes.Location = new System.Drawing.Point(2, 21);
-            this.panelSpellNotes.Name = "panelSpellNotes";
-            this.panelSpellNotes.Size = new System.Drawing.Size(327, 89);
-            this.panelSpellNotes.TabIndex = 129;
-            // 
-            // textBoxAttackNotes
-            // 
-            this.textBoxAttackNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAttackNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxAttackNotes.Location = new System.Drawing.Point(4, 4);
-            this.textBoxAttackNotes.Name = "textBoxAttackNotes";
-            this.textBoxAttackNotes.Size = new System.Drawing.Size(319, 81);
-            this.textBoxAttackNotes.TabIndex = 179;
-            this.textBoxAttackNotes.Text = "";
-            // 
-            // panel170
-            // 
-            this.panel170.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel170.Controls.Add(this.label68);
-            this.panel170.Controls.Add(this.panel30);
-            this.panel170.Location = new System.Drawing.Point(6, 470);
-            this.panel170.Name = "panel170";
-            this.panel170.Size = new System.Drawing.Size(331, 104);
-            this.panel170.TabIndex = 8;
-            // 
-            // label68
-            // 
-            this.label68.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label68.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label68.ForeColor = System.Drawing.SystemColors.Control;
-            this.label68.Location = new System.Drawing.Point(2, 2);
-            this.label68.Name = "label68";
-            this.label68.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label68.Size = new System.Drawing.Size(327, 17);
-            this.label68.TabIndex = 449;
-            this.label68.Text = "SPELL NOTES...";
-            this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel30
-            // 
-            this.panel30.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel30.BackColor = System.Drawing.SystemColors.Window;
-            this.panel30.Controls.Add(this.richTextBox9);
-            this.panel30.Location = new System.Drawing.Point(2, 21);
-            this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(327, 81);
-            this.panel30.TabIndex = 119;
-            // 
-            // richTextBox9
-            // 
-            this.richTextBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox9.Location = new System.Drawing.Point(4, 4);
-            this.richTextBox9.Name = "richTextBox9";
-            this.richTextBox9.Size = new System.Drawing.Size(319, 73);
-            this.richTextBox9.TabIndex = 179;
-            this.richTextBox9.Text = "";
             // 
             // panel169
             // 
@@ -6723,6 +6703,7 @@ namespace SMRPGED.StatsEditor
             // itemName
             // 
             this.itemName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.itemName.ContextMenuStrip = this.contextMenuStrip1;
             this.itemName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.itemName.DropDownHeight = 522;
             this.itemName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -6747,6 +6728,7 @@ namespace SMRPGED.StatsEditor
             // shopName
             // 
             this.shopName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopName.ContextMenuStrip = this.contextMenuStrip1;
             this.shopName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.shopName.DropDownHeight = 500;
             this.shopName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -7447,8 +7429,6 @@ namespace SMRPGED.StatsEditor
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
             this.panel2.Controls.Add(this.panelItemDesc);
-            this.panel2.Controls.Add(this.panel228);
-            this.panel2.Controls.Add(this.panel226);
             this.panel2.Controls.Add(this.panel195);
             this.panel2.Controls.Add(this.panel193);
             this.panel2.Controls.Add(this.panel191);
@@ -7501,38 +7481,6 @@ namespace SMRPGED.StatsEditor
             this.pictureBoxItemDesc.TabIndex = 0;
             this.pictureBoxItemDesc.TabStop = false;
             this.pictureBoxItemDesc.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxItemDesc_Paint);
-            // 
-            // panel228
-            // 
-            this.panel228.Controls.Add(this.panel229);
-            this.panel228.Location = new System.Drawing.Point(426, 554);
-            this.panel228.Name = "panel228";
-            this.panel228.Size = new System.Drawing.Size(248, 20);
-            this.panel228.TabIndex = 543;
-            // 
-            // panel229
-            // 
-            this.panel229.BackColor = System.Drawing.SystemColors.Control;
-            this.panel229.Location = new System.Drawing.Point(2, 2);
-            this.panel229.Name = "panel229";
-            this.panel229.Size = new System.Drawing.Size(244, 16);
-            this.panel229.TabIndex = 540;
-            // 
-            // panel226
-            // 
-            this.panel226.Controls.Add(this.panel227);
-            this.panel226.Location = new System.Drawing.Point(212, 546);
-            this.panel226.Name = "panel226";
-            this.panel226.Size = new System.Drawing.Size(208, 28);
-            this.panel226.TabIndex = 542;
-            // 
-            // panel227
-            // 
-            this.panel227.BackColor = System.Drawing.SystemColors.Control;
-            this.panel227.Location = new System.Drawing.Point(2, 2);
-            this.panel227.Name = "panel227";
-            this.panel227.Size = new System.Drawing.Size(204, 24);
-            this.panel227.TabIndex = 540;
             // 
             // panel195
             // 
@@ -8777,8 +8725,6 @@ namespace SMRPGED.StatsEditor
             this.panel46.Controls.Add(this.panel230);
             this.panel46.Controls.Add(this.panel49);
             this.panel46.Controls.Add(this.panel48);
-            this.panel46.Controls.Add(this.panel125);
-            this.panel46.Controls.Add(this.panel224);
             this.panel46.Controls.Add(this.panel199);
             this.panel46.Controls.Add(this.panel198);
             this.panel46.Controls.Add(this.panel197);
@@ -8923,38 +8869,6 @@ namespace SMRPGED.StatsEditor
             this.label136.TabIndex = 162;
             this.label136.Text = "LEVEL UP STAT INCREMENTS...";
             this.label136.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel125
-            // 
-            this.panel125.Controls.Add(this.panel126);
-            this.panel125.Location = new System.Drawing.Point(461, 206);
-            this.panel125.Name = "panel125";
-            this.panel125.Size = new System.Drawing.Size(213, 367);
-            this.panel125.TabIndex = 549;
-            // 
-            // panel126
-            // 
-            this.panel126.BackColor = System.Drawing.SystemColors.Control;
-            this.panel126.Location = new System.Drawing.Point(2, 2);
-            this.panel126.Name = "panel126";
-            this.panel126.Size = new System.Drawing.Size(209, 363);
-            this.panel126.TabIndex = 540;
-            // 
-            // panel224
-            // 
-            this.panel224.Controls.Add(this.panel225);
-            this.panel224.Location = new System.Drawing.Point(6, 418);
-            this.panel224.Name = "panel224";
-            this.panel224.Size = new System.Drawing.Size(220, 155);
-            this.panel224.TabIndex = 549;
-            // 
-            // panel225
-            // 
-            this.panel225.BackColor = System.Drawing.SystemColors.Control;
-            this.panel225.Location = new System.Drawing.Point(2, 2);
-            this.panel225.Name = "panel225";
-            this.panel225.Size = new System.Drawing.Size(216, 151);
-            this.panel225.TabIndex = 540;
             // 
             // panel199
             // 
@@ -9214,7 +9128,6 @@ namespace SMRPGED.StatsEditor
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel19.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panel19.Controls.Add(this.panel220);
             this.panel19.Controls.Add(this.panel211);
             this.panel19.Controls.Add(this.panel210);
             this.panel19.Controls.Add(this.panel209);
@@ -9227,22 +9140,6 @@ namespace SMRPGED.StatsEditor
             this.panel19.Name = "panel19";
             this.panel19.Size = new System.Drawing.Size(681, 580);
             this.panel19.TabIndex = 485;
-            // 
-            // panel220
-            // 
-            this.panel220.Controls.Add(this.panel221);
-            this.panel220.Location = new System.Drawing.Point(6, 481);
-            this.panel220.Name = "panel220";
-            this.panel220.Size = new System.Drawing.Size(668, 93);
-            this.panel220.TabIndex = 546;
-            // 
-            // panel221
-            // 
-            this.panel221.BackColor = System.Drawing.SystemColors.Control;
-            this.panel221.Location = new System.Drawing.Point(2, 2);
-            this.panel221.Name = "panel221";
-            this.panel221.Size = new System.Drawing.Size(664, 89);
-            this.panel221.TabIndex = 540;
             // 
             // panel211
             // 
@@ -9931,10 +9828,7 @@ namespace SMRPGED.StatsEditor
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel33.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel33.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panel33.Controls.Add(this.panel214);
-            this.panel33.Controls.Add(this.panel212);
             this.panel33.Controls.Add(this.panel141);
-            this.panel33.Controls.Add(this.panel140);
             this.panel33.Controls.Add(this.panel138);
             this.panel33.Controls.Add(this.panel137);
             this.panel33.Controls.Add(this.panel136);
@@ -9951,46 +9845,6 @@ namespace SMRPGED.StatsEditor
             this.panel33.Size = new System.Drawing.Size(681, 580);
             this.panel33.TabIndex = 513;
             // 
-            // panel214
-            // 
-            this.panel214.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel214.Controls.Add(this.panel215);
-            this.panel214.Location = new System.Drawing.Point(6, 532);
-            this.panel214.Name = "panel214";
-            this.panel214.Size = new System.Drawing.Size(198, 42);
-            this.panel214.TabIndex = 541;
-            // 
-            // panel215
-            // 
-            this.panel215.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel215.BackColor = System.Drawing.SystemColors.Control;
-            this.panel215.Location = new System.Drawing.Point(2, 2);
-            this.panel215.Name = "panel215";
-            this.panel215.Size = new System.Drawing.Size(194, 38);
-            this.panel215.TabIndex = 540;
-            // 
-            // panel212
-            // 
-            this.panel212.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel212.Controls.Add(this.panel213);
-            this.panel212.Location = new System.Drawing.Point(210, 489);
-            this.panel212.Name = "panel212";
-            this.panel212.Size = new System.Drawing.Size(198, 85);
-            this.panel212.TabIndex = 540;
-            // 
-            // panel213
-            // 
-            this.panel213.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel213.BackColor = System.Drawing.SystemColors.Control;
-            this.panel213.Location = new System.Drawing.Point(2, 2);
-            this.panel213.Name = "panel213";
-            this.panel213.Size = new System.Drawing.Size(194, 81);
-            this.panel213.TabIndex = 540;
-            // 
             // panel141
             // 
             this.panel141.Controls.Add(this.label9);
@@ -10001,30 +9855,6 @@ namespace SMRPGED.StatsEditor
             this.panel141.Name = "panel141";
             this.panel141.Size = new System.Drawing.Size(260, 279);
             this.panel141.TabIndex = 9;
-            // 
-            // panel140
-            // 
-            this.panel140.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel140.Controls.Add(this.panel139);
-            this.panel140.Location = new System.Drawing.Point(414, 478);
-            this.panel140.Name = "panel140";
-            this.panel140.Size = new System.Drawing.Size(260, 96);
-            this.panel140.TabIndex = 14;
-            // 
-            // panel139
-            // 
-            this.panel139.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel139.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.panel139.Controls.Add(this.label209);
-            this.panel139.Controls.Add(this.panel41);
-            this.panel139.Location = new System.Drawing.Point(2, 2);
-            this.panel139.Name = "panel139";
-            this.panel139.Size = new System.Drawing.Size(256, 92);
-            this.panel139.TabIndex = 500;
             // 
             // panel138
             // 
@@ -10298,16 +10128,14 @@ namespace SMRPGED.StatsEditor
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel142.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panel142.Controls.Add(this.panel216);
             this.panel142.Controls.Add(this.panel150);
-            this.panel142.Controls.Add(this.panel148);
             this.panel142.Controls.Add(this.panel147);
             this.panel142.Controls.Add(this.panel145);
             this.panel142.Controls.Add(this.panel143);
             this.panel142.Controls.Add(this.panel12);
             this.panel142.Controls.Add(this.panel83);
-            this.panel142.Controls.Add(this.panelSearchFormationNames);
             this.panel142.Controls.Add(this.panelSearchFormationPacks);
+            this.panel142.Controls.Add(this.panelSearchFormationNames);
             this.panel142.Location = new System.Drawing.Point(2, 2);
             this.panel142.Name = "panel142";
             this.panel142.Size = new System.Drawing.Size(681, 580);
@@ -10343,18 +10171,6 @@ namespace SMRPGED.StatsEditor
             this.panel149.Name = "panel149";
             this.panel149.Size = new System.Drawing.Size(398, 186);
             this.panel149.TabIndex = 547;
-            // 
-            // panel148
-            // 
-            this.panel148.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel148.Controls.Add(this.label19);
-            this.panel148.Controls.Add(this.panel34);
-            this.panel148.Location = new System.Drawing.Point(414, 272);
-            this.panel148.Name = "panel148";
-            this.panel148.Size = new System.Drawing.Size(260, 302);
-            this.panel148.TabIndex = 6;
             // 
             // panel147
             // 
@@ -10442,9 +10258,9 @@ namespace SMRPGED.StatsEditor
             this.panelSearchFormationPacks.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelSearchFormationPacks.Controls.Add(this.treeViewPackNames);
             this.panelSearchFormationPacks.Controls.Add(this.panel203);
-            this.panelSearchFormationPacks.Location = new System.Drawing.Point(6, 6);
+            this.panelSearchFormationPacks.Location = new System.Drawing.Point(6, 33);
             this.panelSearchFormationPacks.Name = "panelSearchFormationPacks";
-            this.panelSearchFormationPacks.Size = new System.Drawing.Size(668, 303);
+            this.panelSearchFormationPacks.Size = new System.Drawing.Size(652, 296);
             this.panelSearchFormationPacks.TabIndex = 552;
             this.panelSearchFormationPacks.Visible = false;
             // 
@@ -10458,7 +10274,7 @@ namespace SMRPGED.StatsEditor
             this.treeViewPackNames.ShowLines = false;
             this.treeViewPackNames.ShowPlusMinus = false;
             this.treeViewPackNames.ShowRootLines = false;
-            this.treeViewPackNames.Size = new System.Drawing.Size(664, 280);
+            this.treeViewPackNames.Size = new System.Drawing.Size(648, 273);
             this.treeViewPackNames.TabIndex = 194;
             this.treeViewPackNames.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewPackNames_AfterSelect);
             this.treeViewPackNames.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewPackNames_KeyDown);
@@ -10469,7 +10285,7 @@ namespace SMRPGED.StatsEditor
             this.panel203.Controls.Add(this.packNameTextBox);
             this.panel203.Location = new System.Drawing.Point(2, 2);
             this.panel203.Name = "panel203";
-            this.panel203.Size = new System.Drawing.Size(664, 17);
+            this.panel203.Size = new System.Drawing.Size(648, 17);
             this.panel203.TabIndex = 193;
             // 
             // packNameTextBox
@@ -10480,7 +10296,7 @@ namespace SMRPGED.StatsEditor
             this.packNameTextBox.Location = new System.Drawing.Point(4, 2);
             this.packNameTextBox.MaxLength = 128;
             this.packNameTextBox.Name = "packNameTextBox";
-            this.packNameTextBox.Size = new System.Drawing.Size(658, 14);
+            this.packNameTextBox.Size = new System.Drawing.Size(626, 14);
             this.packNameTextBox.TabIndex = 4;
             this.packNameTextBox.TextChanged += new System.EventHandler(this.packNameTextBox_TextChanged);
             this.packNameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.packNameTextBox_KeyDown);
@@ -10544,174 +10360,23 @@ namespace SMRPGED.StatsEditor
             this.labelToolTip.TabIndex = 0;
             this.labelToolTip.Visible = false;
             // 
-            // formationBattleEvent
+            // labelConvertor
             // 
-            this.formationBattleEvent.BackColor = System.Drawing.SystemColors.Window;
-            this.formationBattleEvent.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.formationBattleEvent.Location = new System.Drawing.Point(77, 19);
-            this.formationBattleEvent.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.formationBattleEvent.Name = "formationBattleEvent";
-            this.formationBattleEvent.Size = new System.Drawing.Size(78, 17);
-            this.formationBattleEvent.TabIndex = 81;
-            this.formationBattleEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationBattleEvent.ValueChanged += new System.EventHandler(this.formationBattleEvent_ValueChanged);
-            // 
-            // label140
-            // 
-            this.label140.BackColor = System.Drawing.SystemColors.Control;
-            this.label140.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label140.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label140.Location = new System.Drawing.Point(0, 38);
-            this.label140.Name = "label140";
-            this.label140.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label140.Size = new System.Drawing.Size(398, 17);
-            this.label140.TabIndex = 288;
-            this.label140.Text = "FORMATION MUSIC";
-            this.label140.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label150
-            // 
-            this.label150.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label150.Location = new System.Drawing.Point(156, 57);
-            this.label150.Name = "label150";
-            this.label150.Padding = new System.Windows.Forms.Padding(1, 1, 0, 2);
-            this.label150.Size = new System.Drawing.Size(76, 17);
-            this.label150.TabIndex = 500;
-            this.label150.Text = "Music Track";
-            // 
-            // panel74
-            // 
-            this.panel74.BackColor = System.Drawing.SystemColors.Control;
-            this.panel74.Controls.Add(this.musicTrack);
-            this.panel74.Location = new System.Drawing.Point(233, 57);
-            this.panel74.Name = "panel74";
-            this.panel74.Size = new System.Drawing.Size(166, 17);
-            this.panel74.TabIndex = 80;
-            // 
-            // musicTrack
-            // 
-            this.musicTrack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.musicTrack.BackColor = System.Drawing.SystemColors.Window;
-            this.musicTrack.DropDownHeight = 262;
-            this.musicTrack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.musicTrack.DropDownWidth = 250;
-            this.musicTrack.IntegralHeight = false;
-            this.musicTrack.Items.AddRange(new object[] {
-            "[00]  {CURRENT}",
-            "[01]  Dodo\'s Coming",
-            "[02]  Mushroom Kingdom",
-            "[03]  Fight Against Stronger Monster",
-            "[04]  Yo\'ster Island",
-            "[05]  Seaside Town",
-            "[06]  Fight Against Monsters",
-            "[07]  Pipe Vault",
-            "[08]  Invincible Star",
-            "[09]  Victory",
-            "[0A]  In The Flower Garden",
-            "[0B]  Bowser\'s Castle (1st time)",
-            "[0C]  Fight Against Bowser",
-            "[0D]  Road Is Full Of Dangers",
-            "[0E]  Mario\'s Pad",
-            "[0F]  Here\'s Some Weapons",
-            "[10]  Let\'s Race",
-            "[11]  Tadpole Pond",
-            "[12]  Rose Town",
-            "[13]  Race Training",
-            "[14]  Shock!",
-            "[15]  Sad Song",
-            "[16]  Midas River",
-            "[17]  Got A Star Piece (part 1)",
-            "[18]  Got A Star Piece (part 2)",
-            "[19]  Fight Against An Armed Boss",
-            "[1A]  Forest Maze",
-            "[1B]  Dungeon Is Full Of Monsters",
-            "[1C]  Let\'s Play Geno",
-            "[1D]  Start Slot Menu",
-            "[1E]  Long Long Ago",
-            "[1F]  Booster\'s Tower",
-            "[20]  And My Name\'s Booster",
-            "[21]  Moleville",
-            "[22]  Star Hill",
-            "[23]  Mountain Railroad",
-            "[24]  Explanation",
-            "[25]  Booster Hill (start)",
-            "[26]  Booster Hill",
-            "[27]  Marrymore",
-            "[28]  New Partner",
-            "[29]  Sunken Ship",
-            "[2A]  Still The Road Is Full Of Monsters",
-            "[2B]  {SILENCE}",
-            "[2C]  Sea",
-            "[2D]  Heart Beating A Little Faster (part 1)",
-            "[2E]  Heart Beating A Little Faster (part 2)",
-            "[2F]  Grate Guy\'s Casino",
-            "[30]  Geno Awakens",
-            "[31]  Celebrational",
-            "[32]  Nimbus Land",
-            "[33]  Monstro Town",
-            "[34]  Toadofsky",
-            "[35]  {SILENCE}",
-            "[36]  Happy Adventure, Delighful Adventure",
-            "[37]  World Map",
-            "[38]  Factory",
-            "[39]  Sword Crashes And Stars Scatter",
-            "[3A]  Conversation With Culex",
-            "[3B]  Fight Against Culex",
-            "[3C]  Victory Against Culex",
-            "[3D]  Valentina",
-            "[3E]  Barrel Volcano",
-            "[3F]  Axem Rangers Drop In",
-            "[40]  The End",
-            "[41]  Gate",
-            "[42]  Bowser\'s Castle (2nd time)",
-            "[43]  Weapons Factory",
-            "[44]  Fight Against Smithy 1",
-            "[45]  Fight Against Smithy 2",
-            "[46]  Ending Part 1",
-            "[47]  Ending Part 2",
-            "[48]  Ending Part 3",
-            "[49]  Ending Part 4",
-            "[4A]  {SILENCE}",
-            "[4B]  {SILENCE}",
-            "[4C]  {SILENCE}",
-            "[4D]  {SILENCE}",
-            "[4E]  {SILENCE}",
-            "[4F]  {SILENCE}"});
-            this.musicTrack.Location = new System.Drawing.Point(-2, -2);
-            this.musicTrack.Name = "musicTrack";
-            this.musicTrack.Size = new System.Drawing.Size(170, 21);
-            this.musicTrack.TabIndex = 80;
-            this.musicTrack.SelectedIndexChanged += new System.EventHandler(this.musicTrack_SelectedIndexChanged);
-            // 
-            // panel216
-            // 
-            this.panel216.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel216.Controls.Add(this.panel217);
-            this.panel216.Location = new System.Drawing.Point(6, 550);
-            this.panel216.Name = "panel216";
-            this.panel216.Size = new System.Drawing.Size(402, 24);
-            this.panel216.TabIndex = 553;
-            // 
-            // panel217
-            // 
-            this.panel217.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel217.BackColor = System.Drawing.SystemColors.Control;
-            this.panel217.Location = new System.Drawing.Point(2, 2);
-            this.panel217.Name = "panel217";
-            this.panel217.Size = new System.Drawing.Size(398, 20);
-            this.panel217.TabIndex = 540;
+            this.labelConvertor.AutoSize = true;
+            this.labelConvertor.BackColor = System.Drawing.Color.White;
+            this.labelConvertor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelConvertor.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelConvertor.Location = new System.Drawing.Point(196, 0);
+            this.labelConvertor.Name = "labelConvertor";
+            this.labelConvertor.Size = new System.Drawing.Size(2, 15);
+            this.labelConvertor.TabIndex = 2;
+            this.labelConvertor.Visible = false;
             // 
             // StatsEditor
             // 
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(881, 630);
+            this.Controls.Add(this.labelConvertor);
             this.Controls.Add(this.labelToolTip);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
@@ -10721,7 +10386,7 @@ namespace SMRPGED.StatsEditor
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "StatsEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "EDITING STATS...";
+            this.Text = "STATS - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StatsEditor_FormClosing);
             this.panelSearchFormationNames.ResumeLayout(false);
             this.panel200.ResumeLayout(false);
@@ -10784,11 +10449,11 @@ namespace SMRPGED.StatsEditor
             this.panel64.ResumeLayout(false);
             this.panel64.PerformLayout();
             this.panel63.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.panel55.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValFlowerOdds)).EndInit();
             this.panel66.ResumeLayout(false);
             this.panel42.ResumeLayout(false);
-            this.panel41.ResumeLayout(false);
             this.panel29.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValAtk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValMgDef)).EndInit();
@@ -10822,7 +10487,6 @@ namespace SMRPGED.StatsEditor
             this.panel5.ResumeLayout(false);
             this.panel39.ResumeLayout(false);
             this.panel37.ResumeLayout(false);
-            this.panel34.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.formationNum)).EndInit();
             this.panel36.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
@@ -10861,7 +10525,9 @@ namespace SMRPGED.StatsEditor
             ((System.ComponentModel.ISupportInitialize)(this.formationCoordX4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFormation)).EndInit();
             this.panel52.ResumeLayout(false);
+            this.panel74.ResumeLayout(false);
             this.panel82.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.formationBattleEvent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.formationUnknown)).EndInit();
             this.panel45.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpellDesc)).EndInit();
@@ -10878,11 +10544,6 @@ namespace SMRPGED.StatsEditor
             ((System.ComponentModel.ISupportInitialize)(this.spellFPCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spellMagPower)).EndInit();
             this.panel8.ResumeLayout(false);
-            this.panel218.ResumeLayout(false);
-            this.panel171.ResumeLayout(false);
-            this.panelSpellNotes.ResumeLayout(false);
-            this.panel170.ResumeLayout(false);
-            this.panel30.ResumeLayout(false);
             this.panel169.ResumeLayout(false);
             this.panel166.ResumeLayout(false);
             this.panel168.ResumeLayout(false);
@@ -10934,8 +10595,6 @@ namespace SMRPGED.StatsEditor
             this.panel2.ResumeLayout(false);
             this.panelItemDesc.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxItemDesc)).EndInit();
-            this.panel228.ResumeLayout(false);
-            this.panel226.ResumeLayout(false);
             this.panel195.ResumeLayout(false);
             this.panel192.ResumeLayout(false);
             this.panel193.ResumeLayout(false);
@@ -10994,8 +10653,6 @@ namespace SMRPGED.StatsEditor
             this.panel44.ResumeLayout(false);
             this.panel48.ResumeLayout(false);
             this.panel43.ResumeLayout(false);
-            this.panel125.ResumeLayout(false);
-            this.panel224.ResumeLayout(false);
             this.panel199.ResumeLayout(false);
             this.panel198.ResumeLayout(false);
             this.panel197.ResumeLayout(false);
@@ -11010,7 +10667,6 @@ namespace SMRPGED.StatsEditor
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
             this.panel19.ResumeLayout(false);
-            this.panel220.ResumeLayout(false);
             this.panel211.ResumeLayout(false);
             this.panel21.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown102)).EndInit();
@@ -11051,11 +10707,7 @@ namespace SMRPGED.StatsEditor
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel33.ResumeLayout(false);
-            this.panel214.ResumeLayout(false);
-            this.panel212.ResumeLayout(false);
             this.panel141.ResumeLayout(false);
-            this.panel140.ResumeLayout(false);
-            this.panel139.ResumeLayout(false);
             this.panel138.ResumeLayout(false);
             this.panel133.ResumeLayout(false);
             this.panel137.ResumeLayout(false);
@@ -11080,7 +10732,6 @@ namespace SMRPGED.StatsEditor
             this.panel142.ResumeLayout(false);
             this.panel150.ResumeLayout(false);
             this.panel149.ResumeLayout(false);
-            this.panel148.ResumeLayout(false);
             this.panel147.ResumeLayout(false);
             this.panel146.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
@@ -11095,9 +10746,6 @@ namespace SMRPGED.StatsEditor
             this.tabPage4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.formationBattleEvent)).EndInit();
-            this.panel74.ResumeLayout(false);
-            this.panel216.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -11108,7 +10756,6 @@ namespace SMRPGED.StatsEditor
         // Added
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem allComponentsToolStripMenuItem;
-        private ToolStripMenuItem allComponentsToolStripMenuItem1;
         private NumericUpDown attackAtkLevel;
         private CheckedListBox attackAtkType;
         private NumericUpDown attackHitRate;
@@ -11119,8 +10766,6 @@ namespace SMRPGED.StatsEditor
         private CheckedListBox attackStatusEffect;
         private CheckedListBox attackStatusUp;
         private ToolStripMenuItem attacksToolStripMenuItem;
-        private ToolStripMenuItem attackToolStripMenuItem;
-        private ToolStripMenuItem battleDialoguesToolStripMenuItem;
         private ComboBox battlefieldName;
         private Button button1;
         private Button button2;
@@ -11133,20 +10778,17 @@ namespace SMRPGED.StatsEditor
         private ComboBox characterName;
         private NumericUpDown characterNum;
         private ToolStripMenuItem charactersToolStripMenuItem;
-        private ToolStripMenuItem characterToolStripMenuItem;
         private CheckedListBox CheckboxMonsterEfecNull;
         private CheckedListBox CheckboxMonsterElemNull;
         private CheckedListBox CheckboxMonsterElemWeak;
         private CheckedListBox CheckboxMonsterProp;
         private CheckedListBox checkedListBox1;
         private CheckedListBox checkedListBox2;
-        private ToolStripMenuItem clearToolStripMenuItem;
         private ComboBox comboBox3;
         private ComboBox comboBox4;
         private ComboBox comboBox5;
         private NumericUpDown defensePlus;
         private NumericUpDown defensePlusBonus;
-        private ToolStripMenuItem dialoguesToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
         private NumericUpDown expNeeded;
         private ToolStripMenuItem fileToolStripMenuItem;
@@ -11186,10 +10828,8 @@ namespace SMRPGED.StatsEditor
         private ComboBox formationName8;
         private ComboBox formationNameList;
         private NumericUpDown formationNum;
-        private ToolStripMenuItem formationPackToolStripMenuItem;
         private ComboBox formationSet;
         private ToolStripMenuItem formationsToolStripMenuItem;
-        private ToolStripMenuItem formationToolStripMenuItem;
         private NumericUpDown formationUnknown;
         private TrackBar GenoChargeOverflow;
         private TrackBar GenoLevel2Frame;
@@ -11221,7 +10861,6 @@ namespace SMRPGED.StatsEditor
         private CheckedListBox itemStatusEffect;
         private ToolStripMenuItem itemsToolStripMenuItem;
         private CheckedListBox itemTargetting;
-        private ToolStripMenuItem itemToolStripMenuItem;
         private ComboBox itemType;
         private CheckedListBox itemUsage;
         private CheckedListBox itemWhoEquip;
@@ -11245,12 +10884,10 @@ namespace SMRPGED.StatsEditor
         private ComboBox MonsterFlowerBonus;
         private ComboBox MonsterMorphSuccess;
         private ComboBox monsterName;
-        private RichTextBox monsterNotesTextBox;
         private NumericUpDown MonsterNumber;
         private ComboBox MonsterSoundOther;
         private ComboBox MonsterSoundStrike;
         private ToolStripMenuItem monstersToolStripMenuItem;
-        private ToolStripMenuItem monsterToolStripMenuItem;
         private NumericUpDown MonsterValAtk;
         private NumericUpDown MonsterValCoins;
         private NumericUpDown MonsterValDef;
@@ -11298,8 +10935,6 @@ namespace SMRPGED.StatsEditor
         private RichTextBox richTextBox2;
         private RichTextBox richTextBox3;
         private RichTextBox richTextBox4;
-        private RichTextBox richTextBox8;
-        private RichTextBox richTextBox9;
         private ToolStripMenuItem saveStatsToolStripMenuItem;
         private CheckedListBox shopBuyOptions;
         private CheckedListBox shopDiscounts;
@@ -11321,7 +10956,6 @@ namespace SMRPGED.StatsEditor
         private ComboBox shopName;
         private NumericUpDown shopNum;
         private ToolStripMenuItem shopsToolStripMenuItem;
-        private ToolStripMenuItem shopToolStripMenuItem;
         private NumericUpDown slotNum;
         private TrackBar spell1TimingFrameSpan;
         private TrackBar spell2Level1FrameEnd;
@@ -11339,7 +10973,6 @@ namespace SMRPGED.StatsEditor
         private ToolStripMenuItem spellsToolStripMenuItem;
         private CheckedListBox spellTargetting;
         private ToolStripMenuItem spellTimingsToolStripMenuItem;
-        private ToolStripMenuItem spellToolStripMenuItem;
         private ComboBox startingAccessory;
         private ComboBox startingArmor;
         private NumericUpDown startingAttack;
@@ -11368,7 +11001,6 @@ namespace SMRPGED.StatsEditor
         private TabPage tabPage5;
         private TabPage tabPage6;
         private TextBox textBoxAttackName;
-        private RichTextBox textBoxAttackNotes;
         private TextBox textBoxCharacterName;
         private RichTextBox textBoxItemDescription;
         private TextBox textBoxItemName;
@@ -11380,10 +11012,8 @@ namespace SMRPGED.StatsEditor
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripSeparator toolStripSeparator3;
-        private ToolStripSeparator toolStripSeparator4;
         private ComboBox weaponName;
         private ComboBox weaponOrDefense;
-        private ToolStripMenuItem weaponToolStripMenuItem;
 
         private Label label1;
         private Label label10;
@@ -11469,7 +11099,6 @@ namespace SMRPGED.StatsEditor
         private Label label177;
         private Label label178;
         private Label label179;
-        private Label label18;
         private Label label180;
         private Label label181;
         private Label label182;
@@ -11479,7 +11108,6 @@ namespace SMRPGED.StatsEditor
         private Label label186;
         private Label label188;
         private Label label189;
-        private Label label19;
         private Label label191;
         private Label label193;
         private Label label194;
@@ -11488,7 +11116,6 @@ namespace SMRPGED.StatsEditor
         private Label label20;
         private Label label202;
         private Label label208;
-        private Label label209;
         private Label label21;
         private Label label210;
         private Label label211;
@@ -11536,7 +11163,6 @@ namespace SMRPGED.StatsEditor
         private Label label65;
         private Label label66;
         private Label label67;
-        private Label label68;
         private Label label69;
         private Label label7;
         private Label label70;
@@ -11630,14 +11256,11 @@ namespace SMRPGED.StatsEditor
         private Panel panel28;
         private Panel panel29;
         private Panel panel3;
-        private Panel panel30;
-        private Panel panel34;
         private Panel panel36;
         private Panel panel37;
         private Panel panel38;
         private Panel panel39;
         private Panel panel4;
-        private Panel panel41;
         private Panel panel42;
         private Panel panel45;
         private Panel panel46;
@@ -11698,7 +11321,6 @@ namespace SMRPGED.StatsEditor
         private Panel panelFormationUse;
         private Panel panelItemDescription;
         private Panel panelSpellDescription;
-        private Panel panelSpellNotes;
         private PictureBox pictureBoxFormation;
         private PictureBox pictureBoxMonster;
         private PictureBox pictureBoxPsychopath;
@@ -11707,7 +11329,6 @@ namespace SMRPGED.StatsEditor
         private ListBox listBox3;
         private ToolStripMenuItem importAllToolStripMenuItem;
         private ToolStripMenuItem exportAllToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator5;
         private Panel panel10;
         private Label label40;
         private Label label39;
@@ -11721,8 +11342,6 @@ namespace SMRPGED.StatsEditor
         private Panel panel7;
         private Panel panel33;
         private Panel panel141;
-        private Panel panel140;
-        private Panel panel139;
         private Panel panel138;
         private Panel panel133;
         private Panel panel137;
@@ -11742,15 +11361,12 @@ namespace SMRPGED.StatsEditor
         private Panel panel142;
         private Panel panel150;
         private Panel panel149;
-        private Panel panel148;
         private Panel panel147;
         private Panel panel146;
         private Panel panel145;
         private Panel panel144;
         private Panel panel143;
         private Panel panel12;
-        private Panel panel171;
-        private Panel panel170;
         private Panel panel169;
         private Panel panel166;
         private Panel panel168;
@@ -11810,26 +11426,10 @@ namespace SMRPGED.StatsEditor
         private Panel panel206;
         private Panel panel205;
         private Panel panel204;
-        private Panel panel218;
-        private Panel panel219;
-        private Panel panel214;
-        private Panel panel215;
-        private Panel panel212;
-        private Panel panel213;
-        private Panel panel220;
-        private Panel panel221;
-        private Panel panel224;
-        private Panel panel225;
-        private Panel panel228;
-        private Panel panel229;
-        private Panel panel226;
-        private Panel panel227;
         private Panel panel49;
         private Panel panel44;
         private Panel panel48;
         private Panel panel43;
-        private Panel panel125;
-        private Panel panel126;
         private ListBox listBoxFormationNames;
         private Panel panel200;
         private TextBox nameTextBox;
@@ -11869,8 +11469,32 @@ namespace SMRPGED.StatsEditor
         private Panel panel74;
         private ComboBox musicTrack;
         private Label label150;
-        private Panel panel216;
-        private Panel panel217;
+        private Label labelConvertor;
+        private ToolStripMenuItem showDecHexToolStripMenuItem;
+        private ToolStripMenuItem toolStripMenuItem2;
+        private ToolStripMenuItem toolStripMenuItem3;
+        private ToolStripMenuItem toolStripMenuItem4;
+        private ToolStripMenuItem toolStripMenuItem5;
+        private ToolStripMenuItem toolStripMenuItem6;
+        private ToolStripMenuItem toolStripMenuItem7;
+        private ToolStripMenuItem toolStripMenuItem8;
+        private ToolStripMenuItem toolStripMenuItem9;
+        private ToolStripMenuItem toolStripMenuItem12;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripMenuItem toolStripMenuItem13;
+        private ToolStripMenuItem toolStripMenuItem14;
+        private ToolStripMenuItem toolStripMenuItem15;
+        private ToolStripMenuItem toolStripMenuItem16;
+        private ToolStripMenuItem toolStripMenuItem17;
+        private ToolStripMenuItem toolStripMenuItem18;
+        private ToolStripMenuItem toolStripMenuItem19;
+        private ToolStripMenuItem toolStripMenuItem20;
+        private ToolStripMenuItem toolStripMenuItem21;
+        private ToolStripMenuItem toolStripMenuItem24;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripMenuItem toolStripMenuItem25;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem addThisToNotesDatabaseToolStripMenuItem;
     }
 }
 

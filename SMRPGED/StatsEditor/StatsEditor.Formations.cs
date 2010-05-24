@@ -196,7 +196,7 @@ namespace SMRPGED.StatsEditor
                 if (model.GraphicSets[i] == null)
                     model.GraphicSets[i] = model.Decompress(offset, 0x2000);
 
-                labelText = "DECOMPRESSING GRAPHIC SET 0x" + i.ToString("X3");
+                labelText = "DECOMPRESSING GRAPHIC SET 0x" + i.ToString("d3");
                 pBar.PerformStep(labelText);
             }
 
@@ -209,21 +209,13 @@ namespace SMRPGED.StatsEditor
                 if (model.TileSetsBF[i] == null)
                     model.TileSetsBF[i] = model.Decompress(offset, 0x2000);
 
-                labelText = "DECOMPRESSING BATTLEFIELD 0x" + i.ToString("X3");
+                labelText = "DECOMPRESSING BATTLEFIELD 0x" + i.ToString("d3");
                 pBar.PerformStep(labelText);
             }
             pBar.Close();
         }
         private void SaveFormationNotes()
         {
-            try
-            {
-                this.richTextBox8.SaveFile(notes.GetPath() + "main-stats-formations.rtf");
-            }
-            catch
-            {
-                System.Windows.Forms.MessageBox.Show("Error saving formation notes. Please report this");
-            }
         }
 
         #region Formations Event Handlers
@@ -839,7 +831,7 @@ namespace SMRPGED.StatsEditor
         private void packNameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Escape)
-                panelSearchFormationNames.Visible = false;
+                panelSearchFormationPacks.Visible = false;
         }
         private void packNameTextBox_TextChanged(object sender, EventArgs e)
         {

@@ -8,7 +8,7 @@ namespace SMRPGED
     public class ProgramController
     {
         private Program App;
-        private Model model;
+        private Model model; public Model Model { get { return model; } }
         private State state = State.Instance;
 
         public ProgramController(Model model, Program app)
@@ -54,7 +54,7 @@ namespace SMRPGED
                 if (VerifyRom())
                 {
                     SMRPGED.Encryption.Stamp signature = model.DecryptRomSignature();
-                    
+
                     if (signature.Published)
                         model.ViewSignature(signature);
                 }
@@ -157,6 +157,10 @@ namespace SMRPGED
         {
             App.CreatePatchesWindow();
         }
+        public void Notes()
+        {
+            App.CreateNotesWindow();
+        }
         // MD5 hash methods
         public void CreateNewMd5Checksum()
         {
@@ -208,7 +212,7 @@ namespace SMRPGED
                 if (!stamp.Invalidated) // We have info
                 {
                     // Ask to save rom
-                    if (MessageBox.Show("Publishing a ROM requires saving. Save and publish this rom now?", "Save and Publish?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show("Publishing a ROM requires saving. Save and publish this rom now?", "LAZY SHELL", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         cipher.EncryptSignature(stamp, true);
                         return App.SaveRomFileAs(); // Save

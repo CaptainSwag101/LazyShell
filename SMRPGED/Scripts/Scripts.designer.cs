@@ -35,36 +35,28 @@ namespace SMRPGED.ScriptsEditor
             this.saveScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.battleScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importCurrentBattleScript = new System.Windows.Forms.ToolStripMenuItem();
-            this.importAllBattleScripts = new System.Windows.Forms.ToolStripMenuItem();
-            this.eventScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importCurrentEventScript = new System.Windows.Forms.ToolStripMenuItem();
             this.importAllEventScripts = new System.Windows.Forms.ToolStripMenuItem();
-            this.actionScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importCurrentActionScript = new System.Windows.Forms.ToolStripMenuItem();
             this.importAllActionScripts = new System.Windows.Forms.ToolStripMenuItem();
+            this.importAllBattleScripts = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportCurrentBattleScript = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportAllBattleScripts = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportCurrentEventScript = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAllEventScripts = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportCurrentActionScript = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAllActionScripts = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportAllBattleScripts = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.dumpTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpAnimationTexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearAllBattleScripts = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllEventScripts = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllActionScripts = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAllBattleScripts = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoPointerUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recalibratePointersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableHelpTipsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showDecHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageEventScripts = new System.Windows.Forms.TabPage();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -72,10 +64,6 @@ namespace SMRPGED.ScriptsEditor
             this.listBoxLabels = new System.Windows.Forms.TreeView();
             this.panel200 = new System.Windows.Forms.Panel();
             this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.panel24 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.EventScriptNotes = new System.Windows.Forms.RichTextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.panel16 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
@@ -113,6 +101,8 @@ namespace SMRPGED.ScriptsEditor
             this.eventName = new System.Windows.Forms.ComboBox();
             this.EvtScrLabel2 = new System.Windows.Forms.Label();
             this.EventNumber = new System.Windows.Forms.NumericUpDown();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addThisToNotesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel11 = new System.Windows.Forms.Panel();
             this.eventHexText = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -142,15 +132,9 @@ namespace SMRPGED.ScriptsEditor
             this.EvtScrLabel5 = new System.Windows.Forms.Label();
             this.tabPageBattleScripts = new System.Windows.Forms.TabPage();
             this.panel25 = new System.Windows.Forms.Panel();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.panel32 = new System.Windows.Forms.Panel();
             this.panel31 = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.panel30 = new System.Windows.Forms.Panel();
-            this.BatScrLabel8 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.BattleScriptNotes = new System.Windows.Forms.RichTextBox();
             this.panel29 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBoxMonster = new System.Windows.Forms.PictureBox();
@@ -220,8 +204,6 @@ namespace SMRPGED.ScriptsEditor
             this.tabControlScripts = new System.Windows.Forms.TabControl();
             this.tabPageAnimationScripts = new System.Windows.Forms.TabPage();
             this.panel34 = new System.Windows.Forms.Panel();
-            this.panel43 = new System.Windows.Forms.Panel();
-            this.panel44 = new System.Windows.Forms.Panel();
             this.panelAniControls = new System.Windows.Forms.Panel();
             this.applyAnimation = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -264,13 +246,12 @@ namespace SMRPGED.ScriptsEditor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStripGoto = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelConvertor = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabPageEventScripts.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panelSearchLabels.SuspendLayout();
             this.panel200.SuspendLayout();
-            this.panel24.SuspendLayout();
-            this.panel15.SuspendLayout();
             this.panel16.SuspendLayout();
             this.panel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumF)).BeginInit();
@@ -287,16 +268,14 @@ namespace SMRPGED.ScriptsEditor
             this.panel10.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EventNumber)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel23.SuspendLayout();
             this.panel22.SuspendLayout();
             this.tabPageBattleScripts.SuspendLayout();
             this.panel25.SuspendLayout();
-            this.panel21.SuspendLayout();
             this.panel31.SuspendLayout();
-            this.panel30.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel29.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).BeginInit();
             this.panel28.SuspendLayout();
@@ -322,7 +301,6 @@ namespace SMRPGED.ScriptsEditor
             this.tabControlScripts.SuspendLayout();
             this.tabPageAnimationScripts.SuspendLayout();
             this.panel34.SuspendLayout();
-            this.panel43.SuspendLayout();
             this.panelAniControls.SuspendLayout();
             this.panel40.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.aniNumF)).BeginInit();
@@ -366,16 +344,14 @@ namespace SMRPGED.ScriptsEditor
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(31, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveScriptsToolStripMenuItem
             // 
-            this.saveScriptsToolStripMenuItem.AutoSize = false;
             this.saveScriptsToolStripMenuItem.Name = "saveScriptsToolStripMenuItem";
             this.saveScriptsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveScriptsToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
+            this.saveScriptsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.saveScriptsToolStripMenuItem.Text = "Save Scripts";
             this.saveScriptsToolStripMenuItem.Click += new System.EventHandler(this.saveScriptsToolStripMenuItem_Click);
             // 
@@ -386,182 +362,78 @@ namespace SMRPGED.ScriptsEditor
             // 
             // importToolStripMenuItem
             // 
-            this.importToolStripMenuItem.AutoSize = false;
             this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.battleScriptsToolStripMenuItem,
-            this.eventScriptsToolStripMenuItem,
-            this.actionScriptsToolStripMenuItem});
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
-            this.importToolStripMenuItem.Text = "Import";
-            // 
-            // battleScriptsToolStripMenuItem
-            // 
-            this.battleScriptsToolStripMenuItem.AutoSize = false;
-            this.battleScriptsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importCurrentBattleScript,
+            this.importAllEventScripts,
+            this.importAllActionScripts,
             this.importAllBattleScripts});
-            this.battleScriptsToolStripMenuItem.Name = "battleScriptsToolStripMenuItem";
-            this.battleScriptsToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.battleScriptsToolStripMenuItem.Text = "Battle Scripts";
-            // 
-            // importCurrentBattleScript
-            // 
-            this.importCurrentBattleScript.AutoSize = false;
-            this.importCurrentBattleScript.Name = "importCurrentBattleScript";
-            this.importCurrentBattleScript.Size = new System.Drawing.Size(152, 20);
-            this.importCurrentBattleScript.Text = "Current...";
-            this.importCurrentBattleScript.Click += new System.EventHandler(this.importCurrentBattleScript_Click);
-            // 
-            // importAllBattleScripts
-            // 
-            this.importAllBattleScripts.Name = "importAllBattleScripts";
-            this.importAllBattleScripts.Size = new System.Drawing.Size(123, 22);
-            this.importAllBattleScripts.Text = "All...";
-            this.importAllBattleScripts.Click += new System.EventHandler(this.importAllBattleScripts_Click);
-            // 
-            // eventScriptsToolStripMenuItem
-            // 
-            this.eventScriptsToolStripMenuItem.AutoSize = false;
-            this.eventScriptsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importCurrentEventScript,
-            this.importAllEventScripts});
-            this.eventScriptsToolStripMenuItem.Name = "eventScriptsToolStripMenuItem";
-            this.eventScriptsToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.eventScriptsToolStripMenuItem.Text = "Event Scripts";
-            // 
-            // importCurrentEventScript
-            // 
-            this.importCurrentEventScript.AutoSize = false;
-            this.importCurrentEventScript.Name = "importCurrentEventScript";
-            this.importCurrentEventScript.Size = new System.Drawing.Size(152, 20);
-            this.importCurrentEventScript.Text = "Current...";
-            this.importCurrentEventScript.Click += new System.EventHandler(this.importCurrentEventScript_Click);
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.importToolStripMenuItem.Text = "Import";
             // 
             // importAllEventScripts
             // 
             this.importAllEventScripts.Name = "importAllEventScripts";
-            this.importAllEventScripts.Size = new System.Drawing.Size(123, 22);
-            this.importAllEventScripts.Text = "All...";
+            this.importAllEventScripts.Size = new System.Drawing.Size(151, 22);
+            this.importAllEventScripts.Text = "Event Scripts...";
             this.importAllEventScripts.Click += new System.EventHandler(this.importAllEventScripts_Click);
-            // 
-            // actionScriptsToolStripMenuItem
-            // 
-            this.actionScriptsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importCurrentActionScript,
-            this.importAllActionScripts});
-            this.actionScriptsToolStripMenuItem.Name = "actionScriptsToolStripMenuItem";
-            this.actionScriptsToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.actionScriptsToolStripMenuItem.Text = "Action Scripts";
-            // 
-            // importCurrentActionScript
-            // 
-            this.importCurrentActionScript.AutoSize = false;
-            this.importCurrentActionScript.Name = "importCurrentActionScript";
-            this.importCurrentActionScript.Size = new System.Drawing.Size(152, 20);
-            this.importCurrentActionScript.Text = "Current...";
-            this.importCurrentActionScript.Click += new System.EventHandler(this.importCurrentActionScript_Click);
             // 
             // importAllActionScripts
             // 
             this.importAllActionScripts.Name = "importAllActionScripts";
-            this.importAllActionScripts.Size = new System.Drawing.Size(123, 22);
-            this.importAllActionScripts.Text = "All...";
+            this.importAllActionScripts.Size = new System.Drawing.Size(151, 22);
+            this.importAllActionScripts.Text = "Action Scripts...";
             this.importAllActionScripts.Click += new System.EventHandler(this.importAllActionScripts_Click);
+            // 
+            // importAllBattleScripts
+            // 
+            this.importAllBattleScripts.Name = "importAllBattleScripts";
+            this.importAllBattleScripts.Size = new System.Drawing.Size(151, 22);
+            this.importAllBattleScripts.Text = "Battle Scripts...";
+            this.importAllBattleScripts.Click += new System.EventHandler(this.importAllBattleScripts_Click);
             // 
             // exportToolStripMenuItem
             // 
-            this.exportToolStripMenuItem.AutoSize = false;
             this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem4,
-            this.toolStripMenuItem7,
+            this.exportAllEventScripts,
+            this.exportAllActionScripts,
+            this.exportAllBattleScripts,
+            this.toolStripSeparator3,
             this.dumpTextToolStripMenuItem,
             this.dumpAnimationTexToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.exportToolStripMenuItem.Text = "Export";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.AutoSize = false;
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportCurrentBattleScript,
-            this.exportAllBattleScripts});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(176, 20);
-            this.toolStripMenuItem1.Text = "Battle Scripts";
-            // 
-            // exportCurrentBattleScript
-            // 
-            this.exportCurrentBattleScript.AutoSize = false;
-            this.exportCurrentBattleScript.Name = "exportCurrentBattleScript";
-            this.exportCurrentBattleScript.Size = new System.Drawing.Size(152, 20);
-            this.exportCurrentBattleScript.Text = "Current...";
-            this.exportCurrentBattleScript.Click += new System.EventHandler(this.exportCurrentBattleScript_Click);
-            // 
-            // exportAllBattleScripts
-            // 
-            this.exportAllBattleScripts.Name = "exportAllBattleScripts";
-            this.exportAllBattleScripts.Size = new System.Drawing.Size(123, 22);
-            this.exportAllBattleScripts.Text = "All...";
-            this.exportAllBattleScripts.Click += new System.EventHandler(this.exportAllBattleScripts_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.AutoSize = false;
-            this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportCurrentEventScript,
-            this.exportAllEventScripts});
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(176, 20);
-            this.toolStripMenuItem4.Text = "Event Scripts";
-            // 
-            // exportCurrentEventScript
-            // 
-            this.exportCurrentEventScript.AutoSize = false;
-            this.exportCurrentEventScript.Name = "exportCurrentEventScript";
-            this.exportCurrentEventScript.Size = new System.Drawing.Size(152, 20);
-            this.exportCurrentEventScript.Text = "Current...";
-            this.exportCurrentEventScript.Click += new System.EventHandler(this.exportCurrentEventScript_Click);
             // 
             // exportAllEventScripts
             // 
             this.exportAllEventScripts.Name = "exportAllEventScripts";
-            this.exportAllEventScripts.Size = new System.Drawing.Size(123, 22);
-            this.exportAllEventScripts.Text = "All...";
+            this.exportAllEventScripts.Size = new System.Drawing.Size(176, 22);
+            this.exportAllEventScripts.Text = "Event Scripts...";
             this.exportAllEventScripts.Click += new System.EventHandler(this.exportAllEventScripts_Click);
-            // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.AutoSize = false;
-            this.toolStripMenuItem7.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportCurrentActionScript,
-            this.exportAllActionScripts});
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(176, 20);
-            this.toolStripMenuItem7.Text = "Action Scripts";
-            // 
-            // exportCurrentActionScript
-            // 
-            this.exportCurrentActionScript.AutoSize = false;
-            this.exportCurrentActionScript.Name = "exportCurrentActionScript";
-            this.exportCurrentActionScript.Size = new System.Drawing.Size(152, 20);
-            this.exportCurrentActionScript.Text = "Current...";
-            this.exportCurrentActionScript.Click += new System.EventHandler(this.exportCurrentActionScript_Click);
             // 
             // exportAllActionScripts
             // 
             this.exportAllActionScripts.Name = "exportAllActionScripts";
-            this.exportAllActionScripts.Size = new System.Drawing.Size(123, 22);
-            this.exportAllActionScripts.Text = "All...";
+            this.exportAllActionScripts.Size = new System.Drawing.Size(176, 22);
+            this.exportAllActionScripts.Text = "Action Scripts...";
             this.exportAllActionScripts.Click += new System.EventHandler(this.exportAllActionScripts_Click);
+            // 
+            // exportAllBattleScripts
+            // 
+            this.exportAllBattleScripts.Name = "exportAllBattleScripts";
+            this.exportAllBattleScripts.Size = new System.Drawing.Size(176, 22);
+            this.exportAllBattleScripts.Text = "Battle Scripts...";
+            this.exportAllBattleScripts.Click += new System.EventHandler(this.exportAllBattleScripts_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(173, 6);
             // 
             // dumpTextToolStripMenuItem
             // 
-            this.dumpTextToolStripMenuItem.AutoSize = false;
             this.dumpTextToolStripMenuItem.Name = "dumpTextToolStripMenuItem";
-            this.dumpTextToolStripMenuItem.Size = new System.Drawing.Size(176, 20);
+            this.dumpTextToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.dumpTextToolStripMenuItem.Text = "Dump Event Text";
             this.dumpTextToolStripMenuItem.Click += new System.EventHandler(this.dumpTextToolStripMenuItem_Click);
             // 
@@ -574,37 +446,34 @@ namespace SMRPGED.ScriptsEditor
             // 
             // clearToolStripMenuItem
             // 
-            this.clearToolStripMenuItem.AutoSize = false;
             this.clearToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearAllBattleScripts,
             this.clearAllEventScripts,
-            this.clearAllActionScripts});
+            this.clearAllActionScripts,
+            this.clearAllBattleScripts});
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
-            this.clearToolStripMenuItem.Text = "Clear All";
-            // 
-            // clearAllBattleScripts
-            // 
-            this.clearAllBattleScripts.AutoSize = false;
-            this.clearAllBattleScripts.Name = "clearAllBattleScripts";
-            this.clearAllBattleScripts.Size = new System.Drawing.Size(152, 20);
-            this.clearAllBattleScripts.Text = "Battle Scripts";
-            this.clearAllBattleScripts.Click += new System.EventHandler(this.clearAllBattleScripts_Click);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.clearToolStripMenuItem.Text = "Clear";
             // 
             // clearAllEventScripts
             // 
-            this.clearAllEventScripts.AutoSize = false;
             this.clearAllEventScripts.Name = "clearAllEventScripts";
-            this.clearAllEventScripts.Size = new System.Drawing.Size(152, 20);
-            this.clearAllEventScripts.Text = "Event Scripts";
+            this.clearAllEventScripts.Size = new System.Drawing.Size(151, 22);
+            this.clearAllEventScripts.Text = "Event Scripts...";
             this.clearAllEventScripts.Click += new System.EventHandler(this.clearAllEventScripts_Click);
             // 
             // clearAllActionScripts
             // 
             this.clearAllActionScripts.Name = "clearAllActionScripts";
-            this.clearAllActionScripts.Size = new System.Drawing.Size(139, 22);
-            this.clearAllActionScripts.Text = "Action Scripts";
+            this.clearAllActionScripts.Size = new System.Drawing.Size(151, 22);
+            this.clearAllActionScripts.Text = "Action Scripts...";
             this.clearAllActionScripts.Click += new System.EventHandler(this.clearAllActionScripts_Click);
+            // 
+            // clearAllBattleScripts
+            // 
+            this.clearAllBattleScripts.Name = "clearAllBattleScripts";
+            this.clearAllBattleScripts.Size = new System.Drawing.Size(151, 22);
+            this.clearAllBattleScripts.Text = "Battle Scripts...";
+            this.clearAllBattleScripts.Click += new System.EventHandler(this.clearAllBattleScripts_Click);
             // 
             // toolStripSeparator2
             // 
@@ -621,7 +490,8 @@ namespace SMRPGED.ScriptsEditor
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.autoPointerUpdateToolStripMenuItem});
+            this.autoPointerUpdateToolStripMenuItem,
+            this.recalibratePointersToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.viewToolStripMenuItem.Text = "Edit";
@@ -629,23 +499,47 @@ namespace SMRPGED.ScriptsEditor
             // autoPointerUpdateToolStripMenuItem
             // 
             this.autoPointerUpdateToolStripMenuItem.Name = "autoPointerUpdateToolStripMenuItem";
-            this.autoPointerUpdateToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.autoPointerUpdateToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.autoPointerUpdateToolStripMenuItem.Text = "Auto Pointer Update";
             this.autoPointerUpdateToolStripMenuItem.Click += new System.EventHandler(this.autoPointerUpdateToolStripMenuItem_Click);
+            // 
+            // recalibratePointersToolStripMenuItem
+            // 
+            this.recalibratePointersToolStripMenuItem.Name = "recalibratePointersToolStripMenuItem";
+            this.recalibratePointersToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.recalibratePointersToolStripMenuItem.Text = "Recalibrate Pointers...";
+            this.recalibratePointersToolStripMenuItem.Click += new System.EventHandler(this.recalibratePointersToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enableHelpTipsToolStripMenuItem,
+            this.showDecHexToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(36, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // enableHelpTipsToolStripMenuItem
+            // 
+            this.enableHelpTipsToolStripMenuItem.CheckOnClick = true;
+            this.enableHelpTipsToolStripMenuItem.Name = "enableHelpTipsToolStripMenuItem";
+            this.enableHelpTipsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.enableHelpTipsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.enableHelpTipsToolStripMenuItem.Text = "Enable Help Tips";
+            // 
+            // showDecHexToolStripMenuItem
+            // 
+            this.showDecHexToolStripMenuItem.CheckOnClick = true;
+            this.showDecHexToolStripMenuItem.Name = "showDecHexToolStripMenuItem";
+            this.showDecHexToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.showDecHexToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.showDecHexToolStripMenuItem.Text = "Show Dec <> Hex";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -668,7 +562,6 @@ namespace SMRPGED.ScriptsEditor
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel7.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
             this.panel7.Controls.Add(this.panelSearchLabels);
-            this.panel7.Controls.Add(this.panel24);
             this.panel7.Controls.Add(this.panel16);
             this.panel7.Controls.Add(this.panel20);
             this.panel7.Controls.Add(this.panel38);
@@ -732,51 +625,6 @@ namespace SMRPGED.ScriptsEditor
             this.nameTextBox.TabIndex = 4;
             this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
             this.nameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nameTextBox_KeyDown);
-            // 
-            // panel24
-            // 
-            this.panel24.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel24.Controls.Add(this.panel15);
-            this.panel24.Controls.Add(this.label12);
-            this.panel24.Location = new System.Drawing.Point(850, 411);
-            this.panel24.Name = "panel24";
-            this.panel24.Size = new System.Drawing.Size(130, 208);
-            this.panel24.TabIndex = 400;
-            // 
-            // panel15
-            // 
-            this.panel15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel15.BackColor = System.Drawing.SystemColors.Window;
-            this.panel15.Controls.Add(this.EventScriptNotes);
-            this.panel15.Location = new System.Drawing.Point(2, 21);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(126, 185);
-            this.panel15.TabIndex = 29;
-            // 
-            // EventScriptNotes
-            // 
-            this.EventScriptNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.EventScriptNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.EventScriptNotes.Location = new System.Drawing.Point(5, 5);
-            this.EventScriptNotes.Name = "EventScriptNotes";
-            this.EventScriptNotes.Size = new System.Drawing.Size(116, 174);
-            this.EventScriptNotes.TabIndex = 319;
-            this.EventScriptNotes.Text = "";
-            // 
-            // label12
-            // 
-            this.label12.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.SystemColors.Control;
-            this.label12.Location = new System.Drawing.Point(2, 2);
-            this.label12.Name = "label12";
-            this.label12.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label12.Size = new System.Drawing.Size(126, 17);
-            this.label12.TabIndex = 411;
-            this.label12.Text = "NOTES...";
             // 
             // panel16
             // 
@@ -1259,11 +1107,12 @@ namespace SMRPGED.ScriptsEditor
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.eventLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.eventLabel.Location = new System.Drawing.Point(4, 1);
-            this.eventLabel.MaxLength = 13;
+            this.eventLabel.MaxLength = 128;
             this.eventLabel.Name = "eventLabel";
             this.eventLabel.Size = new System.Drawing.Size(463, 14);
             this.eventLabel.TabIndex = 0;
             this.eventLabel.TextChanged += new System.EventHandler(this.eventLabel_TextChanged);
+            this.eventLabel.Leave += new System.EventHandler(this.eventLabel_Leave);
             // 
             // panel10
             // 
@@ -1324,6 +1173,7 @@ namespace SMRPGED.ScriptsEditor
             this.EventNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.EventNumber.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.EventNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.EventNumber.ContextMenuStrip = this.contextMenuStrip1;
             this.EventNumber.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EventNumber.ForeColor = System.Drawing.SystemColors.Control;
             this.EventNumber.Location = new System.Drawing.Point(462, 2);
@@ -1337,6 +1187,22 @@ namespace SMRPGED.ScriptsEditor
             this.EventNumber.TabIndex = 2;
             this.EventNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.EventNumber.ValueChanged += new System.EventHandler(this.EventNumber_ValueChanged);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addThisToNotesDatabaseToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextMenuStrip1.ShowImageMargin = false;
+            this.contextMenuStrip1.Size = new System.Drawing.Size(192, 26);
+            // 
+            // addThisToNotesDatabaseToolStripMenuItem
+            // 
+            this.addThisToNotesDatabaseToolStripMenuItem.Name = "addThisToNotesDatabaseToolStripMenuItem";
+            this.addThisToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.addThisToNotesDatabaseToolStripMenuItem.Text = "Add this to notes database...";
+            this.addThisToNotesDatabaseToolStripMenuItem.Click += new System.EventHandler(this.addThisToNotesDatabaseToolStripMenuItem_Click);
             // 
             // panel11
             // 
@@ -1730,9 +1596,7 @@ namespace SMRPGED.ScriptsEditor
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel25.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panel25.Controls.Add(this.panel21);
             this.panel25.Controls.Add(this.panel31);
-            this.panel25.Controls.Add(this.panel30);
             this.panel25.Controls.Add(this.panel29);
             this.panel25.Controls.Add(this.panel28);
             this.panel25.Controls.Add(this.panel27);
@@ -1743,27 +1607,6 @@ namespace SMRPGED.ScriptsEditor
             this.panel25.Size = new System.Drawing.Size(987, 625);
             this.panel25.TabIndex = 391;
             // 
-            // panel21
-            // 
-            this.panel21.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel21.Controls.Add(this.panel32);
-            this.panel21.Location = new System.Drawing.Point(562, 585);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(419, 34);
-            this.panel21.TabIndex = 397;
-            // 
-            // panel32
-            // 
-            this.panel32.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel32.BackColor = System.Drawing.SystemColors.Control;
-            this.panel32.Location = new System.Drawing.Point(2, 2);
-            this.panel32.Name = "panel32";
-            this.panel32.Size = new System.Drawing.Size(415, 30);
-            this.panel32.TabIndex = 391;
-            // 
             // panel31
             // 
             this.panel31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1771,7 +1614,7 @@ namespace SMRPGED.ScriptsEditor
             this.panel31.Controls.Add(this.listBox1);
             this.panel31.Location = new System.Drawing.Point(828, 6);
             this.panel31.Name = "panel31";
-            this.panel31.Size = new System.Drawing.Size(153, 289);
+            this.panel31.Size = new System.Drawing.Size(153, 594);
             this.panel31.TabIndex = 396;
             // 
             // label17
@@ -1790,7 +1633,6 @@ namespace SMRPGED.ScriptsEditor
             // 
             this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.IntegralHeight = false;
             this.listBox1.Items.AddRange(new object[] {
             "Do 1 attack",
             "Do 1 of 3 attacks",
@@ -1838,49 +1680,9 @@ namespace SMRPGED.ScriptsEditor
             "If attack phase ="});
             this.listBox1.Location = new System.Drawing.Point(2, 20);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(149, 267);
+            this.listBox1.Size = new System.Drawing.Size(149, 572);
             this.listBox1.TabIndex = 59;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // panel30
-            // 
-            this.panel30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel30.Controls.Add(this.BatScrLabel8);
-            this.panel30.Controls.Add(this.panel3);
-            this.panel30.Location = new System.Drawing.Point(828, 301);
-            this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(153, 278);
-            this.panel30.TabIndex = 395;
-            // 
-            // BatScrLabel8
-            // 
-            this.BatScrLabel8.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.BatScrLabel8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BatScrLabel8.ForeColor = System.Drawing.SystemColors.Control;
-            this.BatScrLabel8.Location = new System.Drawing.Point(2, 2);
-            this.BatScrLabel8.Name = "BatScrLabel8";
-            this.BatScrLabel8.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.BatScrLabel8.Size = new System.Drawing.Size(149, 17);
-            this.BatScrLabel8.TabIndex = 249;
-            this.BatScrLabel8.Text = "NOTES...";
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Window;
-            this.panel3.Controls.Add(this.BattleScriptNotes);
-            this.panel3.Location = new System.Drawing.Point(2, 21);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(149, 255);
-            this.panel3.TabIndex = 60;
-            // 
-            // BattleScriptNotes
-            // 
-            this.BattleScriptNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.BattleScriptNotes.Location = new System.Drawing.Point(5, 5);
-            this.BattleScriptNotes.Name = "BattleScriptNotes";
-            this.BattleScriptNotes.Size = new System.Drawing.Size(139, 244);
-            this.BattleScriptNotes.TabIndex = 319;
-            this.BattleScriptNotes.Text = "";
             // 
             // panel29
             // 
@@ -2580,6 +2382,7 @@ namespace SMRPGED.ScriptsEditor
             this.monsterNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.monsterNumber.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.monsterNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.monsterNumber.ContextMenuStrip = this.contextMenuStrip1;
             this.monsterNumber.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.monsterNumber.ForeColor = System.Drawing.SystemColors.Control;
             this.monsterNumber.Location = new System.Drawing.Point(462, 2);
@@ -2832,7 +2635,6 @@ namespace SMRPGED.ScriptsEditor
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel34.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panel34.Controls.Add(this.panel43);
             this.panel34.Controls.Add(this.panelAniControls);
             this.panel34.Controls.Add(this.emptyAnimationMods);
             this.panel34.Controls.Add(this.aniMoveDown);
@@ -2846,27 +2648,6 @@ namespace SMRPGED.ScriptsEditor
             this.panel34.Name = "panel34";
             this.panel34.Size = new System.Drawing.Size(987, 625);
             this.panel34.TabIndex = 394;
-            // 
-            // panel43
-            // 
-            this.panel43.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel43.Controls.Add(this.panel44);
-            this.panel43.Location = new System.Drawing.Point(699, 274);
-            this.panel43.Name = "panel43";
-            this.panel43.Size = new System.Drawing.Size(282, 318);
-            this.panel43.TabIndex = 420;
-            // 
-            // panel44
-            // 
-            this.panel44.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel44.BackColor = System.Drawing.SystemColors.Control;
-            this.panel44.Location = new System.Drawing.Point(2, 2);
-            this.panel44.Name = "panel44";
-            this.panel44.Size = new System.Drawing.Size(278, 314);
-            this.panel44.TabIndex = 391;
             // 
             // panelAniControls
             // 
@@ -3411,6 +3192,18 @@ namespace SMRPGED.ScriptsEditor
             this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
             this.goToToolStripMenuItem.Size = new System.Drawing.Size(42, 22);
             // 
+            // labelConvertor
+            // 
+            this.labelConvertor.AutoSize = true;
+            this.labelConvertor.BackColor = System.Drawing.Color.White;
+            this.labelConvertor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelConvertor.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelConvertor.Location = new System.Drawing.Point(179, 0);
+            this.labelConvertor.Name = "labelConvertor";
+            this.labelConvertor.Size = new System.Drawing.Size(2, 15);
+            this.labelConvertor.TabIndex = 56;
+            this.labelConvertor.Visible = false;
+            // 
             // Scripts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3418,6 +3211,7 @@ namespace SMRPGED.ScriptsEditor
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(1014, 699);
             this.ClientSize = new System.Drawing.Size(1014, 699);
+            this.Controls.Add(this.labelConvertor);
             this.Controls.Add(this.tabControlScripts);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
@@ -3427,7 +3221,7 @@ namespace SMRPGED.ScriptsEditor
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Scripts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "EDITING SCRIPTS...";
+            this.Text = "SCRIPTS - Lazy Shell";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Scripts_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Scripts_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Scripts_KeyDown);
@@ -3438,8 +3232,6 @@ namespace SMRPGED.ScriptsEditor
             this.panelSearchLabels.ResumeLayout(false);
             this.panel200.ResumeLayout(false);
             this.panel200.PerformLayout();
-            this.panel24.ResumeLayout(false);
-            this.panel15.ResumeLayout(false);
             this.panel16.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.evtNumF)).EndInit();
@@ -3457,6 +3249,7 @@ namespace SMRPGED.ScriptsEditor
             this.panel10.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.EventNumber)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -3464,10 +3257,7 @@ namespace SMRPGED.ScriptsEditor
             this.panel22.ResumeLayout(false);
             this.tabPageBattleScripts.ResumeLayout(false);
             this.panel25.ResumeLayout(false);
-            this.panel21.ResumeLayout(false);
             this.panel31.ResumeLayout(false);
-            this.panel30.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
             this.panel29.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).EndInit();
             this.panel28.ResumeLayout(false);
@@ -3493,7 +3283,6 @@ namespace SMRPGED.ScriptsEditor
             this.tabControlScripts.ResumeLayout(false);
             this.tabPageAnimationScripts.ResumeLayout(false);
             this.panel34.ResumeLayout(false);
-            this.panel43.ResumeLayout(false);
             this.panelAniControls.ResumeLayout(false);
             this.panel40.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.aniNumF)).EndInit();
@@ -3562,25 +3351,7 @@ namespace SMRPGED.ScriptsEditor
         private System.Windows.Forms.Label BatScrLabel3;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem battleScriptsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importCurrentBattleScript;
-        private System.Windows.Forms.ToolStripMenuItem importAllBattleScripts;
-        private System.Windows.Forms.ToolStripMenuItem eventScriptsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importCurrentEventScript;
-        private System.Windows.Forms.ToolStripMenuItem importAllEventScripts;
-        private System.Windows.Forms.ToolStripMenuItem actionScriptsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importCurrentActionScript;
-        private System.Windows.Forms.ToolStripMenuItem importAllActionScripts;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem exportCurrentBattleScript;
-        private System.Windows.Forms.ToolStripMenuItem exportAllBattleScripts;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem exportCurrentEventScript;
-        private System.Windows.Forms.ToolStripMenuItem exportAllEventScripts;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem exportCurrentActionScript;
-        private System.Windows.Forms.ToolStripMenuItem exportAllActionScripts;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearAllBattleScripts;
         private System.Windows.Forms.ToolStripMenuItem clearAllEventScripts;
@@ -3605,13 +3376,7 @@ namespace SMRPGED.ScriptsEditor
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.ComboBox evtNameA;
         private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.RichTextBox BattleScriptNotes;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label BatScrLabel8;
-        private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.RichTextBox EventScriptNotes;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button buttonInsertEvent;
         private System.Windows.Forms.ListBox cpuCommands;
         private System.Windows.Forms.Label label16;
@@ -3681,7 +3446,6 @@ namespace SMRPGED.ScriptsEditor
         private System.Windows.Forms.TextBox eventHexText;
         private System.Windows.Forms.Button battlePreview;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel24;
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.Panel panel20;
         private System.Windows.Forms.Panel panel10;
@@ -3690,12 +3454,9 @@ namespace SMRPGED.ScriptsEditor
         private System.Windows.Forms.Panel panel25;
         private System.Windows.Forms.Panel panel26;
         private System.Windows.Forms.Panel panel31;
-        private System.Windows.Forms.Panel panel30;
         private System.Windows.Forms.Panel panel29;
         private System.Windows.Forms.Panel panel28;
         private System.Windows.Forms.Panel panel27;
-        private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.Panel panel32;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripGoto;
         private System.Windows.Forms.ToolStripMenuItem goToToolStripMenuItem;
         private System.Windows.Forms.Panel panel34;
@@ -3726,8 +3487,6 @@ namespace SMRPGED.ScriptsEditor
         private System.Windows.Forms.Button emptyAnimationMods;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel40;
-        private System.Windows.Forms.Panel panel43;
-        private System.Windows.Forms.Panel panel44;
         private System.Windows.Forms.Button applyAnimation;
         private System.Windows.Forms.Label aniTitleB;
         private System.Windows.Forms.CheckedListBox aniBits;
@@ -3751,6 +3510,19 @@ namespace SMRPGED.ScriptsEditor
         private System.Windows.Forms.ComboBox aniNameB;
         private System.Windows.Forms.Panel panelAniControls;
         private System.Windows.Forms.ToolStripMenuItem dumpAnimationTexToolStripMenuItem;
+        private System.Windows.Forms.Label labelConvertor;
+        private System.Windows.Forms.ToolStripMenuItem showDecHexToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enableHelpTipsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem recalibratePointersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importAllEventScripts;
+        private System.Windows.Forms.ToolStripMenuItem importAllActionScripts;
+        private System.Windows.Forms.ToolStripMenuItem importAllBattleScripts;
+        private System.Windows.Forms.ToolStripMenuItem exportAllEventScripts;
+        private System.Windows.Forms.ToolStripMenuItem exportAllActionScripts;
+        private System.Windows.Forms.ToolStripMenuItem exportAllBattleScripts;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem addThisToNotesDatabaseToolStripMenuItem;
     }
 }
 

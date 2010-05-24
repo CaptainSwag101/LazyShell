@@ -48,6 +48,7 @@ namespace SMRPGED.Encryption
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "VerifyBeta";
             this.ResumeLayout(false);
 

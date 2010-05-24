@@ -250,7 +250,7 @@ namespace SMRPGED
             {
                 offsetChange = 0;
                 graphicSets = null;
-                MessageBox.Show("Problem with Tileset Data: graphicSetIndex invalid, Please report this");
+                MessageBox.Show("Problem with Tileset Data: graphicSetIndex invalid, Please report this", "LAZY SHELL");
                 return null;
             }
 
@@ -826,7 +826,7 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem loading the file.");
+                MessageBox.Show("There was a problem loading the file.", "LAZY SHELL");
                 return;
             }
         }
@@ -838,12 +838,12 @@ namespace SMRPGED
             if (tabControl2.SelectedIndex != 4)
             {
                 if (currentLayer != 2)
-                    saveFileDialog.FileName = "graphicSet." + (levelMap.GraphicSetA + 0x48).ToString("X2") + "-" + levelMap.GraphicSetE.ToString("X2");
+                    saveFileDialog.FileName = "graphicSet." + (levelMap.GraphicSetA + 0x48).ToString("d3") + "-" + levelMap.GraphicSetE.ToString("d3");
                 else
-                    saveFileDialog.FileName = "graphicSet." + (battlefields[(int)battlefieldNum.Value].GraphicSetA + 0x48).ToString("X2") + "-" + battlefields[(int)battlefieldNum.Value].GraphicSetE.ToString("X2");
+                    saveFileDialog.FileName = "graphicSet." + (battlefields[(int)battlefieldNum.Value].GraphicSetA + 0x48).ToString("d3") + "-" + battlefields[(int)battlefieldNum.Value].GraphicSetE.ToString("d3");
             }
             else
-                saveFileDialog.FileName = "graphicSet." + levelMap.GraphicSetL3.ToString("X2");
+                saveFileDialog.FileName = "graphicSet." + levelMap.GraphicSetL3.ToString("d3");
             saveFileDialog.RestoreDirectory = true;
 
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
@@ -871,7 +871,7 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem exporting the graphic block.");
+                MessageBox.Show("There was a problem exporting the graphic block.", "LAZY SHELL");
             }
         }
         private void saveImageToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -994,7 +994,6 @@ namespace SMRPGED
 
             if (!panelTileEditorMax)
             {
-                panel10.Visible = true;
                 label67.Visible = true;
                 panelTileEditor.Size = new Size(260, 426);
                 panelTileEditor.Location = new Point(rightEdge - panelTileEditor.Width, 98);
@@ -1003,7 +1002,6 @@ namespace SMRPGED
             else
             {
                 Size s = panel1.Size;
-                panel10.Visible = false;
                 label67.Visible = false;
                 panelTileEditor.Location = panel1.Location;
                 panelTileEditor.Size = new Size(s.Width, s.Height);

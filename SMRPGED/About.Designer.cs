@@ -50,7 +50,7 @@ namespace SMRPGED
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(473, 269);
+            this.panel1.Size = new System.Drawing.Size(473, 279);
             this.panel1.TabIndex = 311;
             // 
             // button1
@@ -61,7 +61,7 @@ namespace SMRPGED
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(2, 244);
+            this.button1.Location = new System.Drawing.Point(2, 254);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(469, 23);
             this.button1.TabIndex = 316;
@@ -80,7 +80,7 @@ namespace SMRPGED
             this.panel2.Controls.Add(this.richTextBox1);
             this.panel2.Location = new System.Drawing.Point(2, 57);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(469, 185);
+            this.panel2.Size = new System.Drawing.Size(469, 195);
             this.panel2.TabIndex = 315;
             // 
             // richTextBox1
@@ -93,7 +93,7 @@ namespace SMRPGED
             this.richTextBox1.Location = new System.Drawing.Point(65, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(398, 173);
+            this.richTextBox1.Size = new System.Drawing.Size(398, 183);
             this.richTextBox1.TabIndex = 316;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
@@ -112,7 +112,7 @@ namespace SMRPGED
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 291);
+            this.ClientSize = new System.Drawing.Size(494, 301);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

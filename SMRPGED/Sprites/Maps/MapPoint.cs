@@ -19,7 +19,7 @@ namespace SMRPGED
 
         private bool goMapPoint; public bool GoMapPoint { get { return goMapPoint; } set { goMapPoint = value; } }
 
-        private byte destination; public byte Destination { get { return destination; } set { destination = value; } }
+        private ushort runEvent; public ushort RunEvent { get { return runEvent; } set { runEvent = value; } }
 
         private byte whichPointCheckBit; public byte WhichPointCheckBit { get { return whichPointCheckBit; } set { whichPointCheckBit = value; } }
         private ushort whichPointCheckAddress; public ushort WhichPointCheckAddress { get { return whichPointCheckAddress; } set { whichPointCheckAddress = value; } }
@@ -66,7 +66,7 @@ namespace SMRPGED
 
             if (!goMapPoint)
             {
-                destination = data[offset];
+                runEvent = BitManager.GetShort(data, offset);
                 offset += 4;
             }
             else
@@ -158,7 +158,7 @@ namespace SMRPGED
 
             if (!goMapPoint)
             {
-                data[offset] = destination; offset += 2;
+                BitManager.SetShort(data, offset, runEvent); offset += 2;
                 BitManager.SetShort(data, offset, 0xFFFF); offset += 2;
             }
             else
@@ -224,7 +224,7 @@ namespace SMRPGED
             showCheckBit = 0;
             showCheckAddress = 0x7045;
             goMapPoint = false;
-            destination = 0;
+            runEvent = 0;
             whichPointCheckAddress = 0x7045;
             whichPointCheckBit = 0;
             goMapPointA = 0;

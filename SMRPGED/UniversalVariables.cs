@@ -122,7 +122,7 @@ namespace SMRPGED
 
             for (int i = 0; i < names.Count; i++)
             {
-                levelNames[i] = "[" + i.ToString("X3") + "]  " + names[i];
+                levelNames[i] = "[" + i.ToString("d3") + "]  " + names[i];
             }
         }
         public string GetLevelName(int levelNum)
@@ -133,7 +133,9 @@ namespace SMRPGED
         }
         public void RefreshLevelName(int levelNum)
         {
-            levelNames[levelNum] = "[" + levelNum.ToString("X3") + "]  " + settings.LevelNames[levelNum];
+            levelNames[levelNum] = "[" + levelNum.ToString("d3") + "]  " + settings.LevelNames[levelNum];
         }
+
+        private NotesDB notes; public NotesDB Notes { get { return this.notes; } set { this.notes = value; } }
     }
 }

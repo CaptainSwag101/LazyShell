@@ -13,12 +13,27 @@ namespace SMRPGED
     {
         private byte[] data;
         private Model model;
+        private BackgroundWorker backgroundWorker;
         public ProgressBar(Model model, byte[] data, string title, int max)
         {
             InitializeComponent();
+
+            loadingWhat.Width += buttonCancel.Width + 2;
+            buttonCancel.Visible = false;
+
             this.model = model;
             this.data = data;
             this.Text = title;
+            this.progressBar1.Maximum = max;
+        }
+        public ProgressBar(Model model, byte[] data, string title, int max, BackgroundWorker backgroundWorker)
+        {
+            InitializeComponent();
+
+            this.model = model;
+            this.data = data;
+            this.Text = title;
+            this.backgroundWorker = backgroundWorker;
             this.progressBar1.Maximum = max;
         }
         public void PerformStep(string labelText)
@@ -31,6 +46,11 @@ namespace SMRPGED
         {
             progressBar1.Value += amount;
             this.Update();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            backgroundWorker.CancelAsync();
         }
     }
 }

@@ -14,41 +14,6 @@ namespace SMRPGED
 
         private MapPoint[] mapPoints;
         private int currentMapPoint;
-        private static string[] worldMapLevels = new string[]
-            {
-               "Bowser's Keep (talk to Exor)",
-               "Mario's Pad",
-               "Mushroom Way",
-               "Mushroom Kingdom",
-               "Bandit's Way",
-               "Kero Sewers",
-               "Midas River",
-               "Tadpole Pond",
-               "Pipe Vault",
-               "Rose Way",
-               "Rose Town",
-               "Forest Maze",
-               "Yo'ster Island",
-               "Moleville",
-               "Booster Pass",
-               "Booster Tower",
-               "Marrymore",
-               "Star Hill",
-               "Seaside Town",
-               "Sea",
-               "Sunken Ship",
-               "Land's End",
-               "Monstro Town",
-               "Bean Valley",
-               "Nimbus Land",
-               "Barrel Volcano",
-               "Vista Hill",
-               "Booster Hill",
-               "Bowser's Keep (2nd time)",
-               "Gate",
-               "Grate Guy's Casino",
-               "Debug Room"
-            };
 
         #endregion
 
@@ -87,8 +52,11 @@ namespace SMRPGED
 
             if (mapPoints[currentMapPoint].GoMapPoint)
             {
+                label55.Text = "lead to destination";
                 whichPointCheckAddress.Enabled = true;
                 whichPointCheckBit.Enabled = true;
+                goMapPointA.BringToFront();
+                goMapPointA.Enabled = true;
                 goMapPointB.Enabled = true;
                 whichPointCheckAddress.Value = mapPoints[currentMapPoint].WhichPointCheckAddress;
                 whichPointCheckBit.Value = mapPoints[currentMapPoint].WhichPointCheckBit;
@@ -97,10 +65,14 @@ namespace SMRPGED
             }
             else
             {
+                runEvent.BringToFront();
+                runEventEdit.BringToFront();
+                label55.Text = "assigned event #";
                 whichPointCheckAddress.Enabled = false;
                 whichPointCheckBit.Enabled = false;
+                goMapPointA.Enabled = false;
                 goMapPointB.Enabled = false;
-                goMapPointA.SelectedIndex = mapPoints[currentMapPoint].Destination;
+                runEvent.Value = mapPoints[currentMapPoint].RunEvent;
             }
 
             enableEastPath.Checked = mapPoints[currentMapPoint].ToEastEnabled;
@@ -186,9 +158,7 @@ namespace SMRPGED
             toWestPoint.Items.Clear();
             toNorthPoint.Items.Clear();
 
-            if (!mapPoints[currentMapPoint].GoMapPoint)
-                goMapPointA.Items.AddRange(worldMapLevels);
-            else
+            if (mapPoints[currentMapPoint].GoMapPoint)
             {
                 for (int i = 0; i < mapPoints.Length; i++)
                     goMapPointA.Items.Add(mapPoints[i].MapPointText);
@@ -450,17 +420,23 @@ namespace SMRPGED
                 }
                 whichPointCheckAddress.Enabled = true;
                 whichPointCheckBit.Enabled = true;
+                label55.Text = "lead to destination";
+                goMapPointA.Enabled = true;
                 goMapPointB.Enabled = true;
+                goMapPointA.BringToFront();
                 goMapPointA.SelectedIndex = mapPoints[currentMapPoint].GoMapPointA;
                 goMapPointB.SelectedIndex = mapPoints[currentMapPoint].GoMapPointB;
             }
             else
             {
-                goMapPointA.Items.AddRange(worldMapLevels);
+                runEvent.BringToFront();
+                runEventEdit.BringToFront();
+                label55.Text = "assigned event #";
                 whichPointCheckAddress.Enabled = false;
                 whichPointCheckBit.Enabled = false;
+                goMapPointA.Enabled = false;
                 goMapPointB.Enabled = false;
-                goMapPointA.SelectedIndex = mapPoints[currentMapPoint].Destination;
+                runEvent.Value = mapPoints[currentMapPoint].RunEvent;
             }
         }
         private void whichPointCheckAddress_ValueChanged(object sender, EventArgs e)
@@ -481,8 +457,23 @@ namespace SMRPGED
 
             if (mapPoints[currentMapPoint].GoMapPoint)
                 mapPoints[currentMapPoint].GoMapPointA = (byte)goMapPointA.SelectedIndex;
-            else
-                mapPoints[currentMapPoint].Destination = (byte)goMapPointA.SelectedIndex;
+        }
+        private void runEvent_ValueChanged(object sender, EventArgs e)
+        {
+            if (updatingMapPoints) return;
+
+            if (!mapPoints[currentMapPoint].GoMapPoint)
+                mapPoints[currentMapPoint].RunEvent = (byte)runEvent.Value;
+        }
+        private void runEventEdit_Click(object sender, EventArgs e)
+        {
+            if (model.Program.Scripts == null || !model.Program.Scripts.Visible)
+                model.Program.CreateScriptsWindow();
+
+            model.Program.Scripts.TabControlScripts.SelectedIndex = 0;
+            model.Program.Scripts.EventName.SelectedIndex = 0;
+            model.Program.Scripts.EventNum.Value = runEvent.Value;
+            model.Program.Scripts.BringToFront();
         }
         private void goMapPointB_SelectedIndexChanged(object sender, EventArgs e)
         {

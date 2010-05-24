@@ -1,5 +1,7 @@
-v2.1
 Major changes/additions are indicated by ***
+
+
+v2.1
 
 DATE		PORTION		DESCRIPTION
 -------------------------------------------
@@ -67,3 +69,56 @@ DATE		PORTION		DESCRIPTION
 2009-09-05	Scripts		Added: scrollbar position of command trees now stays fixed when modifying commands
 2009-09-22	Sprites		Added: removed all dialogue character buttons, can insert by right-clicking font table
 2009-11-20	Sprites		Added: effects - import an external image file into the tileset
+
+
+v2.1.1
+
+DATE		PORTION		DESCRIPTION
+-------------------------------------------
+2010-02-01	Stats		Fixed: some errors in level-up stat saving
+
+
+v2.2
+
+DATE		PORTION		DESCRIPTION
+-------------------------------------------
+2010-04-20	Scripts		Modif: event, battle, and action scripts are exported to much smaller binaries
+2010-04-20	(all)		Modif: option of dumping NPC, event/action script text to a specific directory
+2010-04-22	(all)		Added: element importer; can import elements en masse from another ROM
+2010-04-22	(all)		Added: preview support for SNES9X; must manually load save however
+2010-04-22	Levels		Modif: edit NPCs auto-loads current NPC ID into the sub-editor
+2010-04-22	Levels		Fixed: no precautionary checks of free space of objects when importing level data
+2010-04-24	Levels		Fixed: not setting current exit when changing exit field type
+2010-04-24	Sprites		Fixed: exporting/importing world map palettes was very buggy
+2010-05-11	(all)		Added: base convertor for converting hex to/from decimal
+2010-05-11	(all)		Added: press F2 in any editor for a label showing a hex <> dec conversion for values
+2010-05-11	(all)		Modif: changed almost all indexes to decimal (ie. level, sprite #'s are in decimal)
+2010-05-11	Levels		Added: more editing options for editing NPCs
+2010-05-12	Scripts		Fixed: some text and labels were inaccurate, also sound & music names show in treeview
+2010-05-12	Sprites		Fixed: should be able to edit event # to run instead of generic map point destination
+2010-05-12	(all)		Added: SNES9X support for previewing
+
+
+v2.3
+
+DATE		PORTION		DESCRIPTION
+-------------------------------------------
+2010-05-19	(all)		Modif: everything is in decimal now (except for a few things like memory addresses)
+2010-05-20	(all)		Added: base conversion tool for converting between hexadecimal and decimal
+2010-05-20	(all)		Added: tool to quickly import elements from other ROM
+2010-05-20	Scripts		Added: pointer recalibration tool for adding/subtracting from pointers en masse
+2010-05-21	Scripts		Fixed: wrong indexes assigned to some commands in list
+2010-05-21	Sprites		Fixed: problems adding/removing sequences,frames,molds,etc.
+2010-05-21	(all)		Modif: clearing elements now more versatile, can clear within range now
+2010-05-21	(all)		Modif: import/export uses new window
+2010-05-21	Levels		Modif: progress bar for importing/exporting now separate window, used by events too
+
+***
+2010-05-22	(all)		Added: notes database builder, right click menus or values to add elements to DB
+***
+
+2010-05-22	(all)		Modif: removed notes textboxes because can now use database, moved controls around
+2010-05-22	(all)		Fixed: settings weren't saving every time they should
+2010-05-22	Stats		Fixed: timing for Ultra Jumps was saving wrong
+2010-05-23	Scripts		Fixed: right-clicking "Run dialogue" node wouldn't always open the menu
+2010-05-23	(all)		Added: warning when trying to run in 64-bit OS

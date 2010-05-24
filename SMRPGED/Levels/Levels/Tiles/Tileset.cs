@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace SMRPGED
 {
-    class Tileset
+    public class Tileset
     {
         private Model model;
         private LevelMap levelMap;
@@ -201,7 +201,7 @@ namespace SMRPGED
             {
                 offsetChange = 0;
                 graphicSets = null;
-                MessageBox.Show("Problem with Tileset Data: graphicSetIndex invalid, Please report this");
+                MessageBox.Show("Problem with Tileset Data: graphicSetIndex invalid, Please report this", "LAZY SHELL");
             }
             //else if (graphicSetIndex == 5) graphicSetData = graphicSet5; // only for layer 3
 

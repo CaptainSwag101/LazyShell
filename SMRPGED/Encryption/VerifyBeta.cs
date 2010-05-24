@@ -45,14 +45,14 @@ namespace SMRPGED.Encryption
                 Random r = new Random();
                 this.label1.Text = "                                 Beta Verified                                 ";
                 pass = true;
-                MessageBox.Show("Beta Version verifyied by author, Confirmation code: " + (tester + 0x126523 ^ r.Next(0x7FFFFFFF)).ToString("X8"));
+                MessageBox.Show("Beta Version verifyied by author, Confirmation code: " + (tester + 0x126523 ^ r.Next(0x7FFFFFFF)).ToString("X8"), "LAZY SHELL");
                 Pass();
             }
             else
             {
                 this.label1.Text = "                            Beta Verification Failed                           ";
                 pass = false;
-                MessageBox.Show("This beta version has NOT been verified \nNote: This is due to the authors deactivation of beta versions or a lack of internet connection");
+                MessageBox.Show("This beta version has NOT been verified \nNote: This is due to the authors deactivation of beta versions or a lack of internet connection", "LAZY SHELL");
                 Fail();
             }
         }

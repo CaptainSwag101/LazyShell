@@ -72,6 +72,8 @@ namespace SMRPGED
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel65 = new System.Windows.Forms.Panel();
+            this.npcCopy = new System.Windows.Forms.Button();
+            this.npcPaste = new System.Windows.Forms.Button();
             this.npcMoveUp = new System.Windows.Forms.Button();
             this.npcMoveDown = new System.Windows.Forms.Button();
             this.panel85 = new System.Windows.Forms.Panel();
@@ -101,8 +103,6 @@ namespace SMRPGED
             this.npcID = new System.Windows.Forms.NumericUpDown();
             this.label49 = new System.Windows.Forms.Label();
             this.npcMovement = new System.Windows.Forms.NumericUpDown();
-            this.label52 = new System.Windows.Forms.Label();
-            this.npcPaletteIndexPlus = new System.Windows.Forms.NumericUpDown();
             this.npcSpeedPlus = new System.Windows.Forms.NumericUpDown();
             this.npcEventORPack = new System.Windows.Forms.NumericUpDown();
             this.label54 = new System.Windows.Forms.Label();
@@ -128,8 +128,9 @@ namespace SMRPGED
             this.npcMapHeader = new System.Windows.Forms.NumericUpDown();
             this.openPartitions = new System.Windows.Forms.Button();
             this.panel118 = new System.Windows.Forms.Panel();
-            this.npcAttributesBattle = new System.Windows.Forms.CheckedListBox();
-            this.label118 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.panel119 = new System.Windows.Forms.Panel();
+            this.npcAfterBattle = new System.Windows.Forms.ComboBox();
             this.label112 = new System.Windows.Forms.Label();
             this.npcObjectTree = new System.Windows.Forms.TreeView();
             this.label36 = new System.Windows.Forms.Label();
@@ -137,12 +138,15 @@ namespace SMRPGED
             this.label33 = new System.Windows.Forms.Label();
             this.levelNum = new System.Windows.Forms.NumericUpDown();
             this.levelName = new System.Windows.Forms.ComboBox();
+            this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addThisLevelToNotesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.overlapShowTileset = new System.Windows.Forms.Button();
             this.panel99 = new System.Windows.Forms.Panel();
             this.overlapCoordZPlusHalf = new System.Windows.Forms.CheckBox();
@@ -161,10 +165,7 @@ namespace SMRPGED
             this.overlapFieldDelete = new System.Windows.Forms.Button();
             this.overlapFieldInsert = new System.Windows.Forms.Button();
             this.overlapFieldTree = new System.Windows.Forms.TreeView();
-            this.label128 = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.levelNotes = new System.Windows.Forms.RichTextBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.panel52 = new System.Windows.Forms.Panel();
             this.panel90 = new System.Windows.Forms.Panel();
@@ -307,21 +308,6 @@ namespace SMRPGED
             this.panel103 = new System.Windows.Forms.Panel();
             this.label138 = new System.Windows.Forms.Label();
             this.colEditSelectNone = new System.Windows.Forms.Button();
-            this.panelTemplates = new System.Windows.Forms.Panel();
-            this.templatesLoaded = new System.Windows.Forms.ListBox();
-            this.panel114 = new System.Windows.Forms.Panel();
-            this.pictureBoxTemplate = new System.Windows.Forms.PictureBox();
-            this.panel115 = new System.Windows.Forms.Panel();
-            this.templateRenameText = new System.Windows.Forms.TextBox();
-            this.templateRename = new System.Windows.Forms.Button();
-            this.labelTemplates = new System.Windows.Forms.Label();
-            this.panelTemplatesSub = new System.Windows.Forms.Panel();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator44 = new System.Windows.Forms.ToolStripSeparator();
-            this.templateTransfer = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator45 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator43 = new System.Windows.Forms.ToolStripSeparator();
             this.panelOverlapTileset = new System.Windows.Forms.Panel();
             this.pictureBoxOverlaps = new System.Windows.Forms.PictureBox();
             this.changeLevelName = new System.Windows.Forms.Button();
@@ -334,71 +320,6 @@ namespace SMRPGED
             this.panel58 = new System.Windows.Forms.Panel();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.listBoxLevelNames = new System.Windows.Forms.ListBox();
-            this.panelTilesets = new System.Windows.Forms.Panel();
-            this.labelTilesets = new System.Windows.Forms.Label();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.panel95 = new System.Windows.Forms.Panel();
-            this.panel96 = new System.Windows.Forms.Panel();
-            this.pictureBoxTilesetL1 = new System.Windows.Forms.PictureBox();
-            this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.panelBattlefields = new System.Windows.Forms.Panel();
-            this.panelBattlefieldTileset = new System.Windows.Forms.Panel();
-            this.panelBattlefieldPalettes = new System.Windows.Forms.Panel();
-            this.panel93 = new System.Windows.Forms.Panel();
-            this.labelBattlefieldPalettes = new System.Windows.Forms.Label();
-            this.battlefieldPaletteSetNum = new System.Windows.Forms.NumericUpDown();
-            this.pictureBoxColorBF = new System.Windows.Forms.PictureBox();
-            this.label102 = new System.Windows.Forms.Label();
-            this.bfPaletteGreenBar = new System.Windows.Forms.TrackBar();
-            this.panel60 = new System.Windows.Forms.Panel();
-            this.battlefieldPaletteSetName = new System.Windows.Forms.ComboBox();
-            this.bfPaletteBlueBar = new System.Windows.Forms.TrackBar();
-            this.bfPalettePictureBox = new System.Windows.Forms.PictureBox();
-            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.importPaletteSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportPaletteSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bfPaletteRedBar = new System.Windows.Forms.TrackBar();
-            this.bfPaletteRedNum = new System.Windows.Forms.NumericUpDown();
-            this.label123 = new System.Windows.Forms.Label();
-            this.label77 = new System.Windows.Forms.Label();
-            this.bfPaletteColorNum = new System.Windows.Forms.NumericUpDown();
-            this.bfPaletteBlueNum = new System.Windows.Forms.NumericUpDown();
-            this.label121 = new System.Windows.Forms.Label();
-            this.label78 = new System.Windows.Forms.Label();
-            this.bfPaletteGreenNum = new System.Windows.Forms.NumericUpDown();
-            this.panelBattlefieldProperties = new System.Windows.Forms.Panel();
-            this.panel92 = new System.Windows.Forms.Panel();
-            this.labelBattlefieldProperties = new System.Windows.Forms.Label();
-            this.label97 = new System.Windows.Forms.Label();
-            this.battlefieldGFXSet4Num = new System.Windows.Forms.NumericUpDown();
-            this.battlefieldGFXSet5Num = new System.Windows.Forms.NumericUpDown();
-            this.label98 = new System.Windows.Forms.Label();
-            this.battlefieldGFXSet3Num = new System.Windows.Forms.NumericUpDown();
-            this.panel57 = new System.Windows.Forms.Panel();
-            this.battlefieldGFXSet1Name = new System.Windows.Forms.ComboBox();
-            this.label99 = new System.Windows.Forms.Label();
-            this.panel56 = new System.Windows.Forms.Panel();
-            this.battlefieldGFXSet3Name = new System.Windows.Forms.ComboBox();
-            this.battlefieldGFXSet2Num = new System.Windows.Forms.NumericUpDown();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.battlefieldGFXSet5Name = new System.Windows.Forms.ComboBox();
-            this.label100 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.battlefieldGFXSet2Name = new System.Windows.Forms.ComboBox();
-            this.battlefieldGFXSet1Num = new System.Windows.Forms.NumericUpDown();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.battlefieldGFXSet4Name = new System.Windows.Forms.ComboBox();
-            this.label69 = new System.Windows.Forms.Label();
-            this.battlefieldTilesetNum = new System.Windows.Forms.NumericUpDown();
-            this.label101 = new System.Windows.Forms.Label();
-            this.panel59 = new System.Windows.Forms.Panel();
-            this.battlefieldTilesetName = new System.Windows.Forms.ComboBox();
-            this.panel45 = new System.Windows.Forms.Panel();
-            this.labelBattlefields = new System.Windows.Forms.Label();
-            this.panel61 = new System.Windows.Forms.Panel();
-            this.battlefieldName = new System.Windows.Forms.ComboBox();
-            this.battlefieldNum = new System.Windows.Forms.NumericUpDown();
             this.label26 = new System.Windows.Forms.Label();
             this.labelOrthCoords = new System.Windows.Forms.Label();
             this.panel27 = new System.Windows.Forms.Panel();
@@ -579,6 +500,9 @@ namespace SMRPGED
             this.colorBalance = new System.Windows.Forms.Button();
             this.paletteUpdate = new System.Windows.Forms.Button();
             this.palettePictureBox = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.importPaletteSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportPaletteSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paletteAutoUpdate = new System.Windows.Forms.CheckBox();
             this.mapPaletteRedNum = new System.Windows.Forms.NumericUpDown();
             this.label79 = new System.Windows.Forms.Label();
@@ -599,6 +523,83 @@ namespace SMRPGED
             this.panel63 = new System.Windows.Forms.Panel();
             this.labelTileCoords = new System.Windows.Forms.Label();
             this.labelPixelCoords = new System.Windows.Forms.Label();
+            this.panelTemplates = new System.Windows.Forms.Panel();
+            this.templatesLoaded = new System.Windows.Forms.ListBox();
+            this.panel114 = new System.Windows.Forms.Panel();
+            this.pictureBoxTemplate = new System.Windows.Forms.PictureBox();
+            this.panel115 = new System.Windows.Forms.Panel();
+            this.templateRenameText = new System.Windows.Forms.TextBox();
+            this.templateRename = new System.Windows.Forms.Button();
+            this.labelTemplates = new System.Windows.Forms.Label();
+            this.panelTemplatesSub = new System.Windows.Forms.Panel();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator44 = new System.Windows.Forms.ToolStripSeparator();
+            this.templateTransfer = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator45 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator43 = new System.Windows.Forms.ToolStripSeparator();
+            this.panelTilesets = new System.Windows.Forms.Panel();
+            this.labelTilesets = new System.Windows.Forms.Label();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel95 = new System.Windows.Forms.Panel();
+            this.panel96 = new System.Windows.Forms.Panel();
+            this.pictureBoxTilesetL1 = new System.Windows.Forms.PictureBox();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.panelBattlefields = new System.Windows.Forms.Panel();
+            this.panelBattlefieldTileset = new System.Windows.Forms.Panel();
+            this.panelBattlefieldPalettes = new System.Windows.Forms.Panel();
+            this.panel93 = new System.Windows.Forms.Panel();
+            this.labelBattlefieldPalettes = new System.Windows.Forms.Label();
+            this.battlefieldPaletteSetNum = new System.Windows.Forms.NumericUpDown();
+            this.pictureBoxColorBF = new System.Windows.Forms.PictureBox();
+            this.label102 = new System.Windows.Forms.Label();
+            this.bfPaletteGreenBar = new System.Windows.Forms.TrackBar();
+            this.panel60 = new System.Windows.Forms.Panel();
+            this.battlefieldPaletteSetName = new System.Windows.Forms.ComboBox();
+            this.bfPaletteBlueBar = new System.Windows.Forms.TrackBar();
+            this.bfPalettePictureBox = new System.Windows.Forms.PictureBox();
+            this.bfPaletteRedBar = new System.Windows.Forms.TrackBar();
+            this.bfPaletteRedNum = new System.Windows.Forms.NumericUpDown();
+            this.label123 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
+            this.bfPaletteColorNum = new System.Windows.Forms.NumericUpDown();
+            this.bfPaletteBlueNum = new System.Windows.Forms.NumericUpDown();
+            this.label121 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.bfPaletteGreenNum = new System.Windows.Forms.NumericUpDown();
+            this.panelBattlefieldProperties = new System.Windows.Forms.Panel();
+            this.panel92 = new System.Windows.Forms.Panel();
+            this.labelBattlefieldProperties = new System.Windows.Forms.Label();
+            this.label97 = new System.Windows.Forms.Label();
+            this.battlefieldGFXSet4Num = new System.Windows.Forms.NumericUpDown();
+            this.battlefieldGFXSet5Num = new System.Windows.Forms.NumericUpDown();
+            this.label98 = new System.Windows.Forms.Label();
+            this.battlefieldGFXSet3Num = new System.Windows.Forms.NumericUpDown();
+            this.panel57 = new System.Windows.Forms.Panel();
+            this.battlefieldGFXSet1Name = new System.Windows.Forms.ComboBox();
+            this.label99 = new System.Windows.Forms.Label();
+            this.panel56 = new System.Windows.Forms.Panel();
+            this.battlefieldGFXSet3Name = new System.Windows.Forms.ComboBox();
+            this.battlefieldGFXSet2Num = new System.Windows.Forms.NumericUpDown();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.battlefieldGFXSet5Name = new System.Windows.Forms.ComboBox();
+            this.label100 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.battlefieldGFXSet2Name = new System.Windows.Forms.ComboBox();
+            this.battlefieldGFXSet1Num = new System.Windows.Forms.NumericUpDown();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.battlefieldGFXSet4Name = new System.Windows.Forms.ComboBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.battlefieldTilesetNum = new System.Windows.Forms.NumericUpDown();
+            this.label101 = new System.Windows.Forms.Label();
+            this.panel59 = new System.Windows.Forms.Panel();
+            this.battlefieldTilesetName = new System.Windows.Forms.ComboBox();
+            this.panel45 = new System.Windows.Forms.Panel();
+            this.labelBattlefields = new System.Windows.Forms.Label();
+            this.panel61 = new System.Windows.Forms.Panel();
+            this.battlefieldName = new System.Windows.Forms.ComboBox();
+            this.battlefieldNum = new System.Windows.Forms.NumericUpDown();
             this.panelLevelZoom = new System.Windows.Forms.Panel();
             this.panel117 = new System.Windows.Forms.Panel();
             this.pictureBoxLevelZoom = new System.Windows.Forms.PictureBox();
@@ -654,15 +655,11 @@ namespace SMRPGED
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.levelDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
             this.arraysToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.graphicSetsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportLevelDataToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
             this.arraysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -671,34 +668,20 @@ namespace SMRPGED
             this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
             this.dumpTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.levelDataToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.allToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
-            this.tilesetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearLevelDataAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator38 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearTilesetsAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearTilemapsAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearPhysicalMapsAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearBattlefieldsAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
             this.unusedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tilemapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allToolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentToolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator39 = new System.Windows.Forms.ToolStripSeparator();
             this.unusedToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.physicalMapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator40 = new System.Windows.Forms.ToolStripSeparator();
             this.unusedToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.battlefieldsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.everythingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator42 = new System.Windows.Forms.ToolStripSeparator();
             this.unusedToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearAllComponentsAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAllComponentsCurrent = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.SpaceAnalyzerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -736,6 +719,7 @@ namespace SMRPGED
             this.eventFieldsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableHelpTipsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showDecHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -785,19 +769,11 @@ namespace SMRPGED
             this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
             this.opacityToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.label27 = new System.Windows.Forms.Label();
-            this.labelExportPercent = new System.Windows.Forms.Label();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.overlayOpacity = new System.Windows.Forms.TrackBar();
             this.ExportLevelImages = new System.ComponentModel.BackgroundWorker();
-            this.ExportLevelData = new System.ComponentModel.BackgroundWorker();
-            this.ImportLevelData = new System.ComponentModel.BackgroundWorker();
             this.labelOverlayOpacity = new System.Windows.Forms.Label();
             this.label67 = new System.Windows.Forms.Label();
-            this.panel10 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.panelOpacity = new System.Windows.Forms.Panel();
@@ -808,6 +784,7 @@ namespace SMRPGED
             this.panel116 = new System.Windows.Forms.Panel();
             this.templateName = new System.Windows.Forms.TextBox();
             this.labelToolTip = new System.Windows.Forms.Label();
+            this.labelConvertor = new System.Windows.Forms.Label();
             templateImport = new System.Windows.Forms.ToolStripButton();
             templateExport = new System.Windows.Forms.ToolStripButton();
             templateDelete = new System.Windows.Forms.ToolStripButton();
@@ -834,7 +811,6 @@ namespace SMRPGED
             this.panel83.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.npcID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcMovement)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcPaletteIndexPlus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcSpeedPlus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcEventORPack)).BeginInit();
             this.panel43.SuspendLayout();
@@ -844,8 +820,10 @@ namespace SMRPGED
             this.panel80.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.npcMapHeader)).BeginInit();
             this.panel118.SuspendLayout();
+            this.panel119.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelNum)).BeginInit();
+            this.contextMenuStrip4.SuspendLayout();
             this.tabPage10.SuspendLayout();
             this.panel99.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.overlapType)).BeginInit();
@@ -853,7 +831,6 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.overlapCoordY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.overlapCoordZ)).BeginInit();
             this.panel62.SuspendLayout();
-            this.panel15.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.panel52.SuspendLayout();
             this.panel90.SuspendLayout();
@@ -909,58 +886,12 @@ namespace SMRPGED
             this.panelColorBalance.SuspendLayout();
             this.panel104.SuspendLayout();
             this.panel103.SuspendLayout();
-            this.panelTemplates.SuspendLayout();
-            this.panel114.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTemplate)).BeginInit();
-            this.panel115.SuspendLayout();
-            this.panelTemplatesSub.SuspendLayout();
-            this.toolStrip3.SuspendLayout();
             this.panelOverlapTileset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOverlaps)).BeginInit();
             this.panelChangeLevelName.SuspendLayout();
             this.panel98.SuspendLayout();
             this.panelSearchLevelNames.SuspendLayout();
             this.panel58.SuspendLayout();
-            this.panelTilesets.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.panel95.SuspendLayout();
-            this.panel96.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL1)).BeginInit();
-            this.tabPage12.SuspendLayout();
-            this.panelBattlefields.SuspendLayout();
-            this.panelBattlefieldTileset.SuspendLayout();
-            this.panelBattlefieldPalettes.SuspendLayout();
-            this.panel93.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldPaletteSetNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorBF)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenBar)).BeginInit();
-            this.panel60.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPalettePictureBox)).BeginInit();
-            this.contextMenuStrip3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteColorNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenNum)).BeginInit();
-            this.panelBattlefieldProperties.SuspendLayout();
-            this.panel92.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet4Num)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet5Num)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet3Num)).BeginInit();
-            this.panel57.SuspendLayout();
-            this.panel56.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet2Num)).BeginInit();
-            this.panel7.SuspendLayout();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet1Num)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldTilesetNum)).BeginInit();
-            this.panel59.SuspendLayout();
-            this.panel45.SuspendLayout();
-            this.panel61.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldNum)).BeginInit();
             this.panel27.SuspendLayout();
             this.panelLevelPicture.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLevel)).BeginInit();
@@ -1033,6 +964,7 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.mapBattlefieldNum)).BeginInit();
             this.panel69.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.palettePictureBox)).BeginInit();
+            this.contextMenuStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteRedNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
@@ -1043,6 +975,51 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteSetNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteRedBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteBlueBar)).BeginInit();
+            this.panelTemplates.SuspendLayout();
+            this.panel114.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTemplate)).BeginInit();
+            this.panel115.SuspendLayout();
+            this.panelTemplatesSub.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
+            this.panelTilesets.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel95.SuspendLayout();
+            this.panel96.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL1)).BeginInit();
+            this.tabPage12.SuspendLayout();
+            this.panelBattlefields.SuspendLayout();
+            this.panelBattlefieldTileset.SuspendLayout();
+            this.panelBattlefieldPalettes.SuspendLayout();
+            this.panel93.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldPaletteSetNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorBF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenBar)).BeginInit();
+            this.panel60.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPalettePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteColorNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenNum)).BeginInit();
+            this.panelBattlefieldProperties.SuspendLayout();
+            this.panel92.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet4Num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet5Num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet3Num)).BeginInit();
+            this.panel57.SuspendLayout();
+            this.panel56.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet2Num)).BeginInit();
+            this.panel7.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet1Num)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldTilesetNum)).BeginInit();
+            this.panel59.SuspendLayout();
+            this.panel45.SuspendLayout();
+            this.panel61.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldNum)).BeginInit();
             this.panelLevelZoom.SuspendLayout();
             this.panel117.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLevelZoom)).BeginInit();
@@ -1067,9 +1044,7 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.tile8x8Tile)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.overlayOpacity)).BeginInit();
-            this.panel10.SuspendLayout();
             this.panelOpacity.SuspendLayout();
             this.panelTemplateName.SuspendLayout();
             this.panel116.SuspendLayout();
@@ -1617,7 +1592,7 @@ namespace SMRPGED
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Size = new System.Drawing.Size(244, 610);
             this.tabPage8.TabIndex = 2;
-            this.tabPage8.Text = "NPCS";
+            this.tabPage8.Text = "NPC";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
             // panel9
@@ -1627,6 +1602,8 @@ namespace SMRPGED
             this.panel9.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel9.Controls.Add(this.panel65);
+            this.panel9.Controls.Add(this.npcCopy);
+            this.panel9.Controls.Add(this.npcPaste);
             this.panel9.Controls.Add(this.npcMoveUp);
             this.panel9.Controls.Add(this.npcMoveDown);
             this.panel9.Controls.Add(this.panel85);
@@ -1648,10 +1625,44 @@ namespace SMRPGED
             this.panel65.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.panel65.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panel65.Location = new System.Drawing.Point(120, 521);
+            this.panel65.Location = new System.Drawing.Point(120, 541);
             this.panel65.Name = "panel65";
-            this.panel65.Size = new System.Drawing.Size(120, 85);
+            this.panel65.Size = new System.Drawing.Size(120, 65);
             this.panel65.TabIndex = 486;
+            // 
+            // npcCopy
+            // 
+            this.npcCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.npcCopy.BackColor = System.Drawing.SystemColors.Window;
+            this.npcCopy.FlatAppearance.BorderSize = 0;
+            this.npcCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.npcCopy.Image = global::SMRPGED.Properties.Resources.copy_small;
+            this.npcCopy.Location = new System.Drawing.Point(60, 328);
+            this.npcCopy.Name = "npcCopy";
+            this.npcCopy.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.npcCopy.Size = new System.Drawing.Size(29, 17);
+            this.npcCopy.TabIndex = 92;
+            this.toolTip1.SetToolTip(this.npcCopy, "Copy NPC");
+            this.npcCopy.UseCompatibleTextRendering = true;
+            this.npcCopy.UseVisualStyleBackColor = false;
+            this.npcCopy.Click += new System.EventHandler(this.npcCopy_Click);
+            // 
+            // npcPaste
+            // 
+            this.npcPaste.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.npcPaste.BackColor = System.Drawing.SystemColors.Window;
+            this.npcPaste.FlatAppearance.BorderSize = 0;
+            this.npcPaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.npcPaste.Image = global::SMRPGED.Properties.Resources.paste_small;
+            this.npcPaste.Location = new System.Drawing.Point(90, 328);
+            this.npcPaste.Name = "npcPaste";
+            this.npcPaste.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.npcPaste.Size = new System.Drawing.Size(28, 17);
+            this.npcPaste.TabIndex = 93;
+            this.toolTip1.SetToolTip(this.npcPaste, "Paste NPC");
+            this.npcPaste.UseCompatibleTextRendering = true;
+            this.npcPaste.UseVisualStyleBackColor = false;
+            this.npcPaste.Click += new System.EventHandler(this.npcPaste_Click);
             // 
             // npcMoveUp
             // 
@@ -1660,10 +1671,10 @@ namespace SMRPGED
             this.npcMoveUp.FlatAppearance.BorderSize = 0;
             this.npcMoveUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.npcMoveUp.Image = global::SMRPGED.Properties.Resources.moveup;
-            this.npcMoveUp.Location = new System.Drawing.Point(0, 275);
+            this.npcMoveUp.Location = new System.Drawing.Point(0, 328);
             this.npcMoveUp.Name = "npcMoveUp";
             this.npcMoveUp.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.npcMoveUp.Size = new System.Drawing.Size(58, 17);
+            this.npcMoveUp.Size = new System.Drawing.Size(29, 17);
             this.npcMoveUp.TabIndex = 92;
             this.toolTip1.SetToolTip(this.npcMoveUp, "NPC Move Up");
             this.npcMoveUp.UseCompatibleTextRendering = true;
@@ -1677,10 +1688,10 @@ namespace SMRPGED
             this.npcMoveDown.FlatAppearance.BorderSize = 0;
             this.npcMoveDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.npcMoveDown.Image = global::SMRPGED.Properties.Resources.movedown;
-            this.npcMoveDown.Location = new System.Drawing.Point(60, 275);
+            this.npcMoveDown.Location = new System.Drawing.Point(30, 328);
             this.npcMoveDown.Name = "npcMoveDown";
             this.npcMoveDown.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.npcMoveDown.Size = new System.Drawing.Size(58, 17);
+            this.npcMoveDown.Size = new System.Drawing.Size(29, 17);
             this.npcMoveDown.TabIndex = 93;
             this.toolTip1.SetToolTip(this.npcMoveDown, "NPC Move Down");
             this.npcMoveDown.UseCompatibleTextRendering = true;
@@ -1693,9 +1704,9 @@ namespace SMRPGED
             this.panel85.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
             this.panel85.Controls.Add(this.npcAttributes);
             this.panel85.Controls.Add(this.label65);
-            this.panel85.Location = new System.Drawing.Point(0, 294);
+            this.panel85.Location = new System.Drawing.Point(0, 347);
             this.panel85.Name = "panel85";
-            this.panel85.Size = new System.Drawing.Size(118, 227);
+            this.panel85.Size = new System.Drawing.Size(118, 259);
             this.panel85.TabIndex = 485;
             // 
             // npcAttributes
@@ -1716,10 +1727,12 @@ namespace SMRPGED
             "Can\'t pass NPCs",
             "{B3,b5}",
             "Can\'t walk through",
-            "{B3,b7}"});
+            "{B3,b7}",
+            "Slidable along walls",
+            "{B4,b1}"});
             this.npcAttributes.Location = new System.Drawing.Point(0, 19);
             this.npcAttributes.Name = "npcAttributes";
-            this.npcAttributes.Size = new System.Drawing.Size(118, 208);
+            this.npcAttributes.Size = new System.Drawing.Size(118, 240);
             this.npcAttributes.TabIndex = 487;
             this.npcAttributes.SelectedIndexChanged += new System.EventHandler(this.npcAttributes_SelectedIndexChanged);
             // 
@@ -1756,7 +1769,7 @@ namespace SMRPGED
             this.panel84.Controls.Add(this.npcsZCoordPlusHalf);
             this.panel84.Controls.Add(this.panel42);
             this.panel84.Controls.Add(this.npcsShowNPC);
-            this.panel84.Location = new System.Drawing.Point(120, 339);
+            this.panel84.Location = new System.Drawing.Point(120, 321);
             this.panel84.Name = "panel84";
             this.panel84.Size = new System.Drawing.Size(120, 180);
             this.panel84.TabIndex = 484;
@@ -2002,8 +2015,6 @@ namespace SMRPGED
             this.panel83.Controls.Add(this.npcID);
             this.panel83.Controls.Add(this.label49);
             this.panel83.Controls.Add(this.npcMovement);
-            this.panel83.Controls.Add(this.label52);
-            this.panel83.Controls.Add(this.npcPaletteIndexPlus);
             this.panel83.Controls.Add(this.npcSpeedPlus);
             this.panel83.Controls.Add(this.npcEventORPack);
             this.panel83.Controls.Add(this.label54);
@@ -2016,7 +2027,7 @@ namespace SMRPGED
             this.panel83.Controls.Add(this.panel53);
             this.panel83.Location = new System.Drawing.Point(120, 133);
             this.panel83.Name = "panel83";
-            this.panel83.Size = new System.Drawing.Size(120, 204);
+            this.panel83.Size = new System.Drawing.Size(120, 186);
             this.panel83.TabIndex = 483;
             // 
             // label71
@@ -2072,35 +2083,10 @@ namespace SMRPGED
             this.npcMovement.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcMovement.ValueChanged += new System.EventHandler(this.npcMovement_ValueChanged);
             // 
-            // label52
-            // 
-            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label52.Location = new System.Drawing.Point(0, 169);
-            this.label52.Name = "label52";
-            this.label52.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label52.Size = new System.Drawing.Size(67, 17);
-            this.label52.TabIndex = 455;
-            this.label52.Text = "Palette #+";
-            // 
-            // npcPaletteIndexPlus
-            // 
-            this.npcPaletteIndexPlus.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.npcPaletteIndexPlus.Location = new System.Drawing.Point(68, 169);
-            this.npcPaletteIndexPlus.Maximum = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-            this.npcPaletteIndexPlus.Name = "npcPaletteIndexPlus";
-            this.npcPaletteIndexPlus.Size = new System.Drawing.Size(53, 17);
-            this.npcPaletteIndexPlus.TabIndex = 102;
-            this.npcPaletteIndexPlus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.npcPaletteIndexPlus.ValueChanged += new System.EventHandler(this.npcPaletteIndexPlus_ValueChanged);
-            // 
             // npcSpeedPlus
             // 
             this.npcSpeedPlus.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.npcSpeedPlus.Location = new System.Drawing.Point(68, 187);
+            this.npcSpeedPlus.Location = new System.Drawing.Point(68, 169);
             this.npcSpeedPlus.Maximum = new decimal(new int[] {
             1023,
             0,
@@ -2130,7 +2116,7 @@ namespace SMRPGED
             // label54
             // 
             this.label54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label54.Location = new System.Drawing.Point(0, 187);
+            this.label54.Location = new System.Drawing.Point(0, 169);
             this.label54.Name = "label54";
             this.label54.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label54.Size = new System.Drawing.Size(67, 17);
@@ -2205,7 +2191,7 @@ namespace SMRPGED
             this.findNPCNum.Name = "findNPCNum";
             this.findNPCNum.Size = new System.Drawing.Size(120, 17);
             this.findNPCNum.TabIndex = 99;
-            this.findNPCNum.Text = "Open NPCs...";
+            this.findNPCNum.Text = "Edit NPCs...";
             this.findNPCNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.findNPCNum.UseCompatibleTextRendering = true;
             this.findNPCNum.UseVisualStyleBackColor = false;
@@ -2427,43 +2413,52 @@ namespace SMRPGED
             // 
             // panel118
             // 
-            this.panel118.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel118.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.panel118.Controls.Add(this.npcAttributesBattle);
-            this.panel118.Controls.Add(this.label118);
-            this.panel118.Location = new System.Drawing.Point(0, 523);
+            this.panel118.Controls.Add(this.label52);
+            this.panel118.Controls.Add(this.panel119);
+            this.panel118.Location = new System.Drawing.Point(120, 503);
             this.panel118.Name = "panel118";
-            this.panel118.Size = new System.Drawing.Size(118, 83);
+            this.panel118.Size = new System.Drawing.Size(120, 36);
             this.panel118.TabIndex = 479;
             // 
-            // npcAttributesBattle
+            // label52
             // 
-            this.npcAttributesBattle.BackColor = System.Drawing.SystemColors.Window;
-            this.npcAttributesBattle.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.npcAttributesBattle.CheckOnClick = true;
-            this.npcAttributesBattle.Items.AddRange(new object[] {
-            "{B8,b0}",
-            "Return to area (A)",
-            "Do not remove",
-            "Return to area (B)"});
-            this.npcAttributesBattle.Location = new System.Drawing.Point(0, 19);
-            this.npcAttributesBattle.Name = "npcAttributesBattle";
-            this.npcAttributesBattle.Size = new System.Drawing.Size(118, 64);
-            this.npcAttributesBattle.TabIndex = 487;
-            this.npcAttributesBattle.SelectedIndexChanged += new System.EventHandler(this.npcAttributesBattle_SelectedIndexChanged);
+            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label52.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label52.Location = new System.Drawing.Point(0, 0);
+            this.label52.Name = "label52";
+            this.label52.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label52.Size = new System.Drawing.Size(120, 17);
+            this.label52.TabIndex = 478;
+            this.label52.Text = "AFTER BATTLE...";
             // 
-            // label118
+            // panel119
             // 
-            this.label118.BackColor = System.Drawing.SystemColors.Control;
-            this.label118.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label118.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label118.Location = new System.Drawing.Point(0, 0);
-            this.label118.Name = "label118";
-            this.label118.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label118.Size = new System.Drawing.Size(118, 17);
-            this.label118.TabIndex = 475;
-            this.label118.Text = "BATTLE PROP...";
-            this.label118.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.panel119.BackColor = System.Drawing.SystemColors.Window;
+            this.panel119.Controls.Add(this.npcAfterBattle);
+            this.panel119.Location = new System.Drawing.Point(0, 19);
+            this.panel119.Name = "panel119";
+            this.panel119.Size = new System.Drawing.Size(120, 17);
+            this.panel119.TabIndex = 477;
+            // 
+            // npcAfterBattle
+            // 
+            this.npcAfterBattle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.npcAfterBattle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.npcAfterBattle.DropDownWidth = 350;
+            this.npcAfterBattle.IntegralHeight = false;
+            this.npcAfterBattle.Items.AddRange(new object[] {
+            "remove permanently (from level memory)",
+            "remove temporarily (return on level re-entry)",
+            "do not remove at all (disable trigger)",
+            "remove permanently (if ran away, can walk through while blinking)",
+            "remove temporarily (if ran away, can walk through while blinking)"});
+            this.npcAfterBattle.Location = new System.Drawing.Point(-2, -2);
+            this.npcAfterBattle.Name = "npcAfterBattle";
+            this.npcAfterBattle.Size = new System.Drawing.Size(125, 21);
+            this.npcAfterBattle.TabIndex = 205;
+            this.npcAfterBattle.SelectedIndexChanged += new System.EventHandler(this.npcAfterBattle_SelectedIndexChanged);
             // 
             // label112
             // 
@@ -2490,10 +2485,9 @@ namespace SMRPGED
             this.npcObjectTree.Name = "npcObjectTree";
             this.npcObjectTree.ShowPlusMinus = false;
             this.npcObjectTree.ShowRootLines = false;
-            this.npcObjectTree.Size = new System.Drawing.Size(118, 254);
+            this.npcObjectTree.Size = new System.Drawing.Size(118, 307);
             this.npcObjectTree.TabIndex = 91;
             this.npcObjectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.npcObjectTree_AfterSelect);
-            this.npcObjectTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.npcObjectTree_KeyDown);
             // 
             // label36
             // 
@@ -2514,7 +2508,6 @@ namespace SMRPGED
             this.mapNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.mapNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mapNum.ForeColor = System.Drawing.SystemColors.Control;
-            this.mapNum.Hexadecimal = true;
             this.mapNum.Location = new System.Drawing.Point(119, 0);
             this.mapNum.Maximum = new decimal(new int[] {
             155,
@@ -2546,10 +2539,9 @@ namespace SMRPGED
             this.levelNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.levelNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.levelNum.ForeColor = System.Drawing.SystemColors.Control;
-            this.levelNum.Hexadecimal = true;
             this.levelNum.Location = new System.Drawing.Point(416, 1);
             this.levelNum.Maximum = new decimal(new int[] {
-            511,
+            509,
             0,
             0,
             0});
@@ -2564,6 +2556,7 @@ namespace SMRPGED
             this.levelName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.levelName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.levelName.ContextMenuStrip = this.contextMenuStrip4;
             this.levelName.DropDownHeight = 626;
             this.levelName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.levelName.DropDownWidth = 550;
@@ -2575,6 +2568,22 @@ namespace SMRPGED
             this.levelName.Size = new System.Drawing.Size(257, 21);
             this.levelName.TabIndex = 116;
             this.levelName.SelectedIndexChanged += new System.EventHandler(this.levelName_SelectedIndexChanged);
+            // 
+            // contextMenuStrip4
+            // 
+            this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addThisLevelToNotesDatabaseToolStripMenuItem});
+            this.contextMenuStrip4.Name = "contextMenuStrip4";
+            this.contextMenuStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextMenuStrip4.ShowImageMargin = false;
+            this.contextMenuStrip4.Size = new System.Drawing.Size(217, 26);
+            // 
+            // addThisLevelToNotesDatabaseToolStripMenuItem
+            // 
+            this.addThisLevelToNotesDatabaseToolStripMenuItem.Name = "addThisLevelToNotesDatabaseToolStripMenuItem";
+            this.addThisLevelToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.addThisLevelToNotesDatabaseToolStripMenuItem.Text = "Add this level to notes database...";
+            this.addThisLevelToNotesDatabaseToolStripMenuItem.Click += new System.EventHandler(this.addThisLevelToNotesDatabaseToolStripMenuItem_Click);
             // 
             // label19
             // 
@@ -2630,22 +2639,31 @@ namespace SMRPGED
             // 
             this.tabPage10.BackColor = System.Drawing.SystemColors.ControlText;
             this.tabPage10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage10.Controls.Add(this.panel8);
             this.tabPage10.Controls.Add(this.overlapShowTileset);
             this.tabPage10.Controls.Add(this.panel99);
             this.tabPage10.Controls.Add(this.panel62);
             this.tabPage10.Controls.Add(this.overlapFieldDelete);
             this.tabPage10.Controls.Add(this.overlapFieldInsert);
             this.tabPage10.Controls.Add(this.overlapFieldTree);
-            this.tabPage10.Controls.Add(this.label128);
             this.tabPage10.Controls.Add(this.label51);
-            this.tabPage10.Controls.Add(this.panel15);
             this.tabPage10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Size = new System.Drawing.Size(244, 610);
             this.tabPage10.TabIndex = 4;
-            this.tabPage10.Text = "OTHER";
+            this.tabPage10.Text = "OVERLAP";
             this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // panel8
+            // 
+            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel8.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
+            this.panel8.Location = new System.Drawing.Point(1, 341);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(240, 266);
+            this.panel8.TabIndex = 496;
             // 
             // overlapShowTileset
             // 
@@ -2844,7 +2862,7 @@ namespace SMRPGED
             this.overlapUnknownBits.ColumnWidth = 60;
             this.overlapUnknownBits.IntegralHeight = false;
             this.overlapUnknownBits.Items.AddRange(new object[] {
-            "{B0,b7}",
+            "overlap tile edges",
             "{B2,b5}",
             "{B2,b6}",
             "{B2,b7}"});
@@ -2894,19 +2912,6 @@ namespace SMRPGED
             this.overlapFieldTree.TabIndex = 456;
             this.overlapFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.overlapFieldTree_AfterSelect);
             // 
-            // label128
-            // 
-            this.label128.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label128.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label128.ForeColor = System.Drawing.SystemColors.Control;
-            this.label128.Location = new System.Drawing.Point(1, 341);
-            this.label128.Name = "label128";
-            this.label128.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label128.Size = new System.Drawing.Size(240, 17);
-            this.label128.TabIndex = 457;
-            this.label128.Text = "NOTES";
-            this.label128.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label51
             // 
             this.label51.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -2920,28 +2925,6 @@ namespace SMRPGED
             this.label51.Text = "OVERLAP OBJECTS";
             this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel15
-            // 
-            this.panel15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel15.BackColor = System.Drawing.SystemColors.Window;
-            this.panel15.Controls.Add(this.levelNotes);
-            this.panel15.Location = new System.Drawing.Point(1, 360);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(240, 247);
-            this.panel15.TabIndex = 0;
-            // 
-            // levelNotes
-            // 
-            this.levelNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.levelNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.levelNotes.Location = new System.Drawing.Point(4, 4);
-            this.levelNotes.Name = "levelNotes";
-            this.levelNotes.Size = new System.Drawing.Size(232, 239);
-            this.levelNotes.TabIndex = 158;
-            this.levelNotes.Text = "";
-            // 
             // tabPage9
             // 
             this.tabPage9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -2951,7 +2934,7 @@ namespace SMRPGED
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Size = new System.Drawing.Size(244, 610);
             this.tabPage9.TabIndex = 3;
-            this.tabPage9.Text = "FIELDS";
+            this.tabPage9.Text = "FIELD";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // panel52
@@ -3357,76 +3340,76 @@ namespace SMRPGED
             "[07]  Pipe Vault",
             "[08]  Invincible Star",
             "[09]  Victory",
-            "[0A]  In The Flower Garden",
-            "[0B]  Bowser\'s Castle (1st time)",
-            "[0C]  Fight Against Bowser",
-            "[0D]  Road Is Full Of Dangers",
-            "[0E]  Mario\'s Pad",
-            "[0F]  Here\'s Some Weapons",
-            "[10]  Let\'s Race",
-            "[11]  Tadpole Pond",
-            "[12]  Rose Town",
-            "[13]  Race Training",
-            "[14]  Shock!",
-            "[15]  Sad Song",
-            "[16]  Midas River",
-            "[17]  Got A Star Piece (part 1)",
-            "[18]  Got A Star Piece (part 2)",
-            "[19]  Fight Against An Armed Boss",
-            "[1A]  Forest Maze",
-            "[1B]  Dungeon Is Full Of Monsters",
-            "[1C]  Let\'s Play Geno",
-            "[1D]  Start Slot Menu",
-            "[1E]  Long Long Ago",
-            "[1F]  Booster\'s Tower",
-            "[20]  And My Name\'s Booster",
-            "[21]  Moleville",
-            "[22]  Star Hill",
-            "[23]  Mountain Railroad",
-            "[24]  Explanation",
-            "[25]  Booster Hill (start)",
-            "[26]  Booster Hill",
-            "[27]  Marrymore",
-            "[28]  New Partner",
-            "[29]  Sunken Ship",
-            "[2A]  Still The Road Is Full Of Monsters",
-            "[2B]  {SILENCE}",
-            "[2C]  Sea",
-            "[2D]  Heart Beating A Little Faster (part 1)",
-            "[2E]  Heart Beating A Little Faster (part 2)",
-            "[2F]  Grate Guy\'s Casino",
-            "[30]  Geno Awakens",
-            "[31]  Celebrational",
-            "[32]  Nimbus Land",
-            "[33]  Monstro Town",
-            "[34]  Toadofsky",
-            "[35]  {SILENCE}",
-            "[36]  Happy Adventure, Delighful Adventure",
-            "[37]  World Map",
-            "[38]  Factory",
-            "[39]  Sword Crashes And Stars Scatter",
-            "[3A]  Conversation With Culex",
-            "[3B]  Fight Against Culex",
-            "[3C]  Victory Against Culex",
-            "[3D]  Valentina",
-            "[3E]  Barrel Volcano",
-            "[3F]  Axem Rangers Drop In",
-            "[40]  The End",
-            "[41]  Gate",
-            "[42]  Bowser\'s Castle (2nd time)",
-            "[43]  Weapons Factory",
-            "[44]  Fight Against Smithy 1",
-            "[45]  Fight Against Smithy 2",
-            "[46]  Ending Part 1",
-            "[47]  Ending Part 2",
-            "[48]  Ending Part 3",
-            "[49]  Ending Part 4",
-            "[4A]  {SILENCE}",
-            "[4B]  {SILENCE}",
-            "[4C]  {SILENCE}",
-            "[4D]  {SILENCE}",
-            "[4E]  {SILENCE}",
-            "[4F]  {SILENCE}"});
+            "[10]  In The Flower Garden",
+            "[11]  Bowser\'s Castle (1st time)",
+            "[12]  Fight Against Bowser",
+            "[13]  Road Is Full Of Dangers",
+            "[14]  Mario\'s Pad",
+            "[15]  Here\'s Some Weapons",
+            "[16]  Let\'s Race",
+            "[17]  Tadpole Pond",
+            "[18]  Rose Town",
+            "[19]  Race Training",
+            "[20]  Shock!",
+            "[21]  Sad Song",
+            "[22]  Midas River",
+            "[23]  Got A Star Piece (part 1)",
+            "[24]  Got A Star Piece (part 2)",
+            "[25]  Fight Against An Armed Boss",
+            "[26]  Forest Maze",
+            "[27]  Dungeon Is Full Of Monsters",
+            "[28]  Let\'s Play Geno",
+            "[29]  Start Slot Menu",
+            "[30]  Long Long Ago",
+            "[31]  Booster\'s Tower",
+            "[32]  And My Name\'s Booster",
+            "[33]  Moleville",
+            "[34]  Star Hill",
+            "[35]  Mountain Railroad",
+            "[36]  Explanation",
+            "[37]  Booster Hill (start)",
+            "[38]  Booster Hill",
+            "[39]  Marrymore",
+            "[40]  New Partner",
+            "[41]  Sunken Ship",
+            "[42]  Still The Road Is Full Of Monsters",
+            "[43]  {SILENCE}",
+            "[44]  Sea",
+            "[45]  Heart Beating A Little Faster (part 1)",
+            "[46]  Heart Beating A Little Faster (part 2)",
+            "[47]  Grate Guy\'s Casino",
+            "[48]  Geno Awakens",
+            "[49]  Celebrational",
+            "[50]  Nimbus Land",
+            "[51]  Monstro Town",
+            "[52]  Toadofsky",
+            "[53]  {SILENCE}",
+            "[54]  Happy Adventure, Delighful Adventure",
+            "[55]  World Map",
+            "[56]  Factory",
+            "[57]  Sword Crashes And Stars Scatter",
+            "[58]  Conversation With Culex",
+            "[59]  Fight Against Culex",
+            "[60]  Victory Against Culex",
+            "[61]  Valentina",
+            "[62]  Barrel Volcano",
+            "[63]  Axem Rangers Drop In",
+            "[64]  The End",
+            "[65]  Gate",
+            "[66]  Bowser\'s Castle (2nd time)",
+            "[67]  Weapons Factory",
+            "[68]  Fight Against Smithy 1",
+            "[69]  Fight Against Smithy 2",
+            "[70]  Ending Part 1",
+            "[71]  Ending Part 2",
+            "[72]  Ending Part 3",
+            "[73]  Ending Part 4",
+            "[74]  {SILENCE}",
+            "[75]  {SILENCE}",
+            "[76]  {SILENCE}",
+            "[77]  {SILENCE}",
+            "[78]  {SILENCE}",
+            "[79]  {SILENCE}"});
             this.eventsAreaMusic.Location = new System.Drawing.Point(-3, -2);
             this.eventsAreaMusic.Name = "eventsAreaMusic";
             this.eventsAreaMusic.Size = new System.Drawing.Size(68, 21);
@@ -4110,37 +4093,33 @@ namespace SMRPGED
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip2.ShowImageMargin = false;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(131, 184);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(131, 198);
             // 
             // cutToolStripMenuItem2
             // 
-            this.cutToolStripMenuItem2.AutoSize = false;
             this.cutToolStripMenuItem2.Name = "cutToolStripMenuItem2";
-            this.cutToolStripMenuItem2.Size = new System.Drawing.Size(152, 20);
+            this.cutToolStripMenuItem2.Size = new System.Drawing.Size(130, 22);
             this.cutToolStripMenuItem2.Text = "Cut";
             this.cutToolStripMenuItem2.Click += new System.EventHandler(this.cutToolStripMenuItem2_Click);
             // 
             // copyToolStripMenuItem2
             // 
-            this.copyToolStripMenuItem2.AutoSize = false;
             this.copyToolStripMenuItem2.Name = "copyToolStripMenuItem2";
-            this.copyToolStripMenuItem2.Size = new System.Drawing.Size(152, 20);
+            this.copyToolStripMenuItem2.Size = new System.Drawing.Size(130, 22);
             this.copyToolStripMenuItem2.Text = "Copy";
             this.copyToolStripMenuItem2.Click += new System.EventHandler(this.copyToolStripMenuItem2_Click);
             // 
             // pasteToolStripMenuItem2
             // 
-            this.pasteToolStripMenuItem2.AutoSize = false;
             this.pasteToolStripMenuItem2.Name = "pasteToolStripMenuItem2";
-            this.pasteToolStripMenuItem2.Size = new System.Drawing.Size(152, 20);
+            this.pasteToolStripMenuItem2.Size = new System.Drawing.Size(130, 22);
             this.pasteToolStripMenuItem2.Text = "Paste";
             this.pasteToolStripMenuItem2.Click += new System.EventHandler(this.pasteToolStripMenuItem2_Click);
             // 
             // deleteToolStripMenuItem2
             // 
-            this.deleteToolStripMenuItem2.AutoSize = false;
             this.deleteToolStripMenuItem2.Name = "deleteToolStripMenuItem2";
-            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(152, 20);
+            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(130, 22);
             this.deleteToolStripMenuItem2.Text = "Delete";
             this.deleteToolStripMenuItem2.Click += new System.EventHandler(this.deleteToolStripMenuItem2_Click);
             // 
@@ -4151,17 +4130,15 @@ namespace SMRPGED
             // 
             // priority1SetToolStripMenuItem
             // 
-            this.priority1SetToolStripMenuItem.AutoSize = false;
             this.priority1SetToolStripMenuItem.Name = "priority1SetToolStripMenuItem";
-            this.priority1SetToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
+            this.priority1SetToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.priority1SetToolStripMenuItem.Text = "Priority 1 set";
             this.priority1SetToolStripMenuItem.Click += new System.EventHandler(this.priority1SetToolStripMenuItem_Click);
             // 
             // priority1ClearToolStripMenuItem
             // 
-            this.priority1ClearToolStripMenuItem.AutoSize = false;
             this.priority1ClearToolStripMenuItem.Name = "priority1ClearToolStripMenuItem";
-            this.priority1ClearToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
+            this.priority1ClearToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.priority1ClearToolStripMenuItem.Text = "Priority 1 clear";
             this.priority1ClearToolStripMenuItem.Click += new System.EventHandler(this.priority1ClearToolStripMenuItem_Click);
             // 
@@ -4172,9 +4149,8 @@ namespace SMRPGED
             // 
             // editToolStripMenuItem1
             // 
-            this.editToolStripMenuItem1.AutoSize = false;
             this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-            this.editToolStripMenuItem1.Size = new System.Drawing.Size(130, 20);
+            this.editToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
             this.editToolStripMenuItem1.Text = "Edit...";
             this.editToolStripMenuItem1.Click += new System.EventHandler(this.editToolStripMenuItem1_Click);
             // 
@@ -4752,13 +4728,11 @@ namespace SMRPGED
             this.panel1.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.panelColorBalance);
-            this.panel1.Controls.Add(this.panelTemplates);
             this.panel1.Controls.Add(this.panelOverlapTileset);
             this.panel1.Controls.Add(this.changeLevelName);
             this.panel1.Controls.Add(this.searchLevelNames);
             this.panel1.Controls.Add(this.panelChangeLevelName);
             this.panel1.Controls.Add(this.panelSearchLevelNames);
-            this.panel1.Controls.Add(this.panelTilesets);
             this.panel1.Controls.Add(this.label36);
             this.panel1.Controls.Add(this.levelNum);
             this.panel1.Controls.Add(this.label26);
@@ -4768,6 +4742,8 @@ namespace SMRPGED
             this.panel1.Controls.Add(this.areaPropertiesPanel);
             this.panel1.Controls.Add(this.labelTileCoords);
             this.panel1.Controls.Add(this.labelPixelCoords);
+            this.panel1.Controls.Add(this.panelTemplates);
+            this.panel1.Controls.Add(this.panelTilesets);
             this.panel1.Location = new System.Drawing.Point(12, 54);
             this.panel1.MinimumSize = new System.Drawing.Size(990, 659);
             this.panel1.Name = "panel1";
@@ -4963,173 +4939,6 @@ namespace SMRPGED
             this.colEditSelectNone.UseVisualStyleBackColor = false;
             this.colEditSelectNone.Click += new System.EventHandler(this.colEditSelectNone_Click);
             // 
-            // panelTemplates
-            // 
-            this.panelTemplates.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTemplates.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelTemplates.Controls.Add(this.templatesLoaded);
-            this.panelTemplates.Controls.Add(this.panel114);
-            this.panelTemplates.Controls.Add(this.panel115);
-            this.panelTemplates.Controls.Add(this.templateRename);
-            this.panelTemplates.Controls.Add(this.labelTemplates);
-            this.panelTemplates.Controls.Add(this.panelTemplatesSub);
-            this.panelTemplates.Location = new System.Drawing.Point(719, -1);
-            this.panelTemplates.Name = "panelTemplates";
-            this.panelTemplates.Size = new System.Drawing.Size(268, 659);
-            this.panelTemplates.TabIndex = 448;
-            this.panelTemplates.Visible = false;
-            // 
-            // templatesLoaded
-            // 
-            this.templatesLoaded.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.templatesLoaded.FormattingEnabled = true;
-            this.templatesLoaded.Location = new System.Drawing.Point(0, 42);
-            this.templatesLoaded.Name = "templatesLoaded";
-            this.templatesLoaded.Size = new System.Drawing.Size(268, 156);
-            this.templatesLoaded.TabIndex = 501;
-            this.templatesLoaded.SelectedIndexChanged += new System.EventHandler(this.templatesLoaded_SelectedIndexChanged);
-            // 
-            // panel114
-            // 
-            this.panel114.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel114.AutoScroll = true;
-            this.panel114.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel114.Controls.Add(this.pictureBoxTemplate);
-            this.panel114.Location = new System.Drawing.Point(0, 219);
-            this.panel114.Name = "panel114";
-            this.panel114.Size = new System.Drawing.Size(268, 438);
-            this.panel114.TabIndex = 498;
-            this.panel114.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel109_Scroll);
-            // 
-            // pictureBoxTemplate
-            // 
-            this.pictureBoxTemplate.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBoxTemplate.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxTemplate.Name = "pictureBoxTemplate";
-            this.pictureBoxTemplate.Size = new System.Drawing.Size(128, 128);
-            this.pictureBoxTemplate.TabIndex = 450;
-            this.pictureBoxTemplate.TabStop = false;
-            // 
-            // panel115
-            // 
-            this.panel115.BackColor = System.Drawing.SystemColors.Window;
-            this.panel115.Controls.Add(this.templateRenameText);
-            this.panel115.Location = new System.Drawing.Point(0, 200);
-            this.panel115.Name = "panel115";
-            this.panel115.Size = new System.Drawing.Size(198, 17);
-            this.panel115.TabIndex = 500;
-            // 
-            // templateRenameText
-            // 
-            this.templateRenameText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.templateRenameText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.templateRenameText.Enabled = false;
-            this.templateRenameText.Location = new System.Drawing.Point(4, 2);
-            this.templateRenameText.MaxLength = 128;
-            this.templateRenameText.Name = "templateRenameText";
-            this.templateRenameText.Size = new System.Drawing.Size(190, 14);
-            this.templateRenameText.TabIndex = 4;
-            // 
-            // templateRename
-            // 
-            this.templateRename.BackColor = System.Drawing.SystemColors.Control;
-            this.templateRename.Enabled = false;
-            this.templateRename.FlatAppearance.BorderSize = 0;
-            this.templateRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.templateRename.Location = new System.Drawing.Point(200, 200);
-            this.templateRename.Name = "templateRename";
-            this.templateRename.Size = new System.Drawing.Size(68, 17);
-            this.templateRename.TabIndex = 456;
-            this.templateRename.Text = "RENAME";
-            this.templateRename.UseCompatibleTextRendering = true;
-            this.templateRename.UseVisualStyleBackColor = false;
-            this.templateRename.Click += new System.EventHandler(this.templateRename_Click);
-            // 
-            // labelTemplates
-            // 
-            this.labelTemplates.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTemplates.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.labelTemplates.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.labelTemplates.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTemplates.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelTemplates.Location = new System.Drawing.Point(0, 2);
-            this.labelTemplates.Name = "labelTemplates";
-            this.labelTemplates.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.labelTemplates.Size = new System.Drawing.Size(268, 17);
-            this.labelTemplates.TabIndex = 498;
-            this.labelTemplates.Text = "TEMPLATES";
-            // 
-            // panelTemplatesSub
-            // 
-            this.panelTemplatesSub.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelTemplatesSub.Controls.Add(this.toolStrip3);
-            this.panelTemplatesSub.Location = new System.Drawing.Point(0, 21);
-            this.panelTemplatesSub.Name = "panelTemplatesSub";
-            this.panelTemplatesSub.Size = new System.Drawing.Size(268, 19);
-            this.panelTemplatesSub.TabIndex = 448;
-            // 
-            // toolStrip3
-            // 
-            this.toolStrip3.AutoSize = false;
-            this.toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel4,
-            this.toolStripSeparator44,
-            this.templateTransfer,
-            this.toolStripSeparator45,
-            templateImport,
-            templateExport,
-            this.toolStripSeparator43,
-            templateDelete,
-            templateCopy,
-            templatePaste});
-            this.toolStrip3.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(268, 21);
-            this.toolStrip3.TabIndex = 0;
-            this.toolStrip3.Text = "toolStrip3";
-            // 
-            // toolStripLabel4
-            // 
-            this.toolStripLabel4.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripLabel4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripLabel4.Margin = new System.Windows.Forms.Padding(3, 1, 0, 2);
-            this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(53, 18);
-            this.toolStripLabel4.Text = "OPTIONS";
-            // 
-            // toolStripSeparator44
-            // 
-            this.toolStripSeparator44.Name = "toolStripSeparator44";
-            this.toolStripSeparator44.Size = new System.Drawing.Size(6, 21);
-            // 
-            // templateTransfer
-            // 
-            this.templateTransfer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.templateTransfer.Image = global::SMRPGED.Properties.Resources.transfer_small;
-            this.templateTransfer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.templateTransfer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.templateTransfer.Name = "templateTransfer";
-            this.templateTransfer.Size = new System.Drawing.Size(23, 18);
-            this.templateTransfer.Text = "Create new template from selection";
-            this.templateTransfer.Click += new System.EventHandler(this.templateTransfer_Click);
-            // 
-            // toolStripSeparator45
-            // 
-            this.toolStripSeparator45.Name = "toolStripSeparator45";
-            this.toolStripSeparator45.Size = new System.Drawing.Size(6, 21);
-            // 
-            // toolStripSeparator43
-            // 
-            this.toolStripSeparator43.Name = "toolStripSeparator43";
-            this.toolStripSeparator43.Size = new System.Drawing.Size(6, 21);
-            // 
             // panelOverlapTileset
             // 
             this.panelOverlapTileset.Controls.Add(this.pictureBoxOverlaps);
@@ -5233,6 +5042,7 @@ namespace SMRPGED
             this.textBox1.TabIndex = 4;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // panelSearchLevelNames
             // 
@@ -5279,1031 +5089,6 @@ namespace SMRPGED
             this.listBoxLevelNames.TabIndex = 194;
             this.listBoxLevelNames.SelectedIndexChanged += new System.EventHandler(this.listBoxLevelNames_SelectedIndexChanged);
             this.listBoxLevelNames.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxLevelNames_KeyDown);
-            // 
-            // panelTilesets
-            // 
-            this.panelTilesets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTilesets.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelTilesets.Controls.Add(this.labelTilesets);
-            this.panelTilesets.Controls.Add(this.tabControl2);
-            this.panelTilesets.Location = new System.Drawing.Point(719, 1);
-            this.panelTilesets.Name = "panelTilesets";
-            this.panelTilesets.Size = new System.Drawing.Size(270, 656);
-            this.panelTilesets.TabIndex = 139;
-            // 
-            // labelTilesets
-            // 
-            this.labelTilesets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTilesets.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.labelTilesets.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.labelTilesets.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTilesets.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelTilesets.Location = new System.Drawing.Point(0, 0);
-            this.labelTilesets.Name = "labelTilesets";
-            this.labelTilesets.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelTilesets.Size = new System.Drawing.Size(268, 17);
-            this.labelTilesets.TabIndex = 162;
-            this.labelTilesets.Text = "TILESETS...";
-            this.labelTilesets.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.labelTilesets, "Double-click to maximize / restore");
-            this.labelTilesets.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labelTilesets_MouseDoubleClick);
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl2.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabControl2.ContextMenuStrip = this.contextMenuStrip2;
-            this.tabControl2.Controls.Add(this.tabPage2);
-            this.tabControl2.Controls.Add(this.tabPage5);
-            this.tabControl2.Controls.Add(this.tabPage6);
-            this.tabControl2.Controls.Add(this.tabPage7);
-            this.tabControl2.Controls.Add(this.tabPage12);
-            this.tabControl2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl2.Location = new System.Drawing.Point(0, 19);
-            this.tabControl2.Multiline = true;
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(268, 636);
-            this.tabControl2.TabIndex = 159;
-            this.tabControl2.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl2_Selecting);
-            this.tabControl2.SelectedIndexChanged += new System.EventHandler(this.tabControl2_SelectedIndexChanged);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.ControlText;
-            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage2.Controls.Add(this.panel95);
-            this.tabPage2.Location = new System.Drawing.Point(4, 23);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(260, 609);
-            this.tabPage2.TabIndex = 0;
-            this.tabPage2.Text = "L1";
-            // 
-            // panel95
-            // 
-            this.panel95.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel95.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panel95.Controls.Add(this.panel96);
-            this.panel95.Location = new System.Drawing.Point(1, 1);
-            this.panel95.Name = "panel95";
-            this.panel95.Size = new System.Drawing.Size(256, 605);
-            this.panel95.TabIndex = 441;
-            // 
-            // panel96
-            // 
-            this.panel96.Controls.Add(this.pictureBoxTilesetL1);
-            this.panel96.Location = new System.Drawing.Point(-2, 0);
-            this.panel96.Name = "panel96";
-            this.panel96.Size = new System.Drawing.Size(260, 514);
-            this.panel96.TabIndex = 441;
-            // 
-            // pictureBoxTilesetL1
-            // 
-            this.pictureBoxTilesetL1.BackgroundImage = global::SMRPGED.Properties.Resources._transparent;
-            this.pictureBoxTilesetL1.ContextMenuStrip = this.contextMenuStrip2;
-            this.pictureBoxTilesetL1.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.pictureBoxTilesetL1.Location = new System.Drawing.Point(2, 0);
-            this.pictureBoxTilesetL1.Name = "pictureBoxTilesetL1";
-            this.pictureBoxTilesetL1.Size = new System.Drawing.Size(256, 512);
-            this.pictureBoxTilesetL1.TabIndex = 1;
-            this.pictureBoxTilesetL1.TabStop = false;
-            this.pictureBoxTilesetL1.MouseLeave += new System.EventHandler(this.pictureBoxTilesetL1_MouseLeave);
-            this.pictureBoxTilesetL1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxTilesetL1_PreviewKeyDown);
-            this.pictureBoxTilesetL1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTilesetL1_MouseMove);
-            this.pictureBoxTilesetL1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTilesetL1_MouseDoubleClick);
-            this.pictureBoxTilesetL1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTilesetL1_MouseClick);
-            this.pictureBoxTilesetL1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTilesetL1_MouseDown);
-            this.pictureBoxTilesetL1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTilesetL1_Paint);
-            this.pictureBoxTilesetL1.MouseEnter += new System.EventHandler(this.pictureBoxTilesetL1_MouseEnter);
-            // 
-            // tabPage12
-            // 
-            this.tabPage12.BackColor = System.Drawing.SystemColors.ControlText;
-            this.tabPage12.Controls.Add(this.panelBattlefields);
-            this.tabPage12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage12.Location = new System.Drawing.Point(4, 23);
-            this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(260, 609);
-            this.tabPage12.TabIndex = 4;
-            this.tabPage12.Text = "BATTLEFIELD";
-            // 
-            // panelBattlefields
-            // 
-            this.panelBattlefields.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelBattlefields.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panelBattlefields.Controls.Add(this.panelBattlefieldTileset);
-            this.panelBattlefields.Controls.Add(this.panelBattlefieldPalettes);
-            this.panelBattlefields.Controls.Add(this.panelBattlefieldProperties);
-            this.panelBattlefields.Controls.Add(this.panel45);
-            this.panelBattlefields.Location = new System.Drawing.Point(2, 2);
-            this.panelBattlefields.Name = "panelBattlefields";
-            this.panelBattlefields.Size = new System.Drawing.Size(256, 605);
-            this.panelBattlefields.TabIndex = 442;
-            this.panelBattlefields.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelBattlefields_MouseMove);
-            this.panelBattlefields.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelBattlefields_MouseUp);
-            // 
-            // panelBattlefieldTileset
-            // 
-            this.panelBattlefieldTileset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelBattlefieldTileset.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelBattlefieldTileset.Controls.Add(panel444);
-            this.panelBattlefieldTileset.Location = new System.Drawing.Point(-2, 36);
-            this.panelBattlefieldTileset.Name = "panelBattlefieldTileset";
-            this.panelBattlefieldTileset.Size = new System.Drawing.Size(260, 220);
-            this.panelBattlefieldTileset.TabIndex = 442;
-            this.panelBattlefieldTileset.MouseLeave += new System.EventHandler(this.panelBattlefieldTileset_MouseLeave);
-            this.panelBattlefieldTileset.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelBattlefieldTileset_MouseMove);
-            this.panelBattlefieldTileset.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelBattlefieldTileset_MouseDown);
-            // 
-            // panelBattlefieldPalettes
-            // 
-            this.panelBattlefieldPalettes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelBattlefieldPalettes.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelBattlefieldPalettes.Controls.Add(this.panel93);
-            this.panelBattlefieldPalettes.Location = new System.Drawing.Point(-2, 382);
-            this.panelBattlefieldPalettes.Name = "panelBattlefieldPalettes";
-            this.panelBattlefieldPalettes.Size = new System.Drawing.Size(260, 225);
-            this.panelBattlefieldPalettes.TabIndex = 444;
-            // 
-            // panel93
-            // 
-            this.panel93.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.panel93.Controls.Add(this.labelBattlefieldPalettes);
-            this.panel93.Controls.Add(this.battlefieldPaletteSetNum);
-            this.panel93.Controls.Add(this.pictureBoxColorBF);
-            this.panel93.Controls.Add(this.label102);
-            this.panel93.Controls.Add(this.bfPaletteGreenBar);
-            this.panel93.Controls.Add(this.panel60);
-            this.panel93.Controls.Add(this.bfPaletteBlueBar);
-            this.panel93.Controls.Add(this.bfPalettePictureBox);
-            this.panel93.Controls.Add(this.bfPaletteRedBar);
-            this.panel93.Controls.Add(this.bfPaletteRedNum);
-            this.panel93.Controls.Add(this.label123);
-            this.panel93.Controls.Add(this.label77);
-            this.panel93.Controls.Add(this.bfPaletteColorNum);
-            this.panel93.Controls.Add(this.bfPaletteBlueNum);
-            this.panel93.Controls.Add(this.label121);
-            this.panel93.Controls.Add(this.label78);
-            this.panel93.Controls.Add(this.bfPaletteGreenNum);
-            this.panel93.Location = new System.Drawing.Point(2, 2);
-            this.panel93.Name = "panel93";
-            this.panel93.Size = new System.Drawing.Size(256, 221);
-            this.panel93.TabIndex = 497;
-            // 
-            // labelBattlefieldPalettes
-            // 
-            this.labelBattlefieldPalettes.BackColor = System.Drawing.SystemColors.Control;
-            this.labelBattlefieldPalettes.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBattlefieldPalettes.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.labelBattlefieldPalettes.Location = new System.Drawing.Point(0, 0);
-            this.labelBattlefieldPalettes.Name = "labelBattlefieldPalettes";
-            this.labelBattlefieldPalettes.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelBattlefieldPalettes.Size = new System.Drawing.Size(256, 17);
-            this.labelBattlefieldPalettes.TabIndex = 454;
-            this.labelBattlefieldPalettes.Text = "PALETTES";
-            this.labelBattlefieldPalettes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // battlefieldPaletteSetNum
-            // 
-            this.battlefieldPaletteSetNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.battlefieldPaletteSetNum.Hexadecimal = true;
-            this.battlefieldPaletteSetNum.Location = new System.Drawing.Point(77, 19);
-            this.battlefieldPaletteSetNum.Maximum = new decimal(new int[] {
-            56,
-            0,
-            0,
-            0});
-            this.battlefieldPaletteSetNum.Name = "battlefieldPaletteSetNum";
-            this.battlefieldPaletteSetNum.Size = new System.Drawing.Size(50, 17);
-            this.battlefieldPaletteSetNum.TabIndex = 189;
-            this.battlefieldPaletteSetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.battlefieldPaletteSetNum.ValueChanged += new System.EventHandler(this.battlefieldPaletteSetNum_ValueChanged);
-            // 
-            // pictureBoxColorBF
-            // 
-            this.pictureBoxColorBF.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBoxColorBF.Location = new System.Drawing.Point(91, 150);
-            this.pictureBoxColorBF.Name = "pictureBoxColorBF";
-            this.pictureBoxColorBF.Size = new System.Drawing.Size(165, 17);
-            this.pictureBoxColorBF.TabIndex = 455;
-            this.pictureBoxColorBF.TabStop = false;
-            // 
-            // label102
-            // 
-            this.label102.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label102.Location = new System.Drawing.Point(0, 19);
-            this.label102.Name = "label102";
-            this.label102.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label102.Size = new System.Drawing.Size(76, 17);
-            this.label102.TabIndex = 190;
-            this.label102.Text = "Palette Set";
-            // 
-            // bfPaletteGreenBar
-            // 
-            this.bfPaletteGreenBar.AutoSize = false;
-            this.bfPaletteGreenBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.bfPaletteGreenBar.Location = new System.Drawing.Point(91, 186);
-            this.bfPaletteGreenBar.Maximum = 248;
-            this.bfPaletteGreenBar.Name = "bfPaletteGreenBar";
-            this.bfPaletteGreenBar.Size = new System.Drawing.Size(165, 17);
-            this.bfPaletteGreenBar.SmallChange = 8;
-            this.bfPaletteGreenBar.TabIndex = 445;
-            this.bfPaletteGreenBar.TickFrequency = 8;
-            this.bfPaletteGreenBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.bfPaletteGreenBar.Scroll += new System.EventHandler(this.bfPaletteGreenBar_Scroll);
-            // 
-            // panel60
-            // 
-            this.panel60.BackColor = System.Drawing.SystemColors.Window;
-            this.panel60.Controls.Add(this.battlefieldPaletteSetName);
-            this.panel60.Location = new System.Drawing.Point(128, 19);
-            this.panel60.Name = "panel60";
-            this.panel60.Size = new System.Drawing.Size(129, 17);
-            this.panel60.TabIndex = 190;
-            // 
-            // battlefieldPaletteSetName
-            // 
-            this.battlefieldPaletteSetName.DropDownHeight = 200;
-            this.battlefieldPaletteSetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.battlefieldPaletteSetName.IntegralHeight = false;
-            this.battlefieldPaletteSetName.Items.AddRange(new object[] {
-            "Forest Maze",
-            "Bowyer\'s Pad",
-            "Beanstalks",
-            "Sunken Ship Cellar",
-            "Sunken Ship",
-            "Underground",
-            "Bowser\'s Keep",
-            "Barrel Volcano",
-            "Grasslands",
-            "Mountains",
-            "House",
-            "Booster Tower",
-            "Castle",
-            "Kero Sewers Water",
-            "____",
-            "Exor",
-            "Booster Tower Balcony",
-            "Smithy Factory",
-            "Kero Sewers",
-            "____",
-            "Nimbus Castle",
-            "Birdo",
-            "Nimbus Land",
-            "___castle",
-            "___forest",
-            "Mushroom Kingdom",
-            "Chandeliers",
-            "Castle",
-            "____",
-            "Forest Maze Path",
-            "____",
-            "Plateaus",
-            "Sea Enclave",
-            "Marrymore Chapel",
-            "Level Up",
-            "Star Hill",
-            "Seaside Town Beach",
-            "Axem Rangers",
-            "Domino & Cloaker",
-            "Sea",
-            "Bean Valley",
-            "Land\'s End Desert",
-            "Smithys\' Pad",
-            "Smithy\'s Final Form",
-            "Culex",
-            "Jinx\'s Dojo",
-            "Factory Grounds",
-            "____",
-            "____",
-            "____",
-            "____",
-            "____",
-            "____",
-            "____",
-            "____",
-            "____",
-            "____"});
-            this.battlefieldPaletteSetName.Location = new System.Drawing.Point(-2, -2);
-            this.battlefieldPaletteSetName.Name = "battlefieldPaletteSetName";
-            this.battlefieldPaletteSetName.Size = new System.Drawing.Size(133, 21);
-            this.battlefieldPaletteSetName.TabIndex = 158;
-            this.battlefieldPaletteSetName.SelectedIndexChanged += new System.EventHandler(this.battlefieldPaletteSetName_SelectedIndexChanged);
-            // 
-            // bfPaletteBlueBar
-            // 
-            this.bfPaletteBlueBar.AutoSize = false;
-            this.bfPaletteBlueBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.bfPaletteBlueBar.Location = new System.Drawing.Point(91, 204);
-            this.bfPaletteBlueBar.Maximum = 248;
-            this.bfPaletteBlueBar.Name = "bfPaletteBlueBar";
-            this.bfPaletteBlueBar.Size = new System.Drawing.Size(165, 17);
-            this.bfPaletteBlueBar.SmallChange = 8;
-            this.bfPaletteBlueBar.TabIndex = 447;
-            this.bfPaletteBlueBar.TickFrequency = 8;
-            this.bfPaletteBlueBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.bfPaletteBlueBar.Scroll += new System.EventHandler(this.bfPaletteBlueBar_Scroll);
-            // 
-            // bfPalettePictureBox
-            // 
-            this.bfPalettePictureBox.BackColor = System.Drawing.SystemColors.Control;
-            this.bfPalettePictureBox.ContextMenuStrip = this.contextMenuStrip3;
-            this.bfPalettePictureBox.Location = new System.Drawing.Point(0, 37);
-            this.bfPalettePictureBox.Name = "bfPalettePictureBox";
-            this.bfPalettePictureBox.Size = new System.Drawing.Size(256, 112);
-            this.bfPalettePictureBox.TabIndex = 448;
-            this.bfPalettePictureBox.TabStop = false;
-            this.bfPalettePictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bfPalettePictureBox_MouseClick);
-            this.bfPalettePictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.bfPalettePictureBox_Paint);
-            // 
-            // contextMenuStrip3
-            // 
-            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importPaletteSetToolStripMenuItem,
-            this.exportPaletteSetToolStripMenuItem});
-            this.contextMenuStrip3.Name = "contextMenuStrip3";
-            this.contextMenuStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip3.ShowImageMargin = false;
-            this.contextMenuStrip3.Size = new System.Drawing.Size(149, 46);
-            // 
-            // importPaletteSetToolStripMenuItem
-            // 
-            this.importPaletteSetToolStripMenuItem.AutoSize = false;
-            this.importPaletteSetToolStripMenuItem.Name = "importPaletteSetToolStripMenuItem";
-            this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(173, 20);
-            this.importPaletteSetToolStripMenuItem.Text = "Import palette set...";
-            this.importPaletteSetToolStripMenuItem.Click += new System.EventHandler(this.importPaletteSetToolStripMenuItem_Click);
-            // 
-            // exportPaletteSetToolStripMenuItem
-            // 
-            this.exportPaletteSetToolStripMenuItem.Name = "exportPaletteSetToolStripMenuItem";
-            this.exportPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.exportPaletteSetToolStripMenuItem.Text = "Export palette set...";
-            this.exportPaletteSetToolStripMenuItem.Click += new System.EventHandler(this.exportPaletteSetToolStripMenuItem_Click);
-            // 
-            // bfPaletteRedBar
-            // 
-            this.bfPaletteRedBar.AutoSize = false;
-            this.bfPaletteRedBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.bfPaletteRedBar.Location = new System.Drawing.Point(91, 168);
-            this.bfPaletteRedBar.Maximum = 248;
-            this.bfPaletteRedBar.Name = "bfPaletteRedBar";
-            this.bfPaletteRedBar.Size = new System.Drawing.Size(165, 17);
-            this.bfPaletteRedBar.SmallChange = 8;
-            this.bfPaletteRedBar.TabIndex = 443;
-            this.bfPaletteRedBar.TickFrequency = 8;
-            this.bfPaletteRedBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.bfPaletteRedBar.Scroll += new System.EventHandler(this.bfPaletteRedBar_Scroll);
-            // 
-            // bfPaletteRedNum
-            // 
-            this.bfPaletteRedNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bfPaletteRedNum.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.bfPaletteRedNum.Location = new System.Drawing.Point(47, 168);
-            this.bfPaletteRedNum.Maximum = new decimal(new int[] {
-            248,
-            0,
-            0,
-            0});
-            this.bfPaletteRedNum.Name = "bfPaletteRedNum";
-            this.bfPaletteRedNum.Size = new System.Drawing.Size(43, 17);
-            this.bfPaletteRedNum.TabIndex = 442;
-            this.bfPaletteRedNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.bfPaletteRedNum.ValueChanged += new System.EventHandler(this.bfPaletteRedNum_ValueChanged);
-            // 
-            // label123
-            // 
-            this.label123.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label123.Location = new System.Drawing.Point(0, 168);
-            this.label123.Name = "label123";
-            this.label123.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label123.Size = new System.Drawing.Size(46, 17);
-            this.label123.TabIndex = 450;
-            this.label123.Text = "Red";
-            // 
-            // label77
-            // 
-            this.label77.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label77.Location = new System.Drawing.Point(0, 204);
-            this.label77.Name = "label77";
-            this.label77.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label77.Size = new System.Drawing.Size(46, 17);
-            this.label77.TabIndex = 452;
-            this.label77.Text = "Blue";
-            // 
-            // bfPaletteColorNum
-            // 
-            this.bfPaletteColorNum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.bfPaletteColorNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bfPaletteColorNum.Location = new System.Drawing.Point(47, 150);
-            this.bfPaletteColorNum.Maximum = new decimal(new int[] {
-            111,
-            0,
-            0,
-            0});
-            this.bfPaletteColorNum.Name = "bfPaletteColorNum";
-            this.bfPaletteColorNum.Size = new System.Drawing.Size(43, 17);
-            this.bfPaletteColorNum.TabIndex = 441;
-            this.bfPaletteColorNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.bfPaletteColorNum.ValueChanged += new System.EventHandler(this.bfPaletteColorNum_ValueChanged);
-            // 
-            // bfPaletteBlueNum
-            // 
-            this.bfPaletteBlueNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bfPaletteBlueNum.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.bfPaletteBlueNum.Location = new System.Drawing.Point(47, 204);
-            this.bfPaletteBlueNum.Maximum = new decimal(new int[] {
-            248,
-            0,
-            0,
-            0});
-            this.bfPaletteBlueNum.Name = "bfPaletteBlueNum";
-            this.bfPaletteBlueNum.Size = new System.Drawing.Size(43, 17);
-            this.bfPaletteBlueNum.TabIndex = 446;
-            this.bfPaletteBlueNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.bfPaletteBlueNum.ValueChanged += new System.EventHandler(this.bfPaletteBlueNum_ValueChanged);
-            // 
-            // label121
-            // 
-            this.label121.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label121.Location = new System.Drawing.Point(0, 150);
-            this.label121.Name = "label121";
-            this.label121.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label121.Size = new System.Drawing.Size(46, 17);
-            this.label121.TabIndex = 449;
-            this.label121.Text = "Color";
-            // 
-            // label78
-            // 
-            this.label78.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label78.Location = new System.Drawing.Point(0, 186);
-            this.label78.Name = "label78";
-            this.label78.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label78.Size = new System.Drawing.Size(46, 17);
-            this.label78.TabIndex = 451;
-            this.label78.Text = "Green";
-            // 
-            // bfPaletteGreenNum
-            // 
-            this.bfPaletteGreenNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bfPaletteGreenNum.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.bfPaletteGreenNum.Location = new System.Drawing.Point(47, 186);
-            this.bfPaletteGreenNum.Maximum = new decimal(new int[] {
-            248,
-            0,
-            0,
-            0});
-            this.bfPaletteGreenNum.Name = "bfPaletteGreenNum";
-            this.bfPaletteGreenNum.Size = new System.Drawing.Size(43, 17);
-            this.bfPaletteGreenNum.TabIndex = 444;
-            this.bfPaletteGreenNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.bfPaletteGreenNum.ValueChanged += new System.EventHandler(this.bfPaletteGreenNum_ValueChanged);
-            // 
-            // panelBattlefieldProperties
-            // 
-            this.panelBattlefieldProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelBattlefieldProperties.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelBattlefieldProperties.Controls.Add(this.panel92);
-            this.panelBattlefieldProperties.Location = new System.Drawing.Point(-2, 254);
-            this.panelBattlefieldProperties.Name = "panelBattlefieldProperties";
-            this.panelBattlefieldProperties.Size = new System.Drawing.Size(260, 130);
-            this.panelBattlefieldProperties.TabIndex = 443;
-            // 
-            // panel92
-            // 
-            this.panel92.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.panel92.Controls.Add(this.labelBattlefieldProperties);
-            this.panel92.Controls.Add(this.label97);
-            this.panel92.Controls.Add(this.battlefieldGFXSet4Num);
-            this.panel92.Controls.Add(this.battlefieldGFXSet5Num);
-            this.panel92.Controls.Add(this.label98);
-            this.panel92.Controls.Add(this.battlefieldGFXSet3Num);
-            this.panel92.Controls.Add(this.panel57);
-            this.panel92.Controls.Add(this.label99);
-            this.panel92.Controls.Add(this.panel56);
-            this.panel92.Controls.Add(this.battlefieldGFXSet2Num);
-            this.panel92.Controls.Add(this.panel7);
-            this.panel92.Controls.Add(this.label100);
-            this.panel92.Controls.Add(this.panel5);
-            this.panel92.Controls.Add(this.battlefieldGFXSet1Num);
-            this.panel92.Controls.Add(this.panel2);
-            this.panel92.Controls.Add(this.label69);
-            this.panel92.Controls.Add(this.battlefieldTilesetNum);
-            this.panel92.Controls.Add(this.label101);
-            this.panel92.Controls.Add(this.panel59);
-            this.panel92.Location = new System.Drawing.Point(2, 2);
-            this.panel92.Name = "panel92";
-            this.panel92.Size = new System.Drawing.Size(256, 126);
-            this.panel92.TabIndex = 496;
-            // 
-            // labelBattlefieldProperties
-            // 
-            this.labelBattlefieldProperties.BackColor = System.Drawing.SystemColors.Control;
-            this.labelBattlefieldProperties.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBattlefieldProperties.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.labelBattlefieldProperties.Location = new System.Drawing.Point(0, 0);
-            this.labelBattlefieldProperties.Name = "labelBattlefieldProperties";
-            this.labelBattlefieldProperties.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelBattlefieldProperties.Size = new System.Drawing.Size(256, 17);
-            this.labelBattlefieldProperties.TabIndex = 456;
-            this.labelBattlefieldProperties.Text = "BATTLEFIELD PROPERTIES";
-            this.labelBattlefieldProperties.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label97
-            // 
-            this.label97.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label97.Location = new System.Drawing.Point(0, 37);
-            this.label97.Name = "label97";
-            this.label97.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label97.Size = new System.Drawing.Size(76, 17);
-            this.label97.TabIndex = 171;
-            this.label97.Text = "GFX Set 2";
-            // 
-            // battlefieldGFXSet4Num
-            // 
-            this.battlefieldGFXSet4Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.battlefieldGFXSet4Num.Hexadecimal = true;
-            this.battlefieldGFXSet4Num.Location = new System.Drawing.Point(77, 73);
-            this.battlefieldGFXSet4Num.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.battlefieldGFXSet4Num.Name = "battlefieldGFXSet4Num";
-            this.battlefieldGFXSet4Num.Size = new System.Drawing.Size(50, 17);
-            this.battlefieldGFXSet4Num.TabIndex = 183;
-            this.battlefieldGFXSet4Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.battlefieldGFXSet4Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet4Num_ValueChanged);
-            // 
-            // battlefieldGFXSet5Num
-            // 
-            this.battlefieldGFXSet5Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.battlefieldGFXSet5Num.Hexadecimal = true;
-            this.battlefieldGFXSet5Num.Location = new System.Drawing.Point(77, 91);
-            this.battlefieldGFXSet5Num.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.battlefieldGFXSet5Num.Name = "battlefieldGFXSet5Num";
-            this.battlefieldGFXSet5Num.Size = new System.Drawing.Size(50, 17);
-            this.battlefieldGFXSet5Num.TabIndex = 185;
-            this.battlefieldGFXSet5Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.battlefieldGFXSet5Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet5Num_ValueChanged);
-            // 
-            // label98
-            // 
-            this.label98.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label98.Location = new System.Drawing.Point(0, 55);
-            this.label98.Name = "label98";
-            this.label98.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label98.Size = new System.Drawing.Size(76, 17);
-            this.label98.TabIndex = 172;
-            this.label98.Text = "GFX Set 3";
-            // 
-            // battlefieldGFXSet3Num
-            // 
-            this.battlefieldGFXSet3Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.battlefieldGFXSet3Num.Hexadecimal = true;
-            this.battlefieldGFXSet3Num.Location = new System.Drawing.Point(77, 55);
-            this.battlefieldGFXSet3Num.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.battlefieldGFXSet3Num.Name = "battlefieldGFXSet3Num";
-            this.battlefieldGFXSet3Num.Size = new System.Drawing.Size(50, 17);
-            this.battlefieldGFXSet3Num.TabIndex = 181;
-            this.battlefieldGFXSet3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.battlefieldGFXSet3Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet3Num_ValueChanged);
-            // 
-            // panel57
-            // 
-            this.panel57.BackColor = System.Drawing.SystemColors.Window;
-            this.panel57.Controls.Add(this.battlefieldGFXSet1Name);
-            this.panel57.Location = new System.Drawing.Point(128, 19);
-            this.panel57.Name = "panel57";
-            this.panel57.Size = new System.Drawing.Size(129, 17);
-            this.panel57.TabIndex = 178;
-            // 
-            // battlefieldGFXSet1Name
-            // 
-            this.battlefieldGFXSet1Name.DropDownHeight = 200;
-            this.battlefieldGFXSet1Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.battlefieldGFXSet1Name.IntegralHeight = false;
-            this.battlefieldGFXSet1Name.Location = new System.Drawing.Point(-2, -2);
-            this.battlefieldGFXSet1Name.Name = "battlefieldGFXSet1Name";
-            this.battlefieldGFXSet1Name.Size = new System.Drawing.Size(133, 21);
-            this.battlefieldGFXSet1Name.TabIndex = 118;
-            this.battlefieldGFXSet1Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet1Name_SelectedIndexChanged);
-            // 
-            // label99
-            // 
-            this.label99.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label99.Location = new System.Drawing.Point(0, 73);
-            this.label99.Name = "label99";
-            this.label99.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label99.Size = new System.Drawing.Size(76, 17);
-            this.label99.TabIndex = 173;
-            this.label99.Text = "GFX Set 4";
-            // 
-            // panel56
-            // 
-            this.panel56.BackColor = System.Drawing.SystemColors.Window;
-            this.panel56.Controls.Add(this.battlefieldGFXSet3Name);
-            this.panel56.Location = new System.Drawing.Point(128, 55);
-            this.panel56.Name = "panel56";
-            this.panel56.Size = new System.Drawing.Size(129, 17);
-            this.panel56.TabIndex = 182;
-            // 
-            // battlefieldGFXSet3Name
-            // 
-            this.battlefieldGFXSet3Name.DropDownHeight = 200;
-            this.battlefieldGFXSet3Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.battlefieldGFXSet3Name.IntegralHeight = false;
-            this.battlefieldGFXSet3Name.Location = new System.Drawing.Point(-2, -2);
-            this.battlefieldGFXSet3Name.Name = "battlefieldGFXSet3Name";
-            this.battlefieldGFXSet3Name.Size = new System.Drawing.Size(133, 21);
-            this.battlefieldGFXSet3Name.TabIndex = 120;
-            this.battlefieldGFXSet3Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet3Name_SelectedIndexChanged);
-            // 
-            // battlefieldGFXSet2Num
-            // 
-            this.battlefieldGFXSet2Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.battlefieldGFXSet2Num.Hexadecimal = true;
-            this.battlefieldGFXSet2Num.Location = new System.Drawing.Point(77, 37);
-            this.battlefieldGFXSet2Num.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.battlefieldGFXSet2Num.Name = "battlefieldGFXSet2Num";
-            this.battlefieldGFXSet2Num.Size = new System.Drawing.Size(50, 17);
-            this.battlefieldGFXSet2Num.TabIndex = 179;
-            this.battlefieldGFXSet2Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.battlefieldGFXSet2Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet2Num_ValueChanged);
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.SystemColors.Window;
-            this.panel7.Controls.Add(this.battlefieldGFXSet5Name);
-            this.panel7.Location = new System.Drawing.Point(128, 91);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(129, 17);
-            this.panel7.TabIndex = 186;
-            // 
-            // battlefieldGFXSet5Name
-            // 
-            this.battlefieldGFXSet5Name.DropDownHeight = 200;
-            this.battlefieldGFXSet5Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.battlefieldGFXSet5Name.IntegralHeight = false;
-            this.battlefieldGFXSet5Name.Location = new System.Drawing.Point(-2, -2);
-            this.battlefieldGFXSet5Name.Name = "battlefieldGFXSet5Name";
-            this.battlefieldGFXSet5Name.Size = new System.Drawing.Size(133, 21);
-            this.battlefieldGFXSet5Name.TabIndex = 122;
-            this.battlefieldGFXSet5Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet5Name_SelectedIndexChanged);
-            // 
-            // label100
-            // 
-            this.label100.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label100.Location = new System.Drawing.Point(0, 91);
-            this.label100.Name = "label100";
-            this.label100.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label100.Size = new System.Drawing.Size(76, 17);
-            this.label100.TabIndex = 174;
-            this.label100.Text = "GFX Set 5";
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.Window;
-            this.panel5.Controls.Add(this.battlefieldGFXSet2Name);
-            this.panel5.Location = new System.Drawing.Point(128, 37);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(129, 17);
-            this.panel5.TabIndex = 180;
-            // 
-            // battlefieldGFXSet2Name
-            // 
-            this.battlefieldGFXSet2Name.DropDownHeight = 200;
-            this.battlefieldGFXSet2Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.battlefieldGFXSet2Name.IntegralHeight = false;
-            this.battlefieldGFXSet2Name.Location = new System.Drawing.Point(-2, -2);
-            this.battlefieldGFXSet2Name.Name = "battlefieldGFXSet2Name";
-            this.battlefieldGFXSet2Name.Size = new System.Drawing.Size(133, 21);
-            this.battlefieldGFXSet2Name.TabIndex = 119;
-            this.battlefieldGFXSet2Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet2Name_SelectedIndexChanged);
-            // 
-            // battlefieldGFXSet1Num
-            // 
-            this.battlefieldGFXSet1Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.battlefieldGFXSet1Num.Hexadecimal = true;
-            this.battlefieldGFXSet1Num.Location = new System.Drawing.Point(77, 19);
-            this.battlefieldGFXSet1Num.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.battlefieldGFXSet1Num.Name = "battlefieldGFXSet1Num";
-            this.battlefieldGFXSet1Num.Size = new System.Drawing.Size(50, 17);
-            this.battlefieldGFXSet1Num.TabIndex = 177;
-            this.battlefieldGFXSet1Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.battlefieldGFXSet1Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet1Num_ValueChanged);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Window;
-            this.panel2.Controls.Add(this.battlefieldGFXSet4Name);
-            this.panel2.Location = new System.Drawing.Point(128, 73);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(129, 17);
-            this.panel2.TabIndex = 184;
-            // 
-            // battlefieldGFXSet4Name
-            // 
-            this.battlefieldGFXSet4Name.DropDownHeight = 200;
-            this.battlefieldGFXSet4Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.battlefieldGFXSet4Name.IntegralHeight = false;
-            this.battlefieldGFXSet4Name.Location = new System.Drawing.Point(-2, -2);
-            this.battlefieldGFXSet4Name.Name = "battlefieldGFXSet4Name";
-            this.battlefieldGFXSet4Name.Size = new System.Drawing.Size(133, 21);
-            this.battlefieldGFXSet4Name.TabIndex = 121;
-            this.battlefieldGFXSet4Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet4Name_SelectedIndexChanged);
-            // 
-            // label69
-            // 
-            this.label69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label69.Location = new System.Drawing.Point(0, 19);
-            this.label69.Name = "label69";
-            this.label69.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label69.Size = new System.Drawing.Size(76, 17);
-            this.label69.TabIndex = 170;
-            this.label69.Text = "GFX Set 1";
-            // 
-            // battlefieldTilesetNum
-            // 
-            this.battlefieldTilesetNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.battlefieldTilesetNum.Hexadecimal = true;
-            this.battlefieldTilesetNum.Location = new System.Drawing.Point(77, 109);
-            this.battlefieldTilesetNum.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.battlefieldTilesetNum.Name = "battlefieldTilesetNum";
-            this.battlefieldTilesetNum.Size = new System.Drawing.Size(50, 17);
-            this.battlefieldTilesetNum.TabIndex = 187;
-            this.battlefieldTilesetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.battlefieldTilesetNum.ValueChanged += new System.EventHandler(this.battlefieldTilesetNum_ValueChanged);
-            // 
-            // label101
-            // 
-            this.label101.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label101.Location = new System.Drawing.Point(0, 109);
-            this.label101.Name = "label101";
-            this.label101.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label101.Size = new System.Drawing.Size(76, 17);
-            this.label101.TabIndex = 185;
-            this.label101.Text = "Tileset";
-            // 
-            // panel59
-            // 
-            this.panel59.BackColor = System.Drawing.SystemColors.Window;
-            this.panel59.Controls.Add(this.battlefieldTilesetName);
-            this.panel59.Location = new System.Drawing.Point(128, 109);
-            this.panel59.Name = "panel59";
-            this.panel59.Size = new System.Drawing.Size(129, 17);
-            this.panel59.TabIndex = 188;
-            // 
-            // battlefieldTilesetName
-            // 
-            this.battlefieldTilesetName.DropDownHeight = 200;
-            this.battlefieldTilesetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.battlefieldTilesetName.IntegralHeight = false;
-            this.battlefieldTilesetName.Items.AddRange(new object[] {
-            "Forest Maze",
-            "Bowyer\'s Pad",
-            "Beanstalks",
-            "Sunken Ship Cellar",
-            "Sunken Ship",
-            "Moleville Mines",
-            "___mines",
-            "Bowser\'s Keep",
-            "Czar Dragon\'s Pad",
-            "Grasslands",
-            "Mountains",
-            "House",
-            "Booster Tower",
-            "Castle",
-            "Kero Sewers Water",
-            "____",
-            "Exor",
-            "Booster Tower Balcony",
-            "Count Down",
-            "Smithy Factory",
-            "Barrel Volcano",
-            "Kero Sewers",
-            "____",
-            "____",
-            "____",
-            "____",
-            "____",
-            "____",
-            "Nimbus Castle",
-            "Birdo",
-            "Nimbus Land",
-            "Underground",
-            "___castle",
-            "___forest",
-            "Mushroom Kingdom",
-            "Chandeliers",
-            "____",
-            "____",
-            "Forest Maze Path",
-            "Level Up foreground",
-            "Level Up background",
-            "Plateaus",
-            "Sea Enclave",
-            "Marrymore Chapel",
-            "Star Hill",
-            "Seaside Town Beach",
-            "Axem Rangers",
-            "Domino & Cloaker",
-            "Belome Temple",
-            "Land\'s End Desert",
-            "____",
-            "Smithys\' Pad",
-            "Smithy\'s Final Form",
-            "Culex",
-            "Jinx\'s Dojo",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "Factory Grounds",
-            "Bean Valley: Pipe Room"});
-            this.battlefieldTilesetName.Location = new System.Drawing.Point(-2, -2);
-            this.battlefieldTilesetName.Name = "battlefieldTilesetName";
-            this.battlefieldTilesetName.Size = new System.Drawing.Size(133, 21);
-            this.battlefieldTilesetName.TabIndex = 129;
-            this.battlefieldTilesetName.SelectedIndexChanged += new System.EventHandler(this.battlefieldTilesetName_SelectedIndexChanged);
-            // 
-            // panel45
-            // 
-            this.panel45.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel45.Controls.Add(this.labelBattlefields);
-            this.panel45.Controls.Add(this.panel61);
-            this.panel45.Controls.Add(this.battlefieldNum);
-            this.panel45.Location = new System.Drawing.Point(-2, -2);
-            this.panel45.Name = "panel45";
-            this.panel45.Size = new System.Drawing.Size(260, 40);
-            this.panel45.TabIndex = 443;
-            // 
-            // labelBattlefields
-            // 
-            this.labelBattlefields.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelBattlefields.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.labelBattlefields.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBattlefields.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelBattlefields.Location = new System.Drawing.Point(2, 2);
-            this.labelBattlefields.Name = "labelBattlefields";
-            this.labelBattlefields.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelBattlefields.Size = new System.Drawing.Size(128, 17);
-            this.labelBattlefields.TabIndex = 192;
-            this.labelBattlefields.Text = "BATTLEFIELD #";
-            // 
-            // panel61
-            // 
-            this.panel61.BackColor = System.Drawing.SystemColors.Window;
-            this.panel61.Controls.Add(this.battlefieldName);
-            this.panel61.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel61.Location = new System.Drawing.Point(2, 21);
-            this.panel61.Name = "panel61";
-            this.panel61.Size = new System.Drawing.Size(256, 17);
-            this.panel61.TabIndex = 175;
-            // 
-            // battlefieldName
-            // 
-            this.battlefieldName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.battlefieldName.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.battlefieldName.DropDownHeight = 561;
-            this.battlefieldName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.battlefieldName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.battlefieldName.ForeColor = System.Drawing.SystemColors.Control;
-            this.battlefieldName.IntegralHeight = false;
-            this.battlefieldName.Items.AddRange(new object[] {
-            "Forest Maze",
-            "Forest Maze: Bowyer\'s Pad",
-            "Bean Valley: Beanstalks",
-            "Sunken Ship: King Calamari\'s Cellar",
-            "Sunken Ship",
-            "Moleville Mines",
-            "___mines",
-            "Bowser\'s Keep",
-            "Barrel Volcano: Czar Dragon\'s Pad",
-            "Grasslands",
-            "Mountains",
-            "Mushroom Kingdom House",
-            "Booster Tower",
-            "Mushroom Kingdom Castle",
-            "Kero Sewers: Underwater",
-            "Mushroom Kingdom Castle",
-            "Bowser\'s Keep Turret: Exor",
-            "Booster Tower: Balcony",
-            "Smithy Factory: Count Down\'s Pad",
-            "Smithy Factory",
-            "Barrel Volcano",
-            "Kero Sewers",
-            "Nimbus Castle",
-            "Nimbus Castle: Birdo\'s Room",
-            "Nimbus Land",
-            "Underground",
-            "___uses Mushroom Kingdom tiles",
-            "___forested area with unique trees",
-            "Mushroom Kingdom",
-            "Bowser\'s Keep: Chandeliers",
-            "Forest Maze: Path to Bowyer",
-            "Level Up foreground",
-            "Level Up background",
-            "Plateaus",
-            "___sea enclave",
-            "Marrymore Chapel Sanctuary",
-            "Star Hill",
-            "Seaside Town Beach",
-            "Sea",
-            "Blade: Axem Rangers",
-            "Smithy Factory: Domino & Cloaker\'s Pad",
-            "Bean Valley: Grasslands",
-            "Belome Temple",
-            "Land\'s End Desert",
-            "Factory Grounds: Smithy\'s Pad",
-            "Smithy\'s Final Form",
-            "Jinx\'s Dojo",
-            "Culex",
-            "Factory Grounds",
-            "Bean Valley: Pipe Room",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "_____",
-            "_____"});
-            this.battlefieldName.Location = new System.Drawing.Point(-2, -2);
-            this.battlefieldName.Name = "battlefieldName";
-            this.battlefieldName.Size = new System.Drawing.Size(261, 21);
-            this.battlefieldName.TabIndex = 116;
-            this.battlefieldName.SelectedIndexChanged += new System.EventHandler(this.battlefieldName_SelectedIndexChanged);
-            // 
-            // battlefieldNum
-            // 
-            this.battlefieldNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.battlefieldNum.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.battlefieldNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.battlefieldNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.battlefieldNum.ForeColor = System.Drawing.SystemColors.Control;
-            this.battlefieldNum.Hexadecimal = true;
-            this.battlefieldNum.Location = new System.Drawing.Point(131, 2);
-            this.battlefieldNum.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.battlefieldNum.Name = "battlefieldNum";
-            this.battlefieldNum.Size = new System.Drawing.Size(128, 17);
-            this.battlefieldNum.TabIndex = 174;
-            this.battlefieldNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.battlefieldNum.ValueChanged += new System.EventHandler(this.battlefieldNum_ValueChanged);
             // 
             // label26
             // 
@@ -6391,37 +5176,33 @@ namespace SMRPGED
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(131, 138);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(131, 148);
             // 
             // cutToolStripMenuItem1
             // 
-            this.cutToolStripMenuItem1.AutoSize = false;
             this.cutToolStripMenuItem1.Name = "cutToolStripMenuItem1";
-            this.cutToolStripMenuItem1.Size = new System.Drawing.Size(163, 20);
+            this.cutToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
             this.cutToolStripMenuItem1.Text = "Cut";
             this.cutToolStripMenuItem1.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem1
             // 
-            this.copyToolStripMenuItem1.AutoSize = false;
             this.copyToolStripMenuItem1.Name = "copyToolStripMenuItem1";
-            this.copyToolStripMenuItem1.Size = new System.Drawing.Size(163, 20);
+            this.copyToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
             this.copyToolStripMenuItem1.Text = "Copy";
             this.copyToolStripMenuItem1.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem1
             // 
-            this.pasteToolStripMenuItem1.AutoSize = false;
             this.pasteToolStripMenuItem1.Name = "pasteToolStripMenuItem1";
-            this.pasteToolStripMenuItem1.Size = new System.Drawing.Size(163, 20);
+            this.pasteToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
             this.pasteToolStripMenuItem1.Text = "Paste";
             this.pasteToolStripMenuItem1.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem1
             // 
-            this.deleteToolStripMenuItem1.AutoSize = false;
             this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(163, 20);
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
             this.deleteToolStripMenuItem1.Text = "Delete";
             this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -6432,9 +5213,8 @@ namespace SMRPGED
             // 
             // toolStripMenuItem5
             // 
-            this.toolStripMenuItem5.AutoSize = false;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(163, 20);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(130, 22);
             this.toolStripMenuItem5.Text = "Select in tileset";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
@@ -6475,7 +5255,6 @@ namespace SMRPGED
             this.Priorities.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Priorities.ItemSize = new System.Drawing.Size(44, 18);
             this.Priorities.Location = new System.Drawing.Point(0, 0);
-            this.Priorities.Multiline = true;
             this.Priorities.Name = "Priorities";
             this.Priorities.Padding = new System.Drawing.Point(5, 4);
             this.Priorities.SelectedIndex = 0;
@@ -6493,7 +5272,7 @@ namespace SMRPGED
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(244, 610);
             this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "LAYERS";
+            this.tabPage3.Text = "LAYER";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // panel4
@@ -6628,13 +5407,13 @@ namespace SMRPGED
             "{NOTHING}",
             "waterfall",
             "???",
-            "glowing save point",
+            "glowing save point (NPC #0)",
             "flashing chandelier",
-            "glowing save point",
+            "glowing save point (NPC #1)",
             "___",
-            "___",
+            "glowing save point (NPC #2)",
             "water tunnel",
-            "glowing save point",
+            "glowing save point (NPC #3)",
             "___",
             "___",
             "___",
@@ -7333,7 +6112,7 @@ namespace SMRPGED
             this.label25.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label25.Size = new System.Drawing.Size(74, 17);
             this.label25.TabIndex = 96;
-            this.label25.Text = "High X+";
+            this.label25.Text = "Right Edge";
             // 
             // layerMaskHighY
             // 
@@ -7358,7 +6137,7 @@ namespace SMRPGED
             this.label24.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label24.Size = new System.Drawing.Size(74, 17);
             this.label24.TabIndex = 98;
-            this.label24.Text = "Low X+";
+            this.label24.Text = "Left Edge";
             // 
             // layerMaskLowY
             // 
@@ -7383,7 +6162,7 @@ namespace SMRPGED
             this.label15.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label15.Size = new System.Drawing.Size(74, 17);
             this.label15.TabIndex = 100;
-            this.label15.Text = "High Y+";
+            this.label15.Text = "Bottom Edge";
             // 
             // labeasdfasd
             // 
@@ -7393,7 +6172,7 @@ namespace SMRPGED
             this.labeasdfasd.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.labeasdfasd.Size = new System.Drawing.Size(74, 17);
             this.labeasdfasd.TabIndex = 103;
-            this.labeasdfasd.Text = "Low Y+";
+            this.labeasdfasd.Text = "Top Edge";
             // 
             // panel73
             // 
@@ -7483,7 +6262,6 @@ namespace SMRPGED
             // layerPrioritySet
             // 
             this.layerPrioritySet.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.layerPrioritySet.Hexadecimal = true;
             this.layerPrioritySet.Location = new System.Drawing.Point(75, 19);
             this.layerPrioritySet.Maximum = new decimal(new int[] {
             15,
@@ -7889,7 +6667,7 @@ namespace SMRPGED
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(244, 610);
             this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "MAPS";
+            this.tabPage4.Text = "MAP";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // panel28
@@ -7963,7 +6741,6 @@ namespace SMRPGED
             // mapGFXSet1Num
             // 
             this.mapGFXSet1Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapGFXSet1Num.Hexadecimal = true;
             this.mapGFXSet1Num.Location = new System.Drawing.Point(75, 19);
             this.mapGFXSet1Num.Maximum = new decimal(new int[] {
             199,
@@ -7979,7 +6756,6 @@ namespace SMRPGED
             // mapGFXSet2Num
             // 
             this.mapGFXSet2Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapGFXSet2Num.Hexadecimal = true;
             this.mapGFXSet2Num.Location = new System.Drawing.Point(75, 37);
             this.mapGFXSet2Num.Maximum = new decimal(new int[] {
             199,
@@ -8066,7 +6842,6 @@ namespace SMRPGED
             // mapGFXSet3Num
             // 
             this.mapGFXSet3Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapGFXSet3Num.Hexadecimal = true;
             this.mapGFXSet3Num.Location = new System.Drawing.Point(75, 55);
             this.mapGFXSet3Num.Maximum = new decimal(new int[] {
             199,
@@ -8124,7 +6899,6 @@ namespace SMRPGED
             // mapGFXSet4Num
             // 
             this.mapGFXSet4Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapGFXSet4Num.Hexadecimal = true;
             this.mapGFXSet4Num.Location = new System.Drawing.Point(75, 73);
             this.mapGFXSet4Num.Maximum = new decimal(new int[] {
             199,
@@ -8161,7 +6935,6 @@ namespace SMRPGED
             // mapGFXSetL3Num
             // 
             this.mapGFXSetL3Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapGFXSetL3Num.Hexadecimal = true;
             this.mapGFXSetL3Num.Location = new System.Drawing.Point(75, 109);
             this.mapGFXSetL3Num.Maximum = new decimal(new int[] {
             28,
@@ -8177,7 +6950,6 @@ namespace SMRPGED
             // mapGFXSet5Num
             // 
             this.mapGFXSet5Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapGFXSet5Num.Hexadecimal = true;
             this.mapGFXSet5Num.Location = new System.Drawing.Point(75, 91);
             this.mapGFXSet5Num.Maximum = new decimal(new int[] {
             199,
@@ -8265,7 +7037,6 @@ namespace SMRPGED
             // mapTilesetL3Num
             // 
             this.mapTilesetL3Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilesetL3Num.Hexadecimal = true;
             this.mapTilesetL3Num.Location = new System.Drawing.Point(75, 55);
             this.mapTilesetL3Num.Maximum = new decimal(new int[] {
             31,
@@ -8281,7 +7052,6 @@ namespace SMRPGED
             // mapTilesetL2Num
             // 
             this.mapTilesetL2Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilesetL2Num.Hexadecimal = true;
             this.mapTilesetL2Num.Location = new System.Drawing.Point(75, 37);
             this.mapTilesetL2Num.Maximum = new decimal(new int[] {
             92,
@@ -8297,7 +7067,6 @@ namespace SMRPGED
             // mapTilesetL1Num
             // 
             this.mapTilesetL1Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilesetL1Num.Hexadecimal = true;
             this.mapTilesetL1Num.Location = new System.Drawing.Point(75, 19);
             this.mapTilesetL1Num.Maximum = new decimal(new int[] {
             92,
@@ -8458,7 +7227,6 @@ namespace SMRPGED
             // mapTilemapL1Num
             // 
             this.mapTilemapL1Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilemapL1Num.Hexadecimal = true;
             this.mapTilemapL1Num.Location = new System.Drawing.Point(75, 19);
             this.mapTilemapL1Num.Maximum = new decimal(new int[] {
             244,
@@ -8492,7 +7260,6 @@ namespace SMRPGED
             // mapTilemapL2Num
             // 
             this.mapTilemapL2Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilemapL2Num.Hexadecimal = true;
             this.mapTilemapL2Num.Location = new System.Drawing.Point(75, 37);
             this.mapTilemapL2Num.Maximum = new decimal(new int[] {
             244,
@@ -8603,7 +7370,6 @@ namespace SMRPGED
             // mapTilemapL3Num
             // 
             this.mapTilemapL3Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilemapL3Num.Hexadecimal = true;
             this.mapTilemapL3Num.Location = new System.Drawing.Point(75, 55);
             this.mapTilemapL3Num.Maximum = new decimal(new int[] {
             63,
@@ -8888,7 +7654,6 @@ namespace SMRPGED
             // mapPhysicalMapNum
             // 
             this.mapPhysicalMapNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapPhysicalMapNum.Hexadecimal = true;
             this.mapPhysicalMapNum.Location = new System.Drawing.Point(75, 73);
             this.mapPhysicalMapNum.Maximum = new decimal(new int[] {
             119,
@@ -8945,7 +7710,6 @@ namespace SMRPGED
             // mapBattlefieldNum
             // 
             this.mapBattlefieldNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapBattlefieldNum.Hexadecimal = true;
             this.mapBattlefieldNum.Location = new System.Drawing.Point(75, 91);
             this.mapBattlefieldNum.Maximum = new decimal(new int[] {
             54,
@@ -9040,6 +7804,30 @@ namespace SMRPGED
             this.palettePictureBox.TabStop = false;
             this.palettePictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.palettePictureBox_MouseClick);
             this.palettePictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.palettePictureBox_Paint);
+            // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importPaletteSetToolStripMenuItem,
+            this.exportPaletteSetToolStripMenuItem});
+            this.contextMenuStrip3.Name = "contextMenuStrip3";
+            this.contextMenuStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextMenuStrip3.ShowImageMargin = false;
+            this.contextMenuStrip3.Size = new System.Drawing.Size(149, 48);
+            // 
+            // importPaletteSetToolStripMenuItem
+            // 
+            this.importPaletteSetToolStripMenuItem.Name = "importPaletteSetToolStripMenuItem";
+            this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.importPaletteSetToolStripMenuItem.Text = "Import palette set...";
+            this.importPaletteSetToolStripMenuItem.Click += new System.EventHandler(this.importPaletteSetToolStripMenuItem_Click);
+            // 
+            // exportPaletteSetToolStripMenuItem
+            // 
+            this.exportPaletteSetToolStripMenuItem.Name = "exportPaletteSetToolStripMenuItem";
+            this.exportPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.exportPaletteSetToolStripMenuItem.Text = "Export palette set...";
+            this.exportPaletteSetToolStripMenuItem.Click += new System.EventHandler(this.exportPaletteSetToolStripMenuItem_Click);
             // 
             // paletteAutoUpdate
             // 
@@ -9313,7 +8101,6 @@ namespace SMRPGED
             // mapPaletteSetNum
             // 
             this.mapPaletteSetNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapPaletteSetNum.Hexadecimal = true;
             this.mapPaletteSetNum.Location = new System.Drawing.Point(75, 19);
             this.mapPaletteSetNum.Maximum = new decimal(new int[] {
             93,
@@ -9399,6 +8186,1165 @@ namespace SMRPGED
             this.labelPixelCoords.Text = "(0, 0)  Pixel Coords";
             this.labelPixelCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // panelTemplates
+            // 
+            this.panelTemplates.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTemplates.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panelTemplates.Controls.Add(this.templatesLoaded);
+            this.panelTemplates.Controls.Add(this.panel114);
+            this.panelTemplates.Controls.Add(this.panel115);
+            this.panelTemplates.Controls.Add(this.templateRename);
+            this.panelTemplates.Controls.Add(this.labelTemplates);
+            this.panelTemplates.Controls.Add(this.panelTemplatesSub);
+            this.panelTemplates.Location = new System.Drawing.Point(719, -1);
+            this.panelTemplates.Name = "panelTemplates";
+            this.panelTemplates.Size = new System.Drawing.Size(268, 659);
+            this.panelTemplates.TabIndex = 448;
+            this.panelTemplates.Visible = false;
+            // 
+            // templatesLoaded
+            // 
+            this.templatesLoaded.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.templatesLoaded.FormattingEnabled = true;
+            this.templatesLoaded.Location = new System.Drawing.Point(0, 42);
+            this.templatesLoaded.Name = "templatesLoaded";
+            this.templatesLoaded.Size = new System.Drawing.Size(268, 156);
+            this.templatesLoaded.TabIndex = 501;
+            this.templatesLoaded.SelectedIndexChanged += new System.EventHandler(this.templatesLoaded_SelectedIndexChanged);
+            // 
+            // panel114
+            // 
+            this.panel114.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel114.AutoScroll = true;
+            this.panel114.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel114.Controls.Add(this.pictureBoxTemplate);
+            this.panel114.Location = new System.Drawing.Point(0, 219);
+            this.panel114.Name = "panel114";
+            this.panel114.Size = new System.Drawing.Size(268, 438);
+            this.panel114.TabIndex = 498;
+            this.panel114.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel109_Scroll);
+            // 
+            // pictureBoxTemplate
+            // 
+            this.pictureBoxTemplate.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBoxTemplate.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxTemplate.Name = "pictureBoxTemplate";
+            this.pictureBoxTemplate.Size = new System.Drawing.Size(128, 128);
+            this.pictureBoxTemplate.TabIndex = 450;
+            this.pictureBoxTemplate.TabStop = false;
+            // 
+            // panel115
+            // 
+            this.panel115.BackColor = System.Drawing.SystemColors.Window;
+            this.panel115.Controls.Add(this.templateRenameText);
+            this.panel115.Location = new System.Drawing.Point(0, 200);
+            this.panel115.Name = "panel115";
+            this.panel115.Size = new System.Drawing.Size(198, 17);
+            this.panel115.TabIndex = 500;
+            // 
+            // templateRenameText
+            // 
+            this.templateRenameText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.templateRenameText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.templateRenameText.Enabled = false;
+            this.templateRenameText.Location = new System.Drawing.Point(4, 2);
+            this.templateRenameText.MaxLength = 128;
+            this.templateRenameText.Name = "templateRenameText";
+            this.templateRenameText.Size = new System.Drawing.Size(190, 14);
+            this.templateRenameText.TabIndex = 4;
+            // 
+            // templateRename
+            // 
+            this.templateRename.BackColor = System.Drawing.SystemColors.Control;
+            this.templateRename.Enabled = false;
+            this.templateRename.FlatAppearance.BorderSize = 0;
+            this.templateRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.templateRename.Location = new System.Drawing.Point(200, 200);
+            this.templateRename.Name = "templateRename";
+            this.templateRename.Size = new System.Drawing.Size(68, 17);
+            this.templateRename.TabIndex = 456;
+            this.templateRename.Text = "RENAME";
+            this.templateRename.UseCompatibleTextRendering = true;
+            this.templateRename.UseVisualStyleBackColor = false;
+            this.templateRename.Click += new System.EventHandler(this.templateRename_Click);
+            // 
+            // labelTemplates
+            // 
+            this.labelTemplates.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTemplates.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.labelTemplates.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.labelTemplates.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTemplates.ForeColor = System.Drawing.SystemColors.Control;
+            this.labelTemplates.Location = new System.Drawing.Point(0, 2);
+            this.labelTemplates.Name = "labelTemplates";
+            this.labelTemplates.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.labelTemplates.Size = new System.Drawing.Size(268, 17);
+            this.labelTemplates.TabIndex = 498;
+            this.labelTemplates.Text = "TEMPLATES";
+            // 
+            // panelTemplatesSub
+            // 
+            this.panelTemplatesSub.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelTemplatesSub.Controls.Add(this.toolStrip3);
+            this.panelTemplatesSub.Location = new System.Drawing.Point(0, 21);
+            this.panelTemplatesSub.Name = "panelTemplatesSub";
+            this.panelTemplatesSub.Size = new System.Drawing.Size(268, 19);
+            this.panelTemplatesSub.TabIndex = 448;
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.AutoSize = false;
+            this.toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel4,
+            this.toolStripSeparator44,
+            this.templateTransfer,
+            this.toolStripSeparator45,
+            templateImport,
+            templateExport,
+            this.toolStripSeparator43,
+            templateDelete,
+            templateCopy,
+            templatePaste});
+            this.toolStrip3.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip3.Size = new System.Drawing.Size(268, 21);
+            this.toolStrip3.TabIndex = 0;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStripLabel4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel4.Margin = new System.Windows.Forms.Padding(3, 1, 0, 2);
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(53, 18);
+            this.toolStripLabel4.Text = "OPTIONS";
+            // 
+            // toolStripSeparator44
+            // 
+            this.toolStripSeparator44.Name = "toolStripSeparator44";
+            this.toolStripSeparator44.Size = new System.Drawing.Size(6, 21);
+            // 
+            // templateTransfer
+            // 
+            this.templateTransfer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.templateTransfer.Image = global::SMRPGED.Properties.Resources.transfer_small;
+            this.templateTransfer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.templateTransfer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.templateTransfer.Name = "templateTransfer";
+            this.templateTransfer.Size = new System.Drawing.Size(23, 18);
+            this.templateTransfer.Text = "Create new template from selection";
+            this.templateTransfer.Click += new System.EventHandler(this.templateTransfer_Click);
+            // 
+            // toolStripSeparator45
+            // 
+            this.toolStripSeparator45.Name = "toolStripSeparator45";
+            this.toolStripSeparator45.Size = new System.Drawing.Size(6, 21);
+            // 
+            // toolStripSeparator43
+            // 
+            this.toolStripSeparator43.Name = "toolStripSeparator43";
+            this.toolStripSeparator43.Size = new System.Drawing.Size(6, 21);
+            // 
+            // panelTilesets
+            // 
+            this.panelTilesets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTilesets.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panelTilesets.Controls.Add(this.labelTilesets);
+            this.panelTilesets.Controls.Add(this.tabControl2);
+            this.panelTilesets.Location = new System.Drawing.Point(719, 1);
+            this.panelTilesets.Name = "panelTilesets";
+            this.panelTilesets.Size = new System.Drawing.Size(270, 656);
+            this.panelTilesets.TabIndex = 139;
+            // 
+            // labelTilesets
+            // 
+            this.labelTilesets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTilesets.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.labelTilesets.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.labelTilesets.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTilesets.ForeColor = System.Drawing.SystemColors.Control;
+            this.labelTilesets.Location = new System.Drawing.Point(0, 0);
+            this.labelTilesets.Name = "labelTilesets";
+            this.labelTilesets.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelTilesets.Size = new System.Drawing.Size(268, 17);
+            this.labelTilesets.TabIndex = 162;
+            this.labelTilesets.Text = "TILESETS...";
+            this.labelTilesets.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.labelTilesets, "Double-click to maximize / restore");
+            this.labelTilesets.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labelTilesets_MouseDoubleClick);
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl2.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControl2.ContextMenuStrip = this.contextMenuStrip2;
+            this.tabControl2.Controls.Add(this.tabPage2);
+            this.tabControl2.Controls.Add(this.tabPage5);
+            this.tabControl2.Controls.Add(this.tabPage6);
+            this.tabControl2.Controls.Add(this.tabPage7);
+            this.tabControl2.Controls.Add(this.tabPage12);
+            this.tabControl2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl2.Location = new System.Drawing.Point(0, 19);
+            this.tabControl2.Multiline = true;
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(268, 636);
+            this.tabControl2.TabIndex = 159;
+            this.tabControl2.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl2_Selecting);
+            this.tabControl2.SelectedIndexChanged += new System.EventHandler(this.tabControl2_SelectedIndexChanged);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.ControlText;
+            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage2.Controls.Add(this.panel95);
+            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(260, 609);
+            this.tabPage2.TabIndex = 0;
+            this.tabPage2.Text = "L1";
+            // 
+            // panel95
+            // 
+            this.panel95.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel95.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
+            this.panel95.Controls.Add(this.panel96);
+            this.panel95.Location = new System.Drawing.Point(1, 1);
+            this.panel95.Name = "panel95";
+            this.panel95.Size = new System.Drawing.Size(256, 605);
+            this.panel95.TabIndex = 441;
+            // 
+            // panel96
+            // 
+            this.panel96.Controls.Add(this.pictureBoxTilesetL1);
+            this.panel96.Location = new System.Drawing.Point(-2, 0);
+            this.panel96.Name = "panel96";
+            this.panel96.Size = new System.Drawing.Size(260, 514);
+            this.panel96.TabIndex = 441;
+            // 
+            // pictureBoxTilesetL1
+            // 
+            this.pictureBoxTilesetL1.BackgroundImage = global::SMRPGED.Properties.Resources._transparent;
+            this.pictureBoxTilesetL1.ContextMenuStrip = this.contextMenuStrip2;
+            this.pictureBoxTilesetL1.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.pictureBoxTilesetL1.Location = new System.Drawing.Point(2, 0);
+            this.pictureBoxTilesetL1.Name = "pictureBoxTilesetL1";
+            this.pictureBoxTilesetL1.Size = new System.Drawing.Size(256, 512);
+            this.pictureBoxTilesetL1.TabIndex = 1;
+            this.pictureBoxTilesetL1.TabStop = false;
+            this.pictureBoxTilesetL1.MouseLeave += new System.EventHandler(this.pictureBoxTilesetL1_MouseLeave);
+            this.pictureBoxTilesetL1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxTilesetL1_PreviewKeyDown);
+            this.pictureBoxTilesetL1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTilesetL1_MouseMove);
+            this.pictureBoxTilesetL1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTilesetL1_MouseDoubleClick);
+            this.pictureBoxTilesetL1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTilesetL1_MouseClick);
+            this.pictureBoxTilesetL1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTilesetL1_MouseDown);
+            this.pictureBoxTilesetL1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTilesetL1_Paint);
+            this.pictureBoxTilesetL1.MouseEnter += new System.EventHandler(this.pictureBoxTilesetL1_MouseEnter);
+            // 
+            // tabPage12
+            // 
+            this.tabPage12.BackColor = System.Drawing.SystemColors.ControlText;
+            this.tabPage12.Controls.Add(this.panelBattlefields);
+            this.tabPage12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage12.Location = new System.Drawing.Point(4, 23);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage12.Size = new System.Drawing.Size(260, 609);
+            this.tabPage12.TabIndex = 4;
+            this.tabPage12.Text = "BATTLEFIELD";
+            // 
+            // panelBattlefields
+            // 
+            this.panelBattlefields.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelBattlefields.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
+            this.panelBattlefields.Controls.Add(this.panelBattlefieldTileset);
+            this.panelBattlefields.Controls.Add(this.panelBattlefieldPalettes);
+            this.panelBattlefields.Controls.Add(this.panelBattlefieldProperties);
+            this.panelBattlefields.Controls.Add(this.panel45);
+            this.panelBattlefields.Location = new System.Drawing.Point(2, 2);
+            this.panelBattlefields.Name = "panelBattlefields";
+            this.panelBattlefields.Size = new System.Drawing.Size(256, 605);
+            this.panelBattlefields.TabIndex = 442;
+            this.panelBattlefields.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelBattlefields_MouseMove);
+            this.panelBattlefields.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelBattlefields_MouseUp);
+            // 
+            // panelBattlefieldTileset
+            // 
+            this.panelBattlefieldTileset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelBattlefieldTileset.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panelBattlefieldTileset.Controls.Add(panel444);
+            this.panelBattlefieldTileset.Location = new System.Drawing.Point(-2, 36);
+            this.panelBattlefieldTileset.Name = "panelBattlefieldTileset";
+            this.panelBattlefieldTileset.Size = new System.Drawing.Size(260, 220);
+            this.panelBattlefieldTileset.TabIndex = 442;
+            this.panelBattlefieldTileset.MouseLeave += new System.EventHandler(this.panelBattlefieldTileset_MouseLeave);
+            this.panelBattlefieldTileset.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelBattlefieldTileset_MouseMove);
+            this.panelBattlefieldTileset.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelBattlefieldTileset_MouseDown);
+            // 
+            // panelBattlefieldPalettes
+            // 
+            this.panelBattlefieldPalettes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelBattlefieldPalettes.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panelBattlefieldPalettes.Controls.Add(this.panel93);
+            this.panelBattlefieldPalettes.Location = new System.Drawing.Point(-2, 382);
+            this.panelBattlefieldPalettes.Name = "panelBattlefieldPalettes";
+            this.panelBattlefieldPalettes.Size = new System.Drawing.Size(260, 225);
+            this.panelBattlefieldPalettes.TabIndex = 444;
+            // 
+            // panel93
+            // 
+            this.panel93.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel93.Controls.Add(this.labelBattlefieldPalettes);
+            this.panel93.Controls.Add(this.battlefieldPaletteSetNum);
+            this.panel93.Controls.Add(this.pictureBoxColorBF);
+            this.panel93.Controls.Add(this.label102);
+            this.panel93.Controls.Add(this.bfPaletteGreenBar);
+            this.panel93.Controls.Add(this.panel60);
+            this.panel93.Controls.Add(this.bfPaletteBlueBar);
+            this.panel93.Controls.Add(this.bfPalettePictureBox);
+            this.panel93.Controls.Add(this.bfPaletteRedBar);
+            this.panel93.Controls.Add(this.bfPaletteRedNum);
+            this.panel93.Controls.Add(this.label123);
+            this.panel93.Controls.Add(this.label77);
+            this.panel93.Controls.Add(this.bfPaletteColorNum);
+            this.panel93.Controls.Add(this.bfPaletteBlueNum);
+            this.panel93.Controls.Add(this.label121);
+            this.panel93.Controls.Add(this.label78);
+            this.panel93.Controls.Add(this.bfPaletteGreenNum);
+            this.panel93.Location = new System.Drawing.Point(2, 2);
+            this.panel93.Name = "panel93";
+            this.panel93.Size = new System.Drawing.Size(256, 221);
+            this.panel93.TabIndex = 497;
+            // 
+            // labelBattlefieldPalettes
+            // 
+            this.labelBattlefieldPalettes.BackColor = System.Drawing.SystemColors.Control;
+            this.labelBattlefieldPalettes.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBattlefieldPalettes.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.labelBattlefieldPalettes.Location = new System.Drawing.Point(0, 0);
+            this.labelBattlefieldPalettes.Name = "labelBattlefieldPalettes";
+            this.labelBattlefieldPalettes.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelBattlefieldPalettes.Size = new System.Drawing.Size(256, 17);
+            this.labelBattlefieldPalettes.TabIndex = 454;
+            this.labelBattlefieldPalettes.Text = "PALETTES";
+            this.labelBattlefieldPalettes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // battlefieldPaletteSetNum
+            // 
+            this.battlefieldPaletteSetNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.battlefieldPaletteSetNum.Location = new System.Drawing.Point(77, 19);
+            this.battlefieldPaletteSetNum.Maximum = new decimal(new int[] {
+            56,
+            0,
+            0,
+            0});
+            this.battlefieldPaletteSetNum.Name = "battlefieldPaletteSetNum";
+            this.battlefieldPaletteSetNum.Size = new System.Drawing.Size(50, 17);
+            this.battlefieldPaletteSetNum.TabIndex = 189;
+            this.battlefieldPaletteSetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.battlefieldPaletteSetNum.ValueChanged += new System.EventHandler(this.battlefieldPaletteSetNum_ValueChanged);
+            // 
+            // pictureBoxColorBF
+            // 
+            this.pictureBoxColorBF.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBoxColorBF.Location = new System.Drawing.Point(91, 150);
+            this.pictureBoxColorBF.Name = "pictureBoxColorBF";
+            this.pictureBoxColorBF.Size = new System.Drawing.Size(165, 17);
+            this.pictureBoxColorBF.TabIndex = 455;
+            this.pictureBoxColorBF.TabStop = false;
+            // 
+            // label102
+            // 
+            this.label102.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label102.Location = new System.Drawing.Point(0, 19);
+            this.label102.Name = "label102";
+            this.label102.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label102.Size = new System.Drawing.Size(76, 17);
+            this.label102.TabIndex = 190;
+            this.label102.Text = "Palette Set";
+            // 
+            // bfPaletteGreenBar
+            // 
+            this.bfPaletteGreenBar.AutoSize = false;
+            this.bfPaletteGreenBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.bfPaletteGreenBar.Location = new System.Drawing.Point(91, 186);
+            this.bfPaletteGreenBar.Maximum = 248;
+            this.bfPaletteGreenBar.Name = "bfPaletteGreenBar";
+            this.bfPaletteGreenBar.Size = new System.Drawing.Size(165, 17);
+            this.bfPaletteGreenBar.SmallChange = 8;
+            this.bfPaletteGreenBar.TabIndex = 445;
+            this.bfPaletteGreenBar.TickFrequency = 8;
+            this.bfPaletteGreenBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.bfPaletteGreenBar.Scroll += new System.EventHandler(this.bfPaletteGreenBar_Scroll);
+            // 
+            // panel60
+            // 
+            this.panel60.BackColor = System.Drawing.SystemColors.Window;
+            this.panel60.Controls.Add(this.battlefieldPaletteSetName);
+            this.panel60.Location = new System.Drawing.Point(128, 19);
+            this.panel60.Name = "panel60";
+            this.panel60.Size = new System.Drawing.Size(129, 17);
+            this.panel60.TabIndex = 190;
+            // 
+            // battlefieldPaletteSetName
+            // 
+            this.battlefieldPaletteSetName.DropDownHeight = 200;
+            this.battlefieldPaletteSetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldPaletteSetName.IntegralHeight = false;
+            this.battlefieldPaletteSetName.Items.AddRange(new object[] {
+            "Forest Maze",
+            "Bowyer\'s Pad",
+            "Beanstalks",
+            "Sunken Ship Cellar",
+            "Sunken Ship",
+            "Underground",
+            "Bowser\'s Keep",
+            "Barrel Volcano",
+            "Grasslands",
+            "Mountains",
+            "House",
+            "Booster Tower",
+            "Castle",
+            "Kero Sewers Water",
+            "____",
+            "Exor",
+            "Booster Tower Balcony",
+            "Smithy Factory",
+            "Kero Sewers",
+            "____",
+            "Nimbus Castle",
+            "Birdo",
+            "Nimbus Land",
+            "___castle",
+            "___forest",
+            "Mushroom Kingdom",
+            "Chandeliers",
+            "Castle",
+            "____",
+            "Forest Maze Path",
+            "____",
+            "Plateaus",
+            "Sea Enclave",
+            "Marrymore Chapel",
+            "Level Up",
+            "Star Hill",
+            "Seaside Town Beach",
+            "Axem Rangers",
+            "Domino & Cloaker",
+            "Sea",
+            "Bean Valley",
+            "Land\'s End Desert",
+            "Smithys\' Pad",
+            "Smithy\'s Final Form",
+            "Culex",
+            "Jinx\'s Dojo",
+            "Factory Grounds",
+            "____",
+            "____",
+            "____",
+            "____",
+            "____",
+            "____",
+            "____",
+            "____",
+            "____",
+            "____"});
+            this.battlefieldPaletteSetName.Location = new System.Drawing.Point(-2, -2);
+            this.battlefieldPaletteSetName.Name = "battlefieldPaletteSetName";
+            this.battlefieldPaletteSetName.Size = new System.Drawing.Size(133, 21);
+            this.battlefieldPaletteSetName.TabIndex = 158;
+            this.battlefieldPaletteSetName.SelectedIndexChanged += new System.EventHandler(this.battlefieldPaletteSetName_SelectedIndexChanged);
+            // 
+            // bfPaletteBlueBar
+            // 
+            this.bfPaletteBlueBar.AutoSize = false;
+            this.bfPaletteBlueBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.bfPaletteBlueBar.Location = new System.Drawing.Point(91, 204);
+            this.bfPaletteBlueBar.Maximum = 248;
+            this.bfPaletteBlueBar.Name = "bfPaletteBlueBar";
+            this.bfPaletteBlueBar.Size = new System.Drawing.Size(165, 17);
+            this.bfPaletteBlueBar.SmallChange = 8;
+            this.bfPaletteBlueBar.TabIndex = 447;
+            this.bfPaletteBlueBar.TickFrequency = 8;
+            this.bfPaletteBlueBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.bfPaletteBlueBar.Scroll += new System.EventHandler(this.bfPaletteBlueBar_Scroll);
+            // 
+            // bfPalettePictureBox
+            // 
+            this.bfPalettePictureBox.BackColor = System.Drawing.SystemColors.Control;
+            this.bfPalettePictureBox.ContextMenuStrip = this.contextMenuStrip3;
+            this.bfPalettePictureBox.Location = new System.Drawing.Point(0, 37);
+            this.bfPalettePictureBox.Name = "bfPalettePictureBox";
+            this.bfPalettePictureBox.Size = new System.Drawing.Size(256, 112);
+            this.bfPalettePictureBox.TabIndex = 448;
+            this.bfPalettePictureBox.TabStop = false;
+            this.bfPalettePictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bfPalettePictureBox_MouseClick);
+            this.bfPalettePictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.bfPalettePictureBox_Paint);
+            // 
+            // bfPaletteRedBar
+            // 
+            this.bfPaletteRedBar.AutoSize = false;
+            this.bfPaletteRedBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.bfPaletteRedBar.Location = new System.Drawing.Point(91, 168);
+            this.bfPaletteRedBar.Maximum = 248;
+            this.bfPaletteRedBar.Name = "bfPaletteRedBar";
+            this.bfPaletteRedBar.Size = new System.Drawing.Size(165, 17);
+            this.bfPaletteRedBar.SmallChange = 8;
+            this.bfPaletteRedBar.TabIndex = 443;
+            this.bfPaletteRedBar.TickFrequency = 8;
+            this.bfPaletteRedBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.bfPaletteRedBar.Scroll += new System.EventHandler(this.bfPaletteRedBar_Scroll);
+            // 
+            // bfPaletteRedNum
+            // 
+            this.bfPaletteRedNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.bfPaletteRedNum.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.bfPaletteRedNum.Location = new System.Drawing.Point(47, 168);
+            this.bfPaletteRedNum.Maximum = new decimal(new int[] {
+            248,
+            0,
+            0,
+            0});
+            this.bfPaletteRedNum.Name = "bfPaletteRedNum";
+            this.bfPaletteRedNum.Size = new System.Drawing.Size(43, 17);
+            this.bfPaletteRedNum.TabIndex = 442;
+            this.bfPaletteRedNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.bfPaletteRedNum.ValueChanged += new System.EventHandler(this.bfPaletteRedNum_ValueChanged);
+            // 
+            // label123
+            // 
+            this.label123.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label123.Location = new System.Drawing.Point(0, 168);
+            this.label123.Name = "label123";
+            this.label123.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label123.Size = new System.Drawing.Size(46, 17);
+            this.label123.TabIndex = 450;
+            this.label123.Text = "Red";
+            // 
+            // label77
+            // 
+            this.label77.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label77.Location = new System.Drawing.Point(0, 204);
+            this.label77.Name = "label77";
+            this.label77.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label77.Size = new System.Drawing.Size(46, 17);
+            this.label77.TabIndex = 452;
+            this.label77.Text = "Blue";
+            // 
+            // bfPaletteColorNum
+            // 
+            this.bfPaletteColorNum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.bfPaletteColorNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.bfPaletteColorNum.Location = new System.Drawing.Point(47, 150);
+            this.bfPaletteColorNum.Maximum = new decimal(new int[] {
+            111,
+            0,
+            0,
+            0});
+            this.bfPaletteColorNum.Name = "bfPaletteColorNum";
+            this.bfPaletteColorNum.Size = new System.Drawing.Size(43, 17);
+            this.bfPaletteColorNum.TabIndex = 441;
+            this.bfPaletteColorNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.bfPaletteColorNum.ValueChanged += new System.EventHandler(this.bfPaletteColorNum_ValueChanged);
+            // 
+            // bfPaletteBlueNum
+            // 
+            this.bfPaletteBlueNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.bfPaletteBlueNum.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.bfPaletteBlueNum.Location = new System.Drawing.Point(47, 204);
+            this.bfPaletteBlueNum.Maximum = new decimal(new int[] {
+            248,
+            0,
+            0,
+            0});
+            this.bfPaletteBlueNum.Name = "bfPaletteBlueNum";
+            this.bfPaletteBlueNum.Size = new System.Drawing.Size(43, 17);
+            this.bfPaletteBlueNum.TabIndex = 446;
+            this.bfPaletteBlueNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.bfPaletteBlueNum.ValueChanged += new System.EventHandler(this.bfPaletteBlueNum_ValueChanged);
+            // 
+            // label121
+            // 
+            this.label121.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label121.Location = new System.Drawing.Point(0, 150);
+            this.label121.Name = "label121";
+            this.label121.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label121.Size = new System.Drawing.Size(46, 17);
+            this.label121.TabIndex = 449;
+            this.label121.Text = "Color";
+            // 
+            // label78
+            // 
+            this.label78.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label78.Location = new System.Drawing.Point(0, 186);
+            this.label78.Name = "label78";
+            this.label78.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label78.Size = new System.Drawing.Size(46, 17);
+            this.label78.TabIndex = 451;
+            this.label78.Text = "Green";
+            // 
+            // bfPaletteGreenNum
+            // 
+            this.bfPaletteGreenNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.bfPaletteGreenNum.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.bfPaletteGreenNum.Location = new System.Drawing.Point(47, 186);
+            this.bfPaletteGreenNum.Maximum = new decimal(new int[] {
+            248,
+            0,
+            0,
+            0});
+            this.bfPaletteGreenNum.Name = "bfPaletteGreenNum";
+            this.bfPaletteGreenNum.Size = new System.Drawing.Size(43, 17);
+            this.bfPaletteGreenNum.TabIndex = 444;
+            this.bfPaletteGreenNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.bfPaletteGreenNum.ValueChanged += new System.EventHandler(this.bfPaletteGreenNum_ValueChanged);
+            // 
+            // panelBattlefieldProperties
+            // 
+            this.panelBattlefieldProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelBattlefieldProperties.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panelBattlefieldProperties.Controls.Add(this.panel92);
+            this.panelBattlefieldProperties.Location = new System.Drawing.Point(-2, 254);
+            this.panelBattlefieldProperties.Name = "panelBattlefieldProperties";
+            this.panelBattlefieldProperties.Size = new System.Drawing.Size(260, 130);
+            this.panelBattlefieldProperties.TabIndex = 443;
+            // 
+            // panel92
+            // 
+            this.panel92.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel92.Controls.Add(this.labelBattlefieldProperties);
+            this.panel92.Controls.Add(this.label97);
+            this.panel92.Controls.Add(this.battlefieldGFXSet4Num);
+            this.panel92.Controls.Add(this.battlefieldGFXSet5Num);
+            this.panel92.Controls.Add(this.label98);
+            this.panel92.Controls.Add(this.battlefieldGFXSet3Num);
+            this.panel92.Controls.Add(this.panel57);
+            this.panel92.Controls.Add(this.label99);
+            this.panel92.Controls.Add(this.panel56);
+            this.panel92.Controls.Add(this.battlefieldGFXSet2Num);
+            this.panel92.Controls.Add(this.panel7);
+            this.panel92.Controls.Add(this.label100);
+            this.panel92.Controls.Add(this.panel5);
+            this.panel92.Controls.Add(this.battlefieldGFXSet1Num);
+            this.panel92.Controls.Add(this.panel2);
+            this.panel92.Controls.Add(this.label69);
+            this.panel92.Controls.Add(this.battlefieldTilesetNum);
+            this.panel92.Controls.Add(this.label101);
+            this.panel92.Controls.Add(this.panel59);
+            this.panel92.Location = new System.Drawing.Point(2, 2);
+            this.panel92.Name = "panel92";
+            this.panel92.Size = new System.Drawing.Size(256, 126);
+            this.panel92.TabIndex = 496;
+            // 
+            // labelBattlefieldProperties
+            // 
+            this.labelBattlefieldProperties.BackColor = System.Drawing.SystemColors.Control;
+            this.labelBattlefieldProperties.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBattlefieldProperties.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.labelBattlefieldProperties.Location = new System.Drawing.Point(0, 0);
+            this.labelBattlefieldProperties.Name = "labelBattlefieldProperties";
+            this.labelBattlefieldProperties.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelBattlefieldProperties.Size = new System.Drawing.Size(256, 17);
+            this.labelBattlefieldProperties.TabIndex = 456;
+            this.labelBattlefieldProperties.Text = "BATTLEFIELD PROPERTIES";
+            this.labelBattlefieldProperties.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label97
+            // 
+            this.label97.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label97.Location = new System.Drawing.Point(0, 37);
+            this.label97.Name = "label97";
+            this.label97.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label97.Size = new System.Drawing.Size(76, 17);
+            this.label97.TabIndex = 171;
+            this.label97.Text = "GFX Set 2";
+            // 
+            // battlefieldGFXSet4Num
+            // 
+            this.battlefieldGFXSet4Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.battlefieldGFXSet4Num.Location = new System.Drawing.Point(77, 73);
+            this.battlefieldGFXSet4Num.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.battlefieldGFXSet4Num.Name = "battlefieldGFXSet4Num";
+            this.battlefieldGFXSet4Num.Size = new System.Drawing.Size(50, 17);
+            this.battlefieldGFXSet4Num.TabIndex = 183;
+            this.battlefieldGFXSet4Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.battlefieldGFXSet4Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet4Num_ValueChanged);
+            // 
+            // battlefieldGFXSet5Num
+            // 
+            this.battlefieldGFXSet5Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.battlefieldGFXSet5Num.Location = new System.Drawing.Point(77, 91);
+            this.battlefieldGFXSet5Num.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.battlefieldGFXSet5Num.Name = "battlefieldGFXSet5Num";
+            this.battlefieldGFXSet5Num.Size = new System.Drawing.Size(50, 17);
+            this.battlefieldGFXSet5Num.TabIndex = 185;
+            this.battlefieldGFXSet5Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.battlefieldGFXSet5Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet5Num_ValueChanged);
+            // 
+            // label98
+            // 
+            this.label98.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label98.Location = new System.Drawing.Point(0, 55);
+            this.label98.Name = "label98";
+            this.label98.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label98.Size = new System.Drawing.Size(76, 17);
+            this.label98.TabIndex = 172;
+            this.label98.Text = "GFX Set 3";
+            // 
+            // battlefieldGFXSet3Num
+            // 
+            this.battlefieldGFXSet3Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.battlefieldGFXSet3Num.Location = new System.Drawing.Point(77, 55);
+            this.battlefieldGFXSet3Num.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.battlefieldGFXSet3Num.Name = "battlefieldGFXSet3Num";
+            this.battlefieldGFXSet3Num.Size = new System.Drawing.Size(50, 17);
+            this.battlefieldGFXSet3Num.TabIndex = 181;
+            this.battlefieldGFXSet3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.battlefieldGFXSet3Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet3Num_ValueChanged);
+            // 
+            // panel57
+            // 
+            this.panel57.BackColor = System.Drawing.SystemColors.Window;
+            this.panel57.Controls.Add(this.battlefieldGFXSet1Name);
+            this.panel57.Location = new System.Drawing.Point(128, 19);
+            this.panel57.Name = "panel57";
+            this.panel57.Size = new System.Drawing.Size(129, 17);
+            this.panel57.TabIndex = 178;
+            // 
+            // battlefieldGFXSet1Name
+            // 
+            this.battlefieldGFXSet1Name.DropDownHeight = 200;
+            this.battlefieldGFXSet1Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldGFXSet1Name.IntegralHeight = false;
+            this.battlefieldGFXSet1Name.Location = new System.Drawing.Point(-2, -2);
+            this.battlefieldGFXSet1Name.Name = "battlefieldGFXSet1Name";
+            this.battlefieldGFXSet1Name.Size = new System.Drawing.Size(133, 21);
+            this.battlefieldGFXSet1Name.TabIndex = 118;
+            this.battlefieldGFXSet1Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet1Name_SelectedIndexChanged);
+            // 
+            // label99
+            // 
+            this.label99.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label99.Location = new System.Drawing.Point(0, 73);
+            this.label99.Name = "label99";
+            this.label99.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label99.Size = new System.Drawing.Size(76, 17);
+            this.label99.TabIndex = 173;
+            this.label99.Text = "GFX Set 4";
+            // 
+            // panel56
+            // 
+            this.panel56.BackColor = System.Drawing.SystemColors.Window;
+            this.panel56.Controls.Add(this.battlefieldGFXSet3Name);
+            this.panel56.Location = new System.Drawing.Point(128, 55);
+            this.panel56.Name = "panel56";
+            this.panel56.Size = new System.Drawing.Size(129, 17);
+            this.panel56.TabIndex = 182;
+            // 
+            // battlefieldGFXSet3Name
+            // 
+            this.battlefieldGFXSet3Name.DropDownHeight = 200;
+            this.battlefieldGFXSet3Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldGFXSet3Name.IntegralHeight = false;
+            this.battlefieldGFXSet3Name.Location = new System.Drawing.Point(-2, -2);
+            this.battlefieldGFXSet3Name.Name = "battlefieldGFXSet3Name";
+            this.battlefieldGFXSet3Name.Size = new System.Drawing.Size(133, 21);
+            this.battlefieldGFXSet3Name.TabIndex = 120;
+            this.battlefieldGFXSet3Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet3Name_SelectedIndexChanged);
+            // 
+            // battlefieldGFXSet2Num
+            // 
+            this.battlefieldGFXSet2Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.battlefieldGFXSet2Num.Location = new System.Drawing.Point(77, 37);
+            this.battlefieldGFXSet2Num.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.battlefieldGFXSet2Num.Name = "battlefieldGFXSet2Num";
+            this.battlefieldGFXSet2Num.Size = new System.Drawing.Size(50, 17);
+            this.battlefieldGFXSet2Num.TabIndex = 179;
+            this.battlefieldGFXSet2Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.battlefieldGFXSet2Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet2Num_ValueChanged);
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.SystemColors.Window;
+            this.panel7.Controls.Add(this.battlefieldGFXSet5Name);
+            this.panel7.Location = new System.Drawing.Point(128, 91);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(129, 17);
+            this.panel7.TabIndex = 186;
+            // 
+            // battlefieldGFXSet5Name
+            // 
+            this.battlefieldGFXSet5Name.DropDownHeight = 200;
+            this.battlefieldGFXSet5Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldGFXSet5Name.IntegralHeight = false;
+            this.battlefieldGFXSet5Name.Location = new System.Drawing.Point(-2, -2);
+            this.battlefieldGFXSet5Name.Name = "battlefieldGFXSet5Name";
+            this.battlefieldGFXSet5Name.Size = new System.Drawing.Size(133, 21);
+            this.battlefieldGFXSet5Name.TabIndex = 122;
+            this.battlefieldGFXSet5Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet5Name_SelectedIndexChanged);
+            // 
+            // label100
+            // 
+            this.label100.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label100.Location = new System.Drawing.Point(0, 91);
+            this.label100.Name = "label100";
+            this.label100.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label100.Size = new System.Drawing.Size(76, 17);
+            this.label100.TabIndex = 174;
+            this.label100.Text = "GFX Set 5";
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.SystemColors.Window;
+            this.panel5.Controls.Add(this.battlefieldGFXSet2Name);
+            this.panel5.Location = new System.Drawing.Point(128, 37);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(129, 17);
+            this.panel5.TabIndex = 180;
+            // 
+            // battlefieldGFXSet2Name
+            // 
+            this.battlefieldGFXSet2Name.DropDownHeight = 200;
+            this.battlefieldGFXSet2Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldGFXSet2Name.IntegralHeight = false;
+            this.battlefieldGFXSet2Name.Location = new System.Drawing.Point(-2, -2);
+            this.battlefieldGFXSet2Name.Name = "battlefieldGFXSet2Name";
+            this.battlefieldGFXSet2Name.Size = new System.Drawing.Size(133, 21);
+            this.battlefieldGFXSet2Name.TabIndex = 119;
+            this.battlefieldGFXSet2Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet2Name_SelectedIndexChanged);
+            // 
+            // battlefieldGFXSet1Num
+            // 
+            this.battlefieldGFXSet1Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.battlefieldGFXSet1Num.Location = new System.Drawing.Point(77, 19);
+            this.battlefieldGFXSet1Num.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.battlefieldGFXSet1Num.Name = "battlefieldGFXSet1Num";
+            this.battlefieldGFXSet1Num.Size = new System.Drawing.Size(50, 17);
+            this.battlefieldGFXSet1Num.TabIndex = 177;
+            this.battlefieldGFXSet1Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.battlefieldGFXSet1Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet1Num_ValueChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.Window;
+            this.panel2.Controls.Add(this.battlefieldGFXSet4Name);
+            this.panel2.Location = new System.Drawing.Point(128, 73);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(129, 17);
+            this.panel2.TabIndex = 184;
+            // 
+            // battlefieldGFXSet4Name
+            // 
+            this.battlefieldGFXSet4Name.DropDownHeight = 200;
+            this.battlefieldGFXSet4Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldGFXSet4Name.IntegralHeight = false;
+            this.battlefieldGFXSet4Name.Location = new System.Drawing.Point(-2, -2);
+            this.battlefieldGFXSet4Name.Name = "battlefieldGFXSet4Name";
+            this.battlefieldGFXSet4Name.Size = new System.Drawing.Size(133, 21);
+            this.battlefieldGFXSet4Name.TabIndex = 121;
+            this.battlefieldGFXSet4Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet4Name_SelectedIndexChanged);
+            // 
+            // label69
+            // 
+            this.label69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label69.Location = new System.Drawing.Point(0, 19);
+            this.label69.Name = "label69";
+            this.label69.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label69.Size = new System.Drawing.Size(76, 17);
+            this.label69.TabIndex = 170;
+            this.label69.Text = "GFX Set 1";
+            // 
+            // battlefieldTilesetNum
+            // 
+            this.battlefieldTilesetNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.battlefieldTilesetNum.Location = new System.Drawing.Point(77, 109);
+            this.battlefieldTilesetNum.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.battlefieldTilesetNum.Name = "battlefieldTilesetNum";
+            this.battlefieldTilesetNum.Size = new System.Drawing.Size(50, 17);
+            this.battlefieldTilesetNum.TabIndex = 187;
+            this.battlefieldTilesetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.battlefieldTilesetNum.ValueChanged += new System.EventHandler(this.battlefieldTilesetNum_ValueChanged);
+            // 
+            // label101
+            // 
+            this.label101.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label101.Location = new System.Drawing.Point(0, 109);
+            this.label101.Name = "label101";
+            this.label101.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label101.Size = new System.Drawing.Size(76, 17);
+            this.label101.TabIndex = 185;
+            this.label101.Text = "Tileset";
+            // 
+            // panel59
+            // 
+            this.panel59.BackColor = System.Drawing.SystemColors.Window;
+            this.panel59.Controls.Add(this.battlefieldTilesetName);
+            this.panel59.Location = new System.Drawing.Point(128, 109);
+            this.panel59.Name = "panel59";
+            this.panel59.Size = new System.Drawing.Size(129, 17);
+            this.panel59.TabIndex = 188;
+            // 
+            // battlefieldTilesetName
+            // 
+            this.battlefieldTilesetName.DropDownHeight = 200;
+            this.battlefieldTilesetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldTilesetName.IntegralHeight = false;
+            this.battlefieldTilesetName.Items.AddRange(new object[] {
+            "Forest Maze",
+            "Bowyer\'s Pad",
+            "Beanstalks",
+            "Sunken Ship Cellar",
+            "Sunken Ship",
+            "Moleville Mines",
+            "___mines",
+            "Bowser\'s Keep",
+            "Czar Dragon\'s Pad",
+            "Grasslands",
+            "Mountains",
+            "House",
+            "Booster Tower",
+            "Castle",
+            "Kero Sewers Water",
+            "____",
+            "Exor",
+            "Booster Tower Balcony",
+            "Count Down",
+            "Smithy Factory",
+            "Barrel Volcano",
+            "Kero Sewers",
+            "____",
+            "____",
+            "____",
+            "____",
+            "____",
+            "____",
+            "Nimbus Castle",
+            "Birdo",
+            "Nimbus Land",
+            "Underground",
+            "___castle",
+            "___forest",
+            "Mushroom Kingdom",
+            "Chandeliers",
+            "____",
+            "____",
+            "Forest Maze Path",
+            "Level Up foreground",
+            "Level Up background",
+            "Plateaus",
+            "Sea Enclave",
+            "Marrymore Chapel",
+            "Star Hill",
+            "Seaside Town Beach",
+            "Axem Rangers",
+            "Domino & Cloaker",
+            "Belome Temple",
+            "Land\'s End Desert",
+            "____",
+            "Smithys\' Pad",
+            "Smithy\'s Final Form",
+            "Culex",
+            "Jinx\'s Dojo",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "Factory Grounds",
+            "Bean Valley: Pipe Room"});
+            this.battlefieldTilesetName.Location = new System.Drawing.Point(-2, -2);
+            this.battlefieldTilesetName.Name = "battlefieldTilesetName";
+            this.battlefieldTilesetName.Size = new System.Drawing.Size(133, 21);
+            this.battlefieldTilesetName.TabIndex = 129;
+            this.battlefieldTilesetName.SelectedIndexChanged += new System.EventHandler(this.battlefieldTilesetName_SelectedIndexChanged);
+            // 
+            // panel45
+            // 
+            this.panel45.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel45.Controls.Add(this.labelBattlefields);
+            this.panel45.Controls.Add(this.panel61);
+            this.panel45.Controls.Add(this.battlefieldNum);
+            this.panel45.Location = new System.Drawing.Point(-2, -2);
+            this.panel45.Name = "panel45";
+            this.panel45.Size = new System.Drawing.Size(260, 40);
+            this.panel45.TabIndex = 443;
+            // 
+            // labelBattlefields
+            // 
+            this.labelBattlefields.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelBattlefields.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.labelBattlefields.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBattlefields.ForeColor = System.Drawing.SystemColors.Control;
+            this.labelBattlefields.Location = new System.Drawing.Point(2, 2);
+            this.labelBattlefields.Name = "labelBattlefields";
+            this.labelBattlefields.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelBattlefields.Size = new System.Drawing.Size(128, 17);
+            this.labelBattlefields.TabIndex = 192;
+            this.labelBattlefields.Text = "BATTLEFIELD #";
+            // 
+            // panel61
+            // 
+            this.panel61.BackColor = System.Drawing.SystemColors.Window;
+            this.panel61.Controls.Add(this.battlefieldName);
+            this.panel61.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel61.Location = new System.Drawing.Point(2, 21);
+            this.panel61.Name = "panel61";
+            this.panel61.Size = new System.Drawing.Size(256, 17);
+            this.panel61.TabIndex = 175;
+            // 
+            // battlefieldName
+            // 
+            this.battlefieldName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.battlefieldName.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.battlefieldName.DropDownHeight = 561;
+            this.battlefieldName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.battlefieldName.ForeColor = System.Drawing.SystemColors.Control;
+            this.battlefieldName.IntegralHeight = false;
+            this.battlefieldName.Items.AddRange(new object[] {
+            "Forest Maze",
+            "Forest Maze: Bowyer\'s Pad",
+            "Bean Valley: Beanstalks",
+            "Sunken Ship: King Calamari\'s Cellar",
+            "Sunken Ship",
+            "Moleville Mines",
+            "___mines",
+            "Bowser\'s Keep",
+            "Barrel Volcano: Czar Dragon\'s Pad",
+            "Grasslands",
+            "Mountains",
+            "Mushroom Kingdom House",
+            "Booster Tower",
+            "Mushroom Kingdom Castle",
+            "Kero Sewers: Underwater",
+            "Mushroom Kingdom Castle",
+            "Bowser\'s Keep Turret: Exor",
+            "Booster Tower: Balcony",
+            "Smithy Factory: Count Down\'s Pad",
+            "Smithy Factory",
+            "Barrel Volcano",
+            "Kero Sewers",
+            "Nimbus Castle",
+            "Nimbus Castle: Birdo\'s Room",
+            "Nimbus Land",
+            "Underground",
+            "___uses Mushroom Kingdom tiles",
+            "___forested area with unique trees",
+            "Mushroom Kingdom",
+            "Bowser\'s Keep: Chandeliers",
+            "Forest Maze: Path to Bowyer",
+            "Level Up foreground",
+            "Level Up background",
+            "Plateaus",
+            "___sea enclave",
+            "Marrymore Chapel Sanctuary",
+            "Star Hill",
+            "Seaside Town Beach",
+            "Sea",
+            "Blade: Axem Rangers",
+            "Smithy Factory: Domino & Cloaker\'s Pad",
+            "Bean Valley: Grasslands",
+            "Belome Temple",
+            "Land\'s End Desert",
+            "Factory Grounds: Smithy\'s Pad",
+            "Smithy\'s Final Form",
+            "Jinx\'s Dojo",
+            "Culex",
+            "Factory Grounds",
+            "Bean Valley: Pipe Room",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "_____",
+            "_____"});
+            this.battlefieldName.Location = new System.Drawing.Point(-2, -2);
+            this.battlefieldName.Name = "battlefieldName";
+            this.battlefieldName.Size = new System.Drawing.Size(261, 21);
+            this.battlefieldName.TabIndex = 116;
+            this.battlefieldName.SelectedIndexChanged += new System.EventHandler(this.battlefieldName_SelectedIndexChanged);
+            // 
+            // battlefieldNum
+            // 
+            this.battlefieldNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.battlefieldNum.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.battlefieldNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.battlefieldNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.battlefieldNum.ForeColor = System.Drawing.SystemColors.Control;
+            this.battlefieldNum.Location = new System.Drawing.Point(131, 2);
+            this.battlefieldNum.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.battlefieldNum.Name = "battlefieldNum";
+            this.battlefieldNum.Size = new System.Drawing.Size(128, 17);
+            this.battlefieldNum.TabIndex = 174;
+            this.battlefieldNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.battlefieldNum.ValueChanged += new System.EventHandler(this.battlefieldNum_ValueChanged);
+            // 
             // panelLevelZoom
             // 
             this.panelLevelZoom.BackColor = System.Drawing.SystemColors.ControlText;
@@ -9441,13 +9387,12 @@ namespace SMRPGED
             this.contextMenuStripTE.Name = "contextMenuStrip1";
             this.contextMenuStripTE.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStripTE.ShowImageMargin = false;
-            this.contextMenuStripTE.Size = new System.Drawing.Size(117, 118);
+            this.contextMenuStripTE.Size = new System.Drawing.Size(117, 120);
             // 
             // setSubtileToolStripMenuItem
             // 
-            this.setSubtileToolStripMenuItem.AutoSize = false;
             this.setSubtileToolStripMenuItem.Name = "setSubtileToolStripMenuItem";
-            this.setSubtileToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
+            this.setSubtileToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.setSubtileToolStripMenuItem.Text = "Set Subtile";
             this.setSubtileToolStripMenuItem.Click += new System.EventHandler(this.setSubtileToolStripMenuItem_Click);
             // 
@@ -9458,28 +9403,25 @@ namespace SMRPGED
             // 
             // toolStripMenuItem7
             // 
-            this.toolStripMenuItem7.AutoSize = false;
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
             this.toolStripMenuItem7.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(127, 20);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(116, 20);
             this.toolStripMenuItem7.Text = "Import...";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
             // exportToolStripMenuItem
             // 
-            this.exportToolStripMenuItem.AutoSize = false;
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // saveImageToolStripMenuItem1
             // 
-            this.saveImageToolStripMenuItem1.AutoSize = false;
             this.saveImageToolStripMenuItem1.Name = "saveImageToolStripMenuItem1";
             this.saveImageToolStripMenuItem1.Padding = new System.Windows.Forms.Padding(0);
-            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(127, 20);
+            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(116, 20);
             this.saveImageToolStripMenuItem1.Text = "Save image...";
             this.saveImageToolStripMenuItem1.Click += new System.EventHandler(this.saveImageToolStripMenuItem1_Click);
             // 
@@ -10017,16 +9959,14 @@ namespace SMRPGED
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(31, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.AutoSize = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(169, 20);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.saveToolStripMenuItem.Text = "Save Levels";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveLevels_Click);
             // 
@@ -10037,39 +9977,20 @@ namespace SMRPGED
             // 
             // importToolStripMenuItem
             // 
-            this.importToolStripMenuItem.AutoSize = false;
             this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.levelDataToolStripMenuItem,
+            this.allToolStripMenuItem,
             this.toolStripSeparator30,
             this.arraysToolStripMenuItem1,
             this.graphicSetsToolStripMenuItem1});
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(169, 20);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.importToolStripMenuItem.Text = "Import";
-            // 
-            // levelDataToolStripMenuItem
-            // 
-            this.levelDataToolStripMenuItem.AutoSize = false;
-            this.levelDataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.currentToolStripMenuItem,
-            this.allToolStripMenuItem});
-            this.levelDataToolStripMenuItem.Name = "levelDataToolStripMenuItem";
-            this.levelDataToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.levelDataToolStripMenuItem.Text = "Level Data";
-            // 
-            // currentToolStripMenuItem
-            // 
-            this.currentToolStripMenuItem.AutoSize = false;
-            this.currentToolStripMenuItem.Name = "currentToolStripMenuItem";
-            this.currentToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.currentToolStripMenuItem.Text = "Current...";
-            this.currentToolStripMenuItem.Click += new System.EventHandler(this.importLevelDataCurrent_Click);
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.allToolStripMenuItem.Text = "All...";
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.allToolStripMenuItem.Text = "Level Data...";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.importLevelDataAll_Click);
             // 
             // toolStripSeparator30
@@ -10079,9 +10000,8 @@ namespace SMRPGED
             // 
             // arraysToolStripMenuItem1
             // 
-            this.arraysToolStripMenuItem1.AutoSize = false;
             this.arraysToolStripMenuItem1.Name = "arraysToolStripMenuItem1";
-            this.arraysToolStripMenuItem1.Size = new System.Drawing.Size(152, 20);
+            this.arraysToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.arraysToolStripMenuItem1.Text = "Arrays...";
             this.arraysToolStripMenuItem1.Click += new System.EventHandler(this.arraysToolStripMenuItem1_Click);
             // 
@@ -10094,9 +10014,8 @@ namespace SMRPGED
             // 
             // exportToolStripMenuItem1
             // 
-            this.exportToolStripMenuItem1.AutoSize = false;
             this.exportToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportLevelDataToolStripMenuItem1,
+            this.toolStripMenuItem1,
             this.toolStripSeparator28,
             this.arraysToolStripMenuItem,
             this.graphicSetsToolStripMenuItem,
@@ -10104,32 +10023,14 @@ namespace SMRPGED
             this.toolStripSeparator32,
             this.dumpTextToolStripMenuItem});
             this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(169, 20);
+            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(169, 22);
             this.exportToolStripMenuItem1.Text = "Export";
-            // 
-            // exportLevelDataToolStripMenuItem1
-            // 
-            this.exportLevelDataToolStripMenuItem1.AutoSize = false;
-            this.exportLevelDataToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem1});
-            this.exportLevelDataToolStripMenuItem1.Name = "exportLevelDataToolStripMenuItem1";
-            this.exportLevelDataToolStripMenuItem1.Size = new System.Drawing.Size(152, 20);
-            this.exportLevelDataToolStripMenuItem1.Text = "Level Data";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.AutoSize = false;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 20);
-            this.toolStripMenuItem2.Text = "Current...";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.exportLevelDataCurrent_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
-            this.toolStripMenuItem1.Text = "All...";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem1.Text = "Level Data...";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.exportLevelDataAll_Click);
             // 
             // toolStripSeparator28
@@ -10139,25 +10040,22 @@ namespace SMRPGED
             // 
             // arraysToolStripMenuItem
             // 
-            this.arraysToolStripMenuItem.AutoSize = false;
             this.arraysToolStripMenuItem.Name = "arraysToolStripMenuItem";
-            this.arraysToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
+            this.arraysToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.arraysToolStripMenuItem.Text = "Arrays...";
             this.arraysToolStripMenuItem.Click += new System.EventHandler(this.arraysToolStripMenuItem_Click);
             // 
             // graphicSetsToolStripMenuItem
             // 
-            this.graphicSetsToolStripMenuItem.AutoSize = false;
             this.graphicSetsToolStripMenuItem.Name = "graphicSetsToolStripMenuItem";
-            this.graphicSetsToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
+            this.graphicSetsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.graphicSetsToolStripMenuItem.Text = "Graphic Sets...";
             this.graphicSetsToolStripMenuItem.Click += new System.EventHandler(this.graphicSetsToolStripMenuItem_Click);
             // 
             // exportLevelImagesToolStripMenuItem1
             // 
-            this.exportLevelImagesToolStripMenuItem1.AutoSize = false;
             this.exportLevelImagesToolStripMenuItem1.Name = "exportLevelImagesToolStripMenuItem1";
-            this.exportLevelImagesToolStripMenuItem1.Size = new System.Drawing.Size(152, 20);
+            this.exportLevelImagesToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
             this.exportLevelImagesToolStripMenuItem1.Text = "Level Images...";
             this.exportLevelImagesToolStripMenuItem1.Click += new System.EventHandler(this.exportLevelImagesAll_Click);
             // 
@@ -10175,238 +10073,116 @@ namespace SMRPGED
             // 
             // clearToolStripMenuItem
             // 
-            this.clearToolStripMenuItem.AutoSize = false;
             this.clearToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.levelDataToolStripMenuItem1,
+            this.clearLevelDataAll,
+            this.toolStripSeparator38,
+            this.clearTilesetsAll,
+            this.clearTilemapsAll,
+            this.clearPhysicalMapsAll,
+            this.clearBattlefieldsAll,
             this.toolStripSeparator29,
-            this.tilesetsToolStripMenuItem,
-            this.tilemapsToolStripMenuItem,
-            this.physicalMapsToolStripMenuItem,
-            this.battlefieldsToolStripMenuItem,
+            this.unusedToolStripMenuItem,
+            this.unusedToolStripMenuItem1,
+            this.unusedToolStripMenuItem2,
+            this.unusedToolStripMenuItem3,
             this.toolStripSeparator8,
-            this.everythingToolStripMenuItem});
+            this.clearAllComponentsAll,
+            this.clearAllComponentsCurrent});
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(169, 20);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             // 
-            // levelDataToolStripMenuItem1
+            // clearLevelDataAll
             // 
-            this.levelDataToolStripMenuItem1.AutoSize = false;
-            this.levelDataToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem4,
-            this.currentToolStripMenuItem4});
-            this.levelDataToolStripMenuItem1.Name = "levelDataToolStripMenuItem1";
-            this.levelDataToolStripMenuItem1.Size = new System.Drawing.Size(152, 20);
-            this.levelDataToolStripMenuItem1.Text = "Level Data";
-            // 
-            // allToolStripMenuItem4
-            // 
-            this.allToolStripMenuItem4.AutoSize = false;
-            this.allToolStripMenuItem4.Name = "allToolStripMenuItem4";
-            this.allToolStripMenuItem4.Size = new System.Drawing.Size(152, 20);
-            this.allToolStripMenuItem4.Text = "All...";
-            this.allToolStripMenuItem4.Click += new System.EventHandler(this.clearLevelDataAll_Click);
-            // 
-            // currentToolStripMenuItem4
-            // 
-            this.currentToolStripMenuItem4.Name = "currentToolStripMenuItem4";
-            this.currentToolStripMenuItem4.Size = new System.Drawing.Size(123, 22);
-            this.currentToolStripMenuItem4.Text = "Current...";
-            this.currentToolStripMenuItem4.Click += new System.EventHandler(this.clearLevelDataCurrent_Click);
-            // 
-            // toolStripSeparator29
-            // 
-            this.toolStripSeparator29.Name = "toolStripSeparator29";
-            this.toolStripSeparator29.Size = new System.Drawing.Size(145, 6);
-            // 
-            // tilesetsToolStripMenuItem
-            // 
-            this.tilesetsToolStripMenuItem.AutoSize = false;
-            this.tilesetsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem5,
-            this.currentToolStripMenuItem5,
-            this.toolStripSeparator38,
-            this.unusedToolStripMenuItem});
-            this.tilesetsToolStripMenuItem.Name = "tilesetsToolStripMenuItem";
-            this.tilesetsToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.tilesetsToolStripMenuItem.Text = "Tilesets";
-            // 
-            // allToolStripMenuItem5
-            // 
-            this.allToolStripMenuItem5.AutoSize = false;
-            this.allToolStripMenuItem5.Name = "allToolStripMenuItem5";
-            this.allToolStripMenuItem5.Size = new System.Drawing.Size(152, 20);
-            this.allToolStripMenuItem5.Text = "All...";
-            this.allToolStripMenuItem5.Click += new System.EventHandler(this.clearTilesetsAll_Click);
-            // 
-            // currentToolStripMenuItem5
-            // 
-            this.currentToolStripMenuItem5.AutoSize = false;
-            this.currentToolStripMenuItem5.Name = "currentToolStripMenuItem5";
-            this.currentToolStripMenuItem5.Size = new System.Drawing.Size(152, 20);
-            this.currentToolStripMenuItem5.Text = "Current...";
-            this.currentToolStripMenuItem5.Click += new System.EventHandler(this.clearTilesetsCurrent_Click);
+            this.clearLevelDataAll.Name = "clearLevelDataAll";
+            this.clearLevelDataAll.Size = new System.Drawing.Size(206, 22);
+            this.clearLevelDataAll.Text = "Level Data...";
+            this.clearLevelDataAll.Click += new System.EventHandler(this.clearLevelDataAll_Click);
             // 
             // toolStripSeparator38
             // 
             this.toolStripSeparator38.Name = "toolStripSeparator38";
-            this.toolStripSeparator38.Size = new System.Drawing.Size(120, 6);
+            this.toolStripSeparator38.Size = new System.Drawing.Size(203, 6);
+            // 
+            // clearTilesetsAll
+            // 
+            this.clearTilesetsAll.Name = "clearTilesetsAll";
+            this.clearTilesetsAll.Size = new System.Drawing.Size(206, 22);
+            this.clearTilesetsAll.Text = "Tilesets...";
+            this.clearTilesetsAll.Click += new System.EventHandler(this.clearTilesetsAll_Click);
+            // 
+            // clearTilemapsAll
+            // 
+            this.clearTilemapsAll.Name = "clearTilemapsAll";
+            this.clearTilemapsAll.Size = new System.Drawing.Size(206, 22);
+            this.clearTilemapsAll.Text = "Tilemaps...";
+            this.clearTilemapsAll.Click += new System.EventHandler(this.clearTilemapsAll_Click);
+            // 
+            // clearPhysicalMapsAll
+            // 
+            this.clearPhysicalMapsAll.Name = "clearPhysicalMapsAll";
+            this.clearPhysicalMapsAll.Size = new System.Drawing.Size(206, 22);
+            this.clearPhysicalMapsAll.Text = "Physical Maps...";
+            this.clearPhysicalMapsAll.Click += new System.EventHandler(this.clearPhysicalMapsAll_Click);
+            // 
+            // clearBattlefieldsAll
+            // 
+            this.clearBattlefieldsAll.Name = "clearBattlefieldsAll";
+            this.clearBattlefieldsAll.Size = new System.Drawing.Size(206, 22);
+            this.clearBattlefieldsAll.Text = "Battlefields...";
+            this.clearBattlefieldsAll.Click += new System.EventHandler(this.clearBattlefieldsAll_Click);
+            // 
+            // toolStripSeparator29
+            // 
+            this.toolStripSeparator29.Name = "toolStripSeparator29";
+            this.toolStripSeparator29.Size = new System.Drawing.Size(203, 6);
             // 
             // unusedToolStripMenuItem
             // 
             this.unusedToolStripMenuItem.Name = "unusedToolStripMenuItem";
-            this.unusedToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.unusedToolStripMenuItem.Text = "Unused...";
+            this.unusedToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.unusedToolStripMenuItem.Text = "Unused tilesets...";
             this.unusedToolStripMenuItem.Click += new System.EventHandler(this.unusedToolStripMenuItem_Click);
-            // 
-            // tilemapsToolStripMenuItem
-            // 
-            this.tilemapsToolStripMenuItem.AutoSize = false;
-            this.tilemapsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem6,
-            this.currentToolStripMenuItem6,
-            this.toolStripSeparator39,
-            this.unusedToolStripMenuItem1});
-            this.tilemapsToolStripMenuItem.Name = "tilemapsToolStripMenuItem";
-            this.tilemapsToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.tilemapsToolStripMenuItem.Text = "Tilemaps";
-            // 
-            // allToolStripMenuItem6
-            // 
-            this.allToolStripMenuItem6.AutoSize = false;
-            this.allToolStripMenuItem6.Name = "allToolStripMenuItem6";
-            this.allToolStripMenuItem6.Size = new System.Drawing.Size(152, 20);
-            this.allToolStripMenuItem6.Text = "All...";
-            this.allToolStripMenuItem6.Click += new System.EventHandler(this.clearTilemapsAll_Click);
-            // 
-            // currentToolStripMenuItem6
-            // 
-            this.currentToolStripMenuItem6.AutoSize = false;
-            this.currentToolStripMenuItem6.Name = "currentToolStripMenuItem6";
-            this.currentToolStripMenuItem6.Size = new System.Drawing.Size(152, 20);
-            this.currentToolStripMenuItem6.Text = "Current...";
-            this.currentToolStripMenuItem6.Click += new System.EventHandler(this.clearTilemapsCurrent_Click);
-            // 
-            // toolStripSeparator39
-            // 
-            this.toolStripSeparator39.Name = "toolStripSeparator39";
-            this.toolStripSeparator39.Size = new System.Drawing.Size(120, 6);
             // 
             // unusedToolStripMenuItem1
             // 
             this.unusedToolStripMenuItem1.Name = "unusedToolStripMenuItem1";
-            this.unusedToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
-            this.unusedToolStripMenuItem1.Text = "Unused...";
+            this.unusedToolStripMenuItem1.Size = new System.Drawing.Size(206, 22);
+            this.unusedToolStripMenuItem1.Text = "Unused tilemaps...";
             this.unusedToolStripMenuItem1.Click += new System.EventHandler(this.unusedToolStripMenuItem1_Click);
-            // 
-            // physicalMapsToolStripMenuItem
-            // 
-            this.physicalMapsToolStripMenuItem.AutoSize = false;
-            this.physicalMapsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem1,
-            this.currentToolStripMenuItem1,
-            this.toolStripSeparator40,
-            this.unusedToolStripMenuItem2});
-            this.physicalMapsToolStripMenuItem.Name = "physicalMapsToolStripMenuItem";
-            this.physicalMapsToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.physicalMapsToolStripMenuItem.Text = "Physical Maps";
-            // 
-            // allToolStripMenuItem1
-            // 
-            this.allToolStripMenuItem1.AutoSize = false;
-            this.allToolStripMenuItem1.Name = "allToolStripMenuItem1";
-            this.allToolStripMenuItem1.Size = new System.Drawing.Size(152, 20);
-            this.allToolStripMenuItem1.Text = "All...";
-            this.allToolStripMenuItem1.Click += new System.EventHandler(this.clearPhysicalMapsAll_Click);
-            // 
-            // currentToolStripMenuItem1
-            // 
-            this.currentToolStripMenuItem1.AutoSize = false;
-            this.currentToolStripMenuItem1.Name = "currentToolStripMenuItem1";
-            this.currentToolStripMenuItem1.Size = new System.Drawing.Size(152, 20);
-            this.currentToolStripMenuItem1.Text = "Current...";
-            this.currentToolStripMenuItem1.Click += new System.EventHandler(this.clearPhysicalMapsCurrent_Click);
-            // 
-            // toolStripSeparator40
-            // 
-            this.toolStripSeparator40.Name = "toolStripSeparator40";
-            this.toolStripSeparator40.Size = new System.Drawing.Size(120, 6);
             // 
             // unusedToolStripMenuItem2
             // 
             this.unusedToolStripMenuItem2.Name = "unusedToolStripMenuItem2";
-            this.unusedToolStripMenuItem2.Size = new System.Drawing.Size(123, 22);
-            this.unusedToolStripMenuItem2.Text = "Unused...";
+            this.unusedToolStripMenuItem2.Size = new System.Drawing.Size(206, 22);
+            this.unusedToolStripMenuItem2.Text = "Unused physical maps...";
             this.unusedToolStripMenuItem2.Click += new System.EventHandler(this.unusedToolStripMenuItem2_Click);
-            // 
-            // battlefieldsToolStripMenuItem
-            // 
-            this.battlefieldsToolStripMenuItem.AutoSize = false;
-            this.battlefieldsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem7,
-            this.currentToolStripMenuItem7});
-            this.battlefieldsToolStripMenuItem.Name = "battlefieldsToolStripMenuItem";
-            this.battlefieldsToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.battlefieldsToolStripMenuItem.Text = "Battlefields";
-            // 
-            // allToolStripMenuItem7
-            // 
-            this.allToolStripMenuItem7.AutoSize = false;
-            this.allToolStripMenuItem7.Name = "allToolStripMenuItem7";
-            this.allToolStripMenuItem7.Size = new System.Drawing.Size(152, 20);
-            this.allToolStripMenuItem7.Text = "All...";
-            this.allToolStripMenuItem7.Click += new System.EventHandler(this.clearBattlefieldsAll_Click);
-            // 
-            // currentToolStripMenuItem7
-            // 
-            this.currentToolStripMenuItem7.Name = "currentToolStripMenuItem7";
-            this.currentToolStripMenuItem7.Size = new System.Drawing.Size(123, 22);
-            this.currentToolStripMenuItem7.Text = "Current...";
-            this.currentToolStripMenuItem7.Click += new System.EventHandler(this.clearBattlefieldsCurrent_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(145, 6);
-            // 
-            // everythingToolStripMenuItem
-            // 
-            this.everythingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4,
-            this.toolStripSeparator42,
-            this.unusedToolStripMenuItem3});
-            this.everythingToolStripMenuItem.Name = "everythingToolStripMenuItem";
-            this.everythingToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.everythingToolStripMenuItem.Text = "All Components";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.AutoSize = false;
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 20);
-            this.toolStripMenuItem3.Text = "All...";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.clearAllComponentsAll_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.AutoSize = false;
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 20);
-            this.toolStripMenuItem4.Text = "Current...";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.clearAllComponentsCurrent_Click);
-            // 
-            // toolStripSeparator42
-            // 
-            this.toolStripSeparator42.Name = "toolStripSeparator42";
-            this.toolStripSeparator42.Size = new System.Drawing.Size(120, 6);
             // 
             // unusedToolStripMenuItem3
             // 
             this.unusedToolStripMenuItem3.Name = "unusedToolStripMenuItem3";
-            this.unusedToolStripMenuItem3.Size = new System.Drawing.Size(123, 22);
-            this.unusedToolStripMenuItem3.Text = "Unused...";
+            this.unusedToolStripMenuItem3.Size = new System.Drawing.Size(206, 22);
+            this.unusedToolStripMenuItem3.Text = "Unused (all components)...";
             this.unusedToolStripMenuItem3.Click += new System.EventHandler(this.unusedToolStripMenuItem3_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(203, 6);
+            // 
+            // clearAllComponentsAll
+            // 
+            this.clearAllComponentsAll.Name = "clearAllComponentsAll";
+            this.clearAllComponentsAll.Size = new System.Drawing.Size(206, 22);
+            this.clearAllComponentsAll.Text = "All Components (all)...";
+            this.clearAllComponentsAll.Click += new System.EventHandler(this.clearAllComponentsAll_Click);
+            // 
+            // clearAllComponentsCurrent
+            // 
+            this.clearAllComponentsCurrent.Name = "clearAllComponentsCurrent";
+            this.clearAllComponentsCurrent.Size = new System.Drawing.Size(206, 22);
+            this.clearAllComponentsCurrent.Text = "All Components (current)...";
+            this.clearAllComponentsCurrent.Click += new System.EventHandler(this.clearAllComponentsCurrent_Click);
             // 
             // toolStripSeparator21
             // 
@@ -10415,9 +10191,8 @@ namespace SMRPGED
             // 
             // SpaceAnalyzerMenuItem
             // 
-            this.SpaceAnalyzerMenuItem.AutoSize = false;
             this.SpaceAnalyzerMenuItem.Name = "SpaceAnalyzerMenuItem";
-            this.SpaceAnalyzerMenuItem.Size = new System.Drawing.Size(169, 20);
+            this.SpaceAnalyzerMenuItem.Size = new System.Drawing.Size(169, 22);
             this.SpaceAnalyzerMenuItem.Text = "Space Analyzer...";
             this.SpaceAnalyzerMenuItem.Click += new System.EventHandler(this.SpaceAnalyzerMenuItem_Click);
             // 
@@ -10451,25 +10226,22 @@ namespace SMRPGED
             this.toolStripSeparator37,
             this.editAllLayersToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(33, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // undoToolStripMenuItem
             // 
-            this.undoToolStripMenuItem.AutoSize = false;
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(184, 20);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // redoToolStripMenuItem
             // 
-            this.redoToolStripMenuItem.AutoSize = false;
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(184, 20);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
@@ -10480,37 +10252,33 @@ namespace SMRPGED
             // 
             // cutToolStripMenuItem
             // 
-            this.cutToolStripMenuItem.AutoSize = false;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(184, 20);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
             // 
-            this.copyToolStripMenuItem.AutoSize = false;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(184, 20);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
-            this.pasteToolStripMenuItem.AutoSize = false;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(184, 20);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
-            this.deleteToolStripMenuItem.AutoSize = false;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(184, 20);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -10521,19 +10289,17 @@ namespace SMRPGED
             // 
             // selectAllToolStripMenuItem
             // 
-            this.selectAllToolStripMenuItem.AutoSize = false;
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             this.selectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(184, 20);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
             // clearSelectionToolStripMenuItem
             // 
-            this.clearSelectionToolStripMenuItem.AutoSize = false;
             this.clearSelectionToolStripMenuItem.Name = "clearSelectionToolStripMenuItem";
             this.clearSelectionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.clearSelectionToolStripMenuItem.Size = new System.Drawing.Size(187, 20);
+            this.clearSelectionToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.clearSelectionToolStripMenuItem.Text = "Clear Selection";
             this.clearSelectionToolStripMenuItem.Click += new System.EventHandler(this.clearSelectionToolStripMenuItem_Click);
             // 
@@ -10544,10 +10310,9 @@ namespace SMRPGED
             // 
             // replaceTilesToolStripMenuItem
             // 
-            this.replaceTilesToolStripMenuItem.AutoSize = false;
             this.replaceTilesToolStripMenuItem.Name = "replaceTilesToolStripMenuItem";
             this.replaceTilesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.replaceTilesToolStripMenuItem.Size = new System.Drawing.Size(187, 20);
+            this.replaceTilesToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.replaceTilesToolStripMenuItem.Text = "Replace Tiles...";
             this.replaceTilesToolStripMenuItem.Click += new System.EventHandler(this.replaceTilesToolStripMenuItem_Click);
             // 
@@ -10582,27 +10347,24 @@ namespace SMRPGED
             this.exitFieldsToolStripMenuItem,
             this.eventFieldsToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // cartesianGridToolStripMenuItem
             // 
-            this.cartesianGridToolStripMenuItem.AutoSize = false;
             this.cartesianGridToolStripMenuItem.CheckOnClick = true;
             this.cartesianGridToolStripMenuItem.Name = "cartesianGridToolStripMenuItem";
             this.cartesianGridToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.cartesianGridToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.cartesianGridToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.cartesianGridToolStripMenuItem.Text = "Cartesian Grid";
             this.cartesianGridToolStripMenuItem.Click += new System.EventHandler(this.cartesianGridToolStripMenuItem_Click);
             // 
             // orthographicGridToolStripMenuItem
             // 
-            this.orthographicGridToolStripMenuItem.AutoSize = false;
             this.orthographicGridToolStripMenuItem.CheckOnClick = true;
             this.orthographicGridToolStripMenuItem.Name = "orthographicGridToolStripMenuItem";
             this.orthographicGridToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.orthographicGridToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.orthographicGridToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.orthographicGridToolStripMenuItem.Text = "Isometric Grid";
             this.orthographicGridToolStripMenuItem.Click += new System.EventHandler(this.orthographicGridToolStripMenuItem_Click);
             // 
@@ -10613,11 +10375,10 @@ namespace SMRPGED
             // 
             // maskToolStripMenuItem
             // 
-            this.maskToolStripMenuItem.AutoSize = false;
             this.maskToolStripMenuItem.CheckOnClick = true;
             this.maskToolStripMenuItem.Name = "maskToolStripMenuItem";
             this.maskToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.maskToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.maskToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.maskToolStripMenuItem.Text = "Mask";
             this.maskToolStripMenuItem.Click += new System.EventHandler(this.maskToolStripMenuItem_Click);
             // 
@@ -10628,50 +10389,45 @@ namespace SMRPGED
             // 
             // layer1ToolStripMenuItem
             // 
-            this.layer1ToolStripMenuItem.AutoSize = false;
             this.layer1ToolStripMenuItem.CheckOnClick = true;
             this.layer1ToolStripMenuItem.Name = "layer1ToolStripMenuItem";
             this.layer1ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
-            this.layer1ToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.layer1ToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.layer1ToolStripMenuItem.Text = "Layer 1";
             this.layer1ToolStripMenuItem.Click += new System.EventHandler(this.layer1ToolStripMenuItem_Click);
             // 
             // layer2ToolStripMenuItem
             // 
-            this.layer2ToolStripMenuItem.AutoSize = false;
             this.layer2ToolStripMenuItem.CheckOnClick = true;
             this.layer2ToolStripMenuItem.Name = "layer2ToolStripMenuItem";
             this.layer2ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
-            this.layer2ToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.layer2ToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.layer2ToolStripMenuItem.Text = "Layer 2";
             this.layer2ToolStripMenuItem.Click += new System.EventHandler(this.layer2ToolStripMenuItem_Click);
             // 
             // layer3ToolStripMenuItem
             // 
-            this.layer3ToolStripMenuItem.AutoSize = false;
             this.layer3ToolStripMenuItem.CheckOnClick = true;
             this.layer3ToolStripMenuItem.Name = "layer3ToolStripMenuItem";
             this.layer3ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
-            this.layer3ToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.layer3ToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.layer3ToolStripMenuItem.Text = "Layer 3";
             this.layer3ToolStripMenuItem.Click += new System.EventHandler(this.layer3ToolStripMenuItem_Click);
             // 
             // priority1ToolStripMenuItem
             // 
-            this.priority1ToolStripMenuItem.AutoSize = false;
             this.priority1ToolStripMenuItem.CheckOnClick = true;
             this.priority1ToolStripMenuItem.Name = "priority1ToolStripMenuItem";
             this.priority1ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4)));
-            this.priority1ToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.priority1ToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.priority1ToolStripMenuItem.Text = "Highlight Priority 1";
             this.priority1ToolStripMenuItem.Click += new System.EventHandler(this.priority1ToolStripMenuItem_Click);
             // 
             // backgroundToolStripMenuItem
             // 
-            this.backgroundToolStripMenuItem.AutoSize = false;
             this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
             this.backgroundToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D5)));
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.backgroundToolStripMenuItem.Text = "Background";
             this.backgroundToolStripMenuItem.Click += new System.EventHandler(this.backgroundToolStripMenuItem_Click);
             // 
@@ -10682,31 +10438,28 @@ namespace SMRPGED
             // 
             // physicalMapToolStripMenuItem
             // 
-            this.physicalMapToolStripMenuItem.AutoSize = false;
             this.physicalMapToolStripMenuItem.CheckOnClick = true;
             this.physicalMapToolStripMenuItem.Name = "physicalMapToolStripMenuItem";
             this.physicalMapToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.physicalMapToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.physicalMapToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.physicalMapToolStripMenuItem.Text = "Physical Map";
             this.physicalMapToolStripMenuItem.Click += new System.EventHandler(this.physicalMapToolStripMenuItem_Click);
             // 
             // npcsToolStripMenuItem
             // 
-            this.npcsToolStripMenuItem.AutoSize = false;
             this.npcsToolStripMenuItem.CheckOnClick = true;
             this.npcsToolStripMenuItem.Name = "npcsToolStripMenuItem";
             this.npcsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.npcsToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.npcsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.npcsToolStripMenuItem.Text = "NPCs";
             this.npcsToolStripMenuItem.Click += new System.EventHandler(this.npcsToolStripMenuItem_Click);
             // 
             // exitFieldsToolStripMenuItem
             // 
-            this.exitFieldsToolStripMenuItem.AutoSize = false;
             this.exitFieldsToolStripMenuItem.CheckOnClick = true;
             this.exitFieldsToolStripMenuItem.Name = "exitFieldsToolStripMenuItem";
             this.exitFieldsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.exitFieldsToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.exitFieldsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.exitFieldsToolStripMenuItem.Text = "Exit Fields";
             this.exitFieldsToolStripMenuItem.Click += new System.EventHandler(this.exitFieldsToolStripMenuItem_Click);
             // 
@@ -10723,25 +10476,32 @@ namespace SMRPGED
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.enableHelpTipsToolStripMenuItem,
+            this.showDecHexToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(36, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // enableHelpTipsToolStripMenuItem
             // 
-            this.enableHelpTipsToolStripMenuItem.AutoSize = false;
             this.enableHelpTipsToolStripMenuItem.CheckOnClick = true;
             this.enableHelpTipsToolStripMenuItem.Name = "enableHelpTipsToolStripMenuItem";
             this.enableHelpTipsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.enableHelpTipsToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
+            this.enableHelpTipsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.enableHelpTipsToolStripMenuItem.Text = "Enable Help Tips";
+            // 
+            // showDecHexToolStripMenuItem
+            // 
+            this.showDecHexToolStripMenuItem.CheckOnClick = true;
+            this.showDecHexToolStripMenuItem.Name = "showDecHexToolStripMenuItem";
+            this.showDecHexToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.showDecHexToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.showDecHexToolStripMenuItem.Text = "Show Dec <> Hex";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -11262,70 +11022,6 @@ namespace SMRPGED
             this.toolStripSeparator23.Name = "toolStripSeparator23";
             this.toolStripSeparator23.Size = new System.Drawing.Size(6, 25);
             // 
-            // panel8
-            // 
-            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel8.BackColor = System.Drawing.SystemColors.Control;
-            this.panel8.Controls.Add(this.progressBar1);
-            this.panel8.Location = new System.Drawing.Point(112, 0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(208, 18);
-            this.panel8.TabIndex = 162;
-            this.panel8.Visible = false;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(-1, -1);
-            this.progressBar1.Maximum = 511;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(210, 20);
-            this.progressBar1.Step = 1;
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 0;
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.BackColor = System.Drawing.SystemColors.Control;
-            this.cancelButton.Enabled = false;
-            this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelButton.Location = new System.Drawing.Point(404, -1);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Padding = new System.Windows.Forms.Padding(0, 1, 2, 0);
-            this.cancelButton.Size = new System.Drawing.Size(59, 20);
-            this.cancelButton.TabIndex = 192;
-            this.cancelButton.Text = "CANCEL";
-            this.cancelButton.UseCompatibleTextRendering = true;
-            this.cancelButton.UseVisualStyleBackColor = false;
-            this.cancelButton.Visible = false;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // label27
-            // 
-            this.label27.BackColor = System.Drawing.SystemColors.Control;
-            this.label27.Location = new System.Drawing.Point(0, 0);
-            this.label27.Name = "label27";
-            this.label27.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label27.Size = new System.Drawing.Size(110, 18);
-            this.label27.TabIndex = 160;
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelExportPercent
-            // 
-            this.labelExportPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelExportPercent.BackColor = System.Drawing.SystemColors.Control;
-            this.labelExportPercent.Location = new System.Drawing.Point(322, 0);
-            this.labelExportPercent.Name = "labelExportPercent";
-            this.labelExportPercent.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.labelExportPercent.Size = new System.Drawing.Size(81, 18);
-            this.labelExportPercent.TabIndex = 122;
-            this.labelExportPercent.Text = "100%";
-            this.labelExportPercent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.labelExportPercent.Visible = false;
-            // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
@@ -11355,22 +11051,6 @@ namespace SMRPGED
             this.ExportLevelImages.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ExportLevelImages_RunWorkerCompleted);
             this.ExportLevelImages.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.ExportLevelImages_ProgressChanged);
             // 
-            // ExportLevelData
-            // 
-            this.ExportLevelData.WorkerReportsProgress = true;
-            this.ExportLevelData.WorkerSupportsCancellation = true;
-            this.ExportLevelData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ExportLevelData_DoWork);
-            this.ExportLevelData.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ExportLevelData_RunWorkerCompleted);
-            this.ExportLevelData.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.ExportLevelData_ProgressChanged);
-            // 
-            // ImportLevelData
-            // 
-            this.ImportLevelData.WorkerReportsProgress = true;
-            this.ImportLevelData.WorkerSupportsCancellation = true;
-            this.ImportLevelData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ImportLevelData_DoWork);
-            this.ImportLevelData.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ImportLevelData_RunWorkerCompleted);
-            this.ImportLevelData.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.ImportLevelData_ProgressChanged);
-            // 
             // labelOverlayOpacity
             // 
             this.labelOverlayOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -11394,20 +11074,6 @@ namespace SMRPGED
             this.label67.Size = new System.Drawing.Size(462, 18);
             this.label67.TabIndex = 160;
             this.label67.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel10
-            // 
-            this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel10.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel10.Controls.Add(this.label27);
-            this.panel10.Controls.Add(this.panel8);
-            this.panel10.Controls.Add(this.cancelButton);
-            this.panel10.Controls.Add(this.labelExportPercent);
-            this.panel10.Location = new System.Drawing.Point(268, 693);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(462, 18);
-            this.panel10.TabIndex = 445;
             // 
             // toolTip1
             // 
@@ -11514,6 +11180,18 @@ namespace SMRPGED
             this.labelToolTip.TabIndex = 502;
             this.labelToolTip.Visible = false;
             // 
+            // labelConvertor
+            // 
+            this.labelConvertor.AutoSize = true;
+            this.labelConvertor.BackColor = System.Drawing.Color.White;
+            this.labelConvertor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelConvertor.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelConvertor.Location = new System.Drawing.Point(214, 0);
+            this.labelConvertor.Name = "labelConvertor";
+            this.labelConvertor.Size = new System.Drawing.Size(2, 15);
+            this.labelConvertor.TabIndex = 504;
+            this.labelConvertor.Visible = false;
+            // 
             // Levels
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -11521,12 +11199,12 @@ namespace SMRPGED
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(1014, 723);
             this.ClientSize = new System.Drawing.Size(1014, 724);
+            this.Controls.Add(this.labelConvertor);
             this.Controls.Add(this.panelLevelZoom);
             this.Controls.Add(this.labelToolTip);
             this.Controls.Add(this.panelTemplateName);
             this.Controls.Add(this.panelTileEditor);
             this.Controls.Add(this.label67);
-            this.Controls.Add(this.panel10);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panelOpacity);
@@ -11538,7 +11216,7 @@ namespace SMRPGED
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Levels";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "EDITING LEVELS...";
+            this.Text = "LEVELS - Lazy Shell";
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Levels_MouseUp);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Levels_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Levels_FormClosing);
@@ -11564,7 +11242,6 @@ namespace SMRPGED
             this.panel83.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.npcID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcMovement)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcPaletteIndexPlus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcSpeedPlus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcEventORPack)).EndInit();
             this.panel43.ResumeLayout(false);
@@ -11574,8 +11251,10 @@ namespace SMRPGED
             this.panel80.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.npcMapHeader)).EndInit();
             this.panel118.ResumeLayout(false);
+            this.panel119.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mapNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelNum)).EndInit();
+            this.contextMenuStrip4.ResumeLayout(false);
             this.tabPage10.ResumeLayout(false);
             this.panel99.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.overlapType)).EndInit();
@@ -11583,7 +11262,6 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.overlapCoordY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.overlapCoordZ)).EndInit();
             this.panel62.ResumeLayout(false);
-            this.panel15.ResumeLayout(false);
             this.tabPage9.ResumeLayout(false);
             this.panel52.ResumeLayout(false);
             this.panel90.ResumeLayout(false);
@@ -11639,14 +11317,6 @@ namespace SMRPGED
             this.panelColorBalance.ResumeLayout(false);
             this.panel104.ResumeLayout(false);
             this.panel103.ResumeLayout(false);
-            this.panelTemplates.ResumeLayout(false);
-            this.panel114.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTemplate)).EndInit();
-            this.panel115.ResumeLayout(false);
-            this.panel115.PerformLayout();
-            this.panelTemplatesSub.ResumeLayout(false);
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
             this.panelOverlapTileset.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOverlaps)).EndInit();
             this.panelChangeLevelName.ResumeLayout(false);
@@ -11655,46 +11325,6 @@ namespace SMRPGED
             this.panelSearchLevelNames.ResumeLayout(false);
             this.panel58.ResumeLayout(false);
             this.panel58.PerformLayout();
-            this.panelTilesets.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.panel95.ResumeLayout(false);
-            this.panel96.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL1)).EndInit();
-            this.tabPage12.ResumeLayout(false);
-            this.panelBattlefields.ResumeLayout(false);
-            this.panelBattlefieldTileset.ResumeLayout(false);
-            this.panelBattlefieldPalettes.ResumeLayout(false);
-            this.panel93.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldPaletteSetNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorBF)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenBar)).EndInit();
-            this.panel60.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPalettePictureBox)).EndInit();
-            this.contextMenuStrip3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteColorNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenNum)).EndInit();
-            this.panelBattlefieldProperties.ResumeLayout(false);
-            this.panel92.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet4Num)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet5Num)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet3Num)).EndInit();
-            this.panel57.ResumeLayout(false);
-            this.panel56.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet2Num)).EndInit();
-            this.panel7.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet1Num)).EndInit();
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldTilesetNum)).EndInit();
-            this.panel59.ResumeLayout(false);
-            this.panel45.ResumeLayout(false);
-            this.panel61.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.battlefieldNum)).EndInit();
             this.panel27.ResumeLayout(false);
             this.panelLevelPicture.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLevel)).EndInit();
@@ -11767,6 +11397,7 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.mapBattlefieldNum)).EndInit();
             this.panel69.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.palettePictureBox)).EndInit();
+            this.contextMenuStrip3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteRedNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
@@ -11777,6 +11408,53 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteSetNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteRedBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteBlueBar)).EndInit();
+            this.panelTemplates.ResumeLayout(false);
+            this.panel114.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTemplate)).EndInit();
+            this.panel115.ResumeLayout(false);
+            this.panel115.PerformLayout();
+            this.panelTemplatesSub.ResumeLayout(false);
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
+            this.panelTilesets.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.panel95.ResumeLayout(false);
+            this.panel96.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL1)).EndInit();
+            this.tabPage12.ResumeLayout(false);
+            this.panelBattlefields.ResumeLayout(false);
+            this.panelBattlefieldTileset.ResumeLayout(false);
+            this.panelBattlefieldPalettes.ResumeLayout(false);
+            this.panel93.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldPaletteSetNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorBF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenBar)).EndInit();
+            this.panel60.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPalettePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteColorNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenNum)).EndInit();
+            this.panelBattlefieldProperties.ResumeLayout(false);
+            this.panel92.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet4Num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet5Num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet3Num)).EndInit();
+            this.panel57.ResumeLayout(false);
+            this.panel56.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet2Num)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet1Num)).EndInit();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldTilesetNum)).EndInit();
+            this.panel59.ResumeLayout(false);
+            this.panel45.ResumeLayout(false);
+            this.panel61.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.battlefieldNum)).EndInit();
             this.panelLevelZoom.ResumeLayout(false);
             this.panel117.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLevelZoom)).EndInit();
@@ -11804,9 +11482,7 @@ namespace SMRPGED
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.panel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.overlayOpacity)).EndInit();
-            this.panel10.ResumeLayout(false);
             this.panelOpacity.ResumeLayout(false);
             this.panelTemplateName.ResumeLayout(false);
             this.panel116.ResumeLayout(false);
@@ -11831,8 +11507,6 @@ namespace SMRPGED
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage10;
-        private System.Windows.Forms.RichTextBox levelNotes;
-        private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.PictureBox pictureBoxTilesetL2;
         private System.Windows.Forms.PictureBox pictureBoxTilesetL3;
@@ -12100,8 +11774,6 @@ namespace SMRPGED
         private Label label54;
         private NumericUpDown npcEventORPack;
         private NumericUpDown npcSpeedPlus;
-        private NumericUpDown npcPaletteIndexPlus;
-        private Label label52;
         private NumericUpDown npcMovement;
         private Label label49;
         private NumericUpDown npcID;
@@ -12225,34 +11897,9 @@ namespace SMRPGED
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem importToolStripMenuItem;
-        private ToolStripMenuItem levelDataToolStripMenuItem;
-        private ToolStripMenuItem allToolStripMenuItem;
-        private ToolStripMenuItem currentToolStripMenuItem;
         private ToolStripMenuItem exportToolStripMenuItem1;
         private ToolStripMenuItem exportLevelImagesToolStripMenuItem1;
-        private ToolStripMenuItem exportLevelDataToolStripMenuItem1;
-        private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem clearToolStripMenuItem;
-        private ToolStripMenuItem levelDataToolStripMenuItem1;
-        private ToolStripMenuItem allToolStripMenuItem4;
-        private ToolStripMenuItem currentToolStripMenuItem4;
-        private ToolStripMenuItem tilesetsToolStripMenuItem;
-        private ToolStripMenuItem allToolStripMenuItem5;
-        private ToolStripMenuItem currentToolStripMenuItem5;
-        private ToolStripMenuItem tilemapsToolStripMenuItem;
-        private ToolStripMenuItem allToolStripMenuItem6;
-        private ToolStripMenuItem currentToolStripMenuItem6;
-        private ToolStripMenuItem physicalMapsToolStripMenuItem;
-        private ToolStripMenuItem allToolStripMenuItem1;
-        private ToolStripMenuItem currentToolStripMenuItem1;
-        private ToolStripMenuItem battlefieldsToolStripMenuItem;
-        private ToolStripMenuItem allToolStripMenuItem7;
-        private ToolStripMenuItem currentToolStripMenuItem7;
-        private ToolStripSeparator toolStripSeparator8;
-        private ToolStripMenuItem everythingToolStripMenuItem;
-        private ToolStripMenuItem toolStripMenuItem3;
-        private ToolStripMenuItem toolStripMenuItem4;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem editToolStripMenuItem;
@@ -12285,11 +11932,6 @@ namespace SMRPGED
         private ToolStripMenuItem toolStripMenuItem5;
         private ToolStripSeparator toolStripSeparator20;
         private Label label26;
-        private Panel panel8;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private Button cancelButton;
-        private Label labelExportPercent;
-        private Label label27;
         private CheckBox layerL3ScrollShift;
         private CheckBox layerL2ScrollShift;
         private CheckBox exitsShowMessage;
@@ -12358,8 +12000,6 @@ namespace SMRPGED
         private Panel panel93;
         private Panel panel92;
         private BackgroundWorker ExportLevelImages;
-        private BackgroundWorker ExportLevelData;
-        private BackgroundWorker ImportLevelData;
         private Label labelOverlayOpacity;
         private ToolStripButton buttonToggleP1;
         private Label label67;
@@ -12383,7 +12023,6 @@ namespace SMRPGED
         private Label labelBattlefieldTileset;
         private Panel panelBattlefields;
         private Panel panelBattlefieldTileset;
-        private Panel panel10;
         private ToolStripMenuItem priority1ToolStripMenuItem;
         private ToolStripMenuItem selectAllToolStripMenuItem;
         private ToolStripMenuItem deleteToolStripMenuItem1;
@@ -12417,7 +12056,6 @@ namespace SMRPGED
         private NumericUpDown overlapCoordX;
         private Label label107;
         private TreeView overlapFieldTree;
-        private Label label128;
         private Label label51;
         private Panel panel99;
         private Label label132;
@@ -12524,16 +12162,8 @@ namespace SMRPGED
         private ToolStripSeparator toolStripSeparator36;
         private ToolStripMenuItem clearToolStripMenuItem1;
         private ToolStripButton buttonToggleTileEditor;
-        private ToolStripMenuItem unusedToolStripMenuItem;
-        private ToolStripMenuItem unusedToolStripMenuItem1;
-        private ToolStripMenuItem unusedToolStripMenuItem2;
-        private ToolStripMenuItem unusedToolStripMenuItem3;
         private ToolStripSeparator toolStripSeparator37;
         private ToolStripMenuItem editAllLayersToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator38;
-        private ToolStripSeparator toolStripSeparator39;
-        private ToolStripSeparator toolStripSeparator40;
-        private ToolStripSeparator toolStripSeparator42;
         private ToolStripSeparator toolStripSeparator41;
         private ToolStripMenuItem saveImageAsToolStripMenuItem;
         private CheckBox overlapCoordZPlusHalf;
@@ -12578,10 +12208,33 @@ namespace SMRPGED
         private Button colEditResetBF;
         private Button colEditUndoBF;
         private Button colEditRedoBF;
-        private CheckedListBox npcAttributesBattle;
         private Panel panel118;
-        private Label label118;
         private Panel panel65;
+        private Button npcCopy;
+        private Button npcPaste;
+        private Label labelConvertor;
+        private ToolStripMenuItem showDecHexToolStripMenuItem;
+        private Label label52;
+        private Panel panel119;
+        private ComboBox npcAfterBattle;
+        private ToolStripSeparator toolStripSeparator8;
+        private ToolStripMenuItem clearLevelDataAll;
+        private ToolStripMenuItem clearTilesetsAll;
+        private ToolStripMenuItem clearTilemapsAll;
+        private ToolStripMenuItem clearPhysicalMapsAll;
+        private ToolStripMenuItem clearBattlefieldsAll;
+        private ToolStripMenuItem unusedToolStripMenuItem;
+        private ToolStripMenuItem unusedToolStripMenuItem1;
+        private ToolStripMenuItem unusedToolStripMenuItem2;
+        private ToolStripMenuItem unusedToolStripMenuItem3;
+        private ToolStripMenuItem clearAllComponentsAll;
+        private ToolStripMenuItem clearAllComponentsCurrent;
+        private ToolStripSeparator toolStripSeparator38;
+        private ToolStripMenuItem allToolStripMenuItem;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private Panel panel8;
+        private ContextMenuStrip contextMenuStrip4;
+        private ToolStripMenuItem addThisLevelToNotesDatabaseToolStripMenuItem;
     }
 }
 

@@ -17,6 +17,7 @@ namespace SMRPGED.Patches
         private Model model;
         private Settings settings;
 
+        private string verifyType = "LAZYSHELL PATCH INFORMATION";
         WebClient client = new WebClient();
         WebClient IPSClient = new WebClient();
         ArrayList patches = new ArrayList();
@@ -38,12 +39,14 @@ namespace SMRPGED.Patches
             clock.Interval = 1000 / 30;
             clock.Tick += new EventHandler(clock_Tick);
             clock.Start();
-        
+
             client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(client_DownloadDataCompleted);
             IPSClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(IPSClient_DownloadDataCompleted);
 
             DownloadPatches(1);
 
+            //clock.Stop();
+            //this.downloadingLabel.Visible = false;
         }
 
         float red, green, blue;
@@ -88,6 +91,12 @@ namespace SMRPGED.Patches
         {
             try
             {
+                char[] temp = verifyType.ToCharArray();
+                for (int i = 0; i < 0x1B; i++)
+                {
+                    if (e.Result[i] != temp[i])
+                        throw new Exception();
+                }
                 AddNewDownload(e.Result);
                 DownloadPatches(patches.Count + 1);
             }
@@ -103,14 +112,15 @@ namespace SMRPGED.Patches
         {
             try
             {
-                Uri link = new Uri(settings.patchServerURL + "Patch" + pn.ToString() + "\\Patch" + pn.ToString() + ".bin");
+                Uri link = new Uri(settings.patchServerURL + "patch" + pn.ToString() + "/patch" + pn.ToString() + ".bin");
                 client.DownloadDataAsync(link);
             }
             catch
             {
-                PatchListBox.Items.Add("No patches availble");
+                PatchListBox.Items.Add("(no patches available)");
             }
         }
+
         private void AddNewDownload(byte[] data)
         {
             Patch patch = new Patch(patches.Count + 1, data);
@@ -120,7 +130,7 @@ namespace SMRPGED.Patches
 
             if (PatchListBox.SelectedIndex == -1)
                 PatchListBox.SelectedIndex = 0;
-            
+
             if (patches.Count == 1)
                 DisplayPatchInfo();
 
@@ -192,10 +202,10 @@ namespace SMRPGED.Patches
                 downloadingIPS = false;
 
                 IPSPatch ips = new IPSPatch(e.Result);
-                
+
                 if (ips.Verified)
                 {
-                    DialogResult result = MessageBox.Show("Apply this patch to the currently open ROM image?\n\nNote: This will modify the current rom image, and cannot be undone.\nNote: You may want to save the patched ROM image to disk once done.", "Apply?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = MessageBox.Show("Apply this patch to the currently open ROM image?\n\nNote: This will modify the current rom image, and cannot be undone.\nNote: You may want to save the patched ROM image to disk once done.", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
                         if (ips.ApplyTo(model.Data))
@@ -209,12 +219,12 @@ namespace SMRPGED.Patches
                                 SMRPGED.Properties.Settings.Default.ShowEncryptionWarnings = false;
 
                                 SMRPGED.Encryption.Stamp signature = model.DecryptRomSignature();
-                                if(signature.Published)
+                                if (signature.Published)
                                     model.ViewSignature(signature);
 
                                 SMRPGED.Properties.Settings.Default.ShowEncryptionWarnings = temp;
                             }
-                            MessageBox.Show("Patch Applied Succesfully");
+                            MessageBox.Show("Patch Applied Succesfully", "LAZY SHELL");
                         }
                         else
                             throw new Exception();
@@ -225,7 +235,7 @@ namespace SMRPGED.Patches
             }
             catch
             {
-                MessageBox.Show("There was an error downloading or applying the IPS patch. Please try to download and apply it manually with LunarIPS.");
+                MessageBox.Show("There was an error downloading or applying the IPS patch. Please try to download and apply it manually with LunarIPS.", "LAZY SHELL");
                 return;
             }
         }

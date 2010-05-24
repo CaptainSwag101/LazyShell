@@ -69,8 +69,10 @@ namespace SMRPGED
             this.label68 = new System.Windows.Forms.Label();
             this.panel116 = new System.Windows.Forms.Panel();
             this.insertTileType = new System.Windows.Forms.ComboBox();
+            this.insertTileHeight = new System.Windows.Forms.NumericUpDown();
             this.insertTileWidth = new System.Windows.Forms.NumericUpDown();
             this.insertTileAmount = new System.Windows.Forms.NumericUpDown();
+            this.label117 = new System.Windows.Forms.Label();
             this.label115 = new System.Windows.Forms.Label();
             this.label87 = new System.Windows.Forms.Label();
             this.panel117 = new System.Windows.Forms.Panel();
@@ -112,39 +114,28 @@ namespace SMRPGED
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allPaletteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.animationsallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allEffectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allMapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allMapPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allEffectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableHelpTipsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentAnimationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allAnimationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
-            this.currentEffectAnimationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allEffectAnimationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.allDialoguesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.currentEffectAnimationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.allEffectAnimationsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
             this.allDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showDecHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panelDialogues = new System.Windows.Forms.Panel();
-            this.panel68 = new System.Windows.Forms.Panel();
-            this.panel83 = new System.Windows.Forms.Panel();
-            this.label184 = new System.Windows.Forms.Label();
-            this.panel67 = new System.Windows.Forms.Panel();
-            this.dialogueNotes = new System.Windows.Forms.RichTextBox();
             this.characterNumLabel = new System.Windows.Forms.Label();
             this.panelSearchDialogue = new System.Windows.Forms.Panel();
             this.panel82 = new System.Windows.Forms.Panel();
@@ -181,6 +172,8 @@ namespace SMRPGED
             this.panel203 = new System.Windows.Forms.Panel();
             this.label119 = new System.Windows.Forms.Label();
             this.dialogueNum = new System.Windows.Forms.NumericUpDown();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addThisToNotesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel202 = new System.Windows.Forms.Panel();
             this.panel60 = new System.Windows.Forms.Panel();
             this.byteOrTextView = new System.Windows.Forms.CheckBox();
@@ -192,6 +185,14 @@ namespace SMRPGED
             this.dialoguePreviewPageUp = new System.Windows.Forms.Button();
             this.panel61 = new System.Windows.Forms.Panel();
             this.dialogueTextBox = new System.Windows.Forms.RichTextBox();
+            this.panelDialogueInsert = new System.Windows.Forms.Panel();
+            this.panelDialogueMemory = new System.Windows.Forms.Panel();
+            this.dialogueMemory = new System.Windows.Forms.ComboBox();
+            this.buttonInsertVAR = new System.Windows.Forms.Button();
+            this.buttonInsertFD = new System.Windows.Forms.Button();
+            this.dialogueByteValue = new System.Windows.Forms.NumericUpDown();
+            this.label118 = new System.Windows.Forms.Label();
+            this.labelDialogueInsert = new System.Windows.Forms.Label();
             this.panel201 = new System.Windows.Forms.Panel();
             this.panel62 = new System.Windows.Forms.Panel();
             this.listBox2 = new System.Windows.Forms.ListBox();
@@ -252,13 +253,6 @@ namespace SMRPGED
             this.fontPaletteGreenBar = new System.Windows.Forms.TrackBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.fontPalette = new System.Windows.Forms.ComboBox();
-            this.panelDialogueInsert = new System.Windows.Forms.Panel();
-            this.panelDialogueMemory = new System.Windows.Forms.Panel();
-            this.dialogueMemory = new System.Windows.Forms.ComboBox();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.labelDialogueInsert = new System.Windows.Forms.Label();
-            this.dialogueByteValue = new System.Windows.Forms.NumericUpDown();
             this.panelColorBalance = new System.Windows.Forms.Panel();
             this.colEditApply = new System.Windows.Forms.Button();
             this.colEditReset = new System.Windows.Forms.Button();
@@ -588,8 +582,6 @@ namespace SMRPGED
             this.nameTextBoxEffects = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel57 = new System.Windows.Forms.Panel();
-            this.panel74 = new System.Windows.Forms.Panel();
-            this.panel75 = new System.Windows.Forms.Panel();
             this.panel79 = new System.Windows.Forms.Panel();
             this.panel35 = new System.Windows.Forms.Panel();
             this.enableNorthPath = new System.Windows.Forms.CheckBox();
@@ -625,6 +617,8 @@ namespace SMRPGED
             this.whichPointCheckBit = new System.Windows.Forms.NumericUpDown();
             this.label52 = new System.Windows.Forms.Label();
             this.panel17 = new System.Windows.Forms.Panel();
+            this.runEventEdit = new System.Windows.Forms.Button();
+            this.runEvent = new System.Windows.Forms.NumericUpDown();
             this.goMapPointA = new System.Windows.Forms.ComboBox();
             this.panel27 = new System.Windows.Forms.Panel();
             this.goMapPointB = new System.Windows.Forms.ComboBox();
@@ -704,8 +698,7 @@ namespace SMRPGED
             this.PlaybackE_Sequence = new System.ComponentModel.BackgroundWorker();
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.labelToolTip = new System.Windows.Forms.Label();
-            this.label117 = new System.Windows.Forms.Label();
-            this.insertTileHeight = new System.Windows.Forms.NumericUpDown();
+            this.labelConvertor = new System.Windows.Forms.Label();
             panel72 = new System.Windows.Forms.Panel();
             label62 = new System.Windows.Forms.Label();
             label75 = new System.Windows.Forms.Label();
@@ -719,6 +712,7 @@ namespace SMRPGED
             this.toolStrip2.SuspendLayout();
             this.panelInsertTile.SuspendLayout();
             this.panel116.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.insertTileHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.insertTileWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.insertTileAmount)).BeginInit();
             this.panel117.SuspendLayout();
@@ -729,9 +723,6 @@ namespace SMRPGED
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panelDialogues.SuspendLayout();
-            this.panel68.SuspendLayout();
-            this.panel83.SuspendLayout();
-            this.panel67.SuspendLayout();
             this.panelSearchDialogue.SuspendLayout();
             this.panel82.SuspendLayout();
             this.panel76.SuspendLayout();
@@ -748,11 +739,15 @@ namespace SMRPGED
             this.panel71.SuspendLayout();
             this.panel203.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dialogueNum)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.panel202.SuspendLayout();
             this.panel60.SuspendLayout();
             this.panel69.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialogue)).BeginInit();
             this.panel61.SuspendLayout();
+            this.panelDialogueInsert.SuspendLayout();
+            this.panelDialogueMemory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dialogueByteValue)).BeginInit();
             this.panel201.SuspendLayout();
             this.panel62.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBattleDialogue)).BeginInit();
@@ -789,9 +784,6 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.fontPaletteBlueNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontPaletteGreenBar)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panelDialogueInsert.SuspendLayout();
-            this.panelDialogueMemory.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dialogueByteValue)).BeginInit();
             this.panelColorBalance.SuspendLayout();
             this.panel36.SuspendLayout();
             this.panel108.SuspendLayout();
@@ -922,7 +914,6 @@ namespace SMRPGED
             this.panel86.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel57.SuspendLayout();
-            this.panel74.SuspendLayout();
             this.panel79.SuspendLayout();
             this.panel35.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toSouthCheckAddress)).BeginInit();
@@ -942,6 +933,7 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.whichPointCheckAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.whichPointCheckBit)).BeginInit();
             this.panel17.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.runEvent)).BeginInit();
             this.panel27.SuspendLayout();
             this.panel48.SuspendLayout();
             this.panel26.SuspendLayout();
@@ -982,7 +974,6 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.wmGraphicSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wmSubtile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.insertTileHeight)).BeginInit();
             this.SuspendLayout();
             // 
             // panel72
@@ -1357,6 +1348,31 @@ namespace SMRPGED
             this.insertTileType.TabIndex = 38;
             this.insertTileType.SelectedIndexChanged += new System.EventHandler(this.insertTileType_SelectedIndexChanged);
             // 
+            // insertTileHeight
+            // 
+            this.insertTileHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.insertTileHeight.Location = new System.Drawing.Point(69, 75);
+            this.insertTileHeight.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.insertTileHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.insertTileHeight.Name = "insertTileHeight";
+            this.insertTileHeight.Size = new System.Drawing.Size(68, 17);
+            this.insertTileHeight.TabIndex = 408;
+            this.insertTileHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.insertTileHeight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.insertTileHeight.ValueChanged += new System.EventHandler(this.insertTileAmount_ValueChanged);
+            // 
             // insertTileWidth
             // 
             this.insertTileWidth.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -1406,6 +1422,16 @@ namespace SMRPGED
             0,
             0});
             this.insertTileAmount.ValueChanged += new System.EventHandler(this.insertTileAmount_ValueChanged);
+            // 
+            // label117
+            // 
+            this.label117.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label117.Location = new System.Drawing.Point(2, 75);
+            this.label117.Name = "label117";
+            this.label117.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label117.Size = new System.Drawing.Size(66, 17);
+            this.label117.TabIndex = 409;
+            this.label117.Text = "Height";
             // 
             // label115
             // 
@@ -1498,21 +1524,19 @@ namespace SMRPGED
             this.contextMenuStripCH.Name = "contextMenuStripGR";
             this.contextMenuStripCH.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStripCH.ShowImageMargin = false;
-            this.contextMenuStripCH.Size = new System.Drawing.Size(97, 132);
+            this.contextMenuStripCH.Size = new System.Drawing.Size(97, 142);
             // 
             // tsmiZoomInCH
             // 
             this.tsmiZoomInCH.Name = "tsmiZoomInCH";
-            this.tsmiZoomInCH.Padding = new System.Windows.Forms.Padding(0);
-            this.tsmiZoomInCH.Size = new System.Drawing.Size(96, 20);
+            this.tsmiZoomInCH.Size = new System.Drawing.Size(96, 22);
             this.tsmiZoomInCH.Text = "Zoom In";
             this.tsmiZoomInCH.Click += new System.EventHandler(this.fontEditZoomIn_Click);
             // 
             // tsmiZoomOutCH
             // 
             this.tsmiZoomOutCH.Name = "tsmiZoomOutCH";
-            this.tsmiZoomOutCH.Padding = new System.Windows.Forms.Padding(0);
-            this.tsmiZoomOutCH.Size = new System.Drawing.Size(96, 20);
+            this.tsmiZoomOutCH.Size = new System.Drawing.Size(96, 22);
             this.tsmiZoomOutCH.Text = "Zoom Out";
             this.tsmiZoomOutCH.Click += new System.EventHandler(this.fontEditZoomOut_Click);
             // 
@@ -1524,24 +1548,21 @@ namespace SMRPGED
             // tsmiCutCH
             // 
             this.tsmiCutCH.Name = "tsmiCutCH";
-            this.tsmiCutCH.Padding = new System.Windows.Forms.Padding(0);
-            this.tsmiCutCH.Size = new System.Drawing.Size(96, 20);
+            this.tsmiCutCH.Size = new System.Drawing.Size(96, 22);
             this.tsmiCutCH.Text = "Cut";
             this.tsmiCutCH.Click += new System.EventHandler(this.tsmiCutCH_Click);
             // 
             // tsmiCopyCH
             // 
             this.tsmiCopyCH.Name = "tsmiCopyCH";
-            this.tsmiCopyCH.Padding = new System.Windows.Forms.Padding(0);
-            this.tsmiCopyCH.Size = new System.Drawing.Size(96, 20);
+            this.tsmiCopyCH.Size = new System.Drawing.Size(96, 22);
             this.tsmiCopyCH.Text = "Copy";
             this.tsmiCopyCH.Click += new System.EventHandler(this.tsmiCopyCH_Click);
             // 
             // tsmiPasteCH
             // 
             this.tsmiPasteCH.Name = "tsmiPasteCH";
-            this.tsmiPasteCH.Padding = new System.Windows.Forms.Padding(0);
-            this.tsmiPasteCH.Size = new System.Drawing.Size(96, 20);
+            this.tsmiPasteCH.Size = new System.Drawing.Size(96, 22);
             this.tsmiPasteCH.Text = "Paste";
             this.tsmiPasteCH.Click += new System.EventHandler(this.tsmiPasteCH_Click);
             // 
@@ -1565,14 +1586,13 @@ namespace SMRPGED
             this.contextMenuStripGR.Name = "contextMenuStripGR";
             this.contextMenuStripGR.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStripGR.ShowImageMargin = false;
-            this.contextMenuStripGR.Size = new System.Drawing.Size(117, 118);
+            this.contextMenuStripGR.Size = new System.Drawing.Size(117, 126);
             this.contextMenuStripGR.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripGR_Opening);
             // 
             // setAsSubtileToolStripMenuItem
             // 
             this.setAsSubtileToolStripMenuItem.Name = "setAsSubtileToolStripMenuItem";
-            this.setAsSubtileToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.setAsSubtileToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.setAsSubtileToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.setAsSubtileToolStripMenuItem.Text = "Set subtile";
             this.setAsSubtileToolStripMenuItem.Click += new System.EventHandler(this.setAsSubtileToolStripMenuItem_Click);
             // 
@@ -1584,24 +1604,21 @@ namespace SMRPGED
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.importToolStripMenuItem.Text = "Import...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // saveImageToolStripMenuItem1
             // 
             this.saveImageToolStripMenuItem1.Name = "saveImageToolStripMenuItem1";
-            this.saveImageToolStripMenuItem1.Padding = new System.Windows.Forms.Padding(0);
-            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(116, 20);
+            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.saveImageToolStripMenuItem1.Text = "Save image...";
             this.saveImageToolStripMenuItem1.Click += new System.EventHandler(this.saveImageToolStripMenuItem1_Click);
             // 
@@ -1653,29 +1670,26 @@ namespace SMRPGED
             this.contextMenuStrip.Name = "contextMenuStripGR";
             this.contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(81, 86);
+            this.contextMenuStrip.Size = new System.Drawing.Size(81, 92);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(80, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(80, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(80, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -1713,9 +1727,8 @@ namespace SMRPGED
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(172, 20);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.saveToolStripMenuItem.Text = "Save Sprites";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -1729,52 +1742,55 @@ namespace SMRPGED
             this.clearToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allPaletteToolStripMenuItem,
             this.animationsallToolStripMenuItem,
+            this.allEffectsToolStripMenuItem,
+            this.dialoguesToolStripMenuItem,
             this.allMapsToolStripMenuItem,
-            this.allMapPointsToolStripMenuItem,
-            this.allEffectsToolStripMenuItem});
+            this.allMapPointsToolStripMenuItem});
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(172, 20);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             // 
             // allPaletteToolStripMenuItem
             // 
             this.allPaletteToolStripMenuItem.Name = "allPaletteToolStripMenuItem";
-            this.allPaletteToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.allPaletteToolStripMenuItem.Size = new System.Drawing.Size(144, 20);
-            this.allPaletteToolStripMenuItem.Text = "All Palettes";
+            this.allPaletteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.allPaletteToolStripMenuItem.Text = "Palettes...";
             this.allPaletteToolStripMenuItem.Click += new System.EventHandler(this.allPaletteToolStripMenuItem_Click);
             // 
             // animationsallToolStripMenuItem
             // 
             this.animationsallToolStripMenuItem.Name = "animationsallToolStripMenuItem";
-            this.animationsallToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.animationsallToolStripMenuItem.Size = new System.Drawing.Size(144, 20);
-            this.animationsallToolStripMenuItem.Text = "All Animations";
+            this.animationsallToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.animationsallToolStripMenuItem.Text = "Animations...";
             this.animationsallToolStripMenuItem.Click += new System.EventHandler(this.animationsallToolStripMenuItem_Click);
-            // 
-            // allMapsToolStripMenuItem
-            // 
-            this.allMapsToolStripMenuItem.Name = "allMapsToolStripMenuItem";
-            this.allMapsToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.allMapsToolStripMenuItem.Size = new System.Drawing.Size(144, 20);
-            this.allMapsToolStripMenuItem.Text = "All World Maps";
-            this.allMapsToolStripMenuItem.Click += new System.EventHandler(this.allMapsToolStripMenuItem_Click);
-            // 
-            // allMapPointsToolStripMenuItem
-            // 
-            this.allMapPointsToolStripMenuItem.AutoSize = false;
-            this.allMapPointsToolStripMenuItem.Name = "allMapPointsToolStripMenuItem";
-            this.allMapPointsToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
-            this.allMapPointsToolStripMenuItem.Text = "All Map Points";
-            this.allMapPointsToolStripMenuItem.Click += new System.EventHandler(this.allMapPointsToolStripMenuItem_Click);
             // 
             // allEffectsToolStripMenuItem
             // 
             this.allEffectsToolStripMenuItem.Name = "allEffectsToolStripMenuItem";
-            this.allEffectsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.allEffectsToolStripMenuItem.Text = "All Effects";
+            this.allEffectsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.allEffectsToolStripMenuItem.Text = "Effects...";
             this.allEffectsToolStripMenuItem.Click += new System.EventHandler(this.allEffectsToolStripMenuItem_Click);
+            // 
+            // dialoguesToolStripMenuItem
+            // 
+            this.dialoguesToolStripMenuItem.Name = "dialoguesToolStripMenuItem";
+            this.dialoguesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.dialoguesToolStripMenuItem.Text = "Dialogues...";
+            this.dialoguesToolStripMenuItem.Click += new System.EventHandler(this.dialoguesToolStripMenuItem_Click);
+            // 
+            // allMapsToolStripMenuItem
+            // 
+            this.allMapsToolStripMenuItem.Name = "allMapsToolStripMenuItem";
+            this.allMapsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.allMapsToolStripMenuItem.Text = "World Maps...";
+            this.allMapsToolStripMenuItem.Click += new System.EventHandler(this.allMapsToolStripMenuItem_Click);
+            // 
+            // allMapPointsToolStripMenuItem
+            // 
+            this.allMapPointsToolStripMenuItem.Name = "allMapPointsToolStripMenuItem";
+            this.allMapPointsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.allMapPointsToolStripMenuItem.Text = "Map Points...";
+            this.allMapPointsToolStripMenuItem.Click += new System.EventHandler(this.allMapPointsToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
@@ -1792,15 +1808,14 @@ namespace SMRPGED
             // 
             this.enableHelpTipsToolStripMenuItem.CheckOnClick = true;
             this.enableHelpTipsToolStripMenuItem.Name = "enableHelpTipsToolStripMenuItem";
-            this.enableHelpTipsToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
             this.enableHelpTipsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.enableHelpTipsToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
+            this.enableHelpTipsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.enableHelpTipsToolStripMenuItem.Text = "Enable Help Tips";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -1815,147 +1830,88 @@ namespace SMRPGED
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(31, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // importToolStripMenuItem1
             // 
             this.importToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.currentAnimationToolStripMenuItem,
             this.allAnimationsToolStripMenuItem,
-            this.toolStripSeparator23,
-            this.currentEffectAnimationToolStripMenuItem,
             this.allEffectAnimationsToolStripMenuItem,
-            this.toolStripSeparator16,
             this.allDialoguesToolStripMenuItem1});
             this.importToolStripMenuItem1.Name = "importToolStripMenuItem1";
-            this.importToolStripMenuItem1.Padding = new System.Windows.Forms.Padding(0);
-            this.importToolStripMenuItem1.Size = new System.Drawing.Size(172, 20);
+            this.importToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
             this.importToolStripMenuItem1.Text = "Import";
-            // 
-            // currentAnimationToolStripMenuItem
-            // 
-            this.currentAnimationToolStripMenuItem.AutoSize = false;
-            this.currentAnimationToolStripMenuItem.Name = "currentAnimationToolStripMenuItem";
-            this.currentAnimationToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
-            this.currentAnimationToolStripMenuItem.Text = "Current Sprite Animation...";
-            this.currentAnimationToolStripMenuItem.Click += new System.EventHandler(this.currentAnimationToolStripMenuItem_Click);
             // 
             // allAnimationsToolStripMenuItem
             // 
-            this.allAnimationsToolStripMenuItem.AutoSize = false;
             this.allAnimationsToolStripMenuItem.Name = "allAnimationsToolStripMenuItem";
-            this.allAnimationsToolStripMenuItem.Size = new System.Drawing.Size(204, 20);
-            this.allAnimationsToolStripMenuItem.Text = "All Sprite Animations...";
+            this.allAnimationsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.allAnimationsToolStripMenuItem.Text = "Sprite Animations...";
             this.allAnimationsToolStripMenuItem.Click += new System.EventHandler(this.allAnimationsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator23
-            // 
-            this.toolStripSeparator23.Name = "toolStripSeparator23";
-            this.toolStripSeparator23.Size = new System.Drawing.Size(202, 6);
-            // 
-            // currentEffectAnimationToolStripMenuItem
-            // 
-            this.currentEffectAnimationToolStripMenuItem.AutoSize = false;
-            this.currentEffectAnimationToolStripMenuItem.Name = "currentEffectAnimationToolStripMenuItem";
-            this.currentEffectAnimationToolStripMenuItem.Size = new System.Drawing.Size(205, 20);
-            this.currentEffectAnimationToolStripMenuItem.Text = "Current Effect Animation...";
-            this.currentEffectAnimationToolStripMenuItem.Click += new System.EventHandler(this.currentEffectAnimationToolStripMenuItem_Click);
             // 
             // allEffectAnimationsToolStripMenuItem
             // 
-            this.allEffectAnimationsToolStripMenuItem.AutoSize = false;
             this.allEffectAnimationsToolStripMenuItem.Name = "allEffectAnimationsToolStripMenuItem";
-            this.allEffectAnimationsToolStripMenuItem.Size = new System.Drawing.Size(205, 20);
-            this.allEffectAnimationsToolStripMenuItem.Text = "All Effect Animations...";
+            this.allEffectAnimationsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.allEffectAnimationsToolStripMenuItem.Text = "Effect Animations...";
             this.allEffectAnimationsToolStripMenuItem.Click += new System.EventHandler(this.allEffectAnimationsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator16
-            // 
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(202, 6);
             // 
             // allDialoguesToolStripMenuItem1
             // 
             this.allDialoguesToolStripMenuItem1.Name = "allDialoguesToolStripMenuItem1";
-            this.allDialoguesToolStripMenuItem1.Size = new System.Drawing.Size(205, 22);
-            this.allDialoguesToolStripMenuItem1.Text = "All Dialogues...";
+            this.allDialoguesToolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
+            this.allDialoguesToolStripMenuItem1.Text = "Dialogues...";
             this.allDialoguesToolStripMenuItem1.Click += new System.EventHandler(this.allDialoguesToolStripMenuItem1_Click);
             // 
             // exportToolStripMenuItem1
             // 
             this.exportToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
             this.toolStripMenuItem5,
-            this.toolStripSeparator15,
-            this.currentEffectAnimationToolStripMenuItem1,
             this.allEffectAnimationsToolStripMenuItem1,
-            this.toolStripSeparator22,
             this.allDialoguesToolStripMenuItem});
             this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            this.exportToolStripMenuItem1.Padding = new System.Windows.Forms.Padding(0);
-            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(172, 20);
+            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
             this.exportToolStripMenuItem1.Text = "Export";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.AutoSize = false;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(204, 20);
-            this.toolStripMenuItem2.Text = "Current Sprite Animation...";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem5
             // 
-            this.toolStripMenuItem5.AutoSize = false;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(204, 20);
-            this.toolStripMenuItem5.Text = "All Sprite Animations...";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(170, 22);
+            this.toolStripMenuItem5.Text = "Sprite Animations...";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
-            // 
-            // toolStripSeparator15
-            // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(202, 6);
-            // 
-            // currentEffectAnimationToolStripMenuItem1
-            // 
-            this.currentEffectAnimationToolStripMenuItem1.AutoSize = false;
-            this.currentEffectAnimationToolStripMenuItem1.Name = "currentEffectAnimationToolStripMenuItem1";
-            this.currentEffectAnimationToolStripMenuItem1.Size = new System.Drawing.Size(205, 20);
-            this.currentEffectAnimationToolStripMenuItem1.Text = "Current Effect Animation...";
-            this.currentEffectAnimationToolStripMenuItem1.Click += new System.EventHandler(this.currentEffectAnimationToolStripMenuItem1_Click);
             // 
             // allEffectAnimationsToolStripMenuItem1
             // 
-            this.allEffectAnimationsToolStripMenuItem1.AutoSize = false;
             this.allEffectAnimationsToolStripMenuItem1.Name = "allEffectAnimationsToolStripMenuItem1";
-            this.allEffectAnimationsToolStripMenuItem1.Size = new System.Drawing.Size(205, 20);
-            this.allEffectAnimationsToolStripMenuItem1.Text = "All Effect Animations...";
+            this.allEffectAnimationsToolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
+            this.allEffectAnimationsToolStripMenuItem1.Text = "Effect Animations...";
             this.allEffectAnimationsToolStripMenuItem1.Click += new System.EventHandler(this.allEffectAnimationsToolStripMenuItem1_Click);
-            // 
-            // toolStripSeparator22
-            // 
-            this.toolStripSeparator22.Name = "toolStripSeparator22";
-            this.toolStripSeparator22.Size = new System.Drawing.Size(202, 6);
             // 
             // allDialoguesToolStripMenuItem
             // 
             this.allDialoguesToolStripMenuItem.Name = "allDialoguesToolStripMenuItem";
-            this.allDialoguesToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.allDialoguesToolStripMenuItem.Text = "All Dialogues...";
+            this.allDialoguesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.allDialoguesToolStripMenuItem.Text = "Dialogues...";
             this.allDialoguesToolStripMenuItem.Click += new System.EventHandler(this.allDialoguesToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.enableHelpTipsToolStripMenuItem,
+            this.showDecHexToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(36, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // showDecHexToolStripMenuItem
+            // 
+            this.showDecHexToolStripMenuItem.CheckOnClick = true;
+            this.showDecHexToolStripMenuItem.Name = "showDecHexToolStripMenuItem";
+            this.showDecHexToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.showDecHexToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.showDecHexToolStripMenuItem.Text = "Show Dec <> Hex";
             // 
             // menuStrip1
             // 
@@ -1988,7 +1944,6 @@ namespace SMRPGED
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelDialogues.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panelDialogues.Controls.Add(this.panel68);
             this.panelDialogues.Controls.Add(this.characterNumLabel);
             this.panelDialogues.Controls.Add(this.panelSearchDialogue);
             this.panelDialogues.Controls.Add(this.panel65);
@@ -1999,7 +1954,6 @@ namespace SMRPGED
             this.panelDialogues.Controls.Add(this.panel59);
             this.panelDialogues.Controls.Add(this.panel9);
             this.panelDialogues.Controls.Add(this.panel46);
-            this.panelDialogues.Controls.Add(this.panelDialogueInsert);
             this.panelDialogues.Location = new System.Drawing.Point(2, 2);
             this.panelDialogues.Name = "panelDialogues";
             this.panelDialogues.Size = new System.Drawing.Size(805, 654);
@@ -2007,61 +1961,13 @@ namespace SMRPGED
             this.panelDialogues.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelDialogues_MouseMove);
             this.panelDialogues.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelDialogues_MouseUp);
             // 
-            // panel68
-            // 
-            this.panel68.Controls.Add(this.panel83);
-            this.panel68.Location = new System.Drawing.Point(538, 181);
-            this.panel68.Name = "panel68";
-            this.panel68.Size = new System.Drawing.Size(260, 467);
-            this.panel68.TabIndex = 562;
-            // 
-            // panel83
-            // 
-            this.panel83.Controls.Add(this.label184);
-            this.panel83.Controls.Add(this.panel67);
-            this.panel83.Location = new System.Drawing.Point(2, 2);
-            this.panel83.Name = "panel83";
-            this.panel83.Size = new System.Drawing.Size(256, 463);
-            this.panel83.TabIndex = 563;
-            // 
-            // label184
-            // 
-            this.label184.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label184.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label184.ForeColor = System.Drawing.SystemColors.Control;
-            this.label184.Location = new System.Drawing.Point(0, 0);
-            this.label184.Name = "label184";
-            this.label184.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label184.Size = new System.Drawing.Size(257, 17);
-            this.label184.TabIndex = 561;
-            this.label184.Text = "DIALOGUE NOTES...";
-            this.label184.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel67
-            // 
-            this.panel67.BackColor = System.Drawing.SystemColors.Window;
-            this.panel67.Controls.Add(this.dialogueNotes);
-            this.panel67.Location = new System.Drawing.Point(0, 19);
-            this.panel67.Name = "panel67";
-            this.panel67.Size = new System.Drawing.Size(256, 444);
-            this.panel67.TabIndex = 560;
-            // 
-            // dialogueNotes
-            // 
-            this.dialogueNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dialogueNotes.Location = new System.Drawing.Point(4, 4);
-            this.dialogueNotes.Name = "dialogueNotes";
-            this.dialogueNotes.Size = new System.Drawing.Size(248, 436);
-            this.dialogueNotes.TabIndex = 328;
-            this.dialogueNotes.Text = "";
-            // 
             // characterNumLabel
             // 
             this.characterNumLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.characterNumLabel.BackColor = System.Drawing.SystemColors.Info;
             this.characterNumLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.characterNumLabel.Location = new System.Drawing.Point(513, 138);
+            this.characterNumLabel.Location = new System.Drawing.Point(779, 138);
             this.characterNumLabel.Name = "characterNumLabel";
             this.characterNumLabel.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.characterNumLabel.Size = new System.Drawing.Size(0, 18);
@@ -2072,9 +1978,9 @@ namespace SMRPGED
             // panelSearchDialogue
             // 
             this.panelSearchDialogue.Controls.Add(this.panel82);
-            this.panelSearchDialogue.Location = new System.Drawing.Point(6, 261);
+            this.panelSearchDialogue.Location = new System.Drawing.Point(272, 6);
             this.panelSearchDialogue.Name = "panelSearchDialogue";
-            this.panelSearchDialogue.Size = new System.Drawing.Size(260, 213);
+            this.panelSearchDialogue.Size = new System.Drawing.Size(260, 642);
             this.panelSearchDialogue.TabIndex = 2;
             this.panelSearchDialogue.MouseLeave += new System.EventHandler(this.panelSearchDialogue_MouseLeave);
             this.panelSearchDialogue.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelSearchDialogue_MouseMove);
@@ -2092,7 +1998,7 @@ namespace SMRPGED
             this.panel82.Controls.Add(this.panel77);
             this.panel82.Location = new System.Drawing.Point(2, 2);
             this.panel82.Name = "panel82";
-            this.panel82.Size = new System.Drawing.Size(256, 209);
+            this.panel82.Size = new System.Drawing.Size(256, 638);
             this.panel82.TabIndex = 560;
             // 
             // labelSearchDialogue
@@ -2161,7 +2067,7 @@ namespace SMRPGED
             this.panel77.Controls.Add(this.searchResults);
             this.panel77.Location = new System.Drawing.Point(0, 37);
             this.panel77.Name = "panel77";
-            this.panel77.Size = new System.Drawing.Size(256, 172);
+            this.panel77.Size = new System.Drawing.Size(256, 601);
             this.panel77.TabIndex = 556;
             // 
             // searchResults
@@ -2174,14 +2080,14 @@ namespace SMRPGED
             this.searchResults.Location = new System.Drawing.Point(4, 4);
             this.searchResults.Name = "searchResults";
             this.searchResults.ReadOnly = true;
-            this.searchResults.Size = new System.Drawing.Size(248, 164);
+            this.searchResults.Size = new System.Drawing.Size(248, 593);
             this.searchResults.TabIndex = 557;
             this.searchResults.Text = "";
             // 
             // panel65
             // 
             this.panel65.Controls.Add(this.panel66);
-            this.panel65.Location = new System.Drawing.Point(272, 419);
+            this.panel65.Location = new System.Drawing.Point(538, 419);
             this.panel65.Name = "panel65";
             this.panel65.Size = new System.Drawing.Size(260, 229);
             this.panel65.TabIndex = 7;
@@ -2542,6 +2448,7 @@ namespace SMRPGED
             // 
             this.dialogueNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dialogueNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dialogueNum.ContextMenuStrip = this.contextMenuStrip2;
             this.dialogueNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dialogueNum.ForeColor = System.Drawing.SystemColors.Control;
             this.dialogueNum.Location = new System.Drawing.Point(182, 2);
@@ -2556,12 +2463,29 @@ namespace SMRPGED
             this.dialogueNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.dialogueNum.ValueChanged += new System.EventHandler(this.dialogueNum_ValueChanged);
             // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addThisToNotesDatabaseToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextMenuStrip2.ShowImageMargin = false;
+            this.contextMenuStrip2.Size = new System.Drawing.Size(192, 26);
+            // 
+            // addThisToNotesDatabaseToolStripMenuItem
+            // 
+            this.addThisToNotesDatabaseToolStripMenuItem.Name = "addThisToNotesDatabaseToolStripMenuItem";
+            this.addThisToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.addThisToNotesDatabaseToolStripMenuItem.Text = "Add this to notes database...";
+            this.addThisToNotesDatabaseToolStripMenuItem.Click += new System.EventHandler(this.addThisToNotesDatabaseToolStripMenuItem_Click);
+            // 
             // panel202
             // 
             this.panel202.Controls.Add(this.panel60);
+            this.panel202.Controls.Add(this.panelDialogueInsert);
             this.panel202.Location = new System.Drawing.Point(6, 33);
             this.panel202.Name = "panel202";
-            this.panel202.Size = new System.Drawing.Size(260, 222);
+            this.panel202.Size = new System.Drawing.Size(260, 259);
             this.panel202.TabIndex = 1;
             // 
             // panel60
@@ -2629,8 +2553,6 @@ namespace SMRPGED
             "New page",
             "Pause (A)",
             "Delay",
-            "Delay...",
-            "Variable...",
             "Option"});
             this.listBox1.Location = new System.Drawing.Point(180, 75);
             this.listBox1.Name = "listBox1";
@@ -2703,10 +2625,112 @@ namespace SMRPGED
             this.dialogueTextBox.Leave += new System.EventHandler(this.dialogueTextBox_Leave);
             this.dialogueTextBox.TextChanged += new System.EventHandler(this.dialogueTextBox_TextChanged);
             // 
+            // panelDialogueInsert
+            // 
+            this.panelDialogueInsert.Controls.Add(this.panelDialogueMemory);
+            this.panelDialogueInsert.Controls.Add(this.buttonInsertVAR);
+            this.panelDialogueInsert.Controls.Add(this.buttonInsertFD);
+            this.panelDialogueInsert.Controls.Add(this.dialogueByteValue);
+            this.panelDialogueInsert.Controls.Add(this.label118);
+            this.panelDialogueInsert.Controls.Add(this.labelDialogueInsert);
+            this.panelDialogueInsert.Location = new System.Drawing.Point(0, 220);
+            this.panelDialogueInsert.Name = "panelDialogueInsert";
+            this.panelDialogueInsert.Size = new System.Drawing.Size(259, 37);
+            this.panelDialogueInsert.TabIndex = 563;
+            // 
+            // panelDialogueMemory
+            // 
+            this.panelDialogueMemory.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelDialogueMemory.Controls.Add(this.dialogueMemory);
+            this.panelDialogueMemory.Location = new System.Drawing.Point(157, 20);
+            this.panelDialogueMemory.Name = "panelDialogueMemory";
+            this.panelDialogueMemory.Size = new System.Drawing.Size(100, 17);
+            this.panelDialogueMemory.TabIndex = 139;
+            // 
+            // dialogueMemory
+            // 
+            this.dialogueMemory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dialogueMemory.DropDownWidth = 140;
+            this.dialogueMemory.FormattingEnabled = true;
+            this.dialogueMemory.Items.AddRange(new object[] {
+            "Item name at 00:70A7",
+            "Value at 00:7000",
+            "Value at 00:7024"});
+            this.dialogueMemory.Location = new System.Drawing.Point(-3, -2);
+            this.dialogueMemory.Name = "dialogueMemory";
+            this.dialogueMemory.Size = new System.Drawing.Size(106, 21);
+            this.dialogueMemory.TabIndex = 119;
+            // 
+            // buttonInsertVAR
+            // 
+            this.buttonInsertVAR.BackColor = System.Drawing.SystemColors.Window;
+            this.buttonInsertVAR.FlatAppearance.BorderSize = 0;
+            this.buttonInsertVAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInsertVAR.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonInsertVAR.Location = new System.Drawing.Point(2, 20);
+            this.buttonInsertVAR.Name = "buttonInsertVAR";
+            this.buttonInsertVAR.Size = new System.Drawing.Size(52, 17);
+            this.buttonInsertVAR.TabIndex = 140;
+            this.buttonInsertVAR.Text = "INSERT";
+            this.buttonInsertVAR.UseCompatibleTextRendering = true;
+            this.buttonInsertVAR.UseVisualStyleBackColor = false;
+            this.buttonInsertVAR.Click += new System.EventHandler(this.buttonInsertVAR_Click);
+            // 
+            // buttonInsertFD
+            // 
+            this.buttonInsertFD.BackColor = System.Drawing.SystemColors.Window;
+            this.buttonInsertFD.FlatAppearance.BorderSize = 0;
+            this.buttonInsertFD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInsertFD.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonInsertFD.Location = new System.Drawing.Point(2, 2);
+            this.buttonInsertFD.Name = "buttonInsertFD";
+            this.buttonInsertFD.Size = new System.Drawing.Size(52, 17);
+            this.buttonInsertFD.TabIndex = 140;
+            this.buttonInsertFD.Text = "INSERT";
+            this.buttonInsertFD.UseCompatibleTextRendering = true;
+            this.buttonInsertFD.UseVisualStyleBackColor = false;
+            this.buttonInsertFD.Click += new System.EventHandler(this.buttonOK_Click);
+            // 
+            // dialogueByteValue
+            // 
+            this.dialogueByteValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dialogueByteValue.Location = new System.Drawing.Point(157, 2);
+            this.dialogueByteValue.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.dialogueByteValue.Name = "dialogueByteValue";
+            this.dialogueByteValue.Size = new System.Drawing.Size(101, 17);
+            this.dialogueByteValue.TabIndex = 138;
+            this.dialogueByteValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label118
+            // 
+            this.label118.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label118.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label118.Location = new System.Drawing.Point(55, 20);
+            this.label118.Name = "label118";
+            this.label118.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label118.Size = new System.Drawing.Size(101, 17);
+            this.label118.TabIndex = 142;
+            this.label118.Text = "Variable";
+            // 
+            // labelDialogueInsert
+            // 
+            this.labelDialogueInsert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelDialogueInsert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.labelDialogueInsert.Location = new System.Drawing.Point(55, 2);
+            this.labelDialogueInsert.Name = "labelDialogueInsert";
+            this.labelDialogueInsert.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelDialogueInsert.Size = new System.Drawing.Size(101, 17);
+            this.labelDialogueInsert.TabIndex = 142;
+            this.labelDialogueInsert.Text = "Frame delay";
+            // 
             // panel201
             // 
             this.panel201.Controls.Add(this.panel62);
-            this.panel201.Location = new System.Drawing.Point(6, 526);
+            this.panel201.Location = new System.Drawing.Point(6, 347);
             this.panel201.Name = "panel201";
             this.panel201.Size = new System.Drawing.Size(260, 122);
             this.panel201.TabIndex = 4;
@@ -2817,7 +2841,7 @@ namespace SMRPGED
             this.panel200.Controls.Add(this.panel113);
             this.panel200.Controls.Add(this.panel126);
             this.panel200.Controls.Add(this.battleDialogueNum);
-            this.panel200.Location = new System.Drawing.Point(6, 480);
+            this.panel200.Location = new System.Drawing.Point(6, 301);
             this.panel200.Name = "panel200";
             this.panel200.Size = new System.Drawing.Size(260, 40);
             this.panel200.TabIndex = 3;
@@ -2891,7 +2915,7 @@ namespace SMRPGED
             // 
             this.panel59.Controls.Add(this.panel58);
             this.panel59.Controls.Add(label53);
-            this.panel59.Location = new System.Drawing.Point(538, 6);
+            this.panel59.Location = new System.Drawing.Point(6, 479);
             this.panel59.Name = "panel59";
             this.panel59.Size = new System.Drawing.Size(260, 169);
             this.panel59.TabIndex = 9;
@@ -3032,7 +3056,7 @@ namespace SMRPGED
             // panel9
             // 
             this.panel9.Controls.Add(this.panel30);
-            this.panel9.Location = new System.Drawing.Point(272, 143);
+            this.panel9.Location = new System.Drawing.Point(538, 143);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(260, 270);
             this.panel9.TabIndex = 6;
@@ -3125,6 +3149,7 @@ namespace SMRPGED
             this.charKeystroke.Size = new System.Drawing.Size(18, 14);
             this.charKeystroke.TabIndex = 4;
             this.charKeystroke.TextChanged += new System.EventHandler(this.charKeystroke_TextChanged);
+            this.charKeystroke.Leave += new System.EventHandler(this.charKeystroke_Leave);
             // 
             // label34
             // 
@@ -3248,7 +3273,7 @@ namespace SMRPGED
             // 
             this.panel46.Controls.Add(this.panel23);
             this.panel46.Controls.Add(label74);
-            this.panel46.Location = new System.Drawing.Point(272, 6);
+            this.panel46.Location = new System.Drawing.Point(538, 6);
             this.panel46.Name = "panel46";
             this.panel46.Size = new System.Drawing.Size(260, 131);
             this.panel46.TabIndex = 5;
@@ -3467,97 +3492,6 @@ namespace SMRPGED
             this.fontPalette.Size = new System.Drawing.Size(132, 21);
             this.fontPalette.TabIndex = 400;
             this.fontPalette.SelectedIndexChanged += new System.EventHandler(this.fontPalette_SelectedIndexChanged);
-            // 
-            // panelDialogueInsert
-            // 
-            this.panelDialogueInsert.Controls.Add(this.panelDialogueMemory);
-            this.panelDialogueInsert.Controls.Add(this.buttonCancel);
-            this.panelDialogueInsert.Controls.Add(this.buttonOK);
-            this.panelDialogueInsert.Controls.Add(this.labelDialogueInsert);
-            this.panelDialogueInsert.Controls.Add(this.dialogueByteValue);
-            this.panelDialogueInsert.Location = new System.Drawing.Point(264, 203);
-            this.panelDialogueInsert.Name = "panelDialogueInsert";
-            this.panelDialogueInsert.Size = new System.Drawing.Size(206, 40);
-            this.panelDialogueInsert.TabIndex = 563;
-            this.panelDialogueInsert.Visible = false;
-            // 
-            // panelDialogueMemory
-            // 
-            this.panelDialogueMemory.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelDialogueMemory.Controls.Add(this.dialogueMemory);
-            this.panelDialogueMemory.Location = new System.Drawing.Point(104, 2);
-            this.panelDialogueMemory.Name = "panelDialogueMemory";
-            this.panelDialogueMemory.Size = new System.Drawing.Size(100, 17);
-            this.panelDialogueMemory.TabIndex = 139;
-            // 
-            // dialogueMemory
-            // 
-            this.dialogueMemory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.dialogueMemory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dialogueMemory.DropDownWidth = 140;
-            this.dialogueMemory.FormattingEnabled = true;
-            this.dialogueMemory.Items.AddRange(new object[] {
-            "Item name at 00:70A7",
-            "Value at 00:7000",
-            "Value at 00:7024"});
-            this.dialogueMemory.Location = new System.Drawing.Point(-3, -2);
-            this.dialogueMemory.Name = "dialogueMemory";
-            this.dialogueMemory.Size = new System.Drawing.Size(106, 21);
-            this.dialogueMemory.TabIndex = 119;
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.BackColor = System.Drawing.SystemColors.Window;
-            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonCancel.Location = new System.Drawing.Point(103, 20);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(102, 19);
-            this.buttonCancel.TabIndex = 141;
-            this.buttonCancel.Text = "CANCEL";
-            this.buttonCancel.UseCompatibleTextRendering = true;
-            this.buttonCancel.UseVisualStyleBackColor = false;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // buttonOK
-            // 
-            this.buttonOK.BackColor = System.Drawing.SystemColors.Window;
-            this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonOK.Location = new System.Drawing.Point(1, 20);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(103, 19);
-            this.buttonOK.TabIndex = 140;
-            this.buttonOK.Text = "OK";
-            this.buttonOK.UseCompatibleTextRendering = true;
-            this.buttonOK.UseVisualStyleBackColor = false;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
-            // labelDialogueInsert
-            // 
-            this.labelDialogueInsert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.labelDialogueInsert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelDialogueInsert.Location = new System.Drawing.Point(2, 2);
-            this.labelDialogueInsert.Name = "labelDialogueInsert";
-            this.labelDialogueInsert.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelDialogueInsert.Size = new System.Drawing.Size(101, 17);
-            this.labelDialogueInsert.TabIndex = 142;
-            // 
-            // dialogueByteValue
-            // 
-            this.dialogueByteValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dialogueByteValue.Location = new System.Drawing.Point(104, 2);
-            this.dialogueByteValue.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.dialogueByteValue.Name = "dialogueByteValue";
-            this.dialogueByteValue.Size = new System.Drawing.Size(101, 17);
-            this.dialogueByteValue.TabIndex = 138;
-            this.dialogueByteValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // panelColorBalance
             // 
@@ -4293,13 +4227,12 @@ namespace SMRPGED
             this.contextMenuStrip3.Name = "contextMenuStrip3";
             this.contextMenuStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip3.ShowImageMargin = false;
-            this.contextMenuStrip3.Size = new System.Drawing.Size(149, 46);
+            this.contextMenuStrip3.Size = new System.Drawing.Size(149, 48);
             // 
             // importPaletteSetToolStripMenuItem
             // 
-            this.importPaletteSetToolStripMenuItem.AutoSize = false;
             this.importPaletteSetToolStripMenuItem.Name = "importPaletteSetToolStripMenuItem";
-            this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(173, 20);
+            this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.importPaletteSetToolStripMenuItem.Text = "Import palette set...";
             this.importPaletteSetToolStripMenuItem.Click += new System.EventHandler(this.importPaletteSetToolStripMenuItem_Click);
             // 
@@ -5542,6 +5475,7 @@ namespace SMRPGED
             // spriteName
             // 
             this.spriteName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.spriteName.ContextMenuStrip = this.contextMenuStrip2;
             this.spriteName.DropDownHeight = 613;
             this.spriteName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.spriteName.DropDownWidth = 340;
@@ -5561,7 +5495,6 @@ namespace SMRPGED
             this.spriteNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.spriteNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spriteNum.ForeColor = System.Drawing.SystemColors.Control;
-            this.spriteNum.Hexadecimal = true;
             this.spriteNum.Location = new System.Drawing.Point(131, 21);
             this.spriteNum.Maximum = new decimal(new int[] {
             1023,
@@ -6099,6 +6032,7 @@ namespace SMRPGED
             // effectName
             // 
             this.effectName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.effectName.ContextMenuStrip = this.contextMenuStrip2;
             this.effectName.DropDownHeight = 613;
             this.effectName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.effectName.DropDownWidth = 200;
@@ -6107,134 +6041,134 @@ namespace SMRPGED
             this.effectName.FormattingEnabled = true;
             this.effectName.IntegralHeight = false;
             this.effectName.Items.AddRange(new object[] {
-            "[00]  ___DUMMY",
-            "[01]  ___DUMMY",
-            "[02]  Thundershock",
-            "[03]  Thundershock (BG mask)",
-            "[04]  Crusher",
-            "[05]  Meteor Blast",
-            "[06]  Bolt",
-            "[07]  Star Rain",
-            "[08]  Flame (fire engulf)",
-            "[09]  Mute (balloon)",
-            "[0A]  Flame Stone",
-            "[0B]  Bowser Crush",
-            "[0C]  spell cast spade",
-            "[0D]  spell cast heart",
-            "[0E]  spell cast club",
-            "[0F]  spell cast diamond",
-            "[10]  spell cast star",
-            "[11]  Terrorize",
-            "[12]  Snowy (snow BG, 4bpp)",
-            "[13]  Snowy (snow FG, 2bpp)",
-            "[14]  Endobubble (black ball/orb)",
-            "[15]  ___DUMMY",
-            "[16]  Solidify",
-            "[17]  ___DUMMY",
-            "[18]  ___DUMMY",
-            "[19]  Psych Bomb (BG)",
-            "[1A]  ___DUMMY",
-            "[1B]  Dark Star",
-            "[1C]  Willy Wisp (blue orb/ball BG)",
-            "[1D]  ___DUMMY",
-            "[1E]  ___DUMMY",
-            "[1F]  ___DUMMY",
-            "[20]  Geno Whirl",
-            "[21]  ___DUMMY",
-            "[22]  ___DUMMY",
-            "[23]  ___DUMMY",
-            "[24]  blank white flash (2bpp)",
-            "[25]  blank white flash (4bpp)",
-            "[26]  Boulder",
-            "[27]  black ball/orb",
-            "[28]  blank blue flash (2bpp)",
-            "[29]  blank red flash (2bpp)",
-            "[2A]  blank blue flash (4bpp)",
-            "[2B]  blank red flash (4bpp)",
-            "[2C]  ___DUMMY",
-            "[2D]  black flash (2bpp)",
-            "[2E]  black flash (4bpp)",
-            "[2F]  Meteor Shower (snow/confetti)",
-            "[30]  purple/violet flash (4bpp)",
-            "[31]  brown flash (4bpp)",
-            "[32]  dark red blast",
-            "[33]  dark blue blast",
-            "[34]  snow/confetti, green",
-            "[35]  light blue blast",
-            "[36]  black ball/orb",
-            "[37]  red ball/orb",
-            "[38]  green ball/orb",
-            "[39]  snow/confetti, slate green",
-            "[3A]  snow/confetti, red",
-            "[3B]  orange/red blast (Fire Bomb)",
-            "[3C]  Ice bomb/Solidify BG (blue freeze)",
-            "[3D]  Static E! (electric blast)",
-            "[3E]  green star bunches",
-            "[3F]  blue star bunches",
-            "[40]  pink star bunches",
-            "[41]  yellow star bunches",
-            "[42]  Aurora Flash",
-            "[43]  Storm",
-            "[44]  Electroshock",
-            "[45]  Smithy Treasure Head spell, red",
-            "[46]  Smithy Treasure Head spell, green",
-            "[47]  Smithy Treasure Head spell, blue",
-            "[48]  Smithy Treasure Head spell, yellow",
-            "[49]  ___DUMMY",
-            "[4A]  ___DUMMY",
-            "[4B]  ___DUMMY",
-            "[4C]  Flame Wall (orange/red fire)",
-            "[4D]  Petal Blast 1",
-            "[4E]  Petal Blast 2",
-            "[4F]  Drain Beam BG (4bpp)",
-            "[50]  Drain Beam FG (2bpp)",
-            "[51]  ___DUMMY",
-            "[52]  electric bolt",
-            "[53]  black flash (2bpp)",
-            "[54]  ___DUMMY",
-            "[55]  Pollen Nap (yellow pollen)",
-            "[56]  Geno Beam, blue",
-            "[57]  Geno Beam, red",
-            "[58]  Geno Beam, gold",
-            "[59]  Geno Beam, yellow",
-            "[5A]  Geno Beam, green",
-            "[5B]  Thunderbolt",
-            "[5C]  Light Beam",
-            "[5D]  Meteor Shower",
-            "[5E]  S\'Crow Dust (purple pollen)",
-            "[5F]  HP Rain BG",
-            "[60]  HP Rain FG",
-            "[61]  wavy dark blue lines",
-            "[62]  wavy blue lines",
-            "[63]  wavy red lines",
-            "[64]  wavy brown lines",
-            "[65]  Sand Storm",
-            "[66]  Sledge",
-            "[67]  Arrow Rain",
-            "[68]  Spear Rain",
-            "[69]  Sword Rain",
-            "[6A]  Lightning Orb (BG waves)",
-            "[6B]  Echofinder",
-            "[6C]  Poison Gas FG 1",
-            "[6D]  Poison Gas FG 2",
-            "[6E]  Poison Gas BG",
-            "[6F]  Smithy Transforms (beam effect)",
-            "[70]  Smelter\'s molten metal",
-            "[71]  ___DUMMY",
-            "[72]  ___DUMMY",
-            "[73]  ___DUMMY",
-            "[74]  ___DUMMY",
-            "[75]  ___DUMMY",
-            "[76]  ___DUMMY",
-            "[77]  ___DUMMY",
-            "[78]  ___DUMMY",
-            "[79]  ___DUMMY",
-            "[7A]  ___DUMMY",
-            "[7B]  ___DUMMY",
-            "[7C]  ___DUMMY",
-            "[7D]  ___DUMMY",
-            "[7E]  ___DUMMY",
-            "[7F]  ___DUMMY"});
+            "[000]  ___DUMMY",
+            "[001]  ___DUMMY",
+            "[002]  Thundershock",
+            "[003]  Thundershock (BG mask)",
+            "[004]  Crusher",
+            "[005]  Meteor Blast",
+            "[006]  Bolt",
+            "[007]  Star Rain",
+            "[008]  Flame (fire engulf)",
+            "[009]  Mute (balloon)",
+            "[010]  Flame Stone",
+            "[011]  Bowser Crush",
+            "[012]  spell cast spade",
+            "[013]  spell cast heart",
+            "[014]  spell cast club",
+            "[015]  spell cast diamond",
+            "[016]  spell cast star",
+            "[017]  Terrorize",
+            "[018]  Snowy (snow BG, 4bpp)",
+            "[019]  Snowy (snow FG, 2bpp)",
+            "[020]  Endobubble (black ball/orb)",
+            "[021]  ___DUMMY",
+            "[022]  Solidify",
+            "[023]  ___DUMMY",
+            "[024]  ___DUMMY",
+            "[025]  Psych Bomb (BG)",
+            "[026]  ___DUMMY",
+            "[027]  Dark Star",
+            "[028]  Willy Wisp (blue orb/ball BG)",
+            "[029]  ___DUMMY",
+            "[030]  ___DUMMY",
+            "[031]  ___DUMMY",
+            "[032]  Geno Whirl",
+            "[033]  ___DUMMY",
+            "[034]  ___DUMMY",
+            "[035]  ___DUMMY",
+            "[036]  blank white flash (2bpp)",
+            "[037]  blank white flash (4bpp)",
+            "[038]  Boulder",
+            "[039]  black ball/orb",
+            "[040]  blank blue flash (2bpp)",
+            "[041]  blank red flash (2bpp)",
+            "[042]  blank blue flash (4bpp)",
+            "[043]  blank red flash (4bpp)",
+            "[044]  ___DUMMY",
+            "[045]  black flash (2bpp)",
+            "[046]  black flash (4bpp)",
+            "[047]  Meteor Shower (snow/confetti)",
+            "[048]  purple/violet flash (4bpp)",
+            "[049]  brown flash (4bpp)",
+            "[050]  dark red blast",
+            "[051]  dark blue blast",
+            "[052]  snow/confetti, green",
+            "[053]  light blue blast",
+            "[054]  black ball/orb",
+            "[055]  red ball/orb",
+            "[056]  green ball/orb",
+            "[057]  snow/confetti, slate green",
+            "[058]  snow/confetti, red",
+            "[059]  orange/red blast (Fire Bomb)",
+            "[060]  Ice bomb/Solidify BG (blue freeze)",
+            "[061]  Static E! (electric blast)",
+            "[062]  green star bunches",
+            "[063]  blue star bunches",
+            "[064]  pink star bunches",
+            "[065]  yellow star bunches",
+            "[066]  Aurora Flash",
+            "[067]  Storm",
+            "[068]  Electroshock",
+            "[069]  Smithy Treasure Head spell, red",
+            "[070]  Smithy Treasure Head spell, green",
+            "[071]  Smithy Treasure Head spell, blue",
+            "[072]  Smithy Treasure Head spell, yellow",
+            "[073]  ___DUMMY",
+            "[074]  ___DUMMY",
+            "[075]  ___DUMMY",
+            "[076]  Flame Wall (orange/red fire)",
+            "[077]  Petal Blast 1",
+            "[078]  Petal Blast 2",
+            "[079]  Drain Beam BG (4bpp)",
+            "[080]  Drain Beam FG (2bpp)",
+            "[081]  ___DUMMY",
+            "[082]  electric bolt",
+            "[083]  black flash (2bpp)",
+            "[084]  ___DUMMY",
+            "[085]  Pollen Nap (yellow pollen)",
+            "[086]  Geno Beam, blue",
+            "[087]  Geno Beam, red",
+            "[088]  Geno Beam, gold",
+            "[089]  Geno Beam, yellow",
+            "[090]  Geno Beam, green",
+            "[091]  Thunderbolt",
+            "[092]  Light Beam",
+            "[093]  Meteor Shower",
+            "[094]  S\'Crow Dust (purple pollen)",
+            "[095]  HP Rain BG",
+            "[096]  HP Rain FG",
+            "[097]  wavy dark blue lines",
+            "[098]  wavy blue lines",
+            "[099]  wavy red lines",
+            "[100]  wavy brown lines",
+            "[101]  Sand Storm",
+            "[102]  Sledge",
+            "[103]  Arrow Rain",
+            "[104]  Spear Rain",
+            "[105]  Sword Rain",
+            "[106]  Lightning Orb (BG waves)",
+            "[107]  Echofinder",
+            "[108]  Poison Gas FG 1",
+            "[109]  Poison Gas FG 2",
+            "[110]  Poison Gas BG",
+            "[111]  Smithy Transforms (beam effect)",
+            "[112]  Smelter\'s molten metal",
+            "[113]  ___DUMMY",
+            "[114]  ___DUMMY",
+            "[115]  ___DUMMY",
+            "[116]  ___DUMMY",
+            "[117]  ___DUMMY",
+            "[118]  ___DUMMY",
+            "[119]  ___DUMMY",
+            "[120]  ___DUMMY",
+            "[121]  ___DUMMY",
+            "[122]  ___DUMMY",
+            "[123]  ___DUMMY",
+            "[124]  ___DUMMY",
+            "[125]  ___DUMMY",
+            "[126]  ___DUMMY",
+            "[127]  ___DUMMY"});
             this.effectName.Location = new System.Drawing.Point(-2, -2);
             this.effectName.Name = "effectName";
             this.effectName.Size = new System.Drawing.Size(240, 21);
@@ -6247,7 +6181,6 @@ namespace SMRPGED
             this.effectNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.effectNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.effectNum.ForeColor = System.Drawing.SystemColors.Control;
-            this.effectNum.Hexadecimal = true;
             this.effectNum.Location = new System.Drawing.Point(131, 21);
             this.effectNum.Maximum = new decimal(new int[] {
             127,
@@ -6679,13 +6612,12 @@ namespace SMRPGED
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(178, 52);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(178, 54);
             // 
             // setMoldTileToolStripMenuItem
             // 
-            this.setMoldTileToolStripMenuItem.AutoSize = false;
             this.setMoldTileToolStripMenuItem.Name = "setMoldTileToolStripMenuItem";
-            this.setMoldTileToolStripMenuItem.Size = new System.Drawing.Size(177, 20);
+            this.setMoldTileToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.setMoldTileToolStripMenuItem.Text = "Set mold tile";
             this.setMoldTileToolStripMenuItem.Click += new System.EventHandler(this.setMoldTileToolStripMenuItem_Click);
             // 
@@ -6714,7 +6646,6 @@ namespace SMRPGED
             // e_tileSetSize
             // 
             this.e_tileSetSize.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.e_tileSetSize.Hexadecimal = true;
             this.e_tileSetSize.Increment = new decimal(new int[] {
             64,
             0,
@@ -7053,13 +6984,12 @@ namespace SMRPGED
             this.contextMenuStripMD.Name = "contextMenuStripMD";
             this.contextMenuStripMD.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStripMD.ShowImageMargin = false;
-            this.contextMenuStripMD.Size = new System.Drawing.Size(113, 46);
+            this.contextMenuStripMD.Size = new System.Drawing.Size(113, 48);
             // 
             // insertTilesToolStripMenuItem
             // 
-            this.insertTilesToolStripMenuItem.AutoSize = false;
             this.insertTilesToolStripMenuItem.Name = "insertTilesToolStripMenuItem";
-            this.insertTilesToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
+            this.insertTilesToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.insertTilesToolStripMenuItem.Text = "Insert tiles...";
             this.insertTilesToolStripMenuItem.Click += new System.EventHandler(this.insertTilesToolStripMenuItem_Click);
             // 
@@ -7594,7 +7524,6 @@ namespace SMRPGED
             // e_graphicSetSize
             // 
             this.e_graphicSetSize.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.e_graphicSetSize.Hexadecimal = true;
             this.e_graphicSetSize.Increment = new decimal(new int[] {
             32,
             0,
@@ -8184,7 +8113,6 @@ namespace SMRPGED
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel57.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
-            this.panel57.Controls.Add(this.panel74);
             this.panel57.Controls.Add(this.panel79);
             this.panel57.Controls.Add(this.panel78);
             this.panel57.Controls.Add(this.panel48);
@@ -8196,22 +8124,6 @@ namespace SMRPGED
             this.panel57.Name = "panel57";
             this.panel57.Size = new System.Drawing.Size(805, 654);
             this.panel57.TabIndex = 543;
-            // 
-            // panel74
-            // 
-            this.panel74.Controls.Add(this.panel75);
-            this.panel74.Location = new System.Drawing.Point(538, 6);
-            this.panel74.Name = "panel74";
-            this.panel74.Size = new System.Drawing.Size(260, 642);
-            this.panel74.TabIndex = 546;
-            // 
-            // panel75
-            // 
-            this.panel75.BackColor = System.Drawing.SystemColors.Control;
-            this.panel75.Location = new System.Drawing.Point(2, 2);
-            this.panel75.Name = "panel75";
-            this.panel75.Size = new System.Drawing.Size(256, 638);
-            this.panel75.TabIndex = 540;
             // 
             // panel79
             // 
@@ -8732,11 +8644,45 @@ namespace SMRPGED
             // 
             // panel17
             // 
+            this.panel17.Controls.Add(this.runEventEdit);
+            this.panel17.Controls.Add(this.runEvent);
             this.panel17.Controls.Add(this.goMapPointA);
             this.panel17.Location = new System.Drawing.Point(130, 37);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(127, 17);
             this.panel17.TabIndex = 84;
+            // 
+            // runEventEdit
+            // 
+            this.runEventEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.runEventEdit.BackColor = System.Drawing.Color.Lime;
+            this.runEventEdit.FlatAppearance.BorderSize = 0;
+            this.runEventEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.runEventEdit.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.runEventEdit.Location = new System.Drawing.Point(74, 0);
+            this.runEventEdit.Name = "runEventEdit";
+            this.runEventEdit.Size = new System.Drawing.Size(52, 17);
+            this.runEventEdit.TabIndex = 556;
+            this.runEventEdit.Text = "Edit...";
+            this.runEventEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.runEventEdit.UseCompatibleTextRendering = true;
+            this.runEventEdit.UseVisualStyleBackColor = false;
+            this.runEventEdit.Click += new System.EventHandler(this.runEventEdit_Click);
+            // 
+            // runEvent
+            // 
+            this.runEvent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.runEvent.Location = new System.Drawing.Point(0, 0);
+            this.runEvent.Maximum = new decimal(new int[] {
+            4095,
+            0,
+            0,
+            0});
+            this.runEvent.Name = "runEvent";
+            this.runEvent.Size = new System.Drawing.Size(74, 17);
+            this.runEvent.TabIndex = 401;
+            this.runEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.runEvent.ValueChanged += new System.EventHandler(this.runEvent_ValueChanged);
             // 
             // goMapPointA
             // 
@@ -9744,46 +9690,24 @@ namespace SMRPGED
             this.labelToolTip.TabIndex = 514;
             this.labelToolTip.Visible = false;
             // 
-            // label117
+            // labelConvertor
             // 
-            this.label117.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label117.Location = new System.Drawing.Point(2, 75);
-            this.label117.Name = "label117";
-            this.label117.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label117.Size = new System.Drawing.Size(66, 17);
-            this.label117.TabIndex = 409;
-            this.label117.Text = "Height";
-            // 
-            // insertTileHeight
-            // 
-            this.insertTileHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.insertTileHeight.Location = new System.Drawing.Point(69, 75);
-            this.insertTileHeight.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.insertTileHeight.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.insertTileHeight.Name = "insertTileHeight";
-            this.insertTileHeight.Size = new System.Drawing.Size(68, 17);
-            this.insertTileHeight.TabIndex = 408;
-            this.insertTileHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.insertTileHeight.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.insertTileHeight.ValueChanged += new System.EventHandler(this.insertTileAmount_ValueChanged);
+            this.labelConvertor.AutoSize = true;
+            this.labelConvertor.BackColor = System.Drawing.Color.White;
+            this.labelConvertor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelConvertor.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelConvertor.Location = new System.Drawing.Point(210, 0);
+            this.labelConvertor.Name = "labelConvertor";
+            this.labelConvertor.Size = new System.Drawing.Size(2, 15);
+            this.labelConvertor.TabIndex = 518;
+            this.labelConvertor.Visible = false;
             // 
             // Sprites
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 704);
+            this.Controls.Add(this.labelConvertor);
             this.Controls.Add(this.labelToolTip);
             this.Controls.Add(this.panel55);
             this.Controls.Add(this.menuStrip1);
@@ -9795,7 +9719,7 @@ namespace SMRPGED
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Sprites";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "EDITING SPRITES...";
+            this.Text = "SPRITES - Lazy Shell";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Sprites_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Sprites_FormClosing);
             panel72.ResumeLayout(false);
@@ -9806,6 +9730,7 @@ namespace SMRPGED
             this.toolStrip2.PerformLayout();
             this.panelInsertTile.ResumeLayout(false);
             this.panel116.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.insertTileHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.insertTileWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.insertTileAmount)).EndInit();
             this.panel117.ResumeLayout(false);
@@ -9817,9 +9742,6 @@ namespace SMRPGED
             this.menuStrip1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.panelDialogues.ResumeLayout(false);
-            this.panel68.ResumeLayout(false);
-            this.panel83.ResumeLayout(false);
-            this.panel67.ResumeLayout(false);
             this.panelSearchDialogue.ResumeLayout(false);
             this.panel82.ResumeLayout(false);
             this.panel76.ResumeLayout(false);
@@ -9837,11 +9759,15 @@ namespace SMRPGED
             this.panel71.ResumeLayout(false);
             this.panel203.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dialogueNum)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.panel202.ResumeLayout(false);
             this.panel60.ResumeLayout(false);
             this.panel69.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialogue)).EndInit();
             this.panel61.ResumeLayout(false);
+            this.panelDialogueInsert.ResumeLayout(false);
+            this.panelDialogueMemory.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dialogueByteValue)).EndInit();
             this.panel201.ResumeLayout(false);
             this.panel62.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBattleDialogue)).EndInit();
@@ -9880,9 +9806,6 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.fontPaletteBlueNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontPaletteGreenBar)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panelDialogueInsert.ResumeLayout(false);
-            this.panelDialogueMemory.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dialogueByteValue)).EndInit();
             this.panelColorBalance.ResumeLayout(false);
             this.panel36.ResumeLayout(false);
             this.panel108.ResumeLayout(false);
@@ -10019,7 +9942,6 @@ namespace SMRPGED
             this.panel86.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.panel57.ResumeLayout(false);
-            this.panel74.ResumeLayout(false);
             this.panel79.ResumeLayout(false);
             this.panel35.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.toSouthCheckAddress)).EndInit();
@@ -10039,6 +9961,7 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.whichPointCheckAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.whichPointCheckBit)).EndInit();
             this.panel17.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.runEvent)).EndInit();
             this.panel27.ResumeLayout(false);
             this.panel48.ResumeLayout(false);
             this.panel26.ResumeLayout(false);
@@ -10080,7 +10003,6 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.wmGraphicSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wmSubtile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.insertTileHeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -10117,10 +10039,8 @@ namespace SMRPGED
         private MenuStrip menuStrip1;
         private ToolStripMenuItem allMapPointsToolStripMenuItem;
         private ToolStripMenuItem importToolStripMenuItem1;
-        private ToolStripMenuItem currentAnimationToolStripMenuItem;
         private ToolStripMenuItem allAnimationsToolStripMenuItem;
         private ToolStripMenuItem exportToolStripMenuItem1;
-        private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem toolStripMenuItem5;
         private ContextMenuStrip contextMenuStripCH;
         private ToolStripMenuItem tsmiZoomInCH;
@@ -10455,11 +10375,6 @@ namespace SMRPGED
         private Button searchButton;
         private Panel panel77;
         private RichTextBox searchResults;
-        private Panel panel68;
-        private Panel panel83;
-        private Label label184;
-        private Panel panel67;
-        private RichTextBox dialogueNotes;
         private CheckBox showMapPoints;
         private ToolTip toolTip1;
         private Button shiftTableUp;
@@ -10506,17 +10421,14 @@ namespace SMRPGED
         private Panel panelSearchSpriteNames;
         private Label labelSearchDialogue;
         private Panel panelSearchDialogue;
-        private ToolStripSeparator toolStripSeparator15;
         private ToolStripMenuItem allDialoguesToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator16;
         private ToolStripMenuItem allDialoguesToolStripMenuItem1;
         private Panel panelDialogueInsert;
-        private Button buttonOK;
+        private Button buttonInsertFD;
         private Label labelDialogueInsert;
         private Panel panelDialogueMemory;
         private ComboBox dialogueMemory;
         private NumericUpDown dialogueByteValue;
-        private Button buttonCancel;
         private Panel panel41;
         private Panel panel44;
         private Label label2;
@@ -10650,11 +10562,7 @@ namespace SMRPGED
         private ToolStripButton e_moldZoomOut;
         private PictureBox pictureBoxE_Subtile;
         private Label e_coordsLabel;
-        private ToolStripSeparator toolStripSeparator23;
-        private ToolStripSeparator toolStripSeparator22;
-        private ToolStripMenuItem currentEffectAnimationToolStripMenuItem;
         private ToolStripMenuItem allEffectAnimationsToolStripMenuItem;
-        private ToolStripMenuItem currentEffectAnimationToolStripMenuItem1;
         private ToolStripMenuItem allEffectAnimationsToolStripMenuItem1;
         private ToolStripMenuItem allEffectsToolStripMenuItem;
         private Label label86;
@@ -10725,8 +10633,6 @@ namespace SMRPGED
         private Panel panel32;
         private Panel panel113;
         private ComboBox battleDlgType;
-        private Panel panel74;
-        private Panel panel75;
         private Panel panel114;
         private ToolStrip toolStrip7;
         private ToolStripButton saveKeystrokes;
@@ -10749,6 +10655,15 @@ namespace SMRPGED
         private NumericUpDown insertTileWidth;
         private NumericUpDown insertTileHeight;
         private Label label117;
+        private NumericUpDown runEvent;
+        private Button runEventEdit;
+        private Label labelConvertor;
+        private ToolStripMenuItem showDecHexToolStripMenuItem;
+        private ToolStripMenuItem dialoguesToolStripMenuItem;
+        private Label label118;
+        private Button buttonInsertVAR;
+        private ContextMenuStrip contextMenuStrip2;
+        private ToolStripMenuItem addThisToNotesDatabaseToolStripMenuItem;
     }
 }
 

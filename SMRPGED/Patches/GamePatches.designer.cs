@@ -55,7 +55,7 @@ namespace SMRPGED.Patches
             // ImagePictureBox
             // 
             this.ImagePictureBox.BackColor = System.Drawing.SystemColors.Control;
-            this.ImagePictureBox.Location = new System.Drawing.Point(354, 20);
+            this.ImagePictureBox.Location = new System.Drawing.Point(354, 21);
             this.ImagePictureBox.Name = "ImagePictureBox";
             this.ImagePictureBox.Size = new System.Drawing.Size(256, 224);
             this.ImagePictureBox.TabIndex = 2;
@@ -69,7 +69,7 @@ namespace SMRPGED.Patches
             this.PatchListBox.IntegralHeight = false;
             this.PatchListBox.Location = new System.Drawing.Point(2, 21);
             this.PatchListBox.Name = "PatchListBox";
-            this.PatchListBox.Size = new System.Drawing.Size(143, 261);
+            this.PatchListBox.Size = new System.Drawing.Size(143, 262);
             this.PatchListBox.TabIndex = 3;
             this.PatchListBox.SelectedIndexChanged += new System.EventHandler(this.PatchListBox_SelectedIndexChanged);
             // 
@@ -97,7 +97,7 @@ namespace SMRPGED.Patches
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.ReadOnly = true;
             this.DescriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.DescriptionTextBox.Size = new System.Drawing.Size(205, 280);
+            this.DescriptionTextBox.Size = new System.Drawing.Size(205, 281);
             this.DescriptionTextBox.TabIndex = 6;
             // 
             // PatchNameLabel
@@ -148,7 +148,7 @@ namespace SMRPGED.Patches
             this.panel1.Controls.Add(this.ImagePictureBox);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(612, 303);
+            this.panel1.Size = new System.Drawing.Size(612, 304);
             this.panel1.TabIndex = 389;
             // 
             // downloadingLabel
@@ -157,7 +157,7 @@ namespace SMRPGED.Patches
             this.downloadingLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.downloadingLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.downloadingLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.downloadingLabel.Location = new System.Drawing.Point(150, 285);
+            this.downloadingLabel.Location = new System.Drawing.Point(150, 286);
             this.downloadingLabel.Name = "downloadingLabel";
             this.downloadingLabel.Size = new System.Drawing.Size(184, 13);
             this.downloadingLabel.TabIndex = 396;
@@ -169,7 +169,7 @@ namespace SMRPGED.Patches
             this.FreshRomLabel.AutoSize = true;
             this.FreshRomLabel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.FreshRomLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FreshRomLabel.Location = new System.Drawing.Point(365, 286);
+            this.FreshRomLabel.Location = new System.Drawing.Point(365, 287);
             this.FreshRomLabel.Name = "FreshRomLabel";
             this.FreshRomLabel.Size = new System.Drawing.Size(236, 13);
             this.FreshRomLabel.TabIndex = 395;
@@ -180,7 +180,7 @@ namespace SMRPGED.Patches
             this.GameHackLabel.AutoSize = true;
             this.GameHackLabel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.GameHackLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GameHackLabel.Location = new System.Drawing.Point(447, 267);
+            this.GameHackLabel.Location = new System.Drawing.Point(447, 268);
             this.GameHackLabel.Name = "GameHackLabel";
             this.GameHackLabel.Size = new System.Drawing.Size(71, 13);
             this.GameHackLabel.TabIndex = 394;
@@ -192,7 +192,7 @@ namespace SMRPGED.Patches
             this.AssemblyHackLabel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.AssemblyHackLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AssemblyHackLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.AssemblyHackLabel.Location = new System.Drawing.Point(436, 249);
+            this.AssemblyHackLabel.Location = new System.Drawing.Point(436, 250);
             this.AssemblyHackLabel.Name = "AssemblyHackLabel";
             this.AssemblyHackLabel.Size = new System.Drawing.Size(93, 13);
             this.AssemblyHackLabel.TabIndex = 393;
@@ -202,7 +202,7 @@ namespace SMRPGED.Patches
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(354, 284);
+            this.label2.Location = new System.Drawing.Point(354, 285);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label2.Size = new System.Drawing.Size(256, 17);
@@ -213,7 +213,7 @@ namespace SMRPGED.Patches
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(354, 265);
+            this.label1.Location = new System.Drawing.Point(354, 266);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label1.Size = new System.Drawing.Size(256, 17);
@@ -224,7 +224,7 @@ namespace SMRPGED.Patches
             // 
             this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(354, 246);
+            this.label12.Location = new System.Drawing.Point(354, 247);
             this.label12.Name = "label12";
             this.label12.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label12.Size = new System.Drawing.Size(256, 17);
@@ -236,7 +236,7 @@ namespace SMRPGED.Patches
             this.applyButton.BackColor = System.Drawing.SystemColors.Window;
             this.applyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.applyButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.applyButton.Location = new System.Drawing.Point(1, 283);
+            this.applyButton.Location = new System.Drawing.Point(1, 284);
             this.applyButton.Name = "applyButton";
             this.applyButton.Size = new System.Drawing.Size(145, 19);
             this.applyButton.TabIndex = 391;
@@ -275,7 +275,7 @@ namespace SMRPGED.Patches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 327);
+            this.ClientSize = new System.Drawing.Size(637, 328);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.SizeLabel);
             this.Controls.Add(this.PatchNameLabel);
@@ -287,7 +287,7 @@ namespace SMRPGED.Patches
             this.Location = new System.Drawing.Point(5, 5);
             this.MaximizeBox = false;
             this.Name = "GamePatches";
-            this.Text = "Game Patches";
+            this.Text = "PATCHES";
             ((System.ComponentModel.ISupportInitialize)(this.ImagePictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

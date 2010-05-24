@@ -22,6 +22,7 @@ namespace SMRPGED.ScriptsEditor
         #region Variables
         private int currentBattleScript = 0;
         private BattleScript[] battleScripts;
+        public BattleScript[] BattleScripts { get { return battleScripts; } set { battleScripts = value; } }
 
         private NPCProperties npcProperties;
         private Bitmap spriteImage;
@@ -507,17 +508,6 @@ namespace SMRPGED.ScriptsEditor
 
             return totalSize - length - 1;
         }
-        private void SaveBattleNotes()
-        {
-            try
-            {
-                this.BattleScriptNotes.SaveFile(notes.GetPath() + "main-scripts-battle.rtf");
-            }
-            catch
-            {
-                MessageBox.Show("ERROR saving main-scripts-battle.rtf, please report this if it presists");
-            }
-        }
 
         private string[] GetBattleEventNames()
         {
@@ -526,7 +516,7 @@ namespace SMRPGED.ScriptsEditor
 
             for (int i = 0; i < batEvtNames.Count; i++)
             {
-                names[i] = "[" + i.ToString("X3") + "]  " + batEvtNames[i];
+                names[i] = "[" + i.ToString("d3") + "]  " + batEvtNames[i];
             }
 
             return names;
@@ -622,52 +612,48 @@ namespace SMRPGED.ScriptsEditor
             if (!CreateDir(path))
                 return;
 
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
-            s = File.Create(path + "Do Not Modify This Directory Or Files Contained Within.txt");
-            s.Close();
-
+            FileStream fs;
+            BinaryWriter bw;
             try
             {
                 for (int i = start; i < start + count; i++)
                 {
                     // Create the file to store the level data
-                    s = File.Create(path + "battleScript." + i.ToString("X2") + ".dat"); // Create data file
-
-                    battleScripts[i].Data = null;
-
-                    // Serialize object
-                    b.Serialize(s, battleScripts[i]);
-                    s.Close();
-
-                    battleScripts[i].Data = model.Data;
+                    fs = new FileStream(path + "battleScript." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite); // Create data file
+                    bw = new BinaryWriter(fs);
+                    bw.Write(battleScripts[i].Script);
+                    bw.Close();
+                    fs.Close();
                 }
             }
             catch
             {
-                MessageBox.Show("There was a problem exporting");
+                MessageBox.Show("There was a problem exporting.", "PROBLEM EXPORTING",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void ImportBattleScript(int start, int count, string path)
         {
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
+            FileStream fs;
+            BinaryReader br;
 
             if (count == 1)
             {
                 try
                 {
-                    s = File.OpenRead(path);
-                    battleScripts[start] = (BattleScript)b.Deserialize(s);
-                    s.Close();
-                    battleScripts[start].Data = model.Data;
+                    fs = File.OpenRead(path);
+                    br = new BinaryReader(fs);
+                    battleScripts[start].Script = new byte[fs.Length];
+                    br.ReadBytes((int)fs.Length).CopyTo(battleScripts[start].Script, 0);
+                    br.Close();
+                    fs.Close();
 
                     monsterNumber_ValueChanged(null, null);
                 }
                 catch
                 {
-                    MessageBox.Show("There was a problem loading Battle Script data.");
-                    return;
+                    MessageBox.Show("There was a problem importing.", "PROBLEM IMPORTING",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -676,21 +662,23 @@ namespace SMRPGED.ScriptsEditor
                 {
                     for (int i = start; i < start + count; i++)
                     {
-                        s = File.OpenRead(path + "battleScript." + i.ToString("X2") + ".dat");
-                        battleScripts[i] = (BattleScript)b.Deserialize(s);
-                        s.Close();
-                        battleScripts[i].Data = model.Data;
+                        if (!File.Exists(path + "battleScript." + i.ToString("d3") + ".bin"))
+                            continue;
+                        fs = File.OpenRead(path + "battleScript." + i.ToString("d3") + ".bin");
+                        br = new BinaryReader(fs);
+                        battleScripts[i].Script = new byte[fs.Length];
+                        br.ReadBytes((int)fs.Length).CopyTo(battleScripts[i].Script, 0);
+                        br.Close();
+                        fs.Close();
                     }
                     monsterNumber_ValueChanged(null, null);
-
                 }
                 catch
                 {
-                    MessageBox.Show("There was a problem loading Battle Script data. Verify that the " +
-                    "Battle Script data files are correctly named and present.");
+                    MessageBox.Show("There was a problem importing.", "PROBLEM IMPORTING",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
         }
         #endregion
 

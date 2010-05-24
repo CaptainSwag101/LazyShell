@@ -22,7 +22,7 @@ namespace SMRPGED
 
         private byte[] data;
 
-        private Model model;
+        private Model model; public Model Model { get { return model; } }
         private State state;
         private SpriteModel spriteModel;
         private Settings settings;
@@ -74,8 +74,13 @@ namespace SMRPGED
         private bool panelEffectGraphicsMax;
 
         // for accessing controls from outside of Sprites
+        public NumericUpDown SpriteNum { get { return spriteNum; } set { spriteNum = value; } }
+        public NumericUpDown EffectNum { get { return effectNum; } set { effectNum = value; } }
         public NumericUpDown DialogueNum { get { return dialogueNum; } set { dialogueNum = value; } }
         public TabControl TabControl1 { get { return tabControl1; } set { tabControl1 = value; } }
+
+        private ClearElements clearElements;
+        private ImportExportElements ioElements;
 
         #endregion
 
@@ -456,155 +461,130 @@ namespace SMRPGED
         {
             Assemble();
         }
+        // Clear elements
         private void animationsallToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Animation sm in animations)
-                sm.Clear();
+            clearElements = new ClearElements(animations, (int)animationPacket.Value, "CLEAR SPRITE ANIMATIONS...");
+            clearElements.ShowDialog();
             animationPacket_ValueChanged(null, null);
         }
         private void allPaletteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (SpritePalette sp in spritePalettes)
-                sp.Clear();
+            clearElements = new ClearElements(spritePalettes, (int)paletteOffset.Value, "CLEAR SPRITE PALETTES...");
+            clearElements.ShowDialog();
             paletteOffset_ValueChanged(null, null);
         }
         private void allMapsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < model.WorldMapTileSets.Length; i++)
-                model.WorldMapTileSets[i] = new byte[0x2000];
-            foreach (WorldMap wm in worldMaps)
-                wm.Clear();
+            clearElements = new ClearElements(worldMaps, (int)worldMapNum.Value, "CLEAR WORLD MAPS...");
+            clearElements.ShowDialog();
+            DialogResult result = MessageBox.Show(
+                "Clear all world map tilesets also?", "CLEAR ALL WORLD MAP TILESETS?",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                for (int i = 0; i < model.WorldMapTileSets.Length; i++)
+                    model.WorldMapTileSets[i] = new byte[0x2000];
+            }
             worldMapNum_ValueChanged(null, null);
         }
         private void allMapPointsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (MapPoint mp in mapPoints)
-                mp.Clear();
+            clearElements = new ClearElements(mapPoints, (int)mapPointNum.Value, "CLEAR WORLD MAP POINTS...");
+            clearElements.ShowDialog();
             mapPointNum_ValueChanged(null, null);
         }
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)// Current Sprite Animation
+        // Import/export elements
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that you want to export the current Sprite Animation to.");
-
-            if (path != null)
-                ExportAnimation((int)this.animationPacket.Value, 1, path);
-        }
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)// All Sprite Animations
-        {
-            string path = GetDirectoryPath("Select the directory that you want to export the Sprite Animations to.");
-
-            if (path != null)
-                ExportAnimation(0, this.animations.Length, path);
-        }
-        private void currentAnimationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string path = SelectFile("Select the Sprite Animation to import", "Sprite Animation files (*.dat)|*.dat|All files (*.*)|*.*", 1);
-
-            if (path != null)
-                ImportAnimation((int)this.animationPacket.Value, 1, path);
+            ioElements = new ImportExportElements(this, (int)animationPacket.Value, "EXPORT SPRITE ANIMATIONS...");
+            ioElements.ShowDialog();
         }
         private void allAnimationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that contains the Sprite Animations to import.");
-            if (path != null)
-                ImportAnimation(0, this.animations.Length, path + "\\");
+            ioElements = new ImportExportElements(this, (int)animationPacket.Value, "IMPORT SPRITE ANIMATIONS...");
+            ioElements.ShowDialog();
+            if (ioElements.DialogResult != DialogResult.OK)
+                return;
+            animationPacket_ValueChanged(null, null);
         }
         private void allDialoguesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that you want to export the Dialogues to.");
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "EXPORT DIALOGUES INTO TEXT FILE...";
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 0;
+            saveFileDialog.FileName = "dialogues";
+            saveFileDialog.RestoreDirectory = true;
 
-            if (path == null) return;
-
-            path += "\\" + model.GetFileNameWithoutPath() + " - Dialogues\\";
-
-            if (!CreateDir(path))
-                return;
-
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
-            s = File.Create(path + "Do Not Modify This Directory Or Files Contained Within.txt");
-            s.Close();
-
-            //try
-            //{
-            for (int i = 0; i < universal.Dialogues.Length; i++)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                s = File.Create(path + "dialogue." + i.ToString("X3") + ".dat"); // Create data file
-
-                universal.Dialogues[i].Data = null;
-
-                // Serialize object
-                b.Serialize(s, universal.Dialogues[i]);
-                s.Close();
-
-                universal.Dialogues[i].Data = model.Data;
+                StreamWriter dialogues = File.CreateText(saveFileDialog.FileName);
+                for (int i = 0; i < universal.Dialogues.Length; i++)
+                {
+                    dialogues.WriteLine(
+                        "{" + i.ToString("d4") + "}\t" +
+                        universal.Dialogues[i].GetDialogue(true));
+                }
+                dialogues.Close();
             }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("There was a problem exporting");
-            //}
         }
         private void allDialoguesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that contains the Dialogues to import.");
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "IMPORT DIALOGUES FROM TEXT FILE...";
+            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 0;
+            openFileDialog.RestoreDirectory = true;
 
-            if (path == null) return;
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+                return;
 
-            path += "\\";
-
-            Stream s;
+            string path = openFileDialog.FileName;
+            TextReader tr;
             BinaryFormatter b = new BinaryFormatter();
-
             try
             {
-                for (int i = 0; i < universal.Dialogues.Length; i++)
+                tr = new StreamReader(path);
+                while (tr.Peek() != -1)
                 {
-                    s = File.OpenRead(path + "dialogue." + i.ToString("X3") + ".dat");
-                    universal.Dialogues[i] = (Dialogue)b.Deserialize(s);
-                    s.Close();
-                    universal.Dialogues[i].Data = model.Data;
+                    string line = tr.ReadLine();
+                    int number = Convert.ToInt32(line.Substring(1, 4), 10);
+                    line = line.Remove(0, 7);
+                    if (!line.EndsWith("[0]") && !line.EndsWith("[6]"))
+                        line += "[0]";
+                    universal.Dialogues[number].SetDialogue(line, true);
+                    universal.Dialogues[number].Data = model.Data;
                 }
                 dialogueNum_ValueChanged(null, null);
             }
             catch
             {
-                MessageBox.Show("There was a problem loading Dialogue data. Verify that the " +
-                "Dialogue data files are correctly named and present.");
+                MessageBox.Show(
+                    "There was a problem loading Dialogue data. Verify that the lines in the\n" +
+                    "text file are correctly named.\n\n" +
+                    "Each line must begin with the 4-digit dialogue number enclosed in {},\n" +
+                    "followed by a tab character, then the raw dialogue itself.",
+                    "COULD NOT IMPORT DIALOGUES", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void currentEffectAnimationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string path = SelectFile("Select the Effect Animation to import", "Effect Animation files (*.dat)|*.dat|All files (*.*)|*.*", 1);
-
-            if (path != null)
-                ImportE_Animation((int)this.e_animation.Value, 1, path);
         }
         private void allEffectAnimationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that contains the Effect Animations to import.");
-            if (path != null)
-                ImportE_Animation(0, this.e_animations.Length, path + "\\");
-        }
-        private void currentEffectAnimationToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            string path = GetDirectoryPath("Select the directory that you want to export the current Effect Animation to.");
-
-            if (path != null)
-                ExportE_Animation((int)this.e_animation.Value, 1, path);
+            ioElements = new ImportExportElements(this, (int)e_animation.Value, "IMPORT EFFECT ANIMATIONS...");
+            ioElements.ShowDialog();
+            if (ioElements.DialogResult != DialogResult.OK)
+                return;
+            e_animation_ValueChanged(null, null);
         }
         private void allEffectAnimationsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that you want to export the Effect Animations to.");
-
-            if (path != null)
-                ExportE_Animation(0, this.e_animations.Length, path);
+            ioElements = new ImportExportElements(this, (int)e_animation.Value, "EXPORT EFFECT ANIMATIONS...");
+            ioElements.ShowDialog();
         }
         private void allEffectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (E_Animation ea in e_animations)
-                ea.Clear();
+            clearElements = new ClearElements(e_animations, (int)e_animation.Value, "CLEAR SPELL EFFECTS...");
+            clearElements.ShowDialog();
             e_animation_ValueChanged(null, null);
         }
 
@@ -702,7 +682,7 @@ namespace SMRPGED
                         graphicSetImage.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
                     break;
                 case "pictureBoxE_Graphics":
-                    saveFileDialog.FileName = "effectGraphic." + e_currentAnimation.ToString("X2") + ".png";
+                    saveFileDialog.FileName = "effectGraphic." + e_currentAnimation.ToString("d3") + ".png";
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         e_graphicImage.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
                     break;
@@ -840,6 +820,7 @@ namespace SMRPGED
                                 worldMapPalettes.PaletteColorBlue[(i * 16) + j] = buffer[(i * 64) + (j * 4) + 3 + 0x17];
                             }
                         }
+                        wmPaletteRedNum_ValueChanged(null, null);
                     }
                     else if (contextMenuStrip3.SourceControl == pictureBoxE_Palette)
                     {
@@ -889,6 +870,7 @@ namespace SMRPGED
                                 worldMapPalettes.PaletteColorBlue[(i * 16) + j] = (byte)(((color >> 10) % 0x20) * multiplier);
                             }
                         }
+                        wmPaletteRedNum_ValueChanged(null, null);
                     }
                     else if (contextMenuStrip3.SourceControl == pictureBoxE_Palette)
                     {
@@ -917,7 +899,7 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem loading the file.");
+                MessageBox.Show("There was a problem loading the file.", "LAZY SHELL");
                 return;
             }
         }
@@ -1017,7 +999,7 @@ namespace SMRPGED
                                 g = (int)(worldMapPalettes.PaletteColorGreen[(i * 16) + j] / 8);
                                 b = (int)(worldMapPalettes.PaletteColorBlue[(i * 16) + j] / 8);
                                 color = (ushort)((b << 10) | (g << 5) | r);
-                                BitManager.SetShort(buffer, (i * 30) + (j * 2), color);
+                                BitManager.SetShort(buffer, (i * 32) + (j * 2), color);
                             }
                         }
                     }
@@ -1101,7 +1083,7 @@ namespace SMRPGED
 
             }
             model.AssembleSprites = false;
-
+            settings.Save();
         }
         private void Sprites_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -2388,40 +2370,82 @@ namespace SMRPGED
         }
         private void controlMouseMove(object sender, MouseEventArgs e)
         {
-            if (sender == this || !enableHelpTipsToolStripMenuItem.Checked)
-            {
-                labelToolTip.Visible = false;
-                return;
-            }
+            if (sender == this) return;
 
             Control control = (Control)sender;
 
-            if (toolTip1.GetToolTip(control) != "")
+            if (enableHelpTipsToolStripMenuItem.Checked)
             {
-                Control parent = (Control)control.Parent;
-                Point p = control.Location;
-                Point l = new Point();
-                while (parent.Parent != this)
+                if (toolTip1.GetToolTip(control) != "")
                 {
-                    p.X += parent.Location.X;
-                    p.Y += parent.Location.Y;
-                    parent = parent.Parent;
-                }
+                    Control parent = (Control)control.Parent;
+                    Point p = control.Location;
+                    Point l = new Point();
+                    while (parent.Parent != this)
+                    {
+                        p.X += parent.Location.X;
+                        p.Y += parent.Location.Y;
+                        parent = parent.Parent;
+                    }
 
-                labelToolTip.Text = toolTip1.GetToolTip(control);
-                l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
-                if (l.X + labelToolTip.Width + 50 > this.Width)
-                    l.X -= labelToolTip.Width + 75;
-                if (l.Y + labelToolTip.Height + 50 > this.Height)
-                    l.Y -= labelToolTip.Height + 50;
-                labelToolTip.Location = l;
-                labelToolTip.BringToFront();
-                labelToolTip.Visible = true;
+                    labelToolTip.Text = toolTip1.GetToolTip(control);
+                    l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
+                    if (l.X + labelToolTip.Width + 50 > this.Width)
+                        l.X -= labelToolTip.Width + 75;
+                    if (l.Y + labelToolTip.Height + 50 > this.Height)
+                        l.Y -= labelToolTip.Height + 50;
+                    labelToolTip.Location = l;
+                    labelToolTip.BringToFront();
+                    labelToolTip.Visible = true;
+                }
+                else
+                    labelToolTip.Visible = false;
             }
             else
-            {
                 labelToolTip.Visible = false;
+
+            if (showDecHexToolStripMenuItem.Checked)
+            {
+                if (control.GetType().Name == "UpDownEdit" || control.GetType().Name == "NumericUpDown")
+                {
+                    Control parent = (Control)control.Parent;
+                    Point p = control.Location;
+                    Point l = new Point();
+                    while (parent.Parent != this)
+                    {
+                        p.X += parent.Location.X;
+                        p.Y += parent.Location.Y;
+                        parent = parent.Parent;
+                    }
+
+                    NumericUpDown numericUpDown;
+                    if (control.GetType().Name == "UpDownEdit")
+                    {
+                        Control temp = GetNextControl(control, false);
+                        numericUpDown = (NumericUpDown)GetNextControl(temp, false);
+                    }
+                    else
+                        numericUpDown = (NumericUpDown)control;
+
+                    if (numericUpDown.Hexadecimal)
+                        labelConvertor.Text = "DEC:  " + ((int)numericUpDown.Value).ToString("d");
+                    else
+                        labelConvertor.Text = "HEX:  0x" + ((int)numericUpDown.Value).ToString("X4");
+
+                    l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
+                    if (l.X + labelConvertor.Width + 50 > this.Width)
+                        l.X -= labelConvertor.Width + 75;
+                    if (l.Y + labelConvertor.Height + 50 > this.Height)
+                        l.Y -= labelConvertor.Height + 50;
+                    labelConvertor.Location = l;
+                    labelConvertor.BringToFront();
+                    labelConvertor.Visible = true;
+                }
+                else
+                    labelConvertor.Visible = false;
             }
+            else
+                labelConvertor.Visible = false;
         }
 
         private void dialogueTextBox_Enter(object sender, EventArgs e)
@@ -2440,6 +2464,64 @@ namespace SMRPGED
                     break;
                 }
             }
+        }
+
+        private void dialoguesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clearElements = new ClearElements(universal.Dialogues, (int)dialogueNum.Value, "CLEAR DIALOGUES...");
+            clearElements.ShowDialog();
+            dialogueNum_ValueChanged(null, null);
+        }
+
+        private void addThisToNotesDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int type = 0;
+            int index = 0;
+            string label = "";
+            string description = "";
+
+            if (contextMenuStrip2.SourceControl.Name == "spriteName")
+            {
+                type = 9;
+                index = (int)spriteNum.Value;
+                label = description = settings.SpriteNames[(int)spriteNum.Value];
+            }
+            if (contextMenuStrip2.SourceControl.Name == "effectName")
+            {
+                type = 10;
+                index = (int)effectNum.Value;
+                label = description = effectName.Text.Substring(7);
+            }
+            if (contextMenuStrip2.SourceControl.Name == "dialogueNum")
+            {
+                type = 11;
+                index = (int)dialogueNum.Value;
+                label = "Dialogue #" + ((int)dialogueNum.Value).ToString("d4");
+                description = dialogueTextBox.Text;
+            }
+
+            if (type == 0) return;
+
+            if (model.Program.Notes == null || !model.Program.Notes.Visible)
+                model.Program.CreateNotesWindow();
+            Notes temp = model.Program.Notes;
+            if (temp.ThisNotes == null)
+                temp.LoadNotes();
+            if (temp.ThisNotes != null)
+            {
+                temp.AddingFromEditor(type, index, label, description);
+                temp.BringToFront();
+            }
+            else
+            {
+                MessageBox.Show("Could not add element to notes database.", "LAZY SHELL",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void charKeystroke_Leave(object sender, EventArgs e)
+        {
+            //settings.Save();
         }
     }
 }

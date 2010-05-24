@@ -166,14 +166,6 @@ namespace SMRPGED.StatsEditor
 
         private void SaveSpellNotes()
         {
-            try
-            {
-                this.richTextBox9.SaveFile(notes.GetPath() + "main-stats-spells.rtf");
-            }
-            catch
-            {
-                System.Windows.Forms.MessageBox.Show("Error saving spell notes. Please report this");
-            }
         }
         #region Event Handlers
         private void spellNum_ValueChanged(object sender, EventArgs e)

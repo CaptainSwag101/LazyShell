@@ -47,7 +47,7 @@ namespace SMRPGED
             if (template == null)
             {
                 MessageBox.Show("Must select a template to paint to the level.",
-                    "WARNING: NO TEMPLATE SELECTED", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                   "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -143,7 +143,7 @@ namespace SMRPGED
                 }
                 catch
                 {
-                    MessageBox.Show("Physical Tile Draw Error");
+                    MessageBox.Show("Physical Tile Draw Error", "LAZY SHELL");
                 }
 
                 physicalMap.RedrawPhysicalTile(overPhysicalTile * 2);
@@ -212,7 +212,7 @@ namespace SMRPGED
                 }
                 catch
                 {
-                    MessageBox.Show("Physical Tile Erase Error");
+                    MessageBox.Show("Physical Tile Erase Error", "LAZY SHELL");
                 }
 
                 physicalMap.RedrawPhysicalTile(overPhysicalTile * 2);
@@ -265,7 +265,7 @@ namespace SMRPGED
                 }
                 catch
                 {
-                    MessageBox.Show("Physical Tile Erase Error");
+                    MessageBox.Show("Physical Tile Erase Error", "LAZY SHELL");
                 }
 
                 physicalMap.RedrawPhysicalTile(selectPhysicalTile * 2);

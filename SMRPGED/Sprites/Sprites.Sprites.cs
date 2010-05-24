@@ -23,7 +23,8 @@ namespace SMRPGED
 
         private Sprite[] sprites;
         private GraphicPalette[] graphicPalettes;
-        private Animation[] animations;
+        private Animation[] animations; 
+        public Animation[] Animations { get { return animations; } set { animations = value; } }
         private SpritePalette[] spritePalettes;
 
         private byte[] spriteGraphics;
@@ -79,7 +80,7 @@ namespace SMRPGED
             this.spritePalettes = spriteModel.SpritePalettes;
 
             for (int i = 0; i < settings.SpriteNames.Count; i++)
-                spriteName.Items.Add(settings.SpriteNames[i]);
+                spriteName.Items.Add("[" + i.ToString("d4") + "]  " + settings.SpriteNames[i]);
             currentSprite = 0;
             this.spriteNum.Value = 0;
             this.spriteName.SelectedIndex = 0;
@@ -862,91 +863,9 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem loading the file.");
+                MessageBox.Show("There was a problem loading the file.", "LAZY SHELL");
                 return;
             }
-        }
-        private void ExportAnimation(int start, int count, string path)
-        {
-            AssembleAllAnimations();
-
-            path += "\\" + model.GetFileNameWithoutPath() + " - Sprite Animations\\";
-
-            if (!CreateDir(path))
-                return;
-
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
-            s = File.Create(path + "Do Not Modify This Directory Or Files Contained Within.txt");
-            s.Close();
-
-            try
-            {
-                for (int i = start; i < start + count; i++)
-                {
-                    s = File.Create(path + "animation." + i.ToString("X3") + ".dat"); // Create data file
-
-                    animations[i].Data = null;
-
-                    // Serialize object
-                    b.Serialize(s, animations[i]);
-                    s.Close();
-
-                    animations[i].Data = model.Data;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("There was a problem exporting");
-            }
-
-
-        }
-        private void ImportAnimation(int start, int count, string path)
-        {
-
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
-
-            if (count == 1)
-            {
-                try
-                {
-                    s = File.OpenRead(path);
-
-                    animations[start] = (Animation)b.Deserialize(s);
-                    s.Close();
-
-                    animations[start].Data = model.Data;
-
-                    animationPacket_ValueChanged(null, null);
-                }
-                catch
-                {
-                    MessageBox.Show("There was a problem loading Sprite Animation data.");
-                    return;
-                }
-            }
-            else
-            {
-                try
-                {
-                    for (int i = start; i < start + count; i++)
-                    {
-                        s = File.OpenRead(path + "animation." + i.ToString("X3") + ".dat");
-                        animations[i] = (Animation)b.Deserialize(s);
-                        s.Close();
-                        animations[i].Data = model.Data;
-                    }
-                    animationPacket_ValueChanged(null, null);
-                }
-                catch
-                {
-                    MessageBox.Show("There was a problem loading Sprite Animation data. Verify that the " +
-                    "Sprite Animation data files are correctly named and present.");
-                }
-            }
-
         }
         private void LoadSpriteNameSearch()
         {
@@ -971,7 +890,7 @@ namespace SMRPGED
             foreach (GraphicPalette gp in graphicPalettes)
                 gp.Assemble();
         }
-        private void AssembleAllAnimations()
+        public void AssembleAllAnimations()
         {
             foreach (Animation sm in animations)
                 sm.Assemble();
@@ -1148,7 +1067,7 @@ namespace SMRPGED
             redoColorReds.Clear();
             redoColorGreens.Clear();
             redoColorBlues.Clear();
-            
+
             if (updatingSprite) return;
 
             currentPalette = (int)paletteOffset.Value;
@@ -1306,19 +1225,19 @@ namespace SMRPGED
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             int index = currentSequence + 1;
             animations[currentAnimation].AddNewSequence(index, currentSequenceOffset);
-
-            delta = 2;
+            delta = 2;  // 2 bytes for new sequence's frame packet pointer
             animations[currentAnimation].UpdateOffsets(delta, currentSequenceOffset);
+            // if adding to only one sequence, the sequence packet pointer will need to be set back to normal
+            if (animations[currentAnimation].Sequences.Count == 2)
+                animations[currentAnimation].SequencePacketPointer = currentSequenceOffset;
             animations[currentAnimation].Assemble();
-
             InitializeSequences();
-
             sequences.SelectedIndex = index;
-
             UpdateAnimationsFreeSpace();
+
+            insertFrame_Click(null, null);  // all sequences must have at least one frame, so add one automatically
         }
         private void deleteSequence_Click(object sender, EventArgs e)
         {
@@ -1329,22 +1248,27 @@ namespace SMRPGED
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             int index = currentSequence;
-            animations[currentAnimation].RemoveCurrentSequence();
-
-            delta = -2;
+            delta = -2; // 2 bytes for deleted sequence
+            // must update offsets before deleting frames
             animations[currentAnimation].UpdateOffsets(delta, currentSequenceOffset);
+            delta = 0;
+            foreach (Sequence.Frame sf in animations[currentAnimation].Frames)
+                delta -= 2;  // 2 bytes for each frame in sequence
+            delta -= 1; // 1 byte for the termination 0x00
+            animations[currentAnimation].UpdateOffsets(delta, animations[currentAnimation].FramePacketPointer);
+            animations[currentAnimation].RemoveCurrentSequence();
             animations[currentAnimation].Assemble();
-
             InitializeSequences();
-
             if (index >= sequences.Items.Count)
                 sequences.SelectedIndex = index - 1;
             else
                 sequences.SelectedIndex = index;
-
             UpdateAnimationsFreeSpace();
+
+            // need to update the variables in Sprites.cs
+            currentMoldOffset = animations[currentAnimation].MoldOffset;
+            currentTileOffset = animations[currentAnimation].TileOffset;
         }
         private void insertFrame_Click(object sender, EventArgs e)
         {
@@ -1355,20 +1279,37 @@ namespace SMRPGED
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            int index = animations[currentAnimation].Frames.Count == 0 ? 0 : currentFrame + 1;
-            animations[currentAnimation].AddNewFrame(index, currentFrameOffset);
-
-            delta = 2;
-            animations[currentAnimation].UpdateOffsets(delta, currentFrameOffset);
+            int index;
+            if (animations[currentAnimation].Frames.Count == 0)
+            {
+                index = currentFrame = 0;
+                currentFrameOffset = animations[currentAnimation].FramePacketPointer;
+                animations[currentAnimation].AddNewFrame(index, currentFrameOffset);
+                delta = 3;  // 2 bytes for new frame, 1 for the termination 0x00
+                animations[currentAnimation].UpdateOffsets(delta, currentFrameOffset);
+                // after updating, set back to normal
+                animations[currentAnimation].FramePacketPointer = currentFrameOffset;
+                ((Sequence.Frame)animations[currentAnimation].Frames[0]).FrameOffset = currentFrameOffset;
+            }
+            else
+            {
+                index = currentFrame + 1;
+                animations[currentAnimation].AddNewFrame(index, currentFrameOffset);
+                delta = 2;  // 2 bytes for new frame
+                animations[currentAnimation].UpdateOffsets(delta, currentFrameOffset);
+                // if adding to only one frame, the frame packet pointer will need to be set back to normal
+                if (animations[currentAnimation].Frames.Count == 2)
+                    animations[currentAnimation].FramePacketPointer = currentFrameOffset;
+            }
             animations[currentAnimation].Assemble();
-
             InitializeFrames();
             SetSequenceFrameImages();
-
             sequenceFrames.SelectedIndex = index;
-
             UpdateAnimationsFreeSpace();
+
+            // need to update the variables in Sprites.cs
+            currentMoldOffset = animations[currentAnimation].MoldOffset;
+            currentTileOffset = animations[currentAnimation].TileOffset;
         }
         private void deleteFrame_Click(object sender, EventArgs e)
         {
@@ -1379,23 +1320,22 @@ namespace SMRPGED
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             int index = currentFrame;
             animations[currentAnimation].RemoveCurrentFrame();
-
             delta = -2;
             animations[currentAnimation].UpdateOffsets(delta, currentFrameOffset);
             animations[currentAnimation].Assemble();
-
             InitializeFrames();
             SetSequenceFrameImages();
-
             if (index >= sequenceFrames.Items.Count)
                 sequenceFrames.SelectedIndex = index - 1;
             else
                 sequenceFrames.SelectedIndex = index;
-
             UpdateAnimationsFreeSpace();
+
+            // need to update the variables in Sprites.cs
+            currentMoldOffset = animations[currentAnimation].MoldOffset;
+            currentTileOffset = animations[currentAnimation].TileOffset;
         }
         private void frameMoveUp_Click(object sender, EventArgs e)
         {
@@ -1562,26 +1502,22 @@ namespace SMRPGED
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             int index = currentMold + 1;
-
-            delta = 5;
-            animations[currentAnimation].UpdateOffsets(delta, animations[currentAnimation].TilePacketPointer);
-
-            delta = 2;
-            animations[currentAnimation].UpdateOffsets(delta, currentMoldOffset);
             animations[currentAnimation].AddNewMold(index, currentMoldOffset);
-
+            delta = 2;  // 2 bytes for new mold's tile packet pointer
+            animations[currentAnimation].UpdateOffsets(delta, currentMoldOffset);
+            // if adding to only one mold, the mold packet pointer will need to be set back to normal
+            if (animations[currentAnimation].Molds.Count == 2)
+                animations[currentAnimation].MoldPacketPointer = currentMoldOffset;
             animations[currentAnimation].Assemble();
-
             InitializeMolds();
             InitializeSequences();
             InitializeFrames();
             SetSequenceFrameImages();
-
             molds.SelectedIndex = index;
-
             UpdateAnimationsFreeSpace();
+
+            insertTile_Click(null, null);
         }
         private void deleteMold_Click(object sender, EventArgs e)
         {
@@ -1597,23 +1533,21 @@ namespace SMRPGED
                 MessageBox.Show(
                     "Deleting mold #0 is not allowed.\n\n" +
                     "This is because mold #0 is often used as a template for other molds.\n" +
-                    "Removing it may adversely affect other molds that copy some of its tiles.", "CANNOT DELETE MOLD #0",
+                    "Removing it may adversely affect other molds that reference its tiles.", "CANNOT DELETE MOLD #0",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             int index = currentMold;
-
+            delta = -2; // 2 bytes for deleted mold
+            // must update offsets before deleting tiles
+            animations[currentAnimation].UpdateOffsets(delta, currentMoldOffset);
+            delta = 0;
             if (animations[currentAnimation].TilePacketPointer != 0x7FFF)
             {
-                delta = (short)(0 - animations[currentAnimation].MoldSize - 1);
+                delta -= (short)(animations[currentAnimation].MoldSize + 1);
                 animations[currentAnimation].UpdateOffsets(delta, animations[currentAnimation].TilePacketPointer);
+                animations[currentAnimation].RemoveCurrentMold();
             }
-
-            delta = -2;
-            animations[currentAnimation].UpdateOffsets(delta, currentMoldOffset);
-            animations[currentAnimation].RemoveCurrentMold();
-
             animations[currentAnimation].Assemble();
 
             InitializeMolds();
@@ -1627,6 +1561,9 @@ namespace SMRPGED
             molds.SelectedIndex = index;
 
             UpdateAnimationsFreeSpace();
+
+            currentSequenceOffset = animations[currentAnimation].SequenceOffset;
+            currentFrameOffset = animations[currentAnimation].FrameOffset;
         }
 
         private void pictureBoxMoldTileset_MouseDown(object sender, MouseEventArgs e)
@@ -1707,24 +1644,32 @@ namespace SMRPGED
                 return;
             }
 
-            int index = currentTile + 1;
-
+            int index;
             if (animations[currentAnimation].Tiles.Count == 0)
-                index = 0;
-
-            delta = 4;
-
-            animations[currentAnimation].AddNewTile(index, currentTileOffset);
-
-            animations[currentAnimation].UpdateOffsets(delta, currentTileOffset);
+            {
+                currentTileOffset = animations[currentAnimation].TilePacketPointer;
+                index = currentTile = 0;
+                animations[currentAnimation].AddNewTile(index, currentTileOffset);
+                delta = 5;  // 4 bytes for empty 24x24 type tile, 1 byte for termination 0x00
+                animations[currentAnimation].UpdateOffsets(delta, currentTileOffset);
+                // after updating, set back to normal
+                animations[currentAnimation].TilePacketPointer = currentTileOffset;
+                ((Mold.Tile)animations[currentAnimation].Tiles[0]).TileOffset = currentTileOffset;
+            }
+            else
+            {
+                index = currentTile + 1;
+                animations[currentAnimation].AddNewTile(index, currentTileOffset);
+                delta = 4;
+                animations[currentAnimation].UpdateOffsets(delta, currentTileOffset);
+                // if adding to only one tile, the tile packet pointer will need to be set back to normal
+                if (animations[currentAnimation].Tiles.Count == 2)
+                    animations[currentAnimation].TilePacketPointer = currentTileOffset;
+            }
             animations[currentAnimation].Assemble();
             animations[currentAnimation].ResetCopies();
-
+            // since cannot do same eventhandler as listbox, must set current tile this way
             animations[currentAnimation].CurrentTile = currentTile = index;
-
-            if (animations[currentAnimation].Tiles.Count != 0)
-                animations[currentAnimation].TileOffset += 4;
-
             RefreshTiles();
             InitializeSubtile();
             SetMoldImage();
@@ -1734,6 +1679,9 @@ namespace SMRPGED
             SetSequenceFrameImages();
 
             UpdateAnimationsFreeSpace();
+
+            currentSequenceOffset = animations[currentAnimation].SequenceOffset;
+            currentFrameOffset = animations[currentAnimation].FrameOffset;
         }
         private void deleteTile_Click(object sender, EventArgs e)
         {
@@ -1746,12 +1694,8 @@ namespace SMRPGED
             }
 
             int index = currentTile;
-
-            delta = 0;
-            delta -= (short)animations[currentAnimation].TileSize;
-
             animations[currentAnimation].RemoveCurrentTile();
-
+            delta = (short)-animations[currentAnimation].TileSize;
             animations[currentAnimation].UpdateOffsets(delta, currentTileOffset);
             animations[currentAnimation].Assemble();
             animations[currentAnimation].ResetCopies();
@@ -1769,6 +1713,9 @@ namespace SMRPGED
             SetSequenceFrameImages();
 
             UpdateAnimationsFreeSpace();
+
+            currentSequenceOffset = animations[currentAnimation].SequenceOffset;
+            currentFrameOffset = animations[currentAnimation].FrameOffset;
         }
 
         private void pictureBoxMold_MouseDown(object sender, MouseEventArgs e)

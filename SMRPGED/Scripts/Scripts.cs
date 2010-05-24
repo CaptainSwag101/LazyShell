@@ -19,11 +19,11 @@ namespace SMRPGED.ScriptsEditor
     public partial class Scripts : Form
     {
         #region Variables
-        private Model model;
-        private Notes notes;
+        private Model model; public Model Model { get { return model; } }
+        //private Notes notes;
         private Settings settings;
         private byte[] data;
-        private ScriptsModel scriptsModel;
+        private ScriptsModel scriptsModel; public ScriptsModel ScriptsModel { get { return scriptsModel; } }
         private bool updatingProperties = false;
         private bool updatingScript = true;
         private bool actionScript = false;
@@ -34,13 +34,13 @@ namespace SMRPGED.ScriptsEditor
         // externally accessed controls
         public NumericUpDown EventNum { get { return EventNumber; } set { EventNumber = value; } }
         public ComboBox EventName { get { return eventName; } set { eventName = value; } }
+        public NumericUpDown MonsterNumber { get { return monsterNumber; } set { monsterNumber = value; } }
         public TabControl TabControlScripts { get { return tabControlScripts; } set { tabControlScripts = value; } }
         #endregion
 
         public Scripts(Model model)
         {
             this.model = model;
-            this.notes = Notes.Instance;
             this.data = model.Data;
             this.state = State.Instance;
             this.universal = state.Universal;
@@ -58,6 +58,12 @@ namespace SMRPGED.ScriptsEditor
             VerifyScriptStats();
 
             InitializeComponent();
+
+            foreach (Control c in this.Controls)
+            {
+                c.MouseMove += new MouseEventHandler(controlMouseMove);
+                SetEventHandlers(c);
+            }
 
             monsterName.Items.AddRange(universal.MonsterNames.GetNames());
             monsterName.SelectedIndex = universal.MonsterNames.GetIndexFromNum((int)monsterNumber.Value);
@@ -195,33 +201,9 @@ namespace SMRPGED.ScriptsEditor
         // Notes Methods
         private void LoadNotes()
         {
-            if (!notes.GetLoadNotes())
-            {
-                return;
-            }
-            try
-            {
-                // Notes load example
-                this.BattleScriptNotes.LoadFile(notes.GetPath() + "main-scripts-battle.rtf");
-                this.EventScriptNotes.LoadFile(notes.GetPath() + "main-scripts-event.rtf");
-            }
-            catch
-            {
-                if (MessageBox.Show("Could not load notes for this ROM, would you like to create a set of notes for it?\nThis will not overwrite any existing notes", "Create Notes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    if (notes.CreateNoteSet())
-                        LoadNotes();
-                }
-                else
-                {
-                    notes.SetLoadNotes(false);
-                }
-
-            }
         }
         private void SaveNotes()
         {
-            SaveBattleNotes();
             SaveEventNotes();
         }
 
@@ -238,8 +220,8 @@ namespace SMRPGED.ScriptsEditor
             if (model.AssembleFinal)
                 model.AssembleScripts = false;
 
-            if (notes.GetLoadNotes())
-                SaveNotes();
+            //if (notes.GetLoadNotes())
+            //    SaveNotes();
 
             settings.Save();
 
@@ -259,9 +241,19 @@ namespace SMRPGED.ScriptsEditor
                 MessageBox.Show("There is not enough available space to save the action scripts to.\n\nThe action scripts were not saved.", "WARNING: NOT ENOUGH ACTION SCRIPT SPACE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
         }
+
+        private void SetEventHandlers(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                c.MouseMove += new MouseEventHandler(controlMouseMove);
+                SetEventHandlers(c);
+            }
+        }
         #endregion
 
         #region Event Handlers
+
         private void Scripts_FormClosed(object sender, FormClosedEventArgs e)
         {
             GC.Collect();
@@ -330,7 +322,7 @@ namespace SMRPGED.ScriptsEditor
 
             }
             model.AssembleScripts = false;
-
+            settings.Save();
         }
 
         private void tabControlScripts_DrawItem(object sender, DrawItemEventArgs e)
@@ -394,107 +386,135 @@ namespace SMRPGED.ScriptsEditor
         }
         private void dumpTextToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 0;
+            saveFileDialog.FileName = "eventScripts.txt";
+            saveFileDialog.RestoreDirectory = true;
+
             ArrayList scriptCmds;
             ArrayList actionQueues;
             EventScriptCommand esc;
             ActionQueueCommand aqc;
 
-            StreamWriter evtscr = File.CreateText("EventScripts.log");
-            for (int i = 0; i < eventScripts.Length; i++)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                scriptCmds = eventScripts[i].Commands;
+                StreamWriter evtscr = File.CreateText(saveFileDialog.FileName);
 
-                evtscr.WriteLine("[" + i.ToString("X3") + "]" +
-                    "------------------------------------------------------------>");
-                for (int j = 0; j < scriptCmds.Count; j++)
+                for (int i = 0; i < eventScripts.Length; i++)
                 {
-                    esc = (EventScriptCommand)scriptCmds[j];
-                    evtscr.Write((esc.Offset).ToString("X6") + ": ");
+                    scriptCmds = eventScripts[i].Commands;
 
-                    if (esc.Opcode <= 0x2F && esc.Option <= 0xF1 && !esc.IsDummy)
+                    evtscr.WriteLine("[" + i.ToString("d4") + "]" +
+                        "------------------------------------------------------------>");
+                    for (int j = 0; j < scriptCmds.Count; j++)
                     {
-                        if (esc.Option == 0xF0 || esc.Option == 0xF1)
-                            evtscr.Write("{" + BitConverter.ToString(esc.EventData, 0, 3) + "}            ");
+                        esc = (EventScriptCommand)scriptCmds[j];
+                        evtscr.Write((esc.Offset).ToString("X6") + ": ");
+
+                        if (esc.Opcode <= 0x2F && esc.Option <= 0xF1 && !esc.IsDummy)
+                        {
+                            if (esc.Option == 0xF0 || esc.Option == 0xF1)
+                                evtscr.Write("{" + BitConverter.ToString(esc.EventData, 0, 3) + "}            ");
+                            else
+                                evtscr.Write("{" + BitConverter.ToString(esc.EventData, 0, 2) + "}               ");
+
+                            evtscr.Write(esc.ToString() + "\n");
+
+                            if (esc.EmbeddedActionQueue.ActionQueueCommands != null)
+                            {
+                                actionQueues = esc.EmbeddedActionQueue.ActionQueueCommands;
+                                for (int k = 0; k < actionQueues.Count; k++)
+                                {
+                                    aqc = (ActionQueueCommand)actionQueues[k];
+                                    evtscr.Write("   " + (aqc.Offset).ToString("X6") + ": ");
+                                    evtscr.Write("{" + BitConverter.ToString(aqc.QueueData) + "}");
+                                    for (int l = aqc.QueueLength; l < 7; l++)
+                                        evtscr.Write("   ");
+                                    evtscr.Write(aqc.ToString() + "\n");
+                                }
+                            }
+                        }
+                        else if (esc.IsDummy)   // 0xd01 and 0xe91 only
+                        {
+                            evtscr.Write("NON-EMBEDDED ACTION QUEUE\n");
+                            if (esc.EmbeddedActionQueue.ActionQueueCommands != null)
+                            {
+                                actionQueues = esc.EmbeddedActionQueue.ActionQueueCommands;
+                                for (int k = 0; k < actionQueues.Count; k++)
+                                {
+                                    aqc = (ActionQueueCommand)actionQueues[k];
+                                    evtscr.Write("   " + (aqc.Offset).ToString("X6") + ": ");
+                                    evtscr.Write("{" + BitConverter.ToString(aqc.QueueData) + "}");
+                                    for (int l = aqc.QueueLength; l < 7; l++)
+                                        evtscr.Write("   ");
+                                    evtscr.Write(aqc.ToString() + "\n");
+                                }
+                            }
+                        }
                         else
-                            evtscr.Write("{" + BitConverter.ToString(esc.EventData, 0, 2) + "}               ");
-
-                        evtscr.Write(esc.ToString() + "\n");
-
-                        if (esc.EmbeddedActionQueue.ActionQueueCommands != null)
                         {
-                            actionQueues = esc.EmbeddedActionQueue.ActionQueueCommands;
-                            for (int k = 0; k < actionQueues.Count; k++)
-                            {
-                                aqc = (ActionQueueCommand)actionQueues[k];
-                                evtscr.Write("   " + (aqc.Offset).ToString("X6") + ": ");
-                                evtscr.Write("{" + BitConverter.ToString(aqc.QueueData) + "}");
-                                for (int l = aqc.QueueLength; l < 7; l++)
-                                    evtscr.Write("   ");
-                                evtscr.Write(aqc.ToString() + "\n");
-                            }
+                            evtscr.Write("{" + BitConverter.ToString(esc.EventData) + "}");
+                            for (int k = esc.EventLength; k < 7; k++)
+                                evtscr.Write("   ");
+
+                            evtscr.Write(esc.ToString() + "\n");
                         }
                     }
-                    else if (esc.IsDummy)   // 0xd01 and 0xe91 only
-                    {
-                        evtscr.Write("NON-EMBEDDED ACTION QUEUE\n");
-                        if (esc.EmbeddedActionQueue.ActionQueueCommands != null)
-                        {
-                            actionQueues = esc.EmbeddedActionQueue.ActionQueueCommands;
-                            for (int k = 0; k < actionQueues.Count; k++)
-                            {
-                                aqc = (ActionQueueCommand)actionQueues[k];
-                                evtscr.Write("   " + (aqc.Offset).ToString("X6") + ": ");
-                                evtscr.Write("{" + BitConverter.ToString(aqc.QueueData) + "}");
-                                for (int l = aqc.QueueLength; l < 7; l++)
-                                    evtscr.Write("   ");
-                                evtscr.Write(aqc.ToString() + "\n");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        evtscr.Write("{" + BitConverter.ToString(esc.EventData) + "}");
-                        for (int k = esc.EventLength; k < 7; k++)
-                            evtscr.Write("   ");
-
-                        evtscr.Write(esc.ToString() + "\n");
-                    }
+                    evtscr.Write("\n");
                 }
-                evtscr.Write("\n");
+                evtscr.Close();
             }
-            evtscr.Close();
 
             // Write the action scripts
             /**/
-            StreamWriter actScr = File.CreateText("ActionScripts.log"); ;
-            for (int i = 0; i < actionScripts.Length; i++)
+            saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 0;
+            saveFileDialog.FileName = "actionScripts.txt";
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                scriptCmds = actionScripts[i].ActionQueueCommands;
+                StreamWriter actScr = File.CreateText(saveFileDialog.FileName);
 
-                actScr.WriteLine("[" + i.ToString("d4") + "]" +
-                    "------------------------------------------------------------>");
-
-                if (scriptCmds != null)
+                for (int i = 0; i < actionScripts.Length; i++)
                 {
-                    for (int k = 0; k < scriptCmds.Count; k++)
+                    scriptCmds = actionScripts[i].ActionQueueCommands;
+
+                    actScr.WriteLine("[" + i.ToString("d4") + "]" +
+                        "------------------------------------------------------------>");
+
+                    if (scriptCmds != null)
                     {
-                        aqc = (ActionQueueCommand)scriptCmds[k];
-                        actScr.Write((aqc.Offset).ToString("X6") + ": ");
-                        actScr.Write("{" + BitConverter.ToString(aqc.QueueData) + "}");
-                        for (int l = aqc.QueueLength; l < 7; l++)
-                            actScr.Write("   ");
-                        actScr.Write(aqc.ToString() + "\n");
+                        for (int k = 0; k < scriptCmds.Count; k++)
+                        {
+                            aqc = (ActionQueueCommand)scriptCmds[k];
+                            actScr.Write((aqc.Offset).ToString("X6") + ": ");
+                            actScr.Write("{" + BitConverter.ToString(aqc.QueueData) + "}");
+                            for (int l = aqc.QueueLength; l < 7; l++)
+                                actScr.Write("   ");
+                            actScr.Write(aqc.ToString() + "\n");
+                        }
                     }
+                    actScr.Write("\n");
                 }
-                actScr.Write("\n");
+                actScr.Close();
             }
-            actScr.Close();
             /**/
         }
         private void dumpAnimationTexToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 0;
+            saveFileDialog.FileName = "animationScripts.txt";
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
             int i = 0;
-            StreamWriter evtscr = File.CreateText("AnimationScripts.log");
+            StreamWriter evtscr = File.CreateText(saveFileDialog.FileName);
             evtscr.WriteLine("**************");
             evtscr.WriteLine("MONSTER SPELLS");
             evtscr.WriteLine("**************\n");
@@ -660,145 +680,239 @@ namespace SMRPGED.ScriptsEditor
         }
 
         // FORM EVENT HANDLERS
-        private void exportCurrentBattleScript_Click(object sender, EventArgs e)
-        {
-            string path = GetDirectoryPath("Select the directory that you want to export the current Battle Script to.");
-
-            if (path != null)
-                ExportBattleScript(this.currentBattleScript, 1, path);
-        }
+        private ClearElements clearElements;
+        private ImportExportElements ioElements;
         private void exportAllBattleScripts_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that you want to export the Battle Scripts to.");
-
-            if (path != null)
-                ExportBattleScript(0, 256, path);
-        }
-        private void exportCurrentEventScript_Click(object sender, EventArgs e)
-        {
-            if (actionScript)
-                return;
-            string path = GetDirectoryPath("Select the directory that you want to export the current Event Script to.");
-
-            if (path != null)
-                ExportEventScript((int)this.EventNumber.Value, 1, path);
+            ioElements = new ImportExportElements(this, (int)monsterNumber.Value, "EXPORT BATTLE SCRIPTS...");
+            ioElements.ShowDialog();
         }
         private void exportAllEventScripts_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that you want to export the Event Scripts to.");
-
-            if (path != null)
-                ExportEventScript(0, 4096, path);
-        }
-        private void exportCurrentActionScript_Click(object sender, EventArgs e)
-        {
-            if (!actionScript)
-                return;
-
-            string path = GetDirectoryPath("Select the directory that you want to export the current Action Script to.");
-
-            if (path != null)
-                ExportActionScript((int)this.EventNumber.Value, 1, path);
+            ioElements = new ImportExportElements(this, (int)EventNumber.Value, "EXPORT EVENT SCRIPTS...");
+            ioElements.ShowDialog();
         }
         private void exportAllActionScripts_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that you want to export the Action Scripts to.");
-
-            if (path != null)
-                ExportActionScript(0, 1024, path);
-        }
-        private void importCurrentBattleScript_Click(object sender, EventArgs e)
-        {
-            string path = SelectFile("Select the Battle Script to import", "Battle Script files (*.dat)|*.dat|All files (*.*)|*.*");
-
-            if (path != null)
-                ImportBattleScript(this.currentBattleScript, 1, path);
+            ioElements = new ImportExportElements(this, (int)EventNumber.Value, "EXPORT ACTION SCRIPTS...");
+            ioElements.ShowDialog();
         }
         private void importAllBattleScripts_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that contains the Battle Scripts to import.");
-            if (path != null)
-                ImportBattleScript(0, 256, path + "\\");
-        }
-        private void importCurrentEventScript_Click(object sender, EventArgs e)
-        {
-            if (actionScript)
+            ioElements = new ImportExportElements(this, (int)monsterNumber.Value, "IMPORT BATTLE SCRIPTS...");
+            ioElements.ShowDialog();
+            if (ioElements.DialogResult == DialogResult.Cancel)
                 return;
-
-            string path = SelectFile("Select the Event Script to import", "Event Script files (*.dat)|*.dat|All files (*.*)|*.*");
-
-            if (path != null)
-                ImportEventScript((int)this.EventNumber.Value, 1, path);
-
+            RefreshBattleScriptsEditor();
         }
         private void importAllEventScripts_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that contains the Event Scripts to import.");
-            if (path != null)
-                ImportEventScript(0, 4096, path + "\\");
-        }
-        private void importCurrentActionScript_Click(object sender, EventArgs e)
-        {
-            if (!actionScript)
+            ioElements = new ImportExportElements(this, (int)EventNumber.Value, "IMPORT EVENT SCRIPTS...");
+            ioElements.ShowDialog();
+            if (ioElements.DialogResult == DialogResult.Cancel)
                 return;
-
-            string path = SelectFile("Select the Action Script to import", "Action Script files (*.dat)|*.dat|All files (*.*)|*.*");
-
-            if (path != null)
-                ImportActionScript((int)this.EventNumber.Value, 1, path);
-
+            EventNumber_ValueChanged(null, null);
         }
         private void importAllActionScripts_Click(object sender, EventArgs e)
         {
-            string path = GetDirectoryPath("Select the directory that contains the Action Scripts to import.");
-            if (path != null)
-                ImportActionScript(0, 1024, path + "\\");
+            ioElements = new ImportExportElements(this, (int)EventNumber.Value, "IMPORT ACTION SCRIPTS...");
+            ioElements.ShowDialog();
+            if (ioElements.DialogResult == DialogResult.Cancel)
+                return;
+            EventNumber_ValueChanged(null, null);
         }
         private void clearAllBattleScripts_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "You are about to delete all commands in all battle scripts.\n\nProceed?",
-                "CLEAR ALL BATTLE SCRIPTS",
-                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-            if (result != DialogResult.Yes)
+            clearElements = new ClearElements(battleScripts, (int)monsterNumber.Value, "CLEAR BATTLE SCRIPTS...");
+            clearElements.ShowDialog();
+            if (clearElements.DialogResult == DialogResult.Cancel)
                 return;
-
-            RemoveAllCommands();
-            foreach (BattleScript bs in battleScripts)
-                bs.ClearAll();
-            UpdateBattleScriptsFreeSpace();
+            RefreshBattleScriptsEditor();
         }
         private void clearAllEventScripts_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "You are about to delete all commands in all event scripts.\n\nProceed?",
-                "CLEAR ALL EVENT SCRIPTS",
-                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-            if (result != DialogResult.Yes)
+            if (!actionScript)
+                clearElements = new ClearElements(eventScripts, (int)EventNumber.Value, "CLEAR EVENT SCRIPTS...");
+            else
+                clearElements = new ClearElements(eventScripts, 0, "CLEAR EVENT SCRIPTS...");
+            clearElements.ShowDialog();
+            if (clearElements.DialogResult == DialogResult.Cancel)
                 return;
 
-            treeViewWrapper.ClearAll();
-            foreach (EventScript es in eventScripts)
-                es.ClearAll();
-            UpdateCommandData();
+            EventNumber_ValueChanged(null, null);
         }
         private void clearAllActionScripts_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-             "You are about to delete all commands in all action scripts.\n\nProceed?",
-                "CLEAR ALL ACTION SCRIPTS",
-             MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-            if (result != DialogResult.Yes)
+            if (actionScript)
+                clearElements = new ClearElements(actionScripts, (int)EventNumber.Value, "CLEAR ACTION SCRIPTS...");
+            else
+                clearElements = new ClearElements(actionScripts, 0, "CLEAR ACTION SCRIPTS...");
+            clearElements.ShowDialog();
+            if (clearElements.DialogResult == DialogResult.Cancel)
                 return;
 
-            treeViewWrapper.ClearAll();
-            foreach (ActionQueue aq in actionScripts)
-                aq.ClearAll();
-            UpdateCommandData();
+            EventNumber_ValueChanged(null, null);
         }
+
+        private void controlMouseMove(object sender, MouseEventArgs e)
+        {
+            if (sender == this) return;
+
+            Control control = (Control)sender;
+
+            //if (enableHelpTipsToolStripMenuItem.Checked)
+            //{
+            //    if (toolTip1.GetToolTip(control) != "")
+            //    {
+            //        Control parent = (Control)control.Parent;
+            //        Point p = control.Location;
+            //        Point l = new Point();
+            //        while (parent.Parent != this)
+            //        {
+            //            p.X += parent.Location.X;
+            //            p.Y += parent.Location.Y;
+            //            parent = parent.Parent;
+            //        }
+
+            //        labelToolTip.Text = toolTip1.GetToolTip(control);
+            //        l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
+            //        if (l.X + labelToolTip.Width + 50 > this.Width)
+            //            l.X -= labelToolTip.Width + 75;
+            //        if (l.Y + labelToolTip.Height + 50 > this.Height)
+            //            l.Y -= labelToolTip.Height + 50;
+            //        labelToolTip.Location = l;
+            //        labelToolTip.BringToFront();
+            //        labelToolTip.Visible = true;
+            //    }
+            //    else
+            //        labelToolTip.Visible = false;
+            //}
+            //else
+            //    labelToolTip.Visible = false;
+
+            if (showDecHexToolStripMenuItem.Checked)
+            {
+                if (control.GetType().Name == "UpDownEdit" || control.GetType().Name == "NumericUpDown")
+                {
+                    Control parent = (Control)control.Parent;
+                    Point p = control.Location;
+                    Point l = new Point();
+                    while (parent.Parent != this)
+                    {
+                        p.X += parent.Location.X;
+                        p.Y += parent.Location.Y;
+                        parent = parent.Parent;
+                    }
+
+                    NumericUpDown numericUpDown;
+                    if (control.GetType().Name == "UpDownEdit")
+                    {
+                        Control temp = GetNextControl(control, false);
+                        numericUpDown = (NumericUpDown)GetNextControl(temp, false);
+                    }
+                    else
+                        numericUpDown = (NumericUpDown)control;
+
+                    if (numericUpDown.Hexadecimal)
+                        labelConvertor.Text = "DEC:  " + ((int)numericUpDown.Value).ToString("d");
+                    else
+                        labelConvertor.Text = "HEX:  0x" + ((int)numericUpDown.Value).ToString("X4");
+
+                    l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
+                    if (l.X + labelConvertor.Width + 50 > this.Width)
+                        l.X -= labelConvertor.Width + 75;
+                    if (l.Y + labelConvertor.Height + 50 > this.Height)
+                        l.Y -= labelConvertor.Height + 50;
+                    labelConvertor.Location = l;
+                    labelConvertor.BringToFront();
+                    labelConvertor.Visible = true;
+                }
+                else
+                    labelConvertor.Visible = false;
+            }
+            else
+                labelConvertor.Visible = false;
+        }
+
         #endregion
+
+        FixPointers fixPointers;
+        private bool apply; public bool Apply { get { return apply; } set { apply = value; } }
+        private int delta; public int Delta { get { return delta; } set { delta = value; } }
+        private void recalibratePointersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fixPointers = new FixPointers(this, treeViewWrapper);
+            fixPointers.ShowDialog();
+            DialogResult result = MessageBox.Show("Pointer recalibration requires saving. Go ahead with process?", "SAVE REQUIRED", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (result != DialogResult.OK) return;
+            if (apply)
+            {
+                treeViewWrapper.ScriptDelta += delta;
+                EventScriptTree.BeginUpdate();
+                treeViewWrapper.RefreshScript();
+                EventScriptTree.EndUpdate();
+                EventNumber_ValueChanged(null, null);
+            }
+            apply = false;
+            if (CalculateEventScriptsLength() >= 0)
+                this.scriptsModel.AssembleAllEventScripts();
+            else
+                MessageBox.Show("There is not enough available space to save the event scripts to.\n\nThe event scripts were not saved.", "WARNING: NOT ENOUGH EVENT SCRIPT SPACE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            scriptsModel.CreateEventScripts();
+            this.eventScripts = scriptsModel.EventScripts;
+            InitializeEventScriptsEditor();
+        }
+
+        private void addThisToNotesDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int type = 0;
+            int index = 0;
+            string label = "";
+            string description = "";
+
+            if (contextMenuStrip1.SourceControl.Name == "EventNumber" &&
+                eventName.SelectedIndex == 0)
+            {
+                type = 4;
+                index = (int)EventNumber.Value;
+                label = description = settings.EventLabels[(int)EventNumber.Value];
+            }
+            if (contextMenuStrip1.SourceControl.Name == "EventNumber" &&
+                eventName.SelectedIndex == 1)
+            {
+                type = 5;
+                index = (int)EventNumber.Value;
+                label = description = "ACTION #" + ((int)EventNumber.Value).ToString("d4");
+            }
+            if (contextMenuStrip1.SourceControl.Name == "monsterNumber")
+            {
+                type = 6;
+                index = (int)monsterNumber.Value;
+                label = description = monsterName.Text;
+            }
+
+            if (type == 0) return;
+
+            if (model.Program.Notes == null || !model.Program.Notes.Visible)
+                model.Program.CreateNotesWindow();
+            Notes temp = model.Program.Notes;
+            if (temp.ThisNotes == null)
+                temp.LoadNotes();
+            if (temp.ThisNotes != null)
+            {
+                temp.AddingFromEditor(type, index, label, description);
+                temp.BringToFront();
+            }
+            else
+            {
+                MessageBox.Show("Could not add element to notes database.", "LAZY SHELL",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void eventLabel_Leave(object sender, EventArgs e)
+        {
+            //settings.Save();
+        }
     }
 }

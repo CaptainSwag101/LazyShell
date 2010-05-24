@@ -59,12 +59,11 @@ namespace SMRPGED
             this.checkByte4b = new System.Windows.Forms.CheckedListBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.searchResults = new System.Windows.Forms.RichTextBox();
             this.panel88 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -73,7 +72,6 @@ namespace SMRPGED
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vramIndex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
-            this.panel7.SuspendLayout();
             this.panel88.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -88,7 +86,7 @@ namespace SMRPGED
             this.byte1.ColumnWidth = 50;
             this.byte1.Items.AddRange(new object[] {
             "Bit 4",
-            "Sprite palettes start at Index 0"});
+            "Sprite palettes start at #0"});
             this.byte1.Location = new System.Drawing.Point(0, 55);
             this.byte1.Name = "byte1";
             this.byte1.Size = new System.Drawing.Size(253, 32);
@@ -101,7 +99,7 @@ namespace SMRPGED
             this.byte2.CheckOnClick = true;
             this.byte2.ColumnWidth = 50;
             this.byte2.Items.AddRange(new object[] {
-            "Only use NPC VRAM"});
+            "Only allow sprite VRAM"});
             this.byte2.Location = new System.Drawing.Point(0, 55);
             this.byte2.Name = "byte2";
             this.byte2.Size = new System.Drawing.Size(253, 16);
@@ -117,7 +115,7 @@ namespace SMRPGED
             this.label1.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label1.Size = new System.Drawing.Size(253, 17);
             this.label1.TabIndex = 387;
-            this.label1.Text = "NPC SPRITE 1";
+            this.label1.Text = "VRAM BLOCK A";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // byte3
@@ -127,7 +125,7 @@ namespace SMRPGED
             this.byte3.CheckOnClick = true;
             this.byte3.ColumnWidth = 50;
             this.byte3.Items.AddRange(new object[] {
-            "Only use NPC VRAM"});
+            "Only allow sprite VRAM"});
             this.byte3.Location = new System.Drawing.Point(0, 55);
             this.byte3.Name = "byte3";
             this.byte3.Size = new System.Drawing.Size(253, 16);
@@ -143,7 +141,7 @@ namespace SMRPGED
             this.label2.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label2.Size = new System.Drawing.Size(253, 17);
             this.label2.TabIndex = 387;
-            this.label2.Text = "NPC SPRITE 2";
+            this.label2.Text = "VRAM BLOCK B";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // byte4
@@ -153,7 +151,7 @@ namespace SMRPGED
             this.byte4.CheckOnClick = true;
             this.byte4.ColumnWidth = 50;
             this.byte4.Items.AddRange(new object[] {
-            "Only use NPC VRAM"});
+            "Only allow sprite VRAM"});
             this.byte4.Location = new System.Drawing.Point(0, 55);
             this.byte4.Name = "byte4";
             this.byte4.Size = new System.Drawing.Size(253, 16);
@@ -169,7 +167,7 @@ namespace SMRPGED
             this.label3.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label3.Size = new System.Drawing.Size(253, 17);
             this.label3.TabIndex = 387;
-            this.label3.Text = "NPC SPRITE 3";
+            this.label3.Text = "VRAM BLOCK C";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel1
@@ -184,15 +182,15 @@ namespace SMRPGED
             // byte2a
             // 
             this.byte2a.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.byte2a.DropDownWidth = 200;
+            this.byte2a.DropDownWidth = 160;
             this.byte2a.IntegralHeight = false;
             this.byte2a.Items.AddRange(new object[] {
-            "32 pixels wide",
-            "24 pixels wide",
-            "store with treasure chest",
-            "store with empty treasure chest",
-            "store with coin",
-            "{BYTE NOT USED}"});
+            "32px wide",
+            "24px wide",
+            "treasure chest",
+            "empty treasure chest",
+            "NPC packet (coin, bag, etc.)",
+            "large sprite (tilemap)"});
             this.byte2a.Location = new System.Drawing.Point(-2, -2);
             this.byte2a.Name = "byte2a";
             this.byte2a.Size = new System.Drawing.Size(125, 21);
@@ -210,15 +208,15 @@ namespace SMRPGED
             // byte3a
             // 
             this.byte3a.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.byte3a.DropDownWidth = 200;
+            this.byte3a.DropDownWidth = 160;
             this.byte3a.IntegralHeight = false;
             this.byte3a.Items.AddRange(new object[] {
-            "32 pixels wide",
-            "24 pixels wide",
-            "store with treasure chest",
-            "store with empty treasure chest",
-            "store with coin",
-            "{BYTE NOT USED}"});
+            "32px wide",
+            "24px wide",
+            "treasure chest",
+            "empty treasure chest",
+            "NPC packet (coin, bag, etc.)",
+            "large sprite (tilemap)"});
             this.byte3a.Location = new System.Drawing.Point(-2, -2);
             this.byte3a.Name = "byte3a";
             this.byte3a.Size = new System.Drawing.Size(125, 21);
@@ -236,15 +234,15 @@ namespace SMRPGED
             // byte4a
             // 
             this.byte4a.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.byte4a.DropDownWidth = 200;
+            this.byte4a.DropDownWidth = 160;
             this.byte4a.IntegralHeight = false;
             this.byte4a.Items.AddRange(new object[] {
-            "32 pixels wide",
-            "24 pixels wide",
-            "store with treasure chest",
-            "store with empty treasure chest",
-            "store with coin",
-            "{BYTE NOT USED}"});
+            "32px wide",
+            "24px wide",
+            "treasure chest",
+            "empty treasure chest",
+            "NPC packet (coin, bag, etc.)",
+            "large sprite (tilemap)"});
             this.byte4a.Location = new System.Drawing.Point(-2, -2);
             this.byte4a.Name = "byte4a";
             this.byte4a.Size = new System.Drawing.Size(125, 21);
@@ -364,7 +362,7 @@ namespace SMRPGED
             this.checkVramIndex.ColumnWidth = 118;
             this.checkVramIndex.IntegralHeight = false;
             this.checkVramIndex.Items.AddRange(new object[] {
-            "NPCs VRAM Index"});
+            "Sprite GFX index #"});
             this.checkVramIndex.Location = new System.Drawing.Point(0, 19);
             this.checkVramIndex.Name = "checkVramIndex";
             this.checkVramIndex.Size = new System.Drawing.Size(132, 17);
@@ -378,7 +376,7 @@ namespace SMRPGED
             this.checkPaletteIndex.ColumnWidth = 118;
             this.checkPaletteIndex.IntegralHeight = false;
             this.checkPaletteIndex.Items.AddRange(new object[] {
-            "NPCs Palette Index"});
+            "Sprite palette index #"});
             this.checkPaletteIndex.Location = new System.Drawing.Point(0, 37);
             this.checkPaletteIndex.Name = "checkPaletteIndex";
             this.checkPaletteIndex.Size = new System.Drawing.Size(132, 17);
@@ -406,7 +404,7 @@ namespace SMRPGED
             this.checkByte2b.ColumnWidth = 118;
             this.checkByte2b.IntegralHeight = false;
             this.checkByte2b.Items.AddRange(new object[] {
-            "Extra VRAM Use"});
+            "Extra VRAM Usage"});
             this.checkByte2b.Location = new System.Drawing.Point(0, 37);
             this.checkByte2b.Name = "checkByte2b";
             this.checkByte2b.Size = new System.Drawing.Size(132, 17);
@@ -434,7 +432,7 @@ namespace SMRPGED
             this.checkByte3b.ColumnWidth = 118;
             this.checkByte3b.IntegralHeight = false;
             this.checkByte3b.Items.AddRange(new object[] {
-            "Extra VRAM Use"});
+            "Extra VRAM Usage"});
             this.checkByte3b.Location = new System.Drawing.Point(0, 37);
             this.checkByte3b.Name = "checkByte3b";
             this.checkByte3b.Size = new System.Drawing.Size(132, 17);
@@ -462,7 +460,7 @@ namespace SMRPGED
             this.checkByte4b.ColumnWidth = 118;
             this.checkByte4b.IntegralHeight = false;
             this.checkByte4b.Items.AddRange(new object[] {
-            "Extra VRAM Use"});
+            "Extra VRAM Usage"});
             this.checkByte4b.Location = new System.Drawing.Point(0, 37);
             this.checkByte4b.Name = "checkByte4b";
             this.checkByte4b.Size = new System.Drawing.Size(132, 17);
@@ -491,31 +489,8 @@ namespace SMRPGED
             this.label4.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label4.Size = new System.Drawing.Size(132, 17);
             this.label4.TabIndex = 391;
-            this.label4.Text = "PARTITION PROPETIES";
+            this.label4.Text = "VRAM OFFSETS";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.SystemColors.Window;
-            this.panel7.Controls.Add(this.searchResults);
-            this.panel7.Location = new System.Drawing.Point(257, 2);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(227, 306);
-            this.panel7.TabIndex = 394;
-            // 
-            // searchResults
-            // 
-            this.searchResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchResults.BackColor = System.Drawing.SystemColors.Window;
-            this.searchResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.searchResults.Location = new System.Drawing.Point(4, 4);
-            this.searchResults.Name = "searchResults";
-            this.searchResults.ReadOnly = true;
-            this.searchResults.Size = new System.Drawing.Size(219, 298);
-            this.searchResults.TabIndex = 328;
-            this.searchResults.Text = "";
             // 
             // panel88
             // 
@@ -582,17 +557,28 @@ namespace SMRPGED
             this.panel11.Size = new System.Drawing.Size(253, 71);
             this.panel11.TabIndex = 499;
             // 
+            // listBox1
+            // 
+            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.IntegralHeight = false;
+            this.listBox1.Location = new System.Drawing.Point(257, 2);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(227, 306);
+            this.listBox1.TabIndex = 500;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
             // OpenNPCSpritePartitions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(486, 310);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel88);
-            this.Controls.Add(this.panel7);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -607,7 +593,6 @@ namespace SMRPGED
             this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.vramIndex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).EndInit();
-            this.panel7.ResumeLayout(false);
             this.panel88.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
@@ -650,11 +635,10 @@ namespace SMRPGED
         private System.Windows.Forms.CheckedListBox checkByte4b;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.RichTextBox searchResults;
         private System.Windows.Forms.Panel panel88;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

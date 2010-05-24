@@ -20,6 +20,7 @@ namespace SMRPGED.Previewer
         private ArrayList eventTriggers;
         private UniversalVariables universal;
         LevelModel levelModel;
+        private bool snes9x;
 
         private int behaviour;
         private enum Behaviours
@@ -56,7 +57,7 @@ namespace SMRPGED.Previewer
 
             if (settings.PreviewFirstTime)
             {
-                DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews.\nDoing so will yield unpredictable results. Do you understand?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews.\nDoing so will yield unpredictable results. Do you understand?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
                     settings.PreviewFirstTime = false;
@@ -299,27 +300,40 @@ namespace SMRPGED.Previewer
         }
         private string GetStatePath()
         {
-            if (settings.PreviewDynamicRomName)
-                return model.GetPathWithoutFileName() + "PreviewROM_" + model.GetFileNameWithoutPathOrExtension() + ".zst";
+            if (snes9x)
+            {
+                if (settings.PreviewDynamicRomName)
+                    return model.GetPathWithoutFileName() + "PreviewROM_" + model.GetFileNameWithoutPathOrExtension() + ".000";
+                else
+                    return model.GetEditorPathWithoutFileName() + "PreviewRom.000";
+            }
             else
-                return model.GetEditorPathWithoutFileName() + "PreviewRom.zst";
+            {
+                if (settings.PreviewDynamicRomName)
+                    return model.GetPathWithoutFileName() + "PreviewROM_" + model.GetFileNameWithoutPathOrExtension() + ".zst";
+                else
+                    return model.GetEditorPathWithoutFileName() + "PreviewRom.zst";
+            }
         }
         private void Launch()
         {
             settings.PreviewArguments = argsTextBox.Text;
             settings.Save();
+
             if (rom && emulator && savestate && eventchoice)
-                LaunchZSNES(this.emulatorPath, this.romPath, argsTextBox.Text);
+            {
+                LaunchZSNES(this.emulatorPath, this.romPath, snes9x ? textBox1.Text : argsTextBox.Text);
+            }
             else
             {
                 if (!rom)
-                    MessageBox.Show("There was a problem generating the preview rom");
+                    MessageBox.Show("There was a problem generating the preview rom", "LAZY SHELL");
                 if (!emulator)
-                    MessageBox.Show("There is a problem with the emulator. ZSNESW is the only emulator supported.");
+                    MessageBox.Show("There is a problem with the emulator.\nSNES9X and ZSNESW are the only emulators supported.", "LAZY SHELL");
                 if (!savestate)
-                    MessageBox.Show("There was a problem generating the preview SaveState");
+                    MessageBox.Show("There was a problem generating the preview SaveState", "LAZY SHELL");
                 if (!eventchoice)
-                    MessageBox.Show("An invalid destination was selected to preview.");
+                    MessageBox.Show("An invalid destination was selected to preview.", "LAZY SHELL");
             }
         }
         private bool Prelaunch()
@@ -332,14 +346,23 @@ namespace SMRPGED.Previewer
         {
             try
             {
-                FileInfo fInfo = new FileInfo(model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave.zst");
+                snes9x = Contains(this.emulatorPath, "snes9x", StringComparison.CurrentCultureIgnoreCase);
+                
+                FileInfo fInfo;
+                if (snes9x)
+                    fInfo = new FileInfo(model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave.000");
+                else
+                    fInfo = new FileInfo(model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave.zst");
                 if (fInfo.Exists)
                 {
                     fInfo = new FileInfo(GetStatePath());
 
                     if (!fInfo.Exists)
                     {
-                        File.Copy(model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave.zst", GetStatePath());
+                        if (snes9x)
+                            File.Copy(model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave.000", GetStatePath());
+                        else
+                            File.Copy(model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave.zst", GetStatePath());
                     }
                 }
             }
@@ -493,7 +516,7 @@ namespace SMRPGED.Previewer
         private void SaveLevelExitEvents()
         {
             ushort offsetStart = 0xE400;
-            for (int i = 0; i < 512; i++)
+            for (int i = 0; i < 510; i++)
                 offsetStart = levelModel.Levels[i].LevelEvents.Assemble(offsetStart);
         }
         private bool GeneratePreviewRom()
@@ -552,7 +575,7 @@ namespace SMRPGED.Previewer
             proc.StartInfo.Arguments = args + " " + "\"" + romPath + "\"";
             proc.Start();
 
-            this.Close();
+            //this.Close();
         }
         private string SelectFile(string filter, string initDir, string title)
         {
@@ -578,7 +601,7 @@ namespace SMRPGED.Previewer
             }
             catch
             {
-                this.emulatorPath = SelectFile("exe files (*.exe)|*.exe|All files (*.*)|*.*", "C:\\", "Select Emulator ZSNESW.exe");
+                this.emulatorPath = SelectFile("exe files (*.exe)|*.exe|All files (*.*)|*.*", "C:\\", "Select Emulator");
 
                 if (this.emulatorPath == null || !this.emulatorPath.EndsWith(".exe"))
                     return false;
@@ -602,9 +625,13 @@ namespace SMRPGED.Previewer
                 Launch();
         }
 
+        public bool Contains(string original, string value, StringComparison comparisionType)
+        {
+            return original.IndexOf(value, comparisionType) >= 0;
+        }
         private void changeEmuButton_Click(object sender, EventArgs e)
         {
-            string path = SelectFile("exe files (*.exe)|*.exe|All files (*.*)|*.*", "C:\\", "Select Emulator ZSNESW.exe");
+            string path = SelectFile("exe files (*.exe)|*.exe|All files (*.*)|*.*", "C:\\", "Select Emulator");
 
             if (path == null || !path.EndsWith(".exe"))
                 return;
@@ -777,6 +804,16 @@ namespace SMRPGED.Previewer
             public ushort LevelNum;
             public bool Flag;
             public string msg;
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.snes9x.com/phpbb2/viewtopic.php?t=3020");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.textBox1.Text = "";
         }
 
     }

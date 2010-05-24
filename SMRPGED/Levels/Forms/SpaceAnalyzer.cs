@@ -58,7 +58,7 @@ namespace SMRPGED
                 offset += size;
 
                 sizeLeftListBox.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("TILE MAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("TILE MAP " + index.ToString("d3"));
             }
 
             bank = 0x170000; // Set bank pointer
@@ -85,7 +85,7 @@ namespace SMRPGED
                 offset += (ushort)size;
 
                 sizeLeftListBox.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("TILE MAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("TILE MAP " + index.ToString("d3"));
             }
 
             bank = 0x180000; // Set bank pointer
@@ -112,7 +112,7 @@ namespace SMRPGED
                 offset += (ushort)size;
 
                 sizeLeftListBox.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("TILE MAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("TILE MAP " + index.ToString("d3"));
             }
 
             bank = 0x190000; // Set bank pointer
@@ -139,7 +139,7 @@ namespace SMRPGED
                 offset += (ushort)size;
 
                 sizeLeftListBox.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("TILE MAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("TILE MAP " + index.ToString("d3"));
             }
 
             bank = 0x1A0000; // Set bank pointer
@@ -166,7 +166,7 @@ namespace SMRPGED
                 offset += (ushort)size;
 
                 sizeLeftListBox.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("TILE MAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("TILE MAP " + index.ToString("d3"));
             }
 
 
@@ -195,7 +195,7 @@ namespace SMRPGED
                 offset += (ushort)size;
 
                 sizeLeftListBox1.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("PHYSICAL MAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("PHYSICAL MAP " + index.ToString());
             }
 
             bank = 0x1C0000; // Set bank pointer
@@ -222,7 +222,7 @@ namespace SMRPGED
                 offset += (ushort)size;
 
                 sizeLeftListBox1.Items.Add(new SizeLeft(0x7FFF - offset, bg));
-                pBar.PerformStep("PHYSICAL MAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("PHYSICAL MAP " + index.ToString("d3"));
             }
 
             pBar.Close();
@@ -248,9 +248,9 @@ namespace SMRPGED
             public override string ToString()
             {
                 if (type == 0)
-                    return "Tile Map 0x" + num.ToString("X3");
+                    return "Tile Map " + num.ToString("d3");
                 else
-                    return "Phys Map 0x" + num.ToString("X3");
+                    return "Phys Map " + num.ToString("d3");
             }
         }
         private class Bank : NewListBoxItem

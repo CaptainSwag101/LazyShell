@@ -62,7 +62,7 @@ namespace SMRPGED.ScriptsEditor.Commands
                     //System.Windows.Forms.MessageBox.Show(
                     //    "Animation #" + animationScript.AnimationNum + 
                     //    ", type " + animationScript.Type + 
-                    //    "\n\nvalue = 0x" + Option.ToString("X2"));
+                    //    "\n\nvalue = 0x" + Option.ToString("d3"));
                     break;
                 case 0x09:
                     search = (offset & 0xFF0000) + BitManager.GetShort(animationData, 1);
@@ -160,7 +160,7 @@ namespace SMRPGED.ScriptsEditor.Commands
                 case 0x64:
                     if (animationScript.AMem > 0x10)
                     {
-                        //System.Windows.Forms.MessageBox.Show(animationScript.AMem.ToString("X2"));
+                        //System.Windows.Forms.MessageBox.Show(animationScript.AMem.ToString("d3"));
                         animationScript.AMem = 0;
                         offset = (offset & 0xFF0000) + BitManager.GetShort(data, offset);
                     }
@@ -170,7 +170,7 @@ namespace SMRPGED.ScriptsEditor.Commands
                 case 0x68:
                     if (animationScript.AMem >= 0x40)
                     {
-                        //System.Windows.Forms.MessageBox.Show(animationScript.Memory.ToString("X2"));
+                        //System.Windows.Forms.MessageBox.Show(animationScript.Memory.ToString("d3"));
                         animationScript.AMem = 0;
                         offset = (offset & 0xFF0000) + BitManager.GetShort(data, offset);
                     }

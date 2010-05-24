@@ -258,9 +258,6 @@ namespace SMRPGED.StatsEditor
 
             Stream s;
             BinaryFormatter b = new BinaryFormatter();
-            s = File.Create(path + "Do Not Modify This Directory Or Files Contained Within.txt");
-            s.Close();
-
             try // Monsters
             {
                 if (!CreateDir(path + "Monsters\\"))
@@ -268,7 +265,7 @@ namespace SMRPGED.StatsEditor
 
                 for (int i = 0; i < this.monsters.Length; i++)
                 {
-                    s = File.Create(path + "Monsters\\" + "Monster_" + i.ToString("X3") + ".dat"); // Create data file
+                    s = File.Create(path + "Monsters\\" + "Monster_" + i.ToString("d3") + ".dat"); // Create data file
 
                     this.monsters[i].Data = null;
                     this.monsters[i].TextHelperReduced = null;
@@ -292,7 +289,7 @@ namespace SMRPGED.StatsEditor
 
                 for (int i = 0; i < this.items.Length; i++)
                 {
-                    s = File.Create(path + "Items\\" + "Item_" + i.ToString("X3") + ".dat"); // Create data file
+                    s = File.Create(path + "Items\\" + "Item_" + i.ToString("d3") + ".dat"); // Create data file
 
                     this.items[i].Data = null;
                     this.items[i].textHelperReduced = null;
@@ -317,7 +314,7 @@ namespace SMRPGED.StatsEditor
 
                 for (int i = 0; i < this.shops.Length; i++)
                 {
-                    s = File.Create(path + "Shops\\" + "Shop_" + i.ToString("X3") + ".dat"); // Create data file
+                    s = File.Create(path + "Shops\\" + "Shop_" + i.ToString("d3") + ".dat"); // Create data file
 
                     this.shops[i].Data = null;
                     // Serialize object
@@ -340,7 +337,7 @@ namespace SMRPGED.StatsEditor
 
                 for (int i = 0; i < this.spells.Length; i++)
                 {
-                    s = File.Create(path + "Spells\\" + "Spell_" + i.ToString("X3") + ".dat"); // Create data file
+                    s = File.Create(path + "Spells\\" + "Spell_" + i.ToString("d3") + ".dat"); // Create data file
 
                     this.spells[i].Data = null;
                     this.spells[i].TextHelperReduced = null;
@@ -365,7 +362,7 @@ namespace SMRPGED.StatsEditor
 
                 for (int i = 0; i < this.attacks.Length; i++)
                 {
-                    s = File.Create(path + "Attacks\\" + "Attack_" + i.ToString("X3") + ".dat"); // Create data file
+                    s = File.Create(path + "Attacks\\" + "Attack_" + i.ToString("d3") + ".dat"); // Create data file
 
                     this.attacks[i].Data = null;
                     // Serialize object
@@ -388,7 +385,7 @@ namespace SMRPGED.StatsEditor
 
                 for (int i = 0; i < this.formationPacks.Length; i++)
                 {
-                    s = File.Create(path + "FormationPacks\\" + "FormationPack_" + i.ToString("X3") + ".dat"); // Create data file
+                    s = File.Create(path + "FormationPacks\\" + "FormationPack_" + i.ToString("d3") + ".dat"); // Create data file
 
                     this.formationPacks[i].Data = null;
                     // Serialize object
@@ -411,7 +408,7 @@ namespace SMRPGED.StatsEditor
 
                 for (int i = 0; i < this.formations.Length; i++)
                 {
-                    s = File.Create(path + "Formations\\" + "Formation_" + i.ToString("X3") + ".dat"); // Create data file
+                    s = File.Create(path + "Formations\\" + "Formation_" + i.ToString("d3") + ".dat"); // Create data file
 
                     this.formations[i].Data = null;
                     // Serialize object
@@ -434,7 +431,7 @@ namespace SMRPGED.StatsEditor
 
                 for (int i = 0; i < this.characters.Length; i++)
                 {
-                    s = File.Create(path + "Characters\\" + "Character_" + i.ToString("X3") + ".dat"); // Create data file
+                    s = File.Create(path + "Characters\\" + "Character_" + i.ToString("d3") + ".dat"); // Create data file
 
                     this.characters[i].Data = null;
                     // Serialize object
@@ -480,7 +477,7 @@ namespace SMRPGED.StatsEditor
             {
                 for (int i = 0; i < monsters.Length; i++)
                 {
-                    s = File.OpenRead(path + "Monsters\\" + "Monster_" + i.ToString("X3") + ".dat");
+                    s = File.OpenRead(path + "Monsters\\" + "Monster_" + i.ToString("d3") + ".dat");
                     monsters[i] = (Monster)b.Deserialize(s);
                     s.Close();
                     monsters[i].Data = model.Data;
@@ -496,7 +493,7 @@ namespace SMRPGED.StatsEditor
             {
                 for (int i = 0; i < items.Length; i++)
                 {
-                    s = File.OpenRead(path + "Items\\" + "Item_" + i.ToString("X3") + ".dat");
+                    s = File.OpenRead(path + "Items\\" + "Item_" + i.ToString("d3") + ".dat");
                     this.items[i] = (Item)b.Deserialize(s);
                     s.Close();
                     this.items[i].Data = model.Data;
@@ -512,7 +509,7 @@ namespace SMRPGED.StatsEditor
             {
                 for (int i = 0; i < this.shops.Length; i++)
                 {
-                    s = File.OpenRead(path + "Shops\\" + "Shop_" + i.ToString("X3") + ".dat");
+                    s = File.OpenRead(path + "Shops\\" + "Shop_" + i.ToString("d3") + ".dat");
                     this.shops[i] = (Shop)b.Deserialize(s);
                     s.Close();
                     this.shops[i].Data = model.Data;
@@ -527,7 +524,7 @@ namespace SMRPGED.StatsEditor
             {
                 for (int i = 0; i < spells.Length; i++)
                 {
-                    s = File.OpenRead(path + "Spells\\" + "Spell_" + i.ToString("X3") + ".dat");
+                    s = File.OpenRead(path + "Spells\\" + "Spell_" + i.ToString("d3") + ".dat");
                     this.spells[i] = (Spell)b.Deserialize(s);
                     s.Close();
                     this.spells[i].Data = model.Data;
@@ -543,7 +540,7 @@ namespace SMRPGED.StatsEditor
             {
                 for (int i = 0; i < this.attacks.Length; i++)
                 {
-                    s = File.OpenRead(path + "Attacks\\" + "Attack_" + i.ToString("X3") + ".dat");
+                    s = File.OpenRead(path + "Attacks\\" + "Attack_" + i.ToString("d3") + ".dat");
                     this.attacks[i] = (Attack)b.Deserialize(s);
                     s.Close();
                     this.attacks[i].Data = model.Data;
@@ -558,7 +555,7 @@ namespace SMRPGED.StatsEditor
             {
                 for (int i = 0; i < this.formationPacks.Length; i++)
                 {
-                    s = File.OpenRead(path + "FormationPacks\\" + "FormationPack_" + i.ToString("X3") + ".dat");
+                    s = File.OpenRead(path + "FormationPacks\\" + "FormationPack_" + i.ToString("d3") + ".dat");
                     this.formationPacks[i] = (FormationPack)b.Deserialize(s);
                     s.Close();
                     this.formationPacks[i].Data = model.Data;
@@ -573,7 +570,7 @@ namespace SMRPGED.StatsEditor
             {
                 for (int i = 0; i < this.formations.Length; i++)
                 {
-                    s = File.OpenRead(path + "Formations\\" + "Formation_" + i.ToString("X3") + ".dat");
+                    s = File.OpenRead(path + "Formations\\" + "Formation_" + i.ToString("d3") + ".dat");
                     this.formations[i] = (Formation)b.Deserialize(s);
                     s.Close();
                     this.formations[i].Data = model.Data;
@@ -588,7 +585,7 @@ namespace SMRPGED.StatsEditor
             {
                 for (int i = 0; i < this.characters.Length; i++)
                 {
-                    s = File.OpenRead(path + "Characters\\" + "Character_" + i.ToString("X3") + ".dat");
+                    s = File.OpenRead(path + "Characters\\" + "Character_" + i.ToString("d3") + ".dat");
                     this.characters[i] = (Character)b.Deserialize(s);
                     s.Close();
                     this.characters[i].Data = model.Data;

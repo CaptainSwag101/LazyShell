@@ -859,7 +859,7 @@ namespace SMRPGED.ScriptsEditor.Commands
                 case 19:
                     return "If in formation:  " + ((commandData[3] * 0x100) + commandData[2]).ToString();
                 case 20:
-                    return "If only one monster alive";
+                    return "If only one alive";
                 default: return "ERROR";
             }
         }

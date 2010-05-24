@@ -11,13 +11,13 @@ namespace SMRPGED
     {
         #region Variables
 
-        private LevelMap[] levelMaps;
+        private LevelMap[] levelMaps; public LevelMap[] LevelMaps { get { return levelMaps; } }
         private LevelMap levelMap; public LevelMap LevelMap { get { return levelMap; } }
 
         private PaletteSet[] paletteSets;
         private PaletteSet paletteSet;
 
-        private TileMap tileMap;
+        private TileMap tileMap; public TileMap TileMap { get { return tileMap; } }
         private PhysicalMap physicalMap;
 
         private int currentColor;
@@ -757,7 +757,7 @@ namespace SMRPGED
                     //MessageBox.Show("Graphic Set " + i.ToString() + " is null. Using empty array to accord.");
                 }
 
-                labelText = "DECOMPRESSING GRAPHIC SET 0x" + i.ToString("X3");
+                labelText = "DECOMPRESSING GRAPHIC SET #" + i.ToString("d3");
                 pBar.PerformStep(labelText);
             }
 
@@ -783,7 +783,7 @@ namespace SMRPGED
                     //MessageBox.Show("Tile Set " + i.ToString() + " is null. Using empty array to accord.");
                 }
 
-                labelText = "DECOMPRESSING TILE SET 0x" + i.ToString("X3");
+                labelText = "DECOMPRESSING TILE SET #" + i.ToString("d3");
                 pBar.PerformStep(labelText);
             }
 
@@ -802,7 +802,7 @@ namespace SMRPGED
                     //MessageBox.Show("Battlefield " + i.ToString() + " is null. Using empty array to accord.");
                 }
 
-                labelText = "DECOMPRESSING BATTLEFIELD 0x" + i.ToString("X3");
+                labelText = "DECOMPRESSING BATTLEFIELD #" + i.ToString("d3");
                 pBar.PerformStep(labelText);
             }
 
@@ -831,7 +831,7 @@ namespace SMRPGED
                     //MessageBox.Show("Tile Map " + i.ToString() + " is null. Using empty array to accord.");
                 }
 
-                labelText = "DECOMPRESSING TILE MAP 0x" + i.ToString("X3");
+                labelText = "DECOMPRESSING TILE MAP #" + i.ToString("d3");
                 pBar.PerformStep(labelText);
             }
 
@@ -857,7 +857,7 @@ namespace SMRPGED
                     //MessageBox.Show("Physical Map " + i.ToString() + " is null. Using empty array to accord.");
                 }
 
-                labelText = "DECOMPRESSING PHYSICAL MAP 0x" + i.ToString("X3");
+                labelText = "DECOMPRESSING PHYSICAL MAP #" + i.ToString("d3");
                 pBar.PerformStep(labelText);
             }
 
@@ -935,7 +935,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0A Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0A Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -946,14 +946,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0A Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0A Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x0A GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x0A GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -978,7 +978,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0B Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0B Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -989,14 +989,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0B Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0B Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x0B GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x0B GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1021,7 +1021,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0C Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0C Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1032,14 +1032,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0C Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0C Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x0C GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x0C GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1064,7 +1064,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0D Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0D Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1075,14 +1075,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0D Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0D Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x0D GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x0D GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1107,7 +1107,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0E Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0E Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1118,14 +1118,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0E Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0E Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x0E GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x0E GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1150,7 +1150,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0F Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0F Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1161,14 +1161,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x0F Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x0F Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x0F GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x0F GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1193,7 +1193,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x10 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x10 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1204,14 +1204,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x10 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x10 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x10 GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x10 GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1236,7 +1236,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x11 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x11 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1247,14 +1247,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x11 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x11 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x11 GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x11 GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1279,7 +1279,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x12 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x12 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1290,14 +1290,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x12 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x12 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x12 GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x12 GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1322,7 +1322,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x13 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x13 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1333,14 +1333,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x13 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x13 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x13 GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x13 GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1365,7 +1365,7 @@ namespace SMRPGED
                     size = model.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0x5FFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x14 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x14 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1376,14 +1376,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0x5FFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x14 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString());
+                        MessageBox.Show("Bank 0x14 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x14 GRAPHIC SET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x14 GRAPHIC SET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x6000 - offset]);
@@ -1454,7 +1454,7 @@ namespace SMRPGED
                     size = model.Compress(model.TileMaps[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x16 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString());
+                        MessageBox.Show("Bank 0x16 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1465,7 +1465,7 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x16 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString());
+                        MessageBox.Show("Bank 0x16 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                 }
@@ -1480,7 +1480,7 @@ namespace SMRPGED
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x16 TILEMAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x16 TILEMAP #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1506,7 +1506,7 @@ namespace SMRPGED
                     size = model.Compress(model.TileMaps[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x17 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString());
+                        MessageBox.Show("Bank 0x17 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1517,7 +1517,7 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x17 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString());
+                        MessageBox.Show("Bank 0x17 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                 }
@@ -1532,7 +1532,7 @@ namespace SMRPGED
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x17 TILEMAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x17 TILEMAP #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1558,7 +1558,7 @@ namespace SMRPGED
                     size = model.Compress(model.TileMaps[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x18 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString());
+                        MessageBox.Show("Bank 0x18 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1569,7 +1569,7 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x18 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString());
+                        MessageBox.Show("Bank 0x18 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                 }
@@ -1584,7 +1584,7 @@ namespace SMRPGED
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x18 TILEMAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x18 TILEMAP #" + index.ToString("d3"));
 
             }
             // fill up the rest of the bank with 0x00's
@@ -1611,7 +1611,7 @@ namespace SMRPGED
                     size = model.Compress(model.TileMaps[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x19 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString());
+                        MessageBox.Show("Bank 0x19 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1622,7 +1622,7 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x19 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString());
+                        MessageBox.Show("Bank 0x19 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                 }
@@ -1637,7 +1637,7 @@ namespace SMRPGED
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x19 TILEMAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x19 TILEMAP #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1663,7 +1663,7 @@ namespace SMRPGED
                     size = model.Compress(model.TileMaps[index], compressed);
                     if (offset + size > 0x7FFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x1A TileMaps too large to save \n Stopped saving at TileMap " + index.ToString());
+                        MessageBox.Show("Bank 0x1A TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1674,7 +1674,7 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0x7FFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x1A TileMaps too large to save \n Stopped saving at TileMap " + index.ToString());
+                        MessageBox.Show("Bank 0x1A TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                 }
@@ -1689,7 +1689,7 @@ namespace SMRPGED
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x1A TILEMAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x1A TILEMAP #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x8000 - offset]);
@@ -1755,7 +1755,7 @@ namespace SMRPGED
                     size = model.Compress(model.PhysicalMaps[index], compressed);
                     if (offset + size > 0xFFFF)
                     {
-                        MessageBox.Show("Bank 0x1B Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString());
+                        MessageBox.Show("Bank 0x1B Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1766,7 +1766,7 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x1B Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString());
+                        MessageBox.Show("Bank 0x1B Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
                     }
                 }
@@ -1780,7 +1780,7 @@ namespace SMRPGED
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x1B PHYSICAL MAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x1B PHYSICAL MAP #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1804,7 +1804,7 @@ namespace SMRPGED
                     size = model.Compress(model.PhysicalMaps[index], compressed);
                     if (offset + size > 0x7FFF)
                     {
-                        MessageBox.Show("Bank 0x1C Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString());
+                        MessageBox.Show("Bank 0x1C Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1815,7 +1815,7 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0x7FFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x1C Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString());
+                        MessageBox.Show("Bank 0x1C Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
                     }
                 }
@@ -1829,7 +1829,7 @@ namespace SMRPGED
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x1C PHYSICAL MAP 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x1C PHYSICAL MAP #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x8000 - offset]);
@@ -1877,7 +1877,7 @@ namespace SMRPGED
                     size = model.Compress(model.TileSetsBF[index], compressed);
                     if (offset + size > 0xFFFF)
                     {
-                        MessageBox.Show("Bank 0x15 Battlefields too large to save \n Stopped saving at Battlefield " + index.ToString());
+                        MessageBox.Show("Bank 0x15 Battlefields too large to save \n Stopped saving at Battlefield " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileSetsBF[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1888,14 +1888,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x15 Battlefields too large to save \n Stopped saving at Battlefield " + index.ToString());
+                        MessageBox.Show("Bank 0x15 Battlefields too large to save \n Stopped saving at Battlefield " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileSetsBF[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x15 BATTLEFIELD 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x15 BATTLEFIELD #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1958,7 +1958,7 @@ namespace SMRPGED
                     size = model.Compress(model.TileSets[index], compressed);
                     if (offset + size > 0xFFFF)
                     {
-                        MessageBox.Show("Bank 0x3B Tilesets too large to save \n Stopped saving at Tileset " + index.ToString());
+                        MessageBox.Show("Bank 0x3B Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -1969,14 +1969,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x3B Tilesets too large to save \n Stopped saving at Tileset " + index.ToString());
+                        MessageBox.Show("Bank 0x3B Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x3B TILESET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x3B TILESET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -2000,7 +2000,7 @@ namespace SMRPGED
                     size = model.Compress(model.TileSets[index], compressed);
                     if (offset + size > 0xFFFF)
                     {
-                        MessageBox.Show("Bank 0x3C Tilesets too large to save \n Stopped saving at Tileset " + index.ToString());
+                        MessageBox.Show("Bank 0x3C Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -2011,14 +2011,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x3C Tilesets too large to save \n Stopped saving at Tileset " + index.ToString());
+                        MessageBox.Show("Bank 0x3C Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x3C TILESET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x3C TILESET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -2042,7 +2042,7 @@ namespace SMRPGED
                     size = model.Compress(model.TileSets[index], compressed);
                     if (offset + size > 0xBFFF)
                     {
-                        MessageBox.Show("Bank 0x3D Tilesets too large to save \n Stopped saving at Tileset " + index.ToString());
+                        MessageBox.Show("Bank 0x3D Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                     // Write data to rom
@@ -2053,14 +2053,14 @@ namespace SMRPGED
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xBFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x3D Tilesets too large to save \n Stopped saving at Tileset " + index.ToString());
+                        MessageBox.Show("Bank 0x3D Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
                         size = model.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                 }
 
                 BitManager.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                pBar.PerformStep("COMPRESSING BANK 0x3D TILESET 0x" + index.ToString("X3"));
+                pBar.PerformStep("COMPRESSING BANK 0x3D TILESET #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             BitManager.SetByteArray(data, bank + offset, new byte[0xC000 - offset]);
@@ -2105,14 +2105,14 @@ namespace SMRPGED
             {
                 for (int i = 0; i < model.GraphicSets.Length; i++)
                 {
-                    binWriter = new BinaryWriter(File.Open(path + "graphicSet." + i.ToString("X2") + ".bin", FileMode.Create));
+                    binWriter = new BinaryWriter(File.Open(path + "graphicSet." + i.ToString("d3") + ".bin", FileMode.Create));
                     binWriter.Write(model.GraphicSets[i]);
                     binWriter.Close();
                 }
             }
             catch (Exception ioexc)
             {
-                MessageBox.Show("Lazy Shell was unable to save the graphic sets.\n\n" + ioexc.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Lazy Shell was unable to save the graphic sets.\n\n" + ioexc.Message, "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
 
         }
@@ -2132,7 +2132,7 @@ namespace SMRPGED
 
                 if (fInfo.Length != 8192)
                 {
-                    MessageBox.Show("File is incorrect size, Graphic Sets are 8192 bytes");
+                    MessageBox.Show("File is incorrect size, Graphic Sets are 8192 bytes", "LAZY SHELL");
                     return;
                 }
 
@@ -2151,7 +2151,7 @@ namespace SMRPGED
             }
             catch (Exception ioexc)
             {
-                MessageBox.Show("Lazy Shell was unable to Import the Graphic Set.\n\n" + ioexc.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Lazy Shell was unable to Import the Graphic Set.\n\n" + ioexc.Message, "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -3047,7 +3047,7 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem loading the file.");
+                MessageBox.Show("There was a problem loading the file.", "LAZY SHELL");
                 return;
             }
         }
@@ -3057,9 +3057,9 @@ namespace SMRPGED
             saveFileDialog.Filter = "Binary files (*.bin)|*.bin|MS Palette file (*.pal)|*.pal|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
             if (contextMenuStrip3.SourceControl == palettePictureBox)
-                saveFileDialog.FileName = "paletteSet." + ((int)(mapPaletteSetNum.Value)).ToString("X3");
+                saveFileDialog.FileName = "paletteSet." + ((int)(mapPaletteSetNum.Value)).ToString("d3");
             else
-                saveFileDialog.FileName = "paletteSetBat." + ((int)(battlefieldPaletteSetNum.Value)).ToString("X3");
+                saveFileDialog.FileName = "paletteSetBat." + ((int)(battlefieldPaletteSetNum.Value)).ToString("d3");
             saveFileDialog.RestoreDirectory = true;
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)

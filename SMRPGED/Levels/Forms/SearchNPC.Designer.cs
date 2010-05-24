@@ -60,6 +60,9 @@ namespace SMRPGED
             this.label8 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.shadow = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.spritePictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel44.SuspendLayout();
@@ -70,6 +73,7 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.axisObtuse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.height)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcNum)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // spritePictureBox
@@ -230,7 +234,7 @@ namespace SMRPGED
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Location = new System.Drawing.Point(132, 317);
+            this.label1.Location = new System.Drawing.Point(132, 336);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label1.Size = new System.Drawing.Size(126, 17);
@@ -245,8 +249,6 @@ namespace SMRPGED
             this.unknownBits.FormattingEnabled = true;
             this.unknownBits.IntegralHeight = false;
             this.unknownBits.Items.AddRange(new object[] {
-            "{B1,b0}",
-            "{B1,b1}",
             "{B1,b2}",
             "{B1,b3}",
             "{B1,b4}",
@@ -258,17 +260,15 @@ namespace SMRPGED
             "{B2,b2}",
             "{B2,b3}",
             "{B2,b4}",
-            "{B3,b5}",
-            "{B3,b6}",
             "{B3,b7}",
             "{B5,b5}",
             "{B5,b6}",
             "{B5,b7}",
             "{B6,b2}"});
-            this.unknownBits.Location = new System.Drawing.Point(132, 336);
+            this.unknownBits.Location = new System.Drawing.Point(132, 355);
             this.unknownBits.MultiColumn = true;
             this.unknownBits.Name = "unknownBits";
-            this.unknownBits.Size = new System.Drawing.Size(126, 160);
+            this.unknownBits.Size = new System.Drawing.Size(126, 141);
             this.unknownBits.TabIndex = 464;
             this.unknownBits.SelectedIndexChanged += new System.EventHandler(this.unknownBits_SelectedIndexChanged);
             // 
@@ -489,6 +489,40 @@ namespace SMRPGED
             this.buttonCancel.UseVisualStyleBackColor = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Window;
+            this.panel1.Controls.Add(this.shadow);
+            this.panel1.Location = new System.Drawing.Point(183, 317);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(75, 17);
+            this.panel1.TabIndex = 460;
+            // 
+            // shadow
+            // 
+            this.shadow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shadow.IntegralHeight = false;
+            this.shadow.Items.AddRange(new object[] {
+            "{NONE}",
+            "small circle",
+            "medium circle",
+            "large block"});
+            this.shadow.Location = new System.Drawing.Point(-2, -2);
+            this.shadow.Name = "shadow";
+            this.shadow.Size = new System.Drawing.Size(79, 21);
+            this.shadow.TabIndex = 370;
+            this.shadow.SelectedIndexChanged += new System.EventHandler(this.shadow_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label9.Location = new System.Drawing.Point(132, 317);
+            this.label9.Name = "label9";
+            this.label9.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label9.Size = new System.Drawing.Size(49, 17);
+            this.label9.TabIndex = 461;
+            this.label9.Text = "Shadow";
+            // 
             // SearchNPC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -512,7 +546,9 @@ namespace SMRPGED
             this.Controls.Add(this.axisAcute);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.yPixelShift);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label78);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.npcNum);
             this.Controls.Add(this.panel44);
             this.Controls.Add(this.panel2);
@@ -539,6 +575,7 @@ namespace SMRPGED
             ((System.ComponentModel.ISupportInitialize)(this.axisObtuse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.height)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcNum)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -576,5 +613,8 @@ namespace SMRPGED
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox shadow;
+        private System.Windows.Forms.Label label9;
     }
 }

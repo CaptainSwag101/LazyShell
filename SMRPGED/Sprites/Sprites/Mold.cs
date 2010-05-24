@@ -746,9 +746,9 @@ namespace SMRPGED
 
             public void UpdateOffsets(short delta, int current)
             {
-                if (tileOffset != 0x7FFF && tileOffset > current)
+                if (tileOffset != 0x7FFF && tileOffset >= current)
                     tileOffset = (ushort)(tileOffset + delta);
-                if (!gridplane && tileFormat == 2 && copyPacketOffset > current)
+                if (!gridplane && tileFormat == 2 && copyPacketOffset >= current)
                     copyPacketOffset = (ushort)(copyPacketOffset + delta);
 
                 foreach (Tile c in copies)
@@ -758,9 +758,9 @@ namespace SMRPGED
 
         public void UpdateOffsets(short delta, int current)
         {
-            if (moldOffset > current)
+            if (moldOffset >= current)
                 moldOffset = (ushort)(moldOffset + delta);
-            if (tilePacketPointer != 0xFFFF && tilePacketPointer != 0x7FFF & tilePacketPointer > current)
+            if (tilePacketPointer != 0xFFFF && tilePacketPointer != 0x7FFF & tilePacketPointer >= current)
                 tilePacketPointer = (ushort)(tilePacketPointer + delta);
 
             foreach (Tile t in tiles)

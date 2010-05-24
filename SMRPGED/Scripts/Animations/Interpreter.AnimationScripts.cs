@@ -668,7 +668,8 @@ namespace SMRPGED.ScriptsEditor.Commands
                     break;
                 case 0x00:
                 case 0x03:
-                    sb.Append(settings.SpriteNames[BitManager.GetShort(asc.AnimationData, 3) & 0x3FF] + "\"");
+                    ushort temp = (ushort)(BitManager.GetShort(asc.AnimationData, 3) & 0x3FF);
+                    sb.Append("[" + temp.ToString("d4") + "]  " + settings.SpriteNames[temp] + "\"");
                     sb.Append(", playback seq = " + asc.AnimationData[5].ToString());
                     sb.Append(", coords = AMEM $32");
                     break;

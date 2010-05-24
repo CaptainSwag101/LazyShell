@@ -12,7 +12,8 @@ namespace SMRPGED.ScriptsEditor
 {
     public partial class Scripts
     {
-        ActionQueue[] actionScripts;
+        private ActionQueue[] actionScripts;
+        public ActionQueue[] ActionScripts { get { return actionScripts; } set { actionScripts = value; } }
 
         #region Static Code
         private static int[][] actionListBoxOpcodes = new int[][]
@@ -74,10 +75,10 @@ namespace SMRPGED.ScriptsEditor
                 new int[]   // 11
                 {
                     0xA3,0xA7,0xAC,0xAD,0xAE,0xAF,0xB4,0xB6,
-                    0xB8,0xB9,0xBA,0xC0,0xC1,0xC3,0xC6,0xCA,
-                    0xCB,0xDB,0xDF,0xE2,0xE3,0xE6,0xE7,0xEA,
-                    0xEB,0xEC,0xED,0xEE,0xEF,0xFD,0xFD,0xFD,
-                    0xFD,0xFD,0xFD
+                    0xB8,0xB9,0xBA,0xC0,0xC1,0xC3,0xC4,0xC5,
+                    0xC6,0xCA,0xCB,0xDB,0xDF,0xE2,0xE3,0xE6,
+                    0xE7,0xEA,0xEB,0xEC,0xED,0xEE,0xEF,0xFD,
+                    0xFD,0xFD,0xFD,0xFD,0xFD
                 },
                 new int[]   // 12
                 {
@@ -248,7 +249,7 @@ namespace SMRPGED.ScriptsEditor
                     "Face northwest",			// 0x75
                     "Face north",			// 0x76
                     "Face northeast",			// 0x77
-                    "Face south",			// 0x78
+                    "Face Mario",			// 0x78
                     "Turn clockwise 45°",			// 0x79
                     "Face random direction",			// 0x7A
                     "Turn clockwise 45° times...",			// 0x7B
@@ -269,7 +270,7 @@ namespace SMRPGED.ScriptsEditor
                     "Bounce isometric units...",			// 0x91
                     "Transfer to isometric coords...",			// 0x92
                     "Transfer isometric units...",			// 0x93
-                    "Transfer isometric pixels...",			// 0x94
+                    "Transfer isometric pixels (facing)...",			// 0x94
                     "Transfer to other obj's isometric coords...",			// 0x95
                     };
 
@@ -333,7 +334,9 @@ namespace SMRPGED.ScriptsEditor
                     "Mem 00:700C compare to...",			// 0xC0
                     "Mem 00:700C compare to mem...",			// 0xC1
                     "Mem 00:700C = current level",			// 0xC3
-                    "Mem 00:700C = obj mem...",			// 0xC6
+                    "Mem 00:700C = object X coord...",			// 0xC4
+                    "Mem 00:700C = object Y coord...",			// 0xC5
+                    "Mem 00:700C = object Z coord...",			// 0xC6
                     "Mem 00:700C = held joypad register",			// 0xCA
                     "Mem 00:700C = tapped joypad register",			// 0xCB
                     "If mem 00:700C bit(s) set, jump to...",			// 0xDB
@@ -595,7 +598,11 @@ namespace SMRPGED.ScriptsEditor
                     labelEvtD.Text = "Y";
                     evtNumC.Enabled = true;
                     evtNumD.Enabled = true;
-
+                    if (aqc.Opcode != 0x80 && aqc.Opcode != 0x82)
+                    {
+                        evtNumC.Minimum = evtNumD.Minimum = -128;
+                        evtNumC.Maximum = evtNumD.Maximum = 127;
+                    }
                     evtNumC.Value = aqc.Option;
                     evtNumD.Value = aqc.QueueData[2];
                     break;
@@ -616,6 +623,11 @@ namespace SMRPGED.ScriptsEditor
                     evtNumA.Enabled = true;
                     evtNumC.Enabled = true;
                     evtNumD.Enabled = true;
+                    if (aqc.Opcode != 0x90)
+                    {
+                        evtNumC.Minimum = evtNumD.Minimum = -128;
+                        evtNumC.Maximum = evtNumD.Maximum = 127;
+                    }
 
                     evtNumA.Value = aqc.QueueData[3];
                     evtNumC.Value = aqc.Option;
@@ -630,6 +642,11 @@ namespace SMRPGED.ScriptsEditor
                     labelEvtD.Text = "Y";
                     evtNameB.Items.AddRange(Directions); evtNameB.Enabled = true;
                     evtNumB.Maximum = 0x31; evtNumB.Enabled = true;
+                    if (aqc.Opcode != 0x92)
+                    {
+                        evtNumC.Minimum = evtNumD.Minimum = -128;
+                        evtNumC.Maximum = evtNumD.Maximum = 127;
+                    }
                     evtNumC.Enabled = true;
                     evtNumD.Enabled = true;
 
@@ -888,12 +905,16 @@ namespace SMRPGED.ScriptsEditor
 
                     evtNumC.Value = (aqc.Option * 2) + 0x7000;
                     break;
+                case 0xC4: labelTitleA.Text = "Mem 00:700C = object X coord..."; goto case 0xC6;
+                case 0xC5: labelTitleA.Text = "Mem 00:700C = object Y coord..."; goto case 0xC6;
                 case 0xC6:
-                    labelTitleA.Text = "Mem 00:700C = object Z coord...";
+                    if (aqc.Opcode == 0xC6) labelTitleA.Text = "Mem 00:700C = object Z coord...";
                     labelEvtA.Text = "object";
                     evtNameA.Items.AddRange(ObjectNames); evtNameA.Enabled = true;
+                    evtEffects.Items.Add("isometric"); evtEffects.Enabled = true;
 
                     evtNameA.SelectedIndex = aqc.Option;
+                    evtEffects.SetItemChecked(0, (aqc.Option & 0x80) == 0x80);
                     break;
                 case 0xDB: labelTitleA.Text = "If mem 00:700C bit(s) set, jump to..."; goto case 0xDF;
                 case 0xDF:
@@ -972,7 +993,7 @@ namespace SMRPGED.ScriptsEditor
                     labelEvtB.Text = "for object";
                     evtNameA.Items.AddRange(LevelNames()); evtNameA.Enabled = true;
                     evtNameB.Items.AddRange(ObjectNames); evtNameB.Enabled = true;
-                    evtNumA.Enabled = true; evtNumA.Maximum = 511; evtNumA.Hexadecimal = true;
+                    evtNumA.Enabled = true; evtNumA.Maximum = 511;
                     evtEffects.Items.AddRange(new object[] { "true" }); evtEffects.Enabled = true;
                     if (aqc.Opcode == 0xF8)
                         evtNumE.Enabled = true; evtNumE.Hexadecimal = true; evtNumE.Maximum = 0xFFFF;
@@ -1156,8 +1177,16 @@ namespace SMRPGED.ScriptsEditor
                 case 0x82:
                 case 0x83:
                 case 0x84:
-                    aqc.Option = (byte)evtNumC.Value;
-                    aqc.QueueData[2] = (byte)evtNumD.Value;
+                    if (aqc.Opcode != 0x80 && aqc.Opcode != 0x82)
+                    {
+                        aqc.Option = (byte)((sbyte)evtNumC.Value);
+                        aqc.QueueData[2] = (byte)((sbyte)evtNumD.Value);
+                    }
+                    else
+                    {
+                        aqc.Option = (byte)evtNumC.Value;
+                        aqc.QueueData[2] = (byte)evtNumD.Value;
+                    }
                     break;
                 case 0x87:
                 case 0x95:
@@ -1166,16 +1195,32 @@ namespace SMRPGED.ScriptsEditor
                 case 0x90:
                 case 0x91:
                     aqc.QueueData[3] = (byte)evtNumA.Value;
-                    aqc.Option = (byte)evtNumC.Value;
-                    aqc.QueueData[2] = (byte)evtNumD.Value;
+                    if (aqc.Opcode != 0x90)
+                    {
+                        aqc.Option = (byte)((sbyte)evtNumC.Value);
+                        aqc.QueueData[2] = (byte)((sbyte)evtNumD.Value);
+                    }
+                    else
+                    {
+                        aqc.Option = (byte)evtNumC.Value;
+                        aqc.QueueData[2] = (byte)evtNumD.Value;
+                    }
                     break;
                 case 0x92:
                 case 0x93:
                 case 0x94:
                     aqc.QueueData[3] = (byte)(evtNameB.SelectedIndex << 5);
                     aqc.QueueData[3] &= 0xE0; aqc.QueueData[3] |= (byte)evtNumB.Value;
-                    aqc.Option = (byte)evtNumC.Value;
-                    aqc.QueueData[2] = (byte)evtNumD.Value;
+                    if (aqc.Opcode != 0x92)
+                    {
+                        aqc.Option = (byte)((sbyte)evtNumC.Value);
+                        aqc.QueueData[2] = (byte)((sbyte)evtNumD.Value);
+                    }
+                    else
+                    {
+                        aqc.Option = (byte)evtNumC.Value;
+                        aqc.QueueData[2] = (byte)evtNumD.Value;
+                    }
                     break;
 
                 // Audio playback
@@ -1291,8 +1336,11 @@ namespace SMRPGED.ScriptsEditor
                 case 0xC1:
                     aqc.Option = (byte)((evtNumC.Value - 0x7000) / 2);
                     break;
+                case 0xC4:
+                case 0xC5:
                 case 0xC6:
                     aqc.Option = (byte)evtNameA.SelectedIndex;
+                    BitManager.SetBit(aqc.QueueData, 1, 7, evtEffects.GetItemChecked(0));
                     break;
                 case 0xDB:
                 case 0xDF:
@@ -1375,7 +1423,7 @@ namespace SMRPGED.ScriptsEditor
             }
         }
 
-        private void UpdateActionOffsets()
+        public void UpdateActionOffsets()
         {
             int delta = treeViewWrapper.ScriptDelta;
             int actionNum = treeViewWrapper.Action.ActionQueueNum;
@@ -1470,109 +1518,5 @@ namespace SMRPGED.ScriptsEditor
 
             return totalSize - length - 1;
         }
-
-        private void ExportActionScript(int start, int count, string path)
-        {
-            this.scriptsModel.AssembleAllActionScripts();
-
-            path += "\\" + model.GetFileNameWithoutPath() + " - Action Scripts\\";
-
-            // Create Level Data directory
-            if (!CreateDir(path))
-                return;
-
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
-            s = File.Create(path + "Do Not Modify This Directory Or Files Contained Within.txt");
-            s.Close();
-
-            try
-            {
-                for (int i = start; i < start + count; i++)
-                {
-                    // Create the file to store the level data
-                    s = File.Create(path + "actionScript." + i.ToString("X3") + ".dat"); // Create data file
-
-                    actionScripts[i].Data = null;
-
-                    // Serialize object
-                    b.Serialize(s, actionScripts[i]);
-                    s.Close();
-
-                    actionScripts[i].Data = model.Data;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("There was a problem exporting");
-            }
-
-
-        }
-        private void ImportActionScript(int start, int count, string path)
-        {
-            Stream s;
-            BinaryFormatter b = new BinaryFormatter();
-            int baseOffset, len;
-            EventActionCommand eac;
-
-            if (count == 1)
-            {
-                try
-                {
-                    s = File.OpenRead(path);
-
-                    baseOffset = actionScripts[start].Offset;
-                    len = actionScripts[start].ActionQueueLength;
-
-                    actionScripts[start] = (ActionQueue)b.Deserialize(s);
-                    s.Close();
-
-                    this.treeViewWrapper.ScriptDelta = actionScripts[start].ActionQueueLength - len;
-                    actionScripts[start].Data = model.Data;
-
-                    ScriptIterator it = new ScriptIterator(actionScripts[start]);
-                    while (!it.IsDone)
-                    {
-                        eac = it.Next();
-                        eac.Offset = (eac.Offset - actionScripts[start].Offset) + baseOffset;
-                        eac.OriginalOffset = eac.Offset;
-                    }
-
-                    actionScripts[start].Offset = baseOffset;
-
-                    EventNumber_ValueChanged(null, null);
-                }
-                catch
-                {
-                    MessageBox.Show("There was a problem loading Event Script data.");
-                    return;
-                }
-            }
-            else
-            {
-                try
-                {
-                    for (int i = start; i < start + count; i++)
-                    {
-                        s = File.OpenRead(path + "actionScript." + i.ToString("X3") + ".dat");
-                        actionScripts[i] = (ActionQueue)b.Deserialize(s);
-                        s.Close();
-                        actionScripts[i].Data = model.Data;
-                    }
-                    this.treeViewWrapper.ScriptDelta = 0;
-
-                    EventNumber_ValueChanged(null, null);
-                }
-                catch
-                {
-                    MessageBox.Show("There was a problem loading Event Script data. Verify that the " +
-                    "Event Script data files are correctly named and present.");
-                }
-            }
-
-        }
-
-
     }
 }

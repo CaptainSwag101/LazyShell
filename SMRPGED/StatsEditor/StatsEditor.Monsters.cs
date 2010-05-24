@@ -128,14 +128,6 @@ namespace SMRPGED.StatsEditor
 
         private void SaveMonsterNotes()
         {
-            try
-            {
-                this.monsterNotesTextBox.SaveFile(notes.GetPath() + "main-stats-monsters.rtf");
-            }
-            catch
-            {
-                System.Windows.Forms.MessageBox.Show("Error saving monster notes. Please report this");
-            }
         }
 
         #region Event Handlers

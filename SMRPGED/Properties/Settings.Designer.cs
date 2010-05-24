@@ -25,25 +25,13 @@ namespace SMRPGED.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LoadNotes {
             get {
                 return ((bool)(this["LoadNotes"]));
             }
             set {
                 this["LoadNotes"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int NotesPath {
-            get {
-                return ((int)(this["NotesPath"]));
-            }
-            set {
-                this["NotesPath"] = value;
             }
         }
         
@@ -85,7 +73,7 @@ namespace SMRPGED.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://members.shaw.ca/SMRPGED/Patches/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://home.comcast.net/~giangurgolo/patches/")]
         public string patchServerURL {
             get {
                 return ((string)(this["patchServerURL"]));
@@ -149,362 +137,361 @@ namespace SMRPGED.Properties {
             "ring>Mushroom Kingdom, before Croco, jumping kid\'s house (2F)</string>\r\n  <strin" +
             "g>Mushroom Kingdom, before Croco, Raz and Raini\'s house</string>\r\n  <string>Mush" +
             "room Kingdom, before Croco, Item Shop (top floor)</string>\r\n  <string>Booster To" +
-            "wer, 1F Area 02 (high Masher room w/teeter-totter) ____dummy</string>\r\n  <string" +
-            ">Mushroom Kingdom, before Croco, Inn (1F)</string>\r\n  <string>____blue BG, nothi" +
-            "ng there</string>\r\n  <string>Mushroom Kingdom, before Croco, running kid\'s house" +
-            "</string>\r\n  <string>Mushroom Kingdom, Inn (2F)</string>\r\n  <string>Mushroom Kin" +
-            "gdom, before Croco, Item Shop (basement)</string>\r\n  <string>Booster Hill ____du" +
-            "mmy</string>\r\n  <string>Pipe Vault Entrance</string>\r\n  <string>Kero Sewers, Are" +
-            "a 02 (long room w/three pipes)</string>\r\n  <string>Kero Sewers, Area 03 (large w" +
-            "ater room w/pipe in center)</string>\r\n  <string>Kero Sewers, Area 06 (long water" +
-            " room w/Rat Funks in a line)</string>\r\n  <string>Kero Sewers, Area 05 (super sta" +
-            "r room w/four Rat Funks)</string>\r\n  <string>Kero Sewers, Area 04 (large room w/" +
-            "Pandorite and hiding Rat Funks)</string>\r\n  <string>Nimbus Land, outside (during" +
-            " Valentina right before fight)</string>\r\n  <string>Kero Sewers, Area 01 (water r" +
-            "oom w/save)</string>\r\n  <string>Marrymore Scene</string>\r\n  <string>Marrymore, o" +
-            "utside</string>\r\n  <string>Marrymore Chapel, sanctuary</string>\r\n  <string>Rose " +
-            "Way, exit Area where Bowser\'s Troops gathered</string>\r\n  <string>Midas River, b" +
-            "usiness transaction Area</string>\r\n  <string>Midas River, barrel jumping river</" +
-            "string>\r\n  <string>Midas River, waterfall</string>\r\n  <string>Midas River, 1st t" +
-            "unnel</string>\r\n  <string>Midas River, 2nd tunnel (both left and right)</string>" +
-            "\r\n  <string>Midas River, 3rd tunnel (on left)</string>\r\n  <string>Midas River, 4" +
-            "th tunnel (on very bottom right)</string>\r\n  <string>Tadpole Pond, Area 02</stri" +
-            "ng>\r\n  <string>Tadpole Pond, Area 01</string>\r\n  <string>Bandit\'s Way, Area 01</" +
-            "string>\r\n  <string>Bandit\'s Way, Area 03</string>\r\n  <string>Bandit\'s Way, Area " +
-            "04</string>\r\n  <string>Rose Way, main Area</string>\r\n  <string>Rose Way, two fas" +
-            "t-floating platforms</string>\r\n  <string>Rose Way, treasure chests w/coins Area<" +
-            "/string>\r\n  <string>Rose Way, winding path w/Crooks</string>\r\n  <string>Rose Tow" +
-            "n, during Bowyer outside</string>\r\n  <string>Rose Town, outside</string>\r\n  <str" +
-            "ing>Rose Town, during Bowyer Inn (1F)</string>\r\n  <string>Rose Town, Inn (1F)</s" +
-            "tring>\r\n  <string>Rose Town, Item Shop</string>\r\n  <string>Smithy\'s Final Form D" +
-            "efeat: Geno\'s Redemption</string>\r\n  <string>Rose Town, during Bowyer three gran" +
-            "dkids\' house</string>\r\n  <string>Rose Town, three grandkids\' house</string>\r\n  <" +
-            "string>Rose Town, couple\'s house</string>\r\n  <string>Grate Guy\'s Casino, inside " +
-            "casino</string>\r\n  <string>Rose Town, during Bowyer treasure house (1F)</string>" +
-            "\r\n  <string>Rose Town, treasure house (1F)</string>\r\n  <string>Rose Town, during" +
-            " Bowyer Inn (2F)</string>\r\n  <string>Rose Town, Inn (2F)</string>\r\n  <string>Ros" +
-            "e Town, during Bowyer treasure house (2F)</string>\r\n  <string>Rose Town, treasur" +
-            "e house (2F)</string>\r\n  <string>Rose Town, Geno Awakens in Inn (1F)</string>\r\n " +
-            " <string>Booster Pass, Area 01</string>\r\n  <string>Booster Pass, Area 02</string" +
-            ">\r\n  <string>Moleville, Outside (at exit from Mines)</string>\r\n  <string>Smithy " +
-            "Factory, Area 17 (Domino and Cloaker\'s room)</string>\r\n  <string>Grate Guy\'s Cas" +
-            "ino, front door</string>\r\n  <string>Moleville, Dyna and Mite\'s House ____dummy</" +
-            "string>\r\n  <string>Grate Guy\'s Casino, outside</string>\r\n  <string>Nimbus Castle" +
-            ", Area 09 (Statue Room, after Valentina)</string>\r\n  <string>Moleville, Outside<" +
-            "/string>\r\n  <string>Nimbus Castle, Area 01 (entrance hall)</string>\r\n  <string>N" +
-            "imbus Castle, Area 18 (Dodo\'s statue-polishing room)</string>\r\n  <string>Nimbus " +
-            "Castle, Area 04 (left of 4-way path, right-angle red brick path w/ treasure)</st" +
-            "ring>\r\n  <string>Nimbus Castle, Area 17 (right of 4-way path, Save Point)</strin" +
-            "g>\r\n  <string>Nimbus Castle, Area 16 (small two-door room w/treasure, from Area " +
-            "15)</string>\r\n  <string>Nimbus Castle, Area 10 (red brick 2-level room w/treasur" +
-            "e from Birdo\'s room)</string>\r\n  <string>Nimbus Castle, Area 03 (4-way path, dur" +
-            "ing Valentina)</string>\r\n  <string>Nimbus Castle, Area 02 (left of Area 01)</str" +
-            "ing>\r\n  <string>Nimbus Castle, Area 15 (front of 4-way path, large right-angle r" +
-            "oom w/ plant)</string>\r\n  <string>Nimbus Castle, Area 05 (long 5-exit room, duri" +
-            "ng Valentina)</string>\r\n  <string>Nimbus Castle, Area 06 (left-most front door f" +
-            "rom Area 05)</string>\r\n  <string>Nimbus Castle, Area 13 (Throne Room, during Val" +
-            "entina)</string>\r\n  <string>Nimbus Castle, path after Throne Room (2nd)</string>" +
-            "\r\n  <string>Nimbus Castle, Area 12 (entrance to throne room)</string>\r\n  <string" +
-            ">Pipe Vault, Area 01</string>\r\n  <string>Pipe Vault, Area 03 (line of pipes)</st" +
-            "ring>\r\n  <string>Pipe Vault, Area 04 (line of coins, 2 hidden treasures)</string" +
-            ">\r\n  <string>Pipe Vault, Area 06 (line of red pipes)</string>\r\n  <string>Pipe Va" +
-            "ult, Area 02</string>\r\n  <string>Pipe Vault, Area 07 (long path w/moving platfor" +
-            "ms)</string>\r\n  <string>Pipe Vault, Area 05</string>\r\n  <string>Sea, Area 02 (la" +
-            "rge room with shop)</string>\r\n  <string>Sea, Area 04 (bunch of Zeostars)</string" +
-            ">\r\n  <string>Sea, Area 05 (from Area 02 w/save point)</string>\r\n  <string>Sea, A" +
-            "rea 06 (water room w/whirlpools)</string>\r\n  <string>Sea, Area 03 (super star ro" +
-            "om)</string>\r\n  <string>Sea, Area 01 (entrance)</string>\r\n  <string>Sea, Area 07" +
-            " (small underwater room)</string>\r\n  <string>Land\'s End, Area 01</string>\r\n  <st" +
-            "ring>Land\'s End, Area 02</string>\r\n  <string>Land\'s End, Area 03 (Geckits playin" +
-            "g cannonball)</string>\r\n  <string>Land\'s End, Area 01,2 (nothing there, unused?)" +
-            "</string>\r\n  <string>Land\'s End, Area 04 (rotating flowers)</string>\r\n  <string>" +
-            "Land\'s End, Area 05 (sky bridge)</string>\r\n  <string>Pipe Vault, Goomba-thumping" +
-            " room</string>\r\n  <string>Bowser\'s Keep 6-door, treasure after each room</string" +
-            ">\r\n  <string>Star Hill, Area 01</string>\r\n  <string>Pipe Vault, Area 02 ___dummy" +
-            "</string>\r\n  <string>GAME INTRO: Midas River, water tunnel</string>\r\n  <string>G" +
-            "AME INTRO: Bandit\'s Way, Area 04</string>\r\n  <string>GAME INTRO: Midas River, Ba" +
-            "rrel Jumping</string>\r\n  <string>GAME INTRO: Moleville, outside during Bowser\'s " +
-            "troop scene</string>\r\n  <string>GAME INTRO: Booster Hill</string>\r\n  <string>Mar" +
-            "rymore Chapel, main hall</string>\r\n  <string>Marrymore Chapel, entrance to sanct" +
-            "uary</string>\r\n  <string>Marrymore Chapel, sanctuary (during Booster)</string>\r\n" +
-            "  <string>Marrymore Chapel, kitchen</string>\r\n  <string>Marrymore Chapel, kitche" +
-            "n (no sprites/exits, unused?)</string>\r\n  <string>Star Hill, Area 03</string>\r\n " +
-            " <string>Star Hill, Area 02</string>\r\n  <string>Star Hill, Area 04</string>\r\n  <" +
-            "string>Sunken Ship, Area 01</string>\r\n  <string>Sunken Ship, Area 03 (Greapers)<" +
-            "/string>\r\n  <string>Sunken Ship, Area 04 (Greapers &amp; Dry Bones)</string>\r\n  " +
-            "<string>Sunken Ship, puzzle room 2</string>\r\n  <string>Sunken Ship, Area 02 (fro" +
-            "m entrance w/save point)</string>\r\n  <string>Sunken Ship, Area 06 (puzzle room p" +
-            "assageway)</string>\r\n  <string>Sunken Ship, puzzle room 1</string>\r\n  <string>Su" +
-            "nken Ship, Area 05 (long stairwell with running Alley Rats)</string>\r\n  <string>" +
-            "Sunken Ship, puzzle room 3</string>\r\n  <string>Sunken Ship, Area 07 (puzzle room" +
-            " passageway branch room w/Shaman)</string>\r\n  <string>Sunken Ship, Area 14 ____d" +
-            "ummy</string>\r\n  <string>Sunken Ship, puzzle room 4</string>\r\n  <string>Sunken S" +
-            "hip, puzzle room 5</string>\r\n  <string>Sunken Ship, post-KC Area 01 (small room " +
-            "w/Trampoline)</string>\r\n  <string>Sea, Area 08 (shore with Sunken Ship)</string>" +
-            "\r\n  <string>Sunken Ship, post-KC Area 05 (w/Dry Bones, linked by Mario mirror ro" +
-            "om)</string>\r\n  <string>Sunken Ship, Area 08 (w/save point and green switch for " +
-            "barrel)</string>\r\n  <string>Sunken Ship, Area 09 (Password room)</string>\r\n  <st" +
-            "ring>Sunken Ship, post-KC Area 04 (long stairwell w/running Alley Rats)</string>" +
-            "\r\n  <string>Sunken Ship, post-KC Area 06 (Mario Mirror room)</string>\r\n  <string" +
-            ">Sunken Ship, post-KC Area 02 (small 2-level room)</string>\r\n  <string>Sunken Sh" +
-            "ip, post-KC Area 03 (Alley Rats on cannons)</string>\r\n  <string>Sunken Ship, pos" +
-            "t-KC Area 07 (three Dry Bones)</string>\r\n  <string>Sunken Ship, post-KC Area 08 " +
-            "(secret room with Frog Coin)</string>\r\n  <string>Sunken Ship, post-KC Area 09 (H" +
-            "idon\'s room w/save point)</string>\r\n  <string>Sunken Ship, post-KC Area 14 (secr" +
-            "et Safety Ring)</string>\r\n  <string>Sunken Ship, post-KC Area 18 (warp room from" +
-            " Johnny\'s room)</string>\r\n  <string>Sunken Ship, post-KC Area 10 (water room wit" +
-            "h frog coins)</string>\r\n  <string>Sunken Ship, post-KC Area 11 (water room with " +
-            "whirlpool)</string>\r\n  <string>Mario\'s Pipehouse</string>\r\n  <string>Mushroom Ki" +
-            "ngdom, during Mack, Outside</string>\r\n  <string>Mushroom Kingdom, Outside</strin" +
-            "g>\r\n  <string>Booster Tower, 9F Area 02 (Booster\'s curtain game room)</string>\r\n" +
-            "  <string>Booster Tower, 2F Area 03 (steps w/circling Bob-ombs)</string>\r\n  <str" +
-            "ing>Booster Tower, 2F Area 02 (Booster\'s railway room)</string>\r\n  <string>Boost" +
-            "er Tower, 6F Area 02 (Booster\'s Ancestor Game room)</string>\r\n  <string>Booster " +
-            "Tower, 2F Area 01 (w/constantly appearing Spookums)</string>\r\n  <string>Booster " +
-            "Tower, 1F Area 02 (high Masher room w/teeter-totter)</string>\r\n  <string>Booster" +
-            " Tower, 8F Area 03 (3-level w/one Chomp)</string>\r\n  <string>Booster Tower, 9F A" +
-            "rea 01 (three yellow platforms w/save point)</string>\r\n  <string>Booster Tower, " +
-            "6F Area 03 (Elder\'s Room w/Chomp)</string>\r\n  <string>Booster Tower, 6F Area 01 " +
-            "(small room w/save point)</string>\r\n  <string>Booster Tower Entrance</string>\r\n " +
-            " <string>Mushroom Way, Area 01</string>\r\n  <string>Mushroom Way, Area 02</string" +
-            ">\r\n  <string>Mushroom Way, Area 03</string>\r\n  <string>Bandit\'s Way, Area 05</st" +
-            "ring>\r\n  <string>Bandit\'s Way, Area 02</string>\r\n  <string>Seaside Town, during " +
-            "Yaridovich Outside</string>\r\n  <string>Seaside Town, during Yaridovich Inn (1F)<" +
-            "/string>\r\n  <string>Seaside Town, during Yaridovich Inn (2F)</string>\r\n  <string" +
-            ">Seaside Town, during Yaridovich Elder\'s House (1F)</string>\r\n  <string>Seaside " +
-            "Town, during Yaridovich Elder\'s House (2F)</string>\r\n  <string>Seaside Town, dur" +
-            "ing Yaridovich Beetles Are Us/Bomb Shop</string>\r\n  <string>Seaside Town, during" +
-            " Yaridovich Weapons and Armor Shop</string>\r\n  <string>Seaside Town, during Yari" +
-            "dovich Health Food Store (left-most)</string>\r\n  <string>Seaside Town, during Ya" +
-            "ridovich Mushroom Boy Shop (middle)</string>\r\n  <string>Seaside Town, during Yar" +
-            "idovich Accessory Shop (right-most)</string>\r\n  <string>Seaside Town, during Yar" +
-            "idovich Shed (unused b/c inaccessible)</string>\r\n  <string>GAME INTRO: Sea, shor" +
-            "e with Sunken Ship</string>\r\n  <string>Smithy Factory, Area 02 (w/save point)</s" +
-            "tring>\r\n  <string>Smithy Factory, Area 04 (green switch w/Ameboids)</string>\r\n  " +
-            "<string>Smithy Factory, Area 03 (Glum Reapers)</string>\r\n  <string>Smithy Factor" +
-            "y, Area 07 (Count Down\'s room)</string>\r\n  <string>Forest Maze, Area 01</string>" +
-            "\r\n  <string>Forest Maze, Area 05 (tree trunk Area)</string>\r\n  <string>Forest Ma" +
-            "ze, Area 02</string>\r\n  <string>Forest Maze, Area 09 (leads to 4-path maze)</str" +
-            "ing>\r\n  <string>Forest Maze, Area 04</string>\r\n  <string>Forest Maze, Area 06</s" +
-            "tring>\r\n  <string>Forest Maze, 4-way path from Area 09</string>\r\n  <string>Fores" +
-            "t Maze, Secret entrance</string>\r\n  <string>Forest Maze, Bowyer\'s practice pad</" +
-            "string>\r\n  <string>Forest Maze, Area 03 (underground)</string>\r\n  <string>Forest" +
-            " Maze, Secret</string>\r\n  <string>Forest Maze, Area 08 (underground)</string>\r\n " +
-            " <string>Forest Maze, Area 07 (underground w/sleeping Wiggler)</string>\r\n  <stri" +
-            "ng>Smithy Factory, Area 05 (w/save point)</string>\r\n  <string>Smithy Factory, fa" +
-            "ll from lugnut rooms (Area 06 &amp; prior)</string>\r\n  <string>Smithy Factory, A" +
-            "rea 06 (Ultra Hammer)</string>\r\n  <string>Volcano, Area 21 ____dummy</string>\r\n " +
-            " <string>Volcano, Area 02 ____dummy</string>\r\n  <string>Forest Maze, all tree tr" +
-            "unk underground areas</string>\r\n  <string>GAME INTRO: Mushroom Kingdom Castle, T" +
-            "hrone Room</string>\r\n  <string>GAME INTRO: Yo\'ster Isle, talk to Yoshi &amp; run" +
-            " around</string>\r\n  <string>GAME INTRO: Pipe Vault, Area 02 (w/Thwomp)</string>\r" +
-            "\n  <string>GAME INTRO: Kero Sewers, Entrance</string>\r\n  <string>GAME INTRO: Tad" +
-            "pole Pond, Mario summons tadpoles</string>\r\n  <string>GAME INTRO: Mushroom Way, " +
-            "Area 01</string>\r\n  <string>GAME INTRO: Vista Hill</string>\r\n  <string>GAME INTR" +
-            "O: Booster Tower, balcony with Toadstool crying</string>\r\n  <string>Bean Valley," +
-            " piranha pipe Area</string>\r\n  <string>Bean Valley, main Area</string>\r\n  <strin" +
-            "g>Bean Valley, magic brick to Beanstalk Area</string>\r\n  <string>Bean Valley, Sm" +
-            "ilax Area</string>\r\n  <string>Monstro Town, Jinx\'s Dojo</string>\r\n  <string>Fore" +
-            "st Maze, Small area w/tree trunk (unused?)</string>\r\n  <string>GAME INTRO: Fores" +
-            "t Maze, fighting Magikoopa at Bowyer\'s Pad</string>\r\n  <string>Booster Tower, Ba" +
-            "lcony at top floor</string>\r\n  <string>Booster Tower, 3F Area 01 (green switch f" +
-            "or BP secret)</string>\r\n  <string>GAME INTRO: Forest Maze, jumping on Wiggler</s" +
-            "tring>\r\n  <string>Bowser\'s Keep 1st time, Area 03 (lava room w/bridge)</string>\r" +
-            "\n  <string>Land\'s End Underground, Area 04 (buy super stars)</string>\r\n  <string" +
-            ">Land\'s End Underground, Area 01</string>\r\n  <string>Land\'s End Underground, Are" +
-            "a 02</string>\r\n  <string>Land\'s End Underground, Area 03</string>\r\n  <string>Bow" +
-            "ser\'s Keep, Area 10 (Magikoopa\'s room)</string>\r\n  <string>Monstro Town, entranc" +
-            "e</string>\r\n  <string>Belome Temple, Area 08 (Belome\'s room)</string>\r\n  <string" +
-            ">ENDING CREDITS: Nimbus Land, Prince Mallow</string>\r\n  <string>Land\'s End secre" +
-            "t underground, Area 01 (leads to Kero Sewers)</string>\r\n  <string>Moleville Mine" +
-            "s, Area 17 (Punchinello\'s room)</string>\r\n  <string>Moleville Mines, Area 11 (bo" +
-            "mbed room w/singing Moles)</string>\r\n  <string>Moleville Mines, Area 04 (w/tramp" +
-            "oline)</string>\r\n  <string>Moleville Mines, Area 02</string>\r\n  <string>Molevill" +
-            "e Mines, Area 06 (small room leading to Area 06)</string>\r\n  <string>Moleville M" +
-            "ines, Area 01 (entrance)</string>\r\n  <string>Moleville Mines, Area 05 (left of t" +
-            "rampoline room)</string>\r\n  <string>Moleville Mines, Area 03 (leads back to Area" +
-            " 1)</string>\r\n  <string>Moleville Mines, Area 08 (Croco\'s bombed room)</string>\r" +
-            "\n  <string>Moleville Mines, Area 15 (2-level room w/Sparky and 10-coin TC)</stri" +
-            "ng>\r\n  <string>Moleville Mines, Area 07 (from Croco\'s bombed room)</string>\r\n  <" +
-            "string>Moleville Mines, Area 10 (small room w/minecart tracks)</string>\r\n  <stri" +
-            "ng>Moleville Mines, Area 09 (leads left to Croco\'s bombed room)</string>\r\n  <str" +
-            "ing>Moleville Mines, Area 18 (minecart room)</string>\r\n  <string>Moleville Mines" +
-            ", Area 13 (long minecart tracks room)</string>\r\n  <string>Moleville Mines, Area " +
-            "12 (2-level room, leads to long minecart tracks room)</string>\r\n  <string>Molevi" +
-            "lle Mines, Area 14 (2-level room from long minecart tracks room)</string>\r\n  <st" +
-            "ring>Moleville Mines, Area 16 (large save-point room w/four Bob-ombs)</string>\r\n" +
-            "  <string>Moleville Mines, Area 17 (Punchinello\'s room)</string>\r\n  <string>Mole" +
-            "ville Mines, Area 19 (from outside after paying)</string>\r\n  <string>GAME INTRO:" +
-            " Booster Tower, 7F (parachuting Spookums)</string>\r\n  <string>____unmapped house" +
-            " room</string>\r\n  <string>____unmapped house room</string>\r\n  <string>____unmapp" +
-            "ed house room</string>\r\n  <string>____unmapped house room</string>\r\n  <string>__" +
-            "__unmapped house room</string>\r\n  <string>____unmapped outside townplace (resemb" +
-            "les Seaside Town)</string>\r\n  <string>____unmapped house room</string>\r\n  <strin" +
-            "g>____unmapped house room</string>\r\n  <string>____unmapped house room</string>\r\n" +
-            "  <string>Kero Sewers, Area 07 (water switch room w/Boos)</string>\r\n  <string>Ke" +
-            "ro Sewers, Area 08 (Belome\'s Room)</string>\r\n  <string>Kero Sewers, Area 08 (Bel" +
-            "ome\'s Room, after defeat)</string>\r\n  <string>Seaside Town, Outside</string>\r\n  " +
-            "<string>Seaside Town, Inn (1F)</string>\r\n  <string>Seaside Town, Inn (2F)</strin" +
-            "g>\r\n  <string>Seaside Town, Elder\'s house (1F)</string>\r\n  <string>Seaside Town," +
-            " Elder\'s house (2F)</string>\r\n  <string>Seaside Town, Beetles Are Us</string>\r\n " +
-            " <string>Seaside Town, Weapon and Armor shop</string>\r\n  <string>Seaside Town, H" +
-            "ealth Food Store</string>\r\n  <string>Seaside Town, Mushroom Boy\'s Shop</string>\r" +
-            "\n  <string>Seaside Town, Accessory Shop</string>\r\n  <string>Seaside Town, Shed</" +
-            "string>\r\n  <string>Seaside Town, during Yaridovich Beach</string>\r\n  <string>Sea" +
-            "side Town, Beach</string>\r\n  <string>Land\'s End Desert, Area 01</string>\r\n  <str" +
-            "ing>Land\'s End Desert, Area 02</string>\r\n  <string>Land\'s End Desert, Area 06</s" +
-            "tring>\r\n  <string>Mushroom Kingdom Castle, Entrance to Throne room</string>\r\n  <" +
-            "string>Bowser\'s Keep 6-door, Action Room 2-A (slow elevating platforms)</string>" +
-            "\r\n  <string>Bowser\'s Keep 6-door, Action Room 1-A (jumping Terrapin)</string>\r\n " +
-            " <string>Mushroom Kingdom Castle, during Mack entrance to Throne Room</string>\r\n" +
-            "  <string>Monstro Town, outside</string>\r\n  <string>Mushroom Kingdom Castle, dur" +
-            "ing Mack Main Hall</string>\r\n  <string>Mushroom Kingdom Castle, during Mack Thro" +
-            "ne Room</string>\r\n  <string>Mushroom Kingdom Castle, during Mack stairwell to To" +
-            "adstool\'s Room</string>\r\n  <string>Mushroom Kingdom Castle, during Mack Toadstoo" +
-            "l\'s Room</string>\r\n  <string>Mushroom Kingdom Castle, during Mack branch room to" +
-            " Vault/Guest Room</string>\r\n  <string>Mushroom Kingdom Castle, during Mack Guest" +
-            " room</string>\r\n  <string>Mushroom Kingdom Castle, during Mack Vault</string>\r\n " +
-            " <string>Mushroom Kingdom Castle, during Mack entrance to Toadstool\'s room</stri" +
-            "ng>\r\n  <string>Kero Sewers Entrance</string>\r\n  <string>Bean Valley pipe room, l" +
-            "eft-most pipe</string>\r\n  <string>Bean Valley pipe room, right-most pipe (large " +
-            "room)</string>\r\n  <string>Moleville, Item Shop</string>\r\n  <string>Moleville, In" +
-            "n</string>\r\n  <string>Moleville, Dyna and Mite\'s house</string>\r\n  <string>Molev" +
-            "ille, Fireworks shop</string>\r\n  <string>Moleville, Special item-trading shop</s" +
-            "tring>\r\n  <string>Nimbus Land, Garro\'s House</string>\r\n  <string>Nimbus Land, lo" +
-            "wer house</string>\r\n  <string>Nimbus Land, Inn</string>\r\n  <string>Nimbus Land, " +
-            "Item Shop</string>\r\n  <string>Nimbus Land, top-right house (Croco drops Signal R" +
-            "ing)</string>\r\n  <string>Nimbus Land, Inn (bedroom)</string>\r\n  <string>Bean Val" +
-            "ley pipe room, top pipe (leads to Grate Guy\'s Casino)</string>\r\n  <string>Bean V" +
-            "alley pipe room, bottom left</string>\r\n  <string>Bean Valley pipe room, bottom r" +
-            "ight</string>\r\n  <string>Smithy Factory, Area 01</string>\r\n  <string>Culex\'s Roo" +
-            "m</string>\r\n  <string>Volcano, Area 21 (Czar Dragon\'s room)</string>\r\n  <string>" +
-            "Volcano, Area 18 (Hino Mart)</string>\r\n  <string>Volcano, Area 01</string>\r\n  <s" +
-            "tring>Volcano, Area 03 (secret w/two flowers)</string>\r\n  <string>Volcano, Area " +
-            "08</string>\r\n  <string>Volcano, Post-CD Area 01</string>\r\n  <string>Volcano, Are" +
-            "a 11</string>\r\n  <string>Volcano, Area 02</string>\r\n  <string>Volcano, Area 04 (" +
-            "bunch of steps)</string>\r\n  <string>Volcano, Area 09</string>\r\n  <string>Volcano" +
-            ", Area 07 (stomping Corkpedite)</string>\r\n  <string>Volcano, Area 15 (stomping C" +
-            "orkpedite)</string>\r\n  <string>Volcano, Area 14</string>\r\n  <string>Volcano, Pos" +
-            "t-CD Area 03</string>\r\n  <string>Volcano, Area 13 (w/save point)</string>\r\n  <st" +
-            "ring>Volcano, Area 17 (leads to Hinopio\'s Shop)</string>\r\n  <string>Nimbus Land," +
-            " Royal Bus station</string>\r\n  <string>Nimbus Land, entrance (w/warp trampoline)" +
-            "</string>\r\n  <string>Nimbus Land, entrance to hot springs</string>\r\n  <string>Ni" +
-            "mbus Land, fall from platform (1st)</string>\r\n  <string>Nimbus Land, fall from p" +
-            "latform (2nd)</string>\r\n  <string>Nimbus Land, fall from platform (3rd)</string>" +
-            "\r\n  <string>Nimbus Land, fall from platform (4th)</string>\r\n  <string>ENDING CRE" +
-            "DITS: Star Pieces shoot through the sky</string>\r\n  <string>Bowser\'s Keep 6-door" +
-            ", Battle Room 2-B (1st fight: Chewy)</string>\r\n  <string>Bowser\'s Keep 6-door, B" +
-            "attle Room 2-C (1st fight: Sparky)</string>\r\n  <string>Bean Valley Beanstalks, A" +
-            "rea 01</string>\r\n  <string>Bean Valley Beanstalks, Area 02</string>\r\n  <string>B" +
-            "ean Valley Beanstalks, Area 03 (from right beanstalk of Area 02)</string>\r\n  <st" +
-            "ring>Bean Valley Beanstalks, Area 04 (from left beanstalk of Area 02)</string>\r\n" +
-            "  <string>Nimbus Land, entrance (no trampolines/exits)</string>\r\n  <string>Volca" +
-            "no, Area 10 (jumping Pyrospheres)</string>\r\n  <string>Volcano, Area 05</string>\r" +
-            "\n  <string>Volcano, Area 06</string>\r\n  <string>Volcano, Area 12 (erupting Stump" +
-            "et)</string>\r\n  <string>Volcano, Area 19 (from Hino Mart w/save point)</string>\r" +
-            "\n  <string>Volcano, Post-CD Area 02</string>\r\n  <string>Volcano, Area 20 (jumpin" +
-            "g Pyrospheres)</string>\r\n  <string>Volcano, Area 16 (erupting Stumpet)</string>\r" +
-            "\n  <string>Volcano, Post-CD Area 04</string>\r\n  <string>Volcano, Post-CD Area 06" +
-            "</string>\r\n  <string>Volcano, Post-CD Area 07 (warp to World Map)</string>\r\n  <s" +
-            "tring>Volcano, Post-CD Area 05</string>\r\n  <string>Monstro Town, Monstermama\'s h" +
-            "ouse (1F)</string>\r\n  <string>Monstro Town, Monstermama\'s house (2F)</string>\r\n " +
-            " <string>Monstro Town, super-jumping room</string>\r\n  <string>Monstro Town, Weap" +
-            "on and Armor Shop</string>\r\n  <string>Monstro Town, 3 Musty Fears Inn</string>\r\n" +
-            "  <string>Bowser\'s Keep, Area 13 (2nd throne room, Boomer\'s room)</string>\r\n  <s" +
-            "tring>Land\'s End secret underground, Area 02 (leads to Kero Sewers)</string>\r\n  " +
-            "<string>Land\'s End Desert, Area 03</string>\r\n  <string>Land\'s End Desert, Area 0" +
-            "5</string>\r\n  <string>Land\'s End Desert, Area 04</string>\r\n  <string>Booster Pas" +
-            "s, Secret</string>\r\n  <string>Factory Grounds, Area 01 (with Toad)</string>\r\n  <" +
-            "string>Land\'s End Cliff (climb w/Sky Troopas)</string>\r\n  <string>Nimbus Castle," +
-            " Area 14 (right-most front door of long 5-exit room) </string>\r\n  <string>Nimbus" +
-            " Castle, Area 09 (Birdo\'s Room)</string>\r\n  <string>Nimbus Castle, Area 07 (stra" +
-            "ight from Area 06 w/long staircase)</string>\r\n  <string>Nimbus Castle, path afte" +
-            "r Throne room (1st)</string>\r\n  <string>Nimbus Castle, Area 11 (long hallway, do" +
-            "or to King\'s Cellar)</string>\r\n  <string>Nimbus Castle, King\'s locked cellar</st" +
-            "ring>\r\n  <string>Nimbus Castle, Area 08 (from Area 07, get Room Key 1 here)</str" +
-            "ing>\r\n  <string>Nimbus Land, small platform after Nimbus Castle throne paths</st" +
-            "ring>\r\n  <string>Nimbus Land, outside (before Valentina)</string>\r\n  <string>Gar" +
-            "dener\'s House, outside</string>\r\n  <string>Gardener\'s House</string>\r\n  <string>" +
-            "Lazy Shell cloud</string>\r\n  <string>Belome Temple, Area 02 (Fortune Room)</stri" +
-            "ng>\r\n  <string>Belome Temple, Area 04 (room determined by fortune)</string>\r\n  <" +
-            "string>Belome Temple, Area 09 (Belome\'s Treasure room)</string>\r\n  <string>Belom" +
-            "e Temple, Area 06 (Belome\'s fortune room w/elevating platform)</string>\r\n  <stri" +
-            "ng>Belome Temple, Area 03 (pipe to room determined by fortune)</string>\r\n  <stri" +
-            "ng>Belome Temple, Area 05 (from Fortune Room)</string>\r\n  <string>Belome Temple," +
-            " Area 07 (pipe to Belome\'s room)</string>\r\n  <string>Belome Temple, Area 10 (pip" +
-            "e to Monstro Town)</string>\r\n  <string>Belome Temple, Area 01 (w/Warp Trampoline" +
-            ")</string>\r\n  <string>GAME INTRO: Nimbus Land, outside with patrolling Birdies</" +
-            "string>\r\n  <string>Nimbus Land, outside (during Valentina)</string>\r\n  <string>B" +
-            "owser\'s Keep 6-door, Puzzle Rooms</string>\r\n  <string>ENDING CREDITS: Johnny loo" +
-            "king out at sunset on beach shore</string>\r\n  <string>Smithy Factory, Area 01 __" +
-            "__dummy</string>\r\n  <string>Smithy Factory, Area 09 (falling Axem Reds on convey" +
-            "or belts)</string>\r\n  <string>ENDING CREDITS: Bowser\'s Keep, Bowser &amp; troops" +
-            " repair</string>\r\n  <string>Smithy Factory, Area 01 ____dummy</string>\r\n  <strin" +
-            "g>Nimbus Castle, path after Throne room (3rd)</string>\r\n  <string>Nimbus Land, o" +
-            "utside (after Valentina)</string>\r\n  <string>Bowser\'s Keep, outside (talk to Exo" +
-            "r)</string>\r\n  <string>Nimbus Castle, Area 13 (Throne room, after Valentina)</st" +
-            "ring>\r\n  <string>ENDING CREDITS: Toadofsky conducts choir</string>\r\n  <string>Sm" +
-            "ithy Factory, Area 11 (conveyor belts spawning Drill Bits and Macks)</string>\r\n " +
-            " <string>Smithy Factory, Area 16 (small room w/two treasures after falling Yarid" +
-            "ovich room)</string>\r\n  <string>Smithy Factory, Area 09 ____dummy</string>\r\n  <s" +
-            "tring>Smithy Factory, Area 10 (fall from Area 09)</string>\r\n  <string>Bowser\'s K" +
-            "eep 6-door, exit room after finishing 4 doors</string>\r\n  <string>Nimbus Land, h" +
-            "ot springs</string>\r\n  <string>Bowser\'s Keep, Area 09 (tall room, w/save point)<" +
-            "/string>\r\n  <string>Bowser\'s Keep, Area 11 (Thwomp/Bullet room after Magikoopa\'s" +
-            " room)</string>\r\n  <string>Bowser\'s Keep, Area 12 (Croco\'s Shop 2, after Magikoo" +
-            "pa\'s room)</string>\r\n  <string>Bowser\'s Keep, Area 07 (150 coins and a mushroom)" +
-            "</string>\r\n  <string>Bowser\'s Keep, Area 06 (save point w/Croco shop)</string>\r\n" +
-            "  <string>Bowser\'s Keep, Area 05 (dark tunnel, after throne room)</string>\r\n  <s" +
-            "tring>Bowser\'s Keep, Area 08 (room with 6 doors)</string>\r\n  <string>Bowser\'s Ke" +
-            "ep 6-door, Action Room 1-C (Gorilla throwing barrels)</string>\r\n  <string>Bowser" +
-            "\'s Keep 6-door, Action Room 2-C (very slow moving circling platforms)</string>\r\n" +
-            "  <string>Bowser\'s Keep 6-door, Action Room 2-B (cannonball riding)</string>\r\n  " +
-            "<string>Bowser\'s Keep 6-door, Action Room 1-B (moving platforms)</string>\r\n  <st" +
-            "ring>Bowser\'s Keep 6-door, Battle Room 1-A (1st fight: Terra Cotta)</string>\r\n  " +
-            "<string>Bowser\'s Keep 6-door, Battle Room 1-B (1st fight: Alley Rat)</string>\r\n " +
-            " <string>Bowser\'s Keep 6-door, Battle Room 1-C (1st fight: Bob-Omb)</string>\r\n  " +
-            "<string>Bowser\'s Keep 6-door, Battle Room 2-A (1st fight: Gu Goomba)</string>\r\n " +
-            " <string>Bowser\'s Keep 6-door, Puzzle Room 1-B (barrel-counting)</string>\r\n  <st" +
-            "ring>Bowser\'s Keep 6-door, Puzzle Room 1-A (quiz)</string>\r\n  <string>Bowser\'s K" +
-            "eep 6-door, Puzzle Room 2-B (green switches)</string>\r\n  <string>Bowser\'s Keep 6" +
-            "-door, Puzzle Room 1-C (word problem)</string>\r\n  <string>Bowser\'s Keep 6-door, " +
-            "Puzzle Room 2-A (coin collecting)</string>\r\n  <string>Bowser\'s Keep 6-door, Puzz" +
-            "le Room 2-C (ball solitaire)</string>\r\n  <string>Factory Grounds, Area 01</strin" +
-            "g>\r\n  <string>Factory Grounds, Area 04 (Gun Yolk\'s room)</string>\r\n  <string>Fac" +
-            "tory Grounds, Area 02</string>\r\n  <string>Factory Grounds, Area 03</string>\r\n  <" +
-            "string>Smithy Factory, Area 13 (Bowyers falling down conveyor belts)</string>\r\n " +
-            " <string>Smithy Factory, Area 15 (falling Yaridovichs)</string>\r\n  <string>Smith" +
-            "y Factory, Area 12 (lots of consecutive conveyor belts and LIL~BOOS)</string>\r\n " +
-            " <string>Bowser\'s Keep 2nd Time, Area 01</string>\r\n  <string>Bowser\'s Keep 2nd T" +
-            "ime, Area 02</string>\r\n  <string>Bowser\'s Keep 2nd Time, Area 03 (lava room w/br" +
-            "idge)</string>\r\n  <string>Bowser\'s Keep 2nd Time, Area 04 (Throne Room)</string>" +
-            "\r\n  <string>Mushroom Kingdom, during Mack, jumping kid\'s house (1F)</string>\r\n  " +
-            "<string>Mushroom Kingdom, during Mack, jumping kid\'s house (2F)</string>\r\n  <str" +
-            "ing>Mushroom Kingdom, during Mack, Raz and Raini\'s house</string>\r\n  <string>Mus" +
-            "hroom Kingdom, during Mack, Item Shop (top floor)</string>\r\n  <string>Mushroom K" +
-            "ingdom, during Mack, Item Shop (basement)</string>\r\n  <string>Mushroom Kingdom, " +
-            "during Mack, Inn (1F)</string>\r\n  <string>ENDING CREDITS: Star Pieces (Rose Town" +
-            "), last star piece to ‘Thank You\'</string>\r\n  <string>Mushroom Kingdom, during M" +
-            "ack, running kid\'s house</string>\r\n  <string>Mushroom Kingdom, jumping kid\'s hou" +
-            "se (1F)</string>\r\n  <string>Mushroom Kingdom, jumping kid\'s house (2F)</string>\r" +
-            "\n  <string>Mushroom Kingdom, Raz and Raini\'s house</string>\r\n  <string>Mushroom " +
-            "Kingdom, Item Shop (top floor)</string>\r\n  <string>Mushroom Kingdom, Item Shop (" +
-            "basement)</string>\r\n  <string>Mushroom Kingdom, Inn (1F)</string>\r\n  <string>Mus" +
-            "hroom Kingdom, Inn (2F)</string>\r\n  <string>Mushroom Kingdom, running kid\'s hous" +
-            "e</string>\r\n  <string>Factory Grounds, fight with Smithy (uses Sledge)</string>\r" +
-            "\n  <string>Nimbus Castle, Area 06 ____dummy</string>\r\n  <string>Nimbus Castle, A" +
-            "rea 10 ____dummy</string>\r\n  <string>Nimbus Castle, Area 05 (long 5-exit room, a" +
-            "fter Valentina)</string>\r\n  <string>Nimbus Castle, Area 04 ____dummy</string>\r\n " +
-            " <string>Nimbus Castle, Area 03 (4-way path, after Valentina)</string>\r\n  <strin" +
-            "g>Nimbus Land, Dream Cushion Dream: small cloud, person cheers on Mario/bed floa" +
-            "ts</string>\r\n  <string>Nimbus Land, Dream Cushion Dream: Heavy Troopa laying on " +
-            "Mario</string>\r\n  <string>Nimbus Land, Dream Cushion Dream: Tortes are seasoning" +
-            " Mario</string>\r\n  <string>ENDING CREDITS: Yo\'ster Isle, Croco racing Yoshi</str" +
-            "ing>\r\n  <string>ENDING CREDITS: Marrymore Chapel, Booster wedding Valentina</str" +
-            "ing>\r\n  <string>Smithy Factory, Area 08 (Trampoline after Count Down)</string>\r\n" +
-            "  <string>Smithy Factory, Area 14 (w/save point)</string>\r\n  <string>Factory Gro" +
-            "unds, Smithy\'s Pad</string>\r\n  <string>Moleville Mines, Area 19 ____dummy</strin" +
-            "g>\r\n  <string>Moleville Mines, Area 19 ____dummy</string>\r\n</ArrayOfString>")]
+            "wer, 8F Area 02 (Zoom Shoes room)</string>\r\n  <string>Mushroom Kingdom, before C" +
+            "roco, Inn (1F)</string>\r\n  <string>____blue BG, nothing there</string>\r\n  <strin" +
+            "g>Mushroom Kingdom, before Croco, running kid\'s house</string>\r\n  <string>Mushro" +
+            "om Kingdom, Inn (2F)</string>\r\n  <string>Mushroom Kingdom, before Croco, Item Sh" +
+            "op (basement)</string>\r\n  <string>Booster Hill ____dummy</string>\r\n  <string>Pip" +
+            "e Vault Entrance</string>\r\n  <string>Kero Sewers, Area 02 (long room w/three pip" +
+            "es)</string>\r\n  <string>Kero Sewers, Area 03 (large water room w/pipe in center)" +
+            "</string>\r\n  <string>Kero Sewers, Area 06 (long water room w/Rat Funks in a line" +
+            ")</string>\r\n  <string>Kero Sewers, Area 05 (super star room w/four Rat Funks)</s" +
+            "tring>\r\n  <string>Kero Sewers, Area 04 (large room w/Pandorite and hiding Rat Fu" +
+            "nks)</string>\r\n  <string>Nimbus Land, outside (during Valentina right before fig" +
+            "ht)</string>\r\n  <string>Kero Sewers, Area 01 (water room w/save)</string>\r\n  <st" +
+            "ring>Marrymore Scene</string>\r\n  <string>Marrymore, outside</string>\r\n  <string>" +
+            "Marrymore Chapel, sanctuary</string>\r\n  <string>Rose Way, exit Area where Bowser" +
+            "\'s Troops gathered</string>\r\n  <string>Midas River, business transaction Area</s" +
+            "tring>\r\n  <string>Midas River, barrel jumping river</string>\r\n  <string>Midas Ri" +
+            "ver, waterfall</string>\r\n  <string>Midas River, 1st tunnel</string>\r\n  <string>M" +
+            "idas River, 2nd tunnel (both left and right)</string>\r\n  <string>Midas River, 3r" +
+            "d tunnel (on left)</string>\r\n  <string>Midas River, 4th tunnel (on very bottom r" +
+            "ight)</string>\r\n  <string>Tadpole Pond, Area 02</string>\r\n  <string>Tadpole Pond" +
+            ", Area 01</string>\r\n  <string>Bandit\'s Way, Area 01</string>\r\n  <string>Bandit\'s" +
+            " Way, Area 03</string>\r\n  <string>Bandit\'s Way, Area 04</string>\r\n  <string>Rose" +
+            " Way, main Area</string>\r\n  <string>Rose Way, two fast-floating platforms</strin" +
+            "g>\r\n  <string>Rose Way, treasure chests w/coins Area</string>\r\n  <string>Rose Wa" +
+            "y, winding path w/Crooks</string>\r\n  <string>Rose Town, during Bowyer outside</s" +
+            "tring>\r\n  <string>Rose Town, outside</string>\r\n  <string>Rose Town, during Bowye" +
+            "r Inn (1F)</string>\r\n  <string>Rose Town, Inn (1F)</string>\r\n  <string>Rose Town" +
+            ", Item Shop</string>\r\n  <string>Smithy\'s Final Form Defeat: Geno\'s Redemption</s" +
+            "tring>\r\n  <string>Rose Town, during Bowyer three grandkids\' house</string>\r\n  <s" +
+            "tring>Rose Town, three grandkids\' house</string>\r\n  <string>Rose Town, couple\'s " +
+            "house</string>\r\n  <string>Grate Guy\'s Casino, inside casino</string>\r\n  <string>" +
+            "Rose Town, during Bowyer treasure house (1F)</string>\r\n  <string>Rose Town, trea" +
+            "sure house (1F)</string>\r\n  <string>Rose Town, during Bowyer Inn (2F)</string>\r\n" +
+            "  <string>Rose Town, Inn (2F)</string>\r\n  <string>Rose Town, during Bowyer treas" +
+            "ure house (2F)</string>\r\n  <string>Rose Town, treasure house (2F)</string>\r\n  <s" +
+            "tring>Rose Town, Geno Awakens in Inn (1F)</string>\r\n  <string>Booster Pass, Area" +
+            " 01</string>\r\n  <string>Booster Pass, Area 02</string>\r\n  <string>Moleville, Out" +
+            "side (at exit from Mines)</string>\r\n  <string>Smithy Factory, Area 17 (Domino an" +
+            "d Cloaker\'s room)</string>\r\n  <string>Grate Guy\'s Casino, front door</string>\r\n " +
+            " <string>Moleville, Dyna and Mite\'s House ____dummy</string>\r\n  <string>Grate Gu" +
+            "y\'s Casino, outside</string>\r\n  <string>Nimbus Castle, Area 09 (Statue Room, aft" +
+            "er Valentina)</string>\r\n  <string>Moleville, Outside</string>\r\n  <string>Nimbus " +
+            "Castle, Area 01 (entrance hall)</string>\r\n  <string>Nimbus Castle, Area 18 (Dodo" +
+            "\'s statue-polishing room)</string>\r\n  <string>Nimbus Castle, Area 04 (left of 4-" +
+            "way path, right-angle red brick path w/ treasure)</string>\r\n  <string>Nimbus Cas" +
+            "tle, Area 17 (right of 4-way path, Save Point)</string>\r\n  <string>Nimbus Castle" +
+            ", Area 16 (small two-door room w/treasure, from Area 15)</string>\r\n  <string>Nim" +
+            "bus Castle, Area 10 (red brick 2-level room w/treasure from Birdo\'s room)</strin" +
+            "g>\r\n  <string>Nimbus Castle, Area 03 (4-way path, during Valentina)</string>\r\n  " +
+            "<string>Nimbus Castle, Area 02 (left of Area 01)</string>\r\n  <string>Nimbus Cast" +
+            "le, Area 15 (front of 4-way path, large right-angle room w/ plant)</string>\r\n  <" +
+            "string>Nimbus Castle, Area 05 (long 5-exit room, during Valentina)</string>\r\n  <" +
+            "string>Nimbus Castle, Area 06 (left-most front door from Area 05)</string>\r\n  <s" +
+            "tring>Nimbus Castle, Area 13 (Throne Room, during Valentina)</string>\r\n  <string" +
+            ">Nimbus Castle, path after Throne Room (2nd)</string>\r\n  <string>Nimbus Castle, " +
+            "Area 12 (entrance to throne room)</string>\r\n  <string>Pipe Vault, Area 01</strin" +
+            "g>\r\n  <string>Pipe Vault, Area 03 (line of pipes)</string>\r\n  <string>Pipe Vault" +
+            ", Area 04 (line of coins, 2 hidden treasures)</string>\r\n  <string>Pipe Vault, Ar" +
+            "ea 06 (line of red pipes)</string>\r\n  <string>Pipe Vault, Area 02</string>\r\n  <s" +
+            "tring>Pipe Vault, Area 07 (long path w/moving platforms)</string>\r\n  <string>Pip" +
+            "e Vault, Area 05</string>\r\n  <string>Sea, Area 02 (large room with shop)</string" +
+            ">\r\n  <string>Sea, Area 04 (bunch of Zeostars)</string>\r\n  <string>Sea, Area 05 (" +
+            "from Area 02 w/save point)</string>\r\n  <string>Sea, Area 06 (water room w/whirlp" +
+            "ools)</string>\r\n  <string>Sea, Area 03 (super star room)</string>\r\n  <string>Sea" +
+            ", Area 01 (entrance)</string>\r\n  <string>Sea, Area 07 (small underwater room)</s" +
+            "tring>\r\n  <string>Land\'s End, Area 01</string>\r\n  <string>Land\'s End, Area 02</s" +
+            "tring>\r\n  <string>Land\'s End, Area 03 (Geckits playing cannonball)</string>\r\n  <" +
+            "string>Land\'s End, Area 01,2 (nothing there, unused?)</string>\r\n  <string>Land\'s" +
+            " End, Area 04 (rotating flowers)</string>\r\n  <string>Land\'s End, Area 05 (sky br" +
+            "idge)</string>\r\n  <string>Pipe Vault, Goomba-thumping room</string>\r\n  <string>B" +
+            "owser\'s Keep 6-door, treasure after each room</string>\r\n  <string>Star Hill, Are" +
+            "a 01</string>\r\n  <string>Pipe Vault, Area 02 ___dummy</string>\r\n  <string>GAME I" +
+            "NTRO: Midas River, water tunnel</string>\r\n  <string>GAME INTRO: Bandit\'s Way, Ar" +
+            "ea 04</string>\r\n  <string>GAME INTRO: Midas River, Barrel Jumping</string>\r\n  <s" +
+            "tring>GAME INTRO: Moleville, outside during Bowser\'s troop scene</string>\r\n  <st" +
+            "ring>GAME INTRO: Booster Hill</string>\r\n  <string>Marrymore Chapel, main hall</s" +
+            "tring>\r\n  <string>Marrymore Chapel, entrance to sanctuary</string>\r\n  <string>Ma" +
+            "rrymore Chapel, sanctuary (during Booster)</string>\r\n  <string>Marrymore Chapel," +
+            " kitchen</string>\r\n  <string>Marrymore Chapel, kitchen (no sprites/exits, unused" +
+            "?)</string>\r\n  <string>Star Hill, Area 03</string>\r\n  <string>Star Hill, Area 02" +
+            "</string>\r\n  <string>Star Hill, Area 04</string>\r\n  <string>Sunken Ship, Area 01" +
+            "</string>\r\n  <string>Sunken Ship, Area 03 (Greapers)</string>\r\n  <string>Sunken " +
+            "Ship, Area 04 (Greapers &amp; Dry Bones)</string>\r\n  <string>Sunken Ship, puzzle" +
+            " room 2</string>\r\n  <string>Sunken Ship, Area 02 (from entrance w/save point)</s" +
+            "tring>\r\n  <string>Sunken Ship, Area 06 (puzzle room passageway)</string>\r\n  <str" +
+            "ing>Sunken Ship, puzzle room 1</string>\r\n  <string>Sunken Ship, Area 05 (long st" +
+            "airwell with running Alley Rats)</string>\r\n  <string>Sunken Ship, puzzle room 3<" +
+            "/string>\r\n  <string>Sunken Ship, Area 07 (puzzle room passageway branch room w/S" +
+            "haman)</string>\r\n  <string>Sunken Ship, Area 14 ____dummy</string>\r\n  <string>Su" +
+            "nken Ship, puzzle room 4</string>\r\n  <string>Sunken Ship, puzzle room 5</string>" +
+            "\r\n  <string>Sunken Ship, post-KC Area 01 (small room w/Trampoline)</string>\r\n  <" +
+            "string>Sea, Area 08 (shore with Sunken Ship)</string>\r\n  <string>Sunken Ship, po" +
+            "st-KC Area 05 (w/Dry Bones, linked by Mario mirror room)</string>\r\n  <string>Sun" +
+            "ken Ship, Area 08 (w/save point and green switch for barrel)</string>\r\n  <string" +
+            ">Sunken Ship, Area 09 (Password room)</string>\r\n  <string>Sunken Ship, post-KC A" +
+            "rea 04 (long stairwell w/running Alley Rats)</string>\r\n  <string>Sunken Ship, po" +
+            "st-KC Area 06 (Mario Mirror room)</string>\r\n  <string>Sunken Ship, post-KC Area " +
+            "02 (small 2-level room)</string>\r\n  <string>Sunken Ship, post-KC Area 03 (Alley " +
+            "Rats on cannons)</string>\r\n  <string>Sunken Ship, post-KC Area 07 (three Dry Bon" +
+            "es)</string>\r\n  <string>Sunken Ship, post-KC Area 08 (secret room with Frog Coin" +
+            ")</string>\r\n  <string>Sunken Ship, post-KC Area 09 (Hidon\'s room w/save point)</" +
+            "string>\r\n  <string>Sunken Ship, post-KC Area 14 (secret Safety Ring)</string>\r\n " +
+            " <string>Sunken Ship, post-KC Area 18 (warp room from Johnny\'s room)</string>\r\n " +
+            " <string>Sunken Ship, post-KC Area 10 (water room with frog coins)</string>\r\n  <" +
+            "string>Sunken Ship, post-KC Area 11 (water room with whirlpool)</string>\r\n  <str" +
+            "ing>Mario\'s Pipehouse</string>\r\n  <string>Mushroom Kingdom, during Mack, Outside" +
+            "</string>\r\n  <string>Mushroom Kingdom, Outside</string>\r\n  <string>Booster Tower" +
+            ", 9F Area 02 (Booster\'s curtain game room)</string>\r\n  <string>Booster Tower, 2F" +
+            " Area 03 (steps w/circling Bob-ombs)</string>\r\n  <string>Booster Tower, 2F Area " +
+            "02 (Booster\'s railway room)</string>\r\n  <string>Booster Tower, 6F Area 02 (Boost" +
+            "er\'s Ancestor Game room)</string>\r\n  <string>Booster Tower, 2F Area 01 (w/consta" +
+            "ntly appearing Spookums)</string>\r\n  <string>Booster Tower, 1F Area 02 (high Mas" +
+            "her room w/teeter-totter)</string>\r\n  <string>Booster Tower, 8F Area 03 (3-level" +
+            " w/one Chomp)</string>\r\n  <string>Booster Tower, 9F Area 01 (three yellow platfo" +
+            "rms w/save point)</string>\r\n  <string>Booster Tower, 6F Area 03 (Elder\'s Room w/" +
+            "Chomp)</string>\r\n  <string>Booster Tower, 6F Area 01 (small room w/save point)</" +
+            "string>\r\n  <string>Booster Tower Entrance</string>\r\n  <string>Mushroom Way, Area" +
+            " 01</string>\r\n  <string>Mushroom Way, Area 02</string>\r\n  <string>Mushroom Way, " +
+            "Area 03</string>\r\n  <string>Bandit\'s Way, Area 05</string>\r\n  <string>Bandit\'s W" +
+            "ay, Area 02</string>\r\n  <string>Seaside Town, during Yaridovich Outside</string>" +
+            "\r\n  <string>Seaside Town, during Yaridovich Inn (1F)</string>\r\n  <string>Seaside" +
+            " Town, during Yaridovich Inn (2F)</string>\r\n  <string>Seaside Town, during Yarid" +
+            "ovich Elder\'s House (1F)</string>\r\n  <string>Seaside Town, during Yaridovich Eld" +
+            "er\'s House (2F)</string>\r\n  <string>Seaside Town, during Yaridovich Beetles Are " +
+            "Us/Bomb Shop</string>\r\n  <string>Seaside Town, during Yaridovich Weapons and Arm" +
+            "or Shop</string>\r\n  <string>Seaside Town, during Yaridovich Health Food Store (l" +
+            "eft-most)</string>\r\n  <string>Seaside Town, during Yaridovich Mushroom Boy Shop " +
+            "(middle)</string>\r\n  <string>Seaside Town, during Yaridovich Accessory Shop (rig" +
+            "ht-most)</string>\r\n  <string>Seaside Town, during Yaridovich Shed (unused b/c in" +
+            "accessible)</string>\r\n  <string>GAME INTRO: Sea, shore with Sunken Ship</string>" +
+            "\r\n  <string>Smithy Factory, Area 02 (w/save point)</string>\r\n  <string>Smithy Fa" +
+            "ctory, Area 04 (green switch w/Ameboids)</string>\r\n  <string>Smithy Factory, Are" +
+            "a 03 (Glum Reapers)</string>\r\n  <string>Smithy Factory, Area 07 (Count Down\'s ro" +
+            "om)</string>\r\n  <string>Forest Maze, Area 01</string>\r\n  <string>Forest Maze, Ar" +
+            "ea 05 (tree trunk Area)</string>\r\n  <string>Forest Maze, Area 02</string>\r\n  <st" +
+            "ring>Forest Maze, Area 09 (leads to 4-path maze)</string>\r\n  <string>Forest Maze" +
+            ", Area 04</string>\r\n  <string>Forest Maze, Area 06</string>\r\n  <string>Forest Ma" +
+            "ze, 4-way path from Area 09</string>\r\n  <string>Forest Maze, Secret entrance</st" +
+            "ring>\r\n  <string>Forest Maze, Bowyer\'s practice pad</string>\r\n  <string>Forest M" +
+            "aze, Area 03 (underground)</string>\r\n  <string>Forest Maze, Secret</string>\r\n  <" +
+            "string>Forest Maze, Area 08 (underground)</string>\r\n  <string>Forest Maze, Area " +
+            "07 (underground w/sleeping Wiggler)</string>\r\n  <string>Smithy Factory, Area 05 " +
+            "(w/save point)</string>\r\n  <string>Smithy Factory, fall from lugnut rooms (Area " +
+            "06 &amp; prior)</string>\r\n  <string>Smithy Factory, Area 06 (Ultra Hammer)</stri" +
+            "ng>\r\n  <string>Volcano, Area 21 ____dummy</string>\r\n  <string>Volcano, Area 02 _" +
+            "___dummy</string>\r\n  <string>Forest Maze, all tree trunk underground areas</stri" +
+            "ng>\r\n  <string>GAME INTRO: Mushroom Kingdom Castle, Throne Room</string>\r\n  <str" +
+            "ing>GAME INTRO: Yo\'ster Isle, talk to Yoshi &amp; run around</string>\r\n  <string" +
+            ">GAME INTRO: Pipe Vault, Area 02 (w/Thwomp)</string>\r\n  <string>GAME INTRO: Kero" +
+            " Sewers, Entrance</string>\r\n  <string>GAME INTRO: Tadpole Pond, Mario summons ta" +
+            "dpoles</string>\r\n  <string>GAME INTRO: Mushroom Way, Area 01</string>\r\n  <string" +
+            ">GAME INTRO: Vista Hill</string>\r\n  <string>GAME INTRO: Booster Tower, balcony w" +
+            "ith Toadstool crying</string>\r\n  <string>Bean Valley, piranha pipe Area</string>" +
+            "\r\n  <string>Bean Valley, main Area</string>\r\n  <string>Bean Valley, magic brick " +
+            "to Beanstalk Area</string>\r\n  <string>Bean Valley, Smilax Area</string>\r\n  <stri" +
+            "ng>Monstro Town, Jinx\'s Dojo</string>\r\n  <string>Forest Maze, Small area w/tree " +
+            "trunk (unused?)</string>\r\n  <string>GAME INTRO: Forest Maze, fighting Magikoopa " +
+            "at Bowyer\'s Pad</string>\r\n  <string>Booster Tower, Balcony at top floor</string>" +
+            "\r\n  <string>Booster Tower, 3F Area 01 (green switch for BP secret)</string>\r\n  <" +
+            "string>GAME INTRO: Forest Maze, jumping on Wiggler</string>\r\n  <string>Bowser\'s " +
+            "Keep 1st time, Area 03 (lava room w/bridge)</string>\r\n  <string>Land\'s End Under" +
+            "ground, Area 04 (buy super stars)</string>\r\n  <string>Land\'s End Underground, Ar" +
+            "ea 01</string>\r\n  <string>Land\'s End Underground, Area 02</string>\r\n  <string>La" +
+            "nd\'s End Underground, Area 03</string>\r\n  <string>Bowser\'s Keep, Area 10 (Magiko" +
+            "opa\'s room)</string>\r\n  <string>Monstro Town, entrance</string>\r\n  <string>Belom" +
+            "e Temple, Area 08 (Belome\'s room)</string>\r\n  <string>ENDING CREDITS: Nimbus Lan" +
+            "d, Prince Mallow</string>\r\n  <string>Land\'s End secret underground, Area 01 (lea" +
+            "ds to Kero Sewers)</string>\r\n  <string>Moleville Mines, Area 17 (Punchinello\'s r" +
+            "oom)</string>\r\n  <string>Moleville Mines, Area 11 (bombed room w/singing Moles)<" +
+            "/string>\r\n  <string>Moleville Mines, Area 04 (w/trampoline)</string>\r\n  <string>" +
+            "Moleville Mines, Area 02</string>\r\n  <string>Moleville Mines, Area 06 (small roo" +
+            "m leading to Area 06)</string>\r\n  <string>Moleville Mines, Area 01 (entrance)</s" +
+            "tring>\r\n  <string>Moleville Mines, Area 05 (left of trampoline room)</string>\r\n " +
+            " <string>Moleville Mines, Area 03 (leads back to Area 1)</string>\r\n  <string>Mol" +
+            "eville Mines, Area 08 (Croco\'s bombed room)</string>\r\n  <string>Moleville Mines," +
+            " Area 15 (2-level room w/Sparky and 10-coin TC)</string>\r\n  <string>Moleville Mi" +
+            "nes, Area 07 (from Croco\'s bombed room)</string>\r\n  <string>Moleville Mines, Are" +
+            "a 10 (small room w/minecart tracks)</string>\r\n  <string>Moleville Mines, Area 09" +
+            " (leads left to Croco\'s bombed room)</string>\r\n  <string>Moleville Mines, Area 1" +
+            "8 (minecart room)</string>\r\n  <string>Moleville Mines, Area 13 (long minecart tr" +
+            "acks room)</string>\r\n  <string>Moleville Mines, Area 12 (2-level room, leads to " +
+            "long minecart tracks room)</string>\r\n  <string>Moleville Mines, Area 14 (2-level" +
+            " room from long minecart tracks room)</string>\r\n  <string>Moleville Mines, Area " +
+            "16 (large save-point room w/four Bob-ombs)</string>\r\n  <string>Moleville Mines, " +
+            "Area 17 (Punchinello\'s room)</string>\r\n  <string>Moleville Mines, Area 19 (from " +
+            "outside after paying)</string>\r\n  <string>GAME INTRO: Booster Tower, 7F (parachu" +
+            "ting Spookums)</string>\r\n  <string>____unmapped house room</string>\r\n  <string>_" +
+            "___unmapped house room</string>\r\n  <string>____unmapped house room</string>\r\n  <" +
+            "string>____unmapped house room</string>\r\n  <string>____unmapped house room</stri" +
+            "ng>\r\n  <string>____unmapped outside townplace (resembles Seaside Town)</string>\r" +
+            "\n  <string>____unmapped house room</string>\r\n  <string>____unmapped house room</" +
+            "string>\r\n  <string>____unmapped house room</string>\r\n  <string>Kero Sewers, Area" +
+            " 07 (water switch room w/Boos)</string>\r\n  <string>Kero Sewers, Area 08 (Belome\'" +
+            "s Room)</string>\r\n  <string>Kero Sewers, Area 08 (Belome\'s Room, after defeat)</" +
+            "string>\r\n  <string>Seaside Town, Outside</string>\r\n  <string>Seaside Town, Inn (" +
+            "1F)</string>\r\n  <string>Seaside Town, Inn (2F)</string>\r\n  <string>Seaside Town," +
+            " Elder\'s house (1F)</string>\r\n  <string>Seaside Town, Elder\'s house (2F)</string" +
+            ">\r\n  <string>Seaside Town, Beetles Are Us</string>\r\n  <string>Seaside Town, Weap" +
+            "on and Armor shop</string>\r\n  <string>Seaside Town, Health Food Store</string>\r\n" +
+            "  <string>Seaside Town, Mushroom Boy\'s Shop</string>\r\n  <string>Seaside Town, Ac" +
+            "cessory Shop</string>\r\n  <string>Seaside Town, Shed</string>\r\n  <string>Seaside " +
+            "Town, during Yaridovich Beach</string>\r\n  <string>Seaside Town, Beach</string>\r\n" +
+            "  <string>Land\'s End Desert, Area 01</string>\r\n  <string>Land\'s End Desert, Area" +
+            " 02</string>\r\n  <string>Land\'s End Desert, Area 06</string>\r\n  <string>Mushroom " +
+            "Kingdom Castle, Entrance to Throne room</string>\r\n  <string>Bowser\'s Keep 6-door" +
+            ", Action Room 2-A (slow elevating platforms)</string>\r\n  <string>Bowser\'s Keep 6" +
+            "-door, Action Room 1-A (jumping Terrapin)</string>\r\n  <string>Mushroom Kingdom C" +
+            "astle, during Mack entrance to Throne Room</string>\r\n  <string>Monstro Town, out" +
+            "side</string>\r\n  <string>Mushroom Kingdom Castle, during Mack Main Hall</string>" +
+            "\r\n  <string>Mushroom Kingdom Castle, during Mack Throne Room</string>\r\n  <string" +
+            ">Mushroom Kingdom Castle, during Mack stairwell to Toadstool\'s Room</string>\r\n  " +
+            "<string>Mushroom Kingdom Castle, during Mack Toadstool\'s Room</string>\r\n  <strin" +
+            "g>Mushroom Kingdom Castle, during Mack branch room to Vault/Guest Room</string>\r" +
+            "\n  <string>Mushroom Kingdom Castle, during Mack Guest room</string>\r\n  <string>M" +
+            "ushroom Kingdom Castle, during Mack Vault</string>\r\n  <string>Mushroom Kingdom C" +
+            "astle, during Mack entrance to Toadstool\'s room</string>\r\n  <string>Kero Sewers " +
+            "Entrance</string>\r\n  <string>Bean Valley pipe room, left-most pipe</string>\r\n  <" +
+            "string>Bean Valley pipe room, right-most pipe (large room)</string>\r\n  <string>M" +
+            "oleville, Item Shop</string>\r\n  <string>Moleville, Inn</string>\r\n  <string>Molev" +
+            "ille, Dyna and Mite\'s house</string>\r\n  <string>Moleville, Fireworks shop</strin" +
+            "g>\r\n  <string>Moleville, Special item-trading shop</string>\r\n  <string>Nimbus La" +
+            "nd, Garro\'s House</string>\r\n  <string>Nimbus Land, lower house</string>\r\n  <stri" +
+            "ng>Nimbus Land, Inn</string>\r\n  <string>Nimbus Land, Item Shop</string>\r\n  <stri" +
+            "ng>Nimbus Land, top-right house (Croco drops Signal Ring)</string>\r\n  <string>Ni" +
+            "mbus Land, Inn (bedroom)</string>\r\n  <string>Bean Valley pipe room, top pipe (le" +
+            "ads to Grate Guy\'s Casino)</string>\r\n  <string>Bean Valley pipe room, bottom lef" +
+            "t</string>\r\n  <string>Bean Valley pipe room, bottom right</string>\r\n  <string>Sm" +
+            "ithy Factory, Area 01</string>\r\n  <string>Culex\'s Room</string>\r\n  <string>Volca" +
+            "no, Area 21 (Czar Dragon\'s room)</string>\r\n  <string>Volcano, Area 18 (Hino Mart" +
+            ")</string>\r\n  <string>Volcano, Area 01</string>\r\n  <string>Volcano, Area 03 (sec" +
+            "ret w/two flowers)</string>\r\n  <string>Volcano, Area 08</string>\r\n  <string>Volc" +
+            "ano, Post-CD Area 01</string>\r\n  <string>Volcano, Area 11</string>\r\n  <string>Vo" +
+            "lcano, Area 02</string>\r\n  <string>Volcano, Area 04 (bunch of steps)</string>\r\n " +
+            " <string>Volcano, Area 09</string>\r\n  <string>Volcano, Area 07 (stomping Corkped" +
+            "ite)</string>\r\n  <string>Volcano, Area 15 (stomping Corkpedite)</string>\r\n  <str" +
+            "ing>Volcano, Area 14</string>\r\n  <string>Volcano, Post-CD Area 03</string>\r\n  <s" +
+            "tring>Volcano, Area 13 (w/save point)</string>\r\n  <string>Volcano, Area 17 (lead" +
+            "s to Hinopio\'s Shop)</string>\r\n  <string>Nimbus Land, Royal Bus station</string>" +
+            "\r\n  <string>Nimbus Land, entrance (w/warp trampoline)</string>\r\n  <string>Nimbus" +
+            " Land, entrance to hot springs</string>\r\n  <string>Nimbus Land, fall from platfo" +
+            "rm (1st)</string>\r\n  <string>Nimbus Land, fall from platform (2nd)</string>\r\n  <" +
+            "string>Nimbus Land, fall from platform (3rd)</string>\r\n  <string>Nimbus Land, fa" +
+            "ll from platform (4th)</string>\r\n  <string>ENDING CREDITS: Star Pieces shoot thr" +
+            "ough the sky</string>\r\n  <string>Bowser\'s Keep 6-door, Battle Room 2-B (1st figh" +
+            "t: Chewy)</string>\r\n  <string>Bowser\'s Keep 6-door, Battle Room 2-C (1st fight: " +
+            "Sparky)</string>\r\n  <string>Bean Valley Beanstalks, Area 01</string>\r\n  <string>" +
+            "Bean Valley Beanstalks, Area 02</string>\r\n  <string>Bean Valley Beanstalks, Area" +
+            " 03 (from right beanstalk of Area 02)</string>\r\n  <string>Bean Valley Beanstalks" +
+            ", Area 04 (from left beanstalk of Area 02)</string>\r\n  <string>Nimbus Land, entr" +
+            "ance (no trampolines/exits)</string>\r\n  <string>Volcano, Area 10 (jumping Pyrosp" +
+            "heres)</string>\r\n  <string>Volcano, Area 05</string>\r\n  <string>Volcano, Area 06" +
+            "</string>\r\n  <string>Volcano, Area 12 (erupting Stumpet)</string>\r\n  <string>Vol" +
+            "cano, Area 19 (from Hino Mart w/save point)</string>\r\n  <string>Volcano, Post-CD" +
+            " Area 02</string>\r\n  <string>Volcano, Area 20 (jumping Pyrospheres)</string>\r\n  " +
+            "<string>Volcano, Area 16 (erupting Stumpet)</string>\r\n  <string>Volcano, Post-CD" +
+            " Area 04</string>\r\n  <string>Volcano, Post-CD Area 06</string>\r\n  <string>Volcan" +
+            "o, Post-CD Area 07 (warp to World Map)</string>\r\n  <string>Volcano, Post-CD Area" +
+            " 05</string>\r\n  <string>Monstro Town, Monstermama\'s house (1F)</string>\r\n  <stri" +
+            "ng>Monstro Town, Monstermama\'s house (2F)</string>\r\n  <string>Monstro Town, supe" +
+            "r-jumping room</string>\r\n  <string>Monstro Town, Weapon and Armor Shop</string>\r" +
+            "\n  <string>Monstro Town, 3 Musty Fears Inn</string>\r\n  <string>Bowser\'s Keep, Ar" +
+            "ea 13 (2nd throne room, Boomer\'s room)</string>\r\n  <string>Land\'s End secret und" +
+            "erground, Area 02 (leads to Kero Sewers)</string>\r\n  <string>Land\'s End Desert, " +
+            "Area 03</string>\r\n  <string>Land\'s End Desert, Area 05</string>\r\n  <string>Land\'" +
+            "s End Desert, Area 04</string>\r\n  <string>Booster Pass, Secret</string>\r\n  <stri" +
+            "ng>Factory Grounds, Area 01 (with Toad)</string>\r\n  <string>Land\'s End Cliff (cl" +
+            "imb w/Sky Troopas)</string>\r\n  <string>Nimbus Castle, Area 14 (right-most front " +
+            "door of long 5-exit room) </string>\r\n  <string>Nimbus Castle, Area 09 (Birdo\'s R" +
+            "oom)</string>\r\n  <string>Nimbus Castle, Area 07 (straight from Area 06 w/long st" +
+            "aircase)</string>\r\n  <string>Nimbus Castle, path after Throne room (1st)</string" +
+            ">\r\n  <string>Nimbus Castle, Area 11 (long hallway, door to King\'s Cellar)</strin" +
+            "g>\r\n  <string>Nimbus Castle, King\'s locked cellar</string>\r\n  <string>Nimbus Cas" +
+            "tle, Area 08 (from Area 07, get Room Key 1 here)</string>\r\n  <string>Nimbus Land" +
+            ", small platform after Nimbus Castle throne paths</string>\r\n  <string>Nimbus Lan" +
+            "d, outside (before Valentina)</string>\r\n  <string>Gardener\'s House, outside</str" +
+            "ing>\r\n  <string>Gardener\'s House</string>\r\n  <string>Lazy Shell cloud</string>\r\n" +
+            "  <string>Belome Temple, Area 02 (Fortune Room)</string>\r\n  <string>Belome Templ" +
+            "e, Area 04 (room determined by fortune)</string>\r\n  <string>Belome Temple, Area " +
+            "09 (Belome\'s Treasure room)</string>\r\n  <string>Belome Temple, Area 06 (Belome\'s" +
+            " fortune room w/elevating platform)</string>\r\n  <string>Belome Temple, Area 03 (" +
+            "pipe to room determined by fortune)</string>\r\n  <string>Belome Temple, Area 05 (" +
+            "from Fortune Room)</string>\r\n  <string>Belome Temple, Area 07 (pipe to Belome\'s " +
+            "room)</string>\r\n  <string>Belome Temple, Area 10 (pipe to Monstro Town)</string>" +
+            "\r\n  <string>Belome Temple, Area 01 (w/Warp Trampoline)</string>\r\n  <string>GAME " +
+            "INTRO: Nimbus Land, outside with patrolling Birdies</string>\r\n  <string>Nimbus L" +
+            "and, outside (during Valentina)</string>\r\n  <string>Bowser\'s Keep 6-door, Puzzle" +
+            " Rooms</string>\r\n  <string>ENDING CREDITS: Johnny looking out at sunset on beach" +
+            " shore</string>\r\n  <string>Smithy Factory, Area 01 ____dummy</string>\r\n  <string" +
+            ">Smithy Factory, Area 09 (falling Axem Reds on conveyor belts)</string>\r\n  <stri" +
+            "ng>ENDING CREDITS: Bowser\'s Keep, Bowser &amp; troops repair</string>\r\n  <string" +
+            ">Smithy Factory, Area 01 ____dummy</string>\r\n  <string>Nimbus Castle, path after" +
+            " Throne room (3rd)</string>\r\n  <string>Nimbus Land, outside (after Valentina)</s" +
+            "tring>\r\n  <string>Bowser\'s Keep, outside (talk to Exor)</string>\r\n  <string>Nimb" +
+            "us Castle, Area 13 (Throne room, after Valentina)</string>\r\n  <string>ENDING CRE" +
+            "DITS: Toadofsky conducts choir</string>\r\n  <string>Smithy Factory, Area 11 (conv" +
+            "eyor belts spawning Drill Bits and Macks)</string>\r\n  <string>Smithy Factory, Ar" +
+            "ea 16 (small room w/two treasures after falling Yaridovich room)</string>\r\n  <st" +
+            "ring>Smithy Factory, Area 09 ____dummy</string>\r\n  <string>Smithy Factory, Area " +
+            "10 (fall from Area 09)</string>\r\n  <string>Bowser\'s Keep 6-door, exit room after" +
+            " finishing 4 doors</string>\r\n  <string>Nimbus Land, hot springs</string>\r\n  <str" +
+            "ing>Bowser\'s Keep, Area 09 (tall room, w/save point)</string>\r\n  <string>Bowser\'" +
+            "s Keep, Area 11 (Thwomp/Bullet room after Magikoopa\'s room)</string>\r\n  <string>" +
+            "Bowser\'s Keep, Area 12 (Croco\'s Shop 2, after Magikoopa\'s room)</string>\r\n  <str" +
+            "ing>Bowser\'s Keep, Area 07 (150 coins and a mushroom)</string>\r\n  <string>Bowser" +
+            "\'s Keep, Area 06 (save point w/Croco shop)</string>\r\n  <string>Bowser\'s Keep, Ar" +
+            "ea 05 (dark tunnel, after throne room)</string>\r\n  <string>Bowser\'s Keep, Area 0" +
+            "8 (room with 6 doors)</string>\r\n  <string>Bowser\'s Keep 6-door, Action Room 1-C " +
+            "(Gorilla throwing barrels)</string>\r\n  <string>Bowser\'s Keep 6-door, Action Room" +
+            " 2-C (very slow moving circling platforms)</string>\r\n  <string>Bowser\'s Keep 6-d" +
+            "oor, Action Room 2-B (cannonball riding)</string>\r\n  <string>Bowser\'s Keep 6-doo" +
+            "r, Action Room 1-B (moving platforms)</string>\r\n  <string>Bowser\'s Keep 6-door, " +
+            "Battle Room 1-A (1st fight: Terra Cotta)</string>\r\n  <string>Bowser\'s Keep 6-doo" +
+            "r, Battle Room 1-B (1st fight: Alley Rat)</string>\r\n  <string>Bowser\'s Keep 6-do" +
+            "or, Battle Room 1-C (1st fight: Bob-Omb)</string>\r\n  <string>Bowser\'s Keep 6-doo" +
+            "r, Battle Room 2-A (1st fight: Gu Goomba)</string>\r\n  <string>Bowser\'s Keep 6-do" +
+            "or, Puzzle Room 1-B (barrel-counting)</string>\r\n  <string>Bowser\'s Keep 6-door, " +
+            "Puzzle Room 1-A (quiz)</string>\r\n  <string>Bowser\'s Keep 6-door, Puzzle Room 2-B" +
+            " (green switches)</string>\r\n  <string>Bowser\'s Keep 6-door, Puzzle Room 1-C (wor" +
+            "d problem)</string>\r\n  <string>Bowser\'s Keep 6-door, Puzzle Room 2-A (coin colle" +
+            "cting)</string>\r\n  <string>Bowser\'s Keep 6-door, Puzzle Room 2-C (ball solitaire" +
+            ")</string>\r\n  <string>Factory Grounds, Area 01</string>\r\n  <string>Factory Groun" +
+            "ds, Area 04 (Gun Yolk\'s room)</string>\r\n  <string>Factory Grounds, Area 02</stri" +
+            "ng>\r\n  <string>Factory Grounds, Area 03</string>\r\n  <string>Smithy Factory, Area" +
+            " 13 (Bowyers falling down conveyor belts)</string>\r\n  <string>Smithy Factory, Ar" +
+            "ea 15 (falling Yaridovichs)</string>\r\n  <string>Smithy Factory, Area 12 (lots of" +
+            " consecutive conveyor belts and LIL~BOOS)</string>\r\n  <string>Bowser\'s Keep 2nd " +
+            "Time, Area 01</string>\r\n  <string>Bowser\'s Keep 2nd Time, Area 02</string>\r\n  <s" +
+            "tring>Bowser\'s Keep 2nd Time, Area 03 (lava room w/bridge)</string>\r\n  <string>B" +
+            "owser\'s Keep 2nd Time, Area 04 (Throne Room)</string>\r\n  <string>Mushroom Kingdo" +
+            "m, during Mack, jumping kid\'s house (1F)</string>\r\n  <string>Mushroom Kingdom, d" +
+            "uring Mack, jumping kid\'s house (2F)</string>\r\n  <string>Mushroom Kingdom, durin" +
+            "g Mack, Raz and Raini\'s house</string>\r\n  <string>Mushroom Kingdom, during Mack," +
+            " Item Shop (top floor)</string>\r\n  <string>Mushroom Kingdom, during Mack, Item S" +
+            "hop (basement)</string>\r\n  <string>Mushroom Kingdom, during Mack, Inn (1F)</stri" +
+            "ng>\r\n  <string>ENDING CREDITS: Star Pieces (Rose Town), last star piece to ‘Than" +
+            "k You\'</string>\r\n  <string>Mushroom Kingdom, during Mack, running kid\'s house</s" +
+            "tring>\r\n  <string>Mushroom Kingdom, jumping kid\'s house (1F)</string>\r\n  <string" +
+            ">Mushroom Kingdom, jumping kid\'s house (2F)</string>\r\n  <string>Mushroom Kingdom" +
+            ", Raz and Raini\'s house</string>\r\n  <string>Mushroom Kingdom, Item Shop (top flo" +
+            "or)</string>\r\n  <string>Mushroom Kingdom, Item Shop (basement)</string>\r\n  <stri" +
+            "ng>Mushroom Kingdom, Inn (1F)</string>\r\n  <string>Mushroom Kingdom, Inn (2F)</st" +
+            "ring>\r\n  <string>Mushroom Kingdom, running kid\'s house</string>\r\n  <string>Facto" +
+            "ry Grounds, fight with Smithy (uses Sledge)</string>\r\n  <string>Nimbus Castle, A" +
+            "rea 06 ____dummy</string>\r\n  <string>Nimbus Castle, Area 10 ____dummy</string>\r\n" +
+            "  <string>Nimbus Castle, Area 05 (long 5-exit room, after Valentina)</string>\r\n " +
+            " <string>Nimbus Castle, Area 04 ____dummy</string>\r\n  <string>Nimbus Castle, Are" +
+            "a 03 (4-way path, after Valentina)</string>\r\n  <string>Nimbus Land, Dream Cushio" +
+            "n Dream: small cloud, person cheers on Mario/bed floats</string>\r\n  <string>Nimb" +
+            "us Land, Dream Cushion Dream: Heavy Troopa laying on Mario</string>\r\n  <string>N" +
+            "imbus Land, Dream Cushion Dream: Tortes are seasoning Mario</string>\r\n  <string>" +
+            "ENDING CREDITS: Yo\'ster Isle, Croco racing Yoshi</string>\r\n  <string>ENDING CRED" +
+            "ITS: Marrymore Chapel, Booster wedding Valentina</string>\r\n  <string>Smithy Fact" +
+            "ory, Area 08 (Trampoline after Count Down)</string>\r\n  <string>Smithy Factory, A" +
+            "rea 14 (w/save point)</string>\r\n  <string>Factory Grounds, Smithy\'s Pad</string>" +
+            "\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection LevelNames {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["LevelNames"]));
@@ -556,362 +543,361 @@ namespace SMRPGED.Properties {
             "ring>Mushroom Kingdom, before Croco, jumping kid’s house (2F)</string>\r\n  <strin" +
             "g>Mushroom Kingdom, before Croco, Raz and Raini’s house</string>\r\n  <string>Mush" +
             "room Kingdom, before Croco, Item Shop (top floor)</string>\r\n  <string>Booster To" +
-            "wer, 1F Area 02 (high Masher room w/teeter-totter) ____dummy</string>\r\n  <string" +
-            ">Mushroom Kingdom, before Croco, Inn (1F)</string>\r\n  <string>____blue BG, nothi" +
-            "ng there</string>\r\n  <string>Mushroom Kingdom, before Croco, running kid’s house" +
-            "</string>\r\n  <string>Mushroom Kingdom, Inn (2F)</string>\r\n  <string>Mushroom Kin" +
-            "gdom, before Croco, Item Shop (basement)</string>\r\n  <string>Booster Hill ____du" +
-            "mmy</string>\r\n  <string>Pipe Vault Entrance</string>\r\n  <string>Kero Sewers, Are" +
-            "a 02 (long room w/three pipes)</string>\r\n  <string>Kero Sewers, Area 03 (large w" +
-            "ater room w/pipe in center)</string>\r\n  <string>Kero Sewers, Area 06 (long water" +
-            " room w/Rat Funks in a line)</string>\r\n  <string>Kero Sewers, Area 05 (super sta" +
-            "r room w/four Rat Funks)</string>\r\n  <string>Kero Sewers, Area 04 (large room w/" +
-            "Pandorite and hiding Rat Funks)</string>\r\n  <string>Nimbus Land, outside (during" +
-            " Valentina right before fight)</string>\r\n  <string>Kero Sewers, Area 01 (water r" +
-            "oom w/save)</string>\r\n  <string>Marrymore Scene</string>\r\n  <string>Marrymore, o" +
-            "utside</string>\r\n  <string>Marrymore Chapel, sanctuary</string>\r\n  <string>Rose " +
-            "Way, exit Area where Bowser’s Troops gathered</string>\r\n  <string>Midas River, b" +
-            "usiness transaction Area</string>\r\n  <string>Midas River, barrel jumping river</" +
-            "string>\r\n  <string>Midas River, waterfall</string>\r\n  <string>Midas River, 1st t" +
-            "unnel</string>\r\n  <string>Midas River, 2nd tunnel (both left and right)</string>" +
-            "\r\n  <string>Midas River, 3rd tunnel (on left)</string>\r\n  <string>Midas River, 4" +
-            "th tunnel (on very bottom right)</string>\r\n  <string>Tadpole Pond, Area 02</stri" +
-            "ng>\r\n  <string>Tadpole Pond, Area 01</string>\r\n  <string>Bandit’s Way, Area 01</" +
-            "string>\r\n  <string>Bandit’s Way, Area 03</string>\r\n  <string>Bandit’s Way, Area " +
-            "04</string>\r\n  <string>Rose Way, main Area</string>\r\n  <string>Rose Way, two fas" +
-            "t-floating platforms</string>\r\n  <string>Rose Way, treasure chests w/coins Area<" +
-            "/string>\r\n  <string>Rose Way, winding path w/Crooks</string>\r\n  <string>Rose Tow" +
-            "n, during Bowyer outside</string>\r\n  <string>Rose Town, outside</string>\r\n  <str" +
-            "ing>Rose Town, during Bowyer Inn (1F)</string>\r\n  <string>Rose Town, Inn (1F)</s" +
-            "tring>\r\n  <string>Rose Town, Item Shop</string>\r\n  <string>Smithy’s Final Form D" +
-            "efeat: Geno’s Redemption</string>\r\n  <string>Rose Town, during Bowyer three gran" +
-            "dkids’ house</string>\r\n  <string>Rose Town, three grandkids’ house</string>\r\n  <" +
-            "string>Rose Town, couple’s house</string>\r\n  <string>Grate Guy’s Casino, inside " +
-            "casino</string>\r\n  <string>Rose Town, during Bowyer treasure house (1F)</string>" +
-            "\r\n  <string>Rose Town, treasure house (1F)</string>\r\n  <string>Rose Town, during" +
-            " Bowyer Inn (2F)</string>\r\n  <string>Rose Town, Inn (2F)</string>\r\n  <string>Ros" +
-            "e Town, during Bowyer treasure house (2F)</string>\r\n  <string>Rose Town, treasur" +
-            "e house (2F)</string>\r\n  <string>Rose Town, Geno Awakens in Inn (1F)</string>\r\n " +
-            " <string>Booster Pass, Area 01</string>\r\n  <string>Booster Pass, Area 02</string" +
-            ">\r\n  <string>Moleville, Outside (at exit from Mines)</string>\r\n  <string>Smithy " +
-            "Factory, Area 17 (Domino and Cloaker’s room)</string>\r\n  <string>Grate Guy’s Cas" +
-            "ino, front door</string>\r\n  <string>Moleville, Dyna and Mite’s House ____dummy</" +
-            "string>\r\n  <string>Grate Guy’s Casino, outside</string>\r\n  <string>Nimbus Castle" +
-            ", Area 09 (Statue Room, after Valentina)</string>\r\n  <string>Moleville, Outside<" +
-            "/string>\r\n  <string>Nimbus Castle, Area 01 (entrance hall)</string>\r\n  <string>N" +
-            "imbus Castle, Area 18 (Dodo’s statue-polishing room)</string>\r\n  <string>Nimbus " +
-            "Castle, Area 04 (left of 4-way path, right-angle red brick path w/ treasure)</st" +
-            "ring>\r\n  <string>Nimbus Castle, Area 17 (right of 4-way path, Save Point)</strin" +
-            "g>\r\n  <string>Nimbus Castle, Area 16 (small two-door room w/treasure, from Area " +
-            "15)</string>\r\n  <string>Nimbus Castle, Area 10 (red brick 2-level room w/treasur" +
-            "e from Birdo’s room)</string>\r\n  <string>Nimbus Castle, Area 03 (4-way path, dur" +
-            "ing Valentina)</string>\r\n  <string>Nimbus Castle, Area 02 (left of Area 01)</str" +
-            "ing>\r\n  <string>Nimbus Castle, Area 15 (front of 4-way path, large right-angle r" +
-            "oom w/ plant)</string>\r\n  <string>Nimbus Castle, Area 05 (long 5-exit room, duri" +
-            "ng Valentina)</string>\r\n  <string>Nimbus Castle, Area 06 (left-most front door f" +
-            "rom Area 05)</string>\r\n  <string>Nimbus Castle, Area 13 (Throne Room, during Val" +
-            "entina)</string>\r\n  <string>Nimbus Castle, path after Throne Room (2nd)</string>" +
-            "\r\n  <string>Nimbus Castle, Area 12 (entrance to throne room)</string>\r\n  <string" +
-            ">Pipe Vault, Area 01</string>\r\n  <string>Pipe Vault, Area 03 (line of pipes)</st" +
-            "ring>\r\n  <string>Pipe Vault, Area 04 (line of coins, 2 hidden treasures)</string" +
-            ">\r\n  <string>Pipe Vault, Area 06 (line of red pipes)</string>\r\n  <string>Pipe Va" +
-            "ult, Area 02</string>\r\n  <string>Pipe Vault, Area 07 (long path w/moving platfor" +
-            "ms)</string>\r\n  <string>Pipe Vault, Area 05</string>\r\n  <string>Sea, Area 02 (la" +
-            "rge room with shop)</string>\r\n  <string>Sea, Area 04 (bunch of Zeostars)</string" +
-            ">\r\n  <string>Sea, Area 05 (from Area 02 w/save point)</string>\r\n  <string>Sea, A" +
-            "rea 06 (water room w/whirlpools)</string>\r\n  <string>Sea, Area 03 (super star ro" +
-            "om)</string>\r\n  <string>Sea, Area 01 (entrance)</string>\r\n  <string>Sea, Area 07" +
-            " (small underwater room)</string>\r\n  <string>Land’s End, Area 01</string>\r\n  <st" +
-            "ring>Land’s End, Area 02</string>\r\n  <string>Land’s End, Area 03 (Geckits playin" +
-            "g cannonball)</string>\r\n  <string>Land’s End, Area 01,2 (nothing there, unused?)" +
-            "</string>\r\n  <string>Land’s End, Area 04 (rotating flowers)</string>\r\n  <string>" +
-            "Land’s End, Area 05 (sky bridge)</string>\r\n  <string>Pipe Vault, Goomba-thumping" +
-            " room</string>\r\n  <string>Bowser’s Keep 6-door, treasure after each room</string" +
-            ">\r\n  <string>Star Hill, Area 01</string>\r\n  <string>Pipe Vault, Area 02 ___dummy" +
-            "</string>\r\n  <string>GAME INTRO: Midas River, water tunnel</string>\r\n  <string>G" +
-            "AME INTRO: Bandit’s Way, Area 04</string>\r\n  <string>GAME INTRO: Midas River, Ba" +
-            "rrel Jumping</string>\r\n  <string>GAME INTRO: Moleville, outside during Bowser’s " +
-            "troop scene</string>\r\n  <string>GAME INTRO: Booster Hill</string>\r\n  <string>Mar" +
-            "rymore Chapel, main hall</string>\r\n  <string>Marrymore Chapel, entrance to sanct" +
-            "uary</string>\r\n  <string>Marrymore Chapel, sanctuary (during Booster)</string>\r\n" +
-            "  <string>Marrymore Chapel, kitchen</string>\r\n  <string>Marrymore Chapel, kitche" +
-            "n (no sprites/exits, unused?)</string>\r\n  <string>Star Hill, Area 03</string>\r\n " +
-            " <string>Star Hill, Area 02</string>\r\n  <string>Star Hill, Area 04</string>\r\n  <" +
-            "string>Sunken Ship, Area 01</string>\r\n  <string>Sunken Ship, Area 03 (Greapers)<" +
-            "/string>\r\n  <string>Sunken Ship, Area 04 (Greapers &amp; Dry Bones)</string>\r\n  " +
-            "<string>Sunken Ship, puzzle room 2</string>\r\n  <string>Sunken Ship, Area 02 (fro" +
-            "m entrance w/save point)</string>\r\n  <string>Sunken Ship, Area 06 (puzzle room p" +
-            "assageway)</string>\r\n  <string>Sunken Ship, puzzle room 1</string>\r\n  <string>Su" +
-            "nken Ship, Area 05 (long stairwell with running Alley Rats)</string>\r\n  <string>" +
-            "Sunken Ship, puzzle room 3</string>\r\n  <string>Sunken Ship, Area 07 (puzzle room" +
-            " passageway branch room w/Shaman)</string>\r\n  <string>Sunken Ship, Area 14 ____d" +
-            "ummy</string>\r\n  <string>Sunken Ship, puzzle room 4</string>\r\n  <string>Sunken S" +
-            "hip, puzzle room 5</string>\r\n  <string>Sunken Ship, post-KC Area 01 (small room " +
-            "w/Trampoline)</string>\r\n  <string>Sea, Area 08 (shore with Sunken Ship)</string>" +
-            "\r\n  <string>Sunken Ship, post-KC Area 05 (w/Dry Bones, linked by Mario mirror ro" +
-            "om)</string>\r\n  <string>Sunken Ship, Area 08 (w/save point and green switch for " +
-            "barrel)</string>\r\n  <string>Sunken Ship, Area 09 (Password room)</string>\r\n  <st" +
-            "ring>Sunken Ship, post-KC Area 04 (long stairwell w/running Alley Rats)</string>" +
-            "\r\n  <string>Sunken Ship, post-KC Area 06 (Mario Mirror room)</string>\r\n  <string" +
-            ">Sunken Ship, post-KC Area 02 (small 2-level room)</string>\r\n  <string>Sunken Sh" +
-            "ip, post-KC Area 03 (Alley Rats on cannons)</string>\r\n  <string>Sunken Ship, pos" +
-            "t-KC Area 07 (three Dry Bones)</string>\r\n  <string>Sunken Ship, post-KC Area 08 " +
-            "(secret room with Frog Coin)</string>\r\n  <string>Sunken Ship, post-KC Area 09 (H" +
-            "idon’s room w/save point)</string>\r\n  <string>Sunken Ship, post-KC Area 14 (secr" +
-            "et Safety Ring)</string>\r\n  <string>Sunken Ship, post-KC Area 18 (warp room from" +
-            " Johnny’s room)</string>\r\n  <string>Sunken Ship, post-KC Area 10 (water room wit" +
-            "h frog coins)</string>\r\n  <string>Sunken Ship, post-KC Area 11 (water room with " +
-            "whirlpool)</string>\r\n  <string>Mario’s Pipehouse</string>\r\n  <string>Mushroom Ki" +
-            "ngdom, during Mack, Outside</string>\r\n  <string>Mushroom Kingdom, Outside</strin" +
-            "g>\r\n  <string>Booster Tower, 9F Area 02 (Booster’s curtain game room)</string>\r\n" +
-            "  <string>Booster Tower, 2F Area 03 (steps w/circling Bob-ombs)</string>\r\n  <str" +
-            "ing>Booster Tower, 2F Area 02 (Booster’s railway room)</string>\r\n  <string>Boost" +
-            "er Tower, 6F Area 02 (Booster’s Ancestor Game room)</string>\r\n  <string>Booster " +
-            "Tower, 2F Area 01 (w/constantly appearing Spookums)</string>\r\n  <string>Booster " +
-            "Tower, 1F Area 02 (high Masher room w/teeter-totter)</string>\r\n  <string>Booster" +
-            " Tower, 8F Area 03 (3-level w/one Chomp)</string>\r\n  <string>Booster Tower, 9F A" +
-            "rea 01 (three yellow platforms w/save point)</string>\r\n  <string>Booster Tower, " +
-            "6F Area 03 (Elder’s Room w/Chomp)</string>\r\n  <string>Booster Tower, 6F Area 01 " +
-            "(small room w/save point)</string>\r\n  <string>Booster Tower Entrance</string>\r\n " +
-            " <string>Mushroom Way, Area 01</string>\r\n  <string>Mushroom Way, Area 02</string" +
-            ">\r\n  <string>Mushroom Way, Area 03</string>\r\n  <string>Bandit’s Way, Area 05</st" +
-            "ring>\r\n  <string>Bandit’s Way, Area 02</string>\r\n  <string>Seaside Town, during " +
-            "Yaridovich Outside</string>\r\n  <string>Seaside Town, during Yaridovich Inn (1F)<" +
-            "/string>\r\n  <string>Seaside Town, during Yaridovich Inn (2F)</string>\r\n  <string" +
-            ">Seaside Town, during Yaridovich Elder’s House (1F)</string>\r\n  <string>Seaside " +
-            "Town, during Yaridovich Elder’s House (2F)</string>\r\n  <string>Seaside Town, dur" +
-            "ing Yaridovich Beetles Are Us/Bomb Shop</string>\r\n  <string>Seaside Town, during" +
-            " Yaridovich Weapons and Armor Shop</string>\r\n  <string>Seaside Town, during Yari" +
-            "dovich Health Food Store (left-most)</string>\r\n  <string>Seaside Town, during Ya" +
-            "ridovich Mushroom Boy Shop (middle)</string>\r\n  <string>Seaside Town, during Yar" +
-            "idovich Accessory Shop (right-most)</string>\r\n  <string>Seaside Town, during Yar" +
-            "idovich Shed (unused b/c inaccessible)</string>\r\n  <string>GAME INTRO: Sea, shor" +
-            "e with Sunken Ship</string>\r\n  <string>Smithy Factory, Area 02 (w/save point)</s" +
-            "tring>\r\n  <string>Smithy Factory, Area 04 (green switch w/Ameboids)</string>\r\n  " +
-            "<string>Smithy Factory, Area 03 (Glum Reapers)</string>\r\n  <string>Smithy Factor" +
-            "y, Area 07 (Count Down’s room)</string>\r\n  <string>Forest Maze, Area 01</string>" +
-            "\r\n  <string>Forest Maze, Area 05 (tree trunk Area)</string>\r\n  <string>Forest Ma" +
-            "ze, Area 02</string>\r\n  <string>Forest Maze, Area 09 (leads to 4-path maze)</str" +
-            "ing>\r\n  <string>Forest Maze, Area 04</string>\r\n  <string>Forest Maze, Area 06</s" +
-            "tring>\r\n  <string>Forest Maze, 4-way path from Area 09</string>\r\n  <string>Fores" +
-            "t Maze, Secret entrance</string>\r\n  <string>Forest Maze, Bowyer’s practice pad</" +
-            "string>\r\n  <string>Forest Maze, Area 03 (underground)</string>\r\n  <string>Forest" +
-            " Maze, Secret</string>\r\n  <string>Forest Maze, Area 08 (underground)</string>\r\n " +
-            " <string>Forest Maze, Area 07 (underground w/sleeping Wiggler)</string>\r\n  <stri" +
-            "ng>Smithy Factory, Area 05 (w/save point)</string>\r\n  <string>Smithy Factory, fa" +
-            "ll from lugnut rooms (Area 06 &amp; prior)</string>\r\n  <string>Smithy Factory, A" +
-            "rea 06 (Ultra Hammer)</string>\r\n  <string>Volcano, Area 21 ____dummy</string>\r\n " +
-            " <string>Volcano, Area 02 ____dummy</string>\r\n  <string>Forest Maze, all tree tr" +
-            "unk underground areas</string>\r\n  <string>GAME INTRO: Mushroom Kingdom Castle, T" +
-            "hrone Room</string>\r\n  <string>GAME INTRO: Yo’ster Isle, talk to Yoshi &amp; run" +
-            " around</string>\r\n  <string>GAME INTRO: Pipe Vault, Area 02 (w/Thwomp)</string>\r" +
-            "\n  <string>GAME INTRO: Kero Sewers, Entrance</string>\r\n  <string>GAME INTRO: Tad" +
-            "pole Pond, Mario summons tadpoles</string>\r\n  <string>GAME INTRO: Mushroom Way, " +
-            "Area 01</string>\r\n  <string>GAME INTRO: Vista Hill</string>\r\n  <string>GAME INTR" +
-            "O: Booster Tower, balcony with Toadstool crying</string>\r\n  <string>Bean Valley," +
-            " piranha pipe Area</string>\r\n  <string>Bean Valley, main Area</string>\r\n  <strin" +
-            "g>Bean Valley, magic brick to Beanstalk Area</string>\r\n  <string>Bean Valley, Sm" +
-            "ilax Area</string>\r\n  <string>Monstro Town, Jinx’s Dojo</string>\r\n  <string>Fore" +
-            "st Maze, Small area w/tree trunk (unused?)</string>\r\n  <string>GAME INTRO: Fores" +
-            "t Maze, fighting Magikoopa at Bowyer’s Pad</string>\r\n  <string>Booster Tower, Ba" +
-            "lcony at top floor</string>\r\n  <string>Booster Tower, 3F Area 01 (green switch f" +
-            "or BP secret)</string>\r\n  <string>GAME INTRO: Forest Maze, jumping on Wiggler</s" +
-            "tring>\r\n  <string>Bowser’s Keep 1st time, Area 03 (lava room w/bridge)</string>\r" +
-            "\n  <string>Land’s End Underground, Area 04 (buy super stars)</string>\r\n  <string" +
-            ">Land’s End Underground, Area 01</string>\r\n  <string>Land’s End Underground, Are" +
-            "a 02</string>\r\n  <string>Land’s End Underground, Area 03</string>\r\n  <string>Bow" +
-            "ser’s Keep, Area 10 (Magikoopa’s room)</string>\r\n  <string>Monstro Town, entranc" +
-            "e</string>\r\n  <string>Belome Temple, Area 08 (Belome’s room)</string>\r\n  <string" +
-            ">ENDING CREDITS: Nimbus Land, Prince Mallow</string>\r\n  <string>Land’s End secre" +
-            "t underground, Area 01 (leads to Kero Sewers)</string>\r\n  <string>Moleville Mine" +
-            "s, Area 17 (Punchinello’s room)</string>\r\n  <string>Moleville Mines, Area 11 (bo" +
-            "mbed room w/singing Moles)</string>\r\n  <string>Moleville Mines, Area 04 (w/tramp" +
-            "oline)</string>\r\n  <string>Moleville Mines, Area 02</string>\r\n  <string>Molevill" +
-            "e Mines, Area 06 (small room leading to Area 06)</string>\r\n  <string>Moleville M" +
-            "ines, Area 01 (entrance)</string>\r\n  <string>Moleville Mines, Area 05 (left of t" +
-            "rampoline room)</string>\r\n  <string>Moleville Mines, Area 03 (leads back to Area" +
-            " 1)</string>\r\n  <string>Moleville Mines, Area 08 (Croco’s bombed room)</string>\r" +
-            "\n  <string>Moleville Mines, Area 15 (2-level room w/Sparky and 10-coin TC)</stri" +
-            "ng>\r\n  <string>Moleville Mines, Area 07 (from Croco’s bombed room)</string>\r\n  <" +
-            "string>Moleville Mines, Area 10 (small room w/minecart tracks)</string>\r\n  <stri" +
-            "ng>Moleville Mines, Area 09 (leads left to Croco’s bombed room)</string>\r\n  <str" +
-            "ing>Moleville Mines, Area 18 (minecart room)</string>\r\n  <string>Moleville Mines" +
-            ", Area 13 (long minecart tracks room)</string>\r\n  <string>Moleville Mines, Area " +
-            "12 (2-level room, leads to long minecart tracks room)</string>\r\n  <string>Molevi" +
-            "lle Mines, Area 14 (2-level room from long minecart tracks room)</string>\r\n  <st" +
-            "ring>Moleville Mines, Area 16 (large save-point room w/four Bob-ombs)</string>\r\n" +
-            "  <string>Moleville Mines, Area 17 (Punchinello’s room)</string>\r\n  <string>Mole" +
-            "ville Mines, Area 19 (from outside after paying)</string>\r\n  <string>GAME INTRO:" +
-            " Booster Tower, 7F (parachuting Spookums)</string>\r\n  <string>____unmapped house" +
-            " room</string>\r\n  <string>____unmapped house room</string>\r\n  <string>____unmapp" +
-            "ed house room</string>\r\n  <string>____unmapped house room</string>\r\n  <string>__" +
-            "__unmapped house room</string>\r\n  <string>____unmapped outside townplace (resemb" +
-            "les Seaside Town)</string>\r\n  <string>____unmapped house room</string>\r\n  <strin" +
-            "g>____unmapped house room</string>\r\n  <string>____unmapped house room</string>\r\n" +
-            "  <string>Kero Sewers, Area 07 (water switch room w/Boos)</string>\r\n  <string>Ke" +
-            "ro Sewers, Area 08 (Belome’s Room)</string>\r\n  <string>Kero Sewers, Area 08 (Bel" +
-            "ome’s Room, after defeat)</string>\r\n  <string>Seaside Town, Outside</string>\r\n  " +
-            "<string>Seaside Town, Inn (1F)</string>\r\n  <string>Seaside Town, Inn (2F)</strin" +
-            "g>\r\n  <string>Seaside Town, Elder’s house (1F)</string>\r\n  <string>Seaside Town," +
-            " Elder’s house (2F)</string>\r\n  <string>Seaside Town, Beetles Are Us</string>\r\n " +
-            " <string>Seaside Town, Weapon and Armor shop</string>\r\n  <string>Seaside Town, H" +
-            "ealth Food Store</string>\r\n  <string>Seaside Town, Mushroom Boy’s Shop</string>\r" +
-            "\n  <string>Seaside Town, Accessory Shop</string>\r\n  <string>Seaside Town, Shed</" +
-            "string>\r\n  <string>Seaside Town, during Yaridovich Beach</string>\r\n  <string>Sea" +
-            "side Town, Beach</string>\r\n  <string>Land’s End Desert, Area 01</string>\r\n  <str" +
-            "ing>Land’s End Desert, Area 02</string>\r\n  <string>Land’s End Desert, Area 06</s" +
-            "tring>\r\n  <string>Mushroom Kingdom Castle, Entrance to Throne room</string>\r\n  <" +
-            "string>Bowser’s Keep 6-door, Action Room 2-A (slow elevating platforms)</string>" +
-            "\r\n  <string>Bowser’s Keep 6-door, Action Room 1-A (jumping Terrapin)</string>\r\n " +
-            " <string>Mushroom Kingdom Castle, during Mack entrance to Throne Room</string>\r\n" +
-            "  <string>Monstro Town, outside</string>\r\n  <string>Mushroom Kingdom Castle, dur" +
-            "ing Mack Main Hall</string>\r\n  <string>Mushroom Kingdom Castle, during Mack Thro" +
-            "ne Room</string>\r\n  <string>Mushroom Kingdom Castle, during Mack stairwell to To" +
-            "adstool’s Room</string>\r\n  <string>Mushroom Kingdom Castle, during Mack Toadstoo" +
-            "l’s Room</string>\r\n  <string>Mushroom Kingdom Castle, during Mack branch room to" +
-            " Vault/Guest Room</string>\r\n  <string>Mushroom Kingdom Castle, during Mack Guest" +
-            " room</string>\r\n  <string>Mushroom Kingdom Castle, during Mack Vault</string>\r\n " +
-            " <string>Mushroom Kingdom Castle, during Mack entrance to Toadstool’s room</stri" +
-            "ng>\r\n  <string>Kero Sewers Entrance</string>\r\n  <string>Bean Valley pipe room, l" +
-            "eft-most pipe</string>\r\n  <string>Bean Valley pipe room, right-most pipe (large " +
-            "room)</string>\r\n  <string>Moleville, Item Shop</string>\r\n  <string>Moleville, In" +
-            "n</string>\r\n  <string>Moleville, Dyna and Mite’s house</string>\r\n  <string>Molev" +
-            "ille, Fireworks shop</string>\r\n  <string>Moleville, Special item-trading shop</s" +
-            "tring>\r\n  <string>Nimbus Land, Garro’s House</string>\r\n  <string>Nimbus Land, lo" +
-            "wer house</string>\r\n  <string>Nimbus Land, Inn</string>\r\n  <string>Nimbus Land, " +
-            "Item Shop</string>\r\n  <string>Nimbus Land, top-right house (Croco drops Signal R" +
-            "ing)</string>\r\n  <string>Nimbus Land, Inn (bedroom)</string>\r\n  <string>Bean Val" +
-            "ley pipe room, top pipe (leads to Grate Guy’s Casino)</string>\r\n  <string>Bean V" +
-            "alley pipe room, bottom left</string>\r\n  <string>Bean Valley pipe room, bottom r" +
-            "ight</string>\r\n  <string>Smithy Factory, Area 01</string>\r\n  <string>Culex’s Roo" +
-            "m</string>\r\n  <string>Volcano, Area 21 (Czar Dragon’s room)</string>\r\n  <string>" +
-            "Volcano, Area 18 (Hino Mart)</string>\r\n  <string>Volcano, Area 01</string>\r\n  <s" +
-            "tring>Volcano, Area 03 (secret w/two flowers)</string>\r\n  <string>Volcano, Area " +
-            "08</string>\r\n  <string>Volcano, Post-CD Area 01</string>\r\n  <string>Volcano, Are" +
-            "a 11</string>\r\n  <string>Volcano, Area 02</string>\r\n  <string>Volcano, Area 04 (" +
-            "bunch of steps)</string>\r\n  <string>Volcano, Area 09</string>\r\n  <string>Volcano" +
-            ", Area 07 (stomping Corkpedite)</string>\r\n  <string>Volcano, Area 15 (stomping C" +
-            "orkpedite)</string>\r\n  <string>Volcano, Area 14</string>\r\n  <string>Volcano, Pos" +
-            "t-CD Area 03</string>\r\n  <string>Volcano, Area 13 (w/save point)</string>\r\n  <st" +
-            "ring>Volcano, Area 17 (leads to Hinopio’s Shop)</string>\r\n  <string>Nimbus Land," +
-            " Royal Bus station</string>\r\n  <string>Nimbus Land, entrance (w/warp trampoline)" +
-            "</string>\r\n  <string>Nimbus Land, entrance to hot springs</string>\r\n  <string>Ni" +
-            "mbus Land, fall from platform (1st)</string>\r\n  <string>Nimbus Land, fall from p" +
-            "latform (2nd)</string>\r\n  <string>Nimbus Land, fall from platform (3rd)</string>" +
-            "\r\n  <string>Nimbus Land, fall from platform (4th)</string>\r\n  <string>ENDING CRE" +
-            "DITS: Star Pieces shoot through the sky</string>\r\n  <string>Bowser’s Keep 6-door" +
-            ", Battle Room 2-B (1st fight: Chewy)</string>\r\n  <string>Bowser’s Keep 6-door, B" +
-            "attle Room 2-C (1st fight: Sparky)</string>\r\n  <string>Bean Valley Beanstalks, A" +
-            "rea 01</string>\r\n  <string>Bean Valley Beanstalks, Area 02</string>\r\n  <string>B" +
-            "ean Valley Beanstalks, Area 03 (from right beanstalk of Area 02)</string>\r\n  <st" +
-            "ring>Bean Valley Beanstalks, Area 04 (from left beanstalk of Area 02)</string>\r\n" +
-            "  <string>Nimbus Land, entrance (no trampolines/exits)</string>\r\n  <string>Volca" +
-            "no, Area 10 (jumping Pyrospheres)</string>\r\n  <string>Volcano, Area 05</string>\r" +
-            "\n  <string>Volcano, Area 06</string>\r\n  <string>Volcano, Area 12 (erupting Stump" +
-            "et)</string>\r\n  <string>Volcano, Area 19 (from Hino Mart w/save point)</string>\r" +
-            "\n  <string>Volcano, Post-CD Area 02</string>\r\n  <string>Volcano, Area 20 (jumpin" +
-            "g Pyrospheres)</string>\r\n  <string>Volcano, Area 16 (erupting Stumpet)</string>\r" +
-            "\n  <string>Volcano, Post-CD Area 04</string>\r\n  <string>Volcano, Post-CD Area 06" +
-            "</string>\r\n  <string>Volcano, Post-CD Area 07 (warp to World Map)</string>\r\n  <s" +
-            "tring>Volcano, Post-CD Area 05</string>\r\n  <string>Monstro Town, Monstermama’s h" +
-            "ouse (1F)</string>\r\n  <string>Monstro Town, Monstermama’s house (2F)</string>\r\n " +
-            " <string>Monstro Town, super-jumping room</string>\r\n  <string>Monstro Town, Weap" +
-            "on and Armor Shop</string>\r\n  <string>Monstro Town, 3 Musty Fears Inn</string>\r\n" +
-            "  <string>Bowser’s Keep, Area 13 (2nd throne room, Boomer’s room)</string>\r\n  <s" +
-            "tring>Land’s End secret underground, Area 02 (leads to Kero Sewers)</string>\r\n  " +
-            "<string>Land’s End Desert, Area 03</string>\r\n  <string>Land’s End Desert, Area 0" +
-            "5</string>\r\n  <string>Land’s End Desert, Area 04</string>\r\n  <string>Booster Pas" +
-            "s, Secret</string>\r\n  <string>Factory Grounds, Area 01 (with Toad)</string>\r\n  <" +
-            "string>Land’s End Cliff (climb w/Sky Troopas)</string>\r\n  <string>Nimbus Castle," +
-            " Area 14 (right-most front door of long 5-exit room) </string>\r\n  <string>Nimbus" +
-            " Castle, Area 09 (Birdo’s Room)</string>\r\n  <string>Nimbus Castle, Area 07 (stra" +
-            "ight from Area 06 w/long staircase)</string>\r\n  <string>Nimbus Castle, path afte" +
-            "r Throne room (1st)</string>\r\n  <string>Nimbus Castle, Area 11 (long hallway, do" +
-            "or to King’s Cellar)</string>\r\n  <string>Nimbus Castle, King’s locked cellar</st" +
-            "ring>\r\n  <string>Nimbus Castle, Area 08 (from Area 07, get Room Key 1 here)</str" +
-            "ing>\r\n  <string>Nimbus Land, small platform after Nimbus Castle throne paths</st" +
-            "ring>\r\n  <string>Nimbus Land, outside (before Valentina)</string>\r\n  <string>Gar" +
-            "dener’s House, outside</string>\r\n  <string>Gardener’s House</string>\r\n  <string>" +
-            "Lazy Shell cloud</string>\r\n  <string>Belome Temple, Area 02 (Fortune Room)</stri" +
-            "ng>\r\n  <string>Belome Temple, Area 04 (room determined by fortune)</string>\r\n  <" +
-            "string>Belome Temple, Area 09 (Belome’s Treasure room)</string>\r\n  <string>Belom" +
-            "e Temple, Area 06 (Belome’s fortune room w/elevating platform)</string>\r\n  <stri" +
-            "ng>Belome Temple, Area 03 (pipe to room determined by fortune)</string>\r\n  <stri" +
-            "ng>Belome Temple, Area 05 (from Fortune Room)</string>\r\n  <string>Belome Temple," +
-            " Area 07 (pipe to Belome’s room)</string>\r\n  <string>Belome Temple, Area 10 (pip" +
-            "e to Monstro Town)</string>\r\n  <string>Belome Temple, Area 01 (w/Warp Trampoline" +
-            ")</string>\r\n  <string>GAME INTRO: Nimbus Land, outside with patrolling Birdies</" +
-            "string>\r\n  <string>Nimbus Land, outside (during Valentina)</string>\r\n  <string>B" +
-            "owser’s Keep 6-door, Puzzle Rooms</string>\r\n  <string>ENDING CREDITS: Johnny loo" +
-            "king out at sunset on beach shore</string>\r\n  <string>Smithy Factory, Area 01 __" +
-            "__dummy</string>\r\n  <string>Smithy Factory, Area 09 (falling Axem Reds on convey" +
-            "or belts)</string>\r\n  <string>ENDING CREDITS: Bowser’s Keep, Bowser &amp; troops" +
-            " repair</string>\r\n  <string>Smithy Factory, Area 01 ____dummy</string>\r\n  <strin" +
-            "g>Nimbus Castle, path after Throne room (3rd)</string>\r\n  <string>Nimbus Land, o" +
-            "utside (after Valentina)</string>\r\n  <string>Bowser’s Keep, outside (talk to Exo" +
-            "r)</string>\r\n  <string>Nimbus Castle, Area 13 (Throne room, after Valentina)</st" +
-            "ring>\r\n  <string>ENDING CREDITS: Toadofsky conducts choir</string>\r\n  <string>Sm" +
-            "ithy Factory, Area 11 (conveyor belts spawning Drill Bits and Macks)</string>\r\n " +
-            " <string>Smithy Factory, Area 16 (small room w/two treasures after falling Yarid" +
-            "ovich room)</string>\r\n  <string>Smithy Factory, Area 09 ____dummy</string>\r\n  <s" +
-            "tring>Smithy Factory, Area 10 (fall from Area 09)</string>\r\n  <string>Bowser’s K" +
-            "eep 6-door, exit room after finishing 4 doors</string>\r\n  <string>Nimbus Land, h" +
-            "ot springs</string>\r\n  <string>Bowser’s Keep, Area 09 (tall room, w/save point)<" +
-            "/string>\r\n  <string>Bowser’s Keep, Area 11 (Thwomp/Bullet room after Magikoopa’s" +
-            " room)</string>\r\n  <string>Bowser’s Keep, Area 12 (Croco’s Shop 2, after Magikoo" +
-            "pa’s room)</string>\r\n  <string>Bowser’s Keep, Area 07 (150 coins and a mushroom)" +
-            "</string>\r\n  <string>Bowser’s Keep, Area 06 (save point w/Croco shop)</string>\r\n" +
-            "  <string>Bowser’s Keep, Area 05 (dark tunnel, after throne room)</string>\r\n  <s" +
-            "tring>Bowser’s Keep, Area 08 (room with 6 doors)</string>\r\n  <string>Bowser’s Ke" +
-            "ep 6-door, Action Room 1-C (Gorilla throwing barrels)</string>\r\n  <string>Bowser" +
-            "’s Keep 6-door, Action Room 2-C (very slow moving circling platforms)</string>\r\n" +
-            "  <string>Bowser’s Keep 6-door, Action Room 2-B (cannonball riding)</string>\r\n  " +
-            "<string>Bowser’s Keep 6-door, Action Room 1-B (moving platforms)</string>\r\n  <st" +
-            "ring>Bowser’s Keep 6-door, Battle Room 1-A (1st fight: Terra Cotta)</string>\r\n  " +
-            "<string>Bowser’s Keep 6-door, Battle Room 1-B (1st fight: Alley Rat)</string>\r\n " +
-            " <string>Bowser’s Keep 6-door, Battle Room 1-C (1st fight: Bob-Omb)</string>\r\n  " +
-            "<string>Bowser’s Keep 6-door, Battle Room 2-A (1st fight: Gu Goomba)</string>\r\n " +
-            " <string>Bowser’s Keep 6-door, Puzzle Room 1-B (barrel-counting)</string>\r\n  <st" +
-            "ring>Bowser’s Keep 6-door, Puzzle Room 1-A (quiz)</string>\r\n  <string>Bowser’s K" +
-            "eep 6-door, Puzzle Room 2-B (green switches)</string>\r\n  <string>Bowser’s Keep 6" +
-            "-door, Puzzle Room 1-C (word problem)</string>\r\n  <string>Bowser’s Keep 6-door, " +
-            "Puzzle Room 2-A (coin collecting)</string>\r\n  <string>Bowser’s Keep 6-door, Puzz" +
-            "le Room 2-C (ball solitaire)</string>\r\n  <string>Factory Grounds, Area 01</strin" +
-            "g>\r\n  <string>Factory Grounds, Area 04 (Gun Yolk’s room)</string>\r\n  <string>Fac" +
-            "tory Grounds, Area 02</string>\r\n  <string>Factory Grounds, Area 03</string>\r\n  <" +
-            "string>Smithy Factory, Area 13 (Bowyers falling down conveyor belts)</string>\r\n " +
-            " <string>Smithy Factory, Area 15 (falling Yaridovichs)</string>\r\n  <string>Smith" +
-            "y Factory, Area 12 (lots of consecutive conveyor belts and LIL~BOOS)</string>\r\n " +
-            " <string>Bowser’s Keep 2nd Time, Area 01</string>\r\n  <string>Bowser’s Keep 2nd T" +
-            "ime, Area 02</string>\r\n  <string>Bowser’s Keep 2nd Time, Area 03 (lava room w/br" +
-            "idge)</string>\r\n  <string>Bowser’s Keep 2nd Time, Area 04 (Throne Room)</string>" +
-            "\r\n  <string>Mushroom Kingdom, during Mack, jumping kid’s house (1F)</string>\r\n  " +
-            "<string>Mushroom Kingdom, during Mack, jumping kid’s house (2F)</string>\r\n  <str" +
-            "ing>Mushroom Kingdom, during Mack, Raz and Raini’s house</string>\r\n  <string>Mus" +
-            "hroom Kingdom, during Mack, Item Shop (top floor)</string>\r\n  <string>Mushroom K" +
-            "ingdom, during Mack, Item Shop (basement)</string>\r\n  <string>Mushroom Kingdom, " +
-            "during Mack, Inn (1F)</string>\r\n  <string>ENDING CREDITS: Star Pieces (Rose Town" +
-            "), last star piece to ‘Thank You’</string>\r\n  <string>Mushroom Kingdom, during M" +
-            "ack, running kid’s house</string>\r\n  <string>Mushroom Kingdom, jumping kid’s hou" +
-            "se (1F)</string>\r\n  <string>Mushroom Kingdom, jumping kid’s house (2F)</string>\r" +
-            "\n  <string>Mushroom Kingdom, Raz and Raini’s house</string>\r\n  <string>Mushroom " +
-            "Kingdom, Item Shop (top floor)</string>\r\n  <string>Mushroom Kingdom, Item Shop (" +
-            "basement)</string>\r\n  <string>Mushroom Kingdom, Inn (1F)</string>\r\n  <string>Mus" +
-            "hroom Kingdom, Inn (2F)</string>\r\n  <string>Mushroom Kingdom, running kid’s hous" +
-            "e</string>\r\n  <string>Factory Grounds, fight with Smithy (uses Sledge)</string>\r" +
-            "\n  <string>Nimbus Castle, Area 06 ____dummy</string>\r\n  <string>Nimbus Castle, A" +
-            "rea 10 ____dummy</string>\r\n  <string>Nimbus Castle, Area 05 (long 5-exit room, a" +
-            "fter Valentina)</string>\r\n  <string>Nimbus Castle, Area 04 ____dummy</string>\r\n " +
-            " <string>Nimbus Castle, Area 03 (4-way path, after Valentina)</string>\r\n  <strin" +
-            "g>Nimbus Land, Dream Cushion Dream: small cloud, person cheers on Mario/bed floa" +
-            "ts</string>\r\n  <string>Nimbus Land, Dream Cushion Dream: Heavy Troopa laying on " +
-            "Mario</string>\r\n  <string>Nimbus Land, Dream Cushion Dream: Tortes are seasoning" +
-            " Mario</string>\r\n  <string>ENDING CREDITS: Yo’ster Isle, Croco racing Yoshi</str" +
-            "ing>\r\n  <string>ENDING CREDITS: Marrymore Chapel, Booster wedding Valentina</str" +
-            "ing>\r\n  <string>Smithy Factory, Area 08 (Trampoline after Count Down)</string>\r\n" +
-            "  <string>Smithy Factory, Area 14 (w/save point)</string>\r\n  <string>Factory Gro" +
-            "unds, Smithy’s Pad</string>\r\n  <string>Moleville Mines, Area 19 ____dummy</strin" +
-            "g>\r\n  <string>Moleville Mines, Area 19 ____dummy</string>\r\n</ArrayOfString>")]
+            "wer, 8F Area 02 (Zoom Shoes room)</string>\r\n  <string>Mushroom Kingdom, before C" +
+            "roco, Inn (1F)</string>\r\n  <string>____blue BG, nothing there</string>\r\n  <strin" +
+            "g>Mushroom Kingdom, before Croco, running kid’s house</string>\r\n  <string>Mushro" +
+            "om Kingdom, Inn (2F)</string>\r\n  <string>Mushroom Kingdom, before Croco, Item Sh" +
+            "op (basement)</string>\r\n  <string>Booster Hill ____dummy</string>\r\n  <string>Pip" +
+            "e Vault Entrance</string>\r\n  <string>Kero Sewers, Area 02 (long room w/three pip" +
+            "es)</string>\r\n  <string>Kero Sewers, Area 03 (large water room w/pipe in center)" +
+            "</string>\r\n  <string>Kero Sewers, Area 06 (long water room w/Rat Funks in a line" +
+            ")</string>\r\n  <string>Kero Sewers, Area 05 (super star room w/four Rat Funks)</s" +
+            "tring>\r\n  <string>Kero Sewers, Area 04 (large room w/Pandorite and hiding Rat Fu" +
+            "nks)</string>\r\n  <string>Nimbus Land, outside (during Valentina right before fig" +
+            "ht)</string>\r\n  <string>Kero Sewers, Area 01 (water room w/save)</string>\r\n  <st" +
+            "ring>Marrymore Scene</string>\r\n  <string>Marrymore, outside</string>\r\n  <string>" +
+            "Marrymore Chapel, sanctuary</string>\r\n  <string>Rose Way, exit Area where Bowser" +
+            "’s Troops gathered</string>\r\n  <string>Midas River, business transaction Area</s" +
+            "tring>\r\n  <string>Midas River, barrel jumping river</string>\r\n  <string>Midas Ri" +
+            "ver, waterfall</string>\r\n  <string>Midas River, 1st tunnel</string>\r\n  <string>M" +
+            "idas River, 2nd tunnel (both left and right)</string>\r\n  <string>Midas River, 3r" +
+            "d tunnel (on left)</string>\r\n  <string>Midas River, 4th tunnel (on very bottom r" +
+            "ight)</string>\r\n  <string>Tadpole Pond, Area 02</string>\r\n  <string>Tadpole Pond" +
+            ", Area 01</string>\r\n  <string>Bandit’s Way, Area 01</string>\r\n  <string>Bandit’s" +
+            " Way, Area 03</string>\r\n  <string>Bandit’s Way, Area 04</string>\r\n  <string>Rose" +
+            " Way, main Area</string>\r\n  <string>Rose Way, two fast-floating platforms</strin" +
+            "g>\r\n  <string>Rose Way, treasure chests w/coins Area</string>\r\n  <string>Rose Wa" +
+            "y, winding path w/Crooks</string>\r\n  <string>Rose Town, during Bowyer outside</s" +
+            "tring>\r\n  <string>Rose Town, outside</string>\r\n  <string>Rose Town, during Bowye" +
+            "r Inn (1F)</string>\r\n  <string>Rose Town, Inn (1F)</string>\r\n  <string>Rose Town" +
+            ", Item Shop</string>\r\n  <string>Smithy’s Final Form Defeat: Geno’s Redemption</s" +
+            "tring>\r\n  <string>Rose Town, during Bowyer three grandkids’ house</string>\r\n  <s" +
+            "tring>Rose Town, three grandkids’ house</string>\r\n  <string>Rose Town, couple’s " +
+            "house</string>\r\n  <string>Grate Guy’s Casino, inside casino</string>\r\n  <string>" +
+            "Rose Town, during Bowyer treasure house (1F)</string>\r\n  <string>Rose Town, trea" +
+            "sure house (1F)</string>\r\n  <string>Rose Town, during Bowyer Inn (2F)</string>\r\n" +
+            "  <string>Rose Town, Inn (2F)</string>\r\n  <string>Rose Town, during Bowyer treas" +
+            "ure house (2F)</string>\r\n  <string>Rose Town, treasure house (2F)</string>\r\n  <s" +
+            "tring>Rose Town, Geno Awakens in Inn (1F)</string>\r\n  <string>Booster Pass, Area" +
+            " 01</string>\r\n  <string>Booster Pass, Area 02</string>\r\n  <string>Moleville, Out" +
+            "side (at exit from Mines)</string>\r\n  <string>Smithy Factory, Area 17 (Domino an" +
+            "d Cloaker’s room)</string>\r\n  <string>Grate Guy’s Casino, front door</string>\r\n " +
+            " <string>Moleville, Dyna and Mite’s House ____dummy</string>\r\n  <string>Grate Gu" +
+            "y’s Casino, outside</string>\r\n  <string>Nimbus Castle, Area 09 (Statue Room, aft" +
+            "er Valentina)</string>\r\n  <string>Moleville, Outside</string>\r\n  <string>Nimbus " +
+            "Castle, Area 01 (entrance hall)</string>\r\n  <string>Nimbus Castle, Area 18 (Dodo" +
+            "’s statue-polishing room)</string>\r\n  <string>Nimbus Castle, Area 04 (left of 4-" +
+            "way path, right-angle red brick path w/ treasure)</string>\r\n  <string>Nimbus Cas" +
+            "tle, Area 17 (right of 4-way path, Save Point)</string>\r\n  <string>Nimbus Castle" +
+            ", Area 16 (small two-door room w/treasure, from Area 15)</string>\r\n  <string>Nim" +
+            "bus Castle, Area 10 (red brick 2-level room w/treasure from Birdo’s room)</strin" +
+            "g>\r\n  <string>Nimbus Castle, Area 03 (4-way path, during Valentina)</string>\r\n  " +
+            "<string>Nimbus Castle, Area 02 (left of Area 01)</string>\r\n  <string>Nimbus Cast" +
+            "le, Area 15 (front of 4-way path, large right-angle room w/ plant)</string>\r\n  <" +
+            "string>Nimbus Castle, Area 05 (long 5-exit room, during Valentina)</string>\r\n  <" +
+            "string>Nimbus Castle, Area 06 (left-most front door from Area 05)</string>\r\n  <s" +
+            "tring>Nimbus Castle, Area 13 (Throne Room, during Valentina)</string>\r\n  <string" +
+            ">Nimbus Castle, path after Throne Room (2nd)</string>\r\n  <string>Nimbus Castle, " +
+            "Area 12 (entrance to throne room)</string>\r\n  <string>Pipe Vault, Area 01</strin" +
+            "g>\r\n  <string>Pipe Vault, Area 03 (line of pipes)</string>\r\n  <string>Pipe Vault" +
+            ", Area 04 (line of coins, 2 hidden treasures)</string>\r\n  <string>Pipe Vault, Ar" +
+            "ea 06 (line of red pipes)</string>\r\n  <string>Pipe Vault, Area 02</string>\r\n  <s" +
+            "tring>Pipe Vault, Area 07 (long path w/moving platforms)</string>\r\n  <string>Pip" +
+            "e Vault, Area 05</string>\r\n  <string>Sea, Area 02 (large room with shop)</string" +
+            ">\r\n  <string>Sea, Area 04 (bunch of Zeostars)</string>\r\n  <string>Sea, Area 05 (" +
+            "from Area 02 w/save point)</string>\r\n  <string>Sea, Area 06 (water room w/whirlp" +
+            "ools)</string>\r\n  <string>Sea, Area 03 (super star room)</string>\r\n  <string>Sea" +
+            ", Area 01 (entrance)</string>\r\n  <string>Sea, Area 07 (small underwater room)</s" +
+            "tring>\r\n  <string>Land’s End, Area 01</string>\r\n  <string>Land’s End, Area 02</s" +
+            "tring>\r\n  <string>Land’s End, Area 03 (Geckits playing cannonball)</string>\r\n  <" +
+            "string>Land’s End, Area 01,2 (nothing there, unused?)</string>\r\n  <string>Land’s" +
+            " End, Area 04 (rotating flowers)</string>\r\n  <string>Land’s End, Area 05 (sky br" +
+            "idge)</string>\r\n  <string>Pipe Vault, Goomba-thumping room</string>\r\n  <string>B" +
+            "owser’s Keep 6-door, treasure after each room</string>\r\n  <string>Star Hill, Are" +
+            "a 01</string>\r\n  <string>Pipe Vault, Area 02 ___dummy</string>\r\n  <string>GAME I" +
+            "NTRO: Midas River, water tunnel</string>\r\n  <string>GAME INTRO: Bandit’s Way, Ar" +
+            "ea 04</string>\r\n  <string>GAME INTRO: Midas River, Barrel Jumping</string>\r\n  <s" +
+            "tring>GAME INTRO: Moleville, outside during Bowser’s troop scene</string>\r\n  <st" +
+            "ring>GAME INTRO: Booster Hill</string>\r\n  <string>Marrymore Chapel, main hall</s" +
+            "tring>\r\n  <string>Marrymore Chapel, entrance to sanctuary</string>\r\n  <string>Ma" +
+            "rrymore Chapel, sanctuary (during Booster)</string>\r\n  <string>Marrymore Chapel," +
+            " kitchen</string>\r\n  <string>Marrymore Chapel, kitchen (no sprites/exits, unused" +
+            "?)</string>\r\n  <string>Star Hill, Area 03</string>\r\n  <string>Star Hill, Area 02" +
+            "</string>\r\n  <string>Star Hill, Area 04</string>\r\n  <string>Sunken Ship, Area 01" +
+            "</string>\r\n  <string>Sunken Ship, Area 03 (Greapers)</string>\r\n  <string>Sunken " +
+            "Ship, Area 04 (Greapers &amp; Dry Bones)</string>\r\n  <string>Sunken Ship, puzzle" +
+            " room 2</string>\r\n  <string>Sunken Ship, Area 02 (from entrance w/save point)</s" +
+            "tring>\r\n  <string>Sunken Ship, Area 06 (puzzle room passageway)</string>\r\n  <str" +
+            "ing>Sunken Ship, puzzle room 1</string>\r\n  <string>Sunken Ship, Area 05 (long st" +
+            "airwell with running Alley Rats)</string>\r\n  <string>Sunken Ship, puzzle room 3<" +
+            "/string>\r\n  <string>Sunken Ship, Area 07 (puzzle room passageway branch room w/S" +
+            "haman)</string>\r\n  <string>Sunken Ship, Area 14 ____dummy</string>\r\n  <string>Su" +
+            "nken Ship, puzzle room 4</string>\r\n  <string>Sunken Ship, puzzle room 5</string>" +
+            "\r\n  <string>Sunken Ship, post-KC Area 01 (small room w/Trampoline)</string>\r\n  <" +
+            "string>Sea, Area 08 (shore with Sunken Ship)</string>\r\n  <string>Sunken Ship, po" +
+            "st-KC Area 05 (w/Dry Bones, linked by Mario mirror room)</string>\r\n  <string>Sun" +
+            "ken Ship, Area 08 (w/save point and green switch for barrel)</string>\r\n  <string" +
+            ">Sunken Ship, Area 09 (Password room)</string>\r\n  <string>Sunken Ship, post-KC A" +
+            "rea 04 (long stairwell w/running Alley Rats)</string>\r\n  <string>Sunken Ship, po" +
+            "st-KC Area 06 (Mario Mirror room)</string>\r\n  <string>Sunken Ship, post-KC Area " +
+            "02 (small 2-level room)</string>\r\n  <string>Sunken Ship, post-KC Area 03 (Alley " +
+            "Rats on cannons)</string>\r\n  <string>Sunken Ship, post-KC Area 07 (three Dry Bon" +
+            "es)</string>\r\n  <string>Sunken Ship, post-KC Area 08 (secret room with Frog Coin" +
+            ")</string>\r\n  <string>Sunken Ship, post-KC Area 09 (Hidon’s room w/save point)</" +
+            "string>\r\n  <string>Sunken Ship, post-KC Area 14 (secret Safety Ring)</string>\r\n " +
+            " <string>Sunken Ship, post-KC Area 18 (warp room from Johnny’s room)</string>\r\n " +
+            " <string>Sunken Ship, post-KC Area 10 (water room with frog coins)</string>\r\n  <" +
+            "string>Sunken Ship, post-KC Area 11 (water room with whirlpool)</string>\r\n  <str" +
+            "ing>Mario’s Pipehouse</string>\r\n  <string>Mushroom Kingdom, during Mack, Outside" +
+            "</string>\r\n  <string>Mushroom Kingdom, Outside</string>\r\n  <string>Booster Tower" +
+            ", 9F Area 02 (Booster’s curtain game room)</string>\r\n  <string>Booster Tower, 2F" +
+            " Area 03 (steps w/circling Bob-ombs)</string>\r\n  <string>Booster Tower, 2F Area " +
+            "02 (Booster’s railway room)</string>\r\n  <string>Booster Tower, 6F Area 02 (Boost" +
+            "er’s Ancestor Game room)</string>\r\n  <string>Booster Tower, 2F Area 01 (w/consta" +
+            "ntly appearing Spookums)</string>\r\n  <string>Booster Tower, 1F Area 02 (high Mas" +
+            "her room w/teeter-totter)</string>\r\n  <string>Booster Tower, 8F Area 03 (3-level" +
+            " w/one Chomp)</string>\r\n  <string>Booster Tower, 9F Area 01 (three yellow platfo" +
+            "rms w/save point)</string>\r\n  <string>Booster Tower, 6F Area 03 (Elder’s Room w/" +
+            "Chomp)</string>\r\n  <string>Booster Tower, 6F Area 01 (small room w/save point)</" +
+            "string>\r\n  <string>Booster Tower Entrance</string>\r\n  <string>Mushroom Way, Area" +
+            " 01</string>\r\n  <string>Mushroom Way, Area 02</string>\r\n  <string>Mushroom Way, " +
+            "Area 03</string>\r\n  <string>Bandit’s Way, Area 05</string>\r\n  <string>Bandit’s W" +
+            "ay, Area 02</string>\r\n  <string>Seaside Town, during Yaridovich Outside</string>" +
+            "\r\n  <string>Seaside Town, during Yaridovich Inn (1F)</string>\r\n  <string>Seaside" +
+            " Town, during Yaridovich Inn (2F)</string>\r\n  <string>Seaside Town, during Yarid" +
+            "ovich Elder’s House (1F)</string>\r\n  <string>Seaside Town, during Yaridovich Eld" +
+            "er’s House (2F)</string>\r\n  <string>Seaside Town, during Yaridovich Beetles Are " +
+            "Us/Bomb Shop</string>\r\n  <string>Seaside Town, during Yaridovich Weapons and Arm" +
+            "or Shop</string>\r\n  <string>Seaside Town, during Yaridovich Health Food Store (l" +
+            "eft-most)</string>\r\n  <string>Seaside Town, during Yaridovich Mushroom Boy Shop " +
+            "(middle)</string>\r\n  <string>Seaside Town, during Yaridovich Accessory Shop (rig" +
+            "ht-most)</string>\r\n  <string>Seaside Town, during Yaridovich Shed (unused b/c in" +
+            "accessible)</string>\r\n  <string>GAME INTRO: Sea, shore with Sunken Ship</string>" +
+            "\r\n  <string>Smithy Factory, Area 02 (w/save point)</string>\r\n  <string>Smithy Fa" +
+            "ctory, Area 04 (green switch w/Ameboids)</string>\r\n  <string>Smithy Factory, Are" +
+            "a 03 (Glum Reapers)</string>\r\n  <string>Smithy Factory, Area 07 (Count Down’s ro" +
+            "om)</string>\r\n  <string>Forest Maze, Area 01</string>\r\n  <string>Forest Maze, Ar" +
+            "ea 05 (tree trunk Area)</string>\r\n  <string>Forest Maze, Area 02</string>\r\n  <st" +
+            "ring>Forest Maze, Area 09 (leads to 4-path maze)</string>\r\n  <string>Forest Maze" +
+            ", Area 04</string>\r\n  <string>Forest Maze, Area 06</string>\r\n  <string>Forest Ma" +
+            "ze, 4-way path from Area 09</string>\r\n  <string>Forest Maze, Secret entrance</st" +
+            "ring>\r\n  <string>Forest Maze, Bowyer’s practice pad</string>\r\n  <string>Forest M" +
+            "aze, Area 03 (underground)</string>\r\n  <string>Forest Maze, Secret</string>\r\n  <" +
+            "string>Forest Maze, Area 08 (underground)</string>\r\n  <string>Forest Maze, Area " +
+            "07 (underground w/sleeping Wiggler)</string>\r\n  <string>Smithy Factory, Area 05 " +
+            "(w/save point)</string>\r\n  <string>Smithy Factory, fall from lugnut rooms (Area " +
+            "06 &amp; prior)</string>\r\n  <string>Smithy Factory, Area 06 (Ultra Hammer)</stri" +
+            "ng>\r\n  <string>Volcano, Area 21 ____dummy</string>\r\n  <string>Volcano, Area 02 _" +
+            "___dummy</string>\r\n  <string>Forest Maze, all tree trunk underground areas</stri" +
+            "ng>\r\n  <string>GAME INTRO: Mushroom Kingdom Castle, Throne Room</string>\r\n  <str" +
+            "ing>GAME INTRO: Yo’ster Isle, talk to Yoshi &amp; run around</string>\r\n  <string" +
+            ">GAME INTRO: Pipe Vault, Area 02 (w/Thwomp)</string>\r\n  <string>GAME INTRO: Kero" +
+            " Sewers, Entrance</string>\r\n  <string>GAME INTRO: Tadpole Pond, Mario summons ta" +
+            "dpoles</string>\r\n  <string>GAME INTRO: Mushroom Way, Area 01</string>\r\n  <string" +
+            ">GAME INTRO: Vista Hill</string>\r\n  <string>GAME INTRO: Booster Tower, balcony w" +
+            "ith Toadstool crying</string>\r\n  <string>Bean Valley, piranha pipe Area</string>" +
+            "\r\n  <string>Bean Valley, main Area</string>\r\n  <string>Bean Valley, magic brick " +
+            "to Beanstalk Area</string>\r\n  <string>Bean Valley, Smilax Area</string>\r\n  <stri" +
+            "ng>Monstro Town, Jinx’s Dojo</string>\r\n  <string>Forest Maze, Small area w/tree " +
+            "trunk (unused?)</string>\r\n  <string>GAME INTRO: Forest Maze, fighting Magikoopa " +
+            "at Bowyer’s Pad</string>\r\n  <string>Booster Tower, Balcony at top floor</string>" +
+            "\r\n  <string>Booster Tower, 3F Area 01 (green switch for BP secret)</string>\r\n  <" +
+            "string>GAME INTRO: Forest Maze, jumping on Wiggler</string>\r\n  <string>Bowser’s " +
+            "Keep 1st time, Area 03 (lava room w/bridge)</string>\r\n  <string>Land’s End Under" +
+            "ground, Area 04 (buy super stars)</string>\r\n  <string>Land’s End Underground, Ar" +
+            "ea 01</string>\r\n  <string>Land’s End Underground, Area 02</string>\r\n  <string>La" +
+            "nd’s End Underground, Area 03</string>\r\n  <string>Bowser’s Keep, Area 10 (Magiko" +
+            "opa’s room)</string>\r\n  <string>Monstro Town, entrance</string>\r\n  <string>Belom" +
+            "e Temple, Area 08 (Belome’s room)</string>\r\n  <string>ENDING CREDITS: Nimbus Lan" +
+            "d, Prince Mallow</string>\r\n  <string>Land’s End secret underground, Area 01 (lea" +
+            "ds to Kero Sewers)</string>\r\n  <string>Moleville Mines, Area 17 (Punchinello’s r" +
+            "oom)</string>\r\n  <string>Moleville Mines, Area 11 (bombed room w/singing Moles)<" +
+            "/string>\r\n  <string>Moleville Mines, Area 04 (w/trampoline)</string>\r\n  <string>" +
+            "Moleville Mines, Area 02</string>\r\n  <string>Moleville Mines, Area 06 (small roo" +
+            "m leading to Area 06)</string>\r\n  <string>Moleville Mines, Area 01 (entrance)</s" +
+            "tring>\r\n  <string>Moleville Mines, Area 05 (left of trampoline room)</string>\r\n " +
+            " <string>Moleville Mines, Area 03 (leads back to Area 1)</string>\r\n  <string>Mol" +
+            "eville Mines, Area 08 (Croco’s bombed room)</string>\r\n  <string>Moleville Mines," +
+            " Area 15 (2-level room w/Sparky and 10-coin TC)</string>\r\n  <string>Moleville Mi" +
+            "nes, Area 07 (from Croco’s bombed room)</string>\r\n  <string>Moleville Mines, Are" +
+            "a 10 (small room w/minecart tracks)</string>\r\n  <string>Moleville Mines, Area 09" +
+            " (leads left to Croco’s bombed room)</string>\r\n  <string>Moleville Mines, Area 1" +
+            "8 (minecart room)</string>\r\n  <string>Moleville Mines, Area 13 (long minecart tr" +
+            "acks room)</string>\r\n  <string>Moleville Mines, Area 12 (2-level room, leads to " +
+            "long minecart tracks room)</string>\r\n  <string>Moleville Mines, Area 14 (2-level" +
+            " room from long minecart tracks room)</string>\r\n  <string>Moleville Mines, Area " +
+            "16 (large save-point room w/four Bob-ombs)</string>\r\n  <string>Moleville Mines, " +
+            "Area 17 (Punchinello’s room)</string>\r\n  <string>Moleville Mines, Area 19 (from " +
+            "outside after paying)</string>\r\n  <string>GAME INTRO: Booster Tower, 7F (parachu" +
+            "ting Spookums)</string>\r\n  <string>____unmapped house room</string>\r\n  <string>_" +
+            "___unmapped house room</string>\r\n  <string>____unmapped house room</string>\r\n  <" +
+            "string>____unmapped house room</string>\r\n  <string>____unmapped house room</stri" +
+            "ng>\r\n  <string>____unmapped outside townplace (resembles Seaside Town)</string>\r" +
+            "\n  <string>____unmapped house room</string>\r\n  <string>____unmapped house room</" +
+            "string>\r\n  <string>____unmapped house room</string>\r\n  <string>Kero Sewers, Area" +
+            " 07 (water switch room w/Boos)</string>\r\n  <string>Kero Sewers, Area 08 (Belome’" +
+            "s Room)</string>\r\n  <string>Kero Sewers, Area 08 (Belome’s Room, after defeat)</" +
+            "string>\r\n  <string>Seaside Town, Outside</string>\r\n  <string>Seaside Town, Inn (" +
+            "1F)</string>\r\n  <string>Seaside Town, Inn (2F)</string>\r\n  <string>Seaside Town," +
+            " Elder’s house (1F)</string>\r\n  <string>Seaside Town, Elder’s house (2F)</string" +
+            ">\r\n  <string>Seaside Town, Beetles Are Us</string>\r\n  <string>Seaside Town, Weap" +
+            "on and Armor shop</string>\r\n  <string>Seaside Town, Health Food Store</string>\r\n" +
+            "  <string>Seaside Town, Mushroom Boy’s Shop</string>\r\n  <string>Seaside Town, Ac" +
+            "cessory Shop</string>\r\n  <string>Seaside Town, Shed</string>\r\n  <string>Seaside " +
+            "Town, during Yaridovich Beach</string>\r\n  <string>Seaside Town, Beach</string>\r\n" +
+            "  <string>Land’s End Desert, Area 01</string>\r\n  <string>Land’s End Desert, Area" +
+            " 02</string>\r\n  <string>Land’s End Desert, Area 06</string>\r\n  <string>Mushroom " +
+            "Kingdom Castle, Entrance to Throne room</string>\r\n  <string>Bowser’s Keep 6-door" +
+            ", Action Room 2-A (slow elevating platforms)</string>\r\n  <string>Bowser’s Keep 6" +
+            "-door, Action Room 1-A (jumping Terrapin)</string>\r\n  <string>Mushroom Kingdom C" +
+            "astle, during Mack entrance to Throne Room</string>\r\n  <string>Monstro Town, out" +
+            "side</string>\r\n  <string>Mushroom Kingdom Castle, during Mack Main Hall</string>" +
+            "\r\n  <string>Mushroom Kingdom Castle, during Mack Throne Room</string>\r\n  <string" +
+            ">Mushroom Kingdom Castle, during Mack stairwell to Toadstool’s Room</string>\r\n  " +
+            "<string>Mushroom Kingdom Castle, during Mack Toadstool’s Room</string>\r\n  <strin" +
+            "g>Mushroom Kingdom Castle, during Mack branch room to Vault/Guest Room</string>\r" +
+            "\n  <string>Mushroom Kingdom Castle, during Mack Guest room</string>\r\n  <string>M" +
+            "ushroom Kingdom Castle, during Mack Vault</string>\r\n  <string>Mushroom Kingdom C" +
+            "astle, during Mack entrance to Toadstool’s room</string>\r\n  <string>Kero Sewers " +
+            "Entrance</string>\r\n  <string>Bean Valley pipe room, left-most pipe</string>\r\n  <" +
+            "string>Bean Valley pipe room, right-most pipe (large room)</string>\r\n  <string>M" +
+            "oleville, Item Shop</string>\r\n  <string>Moleville, Inn</string>\r\n  <string>Molev" +
+            "ille, Dyna and Mite’s house</string>\r\n  <string>Moleville, Fireworks shop</strin" +
+            "g>\r\n  <string>Moleville, Special item-trading shop</string>\r\n  <string>Nimbus La" +
+            "nd, Garro’s House</string>\r\n  <string>Nimbus Land, lower house</string>\r\n  <stri" +
+            "ng>Nimbus Land, Inn</string>\r\n  <string>Nimbus Land, Item Shop</string>\r\n  <stri" +
+            "ng>Nimbus Land, top-right house (Croco drops Signal Ring)</string>\r\n  <string>Ni" +
+            "mbus Land, Inn (bedroom)</string>\r\n  <string>Bean Valley pipe room, top pipe (le" +
+            "ads to Grate Guy’s Casino)</string>\r\n  <string>Bean Valley pipe room, bottom lef" +
+            "t</string>\r\n  <string>Bean Valley pipe room, bottom right</string>\r\n  <string>Sm" +
+            "ithy Factory, Area 01</string>\r\n  <string>Culex’s Room</string>\r\n  <string>Volca" +
+            "no, Area 21 (Czar Dragon’s room)</string>\r\n  <string>Volcano, Area 18 (Hino Mart" +
+            ")</string>\r\n  <string>Volcano, Area 01</string>\r\n  <string>Volcano, Area 03 (sec" +
+            "ret w/two flowers)</string>\r\n  <string>Volcano, Area 08</string>\r\n  <string>Volc" +
+            "ano, Post-CD Area 01</string>\r\n  <string>Volcano, Area 11</string>\r\n  <string>Vo" +
+            "lcano, Area 02</string>\r\n  <string>Volcano, Area 04 (bunch of steps)</string>\r\n " +
+            " <string>Volcano, Area 09</string>\r\n  <string>Volcano, Area 07 (stomping Corkped" +
+            "ite)</string>\r\n  <string>Volcano, Area 15 (stomping Corkpedite)</string>\r\n  <str" +
+            "ing>Volcano, Area 14</string>\r\n  <string>Volcano, Post-CD Area 03</string>\r\n  <s" +
+            "tring>Volcano, Area 13 (w/save point)</string>\r\n  <string>Volcano, Area 17 (lead" +
+            "s to Hinopio’s Shop)</string>\r\n  <string>Nimbus Land, Royal Bus station</string>" +
+            "\r\n  <string>Nimbus Land, entrance (w/warp trampoline)</string>\r\n  <string>Nimbus" +
+            " Land, entrance to hot springs</string>\r\n  <string>Nimbus Land, fall from platfo" +
+            "rm (1st)</string>\r\n  <string>Nimbus Land, fall from platform (2nd)</string>\r\n  <" +
+            "string>Nimbus Land, fall from platform (3rd)</string>\r\n  <string>Nimbus Land, fa" +
+            "ll from platform (4th)</string>\r\n  <string>ENDING CREDITS: Star Pieces shoot thr" +
+            "ough the sky</string>\r\n  <string>Bowser’s Keep 6-door, Battle Room 2-B (1st figh" +
+            "t: Chewy)</string>\r\n  <string>Bowser’s Keep 6-door, Battle Room 2-C (1st fight: " +
+            "Sparky)</string>\r\n  <string>Bean Valley Beanstalks, Area 01</string>\r\n  <string>" +
+            "Bean Valley Beanstalks, Area 02</string>\r\n  <string>Bean Valley Beanstalks, Area" +
+            " 03 (from right beanstalk of Area 02)</string>\r\n  <string>Bean Valley Beanstalks" +
+            ", Area 04 (from left beanstalk of Area 02)</string>\r\n  <string>Nimbus Land, entr" +
+            "ance (no trampolines/exits)</string>\r\n  <string>Volcano, Area 10 (jumping Pyrosp" +
+            "heres)</string>\r\n  <string>Volcano, Area 05</string>\r\n  <string>Volcano, Area 06" +
+            "</string>\r\n  <string>Volcano, Area 12 (erupting Stumpet)</string>\r\n  <string>Vol" +
+            "cano, Area 19 (from Hino Mart w/save point)</string>\r\n  <string>Volcano, Post-CD" +
+            " Area 02</string>\r\n  <string>Volcano, Area 20 (jumping Pyrospheres)</string>\r\n  " +
+            "<string>Volcano, Area 16 (erupting Stumpet)</string>\r\n  <string>Volcano, Post-CD" +
+            " Area 04</string>\r\n  <string>Volcano, Post-CD Area 06</string>\r\n  <string>Volcan" +
+            "o, Post-CD Area 07 (warp to World Map)</string>\r\n  <string>Volcano, Post-CD Area" +
+            " 05</string>\r\n  <string>Monstro Town, Monstermama’s house (1F)</string>\r\n  <stri" +
+            "ng>Monstro Town, Monstermama’s house (2F)</string>\r\n  <string>Monstro Town, supe" +
+            "r-jumping room</string>\r\n  <string>Monstro Town, Weapon and Armor Shop</string>\r" +
+            "\n  <string>Monstro Town, 3 Musty Fears Inn</string>\r\n  <string>Bowser’s Keep, Ar" +
+            "ea 13 (2nd throne room, Boomer’s room)</string>\r\n  <string>Land’s End secret und" +
+            "erground, Area 02 (leads to Kero Sewers)</string>\r\n  <string>Land’s End Desert, " +
+            "Area 03</string>\r\n  <string>Land’s End Desert, Area 05</string>\r\n  <string>Land’" +
+            "s End Desert, Area 04</string>\r\n  <string>Booster Pass, Secret</string>\r\n  <stri" +
+            "ng>Factory Grounds, Area 01 (with Toad)</string>\r\n  <string>Land’s End Cliff (cl" +
+            "imb w/Sky Troopas)</string>\r\n  <string>Nimbus Castle, Area 14 (right-most front " +
+            "door of long 5-exit room) </string>\r\n  <string>Nimbus Castle, Area 09 (Birdo’s R" +
+            "oom)</string>\r\n  <string>Nimbus Castle, Area 07 (straight from Area 06 w/long st" +
+            "aircase)</string>\r\n  <string>Nimbus Castle, path after Throne room (1st)</string" +
+            ">\r\n  <string>Nimbus Castle, Area 11 (long hallway, door to King’s Cellar)</strin" +
+            "g>\r\n  <string>Nimbus Castle, King’s locked cellar</string>\r\n  <string>Nimbus Cas" +
+            "tle, Area 08 (from Area 07, get Room Key 1 here)</string>\r\n  <string>Nimbus Land" +
+            ", small platform after Nimbus Castle throne paths</string>\r\n  <string>Nimbus Lan" +
+            "d, outside (before Valentina)</string>\r\n  <string>Gardener’s House, outside</str" +
+            "ing>\r\n  <string>Gardener’s House</string>\r\n  <string>Lazy Shell cloud</string>\r\n" +
+            "  <string>Belome Temple, Area 02 (Fortune Room)</string>\r\n  <string>Belome Templ" +
+            "e, Area 04 (room determined by fortune)</string>\r\n  <string>Belome Temple, Area " +
+            "09 (Belome’s Treasure room)</string>\r\n  <string>Belome Temple, Area 06 (Belome’s" +
+            " fortune room w/elevating platform)</string>\r\n  <string>Belome Temple, Area 03 (" +
+            "pipe to room determined by fortune)</string>\r\n  <string>Belome Temple, Area 05 (" +
+            "from Fortune Room)</string>\r\n  <string>Belome Temple, Area 07 (pipe to Belome’s " +
+            "room)</string>\r\n  <string>Belome Temple, Area 10 (pipe to Monstro Town)</string>" +
+            "\r\n  <string>Belome Temple, Area 01 (w/Warp Trampoline)</string>\r\n  <string>GAME " +
+            "INTRO: Nimbus Land, outside with patrolling Birdies</string>\r\n  <string>Nimbus L" +
+            "and, outside (during Valentina)</string>\r\n  <string>Bowser’s Keep 6-door, Puzzle" +
+            " Rooms</string>\r\n  <string>ENDING CREDITS: Johnny looking out at sunset on beach" +
+            " shore</string>\r\n  <string>Smithy Factory, Area 01 ____dummy</string>\r\n  <string" +
+            ">Smithy Factory, Area 09 (falling Axem Reds on conveyor belts)</string>\r\n  <stri" +
+            "ng>ENDING CREDITS: Bowser’s Keep, Bowser &amp; troops repair</string>\r\n  <string" +
+            ">Smithy Factory, Area 01 ____dummy</string>\r\n  <string>Nimbus Castle, path after" +
+            " Throne room (3rd)</string>\r\n  <string>Nimbus Land, outside (after Valentina)</s" +
+            "tring>\r\n  <string>Bowser’s Keep, outside (talk to Exor)</string>\r\n  <string>Nimb" +
+            "us Castle, Area 13 (Throne room, after Valentina)</string>\r\n  <string>ENDING CRE" +
+            "DITS: Toadofsky conducts choir</string>\r\n  <string>Smithy Factory, Area 11 (conv" +
+            "eyor belts spawning Drill Bits and Macks)</string>\r\n  <string>Smithy Factory, Ar" +
+            "ea 16 (small room w/two treasures after falling Yaridovich room)</string>\r\n  <st" +
+            "ring>Smithy Factory, Area 09 ____dummy</string>\r\n  <string>Smithy Factory, Area " +
+            "10 (fall from Area 09)</string>\r\n  <string>Bowser’s Keep 6-door, exit room after" +
+            " finishing 4 doors</string>\r\n  <string>Nimbus Land, hot springs</string>\r\n  <str" +
+            "ing>Bowser’s Keep, Area 09 (tall room, w/save point)</string>\r\n  <string>Bowser’" +
+            "s Keep, Area 11 (Thwomp/Bullet room after Magikoopa’s room)</string>\r\n  <string>" +
+            "Bowser’s Keep, Area 12 (Croco’s Shop 2, after Magikoopa’s room)</string>\r\n  <str" +
+            "ing>Bowser’s Keep, Area 07 (150 coins and a mushroom)</string>\r\n  <string>Bowser" +
+            "’s Keep, Area 06 (save point w/Croco shop)</string>\r\n  <string>Bowser’s Keep, Ar" +
+            "ea 05 (dark tunnel, after throne room)</string>\r\n  <string>Bowser’s Keep, Area 0" +
+            "8 (room with 6 doors)</string>\r\n  <string>Bowser’s Keep 6-door, Action Room 1-C " +
+            "(Gorilla throwing barrels)</string>\r\n  <string>Bowser’s Keep 6-door, Action Room" +
+            " 2-C (very slow moving circling platforms)</string>\r\n  <string>Bowser’s Keep 6-d" +
+            "oor, Action Room 2-B (cannonball riding)</string>\r\n  <string>Bowser’s Keep 6-doo" +
+            "r, Action Room 1-B (moving platforms)</string>\r\n  <string>Bowser’s Keep 6-door, " +
+            "Battle Room 1-A (1st fight: Terra Cotta)</string>\r\n  <string>Bowser’s Keep 6-doo" +
+            "r, Battle Room 1-B (1st fight: Alley Rat)</string>\r\n  <string>Bowser’s Keep 6-do" +
+            "or, Battle Room 1-C (1st fight: Bob-Omb)</string>\r\n  <string>Bowser’s Keep 6-doo" +
+            "r, Battle Room 2-A (1st fight: Gu Goomba)</string>\r\n  <string>Bowser’s Keep 6-do" +
+            "or, Puzzle Room 1-B (barrel-counting)</string>\r\n  <string>Bowser’s Keep 6-door, " +
+            "Puzzle Room 1-A (quiz)</string>\r\n  <string>Bowser’s Keep 6-door, Puzzle Room 2-B" +
+            " (green switches)</string>\r\n  <string>Bowser’s Keep 6-door, Puzzle Room 1-C (wor" +
+            "d problem)</string>\r\n  <string>Bowser’s Keep 6-door, Puzzle Room 2-A (coin colle" +
+            "cting)</string>\r\n  <string>Bowser’s Keep 6-door, Puzzle Room 2-C (ball solitaire" +
+            ")</string>\r\n  <string>Factory Grounds, Area 01</string>\r\n  <string>Factory Groun" +
+            "ds, Area 04 (Gun Yolk’s room)</string>\r\n  <string>Factory Grounds, Area 02</stri" +
+            "ng>\r\n  <string>Factory Grounds, Area 03</string>\r\n  <string>Smithy Factory, Area" +
+            " 13 (Bowyers falling down conveyor belts)</string>\r\n  <string>Smithy Factory, Ar" +
+            "ea 15 (falling Yaridovichs)</string>\r\n  <string>Smithy Factory, Area 12 (lots of" +
+            " consecutive conveyor belts and LIL~BOOS)</string>\r\n  <string>Bowser’s Keep 2nd " +
+            "Time, Area 01</string>\r\n  <string>Bowser’s Keep 2nd Time, Area 02</string>\r\n  <s" +
+            "tring>Bowser’s Keep 2nd Time, Area 03 (lava room w/bridge)</string>\r\n  <string>B" +
+            "owser’s Keep 2nd Time, Area 04 (Throne Room)</string>\r\n  <string>Mushroom Kingdo" +
+            "m, during Mack, jumping kid’s house (1F)</string>\r\n  <string>Mushroom Kingdom, d" +
+            "uring Mack, jumping kid’s house (2F)</string>\r\n  <string>Mushroom Kingdom, durin" +
+            "g Mack, Raz and Raini’s house</string>\r\n  <string>Mushroom Kingdom, during Mack," +
+            " Item Shop (top floor)</string>\r\n  <string>Mushroom Kingdom, during Mack, Item S" +
+            "hop (basement)</string>\r\n  <string>Mushroom Kingdom, during Mack, Inn (1F)</stri" +
+            "ng>\r\n  <string>ENDING CREDITS: Star Pieces (Rose Town), last star piece to ‘Than" +
+            "k You’</string>\r\n  <string>Mushroom Kingdom, during Mack, running kid’s house</s" +
+            "tring>\r\n  <string>Mushroom Kingdom, jumping kid’s house (1F)</string>\r\n  <string" +
+            ">Mushroom Kingdom, jumping kid’s house (2F)</string>\r\n  <string>Mushroom Kingdom" +
+            ", Raz and Raini’s house</string>\r\n  <string>Mushroom Kingdom, Item Shop (top flo" +
+            "or)</string>\r\n  <string>Mushroom Kingdom, Item Shop (basement)</string>\r\n  <stri" +
+            "ng>Mushroom Kingdom, Inn (1F)</string>\r\n  <string>Mushroom Kingdom, Inn (2F)</st" +
+            "ring>\r\n  <string>Mushroom Kingdom, running kid’s house</string>\r\n  <string>Facto" +
+            "ry Grounds, fight with Smithy (uses Sledge)</string>\r\n  <string>Nimbus Castle, A" +
+            "rea 06 ____dummy</string>\r\n  <string>Nimbus Castle, Area 10 ____dummy</string>\r\n" +
+            "  <string>Nimbus Castle, Area 05 (long 5-exit room, after Valentina)</string>\r\n " +
+            " <string>Nimbus Castle, Area 04 ____dummy</string>\r\n  <string>Nimbus Castle, Are" +
+            "a 03 (4-way path, after Valentina)</string>\r\n  <string>Nimbus Land, Dream Cushio" +
+            "n Dream: small cloud, person cheers on Mario/bed floats</string>\r\n  <string>Nimb" +
+            "us Land, Dream Cushion Dream: Heavy Troopa laying on Mario</string>\r\n  <string>N" +
+            "imbus Land, Dream Cushion Dream: Tortes are seasoning Mario</string>\r\n  <string>" +
+            "ENDING CREDITS: Yo’ster Isle, Croco racing Yoshi</string>\r\n  <string>ENDING CRED" +
+            "ITS: Marrymore Chapel, Booster wedding Valentina</string>\r\n  <string>Smithy Fact" +
+            "ory, Area 08 (Trampoline after Count Down)</string>\r\n  <string>Smithy Factory, A" +
+            "rea 14 (w/save point)</string>\r\n  <string>Factory Grounds, Smithy’s Pad</string>" +
+            "\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection LevelNamesDefault {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["LevelNamesDefault"]));
@@ -1268,507 +1254,418 @@ namespace SMRPGED.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>[000]  Mario (walking, down-left)</string>\r\n  <string>[001]  Mario (jump, " +
-            "front)</string>\r\n  <string>[002]  Mario (walking, up-right)</string>\r\n  <string>" +
-            "[003]  Mario (surprise, left)</string>\r\n  <string>[004]  Mario (attack, up-right" +
-            ")</string>\r\n  <string>[005]  Mario (hammer attack, up-right)</string>\r\n  <string" +
-            ">[006]  Mario (crouch, up-right)</string>\r\n  <string>[007]  Toadstool (walking, " +
-            "down-left)</string>\r\n  <string>[008]  Toadstool (walking, up-right)</string>\r\n  " +
-            "<string>[009]  Toadstool (surprise)</string>\r\n  <string>[00A]  Toadstool (slap a" +
-            "ttack)</string>\r\n  <string>[00B]  Toadstool (frying pan attack)</string>\r\n  <str" +
-            "ing>[00C]  Toadstool (fallen/crying)</string>\r\n  <string>[00D]  Bowser (walking," +
-            " down-left)</string>\r\n  <string>[00E]  Bowser (walking, up-right)</string>\r\n  <s" +
-            "tring>[00F]  Bowser (surprise)</string>\r\n  <string>[010]  Bowser (claw attack)</" +
-            "string>\r\n  <string>[011]  Bowser (swing ball-chain)</string>\r\n  <string>[012]  B" +
-            "owser (cast spell)</string>\r\n  <string>[013]  Mallow (walking, down-left)</strin" +
-            "g>\r\n  <string>[014]  Mallow (walking, up-right)</string>\r\n  <string>[015]  Mallo" +
-            "w (surprise)</string>\r\n  <string>[016]  Mallow (punch)</string>\r\n  <string>[017]" +
-            "  Mallow (swing stick)</string>\r\n  <string>[018]  Mallow (still, up-right)</stri" +
-            "ng>\r\n  <string>[019]  Geno (walking, down-left)</string>\r\n  <string>[01A]  Geno " +
-            "(walking, up-right)</string>\r\n  <string>[01B]  Geno (surprise)</string>\r\n  <stri" +
-            "ng>[01C]  Geno (elbow shot)</string>\r\n  <string>[01D]  Geno (finger shot)</strin" +
-            "g>\r\n  <string>[01E]  Geno (morph into cannon)</string>\r\n  <string>[01F]  Hammer<" +
-            "/string>\r\n  <string>[020]  Froggie Stick</string>\r\n  <string>[021]  Cymbals</str" +
-            "ing>\r\n  <string>[022]  Chomp</string>\r\n  <string>[023]  Frying Pan</string>\r\n  <" +
-            "string>[024]  Parasol</string>\r\n  <string>[025]  War Fan</string>\r\n  <string>[02" +
-            "6]  Red Mushroom</string>\r\n  <string>[027]  Red Scarecrow</string>\r\n  <string>[0" +
-            "28]  Mario\'s battle portrait</string>\r\n  <string>[029]  Toadstool\'s battle portr" +
-            "ait</string>\r\n  <string>[02A]  Bowser\'s battle portrait</string>\r\n  <string>[02B" +
-            "]  Mallow\'s battle portrait</string>\r\n  <string>[02C]  Geno\'s battle portrait</s" +
-            "tring>\r\n  <string>[02D]  Yellow Yoshi</string>\r\n  <string>[02E]  Pink Yoshi</str" +
-            "ing>\r\n  <string>[02F]  Boshi</string>\r\n  <string>[030]  Croco</string>\r\n  <strin" +
-            "g>[031]  Green Yoshi</string>\r\n  <string>[032]  Booster</string>\r\n  <string>[033" +
-            "]  Green Yoshi (walk)</string>\r\n  <string>[034]  Booster (walk)</string>\r\n  <str" +
-            "ing>[035]  King Nimbus</string>\r\n  <string>[036]  Queen Nimbus</string>\r\n  <stri" +
-            "ng>[037]  Jonathan Jones</string>\r\n  <string>[038]  Valentina</string>\r\n  <strin" +
-            "g>[039]  Magikoopa</string>\r\n  <string>[03A]  Frogfucius</string>\r\n  <string>[03" +
-            "B]  Tadpole</string>\r\n  <string>[03C]  Thwomp</string>\r\n  <string>[03D]  Big Thw" +
-            "omp</string>\r\n  <string>[03E]  Microbomb</string>\r\n  <string>[03F]  Valentina St" +
-            "atue</string>\r\n  <string>[040]  Toad</string>\r\n  <string>[041]  Wallet Guy (also" +
-            " casino assistants)</string>\r\n  <string>[042]  Raini</string>\r\n  <string>[043]  " +
-            "Old Man</string>\r\n  <string>[044]  Old Woman</string>\r\n  <string>[045]  Green/Br" +
-            "own Toad</string>\r\n  <string>[046]  Chancellor</string>\r\n  <string>[047]  Pa Mol" +
-            "e</string>\r\n  <string>[048]  Ma Mole</string>\r\n  <string>[049]  Girl Mole (pink " +
-            "bow)</string>\r\n  <string>[04A]  Girl Mole (yellow bow)</string>\r\n  <string>[04B]" +
-            "  Nimbusite (blue)</string>\r\n  <string>[04C]  Nimbusite (red)</string>\r\n  <strin" +
-            "g>[04D]  Nimbusite (brown/green)</string>\r\n  <string>[04E]  Nimbusite (yellow/gr" +
-            "een)</string>\r\n  <string>[04F]  Nimbus Guard</string>\r\n  <string>[050]  Toadofsk" +
-            "y</string>\r\n  <string>[051]  Mario Doll (Booster\'s Castle)</string>\r\n  <string>[" +
-            "052]  Blue Star Piece</string>\r\n  <string>[053]  Purple Star Piece</string>\r\n  <" +
-            "string>[054]  Red Star Piece</string>\r\n  <string>[055]  Gold Star Piece</string>" +
-            "\r\n  <string>[056]  Green Star Piece</string>\r\n  <string>[057]  Light Blue Star P" +
-            "iece</string>\r\n  <string>[058]  Yellow Star Piece</string>\r\n  <string>[059]  Gen" +
-            "o Doll</string>\r\n  <string>[05A]  Bowser Doll</string>\r\n  <string>[05B]  Mario D" +
-            "oll</string>\r\n  <string>[05C]  Toadstool Doll</string>\r\n  <string>[05D]  Blue St" +
-            "epping Block</string>\r\n  <string>[05E]  Treasure Chest</string>\r\n  <string>[05F]" +
-            "  Empty Treasure Chest</string>\r\n  <string>[060]  Mario Doll (surprised)</string" +
-            ">\r\n  <string>[061]  Toadstool\'s Parachute</string>\r\n  <string>[062]  Rolling Bar" +
-            "rel</string>\r\n  <string>[063]  Warp Spring-board</string>\r\n  <string>[064]  Jump" +
-            " Spring-board</string>\r\n  <string>[065]  Teeter-totter</string>\r\n  <string>[066]" +
-            "  Save Point</string>\r\n  <string>[067]  Corkpedite</string>\r\n  <string>[068]  J " +
-            "Puzzle Block</string>\r\n  <string>[069]  Yellow Stepping Block</string>\r\n  <strin" +
-            "g>[06A]  Water Droplet</string>\r\n  <string>[06B]  Hinopio</string>\r\n  <string>[0" +
-            "6C]  Factory Hex-Nut</string>\r\n  <string>[06D]  Green Switch</string>\r\n  <string" +
-            ">[06E]  Discolored Treasure Chest?</string>\r\n  <string>[06F]  Nimbusland Bus Dri" +
-            "ver</string>\r\n  <string>[070]  Mushroom Boy</string>\r\n  <string>[071]  Marrymore" +
-            " Man (green)</string>\r\n  <string>[072]  Marrymore Woman (yellow)</string>\r\n  <st" +
-            "ring>[073]  Marrymore Woman (green)</string>\r\n  <string>[074]  Marrymore Kid (pu" +
-            "rple)</string>\r\n  <string>[075]  Marrymore Kid (blue/green)</string>\r\n  <string>" +
-            "[076]  Marrymore Bright Card buyer (brown/grey)</string>\r\n  <string>[077]  Rose " +
-            "Town Gardener (green/grey)</string>\r\n  <string>[078]  Old Woman (green/grey)</st" +
-            "ring>\r\n  <string>[079]  Old Woman (purple/grey)</string>\r\n  <string>[07A]  Fat Y" +
-            "oshi Baby</string>\r\n  <string>[07B]  Yoshi Baby Egg</string>\r\n  <string>[07C]  G" +
-            "ameboy Kid</string>\r\n  <string>[07D]  Frogfucius Student</string>\r\n  <string>[07" +
-            "E]  Chomp (behind)</string>\r\n  <string>[07F]  Wiggler (head)</string>\r\n  <string" +
-            ">[080]  Block Shadow</string>\r\n  <string>[081]  Red Magikoopa</string>\r\n  <strin" +
-            "g>[082]  Wiggler (body segment)</string>\r\n  <string>[083]  Dodo (as parson)</str" +
-            "ing>\r\n  <string>[084]  Moleville Mine Cart</string>\r\n  <string>[085]  Knife Guy " +
-            "Juggler (still, red balls)</string>\r\n  <string>[086]  Knife Guy Juggler</string>" +
-            "\r\n  <string>[087]  White Mine Cart?</string>\r\n  <string>[088]  Discolored Mine C" +
-            "art</string>\r\n  <string>[089]  Fireball (surface from lava)</string>\r\n  <string>" +
-            "[08A]  Piranha Plant</string>\r\n  <string>[08B]  Goomba</string>\r\n  <string>[08C]" +
-            "  Bullet Bill</string>\r\n  <string>[08D]  Golden Bullet Bill</string>\r\n  <string>" +
-            "[08E]  Factory Clerk (green)</string>\r\n  <string>[08F]  Land\'s End Cannon</strin" +
-            "g>\r\n  <string>[090]  Red Dot?</string>\r\n  <string>[091]  Bob-omb</string>\r\n  <st" +
-            "ring>[092]  Commander Troopa</string>\r\n  <string>[093]  Golden Belome</string>\r\n" +
-            "  <string>[094]  Birdy Statue</string>\r\n  <string>[095]  Shyguy in Bowser\'s Heli" +
-            "copter</string>\r\n  <string>[096]  Machine Made Bowyer</string>\r\n  <string>[097] " +
-            " Machine Made Yaridovich (out of battle)</string>\r\n  <string>[098]  Machine Made" +
-            " Axem Red</string>\r\n  <string>[099]  Gunyolk (top section)</string>\r\n  <string>[" +
-            "09A]  Gunyolk (outer section)</string>\r\n  <string>[09B]  Factory Crane</string>\r" +
-            "\n  <string>[09C]  Blue-Green Star Piece (spinning)</string>\r\n  <string>[09D]  Sm" +
-            "ithy\'s Hammer</string>\r\n  <string>[09E]  Smithy\'s Chest</string>\r\n  <string>[09F" +
-            "]  Poison Toxic Gas</string>\r\n  <string>[0A0]  Shelly (bottom section)</string>\r" +
-            "\n  <string>[0A1]  Dyna and Mite</string>\r\n  <string>[0A2]  Seaside Town Fake (gr" +
-            "een)</string>\r\n  <string>[0A3]  Seaside Town Fake Elder (green)</string>\r\n  <str" +
-            "ing>[0A4]  Seaside Town Elder (yellow/green)</string>\r\n  <string>[0A5]  Monsterm" +
-            "ama (golden/brown/red)</string>\r\n  <string>[0A6]  Nimbus Guard</string>\r\n  <stri" +
-            "ng>[0A7]  Factory Manager (blue)</string>\r\n  <string>[0A8]  Factory Director (re" +
-            "d)</string>\r\n  <string>[0A9]  Boomer (red)</string>\r\n  <string>[0AA]  Dr.Topper " +
-            "(green)</string>\r\n  <string>[0AB]  Sparkles from Star Piece</string>\r\n  <string>" +
-            "[0AC]  Geno Doll</string>\r\n  <string>[0AD]  Smelter (back section)</string>\r\n  <" +
-            "string>[0AE]  Small Candy Cloud</string>\r\n  <string>[0AF]  Golden Chomp (back)</" +
-            "string>\r\n  <string>[0B0]  Chomp (front)</string>\r\n  <string>[0B1]  Grate Guy (fr" +
-            "om casino)</string>\r\n  <string>[0B2]  Marrymore Inn Keeper (blue, striped hat)</" +
-            "string>\r\n  <string>[0B3]  Rose Town Treasure Holder</string>\r\n  <string>[0B4]  R" +
-            "ose Town Woman (blue/pink, braids)</string>\r\n  <string>[0B5]  Marrymore Woman (y" +
-            "ellow)</string>\r\n  <string>[0B6]  Rose Town Old Man (blue/grey)</string>\r\n  <str" +
-            "ing>[0B7]  Old Woman (grey/red)</string>\r\n  <string>[0B8]  Kid (red, striped hat" +
-            ")</string>\r\n  <string>[0B9]  Gaz (purple)</string>\r\n  <string>[0BA]  (nothing)</" +
-            "string>\r\n  <string>[0BB]  (nothing)</string>\r\n  <string>[0BC]  Cannon Ball</stri" +
-            "ng>\r\n  <string>[0BD]  Croco (still)</string>\r\n  <string>[0BE]  Bowser w/Toadstoo" +
-            "l in Helicopter</string>\r\n  <string>[0BF]  Miniature Toad</string>\r\n  <string>[0" +
-            "C0]  Coin</string>\r\n  <string>[0C1]  Small Coin</string>\r\n  <string>[0C2]  Frog " +
-            "Coin</string>\r\n  <string>[0C3]  Flower</string>\r\n  <string>[0C4]  Big Flower</st" +
-            "ring>\r\n  <string>[0C5]  Sparkle? (sideways)</string>\r\n  <string>[0C6]  Sparkle (" +
-            "downwards)</string>\r\n  <string>[0C7]  Sparkle (circular winding)</string>\r\n  <st" +
-            "ring>[0C8]  Explosion</string>\r\n  <string>[0C9]  Mokura\'s Cloud (blue)</string>\r" +
-            "\n  <string>[0CA]  Small Frog Coin</string>\r\n  <string>[0CB]  Level Up text from " +
-            "Invincible Star</string>\r\n  <string>[0CC]  Grey Explosion (when encountering Fir" +
-            "eballs)</string>\r\n  <string>[0CD]  Miniature Axem Red</string>\r\n  <string>[0CE] " +
-            " Terrapin (still)</string>\r\n  <string>[0CF]  Jinx (walk)</string>\r\n  <string>[0D" +
-            "0]  Axem Red</string>\r\n  <string>[0D1]  Axem Black</string>\r\n  <string>[0D2]  Ax" +
-            "em Pink</string>\r\n  <string>[0D3]  Axem Yellow</string>\r\n  <string>[0D4]  Axem G" +
-            "reen</string>\r\n  <string>[0D5]  Axem Red teleport</string>\r\n  <string>[0D6]  Stu" +
-            "mpet (head)</string>\r\n  <string>[0D7]  Stumpet (roots, right)</string>\r\n  <strin" +
-            "g>[0D8]  Czar Dragon (body)</string>\r\n  <string>[0D9]  Growing Vine Beanstalk</s" +
-            "tring>\r\n  <string>[0DA]  Brick Beanstalk Block</string>\r\n  <string>[0DB]  Yellow" +
-            " Dot?</string>\r\n  <string>[0DC]  Yellow Letter</string>\r\n  <string>[0DD]  Yarido" +
-            "vich (out of battle)</string>\r\n  <string>[0DE]  Banana Peel</string>\r\n  <string>" +
-            "[0DF]  Tentacle (extending)</string>\r\n  <string>[0E0]  Snifit (black, back)</str" +
-            "ing>\r\n  <string>[0E1]  Level Up Bonus Selection Box</string>\r\n  <string>[0E2]  B" +
-            "ooster\'s Tower Entrance Door</string>\r\n  <string>[0E3]  Light Green Pipe (top ed" +
-            "ge)</string>\r\n  <string>[0E4]  Level Up Bonus Text</string>\r\n  <string>[0E5]  Le" +
-            "vel Up Bonus Flower</string>\r\n  <string>[0E6]  Level Up Bonus Pow Power</string>" +
-            "\r\n  <string>[0E7]  Level Up Bonus Star Magic</string>\r\n  <string>[0E8]  Level Up" +
-            " Bonus HP</string>\r\n  <string>[0E9]  Falling Stepping Bridge Block</string>\r\n  <" +
-            "string>[0EA]  Old Classic Mario</string>\r\n  <string>[0EB]  Booster\'s Choo-Choo T" +
-            "rain</string>\r\n  <string>[0EC]  Magikoopa (blue, walking)</string>\r\n  <string>[0" +
-            "ED]  Terrapin (walking)</string>\r\n  <string>[0EE]  Splash Water Droplets</string" +
-            ">\r\n  <string>[0EF]  Small Sea Fish</string>\r\n  <string>[0F0]  Splash Water Geyse" +
-            "r</string>\r\n  <string>[0F1]  Bowyer</string>\r\n  <string>[0F2]  White Gas Cloud</" +
-            "string>\r\n  <string>[0F3]  Machine Made Drill Bit</string>\r\n  <string>[0F4]  Mush" +
-            "room House Decor Mailbox</string>\r\n  <string>[0F5]  Link Sleeping in Rose Town I" +
-            "nn</string>\r\n  <string>[0F6]  Samus Sleeping in Mushroom Kingdom</string>\r\n  <st" +
-            "ring>[0F7]  Grey Stepping Stone</string>\r\n  <string>[0F8]  Hinopio\'s Model Airpl" +
-            "ane (blue/grey)</string>\r\n  <string>[0F9]  Grey Stone Block</string>\r\n  <string>" +
-            "[0FA]  Small Black Fence</string>\r\n  <string>[0FB]  Wooden Bridge Bowser\'s Keep " +
-            "(right section)</string>\r\n  <string>[0FC]  Grey Stone Bridge Bowser\'s Keep (righ" +
-            "t section)</string>\r\n  <string>[0FD]  Toadstool Hand Captive from Rope</string>\r" +
-            "\n  <string>[0FE]  Plywood Brown Door Bowser\'s Keep</string>\r\n  <string>[0FF]  Be" +
-            "etle</string>\r\n  <string>[100]  Terrapin</string>\r\n  <string>[101]  Spikey</stri" +
-            "ng>\r\n  <string>[102]  Sky Troopa</string>\r\n  <string>[103]  Mad Mallet</string>\r" +
-            "\n  <string>[104]  Shaman</string>\r\n  <string>[105]  Crook</string>\r\n  <string>[1" +
-            "06]  Goomba</string>\r\n  <string>[107]  Piranha Plant</string>\r\n  <string>[108]  " +
-            "Amanita</string>\r\n  <string>[109]  Goby</string>\r\n  <string>[10A]  Bloober</stri" +
-            "ng>\r\n  <string>[10B]  Bandana Red</string>\r\n  <string>[10C]  Lakitu</string>\r\n  " +
-            "<string>[10D]  Birdy</string>\r\n  <string>[10E]  Pinwheel</string>\r\n  <string>[10" +
-            "F]  Rat Funk</string>\r\n  <string>[110]  K-9</string>\r\n  <string>[111]  Magmite</" +
-            "string>\r\n  <string>[112]  The Big Boo</string>\r\n  <string>[113]  Dry Bones</stri" +
-            "ng>\r\n  <string>[114]  Greaper</string>\r\n  <string>[115]  Sparky</string>\r\n  <str" +
-            "ing>[116]  Chomp</string>\r\n  <string>[117]  Pandorite</string>\r\n  <string>[118] " +
-            " Shy Ranger</string>\r\n  <string>[119]  Bob-Omb</string>\r\n  <string>[11A]  Spooku" +
-            "m</string>\r\n  <string>[11B]  Hammer Bro</string>\r\n  <string>[11C]  Buzzer</strin" +
-            "g>\r\n  <string>[11D]  Ameboid</string>\r\n  <string>[11E]  Gecko</string>\r\n  <strin" +
-            "g>[11F]  Wiggler</string>\r\n  <string>[120]  Crusty</string>\r\n  <string>[121]  Ma" +
-            "gikoopa</string>\r\n  <string>[122]  Leuko</string>\r\n  <string>[123]  Jawful</stri" +
-            "ng>\r\n  <string>[124]  Enigma</string>\r\n  <string>[125]  Blaster</string>\r\n  <str" +
-            "ing>[126]  Guerrilla</string>\r\n  <string>[127]  Baba Yaga</string>\r\n  <string>[1" +
-            "28]  Hobgoblin</string>\r\n  <string>[129]  Reacher</string>\r\n  <string>[12A]  Sho" +
-            "gun</string>\r\n  <string>[12B]  Orb User</string>\r\n  <string>[12C]  Heavy Troopa<" +
-            "/string>\r\n  <string>[12D]  Shadow</string>\r\n  <string>[12E]  Cluster</string>\r\n " +
-            " <string>[12F]  Bahamutt</string>\r\n  <string>[130]  Octolot</string>\r\n  <string>" +
-            "[131]  Frogog</string>\r\n  <string>[132]  Clerk</string>\r\n  <string>[133]  Gunyol" +
-            "k</string>\r\n  <string>[134]  Boomer</string>\r\n  <string>[135]  Remo Con</string>" +
-            "\r\n  <string>[136]  Snapdragon</string>\r\n  <string>[137]  Stumpet</string>\r\n  <st" +
-            "ring>[138]  Dodo (2nd time)</string>\r\n  <string>[139]  Jester</string>\r\n  <strin" +
-            "g>[13A]  Artichoker</string>\r\n  <string>[13B]  Arachne</string>\r\n  <string>[13C]" +
-            "  Carroboscis</string>\r\n  <string>[13D]  Hippopo</string>\r\n  <string>[13E]  Mast" +
-            "adoom</string>\r\n  <string>[13F]  Corkpedite</string>\r\n  <string>[140]  Terra Cot" +
-            "ta</string>\r\n  <string>[141]  Spikester</string>\r\n  <string>[142]  Malakoopa</st" +
-            "ring>\r\n  <string>[143]  Pounder</string>\r\n  <string>[144]  Poundette</string>\r\n " +
-            " <string>[145]  Sackit</string>\r\n  <string>[146]  Gu Goomba</string>\r\n  <string>" +
-            "[147]  Chewy</string>\r\n  <string>[148]  Fireball</string>\r\n  <string>[149]  Mr.K" +
-            "ipper</string>\r\n  <string>[14A]  Factory Chief</string>\r\n  <string>[14B]  Bandan" +
-            "a Blue</string>\r\n  <string>[14C]  Manager</string>\r\n  <string>[14D]  Bluebird</s" +
-            "tring>\r\n  <string>[14E]  __nothing</string>\r\n  <string>[14F]  Alley Rat</string>" +
-            "\r\n  <string>[150]  Chow</string>\r\n  <string>[151]  Magmus</string>\r\n  <string>[1" +
-            "52]  Li~L Boo</string>\r\n  <string>[153]  Vomer</string>\r\n  <string>[154]  Glum R" +
-            "eaper</string>\r\n  <string>[155]  Pyrosphere</string>\r\n  <string>[156]  Chomp Cho" +
-            "mp</string>\r\n  <string>[157]  Hidon</string>\r\n  <string>[158]  Sling Shy</string" +
-            ">\r\n  <string>[159]  Rob-Omb</string>\r\n  <string>[15A]  Shy Guy</string>\r\n  <stri" +
-            "ng>[15B]  Ninja</string>\r\n  <string>[15C]  Stinger</string>\r\n  <string>[15D]  Go" +
-            "ombette</string>\r\n  <string>[15E]  Geckit</string>\r\n  <string>[15F]  Jabit</stri" +
-            "ng>\r\n  <string>[160]  Star Cruster</string>\r\n  <string>[161]  Merlin</string>\r\n " +
-            " <string>[162]  Muckle</string>\r\n  <string>[163]  Forkies</string>\r\n  <string>[1" +
-            "64]  Gorgon</string>\r\n  <string>[165]  Big Bertha</string>\r\n  <string>[166]  Cha" +
-            "ined Kong</string>\r\n  <string>[167]  Fautso</string>\r\n  <string>[168]  Straw Hea" +
-            "d</string>\r\n  <string>[169]  Juju</string>\r\n  <string>[16A]  Armored Ant</string" +
-            ">\r\n  <string>[16B]  Orbison</string>\r\n  <string>[16C]  Tub-O-Troopa</string>\r\n  " +
-            "<string>[16D]  Doppel</string>\r\n  <string>[16E]  Pulsar</string>\r\n  <string>[16F" +
-            "]  __purple Bahamutt</string>\r\n  <string>[170]  Octovader</string>\r\n  <string>[1" +
-            "71]  Ribbite</string>\r\n  <string>[172]  Director</string>\r\n  <string>[173]  __Gu" +
-            "nyolk (yellow)</string>\r\n  <string>[174]  __Boomer (blue)</string>\r\n  <string>[1" +
-            "75]  Puppox</string>\r\n  <string>[176]  Fink Flower</string>\r\n  <string>[177]  Lu" +
-            "mbler</string>\r\n  <string>[178]  Springer</string>\r\n  <string>[179]  Harlequin</" +
-            "string>\r\n  <string>[17A]  Kriffid</string>\r\n  <string>[17B]  Spinthra</string>\r\n" +
-            "  <string>[17C]  Radish</string>\r\n  <string>[17D]  Crippo</string>\r\n  <string>[1" +
-            "7E]  Mastablasta</string>\r\n  <string>[17F]  Pile Driver</string>\r\n  <string>[180" +
-            "]  Apprentice</string>\r\n  <string>[181]  __nothing</string>\r\n  <string>[182]  __" +
-            "nothing</string>\r\n  <string>[183]  __nothing</string>\r\n  <string>[184]  __Geno r" +
-            "edemption</string>\r\n  <string>[185]  __little bird</string>\r\n  <string>[186]  Bo" +
-            "x Boy</string>\r\n  <string>[187]  Shelly</string>\r\n  <string>[188]  Super Spike</" +
-            "string>\r\n  <string>[189]  Dodo</string>\r\n  <string>[18A]  Oerlikon</string>\r\n  <" +
-            "string>[18B]  Chester</string>\r\n  <string>[18C]  Body</string>\r\n  <string>[18D] " +
-            " __Pile Driver (body)</string>\r\n  <string>[18E]  Torte</string>\r\n  <string>[18F]" +
-            "  Shy Away</string>\r\n  <string>[190]  Jinx Clone</string>\r\n  <string>[191]  Mach" +
-            "ine Made (Shyster)</string>\r\n  <string>[192]  Machine Made (Drill Bit)</string>\r" +
-            "\n  <string>[193]  Formless</string>\r\n  <string>[194]  Mokura</string>\r\n  <string" +
-            ">[195]  Fire Crystal</string>\r\n  <string>[196]  Water Crystal</string>\r\n  <strin" +
-            "g>[197]  Earth Crystal</string>\r\n  <string>[198]  Wind Crystal</string>\r\n  <stri" +
-            "ng>[199]  Mario Clone</string>\r\n  <string>[19A]  Toadstool 2</string>\r\n  <string" +
-            ">[19B]  Bowser Clone</string>\r\n  <string>[19C]  Geno Clone</string>\r\n  <string>[" +
-            "19D]  Mallow Clone</string>\r\n  <string>[19E]  Shyster</string>\r\n  <string>[19F] " +
-            " Kinklink</string>\r\n  <string>[1A0]  __Toadstool (captive)</string>\r\n  <string>[" +
-            "1A1]  Hangin~ Shy</string>\r\n  <string>[1A2]  Smelter</string>\r\n  <string>[1A3]  " +
-            "Machine Made (Mack)</string>\r\n  <string>[1A4]  Machine Made (Bowyer)</string>\r\n " +
-            " <string>[1A5]  Machine Made (Yaridovich)</string>\r\n  <string>[1A6]  Machine Mad" +
-            "e (Axem Pink)</string>\r\n  <string>[1A7]  Machine Made (Axem Black)</string>\r\n  <" +
-            "string>[1A8]  Machine Made (Axem Red)</string>\r\n  <string>[1A9]  Machine Made (A" +
-            "xem Yellow)</string>\r\n  <string>[1AA]  Machine Made (Axem Green)</string>\r\n  <st" +
-            "ring>[1AB]  Goomba (Intro)</string>\r\n  <string>[1AC]  Hammer Bro (Intro)</string" +
-            ">\r\n  <string>[1AD]  Birdo (Intro)</string>\r\n  <string>[1AE]  Bb-Bomb</string>\r\n " +
-            " <string>[1AF]  Magidragon</string>\r\n  <string>[1B0]  Starslap</string>\r\n  <stri" +
-            "ng>[1B1]  Mukumuku</string>\r\n  <string>[1B2]  Zeostar</string>\r\n  <string>[1B3] " +
-            " Jagger</string>\r\n  <string>[1B4]  Chompweed</string>\r\n  <string>[1B5]  Smithy (" +
-            "Tank Head)</string>\r\n  <string>[1B6]  Smithy (Box Head)</string>\r\n  <string>[1B7" +
-            "]  __Corkpedite</string>\r\n  <string>[1B8]  Microbomb</string>\r\n  <string>[1B9]  " +
-            "__Thwomp</string>\r\n  <string>[1BA]  Grit</string>\r\n  <string>[1BB]  Neosquid</st" +
-            "ring>\r\n  <string>[1BC]  Yaridovich (mirage)</string>\r\n  <string>[1BD]  Helio</st" +
-            "ring>\r\n  <string>[1BE]  Right Eye</string>\r\n  <string>[1BF]  Left Eye</string>\r\n" +
-            "  <string>[1C0]  Knife Guy</string>\r\n  <string>[1C1]  Grate Guy</string>\r\n  <str" +
-            "ing>[1C2]  Bundt</string>\r\n  <string>[1C3]  Jinx (1st time)</string>\r\n  <string>" +
-            "[1C4]  Jinx (2nd time)</string>\r\n  <string>[1C5]  Count Down</string>\r\n  <string" +
-            ">[1C6]  Ding-A-Ling</string>\r\n  <string>[1C7]  Belome (1st time)</string>\r\n  <st" +
-            "ring>[1C8]  Belome (2nd time)</string>\r\n  <string>[1C9]  __Belome</string>\r\n  <s" +
-            "tring>[1CA]  Smilax</string>\r\n  <string>[1CB]  Thrax        </string>\r\n  <string" +
-            ">[1CC]  Megasmilax</string>\r\n  <string>[1CD]  Birdo</string>\r\n  <string>[1CE]  E" +
-            "ggbert</string>\r\n  <string>[1CF]  Axem Yellow</string>\r\n  <string>[1D0]  Punchin" +
-            "ello</string>\r\n  <string>[1D1]  Tentacles (right)</string>\r\n  <string>[1D2]  Axe" +
-            "m Red</string>\r\n  <string>[1D3]  Axem Green</string>\r\n  <string>[1D4]  King Bomb" +
-            "</string>\r\n  <string>[1D5]  Mezzo Bomb</string>\r\n  <string>[1D6]  __Bundt object" +
-            "</string>\r\n  <string>[1D7]  Raspberry</string>\r\n  <string>[1D8]  King Calamari</" +
-            "string>\r\n  <string>[1D9]  Tentacles (left)</string>\r\n  <string>[1DA]  Jinx (3rd " +
-            "time)</string>\r\n  <string>[1DB]  Zombone</string>\r\n  <string>[1DC]  Czar Dragon<" +
-            "/string>\r\n  <string>[1DD]  Cloaker (1st time)</string>\r\n  <string>[1DE]  Domino " +
-            "(2nd time)</string>\r\n  <string>[1DF]  Mad Adder</string>\r\n  <string>[1E0]  Mack<" +
-            "/string>\r\n  <string>[1E1]  Bodyguard</string>\r\n  <string>[1E2]  Yaridovich</stri" +
-            "ng>\r\n  <string>[1E3]  Drill Bit</string>\r\n  <string>[1E4]  Axem Pink</string>\r\n " +
-            " <string>[1E5]  Axem Black</string>\r\n  <string>[1E6]  Bowyer</string>\r\n  <string" +
-            ">[1E7]  Aero</string>\r\n  <string>[1E8]  __Exor (mouth)</string>\r\n  <string>[1E9]" +
-            "  Exor</string>\r\n  <string>[1EA]  Smithy (1st Form)</string>\r\n  <string>[1EB]  S" +
-            "hyper</string>\r\n  <string>[1EC]  Smithy (Body)</string>\r\n  <string>[1ED]  Smithy" +
-            " (Head)</string>\r\n  <string>[1EE]  Smithy (Magic Head)</string>\r\n  <string>[1EF]" +
-            "  Smithy (Chest Head)</string>\r\n  <string>[1F0]  Croco (1st time)</string>\r\n  <s" +
-            "tring>[1F1]  Croco (2nd time)</string>\r\n  <string>[1F2]  __Croco</string>\r\n  <st" +
-            "ring>[1F3]  Earth Link</string>\r\n  <string>[1F4]  Bowser</string>\r\n  <string>[1F" +
-            "5]  Axem Rangers</string>\r\n  <string>[1F6]  Booster</string>\r\n  <string>[1F7]  B" +
-            "ooster</string>\r\n  <string>[1F8]  Snifit</string>\r\n  <string>[1F9]  Johnny</stri" +
-            "ng>\r\n  <string>[1FA]  Johnny</string>\r\n  <string>[1FB]  Valentina</string>\r\n  <s" +
-            "tring>[1FC]  Cloaker (2nd time)</string>\r\n  <string>[1FD]  Domino (2nd time)</st" +
-            "ring>\r\n  <string>[1FE]  Candle</string>\r\n  <string>[1FF]  Culex</string>\r\n  <str" +
-            "ing>[200]  A/B/X/Y action button selection in battle</string>\r\n  <string>[201]  " +
-            "Rainbow Explosion</string>\r\n  <string>[202]  Blue Explosion</string>\r\n  <string>" +
-            "[203]  Green Explosion</string>\r\n  <string>[204]  Enemy Defeated Explosion Stars" +
-            "</string>\r\n  <string>[205]  Bomb Explosion</string>\r\n  <string>[206]  Small Whit" +
-            "e Cloud</string>\r\n  <string>[207]  Drain Explosion</string>\r\n  <string>[208]  al" +
-            "phabet + symbols</string>\r\n  <string>[209]  light blue stars</string>\r\n  <string" +
-            ">[20A]  Come Back rainbow star</string>\r\n  <string>[20B]  yellow cure stars</str" +
-            "ing>\r\n  <string>[20C]  ....</string>\r\n  <string>[20D]  Bowyer\'s arrow</string>\r\n" +
-            "  <string>[20E]  yellow steam?</string>\r\n  <string>[20F]  small black bullet</st" +
-            "ring>\r\n  <string>[210]  very small black bullet</string>\r\n  <string>[211]  HP Ra" +
-            "in cloud</string>\r\n  <string>[212]  stat-boost arrows</string>\r\n  <string>[213] " +
-            " black rolling coal rock</string>\r\n  <string>[214]  blue spark</string>\r\n  <stri" +
-            "ng>[215]  yellow spark</string>\r\n  <string>[216]  green spark</string>\r\n  <strin" +
-            "g>[217]  red spark</string>\r\n  <string>[218]  rainbow rain</string>\r\n  <string>[" +
-            "219]  mushroom spores</string>\r\n  <string>[21A]  Lazy Shell (Heavy Troopa)</stri" +
-            "ng>\r\n  <string>[21B]  Orange Lazy Shell</string>\r\n  <string>[21C]  Green Lazy Sh" +
-            "ell (Tub-O-Troopa)</string>\r\n  <string>[21D]  Snowy eyes</string>\r\n  <string>[21" +
-            "E]  blinking yellow light circle</string>\r\n  <string>[21F]  purple petal</string" +
-            ">\r\n  <string>[220]  small pink petal</string>\r\n  <string>[221]  thrown hammer</s" +
-            "tring>\r\n  <string>[222]  Bombs Away electric ball</string>\r\n  <string>[223]  Fir" +
-            "e Orb fireball</string>\r\n  <string>[224]  Willy Wisp purple electric ball</strin" +
-            "g>\r\n  <string>[225]  spore (pink/green)</string>\r\n  <string>[226]  bolt (hardwar" +
-            "e-wise)</string>\r\n  <string>[227]  Mute balloon</string>\r\n  <string>[228]  \'Than" +
-            "k You\' red dialogue bubble</string>\r\n  <string>[229]  \'Thank You\' purple dialogu" +
-            "e bubble</string>\r\n  <string>[22A]  \'Thank You\' blue dialogue bubble</string>\r\n " +
-            " <string>[22B]  \'Thank You\' green dialogue bubble</string>\r\n  <string>[22C]  \'Th" +
-            "ank You\' yellow dialogue bubble</string>\r\n  <string>[22D]  \'Psychopath\' question" +
-            " mark cloud</string>\r\n  <string>[22E]  thrown shuriken</string>\r\n  <string>[22F]" +
-            "  green cure stars</string>\r\n  <string>[230]  red cure stars</string>\r\n  <string" +
-            ">[231]  blue cure stars</string>\r\n  <string>[232]  yellow reusable item sprite w" +
-            "ith letter I</string>\r\n  <string>[233]  \'A\' button from Bowyer\'s \'Button Lock\'</" +
-            "string>\r\n  <string>[234]  Bowser\'s spike shot</string>\r\n  <string>[235]  \'Geno F" +
-            "lash\' squinting eyes</string>\r\n  <string>[236]  green item collection</string>\r\n" +
-            "  <string>[237]  red item collection</string>\r\n  <string>[238]  blue item collec" +
-            "tion</string>\r\n  <string>[239]  yellow item collection</string>\r\n  <string>[23A]" +
-            "  green spore</string>\r\n  <string>[23B]  \'Fear\' exclamation point</string>\r\n  <s" +
-            "tring>[23C]  ....</string>\r\n  <string>[23D]  Mokura</string>\r\n  <string>[23E]  D" +
-            "rain</string>\r\n  <string>[23F]  sparkles</string>\r\n  <string>[240]  ....</string" +
-            ">\r\n  <string>[241]  ....</string>\r\n  <string>[242]  ....</string>\r\n  <string>[24" +
-            "3]  ....</string>\r\n  <string>[244]  ....</string>\r\n  <string>[245]  ....</string" +
-            ">\r\n  <string>[246]  ....</string>\r\n  <string>[247]  ....</string>\r\n  <string>[24" +
-            "8]  ....</string>\r\n  <string>[249]  ....</string>\r\n  <string>[24A]  ....</string" +
-            ">\r\n  <string>[24B]  ....</string>\r\n  <string>[24C]  ....</string>\r\n  <string>[24" +
-            "D]  ....</string>\r\n  <string>[24E]  ....</string>\r\n  <string>[24F]  ....</string" +
-            ">\r\n  <string>[250]  ....</string>\r\n  <string>[251]  ....</string>\r\n  <string>[25" +
-            "2]  ....</string>\r\n  <string>[253]  ....</string>\r\n  <string>[254]  ....</string" +
-            ">\r\n  <string>[255]  ....</string>\r\n  <string>[256]  ....</string>\r\n  <string>[25" +
-            "7]  ....</string>\r\n  <string>[258]  ....</string>\r\n  <string>[259]  ....</string" +
-            ">\r\n  <string>[25A]  ....</string>\r\n  <string>[25B]  ....</string>\r\n  <string>[25" +
-            "C]  ....</string>\r\n  <string>[25D]  ....</string>\r\n  <string>[25E]  ....</string" +
-            ">\r\n  <string>[25F]  ....</string>\r\n  <string>[260]  ....</string>\r\n  <string>[26" +
-            "1]  ....</string>\r\n  <string>[262]  ....</string>\r\n  <string>[263]  ....</string" +
-            ">\r\n  <string>[264]  ....</string>\r\n  <string>[265]  ....</string>\r\n  <string>[26" +
-            "6]  ....</string>\r\n  <string>[267]  ....</string>\r\n  <string>[268]  ....</string" +
-            ">\r\n  <string>[269]  ....</string>\r\n  <string>[26A]  ....</string>\r\n  <string>[26" +
-            "B]  ....</string>\r\n  <string>[26C]  ....</string>\r\n  <string>[26D]  ....</string" +
-            ">\r\n  <string>[26E]  ....</string>\r\n  <string>[26F]  ....</string>\r\n  <string>[27" +
-            "0]  ....</string>\r\n  <string>[271]  ....</string>\r\n  <string>[272]  ....</string" +
-            ">\r\n  <string>[273]  ....</string>\r\n  <string>[274]  ....</string>\r\n  <string>[27" +
-            "5]  ....</string>\r\n  <string>[276]  ....</string>\r\n  <string>[277]  ....</string" +
-            ">\r\n  <string>[278]  ....</string>\r\n  <string>[279]  ....</string>\r\n  <string>[27" +
-            "A]  ....</string>\r\n  <string>[27B]  ....</string>\r\n  <string>[27C]  ....</string" +
-            ">\r\n  <string>[27D]  ....</string>\r\n  <string>[27E]  ....</string>\r\n  <string>[27" +
-            "F]  ....</string>\r\n  <string>[280]  ....</string>\r\n  <string>[281]  ....</string" +
-            ">\r\n  <string>[282]  ....</string>\r\n  <string>[283]  ....</string>\r\n  <string>[28" +
-            "4]  ....</string>\r\n  <string>[285]  ....</string>\r\n  <string>[286]  ....</string" +
-            ">\r\n  <string>[287]  ....</string>\r\n  <string>[288]  ....</string>\r\n  <string>[28" +
-            "9]  ....</string>\r\n  <string>[28A]  ....</string>\r\n  <string>[28B]  ....</string" +
-            ">\r\n  <string>[28C]  ....</string>\r\n  <string>[28D]  ....</string>\r\n  <string>[28" +
-            "E]  ....</string>\r\n  <string>[28F]  ....</string>\r\n  <string>[290]  ....</string" +
-            ">\r\n  <string>[291]  ....</string>\r\n  <string>[292]  ....</string>\r\n  <string>[29" +
-            "3]  ....</string>\r\n  <string>[294]  ....</string>\r\n  <string>[295]  ....</string" +
-            ">\r\n  <string>[296]  ....</string>\r\n  <string>[297]  ....</string>\r\n  <string>[29" +
-            "8]  ....</string>\r\n  <string>[299]  ....</string>\r\n  <string>[29A]  ....</string" +
-            ">\r\n  <string>[29B]  ....</string>\r\n  <string>[29C]  ....</string>\r\n  <string>[29" +
-            "D]  ....</string>\r\n  <string>[29E]  ....</string>\r\n  <string>[29F]  ....</string" +
-            ">\r\n  <string>[2A0]  ....</string>\r\n  <string>[2A1]  ....</string>\r\n  <string>[2A" +
-            "2]  ....</string>\r\n  <string>[2A3]  ....</string>\r\n  <string>[2A4]  ....</string" +
-            ">\r\n  <string>[2A5]  ....</string>\r\n  <string>[2A6]  ....</string>\r\n  <string>[2A" +
-            "7]  ....</string>\r\n  <string>[2A8]  ....</string>\r\n  <string>[2A9]  ....</string" +
-            ">\r\n  <string>[2AA]  ....</string>\r\n  <string>[2AB]  ....</string>\r\n  <string>[2A" +
-            "C]  ....</string>\r\n  <string>[2AD]  ....</string>\r\n  <string>[2AE]  ....</string" +
-            ">\r\n  <string>[2AF]  ....</string>\r\n  <string>[2B0]  ....</string>\r\n  <string>[2B" +
-            "1]  ....</string>\r\n  <string>[2B2]  ....</string>\r\n  <string>[2B3]  ....</string" +
-            ">\r\n  <string>[2B4]  ....</string>\r\n  <string>[2B5]  ....</string>\r\n  <string>[2B" +
-            "6]  ....</string>\r\n  <string>[2B7]  ....</string>\r\n  <string>[2B8]  ....</string" +
-            ">\r\n  <string>[2B9]  ....</string>\r\n  <string>[2BA]  ....</string>\r\n  <string>[2B" +
-            "B]  ....</string>\r\n  <string>[2BC]  ....</string>\r\n  <string>[2BD]  ....</string" +
-            ">\r\n  <string>[2BE]  ....</string>\r\n  <string>[2BF]  ....</string>\r\n  <string>[2C" +
-            "0]  ....</string>\r\n  <string>[2C1]  ....</string>\r\n  <string>[2C2]  ....</string" +
-            ">\r\n  <string>[2C3]  ....</string>\r\n  <string>[2C4]  ....</string>\r\n  <string>[2C" +
-            "5]  ....</string>\r\n  <string>[2C6]  ....</string>\r\n  <string>[2C7]  ....</string" +
-            ">\r\n  <string>[2C8]  ....</string>\r\n  <string>[2C9]  ....</string>\r\n  <string>[2C" +
-            "A]  ....</string>\r\n  <string>[2CB]  ....</string>\r\n  <string>[2CC]  ....</string" +
-            ">\r\n  <string>[2CD]  ....</string>\r\n  <string>[2CE]  ....</string>\r\n  <string>[2C" +
-            "F]  ....</string>\r\n  <string>[2D0]  ....</string>\r\n  <string>[2D1]  ....</string" +
-            ">\r\n  <string>[2D2]  ....</string>\r\n  <string>[2D3]  ....</string>\r\n  <string>[2D" +
-            "4]  ....</string>\r\n  <string>[2D5]  ....</string>\r\n  <string>[2D6]  ....</string" +
-            ">\r\n  <string>[2D7]  ....</string>\r\n  <string>[2D8]  ....</string>\r\n  <string>[2D" +
-            "9]  ....</string>\r\n  <string>[2DA]  ....</string>\r\n  <string>[2DB]  ....</string" +
-            ">\r\n  <string>[2DC]  ....</string>\r\n  <string>[2DD]  ....</string>\r\n  <string>[2D" +
-            "E]  ....</string>\r\n  <string>[2DF]  ....</string>\r\n  <string>[2E0]  ....</string" +
-            ">\r\n  <string>[2E1]  ....</string>\r\n  <string>[2E2]  ....</string>\r\n  <string>[2E" +
-            "3]  ....</string>\r\n  <string>[2E4]  ....</string>\r\n  <string>[2E5]  ....</string" +
-            ">\r\n  <string>[2E6]  ....</string>\r\n  <string>[2E7]  ....</string>\r\n  <string>[2E" +
-            "8]  ....</string>\r\n  <string>[2E9]  ....</string>\r\n  <string>[2EA]  ....</string" +
-            ">\r\n  <string>[2EB]  ....</string>\r\n  <string>[2EC]  ....</string>\r\n  <string>[2E" +
-            "D]  ....</string>\r\n  <string>[2EE]  ....</string>\r\n  <string>[2EF]  ....</string" +
-            ">\r\n  <string>[2F0]  ....</string>\r\n  <string>[2F1]  ....</string>\r\n  <string>[2F" +
-            "2]  ....</string>\r\n  <string>[2F3]  ....</string>\r\n  <string>[2F4]  ....</string" +
-            ">\r\n  <string>[2F5]  ....</string>\r\n  <string>[2F6]  ....</string>\r\n  <string>[2F" +
-            "7]  ....</string>\r\n  <string>[2F8]  ....</string>\r\n  <string>[2F9]  ....</string" +
-            ">\r\n  <string>[2FA]  ....</string>\r\n  <string>[2FB]  ....</string>\r\n  <string>[2F" +
-            "C]  ....</string>\r\n  <string>[2FD]  ....</string>\r\n  <string>[2FE]  ....</string" +
-            ">\r\n  <string>[2FF]  ....</string>\r\n  <string>[300]  ....</string>\r\n  <string>[30" +
-            "1]  yellow lightning ball</string>\r\n  <string>[302]  Fire Orb hit explosion</str" +
-            "ing>\r\n  <string>[303]  egg</string>\r\n  <string>[304]  Lightning Orb blue lightni" +
-            "ng ball</string>\r\n  <string>[305]  small yellow spike</string>\r\n  <string>[306] " +
-            " large yellow spike</string>\r\n  <string>[307]  white gas cloud</string>\r\n  <stri" +
-            "ng>[308]  Blast orange gas cloud</string>\r\n  <string>[309]  Star Egg little brow" +
-            "n bird</string>\r\n  <string>[30A]  Poison Gas green gas cloud</string>\r\n  <string" +
-            ">[30B]  white stars</string>\r\n  <string>[30C]  purple gas cloud</string>\r\n  <str" +
-            "ing>[30D]  yellow star</string>\r\n  <string>[30E]  Diamond Saw snowflake</string>" +
-            "\r\n  <string>[30F]  blue gas cloud</string>\r\n  <string>[310]  bone throw</string>" +
-            "\r\n  <string>[311]  spritz bomb</string>\r\n  <string>[312]  Wind Crystal</string>\r" +
-            "\n  <string>[313]  green shine web</string>\r\n  <string>[314]  Mecha-Koopa (Bowser" +
-            " Crush) eyes</string>\r\n  <string>[315]  Water Crystal</string>\r\n  <string>[316] " +
-            " plasm water droplet (blue-green)</string>\r\n  <string>[317]  Ice Rock</string>\r\n" +
-            "  <string>[318]  Ice Rock (grey)</string>\r\n  <string>[319]  big pink heart</stri" +
-            "ng>\r\n  <string>[31A]  dark red/yellow fireball</string>\r\n  <string>[31B]  light " +
-            "green stars</string>\r\n  <string>[31C]  light orange stars</string>\r\n  <string>[3" +
-            "1D]  Sleepy Time sheep/ram</string>\r\n  <string>[31E]  Geno Beam/Blast/Flash red " +
-            "power-up star</string>\r\n  <string>[31F]  ....</string>\r\n  <string>[320]  blue/gr" +
-            "een bubbles/circles</string>\r\n  <string>[321]  sleep ZZZ\'s</string>\r\n  <string>[" +
-            "322]  backwards yellow spike</string>\r\n  <string>[323]  Water Blast water spouts" +
-            "</string>\r\n  <string>[324]  Gunk Ball / Ink Blast</string>\r\n  <string>[325]  wat" +
-            "er spout (red)</string>\r\n  <string>[326]  Royal Flush card</string>\r\n  <string>[" +
-            "327]  yellow shaking bell</string>\r\n  <string>[328]  ....</string>\r\n  <string>[3" +
-            "29]  blue music note</string>\r\n  <string>[32A]  white pixel dot</string>\r\n  <str" +
-            "ing>[32B]  ....</string>\r\n  <string>[32C]  blue water surfacing/diving droplets<" +
-            "/string>\r\n  <string>[32D]  green water surfacing/diving droplets</string>\r\n  <st" +
-            "ring>[32E]  yellow water surfacing/diving droplets</string>\r\n  <string>[32F]  .." +
-            "..</string>\r\n  <string>[330]  ....</string>\r\n  <string>[331]  ....</string>\r\n  <" +
-            "string>[332]  ....</string>\r\n  <string>[333]  ....</string>\r\n  <string>[334]  Ma" +
-            "gikoopa\'s triangle/circle/X cast magic</string>\r\n  <string>[335]  ....</string>\r" +
-            "\n  <string>[336]  ....</string>\r\n  <string>[337]  ....</string>\r\n  <string>[338]" +
-            "  ....</string>\r\n  <string>[339]  ....</string>\r\n  <string>[33A]  flower bonus</" +
-            "string>\r\n  <string>[33B]  ....</string>\r\n  <string>[33C]  ....</string>\r\n  <stri" +
-            "ng>[33D]  ....</string>\r\n  <string>[33E]  ....</string>\r\n  <string>[33F]  ....</" +
-            "string>\r\n  <string>[340]  ....</string>\r\n  <string>[341]  ....</string>\r\n  <stri" +
-            "ng>[342]  ....</string>\r\n  <string>[343]  ....</string>\r\n  <string>[344]  ....</" +
-            "string>\r\n  <string>[345]  ....</string>\r\n  <string>[346]  ....</string>\r\n  <stri" +
-            "ng>[347]  ....</string>\r\n  <string>[348]  ....</string>\r\n  <string>[349]  ....</" +
-            "string>\r\n  <string>[34A]  ....</string>\r\n  <string>[34B]  ....</string>\r\n  <stri" +
-            "ng>[34C]  ....</string>\r\n  <string>[34D]  ....</string>\r\n  <string>[34E]  ....</" +
-            "string>\r\n  <string>[34F]  ....</string>\r\n  <string>[350]  ....</string>\r\n  <stri" +
-            "ng>[351]  ....</string>\r\n  <string>[352]  ....</string>\r\n  <string>[353]  ....</" +
-            "string>\r\n  <string>[354]  ....</string>\r\n  <string>[355]  ....</string>\r\n  <stri" +
-            "ng>[356]  ....</string>\r\n  <string>[357]  ....</string>\r\n  <string>[358]  ....</" +
-            "string>\r\n  <string>[359]  ....</string>\r\n  <string>[35A]  ....</string>\r\n  <stri" +
-            "ng>[35B]  ....</string>\r\n  <string>[35C]  ....</string>\r\n  <string>[35D]  ....</" +
-            "string>\r\n  <string>[35E]  ....</string>\r\n  <string>[35F]  ....</string>\r\n  <stri" +
-            "ng>[360]  ....</string>\r\n  <string>[361]  ....</string>\r\n  <string>[362]  ....</" +
-            "string>\r\n  <string>[363]  ....</string>\r\n  <string>[364]  ....</string>\r\n  <stri" +
-            "ng>[365]  ....</string>\r\n  <string>[366]  ....</string>\r\n  <string>[367]  ....</" +
-            "string>\r\n  <string>[368]  ....</string>\r\n  <string>[369]  ....</string>\r\n  <stri" +
-            "ng>[36A]  ....</string>\r\n  <string>[36B]  ....</string>\r\n  <string>[36C]  ....</" +
-            "string>\r\n  <string>[36D]  ....</string>\r\n  <string>[36E]  ....</string>\r\n  <stri" +
-            "ng>[36F]  ....</string>\r\n  <string>[370]  ....</string>\r\n  <string>[371]  ....</" +
-            "string>\r\n  <string>[372]  ....</string>\r\n  <string>[373]  ....</string>\r\n  <stri" +
-            "ng>[374]  ....</string>\r\n  <string>[375]  ....</string>\r\n  <string>[376]  ....</" +
-            "string>\r\n  <string>[377]  ....</string>\r\n  <string>[378]  ....</string>\r\n  <stri" +
-            "ng>[379]  ....</string>\r\n  <string>[37A]  ....</string>\r\n  <string>[37B]  ....</" +
-            "string>\r\n  <string>[37C]  ....</string>\r\n  <string>[37D]  ....</string>\r\n  <stri" +
-            "ng>[37E]  ....</string>\r\n  <string>[37F]  ....</string>\r\n  <string>[380]  ....</" +
-            "string>\r\n  <string>[381]  ....</string>\r\n  <string>[382]  ....</string>\r\n  <stri" +
-            "ng>[383]  ....</string>\r\n  <string>[384]  ....</string>\r\n  <string>[385]  ....</" +
-            "string>\r\n  <string>[386]  ....</string>\r\n  <string>[387]  ....</string>\r\n  <stri" +
-            "ng>[388]  ....</string>\r\n  <string>[389]  ....</string>\r\n  <string>[38A]  ....</" +
-            "string>\r\n  <string>[38B]  ....</string>\r\n  <string>[38C]  ....</string>\r\n  <stri" +
-            "ng>[38D]  ....</string>\r\n  <string>[38E]  ....</string>\r\n  <string>[38F]  ....</" +
-            "string>\r\n  <string>[390]  ....</string>\r\n  <string>[391]  ....</string>\r\n  <stri" +
-            "ng>[392]  ....</string>\r\n  <string>[393]  ....</string>\r\n  <string>[394]  ....</" +
-            "string>\r\n  <string>[395]  ....</string>\r\n  <string>[396]  ....</string>\r\n  <stri" +
-            "ng>[397]  ....</string>\r\n  <string>[398]  ....</string>\r\n  <string>[399]  ....</" +
-            "string>\r\n  <string>[39A]  ....</string>\r\n  <string>[39B]  ....</string>\r\n  <stri" +
-            "ng>[39C]  ....</string>\r\n  <string>[39D]  ....</string>\r\n  <string>[39E]  ....</" +
-            "string>\r\n  <string>[39F]  ....</string>\r\n  <string>[3A0]  marching Luigi</string" +
-            ">\r\n  <string>[3A1]  marching Toads</string>\r\n  <string>[3A2]  conducting Toadofs" +
-            "ky</string>\r\n  <string>[3A3]  waving Mallow</string>\r\n  <string>[3A4]  waving Ki" +
-            "ng &amp; Queen Nimbus</string>\r\n  <string>[3A5]  Nimbus Busman, Lakitu &amp; Fro" +
-            "gfucius</string>\r\n  <string>[3A6]  Tadpole</string>\r\n  <string>[3A7]  trumpeting" +
-            " Piranhas</string>\r\n  <string>[3A8]  Mole miners &amp; star</string>\r\n  <string>" +
-            "[3A9]  Dyna &amp; Mite</string>\r\n  <string>[3AA]  Hammer Bros &amp; Chomps</stri" +
-            "ng>\r\n  <string>[3AB]  Crook &amp; Croco</string>\r\n  <string>[3AC]  Bowser in hel" +
-            "icopter chasing</string>\r\n  <string>[3AD]  Dodo carrying Valentina</string>\r\n  <" +
-            "string>[3AE]  red balloon</string>\r\n  <string>[3AF]  Booster riding train</strin" +
-            "g>\r\n  <string>[3B0]  Snifits chasing beetle</string>\r\n  <string>[3B1]  bouncing " +
-            "Shysters</string>\r\n  <string>[3B2]  Mack, Yaridovich, Bowyer</string>\r\n  <string" +
-            ">[3B3]  Smithy</string>\r\n  <string>[3B4]  Johnny &amp; mates</string>\r\n  <string" +
-            ">[3B5]  blue/red/green Toads</string>\r\n  <string>[3B6]  riding Yoshi</string>\r\n " +
-            " <string>[3B7]  waving Mario &amp; Toadstool</string>\r\n  <string>[3B8]  sparkle<" +
-            "/string>\r\n  <string>[3B9]  poof</string>\r\n  <string>[3BA]  purple firework</stri" +
-            "ng>\r\n  <string>[3BB]  smaller red firework</string>\r\n  <string>[3BC]  normal yel" +
-            "low 5-pronged star</string>\r\n  <string>[3BD]  brown object dissipating</string>\r" +
-            "\n  <string>[3BE]  tiny glowing pixel</string>\r\n  <string>[3BF]  ....</string>\r\n " +
-            " <string>[3C0]  ....</string>\r\n  <string>[3C1]  ....</string>\r\n  <string>[3C2]  " +
-            "....</string>\r\n  <string>[3C3]  ....</string>\r\n  <string>[3C4]  ....</string>\r\n " +
-            " <string>[3C5]  ....</string>\r\n  <string>[3C6]  ....</string>\r\n  <string>[3C7]  " +
-            "....</string>\r\n  <string>[3C8]  ....</string>\r\n  <string>[3C9]  ....</string>\r\n " +
-            " <string>[3CA]  ....</string>\r\n  <string>[3CB]  ....</string>\r\n  <string>[3CC]  " +
-            "....</string>\r\n  <string>[3CD]  ....</string>\r\n  <string>[3CE]  ....</string>\r\n " +
-            " <string>[3CF]  ....</string>\r\n  <string>[3D0]  ....</string>\r\n  <string>[3D1]  " +
-            "....</string>\r\n  <string>[3D2]  ....</string>\r\n  <string>[3D3]  ....</string>\r\n " +
-            " <string>[3D4]  ....</string>\r\n  <string>[3D5]  ....</string>\r\n  <string>[3D6]  " +
-            "....</string>\r\n  <string>[3D7]  ....</string>\r\n  <string>[3D8]  ....</string>\r\n " +
-            " <string>[3D9]  ....</string>\r\n  <string>[3DA]  ....</string>\r\n  <string>[3DB]  " +
-            "....</string>\r\n  <string>[3DC]  ....</string>\r\n  <string>[3DD]  ....</string>\r\n " +
-            " <string>[3DE]  ....</string>\r\n  <string>[3DF]  ....</string>\r\n  <string>[3E0]  " +
-            "....</string>\r\n  <string>[3E1]  ....</string>\r\n  <string>[3E2]  ....</string>\r\n " +
-            " <string>[3E3]  ....</string>\r\n  <string>[3E4]  ....</string>\r\n  <string>[3E5]  " +
-            "....</string>\r\n  <string>[3E6]  ....</string>\r\n  <string>[3E7]  ....</string>\r\n " +
-            " <string>[3E8]  ....</string>\r\n  <string>[3E9]  ....</string>\r\n  <string>[3EA]  " +
-            "....</string>\r\n  <string>[3EB]  ....</string>\r\n  <string>[3EC]  ....</string>\r\n " +
-            " <string>[3ED]  ....</string>\r\n  <string>[3EE]  ....</string>\r\n  <string>[3EF]  " +
-            "....</string>\r\n  <string>[3F0]  ....</string>\r\n  <string>[3F1]  ....</string>\r\n " +
-            " <string>[3F2]  ....</string>\r\n  <string>[3F3]  ....</string>\r\n  <string>[3F4]  " +
-            "....</string>\r\n  <string>[3F5]  ....</string>\r\n  <string>[3F6]  ....</string>\r\n " +
-            " <string>[3F7]  ....</string>\r\n  <string>[3F8]  ....</string>\r\n  <string>[3F9]  " +
-            "....</string>\r\n  <string>[3FA]  ....</string>\r\n  <string>[3FB]  ....</string>\r\n " +
-            " <string>[3FC]  ....</string>\r\n  <string>[3FD]  ....</string>\r\n  <string>[3FE]  " +
-            "....</string>\r\n  <string>[3FF]  ....</string>\r\n</ArrayOfString>")]
+            "tring>Mario (walking, down-left)</string>\r\n  <string>Mario (jump, front)</string" +
+            ">\r\n  <string>Mario (walking, up-right)</string>\r\n  <string>Mario (surprise, left" +
+            ")</string>\r\n  <string>Mario (attack, up-right)</string>\r\n  <string>Mario (hammer" +
+            " attack, up-right)</string>\r\n  <string>Mario (crouch, up-right)</string>\r\n  <str" +
+            "ing>Toadstool (walking, down-left)</string>\r\n  <string>Toadstool (walking, up-ri" +
+            "ght)</string>\r\n  <string>Toadstool (surprise)</string>\r\n  <string>Toadstool (sla" +
+            "p attack)</string>\r\n  <string>Toadstool (frying pan attack)</string>\r\n  <string>" +
+            "Toadstool (fallen/crying)</string>\r\n  <string>Bowser (walking, down-left)</strin" +
+            "g>\r\n  <string>Bowser (walking, up-right)</string>\r\n  <string>Bowser (surprise)</" +
+            "string>\r\n  <string>Bowser (claw attack)</string>\r\n  <string>Bowser (swing ball-c" +
+            "hain)</string>\r\n  <string>Bowser (cast spell)</string>\r\n  <string>Mallow (walkin" +
+            "g, down-left)</string>\r\n  <string>Mallow (walking, up-right)</string>\r\n  <string" +
+            ">Mallow (surprise)</string>\r\n  <string>Mallow (punch)</string>\r\n  <string>Mallow" +
+            " (swing stick)</string>\r\n  <string>Mallow (still, up-right)</string>\r\n  <string>" +
+            "Geno (walking, down-left)</string>\r\n  <string>Geno (walking, up-right)</string>\r" +
+            "\n  <string>Geno (surprise)</string>\r\n  <string>Geno (elbow shot)</string>\r\n  <st" +
+            "ring>Geno (finger shot)</string>\r\n  <string>Geno (morph into cannon)</string>\r\n " +
+            " <string>Hammer</string>\r\n  <string>Froggie Stick</string>\r\n  <string>Cymbals</s" +
+            "tring>\r\n  <string>Chomp</string>\r\n  <string>Frying Pan</string>\r\n  <string>Paras" +
+            "ol</string>\r\n  <string>War Fan</string>\r\n  <string>Red Mushroom</string>\r\n  <str" +
+            "ing>Red Scarecrow</string>\r\n  <string>Mario\'s battle portrait</string>\r\n  <strin" +
+            "g>Toadstool\'s battle portrait</string>\r\n  <string>Bowser\'s battle portrait</stri" +
+            "ng>\r\n  <string>Mallow\'s battle portrait</string>\r\n  <string>Geno\'s battle portra" +
+            "it</string>\r\n  <string>Yellow Yoshi</string>\r\n  <string>Pink Yoshi</string>\r\n  <" +
+            "string>Boshi</string>\r\n  <string>Croco</string>\r\n  <string>Green Yoshi</string>\r" +
+            "\n  <string>Booster</string>\r\n  <string>Green Yoshi (walk)</string>\r\n  <string>Bo" +
+            "oster (walk)</string>\r\n  <string>King Nimbus</string>\r\n  <string>Queen Nimbus</s" +
+            "tring>\r\n  <string>Jonathan Jones</string>\r\n  <string>Valentina</string>\r\n  <stri" +
+            "ng>Magikoopa</string>\r\n  <string>Frogfucius</string>\r\n  <string>Tadpole</string>" +
+            "\r\n  <string>Thwomp</string>\r\n  <string>Big Thwomp</string>\r\n  <string>Microbomb<" +
+            "/string>\r\n  <string>Valentina Statue</string>\r\n  <string>Toad</string>\r\n  <strin" +
+            "g>Wallet Guy (also casino assistants)</string>\r\n  <string>Raini</string>\r\n  <str" +
+            "ing>Old Man</string>\r\n  <string>Old Woman</string>\r\n  <string>Green/Brown Toad</" +
+            "string>\r\n  <string>Chancellor</string>\r\n  <string>Pa Mole</string>\r\n  <string>Ma" +
+            " Mole</string>\r\n  <string>Girl Mole (pink bow)</string>\r\n  <string>Girl Mole (ye" +
+            "llow bow)</string>\r\n  <string>Nimbusite (blue)</string>\r\n  <string>Nimbusite (re" +
+            "d)</string>\r\n  <string>Nimbusite (brown/green)</string>\r\n  <string>Nimbusite (ye" +
+            "llow/green)</string>\r\n  <string>Nimbus Guard</string>\r\n  <string>Toadofsky</stri" +
+            "ng>\r\n  <string>Mario Doll (Booster\'s Castle)</string>\r\n  <string>Blue Star Piece" +
+            "</string>\r\n  <string>Purple Star Piece</string>\r\n  <string>Red Star Piece</strin" +
+            "g>\r\n  <string>Gold Star Piece</string>\r\n  <string>Green Star Piece</string>\r\n  <" +
+            "string>Light Blue Star Piece</string>\r\n  <string>Yellow Star Piece</string>\r\n  <" +
+            "string>Geno Doll</string>\r\n  <string>Bowser Doll</string>\r\n  <string>Mario Doll<" +
+            "/string>\r\n  <string>Toadstool Doll</string>\r\n  <string>Blue Stepping Block</stri" +
+            "ng>\r\n  <string>Treasure Chest</string>\r\n  <string>Empty Treasure Chest</string>\r" +
+            "\n  <string>Mario Doll (surprised)</string>\r\n  <string>Toadstool\'s Parachute</str" +
+            "ing>\r\n  <string>Rolling Barrel</string>\r\n  <string>Trampoline (Warp)</string>\r\n " +
+            " <string>Trampoline (Jump)</string>\r\n  <string>Teeter-totter</string>\r\n  <string" +
+            ">Save Point</string>\r\n  <string>Corkpedite</string>\r\n  <string>J Puzzle Block</s" +
+            "tring>\r\n  <string>Yellow Stepping Block</string>\r\n  <string>Water Droplet</strin" +
+            "g>\r\n  <string>Hinopio</string>\r\n  <string>Factory Hex-Nut</string>\r\n  <string>Gr" +
+            "een Switch</string>\r\n  <string>Discolored Treasure Chest?</string>\r\n  <string>Ni" +
+            "mbusland Bus Driver</string>\r\n  <string>Mushroom Boy</string>\r\n  <string>Marrymo" +
+            "re Man (green)</string>\r\n  <string>Marrymore Woman (yellow)</string>\r\n  <string>" +
+            "Marrymore Woman (green)</string>\r\n  <string>Marrymore Kid (purple)</string>\r\n  <" +
+            "string>Marrymore Kid (blue/green)</string>\r\n  <string>Marrymore Bright Card buye" +
+            "r (brown/grey)</string>\r\n  <string>Rose Town Gardener (green/grey)</string>\r\n  <" +
+            "string>Old Woman (green/grey)</string>\r\n  <string>Old Woman (purple/grey)</strin" +
+            "g>\r\n  <string>Fat Yoshi Baby</string>\r\n  <string>Yoshi Baby Egg</string>\r\n  <str" +
+            "ing>Gameboy Kid</string>\r\n  <string>Frogfucius Student</string>\r\n  <string>Chomp" +
+            " (behind)</string>\r\n  <string>Wiggler (head)</string>\r\n  <string>Block Shadow</s" +
+            "tring>\r\n  <string>Red Magikoopa</string>\r\n  <string>Wiggler (body segment)</stri" +
+            "ng>\r\n  <string>Dodo (as parson)</string>\r\n  <string>Moleville Mine Cart</string>" +
+            "\r\n  <string>Knife Guy Juggler (still, red balls)</string>\r\n  <string>Knife Guy J" +
+            "uggler</string>\r\n  <string>White Mine Cart?</string>\r\n  <string>Discolored Mine " +
+            "Cart</string>\r\n  <string>Fireball (surface from lava)</string>\r\n  <string>Piranh" +
+            "a Plant</string>\r\n  <string>Goomba</string>\r\n  <string>Bullet Bill</string>\r\n  <" +
+            "string>Golden Bullet Bill</string>\r\n  <string>Factory Clerk (green)</string>\r\n  " +
+            "<string>Land\'s End Cannon</string>\r\n  <string>Red Dot?</string>\r\n  <string>Bob-o" +
+            "mb</string>\r\n  <string>Commander Troopa</string>\r\n  <string>Golden Belome</strin" +
+            "g>\r\n  <string>Birdy Statue</string>\r\n  <string>Shyguy in Bowser\'s Helicopter</st" +
+            "ring>\r\n  <string>Machine Made Bowyer</string>\r\n  <string>Machine Made Yaridovich" +
+            " (out of battle)</string>\r\n  <string>Machine Made Axem Red</string>\r\n  <string>G" +
+            "unyolk (top section)</string>\r\n  <string>Gunyolk (outer section)</string>\r\n  <st" +
+            "ring>Factory Crane</string>\r\n  <string>Blue-Green Star Piece (spinning)</string>" +
+            "\r\n  <string>Smithy\'s Hammer</string>\r\n  <string>Smithy\'s Chest</string>\r\n  <stri" +
+            "ng>Poison Toxic Gas</string>\r\n  <string>Shelly (bottom section)</string>\r\n  <str" +
+            "ing>Dyna and Mite</string>\r\n  <string>Seaside Town Fake (green)</string>\r\n  <str" +
+            "ing>Seaside Town Fake Elder (green)</string>\r\n  <string>Seaside Town Elder (yell" +
+            "ow/green)</string>\r\n  <string>Monstermama (golden/brown/red)</string>\r\n  <string" +
+            ">Nimbus Guard</string>\r\n  <string>Factory Manager (blue)</string>\r\n  <string>Fac" +
+            "tory Director (red)</string>\r\n  <string>Boomer (red)</string>\r\n  <string>Dr.Topp" +
+            "er (green)</string>\r\n  <string>Sparkles from Star Piece</string>\r\n  <string>Geno" +
+            " Doll</string>\r\n  <string>Smelter (back section)</string>\r\n  <string>Small Candy" +
+            " Cloud</string>\r\n  <string>Golden Chomp (back)</string>\r\n  <string>Chomp (front)" +
+            "</string>\r\n  <string>Grate Guy (from casino)</string>\r\n  <string>Marrymore Inn K" +
+            "eeper (blue, striped hat)</string>\r\n  <string>Rose Town Treasure Holder</string>" +
+            "\r\n  <string>Rose Town Woman (blue/pink, braids)</string>\r\n  <string>Marrymore Wo" +
+            "man (yellow)</string>\r\n  <string>Rose Town Old Man (blue/grey)</string>\r\n  <stri" +
+            "ng>Old Woman (grey/red)</string>\r\n  <string>Kid (red, striped hat)</string>\r\n  <" +
+            "string>Gaz (purple)</string>\r\n  <string>(nothing)</string>\r\n  <string>(nothing)<" +
+            "/string>\r\n  <string>Cannon Ball</string>\r\n  <string>Croco (still)</string>\r\n  <s" +
+            "tring>Bowser w/Toadstool in Helicopter</string>\r\n  <string>Miniature Toad</strin" +
+            "g>\r\n  <string>Coin</string>\r\n  <string>Small Coin</string>\r\n  <string>Frog Coin<" +
+            "/string>\r\n  <string>Flower</string>\r\n  <string>Big Flower</string>\r\n  <string>Sp" +
+            "arkle? (sideways)</string>\r\n  <string>Sparkle (downwards)</string>\r\n  <string>Sp" +
+            "arkle (circular winding)</string>\r\n  <string>Explosion</string>\r\n  <string>Mokur" +
+            "a\'s Cloud (blue)</string>\r\n  <string>Small Frog Coin</string>\r\n  <string>Level U" +
+            "p text from Invincible Star</string>\r\n  <string>Grey Explosion (when encounterin" +
+            "g Fireballs)</string>\r\n  <string>Miniature Axem Red</string>\r\n  <string>Terrapin" +
+            " (still)</string>\r\n  <string>Jinx (walk)</string>\r\n  <string>Axem Red</string>\r\n" +
+            "  <string>Axem Black</string>\r\n  <string>Axem Pink</string>\r\n  <string>Axem Yell" +
+            "ow</string>\r\n  <string>Axem Green</string>\r\n  <string>Axem Red teleport</string>" +
+            "\r\n  <string>Stumpet (head)</string>\r\n  <string>Stumpet (roots, right)</string>\r\n" +
+            "  <string>Czar Dragon (body)</string>\r\n  <string>Growing Vine Beanstalk</string>" +
+            "\r\n  <string>Brick Beanstalk Block</string>\r\n  <string>Yellow Dot?</string>\r\n  <s" +
+            "tring>Yellow Letter</string>\r\n  <string>Yaridovich (out of battle)</string>\r\n  <" +
+            "string>Banana Peel</string>\r\n  <string>Tentacle (extending)</string>\r\n  <string>" +
+            "Snifit (black, back)</string>\r\n  <string>Level Up Bonus Selection Box</string>\r\n" +
+            "  <string>Booster\'s Tower Entrance Door</string>\r\n  <string>Light Green Pipe (to" +
+            "p edge)</string>\r\n  <string>Level Up Bonus Text</string>\r\n  <string>Level Up Bon" +
+            "us Flower</string>\r\n  <string>Level Up Bonus Pow Power</string>\r\n  <string>Level" +
+            " Up Bonus Star Magic</string>\r\n  <string>Level Up Bonus HP</string>\r\n  <string>F" +
+            "alling Stepping Bridge Block</string>\r\n  <string>Old Classic Mario</string>\r\n  <" +
+            "string>Booster\'s Choo-Choo Train</string>\r\n  <string>Magikoopa (blue, walking)</" +
+            "string>\r\n  <string>Terrapin (walking)</string>\r\n  <string>Splash Water Droplets<" +
+            "/string>\r\n  <string>Small Sea Fish</string>\r\n  <string>Splash Water Geyser</stri" +
+            "ng>\r\n  <string>Bowyer</string>\r\n  <string>White Gas Cloud</string>\r\n  <string>Ma" +
+            "chine Made Drill Bit</string>\r\n  <string>Mushroom House Decor Mailbox</string>\r\n" +
+            "  <string>Link Sleeping in Rose Town Inn</string>\r\n  <string>Samus Sleeping in M" +
+            "ushroom Kingdom</string>\r\n  <string>Grey Stepping Stone</string>\r\n  <string>Hino" +
+            "pio\'s Model Airplane (blue/grey)</string>\r\n  <string>Grey Stone Block</string>\r\n" +
+            "  <string>Small Black Fence</string>\r\n  <string>Wooden Bridge Bowser\'s Keep (rig" +
+            "ht section)</string>\r\n  <string>Grey Stone Bridge Bowser\'s Keep (right section)<" +
+            "/string>\r\n  <string>Toadstool Hand Captive from Rope</string>\r\n  <string>Plywood" +
+            " Brown Door Bowser\'s Keep</string>\r\n  <string>Beetle</string>\r\n  <string>Terrapi" +
+            "n</string>\r\n  <string>Spikey</string>\r\n  <string>Sky Troopa</string>\r\n  <string>" +
+            "Mad Mallet</string>\r\n  <string>Shaman</string>\r\n  <string>Crook</string>\r\n  <str" +
+            "ing>Goomba</string>\r\n  <string>Piranha Plant</string>\r\n  <string>Amanita</string" +
+            ">\r\n  <string>Goby</string>\r\n  <string>Bloober</string>\r\n  <string>Bandana Red</s" +
+            "tring>\r\n  <string>Lakitu</string>\r\n  <string>Birdy</string>\r\n  <string>Pinwheel<" +
+            "/string>\r\n  <string>Rat Funk</string>\r\n  <string>K-9</string>\r\n  <string>Magmite" +
+            "</string>\r\n  <string>The Big Boo</string>\r\n  <string>Dry Bones</string>\r\n  <stri" +
+            "ng>Greaper</string>\r\n  <string>Sparky</string>\r\n  <string>Chomp</string>\r\n  <str" +
+            "ing>Pandorite</string>\r\n  <string>Shy Ranger</string>\r\n  <string>Bob-Omb</string" +
+            ">\r\n  <string>Spookum</string>\r\n  <string>Hammer Bro</string>\r\n  <string>Buzzer</" +
+            "string>\r\n  <string>Ameboid</string>\r\n  <string>Gecko</string>\r\n  <string>Wiggler" +
+            "</string>\r\n  <string>Crusty</string>\r\n  <string>Magikoopa</string>\r\n  <string>Le" +
+            "uko</string>\r\n  <string>Jawful</string>\r\n  <string>Enigma</string>\r\n  <string>Bl" +
+            "aster</string>\r\n  <string>Guerrilla</string>\r\n  <string>Baba Yaga</string>\r\n  <s" +
+            "tring>Hobgoblin</string>\r\n  <string>Reacher</string>\r\n  <string>Shogun</string>\r" +
+            "\n  <string>Orb User</string>\r\n  <string>Heavy Troopa</string>\r\n  <string>Shadow<" +
+            "/string>\r\n  <string>Cluster</string>\r\n  <string>Bahamutt</string>\r\n  <string>Oct" +
+            "olot</string>\r\n  <string>Frogog</string>\r\n  <string>Clerk</string>\r\n  <string>Gu" +
+            "nyolk</string>\r\n  <string>Boomer</string>\r\n  <string>Remo Con</string>\r\n  <strin" +
+            "g>Snapdragon</string>\r\n  <string>Stumpet</string>\r\n  <string>Dodo (2nd time)</st" +
+            "ring>\r\n  <string>Jester</string>\r\n  <string>Artichoker</string>\r\n  <string>Arach" +
+            "ne</string>\r\n  <string>Carroboscis</string>\r\n  <string>Hippopo</string>\r\n  <stri" +
+            "ng>Mastadoom</string>\r\n  <string>Corkpedite</string>\r\n  <string>Terra Cotta</str" +
+            "ing>\r\n  <string>Spikester</string>\r\n  <string>Malakoopa</string>\r\n  <string>Poun" +
+            "der</string>\r\n  <string>Poundette</string>\r\n  <string>Sackit</string>\r\n  <string" +
+            ">Gu Goomba</string>\r\n  <string>Chewy</string>\r\n  <string>Fireball</string>\r\n  <s" +
+            "tring>Mr.Kipper</string>\r\n  <string>Factory Chief</string>\r\n  <string>Bandana Bl" +
+            "ue</string>\r\n  <string>Manager</string>\r\n  <string>Bluebird</string>\r\n  <string>" +
+            "__nothing</string>\r\n  <string>Alley Rat</string>\r\n  <string>Chow</string>\r\n  <st" +
+            "ring>Magmus</string>\r\n  <string>Li~L Boo</string>\r\n  <string>Vomer</string>\r\n  <" +
+            "string>Glum Reaper</string>\r\n  <string>Pyrosphere</string>\r\n  <string>Chomp Chom" +
+            "p</string>\r\n  <string>Hidon</string>\r\n  <string>Sling Shy</string>\r\n  <string>Ro" +
+            "b-Omb</string>\r\n  <string>Shy Guy</string>\r\n  <string>Ninja</string>\r\n  <string>" +
+            "Stinger</string>\r\n  <string>Goombette</string>\r\n  <string>Geckit</string>\r\n  <st" +
+            "ring>Jabit</string>\r\n  <string>Star Cruster</string>\r\n  <string>Merlin</string>\r" +
+            "\n  <string>Muckle</string>\r\n  <string>Forkies</string>\r\n  <string>Gorgon</string" +
+            ">\r\n  <string>Big Bertha</string>\r\n  <string>Chained Kong</string>\r\n  <string>Fau" +
+            "tso</string>\r\n  <string>Straw Head</string>\r\n  <string>Juju</string>\r\n  <string>" +
+            "Armored Ant</string>\r\n  <string>Orbison</string>\r\n  <string>Tub-O-Troopa</string" +
+            ">\r\n  <string>Doppel</string>\r\n  <string>Pulsar</string>\r\n  <string>__purple Baha" +
+            "mutt</string>\r\n  <string>Octovader</string>\r\n  <string>Ribbite</string>\r\n  <stri" +
+            "ng>Director</string>\r\n  <string>__Gunyolk (yellow)</string>\r\n  <string>__Boomer " +
+            "(blue)</string>\r\n  <string>Puppox</string>\r\n  <string>Fink Flower</string>\r\n  <s" +
+            "tring>Lumbler</string>\r\n  <string>Springer</string>\r\n  <string>Harlequin</string" +
+            ">\r\n  <string>Kriffid</string>\r\n  <string>Spinthra</string>\r\n  <string>Radish</st" +
+            "ring>\r\n  <string>Crippo</string>\r\n  <string>Mastablasta</string>\r\n  <string>Pile" +
+            " Driver</string>\r\n  <string>Apprentice</string>\r\n  <string>__nothing</string>\r\n " +
+            " <string>__nothing</string>\r\n  <string>__nothing</string>\r\n  <string>__Geno rede" +
+            "mption</string>\r\n  <string>__little bird</string>\r\n  <string>Box Boy</string>\r\n " +
+            " <string>Shelly</string>\r\n  <string>Super Spike</string>\r\n  <string>Dodo</string" +
+            ">\r\n  <string>Oerlikon</string>\r\n  <string>Chester</string>\r\n  <string>Body</stri" +
+            "ng>\r\n  <string>__Pile Driver (body)</string>\r\n  <string>Torte</string>\r\n  <strin" +
+            "g>Shy Away</string>\r\n  <string>Jinx Clone</string>\r\n  <string>Machine Made (Shys" +
+            "ter)</string>\r\n  <string>Machine Made (Drill Bit)</string>\r\n  <string>Formless</" +
+            "string>\r\n  <string>Mokura</string>\r\n  <string>Fire Crystal</string>\r\n  <string>W" +
+            "ater Crystal</string>\r\n  <string>Earth Crystal</string>\r\n  <string>Wind Crystal<" +
+            "/string>\r\n  <string>Mario Clone</string>\r\n  <string>Toadstool 2</string>\r\n  <str" +
+            "ing>Bowser Clone</string>\r\n  <string>Geno Clone</string>\r\n  <string>Mallow Clone" +
+            "</string>\r\n  <string>Shyster</string>\r\n  <string>Kinklink</string>\r\n  <string>__" +
+            "Toadstool (captive)</string>\r\n  <string>Hangin~ Shy</string>\r\n  <string>Smelter<" +
+            "/string>\r\n  <string>Machine Made (Mack)</string>\r\n  <string>Machine Made (Bowyer" +
+            ")</string>\r\n  <string>Machine Made (Yaridovich)</string>\r\n  <string>Machine Made" +
+            " (Axem Pink)</string>\r\n  <string>Machine Made (Axem Black)</string>\r\n  <string>M" +
+            "achine Made (Axem Red)</string>\r\n  <string>Machine Made (Axem Yellow)</string>\r\n" +
+            "  <string>Machine Made (Axem Green)</string>\r\n  <string>Goomba (Intro)</string>\r" +
+            "\n  <string>Hammer Bro (Intro)</string>\r\n  <string>Birdo (Intro)</string>\r\n  <str" +
+            "ing>Bb-Bomb</string>\r\n  <string>Magidragon</string>\r\n  <string>Starslap</string>" +
+            "\r\n  <string>Mukumuku</string>\r\n  <string>Zeostar</string>\r\n  <string>Jagger</str" +
+            "ing>\r\n  <string>Chompweed</string>\r\n  <string>Smithy (Tank Head)</string>\r\n  <st" +
+            "ring>Smithy (Box Head)</string>\r\n  <string>__Corkpedite</string>\r\n  <string>Micr" +
+            "obomb</string>\r\n  <string>__Thwomp</string>\r\n  <string>Grit</string>\r\n  <string>" +
+            "Neosquid</string>\r\n  <string>Yaridovich (mirage)</string>\r\n  <string>Helio</stri" +
+            "ng>\r\n  <string>Right Eye</string>\r\n  <string>Left Eye</string>\r\n  <string>Knife " +
+            "Guy</string>\r\n  <string>Grate Guy</string>\r\n  <string>Bundt</string>\r\n  <string>" +
+            "Jinx (1st time)</string>\r\n  <string>Jinx (2nd time)</string>\r\n  <string>Count Do" +
+            "wn</string>\r\n  <string>Ding-A-Ling</string>\r\n  <string>Belome (1st time)</string" +
+            ">\r\n  <string>Belome (2nd time)</string>\r\n  <string>__Belome</string>\r\n  <string>" +
+            "Smilax</string>\r\n  <string>Thrax        </string>\r\n  <string>Megasmilax</string>" +
+            "\r\n  <string>Birdo</string>\r\n  <string>Eggbert</string>\r\n  <string>Axem Yellow</s" +
+            "tring>\r\n  <string>Punchinello</string>\r\n  <string>Tentacles (right)</string>\r\n  " +
+            "<string>Axem Red</string>\r\n  <string>Axem Green</string>\r\n  <string>King Bomb</s" +
+            "tring>\r\n  <string>Mezzo Bomb</string>\r\n  <string>__Bundt object</string>\r\n  <str" +
+            "ing>Raspberry</string>\r\n  <string>King Calamari</string>\r\n  <string>Tentacles (l" +
+            "eft)</string>\r\n  <string>Jinx (3rd time)</string>\r\n  <string>Zombone</string>\r\n " +
+            " <string>Czar Dragon</string>\r\n  <string>Cloaker (1st time)</string>\r\n  <string>" +
+            "Domino (2nd time)</string>\r\n  <string>Mad Adder</string>\r\n  <string>Mack</string" +
+            ">\r\n  <string>Bodyguard</string>\r\n  <string>Yaridovich</string>\r\n  <string>Drill " +
+            "Bit</string>\r\n  <string>Axem Pink</string>\r\n  <string>Axem Black</string>\r\n  <st" +
+            "ring>Bowyer</string>\r\n  <string>Aero</string>\r\n  <string>__Exor (mouth)</string>" +
+            "\r\n  <string>Exor</string>\r\n  <string>Smithy (1st Form)</string>\r\n  <string>Shype" +
+            "r</string>\r\n  <string>Smithy (Body)</string>\r\n  <string>Smithy (Head)</string>\r\n" +
+            "  <string>Smithy (Magic Head)</string>\r\n  <string>Smithy (Chest Head)</string>\r\n" +
+            "  <string>Croco (1st time)</string>\r\n  <string>Croco (2nd time)</string>\r\n  <str" +
+            "ing>__Croco</string>\r\n  <string>Earth Link</string>\r\n  <string>Bowser</string>\r\n" +
+            "  <string>Axem Rangers</string>\r\n  <string>Booster</string>\r\n  <string>Booster</" +
+            "string>\r\n  <string>Snifit</string>\r\n  <string>Johnny</string>\r\n  <string>Johnny<" +
+            "/string>\r\n  <string>Valentina</string>\r\n  <string>Cloaker (2nd time)</string>\r\n " +
+            " <string>Domino (2nd time)</string>\r\n  <string>Candle</string>\r\n  <string>Culex<" +
+            "/string>\r\n  <string>A/B/X/Y action button selection in battle</string>\r\n  <strin" +
+            "g>Rainbow Explosion</string>\r\n  <string>Blue Explosion</string>\r\n  <string>Green" +
+            " Explosion</string>\r\n  <string>Enemy Defeated Explosion Stars</string>\r\n  <strin" +
+            "g>Bomb Explosion</string>\r\n  <string>Small White Cloud</string>\r\n  <string>Drain" +
+            " Explosion</string>\r\n  <string>alphabet + symbols</string>\r\n  <string>light blue" +
+            " stars</string>\r\n  <string>Come Back rainbow star</string>\r\n  <string>yellow cur" +
+            "e stars</string>\r\n  <string>....</string>\r\n  <string>Bowyer\'s arrow</string>\r\n  " +
+            "<string>yellow steam?</string>\r\n  <string>small black bullet</string>\r\n  <string" +
+            ">very small black bullet</string>\r\n  <string>HP Rain cloud</string>\r\n  <string>s" +
+            "tat-boost arrows</string>\r\n  <string>black rolling coal rock</string>\r\n  <string" +
+            ">blue spark</string>\r\n  <string>yellow spark</string>\r\n  <string>green spark</st" +
+            "ring>\r\n  <string>red spark</string>\r\n  <string>rainbow rain</string>\r\n  <string>" +
+            "mushroom spores</string>\r\n  <string>Lazy Shell (Heavy Troopa)</string>\r\n  <strin" +
+            "g>Orange Lazy Shell</string>\r\n  <string>Green Lazy Shell (Tub-O-Troopa)</string>" +
+            "\r\n  <string>Snowy eyes</string>\r\n  <string>blinking yellow light circle</string>" +
+            "\r\n  <string>purple petal</string>\r\n  <string>small pink petal</string>\r\n  <strin" +
+            "g>thrown hammer</string>\r\n  <string>Bombs Away electric ball</string>\r\n  <string" +
+            ">Fire Orb fireball</string>\r\n  <string>Willy Wisp purple electric ball</string>\r" +
+            "\n  <string>spore (pink/green)</string>\r\n  <string>bolt (hardware-wise)</string>\r" +
+            "\n  <string>Mute balloon</string>\r\n  <string>\'Thank You\' red dialogue bubble</str" +
+            "ing>\r\n  <string>\'Thank You\' purple dialogue bubble</string>\r\n  <string>\'Thank Yo" +
+            "u\' blue dialogue bubble</string>\r\n  <string>\'Thank You\' green dialogue bubble</s" +
+            "tring>\r\n  <string>\'Thank You\' yellow dialogue bubble</string>\r\n  <string>\'Psycho" +
+            "path\' question mark cloud</string>\r\n  <string>thrown shuriken</string>\r\n  <strin" +
+            "g>green cure stars</string>\r\n  <string>red cure stars</string>\r\n  <string>blue c" +
+            "ure stars</string>\r\n  <string>yellow reusable item sprite with letter I</string>" +
+            "\r\n  <string>\'A\' button from Bowyer\'s \'Button Lock\'</string>\r\n  <string>Bowser\'s " +
+            "spike shot</string>\r\n  <string>\'Geno Flash\' squinting eyes</string>\r\n  <string>g" +
+            "reen item collection</string>\r\n  <string>red item collection</string>\r\n  <string" +
+            ">blue item collection</string>\r\n  <string>yellow item collection</string>\r\n  <st" +
+            "ring>green spore</string>\r\n  <string>\'Fear\' exclamation point</string>\r\n  <strin" +
+            "g>....</string>\r\n  <string>Mokura</string>\r\n  <string>Drain</string>\r\n  <string>" +
+            "sparkles</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>yellow lightning ball</str" +
+            "ing>\r\n  <string>Fire Orb hit explosion</string>\r\n  <string>egg</string>\r\n  <stri" +
+            "ng>Lightning Orb blue lightning ball</string>\r\n  <string>small yellow spike</str" +
+            "ing>\r\n  <string>large yellow spike</string>\r\n  <string>white gas cloud</string>\r" +
+            "\n  <string>Blast orange gas cloud</string>\r\n  <string>Star Egg little brown bird" +
+            "</string>\r\n  <string>Poison Gas green gas cloud</string>\r\n  <string>white stars<" +
+            "/string>\r\n  <string>purple gas cloud</string>\r\n  <string>yellow star</string>\r\n " +
+            " <string>Diamond Saw snowflake</string>\r\n  <string>blue gas cloud</string>\r\n  <s" +
+            "tring>bone throw</string>\r\n  <string>spritz bomb</string>\r\n  <string>Wind Crysta" +
+            "l</string>\r\n  <string>green shine web</string>\r\n  <string>Mecha-Koopa (Bowser Cr" +
+            "ush) eyes</string>\r\n  <string>Water Crystal</string>\r\n  <string>plasm water drop" +
+            "let (blue-green)</string>\r\n  <string>Ice Rock</string>\r\n  <string>Ice Rock (grey" +
+            ")</string>\r\n  <string>big pink heart</string>\r\n  <string>dark red/yellow firebal" +
+            "l</string>\r\n  <string>light green stars</string>\r\n  <string>light orange stars</" +
+            "string>\r\n  <string>Sleepy Time sheep/ram</string>\r\n  <string>Geno Beam/Blast/Fla" +
+            "sh red power-up star</string>\r\n  <string>....</string>\r\n  <string>blue/green bub" +
+            "bles/circles</string>\r\n  <string>sleep ZZZ\'s</string>\r\n  <string>backwards yello" +
+            "w spike</string>\r\n  <string>Water Blast water spouts</string>\r\n  <string>Gunk Ba" +
+            "ll / Ink Blast</string>\r\n  <string>water spout (red)</string>\r\n  <string>Royal F" +
+            "lush card</string>\r\n  <string>yellow shaking bell</string>\r\n  <string>....</stri" +
+            "ng>\r\n  <string>blue music note</string>\r\n  <string>white pixel dot</string>\r\n  <" +
+            "string>....</string>\r\n  <string>blue water surfacing/diving droplets</string>\r\n " +
+            " <string>green water surfacing/diving droplets</string>\r\n  <string>yellow water " +
+            "surfacing/diving droplets</string>\r\n  <string>....</string>\r\n  <string>....</str" +
+            "ing>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r" +
+            "\n  <string>Magikoopa\'s triangle/circle/X cast magic</string>\r\n  <string>....</st" +
+            "ring>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>" +
+            "\r\n  <string>....</string>\r\n  <string>flower bonus</string>\r\n  <string>....</stri" +
+            "ng>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n" +
+            "  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <st" +
+            "ring>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>" +
+            "....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....<" +
+            "/string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</stri" +
+            "ng>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n" +
+            "  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <st" +
+            "ring>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>" +
+            "....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....<" +
+            "/string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</stri" +
+            "ng>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n" +
+            "  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <st" +
+            "ring>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>" +
+            "....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....<" +
+            "/string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</stri" +
+            "ng>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n" +
+            "  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <st" +
+            "ring>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>" +
+            "....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....<" +
+            "/string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</stri" +
+            "ng>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n" +
+            "  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <st" +
+            "ring>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>" +
+            "....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....<" +
+            "/string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</stri" +
+            "ng>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n" +
+            "  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <st" +
+            "ring>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>" +
+            "....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....<" +
+            "/string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</stri" +
+            "ng>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n" +
+            "  <string>....</string>\r\n  <string>marching Luigi</string>\r\n  <string>marching T" +
+            "oads</string>\r\n  <string>conducting Toadofsky</string>\r\n  <string>waving Mallow<" +
+            "/string>\r\n  <string>waving King &amp; Queen Nimbus</string>\r\n  <string>Nimbus Bu" +
+            "sman, Lakitu &amp; Frogfucius</string>\r\n  <string>Tadpole</string>\r\n  <string>tr" +
+            "umpeting Piranhas</string>\r\n  <string>Mole miners &amp; star</string>\r\n  <string" +
+            ">Dyna &amp; Mite</string>\r\n  <string>Hammer Bros &amp; Chomps</string>\r\n  <strin" +
+            "g>Crook &amp; Croco</string>\r\n  <string>Bowser in helicopter chasing</string>\r\n " +
+            " <string>Dodo carrying Valentina</string>\r\n  <string>red balloon</string>\r\n  <st" +
+            "ring>Booster riding train</string>\r\n  <string>Snifits chasing beetle</string>\r\n " +
+            " <string>bouncing Shysters</string>\r\n  <string>Mack, Yaridovich, Bowyer</string>" +
+            "\r\n  <string>Smithy</string>\r\n  <string>Johnny &amp; mates</string>\r\n  <string>bl" +
+            "ue/red/green Toads</string>\r\n  <string>riding Yoshi</string>\r\n  <string>waving M" +
+            "ario &amp; Toadstool</string>\r\n  <string>sparkle</string>\r\n  <string>poof</strin" +
+            "g>\r\n  <string>purple firework</string>\r\n  <string>smaller red firework</string>\r" +
+            "\n  <string>normal yellow 5-pronged star</string>\r\n  <string>brown object dissipa" +
+            "ting</string>\r\n  <string>tiny glowing pixel</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n " +
+            " <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <str" +
+            "ing>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>." +
+            "...</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</" +
+            "string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</strin" +
+            "g>\r\n  <string>....</string>\r\n  <string>....</string>\r\n  <string>....</string>\r\n<" +
+            "/ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection SpriteNames {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["SpriteNames"]));

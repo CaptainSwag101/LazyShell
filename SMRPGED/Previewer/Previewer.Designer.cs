@@ -62,6 +62,7 @@ namespace SMRPGED.Previewer
             this.enterEventCheckBox = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -70,6 +71,10 @@ namespace SMRPGED.Previewer
             this.label9 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.panel5 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.selectNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.adjustXNumericUpDown)).BeginInit();
@@ -80,11 +85,13 @@ namespace SMRPGED.Previewer
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel11.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,10 +107,11 @@ namespace SMRPGED.Previewer
             // 
             // changeEmuButton
             // 
+            this.changeEmuButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.changeEmuButton.BackColor = System.Drawing.SystemColors.Control;
             this.changeEmuButton.FlatAppearance.BorderSize = 0;
             this.changeEmuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.changeEmuButton.Location = new System.Drawing.Point(528, 21);
+            this.changeEmuButton.Location = new System.Drawing.Point(645, 21);
             this.changeEmuButton.Name = "changeEmuButton";
             this.changeEmuButton.Size = new System.Drawing.Size(70, 17);
             this.changeEmuButton.TabIndex = 1;
@@ -114,12 +122,15 @@ namespace SMRPGED.Previewer
             // 
             // eventListBox
             // 
+            this.eventListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.eventListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.eventListBox.FormattingEnabled = true;
             this.eventListBox.IntegralHeight = false;
             this.eventListBox.Location = new System.Drawing.Point(2, 21);
             this.eventListBox.Name = "eventListBox";
-            this.eventListBox.Size = new System.Drawing.Size(443, 126);
+            this.eventListBox.Size = new System.Drawing.Size(560, 277);
             this.eventListBox.TabIndex = 2;
             this.eventListBox.SelectedIndexChanged += new System.EventHandler(this.eventListBox_SelectedIndexChanged);
             // 
@@ -128,9 +139,9 @@ namespace SMRPGED.Previewer
             this.launchButton.BackColor = System.Drawing.SystemColors.Window;
             this.launchButton.FlatAppearance.BorderSize = 0;
             this.launchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.launchButton.Location = new System.Drawing.Point(2, 21);
+            this.launchButton.Location = new System.Drawing.Point(2, 2);
             this.launchButton.Name = "launchButton";
-            this.launchButton.Size = new System.Drawing.Size(298, 17);
+            this.launchButton.Size = new System.Drawing.Size(70, 17);
             this.launchButton.TabIndex = 3;
             this.launchButton.Text = "LAUNCH";
             this.launchButton.UseCompatibleTextRendering = true;
@@ -176,9 +187,9 @@ namespace SMRPGED.Previewer
             this.cancelButton.BackColor = System.Drawing.SystemColors.Window;
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelButton.Location = new System.Drawing.Point(301, 21);
+            this.cancelButton.Location = new System.Drawing.Point(74, 2);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(297, 17);
+            this.cancelButton.Size = new System.Drawing.Size(71, 17);
             this.cancelButton.TabIndex = 7;
             this.cancelButton.Text = "CANCEL";
             this.cancelButton.UseCompatibleTextRendering = true;
@@ -187,33 +198,39 @@ namespace SMRPGED.Previewer
             // 
             // emuPathTextBox
             // 
+            this.emuPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.emuPathTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.emuPathTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.emuPathTextBox.Location = new System.Drawing.Point(4, 2);
             this.emuPathTextBox.Name = "emuPathTextBox";
             this.emuPathTextBox.ReadOnly = true;
-            this.emuPathTextBox.Size = new System.Drawing.Size(388, 14);
+            this.emuPathTextBox.Size = new System.Drawing.Size(505, 14);
             this.emuPathTextBox.TabIndex = 8;
             // 
             // romPathTextBox
             // 
+            this.romPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.romPathTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.romPathTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.romPathTextBox.Location = new System.Drawing.Point(4, 2);
             this.romPathTextBox.Name = "romPathTextBox";
             this.romPathTextBox.ReadOnly = true;
-            this.romPathTextBox.Size = new System.Drawing.Size(388, 14);
+            this.romPathTextBox.Size = new System.Drawing.Size(505, 14);
             this.romPathTextBox.TabIndex = 9;
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.BackColor = System.Drawing.SystemColors.Control;
             this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label2.Location = new System.Drawing.Point(2, 2);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label2.Size = new System.Drawing.Size(443, 17);
+            this.label2.Size = new System.Drawing.Size(560, 17);
             this.label2.TabIndex = 10;
             this.label2.Text = "SELECT ENTRANCE TO PREVIEW";
             // 
@@ -223,22 +240,24 @@ namespace SMRPGED.Previewer
             this.label3.Location = new System.Drawing.Point(2, 2);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label3.Size = new System.Drawing.Size(298, 17);
+            this.label3.Size = new System.Drawing.Size(143, 17);
             this.label3.TabIndex = 15;
             this.label3.Text = "Assemble for preview:";
             // 
             // argsTextBox
             // 
+            this.argsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.argsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.argsTextBox.Location = new System.Drawing.Point(4, 2);
             this.argsTextBox.Name = "argsTextBox";
-            this.argsTextBox.Size = new System.Drawing.Size(388, 14);
+            this.argsTextBox.Size = new System.Drawing.Size(505, 14);
             this.argsTextBox.TabIndex = 17;
             // 
             // linkLabel1
             // 
             this.linkLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.linkLabel1.Location = new System.Drawing.Point(2, 57);
+            this.linkLabel1.Location = new System.Drawing.Point(2, 75);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.linkLabel1.Size = new System.Drawing.Size(128, 17);
@@ -334,13 +353,14 @@ namespace SMRPGED.Previewer
             // 
             // checkBox1
             // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBox1.BackColor = System.Drawing.SystemColors.Control;
             this.checkBox1.FlatAppearance.BorderSize = 0;
             this.checkBox1.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.checkBox1.Location = new System.Drawing.Point(528, 39);
+            this.checkBox1.Location = new System.Drawing.Point(645, 39);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(70, 17);
             this.checkBox1.TabIndex = 27;
@@ -352,11 +372,12 @@ namespace SMRPGED.Previewer
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.BackColor = System.Drawing.SystemColors.Window;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(528, 57);
+            this.button1.Location = new System.Drawing.Point(645, 75);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(70, 17);
             this.button1.TabIndex = 28;
@@ -367,29 +388,35 @@ namespace SMRPGED.Previewer
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.SystemColors.Window;
             this.panel2.Controls.Add(this.emuPathTextBox);
             this.panel2.Location = new System.Drawing.Point(131, 21);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(396, 17);
+            this.panel2.Size = new System.Drawing.Size(513, 17);
             this.panel2.TabIndex = 29;
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
             this.panel1.Controls.Add(this.romPathTextBox);
             this.panel1.Location = new System.Drawing.Point(131, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(396, 17);
+            this.panel1.Size = new System.Drawing.Size(513, 17);
             this.panel1.TabIndex = 30;
             // 
             // panel3
             // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.SystemColors.Window;
             this.panel3.Controls.Add(this.argsTextBox);
-            this.panel3.Location = new System.Drawing.Point(131, 57);
+            this.panel3.Location = new System.Drawing.Point(131, 75);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(396, 17);
+            this.panel3.Size = new System.Drawing.Size(513, 17);
             this.panel3.TabIndex = 31;
             // 
             // toggleAssembleLevels
@@ -400,9 +427,9 @@ namespace SMRPGED.Previewer
             this.toggleAssembleLevels.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.toggleAssembleLevels.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.toggleAssembleLevels.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.toggleAssembleLevels.Location = new System.Drawing.Point(301, 2);
+            this.toggleAssembleLevels.Location = new System.Drawing.Point(2, 39);
             this.toggleAssembleLevels.Name = "toggleAssembleLevels";
-            this.toggleAssembleLevels.Size = new System.Drawing.Size(55, 17);
+            this.toggleAssembleLevels.Size = new System.Drawing.Size(143, 17);
             this.toggleAssembleLevels.TabIndex = 27;
             this.toggleAssembleLevels.Text = "Levels";
             this.toggleAssembleLevels.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -418,9 +445,9 @@ namespace SMRPGED.Previewer
             this.toggleAssembleScripts.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.toggleAssembleScripts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.toggleAssembleScripts.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.toggleAssembleScripts.Location = new System.Drawing.Point(357, 2);
+            this.toggleAssembleScripts.Location = new System.Drawing.Point(2, 57);
             this.toggleAssembleScripts.Name = "toggleAssembleScripts";
-            this.toggleAssembleScripts.Size = new System.Drawing.Size(55, 17);
+            this.toggleAssembleScripts.Size = new System.Drawing.Size(143, 17);
             this.toggleAssembleScripts.TabIndex = 27;
             this.toggleAssembleScripts.Text = "Scripts";
             this.toggleAssembleScripts.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -436,9 +463,9 @@ namespace SMRPGED.Previewer
             this.toggleAssembleSprites.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.toggleAssembleSprites.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.toggleAssembleSprites.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.toggleAssembleSprites.Location = new System.Drawing.Point(413, 2);
+            this.toggleAssembleSprites.Location = new System.Drawing.Point(2, 75);
             this.toggleAssembleSprites.Name = "toggleAssembleSprites";
-            this.toggleAssembleSprites.Size = new System.Drawing.Size(55, 17);
+            this.toggleAssembleSprites.Size = new System.Drawing.Size(143, 17);
             this.toggleAssembleSprites.TabIndex = 27;
             this.toggleAssembleSprites.Text = "Sprites";
             this.toggleAssembleSprites.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -454,9 +481,9 @@ namespace SMRPGED.Previewer
             this.toggleAssembleStats.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.toggleAssembleStats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.toggleAssembleStats.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.toggleAssembleStats.Location = new System.Drawing.Point(469, 2);
+            this.toggleAssembleStats.Location = new System.Drawing.Point(2, 21);
             this.toggleAssembleStats.Name = "toggleAssembleStats";
-            this.toggleAssembleStats.Size = new System.Drawing.Size(55, 17);
+            this.toggleAssembleStats.Size = new System.Drawing.Size(143, 17);
             this.toggleAssembleStats.TabIndex = 27;
             this.toggleAssembleStats.Text = "Stats";
             this.toggleAssembleStats.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -472,9 +499,9 @@ namespace SMRPGED.Previewer
             this.enterEventCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.enterEventCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.enterEventCheckBox.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.enterEventCheckBox.Location = new System.Drawing.Point(525, 2);
+            this.enterEventCheckBox.Location = new System.Drawing.Point(2, 93);
             this.enterEventCheckBox.Name = "enterEventCheckBox";
-            this.enterEventCheckBox.Size = new System.Drawing.Size(73, 17);
+            this.enterEventCheckBox.Size = new System.Drawing.Size(143, 17);
             this.enterEventCheckBox.TabIndex = 32;
             this.enterEventCheckBox.Tag = "Replaces Event Script 0 with a Generated Event";
             this.enterEventCheckBox.Text = "Enter Event";
@@ -485,8 +512,12 @@ namespace SMRPGED.Previewer
             // 
             // panel4
             // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackgroundImage = global::SMRPGED.Properties.Resources._bg;
             this.panel4.Controls.Add(this.panel11);
+            this.panel4.Controls.Add(this.panel12);
             this.panel4.Controls.Add(this.panel7);
             this.panel4.Controls.Add(this.panel9);
             this.panel4.Controls.Add(this.panel8);
@@ -494,39 +525,50 @@ namespace SMRPGED.Previewer
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Location = new System.Drawing.Point(2, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(613, 290);
+            this.panel4.Size = new System.Drawing.Size(730, 412);
             this.panel4.TabIndex = 34;
             // 
             // panel11
             // 
+            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel11.Controls.Add(this.label1);
             this.panel11.Controls.Add(this.selectNumericUpDown);
-            this.panel11.Location = new System.Drawing.Point(459, 88);
+            this.panel11.Location = new System.Drawing.Point(576, 106);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(147, 21);
             this.panel11.TabIndex = 37;
             // 
+            // panel12
+            // 
+            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel12.Controls.Add(this.label3);
+            this.panel12.Controls.Add(this.toggleAssembleLevels);
+            this.panel12.Controls.Add(this.toggleAssembleStats);
+            this.panel12.Controls.Add(this.toggleAssembleSprites);
+            this.panel12.Controls.Add(this.toggleAssembleScripts);
+            this.panel12.Controls.Add(this.enterEventCheckBox);
+            this.panel12.Location = new System.Drawing.Point(576, 261);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(147, 112);
+            this.panel12.TabIndex = 35;
+            // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.label3);
-            this.panel7.Controls.Add(this.toggleAssembleLevels);
-            this.panel7.Controls.Add(this.toggleAssembleScripts);
-            this.panel7.Controls.Add(this.enterEventCheckBox);
-            this.panel7.Controls.Add(this.toggleAssembleSprites);
-            this.panel7.Controls.Add(this.toggleAssembleStats);
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel7.Controls.Add(this.launchButton);
             this.panel7.Controls.Add(this.cancelButton);
-            this.panel7.Location = new System.Drawing.Point(6, 243);
+            this.panel7.Location = new System.Drawing.Point(576, 385);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(600, 40);
+            this.panel7.Size = new System.Drawing.Size(147, 21);
             this.panel7.TabIndex = 35;
             // 
             // panel9
             // 
+            this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel9.Controls.Add(this.label4);
             this.panel9.Controls.Add(this.panel10);
             this.panel9.Enabled = false;
-            this.panel9.Location = new System.Drawing.Point(459, 197);
+            this.panel9.Location = new System.Drawing.Point(576, 215);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(147, 40);
             this.panel9.TabIndex = 37;
@@ -611,7 +653,6 @@ namespace SMRPGED.Previewer
             "_____",
             "_____",
             "_____"});
-
             this.battleBGListBox.Location = new System.Drawing.Point(-2, -2);
             this.battleBGListBox.Name = "battleBGListBox";
             this.battleBGListBox.Size = new System.Drawing.Size(148, 21);
@@ -619,6 +660,7 @@ namespace SMRPGED.Previewer
             // 
             // panel8
             // 
+            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel8.Controls.Add(this.adjustXNumericUpDown);
             this.panel8.Controls.Add(this.label5);
             this.panel8.Controls.Add(this.label9);
@@ -626,7 +668,7 @@ namespace SMRPGED.Previewer
             this.panel8.Controls.Add(this.adjustYNumericUpDown);
             this.panel8.Controls.Add(this.adjustZNumericUpDown);
             this.panel8.Controls.Add(this.label7);
-            this.panel8.Location = new System.Drawing.Point(459, 115);
+            this.panel8.Location = new System.Drawing.Point(576, 133);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(147, 76);
             this.panel8.TabIndex = 36;
@@ -645,40 +687,100 @@ namespace SMRPGED.Previewer
             // 
             // panel6
             // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.Controls.Add(this.label8);
             this.panel6.Controls.Add(this.emuPathLabel);
             this.panel6.Controls.Add(this.changeEmuButton);
             this.panel6.Controls.Add(this.romLabel);
+            this.panel6.Controls.Add(this.panel13);
             this.panel6.Controls.Add(this.panel3);
             this.panel6.Controls.Add(this.checkBox1);
+            this.panel6.Controls.Add(this.button2);
             this.panel6.Controls.Add(this.button1);
             this.panel6.Controls.Add(this.panel2);
+            this.panel6.Controls.Add(this.linkLabel2);
             this.panel6.Controls.Add(this.linkLabel1);
             this.panel6.Controls.Add(this.panel1);
             this.panel6.Location = new System.Drawing.Point(6, 6);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(600, 76);
+            this.panel6.Size = new System.Drawing.Size(717, 94);
             this.panel6.TabIndex = 35;
             // 
             // label8
             // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.BackColor = System.Drawing.SystemColors.Control;
             this.label8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label8.Location = new System.Drawing.Point(2, 2);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label8.Size = new System.Drawing.Size(596, 17);
+            this.label8.Size = new System.Drawing.Size(713, 17);
             this.label8.TabIndex = 10;
             this.label8.Text = "DIRECTORIES";
             // 
+            // panel13
+            // 
+            this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel13.BackColor = System.Drawing.SystemColors.Window;
+            this.panel13.Controls.Add(this.textBox1);
+            this.panel13.Location = new System.Drawing.Point(131, 57);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(513, 17);
+            this.panel13.TabIndex = 31;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(4, 2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(505, 14);
+            this.textBox1.TabIndex = 17;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackColor = System.Drawing.SystemColors.Window;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(645, 57);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(70, 17);
+            this.button2.TabIndex = 28;
+            this.button2.Text = "DEFAULT";
+            this.button2.UseCompatibleTextRendering = true;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.linkLabel2.Location = new System.Drawing.Point(2, 57);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.linkLabel2.Size = new System.Drawing.Size(128, 17);
+            this.linkLabel2.TabIndex = 19;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Tag = "";
+            this.linkLabel2.Text = "SNES9X Cmd-Line Args:";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
             // panel5
             // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.eventListBox);
-            this.panel5.Location = new System.Drawing.Point(6, 88);
+            this.panel5.Location = new System.Drawing.Point(6, 106);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(447, 149);
+            this.panel5.Size = new System.Drawing.Size(564, 300);
             this.panel5.TabIndex = 0;
             // 
             // Previewer
@@ -686,12 +788,11 @@ namespace SMRPGED.Previewer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.ClientSize = new System.Drawing.Size(617, 294);
+            this.ClientSize = new System.Drawing.Size(734, 416);
             this.Controls.Add(this.panel4);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "Previewer";
             ((System.ComponentModel.ISupportInitialize)(this.selectNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.adjustXNumericUpDown)).EndInit();
@@ -705,11 +806,14 @@ namespace SMRPGED.Previewer
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -759,5 +863,10 @@ namespace SMRPGED.Previewer
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.ComboBox battleBGListBox;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.LinkLabel linkLabel2;
     }
 }

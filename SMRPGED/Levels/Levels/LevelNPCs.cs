@@ -120,7 +120,9 @@ namespace SMRPGED
         public bool B3b6 { get { return npc.B3b6; } set { npc.B3b6 = value; } } // can't walk through
         public bool B3b7 { get { return npc.B3b7; } set { npc.B3b7 = value; } }
 
-        public byte PaletteIndexPlus { get { return npc.PaletteIndexPlus; } set { npc.PaletteIndexPlus = value; } }
+        public bool B4b0 { get { return npc.B4b0; } set { npc.B4b0 = value; } }
+        public bool B4b1 { get { return npc.B4b1; } set { npc.B4b1 = value; } }
+
         public ushort NPCID { get { return npc.NPCID; } set { npc.NPCID = value; } }
         public ushort Movement { get { return npc.Movement; } set { npc.Movement = value; } }
         public ushort EventORpack { get { return npc.EventORpack; } set { npc.EventORpack = value; } }
@@ -130,10 +132,7 @@ namespace SMRPGED
 
         public byte EngageTrigger { get { return npc.EngageTrigger; } set { npc.EngageTrigger = value; } }
 
-        public bool B8b0 { get { return npc.B8b0; } set { npc.B8b0 = value; } } // fight formation 1
-        public bool B8b1 { get { return npc.B8b1; } set { npc.B8b1 = value; } } // return to area (a)
-        public bool B8b2 { get { return npc.B8b2; } set { npc.B8b2 = value; } } // do not remove
-        public bool B8b3 { get { return npc.B8b3; } set { npc.B8b3 = value; } } // return to area (b)
+        public byte AfterBattle { get { return npc.AfterBattle; } set { npc.AfterBattle = value; } }
 
         public byte CoordX { get { return npc.CoordX; } set { npc.CoordX = value; } }
         public byte CoordY { get { return npc.CoordY; } set { npc.CoordY = value; } }
@@ -305,7 +304,9 @@ namespace SMRPGED
             private bool b3b6; public bool B3b6 { get { return b3b6; } set { b3b6 = value; } }
             private bool b3b7; public bool B3b7 { get { return b3b7; } set { b3b7 = value; } }
 
-            private byte paletteIndexPlus; public byte PaletteIndexPlus { get { return paletteIndexPlus; } set { paletteIndexPlus = value; } }
+            private bool b4b0; public bool B4b0 { get { return b4b0; } set { b4b0 = value; } }
+            private bool b4b1; public bool B4b1 { get { return b4b1; } set { b4b1 = value; } }
+
             private ushort npcID; public ushort NPCID { get { return npcID; } set { npcID = value; } }
             private ushort movement; public ushort Movement { get { return movement; } set { movement = value; } }
             private ushort eventORpack; public ushort EventORpack { get { return eventORpack; } set { eventORpack = value; } }
@@ -315,10 +316,7 @@ namespace SMRPGED
 
             private byte engageTrigger; public byte EngageTrigger { get { return engageTrigger; } set { engageTrigger = value; } }
 
-            private bool b8b0; public bool B8b0 { get { return b8b0; } set { b8b0 = value; } }
-            private bool b8b1; public bool B8b1 { get { return b8b1; } set { b8b1 = value; } }
-            private bool b8b2; public bool B8b2 { get { return b8b2; } set { b8b2 = value; } }
-            private bool b8b3; public bool B8b3 { get { return b8b3; } set { b8b3 = value; } }
+            private byte afterBattle; public byte AfterBattle { get { return afterBattle; } set { afterBattle = value; } }
 
             // for the root NPC
             private byte coordX; public byte CoordX { get { return coordX; } set { coordX = value; } }
@@ -360,17 +358,15 @@ namespace SMRPGED
                 b3b5 = false;
                 b3b6 = true;
                 b3b7 = false;
-                paletteIndexPlus = 0;
+                b4b0 = false;
+                b4b1 = false;
                 npcID = 0;
                 movement = 0;
                 eventORpack = 0;
                 engageTrigger = 0;
                 b7b6 = true;
                 b7b7 = true;
-                b8b0 = false;
-                b8b1 = false;
-                b8b2 = false;
-                b8b3 = false;
+                afterBattle = 0;
                 coordX = 0;
                 coordY = 0;
                 coordZ = 0;
@@ -399,17 +395,15 @@ namespace SMRPGED
                 b3b5 = copy.B3b5;
                 b3b6 = copy.B3b6;
                 b3b7 = copy.B3b7;
-                paletteIndexPlus = copy.PaletteIndexPlus;
+                b4b0 = copy.B4b0;
+                b4b1 = copy.B4b1;
                 npcID = copy.NPCID;
                 movement = copy.Movement;
                 eventORpack = copy.EventORpack;
                 engageTrigger = copy.EngageTrigger;
                 b7b6 = copy.B7b6;
                 b7b7 = copy.B7b7;
-                b8b0 = copy.B8b0;
-                b8b1 = copy.B8b1;
-                b8b2 = copy.B8b2;
-                b8b3 = copy.B8b3;
+                afterBattle = copy.AfterBattle;
                 coordX = copy.CoordX;
                 coordY = copy.CoordY;
                 coordZ = copy.CoordZ;
@@ -458,8 +452,8 @@ namespace SMRPGED
                 if ((temp & 0x40) == 0x40) b3b6 = true;
                 if ((temp & 0x80) == 0x80) b3b7 = true;
 
-                temp = BitManager.GetByte(data, offset);
-                paletteIndexPlus = (byte)(temp & 0x03);
+                b4b0 = (data[offset] & 0x01) == 0x01;
+                b4b1 = (data[offset] & 0x02) == 0x02;
 
                 tempShort = BitManager.GetShort(data, offset);
                 npcID = (ushort)((tempShort & 0x0FFF) >> 2);
@@ -481,23 +475,17 @@ namespace SMRPGED
                 temp = BitManager.GetByte(data, offset);
 
                 if (engageType == 2)
-                {
-                    b8b0 = (temp & 0x01) == 0x01;
-                    b8b1 = (temp & 0x02) == 0x02;
-                    b8b2 = (temp & 0x04) == 0x04;
-                    b8b3 = (temp & 0x08) == 0x08;
-                }
+                    afterBattle = (byte)((temp >> 1) & 0x07);
 
                 engageTrigger = Math.Min((byte)((temp & 0xF0) >> 4), (byte)12); offset++;
 
                 temp = BitManager.GetByte(data, offset); offset++;
 
                 if (engageType == 0) propertyA = (byte)(temp & 0x07);       // npc id+
-                else if (engageType == 1) propertyA = (byte)(temp & 0x0F);  // star XP
+                else if (engageType == 1) propertyA = temp;  // 00:70A7
                 else if (engageType == 2) propertyA = (byte)(temp & 0x0F);  // movement+
 
                 if (engageType == 0) propertyB = (byte)((temp & 0xF0) >> 5);         // event id+
-                else if (engageType == 1) propertyB = (byte)((temp & 0xF0) >> 4);    // treasure
                 else if (engageType == 2) propertyB = (byte)((temp & 0xF0) >> 4);    // pack+
 
                 if (engageType == 0) propertyC = (byte)((temp & 0x18) >> 3);
@@ -543,7 +531,9 @@ namespace SMRPGED
                 BitManager.SetBit(data, offset, 7, b3b7); offset++;
 
                 BitManager.SetShort(data, offset, (ushort)(npcID << 2));
-                BitManager.SetBitsByByte(data, offset, paletteIndexPlus, true); offset++;
+                BitManager.SetBit(data, offset, 0, b4b0);
+                BitManager.SetBit(data, offset, 1, b4b1);
+                offset++;
 
                 BitManager.SetBitsByByte(data, offset, (byte)((movement << 4) & 0xF0), true); offset++; // lower 4 bits
                 BitManager.SetByte(data, offset, (byte)(movement >> 4)); // lower 6 bits
@@ -556,21 +546,22 @@ namespace SMRPGED
                 offset++;
 
                 data[offset] &= 0x0F;
-                BitManager.SetBitsByByte(data, offset, (byte)(engageTrigger << 4), true);
+                data[offset] |= (byte)(engageTrigger << 4);
                 if (engageType == 2)
                 {
-                    BitManager.SetBit(data, offset, 0, b8b0);
-                    BitManager.SetBit(data, offset, 1, b8b1);
-                    BitManager.SetBit(data, offset, 2, b8b2);
-                    BitManager.SetBit(data, offset, 3, b8b3);
+                    data[offset] &= 0xF0;
+                    data[offset] |= (byte)(afterBattle << 1);
                 }
 
                 offset++;
 
                 BitManager.SetByte(data, offset, propertyA);
-                if (engageType == 0) BitManager.SetBitsByByte(data, offset, (byte)(propertyB << 5), true);
-                else BitManager.SetBitsByByte(data, offset, (byte)(propertyB << 4), true);
-                if (engageType == 0) BitManager.SetBitsByByte(data, offset, (byte)(propertyC << 3), true);
+                if (engageType == 0)
+                    BitManager.SetBitsByByte(data, offset, (byte)(propertyB << 5), true);
+                else if (engageType == 2)
+                    BitManager.SetBitsByByte(data, offset, (byte)(propertyB << 4), true);
+                if (engageType == 0)
+                    BitManager.SetBitsByByte(data, offset, (byte)(propertyC << 3), true);
                 offset++;
 
                 BitManager.SetByte(data, offset, coordX);
@@ -633,11 +624,10 @@ namespace SMRPGED
                     temp = BitManager.GetByte(data, offset); offset++;
 
                     if (engageType == 0) propertyA = (byte)(temp & 0x07);       // npc id+
-                    else if (engageType == 1) propertyA = (byte)(temp & 0x0F);  // star XP
+                    else if (engageType == 1) propertyA = temp;  // 00:70A7
                     else if (engageType == 2) propertyA = (byte)(temp & 0x0F);  // movement+
 
                     if (engageType == 0) propertyB = (byte)((temp & 0xF0) >> 5);         // event id+
-                    else if (engageType == 1) propertyB = (byte)((temp & 0xF0) >> 4);    // treasure
                     else if (engageType == 2) propertyB = (byte)((temp & 0xF0) >> 4);    // pack+
 
                     if (engageType == 0) propertyC = (byte)((temp & 0x18) >> 3); // movement+
@@ -655,9 +645,12 @@ namespace SMRPGED
                 public int AssembleInstance(byte[] data, int offset, int engageType)
                 {
                     BitManager.SetByte(data, offset, propertyA);
-                    if (engageType == 0) BitManager.SetBitsByByte(data, offset, (byte)(propertyB << 5), true);
-                    else BitManager.SetBitsByByte(data, offset, (byte)(propertyB << 4), true);
-                    if (engageType == 0) BitManager.SetBitsByByte(data, offset, (byte)(propertyC << 3), true);
+                    if (engageType == 0)
+                        BitManager.SetBitsByByte(data, offset, (byte)(propertyB << 5), true);
+                    else if (engageType == 2)
+                        BitManager.SetBitsByByte(data, offset, (byte)(propertyB << 4), true);
+                    if (engageType == 0)
+                        BitManager.SetBitsByByte(data, offset, (byte)(propertyC << 3), true);
                     offset++;
 
                     BitManager.SetByte(data, offset, coordX);

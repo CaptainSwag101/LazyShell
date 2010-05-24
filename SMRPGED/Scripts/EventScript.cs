@@ -112,7 +112,7 @@ namespace SMRPGED.ScriptsEditor
 
             return length;
         }
-        private void ParseEventScript(byte[] es)
+        public void ParseEventScript(byte[] es)
         {
             int offset = 0, len = 0;
             EventScriptCommand temp;

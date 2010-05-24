@@ -118,8 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Lazy Shell, Version 2.1
-Copyright © 2007-2009  Omega &amp; giangurgolo
+    <value>Lazy Shell, Version 2.2
+Copyright © 2007-2010  Omega &amp; giangurgolo
 
 Created by Omega &amp; giangurgolo
 
@@ -130,6 +130,7 @@ FuSoYa - for permission to use Lunar Compress.dll
 KP9000 - beta testing, discovered many bugs with pre-release version
 MathOnNapkins - helped with some coding
 Alex Farber - MRU list manager
+spel werdz rite - resolution for running program under a 64-bit OS
 romhacking community - various feedback</value>
   </data>
 </root>

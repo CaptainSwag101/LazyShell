@@ -35,7 +35,7 @@ namespace SMRPGED.Encryption
 
             // 0x3DD800 - 0x3DEFFF space available
         }
-        
+
         public bool IsNewRom()
         {
             byte[] publicKey = GeneratePublicKey();
@@ -55,7 +55,7 @@ namespace SMRPGED.Encryption
             }
 
             int offset = stampStart;
-            
+
             // Get Public Buf - Contains private key and hash (of something...)
             ushort len = BitManager.GetShort(data, offset); offset += 2;
             byte[] publicBuf = BitManager.GetByteArray(data, offset, len); offset += len;
@@ -74,11 +74,11 @@ namespace SMRPGED.Encryption
                 if (privateKey == null)
                 {
                     // If we can decrypt a private key, save it in state for use later
-                    privateKey = GetPrivateKey(publicBuf, publicKey, pwBuf); 
+                    privateKey = GetPrivateKey(publicBuf, publicKey, pwBuf);
                     state.PrivateKey = privateKey; // Saved for later use
                 }
             }
-            catch 
+            catch
             {
                 stamp.Invalidate(); // Our stamp is invalid
                 state.PrivateKey = GeneratePrivateKey();
@@ -128,10 +128,10 @@ namespace SMRPGED.Encryption
 
             // Construct final buffer
             byte[] final = new byte[stampSize];
-            
+
             publicBuf = CreatePublicBuf(privateKey, publicKey);
             privateBuf = CreatePrivateBuf(stamp, privateKey);
-            
+
             if (saveNew) // New password
                 pwBuf = CreatePWBuf(stamp, privateKey);
             else // Old Password
@@ -153,7 +153,7 @@ namespace SMRPGED.Encryption
             }
             catch
             {
-                MessageBox.Show("" + (offset - stampSize) + " Bytes too much data to save ROM signature, reduce the content to save signature");
+                MessageBox.Show("" + (offset - stampSize) + " bytes too many to save ROM signature, reduce the content to save signature", "LAZY SHELL");
                 return;
             }
             BitManager.SetByteArray(data, stampStart, final); // Write to rom
@@ -374,7 +374,7 @@ namespace SMRPGED.Encryption
             temp = GenerateSHA1Hash(privateKey);
             BitManager.SetShort(privateBuf, offset, (ushort)temp.Length); offset += 2;
             BitManager.SetByteArray(privateBuf, offset, temp); offset += temp.Length;
-            
+
             // Encrypt
             return EncryptData(privateBuf, byteToStr(privateKey)); // Encrypt privateBuf with privateKey
         }
@@ -400,7 +400,7 @@ namespace SMRPGED.Encryption
             int offset = stampStart;
             ushort len = BitManager.GetShort(data, offset);
             offset += len + 2;
-            
+
             len = BitManager.GetShort(data, offset);
             offset += len + 2;
 
@@ -420,10 +420,10 @@ namespace SMRPGED.Encryption
 
             len = BitManager.GetShort(privateBuf, offset); offset += 2;
             stamp.Name = byteToStr(BitManager.GetByteArray(privateBuf, offset, len)); offset += len;
-            
+
             len = BitManager.GetShort(privateBuf, offset); offset += 2;
             stamp.Comments = byteToStr(BitManager.GetByteArray(privateBuf, offset, len)); offset += len;
-            
+
             if (stamp.DateStamp)
             {
                 len = BitManager.GetShort(privateBuf, offset); offset += 2;
@@ -432,7 +432,7 @@ namespace SMRPGED.Encryption
 
             len = BitManager.GetShort(privateBuf, offset); offset += 2;
             byte[] hash = BitManager.GetByteArray(privateBuf, offset, len); offset += len;
-            
+
             if (!CompareHashes(GenerateSHA1Hash(privateKey), hash))
                 throw new Exception();
 
@@ -504,7 +504,7 @@ namespace SMRPGED.Encryption
                     }
                     catch
                     {
-                        MessageBox.Show("Invalid Password or Invalid Signature, ROM Signature was not restored");
+                        MessageBox.Show("Invalid Password or Invalid Signature, ROM Signature was not restored", "LAZY SHELL");
                         throw new Exception();
                     }
                 }
@@ -514,13 +514,13 @@ namespace SMRPGED.Encryption
                 }
             }
         }
-        
-        
+
+
         private byte[] Decode(ushort lenIndex, ushort offsetIndex, byte[] buf, ushort size)
         {
             ushort offset = buf[offsetIndex];
             int len = buf[lenIndex];
-            
+
             if (buf.Length - offset - len < 0)
                 throw new Exception(); // Invalid Cipher, do not provide any information on why it failed
 
@@ -534,9 +534,9 @@ namespace SMRPGED.Encryption
             Random random = new Random();
 
             BitManager.SetShort(encoded, lenIndex, (ushort)buf.Length);
-            
+
             ushort bufOffset = (ushort)random.Next(Math.Max(lenIndex, offsetIndex) + 1, encoded.Length - buf.Length);
-            
+
             BitManager.SetShort(encoded, offsetIndex, bufOffset);
             BitManager.SetByteArray(encoded, bufOffset, buf);
 
@@ -585,7 +585,7 @@ namespace SMRPGED.Encryption
             }
             catch
             {
-                MessageBox.Show("Invalid Args for FillWithGarbage()");
+                MessageBox.Show("Invalid Args for FillWithGarbage()", "LAZY SHELL");
             }
         }
         private byte[] EncryptData(byte[] toEncrypt, string password)
@@ -610,12 +610,12 @@ namespace SMRPGED.Encryption
         }
 
         // Encrypts specified plaintext using Rijndael symmetric key algorithm
-        private static byte[] Encrypt(byte[] toEncrypt, 
-                                     string passPhrase, 
-                                     string saltValue, 
-                                     string hashAlgorithm, 
+        private static byte[] Encrypt(byte[] toEncrypt,
+                                     string passPhrase,
+                                     string saltValue,
+                                     string hashAlgorithm,
                                      int passwordIterations,
-                                     string initVector, 
+                                     string initVector,
                                      int keySize)
         {
             /*
@@ -815,6 +815,6 @@ namespace SMRPGED.Encryption
             }
             return arr;
         }
-        
+
     }
 }

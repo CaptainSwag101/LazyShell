@@ -23,6 +23,7 @@ namespace SMRPGED
             battlefieldImage,
             battlefieldPaletteSetImage;
 
+        private bool colEditBF = false;
         private Stack<int[]> colorRedsBF = new Stack<int[]>();
         private Stack<int[]> colorGreensBF = new Stack<int[]>();
         private Stack<int[]> colorBluesBF = new Stack<int[]>();
@@ -518,6 +519,38 @@ namespace SMRPGED
             overlay.DrawSelectionBox(e.Graphics, new Point(p.X + 15, p.Y + 15), p, 1);
         }
 
+        private void colEditApplyBF_Click(object sender, EventArgs e)
+        {
+            colEditBF = true;
+
+            colEditApply_Click(null, null);
+
+            colEditBF = false;
+        }
+        private void colEditResetBF_Click(object sender, EventArgs e)
+        {
+            colEditBF = true;
+
+            colEditReset_Click(null, null);
+
+            colEditBF = false;
+        }
+        private void colEditUndoBF_Click(object sender, EventArgs e)
+        {
+            colEditBF = true;
+
+            colEditUndo_Click(null, null);
+
+            colEditBF = false;
+        }
+        private void colEditRedoBF_Click(object sender, EventArgs e)
+        {
+            colEditBF = true;
+
+            colEditRedo_Click(null, null);
+
+            colEditBF = false;
+        }
         #endregion
     }
 }

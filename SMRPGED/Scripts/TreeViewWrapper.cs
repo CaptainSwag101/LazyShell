@@ -9,7 +9,7 @@ using SMRPGED.ScriptsEditor.Commands;
 
 namespace SMRPGED.ScriptsEditor
 {
-    class TreeViewWrapper
+    public class TreeViewWrapper
     {
         TreeView treeView;
         EventScript script; public EventScript Script { get { return this.script; } set { this.script = value; } }
@@ -79,7 +79,7 @@ namespace SMRPGED.ScriptsEditor
         }
         public void ChangeScript(ActionQueue action)
         {
-            this.eventCopies = null;
+            //this.eventCopies = null;
             this.action = action;
             foreach (ActionQueueCommand aqc in action.ActionQueueCommands)
                 aqc.ResetOriginalOffset();
@@ -824,10 +824,20 @@ namespace SMRPGED.ScriptsEditor
                         return;
                     }
 
-                    esc = (EventScriptCommand)tn.Tag; esc.Assemble();
-                    temp = new byte[esc.EventData.Length]; esc.EventData.CopyTo(temp, 0);
-                    escCopy = new EventScriptCommand(temp, esc.Offset);
-                    eventCopies.Add(escCopy);
+                    if (!actionScript)
+                    {
+                        esc = (EventScriptCommand)tn.Tag; esc.Assemble();
+                        temp = new byte[esc.EventData.Length]; esc.EventData.CopyTo(temp, 0);
+                        escCopy = new EventScriptCommand(temp, esc.Offset);
+                        eventCopies.Add(escCopy);
+                    }
+                    else
+                    {
+                        aqc = (ActionQueueCommand)tn.Tag; aqc.Assemble();
+                        temp = new byte[aqc.QueueData.Length]; aqc.QueueData.CopyTo(temp, 0);
+                        aqcCopy = new ActionQueueCommand(temp, aqc.Offset);
+                        eventCopies.Add(aqcCopy);
+                    }
                 }
             }
             finally
@@ -848,7 +858,7 @@ namespace SMRPGED.ScriptsEditor
             byte[] commandData;
             int offset;
             TreeNode temp = treeView.SelectedNode;
-            if ((treeView.SelectedNode == null || IsRootNode(treeView.SelectedNode)) && eventCopies != null)
+            if ((treeView.SelectedNode == null || IsRootNode(treeView.SelectedNode)) && eventCopies != null && !actionScript)
             {
                 try
                 {

@@ -22,8 +22,8 @@ namespace SMRPGED
         private ushort animationLength; public ushort AnimationLength { get { return animationLength; } set { animationLength = value; } }
         private ushort graphicSetPointer; public ushort GraphicSetPointer { get { return graphicSetPointer; } }
         private ushort paletteSetPointer; public ushort PaletteSetPointer { get { return paletteSetPointer; } }
-        private ushort sequencePacketPointer;   // top pointer to the set of sequences
-        private ushort moldPacketPointer; // top pointer to the set of molds
+        private ushort sequencePacketPointer; public ushort SequencePacketPointer { get { return sequencePacketPointer; } set { sequencePacketPointer = value; } }  // top pointer to the set of sequences
+        private ushort moldPacketPointer; public ushort MoldPacketPointer { get { return moldPacketPointer; } set { moldPacketPointer = value; } } // top pointer to the set of molds
 
         private byte moldsWidth; public byte MoldsWidth { get { return moldsWidth; } set { moldsWidth = value; } }
         private byte moldsHeight; public byte MoldsHeight { get { return moldsHeight; } set { moldsHeight = value; } }
@@ -151,15 +151,15 @@ namespace SMRPGED
         public void AddNewMold(int index, ushort newOffset)
         {
             E_Mold tMold = new E_Mold();
-            E_Mold zMold = (E_Mold)molds[currentMold];
-            tMold.MoldOffset = (ushort)(newOffset + 2);
+            E_Mold zMold = (E_Mold)molds[index - 1];
+            tMold.MoldOffset = newOffset;
             tMold.TilePacketPointer = (ushort)(zMold.TilePacketPointer + zMold.MoldSize);
             molds.Insert(index, tMold);
 
-            mold = (E_Mold)molds[index];
-            currentMold = index;
+            //mold = (E_Mold)molds[index];
+            //currentMold = index;
 
-            AddNewTile(0, tMold.TilePacketPointer);
+            //AddNewTile(0, tMold.TilePacketPointer);
         }
         public void RemoveCurrentMold()
         {
@@ -209,6 +209,70 @@ namespace SMRPGED
             this.animationNum = animationNum;
 
             InitializeAnimationOffset(data);
+        }
+        public void Refresh()
+        {
+            sequences = new ArrayList();
+            molds = new ArrayList();
+
+            E_Sequence tSequence;
+            E_Mold tMold;
+
+            animationLength = (ushort)sm.Length;
+
+            sm = BitManager.GetByteArray(data, animationOffset, animationLength);
+
+            int offset = 2;
+            graphicSetPointer = BitManager.GetShort(sm, offset); offset += 2;
+            paletteSetPointer = BitManager.GetShort(sm, offset); offset += 2;
+            sequencePacketPointer = BitManager.GetShort(sm, offset); offset += 2;
+            moldPacketPointer = BitManager.GetShort(sm, offset); offset += 2;
+
+            /** here are two unknown bytes, we'll just skip them **/
+            offset += 2;
+
+            moldsWidth = sm[offset]; offset++;
+            moldsHeight = sm[offset]; offset++;
+
+            codec = BitManager.GetShort(sm, offset); offset += 2;
+
+            tileSetPointer = BitManager.GetShort(sm, offset);
+
+            graphicSet = new byte[paletteSetPointer - graphicSetPointer];
+            graphicSetBuffer = new byte[0x2000];
+            Buffer.BlockCopy(sm, graphicSetPointer, graphicSetBuffer, 0, graphicSet.Length);
+            Buffer.BlockCopy(sm, graphicSetPointer, graphicSet, 0, graphicSet.Length);
+
+            graphicSetLength = graphicSet.Length;
+            paletteSetLength = (ushort)(tileSetPointer - paletteSetPointer);
+
+            InitializePaletteSet(sm, paletteSetPointer);
+
+            tileSetLength = sequencePacketPointer - tileSetPointer - 2;
+
+            offset = sequencePacketPointer;
+            for (int i = 0; BitManager.GetShort(sm, offset) != 0x0000; i++)
+            {
+                tSequence = new E_Sequence();
+                tSequence.InitializeSequence(sm, offset);
+                sequences.Add(tSequence);
+                offset += 2;
+            }
+
+            offset = moldPacketPointer;
+            ushort end = 0;
+            for (int i = 0; BitManager.GetShort(sm, offset) != 0x0000; i++)
+            {
+                if (BitManager.GetShort(sm, offset + 2) == 0x0000)
+                    end = animationLength;
+                else
+                    end = BitManager.GetShort(sm, offset + 2);
+
+                tMold = new E_Mold();
+                tMold.InitializeMold(sm, offset, end);
+                molds.Add(tMold);
+                offset += 2;
+            }
         }
         private void InitializeAnimationOffset(byte[] data)
         {
@@ -396,27 +460,6 @@ namespace SMRPGED
         }
         public void Assemble(E_Tileset tileset)
         {
-            //int total = 0;
-            //foreach (E_Mold m in molds)
-            //{
-            //    // calculate the total # of tiles in each mold
-            //    foreach (E_Mold.Tile t in m.Tiles)
-            //        total += t.Filler ? t.FillAmount : 1;
-
-            //    // if less than width * height, we must fill up with empty tiles
-            //    if (total < moldsWidth * moldsHeight)
-            //    {
-            //        UpdateOffsets(3, TileOffset);   // a filler tile is 3 bytes
-
-            //        CurrentTile = m.Tiles.Count - 1;
-            //        AddNewTile(m.Tiles.Count - 1, TileOffset);
-            //        CurrentTile = m.Tiles.Count - 1;
-
-            //        Empty = true;
-            //        Filler = true;
-            //        FillAmount = (byte)((moldsWidth * moldsHeight) - total);
-            //    }
-            //}
             this.tileset = tileset;
 
             // reset the length
@@ -531,11 +574,6 @@ namespace SMRPGED
                 if (mOffset < sm.Length)
                     BitManager.SetShort(sm, mOffset, 0);
             }
-
-            // write to files to compare when debugging
-            //Stream smNew = File.Create("smNew.dat");
-            //smNew.Write(sm, 0, sm.Length);
-            //smNew.Close();
         }
 
         public void Clear()

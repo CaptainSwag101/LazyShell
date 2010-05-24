@@ -44,7 +44,7 @@ namespace SMRPGED
         public void AddNewTile(int index, ushort newOffset)
         {
             Tile tTile = new Tile();
-            tTile.TileOffset = (ushort)(newOffset + 1);
+            tTile.TileOffset = newOffset;
             if (tile != null && tile.Filler)
                 tTile.TileOffset += 2;
             tiles.Insert(index, tTile);

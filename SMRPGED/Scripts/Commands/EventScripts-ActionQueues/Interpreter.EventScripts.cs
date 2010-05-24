@@ -217,9 +217,9 @@ namespace SMRPGED.ScriptsEditor.Commands
             "Mem compare 00:7000 to mem 00:",			// 0xC1
             "Mem compare 00:",			// 0xC2
             "Mem 00:7000 = current level",			// 0xC3
-            "UNKCMD 0xC4",			// 0xC4
-            "UNKCMD 0xC5",			// 0xC5
-            "Mem 00:7000 = mem obj: ",			// 0xC6
+            "Mem 00:7000 = X coord of obj: ",			// 0xC4
+            "Mem 00:7000 = Y coord of obj: ",			// 0xC5
+            "Mem 00:7000 = Z coord of obj: ",			// 0xC6
             "UNKCMD 0xC7",			// 0xC7
             "UNKCMD 0xC8",			// 0xC8
             "UNKCMD 0xC9",			// 0xC9
@@ -726,7 +726,7 @@ namespace SMRPGED.ScriptsEditor.Commands
                     sb.Append(esc.Option.ToString());
                     break;
                 case 0x4A:
-                    sb.Append(esc.Option.ToString() + ", battlefield: [" + esc.EventData[3].ToString("X2") + "]");
+                    sb.Append(esc.Option.ToString() + ", battlefield: [" + esc.EventData[3].ToString("d2") + "]");
                     break;
                 case 0x50:
                 case 0x51:
@@ -794,10 +794,10 @@ namespace SMRPGED.ScriptsEditor.Commands
                     sb.Append((BitManager.GetShort(esc.EventData, 1)).ToString("X4"));
                     break;
                 case 0x67:
-                    sb.Append((BitManager.GetShort(esc.EventData, 1)).ToString("X3") + ", else if dlg option C selected, jump to $" + (BitManager.GetShort(esc.EventData, 3)).ToString("X3"));
+                    sb.Append((BitManager.GetShort(esc.EventData, 1)).ToString("X4") + ", else if dlg option C selected, jump to $" + (BitManager.GetShort(esc.EventData, 3)).ToString("X4"));
                     break;
                 case 0x68:
-                    sb.Append((BitManager.GetShort(esc.EventData, 1) & 0x1FF).ToString("X3") +
+                    sb.Append((BitManager.GetShort(esc.EventData, 1) & 0x1FF).ToString("d3") +
                         "], place Mario @ (x=" + esc.EventData[3].ToString() +
                         ", y=" + esc.EventData[4].ToString() +
                         ", z=" + (esc.EventData[5] & 0x1F).ToString() +
@@ -862,14 +862,16 @@ namespace SMRPGED.ScriptsEditor.Commands
                     break;
                 case 0x90:
                 case 0x91:
-                    sb.Append(esc.Option.ToString());
-                    break;
                 case 0x92:
-                    sb.Append(esc.Option.ToString());
+                    sb.Append(Scripts.MusicNames[esc.Option]);
                     break;
                 case 0x95:
+                    sb.Append(Scripts.MusicNames[esc.Option] +
+                        ", min volume: " +
+                        esc.EventData[2].ToString());
+                    break;
                 case 0x9E:
-                    sb.Append(esc.Option.ToString() +
+                    sb.Append(Scripts.SoundNames[esc.Option] +
                         ", min volume: " +
                         esc.EventData[2].ToString());
                     break;
@@ -884,10 +886,10 @@ namespace SMRPGED.ScriptsEditor.Commands
                     sb.Append(esc.Option.ToString() + a);
                     break;
                 case 0x9C:
-                    sb.Append(esc.Option.ToString());
+                    sb.Append(Scripts.SoundNames[esc.Option]);
                     break;
                 case 0x9D:
-                    sb.Append(esc.Option.ToString() + ", speaker balance: " +
+                    sb.Append(Scripts.SoundNames[esc.Option] + ", speaker balance: " +
                         esc.EventData[2].ToString());
                     break;
                 case 0xA0:
@@ -973,6 +975,8 @@ namespace SMRPGED.ScriptsEditor.Commands
                     sb.Append(((esc.Option * 2) + 0x7000).ToString("X4") + " <=> mem 00:" +
                         ((esc.EventData[2] * 2) + 0x7000).ToString("X4"));
                     break;
+                case 0xC4:
+                case 0xC5:
                 case 0xC6:
                     sb.Append(ObjectNames[esc.Option & 0x3F]);
                     break;
@@ -1032,19 +1036,19 @@ namespace SMRPGED.ScriptsEditor.Commands
                 case 0xF2:
                     a = (esc.EventData[2] & 0x80) == 0x80 ? "true" : "false";
                     sb.Append(ObjectNames[((esc.EventData[2] >> 1) & 0x3F)] +
-                        ", in level: [" + (BitManager.GetShort(esc.EventData, 1) & 0x1FF).ToString("X3") +
+                        ", in level: [" + (BitManager.GetShort(esc.EventData, 1) & 0x1FF).ToString("d3") +
                         "], presence = " + a);
                     break;
                 case 0xF3:
                     a = (esc.EventData[2] & 0x80) == 0x80 ? "true" : "false";
                     sb.Append(ObjectNames[((esc.EventData[2] >> 1) & 0x3F)] +
-                        ", in level: [" + (BitManager.GetShort(esc.EventData, 1) & 0x1FF).ToString("X3") +
+                        ", in level: [" + (BitManager.GetShort(esc.EventData, 1) & 0x1FF).ToString("d3") +
                         "], event trigger = " + a);
                     break;
                 case 0xF8:
                     a = (esc.EventData[2] & 0x80) == 0x80 ? "true" : "false";
                     sb.Append(ObjectNames[((esc.EventData[2] >> 1) & 0x3F)] +
-                        ", in level: [" + (BitManager.GetShort(esc.EventData, 1) & 0x1FF).ToString("X3") +
+                        ", in level: [" + (BitManager.GetShort(esc.EventData, 1) & 0x1FF).ToString("d3") +
                         "], presence = " + a +
                         ", jump to $" + BitManager.GetShort(esc.EventData, 3).ToString("X4"));
                     break;
@@ -1128,8 +1132,10 @@ namespace SMRPGED.ScriptsEditor.Commands
                 case 0x4C:
                 case 0x4D:
                 case 0x9C:
+                    sb.Append(Scripts.SoundNames[esc.EventData[2]]);
+                    break;
                 case 0x9E:
-                    sb.Append(esc.EventData[2].ToString());
+                    sb.Append(Scripts.MusicNames[esc.EventData[2]]);
                     break;
                 case 0x58:
                     sb.Append("[" + esc.EventData[2].ToString() + "] \"" + TrimTailSpaces(universal.ItemNames.GetNameByNum(esc.EventData[2])) + "\"");
@@ -1156,7 +1162,7 @@ namespace SMRPGED.ScriptsEditor.Commands
                     sb.Append(a + ", y=" + esc.EventData[2].ToString());
                     break;
                 case 0x9D:
-                    sb.Append(esc.EventData[2].ToString() + ", speaker balance: " +
+                    sb.Append(Scripts.SoundNames[esc.EventData[2]] + ", speaker balance: " +
                         esc.EventData[3].ToString());
                     break;
                 case 0xA8:

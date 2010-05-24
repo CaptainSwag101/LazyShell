@@ -19,20 +19,20 @@ namespace SMRPGED
     {
         #region Variables
 
-        private Model model;
+        private Model model; public Model Model { get { return this.model; } }
         private LevelModel levelModel;
-        private Notes notes;
+        //private Notes notes;
         private State state;
         private Settings settings;
         private CommandStack commandStack;
         private UniversalVariables universal;
 
         private int currentLevel;
-        private Level[] levels; // Array of levels
+        private Level[] levels; public Level[] ThisLevels { get { return this.levels; } } // Array of levels
+        public ComboBox LevelName { get { return levelName; } set { levelName = value; } }
+        public NumericUpDown LevelNum { get { return levelNum; } set { levelNum = value; } }
 
         private ProgressBar pBar;
-        private int start, count;
-        private string path;
 
         private int[] levelPixels;
         private Bitmap levelImage, priority1Tint;
@@ -78,18 +78,20 @@ namespace SMRPGED
 
         // for the separate physical tile search window
         public NumericUpDown PhysicalTileNum { get { return physicalTileNum; } set { physicalTileNum = value; } }
+        public NumericUpDown NPCMapHeader { get { return npcMapHeader; } set { npcMapHeader = value; } }
 
         #endregion
 
         public Levels(Model model)
         {
             this.model = model;
-            this.notes = Notes.Instance;
             this.state = State.Instance;
             this.settings = Settings.Default;
             this.overlay = new Overlay();
             this.commandStack = new CommandStack(settings.UndoStackSize);
             this.universal = state.Universal;
+
+            settings.Keystrokes[0x20] = "\x20";
 
             model.CreateLevelModel();
             levelModel = model.LevelModel;
@@ -140,9 +142,6 @@ namespace SMRPGED
             npcSpritePartitions = levelModel.NPCSpritePartitions;
             npcProperties = levelModel.NPCProperties;
 
-            //foreach (PhysicalTile pt in physicalTiles)
-            //    pt.DrawPhysicalTile(quadBasePixels, quadBlockPixels, halfQuadBlockPixels, stairsUpLeftLowPixels, stairsUpLeftHighPixels, stairsUpRightLowPixels, stairsUpRightHighPixels);
-
             rightEdge = panelTileEditor.Right;
 
             if (!updatingLevel)
@@ -155,6 +154,67 @@ namespace SMRPGED
 
             updatingLevel = false;
         }
+
+        #region Methods
+
+        private void InitializeSettings()
+        {
+            this.levelName.SelectedIndex = 0;
+
+            buttonToggleProperties.Checked = true;
+
+            buttonToggleCartGrid.Checked = state.CartesianGrid;
+            buttonToggleOrthGrid.Checked = state.OrthographicGrid;
+            buttonToggleBG.Checked = state.BG;
+            buttonToggleMask.Checked = state.Mask;
+            buttonToggleL1.Checked = state.Layer1;
+            buttonToggleL2.Checked = state.Layer2;
+            buttonToggleL3.Checked = state.Layer3;
+            buttonToggleP1.Checked = state.Priority1;
+            buttonTogglePhys.Checked = state.PhysicalLayer;
+            buttonToggleNPCs.Checked = state.Objects;
+            buttonToggleExits.Checked = state.Exits;
+            buttonToggleEvents.Checked = state.Events;
+            buttonToggleOverlaps.Checked = state.Overlaps;
+
+            buttonEditDraw.Checked = state.Draw;
+            buttonEditSelect.Checked = state.Select;
+            buttonEditErase.Checked = state.Erase;
+            buttonEditDropper.Checked = state.Dropper;
+
+            overlay.PhysTilePoint = new Point(1024, 1024);
+
+            cartesianGridToolStripMenuItem.Checked = state.CartesianGrid;
+            orthographicGridToolStripMenuItem.Checked = state.OrthographicGrid;
+            backgroundToolStripMenuItem.Checked = state.BG;
+            maskToolStripMenuItem.Checked = state.Mask;
+            layer1ToolStripMenuItem.Checked = state.Layer1;
+            layer2ToolStripMenuItem.Checked = state.Layer2;
+            layer3ToolStripMenuItem.Checked = state.Layer3;
+            physicalMapToolStripMenuItem.Checked = state.PhysicalLayer;
+            npcsToolStripMenuItem.Checked = state.Objects;
+            exitFieldsToolStripMenuItem.Checked = state.Exits;
+            eventFieldsToolStripMenuItem.Checked = state.Events;
+
+            InitializeLayerProperties();
+            InitializeMapProperties();
+            InitializeNPCProperties();
+            InitializeExitFieldProperties();
+            InitializeEventFieldProperties();
+            InitializeOverlapProperties();
+            RefreshBattlefield();
+            InitializeTileEditor();
+
+            commandStack.Clear();
+
+            coleditSelectCommand.SelectedIndex = 0;
+            colEditReds.Checked = true;
+            colEditGreens.Checked = true;
+            colEditBlues.Checked = true;
+
+            overlapTileset = new OverlapTileset(model);
+        }
+
         private void SetEventHandlers(Control control)
         {
             foreach (Control c in control.Controls)
@@ -163,44 +223,6 @@ namespace SMRPGED
                 SetEventHandlers(c);
             }
         }
-        private void controlMouseMove(object sender, MouseEventArgs e)
-        {
-            if (sender == this || !enableHelpTipsToolStripMenuItem.Checked)
-            {
-                labelToolTip.Visible = false;
-                return;
-            }
-
-            Control control = (Control)sender;
-
-            if (toolTip1.GetToolTip(control) != "")
-            {
-                Control parent = (Control)control.Parent;
-                Point p = control.Location;
-                Point l = new Point();
-                while (parent.Parent != this)
-                {
-                    p.X += parent.Location.X;
-                    p.Y += parent.Location.Y;
-                    parent = parent.Parent;
-                }
-
-                labelToolTip.Text = toolTip1.GetToolTip(control);
-                l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
-                if (l.X + labelToolTip.Width + 50 > this.Width)
-                    l.X -= labelToolTip.Width + 75;
-                if (l.Y + labelToolTip.Height + 50 > this.Height)
-                    l.Y -= labelToolTip.Height + 50;
-                labelToolTip.Location = l;
-                labelToolTip.BringToFront();
-                labelToolTip.Visible = true;
-            }
-            else
-            {
-                labelToolTip.Visible = false;
-            }
-        }
-
         private void SetToolTips()
         {
             toolTip1.SetToolTip(colorBalance,
@@ -722,9 +744,6 @@ namespace SMRPGED
                 "randomly. \n\n" +
                 "Click the green button to the left to edit the action #.");
 
-            this.toolTip1.SetToolTip(this.npcPaletteIndexPlus,
-                "Unknown property.");
-
             this.toolTip1.SetToolTip(this.npcSpeedPlus,
                 "This will usually increase the speed of the NPC's playback.");
 
@@ -741,21 +760,11 @@ namespace SMRPGED
                 "Example: if \"NPC #+\" is 3 and the \"NPC #\" is 15, then the \n" +
                 "instance will be assigned NPC # 18.\n\n" +
 
-                "If the NPC TYPE is set to \"Treasure\", this value refers to \n" +
-                "\"Star XP\" or the amount of experience the NPC will give you \n" +
-                "if it is knocked out while Mario is invincible from a super \n" +
-                "star. The value here does not refer to the exact amount, \n" +
-                "but instead refers to a table in the ROM:\n" +
-                "0 = give 1 XP\n" +
-                "1 = give 2 XP\n" +
-                "2 = give 5 XP\n" +
-                "3 = give 8 XP\n" +
-                "4 = give 13 XP\n" +
-                "5 = give 11 XP\n" +
-                "6 = give 0 XP\n" +
-                "7 = give 5 XP\n" +
-                "8 = give 6 XP\n" +
-                "9 = give 9 XP\n\n" +
+                "If the NPC TYPE is set to \"Treasure\", this value is what \n" +
+                "memory address 00:70A7 is set to for use in event scripts \n" +
+                "which read 00:70A7 to determine what the item # or what type \n" +
+                "of item (ie. mushroom, super star, flower, etc.) will be \n" +
+                "given or shown for the treasure chest.\n\n" +
 
                 "If the NPC TYPE is set to \"Battle\", this value is added to the \n" +
                 "\"Action #\" used by the currently selected NPC instance. \n" +
@@ -832,10 +841,10 @@ namespace SMRPGED
                 "coord is higher than the top of the floor.\n\n" +
                 "\"Can't walk under\" will not let Mario or any NPC's to walk \n" +
                 "under the NPC.\n\n" +
-                "\"Can't pass walls\" will not let the NPC pass through walls.\n\n" + 
+                "\"Can't pass walls\" will not let the NPC pass through walls.\n\n" +
                 "\"Can't jump through\" will not let Mario or any NPC's beneath \n" +
                 "it to jump through the NPC.\n\n" +
-                "\"Can't pass NPCs\" will not let the NPC pass through NPCs\n\n" + 
+                "\"Can't pass NPCs\" will not let the NPC pass through NPCs\n\n" +
                 "\"Can't walk through\" will not let Mario or any NPC's to walk \n" +
                 "through the NPC.\n\n" +
                 "\"Return to area (A)\" is only used for \"Battle\" type NPC's.\n\n" +
@@ -1146,64 +1155,84 @@ namespace SMRPGED
                 "The amount of blue in the currently selected color.");
             this.toolTip1.SetToolTip(this.bfPaletteBlueBar, this.toolTip1.GetToolTip(this.bfPaletteBlueNum));
         }
-        #region Methods
-
-        private void InitializeSettings()
+        private void controlMouseMove(object sender, MouseEventArgs e)
         {
-            this.levelName.SelectedIndex = 0;
+            if (sender == this) return;
 
-            buttonToggleProperties.Checked = true;
+            Control control = (Control)sender;
 
-            buttonToggleCartGrid.Checked = state.CartesianGrid;
-            buttonToggleOrthGrid.Checked = state.OrthographicGrid;
-            buttonToggleBG.Checked = state.BG;
-            buttonToggleMask.Checked = state.Mask;
-            buttonToggleL1.Checked = state.Layer1;
-            buttonToggleL2.Checked = state.Layer2;
-            buttonToggleL3.Checked = state.Layer3;
-            buttonToggleP1.Checked = state.Priority1;
-            buttonTogglePhys.Checked = state.PhysicalLayer;
-            buttonToggleNPCs.Checked = state.Objects;
-            buttonToggleExits.Checked = state.Exits;
-            buttonToggleEvents.Checked = state.Events;
-            buttonToggleOverlaps.Checked = state.Overlaps;
+            if (enableHelpTipsToolStripMenuItem.Checked)
+            {
+                if (toolTip1.GetToolTip(control) != "")
+                {
+                    Control parent = (Control)control.Parent;
+                    Point p = control.Location;
+                    Point l = new Point();
+                    while (parent.Parent != this)
+                    {
+                        p.X += parent.Location.X;
+                        p.Y += parent.Location.Y;
+                        parent = parent.Parent;
+                    }
 
-            buttonEditDraw.Checked = state.Draw;
-            buttonEditSelect.Checked = state.Select;
-            buttonEditErase.Checked = state.Erase;
-            buttonEditDropper.Checked = state.Dropper;
+                    labelToolTip.Text = toolTip1.GetToolTip(control);
+                    l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
+                    if (l.X + labelToolTip.Width + 50 > this.Width)
+                        l.X -= labelToolTip.Width + 75;
+                    if (l.Y + labelToolTip.Height + 50 > this.Height)
+                        l.Y -= labelToolTip.Height + 50;
+                    labelToolTip.Location = l;
+                    labelToolTip.BringToFront();
+                    labelToolTip.Visible = true;
+                }
+                else
+                    labelToolTip.Visible = false;
+            }
+            else
+                labelToolTip.Visible = false;
 
-            overlay.PhysTilePoint = new Point(1024, 1024);
+            if (showDecHexToolStripMenuItem.Checked)
+            {
+                if (control.GetType().Name == "UpDownEdit" || control.GetType().Name == "NumericUpDown")
+                {
+                    Control parent = (Control)control.Parent;
+                    Point p = control.Location;
+                    Point l = new Point();
+                    while (parent.Parent != this)
+                    {
+                        p.X += parent.Location.X;
+                        p.Y += parent.Location.Y;
+                        parent = parent.Parent;
+                    }
 
-            cartesianGridToolStripMenuItem.Checked = state.CartesianGrid;
-            orthographicGridToolStripMenuItem.Checked = state.OrthographicGrid;
-            backgroundToolStripMenuItem.Checked = state.BG;
-            maskToolStripMenuItem.Checked = state.Mask;
-            layer1ToolStripMenuItem.Checked = state.Layer1;
-            layer2ToolStripMenuItem.Checked = state.Layer2;
-            layer3ToolStripMenuItem.Checked = state.Layer3;
-            physicalMapsToolStripMenuItem.Checked = state.PhysicalLayer;
-            npcsToolStripMenuItem.Checked = state.Objects;
-            exitFieldsToolStripMenuItem.Checked = state.Exits;
-            eventFieldsToolStripMenuItem.Checked = state.Events;
+                    NumericUpDown numericUpDown;
+                    if (control.GetType().Name == "UpDownEdit")
+                    {
+                        Control temp = GetNextControl(control, false);
+                        numericUpDown = (NumericUpDown)GetNextControl(temp, false);
+                    }
+                    else
+                        numericUpDown = (NumericUpDown)control;
 
-            InitializeLayerProperties();
-            InitializeMapProperties();
-            InitializeNPCProperties();
-            InitializeExitFieldProperties();
-            InitializeEventFieldProperties();
-            InitializeOverlapProperties();
-            RefreshBattlefield();
-            InitializeTileEditor();
+                    if (numericUpDown.Hexadecimal)
+                        labelConvertor.Text = "DEC:  " + ((int)numericUpDown.Value).ToString("d");
+                    else
+                        labelConvertor.Text = "HEX:  0x" + ((int)numericUpDown.Value).ToString("X4");
 
-            commandStack.Clear();
-
-            coleditSelectCommand.SelectedIndex = 0;
-            colEditReds.Checked = true;
-            colEditGreens.Checked = true;
-            colEditBlues.Checked = true;
-
-            overlapTileset = new OverlapTileset(model);
+                    l = new Point(p.X + e.X + 50, p.Y + e.Y + 50);
+                    if (l.X + labelConvertor.Width + 50 > this.Width)
+                        l.X -= labelConvertor.Width + 75;
+                    if (l.Y + labelConvertor.Height + 50 > this.Height)
+                        l.Y -= labelConvertor.Height + 50;
+                    labelConvertor.Location = l;
+                    labelConvertor.BringToFront();
+                    labelConvertor.Visible = true;
+                }
+                else
+                    labelConvertor.Visible = false;
+            }
+            else
+                labelConvertor.Visible = false;
         }
 
         private void CreateNewLevelData()
@@ -1438,41 +1467,9 @@ namespace SMRPGED
         }
         private void LoadNotes()
         {
-            if (!notes.GetLoadNotes())
-            {
-                return;
-            }
-            try
-            {
-                // Notes load example
-                this.levelNotes.LoadFile(notes.GetPath() + "main-levels.rtf");
-            }
-            catch
-            {
-
-
-                if (MessageBox.Show("Could not load notes for this ROM, would you like to create a set of notes for it?\nThis will not overwrite any existing notes", "Create Notes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    if (notes.CreateNoteSet())
-                        LoadNotes();
-                }
-                else
-                {
-                    notes.SetLoadNotes(false);
-                }
-
-            }
         }
         private void SaveNotes()
         {
-            try
-            {
-                this.levelNotes.SaveFile(notes.GetPath() + "main-changes.rtf");
-            }
-            catch
-            {
-                MessageBox.Show("ERROR saving main-levels.rtf, please report this if it presists");
-            }
         }
 
         public static bool Contains(string original, string value, StringComparison comparisionType)
@@ -1534,8 +1531,8 @@ namespace SMRPGED
             if (model.AssembleFinal)
                 model.AssembleLevels = false;
 
-            if (notes.GetLoadNotes())
-                SaveNotes();
+            //if (notes.GetLoadNotes())
+            //    SaveNotes();
 
             settings.Save();
 
@@ -1569,20 +1566,32 @@ namespace SMRPGED
             ushort offsetStart = 0x3166;
             if (exits.NumberOfExits > 0)
                 exits.CurrentExit = temp;
-            for (int i = 0; i < 512; i++)
+            if (!CalculateFreeExitSpace(false))
             {
-                offsetStart = levels[i].LevelExits.Assemble(offsetStart);
+                for (int i = 0; i < 510; i++)
+                {
+                    offsetStart = levels[i].LevelExits.Assemble(offsetStart);
+                }
             }
+            else
+                MessageBox.Show("WARNING: Exit fields were not saved because they exceed the maximum alotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
             if (exits.NumberOfExits > 0)
                 exits.CurrentExit = temp;
 
             offsetStart = 0xE400;
             if (events.NumberOfEvents > 0)
                 temp = events.CurrentEvent;
-            for (int i = 0; i < 512; i++)
+            if (!CalculateFreeEventSpace(false))
             {
-                offsetStart = levels[i].LevelEvents.Assemble(offsetStart);
+                for (int i = 0; i < 512; i++)
+                {
+                    offsetStart = levels[i].LevelEvents.Assemble(offsetStart);
+                }
             }
+            else
+                MessageBox.Show("WARNING: Event fields were not saved because they exceed the maximum alotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
             if (events.NumberOfEvents > 0)
                 events.CurrentEvent = temp;
 
@@ -1593,10 +1602,16 @@ namespace SMRPGED
                 if (npcs.NumberOfInstances > 0)
                     temp2 = npcs.CurrentInstance;
             }
-            for (int i = 0; i < 512; i++)
+            if (!CalculateFreeNPCSpace(4, false))
             {
-                offsetStart = levels[i].LevelNPCs.Assemble(offsetStart);
+                for (int i = 0; i < 510; i++)
+                {
+                    offsetStart = levels[i].LevelNPCs.Assemble(offsetStart);
+                }
             }
+            else
+                MessageBox.Show("WARNING: NPCs were not saved because they exceed the maximum alotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
             if (npcs.NumberOfNPCs > 0)
             {
                 npcs.CurrentNPC = temp;
@@ -1607,10 +1622,16 @@ namespace SMRPGED
             offsetStart = 0x4D05;
             if (overlaps.NumberOfOverlaps > 0)
                 temp = overlaps.CurrentOverlap;
-            for (int i = 0; i < 512; i++)
+            if (!CalculateFreeOverlapSpace(false))
             {
-                offsetStart = levels[i].LevelOverlaps.Assemble(offsetStart);
+                for (int i = 0; i < 510; i++)
+                {
+                    offsetStart = levels[i].LevelOverlaps.Assemble(offsetStart);
+                }
             }
+            else
+                MessageBox.Show("WARNING: Overlaps were not saved because they exceed the maximum alotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
             if (overlaps.NumberOfOverlaps > 0)
                 overlaps.CurrentOverlap = temp;
 
@@ -1674,242 +1695,110 @@ namespace SMRPGED
             about.ShowDialog(this);
         }
 
+        private ClearElements clearElements;
+        private ImportExportElements ioElements;
+        private string fullPath; public string FullPath { set { fullPath = value; } }
         private void importLevelDataAll_Click(object sender, EventArgs e)
         {
-            path = GetDirectoryPath("Select the directory containing all level data subdirectories 0x00 - 0x1FF");
-            if (path != null)
-            {
-                this.progressBar1.Value = 0;
-                this.panel1.Enabled = false;
-                this.toolStrip1.Enabled = false;
-                this.menuStrip1.Enabled = false;
-                this.TopMost = true;
+            ioElements = new ImportExportElements(this, (int)levelNum.Value, "IMPORT LEVEL DATA...");
+            ioElements.ShowDialog();
+            if (clearElements.DialogResult == DialogResult.Cancel)
+                return;
+            fullUpdate = true;
+            if (!updatingLevel)
+                UpdateLevel();
 
-                this.label67.Visible = false;
-                this.panel8.Visible = true;
-                this.labelExportPercent.Visible = true;
-                this.cancelButton.Enabled = true;
-                this.cancelButton.Visible = true;
-
-                start = 0; count = 512;
-                ImportLevelData.RunWorkerAsync();
-            }
-        }
-        private void importLevelDataCurrent_Click(object sender, EventArgs e)
-        {
-            path = GetDirectoryPath("Select the directory that contains the level data to import");
-            if (path != null)
-            {
-                this.progressBar1.Value = 0;
-                this.panel1.Enabled = false;
-                this.toolStrip1.Enabled = false;
-                this.menuStrip1.Enabled = false;
-                this.TopMost = true;
-
-                this.label67.Visible = false;
-                this.panel8.Visible = true;
-                this.labelExportPercent.Visible = true;
-                this.cancelButton.Enabled = true;
-                this.cancelButton.Visible = true;
-
-                start = currentLevel; count = 1;
-                ImportLevelData.RunWorkerAsync();
-            }
+            if (CalculateFreeNPCSpace(4, false))
+                MessageBox.Show("WARNING: The total number of NPCs for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (CalculateFreeExitSpace(false))
+                MessageBox.Show("WARNING: The total number of exit fields for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (CalculateFreeEventSpace(false))
+                MessageBox.Show("WARNING: The total number of event fields for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (CalculateFreeOverlapSpace(false))
+                MessageBox.Show("WARNING: The total number of overlaps for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
         private void exportLevelDataAll_Click(object sender, EventArgs e)
         {
-            path = GetDirectoryPath("Select the directory that you want to export Level Data to.");
-            if (path != null)
-            {
-                this.progressBar1.Value = 0;
-                this.panel1.Enabled = false;
-                this.toolStrip1.Enabled = false;
-                this.menuStrip1.Enabled = false;
-                this.TopMost = true;
-
-                this.label67.Visible = false;
-                this.panel8.Visible = true;
-                this.labelExportPercent.Visible = true;
-                this.cancelButton.Enabled = true;
-                this.cancelButton.Visible = true;
-
-                start = 0; count = 512;
-                ExportLevelData.RunWorkerAsync();
-            }
-        }
-        private void exportLevelDataCurrent_Click(object sender, EventArgs e)
-        {
-            path = GetDirectoryPath("Select the directory that you want to export Level Data to.");
-            if (path != null)
-            {
-                this.progressBar1.Value = 0;
-                this.panel1.Enabled = false;
-                this.toolStrip1.Enabled = false;
-                this.menuStrip1.Enabled = false;
-                this.TopMost = true;
-
-                this.label67.Visible = false;
-                this.panel8.Visible = true;
-                this.labelExportPercent.Visible = true;
-                this.cancelButton.Enabled = true;
-                this.cancelButton.Visible = true;
-
-                start = currentLevel; count = 1;
-                ExportLevelData.RunWorkerAsync();
-            }
+            ioElements = new ImportExportElements(this, (int)levelNum.Value, "EXPORT LEVEL DATA...");
+            ioElements.ShowDialog();
         }
         private void exportLevelImagesAll_Click(object sender, EventArgs e)
         {
-            path = GetDirectoryPath("Select the directory that you want to export Level Images to.");
-            if (path != null)
-            {
-                this.progressBar1.Value = 0;
-                this.panel1.Enabled = false;
-                this.toolStrip1.Enabled = false;
-                this.menuStrip1.Enabled = false;
-                this.TopMost = true;
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
 
-                this.label67.Visible = false;
-                this.panel8.Visible = true;
-                this.labelExportPercent.Visible = true;
-                this.cancelButton.Enabled = true;
-                this.cancelButton.Visible = true;
+            folderBrowserDialog.SelectedPath = settings.LastDirectory;
+            folderBrowserDialog.Description = "SELECT DIRECTORY TO SAVE LEVEL IMAGES TO...";
 
-                start = 0; count = 512;
-                ExportLevelImages.RunWorkerAsync();
-            }
+            DialogResult result = folderBrowserDialog.ShowDialog();
+            if (result != DialogResult.OK) return;
+
+            settings.LastDirectory = folderBrowserDialog.SelectedPath;
+            fullPath = folderBrowserDialog.SelectedPath;
+
+            pBar = new ProgressBar(
+                this.model, this.model.Data,
+                "SAVING LEVEL IMAGES...", 509, ExportLevelImages);
+            pBar.Show();
+            this.Enabled = false;
+
+            ExportLevelImages.RunWorkerAsync();
         }
         private void exportLevelImagesCurrent_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PNG files (*.png)|*.png|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 1;
-            saveFileDialog.FileName = "level." + currentLevel.ToString("X3") + ".png";
+            saveFileDialog.FileName = "level." + currentLevel.ToString("d3") + ".png";
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 levelImage.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
         }
         private void clearLevelDataAll_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("WARNING: You are about to clear all level data. Are you sure you want to do this?", "Clear all Level Data?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (result == DialogResult.Yes)
-            {
-                foreach (LevelMap map in levelMaps)
-                {
-                    map.Clear();
-                }
-                foreach (Level lvl in levels)
-                {
-                    lvl.Layer.Clear();
-                    lvl.LevelEvents.Clear();
-                    lvl.LevelExits.Clear();
-                    lvl.LevelNPCs.Clear();
-                }
-                fullUpdate = true;
-
-                if (!updatingLevel)
-                {
-                    UpdateLevel();
-                }
-            }
-        }
-        private void clearLevelDataCurrent_Click(object sender, EventArgs e)
-        {
-            levelMaps[levels[currentLevel].LevelMap].Clear();
-            levels[currentLevel].Layer.Clear();
-            levels[currentLevel].LevelEvents.Clear();
-            levels[currentLevel].LevelExits.Clear();
-            levels[currentLevel].LevelNPCs.Clear();
-
+            clearElements = new ClearElements(model, (int)levelNum.Value, "CLEAR LEVEL DATA...");
+            clearElements.ShowDialog();
+            if (clearElements.DialogResult == DialogResult.Cancel)
+                return;
             fullUpdate = true;
-
             if (!updatingLevel)
-            {
                 UpdateLevel();
-            }
         }
         private void clearTilesetsAll_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("WARNING: You are about to clear all L1, L2, and L3 tilesets. Are you sure you want to do this?", "Clear all Tilesets?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (result == DialogResult.Yes)
-            {
-                tileSet.Clear(125);
-                fullUpdate = true;
-                if (!updatingLevel)
-                    UpdateLevel();
-            }
-        }
-        private void clearTilesetsCurrent_Click(object sender, EventArgs e)
-        {
-            tileSet.Clear(1);
+            clearElements = new ClearElements(model, (int)mapTilesetL1Num.Value, "CLEAR TILESETS...");
+            clearElements.ShowDialog();
+            if (clearElements.DialogResult == DialogResult.Cancel)
+                return;
             fullUpdate = true;
             if (!updatingLevel)
                 UpdateLevel();
         }
         private void clearTilemapsAll_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("WARNING: You are about to clear all L1, L2, and L3 tilemaps. Are you sure you want to do this?", "Clear all Tilemaps?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (result == DialogResult.Yes)
-            {
-                tileMap.Clear(309);
-                fullUpdate = true;
-                if (!updatingLevel)
-                    UpdateLevel();
-            }
-        }
-        private void clearTilemapsCurrent_Click(object sender, EventArgs e)
-        {
-            tileMap.Clear(1);
+            clearElements = new ClearElements(model, (int)mapTilemapL1Num.Value, "CLEAR TILEMAPS...");
+            clearElements.ShowDialog();
+            if (clearElements.DialogResult == DialogResult.Cancel)
+                return;
             fullUpdate = true;
             if (!updatingLevel)
                 UpdateLevel();
         }
         private void clearPhysicalMapsAll_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("WARNING: You are about to clear all physical maps. Are you sure you want to do this?", "Clear all Physical Maps?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (result == DialogResult.Yes)
-            {
-                physicalMap.Clear(120);
-                fullUpdate = true;
-                physicalMap.DrawPhysicalMap();
-                pictureBoxLevel.Invalidate();
-            }
-        }
-        private void clearPhysicalMapsCurrent_Click(object sender, EventArgs e)
-        {
-            physicalMap.Clear(1);
+            clearElements = new ClearElements(model, (int)mapPhysicalMapNum.Value, "CLEAR PHYSICAL MAPS...");
+            clearElements.ShowDialog();
+            if (clearElements.DialogResult == DialogResult.Cancel)
+                return;
             fullUpdate = true;
             physicalMap.DrawPhysicalMap();
             pictureBoxLevel.Invalidate();
         }
         private void clearBattlefieldsAll_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "WARNING: You are about to clear all battlefield tilesets. Are you sure you want to do this?",
-                "Clear all Battlefields?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (result == DialogResult.Yes)
-            {
-                for (int i = 0; i < 61; i++)
-                {
-                    model.TileSetsBF[i] = new byte[0x2000];
-                    model.EditTileSetsBF[i] = true;
-                }
-                RefreshBattlefield();
-                pictureBoxBattlefield.Invalidate();
-                pictureBoxBattlefield.BackColor = Color.FromArgb(paletteSetBF.GetBGColorBF());
-                bfPalettePictureBox.Invalidate();
-            }
-        }
-        private void clearBattlefieldsCurrent_Click(object sender, EventArgs e)
-        {
-            model.TileSetsBF[battlefields[(int)battlefieldNum.Value].TileSet] = new byte[0x2000];
-            model.EditTileSetsBF[battlefields[(int)battlefieldNum.Value].TileSet] = true;
-
+            clearElements = new ClearElements(model, (int)battlefieldNum.Value, "CLEAR BATTLEFIELD TILESETS...");
+            clearElements.ShowDialog();
+            if (clearElements.DialogResult == DialogResult.Cancel)
+                return;
             RefreshBattlefield();
             pictureBoxBattlefield.Invalidate();
             pictureBoxBattlefield.BackColor = Color.FromArgb(paletteSetBF.GetBGColorBF());
@@ -1919,22 +1808,82 @@ namespace SMRPGED
         {
             DialogResult result = MessageBox.Show(
                 "WARNING: You are about to clear all level data, tilesets, tilemaps, physical maps and battlefields.\n" +
-                "This will essentially wipe the slate clean for anything having to do with levels.",
-                "WARNING: Clearing all Level Components...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                "This will essentially wipe the slate clean for anything having to do with levels.\n\nProceed?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
-            clearLevelDataAll_Click(null, null);
-            clearTilesetsAll_Click(null, null);
-            clearTilemapsAll_Click(null, null);
-            clearPhysicalMapsAll_Click(null, null);
-            clearBattlefieldsAll_Click(null, null);
+            if (result != DialogResult.Yes) return;
+
+            for (int i = 0; i <= 509; i++)
+            {
+                levels[i].Layer.Clear();
+                levels[i].LevelEvents.Clear();
+                levels[i].LevelExits.Clear();
+                levels[i].LevelNPCs.Clear();
+            }
+            for (int i = 0; i < model.TileSets.Length; i++)
+            {
+                if (i < 0x20)
+                    model.TileSets[i] = new byte[0x1000];
+                else
+                    model.TileSets[i] = new byte[0x2000];
+                model.EditTileSets[i] = true;
+            }
+            for (int i = 0; i <= model.TileMaps.Length; i++)
+            {
+                if (i < 0x40)
+                    model.TileMaps[i] = new byte[0x1000];
+                else
+                    model.TileMaps[i] = new byte[0x2000];
+                model.EditTileMaps[i] = true;
+            }
+            for (int i = 0; i < model.PhysicalMaps.Length; i++)
+            {
+                model.PhysicalMaps[i] = new byte[0x20C2];
+                model.EditPhysicalMaps[i] = true;
+            }
+            for (int i = 0; i < model.TileSetsBF.Length; i++)
+            {
+                model.TileSetsBF[i] = new byte[0x2000];
+                model.EditTileSetsBF[i] = true;
+            }
+
+            fullUpdate = true;
+            if (!updatingLevel)
+                UpdateLevel();
+            physicalMap.DrawPhysicalMap();
+            pictureBoxLevel.Invalidate();
         }
         private void clearAllComponentsCurrent_Click(object sender, EventArgs e)
         {
-            clearLevelDataCurrent_Click(null, null);
-            clearTilesetsCurrent_Click(null, null);
-            clearTilemapsCurrent_Click(null, null);
-            clearPhysicalMapsCurrent_Click(null, null);
-            clearBattlefieldsCurrent_Click(null, null);
+            levels[currentLevel].Layer.Clear();
+            levels[currentLevel].LevelEvents.Clear();
+            levels[currentLevel].LevelExits.Clear();
+            levels[currentLevel].LevelNPCs.Clear();
+
+            model.TileSets[levelMap.TileSetL1 + 0x20] = new byte[0x2000];
+            model.TileSets[levelMap.TileSetL2 + 0x20] = new byte[0x2000];
+            model.TileSets[levelMap.TileSetL3] = new byte[0x1000];
+            model.EditTileSets[levelMap.TileSetL1 + 0x20] = true;
+            model.EditTileSets[levelMap.TileSetL2 + 0x20] = true;
+            model.EditTileSets[levelMap.TileSetL3] = true;
+
+            model.TileMaps[levelMap.TileMapL1 + 0x40] = new byte[0x2000];
+            model.TileMaps[levelMap.TileMapL2 + 0x40] = new byte[0x2000];
+            model.TileMaps[levelMap.TileMapL3] = new byte[0x1000];
+            model.EditTileMaps[levelMap.TileMapL1 + 0x40] = true;
+            model.EditTileMaps[levelMap.TileMapL2 + 0x40] = true;
+            model.EditTileMaps[levelMap.TileMapL3] = true;
+
+            physicalMap.Clear(1);
+
+            model.TileSetsBF[battlefields[(int)battlefieldNum.Value].TileSet] = new byte[0x2000];
+            model.EditTileSetsBF[battlefields[(int)battlefieldNum.Value].TileSet] = true;
+
+            fullUpdate = true;
+            if (!updatingLevel)
+                UpdateLevel();
+            physicalMap.DrawPhysicalMap();
+            pictureBoxLevel.Invalidate();
         }
         private void unusedToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1943,7 +1892,7 @@ namespace SMRPGED
                 "If there are any tilesets that are unused by any levels that you wish to\n" +
                 "preserve, you will need to export them before executing this command.\n" +
                 "Do you wish to continue?",
-                "Clear all unused tilesets?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (result == DialogResult.No)
                 return;
 
@@ -1978,7 +1927,7 @@ namespace SMRPGED
               "If there are any tilemaps that are unused by any levels that you wish to\n" +
               "preserve, you will need to export them before executing this command.\n" +
               "Do you wish to continue?",
-              "Clear all unused tilemaps?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+              "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (result == DialogResult.No)
                 return;
 
@@ -2013,7 +1962,7 @@ namespace SMRPGED
               "If there are any physical maps that are unused by any levels that you wish to\n" +
               "preserve, you will need to export them before executing this command.\n" +
               "Do you wish to continue?",
-              "Clear all unused physical maps?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+              "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (result == DialogResult.No)
                 return;
 
@@ -2048,11 +1997,11 @@ namespace SMRPGED
         }
         private void arraysToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            path = GetDirectoryPath("Select the directory that you want to export the arrays to.");
-            path += "\\" + model.GetFileNameWithoutPath() + " - Arrays\\";
+            fullPath = GetDirectoryPath("SELECT DIRECTORY TO EXPORT ARRAYS TO...");
+            fullPath += "\\" + model.GetFileNameWithoutPath() + " - Arrays\\";
 
             // Create Level Data directory
-            if (!CreateDir(path)) return;
+            if (!CreateDir(fullPath)) return;
 
             FileStream fs;
             BinaryWriter bw;
@@ -2061,8 +2010,8 @@ namespace SMRPGED
             // Create the file to store the level data
             for (int i = 0; i < model.GraphicSets.Length; i++)
             {
-                CreateDir(path + "Graphic Sets\\");
-                fs = new FileStream(path + "Graphic Sets\\graphicSet." + i.ToString("X3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
+                CreateDir(fullPath + "Graphic Sets\\");
+                fs = new FileStream(fullPath + "Graphic Sets\\graphicSet." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
                 bw = new BinaryWriter(fs);
                 bw.Write(model.GraphicSets[i], 0, model.GraphicSets[i].Length);
                 bw.Close();
@@ -2070,8 +2019,8 @@ namespace SMRPGED
             }
             for (int i = 0; i < model.PhysicalMaps.Length; i++)
             {
-                CreateDir(path + "Physical Maps\\");
-                fs = new FileStream(path + "Physical Maps\\physicalMap." + i.ToString("X3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
+                CreateDir(fullPath + "Physical Maps\\");
+                fs = new FileStream(fullPath + "Physical Maps\\physicalMap." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
                 bw = new BinaryWriter(fs);
                 bw.Write(model.PhysicalMaps[i], 0, model.PhysicalMaps[i].Length);
                 bw.Close();
@@ -2079,8 +2028,8 @@ namespace SMRPGED
             }
             for (int i = 0; i < model.TileMaps.Length; i++)
             {
-                CreateDir(path + "Tile Maps\\");
-                fs = new FileStream(path + "Tile Maps\\tileMap." + i.ToString("X3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
+                CreateDir(fullPath + "Tile Maps\\");
+                fs = new FileStream(fullPath + "Tile Maps\\tileMap." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
                 bw = new BinaryWriter(fs);
                 bw.Write(model.TileMaps[i], 0, model.TileMaps[i].Length);
                 bw.Close();
@@ -2088,8 +2037,8 @@ namespace SMRPGED
             }
             for (int i = 0; i < model.TileSets.Length; i++)
             {
-                CreateDir(path + "Tile Sets\\");
-                fs = new FileStream(path + "Tile Sets\\tileSet." + i.ToString("X3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
+                CreateDir(fullPath + "Tile Sets\\");
+                fs = new FileStream(fullPath + "Tile Sets\\tileSet." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
                 bw = new BinaryWriter(fs);
                 bw.Write(model.TileSets[i], 0, model.TileSets[i].Length);
                 bw.Close();
@@ -2097,8 +2046,8 @@ namespace SMRPGED
             }
             for (int i = 0; i < model.TileSetsBF.Length; i++)
             {
-                CreateDir(path + "Battlefield Tile Sets\\");
-                fs = new FileStream(path + "Battlefield Tile Sets\\tileSetBF." + i.ToString("X3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
+                CreateDir(fullPath + "Battlefield Tile Sets\\");
+                fs = new FileStream(fullPath + "Battlefield Tile Sets\\tileSetBF." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
                 bw = new BinaryWriter(fs);
                 bw.Write(model.TileSetsBF[i], 0, model.TileSetsBF[i].Length);
                 bw.Close();
@@ -2112,8 +2061,8 @@ namespace SMRPGED
         }
         private void arraysToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            path = GetDirectoryPath("Select the directory containing all arrays.");
-            path += "\\";
+            fullPath = GetDirectoryPath("SELECT THE DIRECTORY TO IMPORT ALL ARRAYS FROM...");
+            fullPath += "\\";
 
             FileStream fs;
             BinaryReader br;
@@ -2122,9 +2071,9 @@ namespace SMRPGED
                 // Create the file to store the level data
                 for (int i = 0; i < model.GraphicSets.Length; i++)
                 {
-                    if (!File.Exists(path + "Graphic Sets\\graphicSet." + i.ToString("X3") + ".bin"))
+                    if (!File.Exists(fullPath + "Graphic Sets\\graphicSet." + i.ToString("d3") + ".bin"))
                         continue;
-                    fs = File.OpenRead(path + "Graphic Sets\\graphicSet." + i.ToString("X3") + ".bin");
+                    fs = File.OpenRead(fullPath + "Graphic Sets\\graphicSet." + i.ToString("d3") + ".bin");
                     br = new BinaryReader(fs);
                     model.GraphicSets[i] = br.ReadBytes(model.GraphicSets[i].Length);
                     br.Close();
@@ -2134,9 +2083,9 @@ namespace SMRPGED
                 }
                 for (int i = 0; i < model.PhysicalMaps.Length; i++)
                 {
-                    if (!File.Exists(path + "Physical Maps\\physicalMap." + i.ToString("X3") + ".bin"))
+                    if (!File.Exists(fullPath + "Physical Maps\\physicalMap." + i.ToString("d3") + ".bin"))
                         continue;
-                    fs = File.OpenRead(path + "Physical Maps\\physicalMap." + i.ToString("X3") + ".bin");
+                    fs = File.OpenRead(fullPath + "Physical Maps\\physicalMap." + i.ToString("d3") + ".bin");
                     br = new BinaryReader(fs);
                     model.PhysicalMaps[i] = br.ReadBytes(model.PhysicalMaps[i].Length);
                     br.Close();
@@ -2146,9 +2095,9 @@ namespace SMRPGED
                 }
                 for (int i = 0; i < model.TileMaps.Length; i++)
                 {
-                    if (!File.Exists(path + "Tile Maps\\tileMap." + i.ToString("X3") + ".bin"))
+                    if (!File.Exists(fullPath + "Tile Maps\\tileMap." + i.ToString("d3") + ".bin"))
                         continue;
-                    fs = File.OpenRead(path + "Tile Maps\\tileMap." + i.ToString("X3") + ".bin");
+                    fs = File.OpenRead(fullPath + "Tile Maps\\tileMap." + i.ToString("d3") + ".bin");
                     br = new BinaryReader(fs);
                     model.TileMaps[i] = br.ReadBytes(model.TileMaps[i].Length);
                     br.Close();
@@ -2158,9 +2107,9 @@ namespace SMRPGED
                 }
                 for (int i = 0; i < model.TileSets.Length; i++)
                 {
-                    if (!File.Exists(path + "Tile Sets\\tileSet." + i.ToString("X3") + ".bin"))
+                    if (!File.Exists(fullPath + "Tile Sets\\tileSet." + i.ToString("d3") + ".bin"))
                         continue;
-                    fs = File.OpenRead(path + "Tile Sets\\tileSet." + i.ToString("X3") + ".bin");
+                    fs = File.OpenRead(fullPath + "Tile Sets\\tileSet." + i.ToString("d3") + ".bin");
                     br = new BinaryReader(fs);
                     model.TileSets[i] = br.ReadBytes(model.TileSets[i].Length);
                     br.Close();
@@ -2170,9 +2119,9 @@ namespace SMRPGED
                 }
                 for (int i = 0; i < model.TileSetsBF.Length; i++)
                 {
-                    if (!File.Exists(path + "Battlefield Tile Sets\\tileSetBF." + i.ToString("X3") + ".bin"))
+                    if (!File.Exists(fullPath + "Battlefield Tile Sets\\tileSetBF." + i.ToString("d3") + ".bin"))
                         continue;
-                    fs = File.OpenRead(path + "Battlefield Tile Sets\\tileSetBF." + i.ToString("X3") + ".bin");
+                    fs = File.OpenRead(fullPath + "Battlefield Tile Sets\\tileSetBF." + i.ToString("d3") + ".bin");
                     br = new BinaryReader(fs);
                     model.TileSetsBF[i] = br.ReadBytes(model.TileSetsBF[i].Length);
                     br.Close();
@@ -2186,13 +2135,21 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem importing the arrays.");
+                MessageBox.Show("There was a problem importing the arrays.","LAZY SHELL");
             }
         }
 
         private void dumpTextToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StreamWriter npcrip = File.CreateText("NPCS.log");
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 0;
+            saveFileDialog.FileName = "NPCS.txt";
+            saveFileDialog.RestoreDirectory = true;
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            StreamWriter npcrip = File.CreateText(saveFileDialog.FileName);
             Level tlvl;
             LevelNPCs.NPC tnpc;
             LevelNPCs.NPC.Instance tins;
@@ -2206,7 +2163,7 @@ namespace SMRPGED
                 tlvl = levels[i];
                 offset = tlvl.LevelNPCs.StartingOffset;
 
-                npcrip.WriteLine("[" + i.ToString("X3") + "]" +
+                npcrip.WriteLine("[" + i.ToString("d3") + "]" +
                     "------------------------------------------------------------>");
 
                 for (int j = 0; j < tlvl.LevelNPCs.npcs.Count; j++)
@@ -2464,8 +2421,6 @@ namespace SMRPGED
                 this.areaPropertiesPanel.Visible = false;
                 this.panelLevelPicture.Left -= areaPropertiesPanel.Width;
                 this.panelLevelPicture.Width += areaPropertiesPanel.Width;
-                this.panel10.Left -= areaPropertiesPanel.Width;
-                this.panel10.Width += areaPropertiesPanel.Width;
                 this.label67.Left -= areaPropertiesPanel.Width;
                 this.label67.Width += areaPropertiesPanel.Width;
                 this.labelTileCoords.Left -= areaPropertiesPanel.Width;
@@ -2477,8 +2432,6 @@ namespace SMRPGED
                 this.areaPropertiesPanel.Visible = true;
                 this.panelLevelPicture.Left += areaPropertiesPanel.Width;
                 this.panelLevelPicture.Width -= areaPropertiesPanel.Width;
-                this.panel10.Left += areaPropertiesPanel.Width;
-                this.panel10.Width -= areaPropertiesPanel.Width;
                 this.label67.Left += areaPropertiesPanel.Width;
                 this.label67.Width -= areaPropertiesPanel.Width;
                 this.labelTileCoords.Left += areaPropertiesPanel.Width;
@@ -2787,7 +2740,7 @@ namespace SMRPGED
             if (overlay.DragStart.X == overlay.DragStop.X || overlay.DragStart.Y == overlay.DragStop.Y)
             {
                 MessageBox.Show("Need to make a selection before creating a new template.",
-                    "WARNING: NO SELECTION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -2831,7 +2784,7 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem loading the templates");
+                MessageBox.Show("There was a problem loading the templates", "LAZY SHELL");
             }
         }
         private void templateExport_Click(object sender, EventArgs e)
@@ -2846,9 +2799,6 @@ namespace SMRPGED
 
             Stream s;
             BinaryFormatter b = new BinaryFormatter();
-            s = File.Create(path + "Do Not Modify This Directory Or Files Contained Within.txt");
-            s.Close();
-
             try
             {
                 foreach (LevelTemplate lt in templates)
@@ -2859,7 +2809,7 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem saving the templates");
+                MessageBox.Show("There was a problem saving the templates", "LAZY SHELL");
             }
         }
         private void templateDelete_Click(object sender, EventArgs e)
@@ -2922,7 +2872,7 @@ namespace SMRPGED
         {
             if (templateRenameText.Text == "")
             {
-                MessageBox.Show("A template name cannot be empty.", "WARNING: EMPTY STRING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("A template name cannot be empty.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             foreach (LevelTemplate lt in templates)
@@ -2930,7 +2880,7 @@ namespace SMRPGED
                 if (template != lt && templateRenameText.Text == lt.Name)
                 {
                     MessageBox.Show("Cannot rename " + lt.Name + ". A template with the name you specified already exists.",
-                        "WARNING: CANNOT RENAME TEMPLATE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                       "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 else if (template == lt && template.Name == templateRenameText.Text)
@@ -2953,7 +2903,7 @@ namespace SMRPGED
         {
             if (templateName.Text == "")
             {
-                MessageBox.Show("A template name cannot be empty.", "WARNING: EMPTY STRING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("A template name cannot be empty.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -3114,6 +3064,11 @@ namespace SMRPGED
             MouseEventArgs m = new MouseEventArgs(e.Button, e.Clicks, (int)(e.X / zoom), (int)(e.Y / zoom), e.Delta);
             if (e.Button == MouseButtons.Left)
             {
+                if (state.Dropper)
+                {
+                    MakeSelectColor(m);
+                    return;
+                }
                 if (state.Template)
                 {
                     MakeEditTemplate(m, pictureBoxLevel.CreateGraphics());
@@ -3133,11 +3088,6 @@ namespace SMRPGED
                     MakeEditErase(m, pictureBoxLevel.CreateGraphics());
 
                     panelLevelPicture.AutoScrollPosition = p;
-                    return;
-                }
-                if (state.Dropper)
-                {
-                    MakeSelectColor(m);
                     return;
                 }
             }
@@ -3652,7 +3602,6 @@ namespace SMRPGED
 
             if (!panelTilesetsMax)
             {
-                panel10.Visible = true;
                 label67.Visible = true;
                 panelTilesets.Size = new Size(270, panel1.Height - 3);
                 panelTilesets.Location = new Point(panel1.Width - panelTilesets.Width - 1, 1);
@@ -3661,7 +3610,6 @@ namespace SMRPGED
             else
             {
                 Size s = panel1.Size;
-                panel10.Visible = false;
                 label67.Visible = false;
                 panelTilesets.Location = new Point(1, 1);
                 panelTilesets.Size = new Size(s.Width - 2, s.Height - 3);
@@ -3883,8 +3831,6 @@ namespace SMRPGED
         private void cancelButton_Click(object sender, EventArgs e)
         {
             if (ExportLevelImages.IsBusy) ExportLevelImages.CancelAsync();
-            else if (ExportLevelData.IsBusy) ExportLevelData.CancelAsync();
-            else ImportLevelData.CancelAsync();
         }
 
         // level name editor
@@ -3936,7 +3882,7 @@ namespace SMRPGED
             }
             catch
             {
-                MessageBox.Show("There was a problem loading the search item. Try doing another search.");
+                MessageBox.Show("There was a problem loading the search item. Try doing another search.", "LAZY SHELL");
             }
         }
         private void nameTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -3982,7 +3928,7 @@ namespace SMRPGED
 
             if (model.AssembleLevels)
             {
-                result = MessageBox.Show("Would you like to save changes?", "Save and quit Level Editor?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                result = MessageBox.Show("Would you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                     saveLevels_Click(null, null);
@@ -3994,7 +3940,7 @@ namespace SMRPGED
 
             }
             model.AssembleLevels = false;
-
+            settings.Save();
         }
         private void Levels_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -4023,39 +3969,28 @@ namespace SMRPGED
 
         #endregion
 
-        private bool colEditBF = false;
-
-        private void colEditApplyBF_Click(object sender, EventArgs e)
+        private void addThisLevelToNotesDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            colEditBF = true;
-
-            colEditApply_Click(null, null);
-
-            colEditBF = false;
+            if (model.Program.Notes == null || !model.Program.Notes.Visible)
+                model.Program.CreateNotesWindow();
+            Notes temp = model.Program.Notes;
+            if (temp.ThisNotes == null)
+                temp.LoadNotes();
+            if (temp.ThisNotes != null)
+            {
+                temp.AddingFromEditor(1, currentLevel, settings.LevelNames[currentLevel], settings.LevelNames[currentLevel]);
+                temp.BringToFront();
+            }
+            else
+            {
+                MessageBox.Show("Could not add element to notes database.", "LAZY SHELL",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        private void colEditResetBF_Click(object sender, EventArgs e)
+
+        private void textBox1_Leave(object sender, EventArgs e)
         {
-            colEditBF = true;
-
-            colEditReset_Click(null, null);
-
-            colEditBF = false;
-        }
-        private void colEditUndoBF_Click(object sender, EventArgs e)
-        {
-            colEditBF = true;
-
-            colEditUndo_Click(null, null);
-
-            colEditBF = false;
-        }
-        private void colEditRedoBF_Click(object sender, EventArgs e)
-        {
-            colEditBF = true;
-
-            colEditRedo_Click(null, null);
-
-            colEditBF = false;
+            //settings.Save();
         }
     }
 }

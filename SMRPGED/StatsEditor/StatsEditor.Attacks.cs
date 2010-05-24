@@ -55,14 +55,6 @@ namespace SMRPGED.StatsEditor
         }
         private void SaveAttackNotes()
         {
-            try
-            {
-                this.textBoxAttackNotes.SaveFile(notes.GetPath() + "main-stats-attacks.rtf");
-            }
-            catch
-            {
-                System.Windows.Forms.MessageBox.Show("Error saving attack notes. Please report this");
-            }
         }
 
         #region Event Handlers

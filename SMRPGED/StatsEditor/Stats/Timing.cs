@@ -586,7 +586,7 @@ namespace SMRPGED.StatsEditor.Stats
                         default:
                             int offset = ((i - 1) * 11) + 0x359AD7;
                             BitManager.SetByte(data, offset, multipleSpellInstanceRange[1, i]);
-                            BitManager.SetByte(data, offset + 2, multipleSpellInstanceRange[0, i]);
+                            BitManager.SetByte(data, offset + 2, multipleSpellInstanceRange[1, i]);
                             break;
                     }
                 }

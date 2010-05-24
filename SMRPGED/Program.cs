@@ -14,6 +14,7 @@ namespace SMRPGED
         private Levels levels; public Levels Levels { get { return levels; } }
         private Sprites sprites; public Sprites Sprites { get { return sprites; } }
         private Scripts scripts; public Scripts Scripts { get { return scripts; } }
+        private Notes notes; public Notes Notes { get { return notes; } }
         private GamePatches patches;
         private Model model;
         private Settings settings;
@@ -24,6 +25,20 @@ namespace SMRPGED
         [STAThread]
         public static void Main(string[] args)
         {
+            if (IntPtr.Size == 8)
+            {
+                DialogResult result = MessageBox.Show(
+                    "You are attempting to run Lazy Shell under a 64-bit OS. Several portions\n" +
+                    "of this application are incapable of running within a 64-bit environment.\n" +
+                    "Open \"CorFlags.bat\" to run Lazy Shell within a 32-bit environment.\n\n" +
+                    "Continue using this application anyways?",
+                    "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+            }
+            
             Program App = new Program();
         }
 
@@ -189,7 +204,7 @@ namespace SMRPGED
         {
             if ((stats != null && stats.Visible) || (levels != null && levels.Visible) || (scripts != null && scripts.Visible) || (sprites != null && sprites.Visible))
             {
-                DialogResult result = MessageBox.Show("It is highly recommended that you close and save any editor windows before patching via CIRRUS. Would you like to save and close all current windows?", "Save and close?", MessageBoxButtons.YesNoCancel);
+                DialogResult result = MessageBox.Show("It is highly recommended that you close and save any editor windows before patching. Would you like to save and close all current windows?", "LAZY SHELL", MessageBoxButtons.YesNoCancel);
 
                 if (result == DialogResult.Yes)
                     AssembleAndCloseWindows();
@@ -202,6 +217,14 @@ namespace SMRPGED
                 patches = new GamePatches(model);
                 patches.Show();
                 patches.StartDownloadingPatches();
+            }
+        }
+        public void CreateNotesWindow()
+        {
+            if (notes == null || !notes.Visible)
+            {
+                notes = new Notes(model);
+                notes.Show();
             }
         }
         public void CreateNewLevelsCommandStack()

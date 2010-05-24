@@ -41,7 +41,7 @@ namespace SMRPGED.ScriptsEditor
             for (int i = 0; i < battleScripts.Length; i++)
                 battleScripts[i] = new BattleScript(data, i);
         }
-        private void CreateEventScripts()
+        public void CreateEventScripts()
         {
             this.eventScripts = new EventScript[4096];
 

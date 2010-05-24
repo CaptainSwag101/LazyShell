@@ -83,11 +83,13 @@ namespace SMRPGED.Encryption
             // 
             this.dateStampCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
             this.dateStampCheckBox.BackColor = System.Drawing.SystemColors.Control;
-            this.dateStampCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Desktop;
+            this.dateStampCheckBox.FlatAppearance.BorderSize = 0;
+            this.dateStampCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.dateStampCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dateStampCheckBox.Location = new System.Drawing.Point(124, 39);
+            this.dateStampCheckBox.ForeColor = System.Drawing.Color.Gray;
+            this.dateStampCheckBox.Location = new System.Drawing.Point(125, 40);
             this.dateStampCheckBox.Name = "dateStampCheckBox";
-            this.dateStampCheckBox.Size = new System.Drawing.Size(123, 19);
+            this.dateStampCheckBox.Size = new System.Drawing.Size(121, 17);
             this.dateStampCheckBox.TabIndex = 3;
             this.dateStampCheckBox.Text = "DATE STAMP";
             this.dateStampCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -168,11 +170,13 @@ namespace SMRPGED.Encryption
             // 
             this.publishedCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
             this.publishedCheckBox.BackColor = System.Drawing.SystemColors.Control;
-            this.publishedCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Desktop;
+            this.publishedCheckBox.FlatAppearance.BorderSize = 0;
+            this.publishedCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.publishedCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.publishedCheckBox.Location = new System.Drawing.Point(1, 39);
+            this.publishedCheckBox.ForeColor = System.Drawing.Color.Gray;
+            this.publishedCheckBox.Location = new System.Drawing.Point(2, 40);
             this.publishedCheckBox.Name = "publishedCheckBox";
-            this.publishedCheckBox.Size = new System.Drawing.Size(123, 19);
+            this.publishedCheckBox.Size = new System.Drawing.Size(121, 17);
             this.publishedCheckBox.TabIndex = 2;
             this.publishedCheckBox.Text = "PUBLISHED";
             this.publishedCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -197,10 +201,14 @@ namespace SMRPGED.Encryption
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.publishedCheckBox);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AuthorStamp";
-            this.Text = "AuthorStamp";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "AUTHOR STAMP";
+            this.TopMost = true;
             this.panel64.ResumeLayout(false);
             this.panel64.PerformLayout();
             this.panel1.ResumeLayout(false);

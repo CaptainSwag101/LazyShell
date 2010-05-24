@@ -98,11 +98,11 @@ namespace SMRPGED
 
         public void UpdateOffsets(short delta, int current)
         {
-            if (framePacketPointer != 0x7FFF && framePacketPointer > current)
+            if (framePacketPointer != 0x7FFF && framePacketPointer >= current)
                 framePacketPointer = (ushort)(framePacketPointer + delta);
 
             foreach (Frame f in frames)
-                if (f.FrameOffset > current)
+                if (f.FrameOffset >= current)
                     f.FrameOffset = (ushort)(f.FrameOffset + delta);
         }
     }

@@ -163,11 +163,11 @@ namespace SMRPGED
             updatingLevel = false;
         }
 
-        public bool CalculateFreeEventSpace()
+        public bool CalculateFreeEventSpace(bool showMessageBox)
         {
             int used = 0;
 
-            for (int i = 0; i < 512; i++)
+            for (int i = 0; i < 510; i++)
             {
                 used += 3; // for the music and initial event
                 for (int j = 0; j < levels[i].LevelEvents.NumberOfEvents; j++)
@@ -177,7 +177,8 @@ namespace SMRPGED
 
                     if ((used + 6) > 0x1BFF)
                     {
-                        MessageBox.Show("WARNING: Cannot insert the field. The total number of events for all levels has exceeded the maximum allotted space.", "TOTAL EVENTS LENGTH EXCEEDED", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        if (showMessageBox)
+                            MessageBox.Show("WARNING: Cannot insert the field. The total number of events for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return true;
                     }
                 }
@@ -248,7 +249,7 @@ namespace SMRPGED
 
             if (updatingLevel) return;
 
-            if (!CalculateFreeEventSpace())
+            if (!CalculateFreeEventSpace(true))
             {
                 events.CurrentEvent = this.eventsFieldTree.SelectedNode.Index;
                 events.LengthOverOne = this.eventsLengthOverOne.Checked;
@@ -347,7 +348,7 @@ namespace SMRPGED
         {
             Point o = new Point(Math.Abs(pictureBoxLevel.Left), Math.Abs(pictureBoxLevel.Top));
             Point p = new Point(physicalMap.OrthCoordsX[o.Y * 1024 + o.X] + 2, physicalMap.OrthCoordsY[o.Y * 1024 + o.X] + 4);
-            if (!CalculateFreeEventSpace())
+            if (!CalculateFreeEventSpace(true))
             {
                 this.eventsFieldTree.Focus();
                 if (events.NumberOfEvents < 28)
@@ -374,7 +375,7 @@ namespace SMRPGED
                     eventsFieldTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("WARNING: Cannot insert anymore event fields. The maximum number of event fields allowed is 28.", "WARNING: Cannot insert any more event fields", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("WARNING: Cannot insert anymore event fields. The maximum number of event fields allowed is 28.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         private void eventsDeleteField_Click(object sender, EventArgs e)
