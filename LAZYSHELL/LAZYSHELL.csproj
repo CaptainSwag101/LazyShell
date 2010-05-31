@@ -1,0 +1,661 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{71AABC1D-6183-4308-84E2-ADFD6DB2C881}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LAZYSHELL</RootNamespace>
+    <AssemblyName>LAZYSHELL</AssemblyName>
+    <StartupObject>LAZYSHELL.Program</StartupObject>
+    <ApplicationIcon>LAZYSHELL_icon.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\BaseConvertor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\BaseConvertor.Designer.cs">
+      <DependentUpon>BaseConvertor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataStructures\StreamBuf.cs" />
+    <Compile Include="Compression\LSCompression.cs" />
+    <Compile Include="Encryption\AuthorStamp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Encryption\AuthorStamp.Designer.cs">
+      <DependentUpon>AuthorStamp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BitManager.cs" />
+    <Compile Include="Decomp\LCDecomp.cs" />
+    <Compile Include="Encryption\EnterPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Encryption\EnterPassword.Designer.cs">
+      <DependentUpon>EnterPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Encryption\HashCheckFail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Encryption\HashCheckFail.Designer.cs">
+      <DependentUpon>HashCheckFail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Encryption\SignatureViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Encryption\SignatureViewer.Designer.cs">
+      <DependentUpon>SignatureViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Encryption\Stamp.cs" />
+    <Compile Include="Features\FixPointers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\FixPointers.Designer.cs">
+      <DependentUpon>FixPointers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ImportExportElements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\ImportExportElements.Designer.cs">
+      <DependentUpon>ImportExportElements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Levels\Levels.Battlefields.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.Events.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.Exits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.Layers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.Maps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.NPCs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.Overlaps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.PhysicalTiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\LevelModel.cs" />
+    <Compile Include="Levels\Levels.TileEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.Tilesets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.Editing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.ExtraFeatures.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels\LevelOverlaps.cs" />
+    <Compile Include="Levels\Levels\NPCProperties.cs" />
+    <Compile Include="Levels\Levels\NPCSpritePartitions.cs" />
+    <Compile Include="Levels\Forms\OpenNPCSpritePartitions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Forms\OpenNPCSpritePartitions.Designer.cs">
+      <DependentUpon>OpenNPCSpritePartitions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Levels\Levels\PaletteSet.cs" />
+    <Compile Include="Levels\Levels.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels.designer.cs">
+      <DependentUpon>Levels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Levels\Levels\LevelEvents.cs" />
+    <Compile Include="Levels\Levels\LevelExits.cs" />
+    <Compile Include="Levels\Levels\LevelLayer.cs" />
+    <Compile Include="Levels\Levels\Level\Battlefield.cs" />
+    <Compile Include="Levels\Levels\Level\Level.cs" />
+    <Compile Include="Levels\Levels\Level\LevelMap.cs" />
+    <Compile Include="Levels\Levels\LevelNPCs.cs" />
+    <Compile Include="Levels\Levels\Overlay.cs" />
+    <Compile Include="Levels\Levels\PrioritySet.cs" />
+    <Compile Include="Levels\Forms\SearchNPC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Forms\SearchNPC.Designer.cs">
+      <DependentUpon>SearchNPC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Levels\Forms\SearchPhysicalTile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Forms\SearchPhysicalTile.Designer.cs">
+      <DependentUpon>SearchPhysicalTile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Levels\Levels\SerializedLevel.cs" />
+    <Compile Include="Levels\Forms\SpaceAnalyzer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Levels\Forms\SpaceAnalyzer.Designer.cs">
+      <DependentUpon>SpaceAnalyzer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Levels\Levels\Tiles\BattlefieldTileSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Levels\Levels\Tiles\OverlapTileset.cs" />
+    <Compile Include="Levels\Levels\Tiles\PhysicalMap.cs" />
+    <Compile Include="Levels\Levels\Tiles\PhysicalTile.cs" />
+    <Compile Include="Levels\Levels\Tiles\Tile16x16.cs" />
+    <Compile Include="Levels\Levels\Tiles\Tile8x8.cs" />
+    <Compile Include="Levels\Levels\Tiles\TileMap.cs" />
+    <Compile Include="Levels\Levels\Tiles\Tile32x32.cs" />
+    <Compile Include="Levels\Levels\Tiles\Tileset.cs" />
+    <Compile Include="Levels\LevelTemplate.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="MRUManager.cs" />
+    <Compile Include="Features\Notes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\Notes.Designer.cs">
+      <DependentUpon>Notes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\NotesDB.cs" />
+    <Compile Include="Patches\GamePatches.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Patches\GamePatches.designer.cs">
+      <DependentUpon>GamePatches.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Patches\IPSPatch.cs" />
+    <Compile Include="Patches\Patch.cs" />
+    <Compile Include="Previewer\MenuTextPreview.cs" />
+    <Compile Include="Previewer\Previewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Previewer\Previewer.Designer.cs">
+      <DependentUpon>Previewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProgramController.cs" />
+    <Compile Include="Features\ProgressBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\ProgressBar.Designer.cs">
+      <DependentUpon>ProgressBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="About.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Levels\Levels.resx">
+      <DependentUpon>Levels.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Form1.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\Scripts.resx">
+      <DependentUpon>Scripts.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sprites\Sprites.resx">
+      <DependentUpon>Sprites.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>
+      </SubType>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Encryption\Cipher.cs" />
+    <Compile Include="Features\Restore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\Restore.Designer.cs">
+      <DependentUpon>Restore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Scripts\ActionQueue.cs" />
+    <Compile Include="Scripts\Animations\AnimationScript.cs" />
+    <Compile Include="Scripts\Animations\AnimationScriptCommand.cs" />
+    <Compile Include="Scripts\Animations\A_ScriptEnums.cs" />
+    <Compile Include="Scripts\Animations\A_ScriptIterator.cs" />
+    <Compile Include="Scripts\Animations\A_TreeViewWrapper.cs" />
+    <Compile Include="Scripts\Animations\Interpreter.AnimationScripts.cs" />
+    <Compile Include="Scripts\BattleScript.cs" />
+    <Compile Include="Scripts\Commands\EventScripts-ActionQueues\ActionQueueCommand.cs" />
+    <Compile Include="Scripts\Commands\BattleScript\BattleCommands.cs" />
+    <Compile Include="Scripts\Commands\BattleScript\BattleScriptCommand.cs" />
+    <Compile Include="Scripts\Commands\EventScripts-ActionQueues\EventActionCommand.cs" />
+    <Compile Include="Scripts\Commands\EventScripts-ActionQueues\Interpreter.ActionQueues.cs" />
+    <Compile Include="Scripts\Commands\EventScripts-ActionQueues\Interpreter.cs" />
+    <Compile Include="Scripts\Commands\EventScripts-ActionQueues\EventScriptCommand.cs" />
+    <Compile Include="Scripts\Commands\EventScripts-ActionQueues\Interpreter.EventScripts.cs" />
+    <Compile Include="Scripts\Commands\BattleScript\ScriptCommand.cs" />
+    <Compile Include="Scripts\Commands\EventScripts-ActionQueues\ScriptIterator.cs" />
+    <Compile Include="Scripts\EventScript.cs" />
+    <Compile Include="Scripts\Animations\Scripts.AnimationScripts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scripts\TreeViewWrapper.cs">
+    </Compile>
+    <Compile Include="Scripts\ScriptEnums.cs" />
+    <Compile Include="Scripts\Scripts.ActionQueues.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scripts\Scripts.BattleScripts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scripts\Scripts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scripts\Scripts.designer.cs">
+      <DependentUpon>Scripts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Scripts\Scripts.EventScripts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scripts\ScriptsModel.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Features\ClearElements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\ClearElements.Designer.cs">
+      <DependentUpon>ClearElements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sprites\Dialogue\BattleDialogueTileset.cs" />
+    <Compile Include="Sprites\Dialogue\DialogueTileset.cs" />
+    <Compile Include="Sprites\Effects\Effect.cs" />
+    <Compile Include="Sprites\Effects\E_Animation.cs" />
+    <Compile Include="Sprites\Effects\E_Mold.cs" />
+    <Compile Include="Sprites\Effects\E_Sequence.cs" />
+    <Compile Include="Sprites\Effects\E_Tileset.cs" />
+    <Compile Include="Sprites\Maps\MapPoint.cs" />
+    <Compile Include="Sprites\Maps\WorldMap.cs" />
+    <Compile Include="Sprites\Maps\WorldMapPalettes.cs" />
+    <Compile Include="Sprites\Maps\WorldMapTileset.cs" />
+    <Compile Include="Sprites\MenuTileset.cs" />
+    <Compile Include="Sprites\SpriteModel.cs" />
+    <Compile Include="Sprites\Sprites.Dialogues.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sprites\Sprites.DialogueTilesets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sprites\Sprites.Effects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sprites\Sprites.Fonts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sprites\Sprites.MapPoints.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sprites\Sprites.WorldMaps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sprites\Sprites.Sprites.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sprites\Sprites\Mold.cs" />
+    <Compile Include="Sprites\Sprites\Sequence.cs" />
+    <Compile Include="Sprites\Sprites\SpritePalette.cs" />
+    <Compile Include="Sprites\Sprites\Sprite.cs" />
+    <Compile Include="Sprites\Sprites\GraphicPalette.cs" />
+    <Compile Include="Sprites\Sprites.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sprites\Sprites.designer.cs">
+      <DependentUpon>Sprites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sprites\Sprites\Animation.cs" />
+    <Compile Include="State.cs" />
+    <Compile Include="Previewer\BattleDialoguePreview.cs" />
+    <Compile Include="Previewer\MenuDescriptionPreview.cs" />
+    <Compile Include="StatsEditor\Stats\Attack.cs" />
+    <Compile Include="StatsEditor\Stats\Character.cs" />
+    <Compile Include="StatsEditor\Stats\Formation.cs" />
+    <Compile Include="StatsEditor\Stats\FormationPack.cs" />
+    <Compile Include="StatsEditor\Stats\Item.cs" />
+    <Compile Include="StatsEditor\Stats\Monster.cs" />
+    <Compile Include="StatsEditor\Stats\Shop.cs" />
+    <Compile Include="StatsEditor\Stats\Slot.cs" />
+    <Compile Include="StatsEditor\Stats\Spell.cs" />
+    <Compile Include="StatsEditor\StatsEditor.Attacks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsEditor\StatsEditor.Characters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsEditor\StatsEditor.Formations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsEditor\StatsEditor.Items.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsEditor\StatsEditor.Monsters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsEditor\StatsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsEditor\StatsEditor.Designer.cs">
+      <DependentUpon>StatsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatsEditor\StatsEditor.Shops.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsEditor\StatsEditor.Spells.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsEditor\StatsEditor.Timing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsEditor\StatsModel.cs" />
+    <Compile Include="StatsEditor\Stats\Timing.cs" />
+    <Compile Include="StatsEditor\DDlistName.cs" />
+    <Compile Include="Previewer\DialoguePreview.cs" />
+    <Compile Include="Sprites\Dialogue\BattleDialogue.cs" />
+    <Compile Include="Sprites\Dialogue\Dialogue.cs" />
+    <Compile Include="Sprites\Dialogue\TextHelper.cs">
+    </Compile>
+    <Compile Include="Sprites\Dialogue\TextHelperReduced.cs" />
+    <Compile Include="Sprites\Dialogue\FontCharacter.cs" />
+    <Compile Include="Undo\CheckedListBoxCommand.cs" />
+    <Compile Include="Undo\ComboBoxCommand.cs" />
+    <Compile Include="Undo\Command.cs" />
+    <Compile Include="Undo\CommandStack.cs" />
+    <Compile Include="Undo\PhysicalMapEditCommand.cs" />
+    <Compile Include="Undo\TileMapEditCommand.cs" />
+    <Compile Include="Undo\NewComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Undo\NewNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Undo\NewTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Undo\NumericUpDownCommand.cs" />
+    <Compile Include="Undo\TrackBarCommand.cs" />
+    <Compile Include="Encryption\VerifyBeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Encryption\VerifyBeta.Designer.cs">
+      <DependentUpon>VerifyBeta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UniversalVariables.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Features\BaseConvertor.resx">
+      <DependentUpon>BaseConvertor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Encryption\AuthorStamp.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AuthorStamp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CursorDraw.cur" />
+    <EmbeddedResource Include="CursorErase.cur" />
+    <EmbeddedResource Include="Encryption\EnterPassword.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EnterPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Encryption\HashCheckFail.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>HashCheckFail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Encryption\SignatureViewer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SignatureViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FixPointers.resx">
+      <DependentUpon>FixPointers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\ImportExportElements.resx">
+      <DependentUpon>ImportExportElements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Levels\Forms\OpenNPCSpritePartitions.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OpenNPCSpritePartitions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Levels\Forms\SearchNPC.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SearchNPC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Levels\Forms\SearchPhysicalTile.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SearchPhysicalTile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Levels\Forms\SpaceAnalyzer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SpaceAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Notes.resx">
+      <DependentUpon>Notes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Patches\GamePatches.resx">
+      <DependentUpon>GamePatches.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Previewer\Previewer.resx">
+      <DependentUpon>Previewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\ProgressBar.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Encryption\VerifyBeta.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>VerifyBeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CursorDropper.cur" />
+    <EmbeddedResource Include="CursorZoomIn.cur" />
+    <EmbeddedResource Include="CursorZoomOut.cur" />
+    <EmbeddedResource Include="Features\Restore.resx">
+      <DependentUpon>Restore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\ClearElements.resx">
+      <DependentUpon>ClearElements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatsEditor\StatsEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>StatsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CursorTemplate.cur" />
+    <Content Include="LAZYSHELL_icon.ico" />
+    <Content Include="Patches\PatchFormat.txt" />
+    <None Include="Resources\Tiles\quadBlock.gif" />
+    <None Include="Resources\Tiles\halfQuadBlock.gif" />
+    <None Include="Resources\Tiles\quadBase.gif" />
+    <None Include="Resources\Tiles\stairsUpLeftHigh.gif" />
+    <None Include="Resources\Tiles\stairsUpLeftLow.gif" />
+    <None Include="Resources\Tiles\stairsUpRightHigh.gif" />
+    <None Include="Resources\Tiles\stairsUpRightLow.gif" />
+    <None Include="Resources\back.gif" />
+    <None Include="Resources\foward.gif" />
+    <None Include="Resources\fontBold.gif" />
+    <None Include="Resources\fontItalics.gif" />
+    <None Include="Resources\fontUnderline.gif" />
+    <None Include="Resources\buttonTogglePixelGrid.gif" />
+    <None Include="Resources\buttonToggleP1.gif" />
+    <None Include="Resources\buttonOverlaps.gif" />
+    <None Include="Resources\buttonToggleTileEditor.gif" />
+    <None Include="Resources\buttonToggleTemplates.gif" />
+    <None Include="Resources\flip_small.gif" />
+    <Content Include="Resources\LevelButtons\buttonEventField.gif" />
+    <Content Include="Resources\LevelButtons\buttonExitField.gif" />
+    <Content Include="Resources\LevelButtons\buttonNPC.gif" />
+    <Content Include="Resources\LevelButtons\buttonPhysical.gif" />
+    <Content Include="Resources\LevelButtons\buttonToggleGrid.gif" />
+    <Content Include="Resources\LevelButtons\buttonToggleMask.gif" />
+    <Content Include="Resources\LevelButtons\buttonToggleOrthGrid.gif" />
+    <Content Include="Resources\LevelButtons\buttonToggleProperties.gif" />
+    <None Include="Resources\preview.gif" />
+    <None Include="Resources\play.gif" />
+    <None Include="Resources\stop.gif" />
+    <None Include="Resources\movedown.gif" />
+    <None Include="Resources\moveup.gif" />
+    <None Include="Resources\move_small.gif" />
+    <None Include="Resources\search.gif" />
+    <None Include="Resources\new_small.gif" />
+    <None Include="Resources\open_small.gif" />
+    <None Include="Resources\save_small.gif" />
+    <None Include="Resources\template_small.gif" />
+    <None Include="Resources\mirror_small.gif" />
+    <Content Include="Resources\Tiles\fieldBase.gif" />
+    <Content Include="Resources\Tiles\fieldBlock.gif" />
+    <None Include="Resources\_bg.gif" />
+    <None Include="Resources\_transparent.gif" />
+    <None Include="Resources\transfer_small.gif" />
+    <None Include="Resources\Scripts\clearall.gif" />
+    <None Include="Resources\Scripts\collapseall.gif" />
+    <None Include="Resources\Scripts\delete.gif" />
+    <None Include="Resources\Scripts\edit.gif" />
+    <None Include="Resources\Scripts\expandall.gif" />
+    <None Include="Resources\Scripts\copy.gif" />
+    <None Include="Resources\LevelButtons\copy_small.gif" />
+    <None Include="Resources\LevelButtons\delete_small.gif" />
+    <None Include="Resources\LevelButtons\cut_small.gif" />
+    <None Include="Resources\LevelButtons\draw_small.gif" />
+    <None Include="Resources\LevelButtons\erase_small.gif" />
+    <None Include="Resources\Main\button_levels.gif" />
+    <None Include="Resources\Main\button_scripts.gif" />
+    <None Include="Resources\Main\button_sprites.gif" />
+    <None Include="Resources\Main\button_stats.gif" />
+    <None Include="Resources\Main\HAMMER.gif" />
+    <None Include="Resources\Main\title_smodrpg.gif" />
+    <None Include="Resources\Main\title_stats_bg.gif" />
+    <None Include="Resources\LevelButtons\select_small.gif" />
+    <None Include="Resources\LevelButtons\paste_small.gif" />
+    <None Include="Resources\LevelButtons\undo_small.gif" />
+    <None Include="Resources\LevelButtons\redo_small.gif" />
+    <None Include="Resources\LevelButtons\zoomout_small.gif" />
+    <None Include="Resources\LevelButtons\zoomin_small.gif" />
+    <None Include="Resources\Scripts\paste.gif" />
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

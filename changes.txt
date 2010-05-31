@@ -122,3 +122,5 @@ DATE		PORTION		DESCRIPTION
 2010-05-22	Stats		Fixed: timing for Ultra Jumps was saving wrong
 2010-05-23	Scripts		Fixed: right-clicking "Run dialogue" node wouldn't always open the menu
 2010-05-23	(all)		Added: warning when trying to run in 64-bit OS
+2010-05-28	Scripts		Fixed: updating problem when editing memory commands in battle scripts
+2010-05-30	(all)		Modif: names of items,spells,attacks,monsters are read from 3 diff keystroke tables
