@@ -86,9 +86,9 @@ namespace LAZYSHELL.StatsEditor
                 this.spellNameIcon.SelectedIndex = (int)(statsModel.Spells[(int)spellNum.Value].Name[0] - 0x20);
                 this.spellNameIcon.Invalidate();
                 if (spellNum.Value < 64)
-                    this.textBoxSpellName.Text = RawToASCII(statsModel.Spells[(int)this.spellNum.Value].Name, settings.KeystrokesMenu).Substring(1);
+                    this.textBoxSpellName.Text = Drawing.RawToASCII(statsModel.Spells[(int)this.spellNum.Value].Name, settings.KeystrokesMenu).Substring(1);
                 else
-                    this.textBoxSpellName.Text = RawToASCII(statsModel.Spells[(int)this.spellNum.Value].Name, settings.Keystrokes).Substring(1);
+                    this.textBoxSpellName.Text = Drawing.RawToASCII(statsModel.Spells[(int)this.spellNum.Value].Name, settings.Keystrokes).Substring(1);
 
                 if ((int)this.spellNum.Value > 0x1A)
                 {
@@ -219,7 +219,7 @@ namespace LAZYSHELL.StatsEditor
                     for (int x = 2, a = 0; x < 256; x++, a++)
                         pixels[y * 256 + x] = temp[c * 256 + a];
                 }
-                icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 14));
+                icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 14));
             }
             else
             {
@@ -230,7 +230,7 @@ namespace LAZYSHELL.StatsEditor
                     for (int x = 2, a = 8; a < 256; x++, a++)
                         pixels[y * 256 + x] = temp[c * 256 + a];
                 }
-                icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 32));
+                icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 32));
             }
 
             e.DrawBackground();
@@ -275,7 +275,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 16));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 16));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));
@@ -286,9 +286,9 @@ namespace LAZYSHELL.StatsEditor
             char[] raw = new char[15];
             char[] temp;
             if (spellNum.Value < 64)
-                temp = ASCIIToRaw(this.textBoxSpellName.Text, settings.KeystrokesMenu, 14);
+                temp = Drawing.ASCIIToRaw(this.textBoxSpellName.Text, settings.KeystrokesMenu, 14);
             else
-                temp = ASCIIToRaw(this.textBoxSpellName.Text, settings.Keystrokes, 14);
+                temp = Drawing.ASCIIToRaw(this.textBoxSpellName.Text, settings.Keystrokes, 14);
             for (int i = 0; i < 14; i++)
                 raw[i + 1] = temp[i];
             raw[0] = (char)(spellNameIcon.SelectedIndex + 32);
@@ -475,7 +475,7 @@ namespace LAZYSHELL.StatsEditor
             spellDescPixels = menuDescPreview.GetPreview(
                 descCharacters, palette, statsModel.Spells[(int)spellNum.Value].RawDescription,
                 new Size(120, 88), new Point(8, 8), 6);
-            spellDescImage = new Bitmap(DrawImageFromIntArr(spellDescPixels, 120, 88));
+            spellDescImage = new Bitmap(Drawing.PixelArrayToImage(spellDescPixels, 120, 88));
             pictureBoxSpellDesc.Invalidate();
         }
 

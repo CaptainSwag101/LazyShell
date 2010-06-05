@@ -99,7 +99,6 @@ namespace LAZYSHELL
             currentPalette = graphicPalettes[currentGraphicPalette].PaletteNum;
             this.paletteOffset.Value = currentPalette;
             currentColor = 0;
-            this.mapPaletteColor.Value = currentColor;
 
             updatingSprite = false;
         }
@@ -115,7 +114,7 @@ namespace LAZYSHELL
             mapPaletteBlueBar.Value = spritePalettes[currentPalette].PaletteColorBlue[currentColor];
 
             this.pictureBoxColor.BackColor = Color.FromArgb((int)mapPaletteRedNum.Value, (int)mapPaletteGreenNum.Value, (int)mapPaletteBlueNum.Value);
-
+            
             updatingSprite = false;
         }
         private void InitializeMolds()
@@ -608,20 +607,20 @@ namespace LAZYSHELL
         private void SetPaletteImage()
         {
             palettePixels = spritePalettes[currentPalette].GetPalettePixels();
-            paletteImage = new Bitmap(DrawImageFromIntArr(palettePixels, 256, 64));
+            paletteImage = new Bitmap(Drawing.PixelArrayToImage(palettePixels, 256, 128));
             pictureBoxPalette.Invalidate();
         }
         private void SetGraphicImage()
         {
             graphicPixels = GetGraphicPixels();
-            graphicImage = new Bitmap(DrawImageFromIntArr(graphicPixels, 128, 256));
+            graphicImage = new Bitmap(Drawing.PixelArrayToImage(graphicPixels, 128, 256));
             //pictureBoxGraphics.BackColor = Color.FromArgb(spritePalettes[currentPalette].PaletteColorRed[0], spritePalettes[currentPalette].PaletteColorGreen[0], spritePalettes[currentPalette].PaletteColorBlue[0]);
             pictureBoxGraphics.Invalidate();
         }
         private void SetMoldImage()
         {
             moldPixels = animations[currentAnimation].MoldPixels(!mouseClickTile);
-            moldImage = new Bitmap(DrawImageFromIntArr(moldPixels, 256, 256));
+            moldImage = new Bitmap(Drawing.PixelArrayToImage(moldPixels, 256, 256));
             //pictureBoxMold.BackColor = Color.FromArgb(spritePalettes[currentPalette].PaletteColorRed[0], spritePalettes[currentPalette].PaletteColorGreen[0], spritePalettes[currentPalette].PaletteColorBlue[0]);
             pictureBoxMold.Invalidate();
         }
@@ -634,7 +633,7 @@ namespace LAZYSHELL
             }
 
             tilesetPixels = animations[currentAnimation].TilesetPixels;
-            tilesetImage = new Bitmap(DrawImageFromIntArr(tilesetPixels, 128, 64));
+            tilesetImage = new Bitmap(Drawing.PixelArrayToImage(tilesetPixels, 128, 64));
             //pictureBoxMoldTileset.BackColor = Color.FromArgb(spritePalettes[currentPalette].PaletteColorRed[0], spritePalettes[currentPalette].PaletteColorGreen[0], spritePalettes[currentPalette].PaletteColorBlue[0]);
             pictureBoxMoldTileset.Invalidate();
         }
@@ -652,7 +651,7 @@ namespace LAZYSHELL
             }
 
             tilePixels = animations[currentAnimation].TilePixels;
-            tileImage = new Bitmap(DrawImageFromIntArr(tilePixels, 32, 32));
+            tileImage = new Bitmap(Drawing.PixelArrayToImage(tilePixels, 32, 32));
             //pictureBoxMoldTile.BackColor = Color.FromArgb(spritePalettes[currentPalette].PaletteColorRed[0], spritePalettes[currentPalette].PaletteColorGreen[0], spritePalettes[currentPalette].PaletteColorBlue[0]);
             pictureBoxMoldTile.Invalidate();
         }
@@ -676,7 +675,7 @@ namespace LAZYSHELL
 
             moldSubtile.Enabled = true;
             subtilePixels = animations[currentAnimation].SubtilePixels(currentSubtile);
-            subtileImage = new Bitmap(DrawImageFromIntArr(subtilePixels, 32, 32));
+            subtileImage = new Bitmap(Drawing.PixelArrayToImage(subtilePixels, 32, 32));
             //pictureBoxMoldSubtile.BackColor = Color.FromArgb(spritePalettes[currentPalette].PaletteColorRed[0], spritePalettes[currentPalette].PaletteColorGreen[0], spritePalettes[currentPalette].PaletteColorBlue[0]);
             pictureBoxMoldSubtile.Invalidate();
         }
@@ -692,7 +691,7 @@ namespace LAZYSHELL
                 if (animations[currentAnimation].FrameMold == molds.SelectedIndex)
                 {
                     framePixels = animations[currentAnimation].MoldPixels(false);
-                    frameImage = new Bitmap(DrawImageFromIntArr(framePixels, 256, 256));
+                    frameImage = new Bitmap(Drawing.PixelArrayToImage(framePixels, 256, 256));
                     sequenceImages.RemoveAt(i);
                     sequenceImages.Insert(i, new Bitmap(frameImage));
                     break;
@@ -718,7 +717,7 @@ namespace LAZYSHELL
                     animations[currentAnimation].CurrentMold = animations[currentAnimation].FrameMold;
                     UpdateAllTile8x8SubTiles();
                     framePixels = animations[currentAnimation].MoldPixels(false);
-                    frameImage = new Bitmap(DrawImageFromIntArr(framePixels, 256, 256));
+                    frameImage = new Bitmap(Drawing.PixelArrayToImage(framePixels, 256, 256));
                     sequenceImages.Add(new Bitmap(frameImage));
                 }
                 else
@@ -796,7 +795,7 @@ namespace LAZYSHELL
                 }
             }
 
-            return DrawImageFromIntArr(zoomed, s.Width * z, s.Height * z);
+            return Drawing.PixelArrayToImage(zoomed, s.Width * z, s.Height * z);
         }
 
         // import / export
@@ -1083,7 +1082,9 @@ namespace LAZYSHELL
             pictureBoxPalette.Focus();
 
             if (e.Y >= 16) return;
-            mapPaletteColor.Value = e.X / 16;
+            currentColor = e.X / 16;
+            InitializeSpritePaletteColor();
+            pictureBoxPalette.Invalidate();
         }
         private void pictureBoxPalette_Paint(object sender, PaintEventArgs e)
         {
@@ -1091,23 +1092,13 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(paletteImage, 0, 0);
 
             Point p = new Point(currentColor % 16 * 16, currentColor / 16 * 16);
-            if (p.Y == 0) p.Y++;
             overlay.DrawSelectionBox(e.Graphics, new Point(p.X + 15, p.Y + 15 - (p.Y % 16)), p, 1);
-        }
-        private void mapPaletteColor_ValueChanged(object sender, EventArgs e)
-        {
-            if (updatingSprite) return;
-
-            currentColor = (int)mapPaletteColor.Value;
-            InitializeSpritePaletteColor();
-
-            pictureBoxPalette.Invalidate();
         }
         private void mapPaletteRedNum_ValueChanged(object sender, EventArgs e)
         {
             if (updatingSprite) return;
 
-            mapPaletteRedNum.Value -= mapPaletteRedNum.Value % 8;
+            mapPaletteRedNum.Value = (int)mapPaletteRedNum.Value & 0xF8;
 
             mapPaletteRedBar.Value = (int)mapPaletteRedNum.Value;
             spritePalettes[currentPalette].PaletteColorRed[currentColor] = (int)mapPaletteRedNum.Value;
@@ -1120,7 +1111,7 @@ namespace LAZYSHELL
         {
             if (updatingSprite) return;
 
-            mapPaletteGreenNum.Value -= mapPaletteGreenNum.Value % 8;
+            mapPaletteGreenNum.Value = (int)mapPaletteGreenNum.Value & 0xF8;
 
             mapPaletteGreenBar.Value = (int)mapPaletteGreenNum.Value;
             spritePalettes[currentPalette].PaletteColorGreen[currentColor] = (int)mapPaletteGreenNum.Value;
@@ -1133,7 +1124,7 @@ namespace LAZYSHELL
         {
             if (updatingSprite) return;
 
-            mapPaletteBlueNum.Value -= mapPaletteBlueNum.Value % 8;
+            mapPaletteBlueNum.Value = (int)mapPaletteBlueNum.Value & 0xF8;
 
             mapPaletteBlueBar.Value = (int)mapPaletteBlueNum.Value;
             spritePalettes[currentPalette].PaletteColorBlue[currentColor] = (int)mapPaletteBlueNum.Value;
@@ -1146,22 +1137,19 @@ namespace LAZYSHELL
         {
             if (updatingSprite) return;
 
-            mapPaletteRedBar.Value -= mapPaletteRedBar.Value % 8;
-            mapPaletteRedNum.Value = mapPaletteRedBar.Value;
+            mapPaletteRedNum.Value = mapPaletteRedBar.Value & 0xF8;
         }
         private void mapPaletteGreenBar_Scroll(object sender, EventArgs e)
         {
             if (updatingSprite) return;
 
-            mapPaletteGreenBar.Value -= mapPaletteGreenBar.Value % 8;
-            mapPaletteGreenNum.Value = mapPaletteGreenBar.Value;
+            mapPaletteGreenNum.Value = mapPaletteGreenBar.Value & 0xF8;
         }
         private void mapPaletteBlueBar_Scroll(object sender, EventArgs e)
         {
             if (updatingSprite) return;
 
-            mapPaletteBlueBar.Value -= mapPaletteBlueBar.Value % 8;
-            mapPaletteBlueNum.Value = mapPaletteBlueBar.Value;
+            mapPaletteBlueNum.Value = mapPaletteBlueBar.Value & 0xF8;
         }
 
         // Sequence/frame properties
@@ -2427,7 +2415,9 @@ namespace LAZYSHELL
                     if (BitManager.GetBit(spriteGraphics, offset + 1, bit)) temp |= 2;
                     if (BitManager.GetBit(spriteGraphics, offset + 16, bit)) temp |= 4;
                     if (BitManager.GetBit(spriteGraphics, offset + 17, bit)) temp |= 8;
-                    mapPaletteColor.Value = temp;
+                    currentColor = temp;
+                    InitializeSpritePaletteColor(); 
+                    pictureBoxPalette.Invalidate();
                 }
                 currentPixel = (e.X / zoomG) + (e.Y / zoomG);
             }
@@ -2458,7 +2448,9 @@ namespace LAZYSHELL
                     if (BitManager.GetBit(spriteGraphics, offset + 1, bit)) temp |= 2;
                     if (BitManager.GetBit(spriteGraphics, offset + 16, bit)) temp |= 4;
                     if (BitManager.GetBit(spriteGraphics, offset + 17, bit)) temp |= 8;
-                    mapPaletteColor.Value = temp;
+                    currentColor = temp;
+                    InitializeSpritePaletteColor(); 
+                    pictureBoxPalette.Invalidate();
                 }
                 currentPixel = (e.X / zoomG) + (e.Y / zoomG);
             }

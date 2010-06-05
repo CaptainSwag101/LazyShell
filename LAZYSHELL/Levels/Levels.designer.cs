@@ -297,11 +297,11 @@ namespace LAZYSHELL
             this.pictureBoxTilesetL3 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelColorBalance = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
+            this.colEditBFPanel = new System.Windows.Forms.Panel();
             this.colEditApplyBF = new System.Windows.Forms.Button();
+            this.colEditUndoBF = new System.Windows.Forms.Button();
             this.colEditResetBF = new System.Windows.Forms.Button();
             this.colEditRedoBF = new System.Windows.Forms.Button();
-            this.colEditUndoBF = new System.Windows.Forms.Button();
             this.colEditRedo = new System.Windows.Forms.Button();
             this.colEditUndo = new System.Windows.Forms.Button();
             this.panel104 = new System.Windows.Forms.Panel();
@@ -506,9 +506,6 @@ namespace LAZYSHELL
             this.paletteAutoUpdate = new System.Windows.Forms.CheckBox();
             this.mapPaletteRedNum = new System.Windows.Forms.NumericUpDown();
             this.label79 = new System.Windows.Forms.Label();
-            this.pictureBoxColor = new System.Windows.Forms.PictureBox();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
-            this.label108 = new System.Windows.Forms.Label();
             this.panel40 = new System.Windows.Forms.Panel();
             this.mapPaletteSetName = new System.Windows.Forms.ComboBox();
             this.mapPaletteGreenNum = new System.Windows.Forms.NumericUpDown();
@@ -520,9 +517,25 @@ namespace LAZYSHELL
             this.label46 = new System.Windows.Forms.Label();
             this.mapPaletteRedBar = new System.Windows.Forms.TrackBar();
             this.mapPaletteBlueBar = new System.Windows.Forms.TrackBar();
+            this.pictureBoxColor = new System.Windows.Forms.PictureBox();
             this.panel63 = new System.Windows.Forms.Panel();
             this.labelTileCoords = new System.Windows.Forms.Label();
             this.labelPixelCoords = new System.Windows.Forms.Label();
+            this.panelTemplates = new System.Windows.Forms.Panel();
+            this.templatesLoaded = new System.Windows.Forms.ListBox();
+            this.panel114 = new System.Windows.Forms.Panel();
+            this.pictureBoxTemplate = new System.Windows.Forms.PictureBox();
+            this.panel115 = new System.Windows.Forms.Panel();
+            this.templateRenameText = new System.Windows.Forms.TextBox();
+            this.templateRename = new System.Windows.Forms.Button();
+            this.labelTemplates = new System.Windows.Forms.Label();
+            this.panelTemplatesSub = new System.Windows.Forms.Panel();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator44 = new System.Windows.Forms.ToolStripSeparator();
+            this.templateTransfer = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator45 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator43 = new System.Windows.Forms.ToolStripSeparator();
             this.panelTilesets = new System.Windows.Forms.Panel();
             this.labelTilesets = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -535,9 +548,9 @@ namespace LAZYSHELL
             this.panelBattlefieldTileset = new System.Windows.Forms.Panel();
             this.panelBattlefieldPalettes = new System.Windows.Forms.Panel();
             this.panel93 = new System.Windows.Forms.Panel();
+            this.colorBalanceBF = new System.Windows.Forms.Button();
             this.labelBattlefieldPalettes = new System.Windows.Forms.Label();
             this.battlefieldPaletteSetNum = new System.Windows.Forms.NumericUpDown();
-            this.pictureBoxColorBF = new System.Windows.Forms.PictureBox();
             this.label102 = new System.Windows.Forms.Label();
             this.bfPaletteGreenBar = new System.Windows.Forms.TrackBar();
             this.panel60 = new System.Windows.Forms.Panel();
@@ -548,11 +561,10 @@ namespace LAZYSHELL
             this.bfPaletteRedNum = new System.Windows.Forms.NumericUpDown();
             this.label123 = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
-            this.bfPaletteColorNum = new System.Windows.Forms.NumericUpDown();
             this.bfPaletteBlueNum = new System.Windows.Forms.NumericUpDown();
-            this.label121 = new System.Windows.Forms.Label();
             this.label78 = new System.Windows.Forms.Label();
             this.bfPaletteGreenNum = new System.Windows.Forms.NumericUpDown();
+            this.pictureBoxColorBF = new System.Windows.Forms.PictureBox();
             this.panelBattlefieldProperties = new System.Windows.Forms.Panel();
             this.panel92 = new System.Windows.Forms.Panel();
             this.labelBattlefieldProperties = new System.Windows.Forms.Label();
@@ -585,21 +597,6 @@ namespace LAZYSHELL
             this.panel61 = new System.Windows.Forms.Panel();
             this.battlefieldName = new System.Windows.Forms.ComboBox();
             this.battlefieldNum = new System.Windows.Forms.NumericUpDown();
-            this.panelTemplates = new System.Windows.Forms.Panel();
-            this.templatesLoaded = new System.Windows.Forms.ListBox();
-            this.panel114 = new System.Windows.Forms.Panel();
-            this.pictureBoxTemplate = new System.Windows.Forms.PictureBox();
-            this.panel115 = new System.Windows.Forms.Panel();
-            this.templateRenameText = new System.Windows.Forms.TextBox();
-            this.templateRename = new System.Windows.Forms.Button();
-            this.labelTemplates = new System.Windows.Forms.Label();
-            this.panelTemplatesSub = new System.Windows.Forms.Panel();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator44 = new System.Windows.Forms.ToolStripSeparator();
-            this.templateTransfer = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator45 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator43 = new System.Windows.Forms.ToolStripSeparator();
             this.panelLevelZoom = new System.Windows.Forms.Panel();
             this.panel117 = new System.Windows.Forms.Panel();
             this.pictureBoxLevelZoom = new System.Windows.Forms.PictureBox();
@@ -886,6 +883,7 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL3)).BeginInit();
             this.panel1.SuspendLayout();
             this.panelColorBalance.SuspendLayout();
+            this.colEditBFPanel.SuspendLayout();
             this.panel104.SuspendLayout();
             this.panel103.SuspendLayout();
             this.panelOverlapTileset.SuspendLayout();
@@ -968,8 +966,6 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.palettePictureBox)).BeginInit();
             this.contextMenuStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteRedNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
             this.panel40.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteGreenNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteBlueNum)).BeginInit();
@@ -977,6 +973,13 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteSetNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteRedBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteBlueBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).BeginInit();
+            this.panelTemplates.SuspendLayout();
+            this.panel114.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTemplate)).BeginInit();
+            this.panel115.SuspendLayout();
+            this.panelTemplatesSub.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
             this.panelTilesets.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -989,16 +992,15 @@ namespace LAZYSHELL
             this.panelBattlefieldPalettes.SuspendLayout();
             this.panel93.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.battlefieldPaletteSetNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorBF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenBar)).BeginInit();
             this.panel60.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPalettePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteColorNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorBF)).BeginInit();
             this.panelBattlefieldProperties.SuspendLayout();
             this.panel92.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet4Num)).BeginInit();
@@ -1016,12 +1018,6 @@ namespace LAZYSHELL
             this.panel45.SuspendLayout();
             this.panel61.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.battlefieldNum)).BeginInit();
-            this.panelTemplates.SuspendLayout();
-            this.panel114.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTemplate)).BeginInit();
-            this.panel115.SuspendLayout();
-            this.panelTemplatesSub.SuspendLayout();
-            this.toolStrip3.SuspendLayout();
             this.panelLevelZoom.SuspendLayout();
             this.panel117.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLevelZoom)).BeginInit();
@@ -2091,7 +2087,7 @@ namespace LAZYSHELL
             this.npcSpeedPlus.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.npcSpeedPlus.Location = new System.Drawing.Point(68, 169);
             this.npcSpeedPlus.Maximum = new decimal(new int[] {
-            1023,
+            7,
             0,
             0,
             0});
@@ -4745,8 +4741,8 @@ namespace LAZYSHELL
             this.panel1.Controls.Add(this.areaPropertiesPanel);
             this.panel1.Controls.Add(this.labelTileCoords);
             this.panel1.Controls.Add(this.labelPixelCoords);
-            this.panel1.Controls.Add(this.panelTilesets);
             this.panel1.Controls.Add(this.panelTemplates);
+            this.panel1.Controls.Add(this.panelTilesets);
             this.panel1.Location = new System.Drawing.Point(12, 54);
             this.panel1.MinimumSize = new System.Drawing.Size(990, 659);
             this.panel1.Name = "panel1";
@@ -4758,37 +4754,31 @@ namespace LAZYSHELL
             // panelColorBalance
             // 
             this.panelColorBalance.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelColorBalance.Controls.Add(this.label14);
-            this.panelColorBalance.Controls.Add(this.colEditApplyBF);
-            this.panelColorBalance.Controls.Add(this.colEditResetBF);
+            this.panelColorBalance.Controls.Add(this.colEditBFPanel);
             this.panelColorBalance.Controls.Add(this.colEditApply);
-            this.panelColorBalance.Controls.Add(this.colEditRedoBF);
             this.panelColorBalance.Controls.Add(this.colEditReset);
-            this.panelColorBalance.Controls.Add(this.colEditUndoBF);
             this.panelColorBalance.Controls.Add(this.colEditRedo);
             this.panelColorBalance.Controls.Add(this.colEditUndo);
             this.panelColorBalance.Controls.Add(this.panel104);
             this.panelColorBalance.Controls.Add(this.panel103);
             this.panelColorBalance.Controls.Add(this.panel101);
             this.panelColorBalance.Controls.Add(this.label139);
-            this.panelColorBalance.Location = new System.Drawing.Point(247, 325);
+            this.panelColorBalance.Location = new System.Drawing.Point(247, 348);
             this.panelColorBalance.Name = "panelColorBalance";
-            this.panelColorBalance.Size = new System.Drawing.Size(276, 285);
+            this.panelColorBalance.Size = new System.Drawing.Size(276, 247);
             this.panelColorBalance.TabIndex = 439;
             this.panelColorBalance.Visible = false;
             // 
-            // label14
+            // colEditBFPanel
             // 
-            this.label14.BackColor = System.Drawing.SystemColors.Control;
-            this.label14.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label14.Location = new System.Drawing.Point(2, 247);
-            this.label14.Name = "label14";
-            this.label14.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label14.Size = new System.Drawing.Size(272, 17);
-            this.label14.TabIndex = 160;
-            this.label14.Text = "APPLY TO BATTLEFIELD PALETTE";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.colEditBFPanel.Controls.Add(this.colEditApplyBF);
+            this.colEditBFPanel.Controls.Add(this.colEditUndoBF);
+            this.colEditBFPanel.Controls.Add(this.colEditResetBF);
+            this.colEditBFPanel.Controls.Add(this.colEditRedoBF);
+            this.colEditBFPanel.Location = new System.Drawing.Point(2, 228);
+            this.colEditBFPanel.Name = "colEditBFPanel";
+            this.colEditBFPanel.Size = new System.Drawing.Size(274, 17);
+            this.colEditBFPanel.TabIndex = 152;
             // 
             // colEditApplyBF
             // 
@@ -4796,7 +4786,7 @@ namespace LAZYSHELL
             this.colEditApplyBF.FlatAppearance.BorderSize = 0;
             this.colEditApplyBF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colEditApplyBF.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colEditApplyBF.Location = new System.Drawing.Point(2, 266);
+            this.colEditApplyBF.Location = new System.Drawing.Point(0, 0);
             this.colEditApplyBF.Name = "colEditApplyBF";
             this.colEditApplyBF.Size = new System.Drawing.Size(112, 17);
             this.colEditApplyBF.TabIndex = 4;
@@ -4805,13 +4795,28 @@ namespace LAZYSHELL
             this.colEditApplyBF.UseVisualStyleBackColor = false;
             this.colEditApplyBF.Click += new System.EventHandler(this.colEditApplyBF_Click);
             // 
+            // colEditUndoBF
+            // 
+            this.colEditUndoBF.BackColor = System.Drawing.SystemColors.Window;
+            this.colEditUndoBF.FlatAppearance.BorderSize = 0;
+            this.colEditUndoBF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colEditUndoBF.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colEditUndoBF.Image = global::LAZYSHELL.Properties.Resources.undo_small;
+            this.colEditUndoBF.Location = new System.Drawing.Point(227, 0);
+            this.colEditUndoBF.Name = "colEditUndoBF";
+            this.colEditUndoBF.Size = new System.Drawing.Size(22, 17);
+            this.colEditUndoBF.TabIndex = 6;
+            this.colEditUndoBF.UseCompatibleTextRendering = true;
+            this.colEditUndoBF.UseVisualStyleBackColor = false;
+            this.colEditUndoBF.Click += new System.EventHandler(this.colEditUndoBF_Click);
+            // 
             // colEditResetBF
             // 
             this.colEditResetBF.BackColor = System.Drawing.SystemColors.Window;
             this.colEditResetBF.FlatAppearance.BorderSize = 0;
             this.colEditResetBF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colEditResetBF.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colEditResetBF.Location = new System.Drawing.Point(115, 266);
+            this.colEditResetBF.Location = new System.Drawing.Point(113, 0);
             this.colEditResetBF.Name = "colEditResetBF";
             this.colEditResetBF.Size = new System.Drawing.Size(112, 17);
             this.colEditResetBF.TabIndex = 5;
@@ -4827,28 +4832,13 @@ namespace LAZYSHELL
             this.colEditRedoBF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colEditRedoBF.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.colEditRedoBF.Image = global::LAZYSHELL.Properties.Resources.redo_small;
-            this.colEditRedoBF.Location = new System.Drawing.Point(252, 266);
+            this.colEditRedoBF.Location = new System.Drawing.Point(250, 0);
             this.colEditRedoBF.Name = "colEditRedoBF";
             this.colEditRedoBF.Size = new System.Drawing.Size(22, 17);
             this.colEditRedoBF.TabIndex = 7;
             this.colEditRedoBF.UseCompatibleTextRendering = true;
             this.colEditRedoBF.UseVisualStyleBackColor = false;
             this.colEditRedoBF.Click += new System.EventHandler(this.colEditRedoBF_Click);
-            // 
-            // colEditUndoBF
-            // 
-            this.colEditUndoBF.BackColor = System.Drawing.SystemColors.Window;
-            this.colEditUndoBF.FlatAppearance.BorderSize = 0;
-            this.colEditUndoBF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.colEditUndoBF.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colEditUndoBF.Image = global::LAZYSHELL.Properties.Resources.undo_small;
-            this.colEditUndoBF.Location = new System.Drawing.Point(229, 266);
-            this.colEditUndoBF.Name = "colEditUndoBF";
-            this.colEditUndoBF.Size = new System.Drawing.Size(22, 17);
-            this.colEditUndoBF.TabIndex = 6;
-            this.colEditUndoBF.UseCompatibleTextRendering = true;
-            this.colEditUndoBF.UseVisualStyleBackColor = false;
-            this.colEditUndoBF.Click += new System.EventHandler(this.colEditUndoBF_Click);
             // 
             // colEditRedo
             // 
@@ -7735,9 +7725,6 @@ namespace LAZYSHELL
             this.panel69.Controls.Add(this.paletteAutoUpdate);
             this.panel69.Controls.Add(this.mapPaletteRedNum);
             this.panel69.Controls.Add(this.label79);
-            this.panel69.Controls.Add(this.pictureBoxColor);
-            this.panel69.Controls.Add(this.numericUpDown8);
-            this.panel69.Controls.Add(this.label108);
             this.panel69.Controls.Add(this.panel40);
             this.panel69.Controls.Add(this.mapPaletteGreenNum);
             this.panel69.Controls.Add(this.label80);
@@ -7748,9 +7735,10 @@ namespace LAZYSHELL
             this.panel69.Controls.Add(this.label46);
             this.panel69.Controls.Add(this.mapPaletteRedBar);
             this.panel69.Controls.Add(this.mapPaletteBlueBar);
+            this.panel69.Controls.Add(this.pictureBoxColor);
             this.panel69.Location = new System.Drawing.Point(0, 331);
             this.panel69.Name = "panel69";
-            this.panel69.Size = new System.Drawing.Size(240, 252);
+            this.panel69.Size = new System.Drawing.Size(240, 234);
             this.panel69.TabIndex = 442;
             // 
             // label114
@@ -7772,7 +7760,7 @@ namespace LAZYSHELL
             this.colorBalance.FlatAppearance.BorderSize = 0;
             this.colorBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colorBalance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colorBalance.Location = new System.Drawing.Point(0, 216);
+            this.colorBalance.Location = new System.Drawing.Point(0, 198);
             this.colorBalance.Name = "colorBalance";
             this.colorBalance.Size = new System.Drawing.Size(240, 17);
             this.colorBalance.TabIndex = 89;
@@ -7787,7 +7775,7 @@ namespace LAZYSHELL
             this.paletteUpdate.FlatAppearance.BorderSize = 0;
             this.paletteUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.paletteUpdate.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paletteUpdate.Location = new System.Drawing.Point(119, 235);
+            this.paletteUpdate.Location = new System.Drawing.Point(119, 217);
             this.paletteUpdate.Name = "paletteUpdate";
             this.paletteUpdate.Size = new System.Drawing.Size(121, 17);
             this.paletteUpdate.TabIndex = 91;
@@ -7837,7 +7825,7 @@ namespace LAZYSHELL
             this.paletteAutoUpdate.BackColor = System.Drawing.SystemColors.Control;
             this.paletteAutoUpdate.Checked = true;
             this.paletteAutoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.paletteAutoUpdate.Location = new System.Drawing.Point(0, 235);
+            this.paletteAutoUpdate.Location = new System.Drawing.Point(0, 217);
             this.paletteAutoUpdate.Name = "paletteAutoUpdate";
             this.paletteAutoUpdate.Padding = new System.Windows.Forms.Padding(3, 1, 0, 0);
             this.paletteAutoUpdate.Size = new System.Drawing.Size(118, 17);
@@ -7854,14 +7842,14 @@ namespace LAZYSHELL
             0,
             0,
             0});
-            this.mapPaletteRedNum.Location = new System.Drawing.Point(47, 161);
+            this.mapPaletteRedNum.Location = new System.Drawing.Point(72, 143);
             this.mapPaletteRedNum.Maximum = new decimal(new int[] {
             248,
             0,
             0,
             0});
             this.mapPaletteRedNum.Name = "mapPaletteRedNum";
-            this.mapPaletteRedNum.Size = new System.Drawing.Size(43, 17);
+            this.mapPaletteRedNum.Size = new System.Drawing.Size(46, 17);
             this.mapPaletteRedNum.TabIndex = 83;
             this.mapPaletteRedNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapPaletteRedNum.ValueChanged += new System.EventHandler(this.mapPaletteRedNum_ValueChanged);
@@ -7869,47 +7857,13 @@ namespace LAZYSHELL
             // label79
             // 
             this.label79.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label79.Location = new System.Drawing.Point(0, 161);
+            this.label79.Location = new System.Drawing.Point(54, 143);
             this.label79.Name = "label79";
             this.label79.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label79.Size = new System.Drawing.Size(46, 17);
+            this.label79.Size = new System.Drawing.Size(17, 17);
             this.label79.TabIndex = 147;
-            this.label79.Text = "Red";
-            // 
-            // pictureBoxColor
-            // 
-            this.pictureBoxColor.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBoxColor.Location = new System.Drawing.Point(91, 143);
-            this.pictureBoxColor.Name = "pictureBoxColor";
-            this.pictureBoxColor.Size = new System.Drawing.Size(149, 17);
-            this.pictureBoxColor.TabIndex = 438;
-            this.pictureBoxColor.TabStop = false;
-            // 
-            // numericUpDown8
-            // 
-            this.numericUpDown8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.numericUpDown8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown8.Location = new System.Drawing.Point(47, 143);
-            this.numericUpDown8.Maximum = new decimal(new int[] {
-            111,
-            0,
-            0,
-            0});
-            this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Size = new System.Drawing.Size(43, 17);
-            this.numericUpDown8.TabIndex = 82;
-            this.numericUpDown8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown8.ValueChanged += new System.EventHandler(this.numericUpDown8_ValueChanged);
-            // 
-            // label108
-            // 
-            this.label108.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label108.Location = new System.Drawing.Point(0, 143);
-            this.label108.Name = "label108";
-            this.label108.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label108.Size = new System.Drawing.Size(46, 17);
-            this.label108.TabIndex = 147;
-            this.label108.Text = "Color";
+            this.label79.Text = "R";
+            this.label79.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // panel40
             // 
@@ -8035,14 +7989,14 @@ namespace LAZYSHELL
             0,
             0,
             0});
-            this.mapPaletteGreenNum.Location = new System.Drawing.Point(47, 179);
+            this.mapPaletteGreenNum.Location = new System.Drawing.Point(72, 161);
             this.mapPaletteGreenNum.Maximum = new decimal(new int[] {
             248,
             0,
             0,
             0});
             this.mapPaletteGreenNum.Name = "mapPaletteGreenNum";
-            this.mapPaletteGreenNum.Size = new System.Drawing.Size(43, 17);
+            this.mapPaletteGreenNum.Size = new System.Drawing.Size(46, 17);
             this.mapPaletteGreenNum.TabIndex = 84;
             this.mapPaletteGreenNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapPaletteGreenNum.ValueChanged += new System.EventHandler(this.mapPaletteGreenNum_ValueChanged);
@@ -8050,12 +8004,13 @@ namespace LAZYSHELL
             // label80
             // 
             this.label80.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label80.Location = new System.Drawing.Point(0, 179);
+            this.label80.Location = new System.Drawing.Point(54, 161);
             this.label80.Name = "label80";
             this.label80.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label80.Size = new System.Drawing.Size(46, 17);
+            this.label80.Size = new System.Drawing.Size(17, 17);
             this.label80.TabIndex = 149;
-            this.label80.Text = "Green";
+            this.label80.Text = "G";
+            this.label80.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // mapPaletteBlueNum
             // 
@@ -8065,14 +8020,14 @@ namespace LAZYSHELL
             0,
             0,
             0});
-            this.mapPaletteBlueNum.Location = new System.Drawing.Point(47, 197);
+            this.mapPaletteBlueNum.Location = new System.Drawing.Point(72, 179);
             this.mapPaletteBlueNum.Maximum = new decimal(new int[] {
             248,
             0,
             0,
             0});
             this.mapPaletteBlueNum.Name = "mapPaletteBlueNum";
-            this.mapPaletteBlueNum.Size = new System.Drawing.Size(43, 17);
+            this.mapPaletteBlueNum.Size = new System.Drawing.Size(46, 17);
             this.mapPaletteBlueNum.TabIndex = 85;
             this.mapPaletteBlueNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapPaletteBlueNum.ValueChanged += new System.EventHandler(this.mapPaletteBlueNum_ValueChanged);
@@ -8081,10 +8036,10 @@ namespace LAZYSHELL
             // 
             this.mapPaletteGreenBar.AutoSize = false;
             this.mapPaletteGreenBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.mapPaletteGreenBar.Location = new System.Drawing.Point(91, 179);
+            this.mapPaletteGreenBar.Location = new System.Drawing.Point(119, 161);
             this.mapPaletteGreenBar.Maximum = 248;
             this.mapPaletteGreenBar.Name = "mapPaletteGreenBar";
-            this.mapPaletteGreenBar.Size = new System.Drawing.Size(149, 17);
+            this.mapPaletteGreenBar.Size = new System.Drawing.Size(121, 17);
             this.mapPaletteGreenBar.SmallChange = 8;
             this.mapPaletteGreenBar.TabIndex = 87;
             this.mapPaletteGreenBar.TickFrequency = 8;
@@ -8094,12 +8049,13 @@ namespace LAZYSHELL
             // label81
             // 
             this.label81.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label81.Location = new System.Drawing.Point(0, 197);
+            this.label81.Location = new System.Drawing.Point(54, 179);
             this.label81.Name = "label81";
             this.label81.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label81.Size = new System.Drawing.Size(46, 17);
+            this.label81.Size = new System.Drawing.Size(17, 17);
             this.label81.TabIndex = 151;
-            this.label81.Text = "Blue";
+            this.label81.Text = "B";
+            this.label81.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // mapPaletteSetNum
             // 
@@ -8130,10 +8086,10 @@ namespace LAZYSHELL
             // 
             this.mapPaletteRedBar.AutoSize = false;
             this.mapPaletteRedBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.mapPaletteRedBar.Location = new System.Drawing.Point(91, 161);
+            this.mapPaletteRedBar.Location = new System.Drawing.Point(119, 143);
             this.mapPaletteRedBar.Maximum = 248;
             this.mapPaletteRedBar.Name = "mapPaletteRedBar";
-            this.mapPaletteRedBar.Size = new System.Drawing.Size(149, 17);
+            this.mapPaletteRedBar.Size = new System.Drawing.Size(121, 17);
             this.mapPaletteRedBar.SmallChange = 8;
             this.mapPaletteRedBar.TabIndex = 86;
             this.mapPaletteRedBar.TickFrequency = 8;
@@ -8144,24 +8100,33 @@ namespace LAZYSHELL
             // 
             this.mapPaletteBlueBar.AutoSize = false;
             this.mapPaletteBlueBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.mapPaletteBlueBar.Location = new System.Drawing.Point(91, 197);
+            this.mapPaletteBlueBar.Location = new System.Drawing.Point(119, 179);
             this.mapPaletteBlueBar.Maximum = 248;
             this.mapPaletteBlueBar.Name = "mapPaletteBlueBar";
-            this.mapPaletteBlueBar.Size = new System.Drawing.Size(149, 17);
+            this.mapPaletteBlueBar.Size = new System.Drawing.Size(121, 17);
             this.mapPaletteBlueBar.SmallChange = 8;
             this.mapPaletteBlueBar.TabIndex = 88;
             this.mapPaletteBlueBar.TickFrequency = 8;
             this.mapPaletteBlueBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.mapPaletteBlueBar.Scroll += new System.EventHandler(this.mapPaletteBlueBar_Scroll);
             // 
+            // pictureBoxColor
+            // 
+            this.pictureBoxColor.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBoxColor.Location = new System.Drawing.Point(0, 143);
+            this.pictureBoxColor.Name = "pictureBoxColor";
+            this.pictureBoxColor.Size = new System.Drawing.Size(53, 53);
+            this.pictureBoxColor.TabIndex = 438;
+            this.pictureBoxColor.TabStop = false;
+            // 
             // panel63
             // 
             this.panel63.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.panel63.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
-            this.panel63.Location = new System.Drawing.Point(0, 585);
+            this.panel63.Location = new System.Drawing.Point(0, 567);
             this.panel63.Name = "panel63";
-            this.panel63.Size = new System.Drawing.Size(240, 21);
+            this.panel63.Size = new System.Drawing.Size(240, 39);
             this.panel63.TabIndex = 441;
             // 
             // labelTileCoords
@@ -8188,6 +8153,174 @@ namespace LAZYSHELL
             this.labelPixelCoords.TabIndex = 122;
             this.labelPixelCoords.Text = "(0, 0)  Pixel Coords";
             this.labelPixelCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panelTemplates
+            // 
+            this.panelTemplates.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTemplates.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panelTemplates.Controls.Add(this.templatesLoaded);
+            this.panelTemplates.Controls.Add(this.panel114);
+            this.panelTemplates.Controls.Add(this.panel115);
+            this.panelTemplates.Controls.Add(this.templateRename);
+            this.panelTemplates.Controls.Add(this.labelTemplates);
+            this.panelTemplates.Controls.Add(this.panelTemplatesSub);
+            this.panelTemplates.Location = new System.Drawing.Point(719, -1);
+            this.panelTemplates.Name = "panelTemplates";
+            this.panelTemplates.Size = new System.Drawing.Size(268, 659);
+            this.panelTemplates.TabIndex = 448;
+            this.panelTemplates.Visible = false;
+            // 
+            // templatesLoaded
+            // 
+            this.templatesLoaded.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.templatesLoaded.FormattingEnabled = true;
+            this.templatesLoaded.Location = new System.Drawing.Point(0, 42);
+            this.templatesLoaded.Name = "templatesLoaded";
+            this.templatesLoaded.Size = new System.Drawing.Size(268, 156);
+            this.templatesLoaded.TabIndex = 501;
+            this.templatesLoaded.SelectedIndexChanged += new System.EventHandler(this.templatesLoaded_SelectedIndexChanged);
+            // 
+            // panel114
+            // 
+            this.panel114.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel114.AutoScroll = true;
+            this.panel114.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel114.Controls.Add(this.pictureBoxTemplate);
+            this.panel114.Location = new System.Drawing.Point(0, 219);
+            this.panel114.Name = "panel114";
+            this.panel114.Size = new System.Drawing.Size(268, 438);
+            this.panel114.TabIndex = 498;
+            this.panel114.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel109_Scroll);
+            // 
+            // pictureBoxTemplate
+            // 
+            this.pictureBoxTemplate.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBoxTemplate.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxTemplate.Name = "pictureBoxTemplate";
+            this.pictureBoxTemplate.Size = new System.Drawing.Size(100, 50);
+            this.pictureBoxTemplate.TabIndex = 450;
+            this.pictureBoxTemplate.TabStop = false;
+            this.pictureBoxTemplate.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTemplate_Paint);
+            // 
+            // panel115
+            // 
+            this.panel115.BackColor = System.Drawing.SystemColors.Window;
+            this.panel115.Controls.Add(this.templateRenameText);
+            this.panel115.Location = new System.Drawing.Point(0, 200);
+            this.panel115.Name = "panel115";
+            this.panel115.Size = new System.Drawing.Size(198, 17);
+            this.panel115.TabIndex = 500;
+            // 
+            // templateRenameText
+            // 
+            this.templateRenameText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.templateRenameText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.templateRenameText.Enabled = false;
+            this.templateRenameText.Location = new System.Drawing.Point(4, 2);
+            this.templateRenameText.MaxLength = 128;
+            this.templateRenameText.Name = "templateRenameText";
+            this.templateRenameText.Size = new System.Drawing.Size(190, 14);
+            this.templateRenameText.TabIndex = 4;
+            // 
+            // templateRename
+            // 
+            this.templateRename.BackColor = System.Drawing.SystemColors.Control;
+            this.templateRename.Enabled = false;
+            this.templateRename.FlatAppearance.BorderSize = 0;
+            this.templateRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.templateRename.Location = new System.Drawing.Point(200, 200);
+            this.templateRename.Name = "templateRename";
+            this.templateRename.Size = new System.Drawing.Size(68, 17);
+            this.templateRename.TabIndex = 456;
+            this.templateRename.Text = "RENAME";
+            this.templateRename.UseCompatibleTextRendering = true;
+            this.templateRename.UseVisualStyleBackColor = false;
+            this.templateRename.Click += new System.EventHandler(this.templateRename_Click);
+            // 
+            // labelTemplates
+            // 
+            this.labelTemplates.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTemplates.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.labelTemplates.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.labelTemplates.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTemplates.ForeColor = System.Drawing.SystemColors.Control;
+            this.labelTemplates.Location = new System.Drawing.Point(0, 2);
+            this.labelTemplates.Name = "labelTemplates";
+            this.labelTemplates.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.labelTemplates.Size = new System.Drawing.Size(268, 17);
+            this.labelTemplates.TabIndex = 498;
+            this.labelTemplates.Text = "TEMPLATES";
+            // 
+            // panelTemplatesSub
+            // 
+            this.panelTemplatesSub.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelTemplatesSub.Controls.Add(this.toolStrip3);
+            this.panelTemplatesSub.Location = new System.Drawing.Point(0, 21);
+            this.panelTemplatesSub.Name = "panelTemplatesSub";
+            this.panelTemplatesSub.Size = new System.Drawing.Size(268, 19);
+            this.panelTemplatesSub.TabIndex = 448;
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.AutoSize = false;
+            this.toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel4,
+            this.toolStripSeparator44,
+            this.templateTransfer,
+            this.toolStripSeparator45,
+            templateImport,
+            templateExport,
+            this.toolStripSeparator43,
+            templateDelete,
+            templateCopy,
+            templatePaste});
+            this.toolStrip3.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip3.Size = new System.Drawing.Size(268, 21);
+            this.toolStrip3.TabIndex = 0;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStripLabel4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel4.Margin = new System.Windows.Forms.Padding(3, 1, 0, 2);
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(53, 18);
+            this.toolStripLabel4.Text = "OPTIONS";
+            // 
+            // toolStripSeparator44
+            // 
+            this.toolStripSeparator44.Name = "toolStripSeparator44";
+            this.toolStripSeparator44.Size = new System.Drawing.Size(6, 21);
+            // 
+            // templateTransfer
+            // 
+            this.templateTransfer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.templateTransfer.Image = global::LAZYSHELL.Properties.Resources.transfer_small;
+            this.templateTransfer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.templateTransfer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.templateTransfer.Name = "templateTransfer";
+            this.templateTransfer.Size = new System.Drawing.Size(23, 18);
+            this.templateTransfer.Text = "Create new template from selection";
+            this.templateTransfer.Click += new System.EventHandler(this.templateTransfer_Click);
+            // 
+            // toolStripSeparator45
+            // 
+            this.toolStripSeparator45.Name = "toolStripSeparator45";
+            this.toolStripSeparator45.Size = new System.Drawing.Size(6, 21);
+            // 
+            // toolStripSeparator43
+            // 
+            this.toolStripSeparator43.Name = "toolStripSeparator43";
+            this.toolStripSeparator43.Size = new System.Drawing.Size(6, 21);
             // 
             // panelTilesets
             // 
@@ -8347,9 +8480,9 @@ namespace LAZYSHELL
             // panel93
             // 
             this.panel93.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel93.Controls.Add(this.colorBalanceBF);
             this.panel93.Controls.Add(this.labelBattlefieldPalettes);
             this.panel93.Controls.Add(this.battlefieldPaletteSetNum);
-            this.panel93.Controls.Add(this.pictureBoxColorBF);
             this.panel93.Controls.Add(this.label102);
             this.panel93.Controls.Add(this.bfPaletteGreenBar);
             this.panel93.Controls.Add(this.panel60);
@@ -8359,15 +8492,29 @@ namespace LAZYSHELL
             this.panel93.Controls.Add(this.bfPaletteRedNum);
             this.panel93.Controls.Add(this.label123);
             this.panel93.Controls.Add(this.label77);
-            this.panel93.Controls.Add(this.bfPaletteColorNum);
             this.panel93.Controls.Add(this.bfPaletteBlueNum);
-            this.panel93.Controls.Add(this.label121);
             this.panel93.Controls.Add(this.label78);
             this.panel93.Controls.Add(this.bfPaletteGreenNum);
+            this.panel93.Controls.Add(this.pictureBoxColorBF);
             this.panel93.Location = new System.Drawing.Point(2, 2);
             this.panel93.Name = "panel93";
             this.panel93.Size = new System.Drawing.Size(256, 221);
             this.panel93.TabIndex = 497;
+            // 
+            // colorBalanceBF
+            // 
+            this.colorBalanceBF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.colorBalanceBF.FlatAppearance.BorderSize = 0;
+            this.colorBalanceBF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colorBalanceBF.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colorBalanceBF.Location = new System.Drawing.Point(0, 150);
+            this.colorBalanceBF.Name = "colorBalanceBF";
+            this.colorBalanceBF.Size = new System.Drawing.Size(256, 17);
+            this.colorBalanceBF.TabIndex = 456;
+            this.colorBalanceBF.Text = "COLOR MATH COMMANDS...";
+            this.colorBalanceBF.UseCompatibleTextRendering = true;
+            this.colorBalanceBF.UseVisualStyleBackColor = false;
+            this.colorBalanceBF.Click += new System.EventHandler(this.colorBalanceBF_Click);
             // 
             // labelBattlefieldPalettes
             // 
@@ -8397,15 +8544,6 @@ namespace LAZYSHELL
             this.battlefieldPaletteSetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.battlefieldPaletteSetNum.ValueChanged += new System.EventHandler(this.battlefieldPaletteSetNum_ValueChanged);
             // 
-            // pictureBoxColorBF
-            // 
-            this.pictureBoxColorBF.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBoxColorBF.Location = new System.Drawing.Point(91, 150);
-            this.pictureBoxColorBF.Name = "pictureBoxColorBF";
-            this.pictureBoxColorBF.Size = new System.Drawing.Size(165, 17);
-            this.pictureBoxColorBF.TabIndex = 455;
-            this.pictureBoxColorBF.TabStop = false;
-            // 
             // label102
             // 
             this.label102.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
@@ -8420,10 +8558,10 @@ namespace LAZYSHELL
             // 
             this.bfPaletteGreenBar.AutoSize = false;
             this.bfPaletteGreenBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.bfPaletteGreenBar.Location = new System.Drawing.Point(91, 186);
+            this.bfPaletteGreenBar.Location = new System.Drawing.Point(119, 186);
             this.bfPaletteGreenBar.Maximum = 248;
             this.bfPaletteGreenBar.Name = "bfPaletteGreenBar";
-            this.bfPaletteGreenBar.Size = new System.Drawing.Size(165, 17);
+            this.bfPaletteGreenBar.Size = new System.Drawing.Size(137, 17);
             this.bfPaletteGreenBar.SmallChange = 8;
             this.bfPaletteGreenBar.TabIndex = 445;
             this.bfPaletteGreenBar.TickFrequency = 8;
@@ -8512,10 +8650,10 @@ namespace LAZYSHELL
             // 
             this.bfPaletteBlueBar.AutoSize = false;
             this.bfPaletteBlueBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.bfPaletteBlueBar.Location = new System.Drawing.Point(91, 204);
+            this.bfPaletteBlueBar.Location = new System.Drawing.Point(119, 204);
             this.bfPaletteBlueBar.Maximum = 248;
             this.bfPaletteBlueBar.Name = "bfPaletteBlueBar";
-            this.bfPaletteBlueBar.Size = new System.Drawing.Size(165, 17);
+            this.bfPaletteBlueBar.Size = new System.Drawing.Size(137, 17);
             this.bfPaletteBlueBar.SmallChange = 8;
             this.bfPaletteBlueBar.TabIndex = 447;
             this.bfPaletteBlueBar.TickFrequency = 8;
@@ -8538,10 +8676,10 @@ namespace LAZYSHELL
             // 
             this.bfPaletteRedBar.AutoSize = false;
             this.bfPaletteRedBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.bfPaletteRedBar.Location = new System.Drawing.Point(91, 168);
+            this.bfPaletteRedBar.Location = new System.Drawing.Point(119, 168);
             this.bfPaletteRedBar.Maximum = 248;
             this.bfPaletteRedBar.Name = "bfPaletteRedBar";
-            this.bfPaletteRedBar.Size = new System.Drawing.Size(165, 17);
+            this.bfPaletteRedBar.Size = new System.Drawing.Size(137, 17);
             this.bfPaletteRedBar.SmallChange = 8;
             this.bfPaletteRedBar.TabIndex = 443;
             this.bfPaletteRedBar.TickFrequency = 8;
@@ -8556,14 +8694,14 @@ namespace LAZYSHELL
             0,
             0,
             0});
-            this.bfPaletteRedNum.Location = new System.Drawing.Point(47, 168);
+            this.bfPaletteRedNum.Location = new System.Drawing.Point(72, 168);
             this.bfPaletteRedNum.Maximum = new decimal(new int[] {
             248,
             0,
             0,
             0});
             this.bfPaletteRedNum.Name = "bfPaletteRedNum";
-            this.bfPaletteRedNum.Size = new System.Drawing.Size(43, 17);
+            this.bfPaletteRedNum.Size = new System.Drawing.Size(46, 17);
             this.bfPaletteRedNum.TabIndex = 442;
             this.bfPaletteRedNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.bfPaletteRedNum.ValueChanged += new System.EventHandler(this.bfPaletteRedNum_ValueChanged);
@@ -8571,38 +8709,24 @@ namespace LAZYSHELL
             // label123
             // 
             this.label123.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label123.Location = new System.Drawing.Point(0, 168);
+            this.label123.Location = new System.Drawing.Point(54, 168);
             this.label123.Name = "label123";
             this.label123.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label123.Size = new System.Drawing.Size(46, 17);
+            this.label123.Size = new System.Drawing.Size(17, 17);
             this.label123.TabIndex = 450;
-            this.label123.Text = "Red";
+            this.label123.Text = "R";
+            this.label123.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label77
             // 
             this.label77.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label77.Location = new System.Drawing.Point(0, 204);
+            this.label77.Location = new System.Drawing.Point(54, 204);
             this.label77.Name = "label77";
             this.label77.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label77.Size = new System.Drawing.Size(46, 17);
+            this.label77.Size = new System.Drawing.Size(17, 17);
             this.label77.TabIndex = 452;
-            this.label77.Text = "Blue";
-            // 
-            // bfPaletteColorNum
-            // 
-            this.bfPaletteColorNum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.bfPaletteColorNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bfPaletteColorNum.Location = new System.Drawing.Point(47, 150);
-            this.bfPaletteColorNum.Maximum = new decimal(new int[] {
-            111,
-            0,
-            0,
-            0});
-            this.bfPaletteColorNum.Name = "bfPaletteColorNum";
-            this.bfPaletteColorNum.Size = new System.Drawing.Size(43, 17);
-            this.bfPaletteColorNum.TabIndex = 441;
-            this.bfPaletteColorNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.bfPaletteColorNum.ValueChanged += new System.EventHandler(this.bfPaletteColorNum_ValueChanged);
+            this.label77.Text = "B";
+            this.label77.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // bfPaletteBlueNum
             // 
@@ -8612,37 +8736,28 @@ namespace LAZYSHELL
             0,
             0,
             0});
-            this.bfPaletteBlueNum.Location = new System.Drawing.Point(47, 204);
+            this.bfPaletteBlueNum.Location = new System.Drawing.Point(72, 204);
             this.bfPaletteBlueNum.Maximum = new decimal(new int[] {
             248,
             0,
             0,
             0});
             this.bfPaletteBlueNum.Name = "bfPaletteBlueNum";
-            this.bfPaletteBlueNum.Size = new System.Drawing.Size(43, 17);
+            this.bfPaletteBlueNum.Size = new System.Drawing.Size(46, 17);
             this.bfPaletteBlueNum.TabIndex = 446;
             this.bfPaletteBlueNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.bfPaletteBlueNum.ValueChanged += new System.EventHandler(this.bfPaletteBlueNum_ValueChanged);
             // 
-            // label121
-            // 
-            this.label121.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label121.Location = new System.Drawing.Point(0, 150);
-            this.label121.Name = "label121";
-            this.label121.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label121.Size = new System.Drawing.Size(46, 17);
-            this.label121.TabIndex = 449;
-            this.label121.Text = "Color";
-            // 
             // label78
             // 
             this.label78.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label78.Location = new System.Drawing.Point(0, 186);
+            this.label78.Location = new System.Drawing.Point(54, 186);
             this.label78.Name = "label78";
             this.label78.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label78.Size = new System.Drawing.Size(46, 17);
+            this.label78.Size = new System.Drawing.Size(17, 17);
             this.label78.TabIndex = 451;
-            this.label78.Text = "Green";
+            this.label78.Text = "G";
+            this.label78.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // bfPaletteGreenNum
             // 
@@ -8652,17 +8767,26 @@ namespace LAZYSHELL
             0,
             0,
             0});
-            this.bfPaletteGreenNum.Location = new System.Drawing.Point(47, 186);
+            this.bfPaletteGreenNum.Location = new System.Drawing.Point(72, 186);
             this.bfPaletteGreenNum.Maximum = new decimal(new int[] {
             248,
             0,
             0,
             0});
             this.bfPaletteGreenNum.Name = "bfPaletteGreenNum";
-            this.bfPaletteGreenNum.Size = new System.Drawing.Size(43, 17);
+            this.bfPaletteGreenNum.Size = new System.Drawing.Size(46, 17);
             this.bfPaletteGreenNum.TabIndex = 444;
             this.bfPaletteGreenNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.bfPaletteGreenNum.ValueChanged += new System.EventHandler(this.bfPaletteGreenNum_ValueChanged);
+            // 
+            // pictureBoxColorBF
+            // 
+            this.pictureBoxColorBF.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBoxColorBF.Location = new System.Drawing.Point(0, 168);
+            this.pictureBoxColorBF.Name = "pictureBoxColorBF";
+            this.pictureBoxColorBF.Size = new System.Drawing.Size(53, 53);
+            this.pictureBoxColorBF.TabIndex = 455;
+            this.pictureBoxColorBF.TabStop = false;
             // 
             // panelBattlefieldProperties
             // 
@@ -9181,173 +9305,6 @@ namespace LAZYSHELL
             this.battlefieldNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.battlefieldNum.ValueChanged += new System.EventHandler(this.battlefieldNum_ValueChanged);
             // 
-            // panelTemplates
-            // 
-            this.panelTemplates.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTemplates.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelTemplates.Controls.Add(this.templatesLoaded);
-            this.panelTemplates.Controls.Add(this.panel114);
-            this.panelTemplates.Controls.Add(this.panel115);
-            this.panelTemplates.Controls.Add(this.templateRename);
-            this.panelTemplates.Controls.Add(this.labelTemplates);
-            this.panelTemplates.Controls.Add(this.panelTemplatesSub);
-            this.panelTemplates.Location = new System.Drawing.Point(719, -1);
-            this.panelTemplates.Name = "panelTemplates";
-            this.panelTemplates.Size = new System.Drawing.Size(268, 659);
-            this.panelTemplates.TabIndex = 448;
-            this.panelTemplates.Visible = false;
-            // 
-            // templatesLoaded
-            // 
-            this.templatesLoaded.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.templatesLoaded.FormattingEnabled = true;
-            this.templatesLoaded.Location = new System.Drawing.Point(0, 42);
-            this.templatesLoaded.Name = "templatesLoaded";
-            this.templatesLoaded.Size = new System.Drawing.Size(268, 156);
-            this.templatesLoaded.TabIndex = 501;
-            this.templatesLoaded.SelectedIndexChanged += new System.EventHandler(this.templatesLoaded_SelectedIndexChanged);
-            // 
-            // panel114
-            // 
-            this.panel114.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel114.AutoScroll = true;
-            this.panel114.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel114.Controls.Add(this.pictureBoxTemplate);
-            this.panel114.Location = new System.Drawing.Point(0, 219);
-            this.panel114.Name = "panel114";
-            this.panel114.Size = new System.Drawing.Size(268, 438);
-            this.panel114.TabIndex = 498;
-            this.panel114.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel109_Scroll);
-            // 
-            // pictureBoxTemplate
-            // 
-            this.pictureBoxTemplate.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBoxTemplate.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxTemplate.Name = "pictureBoxTemplate";
-            this.pictureBoxTemplate.Size = new System.Drawing.Size(128, 128);
-            this.pictureBoxTemplate.TabIndex = 450;
-            this.pictureBoxTemplate.TabStop = false;
-            // 
-            // panel115
-            // 
-            this.panel115.BackColor = System.Drawing.SystemColors.Window;
-            this.panel115.Controls.Add(this.templateRenameText);
-            this.panel115.Location = new System.Drawing.Point(0, 200);
-            this.panel115.Name = "panel115";
-            this.panel115.Size = new System.Drawing.Size(198, 17);
-            this.panel115.TabIndex = 500;
-            // 
-            // templateRenameText
-            // 
-            this.templateRenameText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.templateRenameText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.templateRenameText.Enabled = false;
-            this.templateRenameText.Location = new System.Drawing.Point(4, 2);
-            this.templateRenameText.MaxLength = 128;
-            this.templateRenameText.Name = "templateRenameText";
-            this.templateRenameText.Size = new System.Drawing.Size(190, 14);
-            this.templateRenameText.TabIndex = 4;
-            // 
-            // templateRename
-            // 
-            this.templateRename.BackColor = System.Drawing.SystemColors.Control;
-            this.templateRename.Enabled = false;
-            this.templateRename.FlatAppearance.BorderSize = 0;
-            this.templateRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.templateRename.Location = new System.Drawing.Point(200, 200);
-            this.templateRename.Name = "templateRename";
-            this.templateRename.Size = new System.Drawing.Size(68, 17);
-            this.templateRename.TabIndex = 456;
-            this.templateRename.Text = "RENAME";
-            this.templateRename.UseCompatibleTextRendering = true;
-            this.templateRename.UseVisualStyleBackColor = false;
-            this.templateRename.Click += new System.EventHandler(this.templateRename_Click);
-            // 
-            // labelTemplates
-            // 
-            this.labelTemplates.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTemplates.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.labelTemplates.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.labelTemplates.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTemplates.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelTemplates.Location = new System.Drawing.Point(0, 2);
-            this.labelTemplates.Name = "labelTemplates";
-            this.labelTemplates.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.labelTemplates.Size = new System.Drawing.Size(268, 17);
-            this.labelTemplates.TabIndex = 498;
-            this.labelTemplates.Text = "TEMPLATES";
-            // 
-            // panelTemplatesSub
-            // 
-            this.panelTemplatesSub.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelTemplatesSub.Controls.Add(this.toolStrip3);
-            this.panelTemplatesSub.Location = new System.Drawing.Point(0, 21);
-            this.panelTemplatesSub.Name = "panelTemplatesSub";
-            this.panelTemplatesSub.Size = new System.Drawing.Size(268, 19);
-            this.panelTemplatesSub.TabIndex = 448;
-            // 
-            // toolStrip3
-            // 
-            this.toolStrip3.AutoSize = false;
-            this.toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel4,
-            this.toolStripSeparator44,
-            this.templateTransfer,
-            this.toolStripSeparator45,
-            templateImport,
-            templateExport,
-            this.toolStripSeparator43,
-            templateDelete,
-            templateCopy,
-            templatePaste});
-            this.toolStrip3.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(268, 21);
-            this.toolStrip3.TabIndex = 0;
-            this.toolStrip3.Text = "toolStrip3";
-            // 
-            // toolStripLabel4
-            // 
-            this.toolStripLabel4.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripLabel4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripLabel4.Margin = new System.Windows.Forms.Padding(3, 1, 0, 2);
-            this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(53, 18);
-            this.toolStripLabel4.Text = "OPTIONS";
-            // 
-            // toolStripSeparator44
-            // 
-            this.toolStripSeparator44.Name = "toolStripSeparator44";
-            this.toolStripSeparator44.Size = new System.Drawing.Size(6, 21);
-            // 
-            // templateTransfer
-            // 
-            this.templateTransfer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.templateTransfer.Image = global::LAZYSHELL.Properties.Resources.transfer_small;
-            this.templateTransfer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.templateTransfer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.templateTransfer.Name = "templateTransfer";
-            this.templateTransfer.Size = new System.Drawing.Size(23, 18);
-            this.templateTransfer.Text = "Create new template from selection";
-            this.templateTransfer.Click += new System.EventHandler(this.templateTransfer_Click);
-            // 
-            // toolStripSeparator45
-            // 
-            this.toolStripSeparator45.Name = "toolStripSeparator45";
-            this.toolStripSeparator45.Size = new System.Drawing.Size(6, 21);
-            // 
-            // toolStripSeparator43
-            // 
-            this.toolStripSeparator43.Name = "toolStripSeparator43";
-            this.toolStripSeparator43.Size = new System.Drawing.Size(6, 21);
-            // 
             // panelLevelZoom
             // 
             this.panelLevelZoom.BackColor = System.Drawing.SystemColors.ControlText;
@@ -9391,57 +9348,58 @@ namespace LAZYSHELL
             this.contextMenuStripTE.Name = "contextMenuStrip1";
             this.contextMenuStripTE.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStripTE.ShowImageMargin = false;
-            this.contextMenuStripTE.Size = new System.Drawing.Size(128, 170);
+            this.contextMenuStripTE.Size = new System.Drawing.Size(117, 148);
             // 
             // setSubtileToolStripMenuItem
             // 
             this.setSubtileToolStripMenuItem.Name = "setSubtileToolStripMenuItem";
-            this.setSubtileToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.setSubtileToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.setSubtileToolStripMenuItem.Text = "Set Subtile";
             this.setSubtileToolStripMenuItem.Click += new System.EventHandler(this.setSubtileToolStripMenuItem_Click);
             // 
             // toolStripSeparator35
             // 
             this.toolStripSeparator35.Name = "toolStripSeparator35";
-            this.toolStripSeparator35.Size = new System.Drawing.Size(124, 6);
+            this.toolStripSeparator35.Size = new System.Drawing.Size(113, 6);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(127, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(116, 22);
             this.toolStripMenuItem7.Text = "Import...";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // saveImageToolStripMenuItem1
             // 
             this.saveImageToolStripMenuItem1.Name = "saveImageToolStripMenuItem1";
-            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(127, 22);
+            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.saveImageToolStripMenuItem1.Text = "Save image...";
             this.saveImageToolStripMenuItem1.Click += new System.EventHandler(this.saveImageToolStripMenuItem1_Click);
             // 
             // toolStripSeparator36
             // 
             this.toolStripSeparator36.Name = "toolStripSeparator36";
-            this.toolStripSeparator36.Size = new System.Drawing.Size(124, 6);
+            this.toolStripSeparator36.Size = new System.Drawing.Size(113, 6);
             // 
             // clearToolStripMenuItem1
             // 
             this.clearToolStripMenuItem1.Name = "clearToolStripMenuItem1";
-            this.clearToolStripMenuItem1.Size = new System.Drawing.Size(127, 22);
+            this.clearToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.clearToolStripMenuItem1.Text = "Clear";
             this.clearToolStripMenuItem1.Click += new System.EventHandler(this.clearToolStripMenuItem1_Click);
             // 
             // applyBorderToolStripMenuItem
             // 
+            this.applyBorderToolStripMenuItem.Enabled = false;
             this.applyBorderToolStripMenuItem.Name = "applyBorderToolStripMenuItem";
-            this.applyBorderToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.applyBorderToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.applyBorderToolStripMenuItem.Text = "Apply border";
             this.applyBorderToolStripMenuItem.Click += new System.EventHandler(this.applyBorderToolStripMenuItem_Click);
             // 
@@ -9527,7 +9485,7 @@ namespace LAZYSHELL
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(128, 17);
             this.buttonCancel.TabIndex = 6;
-            this.buttonCancel.Text = "RESET";
+            this.buttonCancel.Text = "CANCEL";
             this.buttonCancel.UseCompatibleTextRendering = true;
             this.buttonCancel.UseVisualStyleBackColor = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -11331,6 +11289,7 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL3)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panelColorBalance.ResumeLayout(false);
+            this.colEditBFPanel.ResumeLayout(false);
             this.panel104.ResumeLayout(false);
             this.panel103.ResumeLayout(false);
             this.panelOverlapTileset.ResumeLayout(false);
@@ -11415,8 +11374,6 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.palettePictureBox)).EndInit();
             this.contextMenuStrip3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteRedNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
             this.panel40.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteGreenNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteBlueNum)).EndInit();
@@ -11424,6 +11381,15 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteSetNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteRedBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteBlueBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).EndInit();
+            this.panelTemplates.ResumeLayout(false);
+            this.panel114.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTemplate)).EndInit();
+            this.panel115.ResumeLayout(false);
+            this.panel115.PerformLayout();
+            this.panelTemplatesSub.ResumeLayout(false);
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
             this.panelTilesets.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -11436,16 +11402,15 @@ namespace LAZYSHELL
             this.panelBattlefieldPalettes.ResumeLayout(false);
             this.panel93.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.battlefieldPaletteSetNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorBF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenBar)).EndInit();
             this.panel60.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPalettePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteRedNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfPaletteColorNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteBlueNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bfPaletteGreenNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorBF)).EndInit();
             this.panelBattlefieldProperties.ResumeLayout(false);
             this.panel92.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.battlefieldGFXSet4Num)).EndInit();
@@ -11463,14 +11428,6 @@ namespace LAZYSHELL
             this.panel45.ResumeLayout(false);
             this.panel61.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.battlefieldNum)).EndInit();
-            this.panelTemplates.ResumeLayout(false);
-            this.panel114.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTemplate)).EndInit();
-            this.panel115.ResumeLayout(false);
-            this.panel115.PerformLayout();
-            this.panelTemplatesSub.ResumeLayout(false);
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
             this.panelLevelZoom.ResumeLayout(false);
             this.panel117.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLevelZoom)).EndInit();
@@ -11717,8 +11674,6 @@ namespace LAZYSHELL
         private System.Windows.Forms.Label label97;
         private System.Windows.Forms.Panel panel61;
         private System.Windows.Forms.ComboBox battlefieldName;
-        private System.Windows.Forms.Label label108;
-        private System.Windows.Forms.NumericUpDown numericUpDown8;
         private System.Windows.Forms.PictureBox pictureBoxColor;
         private System.Windows.Forms.Panel panelPhysicalTile;
         private System.Windows.Forms.PictureBox pictureBoxPhysicalTile;
@@ -11963,8 +11918,6 @@ namespace LAZYSHELL
         private NumericUpDown bfPaletteBlueNum;
         private Label label78;
         private NumericUpDown bfPaletteGreenNum;
-        private Label label121;
-        private NumericUpDown bfPaletteColorNum;
         private Label label123;
         private NumericUpDown bfPaletteRedNum;
         private PictureBox bfPalettePictureBox;
@@ -12219,7 +12172,6 @@ namespace LAZYSHELL
         private ToolStripMenuItem enableHelpTipsToolStripMenuItem;
         private ToolStripMenuItem arraysToolStripMenuItem;
         private ToolStripMenuItem arraysToolStripMenuItem1;
-        private Label label14;
         private Button colEditApplyBF;
         private Button colEditResetBF;
         private Button colEditUndoBF;
@@ -12253,6 +12205,8 @@ namespace LAZYSHELL
         private ToolStripMenuItem addThisLevelToNotesDatabaseToolStripMenuItem;
         private BackgroundWorker backgroundWorker1;
         private ToolStripMenuItem applyBorderToolStripMenuItem;
+        private Panel colEditBFPanel;
+        private Button colorBalanceBF;
     }
 }
 

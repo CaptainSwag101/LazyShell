@@ -6744,7 +6744,7 @@ namespace LAZYSHELL.StatsEditor
             this.shopName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.shopName.ContextMenuStrip = this.contextMenuStrip1;
             this.shopName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopName.DropDownHeight = 500;
+            this.shopName.DropDownHeight = 550;
             this.shopName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopName.DropDownWidth = 250;
             this.shopName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

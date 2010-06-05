@@ -73,7 +73,7 @@ namespace LAZYSHELL
         // set images
         private void SetBattleDialogueTilesetImage()
         {
-            battleDialogueTilesetImage = new Bitmap(DrawImageFromIntArr(battleDialogueTileset.GetTilesetPixelArray(), 256, 32));
+            battleDialogueTilesetImage = new Bitmap(Drawing.PixelArrayToImage(battleDialogueTileset.GetTilesetPixelArray(), 256, 32));
             pictureBoxBattle.BackColor = Color.FromArgb(paletteRedDialogue[0], paletteGreenDialogue[0], paletteBlueDialogue[0]);
             pictureBoxBattle.Invalidate();
             pictureBoxBattleDialogue.BackColor = Color.FromArgb(paletteRedDialogue[0], paletteGreenDialogue[0], paletteBlueDialogue[0]);
@@ -114,7 +114,7 @@ namespace LAZYSHELL
                         pixels[c + (d * 128)] = Color.Gray.ToArgb();
                 }
             }
-            dialogueGraphicImage = new Bitmap(DrawImageFromIntArr(pixels, 128, 112));
+            dialogueGraphicImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 128, 112));
             pictureBoxDialogueBG.BackColor = Color.FromArgb(paletteRedDialogue[0], paletteGreenDialogue[0], paletteBlueDialogue[0]);
             pictureBoxDialogueBG.Invalidate();
         }
@@ -139,7 +139,7 @@ namespace LAZYSHELL
                         dlgTilePixels[y * 32 + x] = temp[y / 2 * 16 + (x / 2)];
                 }
             }
-            dialogueTileImage = new Bitmap(DrawImageFromIntArr(dlgTilePixels, 32, 32));
+            dialogueTileImage = new Bitmap(Drawing.PixelArrayToImage(dlgTilePixels, 32, 32));
             pictureBoxDialogueTile.BackColor = Color.FromArgb(paletteRedDialogue[0], paletteGreenDialogue[0], paletteBlueDialogue[0]);
             pictureBoxDialogueTile.Invalidate();
         }
@@ -156,7 +156,7 @@ namespace LAZYSHELL
                     dialogueSubtilePixels[y * 32 + x] = temp[y / 4 * 8 + (x / 4)];
             }
 
-            dialogueSubtileImage = new Bitmap(DrawImageFromIntArr(dialogueSubtilePixels, 32, 32));
+            dialogueSubtileImage = new Bitmap(Drawing.PixelArrayToImage(dialogueSubtilePixels, 32, 32));
             pictureBoxDialogueSubtile.BackColor = Color.FromArgb(paletteRedDialogue[0], paletteGreenDialogue[0], paletteBlueDialogue[0]);
             pictureBoxDialogueSubtile.Invalidate();
         }
@@ -412,7 +412,7 @@ namespace LAZYSHELL
 
             model.BattleDialogueTileset[offset] = (byte)dialogueSubtile.Value;
 
-            battleDialogueTilesetImage = new Bitmap(DrawImageFromIntArr(battleDialogueTileset.GetTilesetPixelArray(), 256, 32));
+            battleDialogueTilesetImage = new Bitmap(Drawing.PixelArrayToImage(battleDialogueTileset.GetTilesetPixelArray(), 256, 32));
 
             SetBattleDialogueTilesetImage();
             SetDialogueTileImage();
@@ -436,7 +436,7 @@ namespace LAZYSHELL
             SetBattleDialogueTilesetImage();
             SetDialogueTileImage();
             SetDialogueSubtileImage();
-            pictureBoxBattleDialogue.BackgroundImage = new Bitmap(DrawImageFromIntArr(battleDialogueTileset.GetTilesetPixelArray(), 256, 32));
+            pictureBoxBattleDialogue.BackgroundImage = new Bitmap(Drawing.PixelArrayToImage(battleDialogueTileset.GetTilesetPixelArray(), 256, 32));
         }
         private void pictureBoxDialogueBG_MouseDoubleClick(object sender, MouseEventArgs e)
         {

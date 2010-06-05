@@ -78,7 +78,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.address)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressBit)).BeginInit();
             this.panel1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -271,7 +270,7 @@
             this.panelIndexNumber.Controls.Add(this.indexNumber);
             this.panelIndexNumber.Location = new System.Drawing.Point(6, 20);
             this.panelIndexNumber.Name = "panelIndexNumber";
-            this.panelIndexNumber.Size = new System.Drawing.Size(213, 21);
+            this.panelIndexNumber.Size = new System.Drawing.Size(214, 21);
             this.panelIndexNumber.TabIndex = 0;
             // 
             // panelAddressBit
@@ -282,7 +281,7 @@
             this.panelAddressBit.Controls.Add(this.addressBit);
             this.panelAddressBit.Location = new System.Drawing.Point(6, 20);
             this.panelAddressBit.Name = "panelAddressBit";
-            this.panelAddressBit.Size = new System.Drawing.Size(214, 21);
+            this.panelAddressBit.Size = new System.Drawing.Size(215, 21);
             this.panelAddressBit.TabIndex = 0;
             this.panelAddressBit.Visible = false;
             // 
@@ -404,9 +403,6 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -515,7 +511,7 @@
             // 
             this.generalNotes.Location = new System.Drawing.Point(6, 6);
             this.generalNotes.Name = "generalNotes";
-            this.generalNotes.Size = new System.Drawing.Size(450, 427);
+            this.generalNotes.Size = new System.Drawing.Size(690, 427);
             this.generalNotes.TabIndex = 2;
             this.generalNotes.Text = "";
             this.generalNotes.TextChanged += new System.EventHandler(this.generalNotes_TextChanged);
@@ -586,8 +582,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.address)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressBit)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);

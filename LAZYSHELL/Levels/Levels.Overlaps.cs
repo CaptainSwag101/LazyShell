@@ -350,7 +350,7 @@ namespace LAZYSHELL
             if (overlapsImage == null)
             {
                 overlapsPixels = overlapTileset.GetTilesetPixelArray(overlapTileset.OverlapTiles);
-                overlapsImage = DrawImageFromIntArr(overlapsPixels, 256, 416);
+                overlapsImage = Drawing.PixelArrayToImage(overlapsPixels, 256, 416);
             }
 
             e.Graphics.DrawImage(overlapsImage, 0, 0);

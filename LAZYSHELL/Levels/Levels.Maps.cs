@@ -588,7 +588,6 @@ namespace LAZYSHELL
         private void InitializeMapProperties()
         {
             updatingProperties = true;
-            currentColor = (int)numericUpDown8.Value;
 
             levelMap = levelMaps[levels[currentLevel].LevelMap];
             paletteSet = paletteSets[levelMaps[levels[currentLevel].LevelMap].PaletteSet];
@@ -668,8 +667,6 @@ namespace LAZYSHELL
         }
         private void UpdateCurrentColor()
         {
-            currentColor = (int)numericUpDown8.Value;
-
             this.mapPaletteRedNum.Value = paletteSet.PaletteColorRed[currentColor];
             this.mapPaletteGreenNum.Value = paletteSet.PaletteColorGreen[currentColor];
             this.mapPaletteBlueNum.Value = paletteSet.PaletteColorBlue[currentColor];
@@ -720,7 +717,7 @@ namespace LAZYSHELL
                 pixels[y * s.Width + 1 + p.X] = color;
                 pixels[y * s.Width + u.Width - 3 + p.X] = color;
             }
-            return DrawImageFromIntArr(pixels, s.Width, s.Height);
+            return Drawing.PixelArrayToImage(pixels, s.Width, s.Height);
         }
 
         private void DecompressLevelData()
@@ -2794,7 +2791,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            mapPaletteRedBar.Value -= mapPaletteRedBar.Value % 8;
+            mapPaletteRedBar.Value = mapPaletteRedBar.Value & 0xF8;
 
             if (mapPaletteRedNum.Value == mapPaletteRedBar.Value)
                 {
@@ -2819,7 +2816,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            mapPaletteRedNum.Value -= mapPaletteRedNum.Value % 8;
+            mapPaletteRedNum.Value = (int)mapPaletteRedNum.Value & 0xF8;
 
             if (mapPaletteRedBar.Value == (int)mapPaletteRedNum.Value)
             {
@@ -2845,7 +2842,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            mapPaletteGreenBar.Value -= mapPaletteGreenBar.Value % 8;
+            mapPaletteGreenBar.Value = mapPaletteGreenBar.Value & 0xF8;
 
             if (mapPaletteGreenNum.Value == mapPaletteGreenBar.Value)
                 {
@@ -2870,7 +2867,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            mapPaletteGreenNum.Value -= mapPaletteGreenNum.Value % 8;
+            mapPaletteGreenNum.Value = (int)mapPaletteGreenNum.Value & 0xF8;
 
             if (mapPaletteGreenBar.Value == (int)mapPaletteGreenNum.Value)
             {
@@ -2896,7 +2893,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            mapPaletteBlueBar.Value -= mapPaletteBlueBar.Value % 8;
+            mapPaletteBlueBar.Value = mapPaletteBlueBar.Value & 0xF8;
 
             if (mapPaletteBlueNum.Value == mapPaletteBlueBar.Value)
                 {
@@ -2921,7 +2918,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            mapPaletteBlueNum.Value -= mapPaletteBlueNum.Value % 8;
+            mapPaletteBlueNum.Value = (int)mapPaletteBlueNum.Value & 0xF8;
 
             if (mapPaletteBlueBar.Value == (int)mapPaletteBlueNum.Value)
             {
@@ -2947,7 +2944,11 @@ namespace LAZYSHELL
         private void palettePictureBox_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             currentColor = (e.X / 15) + ((e.Y / 15) * 16);
-            numericUpDown8.Value = currentColor;
+
+            updatingProperties = true;
+            UpdateCurrentColor();
+            palettePictureBox.Invalidate();
+            updatingProperties = false;
         }
         private void palettePictureBox_Paint(object sender, PaintEventArgs e)
         {
@@ -3141,6 +3142,8 @@ namespace LAZYSHELL
 
         private void colorBalance_Click(object sender, EventArgs e)
         {
+            colEditBFPanel.SendToBack();
+            panelColorBalance.Left = 247;
             panelColorBalance.Visible = !panelColorBalance.Visible;
         }
         private void coleditSelectCommand_SelectedIndexChanged(object sender, EventArgs e)

@@ -1456,7 +1456,7 @@ namespace LAZYSHELL.ScriptsEditor
                             pixels[y * 256 + x] = temp[c * 256 + a];
                     }
 
-                    icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 32));
+                    icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 32));
                 }
                 else
                 {
@@ -1466,7 +1466,7 @@ namespace LAZYSHELL.ScriptsEditor
                         for (int x = 2, a = 0; x < 256; x++, a++)
                             pixels[y * 256 + x] = temp[c * 256 + a];
                     }
-                    icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 14));
+                    icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 14));
                 }
 
                 e.Graphics.DrawImage(new Bitmap(icon), new Point(e.Bounds.X, e.Bounds.Y));

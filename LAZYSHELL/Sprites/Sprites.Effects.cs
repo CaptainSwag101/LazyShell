@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -145,10 +146,7 @@ namespace LAZYSHELL
             updatingEffect = true;
 
             e_paletteSetSize.Value = e_currentPaletteSetSize = e_animations[e_currentAnimation].PaletteSetLength;
-            e_paletteColor.Maximum = (e_animations[e_currentAnimation].PaletteSetLength / 2) - 1;
-
             e_currentColor = 0;
-            this.e_paletteColor.Value = currentColor;
 
             updatingEffect = false;
         }
@@ -380,7 +378,7 @@ namespace LAZYSHELL
         private void SetE_PaletteImage()
         {
             e_palettePixels = e_animations[e_currentAnimation].GetPaletteSetPixels();
-            e_paletteImage = new Bitmap(DrawImageFromIntArr(e_palettePixels, 256, 128));
+            e_paletteImage = new Bitmap(Drawing.PixelArrayToImage(e_palettePixels, 256, 128));
             pictureBoxE_Palette.Invalidate();
         }
         private void SetE_GraphicImage()
@@ -390,7 +388,7 @@ namespace LAZYSHELL
             int b = e_animations[e_currentAnimation].PaletteColorBlue[0];
 
             e_graphicPixels = GetE_GraphicPixels();
-            e_graphicImage = new Bitmap(DrawImageFromIntArr(e_graphicPixels, 128, 128));
+            e_graphicImage = new Bitmap(Drawing.PixelArrayToImage(e_graphicPixels, 128, 128));
             //pictureBoxE_Graphics.BackColor = Color.FromArgb(r, g, b);
             pictureBoxE_Graphics.Invalidate();
         }
@@ -401,7 +399,7 @@ namespace LAZYSHELL
             int b = e_animations[e_currentAnimation].PaletteColorBlue[0];
 
             e_moldPixels = e_animations[e_currentAnimation].MoldPixels(e_animations[e_currentAnimation], e_tileset, true);
-            e_moldImage = new Bitmap(DrawImageFromIntArr(e_moldPixels, 256, 256));
+            e_moldImage = new Bitmap(Drawing.PixelArrayToImage(e_moldPixels, 256, 256));
             //pictureBoxE_Mold.BackColor = Color.FromArgb(r, g, b);
             pictureBoxE_Mold.Invalidate();
         }
@@ -412,7 +410,7 @@ namespace LAZYSHELL
             int b = e_animations[e_currentAnimation].PaletteColorBlue[0];
 
             e_tilesetPixels = e_tileset.TilesetPixels(e_tileset.Tileset, e_animations[e_currentAnimation].TileSetLength);
-            e_tilesetImage = new Bitmap(DrawImageFromIntArr(e_tilesetPixels, 128, 128));
+            e_tilesetImage = new Bitmap(Drawing.PixelArrayToImage(e_tilesetPixels, 128, 128));
             //pictureBoxEffectTileset.BackColor = Color.FromArgb(r, g, b);
             pictureBoxEffectTileset.Invalidate();
         }
@@ -442,7 +440,7 @@ namespace LAZYSHELL
                 for (int x = 0; x < 32; x++)
                     e_tilePixels[y * 32 + x] = temp[y / 2 * 16 + (x / 2)];
             }
-            e_tileImage = new Bitmap(DrawImageFromIntArr(e_tilePixels, 32, 32));
+            e_tileImage = new Bitmap(Drawing.PixelArrayToImage(e_tilePixels, 32, 32));
             //pictureBoxE_Tile.BackColor = Color.FromArgb(r, g, b);
             pictureBoxE_Tile.Invalidate();
         }
@@ -470,7 +468,7 @@ namespace LAZYSHELL
                     e_subtilePixels[y * 32 + x] = temp[y / 4 * 8 + (x / 4)];
             }
 
-            e_subtileImage = new Bitmap(DrawImageFromIntArr(e_subtilePixels, 32, 32));
+            e_subtileImage = new Bitmap(Drawing.PixelArrayToImage(e_subtilePixels, 32, 32));
             //pictureBoxE_Subtile.BackColor = Color.FromArgb(r, g, b);
             pictureBoxE_Subtile.Invalidate();
         }
@@ -487,7 +485,7 @@ namespace LAZYSHELL
                 {
                     e_animations[e_currentAnimation].CurrentMold = e_animations[e_currentAnimation].FrameMold;
                     e_framePixels = e_animations[e_currentAnimation].MoldPixels(e_animations[e_currentAnimation], e_tileset, false);
-                    e_frameImage = new Bitmap(DrawImageFromIntArr(e_framePixels, 256, 256));
+                    e_frameImage = new Bitmap(Drawing.PixelArrayToImage(e_framePixels, 256, 256));
                     e_sequenceImages.Add(new Bitmap(e_frameImage));
                 }
                 else
@@ -532,7 +530,7 @@ namespace LAZYSHELL
                 if (e_animations[e_currentAnimation].FrameMold == e_molds.SelectedIndex)
                 {
                     e_framePixels = e_animations[e_currentAnimation].MoldPixels(e_animations[e_currentAnimation], e_tileset, false);
-                    e_frameImage = new Bitmap(DrawImageFromIntArr(e_framePixels, 256, 256));
+                    e_frameImage = new Bitmap(Drawing.PixelArrayToImage(e_framePixels, 256, 256));
                     e_sequenceImages.RemoveAt(i);
                     e_sequenceImages.Insert(i, new Bitmap(e_frameImage));
                     break;
@@ -604,7 +602,7 @@ namespace LAZYSHELL
             tempTile.PaletteSetIndex = effects[currentEffect].PaletteIndex;
             return tempTile;
         }
-        private byte[] CopyOverGraphicBlockOpt(byte[] src, byte[] dest, Size s, int colspan, int tileSize, int offset)
+        private byte[] CopyOverE_GraphicBlock(byte[] src, byte[] dest, Size s, int colspan, int tileSize, int offset)
         {
             byte[] tempTileset = new byte[s.Width * s.Height];
             for (int i = 0; i < tempTileset.Length; i++)
@@ -671,7 +669,7 @@ namespace LAZYSHELL
             }
             return index;
         }
-        private void CopyOverTileset(byte[] tempTileset, Size s)
+        private void CopyOverE_Tileset(byte[] tempTileset, Size s)
         {
             int m = 0;
             if (tempTileset != null)
@@ -1023,6 +1021,11 @@ namespace LAZYSHELL
         private void pictureBoxEffectTileset_MouseMove(object sender, MouseEventArgs e)
         {
             mouseOverSubtile = ((e.Y / 16) * 8) + (e.X / 16);
+            e_tileCoordsLabel.Text = "tile " + mouseOverSubtile.ToString("d2");
+        }
+        private void CullLabelWidth(Label label)
+        {
+            label.Width = TextRenderer.MeasureText(label.Text, label.Font).Width + 4;
         }
         private void pictureBoxEffectTileset_MouseDown(object sender, MouseEventArgs e)
         {
@@ -1046,6 +1049,12 @@ namespace LAZYSHELL
             if (moldTileEmpty.Checked)
                 moldTileEmpty.Checked = false;
             moldTileIndex.Value = mouseOverSubtile;
+        }
+        private void pictureBoxEffectTileset_MouseEnter(object sender, EventArgs e)
+        {
+        }
+        private void pictureBoxEffectTileset_MouseLeave(object sender, EventArgs e)
+        {
         }
         private void pictureBoxE_Tile_MouseDown(object sender, MouseEventArgs e)
         {
@@ -1127,11 +1136,11 @@ namespace LAZYSHELL
                     import.Width / 8, import.Height / 8,
                     e_animations[e_currentAnimation].GetPaletteSet((int)e_paletteIndex.Value));
 
-            byte[] tempTileset = CopyOverGraphicBlockOpt(
+            byte[] tempTileset = CopyOverE_GraphicBlock(
                 graphicBlock, e_animations[e_currentAnimation].GraphicSet, new Size(import.Width / 8, import.Height / 8), 16, size, 0);
             e_animations[e_currentAnimation].GraphicSet.CopyTo(e_animations[e_currentAnimation].GraphicSetBuffer, 0);
 
-            CopyOverTileset(tempTileset, new Size(import.Width / 8, import.Height / 8));
+            CopyOverE_Tileset(tempTileset, new Size(import.Width / 8, import.Height / 8));
 
             e_tileset.RedrawTileset(e_animations[e_currentAnimation].GraphicSet, effects[currentEffect].PaletteIndex, e_animations[e_currentAnimation].TileSetLength);
 
@@ -1148,6 +1157,16 @@ namespace LAZYSHELL
             //    return;
             //}
             fs.Close();
+        }
+        private void saveImageAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = "effectTileset.png";
+            saveFileDialog.Filter = "PNG files (*.png)|*.png|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.RestoreDirectory = true;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                e_tilesetImage.Save(saveFileDialog.FileName, ImageFormat.Png);
         }
 
         // palette properties
@@ -1186,8 +1205,6 @@ namespace LAZYSHELL
             }
 
             e_animations[e_currentAnimation].PaletteSetLength = e_currentPaletteSetSize = (ushort)e_paletteSetSize.Value;
-            e_paletteColor.Maximum = (e_animations[e_currentAnimation].PaletteSetLength / 2) - 1;
-
             e_animations[e_currentAnimation].UpdateOffsets(delta, e_animations[e_currentAnimation].PaletteSetPointer);
 
             SetE_PaletteImage();
@@ -1201,20 +1218,11 @@ namespace LAZYSHELL
             e_availableBytesNum -= delta;
             e_availableBytes.Text = "AVAILABLE BYTES: " + e_availableBytesNum.ToString();
         }
-        private void e_paletteColor_ValueChanged(object sender, EventArgs e)
-        {
-            if (updatingEffect) return;
-
-            e_currentColor = (int)e_paletteColor.Value;
-            InitializeE_PaletteColor();
-
-            pictureBoxE_Palette.Invalidate();
-        }
         private void e_paletteRedNum_ValueChanged(object sender, EventArgs e)
         {
             if (updatingEffect) return;
 
-            e_paletteRedNum.Value -= e_paletteRedNum.Value % 8;
+            e_paletteRedNum.Value = (int)e_paletteRedNum.Value & 0xF8;
 
             e_paletteRedBar.Value = (int)e_paletteRedNum.Value;
             e_animations[e_currentAnimation].PaletteColorRed[e_currentColor] = (int)e_paletteRedNum.Value;
@@ -1234,7 +1242,7 @@ namespace LAZYSHELL
         {
             if (updatingEffect) return;
 
-            e_paletteGreenNum.Value -= e_paletteGreenNum.Value % 8;
+            e_paletteGreenNum.Value = (int)e_paletteGreenNum.Value & 0xF8;
 
             e_paletteGreenBar.Value = (int)e_paletteGreenNum.Value;
             e_animations[e_currentAnimation].PaletteColorGreen[e_currentColor] = (int)e_paletteGreenNum.Value;
@@ -1254,7 +1262,7 @@ namespace LAZYSHELL
         {
             if (updatingEffect) return;
 
-            e_paletteBlueNum.Value -= e_paletteBlueNum.Value % 8;
+            e_paletteBlueNum.Value = (int)e_paletteBlueNum.Value & 0xF8;
 
             e_paletteBlueBar.Value = (int)e_paletteBlueNum.Value;
             e_animations[e_currentAnimation].PaletteColorBlue[e_currentColor] = (int)e_paletteBlueNum.Value;
@@ -1274,21 +1282,21 @@ namespace LAZYSHELL
         {
             if (updatingEffect) return;
 
-            e_paletteRedBar.Value -= e_paletteRedBar.Value % 8;
+            e_paletteRedBar.Value = e_paletteRedBar.Value & 0xF8;
             e_paletteRedNum.Value = e_paletteRedBar.Value;
         }
         private void e_paletteGreenBar_Scroll(object sender, EventArgs e)
         {
             if (updatingEffect) return;
 
-            e_paletteGreenBar.Value -= e_paletteGreenBar.Value % 8;
+            e_paletteGreenBar.Value = e_paletteGreenBar.Value & 0xF8;
             e_paletteGreenNum.Value = e_paletteGreenBar.Value;
         }
         private void e_paletteBlueBar_Scroll(object sender, EventArgs e)
         {
             if (updatingEffect) return;
 
-            e_paletteBlueBar.Value -= e_paletteBlueBar.Value % 8;
+            e_paletteBlueBar.Value = e_paletteBlueBar.Value & 0xF8;
             e_paletteBlueNum.Value = e_paletteBlueBar.Value;
         }
         private void pictureBoxE_Palette_MouseClick(object sender, MouseEventArgs e)
@@ -1296,7 +1304,9 @@ namespace LAZYSHELL
             pictureBoxE_Palette.Focus();
 
             if (e.Y >= e_animations[e_currentAnimation].PaletteSetLength / 2) return;
-            e_paletteColor.Value = (e.Y / 16) * 16 + (e.X / 16);
+            e_currentColor = (e.Y / 16) * 16 + (e.X / 16);
+            InitializeE_PaletteColor();
+            pictureBoxE_Palette.Invalidate();
         }
         private void pictureBoxE_Palette_Paint(object sender, PaintEventArgs e)
         {
@@ -1304,7 +1314,6 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(e_paletteImage, 0, 0);
 
             Point p = new Point(e_currentColor % 16 * 16, e_currentColor / 16 * 16);
-            if (p.Y == 0) p.Y++;
             overlay.DrawSelectionBox(e.Graphics, new Point(p.X + 15, p.Y + 15 - (p.Y % 16)), p, 1);
         }
 
@@ -2339,7 +2348,9 @@ namespace LAZYSHELL
                     }
 
                     temp += (int)e_paletteIndex.Value * 16;
-                    e_paletteColor.Value = temp;
+                    e_currentColor = temp;
+                    InitializeE_PaletteColor();
+                    pictureBoxE_Palette.Invalidate();
                 }
                 e_currentPixel = (e.X / e_zoomG) + (e.Y / e_zoomG);
             }
@@ -2389,7 +2400,9 @@ namespace LAZYSHELL
                     }
 
                     temp += (int)e_paletteIndex.Value * 16;
-                    e_paletteColor.Value = temp;
+                    e_currentColor = temp;
+                    InitializeE_PaletteColor();
+                    pictureBoxE_Palette.Invalidate();
                 }
                 e_currentPixel = (e.X / e_zoomG) + (e.Y / e_zoomG);
             }
@@ -2497,10 +2510,10 @@ namespace LAZYSHELL
         {
             colEditComboBoxA.Enabled = false;
             colEditComboBoxB.Enabled = false;
-            colEditValueA.Enabled = false;
-            colEditReds.Enabled = false;
-            colEditGreens.Enabled = false;
-            colEditBlues.Enabled = false;
+            colEditValueA.Enabled = false; colEditValueA.Increment = 8; colEditValueA.Value = 0;
+            colEditReds.Enabled = false; colEditReds.Checked = false;
+            colEditGreens.Enabled = false; colEditGreens.Checked = false;
+            colEditBlues.Enabled = false; colEditBlues.Checked = false;
             colEditLabelA.Text = "";
             colEditLabelB.Text = "";
             colEditLabelC.Text = "";
@@ -2519,10 +2532,13 @@ namespace LAZYSHELL
                     break;
                 case 1: colEditLabelC.Text = "Add"; goto case 4;
                 case 2: colEditLabelC.Text = "Subtract"; goto case 4;
-                case 3: colEditLabelC.Text = "Multiply by"; goto case 4;
+                case 3: colEditLabelC.Text = "Multiply by"; colEditValueA.Increment = 1; goto case 4;
                 case 4:
                     if (coleditSelectCommand.SelectedIndex == 4)
+                    {
                         colEditLabelC.Text = "Divide by";
+                        colEditValueA.Increment = 1;
+                    }
                     colEditLabelD.Text = "for";
                     colEditValueA.Enabled = true;
                     colEditReds.Enabled = true;

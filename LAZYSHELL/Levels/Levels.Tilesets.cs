@@ -33,7 +33,7 @@ namespace LAZYSHELL
 
             // Create the images
             if (tileSetPixels != null)
-                tileSetImage = new Bitmap(DrawImageFromIntArr(tileSetPixels, 256, 512));
+                tileSetImage = new Bitmap(Drawing.PixelArrayToImage(tileSetPixels, 256, 512));
 
             // Set the image
             switch (tabControl2.SelectedIndex)
@@ -419,7 +419,7 @@ namespace LAZYSHELL
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             if (state.Priority1)
-                e.Graphics.DrawImage(DrawImageFromIntArr(tileSet.Priority1Tint[0], 256, 512), rdst, 0, 0, 256, 512, GraphicsUnit.Pixel, ia);
+                e.Graphics.DrawImage(Drawing.PixelArrayToImage(tileSet.Priority1Tint[0], 256, 512), rdst, 0, 0, 256, 512, GraphicsUnit.Pixel, ia);
 
             if (mouseEnterTileset)
                 TilesetHoverBox(e.Graphics);
@@ -451,7 +451,7 @@ namespace LAZYSHELL
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             if (state.Priority1)
-                e.Graphics.DrawImage(DrawImageFromIntArr(tileSet.Priority1Tint[1], 256, 512), rdst, 0, 0, 256, 512, GraphicsUnit.Pixel, ia);
+                e.Graphics.DrawImage(Drawing.PixelArrayToImage(tileSet.Priority1Tint[1], 256, 512), rdst, 0, 0, 256, 512, GraphicsUnit.Pixel, ia);
 
             if (mouseEnterTileset)
                 TilesetHoverBox(e.Graphics);
@@ -485,7 +485,7 @@ namespace LAZYSHELL
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             if (state.Priority1)
-                e.Graphics.DrawImage(DrawImageFromIntArr(tileSet.Priority1Tint[2], 256, 512), rdst, 0, 0, 256, 512, GraphicsUnit.Pixel, ia);
+                e.Graphics.DrawImage(Drawing.PixelArrayToImage(tileSet.Priority1Tint[2], 256, 512), rdst, 0, 0, 256, 512, GraphicsUnit.Pixel, ia);
 
             if (mouseEnterTileset)
                 TilesetHoverBox(e.Graphics);

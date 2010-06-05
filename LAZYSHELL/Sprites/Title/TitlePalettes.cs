@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
 namespace LAZYSHELL
 {
-    public class WorldMapPalettes
+    public class TitlePalettes
     {
         private byte[] paletteSet; public byte[] PaletteSet { get { return paletteSet; } }
 
@@ -13,18 +13,18 @@ namespace LAZYSHELL
         private int[] paletteColorGreen = new int[8 * 16]; public int[] PaletteColorGreen { get { return paletteColorGreen; } set { paletteColorGreen = value; } }
         private int[] paletteColorBlue = new int[8 * 16]; public int[] PaletteColorBlue { get { return paletteColorBlue; } set { paletteColorBlue = value; } }
 
-        public WorldMapPalettes(byte[] paletteSet)
+        public TitlePalettes(byte[] paletteSet)
         {
             this.paletteSet = paletteSet;
 
-            InitializeWorldMapPalettes(paletteSet);
+            InitializeTitlePalettes(paletteSet);
         }
-        private void InitializeWorldMapPalettes(byte[] paletteSet)
+        private void InitializeTitlePalettes(byte[] paletteSet)
         {
             double multiplier = 8; // 8;
             ushort color = 0;
 
-            for (int i = 0; i < 8; i++) // 8 palettes in set
+            for (int i = 0; i < paletteSet.Length / 32; i++) // 8 palettes in set
             {
                 for (int j = 0; j < 16; j++) // 16 colors in palette
                 {
@@ -36,7 +36,7 @@ namespace LAZYSHELL
                 }
             }
         }
-        public int[] GetWorldMapPalette(int paletteIndex)
+        public int[] GetTitlePalette(int paletteIndex)
         {
             int[] temp = new int[16];
             if (paletteIndex < 0 || paletteIndex > 7) paletteIndex = 0;
@@ -50,9 +50,9 @@ namespace LAZYSHELL
         }
         public int[] GetPalettePixels()
         {
-            int[] palettePixels = new int[256 * 128];
+            int[] palettePixels = new int[256 * (paletteSet.Length / 2)];
 
-            for (int i = 0; i < 8; i++) // 8 palette blocks high
+            for (int i = 0; i < paletteSet.Length / 32; i++) // 8 palette blocks high
             {
                 for (int j = 0; j < 16; j++) // 16 palette blocks wide
                 {
@@ -63,14 +63,14 @@ namespace LAZYSHELL
                     }
                 }
             }
-            for (int y = 15; y < 128; y += 16)  // draw the horizontal gridlines
+            for (int y = 15; y < paletteSet.Length / 2; y += 16)  // draw the horizontal gridlines
             {
                 for (int x = 0; x < 256; x++)
                     palettePixels[y * 256 + x] = Color.Black.ToArgb();
             }
             for (int x = 15; x < 256; x += 16) // draw the vertical gridlines
             {
-                for (int y = 0; y < 128; y++)
+                for (int y = 0; y < paletteSet.Length / 2; y++)
                     palettePixels[y * 256 + x] = Color.Black.ToArgb();
             }
             return palettePixels;

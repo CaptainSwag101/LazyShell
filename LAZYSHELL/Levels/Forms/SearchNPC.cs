@@ -93,28 +93,8 @@ namespace LAZYSHELL
             imageWidth = npcProperties[0].ImageWidth;
             imageHeight = npcProperties[0].ImageHeight;
             if (spritePixels.Length == 0) { spritePixels = new int[2]; imageWidth = 1; imageHeight = 1; }
-            spriteImage = new Bitmap(DrawImageFromIntArr(spritePixels, imageWidth, imageHeight));
+            spriteImage = new Bitmap(Drawing.PixelArrayToImage(spritePixels, imageWidth, imageHeight));
             spritePictureBox.Invalidate();
-        }
-
-        private Bitmap DrawImageFromIntArr(int[] arr, int width, int height)
-        {
-            Bitmap image = null;
-
-            unsafe
-            {
-                fixed (void* firstPixel = &arr[0])
-                {
-                    IntPtr ip = new IntPtr(firstPixel);
-                    if (image != null)
-                        image.Dispose();
-                    image = new Bitmap(width, height, width * 4, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
-
-                }
-            }
-
-            return image;
-
         }
 
         private void npcNum_ValueChanged(object sender, EventArgs e)

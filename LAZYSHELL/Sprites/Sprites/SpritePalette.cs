@@ -13,9 +13,9 @@ namespace LAZYSHELL
 
         private int paletteOffset; public int PaletteOffset { get { return paletteOffset; } set { paletteOffset = value; } }
 
-        private int[] paletteColorRed = new int[4 * 16]; public int[] PaletteColorRed { get { return paletteColorRed; } set { paletteColorRed = value; } }
-        private int[] paletteColorGreen = new int[4 * 16]; public int[] PaletteColorGreen { get { return paletteColorGreen; } set { paletteColorGreen = value; } }
-        private int[] paletteColorBlue = new int[4 * 16]; public int[] PaletteColorBlue { get { return paletteColorBlue; } set { paletteColorBlue = value; } }
+        private int[] paletteColorRed = new int[8 * 16]; public int[] PaletteColorRed { get { return paletteColorRed; } set { paletteColorRed = value; } }
+        private int[] paletteColorGreen = new int[8 * 16]; public int[] PaletteColorGreen { get { return paletteColorGreen; } set { paletteColorGreen = value; } }
+        private int[] paletteColorBlue = new int[8 * 16]; public int[] PaletteColorBlue { get { return paletteColorBlue; } set { paletteColorBlue = value; } }
 
         public SpritePalette(byte[] data, int paletteNum)
         {
@@ -31,7 +31,7 @@ namespace LAZYSHELL
             double multiplier = 8; // 8;
             ushort color = 0;
 
-            for (int a = 0; a < 4; a++) // 4 palettes
+            for (int a = 0; a < 8; a++) // 4 palettes
             {
                 for (int i = 0; i < 16; i++) // 16 colors in palette
                 {
@@ -72,9 +72,9 @@ namespace LAZYSHELL
         }
         public int[] GetPalettePixels()
         {
-            int[] palettePixels = new int[256 * 64];
+            int[] palettePixels = new int[256 * 128];
 
-            for (int i = 0; i < 4; i++) // 4 palette blocks high
+            for (int i = 0; i < 8; i++) // 4 palette blocks high
             {
                 for (int j = 0; j < 16; j++) // 16 palette blocks wide
                 {
@@ -85,26 +85,24 @@ namespace LAZYSHELL
                     }
                 }
             }
-            for (int y = 0; y < 64; y += 16)  // draw the horizontal gridlines
+            for (int y = 15; y < 128; y += 16)  // draw the horizontal gridlines
             {
                 for (int x = 0; x < 256; x++)
                     palettePixels[y * 256 + x] = Color.Black.ToArgb();
-                if (y == 0) y--;
             }
-            for (int x = 0; x < 256; x += 16) // draw the vertical gridlines
+            for (int x = 15; x < 256; x += 16) // draw the vertical gridlines
             {
-                for (int y = 0; y < 64; y++)
+                for (int y = 0; y < 128; y++)
                     palettePixels[y * 256 + x] = Color.Black.ToArgb();
-                if (x == 0) x--;
             }
             return palettePixels;
         }
         public void Clear()
         {
             paletteOffset = 0x253000;
-            paletteColorRed = new int[4 * 16];
-            paletteColorGreen = new int[4 * 16];
-            paletteColorBlue = new int[4 * 16];
+            paletteColorRed = new int[8 * 16];
+            paletteColorGreen = new int[8 * 16];
+            paletteColorBlue = new int[8 * 16];
         }
     }
 }

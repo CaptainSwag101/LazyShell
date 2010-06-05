@@ -346,6 +346,7 @@
     <Compile Include="Features\ClearElements.Designer.cs">
       <DependentUpon>ClearElements.cs</DependentUpon>
     </Compile>
+    <Compile Include="Drawing.cs" />
     <Compile Include="Sprites\Dialogue\BattleDialogueTileset.cs" />
     <Compile Include="Sprites\Dialogue\DialogueTileset.cs" />
     <Compile Include="Sprites\Effects\Effect.cs" />
@@ -374,6 +375,9 @@
     <Compile Include="Sprites\Sprites.MapPoints.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Sprites\Sprites.Title.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sprites\Sprites.WorldMaps.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -392,6 +396,8 @@
       <DependentUpon>Sprites.cs</DependentUpon>
     </Compile>
     <Compile Include="Sprites\Sprites\Animation.cs" />
+    <Compile Include="Sprites\Title\TitlePalettes.cs" />
+    <Compile Include="Sprites\Title\TitleTileset.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Previewer\BattleDialoguePreview.cs" />
     <Compile Include="Previewer\MenuDescriptionPreview.cs" />

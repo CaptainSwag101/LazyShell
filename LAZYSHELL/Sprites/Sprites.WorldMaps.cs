@@ -170,7 +170,7 @@ namespace LAZYSHELL
         private void SetWorldMapImage()
         {
             worldMapPixels = worldMapTileSet.GetTilesetPixelArray();
-            worldMapImage = new Bitmap(DrawImageFromIntArr(worldMapPixels, 256, 256));
+            worldMapImage = new Bitmap(Drawing.PixelArrayToImage(worldMapPixels, 256, 256));
             pictureBoxWorldMap.BackColor = Color.FromArgb(worldMapPalettes.PaletteColorRed[0], worldMapPalettes.PaletteColorGreen[0], worldMapPalettes.PaletteColorBlue[0]);
             pictureBoxWorldMap.Invalidate();
         }
@@ -189,7 +189,7 @@ namespace LAZYSHELL
                 for (int x = 0; x < 32; x++)
                     wmTilePixels[y * 32 + x] = temp[y / 2 * 16 + (x / 2)];
             }
-            wmTileImage = new Bitmap(DrawImageFromIntArr(wmTilePixels, 32, 32));
+            wmTileImage = new Bitmap(Drawing.PixelArrayToImage(wmTilePixels, 32, 32));
             pictureBoxTile.BackColor = Color.FromArgb(worldMapPalettes.PaletteColorRed[0], worldMapPalettes.PaletteColorGreen[0], worldMapPalettes.PaletteColorBlue[0]);
             pictureBoxTile.Invalidate();
         }
@@ -204,14 +204,14 @@ namespace LAZYSHELL
                 for (int x = 0; x < 32; x++)
                     wmSubtilePixels[y * 32 + x] = temp[y / 4 * 8 + (x / 4)];
             }
-            wmSubtileImage = new Bitmap(DrawImageFromIntArr(wmSubtilePixels, 32, 32));
+            wmSubtileImage = new Bitmap(Drawing.PixelArrayToImage(wmSubtilePixels, 32, 32));
             pictureBoxSubtile.BackColor = Color.FromArgb(worldMapPalettes.PaletteColorRed[0], worldMapPalettes.PaletteColorGreen[0], worldMapPalettes.PaletteColorBlue[0]);
             pictureBoxSubtile.Invalidate();
         }
         private void SetWorldMapPaletteImage()
         {
             wmPalettePixels = worldMapPalettes.GetPalettePixels();
-            wmPaletteImage = new Bitmap(DrawImageFromIntArr(wmPalettePixels, 256, 128));
+            wmPaletteImage = new Bitmap(Drawing.PixelArrayToImage(wmPalettePixels, 256, 128));
             pictureBoxWMPalette.Invalidate();
         }
         private void SetWorldMapGraphicSetImage()
@@ -228,7 +228,9 @@ namespace LAZYSHELL
                         y * 16 + x,
                         (byte)wmGraphicSet.Value,
                         (byte)wmSubtilePalette.Value,
-                        false, false, false);
+                        false, false, false,
+                        model.WorldMapGraphics,
+                        worldMapPalettes.GetWorldMapPalette((byte)wmSubtilePalette.Value));
                     CopyOverTile8x8(subtile, temp, 128, x, y);
                 }
             }
@@ -238,14 +240,14 @@ namespace LAZYSHELL
                     graphicSetPixels[y * 256 + x] = temp[y / 2 * 128 + (x / 2)];
             }
 
-            graphicSetImage = new Bitmap(DrawImageFromIntArr(graphicSetPixels, 256, 256));
+            graphicSetImage = new Bitmap(Drawing.PixelArrayToImage(graphicSetPixels, 256, 256));
             pictureBoxWMGraphics.BackColor = Color.FromArgb(worldMapPalettes.PaletteColorRed[0], worldMapPalettes.PaletteColorGreen[0], worldMapPalettes.PaletteColorBlue[0]);
             pictureBoxWMGraphics.Invalidate();
         }
         private void SetWorldMapPointsImage()
         {
             mapPointsPixels = GetMapPointsPixels();
-            mapPointsImage = new Bitmap(DrawImageFromIntArr(mapPointsPixels, 256, 256));
+            mapPointsImage = new Bitmap(Drawing.PixelArrayToImage(mapPointsPixels, 256, 256));
             pictureBoxWorldMap.Invalidate();
         }
 
@@ -351,7 +353,7 @@ namespace LAZYSHELL
                 }
             }
         }
-        private Tile8x8 Draw4bppTile8x8(int tile, byte graphicSetIndex, byte paletteSetIndex, bool mirrored, bool inverted, bool priorityOne)
+        private Tile8x8 Draw4bppTile8x8(int tile, byte graphicSetIndex, byte paletteSetIndex, bool mirrored, bool inverted, bool priorityOne, byte[] graphics, int[] palette)
         {
             int offsetChange;
             bool twobpp = false;
@@ -359,14 +361,14 @@ namespace LAZYSHELL
             offsetChange = graphicSetIndex * 0x2000;
             int tileDataOffset = (tile * 0x20) + offsetChange;
 
-            if (tileDataOffset >= model.WorldMapGraphics.Length)
+            if (tileDataOffset >= graphics.Length)
                 tileDataOffset = 0;
 
             Tile8x8 temp;
-            temp = new Tile8x8(tile, model.WorldMapGraphics, tileDataOffset, worldMapPalettes.GetWorldMapPalette(paletteSetIndex), mirrored, inverted, priorityOne, twobpp);
+            temp = new Tile8x8(tile, graphics, tileDataOffset, palette, mirrored, inverted, priorityOne, twobpp);
             return temp;
         }
-        private Tile8x8 CreateNewSubtile()
+        private Tile8x8 CreateNewSubtile(byte[] graphics, int[] palette)
         {
             return Draw4bppTile8x8(
                 (byte)wmSubtile.Value,
@@ -374,7 +376,8 @@ namespace LAZYSHELL
                 (byte)wmSubtilePalette.Value,
                 wmSubtileProperties.GetItemChecked(1),
                 wmSubtileProperties.GetItemChecked(2),
-                wmSubtileProperties.GetItemChecked(0));
+                wmSubtileProperties.GetItemChecked(0),
+                graphics, palette);
         }
 
         // editing
@@ -729,9 +732,9 @@ namespace LAZYSHELL
         {
             pictureBoxWMPalette.Focus();
 
-            wmPaletteColor.Value = (e.Y / 16) * 16 + (e.X / 16);
-
+            currentWorldMapColor = (e.Y / 16) * 16 + (e.X / 16);
             InitializeWorldMapPaletteColor();
+            pictureBoxWMPalette.Invalidate();
         }
         private void pictureBoxWMPalette_Paint(object sender, PaintEventArgs e)
         {
@@ -739,24 +742,13 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(wmPaletteImage, 0, 0);
 
             Point p = new Point(currentWorldMapColor % 16 * 16, currentWorldMapColor / 16 * 16);
-            if (p.Y == 0) p.Y++;
             overlay.DrawSelectionBox(e.Graphics, new Point(p.X + 15, p.Y + 15 - (p.Y % 16)), p, 1);
-        }
-        private void wmPaletteColor_ValueChanged(object sender, EventArgs e)
-        {
-            if (updatingWorldMap) return;
-
-            currentWorldMapColor = (int)wmPaletteColor.Value;
-
-            InitializeWorldMapPaletteColor();
-
-            pictureBoxWMPalette.Invalidate();
         }
         private void wmPaletteRedNum_ValueChanged(object sender, EventArgs e)
         {
             if (updatingWorldMap) return;
 
-            wmPaletteRedNum.Value -= wmPaletteRedNum.Value % 8;
+            wmPaletteRedNum.Value = (int)wmPaletteRedNum.Value & 0xF8;
 
             wmPaletteRedBar.Value = (int)wmPaletteRedNum.Value;
             worldMapPalettes.PaletteColorRed[currentWorldMapColor] = (int)wmPaletteRedNum.Value;
@@ -786,7 +778,7 @@ namespace LAZYSHELL
         {
             if (updatingWorldMap) return;
 
-            wmPaletteGreenNum.Value -= wmPaletteGreenNum.Value % 8;
+            wmPaletteGreenNum.Value = (int)wmPaletteGreenNum.Value & 0xF8;
 
             wmPaletteGreenBar.Value = (int)wmPaletteGreenNum.Value;
             worldMapPalettes.PaletteColorGreen[currentWorldMapColor] = (int)wmPaletteGreenNum.Value;
@@ -816,7 +808,7 @@ namespace LAZYSHELL
         {
             if (updatingWorldMap) return;
 
-            wmPaletteBlueNum.Value -= wmPaletteBlueNum.Value % 8;
+            wmPaletteBlueNum.Value = (int)wmPaletteBlueNum.Value & 0xF8;
 
             wmPaletteBlueBar.Value = (int)wmPaletteBlueNum.Value;
             worldMapPalettes.PaletteColorBlue[currentWorldMapColor] = (int)wmPaletteBlueNum.Value;
@@ -846,21 +838,21 @@ namespace LAZYSHELL
         {
             if (updatingWorldMap) return;
 
-            wmPaletteRedBar.Value -= wmPaletteRedBar.Value % 8;
+            wmPaletteRedBar.Value = wmPaletteRedBar.Value & 0xF8;
             wmPaletteRedNum.Value = wmPaletteRedBar.Value;
         }
         private void wmPaletteGreenBar_Scroll(object sender, EventArgs e)
         {
             if (updatingWorldMap) return;
 
-            wmPaletteGreenBar.Value -= wmPaletteGreenBar.Value % 8;
+            wmPaletteGreenBar.Value = wmPaletteGreenBar.Value & 0xF8;
             wmPaletteGreenNum.Value = wmPaletteGreenBar.Value;
         }
         private void wmPaletteBlueBar_Scroll(object sender, EventArgs e)
         {
             if (updatingWorldMap) return;
 
-            wmPaletteBlueBar.Value -= wmPaletteBlueBar.Value % 8;
+            wmPaletteBlueBar.Value = wmPaletteBlueBar.Value & 0xF8;
             wmPaletteBlueNum.Value = wmPaletteBlueBar.Value;
         }
 
@@ -875,7 +867,10 @@ namespace LAZYSHELL
         {
             if (updatingWorldMap) return;
 
-            worldMapTileSet.TilesetLayer[currentWorldMapTile].SetSubtile(CreateNewSubtile(), currentWorldMapSubtile);
+            worldMapTileSet.TilesetLayer[currentWorldMapTile].SetSubtile(
+                CreateNewSubtile(model.WorldMapGraphics,
+                worldMapPalettes.GetWorldMapPalette((byte)wmSubtilePalette.Value)),
+                currentWorldMapSubtile);
 
             int offset = currentWorldMapTile * 4;
             if (currentWorldMapSubtile % 2 == 1) offset += 2;
@@ -902,7 +897,11 @@ namespace LAZYSHELL
         {
             if (updatingWorldMap) return;
 
-            worldMapTileSet.TilesetLayer[currentWorldMapTile].SetSubtile(CreateNewSubtile(), currentWorldMapSubtile);
+            worldMapTileSet.TilesetLayer[currentWorldMapTile].SetSubtile(
+                CreateNewSubtile(
+                model.WorldMapGraphics,
+                worldMapPalettes.GetWorldMapPalette((byte)wmSubtilePalette.Value)),
+                currentWorldMapSubtile);
 
             int offset = currentWorldMapTile * 4;
             if (currentWorldMapSubtile % 2 == 1) offset += 2;
@@ -930,7 +929,9 @@ namespace LAZYSHELL
         {
             if (updatingWorldMap) return;
 
-            worldMapTileSet.TilesetLayer[currentWorldMapTile].SetSubtile(CreateNewSubtile(), currentWorldMapSubtile);
+            worldMapTileSet.TilesetLayer[currentWorldMapTile].SetSubtile(
+                CreateNewSubtile(model.WorldMapGraphics,
+                worldMapPalettes.GetWorldMapPalette((byte)wmSubtilePalette.Value)), currentWorldMapSubtile);
 
             int offset = currentWorldMapTile * 4;
             if (currentWorldMapSubtile % 2 == 1) offset += 2;
@@ -958,7 +959,9 @@ namespace LAZYSHELL
         {
             if (updatingWorldMap) return;
 
-            worldMapTileSet.TilesetLayer[currentWorldMapTile].SetSubtile(CreateNewSubtile(), currentWorldMapSubtile);
+            worldMapTileSet.TilesetLayer[currentWorldMapTile].SetSubtile(
+                CreateNewSubtile(model.WorldMapGraphics, 
+                worldMapPalettes.GetWorldMapPalette((byte)wmSubtilePalette.Value)), currentWorldMapSubtile);
 
             int offset = currentWorldMapTile * 4;
             if (currentWorldMapSubtile % 2 == 1) offset += 2;

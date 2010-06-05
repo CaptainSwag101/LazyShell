@@ -36,6 +36,7 @@ namespace LAZYSHELL
 
         private int[] levelPixels;
         private Bitmap levelImage, priority1Tint;
+        private Bitmap templateImage;
 
         private Level levelCheck; // Used to verify a level change
         private Overlay overlay; // Object used to generate all the overlays for levels
@@ -1328,7 +1329,7 @@ namespace LAZYSHELL
             GetCurrentLevelData(); // Get the new data if required
 
             levelPixels = tileMap.Mainscreen;
-            levelImage = new Bitmap(DrawImageFromIntArr(levelPixels, 1024, 1024));
+            levelImage = new Bitmap(Drawing.PixelArrayToImage(levelPixels, 1024, 1024));
 
             priority1Tint = null;
 
@@ -1338,7 +1339,7 @@ namespace LAZYSHELL
                 try
                 {
                     tileSetPixels = tileSet.GetTilesetPixelArray(tileSet.TileSetLayers[tabControl2.SelectedIndex], tabControl2.SelectedIndex);
-                    tileSetImage = new Bitmap(DrawImageFromIntArr(tileSetPixels, 256, 512));
+                    tileSetImage = new Bitmap(Drawing.PixelArrayToImage(tileSetPixels, 256, 512));
                 }
                 catch (Exception ex)
                 {
@@ -1349,7 +1350,7 @@ namespace LAZYSHELL
 
             paletteSetPixels = paletteSet.GetPaletteSetPixels();
             paletteSetImage = null;
-            paletteSetImage = new Bitmap(DrawImageFromIntArr(paletteSetPixels, 240, 105));
+            paletteSetImage = new Bitmap(Drawing.PixelArrayToImage(paletteSetPixels, 240, 105));
 
             // Set the images
             SetLevelImages();
@@ -1357,6 +1358,15 @@ namespace LAZYSHELL
             updatingLevel = false; // Done
 
             pictureBoxLevel.Invalidate();
+
+            // templates
+            if (template != null)
+            {
+                templateImage = new Bitmap(Drawing.PixelArrayToImage(template.GetTemplatePixels(
+                    this.levelMap, this.paletteSet, this.tileSet, this.layer, this.prioritySets),
+                    template.Size.Width, template.Size.Height));
+                pictureBoxTemplate.Invalidate();
+            }
         }
         private void ResetOverlay()
         {
@@ -1394,33 +1404,12 @@ namespace LAZYSHELL
                 pictureBoxLevel.Invalidate();
 
             levelPixels = tileMap.Mainscreen;
-            levelImage = new Bitmap(DrawImageFromIntArr(levelPixels, 1024, 1024));
+            levelImage = new Bitmap(Drawing.PixelArrayToImage(levelPixels, 1024, 1024));
             priority1Tint = null;
 
             overlay.ClearSelection = false;
 
             pictureBoxLevel.Invalidate();
-        }
-
-        // drawing
-        private Bitmap DrawImageFromIntArr(int[] arr, int width, int height)
-        {
-            Bitmap image = null;
-
-            unsafe
-            {
-                fixed (void* firstPixel = &arr[0])
-                {
-                    IntPtr ip = new IntPtr(firstPixel);
-                    if (image != null)
-                        image.Dispose();
-                    image = new Bitmap(width, height, width * 4, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
-
-                }
-            }
-
-            return image;
-
         }
 
         private void UpdateCoordLabels(Point p)
@@ -2778,7 +2767,7 @@ namespace LAZYSHELL
             if (overlay.DragStart.X == overlay.DragStop.X || overlay.DragStart.Y == overlay.DragStop.Y)
             {
                 MessageBox.Show("Need to make a selection before creating a new template.",
-                    "LAZY SHELL");
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -2815,10 +2804,14 @@ namespace LAZYSHELL
                     temp = (LevelTemplate)b.Deserialize(s);
                     templates.Add(temp);
                     templatesLoaded.Items.Add(temp.Name);
+                    s.Close();
                 }
                 templatesLoaded.Enabled = true;
                 templateRenameText.Enabled = true;
                 templateRename.Enabled = true;
+
+                if (templatesLoaded.Items.Count > 0)
+                    templatesLoaded.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -2843,6 +2836,7 @@ namespace LAZYSHELL
                 {
                     s = File.Create(path + lt.Name + ".dat");
                     b.Serialize(s, lt);
+                    s.Close();
                 }
             }
             catch (Exception ex)
@@ -2870,7 +2864,10 @@ namespace LAZYSHELL
             {
                 templatesLoaded.Enabled = false;
                 templateRenameText.Enabled = false;
+                templateRenameText.Text = "";
                 templateRename.Enabled = false;
+                templateImage = null;
+                pictureBoxTemplate.Invalidate();
                 template = null;
             }
             else if (templates.Count == temp)
@@ -2903,8 +2900,16 @@ namespace LAZYSHELL
         }
         private void templatesLoaded_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (templatesLoaded.SelectedIndex == -1) return;
+
             template = (LevelTemplate)templates[templatesLoaded.SelectedIndex];
             templateRenameText.Text = template.Name;
+
+            pictureBoxTemplate.Size = template.Size;
+            templateImage = new Bitmap(Drawing.PixelArrayToImage(template.GetTemplatePixels(
+                this.levelMap, this.paletteSet, this.tileSet, this.layer, this.prioritySets),
+                template.Size.Width, template.Size.Height));
+            pictureBoxTemplate.Invalidate();
         }
         private void templateRename_Click(object sender, EventArgs e)
         {
@@ -2927,9 +2932,12 @@ namespace LAZYSHELL
 
             int index = templatesLoaded.SelectedIndex;
             template.Name = templateRenameText.Text;
-            templatesLoaded.Items.RemoveAt(index);
-            templatesLoaded.Items.Insert(index, template.Name);
-            templatesLoaded.SelectedIndex = index;
+            templatesLoaded.Items[index] = template.Name;
+        }
+        private void pictureBoxTemplate_Paint(object sender, PaintEventArgs e)
+        {
+            if (templateImage != null)
+                e.Graphics.DrawImage(templateImage, 0, 0);
         }
 
         private void templateName_KeyDown(object sender, KeyEventArgs e)
@@ -2966,9 +2974,6 @@ namespace LAZYSHELL
             template.Name = templateName.Text;
             templates.Add(template);
 
-            templatesLoaded.Items.Add(template.Name);
-            templatesLoaded.SelectedIndex = templatesLoaded.Items.Count - 1;
-            templatesLoaded.Enabled = true;
             templateRenameText.Enabled = true;
             templateRename.Enabled = true;
 
@@ -2980,6 +2985,10 @@ namespace LAZYSHELL
             template.Transfer(tileMap.TileMaps, levelMap, physicalMap, overlay.DragStart, stop);
 
             templateName.Text = "";
+
+            templatesLoaded.Items.Add(template.Name);
+            templatesLoaded.SelectedIndex = templatesLoaded.Items.Count - 1;
+            templatesLoaded.Enabled = true;
         }
         private void buttonTemplateCancel_Click(object sender, EventArgs e)
         {
@@ -3483,7 +3492,7 @@ namespace LAZYSHELL
                 ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
                 if (priority1Tint == null)
-                    priority1Tint = new Bitmap(DrawImageFromIntArr(tileMap.GetPriority1Pixels(), 1024, 1024));
+                    priority1Tint = new Bitmap(Drawing.PixelArrayToImage(tileMap.GetPriority1Pixels(), 1024, 1024));
 
                 e.Graphics.DrawImage(priority1Tint, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
             }
@@ -3781,6 +3790,8 @@ namespace LAZYSHELL
         }
         private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            panelColorBalance.Visible = false;
+
             if (tabControl2.SelectedIndex < 3)
             {
                 tileSet.RedrawTilesets(tabControl2.SelectedIndex);
@@ -3788,7 +3799,7 @@ namespace LAZYSHELL
                 {
                     tileSetPixels = tileSet.GetTilesetPixelArray(tileSet.TileSetLayers[tabControl2.SelectedIndex], tabControl2.SelectedIndex);
                     if (tileSetPixels != null)
-                        tileSetImage = new Bitmap(DrawImageFromIntArr(tileSetPixels, 256, 512));
+                        tileSetImage = new Bitmap(Drawing.PixelArrayToImage(tileSetPixels, 256, 512));
                 }
                 catch (Exception ex)
                 {

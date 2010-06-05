@@ -125,6 +125,48 @@ namespace LAZYSHELL
             CreateMainscreen();
 
         }
+        public TileMap(LevelMap levelMap, PaletteSet paletteSet, Tileset tileset, LevelLayer layer, PrioritySet[] prioritySets, LevelTemplate template)
+        {
+            this.tileset = tileset;
+            this.levelMap = levelMap;
+            this.paletteSet = paletteSet;
+            this.prioritySets = prioritySets;
+            this.levelLayer = layer;
+            this.state = State.Instance;
+
+            tileMaps[0] = new byte[0x2000];
+            tileMaps[1] = new byte[0x2000];
+            tileMaps[2] = new byte[0x1000];
+            for (int y = 0; y < template.Size.Height / 16; y++)
+            {
+                for (int x = 0; x < template.Size.Width / 16; x++)
+                {
+                    BitManager.SetShort(tileMaps[0], (y * 64 + x) * 2, 
+                        BitManager.GetShort(template.Tilemaps[0], (y * (template.Size.Width / 16) + x) * 2));
+                    BitManager.SetShort(tileMaps[1], (y * 64 + x) * 2,
+                        BitManager.GetShort(template.Tilemaps[1], (y * (template.Size.Width / 16) + x) * 2));
+                    tileMaps[2][y * 64 + x] = template.Tilemaps[2][y * (template.Size.Width / 16) + x];
+                }
+            }
+
+            for (int i = 0; i < 3; i++)
+                CreateLayer(i); // Create any required layers
+
+            DrawAllLayers();
+
+            if ((prioritySets[levelLayer.LayerPrioritySet].SubscreenL1 && state.Layer1) ||
+                (prioritySets[levelLayer.LayerPrioritySet].SubscreenL2 && state.Layer2) ||
+                (prioritySets[levelLayer.LayerPrioritySet].SubscreenL3 && state.Layer3) ||
+                (prioritySets[levelLayer.LayerPrioritySet].SubscreenOBJ && state.Objects))
+            {
+                if (subscreenPixels == null)
+                    subscreenPixels = new int[1024 * 1024];
+                CreateSubscreen(); // Create the subscreen if needed
+            }
+
+            CreateMainscreen();
+
+        }
         private void DrawAllLayers()
         {
 

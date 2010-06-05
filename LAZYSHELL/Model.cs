@@ -78,6 +78,9 @@ namespace LAZYSHELL
         private byte[] dialogueGraphics; public byte[] DialogueGraphics { get { return dialogueGraphics; } set { dialogueGraphics = value; } }
         private byte[] battleDialogueTileset; public byte[] BattleDialogueTileset { get { return battleDialogueTileset; } set { battleDialogueTileset = value; } }
 
+        // main title
+        private byte[] titleData; public byte[] TitleData { get { return titleData; } set { titleData = value; } }
+
         // For Rom Signature
         private bool locked = false; public bool Locked { get { return this.locked; } set { this.locked = value; } } // Indicates that this rom is locked and cannot be edited, not for public use
         private bool published = false; public bool Published { get { return this.published; } set { this.published = value; } } // If true, show Author Splash screen on load

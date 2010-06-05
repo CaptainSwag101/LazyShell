@@ -2494,10 +2494,10 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="CreateBackupROM" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CreateBackupROMSave" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="BackupROMDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

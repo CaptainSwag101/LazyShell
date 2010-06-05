@@ -227,7 +227,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 16));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 16));
 
             e.DrawBackground();
             e.Graphics.DrawImage(new Bitmap(icon), new Point(e.Bounds.X, e.Bounds.Y));
@@ -337,7 +337,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 14));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 14));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));
@@ -386,7 +386,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 14));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 14));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));
@@ -490,7 +490,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 14));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 14));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));
@@ -538,7 +538,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 14));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 14));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));
@@ -586,7 +586,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 14));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 14));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));
@@ -631,7 +631,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 14));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 14));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));

@@ -9,7 +9,7 @@ namespace LAZYSHELL
     {
         private byte[] data;
         private int mapPointNum; public int MapPointNum { get { return mapPointNum; } }
-        private string mapPointText; public string MapPointText { get { return mapPointText; } set { mapPointText = value; } }
+        private char[] mapPointName; public char[] MapPointName { get { return mapPointName; } set { mapPointName = value; } }
 
         private byte xCoord; public byte XCoord { get { return xCoord; } set { xCoord = value; } }
         private byte yCoord; public byte YCoord { get { return yCoord; } set { yCoord = value; } }
@@ -132,17 +132,15 @@ namespace LAZYSHELL
             int pointer = BitManager.GetShort(data, mapPointNum * 2 + 0x3EFD00);
             offset = pointer + 0x3EFD80;
             ArrayList temp = new ArrayList();
-            byte[] toStr;
 
             for (int i = 0; data[offset] != 0x06 && data[offset] != 0x00; i++)
             {
-                temp.Add(data[offset]); offset++;
+                temp.Add((char)data[offset]); offset++;
             }
-            toStr = new byte[temp.Count];
-            temp.CopyTo(toStr);
-
-            System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-            mapPointText = encoding.GetString(toStr);
+            mapPointName = new char[temp.Count];
+            int a = 0;
+            foreach (char c in temp)
+                mapPointName[a++] = c;
         }
         public void Assemble()
         {
@@ -233,7 +231,7 @@ namespace LAZYSHELL
             toSouthEnabled = false;
             toWestEnabled = false;
             toNorthEnabled = false;
-            mapPointText = "";
+            mapPointName = new char[0];
         }
     }
 }

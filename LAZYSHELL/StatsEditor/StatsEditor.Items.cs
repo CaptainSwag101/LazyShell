@@ -105,7 +105,7 @@ namespace LAZYSHELL.StatsEditor
 
                 this.itemNameIcon.SelectedIndex = (int)(statsModel.Items[(int)itemNum.Value].Name[0] - 0x20);
                 this.itemNameIcon.Invalidate();
-                this.textBoxItemName.Text = RawToASCII(statsModel.Items[(int)itemNum.Value].Name, settings.KeystrokesMenu).Substring(1);
+                this.textBoxItemName.Text = Drawing.RawToASCII(statsModel.Items[(int)itemNum.Value].Name, settings.KeystrokesMenu).Substring(1);
 
                 if (this.itemNum.Value > 0xB0)
                 {
@@ -242,7 +242,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 16));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 16));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));
@@ -308,7 +308,7 @@ namespace LAZYSHELL.StatsEditor
         private void textBoxItemName_TextChanged(object sender, EventArgs e)
         {
             char[] raw = new char[15];
-            char[] temp = ASCIIToRaw(this.textBoxItemName.Text, settings.KeystrokesMenu, 14);
+            char[] temp = Drawing.ASCIIToRaw(this.textBoxItemName.Text, settings.KeystrokesMenu, 14);
             for (int i = 0; i < 14; i++)
                 raw[i + 1] = temp[i];
             raw[0] = (char)(itemNameIcon.SelectedIndex + 32);
@@ -440,7 +440,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 16));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 16));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));
@@ -602,7 +602,7 @@ namespace LAZYSHELL.StatsEditor
                 itemDescPixels = menuDescPreview.GetPreview(
                     descCharacters, palette, statsModel.Items[(int)itemNum.Value].RawDescription,
                     new Size(120, 48), new Point(8, 8), 4);
-                itemDescImage = new Bitmap(DrawImageFromIntArr(itemDescPixels, 120, 48));
+                itemDescImage = new Bitmap(Drawing.PixelArrayToImage(itemDescPixels, 120, 48));
             }
             else
             {
@@ -615,7 +615,7 @@ namespace LAZYSHELL.StatsEditor
                 itemDescPixels = menuDescPreview.GetPreview(
                     descCharacters, palette, statsModel.Items[(int)itemNum.Value].RawDescription,
                     new Size(136, 64), new Point(16, 16), 4);
-                itemDescImage = new Bitmap(DrawImageFromIntArr(itemDescPixels, 136, 64));
+                itemDescImage = new Bitmap(Drawing.PixelArrayToImage(itemDescPixels, 136, 64));
             }
             pictureBoxItemDesc.Invalidate();
         }

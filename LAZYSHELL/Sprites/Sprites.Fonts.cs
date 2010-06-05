@@ -146,6 +146,10 @@ namespace LAZYSHELL
                 fontPaletteRedBar.Value = paletteRedDialogue[currentFontColor];
                 fontPaletteGreenBar.Value = paletteGreenDialogue[currentFontColor];
                 fontPaletteBlueBar.Value = paletteBlueDialogue[currentFontColor];
+                pictureBoxFontColor.BackColor = Color.FromArgb(
+                    paletteRedDialogue[currentFontColor],
+                    paletteGreenDialogue[currentFontColor],
+                    paletteBlueDialogue[currentFontColor]);
             }
             else
             {
@@ -155,6 +159,10 @@ namespace LAZYSHELL
                 fontPaletteRedBar.Value = paletteRedMenu[currentFontColor];
                 fontPaletteGreenBar.Value = paletteGreenMenu[currentFontColor];
                 fontPaletteBlueBar.Value = paletteBlueMenu[currentFontColor];
+                pictureBoxFontColor.BackColor = Color.FromArgb(
+                    paletteRedMenu[currentFontColor],
+                    paletteGreenMenu[currentFontColor],
+                    paletteBlueMenu[currentFontColor]);
             }
 
             updatingFonts = false;
@@ -299,7 +307,7 @@ namespace LAZYSHELL
                     palettePixels[y * 256 + x] = Color.Black.ToArgb();
                 if (x == 0) x--;
             }
-            fontPaletteImage = new Bitmap(DrawImageFromIntArr(palettePixels, 256, 16));
+            fontPaletteImage = new Bitmap(Drawing.PixelArrayToImage(palettePixels, 256, 16));
             pictureBoxFontPalette.Invalidate();
         }
         private void SetFontTableImage()
@@ -345,7 +353,7 @@ namespace LAZYSHELL
 
             pictureBoxFont.Width = width;
             pictureBoxFont.Height = height;
-            fontTableImage = new Bitmap(DrawImageFromIntArr(pixels, width, height));
+            fontTableImage = new Bitmap(Drawing.PixelArrayToImage(pixels, width, height));
             if (fontType.SelectedIndex == 3)
                 pictureBoxFont.BackColor = Color.FromArgb(palette[0]);
             else
@@ -390,7 +398,7 @@ namespace LAZYSHELL
                 pictureBoxFontEditor.BackColor = Color.FromArgb(palette[0]);
             else
                 pictureBoxFontEditor.BackColor = Color.FromArgb(palette[3]);
-            fontCharacterImage = new Bitmap(DrawImageFromIntArr(pixels, width, height));
+            fontCharacterImage = new Bitmap(Drawing.PixelArrayToImage(pixels, width, height));
             pictureBoxFontEditor.Width = width * zoom;
             pictureBoxFontEditor.Height = height * zoom;
             pictureBoxFontEditor.Invalidate();
@@ -746,7 +754,7 @@ namespace LAZYSHELL
         {
             if (updatingFonts) return;
 
-            fontPaletteRedNum.Value -= fontPaletteRedNum.Value % 8;
+            fontPaletteRedNum.Value = (int)fontPaletteRedNum.Value & 0xF8;
 
             fontPaletteRedBar.Value = (int)fontPaletteRedNum.Value;
             if (fontPalette.SelectedIndex == 0)
@@ -754,6 +762,7 @@ namespace LAZYSHELL
             else
                 paletteRedMenu[currentFontColor] = (int)fontPaletteRedNum.Value;
             Color color = Color.FromArgb((int)fontPaletteRedNum.Value, (int)fontPaletteGreenNum.Value, (int)fontPaletteBlueNum.Value);
+            this.pictureBoxFontColor.BackColor = color;
             if (currentFontColor == 1)
             {
                 fontTable.ForeColor = color;
@@ -780,7 +789,6 @@ namespace LAZYSHELL
             SetDialogueTileImage();
             SetDialogueSubtileImage();
             if (fontType.SelectedIndex != 3)
-
                 SetDialogueTextImage();
             SetDialogueBGImage();
             SetBattleDialogueTextImage();
@@ -789,7 +797,7 @@ namespace LAZYSHELL
         {
             if (updatingFonts) return;
 
-            fontPaletteGreenNum.Value -= fontPaletteGreenNum.Value % 8;
+            fontPaletteGreenNum.Value = (int)fontPaletteGreenNum.Value & 0xF8;
 
             fontPaletteGreenBar.Value = (int)fontPaletteGreenNum.Value;
             if (fontPalette.SelectedIndex == 0)
@@ -797,6 +805,7 @@ namespace LAZYSHELL
             else
                 paletteGreenMenu[currentFontColor] = (int)fontPaletteGreenNum.Value;
             Color color = Color.FromArgb((int)fontPaletteRedNum.Value, (int)fontPaletteGreenNum.Value, (int)fontPaletteBlueNum.Value);
+            this.pictureBoxFontColor.BackColor = color;
             if (currentFontColor == 1)
             {
                 fontTable.ForeColor = color;
@@ -832,7 +841,7 @@ namespace LAZYSHELL
         {
             if (updatingFonts) return;
 
-            fontPaletteBlueNum.Value -= fontPaletteBlueNum.Value % 8;
+            fontPaletteBlueNum.Value = (int)fontPaletteBlueNum.Value & 0xF8;
 
             fontPaletteBlueBar.Value = (int)fontPaletteBlueNum.Value;
             if (fontPalette.SelectedIndex == 0)
@@ -840,6 +849,7 @@ namespace LAZYSHELL
             else
                 paletteBlueMenu[currentFontColor] = (int)fontPaletteBlueNum.Value;
             Color color = Color.FromArgb((int)fontPaletteRedNum.Value, (int)fontPaletteGreenNum.Value, (int)fontPaletteBlueNum.Value);
+            this.pictureBoxFontColor.BackColor = color;
             if (currentFontColor == 1)
             {
                 fontTable.ForeColor = color;
@@ -875,21 +885,21 @@ namespace LAZYSHELL
         {
             if (updatingFonts) return;
 
-            fontPaletteRedBar.Value -= fontPaletteRedBar.Value % 8;
+            fontPaletteRedBar.Value = fontPaletteRedBar.Value & 0xF8;
             fontPaletteRedNum.Value = fontPaletteRedBar.Value;
         }
         private void fontPaletteGreenBar_Scroll(object sender, EventArgs e)
         {
             if (updatingFonts) return;
 
-            fontPaletteGreenBar.Value -= fontPaletteGreenBar.Value % 8;
+            fontPaletteGreenBar.Value = fontPaletteGreenBar.Value & 0xF8;
             fontPaletteGreenNum.Value = fontPaletteGreenBar.Value;
         }
         private void fontPaletteBlueBar_Scroll(object sender, EventArgs e)
         {
             if (updatingFonts) return;
 
-            fontPaletteBlueBar.Value -= fontPaletteBlueBar.Value % 8;
+            fontPaletteBlueBar.Value = fontPaletteBlueBar.Value & 0xF8;
             fontPaletteBlueNum.Value = fontPaletteBlueBar.Value;
         }
         private void pictureBoxFontPalette_MouseClick(object sender, MouseEventArgs e)
@@ -907,7 +917,6 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(fontPaletteImage, 0, 0);
 
             Point p = new Point(currentFontColor % 16 * 16, currentFontColor / 16 * 16);
-            if (p.Y == 0) p.Y++;
             overlay.DrawSelectionBox(e.Graphics, new Point(p.X + 15, p.Y + 15 - (p.Y % 16)), p, 1);
         }
         private void fontType_SelectedIndexChanged(object sender, EventArgs e)
@@ -961,12 +970,22 @@ namespace LAZYSHELL
         {
             pictureBoxFont.Focus();
 
+            int before = currentFontChar;
             switch (fontType.SelectedIndex)
             {
                 case 0: currentFontChar = e.Y / 12 * 16 + (e.X / 8); break;
                 case 1: currentFontChar = e.Y / 12 * 8 + (e.X / 16); break;
                 case 2: currentFontChar = e.Y / 8 * 16 + (e.X / 8); break;
-                case 3: if (e.X > 112) return; currentFontChar = e.Y / 16 * 7 + (e.X / 16); break;
+                case 3:
+                    if (e.X > 112) return;
+                    currentFontChar = e.Y / 16 * 7 + (e.X / 16); break;
+            }
+            if (currentFontChar == 59 || currentFontChar == 61)
+            {
+                MessageBox.Show("Character #91 and #93 cannot be edited because they are reserved for [ and ], respectively.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                currentFontChar = before;
+                return;
             }
 
             InitializeFontCharacter();
@@ -977,18 +996,17 @@ namespace LAZYSHELL
             mouseOverControl = pictureBoxFont.Name;
 
             characterNumLabel.BringToFront();
-            characterNumLabel.Left = 460 + e.X + 25;
-            characterNumLabel.Top = 219 + e.Y - 25;
-            characterNumLabel.Text = "[";
-            characterNumLabel.Width = 40;
+            characterNumLabel.Left = 650 + e.X + 25;
+            characterNumLabel.Top = 230 + e.Y - 25;
             switch (fontType.SelectedIndex)
             {
                 case 0: overFontChar = e.Y / 12 * 16 + (e.X / 8) + 32; break;
                 case 1: overFontChar = e.Y / 12 * 8 + (e.X / 16) + 32; break;
                 case 2: overFontChar = e.Y / 8 * 16 + (e.X / 8) + 32; break;
-                case 3: if (e.X > 112) return; overFontChar = e.Y / 16 * 7 + (e.X / 16) + 32; break;
+                case 3: if (e.X > 112) return; overFontChar = e.Y / 16 * 7 + (e.X / 16); break;
             }
-            characterNumLabel.Text += overFontChar + "]";
+            characterNumLabel.Text = "[" + overFontChar + "]";
+            CullLabelWidth(characterNumLabel);
         }
         private void pictureBoxFont_Paint(object sender, PaintEventArgs e)
         {
@@ -1116,6 +1134,7 @@ namespace LAZYSHELL
                                 break;
                         }
                         InitializeFontColor();
+                        pictureBoxFontPalette.Invalidate();
                         break;
                 }
             }

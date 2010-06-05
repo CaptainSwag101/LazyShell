@@ -172,15 +172,11 @@ namespace LAZYSHELL
         {
             if (toTest >= '\x00' && toTest <= '\x1C')
                 return true;
-            if (toTest >= '\x20' && toTest <= '\x3F')
-                return true;
-            if (toTest >= '\x41' && toTest <= '\x5A')
+            if (toTest >= '\x20' && toTest <= '\x5A')
                 return true;
             if (toTest >= '\x61' && toTest <= '\x7A')
                 return true;
             if (toTest >= '\x8E' && toTest <= '\x9C')
-                return true;
-            if (toTest == '@')
                 return true;
             return false;
         }

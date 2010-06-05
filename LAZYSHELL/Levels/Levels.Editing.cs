@@ -112,7 +112,7 @@ namespace LAZYSHELL
                     s.Width = overlay.TileSetDragStop.X - overlay.TileSetDragStart.X;
                     s.Height = overlay.TileSetDragStop.Y - overlay.TileSetDragStart.Y;
 
-                    Bitmap image = DrawImageFromIntArr(tileMap.GetRangePixels(p, s), s.Width, s.Height);
+                    Bitmap image = Drawing.PixelArrayToImage(tileMap.GetRangePixels(p, s), s.Width, s.Height);
                     p.X *= zoom;
                     p.Y *= zoom;
                     Rectangle rsrc = new Rectangle(0, 0, image.Width, image.Height);
@@ -181,7 +181,7 @@ namespace LAZYSHELL
 
                     Point p = new Point(e.X / 16 * 16, e.Y / 16 * 16);
 
-                    Bitmap image = DrawImageFromIntArr(tileMap.GetRangePixels(p, new Size(16, 16)), 16, 16);
+                    Bitmap image = Drawing.PixelArrayToImage(tileMap.GetRangePixels(p, new Size(16, 16)), 16, 16);
 
                     p.X *= zoom;
                     p.Y *= zoom;
@@ -312,7 +312,7 @@ namespace LAZYSHELL
                         pixels[y * 32 + x] = temp;
                     }
                 }
-                image = new Bitmap(DrawImageFromIntArr(pixels, 32, 784));
+                image = new Bitmap(Drawing.PixelArrayToImage(pixels, 32, 784));
 
                 p = new Point(physicalMap.OrthTilePosX[overPhysicalTile] * zoom, physicalMap.OrthTilePosY[overPhysicalTile] * zoom);
                 p.Y -= 768 * zoom;
@@ -407,7 +407,12 @@ namespace LAZYSHELL
             p.X = (e.X % 16) % 8;
             p.Y = (e.Y % 16) % 8;
             int color = ((temp8x8.PaletteSetIndex - 1) * 16) + temp8x8.Colors[p.Y * 8 + p.X];
-            numericUpDown8.Value = Math.Max(0, color);
+            currentColor = Math.Max(0, color);
+
+            updatingProperties = true;
+            UpdateCurrentColor();
+            palettePictureBox.Invalidate();
+            updatingProperties = false;
         }
 
         private void Undo()
@@ -449,9 +454,9 @@ namespace LAZYSHELL
 
             Size s = overlay.SelectionSize;
             if (editAllLayersToolStripMenuItem.Checked)
-                moveImage = new Bitmap(DrawImageFromIntArr(tileMap.GetRangePixels(overlay.DragStart, s), s.Width, s.Height));
+                moveImage = new Bitmap(Drawing.PixelArrayToImage(tileMap.GetRangePixels(overlay.DragStart, s), s.Width, s.Height));
             else
-                moveImage = new Bitmap(DrawImageFromIntArr(tileMap.GetRangePixels(layer, overlay.DragStart, s), s.Width, s.Height));
+                moveImage = new Bitmap(Drawing.PixelArrayToImage(tileMap.GetRangePixels(layer, overlay.DragStart, s), s.Width, s.Height));
 
             try
             {

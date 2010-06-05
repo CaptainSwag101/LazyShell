@@ -165,7 +165,7 @@ namespace LAZYSHELL.StatsEditor
             PaletteSet paletteSet = statsModel.PaletteSets[statsModel.Battlefields[battlefieldName.SelectedIndex].PaletteSet];
             BattlefieldTileSet bts = new BattlefieldTileSet(statsModel.Battlefields[battlefieldName.SelectedIndex], paletteSet, model);
 
-            formationBGImage = new Bitmap(DrawImageFromIntArr(bts.GetTilesetPixelArray(true), 512, 512));
+            formationBGImage = new Bitmap(Drawing.PixelArrayToImage(bts.GetTilesetPixelArray(true), 512, 512));
 
             pictureBoxFormation.Invalidate();
         }

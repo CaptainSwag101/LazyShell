@@ -321,7 +321,8 @@ namespace LAZYSHELL
             {
                 MessageBox.Show(
                     "Stats could not be opened because Lunar Compress.dll has been moved, renamed, or no longer exists.\n" +
-                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe", "LAZY SHELL");
+                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -333,7 +334,8 @@ namespace LAZYSHELL
             {
                 MessageBox.Show(
                     "Sprites could not be opened because Lunar Compress.dll has been moved, renamed, or no longer exists.\n" +
-                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe", "LAZY SHELL");
+                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -345,7 +347,8 @@ namespace LAZYSHELL
             {
                 MessageBox.Show(
                     "Levels could not be opened because Lunar Compress.dll has been moved, renamed, or no longer exists.\n" +
-                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe", "LAZY SHELL");
+                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

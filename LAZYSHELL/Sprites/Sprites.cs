@@ -88,7 +88,6 @@ namespace LAZYSHELL
 
         public Sprites(Model model)
         {
-            //DateTime start = DateTime.UtcNow;
             this.model = model;
             this.data = model.Data;
             this.state = State.Instance;
@@ -121,15 +120,13 @@ namespace LAZYSHELL
             InitializeBattleDialogueEditor();
             InitializeMapPointEditor();
             InitializeWorldMapEditor();
+            InitializeTitleEditor();
             InitializeEffectsEditor();
 
             coleditSelectCommand.SelectedIndex = 0;
             colEditReds.Checked = true;
             colEditGreens.Checked = true;
             colEditBlues.Checked = true;
-
-            //TimeSpan total = DateTime.UtcNow - start;
-            //MessageBox.Show("Total load time: " + (double)total.Milliseconds / 100 + " seconds");
         }
 
         #region Methods
@@ -172,9 +169,6 @@ namespace LAZYSHELL
 
             this.toolTip1.SetToolTip(this.pictureBoxPalette,
                 "Click a color to edit it's color values below.");
-
-            this.toolTip1.SetToolTip(this.mapPaletteColor,
-                "Select the color to edit by its index.");
 
             this.toolTip1.SetToolTip(this.mapPaletteRedNum,
                 "The amount of red in the currently selected color.");
@@ -735,9 +729,6 @@ namespace LAZYSHELL
             this.toolTip1.SetToolTip(this.pictureBoxWMPalette,
                 "Click a color to edit it's color values below.");
 
-            this.toolTip1.SetToolTip(this.wmPaletteColor,
-                "Select the color to edit by #.");
-
             this.toolTip1.SetToolTip(this.wmPaletteRedNum,
                 "The amount of red in the currently selected color.");
             this.toolTip1.SetToolTip(this.wmPaletteRedBar, toolTip1.GetToolTip(wmPaletteRedNum));
@@ -799,9 +790,6 @@ namespace LAZYSHELL
 
             this.toolTip1.SetToolTip(this.pictureBoxE_Palette,
                 "Click a color to edit it's color values below.");
-
-            this.toolTip1.SetToolTip(this.e_paletteColor,
-                "Select the color to edit by its index.");
 
             this.toolTip1.SetToolTip(this.e_paletteRedNum,
                 "The amount of red in the currently selected color.");
@@ -1059,22 +1047,6 @@ namespace LAZYSHELL
         }
 
         // drawing
-        private Bitmap DrawImageFromIntArr(int[] arr, int width, int height)
-        {
-            Bitmap image = null;
-            unsafe
-            {
-                fixed (void* firstPixel = &arr[0])
-                {
-                    IntPtr ip = new IntPtr(firstPixel);
-                    if (image != null)
-                        image.Dispose();
-                    image = new Bitmap(width, height, width * 4, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
-                }
-            }
-            return image;
-        }
-
         private int[] ImageToArray(Bitmap image, Size max)
         {
             int w = image.Width / 8 * 8;
@@ -1241,7 +1213,7 @@ namespace LAZYSHELL
                 pixels[y * s.Width + 1 + p.X] = color;
                 pixels[y * s.Width + u.Width - 3 + p.X] = color;
             }
-            return DrawImageFromIntArr(pixels, s.Width, s.Height);
+            return Drawing.PixelArrayToImage(pixels, s.Width, s.Height);
         }
 
         // editing
@@ -1315,6 +1287,8 @@ namespace LAZYSHELL
             foreach (Effect e in effects)
                 e.Assemble();
             AssembleAllE_Animations();
+
+            AssembleTitle();
         }
 
         #endregion
@@ -1468,6 +1442,10 @@ namespace LAZYSHELL
                 setAsSubtileToolStripMenuItem.Text = "Insert into dialogue";
             else
                 setAsSubtileToolStripMenuItem.Text = "Set subtile";
+            if (contextMenuStripGR.SourceControl == pictureBoxTitleLogo)
+                setAsSubtileToolStripMenuItem.Enabled = false;
+            else
+                setAsSubtileToolStripMenuItem.Enabled = true;
         }
         private void setAsSubtileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1490,17 +1468,23 @@ namespace LAZYSHELL
         }
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = SelectFile("Select the graphic block to import", "Image files (*.bmp,*.png,*.gif,*.jpg)|*.bmp;*.png;*.gif;*.jpg|All files (*.*)|*.*", 2);
+            string path;
+            string filter = "Image files (*.bmp,*.png,*.gif,*.jpg)|*.bmp;*.png;*.gif;*.jpg|All files (*.*)|*.*";
 
-            if (path != null)
+            switch (contextMenuStripGR.SourceControl.Name)
             {
-                switch (contextMenuStripGR.SourceControl.Name)
-                {
-                    case "pictureBoxGraphics":
+                case "pictureBoxGraphics":
+                    path = SelectFile("Select the graphic block to import", filter, 2);
+                    if (path != null)
                         ImportGraphicBlock(path); graphicOffset_ValueChanged(null, null); break;
-                    case "pictureBoxFont":
+                case "pictureBoxFont":
+                    path = SelectFile("Select the graphic block to import", filter, 2);
+                    if (path != null)
                         ImportFontGraphic(path); fontType_SelectedIndexChanged(null, null); break;
-                    case "pictureBoxDialogueBG":
+                case "pictureBoxDialogueBG":
+                    path = SelectFile("Select the graphic block to import", filter, 2);
+                    if (path != null)
+                    {
                         ImportDialogueGraphic(path);
                         RefreshDialogueTilesets();
                         SetBattleDialogueTilesetImage();
@@ -1508,12 +1492,23 @@ namespace LAZYSHELL
                         SetDialogueTileImage();
                         SetDialogueSubtileImage();
                         SetDialogueBGImage();
-                        break;
-                    case "pictureBoxWMGraphics":
+                    }
+                    break;
+                case "pictureBoxWMGraphics":
+                    path = SelectFile("Select the graphic block to import", filter, 2);
+                    if (path != null)
                         ImportWorldMapGraphic(path); worldMapTileset_ValueChanged(null, null); break;
-                    case "pictureBoxE_Graphics":
+                case "pictureBoxE_Graphics":
+                    path = SelectFile("Select the graphic block to import", filter, 2);
+                    if (path != null)
                         ImportE_GraphicBlock(path); break;
-                }
+                case "pictureBoxTitleL1":
+                    ImportTitle(); break;
+                case "pictureBoxTitleL2":
+                    ImportTitle(); break;
+                case "pictureBoxTitleLogo":
+                    path = SelectFile("Select the image to import", filter, 2);
+                    ImportTitleLogo(path); break;
             }
         }
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1525,6 +1520,7 @@ namespace LAZYSHELL
                 case "pictureBoxDialogueBG": ExportDialogueGraphic(); break;
                 case "pictureBoxWMGraphics": ExportWorldMapGraphic(); break;
                 case "pictureBoxE_Graphics": ExportE_GraphicBlock(); break;
+                case "pictureBoxTitleLogo": ExportTitleLogo(); break;
             }
         }
         private void saveImageToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1560,13 +1556,28 @@ namespace LAZYSHELL
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         e_graphicImage.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
                     break;
+                case "pictureBoxTitleL1":
+                    saveFileDialog.FileName = "titleL1.png";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        titleL1Image.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                    break;
+                case "pictureBoxTitleL2":
+                    saveFileDialog.FileName = "titleL2.png";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        titleL2Image.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                    break;
+                case "pictureBoxTitleLogo":
+                    saveFileDialog.FileName = "titleLogo.png";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        titleLogoImage.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                    break;
             }
         }
         private void clearToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
                 "This will erase all of the graphics in the current image.\nAre you sure you want to do this?",
-                "LAZY SHELL", MessageBoxButtons.YesNo);
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result != DialogResult.Yes) return;
 
             switch (contextMenuStripGR.SourceControl.Name)
@@ -1604,6 +1615,9 @@ namespace LAZYSHELL
                     SetE_TilesetImage();
                     SetE_MoldImage();
                     SetE_SequenceFrameImages();
+                    break;
+                case "pictureBoxTitleLogo":
+                    BitManager.SetByteArray(model.TitleData, 0xBEA0, new byte[0x1BC0]);
                     break;
             }
         }

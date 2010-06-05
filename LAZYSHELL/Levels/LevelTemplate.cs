@@ -25,9 +25,9 @@ namespace LAZYSHELL
             int offset = 0, o = 0, p = 0;
             size = new Size(stop.X - start.X, stop.Y - start.Y);
 
-            this.tilemaps[0] = new byte[(size.Width * size.Height) * 2];
-            this.tilemaps[1] = new byte[(size.Width * size.Height) * 2];
-            this.tilemaps[2] = new byte[(size.Width * size.Height)];
+            this.tilemaps[0] = new byte[(size.Width * size.Height) / 128];
+            this.tilemaps[1] = new byte[(size.Width * size.Height) / 128];
+            this.tilemaps[2] = new byte[(size.Width * size.Height) / 256];
 
             for (int y = start.Y / 16, b = 0; y < stop.Y / 16; y++, b++)
             {
@@ -53,6 +53,18 @@ namespace LAZYSHELL
                     physical[p + 1] = physicalMap.ThePhysicalMap[p + 1];
                 }
             }
+        }
+        public int[] GetTemplatePixels(LevelMap levelMap, PaletteSet paletteSet, Tileset tileset, LevelLayer layer, PrioritySet[] prioritySets)
+        {
+            TileMap tilemap = new TileMap(levelMap, paletteSet, tileset, layer, prioritySets, this);
+            int[] mainscreen = tilemap.Mainscreen;
+            int[] temp = new int[size.Width * size.Height];
+            for (int y = 0; y < size.Height; y++)
+            {
+                for (int x = 0; x < size.Width; x++)
+                    temp[y * size.Width + x] = mainscreen[y * 1024 + x];
+            }
+            return temp;
         }
     }
 }

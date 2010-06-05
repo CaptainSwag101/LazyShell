@@ -144,23 +144,6 @@ namespace LAZYSHELL.ScriptsEditor
             }
         }
 
-        private Bitmap DrawImageFromIntArr(int[] arr, int width, int height)
-        {
-            Bitmap image = null;
-            unsafe
-            {
-                fixed (void* firstPixel = &arr[0])
-                {
-                    IntPtr ip = new IntPtr(firstPixel);
-                    if (image != null)
-                        image.Dispose();
-                    image = new Bitmap(width, height, width * 4, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
-
-                }
-            }
-            return image;
-        }
-
         private string GetDirectoryPath(string caption)
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();

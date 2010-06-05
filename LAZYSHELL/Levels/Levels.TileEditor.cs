@@ -132,7 +132,7 @@ namespace LAZYSHELL
                         pixels[y * 32 + x] = temp[y / 2 * 16 + (x / 2)];
                 }
             }
-            tileImage = new Bitmap(DrawImageFromIntArr(pixels, 32, 32));
+            tileImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 32, 32));
             pictureBoxTile.BackColor = Color.FromArgb(paletteSet.PaletteColorRed[0], paletteSet.PaletteColorGreen[0], paletteSet.PaletteColorBlue[0]);
             pictureBoxTile.Invalidate();
         }
@@ -151,7 +151,7 @@ namespace LAZYSHELL
                 for (int x = 0; x < 32; x++)
                     pixels[y * 32 + x] = temp[y / 4 * 8 + (x / 4)];
             }
-            subtileImage = new Bitmap(DrawImageFromIntArr(pixels, 32, 32));
+            subtileImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 32, 32));
             pictureBoxSubtile.BackColor = Color.FromArgb(paletteSet.PaletteColorRed[0], paletteSet.PaletteColorGreen[0], paletteSet.PaletteColorBlue[0]);
             pictureBoxSubtile.Invalidate();
         }
@@ -173,7 +173,7 @@ namespace LAZYSHELL
                 }
             }
 
-            graphicSetImage = new Bitmap(DrawImageFromIntArr(pixels, 128, 128));
+            graphicSetImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 128, 128));
             pictureBoxGraphicSet.BackColor = Color.FromArgb(paletteSet.PaletteColorRed[0], paletteSet.PaletteColorGreen[0], paletteSet.PaletteColorBlue[0]);
             pictureBoxGraphicSet.Invalidate();
         }
@@ -182,7 +182,7 @@ namespace LAZYSHELL
             int[] palettePixels = new int[256 * 16];
             int[] paletteColors;
 
-            if (tabControl2.SelectedIndex != 4) 
+            if (tabControl2.SelectedIndex != 4)
                 paletteColors = paletteSet.Get4bppPalette((int)tilePalette.Value - 1);
             else
                 paletteColors = paletteSetBF.GetBattlefieldPalette((int)tilePalette.Value - 1);
@@ -207,7 +207,7 @@ namespace LAZYSHELL
                     palettePixels[y * 256 + x] = Color.Black.ToArgb();
                 if (x == 0) x--;
             }
-            paletteImage = new Bitmap(DrawImageFromIntArr(palettePixels, 256, 16));
+            paletteImage = new Bitmap(Drawing.PixelArrayToImage(palettePixels, 256, 16));
             pictureBoxPalette.Invalidate();
         }
 
@@ -260,9 +260,9 @@ namespace LAZYSHELL
                 tileDataOffset = 0;
 
             Tile8x8 temp;
-            if (tabControl2.SelectedIndex != 4) 
+            if (tabControl2.SelectedIndex != 4)
                 temp = new Tile8x8(tile, graphicSets, tileDataOffset, paletteSet.Get4bppPalette(paletteSetIndex), mirrored, inverted, priorityOne, twobpp);
-            else 
+            else
                 temp = new Tile8x8(tile, graphicSets, tileDataOffset, paletteSetBF.GetBattlefieldPalette(paletteSetIndex), mirrored, inverted, priorityOne, twobpp);
             temp.GfxSetIndex = graphicSetIndex;
             temp.PaletteSetIndex = (byte)(paletteSetIndex + 1);
@@ -294,142 +294,6 @@ namespace LAZYSHELL
             }
             else
                 graphicSets = bts.GraphicSets;
-        }
-
-        // importing graphic sets
-        private int[] ImageToArray(Bitmap image, Size max)
-        {
-            int w = image.Width / 8 * 8;
-            int h = image.Height / 8 * 8;
-            int[] temp = new int[w * h];
-            for (int y = 0; y < max.Height && y < h; y++)
-            {
-                for (int x = 0; x < max.Width && x < w; x++)
-                    temp[y * w + x] = image.GetPixel(x, y).ToArgb();
-            }
-            return temp;
-        }
-        private byte[] ArrayTo4bppTile(int[] array, int w, int h, int[] palette)
-        {
-            byte[] temp = new byte[(w * h) * 0x20];
-            Point p;
-            int offset;
-            byte bit;
-
-            ArrayToSnesPalette(array, palette);
-
-            for (int i = 0; i < w * h; i++)   // draw each 8x8 tile
-            {
-                for (int y = 0; y < 8; y++)
-                {
-                    for (int x = 0; x < 8; x++)
-                    {
-                        p = new Point(i % w * 8 + x, i / w * 8 + y);
-                        bit = (byte)(x ^ 7);
-                        offset = i * 0x20;
-                        offset += y * 2;
-                        BitManager.SetBit(temp, offset, bit, (array[p.Y * (w * 8) + p.X] & 1) == 1);
-                        BitManager.SetBit(temp, offset + 1, bit, (array[p.Y * (w * 8) + p.X] & 2) == 2);
-                        BitManager.SetBit(temp, offset + 16, bit, (array[p.Y * (w * 8) + p.X] & 4) == 4);
-                        BitManager.SetBit(temp, offset + 17, bit, (array[p.Y * (w * 8) + p.X] & 8) == 8);
-                    }
-                }
-            }
-            return temp;
-        }
-        private byte[] ArrayTo2bppTile(int[] array, int w, int h, int[] palette)
-        {
-            byte[] temp = new byte[(w * h) * 0x20];
-            Point p;
-            int offset;
-            byte bit;
-
-            ArrayToSnesPalette(array, palette);
-
-            for (int i = 0; i < w * h; i++)   // draw each 8x8 tile
-            {
-                for (int y = 0; y < 8; y++)
-                {
-                    for (int x = 0; x < 8; x++)
-                    {
-                        p = new Point(i % w * 8 + x, i / w * 8 + y);
-                        bit = (byte)(x ^ 7);
-                        offset = i * 0x10;
-                        offset += y * 2;
-                        BitManager.SetBit(temp, offset, bit, (array[p.Y * (w * 8) + p.X] & 1) == 1);
-                        BitManager.SetBit(temp, offset + 1, bit, (array[p.Y * (w * 8) + p.X] & 2) == 2);
-                    }
-                }
-            }
-            return temp;
-        }
-        private void ArrayToSnesPalette(int[] array, int[] palette)
-        {
-            Color[] colors = new Color[palette.Length];
-
-            double distance = 500.0;
-            double temp;
-
-            double r, g, b;
-            double dbl_test_red;
-            double dbl_test_green;
-            double dbl_test_blue;
-
-            for (int i = 0; i < palette.Length; i++)
-                colors[i] = Color.FromArgb(palette[i]);
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                distance = 500;
-                r = Convert.ToDouble(Color.FromArgb(array[i]).R);
-                g = Convert.ToDouble(Color.FromArgb(array[i]).G);
-                b = Convert.ToDouble(Color.FromArgb(array[i]).B);
-                int nearest_color = 0;
-                Color o;
-
-                for (int v = 1; v < colors.Length; v++)
-                {
-                    o = colors[v];
-
-                    dbl_test_red = Math.Pow(Convert.ToDouble(((Color)o).R) - r, 2.0);
-                    dbl_test_green = Math.Pow(Convert.ToDouble(((Color)o).G) - g, 2.0);
-                    dbl_test_blue = Math.Pow(Convert.ToDouble(((Color)o).B) - b, 2.0);
-
-                    temp = Math.Sqrt(dbl_test_blue + dbl_test_green + dbl_test_red);
-
-                    // explore the result and store the nearest color
-                    if (temp == 0.0)
-                    {
-                        nearest_color = v;
-                        break;
-                    }
-                    else if (temp < distance)
-                    {
-                        distance = temp;
-                        nearest_color = v;
-                    }
-                }
-                if (array[i] != 0)
-                    array[i] = nearest_color;
-            }
-        }
-        private void CopyOverGraphicBlock(byte[] src, byte[] dest, Size s, int colspan, int tileSize, int x, int y, int offset)
-        {
-            Point p;
-            for (int b = 0; b < s.Height; b++)
-            {
-                for (int a = 0; a < s.Width; a++)
-                {
-                    p = new Point(x + a, y + b);
-
-                    for (int i = 0; i < tileSize; i++)
-                    {
-                        if ((p.Y * colspan * tileSize + (p.X * tileSize) + i + offset) >= dest.Length) return;
-
-                        dest[p.Y * colspan * tileSize + (p.X * tileSize) + i + offset] = src[b * s.Width * tileSize + (a * tileSize) + i];
-                    }
-                }
-            }
         }
 
         #endregion
@@ -782,13 +646,13 @@ namespace LAZYSHELL
             BinaryReader br;
             Bitmap import;
 
-            byte[] graphicBlock = new byte[0x4000];
+            byte[] graphicBlock = new byte[0x6000];
             int offset;
             switch ((int)tileGFXSet.Value)
             {
                 case 0: offset = 0; break;
                 case 1: offset = 0x2000; break;
-                case 2: offset = 0x3000; break;
+                case 2: offset = 0x4000; break;
                 default: offset = 0; break;
             }
             int[] palette;
@@ -804,12 +668,13 @@ namespace LAZYSHELL
                 if (Path.GetExtension(path) == ".jpg" || Path.GetExtension(path) == ".gif" || Path.GetExtension(path) == ".png")
                 {
                     import = new Bitmap(Image.FromFile(path));
-                    graphicBlock = ArrayTo4bppTile(ImageToArray(import, new Size(128, 128)), import.Width / 8, import.Height / 8, palette);
-                    CopyOverGraphicBlock(
-                        graphicBlock, graphicSets, new Size(import.Width / 8, import.Height / 8), 16, 0x20,
-                        (mouseOverSubTile - 1) % 16,
-                        (mouseOverSubTile - 1) / 16,
-                        offset);
+                    Drawing.PixelArrayTo4bpp(
+                        Drawing.ImageToPixelArray(import, new Size(128, 128)),
+                        graphicBlock, new Size(import.Width / 8, import.Height / 8), palette);
+                    Rectangle region = new Rectangle(
+                        mouseOverSubTile % 16, mouseOverSubTile / 16, 
+                        import.Width / 8, import.Height / 8);
+                    Drawing.CopyOver4bppGraphics(graphicBlock, graphicSets, region, 16, offset);
                 }
                 else
                 {
@@ -1322,7 +1187,8 @@ namespace LAZYSHELL
             else
                 bts.TileSetLayer[(ushort)currentTile].IsBeingModified = false;
 
-            InitializeTileEditor();
+            buttonToggleTileEditor.Checked = false;
+            panelTileEditor.Visible = false;
         }
 
         private void panel109_Scroll(object sender, ScrollEventArgs e)

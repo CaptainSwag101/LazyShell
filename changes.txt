@@ -99,7 +99,7 @@ DATE		PORTION		DESCRIPTION
 2010-05-12	(all)		Added: SNES9X support for previewing
 
 
-v2.3
+v2.3b
 
 DATE		PORTION		DESCRIPTION
 -------------------------------------------
@@ -113,6 +113,11 @@ DATE		PORTION		DESCRIPTION
 2010-05-21	(all)		Modif: import/export uses new window
 2010-05-21	Levels		Modif: progress bar for importing/exporting now separate window, used by events too
 
+
+v2.4b
+
+DATE		PORTION		DESCRIPTION
+-------------------------------------------
 ***
 2010-05-22	(all)		Added: notes database builder, right click menus or values to add elements to DB
 ***
@@ -124,3 +129,20 @@ DATE		PORTION		DESCRIPTION
 2010-05-23	(all)		Added: warning when trying to run in 64-bit OS
 2010-05-28	Scripts		Fixed: updating problem when editing memory commands in battle scripts
 2010-05-30	(all)		Modif: names of items,spells,attacks,monsters are read from 3 diff keystroke tables
+
+
+v2.5b
+
+DATE		PORTION		DESCRIPTION
+-------------------------------------------
+2010-06-04	Levels		Added: templates now show an image of the template in the window
+2010-06-04	(all)		Added: drawing class to provide image conversion functions for all editors
+2010-06-04	(all)		Modif: removed "color" from palette editors, organized controls in palette editors
+2010-06-05	Sprites		Modif: map point names are shown using font table
+2010-06-05	Sprites		Fixed: map point names are read/saved using respective keystroke table
+2010-06-05	Levels		Fixed: npc's speed+ control had no ceiling value
+2010-06-05	Sprites		Added: view tile # when mouse moves over effect tileset
+
+***
+2010-06-05	Sprites		Added: main title screen editor, cannot edit palettes yet, can import/export images
+***

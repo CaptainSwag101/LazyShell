@@ -40,15 +40,13 @@ namespace LAZYSHELL
             updatingProperties = true;
             updatingLevel = true;
 
-            currentBFColor = (int)bfPaletteColorNum.Value;
-
             int bf = (int)battlefieldNum.Value;
             paletteSetBF = paletteSets[battlefields[bf].PaletteSet];
 
             bts = new BattlefieldTileSet(battlefields[bf], paletteSetBF, model);
 
             battlefieldPixels = bts.GetTilesetPixelArray(false);//bts.TileSetLayer);            
-            battlefieldImage = new Bitmap(DrawImageFromIntArr(battlefieldPixels, 512, 512));
+            battlefieldImage = new Bitmap(Drawing.PixelArrayToImage(battlefieldPixels, 512, 512));
 
             // Update fields
             battlefieldName.SelectedIndex = bf;
@@ -76,7 +74,7 @@ namespace LAZYSHELL
             this.bfPaletteBlueBar.Value = paletteSetBF.PaletteColorBlueBF[currentBFColor];
 
             battlefieldPaletteSetPixels = paletteSetBF.GetBFPaletteSetPixels();
-            battlefieldPaletteSetImage = new Bitmap(DrawImageFromIntArr(battlefieldPaletteSetPixels, 256, 112));
+            battlefieldPaletteSetImage = new Bitmap(Drawing.PixelArrayToImage(battlefieldPaletteSetPixels, 256, 112));
 
             this.pictureBoxColorBF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(bfPaletteRedNum.Value)))), ((int)(((byte)(bfPaletteGreenNum.Value)))), ((int)(((byte)(bfPaletteBlueNum.Value)))));
 
@@ -85,8 +83,6 @@ namespace LAZYSHELL
         }
         private void UpdateCurrentBFColor()
         {
-            currentBFColor = (int)bfPaletteColorNum.Value;
-
             this.bfPaletteRedNum.Value = paletteSetBF.PaletteColorRedBF[currentBFColor];
             this.bfPaletteGreenNum.Value = paletteSetBF.PaletteColorGreenBF[currentBFColor];
             this.bfPaletteBlueNum.Value = paletteSetBF.PaletteColorBlueBF[currentBFColor];
@@ -329,7 +325,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            bfPaletteRedNum.Value -= bfPaletteRedNum.Value % 8;
+            bfPaletteRedNum.Value = (int)bfPaletteRedNum.Value & 0xF8;
 
             if (bfPaletteRedBar.Value == (int)bfPaletteRedNum.Value)
             {
@@ -359,7 +355,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            bfPaletteGreenNum.Value -= bfPaletteGreenNum.Value % 8;
+            bfPaletteGreenNum.Value = (int)bfPaletteGreenNum.Value & 0xF8;
 
             if (bfPaletteGreenBar.Value == (int)bfPaletteGreenNum.Value)
             {
@@ -389,7 +385,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            bfPaletteBlueNum.Value -= bfPaletteBlueNum.Value % 8;
+            bfPaletteBlueNum.Value = (int)bfPaletteBlueNum.Value & 0xF8;
 
             if (bfPaletteBlueBar.Value == (int)bfPaletteBlueNum.Value)
             {
@@ -419,7 +415,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            bfPaletteRedBar.Value -= bfPaletteRedBar.Value % 8;
+            bfPaletteRedBar.Value = bfPaletteRedBar.Value & 0xF8;
 
             if (bfPaletteRedNum.Value == bfPaletteRedBar.Value)
                 {
@@ -448,7 +444,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            bfPaletteGreenBar.Value -= bfPaletteGreenBar.Value % 8;
+            bfPaletteGreenBar.Value = bfPaletteGreenBar.Value & 0xF8;
 
             if (bfPaletteGreenNum.Value == bfPaletteGreenBar.Value)
                 {
@@ -477,7 +473,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            bfPaletteBlueBar.Value -= bfPaletteBlueBar.Value % 8;
+            bfPaletteBlueBar.Value = bfPaletteBlueBar.Value & 0xF8;
 
             if (bfPaletteBlueNum.Value == bfPaletteBlueBar.Value)
                 {
@@ -506,7 +502,11 @@ namespace LAZYSHELL
         private void bfPalettePictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             currentBFColor = (e.X / 16) + ((e.Y / 16) * 16);
-            bfPaletteColorNum.Value = currentBFColor;
+
+            updatingProperties = true;
+            UpdateCurrentBFColor();
+            bfPalettePictureBox.Invalidate();
+            updatingProperties = false;
         }
         private void bfPalettePictureBox_Paint(object sender, PaintEventArgs e)
         {
@@ -550,6 +550,13 @@ namespace LAZYSHELL
             colEditRedo_Click(null, null);
 
             colEditBF = false;
+        }
+
+        private void colorBalanceBF_Click(object sender, EventArgs e)
+        {
+            colEditBFPanel.BringToFront();
+            panelColorBalance.Left = panelTilesets.Left - 270;
+            panelColorBalance.Visible = !panelColorBalance.Visible;
         }
         #endregion
     }

@@ -131,7 +131,7 @@ namespace LAZYSHELL
                 offset += 2;
             }
 
-            physicalMapImage = new Bitmap(DrawImageFromIntArr(physicalMapPixels, 1024, 1024));
+            physicalMapImage = new Bitmap(Drawing.PixelArrayToImage(physicalMapPixels, 1024, 1024));
         }
 
         public void SetOrthographic()
@@ -448,7 +448,7 @@ namespace LAZYSHELL
                 twoTiles = !twoTiles;
             }
 
-            physicalMapImage = new Bitmap(DrawImageFromIntArr(physicalMapPixels, 1024, 1024));
+            physicalMapImage = new Bitmap(Drawing.PixelArrayToImage(physicalMapPixels, 1024, 1024));
         }
         public ushort GetTileNum(int physTileNum)
         {
@@ -471,23 +471,6 @@ namespace LAZYSHELL
                     model.EditPhysicalMaps[i] = true;
                 }
             }
-        }
-
-        private Bitmap DrawImageFromIntArr(int[] arr, int width, int height)
-        {
-            Bitmap image = null;
-            unsafe
-            {
-                fixed (void* firstPixel = &arr[0])
-                {
-                    IntPtr ip = new IntPtr(firstPixel);
-                    if (image != null)
-                        image.Dispose();
-                    image = new Bitmap(width, height, width * 4, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
-
-                }
-            }
-            return image;
         }
     }
 }

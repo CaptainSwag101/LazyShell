@@ -30,7 +30,7 @@ namespace LAZYSHELL
             this.mapPointNum.Value = 0;
 
             for (int i = 0; i < mapPoints.Length; i++)
-                mapPointName.Items.Add(mapPoints[i].MapPointText);
+                mapPointName.Items.Add(new string(mapPoints[i].MapPointName));
 
             RefreshMapPointEditor();
 
@@ -143,7 +143,7 @@ namespace LAZYSHELL
                 toNorthCheckBit.Enabled = false;
             }
 
-            textBoxMapPoint.Text = mapPoints[currentMapPoint].MapPointText;
+            textBoxMapPoint.Text = Drawing.RawToASCII(mapPoints[currentMapPoint].MapPointName, settings.Keystrokes);
 
             updatingMapPoints = false;
         }
@@ -161,18 +161,18 @@ namespace LAZYSHELL
             if (mapPoints[currentMapPoint].GoMapPoint)
             {
                 for (int i = 0; i < mapPoints.Length; i++)
-                    goMapPointA.Items.Add(mapPoints[i].MapPointText);
+                    goMapPointA.Items.Add(new string(mapPoints[i].MapPointName));
                 for (int i = 0; i < mapPoints.Length; i++)
-                    goMapPointB.Items.Add(mapPoints[i].MapPointText);
+                    goMapPointB.Items.Add(new string(mapPoints[i].MapPointName));
             }
             for (int i = 0; i < mapPoints.Length; i++)
-                toEastPoint.Items.Add(mapPoints[i].MapPointText);
+                toEastPoint.Items.Add(new string(mapPoints[i].MapPointName));
             for (int i = 0; i < mapPoints.Length; i++)
-                toSouthPoint.Items.Add(mapPoints[i].MapPointText);
+                toSouthPoint.Items.Add(new string(mapPoints[i].MapPointName));
             for (int i = 0; i < mapPoints.Length; i++)
-                toWestPoint.Items.Add(mapPoints[i].MapPointText);
+                toWestPoint.Items.Add(new string(mapPoints[i].MapPointName));
             for (int i = 0; i < mapPoints.Length; i++)
-                toNorthPoint.Items.Add(mapPoints[i].MapPointText);
+                toNorthPoint.Items.Add(new string(mapPoints[i].MapPointName));
         }
         private bool CompareString(byte[] stringA, byte[] stringB, int loc)
         {
@@ -204,27 +204,27 @@ namespace LAZYSHELL
         }
         private void AssembleAllMapPointTexts()
         {
-            byte[][] pointNames = new byte[56][];
-            byte[] tempB;
+            char[][] pointNames = new char[56][];
+            char[] tempB;
             int[] duplicates = new int[56];   // the point it is a duplicate of
             int[] locations = new int[56];    // the location within the point it is a duplicate of
             bool[] isdup = new bool[56];      // if is a duplicate of something
             // set duplicates
             for (int i = 0; i < mapPoints.Length; i++)
             {
-                pointNames[i] = strToByte(mapPoints[i].MapPointText);   // the name we'll be comparing everything to
+                pointNames[i] = mapPoints[i].MapPointName;   // the name we'll be comparing everything to
                 if (!isdup[i])
                 {
                     for (int a = 0; a < mapPoints.Length; a++)
                     {
                         if (a != i && !isdup[a])  // last condition checks if it already has duplicate
                         {
-                            tempB = strToByte(mapPoints[a].MapPointText);   // the name that might be a duplicate of tempA
+                            tempB = mapPoints[a].MapPointName;   // the name that might be a duplicate of tempA
                             for (int b = 0; b < pointNames[i].Length; b++)
                             {
                                 if (tempB.Length == pointNames[i].Length - b)
                                 {
-                                    if (CompareString(pointNames[i], tempB, b)) // if tempB is a duplicate of tempA at location b of tempA
+                                    if (BitManager.Compare(pointNames[i], tempB, b, 0)) // if tempB is a duplicate of tempA at location b of tempA
                                     {
                                         locations[a] = b;
                                         duplicates[a] = i;
@@ -252,7 +252,7 @@ namespace LAZYSHELL
                 {
                     pointers[i] = pointer;
                     BitManager.SetShort(data, i * 2 + pOffset, pointers[i]);
-                    BitManager.SetByteArray(data, dOffset, pointNames[i]);
+                    BitManager.SetCharArray(data, dOffset, pointNames[i]);
                     dOffset += pointNames[i].Length;
                     pointer += (ushort)pointNames[i].Length;
                     data[dOffset] = 6; dOffset++; pointer++;
@@ -301,40 +301,67 @@ namespace LAZYSHELL
             else
                 mapPointNum.Value = currentMapPoint = mapPointName.SelectedIndex;
         }
+        private void mapPointName_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0 || e.Index > 55)
+                return;
+
+            // set the palette
+            int[] palette = new int[16];
+            for (int i = 0; i < 16; i++) // 16 colors in palette
+                palette[i] = Color.FromArgb(paletteRedMenu[i], paletteRedMenu[i], paletteRedMenu[i]).ToArgb();
+
+            // set the pixels
+            int[] temp = battleDialoguePreview.GetPreview(fontDialogue, palette, mapPoints[e.Index].MapPointName, false);
+            int[] pixels = new int[256 * 32];
+
+            for (int y = 2, c = 10; c < 32; y++, c++)
+            {
+                for (int x = 2, a = 8; a < 256; x++, a++)
+                    pixels[y * 256 + x] = temp[c * 256 + a];
+            }
+
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 32));
+
+            e.DrawBackground();
+            e.Graphics.DrawImage(new Bitmap(icon), new Point(e.Bounds.X, e.Bounds.Y));
+            e.DrawFocusRectangle();
+        }
         private void textBoxMapPoint_TextChanged(object sender, EventArgs e)
         {
             if (updatingMapPoints) return;
 
-            mapPoints[currentMapPoint].MapPointText = textBoxMapPoint.Text;
+            mapPoints[currentMapPoint].MapPointName = Drawing.ASCIIToRaw(textBoxMapPoint.Text, settings.Keystrokes, textBoxMapPoint.Text.Length);
 
             updatingMapPoints = true;
             mapPointName.Items.RemoveAt(currentMapPoint);
             mapPointName.Items.Insert(currentMapPoint, textBoxMapPoint.Text);
             mapPointName.Text = textBoxMapPoint.Text;
+            mapPointName.Invalidate();
             updatingMapPoints = false;
 
             // check total length
-            byte[][] pointNames = new byte[56][];
-            byte[] tempB;
+            char[][] pointNames = new char[56][];
+            char[] tempB;
             int[] duplicates = new int[56];   // the point it is a duplicate of
             int[] locations = new int[56];    // the location within the point it is a duplicate of
             bool[] isdup = new bool[56];      // if is a duplicate of something
             // set duplicates
             for (int i = 0; i < mapPoints.Length; i++)
             {
-                pointNames[i] = strToByte(mapPoints[i].MapPointText);   // the name we'll be comparing everything to
+                pointNames[i] = mapPoints[i].MapPointName;   // the name we'll be comparing everything to
                 if (!isdup[i])
                 {
                     for (int a = 0; a < mapPoints.Length; a++)
                     {
                         if (a != i && !isdup[a])  // last condition checks if it already has duplicate
                         {
-                            tempB = strToByte(mapPoints[a].MapPointText);   // the name that might be a duplicate of tempA
+                            tempB = mapPoints[a].MapPointName;   // the name that might be a duplicate of tempA
                             for (int b = 0; b < pointNames[i].Length; b++)
                             {
                                 if (tempB.Length == pointNames[i].Length - b)
                                 {
-                                    if (CompareString(pointNames[i], tempB, b)) // if tempB is a duplicate of tempA at location b of tempA
+                                    if (BitManager.Compare(pointNames[i], tempB, b, 0)) // if tempB is a duplicate of tempA at location b of tempA
                                     {
                                         locations[a] = b;
                                         duplicates[a] = i;
@@ -376,7 +403,7 @@ namespace LAZYSHELL
             if (updatingMapPoints) return;
 
             mapPoints[currentMapPoint].XCoord = (byte)mapPointXCoord.Value;
-            
+
             if (waitBothCoords) return;
 
             SetWorldMapPointsImage();
@@ -415,8 +442,8 @@ namespace LAZYSHELL
             {
                 for (int i = 0; i < mapPoints.Length; i++)
                 {
-                    goMapPointA.Items.Add(mapPoints[i].MapPointText);
-                    goMapPointB.Items.Add(mapPoints[i].MapPointText);
+                    goMapPointA.Items.Add(mapPoints[i].MapPointName);
+                    goMapPointB.Items.Add(mapPoints[i].MapPointName);
                 }
                 whichPointCheckAddress.Enabled = true;
                 whichPointCheckBit.Enabled = true;

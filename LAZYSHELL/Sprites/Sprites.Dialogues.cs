@@ -118,7 +118,7 @@ namespace LAZYSHELL
         {
             switch (fontPalette.SelectedIndex)
             {
-                case 0: dialogueBGImage = new Bitmap(DrawImageFromIntArr(dialogueTileset.GetTilesetPixelArray(), 256, 56)); break;
+                case 0: dialogueBGImage = new Bitmap(Drawing.PixelArrayToImage(dialogueTileset.GetTilesetPixelArray(), 256, 56)); break;
                 case 1: dialogueBGImage = new Bitmap(256, 56); break;
             }
             pictureBoxDialogue.BackColor = Color.FromArgb(paletteRedDialogue[0], paletteGreenDialogue[0], paletteBlueDialogue[0]);
@@ -178,7 +178,7 @@ namespace LAZYSHELL
             {
                 universal.Dialogues[currentDialogue].SetDialogue(dialogueTextBox.Text, textCodeFormat);
                 int[] pixels = dialoguePreview.GetPreview(fontDialogue, fontTriangle, GetFontPalette(fontPalette.SelectedIndex), GetFontPalette(0), universal.Dialogues[currentDialogue].RawDialogue, 16);
-                dialogueTextImage = new Bitmap(DrawImageFromIntArr(pixels, 256, 56));
+                dialogueTextImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 56));
             }
             pictureBoxDialogue.Invalidate();
         }
@@ -238,13 +238,13 @@ namespace LAZYSHELL
                 {
                     universal.BattleDialogues[currentBattleDialogue].SetBattleDialogue(battleDialogueTextBox.Text, textCodeFormat);
                     int[] pixels = battleDialoguePreview.GetPreview(fontDialogue, GetFontPalette(0), universal.BattleDialogues[currentBattleDialogue].RawBattleDialogue, false);
-                    battleDialogueTextImage = new Bitmap(DrawImageFromIntArr(pixels, 256, 32));
+                    battleDialogueTextImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 32));
                 }
                 else
                 {
                     spriteModel.BattleMessages[currentBattleDialogue].SetBattleDialogue(battleDialogueTextBox.Text, textCodeFormat);
                     int[] pixels = battleDialoguePreview.GetPreview(fontDialogue, GetFontPalette(0), spriteModel.BattleMessages[currentBattleDialogue].RawBattleDialogue, false);
-                    battleDialogueTextImage = new Bitmap(DrawImageFromIntArr(pixels, 256, 32));
+                    battleDialogueTextImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 32));
                 }
             }
             pictureBoxBattleDialogue.Invalidate();

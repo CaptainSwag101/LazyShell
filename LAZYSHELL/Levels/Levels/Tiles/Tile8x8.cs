@@ -12,7 +12,7 @@ namespace LAZYSHELL
         private int[] colors = new int[64]; public int[] Colors { get { return colors; } set { colors = value; } }
         private bool mirrored, inverted;
 
-        private int tileNum; public int TileNum { get { return tileNum; } }
+        private int tileNum; public int TileNum { get { return tileNum; } set { tileNum = value; } }
         private bool priorityOne; public bool PriorityOne { get { return priorityOne; } } // Tells us if this tile is a priority one tile
         public bool Mirrored { get { return mirrored; } set { mirrored = value; } }
         public bool Inverted { get { return inverted; } set { inverted = value; } }

@@ -102,7 +102,7 @@ namespace LAZYSHELL
             physicalTileDoorFormat.SelectedIndex = physicalTiles[currentPhysicalTile].Door;
 
             physicalTilePixels = physicalTiles[currentPhysicalTile].DrawPhysicalTile(quadBasePixels, quadBlockPixels, halfQuadBlockPixels, stairsUpLeftLowPixels, stairsUpLeftHighPixels, stairsUpRightLowPixels, stairsUpRightHighPixels);
-            physicalTileImage = new Bitmap(DrawImageFromIntArr(physicalTilePixels, 32, 784));
+            physicalTileImage = new Bitmap(Drawing.PixelArrayToImage(physicalTilePixels, 32, 784));
             pictureBoxPhysicalTile.Invalidate();
         }
 

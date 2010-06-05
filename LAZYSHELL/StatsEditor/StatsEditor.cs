@@ -147,17 +147,17 @@ namespace LAZYSHELL.StatsEditor
             model.DialogueGraphics = BitManager.GetByteArray(model.Data, 0x3DF000, 0x700);
             model.BattleDialogueTileset = BitManager.GetByteArray(model.Data, 0x015943, 0x100);
 
-            psychopathBGImage = new Bitmap(DrawImageFromIntArr(new BattleDialogueTileset(model, GetFontPalette()).GetTilesetPixelArray(), 256, 32));
+            psychopathBGImage = new Bitmap(Drawing.PixelArrayToImage(new BattleDialogueTileset(model, GetFontPalette()).GetTilesetPixelArray(), 256, 32));
             pictureBoxPsychopath.Invalidate();
 
             model.MenuGraphicSet = model.Decompress(0x3E0E69, 0x2000);
             model.MenuTileset = model.Decompress(0x3E286A, 0x2000);
             model.MenuFrame = model.Decompress(0x3E2607, 0x200);
 
-            menuBGImage = new Bitmap(DrawImageFromIntArr(new MenuTileset(model, GetMenuBGPalette()).GetTilesetPixelArray(), 256, 256));
-            menuFrameItemImage = new Bitmap(DrawImageFromIntArr(MenuFramePixels(new Size(15, 6)), 120, 48));
-            menuFrameEquipImage = new Bitmap(DrawImageFromIntArr(MenuFramePixels(new Size(17, 8)), 136, 64));
-            menuFrameSpellImage = new Bitmap(DrawImageFromIntArr(MenuFramePixels(new Size(15, 8)), 120, 64));
+            menuBGImage = new Bitmap(Drawing.PixelArrayToImage(new MenuTileset(model, GetMenuBGPalette()).GetTilesetPixelArray(), 256, 256));
+            menuFrameItemImage = new Bitmap(Drawing.PixelArrayToImage(MenuFramePixels(new Size(15, 6)), 120, 48));
+            menuFrameEquipImage = new Bitmap(Drawing.PixelArrayToImage(MenuFramePixels(new Size(17, 8)), 136, 64));
+            menuFrameSpellImage = new Bitmap(Drawing.PixelArrayToImage(MenuFramePixels(new Size(15, 8)), 120, 64));
             pictureBoxSpellDesc.Invalidate();
             pictureBoxItemDesc.Invalidate();
 
@@ -234,37 +234,6 @@ namespace LAZYSHELL.StatsEditor
                 palette[i] = Color.FromArgb(r, g, b).ToArgb();
             }
             return palette;
-        }
-
-        private string RawToASCII(char[] chars, StringCollection keystrokes)
-        {
-            string temp = "";
-            for (int i = 0; i < chars.Length; i++)
-            {
-                if (keystrokes[chars[i]] == "")
-                    temp += "_";
-                temp += keystrokes[chars[i]];
-            }
-            return temp;
-        }
-        private char[] ASCIIToRaw(string text, StringCollection keystrokes, int length)
-        {
-            char[] temp = new char[length];
-
-            int i = 0;
-            for (; i < temp.Length && i < text.Length; i++)
-            {
-                for (int a = 0; a < keystrokes.Count; a++)
-                {
-                    if (keystrokes[a] == text.Substring(i, 1))
-                        temp[i] = (char)a;
-                }
-            }
-            // pad with spaces
-            for (; i < temp.Length; i++)
-                temp[i] = '\x20';
-
-            return temp;
         }
 
         // tooltips
@@ -1489,24 +1458,6 @@ namespace LAZYSHELL.StatsEditor
                 CopyOverTile8x8(frameTileset[0x06], pixels, s.Width * 8, (s.Width - 1) * 8, y * 8);
             }
             return pixels;
-        }
-        private Bitmap DrawImageFromIntArr(int[] arr, int width, int height)
-        {
-            Bitmap image = null;
-
-            unsafe
-            {
-                fixed (void* firstPixel = &arr[0])
-                {
-                    IntPtr ip = new IntPtr(firstPixel);
-                    if (image != null)
-                        image.Dispose();
-                    image = new Bitmap(width, height, width * 4, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
-
-                }
-            }
-
-            return image;
         }
         public void CopyOverTile8x8(Tile8x8 source, int[] dest, int destinationWidth, int x, int y)
         {

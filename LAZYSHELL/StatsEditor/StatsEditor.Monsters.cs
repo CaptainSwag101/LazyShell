@@ -53,7 +53,7 @@ namespace LAZYSHELL.StatsEditor
                 updatingMonsters = true;
 
                 this.monsterName.SelectedIndex = universal.MonsterNames.GetIndexFromNum((int)MonsterNumber.Value);
-                this.TextboxMonsterName.Text = RawToASCII(statsModel.Monsters[(int)MonsterNumber.Value].Name, settings.KeystrokesMenu);
+                this.TextboxMonsterName.Text = Drawing.RawToASCII(statsModel.Monsters[(int)MonsterNumber.Value].Name, settings.KeystrokesMenu);
                 this.MonsterValHP.Value = statsModel.Monsters[(int)MonsterNumber.Value].HP;
                 this.MonsterValSpeed.Value = statsModel.Monsters[(int)MonsterNumber.Value].Speed;
                 this.MonsterValAtk.Value = statsModel.Monsters[(int)MonsterNumber.Value].Attack;
@@ -167,7 +167,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 14));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 14));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));
@@ -177,7 +177,7 @@ namespace LAZYSHELL.StatsEditor
         {
             if (universal.MonsterNames.GetNameByNum(statsModel.Monsters[(int)MonsterNumber.Value].MonsterNum).CompareTo(this.TextboxMonsterName.Text) != 0)
             {
-                statsModel.Monsters[(int)MonsterNumber.Value].Name = ASCIIToRaw(this.TextboxMonsterName.Text, settings.KeystrokesMenu, 13);
+                statsModel.Monsters[(int)MonsterNumber.Value].Name = Drawing.ASCIIToRaw(this.TextboxMonsterName.Text, settings.KeystrokesMenu, 13);
 
                 universal.MonsterNames.SwapName(
                     statsModel.Monsters[(int)MonsterNumber.Value].MonsterNum, 
@@ -433,7 +433,7 @@ namespace LAZYSHELL.StatsEditor
                     statsModel.Monsters[(int)MonsterNumber.Value].SetPsychoMsg(TextboxMonsterPsychoMsg.Text, textCodeFormat);
                     int[] pixels = battleDialoguePreview.GetPreview(fontCharacters, GetFontPalette(), statsModel.Monsters[(int)MonsterNumber.Value].RawPsychoMsg, false);
 
-                    psychopathTextImage = new Bitmap(DrawImageFromIntArr(pixels, 256, 32));
+                    psychopathTextImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 32));
                     pictureBoxPsychopath.Invalidate();
                 }
             }

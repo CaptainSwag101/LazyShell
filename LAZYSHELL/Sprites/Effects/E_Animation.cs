@@ -380,17 +380,15 @@ namespace LAZYSHELL
                     }
                 }
             }
-            for (int y = 0; y < paletteSetLength / 2; y += 16)  // draw the horizontal gridlines
+            for (int y = 15; y < paletteSetLength / 2; y += 16)  // draw the horizontal gridlines
             {
                 for (int x = 0; x < 256; x++)
                     paletteSetPixels[y * 256 + x] = Color.Black.ToArgb();
-                if (y == 0) y--;
             }
-            for (int x = 0; x < 256; x += 16) // draw the vertical gridlines
+            for (int x = 15; x < 256; x += 16) // draw the vertical gridlines
             {
                 for (int y = 0; y < paletteSetLength / 2; y++)
                     paletteSetPixels[y * 256 + x] = Color.Black.ToArgb();
-                if (x == 0) x--;
             }
 
             return paletteSetPixels;

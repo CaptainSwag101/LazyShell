@@ -318,8 +318,8 @@ namespace LAZYSHELL
 
             Rectangle rsrc = new Rectangle(0, 0, s.Width, s.Height);
             Rectangle rdst = new Rectangle(p.X * z, (p.Y - 768) * z, z * s.Width, z * s.Height);
-            g.DrawImage(new Bitmap(DrawImageFromIntArr(pixels, s.Width, s.Height)), rdst, rsrc, GraphicsUnit.Pixel);
-            //g.DrawImage(new Bitmap(DrawImageFromIntArr(pixels, s.Width, s.Height)), p.X, p.Y - 768);
+            g.DrawImage(new Bitmap(Drawing.PixelArrayToImage(pixels, s.Width, s.Height)), rdst, rsrc, GraphicsUnit.Pixel);
+            //g.DrawImage(new Bitmap(Conversion.PixelArrayToImage(pixels, s.Width, s.Height)), p.X, p.Y - 768);
 
             pixels = null;
         }
@@ -417,7 +417,7 @@ namespace LAZYSHELL
                 }
                 // End Drawing
             }
-            exitsImage = new Bitmap(DrawImageFromIntArr(pixels, 1024, 1024));
+            exitsImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 1024, 1024));
             pixels = null;
 
             if (exits.NumberOfExits > 0)
@@ -554,7 +554,7 @@ namespace LAZYSHELL
                 }
                 // End Drawing
             }
-            eventsImage = new Bitmap(DrawImageFromIntArr(pixels, 1024, 1024));
+            eventsImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 1024, 1024));
             pixels = null;
 
             if (events.NumberOfEvents > 0)
@@ -713,7 +713,7 @@ namespace LAZYSHELL
                 if (show[i])
                     CopySuboverlayToOverlay(whole, 1024, pixels[i], size[i].Width, size[i].Height, x, y);
             }
-            npcsImage = new Bitmap(DrawImageFromIntArr(whole, 1024, 1024));
+            npcsImage = new Bitmap(Drawing.PixelArrayToImage(whole, 1024, 1024));
             pixels = null;
             whole = null;
 
@@ -795,7 +795,7 @@ namespace LAZYSHELL
                 CopySuboverlayToOverlay(pixels, 1024, overlapTileset.OverlapTiles[overlaps.Type].Pixels(), 32, 32, x, y - 16);
                 highlight = false;
             }
-            overlapsImage = new Bitmap(DrawImageFromIntArr(pixels, 1024, 1024));
+            overlapsImage = new Bitmap(Drawing.PixelArrayToImage(pixels, 1024, 1024));
             pixels = null;
 
             if (overlaps.NumberOfOverlaps > 0)
@@ -850,23 +850,6 @@ namespace LAZYSHELL
                     }
                 }
             }
-        }
-
-        private Bitmap DrawImageFromIntArr(int[] arr, int width, int height)
-        {
-            Bitmap image = null;
-            unsafe
-            {
-                fixed (void* firstPixel = &arr[0])
-                {
-                    IntPtr ip = new IntPtr(firstPixel);
-                    if (image != null)
-                        image.Dispose();
-                    image = new Bitmap(width, height, width * 4, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
-
-                }
-            }
-            return image;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace LAZYSHELL.StatsEditor
                 this.attackName.SelectedIndex = universal.AttackNames.GetIndexFromNum((int)attackNum.Value);
                 this.attackHitRate.Value = statsModel.Attacks[(int)attackNum.Value].HitRate;
                 this.attackAtkLevel.Value = statsModel.Attacks[(int)attackNum.Value].AttackLevel;
-                this.textBoxAttackName.Text = RawToASCII(statsModel.Attacks[(int)attackNum.Value].Name, settings.Keystrokes);
+                this.textBoxAttackName.Text = Drawing.RawToASCII(statsModel.Attacks[(int)attackNum.Value].Name, settings.Keystrokes);
                 this.attackStatusEffect.SetItemChecked(0, statsModel.Attacks[(int)attackNum.Value].EffectMute);
                 this.attackStatusEffect.SetItemChecked(1, statsModel.Attacks[(int)attackNum.Value].EffectSleep);
                 this.attackStatusEffect.SetItemChecked(2, statsModel.Attacks[(int)attackNum.Value].EffectPoison);
@@ -93,7 +93,7 @@ namespace LAZYSHELL.StatsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 32));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 32));
 
             e.DrawBackground();
             e.Graphics.DrawImage(new Bitmap(icon), new Point(e.Bounds.X, e.Bounds.Y));
@@ -103,7 +103,7 @@ namespace LAZYSHELL.StatsEditor
         {
             if (universal.AttackNames.GetNameByNum(statsModel.Attacks[(int)this.attackNum.Value].AttackNum).CompareTo(this.textBoxAttackName.Text) != 0)
             {
-                statsModel.Attacks[(int)attackNum.Value].Name = ASCIIToRaw(this.textBoxAttackName.Text, settings.Keystrokes, 13);
+                statsModel.Attacks[(int)attackNum.Value].Name = Drawing.ASCIIToRaw(this.textBoxAttackName.Text, settings.Keystrokes, 13);
 
                 universal.AttackNames.SwapName(
                     statsModel.Attacks[(int)attackNum.Value].AttackNum, 

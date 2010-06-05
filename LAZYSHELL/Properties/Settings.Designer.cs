@@ -1727,7 +1727,7 @@ namespace LAZYSHELL.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool CreateBackupROM {
             get {
                 return ((bool)(this["CreateBackupROM"]));
@@ -1739,7 +1739,7 @@ namespace LAZYSHELL.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool CreateBackupROMSave {
             get {
                 return ((bool)(this["CreateBackupROMSave"]));

@@ -78,7 +78,7 @@ namespace LAZYSHELL.ScriptsEditor
             imageWidth = npcProperties.ImageWidth;
             imageHeight = npcProperties.ImageHeight;
             if (spritePixels.Length == 0) { spritePixels = new int[2]; imageWidth = 1; imageHeight = 1; }
-            spriteImage = new Bitmap(DrawImageFromIntArr(spritePixels, imageWidth, imageHeight));
+            spriteImage = new Bitmap(Drawing.PixelArrayToImage(spritePixels, imageWidth, imageHeight));
             pictureBoxMonster.Invalidate();
 
             BattleScriptTree.EndUpdate();
@@ -723,7 +723,7 @@ namespace LAZYSHELL.ScriptsEditor
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
 
-            Bitmap icon = new Bitmap(DrawImageFromIntArr(pixels, 256, 14));
+            Bitmap icon = new Bitmap(Drawing.PixelArrayToImage(pixels, 256, 14));
 
             e.DrawBackground();
             e.Graphics.DrawImage(icon, new Point(e.Bounds.X, e.Bounds.Y));
