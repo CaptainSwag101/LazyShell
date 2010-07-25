@@ -7,58 +7,41 @@ namespace LAZYSHELL
 {
     public class ProgramController
     {
-        private Program App;
-        private Model model; public Model Model { get { return model; } }
-        private State state = State.Instance;
 
+        private Program App;
+        private Model model;
+        private State state = State.Instance;
+        public Model Model { get { return model; } }
+        public bool DockEditors { get { return App.DockEditors; } set { App.DockEditors = value; } }
+        // Constructor
         public ProgramController(Model model, Program app)
         {
             this.model = model;
             this.App = app;
         }
-
-        public void exit()
-        {
-            Application.Exit();
-        }
-
+        #region File Managing
         public bool OpenRomFile()
         {
             if (App.OpenRomFile())
             {
                 model.ClearModel();
-                state.Universal = new UniversalVariables(); // reset universal variables;
                 state.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
-                if (VerifyRom())
-                {
-                    LAZYSHELL.Encryption.Stamp signature = model.DecryptRomSignature();
-                    if (signature.Published)
-                        model.ViewSignature(signature);
-                }
-                else
+                if (!VerifyRom())
                     return false;
                 return true;
             }
             else
                 return false;
 
-            
+
         }
         public bool OpenRomFile(string filename)
         {
             if (App.OpenRomFile(filename))
             {
                 model.ClearModel();
-                state.Universal = new UniversalVariables();
                 state.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
-                if (VerifyRom())
-                {
-                    LAZYSHELL.Encryption.Stamp signature = model.DecryptRomSignature();
-
-                    if (signature.Published)
-                        model.ViewSignature(signature);
-                }
-                else
+                if (!VerifyRom())
                     return false;
                 return true;
             }
@@ -67,27 +50,21 @@ namespace LAZYSHELL
         }
         public bool SaveRomFile()
         {
-            // Rom Signature Check
-            model.EncryptRomSignature();
             return App.SaveRomFile();
         }
         public bool SaveRomFileAs()
         {
-            // Rom Signature Save
-            model.EncryptRomSignature();
             return App.SaveRomFileAs();
         }
-        public bool CloseRomFile()
+        public void CloseRomFile()
         {
-            return false;
+            model.ClearModel();
+            state.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
+            App.CloseRomFile();
         }
         public bool VerifyRom()
         {
             return model.VerifyRom();
-        }
-        public bool Locked()
-        {
-            return model.Locked;
         }
         public string GetFileName()
         {
@@ -129,39 +106,8 @@ namespace LAZYSHELL
         {
             return model.GetFileSize();
         }
-        public void StatsAndProperties()
-        {
-            App.CreateStatsWindow();            
-        }
-        public void Sprites()
-        {
-            App.CreateSpritesWindow();
-        }
-        public void Levels()
-        {
-            App.CreateLevelsWindow();
-        }
-        public void CreateNewLevelsCommandStack()
-        {
-            App.CreateNewLevelsCommandStack();
-        }
-        public void ClearLevelData()
-        {
-            model.ClearLevelData();
-        }
-        public void Scripts()
-        {
-            App.CreateScriptsWindow();
-        }
-        public void Patches()
-        {
-            App.CreatePatchesWindow();
-        }
-        public void Notes()
-        {
-            App.CreateNotesWindow();
-        }
-        // MD5 hash methods
+        #endregion
+        #region MD5 hash methods
         public void CreateNewMd5Checksum()
         {
             model.CreateNewMD5Checksum();
@@ -178,56 +124,118 @@ namespace LAZYSHELL
         {
             return App.AssembleAndCloseWindows();
         }
-        public void AssembleFinal(bool val)
+        #endregion
+        #region Author Stamp
+        public bool Locked()
         {
-            model.AssembleFinal = val;
-            if(val)
-                Assemble();
+            return model.Locked;
         }
-
-        // Apply Author stamp to rom
         public bool Publish()
         {
-            LAZYSHELL.Encryption.Cipher cipher = new LAZYSHELL.Encryption.Cipher(model.Data, model);
-            LAZYSHELL.Encryption.Stamp stamp = new LAZYSHELL.Encryption.Stamp();
-            
-            bool pass = false; // Open publish window?
-
-            if (cipher.IsNewRom()) // Yes if its a new rom
-                pass = true;
-            else if (cipher.CheckPassword(stamp.Password)) // Yes if the default password is valid
-                pass = true;
-
-            if (!pass) // Not a new rom/default password
-            {
-                LAZYSHELL.Encryption.EnterPassword getPass = new LAZYSHELL.Encryption.EnterPassword(stamp); // Ask for password
-                getPass.ShowDialog();
-                pass = cipher.CheckPassword(stamp.Password); // Check password against entered password
-            }
-            if (pass) // Open Stamper
-            {
-                LAZYSHELL.Encryption.AuthorStamp stamper = new LAZYSHELL.Encryption.AuthorStamp(this.model, stamp);
-                stamper.ShowDialog();
-                
-                if (!stamp.Invalidated) // We have info
-                {
-                    // Ask to save rom
-                    if (MessageBox.Show("Publishing a ROM requires saving. Save and publish this rom now?", "LAZY SHELL", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        cipher.EncryptSignature(stamp, true);
-                        return App.SaveRomFileAs(); // Save
-                    }
-                }
-            }
-            else
-                if(stamp.Password != null)
-                    MessageBox.Show("Incorrect Password"); // Do Not Save
+            // Ask to save rom
+            if (MessageBox.Show("Publishing a ROM requires saving. Save and publish this rom now?",
+                "LAZY SHELL", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                return App.SaveRomFileAs(); // Save
             return false;
         }
-        public void ViewSignature()
+        #endregion
+        #region Create Editor Windows
+        public void Allies()
         {
-            model.ViewSignature();  
+            App.CreateAlliesWindow();
         }
-
+        public void Animations()
+        {
+            App.CreateAnimationsWindow();
+        }
+        public void Attacks()
+        {
+            App.CreateAttacksWindow();
+        }
+        public void Battlefields()
+        {
+            App.CreateBattlefieldsWindow();
+        }
+        public void BattleScripts()
+        {
+            App.CreateBattleScriptsWindow();
+        }
+        public void Dialogues()
+        {
+            App.CreateDialoguesWindow();
+        }
+        public void Effects()
+        {
+            App.CreateEffectsWindow();
+        }
+        public void Formations()
+        {
+            App.CreateFormationsWindow();
+        }
+        public void Items()
+        {
+            App.CreateItemsWindow();
+        }
+        public void Levels()
+        {
+            App.CreateLevelsWindow();
+        }
+        public void MainTitle()
+        {
+            App.CreateMainTitleWindow();
+        }
+        public void Monsters()
+        {
+            App.CreateMonstersWindow();
+        }
+        public void Scripts()
+        {
+            App.CreateEventScriptsWindow();
+        }
+        public void Sprites()
+        {
+            App.CreateSpritesWindow();
+        }
+        public void WorldMaps()
+        {
+            App.CreateWorldMapsWindow();
+        }
+        public void Patches()
+        {
+            App.CreatePatchesWindow();
+        }
+        public void Notes()
+        {
+            App.CreateNotesWindow();
+        }
+        public void Dock()
+        {
+            App.Dock();
+        }
+        public void Undock()
+        {
+            App.Undock();
+        }
+        public void MinimizeAll()
+        {
+            App.MinimizeAll();
+        }
+        public void RestoreAll()
+        {
+            App.RestoreAll();
+        }
+        public void CloseAll()
+        {
+            App.CloseAll();
+        }
+        public void LoadAll()
+        {
+            App.LoadAll();
+        }
+        public void ClearAll()
+        {
+            App.ClearAll();
+        }
+        #endregion
     }
 }

@@ -146,3 +146,71 @@ DATE		PORTION		DESCRIPTION
 ***
 2010-06-05	Sprites		Added: main title screen editor, cannot edit palettes yet, can import/export images
 ***
+
+
+v3.0b
+-------------------------------------------
+General changes:
+*Each editor is in a separate window, with some exceptions
+*Icon buttons with 18x18 images instead of menustrips
+*GUI style generally utilizes Fixed3D borders now
+*No more timing editor since it has been moved into separate editors
+*Areas used for drawing are larger and easier to work in
+*Previewer doesn't have unnecessary button options for assembling
+*Sub-editors within an editor's window can be toggled on/off
+
+General additions:
+*Importing and exporting for all elements of the editor.
+*One-click load-all editors
+*One-click minimize and restoration of all editor windows
+*Dockability inside the main form for all editors
+*Reload a loaded ROM file
+*Close a loaded ROM file
+*Settings window containing editor's preferences
+*Universal graphics editor with image importing
+*Universal palette editor with color balance manipulation
+*Universal search function with movable sizeable window
+
+Editor-specific changes:
+*Allies: defense timing has been moved into this editor
+*Attacks: spell timing has been moved into this editor
+*Battlefields: entire battlefield displayed, no need for scrolling
+*Dialogues: icons instead of a listbox for inserting symbols
+*Dialogues: font character image width is sized based on width value
+*Effects: molds are editable like a level's tilemap
+*Items: weapon timing has been moved into this editor
+*Items: item description shows always, no need for toggle option
+*Sprites: tileset for tilemap format molds works like a level tileset
+*World Maps: when viewing locations, map transforms to correct size
+
+Editor-specific additions:
+*Battlefields: expanded base of drawing functions for editing tileset
+*Dialogues: search function for battle dialogues
+*Dialogues: show BG color option for font editor
+*Dialogues: battle dialogues can now be dumped to a text file
+*Effects: expanded base of drawing functions for editing molds
+*Effects: images are shown for a sequence's frames
+*Effects: duplicate functions for molds, frames
+*Effects: show BG color option
+*Levels: select multiple physical tiles
+*Levels: duplicate function for NPCs
+*Levels: copy, paste, duplicate functions for exits, events, overlaps
+*Levels: expanded base of drawing functions for editing tilesets
+*Levels: boundary box for viewing in-game boundaries
+*Levels: mirror and invert a selection of 16x16 tiles in a tileset
+*Main Title: expanded base of drawing functions for editing tilesets
+*Sprites: expanded base of drawing functions for editing molds
+*Sprites: images are shown for a sequence's frames
+*Sprites: duplicate functions for molds, sequences, frames
+*Sprites: zoom box for mold editor
+*Sprites: show BG color option
+*World Maps: expanded base of drawing functions for editing maps
+
+Notes on palette editor:
+*Brightness and contrast effects can be applied to any palette in the editor.
+*Grayscale and negative image effects are available in the palette editor.
+*Along with the original RGB switching and equating options, color balance can be manipulated.
+*A paint editor-like color spectrum chart is available for selecting various colors.
+
+Notes on graphic editor:
+*A second color can be selected for use with drawing using the right-click button.

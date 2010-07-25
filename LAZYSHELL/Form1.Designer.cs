@@ -29,688 +29,759 @@ namespace LAZYSHELL
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.baseConvertorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadRom = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.openSprites = new System.Windows.Forms.Button();
-            this.openStats = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.restoreElementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.publishRomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewRomSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.recentFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadLastUsedROMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createBackupROMOnLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createBackupROMOnSaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backupROMLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentROMDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.standardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.undoStackSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.undoStackSizeTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.patchHTTPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serverToolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.ignoreInvalidRomWarningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showEncryptionWarningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.resetSettingsToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveCurrentSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openScripts = new System.Windows.Forms.Button();
-            this.openLevels = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.openNotes = new System.Windows.Forms.Button();
-            this.openPatches = new System.Windows.Forms.Button();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.loadRomTextBox = new System.Windows.Forms.RichTextBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.removeHeader = new System.Windows.Forms.Button();
             this.romInfo = new System.Windows.Forms.RichTextBox();
-            this.menuStrip1.SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.loadRom = new System.Windows.Forms.ToolStripButton();
+            this.loadRomTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.removeHeader = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.openAllies = new System.Windows.Forms.ToolStripButton();
+            this.openAnimations = new System.Windows.Forms.ToolStripButton();
+            this.openAttacks = new System.Windows.Forms.ToolStripButton();
+            this.openBattlefields = new System.Windows.Forms.ToolStripButton();
+            this.openBattleScripts = new System.Windows.Forms.ToolStripButton();
+            this.openDialogues = new System.Windows.Forms.ToolStripButton();
+            this.openEffects = new System.Windows.Forms.ToolStripButton();
+            this.openEventScripts = new System.Windows.Forms.ToolStripButton();
+            this.openFormations = new System.Windows.Forms.ToolStripButton();
+            this.openItems = new System.Windows.Forms.ToolStripButton();
+            this.openLevels = new System.Windows.Forms.ToolStripButton();
+            this.openMainTitle = new System.Windows.Forms.ToolStripButton();
+            this.openMonsters = new System.Windows.Forms.ToolStripButton();
+            this.openSprites = new System.Windows.Forms.ToolStripButton();
+            this.openWorldMaps = new System.Windows.Forms.ToolStripButton();
+            this.openPatches = new System.Windows.Forms.ToolStripButton();
+            this.openNotes = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.recentFiles = new System.Windows.Forms.ToolStripDropDownButton();
+            this.refreshROM = new System.Windows.Forms.ToolStripButton();
+            this.closeROM = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.showROMInfo = new System.Windows.Forms.ToolStripButton();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
+            this.restoreElementsToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
+            this.publishRomToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
+            this.openSettings = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.openAll = new System.Windows.Forms.ToolStripButton();
+            this.closeAll = new System.Windows.Forms.ToolStripButton();
+            this.restoreAll = new System.Windows.Forms.ToolStripButton();
+            this.minimizeAll = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.docking = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.loadAllData = new System.Windows.Forms.ToolStripButton();
+            this.clearModel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
+            this.toolStrip4.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.aboutToolStripMenuItem.Text = "About...";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.baseConvertorToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // baseConvertorToolStripMenuItem
-            // 
-            this.baseConvertorToolStripMenuItem.Name = "baseConvertorToolStripMenuItem";
-            this.baseConvertorToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.baseConvertorToolStripMenuItem.Text = "Base Convertor...";
-            this.baseConvertorToolStripMenuItem.Click += new System.EventHandler(this.baseConvertorToolStripMenuItem_Click);
-            // 
-            // loadRom
-            // 
-            this.loadRom.BackColor = System.Drawing.SystemColors.Control;
-            this.loadRom.FlatAppearance.BorderSize = 0;
-            this.loadRom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loadRom.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loadRom.Location = new System.Drawing.Point(1, 56);
-            this.loadRom.Name = "loadRom";
-            this.loadRom.Size = new System.Drawing.Size(118, 26);
-            this.loadRom.TabIndex = 2;
-            this.loadRom.Text = " LOAD ROM...";
-            this.loadRom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.loadRom.UseVisualStyleBackColor = false;
-            this.loadRom.Click += new System.EventHandler(this.loadRom_Click);
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label4.Image = global::LAZYSHELL.Properties.Resources.button_sprites;
-            this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label4.Location = new System.Drawing.Point(120, 296);
-            this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(2);
-            this.label4.Size = new System.Drawing.Size(347, 48);
-            this.label4.TabIndex = 304;
-            this.label4.Text = "EDIT...\n       Sprite animations, spell effect animations...\n       Dialogues, fo" +
-                "nts, world maps...";
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(216)))), ((int)(((byte)(216)))));
-            this.label3.Image = global::LAZYSHELL.Properties.Resources.button_levels;
-            this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label3.Location = new System.Drawing.Point(120, 198);
-            this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(2);
-            this.label3.Size = new System.Drawing.Size(347, 48);
-            this.label3.TabIndex = 302;
-            this.label3.Text = "EDIT...\n       Levels - modify an area\'s fields and properties...\n       Maps - m" +
-                "odify an area\'s tilemap and NPC map...";
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.label2.Image = global::LAZYSHELL.Properties.Resources.button_scripts;
-            this.label2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label2.Location = new System.Drawing.Point(120, 247);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(2);
-            this.label2.Size = new System.Drawing.Size(347, 48);
-            this.label2.TabIndex = 300;
-            this.label2.Text = "EDIT...\n       Battle Scripts, Event Scripts...\n       Animation Scripts - modify" +
-                " spell, attack, item animations...";
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.label1.Image = global::LAZYSHELL.Properties.Resources.button_stats;
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Location = new System.Drawing.Point(120, 149);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(2);
-            this.label1.Size = new System.Drawing.Size(347, 48);
-            this.label1.TabIndex = 297;
-            this.label1.Text = "EDIT...\n       Monsters, Magic, Attacks, Items, Shops...\n       Characters, Level" +
-                "-ups, Weapon/Spell Timing...";
-            // 
-            // openSprites
-            // 
-            this.openSprites.BackColor = System.Drawing.SystemColors.Window;
-            this.openSprites.Enabled = false;
-            this.openSprites.FlatAppearance.BorderSize = 0;
-            this.openSprites.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openSprites.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openSprites.Location = new System.Drawing.Point(1, 296);
-            this.openSprites.Name = "openSprites";
-            this.openSprites.Size = new System.Drawing.Size(118, 48);
-            this.openSprites.TabIndex = 9;
-            this.openSprites.Text = "SPRITES...";
-            this.openSprites.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openSprites.UseVisualStyleBackColor = false;
-            this.openSprites.Click += new System.EventHandler(this.openSprites_Click);
-            // 
-            // openStats
-            // 
-            this.openStats.BackColor = System.Drawing.SystemColors.Window;
-            this.openStats.Enabled = false;
-            this.openStats.FlatAppearance.BorderSize = 0;
-            this.openStats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openStats.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openStats.Location = new System.Drawing.Point(1, 149);
-            this.openStats.Name = "openStats";
-            this.openStats.Size = new System.Drawing.Size(118, 48);
-            this.openStats.TabIndex = 6;
-            this.openStats.Text = "STATS...";
-            this.openStats.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openStats.UseVisualStyleBackColor = false;
-            this.openStats.Click += new System.EventHandler(this.openStats_Click);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.settingsToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(495, 24);
-            this.menuStrip1.TabIndex = 1;
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
-            this.restoreElementsToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.publishRomToolStripMenuItem,
-            this.viewRomSignatureToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.recentFilesToolStripMenuItem,
-            this.toolStripSeparator6,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.openToolStripMenuItem.Text = "Open...";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(94, 6);
+            // 
+            // panel4
+            // 
+            this.panel4.AutoSize = true;
+            this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.panel1);
+            this.panel4.Controls.Add(this.toolStrip1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 25);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(583, 79);
+            this.panel4.TabIndex = 317;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.romInfo);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(579, 50);
+            this.panel1.TabIndex = 332;
+            // 
+            // romInfo
+            // 
+            this.romInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.romInfo.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.romInfo.Location = new System.Drawing.Point(94, 0);
+            this.romInfo.Name = "romInfo";
+            this.romInfo.ReadOnly = true;
+            this.romInfo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.romInfo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.romInfo.Size = new System.Drawing.Size(485, 50);
+            this.romInfo.TabIndex = 4;
+            this.romInfo.Text = "";
+            this.romInfo.WordWrap = false;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(2);
+            this.label1.Size = new System.Drawing.Size(94, 50);
+            this.label1.TabIndex = 331;
+            this.label1.Text = "Rom Name\nHeader\nChecksum\nGamecode";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip1.CanOverflow = false;
+            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadRom,
+            this.loadRomTextBox,
+            this.removeHeader});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(579, 25);
+            this.toolStrip1.Stretch = true;
+            this.toolStrip1.TabIndex = 328;
+            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.SizeChanged += new System.EventHandler(this.toolStrip1_SizeChanged);
+            // 
+            // loadRom
+            // 
+            this.loadRom.AutoSize = false;
+            this.loadRom.Image = global::LAZYSHELL.Properties.Resources.cartridge;
+            this.loadRom.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.loadRom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.loadRom.Name = "loadRom";
+            this.loadRom.Size = new System.Drawing.Size(93, 22);
+            this.loadRom.Text = "Load ROM...";
+            this.loadRom.Click += new System.EventHandler(this.loadRom_Click);
+            // 
+            // loadRomTextBox
+            // 
+            this.loadRomTextBox.AutoSize = false;
+            this.loadRomTextBox.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadRomTextBox.Name = "loadRomTextBox";
+            this.loadRomTextBox.ReadOnly = true;
+            this.loadRomTextBox.Size = new System.Drawing.Size(484, 18);
+            // 
+            // removeHeader
+            // 
+            this.removeHeader.Image = global::LAZYSHELL.Properties.Resources.removeHeader;
+            this.removeHeader.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.removeHeader.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.removeHeader.Name = "removeHeader";
+            this.removeHeader.Size = new System.Drawing.Size(23, 22);
+            this.removeHeader.ToolTipText = "Remove Header";
+            this.removeHeader.Visible = false;
+            this.removeHeader.Click += new System.EventHandler(this.removeHeader_Click);
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.AutoSize = false;
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.toolStrip2.Enabled = false;
+            this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openAllies,
+            this.openAnimations,
+            this.openAttacks,
+            this.openBattlefields,
+            this.openBattleScripts,
+            this.openDialogues,
+            this.openEffects,
+            this.openEventScripts,
+            this.openFormations,
+            this.openItems,
+            this.openLevels,
+            this.openMainTitle,
+            this.openMonsters,
+            this.openSprites,
+            this.openWorldMaps,
+            this.toolStripSeparator1,
+            this.openPatches,
+            this.openNotes});
+            this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.toolStrip2.Location = new System.Drawing.Point(0, 104);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip2.Size = new System.Drawing.Size(96, 432);
+            this.toolStrip2.TabIndex = 329;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // openAllies
+            // 
+            this.openAllies.Image = global::LAZYSHELL.Properties.Resources.mainAllies;
+            this.openAllies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAllies.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openAllies.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openAllies.Name = "openAllies";
+            this.openAllies.Size = new System.Drawing.Size(94, 22);
+            this.openAllies.Text = "Allies";
+            this.openAllies.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAllies.ToolTipText = "Edit new game stats and level-ups for allies";
+            this.openAllies.Click += new System.EventHandler(this.openAllies_Click);
+            // 
+            // openAnimations
+            // 
+            this.openAnimations.Image = global::LAZYSHELL.Properties.Resources.mainAnimations;
+            this.openAnimations.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAnimations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openAnimations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openAnimations.Name = "openAnimations";
+            this.openAnimations.Size = new System.Drawing.Size(94, 22);
+            this.openAnimations.Text = "Animations";
+            this.openAnimations.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAnimations.ToolTipText = "Edit battle animations for battle events, spells, attacks, sprites";
+            this.openAnimations.Click += new System.EventHandler(this.openAnimations_Click);
+            // 
+            // openAttacks
+            // 
+            this.openAttacks.Image = global::LAZYSHELL.Properties.Resources.mainAttacks;
+            this.openAttacks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAttacks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openAttacks.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openAttacks.Name = "openAttacks";
+            this.openAttacks.Size = new System.Drawing.Size(94, 22);
+            this.openAttacks.Text = "Attacks";
+            this.openAttacks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAttacks.ToolTipText = "Edit monster attacks, spells, and ally spells";
+            this.openAttacks.Click += new System.EventHandler(this.openAttacks_Click);
+            // 
+            // openBattlefields
+            // 
+            this.openBattlefields.Image = global::LAZYSHELL.Properties.Resources.mainBattlefields;
+            this.openBattlefields.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openBattlefields.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openBattlefields.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openBattlefields.Name = "openBattlefields";
+            this.openBattlefields.Size = new System.Drawing.Size(94, 22);
+            this.openBattlefields.Text = "Battlefields";
+            this.openBattlefields.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openBattlefields.ToolTipText = "Edit battle / monster formation backgrounds";
+            this.openBattlefields.Click += new System.EventHandler(this.openBattlefields_Click);
+            // 
+            // openBattleScripts
+            // 
+            this.openBattleScripts.Image = global::LAZYSHELL.Properties.Resources.mainBattleScripts;
+            this.openBattleScripts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openBattleScripts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openBattleScripts.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openBattleScripts.Name = "openBattleScripts";
+            this.openBattleScripts.Size = new System.Drawing.Size(94, 22);
+            this.openBattleScripts.Text = "Battle Scripts";
+            this.openBattleScripts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openBattleScripts.ToolTipText = "Edit monster battle script commands";
+            this.openBattleScripts.Click += new System.EventHandler(this.openBattleScripts_Click);
+            // 
+            // openDialogues
+            // 
+            this.openDialogues.Image = global::LAZYSHELL.Properties.Resources.mainDialogues;
+            this.openDialogues.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openDialogues.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openDialogues.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openDialogues.Name = "openDialogues";
+            this.openDialogues.Size = new System.Drawing.Size(94, 22);
+            this.openDialogues.Text = "Dialogues";
+            this.openDialogues.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openDialogues.ToolTipText = "Edit overworld dialogue scripts, battle dialogues, and fonts";
+            this.openDialogues.Click += new System.EventHandler(this.openDialogues_Click);
+            // 
+            // openEffects
+            // 
+            this.openEffects.Image = global::LAZYSHELL.Properties.Resources.mainEffects;
+            this.openEffects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openEffects.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openEffects.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openEffects.Name = "openEffects";
+            this.openEffects.Size = new System.Drawing.Size(94, 22);
+            this.openEffects.Text = "Effects";
+            this.openEffects.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openEffects.ToolTipText = "Edit spell effect animations, palettes, and graphics";
+            this.openEffects.Click += new System.EventHandler(this.openEffects_Click);
+            // 
+            // openEventScripts
+            // 
+            this.openEventScripts.Image = global::LAZYSHELL.Properties.Resources.mainEventScripts;
+            this.openEventScripts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openEventScripts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openEventScripts.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openEventScripts.Name = "openEventScripts";
+            this.openEventScripts.Size = new System.Drawing.Size(94, 22);
+            this.openEventScripts.Text = "Event Scripts";
+            this.openEventScripts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openEventScripts.ToolTipText = "Edit event scripts and their respective command collections";
+            this.openEventScripts.Click += new System.EventHandler(this.openEventScripts_Click);
+            // 
+            // openFormations
+            // 
+            this.openFormations.Image = global::LAZYSHELL.Properties.Resources.mainFormations;
+            this.openFormations.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openFormations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openFormations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openFormations.Name = "openFormations";
+            this.openFormations.Size = new System.Drawing.Size(94, 22);
+            this.openFormations.Text = "Formations";
+            this.openFormations.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openFormations.ToolTipText = "Edit monster battle formations, formations properties, and packs";
+            this.openFormations.Click += new System.EventHandler(this.openFormations_Click);
+            // 
+            // openItems
+            // 
+            this.openItems.Image = global::LAZYSHELL.Properties.Resources.mainItems;
+            this.openItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openItems.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openItems.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openItems.Name = "openItems";
+            this.openItems.Size = new System.Drawing.Size(94, 22);
+            this.openItems.Text = "Items";
+            this.openItems.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openItems.ToolTipText = "Edit items, equipment, and shops";
+            this.openItems.Click += new System.EventHandler(this.openItems_Click);
+            // 
+            // openLevels
+            // 
+            this.openLevels.Image = global::LAZYSHELL.Properties.Resources.mainLevels;
+            this.openLevels.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openLevels.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openLevels.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openLevels.Name = "openLevels";
+            this.openLevels.Size = new System.Drawing.Size(94, 22);
+            this.openLevels.Text = "Levels";
+            this.openLevels.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openLevels.ToolTipText = "Edit level / location maps, NPCs, exits and event fields,  etc.";
+            this.openLevels.Click += new System.EventHandler(this.openLevels_Click);
+            // 
+            // openMainTitle
+            // 
+            this.openMainTitle.Image = global::LAZYSHELL.Properties.Resources.mainMainTitle;
+            this.openMainTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openMainTitle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openMainTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openMainTitle.Name = "openMainTitle";
+            this.openMainTitle.Size = new System.Drawing.Size(94, 22);
+            this.openMainTitle.Text = "Main Title";
+            this.openMainTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openMainTitle.ToolTipText = "Edit the main title logo and backgrounds";
+            this.openMainTitle.Click += new System.EventHandler(this.openMainTitle_Click);
+            // 
+            // openMonsters
+            // 
+            this.openMonsters.Image = global::LAZYSHELL.Properties.Resources.mainMonsters;
+            this.openMonsters.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openMonsters.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openMonsters.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openMonsters.Name = "openMonsters";
+            this.openMonsters.Size = new System.Drawing.Size(94, 22);
+            this.openMonsters.Text = "Monsters";
+            this.openMonsters.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openMonsters.ToolTipText = "Edit monster battle statistics and properties";
+            this.openMonsters.Click += new System.EventHandler(this.openMonsters_Click);
+            // 
+            // openSprites
+            // 
+            this.openSprites.Image = global::LAZYSHELL.Properties.Resources.mainSprites;
+            this.openSprites.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openSprites.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openSprites.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openSprites.Name = "openSprites";
+            this.openSprites.Size = new System.Drawing.Size(94, 22);
+            this.openSprites.Text = "Sprites";
+            this.openSprites.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openSprites.ToolTipText = "Edit sprite animations, palettes, and graphics";
+            this.openSprites.Click += new System.EventHandler(this.openSprites_Click);
+            // 
+            // openWorldMaps
+            // 
+            this.openWorldMaps.Image = global::LAZYSHELL.Properties.Resources.mainWorldMaps;
+            this.openWorldMaps.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openWorldMaps.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openWorldMaps.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openWorldMaps.Name = "openWorldMaps";
+            this.openWorldMaps.Size = new System.Drawing.Size(94, 22);
+            this.openWorldMaps.Text = "World Maps";
+            this.openWorldMaps.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openWorldMaps.ToolTipText = "Edit world maps, map point locations, palettes, and graphics";
+            this.openWorldMaps.Click += new System.EventHandler(this.openWorldMaps_Click);
+            // 
+            // openPatches
+            // 
+            this.openPatches.Image = global::LAZYSHELL.Properties.Resources.mainPatches;
+            this.openPatches.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openPatches.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openPatches.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openPatches.Name = "openPatches";
+            this.openPatches.Size = new System.Drawing.Size(94, 22);
+            this.openPatches.Text = "Patches";
+            this.openPatches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openPatches.ToolTipText = "Apply a hack from the patch HTTP server";
+            this.openPatches.Click += new System.EventHandler(this.openPatches_Click);
+            // 
+            // openNotes
+            // 
+            this.openNotes.Image = global::LAZYSHELL.Properties.Resources.mainNotes;
+            this.openNotes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openNotes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openNotes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openNotes.Name = "openNotes";
+            this.openNotes.Size = new System.Drawing.Size(94, 22);
+            this.openNotes.Text = "Notes";
+            this.openNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openNotes.ToolTipText = "Open the notes database";
+            this.openNotes.Click += new System.EventHandler(this.openNotes_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(357, 6);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(104, 6);
+            // 
+            // panel2
+            // 
+            this.panel2.AllowDrop = true;
+            this.panel2.AutoScroll = true;
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(96, 129);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(487, 407);
+            this.panel2.TabIndex = 333;
+            // 
+            // toolStrip4
+            // 
+            this.toolStrip4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.recentFiles,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.refreshROM,
+            this.closeROM,
+            this.toolStripSeparator11,
+            this.openSettings,
+            this.restoreElementsToolStripMenuItem,
+            this.publishRomToolStripMenuItem,
+            this.toolStripSeparator15,
+            this.showROMInfo,
+            this.toolStripButton4,
+            this.toolStripSeparator4,
+            this.toolStripButton5});
+            this.toolStrip4.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip4.Name = "toolStrip4";
+            this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip4.Size = new System.Drawing.Size(583, 25);
+            this.toolStrip4.TabIndex = 334;
+            this.toolStrip4.Text = "toolStrip4";
+            // 
+            // recentFiles
+            // 
+            this.recentFiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.recentFiles.Image = global::LAZYSHELL.Properties.Resources.recentFiles;
+            this.recentFiles.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.recentFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.recentFiles.Name = "recentFiles";
+            this.recentFiles.Size = new System.Drawing.Size(31, 22);
+            this.recentFiles.ToolTipText = "Recent ROM Files";
+            // 
+            // refreshROM
+            // 
+            this.refreshROM.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.refreshROM.Enabled = false;
+            this.refreshROM.Image = global::LAZYSHELL.Properties.Resources.cartridgeReload;
+            this.refreshROM.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.refreshROM.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.refreshROM.Name = "refreshROM";
+            this.refreshROM.Size = new System.Drawing.Size(23, 22);
+            this.refreshROM.ToolTipText = "Reload ROM";
+            this.refreshROM.Click += new System.EventHandler(this.refreshROM_Click);
+            // 
+            // closeROM
+            // 
+            this.closeROM.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.closeROM.Enabled = false;
+            this.closeROM.Image = global::LAZYSHELL.Properties.Resources.cartridgeClose;
+            this.closeROM.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.closeROM.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.closeROM.Name = "closeROM";
+            this.closeROM.Size = new System.Drawing.Size(23, 22);
+            this.closeROM.ToolTipText = "Close ROM";
+            this.closeROM.Click += new System.EventHandler(this.closeROM_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
+            // 
+            // showROMInfo
+            // 
+            this.showROMInfo.Checked = true;
+            this.showROMInfo.CheckOnClick = true;
+            this.showROMInfo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showROMInfo.Enabled = false;
+            this.showROMInfo.Image = global::LAZYSHELL.Properties.Resources.romInfo;
+            this.showROMInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showROMInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.showROMInfo.Name = "showROMInfo";
+            this.showROMInfo.Size = new System.Drawing.Size(23, 22);
+            this.showROMInfo.ToolTipText = "Show ROM Info";
+            this.showROMInfo.Click += new System.EventHandler(this.showROMInfo_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Enabled = false;
+            this.saveToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.save_small;
+            this.saveToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.saveToolStripMenuItem.Text = "Save ROM";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
+            this.saveToolStripMenuItem.ToolTipText = "Save ROM";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
+            this.saveAsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.saveAs_small;
+            this.saveAsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveAsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.saveAsToolStripMenuItem.Text = "Save ROM As...";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
+            this.saveAsToolStripMenuItem.ToolTipText = "Save ROM As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // restoreElementsToolStripMenuItem
             // 
             this.restoreElementsToolStripMenuItem.Enabled = false;
+            this.restoreElementsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.restoreElementsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.restoreElementsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.restoreElementsToolStripMenuItem.Name = "restoreElementsToolStripMenuItem";
-            this.restoreElementsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.restoreElementsToolStripMenuItem.Text = "Import elements...";
+            this.restoreElementsToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
+            this.restoreElementsToolStripMenuItem.ToolTipText = "Import elements from another ROM";
             this.restoreElementsToolStripMenuItem.Click += new System.EventHandler(this.restoreElementsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(166, 6);
             // 
             // publishRomToolStripMenuItem
             // 
             this.publishRomToolStripMenuItem.Enabled = false;
+            this.publishRomToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.publish;
+            this.publishRomToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.publishRomToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.publishRomToolStripMenuItem.Name = "publishRomToolStripMenuItem";
-            this.publishRomToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.publishRomToolStripMenuItem.Text = "Publish Rom";
+            this.publishRomToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
+            this.publishRomToolStripMenuItem.ToolTipText = "Publish ROM";
             this.publishRomToolStripMenuItem.Click += new System.EventHandler(this.publishRomToolStripMenuItem_Click);
             // 
-            // viewRomSignatureToolStripMenuItem
+            // openSettings
             // 
-            this.viewRomSignatureToolStripMenuItem.Enabled = false;
-            this.viewRomSignatureToolStripMenuItem.Name = "viewRomSignatureToolStripMenuItem";
-            this.viewRomSignatureToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.viewRomSignatureToolStripMenuItem.Text = "View Rom Signature";
-            this.viewRomSignatureToolStripMenuItem.Click += new System.EventHandler(this.viewRomSignatureToolStripMenuItem_Click);
+            this.openSettings.Image = global::LAZYSHELL.Properties.Resources.settings;
+            this.openSettings.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openSettings.Name = "openSettings";
+            this.openSettings.Size = new System.Drawing.Size(23, 22);
+            this.openSettings.ToolTipText = "Settings";
+            this.openSettings.Click += new System.EventHandler(this.openSettings_Click);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.Enabled = false;
+            this.toolStripButton4.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.ToolTipText = "Base Convertor";
+            this.toolStripButton4.Click += new System.EventHandler(this.baseConvertorToolStripMenuItem_Click);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.Enabled = false;
+            this.toolStripButton5.Image = global::LAZYSHELL.Properties.Resources.about_small;
+            this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton5.ToolTipText = "About";
+            this.toolStripButton5.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.Enabled = false;
+            this.toolStrip3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openAll,
+            this.closeAll,
+            this.restoreAll,
+            this.minimizeAll,
+            this.toolStripSeparator2,
+            this.docking,
+            this.toolStripSeparator3,
+            this.loadAllData,
+            this.clearModel});
+            this.toolStrip3.Location = new System.Drawing.Point(96, 104);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip3.Size = new System.Drawing.Size(487, 25);
+            this.toolStrip3.TabIndex = 335;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // openAll
+            // 
+            this.openAll.Image = global::LAZYSHELL.Properties.Resources.openAll;
+            this.openAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openAll.Name = "openAll";
+            this.openAll.Size = new System.Drawing.Size(23, 22);
+            this.openAll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAll.ToolTipText = "Open All Editors";
+            this.openAll.Click += new System.EventHandler(this.openAll_Click);
+            // 
+            // closeAll
+            // 
+            this.closeAll.Image = global::LAZYSHELL.Properties.Resources.closeAll;
+            this.closeAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.closeAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.closeAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.closeAll.Name = "closeAll";
+            this.closeAll.Size = new System.Drawing.Size(23, 22);
+            this.closeAll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.closeAll.ToolTipText = "Close All Editors";
+            this.closeAll.Click += new System.EventHandler(this.closeAll_Click);
+            // 
+            // restoreAll
+            // 
+            this.restoreAll.Image = global::LAZYSHELL.Properties.Resources.restoreAll;
+            this.restoreAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.restoreAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.restoreAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.restoreAll.Name = "restoreAll";
+            this.restoreAll.Size = new System.Drawing.Size(23, 22);
+            this.restoreAll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.restoreAll.ToolTipText = "Restore All Editors";
+            this.restoreAll.Click += new System.EventHandler(this.restoreAll_Click);
+            // 
+            // minimizeAll
+            // 
+            this.minimizeAll.Image = global::LAZYSHELL.Properties.Resources.minimizeAll;
+            this.minimizeAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.minimizeAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.minimizeAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.minimizeAll.Name = "minimizeAll";
+            this.minimizeAll.Size = new System.Drawing.Size(23, 22);
+            this.minimizeAll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.minimizeAll.ToolTipText = "Minimize All Editors";
+            this.minimizeAll.Click += new System.EventHandler(this.minimizeAll_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(166, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // recentFilesToolStripMenuItem
+            // docking
             // 
-            this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
-            this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.recentFilesToolStripMenuItem.Text = "Recent Files";
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(166, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadLastUsedROMToolStripMenuItem,
-            this.createBackupROMOnLoadToolStripMenuItem,
-            this.createBackupROMOnSaveToolStripMenuItem,
-            this.backupROMLocationToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.themeToolStripMenuItem,
-            this.undoStackSizeToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.patchHTTPServerToolStripMenuItem,
-            this.toolStripSeparator7,
-            this.ignoreInvalidRomWarningToolStripMenuItem,
-            this.showEncryptionWarningsToolStripMenuItem,
-            this.toolStripSeparator9,
-            this.resetSettingsToDefaultToolStripMenuItem,
-            this.saveCurrentSettingsToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.settingsToolStripMenuItem.Text = "Options";
-            // 
-            // loadLastUsedROMToolStripMenuItem
-            // 
-            this.loadLastUsedROMToolStripMenuItem.CheckOnClick = true;
-            this.loadLastUsedROMToolStripMenuItem.Name = "loadLastUsedROMToolStripMenuItem";
-            this.loadLastUsedROMToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.loadLastUsedROMToolStripMenuItem.Text = "Auto Load Last Used ROM";
-            this.loadLastUsedROMToolStripMenuItem.Click += new System.EventHandler(this.loadLastUsedROMToolStripMenuItem_Click);
-            // 
-            // createBackupROMOnLoadToolStripMenuItem
-            // 
-            this.createBackupROMOnLoadToolStripMenuItem.Checked = true;
-            this.createBackupROMOnLoadToolStripMenuItem.CheckOnClick = true;
-            this.createBackupROMOnLoadToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.createBackupROMOnLoadToolStripMenuItem.Name = "createBackupROMOnLoadToolStripMenuItem";
-            this.createBackupROMOnLoadToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.createBackupROMOnLoadToolStripMenuItem.Text = "Create Backup ROM on Load";
-            this.createBackupROMOnLoadToolStripMenuItem.Click += new System.EventHandler(this.createBackupROMOnLoadToolStripMenuItem_Click);
-            // 
-            // createBackupROMOnSaveToolStripMenuItem
-            // 
-            this.createBackupROMOnSaveToolStripMenuItem.Checked = true;
-            this.createBackupROMOnSaveToolStripMenuItem.CheckOnClick = true;
-            this.createBackupROMOnSaveToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.createBackupROMOnSaveToolStripMenuItem.Name = "createBackupROMOnSaveToolStripMenuItem";
-            this.createBackupROMOnSaveToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.createBackupROMOnSaveToolStripMenuItem.Text = "Create Backup ROM on Save";
-            this.createBackupROMOnSaveToolStripMenuItem.Click += new System.EventHandler(this.createBackupROMOnSaveToolStripMenuItem_Click);
-            // 
-            // backupROMLocationToolStripMenuItem
-            // 
-            this.backupROMLocationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.currentROMDirectoryToolStripMenuItem,
-            this.customDirectoryToolStripMenuItem});
-            this.backupROMLocationToolStripMenuItem.Name = "backupROMLocationToolStripMenuItem";
-            this.backupROMLocationToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.backupROMLocationToolStripMenuItem.Text = "Backup ROM Location";
-            // 
-            // currentROMDirectoryToolStripMenuItem
-            // 
-            this.currentROMDirectoryToolStripMenuItem.Name = "currentROMDirectoryToolStripMenuItem";
-            this.currentROMDirectoryToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.currentROMDirectoryToolStripMenuItem.Text = "Current ROM Directory";
-            this.currentROMDirectoryToolStripMenuItem.Click += new System.EventHandler(this.currentROMDirectoryToolStripMenuItem_Click);
-            // 
-            // customDirectoryToolStripMenuItem
-            // 
-            this.customDirectoryToolStripMenuItem.Name = "customDirectoryToolStripMenuItem";
-            this.customDirectoryToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.customDirectoryToolStripMenuItem.Text = "Custom Directory...";
-            this.customDirectoryToolStripMenuItem.Click += new System.EventHandler(this.customDirectoryToolStripMenuItem_Click);
+            this.docking.CheckOnClick = true;
+            this.docking.Image = global::LAZYSHELL.Properties.Resources.dock;
+            this.docking.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.docking.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.docking.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.docking.Name = "docking";
+            this.docking.Size = new System.Drawing.Size(23, 22);
+            this.docking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.docking.ToolTipText = "Dock Editors";
+            this.docking.Click += new System.EventHandler(this.docking_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(209, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
-            // themeToolStripMenuItem
+            // loadAllData
             // 
-            this.themeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.systemToolStripMenuItem,
-            this.standardToolStripMenuItem});
-            this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            this.themeToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.themeToolStripMenuItem.Text = "Visual Theme";
+            this.loadAllData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.loadAllData.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.loadAllData.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.loadAllData.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.loadAllData.Name = "loadAllData";
+            this.loadAllData.Size = new System.Drawing.Size(23, 22);
+            this.loadAllData.Text = "Reset Editor Memory";
+            this.loadAllData.Click += new System.EventHandler(this.loadAllData_Click);
             // 
-            // systemToolStripMenuItem
+            // clearModel
             // 
-            this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
-            this.systemToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.systemToolStripMenuItem.Text = "System";
-            this.systemToolStripMenuItem.Click += new System.EventHandler(this.systemToolStripMenuItem_Click);
-            // 
-            // standardToolStripMenuItem
-            // 
-            this.standardToolStripMenuItem.Name = "standardToolStripMenuItem";
-            this.standardToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.standardToolStripMenuItem.Text = "Standard";
-            this.standardToolStripMenuItem.Click += new System.EventHandler(this.standardToolStripMenuItem_Click);
-            // 
-            // undoStackSizeToolStripMenuItem
-            // 
-            this.undoStackSizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undoStackSizeTextBox});
-            this.undoStackSizeToolStripMenuItem.Name = "undoStackSizeToolStripMenuItem";
-            this.undoStackSizeToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.undoStackSizeToolStripMenuItem.Text = "Undo Stack Size";
-            // 
-            // undoStackSizeTextBox
-            // 
-            this.undoStackSizeTextBox.Name = "undoStackSizeTextBox";
-            this.undoStackSizeTextBox.Size = new System.Drawing.Size(100, 21);
-            this.undoStackSizeTextBox.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.undoStackSizeTextBox.ToolTipText = "Changing this value will erase your current undo stack(s)";
-            this.undoStackSizeTextBox.TextChanged += new System.EventHandler(this.undoStackSizeTextBox_TextChanged);
+            this.clearModel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.clearModel.Image = global::LAZYSHELL.Properties.Resources.clearModel;
+            this.clearModel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.clearModel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.clearModel.Name = "clearModel";
+            this.clearModel.Size = new System.Drawing.Size(23, 22);
+            this.clearModel.Text = "Clear Editor Memory";
+            this.clearModel.Click += new System.EventHandler(this.clearModel_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(209, 6);
-            // 
-            // patchHTTPServerToolStripMenuItem
-            // 
-            this.patchHTTPServerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.serverToolStripTextBox1});
-            this.patchHTTPServerToolStripMenuItem.Name = "patchHTTPServerToolStripMenuItem";
-            this.patchHTTPServerToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.patchHTTPServerToolStripMenuItem.Text = "Patch HTTP Server";
-            // 
-            // serverToolStripTextBox1
-            // 
-            this.serverToolStripTextBox1.Name = "serverToolStripTextBox1";
-            this.serverToolStripTextBox1.Size = new System.Drawing.Size(300, 21);
-            this.serverToolStripTextBox1.TextChanged += new System.EventHandler(this.serverToolStripTextBox1_TextChanged);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(209, 6);
-            // 
-            // ignoreInvalidRomWarningToolStripMenuItem
-            // 
-            this.ignoreInvalidRomWarningToolStripMenuItem.CheckOnClick = true;
-            this.ignoreInvalidRomWarningToolStripMenuItem.Name = "ignoreInvalidRomWarningToolStripMenuItem";
-            this.ignoreInvalidRomWarningToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.ignoreInvalidRomWarningToolStripMenuItem.Text = "Verify ROM";
-            this.ignoreInvalidRomWarningToolStripMenuItem.Click += new System.EventHandler(this.ignoreInvalidRomWarningToolStripMenuItem_Click);
-            // 
-            // showEncryptionWarningsToolStripMenuItem
-            // 
-            this.showEncryptionWarningsToolStripMenuItem.CheckOnClick = true;
-            this.showEncryptionWarningsToolStripMenuItem.Name = "showEncryptionWarningsToolStripMenuItem";
-            this.showEncryptionWarningsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.showEncryptionWarningsToolStripMenuItem.Text = "Show Encryption Warnings";
-            this.showEncryptionWarningsToolStripMenuItem.Click += new System.EventHandler(this.showEncryptionWarningsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(209, 6);
-            // 
-            // resetSettingsToDefaultToolStripMenuItem
-            // 
-            this.resetSettingsToDefaultToolStripMenuItem.Name = "resetSettingsToDefaultToolStripMenuItem";
-            this.resetSettingsToDefaultToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.resetSettingsToDefaultToolStripMenuItem.Text = "Reset Settings to Default";
-            this.resetSettingsToDefaultToolStripMenuItem.Click += new System.EventHandler(this.resetSettingsToDefaultToolStripMenuItem_Click);
-            // 
-            // saveCurrentSettingsToolStripMenuItem
-            // 
-            this.saveCurrentSettingsToolStripMenuItem.Name = "saveCurrentSettingsToolStripMenuItem";
-            this.saveCurrentSettingsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.saveCurrentSettingsToolStripMenuItem.Text = "Save Current Settings";
-            this.saveCurrentSettingsToolStripMenuItem.Click += new System.EventHandler(this.saveCurrentSettingsToolStripMenuItem_Click);
-            // 
-            // openScripts
-            // 
-            this.openScripts.BackColor = System.Drawing.SystemColors.Window;
-            this.openScripts.Enabled = false;
-            this.openScripts.FlatAppearance.BorderSize = 0;
-            this.openScripts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openScripts.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openScripts.Location = new System.Drawing.Point(1, 247);
-            this.openScripts.Name = "openScripts";
-            this.openScripts.Size = new System.Drawing.Size(118, 48);
-            this.openScripts.TabIndex = 8;
-            this.openScripts.Text = "SCRIPTS...";
-            this.openScripts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openScripts.UseVisualStyleBackColor = false;
-            this.openScripts.Click += new System.EventHandler(this.openScripts_Click);
-            // 
-            // openLevels
-            // 
-            this.openLevels.BackColor = System.Drawing.SystemColors.Window;
-            this.openLevels.Enabled = false;
-            this.openLevels.FlatAppearance.BorderSize = 0;
-            this.openLevels.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openLevels.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openLevels.Location = new System.Drawing.Point(1, 198);
-            this.openLevels.Name = "openLevels";
-            this.openLevels.Size = new System.Drawing.Size(118, 48);
-            this.openLevels.TabIndex = 7;
-            this.openLevels.Text = "LEVELS...";
-            this.openLevels.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openLevels.UseVisualStyleBackColor = false;
-            this.openLevels.Click += new System.EventHandler(this.openLevels_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Controls.Add(this.label6);
-            this.panel4.Controls.Add(this.openNotes);
-            this.panel4.Controls.Add(this.openPatches);
-            this.panel4.Controls.Add(this.pictureBox5);
-            this.panel4.Controls.Add(this.panel1);
-            this.panel4.Controls.Add(this.loadRom);
-            this.panel4.Controls.Add(this.panel5);
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Controls.Add(this.openLevels);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.openScripts);
-            this.panel4.Controls.Add(this.label1);
-            this.panel4.Controls.Add(this.openStats);
-            this.panel4.Controls.Add(this.openSprites);
-            this.panel4.Location = new System.Drawing.Point(12, 35);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(470, 402);
-            this.panel4.TabIndex = 317;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label5.Location = new System.Drawing.Point(120, 373);
-            this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(4, 4, 2, 2);
-            this.label5.Size = new System.Drawing.Size(347, 26);
-            this.label5.TabIndex = 320;
-            this.label5.Text = "Open the notes database...";
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label6.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label6.Location = new System.Drawing.Point(120, 346);
-            this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(4, 4, 2, 2);
-            this.label6.Size = new System.Drawing.Size(347, 26);
-            this.label6.TabIndex = 320;
-            this.label6.Text = "Apply a hack from the patch HTTP server...";
-            // 
-            // openNotes
-            // 
-            this.openNotes.BackColor = System.Drawing.SystemColors.Control;
-            this.openNotes.Enabled = false;
-            this.openNotes.FlatAppearance.BorderSize = 0;
-            this.openNotes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openNotes.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openNotes.Location = new System.Drawing.Point(1, 373);
-            this.openNotes.Name = "openNotes";
-            this.openNotes.Size = new System.Drawing.Size(118, 26);
-            this.openNotes.TabIndex = 10;
-            this.openNotes.Text = " NOTES...";
-            this.openNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openNotes.UseVisualStyleBackColor = false;
-            this.openNotes.Click += new System.EventHandler(this.openNotes_Click);
-            // 
-            // openPatches
-            // 
-            this.openPatches.BackColor = System.Drawing.SystemColors.Control;
-            this.openPatches.Enabled = false;
-            this.openPatches.FlatAppearance.BorderSize = 0;
-            this.openPatches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openPatches.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openPatches.Location = new System.Drawing.Point(1, 346);
-            this.openPatches.Name = "openPatches";
-            this.openPatches.Size = new System.Drawing.Size(118, 26);
-            this.openPatches.TabIndex = 10;
-            this.openPatches.Text = " PATCHES...";
-            this.openPatches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openPatches.UseVisualStyleBackColor = false;
-            this.openPatches.Click += new System.EventHandler(this.openPatches_Click);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.BackgroundImage = global::LAZYSHELL.Properties.Resources.title_stats_bg;
-            this.pictureBox5.Image = global::LAZYSHELL.Properties.Resources.title_smodrpg;
-            this.pictureBox5.Location = new System.Drawing.Point(1, 0);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(466, 56);
-            this.pictureBox5.TabIndex = 318;
-            this.pictureBox5.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.loadRomTextBox);
-            this.panel1.Location = new System.Drawing.Point(120, 56);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(347, 26);
-            this.panel1.TabIndex = 3;
-            // 
-            // loadRomTextBox
-            // 
-            this.loadRomTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.loadRomTextBox.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loadRomTextBox.Location = new System.Drawing.Point(6, 6);
-            this.loadRomTextBox.Name = "loadRomTextBox";
-            this.loadRomTextBox.ReadOnly = true;
-            this.loadRomTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.loadRomTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.loadRomTextBox.Size = new System.Drawing.Size(334, 14);
-            this.loadRomTextBox.TabIndex = 3;
-            this.loadRomTextBox.Text = "";
-            this.loadRomTextBox.WordWrap = false;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.Control;
-            this.panel5.Controls.Add(this.removeHeader);
-            this.panel5.Controls.Add(this.romInfo);
-            this.panel5.Location = new System.Drawing.Point(1, 84);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(466, 63);
-            this.panel5.TabIndex = 4;
-            // 
-            // removeHeader
-            // 
-            this.removeHeader.Enabled = false;
-            this.removeHeader.FlatAppearance.BorderSize = 0;
-            this.removeHeader.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.removeHeader.Location = new System.Drawing.Point(373, 43);
-            this.removeHeader.Name = "removeHeader";
-            this.removeHeader.Size = new System.Drawing.Size(93, 20);
-            this.removeHeader.TabIndex = 5;
-            this.removeHeader.Text = "Remove Header";
-            this.removeHeader.UseCompatibleTextRendering = true;
-            this.removeHeader.Visible = false;
-            this.removeHeader.Click += new System.EventHandler(this.removeHeader_Click);
-            // 
-            // romInfo
-            // 
-            this.romInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.romInfo.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.romInfo.Location = new System.Drawing.Point(5, 4);
-            this.romInfo.Name = "romInfo";
-            this.romInfo.ReadOnly = true;
-            this.romInfo.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.romInfo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.romInfo.Size = new System.Drawing.Size(456, 55);
-            this.romInfo.TabIndex = 4;
-            this.romInfo.Text = "";
-            this.romInfo.WordWrap = false;
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 449);
-            this.Controls.Add(this.menuStrip1);
+            this.ClientSize = new System.Drawing.Size(583, 536);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.toolStrip3);
+            this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.panel4);
+            this.Controls.Add(this.toolStrip4);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(5, 5);
-            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "LAZY SHELL - Super Mario RPG Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            this.panel4.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
+            this.toolStrip4.ResumeLayout(false);
+            this.toolStrip4.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -719,65 +790,61 @@ namespace LAZYSHELL
 
         #endregion
 
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.Button loadRom;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button openSprites;
-        private System.Windows.Forms.Button openStats;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Button openScripts;
-        private System.Windows.Forms.Button openLevels;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.RichTextBox romInfo;
-        private System.Windows.Forms.Button removeHeader;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RichTextBox loadRomTextBox;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem themeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem standardToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton loadRom;
+        private System.Windows.Forms.ToolStripTextBox loadRomTextBox;
+        private System.Windows.Forms.ToolStripButton removeHeader;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton openMonsters;
+        private System.Windows.Forms.ToolStripButton openLevels;
+        private System.Windows.Forms.ToolStripButton openBattlefields;
+        private System.Windows.Forms.ToolStripButton openEventScripts;
+        private System.Windows.Forms.ToolStripButton openSprites;
+        private System.Windows.Forms.ToolStripButton openDialogues;
+        private System.Windows.Forms.ToolStripButton openWorldMaps;
+        private System.Windows.Forms.ToolStripButton openEffects;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton openPatches;
+        private System.Windows.Forms.ToolStripButton openNotes;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripButton openAttacks;
+        private System.Windows.Forms.ToolStripButton openItems;
+        private System.Windows.Forms.ToolStripButton openMainTitle;
+        private System.Windows.Forms.ToolStripButton openFormations;
+        private System.Windows.Forms.ToolStripButton openAllies;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripButton openAnimations;
+        private System.Windows.Forms.ToolStripButton openBattleScripts;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStrip toolStrip4;
+        private System.Windows.Forms.ToolStripButton saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton restoreElementsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton publishRomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton openSettings;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+        private System.Windows.Forms.ToolStripButton showROMInfo;
+        private System.Windows.Forms.ToolStripButton docking;
+        private System.Windows.Forms.ToolStripDropDownButton recentFiles;
+        private System.Windows.Forms.ToolStripButton openAll;
+        private System.Windows.Forms.ToolStripButton closeAll;
+        private System.Windows.Forms.ToolStripButton minimizeAll;
+        private System.Windows.Forms.ToolStripButton restoreAll;
+        private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton loadAllData;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton clearModel;
+        private System.Windows.Forms.ToolStripButton refreshROM;
+        private System.Windows.Forms.ToolStripButton closeROM;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem undoStackSizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox undoStackSizeTextBox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button openPatches;
-        private System.Windows.Forms.ToolStripMenuItem patchHTTPServerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox serverToolStripTextBox1;
-        private System.Windows.Forms.ToolStripMenuItem publishRomToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewRomSignatureToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem recentFilesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripMenuItem ignoreInvalidRomWarningToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripMenuItem showEncryptionWarningsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadLastUsedROMToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem restoreElementsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem baseConvertorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem resetSettingsToDefaultToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveCurrentSettingsToolStripMenuItem;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button openNotes;
-        private System.Windows.Forms.ToolStripMenuItem createBackupROMOnLoadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createBackupROMOnSaveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem backupROMLocationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem currentROMDirectoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customDirectoryToolStripMenuItem;
     }
 }
 

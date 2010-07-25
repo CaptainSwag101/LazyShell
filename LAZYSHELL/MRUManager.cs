@@ -103,8 +103,8 @@ namespace LAZYSHELL
 
         private Form ownerForm;                 // owner form
 
-        private ToolStripMenuItem menuItemMRU;           // Recent Files menu item
-        private ToolStripMenuItem menuItemParent;        // Recent Files menu item parent
+        private ToolStripDropDownItem menuItemMRU;           // Recent Files menu item
+        private ToolStrip menuItemParent;        // Recent Files menu item parent
 
         private string registryPath;            // Registry path to keep MRU list
 
@@ -228,7 +228,7 @@ namespace LAZYSHELL
         /// <param name="owner">Owner form</param>
         /// <param name="mruItem">Recent Files menu item</param>
         /// <param name="regPath">Registry Path to keep MRU list</param>
-        public void Initialize(Form owner, ToolStripMenuItem mruItem, string regPath)
+        public void Initialize(Form owner, ToolStripDropDownItem mruItem, string regPath)
         {
             // keep reference to owner form
             ownerForm = owner;
@@ -246,7 +246,7 @@ namespace LAZYSHELL
             // keep reference to MRU menu item parent
             try
             {
-                menuItemParent = (ToolStripMenuItem)menuItemMRU.OwnerItem;
+                menuItemParent = menuItemMRU.Owner;
             }
             catch (Exception ex)
             {
@@ -270,7 +270,7 @@ namespace LAZYSHELL
             currentDirectory = Directory.GetCurrentDirectory();
 
             // subscribe to MRU parent Popup event
-            menuItemParent.DropDownOpening += new EventHandler(this.OnMRUParentPopup);
+            menuItemParent.Click += new EventHandler(this.OnMRUParentPopup);
 
             // subscribe to owner form Closing event
             ownerForm.Closing += new System.ComponentModel.CancelEventHandler(OnOwnerClosing);

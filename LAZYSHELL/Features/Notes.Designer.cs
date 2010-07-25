@@ -54,23 +54,18 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonBrowse = new System.Windows.Forms.Button();
             this.notesFile = new System.Windows.Forms.TextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.autoLoadLastNotesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tagIndexesWithNumbersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generalNotes = new System.Windows.Forms.RichTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.newButton = new System.Windows.Forms.ToolStripButton();
+            this.loadButton = new System.Windows.Forms.ToolStripButton();
+            this.save = new System.Windows.Forms.ToolStripButton();
+            this.saveAs = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.numerize = new System.Windows.Forms.ToolStripButton();
+            this.alwaysOnTop = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.indexNumber)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panelIndexNumber.SuspendLayout();
@@ -81,6 +76,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // elementType
@@ -401,112 +397,6 @@
             this.notesFile.Size = new System.Drawing.Size(629, 21);
             this.notesFile.TabIndex = 0;
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(734, 24);
-            this.menuStrip1.TabIndex = 15;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
-            this.loadToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.newToolStripMenuItem.Text = "New...";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-            // 
-            // loadToolStripMenuItem
-            // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.loadToolStripMenuItem.Text = "Open...";
-            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Enabled = false;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Enabled = false;
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.saveAsToolStripMenuItem.Text = "Save as...";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(121, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alwaysOnTopToolStripMenuItem,
-            this.autoLoadLastNotesDatabaseToolStripMenuItem,
-            this.tagIndexesWithNumbersToolStripMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.viewToolStripMenuItem.Text = "Options";
-            // 
-            // alwaysOnTopToolStripMenuItem
-            // 
-            this.alwaysOnTopToolStripMenuItem.Checked = true;
-            this.alwaysOnTopToolStripMenuItem.CheckOnClick = true;
-            this.alwaysOnTopToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
-            this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.alwaysOnTopToolStripMenuItem.Text = "Always on top";
-            this.alwaysOnTopToolStripMenuItem.CheckedChanged += new System.EventHandler(this.alwaysOnTopToolStripMenuItem_CheckedChanged);
-            // 
-            // autoLoadLastNotesDatabaseToolStripMenuItem
-            // 
-            this.autoLoadLastNotesDatabaseToolStripMenuItem.CheckOnClick = true;
-            this.autoLoadLastNotesDatabaseToolStripMenuItem.Name = "autoLoadLastNotesDatabaseToolStripMenuItem";
-            this.autoLoadLastNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.autoLoadLastNotesDatabaseToolStripMenuItem.Text = "Auto Load Last Database";
-            this.autoLoadLastNotesDatabaseToolStripMenuItem.Click += new System.EventHandler(this.autoLoadLastNotesDatabaseToolStripMenuItem_Click);
-            // 
-            // tagIndexesWithNumbersToolStripMenuItem
-            // 
-            this.tagIndexesWithNumbersToolStripMenuItem.CheckOnClick = true;
-            this.tagIndexesWithNumbersToolStripMenuItem.Name = "tagIndexesWithNumbersToolStripMenuItem";
-            this.tagIndexesWithNumbersToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.tagIndexesWithNumbersToolStripMenuItem.Text = "Tag indexes with numbers";
-            this.tagIndexesWithNumbersToolStripMenuItem.Click += new System.EventHandler(this.tagIndexesWithNumbersToolStripMenuItem_Click);
-            // 
             // generalNotes
             // 
             this.generalNotes.Location = new System.Drawing.Point(6, 6);
@@ -554,20 +444,113 @@
             this.tabPage2.Text = "General Notes";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newButton,
+            this.loadButton,
+            this.save,
+            this.saveAs,
+            this.toolStripSeparator1,
+            this.numerize,
+            this.alwaysOnTop});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(734, 25);
+            this.toolStrip1.TabIndex = 16;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // newButton
+            // 
+            this.newButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newButton.Image = global::LAZYSHELL.Properties.Resources.new_small;
+            this.newButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.newButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newButton.Name = "newButton";
+            this.newButton.Size = new System.Drawing.Size(23, 22);
+            this.newButton.Text = "New Notes Database";
+            this.newButton.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // loadButton
+            // 
+            this.loadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.loadButton.Image = global::LAZYSHELL.Properties.Resources.open_small;
+            this.loadButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.loadButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(23, 22);
+            this.loadButton.Text = "Open Existing Notes Database";
+            this.loadButton.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // save
+            // 
+            this.save.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.save.Enabled = false;
+            this.save.Image = global::LAZYSHELL.Properties.Resources.save_small;
+            this.save.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.save.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(23, 22);
+            this.save.Text = "Save";
+            this.save.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveAs
+            // 
+            this.saveAs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveAs.Enabled = false;
+            this.saveAs.Image = global::LAZYSHELL.Properties.Resources.saveAs_small;
+            this.saveAs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveAs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveAs.Name = "saveAs";
+            this.saveAs.Size = new System.Drawing.Size(23, 22);
+            this.saveAs.Text = "Save As";
+            this.saveAs.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // numerize
+            // 
+            this.numerize.CheckOnClick = true;
+            this.numerize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.numerize.Image = global::LAZYSHELL.Properties.Resources.numerize;
+            this.numerize.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.numerize.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.numerize.Name = "numerize";
+            this.numerize.Size = new System.Drawing.Size(23, 22);
+            this.numerize.Text = "Numbered Indexes";
+            this.numerize.Click += new System.EventHandler(this.tagIndexesWithNumbersToolStripMenuItem_Click);
+            // 
+            // alwaysOnTop
+            // 
+            this.alwaysOnTop.Checked = true;
+            this.alwaysOnTop.CheckOnClick = true;
+            this.alwaysOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.alwaysOnTop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.alwaysOnTop.Image = global::LAZYSHELL.Properties.Resources.alwaysOnTop;
+            this.alwaysOnTop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.alwaysOnTop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.alwaysOnTop.Name = "alwaysOnTop";
+            this.alwaysOnTop.Size = new System.Drawing.Size(23, 22);
+            this.alwaysOnTop.Text = "Always On Top";
+            this.alwaysOnTop.CheckedChanged += new System.EventHandler(this.alwaysOnTopToolStripMenuItem_CheckedChanged);
+            // 
             // Notes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 574);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.notesFile);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.buttonOK);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Notes";
             this.Text = "NOTES - Lazy Shell";
             this.TopMost = true;
@@ -585,6 +568,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -611,28 +596,23 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonBrowse;
         private System.Windows.Forms.TextBox notesFile;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem alwaysOnTopToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem autoLoadLastNotesDatabaseToolStripMenuItem;
         private System.Windows.Forms.Panel panelAddressBit;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown addressBit;
         private System.Windows.Forms.Panel panelIndexNumber;
-        private System.Windows.Forms.ToolStripMenuItem tagIndexesWithNumbersToolStripMenuItem;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown address;
         private System.Windows.Forms.RichTextBox generalNotes;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton loadButton;
+        private System.Windows.Forms.ToolStripButton save;
+        private System.Windows.Forms.ToolStripButton saveAs;
+        private System.Windows.Forms.ToolStripButton newButton;
+        private System.Windows.Forms.ToolStripButton numerize;
+        private System.Windows.Forms.ToolStripButton alwaysOnTop;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

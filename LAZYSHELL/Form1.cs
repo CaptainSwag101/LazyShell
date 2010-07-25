@@ -34,9 +34,9 @@ namespace LAZYSHELL
 
         private ImportElements importElements;
         private BaseConvertor baseConvertor;
-
+        public Panel Panel2 { get { return panel2; } set { panel2 = value; } }
         #endregion
-
+        // Constructor
         public Form1(ProgramController controls)
         {
             this.AppControl = controls;
@@ -44,13 +44,13 @@ namespace LAZYSHELL
             settings = Settings.Default;
 
             InitializeComponent();
-
-            LoadInitialSettings();
+            Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(saveToolStripMenuItem_Click));
+            loadRomTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 
             // MRU
             LoadSettingsFromRegistry();
             mruManager = new MRUManager();
-            mruManager.Initialize(this, recentFilesToolStripMenuItem, registryPath);
+            mruManager.Initialize(this, recentFiles, registryPath);
 
             if (settings.LoadLastUsedROM)
             {
@@ -65,9 +65,7 @@ namespace LAZYSHELL
                 }
             }
         }
-
-        #region Methods
-
+        #region Function
         public static void GuiMain(ProgramController AppControl)
         {
             // Start the application.
@@ -76,41 +74,18 @@ namespace LAZYSHELL
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1(AppControl));
         }
-
         // Loading
-        private void LoadInitialSettings()
+        private bool LunarCompressExists()
         {
-            this.loadLastUsedROMToolStripMenuItem.Checked = settings.LoadLastUsedROM;
-
-            this.undoStackSizeTextBox.Text = this.settings.UndoStackSize.ToString();
-            this.serverToolStripTextBox1.Text = this.settings.patchServerURL;
-            this.ignoreInvalidRomWarningToolStripMenuItem.Checked = this.settings.UnverifiedRomWarning;
-            this.showEncryptionWarningsToolStripMenuItem.Checked = settings.ShowEncryptionWarnings;
-
-            if (settings.VisualThemeSystem)
+            if (!File.Exists("Lunar Compress.dll"))
             {
-                systemToolStripMenuItem.Checked = true;
-                standardToolStripMenuItem.Checked = false;
-                Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
+                MessageBox.Show(
+                    "Levels could not be opened because Lunar Compress.dll has been moved, renamed, or no longer exists.\n" +
+                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
-            else
-            {
-                standardToolStripMenuItem.Checked = true;
-                systemToolStripMenuItem.Checked = false;
-                Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
-            }
-            this.createBackupROMOnLoadToolStripMenuItem.Checked = settings.CreateBackupROM;
-            this.createBackupROMOnSaveToolStripMenuItem.Checked = settings.CreateBackupROMSave;
-            if (settings.BackupROMDirectory == "")
-            {
-                currentROMDirectoryToolStripMenuItem.Checked = true;
-                customDirectoryToolStripMenuItem.Checked = false;
-            }
-            else
-            {
-                currentROMDirectoryToolStripMenuItem.Checked = false;
-                customDirectoryToolStripMenuItem.Checked = true;
-            }
+            return true;
         }
         private void Open(string filename)
         {
@@ -136,40 +111,33 @@ namespace LAZYSHELL
 
                 if (!AppControl.HeaderPresent()) // If the rom does not have a header, we enable all the buttons
                 {
-                    this.openStats.Enabled = true;
-                    this.openSprites.Enabled = true;
-                    this.openLevels.Enabled = true;
-                    this.openScripts.Enabled = true;
-                    this.openPatches.Enabled = true;
-                    this.openNotes.Enabled = true;
+                    toolStrip2.Enabled = true;
+                    toolStrip3.Enabled = true;
+                    foreach (ToolStripItem item in toolStrip4.Items)
+                        if (item != recentFiles && item != openSettings)
+                            item.Enabled = true;
                     this.removeHeader.Enabled = false;
                     this.removeHeader.Visible = false;
                     this.saveToolStripMenuItem.Enabled = true;
                     this.saveAsToolStripMenuItem.Enabled = true;
                     this.restoreElementsToolStripMenuItem.Enabled = true;
                     this.publishRomToolStripMenuItem.Enabled = true;
-                    this.viewRomSignatureToolStripMenuItem.Enabled = true;
 
                     AppControl.CreateNewMd5Checksum(); // Create a new checksum for a new rom
                 }
                 else if (AppControl.HeaderPresent()) // If the rom does have a header, we disable all the buttons and enable the Remove Header buttons
                 {
-                    this.openStats.Enabled = false;
-                    this.openSprites.Enabled = false;
-                    this.openLevels.Enabled = false;
-                    this.openScripts.Enabled = false;
-                    this.openPatches.Enabled = false;
-                    this.openNotes.Enabled = false;
-
+                    toolStrip2.Enabled = false;
+                    toolStrip3.Enabled = false;
+                    foreach (ToolStripItem item in toolStrip4.Items)
+                        if (item != recentFiles && item != openSettings)
+                            item.Enabled = false;
                     this.removeHeader.Enabled = true;
-                    this.removeHeader.BackColor = Color.LightPink;
                     this.removeHeader.Visible = true;
-
+                    loadRomTextBox.Width = toolStrip1.Width - 95 - removeHeader.Width;
                 }
 
                 UpdateRomInfo();
-                LoadInitialSettings();
-                AppControl.ClearLevelData();
             }
             else if (ret)
             {
@@ -179,88 +147,87 @@ namespace LAZYSHELL
                     this.saveAsToolStripMenuItem.Enabled = true;
                     this.restoreElementsToolStripMenuItem.Enabled = true;
                     this.publishRomToolStripMenuItem.Enabled = true;
-                    this.viewRomSignatureToolStripMenuItem.Enabled = true;
-
                     UpdateRomInfo();
-                    LoadInitialSettings();
-                    AppControl.ClearLevelData();
                 }
-                this.openStats.Enabled = false;
-                this.removeHeader.Enabled = false;
-                this.openSprites.Enabled = false;
-                this.openLevels.Enabled = false;
-                this.openScripts.Enabled = false;
-                this.openPatches.Enabled = false;
-                this.openNotes.Enabled = false;
+                toolStrip2.Enabled = false;
+                toolStrip3.Enabled = false;
+                foreach (ToolStripItem item in toolStrip4.Items)
+                    if (item != recentFiles && item != openSettings)
+                        item.Enabled = false;
                 this.removeHeader.Visible = false;
             }
             if (ret)
                 mruManager.Add(AppControl.GetPathWithoutFileName() + AppControl.GetFileNameWithoutPath());
+            if (toolStrip2.Enabled && settings.LoadAllData)
+                AppControl.LoadAll();
+        }
+        private void CloseROM()
+        {
+            AppControl.CloseRomFile();
+            toolStrip2.Enabled = false;
+            toolStrip3.Enabled = false;
+            foreach (ToolStripItem item in toolStrip4.Items)
+                if (item != recentFiles && item != openSettings)
+                    item.Enabled = false;
+            this.removeHeader.Visible = false;
         }
         public void UpdateRomInfo()
         {
-            this.loadRomTextBox.Text = AppControl.GetFileNameWithoutPath();
-            this.romInfo.Text = "ROM Path.........." + AppControl.GetPathWithoutFileName() +
-                "\nROM Name.........." + AppControl.GetRomName() +
-                "\nHeader............" + AppControl.HeaderPresent() +
-                "\nChecksum.........." + AppControl.RomChecksum() +
-                "\nGamecode.........." + AppControl.GameCode();
+            this.loadRomTextBox.Text = AppControl.GetFileName();
+            this.romInfo.Text =
+                AppControl.GetRomName() + "\n" +
+                AppControl.HeaderPresent() + "\n" +
+                AppControl.RomChecksum() + "\n" +
+                AppControl.GameCode();
         }
-
         // Closing
-        private void FinalizeAndSave(FormClosingEventArgs e, bool closingApp, int assembleFlag)
+        private void FinalizeAndSave(FormClosingEventArgs e, int assembleFlag)
         {
-            if (e == null)
-                return;
-
             DialogResult result;
-
-            if (AppControl.AssembleAndCloseWindows())
+            if (e != null && AppControl.AssembleAndCloseWindows())
             {
                 e.Cancel = true;
                 return;
             }
-
             if (!AppControl.VerifyMD5Checksum())
             {
-                if (assembleFlag == 1)
-                    result = MessageBox.Show("There are changes to the rom that have not been saved.\n\nWould you like to save them now and quit?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                else
-                    result = MessageBox.Show("There are changes to the rom that have not been saved.\n\nWould you like to save them now?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                result = MessageBox.Show(
+                    "There are changes to the rom that have not been saved.\n\n" +
+                    "Would you like to save them now" + (assembleFlag == 1 ? " and quit?" : "?"), "LAZY SHELL",
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
                     if (!AppControl.SaveRomFile())
                     {
-                        MessageBox.Show("There was an error saving to \"" + AppControl.GetFileName() + "\"", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(
+                            "There was an error saving to \"" + AppControl.GetFileName() + "\"",
+                            "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
                 if (result == DialogResult.Cancel)
                 {
-                    if (closingApp)
+                    if (e != null)
                         e.Cancel = true;
                     cancelAnotherLoad = true;
-                    AppControl.AssembleFinal(false);
+                    AppControl.Assemble();
                     return;
                 }
                 else cancelAnotherLoad = false;
             }
-
-            if (closingApp)
+            if (e != null)
             {
                 this.Dispose();
                 Application.Exit();
             }
         }
-
         // Beta
         public void BetaFailValidation()
         {
             invalidExe = true;
             //vBeta.Close();
         }
-
         // Notes
         private string GetDirectoryPath(string caption)
         {
@@ -280,7 +247,6 @@ namespace LAZYSHELL
             else
                 return null;
         }
-
         // MRU list manager
         public void OpenMRUFile(string fileName)
         {
@@ -309,71 +275,13 @@ namespace LAZYSHELL
                 Trace.WriteLine("LoadSettingsFromRegistry failed");
             }
         }
-
         #endregion
-
         #region Event Handlers
-
-        // Editor buttons
-        private void openStats_Click(object sender, System.EventArgs e)
-        {
-            if (!File.Exists("Lunar Compress.dll"))
-            {
-                MessageBox.Show(
-                    "Stats could not be opened because Lunar Compress.dll has been moved, renamed, or no longer exists.\n" +
-                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            AppControl.StatsAndProperties();
-        }
-        private void openSprites_Click(object sender, System.EventArgs e)
-        {
-            if (!File.Exists("Lunar Compress.dll"))
-            {
-                MessageBox.Show(
-                    "Sprites could not be opened because Lunar Compress.dll has been moved, renamed, or no longer exists.\n" +
-                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            AppControl.Sprites();
-        }
-        private void openLevels_Click(object sender, System.EventArgs e)
-        {
-            if (!File.Exists("Lunar Compress.dll"))
-            {
-                MessageBox.Show(
-                    "Levels could not be opened because Lunar Compress.dll has been moved, renamed, or no longer exists.\n" +
-                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            AppControl.Levels();
-        }
-        private void openScripts_Click(object sender, System.EventArgs e)
-        {
-            AppControl.Scripts();
-        }
-        private void openPatches_Click(object sender, EventArgs e)
-        {
-            AppControl.Patches();
-        }
-        private void openNotes_Click(object sender, EventArgs e)
-        {
-            AppControl.Notes();
-        }
-
         // Main buttons
         private void loadRom_Click(object sender, System.EventArgs e)
         {
             if (saveToolStripMenuItem.Enabled)
-            {
-                FinalizeAndSave(null, false, 0);
-            }
+                FinalizeAndSave(null, 0);
             if (!cancelAnotherLoad)
                 Open(null);
         }
@@ -382,12 +290,11 @@ namespace LAZYSHELL
             if (AppControl.RemoveHeader())
             {
                 // Enable all the editors
-                this.openStats.Enabled = true;
-                this.openSprites.Enabled = true;
-                this.openLevels.Enabled = true;
-                this.openScripts.Enabled = true;
-                this.openPatches.Enabled = true;
-                this.openNotes.Enabled = true;
+                toolStrip2.Enabled = true;
+                toolStrip3.Enabled = true;
+                foreach (ToolStripItem item in toolStrip4.Items)
+                    if (item != recentFiles)
+                        item.Enabled = true;
                 // Disable/hide the remove header button
                 this.removeHeader.Enabled = false;
                 this.removeHeader.Visible = false;
@@ -395,16 +302,39 @@ namespace LAZYSHELL
                 AppControl.CreateNewMd5Checksum(); // Create a new checksum for a new rom
             }
         }
-
+        private void toolStrip1_SizeChanged(object sender, EventArgs e)
+        {
+            if (!removeHeader.Visible)
+                loadRomTextBox.Width = toolStrip1.Width - 95;
+            else
+                loadRomTextBox.Width = toolStrip1.Width - 95 - removeHeader.Width;
+        }
         // toolstripMenuItems : File
         private void openToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             if (saveToolStripMenuItem.Enabled)
-            {
-                FinalizeAndSave(null, false, 0);
-            }
+                FinalizeAndSave(null, 0);
             if (!cancelAnotherLoad)
                 Open(null);
+        }
+        private void refreshROM_Click(object sender, EventArgs e)
+        {
+            if (saveToolStripMenuItem.Enabled)
+                FinalizeAndSave(null, 0);
+            if (!cancelAnotherLoad)
+                Open(loadRomTextBox.Text);
+        }
+        private void closeROM_Click(object sender, EventArgs e)
+        {
+            if (saveToolStripMenuItem.Enabled)
+                FinalizeAndSave(null, 0);
+            CloseROM();
+            this.loadRomTextBox.Text = "";
+            this.romInfo.Text = "";
+        }
+        private void showROMInfo_Click(object sender, EventArgs e)
+        {
+            panel4.Visible = showROMInfo.Checked;
         }
         private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
@@ -448,109 +378,10 @@ namespace LAZYSHELL
             if (AppControl.Publish())
                 UpdateRomInfo();
         }
-        private void viewRomSignatureToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openSettings_Click(object sender, EventArgs e)
         {
-            AppControl.ViewSignature();
+            new SettingsEditor().ShowDialog();
         }
-        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            this.Close();
-        }
-
-        // toolstripmenuitems : Settings
-        private void loadLastUsedROMToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settings.LoadLastUsedROM = loadLastUsedROMToolStripMenuItem.Checked;
-            settings.Save();
-        }
-        private void createBackupROMOnLoadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settings.CreateBackupROM = createBackupROMOnLoadToolStripMenuItem.Checked;
-        }
-        private void createBackupROMOnSaveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settings.CreateBackupROMSave = createBackupROMOnSaveToolStripMenuItem.Checked;
-        }
-        private void currentROMDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            customDirectoryToolStripMenuItem.Checked = false;
-            currentROMDirectoryToolStripMenuItem.Checked = true;
-            settings.BackupROMDirectory = "";
-        }
-        private void customDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-
-            folderBrowserDialog.SelectedPath = Application.StartupPath;
-            folderBrowserDialog.Description = "Select directory to save backup ROMs to..." + this.Text;
-
-            // Display the openFile dialog.
-            DialogResult result = folderBrowserDialog.ShowDialog();
-
-            if (result != DialogResult.OK) return;
-
-            currentROMDirectoryToolStripMenuItem.Checked = false;
-            customDirectoryToolStripMenuItem.Checked = true;
-
-            settings.BackupROMDirectory = folderBrowserDialog.SelectedPath + "\\";
-        }
-        private void systemToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settings.VisualThemeSystem = true;
-            settings.Save();
-            systemToolStripMenuItem.Checked = true;
-            standardToolStripMenuItem.Checked = false;
-            Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
-        }
-        private void standardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settings.VisualThemeSystem = false;
-            settings.Save();
-            systemToolStripMenuItem.Checked = false;
-            standardToolStripMenuItem.Checked = true;
-            Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
-        }
-        private void undoStackSizeTextBox_TextChanged(object sender, System.EventArgs e)
-        {
-            try
-            {
-                settings.UndoStackSize = System.Convert.ToInt32(this.undoStackSizeTextBox.Text, 10);
-                settings.Save();
-                AppControl.CreateNewLevelsCommandStack();
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-        private void serverToolStripTextBox1_TextChanged(object sender, System.EventArgs e)
-        {
-            settings.patchServerURL = serverToolStripTextBox1.Text;
-            settings.Save();
-        }
-        private void ignoreInvalidRomWarningToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settings.UnverifiedRomWarning = ignoreInvalidRomWarningToolStripMenuItem.Checked;
-            settings.Save();
-        }
-        private void showEncryptionWarningsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settings.ShowEncryptionWarnings = this.showEncryptionWarningsToolStripMenuItem.Checked;
-            settings.Save();
-        }
-        private void resetSettingsToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(
-                "You are about to reset the application's settings. You will lose all custom settings.\n\n" +
-                "Are you sure you want to do this?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-                settings.Reset();
-        }
-        private void saveCurrentSettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settings.Save();
-        }
-
         // toolStripMenuitems : Help
         private void baseConvertorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -574,14 +405,154 @@ namespace LAZYSHELL
             Form about = new About(this);
             about.ShowDialog(this);
         }
-
         // other
-        private void Form1_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FinalizeAndSave(e, true, 1);
+            FinalizeAndSave(e, 1);
             settings.Save();
         }
-
+        // Editor buttons
+        private void openAllies_Click(object sender, EventArgs e)
+        {
+            AppControl.Allies();
+        }
+        private void openAnimations_Click(object sender, EventArgs e)
+        {
+            AppControl.Animations();
+        }
+        private void openAttacks_Click(object sender, EventArgs e)
+        {
+            AppControl.Attacks();
+        }
+        private void openBattlefields_Click(object sender, EventArgs e)
+        {
+            if (!LunarCompressExists())
+                return;
+            AppControl.Battlefields();
+        }
+        private void openBattleScripts_Click(object sender, EventArgs e)
+        {
+            AppControl.BattleScripts();
+        }
+        private void openDialogues_Click(object sender, EventArgs e)
+        {
+            if (!LunarCompressExists())
+                return;
+            AppControl.Dialogues();
+        }
+        private void openEffects_Click(object sender, EventArgs e)
+        {
+            AppControl.Effects();
+        }
+        private void openEventScripts_Click(object sender, System.EventArgs e)
+        {
+            AppControl.Scripts();
+        }
+        private void openFormations_Click(object sender, EventArgs e)
+        {
+            if (!LunarCompressExists())
+                return;
+            AppControl.Formations();
+        }
+        private void openItems_Click(object sender, EventArgs e)
+        {
+            AppControl.Items();
+        }
+        private void openLevels_Click(object sender, System.EventArgs e)
+        {
+            if (!LunarCompressExists())
+                return;
+            AppControl.Levels();
+        }
+        private void openMainTitle_Click(object sender, EventArgs e)
+        {
+            if (!LunarCompressExists())
+                return;
+            AppControl.MainTitle();
+        }
+        private void openMonsters_Click(object sender, EventArgs e)
+        {
+            if (!LunarCompressExists())
+                return;
+            AppControl.Monsters();
+        }
+        private void openSprites_Click(object sender, System.EventArgs e)
+        {
+            AppControl.Sprites();
+        }
+        private void openWorldMaps_Click(object sender, EventArgs e)
+        {
+            if (!LunarCompressExists())
+                return;
+            AppControl.WorldMaps();
+        }
+        private void openPatches_Click(object sender, EventArgs e)
+        {
+            AppControl.Patches();
+        }
+        private void openNotes_Click(object sender, EventArgs e)
+        {
+            AppControl.Notes();
+        }
+        // window editing
+        private void docking_Click(object sender, EventArgs e)
+        {
+            AppControl.DockEditors = docking.Checked;
+            if (docking.Checked)
+                AppControl.Dock();
+            else
+                AppControl.Undock();
+        }
+        private void openAll_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You are about to open all 15 editor windows. Are you sure you want to do this?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+            openAllies_Click(null, null);
+            openAnimations_Click(null, null);
+            openAttacks_Click(null, null);
+            openBattlefields_Click(null, null);
+            openBattleScripts_Click(null, null);
+            openDialogues_Click(null, null);
+            openEffects_Click(null, null);
+            openEventScripts_Click(null, null);
+            openFormations_Click(null, null);
+            openItems_Click(null, null);
+            openLevels_Click(null, null);
+            openMainTitle_Click(null, null);
+            openMonsters_Click(null, null);
+            openSprites_Click(null, null);
+            openWorldMaps_Click(null, null);
+        }
+        private void closeAll_Click(object sender, EventArgs e)
+        {
+            AppControl.CloseAll();
+        }
+        private void minimizeAll_Click(object sender, EventArgs e)
+        {
+            AppControl.MinimizeAll();
+        }
+        private void restoreAll_Click(object sender, EventArgs e)
+        {
+            AppControl.RestoreAll();
+        }
+        private void loadAllData_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                "You are about to reset the editor's memory of all elements. Continue?", "LAZY SHELL",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                return;
+            AppControl.ClearAll();
+            AppControl.LoadAll();
+        }
+        private void clearModel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                "You are about to clear the editor's memory of all elements. Continue?", "LAZY SHELL", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                return;
+            AppControl.ClearAll();
+        }
         #endregion
     }
 }

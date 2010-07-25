@@ -11,9 +11,9 @@ namespace LAZYSHELL
 {
     public partial class FixPointers : Form
     {
-        private Scripts scripts;
+        private EventScripts scripts;
         private TreeViewWrapper treeViewWrapper;
-        public FixPointers(Scripts scripts, TreeViewWrapper treeViewWrapper)
+        public FixPointers(EventScripts scripts, TreeViewWrapper treeViewWrapper)
         {
             this.scripts = scripts;
             this.treeViewWrapper = treeViewWrapper;

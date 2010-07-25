@@ -15,11 +15,11 @@ namespace LAZYSHELL
 {
     public partial class Notes : Form
     {
+        #region Variables
         private Model model;
         private Settings settings;
         private ArrayList currentIndexes;
         private NotesDB.Index currentIndex;
-        private UniversalVariables universal;
         private State state;
         private NotesDB notes; public NotesDB ThisNotes { get { return notes; } set { notes = value; } }
         public ComboBox ElementType { get { return elementType; } set { elementType = value; } }
@@ -28,16 +28,15 @@ namespace LAZYSHELL
         public TextBox IndexLabel { get { return indexLabel; } set { indexLabel = value; } }
         public RichTextBox IndexDescription { get { return indexDescription; } set { indexDescription = value; } }
         private bool updating = false;
-
+        #endregion
+        // constructor
         public Notes(Model model)
         {
             this.model = model;
             this.model.Notes = notes;
             this.settings = Settings.Default;
             this.state = State.Instance;
-            this.universal = state.Universal;
             InitializeComponent();
-            this.autoLoadLastNotesDatabaseToolStripMenuItem.Checked = settings.LoadNotes;
             if (settings.LoadNotes)
             {
                 if (!File.Exists(settings.NotePathCustom))
@@ -56,11 +55,11 @@ namespace LAZYSHELL
                 generalNotes.Text = notes.GeneralNotes;
                 tabControl1.Enabled = true;
                 buttonOK.Enabled = true;
-                saveToolStripMenuItem.Enabled = true;
-                saveAsToolStripMenuItem.Enabled = true;
+                save.Enabled = true;
+                saveAs.Enabled = true;
             }
         }
-
+        #region Functions
         private void RefreshElementIndexes()
         {
             updating = true;
@@ -159,7 +158,7 @@ namespace LAZYSHELL
 
             foreach (NotesDB.Index index in currentIndexes)
             {
-                if (tagIndexesWithNumbersToolStripMenuItem.Checked)
+                if (numerize.Checked)
                     elementIndexes.Items.Add("[" + index.IndexNumber.ToString("d4") + "]  " + index.IndexLabel);
                 else
                     elementIndexes.Items.Add(index.IndexLabel);
@@ -183,208 +182,6 @@ namespace LAZYSHELL
             indexDescription.Text = currentIndex.IndexDescription;
 
             updating = false;
-        }
-        private void elementType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-            RefreshElementIndexes();
-
-            if (elementIndexes.Items.Count > 0)
-                elementIndexes.SelectedIndex = 0;
-        }
-        private void elementIndexes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-            RefreshIndex();
-        }
-
-        private void buttonLoad_Click(object sender, EventArgs e)
-        {
-            if (elementType.SelectedIndex == 1)
-            {
-                if (model.Program.Levels == null || !model.Program.Levels.Visible)
-                    model.Program.CreateLevelsWindow();
-                model.Program.Levels.LevelNum.Value = indexNumber.Value;
-                model.Program.Levels.BringToFront();
-            }
-            if (elementType.SelectedIndex == 4)
-            {
-                if (model.Program.Scripts == null || !model.Program.Scripts.Visible)
-                    model.Program.CreateScriptsWindow();
-                model.Program.Scripts.EventName.SelectedIndex = 0;
-                model.Program.Scripts.EventNum.Value = indexNumber.Value;
-                model.Program.Scripts.TabControlScripts.SelectedIndex = 0;
-                model.Program.Scripts.BringToFront();
-            }
-            if (elementType.SelectedIndex == 5)
-            {
-                if (model.Program.Scripts == null || !model.Program.Scripts.Visible)
-                    model.Program.CreateScriptsWindow();
-                model.Program.Scripts.EventName.SelectedIndex = 1;
-                model.Program.Scripts.EventNum.Value = indexNumber.Value;
-                model.Program.Scripts.TabControlScripts.SelectedIndex = 0;
-                model.Program.Scripts.BringToFront();
-            }
-            if (elementType.SelectedIndex == 6)
-            {
-                if (model.Program.Scripts == null || !model.Program.Scripts.Visible)
-                    model.Program.CreateScriptsWindow();
-                model.Program.Scripts.MonsterNumber.Value = indexNumber.Value;
-                model.Program.Scripts.TabControlScripts.SelectedIndex = 1;
-                model.Program.Scripts.BringToFront();
-            }
-            if (elementType.SelectedIndex == 10)
-            {
-                if (model.Program.Sprites == null || !model.Program.Sprites.Visible)
-                    model.Program.CreateSpritesWindow();
-                model.Program.Sprites.SpriteNum.Value = indexNumber.Value;
-                model.Program.Sprites.TabControl1.SelectedIndex = 0;
-                model.Program.Sprites.BringToFront();
-            }
-            if (elementType.SelectedIndex == 11)
-            {
-                if (model.Program.Sprites == null || !model.Program.Sprites.Visible)
-                    model.Program.CreateSpritesWindow();
-                model.Program.Sprites.EffectNum.Value = indexNumber.Value;
-                model.Program.Sprites.TabControl1.SelectedIndex = 1;
-                model.Program.Sprites.BringToFront();
-            }
-            if (elementType.SelectedIndex == 12)
-            {
-                if (model.Program.Sprites == null || !model.Program.Sprites.Visible)
-                    model.Program.CreateSpritesWindow();
-                model.Program.Sprites.DialogueNum.Value = indexNumber.Value;
-                model.Program.Sprites.TabControl1.SelectedIndex = 2;
-                model.Program.Sprites.BringToFront();
-            }
-            if (elementType.SelectedIndex == 15)
-            {
-                if (model.Program.Stats == null || !model.Program.Stats.Visible)
-                    model.Program.CreateStatsWindow();
-                model.Program.Stats.MonsterNum.Value = indexNumber.Value;
-                model.Program.Stats.TabControl1.SelectedIndex = 0;
-                model.Program.Stats.BringToFront();
-            }
-            if (elementType.SelectedIndex == 16)
-            {
-                if (model.Program.Stats == null || !model.Program.Stats.Visible)
-                    model.Program.CreateStatsWindow();
-                model.Program.Stats.FormationNum.Value = indexNumber.Value;
-                model.Program.Stats.TabControl1.SelectedIndex = 1;
-                model.Program.Stats.BringToFront();
-            }
-            if (elementType.SelectedIndex == 17)
-            {
-                if (model.Program.Stats == null || !model.Program.Stats.Visible)
-                    model.Program.CreateStatsWindow();
-                model.Program.Stats.PackNum.Value = indexNumber.Value;
-                model.Program.Stats.TabControl1.SelectedIndex = 1;
-                model.Program.Stats.BringToFront();
-            }
-            if (elementType.SelectedIndex == 18)
-            {
-                if (model.Program.Stats == null || !model.Program.Stats.Visible)
-                    model.Program.CreateStatsWindow();
-                model.Program.Stats.SpellNum.Value = indexNumber.Value;
-                model.Program.Stats.TabControl1.SelectedIndex = 2;
-                model.Program.Stats.BringToFront();
-            }
-            if (elementType.SelectedIndex == 19)
-            {
-                if (model.Program.Stats == null || !model.Program.Stats.Visible)
-                    model.Program.CreateStatsWindow();
-                model.Program.Stats.AttackNum.Value = indexNumber.Value;
-                model.Program.Stats.TabControl1.SelectedIndex = 2;
-                model.Program.Stats.BringToFront();
-            }
-            if (elementType.SelectedIndex == 20)
-            {
-                if (model.Program.Stats == null || !model.Program.Stats.Visible)
-                    model.Program.CreateStatsWindow();
-                model.Program.Stats.ItemNum.Value = indexNumber.Value;
-                model.Program.Stats.TabControl1.SelectedIndex = 3;
-                model.Program.Stats.BringToFront();
-            }
-            if (elementType.SelectedIndex == 21)
-            {
-                if (model.Program.Stats == null || !model.Program.Stats.Visible)
-                    model.Program.CreateStatsWindow();
-                model.Program.Stats.ShopNum.Value = indexNumber.Value;
-                model.Program.Stats.TabControl1.SelectedIndex = 3;
-                model.Program.Stats.BringToFront();
-            }
-        }
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            if (elementIndexes.SelectedIndex == -1)
-                return;
-            notes.DeleteIndex(elementIndexes.SelectedIndex, currentIndexes);
-            int selectedIndex = elementIndexes.SelectedIndex;
-            RefreshElementIndexes();
-            if (currentIndexes.Count > 0)
-                elementIndexes.SelectedIndex = Math.Min(selectedIndex, currentIndexes.Count - 1);
-        }
-        private void buttonMoveUp_Click(object sender, EventArgs e)
-        {
-            if (elementIndexes.SelectedIndex == 0) return;
-            notes.SwitchIndex(elementIndexes.SelectedIndex - 1, currentIndexes);
-            int selectedIndex = elementIndexes.SelectedIndex;
-            RefreshElementIndexes();
-            elementIndexes.SelectedIndex = selectedIndex - 1;
-        }
-        private void buttonMoveDown_Click(object sender, EventArgs e)
-        {
-            if (elementIndexes.SelectedIndex >= elementIndexes.Items.Count - 1) return;
-            notes.SwitchIndex(elementIndexes.SelectedIndex, currentIndexes);
-            int selectedIndex = elementIndexes.SelectedIndex;
-            RefreshElementIndexes();
-            elementIndexes.SelectedIndex = selectedIndex + 1;
-        }
-        private void buttonAdd_Click(object sender, EventArgs e)
-        {
-            AddNewIndex();
-        }
-
-        private void indexNumber_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-            currentIndex.IndexNumber = (int)indexNumber.Value;
-        }
-        private void indexLabel_TextChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-            currentIndex.IndexLabel = indexLabel.Text;
-            int selectedIndex = elementIndexes.SelectedIndex;
-            RefreshElementIndexes();
-            elementIndexes.SelectedIndex = selectedIndex;
-        }
-        private void indexDescription_TextChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-            currentIndex.IndexDescription = indexDescription.Text;
-        }
-
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            SaveLoadedNotes();
-            this.Close();
-        }
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void buttonBrowse_Click(object sender, EventArgs e)
-        {
-            if (notes != null)
-            {
-                DialogResult result = MessageBox.Show("Save changes to currently loaded notes?", "LAZY SHELL",
-                    MessageBoxButtons.YesNoCancel);
-                if (result == DialogResult.Yes)
-                    SaveLoadedNotes();
-                if (result == DialogResult.Cancel)
-                    return;
-            }
-            LoadNotes();
         }
         public bool LoadNotes()
         {
@@ -422,8 +219,8 @@ namespace LAZYSHELL
             generalNotes.Text = notes.GeneralNotes;
             tabControl1.Enabled = true;
             buttonOK.Enabled = true;
-            saveToolStripMenuItem.Enabled = true;
-            saveAsToolStripMenuItem.Enabled = true;
+            save.Enabled = true;
+            saveAs.Enabled = true;
 
             return true;
         }
@@ -465,14 +262,14 @@ namespace LAZYSHELL
                 elementType.SelectedIndex = 1;
             tabControl1.Enabled = true;
             buttonOK.Enabled = true;
-            saveToolStripMenuItem.Enabled = true;
-            saveAsToolStripMenuItem.Enabled = true;
+            save.Enabled = true;
+            saveAs.Enabled = true;
 
             return true;
         }
         private void SaveNewNotes(string path)
         {
-            universal.Notes = notes;
+            model.Notes = notes;
 
             Stream s = File.Create(path);
             BinaryFormatter b = new BinaryFormatter();
@@ -486,7 +283,6 @@ namespace LAZYSHELL
             b.Serialize(s, notes);
             s.Close();
         }
-
         private void AddNewIndex()
         {
             if (elementIndexes.SelectedIndex != -1)
@@ -518,7 +314,8 @@ namespace LAZYSHELL
             indexLabel.Text = label;
             indexDescription.Text = "";
         }
-
+        #endregion
+        #region Event Handlers
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (notes == null) return;
@@ -529,7 +326,209 @@ namespace LAZYSHELL
             if (result == DialogResult.Cancel)
                 e.Cancel = true;
         }
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            SaveLoadedNotes();
+            this.Close();
+        }
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void buttonBrowse_Click(object sender, EventArgs e)
+        {
+            if (notes != null)
+            {
+                DialogResult result = MessageBox.Show("Save changes to currently loaded notes?", "LAZY SHELL",
+                    MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                    SaveLoadedNotes();
+                if (result == DialogResult.Cancel)
+                    return;
+            }
+            LoadNotes();
+        }
+        // loading editors
+        private void buttonLoad_Click(object sender, EventArgs e)
+        {
+            if (elementType.SelectedIndex == 1)
+            {
+                if (model.Program.Levels == null || !model.Program.Levels.Visible)
+                    model.Program.CreateLevelsWindow();
+                model.Program.Levels.LevelNum.Value = indexNumber.Value;
+                model.Program.Levels.BringToFront();
+            }
+            if (elementType.SelectedIndex == 4)
+            {
+                if (model.Program.EventScripts == null || !model.Program.EventScripts.Visible)
+                    model.Program.CreateEventScriptsWindow();
+                model.Program.EventScripts.EventName.SelectedIndex = 0;
+                model.Program.EventScripts.EventNum.Value = indexNumber.Value;
+                model.Program.EventScripts.BringToFront();
+            }
+            if (elementType.SelectedIndex == 5)
+            {
+                if (model.Program.EventScripts == null || !model.Program.EventScripts.Visible)
+                    model.Program.CreateEventScriptsWindow();
+                model.Program.EventScripts.EventName.SelectedIndex = 1;
+                model.Program.EventScripts.EventNum.Value = indexNumber.Value;
+                model.Program.EventScripts.BringToFront();
+            }
+            if (elementType.SelectedIndex == 6)
+            {
+                if (model.Program.BattleScripts == null || !model.Program.BattleScripts.Visible)
+                    model.Program.CreateBattleScriptsWindow();
+                model.Program.BattleScripts.index = (int)indexNumber.Value;
+                model.Program.BattleScripts.BringToFront();
+            }
+            if (elementType.SelectedIndex == 10)
+            {
+                if (model.Program.Sprites == null || !model.Program.Sprites.Visible)
+                    model.Program.CreateSpritesWindow();
+                model.Program.Sprites.index = (int)indexNumber.Value;
+                model.Program.Sprites.BringToFront();
+            }
+            if (elementType.SelectedIndex == 11)
+            {
+                if (model.Program.Effects == null || !model.Program.Effects.Visible)
+                    model.Program.CreateEffectsWindow();
+                model.Program.Effects.index = (int)indexNumber.Value;
+                model.Program.Effects.BringToFront();
+            }
+            if (elementType.SelectedIndex == 12)
+            {
+                if (model.Program.Dialogues == null || !model.Program.Dialogues.Visible)
+                    model.Program.CreateDialoguesWindow();
+                model.Program.Dialogues.index = (int)indexNumber.Value;
+                model.Program.Dialogues.BringToFront();
+            }
+            if (elementType.SelectedIndex == 15)
+            {
+                if (model.Program.Monsters == null || !model.Program.Monsters.Visible)
+                    model.Program.CreateMonstersWindow();
+                model.Program.Monsters.index = (int)indexNumber.Value;
+                model.Program.Monsters.BringToFront();
+            }
+            if (elementType.SelectedIndex == 16)
+            {
+                if (model.Program.Formations == null || !model.Program.Formations.Visible)
+                    model.Program.CreateFormationsWindow();
+                model.Program.Formations.FormationIndex = (int)indexNumber.Value;
+                model.Program.Formations.BringToFront();
+            }
+            if (elementType.SelectedIndex == 17)
+            {
+                if (model.Program.Formations == null || !model.Program.Formations.Visible)
+                    model.Program.CreateFormationsWindow();
+                model.Program.Formations.PackIndex = (int)indexNumber.Value;
+                model.Program.Formations.BringToFront();
+            }
+            if (elementType.SelectedIndex == 18)
+            {
+                if (model.Program.Attacks == null || !model.Program.Attacks.Visible)
+                    model.Program.CreateAttacksWindow();
+                model.Program.Attacks.spellsEditor.Index = (int)indexNumber.Value;
+                model.Program.Attacks.BringToFront();
+            }
+            if (elementType.SelectedIndex == 19)
+            {
+                if (model.Program.Attacks == null || !model.Program.Attacks.Visible)
+                    model.Program.CreateAttacksWindow();
+                model.Program.Attacks.attacksEditor.Index = (int)indexNumber.Value;
+                model.Program.Attacks.BringToFront();
+            }
+            if (elementType.SelectedIndex == 20)
+            {
+                if (model.Program.Items == null || !model.Program.Items.Visible)
+                    model.Program.CreateItemsWindow();
+                model.Program.Items.itemsEditor.Index = (int)indexNumber.Value;
+                model.Program.Items.BringToFront();
+            }
+            if (elementType.SelectedIndex == 21)
+            {
+                if (model.Program.Items == null || !model.Program.Items.Visible)
+                    model.Program.CreateItemsWindow();
+                model.Program.Items.shopsEditor.Index = (int)indexNumber.Value;
+                model.Program.Items.BringToFront();
+            }
+        }
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (elementIndexes.SelectedIndex == -1)
+                return;
+            notes.DeleteIndex(elementIndexes.SelectedIndex, currentIndexes);
+            int selectedIndex = elementIndexes.SelectedIndex;
+            RefreshElementIndexes();
+            if (currentIndexes.Count > 0)
+                elementIndexes.SelectedIndex = Math.Min(selectedIndex, currentIndexes.Count - 1);
+        }
+        private void buttonMoveUp_Click(object sender, EventArgs e)
+        {
+            if (elementIndexes.SelectedIndex == 0) return;
+            notes.SwitchIndex(elementIndexes.SelectedIndex - 1, currentIndexes);
+            int selectedIndex = elementIndexes.SelectedIndex;
+            RefreshElementIndexes();
+            elementIndexes.SelectedIndex = selectedIndex - 1;
+        }
+        private void buttonMoveDown_Click(object sender, EventArgs e)
+        {
+            if (elementIndexes.SelectedIndex >= elementIndexes.Items.Count - 1) return;
+            notes.SwitchIndex(elementIndexes.SelectedIndex, currentIndexes);
+            int selectedIndex = elementIndexes.SelectedIndex;
+            RefreshElementIndexes();
+            elementIndexes.SelectedIndex = selectedIndex + 1;
+        }
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            AddNewIndex();
+        }
+        // notes properties
+        private void elementType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            RefreshElementIndexes();
 
+            if (elementIndexes.Items.Count > 0)
+                elementIndexes.SelectedIndex = 0;
+        }
+        private void elementIndexes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            RefreshIndex();
+        }
+        private void indexNumber_ValueChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            currentIndex.IndexNumber = (int)indexNumber.Value;
+        }
+        private void indexLabel_TextChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            currentIndex.IndexLabel = indexLabel.Text;
+            int selectedIndex = elementIndexes.SelectedIndex;
+            RefreshElementIndexes();
+            elementIndexes.SelectedIndex = selectedIndex;
+        }
+        private void indexDescription_TextChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            currentIndex.IndexDescription = indexDescription.Text;
+        }
+        private void address_ValueChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            currentIndex.Address = (int)address.Value;
+        }
+        private void addressBit_ValueChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            currentIndex.AddressBit = (int)addressBit.Value;
+        }
+        private void generalNotes_TextChanged(object sender, EventArgs e)
+        {
+            notes.GeneralNotes = generalNotes.Text;
+        }
+        // toolstrip
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CreateNewNotes();
@@ -538,12 +537,10 @@ namespace LAZYSHELL
         {
             LoadNotes();
         }
-
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveLoadedNotes();
         }
-
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -562,45 +559,16 @@ namespace LAZYSHELL
             b.Serialize(s, notes);
             s.Close();
         }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            buttonCancel_Click(null, null);
-        }
-
         private void alwaysOnTopToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            this.TopMost = alwaysOnTopToolStripMenuItem.Checked;
+            this.TopMost = alwaysOnTop.Checked;
         }
-
-        private void autoLoadLastNotesDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settings.LoadNotes = autoLoadLastNotesDatabaseToolStripMenuItem.Checked;
-            settings.Save();
-        }
-
         private void tagIndexesWithNumbersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int selectedIndex = elementIndexes.SelectedIndex;
             RefreshElementIndexes();
             elementIndexes.SelectedIndex = selectedIndex;
         }
-
-        private void address_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-            currentIndex.Address = (int)address.Value;
-        }
-
-        private void addressBit_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-            currentIndex.AddressBit = (int)addressBit.Value;
-        }
-
-        private void generalNotes_TextChanged(object sender, EventArgs e)
-        {
-            notes.GeneralNotes = generalNotes.Text;
-        }
+        #endregion
     }
 }

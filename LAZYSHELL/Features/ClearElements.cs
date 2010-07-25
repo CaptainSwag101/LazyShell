@@ -21,6 +21,7 @@ namespace LAZYSHELL
         {
             this.element = element;
             this.currentIndex = currentIndex;
+            this.start = this.end = currentIndex;
             this.type = element.GetType();
             InitializeComponent();
 
@@ -28,15 +29,15 @@ namespace LAZYSHELL
 
             if (type != typeof(Model))
                 toIndex.Value = toIndex.Maximum = ((object[])element).Length - 1;
-            if (type == typeof(Model) && this.Text == "CLEAR LEVEL DATA...")
-                toIndex.Value = toIndex.Maximum = ((Model)element).LevelModel.Levels.Length - 1;
-            if (type == typeof(Model) && this.Text == "CLEAR TILESETS...")
+            else if (type == typeof(Model) && this.Text == "CLEAR LEVEL DATA...")
+                toIndex.Value = toIndex.Maximum = ((Model)element).Levels.Length - 1;
+            else if (type == typeof(Model) && this.Text == "CLEAR TILESETS...")
                 toIndex.Value = toIndex.Maximum = ((Model)element).TileSets.Length - 1;
-            if (type == typeof(Model) && this.Text == "CLEAR TILEMAPS...")
+            else if (type == typeof(Model) && this.Text == "CLEAR TILEMAPS...")
                 toIndex.Value = toIndex.Maximum = ((Model)element).TileMaps.Length - 1;
-            if (type == typeof(Model) && this.Text == "CLEAR PHYSICAL MAPS...")
+            else if (type == typeof(Model) && this.Text == "CLEAR PHYSICAL MAPS...")
                 toIndex.Value = toIndex.Maximum = ((Model)element).PhysicalMaps.Length - 1;
-            if (type == typeof(Model) && this.Text == "CLEAR BATTLEFIELD TILESETS...")
+            else if (type == typeof(Model) && this.Text == "CLEAR BATTLEFIELD TILESETS...")
                 toIndex.Value = toIndex.Maximum = ((Model)element).TileSetsBF.Length - 1;
             start = end = currentIndex;
         }
@@ -55,50 +56,21 @@ namespace LAZYSHELL
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            // SPRITES
-            if (type == typeof(Dialogue[]))
-            {
-                for (int i = start; i <= end; i++)
-                    ((Dialogue[])element)[i].SetDialogue("[0]", true);
-            }
-            if (type == typeof(MapPoint[]))
-            {
-                for (int i = start; i <= end; i++)
-                    ((MapPoint[])element)[i].Clear();
-            }
-            if (type == typeof(Animation[]))
-            {
-                for (int i = start; i <= end; i++)
-                    ((Animation[])element)[i].Clear();
-            }
-            if (type == typeof(SpritePalette[]))
-            {
-                for (int i = start; i <= end; i++)
-                    ((SpritePalette[])element)[i].Clear();
-            }
-            if (type == typeof(WorldMap[]))
-            {
-                for (int i = start; i <= end; i++)
-                    ((WorldMap[])element)[i].Clear();
-            }
-            if (type == typeof(E_Animation[]))
-            {
-                for (int i = start; i <= end; i++)
-                    ((E_Animation[])element)[i].Clear();
-            }
+            for (int i = start; i <= end; i++)
+                ((Element[])element)[i].Clear();
 
             // LEVELS
             if (type == typeof(Model) && this.Text == "CLEAR LEVEL DATA...")
             {
                 for (int i = start; i <= end; i++)
                 {
-                    ((Model)element).LevelModel.Levels[i].Layer.Clear();
-                    ((Model)element).LevelModel.Levels[i].LevelEvents.Clear();
-                    ((Model)element).LevelModel.Levels[i].LevelExits.Clear();
-                    ((Model)element).LevelModel.Levels[i].LevelNPCs.Clear();
-                    ((Model)element).LevelModel.Levels[i].LevelOverlaps.Clear();
-                    int levelMap = ((Model)element).LevelModel.Levels[i].LevelMap;
-                    ((Model)element).LevelModel.LevelMaps[levelMap].Clear();
+                    ((Model)element).Levels[i].Layer.Clear();
+                    ((Model)element).Levels[i].LevelEvents.Clear();
+                    ((Model)element).Levels[i].LevelExits.Clear();
+                    ((Model)element).Levels[i].LevelNPCs.Clear();
+                    ((Model)element).Levels[i].LevelOverlaps.Clear();
+                    int levelMap = ((Model)element).Levels[i].LevelMap;
+                    ((Model)element).LevelMaps[levelMap].Clear();
                 }
             }
             if (type == typeof(Model) && this.Text == "CLEAR TILESETS...")
@@ -138,29 +110,6 @@ namespace LAZYSHELL
                     ((Model)element).TileSetsBF[i] = new byte[0x2000];
                     ((Model)element).EditTileSetsBF[i] = true;
                 }
-            }
-
-
-
-            // STATS
-
-
-
-            // SCRIPTS
-            if (type == typeof(BattleScript[]) && this.Text == "CLEAR BATTLE SCRIPTS...")
-            {
-                for (int i = start; i < end; i++)
-                    ((BattleScript[])element)[i].ClearAll();
-            }
-            if (type == typeof(EventScript[]) && this.Text == "CLEAR EVENT SCRIPTS...")
-            {
-                for (int i = start; i < end; i++)
-                    ((EventScript[])element)[i].ClearAll();
-            }
-            if (type == typeof(ActionQueue[]) && this.Text == "CLEAR ACTION SCRIPTS...")
-            {
-                for (int i = start; i < end; i++)
-                    ((ActionQueue[])element)[i].ClearAll();
             }
 
             this.DialogResult = DialogResult.OK;

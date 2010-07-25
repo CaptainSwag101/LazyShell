@@ -36,18 +36,36 @@ namespace LAZYSHELL
             this.backgroundWorker = backgroundWorker;
             this.progressBar1.Maximum = max;
         }
+        public ProgressBar(string title, int max, BackgroundWorker backgroundWorker)
+        {
+            InitializeComponent();
+
+            this.Text = title;
+            this.backgroundWorker = backgroundWorker;
+            this.progressBar1.Maximum = max;
+        }
+        public ProgressBar(string title, int max)
+        {
+            InitializeComponent();
+
+            loadingWhat.Width += buttonCancel.Width + 2;
+            buttonCancel.Visible = false;
+            
+            this.Text = title;
+            this.progressBar1.Maximum = max;
+        }
         public void PerformStep(string labelText)
         {
             progressBar1.PerformStep();
             loadingWhat.Text = labelText;
             this.Update();
         }
-        public void PerformSteps(int amount)
+        public void PerformStep(string labelText, int steps)
         {
-            progressBar1.Value += amount;
+            progressBar1.Value += steps;
+            loadingWhat.Text = labelText;
             this.Update();
         }
-
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             backgroundWorker.CancelAsync();

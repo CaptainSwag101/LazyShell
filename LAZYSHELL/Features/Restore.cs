@@ -44,7 +44,8 @@ namespace LAZYSHELL
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + ex.Message, "LAZY SHELL");
+                MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + ex.Message,
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 fileName = "Invalid File";
                 return false;
@@ -74,7 +75,7 @@ namespace LAZYSHELL
 
                 // Check if valid rom
                 System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-                if (encoding.GetString(BitManager.GetByteArray(temp, 0x7FB2, 4)) != "ARWE")
+                if (encoding.GetString(Bits.GetByteArray(temp, 0x7FB2, 4)) != "ARWE")
                 {
                     MessageBox.Show("The game code for this ROM is invalid.", "LAZY SHELL");
                     return;
@@ -150,7 +151,7 @@ namespace LAZYSHELL
             // LEVELS
             if (levels.Nodes["Layers"].Checked)   // layers
             {
-                Buffer.BlockCopy(data, 0x1D0000, model.Data, 0x1D0000, 0X2440); 
+                Buffer.BlockCopy(data, 0x1D0000, model.Data, 0x1D0000, 0X2440);
             }
             if (levels.Nodes["Maps"].Checked)   // maps
             {
@@ -261,7 +262,7 @@ namespace LAZYSHELL
             {
                 Buffer.BlockCopy(data, 0x3EF800, model.Data, 0x3EF800, 0x3AF);
                 Buffer.BlockCopy(data, 0x3EFD00, model.Data, 0x3EFD00, 0x220);  // map point names
-           }
+            }
 
 
             this.Close();

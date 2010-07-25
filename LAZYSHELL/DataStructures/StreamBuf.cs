@@ -34,7 +34,7 @@ namespace LAZYSHELL.DataStructures
         {
             try
             {
-                return BitManager.GetShort(this.buf, offset);
+                return Bits.GetShort(this.buf, offset);
             }
             catch (Exception ex)
             {
@@ -54,13 +54,13 @@ namespace LAZYSHELL.DataStructures
         }
         public byte[] ReadArray(int len)
         {
-            byte[] ret = BitManager.GetByteArray(this.buf, this.Index, len);
+            byte[] ret = Bits.GetByteArray(this.buf, this.Index, len);
             this.Index += len;
             return ret;
         }
         public byte[] ReadArray(int offset, int len)
         {
-            return BitManager.GetByteArray(this.buf, offset, len);
+            return Bits.GetByteArray(this.buf, offset, len);
         }
         public byte[] ToArray(int padToSize)
         {
@@ -101,7 +101,7 @@ namespace LAZYSHELL.DataStructures
         }
         public void WriteArray(byte[] arr, int offset)
         {
-            BitManager.SetByteArray(this.buf, offset, arr);
+            Bits.SetByteArray(this.buf, offset, arr);
         }
         public void AppendArray(StreamBuf sbuf, int len)
         {
@@ -113,7 +113,7 @@ namespace LAZYSHELL.DataStructures
         }
         public void AppendArray(byte[] arr)
         {
-            BitManager.SetByteArray(this.buf, this.Index, arr);
+            Bits.SetByteArray(this.buf, this.Index, arr);
             this.Index += arr.Length;
         }
         #endregion
