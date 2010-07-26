@@ -122,7 +122,7 @@ namespace LAZYSHELL
         }
         public bool AssembleAndCloseWindows()
         {
-            return App.AssembleAndCloseWindows();
+            return App.CloseAll();
         }
         #endregion
         #region Author Stamp

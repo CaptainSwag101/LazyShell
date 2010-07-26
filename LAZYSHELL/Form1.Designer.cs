@@ -61,17 +61,17 @@ namespace LAZYSHELL
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.recentFiles = new System.Windows.Forms.ToolStripDropDownButton();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.refreshROM = new System.Windows.Forms.ToolStripButton();
             this.closeROM = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.showROMInfo = new System.Windows.Forms.ToolStripButton();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
-            this.restoreElementsToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
-            this.publishRomToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.openSettings = new System.Windows.Forms.ToolStripButton();
+            this.restoreElementsToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.showROMInfo = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.openAll = new System.Windows.Forms.ToolStripButton();
@@ -83,7 +83,6 @@ namespace LAZYSHELL
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.loadAllData = new System.Windows.Forms.ToolStripButton();
             this.clearModel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -487,7 +486,6 @@ namespace LAZYSHELL
             this.toolStripSeparator11,
             this.openSettings,
             this.restoreElementsToolStripMenuItem,
-            this.publishRomToolStripMenuItem,
             this.toolStripSeparator15,
             this.showROMInfo,
             this.toolStripButton4,
@@ -509,6 +507,28 @@ namespace LAZYSHELL
             this.recentFiles.Name = "recentFiles";
             this.recentFiles.Size = new System.Drawing.Size(31, 22);
             this.recentFiles.ToolTipText = "Recent ROM Files";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Enabled = false;
+            this.saveToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.save_small;
+            this.saveToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
+            this.saveToolStripMenuItem.ToolTipText = "Save ROM";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Enabled = false;
+            this.saveAsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.saveAs_small;
+            this.saveAsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveAsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
+            this.saveAsToolStripMenuItem.ToolTipText = "Save ROM As";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // refreshROM
             // 
@@ -539,6 +559,32 @@ namespace LAZYSHELL
             this.toolStripSeparator11.Name = "toolStripSeparator11";
             this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
             // 
+            // openSettings
+            // 
+            this.openSettings.Image = global::LAZYSHELL.Properties.Resources.settings;
+            this.openSettings.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openSettings.Name = "openSettings";
+            this.openSettings.Size = new System.Drawing.Size(23, 22);
+            this.openSettings.ToolTipText = "Settings";
+            this.openSettings.Click += new System.EventHandler(this.openSettings_Click);
+            // 
+            // restoreElementsToolStripMenuItem
+            // 
+            this.restoreElementsToolStripMenuItem.Enabled = false;
+            this.restoreElementsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.restoreElementsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.restoreElementsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.restoreElementsToolStripMenuItem.Name = "restoreElementsToolStripMenuItem";
+            this.restoreElementsToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
+            this.restoreElementsToolStripMenuItem.ToolTipText = "Import elements from another ROM";
+            this.restoreElementsToolStripMenuItem.Click += new System.EventHandler(this.restoreElementsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
+            // 
             // showROMInfo
             // 
             this.showROMInfo.Checked = true;
@@ -553,65 +599,6 @@ namespace LAZYSHELL
             this.showROMInfo.ToolTipText = "Show ROM Info";
             this.showROMInfo.Click += new System.EventHandler(this.showROMInfo_Click);
             // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Enabled = false;
-            this.saveToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.save_small;
-            this.saveToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
-            this.saveToolStripMenuItem.ToolTipText = "Save ROM";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Enabled = false;
-            this.saveAsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.saveAs_small;
-            this.saveAsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.saveAsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
-            this.saveAsToolStripMenuItem.ToolTipText = "Save ROM As";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-            // 
-            // restoreElementsToolStripMenuItem
-            // 
-            this.restoreElementsToolStripMenuItem.Enabled = false;
-            this.restoreElementsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.import_small;
-            this.restoreElementsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.restoreElementsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.restoreElementsToolStripMenuItem.Name = "restoreElementsToolStripMenuItem";
-            this.restoreElementsToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
-            this.restoreElementsToolStripMenuItem.ToolTipText = "Import elements from another ROM";
-            this.restoreElementsToolStripMenuItem.Click += new System.EventHandler(this.restoreElementsToolStripMenuItem_Click);
-            // 
-            // publishRomToolStripMenuItem
-            // 
-            this.publishRomToolStripMenuItem.Enabled = false;
-            this.publishRomToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.publish;
-            this.publishRomToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.publishRomToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.publishRomToolStripMenuItem.Name = "publishRomToolStripMenuItem";
-            this.publishRomToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
-            this.publishRomToolStripMenuItem.ToolTipText = "Publish ROM";
-            this.publishRomToolStripMenuItem.Click += new System.EventHandler(this.publishRomToolStripMenuItem_Click);
-            // 
-            // openSettings
-            // 
-            this.openSettings.Image = global::LAZYSHELL.Properties.Resources.settings;
-            this.openSettings.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openSettings.Name = "openSettings";
-            this.openSettings.Size = new System.Drawing.Size(23, 22);
-            this.openSettings.ToolTipText = "Settings";
-            this.openSettings.Click += new System.EventHandler(this.openSettings_Click);
-            // 
-            // toolStripSeparator15
-            // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripButton4
             // 
             this.toolStripButton4.Enabled = false;
@@ -622,6 +609,11 @@ namespace LAZYSHELL
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton4.ToolTipText = "Base Convertor";
             this.toolStripButton4.Click += new System.EventHandler(this.baseConvertorToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton5
             // 
@@ -748,11 +740,6 @@ namespace LAZYSHELL
             this.clearModel.Text = "Clear Editor Memory";
             this.clearModel.Click += new System.EventHandler(this.clearModel_Click);
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -827,7 +814,6 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton publishRomToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton openSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripButton showROMInfo;

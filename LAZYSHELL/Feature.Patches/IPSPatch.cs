@@ -33,7 +33,7 @@ namespace LAZYSHELL.Patches
             {
                 return false;
             }
-            
+
         }
         private void Dissassemble(byte[] patch)
         {
@@ -69,8 +69,8 @@ namespace LAZYSHELL.Patches
         private bool EndOfPatch(byte[] patch, int index)
         {
             if (patch[index] == 'E' &&
-                patch[index+1] == 'O' &&
-                patch[index+2] == 'F')
+                patch[index + 1] == 'O' &&
+                patch[index + 2] == 'F')
                 return true;
             else
                 return false;

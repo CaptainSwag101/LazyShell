@@ -139,10 +139,8 @@ namespace LAZYSHELL
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 model.SetFileName(saveFileDialog1.FileName);
-
                 // Assemble all changes
                 Assemble();
-
                 if (model.WriteRom())
                 {
                     settings.LastRomPath = model.GetPathWithoutFileName();
@@ -150,86 +148,40 @@ namespace LAZYSHELL
                     model.CreateNewMD5Checksum();
                     return true;
                 }
+                return false;
             }
-            return false;
+            return true;
         }
         public void Assemble()
         {
-            if (allies != null)
-                allies.Assemble();
-            if (animations != null)
-                animations.Assemble();
-            if (attacks != null)
-                attacks.Assemble();
-            if (battlefields != null)
-                battlefields.Assemble();
-            if (battleScripts != null)
-                battleScripts.Assemble();
-            if (dialogues != null)
-                dialogues.Assemble();
-            if (eventScripts != null)
-                eventScripts.Assemble();
-            if (formations != null)
-                formations.Assemble();
-            if (items != null)
-                items.Assemble();
-            if (levels != null)
-                levels.Assemble();
-            if (monsters != null)
-                monsters.Assemble();
-            if (sprites != null)
-                sprites.Assemble();
-            if (mainTitle != null)
-                mainTitle.Assemble();
-            if (worldMaps != null)
-                worldMaps.Assemble();
-        }
-        public bool AssembleAndCloseWindows()
-        {
             if (allies != null && allies.Visible)
-                allies.Close();
+                allies.Assemble();
             if (animations != null && animations.Visible)
-                animations.Close();
+                animations.Assemble();
             if (attacks != null && attacks.Visible)
-                attacks.Close();
+                attacks.Assemble();
             if (battlefields != null && battlefields.Visible)
-                battlefields.Close();
+                battlefields.Assemble();
             if (battleScripts != null && battleScripts.Visible)
-                battleScripts.Close();
+                battleScripts.Assemble();
             if (dialogues != null && dialogues.Visible)
-                dialogues.Close();
+                dialogues.Assemble();
             if (eventScripts != null && eventScripts.Visible)
-                eventScripts.Close();
+                eventScripts.Assemble();
             if (formations != null && formations.Visible)
-                formations.Close();
+                formations.Assemble();
             if (items != null && items.Visible)
-                items.Close();
+                items.Assemble();
             if (levels != null && levels.Visible)
-                levels.Close();
+                levels.Assemble();
             if (monsters != null && monsters.Visible)
-                monsters.Close();
+                monsters.Assemble();
             if (sprites != null && sprites.Visible)
-                sprites.Close();
+                sprites.Assemble();
             if (mainTitle != null && mainTitle.Visible)
-                mainTitle.Close();
+                mainTitle.Assemble();
             if (worldMaps != null && worldMaps.Visible)
-                worldMaps.Close();
-            if ((allies != null && allies.Visible) ||
-                (animations != null && animations.Visible) ||
-                (attacks != null && attacks.Visible) ||
-                (battlefields != null && battlefields.Visible) ||
-                (battleScripts != null && battleScripts.Visible) ||
-                (dialogues != null && dialogues.Visible) ||
-                (eventScripts != null && eventScripts.Visible) ||
-                (formations != null && formations.Visible) ||
-                (items != null && items.Visible) ||
-                (levels != null && levels.Visible) ||
-                (monsters != null && monsters.Visible) ||
-                (sprites != null && sprites.Visible) ||
-                (mainTitle != null && mainTitle.Visible) ||
-                (worldMaps != null && worldMaps.Visible))
-                return true;
-            return false;
+                worldMaps.Assemble();
         }
         public void CloseRomFile()
         {
@@ -419,8 +371,8 @@ namespace LAZYSHELL
         }
         public void CreatePatchesWindow()
         {
-            if ((levels != null && levels.Visible) || 
-                (eventScripts != null && eventScripts.Visible) || 
+            if ((levels != null && levels.Visible) ||
+                (eventScripts != null && eventScripts.Visible) ||
                 (sprites != null && sprites.Visible))
             {
                 DialogResult result = MessageBox.Show(
@@ -428,7 +380,7 @@ namespace LAZYSHELL
                     "Would you like to save and close all current windows?",
                     "LAZY SHELL", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes)
-                    AssembleAndCloseWindows();
+                    CloseAll();
                 else if (result == DialogResult.Cancel)
                     return;
             }
@@ -583,9 +535,52 @@ namespace LAZYSHELL
             if (worldMaps != null && worldMaps.Visible)
                 worldMaps.WindowState = FormWindowState.Normal;
         }
-        public void CloseAll()
+        public bool CloseAll()
         {
-            AssembleAndCloseWindows();
+            if (allies != null && allies.Visible)
+                allies.Close();
+            if (animations != null && animations.Visible)
+                animations.Close();
+            if (attacks != null && attacks.Visible)
+                attacks.Close();
+            if (battlefields != null && battlefields.Visible)
+                battlefields.Close();
+            if (battleScripts != null && battleScripts.Visible)
+                battleScripts.Close();
+            if (dialogues != null && dialogues.Visible)
+                dialogues.Close();
+            if (eventScripts != null && eventScripts.Visible)
+                eventScripts.Close();
+            if (formations != null && formations.Visible)
+                formations.Close();
+            if (items != null && items.Visible)
+                items.Close();
+            if (levels != null && levels.Visible)
+                levels.Close();
+            if (monsters != null && monsters.Visible)
+                monsters.Close();
+            if (sprites != null && sprites.Visible)
+                sprites.Close();
+            if (mainTitle != null && mainTitle.Visible)
+                mainTitle.Close();
+            if (worldMaps != null && worldMaps.Visible)
+                worldMaps.Close();
+            if ((allies != null && allies.Visible) ||
+                (animations != null && animations.Visible) ||
+                (attacks != null && attacks.Visible) ||
+                (battlefields != null && battlefields.Visible) ||
+                (battleScripts != null && battleScripts.Visible) ||
+                (dialogues != null && dialogues.Visible) ||
+                (eventScripts != null && eventScripts.Visible) ||
+                (formations != null && formations.Visible) ||
+                (items != null && items.Visible) ||
+                (levels != null && levels.Visible) ||
+                (monsters != null && monsters.Visible) ||
+                (sprites != null && sprites.Visible) ||
+                (mainTitle != null && mainTitle.Visible) ||
+                (worldMaps != null && worldMaps.Visible))
+                return true;
+            return false;
         }
         public void LoadAll()
         {

@@ -121,7 +121,6 @@ namespace LAZYSHELL
                     this.saveToolStripMenuItem.Enabled = true;
                     this.saveAsToolStripMenuItem.Enabled = true;
                     this.restoreElementsToolStripMenuItem.Enabled = true;
-                    this.publishRomToolStripMenuItem.Enabled = true;
 
                     AppControl.CreateNewMd5Checksum(); // Create a new checksum for a new rom
                 }
@@ -146,7 +145,6 @@ namespace LAZYSHELL
                     this.saveToolStripMenuItem.Enabled = true;
                     this.saveAsToolStripMenuItem.Enabled = true;
                     this.restoreElementsToolStripMenuItem.Enabled = true;
-                    this.publishRomToolStripMenuItem.Enabled = true;
                     UpdateRomInfo();
                 }
                 toolStrip2.Enabled = false;
