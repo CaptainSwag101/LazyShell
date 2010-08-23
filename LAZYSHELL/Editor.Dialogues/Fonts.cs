@@ -16,7 +16,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
-        private Model model { get { return dialoguesEditor.Model; } }
+        private Model model = State.Instance.Model;
         private Dialogues dialoguesEditor;
         private bool updating;
         private Overlay overlay;

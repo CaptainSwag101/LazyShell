@@ -14,11 +14,11 @@ namespace LAZYSHELL
         #region Variables
         // main
         private delegate void Function();
-        private Model model;
+        private Model model = State.Instance.Model;
         private PaletteSet paletteSet { get { return model.TitlePalettes; } set { model.TitlePalettes = value; } }
         private PaletteSet spritePaletteSet { get { return model.TitleSpritePalettes; } set { model.TitleSpritePalettes = value; } }
         private TitleTileset tileSet { get { return model.TitleTileSet; } set { model.TitleTileSet = value; } }
-        private Overlay overlay;
+        private Overlay overlay = new Overlay();
         private int layer { get { return tabControl2.SelectedIndex; } set { tabControl2.SelectedIndex = value; } }
         private PictureBox pictureBoxTileset
         {
@@ -61,10 +61,8 @@ namespace LAZYSHELL
         private TileEditor tileEditor;
         #endregion
         #region Functions
-        public Title(Model model)
+        public Title()
         {
-            this.model = model;
-            this.overlay = new Overlay();
             InitializeComponent();
             Do.AddShortcut(toolStrip1, Keys.Control | Keys.S, new EventHandler(save_Click));
             SetTilesetImages();
@@ -163,7 +161,7 @@ namespace LAZYSHELL
         }
         private void PaletteUpdate()
         {
-            tileSet = new TitleTileset(paletteSet, model);
+            tileSet = new TitleTileset(paletteSet);
             SetTilesetImages();
             pictureBoxTitle.Invalidate();
             LoadGraphicEditor();
@@ -172,7 +170,7 @@ namespace LAZYSHELL
         private void GraphicUpdate()
         {
             tileSet.AssembleIntoModel(16);
-            tileSet = new TitleTileset(paletteSet, model);
+            tileSet = new TitleTileset(paletteSet);
             SetTilesetImages();
             pictureBoxTitle.Invalidate();
             LoadTileEditor();
@@ -258,6 +256,7 @@ namespace LAZYSHELL
         public void PasteFinal(CopyBuffer buffer)
         {
             if (buffer == null) return;
+            if (overlay.SelectTS == null) return;
             selection = null;
             int x_ = overlay.SelectTS.X / 16;
             int y_ = overlay.SelectTS.Y / 16;
@@ -375,7 +374,7 @@ namespace LAZYSHELL
             Do.CopyToTileset(graphics, tileset, palettes, paletteIndexes, true, false, 0x20, 2, new Size(256, 1024), 0);
             Buffer.BlockCopy(tileset, 0, model.TitleData, 0, 0x2000);
             Buffer.BlockCopy(graphics, 0, model.TitleData, 0x6C00, 0x4FE0);
-            tileSet = new TitleTileset(paletteSet, model);
+            tileSet = new TitleTileset(paletteSet);
             SetTilesetImages();
             pictureBoxTitle.Invalidate();
         }
@@ -428,7 +427,7 @@ namespace LAZYSHELL
             Buffer.BlockCopy(tileset, 0, model.TitleData, 0xBBE0, 0x300);
             Buffer.BlockCopy(graphics, 0, model.TitleData, 0xBEE0, 0x1B80);
 
-            tileSet = new TitleTileset(paletteSet, model);
+            tileSet = new TitleTileset(paletteSet);
 
             SetTilesetImage();
             pictureBoxTitle.Invalidate();
@@ -441,7 +440,7 @@ namespace LAZYSHELL
             tileSet.AssembleIntoModel(16);
             // Tilesets
             byte[] compressed = new byte[0xDA60];
-            int size = model.Compress(model.TitleData, compressed);
+            int size = Comp.Compress(model.TitleData, compressed);
             int totalSize = size + 1;
             if (totalSize > 0x7E91)
             {
@@ -471,31 +470,28 @@ namespace LAZYSHELL
                 model.TitleSpriteGraphics = null;
                 model.TitleSpritePalettes = null;
                 model.TitleTileSet = null;
-                return;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
-            if (paletteEditor != null && paletteEditor.Visible)
-                paletteEditor.Close();
-            if (graphicEditor != null && graphicEditor.Visible)
-                graphicEditor.Close();
-            if (spritePaletteEditor != null && spritePaletteEditor.Visible)
-                spritePaletteEditor.Close();
-            if (spriteGraphicEditor != null && spriteGraphicEditor.Visible)
-                spriteGraphicEditor.Close();
-            if (tileEditor != null && tileEditor.Visible)
-                tileEditor.Close();
+            paletteEditor.Close();
+            graphicEditor.Close();
+            spritePaletteEditor.Close();
+            spriteGraphicEditor.Close();
+            tileEditor.Close();
         }
-        private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabControl2_Deselecting(object sender, TabControlCancelEventArgs e)
         {
             mouseDownTile = 0;
             if (draggedTiles != null)
                 PasteFinal(draggedTiles);
             else
                 overlay.SelectTS = null;
+        }
+        private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
+        {
             pictureBoxTileset.Invalidate();
             LoadGraphicEditor();
             LoadTileEditor();

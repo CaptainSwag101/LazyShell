@@ -13,18 +13,18 @@ namespace LAZYSHELL
         private delegate void Function(TreeView treeView);
         private int index { get { return (int)packNum.Value; } set { packNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
-        private Model model;
+        private Model model = State.Instance.Model;
         private FormationPack[] packs { get { return model.FormationPacks; } set { model.FormationPacks = value; } }
         private FormationPack pack { get { return packs[index]; } set { packs[index] = value; } }
         private bool updating = false;
         private Formation[] formations { get { return model.Formations; } }
         private Formations formationsEditor;
-        public FormationPacks(Model model, Formations formationsEditor)
+        public Search searchWindow;
+        public FormationPacks(Formations formationsEditor)
         {
-            this.model = model;
             this.formationsEditor = formationsEditor;
             InitializeComponent();
-            new Search(packNum, packNameTextBox, searchFormationPacks, new Function(LoadSearch), "treeView");
+            searchWindow = new Search(packNum, packNameTextBox, searchFormationPacks, new Function(LoadSearch), "treeView");
             RefreshFormationPacks();
         }
         public void SetToolTips(ToolTip toolTip1)
@@ -35,11 +35,6 @@ namespace LAZYSHELL
                 "A pack is a set of three formations to either randomly or\n" +
                 "selectively choose from when a battle is called, through an\n" +
                 "event script or through an the property of an NPC in a level.";
-            this.formationSet.ToolTipText =
-                "The range of formations that are allowed in the pack. All 3\n" +
-                "formations in a pack must be either within the range of 0-\n" +
-                "255 or 256-511. Formations 256-511 generally include\n" +
-                "bosses.";
             toolTip1.SetToolTip(this.packFormation1,
                 "The 1st formation in the pack.");
             toolTip1.SetToolTip(this.packFormation2,
@@ -63,42 +58,17 @@ namespace LAZYSHELL
         {
             if (updating) return;
             updating = true;
-            this.formationSet.SelectedIndex = pack.FormationPackSet;
-            this.packFormation1.Maximum = (this.formationSet.SelectedIndex == 0) ? 255 : 511;
-            this.packFormation2.Maximum = (this.formationSet.SelectedIndex == 0) ? 255 : 511;
-            this.packFormation3.Maximum = (this.formationSet.SelectedIndex == 0) ? 255 : 511;
-            this.packFormation1.Minimum = (this.formationSet.SelectedIndex == 0) ? 0 : 256;
-            this.packFormation2.Minimum = (this.formationSet.SelectedIndex == 0) ? 0 : 256;
-            this.packFormation3.Minimum = (this.formationSet.SelectedIndex == 0) ? 0 : 256;
-            if (formationSet.SelectedIndex == 0)
-            {
-                this.packFormation1.Value = pack.FormationPackForm[0];
-                this.packFormation2.Value = pack.FormationPackForm[1];
-                this.packFormation3.Value = pack.FormationPackForm[2];
-            }
-            else
-            {
-                this.packFormation1.Value = pack.FormationPackForm[0] + 256;
-                this.packFormation2.Value = pack.FormationPackForm[1] + 256;
-                this.packFormation3.Value = pack.FormationPackForm[2] + 256;
-            }
+            this.packFormation1.Value = pack.PackFormations[0];
+            this.packFormation2.Value = pack.PackFormations[1];
+            this.packFormation3.Value = pack.PackFormations[2];
             RefreshFormationPackStrings();
             updating = false;
         }
         private void RefreshFormationPackStrings()
         {
-            int a = pack.FormationPackForm[0];
-            int b = pack.FormationPackForm[1];
-            int c = pack.FormationPackForm[2];
-            if (formationSet.SelectedIndex == 1)
-            {
-                a += 256;
-                b += 256;
-                c += 256;
-            }
-            this.richTextBox2.Text = formations[a].FormationListSet;
-            this.richTextBox3.Text = formations[b].FormationListSet;
-            this.richTextBox4.Text = formations[c].FormationListSet;
+            this.richTextBox2.Text = formations[pack.PackFormations[0]].FormationListSet;
+            this.richTextBox3.Text = formations[pack.PackFormations[1]].FormationListSet;
+            this.richTextBox4.Text = formations[pack.PackFormations[2]].FormationListSet;
         }
         private void LoadSearch(TreeView treeView)
         {
@@ -114,40 +84,38 @@ namespace LAZYSHELL
             int set = 0;
             foreach (FormationPack fp in packs)
             {
-                set = fp.FormationPackSet == 1 ? 256 : 0;
-
                 if (Do.Contains(
-                    formations[fp.FormationPackForm[0] + set].ToString(),
+                    formations[fp.PackFormations[0]].ToString(),
                     packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase) ||
                     Do.Contains(
-                    formations[fp.FormationPackForm[1] + set].ToString(),
+                    formations[fp.PackFormations[1]].ToString(),
                     packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase) ||
                     Do.Contains(
-                    formations[fp.FormationPackForm[2] + set].ToString(),
+                    formations[fp.PackFormations[2]].ToString(),
                     packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase))
                 {
                     tn = treeView.Nodes.Add("PACK #" + fp.Index);
                     tn.Tag = (int)fp.Index;
 
                     if (Do.Contains(
-                        formations[fp.FormationPackForm[0] + set].ToString(),
+                        formations[fp.PackFormations[0]].ToString(),
                         packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        cn = tn.Nodes.Add(formations[fp.FormationPackForm[0] + set].ToString());
+                        cn = tn.Nodes.Add(formations[fp.PackFormations[0]].ToString());
                         cn.Tag = (int)fp.Index;
                     }
                     if (Do.Contains(
-                        formations[fp.FormationPackForm[1] + set].ToString(),
+                        formations[fp.PackFormations[1]].ToString(),
                         packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        cn = tn.Nodes.Add(formations[fp.FormationPackForm[1] + set].ToString());
+                        cn = tn.Nodes.Add(formations[fp.PackFormations[1]].ToString());
                         cn.Tag = (int)fp.Index;
                     }
                     if (Do.Contains(
-                        formations[fp.FormationPackForm[2] + set].ToString(),
+                        formations[fp.PackFormations[2]].ToString(),
                         packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        cn = tn.Nodes.Add(formations[fp.FormationPackForm[2] + set].ToString());
+                        cn = tn.Nodes.Add(formations[fp.PackFormations[2]].ToString());
                         cn.Tag = (int)fp.Index;
                     }
                 }
@@ -159,19 +127,11 @@ namespace LAZYSHELL
         {
             RefreshFormationPacks();
         }
-        private void formationSet_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            pack.FormationPackSet = (byte)formationSet.SelectedIndex;
-
-            RefreshFormationPacks();
-        }
         private void packFormation1_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
 
-            pack.FormationPackForm[0] = (byte)((ushort)packFormation1.Value & 0xFF);
+            pack.PackFormations[0] = (ushort)packFormation1.Value;
 
             RefreshFormationPackStrings();
         }
@@ -179,7 +139,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
 
-            pack.FormationPackForm[1] = (byte)((ushort)packFormation2.Value & 0xFF);
+            pack.PackFormations[1] = (ushort)packFormation2.Value;
 
             RefreshFormationPackStrings();
         }
@@ -187,7 +147,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
 
-            pack.FormationPackForm[2] = (byte)((ushort)packFormation3.Value & 0xFF);
+            pack.PackFormations[2] = (ushort)packFormation3.Value;
 
             RefreshFormationPackStrings();
         }

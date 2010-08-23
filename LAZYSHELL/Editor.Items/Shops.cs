@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class Shops : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         private Shop[] shops { get { return model.Shops; } set { model.Shops = value; } }
         private Shop shop { get { return shops[index]; } set { shops[index] = value; } }
@@ -19,9 +19,8 @@ namespace LAZYSHELL
         private int index { get { return (int)shopName.SelectedIndex; } set { shopName.SelectedIndex = value; } }
         public int Index { get { return index; } set { index = value; } }
         // Constructor
-        public Shops(Model model)
+        public Shops()
         {
-            this.model = model;
             InitializeComponent();
             InitializeStrings();
             index = 0;
@@ -61,6 +60,26 @@ namespace LAZYSHELL
             this.shopItem13.Items.AddRange(model.ItemNames.Names);
             this.shopItem14.Items.AddRange(model.ItemNames.Names);
             this.shopItem15.Items.AddRange(model.ItemNames.Names);
+        }
+        public void ResortStrings()
+        {
+            updating = true;
+            this.shopItem1.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[0]);
+            this.shopItem2.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[1]);
+            this.shopItem3.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[2]);
+            this.shopItem4.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[3]);
+            this.shopItem5.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[4]);
+            this.shopItem6.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[5]);
+            this.shopItem7.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[6]);
+            this.shopItem8.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[7]);
+            this.shopItem9.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[8]);
+            this.shopItem10.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[9]);
+            this.shopItem11.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[10]);
+            this.shopItem12.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[11]);
+            this.shopItem13.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[12]);
+            this.shopItem14.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[13]);
+            this.shopItem15.SelectedIndex = model.ItemNames.GetIndexFromNum(shop.Items[14]);
+            updating = true;
         }
         public void RefreshShops()
         {

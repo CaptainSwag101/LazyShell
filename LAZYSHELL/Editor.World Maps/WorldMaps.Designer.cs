@@ -109,7 +109,6 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.textBoxMapPoint = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.mapPointYCoord = new System.Windows.Forms.NumericUpDown();
             this.label59 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
@@ -1233,8 +1232,7 @@
             // 
             this.toolStrip5.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.textBoxMapPoint,
-            this.toolStripButton3});
+            this.textBoxMapPoint});
             this.toolStrip5.Location = new System.Drawing.Point(0, 25);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -1248,15 +1246,6 @@
             this.textBoxMapPoint.Name = "textBoxMapPoint";
             this.textBoxMapPoint.Size = new System.Drawing.Size(196, 25);
             this.textBoxMapPoint.TextChanged += new System.EventHandler(this.textBoxMapPoint_TextChanged);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::LAZYSHELL.Properties.Resources.label;
-            this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             // 
             // mapPointYCoord
             // 
@@ -1731,7 +1720,6 @@
         private LAZYSHELL.ToolStripComboBox mapPointName;
         private ToolStripNumericUpDown mapPointNum;
         private System.Windows.Forms.ToolStrip toolStrip5;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripButton helpTips;
         private System.Windows.Forms.ToolStripButton baseConversion;

@@ -544,6 +544,7 @@ namespace LAZYSHELL
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "SEARCH FOR PHYSICAL TILES...";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchPhysicalTile_FormClosing);
             this.panel55.ResumeLayout(false);
             this.panel54.ResumeLayout(false);
             this.panel44.ResumeLayout(false);

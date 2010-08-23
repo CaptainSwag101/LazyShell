@@ -7,16 +7,15 @@ namespace LAZYSHELL
 {
     public class WorldMapTileSet
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private WorldMap worldMap;
         private PaletteSet palettes;
         private byte[] graphics; public byte[] Graphics { get { return graphics; } set { graphics = value; } }
         private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
         private Tile16x16[] tileSetLayer; public Tile16x16[] TileSetLayer { get { return tileSetLayer; } }
 
-        public WorldMapTileSet(WorldMap worldMap, PaletteSet palettes, Model model)
+        public WorldMapTileSet(WorldMap worldMap, PaletteSet palettes)
         {
-            this.model = model;
             this.worldMap = worldMap;
             this.palettes = palettes;
 

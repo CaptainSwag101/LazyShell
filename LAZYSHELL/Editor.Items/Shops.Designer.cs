@@ -28,15 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel195 = new System.Windows.Forms.Panel();
             this.panel192 = new System.Windows.Forms.Panel();
             this.label102 = new System.Windows.Forms.Label();
             this.shopDiscounts = new System.Windows.Forms.CheckedListBox();
-            this.panel193 = new System.Windows.Forms.Panel();
             this.panel194 = new System.Windows.Forms.Panel();
             this.label161 = new System.Windows.Forms.Label();
             this.shopBuyOptions = new System.Windows.Forms.CheckedListBox();
-            this.panel174 = new System.Windows.Forms.Panel();
             this.panel59 = new System.Windows.Forms.Panel();
             this.panel103 = new System.Windows.Forms.Panel();
             this.shopItem14 = new System.Windows.Forms.ComboBox();
@@ -86,13 +83,9 @@
             this.label82 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.shopName = new LAZYSHELL.ToolStripComboBox();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.shopLabel = new System.Windows.Forms.ToolStripTextBox();
-            this.panel195.SuspendLayout();
             this.panel192.SuspendLayout();
-            this.panel193.SuspendLayout();
             this.panel194.SuspendLayout();
-            this.panel174.SuspendLayout();
             this.panel59.SuspendLayout();
             this.panel103.SuspendLayout();
             this.panel104.SuspendLayout();
@@ -112,24 +105,15 @@
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel195
-            // 
-            this.panel195.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel195.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel195.Controls.Add(this.panel192);
-            this.panel195.Location = new System.Drawing.Point(12, 418);
-            this.panel195.Name = "panel195";
-            this.panel195.Size = new System.Drawing.Size(248, 87);
-            this.panel195.TabIndex = 18;
-            // 
             // panel192
             // 
             this.panel192.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel192.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel192.Controls.Add(this.label102);
             this.panel192.Controls.Add(this.shopDiscounts);
-            this.panel192.Location = new System.Drawing.Point(0, 0);
+            this.panel192.Location = new System.Drawing.Point(12, 419);
             this.panel192.Name = "panel192";
-            this.panel192.Size = new System.Drawing.Size(244, 83);
+            this.panel192.Size = new System.Drawing.Size(248, 87);
             this.panel192.TabIndex = 537;
             // 
             // label102
@@ -162,24 +146,15 @@
             this.shopDiscounts.TabIndex = 177;
             this.shopDiscounts.SelectedIndexChanged += new System.EventHandler(this.shopDiscounts_SelectedIndexChanged);
             // 
-            // panel193
-            // 
-            this.panel193.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel193.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel193.Controls.Add(this.panel194);
-            this.panel193.Location = new System.Drawing.Point(12, 325);
-            this.panel193.Name = "panel193";
-            this.panel193.Size = new System.Drawing.Size(248, 87);
-            this.panel193.TabIndex = 17;
-            // 
             // panel194
             // 
             this.panel194.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel194.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel194.Controls.Add(this.label161);
             this.panel194.Controls.Add(this.shopBuyOptions);
-            this.panel194.Location = new System.Drawing.Point(0, 0);
+            this.panel194.Location = new System.Drawing.Point(12, 326);
             this.panel194.Name = "panel194";
-            this.panel194.Size = new System.Drawing.Size(244, 83);
+            this.panel194.Size = new System.Drawing.Size(248, 87);
             this.panel194.TabIndex = 538;
             // 
             // label161
@@ -210,19 +185,10 @@
             this.shopBuyOptions.TabIndex = 176;
             this.shopBuyOptions.SelectedIndexChanged += new System.EventHandler(this.shopBuyOptions_SelectedIndexChanged);
             // 
-            // panel174
-            // 
-            this.panel174.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel174.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel174.Controls.Add(this.panel59);
-            this.panel174.Location = new System.Drawing.Point(12, 28);
-            this.panel174.Name = "panel174";
-            this.panel174.Size = new System.Drawing.Size(248, 291);
-            this.panel174.TabIndex = 16;
-            // 
             // panel59
             // 
             this.panel59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel59.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel59.Controls.Add(this.panel103);
             this.panel59.Controls.Add(this.panel104);
             this.panel59.Controls.Add(this.panel102);
@@ -254,15 +220,15 @@
             this.panel59.Controls.Add(this.label83);
             this.panel59.Controls.Add(this.label81);
             this.panel59.Controls.Add(this.label82);
-            this.panel59.Location = new System.Drawing.Point(0, 0);
+            this.panel59.Location = new System.Drawing.Point(12, 28);
             this.panel59.Name = "panel59";
-            this.panel59.Size = new System.Drawing.Size(244, 287);
+            this.panel59.Size = new System.Drawing.Size(248, 292);
             this.panel59.TabIndex = 161;
             // 
             // panel103
             // 
             this.panel103.Controls.Add(this.shopItem14);
-            this.panel103.Location = new System.Drawing.Point(75, 252);
+            this.panel103.Location = new System.Drawing.Point(75, 253);
             this.panel103.Name = "panel103";
             this.panel103.Size = new System.Drawing.Size(170, 17);
             this.panel103.TabIndex = 174;
@@ -286,7 +252,7 @@
             // panel104
             // 
             this.panel104.Controls.Add(this.shopItem13);
-            this.panel104.Location = new System.Drawing.Point(75, 234);
+            this.panel104.Location = new System.Drawing.Point(75, 235);
             this.panel104.Name = "panel104";
             this.panel104.Size = new System.Drawing.Size(170, 17);
             this.panel104.TabIndex = 173;
@@ -310,7 +276,7 @@
             // panel102
             // 
             this.panel102.Controls.Add(this.shopItem15);
-            this.panel102.Location = new System.Drawing.Point(75, 270);
+            this.panel102.Location = new System.Drawing.Point(75, 271);
             this.panel102.Name = "panel102";
             this.panel102.Size = new System.Drawing.Size(170, 17);
             this.panel102.TabIndex = 175;
@@ -334,7 +300,7 @@
             // panel105
             // 
             this.panel105.Controls.Add(this.shopItem12);
-            this.panel105.Location = new System.Drawing.Point(75, 216);
+            this.panel105.Location = new System.Drawing.Point(75, 217);
             this.panel105.Name = "panel105";
             this.panel105.Size = new System.Drawing.Size(170, 17);
             this.panel105.TabIndex = 172;
@@ -358,7 +324,7 @@
             // panel106
             // 
             this.panel106.Controls.Add(this.shopItem11);
-            this.panel106.Location = new System.Drawing.Point(75, 198);
+            this.panel106.Location = new System.Drawing.Point(75, 199);
             this.panel106.Name = "panel106";
             this.panel106.Size = new System.Drawing.Size(170, 17);
             this.panel106.TabIndex = 171;
@@ -382,7 +348,7 @@
             // panel107
             // 
             this.panel107.Controls.Add(this.shopItem10);
-            this.panel107.Location = new System.Drawing.Point(75, 180);
+            this.panel107.Location = new System.Drawing.Point(75, 181);
             this.panel107.Name = "panel107";
             this.panel107.Size = new System.Drawing.Size(170, 17);
             this.panel107.TabIndex = 170;
@@ -406,7 +372,7 @@
             // panel108
             // 
             this.panel108.Controls.Add(this.shopItem9);
-            this.panel108.Location = new System.Drawing.Point(75, 162);
+            this.panel108.Location = new System.Drawing.Point(75, 163);
             this.panel108.Name = "panel108";
             this.panel108.Size = new System.Drawing.Size(170, 17);
             this.panel108.TabIndex = 169;
@@ -430,7 +396,7 @@
             // panel109
             // 
             this.panel109.Controls.Add(this.shopItem8);
-            this.panel109.Location = new System.Drawing.Point(75, 144);
+            this.panel109.Location = new System.Drawing.Point(75, 145);
             this.panel109.Name = "panel109";
             this.panel109.Size = new System.Drawing.Size(170, 17);
             this.panel109.TabIndex = 168;
@@ -454,7 +420,7 @@
             // panel110
             // 
             this.panel110.Controls.Add(this.shopItem7);
-            this.panel110.Location = new System.Drawing.Point(75, 126);
+            this.panel110.Location = new System.Drawing.Point(75, 127);
             this.panel110.Name = "panel110";
             this.panel110.Size = new System.Drawing.Size(170, 17);
             this.panel110.TabIndex = 167;
@@ -478,7 +444,7 @@
             // panel111
             // 
             this.panel111.Controls.Add(this.shopItem6);
-            this.panel111.Location = new System.Drawing.Point(75, 108);
+            this.panel111.Location = new System.Drawing.Point(75, 109);
             this.panel111.Name = "panel111";
             this.panel111.Size = new System.Drawing.Size(170, 17);
             this.panel111.TabIndex = 166;
@@ -502,7 +468,7 @@
             // panel112
             // 
             this.panel112.Controls.Add(this.shopItem5);
-            this.panel112.Location = new System.Drawing.Point(75, 90);
+            this.panel112.Location = new System.Drawing.Point(75, 91);
             this.panel112.Name = "panel112";
             this.panel112.Size = new System.Drawing.Size(170, 17);
             this.panel112.TabIndex = 165;
@@ -526,7 +492,7 @@
             // panel113
             // 
             this.panel113.Controls.Add(this.shopItem4);
-            this.panel113.Location = new System.Drawing.Point(75, 72);
+            this.panel113.Location = new System.Drawing.Point(75, 73);
             this.panel113.Name = "panel113";
             this.panel113.Size = new System.Drawing.Size(170, 17);
             this.panel113.TabIndex = 164;
@@ -550,7 +516,7 @@
             // panel114
             // 
             this.panel114.Controls.Add(this.shopItem3);
-            this.panel114.Location = new System.Drawing.Point(75, 54);
+            this.panel114.Location = new System.Drawing.Point(75, 55);
             this.panel114.Name = "panel114";
             this.panel114.Size = new System.Drawing.Size(170, 17);
             this.panel114.TabIndex = 163;
@@ -574,7 +540,7 @@
             // panel115
             // 
             this.panel115.Controls.Add(this.shopItem2);
-            this.panel115.Location = new System.Drawing.Point(75, 36);
+            this.panel115.Location = new System.Drawing.Point(75, 37);
             this.panel115.Name = "panel115";
             this.panel115.Size = new System.Drawing.Size(170, 17);
             this.panel115.TabIndex = 162;
@@ -598,7 +564,7 @@
             // panel116
             // 
             this.panel116.Controls.Add(this.shopItem1);
-            this.panel116.Location = new System.Drawing.Point(75, 18);
+            this.panel116.Location = new System.Drawing.Point(75, 19);
             this.panel116.Name = "panel116";
             this.panel116.Size = new System.Drawing.Size(170, 17);
             this.panel116.TabIndex = 161;
@@ -636,7 +602,7 @@
             // label80
             // 
             this.label80.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label80.Location = new System.Drawing.Point(0, 72);
+            this.label80.Location = new System.Drawing.Point(0, 73);
             this.label80.Name = "label80";
             this.label80.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label80.Size = new System.Drawing.Size(74, 17);
@@ -646,7 +612,7 @@
             // label79
             // 
             this.label79.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label79.Location = new System.Drawing.Point(0, 90);
+            this.label79.Location = new System.Drawing.Point(0, 91);
             this.label79.Name = "label79";
             this.label79.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label79.Size = new System.Drawing.Size(74, 17);
@@ -656,7 +622,7 @@
             // label71
             // 
             this.label71.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label71.Location = new System.Drawing.Point(0, 234);
+            this.label71.Location = new System.Drawing.Point(0, 235);
             this.label71.Name = "label71";
             this.label71.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label71.Size = new System.Drawing.Size(74, 17);
@@ -666,7 +632,7 @@
             // label70
             // 
             this.label70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label70.Location = new System.Drawing.Point(0, 252);
+            this.label70.Location = new System.Drawing.Point(0, 253);
             this.label70.Name = "label70";
             this.label70.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label70.Size = new System.Drawing.Size(74, 17);
@@ -676,7 +642,7 @@
             // label69
             // 
             this.label69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label69.Location = new System.Drawing.Point(0, 270);
+            this.label69.Location = new System.Drawing.Point(0, 271);
             this.label69.Name = "label69";
             this.label69.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label69.Size = new System.Drawing.Size(74, 17);
@@ -686,7 +652,7 @@
             // label72
             // 
             this.label72.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label72.Location = new System.Drawing.Point(0, 216);
+            this.label72.Location = new System.Drawing.Point(0, 217);
             this.label72.Name = "label72";
             this.label72.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label72.Size = new System.Drawing.Size(74, 17);
@@ -696,7 +662,7 @@
             // label73
             // 
             this.label73.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label73.Location = new System.Drawing.Point(0, 198);
+            this.label73.Location = new System.Drawing.Point(0, 199);
             this.label73.Name = "label73";
             this.label73.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label73.Size = new System.Drawing.Size(74, 17);
@@ -706,7 +672,7 @@
             // label74
             // 
             this.label74.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label74.Location = new System.Drawing.Point(0, 180);
+            this.label74.Location = new System.Drawing.Point(0, 181);
             this.label74.Name = "label74";
             this.label74.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label74.Size = new System.Drawing.Size(74, 17);
@@ -716,7 +682,7 @@
             // label75
             // 
             this.label75.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label75.Location = new System.Drawing.Point(0, 162);
+            this.label75.Location = new System.Drawing.Point(0, 163);
             this.label75.Name = "label75";
             this.label75.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label75.Size = new System.Drawing.Size(74, 17);
@@ -726,7 +692,7 @@
             // label76
             // 
             this.label76.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label76.Location = new System.Drawing.Point(0, 144);
+            this.label76.Location = new System.Drawing.Point(0, 145);
             this.label76.Name = "label76";
             this.label76.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label76.Size = new System.Drawing.Size(74, 17);
@@ -736,7 +702,7 @@
             // label77
             // 
             this.label77.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label77.Location = new System.Drawing.Point(0, 126);
+            this.label77.Location = new System.Drawing.Point(0, 127);
             this.label77.Name = "label77";
             this.label77.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label77.Size = new System.Drawing.Size(74, 17);
@@ -746,7 +712,7 @@
             // label78
             // 
             this.label78.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label78.Location = new System.Drawing.Point(0, 108);
+            this.label78.Location = new System.Drawing.Point(0, 109);
             this.label78.Name = "label78";
             this.label78.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label78.Size = new System.Drawing.Size(74, 17);
@@ -756,7 +722,7 @@
             // label83
             // 
             this.label83.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label83.Location = new System.Drawing.Point(0, 18);
+            this.label83.Location = new System.Drawing.Point(0, 19);
             this.label83.Name = "label83";
             this.label83.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label83.Size = new System.Drawing.Size(74, 17);
@@ -766,7 +732,7 @@
             // label81
             // 
             this.label81.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label81.Location = new System.Drawing.Point(0, 54);
+            this.label81.Location = new System.Drawing.Point(0, 55);
             this.label81.Name = "label81";
             this.label81.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label81.Size = new System.Drawing.Size(74, 17);
@@ -776,7 +742,7 @@
             // label82
             // 
             this.label82.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.label82.Location = new System.Drawing.Point(0, 36);
+            this.label82.Location = new System.Drawing.Point(0, 37);
             this.label82.Name = "label82";
             this.label82.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label82.Size = new System.Drawing.Size(74, 17);
@@ -789,7 +755,6 @@
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.shopName,
-            this.toolStripButton1,
             this.shopLabel});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -814,31 +779,22 @@
             this.shopName.SelectedIndexChanged += new System.EventHandler(this.shopName_SelectedIndexChanged);
             this.shopName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.shopName_DrawItem);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::LAZYSHELL.Properties.Resources.label;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            // 
             // shopLabel
             // 
             this.shopLabel.Name = "shopLabel";
-            this.shopLabel.Size = new System.Drawing.Size(96, 25);
+            this.shopLabel.Size = new System.Drawing.Size(115, 25);
             this.shopLabel.TextChanged += new System.EventHandler(this.shopLabel_TextChanged);
             // 
             // Shops
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 517);
+            this.ClientSize = new System.Drawing.Size(272, 518);
             this.ControlBox = false;
+            this.Controls.Add(this.panel192);
+            this.Controls.Add(this.panel194);
+            this.Controls.Add(this.panel59);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.panel195);
-            this.Controls.Add(this.panel193);
-            this.Controls.Add(this.panel174);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -846,11 +802,8 @@
             this.Name = "Shops";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.panel195.ResumeLayout(false);
             this.panel192.ResumeLayout(false);
-            this.panel193.ResumeLayout(false);
             this.panel194.ResumeLayout(false);
-            this.panel174.ResumeLayout(false);
             this.panel59.ResumeLayout(false);
             this.panel103.ResumeLayout(false);
             this.panel104.ResumeLayout(false);
@@ -876,15 +829,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel195;
         private System.Windows.Forms.Panel panel192;
         private System.Windows.Forms.Label label102;
         private System.Windows.Forms.CheckedListBox shopDiscounts;
-        private System.Windows.Forms.Panel panel193;
         private System.Windows.Forms.Panel panel194;
         private System.Windows.Forms.Label label161;
         private System.Windows.Forms.CheckedListBox shopBuyOptions;
-        private System.Windows.Forms.Panel panel174;
         private System.Windows.Forms.Panel panel59;
         private System.Windows.Forms.Panel panel103;
         private System.Windows.Forms.ComboBox shopItem14;
@@ -934,7 +884,6 @@
         private System.Windows.Forms.Label label82;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private LAZYSHELL.ToolStripComboBox shopName;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripTextBox shopLabel;
     }
 }

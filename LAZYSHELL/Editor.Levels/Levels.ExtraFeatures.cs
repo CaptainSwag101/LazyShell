@@ -55,12 +55,11 @@ namespace LAZYSHELL
             {
                 if (ExportLevelImages.CancellationPending) break;
 
-                layr = levels[i].Layer;
                 lmap = levelMaps[levels[i].LevelMap];
                 palSet = paletteSets[levelMaps[levels[i].LevelMap].PaletteSet];
 
-                set = new TileSet(lmap, palSet, model);
-                map = new TileMap(lmap, palSet, set, layr, prioritySets, model);
+                set = new TileSet(lmap, palSet);
+                map = new TileMap(levels[i], set);
 
                 pixels = map.Mainscreen;
 

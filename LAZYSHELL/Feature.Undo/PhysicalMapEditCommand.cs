@@ -8,21 +8,22 @@ namespace LAZYSHELL.Undo
     class PhysicalMapEditCommand : Command
     {
         Levels updater;
-        PhysicalMap physicalMap;
+        Map tilemap;
+        Solidity solidity = Solidity.Instance;
         Point topLeft, bottomRight, tempStart;
         byte[] changes;
         bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
 
         public PhysicalMapEditCommand(
             Levels updater,
-            PhysicalMap physicalMap,
+            Map tilemap,
             Point topLeft,
             Point bottomRight,
             Point tempStart,
             byte[] changes)
         {
             this.updater = updater;
-            this.physicalMap = physicalMap;
+            this.tilemap = tilemap;
 
             if (topLeft.Y < bottomRight.Y)
             {
@@ -65,30 +66,27 @@ namespace LAZYSHELL.Undo
             {
                 for (int x = start.X, a = tempStart.X; x < stop.X; x++, a++)
                 {
-                    if (y * 1024 + x < physicalMap.PixelTiles.Length &&
-                        b * 1024 + a < physicalMap.PixelTiles.Length)
+                    if (y * 1024 + x < solidity.PixelTiles.Length &&
+                        b * 1024 + a < solidity.PixelTiles.Length)
                     {
-                        p = physicalMap.PixelTiles[y * 1024 + x] * 2;
-                        r = physicalMap.PixelTiles[b * 1024 + a] * 2;
+                        p = solidity.PixelTiles[y * 1024 + x] * 2;
+                        r = solidity.PixelTiles[b * 1024 + a] * 2;
 
                         if (!made[p / 2])
                         {
-                            temp = physicalMap.ThePhysicalMap[p];
-                            physicalMap.ThePhysicalMap[p] = changes[r];
+                            temp = tilemap.Tilemap[p];
+                            tilemap.Tilemap[p] = changes[r];
                             changes[r] = temp;
 
-                            temp = physicalMap.ThePhysicalMap[p + 1];
-                            physicalMap.ThePhysicalMap[p + 1] = changes[r + 1];
+                            temp = tilemap.Tilemap[p + 1];
+                            tilemap.Tilemap[p + 1] = changes[r + 1];
                             changes[r + 1] = temp;
 
                             made[p / 2] = true;
                         }
                     }
-                    physicalMap.MakeEdit();
                 }
             }
-
-            //updater.UpdateLevel();
         }
     }
 }

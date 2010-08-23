@@ -8,7 +8,7 @@ namespace LAZYSHELL
 {
     class MenuTileset
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         public int[] palette;
 
         private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
@@ -16,9 +16,8 @@ namespace LAZYSHELL
 
         Tile16x16[] tileset; public Tile16x16[] Tileset { get { return tileset; } }
 
-        public MenuTileset(Model model, int[] palette)
+        public MenuTileset(int[] palette)
         {
-            this.model = model; // grab the model
             this.palette = palette; // grab the current Palette Set
 
             // Create our layers for the tilesets (256x512)

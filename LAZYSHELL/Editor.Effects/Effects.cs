@@ -18,9 +18,9 @@ namespace LAZYSHELL
         #region Variables
         // main
         private delegate void Function();
-        private Model model;
-        private Overlay overlay;
-        private State state;
+        private Model model = State.Instance.Model;
+        private Overlay overlay = new Overlay();
+        private State state = State.Instance;
         private bool updating = false;
         private Effect[] effects { get { return model.Effects; } set { model.Effects = value; } }
         private E_Animation[] animations { get { return model.E_animations; } set { model.E_animations = value; } }
@@ -41,16 +41,14 @@ namespace LAZYSHELL
         public EffectSequences Sequences { get { return sequences; } set { sequences = value; } }
         private PaletteEditor paletteEditor;
         private GraphicEditor graphicEditor;
+        private Search searchWindow;
         // special controls
         #endregion
         #region Functions
         // main
-        public Effects(Model model)
+        public Effects()
         {
             // set data
-            this.model = model;
-            this.state = State.Instance;
-            this.overlay = new Overlay();
             InitializeComponent();
             Do.AddShortcut(toolStrip2, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip2, Keys.F1, enableHelpTips);
@@ -58,7 +56,7 @@ namespace LAZYSHELL
             // tooltips
             toolTip1.InitialDelay = 0;
             SetToolTips(toolTip1);
-            new Search(number, searchText, searchEffectNames, name.Items);
+            searchWindow = new Search(number, searchText, searchEffectNames, name.Items);
             // set control values
             updating = true;
             this.animation.Tileset = new E_Tileset(animation, palette);
@@ -310,17 +308,16 @@ namespace LAZYSHELL
             {
                 model.Effects = null;
                 model.E_animations = null;
-                return;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
-            if (paletteEditor != null && paletteEditor.Visible)
-                paletteEditor.Close();
-            if (graphicEditor != null && graphicEditor.Visible)
-                graphicEditor.Close();
+            paletteEditor.Close();
+            graphicEditor.Close();
+            searchWindow.Close();
+            molds.tileEditor.Close();
         }
         private void number_ValueChanged(object sender, EventArgs e)
         {
@@ -437,14 +434,14 @@ namespace LAZYSHELL
         }
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements(animations, index, "IMPORT EFFECT ANIMATIONS...", model).ShowDialog();
+            new IOElements(animations, index, "IMPORT EFFECT ANIMATIONS...").ShowDialog();
             foreach (E_Animation animation in animations)
                 animation.Assemble();
             RefreshEffectsEditor();
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements(animations, index, "EXPORT EFFECT ANIMATIONS...", model).ShowDialog();
+            new IOElements(animations, index, "EXPORT EFFECT ANIMATIONS...").ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {

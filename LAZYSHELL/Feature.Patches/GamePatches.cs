@@ -14,8 +14,8 @@ namespace LAZYSHELL.Patches
 {
     public partial class GamePatches : Form
     {
-        private Model model;
-        private Settings settings;
+        private Model model = State.Instance.Model;
+        private Settings settings = Settings.Default;
 
         private string verifyType = "LAZYSHELL PATCH INFORMATION";
         WebClient client = new WebClient();
@@ -24,10 +24,8 @@ namespace LAZYSHELL.Patches
         Timer clock;
         private bool downloadingIPS = false;
 
-        public GamePatches(Model model)
+        public GamePatches()
         {
-            this.model = model;
-            settings = Settings.Default;
             InitializeComponent();
         }
         public void StartDownloadingPatches()

@@ -53,7 +53,6 @@
             this.label58 = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.textBoxAttackName = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.panel169.SuspendLayout();
             this.panel166.SuspendLayout();
@@ -108,7 +107,12 @@
             this.attackNum.Hexadecimal = false;
             this.attackNum.Location = new System.Drawing.Point(153, 1);
             this.attackNum.Maximum = new decimal(new int[] {
-            100,
+            128,
+            0,
+            0,
+            0});
+            this.attackNum.Minimum = new decimal(new int[] {
+            0,
             0,
             0,
             0});
@@ -324,7 +328,7 @@
             0,
             0});
             this.attackAtkLevel.Name = "attackAtkLevel";
-            this.attackAtkLevel.Size = new System.Drawing.Size(76, 17);
+            this.attackAtkLevel.Size = new System.Drawing.Size(75, 17);
             this.attackAtkLevel.TabIndex = 124;
             this.attackAtkLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackAtkLevel.ValueChanged += new System.EventHandler(this.attackAtkLevel_ValueChanged);
@@ -334,7 +338,7 @@
             this.attackHitRate.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.attackHitRate.Location = new System.Drawing.Point(100, 19);
             this.attackHitRate.Name = "attackHitRate";
-            this.attackHitRate.Size = new System.Drawing.Size(76, 17);
+            this.attackHitRate.Size = new System.Drawing.Size(75, 17);
             this.attackHitRate.TabIndex = 123;
             this.attackHitRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackHitRate.ValueChanged += new System.EventHandler(this.attackHitRate_ValueChanged);
@@ -363,8 +367,7 @@
             // 
             this.toolStrip2.CanOverflow = false;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.textBoxAttackName,
-            this.toolStripButton1});
+            this.textBoxAttackName});
             this.toolStrip2.Location = new System.Drawing.Point(0, 25);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -378,15 +381,6 @@
             this.textBoxAttackName.Name = "textBoxAttackName";
             this.textBoxAttackName.Size = new System.Drawing.Size(144, 25);
             this.textBoxAttackName.TextChanged += new System.EventHandler(this.textBoxAttackName_TextChanged);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::LAZYSHELL.Properties.Resources.label;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             // 
             // Attacks
             // 
@@ -453,6 +447,5 @@
         private ToolStripNumericUpDown attackNum;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripTextBox textBoxAttackName;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

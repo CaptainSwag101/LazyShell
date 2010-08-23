@@ -8,10 +8,11 @@ namespace LAZYSHELL
     [Serializable]
     public class LevelTemplate
     {
-        string name; public string Name { get { return name; } set { name = value; } }
+        private string name; public string Name { get { return name; } set { name = value; } }
+        private Solidity solidity = Solidity.Instance;
 
-        byte[] physical = new byte[0x20C2]; public byte[] Physical { get { return physical; } }
-        byte[][] tilemaps = new byte[3][]; public byte[][] Tilemaps { get { return tilemaps; } }
+        private byte[] physical = new byte[0x20C2]; public byte[] Physical { get { return physical; } }
+        private byte[][] tilemaps = new byte[3][]; public byte[][] Tilemaps { get { return tilemaps; } }
 
         // so when painting the template it starts at the right isometric coord
         public bool Even { get { return (size.Width / 16) % 2 == 0; } }
@@ -19,7 +20,7 @@ namespace LAZYSHELL
         Point start; public Point Start { get { return start; } }
         Size size; public Size Size { get { return size; } }
 
-        public void Transfer(byte[][] tilemaps, LevelMap levelMap, PhysicalMap physicalMap, Point start, Point stop)
+        public void Transfer(byte[][] tilemaps, LevelMap levelMap, LevelSolidMap physicalMap, Point start, Point stop)
         {
             this.start = start;
             int offset = 0, o = 0, p = 0;
@@ -45,15 +46,15 @@ namespace LAZYSHELL
             {
                 for (int x = start.X; x < stop.X; x++)
                 {
-                    p = physicalMap.PixelTiles[y * 1024 + x] * 2;
-                    physical[p] = physicalMap.ThePhysicalMap[p];
-                    physical[p + 1] = physicalMap.ThePhysicalMap[p + 1];
+                    p = solidity.PixelTiles[y * 1024 + x] * 2;
+                    physical[p] = physicalMap.Tilemap[p];
+                    physical[p + 1] = physicalMap.Tilemap[p + 1];
                 }
             }
         }
-        public int[] GetTemplatePixels(LevelMap levelMap, PaletteSet paletteSet, TileSet tileset, LevelLayer layer, PrioritySet[] prioritySets)
+        public int[] GetTemplatePixels(Level level, TileSet tileset)
         {
-            TileMap tilemap = new TileMap(levelMap, paletteSet, tileset, layer, prioritySets, this);
+            TileMap tilemap = new TileMap(level, tileset, this);
             int[] mainscreen = tilemap.Mainscreen;
             int[] temp = new int[size.Width * size.Height];
             for (int y = 0; y < size.Height; y++)

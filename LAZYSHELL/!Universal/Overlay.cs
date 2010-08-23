@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
 
@@ -11,7 +13,7 @@ namespace LAZYSHELL
     public class Overlay
     {
         #region Variables
-        private State state;
+        private State state = State.Instance;
         // overlay objects
         private int[] exitFieldBasePixels;
         private int[] exitFieldBlockPixels;
@@ -21,6 +23,8 @@ namespace LAZYSHELL
         private int[] overlapFieldBasePixels;
         private int[] fieldBaseShadow;
         private Bitmap npcsImage, exitsImage, eventsImage, overlapsImage;
+        private IList<Bitmap> solidModsImages;
+        private IList<Bitmap> tileModsImages;
         public Bitmap NPCsImage { get { return npcsImage; } set { npcsImage = value; } }
         public Bitmap ExitsImage { get { return exitsImage; } set { exitsImage = value; } }
         public Bitmap EventsImage { get { return eventsImage; } set { eventsImage = value; } }
@@ -187,7 +191,6 @@ namespace LAZYSHELL
         #region Functions
         public Overlay()
         {
-            state = State.Instance;
         }
         public void DrawCartographicGrid(Graphics g, Color c, Size s, Size u, int z)
         {
@@ -777,6 +780,75 @@ namespace LAZYSHELL
                 }
             }
             return somePixels;
+        }
+        // mods
+        public void DrawLevelTileMods(LevelTileMods tileMods, Graphics g)
+        {
+            Rectangle region;
+            Pen pen;
+            foreach (LevelTileMods.Mod mod in tileMods.Mods)
+            {
+                if (tileMods.Mod_ == mod && !tileMods.SelectedB)
+                    continue;
+                g.DrawImage(mod.ImageA, new Point(mod.X * 16, mod.Y * 16));
+                region = new Rectangle(mod.X * 16, mod.Y * 16, mod.Width * 16, mod.Height * 16);
+                pen = new Pen(Color.Red);
+                pen.DashStyle = DashStyle.Dot;
+                pen.Alignment = PenAlignment.Outset;
+                pen.Width = 2;
+                region.X -= 1;
+                region.Y -= 1;
+                region.Width += 2;
+                region.Height += 2;
+                g.DrawRectangle(pen, region);
+            }
+            if (tileMods.Mods.Count == 0) return;
+            LevelTileMods.Mod current = tileMods.Mod_;
+            if (!tileMods.SelectedB)
+                g.DrawImage(current.ImageA, new Point(current.X * 16, current.Y * 16));
+            else
+                g.DrawImage(current.ImageB, new Point(current.X * 16, current.Y * 16));
+            region = new Rectangle(current.X * 16, current.Y * 16, current.Width * 16, current.Height * 16);
+            pen = new Pen(Color.Red);
+            pen.DashStyle = DashStyle.Dot;
+            pen.Alignment = PenAlignment.Outset;
+            pen.Width = 4;
+            region.X -= 2;
+            region.Y -= 2;
+            region.Width += 4;
+            region.Height += 4;
+            g.DrawRectangle(pen, region);
+        }
+        public void DrawLevelSolidMods(LevelSolidMods solidMods, SolidityTile[] tiles, Graphics g)
+        {
+            Solidity solidity = Solidity.Instance;
+            foreach (LevelSolidMods.Mod mod in solidMods.Mods)
+            {
+                if (mod == solidMods.Mod_)
+                    continue;
+                g.DrawImage(mod.Image, 0, 0);
+            }
+            if (solidMods.Mods.Count == 0) return;
+            g.DrawImage(solidMods.Mod_.Image, 0, 0);
+        }
+        public void DrawLevelSolidMods(LevelSolidMods solidMods, Graphics g)
+        {
+            foreach (LevelSolidMods.Mod mod in solidMods.Mods)
+            {
+                int x = ((mod.X & 127) * 32) + (16 * (mod.Y & 1)) - 16;
+                int y = ((mod.Y & 127) * 8) - 8;
+                Point top = new Point(x + 16, y);
+                Point right = new Point(top.X + (mod.Width * 16), y + (mod.Width * 8));
+                Point bottom = new Point(right.X - (mod.Height * 16), right.Y + (mod.Height * 8));
+                Point left = new Point(bottom.X - (mod.Width * 16), bottom.Y - (mod.Width * 8));
+                top.Y -= mod != solidMods.Mod_ ? 2 : 4;
+                right.X += mod != solidMods.Mod_ ? 4 : 6;
+                bottom.Y += mod != solidMods.Mod_ ? 2 : 4;
+                left.X -= mod != solidMods.Mod_ ? 4 : 6;
+                Pen pen = new Pen(Color.Red);
+                pen.Width = mod != solidMods.Mod_ ? 2 : 4; pen.DashStyle = DashStyle.Dot;
+                g.DrawPolygon(pen, new Point[] { top, right, bottom, left, top });
+            }
         }
         #endregion
     }

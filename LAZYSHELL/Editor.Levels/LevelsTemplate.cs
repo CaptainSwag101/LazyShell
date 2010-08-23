@@ -41,8 +41,7 @@ namespace LAZYSHELL
         {
             if (template == null) return;
             pictureBoxTemplate.Size = template.Size;
-            templateImage = new Bitmap(Do.PixelsToImage(template.GetTemplatePixels(
-                levels.LevelMap, levels.PaletteSet, levels.TileSet, levels.Layer, levels.PrioritySets),
+            templateImage = new Bitmap(Do.PixelsToImage(template.GetTemplatePixels(levels.Level, levels.TileSet),
                 template.Size.Width, template.Size.Height));
             pictureBoxTemplate.Invalidate();
         }

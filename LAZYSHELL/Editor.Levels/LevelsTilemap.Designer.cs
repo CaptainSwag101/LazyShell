@@ -31,26 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelsTilemap));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.buttonToggleCartGrid = new System.Windows.Forms.ToolStripButton();
-            this.buttonToggleOrthGrid = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonToggleL1 = new System.Windows.Forms.ToolStripButton();
             this.buttonToggleL2 = new System.Windows.Forms.ToolStripButton();
             this.buttonToggleL3 = new System.Windows.Forms.ToolStripButton();
             this.buttonToggleBG = new System.Windows.Forms.ToolStripButton();
             this.buttonToggleP1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonTogglePhys = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonToggleNPCs = new System.Windows.Forms.ToolStripButton();
-            this.buttonToggleExits = new System.Windows.Forms.ToolStripButton();
-            this.buttonToggleEvents = new System.Windows.Forms.ToolStripButton();
-            this.buttonToggleOverlaps = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonToggleMask = new System.Windows.Forms.ToolStripButton();
-            this.buttonToggleBoundaries = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
-            this.opacityToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator46 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -64,8 +53,10 @@
             this.labelOverlayOpacity = new System.Windows.Forms.Label();
             this.labelTileCoords = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.editAllLayers = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.panelLevelPicture = new System.Windows.Forms.Panel();
+            this.pictureBoxLevel = new System.Windows.Forms.PictureBox();
+            this.editAllLayers = new System.Windows.Forms.ToolStripButton();
             this.buttonEditDraw = new System.Windows.Forms.ToolStripButton();
             this.buttonEditErase = new System.Windows.Forms.ToolStripButton();
             this.buttonEditSelect = new System.Windows.Forms.ToolStripButton();
@@ -80,8 +71,18 @@
             this.buttonEditRedo = new System.Windows.Forms.ToolStripButton();
             this.buttonZoomIn = new System.Windows.Forms.ToolStripButton();
             this.buttonZoomOut = new System.Windows.Forms.ToolStripButton();
-            this.panelLevelPicture = new System.Windows.Forms.Panel();
-            this.pictureBoxLevel = new System.Windows.Forms.PictureBox();
+            this.buttonToggleCartGrid = new System.Windows.Forms.ToolStripButton();
+            this.buttonToggleOrthGrid = new System.Windows.Forms.ToolStripButton();
+            this.buttonToggleTileMods = new System.Windows.Forms.ToolStripButton();
+            this.buttonTogglePhys = new System.Windows.Forms.ToolStripButton();
+            this.buttonToggleSolidMods = new System.Windows.Forms.ToolStripButton();
+            this.buttonToggleNPCs = new System.Windows.Forms.ToolStripButton();
+            this.buttonToggleExits = new System.Windows.Forms.ToolStripButton();
+            this.buttonToggleEvents = new System.Windows.Forms.ToolStripButton();
+            this.buttonToggleOverlaps = new System.Windows.Forms.ToolStripButton();
+            this.buttonToggleMask = new System.Windows.Forms.ToolStripButton();
+            this.buttonToggleBoundaries = new System.Windows.Forms.ToolStripButton();
+            this.opacityToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pictureBoxZoom = new System.Windows.Forms.PictureBox();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -104,9 +105,10 @@
             this.buttonToggleL2,
             this.buttonToggleL3,
             this.buttonToggleBG,
-            this.buttonToggleP1,
-            this.toolStripSeparator1,
+            this.buttonToggleTileMods,
             this.buttonTogglePhys,
+            this.buttonToggleSolidMods,
+            this.buttonToggleP1,
             this.toolStripSeparator14,
             this.buttonToggleNPCs,
             this.buttonToggleExits,
@@ -121,32 +123,8 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(8, 0, 1, 0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(848, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(860, 25);
             this.toolStrip1.TabIndex = 3;
-            // 
-            // buttonToggleCartGrid
-            // 
-            this.buttonToggleCartGrid.CheckOnClick = true;
-            this.buttonToggleCartGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonToggleCartGrid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleGrid;
-            this.buttonToggleCartGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonToggleCartGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonToggleCartGrid.Name = "buttonToggleCartGrid";
-            this.buttonToggleCartGrid.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleCartGrid.Text = "Grid";
-            this.buttonToggleCartGrid.Click += new System.EventHandler(this.buttonToggleCartGrid_Click);
-            // 
-            // buttonToggleOrthGrid
-            // 
-            this.buttonToggleOrthGrid.CheckOnClick = true;
-            this.buttonToggleOrthGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonToggleOrthGrid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleOrthGrid;
-            this.buttonToggleOrthGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonToggleOrthGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonToggleOrthGrid.Name = "buttonToggleOrthGrid";
-            this.buttonToggleOrthGrid.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleOrthGrid.Text = "Isometric Grid";
-            this.buttonToggleOrthGrid.Click += new System.EventHandler(this.buttonToggleOrthGrid_Click);
             // 
             // toolStripSeparator15
             // 
@@ -217,76 +195,11 @@
             this.buttonToggleP1.ToolTipText = "Priority 1";
             this.buttonToggleP1.Click += new System.EventHandler(this.buttonToggleP1_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // buttonTogglePhys
-            // 
-            this.buttonTogglePhys.CheckOnClick = true;
-            this.buttonTogglePhys.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonTogglePhys.Image = global::LAZYSHELL.Properties.Resources.buttonPhysical;
-            this.buttonTogglePhys.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonTogglePhys.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonTogglePhys.Name = "buttonTogglePhys";
-            this.buttonTogglePhys.Size = new System.Drawing.Size(23, 22);
-            this.buttonTogglePhys.Text = "Solidity";
-            this.buttonTogglePhys.Click += new System.EventHandler(this.buttonTogglePhys_Click);
-            // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStripSeparator14.Name = "toolStripSeparator14";
             this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
-            // 
-            // buttonToggleNPCs
-            // 
-            this.buttonToggleNPCs.CheckOnClick = true;
-            this.buttonToggleNPCs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonToggleNPCs.Image = global::LAZYSHELL.Properties.Resources.buttonNPC;
-            this.buttonToggleNPCs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonToggleNPCs.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonToggleNPCs.Name = "buttonToggleNPCs";
-            this.buttonToggleNPCs.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleNPCs.Text = "NPCs";
-            this.buttonToggleNPCs.Click += new System.EventHandler(this.buttonToggleNPCs_Click);
-            // 
-            // buttonToggleExits
-            // 
-            this.buttonToggleExits.CheckOnClick = true;
-            this.buttonToggleExits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonToggleExits.Image = global::LAZYSHELL.Properties.Resources.buttonExitField;
-            this.buttonToggleExits.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonToggleExits.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonToggleExits.Name = "buttonToggleExits";
-            this.buttonToggleExits.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleExits.Text = "Exits";
-            this.buttonToggleExits.Click += new System.EventHandler(this.buttonToggleExits_Click);
-            // 
-            // buttonToggleEvents
-            // 
-            this.buttonToggleEvents.CheckOnClick = true;
-            this.buttonToggleEvents.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonToggleEvents.Image = global::LAZYSHELL.Properties.Resources.buttonEventField;
-            this.buttonToggleEvents.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonToggleEvents.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonToggleEvents.Name = "buttonToggleEvents";
-            this.buttonToggleEvents.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleEvents.Text = "Events";
-            this.buttonToggleEvents.Click += new System.EventHandler(this.buttonToggleEvents_Click);
-            // 
-            // buttonToggleOverlaps
-            // 
-            this.buttonToggleOverlaps.CheckOnClick = true;
-            this.buttonToggleOverlaps.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonToggleOverlaps.Image = global::LAZYSHELL.Properties.Resources.buttonOverlaps;
-            this.buttonToggleOverlaps.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonToggleOverlaps.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonToggleOverlaps.Name = "buttonToggleOverlaps";
-            this.buttonToggleOverlaps.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleOverlaps.Text = "Overlaps";
-            this.buttonToggleOverlaps.Click += new System.EventHandler(this.buttonToggleOverlaps_Click);
             // 
             // toolStripSeparator12
             // 
@@ -294,44 +207,10 @@
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
             // 
-            // buttonToggleMask
-            // 
-            this.buttonToggleMask.CheckOnClick = true;
-            this.buttonToggleMask.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonToggleMask.Image = global::LAZYSHELL.Properties.Resources.buttonToggleMask;
-            this.buttonToggleMask.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonToggleMask.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonToggleMask.Name = "buttonToggleMask";
-            this.buttonToggleMask.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleMask.Text = "Mask";
-            this.buttonToggleMask.Click += new System.EventHandler(this.buttonToggleMask_Click);
-            // 
-            // buttonToggleBoundaries
-            // 
-            this.buttonToggleBoundaries.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonToggleBoundaries.Image = global::LAZYSHELL.Properties.Resources.buttonBoundaries;
-            this.buttonToggleBoundaries.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonToggleBoundaries.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonToggleBoundaries.Name = "buttonToggleBoundaries";
-            this.buttonToggleBoundaries.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleBoundaries.Text = "Screen";
-            this.buttonToggleBoundaries.Click += new System.EventHandler(this.buttonToggleBoundaries_Click);
-            // 
             // toolStripSeparator23
             // 
             this.toolStripSeparator23.Name = "toolStripSeparator23";
             this.toolStripSeparator23.Size = new System.Drawing.Size(6, 25);
-            // 
-            // opacityToolStripButton
-            // 
-            this.opacityToolStripButton.CheckOnClick = true;
-            this.opacityToolStripButton.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.opacityToolStripButton.Image = global::LAZYSHELL.Properties.Resources.opacity;
-            this.opacityToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.opacityToolStripButton.Name = "opacityToolStripButton";
-            this.opacityToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.opacityToolStripButton.ToolTipText = "Opacity";
-            this.opacityToolStripButton.Click += new System.EventHandler(this.opacityToolStripButton_Click);
             // 
             // toolStripSeparator13
             // 
@@ -430,10 +309,10 @@
             this.labelTileCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTileCoords.BackColor = System.Drawing.SystemColors.Control;
-            this.labelTileCoords.Location = new System.Drawing.Point(-19, 645);
+            this.labelTileCoords.Location = new System.Drawing.Point(-27, 657);
             this.labelTileCoords.Name = "labelTileCoords";
             this.labelTileCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.labelTileCoords.Size = new System.Drawing.Size(869, 18);
+            this.labelTileCoords.Size = new System.Drawing.Size(889, 18);
             this.labelTileCoords.TabIndex = 194;
             this.labelTileCoords.Text = "(x: 0, y: 0)  Tile  |  (x: 0, y: 0) Isometric  |  (x: 0, y: 0) Pixel";
             this.labelTileCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -466,9 +345,48 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 25);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(26, 640);
+            this.toolStrip2.Size = new System.Drawing.Size(26, 652);
             this.toolStrip2.TabIndex = 505;
             this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(23, 6);
+            // 
+            // panelLevelPicture
+            // 
+            this.panelLevelPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelLevelPicture.AutoScroll = true;
+            this.panelLevelPicture.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.panelLevelPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelLevelPicture.Controls.Add(this.pictureBoxLevel);
+            this.panelLevelPicture.Location = new System.Drawing.Point(29, 31);
+            this.panelLevelPicture.Name = "panelLevelPicture";
+            this.panelLevelPicture.Size = new System.Drawing.Size(829, 623);
+            this.panelLevelPicture.TabIndex = 192;
+            this.panelLevelPicture.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panelLevelPicture_Scroll);
+            // 
+            // pictureBoxLevel
+            // 
+            this.pictureBoxLevel.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBoxLevel.ContextMenuStrip = this.contextMenuStrip1;
+            this.pictureBoxLevel.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxLevel.Name = "pictureBoxLevel";
+            this.pictureBoxLevel.Size = new System.Drawing.Size(1024, 1024);
+            this.pictureBoxLevel.TabIndex = 0;
+            this.pictureBoxLevel.TabStop = false;
+            this.pictureBoxLevel.MouseLeave += new System.EventHandler(this.pictureBoxLevel_MouseLeave);
+            this.pictureBoxLevel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxLevel_PreviewKeyDown);
+            this.pictureBoxLevel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseMove);
+            this.pictureBoxLevel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseDoubleClick);
+            this.pictureBoxLevel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseDown);
+            this.pictureBoxLevel.MouseHover += new System.EventHandler(this.pictureBoxLevel_MouseHover);
+            this.pictureBoxLevel.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxLevel_Paint);
+            this.pictureBoxLevel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseUp);
+            this.pictureBoxLevel.MouseEnter += new System.EventHandler(this.pictureBoxLevel_MouseEnter);
             // 
             // editAllLayers
             // 
@@ -480,11 +398,6 @@
             this.editAllLayers.Name = "editAllLayers";
             this.editAllLayers.Size = new System.Drawing.Size(23, 17);
             this.editAllLayers.Text = "Edit All Layers Simultaneously";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(23, 6);
             // 
             // buttonEditDraw
             // 
@@ -647,39 +560,147 @@
             this.buttonZoomOut.Text = "Zoom Out";
             this.buttonZoomOut.Click += new System.EventHandler(this.buttonZoomOut_Click);
             // 
-            // panelLevelPicture
+            // buttonToggleCartGrid
             // 
-            this.panelLevelPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelLevelPicture.AutoScroll = true;
-            this.panelLevelPicture.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
-            this.panelLevelPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelLevelPicture.Controls.Add(this.pictureBoxLevel);
-            this.panelLevelPicture.Location = new System.Drawing.Point(29, 31);
-            this.panelLevelPicture.Name = "panelLevelPicture";
-            this.panelLevelPicture.Size = new System.Drawing.Size(817, 611);
-            this.panelLevelPicture.TabIndex = 192;
-            this.panelLevelPicture.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panelLevelPicture_Scroll);
+            this.buttonToggleCartGrid.CheckOnClick = true;
+            this.buttonToggleCartGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleCartGrid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleGrid;
+            this.buttonToggleCartGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleCartGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleCartGrid.Name = "buttonToggleCartGrid";
+            this.buttonToggleCartGrid.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleCartGrid.Text = "Grid";
+            this.buttonToggleCartGrid.Click += new System.EventHandler(this.buttonToggleCartGrid_Click);
             // 
-            // pictureBoxLevel
+            // buttonToggleOrthGrid
             // 
-            this.pictureBoxLevel.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
-            this.pictureBoxLevel.ContextMenuStrip = this.contextMenuStrip1;
-            this.pictureBoxLevel.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxLevel.Name = "pictureBoxLevel";
-            this.pictureBoxLevel.Size = new System.Drawing.Size(1024, 1024);
-            this.pictureBoxLevel.TabIndex = 0;
-            this.pictureBoxLevel.TabStop = false;
-            this.pictureBoxLevel.MouseLeave += new System.EventHandler(this.pictureBoxLevel_MouseLeave);
-            this.pictureBoxLevel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxLevel_PreviewKeyDown);
-            this.pictureBoxLevel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseMove);
-            this.pictureBoxLevel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseDoubleClick);
-            this.pictureBoxLevel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseDown);
-            this.pictureBoxLevel.MouseHover += new System.EventHandler(this.pictureBoxLevel_MouseHover);
-            this.pictureBoxLevel.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxLevel_Paint);
-            this.pictureBoxLevel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseUp);
-            this.pictureBoxLevel.MouseEnter += new System.EventHandler(this.pictureBoxLevel_MouseEnter);
+            this.buttonToggleOrthGrid.CheckOnClick = true;
+            this.buttonToggleOrthGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleOrthGrid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleOrthGrid;
+            this.buttonToggleOrthGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleOrthGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleOrthGrid.Name = "buttonToggleOrthGrid";
+            this.buttonToggleOrthGrid.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleOrthGrid.Text = "Isometric Grid";
+            this.buttonToggleOrthGrid.Click += new System.EventHandler(this.buttonToggleOrthGrid_Click);
+            // 
+            // buttonToggleTileMods
+            // 
+            this.buttonToggleTileMods.CheckOnClick = true;
+            this.buttonToggleTileMods.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleTileMods.Image = global::LAZYSHELL.Properties.Resources.buttonTileMods;
+            this.buttonToggleTileMods.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleTileMods.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleTileMods.Name = "buttonToggleTileMods";
+            this.buttonToggleTileMods.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleTileMods.Text = "Tilemap Mods";
+            this.buttonToggleTileMods.Click += new System.EventHandler(this.buttonToggleTileMods_Click);
+            // 
+            // buttonTogglePhys
+            // 
+            this.buttonTogglePhys.CheckOnClick = true;
+            this.buttonTogglePhys.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonTogglePhys.Image = global::LAZYSHELL.Properties.Resources.buttonPhysical;
+            this.buttonTogglePhys.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonTogglePhys.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonTogglePhys.Name = "buttonTogglePhys";
+            this.buttonTogglePhys.Size = new System.Drawing.Size(23, 22);
+            this.buttonTogglePhys.Text = "Solidity";
+            this.buttonTogglePhys.Click += new System.EventHandler(this.buttonTogglePhys_Click);
+            // 
+            // buttonToggleSolidMods
+            // 
+            this.buttonToggleSolidMods.CheckOnClick = true;
+            this.buttonToggleSolidMods.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleSolidMods.Image = global::LAZYSHELL.Properties.Resources.buttonSolidMods;
+            this.buttonToggleSolidMods.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleSolidMods.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleSolidMods.Name = "buttonToggleSolidMods";
+            this.buttonToggleSolidMods.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleSolidMods.Text = "Solidity Mods";
+            this.buttonToggleSolidMods.Click += new System.EventHandler(this.buttonToggleSolidMods_Click);
+            // 
+            // buttonToggleNPCs
+            // 
+            this.buttonToggleNPCs.CheckOnClick = true;
+            this.buttonToggleNPCs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleNPCs.Image = global::LAZYSHELL.Properties.Resources.buttonNPC;
+            this.buttonToggleNPCs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleNPCs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleNPCs.Name = "buttonToggleNPCs";
+            this.buttonToggleNPCs.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleNPCs.Text = "NPCs";
+            this.buttonToggleNPCs.Click += new System.EventHandler(this.buttonToggleNPCs_Click);
+            // 
+            // buttonToggleExits
+            // 
+            this.buttonToggleExits.CheckOnClick = true;
+            this.buttonToggleExits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleExits.Image = global::LAZYSHELL.Properties.Resources.buttonExitField;
+            this.buttonToggleExits.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleExits.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleExits.Name = "buttonToggleExits";
+            this.buttonToggleExits.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleExits.Text = "Exits";
+            this.buttonToggleExits.Click += new System.EventHandler(this.buttonToggleExits_Click);
+            // 
+            // buttonToggleEvents
+            // 
+            this.buttonToggleEvents.CheckOnClick = true;
+            this.buttonToggleEvents.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleEvents.Image = global::LAZYSHELL.Properties.Resources.buttonEventField;
+            this.buttonToggleEvents.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleEvents.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleEvents.Name = "buttonToggleEvents";
+            this.buttonToggleEvents.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleEvents.Text = "Events";
+            this.buttonToggleEvents.Click += new System.EventHandler(this.buttonToggleEvents_Click);
+            // 
+            // buttonToggleOverlaps
+            // 
+            this.buttonToggleOverlaps.CheckOnClick = true;
+            this.buttonToggleOverlaps.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleOverlaps.Image = global::LAZYSHELL.Properties.Resources.buttonOverlaps;
+            this.buttonToggleOverlaps.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleOverlaps.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleOverlaps.Name = "buttonToggleOverlaps";
+            this.buttonToggleOverlaps.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleOverlaps.Text = "Overlaps";
+            this.buttonToggleOverlaps.Click += new System.EventHandler(this.buttonToggleOverlaps_Click);
+            // 
+            // buttonToggleMask
+            // 
+            this.buttonToggleMask.CheckOnClick = true;
+            this.buttonToggleMask.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleMask.Image = global::LAZYSHELL.Properties.Resources.buttonToggleMask;
+            this.buttonToggleMask.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleMask.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleMask.Name = "buttonToggleMask";
+            this.buttonToggleMask.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleMask.Text = "Mask";
+            this.buttonToggleMask.Click += new System.EventHandler(this.buttonToggleMask_Click);
+            // 
+            // buttonToggleBoundaries
+            // 
+            this.buttonToggleBoundaries.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleBoundaries.Image = global::LAZYSHELL.Properties.Resources.buttonBoundaries;
+            this.buttonToggleBoundaries.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleBoundaries.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleBoundaries.Name = "buttonToggleBoundaries";
+            this.buttonToggleBoundaries.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleBoundaries.Text = "Screen";
+            this.buttonToggleBoundaries.Click += new System.EventHandler(this.buttonToggleBoundaries_Click);
+            // 
+            // opacityToolStripButton
+            // 
+            this.opacityToolStripButton.CheckOnClick = true;
+            this.opacityToolStripButton.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.opacityToolStripButton.Image = global::LAZYSHELL.Properties.Resources.opacity;
+            this.opacityToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.opacityToolStripButton.Name = "opacityToolStripButton";
+            this.opacityToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.opacityToolStripButton.ToolTipText = "Opacity";
+            this.opacityToolStripButton.Click += new System.EventHandler(this.opacityToolStripButton_Click);
             // 
             // pictureBoxZoom
             // 
@@ -696,7 +717,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 665);
+            this.ClientSize = new System.Drawing.Size(860, 677);
             this.ControlBox = false;
             this.Controls.Add(this.panelOpacity);
             this.Controls.Add(this.panelLevelPicture);
@@ -771,7 +792,6 @@
         private System.Windows.Forms.Label labelOverlayOpacity;
         private System.Windows.Forms.Label labelTileCoords;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton buttonToggleBoundaries;
         private System.Windows.Forms.ToolStripButton editAllLayers;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -781,5 +801,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
         private System.Windows.Forms.ToolStripMenuItem saveImageToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBoxZoom;
+        private System.Windows.Forms.ToolStripButton buttonToggleTileMods;
+        private System.Windows.Forms.ToolStripButton buttonToggleSolidMods;
     }
 }

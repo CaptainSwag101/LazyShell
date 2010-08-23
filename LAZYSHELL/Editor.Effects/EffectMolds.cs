@@ -52,7 +52,7 @@ namespace LAZYSHELL
         private CommandStack commandStack;
         private Bitmap selection;
         // editors
-        private TileEditor tileEditor;
+        public TileEditor tileEditor;
         // special controls
         #endregion
         #region Functions

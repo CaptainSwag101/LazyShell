@@ -5,7 +5,6 @@ using System.Collections;
 
 namespace LAZYSHELL.Undo
 {
-
     /*
      * This class completely encapsulates the undo and redo functionality for a window.
      * Just create a command object after each change and push it onto the CommandStack
@@ -118,7 +117,5 @@ namespace LAZYSHELL.Undo
             index = 0;
             undo = 0;
         }
-
-
     }
 }

@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class Allies : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         private Character[] characters { get { return model.Characters; } set { model.Characters = value; } }
         private Character character { get { return characters[index]; } set { characters[index] = value; } }
@@ -19,9 +19,8 @@ namespace LAZYSHELL
         private Slot slot { get { return slots[(int)slotNum.Value]; } set { slots[(int)slotNum.Value] = value; } }
         private bool updating = false;
         private int index = 0; public int Index { get { return index; } }
-        public Allies(Model model)
+        public Allies()
         {
-            this.model = model;
             this.settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             InitializeStrings();

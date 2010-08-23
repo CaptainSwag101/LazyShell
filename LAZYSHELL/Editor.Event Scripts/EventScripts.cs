@@ -15,7 +15,7 @@ namespace LAZYSHELL
 {
     public partial class EventScripts : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         private bool updatingProperties = false;
         private bool updatingScript = true;
@@ -43,15 +43,16 @@ namespace LAZYSHELL
         int currentScript = 0;
         bool updatingControls = false;
         Previewer.Previewer ep;
+        private Search searchWindow;
         // Constructor
-        public EventScripts(Model model)
+        public EventScripts()
         {
-            this.model = model;
+            settings.Keystrokes[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip4, Keys.F2, showDecHex);
             InitializeEventScriptsEditor();
-            new Search(EventNumber, searchLabelsText, searchLabels, settings.EventLabels);
+            searchWindow = new Search(EventNumber, searchLabelsText, searchLabels, settings.EventLabels);
             new ToolTipLabel(this, toolTip1, showDecHex, null);
         }
 
@@ -362,12 +363,15 @@ namespace LAZYSHELL
                     if (esc.Opcode == 0x6A) labelTitleA.Text = "Modify layer of level...";
                     else labelTitleA.Text = "Modify solidity of level...";
                     labelEvtA.Text = "level";
+                    labelEvtC.Text = "Mod #";
 
                     evtNameA.Items.AddRange(Lists.Convert(settings.LevelNames)); evtNameA.Enabled = true;
                     evtNumA.Enabled = true; evtNumA.Maximum = 511;
+                    evtNumC.Enabled = true; evtNumC.Maximum = 63;
 
                     evtNumA.Value = Bits.GetShort(esc.EventData, 1) & 0x1FF;
                     evtNameA.SelectedIndex = (int)evtNumA.Value;
+                    evtNumC.Value = (esc.EventData[2] >> 1) & 0x3F;
 
                     evtEffects.Items.AddRange(new object[] { "permanent" });
                     evtEffects.Enabled = true;
@@ -1445,6 +1449,8 @@ namespace LAZYSHELL
                 case 0x6B:
                     Bits.SetShort(esc.EventData, 1, (ushort)evtNumA.Value);
                     Bits.SetBit(esc.EventData, 2, 7, evtEffects.GetItemChecked(0));
+                    esc.EventData[2] &= 0x81;
+                    esc.EventData[2] |= (byte)((byte)evtNumC.Value << 1);
                     break;
 
                 // Open window
@@ -2159,9 +2165,9 @@ namespace LAZYSHELL
         private void PreviewEventOrAction()
         {
             if (ep == null || !ep.Visible)
-                ep = new Previewer.Previewer(model, this.currentScript, this.eventName.SelectedIndex == 0 ? 0 : 2);
+                ep = new Previewer.Previewer(this.currentScript, this.eventName.SelectedIndex == 0 ? 0 : 2);
             else
-                ep.Reload(model, this.currentScript, this.eventName.SelectedIndex == 0 ? 0 : 2);
+                ep.Reload(this.currentScript, this.eventName.SelectedIndex == 0 ? 0 : 2);
             ep.Show();
         }
 
@@ -3176,29 +3182,29 @@ namespace LAZYSHELL
         // FORM EVENT HANDLERS
         private void exportAllBattleScripts_Click(object sender, EventArgs e)
         {
-            //ioElements = new IOElements(this, (int)monsterNumber.Value, "EXPORT BATTLE SCRIPTS...", model);
+            //ioElements = new IOElements(this, (int)monsterNumber.Value, "EXPORT BATTLE SCRIPTS...");
             //ioElements.ShowDialog();
         }
         private void exportAllEventScripts_Click(object sender, EventArgs e)
         {
-            ioElements = new IOElements(this, index, "EXPORT EVENT SCRIPTS...", model);
+            ioElements = new IOElements(this, index, "EXPORT EVENT SCRIPTS...");
             ioElements.ShowDialog();
         }
         private void exportAllActionScripts_Click(object sender, EventArgs e)
         {
-            ioElements = new IOElements(this, index, "EXPORT ACTION SCRIPTS...", model);
+            ioElements = new IOElements(this, index, "EXPORT ACTION SCRIPTS...");
             ioElements.ShowDialog();
         }
         private void importAllBattleScripts_Click(object sender, EventArgs e)
         {
-            //ioElements = new IOElements(this, (int)monsterNumber.Value, "IMPORT BATTLE SCRIPTS...", model);
+            //ioElements = new IOElements(this, (int)monsterNumber.Value, "IMPORT BATTLE SCRIPTS...");
             //ioElements.ShowDialog();
             //if (ioElements.DialogResult == DialogResult.Cancel)
             //    return;
         }
         private void importAllEventScripts_Click(object sender, EventArgs e)
         {
-            ioElements = new IOElements(this, index, "IMPORT EVENT SCRIPTS...", model);
+            ioElements = new IOElements(this, index, "IMPORT EVENT SCRIPTS...");
             ioElements.ShowDialog();
             if (ioElements.DialogResult == DialogResult.Cancel)
                 return;
@@ -3206,7 +3212,7 @@ namespace LAZYSHELL
         }
         private void importAllActionScripts_Click(object sender, EventArgs e)
         {
-            ioElements = new IOElements(this, index, "IMPORT ACTION SCRIPTS...", model);
+            ioElements = new IOElements(this, index, "IMPORT ACTION SCRIPTS...");
             ioElements.ShowDialog();
             if (ioElements.DialogResult == DialogResult.Cancel)
                 return;
@@ -3342,7 +3348,6 @@ namespace LAZYSHELL
             else if (result == DialogResult.No)
             {
                 model.EventScripts = null;
-                return;
             }
             else if (result == DialogResult.Cancel)
             {
@@ -3350,6 +3355,9 @@ namespace LAZYSHELL
                 return;
             }
             settings.Save();
+            searchWindow.Close();
+            if (ep != null)
+                ep.Close();
         }
 
         private void save_Click(object sender, EventArgs e)
@@ -3361,21 +3369,21 @@ namespace LAZYSHELL
 
         private void importEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.EventScripts, index, "IMPORT EVENT SCRIPTS...", model).ShowDialog();
+            new IOElements((Element[])model.EventScripts, index, "IMPORT EVENT SCRIPTS...").ShowDialog();
             EventNumber_ValueChanged(null, null);
         }
         private void importActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.ActionScripts, index, "IMPORT ACTION SCRIPTS...", model).ShowDialog();
+            new IOElements((Element[])model.ActionScripts, index, "IMPORT ACTION SCRIPTS...").ShowDialog();
             EventNumber_ValueChanged(null, null);
         }
         private void exportEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.EventScripts, index, "EXPORT EVENT SCRIPTS...", model).ShowDialog();
+            new IOElements((Element[])model.EventScripts, index, "EXPORT EVENT SCRIPTS...").ShowDialog();
         }
         private void exportActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.ActionScripts, index, "EXPORT ACTION SCRIPTS...", model).ShowDialog();
+            new IOElements((Element[])model.ActionScripts, index, "EXPORT ACTION SCRIPTS...").ShowDialog();
         }
         private void dumpEventScriptTextToolStripMenuItem_Click(object sender, EventArgs e)
         {

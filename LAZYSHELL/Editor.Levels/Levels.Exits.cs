@@ -243,8 +243,6 @@ namespace LAZYSHELL
 
             for (int i = 0; i < 512; i++)
             {
-                if (i == 0x1F0)
-                    i = 0x1F0;
                 for (int j = 0; j < levels[i].LevelExits.NumberOfExits; j++)
                 {
                     levels[i].LevelExits.CurrentExit = j;
@@ -442,7 +440,7 @@ namespace LAZYSHELL
         private void exitsInsertField_Click(object sender, EventArgs e)
         {
             Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
-            Point p = new Point(physicalMap.PixelCoords[o.Y * 1024 + o.X].X + 2, physicalMap.PixelCoords[o.Y * 1024 + o.X].Y + 4);
+            Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeExitSpace() >= 8)
             {
                 this.exitsFieldTree.Focus();
@@ -502,6 +500,50 @@ namespace LAZYSHELL
                 }
                 exitsFieldTree.EndUpdate();
             }
+        }
+        private void AddNewExit(LevelExits.Exit exit)
+        {
+            if (CalculateFreeExitSpace() >= 8)
+            {
+                this.exitsFieldTree.Focus();
+                if (exits.NumberOfExits < 28)
+                {
+                    if (exitsFieldTree.Nodes.Count > 0)
+                        exits.AddNewExit(exitsFieldTree.SelectedNode.Index + 1, exit);
+                    else
+                        exits.AddNewExit(0, exit);
+                    int reselect;
+                    if (exitsFieldTree.Nodes.Count > 0)
+                        reselect = exitsFieldTree.SelectedNode.Index;
+                    else
+                        reselect = -1;
+                    exitsFieldTree.BeginUpdate();
+                    this.exitsFieldTree.Nodes.Clear();
+                    for (int i = 0; i < exits.NumberOfExits; i++)
+                        this.exitsFieldTree.Nodes.Add(new TreeNode("EXIT #" + i.ToString()));
+                    this.exitsFieldTree.SelectedNode = this.exitsFieldTree.Nodes[reselect + 1];
+                    exitsFieldTree.EndUpdate();
+                }
+                else
+                    MessageBox.Show("Could not insert any more exit fields. The maximum number of exit fields allowed is 28.",
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("Could not insert the field. The total number of exits for all levels has exceeded the maximum allotted space.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void exitsCopyField_Click(object sender, EventArgs e)
+        {
+            if (exitsFieldTree.SelectedNode != null)
+                copyExit = exits.Exit_.Copy();
+        }
+        private void exitsPasteField_Click(object sender, EventArgs e)
+        {
+            AddNewExit((LevelExits.Exit)copyExit);
+        }
+        private void exitsDuplicateField_Click(object sender, EventArgs e)
+        {
+            AddNewExit(exits.Exit_.Copy());
         }
 
         #endregion

@@ -7,16 +7,14 @@ namespace LAZYSHELL
 {
     public class ProgramController
     {
-
         private Program App;
-        private Model model;
+        private Model model = State.Instance.Model;
         private State state = State.Instance;
         public Model Model { get { return model; } }
         public bool DockEditors { get { return App.DockEditors; } set { App.DockEditors = value; } }
         // Constructor
-        public ProgramController(Model model, Program app)
+        public ProgramController(Program app)
         {
-            this.model = model;
             this.App = app;
         }
         #region File Managing
@@ -151,6 +149,10 @@ namespace LAZYSHELL
         public void Attacks()
         {
             App.CreateAttacksWindow();
+        }
+        public void Audio()
+        {
+            App.CreateAudioWindow();
         }
         public void Battlefields()
         {

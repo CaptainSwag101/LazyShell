@@ -11,13 +11,12 @@ namespace LAZYSHELL
 {
     public partial class AlliesEditor : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         private Allies alliesEditor;
         private LevelUps levelUpsEditor;
-        public AlliesEditor(Model model)
+        public AlliesEditor()
         {
-            this.model = model;
             settings.Keystrokes[0x20] = "\x20";
             settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
@@ -26,13 +25,13 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.F2, baseConversion);
             this.toolTip1.InitialDelay = 0;
             // create editors
-            levelUpsEditor = new LevelUps(model);
+            levelUpsEditor = new LevelUps();
             levelUpsEditor.TopLevel = false;
             levelUpsEditor.Dock = DockStyle.Left;
             levelUpsEditor.SetToolTips(toolTip1);
             panel1.Controls.Add(levelUpsEditor);
             levelUpsEditor.Visible = true;
-            alliesEditor = new Allies(model);
+            alliesEditor = new Allies();
             alliesEditor.TopLevel = false;
             alliesEditor.Dock = DockStyle.Left;
             alliesEditor.SetToolTips(toolTip1);
@@ -72,13 +71,13 @@ namespace LAZYSHELL
         }
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Characters, alliesEditor.Index, "IMPORT CHARACTERS...", model).ShowDialog();
+            new IOElements((Element[])model.Characters, alliesEditor.Index, "IMPORT CHARACTERS...").ShowDialog();
             alliesEditor.RefreshCharacter();
             levelUpsEditor.RefreshLevel();
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Characters, alliesEditor.Index, "EXPORT CHARACTERS...", model).ShowDialog();
+            new IOElements((Element[])model.Characters, alliesEditor.Index, "EXPORT CHARACTERS...").ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {

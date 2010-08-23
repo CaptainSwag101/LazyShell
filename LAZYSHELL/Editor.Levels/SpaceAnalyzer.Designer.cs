@@ -69,7 +69,7 @@ namespace LAZYSHELL
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(585, 416);
+            this.tabControl1.Size = new System.Drawing.Size(585, 411);
             this.tabControl1.TabIndex = 0;
             // 
             // tileMapPage
@@ -88,7 +88,8 @@ namespace LAZYSHELL
             this.tileMapPage.Controls.Add(this.label2);
             this.tileMapPage.Controls.Add(this.label1);
             this.tileMapPage.Controls.Add(this.bankListBox);
-            this.tileMapPage.Location = new System.Drawing.Point(4, 25);
+            this.tileMapPage.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tileMapPage.Location = new System.Drawing.Point(4, 20);
             this.tileMapPage.Name = "tileMapPage";
             this.tileMapPage.Padding = new System.Windows.Forms.Padding(3);
             this.tileMapPage.Size = new System.Drawing.Size(577, 387);
@@ -169,10 +170,10 @@ namespace LAZYSHELL
             this.label3.BackColor = System.Drawing.SystemColors.Control;
             this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label3.Location = new System.Drawing.Point(195, 0);
+            this.label3.Location = new System.Drawing.Point(196, 0);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label3.Size = new System.Drawing.Size(86, 17);
+            this.label3.Size = new System.Drawing.Size(85, 17);
             this.label3.TabIndex = 7;
             this.label3.Text = "POINTER OFFSET";
             // 
@@ -206,7 +207,7 @@ namespace LAZYSHELL
             this.label2.Location = new System.Drawing.Point(115, 0);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label2.Size = new System.Drawing.Size(78, 17);
+            this.label2.Size = new System.Drawing.Size(79, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "BANK";
             // 
@@ -249,7 +250,8 @@ namespace LAZYSHELL
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.bankListBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage2.Location = new System.Drawing.Point(4, 20);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(577, 387);
@@ -330,10 +332,10 @@ namespace LAZYSHELL
             this.label10.BackColor = System.Drawing.SystemColors.Control;
             this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label10.Location = new System.Drawing.Point(195, 0);
+            this.label10.Location = new System.Drawing.Point(196, 0);
             this.label10.Name = "label10";
             this.label10.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label10.Size = new System.Drawing.Size(86, 17);
+            this.label10.Size = new System.Drawing.Size(85, 17);
             this.label10.TabIndex = 19;
             this.label10.Text = "POINTER OFFSET";
             // 
@@ -367,7 +369,7 @@ namespace LAZYSHELL
             this.label11.Location = new System.Drawing.Point(115, 0);
             this.label11.Name = "label11";
             this.label11.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label11.Size = new System.Drawing.Size(78, 17);
+            this.label11.Size = new System.Drawing.Size(79, 17);
             this.label11.TabIndex = 16;
             this.label11.Text = "BANK";
             // 
@@ -398,7 +400,7 @@ namespace LAZYSHELL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(585, 416);
+            this.ClientSize = new System.Drawing.Size(585, 411);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

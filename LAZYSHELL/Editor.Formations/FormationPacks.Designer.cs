@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.packNum = new ToolStripNumericUpDown();
-            this.formationSet = new System.Windows.Forms.ToolStripComboBox();
+            this.packNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.searchFormationPacks = new System.Windows.Forms.ToolStripButton();
             this.packNameTextBox = new System.Windows.Forms.ToolStripTextBox();
@@ -61,7 +60,6 @@
             this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.packNum,
-            this.formationSet,
             this.toolStripSeparator1,
             this.searchFormationPacks,
             this.packNameTextBox});
@@ -84,8 +82,13 @@
             0,
             0,
             0});
+            this.packNum.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.packNum.Name = "packNum";
-            this.packNum.Size = new System.Drawing.Size(55, 22);
+            this.packNum.Size = new System.Drawing.Size(60, 22);
             this.packNum.Text = "0";
             this.packNum.Value = new decimal(new int[] {
             0,
@@ -93,17 +96,6 @@
             0,
             0});
             this.packNum.ValueChanged += new System.EventHandler(this.packNum_ValueChanged);
-            // 
-            // formationSet
-            // 
-            this.formationSet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.formationSet.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.formationSet.Items.AddRange(new object[] {
-            "Use formations 0 - 255",
-            "Use formations 256 - 512"});
-            this.formationSet.Name = "formationSet";
-            this.formationSet.Size = new System.Drawing.Size(145, 25);
-            this.formationSet.SelectedIndexChanged += new System.EventHandler(this.formationSet_SelectedIndexChanged);
             // 
             // toolStripSeparator1
             // 
@@ -123,7 +115,7 @@
             // packNameTextBox
             // 
             this.packNameTextBox.Name = "packNameTextBox";
-            this.packNameTextBox.Size = new System.Drawing.Size(185, 25);
+            this.packNameTextBox.Size = new System.Drawing.Size(310, 25);
             this.packNameTextBox.Visible = false;
             // 
             // packFormation3
@@ -321,7 +313,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.ToolStripComboBox formationSet;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

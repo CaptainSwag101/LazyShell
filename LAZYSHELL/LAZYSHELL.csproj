@@ -41,6 +41,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -70,14 +71,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="!Static\BRR.cs" />
     <Compile Include="!Universal\Element.cs" />
     <Compile Include="!Universal\ToolTipLabel.cs" />
+    <Compile Include="Editor.Audio\Audio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Audio\Audio.Designer.cs">
+      <DependentUpon>Audio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor.Animations\AnimationScripts.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor.Animations\AnimationScripts.Designer.cs">
       <DependentUpon>AnimationScripts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor.Audio\BRRSample.cs" />
+    <Compile Include="Editor.Audio\SPC.cs" />
     <Compile Include="Editor.Battle Scripts\BattleScripts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +103,12 @@
     <Compile Include="Editor.Event Scripts\EventScripts.Designer.cs">
       <DependentUpon>EventScripts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor.Levels\Levels.Mods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Levels\Levels\LevelSolidMods.cs" />
+    <Compile Include="Editor.Levels\Levels\LevelTileMods.cs" />
+    <Compile Include="!Universal\Map.cs" />
     <Compile Include="Features\NewCheckedListBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -244,9 +260,8 @@
       <DependentUpon>BaseConvertor.cs</DependentUpon>
     </Compile>
     <Compile Include="DataStructures\StreamBuf.cs" />
-    <Compile Include="Feature.Compression\LSCompression.cs" />
     <Compile Include="!Static\Bits.cs" />
-    <Compile Include="Feature.Decomp\LCDecomp.cs" />
+    <Compile Include="!Static\Comp.cs" />
     <Compile Include="Features\FixPointers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,7 +322,7 @@
     <Compile Include="Editors\PaletteEditor.Designer.cs">
       <DependentUpon>PaletteEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\SolidTilePixels.cs" />
+    <Compile Include="!Universal\Solidity.cs" />
     <Compile Include="Editors\TileEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -376,18 +391,18 @@
       <DependentUpon>SearchPhysicalTile.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.Levels\Levels\SerializedLevel.cs" />
-    <Compile Include="Editors\SpaceAnalyzer.cs">
+    <Compile Include="Editor.Levels\SpaceAnalyzer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\SpaceAnalyzer.Designer.cs">
+    <Compile Include="Editor.Levels\SpaceAnalyzer.Designer.cs">
       <DependentUpon>SpaceAnalyzer.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.Battlefields\BattlefieldTileSet.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Editor.Levels\Levels\OverlapTileset.cs" />
-    <Compile Include="Editor.Levels\Levels\PhysicalMap.cs" />
-    <Compile Include="Editor.Levels\Levels\PhysicalTile.cs" />
+    <Compile Include="Editor.Levels\Levels\LevelSolidMap.cs" />
+    <Compile Include="Editor.Levels\Levels\SolidityTile.cs" />
     <Compile Include="!Universal\Tile16x16.cs" />
     <Compile Include="!Universal\Tile8x8.cs" />
     <Compile Include="Editor.Levels\Levels\TileMap.cs" />
@@ -592,6 +607,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editor.Audio\Audio.resx">
+      <DependentUpon>Audio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editor.Animations\AnimationScripts.resx">
       <DependentUpon>AnimationScripts.cs</DependentUpon>
     </EmbeddedResource>
@@ -711,7 +729,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>SearchPhysicalTile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\SpaceAnalyzer.resx">
+    <EmbeddedResource Include="Editor.Levels\SpaceAnalyzer.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SpaceAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
@@ -796,6 +814,8 @@
     <None Include="Resources\clearModel.gif" />
     <None Include="Resources\cartridgeReload.gif" />
     <None Include="Resources\cartridgeClose.gif" />
+    <None Include="Resources\buttonSolidMods.gif" />
+    <None Include="Resources\buttonTileMods.gif" />
     <Content Include="Resources\dropper_small.gif" />
     <None Include="Resources\endStringA.gif" />
     <None Include="Resources\endString.gif" />
@@ -875,6 +895,7 @@
     <None Include="Resources\minimizeAll.gif" />
     <None Include="Resources\loadAll.gif" />
     <None Include="Resources\numerize.gif" />
+    <None Include="Resources\openAudio.gif" />
     <Content Include="Resources\showMain.gif" />
     <None Include="Resources\signature.gif" />
     <Content Include="Resources\spaceAnalyzer.gif" />

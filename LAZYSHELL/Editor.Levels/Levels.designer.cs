@@ -380,6 +380,57 @@ namespace LAZYSHELL
             this.label53 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.layerMessageBox = new System.Windows.Forms.ComboBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel27 = new System.Windows.Forms.Panel();
+            this.label68 = new System.Windows.Forms.Label();
+            this.panel44 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.solidModsY = new System.Windows.Forms.NumericUpDown();
+            this.label51 = new System.Windows.Forms.Label();
+            this.solidModsX = new System.Windows.Forms.NumericUpDown();
+            this.solidModsHeight = new System.Windows.Forms.NumericUpDown();
+            this.solidModsWidth = new System.Windows.Forms.NumericUpDown();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.panel45 = new System.Windows.Forms.Panel();
+            this.panel41 = new System.Windows.Forms.Panel();
+            this.toolStrip8 = new System.Windows.Forms.ToolStrip();
+            this.solidModsInsert = new System.Windows.Forms.ToolStripButton();
+            this.solidModsDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.solidModsMoveUp = new System.Windows.Forms.ToolStripButton();
+            this.solidModsMoveDown = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.solidModsCopy = new System.Windows.Forms.ToolStripButton();
+            this.solidModsPaste = new System.Windows.Forms.ToolStripButton();
+            this.solidModsDuplicate = new System.Windows.Forms.ToolStripButton();
+            this.solidModsFieldTree = new System.Windows.Forms.TreeView();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label69 = new System.Windows.Forms.Label();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.tileModsLayers = new System.Windows.Forms.CheckedListBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.tileModsY = new System.Windows.Forms.NumericUpDown();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tileModsX = new System.Windows.Forms.NumericUpDown();
+            this.tileModsHeight = new System.Windows.Forms.NumericUpDown();
+            this.tileModsWidth = new System.Windows.Forms.NumericUpDown();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.panel55 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.toolStrip7 = new System.Windows.Forms.ToolStrip();
+            this.tileModsInsertField = new System.Windows.Forms.ToolStripButton();
+            this.tileModsInsertInstance = new System.Windows.Forms.ToolStripButton();
+            this.tileModsDeleteField = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.tileModsMoveUp = new System.Windows.Forms.ToolStripButton();
+            this.tileModsMoveDown = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.tileModsCopy = new System.Windows.Forms.ToolStripButton();
+            this.tileModsPaste = new System.Windows.Forms.ToolStripButton();
+            this.tileModsDuplicate = new System.Windows.Forms.ToolStripButton();
+            this.tileModsFieldTree = new System.Windows.Forms.TreeView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.changeLevelName = new System.Windows.Forms.ToolStripButton();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
@@ -572,6 +623,23 @@ namespace LAZYSHELL
             this.panel17.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.panel27.SuspendLayout();
+            this.panel44.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsWidth)).BeginInit();
+            this.panel41.SuspendLayout();
+            this.toolStrip8.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tileModsY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tileModsX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tileModsHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tileModsWidth)).BeginInit();
+            this.panel10.SuspendLayout();
+            this.toolStrip7.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panelLevels.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -733,7 +801,7 @@ namespace LAZYSHELL
             this.npcMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.npcMoveUp.Name = "npcMoveUp";
             this.npcMoveUp.Size = new System.Drawing.Size(22, 22);
-            this.npcMoveUp.Text = "Move NPC Down";
+            this.npcMoveUp.Text = "Move NPC Up";
             this.npcMoveUp.Click += new System.EventHandler(this.npcMoveUp_Click);
             // 
             // npcMoveDown
@@ -745,7 +813,7 @@ namespace LAZYSHELL
             this.npcMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.npcMoveDown.Name = "npcMoveDown";
             this.npcMoveDown.Size = new System.Drawing.Size(22, 22);
-            this.npcMoveDown.Text = "Move NPC Up";
+            this.npcMoveDown.Text = "Move NPC Down";
             this.npcMoveDown.Click += new System.EventHandler(this.npcMoveDown_Click);
             // 
             // toolStripSeparator7
@@ -1510,7 +1578,7 @@ namespace LAZYSHELL
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Size = new System.Drawing.Size(260, 600);
             this.tabPage10.TabIndex = 4;
-            this.tabPage10.Text = "OVERLAPS";
+            this.tabPage10.Text = "OVERLAP";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -1809,7 +1877,7 @@ namespace LAZYSHELL
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Size = new System.Drawing.Size(260, 600);
             this.tabPage9.TabIndex = 3;
-            this.tabPage9.Text = "FIELDS";
+            this.tabPage9.Text = "FIELD";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // panel2
@@ -2910,6 +2978,7 @@ namespace LAZYSHELL
             this.tabControl.Controls.Add(this.tabPage8);
             this.tabControl.Controls.Add(this.tabPage9);
             this.tabControl.Controls.Add(this.tabPage10);
+            this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Left;
             this.tabControl.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl.ItemSize = new System.Drawing.Size(44, 18);
@@ -4119,7 +4188,7 @@ namespace LAZYSHELL
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(260, 600);
             this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "LAYERS";
+            this.tabPage3.Text = "LAYER";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // panel4
@@ -5453,6 +5522,615 @@ namespace LAZYSHELL
             this.layerMessageBox.TabIndex = 119;
             this.layerMessageBox.SelectedIndexChanged += new System.EventHandler(this.layerMessageBox_SelectedIndexChanged);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.panel27);
+            this.tabPage1.Controls.Add(this.panel8);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(260, 600);
+            this.tabPage1.TabIndex = 5;
+            this.tabPage1.Text = "MODS";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // panel27
+            // 
+            this.panel27.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel27.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel27.Controls.Add(this.label68);
+            this.panel27.Controls.Add(this.panel44);
+            this.panel27.Controls.Add(this.panel45);
+            this.panel27.Controls.Add(this.panel41);
+            this.panel27.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel27.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel27.Location = new System.Drawing.Point(0, 300);
+            this.panel27.Name = "panel27";
+            this.panel27.Size = new System.Drawing.Size(260, 300);
+            this.panel27.TabIndex = 2;
+            // 
+            // label68
+            // 
+            this.label68.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label68.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label68.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label68.ForeColor = System.Drawing.SystemColors.Control;
+            this.label68.Location = new System.Drawing.Point(0, 0);
+            this.label68.Name = "label68";
+            this.label68.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label68.Size = new System.Drawing.Size(256, 17);
+            this.label68.TabIndex = 498;
+            this.label68.Text = "SOLIDITY MAP MODS";
+            this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel44
+            // 
+            this.panel44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel44.Controls.Add(this.label14);
+            this.panel44.Controls.Add(this.solidModsY);
+            this.panel44.Controls.Add(this.label51);
+            this.panel44.Controls.Add(this.solidModsX);
+            this.panel44.Controls.Add(this.solidModsHeight);
+            this.panel44.Controls.Add(this.solidModsWidth);
+            this.panel44.Controls.Add(this.label64);
+            this.panel44.Controls.Add(this.label67);
+            this.panel44.Location = new System.Drawing.Point(127, 45);
+            this.panel44.Name = "panel44";
+            this.panel44.Size = new System.Drawing.Size(129, 251);
+            this.panel44.TabIndex = 495;
+            // 
+            // label14
+            // 
+            this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label14.Location = new System.Drawing.Point(0, 0);
+            this.label14.Name = "label14";
+            this.label14.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label14.Size = new System.Drawing.Size(58, 17);
+            this.label14.TabIndex = 474;
+            this.label14.Text = "X Coord";
+            // 
+            // solidModsY
+            // 
+            this.solidModsY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.solidModsY.Location = new System.Drawing.Point(59, 18);
+            this.solidModsY.Maximum = new decimal(new int[] {
+            127,
+            0,
+            0,
+            0});
+            this.solidModsY.Name = "solidModsY";
+            this.solidModsY.Size = new System.Drawing.Size(70, 17);
+            this.solidModsY.TabIndex = 139;
+            this.solidModsY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.solidModsY.ValueChanged += new System.EventHandler(this.solidModsY_ValueChanged);
+            // 
+            // label51
+            // 
+            this.label51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label51.Location = new System.Drawing.Point(0, 18);
+            this.label51.Name = "label51";
+            this.label51.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label51.Size = new System.Drawing.Size(58, 17);
+            this.label51.TabIndex = 476;
+            this.label51.Text = "Y Coord";
+            // 
+            // solidModsX
+            // 
+            this.solidModsX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.solidModsX.Location = new System.Drawing.Point(59, 0);
+            this.solidModsX.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.solidModsX.Name = "solidModsX";
+            this.solidModsX.Size = new System.Drawing.Size(70, 17);
+            this.solidModsX.TabIndex = 138;
+            this.solidModsX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.solidModsX.ValueChanged += new System.EventHandler(this.solidModsX_ValueChanged);
+            // 
+            // solidModsHeight
+            // 
+            this.solidModsHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.solidModsHeight.Location = new System.Drawing.Point(59, 54);
+            this.solidModsHeight.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.solidModsHeight.Name = "solidModsHeight";
+            this.solidModsHeight.Size = new System.Drawing.Size(70, 17);
+            this.solidModsHeight.TabIndex = 140;
+            this.solidModsHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.solidModsHeight.ValueChanged += new System.EventHandler(this.solidModsHeight_ValueChanged);
+            // 
+            // solidModsWidth
+            // 
+            this.solidModsWidth.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.solidModsWidth.Location = new System.Drawing.Point(59, 36);
+            this.solidModsWidth.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.solidModsWidth.Name = "solidModsWidth";
+            this.solidModsWidth.Size = new System.Drawing.Size(70, 17);
+            this.solidModsWidth.TabIndex = 140;
+            this.solidModsWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.solidModsWidth.ValueChanged += new System.EventHandler(this.solidModsWidth_ValueChanged);
+            // 
+            // label64
+            // 
+            this.label64.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label64.Location = new System.Drawing.Point(0, 36);
+            this.label64.Name = "label64";
+            this.label64.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label64.Size = new System.Drawing.Size(58, 17);
+            this.label64.TabIndex = 487;
+            this.label64.Text = "Width";
+            // 
+            // label67
+            // 
+            this.label67.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label67.Location = new System.Drawing.Point(0, 54);
+            this.label67.Name = "label67";
+            this.label67.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label67.Size = new System.Drawing.Size(58, 17);
+            this.label67.TabIndex = 488;
+            this.label67.Text = "Height";
+            // 
+            // panel45
+            // 
+            this.panel45.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel45.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
+            this.panel45.Location = new System.Drawing.Point(119, 608);
+            this.panel45.Name = "panel45";
+            this.panel45.Size = new System.Drawing.Size(121, 120);
+            this.panel45.TabIndex = 493;
+            // 
+            // panel41
+            // 
+            this.panel41.Controls.Add(this.toolStrip8);
+            this.panel41.Controls.Add(this.solidModsFieldTree);
+            this.panel41.Location = new System.Drawing.Point(0, 19);
+            this.panel41.Name = "panel41";
+            this.panel41.Size = new System.Drawing.Size(256, 277);
+            this.panel41.TabIndex = 497;
+            // 
+            // toolStrip8
+            // 
+            this.toolStrip8.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip8.CanOverflow = false;
+            this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.solidModsInsert,
+            this.solidModsDelete,
+            this.toolStripSeparator13,
+            this.solidModsMoveUp,
+            this.solidModsMoveDown,
+            this.toolStripSeparator14,
+            this.solidModsCopy,
+            this.solidModsPaste,
+            this.solidModsDuplicate});
+            this.toolStrip8.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip8.Name = "toolStrip8";
+            this.toolStrip8.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip8.Size = new System.Drawing.Size(256, 25);
+            this.toolStrip8.TabIndex = 496;
+            this.toolStrip8.Text = "toolStrip8";
+            // 
+            // solidModsInsert
+            // 
+            this.solidModsInsert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsInsert.Image = global::LAZYSHELL.Properties.Resources.new_small;
+            this.solidModsInsert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsInsert.Name = "solidModsInsert";
+            this.solidModsInsert.Size = new System.Drawing.Size(23, 22);
+            this.solidModsInsert.Text = "New Solidity Mod";
+            this.solidModsInsert.Click += new System.EventHandler(this.solidModsInsert_Click);
+            // 
+            // solidModsDelete
+            // 
+            this.solidModsDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.solidModsDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsDelete.Name = "solidModsDelete";
+            this.solidModsDelete.Size = new System.Drawing.Size(23, 22);
+            this.solidModsDelete.Text = "Delete Solidity Mod";
+            this.solidModsDelete.Click += new System.EventHandler(this.solidModsDelete_Click);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(6, 25);
+            // 
+            // solidModsMoveUp
+            // 
+            this.solidModsMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsMoveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
+            this.solidModsMoveUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsMoveUp.Name = "solidModsMoveUp";
+            this.solidModsMoveUp.Size = new System.Drawing.Size(23, 22);
+            this.solidModsMoveUp.Text = "Move Solidity Mod Up";
+            this.solidModsMoveUp.Click += new System.EventHandler(this.solidModsMoveUp_Click);
+            // 
+            // solidModsMoveDown
+            // 
+            this.solidModsMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsMoveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
+            this.solidModsMoveDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsMoveDown.Name = "solidModsMoveDown";
+            this.solidModsMoveDown.Size = new System.Drawing.Size(23, 22);
+            this.solidModsMoveDown.Text = "Move Solidity Mod Down";
+            this.solidModsMoveDown.Click += new System.EventHandler(this.solidModsMoveDown_Click);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
+            // 
+            // solidModsCopy
+            // 
+            this.solidModsCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.solidModsCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsCopy.Name = "solidModsCopy";
+            this.solidModsCopy.Size = new System.Drawing.Size(23, 22);
+            this.solidModsCopy.Text = "Copy Solidity Mod";
+            this.solidModsCopy.Click += new System.EventHandler(this.solidModsCopy_Click);
+            // 
+            // solidModsPaste
+            // 
+            this.solidModsPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsPaste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.solidModsPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsPaste.Name = "solidModsPaste";
+            this.solidModsPaste.Size = new System.Drawing.Size(23, 22);
+            this.solidModsPaste.Text = "Paste Solidity Mod";
+            this.solidModsPaste.Click += new System.EventHandler(this.solidModsPaste_Click);
+            // 
+            // solidModsDuplicate
+            // 
+            this.solidModsDuplicate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsDuplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
+            this.solidModsDuplicate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsDuplicate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsDuplicate.Name = "solidModsDuplicate";
+            this.solidModsDuplicate.Size = new System.Drawing.Size(23, 22);
+            this.solidModsDuplicate.Text = "Duplicate Solidity Mod";
+            this.solidModsDuplicate.Click += new System.EventHandler(this.solidModsDuplicate_Click);
+            // 
+            // solidModsFieldTree
+            // 
+            this.solidModsFieldTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.solidModsFieldTree.HideSelection = false;
+            this.solidModsFieldTree.HotTracking = true;
+            this.solidModsFieldTree.Location = new System.Drawing.Point(0, 26);
+            this.solidModsFieldTree.Name = "solidModsFieldTree";
+            this.solidModsFieldTree.ShowRootLines = false;
+            this.solidModsFieldTree.Size = new System.Drawing.Size(125, 251);
+            this.solidModsFieldTree.TabIndex = 127;
+            this.solidModsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.solidModsFieldTree_AfterSelect);
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel8.Controls.Add(this.label69);
+            this.panel8.Controls.Add(this.panel15);
+            this.panel8.Controls.Add(this.panel55);
+            this.panel8.Controls.Add(this.panel10);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel8.Location = new System.Drawing.Point(0, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(260, 300);
+            this.panel8.TabIndex = 1;
+            // 
+            // label69
+            // 
+            this.label69.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label69.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label69.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label69.ForeColor = System.Drawing.SystemColors.Control;
+            this.label69.Location = new System.Drawing.Point(0, 0);
+            this.label69.Name = "label69";
+            this.label69.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label69.Size = new System.Drawing.Size(256, 17);
+            this.label69.TabIndex = 499;
+            this.label69.Text = "TILEMAP MODS";
+            this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel15
+            // 
+            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel15.Controls.Add(this.tileModsLayers);
+            this.panel15.Controls.Add(this.label26);
+            this.panel15.Controls.Add(this.tileModsY);
+            this.panel15.Controls.Add(this.label27);
+            this.panel15.Controls.Add(this.tileModsX);
+            this.panel15.Controls.Add(this.tileModsHeight);
+            this.panel15.Controls.Add(this.tileModsWidth);
+            this.panel15.Controls.Add(this.label36);
+            this.panel15.Controls.Add(this.label50);
+            this.panel15.Location = new System.Drawing.Point(127, 45);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(129, 251);
+            this.panel15.TabIndex = 495;
+            // 
+            // tileModsLayers
+            // 
+            this.tileModsLayers.BackColor = System.Drawing.SystemColors.Window;
+            this.tileModsLayers.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tileModsLayers.CheckOnClick = true;
+            this.tileModsLayers.ColumnWidth = 60;
+            this.tileModsLayers.Items.AddRange(new object[] {
+            "Layer 1",
+            "Layer 2",
+            "Layer 3",
+            "B0b7"});
+            this.tileModsLayers.Location = new System.Drawing.Point(0, 72);
+            this.tileModsLayers.Name = "tileModsLayers";
+            this.tileModsLayers.Size = new System.Drawing.Size(129, 64);
+            this.tileModsLayers.TabIndex = 489;
+            this.tileModsLayers.SelectedIndexChanged += new System.EventHandler(this.tileModsLayers_SelectedIndexChanged);
+            // 
+            // label26
+            // 
+            this.label26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label26.Location = new System.Drawing.Point(0, 0);
+            this.label26.Name = "label26";
+            this.label26.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label26.Size = new System.Drawing.Size(58, 17);
+            this.label26.TabIndex = 474;
+            this.label26.Text = "X Coord";
+            // 
+            // tileModsY
+            // 
+            this.tileModsY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tileModsY.Location = new System.Drawing.Point(59, 18);
+            this.tileModsY.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.tileModsY.Name = "tileModsY";
+            this.tileModsY.Size = new System.Drawing.Size(70, 17);
+            this.tileModsY.TabIndex = 139;
+            this.tileModsY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tileModsY.ValueChanged += new System.EventHandler(this.tileModsY_ValueChanged);
+            // 
+            // label27
+            // 
+            this.label27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label27.Location = new System.Drawing.Point(0, 18);
+            this.label27.Name = "label27";
+            this.label27.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label27.Size = new System.Drawing.Size(58, 17);
+            this.label27.TabIndex = 476;
+            this.label27.Text = "Y Coord";
+            // 
+            // tileModsX
+            // 
+            this.tileModsX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tileModsX.Location = new System.Drawing.Point(59, 0);
+            this.tileModsX.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.tileModsX.Name = "tileModsX";
+            this.tileModsX.Size = new System.Drawing.Size(70, 17);
+            this.tileModsX.TabIndex = 138;
+            this.tileModsX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tileModsX.ValueChanged += new System.EventHandler(this.tileModsX_ValueChanged);
+            // 
+            // tileModsHeight
+            // 
+            this.tileModsHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tileModsHeight.Location = new System.Drawing.Point(59, 54);
+            this.tileModsHeight.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.tileModsHeight.Name = "tileModsHeight";
+            this.tileModsHeight.Size = new System.Drawing.Size(70, 17);
+            this.tileModsHeight.TabIndex = 140;
+            this.tileModsHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tileModsHeight.ValueChanged += new System.EventHandler(this.tileModsHeight_ValueChanged);
+            // 
+            // tileModsWidth
+            // 
+            this.tileModsWidth.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tileModsWidth.Location = new System.Drawing.Point(59, 36);
+            this.tileModsWidth.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.tileModsWidth.Name = "tileModsWidth";
+            this.tileModsWidth.Size = new System.Drawing.Size(70, 17);
+            this.tileModsWidth.TabIndex = 140;
+            this.tileModsWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tileModsWidth.ValueChanged += new System.EventHandler(this.tileModsWidth_ValueChanged);
+            // 
+            // label36
+            // 
+            this.label36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label36.Location = new System.Drawing.Point(0, 36);
+            this.label36.Name = "label36";
+            this.label36.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label36.Size = new System.Drawing.Size(58, 17);
+            this.label36.TabIndex = 487;
+            this.label36.Text = "Width";
+            // 
+            // label50
+            // 
+            this.label50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label50.Location = new System.Drawing.Point(0, 54);
+            this.label50.Name = "label50";
+            this.label50.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label50.Size = new System.Drawing.Size(58, 17);
+            this.label50.TabIndex = 488;
+            this.label50.Text = "Height";
+            // 
+            // panel55
+            // 
+            this.panel55.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel55.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
+            this.panel55.Location = new System.Drawing.Point(119, 608);
+            this.panel55.Name = "panel55";
+            this.panel55.Size = new System.Drawing.Size(121, 120);
+            this.panel55.TabIndex = 493;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.toolStrip7);
+            this.panel10.Controls.Add(this.tileModsFieldTree);
+            this.panel10.Location = new System.Drawing.Point(0, 19);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(256, 277);
+            this.panel10.TabIndex = 497;
+            // 
+            // toolStrip7
+            // 
+            this.toolStrip7.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip7.CanOverflow = false;
+            this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tileModsInsertField,
+            this.tileModsInsertInstance,
+            this.tileModsDeleteField,
+            this.toolStripSeparator11,
+            this.tileModsMoveUp,
+            this.tileModsMoveDown,
+            this.toolStripSeparator12,
+            this.tileModsCopy,
+            this.tileModsPaste,
+            this.tileModsDuplicate});
+            this.toolStrip7.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip7.Name = "toolStrip7";
+            this.toolStrip7.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip7.Size = new System.Drawing.Size(256, 25);
+            this.toolStrip7.TabIndex = 496;
+            this.toolStrip7.Text = "toolStrip7";
+            // 
+            // tileModsInsertField
+            // 
+            this.tileModsInsertField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tileModsInsertField.Image = global::LAZYSHELL.Properties.Resources.new_small;
+            this.tileModsInsertField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tileModsInsertField.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tileModsInsertField.Name = "tileModsInsertField";
+            this.tileModsInsertField.Size = new System.Drawing.Size(23, 22);
+            this.tileModsInsertField.Text = "New Tilemap Mod";
+            this.tileModsInsertField.Click += new System.EventHandler(this.tileModsInsertField_Click);
+            // 
+            // tileModsInsertInstance
+            // 
+            this.tileModsInsertInstance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tileModsInsertInstance.Image = global::LAZYSHELL.Properties.Resources.newInstance;
+            this.tileModsInsertInstance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tileModsInsertInstance.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tileModsInsertInstance.Name = "tileModsInsertInstance";
+            this.tileModsInsertInstance.Size = new System.Drawing.Size(23, 22);
+            this.tileModsInsertInstance.Text = "New Tilemap Mod Instance";
+            this.tileModsInsertInstance.Click += new System.EventHandler(this.tileModsInsertInstance_Click);
+            // 
+            // tileModsDeleteField
+            // 
+            this.tileModsDeleteField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tileModsDeleteField.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.tileModsDeleteField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tileModsDeleteField.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tileModsDeleteField.Name = "tileModsDeleteField";
+            this.tileModsDeleteField.Size = new System.Drawing.Size(23, 22);
+            this.tileModsDeleteField.Text = "Delete Tilemap Mod";
+            this.tileModsDeleteField.Click += new System.EventHandler(this.tileModsDeleteField_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tileModsMoveUp
+            // 
+            this.tileModsMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tileModsMoveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
+            this.tileModsMoveUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tileModsMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tileModsMoveUp.Name = "tileModsMoveUp";
+            this.tileModsMoveUp.Size = new System.Drawing.Size(23, 22);
+            this.tileModsMoveUp.Text = "Move Tilemap Mod Up";
+            this.tileModsMoveUp.Click += new System.EventHandler(this.tileModsMoveUp_Click);
+            // 
+            // tileModsMoveDown
+            // 
+            this.tileModsMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tileModsMoveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
+            this.tileModsMoveDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tileModsMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tileModsMoveDown.Name = "tileModsMoveDown";
+            this.tileModsMoveDown.Size = new System.Drawing.Size(23, 22);
+            this.tileModsMoveDown.Text = "Move Tilemap Mod Down";
+            this.tileModsMoveDown.Click += new System.EventHandler(this.tileModsMoveDown_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tileModsCopy
+            // 
+            this.tileModsCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tileModsCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.tileModsCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tileModsCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tileModsCopy.Name = "tileModsCopy";
+            this.tileModsCopy.Size = new System.Drawing.Size(23, 22);
+            this.tileModsCopy.Text = "Copy Tilemap Mod";
+            this.tileModsCopy.Click += new System.EventHandler(this.tileModsCopy_Click);
+            // 
+            // tileModsPaste
+            // 
+            this.tileModsPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tileModsPaste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.tileModsPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tileModsPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tileModsPaste.Name = "tileModsPaste";
+            this.tileModsPaste.Size = new System.Drawing.Size(23, 22);
+            this.tileModsPaste.Text = "Paste Tilemap Mod";
+            this.tileModsPaste.Click += new System.EventHandler(this.tileModsPaste_Click);
+            // 
+            // tileModsDuplicate
+            // 
+            this.tileModsDuplicate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tileModsDuplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
+            this.tileModsDuplicate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tileModsDuplicate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tileModsDuplicate.Name = "tileModsDuplicate";
+            this.tileModsDuplicate.Size = new System.Drawing.Size(23, 22);
+            this.tileModsDuplicate.Text = "Duplicate Tilemap Mod";
+            this.tileModsDuplicate.Click += new System.EventHandler(this.tileModsDuplicate_Click);
+            // 
+            // tileModsFieldTree
+            // 
+            this.tileModsFieldTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tileModsFieldTree.HideSelection = false;
+            this.tileModsFieldTree.HotTracking = true;
+            this.tileModsFieldTree.Location = new System.Drawing.Point(0, 26);
+            this.tileModsFieldTree.Name = "tileModsFieldTree";
+            this.tileModsFieldTree.ShowRootLines = false;
+            this.tileModsFieldTree.Size = new System.Drawing.Size(125, 251);
+            this.tileModsFieldTree.TabIndex = 127;
+            this.tileModsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tileModsFieldTree_AfterSelect);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -6111,6 +6789,27 @@ namespace LAZYSHELL
             this.panel17.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.panel27.ResumeLayout(false);
+            this.panel44.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsWidth)).EndInit();
+            this.panel41.ResumeLayout(false);
+            this.panel41.PerformLayout();
+            this.toolStrip8.ResumeLayout(false);
+            this.toolStrip8.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tileModsY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tileModsX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tileModsHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tileModsWidth)).EndInit();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.toolStrip7.ResumeLayout(false);
+            this.toolStrip7.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panelLevels.ResumeLayout(false);
@@ -6522,6 +7221,57 @@ namespace LAZYSHELL
         private ToolStripButton overlapFieldCopy;
         private ToolStripButton overlapFieldPaste;
         private ToolStripButton overlapFieldDuplicate;
+        private TabPage tabPage1;
+        private Panel panel8;
+        private Panel panel10;
+        private TreeView tileModsFieldTree;
+        private ToolStrip toolStrip7;
+        private Panel panel15;
+        private Label label26;
+        private Label label27;
+        private NumericUpDown tileModsX;
+        private Label label36;
+        private Label label50;
+        private Panel panel55;
+        private Panel panel27;
+        private Panel panel41;
+        private TreeView solidModsFieldTree;
+        private ToolStrip toolStrip8;
+        private Panel panel44;
+        private Label label14;
+        private Label label51;
+        private Label label64;
+        private Label label67;
+        private Panel panel45;
+        private Label label68;
+        private Label label69;
+        private NumericUpDown solidModsY;
+        private NumericUpDown solidModsX;
+        private NumericUpDown solidModsHeight;
+        private NumericUpDown solidModsWidth;
+        private CheckedListBox tileModsLayers;
+        private NumericUpDown tileModsY;
+        private NumericUpDown tileModsHeight;
+        private NumericUpDown tileModsWidth;
+        private ToolStripButton solidModsInsert;
+        private ToolStripButton solidModsDelete;
+        private ToolStripButton solidModsCopy;
+        private ToolStripButton solidModsPaste;
+        private ToolStripButton solidModsDuplicate;
+        private ToolStripButton tileModsInsertField;
+        private ToolStripButton tileModsDeleteField;
+        private ToolStripButton tileModsCopy;
+        private ToolStripButton tileModsPaste;
+        private ToolStripButton tileModsDuplicate;
+        private ToolStripButton tileModsInsertInstance;
+        private ToolStripSeparator toolStripSeparator11;
+        private ToolStripButton tileModsMoveUp;
+        private ToolStripButton tileModsMoveDown;
+        private ToolStripSeparator toolStripSeparator12;
+        private ToolStripSeparator toolStripSeparator13;
+        private ToolStripButton solidModsMoveUp;
+        private ToolStripButton solidModsMoveDown;
+        private ToolStripSeparator toolStripSeparator14;
     }
 }
 

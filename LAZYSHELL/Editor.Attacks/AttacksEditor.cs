@@ -11,13 +11,12 @@ namespace LAZYSHELL
 {
     public partial class AttacksEditor : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         public Spells spellsEditor;
         public Attacks attacksEditor;
-        public AttacksEditor(Model model)
+        public AttacksEditor()
         {
-            this.model = model;
             settings.Keystrokes[0x20] = "\x20";
             settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
@@ -26,13 +25,13 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.F2, baseConversion);
             this.toolTip1.InitialDelay = 0;
             // create editors
-            attacksEditor = new Attacks(model);
+            attacksEditor = new Attacks();
             attacksEditor.TopLevel = false;
             attacksEditor.Dock = DockStyle.Left;
             attacksEditor.SetToolTips(toolTip1);
             panel1.Controls.Add(attacksEditor);
             attacksEditor.Visible = true;
-            spellsEditor = new Spells(model);
+            spellsEditor = new Spells();
             spellsEditor.TopLevel = false;
             spellsEditor.Dock = DockStyle.Left;
             spellsEditor.SetToolTips(toolTip1);
@@ -82,21 +81,21 @@ namespace LAZYSHELL
         }
         private void importSpellsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Spells, spellsEditor.Index, "IMPORT SPELLS...", model).ShowDialog();
+            new IOElements((Element[])model.Spells, spellsEditor.Index, "IMPORT SPELLS...").ShowDialog();
             spellsEditor.RefreshSpells();
         }
         private void importAttacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Attacks, attacksEditor.Index, "IMPORT ATTACKS...", model).ShowDialog();
+            new IOElements((Element[])model.Attacks, attacksEditor.Index, "IMPORT ATTACKS...").ShowDialog();
             attacksEditor.RefreshAttacks();
         }
         private void exportSpellsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Spells, spellsEditor.Index, "EXPORT SPELLS...", model).ShowDialog();
+            new IOElements((Element[])model.Spells, spellsEditor.Index, "EXPORT SPELLS...").ShowDialog();
         }
         private void exportAttacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Attacks, attacksEditor.Index, "EXPORT ATTACKS...", model).ShowDialog();
+            new IOElements((Element[])model.Attacks, attacksEditor.Index, "EXPORT ATTACKS...").ShowDialog();
         }
         private void clearSpellsToolStripMenuItem_Click(object sender, EventArgs e)
         {

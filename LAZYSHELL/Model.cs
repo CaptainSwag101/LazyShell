@@ -6,7 +6,6 @@ using System.Windows.Forms; // remove later
 using System.IO;
 using System.Security.Cryptography;
 using LAZYSHELL.ScriptsEditor;
-using LAZYSHELL.Compression;
 using LAZYSHELL.DataStructures;
 using LAZYSHELL.Properties;
 
@@ -37,18 +36,7 @@ namespace LAZYSHELL
         } // If true, show Author Splash screen on load
         private long numBytes = 0;
         private string fileName;
-        private LSCompression LSCompression = null;
-        private LCDecomp lcDecomp;
-        private LCDecomp LCDecomp
-        {
-            get
-            {
-                if (lcDecomp == null)
-                    this.lcDecomp = new LCDecomp(data);
-                return this.lcDecomp;
-            }
-        }
-        private Settings settings;
+        private Settings settings = Settings.Default;
         private NotesDB notes;
         public NotesDB Notes
         {
@@ -58,6 +46,38 @@ namespace LAZYSHELL
         private byte[] dataHash;
         public byte[] DataHash { get { return dataHash; } set { dataHash = value; } }
         private long checkSum = 0;
+        #region Audio
+        private BRRSample[] audioSamples;
+        public BRRSample[] AudioSamples
+        {
+            get
+            {
+                if (this.audioSamples == null)
+                {
+                    audioSamples = new BRRSample[116];
+                    for (int i = 0; i < audioSamples.Length; i++)
+                        audioSamples[i] = new BRRSample(data, i);
+                }
+                return audioSamples;
+            }
+            set { this.audioSamples = value; }
+        }
+        private SPC[] spcs;
+        public SPC[] SPCs
+        {
+            get
+            {
+                if (spcs == null)
+                {
+                    spcs = new SPC[73];
+                    for (int i = 0; i < spcs.Length; i++)
+                        spcs[i] = new SPC(data, i);
+                }
+                return spcs;
+            }
+            set { spcs = value; }
+        }
+        #endregion
         #region Battlefields
         private byte[][] tileSetsBF = new byte[64][];
         public byte[][] TileSetsBF
@@ -436,7 +456,7 @@ namespace LAZYSHELL
         private LevelMap[] levelMaps;
         private PaletteSet[] paletteSets;
         private PrioritySet[] prioritySets;
-        private PhysicalTile[] physicalTiles;
+        private SolidityTile[] physicalTiles;
         private NPCProperties[] npcProperties;
         private NPCSpritePartitions[] npcSpritePartitions;
         private OverlapTileset overlapTileset;
@@ -496,15 +516,15 @@ namespace LAZYSHELL
             }
             set { prioritySets = value; }
         }
-        public PhysicalTile[] PhysicalTiles
+        public SolidityTile[] PhysicalTiles
         {
             get
             {
                 if (physicalTiles == null)
                 {
-                    physicalTiles = new PhysicalTile[1024];
+                    physicalTiles = new SolidityTile[1024];
                     for (int i = 0; i < physicalTiles.Length; i++)
-                        physicalTiles[i] = new PhysicalTile(data, i);
+                        physicalTiles[i] = new SolidityTile(data, i);
                 }
                 return physicalTiles;
             }
@@ -541,7 +561,7 @@ namespace LAZYSHELL
             get
             {
                 if (overlapTileset == null)
-                    overlapTileset = new OverlapTileset(this);
+                    overlapTileset = new OverlapTileset();
                 return overlapTileset;
             }
         }
@@ -555,7 +575,7 @@ namespace LAZYSHELL
             get
             {
                 if (menuGraphicSet == null)
-                    menuGraphicSet = Decompress(0x3E0E69, 0x2000);
+                    menuGraphicSet = Comp.Decompress(data, 0x3E0E69, 0x2000);
                 return menuGraphicSet;
             }
             set { menuGraphicSet = value; }
@@ -565,7 +585,7 @@ namespace LAZYSHELL
             get
             {
                 if (menuTileset == null)
-                    menuTileset = Decompress(0x3E286A, 0x2000);
+                    menuTileset = Comp.Decompress(data, 0x3E286A, 0x2000);
                 return menuTileset;
             }
             set { menuTileset = value; }
@@ -575,7 +595,7 @@ namespace LAZYSHELL
             get
             {
                 if (menuFrame == null)
-                    menuFrame = Decompress(0x3E2607, 0x200);
+                    menuFrame = Comp.Decompress(data, 0x3E2607, 0x200);
                 return menuFrame;
             }
             set { menuFrame = value; }
@@ -611,7 +631,7 @@ namespace LAZYSHELL
                 if (menuBackground == null)
                     menuBackground = Do.PixelsToImage(
                         Do.TilesetToPixels(
-                        new MenuTileset(this, MenuBackgroundPalette.Palette).Tileset, 16, 16, 0, false), 256, 256);
+                        new MenuTileset(MenuBackgroundPalette.Palette).Tileset, 16, 16, 0, false), 256, 256);
                 return menuBackground;
             }
             set { menuBackground = value; }
@@ -1098,7 +1118,7 @@ namespace LAZYSHELL
             get
             {
                 if (titleData == null)
-                    titleData = Decompress(0x3F216F, 0xDA60);
+                    titleData = Comp.Decompress(data, 0x3F216F, 0xDA60);
                 return titleData;
             }
             set { titleData = value; }
@@ -1108,7 +1128,7 @@ namespace LAZYSHELL
             get
             {
                 if (titleTileSet == null)
-                    titleTileSet = new TitleTileset(TitlePalettes, this);
+                    titleTileSet = new TitleTileset(TitlePalettes);
                 return titleTileSet;
             }
             set { titleTileSet = value; }
@@ -1195,7 +1215,7 @@ namespace LAZYSHELL
             get
             {
                 if (worldMapGraphics == null)
-                    worldMapGraphics = Decompress(0x3E2E82, 0x8000);
+                    worldMapGraphics = Comp.Decompress(data, 0x3E2E82, 0x8000);
                 return worldMapGraphics;
             }
             set { worldMapGraphics = value; }
@@ -1205,7 +1225,7 @@ namespace LAZYSHELL
             get
             {
                 if (worldMapPalettes == null)
-                    worldMapPalettes = Decompress(0x3E988D, 0x100);
+                    worldMapPalettes = Comp.Decompress(data, 0x3E988D, 0x100);
                 return worldMapPalettes;
             }
             set { worldMapPalettes = value; }
@@ -1220,7 +1240,7 @@ namespace LAZYSHELL
                     {
                         int pointer = Bits.GetShort(data, i * 2 + 0x3E0014);
                         int offset = 0x3E0000 + pointer + 1;
-                        worldMapTileSets[i] = Decompress(offset, 0x800);
+                        worldMapTileSets[i] = Comp.Decompress(data, offset, 0x800);
                     }
                 }
                 return worldMapTileSets;
@@ -1232,7 +1252,7 @@ namespace LAZYSHELL
             get
             {
                 if (worldMapSprites == null)
-                    worldMapSprites = Decompress(0x3E90A7, 0x400);
+                    worldMapSprites = Comp.Decompress(data, 0x3E90A7, 0x400);
                 return worldMapSprites;
             }
             set { worldMapSprites = value; }
@@ -1242,7 +1262,6 @@ namespace LAZYSHELL
         public Model(Program program)
         {
             this.program = program;
-            this.settings = Settings.Default;
         }
         #region Functions
         #region File Handling
@@ -1505,16 +1524,6 @@ namespace LAZYSHELL
         }
         #endregion
         #region Compression
-        public byte[] Decompress(int offset, int maxSize)
-        {
-            //return LSCompression.Decompress(offset, maxSize);
-            return LCDecomp.Decompress(offset, maxSize);
-        }
-        public int Compress(byte[] source, byte[] dest)
-        {
-            //return LSCompression.Compress(source, dest, 0);
-            return LCDecomp.Compress(source, dest);
-        }
         /// <summary>
         /// Decompresses data to a collection of byte arrays.
         /// </summary>
@@ -1528,7 +1537,7 @@ namespace LAZYSHELL
         public void Decompress(byte[][] arrays, int bankStart, int bankEnd,
             int decompressedSizeA, int decompressedSizeB, string label, int indexB)
         {
-            ProgressBar progressBar = new ProgressBar(this, data, "DECOMPRESSING " + label + "S...", arrays.Length);
+            ProgressBar progressBar = new ProgressBar(data, "DECOMPRESSING " + label + "S...", arrays.Length);
             progressBar.Show();
             int bank = 0;
             for (int i = 0, j = 0; i < arrays.Length; i++)
@@ -1547,9 +1556,9 @@ namespace LAZYSHELL
                 int pointer = Bits.GetShort(data, bank + j);
                 int offset = bank + pointer + 1;
                 if (i < indexB)
-                    arrays[i] = Decompress(offset, decompressedSizeA);
+                    arrays[i] = Comp.Decompress(data, offset, decompressedSizeA);
                 else
-                    arrays[i] = Decompress(offset, decompressedSizeB);
+                    arrays[i] = Comp.Decompress(data, offset, decompressedSizeB);
                 if (arrays[i] == null)
                     arrays[i] = new byte[decompressedSizeA];
                 progressBar.PerformStep("DECOMPRESSING " + label + " #" + i.ToString("d" + arrays.Length.ToString().Length));
@@ -1612,7 +1621,7 @@ namespace LAZYSHELL
                 original[i] = Bits.GetByteArray(data, bank + Bits.GetShort(data, bank + a), size);
             }
             // create a progress bar
-            ProgressBar progressBar = new ProgressBar(this, data, "COMPRESSING " + label + "S", arrays.Length);
+            ProgressBar progressBar = new ProgressBar(data, "COMPRESSING " + label + "S", arrays.Length);
             progressBar.Show();
             // now start compressing the data and storing to ROM
             bank = bankStart;
@@ -1649,13 +1658,13 @@ namespace LAZYSHELL
                     {
                         edit[index] = false;
                         // Compress data
-                        size = Compress(arrays[index], compressed);
+                        size = Comp.Compress(arrays[index], compressed);
                         if (offset + size > bounds) // Do we pass the bounds of this bank?
                         {
                             MessageBox.Show("Could not save all " + label + "S. " +
                                 "Stopped saving at " + label + " #" + index.ToString(),
                                 "LAZY SHELL");
-                            size = Compress(new byte[arrays[index].Length], compressed);
+                            size = Comp.Compress(new byte[arrays[index].Length], compressed);
                         }
                         // Write data to rom
                         Bits.SetByte(data, bank + offset, 1); offset++;
@@ -1668,7 +1677,7 @@ namespace LAZYSHELL
                             MessageBox.Show("Could not save all " + label + "S. " +
                                 "Stopped saving at " + label + " #" + index.ToString(),
                                 "LAZY SHELL");
-                            size = Compress(new byte[arrays[index].Length], compressed);
+                            size = Comp.Compress(new byte[arrays[index].Length], compressed);
                         }
                     }
                     Bits.SetByteArray(data, bank + offset, compressed, 0, size);
@@ -1689,13 +1698,12 @@ namespace LAZYSHELL
         public void LoadAll()
         {
             object dummy;
-            dummy = LSCompression;
-            dummy = LCDecomp;
             dummy = ActionScripts;
             dummy = Animations;
             dummy = Attacks;
             dummy = AttackAnimations;
             dummy = AttackNames;
+            dummy = AudioSamples;
             dummy = BattleDialogues;
             dummy = BattleDialogueTileset;
             dummy = BattleDialogueTilesetImage;
@@ -1773,13 +1781,12 @@ namespace LAZYSHELL
         }
         public void ClearModel()
         {
-            LSCompression = null;
-            lcDecomp = null;
             actionScripts = null;
             animations = null;
             attacks = null;
             attackAnimations = null;
             attackNames = null;
+            audioSamples = null;
             battleDialogues = null;
             battleDialogueTileset = null;
             battleDialogueTilesetImage = null;

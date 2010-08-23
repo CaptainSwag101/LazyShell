@@ -73,15 +73,13 @@ namespace LAZYSHELL
             if (levelsTilemap == null)
             {
                 levelsTilemap = new LevelsTilemap(
-                    this.model, this, this.level,
-                    this.tileMap, this.physicalMap, this.tileSet, this.overlay, this.state,
+                    this, this.level, this.tileMap, this.physicalMap, this.tileSet, this.overlay,
                     this.paletteEditor, this.levelsTileset, this.levelsPhysicalTiles, this.levelsTemplate);
                 levelsTilemap.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
                 levelsTilemap.Reload(
-                  this.model, this, this.level,
-                  this.tileMap, this.physicalMap, this.tileSet, this.overlay, this.state,
+                  this, this.level, this.tileMap, this.physicalMap, this.tileSet, this.overlay,
                   this.paletteEditor, this.levelsTileset, this.levelsPhysicalTiles, this.levelsTemplate);
         }
         private void LoadTilesetEditor()
@@ -96,7 +94,7 @@ namespace LAZYSHELL
         }
         private void LoadPhysicalTileset()
         {
-            levelsPhysicalTiles = new LevelsPhysicalTiles(physicalTiles, solids);
+            levelsPhysicalTiles = new LevelsPhysicalTiles(physicalTiles, solidity);
             levelsPhysicalTiles.FormClosing += new FormClosingEventHandler(editor_FormClosing);
         }
         private void LoadTemplateEditor()

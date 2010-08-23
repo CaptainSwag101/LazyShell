@@ -10,6 +10,7 @@ namespace LAZYSHELL
         static readonly object padlock = new object();
 
         // Initial settings
+        private Solidity solidity; public Solidity Solidity { get { return solidity; } set { solidity = value; } }
         private bool layer1 = true; public bool Layer1 { get { return layer1; } set { layer1 = value; } }
         private bool layer2 = true; public bool Layer2 { get { return layer2; } set { layer2 = value; } }
         private bool layer3 = true; public bool Layer3 { get { return layer3; } set { layer3 = value; } }
@@ -21,6 +22,8 @@ namespace LAZYSHELL
         private bool exits = false; public bool Exits { get { return exits; } set { exits = value; } }
         private bool events = false; public bool Events { get { return events; } set { events = value; } }
         private bool overlaps = false; public bool Overlaps { get { return overlaps; } set { overlaps = value; } }
+        private bool tileMods = false; public bool TileMods { get { return tileMods; } set { tileMods = value; } }
+        private bool solidMods = false; public bool SolidMods { get { return solidMods; } set { solidMods = value; } }
         private bool cartesianGrid = false; public bool CartesianGrid { get { return cartesianGrid; } set { cartesianGrid = value; } }
         private bool isometricGrid = false; public bool IsometricGrid { get { return isometricGrid; } set { isometricGrid = value; } }
         private bool template = false; public bool Template { get { return template; } set { ClearDrawSelectErase(); template = value; } }

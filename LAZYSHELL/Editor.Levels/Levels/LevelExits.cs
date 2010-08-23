@@ -53,7 +53,6 @@ namespace LAZYSHELL
         public void AddNewExit(int index, Point p)
         {
             Exit e = new Exit();
-            e.NullExit();
             e.X = (byte)p.X;
             e.Y = (byte)p.Y;
             if (index < exits.Count)
@@ -178,25 +177,6 @@ namespace LAZYSHELL
 
             private byte width; public byte Width { get { return width; } set { width = value; } }
             private byte face; public byte Face { get { return face; } set { face = value; } }
-
-            public void NullExit()
-            {
-                destination = 0;
-                exitType = 0;
-                x = 0;
-                y = 0;
-                z = 0;
-                height = 0;
-                x_half = false;
-                y_half = false;
-                destX = 0;
-                destY = 0;
-                destZ = 0;
-                destFace = 0;
-                width = 0;
-                face = 0;
-            }
-
             public void InitializeExit(byte[] data, int offset)
             {
                 byte temp = 0;

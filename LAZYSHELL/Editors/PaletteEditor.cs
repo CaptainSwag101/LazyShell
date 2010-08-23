@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -491,11 +492,11 @@ namespace LAZYSHELL
         private void currentRed_ValueChanged(object sender, EventArgs e)
         {
             if (((Control)sender).Name == "currentRed")
-                trackBar1.Value = (int)currentRed.Value;
+                trackBar1.Value = (int)currentRed.Value & 0xF8;
             else if (((Control)sender).Name == "trackBar1")
-                currentRed.Value = trackBar1.Value;
+                currentRed.Value = trackBar1.Value & 0xF8;
             if (updating) return;
-            paletteSet.Reds[currentColor] = (int)currentRed.Value;
+            paletteSet.Reds[currentColor] = (int)currentRed.Value & 0xF8;
             update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
@@ -503,11 +504,11 @@ namespace LAZYSHELL
         private void currentGreen_ValueChanged(object sender, EventArgs e)
         {
             if (((Control)sender).Name == "currentGreen")
-                trackBar2.Value = (int)currentGreen.Value;
+                trackBar2.Value = (int)currentGreen.Value & 0xF8;
             else if (((Control)sender).Name == "trackBar2")
-                currentGreen.Value = trackBar2.Value;
+                currentGreen.Value = trackBar2.Value & 0xF8;
             if (updating) return;
-            paletteSet.Greens[currentColor] = (int)currentRed.Value;
+            paletteSet.Greens[currentColor] = (int)currentGreen.Value & 0xF8;
             update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
@@ -515,11 +516,11 @@ namespace LAZYSHELL
         private void currentBlue_ValueChanged(object sender, EventArgs e)
         {
             if (((Control)sender).Name == "currentBlue")
-                trackBar3.Value = (int)currentBlue.Value;
+                trackBar3.Value = (int)currentBlue.Value & 0xF8;
             else if (((Control)sender).Name == "trackBar3")
-                currentBlue.Value = trackBar3.Value;
+                currentBlue.Value = trackBar3.Value & 0xF8;
             if (updating) return;
-            paletteSet.Blues[currentColor] = (int)currentRed.Value;
+            paletteSet.Blues[currentColor] = (int)currentBlue.Value & 0xF8;
             update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
@@ -573,9 +574,9 @@ namespace LAZYSHELL
         {
             if (updating) return;
             if (currentHTML.Text.Length != 6) return;
-            paletteSet.Reds[currentColor] = Int32.Parse(currentHTML.Text.Substring(0, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
-            paletteSet.Greens[currentColor] = Int32.Parse(currentHTML.Text.Substring(2, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
-            paletteSet.Blues[currentColor] = Int32.Parse(currentHTML.Text.Substring(4, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
+            paletteSet.Reds[currentColor] = Int32.Parse(currentHTML.Text.Substring(0, 2), NumberStyles.AllowHexSpecifier);
+            paletteSet.Greens[currentColor] = Int32.Parse(currentHTML.Text.Substring(2, 2), NumberStyles.AllowHexSpecifier);
+            paletteSet.Blues[currentColor] = Int32.Parse(currentHTML.Text.Substring(4, 2), NumberStyles.AllowHexSpecifier);
             update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();

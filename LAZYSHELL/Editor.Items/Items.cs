@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class Items : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Item[] items { get { return model.Items; } set { model.Items = value; } }
@@ -23,9 +23,10 @@ namespace LAZYSHELL
         private Bitmap descriptionText;
         private MenuDescriptionPreview menuDescPreview = new MenuDescriptionPreview();
         private TextHelperReduced textHelper = TextHelperReduced.Instance;
-        public Items(Model model)
+        private Shops shopsEditor;
+        public Items(Shops shopsEditor)
         {
-            this.model = model;
+            this.shopsEditor = shopsEditor;
             this.settings.KeystrokesMenu[0x20] = "\x20";
             this.settings.KeystrokesDesc[0x20] = "\x20";
             InitializeComponent();
@@ -478,6 +479,7 @@ namespace LAZYSHELL
                 this.itemName.Items.Clear();
                 this.itemName.Items.AddRange(model.ItemNames.GetNames());
                 this.itemName.SelectedIndex = model.ItemNames.GetIndexFromNum(item.Index);
+                shopsEditor.ResortStrings();
             }
         }
         private void itemNameIcon_SelectedIndexChanged(object sender, EventArgs e)

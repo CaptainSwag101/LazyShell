@@ -18,20 +18,18 @@ namespace LAZYSHELL
 {
     public partial class IOElements : Form
     {
-        private Settings settings;
+        private Model model = State.Instance.Model;
+        private Settings settings = Settings.Default;
         private object element;
         private int currentIndex;
         private string fullPath;
         private Type type;
-        private Model model;
 
-        public IOElements(object element, int currentIndex, string title, Model model)
+        public IOElements(object element, int currentIndex, string title)
         {
-            this.settings = Settings.Default;
             this.element = element;
             this.currentIndex = currentIndex;
             this.type = element.GetType();
-            this.model = model;
 
             this.TopLevel = true;
 
@@ -71,12 +69,27 @@ namespace LAZYSHELL
         {
             TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
             string name = this.Text.ToLower().Substring(7, this.Text.Length - 7 - 4);
+            string ext = ".dat";
+            string filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
+            if (name == "sample")
+            {
+                ext = ".wav";
+                filter = "Wav files (*.wav)|*.wav|All files (*.*)|*.*";
+            }
             if (this.Text.Substring(0, 6) == "EXPORT")
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Title = "Select directory to export to";
-                saveFileDialog.Filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
-                saveFileDialog.FileName = name + currentIndex.ToString("d4") + ".dat";
+                saveFileDialog.Filter = filter;
+                try
+                {
+                    saveFileDialog.FileName = name + "." + currentIndex.ToString(
+                        "d" + ((object[])element).Length.ToString().Length) + ext;
+                }
+                catch
+                {
+                    saveFileDialog.FileName = name + "." + currentIndex.ToString("d4") + ext;
+                }
                 saveFileDialog.FilterIndex = 0;
                 saveFileDialog.RestoreDirectory = true;
 
@@ -88,7 +101,7 @@ namespace LAZYSHELL
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.InitialDirectory = settings.LastRomPath;
                 openFileDialog.Title = "Select file to import from";
-                openFileDialog.Filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
+                openFileDialog.Filter = filter;
                 openFileDialog.FilterIndex = 0;
                 openFileDialog.RestoreDirectory = true;
 
@@ -287,6 +300,46 @@ namespace LAZYSHELL
                         battlefields[i].Index = i;
                     }
                 }
+            }
+            #endregion
+            #region Samples
+            if (this.Text == "EXPORT SAMPLES...")
+            {
+                if (radioButtonCurrent.Checked)
+                    Do.Export(BRR.Decode(model.AudioSamples[currentIndex].Sample, 8000),
+                        "sample." + currentIndex.ToString("d3") + ".wav", fullPath);
+                else
+                {
+                    byte[][] samples = new byte[model.AudioSamples.Length][];
+                    int i = 0;
+                    foreach (BRRSample s in model.AudioSamples)
+                        samples[i++] = BRR.Decode(s.Sample, 8000);
+                    Do.Export(samples,
+                        fullPath + "\\" + model.GetFileNameWithoutPath() + " - Samples\\" + "sample",
+                        "SAMPLE", true);
+                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+                return;
+            }
+            if (this.Text == "IMPORT SAMPLES...")
+            {
+                if (radioButtonCurrent.Checked)
+                {
+                    byte[] sample = (byte[])Do.Import(new byte[1], fullPath);
+                    model.AudioSamples[currentIndex].Sample = BRR.Encode(sample);
+                }
+                else
+                {
+                    byte[][] samples = new byte[model.AudioSamples.Length][];
+                    Do.Import(samples, fullPath + "\\" + "sample", "SAMPLE", true);
+                    int i = 0;
+                    foreach (BRRSample sample in model.AudioSamples)
+                        sample.Sample = BRR.Encode(samples[i++]);
+                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+                return;
             }
             #endregion
             #region Other

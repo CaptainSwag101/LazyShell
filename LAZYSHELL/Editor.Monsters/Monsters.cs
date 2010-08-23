@@ -14,7 +14,7 @@ namespace LAZYSHELL
     {
         #region Variables
         private bool updatingMonsters = false;
-        private Model model;
+        private Model model = State.Instance.Model;
         private Monster[] monsters { get { return model.Monsters; } set { model.Monsters = value; } }
         private Monster monster { get { return monsters[index]; } set { monsters[index] = value; } }
         private FontCharacter[] fontDialogue { get { return model.FontDialogue; } }
@@ -35,9 +35,8 @@ namespace LAZYSHELL
         private TextHelper textHelper = TextHelper.Instance;
         #endregion
         #region Functions
-        public Monsters(Model model)
+        public Monsters()
         {
-            this.model = model;
             settings.Keystrokes[0x20] = "\x20";
             settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
@@ -695,12 +694,12 @@ namespace LAZYSHELL
         }
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements(monsters, index, "IMPORT MONSTERS...", model).ShowDialog();
+            new IOElements(monsters, index, "IMPORT MONSTERS...").ShowDialog();
             RefreshMonsterTab();
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements(monsters, index, "EXPORT MONSTERS...", model).ShowDialog();
+            new IOElements(monsters, index, "EXPORT MONSTERS...").ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {

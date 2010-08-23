@@ -11,13 +11,10 @@ namespace LAZYSHELL
 {
     public partial class SpaceAnalyzer : Form
     {
-        Model model;
-        public SpaceAnalyzer(Model model)
+        Model model = State.Instance.Model;
+        public SpaceAnalyzer()
         {
-            this.model = model;
-
             InitializeComponent();
-
             Initialize();
         }
         private void Initialize()
@@ -27,7 +24,7 @@ namespace LAZYSHELL
 
         private void InitTileMaps()
         {
-            ProgressBar pBar = new ProgressBar(this.model, model.Data, "CALCULATING...", 428);
+            ProgressBar pBar = new ProgressBar(model.Data, "CALCULATING...", 428);
             pBar.Show();
 
             int bank, index, size, bankIndex;
@@ -42,7 +39,7 @@ namespace LAZYSHELL
 
             for (; index < 109; index++, bankIndex++)
             {
-                size = model.Compress(model.TileMaps[index], null);
+                size = Comp.Compress(model.TileMaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -69,7 +66,7 @@ namespace LAZYSHELL
 
             for (; index < 163; index++, bankIndex++)
             {
-                size = model.Compress(model.TileMaps[index], null);
+                size = Comp.Compress(model.TileMaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -96,7 +93,7 @@ namespace LAZYSHELL
 
             for (; index < 219; index++, bankIndex++)
             {
-                size = model.Compress(model.TileMaps[index], null);
+                size = Comp.Compress(model.TileMaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -123,7 +120,7 @@ namespace LAZYSHELL
 
             for (; index < 275; index++, bankIndex++)
             {
-                size = model.Compress(model.TileMaps[index], null);
+                size = Comp.Compress(model.TileMaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -150,7 +147,7 @@ namespace LAZYSHELL
 
             for (; index < 309; index++, bankIndex++)
             {
-                size = model.Compress(model.TileMaps[index], null);
+                size = Comp.Compress(model.TileMaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -179,7 +176,7 @@ namespace LAZYSHELL
 
             for (; index < 80; index++, bankIndex++)
             {
-                size = model.Compress(model.PhysicalMaps[index], null);
+                size = Comp.Compress(model.PhysicalMaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -206,7 +203,7 @@ namespace LAZYSHELL
 
             for (; index < 120; index++, bankIndex++)
             {
-                size = model.Compress(model.PhysicalMaps[index], null);
+                size = Comp.Compress(model.PhysicalMaps[index], null);
                 if (offset + size > 0x7FFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -344,13 +341,13 @@ namespace LAZYSHELL
 
             protected override void OnDrawItem(DrawItemEventArgs e)
             {
+                if (this.Items.Count == 0) return;
                 NewListBoxItem i = (NewListBoxItem)this.Items[e.Index];
                 Color col = i.GetBgColor();
                 //Draw the background
                 e.Graphics.FillRectangle(new SolidBrush(col), e.Bounds);
                 //Draw the text
-                Font ft = new Font(e.Font, FontStyle.Regular);
-                e.Graphics.DrawString(Items[e.Index].ToString(), ft, new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
+                e.Graphics.DrawString(Items[e.Index].ToString(), this.Font, new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
                 //Draw the focus rectangle
                 e.DrawFocusRectangle();
             }

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Media;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
@@ -1856,8 +1857,23 @@ namespace LAZYSHELL
             {
                 for (int x = region.X, x_ = 0; x < region.X + region.Width; x++, x_++)
                 {
+                    if (y < 0 || x < 0) continue;
                     if (y * dstWidth + x >= dst.Length) continue;
                     if (y_ * region.Width + x_ >= src.Length) continue;
+                    dst[y * dstWidth + x] = src[y_ * region.Width + x_];
+                }
+            }
+        }
+        public static void PixelsToPixels(int[] src, int[] dst, int dstWidth, Rectangle region, bool drawAsTransparent)
+        {
+            for (int y = region.Y, y_ = 0; y < region.Y + region.Height; y++, y_++)
+            {
+                for (int x = region.X, x_ = 0; x < region.X + region.Width; x++, x_++)
+                {
+                    if (y < 0 || x < 0) continue;
+                    if (y * dstWidth + x >= dst.Length) continue;
+                    if (y_ * region.Width + x_ >= src.Length) continue;
+                    if (src[y_ * region.Width + x_] == 0 && drawAsTransparent) continue;
                     dst[y * dstWidth + x] = src[y_ * region.Width + x_];
                 }
             }
@@ -2905,6 +2921,13 @@ namespace LAZYSHELL
                 if (!Compare(tileA.Subtiles[i], tileB.Subtiles[i]))
                     return false;
             return true;
+        }
+        public static void Play(SoundPlayer soundPlayer, byte[] wav, int rate)
+        {
+            if (wav == null) return;
+            Stream s = new MemoryStream(wav);
+            soundPlayer.Stream = s;
+            soundPlayer.Play();
         }
         #endregion
         #region Math Functions

@@ -22,9 +22,9 @@ namespace LAZYSHELL
         // main
         private delegate void Function();
         private byte[] data;
-        private Model model; public Model Model { get { return model; } }
-        private State state;
-        private Settings settings;
+        private Model model = State.Instance.Model;
+        private State state = State.Instance;
+        private Settings settings = Settings.Default;
         private Overlay overlay;
         private bool updating = false;
         private Sprite[] sprites;
@@ -66,23 +66,21 @@ namespace LAZYSHELL
         public SpriteSequences Sequences { get { return sequences; } set { sequences = value; } }
         private PaletteEditor paletteEditor;
         private GraphicEditor graphicEditor;
+        private Search searchWindow;
         // special controls
         #endregion
         #region Methods
         // main
-        public Sprites(Model model)
+        public Sprites()
         {
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, enableHelpTips);
             Do.AddShortcut(toolStrip3, Keys.F2, showDecHex);
             toolTip1.InitialDelay = 0;
-            new Search(number, nameTextBox, searchEffectNames, name.Items);
+            searchWindow = new Search(number, nameTextBox, searchEffectNames, name.Items);
             // set data
-            this.model = model;
             this.data = model.Data;
-            this.state = State.Instance;
-            this.settings = Settings.Default;
             this.sprites = model.Sprites;
             this.animations = model.Animations;
             this.palettes = model.SpritePalettes;
@@ -365,17 +363,15 @@ namespace LAZYSHELL
                 model.SpritePalettes = null;
                 model.Animations = null;
                 model.GraphicPalettes = null;
-                return;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
-            if (paletteEditor != null && paletteEditor.Visible)
-                paletteEditor.Close();
-            if (graphicEditor != null && graphicEditor.Visible)
-                graphicEditor.Close();
+            paletteEditor.Close();
+            graphicEditor.Close();
+            searchWindow.Close();
         }
         private void number_ValueChanged(object sender, EventArgs e)
         {
@@ -506,12 +502,12 @@ namespace LAZYSHELL
         }
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements(animations, index, "IMPORT SPRITE ANIMATIONS...", model).ShowDialog();
+            new IOElements(animations, index, "IMPORT SPRITE ANIMATIONS...").ShowDialog();
             RefreshSpritesEditor();
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements(animations, index, "EXPORT SPRITE ANIMATIONS...", model).ShowDialog();
+            new IOElements(animations, index, "EXPORT SPRITE ANIMATIONS...").ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {
@@ -605,6 +601,5 @@ namespace LAZYSHELL
                 progressBar.Close();
         }
         #endregion
-
     }
 }

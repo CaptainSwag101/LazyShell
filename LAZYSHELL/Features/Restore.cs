@@ -12,18 +12,14 @@ namespace LAZYSHELL
 {
     public partial class ImportElements : Form
     {
-        Model model;
-        Settings settings;
-        byte[] data;
-        string fileName;
+        private Model model = State.Instance.Model;
+        private Settings settings = Settings.Default;
+        private byte[] data;
+        private string fileName;
 
-        public ImportElements(Model model)
+        public ImportElements()
         {
-            this.model = model;
-            this.settings = Settings.Default;
-
             InitializeComponent();
-
             elements.ExpandAll();
         }
 

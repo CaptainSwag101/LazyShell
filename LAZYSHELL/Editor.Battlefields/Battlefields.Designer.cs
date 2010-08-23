@@ -278,7 +278,7 @@
             this.battlefieldName.ForeColor = System.Drawing.SystemColors.Control;
             this.battlefieldName.IntegralHeight = false;
             this.battlefieldName.Name = "battlefieldName";
-            this.battlefieldName.Size = new System.Drawing.Size(175, 25);
+            this.battlefieldName.Size = new System.Drawing.Size(275, 25);
             this.battlefieldName.SelectedIndexChanged += new System.EventHandler(this.battlefieldName_SelectedIndexChanged);
             // 
             // battlefieldPaletteSetNum

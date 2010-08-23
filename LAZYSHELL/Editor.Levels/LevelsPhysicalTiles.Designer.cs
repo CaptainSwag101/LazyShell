@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel97 = new System.Windows.Forms.Panel();
             this.panel91 = new System.Windows.Forms.Panel();
             this.panel105 = new System.Windows.Forms.Panel();
             this.physicalTileDoorFormat = new System.Windows.Forms.ComboBox();
@@ -57,13 +55,12 @@
             this.label72 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
             this.physicalTilePriority3 = new System.Windows.Forms.CheckedListBox();
-            this.label94 = new System.Windows.Forms.Label();
-            this.physicalTileSearchButton = new System.Windows.Forms.Button();
-            this.physicalTileNum = new System.Windows.Forms.NumericUpDown();
             this.panelPhysicalTile = new System.Windows.Forms.Panel();
             this.pictureBoxPhysicalTile = new System.Windows.Forms.PictureBox();
-            this.panel3.SuspendLayout();
-            this.panel97.SuspendLayout();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.physicalTileNum = new LAZYSHELL.ToolStripNumericUpDown();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.physicalTileSearchButton = new System.Windows.Forms.ToolStripButton();
             this.panel91.SuspendLayout();
             this.panel105.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.physicalTileBaseHeight)).BeginInit();
@@ -73,35 +70,15 @@
             this.panel55.SuspendLayout();
             this.panel54.SuspendLayout();
             this.panel44.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.physicalTileNum)).BeginInit();
             this.panelPhysicalTile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhysicalTile)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.panel97);
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(226, 497);
-            this.panel3.TabIndex = 441;
-            // 
-            // panel97
-            // 
-            this.panel97.Controls.Add(this.panel91);
-            this.panel97.Controls.Add(this.label94);
-            this.panel97.Controls.Add(this.physicalTileSearchButton);
-            this.panel97.Controls.Add(this.physicalTileNum);
-            this.panel97.Location = new System.Drawing.Point(0, 0);
-            this.panel97.Name = "panel97";
-            this.panel97.Size = new System.Drawing.Size(222, 493);
-            this.panel97.TabIndex = 441;
             // 
             // panel91
             // 
             this.panel91.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel91.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel91.Controls.Add(this.panel105);
             this.panel91.Controls.Add(this.label93);
             this.panel91.Controls.Add(this.physicalTileUnknownBits);
@@ -124,9 +101,10 @@
             this.panel91.Controls.Add(this.label72);
             this.panel91.Controls.Add(this.label73);
             this.panel91.Controls.Add(this.physicalTilePriority3);
-            this.panel91.Location = new System.Drawing.Point(0, 38);
+            this.panel91.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel91.Location = new System.Drawing.Point(0, 25);
             this.panel91.Name = "panel91";
-            this.panel91.Size = new System.Drawing.Size(222, 455);
+            this.panel91.Size = new System.Drawing.Size(226, 459);
             this.panel91.TabIndex = 496;
             // 
             // panel105
@@ -158,7 +136,6 @@
             // 
             // label93
             // 
-            this.label93.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label93.BackColor = System.Drawing.SystemColors.Control;
             this.label93.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label93.ForeColor = System.Drawing.SystemColors.ControlDark;
@@ -167,7 +144,7 @@
             this.label93.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label93.Size = new System.Drawing.Size(222, 17);
             this.label93.TabIndex = 361;
-            this.label93.Text = "PHYSICAL TILE PROPETIES";
+            this.label93.Text = "PHYSICAL TILE PROPERTIES";
             this.label93.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // physicalTileUnknownBits
@@ -191,7 +168,6 @@
             // 
             // physicalTileBaseHeight
             // 
-            this.physicalTileBaseHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.physicalTileBaseHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.physicalTileBaseHeight.Enabled = false;
             this.physicalTileBaseHeight.Location = new System.Drawing.Point(136, 19);
@@ -208,7 +184,6 @@
             // 
             // physicalTileOverZCoord
             // 
-            this.physicalTileOverZCoord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.physicalTileOverZCoord.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.physicalTileOverZCoord.Enabled = false;
             this.physicalTileOverZCoord.Location = new System.Drawing.Point(136, 55);
@@ -225,7 +200,6 @@
             // 
             // physicalTileOverHeight
             // 
-            this.physicalTileOverHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.physicalTileOverHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.physicalTileOverHeight.Enabled = false;
             this.physicalTileOverHeight.Location = new System.Drawing.Point(136, 37);
@@ -242,7 +216,6 @@
             // 
             // label140
             // 
-            this.label140.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label140.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label140.Location = new System.Drawing.Point(0, 438);
             this.label140.Name = "label140";
@@ -253,7 +226,6 @@
             // 
             // label92
             // 
-            this.label92.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label92.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label92.Location = new System.Drawing.Point(0, 387);
             this.label92.Name = "label92";
@@ -264,7 +236,6 @@
             // 
             // physicalTileQuadrant
             // 
-            this.physicalTileQuadrant.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.physicalTileQuadrant.BackColor = System.Drawing.SystemColors.Window;
             this.physicalTileQuadrant.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.physicalTileQuadrant.CheckOnClick = true;
@@ -282,7 +253,6 @@
             // 
             // physicalTileWaterZCoord
             // 
-            this.physicalTileWaterZCoord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.physicalTileWaterZCoord.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.physicalTileWaterZCoord.Enabled = false;
             this.physicalTileWaterZCoord.Location = new System.Drawing.Point(136, 73);
@@ -299,7 +269,6 @@
             // 
             // panel55
             // 
-            this.panel55.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel55.BackColor = System.Drawing.SystemColors.Window;
             this.panel55.Controls.Add(this.physicalTileSpecialTile);
             this.panel55.Location = new System.Drawing.Point(136, 387);
@@ -323,7 +292,6 @@
             // 
             // label90
             // 
-            this.label90.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label90.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label90.Location = new System.Drawing.Point(0, 239);
             this.label90.Name = "label90";
@@ -334,7 +302,6 @@
             // 
             // panel54
             // 
-            this.panel54.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel54.BackColor = System.Drawing.SystemColors.Window;
             this.panel54.Controls.Add(this.physicalTileStairs);
             this.panel54.Location = new System.Drawing.Point(136, 239);
@@ -357,7 +324,6 @@
             // 
             // physicalTileProperties
             // 
-            this.physicalTileProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.physicalTileProperties.BackColor = System.Drawing.SystemColors.Window;
             this.physicalTileProperties.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.physicalTileProperties.CheckOnClick = true;
@@ -376,7 +342,6 @@
             // 
             // label75
             // 
-            this.label75.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label75.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label75.Location = new System.Drawing.Point(0, 156);
             this.label75.Name = "label75";
@@ -387,7 +352,6 @@
             // 
             // panel44
             // 
-            this.panel44.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel44.BackColor = System.Drawing.SystemColors.Window;
             this.panel44.Controls.Add(this.physicalTileConveyor);
             this.panel44.Location = new System.Drawing.Point(136, 156);
@@ -416,7 +380,6 @@
             // 
             // physicalTileEdges
             // 
-            this.physicalTileEdges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.physicalTileEdges.BackColor = System.Drawing.SystemColors.Window;
             this.physicalTileEdges.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.physicalTileEdges.CheckOnClick = true;
@@ -435,7 +398,6 @@
             // 
             // label68
             // 
-            this.label68.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label68.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label68.Location = new System.Drawing.Point(0, 19);
             this.label68.Name = "label68";
@@ -446,7 +408,6 @@
             // 
             // label74
             // 
-            this.label74.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label74.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label74.Location = new System.Drawing.Point(0, 73);
             this.label74.Name = "label74";
@@ -457,7 +418,6 @@
             // 
             // label72
             // 
-            this.label72.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label72.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label72.Location = new System.Drawing.Point(0, 37);
             this.label72.Name = "label72";
@@ -468,7 +428,6 @@
             // 
             // label73
             // 
-            this.label73.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label73.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
             this.label73.Location = new System.Drawing.Point(0, 55);
             this.label73.Name = "label73";
@@ -479,7 +438,6 @@
             // 
             // physicalTilePriority3
             // 
-            this.physicalTilePriority3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.physicalTilePriority3.BackColor = System.Drawing.SystemColors.Window;
             this.physicalTilePriority3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.physicalTilePriority3.CheckOnClick = true;
@@ -496,81 +454,93 @@
             this.physicalTilePriority3.TabIndex = 170;
             this.physicalTilePriority3.SelectedIndexChanged += new System.EventHandler(this.physicalTilePriority3_SelectedIndexChanged);
             // 
-            // label94
-            // 
-            this.label94.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label94.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label94.ForeColor = System.Drawing.SystemColors.Control;
-            this.label94.Location = new System.Drawing.Point(0, 0);
-            this.label94.Name = "label94";
-            this.label94.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label94.Size = new System.Drawing.Size(135, 17);
-            this.label94.TabIndex = 374;
-            this.label94.Text = "PHYSICAL TILE #";
-            this.label94.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // physicalTileSearchButton
-            // 
-            this.physicalTileSearchButton.BackColor = System.Drawing.SystemColors.Window;
-            this.physicalTileSearchButton.FlatAppearance.BorderSize = 0;
-            this.physicalTileSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.physicalTileSearchButton.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.physicalTileSearchButton.Location = new System.Drawing.Point(0, 19);
-            this.physicalTileSearchButton.Name = "physicalTileSearchButton";
-            this.physicalTileSearchButton.Size = new System.Drawing.Size(222, 17);
-            this.physicalTileSearchButton.TabIndex = 172;
-            this.physicalTileSearchButton.Text = "SEARCH FOR PHYSICAL TILE...";
-            this.physicalTileSearchButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.physicalTileSearchButton.UseCompatibleTextRendering = true;
-            this.physicalTileSearchButton.UseVisualStyleBackColor = false;
-            this.physicalTileSearchButton.Click += new System.EventHandler(this.physicalTileSearchButton_Click);
-            // 
-            // physicalTileNum
-            // 
-            this.physicalTileNum.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.physicalTileNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.physicalTileNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.physicalTileNum.ForeColor = System.Drawing.SystemColors.Control;
-            this.physicalTileNum.Location = new System.Drawing.Point(136, 0);
-            this.physicalTileNum.Maximum = new decimal(new int[] {
-            1023,
-            0,
-            0,
-            0});
-            this.physicalTileNum.Name = "physicalTileNum";
-            this.physicalTileNum.Size = new System.Drawing.Size(86, 17);
-            this.physicalTileNum.TabIndex = 160;
-            this.physicalTileNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.physicalTileNum.ValueChanged += new System.EventHandler(this.physicalTileNum_ValueChanged);
-            // 
             // panelPhysicalTile
             // 
             this.panelPhysicalTile.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelPhysicalTile.Controls.Add(this.pictureBoxPhysicalTile);
-            this.panelPhysicalTile.Location = new System.Drawing.Point(227, 0);
+            this.panelPhysicalTile.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelPhysicalTile.Location = new System.Drawing.Point(226, 0);
             this.panelPhysicalTile.Name = "panelPhysicalTile";
-            this.panelPhysicalTile.Size = new System.Drawing.Size(36, 497);
+            this.panelPhysicalTile.Size = new System.Drawing.Size(36, 484);
             this.panelPhysicalTile.TabIndex = 173;
             // 
             // pictureBoxPhysicalTile
             // 
             this.pictureBoxPhysicalTile.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBoxPhysicalTile.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pictureBoxPhysicalTile.Location = new System.Drawing.Point(0, -291);
+            this.pictureBoxPhysicalTile.Location = new System.Drawing.Point(0, -304);
             this.pictureBoxPhysicalTile.Name = "pictureBoxPhysicalTile";
             this.pictureBoxPhysicalTile.Size = new System.Drawing.Size(32, 784);
             this.pictureBoxPhysicalTile.TabIndex = 0;
             this.pictureBoxPhysicalTile.TabStop = false;
             this.pictureBoxPhysicalTile.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxPhysicalTile_Paint);
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.physicalTileNum,
+            this.toolStripSeparator1,
+            this.physicalTileSearchButton});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(226, 25);
+            this.toolStrip1.TabIndex = 442;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // physicalTileNum
+            // 
+            this.physicalTileNum.AutoSize = false;
+            this.physicalTileNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.physicalTileNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.physicalTileNum.ForeColor = System.Drawing.SystemColors.Control;
+            this.physicalTileNum.Hexadecimal = false;
+            this.physicalTileNum.Location = new System.Drawing.Point(7, 1);
+            this.physicalTileNum.Maximum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.physicalTileNum.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.physicalTileNum.Name = "physicalTileNum";
+            this.physicalTileNum.Size = new System.Drawing.Size(70, 22);
+            this.physicalTileNum.Text = "0";
+            this.physicalTileNum.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.physicalTileNum.ValueChanged += new System.EventHandler(this.physicalTileNum_ValueChanged);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // physicalTileSearchButton
+            // 
+            this.physicalTileSearchButton.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.physicalTileSearchButton.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.physicalTileSearchButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.physicalTileSearchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.physicalTileSearchButton.Name = "physicalTileSearchButton";
+            this.physicalTileSearchButton.Size = new System.Drawing.Size(23, 22);
+            this.physicalTileSearchButton.ToolTipText = "Search For Physical Tiles";
+            this.physicalTileSearchButton.Click += new System.EventHandler(this.physicalTileSearchButton_Click);
+            // 
             // LevelsPhysicalTiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(267, 501);
+            this.ClientSize = new System.Drawing.Size(262, 484);
             this.ControlBox = false;
+            this.Controls.Add(this.panel91);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panelPhysicalTile);
-            this.Controls.Add(this.panel3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -578,8 +548,7 @@
             this.Name = "LevelsPhysicalTiles";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.panel3.ResumeLayout(false);
-            this.panel97.ResumeLayout(false);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LevelsPhysicalTiles_FormClosed);
             this.panel91.ResumeLayout(false);
             this.panel105.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.physicalTileBaseHeight)).EndInit();
@@ -589,19 +558,19 @@
             this.panel55.ResumeLayout(false);
             this.panel54.ResumeLayout(false);
             this.panel44.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.physicalTileNum)).EndInit();
             this.panelPhysicalTile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhysicalTile)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panelPhysicalTile;
         private System.Windows.Forms.PictureBox pictureBoxPhysicalTile;
-        private System.Windows.Forms.Panel panel97;
         private System.Windows.Forms.Panel panel91;
         private System.Windows.Forms.Panel panel105;
         private System.Windows.Forms.ComboBox physicalTileDoorFormat;
@@ -629,8 +598,9 @@
         private System.Windows.Forms.Label label72;
         private System.Windows.Forms.Label label73;
         private System.Windows.Forms.CheckedListBox physicalTilePriority3;
-        private System.Windows.Forms.Label label94;
-        private System.Windows.Forms.Button physicalTileSearchButton;
-        private System.Windows.Forms.NumericUpDown physicalTileNum;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton physicalTileSearchButton;
+        private ToolStripNumericUpDown physicalTileNum;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

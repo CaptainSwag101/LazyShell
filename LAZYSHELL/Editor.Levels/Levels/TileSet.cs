@@ -8,7 +8,7 @@ namespace LAZYSHELL
 {
     public class TileSet
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private LevelMap levelMap;
         public PaletteSet paletteSet;
         private State state = State.Instance;
@@ -19,9 +19,8 @@ namespace LAZYSHELL
         Tile16x16[][] tilesetLayers = new Tile16x16[3][];
         public Tile16x16[][] TileSetLayers { get { return tilesetLayers; } set { tilesetLayers = value; } }
 
-        public TileSet(LevelMap levelMap, PaletteSet paletteSet, Model model)
+        public TileSet(LevelMap levelMap, PaletteSet paletteSet)
         {
-            this.model = model; // grab the model
             this.levelMap = levelMap; // grab the current LevelMap
             this.paletteSet = paletteSet; // grab the current Palette Set
 

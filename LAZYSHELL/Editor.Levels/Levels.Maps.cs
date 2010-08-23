@@ -20,7 +20,7 @@ namespace LAZYSHELL
         private TileMap tileMap; public TileMap TileMap { get { return tileMap; } }
         private TileSet tileSet; public TileSet TileSet { get { return tileSet; } }
 
-        private PhysicalMap physicalMap; public PhysicalMap PhysicalMap { get { return physicalMap; } }
+        private LevelSolidMap physicalMap; public LevelSolidMap PhysicalMap { get { return physicalMap; } }
         #endregion
         #region Methods
 
@@ -129,7 +129,7 @@ namespace LAZYSHELL
 
         private void RecompressLevelData()
         {
-            progressBar = new ProgressBar(this.model, model.Data, "COMPRESSING AND SAVING LEVEL DATA...", 890); // + whatever else
+            progressBar = new ProgressBar(model.Data, "COMPRESSING AND SAVING LEVEL DATA...", 890); // + whatever else
             progressBar.Show();
 
             int bank, index, size, bankIndex, temp;
@@ -196,11 +196,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0A Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -211,7 +211,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0A Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -239,11 +239,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0B Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -254,7 +254,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0B Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -282,11 +282,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0C Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -297,7 +297,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0C Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -325,11 +325,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0D Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -340,7 +340,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0D Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -368,11 +368,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0E Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -383,7 +383,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0E Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -411,11 +411,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0F Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -426,7 +426,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x0F Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -454,11 +454,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x10 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -469,7 +469,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x10 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -497,11 +497,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x11 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -512,7 +512,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x11 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -540,11 +540,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x12 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -555,7 +555,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x12 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -583,11 +583,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x13 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -598,7 +598,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x13 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -626,11 +626,11 @@ namespace LAZYSHELL
                     model.EditGraphicSets[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.GraphicSets[index], compressed);
+                    size = Comp.Compress(model.GraphicSets[index], compressed);
                     if (offset + size > 0x5FFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x14 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -641,7 +641,7 @@ namespace LAZYSHELL
                     if (offset + size > 0x5FFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x14 Graphic Sets too large to save \n Stopped saving at Graphic Set " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.GraphicSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.GraphicSets[index].Length], compressed);
                     }
                 }
 
@@ -715,11 +715,11 @@ namespace LAZYSHELL
                     model.EditTileMaps[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.TileMaps[index], compressed);
+                    size = Comp.Compress(model.TileMaps[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x16 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -730,13 +730,13 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x16 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                 }
                 else
                 {
                     // Compress data
-                    size = model.Compress(new byte[0x2000], compressed);
+                    size = Comp.Compress(new byte[0x2000], compressed);
                     //MessageBox.Show("Could not save TileMap " + index.ToString() + " because it is greater than 0x2000 bytes.");
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -767,11 +767,11 @@ namespace LAZYSHELL
                     model.EditTileMaps[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.TileMaps[index], compressed);
+                    size = Comp.Compress(model.TileMaps[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x17 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -782,13 +782,13 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x17 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                 }
                 else
                 {
                     // Compress data
-                    size = model.Compress(new byte[0x2000], compressed);
+                    size = Comp.Compress(new byte[0x2000], compressed);
                     //MessageBox.Show("Could not save TileMap " + index.ToString() + " because it is greater than 0x2000 bytes.");
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -819,11 +819,11 @@ namespace LAZYSHELL
                     model.EditTileMaps[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.TileMaps[index], compressed);
+                    size = Comp.Compress(model.TileMaps[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x18 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -834,13 +834,13 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x18 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                 }
                 else
                 {
                     // Compress data
-                    size = model.Compress(new byte[0x2000], compressed);
+                    size = Comp.Compress(new byte[0x2000], compressed);
                     //MessageBox.Show("Could not save TileMap " + index.ToString() + " because it is greater than 0x2000 bytes.");
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -872,11 +872,11 @@ namespace LAZYSHELL
                     model.EditTileMaps[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.TileMaps[index], compressed);
+                    size = Comp.Compress(model.TileMaps[index], compressed);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x19 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -887,13 +887,13 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x19 TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                 }
                 else
                 {
                     // Compress data
-                    size = model.Compress(new byte[0x2000], compressed);
+                    size = Comp.Compress(new byte[0x2000], compressed);
                     //MessageBox.Show("Could not save TileMap " + index.ToString() + " because it is greater than 0x2000 bytes.");
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -924,11 +924,11 @@ namespace LAZYSHELL
                     model.EditTileMaps[index] = false;
 
                     // Compress data
-                    size = model.Compress(model.TileMaps[index], compressed);
+                    size = Comp.Compress(model.TileMaps[index], compressed);
                     if (offset + size > 0x7FFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x1A TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -939,13 +939,13 @@ namespace LAZYSHELL
                     if (offset + size > 0x7FFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x1A TileMaps too large to save \n Stopped saving at TileMap " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileMaps[index].Length], compressed);
                     }
                 }
                 else
                 {
                     // Compress data
-                    size = model.Compress(new byte[0x2000], compressed);
+                    size = Comp.Compress(new byte[0x2000], compressed);
                     //MessageBox.Show("Could not save TileMap " + index.ToString() + " because it is greater than 0x2000 bytes.");
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -1016,11 +1016,11 @@ namespace LAZYSHELL
                     model.EditPhysicalMaps[index] = false;
 
                     //Compress data
-                    size = model.Compress(model.PhysicalMaps[index], compressed);
+                    size = Comp.Compress(model.PhysicalMaps[index], compressed);
                     if (offset + size > 0xFFFF)
                     {
                         MessageBox.Show("Bank 0x1B Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -1031,13 +1031,13 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x1B Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
                     }
                 }
                 else
                 {
                     // Compress data
-                    size = model.Compress(new byte[0x20C2], compressed);
+                    size = Comp.Compress(new byte[0x20C2], compressed);
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
                 }
@@ -1065,11 +1065,11 @@ namespace LAZYSHELL
                     model.EditPhysicalMaps[index] = false;
 
                     //Compress data
-                    size = model.Compress(model.PhysicalMaps[index], compressed);
+                    size = Comp.Compress(model.PhysicalMaps[index], compressed);
                     if (offset + size > 0x7FFF)
                     {
                         MessageBox.Show("Bank 0x1C Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -1080,13 +1080,13 @@ namespace LAZYSHELL
                     if (offset + size > 0x7FFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x1C Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
                     }
                 }
                 else
                 {
                     // Compress data
-                    size = model.Compress(new byte[0x20C2], compressed);
+                    size = Comp.Compress(new byte[0x20C2], compressed);
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
                 }
@@ -1156,11 +1156,11 @@ namespace LAZYSHELL
                     model.EditTileSets[index] = false;
 
                     //Compress data
-                    size = model.Compress(model.TileSets[index], compressed);
+                    size = Comp.Compress(model.TileSets[index], compressed);
                     if (offset + size > 0xFFFF)
                     {
                         MessageBox.Show("Bank 0x3B Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -1171,7 +1171,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x3B Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                 }
 
@@ -1198,11 +1198,11 @@ namespace LAZYSHELL
                     model.EditTileSets[index] = false;
 
                     //Compress data
-                    size = model.Compress(model.TileSets[index], compressed);
+                    size = Comp.Compress(model.TileSets[index], compressed);
                     if (offset + size > 0xFFFF)
                     {
                         MessageBox.Show("Bank 0x3C Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -1213,7 +1213,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x3C Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                 }
 
@@ -1240,11 +1240,11 @@ namespace LAZYSHELL
                     model.EditTileSets[index] = false;
 
                     //Compress data
-                    size = model.Compress(model.TileSets[index], compressed);
+                    size = Comp.Compress(model.TileSets[index], compressed);
                     if (offset + size > 0xBFFF)
                     {
                         MessageBox.Show("Bank 0x3D Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -1255,7 +1255,7 @@ namespace LAZYSHELL
                     if (offset + size > 0xBFFF) // Do we pass the bounds of this bank?
                     {
                         MessageBox.Show("Bank 0x3D Tilesets too large to save \n Stopped saving at Tileset " + index.ToString(), "LAZY SHELL");
-                        size = model.Compress(new byte[model.TileSets[index].Length], compressed);
+                        size = Comp.Compress(new byte[model.TileSets[index].Length], compressed);
                     }
                 }
 
@@ -1300,10 +1300,18 @@ namespace LAZYSHELL
         }
         private void graphicSetsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            string filename = OpenDialogFile("Select the graphic set to import");
-
-            if (filename == null)
+            string filename;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = settings.LastRomPath;
+            openFileDialog1.Title = "Import graphic set";
+            openFileDialog1.Filter = "Binary files (*.bin)|*.bin|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
+                filename = openFileDialog1.FileName;
+            else
                 return;
+
             string num = filename.Substring(filename.LastIndexOf('.') - 2, 2);
 
             int index = Int32.Parse(num, System.Globalization.NumberStyles.HexNumber);
@@ -1587,9 +1595,8 @@ namespace LAZYSHELL
             if (!updating)
             {
                 fullUpdate = true;
-                physicalMap = new PhysicalMap(levelMap, model, solids);
-                physicalMap.SetIsometric();
-                physicalMap.DrawPhysicalMap();
+                physicalMap = new LevelSolidMap(levelMap);
+                physicalMap.Image = null;
                 LoadTilemapEditor();
             }
         }

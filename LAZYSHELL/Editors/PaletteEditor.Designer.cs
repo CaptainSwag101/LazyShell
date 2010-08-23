@@ -843,9 +843,14 @@
             // currentBlue
             // 
             this.currentBlue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.currentBlue.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
             this.currentBlue.Location = new System.Drawing.Point(18, 36);
             this.currentBlue.Maximum = new decimal(new int[] {
-            255,
+            248,
             0,
             0,
             0});
@@ -858,9 +863,14 @@
             // currentGreen
             // 
             this.currentGreen.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.currentGreen.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
             this.currentGreen.Location = new System.Drawing.Point(18, 18);
             this.currentGreen.Maximum = new decimal(new int[] {
-            255,
+            248,
             0,
             0,
             0});
@@ -893,9 +903,14 @@
             // currentRed
             // 
             this.currentRed.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.currentRed.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
             this.currentRed.Location = new System.Drawing.Point(18, 0);
             this.currentRed.Maximum = new decimal(new int[] {
-            255,
+            248,
             0,
             0,
             0});
@@ -1024,7 +1039,6 @@
             this.trackBar3.TickFrequency = 8;
             this.trackBar3.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar3.ValueChanged += new System.EventHandler(this.currentBlue_ValueChanged);
-            this.trackBar3.Scroll += new System.EventHandler(this.trackBarBrightness_Scroll);
             // 
             // trackBar2
             // 
@@ -1040,7 +1054,6 @@
             this.trackBar2.TickFrequency = 8;
             this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar2.ValueChanged += new System.EventHandler(this.currentGreen_ValueChanged);
-            this.trackBar2.Scroll += new System.EventHandler(this.trackBarBrightness_Scroll);
             // 
             // trackBar1
             // 
@@ -1056,7 +1069,6 @@
             this.trackBar1.TickFrequency = 8;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.ValueChanged += new System.EventHandler(this.currentRed_ValueChanged);
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBarBrightness_Scroll);
             // 
             // label19
             // 

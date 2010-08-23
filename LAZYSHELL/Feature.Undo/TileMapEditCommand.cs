@@ -7,20 +7,19 @@ namespace LAZYSHELL.Undo
 {
     class TileMapEditCommand : Command
     {
-        Levels updater;
-        TileMap tileMap;
-        Point topLeft, bottomRight;
-        State state;
-        int[][] changes = new int[3][];
-        bool allLayers;
-        int layer;
-        bool pasting;
+        private Levels updater;
+        private TileMap tileMap;
+        private Point topLeft, bottomRight;
+        private State state = State.Instance;
+        private int[][] changes = new int[3][];
+        private bool allLayers;
+        private int layer;
+        private bool pasting;
         private bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
         public TileMapEditCommand(Levels updater, TileMap tileMap, int layer, Point topLeft, Point bottomRight, int[][] changes, bool pasting, bool allLayers)
         {
             this.updater = updater;
             this.tileMap = tileMap;
-            this.state = State.Instance;
             this.allLayers = allLayers;
             if (topLeft.Y < bottomRight.Y)
             {
@@ -72,11 +71,11 @@ namespace LAZYSHELL.Undo
                             empty = changes[i][x + y * deltaX] == 0;
                             if (temp != changes[i][x + y * deltaX])
                             {
-                                tileMap.MakeEdit(changes[i][x + y * deltaX], i, tileX, tileY, pasting); // Set the tile to the new tileNum
+                                tileMap.MakeEdit(changes[i][x + y * deltaX], i, tileX, tileY); // Set the tile to the new tileNum
                                 changes[i][x + y * deltaX] = temp; // Replace the change with the old tileNum, so that all we have to do is Execute to undo this command
                             }
                             if (pasting && empty && state.Move)
-                                tileMap.MakeEdit(temp, i, tileX, tileY, pasting);
+                                tileMap.MakeEdit(temp, i, tileX, tileY);
                         }
                     }
                     else
@@ -86,11 +85,11 @@ namespace LAZYSHELL.Undo
                         empty = changes[layer][x + y * deltaX] == 0;
                         if (temp != changes[layer][x + y * deltaX])
                         {
-                            tileMap.MakeEdit(changes[layer][x + y * deltaX], layer, tileX, tileY, pasting); // Set the tile to the new tileNum
+                            tileMap.MakeEdit(changes[layer][x + y * deltaX], layer, tileX, tileY); // Set the tile to the new tileNum
                             changes[layer][x + y * deltaX] = temp; // Replace the change with the old tileNum, so that all we have to do is Execute to undo this command
                         }
                         if (pasting && empty && state.Move)
-                            tileMap.MakeEdit(temp, layer, tileX, tileY, pasting);
+                            tileMap.MakeEdit(temp, layer, tileX, tileY);
                     }
                 }
             }

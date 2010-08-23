@@ -300,7 +300,7 @@
             this.target.IntegralHeight = false;
             this.target.Location = new System.Drawing.Point(-2, -2);
             this.target.Name = "target";
-            this.target.Size = new System.Drawing.Size(125, 21);
+            this.target.Size = new System.Drawing.Size(124, 21);
             this.target.TabIndex = 1;
             this.target.SelectedIndexChanged += new System.EventHandler(this.target_SelectedIndexChanged);
             // 
@@ -341,7 +341,7 @@
             0,
             0});
             this.targetNum.Name = "targetNum";
-            this.targetNum.Size = new System.Drawing.Size(121, 17);
+            this.targetNum.Size = new System.Drawing.Size(120, 17);
             this.targetNum.TabIndex = 52;
             this.targetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.targetNum.ValueChanged += new System.EventHandler(this.targetNum_ValueChanged);
@@ -499,12 +499,14 @@
             // 
             this.doNothingA.Appearance = System.Windows.Forms.Appearance.Button;
             this.doNothingA.BackColor = System.Drawing.SystemColors.Control;
+            this.doNothingA.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.doNothingA.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.doNothingA.Location = new System.Drawing.Point(194, 18);
             this.doNothingA.Name = "doNothingA";
             this.doNothingA.Size = new System.Drawing.Size(62, 18);
             this.doNothingA.TabIndex = 44;
             this.doNothingA.Text = "NOTHING";
+            this.doNothingA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.doNothingA.UseCompatibleTextRendering = true;
             this.doNothingA.UseVisualStyleBackColor = false;
             this.doNothingA.CheckedChanged += new System.EventHandler(this.doNothingA_CheckedChanged);
@@ -513,12 +515,14 @@
             // 
             this.doNothingB.Appearance = System.Windows.Forms.Appearance.Button;
             this.doNothingB.BackColor = System.Drawing.SystemColors.Control;
+            this.doNothingB.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.doNothingB.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.doNothingB.Location = new System.Drawing.Point(194, 36);
             this.doNothingB.Name = "doNothingB";
             this.doNothingB.Size = new System.Drawing.Size(62, 18);
             this.doNothingB.TabIndex = 47;
             this.doNothingB.Text = "NOTHING";
+            this.doNothingB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.doNothingB.UseCompatibleTextRendering = true;
             this.doNothingB.UseVisualStyleBackColor = false;
             this.doNothingB.CheckedChanged += new System.EventHandler(this.doNothingB_CheckedChanged);
@@ -527,12 +531,14 @@
             // 
             this.doNothingC.Appearance = System.Windows.Forms.Appearance.Button;
             this.doNothingC.BackColor = System.Drawing.SystemColors.Control;
+            this.doNothingC.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.doNothingC.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.doNothingC.Location = new System.Drawing.Point(194, 54);
             this.doNothingC.Name = "doNothingC";
             this.doNothingC.Size = new System.Drawing.Size(62, 18);
             this.doNothingC.TabIndex = 50;
             this.doNothingC.Text = "NOTHING";
+            this.doNothingC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.doNothingC.UseCompatibleTextRendering = true;
             this.doNothingC.UseVisualStyleBackColor = false;
             this.doNothingC.CheckedChanged += new System.EventHandler(this.doNothingC_CheckedChanged);
@@ -586,7 +592,7 @@
             0,
             0});
             this.memory.Name = "memory";
-            this.memory.Size = new System.Drawing.Size(121, 17);
+            this.memory.Size = new System.Drawing.Size(120, 17);
             this.memory.TabIndex = 54;
             this.memory.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.memory.Value = new decimal(new int[] {
@@ -606,7 +612,7 @@
             0,
             0});
             this.comparison.Name = "comparison";
-            this.comparison.Size = new System.Drawing.Size(121, 17);
+            this.comparison.Size = new System.Drawing.Size(120, 17);
             this.comparison.TabIndex = 55;
             this.comparison.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.comparison.ValueChanged += new System.EventHandler(this.comparison_ValueChanged);
@@ -630,6 +636,7 @@
             this.panelBits.Controls.Add(this.bit6);
             this.panelBits.Controls.Add(this.bit5);
             this.panelBits.Controls.Add(this.bit1);
+            this.panelBits.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelBits.Location = new System.Drawing.Point(135, 36);
             this.panelBits.Name = "panelBits";
             this.panelBits.Size = new System.Drawing.Size(122, 17);

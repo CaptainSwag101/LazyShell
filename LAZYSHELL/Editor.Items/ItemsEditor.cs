@@ -11,13 +11,12 @@ namespace LAZYSHELL
 {
     public partial class ItemsEditor : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         public Items itemsEditor;
         public Shops shopsEditor;
-        public ItemsEditor(Model model)
+        public ItemsEditor()
         {
-            this.model = model;
             settings.Keystrokes[0x20] = "\x20";
             settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
@@ -26,13 +25,13 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.F2, baseConversion);
             this.toolTip1.InitialDelay = 0;
             // create editors
-            shopsEditor = new Shops(model);
+            shopsEditor = new Shops();
             shopsEditor.TopLevel = false;
             shopsEditor.Dock = DockStyle.Left;
             shopsEditor.SetToolTips(toolTip1);
             panel1.Controls.Add(shopsEditor);
             shopsEditor.Visible = true;
-            itemsEditor = new Items(model);
+            itemsEditor = new Items(shopsEditor);
             itemsEditor.TopLevel = false;
             itemsEditor.Dock = DockStyle.Left;
             itemsEditor.SetToolTips(toolTip1);
@@ -67,7 +66,6 @@ namespace LAZYSHELL
                 model.Items = null;
                 model.Shops = null;
                 model.ItemNames = null;
-                return;
             }
             else if (result == DialogResult.Cancel)
             {
@@ -81,21 +79,21 @@ namespace LAZYSHELL
         }
         private void importItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Items, itemsEditor.Index, "IMPORT ITEMS...", model).ShowDialog();
+            new IOElements((Element[])model.Items, itemsEditor.Index, "IMPORT ITEMS...").ShowDialog();
             itemsEditor.RefreshItems();
         }
         private void importShopsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Shops, shopsEditor.Index, "IMPORT SHOPS...", model).ShowDialog();
+            new IOElements((Element[])model.Shops, shopsEditor.Index, "IMPORT SHOPS...").ShowDialog();
             shopsEditor.RefreshShops();
         }
         private void exportItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Items, itemsEditor.Index, "EXPORT ITEMS...", model).ShowDialog();
+            new IOElements((Element[])model.Items, itemsEditor.Index, "EXPORT ITEMS...").ShowDialog();
         }
         private void exportShopsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Shops, shopsEditor.Index, "EXPORT SHOPS...", model).ShowDialog();
+            new IOElements((Element[])model.Shops, shopsEditor.Index, "EXPORT SHOPS...").ShowDialog();
         }
         private void clearItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {

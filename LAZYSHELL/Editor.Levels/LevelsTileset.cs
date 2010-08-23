@@ -39,12 +39,12 @@ namespace LAZYSHELL
             }
         }
         public PictureBox PictureBox { get { return pictureBox; } set { pictureBox = value; } }
-        private State state;
+        private State state = State.Instance;
         private TileSet tileSet;
         private PaletteSet paletteSet;
         private Bitmap tileSetImage, priority1;
         private Overlay overlay;
-        private TileEditor tileEditor;
+        public TileEditor tileEditor;
         // mouse
         private int zoom = 1;
         private bool mouseEnter = false;
@@ -78,7 +78,6 @@ namespace LAZYSHELL
         {
             this.tileSet = tileSet;
             this.paletteSet = paletteSet;
-            this.state = State.Instance;
             this.overlay = overlay;
             this.update = update;
 
@@ -91,7 +90,6 @@ namespace LAZYSHELL
         {
             this.tileSet = tileSet;
             this.paletteSet = paletteSet;
-            this.state = State.Instance;
             this.overlay = overlay;
             this.update = update;
             LoadTileEditor();
@@ -222,6 +220,7 @@ namespace LAZYSHELL
         public void PasteFinal(CopyBuffer buffer)
         {
             if (buffer == null) return;
+            if (overlay.SelectTS == null) return;
             selection = null;
             int x_ = overlay.SelectTS.X / 16;
             int y_ = overlay.SelectTS.Y / 16;
@@ -235,6 +234,7 @@ namespace LAZYSHELL
             }
             overlay.SelectTS = null;
             tileSet.DrawTileset(tileSet.TileSetLayers[Layer], tileSet.TileSets[Layer]);
+            tileSet.AssembleIntoModel(16, Layer);
             SetTileSetImage();
             update.DynamicInvoke();
         }
@@ -249,6 +249,7 @@ namespace LAZYSHELL
                     tileSet.TileSetLayers[Layer][(y + y_) * 16 + x + x_].Clear();
             }
             tileSet.DrawTileset(tileSet.TileSetLayers[Layer], tileSet.TileSets[Layer]);
+            tileSet.AssembleIntoModel(16, Layer);
             SetTileSetImage();
             update.DynamicInvoke();
         }
@@ -275,9 +276,6 @@ namespace LAZYSHELL
                 Do.FlipVertical(copiedTiles, overlay.SelectTS.Width / 16, overlay.SelectTS.Height / 16);
             buffer.Tiles = copiedTiles;
             PasteFinal(buffer);
-            tileSet.DrawTileset(tileSet.TileSetLayers[Layer], tileSet.TileSets[Layer]);
-            SetTileSetImage();
-            update.DynamicInvoke();
         }
         private void Priority1(bool priority1)
         {
@@ -302,12 +300,15 @@ namespace LAZYSHELL
         #endregion
         #region Event handlers
         // main
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabControl1_Deselecting(object sender, TabControlCancelEventArgs e)
         {
             if (draggedTiles != null)
                 PasteFinal(draggedTiles);
             else
                 overlay.SelectTS = null;
+        }
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
             SetTileSetImage();
         }
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)

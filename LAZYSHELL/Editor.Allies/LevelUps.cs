@@ -11,15 +11,14 @@ namespace LAZYSHELL
 {
     public partial class LevelUps : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Character[] characters { get { return model.Characters; } set { model.Characters = value; } }
         private Character character { get { return characters[index]; } set { characters[index] = value; } }
         private int index { get { return characterName.SelectedIndex; } set { characterName.SelectedIndex = value; } }
-        public LevelUps(Model model)
+        public LevelUps()
         {
-            this.model = model;
             InitializeComponent();
             InitializeStrings();
             index = 0;

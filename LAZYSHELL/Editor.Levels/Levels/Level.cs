@@ -16,6 +16,8 @@ namespace LAZYSHELL
         private LevelExits levelExits;
         private LevelEvents levelEvents;
         private LevelOverlaps levelOverlaps;
+        private LevelTileMods levelTileMods;
+        private LevelSolidMods levelSolidMods;
 
         public int Index { get { return index; } set { index = value; } }
         public int LevelMap { get { return levelMap; } set { levelMap = value; } }
@@ -24,6 +26,8 @@ namespace LAZYSHELL
         public LevelExits LevelExits { get { return levelExits; } set { levelExits = value; } }
         public LevelEvents LevelEvents { get { return levelEvents; } set { levelEvents = value; } }
         public LevelOverlaps LevelOverlaps { get { return levelOverlaps; } set { levelOverlaps = value; } }
+        public LevelTileMods LevelTileMods { get { return levelTileMods; } set { levelTileMods = value; } }
+        public LevelSolidMods LevelSolidMods { get { return levelSolidMods; } set { levelSolidMods = value; } }
 
         public Level(byte[] data, int index)
         {
@@ -37,6 +41,8 @@ namespace LAZYSHELL
             this.levelExits = new LevelExits(data, index);
             this.levelEvents = new LevelEvents(data, index);
             this.levelOverlaps = new LevelOverlaps(data, index);
+            this.levelTileMods = new LevelTileMods(data, index);
+            this.levelSolidMods = new LevelSolidMods(data, index);
         }
         public void Assemble()
         {
@@ -51,6 +57,8 @@ namespace LAZYSHELL
             levelExits.Clear();
             levelNPCs.Clear();
             levelOverlaps.Clear();
+            levelTileMods.Clear();
+            levelSolidMods.Clear();
         }
     }
 }

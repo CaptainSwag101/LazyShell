@@ -54,7 +54,6 @@ namespace LAZYSHELL
         public void AddNewEvent(int index, Point p)
         {
             Event e = new Event();
-            e.NullEvent();
             e.X = (byte)p.X;
             e.Y = (byte)p.Y;
             if (index < events.Count)
@@ -167,16 +166,6 @@ namespace LAZYSHELL
             public Event()
             {
 
-            }
-            public void NullEvent()
-            {
-                runEvent = 0;
-                x = 0;
-                y = 0;
-                fieldCoordZ = 0;
-                fieldHeight = 0;
-                fieldWidth = 0;
-                fieldRadialPosition = 0;
             }
 
             public void InitializeEvent(byte[] data, int offset)

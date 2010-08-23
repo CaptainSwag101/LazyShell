@@ -480,7 +480,7 @@
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(23, 22);
-            this.export.Text = "toolStripButton1";
+            this.export.ToolTipText = "Dump Animation Text";
             this.export.Click += new System.EventHandler(this.export_Click);
             // 
             // toolStripSeparator4

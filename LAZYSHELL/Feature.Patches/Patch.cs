@@ -12,7 +12,7 @@ namespace LAZYSHELL.Patches
     {
         private string patchName, author, creationDate, description, size, extra;
         private Uri patchURI;
-        private Settings settings;
+        private Settings settings = Settings.Default;
 
         private WebClient client = new WebClient();
 
@@ -40,7 +40,6 @@ namespace LAZYSHELL.Patches
         public Patch(int patchNum, byte[] data)
         {
             this.patchNum = patchNum;
-            this.settings = Settings.Default;
             Dissassemble(data);
         }
         private void Dissassemble(byte[] data)

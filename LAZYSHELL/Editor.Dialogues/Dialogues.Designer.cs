@@ -470,7 +470,7 @@
             this.pauseFrameNum.Location = new System.Drawing.Point(87, 1);
             this.pauseFrameNum.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.pauseFrameNum.Maximum = new decimal(new int[] {
-            100,
+            255,
             0,
             0,
             0});

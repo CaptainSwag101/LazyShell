@@ -125,7 +125,6 @@
             this.monsterName = new LAZYSHELL.ToolStripComboBox();
             this.monsterNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.TextBoxMonsterName = new System.Windows.Forms.ToolStripTextBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
@@ -1342,7 +1341,6 @@
             this.monsterName,
             this.monsterNum,
             this.toolStripSeparator3,
-            this.toolStripLabel1,
             this.TextBoxMonsterName});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
@@ -1400,16 +1398,6 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.AutoSize = false;
-            this.toolStripLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripLabel1.Image = global::LAZYSHELL.Properties.Resources.label;
-            this.toolStripLabel1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(22, 22);
-            this.toolStripLabel1.Text = "Monster Name";
             // 
             // TextBoxMonsterName
             // 
@@ -1932,7 +1920,6 @@
         private System.Windows.Forms.ToolStripButton pause60f;
         private ToolStripNumericUpDown monsterNum;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton save;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;

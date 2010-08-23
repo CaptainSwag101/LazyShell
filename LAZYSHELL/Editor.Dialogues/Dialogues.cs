@@ -17,7 +17,7 @@ namespace LAZYSHELL
         #region Variables
         // main
         private delegate void Function(RichTextBox richTextBox);
-        private Model model; public Model Model { get { return model; } }
+        private Model model = State.Instance.Model;
         // accessors
         private Dialogue[] dialogues { get { return model.Dialogues; } set { model.Dialogues = value; } }
         private Dialogue dialogue { get { return dialogues[index]; } set { dialogues[index] = value; } }
@@ -26,7 +26,7 @@ namespace LAZYSHELL
         private PaletteSet fontPalette { get { return model.FontPaletteDialogue; } set { model.FontPaletteDialogue = value; } }
         // public accessors
         public ToolStripNumericUpDown DialogueNum { get { return dialogueNum; } set { dialogueNum = value; } }
-        private State state;
+        private State state = State.Instance;
         private DialoguePreview dialoguePreview;
         private TextHelper textHelper;
         private bool textCodeFormat { get { return !byteOrTextView.Checked; } set { byteOrTextView.Checked = !value; } }
@@ -42,13 +42,11 @@ namespace LAZYSHELL
         public BattleDialogues BattleDialogues { get { return battleDialogues; } set { battleDialogues = value; } }
         private Fonts fonts;
         public Fonts Fonts { get { return fonts; } set { fonts = value; } }
+        private Search searchWindow;
         #endregion
         #region Functions
-        public Dialogues(Model model)
+        public Dialogues()
         {
-            this.model = model;
-            this.state = State.Instance;
-
             Settings.Default.Keystrokes[0x20] = "\x20";
             Settings.Default.KeystrokesMenu[0x20] = "\x20";
             Settings.Default.KeystrokesDesc[0x20] = "\x20";
@@ -61,11 +59,11 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip3, Keys.F2, showDecHex);
             SetToolTips(toolTip1);
-            new Search(dialogueNum, textBoxSearch, search, new Function(LoadSearch), "richTextBox");
+            searchWindow = new Search(dialogueNum, textBoxSearch, search, new Function(LoadSearch), "richTextBox");
             // tileset
             textHelper = TextHelper.Instance;
             dialoguePreview = new DialoguePreview();
-            dialogueTileset = new DialogueTileset(model, model.FontPaletteDialogue);
+            dialogueTileset = new DialogueTileset(model.FontPaletteDialogue);
             SetTilesetImage();
             // editors
             LoadFontEditor();
@@ -417,7 +415,7 @@ namespace LAZYSHELL
         }
         public void RedrawTileset()
         {
-            dialogueTileset = new DialogueTileset(model, fontPalette);
+            dialogueTileset = new DialogueTileset(fontPalette);
             SetTilesetImage();
         }
         public void RedrawText()
@@ -544,17 +542,18 @@ namespace LAZYSHELL
                 model.FontPaletteBattle = null;
                 model.FontPaletteDialogue = null;
                 model.FontPaletteMenu = null;
-                return;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
+            searchWindow.Close();
+            fonts.NewFontTable.Close();
+            battleDialogues.Close();
         }
         private void Dialogues_FormClosed(object sender, FormClosedEventArgs e)
         {
-            fonts.NewFontTable.Close();
         }
         private void panel60_Paint(object sender, PaintEventArgs e)
         {

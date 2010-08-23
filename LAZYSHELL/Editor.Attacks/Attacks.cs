@@ -11,15 +11,14 @@ namespace LAZYSHELL
 {
     public partial class Attacks : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Attack[] attacks { get { return model.Attacks; } set { model.Attacks = value; } }
         private int index { get { return (int)attackNum.Value; } set { attackNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
-        public Attacks(Model model)
+        public Attacks()
         {
-            this.model = model;
             this.settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             InitializeStrings();

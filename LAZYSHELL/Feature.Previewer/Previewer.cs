@@ -13,8 +13,8 @@ namespace LAZYSHELL.Previewer
     public partial class Previewer : Form
     {
         #region Variables
-        private Settings settings;
-        private Model model;
+        private Settings settings = Settings.Default;
+        private Model model = State.Instance.Model;
         private string romPath;
         private string emulatorPath = "INVALID";
         private bool rom = false, emulator = false, savestate = false, eventchoice = false, initializing = false;
@@ -31,10 +31,8 @@ namespace LAZYSHELL.Previewer
         }
         #endregion
         // Constructor
-        public Previewer(Model model, int num, int behaviour)
+        public Previewer(int num, int behaviour)
         {
-            this.model = model;
-            this.settings = Settings.Default;
             this.selectNum = num;
             this.eventTriggers = new ArrayList();
             this.behaviour = behaviour;
@@ -57,10 +55,8 @@ namespace LAZYSHELL.Previewer
                 }
             }
         }
-        public void Reload(Model model, int num, int behaviour)
+        public void Reload(int num, int behaviour)
         {
-            this.model = model;
-            this.settings = Settings.Default;
             this.selectNum = num;
             this.eventTriggers = new ArrayList();
             this.behaviour = behaviour;
@@ -436,21 +432,16 @@ namespace LAZYSHELL.Previewer
             }
 
             FormationPack sfp = model.FormationPacks[0];
-            byte formation1 = sfp.FormationPackForm[0];
-            byte formation2 = sfp.FormationPackForm[0];
-            byte formation3 = sfp.FormationPackForm[0];
-            byte packset = sfp.FormationPackSet;
-            if (formationNum > 255)
-                sfp.FormationPackSet = 1;
-
-            sfp.FormationPackForm[0] = (byte)formationNum;
-            sfp.FormationPackForm[1] = (byte)formationNum;
-            sfp.FormationPackForm[2] = (byte)formationNum;
+            ushort formation1 = sfp.PackFormations[0];
+            ushort formation2 = sfp.PackFormations[0];
+            ushort formation3 = sfp.PackFormations[0];
+            sfp.PackFormations[0] = (ushort)formationNum;
+            sfp.PackFormations[1] = (ushort)formationNum;
+            sfp.PackFormations[2] = (ushort)formationNum;
             sfp.Assemble();
-            sfp.FormationPackForm[0] = formation1;
-            sfp.FormationPackForm[1] = formation2;
-            sfp.FormationPackForm[2] = formation3;
-            sfp.FormationPackSet = packset;
+            sfp.PackFormations[0] = formation1;
+            sfp.PackFormations[1] = formation2;
+            sfp.PackFormations[2] = formation3;
         }
         private void SaveLevelExitEvents()
         {

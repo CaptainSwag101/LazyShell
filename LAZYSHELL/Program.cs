@@ -11,13 +11,14 @@ namespace LAZYSHELL
     public class Program
     {
         private Model model;
-        private Settings settings;
+        private Settings settings = Settings.Default;
         private bool dockEditors;
         public bool DockEditors { get { return dockEditors; } set { dockEditors = value; } }
         #region Editor Windows
         private AlliesEditor allies; public AlliesEditor Allies { get { return allies; } }
         private AnimationScripts animations; public AnimationScripts Animations { get { return animations; } }
         private AttacksEditor attacks; public AttacksEditor Attacks { get { return attacks; } }
+        private Audio audio; public Audio Audio { get { return audio; } }
         private Battlefields battlefields; public Battlefields Battlefields { get { return battlefields; } }
         private BattleScripts battleScripts; public BattleScripts BattleScripts { get { return battleScripts; } }
         private Dialogues dialogues; public Dialogues Dialogues { get { return dialogues; } }
@@ -55,28 +56,14 @@ namespace LAZYSHELL
         [STAThread]
         public static void Main(string[] args)
         {
-            if (IntPtr.Size == 8)
-            {
-                DialogResult result = MessageBox.Show(
-                    "You are attempting to run Lazy Shell under a 64-bit OS. Several portions\n" +
-                    "of this application are incapable of running within a 64-bit environment.\n" +
-                    "Open \"CorFlags.bat\" to run Lazy Shell within a 32-bit environment.\n\n" +
-                    "Continue using this application anyways?",
-                    "LAZY SHELL", MessageBoxButtons.YesNo);
-                if (result == DialogResult.No)
-                {
-                    return;
-                }
-            }
             Program App = new Program();
         }
         // Constructor
         public Program()
         {
             model = new Model(this);
-            settings = Settings.Default;
             State.Instance.Model = model;
-            ProgramController controls = new ProgramController(model, this);
+            ProgramController controls = new ProgramController(this);
             Form1.GuiMain(controls);
         }
         #region File Managing
@@ -194,7 +181,7 @@ namespace LAZYSHELL
             if (allies == null || !allies.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                allies = new AlliesEditor(model);
+                allies = new AlliesEditor();
                 if (dockEditors) Do.AddControl(form1.Panel2, allies);
                 else allies.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -206,7 +193,7 @@ namespace LAZYSHELL
             if (animations == null || !animations.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                animations = new AnimationScripts(model);
+                animations = new AnimationScripts();
                 if (dockEditors) Do.AddControl(form1.Panel2, animations);
                 else animations.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -218,19 +205,31 @@ namespace LAZYSHELL
             if (attacks == null || !attacks.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                attacks = new AttacksEditor(model);
+                attacks = new AttacksEditor();
                 if (dockEditors) Do.AddControl(form1.Panel2, attacks);
                 else attacks.Show();
                 Cursor.Current = Cursors.Arrow;
             }
             attacks.BringToFront();
         }
+        public void CreateAudioWindow()
+        {
+            if (audio == null || !audio.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                audio = new Audio();
+                if (dockEditors) Do.AddControl(form1.Panel2, audio);
+                else audio.Show();
+                Cursor.Current = Cursors.Arrow;
+            }
+            audio.BringToFront();
+        }
         public void CreateBattlefieldsWindow()
         {
             if (battlefields == null || !battlefields.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                battlefields = new Battlefields(model);
+                battlefields = new Battlefields();
                 if (dockEditors) Do.AddControl(form1.Panel2, battlefields);
                 else battlefields.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -242,7 +241,7 @@ namespace LAZYSHELL
             if (battleScripts == null || !battleScripts.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                battleScripts = new BattleScripts(model);
+                battleScripts = new BattleScripts();
                 if (dockEditors) Do.AddControl(form1.Panel2, battleScripts);
                 else battleScripts.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -254,7 +253,7 @@ namespace LAZYSHELL
             if (dialogues == null || !dialogues.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                dialogues = new Dialogues(model);
+                dialogues = new Dialogues();
                 if (dockEditors) Do.AddControl(form1.Panel2, dialogues);
                 else dialogues.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -266,7 +265,7 @@ namespace LAZYSHELL
             if (effects == null || !effects.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                effects = new Effects(model);
+                effects = new Effects();
                 if (dockEditors) Do.AddControl(form1.Panel2, effects);
                 else effects.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -278,7 +277,7 @@ namespace LAZYSHELL
             if (eventScripts == null || !eventScripts.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                eventScripts = new EventScripts(model);
+                eventScripts = new EventScripts();
                 if (dockEditors) Do.AddControl(form1.Panel2, eventScripts);
                 else eventScripts.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -290,7 +289,7 @@ namespace LAZYSHELL
             if (formations == null || !formations.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                formations = new FormationsEditor(model);
+                formations = new FormationsEditor();
                 if (dockEditors) Do.AddControl(form1.Panel2, formations);
                 else formations.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -302,7 +301,7 @@ namespace LAZYSHELL
             if (items == null || !items.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                items = new ItemsEditor(model);
+                items = new ItemsEditor();
                 if (dockEditors) Do.AddControl(form1.Panel2, items);
                 else items.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -314,7 +313,7 @@ namespace LAZYSHELL
             if (levels == null || !levels.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                levels = new Levels(model);
+                levels = new Levels();
                 if (dockEditors) Do.AddControl(form1.Panel2, levels);
                 else levels.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -326,7 +325,7 @@ namespace LAZYSHELL
             if (monsters == null || !monsters.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                monsters = new Monsters(model);
+                monsters = new Monsters();
                 if (dockEditors) Do.AddControl(form1.Panel2, monsters);
                 else monsters.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -338,7 +337,7 @@ namespace LAZYSHELL
             if (mainTitle == null || !mainTitle.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                mainTitle = new Title(model);
+                mainTitle = new Title();
                 if (dockEditors) Do.AddControl(form1.Panel2, mainTitle);
                 else mainTitle.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -350,7 +349,7 @@ namespace LAZYSHELL
             if (sprites == null || !sprites.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                sprites = new Sprites(model);
+                sprites = new Sprites();
                 if (dockEditors) Do.AddControl(form1.Panel2, sprites);
                 else sprites.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -362,7 +361,7 @@ namespace LAZYSHELL
             if (worldMaps == null || !worldMaps.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                worldMaps = new WorldMaps(model);
+                worldMaps = new WorldMaps();
                 if (dockEditors) Do.AddControl(form1.Panel2, worldMaps);
                 else worldMaps.Show();
                 Cursor.Current = Cursors.Arrow;
@@ -387,7 +386,7 @@ namespace LAZYSHELL
             if (patches == null || !patches.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                patches = new GamePatches(model);
+                patches = new GamePatches();
                 patches.Show();
                 patches.StartDownloadingPatches();
                 Cursor.Current = Cursors.Arrow;
@@ -398,7 +397,7 @@ namespace LAZYSHELL
             if (notes == null || !notes.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                notes = new Notes(model);
+                notes = new Notes();
                 notes.Show();
                 Cursor.Current = Cursors.Arrow;
             }
@@ -549,6 +548,8 @@ namespace LAZYSHELL
                 battleScripts.Close();
             if (dialogues != null && dialogues.Visible)
                 dialogues.Close();
+            if (effects != null && effects.Visible)
+                effects.Close();
             if (eventScripts != null && eventScripts.Visible)
                 eventScripts.Close();
             if (formations != null && formations.Visible)
@@ -571,6 +572,7 @@ namespace LAZYSHELL
                 (battlefields != null && battlefields.Visible) ||
                 (battleScripts != null && battleScripts.Visible) ||
                 (dialogues != null && dialogues.Visible) ||
+                (effects != null && effects.Visible) ||
                 (eventScripts != null && eventScripts.Visible) ||
                 (formations != null && formations.Visible) ||
                 (items != null && items.Visible) ||

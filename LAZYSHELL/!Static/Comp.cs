@@ -5,10 +5,8 @@ using System.Runtime.InteropServices;
 
 namespace LAZYSHELL
 {
-    public class LCDecomp
+    public static class Comp
     {
-        private byte[] data;
-
         [DllImport("Lunar Compress.dll")]
         static extern int LunarOpenRAMFile([MarshalAs(UnmanagedType.LPArray)] byte[] data, int fileMode, int size);
         [DllImport("Lunar Compress.dll")]
@@ -18,25 +16,14 @@ namespace LAZYSHELL
         [DllImport("Lunar Compress.dll")]
         static extern int LunarRecompress([MarshalAs(UnmanagedType.LPArray)] byte[] source, [MarshalAs(UnmanagedType.LPArray)] byte[] destination, uint dataSize, uint maxDataSize, uint format, uint format2);
 
-        public LCDecomp(byte[] data)
-        {
-            this.data = data;
-        }
-
-        /*
-         * Returns the size of compressed data
-         * 
-         * Source and Destination can be the same array
-         */
-        public int Compress(byte[] source, byte[] dest)
+        public static int Compress(byte[] source, byte[] dest)
         {
             if(dest == null)
                 return LunarRecompress(source, dest, (uint)source.Length, 0, 3, 3);
             else
                 return LunarRecompress(source, dest, (uint)source.Length, (uint)dest.Length, 3, 3);
         }
-
-        public byte[] Decompress(int offset, int maxSize)
+        public static byte[] Decompress(byte[] data, int offset, int maxSize)
         {
             byte[] source; // Load as RAMFile
             byte[] dest; // Destination for decompressed tilemap

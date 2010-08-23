@@ -15,7 +15,7 @@ namespace LAZYSHELL
     public partial class AnimationScripts : Form
     {
         #region Variables
-        private Model model;
+        private Model model = State.Instance.Model;
         private A_TreeViewWrapper a_treeViewWrapper;
         private AnimationScript[] animationScripts
         {
@@ -59,9 +59,8 @@ namespace LAZYSHELL
         private bool updatingAnimations = false;
         #endregion
         // constructor
-        public AnimationScripts(Model model)
+        public AnimationScripts()
         {
-            this.model = model;
             this.settings.Keystrokes[0x20] = "\x20";
             this.settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();

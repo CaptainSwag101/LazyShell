@@ -7,14 +7,13 @@ namespace LAZYSHELL
 {
     public class DialogueTileset
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private byte[] graphicSet;
         private PaletteSet paletteSet;
         private Tile16x16[] tilesetLayer; public Tile16x16[] TilesetLayer { get { return tilesetLayer; } }
 
-        public DialogueTileset(Model model, PaletteSet paletteSet)
+        public DialogueTileset(PaletteSet paletteSet)
         {
-            this.model = model;
             this.graphicSet = model.DialogueGraphics;
             this.paletteSet = paletteSet;
 

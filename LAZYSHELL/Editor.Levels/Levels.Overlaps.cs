@@ -179,7 +179,7 @@ namespace LAZYSHELL
         private void overlapFieldInsert_Click(object sender, EventArgs e)
         {
             Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
-            Point p = new Point(physicalMap.PixelCoords[o.Y * 1024 + o.X].X + 2, physicalMap.PixelCoords[o.Y * 1024 + o.X].Y + 4);
+            Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeOverlapSpace() >= 4)
             {
                 this.overlapFieldTree.Focus();
@@ -337,6 +337,55 @@ namespace LAZYSHELL
             overlay.DrawSelectionBox(e.Graphics, new Point(x + 32, y + 32), new Point(x, y), 1);
         }
 
+        private void AddNewOverlap(LevelOverlaps.Overlap overlap)
+        {
+            if (CalculateFreeOverlapSpace() >= 4)
+            {
+                this.overlapFieldTree.Focus();
+                if (overlaps.NumberOfOverlaps < 28)
+                {
+                    if (overlapFieldTree.Nodes.Count > 0)
+                        overlaps.AddNewOverlap(overlapFieldTree.SelectedNode.Index + 1, overlap);
+                    else
+                        overlaps.AddNewOverlap(0, overlap);
+
+                    int reselect;
+
+                    if (overlapFieldTree.Nodes.Count > 0)
+                        reselect = overlapFieldTree.SelectedNode.Index;
+                    else
+                        reselect = -1;
+
+                    overlapFieldTree.BeginUpdate();
+                    this.overlapFieldTree.Nodes.Clear();
+
+                    for (int i = 0; i < overlaps.NumberOfOverlaps; i++)
+                        this.overlapFieldTree.Nodes.Add(new TreeNode("OVERLAP #" + i.ToString()));
+
+                    this.overlapFieldTree.SelectedNode = this.overlapFieldTree.Nodes[reselect + 1];
+                    overlapFieldTree.EndUpdate();
+                }
+                else
+                    MessageBox.Show("Could not insert any more overlaps. The maximum number of overlaps allowed is 28.",
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("Could not insert the field. The total number of overlaps for all levels has exceeded the maximum allotted space.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void overlapFieldCopy_Click(object sender, EventArgs e)
+        {
+            if (overlapFieldTree.SelectedNode != null)
+                copyOverlap = overlaps.Overlap_.Copy();
+        }
+        private void overlapFieldPaste_Click(object sender, EventArgs e)
+        {
+            AddNewOverlap((LevelOverlaps.Overlap)copyOverlap);
+        }
+        private void overlapFieldDuplicate_Click(object sender, EventArgs e)
+        {
+            AddNewOverlap(overlaps.Overlap_.Copy());
+        }
         #endregion
     }
 }

@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class SettingsEditor : Form
     {
-        Settings settings = Settings.Default;
+        private Settings settings = Settings.Default;
         public SettingsEditor()
         {
             InitializeComponent();

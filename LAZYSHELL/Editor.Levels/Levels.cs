@@ -19,17 +19,18 @@ namespace LAZYSHELL
     {
         #region Variables
         private int index { get { return (int)levelNum.Value; } }
-        private Model model; public Model Model { get { return this.model; } }
-        private PhysicalTile[] physicalTiles;
-        private State state;
-        private Settings settings;
-        private SolidTilePixels solids = new SolidTilePixels();
+        private Model model = State.Instance.Model;
+        private SolidityTile[] physicalTiles;
+        private State state = State.Instance;
+        private Settings settings = Settings.Default;
+        private Solidity solidity = Solidity.Instance;
         private Level[] levels;
         private Level level { get { return levels[index]; } set { levels[index] = value; } }
+        public Level Level { get { return level; } set { level = value; } }
         public System.Windows.Forms.ToolStripComboBox LevelName { get { return levelName; } set { levelName = value; } }
         private ProgressBar progressBar;
         private Level levelCheck; // Used to verify a level change
-        private Overlay overlay; // Object used to generate all the overlays for levels
+        private Overlay overlay = new Overlay(); // Object used to generate all the overlays for levels
         private bool updating = false; // Indicates that we are currently updating the level so we dont update during an update
         private bool fullUpdate = false; // Indicates that we need to do a complete update instead of a fast update
         private bool updatingProperties = false; // indicated whether to update or save properties
@@ -41,22 +42,19 @@ namespace LAZYSHELL
         private string fullPath; public string FullPath { set { fullPath = value; } }
         public ToolStripNumericUpDown LevelNum { get { return levelNum; } set { levelNum = value; } }
         public TabControl TabControl { get { return tabControl; } set { tabControl = value; } }
+        public ToolStripButton OpenSolidTileset { get { return openSolidTileset; } set { openSolidTileset = value; } }
+        private Search searchWindow;
+        private SpaceAnalyzer sa;
         #endregion
-
-        public Levels(Model model)
+        public Levels()
         {
-            this.model = model;
-            this.state = State.Instance;
-            this.settings = Settings.Default;
-            this.overlay = new Overlay();
-
             settings.Keystrokes[0x20] = "\x20";
 
             InitializeComponent();
             Do.AddShortcut(toolStrip2, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip2, Keys.F1, help);
             Do.AddShortcut(toolStrip2, Keys.F2, baseConversion);
-            new Search(levelNum, nameTextBox, searchLevelNames, levelName.Items);
+            searchWindow = new Search(levelNum, nameTextBox, searchLevelNames, levelName.Items);
 
             SetToolTips();
             new ToolTipLabel(this, toolTip1, baseConversion, help);
@@ -100,9 +98,7 @@ namespace LAZYSHELL
 
             updating = false;
         }
-
         #region Methods
-
         private void InitializeSettings()
         {
             this.levelName.SelectedIndex = 0;
@@ -113,6 +109,8 @@ namespace LAZYSHELL
             InitializeExitFieldProperties();
             InitializeEventFieldProperties();
             InitializeOverlapProperties();
+            InitializeTileModProperties();
+            InitializeSolidModProperties();
 
             overlapTileset = model.OverlapTileset;
 
@@ -145,7 +143,6 @@ namespace LAZYSHELL
             levelsTileset.BringToFront();
             levelsTilemap.BringToFront();
         }
-
         private void SetToolTips()
         {
             // Levels
@@ -1026,7 +1023,6 @@ namespace LAZYSHELL
             //    "each row is a palette, thus 7 rows of palettes.");
             //this.toolTip1.SetToolTip(this.battlefieldPaletteSetName, this.toolTip1.GetToolTip(this.battlefieldPaletteSetNum));
         }
-
         public void RefreshLevel()
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -1037,6 +1033,7 @@ namespace LAZYSHELL
                 {
                     tileSet.RedrawTilesets(levelsTileset.Layer); // Redraw all tilesets
                     tileMap.RedrawTileMap();
+                    tileMods.RedrawTilemaps();
                     LoadTilesetEditor();
                     LoadTilemapEditor();
                     LoadTemplateEditor();
@@ -1050,6 +1047,8 @@ namespace LAZYSHELL
                     InitializeExitFieldProperties();
                     InitializeEventFieldProperties();
                     InitializeOverlapProperties();
+                    InitializeTileModProperties();
+                    InitializeSolidModProperties();
                 }
             }
             catch (Exception ex)
@@ -1064,15 +1063,27 @@ namespace LAZYSHELL
             levelCheck = level;
             levelMap = levelMaps[level.LevelMap];
             paletteSet = paletteSets[levelMaps[level.LevelMap].PaletteSet];
-            tileSet = new TileSet(levelMap, paletteSet, model);
+            tileSet = new TileSet(levelMap, paletteSet);
             layer = level.Layer;
             npcs = level.LevelNPCs;
             exits = level.LevelExits;
             events = level.LevelEvents;
             overlaps = level.LevelOverlaps;
-            tileMap = new TileMap(levelMap, paletteSet, tileSet, layer, prioritySets, model);
-            physicalMap = new PhysicalMap(levelMap, model, solids);
-            physicalMap.SetIsometric();
+            tileMap = new TileMap(level, tileSet);
+            foreach (Level l in levels)
+            {
+                l.LevelTileMods.ClearTilemaps();
+                l.LevelSolidMods.ClearTilemaps();
+            }
+            foreach (LevelTileMods.Mod mod in tileMods.Mods)
+            {
+                mod.TilemapA = new TileMap(level, tileSet, mod, false);
+                if (mod.Set)
+                    mod.TilemapB = new TileMap(level, tileSet, mod, true);
+            }
+            foreach (LevelSolidMods.Mod mod in solidMods.Mods)
+                mod.Pixels = solidity.GetTilemapPixels(mod);
+            physicalMap = new LevelSolidMap(levelMap);
             fullUpdate = false;
 
             // load the individual editors
@@ -1109,50 +1120,15 @@ namespace LAZYSHELL
             overlay.NPCsImage = null;
             overlay.OverlapsImage = null;
         }
-
         private void PreviewLevel()
         {
             if (lp == null || !lp.Visible)
-                lp = new LAZYSHELL.Previewer.Previewer(model, (int)this.levelNum.Value, 1);
+                lp = new LAZYSHELL.Previewer.Previewer((int)this.levelNum.Value, 1);
             else
-                lp.Reload(model, (int)this.levelNum.Value, 1);
+                lp.Reload((int)this.levelNum.Value, 1);
             lp.Show();
             lp.BringToFront();
         }
-        public string OpenDialogFile(string title)
-        {
-            string filename;
-
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.InitialDirectory = settings.LastRomPath;
-            openFileDialog1.Title = "Select the " + title + " to Import";
-            openFileDialog1.Filter = "Binary files (*.bin)|*.bin|All files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 2;
-            openFileDialog1.RestoreDirectory = true;
-
-            if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
-                filename = openFileDialog1.FileName;
-            else
-                filename = null;
-
-            return filename;
-        }
-        private string SelectFile(string title, string filter)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.InitialDirectory = settings.LastRomPath;
-            openFileDialog1.Title = title;
-            openFileDialog1.Filter = filter;
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-
-            if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
-                return openFileDialog1.FileName;
-            return null;
-        }
-
         // assemblers
         public void Assemble()
         {
@@ -1233,6 +1209,13 @@ namespace LAZYSHELL
             if (overlaps.NumberOfOverlaps > 0)
                 overlaps.CurrentOverlap = temp;
 
+            int offset = 0x1D62BD;
+            for (int i = 0; i < 512; i++)
+                levels[i].LevelTileMods.Assemble(ref offset);
+            offset = 0x1D91B0;
+            for (int i = 0; i < 512; i++)
+                levels[i].LevelSolidMods.Assemble(ref offset);
+
             model.Compress(model.GraphicSets, model.EditGraphicSets, 0x0A0000, 0x146000, "GRAPHIC SET",
                 0, 78, 94, 111, 129, 147, 167, 184, 204, 236, 261);
             tileMap.AssembleIntoModel();
@@ -1243,9 +1226,7 @@ namespace LAZYSHELL
             model.Compress(model.TileSets, model.EditTileSets, 0x3B0000, 0x3DC000, "TILE SET",
                 0, 58, 91);
         }
-
         #endregion
-
         #region Event Handlers
 
         private void levelNum_ValueChanged(object sender, EventArgs e)
@@ -1298,12 +1279,12 @@ namespace LAZYSHELL
         private void spaceAnalyzer_Click(object sender, EventArgs e)
         {
             LevelChange();
-            SpaceAnalyzer sa = new SpaceAnalyzer(model);
+            sa = new SpaceAnalyzer();
             sa.Show();
         }
         private void importLevelDataAll_Click(object sender, EventArgs e)
         {
-            IOElements ioElements = new IOElements(this, (int)levelNum.Value, "IMPORT LEVEL DATA...", model);
+            IOElements ioElements = new IOElements(this, (int)levelNum.Value, "IMPORT LEVEL DATA...");
             if (ioElements.ShowDialog() == DialogResult.Cancel)
                 return;
             fullUpdate = true;
@@ -1321,7 +1302,7 @@ namespace LAZYSHELL
         }
         private void exportLevelDataAll_Click(object sender, EventArgs e)
         {
-            new IOElements(this, (int)levelNum.Value, "EXPORT LEVEL DATA...", model).ShowDialog();
+            new IOElements(this, (int)levelNum.Value, "EXPORT LEVEL DATA...").ShowDialog();
         }
         private void exportLevelImagesAll_Click(object sender, EventArgs e)
         {
@@ -1332,9 +1313,7 @@ namespace LAZYSHELL
             if (result != DialogResult.OK) return;
             settings.LastDirectory = folderBrowserDialog.SelectedPath;
             fullPath = folderBrowserDialog.SelectedPath;
-            progressBar = new ProgressBar(
-                this.model, this.model.Data,
-                "SAVING LEVEL IMAGES...", 509, ExportLevelImages);
+            progressBar = new ProgressBar(this.model.Data, "SAVING LEVEL IMAGES...", 509, ExportLevelImages);
             progressBar.Show();
             this.Enabled = false;
             ExportLevelImages.RunWorkerAsync();
@@ -1368,7 +1347,7 @@ namespace LAZYSHELL
             if (new ClearElements(model, (int)mapPhysicalMapNum.Value, "CLEAR PHYSICAL MAPS...").ShowDialog() == DialogResult.Cancel)
                 return;
             fullUpdate = true;
-            physicalMap.DrawPhysicalMap();
+            physicalMap.Image = null;
         }
         private void clearAllComponentsAll_Click(object sender, EventArgs e)
         {
@@ -1417,7 +1396,7 @@ namespace LAZYSHELL
             fullUpdate = true;
             if (!updating)
                 RefreshLevel();
-            physicalMap.DrawPhysicalMap();
+            physicalMap.Image = null;
         }
         private void clearAllComponentsCurrent_Click(object sender, EventArgs e)
         {
@@ -1446,7 +1425,7 @@ namespace LAZYSHELL
             fullUpdate = true;
             if (!updating)
                 RefreshLevel();
-            physicalMap.DrawPhysicalMap();
+            physicalMap.Image = null;
         }
         private void unusedToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1577,7 +1556,7 @@ namespace LAZYSHELL
             for (int i = 0; i < model.PhysicalMaps.Length; i++)
             {
                 CreateDir(fullPath + "Physical Maps\\");
-                fs = new FileStream(fullPath + "Physical Maps\\physicalMap." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
+                fs = new FileStream(fullPath + "Physical Maps\\tilemap." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
                 bw = new BinaryWriter(fs);
                 bw.Write(model.PhysicalMaps[i], 0, model.PhysicalMaps[i].Length);
                 bw.Close();
@@ -1640,9 +1619,9 @@ namespace LAZYSHELL
                 }
                 for (int i = 0; i < model.PhysicalMaps.Length; i++)
                 {
-                    if (!File.Exists(fullPath + "Physical Maps\\physicalMap." + i.ToString("d3") + ".bin"))
+                    if (!File.Exists(fullPath + "Physical Maps\\tilemap." + i.ToString("d3") + ".bin"))
                         continue;
-                    fs = File.OpenRead(fullPath + "Physical Maps\\physicalMap." + i.ToString("d3") + ".bin");
+                    fs = File.OpenRead(fullPath + "Physical Maps\\tilemap." + i.ToString("d3") + ".bin");
                     br = new BinaryReader(fs);
                     model.PhysicalMaps[i] = br.ReadBytes(model.PhysicalMaps[i].Length);
                     br.Close();
@@ -1762,7 +1741,7 @@ namespace LAZYSHELL
         {
             LevelChange();
 
-            SpaceAnalyzer sa = new SpaceAnalyzer(model);
+            SpaceAnalyzer sa = new SpaceAnalyzer();
             sa.Show();
 
         }
@@ -1811,7 +1790,7 @@ namespace LAZYSHELL
         //    {
         //        if (backgroundWorker1.CancellationPending) break;
         //        aPaletteSet = paletteSets[lm.PaletteSet];
-        //        aTileset = new TileSet(lm, aPaletteSet, model);
+        //        aTileset = new TileSet(lm, aPaletteSet);
         //        for (int l = 0; l < 2; l++) // for each layer in the tilesets
         //        {
         //            if (backgroundWorker1.CancellationPending) break;
@@ -1954,17 +1933,21 @@ namespace LAZYSHELL
                 model.TileMaps[0] = null;
                 model.TileSets[0] = null;
                 model.GraphicSets[0] = null;
-                return;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
-            if (paletteEditor != null && paletteEditor.Visible)
-                paletteEditor.Close();
-            if (graphicEditor != null && graphicEditor.Visible)
-                graphicEditor.Close();
+            paletteEditor.Close();
+            graphicEditor.Close();
+            searchWindow.Close();
+            levelsTileset.tileEditor.Close();
+            levelsPhysicalTiles.searchPhysTile.Close();
+            if (lp != null)
+                lp.Close();
+            if (sa != null)
+                sa.Close();
             settings.Save();
         }
         private void Levels_FormClosed(object sender, FormClosedEventArgs e)
@@ -1973,150 +1956,5 @@ namespace LAZYSHELL
         }
 
         #endregion
-
-        private void AddNewExit(LevelExits.Exit exit)
-        {
-            if (CalculateFreeExitSpace() >= 8)
-            {
-                this.exitsFieldTree.Focus();
-                if (exits.NumberOfExits < 28)
-                {
-                    if (exitsFieldTree.Nodes.Count > 0)
-                        exits.AddNewExit(exitsFieldTree.SelectedNode.Index + 1, exit);
-                    else
-                        exits.AddNewExit(0, exit);
-                    int reselect;
-                    if (exitsFieldTree.Nodes.Count > 0)
-                        reselect = exitsFieldTree.SelectedNode.Index;
-                    else
-                        reselect = -1;
-                    exitsFieldTree.BeginUpdate();
-                    this.exitsFieldTree.Nodes.Clear();
-                    for (int i = 0; i < exits.NumberOfExits; i++)
-                        this.exitsFieldTree.Nodes.Add(new TreeNode("EXIT #" + i.ToString()));
-                    this.exitsFieldTree.SelectedNode = this.exitsFieldTree.Nodes[reselect + 1];
-                    exitsFieldTree.EndUpdate();
-                }
-                else
-                    MessageBox.Show("Could not insert any more exit fields. The maximum number of exit fields allowed is 28.",
-                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-                MessageBox.Show("Could not insert the field. The total number of exits for all levels has exceeded the maximum allotted space.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void exitsCopyField_Click(object sender, EventArgs e)
-        {
-            if (exitsFieldTree.SelectedNode != null)
-                copyExit = exits.Exit_.Copy();
-        }
-        private void exitsPasteField_Click(object sender, EventArgs e)
-        {
-            AddNewExit((LevelExits.Exit)copyExit);
-        }
-        private void exitsDuplicateField_Click(object sender, EventArgs e)
-        {
-            AddNewExit(exits.Exit_.Copy());
-        }
-
-        private void AddNewEvent(LevelEvents.Event newEvent)
-        {
-            if (CalculateFreeEventSpace() >= 6)
-            {
-                this.eventsFieldTree.Focus();
-                if (events.NumberOfEvents < 28)
-                {
-                    if (eventsFieldTree.Nodes.Count > 0)
-                        events.AddNewEvent(eventsFieldTree.SelectedNode.Index + 1, newEvent);
-                    else
-                        events.AddNewEvent(0, newEvent);
-
-                    int reselect;
-
-                    if (eventsFieldTree.Nodes.Count > 0)
-                        reselect = eventsFieldTree.SelectedNode.Index;
-                    else
-                        reselect = -1;
-
-                    eventsFieldTree.BeginUpdate();
-                    this.eventsFieldTree.Nodes.Clear();
-
-                    for (int i = 0; i < events.NumberOfEvents; i++)
-                        this.eventsFieldTree.Nodes.Add(new TreeNode("EVENT #" + i.ToString()));
-
-                    this.eventsFieldTree.SelectedNode = this.eventsFieldTree.Nodes[reselect + 1];
-                    eventsFieldTree.EndUpdate();
-                }
-                else
-                    MessageBox.Show("Could not insert any more event fields. The maximum number of event fields allowed is 28.",
-                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-                MessageBox.Show("Could not insert the field. The total number of events for all levels has exceeded the maximum allotted space.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void eventsCopyField_Click(object sender, EventArgs e)
-        {
-            if (eventsFieldTree.SelectedNode != null)
-                copyEvent = events.Event_.Copy();
-        }
-        private void eventsPasteField_Click(object sender, EventArgs e)
-        {
-            AddNewEvent((LevelEvents.Event)copyEvent);
-        }
-        private void eventsDuplicateField_Click(object sender, EventArgs e)
-        {
-            AddNewEvent(events.Event_.Copy());
-        }
-
-        private void AddNewOverlap(LevelOverlaps.Overlap overlap)
-        {
-            if (CalculateFreeOverlapSpace() >= 4)
-            {
-                this.overlapFieldTree.Focus();
-                if (overlaps.NumberOfOverlaps < 28)
-                {
-                    if (overlapFieldTree.Nodes.Count > 0)
-                        overlaps.AddNewOverlap(overlapFieldTree.SelectedNode.Index + 1, overlap);
-                    else
-                        overlaps.AddNewOverlap(0, overlap);
-
-                    int reselect;
-
-                    if (overlapFieldTree.Nodes.Count > 0)
-                        reselect = overlapFieldTree.SelectedNode.Index;
-                    else
-                        reselect = -1;
-
-                    overlapFieldTree.BeginUpdate();
-                    this.overlapFieldTree.Nodes.Clear();
-
-                    for (int i = 0; i < overlaps.NumberOfOverlaps; i++)
-                        this.overlapFieldTree.Nodes.Add(new TreeNode("OVERLAP #" + i.ToString()));
-
-                    this.overlapFieldTree.SelectedNode = this.overlapFieldTree.Nodes[reselect + 1];
-                    overlapFieldTree.EndUpdate();
-                }
-                else
-                    MessageBox.Show("Could not insert any more overlaps. The maximum number of overlaps allowed is 28.",
-                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-                MessageBox.Show("Could not insert the field. The total number of overlaps for all levels has exceeded the maximum allotted space.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void overlapFieldCopy_Click(object sender, EventArgs e)
-        {
-            if (overlapFieldTree.SelectedNode != null)
-                copyOverlap = overlaps.Overlap_.Copy();
-        }
-        private void overlapFieldPaste_Click(object sender, EventArgs e)
-        {
-            AddNewOverlap((LevelOverlaps.Overlap)copyOverlap);
-        }
-        private void overlapFieldDuplicate_Click(object sender, EventArgs e)
-        {
-            AddNewOverlap(overlaps.Overlap_.Copy());
-        }
     }
 }

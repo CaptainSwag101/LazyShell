@@ -7,7 +7,7 @@ namespace LAZYSHELL
 {
     class BattlefieldTileSet
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private State state = State.Instance;
         private Battlefield battlefield;
         private PaletteSet paletteSet;
@@ -15,9 +15,8 @@ namespace LAZYSHELL
         private byte[] graphics; public byte[] Graphics { get { return graphics; } set { graphics = value; } }
         private Tile16x16[] tilesetLayer;
         public Tile16x16[] TileSetLayer { get { return tilesetLayer; } set { tilesetLayer = value; } }
-        public BattlefieldTileSet(Battlefield map, PaletteSet paletteSet, Model model)
+        public BattlefieldTileSet(Battlefield map, PaletteSet paletteSet)
         {
-            this.model = model; // grab the model
             this.battlefield = map; // grab the current LevelMap
             this.paletteSet = paletteSet; // grab the current Palette Set
 

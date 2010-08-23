@@ -13,7 +13,7 @@ namespace LAZYSHELL
         #region Variables
         // main
         private delegate void Function();
-        private Model model { get { return dialoguesEditor.Model; } }
+        private Model model = State.Instance.Model;
         private Dialogues dialoguesEditor;
         private State state = State.Instance;
         private BattleDialoguePreview textPreview = new BattleDialoguePreview();
@@ -74,7 +74,7 @@ namespace LAZYSHELL
             InitializeComponent();
             search = new Search(battleDialogueNum, searchBox, searchButton, dialogues);
             // tileset
-            tileset = new BattleDialogueTileset(model, fontPalette);
+            tileset = new BattleDialogueTileset(fontPalette);
             SetTilesetImage();
             // editors
             LoadPaletteEditor();
@@ -86,6 +86,14 @@ namespace LAZYSHELL
             battleDlgType.SelectedIndex = 0;
             RefreshBattleDialogue();
             updating = false;
+        }
+        public void Close()
+        {
+            search.Close();
+            paletteEditor.Close();
+            paletteEditorMenu.Close();
+            tileEditor.Close();
+            graphicEditor.Close();
         }
         public void SetToolTips(ToolTip toolTip1)
         {
@@ -330,7 +338,7 @@ namespace LAZYSHELL
             dialoguesEditor.LoadFontEditor();
             dialoguesEditor.RedrawTileset();
             dialoguesEditor.RedrawText();
-            tileset = new BattleDialogueTileset(model, fontPalette);
+            tileset = new BattleDialogueTileset(fontPalette);
             SetTilesetImage();
             SetTextImage();
         }
@@ -343,7 +351,7 @@ namespace LAZYSHELL
             dialoguesEditor.LoadFontEditor();
             dialoguesEditor.RedrawTileset();
             dialoguesEditor.RedrawText();
-            tileset = new BattleDialogueTileset(model, fontPalette);
+            tileset = new BattleDialogueTileset(fontPalette);
             SetTilesetImage();
         }
         #endregion
@@ -370,6 +378,7 @@ namespace LAZYSHELL
             if (updating) return;
             updating = true;
             index = 0;
+            battleDialogueNum.Maximum = battleDlgType.SelectedIndex == 0 ? 255 : 45;
             search.Names = dialogues;
             search.LoadSearch();
             updating = false;

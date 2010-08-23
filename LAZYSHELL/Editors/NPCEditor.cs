@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class NPCEditor : Form
     {
-        private Settings settings;
+        private Settings settings = Settings.Default;
         private NPCProperties[] npcProperties;
         private NPCProperties npcProperty { get { return npcProperties[index]; } set { npcProperties[index] = value; } }
         private Bitmap spriteImage;
@@ -25,7 +25,6 @@ namespace LAZYSHELL
 
         public NPCEditor(NPCProperties[] npcProperties, Levels level, decimal npcID)
         {
-            this.settings = Settings.Default;
             this.npcProperties = npcProperties;
             this.level = level;
             InitializeComponent();

@@ -10,12 +10,12 @@ namespace LAZYSHELL
         [NonSerialized()]
         private byte[] data;
         public override byte[] Data { get { return data; } set { data = value; } }
-        public override int Index { get { return index;} set { index = value;} }
+        public override int Index { get { return index; } set { index = value; } }
 
         #region Formation Pack stats
-        private int index; 
-        private byte formationPackSet; public byte FormationPackSet { get { return this.formationPackSet; } set { this.formationPackSet = value; } }
-        private byte[] formationPackForm = new byte[3]; public byte[] FormationPackForm { get { return this.formationPackForm; } set { this.formationPackForm = value; } }
+        private int index;
+        private ushort[] packFormations = new ushort[3];
+        public ushort[] PackFormations { get { return this.packFormations; } set { this.packFormations = value; } }
         #endregion
 
         public FormationPack(byte[] data, int index)
@@ -27,35 +27,30 @@ namespace LAZYSHELL
 
         private void InitializePack(byte[] data)
         {
-            byte temp = 0;
-
-            int formPackOffset = (index * 4) + 0x39222A;
-
-            formationPackForm[0] = data[formPackOffset]; formPackOffset++;
-            formationPackForm[1] = data[formPackOffset]; formPackOffset++;
-            formationPackForm[2] = data[formPackOffset]; formPackOffset++;
-
-            temp = data[formPackOffset]; formPackOffset++;
-
-            formationPackSet = temp == 7 ? (byte)1 : (byte)0;
+            int offset = (index * 4) + 0x39222A;
+            packFormations[0] = data[offset]; offset++;
+            packFormations[1] = data[offset]; offset++;
+            packFormations[2] = data[offset]; offset++;
+            if ((data[offset] & 0x01) == 0x01)
+                packFormations[0] += 0x100;
+            if ((data[offset] & 0x02) == 0x02)
+                packFormations[1] += 0x100;
+            if ((data[offset] & 0x04) == 0x04)
+                packFormations[2] += 0x100;
         }
         public void Assemble()
         {
-            int formPackOffset = (index * 4) + 0x39222A;
-
-            Bits.SetByte(data, formPackOffset, formationPackForm[0]); formPackOffset++;
-            Bits.SetByte(data, formPackOffset, formationPackForm[1]); formPackOffset++;
-            Bits.SetByte(data, formPackOffset, formationPackForm[2]); formPackOffset++;
-
-            if (formationPackSet == 1)
-                Bits.SetByte(data, formPackOffset, 0x07);
-            else if (formationPackSet == 0)
-                Bits.SetByte(data, formPackOffset, 0x00);
+            int offset = (index * 4) + 0x39222A;
+            Bits.SetByte(data, offset, (byte)packFormations[0]); offset++;
+            Bits.SetByte(data, offset, (byte)packFormations[1]); offset++;
+            Bits.SetByte(data, offset, (byte)packFormations[2]); offset++;
+            Bits.SetBit(data, offset, 0, packFormations[0] >= 0x100);
+            Bits.SetBit(data, offset, 1, packFormations[1] >= 0x100);
+            Bits.SetBit(data, offset, 2, packFormations[2] >= 0x100);
         }
         public override void Clear()
         {
-            formationPackSet = 0;
-            formationPackForm = new byte[3];
+            packFormations = new ushort[3];
         }
     }
 }

@@ -11,9 +11,9 @@ namespace LAZYSHELL
     public partial class SearchPhysicalTile : Form
     {
         private LevelsPhysicalTiles levelsPhysicalTiles;
-        private PhysicalTile[] physicalTiles;
+        private SolidityTile[] physicalTiles;
 
-        public SearchPhysicalTile(LevelsPhysicalTiles levelsPhysicalTiles, PhysicalTile[] physicalTiles)
+        public SearchPhysicalTile(LevelsPhysicalTiles levelsPhysicalTiles, SolidityTile[] physicalTiles)
         {
             this.levelsPhysicalTiles = levelsPhysicalTiles;
             this.physicalTiles = physicalTiles;
@@ -218,6 +218,12 @@ namespace LAZYSHELL
         private void searchResults_SelectedIndexChanged(object sender, EventArgs e)
         {
             levelsPhysicalTiles.Index = Convert.ToInt32(searchResults.SelectedItem.ToString().Substring(15));
+        }
+
+        private void SearchPhysicalTile_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
         }
     }
 }

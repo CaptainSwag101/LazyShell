@@ -12,20 +12,22 @@ namespace LAZYSHELL
     {
         private int index { get { return (int)physicalTileNum.Value; } }
         public int Index { get { return (int)physicalTileNum.Value; } set { physicalTileNum.Value = value; } }
-        private PhysicalTile[] physicalTiles;
-        private PhysicalTile physicalTile { get { return physicalTiles[index]; } set { physicalTiles[index] = value; } }
+        private SolidityTile[] physicalTiles;
+        private SolidityTile physicalTile { get { return physicalTiles[index]; } set { physicalTiles[index] = value; } }
 
         private Bitmap physicalTileImage;
-        private SolidTilePixels solids;
-        public SolidTilePixels Solids { get { return solids; } }
-        
-        public LevelsPhysicalTiles(PhysicalTile[] physicalTiles, SolidTilePixels solids)
+        private Solidity solids;
+        public Solidity Solids { get { return solids; } }
+        public SearchPhysicalTile searchPhysTile;
+
+        public LevelsPhysicalTiles(SolidityTile[] physicalTiles, Solidity solids)
         {
             this.physicalTiles = physicalTiles;
             this.solids = solids;
             DrawPhysicalTiles();
             InitializeComponent();
             RefreshPhysicalTile();
+            searchPhysTile = new SearchPhysicalTile(this, physicalTiles);
         }
         public void DrawPhysicalTiles()
         {
@@ -62,7 +64,7 @@ namespace LAZYSHELL
             physicalTileUnknownBits.SetItemChecked(4, physicalTile.Byte5b4);
             physicalTileDoorFormat.SelectedIndex = physicalTile.Door;
 
-            int[] physicalTilePixels = physicalTile.DrawPhysicalTile(solids);
+            int[] physicalTilePixels = solids.GetTilePixels(physicalTile);
             physicalTileImage = new Bitmap(Do.PixelsToImage(physicalTilePixels, 32, 784));
             pictureBoxPhysicalTile.Invalidate();
         }
@@ -116,8 +118,6 @@ namespace LAZYSHELL
         }
         private void physicalTileSearchButton_Click(object sender, System.EventArgs e)
         {
-            // Open search physical tile
-            Form searchPhysTile = new SearchPhysicalTile(this, physicalTiles);
             searchPhysTile.Show();
         }
 
@@ -133,6 +133,10 @@ namespace LAZYSHELL
         private void pictureBoxPhysicalTile_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
 
+        }
+
+        private void LevelsPhysicalTiles_FormClosed(object sender, FormClosedEventArgs e)
+        {
         }
     }
 }

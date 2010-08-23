@@ -7,14 +7,12 @@ namespace LAZYSHELL
 {
     public class OverlapTileset
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Tile32x32[] overlapTiles; public Tile32x32[] OverlapTiles { get { return overlapTiles; } }
         public byte[] graphicSet;
 
-        public OverlapTileset(Model model)
+        public OverlapTileset()
         {
-            this.model = model; // grab the model
-
             overlapTiles = new Tile32x32[104];
 
             for (int i = 0; i < overlapTiles.Length; i++)

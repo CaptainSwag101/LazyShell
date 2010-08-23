@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class Spells : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private bool updating = false;
         private Spell[] spells { get { return model.Spells; } set { model.Spells = value; } }
         private Spell spell { get { return spells[index]; } set { spells[index] = value; } }
@@ -22,9 +22,8 @@ namespace LAZYSHELL
         private bool textCodeFormat { get { return !byteOrText.Checked; } set { byteOrText.Checked = !value; } }
         private Bitmap descriptionFrame;
         private Bitmap descriptionText;
-        public Spells(Model model)
+        public Spells()
         {
-            this.model = model;
             this.settings.KeystrokesMenu[0x20] = "\x20";
             this.settings.KeystrokesDesc[0x20] = "\x20";
             InitializeComponent();

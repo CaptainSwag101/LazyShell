@@ -547,7 +547,7 @@ namespace LAZYSHELL
         private void AddNewNPC()
         {
             Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
-            Point p = new Point(physicalMap.PixelCoords[o.Y * 1024 + o.X].X + 2, physicalMap.PixelCoords[o.Y * 1024 + o.X].Y + 4);
+            Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeNPCSpace() >= 12)
             {
                 if (npcObjectTree.GetNodeCount(true) < 28)
@@ -592,7 +592,7 @@ namespace LAZYSHELL
         private void AddNewInstance()
         {
             Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
-            Point p = new Point(physicalMap.PixelCoords[o.Y * 1024 + o.X].X + 2, physicalMap.PixelCoords[o.Y * 1024 + o.X].Y + 4);
+            Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeNPCSpace() >= 4)
             {
                 if (npcObjectTree.SelectedNode.Parent != null)
@@ -643,7 +643,7 @@ namespace LAZYSHELL
         private void AddNewNPC(LevelNPCs.NPC e)
         {
             Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
-            Point p = new Point(physicalMap.PixelCoords[o.Y * 1024 + o.X].X + 2, physicalMap.PixelCoords[o.Y * 1024 + o.X].Y + 4);
+            Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeNPCSpace() >= 12)
             {
                 if (npcObjectTree.GetNodeCount(true) < 28)
@@ -688,7 +688,7 @@ namespace LAZYSHELL
         private void AddNewInstance(LevelNPCs.NPC.Instance e)
         {
             Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
-            Point p = new Point(physicalMap.PixelCoords[o.Y * 1024 + o.X].X + 2, physicalMap.PixelCoords[o.Y * 1024 + o.X].Y + 4);
+            Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeNPCSpace() >= 4)
             {
                 if (npcObjectTree.SelectedNode.Parent != null)

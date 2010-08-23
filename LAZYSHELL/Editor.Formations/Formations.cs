@@ -10,7 +10,7 @@ namespace LAZYSHELL
 {
     public partial class Formations : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private bool updating = false;
         private bool waitBothCoords = false;
         private int overFM = 0;
@@ -28,13 +28,13 @@ namespace LAZYSHELL
         public int Index { get { return (int)formationNum.Value; } set { formationNum.Value = value; } }
         public ToolStripTextBox FormationName { get { return nameTextBox; } }
         public System.Windows.Forms.ToolStripComboBox FormationNames { get { return formationNameList; } }
-        public Formations(Model model)
+        public Search searchWindow;
+        public Formations()
         {
-            this.model = model;
             this.model.MonsterNames = new DDlistName(monsters);
             this.model.MonsterNames.SortAlpha();
             InitializeComponent();
-            new Search(formationNum, nameTextBox, searchFormationNames, formationNameList.Items);
+            searchWindow = new Search(formationNum, nameTextBox, searchFormationNames, formationNameList.Items);
             InitializeStrings();
             this.formationNameList.SelectedIndex = 0;
             battlefieldName.SelectedIndex = 7;
@@ -239,7 +239,7 @@ namespace LAZYSHELL
         private void RefreshFormationBattlefield()
         {
             PaletteSet paletteSet = paletteSets[battlefields[battlefieldName.SelectedIndex].PaletteSet];
-            BattlefieldTileSet tileSet = new BattlefieldTileSet(battlefields[battlefieldName.SelectedIndex], paletteSet, model);
+            BattlefieldTileSet tileSet = new BattlefieldTileSet(battlefields[battlefieldName.SelectedIndex], paletteSet);
             int[] quadrant1 = Do.TilesetToPixels(tileSet.TileSetLayer, 16, 16, 0, false);
             int[] quadrant2 = Do.TilesetToPixels(tileSet.TileSetLayer, 16, 16, 256, false);
             int[] quadrant3 = Do.TilesetToPixels(tileSet.TileSetLayer, 16, 16, 512, false);

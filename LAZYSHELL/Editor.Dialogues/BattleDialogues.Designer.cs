@@ -52,9 +52,9 @@
             this.openTileEditor = new System.Windows.Forms.ToolStripButton();
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
             this.openPalettes = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.openPaletteMenu = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBattleDialogue)).BeginInit();
             this.toolStrip2.SuspendLayout();
@@ -335,22 +335,6 @@
             this.openPalettes.ToolTipText = "Dialogue Palette";
             this.openPalettes.Click += new System.EventHandler(this.openPalettes_Click);
             // 
-            // toolStrip3
-            // 
-            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newLine,
-            this.endString,
-            this.pause60f,
-            this.pauseA,
-            this.pauseFrames});
-            this.toolStrip3.Location = new System.Drawing.Point(369, 107);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(24, 115);
-            this.toolStrip3.TabIndex = 539;
-            this.toolStrip3.Text = "toolStrip3";
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -366,6 +350,22 @@
             this.openPaletteMenu.Size = new System.Drawing.Size(23, 22);
             this.openPaletteMenu.ToolTipText = "Menu Palette";
             this.openPaletteMenu.Click += new System.EventHandler(this.openPaletteMenu_Click);
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newLine,
+            this.endString,
+            this.pause60f,
+            this.pauseA,
+            this.pauseFrames});
+            this.toolStrip3.Location = new System.Drawing.Point(369, 107);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip3.Size = new System.Drawing.Size(24, 115);
+            this.toolStrip3.TabIndex = 539;
+            this.toolStrip3.Text = "toolStrip3";
             // 
             // BattleDialogues
             // 

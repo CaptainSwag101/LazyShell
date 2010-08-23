@@ -158,6 +158,21 @@ namespace LAZYSHELL
                 throw new Exception();
             }
         }
+        public static string GetString(byte[] data, int offset, int length)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < length; i++)
+                sb.Append((char)data[offset++]);
+            return sb.ToString();
+        }
+        public static int GetUInt32(byte[] data, int offset)
+        {
+            return
+                (data[offset + 3] << 24) +
+                (data[offset + 2] << 16) +
+                (data[offset + 1] << 8) +
+                data[offset];
+        }
         // set functions
         public static void SetByte(byte[] data, int offset, byte set)
         {
@@ -173,7 +188,7 @@ namespace LAZYSHELL
             }
 
         }
-        public static void SetShort(byte[] data, int offset, ushort set)
+        public static void SetShort(byte[] data, int offset, int set)
         {
             try
             {
@@ -286,7 +301,25 @@ namespace LAZYSHELL
             }
 
         }
+        public static void SetUInt24(byte[] data, int offset, int value)
+        {
+            data[offset++] = (byte)(value & 0xFF);
+            data[offset++] = (byte)((value >> 8) & 0xFF);
+            data[offset] = (byte)((value >> 16) & 0xFF);
+        }
+        public static void SetUInt32(byte[] data, int offset, int value)
+        {
+            data[offset++] = (byte)(value & 0xFF);
+            data[offset++] = (byte)((value >> 8) & 0xFF);
+            data[offset++] = (byte)((value >> 16) & 0xFF);
+            data[offset] = (byte)((value >> 24) & 0xFF);
+        }
         // operation functions
+        public static void Clear(IList src)
+        {
+            for (int i = 0; i < src.Count; i++)
+                src[i] = 0;
+        }
         public static bool Compare(byte[] a, byte[] b)
         {
             if (a.Length != b.Length)
@@ -323,15 +356,62 @@ namespace LAZYSHELL
 
             return true;
         }
+        public static byte[] Copy(byte[] source)
+        {
+            if (source == null)
+                return null;
+            byte[] temp = new byte[source.Length];
+            source.CopyTo(temp, 0);
+            return temp;
+        }
+        public static int[] Copy(int[] source)
+        {
+            if (source == null)
+                return null;
+            int[] temp = new int[source.Length];
+            source.CopyTo(temp, 0);
+            return temp;
+        }
+        public static bool Empty(byte[] source)
+        {
+            for (int i = 0; i < source.Length; i++)
+                if (source[i] != 0)
+                    return false;
+            return true;
+        }
         public static void Fill(IList src, int value)
         {
             for (int i = 0; i < src.Count; i++)
-                src[i] = value;            
+                src[i] = value;
         }
         public static void Fill(byte[] src, byte value)
         {
             for (int i = 0; i < src.Length; i++)
                 src[i] = value;
+        }
+        public static short ReverseBytes(short value)
+        {
+            byte a = (byte)(value >> 8);
+            byte b = (byte)(value & 255);
+            return (short)((b << 8) + a);
+        }
+        public static int ReverseBytes(int value)
+        {
+            byte a = (byte)(value >> 24);
+            byte b = (byte)(value >> 16);
+            byte c = (byte)(value >> 8);
+            byte d = (byte)value;
+            return (d << 24) + (c << 16) + (b << 8) + a;
+        }
+        public static int Clamp(int value, int bits)
+        {
+            int low = -1 << (value - 1);
+            int high = (1 << (value - 1)) - 1;
+            if (value > high)
+                value = high;
+            if (value < low)
+                value = low;
+            return value;
         }
     }
 }

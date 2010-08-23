@@ -84,7 +84,6 @@
             this.spellName = new LAZYSHELL.ToolStripComboBox();
             this.spellNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.spellNameIcon = new LAZYSHELL.ToolStripComboBox();
             this.textBoxSpellName = new System.Windows.Forms.ToolStripTextBox();
             this.panelTimingRotation = new System.Windows.Forms.Panel();
@@ -849,7 +848,6 @@
             this.spellName,
             this.spellNum,
             this.toolStripSeparator1,
-            this.toolStripButton1,
             this.spellNameIcon,
             this.textBoxSpellName});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -871,7 +869,7 @@
             this.spellName.Name = "spellName";
             this.spellName.SelectedIndex = -1;
             this.spellName.SelectedItem = null;
-            this.spellName.Size = new System.Drawing.Size(130, 22);
+            this.spellName.Size = new System.Drawing.Size(140, 22);
             this.spellName.SelectedIndexChanged += new System.EventHandler(this.spellName_SelectedIndexChanged);
             this.spellName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.spellName_DrawItem);
             // 
@@ -883,7 +881,7 @@
             this.spellNum.Hexadecimal = false;
             this.spellNum.Location = new System.Drawing.Point(137, 1);
             this.spellNum.Maximum = new decimal(new int[] {
-            100,
+            127,
             0,
             0,
             0});
@@ -907,15 +905,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::LAZYSHELL.Properties.Resources.label;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            // 
             // spellNameIcon
             // 
             this.spellNameIcon.AutoSize = false;
@@ -926,7 +915,7 @@
             this.spellNameIcon.DropDownWidth = 40;
             this.spellNameIcon.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spellNameIcon.ItemHeight = 15;
-            this.spellNameIcon.Location = new System.Drawing.Point(214, 2);
+            this.spellNameIcon.Location = new System.Drawing.Point(191, 2);
             this.spellNameIcon.Name = "spellNameIcon";
             this.spellNameIcon.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.spellNameIcon.SelectedIndex = -1;
@@ -937,9 +926,9 @@
             // 
             // textBoxSpellName
             // 
-            this.textBoxSpellName.MaxLength = 15;
+            this.textBoxSpellName.MaxLength = 14;
             this.textBoxSpellName.Name = "textBoxSpellName";
-            this.textBoxSpellName.Size = new System.Drawing.Size(100, 25);
+            this.textBoxSpellName.Size = new System.Drawing.Size(110, 25);
             this.textBoxSpellName.TextChanged += new System.EventHandler(this.textBoxSpellName_TextChanged);
             // 
             // panelTimingRotation
@@ -1867,7 +1856,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private LAZYSHELL.ToolStripComboBox spellName;
         private System.Windows.Forms.ToolStripTextBox textBoxSpellName;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private LAZYSHELL.ToolStripComboBox spellNameIcon;
         private System.Windows.Forms.Panel panelTimingRotation;
         private System.Windows.Forms.Panel panel13;

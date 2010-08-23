@@ -1,5 +1,5 @@
 LAZY SHELL - Super Mario RPG Editor
-Version: 3.0 BETA
+Version: 3.1.0 BETA
 Date: July 25, 2010
 Home Page: http://home.comcast.net/~giangurgolo
 
@@ -22,15 +22,12 @@ system for the application to run at all.
 
 Minimal system requirements: 1GB of RAM, 10MB of hard drive space.
 
-The user must be running under a 32-bit OS to use Lazy Shell. If 
-running under a 64-bit OS, use CorFlags.bat.
-
 ______________________________________________________________________
 
 MAIN FEATURES
 ______________________________________________________________________
 
-The editor is comprised of 15 individual editors.
+The editor is comprised of 16 individual editors.
 
 Various status editors include modification capabilities for the
 statuses of monsters, formations, formation packs, items, spells, 
@@ -64,6 +61,11 @@ on the OS.
 
 In the World Maps editor World maps, world map palettes, and the 
 locations that appear on world maps can be modified.
+
+The Audio editor can export, import, clear, and playback the audio
+samples used by the ROM's SPC engine. Importing/exporting features
+are limited to .wav files, which can be edited in a third party 
+freeware application such as Audacity.
 
 ______________________________________________________________________
 
@@ -116,13 +118,12 @@ ______________________________________________________________________
 UNSUPPORTED FEATURES
 ______________________________________________________________________
 
-Lazy Shell can NOT edit raw SPC & sound data, map mods (ie. modifying
-tiles in a map via event scripts), menu graphics, the new game intro
-sequence and graphics, or the end credits. It cannot make any changes 
-to 65c816 assembly code in the ROM image (with the exception of 
-defense timing). Additionally, ROM expansion is also not supported by 
-the application due to the complications of the SA-1 chip in the 
-game's engine.
+Lazy Shell can NOT edit raw SPC music/sfx data, menu graphics, the new 
+game intro sequence and graphics, or the end credits. It cannot make 
+any changes to 65c816 assembly code in the ROM image (with the exception 
+of defense timing). Additionally, ROM expansion is also not supported by 
+the application due to the complications of the SA-1 chip in the game's 
+engine.
 
 ______________________________________________________________________
 
@@ -154,8 +155,7 @@ or there will be problems running Lazy Shell ***
 
 "LAZYSHELL.exe"
 
-The application. If you get a warning about running it under a 64-bit 
-OS, see the description for "CorFlags.exe" below.
+The application.
 
 
 "Lunar Compress.dll"
@@ -186,19 +186,3 @@ versions are chronicled here.
 "readme.txt"
 
 This file.
-
-
-"CorFlags.exe"
-"CorFlags.bat"
-
-Don't use these unless you're using a 64-bit OS. Most people who use 
-Vista or Windows 7 are using a 64-bit version, so they'll need to run 
-"CorFlags.bat" to run Lazy Shell under a 32-bit environment. Make sure 
-these 2 files are in the same directory as LAZYSHELL.exe.
-
-Before opening "CorFlags.bat", right-click "CorFlags.exe" click 
-"Properties" go to the "Compatibility" tab and make sure "Run in 
-640 x 480 screen resolution" is NOT checked.
-
-Thanks to user spel werdz rite for guide on running Lazy Shell under a 
-64-bit OS.

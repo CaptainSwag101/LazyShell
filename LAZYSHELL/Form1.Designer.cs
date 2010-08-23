@@ -42,6 +42,7 @@ namespace LAZYSHELL
             this.openAllies = new System.Windows.Forms.ToolStripButton();
             this.openAnimations = new System.Windows.Forms.ToolStripButton();
             this.openAttacks = new System.Windows.Forms.ToolStripButton();
+            this.openAudio = new System.Windows.Forms.ToolStripButton();
             this.openBattlefields = new System.Windows.Forms.ToolStripButton();
             this.openBattleScripts = new System.Windows.Forms.ToolStripButton();
             this.openDialogues = new System.Windows.Forms.ToolStripButton();
@@ -61,10 +62,11 @@ namespace LAZYSHELL
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.recentFiles = new System.Windows.Forms.ToolStripDropDownButton();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.refreshROM = new System.Windows.Forms.ToolStripButton();
             this.closeROM = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.openSettings = new System.Windows.Forms.ToolStripButton();
             this.restoreElementsToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
@@ -208,6 +210,7 @@ namespace LAZYSHELL
             this.openAllies,
             this.openAnimations,
             this.openAttacks,
+            this.openAudio,
             this.openBattlefields,
             this.openBattleScripts,
             this.openDialogues,
@@ -227,7 +230,7 @@ namespace LAZYSHELL
             this.toolStrip2.Location = new System.Drawing.Point(0, 104);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(96, 432);
+            this.toolStrip2.Size = new System.Drawing.Size(96, 457);
             this.toolStrip2.TabIndex = 329;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -269,6 +272,19 @@ namespace LAZYSHELL
             this.openAttacks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openAttacks.ToolTipText = "Edit monster attacks, spells, and ally spells";
             this.openAttacks.Click += new System.EventHandler(this.openAttacks_Click);
+            // 
+            // openAudio
+            // 
+            this.openAudio.Image = global::LAZYSHELL.Properties.Resources.openAudio;
+            this.openAudio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAudio.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openAudio.Name = "openAudio";
+            this.openAudio.Size = new System.Drawing.Size(94, 22);
+            this.openAudio.Text = "Audio";
+            this.openAudio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAudio.ToolTipText = "Edit audio samples and import / export to and from .WAV files";
+            this.openAudio.Click += new System.EventHandler(this.openAudio_Click);
             // 
             // openBattlefields
             // 
@@ -446,7 +462,7 @@ namespace LAZYSHELL
             this.openNotes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openNotes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openNotes.Name = "openNotes";
-            this.openNotes.Size = new System.Drawing.Size(94, 22);
+            this.openNotes.Size = new System.Drawing.Size(55, 22);
             this.openNotes.Text = "Notes";
             this.openNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openNotes.ToolTipText = "Open the notes database";
@@ -471,7 +487,7 @@ namespace LAZYSHELL
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(96, 129);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(487, 407);
+            this.panel2.Size = new System.Drawing.Size(487, 432);
             this.panel2.TabIndex = 333;
             // 
             // toolStrip4
@@ -479,10 +495,11 @@ namespace LAZYSHELL
             this.toolStrip4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.recentFiles,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
             this.refreshROM,
             this.closeROM,
+            this.toolStripSeparator5,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
             this.toolStripSeparator11,
             this.openSettings,
             this.restoreElementsToolStripMenuItem,
@@ -508,28 +525,6 @@ namespace LAZYSHELL
             this.recentFiles.Size = new System.Drawing.Size(31, 22);
             this.recentFiles.ToolTipText = "Recent ROM Files";
             // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Enabled = false;
-            this.saveToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.save_small;
-            this.saveToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
-            this.saveToolStripMenuItem.ToolTipText = "Save ROM";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Enabled = false;
-            this.saveAsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.saveAs_small;
-            this.saveAsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.saveAsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
-            this.saveAsToolStripMenuItem.ToolTipText = "Save ROM As";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-            // 
             // refreshROM
             // 
             this.refreshROM.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -553,6 +548,33 @@ namespace LAZYSHELL
             this.closeROM.Size = new System.Drawing.Size(23, 22);
             this.closeROM.ToolTipText = "Close ROM";
             this.closeROM.Click += new System.EventHandler(this.closeROM_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Enabled = false;
+            this.saveToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.save_small;
+            this.saveToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
+            this.saveToolStripMenuItem.ToolTipText = "Save ROM";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Enabled = false;
+            this.saveAsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.saveAs_small;
+            this.saveAsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveAsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(23, 22);
+            this.saveAsToolStripMenuItem.ToolTipText = "Save ROM As";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
@@ -745,7 +767,7 @@ namespace LAZYSHELL
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 536);
+            this.ClientSize = new System.Drawing.Size(583, 561);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.toolStrip2);
@@ -831,6 +853,8 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton refreshROM;
         private System.Windows.Forms.ToolStripButton closeROM;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton openAudio;
     }
 }
 

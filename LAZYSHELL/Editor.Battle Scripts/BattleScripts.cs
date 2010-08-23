@@ -16,7 +16,7 @@ namespace LAZYSHELL
     public partial class BattleScripts : Form
     {
         #region Variables
-        private Model model;
+        private Model model = State.Instance.Model;
         private BattleScript[] battleScripts { get { return model.BattleScripts; } set { model.BattleScripts = value; } }
         private BattleScript battleScript { get { return battleScripts[index]; } set { battleScripts[index] = value; } }
         private DDlistName spellNames { get { return model.SpellNames; } set { model.SpellNames = value; } }
@@ -36,9 +36,8 @@ namespace LAZYSHELL
         Previewer.Previewer bp;
         #endregion
         // Constructor
-        public BattleScripts(Model model)
+        public BattleScripts()
         {
-            this.model = model;
             Settings.Default.Keystrokes[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
@@ -601,13 +600,14 @@ namespace LAZYSHELL
             else if (result == DialogResult.No)
             {
                 model.BattleScripts = null;
-                return;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
+            if (bp != null)
+                bp.Close();
         }
         private void Scripts_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1419,9 +1419,9 @@ namespace LAZYSHELL
         private void battlePreview_Click(object sender, EventArgs e)
         {
             if (bp == null || !bp.Visible)
-                bp = new Previewer.Previewer(model, (int)this.monsterNum.Value, 3);
+                bp = new Previewer.Previewer((int)this.monsterNum.Value, 3);
             else
-                bp.Reload(model, (int)this.monsterNum.Value, 3);
+                bp.Reload((int)this.monsterNum.Value, 3);
             bp.Show();
             bp.BringToFront();
         }
@@ -2196,12 +2196,12 @@ namespace LAZYSHELL
         }
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.BattleScripts, index, "IMPORT BATTLE SCRIPTS...", model).ShowDialog();
+            new IOElements((Element[])model.BattleScripts, index, "IMPORT BATTLE SCRIPTS...").ShowDialog();
             monsterNum_ValueChanged(null, null);
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.BattleScripts, index, "EXPORT BATTLE SCRIPTS...", model).ShowDialog();
+            new IOElements((Element[])model.BattleScripts, index, "EXPORT BATTLE SCRIPTS...").ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {

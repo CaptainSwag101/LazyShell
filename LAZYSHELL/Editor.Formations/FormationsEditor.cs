@@ -11,15 +11,14 @@ namespace LAZYSHELL
 {
     public partial class FormationsEditor : Form
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private Formations formationsEditor;
         private FormationPacks packsEditor;
         private Settings settings = Settings.Default;
         public int FormationIndex { get { return formationsEditor.Index; } set { formationsEditor.Index = value; } }
         public int PackIndex { get { return packsEditor.Index; } set { packsEditor.Index = value; } }
-        public FormationsEditor(Model model)
+        public FormationsEditor()
         {
-            this.model = model;
             settings.Keystrokes[0x20] = "\x20";
             settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
@@ -27,8 +26,8 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.F1, enableHelpTips);
             Do.AddShortcut(toolStrip3, Keys.F2, showDecHex);
             // create editors
-            formationsEditor = new Formations(model);
-            packsEditor = new FormationPacks(model, formationsEditor);
+            formationsEditor = new Formations();
+            packsEditor = new FormationPacks(formationsEditor);
             packsEditor.TopLevel = false;
             packsEditor.Dock = DockStyle.Top;
             packsEditor.SetToolTips(toolTip1);
@@ -63,13 +62,14 @@ namespace LAZYSHELL
                 model.Formations = null;
                 model.FormationMusics = null;
                 model.FormationPacks = null;
-                return;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
+            formationsEditor.searchWindow.Close();
+            packsEditor.searchWindow.Close();
         }
         private void save_Click(object sender, EventArgs e)
         {
@@ -77,21 +77,21 @@ namespace LAZYSHELL
         }
         private void importFormationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Formations, formationsEditor.Index, "IMPORT FORMATIONS...", model).ShowDialog();
+            new IOElements((Element[])model.Formations, formationsEditor.Index, "IMPORT FORMATIONS...").ShowDialog();
             formationsEditor.RefreshFormations();
         }
         private void importPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.FormationPacks, packsEditor.Index, "IMPORT PACKS...", model).ShowDialog();
+            new IOElements((Element[])model.FormationPacks, packsEditor.Index, "IMPORT PACKS...").ShowDialog();
             packsEditor.RefreshFormationPacks();
         }
         private void exportFormationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Formations, formationsEditor.Index, "EXPORT FORMATIONS...", model).ShowDialog();
+            new IOElements((Element[])model.Formations, formationsEditor.Index, "EXPORT FORMATIONS...").ShowDialog();
         }
         private void exportPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.FormationPacks, packsEditor.Index, "EXPORT PACKS...", model).ShowDialog();
+            new IOElements((Element[])model.FormationPacks, packsEditor.Index, "EXPORT PACKS...").ShowDialog();
         }
         private void clearFormationsToolStripMenuItem_Click(object sender, EventArgs e)
         {

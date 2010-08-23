@@ -19,7 +19,7 @@ namespace LAZYSHELL
 
         private ProgramController AppControl;
         //private Notes notes;
-        private Settings settings;
+        private Settings settings = Settings.Default;
         private bool cancelAnotherLoad;
 
         // MRU List manager
@@ -41,7 +41,6 @@ namespace LAZYSHELL
         {
             this.AppControl = controls;
             //notes = Notes.Instance;
-            settings = Settings.Default;
 
             InitializeComponent();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(saveToolStripMenuItem_Click));
@@ -368,7 +367,7 @@ namespace LAZYSHELL
         }
         private void restoreElementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            importElements = new ImportElements(AppControl.Model);
+            importElements = new ImportElements();
             importElements.Show();
         }
         private void publishRomToolStripMenuItem_Click(object sender, EventArgs e)
@@ -421,6 +420,10 @@ namespace LAZYSHELL
         private void openAttacks_Click(object sender, EventArgs e)
         {
             AppControl.Attacks();
+        }
+        private void openAudio_Click(object sender, EventArgs e)
+        {
+            AppControl.Audio();
         }
         private void openBattlefields_Click(object sender, EventArgs e)
         {

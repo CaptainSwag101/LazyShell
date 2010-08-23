@@ -96,6 +96,7 @@
             this.tabControl2.SelectedIndex = 0;
             this.tabControl2.Size = new System.Drawing.Size(268, 543);
             this.tabControl2.TabIndex = 550;
+            this.tabControl2.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl2_Deselecting);
             this.tabControl2.SelectedIndexChanged += new System.EventHandler(this.tabControl2_SelectedIndexChanged);
             // 
             // tabPage8

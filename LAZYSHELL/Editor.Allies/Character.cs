@@ -216,6 +216,11 @@ namespace LAZYSHELL
             Shocker = (temp & 0x01) == 0x01;
             Snowy = (temp & 0x02) == 0x02;
             StarRain = (temp & 0x04) == 0x04;
+            Dummy27 = (temp & 0x08) == 0x08;
+            Dummy28 = (temp & 0x10) == 0x10;
+            Dummy29 = (temp & 0x20) == 0x20;
+            Dummy30 = (temp & 0x40) == 0x40;
+            Dummy31 = (temp & 0x80) == 0x80;
 
             // set up the levels
             byte numberOfLevels = 31;
@@ -289,6 +294,11 @@ namespace LAZYSHELL
             Bits.SetBit(data, charStartOffset, 0, Shocker);
             Bits.SetBit(data, charStartOffset, 1, Snowy);
             Bits.SetBit(data, charStartOffset, 2, StarRain);
+            Bits.SetBit(data, charStartOffset, 3, Dummy27);
+            Bits.SetBit(data, charStartOffset, 4, Dummy28);
+            Bits.SetBit(data, charStartOffset, 5, Dummy29);
+            Bits.SetBit(data, charStartOffset, 6, Dummy30);
+            Bits.SetBit(data, charStartOffset, 7, Dummy31);
             charStartOffset++;
 
             foreach (Level l in levels)

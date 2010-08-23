@@ -16,11 +16,11 @@ namespace LAZYSHELL
     public partial class Notes : Form
     {
         #region Variables
-        private Model model;
-        private Settings settings;
+        private Model model = State.Instance.Model;
+        private Settings settings = Settings.Default;
         private ArrayList currentIndexes;
         private NotesDB.Index currentIndex;
-        private State state;
+        private State state = State.Instance;
         private NotesDB notes; public NotesDB ThisNotes { get { return notes; } set { notes = value; } }
         public ComboBox ElementType { get { return elementType; } set { elementType = value; } }
         public ListBox ElementIndexes { get { return elementIndexes; } set { elementIndexes = value; } }
@@ -30,12 +30,9 @@ namespace LAZYSHELL
         private bool updating = false;
         #endregion
         // constructor
-        public Notes(Model model)
+        public Notes()
         {
-            this.model = model;
             this.model.Notes = notes;
-            this.settings = Settings.Default;
-            this.state = State.Instance;
             InitializeComponent();
             if (settings.LoadNotes)
             {

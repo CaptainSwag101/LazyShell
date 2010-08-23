@@ -7,16 +7,15 @@ namespace LAZYSHELL
 {
     public class TitleTileset
     {
-        private Model model;
+        private Model model = State.Instance.Model;
         private PaletteSet titlePalettes;
         private byte[] graphics; public byte[] Graphics { get { return graphics; } set { graphics = value; } }
         private byte[] graphicsL3; public byte[] GraphicsL3 { get { return graphicsL3; } set { graphicsL3 = value; } }
         private byte[][] tileSets = new byte[3][]; public byte[][] TileSets { get { return tileSets; } set { tileSets = value; } }
         Tile16x16[][] tileSetLayers = new Tile16x16[3][]; public Tile16x16[][] TileSetLayers { get { return tileSetLayers; } }
 
-        public TitleTileset(PaletteSet titlePalettes, Model model)
+        public TitleTileset(PaletteSet titlePalettes)
         {
-            this.model = model;
             this.titlePalettes = titlePalettes;
 
             // Create our layers for the tilesets (256x512)

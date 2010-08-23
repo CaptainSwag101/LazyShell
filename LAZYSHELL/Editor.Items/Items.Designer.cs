@@ -100,7 +100,6 @@
             this.itemName = new LAZYSHELL.ToolStripComboBox();
             this.itemNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.itemNameIcon = new LAZYSHELL.ToolStripComboBox();
             this.textBoxItemName = new System.Windows.Forms.ToolStripTextBox();
             this.lvl1TimingEnd = new System.Windows.Forms.TrackBar();
@@ -1056,7 +1055,6 @@
             this.itemName,
             this.itemNum,
             this.toolStripSeparator1,
-            this.toolStripButton1,
             this.itemNameIcon,
             this.textBoxItemName});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -1078,7 +1076,7 @@
             this.itemName.Name = "itemName";
             this.itemName.SelectedIndex = -1;
             this.itemName.SelectedItem = null;
-            this.itemName.Size = new System.Drawing.Size(150, 22);
+            this.itemName.Size = new System.Drawing.Size(160, 22);
             this.itemName.SelectedIndexChanged += new System.EventHandler(this.itemName_SelectedIndexChanged);
             this.itemName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             // 
@@ -1088,7 +1086,7 @@
             this.itemNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.itemNum.ForeColor = System.Drawing.SystemColors.Control;
             this.itemNum.Hexadecimal = false;
-            this.itemNum.Location = new System.Drawing.Point(157, 1);
+            this.itemNum.Location = new System.Drawing.Point(167, 1);
             this.itemNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1114,15 +1112,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::LAZYSHELL.Properties.Resources.label;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            // 
             // itemNameIcon
             // 
             this.itemNameIcon.AutoSize = false;
@@ -1133,7 +1122,7 @@
             this.itemNameIcon.DropDownWidth = 100;
             this.itemNameIcon.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.itemNameIcon.ItemHeight = 15;
-            this.itemNameIcon.Location = new System.Drawing.Point(234, 2);
+            this.itemNameIcon.Location = new System.Drawing.Point(221, 2);
             this.itemNameIcon.Name = "itemNameIcon";
             this.itemNameIcon.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.itemNameIcon.SelectedIndex = -1;
@@ -1144,9 +1133,9 @@
             // 
             // textBoxItemName
             // 
-            this.textBoxItemName.MaxLength = 15;
+            this.textBoxItemName.MaxLength = 14;
             this.textBoxItemName.Name = "textBoxItemName";
-            this.textBoxItemName.Size = new System.Drawing.Size(132, 25);
+            this.textBoxItemName.Size = new System.Drawing.Size(140, 25);
             this.textBoxItemName.TextChanged += new System.EventHandler(this.textBoxItemName_TextChanged);
             // 
             // lvl1TimingEnd
@@ -1609,7 +1598,6 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private LAZYSHELL.ToolStripComboBox itemName;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private LAZYSHELL.ToolStripComboBox itemNameIcon;
         private System.Windows.Forms.ToolStripTextBox textBoxItemName;
         private System.Windows.Forms.TrackBar lvl1TimingEnd;
