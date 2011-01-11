@@ -2858,30 +2858,19 @@ namespace LAZYSHELL
             return set;
         }
         private static ArrayList set = new ArrayList();
-        public static int GetNodeIndex(TreeNode node, TreeNodeCollection nodes)
+        public static bool GetNodeIndex(TreeNode node, TreeNodeCollection nodes, ref int index)
         {
-            int index = 0;
             if (node == null)
-                return index;
+                return false;
             foreach (TreeNode tn in nodes)
             {
                 if (tn == node)
-                    return index;
+                    return true;
                 index++;
-                foreach (TreeNode child in tn.Nodes)
-                {
-                    if (child == node)
-                        return index;
-                    index++;
-                    foreach (TreeNode chld in child.Nodes)
-                    {
-                        if (chld == node)
-                            return index;
-                        index++;
-                    }
-                }
+                if (GetNodeIndex(node, tn.Nodes, ref index))
+                    return true;
             }
-            return index;
+            return false;
         }
         // Get / set the scrollbar position of the treeview
         [DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]

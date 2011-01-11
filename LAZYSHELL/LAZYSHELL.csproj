@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{71AABC1D-6183-4308-84E2-ADFD6DB2C881}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -52,6 +52,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BNCtrls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -609,110 +610,145 @@
   <ItemGroup>
     <EmbeddedResource Include="Editor.Audio\Audio.resx">
       <DependentUpon>Audio.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Animations\AnimationScripts.resx">
       <DependentUpon>AnimationScripts.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Battle Scripts\BattleScripts.resx">
       <DependentUpon>BattleScripts.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Event Scripts\EventScripts.resx">
       <DependentUpon>EventScripts.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\ZoomPanel.resx">
       <DependentUpon>ZoomPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Allies\Allies.resx">
       <DependentUpon>Allies.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Allies\AlliesEditor.resx">
       <DependentUpon>AlliesEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Allies\LevelUps.resx">
       <DependentUpon>LevelUps.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Attacks\Attacks.resx">
       <DependentUpon>Attacks.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Attacks\AttacksEditor.resx">
       <DependentUpon>AttacksEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Attacks\Spells.resx">
       <DependentUpon>Spells.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Dialogues\BattleDialogues.resx">
       <DependentUpon>BattleDialogues.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Dialogues\Dialogues.resx">
       <DependentUpon>Dialogues.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Dialogues\Fonts.resx">
       <DependentUpon>Fonts.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Dialogues\NewFontTable.resx">
       <DependentUpon>NewFontTable.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Effects\EffectMolds.resx">
       <DependentUpon>EffectMolds.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Effects\Effects.resx">
       <DependentUpon>Effects.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Effects\EffectSequences.resx">
       <DependentUpon>EffectSequences.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Items\Items.resx">
       <DependentUpon>Items.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Items\ItemsEditor.resx">
       <DependentUpon>ItemsEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Items\Shops.resx">
       <DependentUpon>Shops.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Formations\FormationPacks.resx">
       <DependentUpon>FormationPacks.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Formations\Formations.resx">
       <DependentUpon>Formations.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Monsters\Monsters.resx">
       <DependentUpon>Monsters.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Formations\FormationsEditor.resx">
       <DependentUpon>FormationsEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\BaseConvertor.resx">
       <DependentUpon>BaseConvertor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CursorDraw.cur" />
     <EmbeddedResource Include="CursorErase.cur" />
     <EmbeddedResource Include="Features\FixPointers.resx">
       <DependentUpon>FixPointers.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\IOElements.resx">
       <DependentUpon>IOElements.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Battlefields\Battlefields.resx">
       <DependentUpon>Battlefields.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editors\GraphicEditor.resx">
       <DependentUpon>GraphicEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Levels\LevelsPhysicalTiles.resx">
       <DependentUpon>LevelsPhysicalTiles.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Levels\LevelsTemplate.resx">
       <DependentUpon>LevelsTemplate.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Levels\LevelsTilemap.resx">
       <DependentUpon>LevelsTilemap.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Levels\LevelsTileset.resx">
       <DependentUpon>LevelsTileset.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editors\SpritePartitions.resx">
       <SubType>Designer</SubType>
@@ -720,6 +756,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editors\PaletteEditor.resx">
       <DependentUpon>PaletteEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editors\NPCEditor.resx">
       <SubType>Designer</SubType>
@@ -735,12 +772,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Notes.resx">
       <DependentUpon>Notes.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editors\TileEditor.resx">
       <DependentUpon>TileEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Title\Title.resx">
       <DependentUpon>Title.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Feature.Patches\GamePatches.resx">
       <DependentUpon>GamePatches.cs</DependentUpon>
@@ -759,25 +799,34 @@
     <EmbeddedResource Include="CursorZoomOut.cur" />
     <EmbeddedResource Include="Features\Restore.resx">
       <DependentUpon>Restore.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\ClearElements.resx">
       <DependentUpon>ClearElements.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Sprites\SpriteMolds.resx">
       <DependentUpon>SpriteMolds.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Sprites\SpriteSequences.resx">
       <DependentUpon>SpriteSequences.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CursorTemplate.cur" />
     <EmbeddedResource Include="Editor.World Maps\WorldMaps.resx">
       <DependentUpon>WorldMaps.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsEditor.resx">
       <DependentUpon>SettingsEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="bin\Debug\Lunar Compress.dll" />
     <Content Include="LAZYSHELL_icon.ico" />
     <Content Include="Feature.Patches\PatchFormat.txt" />
+    <None Include="Resources\RomPreviewBaseSave.000" />
+    <None Include="Resources\RomPreviewBaseSave.zst" />
     <None Include="Resources\Tiles\quadBlock.gif" />
     <None Include="Resources\Tiles\halfQuadBlock.gif" />
     <None Include="Resources\Tiles\quadBase.gif" />
@@ -896,6 +945,7 @@
     <None Include="Resources\loadAll.gif" />
     <None Include="Resources\numerize.gif" />
     <None Include="Resources\openAudio.gif" />
+    <None Include="Resources\Lunar Compress.dll" />
     <Content Include="Resources\showMain.gif" />
     <None Include="Resources\signature.gif" />
     <Content Include="Resources\spaceAnalyzer.gif" />

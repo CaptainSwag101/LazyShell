@@ -193,7 +193,6 @@ namespace LAZYSHELL
         {
             int used = 0;
             int size = 0;
-            int index = 0;
             int end = 0;
             int left = 0;
 

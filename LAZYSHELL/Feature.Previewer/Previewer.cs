@@ -291,37 +291,43 @@ namespace LAZYSHELL.Previewer
                 snes9x = Do.Contains(this.emulatorPath, "snes9x", StringComparison.CurrentCultureIgnoreCase);
                 string ext = snes9x ? ".000" : ".zst";
                 FileInfo fInfo = new FileInfo(model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave" + ext);
-                if (fInfo.Exists)
+                if (!fInfo.Exists)
                 {
-                    FileStream fs = fInfo.OpenRead();
-                    BinaryReader br = new BinaryReader(fs);
-                    byte[] state = br.ReadBytes((int)fs.Length);
-                    br.Close();
-                    fs.Close();
-
-                    // modify zst if needed
-                    if (maxOutStats.Checked)
-                        maxStats.CopyTo(state, snes9x ? 0x30487 : 0x20413);
-                    int offset = snes9x ? 0x53C9D : 0x41533;
-
-                    byte allyCount = 1;
-                    for (byte i = 0; i < alliesInParty.Items.Count; i++)
-                        if (alliesInParty.GetItemChecked(i))
-                        {
-                            state[offset + 0x32 + i] = (byte)(i + 1);
-                            allyCount++;
-                        }
-                    state[offset + 0x32] = allyCount;
-                    state[offset + 0x3F] &= 0xFC;
-                    state[offset + 0x3F] |= Math.Min((byte)3, allyCount);
-
-                    fInfo = new FileInfo(GetStatePath());
-                    fs = fInfo.OpenWrite();
-                    BinaryWriter bw = new BinaryWriter(fs);
-                    bw.Write(state);
-                    bw.Close();
-                    fs.Close();
+                    byte[] lc;
+                    if (snes9x)
+                        lc = Resources.RomPreviewBaseSave;
+                    else
+                        lc = Resources.RomPreviewBaseSave1;
+                    File.WriteAllBytes(model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave" + ext, lc);
                 }
+                FileStream fs = fInfo.OpenRead();
+                BinaryReader br = new BinaryReader(fs);
+                byte[] state = br.ReadBytes((int)fs.Length);
+                br.Close();
+                fs.Close();
+
+                // modify zst if needed
+                if (maxOutStats.Checked)
+                    maxStats.CopyTo(state, snes9x ? 0x30487 : 0x20413);
+                int offset = snes9x ? 0x53C9D : 0x41533;
+
+                byte allyCount = 1;
+                for (byte i = 0; i < alliesInParty.Items.Count; i++)
+                    if (alliesInParty.GetItemChecked(i))
+                    {
+                        state[offset + 0x32 + i] = (byte)(i + 1);
+                        allyCount++;
+                    }
+                state[offset + 0x32] = allyCount;
+                state[offset + 0x3F] &= 0xFC;
+                state[offset + 0x3F] |= Math.Min((byte)3, allyCount);
+
+                fInfo = new FileInfo(GetStatePath());
+                fs = fInfo.OpenWrite();
+                BinaryWriter bw = new BinaryWriter(fs);
+                bw.Write(state);
+                bw.Close();
+                fs.Close();
             }
             catch (Exception ex)
             {

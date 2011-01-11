@@ -40,7 +40,7 @@ namespace LAZYSHELL
             this.levelMap = levelMap;
             tilemap = model.PhysicalMaps[levelMap.PhysicalMap];
         }
-        public void MakeEdit()
+        public override void MakeEdit()
         {
             model.EditPhysicalMaps[levelMap.PhysicalMap] = true;
         }

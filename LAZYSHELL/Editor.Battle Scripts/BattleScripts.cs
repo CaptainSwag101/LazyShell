@@ -284,11 +284,13 @@ namespace LAZYSHELL
 
             BattleScriptTree.ExpandAll();
 
-            int selectedNode = Do.GetNodeIndex(BattleScriptTree.SelectedNode, BattleScriptTree.Nodes);
-            if (selectedNode + 1 < this.BattleScriptTree.GetNodeCount(true))
-                battleCommands.Insert(selectedNode + 1, cmd);
-            else if (selectedNode + 1 == this.BattleScriptTree.GetNodeCount(true))
-                battleCommands.Insert(selectedNode, cmd);
+            int index = 0; 
+            if(!Do.GetNodeIndex(BattleScriptTree.SelectedNode, BattleScriptTree.Nodes, ref index))
+                return;
+            if (index + 1 < this.BattleScriptTree.GetNodeCount(true))
+                battleCommands.Insert(index + 1, cmd);
+            else if (index + 1 == this.BattleScriptTree.GetNodeCount(true))
+                battleCommands.Insert(index, cmd);
             else
                 battleCommands.Insert(0, cmd);
             cmd.Set = true;

@@ -364,6 +364,9 @@ namespace LAZYSHELL
                 copy.Y = y;
                 return copy;
             }
+            public override void MakeEdit()
+            {
+            }
         }
         public void Clear()
         {

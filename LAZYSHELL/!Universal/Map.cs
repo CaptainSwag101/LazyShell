@@ -10,5 +10,6 @@ namespace LAZYSHELL
         public abstract int[] Pixels { get; set; }
         public abstract byte[] Tilemap { get; set; }
         public abstract Bitmap Image { get; set; }
+        public abstract void MakeEdit();
     }
 }

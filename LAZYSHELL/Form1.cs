@@ -78,11 +78,8 @@ namespace LAZYSHELL
         {
             if (!File.Exists("Lunar Compress.dll"))
             {
-                MessageBox.Show(
-                    "Levels could not be opened because Lunar Compress.dll has been moved, renamed, or no longer exists.\n" +
-                    "Make sure that Lunar Compress.dll is in the same directory as LAZYSHELL.exe",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
+                byte[] lc = Resources.Lunar_Compress;
+                File.WriteAllBytes(Path.GetDirectoryName(Application.ExecutablePath) + '\\' + "Lunar Compress.dll", lc);
             }
             return true;
         }
@@ -549,7 +546,7 @@ namespace LAZYSHELL
         private void clearModel_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show(
-                "You are about to clear the editor's memory of all elements. Continue?", "LAZY SHELL", 
+                "You are about to clear the editor's memory of all elements. Continue?", "LAZY SHELL",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 return;
             AppControl.ClearAll();

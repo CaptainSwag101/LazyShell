@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Lazy Shell, Version 3.0b
-Copyright © 2007-2010  Omega &amp; giangurgolo
+    <value>Lazy Shell, Version 3.2.1b
+Copyright © 2007-2011  Omega &amp; giangurgolo
 
 Created by Omega &amp; giangurgolo
 
-Home Page:   http://giangurgolo.home.att.net/smrpg/
+Home Page:   http://home.comcast.net/~giangurgolo/smrpg/
 
 Special Thanks:
 Bregalad - source code for BRR encoding and decoding

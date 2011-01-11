@@ -83,6 +83,7 @@ namespace LAZYSHELL.Undo
                             changes[r + 1] = temp;
 
                             made[p / 2] = true;
+                            tilemap.MakeEdit();
                         }
                     }
                 }

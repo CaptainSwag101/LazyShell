@@ -19,7 +19,7 @@ namespace LAZYSHELL
         private PaletteSet paletteSetBackup;
         private Bitmap paletteImage, colorMapImage;
         private int[] palettePixels, colorMapPixels;
-        private int currentSwatchColor = 0;
+        private int currentSwatchColor = Color.White.ToArgb();
         private int count;
         private int start;
         private int currentColor = 0;
@@ -75,8 +75,6 @@ namespace LAZYSHELL
         {
             updating = true;
             pictureBoxCurrentColor.Invalidate();
-            pictureBoxSwatchColor.BackColor = pictureBoxCurrentColor.BackColor;
-            currentSwatchColor = pictureBoxCurrentColor.BackColor.ToArgb();
 
             currentRed.Value = paletteSet.Reds[currentColor];
             currentGreen.Value = paletteSet.Greens[currentColor];
@@ -219,7 +217,11 @@ namespace LAZYSHELL
             else
                 rgbB = paletteSet.Blues;
 
-            Buffer.BlockCopy(rgbB, start * 16, rgbA, start * 16, rgbB.Length - (start * 16));
+            for (int c = start * 16; c < rgbA.Length; c++)
+            {
+                int b = rgbB[c];
+                rgbA[c] = b;
+            }
         }
         private void DoGreyscale()
         {
@@ -884,5 +886,6 @@ namespace LAZYSHELL
             }
         }
         #endregion
+
     }
 }

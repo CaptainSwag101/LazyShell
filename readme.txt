@@ -1,6 +1,6 @@
 LAZY SHELL - Super Mario RPG Editor
-Version: 3.1.0 BETA
-Date: July 25, 2010
+Version: 3.2.1 BETA
+Date: January 11, 2011
 Home Page: http://home.comcast.net/~giangurgolo
 
 ______________________________________________________________________
@@ -160,6 +160,7 @@ The application.
 
 "Lunar Compress.dll"
 
+Generates automatically when needed.
 This file is essential to Lazy Shell's functionality. It decompresses 
 and compresses the data that Lazy Shell modifies. It is needed to run 
 the Stats, Levels, and Sprites editors and must be in the exact same 
@@ -170,6 +171,7 @@ completely functionless.
 "RomPreviewBaseSave.000"
 "RomPreviewBaseSave.zst"
 
+These generate automatically when needed.
 Base savestates for SNES9X and ZSNES, respectively. These are needed 
 for previewing levels, event scripts, and battle scripts using either 
 ZSNES or SNES9X. To avoid complications, make sure the emulators are 

@@ -1,5 +1,21 @@
 Major changes/additions are indicated by ***
 
+v3.2.1b
+--------------------------------------
+General changes:
+*Now everything really, truly works in a 32 AND 64-bit environment
+*Updated home page link and version/copyright info
+*Default visual theme is now System instead of Standard
+*Added Lunar Compress.dll to the resources; generates automatically
+*Added RomPreviewBaseSave files to resources; generates automatically
+
+Fixes:
+*Battle Scripts: inserting commands in deeply nested scripts was buggy
+*Dialogues: characters left wasn't correct for other banks
+*Levels: physical maps weren't saving to ROM
+*Palette Editor: equate RGB function wasn't working
+
+
 v3.2.0b
 --------------------------------------
 General changes:

@@ -1099,18 +1099,18 @@
             this.contextMenuStrip3.Name = "contextMenuStrip3";
             this.contextMenuStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip3.ShowImageMargin = false;
-            this.contextMenuStrip3.Size = new System.Drawing.Size(149, 48);
+            this.contextMenuStrip3.Size = new System.Drawing.Size(152, 48);
             // 
             // importPaletteSetToolStripMenuItem
             // 
             this.importPaletteSetToolStripMenuItem.Name = "importPaletteSetToolStripMenuItem";
-            this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.importPaletteSetToolStripMenuItem.Text = "Import palette set...";
             // 
             // exportPaletteSetToolStripMenuItem
             // 
             this.exportPaletteSetToolStripMenuItem.Name = "exportPaletteSetToolStripMenuItem";
-            this.exportPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.exportPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.exportPaletteSetToolStripMenuItem.Text = "Export palette set...";
             // 
             // PaletteEditor
