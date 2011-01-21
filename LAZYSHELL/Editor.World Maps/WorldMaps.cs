@@ -186,7 +186,7 @@ namespace LAZYSHELL
             toolTip1.SetToolTip(this.leadToMapPoint,
                 "If this is enabled, the destination will be another location \n" +
                 "(typically a location in different one of the 8 maps). If not \n" +
-                "enabled, then the destination will be a level #.");
+                "enabled, then an event (Run Event) will be triggered.");
 
             toolTip1.SetToolTip(this.whichPointCheckAddress,
                 "If the bit (at the right) of this memory address is set, then \n" +
@@ -199,6 +199,13 @@ namespace LAZYSHELL
                 "the location will lead to the first destination (next to \"lead to \n" +
                 "destionation\"), otherwise it will lead to the second one.\n" +
                 "This is ignored if \"LOCATION\" is disabled.");
+
+            toolTip1.SetToolTip(this.runEvent,
+                "The event to run when entering the map point.\n" +
+                "This is ignored if \"LOCATION\" is disabled.");
+
+            toolTip1.SetToolTip(this.runEventEdit,
+                "Edit the assigned event # in the Events editor.");
 
             toolTip1.SetToolTip(this.goMapPointA,
                 "The destination the location leads to.");
@@ -844,10 +851,6 @@ namespace LAZYSHELL
                 }
             }
             pictureBoxTileset.Invalidate();
-        }
-        public void PictureBoxTileset_MouseUp(object sender, MouseEventArgs e)
-        {
-            pictureBoxTileset_MouseUp(sender, e);
         }
         private void pictureBoxTileset_MouseUp(object sender, MouseEventArgs e)
         {

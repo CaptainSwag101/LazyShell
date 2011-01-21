@@ -111,7 +111,7 @@
             // 
             // panel30
             // 
-            this.panel30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel30.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel30.Controls.Add(this.panel25);
             this.panel30.Controls.Add(this.panel1);
             this.panel30.Controls.Add(this.toolStrip7);

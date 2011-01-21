@@ -86,7 +86,7 @@ namespace LAZYSHELL.Previewer
             // 
             // emuPathLabel
             // 
-            this.emuPathLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.emuPathLabel.BackColor = System.Drawing.SystemColors.Control;
             this.emuPathLabel.Location = new System.Drawing.Point(0, 0);
             this.emuPathLabel.Name = "emuPathLabel";
             this.emuPathLabel.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -97,7 +97,6 @@ namespace LAZYSHELL.Previewer
             // changeEmuButton
             // 
             this.changeEmuButton.BackColor = System.Drawing.SystemColors.Control;
-            this.changeEmuButton.FlatAppearance.BorderSize = 0;
             this.changeEmuButton.Location = new System.Drawing.Point(639, 0);
             this.changeEmuButton.Name = "changeEmuButton";
             this.changeEmuButton.Size = new System.Drawing.Size(70, 17);
@@ -129,7 +128,7 @@ namespace LAZYSHELL.Previewer
             // 
             // romLabel
             // 
-            this.romLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.romLabel.BackColor = System.Drawing.SystemColors.Control;
             this.romLabel.Location = new System.Drawing.Point(0, 18);
             this.romLabel.Name = "romLabel";
             this.romLabel.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -139,7 +138,7 @@ namespace LAZYSHELL.Previewer
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -201,7 +200,7 @@ namespace LAZYSHELL.Previewer
             // 
             // linkLabelZSNES
             // 
-            this.linkLabelZSNES.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.linkLabelZSNES.BackColor = System.Drawing.SystemColors.Control;
             this.linkLabelZSNES.Location = new System.Drawing.Point(0, 54);
             this.linkLabelZSNES.Name = "linkLabelZSNES";
             this.linkLabelZSNES.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -268,7 +267,7 @@ namespace LAZYSHELL.Previewer
             // 
             // label5
             // 
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label5.BackColor = System.Drawing.SystemColors.Control;
             this.label5.Location = new System.Drawing.Point(0, 19);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -278,7 +277,7 @@ namespace LAZYSHELL.Previewer
             // 
             // label6
             // 
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Location = new System.Drawing.Point(0, 37);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -288,7 +287,7 @@ namespace LAZYSHELL.Previewer
             // 
             // label7
             // 
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label7.BackColor = System.Drawing.SystemColors.Control;
             this.label7.Location = new System.Drawing.Point(0, 55);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -314,7 +313,6 @@ namespace LAZYSHELL.Previewer
             // defaultZSNES
             // 
             this.defaultZSNES.BackColor = System.Drawing.SystemColors.Control;
-            this.defaultZSNES.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.defaultZSNES.Location = new System.Drawing.Point(639, 54);
             this.defaultZSNES.Name = "defaultZSNES";
             this.defaultZSNES.Size = new System.Drawing.Size(70, 17);
@@ -463,7 +461,6 @@ namespace LAZYSHELL.Previewer
             // defaultSNES9X
             // 
             this.defaultSNES9X.BackColor = System.Drawing.SystemColors.Control;
-            this.defaultSNES9X.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(168)))), ((int)(((byte)(168)))));
             this.defaultSNES9X.Location = new System.Drawing.Point(639, 36);
             this.defaultSNES9X.Name = "defaultSNES9X";
             this.defaultSNES9X.Size = new System.Drawing.Size(70, 17);
@@ -475,7 +472,7 @@ namespace LAZYSHELL.Previewer
             // 
             // linkLabelSNES9X
             // 
-            this.linkLabelSNES9X.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.linkLabelSNES9X.BackColor = System.Drawing.SystemColors.Control;
             this.linkLabelSNES9X.Location = new System.Drawing.Point(0, 36);
             this.linkLabelSNES9X.Name = "linkLabelSNES9X";
             this.linkLabelSNES9X.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);

@@ -138,7 +138,7 @@
             // 
             // label98
             // 
-            this.label98.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label98.BackColor = System.Drawing.SystemColors.Control;
             this.label98.Location = new System.Drawing.Point(0, 36);
             this.label98.Name = "label98";
             this.label98.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -163,7 +163,7 @@
             // 
             // label96
             // 
-            this.label96.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label96.BackColor = System.Drawing.SystemColors.Control;
             this.label96.Location = new System.Drawing.Point(0, 18);
             this.label96.Name = "label96";
             this.label96.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -203,7 +203,7 @@
             // 
             // label7
             // 
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label7.BackColor = System.Drawing.SystemColors.Control;
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -223,7 +223,7 @@
             // 
             // panel85
             // 
-            this.panel85.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel85.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel85.Controls.Add(this.panel97);
             this.panel85.Controls.Add(this.e_availableBytes);
             this.panel85.Controls.Add(this.label63);
@@ -338,7 +338,7 @@
             // 
             // label107
             // 
-            this.label107.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label107.BackColor = System.Drawing.SystemColors.Control;
             this.label107.Location = new System.Drawing.Point(0, 57);
             this.label107.Name = "label107";
             this.label107.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -366,7 +366,7 @@
             // 
             // label90
             // 
-            this.label90.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label90.BackColor = System.Drawing.SystemColors.Control;
             this.label90.Location = new System.Drawing.Point(0, 93);
             this.label90.Name = "label90";
             this.label90.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -418,7 +418,7 @@
             // 
             // label89
             // 
-            this.label89.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label89.BackColor = System.Drawing.SystemColors.Control;
             this.label89.Location = new System.Drawing.Point(0, 75);
             this.label89.Name = "label89";
             this.label89.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -429,7 +429,6 @@
             // toolStrip2
             // 
             this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.save,
             this.toolStripSeparator1,

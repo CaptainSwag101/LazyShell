@@ -194,7 +194,7 @@ namespace LAZYSHELL
         }
         private void PaletteUpdate()
         {
-            this.tileset = new BattlefieldTileSet(battlefield, paletteSets[battlefield.PaletteSet]);
+            this.tileset.RedrawTileset();
             SetBattlefieldImage();
             LoadGraphicEditor();
             LoadTileEditor();
@@ -202,7 +202,7 @@ namespace LAZYSHELL
         private void GraphicUpdate()
         {
             this.tileset.AssembleIntoModel(16, 2);
-            this.tileset = new BattlefieldTileSet(battlefield, paletteSets[battlefield.PaletteSet]);
+            this.tileset.RedrawTileset();
             SetBattlefieldImage();
             LoadTileEditor();
         }

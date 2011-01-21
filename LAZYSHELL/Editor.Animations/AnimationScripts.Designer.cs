@@ -145,7 +145,7 @@
             // 
             // panel40
             // 
-            this.panel40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel40.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel40.Controls.Add(this.aniTitleB);
             this.panel40.Controls.Add(this.aniBits);
             this.panel40.Controls.Add(this.aniTitleC);
@@ -218,7 +218,7 @@
             // 
             // aniLabelF
             // 
-            this.aniLabelF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.aniLabelF.BackColor = System.Drawing.SystemColors.Control;
             this.aniLabelF.Location = new System.Drawing.Point(0, 298);
             this.aniLabelF.Name = "aniLabelF";
             this.aniLabelF.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -242,7 +242,7 @@
             // 
             // aniLabelE
             // 
-            this.aniLabelE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.aniLabelE.BackColor = System.Drawing.SystemColors.Control;
             this.aniLabelE.Location = new System.Drawing.Point(0, 280);
             this.aniLabelE.Name = "aniLabelE";
             this.aniLabelE.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -319,7 +319,7 @@
             // 
             // aniLabelA
             // 
-            this.aniLabelA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.aniLabelA.BackColor = System.Drawing.SystemColors.Control;
             this.aniLabelA.Location = new System.Drawing.Point(0, 19);
             this.aniLabelA.Name = "aniLabelA";
             this.aniLabelA.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -344,7 +344,7 @@
             // 
             // aniLabelD
             // 
-            this.aniLabelD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.aniLabelD.BackColor = System.Drawing.SystemColors.Control;
             this.aniLabelD.Location = new System.Drawing.Point(0, 93);
             this.aniLabelD.Name = "aniLabelD";
             this.aniLabelD.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -353,7 +353,7 @@
             // 
             // aniLabelC
             // 
-            this.aniLabelC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.aniLabelC.BackColor = System.Drawing.SystemColors.Control;
             this.aniLabelC.Location = new System.Drawing.Point(0, 75);
             this.aniLabelC.Name = "aniLabelC";
             this.aniLabelC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -362,7 +362,7 @@
             // 
             // aniLabelB
             // 
-            this.aniLabelB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.aniLabelB.BackColor = System.Drawing.SystemColors.Control;
             this.aniLabelB.Location = new System.Drawing.Point(0, 37);
             this.aniLabelB.Name = "aniLabelB";
             this.aniLabelB.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);

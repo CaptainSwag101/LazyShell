@@ -54,6 +54,7 @@ namespace LAZYSHELL
             if (mapPoint.GoMapPoint)
             {
                 label55.Text = "lead to destination";
+                label56.Text = "else lead to destination";
                 whichPointCheckAddress.Enabled = true;
                 whichPointCheckBit.Enabled = true;
                 goMapPointA.BringToFront();
@@ -69,6 +70,7 @@ namespace LAZYSHELL
                 runEvent.BringToFront();
                 runEventEdit.BringToFront();
                 label55.Text = "assigned event #";
+                label56.Text = "";
                 whichPointCheckAddress.Enabled = false;
                 whichPointCheckBit.Enabled = false;
                 goMapPointA.Enabled = false;
@@ -439,6 +441,7 @@ namespace LAZYSHELL
                 whichPointCheckAddress.Enabled = true;
                 whichPointCheckBit.Enabled = true;
                 label55.Text = "lead to destination";
+                label56.Text = "else lead to destination";
                 goMapPointA.Enabled = true;
                 goMapPointB.Enabled = true;
                 goMapPointA.BringToFront();
@@ -450,6 +453,7 @@ namespace LAZYSHELL
                 runEvent.BringToFront();
                 runEventEdit.BringToFront();
                 label55.Text = "assigned event #";
+                label56.Text = "";
                 whichPointCheckAddress.Enabled = false;
                 whichPointCheckBit.Enabled = false;
                 goMapPointA.Enabled = false;

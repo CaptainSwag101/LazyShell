@@ -256,7 +256,7 @@ namespace LAZYSHELL
             // 
             // label73
             // 
-            this.label73.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label73.BackColor = System.Drawing.SystemColors.Control;
             this.label73.Location = new System.Drawing.Point(0, 0);
             this.label73.Name = "label73";
             this.label73.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -276,7 +276,7 @@ namespace LAZYSHELL
             // 
             // panel24
             // 
-            this.panel24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel24.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel24.Controls.Add(this.label18);
             this.panel24.Controls.Add(this.label72);
             this.panel24.Controls.Add(this.animationVRAM);
@@ -290,7 +290,7 @@ namespace LAZYSHELL
             // 
             // label18
             // 
-            this.label18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label18.BackColor = System.Drawing.SystemColors.Control;
             this.label18.Location = new System.Drawing.Point(0, 57);
             this.label18.Name = "label18";
             this.label18.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -395,7 +395,7 @@ namespace LAZYSHELL
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel5.Controls.Add(this.label88);
             this.panel5.Controls.Add(this.label23);
             this.panel5.Controls.Add(this.graphicOffset);
@@ -423,7 +423,7 @@ namespace LAZYSHELL
             // 
             // label23
             // 
-            this.label23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label23.BackColor = System.Drawing.SystemColors.Control;
             this.label23.Location = new System.Drawing.Point(0, 37);
             this.label23.Name = "label23";
             this.label23.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -482,7 +482,7 @@ namespace LAZYSHELL
             // 
             // label9
             // 
-            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label9.BackColor = System.Drawing.SystemColors.Control;
             this.label9.Location = new System.Drawing.Point(0, 55);
             this.label9.Name = "label9";
             this.label9.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -553,7 +553,6 @@ namespace LAZYSHELL
             // toolStrip2
             // 
             this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.save,
             this.toolStripSeparator11,

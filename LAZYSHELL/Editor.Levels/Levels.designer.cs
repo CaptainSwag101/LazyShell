@@ -881,7 +881,7 @@ namespace LAZYSHELL
             // 
             // panel85
             // 
-            this.panel85.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel85.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel85.Controls.Add(this.npcAttributes);
             this.panel85.Controls.Add(this.label65);
             this.panel85.Location = new System.Drawing.Point(0, 395);
@@ -933,7 +933,7 @@ namespace LAZYSHELL
             // 
             // panel84
             // 
-            this.panel84.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel84.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel84.Controls.Add(this.npcX);
             this.panel84.Controls.Add(this.npcY);
             this.panel84.Controls.Add(this.label29);
@@ -987,7 +987,7 @@ namespace LAZYSHELL
             // 
             // label29
             // 
-            this.label29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label29.BackColor = System.Drawing.SystemColors.Control;
             this.label29.Location = new System.Drawing.Point(0, 72);
             this.label29.Name = "label29";
             this.label29.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -997,7 +997,7 @@ namespace LAZYSHELL
             // 
             // label28
             // 
-            this.label28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label28.BackColor = System.Drawing.SystemColors.Control;
             this.label28.Location = new System.Drawing.Point(0, 90);
             this.label28.Name = "label28";
             this.label28.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1022,7 +1022,7 @@ namespace LAZYSHELL
             // 
             // label56
             // 
-            this.label56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label56.BackColor = System.Drawing.SystemColors.Control;
             this.label56.Location = new System.Drawing.Point(0, 108);
             this.label56.Name = "label56";
             this.label56.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1032,7 +1032,7 @@ namespace LAZYSHELL
             // 
             // label30
             // 
-            this.label30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label30.BackColor = System.Drawing.SystemColors.Control;
             this.label30.Location = new System.Drawing.Point(0, 144);
             this.label30.Name = "label30";
             this.label30.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1057,7 +1057,7 @@ namespace LAZYSHELL
             // 
             // label104
             // 
-            this.label104.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label104.BackColor = System.Drawing.SystemColors.Control;
             this.label104.Location = new System.Drawing.Point(0, 18);
             this.label104.Name = "label104";
             this.label104.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1081,7 +1081,7 @@ namespace LAZYSHELL
             // 
             // label31
             // 
-            this.label31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label31.BackColor = System.Drawing.SystemColors.Control;
             this.label31.Location = new System.Drawing.Point(0, 36);
             this.label31.Name = "label31";
             this.label31.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1105,7 +1105,7 @@ namespace LAZYSHELL
             // 
             // label116
             // 
-            this.label116.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label116.BackColor = System.Drawing.SystemColors.Control;
             this.label116.Location = new System.Drawing.Point(0, 54);
             this.label116.Name = "label116";
             this.label116.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1176,7 +1176,7 @@ namespace LAZYSHELL
             // 
             // panel83
             // 
-            this.panel83.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel83.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel83.Controls.Add(this.npcID);
             this.panel83.Controls.Add(this.label49);
             this.panel83.Controls.Add(this.npcMovement);
@@ -1211,7 +1211,7 @@ namespace LAZYSHELL
             // 
             // label49
             // 
-            this.label49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label49.BackColor = System.Drawing.SystemColors.Control;
             this.label49.Location = new System.Drawing.Point(0, 76);
             this.label49.Name = "label49";
             this.label49.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1266,7 +1266,7 @@ namespace LAZYSHELL
             // 
             // label54
             // 
-            this.label54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label54.BackColor = System.Drawing.SystemColors.Control;
             this.label54.Location = new System.Drawing.Point(0, 130);
             this.label54.Name = "label54";
             this.label54.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1276,7 +1276,7 @@ namespace LAZYSHELL
             // 
             // label117
             // 
-            this.label117.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label117.BackColor = System.Drawing.SystemColors.Control;
             this.label117.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label117.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label117.Location = new System.Drawing.Point(0, 0);
@@ -1288,7 +1288,7 @@ namespace LAZYSHELL
             // 
             // label70
             // 
-            this.label70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label70.BackColor = System.Drawing.SystemColors.Control;
             this.label70.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label70.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label70.Location = new System.Drawing.Point(0, 38);
@@ -1391,7 +1391,7 @@ namespace LAZYSHELL
             // 
             // panel80
             // 
-            this.panel80.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel80.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel80.Controls.Add(this.label48);
             this.panel80.Controls.Add(this.npcMapHeader);
             this.panel80.Location = new System.Drawing.Point(128, 26);
@@ -1401,7 +1401,7 @@ namespace LAZYSHELL
             // 
             // label48
             // 
-            this.label48.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label48.BackColor = System.Drawing.SystemColors.Control;
             this.label48.Location = new System.Drawing.Point(0, 0);
             this.label48.Name = "label48";
             this.label48.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1426,7 +1426,7 @@ namespace LAZYSHELL
             // 
             // panel118
             // 
-            this.panel118.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel118.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel118.Controls.Add(this.label52);
             this.panel118.Controls.Add(this.panel119);
             this.panel118.Location = new System.Drawing.Point(128, 357);
@@ -1436,7 +1436,7 @@ namespace LAZYSHELL
             // 
             // label52
             // 
-            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label52.BackColor = System.Drawing.SystemColors.Control;
             this.label52.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label52.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label52.Location = new System.Drawing.Point(0, 0);
@@ -1521,7 +1521,7 @@ namespace LAZYSHELL
             // 
             // label19
             // 
-            this.label19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label19.BackColor = System.Drawing.SystemColors.Control;
             this.label19.Location = new System.Drawing.Point(0, 91);
             this.label19.Name = "label19";
             this.label19.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1531,7 +1531,7 @@ namespace LAZYSHELL
             // 
             // label18
             // 
-            this.label18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label18.BackColor = System.Drawing.SystemColors.Control;
             this.label18.Location = new System.Drawing.Point(0, 73);
             this.label18.Name = "label18";
             this.label18.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1541,7 +1541,7 @@ namespace LAZYSHELL
             // 
             // label17
             // 
-            this.label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label17.BackColor = System.Drawing.SystemColors.Control;
             this.label17.Location = new System.Drawing.Point(0, 55);
             this.label17.Name = "label17";
             this.label17.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1551,7 +1551,7 @@ namespace LAZYSHELL
             // 
             // label16
             // 
-            this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label16.BackColor = System.Drawing.SystemColors.Control;
             this.label16.Location = new System.Drawing.Point(0, 37);
             this.label16.Name = "label16";
             this.label16.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1561,7 +1561,7 @@ namespace LAZYSHELL
             // 
             // label2
             // 
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label2.BackColor = System.Drawing.SystemColors.Control;
             this.label2.Location = new System.Drawing.Point(0, 19);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1712,7 +1712,7 @@ namespace LAZYSHELL
             // 
             // panel99
             // 
-            this.panel99.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel99.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel99.Controls.Add(this.overlapCoordZPlusHalf);
             this.panel99.Controls.Add(this.label109);
             this.panel99.Controls.Add(this.label103);
@@ -1745,7 +1745,7 @@ namespace LAZYSHELL
             // 
             // label109
             // 
-            this.label109.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label109.BackColor = System.Drawing.SystemColors.Control;
             this.label109.Location = new System.Drawing.Point(0, 0);
             this.label109.Name = "label109";
             this.label109.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1755,7 +1755,7 @@ namespace LAZYSHELL
             // 
             // label103
             // 
-            this.label103.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label103.BackColor = System.Drawing.SystemColors.Control;
             this.label103.Location = new System.Drawing.Point(0, 18);
             this.label103.Name = "label103";
             this.label103.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1765,7 +1765,7 @@ namespace LAZYSHELL
             // 
             // label107
             // 
-            this.label107.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label107.BackColor = System.Drawing.SystemColors.Control;
             this.label107.Location = new System.Drawing.Point(0, 54);
             this.label107.Name = "label107";
             this.label107.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1835,7 +1835,7 @@ namespace LAZYSHELL
             // 
             // label106
             // 
-            this.label106.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label106.BackColor = System.Drawing.SystemColors.Control;
             this.label106.Location = new System.Drawing.Point(0, 36);
             this.label106.Name = "label106";
             this.label106.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2004,7 +2004,7 @@ namespace LAZYSHELL
             // 
             // panel90
             // 
-            this.panel90.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel90.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel90.Controls.Add(this.buttonGotoD);
             this.panel90.Controls.Add(this.label62);
             this.panel90.Controls.Add(this.label127);
@@ -2058,7 +2058,7 @@ namespace LAZYSHELL
             // 
             // label127
             // 
-            this.label127.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label127.BackColor = System.Drawing.SystemColors.Control;
             this.label127.Location = new System.Drawing.Point(0, 37);
             this.label127.Name = "label127";
             this.label127.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2093,7 +2093,7 @@ namespace LAZYSHELL
             // 
             // label129
             // 
-            this.label129.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label129.BackColor = System.Drawing.SystemColors.Control;
             this.label129.Location = new System.Drawing.Point(0, 55);
             this.label129.Name = "label129";
             this.label129.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2135,7 +2135,7 @@ namespace LAZYSHELL
             // 
             // label131
             // 
-            this.label131.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label131.BackColor = System.Drawing.SystemColors.Control;
             this.label131.Location = new System.Drawing.Point(0, 91);
             this.label131.Name = "label131";
             this.label131.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2230,7 +2230,7 @@ namespace LAZYSHELL
             // 
             // label133
             // 
-            this.label133.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label133.BackColor = System.Drawing.SystemColors.Control;
             this.label133.Location = new System.Drawing.Point(0, 73);
             this.label133.Name = "label133";
             this.label133.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2240,7 +2240,7 @@ namespace LAZYSHELL
             // 
             // label135
             // 
-            this.label135.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label135.BackColor = System.Drawing.SystemColors.Control;
             this.label135.Location = new System.Drawing.Point(0, 109);
             this.label135.Name = "label135";
             this.label135.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2250,7 +2250,7 @@ namespace LAZYSHELL
             // 
             // label137
             // 
-            this.label137.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label137.BackColor = System.Drawing.SystemColors.Control;
             this.label137.Location = new System.Drawing.Point(0, 127);
             this.label137.Name = "label137";
             this.label137.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2275,7 +2275,7 @@ namespace LAZYSHELL
             // 
             // panel89
             // 
-            this.panel89.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel89.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel89.Controls.Add(this.buttonGotoC);
             this.panel89.Controls.Add(this.label1);
             this.panel89.Controls.Add(this.label125);
@@ -2317,7 +2317,7 @@ namespace LAZYSHELL
             // 
             // label125
             // 
-            this.label125.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label125.BackColor = System.Drawing.SystemColors.Control;
             this.label125.Location = new System.Drawing.Point(0, 19);
             this.label125.Name = "label125";
             this.label125.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2473,7 +2473,7 @@ namespace LAZYSHELL
             // 
             // panel88
             // 
-            this.panel88.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel88.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel88.Controls.Add(this.label66);
             this.panel88.Controls.Add(this.label59);
             this.panel88.Controls.Add(this.exitDestY);
@@ -2504,7 +2504,7 @@ namespace LAZYSHELL
             // 
             // label59
             // 
-            this.label59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label59.BackColor = System.Drawing.SystemColors.Control;
             this.label59.Location = new System.Drawing.Point(0, 19);
             this.label59.Name = "label59";
             this.label59.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2546,7 +2546,7 @@ namespace LAZYSHELL
             // 
             // label60
             // 
-            this.label60.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label60.BackColor = System.Drawing.SystemColors.Control;
             this.label60.Location = new System.Drawing.Point(0, 37);
             this.label60.Name = "label60";
             this.label60.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2586,7 +2586,7 @@ namespace LAZYSHELL
             // 
             // label122
             // 
-            this.label122.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label122.BackColor = System.Drawing.SystemColors.Control;
             this.label122.Location = new System.Drawing.Point(0, 55);
             this.label122.Name = "label122";
             this.label122.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2596,7 +2596,7 @@ namespace LAZYSHELL
             // 
             // label124
             // 
-            this.label124.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label124.BackColor = System.Drawing.SystemColors.Control;
             this.label124.Location = new System.Drawing.Point(0, 73);
             this.label124.Name = "label124";
             this.label124.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2635,7 +2635,7 @@ namespace LAZYSHELL
             // 
             // panel87
             // 
-            this.panel87.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel87.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel87.Controls.Add(this.label119);
             this.panel87.Controls.Add(this.exits135LengthPlusHalf);
             this.panel87.Controls.Add(this.label58);
@@ -2662,7 +2662,7 @@ namespace LAZYSHELL
             // 
             // label119
             // 
-            this.label119.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label119.BackColor = System.Drawing.SystemColors.Control;
             this.label119.Location = new System.Drawing.Point(0, 72);
             this.label119.Name = "label119";
             this.label119.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2689,7 +2689,7 @@ namespace LAZYSHELL
             // 
             // label58
             // 
-            this.label58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label58.BackColor = System.Drawing.SystemColors.Control;
             this.label58.Location = new System.Drawing.Point(0, 90);
             this.label58.Name = "label58";
             this.label58.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2741,7 +2741,7 @@ namespace LAZYSHELL
             // 
             // label105
             // 
-            this.label105.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label105.BackColor = System.Drawing.SystemColors.Control;
             this.label105.Location = new System.Drawing.Point(0, 126);
             this.label105.Name = "label105";
             this.label105.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2827,7 +2827,7 @@ namespace LAZYSHELL
             // 
             // label37
             // 
-            this.label37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label37.BackColor = System.Drawing.SystemColors.Control;
             this.label37.Location = new System.Drawing.Point(0, 54);
             this.label37.Name = "label37";
             this.label37.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2837,7 +2837,7 @@ namespace LAZYSHELL
             // 
             // label55
             // 
-            this.label55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label55.BackColor = System.Drawing.SystemColors.Control;
             this.label55.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label55.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label55.Location = new System.Drawing.Point(0, 0);
@@ -2849,7 +2849,7 @@ namespace LAZYSHELL
             // 
             // label57
             // 
-            this.label57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label57.BackColor = System.Drawing.SystemColors.Control;
             this.label57.Location = new System.Drawing.Point(0, 108);
             this.label57.Name = "label57";
             this.label57.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2859,7 +2859,7 @@ namespace LAZYSHELL
             // 
             // label120
             // 
-            this.label120.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label120.BackColor = System.Drawing.SystemColors.Control;
             this.label120.Location = new System.Drawing.Point(0, 144);
             this.label120.Name = "label120";
             this.label120.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -2892,7 +2892,7 @@ namespace LAZYSHELL
             // 
             // label47
             // 
-            this.label47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label47.BackColor = System.Drawing.SystemColors.Control;
             this.label47.Location = new System.Drawing.Point(0, 162);
             this.label47.Name = "label47";
             this.label47.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -3019,7 +3019,7 @@ namespace LAZYSHELL
             // 
             // panel72
             // 
-            this.panel72.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel72.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel72.Controls.Add(this.label87);
             this.panel72.Controls.Add(this.label44);
             this.panel72.Controls.Add(this.mapGFXSet1Num);
@@ -3059,7 +3059,7 @@ namespace LAZYSHELL
             // 
             // label44
             // 
-            this.label44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label44.BackColor = System.Drawing.SystemColors.Control;
             this.label44.Location = new System.Drawing.Point(0, 109);
             this.label44.Name = "label44";
             this.label44.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -3314,7 +3314,7 @@ namespace LAZYSHELL
             // 
             // panel71
             // 
-            this.panel71.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel71.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel71.Controls.Add(this.label88);
             this.panel71.Controls.Add(this.label40);
             this.panel71.Controls.Add(this.label35);
@@ -3345,7 +3345,7 @@ namespace LAZYSHELL
             // 
             // label40
             // 
-            this.label40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label40.BackColor = System.Drawing.SystemColors.Control;
             this.label40.Location = new System.Drawing.Point(0, 55);
             this.label40.Name = "label40";
             this.label40.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -3355,7 +3355,7 @@ namespace LAZYSHELL
             // 
             // label35
             // 
-            this.label35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label35.BackColor = System.Drawing.SystemColors.Control;
             this.label35.Location = new System.Drawing.Point(0, 37);
             this.label35.Name = "label35";
             this.label35.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -3431,7 +3431,7 @@ namespace LAZYSHELL
             // 
             // label34
             // 
-            this.label34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label34.BackColor = System.Drawing.SystemColors.Control;
             this.label34.Location = new System.Drawing.Point(0, 19);
             this.label34.Name = "label34";
             this.label34.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -3482,7 +3482,7 @@ namespace LAZYSHELL
             // 
             // panel70
             // 
-            this.panel70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel70.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel70.Controls.Add(this.label89);
             this.panel70.Controls.Add(this.mapTilemapL1Num);
             this.panel70.Controls.Add(this.mapSetL3Priority);
@@ -3651,7 +3651,7 @@ namespace LAZYSHELL
             // 
             // label43
             // 
-            this.label43.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label43.BackColor = System.Drawing.SystemColors.Control;
             this.label43.Location = new System.Drawing.Point(0, 19);
             this.label43.Name = "label43";
             this.label43.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -3762,7 +3762,7 @@ namespace LAZYSHELL
             // 
             // label42
             // 
-            this.label42.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label42.BackColor = System.Drawing.SystemColors.Control;
             this.label42.Location = new System.Drawing.Point(0, 37);
             this.label42.Name = "label42";
             this.label42.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -3793,7 +3793,7 @@ namespace LAZYSHELL
             // 
             // label41
             // 
-            this.label41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label41.BackColor = System.Drawing.SystemColors.Control;
             this.label41.Location = new System.Drawing.Point(0, 55);
             this.label41.Name = "label41";
             this.label41.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -3960,7 +3960,7 @@ namespace LAZYSHELL
             // 
             // label45
             // 
-            this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label45.BackColor = System.Drawing.SystemColors.Control;
             this.label45.Location = new System.Drawing.Point(0, 73);
             this.label45.Name = "label45";
             this.label45.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -3991,7 +3991,7 @@ namespace LAZYSHELL
             // 
             // label76
             // 
-            this.label76.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label76.BackColor = System.Drawing.SystemColors.Control;
             this.label76.Location = new System.Drawing.Point(0, 91);
             this.label76.Name = "label76";
             this.label76.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4016,7 +4016,7 @@ namespace LAZYSHELL
             // 
             // panel69
             // 
-            this.panel69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel69.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel69.Controls.Add(this.label114);
             this.panel69.Controls.Add(this.panel40);
             this.panel69.Controls.Add(this.mapPaletteSetNum);
@@ -4172,7 +4172,7 @@ namespace LAZYSHELL
             // 
             // label46
             // 
-            this.label46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label46.BackColor = System.Drawing.SystemColors.Control;
             this.label46.Location = new System.Drawing.Point(0, 19);
             this.label46.Name = "label46";
             this.label46.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4212,7 +4212,7 @@ namespace LAZYSHELL
             // 
             // panel79
             // 
-            this.panel79.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel79.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel79.Controls.Add(this.label110);
             this.panel79.Controls.Add(this.label39);
             this.panel79.Controls.Add(this.label38);
@@ -4239,7 +4239,7 @@ namespace LAZYSHELL
             // 
             // label39
             // 
-            this.label39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label39.BackColor = System.Drawing.SystemColors.Control;
             this.label39.Location = new System.Drawing.Point(0, 19);
             this.label39.Name = "label39";
             this.label39.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4249,7 +4249,7 @@ namespace LAZYSHELL
             // 
             // label38
             // 
-            this.label38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label38.BackColor = System.Drawing.SystemColors.Control;
             this.label38.Location = new System.Drawing.Point(0, 37);
             this.label38.Name = "label38";
             this.label38.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4367,7 +4367,7 @@ namespace LAZYSHELL
             // 
             // panel78
             // 
-            this.panel78.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel78.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel78.Controls.Add(this.label7);
             this.panel78.Controls.Add(this.label85);
             this.panel78.Controls.Add(this.label84);
@@ -4400,7 +4400,7 @@ namespace LAZYSHELL
             // 
             // label85
             // 
-            this.label85.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label85.BackColor = System.Drawing.SystemColors.Control;
             this.label85.Location = new System.Drawing.Point(0, 37);
             this.label85.Name = "label85";
             this.label85.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4410,7 +4410,7 @@ namespace LAZYSHELL
             // 
             // label84
             // 
-            this.label84.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label84.BackColor = System.Drawing.SystemColors.Control;
             this.label84.Location = new System.Drawing.Point(0, 55);
             this.label84.Name = "label84";
             this.label84.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4420,7 +4420,7 @@ namespace LAZYSHELL
             // 
             // label83
             // 
-            this.label83.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label83.BackColor = System.Drawing.SystemColors.Control;
             this.label83.Location = new System.Drawing.Point(0, 73);
             this.label83.Name = "label83";
             this.label83.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4430,7 +4430,7 @@ namespace LAZYSHELL
             // 
             // label82
             // 
-            this.label82.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label82.BackColor = System.Drawing.SystemColors.Control;
             this.label82.Location = new System.Drawing.Point(0, 91);
             this.label82.Name = "label82";
             this.label82.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4595,7 +4595,7 @@ namespace LAZYSHELL
             // 
             // panel77
             // 
-            this.panel77.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel77.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel77.Controls.Add(this.label6);
             this.panel77.Controls.Add(this.label12);
             this.panel77.Controls.Add(this.label13);
@@ -4625,7 +4625,7 @@ namespace LAZYSHELL
             // 
             // label12
             // 
-            this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label12.BackColor = System.Drawing.SystemColors.Control;
             this.label12.Location = new System.Drawing.Point(0, 19);
             this.label12.Name = "label12";
             this.label12.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4635,7 +4635,7 @@ namespace LAZYSHELL
             // 
             // label13
             // 
-            this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label13.BackColor = System.Drawing.SystemColors.Control;
             this.label13.Location = new System.Drawing.Point(0, 37);
             this.label13.Name = "label13";
             this.label13.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4645,7 +4645,7 @@ namespace LAZYSHELL
             // 
             // label11
             // 
-            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label11.BackColor = System.Drawing.SystemColors.Control;
             this.label11.Location = new System.Drawing.Point(0, 55);
             this.label11.Name = "label11";
             this.label11.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4655,7 +4655,7 @@ namespace LAZYSHELL
             // 
             // label3
             // 
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label3.BackColor = System.Drawing.SystemColors.Control;
             this.label3.Location = new System.Drawing.Point(0, 73);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4757,7 +4757,7 @@ namespace LAZYSHELL
             // 
             // panel76
             // 
-            this.panel76.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel76.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel76.Controls.Add(this.label91);
             this.panel76.Controls.Add(this.layerScrollWrapping);
             this.panel76.Location = new System.Drawing.Point(0, 241);
@@ -4802,7 +4802,7 @@ namespace LAZYSHELL
             // 
             // panel75
             // 
-            this.panel75.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel75.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel75.Controls.Add(this.label5);
             this.panel75.Controls.Add(this.layerL2LeftShift);
             this.panel75.Controls.Add(this.layerL2UpShift);
@@ -4863,7 +4863,7 @@ namespace LAZYSHELL
             // 
             // label23
             // 
-            this.label23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label23.BackColor = System.Drawing.SystemColors.Control;
             this.label23.Location = new System.Drawing.Point(0, 19);
             this.label23.Name = "label23";
             this.label23.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4873,7 +4873,7 @@ namespace LAZYSHELL
             // 
             // label10
             // 
-            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label10.BackColor = System.Drawing.SystemColors.Control;
             this.label10.Location = new System.Drawing.Point(0, 37);
             this.label10.Name = "label10";
             this.label10.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4898,7 +4898,7 @@ namespace LAZYSHELL
             // 
             // label9
             // 
-            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label9.BackColor = System.Drawing.SystemColors.Control;
             this.label9.Location = new System.Drawing.Point(130, 19);
             this.label9.Name = "label9";
             this.label9.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4923,7 +4923,7 @@ namespace LAZYSHELL
             // 
             // label8
             // 
-            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label8.BackColor = System.Drawing.SystemColors.Control;
             this.label8.Location = new System.Drawing.Point(130, 37);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -4933,7 +4933,7 @@ namespace LAZYSHELL
             // 
             // panel74
             // 
-            this.panel74.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel74.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel74.Controls.Add(this.label4);
             this.panel74.Controls.Add(this.layerMaskHighX);
             this.panel74.Controls.Add(this.layerLockMask);
@@ -5010,7 +5010,7 @@ namespace LAZYSHELL
             // 
             // label25
             // 
-            this.label25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label25.BackColor = System.Drawing.SystemColors.Control;
             this.label25.Location = new System.Drawing.Point(0, 19);
             this.label25.Name = "label25";
             this.label25.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5035,7 +5035,7 @@ namespace LAZYSHELL
             // 
             // label24
             // 
-            this.label24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label24.BackColor = System.Drawing.SystemColors.Control;
             this.label24.Location = new System.Drawing.Point(0, 37);
             this.label24.Name = "label24";
             this.label24.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5060,7 +5060,7 @@ namespace LAZYSHELL
             // 
             // label15
             // 
-            this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label15.BackColor = System.Drawing.SystemColors.Control;
             this.label15.Location = new System.Drawing.Point(130, 19);
             this.label15.Name = "label15";
             this.label15.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5070,7 +5070,7 @@ namespace LAZYSHELL
             // 
             // labeasdfasd
             // 
-            this.labeasdfasd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labeasdfasd.BackColor = System.Drawing.SystemColors.Control;
             this.labeasdfasd.Location = new System.Drawing.Point(130, 37);
             this.labeasdfasd.Name = "labeasdfasd";
             this.labeasdfasd.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5080,7 +5080,7 @@ namespace LAZYSHELL
             // 
             // panel73
             // 
-            this.panel73.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel73.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel73.Controls.Add(this.panel86);
             this.panel73.Controls.Add(this.label86);
             this.panel73.Controls.Add(this.label20);
@@ -5135,7 +5135,7 @@ namespace LAZYSHELL
             // 
             // label20
             // 
-            this.label20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label20.BackColor = System.Drawing.SystemColors.Control;
             this.label20.Location = new System.Drawing.Point(0, 37);
             this.label20.Name = "label20";
             this.label20.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5145,7 +5145,7 @@ namespace LAZYSHELL
             // 
             // label21
             // 
-            this.label21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label21.BackColor = System.Drawing.SystemColors.Control;
             this.label21.Location = new System.Drawing.Point(0, 55);
             this.label21.Name = "label21";
             this.label21.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5155,7 +5155,7 @@ namespace LAZYSHELL
             // 
             // label32
             // 
-            this.label32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label32.BackColor = System.Drawing.SystemColors.Control;
             this.label32.Location = new System.Drawing.Point(0, 19);
             this.label32.Name = "label32";
             this.label32.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5432,7 +5432,7 @@ namespace LAZYSHELL
             // 
             // label96
             // 
-            this.label96.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label96.BackColor = System.Drawing.SystemColors.Control;
             this.label96.Location = new System.Drawing.Point(138, 91);
             this.label96.Name = "label96";
             this.label96.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5457,7 +5457,7 @@ namespace LAZYSHELL
             // 
             // label95
             // 
-            this.label95.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label95.BackColor = System.Drawing.SystemColors.Control;
             this.label95.Location = new System.Drawing.Point(0, 91);
             this.label95.Name = "label95";
             this.label95.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5482,7 +5482,7 @@ namespace LAZYSHELL
             // 
             // label22
             // 
-            this.label22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label22.BackColor = System.Drawing.SystemColors.Control;
             this.label22.Location = new System.Drawing.Point(0, 73);
             this.label22.Name = "label22";
             this.label22.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5492,7 +5492,7 @@ namespace LAZYSHELL
             // 
             // label53
             // 
-            this.label53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label53.BackColor = System.Drawing.SystemColors.Control;
             this.label53.Location = new System.Drawing.Point(0, 0);
             this.label53.Name = "label53";
             this.label53.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5564,7 +5564,7 @@ namespace LAZYSHELL
             // 
             // panel44
             // 
-            this.panel44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel44.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel44.Controls.Add(this.label14);
             this.panel44.Controls.Add(this.solidModsY);
             this.panel44.Controls.Add(this.label51);
@@ -5580,7 +5580,7 @@ namespace LAZYSHELL
             // 
             // label14
             // 
-            this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label14.BackColor = System.Drawing.SystemColors.Control;
             this.label14.Location = new System.Drawing.Point(0, 0);
             this.label14.Name = "label14";
             this.label14.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5605,7 +5605,7 @@ namespace LAZYSHELL
             // 
             // label51
             // 
-            this.label51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label51.BackColor = System.Drawing.SystemColors.Control;
             this.label51.Location = new System.Drawing.Point(0, 18);
             this.label51.Name = "label51";
             this.label51.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5660,7 +5660,7 @@ namespace LAZYSHELL
             // 
             // label64
             // 
-            this.label64.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label64.BackColor = System.Drawing.SystemColors.Control;
             this.label64.Location = new System.Drawing.Point(0, 36);
             this.label64.Name = "label64";
             this.label64.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5670,7 +5670,7 @@ namespace LAZYSHELL
             // 
             // label67
             // 
-            this.label67.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label67.BackColor = System.Drawing.SystemColors.Control;
             this.label67.Location = new System.Drawing.Point(0, 54);
             this.label67.Name = "label67";
             this.label67.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5848,7 +5848,7 @@ namespace LAZYSHELL
             // 
             // panel15
             // 
-            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel15.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel15.Controls.Add(this.tileModsLayers);
             this.panel15.Controls.Add(this.label26);
             this.panel15.Controls.Add(this.tileModsY);
@@ -5882,7 +5882,7 @@ namespace LAZYSHELL
             // 
             // label26
             // 
-            this.label26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label26.BackColor = System.Drawing.SystemColors.Control;
             this.label26.Location = new System.Drawing.Point(0, 0);
             this.label26.Name = "label26";
             this.label26.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5907,7 +5907,7 @@ namespace LAZYSHELL
             // 
             // label27
             // 
-            this.label27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label27.BackColor = System.Drawing.SystemColors.Control;
             this.label27.Location = new System.Drawing.Point(0, 18);
             this.label27.Name = "label27";
             this.label27.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5962,7 +5962,7 @@ namespace LAZYSHELL
             // 
             // label36
             // 
-            this.label36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label36.BackColor = System.Drawing.SystemColors.Control;
             this.label36.Location = new System.Drawing.Point(0, 36);
             this.label36.Name = "label36";
             this.label36.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -5972,7 +5972,7 @@ namespace LAZYSHELL
             // 
             // label50
             // 
-            this.label50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label50.BackColor = System.Drawing.SystemColors.Control;
             this.label50.Location = new System.Drawing.Point(0, 54);
             this.label50.Name = "label50";
             this.label50.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);

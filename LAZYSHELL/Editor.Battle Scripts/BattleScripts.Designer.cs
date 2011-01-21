@@ -185,7 +185,7 @@
             // 
             this.pictureBoxMonster.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBoxMonster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.pictureBoxMonster.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBoxMonster.Location = new System.Drawing.Point(0, 287);
             this.pictureBoxMonster.Name = "pictureBoxMonster";
             this.pictureBoxMonster.Size = new System.Drawing.Size(256, 285);
@@ -250,7 +250,7 @@
             // 
             // panelIfTargetValue
             // 
-            this.panelIfTargetValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panelIfTargetValue.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panelIfTargetValue.Controls.Add(this.labelTargetA);
             this.panelIfTargetValue.Controls.Add(this.labelTargetC);
             this.panelIfTargetValue.Controls.Add(this.panel19);
@@ -265,7 +265,7 @@
             // 
             // labelTargetA
             // 
-            this.labelTargetA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelTargetA.BackColor = System.Drawing.SystemColors.Control;
             this.labelTargetA.Location = new System.Drawing.Point(0, 0);
             this.labelTargetA.Name = "labelTargetA";
             this.labelTargetA.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -274,7 +274,7 @@
             // 
             // labelTargetC
             // 
-            this.labelTargetC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelTargetC.BackColor = System.Drawing.SystemColors.Control;
             this.labelTargetC.Location = new System.Drawing.Point(0, 37);
             this.labelTargetC.Name = "labelTargetC";
             this.labelTargetC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -319,7 +319,7 @@
             // 
             // labelTargetB
             // 
-            this.labelTargetB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelTargetB.BackColor = System.Drawing.SystemColors.Control;
             this.labelTargetB.Location = new System.Drawing.Point(0, 18);
             this.labelTargetB.Name = "labelTargetB";
             this.labelTargetB.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -348,7 +348,7 @@
             // 
             // panelDoOneOfThree
             // 
-            this.panelDoOneOfThree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panelDoOneOfThree.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panelDoOneOfThree.Controls.Add(this.labelDoA);
             this.panelDoOneOfThree.Controls.Add(this.numA);
             this.panelDoOneOfThree.Controls.Add(this.numB);
@@ -545,7 +545,7 @@
             // 
             // panelMemoryCompare
             // 
-            this.panelMemoryCompare.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panelMemoryCompare.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panelMemoryCompare.Controls.Add(this.labelMemoryA);
             this.panelMemoryCompare.Controls.Add(this.labelMemoryB);
             this.panelMemoryCompare.Controls.Add(this.memory);
@@ -560,7 +560,7 @@
             // 
             // labelMemoryA
             // 
-            this.labelMemoryA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelMemoryA.BackColor = System.Drawing.SystemColors.Control;
             this.labelMemoryA.Location = new System.Drawing.Point(0, 0);
             this.labelMemoryA.Name = "labelMemoryA";
             this.labelMemoryA.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -569,7 +569,7 @@
             // 
             // labelMemoryB
             // 
-            this.labelMemoryB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelMemoryB.BackColor = System.Drawing.SystemColors.Control;
             this.labelMemoryB.Location = new System.Drawing.Point(0, 18);
             this.labelMemoryB.Name = "labelMemoryB";
             this.labelMemoryB.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -619,7 +619,7 @@
             // 
             // labelMemoryC
             // 
-            this.labelMemoryC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelMemoryC.BackColor = System.Drawing.SystemColors.Control;
             this.labelMemoryC.Location = new System.Drawing.Point(0, 36);
             this.labelMemoryC.Name = "labelMemoryC";
             this.labelMemoryC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);

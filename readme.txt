@@ -1,7 +1,8 @@
 LAZY SHELL - Super Mario RPG Editor
-Version: 3.2.1 BETA
+Version: 3.3 ALPHA
 Date: January 11, 2011
-Home Page: http://home.comcast.net/~giangurgolo
+Home Page: http://home.comcast.net/~giangurgolo/smrpg/
+Written by giangurgolo and Omega
 
 ______________________________________________________________________
 
@@ -41,16 +42,15 @@ user to store a separate portion of the map composed of all 3 layers
 and the physical layer into a single file.
 
 The three scripts editors in Lazy Shell enable the user to modify
-the event scripts, battle scripts, and animations scripts in each tab,
-respectively. Commands within event scripts and battle scripts may be 
-added, modified, deleted, moved, or copied and pasted. Commands within 
-animation scripts may be modified or moved, but adding or deleting 
-commands within animations is not supported.
+the event scripts, battle scripts, and animations scripts. Commands 
+within event scripts and battle scripts may be added, modified, 
+deleted, moved, or copied and pasted. Commands within animation 
+scripts may be modified or moved, but adding or deleting commands 
+within animations is not supported.
 
-The Sprites editor can edit much more than just sprites. In addition 
-to being able to modify a sprite's graphics, palette, and animation, 
-this editor allows the user to edit spell effects and their respective 
-graphics, palettes, and animations. 
+The Sprites editor is able to modify a sprite's graphics, palette, and 
+animations. The effects editor allows the user to edit spell effects 
+and their respective graphics, palettes, and animations. 
 
 In the Dialogue editor, the user may view and edit the dialogues (aka 
 the game script) as well as the dialogues which appear in battles and 
@@ -110,7 +110,7 @@ here, and are scattered throughout the editor with the purpose of
 easing the use of Lazy Shell and reducing the amount of work required
 to complete a task.
 
-That's what all of these extra features are here for. Not as bell and
+That's what all of these extra features are here for. Not as bells and
 whistles, but for making the hacking process less headache-inducing.
 
 ______________________________________________________________________
@@ -118,12 +118,12 @@ ______________________________________________________________________
 UNSUPPORTED FEATURES
 ______________________________________________________________________
 
-Lazy Shell can NOT edit raw SPC music/sfx data, menu graphics, the new 
-game intro sequence and graphics, or the end credits. It cannot make 
-any changes to 65c816 assembly code in the ROM image (with the exception 
-of defense timing). Additionally, ROM expansion is also not supported by 
-the application due to the complications of the SA-1 chip in the game's 
-engine.
+Lazy Shell can NOT edit the Moleville Mountain tracks, raw SPC music/sfx 
+data, menu graphics, the new game intro sequence and graphics, or the end 
+credits. It cannot make any changes to 65c816 assembly code in the ROM 
+image (with the exception of defense timing). Additionally, ROM expansion 
+is also not supported by the application due to the complications of the 
+SA-1 chip in the game's engine.
 
 ______________________________________________________________________
 

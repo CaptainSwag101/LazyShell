@@ -171,7 +171,7 @@
             // 
             // panel146
             // 
-            this.panel146.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel146.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel146.Controls.Add(this.panel39);
             this.panel146.Controls.Add(this.label20);
             this.panel146.Controls.Add(this.panel10);
@@ -247,7 +247,7 @@
             // 
             // panel52
             // 
-            this.panel52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel52.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel52.Controls.Add(this.formationCantRun);
             this.panel52.Controls.Add(this.formationBattleEvent);
             this.panel52.Controls.Add(this.label176);
@@ -291,7 +291,7 @@
             // 
             // label176
             // 
-            this.label176.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label176.BackColor = System.Drawing.SystemColors.Control;
             this.label176.Location = new System.Drawing.Point(0, 19);
             this.label176.Name = "label176";
             this.label176.Padding = new System.Windows.Forms.Padding(1, 1, 0, 2);
@@ -301,7 +301,7 @@
             // 
             // label6
             // 
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Location = new System.Drawing.Point(0, 37);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -381,7 +381,7 @@
             // 
             // label150
             // 
-            this.label150.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label150.BackColor = System.Drawing.SystemColors.Control;
             this.label150.Location = new System.Drawing.Point(0, 37);
             this.label150.Name = "label150";
             this.label150.Padding = new System.Windows.Forms.Padding(1, 1, 0, 2);
@@ -411,7 +411,7 @@
             // 
             // panel36
             // 
-            this.panel36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel36.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel36.Controls.Add(this.panel6);
             this.panel36.Controls.Add(this.panel51);
             this.panel36.Controls.Add(this.panel75);

@@ -420,6 +420,10 @@ namespace LAZYSHELL
                 pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorDropper.cur");
         }
 
+        private void GraphicEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            buttonReset_Click(null, null);
+        }
         private void buttonOK_Click(object sender, EventArgs e)
         {
             graphics.CopyTo(graphicsBackup, 0);
@@ -427,9 +431,7 @@ namespace LAZYSHELL
             this.Close();
         }
         private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            graphicsBackup.CopyTo(graphics, 0);
-            update.DynamicInvoke();
+        {            
             this.Close();
         }
         private void buttonReset_Click(object sender, EventArgs e)

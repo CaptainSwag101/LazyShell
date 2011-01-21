@@ -476,6 +476,10 @@ namespace LAZYSHELL
         //}
         #endregion
         #region Event Handlers
+        private void PaletteEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            buttonReset_Click(null, null);
+        }
         private void pictureBoxPalette_Paint(object sender, PaintEventArgs e)
         {
             if (paletteImage != null)
@@ -689,13 +693,10 @@ namespace LAZYSHELL
         private void buttonOK_Click(object sender, EventArgs e)
         {
             paletteSet.CopyTo(paletteSetBackup);
-            update.DynamicInvoke();
             this.Close();
         }
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            paletteSetBackup.CopyTo(paletteSet);
-            update.DynamicInvoke();
             this.Close();
         }
         private void buttonReset_Click(object sender, EventArgs e)
@@ -706,6 +707,8 @@ namespace LAZYSHELL
             levelsBlues.Value = levelsBluesBar.Value = 0;
             switchRedsA.Checked = true; switchGreensA.Checked = false; switchBluesA.Checked = false;
             switchRedsB.Checked = true; switchGreensB.Checked = false; switchBluesB.Checked = false;
+            equateRedsA.Checked = true; equateGreensA.Checked = false; equateBluesA.Checked = false;
+            equateRedsB.Checked = true; equateGreensB.Checked = false; equateBluesB.Checked = false;
             greyscale.Checked = false; negative.Checked = false;
             brightness.Value = trackBarBrightness.Value = 0;
             contrast.Value = trackBarContrast.Value = 0;
@@ -886,6 +889,5 @@ namespace LAZYSHELL
             }
         }
         #endregion
-
     }
 }

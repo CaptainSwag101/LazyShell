@@ -224,7 +224,7 @@
             // 
             // panel10
             // 
-            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.panel10.BackColor = System.Drawing.SystemColors.Control;
             this.panel10.Controls.Add(this.panel3);
             this.panel10.Controls.Add(this.label11);
             this.panel10.Controls.Add(this.panel4);
@@ -262,7 +262,7 @@
             // 
             this.equateBluesB.AutoSize = true;
             this.equateBluesB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.equateBluesB.Location = new System.Drawing.Point(3, 36);
+            this.equateBluesB.Location = new System.Drawing.Point(3, 37);
             this.equateBluesB.Name = "equateBluesB";
             this.equateBluesB.Size = new System.Drawing.Size(49, 17);
             this.equateBluesB.TabIndex = 0;
@@ -274,7 +274,7 @@
             // 
             this.equateGreensB.AutoSize = true;
             this.equateGreensB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.equateGreensB.Location = new System.Drawing.Point(3, 19);
+            this.equateGreensB.Location = new System.Drawing.Point(3, 20);
             this.equateGreensB.Name = "equateGreensB";
             this.equateGreensB.Size = new System.Drawing.Size(58, 17);
             this.equateGreensB.TabIndex = 0;
@@ -319,7 +319,7 @@
             // 
             this.equateBluesA.AutoSize = true;
             this.equateBluesA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.equateBluesA.Location = new System.Drawing.Point(3, 36);
+            this.equateBluesA.Location = new System.Drawing.Point(3, 37);
             this.equateBluesA.Name = "equateBluesA";
             this.equateBluesA.Size = new System.Drawing.Size(49, 17);
             this.equateBluesA.TabIndex = 0;
@@ -331,7 +331,7 @@
             // 
             this.equateGreensA.AutoSize = true;
             this.equateGreensA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.equateGreensA.Location = new System.Drawing.Point(3, 19);
+            this.equateGreensA.Location = new System.Drawing.Point(3, 20);
             this.equateGreensA.Name = "equateGreensA";
             this.equateGreensA.Size = new System.Drawing.Size(58, 17);
             this.equateGreensA.TabIndex = 0;
@@ -350,7 +350,7 @@
             // 
             // panel16
             // 
-            this.panel16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.panel16.BackColor = System.Drawing.SystemColors.Control;
             this.panel16.Controls.Add(this.panel1);
             this.panel16.Controls.Add(this.label8);
             this.panel16.Controls.Add(this.panel2);
@@ -494,7 +494,7 @@
             // 
             // label7
             // 
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label7.BackColor = System.Drawing.SystemColors.Control;
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
@@ -504,7 +504,7 @@
             // 
             // label6
             // 
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Location = new System.Drawing.Point(0, 54);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
@@ -576,7 +576,7 @@
             // 
             // label5
             // 
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label5.BackColor = System.Drawing.SystemColors.Control;
             this.label5.Location = new System.Drawing.Point(0, 36);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
@@ -602,7 +602,7 @@
             // 
             // label4
             // 
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label4.BackColor = System.Drawing.SystemColors.Control;
             this.label4.Location = new System.Drawing.Point(0, 18);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
@@ -688,7 +688,7 @@
             // 
             // negative
             // 
-            this.negative.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.negative.BackColor = System.Drawing.SystemColors.Control;
             this.negative.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.negative.Location = new System.Drawing.Point(0, 35);
             this.negative.Name = "negative";
@@ -728,7 +728,7 @@
             // 
             // greyscale
             // 
-            this.greyscale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.greyscale.BackColor = System.Drawing.SystemColors.Control;
             this.greyscale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.greyscale.Location = new System.Drawing.Point(0, 18);
             this.greyscale.Name = "greyscale";
@@ -822,7 +822,7 @@
             // 
             // label13
             // 
-            this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label13.BackColor = System.Drawing.SystemColors.Control;
             this.label13.Location = new System.Drawing.Point(0, 54);
             this.label13.Name = "label13";
             this.label13.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
@@ -832,7 +832,7 @@
             // 
             // label3
             // 
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label3.BackColor = System.Drawing.SystemColors.Control;
             this.label3.Location = new System.Drawing.Point(0, 36);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
@@ -882,7 +882,7 @@
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
@@ -892,7 +892,7 @@
             // 
             // label2
             // 
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label2.BackColor = System.Drawing.SystemColors.Control;
             this.label2.Location = new System.Drawing.Point(0, 18);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
@@ -1099,18 +1099,18 @@
             this.contextMenuStrip3.Name = "contextMenuStrip3";
             this.contextMenuStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip3.ShowImageMargin = false;
-            this.contextMenuStrip3.Size = new System.Drawing.Size(152, 48);
+            this.contextMenuStrip3.Size = new System.Drawing.Size(149, 48);
             // 
             // importPaletteSetToolStripMenuItem
             // 
             this.importPaletteSetToolStripMenuItem.Name = "importPaletteSetToolStripMenuItem";
-            this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.importPaletteSetToolStripMenuItem.Text = "Import palette set...";
             // 
             // exportPaletteSetToolStripMenuItem
             // 
             this.exportPaletteSetToolStripMenuItem.Name = "exportPaletteSetToolStripMenuItem";
-            this.exportPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.exportPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.exportPaletteSetToolStripMenuItem.Text = "Export palette set...";
             // 
             // PaletteEditor
@@ -1138,6 +1138,7 @@
             this.ShowInTaskbar = false;
             this.Text = "PALETTE EDITOR";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PaletteEditor_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPalette)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

@@ -527,7 +527,6 @@
             this.toolStrip2.AutoSize = false;
             this.toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip2.CanOverflow = false;
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openTileEditor});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
@@ -552,7 +551,7 @@
             // 
             // label86
             // 
-            this.label86.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label86.BackColor = System.Drawing.SystemColors.Control;
             this.label86.Location = new System.Drawing.Point(0, 26);
             this.label86.Name = "label86";
             this.label86.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -604,7 +603,6 @@
             // toolStrip1
             // 
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newMold,
             this.deleteMold,

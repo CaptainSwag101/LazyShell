@@ -510,28 +510,25 @@ namespace LAZYSHELL
             private int tileSize; public int TileSize { get { return tileSize; } set { tileSize = value; } }
 
             private ushort[] subTiles;
-            public ushort[] SubTiles
+            public ushort[] SubTiles { get { return subTiles; } set { subTiles = value; } }
+            public void SetTileSize()
             {
-                get { return subTiles; }
-                set
+                is16bit = false;
+                foreach (ushort subTile in subTiles)
+                    if (subTile >= 0x100)
+                        is16bit = true;
+                if (gridplane)
                 {
-                    subTiles = value;
-                    foreach (ushort subTile in subTiles)
-                        if (subTile >= 0x100)
-                            is16bit = true;
-                    if (gridplane)
+                    tileSize = 1;
+                    if (is16bit)
+                        tileSize += 2;
+                    switch (tileFormat)
                     {
-                        tileSize = 1;
-                        if (is16bit)
-                            tileSize += 2;
-                        switch (tileFormat)
-                        {
-                            case 0: tileSize += 9; break;
-                            case 1: tileSize += 12; break;
-                            case 2: tileSize += 12; break;
-                            case 3: tileSize += 16; break;
-                            default: goto case 0;
-                        }
+                        case 0: tileSize += 9; break;
+                        case 1: tileSize += 12; break;
+                        case 2: tileSize += 12; break;
+                        case 3: tileSize += 16; break;
+                        default: goto case 0;
                     }
                 }
             }

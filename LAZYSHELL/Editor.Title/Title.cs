@@ -158,6 +158,7 @@ namespace LAZYSHELL
         {
             this.tileSet.AssembleIntoModel(16, layer);
             SetTilesetImages();
+            pictureBoxTitle.Invalidate();
         }
         private void PaletteUpdate()
         {
@@ -533,6 +534,7 @@ namespace LAZYSHELL
         }
         private void pictureBoxTileset_MouseDown(object sender, MouseEventArgs e)
         {
+            if (e.Clicks > 1) return;
             if (e.Button == MouseButtons.Right) return;
             mouseDownObject = null;
             // set a floor and ceiling for the coordinates

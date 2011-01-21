@@ -178,64 +178,64 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 170);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 170);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.buttonEditCut_Click);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.buttonEditCopy_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.buttonEditPaste_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.buttonEditDelete_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(131, 6);
             // 
             // mirrorToolStripMenuItem
             // 
             this.mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
-            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.mirrorToolStripMenuItem.Text = "Mirror";
             this.mirrorToolStripMenuItem.Click += new System.EventHandler(this.mirrorToolStripMenuItem_Click);
             // 
             // invertToolStripMenuItem
             // 
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            this.invertToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(131, 6);
             // 
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.saveImageToolStripMenuItem.Text = "Save Image As...";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
@@ -246,7 +246,7 @@
             this.battlefieldNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.battlefieldNum.ForeColor = System.Drawing.SystemColors.Control;
             this.battlefieldNum.Hexadecimal = false;
-            this.battlefieldNum.Location = new System.Drawing.Point(184, 2);
+            this.battlefieldNum.Location = new System.Drawing.Point(286, 2);
             this.battlefieldNum.Maximum = new decimal(new int[] {
             63,
             0,
@@ -298,7 +298,7 @@
             // 
             // label97
             // 
-            this.label97.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label97.BackColor = System.Drawing.SystemColors.Control;
             this.label97.Location = new System.Drawing.Point(0, 36);
             this.label97.Name = "label97";
             this.label97.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -308,7 +308,7 @@
             // 
             // label102
             // 
-            this.label102.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label102.BackColor = System.Drawing.SystemColors.Control;
             this.label102.Location = new System.Drawing.Point(0, 0);
             this.label102.Name = "label102";
             this.label102.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -320,6 +320,7 @@
             // 
             this.battlefieldPaletteSetName.DropDownHeight = 200;
             this.battlefieldPaletteSetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldPaletteSetName.DropDownWidth = 200;
             this.battlefieldPaletteSetName.IntegralHeight = false;
             this.battlefieldPaletteSetName.Items.AddRange(new object[] {
             "Forest Maze",
@@ -417,7 +418,7 @@
             // 
             // label98
             // 
-            this.label98.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label98.BackColor = System.Drawing.SystemColors.Control;
             this.label98.Location = new System.Drawing.Point(0, 54);
             this.label98.Name = "label98";
             this.label98.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -444,6 +445,7 @@
             // 
             this.battlefieldGFXSet1Name.DropDownHeight = 200;
             this.battlefieldGFXSet1Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldGFXSet1Name.DropDownWidth = 200;
             this.battlefieldGFXSet1Name.IntegralHeight = false;
             this.battlefieldGFXSet1Name.Location = new System.Drawing.Point(-2, -2);
             this.battlefieldGFXSet1Name.Name = "battlefieldGFXSet1Name";
@@ -453,7 +455,7 @@
             // 
             // label99
             // 
-            this.label99.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label99.BackColor = System.Drawing.SystemColors.Control;
             this.label99.Location = new System.Drawing.Point(0, 72);
             this.label99.Name = "label99";
             this.label99.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -465,6 +467,7 @@
             // 
             this.battlefieldGFXSet3Name.DropDownHeight = 200;
             this.battlefieldGFXSet3Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldGFXSet3Name.DropDownWidth = 200;
             this.battlefieldGFXSet3Name.IntegralHeight = false;
             this.battlefieldGFXSet3Name.Location = new System.Drawing.Point(-2, -2);
             this.battlefieldGFXSet3Name.Name = "battlefieldGFXSet3Name";
@@ -491,6 +494,7 @@
             // 
             this.battlefieldGFXSet5Name.DropDownHeight = 200;
             this.battlefieldGFXSet5Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldGFXSet5Name.DropDownWidth = 200;
             this.battlefieldGFXSet5Name.IntegralHeight = false;
             this.battlefieldGFXSet5Name.Location = new System.Drawing.Point(-2, -2);
             this.battlefieldGFXSet5Name.Name = "battlefieldGFXSet5Name";
@@ -500,7 +504,7 @@
             // 
             // label100
             // 
-            this.label100.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label100.BackColor = System.Drawing.SystemColors.Control;
             this.label100.Location = new System.Drawing.Point(0, 90);
             this.label100.Name = "label100";
             this.label100.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -512,6 +516,7 @@
             // 
             this.battlefieldGFXSet2Name.DropDownHeight = 200;
             this.battlefieldGFXSet2Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldGFXSet2Name.DropDownWidth = 200;
             this.battlefieldGFXSet2Name.IntegralHeight = false;
             this.battlefieldGFXSet2Name.Location = new System.Drawing.Point(-2, -2);
             this.battlefieldGFXSet2Name.Name = "battlefieldGFXSet2Name";
@@ -538,6 +543,7 @@
             // 
             this.battlefieldGFXSet4Name.DropDownHeight = 200;
             this.battlefieldGFXSet4Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldGFXSet4Name.DropDownWidth = 200;
             this.battlefieldGFXSet4Name.IntegralHeight = false;
             this.battlefieldGFXSet4Name.Location = new System.Drawing.Point(-2, -2);
             this.battlefieldGFXSet4Name.Name = "battlefieldGFXSet4Name";
@@ -547,7 +553,7 @@
             // 
             // label69
             // 
-            this.label69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label69.BackColor = System.Drawing.SystemColors.Control;
             this.label69.Location = new System.Drawing.Point(0, 18);
             this.label69.Name = "label69";
             this.label69.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -572,7 +578,7 @@
             // 
             // label101
             // 
-            this.label101.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label101.BackColor = System.Drawing.SystemColors.Control;
             this.label101.Location = new System.Drawing.Point(0, 108);
             this.label101.Name = "label101";
             this.label101.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -584,6 +590,7 @@
             // 
             this.battlefieldTilesetName.DropDownHeight = 200;
             this.battlefieldTilesetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldTilesetName.DropDownWidth = 200;
             this.battlefieldTilesetName.IntegralHeight = false;
             this.battlefieldTilesetName.Items.AddRange(new object[] {
             "Forest Maze",
@@ -957,7 +964,7 @@
             // 
             // panel92
             // 
-            this.panel92.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel92.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel92.Controls.Add(this.battlefieldPaletteSetNum);
             this.panel92.Controls.Add(this.label97);
             this.panel92.Controls.Add(this.label102);

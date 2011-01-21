@@ -48,12 +48,13 @@ namespace LAZYSHELL
         private Sprite sprite { get { return sprites[index]; } set { sprites[index] = value; } }
         private GraphicPalette image { get { return images[sprite.GraphicPalettePacket]; } set { images[sprite.GraphicPalettePacket] = value; } }
         private Animation animation { get { return animations[sprite.AnimationPacket]; } set { animations[sprite.AnimationPacket] = value; } }
-        private PaletteSet palette { get { return palettes[image.PaletteNum + sprite.PaletteIndex]; } set { palettes[image.PaletteNum + sprite.PaletteIndex] = value; } }
+        private PaletteSet paletteSet { get { return palettes[image.PaletteNum + sprite.PaletteIndex]; } set { palettes[image.PaletteNum + sprite.PaletteIndex] = value; } }
         // public variables
         public Sprite Sprite { get { return sprite; } set { sprite = value; } }
         public GraphicPalette Image { get { return image; } set { image = value; } }
         public Animation Animation { get { return animation; } set { animation = value; } }
-        public int[] Palette { get { return palette.Palette; } }
+        public int[] Palette { get { return paletteSet.Palette; } }
+        public PaletteSet PaletteSet { get { return paletteSet; } set { paletteSet = value; } }
         public int AvailableBytes { get { return availableBytes; } set { availableBytes = value; } }
         // other
         private bool waitBothCoords = false;
@@ -289,23 +290,23 @@ namespace LAZYSHELL
         {
             if (paletteEditor == null)
             {
-                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), palette, 1, 0);
+                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSet, 1, 0);
                 paletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditor.Reload(new Function(PaletteUpdate), palette, 1, 0);
+                paletteEditor.Reload(new Function(PaletteUpdate), paletteSet, 1, 0);
         }
         private void LoadGraphicEditor()
         {
             if (graphicEditor == null)
             {
                 graphicEditor = new GraphicEditor(new Function(GraphicUpdate),
-                    graphics, graphics.Length, 0, palette, 0, 0x20);
+                    graphics, graphics.Length, 0, paletteSet, 0, 0x20);
                 graphicEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
                 graphicEditor.Reload(new Function(GraphicUpdate),
-                    graphics, graphics.Length, 0, palette, 0, 0x20);
+                    graphics, graphics.Length, 0, paletteSet, 0, 0x20);
         }
         private void LoadMoldEditor()
         {
@@ -326,7 +327,7 @@ namespace LAZYSHELL
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, palette.Palette, tile.Gridplane);
+                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -334,12 +335,12 @@ namespace LAZYSHELL
             sequences.InvalidateImages();
             LoadGraphicEditor();
         }
-        private void GraphicUpdate()
+        public void GraphicUpdate()
         {
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, palette.Palette, tile.Gridplane);
+                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -390,7 +391,7 @@ namespace LAZYSHELL
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, palette.Palette, tile.Gridplane);
+                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -407,7 +408,7 @@ namespace LAZYSHELL
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, palette.Palette, tile.Gridplane);
+                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -422,7 +423,7 @@ namespace LAZYSHELL
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, palette.Palette, tile.Gridplane);
+                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -439,7 +440,7 @@ namespace LAZYSHELL
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, palette.Palette, tile.Gridplane);
+                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();

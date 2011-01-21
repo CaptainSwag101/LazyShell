@@ -276,7 +276,7 @@ namespace LAZYSHELL
             // 
             // checkHeightOfBaseTile
             // 
-            this.checkHeightOfBaseTile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkHeightOfBaseTile.BackColor = System.Drawing.SystemColors.Control;
             this.checkHeightOfBaseTile.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkHeightOfBaseTile.CheckOnClick = true;
             this.checkHeightOfBaseTile.ColumnWidth = 118;
@@ -291,7 +291,7 @@ namespace LAZYSHELL
             // 
             // checkHeightOverhead
             // 
-            this.checkHeightOverhead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkHeightOverhead.BackColor = System.Drawing.SystemColors.Control;
             this.checkHeightOverhead.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkHeightOverhead.CheckOnClick = true;
             this.checkHeightOverhead.ColumnWidth = 118;
@@ -306,7 +306,7 @@ namespace LAZYSHELL
             // 
             // checkZCoordOverhead
             // 
-            this.checkZCoordOverhead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkZCoordOverhead.BackColor = System.Drawing.SystemColors.Control;
             this.checkZCoordOverhead.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkZCoordOverhead.CheckOnClick = true;
             this.checkZCoordOverhead.ColumnWidth = 118;
@@ -321,7 +321,7 @@ namespace LAZYSHELL
             // 
             // checkZCoordWater
             // 
-            this.checkZCoordWater.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkZCoordWater.BackColor = System.Drawing.SystemColors.Control;
             this.checkZCoordWater.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkZCoordWater.CheckOnClick = true;
             this.checkZCoordWater.ColumnWidth = 118;
@@ -336,7 +336,7 @@ namespace LAZYSHELL
             // 
             // checkConveyor
             // 
-            this.checkConveyor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkConveyor.BackColor = System.Drawing.SystemColors.Control;
             this.checkConveyor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkConveyor.CheckOnClick = true;
             this.checkConveyor.ColumnWidth = 118;
@@ -351,7 +351,7 @@ namespace LAZYSHELL
             // 
             // checkStairs
             // 
-            this.checkStairs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkStairs.BackColor = System.Drawing.SystemColors.Control;
             this.checkStairs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkStairs.CheckOnClick = true;
             this.checkStairs.ColumnWidth = 118;
@@ -366,7 +366,7 @@ namespace LAZYSHELL
             // 
             // checkSpecialTile
             // 
-            this.checkSpecialTile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkSpecialTile.BackColor = System.Drawing.SystemColors.Control;
             this.checkSpecialTile.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkSpecialTile.CheckOnClick = true;
             this.checkSpecialTile.ColumnWidth = 118;
@@ -392,7 +392,7 @@ namespace LAZYSHELL
             // 
             // checkDoorFormat
             // 
-            this.checkDoorFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkDoorFormat.BackColor = System.Drawing.SystemColors.Control;
             this.checkDoorFormat.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkDoorFormat.CheckOnClick = true;
             this.checkDoorFormat.ColumnWidth = 118;

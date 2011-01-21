@@ -189,7 +189,7 @@
             this.mapPointName.Font = this.worldMapName.Font;
             this.mapPointName.ForeColor = this.worldMapName.ForeColor;
             this.mapPointName.ItemHeight = 15;
-            this.mapPointName.Location = new System.Drawing.Point(7, 2);
+            this.mapPointName.Location = new System.Drawing.Point(9, 2);
             this.mapPointName.Name = "mapPointName";
             this.mapPointName.SelectedIndex = -1;
             this.mapPointName.SelectedItem = null;
@@ -227,7 +227,7 @@
             this.mapPointNum.Font = this.worldMapName.Font;
             this.mapPointNum.ForeColor = this.worldMapName.ForeColor;
             this.mapPointNum.Hexadecimal = false;
-            this.mapPointNum.Location = new System.Drawing.Point(203, 2);
+            this.mapPointNum.Location = new System.Drawing.Point(205, 2);
             this.mapPointNum.Maximum = new decimal(new int[] {
             63,
             0,
@@ -260,7 +260,7 @@
             // 
             // panel35
             // 
-            this.panel35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel35.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel35.Controls.Add(this.enableNorthPath);
             this.panel35.Controls.Add(this.enableWestPath);
             this.panel35.Controls.Add(this.enableSouthPath);
@@ -661,7 +661,7 @@
             // 
             // panel34
             // 
-            this.panel34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel34.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel34.Controls.Add(this.label37);
             this.panel34.Controls.Add(this.leadToMapPoint);
             this.panel34.Controls.Add(this.label55);
@@ -706,7 +706,7 @@
             // 
             // label55
             // 
-            this.label55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label55.BackColor = System.Drawing.SystemColors.Control;
             this.label55.Location = new System.Drawing.Point(0, 37);
             this.label55.Name = "label55";
             this.label55.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -716,7 +716,7 @@
             // 
             // label56
             // 
-            this.label56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label56.BackColor = System.Drawing.SystemColors.Control;
             this.label56.Location = new System.Drawing.Point(0, 55);
             this.label56.Name = "label56";
             this.label56.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -767,7 +767,7 @@
             // 
             // label52
             // 
-            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label52.BackColor = System.Drawing.SystemColors.Control;
             this.label52.Location = new System.Drawing.Point(0, 19);
             this.label52.Name = "label52";
             this.label52.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -891,7 +891,7 @@
             // 
             // label46
             // 
-            this.label46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label46.BackColor = System.Drawing.SystemColors.Control;
             this.label46.Location = new System.Drawing.Point(0, 0);
             this.label46.Name = "label46";
             this.label46.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -901,7 +901,7 @@
             // 
             // label21
             // 
-            this.label21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label21.BackColor = System.Drawing.SystemColors.Control;
             this.label21.Location = new System.Drawing.Point(129, 0);
             this.label21.Name = "label21";
             this.label21.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -926,7 +926,7 @@
             // 
             // label12
             // 
-            this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label12.BackColor = System.Drawing.SystemColors.Control;
             this.label12.Location = new System.Drawing.Point(0, 18);
             this.label12.Name = "label12";
             this.label12.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -936,7 +936,7 @@
             // 
             // label47
             // 
-            this.label47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label47.BackColor = System.Drawing.SystemColors.Control;
             this.label47.Location = new System.Drawing.Point(129, 18);
             this.label47.Name = "label47";
             this.label47.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -976,7 +976,7 @@
             // 
             // panel26
             // 
-            this.panel26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel26.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel26.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel26.Controls.Add(this.pictureBoxTileset);
             this.panel26.Location = new System.Drawing.Point(27, 53);
@@ -1017,64 +1017,64 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 170);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 170);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.buttonEditCut_Click);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.buttonEditCopy_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.buttonEditPaste_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.buttonEditDelete_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(131, 6);
             // 
             // mirrorToolStripMenuItem
             // 
             this.mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
-            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.mirrorToolStripMenuItem.Text = "Mirror";
             this.mirrorToolStripMenuItem.Click += new System.EventHandler(this.mirrorToolStripMenuItem_Click);
             // 
             // invertToolStripMenuItem
             // 
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            this.invertToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(131, 6);
             // 
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.saveImageToolStripMenuItem.Text = "Save Image As...";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
@@ -1214,7 +1214,7 @@
             // 
             // panel14
             // 
-            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel14.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel14.Controls.Add(this.toolStrip5);
             this.panel14.Controls.Add(this.mapPointYCoord);
             this.panel14.Controls.Add(this.label59);
@@ -1244,7 +1244,7 @@
             // 
             this.textBoxMapPoint.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxMapPoint.Name = "textBoxMapPoint";
-            this.textBoxMapPoint.Size = new System.Drawing.Size(196, 25);
+            this.textBoxMapPoint.Size = new System.Drawing.Size(256, 25);
             this.textBoxMapPoint.TextChanged += new System.EventHandler(this.textBoxMapPoint_TextChanged);
             // 
             // mapPointYCoord
@@ -1264,7 +1264,7 @@
             // 
             // label59
             // 
-            this.label59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label59.BackColor = System.Drawing.SystemColors.Control;
             this.label59.Location = new System.Drawing.Point(0, 70);
             this.label59.Name = "label59";
             this.label59.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
@@ -1274,7 +1274,7 @@
             // 
             // label45
             // 
-            this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label45.BackColor = System.Drawing.SystemColors.Control;
             this.label45.Location = new System.Drawing.Point(0, 52);
             this.label45.Name = "label45";
             this.label45.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);

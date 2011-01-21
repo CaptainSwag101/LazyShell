@@ -172,7 +172,7 @@ namespace LAZYSHELL
             // 
             // label3
             // 
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label3.BackColor = System.Drawing.SystemColors.Control;
             this.label3.Location = new System.Drawing.Point(0, 370);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -197,7 +197,7 @@ namespace LAZYSHELL
             // 
             // label4
             // 
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label4.BackColor = System.Drawing.SystemColors.Control;
             this.label4.Location = new System.Drawing.Point(0, 408);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -222,7 +222,7 @@ namespace LAZYSHELL
             // 
             // label5
             // 
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label5.BackColor = System.Drawing.SystemColors.Control;
             this.label5.Location = new System.Drawing.Point(0, 426);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -247,7 +247,7 @@ namespace LAZYSHELL
             // 
             // label6
             // 
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Location = new System.Drawing.Point(0, 444);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -317,7 +317,7 @@ namespace LAZYSHELL
             // 
             // label9
             // 
-            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label9.BackColor = System.Drawing.SystemColors.Control;
             this.label9.Location = new System.Drawing.Point(0, 352);
             this.label9.Name = "label9";
             this.label9.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);

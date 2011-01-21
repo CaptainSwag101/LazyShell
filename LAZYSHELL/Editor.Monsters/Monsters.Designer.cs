@@ -217,7 +217,7 @@
             // 
             // panel222
             // 
-            this.panel222.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel222.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel222.Controls.Add(this.monsterTargetArrowY);
             this.panel222.Controls.Add(this.monsterTargetArrowX);
             this.panel222.Controls.Add(this.label119);
@@ -259,7 +259,7 @@
             // 
             // label119
             // 
-            this.label119.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label119.BackColor = System.Drawing.SystemColors.Control;
             this.label119.Location = new System.Drawing.Point(0, 0);
             this.label119.Name = "label119";
             this.label119.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -297,7 +297,7 @@
             // 
             // label216
             // 
-            this.label216.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label216.BackColor = System.Drawing.SystemColors.Control;
             this.label216.Location = new System.Drawing.Point(0, 19);
             this.label216.Name = "label216";
             this.label216.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -307,7 +307,7 @@
             // 
             // label26
             // 
-            this.label26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label26.BackColor = System.Drawing.SystemColors.Control;
             this.label26.Location = new System.Drawing.Point(0, 37);
             this.label26.Name = "label26";
             this.label26.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -317,7 +317,7 @@
             // 
             // label210
             // 
-            this.label210.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label210.BackColor = System.Drawing.SystemColors.Control;
             this.label210.Location = new System.Drawing.Point(0, 127);
             this.label210.Name = "label210";
             this.label210.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -327,7 +327,7 @@
             // 
             // label191
             // 
-            this.label191.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label191.BackColor = System.Drawing.SystemColors.Control;
             this.label191.Location = new System.Drawing.Point(0, 55);
             this.label191.Name = "label191";
             this.label191.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -337,7 +337,7 @@
             // 
             // label211
             // 
-            this.label211.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label211.BackColor = System.Drawing.SystemColors.Control;
             this.label211.Location = new System.Drawing.Point(0, 73);
             this.label211.Name = "label211";
             this.label211.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -347,7 +347,7 @@
             // 
             // label51
             // 
-            this.label51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label51.BackColor = System.Drawing.SystemColors.Control;
             this.label51.Location = new System.Drawing.Point(0, 109);
             this.label51.Name = "label51";
             this.label51.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -357,7 +357,7 @@
             // 
             // label63
             // 
-            this.label63.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label63.BackColor = System.Drawing.SystemColors.Control;
             this.label63.Location = new System.Drawing.Point(0, 91);
             this.label63.Name = "label63";
             this.label63.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -377,7 +377,7 @@
             // 
             // panel133
             // 
-            this.panel133.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel133.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel133.Controls.Add(this.TextboxMonsterPsychoMsg);
             this.panel133.Controls.Add(this.toolStrip3);
             this.panel133.Controls.Add(this.toolStrip2);
@@ -579,7 +579,7 @@
             // 
             // panel53
             // 
-            this.panel53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel53.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel53.Controls.Add(this.label87);
             this.panel53.Controls.Add(this.CheckboxMonsterProp);
             this.panel53.Location = new System.Drawing.Point(0, 0);
@@ -627,7 +627,7 @@
             // 
             // panel31
             // 
-            this.panel31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel31.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel31.Controls.Add(this.label96);
             this.panel31.Controls.Add(this.CheckboxMonsterElemWeak);
             this.panel31.Location = new System.Drawing.Point(0, 0);
@@ -677,7 +677,7 @@
             // 
             // panel35
             // 
-            this.panel35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel35.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel35.Controls.Add(this.label182);
             this.panel35.Controls.Add(this.CheckboxMonsterEfecNull);
             this.panel35.Location = new System.Drawing.Point(0, 0);
@@ -730,7 +730,7 @@
             // 
             // panel32
             // 
-            this.panel32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel32.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel32.Controls.Add(this.label169);
             this.panel32.Controls.Add(this.CheckboxMonsterElemNull);
             this.panel32.Location = new System.Drawing.Point(0, 0);
@@ -780,7 +780,7 @@
             // 
             // panel55
             // 
-            this.panel55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel55.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel55.Controls.Add(this.panel12);
             this.panel55.Controls.Add(this.MonsterValFlowerOdds);
             this.panel55.Controls.Add(this.label34);
@@ -835,7 +835,7 @@
             // 
             // label34
             // 
-            this.label34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label34.BackColor = System.Drawing.SystemColors.Control;
             this.label34.Location = new System.Drawing.Point(0, 18);
             this.label34.Name = "label34";
             this.label34.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -845,7 +845,7 @@
             // 
             // label30
             // 
-            this.label30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label30.BackColor = System.Drawing.SystemColors.Control;
             this.label30.Location = new System.Drawing.Point(0, 36);
             this.label30.Name = "label30";
             this.label30.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -878,7 +878,7 @@
             // 
             // panel29
             // 
-            this.panel29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel29.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel29.Controls.Add(this.LabelMonsterValMgDef);
             this.panel29.Controls.Add(this.LabelMonsterValSpeed);
             this.panel29.Controls.Add(this.LabelMonsterValMgAtk);
@@ -905,7 +905,7 @@
             // 
             // LabelMonsterValMgDef
             // 
-            this.LabelMonsterValMgDef.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.LabelMonsterValMgDef.BackColor = System.Drawing.SystemColors.Control;
             this.LabelMonsterValMgDef.Location = new System.Drawing.Point(0, 109);
             this.LabelMonsterValMgDef.Name = "LabelMonsterValMgDef";
             this.LabelMonsterValMgDef.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -915,7 +915,7 @@
             // 
             // LabelMonsterValSpeed
             // 
-            this.LabelMonsterValSpeed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.LabelMonsterValSpeed.BackColor = System.Drawing.SystemColors.Control;
             this.LabelMonsterValSpeed.Location = new System.Drawing.Point(0, 127);
             this.LabelMonsterValSpeed.Name = "LabelMonsterValSpeed";
             this.LabelMonsterValSpeed.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -925,7 +925,7 @@
             // 
             // LabelMonsterValMgAtk
             // 
-            this.LabelMonsterValMgAtk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.LabelMonsterValMgAtk.BackColor = System.Drawing.SystemColors.Control;
             this.LabelMonsterValMgAtk.Location = new System.Drawing.Point(0, 91);
             this.LabelMonsterValMgAtk.Name = "LabelMonsterValMgAtk";
             this.LabelMonsterValMgAtk.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -935,7 +935,7 @@
             // 
             // LabelMonsterValAtk
             // 
-            this.LabelMonsterValAtk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.LabelMonsterValAtk.BackColor = System.Drawing.SystemColors.Control;
             this.LabelMonsterValAtk.Location = new System.Drawing.Point(0, 55);
             this.LabelMonsterValAtk.Name = "LabelMonsterValAtk";
             this.LabelMonsterValAtk.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -945,7 +945,7 @@
             // 
             // LabelMonsterValDef
             // 
-            this.LabelMonsterValDef.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.LabelMonsterValDef.BackColor = System.Drawing.SystemColors.Control;
             this.LabelMonsterValDef.Location = new System.Drawing.Point(0, 73);
             this.LabelMonsterValDef.Name = "LabelMonsterValDef";
             this.LabelMonsterValDef.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1073,7 +1073,7 @@
             // 
             // LabelMonsterValFP
             // 
-            this.LabelMonsterValFP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.LabelMonsterValFP.BackColor = System.Drawing.SystemColors.Control;
             this.LabelMonsterValFP.Location = new System.Drawing.Point(0, 37);
             this.LabelMonsterValFP.Name = "LabelMonsterValFP";
             this.LabelMonsterValFP.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1083,7 +1083,7 @@
             // 
             // LabelMonsterValHP
             // 
-            this.LabelMonsterValHP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.LabelMonsterValHP.BackColor = System.Drawing.SystemColors.Control;
             this.LabelMonsterValHP.Location = new System.Drawing.Point(0, 19);
             this.LabelMonsterValHP.Name = "LabelMonsterValHP";
             this.LabelMonsterValHP.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1093,7 +1093,7 @@
             // 
             // LabelMonsterValEvd
             // 
-            this.LabelMonsterValEvd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.LabelMonsterValEvd.BackColor = System.Drawing.SystemColors.Control;
             this.LabelMonsterValEvd.Location = new System.Drawing.Point(0, 145);
             this.LabelMonsterValEvd.Name = "LabelMonsterValEvd";
             this.LabelMonsterValEvd.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1113,7 +1113,7 @@
             // 
             // LabelMonsterValMgEvd
             // 
-            this.LabelMonsterValMgEvd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.LabelMonsterValMgEvd.BackColor = System.Drawing.SystemColors.Control;
             this.LabelMonsterValMgEvd.Location = new System.Drawing.Point(0, 163);
             this.LabelMonsterValMgEvd.Name = "LabelMonsterValMgEvd";
             this.LabelMonsterValMgEvd.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1143,7 +1143,7 @@
             // 
             // panel54
             // 
-            this.panel54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel54.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel54.Controls.Add(this.panel10);
             this.panel54.Controls.Add(this.panel11);
             this.panel54.Controls.Add(this.LabelMonsterRewardStats);
@@ -1258,7 +1258,7 @@
             // 
             // label22
             // 
-            this.label22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label22.BackColor = System.Drawing.SystemColors.Control;
             this.label22.Location = new System.Drawing.Point(0, 18);
             this.label22.Name = "label22";
             this.label22.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1268,7 +1268,7 @@
             // 
             // label21
             // 
-            this.label21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label21.BackColor = System.Drawing.SystemColors.Control;
             this.label21.Location = new System.Drawing.Point(0, 36);
             this.label21.Name = "label21";
             this.label21.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1278,7 +1278,7 @@
             // 
             // LabelMonsterYoshiCookie
             // 
-            this.LabelMonsterYoshiCookie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.LabelMonsterYoshiCookie.BackColor = System.Drawing.SystemColors.Control;
             this.LabelMonsterYoshiCookie.Location = new System.Drawing.Point(0, 90);
             this.LabelMonsterYoshiCookie.Name = "LabelMonsterYoshiCookie";
             this.LabelMonsterYoshiCookie.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1314,7 +1314,7 @@
             // 
             // label31
             // 
-            this.label31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label31.BackColor = System.Drawing.SystemColors.Control;
             this.label31.Location = new System.Drawing.Point(0, 54);
             this.label31.Name = "label31";
             this.label31.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -1324,7 +1324,7 @@
             // 
             // label24
             // 
-            this.label24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label24.BackColor = System.Drawing.SystemColors.Control;
             this.label24.Location = new System.Drawing.Point(0, 72);
             this.label24.Name = "label24";
             this.label24.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);

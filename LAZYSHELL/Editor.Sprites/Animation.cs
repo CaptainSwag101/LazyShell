@@ -14,11 +14,11 @@ namespace LAZYSHELL
     public class Animation : Element
     {
         [NonSerialized()]
-        private byte[] data; 
+        private byte[] data;
         public override byte[] Data { get { return this.data; } set { this.data = value; } }
         public override int Index { get { return index; } set { index = value; } }
         private byte[] sm; public byte[] SM { get { return sm; } set { sm = value; } }    // sequence mold data
-        private int index; 
+        private int index;
 
         private int animationOffset; public int AnimationOffset { get { return animationOffset; } set { index = value; } }
 
@@ -215,8 +215,7 @@ namespace LAZYSHELL
                     if (tile.Is16bit)
                     {
                         for (int i = 0; i < size; i++)
-                            if (tile.SubTiles[i] >= 0x100)
-                                Bits.SetBit(temp, offset, i, true);
+                            Bits.SetBit(temp, offset, i, tile.SubTiles[i] >= 0x100);
                         offset += 2;
                     }
                     for (int i = 0; i < size; i++)

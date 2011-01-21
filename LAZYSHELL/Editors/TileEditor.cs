@@ -17,7 +17,7 @@ namespace LAZYSHELL
         private byte[] graphics;
         private PaletteSet paletteSet;
         private byte format;
-
+        private bool updatingThis;
         private bool updatingSubtile;
         private int currentSubtile;
         private Bitmap tileImage, subtileImage;
@@ -33,8 +33,8 @@ namespace LAZYSHELL
         public TileEditor(Delegate update, Tile16x16 tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {
             this.update = update;
-            this.tileBackup = tile.Copy();
             this.tile = tile;
+            this.tileBackup = tile.Copy();
             this.graphics = graphics;
             this.paletteSet = paletteSet;
             this.format = format;
@@ -51,8 +51,9 @@ namespace LAZYSHELL
         public void Reload(Delegate update, Tile16x16 tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {
             this.update = update;
-            this.tileBackup = tile.Copy();
             this.tile = tile;
+            if (updatingThis) return;
+            this.tileBackup = tile.Copy();
             this.graphics = graphics;
             this.paletteSet = paletteSet;
             this.format = format;
@@ -128,10 +129,14 @@ namespace LAZYSHELL
 
         #region Event Handlers
 
+        private void TileEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            buttonReset_Click(null, null);
+        }
+
         private void tilePalette_ValueChanged(object sender, EventArgs e)
         {
             if (updatingSubtile) return;
-
             if (subtilePalette.Value >= paletteSet.Palettes.Length)
                 subtilePalette.Value = paletteSet.Palettes.Length - 1;
 
@@ -139,22 +144,24 @@ namespace LAZYSHELL
 
             SetTileImage();
             SetSubtileImage();
+            updatingThis = true;
             update.DynamicInvoke();
+            updatingThis = false;
         }
         private void tileAttributes_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updatingSubtile) return;
-
             tile.Subtiles[currentSubtile] = CreateNewSubtile();
 
             SetTileImage();
             SetSubtileImage();
+            updatingThis = true;
             update.DynamicInvoke();
+            updatingThis = false;
         }
         private void tile8x8Tile_ValueChanged(object sender, EventArgs e)
         {
             if (updatingSubtile) return;
-
             if (subtileIndex.Value * format >= graphics.Length)
                 subtileIndex.Value = (graphics.Length / format) - 1;
 
@@ -162,7 +169,9 @@ namespace LAZYSHELL
 
             SetTileImage();
             SetSubtileImage();
+            updatingThis = true;
             update.DynamicInvoke();
+            updatingThis = false;
         }
 
         private void pictureBoxSubtile_Paint(object sender, PaintEventArgs e)
@@ -183,35 +192,10 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(tileImage, 0, 0);
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < 4; i++)
-                this.tileBackup.Subtiles[i] = this.tile.Subtiles[i];
-            update.DynamicInvoke();
-            this.Close();
-        }
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < 4; i++)
-                this.tile.Subtiles[i] = this.tileBackup.Subtiles[i];
-            update.DynamicInvoke();
-            this.Close();
-        }
-        private void buttonReset_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < 4; i++)
-                this.tile.Subtiles[i] = this.tileBackup.Subtiles[i];
-            update.DynamicInvoke();
-            InitializeSubtile();
-            SetTileImage();
-            SetSubtileImage();
-        }
-
-        #endregion
-
         private void buttonMirrorTile_Click(object sender, EventArgs e)
         {
             Do.FlipHorizontal(tile);
+            InitializeSubtile();
             SetTileImage();
             SetSubtileImage();
             update.DynamicInvoke();
@@ -219,9 +203,34 @@ namespace LAZYSHELL
         private void buttonInvertTile_Click(object sender, EventArgs e)
         {
             Do.FlipVertical(tile);
+            InitializeSubtile();
             SetTileImage();
             SetSubtileImage();
             update.DynamicInvoke();
         }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 4; i++)
+                this.tileBackup.Subtiles[i] = this.tile.Subtiles[i];
+            this.Close();
+        }
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 4; i++)
+                this.tile.Subtiles[i] = this.tileBackup.Subtiles[i];
+            updatingThis = true;
+            update.DynamicInvoke();
+            updatingThis = false;
+            InitializeSubtile();
+            SetTileImage();
+            SetSubtileImage();
+        }
+
+        #endregion
     }
 }

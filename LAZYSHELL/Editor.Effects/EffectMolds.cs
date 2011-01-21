@@ -995,13 +995,18 @@ namespace LAZYSHELL
             Bitmap import = new Bitmap(1, 1); import = (Bitmap)Do.Import(import);
             if (import.Width != 128 || import.Height % 16 != 0 || import.Height > 256)
             {
-                MessageBox.Show(
-                    "The image must have a width of 128 and its height must be a multiple of 16 and less than 256.", "LAZY SHELL",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                import.Dispose();
-                return;
+                if (MessageBox.Show(
+                    "The image does not have a width of 128 and a height a multiple of 16 and less than 256. " +
+                    "It is recommended that an imported image possess these attributes for accuracy.\n\n" +
+                    "Import into tileset anyways?", "LAZY SHELL",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                {
+                    import.Dispose();
+                    return;
+                }
             }
-            int[] pixels = Do.ImageToPixels(import, new Size(128, import.Height), new Rectangle(0, 0, 128, import.Height));
+            int height = Math.Min(256, import.Height / 16 * 16);
+            int[] pixels = Do.ImageToPixels(import, new Size(128, height), new Rectangle(0, 0, 128, height));
             if (MessageBox.Show(
                 "Would you like to create a new palette from the imported image?", "LAZY SHELL",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1017,11 +1022,11 @@ namespace LAZYSHELL
             byte[] graphics = new byte[animation.Codec == 1 ? (byte)0x10 * 0x200 : (byte)0x20 * 0x200];
             byte[] tileset = new byte[animation.TileSet.Length * 2];
             Do.PixelsToBPP(
-                pixels, graphics, new Size(16, import.Height / 8),
+                pixels, graphics, new Size(16, height / 8),
                 animation.PaletteSet.Palettes[effect.PaletteIndex],
                 animation.Codec == 1 ? (byte)0x10 : (byte)0x20);
             if (Do.CopyToTileset(graphics, tileset, animation.PaletteSet.Palettes[effect.PaletteIndex],
-                0, false, true, animation.Codec == 1 ? (byte)0x10 : (byte)0x20, 2, new Size(128, import.Height), 0) >
+                0, false, true, animation.Codec == 1 ? (byte)0x10 : (byte)0x20, 2, new Size(128, height), 0) >
                 animation.GraphicSetLength)
                 MessageBox.Show(
                     "Imported graphics exceed graphic set size. Increase the graphic set size to save all data.",

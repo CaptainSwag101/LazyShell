@@ -1131,15 +1131,14 @@ namespace LAZYSHELL
         /// <param name="regHeight">The height of the region to modify.</param>
         public static void FlipVertical(int[] src, int srcWidth, int regX, int regY, int regWidth, int regHeight)
         {
-            int[] invert = new int[src.Length];
             int temp = 0;
             for (int x = regX; x < regX + regWidth; x++)
             {
                 for (int a = regY, b = regY + (regHeight - 1); a < regY + (regHeight / 2); a++, b--)
                 {
-                    temp = invert[(a * srcWidth) + x];
-                    invert[(a * srcWidth) + x] = invert[(b * srcWidth) + x];
-                    invert[(b * srcWidth) + x] = temp;
+                    temp = src[(a * srcWidth) + x];
+                    src[(a * srcWidth) + x] = src[(b * srcWidth) + x];
+                    src[(b * srcWidth) + x] = temp;
                 }
             }
         }
@@ -1167,6 +1166,44 @@ namespace LAZYSHELL
         /// </summary>
         /// <param name="tile">The tile to flip vertically.</param>
         public static void FlipVertical(Tile16x16 tile)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                tile.Subtiles[i].Invert = !tile.Subtiles[i].Invert;
+                FlipVertical(tile.Subtiles[i].Pixels, 8, 8);
+                FlipVertical(tile.Subtiles[i].Colors, 8, 8);
+            }
+            Tile8x8 temp = tile.Subtiles[0].Copy();
+            tile.Subtiles[2].CopyTo(tile.Subtiles[0]);
+            temp.CopyTo(tile.Subtiles[2]);
+            temp = tile.Subtiles[1].Copy();
+            tile.Subtiles[3].CopyTo(tile.Subtiles[1]);
+            temp.CopyTo(tile.Subtiles[3]);
+        }
+        /// <summary>
+        /// Flip horizontally a 16x16 tile.
+        /// </summary>
+        /// <param name="tile">The tile to flip horizontally.</param>
+        public static void FlipHorizontal(Mold.Tile tile)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                tile.Subtiles[i].Mirror = !tile.Subtiles[i].Mirror;
+                FlipHorizontal(tile.Subtiles[i].Pixels, 8, 8);
+                FlipHorizontal(tile.Subtiles[i].Colors, 8, 8);
+            }
+            Tile8x8 temp = tile.Subtiles[0].Copy();
+            tile.Subtiles[1].CopyTo(tile.Subtiles[0]);
+            temp.CopyTo(tile.Subtiles[1]);
+            temp = tile.Subtiles[2].Copy();
+            tile.Subtiles[3].CopyTo(tile.Subtiles[2]);
+            temp.CopyTo(tile.Subtiles[3]);
+        }
+        /// <summary>
+        /// Flip vertically a 16x16 tile.
+        /// </summary>
+        /// <param name="tile">The tile to flip vertically.</param>
+        public static void FlipVertical(Mold.Tile tile)
         {
             for (int i = 0; i < 4; i++)
             {

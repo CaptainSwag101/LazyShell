@@ -357,7 +357,7 @@ namespace LAZYSHELL
             // 
             // checkVramIndex
             // 
-            this.checkVramIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkVramIndex.BackColor = System.Drawing.SystemColors.Control;
             this.checkVramIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkVramIndex.CheckOnClick = true;
             this.checkVramIndex.ColumnWidth = 118;
@@ -371,7 +371,7 @@ namespace LAZYSHELL
             // 
             // checkPaletteIndex
             // 
-            this.checkPaletteIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkPaletteIndex.BackColor = System.Drawing.SystemColors.Control;
             this.checkPaletteIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkPaletteIndex.CheckOnClick = true;
             this.checkPaletteIndex.ColumnWidth = 118;
@@ -385,7 +385,7 @@ namespace LAZYSHELL
             // 
             // checkByte2a
             // 
-            this.checkByte2a.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkByte2a.BackColor = System.Drawing.SystemColors.Control;
             this.checkByte2a.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkByte2a.CheckOnClick = true;
             this.checkByte2a.ColumnWidth = 118;
@@ -399,7 +399,7 @@ namespace LAZYSHELL
             // 
             // checkByte2b
             // 
-            this.checkByte2b.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkByte2b.BackColor = System.Drawing.SystemColors.Control;
             this.checkByte2b.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkByte2b.CheckOnClick = true;
             this.checkByte2b.ColumnWidth = 118;
@@ -413,7 +413,7 @@ namespace LAZYSHELL
             // 
             // checkByte3a
             // 
-            this.checkByte3a.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkByte3a.BackColor = System.Drawing.SystemColors.Control;
             this.checkByte3a.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkByte3a.CheckOnClick = true;
             this.checkByte3a.ColumnWidth = 118;
@@ -427,7 +427,7 @@ namespace LAZYSHELL
             // 
             // checkByte3b
             // 
-            this.checkByte3b.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkByte3b.BackColor = System.Drawing.SystemColors.Control;
             this.checkByte3b.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkByte3b.CheckOnClick = true;
             this.checkByte3b.ColumnWidth = 118;
@@ -441,7 +441,7 @@ namespace LAZYSHELL
             // 
             // checkByte4a
             // 
-            this.checkByte4a.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkByte4a.BackColor = System.Drawing.SystemColors.Control;
             this.checkByte4a.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkByte4a.CheckOnClick = true;
             this.checkByte4a.ColumnWidth = 118;
@@ -455,7 +455,7 @@ namespace LAZYSHELL
             // 
             // checkByte4b
             // 
-            this.checkByte4b.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.checkByte4b.BackColor = System.Drawing.SystemColors.Control;
             this.checkByte4b.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.checkByte4b.CheckOnClick = true;
             this.checkByte4b.ColumnWidth = 118;
@@ -491,7 +491,7 @@ namespace LAZYSHELL
             // 
             // panel88
             // 
-            this.panel88.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel88.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel88.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel88.Controls.Add(this.label4);
             this.panel88.Controls.Add(this.byte1);
@@ -506,7 +506,7 @@ namespace LAZYSHELL
             // 
             // panel9
             // 
-            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel9.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel9.Controls.Add(this.label1);
             this.panel9.Controls.Add(this.byte2);
@@ -521,7 +521,7 @@ namespace LAZYSHELL
             // 
             // panel10
             // 
-            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel10.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel10.Controls.Add(this.label2);
             this.panel10.Controls.Add(this.byte3);
@@ -536,7 +536,7 @@ namespace LAZYSHELL
             // 
             // panel11
             // 
-            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel11.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel11.Controls.Add(this.label3);
             this.panel11.Controls.Add(this.byte4);

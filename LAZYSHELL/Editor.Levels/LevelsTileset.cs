@@ -122,26 +122,26 @@ namespace LAZYSHELL
                     if (tileEditor == null)
                     {
                         tileEditor = new TileEditor(new Function(TileUpdate),
-                            this.tileSet.TileSetLayers[0][mouseDownTile],
+                            this.tileSet.TileSetLayers[Layer][mouseDownTile],
                             tileSet.GraphicsL3, paletteSet, 0x10);
                         tileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
                     }
                     else
                         tileEditor.Reload(new Function(TileUpdate),
-                            this.tileSet.TileSetLayers[0][mouseDownTile],
+                            this.tileSet.TileSetLayers[Layer][mouseDownTile],
                             tileSet.GraphicsL3, paletteSet, 0x10);
                     break;
                 default:
                     if (tileEditor == null)
                     {
                         tileEditor = new TileEditor(new Function(TileUpdate),
-                        this.tileSet.TileSetLayers[0][mouseDownTile],
+                        this.tileSet.TileSetLayers[Layer][mouseDownTile],
                         tileSet.Graphics, paletteSet, 0x20);
                         tileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
                     }
                     else
                         tileEditor.Reload(new Function(TileUpdate),
-                        this.tileSet.TileSetLayers[0][mouseDownTile],
+                        this.tileSet.TileSetLayers[Layer][mouseDownTile],
                         tileSet.Graphics, paletteSet, 0x20);
                     break;
             }
@@ -359,6 +359,7 @@ namespace LAZYSHELL
         }
         private void pictureBoxTileset_MouseDown(object sender, MouseEventArgs e)
         {
+            if (e.Clicks > 1) return;
             if (e.Button == MouseButtons.Right) return;
             mouseDownObject = null;
             // set a floor and ceiling for the coordinates

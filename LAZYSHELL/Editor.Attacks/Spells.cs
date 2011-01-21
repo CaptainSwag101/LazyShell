@@ -230,9 +230,7 @@ namespace LAZYSHELL
                 "spells. Both are exclusively limited to usage by either allies\n" +
                 "or monsters. Any attempts to assign monster spells to allies\n" +
                 "or vice versa will most likely cause a glitch, and is not\n" +
-                "recommended unless the user possesses in-depth\n" +
-                "knowledge of spell animations and a willingness to modify\n" +
-                "them first-hand through a hex editor.";
+                "recommended.";
             this.spellName.ToolTipText =
                 "Select the spell to edit by name. These properties are\n" +
                 "to either in-battle usage, overworld usage or both.\n\n" +
@@ -240,9 +238,7 @@ namespace LAZYSHELL
                 "spells. Both are exclusively limited to usage by either allies\n" +
                 "or monsters. Any attempts to assign monster spells to allies\n" +
                 "or vice versa will most likely cause a glitch, and is not\n" +
-                "recommended unless the user possesses in-depth\n" +
-                "knowledge of spell animations and a willingness to modify\n" +
-                "them first-hand through a hex editor.";
+                "recommended.";
             this.textBoxSpellName.ToolTipText =
                 "The spell's displayed name in all menus.";
             toolTip1.SetToolTip(this.spellFPCost,

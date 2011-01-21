@@ -119,7 +119,7 @@
             // 
             // label141
             // 
-            this.label141.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label141.BackColor = System.Drawing.SystemColors.Control;
             this.label141.Location = new System.Drawing.Point(0, 0);
             this.label141.Name = "label141";
             this.label141.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
@@ -129,7 +129,7 @@
             // 
             // label142
             // 
-            this.label142.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.label142.BackColor = System.Drawing.SystemColors.Control;
             this.label142.Location = new System.Drawing.Point(0, 18);
             this.label142.Name = "label142";
             this.label142.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
@@ -245,6 +245,7 @@
             this.ShowInTaskbar = false;
             this.Text = "TILE EDITOR";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TileEditor_FormClosing);
             this.panel113.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.subtileIndex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subtilePalette)).EndInit();

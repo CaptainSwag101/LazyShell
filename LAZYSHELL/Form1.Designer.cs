@@ -462,7 +462,7 @@ namespace LAZYSHELL
             this.openNotes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openNotes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openNotes.Name = "openNotes";
-            this.openNotes.Size = new System.Drawing.Size(55, 22);
+            this.openNotes.Size = new System.Drawing.Size(94, 22);
             this.openNotes.Text = "Notes";
             this.openNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openNotes.ToolTipText = "Open the notes database";
@@ -639,7 +639,6 @@ namespace LAZYSHELL
             // 
             // toolStripButton5
             // 
-            this.toolStripButton5.Enabled = false;
             this.toolStripButton5.Image = global::LAZYSHELL.Properties.Resources.about_small;
             this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;

@@ -103,6 +103,10 @@ namespace LAZYSHELL
                 offset -= 64; // jump back in buffer so that we can start the next 16x16 tile
             }
         }
+        public void RedrawTileset()
+        {
+            DrawTileset(tileSet, tilesetLayer);
+        }
         public void AssembleIntoModel(int width, int height)
         {
             int offset = 0;

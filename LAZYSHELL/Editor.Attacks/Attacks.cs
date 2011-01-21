@@ -61,20 +61,17 @@ namespace LAZYSHELL
                 "Select the attack to edit by #. These are all exclusively in-\n" +
                 "battle monster attacks. Many monster attacks have no\n" +
                 "name, and even if given one it will not be displayed\n" +
-                "because the attack animation code (which can only be\n" +
-                "edited through a hex editor) does not enable it.";
+                "because the attack animation code does not enable it.";
             this.attackName.ToolTipText =
                 "Select the attack to edit by name. These are all exclusively\n" +
                 "in-battle monster attacks. Many monster attacks have no\n" +
                 "name, and even if given one it will not be displayed\n" +
-                "because the attack animation code (which can only be\n" +
-                "edited through a hex editor) does not enable it.";
+                "because the attack animation code does not enable it.";
             this.textBoxAttackName.ToolTipText =
                 "The attack's name displayed at the top of the screen when\n" +
                 "executed by the monster. Many monster attacks have no\n" +
                 "name, and even if given one it will not be displayed\n" +
-                "because the attack animation code (which can only be\n" +
-                "edited through a hex editor) does not enable it.";
+                "because the attack animation code does not enable it.";
             toolTip1.SetToolTip(this.attackHitRate,
                 "The attack's hit rate percent, ie. the probability out of 100\n" +
                 "the attack will hit its target.");

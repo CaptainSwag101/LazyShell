@@ -146,7 +146,7 @@
             // 
             // panel14
             // 
-            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel14.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel14.Controls.Add(this.labelTitleB);
             this.panel14.Controls.Add(this.labelTitleC);
             this.panel14.Controls.Add(this.evtNumF);
@@ -218,7 +218,7 @@
             // 
             // labelEvtF
             // 
-            this.labelEvtF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelEvtF.BackColor = System.Drawing.SystemColors.Control;
             this.labelEvtF.Location = new System.Drawing.Point(141, 93);
             this.labelEvtF.Name = "labelEvtF";
             this.labelEvtF.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -227,7 +227,7 @@
             // 
             // labelEvtE
             // 
-            this.labelEvtE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelEvtE.BackColor = System.Drawing.SystemColors.Control;
             this.labelEvtE.Location = new System.Drawing.Point(1, 93);
             this.labelEvtE.Name = "labelEvtE";
             this.labelEvtE.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -367,7 +367,7 @@
             // 
             // labelEvtA
             // 
-            this.labelEvtA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelEvtA.BackColor = System.Drawing.SystemColors.Control;
             this.labelEvtA.Location = new System.Drawing.Point(0, 19);
             this.labelEvtA.Name = "labelEvtA";
             this.labelEvtA.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -392,7 +392,7 @@
             // 
             // labelEvtD
             // 
-            this.labelEvtD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelEvtD.BackColor = System.Drawing.SystemColors.Control;
             this.labelEvtD.Location = new System.Drawing.Point(140, 55);
             this.labelEvtD.Name = "labelEvtD";
             this.labelEvtD.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -401,7 +401,7 @@
             // 
             // labelEvtC
             // 
-            this.labelEvtC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelEvtC.BackColor = System.Drawing.SystemColors.Control;
             this.labelEvtC.Location = new System.Drawing.Point(0, 55);
             this.labelEvtC.Name = "labelEvtC";
             this.labelEvtC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -410,7 +410,7 @@
             // 
             // labelEvtB
             // 
-            this.labelEvtB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
+            this.labelEvtB.BackColor = System.Drawing.SystemColors.Control;
             this.labelEvtB.Location = new System.Drawing.Point(0, 37);
             this.labelEvtB.Name = "labelEvtB";
             this.labelEvtB.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
@@ -538,7 +538,7 @@
             // 
             this.panel22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel22.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel22.Controls.Add(this.cpuExtendedCommands);
             this.panel22.Controls.Add(this.actionQueueCommands);
             this.panel22.Controls.Add(this.label4);

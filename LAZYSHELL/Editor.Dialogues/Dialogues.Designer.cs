@@ -139,7 +139,7 @@
             // 
             // panel60
             // 
-            this.panel60.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.panel60.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel60.Controls.Add(this.dialogueTextBox);
             this.panel60.Controls.Add(this.toolStrip2);
             this.panel60.Controls.Add(this.toolStrip1);
@@ -443,7 +443,6 @@
             this.toolStrip4.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip4.CanOverflow = false;
             this.toolStrip4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel2,
             this.pauseFrameNum,
@@ -504,7 +503,6 @@
             this.toolStrip6.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip6.CanOverflow = false;
             this.toolStrip6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip6.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.variables,

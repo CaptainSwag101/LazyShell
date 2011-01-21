@@ -161,7 +161,7 @@ namespace LAZYSHELL
             toolStrip2.Enabled = false;
             toolStrip3.Enabled = false;
             foreach (ToolStripItem item in toolStrip4.Items)
-                if (item != recentFiles && item != openSettings)
+                if (item != recentFiles && item != openSettings && item != toolStripButton5)
                     item.Enabled = false;
             this.removeHeader.Visible = false;
         }
@@ -503,7 +503,7 @@ namespace LAZYSHELL
         }
         private void openAll_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("You are about to open all 15 editor windows. Are you sure you want to do this?",
+            if (MessageBox.Show("You are about to open all 15 editor windows.\n\nAre you sure you want to do this?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
             openAllies_Click(null, null);

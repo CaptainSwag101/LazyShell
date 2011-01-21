@@ -42,6 +42,8 @@
             this.toolStripSeparator36 = new System.Windows.Forms.ToolStripSeparator();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applyBorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sizeLabel = new System.Windows.Forms.Label();
+            this.coordsLabel = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.graphicShowGrid = new System.Windows.Forms.ToolStripButton();
             this.graphicShowPixelGrid = new System.Windows.Forms.ToolStripButton();
@@ -57,8 +59,6 @@
             this.widthIncrease = new System.Windows.Forms.ToolStripButton();
             this.heightDecrease = new System.Windows.Forms.ToolStripButton();
             this.heightIncrease = new System.Windows.Forms.ToolStripButton();
-            this.sizeLabel = new System.Windows.Forms.Label();
-            this.coordsLabel = new System.Windows.Forms.Label();
             this.panel110 = new System.Windows.Forms.Panel();
             this.pictureBoxPalette = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -110,19 +110,20 @@
             this.panelImageGraphics.Controls.Add(this.toolStrip2);
             this.panelImageGraphics.Location = new System.Drawing.Point(12, 86);
             this.panelImageGraphics.Name = "panelImageGraphics";
-            this.panelImageGraphics.Size = new System.Drawing.Size(276, 467);
+            this.panelImageGraphics.Size = new System.Drawing.Size(277, 467);
             this.panelImageGraphics.TabIndex = 498;
             // 
             // panel109
             // 
-            this.panel109.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel109.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel109.AutoScroll = true;
-            this.panel109.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel109.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.panel109.Controls.Add(this.pictureBoxGraphicSet);
             this.panel109.Location = new System.Drawing.Point(0, 43);
             this.panel109.Name = "panel109";
-            this.panel109.Size = new System.Drawing.Size(272, 402);
+            this.panel109.Size = new System.Drawing.Size(273, 402);
             this.panel109.TabIndex = 498;
             this.panel109.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panel109_PreviewKeyDown);
             this.panel109.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel109_MouseDown);
@@ -155,39 +156,39 @@
             this.contextMenuStrip.Name = "contextMenuStrip1";
             this.contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(117, 120);
+            this.contextMenuStrip.Size = new System.Drawing.Size(119, 120);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.importToolStripMenuItem.Text = "Import...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.saveImageToolStripMenuItem.Text = "Save image...";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
             // toolStripSeparator36
             // 
             this.toolStripSeparator36.Name = "toolStripSeparator36";
-            this.toolStripSeparator36.Size = new System.Drawing.Size(113, 6);
+            this.toolStripSeparator36.Size = new System.Drawing.Size(115, 6);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
@@ -195,8 +196,30 @@
             // 
             this.applyBorderToolStripMenuItem.Enabled = false;
             this.applyBorderToolStripMenuItem.Name = "applyBorderToolStripMenuItem";
-            this.applyBorderToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.applyBorderToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.applyBorderToolStripMenuItem.Text = "Apply border";
+            // 
+            // sizeLabel
+            // 
+            this.sizeLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.sizeLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.sizeLabel.Location = new System.Drawing.Point(0, 446);
+            this.sizeLabel.Name = "sizeLabel";
+            this.sizeLabel.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.sizeLabel.Size = new System.Drawing.Size(273, 17);
+            this.sizeLabel.TabIndex = 497;
+            this.sizeLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // coordsLabel
+            // 
+            this.coordsLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.coordsLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.coordsLabel.Location = new System.Drawing.Point(0, 25);
+            this.coordsLabel.Name = "coordsLabel";
+            this.coordsLabel.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.coordsLabel.Size = new System.Drawing.Size(273, 17);
+            this.coordsLabel.TabIndex = 497;
+            this.coordsLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // toolStrip2
             // 
@@ -221,7 +244,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(272, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(273, 25);
             this.toolStrip2.TabIndex = 51;
             this.toolStrip2.TabStop = true;
             this.toolStrip2.Text = "toolStrip2";
@@ -375,28 +398,6 @@
             this.heightIncrease.ToolTipText = "Increase Height";
             this.heightIncrease.Click += new System.EventHandler(this.heightIncrease_Click);
             // 
-            // sizeLabel
-            // 
-            this.sizeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.sizeLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.sizeLabel.Location = new System.Drawing.Point(0, 446);
-            this.sizeLabel.Name = "sizeLabel";
-            this.sizeLabel.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.sizeLabel.Size = new System.Drawing.Size(272, 17);
-            this.sizeLabel.TabIndex = 497;
-            this.sizeLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // coordsLabel
-            // 
-            this.coordsLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(232)))), ((int)(((byte)(224)))));
-            this.coordsLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.coordsLabel.Location = new System.Drawing.Point(0, 25);
-            this.coordsLabel.Name = "coordsLabel";
-            this.coordsLabel.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.coordsLabel.Size = new System.Drawing.Size(272, 17);
-            this.coordsLabel.TabIndex = 497;
-            this.coordsLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // panel110
             // 
             this.panel110.BackColor = System.Drawing.SystemColors.ControlText;
@@ -440,7 +441,7 @@
             // 
             this.buttonReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonReset.FlatAppearance.BorderSize = 0;
-            this.buttonReset.Location = new System.Drawing.Point(213, 559);
+            this.buttonReset.Location = new System.Drawing.Point(214, 559);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 503;
@@ -451,7 +452,7 @@
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.FlatAppearance.BorderSize = 0;
-            this.buttonOK.Location = new System.Drawing.Point(51, 559);
+            this.buttonOK.Location = new System.Drawing.Point(52, 559);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 501;
@@ -462,7 +463,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.FlatAppearance.BorderSize = 0;
-            this.buttonCancel.Location = new System.Drawing.Point(132, 559);
+            this.buttonCancel.Location = new System.Drawing.Point(133, 559);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 502;
@@ -473,7 +474,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 594);
+            this.ClientSize = new System.Drawing.Size(301, 594);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panelImageGraphics);
             this.Controls.Add(this.buttonReset);
@@ -491,6 +492,7 @@
             this.ShowInTaskbar = false;
             this.Text = "GRAPHICS EDITOR - Lazy Shell";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GraphicEditor_FormClosing);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).EndInit();
             this.panelImageGraphics.ResumeLayout(false);

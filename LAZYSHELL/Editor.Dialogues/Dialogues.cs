@@ -191,6 +191,7 @@ namespace LAZYSHELL
         }
         private int CalculateFreeSpace()
         {
+            int index = this.index;
             int used = 0;
             int size = 0;
             int end = 0;

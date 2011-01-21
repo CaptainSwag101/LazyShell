@@ -117,7 +117,9 @@ namespace LAZYSHELL
             updating = false;
 
             newFontTable = new NewFontTable(this);
+            newFontTable.FormClosing += new FormClosingEventHandler(newFontTable_FormClosing);
         }
+
         public void Reload(Dialogues dialoguesEditor)
         {
             SetFontPaletteImage();
@@ -549,6 +551,11 @@ namespace LAZYSHELL
         {
             if (fontType.SelectedIndex < 3)
                 newFontTable.Show();
+        }
+        private void newFontTable_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            newFontTable.Hide();
         }
         private void fontWidth_ValueChanged(object sender, EventArgs e)
         {

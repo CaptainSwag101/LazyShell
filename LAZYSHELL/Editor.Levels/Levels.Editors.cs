@@ -42,7 +42,7 @@ namespace LAZYSHELL
         }
         private void TilesetUpdate()
         {
-            fullUpdate = false;
+            fullUpdate = true;
             RefreshLevel();
         }
 
