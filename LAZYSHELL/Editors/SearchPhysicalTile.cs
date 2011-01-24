@@ -48,9 +48,9 @@ namespace LAZYSHELL
             bool notFound;
 
             if (searchOptions.SelectedIndex == 0)
-                withProp = "Search for physical tiles with ONLY the following properties...\n\n";
+                withProp = "Search for solid tiles with ONLY the following properties...\n\n";
             else
-                withProp = "Search for physical tiles with ANY of the following properties...\n\n";
+                withProp = "Search for solid tiles with ANY of the following properties...\n\n";
 
             if (checkHeightOfBaseTile.GetItemChecked(0)) withProp += "Height of base tile = " + heighOfBaseTile.Value.ToString() + "\n";
             if (checkHeightOverhead.GetItemChecked(0)) withProp += "Height overhead tile = " + heightOverhead.Value.ToString() + "\n";
@@ -174,7 +174,7 @@ namespace LAZYSHELL
                 if (checkDoorFormat.GetItemChecked(0)) { if (doorFormat.SelectedIndex != physicalTiles[i].Door) notFound = true; }
 
                 if (!notFound)
-                    searchResults.Items.Add("Physical Tile #" + i.ToString());
+                    searchResults.Items.Add("Solid Tile #" + i.ToString());
             }
         }
         private void checkHeightOfBaseTile_SelectedIndexChanged(object sender, EventArgs e)

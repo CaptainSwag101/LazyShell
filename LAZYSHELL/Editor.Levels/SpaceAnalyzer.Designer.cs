@@ -95,6 +95,7 @@ namespace LAZYSHELL
             this.tileMapPage.Size = new System.Drawing.Size(577, 387);
             this.tileMapPage.TabIndex = 0;
             this.tileMapPage.Text = "TILE MAPS";
+            this.tileMapPage.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -256,7 +257,8 @@ namespace LAZYSHELL
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(577, 387);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "PHYSICAL MAPS";
+            this.tabPage2.Text = "SOLIDITY MAPS";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -383,7 +385,7 @@ namespace LAZYSHELL
             this.label12.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.label12.Size = new System.Drawing.Size(113, 17);
             this.label12.TabIndex = 15;
-            this.label12.Text = "PHYSICAL MAP";
+            this.label12.Text = "SOLIDITY MAP";
             // 
             // bankListBox1
             // 

@@ -12,6 +12,8 @@ namespace LAZYSHELL
         private FontCharacter[] fontTriangles;
         private int[] palette;
         private int[] tripal;
+        private Model model = State.Instance.Model;
+        private DialogueTable[] tables { get { return model.DialogueTables; } }
 
         private Point p;
         private int next = 0;
@@ -232,7 +234,7 @@ namespace LAZYSHELL
                         // stop adding characters if next character is...
                         if (dlg[charPtr] >= 0x00 && dlg[charPtr] <= 0x04) break;
                         if (dlg[charPtr] == 0x06) break;
-                        if (dlg[charPtr] >= 0x0E && dlg[charPtr] <= 0x19) break;
+                        if (dlg[charPtr] >= 0x0E && dlg[charPtr] <= 0x17) break;
                         if (dlg[charPtr] == 0x1B) break;
                         if (dlg[charPtr] == 0x20) break;
 
@@ -248,6 +250,11 @@ namespace LAZYSHELL
             ArrayList n = new ArrayList();
             for (int i = 0; i < dlg.Length; i++)
             {
+                if (dlg[i] >= 0x0E && dlg[i] <= 0x17)
+                {
+                    n.AddRange(tables[dlg[i] - 0x0E].RawDialogue);
+                    continue;
+                }
                 switch ((byte)dlg[i])
                 {
                     // eliminate, will NOT affect drawing
@@ -266,22 +273,6 @@ namespace LAZYSHELL
                         for (int a = 0; i < dlg.Length && a < dlg[i]; a++)
                             n.Add((char)0x20);
                         break;
-
-                    // compressed letter sets
-                    case 0x0E: n.AddRange(" the".ToCharArray()); break;
-                    case 0x0F: n.AddRange(" you".ToCharArray()); break;
-                    case 0x10: n.AddRange("in".ToCharArray()); break;
-                    case 0x11: n.AddRange(" to ".ToCharArray()); break;
-                    case 0x12: n.AddRange("'s ".ToCharArray()); break;
-                    case 0x13: n.AddRange("Mario".ToCharArray()); break;
-                    case 0x14: n.AddRange(" I ".ToCharArray()); break;
-                    case 0x15: n.AddRange(" and ".ToCharArray()); break;
-                    case 0x16: n.AddRange("is ".ToCharArray()); break;
-                    case 0x17: n.AddRange(" so".ToCharArray()); break;
-                    case 0x18: n.AddRange("at".ToCharArray()); break;
-                    case 0x19: n.AddRange("here".ToCharArray()); break;
-                    case 0x1B: n.AddRange(" for".ToCharArray()); break;
-
                     // 1 regular character >= 0x20
                     default: n.Add(dlg[i]); break;
                 }

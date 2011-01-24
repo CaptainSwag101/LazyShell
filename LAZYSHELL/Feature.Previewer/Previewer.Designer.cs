@@ -96,8 +96,9 @@ namespace LAZYSHELL.Previewer
             // 
             // changeEmuButton
             // 
+            this.changeEmuButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.changeEmuButton.BackColor = System.Drawing.SystemColors.Control;
-            this.changeEmuButton.Location = new System.Drawing.Point(639, 0);
+            this.changeEmuButton.Location = new System.Drawing.Point(711, 0);
             this.changeEmuButton.Name = "changeEmuButton";
             this.changeEmuButton.Size = new System.Drawing.Size(70, 17);
             this.changeEmuButton.TabIndex = 1;
@@ -108,18 +109,22 @@ namespace LAZYSHELL.Previewer
             // 
             // eventListBox
             // 
+            this.eventListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.eventListBox.FormattingEnabled = true;
             this.eventListBox.IntegralHeight = false;
             this.eventListBox.Location = new System.Drawing.Point(12, 93);
             this.eventListBox.Name = "eventListBox";
-            this.eventListBox.Size = new System.Drawing.Size(551, 286);
+            this.eventListBox.Size = new System.Drawing.Size(623, 286);
             this.eventListBox.TabIndex = 2;
             this.eventListBox.SelectedIndexChanged += new System.EventHandler(this.eventListBox_SelectedIndexChanged);
             // 
             // launchButton
             // 
+            this.launchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.launchButton.FlatAppearance.BorderSize = 0;
-            this.launchButton.Location = new System.Drawing.Point(569, 356);
+            this.launchButton.Location = new System.Drawing.Point(641, 356);
             this.launchButton.Name = "launchButton";
             this.launchButton.Size = new System.Drawing.Size(75, 23);
             this.launchButton.TabIndex = 3;
@@ -162,8 +167,9 @@ namespace LAZYSHELL.Previewer
             // 
             // cancelButton
             // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Location = new System.Drawing.Point(650, 356);
+            this.cancelButton.Location = new System.Drawing.Point(722, 356);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 7;
@@ -172,30 +178,36 @@ namespace LAZYSHELL.Previewer
             // 
             // emuPathTextBox
             // 
+            this.emuPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.emuPathTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.emuPathTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.emuPathTextBox.Location = new System.Drawing.Point(4, 2);
             this.emuPathTextBox.Name = "emuPathTextBox";
             this.emuPathTextBox.ReadOnly = true;
-            this.emuPathTextBox.Size = new System.Drawing.Size(501, 14);
+            this.emuPathTextBox.Size = new System.Drawing.Size(573, 14);
             this.emuPathTextBox.TabIndex = 8;
             // 
             // romPathTextBox
             // 
+            this.romPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.romPathTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.romPathTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.romPathTextBox.Location = new System.Drawing.Point(4, 2);
             this.romPathTextBox.Name = "romPathTextBox";
             this.romPathTextBox.ReadOnly = true;
-            this.romPathTextBox.Size = new System.Drawing.Size(501, 14);
+            this.romPathTextBox.Size = new System.Drawing.Size(573, 14);
             this.romPathTextBox.TabIndex = 9;
             // 
             // argsTextBox
             // 
+            this.argsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.argsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.argsTextBox.Location = new System.Drawing.Point(4, 2);
             this.argsTextBox.Name = "argsTextBox";
-            this.argsTextBox.Size = new System.Drawing.Size(501, 14);
+            this.argsTextBox.Size = new System.Drawing.Size(573, 14);
             this.argsTextBox.TabIndex = 17;
             // 
             // linkLabelZSNES
@@ -297,10 +309,11 @@ namespace LAZYSHELL.Previewer
             // 
             // dynamicROMPath
             // 
+            this.dynamicROMPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dynamicROMPath.Appearance = System.Windows.Forms.Appearance.Button;
             this.dynamicROMPath.BackColor = System.Drawing.SystemColors.Control;
             this.dynamicROMPath.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.dynamicROMPath.Location = new System.Drawing.Point(639, 18);
+            this.dynamicROMPath.Location = new System.Drawing.Point(711, 18);
             this.dynamicROMPath.Name = "dynamicROMPath";
             this.dynamicROMPath.Size = new System.Drawing.Size(70, 17);
             this.dynamicROMPath.TabIndex = 27;
@@ -312,8 +325,9 @@ namespace LAZYSHELL.Previewer
             // 
             // defaultZSNES
             // 
+            this.defaultZSNES.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.defaultZSNES.BackColor = System.Drawing.SystemColors.Control;
-            this.defaultZSNES.Location = new System.Drawing.Point(639, 54);
+            this.defaultZSNES.Location = new System.Drawing.Point(711, 54);
             this.defaultZSNES.Name = "defaultZSNES";
             this.defaultZSNES.Size = new System.Drawing.Size(70, 17);
             this.defaultZSNES.TabIndex = 28;
@@ -324,50 +338,58 @@ namespace LAZYSHELL.Previewer
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.SystemColors.Window;
             this.panel2.Controls.Add(this.emuPathTextBox);
             this.panel2.Location = new System.Drawing.Point(129, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(509, 17);
+            this.panel2.Size = new System.Drawing.Size(581, 17);
             this.panel2.TabIndex = 29;
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
             this.panel1.Controls.Add(this.romPathTextBox);
             this.panel1.Location = new System.Drawing.Point(129, 18);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(509, 17);
+            this.panel1.Size = new System.Drawing.Size(581, 17);
             this.panel1.TabIndex = 30;
             // 
             // panel3
             // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.SystemColors.Window;
             this.panel3.Controls.Add(this.argsTextBox);
             this.panel3.Location = new System.Drawing.Point(129, 54);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(509, 17);
+            this.panel3.Size = new System.Drawing.Size(581, 17);
             this.panel3.TabIndex = 31;
             // 
             // panel11
             // 
+            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel11.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel11.Controls.Add(this.label1);
             this.panel11.Controls.Add(this.selectNumericUpDown);
-            this.panel11.Location = new System.Drawing.Point(569, 93);
+            this.panel11.Location = new System.Drawing.Point(641, 93);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(156, 21);
             this.panel11.TabIndex = 37;
             // 
             // panel9
             // 
+            this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel9.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel9.Controls.Add(this.label4);
             this.panel9.Controls.Add(this.panel10);
             this.panel9.Enabled = false;
-            this.panel9.Location = new System.Drawing.Point(569, 202);
+            this.panel9.Location = new System.Drawing.Point(641, 202);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(156, 40);
             this.panel9.TabIndex = 37;
@@ -391,9 +413,11 @@ namespace LAZYSHELL.Previewer
             this.battleBGListBox.Name = "battleBGListBox";
             this.battleBGListBox.Size = new System.Drawing.Size(156, 21);
             this.battleBGListBox.TabIndex = 21;
+            this.battleBGListBox.SelectedIndexChanged += new System.EventHandler(this.battleBGListBox_SelectedIndexChanged);
             // 
             // panel8
             // 
+            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel8.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel8.Controls.Add(this.adjustXNumericUpDown);
@@ -403,7 +427,7 @@ namespace LAZYSHELL.Previewer
             this.panel8.Controls.Add(this.adjustYNumericUpDown);
             this.panel8.Controls.Add(this.adjustZNumericUpDown);
             this.panel8.Controls.Add(this.label7);
-            this.panel8.Location = new System.Drawing.Point(569, 120);
+            this.panel8.Location = new System.Drawing.Point(641, 120);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(156, 76);
             this.panel8.TabIndex = 36;
@@ -422,6 +446,8 @@ namespace LAZYSHELL.Previewer
             // 
             // panel6
             // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel6.Controls.Add(this.emuPathLabel);
@@ -438,30 +464,35 @@ namespace LAZYSHELL.Previewer
             this.panel6.Controls.Add(this.panel1);
             this.panel6.Location = new System.Drawing.Point(12, 12);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(713, 75);
+            this.panel6.Size = new System.Drawing.Size(785, 75);
             this.panel6.TabIndex = 35;
             // 
             // panel13
             // 
+            this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel13.BackColor = System.Drawing.SystemColors.Window;
             this.panel13.Controls.Add(this.textBox1);
             this.panel13.Location = new System.Drawing.Point(129, 36);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(509, 17);
+            this.panel13.Size = new System.Drawing.Size(581, 17);
             this.panel13.TabIndex = 31;
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Location = new System.Drawing.Point(4, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(501, 14);
+            this.textBox1.Size = new System.Drawing.Size(573, 14);
             this.textBox1.TabIndex = 17;
             // 
             // defaultSNES9X
             // 
+            this.defaultSNES9X.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.defaultSNES9X.BackColor = System.Drawing.SystemColors.Control;
-            this.defaultSNES9X.Location = new System.Drawing.Point(639, 36);
+            this.defaultSNES9X.Location = new System.Drawing.Point(711, 36);
             this.defaultSNES9X.Name = "defaultSNES9X";
             this.defaultSNES9X.Size = new System.Drawing.Size(70, 17);
             this.defaultSNES9X.TabIndex = 28;
@@ -485,12 +516,13 @@ namespace LAZYSHELL.Previewer
             // 
             // panel4
             // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.alliesInParty);
             this.panel4.Controls.Add(this.maxOutStats);
             this.panel4.Controls.Add(this.label2);
-            this.panel4.Location = new System.Drawing.Point(569, 248);
+            this.panel4.Location = new System.Drawing.Point(641, 248);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(156, 104);
             this.panel4.TabIndex = 38;
@@ -509,6 +541,7 @@ namespace LAZYSHELL.Previewer
             this.alliesInParty.Name = "alliesInParty";
             this.alliesInParty.Size = new System.Drawing.Size(152, 64);
             this.alliesInParty.TabIndex = 29;
+            this.alliesInParty.SelectedIndexChanged += new System.EventHandler(this.alliesInParty_SelectedIndexChanged);
             // 
             // maxOutStats
             // 
@@ -541,7 +574,7 @@ namespace LAZYSHELL.Previewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 391);
+            this.ClientSize = new System.Drawing.Size(809, 391);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.eventListBox);
             this.Controls.Add(this.cancelButton);
@@ -551,7 +584,6 @@ namespace LAZYSHELL.Previewer
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel8);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Previewer";
             ((System.ComponentModel.ISupportInitialize)(this.selectNumericUpDown)).EndInit();

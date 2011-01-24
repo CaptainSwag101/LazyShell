@@ -69,6 +69,7 @@ namespace LAZYSHELL
             this.zoomPanel = new ZoomPanel();
             this.zoomPanel.PictureBox = this.pictureBoxZoom;
             this.zoomPanel_TS = new ZoomPanel();
+            this.zoomPanel_TS.Size = new Size(66, 66);
             this.zoomPanel_TS.PictureBox = this.pictureBoxZoom_TS;
             updating = true;
             this.listBoxMolds.Items.Clear();
@@ -246,16 +247,8 @@ namespace LAZYSHELL
             if (mouseDownPosition != new Point(-1, -1))
                 return;
             Pen pen = new Pen(Color.Red); pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            g.FillRectangle(new SolidBrush(Color.FromArgb(64, Color.Black)),
-                (x * z) - (1 * z) + (z / 2),
-                (y * z) - (1 * z) + (z / 2),
-                18 * z - (1 * z),
-                18 * z - (1 * z));
-            g.DrawRectangle(pen,
-                (x * z) - (1 * z) + (z / 2),
-                (y * z) - (1 * z) + (z / 2),
-                18 * z - (1 * z),
-                18 * z - (1 * z));
+            g.FillRectangle(new SolidBrush(Color.FromArgb(64, Color.Black)), (x * z), (y * z), 16 * z, 16 * z);
+            g.DrawRectangle(pen, (x * z), (y * z), 16 * z, 16 * z);
         }
         private void Drag()
         {
@@ -763,49 +756,29 @@ namespace LAZYSHELL
         }
         private void pictureBoxZoom_TS_Paint(object sender, PaintEventArgs e)
         {
-            if (tilesetImage != null && !mold.Gridplane)
+            if (tilesetImage != null && !mold.Gridplane && animation.UniqueTiles.Count > 0)
             {
                 int z = 4;
                 RectangleF source, dest, clone;
                 source = new RectangleF(0, 0, pictureBoxZoom_TS.Width / 4, pictureBoxZoom_TS.Height / 4);
                 dest = new RectangleF(0, 0, pictureBoxZoom_TS.Width / 4 * z, pictureBoxZoom_TS.Height / 4 * z);
-                clone = new RectangleF(
-                    Math.Min(80, Math.Max(0, mousePosition.X - (pictureBoxZoom_TS.Width / 8))),
-                    Math.Min(pictureBoxTileset.Height - 48, Math.Max(0, mousePosition.Y - (pictureBoxZoom_TS.Height / 8))),
+
+                clone = new RectangleF(mousePosition.X / 16 * 16, mousePosition.Y / 16 * 16,
                     pictureBoxZoom_TS.Width / 4, pictureBoxZoom_TS.Height / 4);
                 e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 e.Graphics.DrawImage(
                     new Bitmap(tilesetImage.Clone(clone, PixelFormat.DontCare)),
                     dest, source, GraphicsUnit.Pixel);
-                if (showGrid.Checked)
-                {
-                    Pen p = new Pen(new SolidBrush(Color.Gray));
-                    Point h = new Point(0, (int)(z * 16 - (z * clone.Y)));
-                    Point v = new Point((int)(z * 16 - (z * clone.X)), 0);
-                    for (; h.Y < 256; h.Y += z * 16)
-                        e.Graphics.DrawLine(p, h, new Point(h.X + pictureBoxZoom_TS.Width, h.Y));
-                    for (; v.X < 256; v.X += z * 16)
-                        e.Graphics.DrawLine(p, v, new Point(v.X, v.Y + pictureBoxZoom_TS.Height));
-                }
+
                 Rectangle cursorBounds;
                 int size =
                     Cursor.Current == Cursors.Arrow ||
                     Cursor.Current == Cursors.Cross ||
                     Cursor.Current == Cursors.Hand ? 32 : 16;
-                // if on the very edge of the image
-                Point cursorOffset = new Point();
-                if (mousePosition.X - (pictureBoxZoom_TS.Width / 8) < 0)
-                    cursorOffset.X = mousePosition.X - (pictureBoxZoom_TS.Width / 8);
-                else if (mousePosition.X - (pictureBoxZoom_TS.Width / 8) - 80 > 0)
-                    cursorOffset.X = mousePosition.X - (pictureBoxZoom_TS.Width / 8) - 80;
-                if (mousePosition.Y - (pictureBoxZoom_TS.Height / 8) < 0)
-                    cursorOffset.Y = mousePosition.Y - (pictureBoxZoom_TS.Height / 8);
-                else if (mousePosition.Y - (pictureBoxZoom_TS.Height / 8) - (pictureBoxTileset.Height - 48) > 0)
-                    cursorOffset.Y = mousePosition.Y - (pictureBoxZoom_TS.Height / 8) - (pictureBoxTileset.Height - 48);
                 cursorBounds = new Rectangle(
-                        ((24 - Cursor.Current.HotSpot.X) * z) + (cursorOffset.X * z),
-                        ((24 - Cursor.Current.HotSpot.Y) * z) + (cursorOffset.Y * z),
+                        (0 - (Cursor.Current.HotSpot.X * z) + (mousePosition.X % 16 * z)),
+                        (0 - (Cursor.Current.HotSpot.Y * z) + (mousePosition.Y % 16 * z)),
                         size * z, size * z);
                 if (Cursor.Current != null)
                     Cursor.Current.DrawStretched(e.Graphics, cursorBounds);
@@ -885,7 +858,7 @@ namespace LAZYSHELL
             }
             if (toggleZoomBox_TS.Checked)
             {
-                zoomPanel_TS.Location = new Point(MousePosition.X - 256, MousePosition.Y);
+                zoomPanel_TS.Location = new Point(MousePosition.X - 96, MousePosition.Y + 16);
                 zoomPanel_TS.Show();
                 pictureBoxZoom_TS.Invalidate();
                 this.Focus();

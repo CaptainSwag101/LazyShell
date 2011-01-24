@@ -93,7 +93,6 @@ namespace LAZYSHELL
             else
                 filename = "";
             return false;
-
         }
         public bool OpenRomFile(string filename)
         {

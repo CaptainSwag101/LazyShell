@@ -39,7 +39,7 @@ namespace LAZYSHELL
             set
             {
                 graphics = value;
-                graphics.CopyTo(model.SpriteGraphics, image.GraphicOffset);
+                graphics.CopyTo(model.SpriteGraphics, image.GraphicOffset - 0x280000);
             }
         }
         private byte[] spriteGraphics { get { return model.SpriteGraphics; } }
@@ -225,6 +225,10 @@ namespace LAZYSHELL
             }
             if (i < 444)
                 MessageBox.Show("The available space for animation data in bank 0x360000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 444 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
+
+            foreach (PaletteSet p in palettes)
+                p.Assemble();
+            Buffer.BlockCopy(model.SpriteGraphics, 0, data, 0x280000, 0xB4000);
         }
         public void EnableOnPlayback(bool enable)
         {
@@ -301,12 +305,12 @@ namespace LAZYSHELL
             if (graphicEditor == null)
             {
                 graphicEditor = new GraphicEditor(new Function(GraphicUpdate),
-                    graphics, graphics.Length, 0, paletteSet, 0, 0x20);
+                    graphics, graphics.Length, 0, paletteSet, 0, 0x20, 1);
                 graphicEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
                 graphicEditor.Reload(new Function(GraphicUpdate),
-                    graphics, graphics.Length, 0, paletteSet, 0, 0x20);
+                    graphics, graphics.Length, 0, paletteSet, 0, 0x20, 1);
         }
         private void LoadMoldEditor()
         {
@@ -346,6 +350,7 @@ namespace LAZYSHELL
             molds.SetTilemapImage();
             sequences.SetSequenceFrameImages();
             sequences.InvalidateImages();
+            graphics.CopyTo(model.SpriteGraphics, image.GraphicOffset - 0x280000);
         }
         #endregion
         #region Event Handlers
@@ -356,9 +361,13 @@ namespace LAZYSHELL
                 "Sprites have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
+            {
+                graphicEditor.Close();
                 Assemble();
+            }
             else if (result == DialogResult.No)
             {
+                graphicEditor.Close();
                 model.Sprites = null;
                 model.SpriteGraphics = null;
                 model.SpritePalettes = null;
@@ -371,7 +380,6 @@ namespace LAZYSHELL
                 return;
             }
             paletteEditor.Close();
-            graphicEditor.Close();
             searchWindow.Close();
         }
         private void number_ValueChanged(object sender, EventArgs e)

@@ -194,7 +194,7 @@ namespace LAZYSHELL
         public void DrawCartographicGrid(Graphics g, Color c, Size s, Size u, int z)
         {
             c = Color.FromArgb(alpha, c);
-            Pen p = new Pen(new SolidBrush(c));
+            Pen p = new Pen(new SolidBrush(c)); p.DashPattern = new float[] { 1, 1 };
             Point h = new Point();
             Point v = new Point();
             for (h.Y = z * u.Height; h.Y < s.Height; h.Y += z * u.Height)

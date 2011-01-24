@@ -115,7 +115,7 @@ namespace LAZYSHELL
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            tabControl.Visible = toolStripButton2.Checked;
+            tabControl.Visible = propertiesButton.Checked;
         }
         private void openPaletteEditor_Click(object sender, EventArgs e)
         {

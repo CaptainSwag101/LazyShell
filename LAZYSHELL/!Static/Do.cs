@@ -248,10 +248,12 @@ namespace LAZYSHELL
             byte[] character;
             for (int i = 0; i * fontCharacters[0].Graphics.Length < temp.Length && i < temp.Length; i++)
             {
+                if (fontCharacters[i].FontType == 1 && (i == 59 || i == 61))    // skip [ and ]
+                    continue;
                 character = Bits.GetByteArray(temp, i * fontCharacters[i].Graphics.Length, fontCharacters[i].Graphics.Length);
                 CopyOverBPPGraphics(
                     character, fontCharacters[i].Graphics,
-                    new Rectangle(0, 0, fontCharacters[i].Width, fontCharacters[i].Height),
+                    new Rectangle(0, 0, fontCharacters[i].MaxWidth, fontCharacters[i].Height),
                     fontCharacters[i].MaxWidth / 8, 0, 0x10);
                 if (fontCharacters[i].FontType != 3)
                     fontCharacters[i].Width = (byte)(fontCharacters[i].GetRightMostPixel(palette) + 1);

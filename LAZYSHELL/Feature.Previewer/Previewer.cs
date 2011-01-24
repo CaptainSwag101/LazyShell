@@ -47,7 +47,7 @@ namespace LAZYSHELL.Previewer
 
             if (settings.PreviewFirstTime)
             {
-                DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews.\nDoing so will yield unpredictable results. Do you understand?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews. Doing so will yield unpredictable results.\n\nDo you understand?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
                     settings.PreviewFirstTime = false;
@@ -112,10 +112,13 @@ namespace LAZYSHELL.Previewer
                 this.battleBGListBox.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
                 this.battleBGListBox.Visible = true;
                 this.battleBGListBox.Enabled = true;
-                this.battleBGListBox.SelectedIndex = 0;
+                this.battleBGListBox.SelectedIndex = settings.PreviewBattlefield;
             }
             this.argsTextBox.Text = settings.PreviewArguments;
             this.dynamicROMPath.Checked = settings.PreviewDynamicRomName;
+            this.maxOutStats.Checked = settings.PreviewMaxStats;
+            for (int i = 0; i < 4; i++)
+                alliesInParty.SetItemChecked(i, Bits.GetBit(settings.PreviewAllies, i));
 
             romPath = GetRomPath();
             this.initializing = false;
@@ -215,10 +218,14 @@ namespace LAZYSHELL.Previewer
                 {
                     this.eventListBox.Items.Add(ent.msg);
                 }
-
             }
             if (this.eventListBox.Items.Count > 0)
-                this.eventListBox.SelectedIndex = 0;
+            {
+                if (this.behaviour == (int)Behaviours.BattlePreviewer && this.eventListBox.Items.Count > 1)
+                    this.eventListBox.SelectedIndex = 1;
+                else
+                    this.eventListBox.SelectedIndex = 0;
+            }
         }
         // launching
         private bool Prelaunch()
@@ -312,13 +319,16 @@ namespace LAZYSHELL.Previewer
                 int offset = snes9x ? 0x53C9D : 0x41533;
 
                 byte allyCount = 1;
-                for (byte i = 0; i < alliesInParty.Items.Count; i++)
+                for (byte i = 0, a = 1; i < alliesInParty.Items.Count; i++)
+                {
                     if (alliesInParty.GetItemChecked(i))
                     {
-                        state[offset + 0x32 + i] = (byte)(i + 1);
-                        allyCount++;
+                        state[offset + 0x33 + a] = (byte)(i + 1);
+                        a++;  allyCount++;
                     }
+                }
                 state[offset + 0x32] = allyCount;
+                state[offset + 0x33] = 0;   // Mario always in party and in first slot
                 state[offset + 0x3F] &= 0xFC;
                 state[offset + 0x3F] |= Math.Min((byte)3, allyCount);
 
@@ -640,10 +650,10 @@ namespace LAZYSHELL.Previewer
 
                     ent.msg = "Formation: " + i.ToString() + " - " + formations[i].ToString();
                     ent.LevelNum = 0;
-                    ent.CoordX = 5;
-                    ent.CoordY = 5;
+                    ent.CoordX = 0;
+                    ent.CoordY = 0;
                     ent.CoordZ = 0;
-                    ent.RadialPosition = 7;
+                    ent.RadialPosition = 0;
 
                     eventTriggers.Add(ent);
                 }
@@ -730,9 +740,24 @@ namespace LAZYSHELL.Previewer
             }
             UpdateGUI();
         }
+        private void battleBGListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            settings.PreviewBattlefield = battleBGListBox.SelectedIndex;
+            settings.Save();
+        }
+        private void alliesInParty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            byte bits = settings.PreviewAllies;
+            for (int i = 0; i < 4; i++)
+                Bits.SetBit(ref bits, i, alliesInParty.GetItemChecked(i));
+            settings.PreviewAllies = bits;
+            settings.Save();
+        }
         private void maxOutStats_CheckedChanged(object sender, EventArgs e)
         {
             maxOutStats.ForeColor = maxOutStats.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            settings.PreviewMaxStats = maxOutStats.Checked;
+            settings.Save();
         }
         private void launchButton_Click(object sender, EventArgs e)
         {
@@ -755,11 +780,6 @@ namespace LAZYSHELL.Previewer
             public ushort LevelNum;
             public bool Flag;
             public string msg;
-        }
-
-        private void alliesInParty_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

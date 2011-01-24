@@ -95,6 +95,7 @@
     <Compile Include="Editor.Battle Scripts\BattleScripts.Designer.cs">
       <DependentUpon>BattleScripts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor.Dialogues\DialogueTable.cs" />
     <Compile Include="Editor.Event Scripts\EventScripts.Action.cs">
       <SubType>Form</SubType>
     </Compile>

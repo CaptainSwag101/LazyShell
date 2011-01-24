@@ -230,6 +230,20 @@ namespace LAZYSHELL
                 throw new Exception();
             }
         }
+        public static void SetBit(ref byte data, int bit, bool value)
+        {
+            try
+            {
+                if (value)
+                    data |= (byte)(Math.Pow(2, bit));
+                else if (!value)
+                    data &= (byte)((byte)(Math.Pow(2, bit)) ^ 0xFF);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
+        }
         public static void SetBitsByByte(byte[] data, int offset, byte bits, bool value)
         {
             try

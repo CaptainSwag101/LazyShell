@@ -184,7 +184,7 @@ namespace LAZYSHELL
             {
                 Buffer.BlockCopy(data, 0x0A0000, model.Data, 0x0A0000, 0x60000);
             }
-            if (levels.Nodes["PhysicalMaps"].Checked)   // physical maps
+            if (levels.Nodes["SolidityMaps"].Checked)   // physical maps
             {
                 Buffer.BlockCopy(data, 0x1B0000, model.Data, 0x1B0000, 0x18000);
             }

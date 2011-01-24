@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using LAZYSHELL.ScriptsEditor;
@@ -1102,7 +1103,9 @@ namespace LAZYSHELL
 
         private void UpdateActionScriptsFreeSpace()
         {
-            this.label1.Text = " " + CalculateActionScriptsLength().ToString() + " bytes left ";
+            int left = CalculateActionScriptsLength();
+            this.label1.Text = " " + left.ToString() + " bytes left ";
+            this.label1.BackColor = left < 0 ? Color.Red : SystemColors.Control;
         }
         private int CalculateActionScriptsLength()
         {

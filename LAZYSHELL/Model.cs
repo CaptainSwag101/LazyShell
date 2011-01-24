@@ -210,33 +210,10 @@ namespace LAZYSHELL
             {
                 if (dialogues == null)
                 {
-                    //set the charcode to read from table
-                    Bits.SetByte(data, 0x6935, 0xEF);
-                    Bits.SetByte(data, 0x6937, 0xEF);
-                    Bits.SetShort(data, 0x693B, 0x60EF);
-                    //set the pointers for the table
-                    Bits.SetByte(data, 0x249016, 0x31);
-                    Bits.SetByte(data, 0x24901A, 0x36);
-                    //set the new text
-                    Bits.SetShort(data, 0x24912E, 0x7461);
-                    Bits.SetShort(data, 0x249130, 0x6800);
-                    Bits.SetShort(data, 0x249132, 0x7265);
-                    Bits.SetShort(data, 0x249134, 0x0065);
-                    Bits.SetShort(data, 0x249136, 0x6620);
-                    Bits.SetShort(data, 0x249138, 0x726F);
-                    Bits.SetByte(data, 0x24913A, 0x00);
-                    ProgressBar progressBar = new ProgressBar("LOADING DIALOGUES...", 4096);
-                    progressBar.Show();
                     // create dialogues
                     dialogues = new Dialogue[4096];
                     for (int i = 0; i < dialogues.Length; i++)
-                    {
                         dialogues[i] = new Dialogue(data, i);
-                        dialogues[i].SetDialogue(dialogues[i].GetDialogue(true), true);
-                        if (i % 32 == 0)
-                            progressBar.PerformStep("LOADING DIALOGUE #" + i.ToString("d4"), 32);
-                    }
-                    progressBar.Close();
                 }
                 return this.dialogues;
             }
@@ -246,29 +223,27 @@ namespace LAZYSHELL
         {
             if (dialogues != null)
                 return dialogues;
-            //set the charcode to read from table
-            Bits.SetByte(data, 0x6935, 0xEF);
-            Bits.SetByte(data, 0x6937, 0xEF);
-            Bits.SetShort(data, 0x693B, 0x60EF);
-            //set the pointers for the table
-            Bits.SetByte(data, 0x249016, 0x31);
-            Bits.SetByte(data, 0x24901A, 0x36);
-            //set the new text
-            Bits.SetShort(data, 0x24912E, 0x7461);
-            Bits.SetShort(data, 0x249130, 0x6800);
-            Bits.SetShort(data, 0x249132, 0x7265);
-            Bits.SetShort(data, 0x249134, 0x0065);
-            Bits.SetShort(data, 0x249136, 0x6620);
-            Bits.SetShort(data, 0x249138, 0x726F);
-            Bits.SetByte(data, 0x24913A, 0x00);
             // create dialogues
             Dialogue[] temp = new Dialogue[end - start];
             for (int i = start; i < end; i++)
-            {
                 temp[i] = new Dialogue(data, i);
-                temp[i].SetDialogue(temp[i].GetDialogue(true), true);
-            }
             return temp;
+        }
+        private DialogueTable[] dialogueTables;
+        public DialogueTable[] DialogueTables
+        {
+            get
+            {
+                if (dialogueTables == null)
+                {
+                    // create dialogues
+                    dialogueTables = new DialogueTable[10];
+                    for (int i = 0; i < dialogueTables.Length; i++)
+                        dialogueTables[i] = new DialogueTable(data, i);
+                }
+                return this.dialogueTables;
+            }
+            set { this.dialogueTables = value; }
         }
         #endregion
         #region Effects
@@ -437,12 +412,12 @@ namespace LAZYSHELL
             }
             set { tileMaps = value; }
         }
-        public byte[][] PhysicalMaps
+        public byte[][] SolidityMaps
         {
             get
             {
                 if (physicalMaps[0] == null)
-                    Decompress(physicalMaps, 0x1B0000, 0x1D0000, 0x20C2, "PHYSICAL MAP");
+                    Decompress(physicalMaps, 0x1B0000, 0x1D0000, 0x20C2, "SOLIDITY MAP");
                 return physicalMaps;
             }
             set { physicalMaps = value; }
@@ -1752,7 +1727,7 @@ namespace LAZYSHELL
             dummy = Palettes;
             dummy = PaletteSets;
             dummy = PaletteSetsBF;
-            dummy = PhysicalMaps[0];
+            dummy = SolidityMaps[0];
             dummy = PhysicalTiles;
             dummy = PrioritySets;
             dummy = Shops;

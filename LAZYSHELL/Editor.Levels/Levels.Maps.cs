@@ -963,9 +963,9 @@ namespace LAZYSHELL
             /****PHYSICAL MAPS****/
             // store original
             bank = 0x1B0000;
-            original = new byte[model.PhysicalMaps.Length][];
+            original = new byte[model.SolidityMaps.Length][];
             temp = Bits.GetShort(model.Data, 0x1B0000);
-            for (int i = 0, a = 0; i < model.PhysicalMaps.Length; i++)
+            for (int i = 0, a = 0; i < model.SolidityMaps.Length; i++)
             {
                 a = i * 2;
                 for (int b = 0x1B0000; b < 0x1D0000; b += 0x010000)
@@ -1016,11 +1016,11 @@ namespace LAZYSHELL
                     model.EditPhysicalMaps[index] = false;
 
                     //Compress data
-                    size = Comp.Compress(model.PhysicalMaps[index], compressed);
+                    size = Comp.Compress(model.SolidityMaps[index], compressed);
                     if (offset + size > 0xFFFF)
                     {
-                        MessageBox.Show("Bank 0x1B Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
-                        size = Comp.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
+                        MessageBox.Show("Bank 0x1B Solidity Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
+                        size = Comp.Compress(new byte[model.SolidityMaps[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -1030,8 +1030,8 @@ namespace LAZYSHELL
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x1B Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
-                        size = Comp.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
+                        MessageBox.Show("Bank 0x1B Solidity Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
+                        size = Comp.Compress(new byte[model.SolidityMaps[index].Length], compressed);
                     }
                 }
                 else
@@ -1044,7 +1044,7 @@ namespace LAZYSHELL
 
                 Bits.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                progressBar.PerformStep("COMPRESSING BANK 0x1B PHYSICAL MAP #" + index.ToString("d3"));
+                progressBar.PerformStep("COMPRESSING BANK 0x1B SOLIDITY MAP #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             Bits.SetByteArray(data, bank + offset, new byte[0x10000 - offset]);
@@ -1065,11 +1065,11 @@ namespace LAZYSHELL
                     model.EditPhysicalMaps[index] = false;
 
                     //Compress data
-                    size = Comp.Compress(model.PhysicalMaps[index], compressed);
+                    size = Comp.Compress(model.SolidityMaps[index], compressed);
                     if (offset + size > 0x7FFF)
                     {
-                        MessageBox.Show("Bank 0x1C Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
-                        size = Comp.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
+                        MessageBox.Show("Bank 0x1C Solidity Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
+                        size = Comp.Compress(new byte[model.SolidityMaps[index].Length], compressed);
                     }
                     // Write data to rom
                     Bits.SetByte(data, bank + offset, 1); offset++;
@@ -1079,8 +1079,8 @@ namespace LAZYSHELL
                     size = original[index].Length; original[index].CopyTo(compressed, 0);
                     if (offset + size > 0x7FFF) // Do we pass the bounds of this bank?
                     {
-                        MessageBox.Show("Bank 0x1C Physical Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
-                        size = Comp.Compress(new byte[model.PhysicalMaps[index].Length], compressed);
+                        MessageBox.Show("Bank 0x1C Solidity Maps too large to save \n Stopped saving at Physical Map " + index.ToString(), "LAZY SHELL");
+                        size = Comp.Compress(new byte[model.SolidityMaps[index].Length], compressed);
                     }
                 }
                 else
@@ -1093,7 +1093,7 @@ namespace LAZYSHELL
 
                 Bits.SetByteArray(data, bank + offset, compressed, 0, size);
                 offset += (ushort)size; // Move forward in bank
-                progressBar.PerformStep("COMPRESSING BANK 0x1C PHYSICAL MAP #" + index.ToString("d3"));
+                progressBar.PerformStep("COMPRESSING BANK 0x1C SOLIDITY MAP #" + index.ToString("d3"));
             }
             // fill up the rest of the bank with 0x00's
             Bits.SetByteArray(data, bank + offset, new byte[0x8000 - offset]);

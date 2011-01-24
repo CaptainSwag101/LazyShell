@@ -14,6 +14,8 @@ namespace LAZYSHELL
         static readonly object padlock = new object();
         private bool error = false; public bool Error { get { return this.error; } }
         private Settings settings = Settings.Default;
+        private Model model = State.Instance.Model;
+        private DialogueTable[] tables { get { return model.DialogueTables; } }
 
         TextHelper()
         {
@@ -46,29 +48,23 @@ namespace LAZYSHELL
         private const string code0A = "    "; // Text
         private const string code0C = "delay"; // SURROUNDED BY {   }
         private const string code0D = "delay..."; // SURROUNDED BY {   }
-        private const string code0E = " the"; // Text
-        private const string code0F = " you"; // Text
-        private const string code10 = "in"; // Text
-        private const string code11 = " to "; // Text
-        private const string code12 = "'s "; // Text
-        private const string code13 = "Mario"; // Text
-        private const string code14 = " I "; // Text
-        private const string code15 = " and "; // Text
-        private const string code16 = "is "; // Text
-        private const string code17 = " so"; // Text
-        private const string code18 = "at"; // Text
-        private const string code19 = "here"; // Text
         private const string code1A = "memItem"; // SURROUNDED BY {   }
-        private const string code1B = " for";
         private const string code1C = "memNum..."; // no idea
 
-        public char[] DecodeText(char[] decode, bool symbols)
+        public char[] DecodeText(char[] decode, bool symbols, bool table)
         {
             ArrayList arrayList = new ArrayList();
             bool lastBrace = true;
 
             for (int i = 0; i < decode.Length; i++) // For every character of text
             {
+                // if a table
+                if (!table && decode[i] >= 0x0E && decode[i] <= 0x17)
+                {
+                    AddCharsToArrayList(arrayList, tables[decode[i] - 0x0E].GetDialogue(symbols).ToCharArray());
+                    continue;
+                }
+                #region BYTE VIEW
                 if (symbols) // We are decoding to numbers
                 {
                     if (settings.Keystrokes[decode[i]] == "") // Is encoded character
@@ -88,19 +84,6 @@ namespace LAZYSHELL
                                 }
                                 break;
                             case 0x0D: goto case 0xFF;
-                            case 0x0E: AddCharsToArrayList(arrayList, code0E.ToCharArray()); break;
-                            case 0x0F: AddCharsToArrayList(arrayList, code0F.ToCharArray()); break;
-                            case 0x10: AddCharsToArrayList(arrayList, code10.ToCharArray()); break;
-                            case 0x11: AddCharsToArrayList(arrayList, code11.ToCharArray()); break;
-                            case 0x12: AddCharsToArrayList(arrayList, code12.ToCharArray()); break;
-                            case 0x13: AddCharsToArrayList(arrayList, code13.ToCharArray()); break;
-                            case 0x14: AddCharsToArrayList(arrayList, code14.ToCharArray()); break;
-                            case 0x15: AddCharsToArrayList(arrayList, code15.ToCharArray()); break;
-                            case 0x16: AddCharsToArrayList(arrayList, code16.ToCharArray()); break;
-                            case 0x17: AddCharsToArrayList(arrayList, code17.ToCharArray()); break;
-                            case 0x18: AddCharsToArrayList(arrayList, code18.ToCharArray()); break;
-                            case 0x19: AddCharsToArrayList(arrayList, code19.ToCharArray()); break;
-                            case 0x1B: AddCharsToArrayList(arrayList, code1B.ToCharArray()); break;
                             case 0x1C: goto case 0xFF;
                             case 0xFF:
                                 string tem = ((byte)decode[i]).ToString();
@@ -129,12 +112,13 @@ namespace LAZYSHELL
                                 }
                                 arrayList.Add(']');
                                 break;
-
                         }
                     }
                     else // Not encoded character
                         arrayList.Add(Convert.ToChar(settings.Keystrokes[decode[i]]));
                 }
+                #endregion
+                #region TEXT VIEW
                 else // We are decoding to words
                 {
                     if (settings.Keystrokes[decode[i]] == "") // Current byte is encoded
@@ -213,61 +197,9 @@ namespace LAZYSHELL
                                     arrayList.Add(dec[z]);
                                 }
                                 break;
-                            case 0x0E:
-                                AddCharsToArrayList(arrayList, code0E.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x0F:
-                                AddCharsToArrayList(arrayList, code0F.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x10:
-                                AddCharsToArrayList(arrayList, code10.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x11:
-                                AddCharsToArrayList(arrayList, code11.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x12:
-                                AddCharsToArrayList(arrayList, code12.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x13:
-                                AddCharsToArrayList(arrayList, code13.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x14:
-                                AddCharsToArrayList(arrayList, code14.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x15:
-                                AddCharsToArrayList(arrayList, code15.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x16:
-                                AddCharsToArrayList(arrayList, code16.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x17:
-                                AddCharsToArrayList(arrayList, code17.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x18:
-                                AddCharsToArrayList(arrayList, code18.ToCharArray());
-                                lastBrace = false;
-                                break;
-                            case 0x19:
-                                AddCharsToArrayList(arrayList, code19.ToCharArray());
-                                lastBrace = false;
-                                break;
                             case 0x1A:
                                 arrayList.Add('[');
                                 AddCharsToArrayList(arrayList, code1A.ToCharArray());
-                                break;
-                            case 0x1B:
-                                AddCharsToArrayList(arrayList, code1B.ToCharArray());
-                                lastBrace = false;
                                 break;
                             case 0x1C:
                                 arrayList.Add('[');
@@ -297,6 +229,7 @@ namespace LAZYSHELL
                     else
                         arrayList.Add(Convert.ToChar(settings.Keystrokes[decode[i]]));
                 }
+                #endregion
             }
 
             char[] decodedStr = new char[arrayList.Count];
@@ -304,7 +237,7 @@ namespace LAZYSHELL
 
             return decodedStr;
         }
-        public char[] EncodeText(char[] array, bool symbols)
+        public char[] EncodeText(char[] array, bool symbols, bool table)
         {
             bool openQuote = true;
             ArrayList arrayList = new ArrayList();
@@ -312,25 +245,39 @@ namespace LAZYSHELL
 
             for (int i = 0; i < array.Length; i++)
             {
+                // first see if substring of a table
+                if (!table)
+                {
+                    bool cont = false;
+                    for (int a = 0; a < 10; a++)
+                    {
+                        if (SearchForSubstring(array, i, tables[a].GetDialogue(symbols)))
+                        {
+                            arrayList.Add((char)(a + 0x0E));
+                            i += tables[a].DialogueLen - 1;
+                            cont = true;
+                            break;
+                        }
+                    }
+                    // if substring found, cancel operation
+                    if (cont) continue;
+                }
+                #region BYTE VIEW
                 if (symbols)
                 {
-                    if (array[i] == '[' ||
-                        array[i] == '\x20' ||
-                        array[i] == '\x22')
+                    // check for byte characters, multiple spaces, or open quotes
+                    if (array[i] == '[' || array[i] == '\x20' || array[i] == '\x22')
                     {
                         switch (array[i])
                         {
-                            case '[':// Encode {123} to bytes
-                                // Can get rid of by using 2 digit hex characters
-                                if (array[i + 1] != ']') // would make 1
+                            case '[':
+                                if (array[i + 1] != ']') // if character at least 1-digit
                                 {
                                     char digitOne = (char)(array[i + 1] - 0x30);
-
-                                    if (array.Length > i + 2 && array[i + 2] != ']') // would make 2 digits
+                                    if (array.Length > i + 2 && array[i + 2] != ']') // if character at least 2-digit
                                     {
                                         char digitTwo = (char)(array[i + 2] - 0x30);
-
-                                        if (array.Length > i + 3 && array[i + 3] != ']') // would make 3 digits
+                                        if (array.Length > i + 3 && array[i + 3] != ']') // if character at least 3-digit
                                         {
                                             char digitThree = (char)(array[i + 3] - 0x30);
                                             arrayList.Add((char)((digitOne * 100) + (digitTwo * 10) + digitThree));
@@ -377,48 +324,6 @@ namespace LAZYSHELL
                                     i += code08.Length - 1;
                                     break;
                                 }
-                                if (SearchForSubstring(array, i, code0E))
-                                {
-                                    arrayList.Add('\x0E');
-                                    i += code0E.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code0F))
-                                {
-                                    arrayList.Add('\x0F');
-                                    i += code0F.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code11))
-                                {
-                                    arrayList.Add('\x11');
-                                    i += code11.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code14))
-                                {
-                                    arrayList.Add('\x14');
-                                    i += code14.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code15))
-                                {
-                                    arrayList.Add('\x15');
-                                    i += code15.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code17))
-                                {
-                                    arrayList.Add('\x17');
-                                    i += code17.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code1B))
-                                {
-                                    arrayList.Add('\x1B');
-                                    i += code1B.Length - 1;
-                                    break;
-                                }
                                 arrayList.Add('\x20');
                                 break;
                             case '\x22':
@@ -437,66 +342,13 @@ namespace LAZYSHELL
                         }
                     }
                     else
-                    {
-                        switch (array[i])
-                        {
-                            case 'i':
-                                if (SearchForSubstring(array, i, code10))
-                                {
-                                    arrayList.Add('\x10');
-                                    i += code10.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code16))
-                                {
-                                    arrayList.Add('\x16');
-                                    i += code16.Length - 1;
-                                    break;
-                                }
-                                goto default;
-                            case '\x27':
-                                if (SearchForSubstring(array, i, code12))
-                                {
-                                    arrayList.Add('\x12');
-                                    i += code12.Length - 1;
-                                    break;
-                                }
-                                goto default;
-                            case 'M':
-                                if (SearchForSubstring(array, i, code13))
-                                {
-                                    arrayList.Add('\x13');
-                                    i += code13.Length - 1;
-                                    break;
-                                }
-                                goto default;
-                            case 'h':
-                                if (SearchForSubstring(array, i, code19))
-                                {
-                                    arrayList.Add('\x19');
-                                    i += code19.Length - 1;
-                                    break;
-                                }
-                                goto default;
-                            case 'a':
-                                if (SearchForSubstring(array, i, code18))
-                                {
-                                    arrayList.Add('\x18');
-                                    i += code18.Length - 1;
-                                    break;
-                                }
-                                goto default;
-                            default:
-                                arrayList.Add(StringIndex(settings.Keystrokes, array[i]));
-                                break;
-                        }
-                    }
+                        arrayList.Add(StringIndex(settings.Keystrokes, array[i]));
                 }
+                #endregion
+                #region TEXT VIEW
                 else //!symbols
                 {
-                    if (array[i] == '[' ||
-                        array[i] == '\x20' ||
-                        array[i] == '\x22')
+                    if (array[i] == '[' || array[i] == '\x20' || array[i] == '\x22')
                     {
                         switch (array[i])
                         {
@@ -620,48 +472,6 @@ namespace LAZYSHELL
                                     i += code08.Length - 1;
                                     break;
                                 }
-                                if (SearchForSubstring(array, i, code0E))
-                                {
-                                    arrayList.Add('\x0E');
-                                    i += code0E.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code0F))
-                                {
-                                    arrayList.Add('\x0F');
-                                    i += code0F.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code11))
-                                {
-                                    arrayList.Add('\x11');
-                                    i += code11.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code14))
-                                {
-                                    arrayList.Add('\x14');
-                                    i += code14.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code15))
-                                {
-                                    arrayList.Add('\x15');
-                                    i += code15.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code17))
-                                {
-                                    arrayList.Add('\x17');
-                                    i += code17.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code1B))
-                                {
-                                    arrayList.Add('\x1B');
-                                    i += code1B.Length - 1;
-                                    break;
-                                }
                                 arrayList.Add('\x20');
                                 break;
                             case '\x22': // handles user input quotes
@@ -680,61 +490,9 @@ namespace LAZYSHELL
                         }
                     }
                     else
-                    {
-                        switch (array[i])
-                        {
-                            case 'i':
-                                if (SearchForSubstring(array, i, code10))
-                                {
-                                    arrayList.Add('\x10');
-                                    i += code10.Length - 1;
-                                    break;
-                                }
-                                if (SearchForSubstring(array, i, code16))
-                                {
-                                    arrayList.Add('\x16');
-                                    i += code16.Length - 1;
-                                    break;
-                                }
-                                goto default;
-                            case '\x27':
-                                if (SearchForSubstring(array, i, code12))
-                                {
-                                    arrayList.Add('\x12');
-                                    i += code12.Length - 1;
-                                    break;
-                                }
-                                goto default;
-                            case 'M':
-                                if (SearchForSubstring(array, i, code13))
-                                {
-                                    arrayList.Add('\x13');
-                                    i += code13.Length - 1;
-                                    break;
-                                }
-                                goto default;
-                            case 'h':
-                                if (SearchForSubstring(array, i, code19))
-                                {
-                                    arrayList.Add('\x19');
-                                    i += code19.Length - 1;
-                                    break;
-                                }
-                                goto default;
-                            case 'a':
-                                if (SearchForSubstring(array, i, code18))
-                                {
-                                    arrayList.Add('\x18');
-                                    i += code18.Length - 1;
-                                    break;
-                                }
-                                goto default;
-                            default:
-                                arrayList.Add(StringIndex(settings.Keystrokes, array[i]));
-                                break;
-                        }
-                    }
+                        arrayList.Add(StringIndex(settings.Keystrokes, array[i]));
                 }
+                #endregion
             }
 
             char[] encodedStr = new char[arrayList.Count];

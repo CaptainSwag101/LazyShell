@@ -136,6 +136,7 @@ namespace LAZYSHELL
 
         private void DoAdjustment()
         {
+            if (updating) return;
             for (int i = start * 16; i < paletteSetBackup.Palette.Length; i++)
             {
                 paletteSet.Reds[i] = paletteSetBackup.Reds[i];
@@ -149,6 +150,7 @@ namespace LAZYSHELL
             DoNegative();
             DoBrightness();
             DoContrast();
+            DoThreshold();
 
             update.DynamicInvoke();
             InitializeColor();
@@ -299,6 +301,23 @@ namespace LAZYSHELL
                 paletteSet.Reds[i] = r_;
                 paletteSet.Greens[i] = g_;
                 paletteSet.Blues[i] = b_;
+            }
+        }
+        private void DoThreshold()
+        {
+            if (!thresholdApply.Checked) return;
+            for (int i = start * 16; i < paletteSet.Palette.Length; i++)
+            {
+                int r = paletteSet.Reds[i];
+                int g = paletteSet.Greens[i];
+                int b = paletteSet.Blues[i];
+                int brightness = (int)Math.Sqrt(
+                    (r * r * .241) +
+                    (g * g * .691) +
+                    (b * b * .068));
+                paletteSet.Reds[i] = brightness >= threshold.Value ? 248 : 0;
+                paletteSet.Greens[i] = brightness >= threshold.Value ? 248 : 0;
+                paletteSet.Blues[i] = brightness >= threshold.Value ? 248 : 0;
             }
         }
         //private void importPaletteSetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -506,6 +525,7 @@ namespace LAZYSHELL
             update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
+            currentRed.Focus();
         }
         private void currentGreen_ValueChanged(object sender, EventArgs e)
         {
@@ -518,6 +538,7 @@ namespace LAZYSHELL
             update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
+            currentGreen.Focus();
         }
         private void currentBlue_ValueChanged(object sender, EventArgs e)
         {
@@ -530,6 +551,7 @@ namespace LAZYSHELL
             update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
+            currentBlue.Focus();
         }
         private void currentHue_ValueChanged(object sender, EventArgs e)
         {
@@ -681,6 +703,20 @@ namespace LAZYSHELL
         {
             brightness.Value = trackBarBrightness.Value;
         }
+        private void thresholdApply_CheckedChanged(object sender, EventArgs e)
+        {
+            threshold.Enabled = trackBarThreshold.Enabled = thresholdApply.Checked;
+            DoAdjustment();
+        }
+        private void threshold_ValueChanged(object sender, EventArgs e)
+        {
+            trackBarThreshold.Value = (int)threshold.Value;
+            DoAdjustment();
+        }
+        private void trackBarThreshold_Scroll(object sender, EventArgs e)
+        {
+            threshold.Value = trackBarThreshold.Value;
+        }
         private void negative_CheckedChanged(object sender, EventArgs e)
         {
             DoAdjustment();
@@ -712,8 +748,10 @@ namespace LAZYSHELL
             greyscale.Checked = false; negative.Checked = false;
             brightness.Value = trackBarBrightness.Value = 0;
             contrast.Value = trackBarContrast.Value = 0;
+            thresholdApply.Checked = false;
+            threshold.Value = trackBarThreshold.Value = 128;
             updating = false;
-
+            DoAdjustment();
             paletteSetBackup.CopyTo(paletteSet);
             update.DynamicInvoke();
             InitializeColor();
@@ -889,5 +927,6 @@ namespace LAZYSHELL
             }
         }
         #endregion
+
     }
 }

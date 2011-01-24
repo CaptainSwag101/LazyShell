@@ -1512,7 +1512,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label63);
             this.panel1.Controls.Add(this.label51);

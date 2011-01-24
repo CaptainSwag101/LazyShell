@@ -1,5 +1,32 @@
 Major changes/additions are indicated by ***
 
+v3.4
+--------------------------------------
+Additions:
+*Dialogues: NEW compression table editing now supported
+*Palette Editor: NEW threshold adjustment feature
+
+General changes:
+*Dotted pattern for cartographic grid
+
+Editor-specific changes:
+*Levels: moved the level event and music to the level's toolstrip
+*Previewer: now remembers battlefield, allies in party, and max out stats
+*Sprites: zoom box for tilemap mold tileset now shows only tile mouse is over
+
+Fixes:
+*Dialogues: importing a font table image wasn't drawing based on max width
+*Levels: solidity maps weren't resetting when level editor closed w/o saving
+*Palette Editor: resetting was updating too many times, slowed down CPU
+*Palette Editor: equate & switch RGB was updating twice, slowed down CPU
+*Previewer: problems with allies in party not saving to right offsets
+*Sprites: tileset zoom box problems with tilesets less than 3 rows
+*Sprites: tile index label in graphics editor/viewer off by 1
+*Sprites: palettes weren't saving
+*Sprites: graphics had several issues when saving/not saving
+*Sprites: hover box for tilemap molds offset by a few pixels
+
+
 v3.3a
 --------------------------------------
 Editor-specific changes:

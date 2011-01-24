@@ -144,7 +144,7 @@
             this.label93.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label93.Size = new System.Drawing.Size(222, 17);
             this.label93.TabIndex = 361;
-            this.label93.Text = "PHYSICAL TILE PROPERTIES";
+            this.label93.Text = "SOLID TILE PROPERTIES";
             this.label93.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // physicalTileUnknownBits
@@ -529,7 +529,7 @@
             this.physicalTileSearchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.physicalTileSearchButton.Name = "physicalTileSearchButton";
             this.physicalTileSearchButton.Size = new System.Drawing.Size(23, 22);
-            this.physicalTileSearchButton.ToolTipText = "Search For Physical Tiles";
+            this.physicalTileSearchButton.ToolTipText = "Search For Solid Tiles";
             this.physicalTileSearchButton.Click += new System.EventHandler(this.physicalTileSearchButton_Click);
             // 
             // LevelsPhysicalTiles

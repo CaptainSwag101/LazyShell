@@ -56,7 +56,7 @@
             System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Tilemaps");
             System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Tilesets");
             System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Graphics");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Physical maps");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Solidity maps");
             System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Battlefields");
             System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Battlefield tilesets");
             System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Battlefield Graphics");
@@ -150,8 +150,8 @@
             treeNode18.Text = "Tilesets";
             treeNode19.Name = "Graphics";
             treeNode19.Text = "Graphics";
-            treeNode20.Name = "PhysicalMaps";
-            treeNode20.Text = "Physical maps";
+            treeNode20.Name = "SolidityMaps";
+            treeNode20.Text = "Solidity maps";
             treeNode21.Name = "Battlefields";
             treeNode21.Text = "Battlefields";
             treeNode22.Name = "BattlefieldTilesets";

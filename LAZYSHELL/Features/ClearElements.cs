@@ -35,8 +35,8 @@ namespace LAZYSHELL
                 toIndex.Value = toIndex.Maximum = ((Model)element).TileSets.Length - 1;
             else if (type == typeof(Model) && this.Text == "CLEAR TILEMAPS...")
                 toIndex.Value = toIndex.Maximum = ((Model)element).TileMaps.Length - 1;
-            else if (type == typeof(Model) && this.Text == "CLEAR PHYSICAL MAPS...")
-                toIndex.Value = toIndex.Maximum = ((Model)element).PhysicalMaps.Length - 1;
+            else if (type == typeof(Model) && this.Text == "CLEAR SOLIDITY MAPS...")
+                toIndex.Value = toIndex.Maximum = ((Model)element).SolidityMaps.Length - 1;
             else if (type == typeof(Model) && this.Text == "CLEAR BATTLEFIELD TILESETS...")
                 toIndex.Value = toIndex.Maximum = ((Model)element).TileSetsBF.Length - 1;
             start = end = currentIndex;
@@ -95,11 +95,11 @@ namespace LAZYSHELL
                     ((Model)element).EditTileMaps[i] = true;
                 }
             }
-            if (type == typeof(Model) && this.Text == "CLEAR PHYSICAL MAPS...")
+            if (type == typeof(Model) && this.Text == "CLEAR SOLIDITY MAPS...")
             {
                 for (int i = start; i < end; i++)
                 {
-                    ((Model)element).PhysicalMaps[i] = new byte[0x20C2];
+                    ((Model)element).SolidityMaps[i] = new byte[0x20C2];
                     ((Model)element).EditPhysicalMaps[i] = true;
                 }
             }

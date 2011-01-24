@@ -2173,7 +2173,9 @@ namespace LAZYSHELL
 
         private void UpdateEventScriptsFreeSpace()
         {
-            this.EvtScrLabel3.Text = " " + CalculateEventScriptsLength().ToString() + " bytes left ";
+            int left = CalculateEventScriptsLength();
+            this.EvtScrLabel3.Text = " " + left.ToString() + " bytes left ";
+            this.EvtScrLabel3.BackColor = left < 0 ? Color.Red : SystemColors.Control;
         }
         private int CalculateEventScriptsLength()
         {

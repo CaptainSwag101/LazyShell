@@ -18,6 +18,7 @@ namespace LAZYSHELL
         private int offset = 0;
         private int length = 0;
         private int start;
+        private int index;
         private Size size = new Size(16, 48);
         private PaletteSet paletteSet;
         private byte format;
@@ -59,6 +60,15 @@ namespace LAZYSHELL
         /// <param name="format">0x10 or 0x20, 2bpp or 4bpp, respectively.</param>
         /// <param name="sender">The sender's name.</param>
         public GraphicEditor(Delegate update, byte[] graphics, int length, int offset, PaletteSet paletteSet, int start, byte format)
+        {
+            InitializeGraphicEditor(update, graphics, length, offset, paletteSet, start, format);
+        }
+        public GraphicEditor(Delegate update, byte[] graphics, int length, int offset, PaletteSet paletteSet, int start, byte format, int index)
+        {
+            this.index = index;
+            InitializeGraphicEditor(update, graphics, length, offset, paletteSet, start, format);
+        }
+        private void InitializeGraphicEditor(Delegate update, byte[] graphics, int length, int offset, PaletteSet paletteSet, int start, byte format)
         {
             this.update = update;
             this.offset = offset;
@@ -120,6 +130,11 @@ namespace LAZYSHELL
             pictureBoxColor.Invalidate();
             pictureBoxColorBack.Invalidate();
             this.BringToFront();
+        }
+        public void Reload(Delegate update, byte[] graphics, int length, int offset, PaletteSet paletteSet, int start, byte format, int index)
+        {
+            this.index = index;
+            Reload(update, graphics, length, offset, paletteSet, start, format);
         }
         private void SetGraphicSetImage()
         {
@@ -222,7 +237,7 @@ namespace LAZYSHELL
             int x = e.X; int y = e.Y;
             mouseOverControl = pictureBoxGraphicSet.Name;
             mouseOverSubtile = (y / (8 * zoom)) * size.Width + (x / (8 * zoom)); // Calculate tile number
-            coordsLabel.Text = "subtile " + mouseOverSubtile.ToString("d4");
+            coordsLabel.Text = "subtile " + (mouseOverSubtile + index).ToString("d4");
 
             string action = "";
             if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && subtileDraw.Checked)

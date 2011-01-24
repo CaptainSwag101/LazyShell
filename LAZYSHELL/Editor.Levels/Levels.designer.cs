@@ -162,13 +162,6 @@ namespace LAZYSHELL
             this.label135 = new System.Windows.Forms.Label();
             this.label137 = new System.Windows.Forms.Label();
             this.eventEvent = new System.Windows.Forms.NumericUpDown();
-            this.panel89 = new System.Windows.Forms.Panel();
-            this.buttonGotoC = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label125 = new System.Windows.Forms.Label();
-            this.eventExit = new System.Windows.Forms.NumericUpDown();
-            this.panel47 = new System.Windows.Forms.Panel();
-            this.eventMusic = new System.Windows.Forms.ComboBox();
             this.panel52 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.exitsFieldTree = new System.Windows.Forms.TreeView();
@@ -432,14 +425,20 @@ namespace LAZYSHELL
             this.tileModsDuplicate = new System.Windows.Forms.ToolStripButton();
             this.tileModsFieldTree = new System.Windows.Forms.TreeView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonGotoC = new System.Windows.Forms.ToolStripButton();
+            this.eventExit = new LAZYSHELL.ToolStripNumericUpDown();
+            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.eventMusic = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.changeLevelName = new System.Windows.Forms.ToolStripButton();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.searchLevelNames = new System.Windows.Forms.ToolStripButton();
             this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.propertiesButton = new System.Windows.Forms.ToolStripButton();
             this.openTileset = new System.Windows.Forms.ToolStripButton();
             this.openTilemap = new System.Windows.Forms.ToolStripButton();
             this.openSolidTileset = new System.Windows.Forms.ToolStripButton();
@@ -487,6 +486,7 @@ namespace LAZYSHELL
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.help = new System.Windows.Forms.ToolStripButton();
             this.baseConversion = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.tabPage8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.toolStrip3.SuspendLayout();
@@ -535,9 +535,6 @@ namespace LAZYSHELL
             this.panel46.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventEvent)).BeginInit();
-            this.panel89.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.eventExit)).BeginInit();
-            this.panel47.SuspendLayout();
             this.panel52.SuspendLayout();
             this.panel5.SuspendLayout();
             this.toolStrip5.SuspendLayout();
@@ -680,7 +677,7 @@ namespace LAZYSHELL
             this.levelName.DropDownHeight = 500;
             this.levelName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.levelName.DropDownWidth = 500;
-            this.levelName.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.levelName.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.levelName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.levelName.ForeColor = System.Drawing.SystemColors.Control;
             this.levelName.IntegralHeight = false;
@@ -1887,12 +1884,11 @@ namespace LAZYSHELL
             this.panel2.Controls.Add(this.panel7);
             this.panel2.Controls.Add(this.label63);
             this.panel2.Controls.Add(this.panel90);
-            this.panel2.Controls.Add(this.panel89);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel2.Location = new System.Drawing.Point(0, 331);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(260, 242);
+            this.panel2.Size = new System.Drawing.Size(260, 271);
             this.panel2.TabIndex = 498;
             // 
             // panel7
@@ -1901,7 +1897,7 @@ namespace LAZYSHELL
             this.panel7.Controls.Add(this.toolStrip6);
             this.panel7.Location = new System.Drawing.Point(0, 19);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(125, 219);
+            this.panel7.Size = new System.Drawing.Size(125, 248);
             this.panel7.TabIndex = 498;
             // 
             // eventsFieldTree
@@ -1912,7 +1908,7 @@ namespace LAZYSHELL
             this.eventsFieldTree.Location = new System.Drawing.Point(0, 26);
             this.eventsFieldTree.Name = "eventsFieldTree";
             this.eventsFieldTree.ShowRootLines = false;
-            this.eventsFieldTree.Size = new System.Drawing.Size(125, 195);
+            this.eventsFieldTree.Size = new System.Drawing.Size(125, 224);
             this.eventsFieldTree.TabIndex = 146;
             this.eventsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.eventsFieldTree_AfterSelect);
             // 
@@ -2022,9 +2018,9 @@ namespace LAZYSHELL
             this.panel90.Controls.Add(this.label135);
             this.panel90.Controls.Add(this.label137);
             this.panel90.Controls.Add(this.eventEvent);
-            this.panel90.Location = new System.Drawing.Point(127, 75);
+            this.panel90.Location = new System.Drawing.Point(127, 19);
             this.panel90.Name = "panel90";
-            this.panel90.Size = new System.Drawing.Size(129, 163);
+            this.panel90.Size = new System.Drawing.Size(129, 248);
             this.panel90.TabIndex = 497;
             // 
             // buttonGotoD
@@ -2272,95 +2268,6 @@ namespace LAZYSHELL
             this.eventEvent.TabIndex = 149;
             this.eventEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.eventEvent.ValueChanged += new System.EventHandler(this.eventsRunEvent_ValueChanged);
-            // 
-            // panel89
-            // 
-            this.panel89.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel89.Controls.Add(this.buttonGotoC);
-            this.panel89.Controls.Add(this.label1);
-            this.panel89.Controls.Add(this.label125);
-            this.panel89.Controls.Add(this.eventExit);
-            this.panel89.Controls.Add(this.panel47);
-            this.panel89.Location = new System.Drawing.Point(127, 19);
-            this.panel89.Name = "panel89";
-            this.panel89.Size = new System.Drawing.Size(129, 54);
-            this.panel89.TabIndex = 496;
-            // 
-            // buttonGotoC
-            // 
-            this.buttonGotoC.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonGotoC.FlatAppearance.BorderSize = 0;
-            this.buttonGotoC.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGotoC.Location = new System.Drawing.Point(0, 37);
-            this.buttonGotoC.Name = "buttonGotoC";
-            this.buttonGotoC.Size = new System.Drawing.Size(59, 18);
-            this.buttonGotoC.TabIndex = 492;
-            this.buttonGotoC.Text = "Event #";
-            this.buttonGotoC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.buttonGotoC, "Edit level entrance event...");
-            this.buttonGotoC.UseCompatibleTextRendering = true;
-            this.buttonGotoC.UseVisualStyleBackColor = false;
-            this.buttonGotoC.Click += new System.EventHandler(this.buttonGotoC_Click);
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label1.Size = new System.Drawing.Size(129, 17);
-            this.label1.TabIndex = 452;
-            this.label1.Text = "LEVEL PROPERTIES";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label125
-            // 
-            this.label125.BackColor = System.Drawing.SystemColors.Control;
-            this.label125.Location = new System.Drawing.Point(0, 19);
-            this.label125.Name = "label125";
-            this.label125.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label125.Size = new System.Drawing.Size(58, 17);
-            this.label125.TabIndex = 491;
-            this.label125.Text = "Music";
-            // 
-            // eventExit
-            // 
-            this.eventExit.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eventExit.Location = new System.Drawing.Point(59, 37);
-            this.eventExit.Maximum = new decimal(new int[] {
-            4095,
-            0,
-            0,
-            0});
-            this.eventExit.Name = "eventExit";
-            this.eventExit.Size = new System.Drawing.Size(70, 17);
-            this.eventExit.TabIndex = 148;
-            this.eventExit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.eventExit.ValueChanged += new System.EventHandler(this.eventsExitEvent_ValueChanged);
-            // 
-            // panel47
-            // 
-            this.panel47.BackColor = System.Drawing.SystemColors.Window;
-            this.panel47.Controls.Add(this.eventMusic);
-            this.panel47.Location = new System.Drawing.Point(59, 19);
-            this.panel47.Name = "panel47";
-            this.panel47.Size = new System.Drawing.Size(72, 17);
-            this.panel47.TabIndex = 147;
-            // 
-            // eventMusic
-            // 
-            this.eventMusic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.eventMusic.DropDownHeight = 327;
-            this.eventMusic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.eventMusic.DropDownWidth = 250;
-            this.eventMusic.IntegralHeight = false;
-            this.eventMusic.Location = new System.Drawing.Point(-3, -2);
-            this.eventMusic.Name = "eventMusic";
-            this.eventMusic.Size = new System.Drawing.Size(75, 21);
-            this.eventMusic.TabIndex = 234;
-            this.eventMusic.SelectedIndexChanged += new System.EventHandler(this.eventsAreaMusic_SelectedIndexChanged);
             // 
             // panel52
             // 
@@ -6137,29 +6044,93 @@ namespace LAZYSHELL
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.levelName,
             this.levelNum,
+            this.toolStripSeparator17,
+            this.buttonGotoC,
+            this.eventExit,
+            this.toolStripSeparator16,
+            this.toolStripLabel2,
+            this.eventMusic,
+            this.toolStripSeparator3,
             this.changeLevelName,
             this.toolStripTextBox1,
             this.toolStripButton1,
             this.toolStripSeparator4,
             this.searchLevelNames,
-            this.nameTextBox,
-            this.toolStripSeparator3,
-            this.toolStripButton2,
-            this.openTileset,
-            this.openTilemap,
-            this.openSolidTileset,
-            this.toolStripSeparator1,
-            this.openPaletteEditor,
-            this.openGraphicEditor,
-            this.toolStripSeparator2,
-            this.openTemplates,
-            this.levelPreviewToolStripButton,
-            this.spaceAnalyzer});
+            this.nameTextBox});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(1006, 25);
             this.toolStrip1.TabIndex = 2;
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
+            // 
+            // buttonGotoC
+            // 
+            this.buttonGotoC.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.buttonGotoC.Image = ((System.Drawing.Image)(resources.GetObject("buttonGotoC.Image")));
+            this.buttonGotoC.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonGotoC.Name = "buttonGotoC";
+            this.buttonGotoC.Size = new System.Drawing.Size(52, 22);
+            this.buttonGotoC.Text = "EVENT #";
+            this.buttonGotoC.ToolTipText = "Click to edit event";
+            this.buttonGotoC.Click += new System.EventHandler(this.buttonGotoC_Click);
+            // 
+            // eventExit
+            // 
+            this.eventExit.AutoSize = false;
+            this.eventExit.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eventExit.Hexadecimal = false;
+            this.eventExit.Location = new System.Drawing.Point(342, 2);
+            this.eventExit.Maximum = new decimal(new int[] {
+            4095,
+            0,
+            0,
+            0});
+            this.eventExit.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.eventExit.Name = "eventExit";
+            this.eventExit.Size = new System.Drawing.Size(60, 21);
+            this.eventExit.Text = "0";
+            this.eventExit.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.eventExit.ValueChanged += new System.EventHandler(this.eventsExitEvent_ValueChanged);
+            // 
+            // toolStripSeparator16
+            // 
+            this.toolStripSeparator16.Name = "toolStripSeparator16";
+            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(39, 22);
+            this.toolStripLabel2.Text = "MUSIC";
+            // 
+            // eventMusic
+            // 
+            this.eventMusic.DropDownHeight = 200;
+            this.eventMusic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.eventMusic.DropDownWidth = 200;
+            this.eventMusic.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.eventMusic.IntegralHeight = false;
+            this.eventMusic.Name = "eventMusic";
+            this.eventMusic.Size = new System.Drawing.Size(100, 25);
+            this.eventMusic.SelectedIndexChanged += new System.EventHandler(this.eventsAreaMusic_SelectedIndexChanged);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // changeLevelName
             // 
@@ -6176,7 +6147,7 @@ namespace LAZYSHELL
             // toolStripTextBox1
             // 
             this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(190, 25);
+            this.toolStripTextBox1.Size = new System.Drawing.Size(170, 25);
             this.toolStripTextBox1.Visible = false;
             this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
             this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
@@ -6211,25 +6182,20 @@ namespace LAZYSHELL
             // nameTextBox
             // 
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(190, 25);
+            this.nameTextBox.Size = new System.Drawing.Size(170, 25);
             this.nameTextBox.Visible = false;
             // 
-            // toolStripSeparator3
+            // propertiesButton
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.Checked = true;
-            this.toolStripButton2.CheckOnClick = true;
-            this.toolStripButton2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripButton2.Image = global::LAZYSHELL.Properties.Resources.showMain;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.ToolTipText = "Main Properties Window";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            this.propertiesButton.Checked = true;
+            this.propertiesButton.CheckOnClick = true;
+            this.propertiesButton.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.propertiesButton.Image = global::LAZYSHELL.Properties.Resources.showMain;
+            this.propertiesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.propertiesButton.Name = "propertiesButton";
+            this.propertiesButton.Size = new System.Drawing.Size(23, 22);
+            this.propertiesButton.ToolTipText = "Main Properties Window";
+            this.propertiesButton.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // openTileset
             // 
@@ -6368,7 +6334,19 @@ namespace LAZYSHELL
             this.clear,
             this.toolStripSeparator6,
             this.help,
-            this.baseConversion});
+            this.baseConversion,
+            this.toolStripSeparator15,
+            this.propertiesButton,
+            this.openTileset,
+            this.openTilemap,
+            this.openSolidTileset,
+            this.toolStripSeparator1,
+            this.openPaletteEditor,
+            this.openGraphicEditor,
+            this.toolStripSeparator2,
+            this.openTemplates,
+            this.levelPreviewToolStripButton,
+            this.spaceAnalyzer});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -6546,7 +6524,7 @@ namespace LAZYSHELL
             // 
             this.clearPhysicalMapsAll.Name = "clearPhysicalMapsAll";
             this.clearPhysicalMapsAll.Size = new System.Drawing.Size(207, 22);
-            this.clearPhysicalMapsAll.Text = "Physical Maps...";
+            this.clearPhysicalMapsAll.Text = "Solidity Maps...";
             this.clearPhysicalMapsAll.Click += new System.EventHandler(this.clearPhysicalMapsAll_Click);
             // 
             // toolStripSeparator29
@@ -6572,7 +6550,7 @@ namespace LAZYSHELL
             // 
             this.unusedToolStripMenuItem2.Name = "unusedToolStripMenuItem2";
             this.unusedToolStripMenuItem2.Size = new System.Drawing.Size(207, 22);
-            this.unusedToolStripMenuItem2.Text = "Unused physical maps...";
+            this.unusedToolStripMenuItem2.Text = "Unused solidity maps...";
             this.unusedToolStripMenuItem2.Click += new System.EventHandler(this.unusedToolStripMenuItem2_Click);
             // 
             // unusedToolStripMenuItem3
@@ -6625,6 +6603,11 @@ namespace LAZYSHELL
             this.baseConversion.Name = "baseConversion";
             this.baseConversion.Size = new System.Drawing.Size(23, 22);
             this.baseConversion.ToolTipText = "Base Conversion";
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
             // 
             // Levels
             // 
@@ -6699,9 +6682,6 @@ namespace LAZYSHELL
             this.panel46.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.eventHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventEvent)).EndInit();
-            this.panel89.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.eventExit)).EndInit();
-            this.panel47.ResumeLayout(false);
             this.panel52.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -6825,7 +6805,6 @@ namespace LAZYSHELL
         private BackgroundWorker ExportLevelImages;
         private Button buttonGotoA;
         private Button buttonGotoB;
-        private Button buttonGotoC;
         private Button buttonGotoD;
         private CheckBox checkBox15;
         private CheckBox checkBox16;
@@ -6860,7 +6839,6 @@ namespace LAZYSHELL
         private CheckedListBox layerScrollWrapping;
         private CheckedListBox npcAttributes;
         private CheckedListBox overlapUnknownBits;
-        private ComboBox eventMusic;
         private ComboBox eventFace;
         private ComboBox exitDest;
         private ComboBox exitFace;
@@ -6900,7 +6878,6 @@ namespace LAZYSHELL
         private ComboBox npcFace;
         private ContextMenuStrip contextMenuStrip4;
         private Label labeasdfasd;
-        private Label label1;
         private Label label10;
         private Label label103;
         private Label label104;
@@ -6917,7 +6894,6 @@ namespace LAZYSHELL
         private Label label120;
         private Label label122;
         private Label label124;
-        private Label label125;
         private Label label127;
         private Label label129;
         private Label label13;
@@ -6991,7 +6967,6 @@ namespace LAZYSHELL
         private Label label91;
         private Label label95;
         private Label label96;
-        private NumericUpDown eventExit;
         private NumericUpDown eventHeight;
         private NumericUpDown eventLength;
         private NumericUpDown eventX;
@@ -7080,7 +7055,6 @@ namespace LAZYSHELL
         private Panel panel42;
         private Panel panel43;
         private Panel panel46;
-        private Panel panel47;
         private Panel panel48;
         private Panel panel49;
         private Panel panel50;
@@ -7107,7 +7081,6 @@ namespace LAZYSHELL
         private Panel panel86;
         private Panel panel87;
         private Panel panel88;
-        private Panel panel89;
         private Panel panel9;
         private Panel panel90;
         private Panel panel99;
@@ -7178,7 +7151,7 @@ namespace LAZYSHELL
         private ToolStripButton baseConversion;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
-        private ToolStripButton toolStripButton2;
+        private ToolStripButton propertiesButton;
         private Label label28;
         private ToolStripNumericUpDown levelNum;
         private ToolStripSeparator toolStripSeparator4;
@@ -7272,6 +7245,13 @@ namespace LAZYSHELL
         private ToolStripButton solidModsMoveUp;
         private ToolStripButton solidModsMoveDown;
         private ToolStripSeparator toolStripSeparator14;
+        private ToolStripSeparator toolStripSeparator16;
+        private ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripComboBox eventMusic;
+        private ToolStripSeparator toolStripSeparator15;
+        private ToolStripButton buttonGotoC;
+        private ToolStripNumericUpDown eventExit;
+        private ToolStripSeparator toolStripSeparator17;
     }
 }
 

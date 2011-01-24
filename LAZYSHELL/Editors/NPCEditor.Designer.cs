@@ -265,7 +265,7 @@ namespace LAZYSHELL
             this.label7.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label7.Size = new System.Drawing.Size(128, 17);
             this.label7.TabIndex = 461;
-            this.label7.Text = "PHYSICAL FIELD";
+            this.label7.Text = "SOLIDITY FIELD";
             // 
             // buttonOK
             // 

@@ -151,7 +151,7 @@ namespace LAZYSHELL
                     sLevel.tileMapL1 = model.TileMaps[lMap.TileMapL1 + 0x40];
                     sLevel.tileMapL2 = model.TileMaps[lMap.TileMapL2 + 0x40];
                     sLevel.tileMapL3 = model.TileMaps[lMap.TileMapL3];
-                    sLevel.physicalMap = model.PhysicalMaps[lMap.PhysicalMap];
+                    sLevel.physicalMap = model.SolidityMaps[lMap.PhysicalMap];
                     sLevel.levelNPCs = model.Levels[currentIndex].LevelNPCs;
                     sLevel.levelExits = model.Levels[currentIndex].LevelExits;
                     sLevel.levelEvents = model.Levels[currentIndex].LevelEvents;
@@ -176,7 +176,7 @@ namespace LAZYSHELL
                         sLevels[i].tileMapL1 = model.TileMaps[lMap.TileMapL1 + 0x40];
                         sLevels[i].tileMapL2 = model.TileMaps[lMap.TileMapL2 + 0x40];
                         sLevels[i].tileMapL3 = model.TileMaps[lMap.TileMapL3];
-                        sLevels[i].physicalMap = model.PhysicalMaps[lMap.PhysicalMap];
+                        sLevels[i].physicalMap = model.SolidityMaps[lMap.PhysicalMap];
                         sLevels[i].levelNPCs = model.Levels[i].LevelNPCs;
                         sLevels[i].levelExits = model.Levels[i].LevelExits;
                         sLevels[i].levelEvents = model.Levels[i].LevelEvents;
@@ -210,7 +210,7 @@ namespace LAZYSHELL
                     model.EditTileMaps[lMap.TileMapL1 + 0x40] = true;
                     model.EditTileMaps[lMap.TileMapL2 + 0x40] = true;
                     model.EditTileMaps[lMap.TileMapL3] = true;
-                    model.PhysicalMaps[lMap.PhysicalMap] = sLevel.physicalMap;
+                    model.SolidityMaps[lMap.PhysicalMap] = sLevel.physicalMap;
                     model.EditPhysicalMaps[lMap.PhysicalMap] = true;
                     model.Levels[currentIndex].LevelNPCs = sLevel.levelNPCs;
                     model.Levels[currentIndex].LevelExits = sLevel.levelExits;
@@ -240,7 +240,7 @@ namespace LAZYSHELL
                         model.EditTileMaps[lMap.TileMapL1 + 0x40] = true;
                         model.EditTileMaps[lMap.TileMapL2 + 0x40] = true;
                         model.EditTileMaps[lMap.TileMapL3] = true;
-                        model.PhysicalMaps[lMap.PhysicalMap] = sLevels[i].physicalMap;
+                        model.SolidityMaps[lMap.PhysicalMap] = sLevels[i].physicalMap;
                         model.EditPhysicalMaps[lMap.PhysicalMap] = true;
                         model.Levels[i].LevelNPCs = sLevels[i].levelNPCs;
                         model.Levels[i].LevelExits = sLevels[i].levelExits;

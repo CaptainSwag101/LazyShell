@@ -38,7 +38,7 @@ namespace LAZYSHELL
         public LevelSolidMap(LevelMap levelMap)
         {
             this.levelMap = levelMap;
-            tilemap = model.PhysicalMaps[levelMap.PhysicalMap];
+            tilemap = model.SolidityMaps[levelMap.PhysicalMap];
         }
         public override void MakeEdit()
         {
@@ -52,7 +52,7 @@ namespace LAZYSHELL
         {
             if (count == 1)
             {
-                model.PhysicalMaps[levelMap.PhysicalMap] = tilemap = new byte[0x20C2];
+                model.SolidityMaps[levelMap.PhysicalMap] = tilemap = new byte[0x20C2];
                 model.EditPhysicalMaps[levelMap.PhysicalMap] = true;
             }
             else
@@ -60,7 +60,7 @@ namespace LAZYSHELL
                 tilemap = new byte[0x20C2];
                 for (int i = 0; i < count; i++)
                 {
-                    model.PhysicalMaps[i] = new byte[0x20C2];
+                    model.SolidityMaps[i] = new byte[0x20C2];
                     model.EditPhysicalMaps[i] = true;
                 }
             }

@@ -828,16 +828,16 @@ namespace LAZYSHELL
 
 
             // Events
-            this.toolTip1.SetToolTip(this.eventMusic,
+            this.eventMusic.ToolTipText = 
                 "The music that initially plays when the level is first entered. \n" +
                 "All levels have a music property, this property is not \n" +
-                "assigned to any event fields but instead the level itself.");
+                "assigned to any event fields but instead the level itself.";
 
-            this.toolTip1.SetToolTip(this.eventExit,
+            this.eventExit.ToolTipText = 
                 "The event # that initially runs when the level is first \n" +
                 "entered. All levels have an initial event #, this property is \n" +
                 "not assigned to any event fields but instead the level itself.\n\n" +
-                "Click the green button to the left to edit this Event #.");
+                "Click the green button to the left to edit this Event #.";
 
             this.toolTip1.SetToolTip(this.eventsFieldTree,
                 "The collection of event fields in the level. An \"Event field\" is \n" +
@@ -1221,7 +1221,7 @@ namespace LAZYSHELL
             tileMap.AssembleIntoModel();
             model.Compress(model.TileMaps, model.EditTileMaps, 0x160000, 0x1A8000, "TILE MAP",
                 0, 109, 163, 219, 275);
-            model.Compress(model.PhysicalMaps, model.EditPhysicalMaps, 0x1B0000, 0x1C8000, "PHYSICAL MAP",
+            model.Compress(model.SolidityMaps, model.EditPhysicalMaps, 0x1B0000, 0x1C8000, "SOLIDITY MAP",
                 0, 80);
             model.Compress(model.TileSets, model.EditTileSets, 0x3B0000, 0x3DC000, "TILE SET",
                 0, 58, 91);
@@ -1344,7 +1344,7 @@ namespace LAZYSHELL
         }
         private void clearPhysicalMapsAll_Click(object sender, EventArgs e)
         {
-            if (new ClearElements(model, (int)mapPhysicalMapNum.Value, "CLEAR PHYSICAL MAPS...").ShowDialog() == DialogResult.Cancel)
+            if (new ClearElements(model, (int)mapPhysicalMapNum.Value, "CLEAR SOLIDITY MAPS...").ShowDialog() == DialogResult.Cancel)
                 return;
             fullUpdate = true;
             physicalMap.Image = null;
@@ -1382,9 +1382,9 @@ namespace LAZYSHELL
                     model.TileMaps[i] = new byte[0x2000];
                 model.EditTileMaps[i] = true;
             }
-            for (int i = 0; i < model.PhysicalMaps.Length; i++)
+            for (int i = 0; i < model.SolidityMaps.Length; i++)
             {
-                model.PhysicalMaps[i] = new byte[0x20C2];
+                model.SolidityMaps[i] = new byte[0x20C2];
                 model.EditPhysicalMaps[i] = true;
             }
             for (int i = 0; i < model.TileSetsBF.Length; i++)
@@ -1496,14 +1496,14 @@ namespace LAZYSHELL
         private void unusedToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-              "You are about to clear all UNUSED physical maps.\n\n" +
+              "You are about to clear all UNUSED solidity maps.\n\n" +
               "Do you wish to continue?",
               "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.No)
                 return;
 
             // Clear unused physical maps
-            bool[] used = new bool[model.PhysicalMaps.Length];
+            bool[] used = new bool[model.SolidityMaps.Length];
             LevelMap lm;
             foreach (Level lv in levels)
             {
@@ -1511,11 +1511,11 @@ namespace LAZYSHELL
                 used[lm.PhysicalMap] = true;
             }
 
-            for (int i = 0; i < model.PhysicalMaps.Length; i++)
+            for (int i = 0; i < model.SolidityMaps.Length; i++)
             {
                 if (!used[i])
                 {
-                    model.PhysicalMaps[i] = new byte[0x20C2];
+                    model.SolidityMaps[i] = new byte[0x20C2];
                     model.EditPhysicalMaps[i] = true;
                 }
             }
@@ -1553,12 +1553,12 @@ namespace LAZYSHELL
                 bw.Close();
                 fs.Close();
             }
-            for (int i = 0; i < model.PhysicalMaps.Length; i++)
+            for (int i = 0; i < model.SolidityMaps.Length; i++)
             {
-                CreateDir(fullPath + "Physical Maps\\");
-                fs = new FileStream(fullPath + "Physical Maps\\tilemap." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
+                CreateDir(fullPath + "Solidity Maps\\");
+                fs = new FileStream(fullPath + "Solidity Maps\\solidMap." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
                 bw = new BinaryWriter(fs);
-                bw.Write(model.PhysicalMaps[i], 0, model.PhysicalMaps[i].Length);
+                bw.Write(model.SolidityMaps[i], 0, model.SolidityMaps[i].Length);
                 bw.Close();
                 fs.Close();
             }
@@ -1617,13 +1617,13 @@ namespace LAZYSHELL
 
                     model.EditGraphicSets[i] = true;
                 }
-                for (int i = 0; i < model.PhysicalMaps.Length; i++)
+                for (int i = 0; i < model.SolidityMaps.Length; i++)
                 {
-                    if (!File.Exists(fullPath + "Physical Maps\\tilemap." + i.ToString("d3") + ".bin"))
+                    if (!File.Exists(fullPath + "Solidity Maps\\solidMap." + i.ToString("d3") + ".bin"))
                         continue;
-                    fs = File.OpenRead(fullPath + "Physical Maps\\tilemap." + i.ToString("d3") + ".bin");
+                    fs = File.OpenRead(fullPath + "Solidity Maps\\solidMap." + i.ToString("d3") + ".bin");
                     br = new BinaryReader(fs);
-                    model.PhysicalMaps[i] = br.ReadBytes(model.PhysicalMaps[i].Length);
+                    model.SolidityMaps[i] = br.ReadBytes(model.SolidityMaps[i].Length);
                     br.Close();
                     fs.Close();
 
@@ -1933,6 +1933,7 @@ namespace LAZYSHELL
                 model.TileMaps[0] = null;
                 model.TileSets[0] = null;
                 model.GraphicSets[0] = null;
+                model.SolidityMaps[0] = null;
             }
             else if (result == DialogResult.Cancel)
             {

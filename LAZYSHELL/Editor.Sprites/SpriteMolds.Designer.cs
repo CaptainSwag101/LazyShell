@@ -746,7 +746,7 @@
             this.pictureBoxZoom_TS.Location = new System.Drawing.Point(1, 1);
             this.pictureBoxZoom_TS.Margin = new System.Windows.Forms.Padding(1);
             this.pictureBoxZoom_TS.Name = "pictureBoxZoom_TS";
-            this.pictureBoxZoom_TS.Size = new System.Drawing.Size(192, 192);
+            this.pictureBoxZoom_TS.Size = new System.Drawing.Size(64, 64);
             this.pictureBoxZoom_TS.TabIndex = 521;
             this.pictureBoxZoom_TS.TabStop = false;
             this.pictureBoxZoom_TS.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxZoom_TS_Paint);

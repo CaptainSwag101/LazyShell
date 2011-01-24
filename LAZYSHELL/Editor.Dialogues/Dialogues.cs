@@ -21,6 +21,7 @@ namespace LAZYSHELL
         // accessors
         private Dialogue[] dialogues { get { return model.Dialogues; } set { model.Dialogues = value; } }
         private Dialogue dialogue { get { return dialogues[index]; } set { dialogues[index] = value; } }
+        private DialogueTable[] dialogueTables { get { return model.DialogueTables; } set { model.DialogueTables = value; } }
         private FontCharacter[] fontDialogue { get { return model.FontDialogue; } }
         private FontCharacter[] fontTriangle { get { return model.FontTriangle; } }
         private PaletteSet fontPalette { get { return model.FontPaletteDialogue; } set { model.FontPaletteDialogue = value; } }
@@ -65,6 +66,19 @@ namespace LAZYSHELL
             dialoguePreview = new DialoguePreview();
             dialogueTileset = new DialogueTileset(model.FontPaletteDialogue);
             SetTilesetImage();
+            // compression table
+            updatingDialogue = true;
+            this.dct0E.Text = dialogueTables[0].GetDialogue(textCodeFormat); dct0E.Tag = 0;
+            this.dct0F.Text = dialogueTables[1].GetDialogue(textCodeFormat); dct0F.Tag = 1;
+            this.dct10.Text = dialogueTables[2].GetDialogue(textCodeFormat); dct10.Tag = 2;
+            this.dct11.Text = dialogueTables[3].GetDialogue(textCodeFormat); dct11.Tag = 3;
+            this.dct12.Text = dialogueTables[4].GetDialogue(textCodeFormat); dct12.Tag = 4;
+            this.dct13.Text = dialogueTables[5].GetDialogue(textCodeFormat); dct13.Tag = 5;
+            this.dct14.Text = dialogueTables[6].GetDialogue(textCodeFormat); dct14.Tag = 6;
+            this.dct15.Text = dialogueTables[7].GetDialogue(textCodeFormat); dct15.Tag = 7;
+            this.dct16.Text = dialogueTables[8].GetDialogue(textCodeFormat); dct16.Tag = 8;
+            this.dct17.Text = dialogueTables[9].GetDialogue(textCodeFormat); dct17.Tag = 9;
+            updatingDialogue = false;
             // editors
             LoadFontEditor();
             option.Image = new Bitmap(Do.PixelsToImage(fontTriangle[0].GetCharacterPixels(fontPalette.Palettes[1]), 8, 16));
@@ -80,6 +94,7 @@ namespace LAZYSHELL
             updatingDialogue = true;
             variables.SelectedIndex = 0;
             RefreshDialogueEditor();
+            CalculateFreeTableSpace();
             SetTextImage();
             updatingDialogue = false;
             new ToolTipLabel(this, toolTip1, showDecHex, helpTips);
@@ -195,8 +210,6 @@ namespace LAZYSHELL
             int used = 0;
             int size = 0;
             int end = 0;
-            int left = 0;
-
             if (index >= 0x0C00)
             {
                 size = (0xFFFF - 0xEDE0) + 0x9000;
@@ -215,13 +228,11 @@ namespace LAZYSHELL
                 index = 0x0000;
                 end = 0x0800;
             }
-
             for (int i = index; i < end; i++)
             {
                 if (i == dialogues[i].DuplicateDialogues && dialogues[i].WithinDialoguesLocation == 0)
                 {
                     used += dialogues[i].DialogueLen;
-
                     if (i < end - 1 && used + dialogues[i + 1].DialogueLen > size && i + 1 == dialogues[i + 1].DuplicateDialogues && dialogues[i + 1].WithinDialoguesLocation == 0)
                     {
                         bool test = false;
@@ -229,10 +240,16 @@ namespace LAZYSHELL
                     }
                 }
             }
-
-            left = size - used;
-
-            return left;
+            return size - used;
+        }
+        private void CalculateFreeTableSpace()
+        {
+            int used = 0;
+            for (int i = 0; i < 10; i++)
+                used += dialogueTables[i].DialogueLen + 1;
+            int left = 0x40 - used;
+            this.freeTableBytes.Text = "(" + left.ToString() + " characters left)";
+            this.freeTableBytes.BackColor = left >= 0 ? SystemColors.Control : Color.Red;
         }
         private bool FreeSpace(int current)
         {
@@ -297,6 +314,60 @@ namespace LAZYSHELL
             dialogue.SetDialogue(new string(newText), textCodeFormat);
             RefreshDialogueEditor();
             SetTextImage();
+        }
+        private void SetDialogueTable(TextBox textBox)
+        {
+            char[] text = textBox.Text.ToCharArray();
+            bool preview = true, valid = true, fail = false;
+            char[] swap;
+            int temp;
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text[i] == '[' && preview == false) // Open bracket when we have already had an open bracket
+                    fail = true;
+
+                if (text[i] == '[') // Open Bracket
+                {
+                    preview = false;
+                    i++;
+                    temp = i;
+
+                    while (temp < text.Length && text[temp] != ']')
+                    {
+                        if (textCodeFormat)
+                        {
+                            if (!(text[temp] >= '0' && text[temp] <= '9'))
+                                fail = true;
+                        }
+                        temp++;
+                    }
+                }
+                else if (preview == false && text[i] == ']') // Close bracket after open bracket
+                    preview = true;
+                else if (preview == true && valid == true)
+                    valid = textHelper.IsValidChar(text[i]);
+
+                if (i < text.Length && text[i] == '\n')
+                {
+                    int tempSel = textBox.SelectionStart;
+                    swap = new char[text.Length + 2];
+                    for (int x = 0; x < i; x++)
+                        swap[x] = text[x];
+                    swap[i] = '[';
+                    swap[i + 1] = '1';
+                    swap[i + 2] = ']';
+                    for (int x = i + 3; x < swap.Length; x++)
+                        swap[x] = text[x - 2];
+                    textBox.Text = new string(swap);
+                    text = textBox.Text.ToCharArray();
+                    i += 2;
+                    textBox.SelectionStart = tempSel + 2;
+                }
+            }
+            if (preview && valid && !fail)
+                dialogueTables[(int)textBox.Tag].SetDialogue(textBox.Text, textCodeFormat);
+            CalculateFreeTableSpace();
         }
         // duplicate dialogues
         private void FindWithinDialogues()
@@ -851,6 +922,29 @@ namespace LAZYSHELL
                     "followed by a tab character, then the raw dialogue itself.",
                     "LAZY SHELL");
             }
+        }
+        // compression table
+        private void dctApply_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                "You are about to apply the compression table to all dialogues, which involves re-encoding all 4,096 dialogues. This procedure may take up to half a minute to complete.\n\nGo ahead with process?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Information) != DialogResult.Yes)
+                return;
+            // reencode all dialogues
+            ProgressBar progressBar = new ProgressBar("ENCODING DIALOGUES...", 4096);
+            progressBar.Show();
+            for (int i = 0; i < dialogues.Length; i++)
+            {
+                dialogues[i].SetDialogue(dialogues[i].GetDialogue(textCodeFormat), textCodeFormat);
+                progressBar.PerformStep("ENCODING DIALOGUE #" + i.ToString("d4"));
+            }
+            progressBar.Close();
+            dialogueNum_ValueChanged(null, null);
+        }
+        private void dct_TextChanged(object sender, EventArgs e)
+        {
+            if (updatingDialogue) return;
+            SetDialogueTable((TextBox)sender);
         }
         // menu strip
         private void save_Click(object sender, EventArgs e)

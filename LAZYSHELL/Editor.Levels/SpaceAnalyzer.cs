@@ -55,7 +55,7 @@ namespace LAZYSHELL
                 offset += size;
 
                 sizeLeftListBox.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("TILE MAP " + index.ToString("d3"));
+                pBar.PerformStep("TILE MAP #" + index.ToString("d3"));
             }
 
             bank = 0x170000; // Set bank pointer
@@ -82,7 +82,7 @@ namespace LAZYSHELL
                 offset += (ushort)size;
 
                 sizeLeftListBox.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("TILE MAP " + index.ToString("d3"));
+                pBar.PerformStep("TILE MAP #" + index.ToString("d3"));
             }
 
             bank = 0x180000; // Set bank pointer
@@ -109,7 +109,7 @@ namespace LAZYSHELL
                 offset += (ushort)size;
 
                 sizeLeftListBox.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("TILE MAP " + index.ToString("d3"));
+                pBar.PerformStep("TILE MAP #" + index.ToString("d3"));
             }
 
             bank = 0x190000; // Set bank pointer
@@ -136,7 +136,7 @@ namespace LAZYSHELL
                 offset += (ushort)size;
 
                 sizeLeftListBox.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("TILE MAP " + index.ToString("d3"));
+                pBar.PerformStep("TILE MAP #" + index.ToString("d3"));
             }
 
             bank = 0x1A0000; // Set bank pointer
@@ -163,7 +163,7 @@ namespace LAZYSHELL
                 offset += (ushort)size;
 
                 sizeLeftListBox.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("TILE MAP " + index.ToString("d3"));
+                pBar.PerformStep("TILE MAP #" + index.ToString("d3"));
             }
 
 
@@ -176,7 +176,7 @@ namespace LAZYSHELL
 
             for (; index < 80; index++, bankIndex++)
             {
-                size = Comp.Compress(model.PhysicalMaps[index], null);
+                size = Comp.Compress(model.SolidityMaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -192,7 +192,7 @@ namespace LAZYSHELL
                 offset += (ushort)size;
 
                 sizeLeftListBox1.Items.Add(new SizeLeft(0xFFFF - offset, bg));
-                pBar.PerformStep("PHYSICAL MAP " + index.ToString());
+                pBar.PerformStep("SOLIDITY MAP #" + index.ToString());
             }
 
             bank = 0x1C0000; // Set bank pointer
@@ -203,7 +203,7 @@ namespace LAZYSHELL
 
             for (; index < 120; index++, bankIndex++)
             {
-                size = Comp.Compress(model.PhysicalMaps[index], null);
+                size = Comp.Compress(model.SolidityMaps[index], null);
                 if (offset + size > 0x7FFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -219,7 +219,7 @@ namespace LAZYSHELL
                 offset += (ushort)size;
 
                 sizeLeftListBox1.Items.Add(new SizeLeft(0x7FFF - offset, bg));
-                pBar.PerformStep("PHYSICAL MAP " + index.ToString("d3"));
+                pBar.PerformStep("SOLIDITY MAP #" + index.ToString("d3"));
             }
 
             pBar.Close();
@@ -247,7 +247,7 @@ namespace LAZYSHELL
                 if (type == 0)
                     return "Tile Map " + num.ToString("d3");
                 else
-                    return "Phys Map " + num.ToString("d3");
+                    return "Solidity Map " + num.ToString("d3");
             }
         }
         private class Bank : NewListBoxItem

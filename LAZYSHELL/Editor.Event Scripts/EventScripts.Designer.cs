@@ -770,7 +770,7 @@
             this.eventHexText.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventHexText.Name = "eventHexText";
             this.eventHexText.ReadOnly = true;
-            this.eventHexText.Size = new System.Drawing.Size(100, 25);
+            this.eventHexText.Size = new System.Drawing.Size(200, 25);
             // 
             // toolStripSeparator6
             // 

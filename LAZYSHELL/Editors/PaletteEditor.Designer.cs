@@ -70,14 +70,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.levelsReds = new System.Windows.Forms.NumericUpDown();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.thresholdApply = new System.Windows.Forms.CheckBox();
+            this.threshold = new System.Windows.Forms.NumericUpDown();
             this.panel15 = new System.Windows.Forms.Panel();
+            this.trackBarThreshold = new System.Windows.Forms.TrackBar();
             this.trackBarBrightness = new System.Windows.Forms.TrackBar();
             this.trackBarContrast = new System.Windows.Forms.TrackBar();
             this.negative = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
             this.contrast = new System.Windows.Forms.NumericUpDown();
             this.greyscale = new System.Windows.Forms.CheckBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.brightness = new System.Windows.Forms.NumericUpDown();
             this.currentHTML = new System.Windows.Forms.TextBox();
@@ -126,6 +128,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.levelsGreensBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelsReds)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.threshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contrast)).BeginInit();
@@ -256,7 +260,7 @@
             this.equateRedsB.TabStop = true;
             this.equateRedsB.Text = "Reds";
             this.equateRedsB.UseVisualStyleBackColor = true;
-            this.equateRedsB.CheckedChanged += new System.EventHandler(this.equateRedsB_CheckedChanged);
+            this.equateRedsB.Click += new System.EventHandler(this.equateRedsB_CheckedChanged);
             // 
             // equateBluesB
             // 
@@ -268,7 +272,7 @@
             this.equateBluesB.TabIndex = 0;
             this.equateBluesB.Text = "Blues";
             this.equateBluesB.UseVisualStyleBackColor = true;
-            this.equateBluesB.CheckedChanged += new System.EventHandler(this.equateBluesB_CheckedChanged);
+            this.equateBluesB.Click += new System.EventHandler(this.equateBluesB_CheckedChanged);
             // 
             // equateGreensB
             // 
@@ -280,7 +284,7 @@
             this.equateGreensB.TabIndex = 0;
             this.equateGreensB.Text = "Greens";
             this.equateGreensB.UseVisualStyleBackColor = true;
-            this.equateGreensB.CheckedChanged += new System.EventHandler(this.equateGreensB_CheckedChanged);
+            this.equateGreensB.Click += new System.EventHandler(this.equateGreensB_CheckedChanged);
             // 
             // label11
             // 
@@ -313,7 +317,7 @@
             this.equateRedsA.TabStop = true;
             this.equateRedsA.Text = "Reds";
             this.equateRedsA.UseVisualStyleBackColor = true;
-            this.equateRedsA.CheckedChanged += new System.EventHandler(this.equateRedsA_CheckedChanged);
+            this.equateRedsA.Click += new System.EventHandler(this.equateRedsA_CheckedChanged);
             // 
             // equateBluesA
             // 
@@ -325,7 +329,7 @@
             this.equateBluesA.TabIndex = 0;
             this.equateBluesA.Text = "Blues";
             this.equateBluesA.UseVisualStyleBackColor = true;
-            this.equateBluesA.CheckedChanged += new System.EventHandler(this.equateBluesA_CheckedChanged);
+            this.equateBluesA.Click += new System.EventHandler(this.equateBluesA_CheckedChanged);
             // 
             // equateGreensA
             // 
@@ -337,7 +341,7 @@
             this.equateGreensA.TabIndex = 0;
             this.equateGreensA.Text = "Greens";
             this.equateGreensA.UseVisualStyleBackColor = true;
-            this.equateGreensA.CheckedChanged += new System.EventHandler(this.equateGreensA_CheckedChanged);
+            this.equateGreensA.Click += new System.EventHandler(this.equateGreensA_CheckedChanged);
             // 
             // label10
             // 
@@ -382,7 +386,7 @@
             this.switchRedsB.TabStop = true;
             this.switchRedsB.Text = "Reds";
             this.switchRedsB.UseVisualStyleBackColor = true;
-            this.switchRedsB.CheckedChanged += new System.EventHandler(this.switchRedsB_CheckedChanged);
+            this.switchRedsB.Click += new System.EventHandler(this.switchRedsB_CheckedChanged);
             // 
             // switchBluesB
             // 
@@ -394,7 +398,7 @@
             this.switchBluesB.TabIndex = 0;
             this.switchBluesB.Text = "Blues";
             this.switchBluesB.UseVisualStyleBackColor = true;
-            this.switchBluesB.CheckedChanged += new System.EventHandler(this.switchBluesB_CheckedChanged);
+            this.switchBluesB.Click += new System.EventHandler(this.switchBluesB_CheckedChanged);
             // 
             // switchGreensB
             // 
@@ -406,7 +410,7 @@
             this.switchGreensB.TabIndex = 0;
             this.switchGreensB.Text = "Greens";
             this.switchGreensB.UseVisualStyleBackColor = true;
-            this.switchGreensB.CheckedChanged += new System.EventHandler(this.switchGreensB_CheckedChanged);
+            this.switchGreensB.Click += new System.EventHandler(this.switchGreensB_CheckedChanged);
             // 
             // label8
             // 
@@ -439,7 +443,7 @@
             this.switchRedsA.TabStop = true;
             this.switchRedsA.Text = "Reds";
             this.switchRedsA.UseVisualStyleBackColor = true;
-            this.switchRedsA.CheckedChanged += new System.EventHandler(this.switchRedsA_CheckedChanged);
+            this.switchRedsA.Click += new System.EventHandler(this.switchRedsA_CheckedChanged);
             // 
             // switchBluesA
             // 
@@ -451,7 +455,7 @@
             this.switchBluesA.TabIndex = 0;
             this.switchBluesA.Text = "Blues";
             this.switchBluesA.UseVisualStyleBackColor = true;
-            this.switchBluesA.CheckedChanged += new System.EventHandler(this.switchBluesA_CheckedChanged);
+            this.switchBluesA.Click += new System.EventHandler(this.switchBluesA_CheckedChanged);
             // 
             // switchGreensA
             // 
@@ -463,7 +467,7 @@
             this.switchGreensA.TabIndex = 0;
             this.switchGreensA.Text = "Greens";
             this.switchGreensA.UseVisualStyleBackColor = true;
-            this.switchGreensA.CheckedChanged += new System.EventHandler(this.switchGreensA_CheckedChanged);
+            this.switchGreensA.Click += new System.EventHandler(this.switchGreensA_CheckedChanged);
             // 
             // label9
             // 
@@ -629,14 +633,16 @@
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ControlText;
             this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage2.Controls.Add(this.thresholdApply);
+            this.tabPage2.Controls.Add(this.threshold);
             this.tabPage2.Controls.Add(this.panel15);
+            this.tabPage2.Controls.Add(this.trackBarThreshold);
             this.tabPage2.Controls.Add(this.trackBarBrightness);
             this.tabPage2.Controls.Add(this.trackBarContrast);
             this.tabPage2.Controls.Add(this.negative);
             this.tabPage2.Controls.Add(this.label15);
             this.tabPage2.Controls.Add(this.contrast);
             this.tabPage2.Controls.Add(this.greyscale);
-            this.tabPage2.Controls.Add(this.label18);
             this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.brightness);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -646,20 +652,77 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Effects";
             // 
+            // thresholdApply
+            // 
+            this.thresholdApply.BackColor = System.Drawing.SystemColors.Control;
+            this.thresholdApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.thresholdApply.Location = new System.Drawing.Point(0, 112);
+            this.thresholdApply.Name = "thresholdApply";
+            this.thresholdApply.Padding = new System.Windows.Forms.Padding(4, 0, 0, 2);
+            this.thresholdApply.Size = new System.Drawing.Size(248, 19);
+            this.thresholdApply.TabIndex = 533;
+            this.thresholdApply.Text = "Threshold";
+            this.thresholdApply.UseVisualStyleBackColor = false;
+            this.thresholdApply.Click += new System.EventHandler(this.thresholdApply_CheckedChanged);
+            // 
+            // threshold
+            // 
+            this.threshold.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.threshold.Enabled = false;
+            this.threshold.Location = new System.Drawing.Point(0, 132);
+            this.threshold.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.threshold.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.threshold.Name = "threshold";
+            this.threshold.Size = new System.Drawing.Size(50, 17);
+            this.threshold.TabIndex = 20;
+            this.threshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.threshold.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.threshold.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
+            // 
             // panel15
             // 
             this.panel15.BackColor = System.Drawing.SystemColors.Control;
-            this.panel15.Location = new System.Drawing.Point(0, 130);
+            this.panel15.Location = new System.Drawing.Point(0, 151);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(248, 116);
+            this.panel15.Size = new System.Drawing.Size(248, 95);
             this.panel15.TabIndex = 532;
+            // 
+            // trackBarThreshold
+            // 
+            this.trackBarThreshold.AutoSize = false;
+            this.trackBarThreshold.BackColor = System.Drawing.SystemColors.Control;
+            this.trackBarThreshold.Enabled = false;
+            this.trackBarThreshold.LargeChange = 32;
+            this.trackBarThreshold.Location = new System.Drawing.Point(51, 132);
+            this.trackBarThreshold.Maximum = 255;
+            this.trackBarThreshold.Minimum = 1;
+            this.trackBarThreshold.Name = "trackBarThreshold";
+            this.trackBarThreshold.Size = new System.Drawing.Size(197, 17);
+            this.trackBarThreshold.SmallChange = 8;
+            this.trackBarThreshold.TabIndex = 23;
+            this.trackBarThreshold.TickFrequency = 8;
+            this.trackBarThreshold.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBarThreshold.Value = 128;
+            this.trackBarThreshold.Scroll += new System.EventHandler(this.trackBarThreshold_Scroll);
             // 
             // trackBarBrightness
             // 
             this.trackBarBrightness.AutoSize = false;
             this.trackBarBrightness.BackColor = System.Drawing.SystemColors.Control;
             this.trackBarBrightness.LargeChange = 32;
-            this.trackBarBrightness.Location = new System.Drawing.Point(51, 74);
+            this.trackBarBrightness.Location = new System.Drawing.Point(51, 56);
             this.trackBarBrightness.Maximum = 100;
             this.trackBarBrightness.Minimum = -100;
             this.trackBarBrightness.Name = "trackBarBrightness";
@@ -675,7 +738,7 @@
             this.trackBarContrast.AutoSize = false;
             this.trackBarContrast.BackColor = System.Drawing.SystemColors.Control;
             this.trackBarContrast.LargeChange = 32;
-            this.trackBarContrast.Location = new System.Drawing.Point(51, 111);
+            this.trackBarContrast.Location = new System.Drawing.Point(51, 93);
             this.trackBarContrast.Maximum = 100;
             this.trackBarContrast.Minimum = -100;
             this.trackBarContrast.Name = "trackBarContrast";
@@ -690,21 +753,21 @@
             // 
             this.negative.BackColor = System.Drawing.SystemColors.Control;
             this.negative.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.negative.Location = new System.Drawing.Point(0, 35);
+            this.negative.Location = new System.Drawing.Point(0, 17);
             this.negative.Name = "negative";
             this.negative.Padding = new System.Windows.Forms.Padding(4, 0, 0, 2);
             this.negative.Size = new System.Drawing.Size(248, 19);
             this.negative.TabIndex = 0;
             this.negative.Text = "Negative Image";
             this.negative.UseVisualStyleBackColor = false;
-            this.negative.CheckedChanged += new System.EventHandler(this.negative_CheckedChanged);
+            this.negative.Click += new System.EventHandler(this.negative_CheckedChanged);
             // 
             // label15
             // 
             this.label15.BackColor = System.Drawing.SystemColors.Control;
             this.label15.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label15.Location = new System.Drawing.Point(0, 93);
+            this.label15.Location = new System.Drawing.Point(0, 75);
             this.label15.Name = "label15";
             this.label15.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.label15.Size = new System.Drawing.Size(248, 17);
@@ -714,7 +777,7 @@
             // contrast
             // 
             this.contrast.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contrast.Location = new System.Drawing.Point(0, 111);
+            this.contrast.Location = new System.Drawing.Point(0, 93);
             this.contrast.Minimum = new decimal(new int[] {
             100,
             0,
@@ -730,33 +793,21 @@
             // 
             this.greyscale.BackColor = System.Drawing.SystemColors.Control;
             this.greyscale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.greyscale.Location = new System.Drawing.Point(0, 18);
+            this.greyscale.Location = new System.Drawing.Point(0, 0);
             this.greyscale.Name = "greyscale";
             this.greyscale.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.greyscale.Size = new System.Drawing.Size(248, 17);
+            this.greyscale.Size = new System.Drawing.Size(248, 19);
             this.greyscale.TabIndex = 0;
             this.greyscale.Text = "Greyscale";
             this.greyscale.UseVisualStyleBackColor = false;
-            this.greyscale.CheckedChanged += new System.EventHandler(this.greyscale_CheckedChanged);
-            // 
-            // label18
-            // 
-            this.label18.BackColor = System.Drawing.SystemColors.Control;
-            this.label18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label18.Location = new System.Drawing.Point(0, 0);
-            this.label18.Name = "label18";
-            this.label18.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label18.Size = new System.Drawing.Size(248, 17);
-            this.label18.TabIndex = 21;
-            this.label18.Text = "EFFECTS";
+            this.greyscale.Click += new System.EventHandler(this.greyscale_CheckedChanged);
             // 
             // label14
             // 
             this.label14.BackColor = System.Drawing.SystemColors.Control;
             this.label14.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label14.Location = new System.Drawing.Point(0, 56);
+            this.label14.Location = new System.Drawing.Point(0, 38);
             this.label14.Name = "label14";
             this.label14.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.label14.Size = new System.Drawing.Size(248, 17);
@@ -766,7 +817,7 @@
             // brightness
             // 
             this.brightness.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.brightness.Location = new System.Drawing.Point(0, 74);
+            this.brightness.Location = new System.Drawing.Point(0, 56);
             this.brightness.Minimum = new decimal(new int[] {
             100,
             0,
@@ -785,7 +836,7 @@
             this.currentHTML.MaxLength = 6;
             this.currentHTML.Name = "currentHTML";
             this.currentHTML.Size = new System.Drawing.Size(118, 14);
-            this.currentHTML.TabIndex = 20;
+            this.currentHTML.TabIndex = 6;
             this.currentHTML.TextChanged += new System.EventHandler(this.currentHTML_TextChanged);
             // 
             // pictureBoxColorMap
@@ -856,7 +907,7 @@
             0});
             this.currentBlue.Name = "currentBlue";
             this.currentBlue.Size = new System.Drawing.Size(46, 17);
-            this.currentBlue.TabIndex = 11;
+            this.currentBlue.TabIndex = 2;
             this.currentBlue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.currentBlue.ValueChanged += new System.EventHandler(this.currentBlue_ValueChanged);
             // 
@@ -876,7 +927,7 @@
             0});
             this.currentGreen.Name = "currentGreen";
             this.currentGreen.Size = new System.Drawing.Size(46, 17);
-            this.currentGreen.TabIndex = 11;
+            this.currentGreen.TabIndex = 1;
             this.currentGreen.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.currentGreen.ValueChanged += new System.EventHandler(this.currentGreen_ValueChanged);
             // 
@@ -916,7 +967,7 @@
             0});
             this.currentRed.Name = "currentRed";
             this.currentRed.Size = new System.Drawing.Size(46, 17);
-            this.currentRed.TabIndex = 10;
+            this.currentRed.TabIndex = 0;
             this.currentRed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.currentRed.ValueChanged += new System.EventHandler(this.currentRed_ValueChanged);
             // 
@@ -1035,7 +1086,7 @@
             this.trackBar3.Name = "trackBar3";
             this.trackBar3.Size = new System.Drawing.Size(121, 17);
             this.trackBar3.SmallChange = 8;
-            this.trackBar3.TabIndex = 22;
+            this.trackBar3.TabIndex = 5;
             this.trackBar3.TickFrequency = 8;
             this.trackBar3.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar3.ValueChanged += new System.EventHandler(this.currentBlue_ValueChanged);
@@ -1050,7 +1101,7 @@
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(121, 17);
             this.trackBar2.SmallChange = 8;
-            this.trackBar2.TabIndex = 22;
+            this.trackBar2.TabIndex = 4;
             this.trackBar2.TickFrequency = 8;
             this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar2.ValueChanged += new System.EventHandler(this.currentGreen_ValueChanged);
@@ -1065,7 +1116,7 @@
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(121, 17);
             this.trackBar1.SmallChange = 8;
-            this.trackBar1.TabIndex = 22;
+            this.trackBar1.TabIndex = 3;
             this.trackBar1.TickFrequency = 8;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.ValueChanged += new System.EventHandler(this.currentRed_ValueChanged);
@@ -1160,6 +1211,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.levelsGreensBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelsReds)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.threshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contrast)).EndInit();
@@ -1258,7 +1311,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.TrackBar trackBar3;
@@ -1267,6 +1319,9 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
         private System.Windows.Forms.ToolStripMenuItem importPaletteSetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportPaletteSetToolStripMenuItem;
+        private System.Windows.Forms.TrackBar trackBarThreshold;
+        private System.Windows.Forms.NumericUpDown threshold;
+        private System.Windows.Forms.CheckBox thresholdApply;
 
     }
 }
