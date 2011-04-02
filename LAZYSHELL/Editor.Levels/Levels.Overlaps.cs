@@ -11,14 +11,13 @@ namespace LAZYSHELL
     {
         #region Variables
 
-        private LevelOverlaps overlaps; // Overlaps for the current level
+        private LevelOverlaps overlaps { get { return level.LevelOverlaps; } set { level.LevelOverlaps = value; } } // Overlaps for the current level
         private OverlapTileset overlapTileset;
         private Bitmap overlapsImage;
         private int[] overlapsPixels;
         private LevelOverlaps.Overlap copyOverlap;
 
         #endregion
-
         #region Methods
 
         private void InitializeOverlapProperties()
@@ -27,7 +26,7 @@ namespace LAZYSHELL
 
             this.overlapFieldTree.Nodes.Clear();
 
-            for (int i = 0; i < overlaps.NumberOfOverlaps; i++)
+            for (int i = 0; i < overlaps.Count; i++)
             {
                 this.overlapFieldTree.Nodes.Add(new TreeNode("OVERLAP #" + i.ToString()));
             }
@@ -35,7 +34,7 @@ namespace LAZYSHELL
             if (overlapFieldTree.Nodes.Count > 0)
                 this.overlapFieldTree.SelectedNode = this.overlapFieldTree.Nodes[0];
 
-            if (overlaps.NumberOfOverlaps != 0 && this.overlapFieldTree.SelectedNode != null)
+            if (overlaps.Count != 0 && this.overlapFieldTree.SelectedNode != null)
             {
                 overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
                 this.overlapX.Value = overlaps.X;
@@ -85,14 +84,16 @@ namespace LAZYSHELL
             }
 
             pictureBoxOverlaps.Invalidate();
+            overlapsBytesLeft.Text = CalculateFreeOverlapSpace() + " bytes left";
+            overlapsBytesLeft.BackColor = CalculateFreeOverlapSpace() >= 0 ? SystemColors.Control : Color.Red;
 
             updatingProperties = false;
         }
         private void RefreshOverlapProperties()
         {
-            updating = true;
+            updatingProperties = true;
 
-            if (overlaps.NumberOfOverlaps != 0 && this.overlapFieldTree.SelectedNode != null)
+            if (overlaps.Count != 0 && this.overlapFieldTree.SelectedNode != null)
             {
                 overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
                 this.overlapX.Value = overlaps.X;
@@ -143,24 +144,24 @@ namespace LAZYSHELL
 
             pictureBoxOverlaps.Invalidate();
 
-            updating = false;
+            overlapsBytesLeft.Text = CalculateFreeOverlapSpace() + " bytes left";
+            overlapsBytesLeft.BackColor = CalculateFreeOverlapSpace() >= 0 ? SystemColors.Control : Color.Red;
+
+            updatingProperties = false;
         }
 
         public int CalculateFreeOverlapSpace()
         {
             int used = 0;
-            for (int i = 0; i < 512; i++)
+            foreach (Level level in levels)
             {
-                for (int j = 0; j < levels[i].LevelOverlaps.NumberOfOverlaps; j++)
-                {
+                foreach (LevelOverlaps.Overlap overlap in level.LevelOverlaps.Overlaps)
                     used += 4;
-                }
             }
             return 0x11B8 - used;
         }
 
         #endregion
-
         #region Event Handlers
 
         public TreeView OverlapFieldTree { get { return overlapFieldTree; } set { overlapFieldTree = value; } }
@@ -183,7 +184,7 @@ namespace LAZYSHELL
             if (CalculateFreeOverlapSpace() >= 4)
             {
                 this.overlapFieldTree.Focus();
-                if (overlaps.NumberOfOverlaps < 28)
+                if (overlaps.Count < 28)
                 {
                     if (overlapFieldTree.Nodes.Count > 0)
                         overlaps.AddNewOverlap(overlapFieldTree.SelectedNode.Index + 1, p);
@@ -200,7 +201,7 @@ namespace LAZYSHELL
                     overlapFieldTree.BeginUpdate();
                     this.overlapFieldTree.Nodes.Clear();
 
-                    for (int i = 0; i < overlaps.NumberOfOverlaps; i++)
+                    for (int i = 0; i < overlaps.Count; i++)
                         this.overlapFieldTree.Nodes.Add(new TreeNode("OVERLAP #" + i.ToString()));
 
                     this.overlapFieldTree.SelectedNode = this.overlapFieldTree.Nodes[reselect + 1];
@@ -228,7 +229,7 @@ namespace LAZYSHELL
                 overlapFieldTree.BeginUpdate();
                 this.overlapFieldTree.Nodes.Clear();
 
-                for (int i = 0; i < overlaps.NumberOfOverlaps; i++)
+                for (int i = 0; i < overlaps.Count; i++)
                     this.overlapFieldTree.Nodes.Add(new TreeNode("OVERLAP #" + i.ToString()));
 
                 if (overlapFieldTree.Nodes.Count > 0)
@@ -249,31 +250,31 @@ namespace LAZYSHELL
         public NumericUpDown OverlapY { get { return overlapY; } set { overlapY = value; } }
         private void overlapCoordX_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.X = (byte)this.overlapX.Value;
 
-            if (!updatingProperties)
+            if (!updatingLevel)
                 overlay.DrawLevelOverlaps(overlaps, overlapTileset);
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
         }
         private void overlapCoordY_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.Y = (byte)this.overlapY.Value;
 
-            if (!updatingProperties)
+            if (!updatingLevel)
                 overlay.DrawLevelOverlaps(overlaps, overlapTileset);
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
         }
         private void overlapCoordZ_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.Z = (byte)this.overlapZ.Value;
@@ -286,7 +287,7 @@ namespace LAZYSHELL
         {
             overlapCoordZPlusHalf.ForeColor = overlapCoordZPlusHalf.Checked ? Color.Black : Color.Gray;
 
-            if (updating) return;
+            if (updatingProperties) return;
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.B1b7 = this.overlapCoordZPlusHalf.Checked;
@@ -297,7 +298,7 @@ namespace LAZYSHELL
         }
         private void overlapType_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.Type = (byte)this.overlapType.Value;
@@ -310,14 +311,14 @@ namespace LAZYSHELL
         }
         private void overlapUnknownBits_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             overlaps.B0b7 = overlapUnknownBits.GetItemChecked(0);
             overlaps.B2b5 = overlapUnknownBits.GetItemChecked(1);
             overlaps.B2b6 = overlapUnknownBits.GetItemChecked(2);
             overlaps.B2b7 = overlapUnknownBits.GetItemChecked(3);
         }
-
+        //
         private void pictureBoxOverlaps_MouseDown(object sender, MouseEventArgs e)
         {
             overlapType.Value = (e.Y / 32) * 8 + (e.X / 32);
@@ -330,19 +331,18 @@ namespace LAZYSHELL
                 overlapsImage = Do.PixelsToImage(overlapsPixels, 256, 416);
             }
             e.Graphics.DrawImage(overlapsImage, 0, 0);
-            if (state.CartesianGrid)
-                overlay.DrawCartographicGrid(e.Graphics, Color.Gray, new Size(256, 416), new Size(32, 32), 1);
+            overlay.DrawCartographicGrid(e.Graphics, Color.Gray, new Size(256, 416), new Size(32, 32), 1);
             int x = (int)overlapType.Value % 8 * 32;
             int y = (int)overlapType.Value / 8 * 32;
             overlay.DrawSelectionBox(e.Graphics, new Point(x + 32, y + 32), new Point(x, y), 1);
         }
-
+        //
         private void AddNewOverlap(LevelOverlaps.Overlap overlap)
         {
             if (CalculateFreeOverlapSpace() >= 4)
             {
                 this.overlapFieldTree.Focus();
-                if (overlaps.NumberOfOverlaps < 28)
+                if (overlaps.Count < 28)
                 {
                     if (overlapFieldTree.Nodes.Count > 0)
                         overlaps.AddNewOverlap(overlapFieldTree.SelectedNode.Index + 1, overlap);
@@ -359,7 +359,7 @@ namespace LAZYSHELL
                     overlapFieldTree.BeginUpdate();
                     this.overlapFieldTree.Nodes.Clear();
 
-                    for (int i = 0; i < overlaps.NumberOfOverlaps; i++)
+                    for (int i = 0; i < overlaps.Count; i++)
                         this.overlapFieldTree.Nodes.Add(new TreeNode("OVERLAP #" + i.ToString()));
 
                     this.overlapFieldTree.SelectedNode = this.overlapFieldTree.Nodes[reselect + 1];

@@ -112,7 +112,8 @@ namespace LAZYSHELL
         {
             this.tileSet.AssembleIntoModel(16, Layer);
             SetTileSetImage();
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
         }
         private void LoadTileEditor()
         {
@@ -228,15 +229,18 @@ namespace LAZYSHELL
             {
                 for (int x = 0; x < buffer.Width / 16; x++)
                 {
+                    int index = (y + y_) * 16 + x + x_;
                     Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
-                    tileSet.TileSetLayers[Layer][(y + y_) * 16 + x + x_] = tile.Copy();
+                    tileSet.TileSetLayers[Layer][index] = tile.Copy();
+                    tileSet.TileSetLayers[Layer][index].TileIndex = index;
                 }
             }
             overlay.SelectTS = null;
             tileSet.DrawTileset(tileSet.TileSetLayers[Layer], tileSet.TileSets[Layer]);
             tileSet.AssembleIntoModel(16, Layer);
             SetTileSetImage();
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
         }
         private void Delete()
         {
@@ -251,7 +255,8 @@ namespace LAZYSHELL
             tileSet.DrawTileset(tileSet.TileSetLayers[Layer], tileSet.TileSets[Layer]);
             tileSet.AssembleIntoModel(16, Layer);
             SetTileSetImage();
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
         }
         private void Flip(string type)
         {
@@ -295,7 +300,8 @@ namespace LAZYSHELL
             }
             tileSet.DrawTileset(tileSet.TileSetLayers[Layer], tileSet.TileSets[Layer]);
             SetTileSetImage();
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
         }
         #endregion
         #region Event handlers
@@ -384,7 +390,7 @@ namespace LAZYSHELL
             if (e.Button == MouseButtons.Left && mouseOverObject == null)
                 overlay.SelectTS = new Overlay.Selection(16, x / 16 * 16, y / 16 * 16, 16, 16);
             // if moving a current selection
-            if (e.Button == MouseButtons.Left && mouseOverObject == "selection")
+            if (!lockEditing.Checked && e.Button == MouseButtons.Left && mouseOverObject == "selection")
             {
                 mouseDownObject = "selection";
                 mouseDownPosition = overlay.SelectTS.MousePosition(x, y);
@@ -415,7 +421,7 @@ namespace LAZYSHELL
                     x / 16 * 16 - mouseDownPosition.X,
                     y / 16 * 16 - mouseDownPosition.Y);
             // check if over selection
-            if (e.Button == MouseButtons.None && overlay.SelectTS != null && overlay.SelectTS.MouseWithin(x, y))
+            if (!lockEditing.Checked && e.Button == MouseButtons.None && overlay.SelectTS != null && overlay.SelectTS.MouseWithin(x, y))
             {
                 mouseOverObject = "selection";
                 pictureBox.Cursor = Cursors.SizeAll;
@@ -431,6 +437,7 @@ namespace LAZYSHELL
         private void pictureBoxTileset_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right) return;
+            if (overlay.SelectTS == null) return;
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             if (this.selectedTiles == null)
@@ -554,6 +561,10 @@ namespace LAZYSHELL
             Do.Export(tileSetImage, "tileSet.png");
         }
         // editors
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            update.DynamicInvoke();
+        }
         private void editor_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;

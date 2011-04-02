@@ -8,8 +8,24 @@ namespace LAZYSHELL
     [Serializable()]
     public class Tile8x8
     {
-        private int[] pixels = new int[64]; public int[] Pixels { get { return pixels; } set { pixels = value; } }
-        private int[] colors = new int[64]; public int[] Colors { get { return colors; } set { colors = value; } }
+        private int[] pixels = new int[64];
+        public int[] Pixels
+        {
+            get { return pixels; }
+            set
+            {
+                pixels = value;
+            }
+        }
+        private int[] colors = new int[64];
+        public int[] Colors
+        {
+            get { return colors; }
+            set
+            {
+                colors = value;
+            }
+        }
         private bool twobpp;
 
         private bool priorityOne, mirror, invert;

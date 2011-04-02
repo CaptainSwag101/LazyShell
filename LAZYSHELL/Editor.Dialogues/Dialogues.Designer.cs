@@ -58,9 +58,8 @@
             this.panel69 = new System.Windows.Forms.Panel();
             this.pictureBoxDialogue = new System.Windows.Forms.PictureBox();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.search = new System.Windows.Forms.ToolStripButton();
             this.textBoxSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.search = new System.Windows.Forms.ToolStripButton();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.pauseFrameNum = new LAZYSHELL.ToolStripNumericUpDown();
@@ -104,6 +103,7 @@
             this.showBattleDialogues = new System.Windows.Forms.ToolStripButton();
             this.showFonts = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.reset = new System.Windows.Forms.ToolStripButton();
             this.panel60.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -355,7 +355,6 @@
             this.pageUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pageUp.Name = "pageUp";
             this.pageUp.Size = new System.Drawing.Size(23, 22);
-            this.pageUp.Text = "toolStripButton9";
             this.pageUp.ToolTipText = "Back 1 Page";
             this.pageUp.Click += new System.EventHandler(this.pageUp_Click);
             // 
@@ -367,7 +366,6 @@
             this.pageDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pageDown.Name = "pageDown";
             this.pageDown.Size = new System.Drawing.Size(23, 22);
-            this.pageDown.Text = "toolStripButton10";
             this.pageDown.ToolTipText = "Foward 1 Page";
             this.pageDown.Click += new System.EventHandler(this.pageDown_Click);
             // 
@@ -425,9 +423,8 @@
             this.toolStrip5.CanOverflow = false;
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dialogueNum,
-            this.toolStripSeparator3,
-            this.search,
-            this.textBoxSearch});
+            this.textBoxSearch,
+            this.search});
             this.toolStrip5.Location = new System.Drawing.Point(0, 0);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -435,10 +432,10 @@
             this.toolStrip5.TabIndex = 565;
             this.toolStrip5.Text = "toolStrip5";
             // 
-            // toolStripSeparator3
+            // textBoxSearch
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(150, 25);
             // 
             // search
             // 
@@ -449,12 +446,6 @@
             this.search.Name = "search";
             this.search.Size = new System.Drawing.Size(23, 22);
             this.search.Text = "Search For Dialogue";
-            // 
-            // textBoxSearch
-            // 
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(140, 25);
-            this.textBoxSearch.Visible = false;
             // 
             // toolStrip4
             // 
@@ -545,9 +536,9 @@
             this.variables.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.variables.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.variables.Items.AddRange(new object[] {
-            "Item name @ 00:70A7",
-            "Value @ 00:7000",
-            "Value @ 00:7024"});
+            "Item name @ $70A7",
+            "Value @ $7000",
+            "Value @ $7024"});
             this.variables.Name = "variables";
             this.variables.Size = new System.Drawing.Size(130, 25);
             // 
@@ -719,6 +710,7 @@
             this.toolStripSeparator4,
             this.import,
             this.export,
+            this.reset,
             this.clear,
             this.toolStripSeparator12,
             this.helpTips,
@@ -901,6 +893,17 @@
             this.toolTip1.Active = false;
             this.toolTip1.IsBalloon = true;
             // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.Text = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
             // Dialogues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -980,7 +983,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStrip toolStrip5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton search;
         private System.Windows.Forms.ToolStripTextBox textBoxSearch;
         private System.Windows.Forms.ToolTip toolTip1;
@@ -1018,5 +1020,6 @@
         private System.Windows.Forms.ToolStrip toolStrip7;
         private System.Windows.Forms.ToolStripLabel freeTableBytes;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
+        private System.Windows.Forms.ToolStripButton reset;
     }
 }

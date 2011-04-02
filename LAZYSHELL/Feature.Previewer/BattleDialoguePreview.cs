@@ -44,9 +44,12 @@ namespace LAZYSHELL
         }
         public int[] GetPreview(params object[] args)
         {
-            return GetPreview((FontCharacter[])args[0], (int[])args[1], (char[])args[2], (bool)args[3]);
+            if (args.Length == 5)
+                return GetPreview((FontCharacter[])args[0], (int[])args[1], (char[])args[2], (bool)args[3], (bool)args[4]);
+            else
+                return GetPreview((FontCharacter[])args[0], (int[])args[1], (char[])args[2], (bool)args[3], true);
         }
-        public int[] GetPreview(FontCharacter[] fontCharacters, int[] palette, char[] dlg, bool menu)
+        public int[] GetPreview(FontCharacter[] fontCharacters, int[] palette, char[] dlg, bool menu, bool allowclipping)
         {
             this.fontCharacters = fontCharacters;
             this.palette = palette;
@@ -72,7 +75,10 @@ namespace LAZYSHELL
                         return pixels;
                     }
 
-                    width = fontCharacters[dlg[charPtr] - 32].Width;
+                    if (!allowclipping)
+                        width = MinimizeWidth(fontCharacters[dlg[charPtr] - 32]);
+                    else
+                        width = fontCharacters[dlg[charPtr] - 32].Width;
                     maxWidth = fontCharacters[dlg[charPtr] - 32].MaxWidth;
                     font = fontCharacters[dlg[charPtr] - 32].GetCharacterPixels(palette);
 
@@ -123,6 +129,13 @@ namespace LAZYSHELL
                     }
                 }
             }
+        }
+        private byte MinimizeWidth(FontCharacter fontCharacter)
+        {
+            byte width = fontCharacter.Width;
+            if (width <= fontCharacter.GetRightMostPixel(palette))
+                width = (byte)(fontCharacter.GetRightMostPixel(palette) + 1);
+            return width;
         }
     }
 }

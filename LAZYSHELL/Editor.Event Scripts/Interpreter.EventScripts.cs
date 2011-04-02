@@ -26,10 +26,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Obj: Layer 2, ",			// 0x0E
             "Obj: Layer 3, ",			// 0x0F
 			
-            "Obj: Mem 00:70A8, ",			// 0x10
-            "Obj: Mem 00:70A9, ",			// 0x11
-            "Obj: Mem 00:70AA, ",			// 0x12
-            "Obj: Mem 00:70AB, ",			// 0x13
+            "Obj: Mem $70A8, ",			// 0x10
+            "Obj: Mem $70A9, ",			// 0x11
+            "Obj: Mem $70AA, ",			// 0x12
+            "Obj: Mem $70AB, ",			// 0x13
             "Obj: NPC #0, ",			// 0x14
             "Obj: NPC #1, ",			// 0x15
             "Obj: NPC #2, ",			// 0x16
@@ -67,8 +67,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Joypad (reset @ return) disable: ",			// 0x34
             "Joypad disable: ",			// 0x35
             "Activate party member: ",			// 0x36
-            "Mem 00:7000 = party capacity",			// 0x37
-            "Mem 00:7000 = character @ slot: ",			// 0x38
+            "Mem $7000 = party capacity",			// 0x37
+            "Mem $7000 = character @ slot: ",			// 0x38
             "If Mario on top of obj: ",			// 0x39
             "If distance between obj: ",			// 0x3A
             "If distance between obj: ",			// 0x3B
@@ -86,7 +86,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "UNKCMD 0x46",			// 0x46
             "UNKCMD 0x47",			// 0x47
             "UNKCMD 0x48",			// 0x48
-            "Engage battle, pack @ 00:700E",			// 0x49
+            "Engage battle, pack @ $700E",			// 0x49
             "Engage battle, pack: ",			// 0x4A
             "Open, world map point: ",			// 0x4B
             "Open, shop menu: ",			// 0x4C
@@ -99,10 +99,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Add to coins: ",			// 0x52
             "Add to frog coins: ",			// 0x53
             "Equip to character: ",			// 0x54
-            "Mem 00:7000 = open item slots",			// 0x55
-            "HP -= mem 00:7000, character: ",			// 0x56
-            "FP -= mem 00:7000",			// 0x57
-            "Mem 00:7000 = current FP",			// 0x58
+            "Mem $7000 = open item slots",			// 0x55
+            "HP -= mem $7000, character: ",			// 0x56
+            "FP -= mem $7000",			// 0x57
+            "Mem $7000 = current FP",			// 0x58
             "UNKCMD 0x59",			// 0x59
             "UNKCMD 0x5A",			// 0x5A
             "UNKCMD 0x5B",			// 0x5B
@@ -112,9 +112,9 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "UNKCMD 0x5F",			// 0x5F
 			
             "Run dlg: ",			// 0x60
-            "Run dlg: mem 00:7000",			// 0x61
+            "Run dlg: mem $7000",			// 0x61
             "Run timed dlg: ",			// 0x62
-            "Append to dlg: mem 00:7000, ",			// 0x63
+            "Append to dlg: mem $7000, ",			// 0x63
             "Close dlg",			// 0x64
             "Un-sync dlg",			// 0x65
             "If dlg option B selected, jump to $",			// 0x66
@@ -179,52 +179,52 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Playback fade-out sound, duration: ",			// 0x9E
             "UNKCMD 0x9F",			// 0x9F
 			
-            "Set mem 00:",			// 0xA0
-            "Set mem 00:",			// 0xA1
-            "Set mem 00:",			// 0xA2
-            "Set mem @ mem 00:7000",			// 0xA3
-            "Clear mem 00:",			// 0xA4
-            "Clear mem 00:",			// 0xA5
-            "Clear mem 00:",			// 0xA6
-            "Clear mem @ mem 00:7000",			// 0xA7
-            "Mem 00:",			// 0xA8
-            "Mem 00:",			// 0xA9
-            "Mem 00:",			// 0xAA
-            "Mem 00:",			// 0xAB
-            "Mem 00:7000 = ",			// 0xAC
-            "Mem 00:7000 += ",			// 0xAD
-            "Mem 00:7000 increment",			// 0xAE
-            "Mem 00:7000 increment",			// 0xAF
+            "Set mem $",			// 0xA0
+            "Set mem $",			// 0xA1
+            "Set mem $",			// 0xA2
+            "Set mem @ mem $7000",			// 0xA3
+            "Clear mem $",			// 0xA4
+            "Clear mem $",			// 0xA5
+            "Clear mem $",			// 0xA6
+            "Clear mem @ mem $7000",			// 0xA7
+            "mem $",			// 0xA8
+            "mem $",			// 0xA9
+            "mem $",			// 0xAA
+            "mem $",			// 0xAB
+            "Mem $7000 = ",			// 0xAC
+            "Mem $7000 += ",			// 0xAD
+            "Mem $7000 increment",			// 0xAE
+            "Mem $7000 increment",			// 0xAF
 			
-            "Mem 00:",			// 0xB0
-            "Mem 00:",			// 0xB1
-            "Mem 00:",			// 0xB2
-            "Mem 00:",			// 0xB3
-            "Mem 00:7000 = mem 00:",			// 0xB4
-            "Mem 00:",			// 0xB5
-            "Mem 00:7000 = random # less than: ",			// 0xB6
-            "Mem 00:",			// 0xB7
-            "Mem 00:7000 += mem 00:",			// 0xB8
-            "Mem 00:7000 -= mem 00:",			// 0xB9
-            "Mem 00:7000 = mem 00:",			// 0xBA
-            "Mem 00:",			// 0xBB
-            "Mem 00:",			// 0xBC
-            "Mem 00:",			// 0xBD
+            "mem $",			// 0xB0
+            "mem $",			// 0xB1
+            "mem $",			// 0xB2
+            "mem $",			// 0xB3
+            "Mem $7000 = mem $",			// 0xB4
+            "mem $",			// 0xB5
+            "Mem $7000 = random # less than: ",			// 0xB6
+            "mem $",			// 0xB7
+            "Mem $7000 += mem $",			// 0xB8
+            "Mem $7000 -= mem $",			// 0xB9
+            "Mem $7000 = mem $",			// 0xBA
+            "mem $",			// 0xBB
+            "mem $",			// 0xBC
+            "mem $",			// 0xBD
             "UNKCMD 0xBE",			// 0xBE
             "UNKCMD 0xBF",			// 0xBF
 			
-            "Mem compare 00:7000 to ",			// 0xC0
-            "Mem compare 00:7000 to mem 00:",			// 0xC1
+            "Mem compare $7000 to ",			// 0xC0
+            "Mem compare $7000 to mem $",			// 0xC1
             "Mem compare 00:",			// 0xC2
-            "Mem 00:7000 = current level",			// 0xC3
-            "Mem 00:7000 = X coord of obj: ",			// 0xC4
-            "Mem 00:7000 = Y coord of obj: ",			// 0xC5
-            "Mem 00:7000 = Z coord of obj: ",			// 0xC6
+            "Mem $7000 = current level",			// 0xC3
+            "Mem $7000 = X coord of obj: ",			// 0xC4
+            "Mem $7000 = Y coord of obj: ",			// 0xC5
+            "Mem $7000 = Z coord of obj: ",			// 0xC6
             "UNKCMD 0xC7",			// 0xC7
             "UNKCMD 0xC8",			// 0xC8
             "UNKCMD 0xC9",			// 0xC9
-            "Mem 00:7000 = held joypad register",			// 0xCA
-            "Mem 00:7000 = tapped joypad register",			// 0xCB
+            "Mem $7000 = held joypad register",			// 0xCA
+            "Mem $7000 = tapped joypad register",			// 0xCB
             "UNKCMD 0xCC",			// 0xCC
             "UNKCMD 0xCD",			// 0xCD
             "UNKCMD 0xCE",			// 0xCE
@@ -238,23 +238,23 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "UNKCMD 0xD5",			// 0xD5
             "Obj mem = 00:",			// 0xD6
             "Loop end",			// 0xD7
-            "If set, mem 00:",			// 0xD8
-            "If set, mem 00:",			// 0xD9
-            "If set, mem 00:",			// 0xDA
-            "If mem 00:7000 bit(s) set, jump to $",			// 0xDB
-            "If clear, mem 00:",			// 0xDC
-            "If clear, mem 00:",			// 0xDD
-            "If clear, mem 00:",			// 0xDE
-            "If mem 00:7000 bit(s) clear, jump to $",			// 0xDF
+            "If set, mem $",			// 0xD8
+            "If set, mem $",			// 0xD9
+            "If set, mem $",			// 0xDA
+            "If mem $7000 bit(s) set, jump to $",			// 0xDB
+            "If clear, mem $",			// 0xDC
+            "If clear, mem $",			// 0xDD
+            "If clear, mem $",			// 0xDE
+            "If mem $7000 bit(s) clear, jump to $",			// 0xDF
 			
-            "If mem 00:",			// 0xE0
-            "If mem 00:",			// 0xE1
-            "If mem 00:7000 = ",			// 0xE2
-            "If mem 00:7000 != ",			// 0xE3
-            "If mem 00:",			// 0xE4
-            "If mem 00:",			// 0xE5
-            "If mem 00:7000 set, no bits: ",			// 0xE6
-            "If mem 00:7000 set, any bits: ",			// 0xE7
+            "If mem $",			// 0xE0
+            "If mem $",			// 0xE1
+            "If mem $7000 = ",			// 0xE2
+            "If mem $7000 != ",			// 0xE3
+            "If mem $",			// 0xE4
+            "If mem $",			// 0xE5
+            "If mem $7000 set, no bits: ",			// 0xE6
+            "If mem $7000 set, any bits: ",			// 0xE7
             "If random # > 128, jump to $",			// 0xE8
             "If random # > 66, jump to $",			// 0xE9
             "If equal to zero, jump to $",			// 0xEA
@@ -268,10 +268,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Delay, frames (16-bit): ",			// 0xF1
             "Set obj: ",			// 0xF2
             "Set obj: ",			// 0xF3
-            "Set obj: mem 00:70A8, presence = true (current level)",			// 0xF4
-            "Set obj: mem 00:70A8, presence = false (current level)",			// 0xF4
-            "Set obj: mem 00:70A8, event trigger = true",			// 0xF6
-            "Set obj: mem 00:70A8, event trigger = false",			// 0xF7
+            "Set obj: mem $70A8, presence = true (current level)",			// 0xF4
+            "Set obj: mem $70A8, presence = false (current level)",			// 0xF4
+            "Set obj: mem $70A8, event trigger = true",			// 0xF6
+            "Set obj: mem $70A8, event trigger = false",			// 0xF7
             "If obj: ",			// 0xF8
             "Jump to script start",			// 0xF9
             "Jump to script start",			// 0xFA
@@ -369,28 +369,28 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Run moleville mountain",			// 0x4E
             "Run moleville mountain intro",			// 0x4F
 			
-            "Store mem 00:70A7 to item inventory",			// 0x50
-            "Store mem 00:70A7 to equipment inventory",			// 0x51
-            "Coins += mem 00:7000",			// 0x52
-            "Coins -= mem 00:7000",			// 0x53
-            "Frog coins += mem 00:7000",			// 0x54
-            "Frog coins -= mem 00:7000",			// 0x55
-            "Current FP += mem 00:7000",			// 0x56
-            "Maximum FP += mem 00:7000",			// 0x57
-            "Mem 00:7000 = quantity of item: ",			// 0x58
-            "Mem 00:7000 = coins",			// 0x59
-            "Mem 00:7000 = frog coins",			// 0x5A
+            "Store mem $70A7 to item inventory",			// 0x50
+            "Store mem $70A7 to equipment inventory",			// 0x51
+            "Coins += mem $7000",			// 0x52
+            "Coins -= mem $7000",			// 0x53
+            "Frog coins += mem $7000",			// 0x54
+            "Frog coins -= mem $7000",			// 0x55
+            "Current FP += mem $7000",			// 0x56
+            "Maximum FP += mem $7000",			// 0x57
+            "Mem $7000 = quantity of item: ",			// 0x58
+            "Mem $7000 = coins",			// 0x59
+            "Mem $7000 = frog coins",			// 0x5A
             "Restore all HP",			// 0x5B
             "Restore all FP",			// 0x5C
-            "Mem 00:7000 = equipment of character: ",			// 0x5D
-            "Mem 00:70A7 = quantity in inventory of item @ mem 00:7000",			// 0x5E
+            "Mem $7000 = equipment of character: ",			// 0x5D
+            "Mem $70A7 = quantity of item @ mem $7000",			// 0x5E
             "UNKCMD 0xFD Option 0x5F",			// 0x5F
 			
             "Pause script, resume on next dlg page",			// 0x60
             "Pause script, resume on next dlg page",			// 0x61
             "UNKCMD 0xFD Option 0x62",			// 0x62
             "UNKCMD 0xFD Option 0x63",			// 0x63
-            "Experience packet = mem 00:7000",			// 0x64
+            "Experience packet = mem $7000",			// 0x64
             "Open, level-up bonus",			// 0x65
             "Open, character intro title: ",			// 0x66
             "Open, ending credits",			// 0x67
@@ -466,19 +466,19 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Mem set, 00:",			// 0xA9
             "Mem set, 00:",			// 0xAA
             "UNKCMD 0xFD Option 0xAB",			// 0xAB
-            "Mem 00:7000 = mem 7F:",			// 0xAC
+            "Mem $7000 = mem 7F:",			// 0xAC
             "UNKCMD 0xFD Option 0xAD",			// 0xAD
             "UNKCMD 0xFD Option 0xAE",			// 0xAE
             "UNKCMD 0xFD Option 0xAF",			// 0xAF
 			
-            "Mem 00:7000 isolate bits = ",			// 0xB0
-            "Mem 00:7000 set bits = ",			// 0xB1
-            "Mem 00:7000 xor bits = ",			// 0xB2
-            "Mem 00:7000 isolate bits = mem 00:",			// 0xB3
-            "Mem 00:7000 set bits = mem 00:",			// 0xB4
-            "Mem 00:7000 xor bits = mem 00:",			// 0xB5
-            "Mem 00:",			// 0xB6
-            "Generate random # less than mem 00:",			// 0xB7
+            "Mem $7000 isolate bits = ",			// 0xB0
+            "Mem $7000 set bits = ",			// 0xB1
+            "Mem $7000 xor bits = ",			// 0xB2
+            "Mem $7000 isolate bits = mem $",			// 0xB3
+            "Mem $7000 set bits = mem $",			// 0xB4
+            "Mem $7000 xor bits = mem $",			// 0xB5
+            "mem $",			// 0xB6
+            "Generate random # less than mem $",			// 0xB7
             "UNKCMD 0xFD Option 0xB8",			// 0xB8
             "UNKCMD 0xFD Option 0xB9",			// 0xB9
             "UNKCMD 0xFD Option 0xBA",			// 0xBA
@@ -603,10 +603,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Layer 2",
             "Layer 3",
 
-            "Mem 00:70A8",
-            "Mem 00:70A9",
-            "Mem 00:70AA",
-            "Mem 00:70AB",
+            "Mem $70A8",
+            "Mem $70A9",
+            "Mem $70AA",
+            "Mem $70AB",
             "NPC #0",
             "NPC #1",
             "NPC #2",
@@ -730,18 +730,18 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     break;
                 case 0x50:
                 case 0x51:
-                    sb.Append("[" + esc.Option.ToString() + "] \"" + TrimTailSpaces(model.ItemNames.GetNameByNum(esc.Option)) + "\"");
+                    sb.Append("[" + esc.Option.ToString() + "] \"" + TrimTailSpaces(Model.ItemNames.GetNameByNum(esc.Option)) + "\"");
                     break;
                 case 0x54:
                     sb.Append(CharacterNames[esc.Option] +
-                        ", with item: [" + esc.EventData[2] + "] \"" + TrimTailSpaces(model.ItemNames.GetNameByNum(esc.EventData[2])) + "\"");
+                        ", with item: [" + esc.EventData[2] + "] \"" + TrimTailSpaces(Model.ItemNames.GetNameByNum(esc.EventData[2])) + "\"");
                     break;
                 case 0x4E:
                     switch (esc.Option)
                     {
                         case 2: a = ""; break;
                         case 3: a = ""; break;
-                        case 5: a = ": toss item: " + model.ItemNames.GetNameByNum(esc.EventData[2]); break;
+                        case 5: a = ": toss item: " + Model.ItemNames.GetNameByNum(esc.EventData[2]); break;
                         case 7: a = ": " + TutorialNames[esc.EventData[2]]; break;
                         case 16: a = ": " + EventNames[esc.EventData[2]]; break;
                         default: a = ""; break;
@@ -757,7 +757,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     c = (esc.EventData[3] & 0x80) == 0x80 ? ", paper BG = true" : ", paper BG = false";
                     d = (esc.EventData[3] & 0x40) == 0x40 ? ", multi-line = true" : ", multi-line = false";
                     sb.Append("[" + (Bits.GetShort(esc.EventData, 1) & 0xFFF).ToString() + "] \"" +
-                        model.Dialogues[Bits.GetShort(esc.EventData, 1) & 0xFFF].GetDialogueStub(true) + "\"" +
+                        Model.Dialogues[Bits.GetShort(esc.EventData, 1) & 0xFFF].GetDialogueStub(true) + "\"" +
                         a + b + c + d +
                         ", align above obj: " + ObjectNames[esc.EventData[3] & 0x3F]);
                     break;
@@ -778,7 +778,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                         default: b = ", duration: forever"; break;
                     }
                     sb.Append("[" + (Bits.GetShort(esc.EventData, 1) & 0xFFF).ToString() + "] \"" +
-                        model.Dialogues[Bits.GetShort(esc.EventData, 1) & 0xFFF].GetDialogueStub(true) + "\"" +
+                        Model.Dialogues[Bits.GetShort(esc.EventData, 1) & 0xFFF].GetDialogueStub(true) + "\"" +
                         a + b);
                     break;
                 case 0x63:
@@ -808,7 +808,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0x6A:
                 case 0x6B:
                     sb.Append((Bits.GetShort(esc.EventData, 1) & 0x1FF).ToString());
-                    sb.Append(", mod # = " + ((esc.EventData[2] >> 1) & 0x3F).ToString());
+                    sb.Append(", mod # = " + ((esc.EventData[2] & 0x3F) >> 1).ToString());
                     sb.Append(", permanent = " + ((esc.EventData[2] & 0x80) == 0x80 ? "true" : "false"));
                     break;
                 case 0x72:
@@ -945,7 +945,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     sb.Append((esc.Option + 0x70A0).ToString("X4"));
                     break;
                 case 0xB5:
-                    sb.Append((esc.Option + 0x70A0).ToString("X4") + " = 00:7000");
+                    sb.Append((esc.Option + 0x70A0).ToString("X4") + " = $7000");
                     break;
                 case 0xB6:
                     sb.Append(Bits.GetShort(esc.EventData, 1).ToString());
@@ -965,14 +965,14 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                         Bits.GetShort(esc.EventData, 2).ToString());
                     break;
                 case 0xBB:
-                    sb.Append(((esc.Option * 2) + 0x7000).ToString("X4") + " = mem 00:7000");
+                    sb.Append(((esc.Option * 2) + 0x7000).ToString("X4") + " = mem $7000");
                     break;
                 case 0xBC:
-                    sb.Append(((esc.Option * 2) + 0x7000).ToString("X4") + " = mem 00:" +
+                    sb.Append(((esc.Option * 2) + 0x7000).ToString("X4") + " = mem $" +
                     ((esc.EventData[2] * 2) + 0x7000).ToString("X4"));
                     break;
                 case 0xBD:
-                    sb.Append(((esc.Option * 2) + 0x7000).ToString("X4") + " <=> mem 00:" +
+                    sb.Append(((esc.Option * 2) + 0x7000).ToString("X4") + " <=> mem $" +
                         ((esc.EventData[2] * 2) + 0x7000).ToString("X4"));
                     break;
                 case 0xC4:
@@ -1138,7 +1138,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     sb.Append(Lists.Numerize(Lists.MusicNames, esc.EventData[2]));
                     break;
                 case 0x58:
-                    sb.Append("[" + esc.EventData[2].ToString() + "] \"" + TrimTailSpaces(model.ItemNames.GetNameByNum(esc.EventData[2])) + "\"");
+                    sb.Append("[" + esc.EventData[2].ToString() + "] \"" + TrimTailSpaces(Model.ItemNames.GetNameByNum(esc.EventData[2])) + "\"");
                     break;
                 case 0x5D:
                     switch (esc.EventData[3] & 0x03)

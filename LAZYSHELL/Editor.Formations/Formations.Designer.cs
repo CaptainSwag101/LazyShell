@@ -48,7 +48,6 @@
             this.formationMusic = new System.Windows.Forms.ComboBox();
             this.label150 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
             this.panel36 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.formationName8 = new System.Windows.Forms.ComboBox();
@@ -103,9 +102,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.formationNameList = new System.Windows.Forms.ToolStripComboBox();
             this.formationNum = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.searchFormationNames = new System.Windows.Forms.ToolStripButton();
             this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchFormationNames = new System.Windows.Forms.ToolStripButton();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel147.SuspendLayout();
@@ -119,7 +117,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.formationUnknown)).BeginInit();
             this.panel74.SuspendLayout();
             this.panel82.SuspendLayout();
-            this.panel12.SuspendLayout();
             this.panel36.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel51.SuspendLayout();
@@ -164,7 +161,7 @@
             this.panel147.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel147.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel147.Controls.Add(this.panel146);
-            this.panel147.Location = new System.Drawing.Point(12, 28);
+            this.panel147.Location = new System.Drawing.Point(1, 28);
             this.panel147.Name = "panel147";
             this.panel147.Size = new System.Drawing.Size(260, 241);
             this.panel147.TabIndex = 556;
@@ -237,10 +234,10 @@
             // 
             // panel143
             // 
-            this.panel143.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel143.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel143.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel143.Controls.Add(this.panel52);
-            this.panel143.Location = new System.Drawing.Point(278, 211);
+            this.panel143.Location = new System.Drawing.Point(263, 211);
             this.panel143.Name = "panel143";
             this.panel143.Size = new System.Drawing.Size(115, 58);
             this.panel143.TabIndex = 555;
@@ -331,7 +328,7 @@
             this.panel74.Controls.Add(this.musicTrack);
             this.panel74.Location = new System.Drawing.Point(71, 37);
             this.panel74.Name = "panel74";
-            this.panel74.Size = new System.Drawing.Size(136, 17);
+            this.panel74.Size = new System.Drawing.Size(140, 17);
             this.panel74.TabIndex = 80;
             // 
             // musicTrack
@@ -343,7 +340,7 @@
             this.musicTrack.IntegralHeight = false;
             this.musicTrack.Location = new System.Drawing.Point(-2, -2);
             this.musicTrack.Name = "musicTrack";
-            this.musicTrack.Size = new System.Drawing.Size(139, 21);
+            this.musicTrack.Size = new System.Drawing.Size(143, 21);
             this.musicTrack.TabIndex = 80;
             this.musicTrack.SelectedIndexChanged += new System.EventHandler(this.musicTrack_SelectedIndexChanged);
             // 
@@ -353,7 +350,7 @@
             this.panel82.Controls.Add(this.formationMusic);
             this.panel82.Location = new System.Drawing.Point(71, 19);
             this.panel82.Name = "panel82";
-            this.panel82.Size = new System.Drawing.Size(136, 17);
+            this.panel82.Size = new System.Drawing.Size(140, 17);
             this.panel82.TabIndex = 80;
             // 
             // formationMusic
@@ -375,7 +372,7 @@
             "{CURRENT}"});
             this.formationMusic.Location = new System.Drawing.Point(-2, -2);
             this.formationMusic.Name = "formationMusic";
-            this.formationMusic.Size = new System.Drawing.Size(139, 21);
+            this.formationMusic.Size = new System.Drawing.Size(143, 21);
             this.formationMusic.TabIndex = 80;
             this.formationMusic.SelectedIndexChanged += new System.EventHandler(this.formationMusic_SelectedIndexChanged);
             // 
@@ -399,19 +396,10 @@
             this.label16.TabIndex = 500;
             this.label16.Text = "Music Index";
             // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel12.Controls.Add(this.panel36);
-            this.panel12.Location = new System.Drawing.Point(278, 28);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(330, 166);
-            this.panel12.TabIndex = 554;
-            // 
             // panel36
             // 
             this.panel36.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel36.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel36.Controls.Add(this.panel6);
             this.panel36.Controls.Add(this.panel51);
             this.panel36.Controls.Add(this.panel75);
@@ -452,9 +440,9 @@
             this.panel36.Controls.Add(this.formationCoordX7);
             this.panel36.Controls.Add(this.formationCoordX6);
             this.panel36.Controls.Add(this.formationCoordX4);
-            this.panel36.Location = new System.Drawing.Point(0, 0);
+            this.panel36.Location = new System.Drawing.Point(263, 28);
             this.panel36.Name = "panel36";
-            this.panel36.Size = new System.Drawing.Size(326, 162);
+            this.panel36.Size = new System.Drawing.Size(331, 166);
             this.panel36.TabIndex = 45;
             // 
             // panel6
@@ -467,9 +455,9 @@
             // 
             // formationName8
             // 
-            this.formationName8.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.formationName8.BackColor = System.Drawing.SystemColors.ControlDark;
             this.formationName8.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.formationName8.DropDownHeight = 418;
+            this.formationName8.DropDownHeight = 317;
             this.formationName8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formationName8.DropDownWidth = 142;
             this.formationName8.IntegralHeight = false;
@@ -491,9 +479,9 @@
             // 
             // formationName7
             // 
-            this.formationName7.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.formationName7.BackColor = System.Drawing.SystemColors.ControlDark;
             this.formationName7.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.formationName7.DropDownHeight = 418;
+            this.formationName7.DropDownHeight = 317;
             this.formationName7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formationName7.DropDownWidth = 142;
             this.formationName7.IntegralHeight = false;
@@ -515,9 +503,9 @@
             // 
             // formationName6
             // 
-            this.formationName6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.formationName6.BackColor = System.Drawing.SystemColors.ControlDark;
             this.formationName6.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.formationName6.DropDownHeight = 418;
+            this.formationName6.DropDownHeight = 317;
             this.formationName6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formationName6.DropDownWidth = 142;
             this.formationName6.IntegralHeight = false;
@@ -539,9 +527,9 @@
             // 
             // formationName5
             // 
-            this.formationName5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.formationName5.BackColor = System.Drawing.SystemColors.ControlDark;
             this.formationName5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.formationName5.DropDownHeight = 418;
+            this.formationName5.DropDownHeight = 317;
             this.formationName5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formationName5.DropDownWidth = 142;
             this.formationName5.IntegralHeight = false;
@@ -563,9 +551,9 @@
             // 
             // formationName4
             // 
-            this.formationName4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.formationName4.BackColor = System.Drawing.SystemColors.ControlDark;
             this.formationName4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.formationName4.DropDownHeight = 418;
+            this.formationName4.DropDownHeight = 317;
             this.formationName4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formationName4.DropDownWidth = 142;
             this.formationName4.IntegralHeight = false;
@@ -587,9 +575,9 @@
             // 
             // formationName3
             // 
-            this.formationName3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.formationName3.BackColor = System.Drawing.SystemColors.ControlDark;
             this.formationName3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.formationName3.DropDownHeight = 418;
+            this.formationName3.DropDownHeight = 317;
             this.formationName3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formationName3.DropDownWidth = 142;
             this.formationName3.IntegralHeight = false;
@@ -611,9 +599,9 @@
             // 
             // formationName2
             // 
-            this.formationName2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.formationName2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.formationName2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.formationName2.DropDownHeight = 418;
+            this.formationName2.DropDownHeight = 317;
             this.formationName2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formationName2.DropDownWidth = 142;
             this.formationName2.IntegralHeight = false;
@@ -635,9 +623,9 @@
             // 
             // formationName1
             // 
-            this.formationName1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.formationName1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.formationName1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.formationName1.DropDownHeight = 418;
+            this.formationName1.DropDownHeight = 317;
             this.formationName1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formationName1.DropDownWidth = 142;
             this.formationName1.IntegralHeight = false;
@@ -722,7 +710,7 @@
             this.label49.Location = new System.Drawing.Point(290, 0);
             this.label49.Name = "label49";
             this.label49.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label49.Size = new System.Drawing.Size(36, 17);
+            this.label49.Size = new System.Drawing.Size(37, 17);
             this.label49.TabIndex = 523;
             this.label49.Text = "HIDE";
             this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -882,7 +870,7 @@
             this.panelFormationHide.Controls.Add(this.checkedListBox2);
             this.panelFormationHide.Location = new System.Drawing.Point(290, 19);
             this.panelFormationHide.Name = "panelFormationHide";
-            this.panelFormationHide.Size = new System.Drawing.Size(36, 143);
+            this.panelFormationHide.Size = new System.Drawing.Size(37, 143);
             this.panelFormationHide.TabIndex = 516;
             // 
             // checkedListBox2
@@ -1152,13 +1140,12 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.formationNameList,
             this.formationNum,
-            this.toolStripSeparator2,
-            this.searchFormationNames,
-            this.nameTextBox});
+            this.nameTextBox,
+            this.searchFormationNames});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(621, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(595, 25);
             this.toolStrip1.TabIndex = 561;
             // 
             // formationNameList
@@ -1172,7 +1159,7 @@
             this.formationNameList.ForeColor = System.Drawing.SystemColors.Control;
             this.formationNameList.IntegralHeight = false;
             this.formationNameList.Name = "formationNameList";
-            this.formationNameList.Size = new System.Drawing.Size(265, 25);
+            this.formationNameList.Size = new System.Drawing.Size(254, 25);
             this.formationNameList.SelectedIndexChanged += new System.EventHandler(this.formationNameList_SelectedIndexChanged);
             // 
             // formationNum
@@ -1182,7 +1169,7 @@
             this.formationNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formationNum.ForeColor = System.Drawing.SystemColors.Control;
             this.formationNum.Hexadecimal = false;
-            this.formationNum.Location = new System.Drawing.Point(274, 1);
+            this.formationNum.Location = new System.Drawing.Point(263, 1);
             this.formationNum.Maximum = new decimal(new int[] {
             511,
             0,
@@ -1203,10 +1190,11 @@
             0});
             this.formationNum.ValueChanged += new System.EventHandler(this.formationNum_ValueChanged);
             // 
-            // toolStripSeparator2
+            // nameTextBox
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.nameTextBox.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(245, 25);
             // 
             // searchFormationNames
             // 
@@ -1216,28 +1204,20 @@
             this.searchFormationNames.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.searchFormationNames.Name = "searchFormationNames";
             this.searchFormationNames.Size = new System.Drawing.Size(23, 22);
-            this.searchFormationNames.Text = "Search for effect";
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(250, 25);
-            this.nameTextBox.Text = "Search...";
-            this.nameTextBox.Visible = false;
+            this.searchFormationNames.Text = "Search for formation";
             // 
             // panel7
             // 
-            this.panel7.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel7.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel7.Controls.Add(this.label1);
             this.panel7.Controls.Add(this.label16);
             this.panel7.Controls.Add(this.label150);
             this.panel7.Controls.Add(this.panel82);
             this.panel7.Controls.Add(this.panel74);
-            this.panel7.Location = new System.Drawing.Point(399, 211);
+            this.panel7.Location = new System.Drawing.Point(380, 211);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(210, 58);
+            this.panel7.Size = new System.Drawing.Size(214, 58);
             this.panel7.TabIndex = 562;
             // 
             // label1
@@ -1248,7 +1228,7 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label1.Size = new System.Drawing.Size(206, 17);
+            this.label1.Size = new System.Drawing.Size(210, 17);
             this.label1.TabIndex = 519;
             this.label1.Text = "FORMATION MUSIC";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1257,11 +1237,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 281);
+            this.ClientSize = new System.Drawing.Size(595, 270);
             this.ControlBox = false;
+            this.Controls.Add(this.panel36);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel7);
-            this.Controls.Add(this.panel12);
             this.Controls.Add(this.panel143);
             this.Controls.Add(this.panel147);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1282,7 +1262,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.formationUnknown)).EndInit();
             this.panel74.ResumeLayout(false);
             this.panel82.ResumeLayout(false);
-            this.panel12.ResumeLayout(false);
             this.panel36.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel51.ResumeLayout(false);
@@ -1348,7 +1327,6 @@
         private System.Windows.Forms.Label label176;
         private System.Windows.Forms.Label label150;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Panel panel36;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ComboBox formationName8;
@@ -1406,7 +1384,6 @@
         private System.Windows.Forms.ToolStripTextBox nameTextBox;
         private System.Windows.Forms.Panel panel7;
         private ToolStripNumericUpDown formationNum;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Label label1;
     }
 }

@@ -29,7 +29,7 @@ namespace LAZYSHELL.Patches
                     ApplyIPSRecord(record, data);
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -48,7 +48,7 @@ namespace LAZYSHELL.Patches
                 }
                 verified = true;
             }
-            catch (Exception ex)
+            catch
             {
                 verified = false;
             }

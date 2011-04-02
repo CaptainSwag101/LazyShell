@@ -16,8 +16,7 @@ namespace LAZYSHELL
     public partial class Notes : Form
     {
         #region Variables
-        private Model model = State.Instance.Model;
-        private Settings settings = Settings.Default;
+                private Settings settings = Settings.Default;
         private ArrayList currentIndexes;
         private NotesDB.Index currentIndex;
         private State state = State.Instance;
@@ -32,7 +31,7 @@ namespace LAZYSHELL
         // constructor
         public Notes()
         {
-            this.model.Notes = notes;
+            Model.Notes = notes;
             InitializeComponent();
             if (settings.LoadNotes)
             {
@@ -185,7 +184,7 @@ namespace LAZYSHELL
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = settings.NotePathCustom;
             openFileDialog.Title = "Open existing notes database...";
-            openFileDialog.FileName = model.GetFileNameWithoutPath() + " - notes.lsnotes";
+            openFileDialog.FileName = Model.GetFileNameWithoutPath() + " - notes.lsnotes";
             openFileDialog.Filter = "Notes database (*.lsnotes)|*.lsnotes";
             openFileDialog.FilterIndex = 0;
             openFileDialog.RestoreDirectory = true;
@@ -199,7 +198,7 @@ namespace LAZYSHELL
             {
                 notes = (NotesDB)b.Deserialize(s);
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("This is not a valid notes database file.", "LAZY SHELL",
                 MessageBoxButtons.OK);
@@ -233,7 +232,7 @@ namespace LAZYSHELL
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = settings.NotePathCustom;
             saveFileDialog.Title = "Create new notes database...";
-            saveFileDialog.FileName = model.GetFileNameWithoutPath() + " - notes.lsnotes";
+            saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - notes.lsnotes";
             saveFileDialog.Filter = "Notes database (*.lsnotes)|*.lsnotes";
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.RestoreDirectory = true;
@@ -266,7 +265,7 @@ namespace LAZYSHELL
         }
         private void SaveNewNotes(string path)
         {
-            model.Notes = notes;
+            Model.Notes = notes;
 
             Stream s = File.Create(path);
             BinaryFormatter b = new BinaryFormatter();
@@ -350,103 +349,103 @@ namespace LAZYSHELL
         {
             if (elementType.SelectedIndex == 1)
             {
-                if (model.Program.Levels == null || !model.Program.Levels.Visible)
-                    model.Program.CreateLevelsWindow();
-                model.Program.Levels.LevelNum.Value = indexNumber.Value;
-                model.Program.Levels.BringToFront();
+                if (Model.Program.Levels == null || !Model.Program.Levels.Visible)
+                    Model.Program.CreateLevelsWindow();
+                Model.Program.Levels.LevelNum.Value = indexNumber.Value;
+                Model.Program.Levels.BringToFront();
             }
             if (elementType.SelectedIndex == 4)
             {
-                if (model.Program.EventScripts == null || !model.Program.EventScripts.Visible)
-                    model.Program.CreateEventScriptsWindow();
-                model.Program.EventScripts.EventName.SelectedIndex = 0;
-                model.Program.EventScripts.EventNum.Value = indexNumber.Value;
-                model.Program.EventScripts.BringToFront();
+                if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
+                    Model.Program.CreateEventScriptsWindow();
+                Model.Program.EventScripts.EventName.SelectedIndex = 0;
+                Model.Program.EventScripts.EventNum.Value = indexNumber.Value;
+                Model.Program.EventScripts.BringToFront();
             }
             if (elementType.SelectedIndex == 5)
             {
-                if (model.Program.EventScripts == null || !model.Program.EventScripts.Visible)
-                    model.Program.CreateEventScriptsWindow();
-                model.Program.EventScripts.EventName.SelectedIndex = 1;
-                model.Program.EventScripts.EventNum.Value = indexNumber.Value;
-                model.Program.EventScripts.BringToFront();
+                if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
+                    Model.Program.CreateEventScriptsWindow();
+                Model.Program.EventScripts.EventName.SelectedIndex = 1;
+                Model.Program.EventScripts.EventNum.Value = indexNumber.Value;
+                Model.Program.EventScripts.BringToFront();
             }
             if (elementType.SelectedIndex == 6)
             {
-                if (model.Program.BattleScripts == null || !model.Program.BattleScripts.Visible)
-                    model.Program.CreateBattleScriptsWindow();
-                model.Program.BattleScripts.index = (int)indexNumber.Value;
-                model.Program.BattleScripts.BringToFront();
+                if (Model.Program.Monsters == null || !Model.Program.Monsters.Visible)
+                    Model.Program.CreateMonstersWindow();
+                Model.Program.Monsters.Index = (int)indexNumber.Value;
+                Model.Program.Monsters.BringToFront();
             }
             if (elementType.SelectedIndex == 10)
             {
-                if (model.Program.Sprites == null || !model.Program.Sprites.Visible)
-                    model.Program.CreateSpritesWindow();
-                model.Program.Sprites.index = (int)indexNumber.Value;
-                model.Program.Sprites.BringToFront();
+                if (Model.Program.Sprites == null || !Model.Program.Sprites.Visible)
+                    Model.Program.CreateSpritesWindow();
+                Model.Program.Sprites.index = (int)indexNumber.Value;
+                Model.Program.Sprites.BringToFront();
             }
             if (elementType.SelectedIndex == 11)
             {
-                if (model.Program.Effects == null || !model.Program.Effects.Visible)
-                    model.Program.CreateEffectsWindow();
-                model.Program.Effects.index = (int)indexNumber.Value;
-                model.Program.Effects.BringToFront();
+                if (Model.Program.Effects == null || !Model.Program.Effects.Visible)
+                    Model.Program.CreateEffectsWindow();
+                Model.Program.Effects.index = (int)indexNumber.Value;
+                Model.Program.Effects.BringToFront();
             }
             if (elementType.SelectedIndex == 12)
             {
-                if (model.Program.Dialogues == null || !model.Program.Dialogues.Visible)
-                    model.Program.CreateDialoguesWindow();
-                model.Program.Dialogues.index = (int)indexNumber.Value;
-                model.Program.Dialogues.BringToFront();
+                if (Model.Program.Dialogues == null || !Model.Program.Dialogues.Visible)
+                    Model.Program.CreateDialoguesWindow();
+                Model.Program.Dialogues.index = (int)indexNumber.Value;
+                Model.Program.Dialogues.BringToFront();
             }
             if (elementType.SelectedIndex == 15)
             {
-                if (model.Program.Monsters == null || !model.Program.Monsters.Visible)
-                    model.Program.CreateMonstersWindow();
-                model.Program.Monsters.index = (int)indexNumber.Value;
-                model.Program.Monsters.BringToFront();
+                if (Model.Program.Monsters == null || !Model.Program.Monsters.Visible)
+                    Model.Program.CreateMonstersWindow();
+                Model.Program.Monsters.Index = (int)indexNumber.Value;
+                Model.Program.Monsters.BringToFront();
             }
             if (elementType.SelectedIndex == 16)
             {
-                if (model.Program.Formations == null || !model.Program.Formations.Visible)
-                    model.Program.CreateFormationsWindow();
-                model.Program.Formations.FormationIndex = (int)indexNumber.Value;
-                model.Program.Formations.BringToFront();
+                if (Model.Program.Formations == null || !Model.Program.Formations.Visible)
+                    Model.Program.CreateFormationsWindow();
+                Model.Program.Formations.FormationIndex = (int)indexNumber.Value;
+                Model.Program.Formations.BringToFront();
             }
             if (elementType.SelectedIndex == 17)
             {
-                if (model.Program.Formations == null || !model.Program.Formations.Visible)
-                    model.Program.CreateFormationsWindow();
-                model.Program.Formations.PackIndex = (int)indexNumber.Value;
-                model.Program.Formations.BringToFront();
+                if (Model.Program.Formations == null || !Model.Program.Formations.Visible)
+                    Model.Program.CreateFormationsWindow();
+                Model.Program.Formations.PackIndex = (int)indexNumber.Value;
+                Model.Program.Formations.BringToFront();
             }
             if (elementType.SelectedIndex == 18)
             {
-                if (model.Program.Attacks == null || !model.Program.Attacks.Visible)
-                    model.Program.CreateAttacksWindow();
-                model.Program.Attacks.spellsEditor.Index = (int)indexNumber.Value;
-                model.Program.Attacks.BringToFront();
+                if (Model.Program.Attacks == null || !Model.Program.Attacks.Visible)
+                    Model.Program.CreateAttacksWindow();
+                Model.Program.Attacks.spellsEditor.Index = (int)indexNumber.Value;
+                Model.Program.Attacks.BringToFront();
             }
             if (elementType.SelectedIndex == 19)
             {
-                if (model.Program.Attacks == null || !model.Program.Attacks.Visible)
-                    model.Program.CreateAttacksWindow();
-                model.Program.Attacks.attacksEditor.Index = (int)indexNumber.Value;
-                model.Program.Attacks.BringToFront();
+                if (Model.Program.Attacks == null || !Model.Program.Attacks.Visible)
+                    Model.Program.CreateAttacksWindow();
+                Model.Program.Attacks.attacksEditor.Index = (int)indexNumber.Value;
+                Model.Program.Attacks.BringToFront();
             }
             if (elementType.SelectedIndex == 20)
             {
-                if (model.Program.Items == null || !model.Program.Items.Visible)
-                    model.Program.CreateItemsWindow();
-                model.Program.Items.itemsEditor.Index = (int)indexNumber.Value;
-                model.Program.Items.BringToFront();
+                if (Model.Program.Items == null || !Model.Program.Items.Visible)
+                    Model.Program.CreateItemsWindow();
+                Model.Program.Items.itemsEditor.Index = (int)indexNumber.Value;
+                Model.Program.Items.BringToFront();
             }
             if (elementType.SelectedIndex == 21)
             {
-                if (model.Program.Items == null || !model.Program.Items.Visible)
-                    model.Program.CreateItemsWindow();
-                model.Program.Items.shopsEditor.Index = (int)indexNumber.Value;
-                model.Program.Items.BringToFront();
+                if (Model.Program.Items == null || !Model.Program.Items.Visible)
+                    Model.Program.CreateItemsWindow();
+                Model.Program.Items.shopsEditor.Index = (int)indexNumber.Value;
+                Model.Program.Items.BringToFront();
             }
         }
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -543,7 +542,7 @@ namespace LAZYSHELL
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = settings.NotePathCustom;
             saveFileDialog.Title = "Save as new notes database...";
-            saveFileDialog.FileName = model.GetFileNameWithoutPath() + " - notes.lsnotes";
+            saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - notes.lsnotes";
             saveFileDialog.Filter = "Notes database (*.lsnotes)|*.lsnotes";
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.RestoreDirectory = true;

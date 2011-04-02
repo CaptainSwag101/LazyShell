@@ -29,7 +29,7 @@ namespace LAZYSHELL.ScriptsEditor
 
                 return Bits.GetByteArray(script, commandIndex - len, len);
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("No Battle Commands Left");
             }

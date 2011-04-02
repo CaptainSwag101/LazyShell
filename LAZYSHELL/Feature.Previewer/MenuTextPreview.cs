@@ -14,7 +14,7 @@ namespace LAZYSHELL
         {
             return GetPreview((FontCharacter[])args[0], (int[])args[1], (char[])args[2], (bool)args[3]);
         }
-        public int[] GetPreview(FontCharacter[] fontCharacters, int[] palette, char[] dlg, bool battle)
+        public int[] GetPreview(FontCharacter[] fontCharacters, int[] palette, char[] dlg, bool shadow)
         {
             this.fontCharacters = fontCharacters;
             this.palette = palette;
@@ -35,19 +35,19 @@ namespace LAZYSHELL
 
                     for (int y = 0, b = 1; y < 12; y++, b++) // 12 rows per character
                     {
-                        for (int x = 0, a = battle ? c + 1 : c + left + 1; x < 8; x++, a++) // # of pixels per row
+                        for (int x = 0, a = shadow ? c + 1 : c + left + 1; x < 8; x++, a++) // # of pixels per row
                         {
                             if (pixels[b * 256 + a] == 0)
                                 pixels[b * 256 + a] = font[y * maxWidth + x];
                         }
                     }
-                    if (battle)
+                    if (shadow)
                         c += Math.Max(fontCharacters[dlg[i] - 32].GetRightMostPixel(palette), width + 1);
                     else
                         c += 8;
                 }
             }
-            if (battle)
+            if (shadow)
                 AddShadow(pixels);
             else
                 AddBorder(pixels);

@@ -217,9 +217,9 @@
             this.panel160.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel160.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel160.Controls.Add(this.panel156);
-            this.panel160.Location = new System.Drawing.Point(219, 209);
+            this.panel160.Location = new System.Drawing.Point(204, 201);
             this.panel160.Name = "panel160";
-            this.panel160.Size = new System.Drawing.Size(124, 119);
+            this.panel160.Size = new System.Drawing.Size(128, 119);
             this.panel160.TabIndex = 12;
             // 
             // panel156
@@ -229,7 +229,7 @@
             this.panel156.Controls.Add(this.spellTargetting);
             this.panel156.Location = new System.Drawing.Point(0, 0);
             this.panel156.Name = "panel156";
-            this.panel156.Size = new System.Drawing.Size(120, 115);
+            this.panel156.Size = new System.Drawing.Size(124, 115);
             this.panel156.TabIndex = 504;
             // 
             // label170
@@ -240,7 +240,7 @@
             this.label170.Location = new System.Drawing.Point(0, 0);
             this.label170.Name = "label170";
             this.label170.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label170.Size = new System.Drawing.Size(120, 17);
+            this.label170.Size = new System.Drawing.Size(124, 17);
             this.label170.TabIndex = 165;
             this.label170.Text = "TARGETTING";
             this.label170.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -259,7 +259,7 @@
             "Not Self"});
             this.spellTargetting.Location = new System.Drawing.Point(0, 19);
             this.spellTargetting.Name = "spellTargetting";
-            this.spellTargetting.Size = new System.Drawing.Size(120, 96);
+            this.spellTargetting.Size = new System.Drawing.Size(124, 96);
             this.spellTargetting.TabIndex = 117;
             this.spellTargetting.SelectedIndexChanged += new System.EventHandler(this.spellTargetting_SelectedIndexChanged);
             // 
@@ -268,7 +268,7 @@
             this.panel159.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel159.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel159.Controls.Add(this.panel155);
-            this.panel159.Location = new System.Drawing.Point(12, 209);
+            this.panel159.Location = new System.Drawing.Point(1, 201);
             this.panel159.Name = "panel159";
             this.panel159.Size = new System.Drawing.Size(201, 119);
             this.panel159.TabIndex = 11;
@@ -318,9 +318,9 @@
             this.panel158.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel158.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel158.Controls.Add(this.panel154);
-            this.panel158.Location = new System.Drawing.Point(219, 334);
+            this.panel158.Location = new System.Drawing.Point(204, 322);
             this.panel158.Name = "panel158";
-            this.panel158.Size = new System.Drawing.Size(124, 87);
+            this.panel158.Size = new System.Drawing.Size(128, 87);
             this.panel158.TabIndex = 14;
             // 
             // panel154
@@ -330,7 +330,7 @@
             this.panel154.Controls.Add(this.spellStatusChange);
             this.panel154.Location = new System.Drawing.Point(0, 0);
             this.panel154.Name = "panel154";
-            this.panel154.Size = new System.Drawing.Size(120, 83);
+            this.panel154.Size = new System.Drawing.Size(124, 83);
             this.panel154.TabIndex = 502;
             // 
             // label61
@@ -341,7 +341,7 @@
             this.label61.Location = new System.Drawing.Point(0, 0);
             this.label61.Name = "label61";
             this.label61.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label61.Size = new System.Drawing.Size(120, 17);
+            this.label61.Size = new System.Drawing.Size(124, 17);
             this.label61.TabIndex = 362;
             this.label61.Text = "STATUS";
             this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -358,7 +358,7 @@
             "Magic Defense"});
             this.spellStatusChange.Location = new System.Drawing.Point(0, 19);
             this.spellStatusChange.Name = "spellStatusChange";
-            this.spellStatusChange.Size = new System.Drawing.Size(120, 64);
+            this.spellStatusChange.Size = new System.Drawing.Size(124, 64);
             this.spellStatusChange.TabIndex = 115;
             this.spellStatusChange.SelectedIndexChanged += new System.EventHandler(this.spellStatusChange_SelectedIndexChanged);
             // 
@@ -367,7 +367,7 @@
             this.panel157.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel157.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel157.Controls.Add(this.panel153);
-            this.panel157.Location = new System.Drawing.Point(12, 334);
+            this.panel157.Location = new System.Drawing.Point(1, 322);
             this.panel157.Name = "panel157";
             this.panel157.Size = new System.Drawing.Size(201, 87);
             this.panel157.TabIndex = 13;
@@ -421,9 +421,9 @@
             this.panel152.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel152.Controls.Add(this.panel45);
             this.panel152.Controls.Add(this.label55);
-            this.panel152.Location = new System.Drawing.Point(219, 28);
+            this.panel152.Location = new System.Drawing.Point(204, 28);
             this.panel152.Name = "panel152";
-            this.panel152.Size = new System.Drawing.Size(124, 175);
+            this.panel152.Size = new System.Drawing.Size(128, 171);
             this.panel152.TabIndex = 10;
             // 
             // panel45
@@ -436,7 +436,7 @@
             this.panel45.Controls.Add(this.pictureBoxSpellDesc);
             this.panel45.Location = new System.Drawing.Point(0, 19);
             this.panel45.Name = "panel45";
-            this.panel45.Size = new System.Drawing.Size(120, 152);
+            this.panel45.Size = new System.Drawing.Size(124, 152);
             this.panel45.TabIndex = 111;
             // 
             // textBoxSpellDescription
@@ -445,7 +445,7 @@
             this.textBoxSpellDescription.Location = new System.Drawing.Point(0, 90);
             this.textBoxSpellDescription.MaxLength = 255;
             this.textBoxSpellDescription.Name = "textBoxSpellDescription";
-            this.textBoxSpellDescription.Size = new System.Drawing.Size(120, 62);
+            this.textBoxSpellDescription.Size = new System.Drawing.Size(124, 58);
             this.textBoxSpellDescription.TabIndex = 170;
             this.textBoxSpellDescription.Text = "";
             this.textBoxSpellDescription.TextChanged += new System.EventHandler(this.textBoxSpellDescription_TextChanged);
@@ -485,7 +485,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 64);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(120, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(124, 25);
             this.toolStrip2.TabIndex = 173;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -532,7 +532,7 @@
             this.pictureBoxSpellDesc.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBoxSpellDesc.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxSpellDesc.Name = "pictureBoxSpellDesc";
-            this.pictureBoxSpellDesc.Size = new System.Drawing.Size(120, 64);
+            this.pictureBoxSpellDesc.Size = new System.Drawing.Size(124, 64);
             this.pictureBoxSpellDesc.TabIndex = 0;
             this.pictureBoxSpellDesc.TabStop = false;
             this.pictureBoxSpellDesc.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxSpellDesc_Paint);
@@ -545,7 +545,7 @@
             this.label55.Location = new System.Drawing.Point(0, 0);
             this.label55.Name = "label55";
             this.label55.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label55.Size = new System.Drawing.Size(120, 17);
+            this.label55.Size = new System.Drawing.Size(124, 17);
             this.label55.TabIndex = 172;
             this.label55.Text = "DESCRIPTION";
             this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -555,7 +555,7 @@
             this.panel40.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel40.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel40.Controls.Add(this.panel57);
-            this.panel40.Location = new System.Drawing.Point(12, 110);
+            this.panel40.Location = new System.Drawing.Point(1, 106);
             this.panel40.Name = "panel40";
             this.panel40.Size = new System.Drawing.Size(201, 93);
             this.panel40.TabIndex = 9;
@@ -732,7 +732,7 @@
             this.panel151.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel151.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel151.Controls.Add(this.panel38);
-            this.panel151.Location = new System.Drawing.Point(12, 28);
+            this.panel151.Location = new System.Drawing.Point(1, 28);
             this.panel151.Name = "panel151";
             this.panel151.Size = new System.Drawing.Size(201, 76);
             this.panel151.TabIndex = 8;
@@ -853,23 +853,23 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(355, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(333, 25);
             this.toolStrip1.TabIndex = 473;
             // 
             // spellName
             // 
             this.spellName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.spellName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.spellName.DropDownHeight = 500;
+            this.spellName.DropDownHeight = 497;
             this.spellName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.spellName.DropDownWidth = 200;
+            this.spellName.DropDownWidth = 130;
             this.spellName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spellName.ItemHeight = 15;
             this.spellName.Location = new System.Drawing.Point(7, 1);
             this.spellName.Name = "spellName";
             this.spellName.SelectedIndex = -1;
             this.spellName.SelectedItem = null;
-            this.spellName.Size = new System.Drawing.Size(140, 22);
+            this.spellName.Size = new System.Drawing.Size(130, 22);
             this.spellName.SelectedIndexChanged += new System.EventHandler(this.spellName_SelectedIndexChanged);
             this.spellName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.spellName_DrawItem);
             // 
@@ -910,14 +910,13 @@
             this.spellNameIcon.AutoSize = false;
             this.spellNameIcon.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.spellNameIcon.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.spellNameIcon.DropDownHeight = 500;
+            this.spellNameIcon.DropDownHeight = 497;
             this.spellNameIcon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.spellNameIcon.DropDownWidth = 40;
             this.spellNameIcon.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spellNameIcon.ItemHeight = 15;
             this.spellNameIcon.Location = new System.Drawing.Point(191, 2);
             this.spellNameIcon.Name = "spellNameIcon";
-            this.spellNameIcon.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.spellNameIcon.SelectedIndex = -1;
             this.spellNameIcon.SelectedItem = null;
             this.spellNameIcon.Size = new System.Drawing.Size(36, 21);
@@ -928,7 +927,7 @@
             // 
             this.textBoxSpellName.MaxLength = 14;
             this.textBoxSpellName.Name = "textBoxSpellName";
-            this.textBoxSpellName.Size = new System.Drawing.Size(110, 25);
+            this.textBoxSpellName.Size = new System.Drawing.Size(104, 25);
             this.textBoxSpellName.TextChanged += new System.EventHandler(this.textBoxSpellName_TextChanged);
             // 
             // panelTimingRotation
@@ -936,7 +935,7 @@
             this.panelTimingRotation.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelTimingRotation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelTimingRotation.Controls.Add(this.panel13);
-            this.panelTimingRotation.Location = new System.Drawing.Point(12, 427);
+            this.panelTimingRotation.Location = new System.Drawing.Point(1, 411);
             this.panelTimingRotation.Name = "panelTimingRotation";
             this.panelTimingRotation.Size = new System.Drawing.Size(331, 58);
             this.panelTimingRotation.TabIndex = 475;
@@ -965,7 +964,7 @@
             this.label183.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label183.Size = new System.Drawing.Size(327, 17);
             this.label183.TabIndex = 239;
-            this.label183.Text = "PAD ROTATION SPELLS";
+            this.label183.Text = "TIMING PROPERTIES";
             this.label183.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label142
@@ -1023,7 +1022,7 @@
             this.panelTimingFireball.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelTimingFireball.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelTimingFireball.Controls.Add(this.panel9);
-            this.panelTimingFireball.Location = new System.Drawing.Point(12, 427);
+            this.panelTimingFireball.Location = new System.Drawing.Point(1, 411);
             this.panelTimingFireball.Name = "panelTimingFireball";
             this.panelTimingFireball.Size = new System.Drawing.Size(331, 58);
             this.panelTimingFireball.TabIndex = 474;
@@ -1052,7 +1051,7 @@
             this.label186.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label186.Size = new System.Drawing.Size(327, 17);
             this.label186.TabIndex = 239;
-            this.label186.Text = "FIREBALL SPELLS";
+            this.label186.Text = "TIMING PROPERTIES";
             this.label186.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // numericUpDown106
@@ -1110,9 +1109,9 @@
             this.panelTimingRapid.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelTimingRapid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelTimingRapid.Controls.Add(this.panel21);
-            this.panelTimingRapid.Location = new System.Drawing.Point(12, 427);
+            this.panelTimingRapid.Location = new System.Drawing.Point(1, 411);
             this.panelTimingRapid.Name = "panelTimingRapid";
-            this.panelTimingRapid.Size = new System.Drawing.Size(327, 40);
+            this.panelTimingRapid.Size = new System.Drawing.Size(331, 40);
             this.panelTimingRapid.TabIndex = 477;
             this.panelTimingRapid.Visible = false;
             // 
@@ -1124,7 +1123,7 @@
             this.panel21.Controls.Add(this.numericUpDown102);
             this.panel21.Location = new System.Drawing.Point(0, 0);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(323, 36);
+            this.panel21.Size = new System.Drawing.Size(327, 36);
             this.panel21.TabIndex = 309;
             // 
             // label184
@@ -1135,9 +1134,9 @@
             this.label184.Location = new System.Drawing.Point(0, 0);
             this.label184.Name = "label184";
             this.label184.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label184.Size = new System.Drawing.Size(323, 17);
+            this.label184.Size = new System.Drawing.Size(327, 17);
             this.label184.TabIndex = 239;
-            this.label184.Text = "PSYCH BOMB / BOWSER CRUSH";
+            this.label184.Text = "TIMING PROPERTIES";
             this.label184.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label143
@@ -1146,14 +1145,14 @@
             this.label143.Location = new System.Drawing.Point(0, 19);
             this.label143.Name = "label143";
             this.label143.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label143.Size = new System.Drawing.Size(160, 17);
+            this.label143.Size = new System.Drawing.Size(164, 17);
             this.label143.TabIndex = 303;
             this.label143.Text = "Maximum number of power-ups";
             // 
             // numericUpDown102
             // 
             this.numericUpDown102.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown102.Location = new System.Drawing.Point(161, 19);
+            this.numericUpDown102.Location = new System.Drawing.Point(165, 19);
             this.numericUpDown102.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1170,9 +1169,9 @@
             this.panelTimingMultiple.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelTimingMultiple.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelTimingMultiple.Controls.Add(this.panel15);
-            this.panelTimingMultiple.Location = new System.Drawing.Point(12, 427);
+            this.panelTimingMultiple.Location = new System.Drawing.Point(1, 411);
             this.panelTimingMultiple.Name = "panelTimingMultiple";
-            this.panelTimingMultiple.Size = new System.Drawing.Size(327, 76);
+            this.panelTimingMultiple.Size = new System.Drawing.Size(331, 76);
             this.panelTimingMultiple.TabIndex = 476;
             this.panelTimingMultiple.Visible = false;
             // 
@@ -1188,7 +1187,7 @@
             this.panel15.Controls.Add(this.label177);
             this.panel15.Location = new System.Drawing.Point(0, 0);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(323, 72);
+            this.panel15.Size = new System.Drawing.Size(327, 72);
             this.panel15.TabIndex = 305;
             // 
             // label202
@@ -1199,15 +1198,15 @@
             this.label202.Location = new System.Drawing.Point(0, 0);
             this.label202.Name = "label202";
             this.label202.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label202.Size = new System.Drawing.Size(323, 17);
+            this.label202.Size = new System.Drawing.Size(327, 17);
             this.label202.TabIndex = 239;
-            this.label202.Text = "MULTIPLE TIMING";
+            this.label202.Text = "TIMING PROPERTIES";
             this.label202.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel18
             // 
             this.panel18.Controls.Add(this.instanceNumberName);
-            this.panel18.Location = new System.Drawing.Point(161, 37);
+            this.panel18.Location = new System.Drawing.Point(165, 37);
             this.panel18.Name = "panel18";
             this.panel18.Size = new System.Drawing.Size(163, 17);
             this.panel18.TabIndex = 307;
@@ -1230,7 +1229,7 @@
             // numericUpDown7
             // 
             this.numericUpDown7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown7.Location = new System.Drawing.Point(161, 19);
+            this.numericUpDown7.Location = new System.Drawing.Point(165, 19);
             this.numericUpDown7.Maximum = new decimal(new int[] {
             127,
             0,
@@ -1245,7 +1244,7 @@
             // numericUpDown8
             // 
             this.numericUpDown8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown8.Location = new System.Drawing.Point(161, 55);
+            this.numericUpDown8.Location = new System.Drawing.Point(165, 55);
             this.numericUpDown8.Maximum = new decimal(new int[] {
             127,
             0,
@@ -1263,7 +1262,7 @@
             this.label155.Location = new System.Drawing.Point(0, 55);
             this.label155.Name = "label155";
             this.label155.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label155.Size = new System.Drawing.Size(160, 17);
+            this.label155.Size = new System.Drawing.Size(164, 17);
             this.label155.TabIndex = 40;
             this.label155.Text = "Instance Frame Duration";
             // 
@@ -1273,7 +1272,7 @@
             this.label156.Location = new System.Drawing.Point(0, 19);
             this.label156.Name = "label156";
             this.label156.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label156.Size = new System.Drawing.Size(160, 17);
+            this.label156.Size = new System.Drawing.Size(164, 17);
             this.label156.TabIndex = 39;
             this.label156.Text = "Maximum Instances";
             // 
@@ -1283,7 +1282,7 @@
             this.label177.Location = new System.Drawing.Point(0, 37);
             this.label177.Name = "label177";
             this.label177.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label177.Size = new System.Drawing.Size(160, 17);
+            this.label177.Size = new System.Drawing.Size(164, 17);
             this.label177.TabIndex = 39;
             this.label177.Text = "Instance Number";
             // 
@@ -1292,7 +1291,7 @@
             this.panelTimingGeno.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelTimingGeno.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelTimingGeno.Controls.Add(this.panel129);
-            this.panelTimingGeno.Location = new System.Drawing.Point(12, 427);
+            this.panelTimingGeno.Location = new System.Drawing.Point(1, 411);
             this.panelTimingGeno.Name = "panelTimingGeno";
             this.panelTimingGeno.Size = new System.Drawing.Size(331, 94);
             this.panelTimingGeno.TabIndex = 480;
@@ -1341,7 +1340,7 @@
             this.label167.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label167.Size = new System.Drawing.Size(329, 17);
             this.label167.TabIndex = 318;
-            this.label167.Text = "GENO\'S CHARGE SPELLS";
+            this.label167.Text = "TIMING PROPERTIES";
             this.label167.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // GenoLevel4Frame
@@ -1485,7 +1484,7 @@
             this.panelTimingTwo.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelTimingTwo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelTimingTwo.Controls.Add(this.panel14);
-            this.panelTimingTwo.Location = new System.Drawing.Point(12, 427);
+            this.panelTimingTwo.Location = new System.Drawing.Point(1, 411);
             this.panelTimingTwo.Name = "panelTimingTwo";
             this.panelTimingTwo.Size = new System.Drawing.Size(331, 76);
             this.panelTimingTwo.TabIndex = 479;
@@ -1543,7 +1542,7 @@
             this.label123.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label123.Size = new System.Drawing.Size(327, 17);
             this.label123.TabIndex = 318;
-            this.label123.Text = "2-LEVEL TIMING SPELLS";
+            this.label123.Text = "TIMING PROPERTIES";
             this.label123.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // spell2Level2FrameStart
@@ -1638,7 +1637,7 @@
             this.panelTimingOne.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelTimingOne.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelTimingOne.Controls.Add(this.panel128);
-            this.panelTimingOne.Location = new System.Drawing.Point(12, 427);
+            this.panelTimingOne.Location = new System.Drawing.Point(1, 411);
             this.panelTimingOne.Name = "panelTimingOne";
             this.panelTimingOne.Size = new System.Drawing.Size(331, 40);
             this.panelTimingOne.TabIndex = 478;
@@ -1678,7 +1677,7 @@
             this.label197.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label197.Size = new System.Drawing.Size(327, 17);
             this.label197.TabIndex = 318;
-            this.label197.Text = "1-LEVEL TIMING SPELLS";
+            this.label197.Text = "TIMING PROPERTIES";
             this.label197.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // numericUpDown100
@@ -1710,7 +1709,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 533);
+            this.ClientSize = new System.Drawing.Size(333, 506);
             this.ControlBox = false;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel160);
@@ -1720,13 +1719,13 @@
             this.Controls.Add(this.panel152);
             this.Controls.Add(this.panel40);
             this.Controls.Add(this.panel151);
-            this.Controls.Add(this.panelTimingMultiple);
+            this.Controls.Add(this.panelTimingRapid);
             this.Controls.Add(this.panelTimingOne);
             this.Controls.Add(this.panelTimingTwo);
             this.Controls.Add(this.panelTimingGeno);
             this.Controls.Add(this.panelTimingRotation);
-            this.Controls.Add(this.panelTimingRapid);
             this.Controls.Add(this.panelTimingFireball);
+            this.Controls.Add(this.panelTimingMultiple);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;

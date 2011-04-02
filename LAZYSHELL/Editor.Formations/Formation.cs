@@ -14,7 +14,6 @@ namespace LAZYSHELL
         private byte[] data;
         public override byte[] Data { get { return this.data; } set { this.data = value; } }
         public override int Index { get { return index; } set { index = value;} }
-        private Model model { get { return State.Instance.Model; } }
 
         #region Fomation Stats
         private int index;
@@ -85,8 +84,8 @@ namespace LAZYSHELL
                     if (formationUse[i])
                     {
                         // Get correct monster image
-                        monster = model.Monsters[formationMonster[i]].PixelBuffer;
-                        elevation = model.Monsters[formationMonster[i]].Elevation * 16;
+                        monster = Model.Monsters[formationMonster[i]].PixelBuffer;
+                        elevation = Model.Monsters[formationMonster[i]].Elevation * 16;
 
                         for (int y = 0; y < 256; y++)
                         {
@@ -132,7 +131,7 @@ namespace LAZYSHELL
                 for (int i = 0; i < 8; i++)
                 {
                     if (formationUse[i])
-                        names[i] = Do.RawToASCII(model.Monsters[formationMonster[i]].Name, Settings.Default.KeystrokesMenu);
+                        names[i] = Do.RawToASCII(Model.Monsters[formationMonster[i]].Name, Settings.Default.KeystrokesMenu);
                     else
                         names[i] = "{unused}";
                 }
@@ -163,7 +162,7 @@ namespace LAZYSHELL
                 {
                     if (formationUse[i] == true)
                         formationNameList +=
-                            Do.RawToASCII(model.Monsters[formationMonster[i]].Name, Settings.Default.KeystrokesMenu).Trim() +
+                            Do.RawToASCII(Model.Monsters[formationMonster[i]].Name, Settings.Default.KeystrokesMenu).Trim() +
                             ((i < 7) ? "  /  " : "");
                     else
                         formationNameList += "..." + ((i < 7) ? "  /  " : "");

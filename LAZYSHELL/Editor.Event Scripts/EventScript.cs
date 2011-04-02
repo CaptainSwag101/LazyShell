@@ -219,7 +219,7 @@ namespace LAZYSHELL.ScriptsEditor
             {
                 commands.Insert(index, esc);
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("Event Script insert index invalid");
             }
@@ -234,7 +234,7 @@ namespace LAZYSHELL.ScriptsEditor
                     esc.EmbeddedActionQueue.Insert(childIndex, aqc);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("Event Script insert index invalid");
             }
@@ -248,7 +248,7 @@ namespace LAZYSHELL.ScriptsEditor
                 commands.RemoveAt(index);
                 return len;
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("Event Script remove index invalid");
             }
@@ -263,14 +263,14 @@ namespace LAZYSHELL.ScriptsEditor
 
                 if (esc.IsActionQueueTrigger)
                 {
-                    aqc = (ActionQueueCommand)esc.EmbeddedActionQueue.ActionQueueCommands[childIndex];
+                    aqc = (ActionQueueCommand)esc.EmbeddedActionQueue.Commands[childIndex];
                     len = aqc.QueueLength;
                     esc.EmbeddedActionQueue.RemoveAt(childIndex);
 
                 }
                 return len;
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("Event Script insert index invalid");
             }

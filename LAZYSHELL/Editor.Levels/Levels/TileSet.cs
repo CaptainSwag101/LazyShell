@@ -8,7 +8,6 @@ namespace LAZYSHELL
 {
     public class TileSet
     {
-        private Model model = State.Instance.Model;
         private LevelMap levelMap;
         public PaletteSet paletteSet;
         private State state = State.Instance;
@@ -24,18 +23,18 @@ namespace LAZYSHELL
             this.levelMap = levelMap; // grab the current LevelMap
             this.paletteSet = paletteSet; // grab the current Palette Set
 
-            tileSets[0] = model.TileSets[levelMap.TileSetL1 + 0x20];
-            tileSets[1] = model.TileSets[levelMap.TileSetL2 + 0x20];
-            tileSets[2] = model.TileSets[levelMap.TileSetL3];
+            tileSets[0] = Model.TileSets[levelMap.TileSetL1 + 0x20];
+            tileSets[1] = Model.TileSets[levelMap.TileSetL2 + 0x20];
+            tileSets[2] = Model.TileSets[levelMap.TileSetL3];
 
             graphics = new byte[0x6000];
-            Buffer.BlockCopy(model.GraphicSets[levelMap.GraphicSetA + 0x48], 0, graphics, 0, 0x2000);
-            Buffer.BlockCopy(model.GraphicSets[levelMap.GraphicSetB + 0x48], 0, graphics, 0x2000, 0x1000);
-            Buffer.BlockCopy(model.GraphicSets[levelMap.GraphicSetC + 0x48], 0, graphics, 0x3000, 0x1000);
-            Buffer.BlockCopy(model.GraphicSets[levelMap.GraphicSetD + 0x48], 0, graphics, 0x4000, 0x1000);
-            Buffer.BlockCopy(model.GraphicSets[levelMap.GraphicSetE + 0x48], 0, graphics, 0x5000, 0x1000);
+            Buffer.BlockCopy(Model.GraphicSets[levelMap.GraphicSetA + 0x48], 0, graphics, 0, 0x2000);
+            Buffer.BlockCopy(Model.GraphicSets[levelMap.GraphicSetB + 0x48], 0, graphics, 0x2000, 0x1000);
+            Buffer.BlockCopy(Model.GraphicSets[levelMap.GraphicSetC + 0x48], 0, graphics, 0x3000, 0x1000);
+            Buffer.BlockCopy(Model.GraphicSets[levelMap.GraphicSetD + 0x48], 0, graphics, 0x4000, 0x1000);
+            Buffer.BlockCopy(Model.GraphicSets[levelMap.GraphicSetE + 0x48], 0, graphics, 0x5000, 0x1000);
             if (levelMap.GraphicSetL3 != 0xFF)
-                graphicsL3 = model.GraphicSets[levelMap.GraphicSetL3];
+                graphicsL3 = Model.GraphicSets[levelMap.GraphicSetL3];
 
             // Create our layers for the tilesets (256x512)
             tilesetLayers[0] = new Tile16x16[16 * 32];
@@ -100,7 +99,7 @@ namespace LAZYSHELL
                     tile = (ushort)(Bits.GetShort(src, offset) & 0x03FF); offset++;
                     temp = src[offset]; offset++;
                     source = Do.DrawTile8x8(tile, temp, graphics, paletteSet.Palettes, format);
-                    dst[i].Subtiles[a] = source; ;
+                    dst[i].Subtiles[a] = source;
                 }
                 if ((i - 15) % 16 == 0)
                     offset += 64;
@@ -169,24 +168,24 @@ namespace LAZYSHELL
         {
             if (count == 1)
             {
-                model.TileSets[levelMap.TileSetL1 + 0x20] = new byte[0x2000];
-                model.TileSets[levelMap.TileSetL2 + 0x20] = new byte[0x2000];
-                model.TileSets[levelMap.TileSetL3] = new byte[0x1000];
+                Model.TileSets[levelMap.TileSetL1 + 0x20] = new byte[0x2000];
+                Model.TileSets[levelMap.TileSetL2 + 0x20] = new byte[0x2000];
+                Model.TileSets[levelMap.TileSetL3] = new byte[0x1000];
 
-                model.EditTileSets[levelMap.TileSetL1 + 0x20] = true;
-                model.EditTileSets[levelMap.TileSetL2 + 0x20] = true;
-                model.EditTileSets[levelMap.TileSetL3] = true;
+                Model.EditTileSets[levelMap.TileSetL1 + 0x20] = true;
+                Model.EditTileSets[levelMap.TileSetL2 + 0x20] = true;
+                Model.EditTileSets[levelMap.TileSetL3] = true;
             }
             else
             {
                 for (int i = 0; i < count; i++)
                 {
                     if (i < 0x20)
-                        model.TileSets[i] = new byte[0x1000];
+                        Model.TileSets[i] = new byte[0x1000];
                     else
-                        model.TileSets[i] = new byte[0x2000];
+                        Model.TileSets[i] = new byte[0x2000];
 
-                    model.EditTileSets[i] = true;
+                    Model.EditTileSets[i] = true;
                 }
             }
             for (int i = 0; i < 3; i++) RedrawTilesets(i);
@@ -218,17 +217,23 @@ namespace LAZYSHELL
                 }
             }
             if (layer == 0)
-                model.EditTileSets[levelMap.TileSetL1 + 0x20] = true;
+                Model.EditTileSets[levelMap.TileSetL1 + 0x20] = true;
             if (layer == 1)
-                model.EditTileSets[levelMap.TileSetL2 + 0x20] = true;
+                Model.EditTileSets[levelMap.TileSetL2 + 0x20] = true;
             if (layer == 2)
-                model.EditTileSets[levelMap.TileSetL3] = true;
+                Model.EditTileSets[levelMap.TileSetL3] = true;
 
-            Buffer.BlockCopy(graphics, 0, model.GraphicSets[levelMap.GraphicSetA + 0x48], 0, 0x2000);
-            Buffer.BlockCopy(graphics, 0x2000, model.GraphicSets[levelMap.GraphicSetB + 0x48], 0, 0x1000);
-            Buffer.BlockCopy(graphics, 0x3000, model.GraphicSets[levelMap.GraphicSetC + 0x48], 0, 0x1000);
-            Buffer.BlockCopy(graphics, 0x4000, model.GraphicSets[levelMap.GraphicSetD + 0x48], 0, 0x1000);
-            Buffer.BlockCopy(graphics, 0x5000, model.GraphicSets[levelMap.GraphicSetE + 0x48], 0, 0x1000);
+            Buffer.BlockCopy(graphics, 0, Model.GraphicSets[levelMap.GraphicSetA + 0x48], 0, 0x2000);
+            Buffer.BlockCopy(graphics, 0x2000, Model.GraphicSets[levelMap.GraphicSetB + 0x48], 0, 0x1000);
+            Buffer.BlockCopy(graphics, 0x3000, Model.GraphicSets[levelMap.GraphicSetC + 0x48], 0, 0x1000);
+            Buffer.BlockCopy(graphics, 0x4000, Model.GraphicSets[levelMap.GraphicSetD + 0x48], 0, 0x1000);
+            Buffer.BlockCopy(graphics, 0x5000, Model.GraphicSets[levelMap.GraphicSetE + 0x48], 0, 0x1000);
+
+            Model.EditGraphicSets[levelMap.GraphicSetA + 0x48] = true;
+            Model.EditGraphicSets[levelMap.GraphicSetB + 0x48] = true;
+            Model.EditGraphicSets[levelMap.GraphicSetC + 0x48] = true;
+            Model.EditGraphicSets[levelMap.GraphicSetD + 0x48] = true;
+            Model.EditGraphicSets[levelMap.GraphicSetE + 0x48] = true;
         }
         public void AssembleIntoModel(int width)
         {
@@ -257,15 +262,21 @@ namespace LAZYSHELL
                     }
                 }
             }
-            model.EditTileSets[levelMap.TileSetL1 + 0x20] = true;
-            model.EditTileSets[levelMap.TileSetL2 + 0x20] = true;
-            model.EditTileSets[levelMap.TileSetL3] = true;
+            Model.EditTileSets[levelMap.TileSetL1 + 0x20] = true;
+            Model.EditTileSets[levelMap.TileSetL2 + 0x20] = true;
+            Model.EditTileSets[levelMap.TileSetL3] = true;
 
-            Buffer.BlockCopy(graphics, 0, model.GraphicSets[levelMap.GraphicSetA + 0x48], 0, 0x2000);
-            Buffer.BlockCopy(graphics, 0x2000, model.GraphicSets[levelMap.GraphicSetB + 0x48], 0, 0x1000);
-            Buffer.BlockCopy(graphics, 0x3000, model.GraphicSets[levelMap.GraphicSetC + 0x48], 0, 0x1000);
-            Buffer.BlockCopy(graphics, 0x4000, model.GraphicSets[levelMap.GraphicSetD + 0x48], 0, 0x1000);
-            Buffer.BlockCopy(graphics, 0x5000, model.GraphicSets[levelMap.GraphicSetE + 0x48], 0, 0x1000);
+            Buffer.BlockCopy(graphics, 0, Model.GraphicSets[levelMap.GraphicSetA + 0x48], 0, 0x2000);
+            Buffer.BlockCopy(graphics, 0x2000, Model.GraphicSets[levelMap.GraphicSetB + 0x48], 0, 0x1000);
+            Buffer.BlockCopy(graphics, 0x3000, Model.GraphicSets[levelMap.GraphicSetC + 0x48], 0, 0x1000);
+            Buffer.BlockCopy(graphics, 0x4000, Model.GraphicSets[levelMap.GraphicSetD + 0x48], 0, 0x1000);
+            Buffer.BlockCopy(graphics, 0x5000, Model.GraphicSets[levelMap.GraphicSetE + 0x48], 0, 0x1000);
+
+            Model.EditGraphicSets[levelMap.GraphicSetA + 0x48] = true;
+            Model.EditGraphicSets[levelMap.GraphicSetB + 0x48] = true;
+            Model.EditGraphicSets[levelMap.GraphicSetC + 0x48] = true;
+            Model.EditGraphicSets[levelMap.GraphicSetD + 0x48] = true;
+            Model.EditGraphicSets[levelMap.GraphicSetE + 0x48] = true;
         }
     }
 }

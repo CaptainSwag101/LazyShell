@@ -13,7 +13,7 @@ namespace LAZYSHELL
         [NonSerialized()]
         private byte[] data; public byte[] Data { get { return this.data; } set { this.data = value; } }
 
-        private ArrayList overlaps = new ArrayList(); public ArrayList Overlaps { get { return overlaps; } }
+        private List<Overlap> overlaps = new List<Overlap>(); public List<Overlap> Overlaps { get { return overlaps; } }
         private int currentOverlap = 0;
         public int CurrentOverlap
         {
@@ -25,7 +25,7 @@ namespace LAZYSHELL
             {
                 if (this.overlaps.Count > value)
                 {
-                    overlap = (Overlap)overlaps[value];
+                    overlap = overlaps[value];
                     this.currentOverlap = value;
                 }
             }
@@ -36,7 +36,7 @@ namespace LAZYSHELL
 
         private int index; public int Index { get { return index; } set { index = value; } }
 
-        public int NumberOfOverlaps { get { return overlaps.Count; } }
+        public int Count { get { return overlaps.Count; } }
         public void RemoveCurrentOverlap()
         {
             if (currentOverlap < overlaps.Count)
@@ -125,11 +125,9 @@ namespace LAZYSHELL
 
             if (overlaps.Count == 0) return offsetStart; // no exit fields for level
 
-            for (int i = 0; i < overlaps.Count; i++)
+            foreach (Overlap overlap in overlaps)
             {
-                this.CurrentOverlap = i;
                 overlap.AssembleOverlap(data, offset);
-
                 offset += 4;
             }
 

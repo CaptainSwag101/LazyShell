@@ -8,8 +8,7 @@ namespace LAZYSHELL
 {
     class MenuTileset
     {
-        private Model model = State.Instance.Model;
-        public int[] palette;
+                public int[] palette;
 
         private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
         private byte[] graphicSet; public byte[] GraphicSet { get { return graphicSet; } set { graphicSet = value; } }
@@ -32,10 +31,10 @@ namespace LAZYSHELL
         private void DecompressTileSetData()
         {
             // Decompress data at offsets
-            tileSet = model.MenuTileset;
+            tileSet = Model.MenuTileset;
 
             // Decompress graphic sets
-            graphicSet = model.MenuGraphicSet;
+            graphicSet = Model.MenuGraphicSet;
         }
 
         public void DrawTileset(byte[] tileset, Tile16x16[] tileSet)
@@ -76,7 +75,7 @@ namespace LAZYSHELL
         }
         public void Clear(int count)
         {
-            model.EditMenuTileSet = true;
+            Model.EditMenuTileSet = true;
             RedrawTileset();
         }
     }

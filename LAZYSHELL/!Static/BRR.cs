@@ -15,7 +15,6 @@ namespace LAZYSHELL
         static byte[] BRRBuffer;
         static double resample_var;
         static char resample_type;
-        static bool loopflag;
         // decoder functions
         public static byte[] Decode(byte[] inBrr, int rate)
         {
@@ -42,17 +41,17 @@ namespace LAZYSHELL
             byte[] outWav = new byte[(size << 1) + 44];
             offset = 0;
             Bits.SetCharArray(outWav, offset, "RIFF".ToCharArray()); offset += 4;
-            Bits.SetUInt32(outWav, offset, (size << 1) + 36); offset += 4;
+            Bits.Set32Bit(outWav, offset, (size << 1) + 36); offset += 4;
             Bits.SetCharArray(outWav, offset, "WAVEfmt ".ToCharArray()); offset += 8;
-            Bits.SetUInt32(outWav, offset, 16); offset += 4;
+            Bits.Set32Bit(outWav, offset, 16); offset += 4;
             Bits.SetShort(outWav, offset, 1); offset += 2;
             Bits.SetShort(outWav, offset, 1); offset += 2;
-            Bits.SetUInt32(outWav, offset, rate); offset += 4;
-            Bits.SetUInt32(outWav, offset, rate * 2); offset += 4;
+            Bits.Set32Bit(outWav, offset, rate); offset += 4;
+            Bits.Set32Bit(outWav, offset, rate * 2); offset += 4;
             Bits.SetShort(outWav, offset, 2); offset += 2;
             Bits.SetShort(outWav, offset, 16); offset += 2;
             Bits.SetCharArray(outWav, offset, "data".ToCharArray()); offset += 4;
-            Bits.SetUInt32(outWav, offset, size << 1); offset += 4;
+            Bits.Set32Bit(outWav, offset, size << 1); offset += 4;
             for (int i = 0; i < size; i++)
             {
                 Bits.SetShort(outWav, offset, samples[i]);
@@ -144,7 +143,6 @@ namespace LAZYSHELL
         public static byte[] Encode(byte[] inWav)
         {
             byte loop = 0x02;
-            loopflag = false;
             resample_var = 1.0;
             resample_type = 'n';
             FIRen = new bool[] { true, true, true, true };
@@ -173,7 +171,7 @@ namespace LAZYSHELL
                 return null;
             }
             offset += 4;
-            int sc1size = Bits.GetUInt32(inWav, offset);
+            int sc1size = Bits.Get32Bit(inWav, offset);
             offset += 4;
             if (sc1size < 0x10										//Size of sub-chunk1 (header) must be at least 16
                 || Bits.GetShort(inWav, offset) != 1	//Must be in PCM format
@@ -201,7 +199,7 @@ namespace LAZYSHELL
                 return null;
             }
             offset += 4;
-            int Sub2Size = Bits.GetUInt32(inWav, offset);		//Read sub-chunk 2 size
+            int Sub2Size = Bits.Get32Bit(inWav, offset);		//Read sub-chunk 2 size
             offset += 4;
             short[] samples = new short[Sub2Size / BlockAlign];
             switch (BitPerSample)

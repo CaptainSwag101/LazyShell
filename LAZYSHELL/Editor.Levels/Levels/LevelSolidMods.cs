@@ -14,8 +14,8 @@ namespace LAZYSHELL
         [NonSerialized()]
         private byte[] data;
         public byte[] Data { get { return this.data; } set { this.data = value; } }
-        private ArrayList mods = new ArrayList();
-        public ArrayList Mods { get { return mods; } set { mods = value; } }
+        private List<Mod> mods = new List<Mod>();
+        public List<Mod> Mods { get { return mods; } set { mods = value; } }
         private int currentMod = 0;
         public int CurrentMod
         {
@@ -217,6 +217,7 @@ namespace LAZYSHELL
                     CopyToTiles();
                 }
             }
+            [NonSerialized()]
             private int[] pixels;
             public override int[] Pixels { get { return pixels; } set { pixels = value; } }
             private Bitmap image;

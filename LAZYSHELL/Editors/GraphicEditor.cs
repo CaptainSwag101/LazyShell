@@ -75,9 +75,9 @@ namespace LAZYSHELL
             this.length = length;
             this.start = start;
             this.currentPalette = start;
+            this.graphics = graphics;
             this.graphicsBackup = new byte[graphics.Length];
             graphics.CopyTo(graphicsBackup, 0);
-            this.graphics = graphics;
             this.paletteSet = paletteSet;
             this.format = format;
             this.overlay = new Overlay();
@@ -246,6 +246,8 @@ namespace LAZYSHELL
                 action = "erase";
             else if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && subtileDropper.Checked)
                 action = "select";
+            else if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && subtileFill.Checked)
+                action = contiguous.Checked ? "fill" : "replace";
             int color = currentColor;
             if (e.Button == MouseButtons.Right)
                 color = currentColorBack;
@@ -258,9 +260,9 @@ namespace LAZYSHELL
                 pictureBoxGraphicSet.Invalidate(new Rectangle(x / zoom * zoom, y / zoom * zoom, 1 * zoom, 1 * zoom));
 
             currentPixel = (x / zoom) + (y / zoom);
-            if (e.Button == MouseButtons.Left)
+            if (action == "select" && e.Button == MouseButtons.Left)
                 currentColor = color;
-            else if (e.Button == MouseButtons.Right)
+            else if (action == "select" && e.Button == MouseButtons.Right)
                 currentColorBack = color;
             pictureBoxPalette.Invalidate();
             pictureBoxColor.Invalidate();
@@ -268,11 +270,12 @@ namespace LAZYSHELL
         }
         private void pictureBoxGraphicSet_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!subtileDraw.Checked && !subtileErase.Checked) return;
+            if (!subtileDraw.Checked && !subtileErase.Checked && !subtileFill.Checked) return;
 
             if (e.Button == MouseButtons.Left || e.Button == MouseButtons.Right)
                 SetGraphicSetImage();
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
         }
 
         // Graphic Set Editor context menu items
@@ -313,7 +316,8 @@ namespace LAZYSHELL
                 fs.Close();
             }
             SetGraphicSetImage();
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
         }
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -337,7 +341,7 @@ namespace LAZYSHELL
                 bw.Close();
                 fs.Close();
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("There was a problem exporting the graphic block.", "LAZY SHELL");
             }
@@ -354,7 +358,10 @@ namespace LAZYSHELL
         }
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Array.Clear(graphics, 0, graphics.Length);
+            SetGraphicSetImage();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
         }
 
         // Graphic Set Editor toolstrip buttons
@@ -363,6 +370,7 @@ namespace LAZYSHELL
             subtileDraw.Checked = false;
             subtileErase.Checked = false;
             subtileDropper.Checked = false;
+            subtileFill.Checked = false;
             graphicZoomOut.Checked = false;
             if (graphicZoomIn.Checked)
                 pictureBoxGraphicSet.Cursor = new Cursor(GetType(), "CursorZoomIn.cur");
@@ -379,6 +387,7 @@ namespace LAZYSHELL
             subtileDraw.Checked = false;
             subtileErase.Checked = false;
             subtileDropper.Checked = false;
+            subtileFill.Checked = false;
             graphicZoomIn.Checked = false;
             if (graphicZoomOut.Checked)
                 pictureBoxGraphicSet.Cursor = new Cursor(GetType(), "CursorZoomOut.cur");
@@ -402,6 +411,7 @@ namespace LAZYSHELL
         {
             subtileErase.Checked = false;
             subtileDropper.Checked = false;
+            subtileFill.Checked = false;
             graphicZoomIn.Checked = false;
             graphicZoomOut.Checked = false;
 
@@ -414,6 +424,7 @@ namespace LAZYSHELL
         {
             subtileDraw.Checked = false;
             subtileDropper.Checked = false;
+            subtileFill.Checked = false;
             graphicZoomIn.Checked = false;
             graphicZoomOut.Checked = false;
 
@@ -426,6 +437,7 @@ namespace LAZYSHELL
         {
             subtileDraw.Checked = false;
             subtileErase.Checked = false;
+            subtileFill.Checked = false;
             graphicZoomIn.Checked = false;
             graphicZoomOut.Checked = false;
 
@@ -433,6 +445,20 @@ namespace LAZYSHELL
                 pictureBoxGraphicSet.Cursor = Cursors.Arrow;
             else
                 pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorDropper.cur");
+        }
+        private void subtileFill_Click(object sender, EventArgs e)
+        {
+            subtileDraw.Checked = false;
+            subtileErase.Checked = false;
+            subtileDropper.Checked = false;
+            graphicZoomIn.Checked = false;
+            graphicZoomOut.Checked = false;
+            contiguous.Visible = subtileFill.Checked;
+
+            if (!subtileFill.Checked)
+                pictureBoxGraphicSet.Cursor = Cursors.Arrow;
+            else
+                pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorFill.cur");
         }
 
         private void GraphicEditor_FormClosing(object sender, FormClosingEventArgs e)
@@ -442,22 +468,25 @@ namespace LAZYSHELL
         private void buttonOK_Click(object sender, EventArgs e)
         {
             graphics.CopyTo(graphicsBackup, 0);
-            update.DynamicInvoke();
             this.Close();
+            if (!autoUpdate.Checked)
+                update.DynamicInvoke();
         }
         private void buttonCancel_Click(object sender, EventArgs e)
-        {            
+        {
             this.Close();
         }
         private void buttonReset_Click(object sender, EventArgs e)
         {
             graphicsBackup.CopyTo(graphics, 0);
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             SetGraphicSetImage();
         }
         private void panel109_Scroll(object sender, ScrollEventArgs e)
         {
             pictureBoxGraphicSet.Invalidate();
+            panel109.Invalidate();
         }
 
         private void widthDecrease_Click(object sender, EventArgs e)
@@ -547,6 +576,11 @@ namespace LAZYSHELL
             if (subtileDraw.Checked || subtileErase.Checked || subtileDropper.Checked ||
                 graphicZoomIn.Checked || graphicZoomOut.Checked)
                 e.Cancel = true;
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            update.DynamicInvoke();
         }
     }
 }

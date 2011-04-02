@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
@@ -11,14 +12,17 @@ namespace LAZYSHELL
 {
     public partial class Allies : Form
     {
-        private Model model = State.Instance.Model;
+        #region Variables
         private Settings settings = Settings.Default;
-        private Character[] characters { get { return model.Characters; } set { model.Characters = value; } }
+        private Character[] characters { get { return Model.Characters; } set { Model.Characters = value; } }
         private Character character { get { return characters[index]; } set { characters[index] = value; } }
-        private Slot[] slots { get { return model.Slots; } set { model.Slots = value; } }
+        private Slot[] slots { get { return Model.Slots; } set { Model.Slots = value; } }
         private Slot slot { get { return slots[(int)slotNum.Value]; } set { slots[(int)slotNum.Value] = value; } }
+        //
         private bool updating = false;
         private int index = 0; public int Index { get { return index; } }
+        #endregion
+        #region Functions
         public Allies()
         {
             this.settings.KeystrokesMenu[0x20] = "\x20";
@@ -45,20 +49,20 @@ namespace LAZYSHELL
 
             this.startingMagic.Items.Clear();
             for (int i = 0; i < 32; i++)
-                this.startingMagic.Items.Add(new string(model.Spells[i].Name));
+                this.startingMagic.Items.Add(new string(Model.Spells[i].Name));
 
             this.startingWeapon.Items.Clear();
-            this.startingWeapon.Items.AddRange(this.model.ItemNames.GetNames());
+            this.startingWeapon.Items.AddRange(Model.ItemNames.GetNames());
             this.startingAccessory.Items.Clear();
-            this.startingAccessory.Items.AddRange(this.model.ItemNames.GetNames());
+            this.startingAccessory.Items.AddRange(Model.ItemNames.GetNames());
             this.startingArmor.Items.Clear();
-            this.startingArmor.Items.AddRange(this.model.ItemNames.GetNames());
+            this.startingArmor.Items.AddRange(Model.ItemNames.GetNames());
             this.startingItem.Items.Clear();
-            this.startingItem.Items.AddRange(this.model.ItemNames.GetNames());
+            this.startingItem.Items.AddRange(Model.ItemNames.GetNames());
             this.startingSpecialItem.Items.Clear();
-            this.startingSpecialItem.Items.AddRange(this.model.ItemNames.GetNames());
+            this.startingSpecialItem.Items.AddRange(Model.ItemNames.GetNames());
             this.startingEquipment.Items.Clear();
-            this.startingEquipment.Items.AddRange(this.model.ItemNames.GetNames());
+            this.startingEquipment.Items.AddRange(Model.ItemNames.GetNames());
             updating = false;
         }
         public void RefreshCharacter()
@@ -76,9 +80,9 @@ namespace LAZYSHELL
             this.startingMgDefense.Value = character.StartingMgDefense;
             this.startingSpeed.Value = character.StartingSpeed;
 
-            this.startingWeapon.SelectedIndex = model.ItemNames.GetIndexFromNum(character.StartingWeapon);
-            this.startingArmor.SelectedIndex = model.ItemNames.GetIndexFromNum(character.StartingArmor);
-            this.startingAccessory.SelectedIndex = model.ItemNames.GetIndexFromNum(character.StartingAccessory);
+            this.startingWeapon.SelectedIndex = Model.ItemNames.GetIndexFromNum(character.StartingWeapon);
+            this.startingArmor.SelectedIndex = Model.ItemNames.GetIndexFromNum(character.StartingArmor);
+            this.startingAccessory.SelectedIndex = Model.ItemNames.GetIndexFromNum(character.StartingAccessory);
 
             this.startingExperience.Value = character.StartingExperience;
             this.startingCurrentHP.Value = character.StartingCurrentHP;
@@ -122,18 +126,18 @@ namespace LAZYSHELL
         }
         private void RefreshSlots()
         {
-            this.startingItem.SelectedIndex = model.ItemNames.GetIndexFromNum(slot.Item);
+            this.startingItem.SelectedIndex = Model.ItemNames.GetIndexFromNum(slot.Item);
             if (this.slotNum.Value <= 14)
             {
                 this.startingSpecialItem.Enabled = true;
-                this.startingSpecialItem.SelectedIndex = model.ItemNames.GetIndexFromNum(slot.SpecialItem);
+                this.startingSpecialItem.SelectedIndex = Model.ItemNames.GetIndexFromNum(slot.SpecialItem);
             }
             else
             {
                 this.startingSpecialItem.Enabled = false;
                 this.startingSpecialItem.SelectedIndex = 0;
             }
-            this.startingEquipment.SelectedIndex = model.ItemNames.GetIndexFromNum(slot.Equipment);
+            this.startingEquipment.SelectedIndex = Model.ItemNames.GetIndexFromNum(slot.Equipment);
         }
         public void SetToolTips(ToolTip toolTip1)
         {
@@ -259,6 +263,7 @@ namespace LAZYSHELL
             toolTip1.SetToolTip(this.numericUpDown119,
                 toolTip1.GetToolTip(this.lvl1TimingEnd));
         }
+        #endregion
         #region Event Handlers
         private void characterName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -269,15 +274,15 @@ namespace LAZYSHELL
         private void characterName_DrawItem(object sender, DrawItemEventArgs e)
         {
             Do.DrawName(
-                sender, e, new BattleDialoguePreview(), Lists.Convert(model.Characters),
-                model.FontMenu, model.FontPaletteBattle.Palette, 8, 10, 0, 0, false, false);
+                sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
+                Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
             Do.DrawName(
-                sender, e, new BattleDialoguePreview(), model.ItemNames, model.FontMenu,
-                model.FontPaletteBattle.Palette, 8, 10, 0, 128, true, false);
+                sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
+                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, true, false, Model.MenuBackground_);
         }
         private void textBoxCharacterName_TextChanged(object sender, EventArgs e)
         {
@@ -320,15 +325,15 @@ namespace LAZYSHELL
         }
         private void startingWeapon_SelectedIndexChanged(object sender, EventArgs e)
         {
-            character.StartingWeapon = (byte)model.ItemNames.GetNumFromIndex(this.startingWeapon.SelectedIndex);
+            character.StartingWeapon = (byte)Model.ItemNames.GetNumFromIndex(this.startingWeapon.SelectedIndex);
         }
         private void startingArmor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            character.StartingArmor = (byte)model.ItemNames.GetNumFromIndex(this.startingArmor.SelectedIndex);
+            character.StartingArmor = (byte)Model.ItemNames.GetNumFromIndex(this.startingArmor.SelectedIndex);
         }
         private void startingAccessory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            character.StartingAccessory = (byte)model.ItemNames.GetNumFromIndex(this.startingAccessory.SelectedIndex);
+            character.StartingAccessory = (byte)Model.ItemNames.GetNumFromIndex(this.startingAccessory.SelectedIndex);
         }
         private void startingExperience_ValueChanged(object sender, EventArgs e)
         {
@@ -380,8 +385,9 @@ namespace LAZYSHELL
         private void startingMagic_DrawItem(object sender, DrawItemEventArgs e)
         {
             Do.DrawName(
-                sender, e, new BattleDialoguePreview(), Lists.Convert(model.Spells, 32, 1),
-                model.FontMenu, model.FontPaletteBattle.Palette, -8, 10, 0, 0, false, false);
+                sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Spells, 32, 1),
+                Model.FontMenu, Model.FontPaletteMenu.Palette, -8, 10, 0, 0, false, false,
+                Model.MenuBackground__(109, 256));
         }
         private void startingCoins_ValueChanged(object sender, EventArgs e)
         {
@@ -443,15 +449,24 @@ namespace LAZYSHELL
         }
         private void startingItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            slot.Item = (byte)model.ItemNames.GetNumFromIndex(this.startingItem.SelectedIndex);
+            slot.Item = (byte)Model.ItemNames.GetNumFromIndex(this.startingItem.SelectedIndex);
         }
         private void startingSpecialItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            slot.SpecialItem = (byte)model.ItemNames.GetNumFromIndex(this.startingSpecialItem.SelectedIndex);
+            slot.SpecialItem = (byte)Model.ItemNames.GetNumFromIndex(this.startingSpecialItem.SelectedIndex);
         }
         private void startingEquipment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            slot.Equipment = (byte)model.ItemNames.GetNumFromIndex(this.startingEquipment.SelectedIndex);
+            slot.Equipment = (byte)Model.ItemNames.GetNumFromIndex(this.startingEquipment.SelectedIndex);
+        }
+        //
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current character. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            character = new Character(Model.Data, index);
+            characterName_SelectedIndexChanged(null, null);
         }
         #endregion
     }

@@ -1,5 +1,5 @@
 LAZY SHELL - Super Mario RPG Editor
-Version: 3.3 ALPHA
+Version: 3.5 ALPHA
 Date: January 11, 2011
 Home Page: http://home.comcast.net/~giangurgolo/smrpg/
 Written by giangurgolo and Omega
@@ -18,17 +18,18 @@ ______________________________________________________________________
 PROGRAM REQUIREMENTS
 ______________________________________________________________________
 
-Microsoft .NET Framework 3.5 or higher must be installed on the 
+Microsoft .NET Framework 2.0 or higher must be installed on the 
 system for the application to run at all.
 
-Minimal system requirements: 1GB of RAM, 10MB of hard drive space.
+Minimal system requirements: 512MB of RAM (1GB recommended)
+                             10MB HD space (more if ROM back-ups used)
 
 ______________________________________________________________________
 
 MAIN FEATURES
 ______________________________________________________________________
 
-The editor is comprised of 16 individual editors.
+The editor is comprised of 15 individual editors.
 
 Various status editors include modification capabilities for the
 statuses of monsters, formations, formation packs, items, spells, 

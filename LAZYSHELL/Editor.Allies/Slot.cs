@@ -4,8 +4,10 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class Slot : Element
     {
+        [NonSerialized()]
         private byte[] data; 
         public override byte[] Data { get { return this.data; } set { this.data = value; } }
         public override int Index { get { return index; } set { index = value; } }

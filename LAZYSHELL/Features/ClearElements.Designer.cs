@@ -45,7 +45,7 @@
             this.fromIndex.Enabled = false;
             this.fromIndex.Location = new System.Drawing.Point(48, 52);
             this.fromIndex.Name = "fromIndex";
-            this.fromIndex.Size = new System.Drawing.Size(79, 20);
+            this.fromIndex.Size = new System.Drawing.Size(79, 21);
             this.fromIndex.TabIndex = 0;
             this.fromIndex.ValueChanged += new System.EventHandler(this.fromDialogue_ValueChanged);
             // 
@@ -54,7 +54,7 @@
             this.toIndex.Enabled = false;
             this.toIndex.Location = new System.Drawing.Point(155, 52);
             this.toIndex.Name = "toIndex";
-            this.toIndex.Size = new System.Drawing.Size(80, 20);
+            this.toIndex.Size = new System.Drawing.Size(80, 21);
             this.toIndex.TabIndex = 1;
             this.toIndex.Value = new decimal(new int[] {
             100,
@@ -68,7 +68,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 54);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "From";
             // 
@@ -77,7 +77,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(133, 54);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(16, 13);
+            this.label2.Size = new System.Drawing.Size(17, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "to";
             // 
@@ -107,7 +107,7 @@
             this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(12, 12);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(85, 17);
+            this.radioButton1.Size = new System.Drawing.Size(88, 17);
             this.radioButton1.TabIndex = 5;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Clear current";
@@ -119,7 +119,7 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(12, 29);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(109, 17);
+            this.radioButton2.Size = new System.Drawing.Size(112, 17);
             this.radioButton2.TabIndex = 6;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Clear within range";
@@ -139,6 +139,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.toIndex);
             this.Controls.Add(this.fromIndex);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ClearElements";
             this.ShowIcon = false;

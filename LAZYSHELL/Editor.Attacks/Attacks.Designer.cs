@@ -85,9 +85,9 @@
             // 
             this.attackName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.attackName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.attackName.DropDownHeight = 506;
+            this.attackName.DropDownHeight = 497;
             this.attackName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.attackName.DropDownWidth = 200;
+            this.attackName.DropDownWidth = 146;
             this.attackName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.attackName.ForeColor = System.Drawing.SystemColors.Control;
             this.attackName.ItemHeight = 15;
@@ -136,9 +136,9 @@
             this.panel169.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel169.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel169.Controls.Add(this.panel166);
-            this.panel169.Location = new System.Drawing.Point(12, 351);
+            this.panel169.Location = new System.Drawing.Point(1, 339);
             this.panel169.Name = "panel169";
-            this.panel169.Size = new System.Drawing.Size(179, 87);
+            this.panel169.Size = new System.Drawing.Size(201, 87);
             this.panel169.TabIndex = 476;
             // 
             // panel166
@@ -148,7 +148,7 @@
             this.panel166.Controls.Add(this.attackAtkType);
             this.panel166.Location = new System.Drawing.Point(0, 0);
             this.panel166.Name = "panel166";
-            this.panel166.Size = new System.Drawing.Size(175, 83);
+            this.panel166.Size = new System.Drawing.Size(197, 83);
             this.panel166.TabIndex = 514;
             // 
             // label54
@@ -159,7 +159,7 @@
             this.label54.Location = new System.Drawing.Point(0, 0);
             this.label54.Name = "label54";
             this.label54.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label54.Size = new System.Drawing.Size(175, 17);
+            this.label54.Size = new System.Drawing.Size(197, 17);
             this.label54.TabIndex = 487;
             this.label54.Text = "ATTACK TYPE";
             this.label54.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -176,7 +176,7 @@
             "No damage"});
             this.attackAtkType.Location = new System.Drawing.Point(0, 19);
             this.attackAtkType.Name = "attackAtkType";
-            this.attackAtkType.Size = new System.Drawing.Size(175, 64);
+            this.attackAtkType.Size = new System.Drawing.Size(197, 64);
             this.attackAtkType.TabIndex = 127;
             this.attackAtkType.SelectedIndexChanged += new System.EventHandler(this.attackAtkType_SelectedIndexChanged);
             // 
@@ -185,9 +185,9 @@
             this.panel168.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel168.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel168.Controls.Add(this.panel165);
-            this.panel168.Location = new System.Drawing.Point(12, 258);
+            this.panel168.Location = new System.Drawing.Point(1, 250);
             this.panel168.Name = "panel168";
-            this.panel168.Size = new System.Drawing.Size(179, 87);
+            this.panel168.Size = new System.Drawing.Size(201, 87);
             this.panel168.TabIndex = 475;
             // 
             // panel165
@@ -197,7 +197,7 @@
             this.panel165.Controls.Add(this.attackStatusUp);
             this.panel165.Location = new System.Drawing.Point(0, 0);
             this.panel165.Name = "panel165";
-            this.panel165.Size = new System.Drawing.Size(175, 83);
+            this.panel165.Size = new System.Drawing.Size(197, 83);
             this.panel165.TabIndex = 513;
             // 
             // label53
@@ -208,7 +208,7 @@
             this.label53.Location = new System.Drawing.Point(0, 0);
             this.label53.Name = "label53";
             this.label53.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label53.Size = new System.Drawing.Size(175, 17);
+            this.label53.Size = new System.Drawing.Size(197, 17);
             this.label53.TabIndex = 188;
             this.label53.Text = "STATUS UP";
             this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -225,7 +225,7 @@
             "Magic Defense"});
             this.attackStatusUp.Location = new System.Drawing.Point(0, 19);
             this.attackStatusUp.Name = "attackStatusUp";
-            this.attackStatusUp.Size = new System.Drawing.Size(175, 64);
+            this.attackStatusUp.Size = new System.Drawing.Size(197, 64);
             this.attackStatusUp.TabIndex = 126;
             this.attackStatusUp.SelectedIndexChanged += new System.EventHandler(this.attackStatusUp_SelectedIndexChanged);
             // 
@@ -234,9 +234,9 @@
             this.panel167.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel167.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel167.Controls.Add(this.panel164);
-            this.panel167.Location = new System.Drawing.Point(12, 117);
+            this.panel167.Location = new System.Drawing.Point(1, 113);
             this.panel167.Name = "panel167";
-            this.panel167.Size = new System.Drawing.Size(179, 135);
+            this.panel167.Size = new System.Drawing.Size(201, 135);
             this.panel167.TabIndex = 474;
             // 
             // panel164
@@ -246,7 +246,7 @@
             this.panel164.Controls.Add(this.attackStatusEffect);
             this.panel164.Location = new System.Drawing.Point(0, 0);
             this.panel164.Name = "panel164";
-            this.panel164.Size = new System.Drawing.Size(175, 131);
+            this.panel164.Size = new System.Drawing.Size(197, 131);
             this.panel164.TabIndex = 512;
             // 
             // label52
@@ -257,7 +257,7 @@
             this.label52.Location = new System.Drawing.Point(0, 0);
             this.label52.Name = "label52";
             this.label52.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label52.Size = new System.Drawing.Size(175, 17);
+            this.label52.Size = new System.Drawing.Size(197, 17);
             this.label52.TabIndex = 187;
             this.label52.Text = "EFFECT INFLICT";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -278,7 +278,7 @@
             "Invincible"});
             this.attackStatusEffect.Location = new System.Drawing.Point(0, 19);
             this.attackStatusEffect.Name = "attackStatusEffect";
-            this.attackStatusEffect.Size = new System.Drawing.Size(175, 112);
+            this.attackStatusEffect.Size = new System.Drawing.Size(197, 112);
             this.attackStatusEffect.TabIndex = 125;
             this.attackStatusEffect.SelectedIndexChanged += new System.EventHandler(this.attackStatusEffect_SelectedIndexChanged);
             // 
@@ -287,9 +287,9 @@
             this.panel162.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel162.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel162.Controls.Add(this.panel85);
-            this.panel162.Location = new System.Drawing.Point(12, 53);
+            this.panel162.Location = new System.Drawing.Point(1, 53);
             this.panel162.Name = "panel162";
-            this.panel162.Size = new System.Drawing.Size(179, 58);
+            this.panel162.Size = new System.Drawing.Size(201, 58);
             this.panel162.TabIndex = 473;
             // 
             // panel85
@@ -302,7 +302,7 @@
             this.panel85.Controls.Add(this.label58);
             this.panel85.Location = new System.Drawing.Point(0, 0);
             this.panel85.Name = "panel85";
-            this.panel85.Size = new System.Drawing.Size(175, 54);
+            this.panel85.Size = new System.Drawing.Size(197, 54);
             this.panel85.TabIndex = 123;
             // 
             // label11
@@ -313,7 +313,7 @@
             this.label11.Location = new System.Drawing.Point(0, 0);
             this.label11.Name = "label11";
             this.label11.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label11.Size = new System.Drawing.Size(175, 17);
+            this.label11.Size = new System.Drawing.Size(197, 17);
             this.label11.TabIndex = 190;
             this.label11.Text = "STATS";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -328,7 +328,7 @@
             0,
             0});
             this.attackAtkLevel.Name = "attackAtkLevel";
-            this.attackAtkLevel.Size = new System.Drawing.Size(75, 17);
+            this.attackAtkLevel.Size = new System.Drawing.Size(97, 17);
             this.attackAtkLevel.TabIndex = 124;
             this.attackAtkLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackAtkLevel.ValueChanged += new System.EventHandler(this.attackAtkLevel_ValueChanged);
@@ -338,7 +338,7 @@
             this.attackHitRate.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.attackHitRate.Location = new System.Drawing.Point(100, 19);
             this.attackHitRate.Name = "attackHitRate";
-            this.attackHitRate.Size = new System.Drawing.Size(75, 17);
+            this.attackHitRate.Size = new System.Drawing.Size(97, 17);
             this.attackHitRate.TabIndex = 123;
             this.attackHitRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackHitRate.ValueChanged += new System.EventHandler(this.attackHitRate_ValueChanged);
@@ -386,7 +386,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(203, 450);
+            this.ClientSize = new System.Drawing.Size(203, 427);
             this.ControlBox = false;
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.panel169);

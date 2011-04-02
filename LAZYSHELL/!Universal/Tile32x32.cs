@@ -23,6 +23,13 @@ namespace LAZYSHELL
 
                 return pixels;
             }
+            set
+            {
+                subtiles[0].Pixels = Do.GetPixelRegion(value, new Rectangle(0, 0, 16, 16), 32, 32);
+                subtiles[1].Pixels = Do.GetPixelRegion(value, new Rectangle(16, 0, 16, 16), 32, 32);
+                subtiles[2].Pixels = Do.GetPixelRegion(value, new Rectangle(0, 16, 16, 16), 32, 32);
+                subtiles[3].Pixels = Do.GetPixelRegion(value, new Rectangle(16, 16, 16, 16), 32, 32);
+            }
         }
 
         public Tile16x16 GetSubtile(int placement)

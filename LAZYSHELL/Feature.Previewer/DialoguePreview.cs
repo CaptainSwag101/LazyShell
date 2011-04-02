@@ -12,8 +12,7 @@ namespace LAZYSHELL
         private FontCharacter[] fontTriangles;
         private int[] palette;
         private int[] tripal;
-        private Model model = State.Instance.Model;
-        private DialogueTable[] tables { get { return model.DialogueTables; } }
+                private DialogueTable[] tables { get { return Model.DialogueTables; } }
 
         private Point p;
         private int next = 0;

@@ -33,6 +33,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBoxColor = new System.Windows.Forms.PictureBox();
             this.panelImageGraphics = new System.Windows.Forms.Panel();
+            this.contiguous = new System.Windows.Forms.CheckBox();
             this.panel109 = new System.Windows.Forms.Panel();
             this.pictureBoxGraphicSet = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -51,6 +52,7 @@
             this.subtileDraw = new System.Windows.Forms.ToolStripButton();
             this.subtileErase = new System.Windows.Forms.ToolStripButton();
             this.subtileDropper = new System.Windows.Forms.ToolStripButton();
+            this.subtileFill = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator34 = new System.Windows.Forms.ToolStripSeparator();
             this.graphicZoomIn = new System.Windows.Forms.ToolStripButton();
             this.graphicZoomOut = new System.Windows.Forms.ToolStripButton();
@@ -66,6 +68,8 @@
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.autoUpdate = new System.Windows.Forms.CheckBox();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).BeginInit();
             this.panelImageGraphics.SuspendLayout();
@@ -104,14 +108,30 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelImageGraphics.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelImageGraphics.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelImageGraphics.Controls.Add(this.contiguous);
             this.panelImageGraphics.Controls.Add(this.panel109);
             this.panelImageGraphics.Controls.Add(this.sizeLabel);
             this.panelImageGraphics.Controls.Add(this.coordsLabel);
             this.panelImageGraphics.Controls.Add(this.toolStrip2);
             this.panelImageGraphics.Location = new System.Drawing.Point(12, 86);
             this.panelImageGraphics.Name = "panelImageGraphics";
-            this.panelImageGraphics.Size = new System.Drawing.Size(277, 467);
+            this.panelImageGraphics.Size = new System.Drawing.Size(418, 467);
             this.panelImageGraphics.TabIndex = 498;
+            this.panelImageGraphics.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel109_Scroll);
+            // 
+            // contiguous
+            // 
+            this.contiguous.BackColor = System.Drawing.SystemColors.Control;
+            this.contiguous.Checked = true;
+            this.contiguous.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.contiguous.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contiguous.Location = new System.Drawing.Point(3, 25);
+            this.contiguous.Name = "contiguous";
+            this.contiguous.Size = new System.Drawing.Size(80, 17);
+            this.contiguous.TabIndex = 499;
+            this.contiguous.Text = "Contiguous";
+            this.contiguous.UseVisualStyleBackColor = false;
+            this.contiguous.Visible = false;
             // 
             // panel109
             // 
@@ -123,9 +143,10 @@
             this.panel109.Controls.Add(this.pictureBoxGraphicSet);
             this.panel109.Location = new System.Drawing.Point(0, 43);
             this.panel109.Name = "panel109";
-            this.panel109.Size = new System.Drawing.Size(273, 402);
+            this.panel109.Size = new System.Drawing.Size(414, 402);
             this.panel109.TabIndex = 498;
             this.panel109.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panel109_PreviewKeyDown);
+            this.panel109.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel109_Scroll);
             this.panel109.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel109_MouseDown);
             // 
             // pictureBoxGraphicSet
@@ -156,39 +177,39 @@
             this.contextMenuStrip.Name = "contextMenuStrip1";
             this.contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(119, 120);
+            this.contextMenuStrip.Size = new System.Drawing.Size(117, 120);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.importToolStripMenuItem.Text = "Import...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.saveImageToolStripMenuItem.Text = "Save image...";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
             // toolStripSeparator36
             // 
             this.toolStripSeparator36.Name = "toolStripSeparator36";
-            this.toolStripSeparator36.Size = new System.Drawing.Size(115, 6);
+            this.toolStripSeparator36.Size = new System.Drawing.Size(113, 6);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
@@ -196,7 +217,7 @@
             // 
             this.applyBorderToolStripMenuItem.Enabled = false;
             this.applyBorderToolStripMenuItem.Name = "applyBorderToolStripMenuItem";
-            this.applyBorderToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.applyBorderToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.applyBorderToolStripMenuItem.Text = "Apply border";
             // 
             // sizeLabel
@@ -206,7 +227,7 @@
             this.sizeLabel.Location = new System.Drawing.Point(0, 446);
             this.sizeLabel.Name = "sizeLabel";
             this.sizeLabel.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.sizeLabel.Size = new System.Drawing.Size(273, 17);
+            this.sizeLabel.Size = new System.Drawing.Size(414, 17);
             this.sizeLabel.TabIndex = 497;
             this.sizeLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -217,7 +238,7 @@
             this.coordsLabel.Location = new System.Drawing.Point(0, 25);
             this.coordsLabel.Name = "coordsLabel";
             this.coordsLabel.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.coordsLabel.Size = new System.Drawing.Size(273, 17);
+            this.coordsLabel.Size = new System.Drawing.Size(414, 17);
             this.coordsLabel.TabIndex = 497;
             this.coordsLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -232,6 +253,7 @@
             this.subtileDraw,
             this.subtileErase,
             this.subtileDropper,
+            this.subtileFill,
             this.toolStripSeparator34,
             this.graphicZoomIn,
             this.graphicZoomOut,
@@ -244,7 +266,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(273, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(414, 25);
             this.toolStrip2.TabIndex = 51;
             this.toolStrip2.TabStop = true;
             this.toolStrip2.Text = "toolStrip2";
@@ -314,6 +336,18 @@
             this.subtileDropper.Size = new System.Drawing.Size(23, 22);
             this.subtileDropper.Text = "Choose Color";
             this.subtileDropper.Click += new System.EventHandler(this.subtileDropper_Click);
+            // 
+            // subtileFill
+            // 
+            this.subtileFill.CheckOnClick = true;
+            this.subtileFill.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.subtileFill.Image = global::LAZYSHELL.Properties.Resources.fill_small;
+            this.subtileFill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.subtileFill.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.subtileFill.Name = "subtileFill";
+            this.subtileFill.Size = new System.Drawing.Size(23, 22);
+            this.subtileFill.Text = "Fill";
+            this.subtileFill.Click += new System.EventHandler(this.subtileFill_Click);
             // 
             // toolStripSeparator34
             // 
@@ -441,7 +475,7 @@
             // 
             this.buttonReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonReset.FlatAppearance.BorderSize = 0;
-            this.buttonReset.Location = new System.Drawing.Point(214, 559);
+            this.buttonReset.Location = new System.Drawing.Point(355, 559);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 503;
@@ -452,7 +486,7 @@
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.FlatAppearance.BorderSize = 0;
-            this.buttonOK.Location = new System.Drawing.Point(52, 559);
+            this.buttonOK.Location = new System.Drawing.Point(193, 559);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 501;
@@ -463,18 +497,46 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.FlatAppearance.BorderSize = 0;
-            this.buttonCancel.Location = new System.Drawing.Point(133, 559);
+            this.buttonCancel.Location = new System.Drawing.Point(274, 559);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 502;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonUpdate.Location = new System.Drawing.Point(12, 559);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.TabIndex = 536;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
+            // autoUpdate
+            // 
+            this.autoUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.autoUpdate.AutoSize = true;
+            this.autoUpdate.BackColor = System.Drawing.SystemColors.Control;
+            this.autoUpdate.Checked = true;
+            this.autoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.autoUpdate.Location = new System.Drawing.Point(93, 565);
+            this.autoUpdate.Name = "autoUpdate";
+            this.autoUpdate.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.autoUpdate.Size = new System.Drawing.Size(91, 17);
+            this.autoUpdate.TabIndex = 535;
+            this.autoUpdate.Text = "Auto-update";
+            this.autoUpdate.UseVisualStyleBackColor = false;
+            // 
             // GraphicEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 594);
+            this.ClientSize = new System.Drawing.Size(442, 594);
+            this.Controls.Add(this.buttonUpdate);
+            this.Controls.Add(this.autoUpdate);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panelImageGraphics);
             this.Controls.Add(this.buttonReset);
@@ -485,7 +547,6 @@
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GraphicEditor";
             this.ShowIcon = false;
@@ -507,6 +568,7 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorBack)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -548,6 +610,10 @@
         private System.Windows.Forms.ToolStripButton widthIncrease;
         private System.Windows.Forms.ToolStripButton heightDecrease;
         private System.Windows.Forms.ToolStripButton heightIncrease;
+        private System.Windows.Forms.ToolStripButton subtileFill;
+        private System.Windows.Forms.CheckBox contiguous;
+        private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.CheckBox autoUpdate;
 
     }
 }

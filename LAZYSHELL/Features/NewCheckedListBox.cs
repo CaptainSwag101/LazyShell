@@ -12,7 +12,7 @@ namespace LAZYSHELL
             : base()
         {
         }
-        public event DrawItemEventHandler DrawItem;
+        public new event DrawItemEventHandler DrawItem;
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
             if (DrawItem != null)

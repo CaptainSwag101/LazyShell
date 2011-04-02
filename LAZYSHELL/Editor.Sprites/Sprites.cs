@@ -19,10 +19,10 @@ namespace LAZYSHELL
     public partial class Sprites : Form
     {
         #region Variables
+        private long checksum;
         // main
         private delegate void Function();
         private byte[] data;
-        private Model model = State.Instance.Model;
         private State state = State.Instance;
         private Settings settings = Settings.Default;
         private Overlay overlay;
@@ -39,10 +39,10 @@ namespace LAZYSHELL
             set
             {
                 graphics = value;
-                graphics.CopyTo(model.SpriteGraphics, image.GraphicOffset - 0x280000);
+                graphics.CopyTo(Model.SpriteGraphics, image.GraphicOffset - 0x280000);
             }
         }
-        private byte[] spriteGraphics { get { return model.SpriteGraphics; } }
+        private byte[] spriteGraphics { get { return Model.SpriteGraphics; } }
         // indexed variables
         public int index { get { return (int)number.Value; } set { number.Value = value; } }
         private Sprite sprite { get { return sprites[index]; } set { sprites[index] = value; } }
@@ -56,10 +56,6 @@ namespace LAZYSHELL
         public int[] Palette { get { return paletteSet.Palette; } }
         public PaletteSet PaletteSet { get { return paletteSet; } set { paletteSet = value; } }
         public int AvailableBytes { get { return availableBytes; } set { availableBytes = value; } }
-        // other
-        private bool waitBothCoords = false;
-        private bool waitForChange = false;
-        private ProgressBar progressBar;
         // editors
         private SpriteMolds molds;
         public SpriteMolds Molds { get { return molds; } set { molds = value; } }
@@ -81,11 +77,11 @@ namespace LAZYSHELL
             toolTip1.InitialDelay = 0;
             searchWindow = new Search(number, nameTextBox, searchEffectNames, name.Items);
             // set data
-            this.data = model.Data;
-            this.sprites = model.Sprites;
-            this.animations = model.Animations;
-            this.palettes = model.SpritePalettes;
-            this.images = model.GraphicPalettes;
+            this.data = Model.Data;
+            this.sprites = Model.Sprites;
+            this.animations = Model.Animations;
+            this.palettes = Model.SpritePalettes;
+            this.images = Model.GraphicPalettes;
             this.overlay = new Overlay();
             graphics = image.Graphics(spriteGraphics);
             // tooltips
@@ -115,6 +111,8 @@ namespace LAZYSHELL
             openSequences.Checked = true;
             sequences.Visible = true;
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
+            //
+            checksum = Do.GenerateChecksum(sprites, animations, images, graphics);
         }
         private void RefreshSpritesEditor()
         {
@@ -161,7 +159,7 @@ namespace LAZYSHELL
                 length += animations[i].SM.Length;
             availableBytes = totalSize - length;
             animationAvailableBytes.BackColor = availableBytes > 0 ? Color.Lime : Color.Red;
-            animationAvailableBytes.Text = "AVAILABLE BYTES: " + availableBytes.ToString();
+            animationAvailableBytes.Text = availableBytes.ToString() + " bytes free (animations)";
         }
         public void Assemble()
         {
@@ -226,9 +224,17 @@ namespace LAZYSHELL
             if (i < 444)
                 MessageBox.Show("The available space for animation data in bank 0x360000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 444 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
 
+            foreach (Sprite s in sprites)
+                s.Assemble();
+            foreach (GraphicPalette gp in images)
+                gp.Assemble();
             foreach (PaletteSet p in palettes)
                 p.Assemble();
-            Buffer.BlockCopy(model.SpriteGraphics, 0, data, 0x280000, 0xB4000);
+            Buffer.BlockCopy(Model.SpriteGraphics, 0, data, 0x280000, 0xB4000);
+
+            Model.HexViewer.Offset = animation.AnimationOffset & 0xFFFFF0;
+            Model.HexViewer.SelectionStart = (animation.AnimationOffset & 15) * 3;
+            Model.HexViewer.Compare();
         }
         public void EnableOnPlayback(bool enable)
         {
@@ -338,6 +344,7 @@ namespace LAZYSHELL
             sequences.SetSequenceFrameImages();
             sequences.InvalidateImages();
             LoadGraphicEditor();
+            checksum--;   // b/c switching colors won't modify checksum
         }
         public void GraphicUpdate()
         {
@@ -350,13 +357,15 @@ namespace LAZYSHELL
             molds.SetTilemapImage();
             sequences.SetSequenceFrameImages();
             sequences.InvalidateImages();
-            graphics.CopyTo(model.SpriteGraphics, image.GraphicOffset - 0x280000);
+            graphics.CopyTo(Model.SpriteGraphics, image.GraphicOffset - 0x280000);
         }
         #endregion
         #region Event Handlers
         // main
         private void Sprites_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Do.GenerateChecksum(sprites, animations, images, graphics) == checksum)
+                goto Close;
             DialogResult result = MessageBox.Show(
                 "Sprites have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -368,17 +377,18 @@ namespace LAZYSHELL
             else if (result == DialogResult.No)
             {
                 graphicEditor.Close();
-                model.Sprites = null;
-                model.SpriteGraphics = null;
-                model.SpritePalettes = null;
-                model.Animations = null;
-                model.GraphicPalettes = null;
+                Model.Sprites = null;
+                Model.SpriteGraphics = null;
+                Model.SpritePalettes = null;
+                Model.Animations = null;
+                Model.GraphicPalettes = null;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
+        Close:
             paletteEditor.Close();
             searchWindow.Close();
         }
@@ -526,89 +536,33 @@ namespace LAZYSHELL
                 return;
             RefreshSpritesEditor();
         }
+        private void hexViewer_Click(object sender, EventArgs e)
+        {
+            Model.HexViewer.Offset = animation.AnimationOffset & 0xFFFFF0;
+            Model.HexViewer.SelectionStart = (animation.AnimationOffset & 15) * 3;
+            Model.HexViewer.Compare();
+            Model.HexViewer.Show();
+        }
         private void allMoldImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ExportAllMoldImages();
+            ExportImages exportImages = new ExportImages(index, "sprites");
+            exportImages.ShowDialog();
         }
         private void allSequenceImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
-        private void ExportAllMoldImages()
-        {
-            bool crop = MessageBox.Show(
-                "Would you like to crop the saved image to the bounds of the pixel edges?", "LAZY SHELL",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
-            // first, open and create directory
-            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-            folderBrowserDialog1.SelectedPath = Settings.Default.LastDirectory;
-            folderBrowserDialog1.Description = "Select directory to export to";
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                Settings.Default.LastDirectory = folderBrowserDialog1.SelectedPath;
-            else
-                return;
-            string fullPath = folderBrowserDialog1.SelectedPath + "\\" + model.GetFileNameWithoutPath() + " - Sprite Mold Images";
-            DirectoryInfo di = new DirectoryInfo(fullPath);
-            if (!di.Exists)
-                di.Create();
-            // set the backgroundworker properties
-            Export_Worker.DoWork += (s, e) => Export_Worker_DoWork(s, e, fullPath, crop);
-            Export_Worker.ProgressChanged += new ProgressChangedEventHandler(Export_Worker_ProgressChanged);
-            Export_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Export_Worker_RunWorkerCompleted);
-            progressBar = new ProgressBar("EXPORTING SPRITE MOLD IMAGES...", sprites.Length, Export_Worker);
-            progressBar.Show();
-            Export_Worker.RunWorkerAsync();
-            while (Export_Worker.IsBusy)
-                Application.DoEvents();
-        }
-        private void Export_Worker_DoWork(object sender, DoWorkEventArgs e, string fullPath, bool crop)
-        {
-            foreach (Sprite s in sprites)
-            {
-                if (Export_Worker.CancellationPending)
-                    break;
-                Export_Worker.ReportProgress(s.Index);
-                DirectoryInfo di = new DirectoryInfo(fullPath + "\\Sprite #" + s.Index.ToString("d4"));
-                if (!di.Exists)
-                    di.Create();
-                int index = 0;
-                foreach (Mold m in animations[s.AnimationPacket].Molds)
-                {
-                    foreach (Mold.Tile t in m.Tiles)
-                        t.Set8x8Tiles(
-                            images[s.GraphicPalettePacket].Graphics(spriteGraphics),
-                            palettes[images[s.GraphicPalettePacket].PaletteNum + s.PaletteIndex].Palette,
-                            m.Gridplane);
-                    int[] pixels;
-                    Rectangle region;
-                    if (crop)
-                    {
-                        if (m.Gridplane)
-                            region = Do.Crop(m.GridplanePixels(), out pixels, 32, 32);
-                        else
-                            region = Do.Crop(m.MoldPixels(), out pixels, 256, 256);
-                    }
-                    else
-                    {
-                        region = new Rectangle(new Point(0, 0), m.Gridplane ? new Size(32, 32) : new Size(256, 256));
-                        pixels = m.Gridplane ? m.GridplanePixels() : m.MoldPixels();
-                    }
-                    Do.PixelsToImage(pixels, region.Width, region.Height).Save(
-                        fullPath + "\\Sprite #" + s.Index.ToString("d4") + "\\mold." + index.ToString("d2") + ".png", ImageFormat.Png);
-                    index++;
-                }
-            }
-        }
-        private void Export_Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            if (progressBar != null && progressBar.Visible)
-                progressBar.PerformStep("EXPORTING SPRITE #" + e.ProgressPercentage + " MOLD IMAGES");
-        }
-        private void Export_Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (progressBar != null && progressBar.Visible)
-                progressBar.Close();
-        }
         #endregion
+
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current sprite and animation index. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            animation = new Animation(Model.Data, sprite.AnimationPacket);
+            image = new GraphicPalette(Model.Data, sprite.GraphicPalettePacket);
+            sprite = new Sprite(Model.Data, index);
+            number_ValueChanged(null, null);
+        }
     }
 }

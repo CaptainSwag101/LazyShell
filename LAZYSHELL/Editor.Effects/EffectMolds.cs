@@ -993,6 +993,7 @@ namespace LAZYSHELL
         private void importIntoTilesetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Bitmap import = new Bitmap(1, 1); import = (Bitmap)Do.Import(import);
+            if (import == null) return;
             if (import.Width != 128 || import.Height % 16 != 0 || import.Height > 256)
             {
                 if (MessageBox.Show(

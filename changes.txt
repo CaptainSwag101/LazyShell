@@ -1,5 +1,88 @@
 Major changes/additions are indicated by ***
 
+v3.5
+--------------------------------------
+General changes:
+*Changed target framework to NET 2.0
+*Closing editors w/o making any changes no longer prompts for save
+*Drop-down list backgrounds now drawn with game's menu background graphics
+*Model class now more easily accessible static class
+*Most panels are now Fixed3D appearance
+*Reset option in many editors to undo all changes to a current element
+*Search field in most editors now visible by default
+*Searching now has match case and match whole word options
+
+Editor-specific changes:
+*Animation Scripts: text dump now tags scripts with names of spell, item, etc.
+*Battle Scripts: moved battle scripts editor to monsters editor
+*Event Scripts: command category now just one listbox, saves space
+*Levels: color gradient effect on object fields and solidity map
+*NPC Editor: can now search for NPCs w/sprite w/o modifying current NPC sprite
+*Scripts: command color-coding for event and battle script editors is lighter
+*Solid Tiles: solid tile searcher and viewer now far more versatile & superior
+*Space analyzer: now one listbox, easier to manage and clearer
+
+Additions:
+***Hex editor with typical features like search, fill, copy/paste, etc***
+*Animations: added a few more descriptions for commands
+*Clearing: option to clear unused graphic sets
+*Damage Calculator: calculate damage of spells or an attack based on stats
+*Event Scripts: right-click-go-to options for jump to/run event commands
+*Graphic Editor: fill/paint bucket feature, contiguous and non-contiguous
+*Hacking Tools: auto-hack creation tools, like raising/lowering monster stats
+*Levels: export/import level architecture allows porting maps from other games
+*Levels: can now see how many bytes left for NPC's, events, exits, overlaps
+*Levels: can export a selection (one layer only) as a battlefield
+*Levels: can now edit solidity properties of a tile
+*Levels: NPC, event, exit fields display information tags next to field on map
+*Levels: jump to destination, event or formation on right-click of objects
+*Levels: option to lock tileset editing; avoid annoyances w/accidental moving
+*Levels: auto-update option and manual update for tileset editing
+*Levels: export all images with option to crop to mask edges
+*Levels: can now toggle view of priority 1 for solidity map tiles
+*Levels: click/drag solid tiles makes editing solidity map remarkably easier
+*Palette Editor: import/export palette feature added back on
+*Previewer: option to set (ie. raise) level of party members from 1 to 30
+*Previewer: option to set equipment of party members
+*Settings: option to remember and load last viewed level
+*Sprites: export all molds of each sprite as individual sprite sheet images
+*Sprites: added back option to incrementally adjust X,Y coord of tiles
+
+Fixes:
+*Allies: XP needed wasn't updating if Mario not selected
+*Battle Scripts: cut icon off of spell names b/c were showing box character
+*Clearing: clearing current for solidity and battlefields not working
+*Dialogues: couldn't draw to lower-right region of overworld font characters
+*Dialogues: battle dialogue search crashing b/c casting instead of ToString()
+*Effects: cancelling import into tileset threw exception--reading null image
+*Graphic Editor: clear function (right-click) wasn't even written at all
+*Levels: graphics weren't saving after editing in graphic editor
+*Levels: graphics weren't saving to ROM b/c edit flag not set
+*Levels: palettes and graphics were saving when choosing not to save on close
+*Levels: moving tiles in tileset was resetting edits within tilemap
+*Levels: scrollbars were resetting when changing window focus
+*Levels: free space calculation for objects confused memory of current object
+*Levels: issues with toggle off for selection and pasting
+*Levels: event goto button for NPCs wasn't disabling if battle trigger type
+*Levels: copy/paste then enable solidity or objects shrinks inside selection
+*Levels: undo/redo not working for solidity map editing; stack not updating
+*Levels: copy/paste tiles in tileset not updating pasted tile's internal index
+*Levels: erasing w/edit all layers simultaneously not always working
+*Levels: using wrong updating bool for individual properties
+*Levels: priority 1 tint not updating after undo/redo
+*NPC editor: search button wasn't doing anything
+*Previewer: was loading level exit source and not level trying to preview
+*Previewer: edit flags being reset, so issues with previewing more than once
+*Script Editors: editing script no longer causes blinking/flickering
+*Search Solid Tiles: selecting item in results listbox threw exception
+*Sprites: dragging tiles past boundaries threw an exception
+*Sprites: palette num, index, graphic set offset were not saving
+*Sprites: issues with auto-copy function; shouldn't flip copied tiles
+*Sprites: clicking tileset outside of index limit threw exception
+*Sprites: cancelling import into tileset threw exception--reading null image
+*World Maps: not saving wasn't resetting the map points
+
+
 v3.4
 --------------------------------------
 Additions:

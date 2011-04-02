@@ -14,8 +14,7 @@ namespace LAZYSHELL
         static readonly object padlock = new object();
         private bool error = false; public bool Error { get { return this.error; } }
         private Settings settings = Settings.Default;
-        private Model model = State.Instance.Model;
-        private DialogueTable[] tables { get { return model.DialogueTables; } }
+                private DialogueTable[] tables { get { return Model.DialogueTables; } }
 
         TextHelper()
         {
@@ -500,7 +499,7 @@ namespace LAZYSHELL
             {
                 arrayList.CopyTo(encodedStr);
             }
-            catch (Exception ex)
+            catch
             {
                 //MessageBox.Show("Input Error, text not valid. You probably entered a character that Super Mario RPG cannot parse. This text will not be saved unless the error is fixed.");
                 error = true;
@@ -601,7 +600,7 @@ namespace LAZYSHELL
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

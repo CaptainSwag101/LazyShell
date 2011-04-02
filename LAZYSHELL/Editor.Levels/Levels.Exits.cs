@@ -10,20 +10,18 @@ namespace LAZYSHELL
     {
         #region Variables
 
-        private LevelExits exits; // Exits for the current level
+        private LevelExits exits { get { return level.LevelExits; } set { level.LevelExits = value; } } // Exits for the current level
         private Object copyExit;
 
         #endregion
-
         #region Methods
-
         private void InitializeExitFieldProperties()
         {
             updatingProperties = true;
 
             this.exitsFieldTree.Nodes.Clear();
 
-            for (int i = 0; i < exits.NumberOfExits; i++)
+            for (int i = 0; i < exits.Count; i++)
             {
                 this.exitsFieldTree.Nodes.Add(new TreeNode("EXIT #" + i.ToString()));
             }
@@ -31,7 +29,7 @@ namespace LAZYSHELL
             if (exitsFieldTree.Nodes.Count > 0)
                 this.exitsFieldTree.SelectedNode = this.exitsFieldTree.Nodes[0];
 
-            if (exits.NumberOfExits != 0 && this.exitsFieldTree.SelectedNode != null)
+            if (exits.Count != 0 && this.exitsFieldTree.SelectedNode != null)
             {
                 exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
                 this.exitType.SelectedIndex = exits.ExitType;
@@ -40,12 +38,12 @@ namespace LAZYSHELL
                 this.exitsShowMessage.Checked = exits.ShowMessage;
                 this.exitX.Value = exits.X;
                 this.exitY.Value = exits.Y;
-                this.exitZ.Value = exits.FieldCoordZ;
+                this.exitZ.Value = exits.Z;
                 this.exitFace.SelectedIndex = exits.Face;
                 this.exitLength.Value = exits.Width + 1;
-                this.exitHeight.Value = exits.FieldHeight;
-                this.exits45LengthPlusHalf.Checked = exits.FieldWidthXPlusHalf;
-                this.exits135LengthPlusHalf.Checked = exits.FieldWidthYPlusHalf;
+                this.exitHeight.Value = exits.Height;
+                this.exits45LengthPlusHalf.Checked = exits.WidthXPlusHalf;
+                this.exits135LengthPlusHalf.Checked = exits.WidthYPlusHalf;
                 this.exitDestX.Value = exits.DestX;
                 this.exitDestY.Value = exits.DestY;
                 this.exitDestZ.Value = exits.DestZ;
@@ -123,15 +121,17 @@ namespace LAZYSHELL
             }
 
             overlay.DrawLevelExits(exits);
+            exitsBytesLeft.Text = CalculateFreeExitSpace() + " bytes left";
+            exitsBytesLeft.BackColor = CalculateFreeExitSpace() >= 0 ? SystemColors.Control : Color.Red;
 
             updatingProperties = false;
 
         }
         private void RefreshExitFieldProperties()
         {
-            updating = true;
+            updatingProperties = true;
 
-            if (exits.NumberOfExits != 0 && this.exitsFieldTree.SelectedNode != null)
+            if (exits.Count != 0 && this.exitsFieldTree.SelectedNode != null)
             {
                 exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
                 this.exitType.SelectedIndex = exits.ExitType;
@@ -140,12 +140,12 @@ namespace LAZYSHELL
                 this.exitsShowMessage.Checked = exits.ShowMessage;
                 this.exitX.Value = exits.X;
                 this.exitY.Value = exits.Y;
-                this.exitZ.Value = exits.FieldCoordZ;
+                this.exitZ.Value = exits.Z;
                 this.exitFace.SelectedIndex = exits.Face;
                 this.exitLength.Value = exits.Width + 1;
-                this.exitHeight.Value = exits.FieldHeight;
-                this.exits45LengthPlusHalf.Checked = exits.FieldWidthXPlusHalf;
-                this.exits135LengthPlusHalf.Checked = exits.FieldWidthYPlusHalf;
+                this.exitHeight.Value = exits.Height;
+                this.exits45LengthPlusHalf.Checked = exits.WidthXPlusHalf;
+                this.exits135LengthPlusHalf.Checked = exits.WidthYPlusHalf;
                 this.exitDestX.Value = exits.DestX;
                 this.exitDestY.Value = exits.DestY;
                 this.exitDestZ.Value = exits.DestZ;
@@ -221,39 +221,37 @@ namespace LAZYSHELL
                 this.exitDestFace.SelectedIndex = 0;
                 this.marioZCoordPlusHalf.Checked = false;
             }
-            updating = false;
-        }
+            exitsBytesLeft.Text = CalculateFreeExitSpace() + " bytes left";
+            exitsBytesLeft.BackColor = CalculateFreeExitSpace() >= 0 ? SystemColors.Control : Color.Red;
 
+            updatingProperties = false;
+        }
         private void SetExitDestinationItems()
         {
             this.exitDest.Items.Clear();
             if (this.exitType.SelectedIndex == 0)
             {
+                this.exitDest.DropDownWidth = 490;
                 this.exitDest.Items.AddRange(Lists.Convert(settings.LevelNames));
             }
             else
             {
-                this.exitDest.Items.AddRange(Lists.MapNames);
+                this.exitDest.DropDownWidth = 200;
+                this.exitDest.Items.AddRange(Lists.Numerize(Model.MapPoints));
             }
         }
-
         public int CalculateFreeExitSpace()
         {
             int used = 0;
 
-            for (int i = 0; i < 512; i++)
+            foreach(Level level in levels)
             {
-                for (int j = 0; j < levels[i].LevelExits.NumberOfExits; j++)
-                {
-                    levels[i].LevelExits.CurrentExit = j;
-                    used += levels[i].LevelExits.GetExitLength();
-                }
+                foreach(Exit exit in level.LevelExits.Exits)
+                    used += exit.GetExitLength();
             }
             return 0x179F - used;
         }
-
         #endregion
-
         #region Event Handlers
         public TreeView ExitsFieldTree { get { return exitsFieldTree; } set { exitsFieldTree = value; } }
         private void exitsFieldTree_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
@@ -272,10 +270,10 @@ namespace LAZYSHELL
         {
             if (exits45LengthPlusHalf.Checked) exits45LengthPlusHalf.ForeColor = Color.Black;
             else exits45LengthPlusHalf.ForeColor = Color.Gray;
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
-            exits.FieldWidthXPlusHalf = this.exits45LengthPlusHalf.Checked;
+            exits.WidthXPlusHalf = this.exits45LengthPlusHalf.Checked;
 
             overlay.DrawLevelExits(exits);
 
@@ -287,10 +285,10 @@ namespace LAZYSHELL
         {
             if (exits135LengthPlusHalf.Checked) exits135LengthPlusHalf.ForeColor = Color.Black;
             else exits135LengthPlusHalf.ForeColor = Color.Gray;
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
-            exits.FieldWidthYPlusHalf = this.exits135LengthPlusHalf.Checked;
+            exits.WidthYPlusHalf = this.exits135LengthPlusHalf.Checked;
 
             overlay.DrawLevelExits(exits);
 
@@ -300,7 +298,7 @@ namespace LAZYSHELL
         }
         private void exitsType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             if (CalculateFreeExitSpace() >= 0)
             {
@@ -316,22 +314,23 @@ namespace LAZYSHELL
             {
                 this.exitType.SelectedIndex = 1;
             }
+            levelsTilemap.Picture.Invalidate();
         }
         private void exitsMarioZCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.DestZ = (byte)this.exitDestZ.Value;
         }
         private void exitsMarioYCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.DestY = (byte)this.exitDestY.Value;
         }
         private void exitsMarioXCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.DestX = (byte)this.exitDestX.Value;
         }
@@ -339,16 +338,16 @@ namespace LAZYSHELL
         {
             if (marioZCoordPlusHalf.Checked) marioZCoordPlusHalf.ForeColor = Color.Black;
             else marioZCoordPlusHalf.ForeColor = Color.Gray;
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.DestYb7 = this.marioZCoordPlusHalf.Checked;
         }
         private void exitsFieldHeight_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
-            exits.FieldHeight = (byte)this.exitHeight.Value;
+            exits.Height = (byte)this.exitHeight.Value;
 
             overlay.DrawLevelExits(exits);
 
@@ -357,7 +356,7 @@ namespace LAZYSHELL
         }
         private void exitsFieldLength_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Width = (byte)(this.exitLength.Value - 1);
@@ -369,7 +368,7 @@ namespace LAZYSHELL
         }
         private void exitsMarioRadialPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.DestFace = (byte)this.exitDestFace.SelectedIndex;
         }
@@ -377,10 +376,10 @@ namespace LAZYSHELL
         public NumericUpDown ExitY { get { return exitY; } set { exitY = value; } }
         private void exitsZ_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
-            exits.FieldCoordZ = (byte)this.exitZ.Value;
+            exits.Z = (byte)this.exitZ.Value;
 
             overlay.DrawLevelExits(exits);
 
@@ -389,12 +388,12 @@ namespace LAZYSHELL
         }
         private void exitsY_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Y = (byte)this.exitY.Value;
 
-            if (!updatingProperties)
+            if (!updatingLevel)
                 overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
@@ -402,12 +401,12 @@ namespace LAZYSHELL
         }
         private void exitsX_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.X = (byte)this.exitX.Value;
 
-            if (!updatingProperties)
+            if (!updatingLevel)
                 overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
@@ -415,7 +414,7 @@ namespace LAZYSHELL
         }
         private void exitsFace_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Face = (byte)this.exitFace.SelectedIndex;
@@ -427,15 +426,16 @@ namespace LAZYSHELL
         {
             if (exitsShowMessage.Checked) exitsShowMessage.ForeColor = Color.Black;
             else exitsShowMessage.ForeColor = Color.Gray;
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.ShowMessage = this.exitsShowMessage.Checked;
         }
         private void exitsDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
 
             exits.Destination = (ushort)this.exitDest.SelectedIndex;
+            levelsTilemap.Picture.Invalidate();
         }
         private void exitsInsertField_Click(object sender, EventArgs e)
         {
@@ -444,7 +444,7 @@ namespace LAZYSHELL
             if (CalculateFreeExitSpace() >= 8)
             {
                 this.exitsFieldTree.Focus();
-                if (exits.NumberOfExits < 28)
+                if (exits.Count < 28)
                 {
                     if (exitsFieldTree.Nodes.Count > 0)
                         exits.AddNewExit(exitsFieldTree.SelectedNode.Index + 1, p);
@@ -457,7 +457,7 @@ namespace LAZYSHELL
                         reselect = -1;
                     exitsFieldTree.BeginUpdate();
                     this.exitsFieldTree.Nodes.Clear();
-                    for (int i = 0; i < exits.NumberOfExits; i++)
+                    for (int i = 0; i < exits.Count; i++)
                         this.exitsFieldTree.Nodes.Add(new TreeNode("EXIT #" + i.ToString()));
                     this.exitsFieldTree.SelectedNode = this.exitsFieldTree.Nodes[reselect + 1];
                     exitsFieldTree.EndUpdate();
@@ -484,7 +484,7 @@ namespace LAZYSHELL
                 exitsFieldTree.BeginUpdate();
                 this.exitsFieldTree.Nodes.Clear();
 
-                for (int i = 0; i < exits.NumberOfExits; i++)
+                for (int i = 0; i < exits.Count; i++)
                     this.exitsFieldTree.Nodes.Add(new TreeNode("EXIT #" + i.ToString()));
 
                 if (exitsFieldTree.Nodes.Count > 0)
@@ -501,12 +501,12 @@ namespace LAZYSHELL
                 exitsFieldTree.EndUpdate();
             }
         }
-        private void AddNewExit(LevelExits.Exit exit)
+        private void AddNewExit(Exit exit)
         {
             if (CalculateFreeExitSpace() >= 8)
             {
                 this.exitsFieldTree.Focus();
-                if (exits.NumberOfExits < 28)
+                if (exits.Count < 28)
                 {
                     if (exitsFieldTree.Nodes.Count > 0)
                         exits.AddNewExit(exitsFieldTree.SelectedNode.Index + 1, exit);
@@ -519,7 +519,7 @@ namespace LAZYSHELL
                         reselect = -1;
                     exitsFieldTree.BeginUpdate();
                     this.exitsFieldTree.Nodes.Clear();
-                    for (int i = 0; i < exits.NumberOfExits; i++)
+                    for (int i = 0; i < exits.Count; i++)
                         this.exitsFieldTree.Nodes.Add(new TreeNode("EXIT #" + i.ToString()));
                     this.exitsFieldTree.SelectedNode = this.exitsFieldTree.Nodes[reselect + 1];
                     exitsFieldTree.EndUpdate();
@@ -539,7 +539,7 @@ namespace LAZYSHELL
         }
         private void exitsPasteField_Click(object sender, EventArgs e)
         {
-            AddNewExit((LevelExits.Exit)copyExit);
+            AddNewExit((Exit)copyExit);
         }
         private void exitsDuplicateField_Click(object sender, EventArgs e)
         {

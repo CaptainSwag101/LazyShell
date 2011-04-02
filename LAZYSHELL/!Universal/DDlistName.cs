@@ -6,6 +6,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class DDlistName
     {
         public string[] names;
@@ -86,6 +87,11 @@ namespace LAZYSHELL
                 }
             }
             return null;
+        }
+        public string GetNameByNum(int num, int startIndex)
+        {
+            string name = GetNameByNum(num);
+            return name.Substring(startIndex);
         }
 
         public void SortAlpha()

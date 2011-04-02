@@ -5,8 +5,10 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class BRRSample : Element
     {
+        [NonSerialized()]
         private byte[] data;
         public override byte[] Data { get { return data; } set { data = value; } }
         private int index;
@@ -40,10 +42,10 @@ namespace LAZYSHELL
         {
             if (sample == null)
             {
-                Bits.SetUInt24(data, index * 3 + 0x042333, 0);
+                Bits.Set24Bit(data, index * 3 + 0x042333, 0);
                 return;
             }
-            Bits.SetUInt24(data, index * 3 + 0x042333, offset + 0xC00000);
+            Bits.Set24Bit(data, index * 3 + 0x042333, offset + 0xC00000);
             Bits.SetShort(data, offset, sample.Length); offset += 2;
             Bits.SetByteArray(data, offset, sample);
             offset += sample.Length;

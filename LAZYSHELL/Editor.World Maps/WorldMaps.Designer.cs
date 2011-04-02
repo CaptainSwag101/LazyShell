@@ -121,6 +121,9 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.import = new System.Windows.Forms.ToolStripButton();
             this.export = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.resetWorldMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetMapPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.helpTips = new System.Windows.Forms.ToolStripButton();
@@ -183,13 +186,13 @@
             this.mapPointName.AutoSize = false;
             this.mapPointName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.mapPointName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.mapPointName.DropDownHeight = 440;
+            this.mapPointName.DropDownHeight = 453;
             this.mapPointName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapPointName.DropDownWidth = 170;
             this.mapPointName.Font = this.worldMapName.Font;
             this.mapPointName.ForeColor = this.worldMapName.ForeColor;
             this.mapPointName.ItemHeight = 15;
-            this.mapPointName.Location = new System.Drawing.Point(9, 2);
+            this.mapPointName.Location = new System.Drawing.Point(7, 2);
             this.mapPointName.Name = "mapPointName";
             this.mapPointName.SelectedIndex = -1;
             this.mapPointName.SelectedItem = null;
@@ -227,7 +230,7 @@
             this.mapPointNum.Font = this.worldMapName.Font;
             this.mapPointNum.ForeColor = this.worldMapName.ForeColor;
             this.mapPointNum.Hexadecimal = false;
-            this.mapPointNum.Location = new System.Drawing.Point(205, 2);
+            this.mapPointNum.Location = new System.Drawing.Point(203, 2);
             this.mapPointNum.Maximum = new decimal(new int[] {
             63,
             0,
@@ -253,7 +256,7 @@
             this.panel79.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel79.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel79.Controls.Add(this.panel35);
-            this.panel79.Location = new System.Drawing.Point(293, 264);
+            this.panel79.Location = new System.Drawing.Point(289, 260);
             this.panel79.Name = "panel79";
             this.panel79.Size = new System.Drawing.Size(270, 94);
             this.panel79.TabIndex = 549;
@@ -501,7 +504,7 @@
             // 
             this.toEastPoint.BackColor = System.Drawing.SystemColors.ControlDark;
             this.toEastPoint.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.toEastPoint.DropDownHeight = 340;
+            this.toEastPoint.DropDownHeight = 333;
             this.toEastPoint.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toEastPoint.DropDownWidth = 158;
             this.toEastPoint.FormattingEnabled = true;
@@ -541,7 +544,7 @@
             // 
             this.toWestPoint.BackColor = System.Drawing.SystemColors.ControlDark;
             this.toWestPoint.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.toWestPoint.DropDownHeight = 340;
+            this.toWestPoint.DropDownHeight = 333;
             this.toWestPoint.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toWestPoint.DropDownWidth = 158;
             this.toWestPoint.FormattingEnabled = true;
@@ -581,7 +584,7 @@
             // 
             this.toSouthPoint.BackColor = System.Drawing.SystemColors.ControlDark;
             this.toSouthPoint.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.toSouthPoint.DropDownHeight = 340;
+            this.toSouthPoint.DropDownHeight = 333;
             this.toSouthPoint.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toSouthPoint.DropDownWidth = 158;
             this.toSouthPoint.FormattingEnabled = true;
@@ -636,7 +639,7 @@
             // 
             this.toNorthPoint.BackColor = System.Drawing.SystemColors.ControlDark;
             this.toNorthPoint.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.toNorthPoint.DropDownHeight = 340;
+            this.toNorthPoint.DropDownHeight = 333;
             this.toNorthPoint.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toNorthPoint.DropDownWidth = 158;
             this.toNorthPoint.FormattingEnabled = true;
@@ -654,7 +657,7 @@
             this.panel78.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel78.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel78.Controls.Add(this.panel34);
-            this.panel78.Location = new System.Drawing.Point(293, 175);
+            this.panel78.Location = new System.Drawing.Point(289, 173);
             this.panel78.Name = "panel78";
             this.panel78.Size = new System.Drawing.Size(270, 76);
             this.panel78.TabIndex = 548;
@@ -844,7 +847,7 @@
             // 
             this.goMapPointB.BackColor = System.Drawing.SystemColors.ControlDark;
             this.goMapPointB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.goMapPointB.DropDownHeight = 340;
+            this.goMapPointB.DropDownHeight = 333;
             this.goMapPointB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.goMapPointB.DropDownWidth = 158;
             this.goMapPointB.FormattingEnabled = true;
@@ -869,7 +872,7 @@
             this.panel48.Controls.Add(this.label47);
             this.panel48.Controls.Add(this.worldMapXCoord);
             this.panel48.Controls.Add(this.pointCount);
-            this.panel48.Location = new System.Drawing.Point(27, 319);
+            this.panel48.Location = new System.Drawing.Point(27, 315);
             this.panel48.Name = "panel48";
             this.panel48.Size = new System.Drawing.Size(260, 39);
             this.panel48.TabIndex = 546;
@@ -1017,64 +1020,64 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 170);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 170);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.buttonEditCut_Click);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.buttonEditCopy_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.buttonEditPaste_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.buttonEditDelete_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(131, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(130, 6);
             // 
             // mirrorToolStripMenuItem
             // 
             this.mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
-            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.mirrorToolStripMenuItem.Text = "Mirror";
             this.mirrorToolStripMenuItem.Click += new System.EventHandler(this.mirrorToolStripMenuItem_Click);
             // 
             // invertToolStripMenuItem
             // 
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            this.invertToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(131, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(130, 6);
             // 
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.saveImageToolStripMenuItem.Text = "Save Image As...";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
@@ -1095,7 +1098,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 50);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(24, 320);
+            this.toolStrip2.Size = new System.Drawing.Size(24, 304);
             this.toolStrip2.TabIndex = 552;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -1195,7 +1198,7 @@
             this.panel49.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel49.Controls.Add(this.label43);
             this.panel49.Controls.Add(this.panel14);
-            this.panel49.Location = new System.Drawing.Point(293, 53);
+            this.panel49.Location = new System.Drawing.Point(289, 53);
             this.panel49.Name = "panel49";
             this.panel49.Size = new System.Drawing.Size(270, 110);
             this.panel49.TabIndex = 547;
@@ -1360,6 +1363,7 @@
             this.toolStripSeparator4,
             this.import,
             this.export,
+            this.toolStripDropDownButton1,
             this.clear,
             this.toolStripSeparator8,
             this.helpTips,
@@ -1367,7 +1371,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(575, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(559, 25);
             this.toolStrip3.TabIndex = 550;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -1405,6 +1409,32 @@
             this.export.Size = new System.Drawing.Size(23, 22);
             this.export.ToolTipText = "Export";
             this.export.Click += new System.EventHandler(this.export_Click);
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetWorldMapToolStripMenuItem,
+            this.resetMapPointToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(27, 22);
+            // 
+            // resetWorldMapToolStripMenuItem
+            // 
+            this.resetWorldMapToolStripMenuItem.Name = "resetWorldMapToolStripMenuItem";
+            this.resetWorldMapToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.resetWorldMapToolStripMenuItem.Text = "Reset world map";
+            this.resetWorldMapToolStripMenuItem.Click += new System.EventHandler(this.resetWorldMapToolStripMenuItem_Click);
+            // 
+            // resetMapPointToolStripMenuItem
+            // 
+            this.resetMapPointToolStripMenuItem.Name = "resetMapPointToolStripMenuItem";
+            this.resetMapPointToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.resetMapPointToolStripMenuItem.Text = "Reset map point";
+            this.resetMapPointToolStripMenuItem.Click += new System.EventHandler(this.resetMapPointToolStripMenuItem_Click);
             // 
             // clear
             // 
@@ -1461,7 +1491,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(575, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(559, 25);
             this.toolStrip1.TabIndex = 551;
             // 
             // toolStripSeparator3
@@ -1551,7 +1581,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(575, 370);
+            this.ClientSize = new System.Drawing.Size(559, 354);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.panel26);
             this.Controls.Add(this.toolStrip1);
@@ -1724,5 +1754,8 @@
         private System.Windows.Forms.ToolStripButton helpTips;
         private System.Windows.Forms.ToolStripButton baseConversion;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem resetWorldMapToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetMapPointToolStripMenuItem;
     }
 }

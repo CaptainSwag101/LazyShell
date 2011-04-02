@@ -145,7 +145,8 @@ namespace LAZYSHELL
             SetTileImage();
             SetSubtileImage();
             updatingThis = true;
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             updatingThis = false;
         }
         private void tileAttributes_SelectedIndexChanged(object sender, EventArgs e)
@@ -156,7 +157,8 @@ namespace LAZYSHELL
             SetTileImage();
             SetSubtileImage();
             updatingThis = true;
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             updatingThis = false;
         }
         private void tile8x8Tile_ValueChanged(object sender, EventArgs e)
@@ -170,7 +172,8 @@ namespace LAZYSHELL
             SetTileImage();
             SetSubtileImage();
             updatingThis = true;
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             updatingThis = false;
         }
 
@@ -198,7 +201,8 @@ namespace LAZYSHELL
             InitializeSubtile();
             SetTileImage();
             SetSubtileImage();
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
         }
         private void buttonInvertTile_Click(object sender, EventArgs e)
         {
@@ -206,14 +210,21 @@ namespace LAZYSHELL
             InitializeSubtile();
             SetTileImage();
             SetSubtileImage();
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
         }
 
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            update.DynamicInvoke();
+        }
         private void buttonOK_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < 4; i++)
                 this.tileBackup.Subtiles[i] = this.tile.Subtiles[i];
             this.Close();
+            if (!autoUpdate.Checked)
+                update.DynamicInvoke();
         }
         private void buttonCancel_Click(object sender, EventArgs e)
         {
@@ -224,7 +235,8 @@ namespace LAZYSHELL
             for (int i = 0; i < 4; i++)
                 this.tile.Subtiles[i] = this.tileBackup.Subtiles[i];
             updatingThis = true;
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             updatingThis = false;
             InitializeSubtile();
             SetTileImage();

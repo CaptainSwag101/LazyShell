@@ -11,10 +11,10 @@ namespace LAZYSHELL
 {
     public partial class Spells : Form
     {
-        private Model model = State.Instance.Model;
         private bool updating = false;
-        private Spell[] spells { get { return model.Spells; } set { model.Spells = value; } }
+        private Spell[] spells { get { return Model.Spells; } set { Model.Spells = value; } }
         private Spell spell { get { return spells[index]; } set { spells[index] = value; } }
+        public Spell Spell { get { return spell; } set { spell = value; } }
         private int index { get { return (int)spellNum.Value; } set { spellNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
         private Settings settings = Settings.Default;
@@ -36,7 +36,7 @@ namespace LAZYSHELL
             Cursor.Current = Cursors.WaitCursor;
             if (updating) return;
             updating = true;
-            this.spellName.SelectedIndex = model.SpellNames.GetIndexFromNum(index);
+            this.spellName.SelectedIndex = Model.SpellNames.GetIndexFromNum(index);
             this.spellFPCost.Value = spell.FPCost;
             this.spellMagPower.Value = spell.MagicPower;
             this.spellHitRate.Value = spell.HitRate;
@@ -199,8 +199,8 @@ namespace LAZYSHELL
         private void InitializeStrings()
         {
             this.spellName.Items.Clear();
-            this.spellName.Items.AddRange(model.SpellNames.Names);
-            this.spellName.SelectedIndex = model.SpellNames.GetIndexFromNum(index);
+            this.spellName.Items.AddRange(Model.SpellNames.Names);
+            this.spellName.SelectedIndex = Model.SpellNames.GetIndexFromNum(index);
             string[] temp = new string[96];
             for (int i = 0; i < 96; i++)
                 temp[i] = i.ToString();
@@ -469,32 +469,32 @@ namespace LAZYSHELL
         }
         private void spellName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.spellNum.Value = model.SpellNames.GetNumFromIndex(spellName.SelectedIndex);
+            this.spellNum.Value = Model.SpellNames.GetNumFromIndex(spellName.SelectedIndex);
         }
         private void spellName_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
             Do.DrawName(
-                sender, e, new BattleDialoguePreview(), model.SpellNames,
-                model.SpellNames.GetNumFromIndex(e.Index) < 64 ? model.FontMenu : model.FontDialogue,
-                model.FontPaletteBattle.Palette, 8, 10, 0, 128, false, false);
+                sender, e, new BattleDialoguePreview(), Model.SpellNames,
+                Model.SpellNames.GetNumFromIndex(e.Index) < 64 ? Model.FontMenu : Model.FontDialogue,
+                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
         }
         private void spellNameIcon_SelectedIndexChanged(object sender, EventArgs e)
         {
             spell.Name[0] = (char)(spellNameIcon.SelectedIndex + 0x20);
-            if (model.SpellNames.GetNameByNum(index).CompareTo(this.textBoxSpellName.Text) != 0)
+            if (Model.SpellNames.GetNameByNum(index).CompareTo(this.textBoxSpellName.Text) != 0)
             {
-                model.SpellNames.SwapName(
+                Model.SpellNames.SwapName(
                     index, new string(spell.Name));
-                model.SpellNames.SortAlpha();
+                Model.SpellNames.SortAlpha();
                 this.spellName.Items.Clear();
-                this.spellName.Items.AddRange(model.SpellNames.GetNames());
-                this.spellName.SelectedIndex = model.SpellNames.GetIndexFromNum(index);
+                this.spellName.Items.AddRange(Model.SpellNames.GetNames());
+                this.spellName.SelectedIndex = Model.SpellNames.GetIndexFromNum(index);
             }
         }
         private void spellNameIcon_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Do.DrawIcon(sender, e, new MenuTextPreview(), 32, model.FontMenu, model.FontPaletteBattle.Palette, true);
+            Do.DrawIcon(sender, e, new MenuTextPreview(), 32, Model.FontMenu, Model.FontPaletteMenu.Palette, false, Model.MenuBackground_);
         }
         private void textBoxSpellName_TextChanged(object sender, EventArgs e)
         {
@@ -507,22 +507,22 @@ namespace LAZYSHELL
             for (int i = 0; i < 14; i++)
                 raw[i + 1] = temp[i];
             raw[0] = (char)(spellNameIcon.SelectedIndex + 32);
-            if (model.SpellNames.GetNameByNum(index).CompareTo(this.textBoxSpellName.Text) != 0)
+            if (Model.SpellNames.GetNameByNum(index).CompareTo(this.textBoxSpellName.Text) != 0)
             {
                 spell.Name = raw;
-                model.SpellNames.SwapName(
+                Model.SpellNames.SwapName(
                     index, new string(spell.Name));
-                model.SpellNames.SortAlpha();
+                Model.SpellNames.SortAlpha();
                 this.spellName.Items.Clear();
-                this.spellName.Items.AddRange(model.SpellNames.GetNames());
-                this.spellName.SelectedIndex = model.SpellNames.GetIndexFromNum(index);
+                this.spellName.Items.AddRange(Model.SpellNames.GetNames());
+                this.spellName.SelectedIndex = Model.SpellNames.GetIndexFromNum(index);
             }
         }
         private void textBoxSpellName_Leave(object sender, EventArgs e)
         {
             spellName.Items.Clear();
-            spellName.Items.AddRange(this.model.SpellNames.GetNames());
-            spellName.SelectedIndex = model.SpellNames.GetIndexFromNum(index);
+            spellName.Items.AddRange(Model.SpellNames.GetNames());
+            spellName.SelectedIndex = Model.SpellNames.GetIndexFromNum(index);
             InitializeStrings();
         }
         private void spellFPCost_ValueChanged(object sender, EventArgs e)
@@ -654,19 +654,19 @@ namespace LAZYSHELL
         }
         private void pictureBoxSpellDesc_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(model.MenuBackground, 0, 0);
+            e.Graphics.DrawImage(Model.MenuBackground, 0, 0);
             if (descriptionText == null)
                 SetDescriptionText();
             e.Graphics.DrawImage(descriptionText, 0, 0);
             if (descriptionFrame == null)
                 descriptionFrame = Do.PixelsToImage(
-                    Do.DrawMenuFrame(new Size(15, 8), model.MenuFrame, model.MenuFramePalette.Palette), 120, 64);
+                    Do.DrawMenuFrame(new Size(15, 8), Model.MenuFrame, Model.MenuFramePalette.Palette), 120, 64);
             e.Graphics.DrawImage(descriptionFrame, 0, 0);
         }
         private void SetDescriptionText()
         {
             int[] pixels = new MenuDescriptionPreview().GetPreview(
-                model.FontDescription, model.FontPaletteMenu.Palette, spell.RawDescription,
+                Model.FontDescription, Model.FontPaletteMenu.Palette, spell.RawDescription,
                 new Size(120, 88), new Point(8, 8), 6);
             descriptionText = new Bitmap(Do.PixelsToImage(pixels, 120, 88));
             pictureBoxSpellDesc.Invalidate();
@@ -801,8 +801,8 @@ namespace LAZYSHELL
         {
             string[] array = Lists.Convert(instanceNumberName.Items);
             Do.DrawName(
-                sender, e, new BattleDialoguePreview(), array, model.FontMenu,
-                model.FontPaletteBattle.Palette, 8, 10, 0, 128, false, false);
+                sender, e, new BattleDialoguePreview(), array, Model.FontMenu,
+                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
         }
         private void numericUpDown8_ValueChanged(object sender, EventArgs e)
         {

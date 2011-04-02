@@ -10,6 +10,79 @@ namespace LAZYSHELL
     {
         #region Variables
         #region Other
+        public static string[] EntranceNames = new string[]
+        {
+            "no movement for \"Escape\"",
+            "slide backward when hit",
+            "Bowser Clone sprite",
+            "Mario Clone sprite",
+            "no reaction when hit",
+            "sprite shadow",
+            "floating, sprite shadow",
+            "floating",
+            "floating, slide backward when hit",
+            "floating, slide backward when hit",
+            "fade out death, floating",
+            "fade out death",
+            "fade out death",
+            "fade out death, Smithy spell cast",
+            "fade out death, no \"Escape\" movement",
+            "fade out death, no \"Escape\" transition",
+            "(normal)",
+            "no reaction when hit"
+        };
+        public static string[] CoinSizes = new string[]
+        {
+            "none","small","big"
+        };
+        public static string[] SpriteBehaviors = new string[] {
+            "no movement for \"Escape\"",
+            "slide backward when hit",
+            "Bowser Clone sprite",
+            "Mario Clone sprite",
+            "no reaction when hit",
+            "sprite shadow",
+            "floating, sprite shadow",
+            "floating",
+            "floating, slide backward when hit",
+            "floating, slide backward when hit",
+            "fade out death, floating",
+            "fade out death",
+            "fade out death",
+            "fade out death, Smithy spell cast",
+            "fade out death, no \"Escape\" movement",
+            "fade out death, no \"Escape\" transition",
+            "(normal)",
+            "no reaction when hit"
+        };
+        public static string[] MonsterSoundStrike = new string[] 
+        {
+            "bite",
+            "pierce",
+            "claw",
+            "jab",
+            "slap",
+            "knock",
+            "smash",
+            "deep knock",
+            "punch",
+            "bonk",
+            "flopping",
+            "deep jab",
+            "blast",
+            "blast"
+        };
+        public static string[] MonsterSoundOther = new string[] 
+        {
+            "none",
+            "Starslap, Spikey, Enigma",
+            "Sparky, Goomba, Birdy",
+            "Amanita, Terrapin",
+            "Guerilla",
+            "Pulsar",
+            "Dry Bones",
+            "Torte"
+        };
         public static string[] CharacterNames = new string[]
         {
             "Mario", "Toadstool", "Bowser", "Geno", "Mallow"
@@ -130,10 +203,10 @@ namespace LAZYSHELL
                     "Layer 2",			// 0x0E
                     "Layer 3",			// 0x0F
             			
-                    "Mem 00:70A8",			// 0x10
-                    "Mem 00:70A9",			// 0x11
-                    "Mem 00:70AA",			// 0x12
-                    "Mem 00:70AB",			// 0x13
+                    "Mem $70A8",			// 0x10
+                    "Mem $70A9",			// 0x11
+                    "Mem $70AA",			// 0x12
+                    "Mem $70AB",			// 0x13
                     "NPC #0",			// 0x14
                     "NPC #1",			// 0x15
                     "NPC #2",			// 0x16
@@ -911,7 +984,7 @@ namespace LAZYSHELL
             "Green Yoshi",
             "Booster",
             "Green Yoshi (walk)",
-            "Booster (walk)",
+            "Green Yoshi (laying egg)",
             "King Nimbus",
             "Queen Nimbus",
             "Jonathan Jones",
@@ -2477,8 +2550,8 @@ namespace LAZYSHELL
             "Bowser's Keep, Area 05 (dark tunnel, after throne room)",
             "Bowser's Keep, Area 08 (room with 6 doors)",
             "Bowser's Keep 6-door, Action Room 1-C (Gorilla throwing barrels)",
-            "Bowser's Keep 6-door, Action Room 2-C (very slow moving circling platforms)",
             "Bowser's Keep 6-door, Action Room 2-B (cannonball riding)",
+            "Bowser's Keep 6-door, Action Room 2-C (very slow moving circling platforms)",
             "Bowser's Keep 6-door, Action Room 1-B (moving platforms)",
             "Bowser's Keep 6-door, Battle Room 1-A (1st fight: Terra Cotta)",
             "Bowser's Keep 6-door, Battle Room 1-B (1st fight: Alley Rat)",
@@ -2743,11 +2816,11 @@ namespace LAZYSHELL
             "Forest Maze",
             "Sunken Ship",
             "Kero Sewers",
-            "--------",
+            "____",
             "Water",
             "Grasslands",
             "River",
-            "--------",
+            "____",
             "Waterfall",
             "Clouds",
             "Yo\'ster Isle",
@@ -2764,19 +2837,19 @@ namespace LAZYSHELL
             "Keep, inside",
             "Temples",
             "Desert",
-            "--------",
+            "____",
             "Smithy Factory",
-            "--------",
+            "____",
             "Smithy 2",
-            "--------",
-            "--------",
-            "--------"        
+            "____",
+            "____",
+            "____"        
         };
         public static string[] TileSetNames = new string[]
         {
             "Houses, inside  (L1)",
             "Houses, inside  (L2)",
-            "--------",
+            "____",
             "Keep, puzzles (L2)",
             "Towns 1 (L1)",
             "Towns 1 (L2)",
@@ -2786,8 +2859,8 @@ namespace LAZYSHELL
             "Sewers (L1)",
             "Sewers (L2)",
             "Keep, outside (L1)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Tower, entrance (L1)",
             "Tower, entrance (L2)",
             "Keep, puzzles (L1)",
@@ -2814,7 +2887,7 @@ namespace LAZYSHELL
             "Riverside (L2)",
             "Clouds (L1)",
             "Clouds (L2)",
-            "--------",
+            "____",
             "Culex (L1)",
             "Culex (L2)",
             "Grasslands 2 (L1)",
@@ -2826,15 +2899,15 @@ namespace LAZYSHELL
             "Yo'ster Isle (L1)",
             "Yo'ster Isle (L2)",
             "Smithy Factory (L1,2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Count Down (L1)",
-            "--------",
+            "____",
             "Sanctuary (L1)",
             "Sanctuary (L2)",
             "Keep, inside (L1,2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Shacks (L1)",
             "Grasslands 1 (L2)",
             "Keep, outside (L2)",
@@ -2858,28 +2931,28 @@ namespace LAZYSHELL
             "Volcano, Map (L2)",
             "Jinx's Dojo (L1,2)",
             "Factory Grounds (L1,2)",
-            "--------",
+            "____",
             "Ending, Seashore (L1,2)",
             "Ending, Keep (L1,2)",
             "Ending, Toadofsky (L1)",
             "Ending, Toadofsky (L2)",
-            "--------",
+            "____",
             "Ending, Yo'ster Isle (L1)",
             "Ending, Yo'ster Isle (L2)",
-            "--------"
+            "____"
         };
         public static string[] TileMapNames = new string[]
         {
             "Bowser’s Keep, outside (L2)",
-            "--------",
+            "____",
             "Chapel Kitchen (L1)",
             "Chapel Kitchen (L2)",
             "Land's End 1 (L1)",
             "Land's End 1 (L2)",
             "Booster Tower 1 (L1)",
             "Booster Tower 1 (L2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Mushroom Kingdom houses (L1)",
             "Mushroom Kingdom houses (L2)",
             "Mario's Pad, outside (L1)",
@@ -2890,14 +2963,14 @@ namespace LAZYSHELL
             "Bowser's Keep 1 (L2)",
             "Forest Maze 1 (L1)",
             "Forest Maze 1 (L2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Rose Town (L1)",
             "Rose Town (L2)",
             "Kero Sewers 1 (L1)",
             "Kero Sewers 1 (L2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Tadpole Pond 1 (L1)",
             "Tadpole Pond 1 (L2)",
             "Beach (L1)",
@@ -2912,8 +2985,8 @@ namespace LAZYSHELL
             "Forest Maze 2 (L2)",
             "Forest Maze 3 (L1)",
             "Forest Maze 3 (L2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Sunken Ship 2 (L1)",
             "Sunken Ship 2 (L2)",
             "Debug Room (L1)",
@@ -2937,7 +3010,7 @@ namespace LAZYSHELL
             "Mushroom Kingdom (L1)",
             "Mushroom Kingdom (L2)",
             "Bowser's Keep outside(L1)",
-            "--------",
+            "____",
             "Seaside Town houses (L1)",
             "Seaside Town houses (L2)",
             "Moleville shacks (L1)",
@@ -2950,18 +3023,18 @@ namespace LAZYSHELL
             "Land's End underground (L2)",
             "Moleville Mines 1 (L1)",
             "Moleville Mines 1 (L2)",
-            "--------",
-            "--------",
-            "--------",
-            "--------",
+            "____",
+            "____",
+            "____",
+            "____",
             "Land's End grasslands (L1)",
             "Land's End grasslands (L2)",
             "Moleville Mines 2 (L1)",
             "Moleville Mines 2 (L2)",
             "Moleville Mines 3 (L1)",
             "Moleville Mines 3 (L2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Plains (L1)",
             "Plains (L2)",
             "Booster Hill (L1)",
@@ -2970,8 +3043,8 @@ namespace LAZYSHELL
             "Tadpole Pond 2 (L2)",
             "Clouds (L1)",
             "Clouds (L2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Bowser's Keep 2 (L1)",
             "Bowser's Keep 2 (L2)",
             "___forest (L1)",
@@ -2988,8 +3061,8 @@ namespace LAZYSHELL
             "___underground (L2)",
             "Rose Way (L1)",
             "Rose Way (L2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Marrymore (L1)",
             "Marrymore (L2)",
             "Nimbus Castle 1 (L1)",
@@ -3002,8 +3075,8 @@ namespace LAZYSHELL
             "Sea (L2)",
             "Pipe Vault (L1)",
             "Pipe Vault (L2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Booster Tower balcony (L1)",
             "Beanstalks (L1)",
             "Smithy Factory 1 (L1)",
@@ -3018,18 +3091,18 @@ namespace LAZYSHELL
             "Star Hill 2 (L2)",
             "Bean Valley pipes (L1)",
             "Bean Valley pipes (L2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Chapel, main hall (L1)",
             "Chapel, main hall (L2)",
             "Chapel sanctuary (L1)",
             "Chapel sanctuary (L2)",
             "Belome Temple 1 (L1)",
             "Belome Temple 1 (L2)",
-            "--------",
-            "--------",
-            "--------",
-            "--------",
+            "____",
+            "____",
+            "____",
+            "____",
             "Bandit's Way 1 (L1)",
             "Bandit's Way 1 (L2)",
             "Bandit's Way 2 (L1)",
@@ -3038,8 +3111,8 @@ namespace LAZYSHELL
             "Mario's Pipehouse (L2)",
             "Mushroom Way 1 (L1)",
             "Mushroom Way 1 (L2)",
-            "--------",
-            "--------",
+            "____",
+            "____",
             "Kero Sewers, area 1 (L1)",
             "Kero Sewers, area 1 (L2)",
             "Rose Way, area 1 (L1)",
@@ -3103,18 +3176,18 @@ namespace LAZYSHELL
             "Nimbus clouds 2 (L2)",
             "Smithy Factory 4 (L1)",
             "Smithy Factory 4 (L2)",
-            "--------",
+            "____",
             "Ending: Yo'ster Isle (L1)",
             "Ending: Yo'ster Isle (L2)",
-            "--------",
+            "____",
             "___nothing (L1)",
             "___nothing (L2)",
             "Grate Guy's Casino (L1)",
             "Grate Guy's Casino (L2)",
             "Star Hill 1 (L1)",
             "Star Hill 1 (L2)",
-            "--------",
-            "--------"
+            "____",
+            "____"
         };
         #endregion
         #region Events
@@ -3502,9 +3575,9 @@ namespace LAZYSHELL
                     "Add to mem (16-bit)...",			// 0xB1
                     "Increment mem (16-bit)...",// 0xB2
                     "Decrement mem (16-bit)...",// 0xB3
-                    "Store to mem from mem 00:7000 (8-bit)...",         // 0xB5
+                    "Store to mem from mem $7000 (8-bit)...",         // 0xB5
                     "Store random # to mem...",			// 0xB7
-                    "Store to mem from mem 00:7000 (16-bit)...",        // 0xBB
+                    "Store to mem from mem $7000 (16-bit)...",        // 0xBB
                     "Store to mem from mem (choose both, 16-bit)...",      // 0xBC
                     "Exchange mem...",			// 0xBD
                     "Mem compare to...",			// 0xC2
@@ -3526,31 +3599,31 @@ namespace LAZYSHELL
                 case 11:
                     return new string[] 
                     { 
-                    "Set mem @ 00:700C",			// 0xA3
-                    "Clear mem @ 00:700C",			// 0xA7
-                    "Mem 00:700C =...",			// 0xAC
-                    "Mem 00:700C +=...",			// 0xAD
-                    "Mem 00:700C increment",			// 0xAE
-                    "Mem 00:700C decrement",			// 0xAF
-                    "Mem 00:700C = mem...",			// 0xB4
-                    "Mem 00:700C = random # less than...",			// 0xB6
-                    "Mem 00:700C += mem...",			// 0xB8
-                    "Mem 00:700C -= mem...",			// 0xB9
-                    "Mem 00:700C = mem...",			// 0xBA
-                    "Mem 00:700C compare to...",			// 0xC0
-                    "Mem 00:700C compare to mem...",			// 0xC1
-                    "Mem 00:700C = current level",			// 0xC3
-                    "Mem 00:700C = object X coord...",			// 0xC4
-                    "Mem 00:700C = object Y coord...",			// 0xC5
-                    "Mem 00:700C = object Z coord...",			// 0xC6
-                    "Mem 00:700C = held joypad register",			// 0xCA
-                    "Mem 00:700C = tapped joypad register",			// 0xCB
-                    "If mem 00:700C bit(s) set, jump to...",			// 0xDB
-                    "If mem 00:700C bit(s) clear, jump to...",			// 0xDF
-                    "If mem 00:700C =...",			// 0xE2
-                    "If mem 00:700C !=...",			// 0xE3
-                    "If mem 00:700C set, no bits...",			// 0xE6
-                    "If mem 00:700C set, any bits...",			// 0xE7
+                    "Set mem @ $700C",			// 0xA3
+                    "Clear mem @ $700C",			// 0xA7
+                    "Mem $700C =...",			// 0xAC
+                    "Mem $700C +=...",			// 0xAD
+                    "Mem $700C increment",			// 0xAE
+                    "Mem $700C decrement",			// 0xAF
+                    "Mem $700C = mem...",			// 0xB4
+                    "Mem $700C = random # less than...",			// 0xB6
+                    "Mem $700C += mem...",			// 0xB8
+                    "Mem $700C -= mem...",			// 0xB9
+                    "Mem $700C = mem...",			// 0xBA
+                    "Mem $700C compare to...",			// 0xC0
+                    "Mem $700C compare to mem...",			// 0xC1
+                    "Mem $700C = current level",			// 0xC3
+                    "Mem $700C = object X coord...",			// 0xC4
+                    "Mem $700C = object Y coord...",			// 0xC5
+                    "Mem $700C = object Z coord...",			// 0xC6
+                    "Mem $700C = held joypad register",			// 0xCA
+                    "Mem $700C = tapped joypad register",			// 0xCB
+                    "If mem $700C bit(s) set, jump to...",			// 0xDB
+                    "If mem $700C bit(s) clear, jump to...",			// 0xDF
+                    "If mem $700C =...",			// 0xE2
+                    "If mem $700C !=...",			// 0xE3
+                    "If mem $700C set, no bits...",			// 0xE6
+                    "If mem $700C set, any bits...",			// 0xE7
                     "If equal to zero, jump to...",			// 0xEA
                     "If not equal to zero, jump to...",			// 0xEB
                     "If greater than / equal to, jump to...",			// 0xEC
@@ -3560,12 +3633,12 @@ namespace LAZYSHELL
 
                     /********FD OPTIONS********/
 
-                    "00:700C, isolate bits =...",			// 0xB0
-                    "00:700C, set bits =...",			// 0xB1
-                    "00:700C, xor bits =...",			// 0xB2
-                    "00:700C, isolate bits, from mem...",			// 0xB3
-                    "00:700C, set bits, from mem...",			// 0xB4
-                    "00:700C, xor bits, from mem...",			// 0xB5
+                    "$700C, isolate bits =...",			// 0xB0
+                    "$700C, set bits =...",			// 0xB1
+                    "$700C, xor bits =...",			// 0xB2
+                    "$700C, isolate bits, from mem...",			// 0xB3
+                    "$700C, set bits, from mem...",			// 0xB4
+                    "$700C, xor bits, from mem...",			// 0xB5
                     };
 
                 case 12:
@@ -3580,12 +3653,12 @@ namespace LAZYSHELL
                 case 13:
                     return new string[] 
                     { 
-                    "Set object presence...",			// 0xF2
-                    "Set object event trigger...",			// 0xF3
-                    "Set object: mem 00:70A8, presence = true (current level)",			// 0xF4
-                    "Set object: mem 00:70A8, presence = false (current level)",			// 0xF4
-                    "Set object: mem 00:70A8, event trigger = true",			// 0xF6
-                    "Set object: mem 00:70A8, event trigger = false",			// 0xF7
+                    "Set obj presence...",			// 0xF2
+                    "Set obj event trigger...",			// 0xF3
+                    "Set obj: mem $70A8, presence = true (current level)",			// 0xF4
+                    "Set obj: mem $70A8, presence = false (current level)",			// 0xF4
+                    "Set obj: mem $70A8, event trigger = true",			// 0xF6
+                    "Set obj: mem $70A8, event trigger = false",			// 0xF7
                     "If object in level ..., presence =...",			// 0xF8
 
                     /********FD OPTIONS********/
@@ -3636,15 +3709,15 @@ namespace LAZYSHELL
                     "If distance between object A and...",			// 0x3A
                     "If distance (Z==) between object A and...",			// 0x3B
                     "If Mario in air, jump to...",			// 0x3D
-                    "Create new NPC packet @ object coords...",			// 0x3E
-                    "Create new NPC packet @ Mario coords...",			// 0x3F
+                    "Create NPC packet @ object coords...",			// 0x3E
+                    "Create NPC packet @ Mario coords...",			// 0x3F
                     "If Mario on top of an object, jump to...",			// 0x42
-                    "Set object presence...",			// 0xF2
-                    "Set object event trigger...",			// 0xF3
-                    "Set object: mem 00:70A8, presence = true (current level)",			// 0xF4
-                    "Set object: mem 00:70A8, presence = false (current level)",			// 0xF5
-                    "Set object: mem 00:70A8, event trigger = true",			// 0xF6
-                    "Set object: mem 00:70A8, event trigger = false",			// 0xF7
+                    "Set obj presence...",			// 0xF2
+                    "Set obj event trigger...",			// 0xF3
+                    "Set obj: mem $70A8, presence = true (current level)",			// 0xF4
+                    "Set obj: mem $70A8, presence = false (current level)",			// 0xF5
+                    "Set obj: mem $70A8, event trigger = true",			// 0xF6
+                    "Set obj: mem $70A8, event trigger = false",			// 0xF7
                     "If object in level ..., presence =...",			// 0xF8
 
                     /********FD OPTIONS********/
@@ -3653,7 +3726,7 @@ namespace LAZYSHELL
                     "If running action script, object...",			// 0x33
                     "If underwater, object...",			// 0x34
                     "If in air, object...",			// 0x3D
-                    "Create new NPC packet with event @ Mario coords...",			// 0x3E
+                    "Create NPC packet with event @ Mario coords...",			// 0x3E
                     "Mario glows via super star"			// 0xF9
                                         };
 
@@ -3669,13 +3742,13 @@ namespace LAZYSHELL
                     { 
                     "Activate party member...",			// 0x36
                     "Equip item to character...",			// 0x54
-                    "HP -= mem 00:7000, character...",			// 0x56
+                    "HP -= mem $7000, character...",			// 0x56
 
                     /********FD OPTIONS********/
 
                     "Experience += experience packet data",			// 0x4B
                     "Restore all HP",			// 0x5B
-                    "Experience packet = mem 00:7000"			// 0x64
+                    "Experience packet = mem $7000"			// 0x64
                     };
 
                 case 3:
@@ -3685,25 +3758,25 @@ namespace LAZYSHELL
                     "Inventory remove x1, item...",			// 0x51
                     "Add to coins...",			// 0x52
                     "Add to frog coins...",			// 0x53
-                    "FP -= mem 00:7000",			// 0x57
+                    "FP -= mem $7000",			// 0x57
 
                     /********FD OPTIONS********/
 
-                    "Store mem 00:70A7 to item inventory",			// 0x50
-                    "Store mem 00:70A7 to equipment inventory",			// 0x51
-                    "Coins += mem 00:7000",			// 0x52
-                    "Coins -= mem 00:7000",			// 0x53
-                    "Frog coins += mem 00:7000",			// 0x54
-                    "Frog coins -= mem 00:7000",			// 0x55
-                    "Current FP += mem 00:7000",			// 0x56
-                    "Maximum FP += mem 00:7000",			// 0x57
+                    "Store mem $70A7 to item inventory",			// 0x50
+                    "Store mem $70A7 to equipment inventory",			// 0x51
+                    "Coins += mem $7000",			// 0x52
+                    "Coins -= mem $7000",			// 0x53
+                    "Frog coins += mem $7000",			// 0x54
+                    "Frog coins -= mem $7000",			// 0x55
+                    "Current FP += mem $7000",			// 0x56
+                    "Maximum FP += mem $7000",			// 0x57
                     "Restore all FP"			// 0x5C
                     };
 
                 case 4:
                     return new string[] 
                     { 
-                    "Engage battle with pack @ 00:700E",			// 0x49
+                    "Engage battle with pack @ $700E",			// 0x49
                     "Engage battle with pack..."			// 0x4A
                     };
 
@@ -3735,9 +3808,9 @@ namespace LAZYSHELL
                     return new string[] 
                     { 
                     "Run dlg...",			// 0x60
-                    "Run dlg: mem 00:7000...",			// 0x61
+                    "Run dlg: mem $7000...",			// 0x61
                     "Run timed dlg...",			// 0x62
-                    "Append to dlg: mem 00:7000...",			// 0x63
+                    "Append to dlg: mem $7000...",			// 0x63
                     "Close dlg",			// 0x64
                     "Un-sync dlg",			// 0x65
                     "If dlg option B selected, jump to...",			// 0x66
@@ -3843,9 +3916,9 @@ namespace LAZYSHELL
                     "Add to mem (16-bit)...",			// 0xB1
                     "Increment mem (16-bit)...",// 0xB2
                     "Decrement mem (16-bit)...",// 0xB3
-                    "Store to mem from mem 00:7000 (8-bit)...",         // 0xB5
+                    "Store to mem from mem $7000 (8-bit)...",         // 0xB5
                     "Store random # to mem...",			// 0xB7
-                    "Store to mem from mem 00:7000 (16-bit)...",        // 0xBB
+                    "Store to mem from mem $7000 (16-bit)...",        // 0xBB
                     "Store to mem from mem (choose both, 16-bit)...",      // 0xBC
                     "Exchange mem...",			// 0xBD
                     "Mem compare to...",			// 0xC2
@@ -3868,35 +3941,35 @@ namespace LAZYSHELL
                 case 13:
                     return new string[] 
                     {
-                    "Mem 00:7000 = party capacity",			// 0x37
-                    "Mem 00:7000 = character @ slot...",			// 0x38
-                    "Mem 00:7000 = open item slots",			// 0x55
-                    "Mem 00:7000 = current FP",			// 0x58
-                    "Set mem @ mem 00:7000",			// 0xA3
-                    "Clear mem @ mem 00:7000",			// 0xA7
-                    "Mem 00:7000 =...",			// 0xAC
-                    "Mem 00:7000 +=...",			// 0xAD
-                    "Mem 00:7000 increment",			// 0xAE
-                    "Mem 00:7000 decrement",			// 0xAF
-                    "Mem 00:7000 = mem (8-bit)...",			// 0xB4
-                    "Mem 00:7000 = random # less than...",			// 0xB6
-                    "Mem 00:7000 += mem...",			// 0xB8
-                    "Mem 00:7000 -= mem...",			// 0xB9
-                    "Mem 00:7000 = mem (16-bit)...",			// 0xBA
-                    "Mem 00:7000 compare to...",			// 0xC0
-                    "Mem 00:7000 compare to mem...",			// 0xC1
-                    "Mem 00:7000 = current level",			// 0xC3
-                    "Mem 00:7000 = object X coord...",			// 0xC4
-                    "Mem 00:7000 = object Y coord...",			// 0xC5
-                    "Mem 00:7000 = object Z coord...",			// 0xC6
-                    "Mem 00:7000 = held joypad register",			// 0xCA
-                    "Mem 00:7000 = tapped joypad register",			// 0xCB
-                    "If mem 00:7000 bit(s) set, jump to...",			// 0xDB
-                    "If mem 00:7000 bit(s) clear, jump to...",			// 0xDF
-                    "If mem 00:7000 =...",			// 0xE2
-                    "If mem 00:7000 !=...",			// 0xE3
-                    "If mem 00:7000 set, no bits...",			// 0xE6
-                    "If mem 00:7000 set, any bits...",			// 0xE7
+                    "Mem $7000 = party capacity",			// 0x37
+                    "Mem $7000 = character @ slot...",			// 0x38
+                    "Mem $7000 = open item slots",			// 0x55
+                    "Mem $7000 = current FP",			// 0x58
+                    "Set mem @ mem $7000",			// 0xA3
+                    "Clear mem @ mem $7000",			// 0xA7
+                    "Mem $7000 =...",			// 0xAC
+                    "Mem $7000 +=...",			// 0xAD
+                    "Mem $7000 increment",			// 0xAE
+                    "Mem $7000 decrement",			// 0xAF
+                    "Mem $7000 = mem (8-bit)...",			// 0xB4
+                    "Mem $7000 = random # less than...",			// 0xB6
+                    "Mem $7000 += mem...",			// 0xB8
+                    "Mem $7000 -= mem...",			// 0xB9
+                    "Mem $7000 = mem (16-bit)...",			// 0xBA
+                    "Mem $7000 compare to...",			// 0xC0
+                    "Mem $7000 compare to mem...",			// 0xC1
+                    "Mem $7000 = current level",			// 0xC3
+                    "Mem $7000 = object X coord...",			// 0xC4
+                    "Mem $7000 = object Y coord...",			// 0xC5
+                    "Mem $7000 = object Z coord...",			// 0xC6
+                    "Mem $7000 = held joypad register",			// 0xCA
+                    "Mem $7000 = tapped joypad register",			// 0xCB
+                    "If mem $7000 bit(s) set, jump to...",			// 0xDB
+                    "If mem $7000 bit(s) clear, jump to...",			// 0xDF
+                    "If mem $7000 =...",			// 0xE2
+                    "If mem $7000 !=...",			// 0xE3
+                    "If mem $7000 set, no bits...",			// 0xE6
+                    "If mem $7000 set, any bits...",			// 0xE7
                     "If equal to zero, jump to...",			// 0xEA
                     "If not equal to zero, jump to...",			// 0xEB
                     "If greater than / equal to, jump to...",			// 0xEC
@@ -3906,18 +3979,18 @@ namespace LAZYSHELL
 
                     /********FD OPTIONS********/
 
-                    "Mem 00:7000 = quantity of item...",			// 0x58
-                    "Mem 00:7000 = coins",			// 0x59
-                    "Mem 00:7000 = frog coins",			// 0x5A
-                    "Mem 00:7000 = equipment of character...",			// 0x5D
-                    "Mem 00:70A7 = quantity in inventory of item @ mem 00:7000",			// 0x5E
-                    "Mem 00:7000 = mem 7F:...",			// 0xAC
-                    "Mem 00:7000 isolate bits =...",			// 0xB0
-                    "Mem 00:7000 set bits =...",			// 0xB1
-                    "Mem 00:7000 xor bits =...",			// 0xB2
-                    "Mem 00:7000 isolate bits = mem...",			// 0xB3
-                    "Mem 00:7000 set bits = mem...",			// 0xB4
-                    "Mem 00:7000 xor bits = mem..."			// 0xB5
+                    "Mem $7000 = quantity of item...",			// 0x58
+                    "Mem $7000 = coins",			// 0x59
+                    "Mem $7000 = frog coins",			// 0x5A
+                    "Mem $7000 = equipment of character...",			// 0x5D
+                    "Mem $70A7 = quantity of item @ mem $7000",			// 0x5E
+                    "Mem $7000 = mem 7F:...",			// 0xAC
+                    "Mem $7000 isolate bits =...",			// 0xB0
+                    "Mem $7000 set bits =...",			// 0xB1
+                    "Mem $7000 xor bits =...",			// 0xB2
+                    "Mem $7000 isolate bits = mem...",			// 0xB3
+                    "Mem $7000 set bits = mem...",			// 0xB4
+                    "Mem $7000 xor bits = mem..."			// 0xB5
                     };
 
                 case 14:
@@ -3948,20 +4021,20 @@ namespace LAZYSHELL
         #region Functions
         public static string Numerize(string[] list, int index, int length)
         {
-            return "[" + index.ToString("d" + length) + "]  " + list[index];
+            return "{" + index.ToString("d" + length) + "}  " + list[index];
         }
         public static string Numerize(string[] list, int index)
         {
             if (index >= list.Length)
                 return "ERROR: OUT OF BOUNDS INDEX";
             int length = (list.Length - 1).ToString().Length;
-            return "[" + index.ToString("d" + length) + "]  " + list[index];
+            return "{" + index.ToString("d" + length) + "}  " + list[index];
         }
         public static string[] Numerize(int length, string[] list)
         {
             string[] temp = new string[list.Length];
             for (int i = 0; i < list.Length; i++)
-                temp[i] = "[" + i.ToString("d" + length) + "]  " + list[i];
+                temp[i] = "{" + i.ToString("d" + length) + "}  " + list[i];
             return temp;
         }
         public static string[] Numerize(string[] list)
@@ -3969,7 +4042,7 @@ namespace LAZYSHELL
             int length = (list.Length - 1).ToString().Length;
             string[] temp = new string[list.Length];
             for (int i = 0; i < list.Length; i++)
-                temp[i] = "[" + i.ToString("d" + length) + "]  " + list[i];
+                temp[i] = "{" + i.ToString("d" + length) + "}  " + list[i];
             return temp;
         }
         public static string[] Numerize(StringCollection list)

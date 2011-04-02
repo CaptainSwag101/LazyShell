@@ -10,7 +10,6 @@ namespace LAZYSHELL
 {
     public class Program
     {
-        private Model model;
         private Settings settings = Settings.Default;
         private bool dockEditors;
         public bool DockEditors { get { return dockEditors; } set { dockEditors = value; } }
@@ -20,7 +19,6 @@ namespace LAZYSHELL
         private AttacksEditor attacks; public AttacksEditor Attacks { get { return attacks; } }
         private Audio audio; public Audio Audio { get { return audio; } }
         private Battlefields battlefields; public Battlefields Battlefields { get { return battlefields; } }
-        private BattleScripts battleScripts; public BattleScripts BattleScripts { get { return battleScripts; } }
         private Dialogues dialogues; public Dialogues Dialogues { get { return dialogues; } }
         private Effects effects; public Effects Effects { get { return effects; } }
         private FormationsEditor formations; public FormationsEditor Formations { get { return formations; } }
@@ -61,8 +59,7 @@ namespace LAZYSHELL
         // Constructor
         public Program()
         {
-            model = new Model(this);
-            State.Instance.Model = model;
+            Model.Program = this;
             ProgramController controls = new ProgramController(this);
             Form1.GuiMain(controls);
         }
@@ -82,10 +79,10 @@ namespace LAZYSHELL
             if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
             {
                 filename = openFileDialog1.FileName;
-                model.SetFileName(filename);
-                if (model.ReadRom())
+                Model.FileName=filename;
+                if (Model.ReadRom())
                 {
-                    settings.LastRomPath = model.GetPathWithoutFileName();
+                    settings.LastRomPath = Model.GetPathWithoutFileName();
                     settings.Save();
                     return true;
                 }
@@ -96,10 +93,10 @@ namespace LAZYSHELL
         }
         public bool OpenRomFile(string filename)
         {
-            model.SetFileName(filename);
-            if (model.ReadRom())
+            Model.FileName=filename;
+            if (Model.ReadRom())
             {
-                settings.LastRomPath = model.GetPathWithoutFileName();
+                settings.LastRomPath = Model.GetPathWithoutFileName();
                 settings.Save();
                 return true;
             }
@@ -108,9 +105,9 @@ namespace LAZYSHELL
         public bool SaveRomFile()
         {
             Assemble();
-            if (model.WriteRom())
+            if (Model.WriteRom())
             {
-                model.CreateNewMD5Checksum();
+                Model.CreateNewMD5Checksum();
                 return true;
             }
             return false;
@@ -124,14 +121,14 @@ namespace LAZYSHELL
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                model.SetFileName(saveFileDialog1.FileName);
+                Model.FileName=saveFileDialog1.FileName;
                 // Assemble all changes
                 Assemble();
-                if (model.WriteRom())
+                if (Model.WriteRom())
                 {
-                    settings.LastRomPath = model.GetPathWithoutFileName();
+                    settings.LastRomPath = Model.GetPathWithoutFileName();
                     settings.Save();
-                    model.CreateNewMD5Checksum();
+                    Model.CreateNewMD5Checksum();
                     return true;
                 }
                 return false;
@@ -148,8 +145,6 @@ namespace LAZYSHELL
                 attacks.Assemble();
             if (battlefields != null && battlefields.Visible)
                 battlefields.Assemble();
-            if (battleScripts != null && battleScripts.Visible)
-                battleScripts.Assemble();
             if (dialogues != null && dialogues.Visible)
                 dialogues.Assemble();
             if (eventScripts != null && eventScripts.Visible)
@@ -171,7 +166,7 @@ namespace LAZYSHELL
         }
         public void CloseRomFile()
         {
-            model.DataHash = null;
+            Model.DataHash = null;
         }
         #endregion
         #region Create Editor Windows
@@ -234,18 +229,6 @@ namespace LAZYSHELL
                 Cursor.Current = Cursors.Arrow;
             }
             battlefields.BringToFront();
-        }
-        public void CreateBattleScriptsWindow()
-        {
-            if (battleScripts == null || !battleScripts.Visible)
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                battleScripts = new BattleScripts();
-                if (dockEditors) Do.AddControl(form1.Panel2, battleScripts);
-                else battleScripts.Show();
-                Cursor.Current = Cursors.Arrow;
-            }
-            battleScripts.BringToFront();
         }
         public void CreateDialoguesWindow()
         {
@@ -411,8 +394,6 @@ namespace LAZYSHELL
                 Do.AddControl(form1.Panel2, attacks);
             if (battlefields != null && battlefields.Visible)
                 Do.AddControl(form1.Panel2, battlefields);
-            if (battleScripts != null && battleScripts.Visible)
-                Do.AddControl(form1.Panel2, battleScripts);
             if (dialogues != null && dialogues.Visible)
                 Do.AddControl(form1.Panel2, dialogues);
             if (effects != null && effects.Visible)
@@ -444,8 +425,6 @@ namespace LAZYSHELL
                 Do.RemoveControl(attacks);
             if (battlefields != null && battlefields.Visible)
                 Do.RemoveControl(battlefields);
-            if (battleScripts != null && battleScripts.Visible)
-                Do.RemoveControl(battleScripts);
             if (dialogues != null && dialogues.Visible)
                 Do.RemoveControl(dialogues);
             if (effects != null && effects.Visible)
@@ -477,8 +456,6 @@ namespace LAZYSHELL
                 attacks.WindowState = FormWindowState.Minimized;
             if (battlefields != null && battlefields.Visible)
                 battlefields.WindowState = FormWindowState.Minimized;
-            if (battleScripts != null && battleScripts.Visible)
-                battleScripts.WindowState = FormWindowState.Minimized;
             if (dialogues != null && dialogues.Visible)
                 dialogues.WindowState = FormWindowState.Minimized;
             if (effects != null && effects.Visible)
@@ -510,8 +487,6 @@ namespace LAZYSHELL
                 attacks.WindowState = FormWindowState.Normal;
             if (battlefields != null && battlefields.Visible)
                 battlefields.WindowState = FormWindowState.Normal;
-            if (battleScripts != null && battleScripts.Visible)
-                battleScripts.WindowState = FormWindowState.Normal;
             if (dialogues != null && dialogues.Visible)
                 dialogues.WindowState = FormWindowState.Normal;
             if (effects != null && effects.Visible)
@@ -543,8 +518,6 @@ namespace LAZYSHELL
                 attacks.Close();
             if (battlefields != null && battlefields.Visible)
                 battlefields.Close();
-            if (battleScripts != null && battleScripts.Visible)
-                battleScripts.Close();
             if (dialogues != null && dialogues.Visible)
                 dialogues.Close();
             if (effects != null && effects.Visible)
@@ -569,7 +542,6 @@ namespace LAZYSHELL
                 (animations != null && animations.Visible) ||
                 (attacks != null && attacks.Visible) ||
                 (battlefields != null && battlefields.Visible) ||
-                (battleScripts != null && battleScripts.Visible) ||
                 (dialogues != null && dialogues.Visible) ||
                 (effects != null && effects.Visible) ||
                 (eventScripts != null && eventScripts.Visible) ||
@@ -585,11 +557,11 @@ namespace LAZYSHELL
         }
         public void LoadAll()
         {
-            model.LoadAll();
+            Model.LoadAll();
         }
         public void ClearAll()
         {
-            model.ClearModel();
+            Model.ClearModel();
         }
         #endregion
     }

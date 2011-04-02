@@ -14,35 +14,29 @@ namespace LAZYSHELL
         private GraphicEditor graphicEditor;
         private LevelsTileset levelsTileset;
         private LevelsTilemap levelsTilemap;
-        private LevelsPhysicalTiles levelsPhysicalTiles;
+        private LevelsSolidTiles levelsPhysicalTiles;
         private LevelsTemplate levelsTemplate;
 
         private void PaletteUpdate()
         {
-            updating = true; // Start
-            tileSet.RedrawTilesets(); // Redraw all tilesets
-            tileMap.RedrawTileMap();
-            LoadTilesetEditor();
-            LoadTilemapEditor();
-            LoadTemplateEditor();
-            updating = false; // Done
+            fullUpdate = false;
+            RefreshLevel();
+            checksum--;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {
-            updating = true; // Start
-            tileSet.RedrawTilesets(); // Redraw all tilesets
-            tileMap.RedrawTileMap();
-            LoadTilesetEditor();
-            LoadTilemapEditor();
-            LoadTemplateEditor();
-            updating = false; // Done
+            tileSet.AssembleIntoModel(16, levelsTileset.Layer);
+            fullUpdate = false;
+            RefreshLevel();
         }
         private void TilemapUpdate()
         {
         }
         private void TilesetUpdate()
         {
-            fullUpdate = true;
+            tileMap.AssembleIntoModel();
+            tileMap = new TileMap(level, tileSet);
+            fullUpdate = false;
             RefreshLevel();
         }
 
@@ -94,7 +88,7 @@ namespace LAZYSHELL
         }
         private void LoadPhysicalTileset()
         {
-            levelsPhysicalTiles = new LevelsPhysicalTiles(physicalTiles, solidity);
+            levelsPhysicalTiles = new LevelsSolidTiles(solidTiles, solidity);
             levelsPhysicalTiles.FormClosing += new FormClosingEventHandler(editor_FormClosing);
         }
         private void LoadTemplateEditor()

@@ -283,20 +283,23 @@
             // pictureBoxTitle
             // 
             this.pictureBoxTitle.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
-            this.pictureBoxTitle.Location = new System.Drawing.Point(0, 24);
+            this.pictureBoxTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxTitle.Location = new System.Drawing.Point(0, 17);
             this.pictureBoxTitle.Name = "pictureBoxTitle";
-            this.pictureBoxTitle.Size = new System.Drawing.Size(256, 540);
+            this.pictureBoxTitle.Size = new System.Drawing.Size(256, 547);
             this.pictureBoxTitle.TabIndex = 546;
             this.pictureBoxTitle.TabStop = false;
             this.pictureBoxTitle.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTitle_Paint);
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 1);
+            this.label1.ForeColor = System.Drawing.SystemColors.Control;
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(256, 21);
+            this.label1.Size = new System.Drawing.Size(256, 17);
             this.label1.TabIndex = 553;
             this.label1.Text = "  MAIN TITLE PREVIEW";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -315,7 +318,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(529, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(526, 25);
             this.toolStrip1.TabIndex = 551;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -396,7 +399,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Padding = new System.Windows.Forms.Padding(8, 0, 1, 0);
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(269, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(266, 25);
             this.toolStrip2.TabIndex = 552;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -490,7 +493,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 593);
+            this.ClientSize = new System.Drawing.Size(526, 593);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.panel67);

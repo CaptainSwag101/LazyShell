@@ -85,10 +85,11 @@ namespace LAZYSHELL
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.enableHelpTips = new System.Windows.Forms.ToolStripButton();
             this.showDecHex = new System.Windows.Forms.ToolStripButton();
+            this.hexViewer = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.name = new System.Windows.Forms.ToolStripComboBox();
-            this.searchEffectNames = new System.Windows.Forms.ToolStripButton();
             this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchEffectNames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showMain = new System.Windows.Forms.ToolStripButton();
             this.openMolds = new System.Windows.Forms.ToolStripButton();
@@ -96,8 +97,8 @@ namespace LAZYSHELL
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.openPalettes = new System.Windows.Forms.ToolStripButton();
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
-            this.Export_Worker = new System.ComponentModel.BackgroundWorker();
             this.toolTip3 = new System.Windows.Forms.ToolTip(this.components);
+            this.reset = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip2.SuspendLayout();
             this.panelSprites.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -223,7 +224,7 @@ namespace LAZYSHELL
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(273, 650);
+            this.panel1.Size = new System.Drawing.Size(266, 650);
             this.panel1.TabIndex = 516;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.SizeChanged += new System.EventHandler(this.panel1_SizeChanged);
@@ -234,7 +235,7 @@ namespace LAZYSHELL
             this.panel45.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel45.Controls.Add(this.paletteIndex);
             this.panel45.Controls.Add(this.label73);
-            this.panel45.Location = new System.Drawing.Point(6, 6);
+            this.panel45.Location = new System.Drawing.Point(3, 3);
             this.panel45.Name = "panel45";
             this.panel45.Size = new System.Drawing.Size(260, 21);
             this.panel45.TabIndex = 2;
@@ -269,9 +270,9 @@ namespace LAZYSHELL
             this.panel22.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel22.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel22.Controls.Add(this.panel24);
-            this.panel22.Location = new System.Drawing.Point(6, 115);
+            this.panel22.Location = new System.Drawing.Point(3, 104);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(260, 78);
+            this.panel22.Size = new System.Drawing.Size(260, 75);
             this.panel22.TabIndex = 8;
             // 
             // panel24
@@ -291,7 +292,7 @@ namespace LAZYSHELL
             // label18
             // 
             this.label18.BackColor = System.Drawing.SystemColors.Control;
-            this.label18.Location = new System.Drawing.Point(0, 57);
+            this.label18.Location = new System.Drawing.Point(0, 54);
             this.label18.Name = "label18";
             this.label18.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label18.Size = new System.Drawing.Size(128, 17);
@@ -318,7 +319,7 @@ namespace LAZYSHELL
             0,
             0,
             0});
-            this.animationVRAM.Location = new System.Drawing.Point(129, 57);
+            this.animationVRAM.Location = new System.Drawing.Point(129, 54);
             this.animationVRAM.Maximum = new decimal(new int[] {
             8192,
             0,
@@ -374,21 +375,21 @@ namespace LAZYSHELL
             // animationAvailableBytes
             // 
             this.animationAvailableBytes.BackColor = System.Drawing.Color.Lime;
-            this.animationAvailableBytes.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.animationAvailableBytes.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.animationAvailableBytes.ForeColor = System.Drawing.SystemColors.ControlText;
             this.animationAvailableBytes.Location = new System.Drawing.Point(0, 38);
             this.animationAvailableBytes.Name = "animationAvailableBytes";
             this.animationAvailableBytes.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.animationAvailableBytes.Size = new System.Drawing.Size(256, 17);
+            this.animationAvailableBytes.Size = new System.Drawing.Size(256, 14);
             this.animationAvailableBytes.TabIndex = 451;
-            this.animationAvailableBytes.Text = "AVAILABLE BYTES: ";
+            this.animationAvailableBytes.Text = "0 bytes free";
             // 
             // panel54
             // 
             this.panel54.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel54.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel54.Controls.Add(this.panel5);
-            this.panel54.Location = new System.Drawing.Point(6, 33);
+            this.panel54.Location = new System.Drawing.Point(3, 26);
             this.panel54.Name = "panel54";
             this.panel54.Size = new System.Drawing.Size(260, 76);
             this.panel54.TabIndex = 3;
@@ -558,10 +559,12 @@ namespace LAZYSHELL
             this.toolStripSeparator11,
             this.import,
             this.export,
+            this.reset,
             this.clear,
             this.toolStripSeparator12,
             this.enableHelpTips,
-            this.showDecHex});
+            this.showDecHex,
+            this.hexViewer});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -609,15 +612,15 @@ namespace LAZYSHELL
             // animationsToolStripMenuItem
             // 
             this.animationsToolStripMenuItem.Name = "animationsToolStripMenuItem";
-            this.animationsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.animationsToolStripMenuItem.Text = "Animations";
+            this.animationsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.animationsToolStripMenuItem.Text = "Animation(s)...";
             this.animationsToolStripMenuItem.Click += new System.EventHandler(this.export_Click);
             // 
             // allMoldImagesToolStripMenuItem
             // 
             this.allMoldImagesToolStripMenuItem.Name = "allMoldImagesToolStripMenuItem";
-            this.allMoldImagesToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.allMoldImagesToolStripMenuItem.Text = "All mold images";
+            this.allMoldImagesToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.allMoldImagesToolStripMenuItem.Text = "Sprite image(s)...";
             this.allMoldImagesToolStripMenuItem.Click += new System.EventHandler(this.allMoldImagesToolStripMenuItem_Click);
             // 
             // clear
@@ -655,14 +658,25 @@ namespace LAZYSHELL
             this.showDecHex.Size = new System.Drawing.Size(23, 22);
             this.showDecHex.ToolTipText = "Show Base Conversion";
             // 
+            // hexViewer
+            // 
+            this.hexViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hexViewer.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
+            this.hexViewer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.hexViewer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.hexViewer.Name = "hexViewer";
+            this.hexViewer.Size = new System.Drawing.Size(23, 22);
+            this.hexViewer.Text = "Open Hex Editor";
+            this.hexViewer.Click += new System.EventHandler(this.hexViewer_Click);
+            // 
             // toolStrip3
             // 
             this.toolStrip3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.name,
             this.number,
-            this.searchEffectNames,
             this.nameTextBox,
+            this.searchEffectNames,
             this.toolStripSeparator1,
             this.showMain,
             this.openMolds,
@@ -691,6 +705,11 @@ namespace LAZYSHELL
             this.name.Size = new System.Drawing.Size(210, 25);
             this.name.SelectedIndexChanged += new System.EventHandler(this.name_SelectedIndexChanged);
             // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(200, 25);
+            // 
             // searchEffectNames
             // 
             this.searchEffectNames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -700,12 +719,6 @@ namespace LAZYSHELL
             this.searchEffectNames.Name = "searchEffectNames";
             this.searchEffectNames.Size = new System.Drawing.Size(23, 22);
             this.searchEffectNames.Text = "Search for sprite";
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(100, 25);
-            this.nameTextBox.Visible = false;
             // 
             // toolStripSeparator1
             // 
@@ -772,14 +785,20 @@ namespace LAZYSHELL
             this.openGraphics.ToolTipText = "BPP Graphics";
             this.openGraphics.Click += new System.EventHandler(this.openGraphics_Click);
             // 
-            // Export_Worker
-            // 
-            this.Export_Worker.WorkerReportsProgress = true;
-            this.Export_Worker.WorkerSupportsCancellation = true;
-            // 
             // toolTip3
             // 
             this.toolTip3.Active = false;
+            // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.ToolTipText = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // Sprites
             // 
@@ -881,10 +900,11 @@ namespace LAZYSHELL
         private ToolStripButton showDecHex;
         private ToolStripDropDownButton export;
         private ToolStripMenuItem allMoldImagesToolStripMenuItem;
-        private BackgroundWorker Export_Worker;
         private ToolStripMenuItem animationsToolStripMenuItem;
         private ToolStripNumericUpDown number;
         private ToolTip toolTip3;
+        private ToolStripButton hexViewer;
+        private ToolStripButton reset;
     }
 }
 

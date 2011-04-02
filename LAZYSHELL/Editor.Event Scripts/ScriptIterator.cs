@@ -33,17 +33,17 @@ namespace LAZYSHELL.ScriptsEditor
             {
                 esc = (EventScriptCommand)es.Commands[parentIndex];
 
-                if (esc.IsActionQueueTrigger && esc.EmbeddedActionQueue.ActionQueueCommands.Count > 0)
+                if (esc.IsActionQueueTrigger && esc.EmbeddedActionQueue.Commands.Count > 0)
                 {
-                    if (childIndex < esc.EmbeddedActionQueue.ActionQueueCommands.Count)
+                    if (childIndex < esc.EmbeddedActionQueue.Commands.Count)
                     {
                         if (childIndex != -1)
                         {
-                            aqc = (ActionQueueCommand)esc.EmbeddedActionQueue.ActionQueueCommands[childIndex];
+                            aqc = (ActionQueueCommand)esc.EmbeddedActionQueue.Commands[childIndex];
 
                             childIndex++;
 
-                            if (childIndex == esc.EmbeddedActionQueue.ActionQueueCommands.Count)
+                            if (childIndex == esc.EmbeddedActionQueue.Commands.Count)
                             {
                                 childIndex = -1;
                                 parentIndex++;
@@ -63,7 +63,7 @@ namespace LAZYSHELL.ScriptsEditor
             }
             else if (aq != null)
             {
-                aqc = (ActionQueueCommand)aq.ActionQueueCommands[parentIndex];
+                aqc = (ActionQueueCommand)aq.Commands[parentIndex];
                 parentIndex++;
                 return (EventActionCommand)aqc;
             }
@@ -83,15 +83,15 @@ namespace LAZYSHELL.ScriptsEditor
                     // Get the last command to check child index
                     EventScriptCommand esc = (EventScriptCommand)es.Commands[es.Commands.Count - 1];
 
-                    if (esc.IsActionQueueTrigger && esc.EmbeddedActionQueue.ActionQueueCommands.Count > 0)
+                    if (esc.IsActionQueueTrigger && esc.EmbeddedActionQueue.Commands.Count > 0)
                     {
-                        if (childIndex != -1 && childIndex < esc.EmbeddedActionQueue.ActionQueueCommands.Count)
+                        if (childIndex != -1 && childIndex < esc.EmbeddedActionQueue.Commands.Count)
                             return false;
                     }
                 }
                 else if (aq != null)
                 {
-                    if (parentIndex < aq.ActionQueueCommands.Count)
+                    if (parentIndex < aq.Commands.Count)
                         return false;
                 }
 

@@ -11,8 +11,9 @@ namespace LAZYSHELL
 {
     public partial class NPCEditor : Form
     {
+        private NPCProperties _npcProperty;
         private Settings settings = Settings.Default;
-        private NPCProperties[] npcProperties;
+        private NPCProperties[] npcProperties { get { return Model.NPCProperties; } set { Model.NPCProperties = value; } }
         private NPCProperties npcProperty { get { return npcProperties[index]; } set { npcProperties[index] = value; } }
         private Bitmap spriteImage;
         private int[] spritePixels;
@@ -20,18 +21,25 @@ namespace LAZYSHELL
         private int imageHeight;
         private Levels level;
         private int index { get { return (int)npcNum.Value; } set { npcNum.Value = value; } }
+        private Search searchWindow;
 
         private bool updating = false;
 
-        public NPCEditor(NPCProperties[] npcProperties, Levels level, decimal npcID)
+        public NPCEditor(Levels level, decimal npcID)
         {
-            this.npcProperties = npcProperties;
             this.level = level;
             InitializeComponent();
             spriteName.Items.AddRange(Lists.Numerize(Lists.SpriteNames));
+            searchSpriteName.Items.AddRange(Lists.Numerize(Lists.SpriteNames));
+            searchSpriteName.SelectedIndex = 0;
             npcNum.Value = npcID;
             InitializeNPCs();
-            new Search(spriteName, spriteNameTextBox, searchSpriteNames, spriteName.Items);
+            searchWindow = new Search(searchSpriteName, spriteNameTextBox, searchSpriteNames, searchSpriteName.Items);
+        }
+        public void Reload(decimal npcID)
+        {
+            npcNum.Value = Math.Min(511, npcID);
+            InitializeNPCs();
         }
         private void InitializeNPCs()
         {
@@ -68,6 +76,9 @@ namespace LAZYSHELL
             SetSpriteImage();
 
             updating = false;
+
+            //if (level.npcs.NumberOfNPCs != 0)
+            //    level.NPCID.Value = npcNum.Value;
         }
 
         private void LoadSearch()
@@ -75,11 +86,11 @@ namespace LAZYSHELL
             searchResults.Items.Clear();
 
             bool notFound;
-            int val = (int)spriteName.SelectedIndex;
+            int val = (int)searchSpriteName.SelectedIndex;
             for (int i = 0; i < npcProperties.Length; i++)
             {
                 notFound = false;
-                if (spriteName.SelectedIndex != npcProperties[i].Sprite) notFound = true;
+                if (searchSpriteName.SelectedIndex != npcProperties[i].Sprite) notFound = true;
                 if (!notFound)
                     searchResults.Items.Add("NPC #" + i.ToString() + "\n");
             }
@@ -97,10 +108,12 @@ namespace LAZYSHELL
 
         private void npcNum_ValueChanged(object sender, EventArgs e)
         {
+            _npcProperty = npcProperty.Copy();
             InitializeNPCs();
         }
         private void spriteName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            spriteNum.Value = spriteName.SelectedIndex;
             if (updating) return;
             SetSpriteImage();
         }
@@ -133,10 +146,6 @@ namespace LAZYSHELL
             if (updating) return;
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
-        {
-            LoadSearch();
-        }
         private void spritePictureBox_Paint(object sender, PaintEventArgs e)
         {
             if (spriteImage != null)
@@ -145,8 +154,6 @@ namespace LAZYSHELL
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            level.npcID_ValueChanged(null, null);
-
             npcProperty.Sprite = (ushort)spriteName.SelectedIndex;
             npcProperty.Priority0 = layerPriority.GetItemChecked(0);
             npcProperty.Priority1 = layerPriority.GetItemChecked(1);
@@ -181,8 +188,7 @@ namespace LAZYSHELL
             npcProperty.B5b6 = unknownBits.GetItemChecked(13);
             npcProperty.B5b7 = unknownBits.GetItemChecked(14);
             npcProperty.B6b2 = unknownBits.GetItemChecked(15);
-
-            this.Close();
+            level.npcID_ValueChanged(null, null);
         }
         private void buttonCancel_Click(object sender, EventArgs e)
         {
@@ -191,7 +197,30 @@ namespace LAZYSHELL
 
         private void searchResults_SelectedIndexChanged(object sender, EventArgs e)
         {
-            level.NPCID.Value = Convert.ToInt32(searchResults.SelectedItem.ToString().Substring(5));
+            npcNum.Value = Convert.ToInt32(searchResults.SelectedItem.ToString().Substring(5));
+        }
+
+        private void searchSpriteName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadSearch();
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            npcProperty = _npcProperty.Copy();
+            InitializeNPCs();
+        }
+
+        private void NPCEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            searchWindow.Hide();
+            this.Hide();
+            e.Cancel = true;
+        }
+
+        private void spriteNum_ValueChanged(object sender, EventArgs e)
+        {
+            spriteName.SelectedIndex = (int)spriteNum.Value;
         }
     }
 }

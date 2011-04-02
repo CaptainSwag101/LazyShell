@@ -44,6 +44,8 @@
             this.pictureBoxTile = new System.Windows.Forms.PictureBox();
             this.pictureBoxSubtile = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.autoUpdate = new System.Windows.Forms.CheckBox();
             this.panel113.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.subtileIndex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subtilePalette)).BeginInit();
@@ -222,11 +224,37 @@
             this.panel1.Size = new System.Drawing.Size(68, 68);
             this.panel1.TabIndex = 498;
             // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(174, 151);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.TabIndex = 538;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
+            // autoUpdate
+            // 
+            this.autoUpdate.AutoSize = true;
+            this.autoUpdate.BackColor = System.Drawing.SystemColors.Control;
+            this.autoUpdate.Checked = true;
+            this.autoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.autoUpdate.Location = new System.Drawing.Point(170, 128);
+            this.autoUpdate.Name = "autoUpdate";
+            this.autoUpdate.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.autoUpdate.Size = new System.Drawing.Size(91, 17);
+            this.autoUpdate.TabIndex = 537;
+            this.autoUpdate.Text = "Auto-update";
+            this.autoUpdate.UseVisualStyleBackColor = false;
+            // 
             // TileEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(261, 215);
+            this.Controls.Add(this.buttonUpdate);
+            this.Controls.Add(this.autoUpdate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonInvertTile);
             this.Controls.Add(this.buttonMirrorTile);
@@ -254,6 +282,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSubtile)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -274,5 +303,7 @@
         private System.Windows.Forms.Button buttonInvertTile;
         private System.Windows.Forms.Button buttonMirrorTile;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.CheckBox autoUpdate;
     }
 }

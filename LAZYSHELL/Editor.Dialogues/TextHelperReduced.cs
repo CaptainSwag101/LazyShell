@@ -302,7 +302,7 @@ namespace LAZYSHELL
             {
                 arrayList.CopyTo(encodedStr);
             }
-            catch (Exception ex)
+            catch
             {
                 //MessageBox.Show("Input Error, text not valid. You probably entered a character that Super Mario RPG cannot parse. This text will not be saved unless the error is fixed.");
                 error = true;
@@ -398,7 +398,7 @@ namespace LAZYSHELL
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

@@ -5,16 +5,17 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class DialogueTileset
     {
-        private Model model = State.Instance.Model;
-        private byte[] graphicSet;
+        [NonSerialized()]
+                private byte[] graphicSet;
         private PaletteSet paletteSet;
         private Tile16x16[] tilesetLayer; public Tile16x16[] TilesetLayer { get { return tilesetLayer; } }
 
         public DialogueTileset(PaletteSet paletteSet)
         {
-            this.graphicSet = model.DialogueGraphics;
+            this.graphicSet = Model.DialogueGraphics;
             this.paletteSet = paletteSet;
 
             tilesetLayer = new Tile16x16[16 * 4];

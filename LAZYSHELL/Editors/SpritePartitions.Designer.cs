@@ -469,7 +469,7 @@ namespace LAZYSHELL
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(318, 352);
+            this.searchButton.Location = new System.Drawing.Point(311, 338);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(75, 23);
             this.searchButton.TabIndex = 392;
@@ -499,7 +499,8 @@ namespace LAZYSHELL
             this.panel88.Controls.Add(this.paletteIndex);
             this.panel88.Controls.Add(this.checkVramIndex);
             this.panel88.Controls.Add(this.checkPaletteIndex);
-            this.panel88.Location = new System.Drawing.Point(216, 12);
+            this.panel88.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel88.Location = new System.Drawing.Point(210, 0);
             this.panel88.Name = "panel88";
             this.panel88.Size = new System.Drawing.Size(258, 91);
             this.panel88.TabIndex = 496;
@@ -514,7 +515,8 @@ namespace LAZYSHELL
             this.panel9.Controls.Add(this.panel4);
             this.panel9.Controls.Add(this.checkByte2a);
             this.panel9.Controls.Add(this.checkByte2b);
-            this.panel9.Location = new System.Drawing.Point(216, 109);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(210, 91);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(258, 75);
             this.panel9.TabIndex = 497;
@@ -529,7 +531,8 @@ namespace LAZYSHELL
             this.panel10.Controls.Add(this.panel2);
             this.panel10.Controls.Add(this.checkByte3a);
             this.panel10.Controls.Add(this.checkByte3b);
-            this.panel10.Location = new System.Drawing.Point(216, 190);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(210, 166);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(258, 75);
             this.panel10.TabIndex = 498;
@@ -544,7 +547,8 @@ namespace LAZYSHELL
             this.panel11.Controls.Add(this.panel3);
             this.panel11.Controls.Add(this.checkByte4a);
             this.panel11.Controls.Add(this.checkByte4b);
-            this.panel11.Location = new System.Drawing.Point(216, 271);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Location = new System.Drawing.Point(210, 241);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(258, 75);
             this.panel11.TabIndex = 499;
@@ -556,13 +560,13 @@ namespace LAZYSHELL
             this.listBox1.IntegralHeight = false;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(210, 387);
+            this.listBox1.Size = new System.Drawing.Size(210, 362);
             this.listBox1.TabIndex = 500;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(399, 352);
+            this.buttonCancel.Location = new System.Drawing.Point(392, 338);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 392;
@@ -573,14 +577,14 @@ namespace LAZYSHELL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 387);
-            this.Controls.Add(this.listBox1);
+            this.ClientSize = new System.Drawing.Size(468, 362);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.panel10);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.searchButton);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel88);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.searchButton);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;

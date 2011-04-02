@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.Text;
 using System.IO;
@@ -14,7 +15,6 @@ namespace LAZYSHELL.Previewer
     {
         #region Variables
         private Settings settings = Settings.Default;
-        private Model model = State.Instance.Model;
         private string romPath;
         private string emulatorPath = "INVALID";
         private bool rom = false, emulator = false, savestate = false, eventchoice = false, initializing = false;
@@ -22,6 +22,7 @@ namespace LAZYSHELL.Previewer
         private ArrayList eventTriggers;
         private bool snes9x;
         private int behaviour;
+        private bool updating = false;
         private enum Behaviours
         {
             EventPreviewer,
@@ -116,12 +117,37 @@ namespace LAZYSHELL.Previewer
             }
             this.argsTextBox.Text = settings.PreviewArguments;
             this.dynamicROMPath.Checked = settings.PreviewDynamicRomName;
+            this.level.Value = settings.PreviewLevel;
+            // ally stats
+            this.allyName.Items.Clear();
+            for (int i = 0; i < Model.Characters.Length; i++)
+                this.allyName.Items.Add(new string(Model.Characters[i].Name));
+            this.allyName.SelectedIndex = 0;
+            this.allyWeapon.Items.Clear();
+            this.allyWeapon.Items.AddRange(Model.ItemNames.GetNames());
+            this.allyArmor.Items.Clear();
+            this.allyArmor.Items.AddRange(Model.ItemNames.GetNames());
+            this.allyAccessory.Items.Clear();
+            this.allyAccessory.Items.AddRange(Model.ItemNames.GetNames());
+            //settings.AllyEquipment = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+            //settings.Save();
+            updating = true;
+            this.allyWeapon.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
+            this.allyArmor.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
+            this.allyAccessory.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
+            //
             this.maxOutStats.Checked = settings.PreviewMaxStats;
             for (int i = 0; i < 4; i++)
                 alliesInParty.SetItemChecked(i, Bits.GetBit(settings.PreviewAllies, i));
-
+            updating = false;
             romPath = GetRomPath();
             this.initializing = false;
+        }
+        private byte StringToByte(string value, int index)
+        {
+            string substring = value.Substring(index * 2, 2);
+            byte equipment = Convert.ToByte(substring, 16);
+            return equipment;
         }
         private bool GetEmulator()
         {
@@ -136,7 +162,7 @@ namespace LAZYSHELL.Previewer
                 else
                     throw new Exception();
             }
-            catch (Exception ex)
+            catch
             {
                 this.emulatorPath = SelectFile("exe files (*.exe)|*.exe|All files (*.*)|*.*", "C:\\", "Select Emulator");
 
@@ -181,13 +207,13 @@ namespace LAZYSHELL.Previewer
                             "Enter Event - X:" + ent.CoordX.ToString("00") +
                             " Y:" + ent.CoordY.ToString("000") +
                             " Z:" + ent.CoordZ.ToString("00") +
-                            " - Area: [" + ent.LevelNum.ToString("d3") + "]" + settings.LevelNames[ent.LevelNum]);
+                            " - Area: [" + ent.LevelNum.ToString("d3") + "] " + settings.LevelNames[ent.LevelNum]);
                     else // A run event
                         this.eventListBox.Items.Add(
                             "Run Event - X:" + ent.CoordX.ToString("00") +
                             " Y:" + ent.CoordY.ToString("000") +
                             " Z:" + ent.CoordZ.ToString("00") +
-                            " - Area: [" + ent.LevelNum.ToString("d3") + "]" + settings.LevelNames[ent.LevelNum]);
+                            " - Area: [" + ent.LevelNum.ToString("d3") + "] " + settings.LevelNames[ent.LevelNum]);
                 }
                 else if (this.behaviour == (int)Behaviours.LevelPreviewer)
                 {
@@ -195,7 +221,7 @@ namespace LAZYSHELL.Previewer
                         "Enter - X:" + ent.CoordX.ToString("00") +
                         " Y:" + ent.CoordY.ToString("000") +
                         " Z:" + ent.CoordZ.ToString("00") +
-                        " - From Area: [" + ent.LevelNum.ToString("d3") + "]" + settings.LevelNames[ent.LevelNum]);
+                        " - From Area: [" + ent.LevelNum.ToString("d3") + "] " + settings.LevelNames[ent.LevelNum]);
                 }
                 else if (this.behaviour == (int)Behaviours.ActionPreviewer)
                 {
@@ -205,14 +231,14 @@ namespace LAZYSHELL.Previewer
                             " - NPC Action - Enter X:" + (ent.CoordX).ToString("00") +
                             " Y:" + ent.CoordY.ToString("000") +
                             " Z:" + ent.CoordZ.ToString("00") +
-                            " - Area: [" + ent.LevelNum.ToString("d3") + "]" + settings.LevelNames[ent.LevelNum]);
+                            " - Area: [" + ent.LevelNum.ToString("d3") + "] " + settings.LevelNames[ent.LevelNum]);
                     else
                         this.eventListBox.Items.Add(
                             "NPC-ID: " + ent.Source.ToString() +
                             " - NPC Instance Action - Enter X:" + ent.CoordX.ToString("00") +
                             " Y:" + ent.CoordY.ToString("000") +
                             " Z:" + ent.CoordZ.ToString("00") +
-                            " - Area: [" + ent.LevelNum.ToString("d3") + "]" + settings.LevelNames[ent.LevelNum]);
+                            " - Area: [" + ent.LevelNum.ToString("d3") + "] " + settings.LevelNames[ent.LevelNum]);
                 }
                 else if (this.behaviour == (int)Behaviours.BattlePreviewer)
                 {
@@ -256,31 +282,43 @@ namespace LAZYSHELL.Previewer
         {
             bool ret = false;
             // Make backup of current data                
-            byte[] backup = new byte[model.Data.Length];
-            model.Data.CopyTo(backup, 0);
+            byte[] backup = new byte[Model.Data.Length];
+            bool[] editGraphicSets = new bool[272];
+            bool[] editTileSets = new bool[125];
+            bool[] editTileMaps = new bool[309];
+            bool[] editSolidityMaps = new bool[120];
+            Model.Data.CopyTo(backup, 0);
+            Model.EditGraphicSets.CopyTo(editGraphicSets, 0);
+            Model.EditTileSets.CopyTo(editTileSets, 0);
+            Model.EditTileMaps.CopyTo(editTileMaps, 0);
+            Model.EditSolidityMaps.CopyTo(editSolidityMaps, 0);
             if (!((this.behaviour == (int)Behaviours.EventPreviewer || this.behaviour == (int)Behaviours.ActionPreviewer) &&
                 this.eventListBox.SelectedIndex < 0 || this.eventListBox.SelectedIndex >= this.eventTriggers.Count))
             {
                 if (this.behaviour == (int)Behaviours.BattlePreviewer)
-                    this.model.Program.BattleScripts.Assemble();
+                    Model.Program.Monsters.Assemble();
                 if (this.behaviour == (int)Behaviours.EventPreviewer ||
                     this.behaviour == (int)Behaviours.ActionPreviewer)
-                    this.model.Program.EventScripts.Assemble();
+                    Model.Program.EventScripts.Assemble();
                 if (this.behaviour == (int)Behaviours.LevelPreviewer)
-                    this.model.Program.Levels.Assemble();
+                    Model.Program.Levels.Assemble();
                 PrepareImage();
                 // Backup filename
-                string fileNameBackup = model.GetFileName();
+                string fileNameBackup = Model.FileName;
                 // Generate preview name;
                 this.romPath = GetRomPath();
-                string oldFileName = model.GetFileName();
-                model.SetFileName(romPath);
-                ret = model.WriteRom(); // Save temp rom
+                string oldFileName = Model.FileName;
+                Model.FileName = romPath;
+                ret = Model.WriteRom(); // Save temp rom
                 // Restore name
-                model.SetFileName(oldFileName);
+                Model.FileName = oldFileName;
             }
             //Restore Rom Image
-            backup.CopyTo(model.Data, 0);
+            backup.CopyTo(Model.Data, 0);
+            editGraphicSets.CopyTo(Model.EditGraphicSets, 0);
+            editTileSets.CopyTo(Model.EditTileSets, 0);
+            editTileMaps.CopyTo(Model.EditTileMaps, 0);
+            editSolidityMaps.CopyTo(Model.EditSolidityMaps, 0);
             return ret;
         }
         private byte[] maxStats = new byte[]
@@ -297,7 +335,7 @@ namespace LAZYSHELL.Previewer
             {
                 snes9x = Do.Contains(this.emulatorPath, "snes9x", StringComparison.CurrentCultureIgnoreCase);
                 string ext = snes9x ? ".000" : ".zst";
-                FileInfo fInfo = new FileInfo(model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave" + ext);
+                FileInfo fInfo = new FileInfo(Model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave" + ext);
                 if (!fInfo.Exists)
                 {
                     byte[] lc;
@@ -305,7 +343,7 @@ namespace LAZYSHELL.Previewer
                         lc = Resources.RomPreviewBaseSave;
                     else
                         lc = Resources.RomPreviewBaseSave1;
-                    File.WriteAllBytes(model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave" + ext, lc);
+                    File.WriteAllBytes(Model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave" + ext, lc);
                 }
                 FileStream fs = fInfo.OpenRead();
                 BinaryReader br = new BinaryReader(fs);
@@ -313,10 +351,100 @@ namespace LAZYSHELL.Previewer
                 br.Close();
                 fs.Close();
 
+                int offset = 0;
                 // modify zst if needed
                 if (maxOutStats.Checked)
                     maxStats.CopyTo(state, snes9x ? 0x30487 : 0x20413);
-                int offset = snes9x ? 0x53C9D : 0x41533;
+                else
+                {
+                    foreach (Character character in Model.Characters)
+                    {
+                        int hp = character.StartingCurrentHP;
+                        int attack = character.StartingAttack;
+                        int defense = character.StartingDefense;
+                        int mgAttack = character.StartingMgAttack;
+                        int mgDefense = character.StartingMgDefense;
+                        int experience = character.StartingExperience;
+                        bool[] spells = new bool[128];
+                        spells[0] = character.Jump;
+                        spells[1] = character.FireOrb;
+                        spells[2] = character.SuperJump;
+                        spells[3] = character.SuperFlame;
+                        spells[4] = character.UltraJump;
+                        spells[5] = character.UltraFlame;
+                        spells[6] = character.Therapy;
+                        spells[7] = character.GroupHug;
+                        spells[8] = character.SleepyTime;
+                        spells[9] = character.ComeBack;
+                        spells[10] = character.Mute;
+                        spells[11] = character.PsychBomb;
+                        spells[12] = character.Terrorize;
+                        spells[13] = character.PoisonGas;
+                        spells[14] = character.Crusher;
+                        spells[15] = character.BowserCrush;
+                        spells[16] = character.GenoBeam;
+                        spells[17] = character.GenoBoost;
+                        spells[18] = character.GenoWhirl;
+                        spells[19] = character.GenoBlast;
+                        spells[20] = character.GenoFlash;
+                        spells[21] = character.Thunderbolt;
+                        spells[22] = character.HPRain;
+                        spells[23] = character.Psychopath;
+                        spells[24] = character.Shocker;
+                        spells[25] = character.Snowy;
+                        spells[26] = character.StarRain;
+                        spells[27] = character.Dummy27;
+                        spells[28] = character.Dummy28;
+                        spells[29] = character.Dummy29;
+                        spells[30] = character.Dummy30;
+                        spells[31] = character.Dummy31;
+
+                        foreach (Character.Level level in character.Levels)
+                        {
+                            if (level == null) continue;
+                            if (level.Index > this.level.Value) break;
+                            hp += level.HpPlus;
+                            attack += level.AttackPlus;
+                            defense += level.DefensePlus;
+                            mgAttack += level.MgAttackPlus;
+                            mgDefense += level.MgDefensePlus;
+                            // used balanced level-up bonus
+                            if (level.AttackPlusBonus > level.MgAttackPlusBonus)
+                            {
+                                attack += level.AttackPlusBonus;
+                                defense += level.DefensePlusBonus;
+                            }
+                            else if (level.MgAttackPlusBonus > level.AttackPlusBonus)
+                            {
+                                mgAttack += level.MgAttackPlusBonus;
+                                mgDefense += level.MgDefensePlusBonus;
+                            }
+                            else
+                                hp += level.HpPlusBonus;
+                            experience = level.ExpNeeded;
+                            spells[level.SpellLearned] = level.SpellLearned != 0xFF;
+                        }
+                        offset = snes9x ? 0x30487 : 0x20413;
+                        offset += character.Index * 20;
+                        state[offset++] = Math.Max(character.StartingLevel, (byte)this.level.Value);
+                        Bits.SetShort(state, offset, (ushort)hp); offset += 2;
+                        Bits.SetShort(state, offset, (ushort)hp); offset += 2;
+                        offset++;
+                        state[offset++] = (byte)attack;
+                        state[offset++] = (byte)defense;
+                        state[offset++] = (byte)mgAttack;
+                        state[offset++] = (byte)mgDefense;
+                        Bits.SetShort(state, offset, experience); offset += 2;
+                        state[offset++] = StringToByte(settings.AllyEquipment, character.Index * 3);
+                        state[offset++] = StringToByte(settings.AllyEquipment, character.Index * 3 + 1);
+                        state[offset++] = StringToByte(settings.AllyEquipment, character.Index * 3 + 2);
+                        offset++;   // unused byte
+                        double p = 0;
+                        for (int i = 0; i < 32; i++, p += 0.125)
+                            Bits.SetBit(state, offset + (int)p, i & 7, spells[i]);
+                    }
+                }
+                offset = snes9x ? 0x53C9D : 0x41533;
 
                 byte allyCount = 1;
                 for (byte i = 0, a = 1; i < alliesInParty.Items.Count; i++)
@@ -324,7 +452,7 @@ namespace LAZYSHELL.Previewer
                     if (alliesInParty.GetItemChecked(i))
                     {
                         state[offset + 0x33 + a] = (byte)(i + 1);
-                        a++;  allyCount++;
+                        a++; allyCount++;
                     }
                 }
                 state[offset + 0x32] = allyCount;
@@ -339,7 +467,7 @@ namespace LAZYSHELL.Previewer
                 bw.Close();
                 fs.Close();
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -359,43 +487,44 @@ namespace LAZYSHELL.Previewer
                 return false;
             }
 
-            LevelExits storage = new LevelExits(model.Data);
+            LevelExits storage = new LevelExits(Model.Data);
             storage.AddNewExit(0, new Point(0, 0));
             storage.CurrentExit = 0;
-
             if (this.eventTriggers.Count > 0)
             {
                 ent = (Entrance)eventTriggers[index];
-                storage.Destination = (ushort)ent.LevelNum;
                 storage.DestFace = ent.RadialPosition;
                 storage.ShowMessage = ent.ShowMessage;
             }
             else
             {
-                storage.Destination = (ushort)this.selectNumericUpDown.Value;
                 storage.DestFace = 7;
                 storage.ShowMessage = false;
             }
+            if (this.behaviour == (int)Behaviours.LevelPreviewer)
+                storage.Destination = Math.Min((ushort)509, (ushort)this.selectNumericUpDown.Value);
+            else if (this.behaviour == (int)Behaviours.EventPreviewer || this.behaviour == (int)Behaviours.ActionPreviewer)
+                storage.Destination = ent.LevelNum;
             storage.ExitType = 0;
             storage.Y = 10;
             storage.DestX = (byte)this.adjustXNumericUpDown.Value;
             storage.DestY = (byte)this.adjustYNumericUpDown.Value;
             storage.DestZ = (byte)this.adjustZNumericUpDown.Value;
 
-            ushort save = this.model.Levels[storage.Destination].LevelEvents.ExitEvent;
-            this.model.Levels[storage.Destination].LevelEvents.ExitEvent = 0;
+            ushort save = Model.Levels[storage.Destination].LevelEvents.ExitEvent;
+            Model.Levels[storage.Destination].LevelEvents.ExitEvent = 0;
             if (this.behaviour == (int)Behaviours.BattlePreviewer)
             {
                 PrepareBattlePack(ent.Source);
                 byte[] eventData = new byte[] { 0x4A, 0x00, 0x00, 0x00, 0xFE };
                 eventData[3] = (byte)this.battleBGListBox.SelectedIndex;
-                eventData.CopyTo(model.Data, 0x1E0C00);
+                eventData.CopyTo(Model.Data, 0x1E0C00);
             }
             else
-                new byte[] { 0x70, 0xFE }.CopyTo(model.Data, 0x1E0C00);
+                new byte[] { 0x70, 0xFE }.CopyTo(Model.Data, 0x1E0C00);
 
             SaveLevelExitEvents();
-            this.model.Levels[storage.Destination].LevelEvents.ExitEvent = save;
+            Model.Levels[storage.Destination].LevelEvents.ExitEvent = save;
 
             storage.Assemble(0x3166);
             this.eventchoice = true;
@@ -407,47 +536,47 @@ namespace LAZYSHELL.Previewer
             {
                 int formationIndex = 4;
 
-                byte monster1 = model.Formations[formationIndex].FormationMonster[0];
-                byte xcoord = model.Formations[formationIndex].FormationCoordX[0];
-                byte ycoord = model.Formations[formationIndex].FormationCoordY[0];
-                model.Formations[formationIndex].FormationCoordX[0] = 167;
-                model.Formations[formationIndex].FormationCoordY[0] = 135;
-                model.Formations[formationIndex].FormationMonster[0] = (byte)this.selectNumericUpDown.Value;
+                byte monster1 = Model.Formations[formationIndex].FormationMonster[0];
+                byte xcoord = Model.Formations[formationIndex].FormationCoordX[0];
+                byte ycoord = Model.Formations[formationIndex].FormationCoordY[0];
+                Model.Formations[formationIndex].FormationCoordX[0] = 167;
+                Model.Formations[formationIndex].FormationCoordY[0] = 135;
+                Model.Formations[formationIndex].FormationMonster[0] = (byte)this.selectNumericUpDown.Value;
                 bool[] uses = new bool[8];
-                uses[0] = model.Formations[formationIndex].FormationUse[0];
-                uses[1] = model.Formations[formationIndex].FormationUse[1];
-                uses[2] = model.Formations[formationIndex].FormationUse[2];
-                uses[3] = model.Formations[formationIndex].FormationUse[3];
-                uses[4] = model.Formations[formationIndex].FormationUse[4];
-                uses[5] = model.Formations[formationIndex].FormationUse[5];
-                uses[6] = model.Formations[formationIndex].FormationUse[6];
-                uses[7] = model.Formations[formationIndex].FormationUse[7];
-                model.Formations[formationIndex].FormationUse[0] = true;
-                model.Formations[formationIndex].FormationUse[1] = false;
-                model.Formations[formationIndex].FormationUse[2] = false;
-                model.Formations[formationIndex].FormationUse[3] = false;
-                model.Formations[formationIndex].FormationUse[4] = false;
-                model.Formations[formationIndex].FormationUse[5] = false;
-                model.Formations[formationIndex].FormationUse[6] = false;
-                model.Formations[formationIndex].FormationUse[7] = false;
+                uses[0] = Model.Formations[formationIndex].FormationUse[0];
+                uses[1] = Model.Formations[formationIndex].FormationUse[1];
+                uses[2] = Model.Formations[formationIndex].FormationUse[2];
+                uses[3] = Model.Formations[formationIndex].FormationUse[3];
+                uses[4] = Model.Formations[formationIndex].FormationUse[4];
+                uses[5] = Model.Formations[formationIndex].FormationUse[5];
+                uses[6] = Model.Formations[formationIndex].FormationUse[6];
+                uses[7] = Model.Formations[formationIndex].FormationUse[7];
+                Model.Formations[formationIndex].FormationUse[0] = true;
+                Model.Formations[formationIndex].FormationUse[1] = false;
+                Model.Formations[formationIndex].FormationUse[2] = false;
+                Model.Formations[formationIndex].FormationUse[3] = false;
+                Model.Formations[formationIndex].FormationUse[4] = false;
+                Model.Formations[formationIndex].FormationUse[5] = false;
+                Model.Formations[formationIndex].FormationUse[6] = false;
+                Model.Formations[formationIndex].FormationUse[7] = false;
 
-                model.Formations[formationIndex].Assemble();
+                Model.Formations[formationIndex].Assemble();
 
-                model.Formations[formationIndex].FormationMonster[0] = monster1;
-                model.Formations[formationIndex].FormationCoordX[0] = xcoord;
-                model.Formations[formationIndex].FormationCoordY[0] = ycoord;
-                model.Formations[formationIndex].FormationUse[0] = uses[0];
-                model.Formations[formationIndex].FormationUse[1] = uses[1];
-                model.Formations[formationIndex].FormationUse[2] = uses[2];
-                model.Formations[formationIndex].FormationUse[3] = uses[3];
-                model.Formations[formationIndex].FormationUse[4] = uses[4];
-                model.Formations[formationIndex].FormationUse[5] = uses[5];
-                model.Formations[formationIndex].FormationUse[6] = uses[6];
-                model.Formations[formationIndex].FormationUse[7] = uses[7];
+                Model.Formations[formationIndex].FormationMonster[0] = monster1;
+                Model.Formations[formationIndex].FormationCoordX[0] = xcoord;
+                Model.Formations[formationIndex].FormationCoordY[0] = ycoord;
+                Model.Formations[formationIndex].FormationUse[0] = uses[0];
+                Model.Formations[formationIndex].FormationUse[1] = uses[1];
+                Model.Formations[formationIndex].FormationUse[2] = uses[2];
+                Model.Formations[formationIndex].FormationUse[3] = uses[3];
+                Model.Formations[formationIndex].FormationUse[4] = uses[4];
+                Model.Formations[formationIndex].FormationUse[5] = uses[5];
+                Model.Formations[formationIndex].FormationUse[6] = uses[6];
+                Model.Formations[formationIndex].FormationUse[7] = uses[7];
                 formationNum = formationIndex;
             }
 
-            FormationPack sfp = model.FormationPacks[0];
+            FormationPack sfp = Model.FormationPacks[0];
             ushort formation1 = sfp.PackFormations[0];
             ushort formation2 = sfp.PackFormations[0];
             ushort formation3 = sfp.PackFormations[0];
@@ -463,22 +592,22 @@ namespace LAZYSHELL.Previewer
         {
             ushort offsetStart = 0xE400;
             for (int i = 0; i < 512; i++)
-                offsetStart = model.Levels[i].LevelEvents.Assemble(offsetStart);
+                offsetStart = Model.Levels[i].LevelEvents.Assemble(offsetStart);
         }
         private string GetRomPath()
         {
             if (settings.PreviewDynamicRomName)
-                return model.GetPathWithoutFileName() + "PreviewROM_" + model.GetFileNameWithoutPath();
+                return Model.GetPathWithoutFileName() + "PreviewROM_" + Model.GetFileNameWithoutPath();
             else
-                return model.GetEditorPathWithoutFileName() + "PreviewRom.smc";
+                return Model.GetEditorPathWithoutFileName() + "PreviewRom.smc";
         }
         private string GetStatePath()
         {
             string ext = snes9x ? ".000" : ".zst";
             if (settings.PreviewDynamicRomName)
-                return model.GetPathWithoutFileName() + "PreviewROM_" + model.GetFileNameWithoutPathOrExtension() + ext;
+                return Model.GetPathWithoutFileName() + "PreviewROM_" + Model.GetFileNameWithoutPathOrExtension() + ext;
             else
-                return model.GetEditorPathWithoutFileName() + "PreviewRom" + ext;
+                return Model.GetEditorPathWithoutFileName() + "PreviewRom" + ext;
         }
         private void LaunchEmulator(string zsnesPath, string romPath, string args)
         {
@@ -497,7 +626,7 @@ namespace LAZYSHELL.Previewer
         }
         private void ScanForEnterEvents()
         {
-            foreach (Level lvl in model.Levels)
+            foreach (Level lvl in Model.Levels)
             {
                 if (lvl.LevelEvents.ExitEvent == this.selectNum)
                 {
@@ -509,10 +638,10 @@ namespace LAZYSHELL.Previewer
         {
             Entrance ent;
             int save;
-            foreach (Level lvl in model.Levels) // For every level
+            foreach (Level lvl in Model.Levels) // For every level
             {
                 save = lvl.LevelEvents.CurrentEvent; // Save current index to restore later
-                for (int i = 0; i < lvl.LevelEvents.NumberOfEvents; i++) // For every event in each level
+                for (int i = 0; i < lvl.LevelEvents.Count; i++) // For every event in each level
                 {
                     lvl.LevelEvents.CurrentEvent = i;
                     if (lvl.LevelEvents.RunEvent == this.selectNum)
@@ -521,8 +650,8 @@ namespace LAZYSHELL.Previewer
                         ent.LevelNum = (ushort)lvl.Index;
                         ent.CoordX = lvl.LevelEvents.X;
                         ent.CoordY = lvl.LevelEvents.Y;
-                        ent.CoordZ = lvl.LevelEvents.FieldCoordZ;
-                        ent.RadialPosition = lvl.LevelEvents.FieldRadialPosition;
+                        ent.CoordZ = lvl.LevelEvents.Z;
+                        ent.RadialPosition = lvl.LevelEvents.Facing;
                         ent.ShowMessage = false;
                         ent.Flag = false;
                         eventTriggers.Add(ent); // Add the event trigger
@@ -536,17 +665,17 @@ namespace LAZYSHELL.Previewer
             Entrance ent;
             int save;
 
-            foreach (Level lvl in model.Levels) // For every level
+            foreach (Level lvl in Model.Levels) // For every level
             {
                 save = lvl.LevelExits.CurrentExit; // Save current index to restore later
-                for (int i = 0; i < lvl.LevelExits.NumberOfExits; i++) // For every event in each level
+                for (int i = 0; i < lvl.LevelExits.Count; i++) // For every event in each level
                 {
                     lvl.LevelExits.CurrentExit = i;
                     if (lvl.LevelExits.Destination == lvlNum) // If this exit points to the level we want
                     {
                         ent = new Entrance();
                         ent.Source = (ushort)lvl.Index;
-                        ent.LevelNum = (ushort)lvl.LevelExits.Destination;
+                        ent.LevelNum = (ushort)lvl.Index;
                         ent.CoordX = lvl.LevelExits.DestX;
                         ent.CoordY = lvl.LevelExits.DestY;
                         ent.CoordZ = lvl.LevelExits.DestZ;
@@ -565,11 +694,11 @@ namespace LAZYSHELL.Previewer
             Entrance ent;
             int saveNPC, saveInstance;
 
-            foreach (Level lvl in model.Levels) // For every level
+            foreach (Level lvl in Model.Levels) // For every level
             {
                 saveNPC = lvl.LevelNPCs.CurrentNPC;
 
-                for (int i = 0; i < lvl.LevelNPCs.NumberOfNPCs; i++) // For every NPC in each level
+                for (int i = 0; i < lvl.LevelNPCs.Count; i++) // For every NPC in each level
                 {
                     lvl.LevelNPCs.CurrentNPC = i;
                     if (lvl.LevelNPCs.Movement + lvl.LevelNPCs.PropertyC == actionNum) // If this NPC has our action #
@@ -587,7 +716,7 @@ namespace LAZYSHELL.Previewer
                     }
 
                     saveInstance = lvl.LevelNPCs.CurrentInstance;
-                    for (int x = 0; x < lvl.LevelNPCs.NumberOfInstances; x++) // test all instances
+                    for (int x = 0; x < lvl.LevelNPCs.InstanceCount; x++) // test all instances
                     {
                         lvl.LevelNPCs.CurrentInstance = x;
 
@@ -635,9 +764,9 @@ namespace LAZYSHELL.Previewer
         private void ScanFormationsForMonster(int monsterNum)
         {
             Entrance ent = new Entrance();
-            Formation[] formations = model.Formations;
+            Formation[] formations = Model.Formations;
             ent.Source = 0xFFFF;
-            ent.msg = "Default: " + model.MonsterNames.GetNameByNum(monsterNum);
+            ent.msg = "Default: " + Model.MonsterNames.GetNameByNum(monsterNum);
             eventTriggers.Add(ent);
 
             for (int i = 0; i < formations.Length; i++)
@@ -742,22 +871,78 @@ namespace LAZYSHELL.Previewer
         }
         private void battleBGListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (updating || initializing)
+                return;
             settings.PreviewBattlefield = battleBGListBox.SelectedIndex;
             settings.Save();
         }
         private void alliesInParty_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (updating || initializing)
+                return;
             byte bits = settings.PreviewAllies;
             for (int i = 0; i < 4; i++)
                 Bits.SetBit(ref bits, i, alliesInParty.GetItemChecked(i));
             settings.PreviewAllies = bits;
             settings.Save();
         }
+        private void level_ValueChanged(object sender, EventArgs e)
+        {
+            if (updating || initializing)
+                return;
+            settings.PreviewLevel = (int)level.Value;
+            settings.Save();
+        }
+        private void allyWeapon_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating || initializing)
+                return;
+            byte number = (byte)Model.ItemNames.GetNumFromIndex(allyWeapon.SelectedIndex);
+            settings.AllyEquipment = settings.AllyEquipment.Remove((allyName.SelectedIndex * 3) * 2, 2);
+            settings.AllyEquipment = settings.AllyEquipment.Insert((allyName.SelectedIndex * 3) * 2, number.ToString("X2"));
+            settings.Save();
+        }
+        private void allyArmor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating || initializing)
+                return;
+            byte number = (byte)Model.ItemNames.GetNumFromIndex(allyArmor.SelectedIndex);
+            settings.AllyEquipment = settings.AllyEquipment.Remove((allyName.SelectedIndex * 3 + 1) * 2, 2);
+            settings.AllyEquipment = settings.AllyEquipment.Insert((allyName.SelectedIndex * 3 + 1) * 2, number.ToString("X2"));
+            settings.Save();
+        }
+        private void allyAccessory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating || initializing)
+                return;
+            byte number = (byte)Model.ItemNames.GetNumFromIndex(allyAccessory.SelectedIndex);
+            settings.AllyEquipment = settings.AllyEquipment.Remove((allyName.SelectedIndex * 3 + 2) * 2, 2);
+            settings.AllyEquipment = settings.AllyEquipment.Insert((allyName.SelectedIndex * 3 + 2) * 2, number.ToString("X2"));
+            settings.Save();
+        }
         private void maxOutStats_CheckedChanged(object sender, EventArgs e)
         {
             maxOutStats.ForeColor = maxOutStats.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            level.Enabled = !maxOutStats.Checked;
+            allyName.Enabled = !maxOutStats.Checked;
+            allyWeapon.Enabled = !maxOutStats.Checked;
+            allyArmor.Enabled = !maxOutStats.Checked;
+            allyAccessory.Enabled = !maxOutStats.Checked;
+            if (updating || initializing)
+                return;
             settings.PreviewMaxStats = maxOutStats.Checked;
             settings.Save();
+        }
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to clear all equipement for all allies. Go ahead with process?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            settings.AllyEquipment = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+            settings.Save();
+            this.allyWeapon.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
+            this.allyArmor.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
+            this.allyAccessory.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
         }
         private void launchButton_Click(object sender, EventArgs e)
         {
@@ -780,6 +965,30 @@ namespace LAZYSHELL.Previewer
             public ushort LevelNum;
             public bool Flag;
             public string msg;
+        }
+        private void allyName_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Do.DrawName(
+                sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
+                Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
+        }
+        private void itemName_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+            Do.DrawName(
+                sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
+                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, true, false, Model.MenuBackground_);
+        }
+
+        private void allyName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating || initializing)
+                return;
+            updating = true;
+            this.allyWeapon.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
+            this.allyArmor.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
+            this.allyAccessory.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
+            updating = false;
         }
     }
 }

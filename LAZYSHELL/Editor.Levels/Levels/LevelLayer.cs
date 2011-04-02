@@ -50,7 +50,7 @@ namespace LAZYSHELL
         private bool scrollL2Bit7; public bool ScrollL2Bit7 { get { return scrollL2Bit7; } set { scrollL2Bit7 = value; } }
         private bool scrollL3Bit7; public bool ScrollL3Bit7 { get { return scrollL3Bit7; } set { scrollL3Bit7 = value; } }
 
-        private byte layerPrioritySet; public byte LayerPrioritySet { get { return layerPrioritySet; } set { layerPrioritySet = value; } }
+        private byte layerPrioritySet; public byte PrioritySet { get { return layerPrioritySet; } set { layerPrioritySet = value; } }
 
         private bool waveEffectL3; public bool WaveEffectL3 { get { return waveEffectL3; } set { waveEffectL3 = value; } }
 

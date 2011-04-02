@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
+using LAZYSHELL.ScriptsEditor.Commands;
 
 namespace LAZYSHELL
 {
@@ -22,8 +23,8 @@ namespace LAZYSHELL
         private int[] overlapFieldBasePixels;
         private int[] fieldBaseShadow;
         private Bitmap npcsImage, exitsImage, eventsImage, overlapsImage;
-        private IList<Bitmap> solidModsImages;
-        private IList<Bitmap> tileModsImages;
+        //private IList<Bitmap> solidModsImages;
+        //private IList<Bitmap> tileModsImages;
         public Bitmap NPCsImage { get { return npcsImage; } set { npcsImage = value; } }
         public Bitmap ExitsImage { get { return exitsImage; } set { exitsImage = value; } }
         public Bitmap EventsImage { get { return eventsImage; } set { eventsImage = value; } }
@@ -253,18 +254,24 @@ namespace LAZYSHELL
         {
             DrawSelectionBox(g, new Point(x_terminal, y_terminal), new Point(x_initial, y_initial), z);
         }
-        private void CopySuboverlayToOverlay(int[] overlay, int overlayWidth, int[] sub, int subWidth, int subHeight, int xPixel, int yPixel)
+        private void CopySuboverlayToOverlay(int[] dst, int dstWidth, int[] src, int srcWidth, int srcHeight, int x_, int y_)
         {
-            int temp;
-            for (int y = 0; y < subHeight; y++)
+            for (int y = 0; y < srcHeight; y++)
             {
-                for (int x = 0; x < subWidth; x++)
+                for (int x = 0; x < srcWidth; x++)
                 {
-                    temp = sub[y * subWidth + x];
-                    if (yPixel + y >= 0 && xPixel + x >= 0 && temp != 0)
+                    if (src[y * srcWidth + x] == 0) continue;
+                    Color color = Color.FromArgb(src[y * srcWidth + x]);
+                    int l = (int)(color.GetBrightness() * 255);
+                    int r = Math.Min(255, 255 + l);
+                    int g = Math.Min(255, l);
+                    int b = Math.Min(255, 255 + l);
+                    if (y_ + y >= 0 && x_ + x >= 0)
                     {
-                        if (highlight) temp = temp / 2 | (0xFF << 32);
-                        overlay[((yPixel + y) * overlayWidth) + (xPixel + x)] = temp;
+                        if (highlight)
+                            dst[((y_ + y) * dstWidth) + (x_ + x)] = Color.FromArgb(r, g, b).ToArgb();
+                        else
+                            dst[((y_ + y) * dstWidth) + (x_ + x)] = src[y * srcWidth + x];
                     }
                 }
             }
@@ -283,20 +290,20 @@ namespace LAZYSHELL
             if (fieldBaseShadow == null)
                 GenerateNPCPixels();
 
-            int[] order = new int[exits.NumberOfExits];
-            int[] coordY = new int[exits.NumberOfExits];
-            for (int i = 0; i < exits.NumberOfExits; i++)
+            int[] order = new int[exits.Count];
+            int[] coordY = new int[exits.Count];
+            for (int i = 0; i < exits.Count; i++)
             {
                 exits.CurrentExit = i;
                 coordY[i] = exits.Y;
             }
 
-            for (int i = 0; i < exits.NumberOfExits; i++)
+            for (int i = 0; i < exits.Count; i++)
                 order[i] = i;
             int[] temp = new int[coordY.Length]; coordY.CopyTo(temp, 0);
             Array.Sort(temp, order);
 
-            for (int g = 0; g < exits.NumberOfExits; g++)
+            for (int g = 0; g < exits.Count; g++)
             {
                 int i = order[g];
 
@@ -318,7 +325,7 @@ namespace LAZYSHELL
                     for (int w = 0; w <= exits.Width; w++)
                     {
                         // draw shadow
-                        if (exits.FieldCoordZ > 0)
+                        if (exits.Z > 0)
                         {
                             if (exits.Face == 0)
                                 CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, -(w * 16) + x, w * 8 + y);
@@ -328,15 +335,15 @@ namespace LAZYSHELL
                     }
                     for (int w = 0; w <= exits.Width; w++)
                     {
-                        if (w == 0) y -= exits.FieldCoordZ * 16;
+                        if (w == 0) y -= exits.Z * 16;
 
                         // draw the whole field
-                        if (exits.FieldHeight == 0)
+                        if (exits.Height == 0)
                             CopySuboverlayToOverlay(pixels, 1024, exitFieldBasePixels, 32, 16, x, y);
-                        else if (exits.FieldHeight > 0)
+                        else if (exits.Height > 0)
                         {
                             y -= 16;
-                            for (int h = 0; h < exits.FieldHeight; h++)
+                            for (int h = 0; h < exits.Height; h++)
                                 CopySuboverlayToOverlay(pixels, 1024, exitFieldBlockPixels, 32, 32, x, y - (h * 16));
                             y += 16;
                         }
@@ -347,17 +354,17 @@ namespace LAZYSHELL
                 else
                 {
                     // draw shadow
-                    if (exits.FieldCoordZ > 0)
+                    if (exits.Z > 0)
                         CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, x, y);
 
-                    y -= exits.FieldCoordZ * 16;
+                    y -= exits.Z * 16;
 
-                    if (exits.FieldHeight == 0)
+                    if (exits.Height == 0)
                         CopySuboverlayToOverlay(pixels, 1024, exitFieldBasePixels, 32, 16, x, y);
-                    else if (exits.FieldHeight > 0)
+                    else if (exits.Height > 0)
                     {
                         y -= 16;
-                        for (int h = 0; h < exits.FieldHeight; h++)
+                        for (int h = 0; h < exits.Height; h++)
                             CopySuboverlayToOverlay(pixels, 1024, exitFieldBlockPixels, 32, 32, x, y - (h * 16));
                     }
                 }
@@ -366,45 +373,54 @@ namespace LAZYSHELL
             exitsImage = new Bitmap(Do.PixelsToImage(pixels, 1024, 1024));
             pixels = null;
 
-            if (exits.NumberOfExits > 0)
+            if (exits.Count > 0)
                 exits.CurrentExit = currentExit;
+        }
+        public void DrawLevelExits(LevelExits exits, Graphics g)
+        {
+            // draw exit strings
+            Rectangle r = new Rectangle();
+            Pen pen = new Pen(Color.Yellow, 2);
+            SolidBrush brush = new SolidBrush(Color.FromArgb(128, Color.Yellow));
+            SolidBrush brush_ = new SolidBrush(Color.FromArgb(192, Color.Yellow));
+            Font font = new Font("Tahoma", 8.25F);
+            Font font_ = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            foreach (Exit exit in exits.Exits)
+            {
+                r.X = ((exit.X & 127) * 32) + (16 * (exit.Y & 1)) - 16;
+                r.Y = ((exit.Y & 127) * 8) - 8;
+                string name;
+                if (exit.ExitType == 0)
+                    name = "{" + exit.Destination.ToString("d3") + "} " + Lists.LevelNames[exit.Destination];
+                else
+                    name = "{" + exit.Destination.ToString("d3") + "} MAP POINT: " + Lists.MapNames[exit.Destination];
+                RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),
+                    g.MeasureString(name, font_, new PointF(0, 0), StringFormat.GenericDefault));
+                if (exit == exits.Exit_)
+                {
+                    g.FillRectangle(brush, r);
+                    g.FillRectangle(new SolidBrush(Color.FromArgb(192, Color.Black)), label);
+                    g.DrawString(name, font_, brush_, r.X, r.Y + 24);
+                }
+                else
+                {
+                    g.FillRectangle(new SolidBrush(Color.FromArgb(128, Color.Black)), label);
+                    g.DrawString(name, font, brush, r.X, r.Y + 24);
+                }
+                g.DrawRectangle(pen, r);
+            }
         }
         private void GenerateExitPixels()
         {
             Bitmap exitFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
             Bitmap exitFieldBlock = global::LAZYSHELL.Properties.Resources.fieldBlock;
-            exitFieldBasePixels = new int[32 * 16];
-            exitFieldBlockPixels = new int[32 * 32];
+            exitFieldBasePixels = Do.ImageToPixels(exitFieldBase);
+            exitFieldBlockPixels = Do.ImageToPixels(exitFieldBlock);
 
-            for (int y = 0; y < 32; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    if (y < 16) exitFieldBasePixels[y * 32 + x] = exitFieldBase.GetPixel(x, y).ToArgb();
-                    exitFieldBlockPixels[y * 32 + x] = exitFieldBlock.GetPixel(x, y).ToArgb();
-
-                    if (y < 16 && exitFieldBasePixels[y * 32 + x] == Color.White.ToArgb()) exitFieldBasePixels[y * 32 + x] = 0;
-                    if (exitFieldBlockPixels[y * 32 + x] == Color.White.ToArgb()) exitFieldBlockPixels[y * 32 + x] = 0;
-                }
-            }
-
-            exitFieldBasePixels = ColorExitPixels(16, exitFieldBasePixels, false);
-            exitFieldBlockPixels = ColorExitPixels(32, exitFieldBlockPixels, false);
-        }
-        private int[] ColorExitPixels(int height, int[] thePixels, bool isShadow)
-        {
-            int[] somePixels = new int[32 * 256];
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    if (thePixels[y * 32 + x] == Color.FromArgb(192, 192, 192).ToArgb()) somePixels[y * 32 + x] = Color.FromArgb(255, 255, 0).ToArgb();
-                    else if (thePixels[y * 32 + x] == Color.FromArgb(128, 128, 128).ToArgb()) somePixels[y * 32 + x] = Color.FromArgb(192, 192, 0).ToArgb();
-                    else somePixels[y * 32 + x] = thePixels[y * 32 + x];
-
-                }
-            }
-            return somePixels;
+            Do.Colorize(exitFieldBasePixels, 60.0, 1.0);
+            Do.Colorize(exitFieldBlockPixels, 60.0, 1.0);
+            Do.Gradient(exitFieldBasePixels, 32, 16, 128.0, -128.0, true);
+            Do.Gradient(exitFieldBlockPixels, 32, 16, 128.0, 0, true);
         }
         // events
         public void DrawLevelEvents(LevelEvents events)
@@ -420,20 +436,20 @@ namespace LAZYSHELL
             if (fieldBaseShadow == null)
                 GenerateNPCPixels();
 
-            int[] order = new int[events.NumberOfEvents];
-            int[] coordY = new int[events.NumberOfEvents];
-            for (int i = 0; i < events.NumberOfEvents; i++)
+            int[] order = new int[events.Count];
+            int[] coordY = new int[events.Count];
+            for (int i = 0; i < events.Count; i++)
             {
                 events.CurrentEvent = i;
                 coordY[i] = events.Y;
             }
 
-            for (int i = 0; i < events.NumberOfEvents; i++)
+            for (int i = 0; i < events.Count; i++)
                 order[i] = i;
             int[] temp = new int[coordY.Length]; coordY.CopyTo(temp, 0);
             Array.Sort(temp, order);
 
-            for (int g = 0; g < events.NumberOfEvents; g++)
+            for (int g = 0; g < events.Count; g++)
             {
                 int i = order[g];
 
@@ -445,56 +461,56 @@ namespace LAZYSHELL
                 y = ((events.Y & 127) * 8) - 8;
 
                 // Draw the complete # of blocks
-                if (events.FieldWidth > 0)
+                if (events.Width > 0)
                 {
-                    if (events.FieldRadialPosition == 0)
+                    if (events.Facing == 0)
                     {
-                        y -= events.FieldWidth * 8;
-                        x += events.FieldWidth * 16;
+                        y -= events.Width * 8;
+                        x += events.Width * 16;
                     }
-                    for (int w = 0; w <= events.FieldWidth; w++)
+                    for (int w = 0; w <= events.Width; w++)
                     {
                         // draw shadow
-                        if (events.FieldCoordZ > 0)
+                        if (events.Z > 0)
                         {
-                            if (events.FieldRadialPosition == 0)
+                            if (events.Facing == 0)
                                 CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, -(w * 16) + x, w * 8 + y);
                             else
                                 CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, w * 16 + x, w * 8 + y);
                         }
                     }
-                    for (int w = 0; w <= events.FieldWidth; w++)
+                    for (int w = 0; w <= events.Width; w++)
                     {
-                        if (w == 0) y -= events.FieldCoordZ * 16;
+                        if (w == 0) y -= events.Z * 16;
 
                         // draw the whole field
-                        if (events.FieldHeight == 0)
+                        if (events.Height == 0)
                             CopySuboverlayToOverlay(pixels, 1024, eventFieldBasePixels, 32, 16, x, y);
-                        else if (events.FieldHeight > 0)
+                        else if (events.Height > 0)
                         {
                             y -= 16;
-                            for (int h = 0; h < events.FieldHeight; h++)
+                            for (int h = 0; h < events.Height; h++)
                                 CopySuboverlayToOverlay(pixels, 1024, eventFieldBlockPixels, 32, 32, x, y - (h * 16));
                             y += 16;
                         }
-                        x += events.FieldRadialPosition == 0 ? -16 : 16;
+                        x += events.Facing == 0 ? -16 : 16;
                         y += 8;
                     }
                 }
                 else
                 {
                     // draw shadow
-                    if (events.FieldCoordZ > 0)
+                    if (events.Z > 0)
                         CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, x, y);
 
-                    y -= events.FieldCoordZ * 16;
+                    y -= events.Z * 16;
 
-                    if (events.FieldHeight == 0)
+                    if (events.Height == 0)
                         CopySuboverlayToOverlay(pixels, 1024, eventFieldBasePixels, 32, 16, x, y);
-                    else if (events.FieldHeight > 0)
+                    else if (events.Height > 0)
                     {
                         y -= 16;
-                        for (int h = 0; h < events.FieldHeight; h++)
+                        for (int h = 0; h < events.Height; h++)
                             CopySuboverlayToOverlay(pixels, 1024, eventFieldBlockPixels, 32, 32, x, y - (h * 16));
                     }
                 }
@@ -503,45 +519,67 @@ namespace LAZYSHELL
             eventsImage = new Bitmap(Do.PixelsToImage(pixels, 1024, 1024));
             pixels = null;
 
-            if (events.NumberOfEvents > 0)
+            if (events.Count > 0)
                 events.CurrentEvent = currentEvent;
+        }
+        public void DrawLevelEvents(LevelEvents events, Graphics g)
+        {
+            // draw exit strings
+            foreach (Event event_ in events.Events)
+            {
+                if (event_ != events.Event_)
+                    DrawLevelEvent(g, events, event_);
+            }
+            if (events.Event_ != null)
+                DrawLevelEvent(g, events, events.Event_);
+        }
+        private void DrawLevelEvent(Graphics g, LevelEvents events, Event temp)
+        {
+            Rectangle r = new Rectangle();
+            Pen pen = new Pen(Color.Yellow, 2);
+            SolidBrush brush = new SolidBrush(Color.FromArgb(128, 0, 255, 0));
+            SolidBrush brush_ = new SolidBrush(Color.FromArgb(192, 0, 255, 0));
+            Font font = new Font("Tahoma", 8.25F);
+            Font font_ = new Font("Tahoma", 8.25F, FontStyle.Bold | FontStyle.Underline);
+            Font font_b = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            Font lucida = new Font("Lucida Console", 8.25F);
+
+            r.X = ((temp.X & 127) * 32) + (16 * (temp.Y & 1)) - 16;
+            r.Y = ((temp.Y & 127) * 8) - 8;
+
+            string name = "Event #" + temp.RunEvent.ToString();
+            RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),
+                g.MeasureString(name, font_, new PointF(0, 0), StringFormat.GenericDefault));
+
+            if (temp != events.Event_)
+            {
+                g.FillRectangle(new SolidBrush(Color.FromArgb(128, Color.Black)), label);
+                g.DrawString(name, font, brush, r.X, r.Y + 24);
+            }
+            else
+            {
+                g.FillRectangle(brush, r);
+                g.FillRectangle(new SolidBrush(Color.FromArgb(192, Color.Black)), label);
+                g.DrawString(name, font_, brush_, r.X, r.Y + 24);
+                // draw commands
+                string script = Do.EventScriptToText(Model.EventScripts[events.Event_.RunEvent], 8, 40);
+                RectangleF commandbox = new RectangleF(r.X + 2, r.Y + 40, 256, (label.Height - 2) * script.Split('\n').Length);
+                g.FillRectangle(brush_, commandbox);
+                g.DrawString(script, font_b, new SolidBrush(Color.Black), r.X + 6, r.Y + 44);
+            }
+            g.DrawRectangle(pen, r);
         }
         private void GenerateEventPixels()
         {
             Bitmap eventFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
             Bitmap eventFieldBlock = global::LAZYSHELL.Properties.Resources.fieldBlock;
-            eventFieldBasePixels = new int[32 * 16];
-            eventFieldBlockPixels = new int[32 * 32];
+            eventFieldBasePixels = Do.ImageToPixels(eventFieldBase);
+            eventFieldBlockPixels = Do.ImageToPixels(eventFieldBlock);
 
-            for (int y = 0; y < 32; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    if (y < 16) eventFieldBasePixels[y * 32 + x] = eventFieldBase.GetPixel(x, y).ToArgb();
-                    eventFieldBlockPixels[y * 32 + x] = eventFieldBlock.GetPixel(x, y).ToArgb();
-
-                    if (y < 16 && eventFieldBasePixels[y * 32 + x] == Color.White.ToArgb()) eventFieldBasePixels[y * 32 + x] = 0;
-                    if (eventFieldBlockPixels[y * 32 + x] == Color.White.ToArgb()) eventFieldBlockPixels[y * 32 + x] = 0;
-                }
-            }
-
-            eventFieldBasePixels = ColorEventPixels(16, eventFieldBasePixels, false);
-            eventFieldBlockPixels = ColorEventPixels(32, eventFieldBlockPixels, false);
-        }
-        private int[] ColorEventPixels(int height, int[] thePixels, bool isShadow)
-        {
-            int[] somePixels = new int[32 * 256];
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    if (thePixels[y * 32 + x] == Color.FromArgb(192, 192, 192).ToArgb()) somePixels[y * 32 + x] = Color.FromArgb(0, 255, 0).ToArgb();
-                    else if (thePixels[y * 32 + x] == Color.FromArgb(128, 128, 128).ToArgb()) somePixels[y * 32 + x] = Color.FromArgb(0, 192, 0).ToArgb();
-                    else somePixels[y * 32 + x] = thePixels[y * 32 + x];
-
-                }
-            }
-            return somePixels;
+            Do.Colorize(eventFieldBasePixels, 120.0, 1.0);
+            Do.Colorize(eventFieldBlockPixels, 120.0, 1.0);
+            Do.Gradient(eventFieldBasePixels, 32, 16, 128.0, -128.0, true);
+            Do.Gradient(eventFieldBlockPixels, 32, 16, 128.0, 0, true);
         }
         // npcs
         public void DrawLevelNPCs(LevelNPCs npcs, NPCProperties[] npcProperties)
@@ -549,7 +587,7 @@ namespace LAZYSHELL
             int[] whole = new int[1024 * 1024];
             int currentNPC = npcs.CurrentNPC;
             int currentInstance = 0;
-            if (npcs.NumberOfNPCs > 0)
+            if (npcs.Count > 0)
                 currentInstance = npcs.CurrentInstance;
 
             highlight = false;
@@ -558,10 +596,10 @@ namespace LAZYSHELL
                 GenerateNPCPixels();
 
             int total = 0;
-            for (int i = 0; i < npcs.NumberOfNPCs; i++, total++)
+            for (int i = 0; i < npcs.Count; i++, total++)
             {
                 npcs.CurrentNPC = i;
-                total += npcs.NumberOfInstances;
+                total += npcs.InstanceCount;
             }
             int[] order = new int[total];
             int[] coordY = new int[total];
@@ -572,7 +610,7 @@ namespace LAZYSHELL
             bool[] floating = new bool[total];
             bool[] show = new bool[total];
             bool[] selected = new bool[total];
-            for (int i = 0, a = 0; i < npcs.NumberOfNPCs; i++, a++)
+            for (int i = 0, a = 0; i < npcs.Count; i++, a++)
             {
                 npcs.CurrentNPC = i;
 
@@ -596,7 +634,7 @@ namespace LAZYSHELL
                 show[a] = npcs.CoordXBit7;
                 selected[a] = i == npcs.SelectedNPC && !npcs.IsInstanceSelected;
 
-                for (int o = 0; o < npcs.NumberOfInstances; o++, a++)
+                for (int o = 0; o < npcs.InstanceCount; o++, a++)
                 {
                     npcs.CurrentInstance = o;
 
@@ -629,10 +667,10 @@ namespace LAZYSHELL
 
             int x, y;
 
-            if (npcs.NumberOfNPCs > 0)
+            if (npcs.Count > 0)
             {
                 npcs.CurrentNPC = currentNPC;
-                if (npcs.NumberOfInstances > 0)
+                if (npcs.InstanceCount > 0)
                     npcs.CurrentInstance = currentInstance;
             }
 
@@ -641,6 +679,7 @@ namespace LAZYSHELL
                 int i = order[g];
 
                 // Draw dark grey shadow at actual coords
+                highlight = selected[i];
                 if (floating[i])
                     CopySuboverlayToOverlay(whole, 1024, fieldBaseShadow, 32, 16, coords[i].X, coords[i].Y);
 
@@ -648,7 +687,6 @@ namespace LAZYSHELL
                 x = point[i].X;
                 y = point[i].Y;
 
-                highlight = selected[i];
                 CopySuboverlayToOverlay(whole, 1024, npcFieldBasePixels, 32, 16, x, y);
                 highlight = false;
 
@@ -663,52 +701,123 @@ namespace LAZYSHELL
             pixels = null;
             whole = null;
 
-            if (npcs.NumberOfNPCs > 0)
+            if (npcs.Count > 0)
             {
                 npcs.CurrentNPC = currentNPC;
-                if (npcs.NumberOfInstances > 0)
+                if (npcs.InstanceCount > 0)
                     npcs.CurrentInstance = currentInstance;
             }
+        }
+        public void DrawLevelNPCs(LevelNPCs npcs, Graphics g)
+        {
+            // draw exit strings
+            int index = 0;
+            int current = 0;
+            foreach (NPC npc in npcs.Npcs)
+            {
+                if (npc != npcs.Npc || npcs.IsInstanceSelected)
+                    DrawLevelNPC(npcs, g, npc, index++, false, null);
+                else
+                    current = index++;
+                foreach (NPC instance in npc.Instances)
+                {
+                    if (npc != npcs.Npc || instance != npcs.Npc.Instance_ || !npcs.IsInstanceSelected)
+                        DrawLevelNPC(npcs, g, instance, index++, false, null);
+                    else
+                        current = index++;
+                }
+            }
+            if (npcs.Npc != null)
+            {
+                if (!npcs.IsInstanceSelected)
+                    DrawLevelNPC(npcs, g, npcs.Npc, current, true, null);
+                else
+                    DrawLevelNPC(npcs, g, npcs.Npc.Instance_, current, true, npcs.Npc);
+            }
+        }
+        private void DrawLevelNPC(LevelNPCs npcs, Graphics g, NPC npc, int index, bool selected, NPC parent)
+        {
+            Rectangle r = new Rectangle();
+            Pen pen = new Pen(Color.Yellow, 2);
+            SolidBrush brush = new SolidBrush(Color.FromArgb(128, 255, 0, 0));
+            SolidBrush brush_ = new SolidBrush(Color.FromArgb(192, 255, 0, 0));
+            Font font = new Font("Tahoma", 8.25F);
+            Font font_ = new Font("Tahoma", 8.25F, FontStyle.Bold | FontStyle.Underline);
+            Font font_b = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            Font lucida = new Font("Lucida Console", 8.25F);
+
+            r.X = ((npc.X & 127) * 32) + (16 * (npc.Y & 1)) - 16;
+            r.Y = ((npc.Y & 127) * 8) - 8;
+
+            string name = "NPC #" + index;
+            RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),
+                g.MeasureString(name, font_, new PointF(0, 0), StringFormat.GenericDefault));
+
+            if (!selected)
+            {
+                g.FillRectangle(new SolidBrush(Color.FromArgb(128, Color.Black)), label);
+                g.DrawString(name, font, brush, r.X, r.Y + 24);
+            }
+            else
+            {
+                g.FillRectangle(brush, r);
+                g.FillRectangle(new SolidBrush(Color.FromArgb(192, Color.Black)), label);
+                g.DrawString(name, font_, brush_, r.X, r.Y + 24);
+                // draw commands
+                RectangleF commandbox;
+                string text = "";
+                int property, engagetype;
+                if (parent == null)
+                {
+                    property = npc.EventORpack + npc.PropertyB;
+                    engagetype = npc.EngageType;
+                }
+                else
+                {
+                    property = parent.EventORpack + npc.PropertyB;
+                    engagetype = parent.EngageType;
+                }
+                if (engagetype == 0)   // default
+                {
+                    text = "{EVENT #" + property.ToString() + "}\n";
+                    text += Do.EventScriptToText(Model.EventScripts[property], 8, 80);
+                    commandbox = new RectangleF(r.X + 2, r.Y + 40, 512, (label.Height - 2) * text.Split('\n').Length);
+                }
+                else if (engagetype == 1)  // treasure
+                {
+                    text = "{EVENT #" + property.ToString() + "}\n";
+                    text += Do.EventScriptToText(Model.EventScripts[property], 8, 80);
+                    commandbox = new RectangleF(r.X + 2, r.Y + 40, 512, (label.Height - 2) * text.Split('\n').Length);
+                }
+                else   // battle
+                {
+                    text = "{PACK #" + property.ToString() + "}\n";
+                    text += Model.Formations[Model.FormationPacks[property].PackFormations[0]].ToString() + "\n";
+                    text += Model.Formations[Model.FormationPacks[property].PackFormations[1]].ToString() + "\n";
+                    text += Model.Formations[Model.FormationPacks[property].PackFormations[2]].ToString() + "\n";
+                    commandbox = new RectangleF(r.X + 2, r.Y + 40, 512, (label.Height - 2) * 5);
+                }
+                g.FillRectangle(brush_, commandbox);
+                g.DrawString(text, font_b, new SolidBrush(Color.Black), r.X + 6, r.Y + 44);
+            }
+            g.DrawRectangle(pen, r);
         }
         private void GenerateNPCPixels()
         {
             Bitmap npcFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
-            npcFieldBasePixels = new int[32 * 16];
-            fieldBaseShadow = new int[32 * 16];
+            npcFieldBasePixels = Do.ImageToPixels(npcFieldBase);
+            Do.Colorize(npcFieldBasePixels, 0.0, 1.0);
+            Do.Gradient(npcFieldBasePixels, 32, 16, 128.0, -128.0, true);
 
-            for (int y = 0; y < 16; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    npcFieldBasePixels[y * 32 + x] = npcFieldBase.GetPixel(x, y).ToArgb();
-                    if (npcFieldBasePixels[y * 32 + x] == Color.White.ToArgb()) npcFieldBasePixels[y * 32 + x] = 0;
-                }
-            }
+            fieldBaseShadow = new int[32 * 16];
             for (int y = 0; y < 16; y++)
             {
                 for (int x = 0; x < 32; x++)
                 {
                     if (npcFieldBasePixels[y * 32 + x] != 0)
-                        fieldBaseShadow[y * 32 + x] = Color.FromArgb(64, 64, 64).ToArgb();
+                        fieldBaseShadow[y * 32 + x] = Color.FromArgb(64 - (y * 4), 64 - (y * 4), 64 - (y * 4)).ToArgb();
                 }
             }
-
-            npcFieldBasePixels = ColorNPCPixels(16, npcFieldBasePixels, false);
-        }
-        private int[] ColorNPCPixels(int height, int[] thePixels, bool isShadow)
-        {
-            int[] somePixels = new int[32 * 256];
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    if (thePixels[y * 32 + x] == Color.FromArgb(192, 192, 192).ToArgb()) somePixels[y * 32 + x] = Color.FromArgb(255, 0, 0).ToArgb();
-                    else if (thePixels[y * 32 + x] == Color.FromArgb(128, 128, 128).ToArgb()) somePixels[y * 32 + x] = Color.FromArgb(192, 0, 0).ToArgb();
-                    else somePixels[y * 32 + x] = thePixels[y * 32 + x];
-
-                }
-            }
-            return somePixels;
         }
         // overlaps
         public void DrawLevelOverlaps(LevelOverlaps overlaps, OverlapTileset overlapTileset)
@@ -722,7 +831,7 @@ namespace LAZYSHELL
 
             int x, y;
 
-            for (int g = 0; g < overlaps.NumberOfOverlaps; g++)
+            for (int g = 0; g < overlaps.Count; g++)
             {
                 overlaps.CurrentOverlap = g;
 
@@ -730,55 +839,32 @@ namespace LAZYSHELL
                 y = ((overlaps.Y & 127) * 8) - 8;
 
                 // Draw dark grey shadow at actual coords
+                highlight = g == overlaps.SelectedOverlap;
                 if (overlaps.Z > 0)
                     CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, x, y);
 
                 y = ((overlaps.Y & 127) * 8) - 8 - (overlaps.Z * 16) - (overlaps.B1b7 ? 8 : 0);
 
                 // Draw blue field base at exact pixel coords
-                highlight = g == overlaps.SelectedOverlap;
                 CopySuboverlayToOverlay(pixels, 1024, overlapFieldBasePixels, 32, 16, x, y);
-                CopySuboverlayToOverlay(pixels, 1024, overlapTileset.OverlapTiles[overlaps.Type].Pixels, 32, 32, x, y - 16);
+                int[] tilepixels = Bits.Copy(overlapTileset.OverlapTiles[overlaps.Type].Pixels);
+                Do.Gradient(tilepixels, 32, 32, 0, 64, false);
+                Do.Opacity(tilepixels, 32, 32, 224);
+                CopySuboverlayToOverlay(pixels, 1024, tilepixels, 32, 32, x, y - 16);
                 highlight = false;
             }
             overlapsImage = new Bitmap(Do.PixelsToImage(pixels, 1024, 1024));
             pixels = null;
 
-            if (overlaps.NumberOfOverlaps > 0)
+            if (overlaps.Count > 0)
                 overlaps.CurrentOverlap = currentOverlap;
         }
         private void GenerateOverlapPixels()
         {
             Bitmap overlapFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
-            overlapFieldBasePixels = new int[32 * 16];
-
-            for (int y = 0; y < 32; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    if (y < 16)
-                        overlapFieldBasePixels[y * 32 + x] = overlapFieldBase.GetPixel(x, y).ToArgb();
-                    if (y < 16 && overlapFieldBasePixels[y * 32 + x] == Color.White.ToArgb())
-                        overlapFieldBasePixels[y * 32 + x] = 0;
-                }
-            }
-
-            overlapFieldBasePixels = ColorOverlapPixels(16, overlapFieldBasePixels, false);
-        }
-        private int[] ColorOverlapPixels(int height, int[] thePixels, bool isShadow)
-        {
-            int[] somePixels = new int[32 * 256];
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    if (thePixels[y * 32 + x] == Color.FromArgb(192, 192, 192).ToArgb()) somePixels[y * 32 + x] = Color.FromArgb(0, 0, 255).ToArgb();
-                    else if (thePixels[y * 32 + x] == Color.FromArgb(128, 128, 128).ToArgb()) somePixels[y * 32 + x] = Color.FromArgb(0, 0, 192).ToArgb();
-                    else somePixels[y * 32 + x] = thePixels[y * 32 + x];
-
-                }
-            }
-            return somePixels;
+            overlapFieldBasePixels = Do.ImageToPixels(overlapFieldBase);
+            Do.Colorize(overlapFieldBasePixels, 240.0, 1.0);
+            Do.Gradient(overlapFieldBasePixels, 32, 16, 128.0, -128.0, true);
         }
         // mods
         public void DrawLevelTileMods(LevelTileMods tileMods, Graphics g)

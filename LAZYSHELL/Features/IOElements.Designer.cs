@@ -86,7 +86,7 @@
             this.textBoxCurrent.Location = new System.Drawing.Point(12, 35);
             this.textBoxCurrent.Name = "textBoxCurrent";
             this.textBoxCurrent.ReadOnly = true;
-            this.textBoxCurrent.Size = new System.Drawing.Size(445, 20);
+            this.textBoxCurrent.Size = new System.Drawing.Size(445, 21);
             this.textBoxCurrent.TabIndex = 4;
             // 
             // browseCurrent
@@ -116,10 +116,10 @@
             this.textBoxAll.Location = new System.Drawing.Point(12, 87);
             this.textBoxAll.Name = "textBoxAll";
             this.textBoxAll.ReadOnly = true;
-            this.textBoxAll.Size = new System.Drawing.Size(445, 20);
+            this.textBoxAll.Size = new System.Drawing.Size(445, 21);
             this.textBoxAll.TabIndex = 6;
             // 
-            // ImportExportElements
+            // IOElements
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -132,8 +132,9 @@
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.radioButtonAll);
             this.Controls.Add(this.radioButtonCurrent);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "ImportExportElements";
+            this.Name = "IOElements";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.TopMost = true;

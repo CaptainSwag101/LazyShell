@@ -11,10 +11,10 @@ namespace LAZYSHELL
 {
     public partial class Attacks : Form
     {
-        private Model model = State.Instance.Model;
-        private Settings settings = Settings.Default;
+                private Settings settings = Settings.Default;
         private bool updating = false;
-        private Attack[] attacks { get { return model.Attacks; } set { model.Attacks = value; } }
+        private Attack[] attacks { get { return Model.Attacks; } set { Model.Attacks = value; } }
+        public Attack Attack { get { return attacks[index]; } set { attacks[index] = value; } }
         private int index { get { return (int)attackNum.Value; } set { attackNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
         public Attacks()
@@ -27,13 +27,13 @@ namespace LAZYSHELL
         private void InitializeStrings()
         {
             this.attackName.Items.Clear();
-            this.attackName.Items.AddRange(model.AttackNames.Names);
+            this.attackName.Items.AddRange(Model.AttackNames.Names);
         }
         public void RefreshAttacks()
         {
             if (updating) return;
             updating = true;
-            this.attackName.SelectedIndex = model.AttackNames.GetIndexFromNum(index);
+            this.attackName.SelectedIndex = Model.AttackNames.GetIndexFromNum(index);
             this.attackHitRate.Value = attacks[index].HitRate;
             this.attackAtkLevel.Value = attacks[index].AttackLevel;
             this.textBoxAttackName.Text = Do.RawToASCII(attacks[index].Name, settings.Keystrokes);
@@ -119,26 +119,26 @@ namespace LAZYSHELL
         }
         private void attackName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.attackNum.Value = model.AttackNames.GetNumFromIndex(attackName.SelectedIndex);
+            this.attackNum.Value = Model.AttackNames.GetNumFromIndex(attackName.SelectedIndex);
         }
         private void attackName_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
             Do.DrawName(
-                sender, e, new BattleDialoguePreview(), model.AttackNames, model.FontDialogue,
-                model.FontPaletteBattle.Palette, 8, 10, 0, 128, false, false);
+                sender, e, new BattleDialoguePreview(), Model.AttackNames, Model.FontDialogue,
+                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, true, Model.MenuBackground_);
         }
         private void textBoxAttackName_TextChanged(object sender, EventArgs e)
         {
-            if (model.AttackNames.GetNameByNum(index).CompareTo(this.textBoxAttackName.Text) != 0)
+            if (Model.AttackNames.GetNameByNum(index).CompareTo(this.textBoxAttackName.Text) != 0)
             {
                 attacks[index].Name = Do.ASCIIToRaw(this.textBoxAttackName.Text, settings.Keystrokes, 13);
-                model.AttackNames.SwapName(
+                Model.AttackNames.SwapName(
                     index, new string(attacks[index].Name));
-                model.AttackNames.SortAlpha();
+                Model.AttackNames.SortAlpha();
                 this.attackName.Items.Clear();
-                this.attackName.Items.AddRange(model.AttackNames.GetNames());
-                this.attackName.SelectedIndex = model.AttackNames.GetIndexFromNum(index);
+                this.attackName.Items.AddRange(Model.AttackNames.GetNames());
+                this.attackName.SelectedIndex = Model.AttackNames.GetIndexFromNum(index);
             }
         }
         private void attackHitRate_ValueChanged(object sender, EventArgs e)

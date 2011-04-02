@@ -32,9 +32,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.battleDlgType = new System.Windows.Forms.ToolStripComboBox();
             this.battleDialogueNum = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.searchButton = new System.Windows.Forms.ToolStripButton();
             this.searchBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchButton = new System.Windows.Forms.ToolStripButton();
             this.pictureBoxBattleDialogue = new System.Windows.Forms.PictureBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.pageUp = new System.Windows.Forms.ToolStripButton();
@@ -55,6 +54,8 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.openPaletteMenu = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.reset = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBattleDialogue)).BeginInit();
             this.toolStrip2.SuspendLayout();
@@ -80,10 +81,9 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.battleDlgType,
             this.battleDialogueNum,
-            this.toolStripSeparator2,
-            this.searchButton,
-            this.searchBox});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.searchBox,
+            this.searchButton});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(393, 25);
@@ -129,10 +129,10 @@
             0});
             this.battleDialogueNum.ValueChanged += new System.EventHandler(this.battleDialogueNum_ValueChanged);
             // 
-            // toolStripSeparator2
+            // searchBox
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(145, 25);
             // 
             // searchButton
             // 
@@ -143,12 +143,6 @@
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(23, 22);
             this.searchButton.Text = "Search For Dialogue";
-            // 
-            // searchBox
-            // 
-            this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(140, 25);
-            this.searchBox.Visible = false;
             // 
             // pictureBoxBattleDialogue
             // 
@@ -292,12 +286,14 @@
             this.toolStrip4.CanOverflow = false;
             this.toolStrip4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reset,
+            this.toolStripSeparator2,
             this.openTileEditor,
             this.openGraphics,
             this.openPalettes,
             this.toolStripSeparator3,
             this.openPaletteMenu});
-            this.toolStrip4.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip4.Size = new System.Drawing.Size(393, 25);
@@ -366,6 +362,22 @@
             this.toolStrip3.TabIndex = 539;
             this.toolStrip3.Text = "toolStrip3";
             // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.Text = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // BattleDialogues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -376,8 +388,8 @@
             this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.pictureBoxBattleDialogue);
-            this.Controls.Add(this.toolStrip4);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.toolStrip4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "BattleDialogues";
             this.toolStrip1.ResumeLayout(false);
@@ -415,7 +427,6 @@
         private System.Windows.Forms.ToolStripButton openTileEditor;
         private System.Windows.Forms.ToolStripButton openGraphics;
         private System.Windows.Forms.ToolStripButton openPalettes;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton searchButton;
         private System.Windows.Forms.ToolStripButton byteOrTextView;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -423,5 +434,7 @@
         private System.Windows.Forms.ToolStripTextBox searchBox;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton openPaletteMenu;
+        private System.Windows.Forms.ToolStripButton reset;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

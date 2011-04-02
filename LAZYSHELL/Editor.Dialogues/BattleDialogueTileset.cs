@@ -5,18 +5,19 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class BattleDialogueTileset
     {
-        private Model model = State.Instance.Model;
-        private PaletteSet paletteSet;
+        [NonSerialized()]
+                private PaletteSet paletteSet;
         private byte[] graphicSet; public byte[] GraphicSet { get { return graphicSet; } set { graphicSet = value; } }
         private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
         private Tile16x16[] tilesetLayer; public Tile16x16[] TilesetLayer { get { return tilesetLayer; } }
 
         public BattleDialogueTileset(PaletteSet paletteSet)
         {
-            this.graphicSet = model.DialogueGraphics;
-            this.tileSet = model.BattleDialogueTileSet;
+            this.graphicSet = Model.DialogueGraphics;
+            this.tileSet = Model.BattleDialogueTileSet;
             this.paletteSet = paletteSet;
 
             tilesetLayer = new Tile16x16[16 * 2];

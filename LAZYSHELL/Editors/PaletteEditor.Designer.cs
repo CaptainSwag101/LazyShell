@@ -33,32 +33,32 @@
             this.pictureBoxPalette = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.equateRedsA = new System.Windows.Forms.RadioButton();
+            this.label11 = new System.Windows.Forms.Label();
+            this.equateBluesA = new System.Windows.Forms.RadioButton();
+            this.equateGreensA = new System.Windows.Forms.RadioButton();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
             this.equateRedsB = new System.Windows.Forms.RadioButton();
             this.equateBluesB = new System.Windows.Forms.RadioButton();
             this.equateGreensB = new System.Windows.Forms.RadioButton();
-            this.label11 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.equateRedsA = new System.Windows.Forms.RadioButton();
-            this.equateBluesA = new System.Windows.Forms.RadioButton();
-            this.equateGreensA = new System.Windows.Forms.RadioButton();
-            this.label10 = new System.Windows.Forms.Label();
             this.panel16 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
             this.switchRedsB = new System.Windows.Forms.RadioButton();
             this.switchBluesB = new System.Windows.Forms.RadioButton();
             this.switchGreensB = new System.Windows.Forms.RadioButton();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.switchRedsA = new System.Windows.Forms.RadioButton();
             this.switchBluesA = new System.Windows.Forms.RadioButton();
             this.switchGreensA = new System.Windows.Forms.RadioButton();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel17 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.levelsBlues = new System.Windows.Forms.NumericUpDown();
@@ -70,18 +70,21 @@
             this.label4 = new System.Windows.Forms.Label();
             this.levelsReds = new System.Windows.Forms.NumericUpDown();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel15 = new System.Windows.Forms.Panel();
             this.thresholdApply = new System.Windows.Forms.CheckBox();
             this.threshold = new System.Windows.Forms.NumericUpDown();
-            this.panel15 = new System.Windows.Forms.Panel();
             this.trackBarThreshold = new System.Windows.Forms.TrackBar();
-            this.trackBarBrightness = new System.Windows.Forms.TrackBar();
-            this.trackBarContrast = new System.Windows.Forms.TrackBar();
-            this.negative = new System.Windows.Forms.CheckBox();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.contrast = new System.Windows.Forms.NumericUpDown();
-            this.greyscale = new System.Windows.Forms.CheckBox();
+            this.trackBarContrast = new System.Windows.Forms.TrackBar();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.brightness = new System.Windows.Forms.NumericUpDown();
+            this.trackBarBrightness = new System.Windows.Forms.TrackBar();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.greyscale = new System.Windows.Forms.CheckBox();
+            this.negative = new System.Windows.Forms.CheckBox();
             this.currentHTML = new System.Windows.Forms.TextBox();
             this.pictureBoxColorMap = new System.Windows.Forms.PictureBox();
             this.buttonSetToColor = new System.Windows.Forms.Button();
@@ -111,12 +114,17 @@
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importPaletteSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportPaletteSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoUpdate = new System.Windows.Forms.CheckBox();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.importPaletteSet = new System.Windows.Forms.ToolStripButton();
+            this.exportPaletteSet = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPalette)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel10.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel16.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -128,12 +136,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.levelsGreensBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelsReds)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.threshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarThreshold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).BeginInit();
+            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contrast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).BeginInit();
+            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.brightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).BeginInit();
+            this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSwatchColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentBlue)).BeginInit();
@@ -151,6 +163,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panel7.SuspendLayout();
             this.contextMenuStrip3.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxPalette
@@ -175,44 +188,312 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tabPage1.Controls.Add(this.label17);
-            this.tabPage1.Controls.Add(this.label16);
-            this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.panel10);
             this.tabPage1.Controls.Add(this.panel16);
             this.tabPage1.Controls.Add(this.panel17);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(252, 250);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Adjust RGB";
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel10.Controls.Add(this.label17);
+            this.panel10.Controls.Add(this.panel4);
+            this.panel10.Controls.Add(this.panel3);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(0, 172);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(252, 78);
+            this.panel10.TabIndex = 527;
             // 
             // label17
             // 
             this.label17.BackColor = System.Drawing.SystemColors.Control;
             this.label17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label17.Location = new System.Drawing.Point(0, 170);
+            this.label17.Location = new System.Drawing.Point(0, 0);
             this.label17.Name = "label17";
             this.label17.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label17.Size = new System.Drawing.Size(248, 17);
+            this.label17.Size = new System.Drawing.Size(250, 17);
             this.label17.TabIndex = 19;
             this.label17.Text = "EQUATE RGB";
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.Control;
+            this.panel4.Controls.Add(this.equateRedsA);
+            this.panel4.Controls.Add(this.label11);
+            this.panel4.Controls.Add(this.equateBluesA);
+            this.panel4.Controls.Add(this.equateGreensA);
+            this.panel4.Location = new System.Drawing.Point(0, 19);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(124, 55);
+            this.panel4.TabIndex = 20;
+            // 
+            // equateRedsA
+            // 
+            this.equateRedsA.AutoSize = true;
+            this.equateRedsA.Checked = true;
+            this.equateRedsA.Location = new System.Drawing.Point(63, 2);
+            this.equateRedsA.Name = "equateRedsA";
+            this.equateRedsA.Size = new System.Drawing.Size(49, 17);
+            this.equateRedsA.TabIndex = 0;
+            this.equateRedsA.TabStop = true;
+            this.equateRedsA.Text = "Reds";
+            this.equateRedsA.UseVisualStyleBackColor = true;
+            this.equateRedsA.Click += new System.EventHandler(this.equateRedsA_CheckedChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(0, 0);
+            this.label11.Name = "label11";
+            this.label11.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
+            this.label11.Size = new System.Drawing.Size(32, 15);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "This:";
+            // 
+            // equateBluesA
+            // 
+            this.equateBluesA.AutoSize = true;
+            this.equateBluesA.Location = new System.Drawing.Point(63, 36);
+            this.equateBluesA.Name = "equateBluesA";
+            this.equateBluesA.Size = new System.Drawing.Size(50, 17);
+            this.equateBluesA.TabIndex = 0;
+            this.equateBluesA.Text = "Blues";
+            this.equateBluesA.UseVisualStyleBackColor = true;
+            this.equateBluesA.Click += new System.EventHandler(this.equateBluesA_CheckedChanged);
+            // 
+            // equateGreensA
+            // 
+            this.equateGreensA.AutoSize = true;
+            this.equateGreensA.Location = new System.Drawing.Point(63, 19);
+            this.equateGreensA.Name = "equateGreensA";
+            this.equateGreensA.Size = new System.Drawing.Size(59, 17);
+            this.equateGreensA.TabIndex = 0;
+            this.equateGreensA.Text = "Greens";
+            this.equateGreensA.UseVisualStyleBackColor = true;
+            this.equateGreensA.Click += new System.EventHandler(this.equateGreensA_CheckedChanged);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.label10);
+            this.panel3.Controls.Add(this.equateRedsB);
+            this.panel3.Controls.Add(this.equateBluesB);
+            this.panel3.Controls.Add(this.equateGreensB);
+            this.panel3.Location = new System.Drawing.Point(124, 19);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(124, 55);
+            this.panel3.TabIndex = 20;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(0, 0);
+            this.label10.Name = "label10";
+            this.label10.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
+            this.label10.Size = new System.Drawing.Size(44, 15);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Equals:";
+            // 
+            // equateRedsB
+            // 
+            this.equateRedsB.AutoSize = true;
+            this.equateRedsB.Checked = true;
+            this.equateRedsB.Location = new System.Drawing.Point(55, 2);
+            this.equateRedsB.Name = "equateRedsB";
+            this.equateRedsB.Size = new System.Drawing.Size(49, 17);
+            this.equateRedsB.TabIndex = 0;
+            this.equateRedsB.TabStop = true;
+            this.equateRedsB.Text = "Reds";
+            this.equateRedsB.UseVisualStyleBackColor = true;
+            this.equateRedsB.Click += new System.EventHandler(this.equateRedsB_CheckedChanged);
+            // 
+            // equateBluesB
+            // 
+            this.equateBluesB.AutoSize = true;
+            this.equateBluesB.Location = new System.Drawing.Point(55, 36);
+            this.equateBluesB.Name = "equateBluesB";
+            this.equateBluesB.Size = new System.Drawing.Size(50, 17);
+            this.equateBluesB.TabIndex = 0;
+            this.equateBluesB.Text = "Blues";
+            this.equateBluesB.UseVisualStyleBackColor = true;
+            this.equateBluesB.Click += new System.EventHandler(this.equateBluesB_CheckedChanged);
+            // 
+            // equateGreensB
+            // 
+            this.equateGreensB.AutoSize = true;
+            this.equateGreensB.Location = new System.Drawing.Point(55, 19);
+            this.equateGreensB.Name = "equateGreensB";
+            this.equateGreensB.Size = new System.Drawing.Size(59, 17);
+            this.equateGreensB.TabIndex = 0;
+            this.equateGreensB.Text = "Greens";
+            this.equateGreensB.UseVisualStyleBackColor = true;
+            this.equateGreensB.Click += new System.EventHandler(this.equateGreensB_CheckedChanged);
+            // 
+            // panel16
+            // 
+            this.panel16.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel16.Controls.Add(this.panel1);
+            this.panel16.Controls.Add(this.panel2);
+            this.panel16.Controls.Add(this.label16);
+            this.panel16.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel16.Location = new System.Drawing.Point(0, 94);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(252, 78);
+            this.panel16.TabIndex = 533;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.switchRedsB);
+            this.panel1.Controls.Add(this.switchBluesB);
+            this.panel1.Controls.Add(this.switchGreensB);
+            this.panel1.Location = new System.Drawing.Point(124, 18);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(124, 56);
+            this.panel1.TabIndex = 20;
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(0, 0);
+            this.label9.Name = "label9";
+            this.label9.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
+            this.label9.Size = new System.Drawing.Size(44, 17);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "With:";
+            // 
+            // switchRedsB
+            // 
+            this.switchRedsB.AutoSize = true;
+            this.switchRedsB.Checked = true;
+            this.switchRedsB.Location = new System.Drawing.Point(52, 2);
+            this.switchRedsB.Name = "switchRedsB";
+            this.switchRedsB.Size = new System.Drawing.Size(49, 17);
+            this.switchRedsB.TabIndex = 0;
+            this.switchRedsB.TabStop = true;
+            this.switchRedsB.Text = "Reds";
+            this.switchRedsB.UseVisualStyleBackColor = true;
+            this.switchRedsB.Click += new System.EventHandler(this.switchRedsB_CheckedChanged);
+            // 
+            // switchBluesB
+            // 
+            this.switchBluesB.AutoSize = true;
+            this.switchBluesB.Location = new System.Drawing.Point(52, 36);
+            this.switchBluesB.Name = "switchBluesB";
+            this.switchBluesB.Size = new System.Drawing.Size(50, 17);
+            this.switchBluesB.TabIndex = 0;
+            this.switchBluesB.Text = "Blues";
+            this.switchBluesB.UseVisualStyleBackColor = true;
+            this.switchBluesB.Click += new System.EventHandler(this.switchBluesB_CheckedChanged);
+            // 
+            // switchGreensB
+            // 
+            this.switchGreensB.AutoSize = true;
+            this.switchGreensB.Location = new System.Drawing.Point(52, 19);
+            this.switchGreensB.Name = "switchGreensB";
+            this.switchGreensB.Size = new System.Drawing.Size(59, 17);
+            this.switchGreensB.TabIndex = 0;
+            this.switchGreensB.Text = "Greens";
+            this.switchGreensB.UseVisualStyleBackColor = true;
+            this.switchGreensB.Click += new System.EventHandler(this.switchGreensB_CheckedChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.switchRedsA);
+            this.panel2.Controls.Add(this.switchBluesA);
+            this.panel2.Controls.Add(this.switchGreensA);
+            this.panel2.Location = new System.Drawing.Point(0, 18);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(124, 56);
+            this.panel2.TabIndex = 20;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Name = "label8";
+            this.label8.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
+            this.label8.Size = new System.Drawing.Size(44, 15);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Switch:";
+            // 
+            // switchRedsA
+            // 
+            this.switchRedsA.AutoSize = true;
+            this.switchRedsA.Checked = true;
+            this.switchRedsA.Location = new System.Drawing.Point(63, 2);
+            this.switchRedsA.Name = "switchRedsA";
+            this.switchRedsA.Size = new System.Drawing.Size(49, 17);
+            this.switchRedsA.TabIndex = 0;
+            this.switchRedsA.TabStop = true;
+            this.switchRedsA.Text = "Reds";
+            this.switchRedsA.UseVisualStyleBackColor = true;
+            this.switchRedsA.Click += new System.EventHandler(this.switchRedsA_CheckedChanged);
+            // 
+            // switchBluesA
+            // 
+            this.switchBluesA.AutoSize = true;
+            this.switchBluesA.Location = new System.Drawing.Point(63, 36);
+            this.switchBluesA.Name = "switchBluesA";
+            this.switchBluesA.Size = new System.Drawing.Size(50, 17);
+            this.switchBluesA.TabIndex = 0;
+            this.switchBluesA.Text = "Blues";
+            this.switchBluesA.UseVisualStyleBackColor = true;
+            this.switchBluesA.Click += new System.EventHandler(this.switchBluesA_CheckedChanged);
+            // 
+            // switchGreensA
+            // 
+            this.switchGreensA.AutoSize = true;
+            this.switchGreensA.Location = new System.Drawing.Point(63, 19);
+            this.switchGreensA.Name = "switchGreensA";
+            this.switchGreensA.Size = new System.Drawing.Size(59, 17);
+            this.switchGreensA.TabIndex = 0;
+            this.switchGreensA.Text = "Greens";
+            this.switchGreensA.UseVisualStyleBackColor = true;
+            this.switchGreensA.Click += new System.EventHandler(this.switchGreensA_CheckedChanged);
             // 
             // label16
             // 
             this.label16.BackColor = System.Drawing.SystemColors.Control;
             this.label16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label16.Location = new System.Drawing.Point(0, 92);
+            this.label16.Location = new System.Drawing.Point(-1, -1);
             this.label16.Name = "label16";
             this.label16.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label16.Size = new System.Drawing.Size(248, 17);
+            this.label16.Size = new System.Drawing.Size(249, 17);
             this.label16.TabIndex = 19;
             this.label16.Text = "SWITCH RGB";
+            // 
+            // panel17
+            // 
+            this.panel17.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel17.Controls.Add(this.label12);
+            this.panel17.Controls.Add(this.label7);
+            this.panel17.Controls.Add(this.label6);
+            this.panel17.Controls.Add(this.levelsBlues);
+            this.panel17.Controls.Add(this.levelsGreens);
+            this.panel17.Controls.Add(this.levelsRedsBar);
+            this.panel17.Controls.Add(this.levelsBluesBar);
+            this.panel17.Controls.Add(this.label5);
+            this.panel17.Controls.Add(this.levelsGreensBar);
+            this.panel17.Controls.Add(this.label4);
+            this.panel17.Controls.Add(this.levelsReds);
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel17.Location = new System.Drawing.Point(0, 0);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(252, 94);
+            this.panel17.TabIndex = 534;
             // 
             // label12
             // 
@@ -226,280 +507,10 @@
             this.label12.TabIndex = 19;
             this.label12.Text = "COLOR LEVELS";
             // 
-            // panel10
-            // 
-            this.panel10.BackColor = System.Drawing.SystemColors.Control;
-            this.panel10.Controls.Add(this.panel3);
-            this.panel10.Controls.Add(this.label11);
-            this.panel10.Controls.Add(this.panel4);
-            this.panel10.Controls.Add(this.label10);
-            this.panel10.Location = new System.Drawing.Point(0, 189);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(248, 57);
-            this.panel10.TabIndex = 527;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.equateRedsB);
-            this.panel3.Controls.Add(this.equateBluesB);
-            this.panel3.Controls.Add(this.equateGreensB);
-            this.panel3.Location = new System.Drawing.Point(171, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(65, 57);
-            this.panel3.TabIndex = 20;
-            // 
-            // equateRedsB
-            // 
-            this.equateRedsB.AutoSize = true;
-            this.equateRedsB.Checked = true;
-            this.equateRedsB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.equateRedsB.Location = new System.Drawing.Point(3, 3);
-            this.equateRedsB.Name = "equateRedsB";
-            this.equateRedsB.Size = new System.Drawing.Size(48, 17);
-            this.equateRedsB.TabIndex = 0;
-            this.equateRedsB.TabStop = true;
-            this.equateRedsB.Text = "Reds";
-            this.equateRedsB.UseVisualStyleBackColor = true;
-            this.equateRedsB.Click += new System.EventHandler(this.equateRedsB_CheckedChanged);
-            // 
-            // equateBluesB
-            // 
-            this.equateBluesB.AutoSize = true;
-            this.equateBluesB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.equateBluesB.Location = new System.Drawing.Point(3, 37);
-            this.equateBluesB.Name = "equateBluesB";
-            this.equateBluesB.Size = new System.Drawing.Size(49, 17);
-            this.equateBluesB.TabIndex = 0;
-            this.equateBluesB.Text = "Blues";
-            this.equateBluesB.UseVisualStyleBackColor = true;
-            this.equateBluesB.Click += new System.EventHandler(this.equateBluesB_CheckedChanged);
-            // 
-            // equateGreensB
-            // 
-            this.equateGreensB.AutoSize = true;
-            this.equateGreensB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.equateGreensB.Location = new System.Drawing.Point(3, 20);
-            this.equateGreensB.Name = "equateGreensB";
-            this.equateGreensB.Size = new System.Drawing.Size(58, 17);
-            this.equateGreensB.TabIndex = 0;
-            this.equateGreensB.Text = "Greens";
-            this.equateGreensB.UseVisualStyleBackColor = true;
-            this.equateGreensB.Click += new System.EventHandler(this.equateGreensB_CheckedChanged);
-            // 
-            // label11
-            // 
-            this.label11.Location = new System.Drawing.Point(0, 0);
-            this.label11.Name = "label11";
-            this.label11.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label11.Size = new System.Drawing.Size(60, 17);
-            this.label11.TabIndex = 19;
-            this.label11.Text = "This:";
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.equateRedsA);
-            this.panel4.Controls.Add(this.equateBluesA);
-            this.panel4.Controls.Add(this.equateGreensA);
-            this.panel4.Location = new System.Drawing.Point(61, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(65, 57);
-            this.panel4.TabIndex = 20;
-            // 
-            // equateRedsA
-            // 
-            this.equateRedsA.AutoSize = true;
-            this.equateRedsA.Checked = true;
-            this.equateRedsA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.equateRedsA.Location = new System.Drawing.Point(3, 3);
-            this.equateRedsA.Name = "equateRedsA";
-            this.equateRedsA.Size = new System.Drawing.Size(48, 17);
-            this.equateRedsA.TabIndex = 0;
-            this.equateRedsA.TabStop = true;
-            this.equateRedsA.Text = "Reds";
-            this.equateRedsA.UseVisualStyleBackColor = true;
-            this.equateRedsA.Click += new System.EventHandler(this.equateRedsA_CheckedChanged);
-            // 
-            // equateBluesA
-            // 
-            this.equateBluesA.AutoSize = true;
-            this.equateBluesA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.equateBluesA.Location = new System.Drawing.Point(3, 37);
-            this.equateBluesA.Name = "equateBluesA";
-            this.equateBluesA.Size = new System.Drawing.Size(49, 17);
-            this.equateBluesA.TabIndex = 0;
-            this.equateBluesA.Text = "Blues";
-            this.equateBluesA.UseVisualStyleBackColor = true;
-            this.equateBluesA.Click += new System.EventHandler(this.equateBluesA_CheckedChanged);
-            // 
-            // equateGreensA
-            // 
-            this.equateGreensA.AutoSize = true;
-            this.equateGreensA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.equateGreensA.Location = new System.Drawing.Point(3, 20);
-            this.equateGreensA.Name = "equateGreensA";
-            this.equateGreensA.Size = new System.Drawing.Size(58, 17);
-            this.equateGreensA.TabIndex = 0;
-            this.equateGreensA.Text = "Greens";
-            this.equateGreensA.UseVisualStyleBackColor = true;
-            this.equateGreensA.Click += new System.EventHandler(this.equateGreensA_CheckedChanged);
-            // 
-            // label10
-            // 
-            this.label10.Location = new System.Drawing.Point(127, 0);
-            this.label10.Name = "label10";
-            this.label10.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label10.Size = new System.Drawing.Size(44, 17);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "Equals:";
-            // 
-            // panel16
-            // 
-            this.panel16.BackColor = System.Drawing.SystemColors.Control;
-            this.panel16.Controls.Add(this.panel1);
-            this.panel16.Controls.Add(this.label8);
-            this.panel16.Controls.Add(this.panel2);
-            this.panel16.Controls.Add(this.label9);
-            this.panel16.Location = new System.Drawing.Point(0, 111);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(248, 57);
-            this.panel16.TabIndex = 533;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.switchRedsB);
-            this.panel1.Controls.Add(this.switchBluesB);
-            this.panel1.Controls.Add(this.switchGreensB);
-            this.panel1.Location = new System.Drawing.Point(171, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(65, 57);
-            this.panel1.TabIndex = 20;
-            // 
-            // switchRedsB
-            // 
-            this.switchRedsB.AutoSize = true;
-            this.switchRedsB.Checked = true;
-            this.switchRedsB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.switchRedsB.Location = new System.Drawing.Point(3, 3);
-            this.switchRedsB.Name = "switchRedsB";
-            this.switchRedsB.Size = new System.Drawing.Size(48, 17);
-            this.switchRedsB.TabIndex = 0;
-            this.switchRedsB.TabStop = true;
-            this.switchRedsB.Text = "Reds";
-            this.switchRedsB.UseVisualStyleBackColor = true;
-            this.switchRedsB.Click += new System.EventHandler(this.switchRedsB_CheckedChanged);
-            // 
-            // switchBluesB
-            // 
-            this.switchBluesB.AutoSize = true;
-            this.switchBluesB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.switchBluesB.Location = new System.Drawing.Point(3, 37);
-            this.switchBluesB.Name = "switchBluesB";
-            this.switchBluesB.Size = new System.Drawing.Size(49, 17);
-            this.switchBluesB.TabIndex = 0;
-            this.switchBluesB.Text = "Blues";
-            this.switchBluesB.UseVisualStyleBackColor = true;
-            this.switchBluesB.Click += new System.EventHandler(this.switchBluesB_CheckedChanged);
-            // 
-            // switchGreensB
-            // 
-            this.switchGreensB.AutoSize = true;
-            this.switchGreensB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.switchGreensB.Location = new System.Drawing.Point(3, 20);
-            this.switchGreensB.Name = "switchGreensB";
-            this.switchGreensB.Size = new System.Drawing.Size(58, 17);
-            this.switchGreensB.TabIndex = 0;
-            this.switchGreensB.Text = "Greens";
-            this.switchGreensB.UseVisualStyleBackColor = true;
-            this.switchGreensB.Click += new System.EventHandler(this.switchGreensB_CheckedChanged);
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(0, 0);
-            this.label8.Name = "label8";
-            this.label8.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label8.Size = new System.Drawing.Size(60, 17);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "Switch:";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.switchRedsA);
-            this.panel2.Controls.Add(this.switchBluesA);
-            this.panel2.Controls.Add(this.switchGreensA);
-            this.panel2.Location = new System.Drawing.Point(61, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(65, 57);
-            this.panel2.TabIndex = 20;
-            // 
-            // switchRedsA
-            // 
-            this.switchRedsA.AutoSize = true;
-            this.switchRedsA.Checked = true;
-            this.switchRedsA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.switchRedsA.Location = new System.Drawing.Point(3, 3);
-            this.switchRedsA.Name = "switchRedsA";
-            this.switchRedsA.Size = new System.Drawing.Size(48, 17);
-            this.switchRedsA.TabIndex = 0;
-            this.switchRedsA.TabStop = true;
-            this.switchRedsA.Text = "Reds";
-            this.switchRedsA.UseVisualStyleBackColor = true;
-            this.switchRedsA.Click += new System.EventHandler(this.switchRedsA_CheckedChanged);
-            // 
-            // switchBluesA
-            // 
-            this.switchBluesA.AutoSize = true;
-            this.switchBluesA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.switchBluesA.Location = new System.Drawing.Point(3, 37);
-            this.switchBluesA.Name = "switchBluesA";
-            this.switchBluesA.Size = new System.Drawing.Size(49, 17);
-            this.switchBluesA.TabIndex = 0;
-            this.switchBluesA.Text = "Blues";
-            this.switchBluesA.UseVisualStyleBackColor = true;
-            this.switchBluesA.Click += new System.EventHandler(this.switchBluesA_CheckedChanged);
-            // 
-            // switchGreensA
-            // 
-            this.switchGreensA.AutoSize = true;
-            this.switchGreensA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.switchGreensA.Location = new System.Drawing.Point(3, 20);
-            this.switchGreensA.Name = "switchGreensA";
-            this.switchGreensA.Size = new System.Drawing.Size(58, 17);
-            this.switchGreensA.TabIndex = 0;
-            this.switchGreensA.Text = "Greens";
-            this.switchGreensA.UseVisualStyleBackColor = true;
-            this.switchGreensA.Click += new System.EventHandler(this.switchGreensA_CheckedChanged);
-            // 
-            // label9
-            // 
-            this.label9.Location = new System.Drawing.Point(127, 0);
-            this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.label9.Size = new System.Drawing.Size(44, 17);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "With:";
-            // 
-            // panel17
-            // 
-            this.panel17.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel17.Controls.Add(this.label7);
-            this.panel17.Controls.Add(this.label6);
-            this.panel17.Controls.Add(this.levelsBlues);
-            this.panel17.Controls.Add(this.levelsGreens);
-            this.panel17.Controls.Add(this.levelsRedsBar);
-            this.panel17.Controls.Add(this.levelsBluesBar);
-            this.panel17.Controls.Add(this.label5);
-            this.panel17.Controls.Add(this.levelsGreensBar);
-            this.panel17.Controls.Add(this.label4);
-            this.panel17.Controls.Add(this.levelsReds);
-            this.panel17.Location = new System.Drawing.Point(0, 19);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(248, 71);
-            this.panel17.TabIndex = 534;
-            // 
             // label7
             // 
             this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Location = new System.Drawing.Point(0, 19);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.label7.Size = new System.Drawing.Size(60, 17);
@@ -509,7 +520,7 @@
             // label6
             // 
             this.label6.BackColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(0, 54);
+            this.label6.Location = new System.Drawing.Point(0, 73);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.label6.Size = new System.Drawing.Size(60, 17);
@@ -519,7 +530,7 @@
             // levelsBlues
             // 
             this.levelsBlues.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.levelsBlues.Location = new System.Drawing.Point(187, 0);
+            this.levelsBlues.Location = new System.Drawing.Point(187, 19);
             this.levelsBlues.Minimum = new decimal(new int[] {
             100,
             0,
@@ -534,7 +545,7 @@
             // levelsGreens
             // 
             this.levelsGreens.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.levelsGreens.Location = new System.Drawing.Point(124, 0);
+            this.levelsGreens.Location = new System.Drawing.Point(124, 19);
             this.levelsGreens.Minimum = new decimal(new int[] {
             100,
             0,
@@ -551,7 +562,7 @@
             this.levelsRedsBar.AutoSize = false;
             this.levelsRedsBar.BackColor = System.Drawing.SystemColors.Control;
             this.levelsRedsBar.LargeChange = 32;
-            this.levelsRedsBar.Location = new System.Drawing.Point(61, 18);
+            this.levelsRedsBar.Location = new System.Drawing.Point(61, 37);
             this.levelsRedsBar.Maximum = 100;
             this.levelsRedsBar.Minimum = -100;
             this.levelsRedsBar.Name = "levelsRedsBar";
@@ -567,7 +578,7 @@
             this.levelsBluesBar.AutoSize = false;
             this.levelsBluesBar.BackColor = System.Drawing.SystemColors.Control;
             this.levelsBluesBar.LargeChange = 32;
-            this.levelsBluesBar.Location = new System.Drawing.Point(61, 54);
+            this.levelsBluesBar.Location = new System.Drawing.Point(61, 73);
             this.levelsBluesBar.Maximum = 100;
             this.levelsBluesBar.Minimum = -100;
             this.levelsBluesBar.Name = "levelsBluesBar";
@@ -581,7 +592,7 @@
             // label5
             // 
             this.label5.BackColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(0, 36);
+            this.label5.Location = new System.Drawing.Point(0, 55);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.label5.Size = new System.Drawing.Size(60, 17);
@@ -593,7 +604,7 @@
             this.levelsGreensBar.AutoSize = false;
             this.levelsGreensBar.BackColor = System.Drawing.SystemColors.Control;
             this.levelsGreensBar.LargeChange = 32;
-            this.levelsGreensBar.Location = new System.Drawing.Point(61, 36);
+            this.levelsGreensBar.Location = new System.Drawing.Point(61, 55);
             this.levelsGreensBar.Maximum = 100;
             this.levelsGreensBar.Minimum = -100;
             this.levelsGreensBar.Name = "levelsGreensBar";
@@ -607,7 +618,7 @@
             // label4
             // 
             this.label4.BackColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(0, 18);
+            this.label4.Location = new System.Drawing.Point(0, 37);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.label4.Size = new System.Drawing.Size(60, 17);
@@ -617,7 +628,7 @@
             // levelsReds
             // 
             this.levelsReds.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.levelsReds.Location = new System.Drawing.Point(61, 0);
+            this.levelsReds.Location = new System.Drawing.Point(61, 19);
             this.levelsReds.Minimum = new decimal(new int[] {
             100,
             0,
@@ -631,32 +642,33 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.ControlText;
-            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tabPage2.Controls.Add(this.thresholdApply);
-            this.tabPage2.Controls.Add(this.threshold);
             this.tabPage2.Controls.Add(this.panel15);
-            this.tabPage2.Controls.Add(this.trackBarThreshold);
-            this.tabPage2.Controls.Add(this.trackBarBrightness);
-            this.tabPage2.Controls.Add(this.trackBarContrast);
-            this.tabPage2.Controls.Add(this.negative);
-            this.tabPage2.Controls.Add(this.label15);
-            this.tabPage2.Controls.Add(this.contrast);
-            this.tabPage2.Controls.Add(this.greyscale);
-            this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Controls.Add(this.brightness);
+            this.tabPage2.Controls.Add(this.panel6);
+            this.tabPage2.Controls.Add(this.panel5);
+            this.tabPage2.Controls.Add(this.panel8);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(252, 250);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Effects";
             // 
+            // panel15
+            // 
+            this.panel15.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel15.Controls.Add(this.thresholdApply);
+            this.panel15.Controls.Add(this.threshold);
+            this.panel15.Controls.Add(this.trackBarThreshold);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel15.Location = new System.Drawing.Point(0, 118);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(252, 41);
+            this.panel15.TabIndex = 532;
+            // 
             // thresholdApply
             // 
             this.thresholdApply.BackColor = System.Drawing.SystemColors.Control;
-            this.thresholdApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.thresholdApply.Location = new System.Drawing.Point(0, 112);
+            this.thresholdApply.Location = new System.Drawing.Point(0, 0);
             this.thresholdApply.Name = "thresholdApply";
             this.thresholdApply.Padding = new System.Windows.Forms.Padding(4, 0, 0, 2);
             this.thresholdApply.Size = new System.Drawing.Size(248, 19);
@@ -669,7 +681,7 @@
             // 
             this.threshold.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.threshold.Enabled = false;
-            this.threshold.Location = new System.Drawing.Point(0, 132);
+            this.threshold.Location = new System.Drawing.Point(0, 20);
             this.threshold.Maximum = new decimal(new int[] {
             255,
             0,
@@ -691,21 +703,13 @@
             0});
             this.threshold.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
-            // panel15
-            // 
-            this.panel15.BackColor = System.Drawing.SystemColors.Control;
-            this.panel15.Location = new System.Drawing.Point(0, 151);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(248, 95);
-            this.panel15.TabIndex = 532;
-            // 
             // trackBarThreshold
             // 
             this.trackBarThreshold.AutoSize = false;
             this.trackBarThreshold.BackColor = System.Drawing.SystemColors.Control;
             this.trackBarThreshold.Enabled = false;
             this.trackBarThreshold.LargeChange = 32;
-            this.trackBarThreshold.Location = new System.Drawing.Point(51, 132);
+            this.trackBarThreshold.Location = new System.Drawing.Point(51, 20);
             this.trackBarThreshold.Maximum = 255;
             this.trackBarThreshold.Minimum = 1;
             this.trackBarThreshold.Name = "trackBarThreshold";
@@ -717,57 +721,25 @@
             this.trackBarThreshold.Value = 128;
             this.trackBarThreshold.Scroll += new System.EventHandler(this.trackBarThreshold_Scroll);
             // 
-            // trackBarBrightness
+            // panel6
             // 
-            this.trackBarBrightness.AutoSize = false;
-            this.trackBarBrightness.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarBrightness.LargeChange = 32;
-            this.trackBarBrightness.Location = new System.Drawing.Point(51, 56);
-            this.trackBarBrightness.Maximum = 100;
-            this.trackBarBrightness.Minimum = -100;
-            this.trackBarBrightness.Name = "trackBarBrightness";
-            this.trackBarBrightness.Size = new System.Drawing.Size(197, 17);
-            this.trackBarBrightness.SmallChange = 8;
-            this.trackBarBrightness.TabIndex = 22;
-            this.trackBarBrightness.TickFrequency = 8;
-            this.trackBarBrightness.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarBrightness.Scroll += new System.EventHandler(this.trackBarBrightness_Scroll);
-            // 
-            // trackBarContrast
-            // 
-            this.trackBarContrast.AutoSize = false;
-            this.trackBarContrast.BackColor = System.Drawing.SystemColors.Control;
-            this.trackBarContrast.LargeChange = 32;
-            this.trackBarContrast.Location = new System.Drawing.Point(51, 93);
-            this.trackBarContrast.Maximum = 100;
-            this.trackBarContrast.Minimum = -100;
-            this.trackBarContrast.Name = "trackBarContrast";
-            this.trackBarContrast.Size = new System.Drawing.Size(197, 17);
-            this.trackBarContrast.SmallChange = 8;
-            this.trackBarContrast.TabIndex = 23;
-            this.trackBarContrast.TickFrequency = 8;
-            this.trackBarContrast.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarContrast.Scroll += new System.EventHandler(this.trackBarContrast_Scroll);
-            // 
-            // negative
-            // 
-            this.negative.BackColor = System.Drawing.SystemColors.Control;
-            this.negative.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.negative.Location = new System.Drawing.Point(0, 17);
-            this.negative.Name = "negative";
-            this.negative.Padding = new System.Windows.Forms.Padding(4, 0, 0, 2);
-            this.negative.Size = new System.Drawing.Size(248, 19);
-            this.negative.TabIndex = 0;
-            this.negative.Text = "Negative Image";
-            this.negative.UseVisualStyleBackColor = false;
-            this.negative.Click += new System.EventHandler(this.negative_CheckedChanged);
+            this.panel6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.label15);
+            this.panel6.Controls.Add(this.contrast);
+            this.panel6.Controls.Add(this.trackBarContrast);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(0, 79);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(252, 39);
+            this.panel6.TabIndex = 534;
             // 
             // label15
             // 
             this.label15.BackColor = System.Drawing.SystemColors.Control;
             this.label15.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label15.Location = new System.Drawing.Point(0, 75);
+            this.label15.Location = new System.Drawing.Point(0, 0);
             this.label15.Name = "label15";
             this.label15.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.label15.Size = new System.Drawing.Size(248, 17);
@@ -777,7 +749,7 @@
             // contrast
             // 
             this.contrast.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contrast.Location = new System.Drawing.Point(0, 93);
+            this.contrast.Location = new System.Drawing.Point(0, 18);
             this.contrast.Minimum = new decimal(new int[] {
             100,
             0,
@@ -789,25 +761,41 @@
             this.contrast.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.contrast.ValueChanged += new System.EventHandler(this.contrast_ValueChanged);
             // 
-            // greyscale
+            // trackBarContrast
             // 
-            this.greyscale.BackColor = System.Drawing.SystemColors.Control;
-            this.greyscale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.greyscale.Location = new System.Drawing.Point(0, 0);
-            this.greyscale.Name = "greyscale";
-            this.greyscale.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.greyscale.Size = new System.Drawing.Size(248, 19);
-            this.greyscale.TabIndex = 0;
-            this.greyscale.Text = "Greyscale";
-            this.greyscale.UseVisualStyleBackColor = false;
-            this.greyscale.Click += new System.EventHandler(this.greyscale_CheckedChanged);
+            this.trackBarContrast.AutoSize = false;
+            this.trackBarContrast.BackColor = System.Drawing.SystemColors.Control;
+            this.trackBarContrast.LargeChange = 32;
+            this.trackBarContrast.Location = new System.Drawing.Point(51, 18);
+            this.trackBarContrast.Maximum = 100;
+            this.trackBarContrast.Minimum = -100;
+            this.trackBarContrast.Name = "trackBarContrast";
+            this.trackBarContrast.Size = new System.Drawing.Size(197, 17);
+            this.trackBarContrast.SmallChange = 8;
+            this.trackBarContrast.TabIndex = 23;
+            this.trackBarContrast.TickFrequency = 8;
+            this.trackBarContrast.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBarContrast.Scroll += new System.EventHandler(this.trackBarContrast_Scroll);
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.label14);
+            this.panel5.Controls.Add(this.brightness);
+            this.panel5.Controls.Add(this.trackBarBrightness);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 40);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(252, 39);
+            this.panel5.TabIndex = 533;
             // 
             // label14
             // 
             this.label14.BackColor = System.Drawing.SystemColors.Control;
             this.label14.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label14.Location = new System.Drawing.Point(0, 38);
+            this.label14.Location = new System.Drawing.Point(0, 0);
             this.label14.Name = "label14";
             this.label14.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.label14.Size = new System.Drawing.Size(248, 17);
@@ -817,7 +805,7 @@
             // brightness
             // 
             this.brightness.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.brightness.Location = new System.Drawing.Point(0, 56);
+            this.brightness.Location = new System.Drawing.Point(0, 18);
             this.brightness.Minimum = new decimal(new int[] {
             100,
             0,
@@ -828,6 +816,58 @@
             this.brightness.TabIndex = 20;
             this.brightness.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.brightness.ValueChanged += new System.EventHandler(this.brightness_ValueChanged);
+            // 
+            // trackBarBrightness
+            // 
+            this.trackBarBrightness.AutoSize = false;
+            this.trackBarBrightness.BackColor = System.Drawing.SystemColors.Control;
+            this.trackBarBrightness.LargeChange = 32;
+            this.trackBarBrightness.Location = new System.Drawing.Point(51, 18);
+            this.trackBarBrightness.Maximum = 100;
+            this.trackBarBrightness.Minimum = -100;
+            this.trackBarBrightness.Name = "trackBarBrightness";
+            this.trackBarBrightness.Size = new System.Drawing.Size(197, 17);
+            this.trackBarBrightness.SmallChange = 8;
+            this.trackBarBrightness.TabIndex = 22;
+            this.trackBarBrightness.TickFrequency = 8;
+            this.trackBarBrightness.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBarBrightness.Scroll += new System.EventHandler(this.trackBarBrightness_Scroll);
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel8.Controls.Add(this.greyscale);
+            this.panel8.Controls.Add(this.negative);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Location = new System.Drawing.Point(0, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(252, 40);
+            this.panel8.TabIndex = 535;
+            // 
+            // greyscale
+            // 
+            this.greyscale.BackColor = System.Drawing.SystemColors.Control;
+            this.greyscale.Location = new System.Drawing.Point(0, 0);
+            this.greyscale.Name = "greyscale";
+            this.greyscale.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.greyscale.Size = new System.Drawing.Size(248, 19);
+            this.greyscale.TabIndex = 0;
+            this.greyscale.Text = "Greyscale";
+            this.greyscale.UseVisualStyleBackColor = false;
+            this.greyscale.Click += new System.EventHandler(this.greyscale_CheckedChanged);
+            // 
+            // negative
+            // 
+            this.negative.BackColor = System.Drawing.SystemColors.Control;
+            this.negative.Location = new System.Drawing.Point(0, 17);
+            this.negative.Name = "negative";
+            this.negative.Padding = new System.Windows.Forms.Padding(4, 0, 0, 2);
+            this.negative.Size = new System.Drawing.Size(248, 19);
+            this.negative.TabIndex = 0;
+            this.negative.Text = "Negative Image";
+            this.negative.UseVisualStyleBackColor = false;
+            this.negative.Click += new System.EventHandler(this.negative_CheckedChanged);
             // 
             // currentHTML
             // 
@@ -1039,7 +1079,7 @@
             // 
             // panel12
             // 
-            this.panel12.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel12.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel12.Controls.Add(this.panel14);
             this.panel12.Controls.Add(this.label19);
@@ -1164,11 +1204,74 @@
             this.exportPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.exportPaletteSetToolStripMenuItem.Text = "Export palette set...";
             // 
+            // autoUpdate
+            // 
+            this.autoUpdate.AutoSize = true;
+            this.autoUpdate.BackColor = System.Drawing.SystemColors.Control;
+            this.autoUpdate.Checked = true;
+            this.autoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.autoUpdate.Location = new System.Drawing.Point(93, 372);
+            this.autoUpdate.Name = "autoUpdate";
+            this.autoUpdate.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.autoUpdate.Size = new System.Drawing.Size(91, 17);
+            this.autoUpdate.TabIndex = 531;
+            this.autoUpdate.Text = "Auto-update";
+            this.autoUpdate.UseVisualStyleBackColor = false;
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(12, 366);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.TabIndex = 532;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importPaletteSet,
+            this.exportPaletteSet});
+            this.toolStrip1.Location = new System.Drawing.Point(147, 12);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(49, 25);
+            this.toolStrip1.TabIndex = 533;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // importPaletteSet
+            // 
+            this.importPaletteSet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.importPaletteSet.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importPaletteSet.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.importPaletteSet.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.importPaletteSet.Name = "importPaletteSet";
+            this.importPaletteSet.Size = new System.Drawing.Size(23, 22);
+            this.importPaletteSet.Text = "Import palette set";
+            this.importPaletteSet.Click += new System.EventHandler(this.importPaletteSetToolStripMenuItem_Click);
+            // 
+            // exportPaletteSet
+            // 
+            this.exportPaletteSet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.exportPaletteSet.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.exportPaletteSet.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exportPaletteSet.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exportPaletteSet.Name = "exportPaletteSet";
+            this.exportPaletteSet.Size = new System.Drawing.Size(23, 22);
+            this.exportPaletteSet.Text = "Export palette set";
+            this.exportPaletteSet.Click += new System.EventHandler(this.exportPaletteSetToolStripMenuItem_Click);
+            // 
             // PaletteEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 401);
+            this.Controls.Add(this.buttonUpdate);
+            this.Controls.Add(this.autoUpdate);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel13);
             this.Controls.Add(this.panel9);
@@ -1194,10 +1297,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel16.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -1211,12 +1314,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.levelsGreensBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelsReds)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.threshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarThreshold)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).EndInit();
+            this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contrast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).EndInit();
+            this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.brightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).EndInit();
+            this.panel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSwatchColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentBlue)).EndInit();
@@ -1235,7 +1342,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.panel7.ResumeLayout(false);
             this.contextMenuStrip3.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1322,6 +1432,14 @@
         private System.Windows.Forms.TrackBar trackBarThreshold;
         private System.Windows.Forms.NumericUpDown threshold;
         private System.Windows.Forms.CheckBox thresholdApply;
+        private System.Windows.Forms.CheckBox autoUpdate;
+        private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton importPaletteSet;
+        private System.Windows.Forms.ToolStripButton exportPaletteSet;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel5;
 
     }
 }

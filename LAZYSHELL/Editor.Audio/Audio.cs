@@ -12,11 +12,11 @@ namespace LAZYSHELL
 {
     public partial class Audio : Form
     {
-        private Model model = State.Instance.Model;
-        private SoundPlayer soundPlayer = new SoundPlayer();
+        private long checksum;
+                private SoundPlayer soundPlayer = new SoundPlayer();
         private byte[] wav;
         private int index { get { return (int)sampleNum.Value; } set { sampleNum.Value = value; } }
-        private BRRSample[] audioSamples { get { return model.AudioSamples; } set { model.AudioSamples = value; } }
+        private BRRSample[] audioSamples { get { return Model.AudioSamples; } set { Model.AudioSamples = value; } }
         private BRRSample audioSample { get { return audioSamples[index]; } set { audioSamples[index] = value; } }
         private int sampleRate
         {
@@ -35,12 +35,13 @@ namespace LAZYSHELL
         }
         public Audio()
         {
+            checksum = Do.GenerateChecksum(audioSamples);
             InitializeComponent();
             wav = BRR.Decode(audioSample.Sample, sampleRate);
         }
         private void DrawWavelength(Graphics g, int width, int height, byte[] wav)
         {
-            int size = Bits.GetUInt32(wav, 0x0028) / 2;
+            int size = Bits.Get32Bit(wav, 0x0028) / 2;
             int offset = 0x2C;
             List<Point> points = new List<Point>();
             double w_ratio = (double)width / (double)size;
@@ -88,6 +89,8 @@ namespace LAZYSHELL
         }
         private void Audio_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Do.GenerateChecksum(audioSamples) == checksum)
+                return;
             soundPlayer.Stop();
             DialogResult result = MessageBox.Show(
               "Audio has not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -96,7 +99,7 @@ namespace LAZYSHELL
                 save_Click(null, null);
             else if (result == DialogResult.No)
             {
-                model.AudioSamples = null;
+                Model.AudioSamples = null;
                 return;
             }
             else if (result == DialogResult.Cancel)
@@ -152,17 +155,17 @@ namespace LAZYSHELL
         }
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.AudioSamples, index, "IMPORT SAMPLES...").ShowDialog();
+            new IOElements((Element[])Model.AudioSamples, index, "IMPORT SAMPLES...").ShowDialog();
             wav = BRR.Decode(audioSample.Sample, sampleRate);
             pictureBox1.Invalidate();
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.AudioSamples, index, "EXPORT SAMPLES...").ShowDialog();
+            new IOElements((Element[])Model.AudioSamples, index, "EXPORT SAMPLES...").ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {
-            new ClearElements(model.AudioSamples, index, "CLEAR SAMPLES...").ShowDialog();
+            new ClearElements(Model.AudioSamples, index, "CLEAR SAMPLES...").ShowDialog();
             wav = BRR.Decode(audioSample.Sample, sampleRate);
             pictureBox1.Invalidate();
         }

@@ -5,8 +5,10 @@ using System.Drawing;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class FontCharacter
     {
+        [NonSerialized()]
         private byte[] data;
 
         private int index; public int Index { get { return index; } }
@@ -106,7 +108,7 @@ namespace LAZYSHELL
         public int GetRightMostPixel(int[] palette)
         {
             int[] pixels = GetCharacterPixels(palette);
-            int left = maxWidth - 1;
+            int left = maxWidth;
 
             for (int x = maxWidth - 1; x >= 0; x--)
             {
@@ -142,7 +144,7 @@ namespace LAZYSHELL
         public int GetBottomMostPixel(int[] palette)
         {
             int[] pixels = GetCharacterPixels(palette);
-            int top = height - 1;
+            int top = height;
 
             for (int y = height - 1; y >= 0; y--)
             {

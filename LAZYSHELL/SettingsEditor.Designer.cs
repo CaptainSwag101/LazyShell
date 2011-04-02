@@ -53,6 +53,7 @@
             // checkedListBox1
             // 
             this.checkedListBox1.CheckOnClick = true;
+            this.checkedListBox1.ColumnWidth = 214;
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Items.AddRange(new object[] {
             "Auto-load last used ROM",
@@ -61,10 +62,12 @@
             "Create back-up ROM on save",
             "Create back-up ROM on load",
             "Verify ROM",
-            "Show encryption warnings"});
+            "Show encryption warnings",
+            "Remember last loaded level"});
             this.checkedListBox1.Location = new System.Drawing.Point(12, 12);
+            this.checkedListBox1.MultiColumn = true;
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(434, 116);
+            this.checkedListBox1.Size = new System.Drawing.Size(434, 84);
             this.checkedListBox1.TabIndex = 0;
             // 
             // customDirectoryTextBox
@@ -77,7 +80,7 @@
             // 
             // buttonDefault
             // 
-            this.buttonDefault.Location = new System.Drawing.Point(12, 271);
+            this.buttonDefault.Location = new System.Drawing.Point(12, 239);
             this.buttonDefault.Name = "buttonDefault";
             this.buttonDefault.Size = new System.Drawing.Size(75, 23);
             this.buttonDefault.TabIndex = 2;
@@ -87,7 +90,7 @@
             // 
             // buttonApply
             // 
-            this.buttonApply.Location = new System.Drawing.Point(371, 271);
+            this.buttonApply.Location = new System.Drawing.Point(371, 239);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(75, 23);
             this.buttonApply.TabIndex = 2;
@@ -119,7 +122,7 @@
             // 
             // undoStackSize
             // 
-            this.undoStackSize.Location = new System.Drawing.Point(209, 223);
+            this.undoStackSize.Location = new System.Drawing.Point(209, 191);
             this.undoStackSize.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -132,7 +135,7 @@
             // 
             // patchHTTPServer
             // 
-            this.patchHTTPServer.Location = new System.Drawing.Point(209, 202);
+            this.patchHTTPServer.Location = new System.Drawing.Point(209, 170);
             this.patchHTTPServer.Name = "patchHTTPServer";
             this.patchHTTPServer.Size = new System.Drawing.Size(237, 21);
             this.patchHTTPServer.TabIndex = 1;
@@ -140,7 +143,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(107, 205);
+            this.label2.Location = new System.Drawing.Point(107, 173);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 13);
             this.label2.TabIndex = 3;
@@ -149,7 +152,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(107, 225);
+            this.label3.Location = new System.Drawing.Point(107, 193);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 13);
             this.label3.TabIndex = 3;
@@ -159,7 +162,7 @@
             // 
             this.groupBox1.Controls.Add(this.visualThemeSystem);
             this.groupBox1.Controls.Add(this.visualThemeStandard);
-            this.groupBox1.Location = new System.Drawing.Point(12, 202);
+            this.groupBox1.Location = new System.Drawing.Point(12, 170);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(87, 63);
             this.groupBox1.TabIndex = 6;
@@ -172,7 +175,7 @@
             this.groupBox2.Controls.Add(this.customDirectory);
             this.groupBox2.Controls.Add(this.customDirectoryTextBox);
             this.groupBox2.Controls.Add(this.buttonCustomDirectory);
-            this.groupBox2.Location = new System.Drawing.Point(12, 134);
+            this.groupBox2.Location = new System.Drawing.Point(12, 102);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(434, 62);
             this.groupBox2.TabIndex = 7;
@@ -213,7 +216,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(290, 271);
+            this.buttonClose.Location = new System.Drawing.Point(290, 239);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 2;
@@ -223,7 +226,7 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(209, 271);
+            this.buttonOK.Location = new System.Drawing.Point(209, 239);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 2;
@@ -235,7 +238,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 306);
+            this.ClientSize = new System.Drawing.Size(458, 274);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.undoStackSize);

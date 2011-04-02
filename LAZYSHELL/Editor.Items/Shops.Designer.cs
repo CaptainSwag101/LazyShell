@@ -111,7 +111,7 @@
             this.panel192.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel192.Controls.Add(this.label102);
             this.panel192.Controls.Add(this.shopDiscounts);
-            this.panel192.Location = new System.Drawing.Point(12, 419);
+            this.panel192.Location = new System.Drawing.Point(1, 429);
             this.panel192.Name = "panel192";
             this.panel192.Size = new System.Drawing.Size(248, 87);
             this.panel192.TabIndex = 537;
@@ -152,7 +152,7 @@
             this.panel194.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel194.Controls.Add(this.label161);
             this.panel194.Controls.Add(this.shopBuyOptions);
-            this.panel194.Location = new System.Drawing.Point(12, 326);
+            this.panel194.Location = new System.Drawing.Point(1, 340);
             this.panel194.Name = "panel194";
             this.panel194.Size = new System.Drawing.Size(248, 87);
             this.panel194.TabIndex = 538;
@@ -220,7 +220,7 @@
             this.panel59.Controls.Add(this.label83);
             this.panel59.Controls.Add(this.label81);
             this.panel59.Controls.Add(this.label82);
-            this.panel59.Location = new System.Drawing.Point(12, 28);
+            this.panel59.Location = new System.Drawing.Point(1, 46);
             this.panel59.Name = "panel59";
             this.panel59.Size = new System.Drawing.Size(248, 292);
             this.panel59.TabIndex = 161;
@@ -235,9 +235,9 @@
             // 
             // shopItem14
             // 
-            this.shopItem14.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem14.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem14.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem14.DropDownHeight = 314;
+            this.shopItem14.DropDownHeight = 317;
             this.shopItem14.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem14.IntegralHeight = false;
             this.shopItem14.ItemHeight = 15;
@@ -259,9 +259,9 @@
             // 
             // shopItem13
             // 
-            this.shopItem13.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem13.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem13.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem13.DropDownHeight = 314;
+            this.shopItem13.DropDownHeight = 317;
             this.shopItem13.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem13.IntegralHeight = false;
             this.shopItem13.ItemHeight = 15;
@@ -283,9 +283,9 @@
             // 
             // shopItem15
             // 
-            this.shopItem15.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem15.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem15.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem15.DropDownHeight = 314;
+            this.shopItem15.DropDownHeight = 317;
             this.shopItem15.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem15.IntegralHeight = false;
             this.shopItem15.ItemHeight = 15;
@@ -307,9 +307,9 @@
             // 
             // shopItem12
             // 
-            this.shopItem12.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem12.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem12.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem12.DropDownHeight = 314;
+            this.shopItem12.DropDownHeight = 317;
             this.shopItem12.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem12.IntegralHeight = false;
             this.shopItem12.ItemHeight = 15;
@@ -331,9 +331,9 @@
             // 
             // shopItem11
             // 
-            this.shopItem11.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem11.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem11.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem11.DropDownHeight = 314;
+            this.shopItem11.DropDownHeight = 317;
             this.shopItem11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem11.IntegralHeight = false;
             this.shopItem11.ItemHeight = 15;
@@ -355,9 +355,9 @@
             // 
             // shopItem10
             // 
-            this.shopItem10.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem10.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem10.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem10.DropDownHeight = 314;
+            this.shopItem10.DropDownHeight = 317;
             this.shopItem10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem10.IntegralHeight = false;
             this.shopItem10.ItemHeight = 15;
@@ -379,9 +379,9 @@
             // 
             // shopItem9
             // 
-            this.shopItem9.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem9.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem9.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem9.DropDownHeight = 314;
+            this.shopItem9.DropDownHeight = 317;
             this.shopItem9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem9.IntegralHeight = false;
             this.shopItem9.ItemHeight = 15;
@@ -403,9 +403,9 @@
             // 
             // shopItem8
             // 
-            this.shopItem8.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem8.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem8.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem8.DropDownHeight = 314;
+            this.shopItem8.DropDownHeight = 317;
             this.shopItem8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem8.IntegralHeight = false;
             this.shopItem8.ItemHeight = 15;
@@ -427,9 +427,9 @@
             // 
             // shopItem7
             // 
-            this.shopItem7.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem7.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem7.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem7.DropDownHeight = 314;
+            this.shopItem7.DropDownHeight = 317;
             this.shopItem7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem7.IntegralHeight = false;
             this.shopItem7.ItemHeight = 15;
@@ -451,9 +451,9 @@
             // 
             // shopItem6
             // 
-            this.shopItem6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem6.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem6.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem6.DropDownHeight = 314;
+            this.shopItem6.DropDownHeight = 317;
             this.shopItem6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem6.IntegralHeight = false;
             this.shopItem6.ItemHeight = 15;
@@ -475,9 +475,9 @@
             // 
             // shopItem5
             // 
-            this.shopItem5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem5.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem5.DropDownHeight = 314;
+            this.shopItem5.DropDownHeight = 317;
             this.shopItem5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem5.IntegralHeight = false;
             this.shopItem5.ItemHeight = 15;
@@ -499,9 +499,9 @@
             // 
             // shopItem4
             // 
-            this.shopItem4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem4.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem4.DropDownHeight = 314;
+            this.shopItem4.DropDownHeight = 317;
             this.shopItem4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem4.IntegralHeight = false;
             this.shopItem4.ItemHeight = 15;
@@ -523,9 +523,9 @@
             // 
             // shopItem3
             // 
-            this.shopItem3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem3.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem3.DropDownHeight = 314;
+            this.shopItem3.DropDownHeight = 317;
             this.shopItem3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem3.IntegralHeight = false;
             this.shopItem3.ItemHeight = 15;
@@ -547,9 +547,9 @@
             // 
             // shopItem2
             // 
-            this.shopItem2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem2.DropDownHeight = 314;
+            this.shopItem2.DropDownHeight = 317;
             this.shopItem2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem2.IntegralHeight = false;
             this.shopItem2.ItemHeight = 15;
@@ -571,9 +571,9 @@
             // 
             // shopItem1
             // 
-            this.shopItem1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shopItem1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.shopItem1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopItem1.DropDownHeight = 314;
+            this.shopItem1.DropDownHeight = 317;
             this.shopItem1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopItem1.IntegralHeight = false;
             this.shopItem1.ItemHeight = 15;
@@ -756,40 +756,41 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.shopName,
             this.shopLabel});
+            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(272, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(250, 43);
             this.toolStrip1.TabIndex = 472;
             // 
             // shopName
             // 
             this.shopName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.shopName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.shopName.DropDownHeight = 506;
+            this.shopName.DropDownHeight = 497;
             this.shopName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shopName.DropDownWidth = 250;
             this.shopName.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shopName.ItemHeight = 15;
-            this.shopName.Location = new System.Drawing.Point(7, 1);
+            this.shopName.Location = new System.Drawing.Point(0, 0);
             this.shopName.Name = "shopName";
             this.shopName.SelectedIndex = -1;
             this.shopName.SelectedItem = null;
-            this.shopName.Size = new System.Drawing.Size(140, 22);
+            this.shopName.Size = new System.Drawing.Size(250, 19);
             this.shopName.SelectedIndexChanged += new System.EventHandler(this.shopName_SelectedIndexChanged);
             this.shopName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.shopName_DrawItem);
             // 
             // shopLabel
             // 
             this.shopLabel.Name = "shopLabel";
-            this.shopLabel.Size = new System.Drawing.Size(115, 25);
+            this.shopLabel.Size = new System.Drawing.Size(248, 21);
             this.shopLabel.TextChanged += new System.EventHandler(this.shopLabel_TextChanged);
             // 
             // Shops
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 518);
+            this.ClientSize = new System.Drawing.Size(250, 517);
             this.ControlBox = false;
             this.Controls.Add(this.panel192);
             this.Controls.Add(this.panel194);

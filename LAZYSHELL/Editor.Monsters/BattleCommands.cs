@@ -273,12 +273,11 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         public override string ToString()
         {
             string name;
-
-            if (commandData[1] == 0xFB) name = "{Do nothing}";
-            else name = "[" + commandData[1].ToString("d3") + "]  " + names.GetNameByNum(commandData[1]);
-
+            if (commandData[1] == 0xFB)
+                name = "{Do nothing}";
+            else
+                name = "[" + commandData[1].ToString("d3") + "]  " + names.GetNameByNum(commandData[1], 1);
             name = name.Trim('\x20');
-
             return "Do 1 spell:  " + name;
         }
 
@@ -581,7 +580,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             for (int i = 0; i < 3; i++)
             {
                 if (commandData[i + 1] == 0xFB) name[i] = "{Do nothing}";
-                else name[i] = "[" + commandData[i + 1].ToString("d3") + "]  " + names.GetNameByNum(commandData[i + 1]);
+                else name[i] = "[" + commandData[i + 1].ToString("d3") + "]  " + names.GetNameByNum(commandData[i + 1], 1);
                 name[i] = name[i].Trim('\x20');
             }
 

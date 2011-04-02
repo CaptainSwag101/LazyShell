@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class FormationsEditor : Form
     {
-        private Model model = State.Instance.Model;
+        private long checksum;
         private Formations formationsEditor;
         private FormationPacks packsEditor;
         private Settings settings = Settings.Default;
@@ -39,19 +39,23 @@ namespace LAZYSHELL
             panel1.Controls.Add(formationsEditor);
             formationsEditor.Visible = true;
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
+            //
+            checksum = Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics);
         }
         // tooltips
         public void Assemble()
         {
-            foreach (Formation f in model.Formations)
+            foreach (Formation f in Model.Formations)
                 f.Assemble();
-            foreach (FormationPack fp in model.FormationPacks)
+            foreach (FormationPack fp in Model.FormationPacks)
                 fp.Assemble();
-            for (int i = 0; i < model.FormationMusics.Length; i++)
-                model.Data[0x029F51 + i] = model.FormationMusics[i];
+            for (int i = 0; i < Model.FormationMusics.Length; i++)
+                Model.Data[0x029F51 + i] = Model.FormationMusics[i];
         }
         private void FormationsEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics) == checksum)
+                goto Close;
             DialogResult result = MessageBox.Show(
                 "Formations have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -59,15 +63,16 @@ namespace LAZYSHELL
                 Assemble();
             else if (result == DialogResult.No)
             {
-                model.Formations = null;
-                model.FormationMusics = null;
-                model.FormationPacks = null;
+                Model.Formations = null;
+                Model.FormationMusics = null;
+                Model.FormationPacks = null;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
+        Close:
             formationsEditor.searchWindow.Close();
             packsEditor.searchWindow.Close();
         }
@@ -77,30 +82,30 @@ namespace LAZYSHELL
         }
         private void importFormationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Formations, formationsEditor.Index, "IMPORT FORMATIONS...").ShowDialog();
+            new IOElements((Element[])Model.Formations, formationsEditor.Index, "IMPORT FORMATIONS...").ShowDialog();
             formationsEditor.RefreshFormations();
         }
         private void importPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.FormationPacks, packsEditor.Index, "IMPORT PACKS...").ShowDialog();
+            new IOElements((Element[])Model.FormationPacks, packsEditor.Index, "IMPORT PACKS...").ShowDialog();
             packsEditor.RefreshFormationPacks();
         }
         private void exportFormationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Formations, formationsEditor.Index, "EXPORT FORMATIONS...").ShowDialog();
+            new IOElements((Element[])Model.Formations, formationsEditor.Index, "EXPORT FORMATIONS...").ShowDialog();
         }
         private void exportPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.FormationPacks, packsEditor.Index, "EXPORT PACKS...").ShowDialog();
+            new IOElements((Element[])Model.FormationPacks, packsEditor.Index, "EXPORT PACKS...").ShowDialog();
         }
         private void clearFormationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ClearElements(model.Formations, formationsEditor.Index, "CLEAR FORMATIONS...").ShowDialog();
+            new ClearElements(Model.Formations, formationsEditor.Index, "CLEAR FORMATIONS...").ShowDialog();
             formationsEditor.RefreshFormations();
         }
         private void clearPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ClearElements(model.FormationPacks, packsEditor.Index, "CLEAR PACKS...").ShowDialog();
+            new ClearElements(Model.FormationPacks, packsEditor.Index, "CLEAR PACKS...").ShowDialog();
             packsEditor.RefreshFormationPacks();
         }
         private void showFormations_Click(object sender, EventArgs e)
@@ -110,6 +115,24 @@ namespace LAZYSHELL
         private void showPacks_Click(object sender, EventArgs e)
         {
             packsEditor.Visible = showPacks.Checked;
+        }
+
+        private void resetFormationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current formation. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            formationsEditor.Formation = new Formation(Model.Data, formationsEditor.Index);
+            formationsEditor.RefreshFormations();
+        }
+
+        private void resetPackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current pack. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            packsEditor.Pack = new FormationPack(Model.Data, packsEditor.Index);
+            packsEditor.RefreshFormationPacks();
         }
     }
 }

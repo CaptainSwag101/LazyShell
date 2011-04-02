@@ -16,14 +16,14 @@ namespace LAZYSHELL
     public partial class Effects : Form
     {
         #region Variables
+        private long checksum;
         // main
         private delegate void Function();
-        private Model model = State.Instance.Model;
         private Overlay overlay = new Overlay();
         private State state = State.Instance;
         private bool updating = false;
-        private Effect[] effects { get { return model.Effects; } set { model.Effects = value; } }
-        private E_Animation[] animations { get { return model.E_animations; } set { model.E_animations = value; } }
+        private Effect[] effects { get { return Model.Effects; } set { Model.Effects = value; } }
+        private E_Animation[] animations { get { return Model.E_animations; } set { Model.E_animations = value; } }
         private int availableBytes = 0;
         // indexed variables
         public int index { get { return (int)number.Value; } set { number.Value = value; } }
@@ -86,6 +86,8 @@ namespace LAZYSHELL
             openSequences.Checked = true;
             sequences.Visible = true;
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
+            //
+            checksum = Do.GenerateChecksum(animations, effects);
         }
         private void RefreshEffectsEditor()
         {
@@ -127,7 +129,7 @@ namespace LAZYSHELL
                 length += animations[i].SM.Length;
             availableBytes = totalSize - length;
             e_availableBytes.BackColor = availableBytes > 0 ? Color.Lime : Color.Red;
-            e_availableBytes.Text = "AVAILABLE BYTES: " + availableBytes.ToString();
+            e_availableBytes.Text = availableBytes.ToString() + " bytes free";
         }
         private void Assemble()
         {
@@ -140,9 +142,9 @@ namespace LAZYSHELL
             {
                 if (animations[i].SM.Length + offset > 0x33FFFF)
                     break;
-                Bits.SetShort(model.Data, pointer, (ushort)offset);
-                Bits.SetByte(model.Data, pointer + 2, (byte)((offset >> 16) + 0xC0));
-                Bits.SetByteArray(model.Data, offset, animations[i].SM);
+                Bits.SetShort(Model.Data, pointer, (ushort)offset);
+                Bits.SetByte(Model.Data, pointer + 2, (byte)((offset >> 16) + 0xC0));
+                Bits.SetByteArray(Model.Data, offset, animations[i].SM);
                 offset += animations[i].SM.Length;
             }
             if (i < 39)
@@ -152,9 +154,9 @@ namespace LAZYSHELL
             {
                 if (animations[i].SM.Length + offset > 0x34CFFF)
                     break;
-                Bits.SetShort(model.Data, pointer, (ushort)offset);
-                Bits.SetByte(model.Data, pointer + 2, (byte)((offset >> 16) + 0xC0));
-                Bits.SetByteArray(model.Data, offset, animations[i].SM);
+                Bits.SetShort(Model.Data, pointer, (ushort)offset);
+                Bits.SetByte(Model.Data, pointer + 2, (byte)((offset >> 16) + 0xC0));
+                Bits.SetByteArray(Model.Data, offset, animations[i].SM);
                 offset += animations[i].SM.Length;
             }
             if (i < 64)
@@ -285,6 +287,7 @@ namespace LAZYSHELL
             sequences.InvalidateImages();
             LoadGraphicEditor();
             molds.LoadTileEditor();
+            checksum--;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {
@@ -299,6 +302,8 @@ namespace LAZYSHELL
         #region Event handlers
         private void Effects_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Do.GenerateChecksum(animations, effects) == checksum)
+                goto Close;
             DialogResult result = MessageBox.Show(
                 "Effects have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -306,14 +311,15 @@ namespace LAZYSHELL
                 Assemble();
             else if (result == DialogResult.No)
             {
-                model.Effects = null;
-                model.E_animations = null;
+                Model.Effects = null;
+                Model.E_animations = null;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
+        Close:
             paletteEditor.Close();
             graphicEditor.Close();
             searchWindow.Close();
@@ -452,5 +458,15 @@ namespace LAZYSHELL
             RefreshEffectsEditor();
         }
         #endregion
+
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current effect and animation index. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            animation = new E_Animation(Model.Data, effect.AnimationPacket);
+            effect = new Effect(Model.Data, index);
+            number_ValueChanged(null, null);
+        }
     }
 }

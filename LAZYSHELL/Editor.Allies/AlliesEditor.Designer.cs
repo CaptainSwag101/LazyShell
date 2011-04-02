@@ -65,7 +65,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(726, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(682, 25);
             this.toolStrip3.TabIndex = 447;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -179,7 +179,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(726, 542);
+            this.panel1.Size = new System.Drawing.Size(682, 526);
             this.panel1.TabIndex = 448;
             // 
             // toolTip1
@@ -190,7 +190,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(726, 567);
+            this.ClientSize = new System.Drawing.Size(682, 551);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

@@ -33,7 +33,7 @@ namespace LAZYSHELL
 
         private byte tileMapL1; public byte TileMapL1 { get { return tileMapL1; } set { tileMapL1 = value; } }
         private byte tileMapL2; public byte TileMapL2 { get { return tileMapL2; } set { tileMapL2 = value; } }
-        private byte physicalMap; public byte PhysicalMap { get { return physicalMap; } set { physicalMap = value; } }
+        private byte solidityMap; public byte SolidityMap { get { return solidityMap; } set { solidityMap = value; } }
 
         private byte paletteSet; public byte PaletteSet { get { return paletteSet; } set { paletteSet = value; } }
 
@@ -84,7 +84,7 @@ namespace LAZYSHELL
 
             tileMapL1 = data[offset]; offset++;
             tileMapL2 = data[offset]; offset++;
-            physicalMap = data[offset]; offset++;
+            solidityMap = data[offset]; offset++;
             paletteSet = data[offset]; offset++;
             graphicSetL3 = data[offset]; offset++;
             tileSetL3 = data[offset]; offset++;
@@ -139,7 +139,7 @@ namespace LAZYSHELL
 
             Bits.SetByte(data, offset, tileMapL1); offset++;
             Bits.SetByte(data, offset, tileMapL2); offset++;
-            Bits.SetByte(data, offset, physicalMap); offset++;
+            Bits.SetByte(data, offset, solidityMap); offset++;
             Bits.SetByte(data, offset, paletteSet); offset++;
             Bits.SetByte(data, offset, graphicSetL3); offset++;
             Bits.SetByte(data, offset, tileSetL3); offset++;
@@ -158,7 +158,7 @@ namespace LAZYSHELL
             this.topPriorityL3 = false;
             this.tileMapL1 = 0;
             this.tileMapL2 = 0;
-            this.physicalMap = 0;
+            this.solidityMap = 0;
             this.paletteSet = 0;
             this.graphicSetL3 = 0;
             this.tileSetL3 = 0;

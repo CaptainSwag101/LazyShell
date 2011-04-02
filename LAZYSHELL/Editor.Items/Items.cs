@@ -11,11 +11,11 @@ namespace LAZYSHELL
 {
     public partial class Items : Form
     {
-        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         private bool updating = false;
-        private Item[] items { get { return model.Items; } set { model.Items = value; } }
+        private Item[] items { get { return Model.Items; } set { Model.Items = value; } }
         private Item item { get { return items[index]; } set { items[index] = value; } }
+        public Item Item { get { return item; } set { item = value; } }
         private int index { get { return (int)itemNum.Value; } set { itemNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
         private bool textCodeFormat { get { return !byteOrText.Checked; } set { byteOrText.Checked = !value; } }
@@ -30,13 +30,14 @@ namespace LAZYSHELL
             this.settings.KeystrokesMenu[0x20] = "\x20";
             this.settings.KeystrokesDesc[0x20] = "\x20";
             InitializeComponent();
+            itemName.BackgroundImage = Model.MenuBackground;
             InitializeStrings();
             RefreshItems();
         }
         private void InitializeStrings()
         {
             this.itemName.Items.Clear();
-            this.itemName.Items.AddRange(this.model.ItemNames.Names);
+            this.itemName.Items.AddRange(Model.ItemNames.Names);
             string[] temp = new string[96];
             for (int i = 0; i < 96; i++)
                 temp[i] = i.ToString();
@@ -48,7 +49,7 @@ namespace LAZYSHELL
             Cursor.Current = Cursors.WaitCursor;
             if (updating) return;
             updating = true;
-            this.itemName.SelectedIndex = model.ItemNames.GetIndexFromNum(index);
+            this.itemName.SelectedIndex = Model.ItemNames.GetIndexFromNum(index);
             this.itemName.Invalidate();
             this.itemCoinValue.Value = item.CoinValue;
             this.itemSpeed.Value = item.Speed;
@@ -63,7 +64,7 @@ namespace LAZYSHELL
             this.textBoxItemName.Text = Do.RawToASCII(item.Name, settings.KeystrokesMenu).Substring(1);
             if (this.itemNum.Value > 0xB0)
             {
-                this.textBoxItemDescription.Text = "This item cannot have a description";
+                this.textBoxItemDescription.Text = " This item[1] cannot have a[1] description";
                 this.panelItemDesc.Enabled = false;
             }
             else
@@ -154,22 +155,22 @@ namespace LAZYSHELL
             if (item.ItemType == 3)
             {
                 int[] pixels = menuDescPreview.GetPreview(
-                    model.FontDescription, model.FontPaletteMenu.Palette,
+                    Model.FontDescription, Model.FontPaletteMenu.Palette,
                     item.RawDescription,
                     new Size(120, 48), new Point(8, 8), 4);
                 descriptionText = new Bitmap(Do.PixelsToImage(pixels, 120, 48));
                 descriptionFrame = Do.PixelsToImage(
-                    Do.DrawMenuFrame(new Size(15, 6), model.MenuFrame, model.MenuFramePalette.Palette), 120, 48);
+                    Do.DrawMenuFrame(new Size(15, 6), Model.MenuFrame, Model.MenuFramePalette.Palette), 120, 48);
             }
             else
             {
                 int[] pixels = menuDescPreview.GetPreview(
-                    model.FontDescription, model.FontPaletteMenu.Palette,
+                    Model.FontDescription, Model.FontPaletteMenu.Palette,
                     item.RawDescription,
                     new Size(136, 64), new Point(16, 16), 4);
                 descriptionText = new Bitmap(Do.PixelsToImage(pixels, 136, 64));
                 descriptionFrame = Do.PixelsToImage(
-                    Do.DrawMenuFrame(new Size(17, 8), model.MenuFrame, model.MenuFramePalette.Palette), 136, 64);
+                    Do.DrawMenuFrame(new Size(17, 8), Model.MenuFrame, Model.MenuFramePalette.Palette), 136, 64);
             }
             pictureBoxItemDesc.Invalidate();
         }
@@ -453,14 +454,14 @@ namespace LAZYSHELL
         }
         private void itemName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            itemNum.Value = model.ItemNames.GetNumFromIndex(itemName.SelectedIndex);
+            itemNum.Value = Model.ItemNames.GetNumFromIndex(itemName.SelectedIndex);
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
             Do.DrawName(
-                sender, e, new BattleDialoguePreview(), model.ItemNames, model.FontMenu,
-                model.FontPaletteBattle.Palette, 8, 10, 0, 128, false, false);
+                sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
+                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
         }
         private void textBoxItemName_TextChanged(object sender, EventArgs e)
         {
@@ -472,32 +473,32 @@ namespace LAZYSHELL
             if (item.Name != raw)
             {
                 item.Name = raw;
-                model.ItemNames.SwapName(
+                Model.ItemNames.SwapName(
                     item.Index,
                     new string(item.Name));
-                model.ItemNames.SortAlpha();
+                Model.ItemNames.SortAlpha();
                 this.itemName.Items.Clear();
-                this.itemName.Items.AddRange(model.ItemNames.GetNames());
-                this.itemName.SelectedIndex = model.ItemNames.GetIndexFromNum(item.Index);
+                this.itemName.Items.AddRange(Model.ItemNames.GetNames());
+                this.itemName.SelectedIndex = Model.ItemNames.GetIndexFromNum(item.Index);
                 shopsEditor.ResortStrings();
             }
         }
         private void itemNameIcon_SelectedIndexChanged(object sender, EventArgs e)
         {
             item.Name[0] = (char)(itemNameIcon.SelectedIndex + 0x20);
-            if (model.ItemNames.GetNameByNum(index).CompareTo(this.textBoxItemName.Text) != 0)
+            if (Model.ItemNames.GetNameByNum(index).CompareTo(this.textBoxItemName.Text) != 0)
             {
-                model.ItemNames.SwapName(
+                Model.ItemNames.SwapName(
                     item.Index, new string(item.Name));
-                model.ItemNames.SortAlpha();
+                Model.ItemNames.SortAlpha();
                 this.itemName.Items.Clear();
-                this.itemName.Items.AddRange(model.ItemNames.GetNames());
-                this.itemName.SelectedIndex = model.ItemNames.GetIndexFromNum(item.Index);
+                this.itemName.Items.AddRange(Model.ItemNames.GetNames());
+                this.itemName.SelectedIndex = Model.ItemNames.GetIndexFromNum(item.Index);
             }
         }
         private void itemNameIcon_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Do.DrawIcon(sender, e, new MenuTextPreview(), 32, model.FontMenu, model.FontPaletteBattle.Palette, true);
+            Do.DrawIcon(sender, e, new MenuTextPreview(), 32, Model.FontMenu, Model.FontPaletteMenu.Palette, false, Model.MenuBackground_);
         }
         private void itemCoinValue_ValueChanged(object sender, EventArgs e)
         {
@@ -651,7 +652,7 @@ namespace LAZYSHELL
         }
         private void pictureBoxItemDesc_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(model.MenuBackground, 0, 0);
+            e.Graphics.DrawImage(Model.MenuBackground, 0, 0);
             if (descriptionText == null)
                 SetDescriptionImage();
             e.Graphics.DrawImage(descriptionText, 0, 0);

@@ -6,8 +6,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
 {
     public partial class Interpreter
     {
-        Model model = State.Instance.Model;
-        static Interpreter instance = null; // Our instance
+                static Interpreter instance = null; // Our instance
         static readonly object padlock = new object(); // Ensures only one instance of this object
         Interpreter()
         {

@@ -140,7 +140,7 @@ namespace LAZYSHELL
         /// A tile index is assigned to each pixel;
         /// </summary>
         private int[] moldTilesPerPixel;
-        public int[] MoldTilesPerPixel { get { return moldTilesPerPixel; } }
+        public int[] MoldTilesPerPixel { get { return moldTilesPerPixel; } set { moldTilesPerPixel = value; } }
         public int[] MoldPixels()
         {
             moldTilesPerPixel = new int[256 * 256];
@@ -230,6 +230,8 @@ namespace LAZYSHELL
                     tileA.SubTiles[1] == tileB.SubTiles[1] &&
                     tileA.SubTiles[2] == tileB.SubTiles[2] &&
                     tileA.SubTiles[3] == tileB.SubTiles[3] &&
+                    tileA.Mirror == tileB.Mirror &&
+                    tileA.Invert == tileB.Invert && 
                     activeQuadrants > 2)
                     return true;
                 // if 16-bit and at least 2 active quadrants, make copy since will be saving space
@@ -239,6 +241,8 @@ namespace LAZYSHELL
                         tileA.SubTiles[1] == tileB.SubTiles[1] &&
                         tileA.SubTiles[2] == tileB.SubTiles[2] &&
                         tileA.SubTiles[3] == tileB.SubTiles[3] &&
+                        tileA.Mirror == tileB.Mirror &&
+                        tileA.Invert == tileB.Invert &&
                         activeQuadrants > 1)
                         return true;
             }
@@ -262,12 +266,12 @@ namespace LAZYSHELL
                 int copyOffset = 0;
                 int copyDiffX = 0;
                 int copyDiffY = 0;
-                bool copyDiffMirror = false;
-                bool copyDiffInvert = false;
                 // look through each mold for copies
                 foreach (Mold m in molds)
                 {
+                    // cancel if we've reached the same mold
                     if (m == this) break;
+                    // skip if gridplane; not copyable
                     if (m.Gridplane) continue;
                     counter = 0;
                     // look through all mold's tiles for copies
@@ -286,22 +290,22 @@ namespace LAZYSHELL
                         }
                         copyDiffX = thisTileA.XCoord - tileA.XCoord;
                         copyDiffY = thisTileA.YCoord - tileA.YCoord;
-                        copyDiffMirror = thisTileA.Mirror ^ tileA.Mirror;
-                        copyDiffInvert = thisTileA.Invert ^ tileA.Invert;
                         // first check to see if going to be making a copy of more than one, regardless of active quadrants
                         if (tileB.TileOffset != 0 &&
-                                 thisTileA.SubTiles[0] == tileA.SubTiles[0] &&
-                                 thisTileA.SubTiles[1] == tileA.SubTiles[1] &&
-                                 thisTileA.SubTiles[2] == tileA.SubTiles[2] &&
-                                 thisTileA.SubTiles[3] == tileA.SubTiles[3] &&
-                                 thisTileB.SubTiles[0] == tileB.SubTiles[0] &&
-                                 thisTileB.SubTiles[1] == tileB.SubTiles[1] &&
-                                 thisTileB.SubTiles[2] == tileB.SubTiles[2] &&
-                                 thisTileB.SubTiles[3] == tileB.SubTiles[3] &&
-                                 copyDiffX == thisTileB.XCoord - tileB.XCoord &&
-                                 copyDiffY == thisTileB.YCoord - tileB.YCoord &&
-                                 copyDiffMirror == thisTileB.Mirror ^ tileB.Mirror &&
-                                 copyDiffInvert == thisTileB.Invert ^ tileB.Invert)
+                            thisTileA.SubTiles[0] == tileA.SubTiles[0] &&
+                            thisTileA.SubTiles[1] == tileA.SubTiles[1] &&
+                            thisTileA.SubTiles[2] == tileA.SubTiles[2] &&
+                            thisTileA.SubTiles[3] == tileA.SubTiles[3] &&
+                            thisTileA.Mirror == tileA.Mirror &&
+                            thisTileA.Invert == tileA.Invert &&
+                            thisTileB.SubTiles[0] == tileB.SubTiles[0] &&
+                            thisTileB.SubTiles[1] == tileB.SubTiles[1] &&
+                            thisTileB.SubTiles[2] == tileB.SubTiles[2] &&
+                            thisTileB.SubTiles[3] == tileB.SubTiles[3] &&
+                            thisTileB.Mirror == tileB.Mirror &&
+                            thisTileB.Invert == tileB.Invert && 
+                            copyDiffX == thisTileB.XCoord - tileB.XCoord &&
+                            copyDiffY == thisTileB.YCoord - tileB.YCoord)
                         {
                             // we will be making a copy of at least 2
                             copySize = 2;
@@ -319,10 +323,9 @@ namespace LAZYSHELL
                                    thisTileC.SubTiles[1] == tileC.SubTiles[1] &&
                                    thisTileC.SubTiles[2] == tileC.SubTiles[2] &&
                                    thisTileC.SubTiles[3] == tileC.SubTiles[3] &&
+                                   thisTileC.Mirror == tileC.Mirror && 
                                    copyDiffX == thisTileC.XCoord - tileC.XCoord &&
-                                   copyDiffY == thisTileC.YCoord - tileC.YCoord &&
-                                   copyDiffMirror == thisTileC.Mirror ^ tileC.Mirror &&
-                                   copyDiffInvert == thisTileC.Invert ^ tileC.Invert)
+                                   copyDiffY == thisTileC.YCoord - tileC.YCoord)
                             {
                                 // stop adding copies if the tile doesn't have an offset
                                 // it is probably a copy itself, so we shouldn't add it
@@ -352,8 +355,6 @@ namespace LAZYSHELL
                             copyOffset = tileA.TileOffset;
                             copyDiffX = thisTileA.XCoord - tileA.XCoord;
                             copyDiffY = thisTileA.YCoord - tileA.YCoord;
-                            copyDiffMirror = thisTileA.Mirror ^ tileA.Mirror;
-                            copyDiffInvert = thisTileA.Invert ^ tileA.Invert;
                             copySize++;
                             // move for next tile
                             thisCounter++;
@@ -373,8 +374,6 @@ namespace LAZYSHELL
                 if (copySize > 0)
                 {
                     mold[offset] = 2;
-                    Bits.SetBit(mold, offset, 2, copyDiffMirror);
-                    Bits.SetBit(mold, offset, 3, copyDiffInvert);
                     mold[offset] |= (byte)(copySize << 4);
                     mold[offset + 1] = (byte)copyDiffY;
                     mold[offset + 2] = (byte)copyDiffX;
@@ -515,8 +514,13 @@ namespace LAZYSHELL
             {
                 is16bit = false;
                 foreach (ushort subTile in subTiles)
+                {
+                    tileSize = 3;
+                    if (subTile != 0)
+                        tileSize++;
                     if (subTile >= 0x100)
                         is16bit = true;
+                }
                 if (gridplane)
                 {
                     tileSize = 1;
@@ -746,7 +750,7 @@ namespace LAZYSHELL
                 }
                 else
                 {
-                    empty.TileSize = 4;
+                    empty.TileSize = 3;
                     empty.SubTiles = new ushort[4];
                     empty.XCoord = 0x80;
                     empty.YCoord = 0x80;
@@ -760,7 +764,7 @@ namespace LAZYSHELL
                 copy.Invert = invert;
                 copy.Is16bit = is16bit;
                 copy.Mirror = mirror;
-                copy.SubTiles = subTiles;
+                copy.SubTiles = Bits.Copy(subTiles);
                 copy.TileFormat = tileFormat;
                 copy.TileOffset = tileOffset;
                 copy.TileSize = tileSize;

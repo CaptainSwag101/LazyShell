@@ -25,7 +25,7 @@ namespace LAZYSHELL.DataStructures
 
                 return this.buf[this.Index++];
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("StreamBuf out of data.\nSize: " + this.buf.Length + "\nRequested Index: " + Index);
             }
@@ -36,7 +36,7 @@ namespace LAZYSHELL.DataStructures
             {
                 return Bits.GetShort(this.buf, offset);
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("StreamBuf out of data.\nSize: " + this.buf.Length + "\nRequested Index: " + Index);
             }
@@ -47,7 +47,7 @@ namespace LAZYSHELL.DataStructures
             {
                 return this.buf[offset];
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("StreamBuf out of data.\nSize: " + this.buf.Length + "\nRequested Index: " + offset);
             }
@@ -79,7 +79,7 @@ namespace LAZYSHELL.DataStructures
             {
                 this.buf[offset] = b;
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("StreamBuf out of data.\nSize: " + this.buf.Length + "\nRequested Index: " + Index);
             }
@@ -94,7 +94,7 @@ namespace LAZYSHELL.DataStructures
             {
                 this.buf[this.Index++] = b;
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("StreamBuf out of data.\nSize: " + this.buf.Length + "\nRequested Index: " + Index);
             }

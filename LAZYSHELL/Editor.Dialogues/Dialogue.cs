@@ -11,6 +11,7 @@ namespace LAZYSHELL
     [Serializable()]
     public class Dialogue : Element
     {
+        [NonSerialized()]
         private byte[] data;
         public override byte[] Data { get { return data; } set { data = value; } }
         public override int Index { get { return index; } set { index = value; } }
@@ -22,6 +23,7 @@ namespace LAZYSHELL
         private bool error = false;
         private int caretPositionSymbol;
         private int caretPositionNotSymbol;
+        [NonSerialized()]
         private TextHelper textHelper;
 
         private int duplicateDialogues; public int DuplicateDialogues { get { return duplicateDialogues; } set { duplicateDialogues = value; } }

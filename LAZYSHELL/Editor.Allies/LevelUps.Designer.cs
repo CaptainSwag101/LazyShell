@@ -66,6 +66,7 @@
             this.label124 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.characterName = new LAZYSHELL.ToolStripComboBox();
+            this.reset = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.levelNum = new System.Windows.Forms.NumericUpDown();
@@ -101,7 +102,7 @@
             this.panel230.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel230.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel230.Controls.Add(this.panel231);
-            this.panel230.Location = new System.Drawing.Point(12, 318);
+            this.panel230.Location = new System.Drawing.Point(1, 302);
             this.panel230.Name = "panel230";
             this.panel230.Size = new System.Drawing.Size(220, 40);
             this.panel230.TabIndex = 6;
@@ -150,9 +151,9 @@
             // 
             // levelUpSpellLearned
             // 
-            this.levelUpSpellLearned.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.levelUpSpellLearned.BackColor = System.Drawing.SystemColors.ControlDark;
             this.levelUpSpellLearned.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.levelUpSpellLearned.DropDownHeight = 314;
+            this.levelUpSpellLearned.DropDownHeight = 317;
             this.levelUpSpellLearned.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.levelUpSpellLearned.DropDownWidth = 150;
             this.levelUpSpellLearned.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -171,7 +172,7 @@
             this.panel49.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel49.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel49.Controls.Add(this.panel44);
-            this.panel49.Location = new System.Drawing.Point(12, 200);
+            this.panel49.Location = new System.Drawing.Point(1, 188);
             this.panel49.Name = "panel49";
             this.panel49.Size = new System.Drawing.Size(220, 112);
             this.panel49.TabIndex = 7;
@@ -338,7 +339,7 @@
             this.panel48.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel48.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel48.Controls.Add(this.panel43);
-            this.panel48.Location = new System.Drawing.Point(12, 82);
+            this.panel48.Location = new System.Drawing.Point(1, 74);
             this.panel48.Name = "panel48";
             this.panel48.Size = new System.Drawing.Size(220, 112);
             this.panel48.TabIndex = 5;
@@ -505,7 +506,7 @@
             this.panel197.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel197.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel197.Controls.Add(this.panel101);
-            this.panel197.Location = new System.Drawing.Point(12, 55);
+            this.panel197.Location = new System.Drawing.Point(1, 51);
             this.panel197.Name = "panel197";
             this.panel197.Size = new System.Drawing.Size(220, 21);
             this.panel197.TabIndex = 4;
@@ -550,11 +551,12 @@
             this.toolStrip1.CanOverflow = false;
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.characterName});
+            this.characterName,
+            this.reset});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(244, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(222, 25);
             this.toolStrip1.TabIndex = 473;
             // 
             // characterName
@@ -563,22 +565,33 @@
             this.characterName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.characterName.DropDownHeight = 506;
             this.characterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.characterName.DropDownWidth = 230;
+            this.characterName.DropDownWidth = 120;
             this.characterName.ItemHeight = 15;
             this.characterName.Location = new System.Drawing.Point(7, 1);
             this.characterName.Name = "characterName";
             this.characterName.SelectedIndex = -1;
             this.characterName.SelectedItem = null;
-            this.characterName.Size = new System.Drawing.Size(225, 22);
+            this.characterName.Size = new System.Drawing.Size(190, 22);
             this.characterName.SelectedIndexChanged += new System.EventHandler(this.characterName_SelectedIndexChanged);
             this.characterName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.characterName_DrawItem);
+            // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.ToolTipText = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(12, 28);
+            this.panel1.Location = new System.Drawing.Point(1, 28);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(220, 21);
             this.panel1.TabIndex = 4;
@@ -637,7 +650,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 370);
+            this.ClientSize = new System.Drawing.Size(222, 343);
             this.ControlBox = false;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel230);
@@ -726,5 +739,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.NumericUpDown levelNum;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripButton reset;
     }
 }

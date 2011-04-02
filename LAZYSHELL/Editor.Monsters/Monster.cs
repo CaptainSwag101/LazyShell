@@ -12,9 +12,9 @@ namespace LAZYSHELL
     public class Monster : Element
     {
         [NonSerialized()]
-        private byte[] data; 
+        private byte[] data;
         public override byte[] Data { get { return this.data; } set { this.data = value; } }
-        public override int Index { get { return index;} set { index = value;} }
+        public override int Index { get { return index; } set { index = value; } }
         #region Monster Stats
         private int index;
         private char[] name;
@@ -75,7 +75,7 @@ namespace LAZYSHELL
             this.psychoMsgError = textHelperReduced.Error;
             return !psychoMsgError;
         }
-        public string GetPsychoMsg(bool symbols) { if (!psychoMsgError) return new string(textHelperReduced.DecodeText(psychoMsg, symbols,0)); else return new string(psychoMsg); }
+        public string GetPsychoMsg(bool symbols) { if (!psychoMsgError) return new string(textHelperReduced.DecodeText(psychoMsg, symbols, 0)); else return new string(psychoMsg); }
         public char[] RawPsychoMsg { get { return this.psychoMsg; } }
         public bool PsychoMsgError { get { return this.psychoMsgError; } set { this.psychoMsgError = value; } }
         public ushort HP { get { return this.hp; } set { this.hp = value; } }
@@ -112,16 +112,16 @@ namespace LAZYSHELL
         public bool EffectScarecrowNull { get { return this.effectScarecrowNull; } set { this.effectScarecrowNull = value; } }
         public bool EffectInvincibleNull { get { return this.effectInvincibleNull; } set { this.effectInvincibleNull = value; } }
         public bool Invincible { get { return this.invincible; } set { this.invincible = value; } }
-        public bool ProtectAgainstInstantDeath { get { return this.protectAgainstInstantDeath; } set { this.protectAgainstInstantDeath = value; } }
-        public bool LetBattleScriptRemove { get { return this.letBattleScriptRemove; } set { this.letBattleScriptRemove = value; } }
-        public bool UsedByCrystals { get { return this.usedByCrystals; } set { this.usedByCrystals = value; } }
+        public bool MortalityProtection { get { return this.protectAgainstInstantDeath; } set { this.protectAgainstInstantDeath = value; } }
+        public bool DisableAutoDeath { get { return this.letBattleScriptRemove; } set { this.letBattleScriptRemove = value; } }
+        public bool Palette2bpp { get { return this.usedByCrystals; } set { this.usedByCrystals = value; } }
         public byte MorphSuccessRate { get { return this.morphSuccessRate; } set { this.morphSuccessRate = value; } }
         public byte FlowerBonus { get { return this.flowerBonus; } set { this.flowerBonus = value; } }
         public byte FlowerOdds { get { return this.flowerOdds; } set { this.flowerOdds = value; } }
         public byte EntranceStyle { get { return this.entranceStyle; } set { this.entranceStyle = value; } }
         public byte CoinSize { get { return this.coinSize; } set { this.coinSize = value; } }
         public byte Elevation { get { return this.elevation; } set { this.elevation = value; } }
-        public byte DeathAnimation { get { return this.deathAnimation; } set { this.deathAnimation = value; } }
+        public byte SpriteBehavior { get { return this.deathAnimation; } set { this.deathAnimation = value; } }
         public byte StrikeSound { get { return this.strikeSound; } set { this.strikeSound = value; } }
         public byte OtherSound { get { return this.otherSound; } set { this.otherSound = value; } }
 

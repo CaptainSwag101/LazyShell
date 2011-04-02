@@ -25,6 +25,7 @@ namespace LAZYSHELL
         private int index;
         private byte currentLevel = 2;
         private Level[] levels;
+        public Level[] Levels { get { return levels; } }
 
         private char[] name;
         private byte startingLevel;
@@ -321,11 +322,12 @@ namespace LAZYSHELL
             Bits.SetCharArray(data, 0x3a134d + (index * 10), name);
         }
         [Serializable()]
-        class Level
+        public class Level
         {
             [NonSerialized()]
             private byte[] data; public byte[] Data { get { return this.data; } set { this.data = value; } }
             private byte index;
+            public byte Index { get { return index; } }
             private int characterOwner;
 
             private ushort expNeeded; public ushort ExpNeeded { get { return this.expNeeded; } set { this.expNeeded = value; } }

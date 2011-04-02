@@ -44,7 +44,6 @@ namespace LAZYSHELL
             this.openAttacks = new System.Windows.Forms.ToolStripButton();
             this.openAudio = new System.Windows.Forms.ToolStripButton();
             this.openBattlefields = new System.Windows.Forms.ToolStripButton();
-            this.openBattleScripts = new System.Windows.Forms.ToolStripButton();
             this.openDialogues = new System.Windows.Forms.ToolStripButton();
             this.openEffects = new System.Windows.Forms.ToolStripButton();
             this.openEventScripts = new System.Windows.Forms.ToolStripButton();
@@ -74,6 +73,7 @@ namespace LAZYSHELL
             this.showROMInfo = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.hexViewer = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.openAll = new System.Windows.Forms.ToolStripButton();
@@ -212,7 +212,6 @@ namespace LAZYSHELL
             this.openAttacks,
             this.openAudio,
             this.openBattlefields,
-            this.openBattleScripts,
             this.openDialogues,
             this.openEffects,
             this.openEventScripts,
@@ -230,7 +229,7 @@ namespace LAZYSHELL
             this.toolStrip2.Location = new System.Drawing.Point(0, 104);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(96, 457);
+            this.toolStrip2.Size = new System.Drawing.Size(96, 434);
             this.toolStrip2.TabIndex = 329;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -298,19 +297,6 @@ namespace LAZYSHELL
             this.openBattlefields.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openBattlefields.ToolTipText = "Edit battle / monster formation backgrounds";
             this.openBattlefields.Click += new System.EventHandler(this.openBattlefields_Click);
-            // 
-            // openBattleScripts
-            // 
-            this.openBattleScripts.Image = global::LAZYSHELL.Properties.Resources.mainBattleScripts;
-            this.openBattleScripts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openBattleScripts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openBattleScripts.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openBattleScripts.Name = "openBattleScripts";
-            this.openBattleScripts.Size = new System.Drawing.Size(94, 22);
-            this.openBattleScripts.Text = "Battle Scripts";
-            this.openBattleScripts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openBattleScripts.ToolTipText = "Edit monster battle script commands";
-            this.openBattleScripts.Click += new System.EventHandler(this.openBattleScripts_Click);
             // 
             // openDialogues
             // 
@@ -487,7 +473,7 @@ namespace LAZYSHELL
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(96, 129);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(487, 432);
+            this.panel2.Size = new System.Drawing.Size(487, 409);
             this.panel2.TabIndex = 333;
             // 
             // toolStrip4
@@ -507,6 +493,7 @@ namespace LAZYSHELL
             this.showROMInfo,
             this.toolStripButton4,
             this.toolStripSeparator4,
+            this.hexViewer,
             this.toolStripButton5});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
@@ -637,6 +624,17 @@ namespace LAZYSHELL
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
+            // hexViewer
+            // 
+            this.hexViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hexViewer.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
+            this.hexViewer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.hexViewer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.hexViewer.Name = "hexViewer";
+            this.hexViewer.Size = new System.Drawing.Size(23, 22);
+            this.hexViewer.Text = "Open Hex Editor";
+            this.hexViewer.Click += new System.EventHandler(this.hexViewer_Click);
+            // 
             // toolStripButton5
             // 
             this.toolStripButton5.Image = global::LAZYSHELL.Properties.Resources.about_small;
@@ -766,7 +764,7 @@ namespace LAZYSHELL
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 561);
+            this.ClientSize = new System.Drawing.Size(583, 538);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.toolStrip2);
@@ -826,7 +824,6 @@ namespace LAZYSHELL
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripButton openAnimations;
-        private System.Windows.Forms.ToolStripButton openBattleScripts;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton saveToolStripMenuItem;
@@ -854,6 +851,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton openAudio;
+        private System.Windows.Forms.ToolStripButton hexViewer;
     }
 }
 

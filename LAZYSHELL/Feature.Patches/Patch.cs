@@ -70,7 +70,7 @@ namespace LAZYSHELL.Patches
                 Stream st = client.OpenRead(settings.patchServerURL + "patch" + patchNum.ToString() + "\\" + imageName);
                 patchImage = new Bitmap(st);
             }
-            catch (Exception ex)
+            catch
             {
                 patchImage = null;
             }

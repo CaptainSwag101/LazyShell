@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -16,13 +17,15 @@ namespace LAZYSHELL
     public partial class BattleScripts : Form
     {
         #region Variables
-        private Model model = State.Instance.Model;
-        private BattleScript[] battleScripts { get { return model.BattleScripts; } set { model.BattleScripts = value; } }
+        private long checksum;
+                private Monsters monsterEditor;
+        private BattleScript[] battleScripts { get { return Model.BattleScripts; } set { Model.BattleScripts = value; } }
         private BattleScript battleScript { get { return battleScripts[index]; } set { battleScripts[index] = value; } }
-        private DDlistName spellNames { get { return model.SpellNames; } set { model.SpellNames = value; } }
-        private DDlistName attackNames { get { return model.AttackNames; } set { model.AttackNames = value; } }
-        private DDlistName itemNames { get { return model.ItemNames; } set { model.ItemNames = value; } }
-        public int index { get { return (int)monsterNum.Value; } set { monsterNum.Value = value; } }
+        public BattleScript BattleScript { get { return battleScript; } set { battleScript = value; } }
+        private DDlistName spellNames { get { return Model.SpellNames; } set { Model.SpellNames = value; } }
+        private DDlistName attackNames { get { return Model.AttackNames; } set { Model.AttackNames = value; } }
+        private DDlistName itemNames { get { return Model.ItemNames; } set { Model.ItemNames = value; } }
+        public int index { get { return monsterEditor.Index; } set { monsterEditor.Index = value; } }
         private bool updatingProperties = false;
         private Bitmap monsterImage;
         private BattleScriptCommand command;
@@ -34,22 +37,32 @@ namespace LAZYSHELL
         private TreeNode selectedNode;
         private TreeNode editedBatNode;
         Previewer.Previewer bp;
+        //
+        private Monster[] monsters { get { return Model.Monsters; } set { Model.Monsters = value; } }
+        private Monster monster { get { return monsters[index]; } set { monsters[index] = value; } }
+        private bool waitBothCoords = false;
+        private bool overTarget = false;
         #endregion
         // Constructor
-        public BattleScripts()
+        public BattleScripts(Monsters monsterEditor)
         {
+            this.monsterEditor = monsterEditor;
+            checksum = Do.GenerateChecksum(battleScripts);
             Settings.Default.Keystrokes[0x20] = "\x20";
             InitializeComponent();
-            Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
-            Do.AddShortcut(toolStrip4, Keys.F2, baseConvertor);
-            this.monsterName.Items.AddRange(model.MonsterNames.GetNames());
-            this.monsterName.SelectedIndex = model.MonsterNames.GetIndexFromNum(index);
             InitializeBattleScriptsEditor();
-            new ToolTipLabel(this, null, baseConvertor, null);
         }
         #region Methods
-        private void InitializeBattleScriptsEditor()
+        public void InitializeBattleScriptsEditor()
         {
+            buttonInsert.Enabled = false;
+            buttonApply.Enabled = false;
+            panelDoOneOfThree.Visible = false;
+            panelIfTargetValue.Visible = false;
+            panelMemoryCompare.Visible = false;
+            AlignCommandGUI(null);
+            ResetAllControls();
+
             Cursor.Current = Cursors.WaitCursor;
             BattleScriptTree.BeginUpdate();
             ParseBattleScript(battleScript);
@@ -63,11 +76,14 @@ namespace LAZYSHELL
             BattleScriptTree.ExpandAll();
             UpdateBattleScriptsFreeSpace();
             BattleScriptTree.EndUpdate();
-            monsterImage = new Bitmap(model.Monsters[index].Image);
+
+            this.monsterTargetArrowX.Value = monster.CursorX;
+            this.monsterTargetArrowY.Value = monster.CursorY;
+            monsterImage = new Bitmap(monster.Image);
             pictureBoxMonster.Invalidate();
             Cursor.Current = Cursors.Arrow;
         }
-        private void RefreshBattleScriptsEditor()
+        public void RefreshBattleScriptsEditor()
         {
             Point p = Do.GetTreeViewScrollPos(BattleScriptTree);
             BattleScriptTree.BeginUpdate();
@@ -84,6 +100,11 @@ namespace LAZYSHELL
             BattleScriptTree.SelectedNode = selectedNode;
             p.X = 0;
             Do.SetTreeViewScrollPos(BattleScriptTree, p);
+
+            this.monsterTargetArrowX.Value = monster.CursorX;
+            this.monsterTargetArrowY.Value = monster.CursorY;
+            monsterImage = new Bitmap(monster.Image);
+            pictureBoxMonster.Invalidate();
         }
 
         public TreeNode AddNode()
@@ -122,19 +143,19 @@ namespace LAZYSHELL
 
             else if (bsc.CommandID == 0xFD)
             {
-                treeNode.BackColor = Color.Yellow;
+                treeNode.BackColor = Color.FromArgb(255, 255, 255, 160);
             }
 
             else if (bsc.CommandID == 0xFE)
             {
-                treeNode.BackColor = Color.Yellow;
+                treeNode.BackColor = Color.FromArgb(255, 255, 255, 160);
                 if (counterCmd) currentDepth = 1;
                 else currentDepth = 0;
             }
 
             else if (bsc.CommandID == 0xFF)
             {
-                treeNode.BackColor = Color.FromArgb(255, 0, 255, 0);
+                treeNode.BackColor = Color.FromArgb(255, 160, 255, 160);
 
                 if (!counterCmd)
                 {
@@ -164,7 +185,7 @@ namespace LAZYSHELL
                     battleCommands.Add(CreateCommand(commandData));
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 // done parsing Battle Script
                 source.CommandIndex = 0;
@@ -220,7 +241,7 @@ namespace LAZYSHELL
                     cmd = new BattleCommandE2(commandData);
                     break;
                 case 0xE3:
-                    cmd = new BattleCommandE3(commandData, model.BattleDialogues);
+                    cmd = new BattleCommandE3(commandData, Model.BattleDialogues);
                     break;
                 case 0xE5:
                     cmd = new BattleCommandE5(commandData);
@@ -265,7 +286,7 @@ namespace LAZYSHELL
                     cmd = new BattleCommandF4(commandData);
                     break;
                 case 0xFC:
-                    cmd = new BattleCommandFC(commandData, spellNames, model.ItemNames);
+                    cmd = new BattleCommandFC(commandData, spellNames, Model.ItemNames);
                     break;
                 default:
                     if (opcode < 0xE0)
@@ -284,8 +305,8 @@ namespace LAZYSHELL
 
             BattleScriptTree.ExpandAll();
 
-            int index = 0; 
-            if(!Do.GetNodeIndex(BattleScriptTree.SelectedNode, BattleScriptTree.Nodes, ref index))
+            int index = 0;
+            if (!Do.GetNodeIndex(BattleScriptTree.SelectedNode, BattleScriptTree.Nodes, ref index))
                 return;
             if (index + 1 < this.BattleScriptTree.GetNodeCount(true))
                 battleCommands.Insert(index + 1, cmd);
@@ -430,7 +451,7 @@ namespace LAZYSHELL
         private int MoveUpCommand(TreeNodeCollection nodes, int count)
         {
             if (nodes.Count <= 0) return count;
-
+            checksum--;   // moving commands won't modify the checksum, so have to modify manually
             foreach (TreeNode tn in nodes)
             {
                 if (tn.Checked)
@@ -442,7 +463,7 @@ namespace LAZYSHELL
         private int MoveDownCommand(TreeNodeCollection nodes, int count)
         {
             if (nodes.Count <= 0) return count;
-
+            checksum--;   // moving commands won't modify the checksum, so have to modify manually
             TreeNode tn;
             for (int i = nodes.Count - 1; i >= 0; i--, count--)
             {
@@ -473,7 +494,7 @@ namespace LAZYSHELL
         private void UpdateBattleScriptsFreeSpace()
         {
             int bytesLeft = CalculateBattleScriptsLength();
-            this.BatScrLabel3.Text = " " + bytesLeft.ToString() + " bytes left ";
+            this.BatScrLabel3.Text = " " + bytesLeft.ToString() + " bytes left";
             this.BatScrLabel3.BackColor = bytesLeft < 0 ? Color.Red : SystemColors.Control;
         }
         private int CalculateBattleScriptsLength()
@@ -571,7 +592,7 @@ namespace LAZYSHELL
             for (; i < battleScripts.Length && offset + battleScripts[i].ScriptLength <= 0x59F3; i++)
             {
                 // write to the pointer array
-                Bits.SetShort(model.Data, pointerTable + (i * 2), offset);
+                Bits.SetShort(Model.Data, pointerTable + (i * 2), offset);
                 // write to the data
                 offset += battleScripts[i].Assemble(bank + offset);
             }
@@ -580,7 +601,7 @@ namespace LAZYSHELL
             for (; i < battleScripts.Length && offset + battleScripts[i].ScriptLength <= 0xFFFF; i++)
             {
                 // write to the pointer array
-                Bits.SetShort(model.Data, pointerTable + (i * 2), offset);
+                Bits.SetShort(Model.Data, pointerTable + (i * 2), offset);
                 // write to the data
                 offset += battleScripts[i].Assemble(bank + offset);
             }
@@ -594,6 +615,8 @@ namespace LAZYSHELL
         #region Event Handlers
         private void BattleScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Do.GenerateChecksum(battleScripts) == this.checksum)
+                return;
             DialogResult result = MessageBox.Show(
                 "Battle scripts have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -601,7 +624,7 @@ namespace LAZYSHELL
                 Assemble();
             else if (result == DialogResult.No)
             {
-                model.BattleScripts = null;
+                Model.BattleScripts = null;
             }
             else if (result == DialogResult.Cancel)
             {
@@ -631,29 +654,6 @@ namespace LAZYSHELL
                 case Keys.Delete: BatScrDeleteCommand_Click(null, null); break;
             }
         }
-        private void monsterName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            monsterNum.Value = model.MonsterNames.GetNum(monsterName.SelectedIndex);
-        }
-        private void monsterName_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            Do.DrawName(sender, e, new MenuTextPreview(), model.MonsterNames,
-                model.FontMenu, model.FontPaletteBattle.Palette, true);
-        }
-        private void monsterNum_ValueChanged(object sender, EventArgs e)
-        {
-            // Test code
-            monsterName.SelectedIndex = model.MonsterNames.GetIndexFromNum(index);
-
-            buttonInsert.Enabled = false;
-            buttonApply.Enabled = false;
-            panelDoOneOfThree.Enabled = false;
-            panelIfTargetValue.Enabled = false;
-            panelMemoryCompare.Enabled = false;
-            ResetAllControls();
-
-            InitializeBattleScriptsEditor();
-        }
         private void BattleScriptTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             BattleScriptCommand bsc = (BattleScriptCommand)e.Node.Tag;
@@ -679,11 +679,6 @@ namespace LAZYSHELL
         private void BattleScriptTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
         }
-        private void pictureBoxMonster_Paint(object sender, PaintEventArgs e)
-        {
-            if (monsterImage != null)
-                e.Graphics.DrawImage(monsterImage, 128 - (monsterImage.Width / 2), 128 - (monsterImage.Height / 2));
-        }
         // Command properties
         private void listBoxCommands_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -706,7 +701,7 @@ namespace LAZYSHELL
                     BatScrDoOneOfThreeSpells(new BattleCommandF0(new byte[] { 0xF0, 0x00, 0x00, 0x00 }, this.spellNames));
                     break;
                 case 4:
-                    BatScrRunBattleDialogue(new BattleCommandE3(new byte[] { 0xE3, 0x00 }, model.BattleDialogues));
+                    BatScrRunBattleDialogue(new BattleCommandE3(new byte[] { 0xE3, 0x00 }, Model.BattleDialogues));
                     break;
                 case 5:
                     BatScrRunBattleEvent(new BattleCommandE5(new byte[] { 0xE5, 0x00 }));
@@ -772,60 +767,61 @@ namespace LAZYSHELL
                     BatScrWaitOneTurnRestart(new BattleCommandFE(new byte[] { 0xFE }));
                     break;
                 case 26:
-                    BatScrIfAttackedByCommand(new BattleCommandFC(new byte[] { 0xFC, 0x01, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfAttackedByCommand(new BattleCommandFC(new byte[] { 0xFC, 0x01, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 27:
-                    BatScrIfAttackedBySpell(new BattleCommandFC(new byte[] { 0xFC, 0x02, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfAttackedBySpell(new BattleCommandFC(new byte[] { 0xFC, 0x02, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 28:
-                    BatScrIfAttackedByItem(new BattleCommandFC(new byte[] { 0xFC, 0x03, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfAttackedByItem(new BattleCommandFC(new byte[] { 0xFC, 0x03, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 29:
-                    BatScrIfAttackedByElement(new BattleCommandFC(new byte[] { 0xFC, 0x04, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfAttackedByElement(new BattleCommandFC(new byte[] { 0xFC, 0x04, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 30:
-                    BatScrIfAttacked(new BattleCommandFC(new byte[] { 0xFC, 0x05, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfAttacked(new BattleCommandFC(new byte[] { 0xFC, 0x05, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 31:
-                    BatScrIfTargetHPIsBelow(new BattleCommandFC(new byte[] { 0xFC, 0x06, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfTargetHPIsBelow(new BattleCommandFC(new byte[] { 0xFC, 0x06, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 32:
-                    BatScrIfTargetAffectedBy(new BattleCommandFC(new byte[] { 0xFC, 0x08, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfTargetAffectedBy(new BattleCommandFC(new byte[] { 0xFC, 0x08, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 33:
-                    BatScrIfTargetNotAffectedBy(new BattleCommandFC(new byte[] { 0xFC, 0x09, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfTargetNotAffectedBy(new BattleCommandFC(new byte[] { 0xFC, 0x09, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 34:
-                    BatScrIfTargetAlive(new BattleCommandFC(new byte[] { 0xFC, 0x10, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfTargetAlive(new BattleCommandFC(new byte[] { 0xFC, 0x10, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 35:
-                    BatScrIfTargetDead(new BattleCommandFC(new byte[] { 0xFC, 0x10, 0x01, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfTargetDead(new BattleCommandFC(new byte[] { 0xFC, 0x10, 0x01, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 36:
-                    BatScrIfHPIsBelow(new BattleCommandFC(new byte[] { 0xFC, 0x07, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfHPIsBelow(new BattleCommandFC(new byte[] { 0xFC, 0x07, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 37:
-                    BatScrIfInFormation(new BattleCommandFC(new byte[] { 0xFC, 0x13, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfInFormation(new BattleCommandFC(new byte[] { 0xFC, 0x13, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 38:
-                    BatScrIfOnlyOneAlive(new BattleCommandFC(new byte[] { 0xFC, 0x14, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfOnlyOneAlive(new BattleCommandFC(new byte[] { 0xFC, 0x14, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 39:
-                    BatScrIfMemoryGreaterThan(new BattleCommandFC(new byte[] { 0xFC, 0x0D, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfMemoryGreaterThan(new BattleCommandFC(new byte[] { 0xFC, 0x0D, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 40:
-                    BatScrIfMemoryLessThan(new BattleCommandFC(new byte[] { 0xFC, 0x0C, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfMemoryLessThan(new BattleCommandFC(new byte[] { 0xFC, 0x0C, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 41:
-                    BatScrIfMemoryBitsSet(new BattleCommandFC(new byte[] { 0xFC, 0x11, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfMemoryBitsSet(new BattleCommandFC(new byte[] { 0xFC, 0x11, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 42:
-                    BatScrIfMemoryBitsClear(new BattleCommandFC(new byte[] { 0xFC, 0x12, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfMemoryBitsClear(new BattleCommandFC(new byte[] { 0xFC, 0x12, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
                 case 43:
-                    BatScrIfAttackPhaseEqualTo(new BattleCommandFC(new byte[] { 0xFC, 0x0A, 0x00, 0x00 }, this.spellNames, this.model.ItemNames));
+                    BatScrIfAttackPhaseEqualTo(new BattleCommandFC(new byte[] { 0xFC, 0x0A, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
                     break;
-                default: ; break;
+                default: AlignCommandGUI(null);
+                    break;
             }
         }
         private void buttonInsert_Click(object sender, EventArgs e)
@@ -876,7 +872,7 @@ namespace LAZYSHELL
                             nameA.SelectedIndex = spellNames.GetIndexFromNum((int)numA.Value); break;
                         case 0x03:
                             command.ModifyCommand(2, (byte)numA.Value);
-                            nameA.SelectedIndex = model.ItemNames.GetIndexFromNum((int)numA.Value); break;
+                            nameA.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)numA.Value); break;
                         case 0x07:
                         case 0x13:
                             Bits.SetShort(command.CommandData, 2, (ushort)numA.Value);
@@ -920,7 +916,7 @@ namespace LAZYSHELL
                             break;
                         case 0x03:
                             command.ModifyCommand(2, (byte)numA.Value);
-                            numA.Value = model.ItemNames.GetNumFromIndex(nameA.SelectedIndex);
+                            numA.Value = Model.ItemNames.GetNumFromIndex(nameA.SelectedIndex);
                             break;
                     }
                     break;
@@ -952,7 +948,7 @@ namespace LAZYSHELL
                             nameB.SelectedIndex = spellNames.GetIndexFromNum((int)numB.Value); break;
                         case 0x03:
                             command.ModifyCommand(3, (byte)numB.Value);
-                            nameB.SelectedIndex = model.ItemNames.GetIndexFromNum((int)numB.Value); break;
+                            nameB.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)numB.Value); break;
                     }
                     break;
                 default:
@@ -986,7 +982,7 @@ namespace LAZYSHELL
                             break;
                         case 0x03:
                             command.ModifyCommand(3, (byte)numB.Value);
-                            numB.Value = model.ItemNames.GetNumFromIndex(nameB.SelectedIndex);
+                            numB.Value = Model.ItemNames.GetNumFromIndex(nameB.SelectedIndex);
                             break;
                     }
                     break;
@@ -1366,9 +1362,9 @@ namespace LAZYSHELL
             ResetAllControls();
             buttonInsert.Enabled = false;
             buttonApply.Enabled = false;
-            panelDoOneOfThree.Enabled = false;
-            panelIfTargetValue.Enabled = false;
-            panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false;
+            panelIfTargetValue.Visible = false;
+            panelMemoryCompare.Visible = false;
 
             BattleScriptTree.ExpandAll();
 
@@ -1421,9 +1417,9 @@ namespace LAZYSHELL
         private void battlePreview_Click(object sender, EventArgs e)
         {
             if (bp == null || !bp.Visible)
-                bp = new Previewer.Previewer((int)this.monsterNum.Value, 3);
+                bp = new Previewer.Previewer(index, 3);
             else
-                bp.Reload((int)this.monsterNum.Value, 3);
+                bp.Reload(index, 3);
             bp.Show();
             bp.BringToFront();
         }
@@ -1433,7 +1429,9 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = true; doNothingA.Enabled = true;
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true;
+            panelIfTargetValue.Visible = false;
+            panelMemoryCompare.Visible = false;
             labelDoA.Text = "Attack..."; labelDoB.Text = "Number...";
 
             this.nameA.Items.AddRange(this.attackNames.GetNames());
@@ -1456,7 +1454,7 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = true; doNothingA.Enabled = true;
             numB.Enabled = true; nameB.Enabled = true; doNothingB.Enabled = true;
             numC.Enabled = true; nameC.Enabled = true; doNothingC.Enabled = true;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = "Attack..."; labelDoB.Text = "Number...";
 
             this.nameA.Items.AddRange(this.attackNames.GetNames());
@@ -1493,7 +1491,7 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = true; doNothingA.Enabled = true;
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = "Spell..."; labelDoB.Text = "Number...";
 
             this.command = cmd;
@@ -1510,7 +1508,7 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = true; doNothingA.Enabled = true;
             numB.Enabled = true; nameB.Enabled = true; doNothingB.Enabled = true;
             numC.Enabled = true; nameC.Enabled = true; doNothingC.Enabled = true;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = "Spell..."; labelDoB.Text = "Number...";
 
             this.command = cmd;
@@ -1547,7 +1545,7 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = false; doNothingA.Enabled = false;
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = ""; labelDoB.Text = "Number...";
 
             this.command = cmd;
@@ -1560,7 +1558,7 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = true; doNothingA.Enabled = false;
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = "Battle Dialogue..."; labelDoB.Text = "Number...";
 
             this.command = cmd;
@@ -1583,7 +1581,7 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = true; doNothingA.Enabled = false;
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = "Battle Event..."; labelDoB.Text = "Number...";
 
             this.command = cmd;
@@ -1600,7 +1598,7 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = false; doNothingA.Enabled = false;
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = ""; labelDoB.Text = "Object sequence...";
 
             this.command = cmd;
@@ -1613,7 +1611,7 @@ namespace LAZYSHELL
             numA.Enabled = false; nameA.Enabled = true; doNothingA.Enabled = false;
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = "Set Items..."; labelDoB.Text = "";
 
             this.command = cmd;
@@ -1631,7 +1629,7 @@ namespace LAZYSHELL
             numA.Enabled = false; nameA.Enabled = true; doNothingA.Enabled = false;
             numB.Enabled = false; nameB.Enabled = true; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = "If attacked by CMD..."; labelDoB.Text = "";
 
             this.command = cmd;
@@ -1661,28 +1659,28 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = true; doNothingA.Enabled = true;
             numB.Enabled = true; nameB.Enabled = true; doNothingB.Enabled = true;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = "If attacked by item..."; labelDoB.Text = "Number";
 
             this.command = cmd;
 
-            this.nameA.Items.AddRange(this.model.ItemNames.GetNames());
-            this.nameB.Items.AddRange(this.model.ItemNames.GetNames());
+            this.nameA.Items.AddRange(Model.ItemNames.GetNames());
+            this.nameB.Items.AddRange(Model.ItemNames.GetNames());
             if (cmd.editable)
             {
                 if (cmd.CommandData[2] != 0xFB)
-                    nameA.SelectedIndex = model.ItemNames.GetIndexFromNum((int)cmd.CommandData[2]);
+                    nameA.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)cmd.CommandData[2]);
                 else
                     doNothingA.Checked = true;
                 if (cmd.CommandData[3] != 0xFB)
-                    nameB.SelectedIndex = model.ItemNames.GetIndexFromNum((int)cmd.CommandData[3]);
+                    nameB.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)cmd.CommandData[3]);
                 else
                     doNothingB.Checked = true;
             }
             else
             {
-                nameA.SelectedIndex = model.ItemNames.GetIndexFromNum((int)numA.Value);
-                nameB.SelectedIndex = model.ItemNames.GetIndexFromNum((int)numB.Value);
+                nameA.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)numA.Value);
+                nameB.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)numB.Value);
             }
         }
         private void BatScrIfAttackedBySpell(BattleScriptCommand cmd)
@@ -1690,7 +1688,7 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = true; doNothingA.Enabled = true;
             numB.Enabled = true; nameB.Enabled = true; doNothingB.Enabled = true;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = "If attacked by spell..."; labelDoB.Text = "Number";
 
             this.command = cmd;
@@ -1720,7 +1718,7 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = false; doNothingA.Enabled = false;
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = ""; labelDoB.Text = "HP...";
 
             this.command = cmd;
@@ -1735,7 +1733,7 @@ namespace LAZYSHELL
             numA.Enabled = true; nameA.Enabled = false; doNothingA.Enabled = false;
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
-            panelDoOneOfThree.Enabled = true; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             labelDoA.Text = ""; labelDoB.Text = "Formation...";
 
             this.command = cmd;
@@ -1748,7 +1746,7 @@ namespace LAZYSHELL
         private void BatScrTargetCall(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "Call Target"; labelTargetB.Text = ""; labelTargetC.Text = "";
 
             this.command = cmd;
@@ -1765,7 +1763,7 @@ namespace LAZYSHELL
         private void BatScrTargetDisable(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "Disable target"; labelTargetB.Text = ""; labelTargetC.Text = "";
 
             this.command = cmd;
@@ -1788,7 +1786,7 @@ namespace LAZYSHELL
         private void BatScrTargetEnable(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "Enable target"; labelTargetB.Text = ""; labelTargetC.Text = "";
 
             this.command = cmd;
@@ -1811,7 +1809,7 @@ namespace LAZYSHELL
         private void BatScrTargetNullInvincibility(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "Null target invincibility"; labelTargetB.Text = ""; labelTargetC.Text = "";
 
             this.command = cmd;
@@ -1825,7 +1823,7 @@ namespace LAZYSHELL
         private void BatScrTargetRemove(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "Remove target"; labelTargetB.Text = ""; labelTargetC.Text = "";
 
             this.command = cmd;
@@ -1840,7 +1838,7 @@ namespace LAZYSHELL
         private void BatScrTargetSet(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "Set target"; labelTargetB.Text = ""; labelTargetC.Text = "";
 
             this.command = cmd;
@@ -1854,7 +1852,7 @@ namespace LAZYSHELL
         private void BatScrTargetSetInvincibility(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "Set target invincibility"; labelTargetB.Text = ""; labelTargetC.Text = "";
 
             this.command = cmd;
@@ -1868,7 +1866,7 @@ namespace LAZYSHELL
         private void BatScrIfTargetAffectedBy(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = true;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "If target"; labelTargetB.Text = ""; labelTargetC.Text = "...is affected by";
 
             this.command = cmd;
@@ -1900,7 +1898,7 @@ namespace LAZYSHELL
         private void BatScrIfTargetAlive(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "If target alive"; labelTargetB.Text = ""; labelTargetC.Text = "";
 
             this.command = cmd;
@@ -1915,7 +1913,7 @@ namespace LAZYSHELL
         private void BatScrIfTargetDead(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "If target dead"; labelTargetB.Text = ""; labelTargetC.Text = "";
 
             this.command = cmd;
@@ -1930,7 +1928,7 @@ namespace LAZYSHELL
         private void BatScrIfTargetHPIsBelow(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = true; effects.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "If Target"; labelTargetB.Text = "HP is below"; labelTargetC.Text = "";
 
             this.command = cmd;
@@ -1948,7 +1946,7 @@ namespace LAZYSHELL
         private void BatScrIfTargetNotAffectedBy(BattleScriptCommand cmd)
         {
             target.Enabled = true; targetNum.Enabled = false; effects.Enabled = true;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = "If target"; labelTargetB.Text = ""; labelTargetC.Text = "...is not affected by";
 
             this.command = cmd;
@@ -1980,7 +1978,7 @@ namespace LAZYSHELL
         private void BatScrIfAttackedByElement(BattleScriptCommand cmd)
         {
             target.Enabled = false; targetNum.Enabled = false; effects.Enabled = true;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetA.Text = ""; labelTargetB.Text = ""; labelTargetC.Text = "If attacked by element";
 
             this.command = cmd;
@@ -2002,7 +2000,7 @@ namespace LAZYSHELL
         private void BatScrCommandDisable(BattleScriptCommand cmd)
         {
             target.Enabled = false; targetNum.Enabled = false; effects.Enabled = true;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetC.Text = "Command disable...";
 
             this.command = cmd;
@@ -2021,7 +2019,7 @@ namespace LAZYSHELL
         private void BatScrCommandEnable(BattleScriptCommand cmd)
         {
             target.Enabled = false; targetNum.Enabled = false; effects.Enabled = true;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = true; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = true; panelMemoryCompare.Visible = false;
             labelTargetC.Text = "Command enable...";
 
             this.command = cmd;
@@ -2040,7 +2038,7 @@ namespace LAZYSHELL
         private void BatScrMemoryClear(BattleScriptCommand cmd)
         {
             memory.Enabled = true; comparison.Enabled = false; panelBits.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = true;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
             labelMemoryA.Text = "Clear memory address";
@@ -2050,7 +2048,7 @@ namespace LAZYSHELL
         private void BatScrMemoryDecrement(BattleScriptCommand cmd)
         {
             memory.Enabled = true; comparison.Enabled = false; panelBits.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = true;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
             labelMemoryA.Text = "Decrement memory address";
@@ -2060,7 +2058,7 @@ namespace LAZYSHELL
         private void BatScrMemoryIncrement(BattleScriptCommand cmd)
         {
             memory.Enabled = true; comparison.Enabled = false; panelBits.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = true;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
             labelMemoryA.Text = "Increment memory address";
@@ -2070,7 +2068,7 @@ namespace LAZYSHELL
         private void BatScrIfMemoryGreaterThan(BattleScriptCommand cmd)
         {
             memory.Enabled = true; comparison.Enabled = true; panelBits.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = true;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
             labelMemoryA.Text = "If memory address";
@@ -2084,7 +2082,7 @@ namespace LAZYSHELL
         private void BatScrIfMemoryLessThan(BattleScriptCommand cmd)
         {
             memory.Enabled = true; comparison.Enabled = true; panelBits.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = true;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
             labelMemoryA.Text = "If memory address";
@@ -2098,7 +2096,7 @@ namespace LAZYSHELL
         private void BatScrIfAttackPhaseEqualTo(BattleScriptCommand cmd)
         {
             memory.Enabled = false; comparison.Enabled = true; panelBits.Enabled = false;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = true;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
             labelMemoryB.Text = "If attack phase (7EE006) equals";
@@ -2111,7 +2109,7 @@ namespace LAZYSHELL
         private void BatScrMemoryClearBits(BattleScriptCommand cmd)
         {
             memory.Enabled = true; comparison.Enabled = false; panelBits.Enabled = true;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = true;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
             labelMemoryA.Text = "Clear memory address";
@@ -2126,7 +2124,7 @@ namespace LAZYSHELL
         private void BatScrMemorySetBits(BattleScriptCommand cmd)
         {
             memory.Enabled = true; comparison.Enabled = false; panelBits.Enabled = true;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = true;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
             labelMemoryA.Text = "Set memory address";
@@ -2141,7 +2139,7 @@ namespace LAZYSHELL
         private void BatScrIfMemoryBitsClear(BattleScriptCommand cmd)
         {
             memory.Enabled = true; comparison.Enabled = false; panelBits.Enabled = true;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = true;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
             labelMemoryA.Text = "If memory address";
@@ -2155,7 +2153,7 @@ namespace LAZYSHELL
         private void BatScrIfMemoryBitsSet(BattleScriptCommand cmd)
         {
             memory.Enabled = true; comparison.Enabled = false; panelBits.Enabled = true;
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = true;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
             labelMemoryA.Text = "If memory address";
@@ -2168,48 +2166,141 @@ namespace LAZYSHELL
         }
         private void BatScrExitBattle(BattleScriptCommand cmd)
         {
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             this.command = cmd;
+            AlignCommandGUI(null);
         }
         private void BatScrIfAttacked(BattleScriptCommand cmd)
         {
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             this.command = cmd;
+            AlignCommandGUI(null);
         }
         private void BatScrIfOnlyOneAlive(BattleScriptCommand cmd)
         {
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
             this.command = cmd;
+            AlignCommandGUI(null);
         }
         private void BatScrWaitOneTurn(BattleScriptCommand cmd)
         {
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false;
+            panelIfTargetValue.Visible = false;
+            panelMemoryCompare.Visible = false;
             this.command = cmd;
+            AlignCommandGUI(null);
         }
         private void BatScrWaitOneTurnRestart(BattleScriptCommand cmd)
         {
-            panelDoOneOfThree.Enabled = false; panelIfTargetValue.Enabled = false; panelMemoryCompare.Enabled = false;
+            panelDoOneOfThree.Visible = false; 
+            panelIfTargetValue.Visible = false; 
+            panelMemoryCompare.Visible = false;
             this.command = cmd;
+            AlignCommandGUI(null);
+        }
+        // image
+        private void pictureBoxMonster_MouseDown(object sender, MouseEventArgs e)
+        {
+        }
+        private void pictureBoxMonster_MouseMove(object sender, MouseEventArgs e)
+        {
+            int x = 15 - (e.X / 8); int y = 15 - (e.Y / 8);
+            if (x > 15) x = 15; if (x < 0) x = 0;
+            if (y > 15) y = 15; if (y < 0) y = 0;
+            if (e.Button == MouseButtons.Left)
+            {
+                if (overTarget)
+                {
+                    if (monsterTargetArrowX.Value != x && monsterTargetArrowY.Value != y)
+                        waitBothCoords = true;
+                    monsterTargetArrowX.Value = x;
+                    waitBothCoords = false;
+                    monsterTargetArrowY.Value = y;
+                }
+            }
+            else
+            {
+                if ((128 - (monsterTargetArrowX.Value * 8) > e.X && 128 - (monsterTargetArrowX.Value * 8) < e.X + 16) &&
+                    (128 - (monsterTargetArrowY.Value * 8) > e.Y && 128 - (monsterTargetArrowY.Value * 8) < e.Y + 16))
+                {
+                    pictureBoxMonster.Cursor = Cursors.Hand;
+                    overTarget = true;
+                }
+                else
+                {
+                    pictureBoxMonster.Cursor = Cursors.Arrow;
+                    overTarget = false;
+                }
+            }
+        }
+        private void pictureBoxMonster_MouseUp(object sender, MouseEventArgs e)
+        {
+            monsterImage = new Bitmap(monster.Image);
+            pictureBoxMonster.Invalidate();
+        }
+        private void pictureBoxMonster_Paint(object sender, PaintEventArgs e)
+        {
+            if (monsterImage != null)
+                e.Graphics.DrawImage(monsterImage, 0, 0);
+        }
+        private void monsterTargetArrowX_ValueChanged(object sender, EventArgs e)
+        {
+            monster.CursorX = (byte)monsterTargetArrowX.Value;
+
+            if (waitBothCoords) return;
+            monsterImage = new Bitmap(monster.Image);
+            pictureBoxMonster.Invalidate();
+        }
+        private void monsterTargetArrowY_ValueChanged(object sender, EventArgs e)
+        {
+            monster.CursorY = (byte)monsterTargetArrowY.Value;
+
+            if (waitBothCoords) return;
+            monsterImage = new Bitmap(monster.Image);
+            pictureBoxMonster.Invalidate();
         }
         // toolstrip
-        private void save_Click(object sender, EventArgs e)
+        public void Import()
         {
-            Assemble();
+            new IOElements((Element[])Model.BattleScripts, index, "IMPORT BATTLE SCRIPTS...").ShowDialog();
+            InitializeBattleScriptsEditor();
         }
-        private void import_Click(object sender, EventArgs e)
+        public void Export()
         {
-            new IOElements((Element[])model.BattleScripts, index, "IMPORT BATTLE SCRIPTS...").ShowDialog();
-            monsterNum_ValueChanged(null, null);
+            new IOElements((Element[])Model.BattleScripts, index, "EXPORT BATTLE SCRIPTS...").ShowDialog();
+            InitializeBattleScriptsEditor();
         }
-        private void export_Click(object sender, EventArgs e)
+        public void Clear()
         {
-            new IOElements((Element[])model.BattleScripts, index, "EXPORT BATTLE SCRIPTS...").ShowDialog();
-        }
-        private void clear_Click(object sender, EventArgs e)
-        {
-            new ClearElements(model.BattleScripts, index, "CLEAR BATTLE SCRIPTS...").ShowDialog();
-            monsterNum_ValueChanged(null, null);
+            new ClearElements(Model.BattleScripts, index, "CLEAR BATTLE SCRIPTS...").ShowDialog();
+            InitializeBattleScriptsEditor();
         }
         #endregion
+
+        private void panelDoOneOfThree_VisibleChanged(object sender, EventArgs e)
+        {
+            AlignCommandGUI(panelDoOneOfThree);
+        }
+        private void panelMemoryCompare_VisibleChanged(object sender, EventArgs e)
+        {
+            AlignCommandGUI(panelMemoryCompare);
+        }
+        private void panelIfTargetValue_VisibleChanged(object sender, EventArgs e)
+        {
+            AlignCommandGUI(panelIfTargetValue);
+        }
+        private void AlignCommandGUI(Panel panel)
+        {
+            if (panel == null)
+            {
+                panel1.Height = 21;
+                buttonApply.Top = buttonInsert.Top = 1;
+            }
+            else if (panel.Visible)
+            {
+                panel1.Height = panel.Height + 23;
+                buttonApply.Top = buttonInsert.Top = panel.Height + 4;
+            }
+        }
     }
 }

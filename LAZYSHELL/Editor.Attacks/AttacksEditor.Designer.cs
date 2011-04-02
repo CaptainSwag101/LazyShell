@@ -47,10 +47,14 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.helpTips = new System.Windows.Forms.ToolStripButton();
             this.baseConversion = new System.Windows.Forms.ToolStripButton();
+            this.damageCalculator = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showSpells = new System.Windows.Forms.ToolStripButton();
             this.showAttacks = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.resetSpellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetAttackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +65,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(574, 562);
+            this.panel1.Size = new System.Drawing.Size(552, 498);
             this.panel1.TabIndex = 0;
             // 
             // saveShortcut
@@ -79,17 +83,19 @@
             this.toolStripSeparator4,
             this.import,
             this.export,
+            this.toolStripDropDownButton1,
             this.clear,
             this.toolStripSeparator2,
             this.helpTips,
             this.baseConversion,
+            this.damageCalculator,
             this.toolStripSeparator1,
             this.showSpells,
             this.showAttacks});
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(574, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(552, 25);
             this.toolStrip3.TabIndex = 447;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -175,14 +181,14 @@
             // clearSpellsToolStripMenuItem
             // 
             this.clearSpellsToolStripMenuItem.Name = "clearSpellsToolStripMenuItem";
-            this.clearSpellsToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.clearSpellsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearSpellsToolStripMenuItem.Text = "Clear Spells...";
             this.clearSpellsToolStripMenuItem.Click += new System.EventHandler(this.clearSpellsToolStripMenuItem_Click);
             // 
             // clearAttacksToolStripMenuItem
             // 
             this.clearAttacksToolStripMenuItem.Name = "clearAttacksToolStripMenuItem";
-            this.clearAttacksToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.clearAttacksToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearAttacksToolStripMenuItem.Text = "Clear Attacks...";
             this.clearAttacksToolStripMenuItem.Click += new System.EventHandler(this.clearAttacksToolStripMenuItem_Click);
             // 
@@ -212,6 +218,17 @@
             this.baseConversion.Name = "baseConversion";
             this.baseConversion.Size = new System.Drawing.Size(23, 22);
             this.baseConversion.Text = "Show Base Conversion";
+            // 
+            // damageCalculator
+            // 
+            this.damageCalculator.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.damageCalculator.Image = global::LAZYSHELL.Properties.Resources.calculator;
+            this.damageCalculator.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.damageCalculator.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.damageCalculator.Name = "damageCalculator";
+            this.damageCalculator.Size = new System.Drawing.Size(23, 22);
+            this.damageCalculator.Text = "Damage Calculator";
+            this.damageCalculator.Click += new System.EventHandler(this.damageCalculator_Click);
             // 
             // toolStripSeparator1
             // 
@@ -248,11 +265,37 @@
             // 
             this.toolTip1.Active = false;
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetSpellToolStripMenuItem,
+            this.resetAttackToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(27, 22);
+            // 
+            // resetSpellToolStripMenuItem
+            // 
+            this.resetSpellToolStripMenuItem.Name = "resetSpellToolStripMenuItem";
+            this.resetSpellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetSpellToolStripMenuItem.Text = "Reset spell";
+            this.resetSpellToolStripMenuItem.Click += new System.EventHandler(this.resetSpellToolStripMenuItem_Click);
+            // 
+            // resetAttackToolStripMenuItem
+            // 
+            this.resetAttackToolStripMenuItem.Name = "resetAttackToolStripMenuItem";
+            this.resetAttackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetAttackToolStripMenuItem.Text = "Reset attack";
+            this.resetAttackToolStripMenuItem.Click += new System.EventHandler(this.resetAttackToolStripMenuItem_Click);
+            // 
             // AttacksEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(574, 587);
+            this.ClientSize = new System.Drawing.Size(552, 523);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -292,5 +335,9 @@
         private System.Windows.Forms.ToolStripButton baseConversion;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem saveShortcut;
+        private System.Windows.Forms.ToolStripButton damageCalculator;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem resetSpellToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetAttackToolStripMenuItem;
     }
 }

@@ -5,8 +5,10 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class GraphicPalette
     {
+        [NonSerialized()]
         private byte[] data;
         private int index; public int Index { get { return index; } set { index = value; } }
         private int paletteOffset; public int PaletteOffset { get { return paletteOffset; } set { paletteOffset = value; } }

@@ -29,9 +29,6 @@ namespace LAZYSHELL
         [DllImport("advapi32.dll", EntryPoint = "RegDeleteKey")]
         public static extern int RegDeleteKeyA(int hKey, string lpSubKey);
 
-        bool invalidExe = false;
-        //LAZYSHELL.Encryption.VerifyBeta vBeta;
-
         private ImportElements importElements;
         private BaseConvertor baseConvertor;
         public Panel Panel2 { get { return panel2; } set { panel2 = value; } }
@@ -131,7 +128,6 @@ namespace LAZYSHELL
                     this.removeHeader.Visible = true;
                     loadRomTextBox.Width = toolStrip1.Width - 95 - removeHeader.Width;
                 }
-
                 UpdateRomInfo();
             }
             else if (ret)
@@ -151,7 +147,10 @@ namespace LAZYSHELL
                 this.removeHeader.Visible = false;
             }
             if (ret)
+            {
                 mruManager.Add(AppControl.GetPathWithoutFileName() + AppControl.GetFileNameWithoutPath());
+                settings.Save();
+            }
             if (toolStrip2.Enabled && settings.LoadAllData)
                 AppControl.LoadAll();
         }
@@ -216,12 +215,6 @@ namespace LAZYSHELL
                 Application.Exit();
             }
         }
-        // Beta
-        public void BetaFailValidation()
-        {
-            invalidExe = true;
-            //vBeta.Close();
-        }
         // Notes
         private string GetDirectoryPath(string caption)
         {
@@ -264,7 +257,7 @@ namespace LAZYSHELL
                     "InitDir",                          // value name
                     Directory.GetCurrentDirectory());   // default value
             }
-            catch (Exception ex)
+            catch
             {
                 Trace.WriteLine("LoadSettingsFromRegistry failed");
             }
@@ -346,7 +339,7 @@ namespace LAZYSHELL
                 fs = File.Open(AppControl.GetFileName(), FileMode.Open);
                 fs.Close();
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Lazy Shell could not save the ROM.\n\nThe file is currently in use by another application.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -389,7 +382,7 @@ namespace LAZYSHELL
             {
                 System.Diagnostics.Process.Start(path);
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Could not load the index help file. Try unzipping the program's files again.", "LAZY SHELL");
             }
@@ -427,10 +420,6 @@ namespace LAZYSHELL
             if (!LunarCompressExists())
                 return;
             AppControl.Battlefields();
-        }
-        private void openBattleScripts_Click(object sender, EventArgs e)
-        {
-            AppControl.BattleScripts();
         }
         private void openDialogues_Click(object sender, EventArgs e)
         {
@@ -510,7 +499,7 @@ namespace LAZYSHELL
             openAnimations_Click(null, null);
             openAttacks_Click(null, null);
             openBattlefields_Click(null, null);
-            openBattleScripts_Click(null, null);
+            //openBattleScripts_Click(null, null);
             openDialogues_Click(null, null);
             openEffects_Click(null, null);
             openEventScripts_Click(null, null);
@@ -552,5 +541,10 @@ namespace LAZYSHELL
             AppControl.ClearAll();
         }
         #endregion
+
+        private void hexViewer_Click(object sender, EventArgs e)
+        {
+            Model.HexViewer.Show();
+        }
     }
 }

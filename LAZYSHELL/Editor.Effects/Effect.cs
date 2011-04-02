@@ -4,8 +4,10 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class Effect
     {
+        [NonSerialized()]
         private byte[] data;
         private int index; public int Index { get { return index; } set { index = value; } }
 

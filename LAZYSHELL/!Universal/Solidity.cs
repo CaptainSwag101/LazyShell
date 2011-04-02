@@ -10,24 +10,43 @@ namespace LAZYSHELL
     {
         static Solidity instance = null;
         static readonly object padlock = new object();
-        private int[] quadBasePixels = new int[16 * 8];
-        private int[] quadBlockPixels = new int[16 * 24];
-        private int[] halfQuadBlockPixels = new int[16 * 16];
-        private int[] stairsUpRightLowPixels = new int[16 * 24];
-        private int[] stairsUpRightHighPixels = new int[16 * 24];
-        private int[] stairsUpLeftLowPixels = new int[16 * 24];
-        private int[] stairsUpLeftHighPixels = new int[16 * 24];
-        private int[] fieldBasePixels = new int[32 * 16];
-        private int[] fieldBlockPixels = new int[32 * 32];
-        public int[] QuadBasePixels { get { return quadBasePixels; } }
-        public int[] QuadBlockPixels { get { return quadBlockPixels; } }
-        public int[] HalfQuadBlockPixels { get { return halfQuadBlockPixels; } }
-        public int[] StairsUpRightLowPixels { get { return stairsUpRightLowPixels; } }
-        public int[] StairsUpRightHighPixels { get { return stairsUpRightHighPixels; } }
-        public int[] StairsUpLeftLowPixels { get { return stairsUpLeftLowPixels; } }
-        public int[] StairsUpLeftHighPixels { get { return stairsUpLeftHighPixels; } }
-        public int[] FieldBasePixels { get { return fieldBasePixels; } }
-        public int[] FieldBlockPixels { get { return fieldBlockPixels; } }
+        private int[][] quadBasePixels = new int[8][] { 
+            new int[16 * 8], new int[16 * 8], new int[16 * 8], new int[16 * 8],
+            new int[16 * 8], new int[16 * 8], new int[16 * 8], new int[16 * 8]};
+        private int[][] quadBlockPixels = new int[8][] { 
+            new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24],
+            new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24]};
+        private int[][] halfQuadBlockPixels = new int[8][] { 
+            new int[16 * 16], new int[16 * 16], new int[16 * 16], new int[16 * 16],
+            new int[16 * 16], new int[16 * 16], new int[16 * 16], new int[16 * 16]};
+        private int[][] stairsUpRightLowPixels = new int[8][] { 
+            new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24],
+            new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24]};
+        private int[][] stairsUpRightHighPixels = new int[8][] { 
+            new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24],
+            new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24]};
+        private int[][] stairsUpLeftLowPixels = new int[8][] { 
+            new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24],
+            new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24]};
+        private int[][] stairsUpLeftHighPixels = new int[8][] { 
+            new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24],
+            new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24]};
+        private double[] hues = new double[] 
+        { 
+            /*grey*/    0.0,    // normal
+            /*pink*/    0.0,    // solid
+            /*blue*/    240.0,  // water
+            /*green*/   120.0,   // vine
+            0.0, 0.0, 240.0, 120.0
+        };
+        private double[] sats = new double[] { 
+            0.0, 1.0, 1.0, 1.0,
+            0.0, 1.0, 1.0, 1.0
+        };
+        private double[] lums = new double[] { 
+            0.0, 0.0, 0.0, 0.0,
+            64.0, 64.0, 64.0, 64.0
+        };
         // tile assignments
         private int[] pixelTiles = new int[1024 * 1024];
         /// <summary>
@@ -47,15 +66,51 @@ namespace LAZYSHELL
         private SolidityTile tile;
         public Solidity()
         {
-            quadBasePixels = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.quadBase, Color.White);
-            quadBlockPixels = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.quadBlock, Color.White);
-            halfQuadBlockPixels = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.halfQuadBlock, Color.White);
-            stairsUpLeftLowPixels = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpLeftLow, Color.White);
-            stairsUpLeftHighPixels = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpLeftHigh, Color.White);
-            stairsUpRightLowPixels = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpRightLow, Color.White);
-            stairsUpRightHighPixels = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpRightHigh, Color.White);
-            fieldBasePixels = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.fieldBase, Color.White);
-            fieldBlockPixels = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.fieldBlock, Color.White);
+            for (int i = 0, o = 4; i < 4; i++, o++)
+            {
+                quadBasePixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.quadBase);
+                quadBasePixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.quadBase);
+                Do.Colorize(quadBasePixels[i], hues[i], sats[i], -16.0, 255);
+                Do.Colorize(quadBasePixels[o], hues[o], sats[o], -64.0, 255);
+                Do.Gradient(quadBasePixels[i], 16, 8, 32, -96, true);
+                Do.Gradient(quadBasePixels[o], 16, 8, 32, -96, true);
+                quadBlockPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.quadBlock);
+                quadBlockPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.quadBlock);
+                Do.Colorize(quadBlockPixels[i], hues[i], sats[i], -16.0, 255);
+                Do.Colorize(quadBlockPixels[o], hues[o], sats[o], -64.0, 255);
+                Do.Gradient(quadBlockPixels[i], 16, 24, 32, -96, true);
+                Do.Gradient(quadBlockPixels[o], 16, 24, 32, -96, true);
+                halfQuadBlockPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.halfQuadBlock);
+                halfQuadBlockPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.halfQuadBlock);
+                Do.Colorize(halfQuadBlockPixels[i], hues[i], sats[i], -16.0, 255);
+                Do.Colorize(halfQuadBlockPixels[o], hues[o], sats[o], -64.0, 255);
+                Do.Gradient(halfQuadBlockPixels[i], 16, 16, 32, -96, true);
+                Do.Gradient(halfQuadBlockPixels[o], 16, 16, 32, -96, true);
+                stairsUpLeftLowPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpLeftLow);
+                stairsUpLeftLowPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpLeftLow);
+                Do.Colorize(stairsUpLeftLowPixels[i], hues[i], sats[i], -16.0, 255);
+                Do.Colorize(stairsUpLeftLowPixels[o], hues[o], sats[o], -64.0, 255);
+                Do.Gradient(stairsUpLeftLowPixels[i], 16, 24, 32, -96, true);
+                Do.Gradient(stairsUpLeftLowPixels[o], 16, 24, 32, -96, true);
+                stairsUpLeftHighPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpLeftHigh);
+                stairsUpLeftHighPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpLeftHigh);
+                Do.Colorize(stairsUpLeftHighPixels[i], hues[i], sats[i], -16.0, 255);
+                Do.Colorize(stairsUpLeftHighPixels[o], hues[o], sats[o], -64.0, 255);
+                Do.Gradient(stairsUpLeftHighPixels[i], 16, 24, 32, -96, true);
+                Do.Gradient(stairsUpLeftHighPixels[o], 16, 24, 32, -96, true);
+                stairsUpRightLowPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpRightLow);
+                stairsUpRightLowPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpRightLow);
+                Do.Colorize(stairsUpRightLowPixels[i], hues[i], sats[i], -16.0, 255);
+                Do.Colorize(stairsUpRightLowPixels[o], hues[o], sats[o], -64.0, 255);
+                Do.Gradient(stairsUpRightLowPixels[i], 16, 24, 32, -96, true);
+                Do.Gradient(stairsUpRightLowPixels[o], 16, 24, 32, -96, true);
+                stairsUpRightHighPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpRightHigh);
+                stairsUpRightHighPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpRightHigh);
+                Do.Colorize(stairsUpRightHighPixels[i], hues[i], sats[i], -16.0, 255);
+                Do.Colorize(stairsUpRightHighPixels[o], hues[o], sats[o], -64.0, 255);
+                Do.Gradient(stairsUpRightHighPixels[i], 16, 24, 32, -96, true);
+                Do.Gradient(stairsUpRightHighPixels[o], 16, 24, 32, -96, true);
+            }
             SetIsometric();
         }
         public static Solidity Instance
@@ -72,7 +127,7 @@ namespace LAZYSHELL
                 }
             }
         }
-        public int[] GetTilePixels(SolidityTile tile)
+        public int[] GetTilePixels(SolidityTile tile, byte alpha)
         {
             this.tile = tile;
             int[] tilePixels = new int[32 * 784];
@@ -87,7 +142,7 @@ namespace LAZYSHELL
             /******DRAW BASE TILES******/
             if (tile.BaseTileHeight == 0 && !tile.BaseTileHeightPlusHalf && tile.StairsDirection == 0)
             {
-                qBase = ColorQuad(true, false, 0, quadBasePixels);
+                qBase = GetQuadPixels(true, false, 0, quadBasePixels);
                 if (tile.SolidTopQuadrant)             // draw top quadbase
                 {
                     for (int y = (16 + 752); y < (24 + 752); y++)
@@ -124,7 +179,7 @@ namespace LAZYSHELL
             /******DRAW TILES THAT HAVE A HEIGHT PLUS 1/2 A TILE******/
             else if (tile.BaseTileHeight == 0 && tile.BaseTileHeightPlusHalf) // total height = 1/2
             {
-                hqBlock = ColorQuad(true, false, 2, halfQuadBlockPixels);
+                hqBlock = GetQuadPixels(true, false, 2, halfQuadBlockPixels);
                 if (tile.SolidTopQuadrant)             // draw top quadblock
                 {
                     for (int y = (8 + 752); y < (24 + 752); y++) // start 16 pixels above normal base start (ie. 240 - 16)
@@ -163,7 +218,7 @@ namespace LAZYSHELL
             {
                 if (tile.SolidTopQuadrant)             // draw top quadbase
                 {
-                    stULHi = ColorQuad(true, false, 1, stairsUpLeftHighPixels);
+                    stULHi = GetQuadPixels(true, false, 1, stairsUpLeftHighPixels);
                     for (int y = (0 + 752); y < (24 + 752); y++)
                     {
                         for (int x = 8; x < 24; x++)
@@ -172,7 +227,7 @@ namespace LAZYSHELL
                 }
                 if (tile.SolidLeftQuadrant)              // draw left quadbase
                 {
-                    stULHi = ColorQuad(true, false, 1, stairsUpLeftHighPixels);
+                    stULHi = GetQuadPixels(true, false, 1, stairsUpLeftHighPixels);
                     for (int y = (4 + 752); y < (28 + 752); y++)
                     {
                         for (int x = 0; x < 16; x++)
@@ -181,7 +236,7 @@ namespace LAZYSHELL
                 }
                 if (tile.SolidRightQuadrant)              // draw right quadbase
                 {
-                    stULLo = ColorQuad(true, false, 1, stairsUpLeftLowPixels);
+                    stULLo = GetQuadPixels(true, false, 1, stairsUpLeftLowPixels);
                     for (int y = (4 + 752); y < (28 + 752); y++)
                     {
                         for (int x = 16; x < 32; x++)
@@ -190,7 +245,7 @@ namespace LAZYSHELL
                 }
                 if (tile.SolidBottomQuadrant)              // draw bottom quadbase
                 {
-                    stULLo = ColorQuad(true, false, 1, stairsUpLeftLowPixels);
+                    stULLo = GetQuadPixels(true, false, 1, stairsUpLeftLowPixels);
                     for (int y = (8 + 752); y < (32 + 752); y++)
                     {
                         for (int x = 8; x < 24; x++)
@@ -203,7 +258,7 @@ namespace LAZYSHELL
             {
                 if (tile.SolidTopQuadrant)             // draw top quadbase
                 {
-                    stURHi = ColorQuad(true, false, 1, stairsUpRightHighPixels);
+                    stURHi = GetQuadPixels(true, false, 1, stairsUpRightHighPixels);
                     for (int y = (0 + 752); y < (24 + 752); y++)
                     {
                         for (int x = 8; x < 24; x++)
@@ -212,7 +267,7 @@ namespace LAZYSHELL
                 }
                 if (tile.SolidLeftQuadrant)              // draw left quadbase
                 {
-                    stURLo = ColorQuad(true, false, 1, stairsUpRightLowPixels);
+                    stURLo = GetQuadPixels(true, false, 1, stairsUpRightLowPixels);
                     for (int y = (4 + 752); y < (28 + 752); y++)
                     {
                         for (int x = 0; x < 16; x++)
@@ -221,7 +276,7 @@ namespace LAZYSHELL
                 }
                 if (tile.SolidRightQuadrant)              // draw right quadbase
                 {
-                    stURHi = ColorQuad(true, false, 1, stairsUpRightHighPixels);
+                    stURHi = GetQuadPixels(true, false, 1, stairsUpRightHighPixels);
                     for (int y = (4 + 752); y < (28 + 752); y++)
                     {
                         for (int x = 16; x < 32; x++)
@@ -230,7 +285,7 @@ namespace LAZYSHELL
                 }
                 if (tile.SolidBottomQuadrant)              // draw bottom quadbase
                 {
-                    stURLo = ColorQuad(true, false, 1, stairsUpRightLowPixels);
+                    stURLo = GetQuadPixels(true, false, 1, stairsUpRightLowPixels);
                     for (int y = (8 + 752); y < (32 + 752); y++)
                     {
                         for (int x = 8; x < 24; x++)
@@ -241,8 +296,8 @@ namespace LAZYSHELL
             /******DRAW TILES THAT HAVE HEIGHT > 0******/
             else if (tile.BaseTileHeight > 0)
             {
-                qBlock = ColorQuad(true, false, 1, quadBlockPixels);
-                hqBlock = ColorQuad(true, false, 2, halfQuadBlockPixels);
+                qBlock = GetQuadPixels(true, false, 1, quadBlockPixels);
+                hqBlock = GetQuadPixels(true, false, 2, halfQuadBlockPixels);
                 int b = 0;
                 if (tile.SolidTopQuadrant)             // draw top quadblock
                 {
@@ -267,7 +322,7 @@ namespace LAZYSHELL
                     if (tile.StairsDirection == 1)
                     {
                         hChange = (b * 32) - (b * 16);
-                        stULHi = ColorQuad(true, false, 1, stairsUpLeftHighPixels);
+                        stULHi = GetQuadPixels(true, false, 1, stairsUpLeftHighPixels);
                         for (int y = (0 + 752) - hChange; y < (24 + 752) - hChange; y++)
                         {
                             for (int x = 8; x < 24; x++)
@@ -277,7 +332,7 @@ namespace LAZYSHELL
                     else if (tile.StairsDirection == 2)
                     {
                         hChange = (b * 32) - (b * 16);
-                        stURHi = ColorQuad(true, false, 1, stairsUpRightHighPixels);
+                        stURHi = GetQuadPixels(true, false, 1, stairsUpRightHighPixels);
                         for (int y = (0 + 752) - hChange; y < (24 + 752) - hChange; y++)
                         {
                             for (int x = 8; x < 24; x++)
@@ -308,7 +363,7 @@ namespace LAZYSHELL
                     if (tile.StairsDirection == 1)
                     {
                         hChange = (b * 32) - (b * 16);
-                        stULHi = ColorQuad(true, false, 1, stairsUpLeftHighPixels);
+                        stULHi = GetQuadPixels(true, false, 1, stairsUpLeftHighPixels);
                         for (int y = (4 + 752) - hChange; y < (28 + 752) - hChange; y++)
                         {
                             for (int x = 0; x < 16; x++)
@@ -318,7 +373,7 @@ namespace LAZYSHELL
                     else if (tile.StairsDirection == 2)
                     {
                         hChange = (b * 32) - (b * 16);
-                        stURLo = ColorQuad(true, false, 1, stairsUpRightLowPixels);
+                        stURLo = GetQuadPixels(true, false, 1, stairsUpRightLowPixels);
                         for (int y = (4 + 752) - hChange; y < (28 + 752) - hChange; y++)
                         {
                             for (int x = 0; x < 16; x++)
@@ -349,7 +404,7 @@ namespace LAZYSHELL
                     if (tile.StairsDirection == 1)
                     {
                         hChange = (b * 32) - (b * 16);
-                        stULLo = ColorQuad(true, false, 1, stairsUpLeftLowPixels);
+                        stULLo = GetQuadPixels(true, false, 1, stairsUpLeftLowPixels);
                         for (int y = (4 + 752) - hChange; y < (28 + 752) - hChange; y++)
                         {
                             for (int x = 16; x < 32; x++)
@@ -359,7 +414,7 @@ namespace LAZYSHELL
                     else if (tile.StairsDirection == 2)
                     {
                         hChange = (b * 32) - (b * 16);
-                        stURHi = ColorQuad(true, false, 1, stairsUpRightHighPixels);
+                        stURHi = GetQuadPixels(true, false, 1, stairsUpRightHighPixels);
                         for (int y = (4 + 752) - hChange; y < (28 + 752) - hChange; y++)
                         {
                             for (int x = 16; x < 32; x++)
@@ -390,7 +445,7 @@ namespace LAZYSHELL
                     if (tile.StairsDirection == 1)
                     {
                         hChange = (b * 32) - (b * 16);
-                        stULLo = ColorQuad(true, false, 1, stairsUpLeftLowPixels);
+                        stULLo = GetQuadPixels(true, false, 1, stairsUpLeftLowPixels);
                         for (int y = (8 + 752) - hChange; y < (32 + 752) - hChange; y++)
                         {
                             for (int x = 8; x < 24; x++)
@@ -400,7 +455,7 @@ namespace LAZYSHELL
                     else if (tile.StairsDirection == 2)
                     {
                         hChange = (b * 32) - (b * 16);
-                        stURLo = ColorQuad(true, false, 1, stairsUpRightLowPixels);
+                        stURLo = GetQuadPixels(true, false, 1, stairsUpRightLowPixels);
                         for (int y = (8 + 752) - hChange; y < (32 + 752) - hChange; y++)
                         {
                             for (int x = 8; x < 24; x++)
@@ -413,7 +468,7 @@ namespace LAZYSHELL
             int overH = tile.WaterTileCoordZ * 16; int baseT = tile.BaseTileHeight * 16;
             if (tile.WaterTileCoordZ != 0)
             {
-                qBase = ColorQuad(false, true, 0, quadBasePixels);
+                qBase = GetQuadPixels(false, true, 0, quadBasePixels);
                 if (tile.SolidTopQuadrant)             // draw top quadbase
                 {
                     for (int y = (16 + 752) - overH - baseT; y < (24 + 752) - overH - baseT; y++)
@@ -451,7 +506,7 @@ namespace LAZYSHELL
             overH = tile.OverheadTileCoordZ * 16; baseT = tile.BaseTileHeight * 16;
             if (tile.OverheadTileHeight == 0 && tile.OverheadTileCoordZ != 0)
             {
-                qBase = ColorQuad(false, false, 0, quadBasePixels);
+                qBase = GetQuadPixels(false, false, 0, quadBasePixels);
                 if (tile.SolidTopQuadrant)             // draw top quadbase
                 {
                     for (int y = (16 + 752) - overH - baseT; y < (24 + 752) - overH - baseT; y++)
@@ -488,7 +543,7 @@ namespace LAZYSHELL
             /******DRAW OVERHEAD TILES THAT HAVE A HEIGHT > 0******/
             else if (tile.OverheadTileHeight != 0)
             {
-                qBlock = ColorQuad(false, false, 1, quadBlockPixels); hqBlock = ColorQuad(false, false, 2, halfQuadBlockPixels);
+                qBlock = GetQuadPixels(false, false, 1, quadBlockPixels); hqBlock = GetQuadPixels(false, false, 2, halfQuadBlockPixels);
                 int b = 0;
                 if (tile.SolidTopQuadrant)             // draw top quadblock
                 {
@@ -541,10 +596,14 @@ namespace LAZYSHELL
             }
             return tilePixels;
         }
+        public int[] GetTilePixels(SolidityTile tile)
+        {
+            return GetTilePixels(tile, 255);
+        }
         public int[] GetTilemapPixels(Map map)
         {
             /*********DRAW THE PHYSICAL MAP FROM BUFFER*********/
-            SolidityTile[] tiles = State.Instance.Model.PhysicalTiles;
+            SolidityTile[] tiles = Model.SolidTiles;
             int[] pixels = new int[1024 * 1024];
             int[] tilePixels = new int[32 * 784];
             ushort tileNum;
@@ -580,9 +639,47 @@ namespace LAZYSHELL
             }
             return pixels;
         }
+        public int[] GetPriority1Pixels(Map map)
+        {
+            /*********DRAW THE PHYSICAL MAP FROM BUFFER*********/
+            SolidityTile[] tiles = Model.SolidTiles;
+            int[] pixels = new int[1024 * 1024];
+            int[] tilePixels = new int[32 * 784];
+            ushort tileNum;
+            int currTilePosX = 0;
+            int currTilePosY = 0;
+            int offset = 0;
+            int xPixel = 0;
+            int yPixel = 0;
+            while (offset < map.Tilemap.Length)
+            {
+                tileNum = Bits.GetShort(map.Tilemap, offset);
+                currTilePosX = tileCoords[offset / 2].X;
+                currTilePosY = tileCoords[offset / 2].Y;
+                if (tileNum != 0 && tiles[tileNum].ObjectOnTilePriority3)
+                {
+                    tilePixels = GetTilePixels(tiles[tileNum]);
+                    for (int a = 752 - tiles[tileNum].TotalHeight; a < 784; a++)
+                    {
+                        for (int b = 0; b < 32; b++)
+                        {
+                            xPixel = currTilePosX + b;
+                            yPixel = currTilePosY + a - 768;
+                            if (xPixel >= 0 && xPixel < 1024 && yPixel >= 0 && yPixel < 1024)
+                            {
+                                if (tilePixels[b + (a * 32)] != 0)
+                                    pixels[xPixel + (yPixel * 1024)] = Color.FromArgb(128, 255, 255, 0).ToArgb();
+                            }
+                        }
+                    }
+                }
+                offset += 2;
+            }
+            return pixels;
+        }
         public void RefreshTilemapImage(Map map, int offset)
         {
-            SolidityTile[] tiles = State.Instance.Model.PhysicalTiles;
+            SolidityTile[] tiles = Model.SolidTiles;
             int[] tilePixels = new int[32 * 784];
             ushort tileNum;
             int currTilePosX = 0;
@@ -737,62 +834,47 @@ namespace LAZYSHELL
                 twoTiles = !twoTiles;
             }
         }
-        private int[] ColorQuad(bool isBase, bool isWater, int type, int[] thePixels)
+        private int[] GetQuadPixels(bool isBase, bool isWater, int type, int[][] src)
         {
-            int[] somePixels = new int[16 * 24];
-            int red = 0; int green = 0; int blue = 0;
-            int theLighterColor; int theDarkerColor;
+            int format = 0;
 
             if (!isBase && !isWater) // it is an overhead tile
             {
-                if (tile.SpecialTileFormat == 1) { red = 64; green = 255; blue = 64; }
-                else { red = 255; green = 255; blue = 255; }
+                if (tile.SpecialTileFormat == 1)    // vines (green)
+                    format = 3;
+                else
+                    format = 0; // overhead (white)
             }
             else if (isBase && !isWater && tile.OverheadTileCoordZ != 0) // it is a base tile and there is something overhead
             {
-                if (tile.SpecialTileFormat == 1) { red = 64; green = 128; blue = 64; }
-                else if (tile.SpecialTileFormat == 2) { red = 64; green = 64; blue = 128; }
-                else { red = 128; green = 128; blue = 128; }
+                if (tile.SpecialTileFormat == 1)    // vines (green)
+                    format = 3 + 4;
+                else if (tile.SpecialTileFormat == 2)   // water (blue)
+                    format = 2 + 4;
+                else
+                    format = 0 + 4;
             }
             else if (!isBase && isWater) // it is an overhead water tile
-            {
-                red = 64; green = 64; blue = 255;
-            }
+                format = 2;
             else if (isBase && isWater && (tile.OverheadTileCoordZ != 0 || tile.WaterTileCoordZ != 0)) // it is a base water tile and there is something overhead
-            {
-                red = 64; green = 64; blue = 128;
-            }
+                format = 2 + 4;
             else if (isBase && isWater) // it is a base water tile and there is nothing overhead
-            {
-                red = 64; green = 64; blue = 192;
-            }
+                format = 2;
             else // it is a base tile and there is nothing overhead
             {
-                if (tile.SpecialTileFormat == 1) { red = 64; green = 192; blue = 64; }
-                else if (tile.SpecialTileFormat == 2) { red = 64; green = 64; blue = 192; }
-                else { red = 192; green = 192; blue = 192; }
+                if (tile.SpecialTileFormat == 1)
+                    format = 3;
+                else if (tile.SpecialTileFormat == 2)
+                    format = 2;
+                else
+                    format = 0;
             }
+            if (tile.SolidTile && !isBase && tile.OverheadTileCoordZ != 0)
+                format = 1;
+            else if (tile.SolidTile && isBase && tile.OverheadTileCoordZ == 0)
+                format = 1;
 
-            if (tile.SolidTile && !isBase && tile.OverheadTileCoordZ != 0) { red = 255; green = 64; blue = 64; }
-            else if (tile.SolidTile && isBase && tile.OverheadTileCoordZ == 0) { red = 255; green = 64; blue = 64; }
-
-            theLighterColor = Color.FromArgb(red, green, blue).ToArgb();
-            theDarkerColor = Color.FromArgb(red - 64, green - 64, blue - 64).ToArgb();
-
-            for (int y = 0; y < 24; y++)
-            {
-                for (int x = 0; x < 16; x++)
-                {
-                    if (y >= 8 && type == 0) return somePixels;
-                    else if (y >= 16 && type == 2) return somePixels;
-
-                    if (thePixels[y * 16 + x] == Color.FromArgb(192, 192, 192).ToArgb()) somePixels[y * 16 + x] = theLighterColor;
-                    else if (thePixels[y * 16 + x] == Color.FromArgb(128, 128, 128).ToArgb()) somePixels[y * 16 + x] = theDarkerColor;
-                    else somePixels[y * 16 + x] = thePixels[y * 16 + x];
-                }
-            }
-
-            return somePixels;
+            return src[format];
         }
         private void SetIsometric()
         {

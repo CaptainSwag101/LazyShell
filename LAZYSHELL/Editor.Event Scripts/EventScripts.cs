@@ -15,47 +15,51 @@ namespace LAZYSHELL
 {
     public partial class EventScripts : Form
     {
-        private Model model = State.Instance.Model;
+        #region Variables
+        // main
+        private long checksum;
         private Settings settings = Settings.Default;
-        private bool updatingProperties = false;
+        private EventScript[] eventScripts { get { return Model.EventScripts; } set { Model.EventScripts = value; } }
+        public EventScript[] ThisEventScripts { get { return eventScripts; } set { eventScripts = value; } }
+        private EventScript eventScript { get { return eventScripts[index]; } set { eventScripts[index] = value; } }
         private bool updatingScript = true;
-        private bool actionScript = false;
-        private bool actionSelected = false;
-        private int index { get { return (int)EventNumber.Value; } set { EventNumber.Value = value; } }
-
+        private bool updatingControls = false;
+        private bool isActionScript = false;
+        private bool isActionSelected = false;
+        private int index { get { return (int)eventNum.Value; } set { eventNum.Value = value; } }
+        private int currentScript = 0;
+        //
+        private EventScriptCommand esc;
+        private ActionQueueCommand aqc;
+        private TreeViewWrapper treeViewWrapper;
+        public TreeViewWrapper TreeViewWrapper { get { return treeViewWrapper; } }
+        private TreeNode editedNode;
         // externally accessed controls
-        public ToolStripNumericUpDown EventNum { get { return EventNumber; } set { EventNumber = value; } }
+        public ToolStripNumericUpDown EventNum { get { return eventNum; } set { eventNum = value; } }
         public System.Windows.Forms.ToolStripComboBox EventName { get { return eventName; } set { eventName = value; } }
-
         // pointer recalibration
         private FixPointers fixPointers;
         private bool apply; public bool Apply { get { return apply; } set { apply = value; } }
         private int delta; public int Delta { get { return delta; } set { delta = value; } }
-
+        // other
+        private Previewer.Previewer ep;
         private ClearElements clearElements;
         private IOElements ioElements;
-        TreeViewWrapper treeViewWrapper; public TreeViewWrapper TreeViewWrapper { get { return treeViewWrapper; } }
-        EventScript[] eventScripts { get { return model.EventScripts; } set { model.EventScripts = value; } }
-        public EventScript[] ThisEventScripts { get { return eventScripts; } set { eventScripts = value; } }
-        EventScriptCommand esc;
-        ActionQueueCommand aqc;
-        TreeNode editedNode;
-        int currentScript = 0;
-        bool updatingControls = false;
-        Previewer.Previewer ep;
         private Search searchWindow;
+        #endregion
+        #region Functions
         // Constructor
         public EventScripts()
         {
+            checksum = Do.GenerateChecksum(eventScripts, actionScripts);
             settings.Keystrokes[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip4, Keys.F2, showDecHex);
             InitializeEventScriptsEditor();
-            searchWindow = new Search(EventNumber, searchLabelsText, searchLabels, settings.EventLabels);
+            searchWindow = new Search(eventNum, searchLabelsText, searchLabels, settings.EventLabels);
             new ToolTipLabel(this, toolTip1, showDecHex, null);
         }
-
         private void InitializeEventScriptsEditor()
         {
             if (settings.EventLabels.Count == 0)
@@ -84,29 +88,17 @@ namespace LAZYSHELL
             }
             if (settings.LevelNames.Count == 0)
                 settings.LevelNames.AddRange(Lists.LevelNames);
-            eventLabel.Text = settings.EventLabels[(int)this.EventNumber.Value];
+            eventLabel.Text = settings.EventLabels[(int)this.eventNum.Value];
 
             treeViewWrapper = new TreeViewWrapper(this.EventScriptTree);
-            treeViewWrapper.ChangeScript(eventScripts[(int)this.EventNumber.Value]);
+            treeViewWrapper.ChangeScript(eventScripts[(int)this.eventNum.Value]);
 
             this.autoPointerUpdate.Checked = autoPointerUpdate.Checked;
             eventName.SelectedIndex = 0; // Editing Event Scripts
 
             UpdateEventScriptsFreeSpace();
         }
-
-        private void SaveEventNotes()
-        {
-            try
-            {
-                //this.EventScriptNotes.SaveFile(notes.GetPath() + "main-scripts-event.rtf");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ERROR saving main-scripts-event.rtf, please report this if it persists");
-            }
-        }
-
+        // GUI settings
         private void ControlEventDisasmMethod()
         {
             updatingControls = false;
@@ -153,8 +145,8 @@ namespace LAZYSHELL
 
                     evtNumE.Value = Bits.GetShort(esc.EventData, 1);
                     break;
-                case 0x3E:         // Create new NPC packet @ obj coords...
-                    labelTitleA.Text = "Create new NPC packet @ obj coords...";
+                case 0x3E:         // Create NPC packet @ obj coords...
+                    labelTitleA.Text = "Create NPC packet @ obj coords...";
                     labelEvtA.Text = "object";
                     labelEvtC.Text = "packet";
                     labelTitleC.Text = "If object null...";
@@ -167,8 +159,8 @@ namespace LAZYSHELL
                     evtNumC.Value = esc.Option;
                     evtNumE.Value = Bits.GetShort(esc.EventData, 3);
                     break;
-                case 0x3F:         // Create new NPC packet...
-                    labelTitleA.Text = "Create new NPC packet @ Mario coords...";
+                case 0x3F:         // Create NPC packet...
+                    labelTitleA.Text = "Create NPC packet @ Mario coords...";
                     labelEvtC.Text = "packet";
                     labelTitleC.Text = "If Mario null...";
                     labelEvtE.Text = "jump to";
@@ -188,8 +180,8 @@ namespace LAZYSHELL
                     evtNumE.Value = Bits.GetShort(esc.EventData, 1);
                     evtNumF.Value = Bits.GetShort(esc.EventData, 3);
                     break;
-                case 0xF2:         // Set object presence...  
-                case 0xF3:         // Set object engage type...
+                case 0xF2:         // Set obj presence...  
+                case 0xF3:         // Set obj engage type...
                 case 0xF8:         // If object in level ..., presence =...
                     if (esc.Opcode == 0xF2)
                     {
@@ -255,19 +247,19 @@ namespace LAZYSHELL
                     labelEvtA.Text = "character";
                     labelEvtB.Text = "item";
                     evtNameA.Items.AddRange(Lists.CharacterNames); evtNameA.Enabled = true;
-                    evtNameB.Items.AddRange(model.ItemNames.GetNames()); evtNameB.Enabled = true;
+                    evtNameB.Items.AddRange(Model.ItemNames.GetNames()); evtNameB.Enabled = true;
                     evtNumB.Maximum = 176; evtNumB.Enabled = true;
 
                     evtNameA.SelectedIndex = esc.Option & 7;
                     evtNumB.Value = esc.EventData[2];
-                    evtNameB.SelectedIndex = model.ItemNames.GetIndexFromNum((int)evtNumB.Value);
+                    evtNameB.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)evtNumB.Value);
                     break;
                 /* 
                 * TODO
                 * synchronize evtNameB with evtNumB
                 */
                 case 0x56:
-                    labelTitleA.Text = "Subtract mem 00:7000 from character's HP...";
+                    labelTitleA.Text = "Subtract mem $7000 from character's HP...";
                     labelEvtA.Text = "character";
                     evtNameA.Items.AddRange(Lists.CharacterNames); evtNameA.Enabled = true;
 
@@ -281,11 +273,11 @@ namespace LAZYSHELL
                     else labelTitleA.Text = "Remove x1 item in inventory...";
 
                     labelEvtA.Text = "item";
-                    evtNameA.Items.AddRange(model.ItemNames.GetNames()); evtNameA.Enabled = true;
+                    evtNameA.Items.AddRange(Model.ItemNames.GetNames()); evtNameA.Enabled = true;
                     evtNumA.Maximum = 176; evtNumA.Enabled = true;
 
                     evtNumA.Value = esc.Option;
-                    evtNameA.SelectedIndex = model.ItemNames.GetIndexFromNum((int)evtNumA.Value);
+                    evtNameA.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)evtNumA.Value);
                     break;
                 /* 
                 * TODO
@@ -420,7 +412,7 @@ namespace LAZYSHELL
                     evtEffects.SetItemChecked(3, (esc.EventData[3] & 0x80) == 0x80);
                     break;
                 case 0x61:
-                    labelTitleA.Text = "Run dialogue from mem 00:7000...";
+                    labelTitleA.Text = "Run dialogue from mem $7000...";
                     labelEvtA.Text = "above obj";
                     labelTitleB.Text = "properties";
                     evtNameA.Items.AddRange(Lists.ObjectNames); evtNameA.Enabled = true;
@@ -450,7 +442,7 @@ namespace LAZYSHELL
                     evtEffects.SetItemChecked(0, (esc.EventData[2] & 0x80) == 0x80);
                     break;
                 case 0x63:
-                    labelTitleA.Text = "Append to current dialogue from mem 00:7000...";
+                    labelTitleA.Text = "Append to current dialogue from mem $7000...";
                     labelTitleB.Text = "properties";
                     evtEffects.Items.AddRange(new string[] { "closable", "asynchronous" }); evtEffects.Enabled = true;
 
@@ -538,11 +530,11 @@ namespace LAZYSHELL
                             break;
                         case 5: // items maxed out
                             labelEvtB.Text = "toss item";
-                            evtNameB.Items.AddRange(model.ItemNames.GetNames()); evtNameB.Enabled = true;
+                            evtNameB.Items.AddRange(Model.ItemNames.GetNames()); evtNameB.Enabled = true;
                             evtNumB.Maximum = 176; evtNumB.Enabled = true;
 
                             evtNumB.Value = esc.EventData[2];
-                            evtNameB.SelectedIndex = model.ItemNames.GetIndexFromNum((int)evtNumB.Value);
+                            evtNameB.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)evtNumB.Value);
                             break;
                         case 7: // menu tutorial
                             labelEvtB.Text = "tutorial";
@@ -900,7 +892,7 @@ namespace LAZYSHELL
                     if (esc.Opcode == 0xB2) labelTitleA.Text = "Increment mem (16-bit)...";
                     else if (esc.Opcode == 0xB3) labelTitleA.Text = "Decrement mem (16-bit)...";
                     else if (esc.Opcode == 0xB6) labelTitleA.Text = "Store to object mem from mem...";
-                    else labelTitleA.Text = "Store to mem from mem 00:7000 (16-bit)...";
+                    else labelTitleA.Text = "Store to mem from mem $7000 (16-bit)...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true; evtNumC.Increment = 2;
                     evtNumC.Maximum = 0x71FE; evtNumC.Minimum = 0x7000;
@@ -909,7 +901,7 @@ namespace LAZYSHELL
                     evtNumC.Value = (esc.Option * 2) + 0x7000;
                     break;
                 case 0xB5:
-                    labelTitleA.Text = "Store to mem from mem 00:7000 (8-bit)...";
+                    labelTitleA.Text = "Store to mem from mem $7000 (8-bit)...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true;
                     evtNumC.Maximum = 0x719F; evtNumC.Minimum = 0x70A0;
@@ -1020,27 +1012,27 @@ namespace LAZYSHELL
                     evtNumD.Value = Bits.GetShort(esc.EventData, 3);
                     break;
 
-                // Memory 00:7000
+                // Memory $7000
                 case 0x38:
-                    labelTitleA.Text = "Mem 00:7000 = character @ slot...";
+                    labelTitleA.Text = "Mem $7000 = character @ slot...";
                     labelEvtC.Text = "slot";
                     evtNumC.Maximum = 4; evtNumC.Enabled = true;
 
                     if (esc.Option < 8) esc.Option = 8;
                     evtNumC.Value = esc.Option - 8;
                     break;
-                case 0xAC: labelTitleA.Text = "Mem 00:7000 =..."; goto case 0xC0;
-                case 0xAD: labelTitleA.Text = "Mem 00:7000 +=..."; goto case 0xC0;
-                case 0xB6: labelTitleA.Text = "Mem 00:7000 = random # less than..."; goto case 0xC0;
+                case 0xAC: labelTitleA.Text = "Mem $7000 =..."; goto case 0xC0;
+                case 0xAD: labelTitleA.Text = "Mem $7000 +=..."; goto case 0xC0;
+                case 0xB6: labelTitleA.Text = "Mem $7000 = random # less than..."; goto case 0xC0;
                 case 0xC0:
-                    if (esc.Opcode == 0xC0) labelTitleA.Text = "Mem 00:7000 compare to...";
+                    if (esc.Opcode == 0xC0) labelTitleA.Text = "Mem $7000 compare to...";
                     labelEvtC.Text = "value";
                     evtNumC.Maximum = 65535; evtNumC.Enabled = true;
 
                     evtNumC.Value = Bits.GetShort(esc.EventData, 1);
                     break;
                 case 0xB4:
-                    labelTitleA.Text = "Mem 00:7000 = mem...";
+                    labelTitleA.Text = "Mem $7000 = mem...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true;
                     evtNumC.Maximum = 0x719F; evtNumC.Minimum = 0x70A0;
@@ -1048,11 +1040,11 @@ namespace LAZYSHELL
 
                     evtNumC.Value = esc.Option + 0x70A0;
                     break;
-                case 0xB8: labelTitleA.Text = "Mem 00:7000 += mem..."; goto case 0xC1;
-                case 0xB9: labelTitleA.Text = "Mem 00:7000 -= mem..."; goto case 0xC1;
-                case 0xBA: labelTitleA.Text = "Mem 00:7000 = mem..."; goto case 0xC1;
+                case 0xB8: labelTitleA.Text = "Mem $7000 += mem..."; goto case 0xC1;
+                case 0xB9: labelTitleA.Text = "Mem $7000 -= mem..."; goto case 0xC1;
+                case 0xBA: labelTitleA.Text = "Mem $7000 = mem..."; goto case 0xC1;
                 case 0xC1:
-                    if (esc.Opcode == 0xC1) labelTitleA.Text = "Mem 00:7000 compare to mem...";
+                    if (esc.Opcode == 0xC1) labelTitleA.Text = "Mem $7000 compare to mem...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true; evtNumC.Increment = 2;
                     evtNumC.Maximum = 0x71FE; evtNumC.Minimum = 0x7000;
@@ -1060,10 +1052,10 @@ namespace LAZYSHELL
 
                     evtNumC.Value = (esc.Option * 2) + 0x7000;
                     break;
-                case 0xC4: labelTitleA.Text = "Mem 00:7000 = object X coord..."; goto case 0xC6;
-                case 0xC5: labelTitleA.Text = "Mem 00:7000 = object Y coord..."; goto case 0xC6;
+                case 0xC4: labelTitleA.Text = "Mem $7000 = object X coord..."; goto case 0xC6;
+                case 0xC5: labelTitleA.Text = "Mem $7000 = object Y coord..."; goto case 0xC6;
                 case 0xC6:
-                    if (esc.Opcode == 0xC6) labelTitleA.Text = "Mem 00:7000 = object Z coord...";
+                    if (esc.Opcode == 0xC6) labelTitleA.Text = "Mem $7000 = object Z coord...";
                     labelEvtA.Text = "object";
                     evtNameA.Items.AddRange(Lists.ObjectNames); evtNameA.Enabled = true;
                     evtEffects.Items.Add("isometric"); evtEffects.Enabled = true;
@@ -1071,19 +1063,19 @@ namespace LAZYSHELL
                     evtNameA.SelectedIndex = esc.Option & 0x3F;
                     evtEffects.SetItemChecked(0, (esc.Option & 0x80) == 0x80);
                     break;
-                case 0xDB: labelTitleA.Text = "If mem 00:7000 bit(s) set, jump to..."; goto case 0xDF;
+                case 0xDB: labelTitleA.Text = "If mem $7000 bit(s) set, jump to..."; goto case 0xDF;
                 case 0xDF:
-                    if (esc.Opcode == 0xDF) labelTitleA.Text = "If mem 00:7000 bit(s) clear, jump to...";
+                    if (esc.Opcode == 0xDF) labelTitleA.Text = "If mem $7000 bit(s) clear, jump to...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true; evtNumC.Maximum = 0xFFFF; evtNumC.Enabled = true;
 
                     evtNumC.Value = Bits.GetShort(esc.EventData, 1);
                     break;
-                case 0xE2: labelTitleA.Text = "If mem 00:7000 = value..."; labelEvtC.Text = "value"; goto case 0xE7;
-                case 0xE3: labelTitleA.Text = "If mem 00:7000 != value..."; labelEvtC.Text = "value"; goto case 0xE7;
-                case 0xE6: labelTitleA.Text = "If mem 00:7000 set, no bits..."; goto case 0xE7;
+                case 0xE2: labelTitleA.Text = "If mem $7000 = value..."; labelEvtC.Text = "value"; goto case 0xE7;
+                case 0xE3: labelTitleA.Text = "If mem $7000 != value..."; labelEvtC.Text = "value"; goto case 0xE7;
+                case 0xE6: labelTitleA.Text = "If mem $7000 set, no bits..."; goto case 0xE7;
                 case 0xE7:
-                    if (esc.Opcode == 0xE7) labelTitleA.Text = "If mem 00:7000 set, any bits...";
+                    if (esc.Opcode == 0xE7) labelTitleA.Text = "If mem $7000 set, any bits...";
                     if (esc.Opcode > 0xE3) labelEvtC.Text = "bits";
                     labelEvtD.Text = "jump to";
                     evtNumC.Maximum = 65535; evtNumC.Enabled = true;
@@ -1147,7 +1139,7 @@ namespace LAZYSHELL
                         "enable trigger",                       // 0xFC
                         "disable trigger",                      // 0xFD
                         "stop embedded action script",          // 0xFE
-                        "set object coords to default"          // 0xFF
+                        "Set obj coords to default"          // 0xFF
                         });
                         evtNameA.Enabled = true;
                         evtNameB.Enabled = true;
@@ -1196,7 +1188,7 @@ namespace LAZYSHELL
                                 evtNumC.Value = Bits.GetShort(esc.EventData, 3);
                                 break;
                             case 0x3E:
-                                labelTitleA.Text = "Create new NPC packet with event @ Mario coords...";
+                                labelTitleA.Text = "Create NPC packet with event @ Mario coords...";
                                 labelEvtC.Text = "packet";
                                 labelEvtD.Text = "event #";
                                 labelTitleC.Text = "If Mario invalid, jump to...";
@@ -1272,18 +1264,18 @@ namespace LAZYSHELL
                                 evtNumC.Value = (esc.EventData[2] * 2) + 0x7000;
                                 break;
 
-                            // Memory 00:7000
+                            // Memory $7000
                             case 0x58:
-                                labelTitleA.Text = "Mem 00:7000 = quantity of item...";
+                                labelTitleA.Text = "Mem $7000 = quantity of item...";
                                 labelEvtA.Text = "item";
-                                evtNameA.Items.AddRange(model.ItemNames.GetNames()); evtNameA.Enabled = true;
+                                evtNameA.Items.AddRange(Model.ItemNames.GetNames()); evtNameA.Enabled = true;
                                 evtNumA.Maximum = 176; evtNumA.Enabled = true;
 
                                 evtNumA.Value = esc.EventData[2];
-                                evtNameA.SelectedIndex = model.ItemNames.GetIndexFromNum((int)evtNumA.Value);
+                                evtNameA.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)evtNumA.Value);
                                 break;
                             case 0x5D:
-                                labelTitleA.Text = "Mem 00:7000 = equipment of character...";
+                                labelTitleA.Text = "Mem $7000 = equipment of character...";
                                 labelEvtA.Text = "character";
                                 labelEvtB.Text = "item type";
                                 evtNameA.Items.AddRange(Lists.CharacterNames); evtNameA.Enabled = true;
@@ -1294,7 +1286,7 @@ namespace LAZYSHELL
                                 evtNameB.SelectedIndex = esc.EventData[3];
                                 break;
                             case 0xAC:
-                                labelTitleA.Text = "Mem 00:7000 = mem 7F:...";
+                                labelTitleA.Text = "Mem $7000 = mem 7F:...";
                                 labelEvtC.Text = "address";
                                 evtNumC.Hexadecimal = true;
                                 evtNumC.Maximum = 0x7FFFFF; evtNumC.Minimum = 0x7FF800;
@@ -1302,19 +1294,19 @@ namespace LAZYSHELL
 
                                 evtNumC.Value = Bits.GetShort(esc.EventData, 2) + 0x7FF800;
                                 break;
-                            case 0xB0: labelTitleA.Text = "Mem 00:7000 isolate bits =..."; goto case 0xB2;
-                            case 0xB1: labelTitleA.Text = "Mem 00:7000 set bits =..."; goto case 0xB2;
+                            case 0xB0: labelTitleA.Text = "Mem $7000 isolate bits =..."; goto case 0xB2;
+                            case 0xB1: labelTitleA.Text = "Mem $7000 set bits =..."; goto case 0xB2;
                             case 0xB2:
-                                if (esc.Option == 0xB2) labelTitleA.Text = "Mem 00:7000 xor bits =...";
+                                if (esc.Option == 0xB2) labelTitleA.Text = "Mem $7000 xor bits =...";
                                 labelEvtC.Text = "bits";
                                 evtNumC.Maximum = 65535; evtNumC.Enabled = true;
 
                                 evtNumC.Value = Bits.GetShort(esc.EventData, 2);
                                 break;
-                            case 0xB3: labelTitleA.Text = "Mem 00:7000 isolate bits = mem..."; goto case 0xB5;
-                            case 0xB4: labelTitleA.Text = "Mem 00:7000 set bits = mem..."; goto case 0xB5;
+                            case 0xB3: labelTitleA.Text = "Mem $7000 isolate bits = mem..."; goto case 0xB5;
+                            case 0xB4: labelTitleA.Text = "Mem $7000 set bits = mem..."; goto case 0xB5;
                             case 0xB5:
-                                if (esc.Option == 0xB5) labelTitleA.Text = "Mem 00:7000 xor bits = mem...";
+                                if (esc.Option == 0xB5) labelTitleA.Text = "Mem $7000 xor bits = mem...";
                                 labelEvtC.Text = "address";
                                 evtNumC.Hexadecimal = true; evtNumC.Increment = 2;
                                 evtNumC.Maximum = 0x71FE; evtNumC.Minimum = 0x7000;
@@ -1352,12 +1344,12 @@ namespace LAZYSHELL
                 case 0x3D:         // If Mario in air...
                     Bits.SetShort(esc.EventData, 1, (ushort)evtNumE.Value);
                     break;
-                case 0x3E:         // Create new NPC packet @ obj coords...
+                case 0x3E:         // Create NPC packet @ obj coords...
                     esc.EventData[2] = (byte)evtNameA.SelectedIndex;
                     esc.Option = (byte)evtNumC.Value;
                     Bits.SetShort(esc.EventData, 3, (ushort)evtNumE.Value);
                     break;
-                case 0x3F:         // Create new NPC packet...
+                case 0x3F:         // Create NPC packet...
                     esc.Option = (byte)evtNumC.Value;
                     Bits.SetShort(esc.EventData, 2, (ushort)evtNumE.Value);
                     break;
@@ -1365,8 +1357,8 @@ namespace LAZYSHELL
                     Bits.SetShort(esc.EventData, 1, (ushort)evtNumE.Value);
                     Bits.SetShort(esc.EventData, 3, (ushort)evtNumF.Value);
                     break;
-                case 0xF2:         // Set object presence...  
-                case 0xF3:         // Set object engage type...
+                case 0xF2:         // Set obj presence...  
+                case 0xF3:         // Set obj engage type...
                 case 0xF8:         // If object in level ..., presence =...
                     Bits.SetShort(esc.EventData, 1, (ushort)evtNumA.Value);
                     esc.EventData[2] &= 1; esc.EventData[2] |= (byte)(evtNameB.SelectedIndex << 1);
@@ -1755,7 +1747,7 @@ namespace LAZYSHELL
                     Bits.SetShort(esc.EventData, 3, (ushort)evtNumD.Value);
                     break;
 
-                // Memory 00:7000
+                // Memory $7000
                 case 0x38:
                     if (esc.Option < 8) esc.Option = 8;
                     esc.Option = (byte)(evtNumC.Value + 8);
@@ -1892,7 +1884,7 @@ namespace LAZYSHELL
                                 esc.EventData[2] = (byte)((evtNumC.Value - 0x7000) / 2);
                                 break;
 
-                            // Memory 00:7000
+                            // Memory $7000
                             case 0x58:
                                 esc.EventData[2] = (byte)evtNumA.Value;
                                 break;
@@ -1920,17 +1912,14 @@ namespace LAZYSHELL
                     break;
             }
         }
-
         private string[] DialogueNames()
         {
-            String[] names = new String[model.Dialogues.Length];
-
-            for (int i = 0; i < model.Dialogues.Length; i++)
-                names[i] = model.Dialogues[i].GetDialogueStub(true);
-
+            String[] names = new String[Model.Dialogues.Length];
+            for (int i = 0; i < Model.Dialogues.Length; i++)
+                names[i] = Model.Dialogues[i].GetDialogueStub(true);
             return names;
         }
-
+        // Editing
         private void EditCommand(EventScriptCommand dest, bool insert)
         {
 
@@ -1939,10 +1928,43 @@ namespace LAZYSHELL
         {
 
         }
-        private void UpdateEditorMask()
+        private void InsertEventCommand()
         {
+            byte[] temp;
+            int opcode;
+            int option;
 
+            opcode = Lists.EventListBoxOpcodes[categories_es.SelectedIndex][commands.SelectedIndex];
+            option = Lists.EventListBoxFDOpcodes[categories_es.SelectedIndex][commands.SelectedIndex];
+
+            temp = new byte[ScriptEnums.GetEventOpcodeLength(opcode, option)];
+            temp[0] = (byte)opcode;
+            if (temp.Length > 1)
+                temp[1] = (byte)option;
+            esc = new EventScriptCommand(temp, 0);
+
+            ControlEventAsmMethod();
+            treeViewWrapper.InsertNode(esc);
         }
+        private void InsertActionCommand()
+        {
+            byte[] temp;
+            int opcode;
+            int option;
+
+            opcode = Lists.ActionListBoxOpcodes[categories_aq.SelectedIndex][commands.SelectedIndex];
+            option = Lists.ActionListBoxFDOpcodes[categories_aq.SelectedIndex][commands.SelectedIndex];
+
+            temp = new byte[ScriptEnums.GetActionQueueOpcodeLength(opcode, option)];
+            temp[0] = (byte)opcode;
+            if (temp.Length > 1)
+                temp[1] = (byte)option;
+            aqc = new ActionQueueCommand(temp, 0);
+
+            ControlActionAsmMethod();
+            treeViewWrapper.InsertNode(aqc);
+        }
+        // Update offsets
         public void UpdateScriptOffsets()
         {
             int delta = treeViewWrapper.ScriptDelta;
@@ -2011,9 +2033,9 @@ namespace LAZYSHELL
 
             foreach (EventScriptCommand esc in es.Commands)
             {
-                if (esc.IsActionQueueTrigger && esc.EmbeddedActionQueue.ActionQueueCommands != null)
+                if (esc.IsActionQueueTrigger && esc.EmbeddedActionQueue.Commands != null)
                 {
-                    foreach (ActionQueueCommand aqc in esc.EmbeddedActionQueue.ActionQueueCommands)
+                    foreach (ActionQueueCommand aqc in esc.EmbeddedActionQueue.Commands)
                     {
                         if (aqc.CommandDelta != 0)
                             UpdatePointersToCommand(aqc);
@@ -2042,9 +2064,9 @@ namespace LAZYSHELL
                 {
                     foreach (EventScriptCommand escIterator in es.Commands)
                     {
-                        if (escIterator.IsActionQueueTrigger && escIterator.EmbeddedActionQueue.ActionQueueCommands != null)
+                        if (escIterator.IsActionQueueTrigger && escIterator.EmbeddedActionQueue.Commands != null)
                         {
-                            foreach (ActionQueueCommand aqcIterator in escIterator.EmbeddedActionQueue.ActionQueueCommands)
+                            foreach (ActionQueueCommand aqcIterator in escIterator.EmbeddedActionQueue.Commands)
                             {
                                 if (aqcIterator.Opcode == 0xE9)
                                 {
@@ -2106,9 +2128,9 @@ namespace LAZYSHELL
                 {
                     foreach (EventScriptCommand escIterator in es.Commands)
                     {
-                        if (escIterator.IsActionQueueTrigger && escIterator.EmbeddedActionQueue.ActionQueueCommands != null)
+                        if (escIterator.IsActionQueueTrigger && escIterator.EmbeddedActionQueue.Commands != null)
                         {
-                            foreach (ActionQueueCommand aqcIterator in escIterator.EmbeddedActionQueue.ActionQueueCommands)
+                            foreach (ActionQueueCommand aqcIterator in escIterator.EmbeddedActionQueue.Commands)
                             {
                                 if (aqcIterator.Opcode == 0xE9)
                                 {
@@ -2161,16 +2183,7 @@ namespace LAZYSHELL
                 }
             }
         }
-
-        private void PreviewEventOrAction()
-        {
-            if (ep == null || !ep.Visible)
-                ep = new Previewer.Previewer(this.currentScript, this.eventName.SelectedIndex == 0 ? 0 : 2);
-            else
-                ep.Reload(this.currentScript, this.eventName.SelectedIndex == 0 ? 0 : 2);
-            ep.Show();
-        }
-
+        // Update controls
         private void UpdateEventScriptsFreeSpace()
         {
             int left = CalculateEventScriptsLength();
@@ -2205,44 +2218,6 @@ namespace LAZYSHELL
 
             return totalSize - length - 1;
         }
-
-        private void InsertEventCommand()
-        {
-            byte[] temp;
-            int opcode;
-            int option;
-
-            opcode = Lists.EventListBoxOpcodes[cpuCommands.SelectedIndex][cpuExtendedCommands.SelectedIndex];
-            option = Lists.EventListBoxFDOpcodes[cpuCommands.SelectedIndex][cpuExtendedCommands.SelectedIndex];
-
-            temp = new byte[ScriptEnums.GetEventOpcodeLength(opcode, option)];
-            temp[0] = (byte)opcode;
-            if (temp.Length > 1)
-                temp[1] = (byte)option;
-            esc = new EventScriptCommand(temp, 0);
-
-            ControlEventAsmMethod();
-            treeViewWrapper.InsertNode(esc);
-        }
-        private void InsertActionCommand()
-        {
-            byte[] temp;
-            int opcode;
-            int option;
-
-            opcode = Lists.ActionListBoxOpcodes[actionQueueCommands.SelectedIndex][cpuExtendedCommands.SelectedIndex];
-            option = Lists.ActionListBoxFDOpcodes[actionQueueCommands.SelectedIndex][cpuExtendedCommands.SelectedIndex];
-
-            temp = new byte[ScriptEnums.GetActionQueueOpcodeLength(opcode, option)];
-            temp[0] = (byte)opcode;
-            if (temp.Length > 1)
-                temp[1] = (byte)option;
-            aqc = new ActionQueueCommand(temp, 0);
-
-            ControlActionAsmMethod();
-            treeViewWrapper.InsertNode(aqc);
-        }
-
         private void ResetAllEventLists()
         {
             ResetAllEventControls();
@@ -2250,22 +2225,18 @@ namespace LAZYSHELL
             buttonApplyEvent.Enabled = false;
             if (eventName.SelectedIndex == 1)   // Action Scripts
             {
-                EventNumber.Maximum = 1023;
-                cpuCommands.Enabled = false;
-                cpuExtendedCommands.Items.Clear();
-                actionQueueCommands.Enabled = true;
-                cpuExtendedCommands.Items.Clear(); cpuExtendedCommands.ClearSelected();
-                actionScript = true;
+                eventNum.Maximum = 1023;
+                categories_aq.BringToFront();
+                categories_aq.SelectedIndex = 0;
+                isActionScript = true;
                 treeViewWrapper.ActionScript = true;
             }
             else    // Event Scripts
             {
-                EventNumber.Maximum = 4095;
-                cpuCommands.Enabled = true;
-                cpuExtendedCommands.Items.Clear();
-                actionQueueCommands.Enabled = false;
-                cpuExtendedCommands.Items.Clear(); cpuExtendedCommands.ClearSelected();
-                actionScript = false;
+                eventNum.Maximum = 4095;
+                categories_es.BringToFront();
+                categories_es.SelectedIndex = 0;
+                isActionScript = false;
                 treeViewWrapper.ActionScript = false;
             }
         }
@@ -2295,29 +2266,11 @@ namespace LAZYSHELL
 
             updatingControls = true;
         }
-        private void VerifyScriptStats()
-        {
-            // Get all the stats
-            try
-            {
-                // If any of these throws an exception, refresh all the universal data Scripts uses
-                DDlistName test = model.AttackNames;
-                test = model.ItemNames;
-                test = model.MonsterNames;
-                test = model.SpellNames;
-                BattleDialogue[] sbd = model.BattleDialogues;
-                Dialogue[] sd = model.Dialogues;
-            }
-            catch (Exception ex)
-            {
-                // Create the Stats Model
-            }
-        }
         private void UpdateCommandData()
         {
             this.eventHexText.Text = BitConverter.ToString(treeViewWrapper.CurrentNodeData);
 
-            if (!actionScript)
+            if (!isActionScript)
             {
                 eventScripts[currentScript].Assemble();
                 UpdateEventScriptsFreeSpace();
@@ -2328,10 +2281,10 @@ namespace LAZYSHELL
                 UpdateActionScriptsFreeSpace();
             }
         }
-
+        // Saving
         public void Assemble()
         {
-            if (!actionScript)
+            if (!isActionScript)
                 UpdateScriptOffsets();
             else
                 UpdateActionOffsets();
@@ -2349,6 +2302,17 @@ namespace LAZYSHELL
             else
                 MessageBox.Show("There is not enough available space to save the action scripts to.\n\nThe action scripts were not saved.", "LAZY SHELL");
 
+            if (!isActionScript)
+            {
+                Model.HexViewer.Offset = eventScript.BaseOffset & 0xFFFFF0;
+                Model.HexViewer.SelectionStart = (eventScript.BaseOffset & 15) * 3;
+            }
+            else
+            {
+                Model.HexViewer.Offset = actionScript.Offset & 0xFFFFF0;
+                Model.HexViewer.SelectionStart = (actionScript.Offset & 15) * 3;
+            }
+            Model.HexViewer.Compare();
         }
         public void AssembleAllEventScripts()
         {
@@ -2361,33 +2325,33 @@ namespace LAZYSHELL
             ushort offset = 0xC00;
             for (; i < 1536; i++, pointer += 2)
             {
-                Bits.SetShort(model.Data, bank + pointer, offset);
-                Bits.SetByteArray(model.Data, bank + offset, eventScripts[i].Script);
+                Bits.SetShort(Model.Data, bank + pointer, offset);
+                Bits.SetByteArray(Model.Data, bank + offset, eventScripts[i].Script);
                 offset += (ushort)eventScripts[i].Script.Length;
             }
-            for (int a = offset; a < 0x10000; a++) model.Data[bank + a] = 0xFF;
+            for (int a = offset; a < 0x10000; a++) Model.Data[bank + a] = 0xFF;
 
             pointer = 0;
             bank = 0x1F0000;
             offset = 0xC00;
             for (; i < 3072; i++, pointer += 2)
             {
-                Bits.SetShort(model.Data, bank + pointer, offset);
-                Bits.SetByteArray(model.Data, bank + offset, eventScripts[i].Script);
+                Bits.SetShort(Model.Data, bank + pointer, offset);
+                Bits.SetByteArray(Model.Data, bank + offset, eventScripts[i].Script);
                 offset += (ushort)eventScripts[i].Script.Length;
             }
-            for (int a = offset; a < 0x10000; a++) model.Data[bank + a] = 0xFF;
+            for (int a = offset; a < 0x10000; a++) Model.Data[bank + a] = 0xFF;
 
             pointer = 0;
             bank = 0x200000;
             offset = 0x800;
             for (; i < 4096; i++, pointer += 2)
             {
-                Bits.SetShort(model.Data, bank + pointer, offset);
-                Bits.SetByteArray(model.Data, bank + offset, eventScripts[i].Script);
+                Bits.SetShort(Model.Data, bank + pointer, offset);
+                Bits.SetByteArray(Model.Data, bank + offset, eventScripts[i].Script);
                 offset += (ushort)eventScripts[i].Script.Length;
             }
-            for (int a = offset; a < 0xE000; a++) model.Data[bank + a] = 0xFF;
+            for (int a = offset; a < 0xE000; a++) Model.Data[bank + a] = 0xFF;
         }
         public void AssembleAllActionScripts()
         {
@@ -2400,19 +2364,40 @@ namespace LAZYSHELL
             ushort offset = 0x800;
             for (; i < actionScripts.Length; i++, pointer += 2)
             {
-                Bits.SetShort(model.Data, bank + pointer, offset);
-                Bits.SetByteArray(model.Data, bank + offset, actionScripts[i].ActionQueueData);
+                Bits.SetShort(Model.Data, bank + pointer, offset);
+                Bits.SetByteArray(Model.Data, bank + offset, actionScripts[i].ActionQueueData);
                 offset += (ushort)actionScripts[i].ActionQueueData.Length;
             }
         }
-
-        private void EventNumber_ValueChanged(object sender, EventArgs e)
+        // Other
+        private void PreviewEventOrAction()
+        {
+            if (ep == null || !ep.Visible)
+                ep = new Previewer.Previewer(this.currentScript, this.eventName.SelectedIndex == 0 ? 0 : 2);
+            else
+                ep.Reload(this.currentScript, this.eventName.SelectedIndex == 0 ? 0 : 2);
+            ep.Show();
+        }
+        private void SaveEventNotes()
+        {
+            try
+            {
+                //this.EventScriptNotes.SaveFile(notes.GetPath() + "main-scripts-event.rtf");
+            }
+            catch
+            {
+                MessageBox.Show("ERROR saving main-scripts-event.rtf, please report this if it persists");
+            }
+        }
+        #endregion
+        #region Event Handlers
+        private void eventNum_ValueChanged(object sender, EventArgs e)
         {
             if (!updatingScript) return;
 
-            if (actionScript)
+            if (isActionScript)
             {
-                foreach (ActionQueueCommand aq in actionScripts[currentScript].ActionQueueCommands)
+                foreach (ActionQueueCommand aq in actionScripts[currentScript].Commands)
                     aq.Set = false;
             }
             else
@@ -2421,29 +2406,29 @@ namespace LAZYSHELL
                 {
                     es.Set = false;
                     if (es.EmbeddedActionQueue == null) continue;
-                    foreach (ActionQueueCommand aq in es.EmbeddedActionQueue.ActionQueueCommands)
+                    foreach (ActionQueueCommand aq in es.EmbeddedActionQueue.Commands)
                         aq.Set = false;
                 }
             }
 
             // Update Event Script Offsets
-            currentScript = (int)this.EventNumber.Value;
+            currentScript = (int)this.eventNum.Value;
 
             ResetAllEventLists();
-            if (actionScript)
+            if (isActionScript)
             {
                 UpdateActionOffsets();
-                treeViewWrapper.ChangeScript(actionScripts[(int)this.EventNumber.Value]);
+                treeViewWrapper.ChangeScript(actionScripts[(int)this.eventNum.Value]);
             }
             else
             {
                 UpdateScriptOffsets();
-                treeViewWrapper.ChangeScript(eventScripts[(int)this.EventNumber.Value]);
+                treeViewWrapper.ChangeScript(eventScripts[(int)this.eventNum.Value]);
             }
 
             UpdateCommandData();
 
-            if (actionScript)
+            if (isActionScript)
                 return;
 
             switch (currentScript)
@@ -2454,9 +2439,9 @@ namespace LAZYSHELL
                 case 0xD01:
                 case 0xE91:
                     EventScriptTree.Enabled = false;
-                    cpuCommands.Enabled = false;
-                    actionQueueCommands.Enabled = false;
-                    cpuExtendedCommands.Enabled = false;
+                    categories_es.Enabled = false;
+                    categories_aq.Enabled = false;
+                    commands.Enabled = false;
                     MessageBox.Show(
                         "Editing of script #" + currentScript.ToString() + " is not allowed due to parsing issues.",
                         "LAZY SHELL",
@@ -2466,7 +2451,7 @@ namespace LAZYSHELL
                     EventScriptTree.Enabled = true;
                     break;
             }
-            if (!actionScript)
+            if (!isActionScript)
                 eventLabel.Text = settings.EventLabels[currentScript];
             else
                 eventLabel.Text = settings.ActionLabels[currentScript];
@@ -2475,53 +2460,82 @@ namespace LAZYSHELL
         {
             updatingScript = false;
 
-            EventNumber.Value = currentScript = 0;
+            eventNum.Value = currentScript = 0;
 
-            if (!actionScript)
+            if (!isActionScript)
                 UpdateScriptOffsets();
             else
                 UpdateActionOffsets();
 
             ResetAllEventLists();
 
-            if (actionScript)
-                treeViewWrapper.ChangeScript(actionScripts[(int)this.EventNumber.Value]);
+            if (isActionScript)
+                treeViewWrapper.ChangeScript(actionScripts[(int)this.eventNum.Value]);
             else
-                treeViewWrapper.ChangeScript(eventScripts[(int)this.EventNumber.Value]);
+                treeViewWrapper.ChangeScript(eventScripts[(int)this.eventNum.Value]);
 
             UpdateCommandData();
 
-            if (!actionScript)
+            if (!isActionScript)
                 eventLabel.Text = settings.EventLabels[currentScript];
             else
                 eventLabel.Text = settings.ActionLabels[currentScript];
 
             updatingScript = true;
         }
-        private void addThisToNotesDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EventScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Do.GenerateChecksum(eventScripts, actionScripts) == checksum)
+                goto Close;
+            DialogResult result;
 
+            result = MessageBox.Show("Event Scripts have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+                Assemble();
+            else if (result == DialogResult.No)
+            {
+                Model.EventScripts = null;
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+                return;
+            }
+        Close:
+            settings.Save();
+            searchWindow.Close();
+            if (ep != null)
+                ep.Close();
         }
-
+        private void eventLabel_TextChanged(object sender, EventArgs e)
+        {
+            if (!isActionScript)
+                settings.EventLabels[currentScript] = eventLabel.Text;
+            else
+                settings.ActionLabels[currentScript] = eventLabel.Text;
+        }
+        // tree
         private void EventScriptTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (!updatingScript) return;
-
             if (!EventScriptTree.Enabled)
                 return;
-
-            // Select New
             UpdateCommandData();
-
+            // Set command/category listboxes based on selected node
             EventScriptCommand tempEsc;
-
             // if selecting an action queue/script command
-            if (EventScriptTree.SelectedNode.Parent != null || actionScript)
+            if (EventScriptTree.SelectedNode.Parent != null || isActionScript)
             {
-                cpuCommands.Enabled = false;
-
-                actionQueueCommands.Enabled = true;
-
+                button1.Visible = false;
+                if (!isActionSelected)
+                {
+                    categories_aq.BringToFront();
+                    commands.Items.Clear();
+                    commands.Items.AddRange(Lists.ActionListBoxNames(categories_aq.SelectedIndex));
+                    categories_aq.SelectedIndex = 0;
+                    commands.SelectedIndex = 0;
+                }
                 if (aqc == null && editedNode == null)    // if an event command is in the COMMAND PROPERTIES panel
                 {
                     ResetAllEventControls();
@@ -2534,17 +2548,19 @@ namespace LAZYSHELL
                 tempEsc = (EventScriptCommand)eventScripts[currentScript].Commands[EventScriptTree.SelectedNode.Index];
                 if (tempEsc.Opcode <= 0x2F && tempEsc.Option < 0xF2)
                 {
-                    cpuCommands.Enabled = true;
-
-                    actionQueueCommands.Enabled = true;
-
+                    button1.Visible = true;
                 }
                 else
                 {
-                    cpuCommands.Enabled = true;
-
-                    actionQueueCommands.Enabled = false;
-
+                    button1.Visible = false;
+                    if (isActionSelected)
+                    {
+                        categories_es.BringToFront();
+                        commands.Items.Clear();
+                        commands.Items.AddRange(Lists.EventListBoxNames(categories_es.SelectedIndex));
+                        categories_es.SelectedIndex = 0;
+                        commands.SelectedIndex = 0;
+                    }
                 }
                 if (aqc != null && editedNode == null)    // if an action queue command is in the COMMAND PROPERTIES panel
                 {
@@ -2552,7 +2568,6 @@ namespace LAZYSHELL
                     buttonInsertEvent.Enabled = false;
                 }
             }
-
             treeViewWrapper.SelectedNode = EventScriptTree.SelectedNode;
         }
         private void EventScriptTree_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -2566,46 +2581,47 @@ namespace LAZYSHELL
         private void EventScriptTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             EventScriptTree.SelectedNode = e.Node;
-            if (e.Button == MouseButtons.Right)
+            if (e.Button != MouseButtons.Right) return;
+            goToToolStripMenuItem.Click -= goToDialogue_Click;
+            goToToolStripMenuItem.Click -= goToEvent_Click;
+            goToToolStripMenuItem.Click -= goToOffset_Click;
+            goToToolStripMenuItem.Click -= addMemoryToNotesDatabase_Click;
+            goToToolStripMenuItem.Click -= addMemoryToNotesDatabase_Click;
+            if (EventScriptTree.SelectedNode.Tag.GetType() == typeof(EventScriptCommand))
             {
-                if (EventScriptTree.SelectedNode.Tag.GetType() == typeof(EventScriptCommand))
+                EventScriptCommand temp = (EventScriptCommand)EventScriptTree.SelectedNode.Tag;
+                if (temp.Opcode == 0x60 || temp.Opcode == 0x62)
                 {
-                    EventScriptCommand temp = (EventScriptCommand)EventScriptTree.SelectedNode.Tag;
-                    if (temp.Opcode == 0x60 || temp.Opcode == 0x62)
-                    {
-                        e.Node.ContextMenuStrip = contextMenuStripGoto;
-                        goToToolStripMenuItem.Text = "Edit dialogue...";
-                        goToToolStripMenuItem.Click += new EventHandler(goToDialogue_Click);
-                    }
-                    // 0xa0 - 0xa6  // 0xd8 - 0xde
-                    if (temp.Opcode == 0xA0 || temp.Opcode == 0xA1 || temp.Opcode == 0xA2 ||
-                        temp.Opcode == 0xA4 || temp.Opcode == 0xA5 || temp.Opcode == 0xA6 ||
-                        temp.Opcode == 0xD8 || temp.Opcode == 0xD9 || temp.Opcode == 0xDA ||
-                        temp.Opcode == 0xDC || temp.Opcode == 0xDD || temp.Opcode == 0xDE)
-                    {
-                        e.Node.ContextMenuStrip = contextMenuStripGoto;
-                        goToToolStripMenuItem.Text = "Add to notes database...";
-                        goToToolStripMenuItem.Click += new EventHandler(addMemoryToNotesDatabase_Click);
-                    }
-                    if (temp.Opcode == 0xFD)
-                    {
-                        if (temp.Option == 0xD8 || temp.Option == 0xD9 || temp.Option == 0xDA ||
-                            temp.Option == 0xDC || temp.Option == 0xDD || temp.Option == 0xDE)
-                        {
-                            e.Node.ContextMenuStrip = contextMenuStripGoto;
-                            goToToolStripMenuItem.Text = "Add to notes database...";
-                            goToToolStripMenuItem.Click += new EventHandler(addMemoryToNotesDatabase_Click);
-                        }
-                    }
+                    e.Node.ContextMenuStrip = contextMenuStripGoto;
+                    goToToolStripMenuItem.Text = "Edit dialogue...";
+                    goToToolStripMenuItem.Click += new EventHandler(goToDialogue_Click);
                 }
-                else
+                else if (temp.Opcode == 0x40 || temp.Opcode == 0xD0 || temp.Opcode == 0xD1)
                 {
-                    ActionQueueCommand temp = (ActionQueueCommand)EventScriptTree.SelectedNode.Tag;
-                    // 0xa0 - 0xa6  // 0xd8 - 0xde
-                    if (temp.Opcode == 0xA0 || temp.Opcode == 0xA1 || temp.Opcode == 0xA2 ||
-                        temp.Opcode == 0xA4 || temp.Opcode == 0xA5 || temp.Opcode == 0xA6 ||
-                        temp.Opcode == 0xD8 || temp.Opcode == 0xD9 || temp.Opcode == 0xDA ||
-                        temp.Opcode == 0xDC || temp.Opcode == 0xDD || temp.Opcode == 0xDE)
+                    e.Node.ContextMenuStrip = contextMenuStripGoto;
+                    goToToolStripMenuItem.Text = "Goto event...";
+                    goToToolStripMenuItem.Click += new EventHandler(goToEvent_Click);
+                }
+                else if (temp.ReadPointer() != 0)
+                {
+                    e.Node.ContextMenuStrip = contextMenuStripGoto;
+                    goToToolStripMenuItem.Text = "Goto offset...";
+                    goToToolStripMenuItem.Click += new EventHandler(goToOffset_Click);
+                }
+                // 0xa0 - 0xa6  // 0xd8 - 0xde
+                else if (temp.Opcode == 0xA0 || temp.Opcode == 0xA1 || temp.Opcode == 0xA2 ||
+                    temp.Opcode == 0xA4 || temp.Opcode == 0xA5 || temp.Opcode == 0xA6 ||
+                    temp.Opcode == 0xD8 || temp.Opcode == 0xD9 || temp.Opcode == 0xDA ||
+                    temp.Opcode == 0xDC || temp.Opcode == 0xDD || temp.Opcode == 0xDE)
+                {
+                    e.Node.ContextMenuStrip = contextMenuStripGoto;
+                    goToToolStripMenuItem.Text = "Add to notes database...";
+                    goToToolStripMenuItem.Click += new EventHandler(addMemoryToNotesDatabase_Click);
+                }
+                else if (temp.Opcode == 0xFD)
+                {
+                    if (temp.Option == 0xD8 || temp.Option == 0xD9 || temp.Option == 0xDA ||
+                        temp.Option == 0xDC || temp.Option == 0xDD || temp.Option == 0xDE)
                     {
                         e.Node.ContextMenuStrip = contextMenuStripGoto;
                         goToToolStripMenuItem.Text = "Add to notes database...";
@@ -2613,12 +2629,26 @@ namespace LAZYSHELL
                     }
                 }
             }
+            else
+            {
+                ActionQueueCommand temp = (ActionQueueCommand)EventScriptTree.SelectedNode.Tag;
+                // 0xa0 - 0xa6  // 0xd8 - 0xde
+                if (temp.Opcode == 0xA0 || temp.Opcode == 0xA1 || temp.Opcode == 0xA2 ||
+                    temp.Opcode == 0xA4 || temp.Opcode == 0xA5 || temp.Opcode == 0xA6 ||
+                    temp.Opcode == 0xD8 || temp.Opcode == 0xD9 || temp.Opcode == 0xDA ||
+                    temp.Opcode == 0xDC || temp.Opcode == 0xDD || temp.Opcode == 0xDE)
+                {
+                    e.Node.ContextMenuStrip = contextMenuStripGoto;
+                    goToToolStripMenuItem.Text = "Add to notes database...";
+                    goToToolStripMenuItem.Click += new EventHandler(addMemoryToNotesDatabase_Click);
+                }
+            }
         }
         private void EventScriptTree_AfterCheck(object sender, TreeViewEventArgs e)
         {
             EventScriptCommand esc;
             ActionQueueCommand aqc;
-            if (e.Node.Parent != null || actionScript)
+            if (e.Node.Parent != null || isActionScript)
             {
                 aqc = (ActionQueueCommand)e.Node.Tag;
                 aqc.Set = e.Node.Checked;
@@ -2629,7 +2659,27 @@ namespace LAZYSHELL
                 esc.Set = e.Node.Checked;
             }
         }
+        private void EventScriptTree_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!EventScriptTree.Enabled)
+                return;
+            if (!EventScriptTree.Focused)
+                return;
 
+            switch (e.KeyData)
+            {
+                case Keys.Control | Keys.A: Do.SelectAllNodes(EventScriptTree.Nodes, true); break;
+                case Keys.Control | Keys.D: Do.SelectAllNodes(EventScriptTree.Nodes, false); break;
+                case Keys.Control | Keys.C: EvtScrCopyCommand_Click(null, null); break;
+                case Keys.Control | Keys.V: EvtScrPasteCommand_Click(null, null); break;
+                case Keys.Shift | Keys.Up:
+                case Keys.Control | Keys.Up: EvtScrMoveUp_Click(null, null); break;
+                case Keys.Shift | Keys.Down:
+                case Keys.Control | Keys.Down: EvtScrMoveDown_Click(null, null); break;
+                case Keys.Delete: EvtScrDeleteCommand_Click(null, null); break;
+            }
+        }
+        // functions
         private void EvtScrMoveUp_Click(object sender, EventArgs e)
         {
             updatingScript = false;
@@ -2646,10 +2696,11 @@ namespace LAZYSHELL
             {
                 esc = (EventScriptCommand)eventScripts[currentScript].Commands[EventScriptTree.SelectedNode.Index];
             }
-            catch (Exception ex)
+            catch
             {
             }
             treeViewWrapper.MoveUp();
+            checksum--;   // b/c switching colors won't modify checksum
 
             updatingScript = true;
         }
@@ -2669,10 +2720,11 @@ namespace LAZYSHELL
             {
                 esc = (EventScriptCommand)eventScripts[currentScript].Commands[EventScriptTree.SelectedNode.Index];
             }
-            catch (Exception ex)
+            catch
             {
             }
             treeViewWrapper.MoveDown();
+            checksum--;   // b/c switching colors won't modify checksum
 
             updatingScript = true;
         }
@@ -2719,13 +2771,13 @@ namespace LAZYSHELL
             if (EventScriptTree.SelectedNode.Parent != null)
             {
                 esc = (EventScriptCommand)eventScripts[currentScript].Commands[EventScriptTree.SelectedNode.Parent.Index];
-                aqc = (ActionQueueCommand)esc.EmbeddedActionQueue.ActionQueueCommands[EventScriptTree.SelectedNode.Index];
+                aqc = (ActionQueueCommand)esc.EmbeddedActionQueue.Commands[EventScriptTree.SelectedNode.Index];
                 ControlActionDisasmMethod();
             }
             // action script command
-            else if (actionScript)
+            else if (isActionScript)
             {
-                aqc = (ActionQueueCommand)actionScripts[currentScript].ActionQueueCommands[EventScriptTree.SelectedNode.Index];
+                aqc = (ActionQueueCommand)actionScripts[currentScript].Commands[EventScriptTree.SelectedNode.Index];
                 esc = null;
                 ControlActionDisasmMethod();
             }
@@ -2771,7 +2823,73 @@ namespace LAZYSHELL
         {
             PreviewEventOrAction();
         }
+        // GUI command editor
+        private void categories_es_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            isActionSelected = false;
+            commands.Items.Clear();
+            commands.Items.AddRange(Lists.EventListBoxNames(categories_es.SelectedIndex));
+            commands.SelectedIndex = 0;
+        }
+        private void categories_aq_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            isActionSelected = true;
+            commands.Items.Clear();
+            commands.Items.AddRange(Lists.ActionListBoxNames(categories_aq.SelectedIndex));
+            commands.SelectedIndex = 0;
+        }
+        private void commands_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            byte[] temp;
+            int opcode;
+            int option;
 
+            if (!isActionSelected)
+            {
+                opcode = Lists.EventListBoxOpcodes[categories_es.SelectedIndex][commands.SelectedIndex];
+                option = Lists.EventListBoxFDOpcodes[categories_es.SelectedIndex][commands.SelectedIndex];
+                temp = new byte[ScriptEnums.GetEventOpcodeLength(opcode, option)];
+                temp[0] = (byte)opcode;
+                if (temp.Length > 1)
+                    temp[1] = (byte)option;
+                esc = new EventScriptCommand(temp, 0);
+                aqc = null;
+            }
+            else
+            {
+                opcode = Lists.ActionListBoxOpcodes[categories_aq.SelectedIndex][commands.SelectedIndex];
+                option = Lists.ActionListBoxFDOpcodes[categories_aq.SelectedIndex][commands.SelectedIndex];
+                temp = new byte[ScriptEnums.GetActionQueueOpcodeLength(opcode, option)];
+                temp[0] = (byte)opcode;
+                if (temp.Length > 1)
+                    temp[1] = (byte)option;
+                aqc = new ActionQueueCommand(temp, 0);
+            }
+
+            editedNode = null;  // the COMMAND PROPERTIES panel now contains a new node instead (2008-11-09)
+            ResetAllEventControls();
+            if (!isActionSelected)
+                ControlEventDisasmMethod();
+            else
+                ControlActionDisasmMethod();
+            buttonInsertEvent.Enabled = true;
+            buttonApplyEvent.Enabled = false;
+        }
+        private void button1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (button1.Checked)
+            {
+                categories_aq.BringToFront();
+                categories_aq.SelectedIndex = 0;
+                categories_aq_SelectedIndexChanged(null, null);
+            }
+            else
+            {
+                categories_es.BringToFront();
+                categories_es.SelectedIndex = 0;
+                categories_es_SelectedIndexChanged(null, null);
+            }
+        }
         private void evtNameA_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!updatingControls) return;
@@ -2803,7 +2921,7 @@ namespace LAZYSHELL
                         break;
                     case 0x50:
                     case 0x51:
-                        evtNumA.Value = model.ItemNames.GetNumFromIndex(evtNameA.SelectedIndex);    // Item names
+                        evtNumA.Value = Model.ItemNames.GetNumFromIndex(evtNameA.SelectedIndex);    // Item names
                         break;
                     case 0x4E:
                         updatingControls = false;
@@ -2827,10 +2945,10 @@ namespace LAZYSHELL
                                 break;
                             case 5: // items maxed out
                                 labelEvtB.Text = "toss item";
-                                evtNameB.Items.Clear(); evtNameB.Items.AddRange(model.ItemNames.GetNames()); evtNameB.Enabled = true;
+                                evtNameB.Items.Clear(); evtNameB.Items.AddRange(Model.ItemNames.GetNames()); evtNameB.Enabled = true;
                                 evtNumB.Enabled = true;
 
-                                evtNameB.SelectedIndex = model.ItemNames.GetIndexFromNum((int)evtNumB.Value);
+                                evtNameB.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)evtNumB.Value);
                                 break;
                             case 7: // menu tutorial
                                 labelEvtB.Text = "tutorial";
@@ -2858,7 +2976,7 @@ namespace LAZYSHELL
                         switch (esc.Option)
                         {
                             case 0x58:
-                                evtNumA.Value = model.ItemNames.GetNumFromIndex(evtNameA.SelectedIndex);    // Item names
+                                evtNumA.Value = Model.ItemNames.GetNumFromIndex(evtNameA.SelectedIndex);    // Item names
                                 break;
                         }
                         break;
@@ -2896,7 +3014,7 @@ namespace LAZYSHELL
                         break;
                     case 0x50:
                     case 0x51:
-                        evtNameA.SelectedIndex = model.ItemNames.GetIndexFromNum((int)evtNumA.Value);    // Item names
+                        evtNameA.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)evtNumA.Value);    // Item names
                         break;
                 }
             }
@@ -2911,7 +3029,7 @@ namespace LAZYSHELL
                 {
                     case 0x54:
                     case 0x4E:
-                        evtNumB.Value = model.ItemNames.GetNumFromIndex(evtNameB.SelectedIndex);    // Item names
+                        evtNumB.Value = Model.ItemNames.GetNumFromIndex(evtNameB.SelectedIndex);    // Item names
                         break;
                     case 0x4A:
                         evtNumB.Value = evtNameB.SelectedIndex; // battlefields
@@ -2953,7 +3071,7 @@ namespace LAZYSHELL
                 {
                     case 0x54:
                     case 0x4E:
-                        evtNameB.SelectedIndex = model.ItemNames.GetIndexFromNum((int)evtNumB.Value);    // Item names
+                        evtNameB.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)evtNumB.Value);    // Item names
                         break;
                     case 0x4A:
                         evtNameB.SelectedIndex = (int)evtNumB.Value;    // battlefields
@@ -2973,46 +3091,41 @@ namespace LAZYSHELL
                 }
             }
         }
-
         private void buttonInsertEvent_Click(object sender, EventArgs e)
         {
             EventScriptCommand tempEsc;
-
             // if editing a non-blank script
             if (EventScriptTree.SelectedNode != null)
             {
                 // if inserting action queue/script command
-                if (EventScriptTree.SelectedNode.Parent != null || actionScript)
+                if (EventScriptTree.SelectedNode.Parent != null || isActionScript)
                     InsertActionCommand();
-
                 else
                 {
                     tempEsc = (EventScriptCommand)eventScripts[currentScript].Commands[EventScriptTree.SelectedNode.Index];
-
                     // if adding action queue command to an empty queue trigger
-                    if (tempEsc.IsActionQueueTrigger && actionSelected)
+                    if (tempEsc.IsActionQueueTrigger && isActionSelected)
                         InsertActionCommand();
-
                     // if inserting an event command
                     else InsertEventCommand();
                 }
             }
             // if inserting action command to a blank action script
-            else if (actionScript) InsertActionCommand();
-
+            else if (isActionScript)
+                InsertActionCommand();
             // if inserting event command to a blank event script
             else InsertEventCommand();
-
-            if (!actionScript) UpdateEventScriptsFreeSpace();
-            else UpdateActionScriptsFreeSpace();
-
+            if (!isActionScript)
+                UpdateEventScriptsFreeSpace();
+            else
+                UpdateActionScriptsFreeSpace();
             UpdateCommandData();
         }
         private void buttonApplyEvent_Click(object sender, EventArgs e)
         {
             if (editedNode != null)
             {
-                if (editedNode.Parent != null || actionScript)
+                if (editedNode.Parent != null || isActionScript)
                 {
                     ControlActionAsmMethod();
                     treeViewWrapper.ReplaceNode(aqc);
@@ -3032,108 +3145,12 @@ namespace LAZYSHELL
 
             EvtScrEditCommand_Click(null, null);
         }
-        private void cpuCommands_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            actionSelected = false;
-            cpuExtendedCommands.Items.Clear();
-            cpuExtendedCommands.Items.AddRange(Lists.EventListBoxNames(cpuCommands.SelectedIndex));
-            cpuExtendedCommands.SelectedIndex = 0;
-        }
-        private void cpuExtendedCommands_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            byte[] temp;
-            int opcode;
-            int option;
-
-            if (!actionSelected)
-            {
-                opcode = Lists.EventListBoxOpcodes[cpuCommands.SelectedIndex][cpuExtendedCommands.SelectedIndex];
-                option = Lists.EventListBoxFDOpcodes[cpuCommands.SelectedIndex][cpuExtendedCommands.SelectedIndex];
-                temp = new byte[ScriptEnums.GetEventOpcodeLength(opcode, option)];
-                temp[0] = (byte)opcode;
-                if (temp.Length > 1)
-                    temp[1] = (byte)option;
-                esc = new EventScriptCommand(temp, 0);
-                aqc = null;
-            }
-            else
-            {
-                opcode = Lists.ActionListBoxOpcodes[actionQueueCommands.SelectedIndex][cpuExtendedCommands.SelectedIndex];
-                option = Lists.ActionListBoxFDOpcodes[actionQueueCommands.SelectedIndex][cpuExtendedCommands.SelectedIndex];
-                temp = new byte[ScriptEnums.GetActionQueueOpcodeLength(opcode, option)];
-                temp[0] = (byte)opcode;
-                if (temp.Length > 1)
-                    temp[1] = (byte)option;
-                aqc = new ActionQueueCommand(temp, 0);
-            }
-
-            editedNode = null;  // the COMMAND PROPERTIES panel now contains a new node instead (2008-11-09)
-            ResetAllEventControls();
-            if (!actionSelected)
-                ControlEventDisasmMethod();
-            else
-                ControlActionDisasmMethod();
-            buttonInsertEvent.Enabled = true;
-            buttonApplyEvent.Enabled = false;
-        }
-        private void actionQueueCommands_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            actionSelected = true;
-            cpuExtendedCommands.Items.Clear();
-            cpuExtendedCommands.Items.AddRange(Lists.ActionListBoxNames(actionQueueCommands.SelectedIndex));
-            cpuExtendedCommands.SelectedIndex = 0;
-        }
-        // main
-        private void Scripts_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            GC.Collect();
-        }
-        private void Scripts_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (!EventScriptTree.Enabled)
-                return;
-            if (!EventScriptTree.Focused)
-                return;
-
-            switch (e.KeyData)
-            {
-                case Keys.Control | Keys.A: Do.SelectAllNodes(EventScriptTree.Nodes, true); break;
-                case Keys.Control | Keys.D: Do.SelectAllNodes(EventScriptTree.Nodes, false); break;
-                case Keys.Control | Keys.C: EvtScrCopyCommand_Click(null, null); break;
-                case Keys.Control | Keys.V: EvtScrPasteCommand_Click(null, null); break;
-                case Keys.Shift | Keys.Up:
-                case Keys.Control | Keys.Up: EvtScrMoveUp_Click(null, null); break;
-                case Keys.Shift | Keys.Down:
-                case Keys.Control | Keys.Down: EvtScrMoveDown_Click(null, null); break;
-                case Keys.Delete: EvtScrDeleteCommand_Click(null, null); break;
-            }
-        }
-        private void Scripts_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
-        {
-            DialogResult result;
-
-            result = MessageBox.Show("Scripts have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
-            {
-                Assemble();
-            }
-            else if (result == DialogResult.No)
-            {
-                //Buffer.BlockCopy(animationBank, 0, data, 0x350000, 0x10000);
-                //Buffer.BlockCopy(battleBank, 0, data, 0x3A6000, 0xA000);
-            }
-            else if (result == DialogResult.Cancel)
-            {
-                e.Cancel = true;
-                return;
-            }
-            settings.Save();
-        }
         // menustrip
-        private void saveScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void save_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             Assemble();
+            Cursor.Current = Cursors.Arrow;
         }
         private void autoPointerUpdate_Click(object sender, EventArgs e)
         {
@@ -3165,23 +3182,37 @@ namespace LAZYSHELL
             EventScriptTree.BeginUpdate();
             treeViewWrapper.RefreshScript();
             EventScriptTree.EndUpdate();
-            EventNumber_ValueChanged(null, null);
+            eventNum_ValueChanged(null, null);
 
             apply = false;
             if (CalculateEventScriptsLength() >= 0)
                 AssembleAllEventScripts();
             else
                 MessageBox.Show("There is not enough available space to save the event scripts to.\n\nThe event scripts were not saved.", "LAZY SHELL");
-            this.eventScripts = model.EventScripts;
+            this.eventScripts = Model.EventScripts;
             InitializeEventScriptsEditor();
         }
-        // help menu
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Form about = new About(this);
             //about.ShowDialog(this);
         }
-        // FORM EVENT HANDLERS
+        private void hexViewer_Click(object sender, EventArgs e)
+        {
+            if (!isActionScript)
+            {
+                Model.HexViewer.Offset = eventScript.BaseOffset & 0xFFFFF0;
+                Model.HexViewer.SelectionStart = (eventScript.BaseOffset & 15) * 3;
+            }
+            else
+            {
+                Model.HexViewer.Offset = actionScript.Offset & 0xFFFFF0;
+                Model.HexViewer.SelectionStart = (actionScript.Offset & 15) * 3;
+            }
+            Model.HexViewer.Compare();
+            Model.HexViewer.Show();
+        }
+        // IO elements
         private void exportAllBattleScripts_Click(object sender, EventArgs e)
         {
             //ioElements = new IOElements(this, (int)monsterNumber.Value, "EXPORT BATTLE SCRIPTS...");
@@ -3210,7 +3241,7 @@ namespace LAZYSHELL
             ioElements.ShowDialog();
             if (ioElements.DialogResult == DialogResult.Cancel)
                 return;
-            EventNumber_ValueChanged(null, null);
+            eventNum_ValueChanged(null, null);
         }
         private void importAllActionScripts_Click(object sender, EventArgs e)
         {
@@ -3218,7 +3249,7 @@ namespace LAZYSHELL
             ioElements.ShowDialog();
             if (ioElements.DialogResult == DialogResult.Cancel)
                 return;
-            EventNumber_ValueChanged(null, null);
+            eventNum_ValueChanged(null, null);
         }
         private void clearAllBattleScripts_Click(object sender, EventArgs e)
         {
@@ -3229,7 +3260,7 @@ namespace LAZYSHELL
         }
         private void clearAllEventScripts_Click(object sender, EventArgs e)
         {
-            if (!actionScript)
+            if (!isActionScript)
                 clearElements = new ClearElements(eventScripts, index, "CLEAR EVENT SCRIPTS...");
             else
                 clearElements = new ClearElements(eventScripts, 0, "CLEAR EVENT SCRIPTS...");
@@ -3237,11 +3268,11 @@ namespace LAZYSHELL
             if (clearElements.DialogResult == DialogResult.Cancel)
                 return;
 
-            EventNumber_ValueChanged(null, null);
+            eventNum_ValueChanged(null, null);
         }
         private void clearAllActionScripts_Click(object sender, EventArgs e)
         {
-            if (actionScript)
+            if (isActionScript)
                 clearElements = new ClearElements(actionScripts, index, "CLEAR ACTION SCRIPTS...");
             else
                 clearElements = new ClearElements(actionScripts, 0, "CLEAR ACTION SCRIPTS...");
@@ -3249,17 +3280,186 @@ namespace LAZYSHELL
             if (clearElements.DialogResult == DialogResult.Cancel)
                 return;
 
-            EventNumber_ValueChanged(null, null);
+            eventNum_ValueChanged(null, null);
         }
-
-        // Labels
-        private void eventLabel_TextChanged(object sender, EventArgs e)
+        private void importEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!actionScript)
-                settings.EventLabels[currentScript] = eventLabel.Text;
-            else
-                settings.ActionLabels[currentScript] = eventLabel.Text;
+            int length = eventScript.ScriptLength;
+            new IOElements((Element[])Model.EventScripts, index, "IMPORT EVENT SCRIPTS...").ShowDialog();
+            treeViewWrapper.ScriptDelta += eventScript.ScriptLength - length;
+            treeViewWrapper.RefreshScript();
+            treeViewWrapper.ChangeScript(eventScript);
         }
+        private void importActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int length = actionScript.ActionQueueLength;
+            new IOElements((Element[])Model.ActionScripts, index, "IMPORT ACTION SCRIPTS...").ShowDialog();
+            treeViewWrapper.ScriptDelta += actionScript.ActionQueueLength - length;
+            treeViewWrapper.RefreshScript();
+            treeViewWrapper.ChangeScript(actionScript);
+        }
+        private void exportEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new IOElements((Element[])Model.EventScripts, index, "EXPORT EVENT SCRIPTS...").ShowDialog();
+        }
+        private void exportActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new IOElements((Element[])Model.ActionScripts, index, "EXPORT ACTION SCRIPTS...").ShowDialog();
+        }
+        private void dumpEventScriptTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 0;
+            saveFileDialog.FileName = "eventScripts.txt";
+            saveFileDialog.RestoreDirectory = true;
+
+            ArrayList scriptCmds;
+            ArrayList actionQueues;
+            EventScriptCommand esc;
+            ActionQueueCommand aqc;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter evtscr = File.CreateText(saveFileDialog.FileName);
+
+                for (int i = 0; i < eventScripts.Length; i++)
+                {
+                    scriptCmds = eventScripts[i].Commands;
+
+                    evtscr.WriteLine("[" + i.ToString("d4") + "]" +
+                        "------------------------------------------------------------>");
+                    for (int j = 0; j < scriptCmds.Count; j++)
+                    {
+                        esc = (EventScriptCommand)scriptCmds[j];
+                        evtscr.Write((esc.Offset).ToString("X6") + ": ");
+
+                        if (esc.Opcode <= 0x2F && esc.Option <= 0xF1 && !esc.IsDummy)
+                        {
+                            if (esc.Option == 0xF0 || esc.Option == 0xF1)
+                                evtscr.Write("{" + BitConverter.ToString(esc.EventData, 0, 3) + "}            ");
+                            else
+                                evtscr.Write("{" + BitConverter.ToString(esc.EventData, 0, 2) + "}               ");
+
+                            evtscr.Write(esc.ToString() + "\n");
+
+                            if (esc.EmbeddedActionQueue.Commands != null)
+                            {
+                                actionQueues = esc.EmbeddedActionQueue.Commands;
+                                for (int k = 0; k < actionQueues.Count; k++)
+                                {
+                                    aqc = (ActionQueueCommand)actionQueues[k];
+                                    evtscr.Write("   " + (aqc.Offset).ToString("X6") + ": ");
+                                    evtscr.Write("{" + BitConverter.ToString(aqc.EventData) + "}");
+                                    for (int l = aqc.QueueLength; l < 7; l++)
+                                        evtscr.Write("   ");
+                                    evtscr.Write(aqc.ToString() + "\n");
+                                }
+                            }
+                        }
+                        else if (esc.IsDummy)   // 0xd01 and 0xe91 only
+                        {
+                            evtscr.Write("NON-EMBEDDED ACTION QUEUE\n");
+                            if (esc.EmbeddedActionQueue.Commands != null)
+                            {
+                                actionQueues = esc.EmbeddedActionQueue.Commands;
+                                for (int k = 0; k < actionQueues.Count; k++)
+                                {
+                                    aqc = (ActionQueueCommand)actionQueues[k];
+                                    evtscr.Write("   " + (aqc.Offset).ToString("X6") + ": ");
+                                    evtscr.Write("{" + BitConverter.ToString(aqc.EventData) + "}");
+                                    for (int l = aqc.QueueLength; l < 7; l++)
+                                        evtscr.Write("   ");
+                                    evtscr.Write(aqc.ToString() + "\n");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            evtscr.Write("{" + BitConverter.ToString(esc.EventData) + "}");
+                            for (int k = esc.EventLength; k < 7; k++)
+                                evtscr.Write("   ");
+
+                            evtscr.Write(esc.ToString() + "\n");
+                        }
+                    }
+                    evtscr.Write("\n");
+                }
+                evtscr.Close();
+            }
+        }
+        private void dumpActionScriptTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 0;
+            saveFileDialog.FileName = "actionScripts.txt";
+            saveFileDialog.RestoreDirectory = true;
+
+            ArrayList scriptCmds;
+            ActionQueueCommand aqc;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter actScr = File.CreateText(saveFileDialog.FileName);
+
+                for (int i = 0; i < actionScripts.Length; i++)
+                {
+                    scriptCmds = actionScripts[i].Commands;
+
+                    actScr.WriteLine("[" + i.ToString("d4") + "]" +
+                        "------------------------------------------------------------>");
+
+                    if (scriptCmds != null)
+                    {
+                        for (int k = 0; k < scriptCmds.Count; k++)
+                        {
+                            aqc = (ActionQueueCommand)scriptCmds[k];
+                            actScr.Write((aqc.Offset).ToString("X6") + ": ");
+                            actScr.Write("{" + BitConverter.ToString(aqc.EventData) + "}");
+                            for (int l = aqc.QueueLength; l < 7; l++)
+                                actScr.Write("   ");
+                            actScr.Write(aqc.ToString() + "\n");
+                        }
+                    }
+                    actScr.Write("\n");
+                }
+                actScr.Close();
+            }
+        }
+        private void clearEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ClearElements(Model.EventScripts, index, "CLEAR EVENT SCRIPTS...").ShowDialog();
+            eventNum_ValueChanged(null, null);
+        }
+        private void clearActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ClearElements(Model.ActionScripts, index, "CLEAR ACTION SCRIPTS...").ShowDialog();
+            eventNum_ValueChanged(null, null);
+        }
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current script. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            int length;
+            if (!isActionScript)
+            {
+                length = eventScript.ScriptLength;
+                eventScript = new EventScript(Model.Data, index);
+                treeViewWrapper.ScriptDelta += eventScript.ScriptLength - length;
+                treeViewWrapper.RefreshScript();
+                treeViewWrapper.ChangeScript(eventScript);
+            }
+            else
+            {
+                length = actionScript.ActionQueueLength;
+                actionScript = new ActionQueue(Model.Data, index);
+                treeViewWrapper.ScriptDelta += actionScript.ActionQueueLength - length;
+                treeViewWrapper.RefreshScript();
+                treeViewWrapper.ChangeScript(actionScript);
+            }
+        }
+        // context menustrip
         private void goToDialogue_Click(object sender, EventArgs e)
         {
             if (EventScriptTree.SelectedNode == null) return;
@@ -3267,11 +3467,11 @@ namespace LAZYSHELL
             EventScriptCommand temp = (EventScriptCommand)EventScriptTree.SelectedNode.Tag;
             int num = Bits.GetShort(temp.EventData, 1) & 0xFFF;
 
-            if (model.Program.Dialogues == null)
-                model.Program.CreateDialoguesWindow();
+            if (Model.Program.Dialogues == null)
+                Model.Program.CreateDialoguesWindow();
 
-            model.Program.Dialogues.DialogueNum.Value = num;
-            model.Program.Dialogues.BringToFront();
+            Model.Program.Dialogues.DialogueNum.Value = num;
+            Model.Program.Dialogues.BringToFront();
         }
         private void addMemoryToNotesDatabase_Click(object sender, EventArgs e)
         {
@@ -3322,9 +3522,9 @@ namespace LAZYSHELL
 
             label = description = "[" + address.ToString("X4") + ", bit: " + addressBit.ToString() + "]";
 
-            if (model.Program.Notes == null || !model.Program.Notes.Visible)
-                model.Program.CreateNotesWindow();
-            Notes note = model.Program.Notes;
+            if (Model.Program.Notes == null || !Model.Program.Notes.Visible)
+                Model.Program.CreateNotesWindow();
+            Notes note = Model.Program.Notes;
             if (note.ThisNotes == null)
                 note.LoadNotes();
             if (note.ThisNotes != null)
@@ -3338,184 +3538,55 @@ namespace LAZYSHELL
                     MessageBoxButtons.OK);
             }
         }
-
-        private void EventScripts_FormClosing(object sender, FormClosingEventArgs e)
+        private void addThisToNotesDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult result;
 
-            result = MessageBox.Show("Event Scripts have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+        }
+        private void goToEvent_Click(object sender, EventArgs e)
+        {
+            if (EventScriptTree.SelectedNode == null) return;
 
-            if (result == DialogResult.Yes)
-                Assemble();
-            else if (result == DialogResult.No)
+            EventScriptCommand temp = (EventScriptCommand)EventScriptTree.SelectedNode.Tag;
+            int num = Bits.GetShort(temp.EventData, 1) & 0xFFF;
+
+            eventNum.Value = num;
+        }
+        private void goToOffset_Click(object sender, EventArgs e)
+        {
+            if (EventScriptTree.SelectedNode == null) return;
+            EventActionCommand temp = (EventActionCommand)EventScriptTree.SelectedNode.Tag;
+            int pointer = temp.ReadPointer() + (eventScript.BaseOffset & 0xFF0000);
+            foreach (EventScript script in eventScripts)
             {
-                model.EventScripts = null;
-            }
-            else if (result == DialogResult.Cancel)
-            {
-                e.Cancel = true;
-                return;
-            }
-            settings.Save();
-            searchWindow.Close();
-            if (ep != null)
-                ep.Close();
-        }
-
-        private void save_Click(object sender, EventArgs e)
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            Assemble();
-            Cursor.Current = Cursors.Arrow;
-        }
-
-        private void importEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new IOElements((Element[])model.EventScripts, index, "IMPORT EVENT SCRIPTS...").ShowDialog();
-            EventNumber_ValueChanged(null, null);
-        }
-        private void importActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new IOElements((Element[])model.ActionScripts, index, "IMPORT ACTION SCRIPTS...").ShowDialog();
-            EventNumber_ValueChanged(null, null);
-        }
-        private void exportEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new IOElements((Element[])model.EventScripts, index, "EXPORT EVENT SCRIPTS...").ShowDialog();
-        }
-        private void exportActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new IOElements((Element[])model.ActionScripts, index, "EXPORT ACTION SCRIPTS...").ShowDialog();
-        }
-        private void dumpEventScriptTextToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = "eventScripts.txt";
-            saveFileDialog.RestoreDirectory = true;
-
-            ArrayList scriptCmds;
-            ArrayList actionQueues;
-            EventScriptCommand esc;
-            ActionQueueCommand aqc;
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                StreamWriter evtscr = File.CreateText(saveFileDialog.FileName);
-
-                for (int i = 0; i < eventScripts.Length; i++)
+                foreach (EventScriptCommand command in script.Commands)
                 {
-                    scriptCmds = eventScripts[i].Commands;
-
-                    evtscr.WriteLine("[" + i.ToString("d4") + "]" +
-                        "------------------------------------------------------------>");
-                    for (int j = 0; j < scriptCmds.Count; j++)
+                    if (command.EmbeddedActionQueue != null)
                     {
-                        esc = (EventScriptCommand)scriptCmds[j];
-                        evtscr.Write((esc.Offset).ToString("X6") + ": ");
-
-                        if (esc.Opcode <= 0x2F && esc.Option <= 0xF1 && !esc.IsDummy)
+                        foreach (ActionQueueCommand action in command.EmbeddedActionQueue.Commands)
                         {
-                            if (esc.Option == 0xF0 || esc.Option == 0xF1)
-                                evtscr.Write("{" + BitConverter.ToString(esc.EventData, 0, 3) + "}            ");
-                            else
-                                evtscr.Write("{" + BitConverter.ToString(esc.EventData, 0, 2) + "}               ");
-
-                            evtscr.Write(esc.ToString() + "\n");
-
-                            if (esc.EmbeddedActionQueue.ActionQueueCommands != null)
+                            if (action.Offset + action.EventData.Length > pointer || action.Offset >= pointer)
                             {
-                                actionQueues = esc.EmbeddedActionQueue.ActionQueueCommands;
-                                for (int k = 0; k < actionQueues.Count; k++)
+                                if (command.Offset + command.EventLength > pointer || command.Offset >= pointer)
                                 {
-                                    aqc = (ActionQueueCommand)actionQueues[k];
-                                    evtscr.Write("   " + (aqc.Offset).ToString("X6") + ": ");
-                                    evtscr.Write("{" + BitConverter.ToString(aqc.QueueData) + "}");
-                                    for (int l = aqc.QueueLength; l < 7; l++)
-                                        evtscr.Write("   ");
-                                    evtscr.Write(aqc.ToString() + "\n");
+                                    index = script.Index;
+                                    treeViewWrapper.SelectNode(command);
+                                    return;
                                 }
+                                index = script.Index;
+                                treeViewWrapper.SelectNode(action);
+                                return;
                             }
                         }
-                        else if (esc.IsDummy)   // 0xd01 and 0xe91 only
-                        {
-                            evtscr.Write("NON-EMBEDDED ACTION QUEUE\n");
-                            if (esc.EmbeddedActionQueue.ActionQueueCommands != null)
-                            {
-                                actionQueues = esc.EmbeddedActionQueue.ActionQueueCommands;
-                                for (int k = 0; k < actionQueues.Count; k++)
-                                {
-                                    aqc = (ActionQueueCommand)actionQueues[k];
-                                    evtscr.Write("   " + (aqc.Offset).ToString("X6") + ": ");
-                                    evtscr.Write("{" + BitConverter.ToString(aqc.QueueData) + "}");
-                                    for (int l = aqc.QueueLength; l < 7; l++)
-                                        evtscr.Write("   ");
-                                    evtscr.Write(aqc.ToString() + "\n");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            evtscr.Write("{" + BitConverter.ToString(esc.EventData) + "}");
-                            for (int k = esc.EventLength; k < 7; k++)
-                                evtscr.Write("   ");
-
-                            evtscr.Write(esc.ToString() + "\n");
-                        }
                     }
-                    evtscr.Write("\n");
-                }
-                evtscr.Close();
-            }
-        }
-        private void dumpActionScriptTextToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = "actionScripts.txt";
-            saveFileDialog.RestoreDirectory = true;
-
-            ArrayList scriptCmds;
-            ActionQueueCommand aqc;
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                StreamWriter actScr = File.CreateText(saveFileDialog.FileName);
-
-                for (int i = 0; i < actionScripts.Length; i++)
-                {
-                    scriptCmds = actionScripts[i].ActionQueueCommands;
-
-                    actScr.WriteLine("[" + i.ToString("d4") + "]" +
-                        "------------------------------------------------------------>");
-
-                    if (scriptCmds != null)
+                    if (command.Offset + command.EventLength > pointer || command.Offset >= pointer)
                     {
-                        for (int k = 0; k < scriptCmds.Count; k++)
-                        {
-                            aqc = (ActionQueueCommand)scriptCmds[k];
-                            actScr.Write((aqc.Offset).ToString("X6") + ": ");
-                            actScr.Write("{" + BitConverter.ToString(aqc.QueueData) + "}");
-                            for (int l = aqc.QueueLength; l < 7; l++)
-                                actScr.Write("   ");
-                            actScr.Write(aqc.ToString() + "\n");
-                        }
+                        index = script.Index;
+                        treeViewWrapper.SelectNode(command);
+                        return;
                     }
-                    actScr.Write("\n");
                 }
-                actScr.Close();
             }
         }
-        private void clearEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new ClearElements(model.EventScripts, index, "CLEAR EVENT SCRIPTS...").ShowDialog();
-            EventNumber_ValueChanged(null, null);
-        }
-        private void clearActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new ClearElements(model.ActionScripts, index, "CLEAR ACTION SCRIPTS...").ShowDialog();
-            EventNumber_ValueChanged(null, null);
-        }
+        #endregion
     }
 }

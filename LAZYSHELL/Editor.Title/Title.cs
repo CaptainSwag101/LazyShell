@@ -12,12 +12,12 @@ namespace LAZYSHELL
     public partial class Title : Form
     {
         #region Variables
+        private long checksum;
         // main
         private delegate void Function();
-        private Model model = State.Instance.Model;
-        private PaletteSet paletteSet { get { return model.TitlePalettes; } set { model.TitlePalettes = value; } }
-        private PaletteSet spritePaletteSet { get { return model.TitleSpritePalettes; } set { model.TitleSpritePalettes = value; } }
-        private TitleTileset tileSet { get { return model.TitleTileSet; } set { model.TitleTileSet = value; } }
+        private PaletteSet paletteSet { get { return Model.TitlePalettes; } set { Model.TitlePalettes = value; } }
+        private PaletteSet spritePaletteSet { get { return Model.TitleSpritePalettes; } set { Model.TitleSpritePalettes = value; } }
+        private TitleTileset tileSet { get { return Model.TitleTileSet; } set { Model.TitleTileSet = value; } }
         private Overlay overlay = new Overlay();
         private int layer { get { return tabControl2.SelectedIndex; } set { tabControl2.SelectedIndex = value; } }
         private PictureBox pictureBoxTileset
@@ -63,6 +63,8 @@ namespace LAZYSHELL
         #region Functions
         public Title()
         {
+            checksum = Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
+            //
             InitializeComponent();
             Do.AddShortcut(toolStrip1, Keys.Control | Keys.S, new EventHandler(save_Click));
             SetTilesetImages();
@@ -147,12 +149,12 @@ namespace LAZYSHELL
             if (spriteGraphicEditor == null)
             {
                 spriteGraphicEditor = new GraphicEditor(new Function(SpriteGraphicUpdate),
-                    model.TitleSpriteGraphics, model.TitleSpriteGraphics.Length, 0, spritePaletteSet, 0, 0x20);
+                    Model.TitleSpriteGraphics, Model.TitleSpriteGraphics.Length, 0, spritePaletteSet, 0, 0x20);
                 spriteGraphicEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
                 spriteGraphicEditor.Reload(new Function(SpriteGraphicUpdate),
-                    model.TitleSpriteGraphics, model.TitleSpriteGraphics.Length, 0, spritePaletteSet, 0, 0x20);
+                    Model.TitleSpriteGraphics, Model.TitleSpriteGraphics.Length, 0, spritePaletteSet, 0, 0x20);
         }
         private void TileUpdate()
         {
@@ -167,6 +169,7 @@ namespace LAZYSHELL
             pictureBoxTitle.Invalidate();
             LoadGraphicEditor();
             LoadTileEditor();
+            checksum--;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {
@@ -267,6 +270,7 @@ namespace LAZYSHELL
                 {
                     Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileSet.TileSetLayers[layer][(y + y_) * 16 + x + x_] = tile.Copy();
+                    tileSet.TileSetLayers[layer][(y + y_) * 16 + x + x_].TileIndex = (y + y_) * 16 + x + x_;
                 }
             }
             overlay.SelectTS = null;
@@ -373,8 +377,8 @@ namespace LAZYSHELL
             if (paletteIndexes == null) return;
             byte[] tileset = new byte[0x2000];
             Do.CopyToTileset(graphics, tileset, palettes, paletteIndexes, true, false, 0x20, 2, new Size(256, 1024), 0);
-            Buffer.BlockCopy(tileset, 0, model.TitleData, 0, 0x2000);
-            Buffer.BlockCopy(graphics, 0, model.TitleData, 0x6C00, 0x4FE0);
+            Buffer.BlockCopy(tileset, 0, Model.TitleData, 0, 0x2000);
+            Buffer.BlockCopy(graphics, 0, Model.TitleData, 0x6C00, 0x4FE0);
             tileSet = new TitleTileset(paletteSet);
             SetTilesetImages();
             pictureBoxTitle.Invalidate();
@@ -425,8 +429,8 @@ namespace LAZYSHELL
             Buffer.BlockCopy(tilesetTitle, 0, tileset, 0, 0x300);
             Buffer.BlockCopy(tilesetCopyright, 0x1C0, tileset, 0x1C0, 0x140);
 
-            Buffer.BlockCopy(tileset, 0, model.TitleData, 0xBBE0, 0x300);
-            Buffer.BlockCopy(graphics, 0, model.TitleData, 0xBEE0, 0x1B80);
+            Buffer.BlockCopy(tileset, 0, Model.TitleData, 0xBBE0, 0x300);
+            Buffer.BlockCopy(graphics, 0, Model.TitleData, 0xBEE0, 0x1B80);
 
             tileSet = new TitleTileset(paletteSet);
 
@@ -441,7 +445,7 @@ namespace LAZYSHELL
             tileSet.AssembleIntoModel(16);
             // Tilesets
             byte[] compressed = new byte[0xDA60];
-            int size = Comp.Compress(model.TitleData, compressed);
+            int size = Comp.Compress(Model.TitleData, compressed);
             int totalSize = size + 1;
             if (totalSize > 0x7E91)
             {
@@ -452,13 +456,15 @@ namespace LAZYSHELL
             }
             else
             {
-                Bits.SetByteArray(model.Data, 0x3F216F, compressed, 0, size - 1);
+                Bits.SetByteArray(Model.Data, 0x3F216F, compressed, 0, size - 1);
             }
         }
         #endregion
         #region Event Handlers
         private void Title_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet) == checksum)
+                goto Close;
             DialogResult result = MessageBox.Show(
                 "Main Title has not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -466,17 +472,18 @@ namespace LAZYSHELL
                 Assemble();
             else if (result == DialogResult.No)
             {
-                model.TitleData = null;
-                model.TitlePalettes = null;
-                model.TitleSpriteGraphics = null;
-                model.TitleSpritePalettes = null;
-                model.TitleTileSet = null;
+                Model.TitleData = null;
+                Model.TitlePalettes = null;
+                Model.TitleSpriteGraphics = null;
+                Model.TitleSpritePalettes = null;
+                Model.TitleTileSet = null;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
+        Close:
             paletteEditor.Close();
             graphicEditor.Close();
             spritePaletteEditor.Close();

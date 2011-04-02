@@ -5,10 +5,11 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class WorldMapTileSet
     {
-        private Model model = State.Instance.Model;
-        private WorldMap worldMap;
+        [NonSerialized()]
+                private WorldMap worldMap;
         private PaletteSet palettes;
         private byte[] graphics; public byte[] Graphics { get { return graphics; } set { graphics = value; } }
         private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
@@ -19,8 +20,8 @@ namespace LAZYSHELL
             this.worldMap = worldMap;
             this.palettes = palettes;
 
-            graphics = model.WorldMapGraphics;
-            tileSet = model.WorldMapTileSets[worldMap.Tileset];
+            graphics = Model.WorldMapGraphics;
+            tileSet = Model.WorldMapTileSets[worldMap.Tileset];
 
             tileSetLayer = new Tile16x16[16 * 16];
             for (int i = 0; i < tileSetLayer.Length; i++)

@@ -75,7 +75,7 @@ namespace LAZYSHELL
         }
         private void RefreshTileModProperties()
         {
-            updating = true;
+            updatingProperties = true;
 
             if (tileMods.Mods.Count != 0 && this.tileModsFieldTree.SelectedNode != null)
             {
@@ -112,7 +112,7 @@ namespace LAZYSHELL
                         item.Enabled = false;
                 panel15.Enabled = false;
             }
-            updating = false;
+            updatingProperties = false;
         }
         private int CalculateFreeTileModSpace()
         {
@@ -182,19 +182,19 @@ namespace LAZYSHELL
         }
         private void tileModsX_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
             tileMods.X = (int)tileModsX.Value;
             levelsTilemap.Picture.Invalidate();
         }
         private void tileModsY_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
             tileMods.Y = (int)tileModsY.Value;
             levelsTilemap.Picture.Invalidate();
         }
         private void tileModsWidth_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
             int temp = tileMods.Width;
             tileMods.Width = (int)tileModsWidth.Value;
             if (CalculateFreeTileModSpace() < 0)
@@ -210,7 +210,7 @@ namespace LAZYSHELL
         }
         private void tileModsHeight_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
             int temp = tileMods.Height;
             tileMods.Height = (int)tileModsHeight.Value;
             if (CalculateFreeTileModSpace() < 0)
@@ -226,7 +226,7 @@ namespace LAZYSHELL
         }
         private void tileModsLayers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
             tileMods.Layer1 = tileModsLayers.GetItemChecked(0);
             tileMods.Layer2 = tileModsLayers.GetItemChecked(1);
             tileMods.Layer3 = tileModsLayers.GetItemChecked(2);
@@ -421,7 +421,7 @@ namespace LAZYSHELL
         }
         private void RefreshSolidModProperties()
         {
-            updating = true;
+            updatingLevel = true;
             if (solidMods.Mods.Count != 0 && this.solidModsFieldTree.SelectedNode != null)
             {
                 solidMods.CurrentMod = this.solidModsFieldTree.SelectedNode.Index;
@@ -444,7 +444,7 @@ namespace LAZYSHELL
                 solidModsWidth.Value = 0;
                 solidModsHeight.Value = 0;
             }
-            updating = false;
+            updatingLevel = false;
         }
         private int CalculateFreeSolidModSpace()
         {
@@ -501,21 +501,21 @@ namespace LAZYSHELL
         }
         private void solidModsX_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
             solidMods.X = (int)solidModsX.Value;
             solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
             levelsTilemap.Picture.Invalidate();
         }
         private void solidModsY_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
             solidMods.Y = (int)solidModsY.Value;
             solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
             levelsTilemap.Picture.Invalidate();
         }
         private void solidModsWidth_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
             int temp = solidMods.Width;
             solidMods.Width = (int)solidModsWidth.Value;
             if (CalculateFreeSolidModSpace() < 0)
@@ -529,7 +529,7 @@ namespace LAZYSHELL
         }
         private void solidModsHeight_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updatingProperties) return;
             int temp = solidMods.Height;
             solidMods.Height = (int)solidModsHeight.Value;
             if (CalculateFreeSolidModSpace() < 0)

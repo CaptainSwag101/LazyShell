@@ -27,18 +27,18 @@ namespace LAZYSHELL
 
             this.Text = title;
 
-            if (type != typeof(Model))
+            if (type != null)
                 toIndex.Value = toIndex.Maximum = ((object[])element).Length - 1;
-            else if (type == typeof(Model) && this.Text == "CLEAR LEVEL DATA...")
-                toIndex.Value = toIndex.Maximum = ((Model)element).Levels.Length - 1;
-            else if (type == typeof(Model) && this.Text == "CLEAR TILESETS...")
-                toIndex.Value = toIndex.Maximum = ((Model)element).TileSets.Length - 1;
-            else if (type == typeof(Model) && this.Text == "CLEAR TILEMAPS...")
-                toIndex.Value = toIndex.Maximum = ((Model)element).TileMaps.Length - 1;
-            else if (type == typeof(Model) && this.Text == "CLEAR SOLIDITY MAPS...")
-                toIndex.Value = toIndex.Maximum = ((Model)element).SolidityMaps.Length - 1;
-            else if (type == typeof(Model) && this.Text == "CLEAR BATTLEFIELD TILESETS...")
-                toIndex.Value = toIndex.Maximum = ((Model)element).TileSetsBF.Length - 1;
+            else if (type == null && this.Text == "CLEAR LEVEL DATA...")
+                toIndex.Value = toIndex.Maximum = Model.Levels.Length - 1;
+            else if (type == null && this.Text == "CLEAR TILESETS...")
+                toIndex.Value = toIndex.Maximum = Model.TileSets.Length - 1;
+            else if (type == null && this.Text == "CLEAR TILEMAPS...")
+                toIndex.Value = toIndex.Maximum = Model.TileMaps.Length - 1;
+            else if (type == null && this.Text == "CLEAR SOLIDITY MAPS...")
+                toIndex.Value = toIndex.Maximum = Model.SolidityMaps.Length - 1;
+            else if (type == null && this.Text == "CLEAR BATTLEFIELD TILESETS...")
+                toIndex.Value = toIndex.Maximum = Model.TileSetsBF.Length - 1;
             start = end = currentIndex;
         }
 
@@ -56,59 +56,59 @@ namespace LAZYSHELL
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            for (int i = start; i <= end; i++)
+            for (int i = start; type != null && i <= end; i++)
                 ((Element[])element)[i].Clear();
 
             // LEVELS
-            if (type == typeof(Model) && this.Text == "CLEAR LEVEL DATA...")
+            if (type == null && this.Text == "CLEAR LEVEL DATA...")
             {
                 for (int i = start; i <= end; i++)
                 {
-                    ((Model)element).Levels[i].Layer.Clear();
-                    ((Model)element).Levels[i].LevelEvents.Clear();
-                    ((Model)element).Levels[i].LevelExits.Clear();
-                    ((Model)element).Levels[i].LevelNPCs.Clear();
-                    ((Model)element).Levels[i].LevelOverlaps.Clear();
-                    int levelMap = ((Model)element).Levels[i].LevelMap;
-                    ((Model)element).LevelMaps[levelMap].Clear();
+                    Model.Levels[i].Layer.Clear();
+                    Model.Levels[i].LevelEvents.Clear();
+                    Model.Levels[i].LevelExits.Clear();
+                    Model.Levels[i].LevelNPCs.Clear();
+                    Model.Levels[i].LevelOverlaps.Clear();
+                    int levelMap = Model.Levels[i].LevelMap;
+                    Model.LevelMaps[levelMap].Clear();
                 }
             }
-            if (type == typeof(Model) && this.Text == "CLEAR TILESETS...")
+            if (type == null && this.Text == "CLEAR TILESETS...")
             {
                 for (int i = start; i <= end; i++)
                 {
                     if (i < 0x20)
-                        ((Model)element).TileSets[i] = new byte[0x1000];
+                        Model.TileSets[i] = new byte[0x1000];
                     else
-                        ((Model)element).TileSets[i] = new byte[0x2000];
-                    ((Model)element).EditTileSets[i] = true;
+                        Model.TileSets[i] = new byte[0x2000];
+                    Model.EditTileSets[i] = true;
                 }
             }
-            if (type == typeof(Model) && this.Text == "CLEAR TILEMAPS...")
+            if (type == null && this.Text == "CLEAR TILEMAPS...")
             {
                 for (int i = start; i <= end; i++)
                 {
                     if (i < 0x40)
-                        ((Model)element).TileMaps[i] = new byte[0x1000];
+                        Model.TileMaps[i] = new byte[0x1000];
                     else
-                        ((Model)element).TileMaps[i] = new byte[0x2000];
-                    ((Model)element).EditTileMaps[i] = true;
+                        Model.TileMaps[i] = new byte[0x2000];
+                    Model.EditTileMaps[i] = true;
                 }
             }
-            if (type == typeof(Model) && this.Text == "CLEAR SOLIDITY MAPS...")
+            if (type == null && this.Text == "CLEAR SOLIDITY MAPS...")
             {
-                for (int i = start; i < end; i++)
+                for (int i = start; i <= end; i++)
                 {
-                    ((Model)element).SolidityMaps[i] = new byte[0x20C2];
-                    ((Model)element).EditPhysicalMaps[i] = true;
+                    Model.SolidityMaps[i] = new byte[0x20C2];
+                    Model.EditSolidityMaps[i] = true;
                 }
             }
-            if (type == typeof(Model) && this.Text == "CLEAR BATTLEFIELD TILESETS...")
+            if (type == null && this.Text == "CLEAR BATTLEFIELD TILESETS...")
             {
-                for (int i = start; i < end; i++)
+                for (int i = start; i <= end; i++)
                 {
-                    ((Model)element).TileSetsBF[i] = new byte[0x2000];
-                    ((Model)element).EditTileSetsBF[i] = true;
+                    Model.TileSetsBF[i] = new byte[0x2000];
+                    Model.EditTileSetsBF[i] = true;
                 }
             }
 

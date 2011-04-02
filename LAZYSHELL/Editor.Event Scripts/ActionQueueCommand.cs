@@ -9,7 +9,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
     public class ActionQueueCommand : EventActionCommand
     {
 
-        private byte[] queueData; public byte[] QueueData { get { return this.queueData; } set { this.queueData = value; } }
+        private byte[] queueData; public byte[] EventData { get { return this.queueData; } set { this.queueData = value; } }
 
         public int QueueLength { get { return this.queueData.Length; } }
         private bool isEmbedded = false; public bool IsEmbedded { get { return this.isEmbedded; } set { this.isEmbedded = value; } }

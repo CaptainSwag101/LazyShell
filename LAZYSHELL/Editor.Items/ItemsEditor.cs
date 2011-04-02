@@ -11,8 +11,8 @@ namespace LAZYSHELL
 {
     public partial class ItemsEditor : Form
     {
-        private Model model = State.Instance.Model;
-        private Settings settings = Settings.Default;
+        private long checksum;
+                private Settings settings = Settings.Default;
         public Items itemsEditor;
         public Shops shopsEditor;
         public ItemsEditor()
@@ -38,24 +38,28 @@ namespace LAZYSHELL
             panel1.Controls.Add(itemsEditor);
             itemsEditor.Visible = true;
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
+            //
+            checksum = Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops);
         }
         public void Assemble()
         {
-            // Assemble the model.Items
+            // Assemble the Model.Items
             int i;
             ushort len = 0x3120;
-            for (i = 0; i < model.Items.Length && len + (model.Items[i].RawDescription != null ? model.Items[i].RawDescription.Length : 0) < 0x40f1; i++)
-                len += model.Items[i].Assemble(len);
+            for (i = 0; i < Model.Items.Length && len + (Model.Items[i].RawDescription != null ? Model.Items[i].RawDescription.Length : 0) < 0x40f1; i++)
+                len += Model.Items[i].Assemble(len);
             len = 0xed44;
-            for (; i < model.Items.Length && len + (model.Items[i].RawDescription != null ? model.Items[i].RawDescription.Length : 0) < 0xffff; i++)
-                len += model.Items[i].Assemble(len);
-            if (i != model.Items.Length)
+            for (; i < Model.Items.Length && len + (Model.Items[i].RawDescription != null ? Model.Items[i].RawDescription.Length : 0) < 0xffff; i++)
+                len += Model.Items[i].Assemble(len);
+            if (i != Model.Items.Length)
                 System.Windows.Forms.MessageBox.Show("Item Descriptions total length exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
-            foreach (Shop shop in model.Shops)
+            foreach (Shop shop in Model.Shops)
                 shop.Assemble();
         }
         private void ItemsEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops) == checksum)
+                return;
             DialogResult result = MessageBox.Show(
                 "Items and shops have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -63,9 +67,9 @@ namespace LAZYSHELL
                 Assemble();
             else if (result == DialogResult.No)
             {
-                model.Items = null;
-                model.Shops = null;
-                model.ItemNames = null;
+                Model.Items = null;
+                Model.Shops = null;
+                Model.ItemNames = null;
             }
             else if (result == DialogResult.Cancel)
             {
@@ -79,30 +83,30 @@ namespace LAZYSHELL
         }
         private void importItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Items, itemsEditor.Index, "IMPORT ITEMS...").ShowDialog();
+            new IOElements((Element[])Model.Items, itemsEditor.Index, "IMPORT ITEMS...").ShowDialog();
             itemsEditor.RefreshItems();
         }
         private void importShopsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Shops, shopsEditor.Index, "IMPORT SHOPS...").ShowDialog();
+            new IOElements((Element[])Model.Shops, shopsEditor.Index, "IMPORT SHOPS...").ShowDialog();
             shopsEditor.RefreshShops();
         }
         private void exportItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Items, itemsEditor.Index, "EXPORT ITEMS...").ShowDialog();
+            new IOElements((Element[])Model.Items, itemsEditor.Index, "EXPORT ITEMS...").ShowDialog();
         }
         private void exportShopsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])model.Shops, shopsEditor.Index, "EXPORT SHOPS...").ShowDialog();
+            new IOElements((Element[])Model.Shops, shopsEditor.Index, "EXPORT SHOPS...").ShowDialog();
         }
         private void clearItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ClearElements(model.Items, itemsEditor.Index, "CLEAR ITEMS...").ShowDialog();
+            new ClearElements(Model.Items, itemsEditor.Index, "CLEAR ITEMS...").ShowDialog();
             itemsEditor.RefreshItems();
         }
         private void clearShopsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ClearElements(model.Shops, shopsEditor.Index, "CLEAR SHOPS...").ShowDialog();
+            new ClearElements(Model.Shops, shopsEditor.Index, "CLEAR SHOPS...").ShowDialog();
             shopsEditor.RefreshShops();
         }
         private void showItems_Click(object sender, EventArgs e)
@@ -112,6 +116,24 @@ namespace LAZYSHELL
         private void showShops_Click(object sender, EventArgs e)
         {
             shopsEditor.Visible = showShops.Checked;
+        }
+
+        private void resetItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current item. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            itemsEditor.Item = new Item(Model.Data, itemsEditor.Index);
+            itemsEditor.RefreshItems();
+        }
+
+        private void resetShopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current shop. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            shopsEditor.Shop = new Shop(Model.Data, shopsEditor.Index);
+            shopsEditor.RefreshShops();
         }
     }
 }

@@ -13,13 +13,12 @@ namespace LAZYSHELL
         #region Variables
         // main
         private delegate void Function();
-        private Model model = State.Instance.Model;
-        private Dialogues dialoguesEditor;
+                private Dialogues dialoguesEditor;
         private State state = State.Instance;
         private BattleDialoguePreview textPreview = new BattleDialoguePreview();
         private TextHelperReduced textHelper = TextHelperReduced.Instance;
-        private BattleDialogueTileset tileset { get { return model.BattleDialogueTileset; } set { model.BattleDialogueTileset = value; } }
-        private Bitmap tilesetImage { get { return model.BattleDialogueTilesetImage; } set { model.BattleDialogueTilesetImage = value; } }
+        private BattleDialogueTileset tileset { get { return Model.BattleDialogueTileset; } set { Model.BattleDialogueTileset = value; } }
+        private Bitmap tilesetImage { get { return Model.BattleDialogueTilesetImage; } set { Model.BattleDialogueTilesetImage = value; } }
         private Bitmap textImage;
         private Overlay overlay;
         private Search search;
@@ -30,9 +29,9 @@ namespace LAZYSHELL
             get
             {
                 if (battleDlgType.SelectedIndex == 0)
-                    return model.BattleDialogues;
+                    return Model.BattleDialogues;
                 else
-                    return model.BattleMessages;
+                    return Model.BattleMessages;
             }
         }
         private BattleDialogue dialogue
@@ -40,21 +39,21 @@ namespace LAZYSHELL
             get
             {
                 if (battleDlgType.SelectedIndex == 0)
-                    return model.BattleDialogues[index];
+                    return Model.BattleDialogues[index];
                 else
-                    return model.BattleMessages[index];
+                    return Model.BattleMessages[index];
             }
             set
             {
                 if (battleDlgType.SelectedIndex == 0)
-                    model.BattleDialogues[index] = value;
+                    Model.BattleDialogues[index] = value;
                 else
-                    model.BattleMessages[index] = value;
+                    Model.BattleMessages[index] = value;
             }
         }
-        private byte[] graphics { get { return model.DialogueGraphics; } set { model.DialogueGraphics = value; } }
-        private FontCharacter[] fontDialogue { get { return model.FontDialogue; } set { model.FontDialogue = value; } }
-        private PaletteSet fontPalette { get { return model.FontPaletteDialogue; } set { model.FontPaletteDialogue = value; } }
+        private byte[] graphics { get { return Model.DialogueGraphics; } set { Model.DialogueGraphics = value; } }
+        private FontCharacter[] fontDialogue { get { return Model.FontDialogue; } set { Model.FontDialogue = value; } }
+        private PaletteSet fontPalette { get { return Model.FontPaletteDialogue; } set { Model.FontPaletteDialogue = value; } }
         public bool textCodeFormat = true;
         // local variables
         private int index { get { return (int)battleDialogueNum.Value; } set { battleDialogueNum.Value = value; } }
@@ -72,7 +71,6 @@ namespace LAZYSHELL
             this.dialoguesEditor = dialoguesEditor;
             this.overlay = new Overlay();
             InitializeComponent();
-            search = new Search(battleDialogueNum, searchBox, searchButton, dialogues);
             // tileset
             tileset = new BattleDialogueTileset(fontPalette);
             SetTilesetImage();
@@ -84,10 +82,11 @@ namespace LAZYSHELL
             // controls
             updating = true;
             battleDlgType.SelectedIndex = 0;
+            search = new Search(battleDialogueNum, searchBox, searchButton, dialogues);
             RefreshBattleDialogue();
             updating = false;
         }
-        public void Close()
+        public new void Close()
         {
             search.Close();
             paletteEditor.Close();
@@ -116,13 +115,13 @@ namespace LAZYSHELL
             this.index = (int)this.battleDialogueNum.Value;
             if (battleDlgType.SelectedIndex == 0)
             {
-                this.battleDialogueTextBox.Text = this.model.BattleDialogues[index].GetBattleDialogue(textCodeFormat);
-                this.battleDialogueTextBox.SelectionStart = this.model.BattleDialogues[index].GetCaretPosition(textCodeFormat);
+                this.battleDialogueTextBox.Text = Model.BattleDialogues[index].GetBattleDialogue(textCodeFormat);
+                this.battleDialogueTextBox.SelectionStart = Model.BattleDialogues[index].GetCaretPosition(textCodeFormat);
             }
             else
             {
-                this.battleDialogueTextBox.Text = this.model.BattleMessages[index].GetBattleDialogue(textCodeFormat);
-                this.battleDialogueTextBox.SelectionStart = this.model.BattleMessages[index].GetCaretPosition(textCodeFormat);
+                this.battleDialogueTextBox.Text = Model.BattleMessages[index].GetBattleDialogue(textCodeFormat);
+                this.battleDialogueTextBox.SelectionStart = Model.BattleMessages[index].GetCaretPosition(textCodeFormat);
             }
             CalculateFreeSpace();
             SetTextImage();
@@ -194,12 +193,12 @@ namespace LAZYSHELL
             if (battleDlgType.SelectedIndex == 0)
             {
                 size = (0x92d1 - 0x6754) + (0x2aa9 - 0x260a) + (0xbfff - 0xbc58);/*(0xffff - 0xf400) USED FOR BATTLE SCRIPTS NOW*/
-                for (int i = 0; i < model.BattleDialogues.Length - 1; i++)
+                for (int i = 0; i < Model.BattleDialogues.Length - 1; i++)
                 {
-                    used += model.BattleDialogues[i].BattleDialogueLen;
-                    if (used + model.BattleDialogues[i].BattleDialogueLen > size)
+                    used += Model.BattleDialogues[i].BattleDialogueLen;
+                    if (used + Model.BattleDialogues[i].BattleDialogueLen > size)
                     {
-                        bool test = size >= used + model.BattleDialogues[i].BattleDialogueLen;
+                        bool test = size >= used + Model.BattleDialogues[i].BattleDialogueLen;
                         if (!test)
                         {
                             availableBytes.Text = "Entry " + i++.ToString() + " Too Long - Cannot Save";
@@ -211,8 +210,8 @@ namespace LAZYSHELL
             else
             {
                 size = (0x2A00 - 0x274D);
-                for (int i = 0; i < model.BattleMessages.Length; i++)
-                    used += model.BattleMessages[i].BattleDialogueLen;
+                for (int i = 0; i < Model.BattleMessages.Length; i++)
+                    used += Model.BattleMessages[i].BattleDialogueLen;
             }
             availableBytes.Text = ((double)(size - used)).ToString() + " characters left";
         }
@@ -223,14 +222,14 @@ namespace LAZYSHELL
             if (!message)
             {
                 size = (0x92d1 - 0x6754) + (0x2aa9 - 0x260a) + (0xbfff - 0xbc58);/*(0xffff - 0xf400) USED FOR BATTLE SCRIPTS NOW*/
-                for (int i = 0; i < model.BattleDialogues.Length - 1; i++)
-                    used += model.BattleDialogues[i].BattleDialogueLen;
+                for (int i = 0; i < Model.BattleDialogues.Length - 1; i++)
+                    used += Model.BattleDialogues[i].BattleDialogueLen;
             }
             else
             {
                 size = (0x2A00 - 0x274D);
-                for (int i = 0; i < model.BattleMessages.Length; i++)
-                    used += model.BattleMessages[i].BattleDialogueLen;
+                for (int i = 0; i < Model.BattleMessages.Length; i++)
+                    used += Model.BattleMessages[i].BattleDialogueLen;
             }
             return size - used < 0;
         }
@@ -244,8 +243,8 @@ namespace LAZYSHELL
 
             if (battleDlgType.SelectedIndex == 0)
             {
-                model.BattleDialogues[index].SetCaretPosition(this.battleDialogueTextBox.SelectionStart + toInsert.Length, textCodeFormat);
-                model.BattleDialogues[index].SetBattleDialogue(new string(newText), textCodeFormat);
+                Model.BattleDialogues[index].SetCaretPosition(this.battleDialogueTextBox.SelectionStart + toInsert.Length, textCodeFormat);
+                Model.BattleDialogues[index].SetBattleDialogue(new string(newText), textCodeFormat);
             }
             else
             {
@@ -261,14 +260,14 @@ namespace LAZYSHELL
             ushort len = 0x6754;
             if (!FreeSpace(false))
             {
-                for (; i < model.BattleDialogues.Length && len + model.BattleDialogues[i].BattleDialogueLen < 0x92d1; i++)
-                    len += model.BattleDialogues[i].Assemble(len);
+                for (; i < Model.BattleDialogues.Length && len + Model.BattleDialogues[i].BattleDialogueLen < 0x92d1; i++)
+                    len += Model.BattleDialogues[i].Assemble(len);
                 len = 0x260A;// - 0x392AA9
-                for (; i < model.BattleDialogues.Length && len + model.BattleDialogues[i].BattleDialogueLen < 0x2aa9; i++)
-                    len += model.BattleDialogues[i].Assemble(len);
+                for (; i < Model.BattleDialogues.Length && len + Model.BattleDialogues[i].BattleDialogueLen < 0x2aa9; i++)
+                    len += Model.BattleDialogues[i].Assemble(len);
                 len = 0xBC58;// - 0x39BFFF
-                for (; i < model.BattleDialogues.Length && len + model.BattleDialogues[i].BattleDialogueLen < 0xbfff; i++)
-                    len += model.BattleDialogues[i].Assemble(len);
+                for (; i < Model.BattleDialogues.Length && len + Model.BattleDialogues[i].BattleDialogueLen < 0xbfff; i++)
+                    len += Model.BattleDialogues[i].Assemble(len);
             }
             else
                 MessageBox.Show("Battle Dialogue exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
@@ -276,8 +275,8 @@ namespace LAZYSHELL
             {
                 i = 0;
                 len = 0x274D;
-                for (; i < model.BattleMessages.Length && len + model.BattleMessages[i].BattleDialogueLen < 0x2A00; i++)
-                    len += model.BattleMessages[i].Assemble(len);
+                for (; i < Model.BattleMessages.Length && len + Model.BattleMessages[i].BattleDialogueLen < 0x2A00; i++)
+                    len += Model.BattleMessages[i].Assemble(len);
             }
             else
                 MessageBox.Show("Battle Message exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
@@ -297,11 +296,11 @@ namespace LAZYSHELL
         {
             if (paletteEditorMenu == null)
             {
-                paletteEditorMenu = new PaletteEditor(new Function(PaletteMenuUpdate), model.FontPaletteMenu, 1, 0);
+                paletteEditorMenu = new PaletteEditor(new Function(PaletteMenuUpdate), Model.FontPaletteMenu, 1, 0);
                 paletteEditorMenu.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditorMenu.Reload(new Function(PaletteMenuUpdate), model.FontPaletteMenu, 1, 0);
+                paletteEditorMenu.Reload(new Function(PaletteMenuUpdate), Model.FontPaletteMenu, 1, 0);
         }
         public void LoadGraphicEditor()
         {
@@ -341,6 +340,7 @@ namespace LAZYSHELL
             tileset = new BattleDialogueTileset(fontPalette);
             SetTilesetImage();
             SetTextImage();
+            dialoguesEditor.checksum--;
         }
         private void PaletteMenuUpdate()
         {
@@ -479,5 +479,14 @@ namespace LAZYSHELL
             ((Form)sender).Hide();
         }
         #endregion
+
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current battle dialogue. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            dialogue = new BattleDialogue(Model.Data, index, battleDlgType.SelectedIndex);
+            RefreshBattleDialogue();
+        }
     }
 }

@@ -5,12 +5,15 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     class BattlefieldTileSet
     {
-        private Model model = State.Instance.Model;
+        [NonSerialized()]
         private State state = State.Instance;
         private Battlefield battlefield;
+        public Battlefield Battlefield { get { return battlefield; } set { battlefield = value; } }
         private PaletteSet paletteSet;
+        public PaletteSet PaletteSet { get { return paletteSet; } set { paletteSet = value; } }
         private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
         private byte[] graphics; public byte[] Graphics { get { return graphics; } set { graphics = value; } }
         private Tile16x16[] tilesetLayer;
@@ -20,19 +23,19 @@ namespace LAZYSHELL
             this.battlefield = map; // grab the current LevelMap
             this.paletteSet = paletteSet; // grab the current Palette Set
 
-            tileSet = model.TileSetsBF[battlefield.TileSet];
+            tileSet = Model.TileSetsBF[battlefield.TileSet];
 
             graphics = new byte[0x6000];
             if (battlefield.GraphicSetA < 0xC8)
-                Buffer.BlockCopy(model.GraphicSets[battlefield.GraphicSetA + 0x48], 0, graphics, 0, 0x2000);
+                Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetA + 0x48], 0, graphics, 0, 0x2000);
             if (battlefield.GraphicSetB < 0xC8)
-                Buffer.BlockCopy(model.GraphicSets[battlefield.GraphicSetB + 0x48], 0, graphics, 0x2000, 0x1000);
+                Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetB + 0x48], 0, graphics, 0x2000, 0x1000);
             if (battlefield.GraphicSetC < 0xC8)
-                Buffer.BlockCopy(model.GraphicSets[battlefield.GraphicSetC + 0x48], 0, graphics, 0x3000, 0x1000);
+                Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetC + 0x48], 0, graphics, 0x3000, 0x1000);
             if (battlefield.GraphicSetD < 0xC8)
-                Buffer.BlockCopy(model.GraphicSets[battlefield.GraphicSetD + 0x48], 0, graphics, 0x4000, 0x1000);
+                Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetD + 0x48], 0, graphics, 0x4000, 0x1000);
             if (battlefield.GraphicSetE < 0xC8)
-                Buffer.BlockCopy(model.GraphicSets[battlefield.GraphicSetE + 0x48], 0, graphics, 0x5000, 0x1000);
+                Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetE + 0x48], 0, graphics, 0x5000, 0x1000);
 
             tilesetLayer = new Tile16x16[32 * 32];
 
@@ -40,6 +43,28 @@ namespace LAZYSHELL
                 tilesetLayer[i] = new Tile16x16(i);
 
             DrawTileset(tileSet, tilesetLayer);
+        }
+        public BattlefieldTileSet(Battlefield map, PaletteSet paletteSet, Tile16x16[] tilesetLayer)
+        {
+            this.battlefield = map; // grab the current LevelMap
+            this.paletteSet = paletteSet; // grab the current Palette Set
+            this.tileSet = new byte[0x2000];
+            this.tilesetLayer = tilesetLayer;
+            graphics = new byte[0x6000];
+            if (battlefield.GraphicSetA < 0xC8)
+                Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetA + 0x48], 0, graphics, 0, 0x2000);
+            if (battlefield.GraphicSetB < 0xC8)
+                Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetB + 0x48], 0, graphics, 0x2000, 0x1000);
+            if (battlefield.GraphicSetC < 0xC8)
+                Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetC + 0x48], 0, graphics, 0x3000, 0x1000);
+            if (battlefield.GraphicSetD < 0xC8)
+                Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetD + 0x48], 0, graphics, 0x4000, 0x1000);
+            if (battlefield.GraphicSetE < 0xC8)
+                Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetE + 0x48], 0, graphics, 0x5000, 0x1000);
+            DrawTileset(tilesetLayer, tileSet);
+        }
+        public BattlefieldTileSet()
+        {
         }
         public void DrawTileset(byte[] src, Tile16x16[] dst)
         {
@@ -135,17 +160,17 @@ namespace LAZYSHELL
                     }
                 }
             }
-            model.EditTileSetsBF[battlefield.TileSet] = true;
+            Model.EditTileSetsBF[battlefield.TileSet] = true;
             if (battlefield.GraphicSetA < 0xC8)
-                Buffer.BlockCopy(graphics, 0, model.GraphicSets[battlefield.GraphicSetA + 0x48], 0, 0x2000);
+                Buffer.BlockCopy(graphics, 0, Model.GraphicSets[battlefield.GraphicSetA + 0x48], 0, 0x2000);
             if (battlefield.GraphicSetB < 0xC8)
-                Buffer.BlockCopy(graphics, 0x2000, model.GraphicSets[battlefield.GraphicSetB + 0x48], 0, 0x1000);
+                Buffer.BlockCopy(graphics, 0x2000, Model.GraphicSets[battlefield.GraphicSetB + 0x48], 0, 0x1000);
             if (battlefield.GraphicSetC < 0xC8)
-                Buffer.BlockCopy(graphics, 0x3000, model.GraphicSets[battlefield.GraphicSetC + 0x48], 0, 0x1000);
+                Buffer.BlockCopy(graphics, 0x3000, Model.GraphicSets[battlefield.GraphicSetC + 0x48], 0, 0x1000);
             if (battlefield.GraphicSetD < 0xC8)
-                Buffer.BlockCopy(graphics, 0x4000, model.GraphicSets[battlefield.GraphicSetD + 0x48], 0, 0x1000);
+                Buffer.BlockCopy(graphics, 0x4000, Model.GraphicSets[battlefield.GraphicSetD + 0x48], 0, 0x1000);
             if (battlefield.GraphicSetE < 0xC8)
-                Buffer.BlockCopy(graphics, 0x5000, model.GraphicSets[battlefield.GraphicSetE + 0x48], 0, 0x1000);
+                Buffer.BlockCopy(graphics, 0x5000, Model.GraphicSets[battlefield.GraphicSetE + 0x48], 0, 0x1000);
         }
     }
 }

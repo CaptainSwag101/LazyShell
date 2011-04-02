@@ -16,12 +16,11 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
-        private Model model = State.Instance.Model;
-        private Dialogues dialoguesEditor;
+                private Dialogues dialoguesEditor;
         private bool updating;
         private Overlay overlay;
         // accessors
-        private byte[] data { get { return model.Data; } set { model.Data = value; } }
+        private byte[] data { get { return Model.Data; } set { Model.Data = value; } }
         private BattleDialogues battleDialogues { get { return dialoguesEditor.BattleDialogues; } set { dialoguesEditor.BattleDialogues = value; } }
         private FontCharacter[] font
         {
@@ -46,12 +45,12 @@ namespace LAZYSHELL
                 }
             }
         }
-        private FontCharacter[] fontMenu { get { return model.FontMenu; } set { model.FontMenu = value; } }
-        private FontCharacter[] fontDialogue { get { return model.FontDialogue; } set { model.FontDialogue = value; } }
-        private FontCharacter[] fontDescription { get { return model.FontDescription; } set { model.FontDescription = value; } }
-        private FontCharacter[] fontTriangle { get { return model.FontTriangle; } set { model.FontTriangle = value; } }
-        private PaletteSet fontPalettesDialogue { get { return model.FontPaletteDialogue; } set { model.FontPaletteDialogue = value; } }
-        private PaletteSet fontPalettesMenu { get { return model.FontPaletteMenu; } set { model.FontPaletteMenu = value; } }
+        private FontCharacter[] fontMenu { get { return Model.FontMenu; } set { Model.FontMenu = value; } }
+        private FontCharacter[] fontDialogue { get { return Model.FontDialogue; } set { Model.FontDialogue = value; } }
+        private FontCharacter[] fontDescription { get { return Model.FontDescription; } set { Model.FontDescription = value; } }
+        private FontCharacter[] fontTriangle { get { return Model.FontTriangle; } set { Model.FontTriangle = value; } }
+        private PaletteSet fontPalettesDialogue { get { return Model.FontPaletteDialogue; } set { Model.FontPaletteDialogue = value; } }
+        private PaletteSet fontPalettesMenu { get { return Model.FontPaletteMenu; } set { Model.FontPaletteMenu = value; } }
         // font palette variables
         private int currentColor = 0;
         private int currentColorBack = 0;
@@ -181,16 +180,16 @@ namespace LAZYSHELL
         {
             fontPalettesDialogue.Assemble();
             fontPalettesMenu.Assemble();
-            Bits.SetBit(model.Data, 0x3E2D6C, 7, true);
-            Bits.SetBit(model.Data, 0x3E2D74, 7, true);
+            Bits.SetBit(Model.Data, 0x3E2D6C, 7, true);
+            Bits.SetBit(Model.Data, 0x3E2D74, 7, true);
 
             foreach (FontCharacter f in fontMenu) f.Assemble();
             foreach (FontCharacter f in fontDialogue) f.Assemble();
             foreach (FontCharacter f in fontDescription) f.Assemble();
             foreach (FontCharacter f in fontTriangle) f.Assemble();
 
-            Bits.SetByteArray(data, 0x3DF000, model.DialogueGraphics, 0, 0x700);
-            Bits.SetByteArray(data, 0x015943, model.BattleDialogueTileSet, 0, 0x100);
+            Bits.SetByteArray(data, 0x3DF000, Model.DialogueGraphics, 0, 0x700);
+            Bits.SetByteArray(data, 0x015943, Model.BattleDialogueTileSet, 0, 0x100);
         }
         // set images
         private void SetFontPaletteImage()
@@ -457,12 +456,11 @@ namespace LAZYSHELL
         }
         private void pictureBoxFontCharacter_MouseMove(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.None) return;
             int x = e.X; int y = e.Y;
             if (x >= pictureBoxFontCharacter.Width ||
                 y >= pictureBoxFontCharacter.Height ||
                 x < 0 || y < 0)
-                return;
-            if (x / zoom > 8 && y / zoom > 8)
                 return;
             string action = "";
             if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && fontEditDraw.Checked)
@@ -471,6 +469,8 @@ namespace LAZYSHELL
                 action = "erase";
             else if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && fontEditChoose.Checked)
                 action = "select";
+            else if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && fontEditFill.Checked)
+                action = "fill";
             int color = currentColor;
             if (e.Button == MouseButtons.Right)
                 color = currentColorBack;
@@ -481,7 +481,8 @@ namespace LAZYSHELL
                 font[currentFontChar].Graphics, srcOffset, palette,
                 pictureBoxFontCharacter.CreateGraphics(), zoom, action,
                 ((x / zoom) & 7) * zoom, ((y / zoom) & 7) * zoom, index, color,
-                font[currentFontChar].MaxWidth, font[currentFontChar].Height, 0x10);
+                font[currentFontChar].MaxWidth, font[currentFontChar].Height, 0x10, 
+                ((x / zoom) & 8) * zoom, ((y / zoom) & 8) * zoom);
             if (action == "erase")
                 pictureBoxFontCharacter.Invalidate(new Rectangle(x / zoom * zoom, y / zoom * zoom, 1 * zoom, 1 * zoom));
 
@@ -590,6 +591,7 @@ namespace LAZYSHELL
         {
             fontEditErase.Checked = false;
             fontEditChoose.Checked = false;
+            fontEditFill.Checked = false;
             fontEditZoomIn.Checked = false;
             fontEditZoomOut.Checked = false;
             edit = fontEditDraw.Checked ? 1 : 0;
@@ -599,6 +601,7 @@ namespace LAZYSHELL
         {
             fontEditDraw.Checked = false;
             fontEditChoose.Checked = false;
+            fontEditFill.Checked = false;
             fontEditZoomIn.Checked = false;
             fontEditZoomOut.Checked = false;
             edit = fontEditErase.Checked ? 2 : 0;
@@ -608,10 +611,21 @@ namespace LAZYSHELL
         {
             fontEditDraw.Checked = false;
             fontEditErase.Checked = false;
+            fontEditFill.Checked = false;
             fontEditZoomIn.Checked = false;
             fontEditZoomOut.Checked = false;
             edit = fontEditChoose.Checked ? 3 : 0;
             pictureBoxFontCharacter.Cursor = edit == 3 ? new Cursor(GetType(), "CursorDropper.cur") : Cursors.Arrow;
+        }
+        private void fontEditFill_Click(object sender, EventArgs e)
+        {
+            fontEditDraw.Checked = false;
+            fontEditErase.Checked = false;
+            fontEditChoose.Checked = false;
+            fontEditZoomIn.Checked = false;
+            fontEditZoomOut.Checked = false;
+            edit = fontEditFill.Checked ? 4 : 0;
+            pictureBoxFontCharacter.Cursor = edit == 4 ? new Cursor(GetType(), "CursorFill.cur") : Cursors.Arrow;
         }
         private void fontEditZoomIn_Click(object sender, EventArgs e)
         {
@@ -860,7 +874,7 @@ namespace LAZYSHELL
                 bw.Close();
                 fs.Close();
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("There was a problem exporting the font graphics.");
             }
@@ -888,5 +902,15 @@ namespace LAZYSHELL
             insertIntoTextToolStripMenuItem.Enabled = fontType.SelectedIndex != 3;
         }
         #endregion
+
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current font character. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            font[currentFontChar] = new FontCharacter(Model.Data, currentFontChar, fontType.SelectedIndex);
+            InitializeFontCharacter();
+            SetFontCharacterImage();
+        }
     }
 }

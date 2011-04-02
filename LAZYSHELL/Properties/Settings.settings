@@ -613,5 +613,17 @@
     <Setting Name="PreviewBattlefield" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="LastLevel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastLevelRem" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PreviewLevel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="AllyEquipment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

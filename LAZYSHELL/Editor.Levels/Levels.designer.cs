@@ -41,43 +41,26 @@ namespace LAZYSHELL
             this.levelNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.levelName = new System.Windows.Forms.ToolStripComboBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.npcObjectTree = new System.Windows.Forms.TreeView();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.npcInsertObject = new System.Windows.Forms.ToolStripButton();
             this.npcInsertInstance = new System.Windows.Forms.ToolStripButton();
             this.npcRemoveObject = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.npcMoveUp = new System.Windows.Forms.ToolStripButton();
-            this.npcMoveDown = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.npcCopy = new System.Windows.Forms.ToolStripButton();
             this.npcPaste = new System.Windows.Forms.ToolStripButton();
             this.npcDuplicate = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.npcMoveUp = new System.Windows.Forms.ToolStripButton();
+            this.npcMoveDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.findNPCNum = new System.Windows.Forms.ToolStripButton();
             this.openPartitions = new System.Windows.Forms.ToolStripButton();
             this.panel85 = new System.Windows.Forms.Panel();
             this.npcAttributes = new System.Windows.Forms.CheckedListBox();
             this.label65 = new System.Windows.Forms.Label();
-            this.panel84 = new System.Windows.Forms.Panel();
-            this.npcX = new System.Windows.Forms.NumericUpDown();
-            this.npcY = new System.Windows.Forms.NumericUpDown();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.npcZ = new System.Windows.Forms.NumericUpDown();
-            this.label56 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.npcPropertyA = new System.Windows.Forms.NumericUpDown();
-            this.label104 = new System.Windows.Forms.Label();
-            this.npcPropertyB = new System.Windows.Forms.NumericUpDown();
-            this.label31 = new System.Windows.Forms.Label();
-            this.npcPropertyC = new System.Windows.Forms.NumericUpDown();
-            this.label116 = new System.Windows.Forms.Label();
-            this.npcZ_half = new System.Windows.Forms.CheckBox();
-            this.panel42 = new System.Windows.Forms.Panel();
-            this.npcFace = new System.Windows.Forms.ComboBox();
-            this.npcVisible = new System.Windows.Forms.CheckBox();
+            this.panel118 = new System.Windows.Forms.Panel();
+            this.label52 = new System.Windows.Forms.Label();
+            this.panel119 = new System.Windows.Forms.Panel();
+            this.npcAfterBattle = new System.Windows.Forms.ComboBox();
             this.panel83 = new System.Windows.Forms.Panel();
             this.npcID = new System.Windows.Forms.NumericUpDown();
             this.label49 = new System.Windows.Forms.Label();
@@ -96,10 +79,26 @@ namespace LAZYSHELL
             this.panel80 = new System.Windows.Forms.Panel();
             this.label48 = new System.Windows.Forms.Label();
             this.npcMapHeader = new System.Windows.Forms.NumericUpDown();
-            this.panel118 = new System.Windows.Forms.Panel();
-            this.label52 = new System.Windows.Forms.Label();
-            this.panel119 = new System.Windows.Forms.Panel();
-            this.npcAfterBattle = new System.Windows.Forms.ComboBox();
+            this.npcsBytesLeft = new System.Windows.Forms.Label();
+            this.npcObjectTree = new System.Windows.Forms.TreeView();
+            this.panel84 = new System.Windows.Forms.Panel();
+            this.npcX = new System.Windows.Forms.NumericUpDown();
+            this.npcY = new System.Windows.Forms.NumericUpDown();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.npcZ = new System.Windows.Forms.NumericUpDown();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.npcPropertyA = new System.Windows.Forms.NumericUpDown();
+            this.label104 = new System.Windows.Forms.Label();
+            this.npcPropertyB = new System.Windows.Forms.NumericUpDown();
+            this.label31 = new System.Windows.Forms.Label();
+            this.npcPropertyC = new System.Windows.Forms.NumericUpDown();
+            this.label116 = new System.Windows.Forms.Label();
+            this.npcZ_half = new System.Windows.Forms.CheckBox();
+            this.panel42 = new System.Windows.Forms.Panel();
+            this.npcFace = new System.Windows.Forms.ComboBox();
+            this.npcVisible = new System.Windows.Forms.CheckBox();
             this.mapNum = new System.Windows.Forms.NumericUpDown();
             this.label33 = new System.Windows.Forms.Label();
             this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -111,15 +110,16 @@ namespace LAZYSHELL
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.overlapUnknownBits = new System.Windows.Forms.CheckedListBox();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.overlapFieldTree = new System.Windows.Forms.TreeView();
+            this.overlapUnknownBits = new System.Windows.Forms.CheckedListBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.overlapFieldInsert = new System.Windows.Forms.ToolStripButton();
             this.overlapFieldDelete = new System.Windows.Forms.ToolStripButton();
             this.overlapFieldCopy = new System.Windows.Forms.ToolStripButton();
             this.overlapFieldPaste = new System.Windows.Forms.ToolStripButton();
             this.overlapFieldDuplicate = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+            this.overlapsBytesLeft = new System.Windows.Forms.ToolStripLabel();
             this.panel99 = new System.Windows.Forms.Panel();
             this.overlapCoordZPlusHalf = new System.Windows.Forms.CheckBox();
             this.label109 = new System.Windows.Forms.Label();
@@ -134,15 +134,6 @@ namespace LAZYSHELL
             this.pictureBoxOverlaps = new System.Windows.Forms.PictureBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.eventsFieldTree = new System.Windows.Forms.TreeView();
-            this.toolStrip6 = new System.Windows.Forms.ToolStrip();
-            this.eventsInsertField = new System.Windows.Forms.ToolStripButton();
-            this.eventsDeleteField = new System.Windows.Forms.ToolStripButton();
-            this.eventsCopyField = new System.Windows.Forms.ToolStripButton();
-            this.eventsPasteField = new System.Windows.Forms.ToolStripButton();
-            this.eventsDuplicateField = new System.Windows.Forms.ToolStripButton();
-            this.label63 = new System.Windows.Forms.Label();
             this.panel90 = new System.Windows.Forms.Panel();
             this.buttonGotoD = new System.Windows.Forms.Button();
             this.label62 = new System.Windows.Forms.Label();
@@ -162,15 +153,17 @@ namespace LAZYSHELL
             this.label135 = new System.Windows.Forms.Label();
             this.label137 = new System.Windows.Forms.Label();
             this.eventEvent = new System.Windows.Forms.NumericUpDown();
+            this.eventsList = new System.Windows.Forms.TreeView();
+            this.toolStrip6 = new System.Windows.Forms.ToolStrip();
+            this.eventsInsertField = new System.Windows.Forms.ToolStripButton();
+            this.eventsDeleteField = new System.Windows.Forms.ToolStripButton();
+            this.eventsCopyField = new System.Windows.Forms.ToolStripButton();
+            this.eventsPasteField = new System.Windows.Forms.ToolStripButton();
+            this.eventsDuplicateField = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.eventsBytesLeft = new System.Windows.Forms.ToolStripLabel();
+            this.label63 = new System.Windows.Forms.Label();
             this.panel52 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.exitsFieldTree = new System.Windows.Forms.TreeView();
-            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-            this.exitsInsertField = new System.Windows.Forms.ToolStripButton();
-            this.exitsDeleteField = new System.Windows.Forms.ToolStripButton();
-            this.exitsCopyField = new System.Windows.Forms.ToolStripButton();
-            this.exitsPasteField = new System.Windows.Forms.ToolStripButton();
-            this.exitsDuplicateField = new System.Windows.Forms.ToolStripButton();
             this.panel88 = new System.Windows.Forms.Panel();
             this.label66 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
@@ -183,6 +176,7 @@ namespace LAZYSHELL
             this.label124 = new System.Windows.Forms.Label();
             this.panel48 = new System.Windows.Forms.Panel();
             this.exitDestFace = new System.Windows.Forms.ComboBox();
+            this.exitsFieldTree = new System.Windows.Forms.TreeView();
             this.panel87 = new System.Windows.Forms.Panel();
             this.label119 = new System.Windows.Forms.Label();
             this.exits135LengthPlusHalf = new System.Windows.Forms.CheckBox();
@@ -207,45 +201,17 @@ namespace LAZYSHELL
             this.panel51 = new System.Windows.Forms.Panel();
             this.exitDest = new System.Windows.Forms.ComboBox();
             this.panel68 = new System.Windows.Forms.Panel();
+            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
+            this.exitsInsertField = new System.Windows.Forms.ToolStripButton();
+            this.exitsDeleteField = new System.Windows.Forms.ToolStripButton();
+            this.exitsCopyField = new System.Windows.Forms.ToolStripButton();
+            this.exitsPasteField = new System.Windows.Forms.ToolStripButton();
+            this.exitsDuplicateField = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitsBytesLeft = new System.Windows.Forms.ToolStripLabel();
             this.label61 = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.panel28 = new System.Windows.Forms.Panel();
-            this.panel72 = new System.Windows.Forms.Panel();
-            this.label87 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.mapGFXSet1Num = new System.Windows.Forms.NumericUpDown();
-            this.mapGFXSet2Num = new System.Windows.Forms.NumericUpDown();
-            this.panel31 = new System.Windows.Forms.Panel();
-            this.mapGFXSetL3Name = new System.Windows.Forms.ComboBox();
-            this.panel29 = new System.Windows.Forms.Panel();
-            this.mapGFXSet4Name = new System.Windows.Forms.ComboBox();
-            this.mapGFXSet3Num = new System.Windows.Forms.NumericUpDown();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.mapGFXSet2Name = new System.Windows.Forms.ComboBox();
-            this.panel30 = new System.Windows.Forms.Panel();
-            this.mapGFXSet5Name = new System.Windows.Forms.ComboBox();
-            this.mapGFXSet4Num = new System.Windows.Forms.NumericUpDown();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.mapGFXSet3Name = new System.Windows.Forms.ComboBox();
-            this.mapGFXSetL3Num = new System.Windows.Forms.NumericUpDown();
-            this.mapGFXSet5Num = new System.Windows.Forms.NumericUpDown();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.mapGFXSet1Name = new System.Windows.Forms.ComboBox();
-            this.panel71 = new System.Windows.Forms.Panel();
-            this.label88 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.mapTilesetL3Num = new System.Windows.Forms.NumericUpDown();
-            this.mapTilesetL2Num = new System.Windows.Forms.NumericUpDown();
-            this.mapTilesetL1Num = new System.Windows.Forms.NumericUpDown();
-            this.panel32 = new System.Windows.Forms.Panel();
-            this.mapTilesetL2Name = new System.Windows.Forms.ComboBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.panel33 = new System.Windows.Forms.Panel();
-            this.mapTilesetL3Name = new System.Windows.Forms.ComboBox();
-            this.panel34 = new System.Windows.Forms.Panel();
-            this.mapTilesetL1Name = new System.Windows.Forms.ComboBox();
             this.panel70 = new System.Windows.Forms.Panel();
             this.label89 = new System.Windows.Forms.Label();
             this.mapTilemapL1Num = new System.Windows.Forms.NumericUpDown();
@@ -275,8 +241,43 @@ namespace LAZYSHELL
             this.mapPaletteSetName = new System.Windows.Forms.ComboBox();
             this.mapPaletteSetNum = new System.Windows.Forms.NumericUpDown();
             this.label46 = new System.Windows.Forms.Label();
+            this.panel71 = new System.Windows.Forms.Panel();
+            this.label88 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.mapTilesetL3Num = new System.Windows.Forms.NumericUpDown();
+            this.mapTilesetL2Num = new System.Windows.Forms.NumericUpDown();
+            this.mapTilesetL1Num = new System.Windows.Forms.NumericUpDown();
+            this.panel32 = new System.Windows.Forms.Panel();
+            this.mapTilesetL2Name = new System.Windows.Forms.ComboBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.panel33 = new System.Windows.Forms.Panel();
+            this.mapTilesetL3Name = new System.Windows.Forms.ComboBox();
+            this.panel34 = new System.Windows.Forms.Panel();
+            this.mapTilesetL1Name = new System.Windows.Forms.ComboBox();
+            this.panel72 = new System.Windows.Forms.Panel();
+            this.label87 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.mapGFXSet1Num = new System.Windows.Forms.NumericUpDown();
+            this.mapGFXSet2Num = new System.Windows.Forms.NumericUpDown();
+            this.panel31 = new System.Windows.Forms.Panel();
+            this.mapGFXSetL3Name = new System.Windows.Forms.ComboBox();
+            this.panel29 = new System.Windows.Forms.Panel();
+            this.mapGFXSet4Name = new System.Windows.Forms.ComboBox();
+            this.mapGFXSet3Num = new System.Windows.Forms.NumericUpDown();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.mapGFXSet2Name = new System.Windows.Forms.ComboBox();
+            this.panel30 = new System.Windows.Forms.Panel();
+            this.mapGFXSet5Name = new System.Windows.Forms.ComboBox();
+            this.mapGFXSet4Num = new System.Windows.Forms.NumericUpDown();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.mapGFXSet3Name = new System.Windows.Forms.ComboBox();
+            this.mapGFXSetL3Num = new System.Windows.Forms.NumericUpDown();
+            this.mapGFXSet5Num = new System.Windows.Forms.NumericUpDown();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.mapGFXSet1Name = new System.Windows.Forms.ComboBox();
+            this.panel28 = new System.Windows.Forms.Panel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.panel79 = new System.Windows.Forms.Panel();
             this.label110 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
@@ -286,61 +287,10 @@ namespace LAZYSHELL
             this.panel26 = new System.Windows.Forms.Panel();
             this.layerOBJEffects = new System.Windows.Forms.ComboBox();
             this.layerWaveEffect = new System.Windows.Forms.CheckBox();
-            this.panel78 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label85 = new System.Windows.Forms.Label();
-            this.label84 = new System.Windows.Forms.Label();
-            this.label83 = new System.Windows.Forms.Label();
-            this.label82 = new System.Windows.Forms.Label();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.layerL2ScrollDirection = new System.Windows.Forms.ComboBox();
-            this.panel23 = new System.Windows.Forms.Panel();
-            this.layerL2ScrollSpeed = new System.Windows.Forms.ComboBox();
-            this.panel24 = new System.Windows.Forms.Panel();
-            this.layerL3ScrollDirection = new System.Windows.Forms.ComboBox();
-            this.layerInfiniteAutoscroll = new System.Windows.Forms.CheckBox();
-            this.panel25 = new System.Windows.Forms.Panel();
-            this.layerL3ScrollSpeed = new System.Windows.Forms.ComboBox();
-            this.layerL2ScrollShift = new System.Windows.Forms.CheckBox();
-            this.layerL3ScrollShift = new System.Windows.Forms.CheckBox();
-            this.panel77 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.layerL2VSync = new System.Windows.Forms.ComboBox();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.layerL3VSync = new System.Windows.Forms.ComboBox();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.layerL2HSync = new System.Windows.Forms.ComboBox();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.layerL3HSync = new System.Windows.Forms.ComboBox();
-            this.panel76 = new System.Windows.Forms.Panel();
-            this.label91 = new System.Windows.Forms.Label();
-            this.layerScrollWrapping = new System.Windows.Forms.CheckedListBox();
-            this.panel75 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.layerL2LeftShift = new System.Windows.Forms.NumericUpDown();
-            this.layerL2UpShift = new System.Windows.Forms.NumericUpDown();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.layerL3LeftShift = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.layerL3UpShift = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.panel74 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.layerMaskHighX = new System.Windows.Forms.NumericUpDown();
-            this.layerLockMask = new System.Windows.Forms.CheckBox();
-            this.layerMaskLowX = new System.Windows.Forms.NumericUpDown();
-            this.label25 = new System.Windows.Forms.Label();
-            this.layerMaskHighY = new System.Windows.Forms.NumericUpDown();
-            this.label24 = new System.Windows.Forms.Label();
-            this.layerMaskLowY = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.labeasdfasd = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label53 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.layerMessageBox = new System.Windows.Forms.ComboBox();
             this.panel73 = new System.Windows.Forms.Panel();
             this.panel86 = new System.Windows.Forms.Panel();
             this.label86 = new System.Windows.Forms.Label();
@@ -370,36 +320,63 @@ namespace LAZYSHELL
             this.label95 = new System.Windows.Forms.Label();
             this.checkBox16 = new System.Windows.Forms.CheckBox();
             this.label22 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.layerMessageBox = new System.Windows.Forms.ComboBox();
+            this.panel78 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label85 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
+            this.panel21 = new System.Windows.Forms.Panel();
+            this.layerL2ScrollDirection = new System.Windows.Forms.ComboBox();
+            this.panel23 = new System.Windows.Forms.Panel();
+            this.layerL2ScrollSpeed = new System.Windows.Forms.ComboBox();
+            this.panel24 = new System.Windows.Forms.Panel();
+            this.layerL3ScrollDirection = new System.Windows.Forms.ComboBox();
+            this.layerInfiniteAutoscroll = new System.Windows.Forms.CheckBox();
+            this.panel25 = new System.Windows.Forms.Panel();
+            this.layerL3ScrollSpeed = new System.Windows.Forms.ComboBox();
+            this.layerL2ScrollShift = new System.Windows.Forms.CheckBox();
+            this.layerL3ScrollShift = new System.Windows.Forms.CheckBox();
+            this.panel74 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.layerMaskHighX = new System.Windows.Forms.NumericUpDown();
+            this.layerLockMask = new System.Windows.Forms.CheckBox();
+            this.layerMaskLowX = new System.Windows.Forms.NumericUpDown();
+            this.label25 = new System.Windows.Forms.Label();
+            this.layerMaskHighY = new System.Windows.Forms.NumericUpDown();
+            this.label24 = new System.Windows.Forms.Label();
+            this.layerMaskLowY = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.labeasdfasd = new System.Windows.Forms.Label();
+            this.panel77 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.layerL2VSync = new System.Windows.Forms.ComboBox();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.layerL3VSync = new System.Windows.Forms.ComboBox();
+            this.panel18 = new System.Windows.Forms.Panel();
+            this.layerL2HSync = new System.Windows.Forms.ComboBox();
+            this.panel20 = new System.Windows.Forms.Panel();
+            this.layerL3HSync = new System.Windows.Forms.ComboBox();
+            this.panel75 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.layerL2LeftShift = new System.Windows.Forms.NumericUpDown();
+            this.layerL2UpShift = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.layerL3LeftShift = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.layerL3UpShift = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel76 = new System.Windows.Forms.Panel();
+            this.label91 = new System.Windows.Forms.Label();
+            this.layerScrollWrapping = new System.Windows.Forms.CheckedListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel27 = new System.Windows.Forms.Panel();
-            this.label68 = new System.Windows.Forms.Label();
-            this.panel44 = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
-            this.solidModsY = new System.Windows.Forms.NumericUpDown();
-            this.label51 = new System.Windows.Forms.Label();
-            this.solidModsX = new System.Windows.Forms.NumericUpDown();
-            this.solidModsHeight = new System.Windows.Forms.NumericUpDown();
-            this.solidModsWidth = new System.Windows.Forms.NumericUpDown();
-            this.label64 = new System.Windows.Forms.Label();
-            this.label67 = new System.Windows.Forms.Label();
-            this.panel45 = new System.Windows.Forms.Panel();
-            this.panel41 = new System.Windows.Forms.Panel();
-            this.toolStrip8 = new System.Windows.Forms.ToolStrip();
-            this.solidModsInsert = new System.Windows.Forms.ToolStripButton();
-            this.solidModsDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.solidModsMoveUp = new System.Windows.Forms.ToolStripButton();
-            this.solidModsMoveDown = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.solidModsCopy = new System.Windows.Forms.ToolStripButton();
-            this.solidModsPaste = new System.Windows.Forms.ToolStripButton();
-            this.solidModsDuplicate = new System.Windows.Forms.ToolStripButton();
-            this.solidModsFieldTree = new System.Windows.Forms.TreeView();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.label69 = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
             this.tileModsLayers = new System.Windows.Forms.CheckedListBox();
             this.label26 = new System.Windows.Forms.Label();
@@ -410,8 +387,7 @@ namespace LAZYSHELL
             this.tileModsWidth = new System.Windows.Forms.NumericUpDown();
             this.label36 = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
-            this.panel55 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
+            this.tileModsFieldTree = new System.Windows.Forms.TreeView();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
             this.tileModsInsertField = new System.Windows.Forms.ToolStripButton();
             this.tileModsInsertInstance = new System.Windows.Forms.ToolStripButton();
@@ -423,21 +399,45 @@ namespace LAZYSHELL
             this.tileModsCopy = new System.Windows.Forms.ToolStripButton();
             this.tileModsPaste = new System.Windows.Forms.ToolStripButton();
             this.tileModsDuplicate = new System.Windows.Forms.ToolStripButton();
-            this.tileModsFieldTree = new System.Windows.Forms.TreeView();
+            this.label69 = new System.Windows.Forms.Label();
+            this.panel55 = new System.Windows.Forms.Panel();
+            this.panel27 = new System.Windows.Forms.Panel();
+            this.panel44 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.solidModsY = new System.Windows.Forms.NumericUpDown();
+            this.label51 = new System.Windows.Forms.Label();
+            this.solidModsX = new System.Windows.Forms.NumericUpDown();
+            this.solidModsHeight = new System.Windows.Forms.NumericUpDown();
+            this.solidModsWidth = new System.Windows.Forms.NumericUpDown();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.solidModsFieldTree = new System.Windows.Forms.TreeView();
+            this.toolStrip8 = new System.Windows.Forms.ToolStrip();
+            this.solidModsInsert = new System.Windows.Forms.ToolStripButton();
+            this.solidModsDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.solidModsMoveUp = new System.Windows.Forms.ToolStripButton();
+            this.solidModsMoveDown = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.solidModsCopy = new System.Windows.Forms.ToolStripButton();
+            this.solidModsPaste = new System.Windows.Forms.ToolStripButton();
+            this.solidModsDuplicate = new System.Windows.Forms.ToolStripButton();
+            this.label68 = new System.Windows.Forms.Label();
+            this.panel45 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchLevelNames = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.changeLevelName = new System.Windows.Forms.ToolStripButton();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonGotoC = new System.Windows.Forms.ToolStripButton();
             this.eventExit = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.eventMusic = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.changeLevelName = new System.Windows.Forms.ToolStripButton();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.searchLevelNames = new System.Windows.Forms.ToolStripButton();
-            this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.hexEditor = new System.Windows.Forms.ToolStripButton();
             this.propertiesButton = new System.Windows.Forms.ToolStripButton();
             this.openTileset = new System.Windows.Forms.ToolStripButton();
             this.openTilemap = new System.Windows.Forms.ToolStripButton();
@@ -450,7 +450,6 @@ namespace LAZYSHELL
             this.levelPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.spaceAnalyzer = new System.Windows.Forms.ToolStripButton();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExportLevelImages = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelLevels = new System.Windows.Forms.Panel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -458,17 +457,36 @@ namespace LAZYSHELL
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.import = new System.Windows.Forms.ToolStripDropDownButton();
             this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importArchitectureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
             this.arraysToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.graphicSetsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.export = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportArchitectureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
             this.arraysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graphicSetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportLevelImagesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
             this.dumpTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.resetLevelMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetLayerDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetNPCDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetEventDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetExitDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetOverlapDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetTilemapModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetSolidityModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.resetPaletteSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetGraphicSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetTilesetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetTilemapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetSolidityMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.resetAllComponentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clear = new System.Windows.Forms.ToolStripDropDownButton();
             this.clearLevelDataAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator38 = new System.Windows.Forms.ToolStripSeparator();
@@ -476,6 +494,7 @@ namespace LAZYSHELL
             this.clearTilemapsAll = new System.Windows.Forms.ToolStripMenuItem();
             this.clearPhysicalMapsAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
+            this.unusedGraphicSetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unusedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unusedToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.unusedToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -488,17 +507,10 @@ namespace LAZYSHELL
             this.baseConversion = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.tabPage8.SuspendLayout();
-            this.panel9.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.panel85.SuspendLayout();
-            this.panel84.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.npcX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcZ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyA)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyC)).BeginInit();
-            this.panel42.SuspendLayout();
+            this.panel118.SuspendLayout();
+            this.panel119.SuspendLayout();
             this.panel83.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.npcID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcMovement)).BeginInit();
@@ -508,13 +520,18 @@ namespace LAZYSHELL
             this.panel53.SuspendLayout();
             this.panel80.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.npcMapHeader)).BeginInit();
-            this.panel118.SuspendLayout();
-            this.panel119.SuspendLayout();
+            this.panel84.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.npcX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyA)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyC)).BeginInit();
+            this.panel42.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapNum)).BeginInit();
             this.contextMenuStrip4.SuspendLayout();
             this.tabPage10.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.panel99.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.overlapType)).BeginInit();
@@ -525,8 +542,6 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOverlaps)).BeginInit();
             this.tabPage9.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.toolStrip6.SuspendLayout();
             this.panel90.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventY)).BeginInit();
@@ -535,9 +550,8 @@ namespace LAZYSHELL
             this.panel46.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventEvent)).BeginInit();
+            this.toolStrip6.SuspendLayout();
             this.panel52.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.toolStrip5.SuspendLayout();
             this.panel88.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitDestY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitDestX)).BeginInit();
@@ -552,29 +566,9 @@ namespace LAZYSHELL
             this.panel49.SuspendLayout();
             this.panel50.SuspendLayout();
             this.panel51.SuspendLayout();
+            this.toolStrip5.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.panel28.SuspendLayout();
-            this.panel72.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet1Num)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet2Num)).BeginInit();
-            this.panel31.SuspendLayout();
-            this.panel29.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet3Num)).BeginInit();
-            this.panel12.SuspendLayout();
-            this.panel30.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet4Num)).BeginInit();
-            this.panel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSetL3Num)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet5Num)).BeginInit();
-            this.panel11.SuspendLayout();
-            this.panel71.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL3Num)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL2Num)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL1Num)).BeginInit();
-            this.panel32.SuspendLayout();
-            this.panel33.SuspendLayout();
-            this.panel34.SuspendLayout();
             this.panel70.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapTilemapL1Num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapTilemapL2Num)).BeginInit();
@@ -589,54 +583,73 @@ namespace LAZYSHELL
             this.panel69.SuspendLayout();
             this.panel40.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteSetNum)).BeginInit();
+            this.panel71.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL3Num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL2Num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL1Num)).BeginInit();
+            this.panel32.SuspendLayout();
+            this.panel33.SuspendLayout();
+            this.panel34.SuspendLayout();
+            this.panel72.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet1Num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet2Num)).BeginInit();
+            this.panel31.SuspendLayout();
+            this.panel29.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet3Num)).BeginInit();
+            this.panel12.SuspendLayout();
+            this.panel30.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet4Num)).BeginInit();
+            this.panel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSetL3Num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet5Num)).BeginInit();
+            this.panel11.SuspendLayout();
+            this.panel28.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel79.SuspendLayout();
             this.panel22.SuspendLayout();
             this.panel26.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel73.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layerPrioritySet)).BeginInit();
+            this.panel17.SuspendLayout();
+            this.panel14.SuspendLayout();
             this.panel78.SuspendLayout();
             this.panel21.SuspendLayout();
             this.panel23.SuspendLayout();
             this.panel24.SuspendLayout();
             this.panel25.SuspendLayout();
-            this.panel77.SuspendLayout();
-            this.panel16.SuspendLayout();
-            this.panel19.SuspendLayout();
-            this.panel18.SuspendLayout();
-            this.panel20.SuspendLayout();
-            this.panel76.SuspendLayout();
-            this.panel75.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layerL2LeftShift)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layerL2UpShift)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layerL3LeftShift)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layerL3UpShift)).BeginInit();
             this.panel74.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layerMaskHighX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layerMaskLowX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layerMaskHighY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layerMaskLowY)).BeginInit();
-            this.panel73.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layerPrioritySet)).BeginInit();
-            this.panel17.SuspendLayout();
-            this.panel14.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.panel77.SuspendLayout();
+            this.panel16.SuspendLayout();
+            this.panel19.SuspendLayout();
+            this.panel18.SuspendLayout();
+            this.panel20.SuspendLayout();
+            this.panel75.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layerL2LeftShift)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layerL2UpShift)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layerL3LeftShift)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layerL3UpShift)).BeginInit();
+            this.panel76.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.panel27.SuspendLayout();
-            this.panel44.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.solidModsY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.solidModsX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.solidModsHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.solidModsWidth)).BeginInit();
-            this.panel41.SuspendLayout();
-            this.toolStrip8.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tileModsY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileModsX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileModsHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileModsWidth)).BeginInit();
-            this.panel10.SuspendLayout();
             this.toolStrip7.SuspendLayout();
+            this.panel27.SuspendLayout();
+            this.panel44.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsWidth)).BeginInit();
+            this.toolStrip8.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panelLevels.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -649,7 +662,7 @@ namespace LAZYSHELL
             this.levelNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.levelNum.ForeColor = System.Drawing.SystemColors.Control;
             this.levelNum.Hexadecimal = false;
-            this.levelNum.Location = new System.Drawing.Point(224, 2);
+            this.levelNum.Location = new System.Drawing.Point(209, 2);
             this.levelNum.Maximum = new decimal(new int[] {
             509,
             0,
@@ -682,49 +695,26 @@ namespace LAZYSHELL
             this.levelName.ForeColor = System.Drawing.SystemColors.Control;
             this.levelName.IntegralHeight = false;
             this.levelName.Name = "levelName";
-            this.levelName.Size = new System.Drawing.Size(215, 21);
+            this.levelName.Size = new System.Drawing.Size(200, 21);
             this.levelName.SelectedIndexChanged += new System.EventHandler(this.levelName_SelectedIndexChanged);
             // 
             // tabPage8
             // 
-            this.tabPage8.Controls.Add(this.panel9);
+            this.tabPage8.Controls.Add(this.toolStrip3);
+            this.tabPage8.Controls.Add(this.panel85);
+            this.tabPage8.Controls.Add(this.panel118);
+            this.tabPage8.Controls.Add(this.panel83);
+            this.tabPage8.Controls.Add(this.panel80);
+            this.tabPage8.Controls.Add(this.npcsBytesLeft);
+            this.tabPage8.Controls.Add(this.npcObjectTree);
+            this.tabPage8.Controls.Add(this.panel84);
             this.tabPage8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(260, 600);
+            this.tabPage8.Size = new System.Drawing.Size(260, 640);
             this.tabPage8.TabIndex = 2;
             this.tabPage8.Text = "NPCS";
             this.tabPage8.UseVisualStyleBackColor = true;
-            // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel9.Controls.Add(this.npcObjectTree);
-            this.panel9.Controls.Add(this.toolStrip3);
-            this.panel9.Controls.Add(this.panel85);
-            this.panel9.Controls.Add(this.panel84);
-            this.panel9.Controls.Add(this.panel83);
-            this.panel9.Controls.Add(this.panel80);
-            this.panel9.Controls.Add(this.panel118);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(260, 546);
-            this.panel9.TabIndex = 0;
-            // 
-            // npcObjectTree
-            // 
-            this.npcObjectTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.npcObjectTree.HideSelection = false;
-            this.npcObjectTree.HotTracking = true;
-            this.npcObjectTree.Location = new System.Drawing.Point(0, 26);
-            this.npcObjectTree.Name = "npcObjectTree";
-            this.npcObjectTree.ShowPlusMinus = false;
-            this.npcObjectTree.ShowRootLines = false;
-            this.npcObjectTree.Size = new System.Drawing.Size(126, 367);
-            this.npcObjectTree.TabIndex = 91;
-            this.npcObjectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.npcObjectTree_AfterSelect);
             // 
             // toolStrip3
             // 
@@ -734,25 +724,25 @@ namespace LAZYSHELL
             this.npcInsertObject,
             this.npcInsertInstance,
             this.npcRemoveObject,
-            this.toolStripSeparator10,
-            this.npcMoveUp,
-            this.npcMoveDown,
-            this.toolStripSeparator7,
             this.npcCopy,
             this.npcPaste,
             this.npcDuplicate,
+            this.toolStripSeparator10,
+            this.npcMoveUp,
+            this.npcMoveDown,
             this.toolStripSeparator9,
             this.findNPCNum,
             this.openPartitions});
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(256, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(260, 25);
             this.toolStrip3.TabIndex = 486;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // npcInsertObject
             // 
+            this.npcInsertObject.AutoSize = false;
             this.npcInsertObject.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcInsertObject.Image = global::LAZYSHELL.Properties.Resources.new_small;
             this.npcInsertObject.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -764,6 +754,7 @@ namespace LAZYSHELL
             // 
             // npcInsertInstance
             // 
+            this.npcInsertInstance.AutoSize = false;
             this.npcInsertInstance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcInsertInstance.Image = global::LAZYSHELL.Properties.Resources.newInstance;
             this.npcInsertInstance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -775,6 +766,7 @@ namespace LAZYSHELL
             // 
             // npcRemoveObject
             // 
+            this.npcRemoveObject.AutoSize = false;
             this.npcRemoveObject.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcRemoveObject.Image = global::LAZYSHELL.Properties.Resources.delete_small;
             this.npcRemoveObject.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -783,6 +775,42 @@ namespace LAZYSHELL
             this.npcRemoveObject.Size = new System.Drawing.Size(23, 22);
             this.npcRemoveObject.Text = "Delete NPC";
             this.npcRemoveObject.Click += new System.EventHandler(this.npcRemoveObject_Click);
+            // 
+            // npcCopy
+            // 
+            this.npcCopy.AutoSize = false;
+            this.npcCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.npcCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.npcCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.npcCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.npcCopy.Name = "npcCopy";
+            this.npcCopy.Size = new System.Drawing.Size(23, 22);
+            this.npcCopy.Text = "Copy NPC";
+            this.npcCopy.Click += new System.EventHandler(this.npcCopy_Click);
+            // 
+            // npcPaste
+            // 
+            this.npcPaste.AutoSize = false;
+            this.npcPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.npcPaste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.npcPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.npcPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.npcPaste.Name = "npcPaste";
+            this.npcPaste.Size = new System.Drawing.Size(23, 22);
+            this.npcPaste.Text = "Paste NPC";
+            this.npcPaste.Click += new System.EventHandler(this.npcPaste_Click);
+            // 
+            // npcDuplicate
+            // 
+            this.npcDuplicate.AutoSize = false;
+            this.npcDuplicate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.npcDuplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
+            this.npcDuplicate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.npcDuplicate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.npcDuplicate.Name = "npcDuplicate";
+            this.npcDuplicate.Size = new System.Drawing.Size(23, 22);
+            this.npcDuplicate.Text = "Duplicate NPC";
+            this.npcDuplicate.Click += new System.EventHandler(this.npcDuplicate_Click);
             // 
             // toolStripSeparator10
             // 
@@ -797,7 +825,7 @@ namespace LAZYSHELL
             this.npcMoveUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.npcMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.npcMoveUp.Name = "npcMoveUp";
-            this.npcMoveUp.Size = new System.Drawing.Size(22, 22);
+            this.npcMoveUp.Size = new System.Drawing.Size(23, 22);
             this.npcMoveUp.Text = "Move NPC Up";
             this.npcMoveUp.Click += new System.EventHandler(this.npcMoveUp_Click);
             // 
@@ -809,47 +837,9 @@ namespace LAZYSHELL
             this.npcMoveDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.npcMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.npcMoveDown.Name = "npcMoveDown";
-            this.npcMoveDown.Size = new System.Drawing.Size(22, 22);
+            this.npcMoveDown.Size = new System.Drawing.Size(23, 22);
             this.npcMoveDown.Text = "Move NPC Down";
             this.npcMoveDown.Click += new System.EventHandler(this.npcMoveDown_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
-            // 
-            // npcCopy
-            // 
-            this.npcCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.npcCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
-            this.npcCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.npcCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.npcCopy.Name = "npcCopy";
-            this.npcCopy.Size = new System.Drawing.Size(23, 22);
-            this.npcCopy.Text = "Copy NPC";
-            this.npcCopy.Click += new System.EventHandler(this.npcCopy_Click);
-            // 
-            // npcPaste
-            // 
-            this.npcPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.npcPaste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
-            this.npcPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.npcPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.npcPaste.Name = "npcPaste";
-            this.npcPaste.Size = new System.Drawing.Size(23, 22);
-            this.npcPaste.Text = "Paste NPC";
-            this.npcPaste.Click += new System.EventHandler(this.npcPaste_Click);
-            // 
-            // npcDuplicate
-            // 
-            this.npcDuplicate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.npcDuplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
-            this.npcDuplicate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.npcDuplicate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.npcDuplicate.Name = "npcDuplicate";
-            this.npcDuplicate.Size = new System.Drawing.Size(23, 22);
-            this.npcDuplicate.Text = "Duplicate NPC";
-            this.npcDuplicate.Click += new System.EventHandler(this.npcDuplicate_Click);
             // 
             // toolStripSeparator9
             // 
@@ -858,6 +848,7 @@ namespace LAZYSHELL
             // 
             // findNPCNum
             // 
+            this.findNPCNum.AutoSize = false;
             this.findNPCNum.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.findNPCNum.Image = global::LAZYSHELL.Properties.Resources.openNPCs;
             this.findNPCNum.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -868,6 +859,7 @@ namespace LAZYSHELL
             // 
             // openPartitions
             // 
+            this.openPartitions.AutoSize = false;
             this.openPartitions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.openPartitions.Image = global::LAZYSHELL.Properties.Resources.openPartitions;
             this.openPartitions.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -879,11 +871,12 @@ namespace LAZYSHELL
             // panel85
             // 
             this.panel85.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel85.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel85.Controls.Add(this.npcAttributes);
             this.panel85.Controls.Add(this.label65);
-            this.panel85.Location = new System.Drawing.Point(0, 395);
+            this.panel85.Location = new System.Drawing.Point(0, 413);
             this.panel85.Name = "panel85";
-            this.panel85.Size = new System.Drawing.Size(256, 147);
+            this.panel85.Size = new System.Drawing.Size(260, 151);
             this.panel85.TabIndex = 485;
             // 
             // npcAttributes
@@ -928,9 +921,337 @@ namespace LAZYSHELL
             this.label65.Text = "PROPERTIES...";
             this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // panel118
+            // 
+            this.panel118.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel118.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel118.Controls.Add(this.label52);
+            this.panel118.Controls.Add(this.panel119);
+            this.panel118.Location = new System.Drawing.Point(128, 371);
+            this.panel118.Name = "panel118";
+            this.panel118.Size = new System.Drawing.Size(132, 40);
+            this.panel118.TabIndex = 479;
+            // 
+            // label52
+            // 
+            this.label52.BackColor = System.Drawing.SystemColors.Control;
+            this.label52.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label52.Location = new System.Drawing.Point(0, 0);
+            this.label52.Name = "label52";
+            this.label52.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label52.Size = new System.Drawing.Size(128, 17);
+            this.label52.TabIndex = 478;
+            this.label52.Text = "AFTER BATTLE...";
+            // 
+            // panel119
+            // 
+            this.panel119.BackColor = System.Drawing.SystemColors.Window;
+            this.panel119.Controls.Add(this.npcAfterBattle);
+            this.panel119.Location = new System.Drawing.Point(0, 19);
+            this.panel119.Name = "panel119";
+            this.panel119.Size = new System.Drawing.Size(128, 17);
+            this.panel119.TabIndex = 477;
+            // 
+            // npcAfterBattle
+            // 
+            this.npcAfterBattle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.npcAfterBattle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.npcAfterBattle.DropDownWidth = 350;
+            this.npcAfterBattle.IntegralHeight = false;
+            this.npcAfterBattle.Items.AddRange(new object[] {
+            "remove permanently (from level memory)",
+            "remove temporarily (return on level re-entry)",
+            "do not remove at all (disable trigger)",
+            "remove permanently (if ran away, can walk through while blinking)",
+            "remove temporarily (if ran away, can walk through while blinking)"});
+            this.npcAfterBattle.Location = new System.Drawing.Point(-2, -2);
+            this.npcAfterBattle.Name = "npcAfterBattle";
+            this.npcAfterBattle.Size = new System.Drawing.Size(132, 21);
+            this.npcAfterBattle.TabIndex = 205;
+            this.npcAfterBattle.SelectedIndexChanged += new System.EventHandler(this.npcAfterBattle_SelectedIndexChanged);
+            // 
+            // panel83
+            // 
+            this.panel83.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel83.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel83.Controls.Add(this.npcID);
+            this.panel83.Controls.Add(this.label49);
+            this.panel83.Controls.Add(this.npcMovement);
+            this.panel83.Controls.Add(this.npcSpeedPlus);
+            this.panel83.Controls.Add(this.npcEventORPack);
+            this.panel83.Controls.Add(this.label54);
+            this.panel83.Controls.Add(this.label117);
+            this.panel83.Controls.Add(this.label70);
+            this.panel83.Controls.Add(this.buttonGotoB);
+            this.panel83.Controls.Add(this.buttonGotoA);
+            this.panel83.Controls.Add(this.panel43);
+            this.panel83.Controls.Add(this.panel53);
+            this.panel83.Location = new System.Drawing.Point(128, 51);
+            this.panel83.Name = "panel83";
+            this.panel83.Size = new System.Drawing.Size(132, 151);
+            this.panel83.TabIndex = 483;
+            // 
+            // npcID
+            // 
+            this.npcID.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.npcID.Location = new System.Drawing.Point(68, 76);
+            this.npcID.Maximum = new decimal(new int[] {
+            511,
+            0,
+            0,
+            0});
+            this.npcID.Name = "npcID";
+            this.npcID.Size = new System.Drawing.Size(60, 17);
+            this.npcID.TabIndex = 98;
+            this.npcID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.npcID.ValueChanged += new System.EventHandler(this.npcID_ValueChanged);
+            // 
+            // label49
+            // 
+            this.label49.BackColor = System.Drawing.SystemColors.Control;
+            this.label49.Location = new System.Drawing.Point(0, 76);
+            this.label49.Name = "label49";
+            this.label49.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label49.Size = new System.Drawing.Size(67, 17);
+            this.label49.TabIndex = 452;
+            this.label49.Text = "NPC #";
+            // 
+            // npcMovement
+            // 
+            this.npcMovement.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.npcMovement.Location = new System.Drawing.Point(68, 112);
+            this.npcMovement.Maximum = new decimal(new int[] {
+            1023,
+            0,
+            0,
+            0});
+            this.npcMovement.Name = "npcMovement";
+            this.npcMovement.Size = new System.Drawing.Size(60, 17);
+            this.npcMovement.TabIndex = 101;
+            this.npcMovement.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.npcMovement.ValueChanged += new System.EventHandler(this.npcMovement_ValueChanged);
+            // 
+            // npcSpeedPlus
+            // 
+            this.npcSpeedPlus.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.npcSpeedPlus.Location = new System.Drawing.Point(68, 130);
+            this.npcSpeedPlus.Maximum = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.npcSpeedPlus.Name = "npcSpeedPlus";
+            this.npcSpeedPlus.Size = new System.Drawing.Size(60, 17);
+            this.npcSpeedPlus.TabIndex = 103;
+            this.npcSpeedPlus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.npcSpeedPlus.ValueChanged += new System.EventHandler(this.npcSpeedPlus_ValueChanged);
+            // 
+            // npcEventORPack
+            // 
+            this.npcEventORPack.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.npcEventORPack.Location = new System.Drawing.Point(68, 94);
+            this.npcEventORPack.Maximum = new decimal(new int[] {
+            4095,
+            0,
+            0,
+            0});
+            this.npcEventORPack.Name = "npcEventORPack";
+            this.npcEventORPack.Size = new System.Drawing.Size(60, 17);
+            this.npcEventORPack.TabIndex = 100;
+            this.npcEventORPack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.npcEventORPack.ValueChanged += new System.EventHandler(this.npcEventORPack_ValueChanged);
+            // 
+            // label54
+            // 
+            this.label54.BackColor = System.Drawing.SystemColors.Control;
+            this.label54.Location = new System.Drawing.Point(0, 130);
+            this.label54.Name = "label54";
+            this.label54.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label54.Size = new System.Drawing.Size(67, 17);
+            this.label54.TabIndex = 460;
+            this.label54.Text = "Speed +";
+            // 
+            // label117
+            // 
+            this.label117.BackColor = System.Drawing.SystemColors.Control;
+            this.label117.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label117.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label117.Location = new System.Drawing.Point(0, 0);
+            this.label117.Name = "label117";
+            this.label117.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label117.Size = new System.Drawing.Size(128, 17);
+            this.label117.TabIndex = 477;
+            this.label117.Text = "NPC TYPE";
+            // 
+            // label70
+            // 
+            this.label70.BackColor = System.Drawing.SystemColors.Control;
+            this.label70.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label70.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label70.Location = new System.Drawing.Point(0, 38);
+            this.label70.Name = "label70";
+            this.label70.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label70.Size = new System.Drawing.Size(128, 17);
+            this.label70.TabIndex = 476;
+            this.label70.Text = "TRIGGER";
+            // 
+            // buttonGotoB
+            // 
+            this.buttonGotoB.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonGotoB.FlatAppearance.BorderSize = 0;
+            this.buttonGotoB.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGotoB.Location = new System.Drawing.Point(0, 112);
+            this.buttonGotoB.Name = "buttonGotoB";
+            this.buttonGotoB.Size = new System.Drawing.Size(68, 18);
+            this.buttonGotoB.TabIndex = 99;
+            this.buttonGotoB.Text = "Action #";
+            this.buttonGotoB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.buttonGotoB, "Edit NPC action...");
+            this.buttonGotoB.UseCompatibleTextRendering = true;
+            this.buttonGotoB.UseVisualStyleBackColor = false;
+            this.buttonGotoB.Click += new System.EventHandler(this.buttonGotoB_Click);
+            // 
+            // buttonGotoA
+            // 
+            this.buttonGotoA.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonGotoA.FlatAppearance.BorderSize = 0;
+            this.buttonGotoA.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGotoA.Location = new System.Drawing.Point(0, 94);
+            this.buttonGotoA.Name = "buttonGotoA";
+            this.buttonGotoA.Size = new System.Drawing.Size(68, 18);
+            this.buttonGotoA.TabIndex = 99;
+            this.buttonGotoA.Text = "Event #";
+            this.buttonGotoA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.buttonGotoA, "Edit NPC event...");
+            this.buttonGotoA.UseCompatibleTextRendering = true;
+            this.buttonGotoA.UseVisualStyleBackColor = false;
+            this.buttonGotoA.Click += new System.EventHandler(this.buttonGotoA_Click);
+            // 
+            // panel43
+            // 
+            this.panel43.BackColor = System.Drawing.SystemColors.Window;
+            this.panel43.Controls.Add(this.npcEngageType);
+            this.panel43.Location = new System.Drawing.Point(0, 19);
+            this.panel43.Name = "panel43";
+            this.panel43.Size = new System.Drawing.Size(128, 17);
+            this.panel43.TabIndex = 96;
+            // 
+            // npcEngageType
+            // 
+            this.npcEngageType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.npcEngageType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.npcEngageType.Items.AddRange(new object[] {
+            "Object",
+            "Treasure",
+            "Battle"});
+            this.npcEngageType.Location = new System.Drawing.Point(-2, -2);
+            this.npcEngageType.Name = "npcEngageType";
+            this.npcEngageType.Size = new System.Drawing.Size(132, 21);
+            this.npcEngageType.TabIndex = 206;
+            this.npcEngageType.SelectedIndexChanged += new System.EventHandler(this.npcEngageType_SelectedIndexChanged);
+            // 
+            // panel53
+            // 
+            this.panel53.BackColor = System.Drawing.SystemColors.Window;
+            this.panel53.Controls.Add(this.npcEngageTrigger);
+            this.panel53.Location = new System.Drawing.Point(0, 57);
+            this.panel53.Name = "panel53";
+            this.panel53.Size = new System.Drawing.Size(128, 17);
+            this.panel53.TabIndex = 97;
+            // 
+            // npcEngageTrigger
+            // 
+            this.npcEngageTrigger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.npcEngageTrigger.DropDownHeight = 171;
+            this.npcEngageTrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.npcEngageTrigger.DropDownWidth = 210;
+            this.npcEngageTrigger.IntegralHeight = false;
+            this.npcEngageTrigger.Items.AddRange(new object[] {
+            "(none)",
+            "press A from any side",
+            "press A from front",
+            "do anything EXCEPT touch any side",
+            "press A from any side / touch any side",
+            "press A from front / touch from front",
+            "do anything",
+            "hit from below",
+            "jump on",
+            "jump on / hit from below",
+            "touch any side",
+            "touch from front",
+            "do anything EXCEPT press A"});
+            this.npcEngageTrigger.Location = new System.Drawing.Point(-2, -2);
+            this.npcEngageTrigger.Name = "npcEngageTrigger";
+            this.npcEngageTrigger.Size = new System.Drawing.Size(132, 21);
+            this.npcEngageTrigger.TabIndex = 205;
+            this.npcEngageTrigger.SelectedIndexChanged += new System.EventHandler(this.npcEngageTrigger_SelectedIndexChanged);
+            // 
+            // panel80
+            // 
+            this.panel80.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel80.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel80.Controls.Add(this.label48);
+            this.panel80.Controls.Add(this.npcMapHeader);
+            this.panel80.Location = new System.Drawing.Point(128, 28);
+            this.panel80.Name = "panel80";
+            this.panel80.Size = new System.Drawing.Size(132, 21);
+            this.panel80.TabIndex = 480;
+            // 
+            // label48
+            // 
+            this.label48.BackColor = System.Drawing.SystemColors.Control;
+            this.label48.Location = new System.Drawing.Point(0, 0);
+            this.label48.Name = "label48";
+            this.label48.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label48.Size = new System.Drawing.Size(67, 17);
+            this.label48.TabIndex = 449;
+            this.label48.Text = "Partition #";
+            // 
+            // npcMapHeader
+            // 
+            this.npcMapHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.npcMapHeader.Location = new System.Drawing.Point(68, 0);
+            this.npcMapHeader.Maximum = new decimal(new int[] {
+            119,
+            0,
+            0,
+            0});
+            this.npcMapHeader.Name = "npcMapHeader";
+            this.npcMapHeader.Size = new System.Drawing.Size(60, 17);
+            this.npcMapHeader.TabIndex = 89;
+            this.npcMapHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.npcMapHeader.ValueChanged += new System.EventHandler(this.npcMapHeader_ValueChanged);
+            // 
+            // npcsBytesLeft
+            // 
+            this.npcsBytesLeft.BackColor = System.Drawing.SystemColors.Control;
+            this.npcsBytesLeft.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.npcsBytesLeft.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.npcsBytesLeft.Location = new System.Drawing.Point(0, 28);
+            this.npcsBytesLeft.Name = "npcsBytesLeft";
+            this.npcsBytesLeft.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.npcsBytesLeft.Size = new System.Drawing.Size(126, 21);
+            this.npcsBytesLeft.TabIndex = 498;
+            this.npcsBytesLeft.Text = "bytes left";
+            this.npcsBytesLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // npcObjectTree
+            // 
+            this.npcObjectTree.HideSelection = false;
+            this.npcObjectTree.HotTracking = true;
+            this.npcObjectTree.Location = new System.Drawing.Point(0, 51);
+            this.npcObjectTree.Name = "npcObjectTree";
+            this.npcObjectTree.ShowPlusMinus = false;
+            this.npcObjectTree.ShowRootLines = false;
+            this.npcObjectTree.Size = new System.Drawing.Size(126, 360);
+            this.npcObjectTree.TabIndex = 91;
+            this.npcObjectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.npcObjectTree_AfterSelect);
+            // 
             // panel84
             // 
             this.panel84.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel84.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel84.Controls.Add(this.npcX);
             this.panel84.Controls.Add(this.npcY);
             this.panel84.Controls.Add(this.label29);
@@ -947,9 +1268,9 @@ namespace LAZYSHELL
             this.panel84.Controls.Add(this.npcZ_half);
             this.panel84.Controls.Add(this.panel42);
             this.panel84.Controls.Add(this.npcVisible);
-            this.panel84.Location = new System.Drawing.Point(128, 194);
+            this.panel84.Location = new System.Drawing.Point(128, 204);
             this.panel84.Name = "panel84";
-            this.panel84.Size = new System.Drawing.Size(128, 161);
+            this.panel84.Size = new System.Drawing.Size(132, 165);
             this.panel84.TabIndex = 484;
             // 
             // npcX
@@ -1171,305 +1492,6 @@ namespace LAZYSHELL
             this.npcVisible.UseVisualStyleBackColor = false;
             this.npcVisible.CheckedChanged += new System.EventHandler(this.npcsShowNPC_CheckedChanged);
             // 
-            // panel83
-            // 
-            this.panel83.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel83.Controls.Add(this.npcID);
-            this.panel83.Controls.Add(this.label49);
-            this.panel83.Controls.Add(this.npcMovement);
-            this.panel83.Controls.Add(this.npcSpeedPlus);
-            this.panel83.Controls.Add(this.npcEventORPack);
-            this.panel83.Controls.Add(this.label54);
-            this.panel83.Controls.Add(this.label117);
-            this.panel83.Controls.Add(this.label70);
-            this.panel83.Controls.Add(this.buttonGotoB);
-            this.panel83.Controls.Add(this.buttonGotoA);
-            this.panel83.Controls.Add(this.panel43);
-            this.panel83.Controls.Add(this.panel53);
-            this.panel83.Location = new System.Drawing.Point(128, 45);
-            this.panel83.Name = "panel83";
-            this.panel83.Size = new System.Drawing.Size(128, 147);
-            this.panel83.TabIndex = 483;
-            // 
-            // npcID
-            // 
-            this.npcID.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.npcID.Location = new System.Drawing.Point(68, 76);
-            this.npcID.Maximum = new decimal(new int[] {
-            511,
-            0,
-            0,
-            0});
-            this.npcID.Name = "npcID";
-            this.npcID.Size = new System.Drawing.Size(60, 17);
-            this.npcID.TabIndex = 98;
-            this.npcID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.npcID.ValueChanged += new System.EventHandler(this.npcID_ValueChanged);
-            // 
-            // label49
-            // 
-            this.label49.BackColor = System.Drawing.SystemColors.Control;
-            this.label49.Location = new System.Drawing.Point(0, 76);
-            this.label49.Name = "label49";
-            this.label49.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label49.Size = new System.Drawing.Size(67, 17);
-            this.label49.TabIndex = 452;
-            this.label49.Text = "NPC #";
-            // 
-            // npcMovement
-            // 
-            this.npcMovement.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.npcMovement.Location = new System.Drawing.Point(68, 112);
-            this.npcMovement.Maximum = new decimal(new int[] {
-            1023,
-            0,
-            0,
-            0});
-            this.npcMovement.Name = "npcMovement";
-            this.npcMovement.Size = new System.Drawing.Size(60, 17);
-            this.npcMovement.TabIndex = 101;
-            this.npcMovement.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.npcMovement.ValueChanged += new System.EventHandler(this.npcMovement_ValueChanged);
-            // 
-            // npcSpeedPlus
-            // 
-            this.npcSpeedPlus.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.npcSpeedPlus.Location = new System.Drawing.Point(68, 130);
-            this.npcSpeedPlus.Maximum = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-            this.npcSpeedPlus.Name = "npcSpeedPlus";
-            this.npcSpeedPlus.Size = new System.Drawing.Size(60, 17);
-            this.npcSpeedPlus.TabIndex = 103;
-            this.npcSpeedPlus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.npcSpeedPlus.ValueChanged += new System.EventHandler(this.npcSpeedPlus_ValueChanged);
-            // 
-            // npcEventORPack
-            // 
-            this.npcEventORPack.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.npcEventORPack.Location = new System.Drawing.Point(68, 94);
-            this.npcEventORPack.Maximum = new decimal(new int[] {
-            4095,
-            0,
-            0,
-            0});
-            this.npcEventORPack.Name = "npcEventORPack";
-            this.npcEventORPack.Size = new System.Drawing.Size(60, 17);
-            this.npcEventORPack.TabIndex = 100;
-            this.npcEventORPack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.npcEventORPack.ValueChanged += new System.EventHandler(this.npcEventORPack_ValueChanged);
-            // 
-            // label54
-            // 
-            this.label54.BackColor = System.Drawing.SystemColors.Control;
-            this.label54.Location = new System.Drawing.Point(0, 130);
-            this.label54.Name = "label54";
-            this.label54.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label54.Size = new System.Drawing.Size(67, 17);
-            this.label54.TabIndex = 460;
-            this.label54.Text = "Speed +";
-            // 
-            // label117
-            // 
-            this.label117.BackColor = System.Drawing.SystemColors.Control;
-            this.label117.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label117.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label117.Location = new System.Drawing.Point(0, 0);
-            this.label117.Name = "label117";
-            this.label117.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label117.Size = new System.Drawing.Size(128, 17);
-            this.label117.TabIndex = 477;
-            this.label117.Text = "NPC TYPE";
-            // 
-            // label70
-            // 
-            this.label70.BackColor = System.Drawing.SystemColors.Control;
-            this.label70.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label70.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label70.Location = new System.Drawing.Point(0, 38);
-            this.label70.Name = "label70";
-            this.label70.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label70.Size = new System.Drawing.Size(128, 17);
-            this.label70.TabIndex = 476;
-            this.label70.Text = "TRIGGER";
-            // 
-            // buttonGotoB
-            // 
-            this.buttonGotoB.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonGotoB.FlatAppearance.BorderSize = 0;
-            this.buttonGotoB.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGotoB.Location = new System.Drawing.Point(0, 112);
-            this.buttonGotoB.Name = "buttonGotoB";
-            this.buttonGotoB.Size = new System.Drawing.Size(68, 18);
-            this.buttonGotoB.TabIndex = 99;
-            this.buttonGotoB.Text = "Action #";
-            this.buttonGotoB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.buttonGotoB, "Edit NPC action...");
-            this.buttonGotoB.UseCompatibleTextRendering = true;
-            this.buttonGotoB.UseVisualStyleBackColor = false;
-            this.buttonGotoB.Click += new System.EventHandler(this.buttonGotoB_Click);
-            // 
-            // buttonGotoA
-            // 
-            this.buttonGotoA.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonGotoA.FlatAppearance.BorderSize = 0;
-            this.buttonGotoA.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGotoA.Location = new System.Drawing.Point(0, 94);
-            this.buttonGotoA.Name = "buttonGotoA";
-            this.buttonGotoA.Size = new System.Drawing.Size(68, 18);
-            this.buttonGotoA.TabIndex = 99;
-            this.buttonGotoA.Text = "Event #";
-            this.buttonGotoA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.buttonGotoA, "Edit NPC event...");
-            this.buttonGotoA.UseCompatibleTextRendering = true;
-            this.buttonGotoA.UseVisualStyleBackColor = false;
-            this.buttonGotoA.Click += new System.EventHandler(this.buttonGotoA_Click);
-            // 
-            // panel43
-            // 
-            this.panel43.BackColor = System.Drawing.SystemColors.Window;
-            this.panel43.Controls.Add(this.npcEngageType);
-            this.panel43.Location = new System.Drawing.Point(0, 19);
-            this.panel43.Name = "panel43";
-            this.panel43.Size = new System.Drawing.Size(128, 17);
-            this.panel43.TabIndex = 96;
-            // 
-            // npcEngageType
-            // 
-            this.npcEngageType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.npcEngageType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.npcEngageType.Items.AddRange(new object[] {
-            "Object",
-            "Treasure",
-            "Battle"});
-            this.npcEngageType.Location = new System.Drawing.Point(-2, -2);
-            this.npcEngageType.Name = "npcEngageType";
-            this.npcEngageType.Size = new System.Drawing.Size(132, 21);
-            this.npcEngageType.TabIndex = 206;
-            this.npcEngageType.SelectedIndexChanged += new System.EventHandler(this.npcEngageType_SelectedIndexChanged);
-            // 
-            // panel53
-            // 
-            this.panel53.BackColor = System.Drawing.SystemColors.Window;
-            this.panel53.Controls.Add(this.npcEngageTrigger);
-            this.panel53.Location = new System.Drawing.Point(0, 57);
-            this.panel53.Name = "panel53";
-            this.panel53.Size = new System.Drawing.Size(128, 17);
-            this.panel53.TabIndex = 97;
-            // 
-            // npcEngageTrigger
-            // 
-            this.npcEngageTrigger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.npcEngageTrigger.DropDownHeight = 171;
-            this.npcEngageTrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.npcEngageTrigger.DropDownWidth = 210;
-            this.npcEngageTrigger.IntegralHeight = false;
-            this.npcEngageTrigger.Items.AddRange(new object[] {
-            "(none)",
-            "press A from any side",
-            "press A from front",
-            "do anything EXCEPT touch any side",
-            "press A from any side / touch any side",
-            "press A from front / touch from front",
-            "do anything",
-            "hit from below",
-            "jump on",
-            "jump on / hit from below",
-            "touch any side",
-            "touch from front",
-            "do anything EXCEPT press A"});
-            this.npcEngageTrigger.Location = new System.Drawing.Point(-2, -2);
-            this.npcEngageTrigger.Name = "npcEngageTrigger";
-            this.npcEngageTrigger.Size = new System.Drawing.Size(132, 21);
-            this.npcEngageTrigger.TabIndex = 205;
-            this.npcEngageTrigger.SelectedIndexChanged += new System.EventHandler(this.npcEngageTrigger_SelectedIndexChanged);
-            // 
-            // panel80
-            // 
-            this.panel80.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel80.Controls.Add(this.label48);
-            this.panel80.Controls.Add(this.npcMapHeader);
-            this.panel80.Location = new System.Drawing.Point(128, 26);
-            this.panel80.Name = "panel80";
-            this.panel80.Size = new System.Drawing.Size(128, 17);
-            this.panel80.TabIndex = 480;
-            // 
-            // label48
-            // 
-            this.label48.BackColor = System.Drawing.SystemColors.Control;
-            this.label48.Location = new System.Drawing.Point(0, 0);
-            this.label48.Name = "label48";
-            this.label48.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label48.Size = new System.Drawing.Size(67, 17);
-            this.label48.TabIndex = 449;
-            this.label48.Text = "Partition #";
-            // 
-            // npcMapHeader
-            // 
-            this.npcMapHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.npcMapHeader.Location = new System.Drawing.Point(68, 0);
-            this.npcMapHeader.Maximum = new decimal(new int[] {
-            119,
-            0,
-            0,
-            0});
-            this.npcMapHeader.Name = "npcMapHeader";
-            this.npcMapHeader.Size = new System.Drawing.Size(60, 17);
-            this.npcMapHeader.TabIndex = 89;
-            this.npcMapHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.npcMapHeader.ValueChanged += new System.EventHandler(this.npcMapHeader_ValueChanged);
-            // 
-            // panel118
-            // 
-            this.panel118.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel118.Controls.Add(this.label52);
-            this.panel118.Controls.Add(this.panel119);
-            this.panel118.Location = new System.Drawing.Point(128, 357);
-            this.panel118.Name = "panel118";
-            this.panel118.Size = new System.Drawing.Size(128, 36);
-            this.panel118.TabIndex = 479;
-            // 
-            // label52
-            // 
-            this.label52.BackColor = System.Drawing.SystemColors.Control;
-            this.label52.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label52.Location = new System.Drawing.Point(0, 0);
-            this.label52.Name = "label52";
-            this.label52.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label52.Size = new System.Drawing.Size(128, 17);
-            this.label52.TabIndex = 478;
-            this.label52.Text = "AFTER BATTLE...";
-            // 
-            // panel119
-            // 
-            this.panel119.BackColor = System.Drawing.SystemColors.Window;
-            this.panel119.Controls.Add(this.npcAfterBattle);
-            this.panel119.Location = new System.Drawing.Point(0, 19);
-            this.panel119.Name = "panel119";
-            this.panel119.Size = new System.Drawing.Size(128, 17);
-            this.panel119.TabIndex = 477;
-            // 
-            // npcAfterBattle
-            // 
-            this.npcAfterBattle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.npcAfterBattle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.npcAfterBattle.DropDownWidth = 350;
-            this.npcAfterBattle.IntegralHeight = false;
-            this.npcAfterBattle.Items.AddRange(new object[] {
-            "remove permanently (from level memory)",
-            "remove temporarily (return on level re-entry)",
-            "do not remove at all (disable trigger)",
-            "remove permanently (if ran away, can walk through while blinking)",
-            "remove temporarily (if ran away, can walk through while blinking)"});
-            this.npcAfterBattle.Location = new System.Drawing.Point(-2, -2);
-            this.npcAfterBattle.Name = "npcAfterBattle";
-            this.npcAfterBattle.Size = new System.Drawing.Size(132, 21);
-            this.npcAfterBattle.TabIndex = 205;
-            this.npcAfterBattle.SelectedIndexChanged += new System.EventHandler(this.npcAfterBattle_SelectedIndexChanged);
-            // 
             // mapNum
             // 
             this.mapNum.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -1573,30 +1595,40 @@ namespace LAZYSHELL
             this.tabPage10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(260, 600);
+            this.tabPage10.Size = new System.Drawing.Size(260, 640);
             this.tabPage10.TabIndex = 4;
             this.tabPage10.Text = "OVERLAP";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.overlapFieldTree);
             this.panel1.Controls.Add(this.overlapUnknownBits);
-            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.toolStrip4);
             this.panel1.Controls.Add(this.panel99);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(260, 180);
+            this.panel1.Size = new System.Drawing.Size(260, 220);
             this.panel1.TabIndex = 496;
+            // 
+            // overlapFieldTree
+            // 
+            this.overlapFieldTree.Dock = System.Windows.Forms.DockStyle.Left;
+            this.overlapFieldTree.HideSelection = false;
+            this.overlapFieldTree.HotTracking = true;
+            this.overlapFieldTree.Location = new System.Drawing.Point(0, 25);
+            this.overlapFieldTree.Name = "overlapFieldTree";
+            this.overlapFieldTree.ShowRootLines = false;
+            this.overlapFieldTree.Size = new System.Drawing.Size(125, 195);
+            this.overlapFieldTree.TabIndex = 456;
+            this.overlapFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.overlapFieldTree_AfterSelect);
             // 
             // overlapUnknownBits
             // 
             this.overlapUnknownBits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.overlapUnknownBits.BackColor = System.Drawing.SystemColors.Window;
-            this.overlapUnknownBits.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.overlapUnknownBits.CheckOnClick = true;
             this.overlapUnknownBits.ColumnWidth = 60;
             this.overlapUnknownBits.IntegralHeight = false;
@@ -1605,50 +1637,29 @@ namespace LAZYSHELL
             "{B2,b5}",
             "{B2,b6}",
             "{B2,b7}"});
-            this.overlapUnknownBits.Location = new System.Drawing.Point(127, 91);
+            this.overlapUnknownBits.Location = new System.Drawing.Point(127, 124);
             this.overlapUnknownBits.Name = "overlapUnknownBits";
-            this.overlapUnknownBits.Size = new System.Drawing.Size(129, 85);
+            this.overlapUnknownBits.Size = new System.Drawing.Size(133, 95);
             this.overlapUnknownBits.TabIndex = 123;
             this.overlapUnknownBits.SelectedIndexChanged += new System.EventHandler(this.overlapUnknownBits_SelectedIndexChanged);
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.overlapFieldTree);
-            this.panel3.Controls.Add(this.toolStrip4);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(125, 176);
-            this.panel3.TabIndex = 497;
-            // 
-            // overlapFieldTree
-            // 
-            this.overlapFieldTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.overlapFieldTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.overlapFieldTree.HideSelection = false;
-            this.overlapFieldTree.HotTracking = true;
-            this.overlapFieldTree.Location = new System.Drawing.Point(0, 26);
-            this.overlapFieldTree.Name = "overlapFieldTree";
-            this.overlapFieldTree.ShowRootLines = false;
-            this.overlapFieldTree.Size = new System.Drawing.Size(125, 150);
-            this.overlapFieldTree.TabIndex = 456;
-            this.overlapFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.overlapFieldTree_AfterSelect);
             // 
             // toolStrip4
             // 
             this.toolStrip4.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip4.CanOverflow = false;
+            this.toolStrip4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.overlapFieldInsert,
             this.overlapFieldDelete,
             this.overlapFieldCopy,
             this.overlapFieldPaste,
-            this.overlapFieldDuplicate});
+            this.overlapFieldDuplicate,
+            this.toolStripSeparator18,
+            this.overlapsBytesLeft});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip4.Size = new System.Drawing.Size(125, 25);
+            this.toolStrip4.Size = new System.Drawing.Size(260, 25);
             this.toolStrip4.TabIndex = 496;
             this.toolStrip4.Text = "toolStrip4";
             // 
@@ -1660,7 +1671,7 @@ namespace LAZYSHELL
             this.overlapFieldInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.overlapFieldInsert.Name = "overlapFieldInsert";
             this.overlapFieldInsert.Size = new System.Drawing.Size(23, 22);
-            this.overlapFieldInsert.Text = "toolStripButton3";
+            this.overlapFieldInsert.Text = "Insert overlap";
             this.overlapFieldInsert.Click += new System.EventHandler(this.overlapFieldInsert_Click);
             // 
             // overlapFieldDelete
@@ -1671,7 +1682,7 @@ namespace LAZYSHELL
             this.overlapFieldDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.overlapFieldDelete.Name = "overlapFieldDelete";
             this.overlapFieldDelete.Size = new System.Drawing.Size(23, 22);
-            this.overlapFieldDelete.Text = "toolStripButton4";
+            this.overlapFieldDelete.Text = "Delete overlap";
             this.overlapFieldDelete.Click += new System.EventHandler(this.overlapFieldDelete_Click);
             // 
             // overlapFieldCopy
@@ -1707,9 +1718,21 @@ namespace LAZYSHELL
             this.overlapFieldDuplicate.Text = "Duplicate Overlap";
             this.overlapFieldDuplicate.Click += new System.EventHandler(this.overlapFieldDuplicate_Click);
             // 
+            // toolStripSeparator18
+            // 
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
+            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 25);
+            // 
+            // overlapsBytesLeft
+            // 
+            this.overlapsBytesLeft.Name = "overlapsBytesLeft";
+            this.overlapsBytesLeft.Size = new System.Drawing.Size(52, 22);
+            this.overlapsBytesLeft.Text = "bytes left";
+            // 
             // panel99
             // 
             this.panel99.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel99.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel99.Controls.Add(this.overlapCoordZPlusHalf);
             this.panel99.Controls.Add(this.label109);
             this.panel99.Controls.Add(this.label103);
@@ -1719,9 +1742,9 @@ namespace LAZYSHELL
             this.panel99.Controls.Add(this.overlapY);
             this.panel99.Controls.Add(this.overlapZ);
             this.panel99.Controls.Add(this.label106);
-            this.panel99.Location = new System.Drawing.Point(127, 0);
+            this.panel99.Location = new System.Drawing.Point(127, 28);
             this.panel99.Name = "panel99";
-            this.panel99.Size = new System.Drawing.Size(129, 89);
+            this.panel99.Size = new System.Drawing.Size(133, 94);
             this.panel99.TabIndex = 495;
             // 
             // overlapCoordZPlusHalf
@@ -1846,7 +1869,7 @@ namespace LAZYSHELL
             this.panelOverlapTileset.Controls.Add(this.pictureBoxOverlaps);
             this.panelOverlapTileset.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelOverlapTileset.Enabled = false;
-            this.panelOverlapTileset.Location = new System.Drawing.Point(0, 180);
+            this.panelOverlapTileset.Location = new System.Drawing.Point(0, 220);
             this.panelOverlapTileset.Name = "panelOverlapTileset";
             this.panelOverlapTileset.Size = new System.Drawing.Size(260, 420);
             this.panelOverlapTileset.TabIndex = 505;
@@ -1872,45 +1895,308 @@ namespace LAZYSHELL
             this.tabPage9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(260, 600);
+            this.tabPage9.Size = new System.Drawing.Size(260, 640);
             this.tabPage9.TabIndex = 3;
             this.tabPage9.Text = "FIELD";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.panel7);
-            this.panel2.Controls.Add(this.label63);
             this.panel2.Controls.Add(this.panel90);
+            this.panel2.Controls.Add(this.eventsList);
+            this.panel2.Controls.Add(this.toolStrip6);
+            this.panel2.Controls.Add(this.label63);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel2.Location = new System.Drawing.Point(0, 331);
+            this.panel2.Location = new System.Drawing.Point(0, 363);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(260, 271);
+            this.panel2.Size = new System.Drawing.Size(260, 277);
             this.panel2.TabIndex = 498;
             // 
-            // panel7
+            // panel90
             // 
-            this.panel7.Controls.Add(this.eventsFieldTree);
-            this.panel7.Controls.Add(this.toolStrip6);
-            this.panel7.Location = new System.Drawing.Point(0, 19);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(125, 248);
-            this.panel7.TabIndex = 498;
+            this.panel90.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel90.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel90.Controls.Add(this.buttonGotoD);
+            this.panel90.Controls.Add(this.label62);
+            this.panel90.Controls.Add(this.label127);
+            this.panel90.Controls.Add(this.eventLength);
+            this.panel90.Controls.Add(this.label129);
+            this.panel90.Controls.Add(this.eventY);
+            this.panel90.Controls.Add(this.eventsWidthYPlusHalf);
+            this.panel90.Controls.Add(this.label131);
+            this.panel90.Controls.Add(this.eventsWidthXPlusHalf);
+            this.panel90.Controls.Add(this.eventX);
+            this.panel90.Controls.Add(this.eventZ);
+            this.panel90.Controls.Add(this.panel46);
+            this.panel90.Controls.Add(this.eventHeight);
+            this.panel90.Controls.Add(this.label133);
+            this.panel90.Controls.Add(this.label135);
+            this.panel90.Controls.Add(this.label137);
+            this.panel90.Controls.Add(this.eventEvent);
+            this.panel90.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel90.Location = new System.Drawing.Point(125, 44);
+            this.panel90.Name = "panel90";
+            this.panel90.Size = new System.Drawing.Size(135, 233);
+            this.panel90.TabIndex = 497;
             // 
-            // eventsFieldTree
+            // buttonGotoD
             // 
-            this.eventsFieldTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eventsFieldTree.HideSelection = false;
-            this.eventsFieldTree.HotTracking = true;
-            this.eventsFieldTree.Location = new System.Drawing.Point(0, 26);
-            this.eventsFieldTree.Name = "eventsFieldTree";
-            this.eventsFieldTree.ShowRootLines = false;
-            this.eventsFieldTree.Size = new System.Drawing.Size(125, 224);
-            this.eventsFieldTree.TabIndex = 146;
-            this.eventsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.eventsFieldTree_AfterSelect);
+            this.buttonGotoD.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonGotoD.FlatAppearance.BorderSize = 0;
+            this.buttonGotoD.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGotoD.Location = new System.Drawing.Point(0, 19);
+            this.buttonGotoD.Name = "buttonGotoD";
+            this.buttonGotoD.Size = new System.Drawing.Size(61, 18);
+            this.buttonGotoD.TabIndex = 492;
+            this.buttonGotoD.Text = "Event #";
+            this.buttonGotoD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.buttonGotoD, "Edit event field event...");
+            this.buttonGotoD.UseCompatibleTextRendering = true;
+            this.buttonGotoD.UseVisualStyleBackColor = false;
+            this.buttonGotoD.Click += new System.EventHandler(this.buttonGotoD_Click);
+            // 
+            // label62
+            // 
+            this.label62.BackColor = System.Drawing.SystemColors.Control;
+            this.label62.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label62.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label62.Location = new System.Drawing.Point(0, 0);
+            this.label62.Name = "label62";
+            this.label62.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label62.Size = new System.Drawing.Size(131, 17);
+            this.label62.TabIndex = 452;
+            this.label62.Text = "FIELD PROPERTIES";
+            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label127
+            // 
+            this.label127.BackColor = System.Drawing.SystemColors.Control;
+            this.label127.Location = new System.Drawing.Point(0, 37);
+            this.label127.Name = "label127";
+            this.label127.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label127.Size = new System.Drawing.Size(60, 17);
+            this.label127.TabIndex = 473;
+            this.label127.Text = "X Coord";
+            // 
+            // eventLength
+            // 
+            this.eventLength.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eventLength.Location = new System.Drawing.Point(61, 91);
+            this.eventLength.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.eventLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.eventLength.Name = "eventLength";
+            this.eventLength.Size = new System.Drawing.Size(70, 17);
+            this.eventLength.TabIndex = 153;
+            this.eventLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.eventLength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.eventLength.ValueChanged += new System.EventHandler(this.eventsFieldLength_ValueChanged);
+            // 
+            // label129
+            // 
+            this.label129.BackColor = System.Drawing.SystemColors.Control;
+            this.label129.Location = new System.Drawing.Point(0, 55);
+            this.label129.Name = "label129";
+            this.label129.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label129.Size = new System.Drawing.Size(60, 17);
+            this.label129.TabIndex = 477;
+            this.label129.Text = "Y Coord";
+            // 
+            // eventY
+            // 
+            this.eventY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eventY.Location = new System.Drawing.Point(61, 55);
+            this.eventY.Maximum = new decimal(new int[] {
+            127,
+            0,
+            0,
+            0});
+            this.eventY.Name = "eventY";
+            this.eventY.Size = new System.Drawing.Size(70, 17);
+            this.eventY.TabIndex = 151;
+            this.eventY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.eventY.ValueChanged += new System.EventHandler(this.eventsFieldYCoord_ValueChanged);
+            // 
+            // eventsWidthYPlusHalf
+            // 
+            this.eventsWidthYPlusHalf.Appearance = System.Windows.Forms.Appearance.Button;
+            this.eventsWidthYPlusHalf.BackColor = System.Drawing.SystemColors.Control;
+            this.eventsWidthYPlusHalf.FlatAppearance.BorderSize = 0;
+            this.eventsWidthYPlusHalf.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eventsWidthYPlusHalf.ForeColor = System.Drawing.Color.Gray;
+            this.eventsWidthYPlusHalf.Location = new System.Drawing.Point(61, 146);
+            this.eventsWidthYPlusHalf.Name = "eventsWidthYPlusHalf";
+            this.eventsWidthYPlusHalf.Size = new System.Drawing.Size(70, 17);
+            this.eventsWidthYPlusHalf.TabIndex = 157;
+            this.eventsWidthYPlusHalf.Text = "135°+½";
+            this.eventsWidthYPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.eventsWidthYPlusHalf.UseCompatibleTextRendering = true;
+            this.eventsWidthYPlusHalf.UseVisualStyleBackColor = false;
+            this.eventsWidthYPlusHalf.CheckedChanged += new System.EventHandler(this.eventsWidthYPlusHalf_CheckedChanged);
+            // 
+            // label131
+            // 
+            this.label131.BackColor = System.Drawing.SystemColors.Control;
+            this.label131.Location = new System.Drawing.Point(0, 91);
+            this.label131.Name = "label131";
+            this.label131.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label131.Size = new System.Drawing.Size(60, 17);
+            this.label131.TabIndex = 471;
+            this.label131.Text = "Length";
+            // 
+            // eventsWidthXPlusHalf
+            // 
+            this.eventsWidthXPlusHalf.Appearance = System.Windows.Forms.Appearance.Button;
+            this.eventsWidthXPlusHalf.BackColor = System.Drawing.SystemColors.Control;
+            this.eventsWidthXPlusHalf.FlatAppearance.BorderSize = 0;
+            this.eventsWidthXPlusHalf.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eventsWidthXPlusHalf.ForeColor = System.Drawing.Color.Gray;
+            this.eventsWidthXPlusHalf.Location = new System.Drawing.Point(0, 146);
+            this.eventsWidthXPlusHalf.Name = "eventsWidthXPlusHalf";
+            this.eventsWidthXPlusHalf.Size = new System.Drawing.Size(61, 17);
+            this.eventsWidthXPlusHalf.TabIndex = 156;
+            this.eventsWidthXPlusHalf.Text = "45°+½";
+            this.eventsWidthXPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.eventsWidthXPlusHalf.UseCompatibleTextRendering = true;
+            this.eventsWidthXPlusHalf.UseVisualStyleBackColor = false;
+            this.eventsWidthXPlusHalf.CheckedChanged += new System.EventHandler(this.eventsWidthXPlusHalf_CheckedChanged);
+            // 
+            // eventX
+            // 
+            this.eventX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eventX.Location = new System.Drawing.Point(61, 37);
+            this.eventX.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.eventX.Name = "eventX";
+            this.eventX.Size = new System.Drawing.Size(70, 17);
+            this.eventX.TabIndex = 150;
+            this.eventX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.eventX.ValueChanged += new System.EventHandler(this.eventsFieldXCoord_ValueChanged);
+            // 
+            // eventZ
+            // 
+            this.eventZ.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eventZ.Location = new System.Drawing.Point(61, 73);
+            this.eventZ.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.eventZ.Name = "eventZ";
+            this.eventZ.Size = new System.Drawing.Size(70, 17);
+            this.eventZ.TabIndex = 152;
+            this.eventZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.eventZ.ValueChanged += new System.EventHandler(this.eventsFieldZCoord_ValueChanged);
+            // 
+            // panel46
+            // 
+            this.panel46.BackColor = System.Drawing.SystemColors.Window;
+            this.panel46.Controls.Add(this.eventFace);
+            this.panel46.Location = new System.Drawing.Point(61, 127);
+            this.panel46.Name = "panel46";
+            this.panel46.Size = new System.Drawing.Size(71, 17);
+            this.panel46.TabIndex = 155;
+            // 
+            // eventFace
+            // 
+            this.eventFace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.eventFace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.eventFace.DropDownWidth = 60;
+            this.eventFace.Items.AddRange(new object[] {
+            "UR to DL",
+            "DR to UL"});
+            this.eventFace.Location = new System.Drawing.Point(-2, -2);
+            this.eventFace.Name = "eventFace";
+            this.eventFace.Size = new System.Drawing.Size(74, 21);
+            this.eventFace.TabIndex = 211;
+            this.eventFace.SelectedIndexChanged += new System.EventHandler(this.eventsFieldRadialPosition_SelectedIndexChanged);
+            // 
+            // eventHeight
+            // 
+            this.eventHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eventHeight.Location = new System.Drawing.Point(61, 109);
+            this.eventHeight.Maximum = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.eventHeight.Name = "eventHeight";
+            this.eventHeight.Size = new System.Drawing.Size(70, 17);
+            this.eventHeight.TabIndex = 154;
+            this.eventHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.eventHeight.ValueChanged += new System.EventHandler(this.eventsFieldHeight_ValueChanged);
+            // 
+            // label133
+            // 
+            this.label133.BackColor = System.Drawing.SystemColors.Control;
+            this.label133.Location = new System.Drawing.Point(0, 73);
+            this.label133.Name = "label133";
+            this.label133.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label133.Size = new System.Drawing.Size(60, 17);
+            this.label133.TabIndex = 486;
+            this.label133.Text = "Z Coord";
+            // 
+            // label135
+            // 
+            this.label135.BackColor = System.Drawing.SystemColors.Control;
+            this.label135.Location = new System.Drawing.Point(0, 109);
+            this.label135.Name = "label135";
+            this.label135.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label135.Size = new System.Drawing.Size(60, 17);
+            this.label135.TabIndex = 484;
+            this.label135.Text = "Height";
+            // 
+            // label137
+            // 
+            this.label137.BackColor = System.Drawing.SystemColors.Control;
+            this.label137.Location = new System.Drawing.Point(0, 127);
+            this.label137.Name = "label137";
+            this.label137.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label137.Size = new System.Drawing.Size(60, 17);
+            this.label137.TabIndex = 489;
+            this.label137.Text = "Facing";
+            // 
+            // eventEvent
+            // 
+            this.eventEvent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eventEvent.Location = new System.Drawing.Point(61, 19);
+            this.eventEvent.Maximum = new decimal(new int[] {
+            4095,
+            0,
+            0,
+            0});
+            this.eventEvent.Name = "eventEvent";
+            this.eventEvent.Size = new System.Drawing.Size(70, 17);
+            this.eventEvent.TabIndex = 149;
+            this.eventEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.eventEvent.ValueChanged += new System.EventHandler(this.eventsRunEvent_ValueChanged);
+            // 
+            // eventsList
+            // 
+            this.eventsList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.eventsList.HideSelection = false;
+            this.eventsList.HotTracking = true;
+            this.eventsList.Location = new System.Drawing.Point(0, 44);
+            this.eventsList.Name = "eventsList";
+            this.eventsList.ShowRootLines = false;
+            this.eventsList.Size = new System.Drawing.Size(125, 233);
+            this.eventsList.TabIndex = 146;
+            this.eventsList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.eventsFieldTree_AfterSelect);
             // 
             // toolStrip6
             // 
@@ -1921,11 +2207,13 @@ namespace LAZYSHELL
             this.eventsDeleteField,
             this.eventsCopyField,
             this.eventsPasteField,
-            this.eventsDuplicateField});
-            this.toolStrip6.Location = new System.Drawing.Point(0, 0);
+            this.eventsDuplicateField,
+            this.toolStripSeparator20,
+            this.eventsBytesLeft});
+            this.toolStrip6.Location = new System.Drawing.Point(0, 19);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip6.Size = new System.Drawing.Size(125, 25);
+            this.toolStrip6.Size = new System.Drawing.Size(260, 25);
             this.toolStrip6.TabIndex = 497;
             this.toolStrip6.Text = "toolStrip6";
             // 
@@ -1984,403 +2272,52 @@ namespace LAZYSHELL
             this.eventsDuplicateField.Text = "Duplicate Event";
             this.eventsDuplicateField.Click += new System.EventHandler(this.eventsDuplicateField_Click);
             // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 25);
+            // 
+            // eventsBytesLeft
+            // 
+            this.eventsBytesLeft.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eventsBytesLeft.Name = "eventsBytesLeft";
+            this.eventsBytesLeft.Size = new System.Drawing.Size(52, 22);
+            this.eventsBytesLeft.Text = "bytes left";
+            // 
             // label63
             // 
             this.label63.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label63.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label63.Dock = System.Windows.Forms.DockStyle.Top;
             this.label63.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label63.ForeColor = System.Drawing.SystemColors.Control;
             this.label63.Location = new System.Drawing.Point(0, 0);
             this.label63.Name = "label63";
             this.label63.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label63.Size = new System.Drawing.Size(256, 17);
+            this.label63.Size = new System.Drawing.Size(260, 19);
             this.label63.TabIndex = 456;
             this.label63.Text = "EVENT FIELDS";
             this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel90
-            // 
-            this.panel90.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel90.Controls.Add(this.buttonGotoD);
-            this.panel90.Controls.Add(this.label62);
-            this.panel90.Controls.Add(this.label127);
-            this.panel90.Controls.Add(this.eventLength);
-            this.panel90.Controls.Add(this.label129);
-            this.panel90.Controls.Add(this.eventY);
-            this.panel90.Controls.Add(this.eventsWidthYPlusHalf);
-            this.panel90.Controls.Add(this.label131);
-            this.panel90.Controls.Add(this.eventsWidthXPlusHalf);
-            this.panel90.Controls.Add(this.eventX);
-            this.panel90.Controls.Add(this.eventZ);
-            this.panel90.Controls.Add(this.panel46);
-            this.panel90.Controls.Add(this.eventHeight);
-            this.panel90.Controls.Add(this.label133);
-            this.panel90.Controls.Add(this.label135);
-            this.panel90.Controls.Add(this.label137);
-            this.panel90.Controls.Add(this.eventEvent);
-            this.panel90.Location = new System.Drawing.Point(127, 19);
-            this.panel90.Name = "panel90";
-            this.panel90.Size = new System.Drawing.Size(129, 248);
-            this.panel90.TabIndex = 497;
-            // 
-            // buttonGotoD
-            // 
-            this.buttonGotoD.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonGotoD.FlatAppearance.BorderSize = 0;
-            this.buttonGotoD.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGotoD.Location = new System.Drawing.Point(0, 19);
-            this.buttonGotoD.Name = "buttonGotoD";
-            this.buttonGotoD.Size = new System.Drawing.Size(59, 18);
-            this.buttonGotoD.TabIndex = 492;
-            this.buttonGotoD.Text = "Event #";
-            this.buttonGotoD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.buttonGotoD, "Edit event field event...");
-            this.buttonGotoD.UseCompatibleTextRendering = true;
-            this.buttonGotoD.UseVisualStyleBackColor = false;
-            this.buttonGotoD.Click += new System.EventHandler(this.buttonGotoD_Click);
-            // 
-            // label62
-            // 
-            this.label62.BackColor = System.Drawing.SystemColors.Control;
-            this.label62.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label62.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label62.Location = new System.Drawing.Point(0, 0);
-            this.label62.Name = "label62";
-            this.label62.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label62.Size = new System.Drawing.Size(129, 17);
-            this.label62.TabIndex = 452;
-            this.label62.Text = "FIELD PROPERTIES";
-            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label127
-            // 
-            this.label127.BackColor = System.Drawing.SystemColors.Control;
-            this.label127.Location = new System.Drawing.Point(0, 37);
-            this.label127.Name = "label127";
-            this.label127.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label127.Size = new System.Drawing.Size(58, 17);
-            this.label127.TabIndex = 473;
-            this.label127.Text = "X Coord";
-            // 
-            // eventLength
-            // 
-            this.eventLength.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eventLength.Location = new System.Drawing.Point(59, 91);
-            this.eventLength.Maximum = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.eventLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.eventLength.Name = "eventLength";
-            this.eventLength.Size = new System.Drawing.Size(70, 17);
-            this.eventLength.TabIndex = 153;
-            this.eventLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.eventLength.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.eventLength.ValueChanged += new System.EventHandler(this.eventsFieldLength_ValueChanged);
-            // 
-            // label129
-            // 
-            this.label129.BackColor = System.Drawing.SystemColors.Control;
-            this.label129.Location = new System.Drawing.Point(0, 55);
-            this.label129.Name = "label129";
-            this.label129.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label129.Size = new System.Drawing.Size(58, 17);
-            this.label129.TabIndex = 477;
-            this.label129.Text = "Y Coord";
-            // 
-            // eventY
-            // 
-            this.eventY.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eventY.Location = new System.Drawing.Point(59, 55);
-            this.eventY.Maximum = new decimal(new int[] {
-            127,
-            0,
-            0,
-            0});
-            this.eventY.Name = "eventY";
-            this.eventY.Size = new System.Drawing.Size(70, 17);
-            this.eventY.TabIndex = 151;
-            this.eventY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.eventY.ValueChanged += new System.EventHandler(this.eventsFieldYCoord_ValueChanged);
-            // 
-            // eventsWidthYPlusHalf
-            // 
-            this.eventsWidthYPlusHalf.Appearance = System.Windows.Forms.Appearance.Button;
-            this.eventsWidthYPlusHalf.BackColor = System.Drawing.SystemColors.Control;
-            this.eventsWidthYPlusHalf.FlatAppearance.BorderSize = 0;
-            this.eventsWidthYPlusHalf.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.eventsWidthYPlusHalf.ForeColor = System.Drawing.Color.Gray;
-            this.eventsWidthYPlusHalf.Location = new System.Drawing.Point(59, 146);
-            this.eventsWidthYPlusHalf.Name = "eventsWidthYPlusHalf";
-            this.eventsWidthYPlusHalf.Size = new System.Drawing.Size(70, 17);
-            this.eventsWidthYPlusHalf.TabIndex = 157;
-            this.eventsWidthYPlusHalf.Text = "135°+½";
-            this.eventsWidthYPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.eventsWidthYPlusHalf.UseCompatibleTextRendering = true;
-            this.eventsWidthYPlusHalf.UseVisualStyleBackColor = false;
-            this.eventsWidthYPlusHalf.CheckedChanged += new System.EventHandler(this.eventsWidthYPlusHalf_CheckedChanged);
-            // 
-            // label131
-            // 
-            this.label131.BackColor = System.Drawing.SystemColors.Control;
-            this.label131.Location = new System.Drawing.Point(0, 91);
-            this.label131.Name = "label131";
-            this.label131.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label131.Size = new System.Drawing.Size(58, 17);
-            this.label131.TabIndex = 471;
-            this.label131.Text = "Length";
-            // 
-            // eventsWidthXPlusHalf
-            // 
-            this.eventsWidthXPlusHalf.Appearance = System.Windows.Forms.Appearance.Button;
-            this.eventsWidthXPlusHalf.BackColor = System.Drawing.SystemColors.Control;
-            this.eventsWidthXPlusHalf.FlatAppearance.BorderSize = 0;
-            this.eventsWidthXPlusHalf.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.eventsWidthXPlusHalf.ForeColor = System.Drawing.Color.Gray;
-            this.eventsWidthXPlusHalf.Location = new System.Drawing.Point(0, 146);
-            this.eventsWidthXPlusHalf.Name = "eventsWidthXPlusHalf";
-            this.eventsWidthXPlusHalf.Size = new System.Drawing.Size(59, 17);
-            this.eventsWidthXPlusHalf.TabIndex = 156;
-            this.eventsWidthXPlusHalf.Text = "45°+½";
-            this.eventsWidthXPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.eventsWidthXPlusHalf.UseCompatibleTextRendering = true;
-            this.eventsWidthXPlusHalf.UseVisualStyleBackColor = false;
-            this.eventsWidthXPlusHalf.CheckedChanged += new System.EventHandler(this.eventsWidthXPlusHalf_CheckedChanged);
-            // 
-            // eventX
-            // 
-            this.eventX.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eventX.Location = new System.Drawing.Point(59, 37);
-            this.eventX.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.eventX.Name = "eventX";
-            this.eventX.Size = new System.Drawing.Size(70, 17);
-            this.eventX.TabIndex = 150;
-            this.eventX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.eventX.ValueChanged += new System.EventHandler(this.eventsFieldXCoord_ValueChanged);
-            // 
-            // eventZ
-            // 
-            this.eventZ.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eventZ.Location = new System.Drawing.Point(59, 73);
-            this.eventZ.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.eventZ.Name = "eventZ";
-            this.eventZ.Size = new System.Drawing.Size(70, 17);
-            this.eventZ.TabIndex = 152;
-            this.eventZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.eventZ.ValueChanged += new System.EventHandler(this.eventsFieldZCoord_ValueChanged);
-            // 
-            // panel46
-            // 
-            this.panel46.BackColor = System.Drawing.SystemColors.Window;
-            this.panel46.Controls.Add(this.eventFace);
-            this.panel46.Location = new System.Drawing.Point(59, 127);
-            this.panel46.Name = "panel46";
-            this.panel46.Size = new System.Drawing.Size(71, 17);
-            this.panel46.TabIndex = 155;
-            // 
-            // eventFace
-            // 
-            this.eventFace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.eventFace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.eventFace.DropDownWidth = 60;
-            this.eventFace.Items.AddRange(new object[] {
-            "UR to DL",
-            "DR to UL"});
-            this.eventFace.Location = new System.Drawing.Point(-2, -2);
-            this.eventFace.Name = "eventFace";
-            this.eventFace.Size = new System.Drawing.Size(74, 21);
-            this.eventFace.TabIndex = 211;
-            this.eventFace.SelectedIndexChanged += new System.EventHandler(this.eventsFieldRadialPosition_SelectedIndexChanged);
-            // 
-            // eventHeight
-            // 
-            this.eventHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eventHeight.Location = new System.Drawing.Point(59, 109);
-            this.eventHeight.Maximum = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-            this.eventHeight.Name = "eventHeight";
-            this.eventHeight.Size = new System.Drawing.Size(70, 17);
-            this.eventHeight.TabIndex = 154;
-            this.eventHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.eventHeight.ValueChanged += new System.EventHandler(this.eventsFieldHeight_ValueChanged);
-            // 
-            // label133
-            // 
-            this.label133.BackColor = System.Drawing.SystemColors.Control;
-            this.label133.Location = new System.Drawing.Point(0, 73);
-            this.label133.Name = "label133";
-            this.label133.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label133.Size = new System.Drawing.Size(58, 17);
-            this.label133.TabIndex = 486;
-            this.label133.Text = "Z Coord";
-            // 
-            // label135
-            // 
-            this.label135.BackColor = System.Drawing.SystemColors.Control;
-            this.label135.Location = new System.Drawing.Point(0, 109);
-            this.label135.Name = "label135";
-            this.label135.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label135.Size = new System.Drawing.Size(58, 17);
-            this.label135.TabIndex = 484;
-            this.label135.Text = "Height";
-            // 
-            // label137
-            // 
-            this.label137.BackColor = System.Drawing.SystemColors.Control;
-            this.label137.Location = new System.Drawing.Point(0, 127);
-            this.label137.Name = "label137";
-            this.label137.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label137.Size = new System.Drawing.Size(58, 17);
-            this.label137.TabIndex = 489;
-            this.label137.Text = "Facing";
-            // 
-            // eventEvent
-            // 
-            this.eventEvent.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eventEvent.Location = new System.Drawing.Point(59, 19);
-            this.eventEvent.Maximum = new decimal(new int[] {
-            4095,
-            0,
-            0,
-            0});
-            this.eventEvent.Name = "eventEvent";
-            this.eventEvent.Size = new System.Drawing.Size(70, 17);
-            this.eventEvent.TabIndex = 149;
-            this.eventEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.eventEvent.ValueChanged += new System.EventHandler(this.eventsRunEvent_ValueChanged);
-            // 
             // panel52
             // 
-            this.panel52.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel52.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel52.Controls.Add(this.panel5);
             this.panel52.Controls.Add(this.panel88);
+            this.panel52.Controls.Add(this.exitsFieldTree);
             this.panel52.Controls.Add(this.panel87);
             this.panel52.Controls.Add(this.panel68);
+            this.panel52.Controls.Add(this.toolStrip5);
             this.panel52.Controls.Add(this.label61);
             this.panel52.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel52.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel52.Location = new System.Drawing.Point(0, 0);
             this.panel52.Name = "panel52";
-            this.panel52.Size = new System.Drawing.Size(260, 331);
+            this.panel52.Size = new System.Drawing.Size(260, 363);
             this.panel52.TabIndex = 0;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.exitsFieldTree);
-            this.panel5.Controls.Add(this.toolStrip5);
-            this.panel5.Location = new System.Drawing.Point(0, 19);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(125, 308);
-            this.panel5.TabIndex = 497;
-            // 
-            // exitsFieldTree
-            // 
-            this.exitsFieldTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.exitsFieldTree.HideSelection = false;
-            this.exitsFieldTree.HotTracking = true;
-            this.exitsFieldTree.Location = new System.Drawing.Point(0, 26);
-            this.exitsFieldTree.Name = "exitsFieldTree";
-            this.exitsFieldTree.ShowRootLines = false;
-            this.exitsFieldTree.Size = new System.Drawing.Size(125, 282);
-            this.exitsFieldTree.TabIndex = 127;
-            this.exitsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.exitsFieldTree_AfterSelect);
-            // 
-            // toolStrip5
-            // 
-            this.toolStrip5.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip5.CanOverflow = false;
-            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitsInsertField,
-            this.exitsDeleteField,
-            this.exitsCopyField,
-            this.exitsPasteField,
-            this.exitsDuplicateField});
-            this.toolStrip5.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip5.Name = "toolStrip5";
-            this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip5.Size = new System.Drawing.Size(125, 25);
-            this.toolStrip5.TabIndex = 496;
-            this.toolStrip5.Text = "toolStrip5";
-            // 
-            // exitsInsertField
-            // 
-            this.exitsInsertField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.exitsInsertField.Image = global::LAZYSHELL.Properties.Resources.new_small;
-            this.exitsInsertField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.exitsInsertField.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.exitsInsertField.Name = "exitsInsertField";
-            this.exitsInsertField.Size = new System.Drawing.Size(23, 22);
-            this.exitsInsertField.Text = "New Exit";
-            this.exitsInsertField.Click += new System.EventHandler(this.exitsInsertField_Click);
-            // 
-            // exitsDeleteField
-            // 
-            this.exitsDeleteField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.exitsDeleteField.Image = global::LAZYSHELL.Properties.Resources.delete_small;
-            this.exitsDeleteField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.exitsDeleteField.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.exitsDeleteField.Name = "exitsDeleteField";
-            this.exitsDeleteField.Size = new System.Drawing.Size(23, 22);
-            this.exitsDeleteField.Text = "Delete Exit";
-            this.exitsDeleteField.Click += new System.EventHandler(this.exitsDeleteField_Click);
-            // 
-            // exitsCopyField
-            // 
-            this.exitsCopyField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.exitsCopyField.Image = global::LAZYSHELL.Properties.Resources.copy_small;
-            this.exitsCopyField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.exitsCopyField.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.exitsCopyField.Name = "exitsCopyField";
-            this.exitsCopyField.Size = new System.Drawing.Size(23, 22);
-            this.exitsCopyField.Text = "Copy Exit";
-            this.exitsCopyField.Click += new System.EventHandler(this.exitsCopyField_Click);
-            // 
-            // exitsPasteField
-            // 
-            this.exitsPasteField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.exitsPasteField.Image = global::LAZYSHELL.Properties.Resources.paste_small;
-            this.exitsPasteField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.exitsPasteField.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.exitsPasteField.Name = "exitsPasteField";
-            this.exitsPasteField.Size = new System.Drawing.Size(23, 22);
-            this.exitsPasteField.Text = "Paste Exit";
-            this.exitsPasteField.Click += new System.EventHandler(this.exitsPasteField_Click);
-            // 
-            // exitsDuplicateField
-            // 
-            this.exitsDuplicateField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.exitsDuplicateField.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
-            this.exitsDuplicateField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.exitsDuplicateField.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.exitsDuplicateField.Name = "exitsDuplicateField";
-            this.exitsDuplicateField.Size = new System.Drawing.Size(23, 22);
-            this.exitsDuplicateField.Text = "Duplicate Exit";
-            this.exitsDuplicateField.Click += new System.EventHandler(this.exitsDuplicateField_Click);
             // 
             // panel88
             // 
             this.panel88.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel88.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel88.Controls.Add(this.label66);
             this.panel88.Controls.Add(this.label59);
             this.panel88.Controls.Add(this.exitDestY);
@@ -2391,9 +2328,9 @@ namespace LAZYSHELL
             this.panel88.Controls.Add(this.label122);
             this.panel88.Controls.Add(this.label124);
             this.panel88.Controls.Add(this.panel48);
-            this.panel88.Location = new System.Drawing.Point(127, 219);
+            this.panel88.Location = new System.Drawing.Point(127, 249);
             this.panel88.Name = "panel88";
-            this.panel88.Size = new System.Drawing.Size(129, 109);
+            this.panel88.Size = new System.Drawing.Size(133, 112);
             this.panel88.TabIndex = 495;
             // 
             // label66
@@ -2540,9 +2477,22 @@ namespace LAZYSHELL
             this.exitDestFace.TabIndex = 210;
             this.exitDestFace.SelectedIndexChanged += new System.EventHandler(this.exitsMarioRadialPosition_SelectedIndexChanged);
             // 
+            // exitsFieldTree
+            // 
+            this.exitsFieldTree.Dock = System.Windows.Forms.DockStyle.Left;
+            this.exitsFieldTree.HideSelection = false;
+            this.exitsFieldTree.HotTracking = true;
+            this.exitsFieldTree.Location = new System.Drawing.Point(0, 44);
+            this.exitsFieldTree.Name = "exitsFieldTree";
+            this.exitsFieldTree.ShowRootLines = false;
+            this.exitsFieldTree.Size = new System.Drawing.Size(125, 319);
+            this.exitsFieldTree.TabIndex = 127;
+            this.exitsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.exitsFieldTree_AfterSelect);
+            // 
             // panel87
             // 
             this.panel87.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel87.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel87.Controls.Add(this.label119);
             this.panel87.Controls.Add(this.exits135LengthPlusHalf);
             this.panel87.Controls.Add(this.label58);
@@ -2562,9 +2512,9 @@ namespace LAZYSHELL
             this.panel87.Controls.Add(this.label47);
             this.panel87.Controls.Add(this.panel50);
             this.panel87.Controls.Add(this.panel51);
-            this.panel87.Location = new System.Drawing.Point(127, 19);
+            this.panel87.Location = new System.Drawing.Point(127, 45);
             this.panel87.Name = "panel87";
-            this.panel87.Size = new System.Drawing.Size(129, 198);
+            this.panel87.Size = new System.Drawing.Size(133, 202);
             this.panel87.TabIndex = 494;
             // 
             // label119
@@ -2823,7 +2773,7 @@ namespace LAZYSHELL
             this.exitType.DropDownWidth = 80;
             this.exitType.Items.AddRange(new object[] {
             "Overworld",
-            "World Map"});
+            "Map Point"});
             this.exitType.Location = new System.Drawing.Point(-2, -2);
             this.exitType.Name = "exitType";
             this.exitType.Size = new System.Drawing.Size(74, 21);
@@ -2861,19 +2811,106 @@ namespace LAZYSHELL
             this.panel68.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
             this.panel68.Location = new System.Drawing.Point(119, 608);
             this.panel68.Name = "panel68";
-            this.panel68.Size = new System.Drawing.Size(121, 0);
+            this.panel68.Size = new System.Drawing.Size(121, 36);
             this.panel68.TabIndex = 493;
+            // 
+            // toolStrip5
+            // 
+            this.toolStrip5.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip5.CanOverflow = false;
+            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitsInsertField,
+            this.exitsDeleteField,
+            this.exitsCopyField,
+            this.exitsPasteField,
+            this.exitsDuplicateField,
+            this.toolStripSeparator19,
+            this.exitsBytesLeft});
+            this.toolStrip5.Location = new System.Drawing.Point(0, 19);
+            this.toolStrip5.Name = "toolStrip5";
+            this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip5.Size = new System.Drawing.Size(260, 25);
+            this.toolStrip5.TabIndex = 496;
+            this.toolStrip5.Text = "toolStrip5";
+            // 
+            // exitsInsertField
+            // 
+            this.exitsInsertField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.exitsInsertField.Image = global::LAZYSHELL.Properties.Resources.new_small;
+            this.exitsInsertField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exitsInsertField.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exitsInsertField.Name = "exitsInsertField";
+            this.exitsInsertField.Size = new System.Drawing.Size(23, 22);
+            this.exitsInsertField.Text = "New Exit";
+            this.exitsInsertField.Click += new System.EventHandler(this.exitsInsertField_Click);
+            // 
+            // exitsDeleteField
+            // 
+            this.exitsDeleteField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.exitsDeleteField.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.exitsDeleteField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exitsDeleteField.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exitsDeleteField.Name = "exitsDeleteField";
+            this.exitsDeleteField.Size = new System.Drawing.Size(23, 22);
+            this.exitsDeleteField.Text = "Delete Exit";
+            this.exitsDeleteField.Click += new System.EventHandler(this.exitsDeleteField_Click);
+            // 
+            // exitsCopyField
+            // 
+            this.exitsCopyField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.exitsCopyField.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.exitsCopyField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exitsCopyField.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exitsCopyField.Name = "exitsCopyField";
+            this.exitsCopyField.Size = new System.Drawing.Size(23, 22);
+            this.exitsCopyField.Text = "Copy Exit";
+            this.exitsCopyField.Click += new System.EventHandler(this.exitsCopyField_Click);
+            // 
+            // exitsPasteField
+            // 
+            this.exitsPasteField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.exitsPasteField.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.exitsPasteField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exitsPasteField.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exitsPasteField.Name = "exitsPasteField";
+            this.exitsPasteField.Size = new System.Drawing.Size(23, 22);
+            this.exitsPasteField.Text = "Paste Exit";
+            this.exitsPasteField.Click += new System.EventHandler(this.exitsPasteField_Click);
+            // 
+            // exitsDuplicateField
+            // 
+            this.exitsDuplicateField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.exitsDuplicateField.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
+            this.exitsDuplicateField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exitsDuplicateField.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exitsDuplicateField.Name = "exitsDuplicateField";
+            this.exitsDuplicateField.Size = new System.Drawing.Size(23, 22);
+            this.exitsDuplicateField.Text = "Duplicate Exit";
+            this.exitsDuplicateField.Click += new System.EventHandler(this.exitsDuplicateField_Click);
+            // 
+            // toolStripSeparator19
+            // 
+            this.toolStripSeparator19.Name = "toolStripSeparator19";
+            this.toolStripSeparator19.Size = new System.Drawing.Size(6, 25);
+            // 
+            // exitsBytesLeft
+            // 
+            this.exitsBytesLeft.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Bold);
+            this.exitsBytesLeft.Name = "exitsBytesLeft";
+            this.exitsBytesLeft.Size = new System.Drawing.Size(52, 22);
+            this.exitsBytesLeft.Text = "bytes left";
             // 
             // label61
             // 
             this.label61.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label61.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label61.Dock = System.Windows.Forms.DockStyle.Top;
             this.label61.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label61.ForeColor = System.Drawing.SystemColors.Control;
             this.label61.Location = new System.Drawing.Point(0, 0);
             this.label61.Name = "label61";
             this.label61.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label61.Size = new System.Drawing.Size(256, 17);
+            this.label61.Size = new System.Drawing.Size(260, 19);
             this.label61.TabIndex = 453;
             this.label61.Text = "EXIT FIELDS";
             this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2893,40 +2930,900 @@ namespace LAZYSHELL
             this.tabControl.Name = "tabControl";
             this.tabControl.Padding = new System.Drawing.Point(5, 4);
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(268, 626);
+            this.tabControl.Size = new System.Drawing.Size(268, 666);
             this.tabControl.TabIndex = 6;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.panel70);
+            this.tabPage4.Controls.Add(this.panel69);
+            this.tabPage4.Controls.Add(this.panel71);
+            this.tabPage4.Controls.Add(this.panel72);
             this.tabPage4.Controls.Add(this.panel28);
             this.tabPage4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(260, 600);
+            this.tabPage4.Size = new System.Drawing.Size(260, 640);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "MAPS";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // panel28
+            // panel70
             // 
-            this.panel28.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel28.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel28.Controls.Add(this.panel72);
-            this.panel28.Controls.Add(this.panel71);
-            this.panel28.Controls.Add(this.panel70);
-            this.panel28.Controls.Add(this.panel69);
-            this.panel28.Controls.Add(this.label33);
-            this.panel28.Controls.Add(this.mapNum);
-            this.panel28.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel28.Location = new System.Drawing.Point(0, 0);
-            this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(260, 371);
-            this.panel28.TabIndex = 0;
+            this.panel70.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel70.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel70.Controls.Add(this.label89);
+            this.panel70.Controls.Add(this.mapTilemapL1Num);
+            this.panel70.Controls.Add(this.mapSetL3Priority);
+            this.panel70.Controls.Add(this.mapTilemapL2Num);
+            this.panel70.Controls.Add(this.panel35);
+            this.panel70.Controls.Add(this.label43);
+            this.panel70.Controls.Add(this.mapTilemapL3Num);
+            this.panel70.Controls.Add(this.panel36);
+            this.panel70.Controls.Add(this.label42);
+            this.panel70.Controls.Add(this.panel37);
+            this.panel70.Controls.Add(this.label41);
+            this.panel70.Controls.Add(this.panel38);
+            this.panel70.Controls.Add(this.mapPhysicalMapNum);
+            this.panel70.Controls.Add(this.label45);
+            this.panel70.Controls.Add(this.panel39);
+            this.panel70.Controls.Add(this.label76);
+            this.panel70.Controls.Add(this.mapBattlefieldNum);
+            this.panel70.Location = new System.Drawing.Point(0, 233);
+            this.panel70.Name = "panel70";
+            this.panel70.Size = new System.Drawing.Size(260, 112);
+            this.panel70.TabIndex = 443;
+            // 
+            // label89
+            // 
+            this.label89.BackColor = System.Drawing.SystemColors.Control;
+            this.label89.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label89.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label89.Location = new System.Drawing.Point(0, 0);
+            this.label89.Name = "label89";
+            this.label89.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label89.Size = new System.Drawing.Size(126, 17);
+            this.label89.TabIndex = 154;
+            this.label89.Text = "TILEMAPS";
+            this.label89.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // mapTilemapL1Num
+            // 
+            this.mapTilemapL1Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mapTilemapL1Num.Location = new System.Drawing.Point(75, 19);
+            this.mapTilemapL1Num.Maximum = new decimal(new int[] {
+            244,
+            0,
+            0,
+            0});
+            this.mapTilemapL1Num.Name = "mapTilemapL1Num";
+            this.mapTilemapL1Num.Size = new System.Drawing.Size(51, 17);
+            this.mapTilemapL1Num.TabIndex = 70;
+            this.mapTilemapL1Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.mapTilemapL1Num.ValueChanged += new System.EventHandler(this.mapTilemapL1Num_ValueChanged);
+            // 
+            // mapSetL3Priority
+            // 
+            this.mapSetL3Priority.Appearance = System.Windows.Forms.Appearance.Button;
+            this.mapSetL3Priority.BackColor = System.Drawing.SystemColors.Control;
+            this.mapSetL3Priority.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mapSetL3Priority.ForeColor = System.Drawing.Color.Gray;
+            this.mapSetL3Priority.Location = new System.Drawing.Point(127, 0);
+            this.mapSetL3Priority.Name = "mapSetL3Priority";
+            this.mapSetL3Priority.Size = new System.Drawing.Size(129, 18);
+            this.mapSetL3Priority.TabIndex = 69;
+            this.mapSetL3Priority.Text = "L3 PRIORITY 1";
+            this.mapSetL3Priority.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mapSetL3Priority.UseCompatibleTextRendering = true;
+            this.mapSetL3Priority.UseVisualStyleBackColor = false;
+            this.mapSetL3Priority.CheckedChanged += new System.EventHandler(this.mapSetL3Priority_CheckedChanged);
+            // 
+            // mapTilemapL2Num
+            // 
+            this.mapTilemapL2Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mapTilemapL2Num.Location = new System.Drawing.Point(75, 37);
+            this.mapTilemapL2Num.Maximum = new decimal(new int[] {
+            244,
+            0,
+            0,
+            0});
+            this.mapTilemapL2Num.Name = "mapTilemapL2Num";
+            this.mapTilemapL2Num.Size = new System.Drawing.Size(51, 17);
+            this.mapTilemapL2Num.TabIndex = 72;
+            this.mapTilemapL2Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.mapTilemapL2Num.ValueChanged += new System.EventHandler(this.mapTilemapL2Num_ValueChanged);
+            // 
+            // panel35
+            // 
+            this.panel35.BackColor = System.Drawing.SystemColors.Window;
+            this.panel35.Controls.Add(this.mapBattlefieldName);
+            this.panel35.Location = new System.Drawing.Point(127, 91);
+            this.panel35.Name = "panel35";
+            this.panel35.Size = new System.Drawing.Size(130, 17);
+            this.panel35.TabIndex = 79;
+            // 
+            // mapBattlefieldName
+            // 
+            this.mapBattlefieldName.DropDownHeight = 200;
+            this.mapBattlefieldName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapBattlefieldName.IntegralHeight = false;
+            this.mapBattlefieldName.Items.AddRange(new object[] {
+            "Bowser\'s Keep",
+            "Castle",
+            "House",
+            "Mushroom Kingdom",
+            "Kero Sewers",
+            "Mines",
+            "Forest",
+            "Underground",
+            "Sea",
+            "Sea Enclave",
+            "Sunken Ship",
+            "Forest",
+            "Barrel Volcano",
+            "Star Hill",
+            "Castle",
+            "Booster Tower",
+            "Bowser\'s Keep",
+            "Grasslands",
+            "Mountains",
+            "Plains",
+            "Nimbus Land",
+            "Nimbus Castle",
+            "Count Down",
+            "Smithy Factory",
+            "Kero Sewers",
+            "Bean Valley",
+            "Land\'s End Desert",
+            "Belome Temple",
+            "Pipe Rooms",
+            "Beanstalks",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Forest",
+            "House",
+            "Forest",
+            "Mines",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Sunken Ship",
+            "Forest",
+            "Barrel Volcano",
+            "Castle",
+            "Kero Sewers",
+            "Forest",
+            "Booster Tower",
+            "Forest",
+            "Bowser\'s Keep",
+            "Bowser\'s Keep",
+            "Grasslands",
+            "Mountains",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Forest",
+            "Forest"});
+            this.mapBattlefieldName.Location = new System.Drawing.Point(-2, -2);
+            this.mapBattlefieldName.Name = "mapBattlefieldName";
+            this.mapBattlefieldName.Size = new System.Drawing.Size(133, 21);
+            this.mapBattlefieldName.TabIndex = 144;
+            this.mapBattlefieldName.SelectedIndexChanged += new System.EventHandler(this.mapBattlefieldName_SelectedIndexChanged);
+            // 
+            // label43
+            // 
+            this.label43.BackColor = System.Drawing.SystemColors.Control;
+            this.label43.Location = new System.Drawing.Point(0, 19);
+            this.label43.Name = "label43";
+            this.label43.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label43.Size = new System.Drawing.Size(74, 17);
+            this.label43.TabIndex = 132;
+            this.label43.Text = "L1 Tilemap";
+            // 
+            // mapTilemapL3Num
+            // 
+            this.mapTilemapL3Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mapTilemapL3Num.Location = new System.Drawing.Point(75, 55);
+            this.mapTilemapL3Num.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.mapTilemapL3Num.Name = "mapTilemapL3Num";
+            this.mapTilemapL3Num.Size = new System.Drawing.Size(51, 17);
+            this.mapTilemapL3Num.TabIndex = 74;
+            this.mapTilemapL3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.mapTilemapL3Num.ValueChanged += new System.EventHandler(this.mapTilemapL3Num_ValueChanged);
+            // 
+            // panel36
+            // 
+            this.panel36.BackColor = System.Drawing.SystemColors.Window;
+            this.panel36.Controls.Add(this.mapTilemapL3Name);
+            this.panel36.Location = new System.Drawing.Point(127, 55);
+            this.panel36.Name = "panel36";
+            this.panel36.Size = new System.Drawing.Size(130, 17);
+            this.panel36.TabIndex = 75;
+            // 
+            // mapTilemapL3Name
+            // 
+            this.mapTilemapL3Name.DropDownHeight = 200;
+            this.mapTilemapL3Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapTilemapL3Name.DropDownWidth = 200;
+            this.mapTilemapL3Name.IntegralHeight = false;
+            this.mapTilemapL3Name.Items.AddRange(new object[] {
+            "{NOTHING}",
+            "Booster\'s Tower 1 ",
+            "Tadpole Pond 2 ",
+            "Mushroom Kingdom Castle ",
+            "Forest Maze 1",
+            "Forest Maze 2",
+            "Sunken Ship 1 ",
+            "Kero Sewers 1",
+            "Sunken Ship 2 ",
+            "Booster\'s Tower 2 ",
+            "____",
+            "Seashore",
+            "Midas River ",
+            "____",
+            "Waterfall ",
+            "____",
+            "various areas…",
+            "Sea",
+            "Tadpole Pond 1 ",
+            "Nimbus Clouds",
+            "Chapel, main hall ",
+            "Plains",
+            "Yo\'ster Isle ",
+            "Maps",
+            "Mushroom Kingdom",
+            "Sewers",
+            "Pipehouse ",
+            "Houses 1",
+            "Bowser\'s Keep Throne",
+            "Rose Way, area 1 ",
+            "Houses 2",
+            "____",
+            "Rose Way",
+            "Moleville shacks ",
+            "Houses 3",
+            "Suite",
+            "Sunken Ship 3",
+            "Star Hill 2",
+            "Vista Hill ",
+            "Seaside Town beach ",
+            "Grasslands 2",
+            "Marrymore Scene",
+            "____",
+            "Nimbus Land houses ",
+            "Jinx\'s Dojo ",
+            "Monstro Town houses",
+            "Bowser\'s Keep 6-doors 1",
+            "Pipe Rooms",
+            "Culex\'s Room ",
+            "Bowser\'s Keep 6-doors 2",
+            "Bowser\'s Keep 2",
+            "Bowser\'s Keep 3",
+            "Bowser\'s Keep 6-doors 3",
+            "Bowser\'s Keep 6-doors 4",
+            "Belome Temple",
+            "Land\'s End Desert",
+            "Bowser\'s Keep 4",
+            "Nimbus Land springs ",
+            "Smithy Factory",
+            "____",
+            "Smithy 2",
+            "___nothing",
+            "Star Hill 1",
+            "____"});
+            this.mapTilemapL3Name.Location = new System.Drawing.Point(-2, -2);
+            this.mapTilemapL3Name.Name = "mapTilemapL3Name";
+            this.mapTilemapL3Name.Size = new System.Drawing.Size(133, 21);
+            this.mapTilemapL3Name.TabIndex = 140;
+            this.mapTilemapL3Name.SelectedIndexChanged += new System.EventHandler(this.mapTilemapL3Name_SelectedIndexChanged);
+            // 
+            // label42
+            // 
+            this.label42.BackColor = System.Drawing.SystemColors.Control;
+            this.label42.Location = new System.Drawing.Point(0, 37);
+            this.label42.Name = "label42";
+            this.label42.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label42.Size = new System.Drawing.Size(74, 17);
+            this.label42.TabIndex = 136;
+            this.label42.Text = "L2 Tilemap";
+            // 
+            // panel37
+            // 
+            this.panel37.BackColor = System.Drawing.SystemColors.Window;
+            this.panel37.Controls.Add(this.mapTilemapL1Name);
+            this.panel37.Location = new System.Drawing.Point(127, 19);
+            this.panel37.Name = "panel37";
+            this.panel37.Size = new System.Drawing.Size(130, 17);
+            this.panel37.TabIndex = 71;
+            // 
+            // mapTilemapL1Name
+            // 
+            this.mapTilemapL1Name.DropDownHeight = 200;
+            this.mapTilemapL1Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapTilemapL1Name.DropDownWidth = 200;
+            this.mapTilemapL1Name.IntegralHeight = false;
+            this.mapTilemapL1Name.Location = new System.Drawing.Point(-2, -2);
+            this.mapTilemapL1Name.Name = "mapTilemapL1Name";
+            this.mapTilemapL1Name.Size = new System.Drawing.Size(133, 21);
+            this.mapTilemapL1Name.TabIndex = 138;
+            this.mapTilemapL1Name.SelectedIndexChanged += new System.EventHandler(this.mapTilemapL1Name_SelectedIndexChanged);
+            // 
+            // label41
+            // 
+            this.label41.BackColor = System.Drawing.SystemColors.Control;
+            this.label41.Location = new System.Drawing.Point(0, 55);
+            this.label41.Name = "label41";
+            this.label41.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label41.Size = new System.Drawing.Size(74, 17);
+            this.label41.TabIndex = 137;
+            this.label41.Text = "L3 Tilemap";
+            // 
+            // panel38
+            // 
+            this.panel38.BackColor = System.Drawing.SystemColors.Window;
+            this.panel38.Controls.Add(this.mapPhysicalMapName);
+            this.panel38.Location = new System.Drawing.Point(127, 73);
+            this.panel38.Name = "panel38";
+            this.panel38.Size = new System.Drawing.Size(130, 17);
+            this.panel38.TabIndex = 77;
+            // 
+            // mapPhysicalMapName
+            // 
+            this.mapPhysicalMapName.DropDownHeight = 200;
+            this.mapPhysicalMapName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapPhysicalMapName.DropDownWidth = 200;
+            this.mapPhysicalMapName.IntegralHeight = false;
+            this.mapPhysicalMapName.Items.AddRange(new object[] {
+            "Debug Room",
+            "{NOTHING}",
+            "Kero Sewers 1",
+            "Bowser\'s Keep 1",
+            "____",
+            "Mushroom Kingdom Castle",
+            "____",
+            "____",
+            "Gardener\'s House",
+            "Seaside Town",
+            "____",
+            "Forest Maze 3",
+            "Midas River, waterfall",
+            "Forest Maze 4",
+            "Rose Town",
+            "____",
+            "Forest Maze 2",
+            "___underground areas",
+            "Sunken Ship 1",
+            "Sunken Ship 2",
+            "Tadpole Pond 2",
+            "____",
+            "____",
+            "Mushroom Kingdom",
+            "Mushroom Kingdom houses",
+            "Bowser\'s Keep Throne",
+            "Booster\'s Tower 2",
+            "Booster\'s Tower 1",
+            "Booster\'s Tower entrance",
+            "Rose Way",
+            "Moleville Mines 1",
+            "Moleville Mines 2",
+            "Moleville Mines 3",
+            "Seaside Town houses",
+            "____",
+            "Barrel Volcano 1",
+            "Barrel Volcano 2",
+            "Mario\'s Pad",
+            "Rose Town houses",
+            "Moleville shacks",
+            "Kero Sewers 2",
+            "____",
+            "____",
+            "Bowser\'s Keep 3",
+            "Grate Guy\'s Casino",
+            "Midas River",
+            "Plains",
+            "Grasslands",
+            "Forest Maze Underground",
+            "Forest Maze, area 7",
+            "Land\'s End Underground",
+            "Suite",
+            "____",
+            "Nimbus clouds",
+            "Nimbus Castle 1",
+            "Nimbus Castle 2",
+            "Barrel Volcano 3",
+            "____",
+            "Sea",
+            "Pipe Vault",
+            "Seashore",
+            "____",
+            "Smithy Factory 2",
+            "Smithy Factory 3",
+            "Smithy Factory 1",
+            "Tadpole Pond 1",
+            "Nimbus Land houses",
+            "Star Hill 2",
+            "Pipe Rooms",
+            "____",
+            "____",
+            "Chapel, main hall",
+            "Chapel sanctuary",
+            "Bowser\'s Keep Bridge",
+            "Belome\'s Temple 1",
+            "____",
+            "____",
+            "Bandit\'s Way 1",
+            "Bandit\'s Way 2",
+            "Pipehouse",
+            "Mushroom Way 1",
+            "____",
+            "Kero Sewers 1",
+            "Rose Way 1",
+            "Waterfall tunnels",
+            "Booster Pass 1",
+            "Moleville",
+            "Marrymore",
+            "Marrymore houses",
+            "Volcano map",
+            "Sunken Ship 2",
+            "Vista Hill",
+            "Booster Hill",
+            "Seaside Town beach",
+            "Seaside Town",
+            "Land\'s End 1",
+            "Land\'s End 2",
+            "Bean Valley",
+            "Beanstalks",
+            "____",
+            "Land\'s End 3",
+            "Land\'s End desert",
+            "Monstro Town houses",
+            "Monstro Town",
+            "Jinx\'s Dojo",
+            "Bowser’s Keep 6-door 1",
+            "____",
+            "Booster Pass secret",
+            "Bowser\'s Keep 4",
+            "Bowser\'s Keep 6-door 2",
+            "Bowser\'s Keep Magikoopa",
+            "Bowser\'s Keep 6-door 3",
+            "Bowser\'s Keep 6-door 4",
+            "Bowser\'s Keep 6-door 5",
+            "Factory Grounds 1",
+            "Factory Grounds 2",
+            "Bowser\'s Keep 5",
+            "Nimbus Clouds 2",
+            "Smithy Factory 4",
+            "Star Hill 1"});
+            this.mapPhysicalMapName.Location = new System.Drawing.Point(-2, -2);
+            this.mapPhysicalMapName.Name = "mapPhysicalMapName";
+            this.mapPhysicalMapName.Size = new System.Drawing.Size(133, 21);
+            this.mapPhysicalMapName.TabIndex = 143;
+            this.mapPhysicalMapName.SelectedIndexChanged += new System.EventHandler(this.mapPhysicalMapName_SelectedIndexChanged);
+            // 
+            // mapPhysicalMapNum
+            // 
+            this.mapPhysicalMapNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mapPhysicalMapNum.Location = new System.Drawing.Point(75, 73);
+            this.mapPhysicalMapNum.Maximum = new decimal(new int[] {
+            119,
+            0,
+            0,
+            0});
+            this.mapPhysicalMapNum.Name = "mapPhysicalMapNum";
+            this.mapPhysicalMapNum.Size = new System.Drawing.Size(51, 17);
+            this.mapPhysicalMapNum.TabIndex = 76;
+            this.mapPhysicalMapNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.mapPhysicalMapNum.ValueChanged += new System.EventHandler(this.mapPhysicalMapNum_ValueChanged);
+            // 
+            // label45
+            // 
+            this.label45.BackColor = System.Drawing.SystemColors.Control;
+            this.label45.Location = new System.Drawing.Point(0, 73);
+            this.label45.Name = "label45";
+            this.label45.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label45.Size = new System.Drawing.Size(74, 17);
+            this.label45.TabIndex = 152;
+            this.label45.Text = "Solidity Map";
+            // 
+            // panel39
+            // 
+            this.panel39.BackColor = System.Drawing.SystemColors.Window;
+            this.panel39.Controls.Add(this.mapTilemapL2Name);
+            this.panel39.Location = new System.Drawing.Point(127, 37);
+            this.panel39.Name = "panel39";
+            this.panel39.Size = new System.Drawing.Size(130, 17);
+            this.panel39.TabIndex = 73;
+            // 
+            // mapTilemapL2Name
+            // 
+            this.mapTilemapL2Name.DropDownHeight = 200;
+            this.mapTilemapL2Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapTilemapL2Name.DropDownWidth = 200;
+            this.mapTilemapL2Name.IntegralHeight = false;
+            this.mapTilemapL2Name.Location = new System.Drawing.Point(-2, -2);
+            this.mapTilemapL2Name.Name = "mapTilemapL2Name";
+            this.mapTilemapL2Name.Size = new System.Drawing.Size(133, 21);
+            this.mapTilemapL2Name.TabIndex = 139;
+            this.mapTilemapL2Name.SelectedIndexChanged += new System.EventHandler(this.mapTilemapL2Name_SelectedIndexChanged);
+            // 
+            // label76
+            // 
+            this.label76.BackColor = System.Drawing.SystemColors.Control;
+            this.label76.Location = new System.Drawing.Point(0, 91);
+            this.label76.Name = "label76";
+            this.label76.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label76.Size = new System.Drawing.Size(74, 17);
+            this.label76.TabIndex = 155;
+            this.label76.Text = "Battlefield";
+            // 
+            // mapBattlefieldNum
+            // 
+            this.mapBattlefieldNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mapBattlefieldNum.Location = new System.Drawing.Point(75, 91);
+            this.mapBattlefieldNum.Maximum = new decimal(new int[] {
+            54,
+            0,
+            0,
+            0});
+            this.mapBattlefieldNum.Name = "mapBattlefieldNum";
+            this.mapBattlefieldNum.Size = new System.Drawing.Size(51, 17);
+            this.mapBattlefieldNum.TabIndex = 78;
+            this.mapBattlefieldNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.mapBattlefieldNum.ValueChanged += new System.EventHandler(this.mapBattlefieldNum_ValueChanged);
+            // 
+            // panel69
+            // 
+            this.panel69.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel69.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel69.Controls.Add(this.label114);
+            this.panel69.Controls.Add(this.panel40);
+            this.panel69.Controls.Add(this.mapPaletteSetNum);
+            this.panel69.Controls.Add(this.label46);
+            this.panel69.Location = new System.Drawing.Point(0, 347);
+            this.panel69.Name = "panel69";
+            this.panel69.Size = new System.Drawing.Size(260, 40);
+            this.panel69.TabIndex = 442;
+            // 
+            // label114
+            // 
+            this.label114.BackColor = System.Drawing.SystemColors.Control;
+            this.label114.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label114.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label114.Location = new System.Drawing.Point(0, 0);
+            this.label114.Name = "label114";
+            this.label114.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label114.Size = new System.Drawing.Size(256, 17);
+            this.label114.TabIndex = 160;
+            this.label114.Text = "PALETTES";
+            this.label114.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel40
+            // 
+            this.panel40.BackColor = System.Drawing.SystemColors.Window;
+            this.panel40.Controls.Add(this.mapPaletteSetName);
+            this.panel40.Location = new System.Drawing.Point(127, 19);
+            this.panel40.Name = "panel40";
+            this.panel40.Size = new System.Drawing.Size(130, 17);
+            this.panel40.TabIndex = 81;
+            // 
+            // mapPaletteSetName
+            // 
+            this.mapPaletteSetName.DropDownHeight = 200;
+            this.mapPaletteSetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapPaletteSetName.DropDownWidth = 200;
+            this.mapPaletteSetName.IntegralHeight = false;
+            this.mapPaletteSetName.Items.AddRange(new object[] {
+            "Bowser\'s Keep Throne",
+            "____",
+            "Moleville shacks",
+            "Rose Town",
+            "____",
+            "____",
+            "Grasslands 1",
+            "____",
+            "Bowser\'s Keep Lava",
+            "Bowser\'s Keep, outside",
+            "Mushroom Kingdom Castle",
+            "Forest Maze",
+            "Sunken Ship",
+            "Sewers",
+            "Mountains",
+            "Mushroom Kingdom",
+            "Marrymore",
+            "____",
+            "Booster Tower 1",
+            "Underground",
+            "Bowser\'s Keep 1",
+            "Houses",
+            "____",
+            "____",
+            "____",
+            "Seaside Town",
+            "Booster Tower entrance",
+            "Seashore",
+            "____",
+            "Booster Hill",
+            "Rose Way",
+            "Nimbus Clouds",
+            "Grasslands 2",
+            "Culex\'s Room",
+            "Plains 1",
+            "Plains 2",
+            "Nimbus Castle",
+            "Grasslands 3",
+            "Smithy Factory",
+            "____",
+            "Sea",
+            "Tadpole Pond",
+            "Yo\'ster Isle",
+            "____",
+            "Count Down",
+            "Chapel Sanctuary",
+            "Bowser\'s Keep Lava",
+            "Pipe Rooms",
+            "____",
+            "Mushroom Kingdom dark",
+            "Pipehouse",
+            "Waterfall tunnels",
+            "Rose Town houses",
+            "Rose Town houses",
+            "Sewers Gate",
+            "Rose Town dark",
+            "Booster Tower 2",
+            "Suite",
+            "Volcano Map",
+            "Houses",
+            "Star Hill",
+            "Marrymore houses",
+            "Sunken Ship 2",
+            "Vista Hill",
+            "Johnny\'s Room",
+            "Marrymore Scene",
+            "Booster Tower Balcony",
+            "Bean Valley",
+            "Nimbus Land houses",
+            "Jinx\'s Dojo",
+            "Monstro Town houses",
+            "Monstro Town",
+            "Bowser\'s Keep puzzles",
+            "Beanstalks",
+            "Land\'s End Desert",
+            "Seashore sunset",
+            "Belome Temple",
+            "Nimbus Land",
+            "Factory Grounds 2",
+            "Factory Grounds 1",
+            "Bowser\'s Keep repairs",
+            "Nimbus Castle 2",
+            "Ending: Toadofsky",
+            "Nimbus Land springs",
+            "Nimbus Land clouds",
+            "Smithy 2",
+            "____",
+            "Ending: Yo\'ster Isle",
+            "Smithy Pad",
+            "____",
+            "Ending: Nimbus Land",
+            "Casino entrance",
+            "Casino, inside",
+            "Count Down"});
+            this.mapPaletteSetName.Location = new System.Drawing.Point(-2, -2);
+            this.mapPaletteSetName.Name = "mapPaletteSetName";
+            this.mapPaletteSetName.Size = new System.Drawing.Size(133, 21);
+            this.mapPaletteSetName.TabIndex = 158;
+            this.mapPaletteSetName.SelectedIndexChanged += new System.EventHandler(this.mapPaletteSetName_SelectedIndexChanged);
+            // 
+            // mapPaletteSetNum
+            // 
+            this.mapPaletteSetNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mapPaletteSetNum.Location = new System.Drawing.Point(75, 19);
+            this.mapPaletteSetNum.Maximum = new decimal(new int[] {
+            93,
+            0,
+            0,
+            0});
+            this.mapPaletteSetNum.Name = "mapPaletteSetNum";
+            this.mapPaletteSetNum.Size = new System.Drawing.Size(51, 17);
+            this.mapPaletteSetNum.TabIndex = 80;
+            this.mapPaletteSetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.mapPaletteSetNum.ValueChanged += new System.EventHandler(this.mapPaletteSetNum_ValueChanged);
+            // 
+            // label46
+            // 
+            this.label46.BackColor = System.Drawing.SystemColors.Control;
+            this.label46.Location = new System.Drawing.Point(0, 19);
+            this.label46.Name = "label46";
+            this.label46.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label46.Size = new System.Drawing.Size(74, 17);
+            this.label46.TabIndex = 157;
+            this.label46.Text = "Palette Set";
+            // 
+            // panel71
+            // 
+            this.panel71.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel71.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel71.Controls.Add(this.label88);
+            this.panel71.Controls.Add(this.label40);
+            this.panel71.Controls.Add(this.label35);
+            this.panel71.Controls.Add(this.mapTilesetL3Num);
+            this.panel71.Controls.Add(this.mapTilesetL2Num);
+            this.panel71.Controls.Add(this.mapTilesetL1Num);
+            this.panel71.Controls.Add(this.panel32);
+            this.panel71.Controls.Add(this.label34);
+            this.panel71.Controls.Add(this.panel33);
+            this.panel71.Controls.Add(this.panel34);
+            this.panel71.Location = new System.Drawing.Point(0, 155);
+            this.panel71.Name = "panel71";
+            this.panel71.Size = new System.Drawing.Size(260, 76);
+            this.panel71.TabIndex = 444;
+            // 
+            // label88
+            // 
+            this.label88.BackColor = System.Drawing.SystemColors.Control;
+            this.label88.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label88.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label88.Location = new System.Drawing.Point(0, 0);
+            this.label88.Name = "label88";
+            this.label88.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label88.Size = new System.Drawing.Size(256, 17);
+            this.label88.TabIndex = 153;
+            this.label88.Text = "TILESETS";
+            this.label88.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label40
+            // 
+            this.label40.BackColor = System.Drawing.SystemColors.Control;
+            this.label40.Location = new System.Drawing.Point(0, 55);
+            this.label40.Name = "label40";
+            this.label40.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label40.Size = new System.Drawing.Size(74, 17);
+            this.label40.TabIndex = 128;
+            this.label40.Text = "L3 Tileset";
+            // 
+            // label35
+            // 
+            this.label35.BackColor = System.Drawing.SystemColors.Control;
+            this.label35.Location = new System.Drawing.Point(0, 37);
+            this.label35.Name = "label35";
+            this.label35.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label35.Size = new System.Drawing.Size(74, 17);
+            this.label35.TabIndex = 127;
+            this.label35.Text = "L2 Tileset";
+            // 
+            // mapTilesetL3Num
+            // 
+            this.mapTilesetL3Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mapTilesetL3Num.Location = new System.Drawing.Point(75, 55);
+            this.mapTilesetL3Num.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.mapTilesetL3Num.Name = "mapTilesetL3Num";
+            this.mapTilesetL3Num.Size = new System.Drawing.Size(51, 17);
+            this.mapTilesetL3Num.TabIndex = 67;
+            this.mapTilesetL3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.mapTilesetL3Num.ValueChanged += new System.EventHandler(this.mapTilesetL3Num_ValueChanged);
+            // 
+            // mapTilesetL2Num
+            // 
+            this.mapTilesetL2Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mapTilesetL2Num.Location = new System.Drawing.Point(75, 37);
+            this.mapTilesetL2Num.Maximum = new decimal(new int[] {
+            92,
+            0,
+            0,
+            0});
+            this.mapTilesetL2Num.Name = "mapTilesetL2Num";
+            this.mapTilesetL2Num.Size = new System.Drawing.Size(51, 17);
+            this.mapTilesetL2Num.TabIndex = 65;
+            this.mapTilesetL2Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.mapTilesetL2Num.ValueChanged += new System.EventHandler(this.mapTilesetL2Num_ValueChanged);
+            // 
+            // mapTilesetL1Num
+            // 
+            this.mapTilesetL1Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mapTilesetL1Num.Location = new System.Drawing.Point(75, 19);
+            this.mapTilesetL1Num.Maximum = new decimal(new int[] {
+            92,
+            0,
+            0,
+            0});
+            this.mapTilesetL1Num.Name = "mapTilesetL1Num";
+            this.mapTilesetL1Num.Size = new System.Drawing.Size(51, 17);
+            this.mapTilesetL1Num.TabIndex = 63;
+            this.mapTilesetL1Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.mapTilesetL1Num.ValueChanged += new System.EventHandler(this.mapTilesetL1Num_ValueChanged);
+            // 
+            // panel32
+            // 
+            this.panel32.BackColor = System.Drawing.SystemColors.Window;
+            this.panel32.Controls.Add(this.mapTilesetL2Name);
+            this.panel32.Location = new System.Drawing.Point(127, 37);
+            this.panel32.Name = "panel32";
+            this.panel32.Size = new System.Drawing.Size(130, 17);
+            this.panel32.TabIndex = 66;
+            // 
+            // mapTilesetL2Name
+            // 
+            this.mapTilesetL2Name.DropDownHeight = 200;
+            this.mapTilesetL2Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapTilesetL2Name.DropDownWidth = 200;
+            this.mapTilesetL2Name.IntegralHeight = false;
+            this.mapTilesetL2Name.Location = new System.Drawing.Point(-2, -2);
+            this.mapTilesetL2Name.Name = "mapTilesetL2Name";
+            this.mapTilesetL2Name.Size = new System.Drawing.Size(133, 21);
+            this.mapTilesetL2Name.TabIndex = 130;
+            this.mapTilesetL2Name.SelectedIndexChanged += new System.EventHandler(this.mapTilesetL2Name_SelectedIndexChanged);
+            // 
+            // label34
+            // 
+            this.label34.BackColor = System.Drawing.SystemColors.Control;
+            this.label34.Location = new System.Drawing.Point(0, 19);
+            this.label34.Name = "label34";
+            this.label34.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label34.Size = new System.Drawing.Size(74, 17);
+            this.label34.TabIndex = 123;
+            this.label34.Text = "L1 Tileset";
+            // 
+            // panel33
+            // 
+            this.panel33.BackColor = System.Drawing.SystemColors.Window;
+            this.panel33.Controls.Add(this.mapTilesetL3Name);
+            this.panel33.Location = new System.Drawing.Point(127, 55);
+            this.panel33.Name = "panel33";
+            this.panel33.Size = new System.Drawing.Size(130, 17);
+            this.panel33.TabIndex = 68;
+            // 
+            // mapTilesetL3Name
+            // 
+            this.mapTilesetL3Name.DropDownHeight = 200;
+            this.mapTilesetL3Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapTilesetL3Name.IntegralHeight = false;
+            this.mapTilesetL3Name.Location = new System.Drawing.Point(-2, -2);
+            this.mapTilesetL3Name.Name = "mapTilesetL3Name";
+            this.mapTilesetL3Name.Size = new System.Drawing.Size(133, 21);
+            this.mapTilesetL3Name.TabIndex = 131;
+            this.mapTilesetL3Name.SelectedIndexChanged += new System.EventHandler(this.mapTilesetL3Name_SelectedIndexChanged);
+            // 
+            // panel34
+            // 
+            this.panel34.BackColor = System.Drawing.SystemColors.Window;
+            this.panel34.Controls.Add(this.mapTilesetL1Name);
+            this.panel34.Location = new System.Drawing.Point(127, 19);
+            this.panel34.Name = "panel34";
+            this.panel34.Size = new System.Drawing.Size(130, 17);
+            this.panel34.TabIndex = 64;
+            // 
+            // mapTilesetL1Name
+            // 
+            this.mapTilesetL1Name.DropDownHeight = 200;
+            this.mapTilesetL1Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapTilesetL1Name.DropDownWidth = 200;
+            this.mapTilesetL1Name.IntegralHeight = false;
+            this.mapTilesetL1Name.Location = new System.Drawing.Point(-2, -2);
+            this.mapTilesetL1Name.Name = "mapTilesetL1Name";
+            this.mapTilesetL1Name.Size = new System.Drawing.Size(133, 21);
+            this.mapTilesetL1Name.TabIndex = 129;
+            this.mapTilesetL1Name.SelectedIndexChanged += new System.EventHandler(this.mapTilesetL1Name_SelectedIndexChanged);
             // 
             // panel72
             // 
             this.panel72.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel72.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel72.Controls.Add(this.label87);
             this.panel72.Controls.Add(this.label44);
             this.panel72.Controls.Add(this.mapGFXSet1Num);
@@ -2946,9 +3843,9 @@ namespace LAZYSHELL
             this.panel72.Controls.Add(this.mapGFXSet5Num);
             this.panel72.Controls.Add(this.panel11);
             this.panel72.Controls.Add(this.label2);
-            this.panel72.Location = new System.Drawing.Point(0, 19);
+            this.panel72.Location = new System.Drawing.Point(0, 23);
             this.panel72.Name = "panel72";
-            this.panel72.Size = new System.Drawing.Size(256, 126);
+            this.panel72.Size = new System.Drawing.Size(260, 130);
             this.panel72.TabIndex = 445;
             // 
             // label87
@@ -3219,916 +4116,49 @@ namespace LAZYSHELL
             this.mapGFXSet1Name.TabIndex = 118;
             this.mapGFXSet1Name.SelectedIndexChanged += new System.EventHandler(this.mapGFXSet1Name_SelectedIndexChanged);
             // 
-            // panel71
-            // 
-            this.panel71.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel71.Controls.Add(this.label88);
-            this.panel71.Controls.Add(this.label40);
-            this.panel71.Controls.Add(this.label35);
-            this.panel71.Controls.Add(this.mapTilesetL3Num);
-            this.panel71.Controls.Add(this.mapTilesetL2Num);
-            this.panel71.Controls.Add(this.mapTilesetL1Num);
-            this.panel71.Controls.Add(this.panel32);
-            this.panel71.Controls.Add(this.label34);
-            this.panel71.Controls.Add(this.panel33);
-            this.panel71.Controls.Add(this.panel34);
-            this.panel71.Location = new System.Drawing.Point(0, 147);
-            this.panel71.Name = "panel71";
-            this.panel71.Size = new System.Drawing.Size(256, 72);
-            this.panel71.TabIndex = 444;
-            // 
-            // label88
-            // 
-            this.label88.BackColor = System.Drawing.SystemColors.Control;
-            this.label88.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label88.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label88.Location = new System.Drawing.Point(0, 0);
-            this.label88.Name = "label88";
-            this.label88.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label88.Size = new System.Drawing.Size(256, 17);
-            this.label88.TabIndex = 153;
-            this.label88.Text = "TILESETS";
-            this.label88.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label40
-            // 
-            this.label40.BackColor = System.Drawing.SystemColors.Control;
-            this.label40.Location = new System.Drawing.Point(0, 55);
-            this.label40.Name = "label40";
-            this.label40.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label40.Size = new System.Drawing.Size(74, 17);
-            this.label40.TabIndex = 128;
-            this.label40.Text = "L3 Tileset";
-            // 
-            // label35
-            // 
-            this.label35.BackColor = System.Drawing.SystemColors.Control;
-            this.label35.Location = new System.Drawing.Point(0, 37);
-            this.label35.Name = "label35";
-            this.label35.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label35.Size = new System.Drawing.Size(74, 17);
-            this.label35.TabIndex = 127;
-            this.label35.Text = "L2 Tileset";
-            // 
-            // mapTilesetL3Num
-            // 
-            this.mapTilesetL3Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilesetL3Num.Location = new System.Drawing.Point(75, 55);
-            this.mapTilesetL3Num.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.mapTilesetL3Num.Name = "mapTilesetL3Num";
-            this.mapTilesetL3Num.Size = new System.Drawing.Size(51, 17);
-            this.mapTilesetL3Num.TabIndex = 67;
-            this.mapTilesetL3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapTilesetL3Num.ValueChanged += new System.EventHandler(this.mapTilesetL3Num_ValueChanged);
-            // 
-            // mapTilesetL2Num
-            // 
-            this.mapTilesetL2Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilesetL2Num.Location = new System.Drawing.Point(75, 37);
-            this.mapTilesetL2Num.Maximum = new decimal(new int[] {
-            92,
-            0,
-            0,
-            0});
-            this.mapTilesetL2Num.Name = "mapTilesetL2Num";
-            this.mapTilesetL2Num.Size = new System.Drawing.Size(51, 17);
-            this.mapTilesetL2Num.TabIndex = 65;
-            this.mapTilesetL2Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapTilesetL2Num.ValueChanged += new System.EventHandler(this.mapTilesetL2Num_ValueChanged);
-            // 
-            // mapTilesetL1Num
-            // 
-            this.mapTilesetL1Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilesetL1Num.Location = new System.Drawing.Point(75, 19);
-            this.mapTilesetL1Num.Maximum = new decimal(new int[] {
-            92,
-            0,
-            0,
-            0});
-            this.mapTilesetL1Num.Name = "mapTilesetL1Num";
-            this.mapTilesetL1Num.Size = new System.Drawing.Size(51, 17);
-            this.mapTilesetL1Num.TabIndex = 63;
-            this.mapTilesetL1Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapTilesetL1Num.ValueChanged += new System.EventHandler(this.mapTilesetL1Num_ValueChanged);
-            // 
-            // panel32
-            // 
-            this.panel32.BackColor = System.Drawing.SystemColors.Window;
-            this.panel32.Controls.Add(this.mapTilesetL2Name);
-            this.panel32.Location = new System.Drawing.Point(127, 37);
-            this.panel32.Name = "panel32";
-            this.panel32.Size = new System.Drawing.Size(130, 17);
-            this.panel32.TabIndex = 66;
-            // 
-            // mapTilesetL2Name
-            // 
-            this.mapTilesetL2Name.DropDownHeight = 200;
-            this.mapTilesetL2Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapTilesetL2Name.DropDownWidth = 200;
-            this.mapTilesetL2Name.IntegralHeight = false;
-            this.mapTilesetL2Name.Location = new System.Drawing.Point(-2, -2);
-            this.mapTilesetL2Name.Name = "mapTilesetL2Name";
-            this.mapTilesetL2Name.Size = new System.Drawing.Size(133, 21);
-            this.mapTilesetL2Name.TabIndex = 130;
-            this.mapTilesetL2Name.SelectedIndexChanged += new System.EventHandler(this.mapTilesetL2Name_SelectedIndexChanged);
-            // 
-            // label34
-            // 
-            this.label34.BackColor = System.Drawing.SystemColors.Control;
-            this.label34.Location = new System.Drawing.Point(0, 19);
-            this.label34.Name = "label34";
-            this.label34.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label34.Size = new System.Drawing.Size(74, 17);
-            this.label34.TabIndex = 123;
-            this.label34.Text = "L1 Tileset";
-            // 
-            // panel33
-            // 
-            this.panel33.BackColor = System.Drawing.SystemColors.Window;
-            this.panel33.Controls.Add(this.mapTilesetL3Name);
-            this.panel33.Location = new System.Drawing.Point(127, 55);
-            this.panel33.Name = "panel33";
-            this.panel33.Size = new System.Drawing.Size(130, 17);
-            this.panel33.TabIndex = 68;
-            // 
-            // mapTilesetL3Name
-            // 
-            this.mapTilesetL3Name.DropDownHeight = 200;
-            this.mapTilesetL3Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapTilesetL3Name.IntegralHeight = false;
-            this.mapTilesetL3Name.Location = new System.Drawing.Point(-2, -2);
-            this.mapTilesetL3Name.Name = "mapTilesetL3Name";
-            this.mapTilesetL3Name.Size = new System.Drawing.Size(133, 21);
-            this.mapTilesetL3Name.TabIndex = 131;
-            this.mapTilesetL3Name.SelectedIndexChanged += new System.EventHandler(this.mapTilesetL3Name_SelectedIndexChanged);
-            // 
-            // panel34
-            // 
-            this.panel34.BackColor = System.Drawing.SystemColors.Window;
-            this.panel34.Controls.Add(this.mapTilesetL1Name);
-            this.panel34.Location = new System.Drawing.Point(127, 19);
-            this.panel34.Name = "panel34";
-            this.panel34.Size = new System.Drawing.Size(130, 17);
-            this.panel34.TabIndex = 64;
-            // 
-            // mapTilesetL1Name
-            // 
-            this.mapTilesetL1Name.DropDownHeight = 200;
-            this.mapTilesetL1Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapTilesetL1Name.DropDownWidth = 200;
-            this.mapTilesetL1Name.IntegralHeight = false;
-            this.mapTilesetL1Name.Location = new System.Drawing.Point(-2, -2);
-            this.mapTilesetL1Name.Name = "mapTilesetL1Name";
-            this.mapTilesetL1Name.Size = new System.Drawing.Size(133, 21);
-            this.mapTilesetL1Name.TabIndex = 129;
-            this.mapTilesetL1Name.SelectedIndexChanged += new System.EventHandler(this.mapTilesetL1Name_SelectedIndexChanged);
-            // 
-            // panel70
-            // 
-            this.panel70.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel70.Controls.Add(this.label89);
-            this.panel70.Controls.Add(this.mapTilemapL1Num);
-            this.panel70.Controls.Add(this.mapSetL3Priority);
-            this.panel70.Controls.Add(this.mapTilemapL2Num);
-            this.panel70.Controls.Add(this.panel35);
-            this.panel70.Controls.Add(this.label43);
-            this.panel70.Controls.Add(this.mapTilemapL3Num);
-            this.panel70.Controls.Add(this.panel36);
-            this.panel70.Controls.Add(this.label42);
-            this.panel70.Controls.Add(this.panel37);
-            this.panel70.Controls.Add(this.label41);
-            this.panel70.Controls.Add(this.panel38);
-            this.panel70.Controls.Add(this.mapPhysicalMapNum);
-            this.panel70.Controls.Add(this.label45);
-            this.panel70.Controls.Add(this.panel39);
-            this.panel70.Controls.Add(this.label76);
-            this.panel70.Controls.Add(this.mapBattlefieldNum);
-            this.panel70.Location = new System.Drawing.Point(0, 221);
-            this.panel70.Name = "panel70";
-            this.panel70.Size = new System.Drawing.Size(256, 108);
-            this.panel70.TabIndex = 443;
-            // 
-            // label89
-            // 
-            this.label89.BackColor = System.Drawing.SystemColors.Control;
-            this.label89.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label89.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label89.Location = new System.Drawing.Point(0, 0);
-            this.label89.Name = "label89";
-            this.label89.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label89.Size = new System.Drawing.Size(126, 17);
-            this.label89.TabIndex = 154;
-            this.label89.Text = "TILEMAPS";
-            this.label89.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // mapTilemapL1Num
-            // 
-            this.mapTilemapL1Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilemapL1Num.Location = new System.Drawing.Point(75, 19);
-            this.mapTilemapL1Num.Maximum = new decimal(new int[] {
-            244,
-            0,
-            0,
-            0});
-            this.mapTilemapL1Num.Name = "mapTilemapL1Num";
-            this.mapTilemapL1Num.Size = new System.Drawing.Size(51, 17);
-            this.mapTilemapL1Num.TabIndex = 70;
-            this.mapTilemapL1Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapTilemapL1Num.ValueChanged += new System.EventHandler(this.mapTilemapL1Num_ValueChanged);
-            // 
-            // mapSetL3Priority
-            // 
-            this.mapSetL3Priority.Appearance = System.Windows.Forms.Appearance.Button;
-            this.mapSetL3Priority.BackColor = System.Drawing.SystemColors.Control;
-            this.mapSetL3Priority.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mapSetL3Priority.ForeColor = System.Drawing.Color.Gray;
-            this.mapSetL3Priority.Location = new System.Drawing.Point(127, 0);
-            this.mapSetL3Priority.Name = "mapSetL3Priority";
-            this.mapSetL3Priority.Size = new System.Drawing.Size(129, 18);
-            this.mapSetL3Priority.TabIndex = 69;
-            this.mapSetL3Priority.Text = "L3 PRIORITY 1";
-            this.mapSetL3Priority.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.mapSetL3Priority.UseCompatibleTextRendering = true;
-            this.mapSetL3Priority.UseVisualStyleBackColor = false;
-            this.mapSetL3Priority.CheckedChanged += new System.EventHandler(this.mapSetL3Priority_CheckedChanged);
-            // 
-            // mapTilemapL2Num
-            // 
-            this.mapTilemapL2Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilemapL2Num.Location = new System.Drawing.Point(75, 37);
-            this.mapTilemapL2Num.Maximum = new decimal(new int[] {
-            244,
-            0,
-            0,
-            0});
-            this.mapTilemapL2Num.Name = "mapTilemapL2Num";
-            this.mapTilemapL2Num.Size = new System.Drawing.Size(51, 17);
-            this.mapTilemapL2Num.TabIndex = 72;
-            this.mapTilemapL2Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapTilemapL2Num.ValueChanged += new System.EventHandler(this.mapTilemapL2Num_ValueChanged);
-            // 
-            // panel35
-            // 
-            this.panel35.BackColor = System.Drawing.SystemColors.Window;
-            this.panel35.Controls.Add(this.mapBattlefieldName);
-            this.panel35.Location = new System.Drawing.Point(127, 91);
-            this.panel35.Name = "panel35";
-            this.panel35.Size = new System.Drawing.Size(130, 17);
-            this.panel35.TabIndex = 79;
-            // 
-            // mapBattlefieldName
-            // 
-            this.mapBattlefieldName.DropDownHeight = 200;
-            this.mapBattlefieldName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapBattlefieldName.IntegralHeight = false;
-            this.mapBattlefieldName.Items.AddRange(new object[] {
-            "Bowser\'s Keep",
-            "Castle",
-            "House",
-            "Mushroom Kingdom",
-            "Kero Sewers",
-            "Mines",
-            "Forest",
-            "Underground",
-            "Sea",
-            "Sea Enclave",
-            "Sunken Ship",
-            "Forest",
-            "Barrel Volcano",
-            "Star Hill",
-            "Castle",
-            "Booster Tower",
-            "Bowser\'s Keep",
-            "Grasslands",
-            "Mountains",
-            "Plains",
-            "Nimbus Land",
-            "Nimbus Castle",
-            "Count Down",
-            "Smithy Factory",
-            "Kero Sewers",
-            "Bean Valley",
-            "Land\'s End Desert",
-            "Belome Temple",
-            "Pipe Rooms",
-            "Beanstalks",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Forest",
-            "House",
-            "Forest",
-            "Mines",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Sunken Ship",
-            "Forest",
-            "Barrel Volcano",
-            "Castle",
-            "Kero Sewers",
-            "Forest",
-            "Booster Tower",
-            "Forest",
-            "Bowser\'s Keep",
-            "Bowser\'s Keep",
-            "Grasslands",
-            "Mountains",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Forest",
-            "Forest"});
-            this.mapBattlefieldName.Location = new System.Drawing.Point(-2, -2);
-            this.mapBattlefieldName.Name = "mapBattlefieldName";
-            this.mapBattlefieldName.Size = new System.Drawing.Size(133, 21);
-            this.mapBattlefieldName.TabIndex = 144;
-            this.mapBattlefieldName.SelectedIndexChanged += new System.EventHandler(this.mapBattlefieldName_SelectedIndexChanged);
-            // 
-            // label43
-            // 
-            this.label43.BackColor = System.Drawing.SystemColors.Control;
-            this.label43.Location = new System.Drawing.Point(0, 19);
-            this.label43.Name = "label43";
-            this.label43.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label43.Size = new System.Drawing.Size(74, 17);
-            this.label43.TabIndex = 132;
-            this.label43.Text = "L1 Tilemap";
-            // 
-            // mapTilemapL3Num
-            // 
-            this.mapTilemapL3Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapTilemapL3Num.Location = new System.Drawing.Point(75, 55);
-            this.mapTilemapL3Num.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.mapTilemapL3Num.Name = "mapTilemapL3Num";
-            this.mapTilemapL3Num.Size = new System.Drawing.Size(51, 17);
-            this.mapTilemapL3Num.TabIndex = 74;
-            this.mapTilemapL3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapTilemapL3Num.ValueChanged += new System.EventHandler(this.mapTilemapL3Num_ValueChanged);
-            // 
-            // panel36
-            // 
-            this.panel36.BackColor = System.Drawing.SystemColors.Window;
-            this.panel36.Controls.Add(this.mapTilemapL3Name);
-            this.panel36.Location = new System.Drawing.Point(127, 55);
-            this.panel36.Name = "panel36";
-            this.panel36.Size = new System.Drawing.Size(130, 17);
-            this.panel36.TabIndex = 75;
-            // 
-            // mapTilemapL3Name
-            // 
-            this.mapTilemapL3Name.DropDownHeight = 200;
-            this.mapTilemapL3Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapTilemapL3Name.DropDownWidth = 200;
-            this.mapTilemapL3Name.IntegralHeight = false;
-            this.mapTilemapL3Name.Items.AddRange(new object[] {
-            "{NOTHING}",
-            "Booster\'s Tower 1 ",
-            "Tadpole Pond 2 ",
-            "Mushroom Kingdom Castle ",
-            "Forest Maze 1",
-            "Forest Maze 2",
-            "Sunken Ship 1 ",
-            "Kero Sewers 1",
-            "Sunken Ship 2 ",
-            "Booster\'s Tower 2 ",
-            "--------",
-            "Seashore",
-            "Midas River ",
-            "--------",
-            "Waterfall ",
-            "--------",
-            "various areas…",
-            "Sea",
-            "Tadpole Pond 1 ",
-            "Nimbus Clouds",
-            "Chapel, main hall ",
-            "Plains",
-            "Yo\'ster Isle ",
-            "Maps",
-            "Mushroom Kingdom",
-            "Sewers",
-            "Pipehouse ",
-            "Houses 1",
-            "Bowser\'s Keep Throne",
-            "Rose Way, area 1 ",
-            "Houses 2",
-            "--------",
-            "Rose Way",
-            "Moleville shacks ",
-            "Houses 3",
-            "Suite",
-            "Sunken Ship 3",
-            "Star Hill 2",
-            "Vista Hill ",
-            "Seaside Town beach ",
-            "Grasslands 2",
-            "Marrymore Scene",
-            "--------",
-            "Nimbus Land houses ",
-            "Jinx\'s Dojo ",
-            "Monstro Town houses",
-            "Bowser\'s Keep 6-doors 1",
-            "Pipe Rooms",
-            "Culex\'s Room ",
-            "Bowser\'s Keep 6-doors 2",
-            "Bowser\'s Keep 2",
-            "Bowser\'s Keep 3",
-            "Bowser\'s Keep 6-doors 3",
-            "Bowser\'s Keep 6-doors 4",
-            "Belome Temple",
-            "Land\'s End Desert",
-            "Bowser\'s Keep 4",
-            "Nimbus Land springs ",
-            "Smithy Factory",
-            "--------",
-            "Smithy 2",
-            "___nothing",
-            "Star Hill 1",
-            "--------"});
-            this.mapTilemapL3Name.Location = new System.Drawing.Point(-2, -2);
-            this.mapTilemapL3Name.Name = "mapTilemapL3Name";
-            this.mapTilemapL3Name.Size = new System.Drawing.Size(133, 21);
-            this.mapTilemapL3Name.TabIndex = 140;
-            this.mapTilemapL3Name.SelectedIndexChanged += new System.EventHandler(this.mapTilemapL3Name_SelectedIndexChanged);
-            // 
-            // label42
-            // 
-            this.label42.BackColor = System.Drawing.SystemColors.Control;
-            this.label42.Location = new System.Drawing.Point(0, 37);
-            this.label42.Name = "label42";
-            this.label42.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label42.Size = new System.Drawing.Size(74, 17);
-            this.label42.TabIndex = 136;
-            this.label42.Text = "L2 Tilemap";
-            // 
-            // panel37
-            // 
-            this.panel37.BackColor = System.Drawing.SystemColors.Window;
-            this.panel37.Controls.Add(this.mapTilemapL1Name);
-            this.panel37.Location = new System.Drawing.Point(127, 19);
-            this.panel37.Name = "panel37";
-            this.panel37.Size = new System.Drawing.Size(130, 17);
-            this.panel37.TabIndex = 71;
-            // 
-            // mapTilemapL1Name
-            // 
-            this.mapTilemapL1Name.DropDownHeight = 200;
-            this.mapTilemapL1Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapTilemapL1Name.DropDownWidth = 200;
-            this.mapTilemapL1Name.IntegralHeight = false;
-            this.mapTilemapL1Name.Location = new System.Drawing.Point(-2, -2);
-            this.mapTilemapL1Name.Name = "mapTilemapL1Name";
-            this.mapTilemapL1Name.Size = new System.Drawing.Size(133, 21);
-            this.mapTilemapL1Name.TabIndex = 138;
-            this.mapTilemapL1Name.SelectedIndexChanged += new System.EventHandler(this.mapTilemapL1Name_SelectedIndexChanged);
-            // 
-            // label41
-            // 
-            this.label41.BackColor = System.Drawing.SystemColors.Control;
-            this.label41.Location = new System.Drawing.Point(0, 55);
-            this.label41.Name = "label41";
-            this.label41.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label41.Size = new System.Drawing.Size(74, 17);
-            this.label41.TabIndex = 137;
-            this.label41.Text = "L3 Tilemap";
-            // 
-            // panel38
-            // 
-            this.panel38.BackColor = System.Drawing.SystemColors.Window;
-            this.panel38.Controls.Add(this.mapPhysicalMapName);
-            this.panel38.Location = new System.Drawing.Point(127, 73);
-            this.panel38.Name = "panel38";
-            this.panel38.Size = new System.Drawing.Size(130, 17);
-            this.panel38.TabIndex = 77;
-            // 
-            // mapPhysicalMapName
-            // 
-            this.mapPhysicalMapName.DropDownHeight = 200;
-            this.mapPhysicalMapName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapPhysicalMapName.DropDownWidth = 200;
-            this.mapPhysicalMapName.IntegralHeight = false;
-            this.mapPhysicalMapName.Items.AddRange(new object[] {
-            "Debug Room",
-            "{NOTHING}",
-            "Kero Sewers 1",
-            "Bowser\'s Keep 1",
-            "--------",
-            "Mushroom Kingdom Castle",
-            "--------",
-            "--------",
-            "Gardener\'s House",
-            "Seaside Town",
-            "--------",
-            "Forest Maze 3",
-            "Midas River, waterfall",
-            "Forest Maze 4",
-            "Rose Town",
-            "--------",
-            "Forest Maze 2",
-            "___underground areas",
-            "Sunken Ship 1",
-            "Sunken Ship 2",
-            "Tadpole Pond 2",
-            "--------",
-            "--------",
-            "Mushroom Kingdom",
-            "Mushroom Kingdom houses",
-            "Bowser\'s Keep Throne",
-            "Booster\'s Tower 2",
-            "Booster\'s Tower 1",
-            "Booster\'s Tower entrance",
-            "Rose Way",
-            "Moleville Mines 1",
-            "Moleville Mines 2",
-            "Moleville Mines 3",
-            "Seaside Town houses",
-            "--------",
-            "Barrel Volcano 1",
-            "Barrel Volcano 2",
-            "Mario\'s Pad",
-            "Rose Town houses",
-            "Moleville shacks",
-            "Kero Sewers 2",
-            "--------",
-            "--------",
-            "Bowser\'s Keep 3",
-            "Grate Guy\'s Casino",
-            "Midas River",
-            "Plains",
-            "Grasslands",
-            "Forest Maze Underground",
-            "Forest Maze, area 7",
-            "Land\'s End Underground",
-            "Suite",
-            "--------",
-            "Nimbus clouds",
-            "Nimbus Castle 1",
-            "Nimbus Castle 2",
-            "Barrel Volcano 3",
-            "--------",
-            "Sea",
-            "Pipe Vault",
-            "Seashore",
-            "--------",
-            "Smithy Factory 2",
-            "Smithy Factory 3",
-            "Smithy Factory 1",
-            "Tadpole Pond 1",
-            "Nimbus Land houses",
-            "Star Hill 2",
-            "Pipe Rooms",
-            "--------",
-            "--------",
-            "Chapel, main hall",
-            "Chapel sanctuary",
-            "Bowser\'s Keep Bridge",
-            "Belome\'s Temple 1",
-            "--------",
-            "--------",
-            "Bandit\'s Way 1",
-            "Bandit\'s Way 2",
-            "Pipehouse",
-            "Mushroom Way 1",
-            "--------",
-            "Kero Sewers 1",
-            "Rose Way 1",
-            "Waterfall tunnels",
-            "Booster Pass 1",
-            "Moleville",
-            "Marrymore",
-            "Marrymore houses",
-            "Volcano map",
-            "Sunken Ship 2",
-            "Vista Hill",
-            "Booster Hill",
-            "Seaside Town beach",
-            "Seaside Town",
-            "Land\'s End 1",
-            "Land\'s End 2",
-            "Bean Valley",
-            "Beanstalks",
-            "--------",
-            "Land\'s End 3",
-            "Land\'s End desert",
-            "Monstro Town houses",
-            "Monstro Town",
-            "Jinx\'s Dojo",
-            "Bowser’s Keep 6-door 1",
-            "--------",
-            "Booster Pass secret",
-            "Bowser\'s Keep 4",
-            "Bowser\'s Keep 6-door 2",
-            "Bowser\'s Keep Magikoopa",
-            "Bowser\'s Keep 6-door 3",
-            "Bowser\'s Keep 6-door 4",
-            "Bowser\'s Keep 6-door 5",
-            "Factory Grounds 1",
-            "Factory Grounds 2",
-            "Bowser\'s Keep 5",
-            "Nimbus Clouds 2",
-            "Smithy Factory 4",
-            "Star Hill 1"});
-            this.mapPhysicalMapName.Location = new System.Drawing.Point(-2, -2);
-            this.mapPhysicalMapName.Name = "mapPhysicalMapName";
-            this.mapPhysicalMapName.Size = new System.Drawing.Size(133, 21);
-            this.mapPhysicalMapName.TabIndex = 143;
-            this.mapPhysicalMapName.SelectedIndexChanged += new System.EventHandler(this.mapPhysicalMapName_SelectedIndexChanged);
-            // 
-            // mapPhysicalMapNum
-            // 
-            this.mapPhysicalMapNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapPhysicalMapNum.Location = new System.Drawing.Point(75, 73);
-            this.mapPhysicalMapNum.Maximum = new decimal(new int[] {
-            119,
-            0,
-            0,
-            0});
-            this.mapPhysicalMapNum.Name = "mapPhysicalMapNum";
-            this.mapPhysicalMapNum.Size = new System.Drawing.Size(51, 17);
-            this.mapPhysicalMapNum.TabIndex = 76;
-            this.mapPhysicalMapNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapPhysicalMapNum.ValueChanged += new System.EventHandler(this.mapPhysicalMapNum_ValueChanged);
-            // 
-            // label45
-            // 
-            this.label45.BackColor = System.Drawing.SystemColors.Control;
-            this.label45.Location = new System.Drawing.Point(0, 73);
-            this.label45.Name = "label45";
-            this.label45.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label45.Size = new System.Drawing.Size(74, 17);
-            this.label45.TabIndex = 152;
-            this.label45.Text = "Solidity Map";
-            // 
-            // panel39
-            // 
-            this.panel39.BackColor = System.Drawing.SystemColors.Window;
-            this.panel39.Controls.Add(this.mapTilemapL2Name);
-            this.panel39.Location = new System.Drawing.Point(127, 37);
-            this.panel39.Name = "panel39";
-            this.panel39.Size = new System.Drawing.Size(130, 17);
-            this.panel39.TabIndex = 73;
-            // 
-            // mapTilemapL2Name
-            // 
-            this.mapTilemapL2Name.DropDownHeight = 200;
-            this.mapTilemapL2Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapTilemapL2Name.DropDownWidth = 200;
-            this.mapTilemapL2Name.IntegralHeight = false;
-            this.mapTilemapL2Name.Location = new System.Drawing.Point(-2, -2);
-            this.mapTilemapL2Name.Name = "mapTilemapL2Name";
-            this.mapTilemapL2Name.Size = new System.Drawing.Size(133, 21);
-            this.mapTilemapL2Name.TabIndex = 139;
-            this.mapTilemapL2Name.SelectedIndexChanged += new System.EventHandler(this.mapTilemapL2Name_SelectedIndexChanged);
-            // 
-            // label76
-            // 
-            this.label76.BackColor = System.Drawing.SystemColors.Control;
-            this.label76.Location = new System.Drawing.Point(0, 91);
-            this.label76.Name = "label76";
-            this.label76.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label76.Size = new System.Drawing.Size(74, 17);
-            this.label76.TabIndex = 155;
-            this.label76.Text = "Battlefield";
-            // 
-            // mapBattlefieldNum
-            // 
-            this.mapBattlefieldNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapBattlefieldNum.Location = new System.Drawing.Point(75, 91);
-            this.mapBattlefieldNum.Maximum = new decimal(new int[] {
-            54,
-            0,
-            0,
-            0});
-            this.mapBattlefieldNum.Name = "mapBattlefieldNum";
-            this.mapBattlefieldNum.Size = new System.Drawing.Size(51, 17);
-            this.mapBattlefieldNum.TabIndex = 78;
-            this.mapBattlefieldNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapBattlefieldNum.ValueChanged += new System.EventHandler(this.mapBattlefieldNum_ValueChanged);
-            // 
-            // panel69
-            // 
-            this.panel69.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel69.Controls.Add(this.label114);
-            this.panel69.Controls.Add(this.panel40);
-            this.panel69.Controls.Add(this.mapPaletteSetNum);
-            this.panel69.Controls.Add(this.label46);
-            this.panel69.Location = new System.Drawing.Point(0, 331);
-            this.panel69.Name = "panel69";
-            this.panel69.Size = new System.Drawing.Size(256, 36);
-            this.panel69.TabIndex = 442;
-            // 
-            // label114
-            // 
-            this.label114.BackColor = System.Drawing.SystemColors.Control;
-            this.label114.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label114.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label114.Location = new System.Drawing.Point(0, 0);
-            this.label114.Name = "label114";
-            this.label114.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label114.Size = new System.Drawing.Size(256, 17);
-            this.label114.TabIndex = 160;
-            this.label114.Text = "PALETTES";
-            this.label114.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel40
-            // 
-            this.panel40.BackColor = System.Drawing.SystemColors.Window;
-            this.panel40.Controls.Add(this.mapPaletteSetName);
-            this.panel40.Location = new System.Drawing.Point(127, 19);
-            this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(130, 17);
-            this.panel40.TabIndex = 81;
-            // 
-            // mapPaletteSetName
-            // 
-            this.mapPaletteSetName.DropDownHeight = 200;
-            this.mapPaletteSetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapPaletteSetName.DropDownWidth = 200;
-            this.mapPaletteSetName.IntegralHeight = false;
-            this.mapPaletteSetName.Items.AddRange(new object[] {
-            "Bowser\'s Keep Throne",
-            "____",
-            "Moleville shacks",
-            "Rose Town",
-            "____",
-            "____",
-            "Grasslands 1",
-            "____",
-            "Bowser\'s Keep Lava",
-            "Bowser\'s Keep, outside",
-            "Mushroom Kingdom Castle",
-            "Forest Maze",
-            "Sunken Ship",
-            "Sewers",
-            "Mountains",
-            "Mushroom Kingdom",
-            "Marrymore",
-            "____",
-            "Booster Tower 1",
-            "Underground",
-            "Bowser\'s Keep 1",
-            "Houses",
-            "____",
-            "____",
-            "____",
-            "Seaside Town",
-            "Booster Tower entrance",
-            "Seashore",
-            "____",
-            "Booster Hill",
-            "Rose Way",
-            "Nimbus Clouds",
-            "Grasslands 2",
-            "Culex\'s Room",
-            "Plains 1",
-            "Plains 2",
-            "Nimbus Castle",
-            "Grasslands 3",
-            "Smithy Factory",
-            "____",
-            "Sea",
-            "Tadpole Pond",
-            "Yo\'ster Isle",
-            "____",
-            "Count Down",
-            "Chapel Sanctuary",
-            "Bowser\'s Keep Lava",
-            "Pipe Rooms",
-            "____",
-            "Mushroom Kingdom dark",
-            "Pipehouse",
-            "Waterfall tunnels",
-            "Rose Town houses",
-            "Rose Town houses",
-            "Sewers Gate",
-            "Rose Town dark",
-            "Booster Tower 2",
-            "Suite",
-            "Volcano Map",
-            "Houses",
-            "Star Hill",
-            "Marrymore houses",
-            "Sunken Ship 2",
-            "Vista Hill",
-            "Johnny\'s Room",
-            "Marrymore Scene",
-            "Booster Tower Balcony",
-            "Bean Valley",
-            "Nimbus Land houses",
-            "Jinx\'s Dojo",
-            "Monstro Town houses",
-            "Monstro Town",
-            "Bowser\'s Keep puzzles",
-            "Beanstalks",
-            "Land\'s End Desert",
-            "Seashore sunset",
-            "Belome Temple",
-            "Nimbus Land",
-            "Factory Grounds 2",
-            "Factory Grounds 1",
-            "Bowser\'s Keep repairs",
-            "Nimbus Castle 2",
-            "Ending: Toadofsky",
-            "Nimbus Land springs",
-            "Nimbus Land clouds",
-            "Smithy 2",
-            "____",
-            "Ending: Yo\'ster Isle",
-            "Smithy Pad",
-            "____",
-            "Ending: Nimbus Land",
-            "Casino entrance",
-            "Casino, inside",
-            "Count Down"});
-            this.mapPaletteSetName.Location = new System.Drawing.Point(-2, -2);
-            this.mapPaletteSetName.Name = "mapPaletteSetName";
-            this.mapPaletteSetName.Size = new System.Drawing.Size(133, 21);
-            this.mapPaletteSetName.TabIndex = 158;
-            this.mapPaletteSetName.SelectedIndexChanged += new System.EventHandler(this.mapPaletteSetName_SelectedIndexChanged);
-            // 
-            // mapPaletteSetNum
-            // 
-            this.mapPaletteSetNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mapPaletteSetNum.Location = new System.Drawing.Point(75, 19);
-            this.mapPaletteSetNum.Maximum = new decimal(new int[] {
-            93,
-            0,
-            0,
-            0});
-            this.mapPaletteSetNum.Name = "mapPaletteSetNum";
-            this.mapPaletteSetNum.Size = new System.Drawing.Size(51, 17);
-            this.mapPaletteSetNum.TabIndex = 80;
-            this.mapPaletteSetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapPaletteSetNum.ValueChanged += new System.EventHandler(this.mapPaletteSetNum_ValueChanged);
-            // 
-            // label46
-            // 
-            this.label46.BackColor = System.Drawing.SystemColors.Control;
-            this.label46.Location = new System.Drawing.Point(0, 19);
-            this.label46.Name = "label46";
-            this.label46.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label46.Size = new System.Drawing.Size(74, 17);
-            this.label46.TabIndex = 157;
-            this.label46.Text = "Palette Set";
+            // panel28
+            // 
+            this.panel28.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel28.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel28.Controls.Add(this.label33);
+            this.panel28.Controls.Add(this.mapNum);
+            this.panel28.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel28.Location = new System.Drawing.Point(0, 0);
+            this.panel28.Name = "panel28";
+            this.panel28.Size = new System.Drawing.Size(260, 21);
+            this.panel28.TabIndex = 0;
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.panel79);
             this.tabPage3.Controls.Add(this.panel4);
+            this.tabPage3.Controls.Add(this.panel73);
+            this.tabPage3.Controls.Add(this.panel78);
+            this.tabPage3.Controls.Add(this.panel74);
+            this.tabPage3.Controls.Add(this.panel77);
+            this.tabPage3.Controls.Add(this.panel75);
+            this.tabPage3.Controls.Add(this.panel76);
             this.tabPage3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(260, 600);
+            this.tabPage3.Size = new System.Drawing.Size(260, 640);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "LAYER";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.panel79);
-            this.panel4.Controls.Add(this.panel78);
-            this.panel4.Controls.Add(this.panel77);
-            this.panel4.Controls.Add(this.panel76);
-            this.panel4.Controls.Add(this.panel75);
-            this.panel4.Controls.Add(this.panel74);
-            this.panel4.Controls.Add(this.panel73);
-            this.panel4.Controls.Add(this.label53);
-            this.panel4.Controls.Add(this.panel6);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(260, 586);
-            this.panel4.TabIndex = 0;
-            // 
             // panel79
             // 
             this.panel79.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel79.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel79.Controls.Add(this.label110);
             this.panel79.Controls.Add(this.label39);
             this.panel79.Controls.Add(this.label38);
             this.panel79.Controls.Add(this.panel22);
             this.panel79.Controls.Add(this.panel26);
             this.panel79.Controls.Add(this.layerWaveEffect);
-            this.panel79.Location = new System.Drawing.Point(0, 528);
+            this.panel79.Location = new System.Drawing.Point(0, 556);
             this.panel79.Name = "panel79";
-            this.panel79.Size = new System.Drawing.Size(256, 54);
+            this.panel79.Size = new System.Drawing.Size(260, 58);
             this.panel79.TabIndex = 449;
             // 
             // label110
@@ -4272,722 +4302,54 @@ namespace LAZYSHELL
             this.layerWaveEffect.UseVisualStyleBackColor = false;
             this.layerWaveEffect.CheckedChanged += new System.EventHandler(this.layerWaveEffect_CheckedChanged);
             // 
-            // panel78
-            // 
-            this.panel78.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel78.Controls.Add(this.label7);
-            this.panel78.Controls.Add(this.label85);
-            this.panel78.Controls.Add(this.label84);
-            this.panel78.Controls.Add(this.label83);
-            this.panel78.Controls.Add(this.label82);
-            this.panel78.Controls.Add(this.panel21);
-            this.panel78.Controls.Add(this.panel23);
-            this.panel78.Controls.Add(this.panel24);
-            this.panel78.Controls.Add(this.layerInfiniteAutoscroll);
-            this.panel78.Controls.Add(this.panel25);
-            this.panel78.Controls.Add(this.layerL2ScrollShift);
-            this.panel78.Controls.Add(this.layerL3ScrollShift);
-            this.panel78.Location = new System.Drawing.Point(0, 418);
-            this.panel78.Name = "panel78";
-            this.panel78.Size = new System.Drawing.Size(256, 108);
-            this.panel78.TabIndex = 448;
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label7.Size = new System.Drawing.Size(126, 17);
-            this.label7.TabIndex = 108;
-            this.label7.Text = "AUTOSCROLLING";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label85
-            // 
-            this.label85.BackColor = System.Drawing.SystemColors.Control;
-            this.label85.Location = new System.Drawing.Point(0, 37);
-            this.label85.Name = "label85";
-            this.label85.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label85.Size = new System.Drawing.Size(126, 17);
-            this.label85.TabIndex = 76;
-            this.label85.Text = "L2 Scroll Direction";
-            // 
-            // label84
-            // 
-            this.label84.BackColor = System.Drawing.SystemColors.Control;
-            this.label84.Location = new System.Drawing.Point(0, 55);
-            this.label84.Name = "label84";
-            this.label84.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label84.Size = new System.Drawing.Size(126, 17);
-            this.label84.TabIndex = 78;
-            this.label84.Text = "L2 Scroll Speed";
-            // 
-            // label83
-            // 
-            this.label83.BackColor = System.Drawing.SystemColors.Control;
-            this.label83.Location = new System.Drawing.Point(0, 73);
-            this.label83.Name = "label83";
-            this.label83.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label83.Size = new System.Drawing.Size(126, 17);
-            this.label83.TabIndex = 79;
-            this.label83.Text = "L3 Scroll Direction";
-            // 
-            // label82
-            // 
-            this.label82.BackColor = System.Drawing.SystemColors.Control;
-            this.label82.Location = new System.Drawing.Point(0, 91);
-            this.label82.Name = "label82";
-            this.label82.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label82.Size = new System.Drawing.Size(126, 17);
-            this.label82.TabIndex = 81;
-            this.label82.Text = "L3 Scroll Speed";
-            // 
-            // panel21
-            // 
-            this.panel21.BackColor = System.Drawing.SystemColors.Window;
-            this.panel21.Controls.Add(this.layerL2ScrollDirection);
-            this.panel21.Location = new System.Drawing.Point(127, 37);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(130, 17);
-            this.panel21.TabIndex = 43;
-            // 
-            // layerL2ScrollDirection
-            // 
-            this.layerL2ScrollDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.layerL2ScrollDirection.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.layerL2ScrollDirection.Items.AddRange(new object[] {
-            "Left",
-            "Up-Left",
-            "Up",
-            "Up-Right",
-            "Right",
-            "Down-Right",
-            "Down",
-            "Down-Left"});
-            this.layerL2ScrollDirection.Location = new System.Drawing.Point(-2, -2);
-            this.layerL2ScrollDirection.Name = "layerL2ScrollDirection";
-            this.layerL2ScrollDirection.Size = new System.Drawing.Size(133, 21);
-            this.layerL2ScrollDirection.TabIndex = 64;
-            this.layerL2ScrollDirection.SelectedIndexChanged += new System.EventHandler(this.layerL2ScrollDirection_SelectedIndexChanged);
-            // 
-            // panel23
-            // 
-            this.panel23.BackColor = System.Drawing.SystemColors.Window;
-            this.panel23.Controls.Add(this.layerL2ScrollSpeed);
-            this.panel23.Location = new System.Drawing.Point(127, 55);
-            this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(130, 17);
-            this.panel23.TabIndex = 44;
-            // 
-            // layerL2ScrollSpeed
-            // 
-            this.layerL2ScrollSpeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.layerL2ScrollSpeed.Items.AddRange(new object[] {
-            "(none)",
-            "Very Slow",
-            "Slow",
-            "Medium Slow",
-            "Medium Fast",
-            "Fast",
-            "Very Fast"});
-            this.layerL2ScrollSpeed.Location = new System.Drawing.Point(-2, -2);
-            this.layerL2ScrollSpeed.Name = "layerL2ScrollSpeed";
-            this.layerL2ScrollSpeed.Size = new System.Drawing.Size(133, 21);
-            this.layerL2ScrollSpeed.TabIndex = 64;
-            this.layerL2ScrollSpeed.SelectedIndexChanged += new System.EventHandler(this.layerL2ScrollSpeed_SelectedIndexChanged);
-            // 
-            // panel24
-            // 
-            this.panel24.BackColor = System.Drawing.SystemColors.Window;
-            this.panel24.Controls.Add(this.layerL3ScrollDirection);
-            this.panel24.Location = new System.Drawing.Point(127, 73);
-            this.panel24.Name = "panel24";
-            this.panel24.Size = new System.Drawing.Size(130, 17);
-            this.panel24.TabIndex = 45;
-            // 
-            // layerL3ScrollDirection
-            // 
-            this.layerL3ScrollDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.layerL3ScrollDirection.Items.AddRange(new object[] {
-            "Left",
-            "Up-Left",
-            "Up",
-            "Up-Right",
-            "Right",
-            "Down-Right",
-            "Down",
-            "Down-Left"});
-            this.layerL3ScrollDirection.Location = new System.Drawing.Point(-2, -2);
-            this.layerL3ScrollDirection.Name = "layerL3ScrollDirection";
-            this.layerL3ScrollDirection.Size = new System.Drawing.Size(133, 21);
-            this.layerL3ScrollDirection.TabIndex = 64;
-            this.layerL3ScrollDirection.SelectedIndexChanged += new System.EventHandler(this.layerL3ScrollDirection_SelectedIndexChanged);
-            // 
-            // layerInfiniteAutoscroll
-            // 
-            this.layerInfiniteAutoscroll.Appearance = System.Windows.Forms.Appearance.Button;
-            this.layerInfiniteAutoscroll.BackColor = System.Drawing.SystemColors.Control;
-            this.layerInfiniteAutoscroll.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layerInfiniteAutoscroll.ForeColor = System.Drawing.Color.Gray;
-            this.layerInfiniteAutoscroll.Location = new System.Drawing.Point(127, 0);
-            this.layerInfiniteAutoscroll.Name = "layerInfiniteAutoscroll";
-            this.layerInfiniteAutoscroll.Size = new System.Drawing.Size(129, 18);
-            this.layerInfiniteAutoscroll.TabIndex = 40;
-            this.layerInfiniteAutoscroll.Text = "INFINITE";
-            this.layerInfiniteAutoscroll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.layerInfiniteAutoscroll.UseCompatibleTextRendering = true;
-            this.layerInfiniteAutoscroll.UseVisualStyleBackColor = false;
-            this.layerInfiniteAutoscroll.CheckedChanged += new System.EventHandler(this.layerInfiniteAutoscroll_CheckedChanged);
-            // 
-            // panel25
-            // 
-            this.panel25.BackColor = System.Drawing.SystemColors.Window;
-            this.panel25.Controls.Add(this.layerL3ScrollSpeed);
-            this.panel25.Location = new System.Drawing.Point(127, 91);
-            this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(130, 17);
-            this.panel25.TabIndex = 46;
-            // 
-            // layerL3ScrollSpeed
-            // 
-            this.layerL3ScrollSpeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.layerL3ScrollSpeed.Items.AddRange(new object[] {
-            "(none)",
-            "Very Slow",
-            "Slow",
-            "Medium Slow",
-            "Medium Fast",
-            "Fast",
-            "Very Fast"});
-            this.layerL3ScrollSpeed.Location = new System.Drawing.Point(-2, -2);
-            this.layerL3ScrollSpeed.Name = "layerL3ScrollSpeed";
-            this.layerL3ScrollSpeed.Size = new System.Drawing.Size(133, 21);
-            this.layerL3ScrollSpeed.TabIndex = 64;
-            this.layerL3ScrollSpeed.SelectedIndexChanged += new System.EventHandler(this.layerL3ScrollSpeed_SelectedIndexChanged);
-            // 
-            // layerL2ScrollShift
-            // 
-            this.layerL2ScrollShift.Appearance = System.Windows.Forms.Appearance.Button;
-            this.layerL2ScrollShift.BackColor = System.Drawing.SystemColors.Control;
-            this.layerL2ScrollShift.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layerL2ScrollShift.ForeColor = System.Drawing.Color.Gray;
-            this.layerL2ScrollShift.Location = new System.Drawing.Point(0, 19);
-            this.layerL2ScrollShift.Name = "layerL2ScrollShift";
-            this.layerL2ScrollShift.Size = new System.Drawing.Size(127, 18);
-            this.layerL2ScrollShift.TabIndex = 41;
-            this.layerL2ScrollShift.Text = "L2 SCROLL SHIFT";
-            this.layerL2ScrollShift.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.layerL2ScrollShift.UseCompatibleTextRendering = true;
-            this.layerL2ScrollShift.UseVisualStyleBackColor = false;
-            this.layerL2ScrollShift.CheckedChanged += new System.EventHandler(this.layerL2ScrollShift_CheckedChanged);
-            // 
-            // layerL3ScrollShift
-            // 
-            this.layerL3ScrollShift.Appearance = System.Windows.Forms.Appearance.Button;
-            this.layerL3ScrollShift.BackColor = System.Drawing.SystemColors.Control;
-            this.layerL3ScrollShift.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layerL3ScrollShift.ForeColor = System.Drawing.Color.Gray;
-            this.layerL3ScrollShift.Location = new System.Drawing.Point(127, 19);
-            this.layerL3ScrollShift.Name = "layerL3ScrollShift";
-            this.layerL3ScrollShift.Size = new System.Drawing.Size(129, 18);
-            this.layerL3ScrollShift.TabIndex = 42;
-            this.layerL3ScrollShift.Text = "L3 SCROLL SHIFT";
-            this.layerL3ScrollShift.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.layerL3ScrollShift.UseCompatibleTextRendering = true;
-            this.layerL3ScrollShift.UseVisualStyleBackColor = false;
-            this.layerL3ScrollShift.CheckedChanged += new System.EventHandler(this.layerL3ScrollShift_CheckedChanged);
-            // 
-            // panel77
-            // 
-            this.panel77.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel77.Controls.Add(this.label6);
-            this.panel77.Controls.Add(this.label12);
-            this.panel77.Controls.Add(this.label13);
-            this.panel77.Controls.Add(this.label11);
-            this.panel77.Controls.Add(this.label3);
-            this.panel77.Controls.Add(this.panel16);
-            this.panel77.Controls.Add(this.panel19);
-            this.panel77.Controls.Add(this.panel18);
-            this.panel77.Controls.Add(this.panel20);
-            this.panel77.Location = new System.Drawing.Point(0, 326);
-            this.panel77.Name = "panel77";
-            this.panel77.Size = new System.Drawing.Size(256, 90);
-            this.panel77.TabIndex = 447;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.SystemColors.Control;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label6.Size = new System.Drawing.Size(256, 17);
-            this.label6.TabIndex = 106;
-            this.label6.Text = "LAYER SCROLLING SYNCHRONIZATION";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label12
-            // 
-            this.label12.BackColor = System.Drawing.SystemColors.Control;
-            this.label12.Location = new System.Drawing.Point(0, 19);
-            this.label12.Name = "label12";
-            this.label12.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label12.Size = new System.Drawing.Size(126, 17);
-            this.label12.TabIndex = 181;
-            this.label12.Text = "L2 Vertical Sync";
-            // 
-            // label13
-            // 
-            this.label13.BackColor = System.Drawing.SystemColors.Control;
-            this.label13.Location = new System.Drawing.Point(0, 37);
-            this.label13.Name = "label13";
-            this.label13.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label13.Size = new System.Drawing.Size(126, 17);
-            this.label13.TabIndex = 182;
-            this.label13.Text = "L2 Horizontal Sync";
-            // 
-            // label11
-            // 
-            this.label11.BackColor = System.Drawing.SystemColors.Control;
-            this.label11.Location = new System.Drawing.Point(0, 55);
-            this.label11.Name = "label11";
-            this.label11.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label11.Size = new System.Drawing.Size(126, 17);
-            this.label11.TabIndex = 183;
-            this.label11.Text = "L3 Vertical Sync";
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(0, 73);
-            this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label3.Size = new System.Drawing.Size(126, 17);
-            this.label3.TabIndex = 184;
-            this.label3.Text = "L3 Horizontal Sync";
-            // 
-            // panel16
-            // 
-            this.panel16.BackColor = System.Drawing.SystemColors.Window;
-            this.panel16.Controls.Add(this.layerL2VSync);
-            this.panel16.Location = new System.Drawing.Point(127, 19);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(129, 17);
-            this.panel16.TabIndex = 36;
-            // 
-            // layerL2VSync
-            // 
-            this.layerL2VSync.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.layerL2VSync.Items.AddRange(new object[] {
-            "None",
-            "Low",
-            "Normal",
-            "High"});
-            this.layerL2VSync.Location = new System.Drawing.Point(-2, -2);
-            this.layerL2VSync.Name = "layerL2VSync";
-            this.layerL2VSync.Size = new System.Drawing.Size(133, 21);
-            this.layerL2VSync.TabIndex = 64;
-            this.layerL2VSync.SelectedIndexChanged += new System.EventHandler(this.layerL2VSync_SelectedIndexChanged);
-            // 
-            // panel19
-            // 
-            this.panel19.BackColor = System.Drawing.SystemColors.Window;
-            this.panel19.Controls.Add(this.layerL3VSync);
-            this.panel19.Location = new System.Drawing.Point(127, 55);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(129, 17);
-            this.panel19.TabIndex = 38;
-            // 
-            // layerL3VSync
-            // 
-            this.layerL3VSync.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.layerL3VSync.Items.AddRange(new object[] {
-            "None",
-            "Low",
-            "Normal",
-            "High"});
-            this.layerL3VSync.Location = new System.Drawing.Point(-2, -2);
-            this.layerL3VSync.Name = "layerL3VSync";
-            this.layerL3VSync.Size = new System.Drawing.Size(133, 21);
-            this.layerL3VSync.TabIndex = 64;
-            this.layerL3VSync.SelectedIndexChanged += new System.EventHandler(this.layerL3VSync_SelectedIndexChanged);
-            // 
-            // panel18
-            // 
-            this.panel18.BackColor = System.Drawing.SystemColors.Window;
-            this.panel18.Controls.Add(this.layerL2HSync);
-            this.panel18.Location = new System.Drawing.Point(127, 37);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(129, 17);
-            this.panel18.TabIndex = 37;
-            // 
-            // layerL2HSync
-            // 
-            this.layerL2HSync.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.layerL2HSync.Items.AddRange(new object[] {
-            "None",
-            "Low",
-            "Normal",
-            "High"});
-            this.layerL2HSync.Location = new System.Drawing.Point(-2, -2);
-            this.layerL2HSync.Name = "layerL2HSync";
-            this.layerL2HSync.Size = new System.Drawing.Size(133, 21);
-            this.layerL2HSync.TabIndex = 64;
-            this.layerL2HSync.SelectedIndexChanged += new System.EventHandler(this.layerL2HSync_SelectedIndexChanged);
-            // 
-            // panel20
-            // 
-            this.panel20.BackColor = System.Drawing.SystemColors.Window;
-            this.panel20.Controls.Add(this.layerL3HSync);
-            this.panel20.Location = new System.Drawing.Point(127, 73);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(129, 17);
-            this.panel20.TabIndex = 39;
-            // 
-            // layerL3HSync
-            // 
-            this.layerL3HSync.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.layerL3HSync.Items.AddRange(new object[] {
-            "None",
-            "Low",
-            "Normal",
-            "High"});
-            this.layerL3HSync.Location = new System.Drawing.Point(-2, -2);
-            this.layerL3HSync.Name = "layerL3HSync";
-            this.layerL3HSync.Size = new System.Drawing.Size(133, 21);
-            this.layerL3HSync.TabIndex = 64;
-            this.layerL3HSync.SelectedIndexChanged += new System.EventHandler(this.layerL3HSync_SelectedIndexChanged);
-            // 
-            // panel76
-            // 
-            this.panel76.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel76.Controls.Add(this.label91);
-            this.panel76.Controls.Add(this.layerScrollWrapping);
-            this.panel76.Location = new System.Drawing.Point(0, 241);
-            this.panel76.Name = "panel76";
-            this.panel76.Size = new System.Drawing.Size(256, 83);
-            this.panel76.TabIndex = 446;
-            // 
-            // label91
-            // 
-            this.label91.BackColor = System.Drawing.SystemColors.Control;
-            this.label91.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label91.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label91.Location = new System.Drawing.Point(0, 0);
-            this.label91.Name = "label91";
-            this.label91.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label91.Size = new System.Drawing.Size(256, 17);
-            this.label91.TabIndex = 104;
-            this.label91.Text = "SCROLL WRAPPING";
-            this.label91.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // layerScrollWrapping
-            // 
-            this.layerScrollWrapping.BackColor = System.Drawing.SystemColors.Window;
-            this.layerScrollWrapping.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.layerScrollWrapping.CheckOnClick = true;
-            this.layerScrollWrapping.ColumnWidth = 118;
-            this.layerScrollWrapping.Items.AddRange(new object[] {
-            "L1 horizontal",
-            "L1 vertical",
-            "L2 horizontal",
-            "L2 vertical",
-            "L3 horizontal",
-            "L3 vertical",
-            "(used only Culex)",
-            "(used only Culex)"});
-            this.layerScrollWrapping.Location = new System.Drawing.Point(0, 19);
-            this.layerScrollWrapping.MultiColumn = true;
-            this.layerScrollWrapping.Name = "layerScrollWrapping";
-            this.layerScrollWrapping.Size = new System.Drawing.Size(256, 64);
-            this.layerScrollWrapping.TabIndex = 35;
-            this.layerScrollWrapping.SelectedIndexChanged += new System.EventHandler(this.layerScrollWrapping_SelectedIndexChanged);
-            // 
-            // panel75
-            // 
-            this.panel75.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel75.Controls.Add(this.label5);
-            this.panel75.Controls.Add(this.layerL2LeftShift);
-            this.panel75.Controls.Add(this.layerL2UpShift);
-            this.panel75.Controls.Add(this.label23);
-            this.panel75.Controls.Add(this.label10);
-            this.panel75.Controls.Add(this.layerL3LeftShift);
-            this.panel75.Controls.Add(this.label9);
-            this.panel75.Controls.Add(this.layerL3UpShift);
-            this.panel75.Controls.Add(this.label8);
-            this.panel75.Location = new System.Drawing.Point(0, 185);
-            this.panel75.Name = "panel75";
-            this.panel75.Size = new System.Drawing.Size(256, 54);
-            this.panel75.TabIndex = 445;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.SystemColors.Control;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label5.Size = new System.Drawing.Size(256, 17);
-            this.label5.TabIndex = 104;
-            this.label5.Text = "LAYER SHIFTING";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // layerL2LeftShift
-            // 
-            this.layerL2LeftShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.layerL2LeftShift.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layerL2LeftShift.Location = new System.Drawing.Point(75, 19);
-            this.layerL2LeftShift.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.layerL2LeftShift.Name = "layerL2LeftShift";
-            this.layerL2LeftShift.Size = new System.Drawing.Size(54, 17);
-            this.layerL2LeftShift.TabIndex = 31;
-            this.layerL2LeftShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.layerL2LeftShift.ValueChanged += new System.EventHandler(this.layerL2LeftShift_ValueChanged);
-            // 
-            // layerL2UpShift
-            // 
-            this.layerL2UpShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.layerL2UpShift.Location = new System.Drawing.Point(75, 37);
-            this.layerL2UpShift.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.layerL2UpShift.Name = "layerL2UpShift";
-            this.layerL2UpShift.Size = new System.Drawing.Size(54, 17);
-            this.layerL2UpShift.TabIndex = 33;
-            this.layerL2UpShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.layerL2UpShift.ValueChanged += new System.EventHandler(this.layerL2UpShift_ValueChanged);
-            // 
-            // label23
-            // 
-            this.label23.BackColor = System.Drawing.SystemColors.Control;
-            this.label23.Location = new System.Drawing.Point(0, 19);
-            this.label23.Name = "label23";
-            this.label23.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label23.Size = new System.Drawing.Size(74, 17);
-            this.label23.TabIndex = 82;
-            this.label23.Text = "L2 Left Shift";
-            // 
-            // label10
-            // 
-            this.label10.BackColor = System.Drawing.SystemColors.Control;
-            this.label10.Location = new System.Drawing.Point(0, 37);
-            this.label10.Name = "label10";
-            this.label10.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label10.Size = new System.Drawing.Size(74, 17);
-            this.label10.TabIndex = 83;
-            this.label10.Text = "L2 Up Shift";
-            // 
-            // layerL3LeftShift
-            // 
-            this.layerL3LeftShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.layerL3LeftShift.Location = new System.Drawing.Point(205, 19);
-            this.layerL3LeftShift.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.layerL3LeftShift.Name = "layerL3LeftShift";
-            this.layerL3LeftShift.Size = new System.Drawing.Size(51, 17);
-            this.layerL3LeftShift.TabIndex = 32;
-            this.layerL3LeftShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.layerL3LeftShift.ValueChanged += new System.EventHandler(this.layerL3LeftShift_ValueChanged);
-            // 
-            // label9
-            // 
-            this.label9.BackColor = System.Drawing.SystemColors.Control;
-            this.label9.Location = new System.Drawing.Point(130, 19);
-            this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label9.Size = new System.Drawing.Size(74, 17);
-            this.label9.TabIndex = 85;
-            this.label9.Text = "L3 Left Shift";
-            // 
-            // layerL3UpShift
-            // 
-            this.layerL3UpShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.layerL3UpShift.Location = new System.Drawing.Point(205, 37);
-            this.layerL3UpShift.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.layerL3UpShift.Name = "layerL3UpShift";
-            this.layerL3UpShift.Size = new System.Drawing.Size(51, 17);
-            this.layerL3UpShift.TabIndex = 34;
-            this.layerL3UpShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.layerL3UpShift.ValueChanged += new System.EventHandler(this.layerL3UpShift_ValueChanged);
-            // 
-            // label8
-            // 
-            this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(130, 37);
-            this.label8.Name = "label8";
-            this.label8.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label8.Size = new System.Drawing.Size(74, 17);
-            this.label8.TabIndex = 86;
-            this.label8.Text = "L3 Up Shift";
-            // 
-            // panel74
-            // 
-            this.panel74.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel74.Controls.Add(this.label4);
-            this.panel74.Controls.Add(this.layerMaskHighX);
-            this.panel74.Controls.Add(this.layerLockMask);
-            this.panel74.Controls.Add(this.layerMaskLowX);
-            this.panel74.Controls.Add(this.label25);
-            this.panel74.Controls.Add(this.layerMaskHighY);
-            this.panel74.Controls.Add(this.label24);
-            this.panel74.Controls.Add(this.layerMaskLowY);
-            this.panel74.Controls.Add(this.label15);
-            this.panel74.Controls.Add(this.labeasdfasd);
-            this.panel74.Location = new System.Drawing.Point(0, 129);
-            this.panel74.Name = "panel74";
-            this.panel74.Size = new System.Drawing.Size(256, 54);
-            this.panel74.TabIndex = 444;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.SystemColors.Control;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label4.Size = new System.Drawing.Size(129, 17);
-            this.label4.TabIndex = 84;
-            this.label4.Text = "LAYER MASK";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // layerMaskHighX
-            // 
-            this.layerMaskHighX.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.layerMaskHighX.Location = new System.Drawing.Point(75, 19);
-            this.layerMaskHighX.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.layerMaskHighX.Name = "layerMaskHighX";
-            this.layerMaskHighX.Size = new System.Drawing.Size(54, 17);
-            this.layerMaskHighX.TabIndex = 27;
-            this.layerMaskHighX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.layerMaskHighX.ValueChanged += new System.EventHandler(this.layerMaskHighX_ValueChanged);
-            // 
-            // layerLockMask
-            // 
-            this.layerLockMask.Appearance = System.Windows.Forms.Appearance.Button;
-            this.layerLockMask.BackColor = System.Drawing.SystemColors.Control;
-            this.layerLockMask.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layerLockMask.ForeColor = System.Drawing.Color.Gray;
-            this.layerLockMask.Location = new System.Drawing.Point(130, 0);
-            this.layerLockMask.Name = "layerLockMask";
-            this.layerLockMask.Size = new System.Drawing.Size(126, 19);
-            this.layerLockMask.TabIndex = 26;
-            this.layerLockMask.Text = "LOCK SCROLLING";
-            this.layerLockMask.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.layerLockMask.UseCompatibleTextRendering = true;
-            this.layerLockMask.UseVisualStyleBackColor = false;
-            this.layerLockMask.CheckedChanged += new System.EventHandler(this.layerLockMask_CheckedChanged);
-            // 
-            // layerMaskLowX
-            // 
-            this.layerMaskLowX.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.layerMaskLowX.Location = new System.Drawing.Point(75, 37);
-            this.layerMaskLowX.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.layerMaskLowX.Name = "layerMaskLowX";
-            this.layerMaskLowX.Size = new System.Drawing.Size(54, 17);
-            this.layerMaskLowX.TabIndex = 29;
-            this.layerMaskLowX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.layerMaskLowX.ValueChanged += new System.EventHandler(this.layerMaskLowX_ValueChanged);
-            // 
-            // label25
-            // 
-            this.label25.BackColor = System.Drawing.SystemColors.Control;
-            this.label25.Location = new System.Drawing.Point(0, 19);
-            this.label25.Name = "label25";
-            this.label25.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label25.Size = new System.Drawing.Size(74, 17);
-            this.label25.TabIndex = 96;
-            this.label25.Text = "Right Edge";
-            // 
-            // layerMaskHighY
-            // 
-            this.layerMaskHighY.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.layerMaskHighY.Location = new System.Drawing.Point(205, 19);
-            this.layerMaskHighY.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.layerMaskHighY.Name = "layerMaskHighY";
-            this.layerMaskHighY.Size = new System.Drawing.Size(51, 17);
-            this.layerMaskHighY.TabIndex = 28;
-            this.layerMaskHighY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.layerMaskHighY.ValueChanged += new System.EventHandler(this.layerMaskHighY_ValueChanged);
-            // 
-            // label24
-            // 
-            this.label24.BackColor = System.Drawing.SystemColors.Control;
-            this.label24.Location = new System.Drawing.Point(0, 37);
-            this.label24.Name = "label24";
-            this.label24.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label24.Size = new System.Drawing.Size(74, 17);
-            this.label24.TabIndex = 98;
-            this.label24.Text = "Left Edge";
-            // 
-            // layerMaskLowY
-            // 
-            this.layerMaskLowY.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.layerMaskLowY.Location = new System.Drawing.Point(205, 37);
-            this.layerMaskLowY.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.layerMaskLowY.Name = "layerMaskLowY";
-            this.layerMaskLowY.Size = new System.Drawing.Size(51, 17);
-            this.layerMaskLowY.TabIndex = 30;
-            this.layerMaskLowY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.layerMaskLowY.ValueChanged += new System.EventHandler(this.layerMaskLowY_ValueChanged);
-            // 
-            // label15
-            // 
-            this.label15.BackColor = System.Drawing.SystemColors.Control;
-            this.label15.Location = new System.Drawing.Point(130, 19);
-            this.label15.Name = "label15";
-            this.label15.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label15.Size = new System.Drawing.Size(74, 17);
-            this.label15.TabIndex = 100;
-            this.label15.Text = "Bottom Edge";
-            // 
-            // labeasdfasd
-            // 
-            this.labeasdfasd.BackColor = System.Drawing.SystemColors.Control;
-            this.labeasdfasd.Location = new System.Drawing.Point(130, 37);
-            this.labeasdfasd.Name = "labeasdfasd";
-            this.labeasdfasd.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labeasdfasd.Size = new System.Drawing.Size(74, 17);
-            this.labeasdfasd.TabIndex = 103;
-            this.labeasdfasd.Text = "Top Edge";
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.label53);
+            this.panel4.Controls.Add(this.panel6);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(260, 21);
+            this.panel4.TabIndex = 0;
+            // 
+            // label53
+            // 
+            this.label53.BackColor = System.Drawing.SystemColors.Control;
+            this.label53.Location = new System.Drawing.Point(0, 0);
+            this.label53.Name = "label53";
+            this.label53.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label53.Size = new System.Drawing.Size(74, 17);
+            this.label53.TabIndex = 137;
+            this.label53.Text = "Message";
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.SystemColors.Window;
+            this.panel6.Controls.Add(this.layerMessageBox);
+            this.panel6.Location = new System.Drawing.Point(75, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(181, 17);
+            this.panel6.TabIndex = 7;
+            // 
+            // layerMessageBox
+            // 
+            this.layerMessageBox.BackColor = System.Drawing.SystemColors.Window;
+            this.layerMessageBox.DropDownHeight = 301;
+            this.layerMessageBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.layerMessageBox.DropDownWidth = 250;
+            this.layerMessageBox.IntegralHeight = false;
+            this.layerMessageBox.Location = new System.Drawing.Point(-2, -2);
+            this.layerMessageBox.Name = "layerMessageBox";
+            this.layerMessageBox.Size = new System.Drawing.Size(185, 21);
+            this.layerMessageBox.TabIndex = 119;
+            this.layerMessageBox.SelectedIndexChanged += new System.EventHandler(this.layerMessageBox_SelectedIndexChanged);
             // 
             // panel73
             // 
             this.panel73.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel73.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel73.Controls.Add(this.panel86);
             this.panel73.Controls.Add(this.label86);
             this.panel73.Controls.Add(this.label20);
@@ -5014,9 +4376,9 @@ namespace LAZYSHELL
             this.panel73.Controls.Add(this.label95);
             this.panel73.Controls.Add(this.checkBox16);
             this.panel73.Controls.Add(this.label22);
-            this.panel73.Location = new System.Drawing.Point(0, 19);
+            this.panel73.Location = new System.Drawing.Point(0, 23);
             this.panel73.Name = "panel73";
-            this.panel73.Size = new System.Drawing.Size(256, 108);
+            this.panel73.Size = new System.Drawing.Size(260, 112);
             this.panel73.TabIndex = 444;
             // 
             // panel86
@@ -5397,365 +4759,753 @@ namespace LAZYSHELL
             this.label22.TabIndex = 176;
             this.label22.Text = "Color Math";
             // 
-            // label53
+            // panel78
             // 
-            this.label53.BackColor = System.Drawing.SystemColors.Control;
-            this.label53.Location = new System.Drawing.Point(0, 0);
-            this.label53.Name = "label53";
-            this.label53.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label53.Size = new System.Drawing.Size(74, 17);
-            this.label53.TabIndex = 137;
-            this.label53.Text = "Message";
+            this.panel78.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel78.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel78.Controls.Add(this.label7);
+            this.panel78.Controls.Add(this.label85);
+            this.panel78.Controls.Add(this.label84);
+            this.panel78.Controls.Add(this.label83);
+            this.panel78.Controls.Add(this.label82);
+            this.panel78.Controls.Add(this.panel21);
+            this.panel78.Controls.Add(this.panel23);
+            this.panel78.Controls.Add(this.panel24);
+            this.panel78.Controls.Add(this.layerInfiniteAutoscroll);
+            this.panel78.Controls.Add(this.panel25);
+            this.panel78.Controls.Add(this.layerL2ScrollShift);
+            this.panel78.Controls.Add(this.layerL3ScrollShift);
+            this.panel78.Location = new System.Drawing.Point(0, 442);
+            this.panel78.Name = "panel78";
+            this.panel78.Size = new System.Drawing.Size(260, 112);
+            this.panel78.TabIndex = 448;
             // 
-            // panel6
+            // label7
             // 
-            this.panel6.BackColor = System.Drawing.SystemColors.Window;
-            this.panel6.Controls.Add(this.layerMessageBox);
-            this.panel6.Location = new System.Drawing.Point(75, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(181, 17);
-            this.panel6.TabIndex = 7;
+            this.label7.BackColor = System.Drawing.SystemColors.Control;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label7.Size = new System.Drawing.Size(126, 17);
+            this.label7.TabIndex = 108;
+            this.label7.Text = "AUTOSCROLLING";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // layerMessageBox
+            // label85
             // 
-            this.layerMessageBox.BackColor = System.Drawing.SystemColors.Window;
-            this.layerMessageBox.DropDownHeight = 301;
-            this.layerMessageBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.layerMessageBox.DropDownWidth = 250;
-            this.layerMessageBox.IntegralHeight = false;
-            this.layerMessageBox.Location = new System.Drawing.Point(-2, -2);
-            this.layerMessageBox.Name = "layerMessageBox";
-            this.layerMessageBox.Size = new System.Drawing.Size(185, 21);
-            this.layerMessageBox.TabIndex = 119;
-            this.layerMessageBox.SelectedIndexChanged += new System.EventHandler(this.layerMessageBox_SelectedIndexChanged);
+            this.label85.BackColor = System.Drawing.SystemColors.Control;
+            this.label85.Location = new System.Drawing.Point(0, 37);
+            this.label85.Name = "label85";
+            this.label85.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label85.Size = new System.Drawing.Size(126, 17);
+            this.label85.TabIndex = 76;
+            this.label85.Text = "L2 Scroll Direction";
             // 
-            // tabPage1
+            // label84
             // 
-            this.tabPage1.Controls.Add(this.panel27);
-            this.tabPage1.Controls.Add(this.panel8);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(260, 600);
-            this.tabPage1.TabIndex = 5;
-            this.tabPage1.Text = "MODS";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.label84.BackColor = System.Drawing.SystemColors.Control;
+            this.label84.Location = new System.Drawing.Point(0, 55);
+            this.label84.Name = "label84";
+            this.label84.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label84.Size = new System.Drawing.Size(126, 17);
+            this.label84.TabIndex = 78;
+            this.label84.Text = "L2 Scroll Speed";
             // 
-            // panel27
+            // label83
             // 
-            this.panel27.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel27.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel27.Controls.Add(this.label68);
-            this.panel27.Controls.Add(this.panel44);
-            this.panel27.Controls.Add(this.panel45);
-            this.panel27.Controls.Add(this.panel41);
-            this.panel27.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel27.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel27.Location = new System.Drawing.Point(0, 300);
-            this.panel27.Name = "panel27";
-            this.panel27.Size = new System.Drawing.Size(260, 300);
-            this.panel27.TabIndex = 2;
+            this.label83.BackColor = System.Drawing.SystemColors.Control;
+            this.label83.Location = new System.Drawing.Point(0, 73);
+            this.label83.Name = "label83";
+            this.label83.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label83.Size = new System.Drawing.Size(126, 17);
+            this.label83.TabIndex = 79;
+            this.label83.Text = "L3 Scroll Direction";
             // 
-            // label68
+            // label82
             // 
-            this.label68.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label68.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label68.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label68.ForeColor = System.Drawing.SystemColors.Control;
-            this.label68.Location = new System.Drawing.Point(0, 0);
-            this.label68.Name = "label68";
-            this.label68.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label68.Size = new System.Drawing.Size(256, 17);
-            this.label68.TabIndex = 498;
-            this.label68.Text = "SOLIDITY MAP MODS";
-            this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label82.BackColor = System.Drawing.SystemColors.Control;
+            this.label82.Location = new System.Drawing.Point(0, 91);
+            this.label82.Name = "label82";
+            this.label82.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label82.Size = new System.Drawing.Size(126, 17);
+            this.label82.TabIndex = 81;
+            this.label82.Text = "L3 Scroll Speed";
             // 
-            // panel44
+            // panel21
             // 
-            this.panel44.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel44.Controls.Add(this.label14);
-            this.panel44.Controls.Add(this.solidModsY);
-            this.panel44.Controls.Add(this.label51);
-            this.panel44.Controls.Add(this.solidModsX);
-            this.panel44.Controls.Add(this.solidModsHeight);
-            this.panel44.Controls.Add(this.solidModsWidth);
-            this.panel44.Controls.Add(this.label64);
-            this.panel44.Controls.Add(this.label67);
-            this.panel44.Location = new System.Drawing.Point(127, 45);
-            this.panel44.Name = "panel44";
-            this.panel44.Size = new System.Drawing.Size(129, 251);
-            this.panel44.TabIndex = 495;
+            this.panel21.BackColor = System.Drawing.SystemColors.Window;
+            this.panel21.Controls.Add(this.layerL2ScrollDirection);
+            this.panel21.Location = new System.Drawing.Point(127, 37);
+            this.panel21.Name = "panel21";
+            this.panel21.Size = new System.Drawing.Size(130, 17);
+            this.panel21.TabIndex = 43;
             // 
-            // label14
+            // layerL2ScrollDirection
             // 
-            this.label14.BackColor = System.Drawing.SystemColors.Control;
-            this.label14.Location = new System.Drawing.Point(0, 0);
-            this.label14.Name = "label14";
-            this.label14.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label14.Size = new System.Drawing.Size(58, 17);
-            this.label14.TabIndex = 474;
-            this.label14.Text = "X Coord";
+            this.layerL2ScrollDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.layerL2ScrollDirection.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.layerL2ScrollDirection.Items.AddRange(new object[] {
+            "Left",
+            "Up-Left",
+            "Up",
+            "Up-Right",
+            "Right",
+            "Down-Right",
+            "Down",
+            "Down-Left"});
+            this.layerL2ScrollDirection.Location = new System.Drawing.Point(-2, -2);
+            this.layerL2ScrollDirection.Name = "layerL2ScrollDirection";
+            this.layerL2ScrollDirection.Size = new System.Drawing.Size(133, 21);
+            this.layerL2ScrollDirection.TabIndex = 64;
+            this.layerL2ScrollDirection.SelectedIndexChanged += new System.EventHandler(this.layerL2ScrollDirection_SelectedIndexChanged);
             // 
-            // solidModsY
+            // panel23
             // 
-            this.solidModsY.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.solidModsY.Location = new System.Drawing.Point(59, 18);
-            this.solidModsY.Maximum = new decimal(new int[] {
-            127,
-            0,
-            0,
-            0});
-            this.solidModsY.Name = "solidModsY";
-            this.solidModsY.Size = new System.Drawing.Size(70, 17);
-            this.solidModsY.TabIndex = 139;
-            this.solidModsY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.solidModsY.ValueChanged += new System.EventHandler(this.solidModsY_ValueChanged);
+            this.panel23.BackColor = System.Drawing.SystemColors.Window;
+            this.panel23.Controls.Add(this.layerL2ScrollSpeed);
+            this.panel23.Location = new System.Drawing.Point(127, 55);
+            this.panel23.Name = "panel23";
+            this.panel23.Size = new System.Drawing.Size(130, 17);
+            this.panel23.TabIndex = 44;
             // 
-            // label51
+            // layerL2ScrollSpeed
             // 
-            this.label51.BackColor = System.Drawing.SystemColors.Control;
-            this.label51.Location = new System.Drawing.Point(0, 18);
-            this.label51.Name = "label51";
-            this.label51.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label51.Size = new System.Drawing.Size(58, 17);
-            this.label51.TabIndex = 476;
-            this.label51.Text = "Y Coord";
+            this.layerL2ScrollSpeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.layerL2ScrollSpeed.Items.AddRange(new object[] {
+            "(none)",
+            "Very Slow",
+            "Slow",
+            "Medium Slow",
+            "Medium Fast",
+            "Fast",
+            "Very Fast"});
+            this.layerL2ScrollSpeed.Location = new System.Drawing.Point(-2, -2);
+            this.layerL2ScrollSpeed.Name = "layerL2ScrollSpeed";
+            this.layerL2ScrollSpeed.Size = new System.Drawing.Size(133, 21);
+            this.layerL2ScrollSpeed.TabIndex = 64;
+            this.layerL2ScrollSpeed.SelectedIndexChanged += new System.EventHandler(this.layerL2ScrollSpeed_SelectedIndexChanged);
             // 
-            // solidModsX
+            // panel24
             // 
-            this.solidModsX.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.solidModsX.Location = new System.Drawing.Point(59, 0);
-            this.solidModsX.Maximum = new decimal(new int[] {
+            this.panel24.BackColor = System.Drawing.SystemColors.Window;
+            this.panel24.Controls.Add(this.layerL3ScrollDirection);
+            this.panel24.Location = new System.Drawing.Point(127, 73);
+            this.panel24.Name = "panel24";
+            this.panel24.Size = new System.Drawing.Size(130, 17);
+            this.panel24.TabIndex = 45;
+            // 
+            // layerL3ScrollDirection
+            // 
+            this.layerL3ScrollDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.layerL3ScrollDirection.Items.AddRange(new object[] {
+            "Left",
+            "Up-Left",
+            "Up",
+            "Up-Right",
+            "Right",
+            "Down-Right",
+            "Down",
+            "Down-Left"});
+            this.layerL3ScrollDirection.Location = new System.Drawing.Point(-2, -2);
+            this.layerL3ScrollDirection.Name = "layerL3ScrollDirection";
+            this.layerL3ScrollDirection.Size = new System.Drawing.Size(133, 21);
+            this.layerL3ScrollDirection.TabIndex = 64;
+            this.layerL3ScrollDirection.SelectedIndexChanged += new System.EventHandler(this.layerL3ScrollDirection_SelectedIndexChanged);
+            // 
+            // layerInfiniteAutoscroll
+            // 
+            this.layerInfiniteAutoscroll.Appearance = System.Windows.Forms.Appearance.Button;
+            this.layerInfiniteAutoscroll.BackColor = System.Drawing.SystemColors.Control;
+            this.layerInfiniteAutoscroll.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layerInfiniteAutoscroll.ForeColor = System.Drawing.Color.Gray;
+            this.layerInfiniteAutoscroll.Location = new System.Drawing.Point(127, 0);
+            this.layerInfiniteAutoscroll.Name = "layerInfiniteAutoscroll";
+            this.layerInfiniteAutoscroll.Size = new System.Drawing.Size(129, 18);
+            this.layerInfiniteAutoscroll.TabIndex = 40;
+            this.layerInfiniteAutoscroll.Text = "INFINITE";
+            this.layerInfiniteAutoscroll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.layerInfiniteAutoscroll.UseCompatibleTextRendering = true;
+            this.layerInfiniteAutoscroll.UseVisualStyleBackColor = false;
+            this.layerInfiniteAutoscroll.CheckedChanged += new System.EventHandler(this.layerInfiniteAutoscroll_CheckedChanged);
+            // 
+            // panel25
+            // 
+            this.panel25.BackColor = System.Drawing.SystemColors.Window;
+            this.panel25.Controls.Add(this.layerL3ScrollSpeed);
+            this.panel25.Location = new System.Drawing.Point(127, 91);
+            this.panel25.Name = "panel25";
+            this.panel25.Size = new System.Drawing.Size(130, 17);
+            this.panel25.TabIndex = 46;
+            // 
+            // layerL3ScrollSpeed
+            // 
+            this.layerL3ScrollSpeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.layerL3ScrollSpeed.Items.AddRange(new object[] {
+            "(none)",
+            "Very Slow",
+            "Slow",
+            "Medium Slow",
+            "Medium Fast",
+            "Fast",
+            "Very Fast"});
+            this.layerL3ScrollSpeed.Location = new System.Drawing.Point(-2, -2);
+            this.layerL3ScrollSpeed.Name = "layerL3ScrollSpeed";
+            this.layerL3ScrollSpeed.Size = new System.Drawing.Size(133, 21);
+            this.layerL3ScrollSpeed.TabIndex = 64;
+            this.layerL3ScrollSpeed.SelectedIndexChanged += new System.EventHandler(this.layerL3ScrollSpeed_SelectedIndexChanged);
+            // 
+            // layerL2ScrollShift
+            // 
+            this.layerL2ScrollShift.Appearance = System.Windows.Forms.Appearance.Button;
+            this.layerL2ScrollShift.BackColor = System.Drawing.SystemColors.Control;
+            this.layerL2ScrollShift.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layerL2ScrollShift.ForeColor = System.Drawing.Color.Gray;
+            this.layerL2ScrollShift.Location = new System.Drawing.Point(0, 19);
+            this.layerL2ScrollShift.Name = "layerL2ScrollShift";
+            this.layerL2ScrollShift.Size = new System.Drawing.Size(127, 18);
+            this.layerL2ScrollShift.TabIndex = 41;
+            this.layerL2ScrollShift.Text = "L2 SCROLL SHIFT";
+            this.layerL2ScrollShift.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.layerL2ScrollShift.UseCompatibleTextRendering = true;
+            this.layerL2ScrollShift.UseVisualStyleBackColor = false;
+            this.layerL2ScrollShift.CheckedChanged += new System.EventHandler(this.layerL2ScrollShift_CheckedChanged);
+            // 
+            // layerL3ScrollShift
+            // 
+            this.layerL3ScrollShift.Appearance = System.Windows.Forms.Appearance.Button;
+            this.layerL3ScrollShift.BackColor = System.Drawing.SystemColors.Control;
+            this.layerL3ScrollShift.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layerL3ScrollShift.ForeColor = System.Drawing.Color.Gray;
+            this.layerL3ScrollShift.Location = new System.Drawing.Point(127, 19);
+            this.layerL3ScrollShift.Name = "layerL3ScrollShift";
+            this.layerL3ScrollShift.Size = new System.Drawing.Size(129, 18);
+            this.layerL3ScrollShift.TabIndex = 42;
+            this.layerL3ScrollShift.Text = "L3 SCROLL SHIFT";
+            this.layerL3ScrollShift.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.layerL3ScrollShift.UseCompatibleTextRendering = true;
+            this.layerL3ScrollShift.UseVisualStyleBackColor = false;
+            this.layerL3ScrollShift.CheckedChanged += new System.EventHandler(this.layerL3ScrollShift_CheckedChanged);
+            // 
+            // panel74
+            // 
+            this.panel74.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel74.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel74.Controls.Add(this.label4);
+            this.panel74.Controls.Add(this.layerMaskHighX);
+            this.panel74.Controls.Add(this.layerLockMask);
+            this.panel74.Controls.Add(this.layerMaskLowX);
+            this.panel74.Controls.Add(this.label25);
+            this.panel74.Controls.Add(this.layerMaskHighY);
+            this.panel74.Controls.Add(this.label24);
+            this.panel74.Controls.Add(this.layerMaskLowY);
+            this.panel74.Controls.Add(this.label15);
+            this.panel74.Controls.Add(this.labeasdfasd);
+            this.panel74.Location = new System.Drawing.Point(0, 137);
+            this.panel74.Name = "panel74";
+            this.panel74.Size = new System.Drawing.Size(260, 58);
+            this.panel74.TabIndex = 444;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.SystemColors.Control;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label4.Size = new System.Drawing.Size(129, 17);
+            this.label4.TabIndex = 84;
+            this.label4.Text = "LAYER MASK";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // layerMaskHighX
+            // 
+            this.layerMaskHighX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.layerMaskHighX.Location = new System.Drawing.Point(75, 19);
+            this.layerMaskHighX.Maximum = new decimal(new int[] {
             63,
             0,
             0,
             0});
-            this.solidModsX.Name = "solidModsX";
-            this.solidModsX.Size = new System.Drawing.Size(70, 17);
-            this.solidModsX.TabIndex = 138;
-            this.solidModsX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.solidModsX.ValueChanged += new System.EventHandler(this.solidModsX_ValueChanged);
+            this.layerMaskHighX.Name = "layerMaskHighX";
+            this.layerMaskHighX.Size = new System.Drawing.Size(54, 17);
+            this.layerMaskHighX.TabIndex = 27;
+            this.layerMaskHighX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.layerMaskHighX.ValueChanged += new System.EventHandler(this.layerMaskHighX_ValueChanged);
             // 
-            // solidModsHeight
+            // layerLockMask
             // 
-            this.solidModsHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.solidModsHeight.Location = new System.Drawing.Point(59, 54);
-            this.solidModsHeight.Maximum = new decimal(new int[] {
-            31,
+            this.layerLockMask.Appearance = System.Windows.Forms.Appearance.Button;
+            this.layerLockMask.BackColor = System.Drawing.SystemColors.Control;
+            this.layerLockMask.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layerLockMask.ForeColor = System.Drawing.Color.Gray;
+            this.layerLockMask.Location = new System.Drawing.Point(130, 0);
+            this.layerLockMask.Name = "layerLockMask";
+            this.layerLockMask.Size = new System.Drawing.Size(126, 19);
+            this.layerLockMask.TabIndex = 26;
+            this.layerLockMask.Text = "LOCK SCROLLING";
+            this.layerLockMask.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.layerLockMask.UseCompatibleTextRendering = true;
+            this.layerLockMask.UseVisualStyleBackColor = false;
+            this.layerLockMask.CheckedChanged += new System.EventHandler(this.layerLockMask_CheckedChanged);
+            // 
+            // layerMaskLowX
+            // 
+            this.layerMaskLowX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.layerMaskLowX.Location = new System.Drawing.Point(75, 37);
+            this.layerMaskLowX.Maximum = new decimal(new int[] {
+            63,
             0,
             0,
             0});
-            this.solidModsHeight.Name = "solidModsHeight";
-            this.solidModsHeight.Size = new System.Drawing.Size(70, 17);
-            this.solidModsHeight.TabIndex = 140;
-            this.solidModsHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.solidModsHeight.ValueChanged += new System.EventHandler(this.solidModsHeight_ValueChanged);
+            this.layerMaskLowX.Name = "layerMaskLowX";
+            this.layerMaskLowX.Size = new System.Drawing.Size(54, 17);
+            this.layerMaskLowX.TabIndex = 29;
+            this.layerMaskLowX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.layerMaskLowX.ValueChanged += new System.EventHandler(this.layerMaskLowX_ValueChanged);
             // 
-            // solidModsWidth
+            // label25
             // 
-            this.solidModsWidth.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.solidModsWidth.Location = new System.Drawing.Point(59, 36);
-            this.solidModsWidth.Maximum = new decimal(new int[] {
-            31,
+            this.label25.BackColor = System.Drawing.SystemColors.Control;
+            this.label25.Location = new System.Drawing.Point(0, 19);
+            this.label25.Name = "label25";
+            this.label25.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label25.Size = new System.Drawing.Size(74, 17);
+            this.label25.TabIndex = 96;
+            this.label25.Text = "Right Edge";
+            // 
+            // layerMaskHighY
+            // 
+            this.layerMaskHighY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.layerMaskHighY.Location = new System.Drawing.Point(205, 19);
+            this.layerMaskHighY.Maximum = new decimal(new int[] {
+            63,
             0,
             0,
             0});
-            this.solidModsWidth.Name = "solidModsWidth";
-            this.solidModsWidth.Size = new System.Drawing.Size(70, 17);
-            this.solidModsWidth.TabIndex = 140;
-            this.solidModsWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.solidModsWidth.ValueChanged += new System.EventHandler(this.solidModsWidth_ValueChanged);
+            this.layerMaskHighY.Name = "layerMaskHighY";
+            this.layerMaskHighY.Size = new System.Drawing.Size(51, 17);
+            this.layerMaskHighY.TabIndex = 28;
+            this.layerMaskHighY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.layerMaskHighY.ValueChanged += new System.EventHandler(this.layerMaskHighY_ValueChanged);
             // 
-            // label64
+            // label24
             // 
-            this.label64.BackColor = System.Drawing.SystemColors.Control;
-            this.label64.Location = new System.Drawing.Point(0, 36);
-            this.label64.Name = "label64";
-            this.label64.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label64.Size = new System.Drawing.Size(58, 17);
-            this.label64.TabIndex = 487;
-            this.label64.Text = "Width";
+            this.label24.BackColor = System.Drawing.SystemColors.Control;
+            this.label24.Location = new System.Drawing.Point(0, 37);
+            this.label24.Name = "label24";
+            this.label24.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label24.Size = new System.Drawing.Size(74, 17);
+            this.label24.TabIndex = 98;
+            this.label24.Text = "Left Edge";
             // 
-            // label67
+            // layerMaskLowY
             // 
-            this.label67.BackColor = System.Drawing.SystemColors.Control;
-            this.label67.Location = new System.Drawing.Point(0, 54);
-            this.label67.Name = "label67";
-            this.label67.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label67.Size = new System.Drawing.Size(58, 17);
-            this.label67.TabIndex = 488;
-            this.label67.Text = "Height";
+            this.layerMaskLowY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.layerMaskLowY.Location = new System.Drawing.Point(205, 37);
+            this.layerMaskLowY.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.layerMaskLowY.Name = "layerMaskLowY";
+            this.layerMaskLowY.Size = new System.Drawing.Size(51, 17);
+            this.layerMaskLowY.TabIndex = 30;
+            this.layerMaskLowY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.layerMaskLowY.ValueChanged += new System.EventHandler(this.layerMaskLowY_ValueChanged);
             // 
-            // panel45
+            // label15
             // 
-            this.panel45.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel45.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
-            this.panel45.Location = new System.Drawing.Point(119, 608);
-            this.panel45.Name = "panel45";
-            this.panel45.Size = new System.Drawing.Size(121, 120);
-            this.panel45.TabIndex = 493;
+            this.label15.BackColor = System.Drawing.SystemColors.Control;
+            this.label15.Location = new System.Drawing.Point(130, 19);
+            this.label15.Name = "label15";
+            this.label15.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label15.Size = new System.Drawing.Size(74, 17);
+            this.label15.TabIndex = 100;
+            this.label15.Text = "Bottom Edge";
             // 
-            // panel41
+            // labeasdfasd
             // 
-            this.panel41.Controls.Add(this.toolStrip8);
-            this.panel41.Controls.Add(this.solidModsFieldTree);
-            this.panel41.Location = new System.Drawing.Point(0, 19);
-            this.panel41.Name = "panel41";
-            this.panel41.Size = new System.Drawing.Size(256, 277);
-            this.panel41.TabIndex = 497;
+            this.labeasdfasd.BackColor = System.Drawing.SystemColors.Control;
+            this.labeasdfasd.Location = new System.Drawing.Point(130, 37);
+            this.labeasdfasd.Name = "labeasdfasd";
+            this.labeasdfasd.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labeasdfasd.Size = new System.Drawing.Size(74, 17);
+            this.labeasdfasd.TabIndex = 103;
+            this.labeasdfasd.Text = "Top Edge";
             // 
-            // toolStrip8
+            // panel77
             // 
-            this.toolStrip8.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip8.CanOverflow = false;
-            this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.solidModsInsert,
-            this.solidModsDelete,
-            this.toolStripSeparator13,
-            this.solidModsMoveUp,
-            this.solidModsMoveDown,
-            this.toolStripSeparator14,
-            this.solidModsCopy,
-            this.solidModsPaste,
-            this.solidModsDuplicate});
-            this.toolStrip8.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip8.Name = "toolStrip8";
-            this.toolStrip8.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip8.Size = new System.Drawing.Size(256, 25);
-            this.toolStrip8.TabIndex = 496;
-            this.toolStrip8.Text = "toolStrip8";
+            this.panel77.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel77.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel77.Controls.Add(this.label6);
+            this.panel77.Controls.Add(this.label12);
+            this.panel77.Controls.Add(this.label13);
+            this.panel77.Controls.Add(this.label11);
+            this.panel77.Controls.Add(this.label3);
+            this.panel77.Controls.Add(this.panel16);
+            this.panel77.Controls.Add(this.panel19);
+            this.panel77.Controls.Add(this.panel18);
+            this.panel77.Controls.Add(this.panel20);
+            this.panel77.Location = new System.Drawing.Point(0, 346);
+            this.panel77.Name = "panel77";
+            this.panel77.Size = new System.Drawing.Size(260, 94);
+            this.panel77.TabIndex = 447;
             // 
-            // solidModsInsert
+            // label6
             // 
-            this.solidModsInsert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.solidModsInsert.Image = global::LAZYSHELL.Properties.Resources.new_small;
-            this.solidModsInsert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.solidModsInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.solidModsInsert.Name = "solidModsInsert";
-            this.solidModsInsert.Size = new System.Drawing.Size(23, 22);
-            this.solidModsInsert.Text = "New Solidity Mod";
-            this.solidModsInsert.Click += new System.EventHandler(this.solidModsInsert_Click);
+            this.label6.BackColor = System.Drawing.SystemColors.Control;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label6.Size = new System.Drawing.Size(256, 17);
+            this.label6.TabIndex = 106;
+            this.label6.Text = "LAYER SCROLLING SYNCHRONIZATION";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // solidModsDelete
+            // label12
             // 
-            this.solidModsDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.solidModsDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
-            this.solidModsDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.solidModsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.solidModsDelete.Name = "solidModsDelete";
-            this.solidModsDelete.Size = new System.Drawing.Size(23, 22);
-            this.solidModsDelete.Text = "Delete Solidity Mod";
-            this.solidModsDelete.Click += new System.EventHandler(this.solidModsDelete_Click);
+            this.label12.BackColor = System.Drawing.SystemColors.Control;
+            this.label12.Location = new System.Drawing.Point(0, 19);
+            this.label12.Name = "label12";
+            this.label12.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label12.Size = new System.Drawing.Size(126, 17);
+            this.label12.TabIndex = 181;
+            this.label12.Text = "L2 Vertical Sync";
             // 
-            // toolStripSeparator13
+            // label13
             // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(6, 25);
+            this.label13.BackColor = System.Drawing.SystemColors.Control;
+            this.label13.Location = new System.Drawing.Point(0, 37);
+            this.label13.Name = "label13";
+            this.label13.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label13.Size = new System.Drawing.Size(126, 17);
+            this.label13.TabIndex = 182;
+            this.label13.Text = "L2 Horizontal Sync";
             // 
-            // solidModsMoveUp
+            // label11
             // 
-            this.solidModsMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.solidModsMoveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
-            this.solidModsMoveUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.solidModsMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.solidModsMoveUp.Name = "solidModsMoveUp";
-            this.solidModsMoveUp.Size = new System.Drawing.Size(23, 22);
-            this.solidModsMoveUp.Text = "Move Solidity Mod Up";
-            this.solidModsMoveUp.Click += new System.EventHandler(this.solidModsMoveUp_Click);
+            this.label11.BackColor = System.Drawing.SystemColors.Control;
+            this.label11.Location = new System.Drawing.Point(0, 55);
+            this.label11.Name = "label11";
+            this.label11.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label11.Size = new System.Drawing.Size(126, 17);
+            this.label11.TabIndex = 183;
+            this.label11.Text = "L3 Vertical Sync";
             // 
-            // solidModsMoveDown
+            // label3
             // 
-            this.solidModsMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.solidModsMoveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
-            this.solidModsMoveDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.solidModsMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.solidModsMoveDown.Name = "solidModsMoveDown";
-            this.solidModsMoveDown.Size = new System.Drawing.Size(23, 22);
-            this.solidModsMoveDown.Text = "Move Solidity Mod Down";
-            this.solidModsMoveDown.Click += new System.EventHandler(this.solidModsMoveDown_Click);
+            this.label3.BackColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(0, 73);
+            this.label3.Name = "label3";
+            this.label3.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label3.Size = new System.Drawing.Size(126, 17);
+            this.label3.TabIndex = 184;
+            this.label3.Text = "L3 Horizontal Sync";
             // 
-            // toolStripSeparator14
+            // panel16
             // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
+            this.panel16.BackColor = System.Drawing.SystemColors.Window;
+            this.panel16.Controls.Add(this.layerL2VSync);
+            this.panel16.Location = new System.Drawing.Point(127, 19);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(129, 17);
+            this.panel16.TabIndex = 36;
             // 
-            // solidModsCopy
+            // layerL2VSync
             // 
-            this.solidModsCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.solidModsCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
-            this.solidModsCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.solidModsCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.solidModsCopy.Name = "solidModsCopy";
-            this.solidModsCopy.Size = new System.Drawing.Size(23, 22);
-            this.solidModsCopy.Text = "Copy Solidity Mod";
-            this.solidModsCopy.Click += new System.EventHandler(this.solidModsCopy_Click);
+            this.layerL2VSync.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.layerL2VSync.Items.AddRange(new object[] {
+            "None",
+            "Low",
+            "Normal",
+            "High"});
+            this.layerL2VSync.Location = new System.Drawing.Point(-2, -2);
+            this.layerL2VSync.Name = "layerL2VSync";
+            this.layerL2VSync.Size = new System.Drawing.Size(133, 21);
+            this.layerL2VSync.TabIndex = 64;
+            this.layerL2VSync.SelectedIndexChanged += new System.EventHandler(this.layerL2VSync_SelectedIndexChanged);
             // 
-            // solidModsPaste
+            // panel19
             // 
-            this.solidModsPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.solidModsPaste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
-            this.solidModsPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.solidModsPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.solidModsPaste.Name = "solidModsPaste";
-            this.solidModsPaste.Size = new System.Drawing.Size(23, 22);
-            this.solidModsPaste.Text = "Paste Solidity Mod";
-            this.solidModsPaste.Click += new System.EventHandler(this.solidModsPaste_Click);
+            this.panel19.BackColor = System.Drawing.SystemColors.Window;
+            this.panel19.Controls.Add(this.layerL3VSync);
+            this.panel19.Location = new System.Drawing.Point(127, 55);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(129, 17);
+            this.panel19.TabIndex = 38;
             // 
-            // solidModsDuplicate
+            // layerL3VSync
             // 
-            this.solidModsDuplicate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.solidModsDuplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
-            this.solidModsDuplicate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.solidModsDuplicate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.solidModsDuplicate.Name = "solidModsDuplicate";
-            this.solidModsDuplicate.Size = new System.Drawing.Size(23, 22);
-            this.solidModsDuplicate.Text = "Duplicate Solidity Mod";
-            this.solidModsDuplicate.Click += new System.EventHandler(this.solidModsDuplicate_Click);
+            this.layerL3VSync.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.layerL3VSync.Items.AddRange(new object[] {
+            "None",
+            "Low",
+            "Normal",
+            "High"});
+            this.layerL3VSync.Location = new System.Drawing.Point(-2, -2);
+            this.layerL3VSync.Name = "layerL3VSync";
+            this.layerL3VSync.Size = new System.Drawing.Size(133, 21);
+            this.layerL3VSync.TabIndex = 64;
+            this.layerL3VSync.SelectedIndexChanged += new System.EventHandler(this.layerL3VSync_SelectedIndexChanged);
             // 
-            // solidModsFieldTree
+            // panel18
             // 
-            this.solidModsFieldTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.solidModsFieldTree.HideSelection = false;
-            this.solidModsFieldTree.HotTracking = true;
-            this.solidModsFieldTree.Location = new System.Drawing.Point(0, 26);
-            this.solidModsFieldTree.Name = "solidModsFieldTree";
-            this.solidModsFieldTree.ShowRootLines = false;
-            this.solidModsFieldTree.Size = new System.Drawing.Size(125, 251);
-            this.solidModsFieldTree.TabIndex = 127;
-            this.solidModsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.solidModsFieldTree_AfterSelect);
+            this.panel18.BackColor = System.Drawing.SystemColors.Window;
+            this.panel18.Controls.Add(this.layerL2HSync);
+            this.panel18.Location = new System.Drawing.Point(127, 37);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(129, 17);
+            this.panel18.TabIndex = 37;
+            // 
+            // layerL2HSync
+            // 
+            this.layerL2HSync.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.layerL2HSync.Items.AddRange(new object[] {
+            "None",
+            "Low",
+            "Normal",
+            "High"});
+            this.layerL2HSync.Location = new System.Drawing.Point(-2, -2);
+            this.layerL2HSync.Name = "layerL2HSync";
+            this.layerL2HSync.Size = new System.Drawing.Size(133, 21);
+            this.layerL2HSync.TabIndex = 64;
+            this.layerL2HSync.SelectedIndexChanged += new System.EventHandler(this.layerL2HSync_SelectedIndexChanged);
+            // 
+            // panel20
+            // 
+            this.panel20.BackColor = System.Drawing.SystemColors.Window;
+            this.panel20.Controls.Add(this.layerL3HSync);
+            this.panel20.Location = new System.Drawing.Point(127, 73);
+            this.panel20.Name = "panel20";
+            this.panel20.Size = new System.Drawing.Size(129, 17);
+            this.panel20.TabIndex = 39;
+            // 
+            // layerL3HSync
+            // 
+            this.layerL3HSync.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.layerL3HSync.Items.AddRange(new object[] {
+            "None",
+            "Low",
+            "Normal",
+            "High"});
+            this.layerL3HSync.Location = new System.Drawing.Point(-2, -2);
+            this.layerL3HSync.Name = "layerL3HSync";
+            this.layerL3HSync.Size = new System.Drawing.Size(133, 21);
+            this.layerL3HSync.TabIndex = 64;
+            this.layerL3HSync.SelectedIndexChanged += new System.EventHandler(this.layerL3HSync_SelectedIndexChanged);
+            // 
+            // panel75
+            // 
+            this.panel75.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel75.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel75.Controls.Add(this.label5);
+            this.panel75.Controls.Add(this.layerL2LeftShift);
+            this.panel75.Controls.Add(this.layerL2UpShift);
+            this.panel75.Controls.Add(this.label23);
+            this.panel75.Controls.Add(this.label10);
+            this.panel75.Controls.Add(this.layerL3LeftShift);
+            this.panel75.Controls.Add(this.label9);
+            this.panel75.Controls.Add(this.layerL3UpShift);
+            this.panel75.Controls.Add(this.label8);
+            this.panel75.Location = new System.Drawing.Point(0, 197);
+            this.panel75.Name = "panel75";
+            this.panel75.Size = new System.Drawing.Size(260, 58);
+            this.panel75.TabIndex = 445;
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.SystemColors.Control;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label5.Size = new System.Drawing.Size(256, 17);
+            this.label5.TabIndex = 104;
+            this.label5.Text = "LAYER SHIFTING";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // layerL2LeftShift
+            // 
+            this.layerL2LeftShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.layerL2LeftShift.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layerL2LeftShift.Location = new System.Drawing.Point(75, 19);
+            this.layerL2LeftShift.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.layerL2LeftShift.Name = "layerL2LeftShift";
+            this.layerL2LeftShift.Size = new System.Drawing.Size(54, 17);
+            this.layerL2LeftShift.TabIndex = 31;
+            this.layerL2LeftShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.layerL2LeftShift.ValueChanged += new System.EventHandler(this.layerL2LeftShift_ValueChanged);
+            // 
+            // layerL2UpShift
+            // 
+            this.layerL2UpShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.layerL2UpShift.Location = new System.Drawing.Point(75, 37);
+            this.layerL2UpShift.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.layerL2UpShift.Name = "layerL2UpShift";
+            this.layerL2UpShift.Size = new System.Drawing.Size(54, 17);
+            this.layerL2UpShift.TabIndex = 33;
+            this.layerL2UpShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.layerL2UpShift.ValueChanged += new System.EventHandler(this.layerL2UpShift_ValueChanged);
+            // 
+            // label23
+            // 
+            this.label23.BackColor = System.Drawing.SystemColors.Control;
+            this.label23.Location = new System.Drawing.Point(0, 19);
+            this.label23.Name = "label23";
+            this.label23.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label23.Size = new System.Drawing.Size(74, 17);
+            this.label23.TabIndex = 82;
+            this.label23.Text = "L2 Left Shift";
+            // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.SystemColors.Control;
+            this.label10.Location = new System.Drawing.Point(0, 37);
+            this.label10.Name = "label10";
+            this.label10.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label10.Size = new System.Drawing.Size(74, 17);
+            this.label10.TabIndex = 83;
+            this.label10.Text = "L2 Up Shift";
+            // 
+            // layerL3LeftShift
+            // 
+            this.layerL3LeftShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.layerL3LeftShift.Location = new System.Drawing.Point(205, 19);
+            this.layerL3LeftShift.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.layerL3LeftShift.Name = "layerL3LeftShift";
+            this.layerL3LeftShift.Size = new System.Drawing.Size(51, 17);
+            this.layerL3LeftShift.TabIndex = 32;
+            this.layerL3LeftShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.layerL3LeftShift.ValueChanged += new System.EventHandler(this.layerL3LeftShift_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.SystemColors.Control;
+            this.label9.Location = new System.Drawing.Point(130, 19);
+            this.label9.Name = "label9";
+            this.label9.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label9.Size = new System.Drawing.Size(74, 17);
+            this.label9.TabIndex = 85;
+            this.label9.Text = "L3 Left Shift";
+            // 
+            // layerL3UpShift
+            // 
+            this.layerL3UpShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.layerL3UpShift.Location = new System.Drawing.Point(205, 37);
+            this.layerL3UpShift.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.layerL3UpShift.Name = "layerL3UpShift";
+            this.layerL3UpShift.Size = new System.Drawing.Size(51, 17);
+            this.layerL3UpShift.TabIndex = 34;
+            this.layerL3UpShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.layerL3UpShift.ValueChanged += new System.EventHandler(this.layerL3UpShift_ValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.SystemColors.Control;
+            this.label8.Location = new System.Drawing.Point(130, 37);
+            this.label8.Name = "label8";
+            this.label8.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label8.Size = new System.Drawing.Size(74, 17);
+            this.label8.TabIndex = 86;
+            this.label8.Text = "L3 Up Shift";
+            // 
+            // panel76
+            // 
+            this.panel76.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel76.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel76.Controls.Add(this.label91);
+            this.panel76.Controls.Add(this.layerScrollWrapping);
+            this.panel76.Location = new System.Drawing.Point(0, 257);
+            this.panel76.Name = "panel76";
+            this.panel76.Size = new System.Drawing.Size(260, 87);
+            this.panel76.TabIndex = 446;
+            // 
+            // label91
+            // 
+            this.label91.BackColor = System.Drawing.SystemColors.Control;
+            this.label91.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label91.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label91.Location = new System.Drawing.Point(0, 0);
+            this.label91.Name = "label91";
+            this.label91.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label91.Size = new System.Drawing.Size(256, 17);
+            this.label91.TabIndex = 104;
+            this.label91.Text = "SCROLL WRAPPING";
+            this.label91.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // layerScrollWrapping
+            // 
+            this.layerScrollWrapping.BackColor = System.Drawing.SystemColors.Window;
+            this.layerScrollWrapping.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.layerScrollWrapping.CheckOnClick = true;
+            this.layerScrollWrapping.ColumnWidth = 118;
+            this.layerScrollWrapping.Items.AddRange(new object[] {
+            "L1 horizontal",
+            "L1 vertical",
+            "L2 horizontal",
+            "L2 vertical",
+            "L3 horizontal",
+            "L3 vertical",
+            "(used only Culex)",
+            "(used only Culex)"});
+            this.layerScrollWrapping.Location = new System.Drawing.Point(0, 19);
+            this.layerScrollWrapping.MultiColumn = true;
+            this.layerScrollWrapping.Name = "layerScrollWrapping";
+            this.layerScrollWrapping.Size = new System.Drawing.Size(256, 64);
+            this.layerScrollWrapping.TabIndex = 35;
+            this.layerScrollWrapping.SelectedIndexChanged += new System.EventHandler(this.layerScrollWrapping_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.panel8);
+            this.tabPage1.Controls.Add(this.panel27);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(260, 640);
+            this.tabPage1.TabIndex = 5;
+            this.tabPage1.Text = "MODS";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // panel8
             // 
-            this.panel8.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel8.Controls.Add(this.label69);
             this.panel8.Controls.Add(this.panel15);
+            this.panel8.Controls.Add(this.tileModsFieldTree);
+            this.panel8.Controls.Add(this.toolStrip7);
+            this.panel8.Controls.Add(this.label69);
             this.panel8.Controls.Add(this.panel55);
-            this.panel8.Controls.Add(this.panel10);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(260, 300);
             this.panel8.TabIndex = 1;
             // 
-            // label69
-            // 
-            this.label69.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label69.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label69.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label69.ForeColor = System.Drawing.SystemColors.Control;
-            this.label69.Location = new System.Drawing.Point(0, 0);
-            this.label69.Name = "label69";
-            this.label69.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label69.Size = new System.Drawing.Size(256, 17);
-            this.label69.TabIndex = 499;
-            this.label69.Text = "TILEMAP MODS";
-            this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // panel15
             // 
             this.panel15.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel15.Controls.Add(this.tileModsLayers);
             this.panel15.Controls.Add(this.label26);
             this.panel15.Controls.Add(this.tileModsY);
@@ -5765,9 +5515,10 @@ namespace LAZYSHELL
             this.panel15.Controls.Add(this.tileModsWidth);
             this.panel15.Controls.Add(this.label36);
             this.panel15.Controls.Add(this.label50);
-            this.panel15.Location = new System.Drawing.Point(127, 45);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel15.Location = new System.Drawing.Point(125, 44);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(129, 251);
+            this.panel15.Size = new System.Drawing.Size(135, 256);
             this.panel15.TabIndex = 495;
             // 
             // tileModsLayers
@@ -5783,7 +5534,7 @@ namespace LAZYSHELL
             "B0b7"});
             this.tileModsLayers.Location = new System.Drawing.Point(0, 72);
             this.tileModsLayers.Name = "tileModsLayers";
-            this.tileModsLayers.Size = new System.Drawing.Size(129, 64);
+            this.tileModsLayers.Size = new System.Drawing.Size(131, 64);
             this.tileModsLayers.TabIndex = 489;
             this.tileModsLayers.SelectedIndexChanged += new System.EventHandler(this.tileModsLayers_SelectedIndexChanged);
             // 
@@ -5807,7 +5558,7 @@ namespace LAZYSHELL
             0,
             0});
             this.tileModsY.Name = "tileModsY";
-            this.tileModsY.Size = new System.Drawing.Size(70, 17);
+            this.tileModsY.Size = new System.Drawing.Size(72, 17);
             this.tileModsY.TabIndex = 139;
             this.tileModsY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tileModsY.ValueChanged += new System.EventHandler(this.tileModsY_ValueChanged);
@@ -5832,7 +5583,7 @@ namespace LAZYSHELL
             0,
             0});
             this.tileModsX.Name = "tileModsX";
-            this.tileModsX.Size = new System.Drawing.Size(70, 17);
+            this.tileModsX.Size = new System.Drawing.Size(72, 17);
             this.tileModsX.TabIndex = 138;
             this.tileModsX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tileModsX.ValueChanged += new System.EventHandler(this.tileModsX_ValueChanged);
@@ -5847,7 +5598,7 @@ namespace LAZYSHELL
             0,
             0});
             this.tileModsHeight.Name = "tileModsHeight";
-            this.tileModsHeight.Size = new System.Drawing.Size(70, 17);
+            this.tileModsHeight.Size = new System.Drawing.Size(72, 17);
             this.tileModsHeight.TabIndex = 140;
             this.tileModsHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tileModsHeight.ValueChanged += new System.EventHandler(this.tileModsHeight_ValueChanged);
@@ -5862,7 +5613,7 @@ namespace LAZYSHELL
             0,
             0});
             this.tileModsWidth.Name = "tileModsWidth";
-            this.tileModsWidth.Size = new System.Drawing.Size(70, 17);
+            this.tileModsWidth.Size = new System.Drawing.Size(72, 17);
             this.tileModsWidth.TabIndex = 140;
             this.tileModsWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tileModsWidth.ValueChanged += new System.EventHandler(this.tileModsWidth_ValueChanged);
@@ -5887,24 +5638,17 @@ namespace LAZYSHELL
             this.label50.TabIndex = 488;
             this.label50.Text = "Height";
             // 
-            // panel55
+            // tileModsFieldTree
             // 
-            this.panel55.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel55.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
-            this.panel55.Location = new System.Drawing.Point(119, 608);
-            this.panel55.Name = "panel55";
-            this.panel55.Size = new System.Drawing.Size(121, 120);
-            this.panel55.TabIndex = 493;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.toolStrip7);
-            this.panel10.Controls.Add(this.tileModsFieldTree);
-            this.panel10.Location = new System.Drawing.Point(0, 19);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(256, 277);
-            this.panel10.TabIndex = 497;
+            this.tileModsFieldTree.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tileModsFieldTree.HideSelection = false;
+            this.tileModsFieldTree.HotTracking = true;
+            this.tileModsFieldTree.Location = new System.Drawing.Point(0, 44);
+            this.tileModsFieldTree.Name = "tileModsFieldTree";
+            this.tileModsFieldTree.ShowRootLines = false;
+            this.tileModsFieldTree.Size = new System.Drawing.Size(125, 256);
+            this.tileModsFieldTree.TabIndex = 127;
+            this.tileModsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tileModsFieldTree_AfterSelect);
             // 
             // toolStrip7
             // 
@@ -5921,10 +5665,10 @@ namespace LAZYSHELL
             this.tileModsCopy,
             this.tileModsPaste,
             this.tileModsDuplicate});
-            this.toolStrip7.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip7.Location = new System.Drawing.Point(0, 19);
             this.toolStrip7.Name = "toolStrip7";
             this.toolStrip7.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip7.Size = new System.Drawing.Size(256, 25);
+            this.toolStrip7.Size = new System.Drawing.Size(260, 25);
             this.toolStrip7.TabIndex = 496;
             this.toolStrip7.Text = "toolStrip7";
             // 
@@ -6026,47 +5770,388 @@ namespace LAZYSHELL
             this.tileModsDuplicate.Text = "Duplicate Tilemap Mod";
             this.tileModsDuplicate.Click += new System.EventHandler(this.tileModsDuplicate_Click);
             // 
-            // tileModsFieldTree
+            // label69
             // 
-            this.tileModsFieldTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tileModsFieldTree.HideSelection = false;
-            this.tileModsFieldTree.HotTracking = true;
-            this.tileModsFieldTree.Location = new System.Drawing.Point(0, 26);
-            this.tileModsFieldTree.Name = "tileModsFieldTree";
-            this.tileModsFieldTree.ShowRootLines = false;
-            this.tileModsFieldTree.Size = new System.Drawing.Size(125, 251);
-            this.tileModsFieldTree.TabIndex = 127;
-            this.tileModsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tileModsFieldTree_AfterSelect);
+            this.label69.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label69.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label69.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label69.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label69.ForeColor = System.Drawing.SystemColors.Control;
+            this.label69.Location = new System.Drawing.Point(0, 0);
+            this.label69.Name = "label69";
+            this.label69.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label69.Size = new System.Drawing.Size(260, 19);
+            this.label69.TabIndex = 499;
+            this.label69.Text = "TILEMAP MODS";
+            this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel55
+            // 
+            this.panel55.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel55.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
+            this.panel55.Location = new System.Drawing.Point(119, 608);
+            this.panel55.Name = "panel55";
+            this.panel55.Size = new System.Drawing.Size(121, 124);
+            this.panel55.TabIndex = 493;
+            // 
+            // panel27
+            // 
+            this.panel27.Controls.Add(this.panel44);
+            this.panel27.Controls.Add(this.solidModsFieldTree);
+            this.panel27.Controls.Add(this.toolStrip8);
+            this.panel27.Controls.Add(this.label68);
+            this.panel27.Controls.Add(this.panel45);
+            this.panel27.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel27.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel27.Location = new System.Drawing.Point(0, 300);
+            this.panel27.Name = "panel27";
+            this.panel27.Size = new System.Drawing.Size(260, 340);
+            this.panel27.TabIndex = 2;
+            // 
+            // panel44
+            // 
+            this.panel44.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel44.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel44.Controls.Add(this.label14);
+            this.panel44.Controls.Add(this.solidModsY);
+            this.panel44.Controls.Add(this.label51);
+            this.panel44.Controls.Add(this.solidModsX);
+            this.panel44.Controls.Add(this.solidModsHeight);
+            this.panel44.Controls.Add(this.solidModsWidth);
+            this.panel44.Controls.Add(this.label64);
+            this.panel44.Controls.Add(this.label67);
+            this.panel44.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel44.Location = new System.Drawing.Point(125, 44);
+            this.panel44.Name = "panel44";
+            this.panel44.Size = new System.Drawing.Size(135, 296);
+            this.panel44.TabIndex = 495;
+            // 
+            // label14
+            // 
+            this.label14.BackColor = System.Drawing.SystemColors.Control;
+            this.label14.Location = new System.Drawing.Point(0, 0);
+            this.label14.Name = "label14";
+            this.label14.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label14.Size = new System.Drawing.Size(58, 17);
+            this.label14.TabIndex = 474;
+            this.label14.Text = "X Coord";
+            // 
+            // solidModsY
+            // 
+            this.solidModsY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.solidModsY.Location = new System.Drawing.Point(59, 18);
+            this.solidModsY.Maximum = new decimal(new int[] {
+            127,
+            0,
+            0,
+            0});
+            this.solidModsY.Name = "solidModsY";
+            this.solidModsY.Size = new System.Drawing.Size(72, 17);
+            this.solidModsY.TabIndex = 139;
+            this.solidModsY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.solidModsY.ValueChanged += new System.EventHandler(this.solidModsY_ValueChanged);
+            // 
+            // label51
+            // 
+            this.label51.BackColor = System.Drawing.SystemColors.Control;
+            this.label51.Location = new System.Drawing.Point(0, 18);
+            this.label51.Name = "label51";
+            this.label51.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label51.Size = new System.Drawing.Size(58, 17);
+            this.label51.TabIndex = 476;
+            this.label51.Text = "Y Coord";
+            // 
+            // solidModsX
+            // 
+            this.solidModsX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.solidModsX.Location = new System.Drawing.Point(59, 0);
+            this.solidModsX.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.solidModsX.Name = "solidModsX";
+            this.solidModsX.Size = new System.Drawing.Size(72, 17);
+            this.solidModsX.TabIndex = 138;
+            this.solidModsX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.solidModsX.ValueChanged += new System.EventHandler(this.solidModsX_ValueChanged);
+            // 
+            // solidModsHeight
+            // 
+            this.solidModsHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.solidModsHeight.Location = new System.Drawing.Point(59, 54);
+            this.solidModsHeight.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.solidModsHeight.Name = "solidModsHeight";
+            this.solidModsHeight.Size = new System.Drawing.Size(72, 17);
+            this.solidModsHeight.TabIndex = 140;
+            this.solidModsHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.solidModsHeight.ValueChanged += new System.EventHandler(this.solidModsHeight_ValueChanged);
+            // 
+            // solidModsWidth
+            // 
+            this.solidModsWidth.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.solidModsWidth.Location = new System.Drawing.Point(59, 36);
+            this.solidModsWidth.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.solidModsWidth.Name = "solidModsWidth";
+            this.solidModsWidth.Size = new System.Drawing.Size(72, 17);
+            this.solidModsWidth.TabIndex = 140;
+            this.solidModsWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.solidModsWidth.ValueChanged += new System.EventHandler(this.solidModsWidth_ValueChanged);
+            // 
+            // label64
+            // 
+            this.label64.BackColor = System.Drawing.SystemColors.Control;
+            this.label64.Location = new System.Drawing.Point(0, 36);
+            this.label64.Name = "label64";
+            this.label64.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label64.Size = new System.Drawing.Size(58, 17);
+            this.label64.TabIndex = 487;
+            this.label64.Text = "Width";
+            // 
+            // label67
+            // 
+            this.label67.BackColor = System.Drawing.SystemColors.Control;
+            this.label67.Location = new System.Drawing.Point(0, 54);
+            this.label67.Name = "label67";
+            this.label67.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label67.Size = new System.Drawing.Size(58, 17);
+            this.label67.TabIndex = 488;
+            this.label67.Text = "Height";
+            // 
+            // solidModsFieldTree
+            // 
+            this.solidModsFieldTree.Dock = System.Windows.Forms.DockStyle.Left;
+            this.solidModsFieldTree.HideSelection = false;
+            this.solidModsFieldTree.HotTracking = true;
+            this.solidModsFieldTree.Location = new System.Drawing.Point(0, 44);
+            this.solidModsFieldTree.Name = "solidModsFieldTree";
+            this.solidModsFieldTree.ShowRootLines = false;
+            this.solidModsFieldTree.Size = new System.Drawing.Size(125, 296);
+            this.solidModsFieldTree.TabIndex = 127;
+            this.solidModsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.solidModsFieldTree_AfterSelect);
+            // 
+            // toolStrip8
+            // 
+            this.toolStrip8.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip8.CanOverflow = false;
+            this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.solidModsInsert,
+            this.solidModsDelete,
+            this.toolStripSeparator13,
+            this.solidModsMoveUp,
+            this.solidModsMoveDown,
+            this.toolStripSeparator14,
+            this.solidModsCopy,
+            this.solidModsPaste,
+            this.solidModsDuplicate});
+            this.toolStrip8.Location = new System.Drawing.Point(0, 19);
+            this.toolStrip8.Name = "toolStrip8";
+            this.toolStrip8.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip8.Size = new System.Drawing.Size(260, 25);
+            this.toolStrip8.TabIndex = 496;
+            this.toolStrip8.Text = "toolStrip8";
+            // 
+            // solidModsInsert
+            // 
+            this.solidModsInsert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsInsert.Image = global::LAZYSHELL.Properties.Resources.new_small;
+            this.solidModsInsert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsInsert.Name = "solidModsInsert";
+            this.solidModsInsert.Size = new System.Drawing.Size(23, 22);
+            this.solidModsInsert.Text = "New Solidity Mod";
+            this.solidModsInsert.Click += new System.EventHandler(this.solidModsInsert_Click);
+            // 
+            // solidModsDelete
+            // 
+            this.solidModsDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.solidModsDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsDelete.Name = "solidModsDelete";
+            this.solidModsDelete.Size = new System.Drawing.Size(23, 22);
+            this.solidModsDelete.Text = "Delete Solidity Mod";
+            this.solidModsDelete.Click += new System.EventHandler(this.solidModsDelete_Click);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(6, 25);
+            // 
+            // solidModsMoveUp
+            // 
+            this.solidModsMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsMoveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
+            this.solidModsMoveUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsMoveUp.Name = "solidModsMoveUp";
+            this.solidModsMoveUp.Size = new System.Drawing.Size(23, 22);
+            this.solidModsMoveUp.Text = "Move Solidity Mod Up";
+            this.solidModsMoveUp.Click += new System.EventHandler(this.solidModsMoveUp_Click);
+            // 
+            // solidModsMoveDown
+            // 
+            this.solidModsMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsMoveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
+            this.solidModsMoveDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsMoveDown.Name = "solidModsMoveDown";
+            this.solidModsMoveDown.Size = new System.Drawing.Size(23, 22);
+            this.solidModsMoveDown.Text = "Move Solidity Mod Down";
+            this.solidModsMoveDown.Click += new System.EventHandler(this.solidModsMoveDown_Click);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
+            // 
+            // solidModsCopy
+            // 
+            this.solidModsCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.solidModsCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsCopy.Name = "solidModsCopy";
+            this.solidModsCopy.Size = new System.Drawing.Size(23, 22);
+            this.solidModsCopy.Text = "Copy Solidity Mod";
+            this.solidModsCopy.Click += new System.EventHandler(this.solidModsCopy_Click);
+            // 
+            // solidModsPaste
+            // 
+            this.solidModsPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsPaste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.solidModsPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsPaste.Name = "solidModsPaste";
+            this.solidModsPaste.Size = new System.Drawing.Size(23, 22);
+            this.solidModsPaste.Text = "Paste Solidity Mod";
+            this.solidModsPaste.Click += new System.EventHandler(this.solidModsPaste_Click);
+            // 
+            // solidModsDuplicate
+            // 
+            this.solidModsDuplicate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.solidModsDuplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
+            this.solidModsDuplicate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.solidModsDuplicate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.solidModsDuplicate.Name = "solidModsDuplicate";
+            this.solidModsDuplicate.Size = new System.Drawing.Size(23, 22);
+            this.solidModsDuplicate.Text = "Duplicate Solidity Mod";
+            this.solidModsDuplicate.Click += new System.EventHandler(this.solidModsDuplicate_Click);
+            // 
+            // label68
+            // 
+            this.label68.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label68.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label68.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label68.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label68.ForeColor = System.Drawing.SystemColors.Control;
+            this.label68.Location = new System.Drawing.Point(0, 0);
+            this.label68.Name = "label68";
+            this.label68.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label68.Size = new System.Drawing.Size(260, 19);
+            this.label68.TabIndex = 498;
+            this.label68.Text = "SOLIDITY MAP MODS";
+            this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel45
+            // 
+            this.panel45.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel45.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
+            this.panel45.Location = new System.Drawing.Point(119, 608);
+            this.panel45.Name = "panel45";
+            this.panel45.Size = new System.Drawing.Size(121, 164);
+            this.panel45.TabIndex = 493;
             // 
             // toolStrip1
             // 
+            this.toolStrip1.CanOverflow = false;
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.levelName,
             this.levelNum,
-            this.toolStripSeparator17,
+            this.nameTextBox,
+            this.searchLevelNames,
+            this.toolStripSeparator7,
+            this.changeLevelName,
+            this.toolStripTextBox1,
+            this.toolStripButton1,
+            this.toolStripSeparator21,
             this.buttonGotoC,
             this.eventExit,
             this.toolStripSeparator16,
             this.toolStripLabel2,
-            this.eventMusic,
-            this.toolStripSeparator3,
-            this.changeLevelName,
-            this.toolStripTextBox1,
-            this.toolStripButton1,
-            this.toolStripSeparator4,
-            this.searchLevelNames,
-            this.nameTextBox});
+            this.eventMusic});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(1006, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1020, 25);
             this.toolStrip1.TabIndex = 2;
             // 
-            // toolStripSeparator17
+            // nameTextBox
             // 
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(150, 25);
+            // 
+            // searchLevelNames
+            // 
+            this.searchLevelNames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.searchLevelNames.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.searchLevelNames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.searchLevelNames.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.searchLevelNames.Name = "searchLevelNames";
+            this.searchLevelNames.Size = new System.Drawing.Size(23, 22);
+            this.searchLevelNames.Text = "Search Level Names";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+            // 
+            // changeLevelName
+            // 
+            this.changeLevelName.CheckOnClick = true;
+            this.changeLevelName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.changeLevelName.Image = global::LAZYSHELL.Properties.Resources.label;
+            this.changeLevelName.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.changeLevelName.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.changeLevelName.Name = "changeLevelName";
+            this.changeLevelName.Size = new System.Drawing.Size(23, 22);
+            this.changeLevelName.Text = "Edit level name";
+            this.changeLevelName.Click += new System.EventHandler(this.changeLevelName_Click);
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(160, 25);
+            this.toolStripTextBox1.Visible = false;
+            this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
+            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.ToolTipText = "Reset";
+            this.toolStripButton1.Visible = false;
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripSeparator21
+            // 
+            this.toolStripSeparator21.Name = "toolStripSeparator21";
+            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 25);
             // 
             // buttonGotoC
             // 
@@ -6084,7 +6169,7 @@ namespace LAZYSHELL
             this.eventExit.AutoSize = false;
             this.eventExit.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventExit.Hexadecimal = false;
-            this.eventExit.Location = new System.Drawing.Point(342, 2);
+            this.eventExit.Location = new System.Drawing.Point(531, 2);
             this.eventExit.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -6118,72 +6203,25 @@ namespace LAZYSHELL
             // 
             // eventMusic
             // 
-            this.eventMusic.DropDownHeight = 200;
+            this.eventMusic.DropDownHeight = 300;
             this.eventMusic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.eventMusic.DropDownWidth = 200;
+            this.eventMusic.DropDownWidth = 300;
             this.eventMusic.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.eventMusic.IntegralHeight = false;
             this.eventMusic.Name = "eventMusic";
-            this.eventMusic.Size = new System.Drawing.Size(100, 25);
+            this.eventMusic.Size = new System.Drawing.Size(180, 25);
             this.eventMusic.SelectedIndexChanged += new System.EventHandler(this.eventsAreaMusic_SelectedIndexChanged);
             // 
-            // toolStripSeparator3
+            // hexEditor
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // changeLevelName
-            // 
-            this.changeLevelName.CheckOnClick = true;
-            this.changeLevelName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.changeLevelName.Image = global::LAZYSHELL.Properties.Resources.label;
-            this.changeLevelName.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.changeLevelName.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.changeLevelName.Name = "changeLevelName";
-            this.changeLevelName.Size = new System.Drawing.Size(23, 22);
-            this.changeLevelName.Text = "toolStripButton1";
-            this.changeLevelName.Click += new System.EventHandler(this.changeLevelName_Click);
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(170, 25);
-            this.toolStripTextBox1.Visible = false;
-            this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
-            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(41, 22);
-            this.toolStripButton1.Text = "RESET";
-            this.toolStripButton1.Visible = false;
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            this.toolStripSeparator4.Visible = false;
-            // 
-            // searchLevelNames
-            // 
-            this.searchLevelNames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.searchLevelNames.Image = global::LAZYSHELL.Properties.Resources.search;
-            this.searchLevelNames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.searchLevelNames.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.searchLevelNames.Name = "searchLevelNames";
-            this.searchLevelNames.Size = new System.Drawing.Size(23, 22);
-            this.searchLevelNames.Text = "Search Level Names";
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(170, 25);
-            this.nameTextBox.Visible = false;
+            this.hexEditor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hexEditor.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
+            this.hexEditor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.hexEditor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.hexEditor.Name = "hexEditor";
+            this.hexEditor.Size = new System.Drawing.Size(23, 22);
+            this.hexEditor.Text = "Hex Editor";
+            this.hexEditor.Click += new System.EventHandler(this.hexEditor_Click);
             // 
             // propertiesButton
             // 
@@ -6300,14 +6338,6 @@ namespace LAZYSHELL
             this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem6.Text = "toolStripMenuItem6";
             // 
-            // ExportLevelImages
-            // 
-            this.ExportLevelImages.WorkerReportsProgress = true;
-            this.ExportLevelImages.WorkerSupportsCancellation = true;
-            this.ExportLevelImages.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ExportLevelImages_DoWork);
-            this.ExportLevelImages.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ExportLevelImages_RunWorkerCompleted);
-            this.ExportLevelImages.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.ExportLevelImages_ProgressChanged);
-            // 
             // toolTip1
             // 
             this.toolTip1.Active = false;
@@ -6320,7 +6350,7 @@ namespace LAZYSHELL
             this.panelLevels.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLevels.Location = new System.Drawing.Point(0, 50);
             this.panelLevels.Name = "panelLevels";
-            this.panelLevels.Size = new System.Drawing.Size(1006, 630);
+            this.panelLevels.Size = new System.Drawing.Size(1020, 670);
             this.panelLevels.TabIndex = 506;
             // 
             // toolStrip2
@@ -6331,10 +6361,12 @@ namespace LAZYSHELL
             this.toolStripSeparator5,
             this.import,
             this.export,
+            this.toolStripDropDownButton1,
             this.clear,
             this.toolStripSeparator6,
             this.help,
             this.baseConversion,
+            this.hexEditor,
             this.toolStripSeparator15,
             this.propertiesButton,
             this.openTileset,
@@ -6350,7 +6382,7 @@ namespace LAZYSHELL
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(1006, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(1020, 25);
             this.toolStrip2.TabIndex = 507;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -6373,6 +6405,7 @@ namespace LAZYSHELL
             // 
             this.import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allToolStripMenuItem,
+            this.importArchitectureToolStripMenuItem,
             this.toolStripSeparator30,
             this.arraysToolStripMenuItem1,
             this.graphicSetsToolStripMenuItem1});
@@ -6386,26 +6419,33 @@ namespace LAZYSHELL
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.allToolStripMenuItem.Text = "Import Level Data...";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.importLevelDataAll_Click);
+            // 
+            // importArchitectureToolStripMenuItem
+            // 
+            this.importArchitectureToolStripMenuItem.Name = "importArchitectureToolStripMenuItem";
+            this.importArchitectureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importArchitectureToolStripMenuItem.Text = "Import Architecture...";
+            this.importArchitectureToolStripMenuItem.Click += new System.EventHandler(this.importArchitectureToolStripMenuItem_Click);
             // 
             // toolStripSeparator30
             // 
             this.toolStripSeparator30.Name = "toolStripSeparator30";
-            this.toolStripSeparator30.Size = new System.Drawing.Size(171, 6);
+            this.toolStripSeparator30.Size = new System.Drawing.Size(177, 6);
             // 
             // arraysToolStripMenuItem1
             // 
             this.arraysToolStripMenuItem1.Name = "arraysToolStripMenuItem1";
-            this.arraysToolStripMenuItem1.Size = new System.Drawing.Size(174, 22);
+            this.arraysToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.arraysToolStripMenuItem1.Text = "Import Arrays...";
             this.arraysToolStripMenuItem1.Click += new System.EventHandler(this.arraysToolStripMenuItem1_Click);
             // 
             // graphicSetsToolStripMenuItem1
             // 
             this.graphicSetsToolStripMenuItem1.Name = "graphicSetsToolStripMenuItem1";
-            this.graphicSetsToolStripMenuItem1.Size = new System.Drawing.Size(174, 22);
+            this.graphicSetsToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.graphicSetsToolStripMenuItem1.Text = "Import Graphic Set...";
             this.graphicSetsToolStripMenuItem1.Click += new System.EventHandler(this.graphicSetsToolStripMenuItem1_Click);
             // 
@@ -6413,6 +6453,7 @@ namespace LAZYSHELL
             // 
             this.export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
+            this.exportArchitectureToolStripMenuItem,
             this.toolStripSeparator28,
             this.arraysToolStripMenuItem,
             this.graphicSetsToolStripMenuItem,
@@ -6432,6 +6473,13 @@ namespace LAZYSHELL
             this.toolStripMenuItem1.Size = new System.Drawing.Size(182, 22);
             this.toolStripMenuItem1.Text = "Export Level Data...";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.exportLevelDataAll_Click);
+            // 
+            // exportArchitectureToolStripMenuItem
+            // 
+            this.exportArchitectureToolStripMenuItem.Name = "exportArchitectureToolStripMenuItem";
+            this.exportArchitectureToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.exportArchitectureToolStripMenuItem.Text = "Export Architecture...";
+            this.exportArchitectureToolStripMenuItem.Click += new System.EventHandler(this.exportArchitectureToolStripMenuItem_Click);
             // 
             // toolStripSeparator28
             // 
@@ -6471,6 +6519,140 @@ namespace LAZYSHELL
             this.dumpTextToolStripMenuItem.Text = "Dump NPCs to Text...";
             this.dumpTextToolStripMenuItem.Click += new System.EventHandler(this.dumpTextToolStripMenuItem_Click);
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetLevelMapToolStripMenuItem,
+            this.resetLayerDataToolStripMenuItem,
+            this.resetNPCDataToolStripMenuItem,
+            this.resetEventDataToolStripMenuItem,
+            this.resetExitDataToolStripMenuItem,
+            this.resetOverlapDataToolStripMenuItem,
+            this.resetTilemapModsToolStripMenuItem,
+            this.resetSolidityModsToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.resetPaletteSetToolStripMenuItem,
+            this.resetGraphicSetToolStripMenuItem,
+            this.resetTilesetsToolStripMenuItem,
+            this.resetTilemapsToolStripMenuItem,
+            this.resetSolidityMapToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.resetAllComponentsToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(27, 22);
+            // 
+            // resetLevelMapToolStripMenuItem
+            // 
+            this.resetLevelMapToolStripMenuItem.Name = "resetLevelMapToolStripMenuItem";
+            this.resetLevelMapToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetLevelMapToolStripMenuItem.Text = "Reset level map";
+            this.resetLevelMapToolStripMenuItem.Click += new System.EventHandler(this.resetLevelMapToolStripMenuItem_Click);
+            // 
+            // resetLayerDataToolStripMenuItem
+            // 
+            this.resetLayerDataToolStripMenuItem.Name = "resetLayerDataToolStripMenuItem";
+            this.resetLayerDataToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetLayerDataToolStripMenuItem.Text = "Reset layer data";
+            this.resetLayerDataToolStripMenuItem.Click += new System.EventHandler(this.resetLayerDataToolStripMenuItem_Click);
+            // 
+            // resetNPCDataToolStripMenuItem
+            // 
+            this.resetNPCDataToolStripMenuItem.Name = "resetNPCDataToolStripMenuItem";
+            this.resetNPCDataToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetNPCDataToolStripMenuItem.Text = "Reset NPCs";
+            this.resetNPCDataToolStripMenuItem.Click += new System.EventHandler(this.resetNPCDataToolStripMenuItem_Click);
+            // 
+            // resetEventDataToolStripMenuItem
+            // 
+            this.resetEventDataToolStripMenuItem.Name = "resetEventDataToolStripMenuItem";
+            this.resetEventDataToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetEventDataToolStripMenuItem.Text = "Reset event fields";
+            this.resetEventDataToolStripMenuItem.Click += new System.EventHandler(this.resetEventDataToolStripMenuItem_Click);
+            // 
+            // resetExitDataToolStripMenuItem
+            // 
+            this.resetExitDataToolStripMenuItem.Name = "resetExitDataToolStripMenuItem";
+            this.resetExitDataToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetExitDataToolStripMenuItem.Text = "Reset exit fields";
+            this.resetExitDataToolStripMenuItem.Click += new System.EventHandler(this.resetExitDataToolStripMenuItem_Click);
+            // 
+            // resetOverlapDataToolStripMenuItem
+            // 
+            this.resetOverlapDataToolStripMenuItem.Name = "resetOverlapDataToolStripMenuItem";
+            this.resetOverlapDataToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetOverlapDataToolStripMenuItem.Text = "Reset overlaps";
+            this.resetOverlapDataToolStripMenuItem.Click += new System.EventHandler(this.resetOverlapDataToolStripMenuItem_Click);
+            // 
+            // resetTilemapModsToolStripMenuItem
+            // 
+            this.resetTilemapModsToolStripMenuItem.Name = "resetTilemapModsToolStripMenuItem";
+            this.resetTilemapModsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetTilemapModsToolStripMenuItem.Text = "Reset tilemap mods";
+            this.resetTilemapModsToolStripMenuItem.Click += new System.EventHandler(this.resetTilemapModsToolStripMenuItem_Click);
+            // 
+            // resetSolidityModsToolStripMenuItem
+            // 
+            this.resetSolidityModsToolStripMenuItem.Name = "resetSolidityModsToolStripMenuItem";
+            this.resetSolidityModsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetSolidityModsToolStripMenuItem.Text = "Reset solidity mods";
+            this.resetSolidityModsToolStripMenuItem.Click += new System.EventHandler(this.resetSolidityModsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(172, 6);
+            // 
+            // resetPaletteSetToolStripMenuItem
+            // 
+            this.resetPaletteSetToolStripMenuItem.Name = "resetPaletteSetToolStripMenuItem";
+            this.resetPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetPaletteSetToolStripMenuItem.Text = "Reset palette set";
+            this.resetPaletteSetToolStripMenuItem.Click += new System.EventHandler(this.resetPaletteSetToolStripMenuItem_Click);
+            // 
+            // resetGraphicSetToolStripMenuItem
+            // 
+            this.resetGraphicSetToolStripMenuItem.Name = "resetGraphicSetToolStripMenuItem";
+            this.resetGraphicSetToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetGraphicSetToolStripMenuItem.Text = "Reset graphic set";
+            this.resetGraphicSetToolStripMenuItem.Click += new System.EventHandler(this.resetGraphicSetToolStripMenuItem_Click);
+            // 
+            // resetTilesetsToolStripMenuItem
+            // 
+            this.resetTilesetsToolStripMenuItem.Name = "resetTilesetsToolStripMenuItem";
+            this.resetTilesetsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetTilesetsToolStripMenuItem.Text = "Reset tilesets";
+            this.resetTilesetsToolStripMenuItem.Click += new System.EventHandler(this.resetTilesetsToolStripMenuItem_Click);
+            // 
+            // resetTilemapsToolStripMenuItem
+            // 
+            this.resetTilemapsToolStripMenuItem.Name = "resetTilemapsToolStripMenuItem";
+            this.resetTilemapsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetTilemapsToolStripMenuItem.Text = "Reset tilemaps";
+            this.resetTilemapsToolStripMenuItem.Click += new System.EventHandler(this.resetTilemapsToolStripMenuItem_Click);
+            // 
+            // resetSolidityMapToolStripMenuItem
+            // 
+            this.resetSolidityMapToolStripMenuItem.Name = "resetSolidityMapToolStripMenuItem";
+            this.resetSolidityMapToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetSolidityMapToolStripMenuItem.Text = "Reset solidity map";
+            this.resetSolidityMapToolStripMenuItem.Click += new System.EventHandler(this.resetSolidityMapToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(172, 6);
+            // 
+            // resetAllComponentsToolStripMenuItem
+            // 
+            this.resetAllComponentsToolStripMenuItem.Name = "resetAllComponentsToolStripMenuItem";
+            this.resetAllComponentsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.resetAllComponentsToolStripMenuItem.Text = "Reset all components";
+            this.resetAllComponentsToolStripMenuItem.Click += new System.EventHandler(this.resetAllComponentsToolStripMenuItem_Click);
+            // 
             // clear
             // 
             this.clear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -6480,6 +6662,7 @@ namespace LAZYSHELL
             this.clearTilemapsAll,
             this.clearPhysicalMapsAll,
             this.toolStripSeparator29,
+            this.unusedGraphicSetsToolStripMenuItem,
             this.unusedToolStripMenuItem,
             this.unusedToolStripMenuItem1,
             this.unusedToolStripMenuItem2,
@@ -6531,6 +6714,13 @@ namespace LAZYSHELL
             // 
             this.toolStripSeparator29.Name = "toolStripSeparator29";
             this.toolStripSeparator29.Size = new System.Drawing.Size(204, 6);
+            // 
+            // unusedGraphicSetsToolStripMenuItem
+            // 
+            this.unusedGraphicSetsToolStripMenuItem.Name = "unusedGraphicSetsToolStripMenuItem";
+            this.unusedGraphicSetsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.unusedGraphicSetsToolStripMenuItem.Text = "Unused graphic sets...";
+            this.unusedGraphicSetsToolStripMenuItem.Click += new System.EventHandler(this.unusedGraphicSetsToolStripMenuItem_Click);
             // 
             // unusedToolStripMenuItem
             // 
@@ -6613,7 +6803,7 @@ namespace LAZYSHELL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 680);
+            this.ClientSize = new System.Drawing.Size(1020, 720);
             this.Controls.Add(this.panelLevels);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip2);
@@ -6629,19 +6819,12 @@ namespace LAZYSHELL
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Levels_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Levels_KeyDown);
             this.tabPage8.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
+            this.tabPage8.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
             this.panel85.ResumeLayout(false);
-            this.panel84.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.npcX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcZ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyA)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyC)).EndInit();
-            this.panel42.ResumeLayout(false);
+            this.panel118.ResumeLayout(false);
+            this.panel119.ResumeLayout(false);
             this.panel83.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.npcID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcMovement)).EndInit();
@@ -6651,14 +6834,19 @@ namespace LAZYSHELL
             this.panel53.ResumeLayout(false);
             this.panel80.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.npcMapHeader)).EndInit();
-            this.panel118.ResumeLayout(false);
-            this.panel119.ResumeLayout(false);
+            this.panel84.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.npcX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyA)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcPropertyC)).EndInit();
+            this.panel42.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mapNum)).EndInit();
             this.contextMenuStrip4.ResumeLayout(false);
             this.tabPage10.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.panel1.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
             this.panel99.ResumeLayout(false);
@@ -6670,10 +6858,7 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOverlaps)).EndInit();
             this.tabPage9.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            this.toolStrip6.ResumeLayout(false);
-            this.toolStrip6.PerformLayout();
+            this.panel2.PerformLayout();
             this.panel90.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.eventLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventY)).EndInit();
@@ -6682,11 +6867,10 @@ namespace LAZYSHELL
             this.panel46.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.eventHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventEvent)).EndInit();
+            this.toolStrip6.ResumeLayout(false);
+            this.toolStrip6.PerformLayout();
             this.panel52.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.toolStrip5.ResumeLayout(false);
-            this.toolStrip5.PerformLayout();
+            this.panel52.PerformLayout();
             this.panel88.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.exitDestY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitDestX)).EndInit();
@@ -6701,29 +6885,10 @@ namespace LAZYSHELL
             this.panel49.ResumeLayout(false);
             this.panel50.ResumeLayout(false);
             this.panel51.ResumeLayout(false);
+            this.toolStrip5.ResumeLayout(false);
+            this.toolStrip5.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.panel28.ResumeLayout(false);
-            this.panel72.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet1Num)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet2Num)).EndInit();
-            this.panel31.ResumeLayout(false);
-            this.panel29.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet3Num)).EndInit();
-            this.panel12.ResumeLayout(false);
-            this.panel30.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet4Num)).EndInit();
-            this.panel13.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSetL3Num)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet5Num)).EndInit();
-            this.panel11.ResumeLayout(false);
-            this.panel71.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL3Num)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL2Num)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL1Num)).EndInit();
-            this.panel32.ResumeLayout(false);
-            this.panel33.ResumeLayout(false);
-            this.panel34.ResumeLayout(false);
             this.panel70.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mapTilemapL1Num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapTilemapL2Num)).EndInit();
@@ -6738,58 +6903,77 @@ namespace LAZYSHELL
             this.panel69.ResumeLayout(false);
             this.panel40.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteSetNum)).EndInit();
+            this.panel71.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL3Num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL2Num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mapTilesetL1Num)).EndInit();
+            this.panel32.ResumeLayout(false);
+            this.panel33.ResumeLayout(false);
+            this.panel34.ResumeLayout(false);
+            this.panel72.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet1Num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet2Num)).EndInit();
+            this.panel31.ResumeLayout(false);
+            this.panel29.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet3Num)).EndInit();
+            this.panel12.ResumeLayout(false);
+            this.panel30.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet4Num)).EndInit();
+            this.panel13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSetL3Num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet5Num)).EndInit();
+            this.panel11.ResumeLayout(false);
+            this.panel28.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.panel79.ResumeLayout(false);
             this.panel22.ResumeLayout(false);
             this.panel26.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel73.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layerPrioritySet)).EndInit();
+            this.panel17.ResumeLayout(false);
+            this.panel14.ResumeLayout(false);
             this.panel78.ResumeLayout(false);
             this.panel21.ResumeLayout(false);
             this.panel23.ResumeLayout(false);
             this.panel24.ResumeLayout(false);
             this.panel25.ResumeLayout(false);
-            this.panel77.ResumeLayout(false);
-            this.panel16.ResumeLayout(false);
-            this.panel19.ResumeLayout(false);
-            this.panel18.ResumeLayout(false);
-            this.panel20.ResumeLayout(false);
-            this.panel76.ResumeLayout(false);
-            this.panel75.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layerL2LeftShift)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layerL2UpShift)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layerL3LeftShift)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layerL3UpShift)).EndInit();
             this.panel74.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layerMaskHighX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layerMaskLowX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layerMaskHighY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layerMaskLowY)).EndInit();
-            this.panel73.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layerPrioritySet)).EndInit();
-            this.panel17.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
+            this.panel77.ResumeLayout(false);
+            this.panel16.ResumeLayout(false);
+            this.panel19.ResumeLayout(false);
+            this.panel18.ResumeLayout(false);
+            this.panel20.ResumeLayout(false);
+            this.panel75.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layerL2LeftShift)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layerL2UpShift)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layerL3LeftShift)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layerL3UpShift)).EndInit();
+            this.panel76.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.panel27.ResumeLayout(false);
-            this.panel44.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.solidModsY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.solidModsX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.solidModsHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.solidModsWidth)).EndInit();
-            this.panel41.ResumeLayout(false);
-            this.panel41.PerformLayout();
-            this.toolStrip8.ResumeLayout(false);
-            this.toolStrip8.PerformLayout();
             this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.panel15.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tileModsY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileModsX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileModsHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileModsWidth)).EndInit();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
             this.toolStrip7.ResumeLayout(false);
             this.toolStrip7.PerformLayout();
+            this.panel27.ResumeLayout(false);
+            this.panel27.PerformLayout();
+            this.panel44.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solidModsWidth)).EndInit();
+            this.toolStrip8.ResumeLayout(false);
+            this.toolStrip8.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panelLevels.ResumeLayout(false);
@@ -6802,7 +6986,6 @@ namespace LAZYSHELL
 
         #endregion
 
-        private BackgroundWorker ExportLevelImages;
         private Button buttonGotoA;
         private Button buttonGotoB;
         private Button buttonGotoD;
@@ -7081,7 +7264,6 @@ namespace LAZYSHELL
         private Panel panel86;
         private Panel panel87;
         private Panel panel88;
-        private Panel panel9;
         private Panel panel90;
         private Panel panel99;
         private TabControl tabControl;
@@ -7092,7 +7274,6 @@ namespace LAZYSHELL
         private TabPage tabPage9;
         private ToolStrip toolStrip1;
         private ToolStripButton levelPreviewToolStripButton;
-        private ToolStripButton openBattlefields;
         private ToolStripButton openGraphicEditor;
         private ToolStripButton openPaletteEditor;
         private ToolStripButton openTilemap;
@@ -7124,7 +7305,7 @@ namespace LAZYSHELL
         private ToolStripSeparator toolStripSeparator38;
         private ToolStripSeparator toolStripSeparator8;
         private ToolTip toolTip1;
-        private TreeView eventsFieldTree;
+        private TreeView eventsList;
         private TreeView exitsFieldTree;
         private TreeView npcObjectTree;
         private TreeView overlapFieldTree;
@@ -7135,7 +7316,6 @@ namespace LAZYSHELL
         private Panel panel2;
         private Panel panelLevels;
         private System.Windows.Forms.ToolStripComboBox levelName;
-        private ToolStripSeparator toolStripSeparator3;
         private ToolStripButton changeLevelName;
         private ToolStripButton searchLevelNames;
         private ToolStripTextBox toolStripTextBox1;
@@ -7154,7 +7334,6 @@ namespace LAZYSHELL
         private ToolStripButton propertiesButton;
         private Label label28;
         private ToolStripNumericUpDown levelNum;
-        private ToolStripSeparator toolStripSeparator4;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripSeparator toolStripSeparator6;
         private Panel panel1;
@@ -7163,7 +7342,6 @@ namespace LAZYSHELL
         private ToolStripButton npcMoveDown;
         private ToolStripButton npcCopy;
         private ToolStripButton npcPaste;
-        private ToolStripSeparator toolStripSeparator7;
         private ToolStripButton npcDuplicate;
         private ToolStripSeparator toolStripSeparator9;
         private ToolStripButton npcInsertObject;
@@ -7175,7 +7353,6 @@ namespace LAZYSHELL
         private ToolStrip toolStrip4;
         private ToolStripButton overlapFieldInsert;
         private ToolStripButton overlapFieldDelete;
-        private Panel panel3;
         private Label label106;
         private ToolStrip toolStrip6;
         private ToolStripButton eventsDeleteField;
@@ -7183,8 +7360,6 @@ namespace LAZYSHELL
         private ToolStripButton exitsInsertField;
         private ToolStripButton exitsDeleteField;
         private ToolStripButton eventsInsertField;
-        private Panel panel7;
-        private Panel panel5;
         private ToolStripButton eventsCopyField;
         private ToolStripButton eventsPasteField;
         private ToolStripButton eventsDuplicateField;
@@ -7196,7 +7371,6 @@ namespace LAZYSHELL
         private ToolStripButton overlapFieldDuplicate;
         private TabPage tabPage1;
         private Panel panel8;
-        private Panel panel10;
         private TreeView tileModsFieldTree;
         private ToolStrip toolStrip7;
         private Panel panel15;
@@ -7207,7 +7381,6 @@ namespace LAZYSHELL
         private Label label50;
         private Panel panel55;
         private Panel panel27;
-        private Panel panel41;
         private TreeView solidModsFieldTree;
         private ToolStrip toolStrip8;
         private Panel panel44;
@@ -7251,7 +7424,36 @@ namespace LAZYSHELL
         private ToolStripSeparator toolStripSeparator15;
         private ToolStripButton buttonGotoC;
         private ToolStripNumericUpDown eventExit;
-        private ToolStripSeparator toolStripSeparator17;
+        private Label npcsBytesLeft;
+        private ToolStripSeparator toolStripSeparator18;
+        private ToolStripLabel overlapsBytesLeft;
+        private ToolStripMenuItem unusedGraphicSetsToolStripMenuItem;
+        private ToolStripMenuItem importArchitectureToolStripMenuItem;
+        private ToolStripMenuItem exportArchitectureToolStripMenuItem;
+        private ToolStripButton hexEditor;
+        private ToolStripSeparator toolStripSeparator20;
+        private ToolStripLabel eventsBytesLeft;
+        private ToolStripSeparator toolStripSeparator19;
+        private ToolStripLabel exitsBytesLeft;
+        private ToolStripSeparator toolStripSeparator7;
+        private ToolStripSeparator toolStripSeparator21;
+        private ToolStripDropDownButton toolStripDropDownButton1;
+        private ToolStripMenuItem resetLevelMapToolStripMenuItem;
+        private ToolStripMenuItem resetNPCDataToolStripMenuItem;
+        private ToolStripMenuItem resetEventDataToolStripMenuItem;
+        private ToolStripMenuItem resetExitDataToolStripMenuItem;
+        private ToolStripMenuItem resetOverlapDataToolStripMenuItem;
+        private ToolStripMenuItem resetLayerDataToolStripMenuItem;
+        private ToolStripMenuItem resetTilemapModsToolStripMenuItem;
+        private ToolStripMenuItem resetSolidityModsToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripMenuItem resetTilesetsToolStripMenuItem;
+        private ToolStripMenuItem resetTilemapsToolStripMenuItem;
+        private ToolStripMenuItem resetSolidityMapToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripMenuItem resetAllComponentsToolStripMenuItem;
+        private ToolStripMenuItem resetPaletteSetToolStripMenuItem;
+        private ToolStripMenuItem resetGraphicSetToolStripMenuItem;
     }
 }
 

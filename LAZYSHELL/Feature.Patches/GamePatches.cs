@@ -14,8 +14,7 @@ namespace LAZYSHELL.Patches
 {
     public partial class GamePatches : Form
     {
-        private Model model = State.Instance.Model;
-        private Settings settings = Settings.Default;
+                private Settings settings = Settings.Default;
 
         private string verifyType = "LAZYSHELL PATCH INFORMATION";
         WebClient client = new WebClient();
@@ -98,7 +97,7 @@ namespace LAZYSHELL.Patches
                 AddNewDownload(e.Result);
                 DownloadPatches(patches.Count + 1);
             }
-            catch (Exception ex)
+            catch
             {
                 clock.Stop();
                 this.downloadingLabel.Visible = false;
@@ -113,7 +112,7 @@ namespace LAZYSHELL.Patches
                 Uri link = new Uri(settings.patchServerURL + "patch" + pn.ToString() + "/patch" + pn.ToString() + ".bin");
                 client.DownloadDataAsync(link);
             }
-            catch (Exception ex)
+            catch
             {
                 PatchListBox.Items.Add("(no patches available)");
             }
@@ -153,7 +152,7 @@ namespace LAZYSHELL.Patches
                 FreshRomLabel.Visible = patch.FreshRom;
                 ImagePictureBox.Image = new Bitmap(patch.PatchImage);
             }
-            catch (Exception ex)
+            catch
             {
                 return;
             }
@@ -206,10 +205,10 @@ namespace LAZYSHELL.Patches
                     DialogResult result = MessageBox.Show("Apply this patch to the currently open ROM image?\n\nNote: This will modify the current rom image, and cannot be undone.\nNote: You may want to save the patched ROM image to disk once done.", "LAZY SHELL", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        if (ips.ApplyTo(model.Data))
+                        if (ips.ApplyTo(Model.Data))
                         {
                             // Needed to reset state for new rom image
-                            model.ClearModel();
+                            Model.ClearModel();
                             State.Instance.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
                             MessageBox.Show("Patch Applied Succesfully", "LAZY SHELL");
                         }
@@ -220,7 +219,7 @@ namespace LAZYSHELL.Patches
                 else
                     throw new Exception();
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("There was an error downloading or applying the IPS patch. Please try to download and apply it manually with LunarIPS.", "LAZY SHELL");
                 return;

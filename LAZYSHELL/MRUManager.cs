@@ -248,7 +248,7 @@ namespace LAZYSHELL
             {
                 menuItemParent = menuItemMRU.Owner;
             }
-            catch (Exception ex)
+            catch
             {
             }
 

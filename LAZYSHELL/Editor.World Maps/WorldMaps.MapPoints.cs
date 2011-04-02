@@ -12,9 +12,10 @@ namespace LAZYSHELL
         #region Variables
         // main
         private bool updatingMapPoints;
-        private MapPoint[] mapPoints { get { return model.MapPoints; } set { model.MapPoints = value; } }
+        private MapPoint[] mapPoints { get { return Model.MapPoints; } set { Model.MapPoints = value; } }
         private MapPoint mapPoint { get { return mapPoints[index_l]; } set { mapPoints[index_l] = value; } }
         private int index_l;
+        public int Index_l { get { return (int)mapPointNum.Value; } set { mapPointNum.Value = value; } }
         private PaletteSet[] fontPalettes = new PaletteSet[3];
         private FontCharacter[] fontDialogue = new FontCharacter[128];
         private BattleDialoguePreview drawName = new BattleDialoguePreview();
@@ -246,11 +247,11 @@ namespace LAZYSHELL
                 if (!isdup[i])
                 {
                     pointers[i] = pointer;
-                    Bits.SetShort(model.Data, i * 2 + pOffset, pointers[i]);
-                    Bits.SetCharArray(model.Data, dOffset, pointNames[i]);
+                    Bits.SetShort(Model.Data, i * 2 + pOffset, pointers[i]);
+                    Bits.SetCharArray(Model.Data, dOffset, pointNames[i]);
                     dOffset += pointNames[i].Length;
                     pointer += (ushort)pointNames[i].Length;
-                    model.Data[dOffset] = 6; dOffset++; pointer++;
+                    Model.Data[dOffset] = 6; dOffset++; pointer++;
                 }
             }
             // set duplicates
@@ -261,7 +262,7 @@ namespace LAZYSHELL
                 if (isdup[i])
                 {
                     pointers[i] = (ushort)(pointers[duplicates[i]] + locations[i]);
-                    Bits.SetShort(model.Data, i * 2 + pOffset, pointers[i]);
+                    Bits.SetShort(Model.Data, i * 2 + pOffset, pointers[i]);
                 }
             }
         }
@@ -316,8 +317,14 @@ namespace LAZYSHELL
             }
 
             Bitmap icon = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
-
-            e.DrawBackground();
+            Bitmap bgimage = Model.MenuBackground_;
+            if (bgimage != null)
+            {
+                Rectangle background = new Rectangle(0, e.Index * 15 % bgimage.Height, bgimage.Width, 15);
+                e.Graphics.DrawImage(bgimage, e.Bounds.X, e.Bounds.Y, background, GraphicsUnit.Pixel);
+            }
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                e.DrawBackground();
             e.Graphics.DrawImage(new Bitmap(icon), new Point(e.Bounds.X, e.Bounds.Y));
             e.DrawFocusRectangle();
         }
@@ -489,12 +496,12 @@ namespace LAZYSHELL
         }
         private void runEventEdit_Click(object sender, EventArgs e)
         {
-            if (model.Program.EventScripts == null || !model.Program.EventScripts.Visible)
-                model.Program.CreateEventScriptsWindow();
+            if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
+                Model.Program.CreateEventScriptsWindow();
 
-            model.Program.EventScripts.EventName.SelectedIndex = 0;
-            model.Program.EventScripts.EventNum.Value = runEvent.Value;
-            model.Program.EventScripts.BringToFront();
+            Model.Program.EventScripts.EventName.SelectedIndex = 0;
+            Model.Program.EventScripts.EventNum.Value = runEvent.Value;
+            Model.Program.EventScripts.BringToFront();
         }
         private void goMapPointB_SelectedIndexChanged(object sender, EventArgs e)
         {

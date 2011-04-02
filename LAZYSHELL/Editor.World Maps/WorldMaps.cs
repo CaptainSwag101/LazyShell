@@ -15,13 +15,13 @@ namespace LAZYSHELL
     public partial class WorldMaps : Form
     {
         #region Variables
+        private long checksum;
         // main
         private delegate void Function();
         private bool updating = false;
         private int index { get { return (int)worldMapName.SelectedIndex; } }
-        private Model model = State.Instance.Model;
-        private WorldMap[] worldMaps { get { return model.WorldMaps; } set { model.WorldMaps = value; } }
-        private PaletteSet palettes { get { return model.Palettes; } set { model.Palettes = value; } }
+        private WorldMap[] worldMaps { get { return Model.WorldMaps; } set { Model.WorldMaps = value; } }
+        private PaletteSet palettes { get { return Model.Palettes; } set { Model.Palettes = value; } }
         private WorldMap worldMap { get { return worldMaps[index]; } set { worldMaps[index] = value; } }
         private WorldMapTileSet tileSet;
         private Overlay overlay = new Overlay();
@@ -40,7 +40,6 @@ namespace LAZYSHELL
         private TileEditor tileEditor;
         private PaletteEditor paletteEditor;
         private GraphicEditor graphicEditor;
-        private ProgressBar progressBar;
         // buffers and stacks
         private Bitmap selection;
         private CopyBuffer draggedTiles;
@@ -56,12 +55,14 @@ namespace LAZYSHELL
         // main
         public WorldMaps()
         {
+            checksum = Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
+                Model.WorldMapSprites, Model.WorldMapTileSets, Model.MapPoints);
             settings.Keystrokes[0x20] = "\x20";
-            fontPalettes[0] = new PaletteSet(model.Data, 0, 0x3DFEE0, 2, 16, 32);
-            fontPalettes[1] = new PaletteSet(model.Data, 0, 0x3E2D55, 2, 16, 32);
-            fontPalettes[2] = new PaletteSet(model.Data, 0, 0x01EF40, 2, 16, 32);
+            fontPalettes[0] = new PaletteSet(Model.Data, 0, 0x3DFEE0, 2, 16, 32);
+            fontPalettes[1] = new PaletteSet(Model.Data, 0, 0x3E2D55, 2, 16, 32);
+            fontPalettes[2] = new PaletteSet(Model.Data, 0, 0x01EF40, 2, 16, 32);
             for (int i = 0; i < fontDialogue.Length; i++)
-                fontDialogue[i] = new FontCharacter(model.Data, i, 1);
+                fontDialogue[i] = new FontCharacter(Model.Data, i, 1);
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
@@ -171,7 +172,7 @@ namespace LAZYSHELL
                 "If the bit (under \"BIT SET\") of this memory address is set, \n" +
                 "then the location is enabled / visible in-game.\n\n" +
                 "Example: by default location #9 (Mushroom Way) is not \n" +
-                "enabled or visible until bit 2 of memory address 00:7065 is \n" +
+                "enabled or visible until bit 2 of memory address $7065 is \n" +
                 "set. This bit is set at the end of event script #1396.\n\n" +
                 "These bits are always set in an event script.");
 
@@ -179,7 +180,7 @@ namespace LAZYSHELL
                 "If this bit of a memory address (under \"IF MEMORY\") is set, \n" +
                 "then the location is enabled / visible in-game.\n\n" +
                 "Example: by default location #9 (Mushroom Way) is not \n" +
-                "enabled or visible until bit 2 of memory address 00:7065 is \n" +
+                "enabled or visible until bit 2 of memory address $7065 is \n" +
                 "set. This bit is set at the end of event script #1396.\n\n" +
                 "These bits are always set in an event script.");
 
@@ -289,15 +290,15 @@ namespace LAZYSHELL
                 wm.Assemble();
 
             // Palette set
-            palettes.Assemble(model.WorldMapPalettes, 0);
+            palettes.Assemble(Model.WorldMapPalettes, 0);
             byte[] compressed = new byte[0x100];
-            int totalSize = Comp.Compress(model.WorldMapPalettes, compressed);
+            int totalSize = Comp.Compress(Model.WorldMapPalettes, compressed);
             if (totalSize > 0xD3)
                 MessageBox.Show(
                     "Recompressed palette set exceeds allotted ROM space by " + (totalSize - 0xD4).ToString() + " bytes.\nPalettes will not save. Change some color values to reduce the size.",
                     "LAZY SHELL");
             else
-                Bits.SetByteArray(model.Data, 0x3E988D, compressed, 0, totalSize - 1);
+                Bits.SetByteArray(Model.Data, 0x3E988D, compressed, 0, totalSize - 1);
 
             // Tilesets
             byte[] compress = new byte[0x800];
@@ -305,10 +306,10 @@ namespace LAZYSHELL
             int pOffset = 0x3E0014;
             int dOffset = 0x3E929F;
             int size = 0;
-            for (int i = 0; i < model.WorldMapTileSets.Length; i++)
+            for (int i = 0; i < Model.WorldMapTileSets.Length; i++)
             {
-                Bits.SetShort(model.Data, pOffset, (ushort)dOffset);
-                size = Comp.Compress(model.WorldMapTileSets[i], compress);
+                Bits.SetShort(Model.Data, pOffset, (ushort)dOffset);
+                size = Comp.Compress(Model.WorldMapTileSets[i], compress);
                 totalSize += size + 1;
                 if (totalSize > 0x5ED)
                 {
@@ -319,8 +320,8 @@ namespace LAZYSHELL
                 }
                 else
                 {
-                    model.Data[dOffset] = 1; dOffset++;
-                    Bits.SetByteArray(model.Data, dOffset, compress, 0, size - 1);
+                    Model.Data[dOffset] = 1; dOffset++;
+                    Bits.SetByteArray(Model.Data, dOffset, compress, 0, size - 1);
                     dOffset += size;
                     pOffset += 2;
                 }
@@ -328,13 +329,13 @@ namespace LAZYSHELL
 
             // Graphics
             compressed = new byte[0x8000];
-            totalSize = Comp.Compress(model.WorldMapGraphics, compressed);
+            totalSize = Comp.Compress(Model.WorldMapGraphics, compressed);
             if (totalSize > 0x56F5)
                 MessageBox.Show(
                     "Recompressed graphic sets exceed allotted ROM space by " + (totalSize - 0x56F6).ToString() + " bytes.\nPalettes will not save. Change some color values to reduce the size.",
                     "LAZY SHELL");
             else
-                Bits.SetByteArray(model.Data, 0x3E2E82, compressed, 0, totalSize - 1);
+                Bits.SetByteArray(Model.Data, 0x3E2E82, compressed, 0, totalSize - 1);
 
             foreach (MapPoint mp in mapPoints)
                 mp.Assemble();
@@ -395,8 +396,8 @@ namespace LAZYSHELL
         {
             int[] pixels = new int[8 * 16];
 
-            Tile8x8 tempA = new Tile8x8(16, model.WorldMapSprites, 0x200, GetPointPalette(), false, false, false, false);
-            Tile8x8 tempB = new Tile8x8(17, model.WorldMapSprites, 0x220, GetPointPalette(), false, false, false, false);
+            Tile8x8 tempA = new Tile8x8(16, Model.WorldMapSprites, 0x200, GetPointPalette(), false, false, false, false);
+            Tile8x8 tempB = new Tile8x8(17, Model.WorldMapSprites, 0x220, GetPointPalette(), false, false, false, false);
 
             for (int y = 0; y < 8; y++)
             {
@@ -417,7 +418,7 @@ namespace LAZYSHELL
 
             for (int i = 0; i < 16; i++) // 16 colors in palette
             {
-                color = Bits.GetShort(model.Data, i * 2 + 0x3DFF00);
+                color = Bits.GetShort(Model.Data, i * 2 + 0x3DFF00);
 
                 red[i] = (byte)((color % 0x20) * multiplier);
                 green[i] = (byte)(((color >> 5) % 0x20) * multiplier);
@@ -477,6 +478,7 @@ namespace LAZYSHELL
             SetWorldMapImage();
             LoadGraphicEditor();
             LoadTileEditor();
+            checksum--;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {
@@ -567,6 +569,7 @@ namespace LAZYSHELL
                 {
                     Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileSet.TileSetLayer[(y + y_) * 16 + x + x_] = tile.Copy();
+                    tileSet.TileSetLayer[(y + y_) * 16 + x + x_].TileIndex = (y + y_) * 16 + x + x_;
                 }
             }
             tileSet.DrawTileset(tileSet.TileSetLayer, tileSet.TileSet);
@@ -621,6 +624,9 @@ namespace LAZYSHELL
         }
         private void WorldMaps_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
+                Model.WorldMapSprites, Model.WorldMapTileSets, Model.MapPoints) == checksum)
+                goto Close;
             DialogResult result = MessageBox.Show(
                 "World Maps have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -628,18 +634,20 @@ namespace LAZYSHELL
                 Assemble();
             else if (result == DialogResult.No)
             {
-                model.WorldMapGraphics = null;
-                model.WorldMapPalettes = null;
-                model.WorldMaps = null;
-                model.WorldMapSprites = null;
-                model.WorldMapTileSets[0] = null;
-                model.Palettes = null;
+                Model.MapPoints = null;
+                Model.WorldMapGraphics = null;
+                Model.WorldMapPalettes = null;
+                Model.WorldMaps = null;
+                Model.WorldMapSprites = null;
+                Model.WorldMapTileSets[0] = null;
+                Model.Palettes = null;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
+        Close:
             tileEditor.Close();
             paletteEditor.Close();
             graphicEditor.Close();
@@ -996,5 +1004,26 @@ namespace LAZYSHELL
             Do.Export(tileSetImage, "worldMap." + index.ToString("d2") + ".png");
         }
         #endregion
+
+        private void resetWorldMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current world map. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            int pointer = Bits.GetShort(Model.Data, worldMap.Tileset * 2 + 0x3E0014);
+            int offset = 0x3E0000 + pointer + 1;
+            Model.WorldMapTileSets[worldMap.Tileset] = Comp.Decompress(Model.Data, offset, 0x800);
+            worldMap = new WorldMap(Model.Data, index);
+            RefreshWorldMap();
+        }
+
+        private void resetMapPointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current map point. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            mapPoint = new MapPoint(Model.Data, index_l);
+            RefreshMapPointEditor();
+        }
     }
 }

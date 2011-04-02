@@ -15,7 +15,7 @@ namespace LAZYSHELL
     public partial class AnimationScripts : Form
     {
         #region Variables
-        private Model model = State.Instance.Model;
+        private long checksum;
         private A_TreeViewWrapper a_treeViewWrapper;
         private AnimationScript[] animationScripts
         {
@@ -23,14 +23,14 @@ namespace LAZYSHELL
             {
                 switch (animationCategory.SelectedIndex)
                 {
-                    case 0: return model.BehaviorAnimations;
-                    case 1: return model.SpellAnimMonsters;
-                    case 2: return model.AttackAnimations;
-                    case 3: return model.EntranceAnimations;
-                    case 4: return model.ItemAnimations;
-                    case 5: return model.SpellAnimAllies;
-                    case 6: return model.WeaponAnimations;
-                    case 7: return model.BattleEvents;
+                    case 0: return Model.BehaviorAnimations;
+                    case 1: return Model.SpellAnimMonsters;
+                    case 2: return Model.AttackAnimations;
+                    case 3: return Model.EntranceAnimations;
+                    case 4: return Model.ItemAnimations;
+                    case 5: return Model.SpellAnimAllies;
+                    case 6: return Model.WeaponAnimations;
+                    case 7: return Model.BattleEvents;
                 }
                 return null;
             }
@@ -38,14 +38,14 @@ namespace LAZYSHELL
             {
                 switch (animationCategory.SelectedIndex)
                 {
-                    case 0: model.BehaviorAnimations = value; break;
-                    case 1: model.SpellAnimMonsters = value; break;
-                    case 2: model.AttackAnimations = value; break;
-                    case 3: model.EntranceAnimations = value; break;
-                    case 4: model.ItemAnimations = value; break;
-                    case 5: model.SpellAnimAllies = value; break;
-                    case 6: model.WeaponAnimations = value; break;
-                    case 7: model.BattleEvents = value; break;
+                    case 0: Model.BehaviorAnimations = value; break;
+                    case 1: Model.SpellAnimMonsters = value; break;
+                    case 2: Model.AttackAnimations = value; break;
+                    case 3: Model.EntranceAnimations = value; break;
+                    case 4: Model.ItemAnimations = value; break;
+                    case 5: Model.SpellAnimAllies = value; break;
+                    case 6: Model.WeaponAnimations = value; break;
+                    case 7: Model.BattleEvents = value; break;
                 }
             }
         }
@@ -64,19 +64,39 @@ namespace LAZYSHELL
             this.settings.Keystrokes[0x20] = "\x20";
             this.settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
+            toolTipLabel = new ToolTipLabel(this, toolTip1, showDecHex, null);
+            for (int i = 0; i < 9; i++)
+            {
+                ToolStripNumericUpDown numUpDown = new ToolStripNumericUpDown();
+                numUpDown.Hexadecimal = true;
+                numUpDown.Maximum = 255;
+                numUpDown.MouseMove += new MouseEventHandler(toolTipLabel.ControlMouseMove);
+                numUpDown.Width = 40;
+                toolStrip2.Items.Insert(i + 4, numUpDown);
+            }
+            this.animationCategory.Items.AddRange(new object[] {
+            "Monster Behaviors",
+            "Monster Spells",
+            "Monster Attacks",
+            "Monster Entrances",
+            "Items",
+            "Ally Spells",
+            "Weapons",
+            "Battle Events"});
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip4, Keys.F2, showDecHex);
             InitializeAnimationScriptsEditor();
-            toolTipLabel = new ToolTipLabel(this, toolTip1, showDecHex, null);
         }
         #region Methods
         private void InitializeAnimationScriptsEditor()
         {
             updatingAnimations = true;
 
-            animationBank = Bits.GetByteArray(model.Data, 0x350000, 0x10000);
-            battleBank = Bits.GetByteArray(model.Data, 0x3A6000, 0xA000);
+            animationBank = Bits.GetByteArray(Model.Data, 0x350000, 0x10000);
+            battleBank = Bits.GetByteArray(Model.Data, 0x3A6000, 0xA000);
 
+            checksum = Do.GenerateChecksum(animationBank, battleBank);
+            //
             this.menuTextPreview = new MenuTextPreview();
             this.battleDialoguePreview = new BattleDialoguePreview();
 
@@ -97,19 +117,22 @@ namespace LAZYSHELL
                     animationName.Items.Clear();
                     for (int i = 0; i < animationScripts.Length; i++)
                         this.animationName.Items.Add("Script #" + i.ToString());
+                    animationName.DropDownWidth = animationName.Width;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 1:
                     a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     for (int i = 0; i < animationScripts.Length; i++)
-                        this.animationName.Items.Add(model.SpellNames.GetNameByNum(i + 0x40));
+                        this.animationName.Items.Add(Model.SpellNames.GetNameByNum(i + 0x40));
+                    animationName.DropDownWidth = animationName.Width;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 2:
                     a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
-                    this.animationName.Items.AddRange(model.AttackNames.Names);
+                    this.animationName.Items.AddRange(Model.AttackNames.Names);
+                    animationName.DropDownWidth = animationName.Width;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 3:
@@ -132,33 +155,38 @@ namespace LAZYSHELL
                         "spread from front",
                         "spread from middle",
                         "ready to attack"});
+                    animationName.DropDownWidth = animationName.Width;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 4:
                     a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     for (int i = 0; i < animationScripts.Length; i++)
-                        this.animationName.Items.Add(model.ItemNames.GetNameByNum(i + 0x60));
+                        this.animationName.Items.Add(Model.ItemNames.GetNameByNum(i + 0x60));
+                    animationName.DropDownWidth = animationName.Width;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 5:
                     a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     for (int i = 0; i < animationScripts.Length; i++)
-                        this.animationName.Items.Add(model.SpellNames.GetNameByNum(i));
+                        this.animationName.Items.Add(Model.SpellNames.GetNameByNum(i));
+                    animationName.DropDownWidth = animationName.Width;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 6:
                     a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     for (int i = 0; i < animationScripts.Length; i++)
-                        this.animationName.Items.Add(model.ItemNames.GetNameByNum(i));
+                        this.animationName.Items.Add(Model.ItemNames.GetNameByNum(i));
+                    animationName.DropDownWidth = animationName.Width;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 7:
                     a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     this.animationName.Items.AddRange(Lists.Numerize(Lists.BattleEventNames));
+                    animationName.DropDownWidth = 500;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
             }
@@ -248,7 +276,7 @@ namespace LAZYSHELL
                     aniBits.Enabled = true;
 
                     aniNumA.Value = aniNameA.SelectedIndex = Bits.GetShort(asc.AnimationData, 3) & 0x3FF;
-                    aniNumC.Value = asc.AnimationData[5];
+                    aniNumC.Value = asc.AnimationData[5] & 15;
                     aniBits.SetItemChecked(0, (asc.AnimationData[1] & 0x01) == 0x01);
                     aniBits.SetItemChecked(1, (asc.AnimationData[2] & 0x08) == 0x08);
                     aniBits.SetItemChecked(2, (asc.AnimationData[2] & 0x20) == 0x20);
@@ -412,7 +440,7 @@ namespace LAZYSHELL
 
                     aniNumC.Value = asc.Option & 0x0F;
                     break;
-                case 0x36: aniTitleA.Text = "Set object mem bits..."; goto case 0x37;
+                case 0x36: aniTitleA.Text = "Set obj mem bits..."; goto case 0x37;
                 case 0x37:
                     if (asc.Opcode == 0x37)
                         aniTitleA.Text = "Clear object mem bits...";
@@ -559,7 +587,7 @@ namespace LAZYSHELL
                     aniNumC.Value = Bits.GetShort(asc.AnimationData, 1);
                     break;
                 case 0x77:
-                    aniTitleA.Text = "Set object graphic properties...";
+                    aniTitleA.Text = "Set obj graphic properties...";
                     aniLabelA.Text = "Overlap";
                     aniTitleB.Text = "Properties...";
 
@@ -575,7 +603,7 @@ namespace LAZYSHELL
                         aniBits.SetItemChecked(j, (asc.Option & i) == i);
                     break;
                 case 0x78:
-                    aniTitleA.Text = "Set object layer priority...";
+                    aniTitleA.Text = "Set obj layer priority...";
                     aniLabelC.Text = "Low bits";
                     aniLabelD.Text = "High bits";
 
@@ -594,7 +622,7 @@ namespace LAZYSHELL
                     aniNameA.Enabled = true;
                     aniNumC.Enabled = true;
 
-                    aniNameA.SelectedIndex = asc.Option;
+                    aniNameA.SelectedIndex = asc.Option & 3;
                     aniNumC.Value = asc.AnimationData[2];
                     break;
                 case 0x7E:
@@ -619,6 +647,7 @@ namespace LAZYSHELL
                     aniNumC.Value = asc.AnimationData[2];
                     break;
                 case 0x8E:
+                case 0x8F:
                     aniTitleA.Text = "Screen flash color...";
                     aniLabelA.Text = "Color";
                     aniLabelC.Text = "Duration";
@@ -626,10 +655,13 @@ namespace LAZYSHELL
                     aniNameA.Items.AddRange(new object[] { 
                         "{none}", "red", "green", "yellow", "blue", "pink", "aqua", "white" });
                     aniNameA.Enabled = true;
-                    aniNumC.Enabled = true;
-
                     aniNameA.SelectedIndex = asc.Option & 0x07;
-                    aniNumC.Value = asc.AnimationData[2];
+
+                    if (asc.Opcode == 0x8E)
+                    {
+                        aniNumC.Enabled = true;
+                        aniNumC.Value = asc.AnimationData[2];
+                    }
                     break;
                 case 0xAB:
                 case 0xAE:
@@ -687,12 +719,12 @@ namespace LAZYSHELL
                         "Store / remove item to item inventory..." : "Store / remove item to special item inventory...";
                     aniLabelA.Text = "Item";
 
-                    aniNameA.Items.AddRange(model.ItemNames.GetNames());
+                    aniNameA.Items.AddRange(Model.ItemNames.GetNames());
                     aniNameA.Enabled = true;
                     aniNumA.Maximum = 0xB0; aniNumA.Enabled = true;
                     aniBits.Items.Add("remove"); aniBits.Enabled = true;
 
-                    aniNameA.SelectedIndex = model.ItemNames.GetIndexFromNum(
+                    aniNameA.SelectedIndex = Model.ItemNames.GetIndexFromNum(
                         Math.Abs((short)Bits.GetShort(asc.AnimationData, 1)));
                     aniNumA.Value = Math.Abs((short)Bits.GetShort(asc.AnimationData, 1));
                     aniBits.SetItemChecked(0, asc.AnimationData[2] == 0xFF);
@@ -900,8 +932,13 @@ namespace LAZYSHELL
                     asc.AnimationData[2] = (byte)aniNumC.Value;
                     break;
                 case 0x85:
+                    asc.Option = (byte)(aniNameA.SelectedIndex << 1);
+                    asc.Option |= (byte)(aniNameB.SelectedIndex << 4);
+                    asc.AnimationData[2] = (byte)aniNumC.Value;
                     break;
                 case 0x8E:
+                    asc.Option = (byte)aniNameA.SelectedIndex;
+                    asc.AnimationData[2] = (byte)aniNumC.Value;
                     break;
                 case 0xAB:
                 case 0xAE:
@@ -970,64 +1007,6 @@ namespace LAZYSHELL
             updatingAnimations = false;
         }
 
-        private void MoveAnimationNode(AnimationScriptCommand tempA, AnimationScriptCommand tempB, int select)
-        {
-            Point p = Do.GetTreeViewScrollPos(animationScriptTree);
-
-            byte[] byteA = new byte[tempB.AnimationData.Length];
-            byte[] byteB = new byte[tempA.AnimationData.Length];
-            for (int i = 0; i < byteA.Length; i++)
-                byteA[i] = tempB.AnimationData[i];
-            for (int i = 0; i < byteB.Length; i++)
-                byteB[i] = tempA.AnimationData[i];
-            tempA.AnimationData = byteA;
-            tempB.AnimationData = byteB;
-
-            int offset = tempA.InternalOffset;
-            for (int i = 0; i < byteA.Length; i++, offset++)
-                model.Data[offset] = tempA.AnimationData[i];
-            int temp = tempB.InternalOffset;
-            tempB.InternalOffset = tempA.InternalOffset;
-            tempA.InternalOffset = offset;
-            for (int i = 0; i < byteB.Length; i++, offset++)
-                model.Data[offset] = tempB.AnimationData[i];
-            tempA.Offset = tempA.OriginalOffset = tempA.InternalOffset;
-            tempB.Offset = tempB.OriginalOffset = tempB.InternalOffset;
-
-            // check multiple instances of command in current script, and change each accordingly
-            animationScripts[(int)animationNum.Value].RefreshAnimationScript();
-
-            // redraw the treeview
-            a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
-
-            // set the selected node
-            int internalOffset = select == 0 ? tempA.InternalOffset : tempB.InternalOffset;
-            foreach (TreeNode tn in this.animationScriptTree.Nodes)
-            {
-                if (internalOffset == ((AnimationScriptCommand)tn.Tag).InternalOffset)
-                {
-                    this.animationScriptTree.SelectedNode = tn;
-                    break;
-                }
-                else
-                    SearchForNodeWithTag(tn, internalOffset);
-            }
-            p.X = 0;
-            Do.SetTreeViewScrollPos(animationScriptTree, p);
-        }
-        private void SearchForNodeWithTag(TreeNode node, int offset)
-        {
-            foreach (TreeNode tn in node.Nodes)
-            {
-                if (offset == ((AnimationScriptCommand)tn.Tag).InternalOffset)
-                {
-                    this.animationScriptTree.SelectedNode = tn;
-                    break;
-                }
-                else
-                    SearchForNodeWithTag(tn, offset);
-            }
-        }
         public void Assemble()
         {
         }
@@ -1047,7 +1026,7 @@ namespace LAZYSHELL
 
             if (animationCategory.SelectedIndex == 2)
             {
-                animationName.SelectedIndex = model.AttackNames.GetIndexFromNum(index);
+                animationName.SelectedIndex = Model.AttackNames.GetIndexFromNum(index);
                 a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
             }
             else
@@ -1062,12 +1041,13 @@ namespace LAZYSHELL
         private void animationName_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (animationCategory.SelectedIndex == 2)
-                animationNum.Value = model.AttackNames.GetNumFromIndex(animationName.SelectedIndex);
+                animationNum.Value = Model.AttackNames.GetNumFromIndex(animationName.SelectedIndex);
             else
                 animationNum.Value = animationName.SelectedIndex;
         }
         private void animationName_DrawItem(object sender, DrawItemEventArgs e)
         {
+            Bitmap bgimage = Model.MenuBackground_;
             switch (animationCategory.SelectedIndex)
             {
                 case 0: if (e.Index < 0 || e.Index > 53) return; break;
@@ -1079,20 +1059,6 @@ namespace LAZYSHELL
                 case 6: if (e.Index < 0 || e.Index > 35) return; break;
                 case 7: if (e.Index < 0 || e.Index > 102) return; break;
             }
-
-            // set the palette
-            int[] palette = new int[16];
-            ushort color = 0; int r, g, b;
-            for (int i = 0; i < 16; i++) // 16 colors in palette
-            {
-                color = Bits.GetShort(model.Data, i * 2 + 0x01EF40);
-                r = (byte)((color % 0x20) * 8);
-                g = (byte)(((color >> 5) % 0x20) * 8);
-                b = (byte)(((color >> 10) % 0x20) * 8);
-                palette[i] = Color.FromArgb(r, g, b).ToArgb();
-            }
-
-            e.DrawBackground();
             int[] temp;
             if (animationCategory.SelectedIndex == 1 ||
                 animationCategory.SelectedIndex == 2 ||
@@ -1105,26 +1071,35 @@ namespace LAZYSHELL
                 switch (animationCategory.SelectedIndex)
                 {
                     case 1: // monster spells
-                        arr = model.SpellNames.GetNameByNum(e.Index + 0x40).ToCharArray();
-                        temp = battleDialoguePreview.GetPreview(model.FontDialogue, palette, arr, false); break;
+                        arr = Model.SpellNames.GetNameByNum(e.Index + 0x40).ToCharArray();
+                        temp = battleDialoguePreview.GetPreview(Model.FontDialogue, Model.FontPaletteBattle.Palette, arr, false);
+                        break;
                     case 2: // monster attacks
-                        arr = model.AttackNames.GetName(e.Index).ToCharArray();
-                        temp = battleDialoguePreview.GetPreview(model.FontDialogue, palette, arr, false); break;
+                        arr = Model.AttackNames.GetName(e.Index).ToCharArray();
+                        temp = battleDialoguePreview.GetPreview(Model.FontDialogue, Model.FontPaletteBattle.Palette, arr, false);
+                        break;
                     case 4: // items
-                        arr = model.ItemNames.GetNameByNum(e.Index + 0x60).ToCharArray();
-                        temp = menuTextPreview.GetPreview(model.FontMenu, palette, arr, true); break;
+                        arr = Model.ItemNames.GetNameByNum(e.Index + 0x60).ToCharArray();
+                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, arr, true);
+                        break;
                     case 5: // ally spells
-                        arr = model.SpellNames.GetNameByNum(e.Index).ToCharArray();
-                        temp = menuTextPreview.GetPreview(model.FontMenu, palette, arr, true); break;
+                        arr = Model.SpellNames.GetNameByNum(e.Index).ToCharArray();
+                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, arr, true);
+                        break;
                     case 6: // weapons
-                        arr = model.ItemNames.GetNameByNum(e.Index).ToCharArray();
-                        temp = menuTextPreview.GetPreview(model.FontMenu, palette, arr, true); break;
+                        arr = Model.ItemNames.GetNameByNum(e.Index).ToCharArray();
+                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, arr, true);
+                        break;
                     default:
                         arr = new char[1];
-                        temp = menuTextPreview.GetPreview(model.FontMenu, palette, arr, true); break;
+                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, arr, true); break;
                 }
 
+                Rectangle background = new Rectangle(0, e.Index * 15 % bgimage.Height, bgimage.Width, 15);
+                e.Graphics.DrawImage(bgimage, e.Bounds.X, e.Bounds.Y, background, GraphicsUnit.Pixel);
                 // set the pixels
+                if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                    e.DrawBackground();
 
                 int[] pixels;
                 Bitmap icon;
@@ -1152,38 +1127,31 @@ namespace LAZYSHELL
             }
             else
             {
+                e.DrawBackground();
                 e.Graphics.DrawString(animationName.Items[e.Index].ToString(), e.Font, new SolidBrush(animationName.ForeColor), e.Bounds);
             }
-            e.DrawFocusRectangle();
         }
 
         private void animationScriptTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             //if (asc == (AnimationScriptCommand)e.Node.Tag)
             //    return;
-
             a_treeViewWrapper.SelectedNode = e.Node;
             asc = (AnimationScriptCommand)e.Node.Tag;
 
             ToolStripNumericUpDown numUpDown;
-            int index = 0;
-            while (index < toolStrip2.Items.Count)
+            int i = 4;
+            for (int a = 0; a < asc.AnimationData.Length && a < 9; a++, i++)
             {
-                if (toolStrip2.Items[index].GetType() == typeof(ToolStripNumericUpDown))
-                    toolStrip2.Items.RemoveAt(index);
-                else
-                    index++;
-            }
-            for (int i = 0; i < asc.AnimationData.Length; i++)
-            {
-                numUpDown = new ToolStripNumericUpDown();
-                numUpDown.Hexadecimal = true;
-                numUpDown.Maximum = 255;
-                numUpDown.MouseMove += new MouseEventHandler(toolTipLabel.ControlMouseMove);
+                numUpDown = (ToolStripNumericUpDown)toolStrip2.Items[i];
                 numUpDown.Tag = asc;
-                numUpDown.Value = asc.AnimationData[i];
-                numUpDown.Width = 40;
-                toolStrip2.Items.Insert(i + 4, numUpDown);
+                numUpDown.Value = asc.AnimationData[a];
+                numUpDown.Visible = true;
+            }
+            for (; i < 4 + 9; i++)
+            {
+                numUpDown = (ToolStripNumericUpDown)toolStrip2.Items[i];
+                numUpDown.Visible = false;
             }
             emptyAnimationMods.Enabled = true;
             applyAnimationMods.Enabled = true;
@@ -1212,68 +1180,17 @@ namespace LAZYSHELL
 
         private void aniMoveDown_Click(object sender, EventArgs e)
         {
-            if (a_treeViewWrapper.SelectedNode.NextNode == null)
-                return;
-            if (asc.Opcode == 0x07 ||
-                asc.Opcode == 0x11 ||
-                asc.Opcode == 0x5E)
-                return;
-            AnimationScriptCommand next = (AnimationScriptCommand)a_treeViewWrapper.SelectedNode.NextNode.Tag;
-            if (next.Opcode == 0x07 ||
-                next.Opcode == 0x11 ||
-                next.Opcode == 0x5E)
-                return;
-            if (a_treeViewWrapper.SelectedNode.Parent != null)
-            {
-                if (a_treeViewWrapper.SelectedNode.Index >= a_treeViewWrapper.SelectedNode.Parent.Nodes.Count - 1)
-                    return;
-            }
-            else
-            {
-                if (a_treeViewWrapper.SelectedNode.Index >= animationScriptTree.Nodes.Count - 1)
-                    return;
-            }
-            //try
-            //{
-            MoveAnimationNode(asc, (AnimationScriptCommand)a_treeViewWrapper.SelectedNode.NextNode.Tag, 0);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Setting this byte to this value causes errors.",
-            //        "LAZY SHELL");
-            //    animationScriptTree.EndUpdate();
-            //}
+            a_treeViewWrapper.MoveDown(asc);
         }
         private void aniMoveUp_Click(object sender, EventArgs e)
         {
-            if (a_treeViewWrapper.SelectedNode.PrevNode == null)
-                return;
-            if (asc.Opcode == 0x07 ||
-                asc.Opcode == 0x11 ||
-                asc.Opcode == 0x5E)
-                return;
-            AnimationScriptCommand prev = (AnimationScriptCommand)a_treeViewWrapper.SelectedNode.PrevNode.Tag;
-            if (prev.Opcode == 0x07 ||
-                prev.Opcode == 0x11 ||
-                prev.Opcode == 0x5E)
-                return;
-            if (a_treeViewWrapper.SelectedNode.Index == 0)
-                return;
-
-            //try
-            //{
-            MoveAnimationNode((AnimationScriptCommand)a_treeViewWrapper.SelectedNode.PrevNode.Tag, asc, 1);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Setting this byte to this value causes errors.",
-            //        "LAZY SHELL");
-            //    animationScriptTree.EndUpdate();
-            //}
+            a_treeViewWrapper.MoveUp(asc);
         }
         private void applyAnimationMods_Click(object sender, EventArgs e)
         {
             Point p = Do.GetTreeViewScrollPos(animationScriptTree);
+            animationScriptTree.BeginUpdate();
+            animationScriptTree.EnablePaint = false;
 
             int tmp = asc.InternalOffset;
             byte[] temp = new byte[asc.AnimationData.Length];
@@ -1282,22 +1199,22 @@ namespace LAZYSHELL
             {
                 foreach (ToolStripItem item in toolStrip2.Items)
                 {
-                    if (item.GetType() != typeof(ToolStripNumericUpDown))
+                    if (!item.Visible || item.GetType() != typeof(ToolStripNumericUpDown))
                         continue;
                     ToolStripNumericUpDown numUpDown = (ToolStripNumericUpDown)item;
                     int index = toolStrip2.Items.IndexOf(numUpDown) - 4;
                     // set the new value for the command
                     asc.AnimationData[index] = (byte)numUpDown.Value;
-                    model.Data[asc.InternalOffset + index] = (byte)numUpDown.Value;
+                    Model.Data[asc.InternalOffset + index] = (byte)numUpDown.Value;
                 }
                 // check multiple instances of command in current script, and change each accordingly
                 animationScripts[(int)animationNum.Value].RefreshAnimationScript();
 
             }
-            catch (Exception ex)
+            catch
             {
                 for (int i = 0; i < temp.Length; i++)
-                    model.Data[tmp + i] = temp[i];
+                    Model.Data[tmp + i] = temp[i];
 
                 // check multiple instances of command in current script, and change each accordingly
                 animationScripts[(int)animationNum.Value].RefreshAnimationScript();
@@ -1307,27 +1224,19 @@ namespace LAZYSHELL
 
                 MessageBox.Show("Setting this byte to this value causes errors.",
                     "LAZY SHELL");
-                animationScriptTree.EndUpdate();
             }
             finally
             {
                 // redraw the treeview
-                a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value], false);
             }
 
             // set the selected node
-            foreach (TreeNode tn in this.animationScriptTree.Nodes)
-            {
-                if (asc.InternalOffset == ((AnimationScriptCommand)tn.Tag).InternalOffset)
-                {
-                    this.animationScriptTree.SelectedNode = tn;
-                    break;
-                }
-                else
-                    SearchForNodeWithTag(tn, asc.InternalOffset);
-            }
+            a_treeViewWrapper.SetSelectedNode(asc.InternalOffset);
             p.X = 0;
             Do.SetTreeViewScrollPos(animationScriptTree, p);
+            animationScriptTree.EnablePaint = true;
+            animationScriptTree.EndUpdate();
         }
         private void emptyAnimationMods_Click(object sender, EventArgs e)
         {
@@ -1341,29 +1250,24 @@ namespace LAZYSHELL
         private void applyAnimation_Click(object sender, EventArgs e)
         {
             Point p = Do.GetTreeViewScrollPos(animationScriptTree);
+            animationScriptTree.BeginUpdate();
+            animationScriptTree.EnablePaint = false;
 
             ControlAniAsmMethod();
 
             for (int i = 0; i < asc.AnimationData.Length; i++)
-                model.Data[asc.InternalOffset + i] = asc.AnimationData[i];
+                Model.Data[asc.InternalOffset + i] = asc.AnimationData[i];
 
             // redraw the treeview
             animationScripts[(int)animationNum.Value].RefreshAnimationScript();
-            a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+            a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value], false);
 
             // set the selected node
-            foreach (TreeNode tn in this.animationScriptTree.Nodes)
-            {
-                if (asc.InternalOffset == ((AnimationScriptCommand)tn.Tag).InternalOffset)
-                {
-                    this.animationScriptTree.SelectedNode = tn;
-                    break;
-                }
-                else
-                    SearchForNodeWithTag(tn, asc.InternalOffset);
-            }
+            a_treeViewWrapper.SetSelectedNode(asc.InternalOffset);
             p.X = 0;
             Do.SetTreeViewScrollPos(animationScriptTree, p);
+            animationScriptTree.EnablePaint = true;
+            animationScriptTree.EndUpdate();
         }
         private void aniNameA_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1377,7 +1281,7 @@ namespace LAZYSHELL
                     break;
                 case 0xBC:
                 case 0xBD:
-                    aniNumA.Value = model.ItemNames.GetNumFromIndex(aniNameA.SelectedIndex);
+                    aniNumA.Value = Model.ItemNames.GetNumFromIndex(aniNameA.SelectedIndex);
                     break;
             }
         }
@@ -1393,32 +1297,32 @@ namespace LAZYSHELL
                     break;
                 case 0xBC:
                 case 0xBD:
-                    aniNameA.SelectedIndex = model.ItemNames.GetIndexFromNum((int)aniNumA.Value);
+                    aniNameA.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)aniNumA.Value);
                     break;
             }
         }
 
         private void AnimationScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result;
-
-            result = MessageBox.Show("Animations have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            if (Do.GenerateChecksum(Bits.GetByteArray(Model.Data, 0x350000, 0x10000), Bits.GetByteArray(Model.Data, 0x3A6000, 0xA000)) == this.checksum)
+                return;
+            DialogResult result = MessageBox.Show("Animations have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 Assemble();
             }
             else if (result == DialogResult.No)
             {
-                Buffer.BlockCopy(animationBank, 0, model.Data, 0x350000, 0x10000);
-                Buffer.BlockCopy(battleBank, 0, model.Data, 0x3A6000, 0xA000);
-                model.SpellAnimMonsters = null;
-                model.SpellAnimAllies = null;
-                model.AttackAnimations = null;
-                model.ItemAnimations = null;
-                model.BattleEvents = null;
-                model.BehaviorAnimations = null;
-                model.EntranceAnimations = null;
-                model.WeaponAnimations = null;
+                Buffer.BlockCopy(animationBank, 0, Model.Data, 0x350000, 0x10000);
+                Buffer.BlockCopy(battleBank, 0, Model.Data, 0x3A6000, 0xA000);
+                Model.SpellAnimMonsters = null;
+                Model.SpellAnimAllies = null;
+                Model.AttackAnimations = null;
+                Model.ItemAnimations = null;
+                Model.BattleEvents = null;
+                Model.BehaviorAnimations = null;
+                Model.EntranceAnimations = null;
+                Model.WeaponAnimations = null;
             }
             else if (result == DialogResult.Cancel)
             {
@@ -1445,9 +1349,9 @@ namespace LAZYSHELL
             evtscr.WriteLine("**************");
             evtscr.WriteLine("MONSTER SPELLS");
             evtscr.WriteLine("**************\n");
-            foreach (AnimationScript ans in model.SpellAnimMonsters)
+            foreach (AnimationScript ans in Model.SpellAnimMonsters)
             {
-                evtscr.WriteLine("\nMONSTER SPELL [" + i.ToString("d3") + "]" +
+                evtscr.WriteLine("\nMONSTER SPELL [" + i.ToString("d3") + "] " + Model.SpellNames.GetNameByNum(i + 64).Substring(1).Trim() +
                     "------------------------------------------------------------>\n");
                 foreach (AnimationScriptCommand asc in ans.Commands)
                 {
@@ -1462,9 +1366,9 @@ namespace LAZYSHELL
             evtscr.WriteLine("\n***********");
             evtscr.WriteLine("ALLY SPELLS");
             evtscr.WriteLine("***********\n");
-            foreach (AnimationScript ans in model.SpellAnimAllies)
+            foreach (AnimationScript ans in Model.SpellAnimAllies)
             {
-                evtscr.WriteLine("\nALLY SPELL [" + i.ToString("d3") + "]" +
+                evtscr.WriteLine("\nALLY SPELL [" + i.ToString("d3") + "] " + Model.SpellNames.GetNameByNum(i).Substring(1).Trim() +
                     "------------------------------------------------------------>\n");
                 foreach (AnimationScriptCommand asc in ans.Commands)
                 {
@@ -1479,9 +1383,9 @@ namespace LAZYSHELL
             evtscr.WriteLine("\n*******");
             evtscr.WriteLine("ATTACKS");
             evtscr.WriteLine("*******\n");
-            foreach (AnimationScript ans in model.AttackAnimations)
+            foreach (AnimationScript ans in Model.AttackAnimations)
             {
-                evtscr.WriteLine("\nATTACK [" + i.ToString("d3") + "]" +
+                evtscr.WriteLine("\nATTACK [" + i.ToString("d3") + "] " + Model.AttackNames.GetNameByNum(i).Trim() +
                     "------------------------------------------------------------>\n");
                 foreach (AnimationScriptCommand asc in ans.Commands)
                 {
@@ -1496,9 +1400,9 @@ namespace LAZYSHELL
             evtscr.WriteLine("\n*****");
             evtscr.WriteLine("ITEMS");
             evtscr.WriteLine("*****\n");
-            foreach (AnimationScript ans in model.ItemAnimations)
+            foreach (AnimationScript ans in Model.ItemAnimations)
             {
-                evtscr.WriteLine("\nITEM [" + i.ToString("d3") + "]" +
+                evtscr.WriteLine("\nITEM [" + i.ToString("d3") + "] " + Model.ItemNames.GetNameByNum(i + 96).Substring(1).Trim() +
                     "------------------------------------------------------------>\n");
                 foreach (AnimationScriptCommand asc in ans.Commands)
                 {
@@ -1513,9 +1417,9 @@ namespace LAZYSHELL
             evtscr.WriteLine("\n*************");
             evtscr.WriteLine("BATTLE EVENTS");
             evtscr.WriteLine("*************\n");
-            foreach (AnimationScript ans in model.BattleEvents)
+            foreach (AnimationScript ans in Model.BattleEvents)
             {
-                evtscr.WriteLine("\nBATTLE EVENT [" + i.ToString("d3") + "]" +
+                evtscr.WriteLine("\nBATTLE EVENT [" + i.ToString("d3") + "] " +
                     "------------------------------------------------------------>\n");
                 foreach (AnimationScriptCommand asc in ans.Commands)
                 {
@@ -1530,9 +1434,9 @@ namespace LAZYSHELL
             evtscr.WriteLine("\n*********");
             evtscr.WriteLine("BEHAVIORS");
             evtscr.WriteLine("*********\n");
-            foreach (AnimationScript ans in model.BehaviorAnimations)
+            foreach (AnimationScript ans in Model.BehaviorAnimations)
             {
-                evtscr.WriteLine("\nBEHAVIOR [" + i.ToString("d3") + "]" +
+                evtscr.WriteLine("\nBEHAVIOR [" + i.ToString("d3") + "] " +
                     "------------------------------------------------------------>\n");
                 foreach (AnimationScriptCommand asc in ans.Commands)
                 {
@@ -1547,9 +1451,9 @@ namespace LAZYSHELL
             evtscr.WriteLine("\n*********");
             evtscr.WriteLine("ENTRANCES");
             evtscr.WriteLine("*********\n");
-            foreach (AnimationScript ans in model.EntranceAnimations)
+            foreach (AnimationScript ans in Model.EntranceAnimations)
             {
-                evtscr.WriteLine("\nENTRANCE [" + i.ToString("d3") + "]" +
+                evtscr.WriteLine("\nENTRANCE [" + i.ToString("d3") + "] " +
                     "------------------------------------------------------------>\n");
                 foreach (AnimationScriptCommand asc in ans.Commands)
                 {
@@ -1564,9 +1468,9 @@ namespace LAZYSHELL
             evtscr.WriteLine("\n*******");
             evtscr.WriteLine("WEAPONS");
             evtscr.WriteLine("*******\n");
-            foreach (AnimationScript ans in model.WeaponAnimations)
+            foreach (AnimationScript ans in Model.WeaponAnimations)
             {
-                evtscr.WriteLine("\nWEAPON[" + i.ToString("d3") + "]" +
+                evtscr.WriteLine("\nWEAPON [" + i.ToString("d3") + "] " + Model.ItemNames.GetNameByNum(i).Substring(1).Trim() +
                     "------------------------------------------------------------>\n");
                 foreach (AnimationScriptCommand asc in ans.Commands)
                 {

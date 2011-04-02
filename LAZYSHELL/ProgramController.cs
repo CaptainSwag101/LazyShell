@@ -8,9 +8,7 @@ namespace LAZYSHELL
     public class ProgramController
     {
         private Program App;
-        private Model model = State.Instance.Model;
-        private State state = State.Instance;
-        public Model Model { get { return model; } }
+                private State state = State.Instance;
         public bool DockEditors { get { return App.DockEditors; } set { App.DockEditors = value; } }
         // Constructor
         public ProgramController(Program app)
@@ -22,7 +20,7 @@ namespace LAZYSHELL
         {
             if (App.OpenRomFile())
             {
-                model.ClearModel();
+                Model.ClearModel();
                 state.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
                 if (!VerifyRom())
                     return false;
@@ -37,7 +35,7 @@ namespace LAZYSHELL
         {
             if (App.OpenRomFile(filename))
             {
-                model.ClearModel();
+                Model.ClearModel();
                 state.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
                 if (!VerifyRom())
                     return false;
@@ -56,63 +54,63 @@ namespace LAZYSHELL
         }
         public void CloseRomFile()
         {
-            model.ClearModel();
+            Model.ClearModel();
             state.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
             App.CloseRomFile();
         }
         public bool VerifyRom()
         {
-            return model.VerifyRom();
+            return Model.VerifyRom();
         }
         public string GetFileName()
         {
-            return model.GetFileName();
+            return Model.FileName;
         }
         public bool HeaderPresent()
         {
-            return model.HeaderPresent();
+            return Model.HeaderPresent();
         }
         public string GetFileNameWithoutPath()
         {
-            return model.GetFileNameWithoutPath();
+            return Model.GetFileNameWithoutPath();
         }
         public string GetFileNameWithoutPathOrExtension()
         {
-            return model.GetFileNameWithoutPathOrExtension();
+            return Model.GetFileNameWithoutPathOrExtension();
         }
         public string GetRomName()
         {
-            return model.GetRomName();
+            return Model.GetRomName();
         }
         public string GetPathWithoutFileName()
         {
-            return model.GetPathWithoutFileName();
+            return Model.GetPathWithoutFileName();
         }
         public string RomChecksum()
         {
-            return model.RomChecksum();
+            return Model.RomChecksum();
         }
         public string GameCode()
         {
-            return model.GameCode();
+            return Model.GameCode();
         }
         public bool RemoveHeader()
         {
-            return model.RemoveHeader();
+            return Model.RemoveHeader();
         }
         public long GetFileSize()
         {
-            return model.GetFileSize();
+            return Model.GetFileSize();
         }
         #endregion
         #region MD5 hash methods
         public void CreateNewMd5Checksum()
         {
-            model.CreateNewMD5Checksum();
+            Model.CreateNewMD5Checksum();
         }
         public bool VerifyMD5Checksum()
         {
-            return model.VerifyMD5Checksum();
+            return Model.VerifyMD5Checksum();
         }
         public void Assemble()
         {
@@ -126,7 +124,7 @@ namespace LAZYSHELL
         #region Author Stamp
         public bool Locked()
         {
-            return model.Locked;
+            return Model.Locked;
         }
         public bool Publish()
         {
@@ -157,10 +155,6 @@ namespace LAZYSHELL
         public void Battlefields()
         {
             App.CreateBattlefieldsWindow();
-        }
-        public void BattleScripts()
-        {
-            App.CreateBattleScriptsWindow();
         }
         public void Dialogues()
         {

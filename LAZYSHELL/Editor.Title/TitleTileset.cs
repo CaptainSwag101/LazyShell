@@ -5,10 +5,11 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class TitleTileset
     {
-        private Model model = State.Instance.Model;
-        private PaletteSet titlePalettes;
+        [NonSerialized()]
+                private PaletteSet titlePalettes;
         private byte[] graphics; public byte[] Graphics { get { return graphics; } set { graphics = value; } }
         private byte[] graphicsL3; public byte[] GraphicsL3 { get { return graphicsL3; } set { graphicsL3 = value; } }
         private byte[][] tileSets = new byte[3][]; public byte[][] TileSets { get { return tileSets; } set { tileSets = value; } }
@@ -44,13 +45,13 @@ namespace LAZYSHELL
         private void DecompressTileSetData()
         {
             // Decompress data at offsets
-            tileSets[0] = Bits.GetByteArray(model.TitleData, 0x0000, 0x1000);
-            tileSets[1] = Bits.GetByteArray(model.TitleData, 0x1000, 0x1000);
-            tileSets[2] = Bits.GetByteArray(model.TitleData, 0xBBE0, 0x300);
+            tileSets[0] = Bits.GetByteArray(Model.TitleData, 0x0000, 0x1000);
+            tileSets[1] = Bits.GetByteArray(Model.TitleData, 0x1000, 0x1000);
+            tileSets[2] = Bits.GetByteArray(Model.TitleData, 0xBBE0, 0x300);
 
             // Create buffer the size of the combined graphicSets
-            graphics = Bits.GetByteArray(model.TitleData, 0x6C00, 0x4FE0);
-            graphicsL3 = Bits.GetByteArray(model.TitleData, 0xBEA0, 0x1BC0);
+            graphics = Bits.GetByteArray(Model.TitleData, 0x6C00, 0x4FE0);
+            graphicsL3 = Bits.GetByteArray(Model.TitleData, 0xBEA0, 0x1BC0);
         }
         public void DrawTileset(byte[] tileset, Tile16x16[] tilesetLayer, byte[] gfx)
         {
@@ -151,11 +152,11 @@ namespace LAZYSHELL
                     }
                 }
             }
-            Buffer.BlockCopy(tileSets[0], 0, model.TitleData, 0, 0x1000);
-            Buffer.BlockCopy(tileSets[1], 0, model.TitleData, 0x1000, 0x1000);
-            Buffer.BlockCopy(tileSets[2], 0, model.TitleData, 0xBBE0, 0x300);
-            Buffer.BlockCopy(graphics, 0, model.TitleData, 0x6C00, 0x4FE0);
-            Buffer.BlockCopy(graphicsL3, 0x40, model.TitleData, 0xBEE0, 0x1B80);
+            Buffer.BlockCopy(tileSets[0], 0, Model.TitleData, 0, 0x1000);
+            Buffer.BlockCopy(tileSets[1], 0, Model.TitleData, 0x1000, 0x1000);
+            Buffer.BlockCopy(tileSets[2], 0, Model.TitleData, 0xBBE0, 0x300);
+            Buffer.BlockCopy(graphics, 0, Model.TitleData, 0x6C00, 0x4FE0);
+            Buffer.BlockCopy(graphicsL3, 0x40, Model.TitleData, 0xBEE0, 0x1B80);
         }
         public void AssembleIntoModel(int width)
         {
@@ -183,11 +184,11 @@ namespace LAZYSHELL
                     }
                 }
             }
-            Buffer.BlockCopy(tileSets[0], 0, model.TitleData, 0, 0x1000);
-            Buffer.BlockCopy(tileSets[1], 0, model.TitleData, 0x1000, 0x1000);
-            Buffer.BlockCopy(tileSets[2], 0, model.TitleData, 0xBBE0, 0x300);
-            Buffer.BlockCopy(graphics, 0, model.TitleData, 0x6C00, 0x4FE0);
-            Buffer.BlockCopy(graphicsL3, 0x40, model.TitleData, 0xBEE0, 0x1B80);
+            Buffer.BlockCopy(tileSets[0], 0, Model.TitleData, 0, 0x1000);
+            Buffer.BlockCopy(tileSets[1], 0, Model.TitleData, 0x1000, 0x1000);
+            Buffer.BlockCopy(tileSets[2], 0, Model.TitleData, 0xBBE0, 0x300);
+            Buffer.BlockCopy(graphics, 0, Model.TitleData, 0x6C00, 0x4FE0);
+            Buffer.BlockCopy(graphicsL3, 0x40, Model.TitleData, 0xBEE0, 0x1B80);
         }
     }
 }

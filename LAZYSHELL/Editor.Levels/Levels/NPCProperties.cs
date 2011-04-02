@@ -5,10 +5,12 @@ using System.Drawing;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class NPCProperties
     {
+        [NonSerialized()]
         private byte[] data; public byte[] Data { get { return this.data; } set { this.data = value; } }
-
+        [NonSerialized()]
         private int[] pixels = null;
 
         private int imageHeight; public int ImageHeight { get { return imageHeight; } set { imageHeight = value; } }
@@ -103,7 +105,7 @@ namespace LAZYSHELL
         {
             int offset = index * 7 + 0x1DB800;
 
-            Bits.SetShort(data, offset, sprite);offset++;
+            Bits.SetShort(data, offset, sprite); offset++;
             Bits.SetBit(data, offset, 2, b1b2);
             Bits.SetBit(data, offset, 3, b1b3);
             Bits.SetBit(data, offset, 4, b1b4);
@@ -263,6 +265,10 @@ namespace LAZYSHELL
                 }
             }
             return pixels;
+        }
+        public NPCProperties Copy()
+        {
+            return new NPCProperties(this.data, this.index);
         }
     }
 }

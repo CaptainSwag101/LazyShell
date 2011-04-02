@@ -50,6 +50,9 @@
             this.showItems = new System.Windows.Forms.ToolStripButton();
             this.showShops = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.resetItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetShopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +63,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(696, 652);
+            this.panel1.Size = new System.Drawing.Size(647, 626);
             this.panel1.TabIndex = 449;
             // 
             // toolStrip3
@@ -71,6 +74,7 @@
             this.toolStripSeparator4,
             this.import,
             this.export,
+            this.toolStripDropDownButton1,
             this.clear,
             this.toolStripSeparator1,
             this.helpTips,
@@ -81,7 +85,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(696, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(647, 25);
             this.toolStrip3.TabIndex = 448;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -167,14 +171,14 @@
             // clearItemsToolStripMenuItem
             // 
             this.clearItemsToolStripMenuItem.Name = "clearItemsToolStripMenuItem";
-            this.clearItemsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.clearItemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearItemsToolStripMenuItem.Text = "Clear Items...";
             this.clearItemsToolStripMenuItem.Click += new System.EventHandler(this.clearItemsToolStripMenuItem_Click);
             // 
             // clearShopsToolStripMenuItem
             // 
             this.clearShopsToolStripMenuItem.Name = "clearShopsToolStripMenuItem";
-            this.clearShopsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.clearShopsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearShopsToolStripMenuItem.Text = "Clear Shops...";
             this.clearShopsToolStripMenuItem.Click += new System.EventHandler(this.clearShopsToolStripMenuItem_Click);
             // 
@@ -240,11 +244,37 @@
             // 
             this.toolTip1.Active = false;
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetItemToolStripMenuItem,
+            this.resetShopToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(27, 22);
+            // 
+            // resetItemToolStripMenuItem
+            // 
+            this.resetItemToolStripMenuItem.Name = "resetItemToolStripMenuItem";
+            this.resetItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetItemToolStripMenuItem.Text = "Reset item";
+            this.resetItemToolStripMenuItem.Click += new System.EventHandler(this.resetItemToolStripMenuItem_Click);
+            // 
+            // resetShopToolStripMenuItem
+            // 
+            this.resetShopToolStripMenuItem.Name = "resetShopToolStripMenuItem";
+            this.resetShopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetShopToolStripMenuItem.Text = "Reset shop";
+            this.resetShopToolStripMenuItem.Click += new System.EventHandler(this.resetShopToolStripMenuItem_Click);
+            // 
             // ItemsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 677);
+            this.ClientSize = new System.Drawing.Size(647, 651);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -283,5 +313,8 @@
         private System.Windows.Forms.ToolStripButton helpTips;
         private System.Windows.Forms.ToolStripButton baseConversion;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem resetItemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetShopToolStripMenuItem;
     }
 }

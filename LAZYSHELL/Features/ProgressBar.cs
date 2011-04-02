@@ -12,8 +12,7 @@ namespace LAZYSHELL
     public partial class ProgressBar : Form
     {
         private byte[] data;
-        private Model model = State.Instance.Model;
-        private BackgroundWorker backgroundWorker;
+                private BackgroundWorker backgroundWorker;
         public ProgressBar(byte[] data, string title, int max)
         {
             InitializeComponent();

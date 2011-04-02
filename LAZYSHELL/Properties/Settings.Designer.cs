@@ -519,5 +519,53 @@ namespace LAZYSHELL.Properties {
                 this["PreviewBattlefield"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastLevel {
+            get {
+                return ((int)(this["LastLevel"]));
+            }
+            set {
+                this["LastLevel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LastLevelRem {
+            get {
+                return ((bool)(this["LastLevelRem"]));
+            }
+            set {
+                this["LastLevelRem"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int PreviewLevel {
+            get {
+                return ((int)(this["PreviewLevel"]));
+            }
+            set {
+                this["PreviewLevel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")]
+        public string AllyEquipment {
+            get {
+                return ((string)(this["AllyEquipment"]));
+            }
+            set {
+                this["AllyEquipment"] = value;
+            }
+        }
     }
 }

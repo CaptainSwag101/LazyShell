@@ -179,52 +179,52 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Playback fade-out sound, duration: ",			// 0x9E
             "UNKAQCMD 0x9F",			// 0x9F
             			
-            "Set mem 00:",			// 0xA0
-            "Set mem 00:",			// 0xA1
-            "Set mem 00:",			// 0xA2
-            "Set mem @ 00:700C",			// 0xA3
-            "Clear mem 00:",			// 0xA4
-            "Clear mem 00:",			// 0xA5
-            "Clear mem 00:",			// 0xA6
-            "Clear mem @ 00:700C",			// 0xA7
-            "Mem 00:",			// 0xA8
-            "Mem 00:",			// 0xA9
-            "Mem 00:",			// 0xAA
-            "Mem 00:",			// 0xAB
-            "Mem 00:700C = ",			// 0xAC
-            "Mem 00:700C += ",			// 0xAD
-            "Mem 00:700C increment",			// 0xAE
-            "Mem 00:700C decrement",			// 0xAF
+            "Set mem $",			// 0xA0
+            "Set mem $",			// 0xA1
+            "Set mem $",			// 0xA2
+            "Set mem @ $700C",			// 0xA3
+            "Clear mem $",			// 0xA4
+            "Clear mem $",			// 0xA5
+            "Clear mem $",			// 0xA6
+            "Clear mem @ $700C",			// 0xA7
+            "mem $",			// 0xA8
+            "mem $",			// 0xA9
+            "mem $",			// 0xAA
+            "mem $",			// 0xAB
+            "Mem $700C = ",			// 0xAC
+            "Mem $700C += ",			// 0xAD
+            "Mem $700C increment",			// 0xAE
+            "Mem $700C decrement",			// 0xAF
             			
-            "Mem 00:",			// 0xB0
-            "Mem 00:",			// 0xB1
-            "Mem 00:",			// 0xB2
-            "Mem 00:",			// 0xB3
-            "Mem 00:700C = mem 00:",			// 0xB4
-            "Mem 00:",			// 0xB5
-            "Mem 00:700C = random # less than: ",			// 0xB6
-            "Mem 00:", 			// 0xB7
-            "Mem 00:700C += mem 00:",			// 0xB8
-            "Mem 00:700C -= mem 00:",			// 0xB9
-            "Mem 00:700C = mem 00:",			// 0xBA
-            "Mem 00:",			// 0xBB
-            "Mem 00:",			// 0xBC
-            "Mem 00:",			// 0xBD
+            "mem $",			// 0xB0
+            "mem $",			// 0xB1
+            "mem $",			// 0xB2
+            "mem $",			// 0xB3
+            "Mem $700C = mem $",			// 0xB4
+            "mem $",			// 0xB5
+            "Mem $700C = random # less than: ",			// 0xB6
+            "mem $", 			// 0xB7
+            "Mem $700C += mem $",			// 0xB8
+            "Mem $700C -= mem $",			// 0xB9
+            "Mem $700C = mem $",			// 0xBA
+            "mem $",			// 0xBB
+            "mem $",			// 0xBC
+            "mem $",			// 0xBD
             "UNKAQCMD 0xBE",			// 0xBE
             "UNKAQCMD 0xBF",			// 0xBF
             			
-            "Compare mem 00:700C to ",			// 0xC0
-            "Compare mem 00:700C to mem 00:",			// 0xC1
-            "Compare mem 00:",			// 0xC2
-            "Mem 00:700C = current level",			// 0xC3
-            "Mem 00:700C = X coord of obj: ",			// 0xC4
-            "Mem 00:700C = Y coord of obj: ",			// 0xC5
-            "Mem 00:700C = Z coord of obj: ",			// 0xC6
+            "Compare mem $700C to ",			// 0xC0
+            "Compare mem $700C to mem $",			// 0xC1
+            "Compare mem $",			// 0xC2
+            "Mem $700C = current level",			// 0xC3
+            "Mem $700C = X coord of obj: ",			// 0xC4
+            "Mem $700C = Y coord of obj: ",			// 0xC5
+            "Mem $700C = Z coord of obj: ",			// 0xC6
             "UNKCMD 0xC7",			// 0xC7
             "UNKCMD 0xC8",			// 0xC8
             "UNKCMD 0xC9",			// 0xC9
-            "Mem 00:700C = held joypad register",			// 0xCA
-            "Mem 00:700C = tapped joypad register",			// 0xCB
+            "Mem $700C = held joypad register",			// 0xCA
+            "Mem $700C = tapped joypad register",			// 0xCB
             "UNKCMD 0xCC",			// 0xCC
             "UNKCMD 0xCD",			// 0xCD
             "UNKCMD 0xCE",			// 0xCE
@@ -236,25 +236,25 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Jump to subroutine $",			// 0xD3
             "Loop start, loop count: ",			// 0xD4
             "UNKAQCMD 0xD5",			// 0xD5
-            "Load mem 00:",			// 0xD6
+            "Load mem $",			// 0xD6
             "Loop end",			// 0xD7
-            "If set, mem 00:",			// 0xD8
-            "If set, mem 00:",			// 0xD9
-            "If set, mem 00:",			// 0xDA
-            "If mem 00:7000 bit(s) set, jump to $",			// 0xDB
-            "If clear, mem 00:",			// 0xDC
-            "If clear, mem 00:",			// 0xDD
-            "If clear, mem 00:",			// 0xDE
-            "If mem 00:7000 bit(s) clear, jump to $",			// 0xDF
+            "If set, mem $",			// 0xD8
+            "If set, mem $",			// 0xD9
+            "If set, mem $",			// 0xDA
+            "If mem $7000 bit(s) set, jump to $",			// 0xDB
+            "If clear, mem $",			// 0xDC
+            "If clear, mem $",			// 0xDD
+            "If clear, mem $",			// 0xDE
+            "If mem $7000 bit(s) clear, jump to $",			// 0xDF
             			
-            "If mem 00:",			// 0xE0
-            "If mem 00:",			// 0xE1
-            "If mem 00:700C = ",			// 0xE2
-            "If mem 00:700C != ",			// 0xE3
-            "If mem 00:",			// 0xE4
-            "If mem 00:",			// 0xE5
-            "If mem 00:700C set, no bits: ",			// 0xE6
-            "If mem 00:700C set, any bits: ",			// 0xE7
+            "If mem $",			// 0xE0
+            "If mem $",			// 0xE1
+            "If mem $700C = ",			// 0xE2
+            "If mem $700C != ",			// 0xE3
+            "If mem $",			// 0xE4
+            "If mem $",			// 0xE5
+            "If mem $700C set, no bits: ",			// 0xE6
+            "If mem $700C set, any bits: ",			// 0xE7
             "If random # > 128, jump to $",			// 0xE8
             "If random # > 66, jump to $",			// 0xE9
             "If equal to zero, jump to $",			// 0xEA
@@ -268,10 +268,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Delay, frames (16-bit): ",			// 0xF1
             "Set obj: ",			// 0xF2
             "Set obj: ",			// 0xF3
-            "Set obj: mem 00:70A8, presence = true (current level)",			// 0xF4
-            "Set obj: mem 00:70A8, presence = false (current level)",			// 0xF4
-            "Set obj: mem 00:70A8, event trigger = true",			// 0xF6
-            "Set obj: mem 00:70A8, event trigger = false",			// 0xF7
+            "Set obj: mem $70A8, presence = true (current level)",			// 0xF4
+            "Set obj: mem $70A8, presence = false (current level)",			// 0xF4
+            "Set obj: mem $70A8, event trigger = true",			// 0xF6
+            "Set obj: mem $70A8, event trigger = false",			// 0xF7
             "If obj: ",			// 0xF8
             "UNKAQCMD 0xF9",			// 0xF9
             "UNKAQCMD 0xFA",			// 0xFA
@@ -470,13 +470,13 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "UNKCMD 0xFD Option 0xAE",			// 0xAE
             "UNKCMD 0xFD Option 0xAF",			// 0xAF
 			
-            "Mem 00:700C, isolate bits = ",			// 0xB0
-            "Mem 00:700C, set bits = ",			// 0xB1
-            "Mem 00:700C, xor bits = ",			// 0xB2
-            "Mem 00:700C, isolate bits, from mem 00:",			// 0xB3
-            "Mem 00:700C, set bits, from mem 00:",			// 0xB4
-            "Mem 00:700C, xor bits, from mem 00:",			// 0xB5
-            "Shift mem 00:",			// 0xB6
+            "Mem $700C, isolate bits = ",			// 0xB0
+            "Mem $700C, set bits = ",			// 0xB1
+            "Mem $700C, xor bits = ",			// 0xB2
+            "Mem $700C, isolate bits, from mem $",			// 0xB3
+            "Mem $700C, set bits, from mem $",			// 0xB4
+            "Mem $700C, xor bits, from mem $",			// 0xB5
+            "Shift mem $",			// 0xB6
             "UNKCMD 0xFD Option 0xB7",			// 0xB7
             "UNKCMD 0xFD Option 0xB8",			// 0xB8
             "UNKCMD 0xFD Option 0xB9",			// 0xB9
@@ -570,10 +570,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0x08:
                     a = (aqc.Option & 0x08) == 0x08 ? ", mold = true" : ", mold = false";
                     b = (aqc.Option & 0x10) == 0x10 ? ", playback once = true" : ", playback once = false";
-                    c = (aqc.QueueData[2] & 0x80) == 0x80 ? ", mirror = true" : ", mirror = false";
+                    c = (aqc.EventData[2] & 0x80) == 0x80 ? ", mirror = true" : ", mirror = false";
                     d = (aqc.Option & 0x08) == 0x08 ? ", mold = " : ", seq = ";
                     sb.Append(
-                        (aqc.Option & 0x07).ToString() + a + b + d + (aqc.QueueData[2] & 0x7F).ToString() + c);
+                        (aqc.Option & 0x07).ToString() + a + b + d + (aqc.EventData[2] & 0x7F).ToString() + c);
                     break;
                 case 0x0A:
                     sb.Append(aqc.Option.ToString());
@@ -602,7 +602,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0x26:
                 case 0x27:
                 case 0x28:
-                    sb.Append("{" + BitConverter.ToString(aqc.QueueData, 1) + "}");
+                    sb.Append("{" + BitConverter.ToString(aqc.EventData, 1) + "}");
                     break;
                 case 0x50:
                 case 0x51:
@@ -635,7 +635,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     break;
                 case 0x7E:
                 case 0x7F:
-                    sb.Append(Bits.GetShort(aqc.QueueData, 1).ToString());
+                    sb.Append(Bits.GetShort(aqc.EventData, 1).ToString());
                     break;
                 case 0x80:
                 case 0x81:
@@ -643,9 +643,9 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0x83:
                 case 0x84:
                     if (aqc.Opcode != 0x80 || aqc.Opcode != 0x82)
-                        sb.Append(((sbyte)aqc.Option).ToString() + ", y=" + ((sbyte)aqc.QueueData[2]).ToString() + ")");
+                        sb.Append(((sbyte)aqc.Option).ToString() + ", y=" + ((sbyte)aqc.EventData[2]).ToString() + ")");
                     else
-                        sb.Append(aqc.Option.ToString() + ", y=" + aqc.QueueData[2].ToString() + ")");
+                        sb.Append(aqc.Option.ToString() + ", y=" + aqc.EventData[2].ToString() + ")");
                     break;
                 case 0x87:
                     sb.Append(ObjectNames[aqc.Option]);
@@ -653,31 +653,31 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0x90:
                 case 0x91:
                     if (aqc.Opcode != 0x90)
-                        sb.Append(((sbyte)aqc.Option).ToString() + ", y=" + ((sbyte)aqc.QueueData[2]).ToString());
+                        sb.Append(((sbyte)aqc.Option).ToString() + ", y=" + ((sbyte)aqc.EventData[2]).ToString());
                     else
-                        sb.Append(aqc.Option.ToString() + ", y=" + aqc.QueueData[2].ToString());
-                    sb.Append("), archHeight = " + aqc.QueueData[3].ToString());
+                        sb.Append(aqc.Option.ToString() + ", y=" + aqc.EventData[2].ToString());
+                    sb.Append("), archHeight = " + aqc.EventData[3].ToString());
                     break;
                 case 0x92:
                 case 0x93:
                 case 0x94:
                     if (aqc.Opcode != 0x92)
-                        sb.Append(((sbyte)aqc.Option).ToString() + ", y=" + ((sbyte)aqc.QueueData[2]).ToString());
+                        sb.Append(((sbyte)aqc.Option).ToString() + ", y=" + ((sbyte)aqc.EventData[2]).ToString());
                     else
-                        sb.Append(aqc.Option.ToString() + ", y=" + aqc.QueueData[2].ToString());
-                    sb.Append(", z=" + aqc.QueueData[3].ToString() + ")");
+                        sb.Append(aqc.Option.ToString() + ", y=" + aqc.EventData[2].ToString());
+                    sb.Append(", z=" + aqc.EventData[3].ToString() + ")");
                     break;
                 case 0x95:
                     sb.Append(ObjectNames[aqc.Option]);
                     break;
                 case 0x9D:
                     sb.Append(Lists.Numerize(Lists.SoundNames, aqc.Option) + ", speaker balance: " +
-                        aqc.QueueData[2].ToString());
+                        aqc.EventData[2].ToString());
                     break;
                 case 0x9E:
                     sb.Append(aqc.Option.ToString() +
                         ", min volume: " +
-                        aqc.QueueData[2].ToString());
+                        aqc.EventData[2].ToString());
                     break;
                 case 0xA0:
                 case 0xA1:
@@ -693,11 +693,11 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     break;
                 case 0xA8:
                     sb.Append((aqc.Option + 0x70A0).ToString("X4") +
-                        " = " + aqc.QueueData[2]);
+                        " = " + aqc.EventData[2]);
                     break;
                 case 0xA9:
                     sb.Append((aqc.Option + 0x70A0).ToString("X4") +
-                         " += " + aqc.QueueData[2]);
+                         " += " + aqc.EventData[2]);
                     break;
                 case 0xAA:
                     sb.Append((aqc.Option + 0x70A0).ToString("X4") + " increment");
@@ -707,20 +707,20 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     break;
                 case 0xAC:
                 case 0xAD:
-                    sb.Append(Bits.GetShort(aqc.QueueData, 1).ToString());
+                    sb.Append(Bits.GetShort(aqc.EventData, 1).ToString());
                     break;
                 case 0xC0:
                 case 0xD0:
                 case 0xF1:
-                    sb.Append(Bits.GetShort(aqc.QueueData, 1).ToString());
+                    sb.Append(Bits.GetShort(aqc.EventData, 1).ToString());
                     break;
                 case 0xB0:
                     sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") +
-                    " = " + Bits.GetShort(aqc.QueueData, 2).ToString());
+                    " = " + Bits.GetShort(aqc.EventData, 2).ToString());
                     break;
                 case 0xB1:
                     sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") +
-                        " += " + Bits.GetShort(aqc.QueueData, 2).ToString());
+                        " += " + Bits.GetShort(aqc.EventData, 2).ToString());
                     break;
                 case 0xB2:
                     sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " increment");
@@ -732,14 +732,14 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     sb.Append((aqc.Option + 0x70A0).ToString("X4"));
                     break;
                 case 0xB5:
-                    sb.Append((aqc.Option + 0x70A0).ToString("X4") + " = mem 00:7000");
+                    sb.Append((aqc.Option + 0x70A0).ToString("X4") + " = mem $7000");
                     break;
                 case 0xB6:
-                    sb.Append(Bits.GetShort(aqc.QueueData, 1).ToString());
+                    sb.Append(Bits.GetShort(aqc.EventData, 1).ToString());
                     break;
                 case 0xB7:
                     sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") +
-                        " = random # less than: " + Bits.GetShort(aqc.QueueData, 2).ToString());
+                        " = random # less than: " + Bits.GetShort(aqc.EventData, 2).ToString());
                     break;
                 case 0xB8:
                 case 0xB9:
@@ -749,18 +749,18 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     break;
                 case 0xC2:
                     sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " to " +
-                        Bits.GetShort(aqc.QueueData, 2).ToString());
+                        Bits.GetShort(aqc.EventData, 2).ToString());
                     break;
                 case 0xBB:
-                    sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " = mem 00:700C");
+                    sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " = mem $700C");
                     break;
                 case 0xBC:
-                    sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " = mem 00:" +
-                    ((aqc.QueueData[2] * 2) + 0x7000).ToString("X4"));
+                    sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " = mem $" +
+                    ((aqc.EventData[2] * 2) + 0x7000).ToString("X4"));
                     break;
                 case 0xBD:
-                    sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " <=> mem 00:" +
-                        ((aqc.QueueData[2] * 2) + 0x7000).ToString("X4"));
+                    sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " <=> mem $" +
+                        ((aqc.EventData[2] * 2) + 0x7000).ToString("X4"));
                     break;
                 case 0xC4:
                 case 0xC5:
@@ -774,51 +774,51 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xD3:
                 case 0xDB:
                 case 0xDF:
-                    sb.Append((Bits.GetShort(aqc.QueueData, 1)).ToString("X4"));
+                    sb.Append((Bits.GetShort(aqc.EventData, 1)).ToString("X4"));
                     break;
                 case 0xD8:
                 case 0xD9:
                 case 0xDA:
                     sb.Append((((((aqc.Opcode * 0x100) + aqc.Option) - 0xD800) / 8) + 0x7040).ToString("X4") + ", bit: " +
                         (aqc.Option & 0x07).ToString() + ", jump to $" +
-                        (Bits.GetShort(aqc.QueueData, 2)).ToString("X4"));
+                        (Bits.GetShort(aqc.EventData, 2)).ToString("X4"));
                     break;
                 case 0xDC:
                 case 0xDD:
                 case 0xDE:
                     sb.Append((((((aqc.Opcode * 0x100) + aqc.Option) - 0xDC00) / 8) + 0x7040).ToString("X4") + ", bit: " +
                         (aqc.Option & 0x07).ToString() + ", jump to $" +
-                        (Bits.GetShort(aqc.QueueData, 2)).ToString("X4"));
+                        (Bits.GetShort(aqc.EventData, 2)).ToString("X4"));
                     break;
                 case 0xE0:
                     sb.Append((aqc.Option + 0x70A0).ToString("X4") + " = " +
-                        aqc.QueueData[2].ToString() + ", jump to $" +
-                        (Bits.GetShort(aqc.QueueData, 3)).ToString("X4"));
+                        aqc.EventData[2].ToString() + ", jump to $" +
+                        (Bits.GetShort(aqc.EventData, 3)).ToString("X4"));
                     break;
                 case 0xE1:
                     sb.Append((aqc.Option + 0x70A0).ToString("X4") + " != " +
-                        aqc.QueueData[2].ToString() + ", jump to $" +
-                        (Bits.GetShort(aqc.QueueData, 3)).ToString("X4"));
+                        aqc.EventData[2].ToString() + ", jump to $" +
+                        (Bits.GetShort(aqc.EventData, 3)).ToString("X4"));
                     break;
                 case 0xE2:
                 case 0xE3:
-                    sb.Append((Bits.GetShort(aqc.QueueData, 1)).ToString() + ", jump to $" +
-                    (Bits.GetShort(aqc.QueueData, 3)).ToString("X4"));
+                    sb.Append((Bits.GetShort(aqc.EventData, 1)).ToString() + ", jump to $" +
+                    (Bits.GetShort(aqc.EventData, 3)).ToString("X4"));
                     break;
                 case 0xE4:
                     sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " = " +
-                        (Bits.GetShort(aqc.QueueData, 2)).ToString() + ", jump to $" +
-                        (Bits.GetShort(aqc.QueueData, 4)).ToString("X4"));
+                        (Bits.GetShort(aqc.EventData, 2)).ToString() + ", jump to $" +
+                        (Bits.GetShort(aqc.EventData, 4)).ToString("X4"));
                     break;
                 case 0xE5:
                     sb.Append(((aqc.Option * 2) + 0x7000).ToString("X4") + " != " +
-                    (Bits.GetShort(aqc.QueueData, 2)).ToString() + ", jump to $" +
-                    (Bits.GetShort(aqc.QueueData, 4)).ToString("X4"));
+                    (Bits.GetShort(aqc.EventData, 2)).ToString() + ", jump to $" +
+                    (Bits.GetShort(aqc.EventData, 4)).ToString("X4"));
                     break;
                 case 0xE6:
                 case 0xE7:
-                    sb.Append(Bits.GetShort(aqc.QueueData, 1).ToString("X4") + ", jump to $" +
-                        Bits.GetShort(aqc.QueueData, 3).ToString("X4"));
+                    sb.Append(Bits.GetShort(aqc.EventData, 1).ToString("X4") + ", jump to $" +
+                        Bits.GetShort(aqc.EventData, 3).ToString("X4"));
                     break;
                 case 0x3D:
                 case 0xE8:
@@ -828,30 +828,30 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xED:
                 case 0xEE:
                 case 0xEF:
-                    sb.Append(Bits.GetShort(aqc.QueueData, 1).ToString("X4"));
+                    sb.Append(Bits.GetShort(aqc.EventData, 1).ToString("X4"));
                     break;
                 case 0xE9:
-                    sb.Append(Bits.GetShort(aqc.QueueData, 1).ToString("X4") + ", else jump to $" +
-                        Bits.GetShort(aqc.QueueData, 3).ToString("X4"));
+                    sb.Append(Bits.GetShort(aqc.EventData, 1).ToString("X4") + ", else jump to $" +
+                        Bits.GetShort(aqc.EventData, 3).ToString("X4"));
                     break;
                 case 0xF2:
-                    a = (aqc.QueueData[2] & 0x80) == 0x80 ? "true" : "false";
-                    sb.Append(ObjectNames[((aqc.QueueData[2] >> 1) & 0x3F)] +
-                        ", in level: [" + (Bits.GetShort(aqc.QueueData, 1) & 0x1FF).ToString("d3") +
+                    a = (aqc.EventData[2] & 0x80) == 0x80 ? "true" : "false";
+                    sb.Append(ObjectNames[((aqc.EventData[2] >> 1) & 0x3F)] +
+                        ", in level: [" + (Bits.GetShort(aqc.EventData, 1) & 0x1FF).ToString("d3") +
                         "], presence = " + a);
                     break;
                 case 0xF3:
-                    a = (aqc.QueueData[2] & 0x80) == 0x80 ? "true" : "false";
-                    sb.Append(ObjectNames[((aqc.QueueData[2] >> 1) & 0x3F)] +
-                        ", in level: [" + (Bits.GetShort(aqc.QueueData, 1) & 0x1FF).ToString("d3") +
+                    a = (aqc.EventData[2] & 0x80) == 0x80 ? "true" : "false";
+                    sb.Append(ObjectNames[((aqc.EventData[2] >> 1) & 0x3F)] +
+                        ", in level: [" + (Bits.GetShort(aqc.EventData, 1) & 0x1FF).ToString("d3") +
                         "], event trigger = " + a);
                     break;
                 case 0xF8:
-                    a = (aqc.QueueData[2] & 0x80) == 0x80 ? "true" : "false";
-                    sb.Append(ObjectNames[((aqc.QueueData[2] >> 1) & 0x3F)] +
-                        ", in level: [" + (Bits.GetShort(aqc.QueueData, 1) & 0x1FF).ToString("d3") +
+                    a = (aqc.EventData[2] & 0x80) == 0x80 ? "true" : "false";
+                    sb.Append(ObjectNames[((aqc.EventData[2] >> 1) & 0x3F)] +
+                        ", in level: [" + (Bits.GetShort(aqc.EventData, 1) & 0x1FF).ToString("d3") +
                         "], presence = " + a +
-                        ", jump to $" + Bits.GetShort(aqc.QueueData, 3).ToString("X4"));
+                        ", jump to $" + Bits.GetShort(aqc.EventData, 3).ToString("X4"));
                     break;
                 case 0xFD:
                     sb.Append(ESC_FD_Options(aqc));
@@ -870,24 +870,24 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             switch (aqc.Option)
             {
                 case 0x0F:
-                    sb.Append(aqc.QueueData[2].ToString());
+                    sb.Append(aqc.EventData[2].ToString());
                     break;
                 case 0x9E:
-                    sb.Append(Lists.Numerize(Lists.SoundNames, aqc.QueueData[2]));
+                    sb.Append(Lists.Numerize(Lists.SoundNames, aqc.EventData[2]));
                     break;
                 case 0xB0:
                 case 0xB1:
                 case 0xB2:
-                    sb.Append(Bits.GetShort(aqc.QueueData, 2).ToString());
+                    sb.Append(Bits.GetShort(aqc.EventData, 2).ToString());
                     break;
                 case 0xB3:
                 case 0xB4:
                 case 0xB5:
-                    sb.Append(((aqc.QueueData[2] * 2) + 0x7000).ToString("X4"));
+                    sb.Append(((aqc.EventData[2] * 2) + 0x7000).ToString("X4"));
                     break;
                 case 0xB6:
-                    sb.Append(((aqc.QueueData[2] * 2) + 0x7000).ToString("X4") + ", shifts: " +
-                        ((aqc.QueueData[3] ^ 0xFF) + 1).ToString());
+                    sb.Append(((aqc.EventData[2] * 2) + 0x7000).ToString("X4") + ", shifts: " +
+                        ((aqc.EventData[3] ^ 0xFF) + 1).ToString());
                     break;
                 default:
                     break;

@@ -66,8 +66,24 @@ namespace LAZYSHELL.Previewer
             this.linkLabelSNES9X = new System.Windows.Forms.LinkLabel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.alliesInParty = new System.Windows.Forms.CheckedListBox();
-            this.maxOutStats = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.level = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.maxOutStats = new System.Windows.Forms.CheckBox();
+            this.panel28 = new System.Windows.Forms.Panel();
+            this.allyWeapon = new System.Windows.Forms.ComboBox();
+            this.label133 = new System.Windows.Forms.Label();
+            this.panel120 = new System.Windows.Forms.Panel();
+            this.allyAccessory = new System.Windows.Forms.ComboBox();
+            this.panel119 = new System.Windows.Forms.Panel();
+            this.allyArmor = new System.Windows.Forms.ComboBox();
+            this.label135 = new System.Windows.Forms.Label();
+            this.label134 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.allyName = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.reset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.selectNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.adjustXNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.adjustYNumericUpDown)).BeginInit();
@@ -82,6 +98,12 @@ namespace LAZYSHELL.Previewer
             this.panel6.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.level)).BeginInit();
+            this.panel28.SuspendLayout();
+            this.panel120.SuspendLayout();
+            this.panel119.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // emuPathLabel
@@ -98,7 +120,7 @@ namespace LAZYSHELL.Previewer
             // 
             this.changeEmuButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.changeEmuButton.BackColor = System.Drawing.SystemColors.Control;
-            this.changeEmuButton.Location = new System.Drawing.Point(711, 0);
+            this.changeEmuButton.Location = new System.Drawing.Point(735, 0);
             this.changeEmuButton.Name = "changeEmuButton";
             this.changeEmuButton.Size = new System.Drawing.Size(70, 17);
             this.changeEmuButton.TabIndex = 1;
@@ -109,22 +131,20 @@ namespace LAZYSHELL.Previewer
             // 
             // eventListBox
             // 
-            this.eventListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.eventListBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.eventListBox.FormattingEnabled = true;
             this.eventListBox.IntegralHeight = false;
-            this.eventListBox.Location = new System.Drawing.Point(12, 93);
+            this.eventListBox.Location = new System.Drawing.Point(0, 75);
             this.eventListBox.Name = "eventListBox";
-            this.eventListBox.Size = new System.Drawing.Size(623, 286);
+            this.eventListBox.Size = new System.Drawing.Size(651, 412);
             this.eventListBox.TabIndex = 2;
             this.eventListBox.SelectedIndexChanged += new System.EventHandler(this.eventListBox_SelectedIndexChanged);
             // 
             // launchButton
             // 
-            this.launchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.launchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.launchButton.FlatAppearance.BorderSize = 0;
-            this.launchButton.Location = new System.Drawing.Point(641, 356);
+            this.launchButton.Location = new System.Drawing.Point(654, 464);
             this.launchButton.Name = "launchButton";
             this.launchButton.Size = new System.Drawing.Size(75, 23);
             this.launchButton.TabIndex = 3;
@@ -167,9 +187,9 @@ namespace LAZYSHELL.Previewer
             // 
             // cancelButton
             // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Location = new System.Drawing.Point(722, 356);
+            this.cancelButton.Location = new System.Drawing.Point(733, 464);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 7;
@@ -185,7 +205,7 @@ namespace LAZYSHELL.Previewer
             this.emuPathTextBox.Location = new System.Drawing.Point(4, 2);
             this.emuPathTextBox.Name = "emuPathTextBox";
             this.emuPathTextBox.ReadOnly = true;
-            this.emuPathTextBox.Size = new System.Drawing.Size(573, 14);
+            this.emuPathTextBox.Size = new System.Drawing.Size(597, 14);
             this.emuPathTextBox.TabIndex = 8;
             // 
             // romPathTextBox
@@ -197,7 +217,7 @@ namespace LAZYSHELL.Previewer
             this.romPathTextBox.Location = new System.Drawing.Point(4, 2);
             this.romPathTextBox.Name = "romPathTextBox";
             this.romPathTextBox.ReadOnly = true;
-            this.romPathTextBox.Size = new System.Drawing.Size(573, 14);
+            this.romPathTextBox.Size = new System.Drawing.Size(597, 14);
             this.romPathTextBox.TabIndex = 9;
             // 
             // argsTextBox
@@ -207,7 +227,7 @@ namespace LAZYSHELL.Previewer
             this.argsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.argsTextBox.Location = new System.Drawing.Point(4, 2);
             this.argsTextBox.Name = "argsTextBox";
-            this.argsTextBox.Size = new System.Drawing.Size(573, 14);
+            this.argsTextBox.Size = new System.Drawing.Size(597, 14);
             this.argsTextBox.TabIndex = 17;
             // 
             // linkLabelZSNES
@@ -313,7 +333,7 @@ namespace LAZYSHELL.Previewer
             this.dynamicROMPath.Appearance = System.Windows.Forms.Appearance.Button;
             this.dynamicROMPath.BackColor = System.Drawing.SystemColors.Control;
             this.dynamicROMPath.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.dynamicROMPath.Location = new System.Drawing.Point(711, 18);
+            this.dynamicROMPath.Location = new System.Drawing.Point(735, 18);
             this.dynamicROMPath.Name = "dynamicROMPath";
             this.dynamicROMPath.Size = new System.Drawing.Size(70, 17);
             this.dynamicROMPath.TabIndex = 27;
@@ -327,7 +347,7 @@ namespace LAZYSHELL.Previewer
             // 
             this.defaultZSNES.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.defaultZSNES.BackColor = System.Drawing.SystemColors.Control;
-            this.defaultZSNES.Location = new System.Drawing.Point(711, 54);
+            this.defaultZSNES.Location = new System.Drawing.Point(735, 54);
             this.defaultZSNES.Name = "defaultZSNES";
             this.defaultZSNES.Size = new System.Drawing.Size(70, 17);
             this.defaultZSNES.TabIndex = 28;
@@ -344,7 +364,7 @@ namespace LAZYSHELL.Previewer
             this.panel2.Controls.Add(this.emuPathTextBox);
             this.panel2.Location = new System.Drawing.Point(129, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(581, 17);
+            this.panel2.Size = new System.Drawing.Size(605, 17);
             this.panel2.TabIndex = 29;
             // 
             // panel1
@@ -355,7 +375,7 @@ namespace LAZYSHELL.Previewer
             this.panel1.Controls.Add(this.romPathTextBox);
             this.panel1.Location = new System.Drawing.Point(129, 18);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(581, 17);
+            this.panel1.Size = new System.Drawing.Size(605, 17);
             this.panel1.TabIndex = 30;
             // 
             // panel3
@@ -366,17 +386,17 @@ namespace LAZYSHELL.Previewer
             this.panel3.Controls.Add(this.argsTextBox);
             this.panel3.Location = new System.Drawing.Point(129, 54);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(581, 17);
+            this.panel3.Size = new System.Drawing.Size(605, 17);
             this.panel3.TabIndex = 31;
             // 
             // panel11
             // 
             this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel11.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel11.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel11.Controls.Add(this.label1);
             this.panel11.Controls.Add(this.selectNumericUpDown);
-            this.panel11.Location = new System.Drawing.Point(641, 93);
+            this.panel11.Location = new System.Drawing.Point(653, 77);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(156, 21);
             this.panel11.TabIndex = 37;
@@ -384,12 +404,12 @@ namespace LAZYSHELL.Previewer
             // panel9
             // 
             this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel9.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel9.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel9.Controls.Add(this.label4);
             this.panel9.Controls.Add(this.panel10);
             this.panel9.Enabled = false;
-            this.panel9.Location = new System.Drawing.Point(641, 202);
+            this.panel9.Location = new System.Drawing.Point(653, 178);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(156, 40);
             this.panel9.TabIndex = 37;
@@ -418,7 +438,7 @@ namespace LAZYSHELL.Previewer
             // panel8
             // 
             this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel8.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel8.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel8.Controls.Add(this.adjustXNumericUpDown);
             this.panel8.Controls.Add(this.label5);
@@ -427,7 +447,7 @@ namespace LAZYSHELL.Previewer
             this.panel8.Controls.Add(this.adjustYNumericUpDown);
             this.panel8.Controls.Add(this.adjustZNumericUpDown);
             this.panel8.Controls.Add(this.label7);
-            this.panel8.Location = new System.Drawing.Point(641, 120);
+            this.panel8.Location = new System.Drawing.Point(653, 100);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(156, 76);
             this.panel8.TabIndex = 36;
@@ -446,9 +466,7 @@ namespace LAZYSHELL.Previewer
             // 
             // panel6
             // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel6.Controls.Add(this.emuPathLabel);
             this.panel6.Controls.Add(this.changeEmuButton);
@@ -462,9 +480,10 @@ namespace LAZYSHELL.Previewer
             this.panel6.Controls.Add(this.linkLabelSNES9X);
             this.panel6.Controls.Add(this.linkLabelZSNES);
             this.panel6.Controls.Add(this.panel1);
-            this.panel6.Location = new System.Drawing.Point(12, 12);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(785, 75);
+            this.panel6.Size = new System.Drawing.Size(809, 75);
             this.panel6.TabIndex = 35;
             // 
             // panel13
@@ -475,7 +494,7 @@ namespace LAZYSHELL.Previewer
             this.panel13.Controls.Add(this.textBox1);
             this.panel13.Location = new System.Drawing.Point(129, 36);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(581, 17);
+            this.panel13.Size = new System.Drawing.Size(605, 17);
             this.panel13.TabIndex = 31;
             // 
             // textBox1
@@ -485,14 +504,14 @@ namespace LAZYSHELL.Previewer
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Location = new System.Drawing.Point(4, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(573, 14);
+            this.textBox1.Size = new System.Drawing.Size(597, 14);
             this.textBox1.TabIndex = 17;
             // 
             // defaultSNES9X
             // 
             this.defaultSNES9X.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.defaultSNES9X.BackColor = System.Drawing.SystemColors.Control;
-            this.defaultSNES9X.Location = new System.Drawing.Point(711, 36);
+            this.defaultSNES9X.Location = new System.Drawing.Point(735, 36);
             this.defaultSNES9X.Name = "defaultSNES9X";
             this.defaultSNES9X.Size = new System.Drawing.Size(70, 17);
             this.defaultSNES9X.TabIndex = 28;
@@ -517,14 +536,13 @@ namespace LAZYSHELL.Previewer
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.alliesInParty);
-            this.panel4.Controls.Add(this.maxOutStats);
             this.panel4.Controls.Add(this.label2);
-            this.panel4.Location = new System.Drawing.Point(641, 248);
+            this.panel4.Location = new System.Drawing.Point(653, 220);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(156, 104);
+            this.panel4.Size = new System.Drawing.Size(156, 87);
             this.panel4.TabIndex = 38;
             // 
             // alliesInParty
@@ -543,21 +561,6 @@ namespace LAZYSHELL.Previewer
             this.alliesInParty.TabIndex = 29;
             this.alliesInParty.SelectedIndexChanged += new System.EventHandler(this.alliesInParty_SelectedIndexChanged);
             // 
-            // maxOutStats
-            // 
-            this.maxOutStats.Appearance = System.Windows.Forms.Appearance.Button;
-            this.maxOutStats.BackColor = System.Drawing.SystemColors.Control;
-            this.maxOutStats.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.maxOutStats.Location = new System.Drawing.Point(0, 83);
-            this.maxOutStats.Name = "maxOutStats";
-            this.maxOutStats.Size = new System.Drawing.Size(152, 17);
-            this.maxOutStats.TabIndex = 28;
-            this.maxOutStats.Text = "MAX OUT STATS";
-            this.maxOutStats.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.maxOutStats.UseCompatibleTextRendering = true;
-            this.maxOutStats.UseVisualStyleBackColor = false;
-            this.maxOutStats.CheckedChanged += new System.EventHandler(this.maxOutStats_CheckedChanged);
-            // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.SystemColors.Control;
@@ -570,11 +573,243 @@ namespace LAZYSHELL.Previewer
             this.label2.TabIndex = 20;
             this.label2.Text = "ALLIES IN PARTY";
             // 
+            // level
+            // 
+            this.level.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.level.Location = new System.Drawing.Point(63, 19);
+            this.level.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.level.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.level.Name = "level";
+            this.level.Size = new System.Drawing.Size(89, 17);
+            this.level.TabIndex = 21;
+            this.level.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.level.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.level.ValueChanged += new System.EventHandler(this.level_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(0, 19);
+            this.label3.Name = "label3";
+            this.label3.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label3.Size = new System.Drawing.Size(62, 17);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "Level";
+            // 
+            // maxOutStats
+            // 
+            this.maxOutStats.Appearance = System.Windows.Forms.Appearance.Button;
+            this.maxOutStats.BackColor = System.Drawing.SystemColors.Control;
+            this.maxOutStats.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.maxOutStats.Location = new System.Drawing.Point(0, 109);
+            this.maxOutStats.Name = "maxOutStats";
+            this.maxOutStats.Size = new System.Drawing.Size(152, 17);
+            this.maxOutStats.TabIndex = 28;
+            this.maxOutStats.Text = "MAX OUT STATS";
+            this.maxOutStats.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.maxOutStats.UseCompatibleTextRendering = true;
+            this.maxOutStats.UseVisualStyleBackColor = false;
+            this.maxOutStats.CheckedChanged += new System.EventHandler(this.maxOutStats_CheckedChanged);
+            // 
+            // panel28
+            // 
+            this.panel28.Controls.Add(this.allyWeapon);
+            this.panel28.Location = new System.Drawing.Point(63, 55);
+            this.panel28.Name = "panel28";
+            this.panel28.Size = new System.Drawing.Size(90, 17);
+            this.panel28.TabIndex = 211;
+            // 
+            // allyWeapon
+            // 
+            this.allyWeapon.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.allyWeapon.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.allyWeapon.DropDownHeight = 317;
+            this.allyWeapon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.allyWeapon.DropDownWidth = 150;
+            this.allyWeapon.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allyWeapon.IntegralHeight = false;
+            this.allyWeapon.ItemHeight = 15;
+            this.allyWeapon.Location = new System.Drawing.Point(-2, -2);
+            this.allyWeapon.Name = "allyWeapon";
+            this.allyWeapon.Size = new System.Drawing.Size(93, 21);
+            this.allyWeapon.TabIndex = 109;
+            this.allyWeapon.Tag = "";
+            this.allyWeapon.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
+            this.allyWeapon.SelectedIndexChanged += new System.EventHandler(this.allyWeapon_SelectedIndexChanged);
+            // 
+            // label133
+            // 
+            this.label133.BackColor = System.Drawing.SystemColors.Control;
+            this.label133.Location = new System.Drawing.Point(0, 91);
+            this.label133.Name = "label133";
+            this.label133.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label133.Size = new System.Drawing.Size(62, 17);
+            this.label133.TabIndex = 210;
+            this.label133.Text = "Accessory";
+            // 
+            // panel120
+            // 
+            this.panel120.Controls.Add(this.allyAccessory);
+            this.panel120.Location = new System.Drawing.Point(63, 91);
+            this.panel120.Name = "panel120";
+            this.panel120.Size = new System.Drawing.Size(90, 17);
+            this.panel120.TabIndex = 213;
+            // 
+            // allyAccessory
+            // 
+            this.allyAccessory.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.allyAccessory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.allyAccessory.DropDownHeight = 317;
+            this.allyAccessory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.allyAccessory.DropDownWidth = 150;
+            this.allyAccessory.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allyAccessory.IntegralHeight = false;
+            this.allyAccessory.ItemHeight = 15;
+            this.allyAccessory.Location = new System.Drawing.Point(-2, -2);
+            this.allyAccessory.Name = "allyAccessory";
+            this.allyAccessory.Size = new System.Drawing.Size(93, 21);
+            this.allyAccessory.TabIndex = 111;
+            this.allyAccessory.Tag = "";
+            this.allyAccessory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
+            this.allyAccessory.SelectedIndexChanged += new System.EventHandler(this.allyAccessory_SelectedIndexChanged);
+            // 
+            // panel119
+            // 
+            this.panel119.Controls.Add(this.allyArmor);
+            this.panel119.Location = new System.Drawing.Point(63, 73);
+            this.panel119.Name = "panel119";
+            this.panel119.Size = new System.Drawing.Size(90, 17);
+            this.panel119.TabIndex = 212;
+            // 
+            // allyArmor
+            // 
+            this.allyArmor.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.allyArmor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.allyArmor.DropDownHeight = 317;
+            this.allyArmor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.allyArmor.DropDownWidth = 150;
+            this.allyArmor.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allyArmor.IntegralHeight = false;
+            this.allyArmor.ItemHeight = 15;
+            this.allyArmor.Location = new System.Drawing.Point(-2, -2);
+            this.allyArmor.Name = "allyArmor";
+            this.allyArmor.Size = new System.Drawing.Size(93, 21);
+            this.allyArmor.TabIndex = 110;
+            this.allyArmor.Tag = "";
+            this.allyArmor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
+            this.allyArmor.SelectedIndexChanged += new System.EventHandler(this.allyArmor_SelectedIndexChanged);
+            // 
+            // label135
+            // 
+            this.label135.BackColor = System.Drawing.SystemColors.Control;
+            this.label135.Location = new System.Drawing.Point(0, 55);
+            this.label135.Name = "label135";
+            this.label135.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label135.Size = new System.Drawing.Size(62, 17);
+            this.label135.TabIndex = 208;
+            this.label135.Text = "Weapon";
+            // 
+            // label134
+            // 
+            this.label134.BackColor = System.Drawing.SystemColors.Control;
+            this.label134.Location = new System.Drawing.Point(0, 73);
+            this.label134.Name = "label134";
+            this.label134.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label134.Size = new System.Drawing.Size(62, 17);
+            this.label134.TabIndex = 209;
+            this.label134.Text = "Armor";
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.panel7);
+            this.panel5.Controls.Add(this.panel28);
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Controls.Add(this.label133);
+            this.panel5.Controls.Add(this.reset);
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.panel120);
+            this.panel5.Controls.Add(this.maxOutStats);
+            this.panel5.Controls.Add(this.panel119);
+            this.panel5.Controls.Add(this.level);
+            this.panel5.Controls.Add(this.label135);
+            this.panel5.Controls.Add(this.label134);
+            this.panel5.Location = new System.Drawing.Point(653, 309);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(156, 153);
+            this.panel5.TabIndex = 38;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.allyName);
+            this.panel7.Location = new System.Drawing.Point(0, 37);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(153, 17);
+            this.panel7.TabIndex = 212;
+            // 
+            // allyName
+            // 
+            this.allyName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.allyName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.allyName.DropDownHeight = 317;
+            this.allyName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.allyName.DropDownWidth = 150;
+            this.allyName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allyName.IntegralHeight = false;
+            this.allyName.ItemHeight = 15;
+            this.allyName.Location = new System.Drawing.Point(-2, -2);
+            this.allyName.Name = "allyName";
+            this.allyName.Size = new System.Drawing.Size(156, 21);
+            this.allyName.TabIndex = 109;
+            this.allyName.Tag = "";
+            this.allyName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.allyName_DrawItem);
+            this.allyName.SelectedIndexChanged += new System.EventHandler(this.allyName_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.SystemColors.Control;
+            this.label8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Name = "label8";
+            this.label8.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label8.Size = new System.Drawing.Size(152, 17);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "ALLY STATS";
+            // 
+            // reset
+            // 
+            this.reset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.reset.BackColor = System.Drawing.SystemColors.Control;
+            this.reset.FlatAppearance.BorderSize = 0;
+            this.reset.Location = new System.Drawing.Point(0, 126);
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(152, 23);
+            this.reset.TabIndex = 3;
+            this.reset.Text = "Reset all equipment";
+            this.reset.UseVisualStyleBackColor = false;
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
             // Previewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 391);
+            this.ClientSize = new System.Drawing.Size(809, 487);
+            this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.eventListBox);
             this.Controls.Add(this.cancelButton);
@@ -604,6 +839,12 @@ namespace LAZYSHELL.Previewer
             this.panel13.ResumeLayout(false);
             this.panel13.PerformLayout();
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.level)).EndInit();
+            this.panel28.ResumeLayout(false);
+            this.panel120.ResumeLayout(false);
+            this.panel119.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -649,5 +890,21 @@ namespace LAZYSHELL.Previewer
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckedListBox alliesInParty;
         private System.Windows.Forms.CheckBox maxOutStats;
+        private System.Windows.Forms.NumericUpDown level;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel28;
+        private System.Windows.Forms.ComboBox allyWeapon;
+        private System.Windows.Forms.Label label133;
+        private System.Windows.Forms.Panel panel120;
+        private System.Windows.Forms.ComboBox allyAccessory;
+        private System.Windows.Forms.Panel panel119;
+        private System.Windows.Forms.ComboBox allyArmor;
+        private System.Windows.Forms.Label label135;
+        private System.Windows.Forms.Label label134;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.ComboBox allyName;
+        private System.Windows.Forms.Button reset;
     }
 }

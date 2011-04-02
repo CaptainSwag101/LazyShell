@@ -15,16 +15,16 @@ namespace LAZYSHELL
     public partial class Dialogues : Form
     {
         #region Variables
+        public long checksum;
         // main
-        private delegate void Function(RichTextBox richTextBox);
-        private Model model = State.Instance.Model;
+        private delegate void Function(RichTextBox richTextBox, StringComparison stringComparison, bool matchWholeWord);
         // accessors
-        private Dialogue[] dialogues { get { return model.Dialogues; } set { model.Dialogues = value; } }
+        private Dialogue[] dialogues { get { return Model.Dialogues; } set { Model.Dialogues = value; } }
         private Dialogue dialogue { get { return dialogues[index]; } set { dialogues[index] = value; } }
-        private DialogueTable[] dialogueTables { get { return model.DialogueTables; } set { model.DialogueTables = value; } }
-        private FontCharacter[] fontDialogue { get { return model.FontDialogue; } }
-        private FontCharacter[] fontTriangle { get { return model.FontTriangle; } }
-        private PaletteSet fontPalette { get { return model.FontPaletteDialogue; } set { model.FontPaletteDialogue = value; } }
+        private DialogueTable[] dialogueTables { get { return Model.DialogueTables; } set { Model.DialogueTables = value; } }
+        private FontCharacter[] fontDialogue { get { return Model.FontDialogue; } }
+        private FontCharacter[] fontTriangle { get { return Model.FontTriangle; } }
+        private PaletteSet fontPalette { get { return Model.FontPaletteDialogue; } set { Model.FontPaletteDialogue = value; } }
         // public accessors
         public ToolStripNumericUpDown DialogueNum { get { return dialogueNum; } set { dialogueNum = value; } }
         private State state = State.Instance;
@@ -64,7 +64,7 @@ namespace LAZYSHELL
             // tileset
             textHelper = TextHelper.Instance;
             dialoguePreview = new DialoguePreview();
-            dialogueTileset = new DialogueTileset(model.FontPaletteDialogue);
+            dialogueTileset = new DialogueTileset(Model.FontPaletteDialogue);
             SetTilesetImage();
             // compression table
             updatingDialogue = true;
@@ -98,6 +98,8 @@ namespace LAZYSHELL
             SetTextImage();
             updatingDialogue = false;
             new ToolTipLabel(this, toolTip1, showDecHex, helpTips);
+            //
+            checksum = Do.GenerateChecksum(dialogues, dialogueTables, fontDialogue, fontTriangle, fontPalette, Model.BattleDialogues, dialogueTileset);
         }
         // tooltips
         private void SetToolTips(ToolTip toolTip1)
@@ -452,15 +454,24 @@ namespace LAZYSHELL
                 else dialogues[i].DuplicateDialogues = i;
             }
         }
-        private void LoadSearch(RichTextBox searchResults)
+        private void LoadSearch(RichTextBox searchResults, StringComparison stringComparison, bool matchWholeWord)
         {
             string dialogueSearch = "";
             int j = 0;
 
             for (int i = 0; i < dialogues.Length; i++)
             {
-                if (Do.Contains(dialogues[i].GetDialogue(textCodeFormat), textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase))
+                string dialogue = dialogues[i].GetDialogue(textCodeFormat);
+                int index = dialogue.IndexOf(textBoxSearch.Text, stringComparison);
+                if (index >= 0)
                 {
+                    if (matchWholeWord)
+                    {
+                        if (index + textBoxSearch.Text.Length < dialogue.Length && Char.IsLetter(dialogue, index + textBoxSearch.Text.Length))
+                            continue;
+                        if (index - 1 >= 0 && Char.IsLetter(dialogue, index - 1))
+                            continue;
+                    }
                     j++;
                     dialogueSearch += "[" + dialogues[i].Index.ToString() + "]\n";
                     dialogueSearch += dialogues[i].GetDialogue(textCodeFormat) + "\n\n";
@@ -594,6 +605,8 @@ namespace LAZYSHELL
         // main
         private void Dialogues_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Do.GenerateChecksum(dialogues, dialogueTables, fontDialogue, fontTriangle, fontPalette, Model.BattleDialogues, dialogueTileset) == checksum)
+                goto Close;
             DialogResult result = MessageBox.Show(
                 "Dialogues have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -601,24 +614,25 @@ namespace LAZYSHELL
                 Assemble();
             else if (result == DialogResult.No)
             {
-                model.Dialogues = null;
-                model.BattleDialogues = null;
-                model.BattleMessages = null;
-                model.DialogueGraphics = null;
-                model.BattleDialogueTileSet = null;
-                model.FontDescription = null;
-                model.FontDialogue = null;
-                model.FontMenu = null;
-                model.FontTriangle = null;
-                model.FontPaletteBattle = null;
-                model.FontPaletteDialogue = null;
-                model.FontPaletteMenu = null;
+                Model.Dialogues = null;
+                Model.BattleDialogues = null;
+                Model.BattleMessages = null;
+                Model.DialogueGraphics = null;
+                Model.BattleDialogueTileSet = null;
+                Model.FontDescription = null;
+                Model.FontDialogue = null;
+                Model.FontMenu = null;
+                Model.FontTriangle = null;
+                Model.FontPaletteBattle = null;
+                Model.FontPaletteDialogue = null;
+                Model.FontPaletteMenu = null;
             }
             else if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
+        Close:
             searchWindow.Close();
             fonts.NewFontTable.Close();
             battleDialogues.Close();
@@ -852,7 +866,7 @@ namespace LAZYSHELL
                     InsertIntoDialogueText("[NUMBER FROM EVENT MEMORY][ " + variable.ToString() + "]");
                 }
                 else
-                    InsertIntoDialogueText("[ITEM VARIABLE FROM EVENT MEMORY 00:70A7]");
+                    InsertIntoDialogueText("[ITEM VARIABLE FROM EVENT Memory $70A7]");
             }
             dialogueTextBox.Focus();
         }
@@ -909,11 +923,11 @@ namespace LAZYSHELL
                     if (!line.EndsWith("[0]") && !line.EndsWith("[6]"))
                         line += "[0]";
                     dialogues[number].SetDialogue(line, true);
-                    dialogues[number].Data = model.Data;
+                    dialogues[number].Data = Model.Data;
                 }
                 dialogueNum_ValueChanged(null, null);
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show(
                     "There was a problem loading Dialogue data. Verify that the lines in the\n" +
@@ -983,11 +997,11 @@ namespace LAZYSHELL
                         if (!line.EndsWith("[endInput]") && !line.EndsWith("[end]"))
                             line += "[endInput]";
                     dialogues[number].SetDialogue(line, textCodeFormat);
-                    dialogues[number].Data = model.Data;
+                    dialogues[number].Data = Model.Data;
                 }
                 dialogueNum_ValueChanged(null, null);
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show(
                     "There was a problem loading dialogues. Verify that the lines are correctly named.\n\n" +
@@ -1024,11 +1038,11 @@ namespace LAZYSHELL
                     else
                         if (!line.EndsWith("[endInput]") && !line.EndsWith("[end]"))
                             line += "[endInput]";
-                    model.BattleDialogues[number].SetBattleDialogue(line, battleDialogues.textCodeFormat);
+                    Model.BattleDialogues[number].SetBattleDialogue(line, battleDialogues.textCodeFormat);
                 }
                 dialogueNum_ValueChanged(null, null);
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show(
                     "There was a problem loading dialogues. Verify that the lines are correctly named.\n\n" +
@@ -1069,11 +1083,11 @@ namespace LAZYSHELL
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 StreamWriter dialogues = File.CreateText(saveFileDialog.FileName);
-                for (int i = 0; i < model.BattleDialogues.Length; i++)
+                for (int i = 0; i < Model.BattleDialogues.Length; i++)
                 {
                     dialogues.WriteLine(
                         "{" + i.ToString("d4") + "}\t" +
-                        model.BattleDialogues[i].GetBattleDialogue(battleDialogues.textCodeFormat));
+                        Model.BattleDialogues[i].GetBattleDialogue(battleDialogues.textCodeFormat));
                 }
                 dialogues.Close();
             }
@@ -1085,9 +1099,20 @@ namespace LAZYSHELL
         }
         private void clearBattleDialoguesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ClearElements(model.BattleDialogues, battleDialogues.Index, "CLEAR BATTLE DIALOGUES...").ShowDialog();
+            new ClearElements(Model.BattleDialogues, battleDialogues.Index, "CLEAR BATTLE DIALOGUES...").ShowDialog();
             battleDialogues.RefreshBattleDialogue();
         }
         #endregion
+
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current dialogue. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            dialogue = new Dialogue(Model.Data, index);
+            dialoguePreview.Reset();
+            RefreshDialogueEditor();
+            SetTextImage();
+        }
     }
 }

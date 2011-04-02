@@ -87,6 +87,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.characterName = new LAZYSHELL.ToolStripComboBox();
             this.textBoxCharacterName = new System.Windows.Forms.ToolStripTextBox();
+            this.reset = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label208 = new System.Windows.Forms.Label();
@@ -150,7 +151,7 @@
             this.panel198.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel198.Controls.Add(this.label235);
             this.panel198.Controls.Add(this.panel118);
-            this.panel198.Location = new System.Drawing.Point(12, 28);
+            this.panel198.Location = new System.Drawing.Point(1, 28);
             this.panel198.Name = "panel198";
             this.panel198.Size = new System.Drawing.Size(223, 238);
             this.panel198.TabIndex = 7;
@@ -345,9 +346,9 @@
             // 
             // startingWeapon
             // 
-            this.startingWeapon.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.startingWeapon.BackColor = System.Drawing.SystemColors.ControlDark;
             this.startingWeapon.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.startingWeapon.DropDownHeight = 314;
+            this.startingWeapon.DropDownHeight = 317;
             this.startingWeapon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startingWeapon.DropDownWidth = 150;
             this.startingWeapon.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -396,9 +397,9 @@
             // 
             // startingAccessory
             // 
-            this.startingAccessory.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.startingAccessory.BackColor = System.Drawing.SystemColors.ControlDark;
             this.startingAccessory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.startingAccessory.DropDownHeight = 314;
+            this.startingAccessory.DropDownHeight = 317;
             this.startingAccessory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startingAccessory.DropDownWidth = 150;
             this.startingAccessory.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -422,9 +423,9 @@
             // 
             // startingArmor
             // 
-            this.startingArmor.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.startingArmor.BackColor = System.Drawing.SystemColors.ControlDark;
             this.startingArmor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.startingArmor.DropDownHeight = 314;
+            this.startingArmor.DropDownHeight = 317;
             this.startingArmor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startingArmor.DropDownWidth = 150;
             this.startingArmor.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -557,9 +558,9 @@
             this.panel196.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel196.Controls.Add(this.panel11);
             this.panel196.Controls.Add(this.label194);
-            this.panel196.Location = new System.Drawing.Point(241, 128);
+            this.panel196.Location = new System.Drawing.Point(226, 124);
             this.panel196.Name = "panel196";
-            this.panel196.Size = new System.Drawing.Size(213, 94);
+            this.panel196.Size = new System.Drawing.Size(217, 94);
             this.panel196.TabIndex = 9;
             // 
             // panel11
@@ -575,7 +576,7 @@
             this.panel11.Controls.Add(this.slotNum);
             this.panel11.Location = new System.Drawing.Point(0, 19);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(209, 71);
+            this.panel11.Size = new System.Drawing.Size(213, 71);
             this.panel11.TabIndex = 538;
             // 
             // label92
@@ -595,14 +596,14 @@
             this.panel123.Controls.Add(this.startingEquipment);
             this.panel123.Location = new System.Drawing.Point(97, 54);
             this.panel123.Name = "panel123";
-            this.panel123.Size = new System.Drawing.Size(113, 17);
+            this.panel123.Size = new System.Drawing.Size(117, 17);
             this.panel123.TabIndex = 213;
             // 
             // startingEquipment
             // 
-            this.startingEquipment.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.startingEquipment.BackColor = System.Drawing.SystemColors.ControlDark;
             this.startingEquipment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.startingEquipment.DropDownHeight = 314;
+            this.startingEquipment.DropDownHeight = 317;
             this.startingEquipment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startingEquipment.DropDownWidth = 150;
             this.startingEquipment.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -610,7 +611,7 @@
             this.startingEquipment.ItemHeight = 15;
             this.startingEquipment.Location = new System.Drawing.Point(-2, -2);
             this.startingEquipment.Name = "startingEquipment";
-            this.startingEquipment.Size = new System.Drawing.Size(116, 21);
+            this.startingEquipment.Size = new System.Drawing.Size(120, 21);
             this.startingEquipment.TabIndex = 324;
             this.startingEquipment.Tag = "";
             this.startingEquipment.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
@@ -621,14 +622,14 @@
             this.panel124.Controls.Add(this.startingSpecialItem);
             this.panel124.Location = new System.Drawing.Point(97, 36);
             this.panel124.Name = "panel124";
-            this.panel124.Size = new System.Drawing.Size(113, 17);
+            this.panel124.Size = new System.Drawing.Size(117, 17);
             this.panel124.TabIndex = 212;
             // 
             // startingSpecialItem
             // 
-            this.startingSpecialItem.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.startingSpecialItem.BackColor = System.Drawing.SystemColors.ControlDark;
             this.startingSpecialItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.startingSpecialItem.DropDownHeight = 314;
+            this.startingSpecialItem.DropDownHeight = 317;
             this.startingSpecialItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startingSpecialItem.DropDownWidth = 150;
             this.startingSpecialItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -636,7 +637,7 @@
             this.startingSpecialItem.ItemHeight = 15;
             this.startingSpecialItem.Location = new System.Drawing.Point(-2, -2);
             this.startingSpecialItem.Name = "startingSpecialItem";
-            this.startingSpecialItem.Size = new System.Drawing.Size(116, 21);
+            this.startingSpecialItem.Size = new System.Drawing.Size(120, 21);
             this.startingSpecialItem.TabIndex = 323;
             this.startingSpecialItem.Tag = "";
             this.startingSpecialItem.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
@@ -647,14 +648,14 @@
             this.panel122.Controls.Add(this.startingItem);
             this.panel122.Location = new System.Drawing.Point(97, 18);
             this.panel122.Name = "panel122";
-            this.panel122.Size = new System.Drawing.Size(113, 17);
+            this.panel122.Size = new System.Drawing.Size(117, 17);
             this.panel122.TabIndex = 211;
             // 
             // startingItem
             // 
-            this.startingItem.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.startingItem.BackColor = System.Drawing.SystemColors.ControlDark;
             this.startingItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.startingItem.DropDownHeight = 314;
+            this.startingItem.DropDownHeight = 317;
             this.startingItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startingItem.DropDownWidth = 150;
             this.startingItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -662,7 +663,7 @@
             this.startingItem.ItemHeight = 15;
             this.startingItem.Location = new System.Drawing.Point(-2, -2);
             this.startingItem.Name = "startingItem";
-            this.startingItem.Size = new System.Drawing.Size(116, 21);
+            this.startingItem.Size = new System.Drawing.Size(120, 21);
             this.startingItem.TabIndex = 322;
             this.startingItem.Tag = "";
             this.startingItem.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
@@ -711,7 +712,7 @@
             0,
             0});
             this.slotNum.Name = "slotNum";
-            this.slotNum.Size = new System.Drawing.Size(112, 17);
+            this.slotNum.Size = new System.Drawing.Size(116, 17);
             this.slotNum.TabIndex = 210;
             this.slotNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.slotNum.ValueChanged += new System.EventHandler(this.slotNum_ValueChanged);
@@ -724,7 +725,7 @@
             this.label194.Location = new System.Drawing.Point(0, 0);
             this.label194.Name = "label194";
             this.label194.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label194.Size = new System.Drawing.Size(209, 17);
+            this.label194.Size = new System.Drawing.Size(213, 17);
             this.label194.TabIndex = 340;
             this.label194.Text = "NEW GAME INVENTORY ITEMS";
             this.label194.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -735,9 +736,9 @@
             this.panel22.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel22.Controls.Add(this.label193);
             this.panel22.Controls.Add(this.panel121);
-            this.panel22.Location = new System.Drawing.Point(241, 28);
+            this.panel22.Location = new System.Drawing.Point(226, 28);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(213, 94);
+            this.panel22.Size = new System.Drawing.Size(217, 94);
             this.panel22.TabIndex = 8;
             // 
             // label193
@@ -748,7 +749,7 @@
             this.label193.Location = new System.Drawing.Point(0, 0);
             this.label193.Name = "label193";
             this.label193.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label193.Size = new System.Drawing.Size(209, 17);
+            this.label193.Size = new System.Drawing.Size(213, 17);
             this.label193.TabIndex = 340;
             this.label193.Text = "NEW GAME INVENTORY STATS";
             this.label193.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -766,7 +767,7 @@
             this.panel121.Controls.Add(this.label164);
             this.panel121.Location = new System.Drawing.Point(0, 19);
             this.panel121.Name = "panel121";
-            this.panel121.Size = new System.Drawing.Size(209, 71);
+            this.panel121.Size = new System.Drawing.Size(213, 71);
             this.panel121.TabIndex = 206;
             // 
             // label163
@@ -789,7 +790,7 @@
             0,
             0});
             this.startingMaximumFP.Name = "startingMaximumFP";
-            this.startingMaximumFP.Size = new System.Drawing.Size(112, 17);
+            this.startingMaximumFP.Size = new System.Drawing.Size(116, 17);
             this.startingMaximumFP.TabIndex = 209;
             this.startingMaximumFP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingMaximumFP.ValueChanged += new System.EventHandler(this.startingMaximumFP_ValueChanged);
@@ -804,7 +805,7 @@
             0,
             0});
             this.startingCurrentFP.Name = "startingCurrentFP";
-            this.startingCurrentFP.Size = new System.Drawing.Size(112, 17);
+            this.startingCurrentFP.Size = new System.Drawing.Size(116, 17);
             this.startingCurrentFP.TabIndex = 208;
             this.startingCurrentFP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingCurrentFP.ValueChanged += new System.EventHandler(this.startingCurrentFP_ValueChanged);
@@ -819,7 +820,7 @@
             0,
             0});
             this.startingFrogCoins.Name = "startingFrogCoins";
-            this.startingFrogCoins.Size = new System.Drawing.Size(112, 17);
+            this.startingFrogCoins.Size = new System.Drawing.Size(116, 17);
             this.startingFrogCoins.TabIndex = 207;
             this.startingFrogCoins.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingFrogCoins.ValueChanged += new System.EventHandler(this.startingFrogCoins_ValueChanged);
@@ -834,7 +835,7 @@
             0,
             0});
             this.startingCoins.Name = "startingCoins";
-            this.startingCoins.Size = new System.Drawing.Size(112, 17);
+            this.startingCoins.Size = new System.Drawing.Size(116, 17);
             this.startingCoins.TabIndex = 206;
             this.startingCoins.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingCoins.ValueChanged += new System.EventHandler(this.startingCoins_ValueChanged);
@@ -875,11 +876,12 @@
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.characterName,
-            this.textBoxCharacterName});
+            this.textBoxCharacterName,
+            this.reset});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(466, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(444, 25);
             this.toolStrip1.TabIndex = 472;
             // 
             // characterName
@@ -890,11 +892,11 @@
             this.characterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.characterName.DropDownWidth = 120;
             this.characterName.ItemHeight = 15;
-            this.characterName.Location = new System.Drawing.Point(9, 1);
+            this.characterName.Location = new System.Drawing.Point(7, 1);
             this.characterName.Name = "characterName";
             this.characterName.SelectedIndex = -1;
             this.characterName.SelectedItem = null;
-            this.characterName.Size = new System.Drawing.Size(228, 22);
+            this.characterName.Size = new System.Drawing.Size(218, 22);
             this.characterName.SelectedIndexChanged += new System.EventHandler(this.characterName_SelectedIndexChanged);
             this.characterName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.characterName_DrawItem);
             // 
@@ -902,22 +904,33 @@
             // 
             this.textBoxCharacterName.MaxLength = 10;
             this.textBoxCharacterName.Name = "textBoxCharacterName";
-            this.textBoxCharacterName.Size = new System.Drawing.Size(220, 25);
+            this.textBoxCharacterName.Size = new System.Drawing.Size(190, 25);
             this.textBoxCharacterName.TextChanged += new System.EventHandler(this.textBoxCharacterName_TextChanged);
+            // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.ToolTipText = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(12, 429);
+            this.panel1.Location = new System.Drawing.Point(1, 421);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(442, 94);
             this.panel1.TabIndex = 571;
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel2.Controls.Add(this.label208);
             this.panel2.Controls.Add(this.label158);
             this.panel2.Controls.Add(this.label159);
@@ -1103,17 +1116,16 @@
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.startingMagic);
             this.panel4.Controls.Add(this.label91);
-            this.panel4.Location = new System.Drawing.Point(12, 272);
+            this.panel4.Location = new System.Drawing.Point(1, 268);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(442, 151);
             this.panel4.TabIndex = 573;
             // 
             // startingMagic
             // 
-            this.startingMagic.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.startingMagic.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.startingMagic.CheckOnClick = true;
-            this.startingMagic.ColumnWidth = 108;
+            this.startingMagic.ColumnWidth = 109;
             this.startingMagic.ForeColor = System.Drawing.SystemColors.Control;
             this.startingMagic.Location = new System.Drawing.Point(0, 19);
             this.startingMagic.MultiColumn = true;
@@ -1127,7 +1139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 535);
+            this.ClientSize = new System.Drawing.Size(444, 516);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel4);
@@ -1264,6 +1276,7 @@
         private System.Windows.Forms.TrackBar lvl2TimingEnd;
         private System.Windows.Forms.Label label160;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ToolStripButton reset;
 
     }
 }

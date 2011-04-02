@@ -10,21 +10,26 @@ namespace LAZYSHELL.ScriptsEditor
 {
     class A_TreeViewWrapper
     {
-        TreeView treeView;
+        NewTreeView treeView;
         private AnimationScript script; public AnimationScript Script { get { return script; } set { script = value; } }
         private TreeNode selectedNode; public TreeNode SelectedNode { get { return selectedNode; } set { selectedNode = value; } }
-        public A_TreeViewWrapper(TreeView control)
+        public A_TreeViewWrapper(NewTreeView control)
         {
             this.treeView = control;
         }
-        public void ChangeScript(AnimationScript script)
+        public void ChangeScript(AnimationScript script, bool update)
         {
             this.script = script;
-            Populate();
+            Populate(update);
         }
-        private void Populate()
+        public void ChangeScript(AnimationScript script)
         {
-            this.treeView.BeginUpdate();
+            ChangeScript(script, true);
+        }
+        private void Populate(bool update)
+        {
+            if (update)
+                this.treeView.BeginUpdate();
 
             ArrayList scriptcmds;
 
@@ -35,7 +40,8 @@ namespace LAZYSHELL.ScriptsEditor
                 AddAnimationScriptCommand((AnimationScriptCommand)scriptcmds[i]);
 
             this.treeView.ExpandAll();
-            this.treeView.EndUpdate();
+            if (update)
+                this.treeView.EndUpdate();
         }
         private void AddAnimationScriptCommand(AnimationScriptCommand asc)
         {
@@ -102,6 +108,114 @@ namespace LAZYSHELL.ScriptsEditor
                         }
                         break;
                 }
+            }
+        }
+        public void MoveUp(AnimationScriptCommand asc)
+        {
+            if (selectedNode.PrevNode == null)
+                return;
+            if (asc.Opcode == 0x07 ||
+                asc.Opcode == 0x11 ||
+                asc.Opcode == 0x5E)
+                return;
+            AnimationScriptCommand prev = (AnimationScriptCommand)selectedNode.PrevNode.Tag;
+            if (prev.Opcode == 0x07 ||
+                prev.Opcode == 0x11 ||
+                prev.Opcode == 0x5E)
+                return;
+            if (selectedNode.Index == 0)
+                return;
+            Move((AnimationScriptCommand)selectedNode.PrevNode.Tag, asc, 1, "up");
+        }
+        public void MoveDown(AnimationScriptCommand asc)
+        {
+            if (selectedNode.NextNode == null)
+                return;
+            if (asc.Opcode == 0x07 ||
+                asc.Opcode == 0x11 ||
+                asc.Opcode == 0x5E)
+                return;
+            AnimationScriptCommand next = (AnimationScriptCommand)selectedNode.NextNode.Tag;
+            if (next.Opcode == 0x07 ||
+                next.Opcode == 0x11 ||
+                next.Opcode == 0x5E)
+                return;
+            if (selectedNode.Parent != null)
+            {
+                if (selectedNode.Index >= selectedNode.Parent.Nodes.Count - 1)
+                    return;
+            }
+            else
+            {
+                if (selectedNode.Index >= treeView.Nodes.Count - 1)
+                    return;
+            }
+            Move(asc, (AnimationScriptCommand)selectedNode.NextNode.Tag, 0, "down");
+        }
+        private void Move(AnimationScriptCommand tempA, AnimationScriptCommand tempB, int select, string direction)
+        {
+            treeView.BeginUpdate();
+            treeView.EnablePaint = false;
+            Point p = Do.GetTreeViewScrollPos(treeView);
+
+            byte[] byteA = new byte[tempB.AnimationData.Length];
+            byte[] byteB = new byte[tempA.AnimationData.Length];
+            for (int i = 0; i < byteA.Length; i++)
+                byteA[i] = tempB.AnimationData[i];
+            for (int i = 0; i < byteB.Length; i++)
+                byteB[i] = tempA.AnimationData[i];
+            tempA.AnimationData = byteA;
+            tempB.AnimationData = byteB;
+
+            int offset = tempA.InternalOffset;
+            for (int i = 0; i < byteA.Length; i++, offset++)
+                Model.Data[offset] = tempA.AnimationData[i];
+            int temp = tempB.InternalOffset;
+            tempB.InternalOffset = tempA.InternalOffset;
+            tempA.InternalOffset = offset;
+            for (int i = 0; i < byteB.Length; i++, offset++)
+                Model.Data[offset] = tempB.AnimationData[i];
+            tempA.Offset = tempA.OriginalOffset = tempA.InternalOffset;
+            tempB.Offset = tempB.OriginalOffset = tempB.InternalOffset;
+
+            // check multiple instances of command in current script, and change each accordingly
+            script.RefreshAnimationScript();
+
+            // redraw the treeview
+            ChangeScript(script, false);
+
+            // set the selected node
+            int internalOffset = select == 0 ? tempA.InternalOffset : tempB.InternalOffset;
+            SetSelectedNode(internalOffset);
+            p.X = 0;
+            Do.SetTreeViewScrollPos(treeView, p);
+            treeView.EnablePaint = true;
+            treeView.EndUpdate();
+        }
+        public void SetSelectedNode(int internalOffset)
+        {
+            foreach (TreeNode tn in this.treeView.Nodes)
+            {
+                if (internalOffset == ((AnimationScriptCommand)tn.Tag).InternalOffset)
+                {
+                    this.treeView.SelectedNode = tn;
+                    break;
+                }
+                else
+                    SearchForNodeWithTag(tn, internalOffset);
+            }
+        }
+        private void SearchForNodeWithTag(TreeNode node, int offset)
+        {
+            foreach (TreeNode tn in node.Nodes)
+            {
+                if (offset == ((AnimationScriptCommand)tn.Tag).InternalOffset)
+                {
+                    this.treeView.SelectedNode = tn;
+                    break;
+                }
+                else
+                    SearchForNodeWithTag(tn, offset);
             }
         }
     }

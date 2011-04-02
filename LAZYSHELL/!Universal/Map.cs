@@ -5,6 +5,7 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public abstract class Map
     {
         public abstract int[] Pixels { get; set; }

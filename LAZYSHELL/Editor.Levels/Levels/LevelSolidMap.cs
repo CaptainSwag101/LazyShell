@@ -7,8 +7,7 @@ namespace LAZYSHELL
 {
     public class LevelSolidMap : Map
     {
-        private Model model = State.Instance.Model;
-        private Solidity solidity = Solidity.Instance;
+                private Solidity solidity = Solidity.Instance;
         private LevelMap levelMap; public LevelMap Levelmap { get { return levelMap; } }
         private int[] pixels;
         public override int[] Pixels
@@ -38,11 +37,11 @@ namespace LAZYSHELL
         public LevelSolidMap(LevelMap levelMap)
         {
             this.levelMap = levelMap;
-            tilemap = model.SolidityMaps[levelMap.PhysicalMap];
+            tilemap = Model.SolidityMaps[levelMap.SolidityMap];
         }
         public override void MakeEdit()
         {
-            model.EditPhysicalMaps[levelMap.PhysicalMap] = true;
+            Model.EditSolidityMaps[levelMap.SolidityMap] = true;
         }
         public ushort GetTileNum(int physTileNum)
         {
@@ -52,16 +51,16 @@ namespace LAZYSHELL
         {
             if (count == 1)
             {
-                model.SolidityMaps[levelMap.PhysicalMap] = tilemap = new byte[0x20C2];
-                model.EditPhysicalMaps[levelMap.PhysicalMap] = true;
+                Model.SolidityMaps[levelMap.SolidityMap] = tilemap = new byte[0x20C2];
+                Model.EditSolidityMaps[levelMap.SolidityMap] = true;
             }
             else
             {
                 tilemap = new byte[0x20C2];
                 for (int i = 0; i < count; i++)
                 {
-                    model.SolidityMaps[i] = new byte[0x20C2];
-                    model.EditPhysicalMaps[i] = true;
+                    Model.SolidityMaps[i] = new byte[0x20C2];
+                    Model.EditSolidityMaps[i] = true;
                 }
             }
         }

@@ -6,11 +6,13 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class BattleDialogue : Element
     {
         /*****************************************************************************
          * Variables
          ****************************************************************************/
+        [NonSerialized()]
         private byte[] data;
         public override byte[] Data { get { return data; } set { data = value; } }
         public override int Index { get { return index; } set { index = value;} }
@@ -20,6 +22,7 @@ namespace LAZYSHELL
         private bool error = false;
         private int caretPositionSymbol;
         private int caretPositionNotSymbol;
+        [NonSerialized()]
         private TextHelperReduced textHelperReduced;
         private int type;
 

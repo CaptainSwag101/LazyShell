@@ -11,11 +11,11 @@ namespace LAZYSHELL
 {
     public partial class LevelUps : Form
     {
-        private Model model = State.Instance.Model;
         private Settings settings = Settings.Default;
         private bool updating = false;
-        private Character[] characters { get { return model.Characters; } set { model.Characters = value; } }
+        private Character[] characters { get { return Model.Characters; } set { Model.Characters = value; } }
         private Character character { get { return characters[index]; } set { characters[index] = value; } }
+        private Character character_;
         private int index { get { return characterName.SelectedIndex; } set { characterName.SelectedIndex = value; } }
         public LevelUps()
         {
@@ -33,7 +33,7 @@ namespace LAZYSHELL
 
             this.levelUpSpellLearned.Items.Clear();
             for (int i = 0; i < 32; i++)
-                this.levelUpSpellLearned.Items.Add(new string(model.Spells[i].Name));
+                this.levelUpSpellLearned.Items.Add(new string(Model.Spells[i].Name));
             this.levelUpSpellLearned.Items.Add("{NOTHING}");
             updating = false;
         }
@@ -54,6 +54,7 @@ namespace LAZYSHELL
             this.expNeeded.Value = characters[0].LevelExpNeeded;
             this.levelUpSpellLearned.SelectedIndex = character.LevelSpellLearned;
             this.characterName.Invalidate();
+            character_ = new Character(Model.Data, index);
         }
         public void SetToolTips(ToolTip toolTip1)
         {
@@ -131,12 +132,13 @@ namespace LAZYSHELL
         private void characterName_DrawItem(object sender, DrawItemEventArgs e)
         {
             Do.DrawName(
-                sender, e, new BattleDialoguePreview(), Lists.Convert(model.Characters),
-                model.FontMenu, model.FontPaletteBattle.Palette, 8, 10, 0, 0, false, false);
+                sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
+                Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
         }
         private void levelNum_ValueChanged(object sender, EventArgs e)
         {
-            character.CurrentLevel = (byte)levelNum.Value;
+            foreach (Character character in characters)
+                character.CurrentLevel = (byte)levelNum.Value;
             RefreshLevel();
         }
         private void expNeeded_ValueChanged(object sender, EventArgs e)
@@ -190,9 +192,18 @@ namespace LAZYSHELL
         private void levelUpSpellLearned_DrawItem(object sender, DrawItemEventArgs e)
         {
             Do.DrawName(
-                sender, e, new BattleDialoguePreview(), Lists.Convert(model.Spells, 33),
-                model.FontMenu, model.FontPaletteBattle.Palette, 8, 10, 0, 0, true, false);
+                sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Spells, 33),
+                Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, true, false, Model.MenuBackground_);
         }
         #endregion
+
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current character's level-up index. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            character = new Character(Model.Data, index);
+            characterName_SelectedIndexChanged(null, null);
+        }
     }
 }

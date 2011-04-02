@@ -52,5 +52,9 @@ namespace LAZYSHELL
         {
             packFormations = new ushort[3];
         }
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

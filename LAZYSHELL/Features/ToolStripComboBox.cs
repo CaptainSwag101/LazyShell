@@ -3,22 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
     [ToolboxItemAttribute(true)]
-    public class ToolStripComboBox : System.Windows.Forms.ToolStripControlHost
+    public class ToolStripComboBox : ToolStripControlHost
     {
         public ToolStripComboBox()
-            : base(new ComboBox())
+            : base(new NewComboBox())
         {
             this.DropDownControl.Margin = new Padding(1, 0, 1, 0);
         }
-        private ComboBox DropDownControl
+        private NewComboBox DropDownControl
         {
-            get { return Control as ComboBox; }
+            get { return Control as NewComboBox; }
         }
         public DrawMode DrawMode { get { return DropDownControl.DrawMode; } set { DropDownControl.DrawMode = value; } }
         public int DropDownHeight { get { return DropDownControl.DropDownHeight; } set { DropDownControl.DropDownHeight = value; } }
@@ -61,6 +62,116 @@ namespace LAZYSHELL
         {
             if (DrawItem != null)
                 DrawItem(this, e);
+        }
+
+        public class NewComboBox : ComboBox
+        {
+            private ComboEditWindow EditBox = new ComboEditWindow(); // the NativeWindow object, used to access and repaint the TextBox.
+            protected override void OnHandleCreated(EventArgs e)
+            {
+                base.OnHandleCreated(e);
+                //EditBox.AssignTextBoxHandle(this);
+            }
+        }
+
+        public sealed class ComboEditWindow : NativeWindow
+        {
+            [StructLayout(LayoutKind.Sequential)]
+            private struct RECT
+            {
+                public int left;
+                public int top;
+                public int right;
+                public int bottom;
+            }
+            [DllImport("user32")]
+            private static extern bool GetComboBoxInfo(IntPtr hwndCombo, ref ComboBoxInfo info);
+            [StructLayout(LayoutKind.Sequential)]
+            private struct ComboBoxInfo
+            {
+                public int cbSize;
+                public RECT rcItem;
+                public RECT rcButton;
+                public IntPtr stateButton;
+                public IntPtr hwndCombo;
+                public IntPtr hwndEdit;
+                public IntPtr hwndList;
+            }
+            [DllImport("user32", CharSet = CharSet.Auto)]
+            private extern static int SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
+            private const int EC_LEFTMARGIN = 0x1;
+            private const int EC_RIGHTMARGIN = 0x2;
+            private const int WM_PAINT = 0xF;
+            private const int WM_SETCURSOR = 0x20;
+            private const int WM_LBUTTONDOWN = 0x201;
+            private const int WM_KEYDOWN = 0x100;
+            private const int WM_KEYUP = 0x101;
+            private const int WM_CHAR = 0x102;
+            private const int WM_GETTEXTLENGTH = 0xe;
+            private const int WM_GETTEXT = 0xd;
+            private const int EM_SETMARGINS = 0xD3;
+            protected override void WndProc(ref Message m)
+            {
+                switch (m.Msg)
+                {
+                    case WM_PAINT:
+                        base.WndProc(ref m);
+                        DrawImage();
+                        break;
+                    case WM_LBUTTONDOWN:
+                        base.WndProc(ref m);
+                        DrawImage();
+                        break;
+                    case WM_KEYDOWN:
+                        base.WndProc(ref m);
+                        DrawImage();
+                        break;
+                    case WM_KEYUP:
+                        base.WndProc(ref m);
+                        DrawImage();
+                        break;
+                    case WM_CHAR:
+                        base.WndProc(ref m);
+                        DrawImage();
+                        break;
+                    case WM_GETTEXTLENGTH:
+                        base.WndProc(ref m);
+                        DrawImage();
+                        break;
+                    case WM_GETTEXT:
+                        base.WndProc(ref m);
+                        DrawImage();
+                        break;
+                    default:
+                        base.WndProc(ref m);
+                        break;
+                }
+            }
+            private Graphics gfx;
+            private NewComboBox Owner = null;
+            private ComboBoxInfo cbxinfo = new ComboBoxInfo();
+            public void DrawImage()
+            {
+                if (Owner.BackgroundImage != null)
+                {
+                    // Gets a GDI drawing surface from the textbox.
+                    gfx = Graphics.FromHwnd(this.Handle);
+                    gfx.DrawImage(Owner.BackgroundImage, 0, 0);
+                    gfx.Flush();
+                    gfx.Dispose();
+                }
+            }
+            public void AssignTextBoxHandle(NewComboBox owner)
+            {
+                Owner = owner;
+                cbxinfo.cbSize = Marshal.SizeOf(cbxinfo);
+                GetComboBoxInfo(Owner.Handle, ref cbxinfo);
+                if (!this.Handle.Equals(IntPtr.Zero))
+                {
+                    this.ReleaseHandle();
+                }
+                this.AssignHandle(cbxinfo.hwndEdit);
+            }
         }
     }
 }

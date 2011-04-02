@@ -157,7 +157,7 @@ namespace LAZYSHELL
                 underline = fontUnderline.Checked ? FontStyle.Underline : FontStyle.Regular;
                 fontTable.Font = new Font(ff[fontFamily.SelectedIndex].Name, (float)fontSize.Value, (FontStyle)(bold | italics | underline));
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Font does not support the current selected styles.", "LAZY SHELL");
             }
@@ -169,7 +169,7 @@ namespace LAZYSHELL
                 italics = fontItalics.Checked ? FontStyle.Italic : FontStyle.Regular;
                 fontTable.Font = new Font(ff[fontFamily.SelectedIndex].Name, (float)fontSize.Value, (FontStyle)(bold | italics | underline));
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Font does not support the current selected styles.", "LAZY SHELL");
             }
@@ -181,7 +181,7 @@ namespace LAZYSHELL
                 bold = fontBold.Checked ? FontStyle.Bold : FontStyle.Regular;
                 fontTable.Font = new Font(ff[fontFamily.SelectedIndex].Name, (float)fontSize.Value, (FontStyle)(bold | italics | underline));
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Font does not support the current selected styles.", "LAZY SHELL");
             }
@@ -226,7 +226,7 @@ namespace LAZYSHELL
             {
                 fontTable.Font = new Font(ff[fontFamily.SelectedIndex].Name, (float)fontSize.Value, (FontStyle)(bold | italics | underline));
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Font does not support the current selected styles.", "LAZY SHELL");
             }
@@ -237,7 +237,7 @@ namespace LAZYSHELL
             {
                 fontTable.Font = new Font(ff[fontFamily.SelectedIndex].Name, (float)fontSize.Value, (FontStyle)(bold | italics | underline));
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Font does not support the current selected size.", "LAZY SHELL");
             }

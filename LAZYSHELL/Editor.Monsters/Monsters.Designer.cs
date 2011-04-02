@@ -28,12 +28,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Monsters));
-            this.panel141 = new System.Windows.Forms.Panel();
-            this.panel222 = new System.Windows.Forms.Panel();
-            this.monsterTargetArrowY = new System.Windows.Forms.NumericUpDown();
-            this.monsterTargetArrowX = new System.Windows.Forms.NumericUpDown();
-            this.label119 = new System.Windows.Forms.Label();
-            this.pictureBoxMonster = new System.Windows.Forms.PictureBox();
             this.MonsterValElevation = new System.Windows.Forms.NumericUpDown();
             this.label216 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
@@ -129,12 +123,25 @@
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.import = new System.Windows.Forms.ToolStripButton();
-            this.export = new System.Windows.Forms.ToolStripButton();
-            this.clear = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.import = new System.Windows.Forms.ToolStripMenuItem();
+            this.importBattleScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.export = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportBattleScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.resetCurrentMonsterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetCurrentBattleScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.clear = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearBattleScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.helpTips = new System.Windows.Forms.ToolStripButton();
             this.baseConversion = new System.Windows.Forms.ToolStripButton();
+            this.hackingTools = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.showMonster = new System.Windows.Forms.ToolStripButton();
+            this.showBattleScripts = new System.Windows.Forms.ToolStripButton();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -151,11 +158,8 @@
             this.MonsterCoinSize = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel141.SuspendLayout();
-            this.panel222.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).BeginInit();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.panel14 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValElevation)).BeginInit();
             this.panel138.SuspendLayout();
             this.panel133.SuspendLayout();
@@ -202,83 +206,9 @@
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel13.SuspendLayout();
+            this.panel14.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel141
-            // 
-            this.panel141.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel141.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel141.Controls.Add(this.panel222);
-            this.panel141.Controls.Add(this.pictureBoxMonster);
-            this.panel141.Location = new System.Drawing.Point(352, 53);
-            this.panel141.Name = "panel141";
-            this.panel141.Size = new System.Drawing.Size(260, 279);
-            this.panel141.TabIndex = 468;
-            // 
-            // panel222
-            // 
-            this.panel222.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel222.Controls.Add(this.monsterTargetArrowY);
-            this.panel222.Controls.Add(this.monsterTargetArrowX);
-            this.panel222.Controls.Add(this.label119);
-            this.panel222.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel222.Location = new System.Drawing.Point(0, 258);
-            this.panel222.Name = "panel222";
-            this.panel222.Size = new System.Drawing.Size(256, 17);
-            this.panel222.TabIndex = 18;
-            // 
-            // monsterTargetArrowY
-            // 
-            this.monsterTargetArrowY.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.monsterTargetArrowY.Location = new System.Drawing.Point(191, 0);
-            this.monsterTargetArrowY.Maximum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.monsterTargetArrowY.Name = "monsterTargetArrowY";
-            this.monsterTargetArrowY.Size = new System.Drawing.Size(65, 17);
-            this.monsterTargetArrowY.TabIndex = 20;
-            this.monsterTargetArrowY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.monsterTargetArrowY.ValueChanged += new System.EventHandler(this.monsterTargetArrowY_ValueChanged);
-            // 
-            // monsterTargetArrowX
-            // 
-            this.monsterTargetArrowX.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.monsterTargetArrowX.Location = new System.Drawing.Point(125, 0);
-            this.monsterTargetArrowX.Maximum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.monsterTargetArrowX.Name = "monsterTargetArrowX";
-            this.monsterTargetArrowX.Size = new System.Drawing.Size(65, 17);
-            this.monsterTargetArrowX.TabIndex = 19;
-            this.monsterTargetArrowX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.monsterTargetArrowX.ValueChanged += new System.EventHandler(this.monsterTargetArrowX_ValueChanged);
-            // 
-            // label119
-            // 
-            this.label119.BackColor = System.Drawing.SystemColors.Control;
-            this.label119.Location = new System.Drawing.Point(0, 0);
-            this.label119.Name = "label119";
-            this.label119.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label119.Size = new System.Drawing.Size(124, 17);
-            this.label119.TabIndex = 391;
-            this.label119.Text = "Target (X, Y)";
-            // 
-            // pictureBoxMonster
-            // 
-            this.pictureBoxMonster.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pictureBoxMonster.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxMonster.Name = "pictureBoxMonster";
-            this.pictureBoxMonster.Size = new System.Drawing.Size(256, 256);
-            this.pictureBoxMonster.TabIndex = 220;
-            this.pictureBoxMonster.TabStop = false;
-            this.pictureBoxMonster.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseMove);
-            this.pictureBoxMonster.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseDown);
-            this.pictureBoxMonster.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMonster_Paint);
-            this.pictureBoxMonster.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseUp);
             // 
             // MonsterValElevation
             // 
@@ -367,12 +297,14 @@
             // 
             // panel138
             // 
+            this.panel138.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.panel138.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel138.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel138.Controls.Add(this.panel133);
-            this.panel138.Location = new System.Drawing.Point(352, 338);
+            this.panel138.Location = new System.Drawing.Point(3, 452);
             this.panel138.Name = "panel138";
-            this.panel138.Size = new System.Drawing.Size(260, 192);
+            this.panel138.Size = new System.Drawing.Size(330, 210);
             this.panel138.TabIndex = 470;
             // 
             // panel133
@@ -383,17 +315,21 @@
             this.panel133.Controls.Add(this.toolStrip2);
             this.panel133.Controls.Add(this.pictureBoxPsychopath);
             this.panel133.Controls.Add(this.label32);
+            this.panel133.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel133.Location = new System.Drawing.Point(0, 0);
             this.panel133.Name = "panel133";
-            this.panel133.Size = new System.Drawing.Size(256, 188);
+            this.panel133.Size = new System.Drawing.Size(326, 206);
             this.panel133.TabIndex = 494;
             // 
             // TextboxMonsterPsychoMsg
             // 
+            this.TextboxMonsterPsychoMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.TextboxMonsterPsychoMsg.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TextboxMonsterPsychoMsg.Location = new System.Drawing.Point(0, 75);
+            this.TextboxMonsterPsychoMsg.Location = new System.Drawing.Point(0, 74);
             this.TextboxMonsterPsychoMsg.Name = "TextboxMonsterPsychoMsg";
-            this.TextboxMonsterPsychoMsg.Size = new System.Drawing.Size(231, 113);
+            this.TextboxMonsterPsychoMsg.Size = new System.Drawing.Size(301, 132);
             this.TextboxMonsterPsychoMsg.TabIndex = 35;
             this.TextboxMonsterPsychoMsg.Text = "";
             this.TextboxMonsterPsychoMsg.TextChanged += new System.EventHandler(this.TextboxMonsterPsychoMsg_TextChanged);
@@ -410,10 +346,10 @@
             this.pause60f,
             this.pauseFrames,
             this.pauseA});
-            this.toolStrip3.Location = new System.Drawing.Point(232, 74);
+            this.toolStrip3.Location = new System.Drawing.Point(302, 74);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(24, 114);
+            this.toolStrip3.Size = new System.Drawing.Size(24, 132);
             this.toolStrip3.TabIndex = 565;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -487,7 +423,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 49);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(256, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(326, 25);
             this.toolStrip2.TabIndex = 539;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -499,7 +435,6 @@
             this.pageUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pageUp.Name = "pageUp";
             this.pageUp.Size = new System.Drawing.Size(23, 22);
-            this.pageUp.Text = "toolStripButton9";
             this.pageUp.ToolTipText = "Back 1 Page";
             this.pageUp.Click += new System.EventHandler(this.pageUp_Click);
             // 
@@ -511,7 +446,6 @@
             this.pageDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pageDown.Name = "pageDown";
             this.pageDown.Size = new System.Drawing.Size(23, 22);
-            this.pageDown.Text = "toolStripButton10";
             this.pageDown.ToolTipText = "Foward 1 Page";
             this.pageDown.Click += new System.EventHandler(this.pageDown_Click);
             // 
@@ -548,7 +482,7 @@
             this.pictureBoxPsychopath.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBoxPsychopath.Location = new System.Drawing.Point(0, 17);
             this.pictureBoxPsychopath.Name = "pictureBoxPsychopath";
-            this.pictureBoxPsychopath.Size = new System.Drawing.Size(256, 32);
+            this.pictureBoxPsychopath.Size = new System.Drawing.Size(326, 32);
             this.pictureBoxPsychopath.TabIndex = 343;
             this.pictureBoxPsychopath.TabStop = false;
             this.pictureBoxPsychopath.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxPsychopath_Paint);
@@ -562,7 +496,7 @@
             this.label32.Location = new System.Drawing.Point(0, 0);
             this.label32.Name = "label32";
             this.label32.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label32.Size = new System.Drawing.Size(256, 17);
+            this.label32.Size = new System.Drawing.Size(326, 17);
             this.label32.TabIndex = 162;
             this.label32.Text = "PSYCHOPATH MESSAGE...";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -572,7 +506,7 @@
             this.panel137.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel137.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel137.Controls.Add(this.panel53);
-            this.panel137.Location = new System.Drawing.Point(214, 380);
+            this.panel137.Location = new System.Drawing.Point(201, 299);
             this.panel137.Name = "panel137";
             this.panel137.Size = new System.Drawing.Size(132, 87);
             this.panel137.TabIndex = 466;
@@ -620,9 +554,9 @@
             this.panel136.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel136.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel136.Controls.Add(this.panel31);
-            this.panel136.Location = new System.Drawing.Point(214, 194);
+            this.panel136.Location = new System.Drawing.Point(201, 142);
             this.panel136.Name = "panel136";
-            this.panel136.Size = new System.Drawing.Size(132, 87);
+            this.panel136.Size = new System.Drawing.Size(132, 71);
             this.panel136.TabIndex = 464;
             // 
             // panel31
@@ -632,7 +566,7 @@
             this.panel31.Controls.Add(this.CheckboxMonsterElemWeak);
             this.panel31.Location = new System.Drawing.Point(0, 0);
             this.panel31.Name = "panel31";
-            this.panel31.Size = new System.Drawing.Size(128, 83);
+            this.panel31.Size = new System.Drawing.Size(128, 67);
             this.panel31.TabIndex = 490;
             // 
             // label96
@@ -661,7 +595,7 @@
             this.CheckboxMonsterElemWeak.Location = new System.Drawing.Point(0, 19);
             this.CheckboxMonsterElemWeak.MultiColumn = true;
             this.CheckboxMonsterElemWeak.Name = "CheckboxMonsterElemWeak";
-            this.CheckboxMonsterElemWeak.Size = new System.Drawing.Size(128, 64);
+            this.CheckboxMonsterElemWeak.Size = new System.Drawing.Size(128, 48);
             this.CheckboxMonsterElemWeak.TabIndex = 27;
             this.CheckboxMonsterElemWeak.SelectedIndexChanged += new System.EventHandler(this.CheckboxMonsterElemWeak_SelectedIndexChanged);
             // 
@@ -670,7 +604,7 @@
             this.panel135.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel135.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel135.Controls.Add(this.panel35);
-            this.panel135.Location = new System.Drawing.Point(214, 53);
+            this.panel135.Location = new System.Drawing.Point(201, 3);
             this.panel135.Name = "panel135";
             this.panel135.Size = new System.Drawing.Size(132, 135);
             this.panel135.TabIndex = 463;
@@ -723,9 +657,9 @@
             this.panel134.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel134.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel134.Controls.Add(this.panel32);
-            this.panel134.Location = new System.Drawing.Point(214, 287);
+            this.panel134.Location = new System.Drawing.Point(201, 221);
             this.panel134.Name = "panel134";
-            this.panel134.Size = new System.Drawing.Size(132, 87);
+            this.panel134.Size = new System.Drawing.Size(132, 71);
             this.panel134.TabIndex = 465;
             // 
             // panel32
@@ -735,7 +669,7 @@
             this.panel32.Controls.Add(this.CheckboxMonsterElemNull);
             this.panel32.Location = new System.Drawing.Point(0, 0);
             this.panel32.Name = "panel32";
-            this.panel32.Size = new System.Drawing.Size(128, 83);
+            this.panel32.Size = new System.Drawing.Size(128, 67);
             this.panel32.TabIndex = 491;
             // 
             // label169
@@ -764,7 +698,7 @@
             this.CheckboxMonsterElemNull.Location = new System.Drawing.Point(0, 19);
             this.CheckboxMonsterElemNull.MultiColumn = true;
             this.CheckboxMonsterElemNull.Name = "CheckboxMonsterElemNull";
-            this.CheckboxMonsterElemNull.Size = new System.Drawing.Size(128, 64);
+            this.CheckboxMonsterElemNull.Size = new System.Drawing.Size(128, 48);
             this.CheckboxMonsterElemNull.TabIndex = 28;
             this.CheckboxMonsterElemNull.SelectedIndexChanged += new System.EventHandler(this.CheckboxMonsterElemNull_SelectedIndexChanged);
             // 
@@ -773,7 +707,7 @@
             this.panel23.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel23.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel23.Controls.Add(this.panel55);
-            this.panel23.Location = new System.Drawing.Point(214, 473);
+            this.panel23.Location = new System.Drawing.Point(201, 392);
             this.panel23.Name = "panel23";
             this.panel23.Size = new System.Drawing.Size(132, 57);
             this.panel23.TabIndex = 467;
@@ -871,7 +805,7 @@
             this.panel25.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel25.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel25.Controls.Add(this.panel29);
-            this.panel25.Location = new System.Drawing.Point(12, 53);
+            this.panel25.Location = new System.Drawing.Point(3, 3);
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(196, 184);
             this.panel25.TabIndex = 460;
@@ -1136,7 +1070,7 @@
             this.panel24.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel24.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel24.Controls.Add(this.panel54);
-            this.panel24.Location = new System.Drawing.Point(12, 243);
+            this.panel24.Location = new System.Drawing.Point(3, 189);
             this.panel24.Name = "panel24";
             this.panel24.Size = new System.Drawing.Size(196, 111);
             this.panel24.TabIndex = 461;
@@ -1171,9 +1105,9 @@
             // 
             // MonsterYoshiCookie
             // 
-            this.MonsterYoshiCookie.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.MonsterYoshiCookie.BackColor = System.Drawing.SystemColors.ControlDark;
             this.MonsterYoshiCookie.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.MonsterYoshiCookie.DropDownHeight = 314;
+            this.MonsterYoshiCookie.DropDownHeight = 317;
             this.MonsterYoshiCookie.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MonsterYoshiCookie.DropDownWidth = 150;
             this.MonsterYoshiCookie.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1197,9 +1131,9 @@
             // 
             // ItemWinB
             // 
-            this.ItemWinB.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ItemWinB.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ItemWinB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ItemWinB.DropDownHeight = 314;
+            this.ItemWinB.DropDownHeight = 317;
             this.ItemWinB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ItemWinB.DropDownWidth = 150;
             this.ItemWinB.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1296,9 +1230,9 @@
             // 
             // ItemWinA
             // 
-            this.ItemWinA.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ItemWinA.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ItemWinA.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ItemWinA.DropDownHeight = 314;
+            this.ItemWinA.DropDownHeight = 317;
             this.ItemWinA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ItemWinA.DropDownWidth = 150;
             this.ItemWinA.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1345,24 +1279,25 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(624, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1026, 25);
             this.toolStrip1.TabIndex = 471;
             // 
             // monsterName
             // 
             this.monsterName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.monsterName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.monsterName.DropDownHeight = 500;
+            this.monsterName.DropDownHeight = 497;
             this.monsterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.monsterName.DropDownWidth = 200;
+            this.monsterName.DropDownWidth = 197;
             this.monsterName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.monsterName.ForeColor = System.Drawing.SystemColors.Control;
             this.monsterName.ItemHeight = 15;
-            this.monsterName.Location = new System.Drawing.Point(7, 1);
+            this.monsterName.Location = new System.Drawing.Point(8, 1);
             this.monsterName.Name = "monsterName";
+            this.monsterName.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.monsterName.SelectedIndex = -1;
             this.monsterName.SelectedItem = null;
-            this.monsterName.Size = new System.Drawing.Size(205, 22);
+            this.monsterName.Size = new System.Drawing.Size(197, 22);
             this.monsterName.SelectedIndexChanged += new System.EventHandler(this.monsterName_SelectedIndexChanged);
             this.monsterName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.monsterName_DrawItem);
             // 
@@ -1373,7 +1308,7 @@
             this.monsterNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.monsterNum.ForeColor = System.Drawing.SystemColors.Control;
             this.monsterNum.Hexadecimal = false;
-            this.monsterNum.Location = new System.Drawing.Point(212, 1);
+            this.monsterNum.Location = new System.Drawing.Point(204, 1);
             this.monsterNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1412,16 +1347,21 @@
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.save,
             this.toolStripSeparator4,
-            this.import,
-            this.export,
-            this.clear,
+            this.toolStripDropDownButton1,
+            this.toolStripDropDownButton2,
+            this.toolStripDropDownButton4,
+            this.toolStripDropDownButton3,
             this.toolStripSeparator5,
             this.helpTips,
-            this.baseConversion});
+            this.baseConversion,
+            this.hackingTools,
+            this.toolStripSeparator6,
+            this.showMonster,
+            this.showBattleScripts});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip4.Size = new System.Drawing.Size(624, 25);
+            this.toolStrip4.Size = new System.Drawing.Size(1026, 25);
             this.toolStrip4.TabIndex = 472;
             this.toolStrip4.Text = "toolStrip4";
             // 
@@ -1440,35 +1380,109 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.import,
+            this.importBattleScriptsToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(26, 22);
+            // 
             // import
             // 
-            this.import.Image = global::LAZYSHELL.Properties.Resources.import_small;
-            this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
-            this.import.Size = new System.Drawing.Size(23, 22);
-            this.import.ToolTipText = "Import";
+            this.import.Size = new System.Drawing.Size(192, 22);
+            this.import.Text = "Import monster(s)...";
             this.import.Click += new System.EventHandler(this.import_Click);
+            // 
+            // importBattleScriptsToolStripMenuItem
+            // 
+            this.importBattleScriptsToolStripMenuItem.Name = "importBattleScriptsToolStripMenuItem";
+            this.importBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.importBattleScriptsToolStripMenuItem.Text = "Import battle script(s)...";
+            this.importBattleScriptsToolStripMenuItem.Click += new System.EventHandler(this.importBattleScriptsToolStripMenuItem_Click);
+            // 
+            // toolStripDropDownButton2
+            // 
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.export,
+            this.exportBattleScriptsToolStripMenuItem});
+            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(26, 22);
             // 
             // export
             // 
-            this.export.Image = global::LAZYSHELL.Properties.Resources.export_small;
-            this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(23, 22);
-            this.export.ToolTipText = "Export";
+            this.export.Size = new System.Drawing.Size(190, 22);
+            this.export.Text = "Export monster(s)...";
             this.export.Click += new System.EventHandler(this.export_Click);
+            // 
+            // exportBattleScriptsToolStripMenuItem
+            // 
+            this.exportBattleScriptsToolStripMenuItem.Name = "exportBattleScriptsToolStripMenuItem";
+            this.exportBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.exportBattleScriptsToolStripMenuItem.Text = "Export battle script(s)...";
+            this.exportBattleScriptsToolStripMenuItem.Click += new System.EventHandler(this.exportBattleScriptsToolStripMenuItem_Click);
+            // 
+            // toolStripDropDownButton4
+            // 
+            this.toolStripDropDownButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetCurrentMonsterToolStripMenuItem,
+            this.resetCurrentBattleScriptToolStripMenuItem});
+            this.toolStripDropDownButton4.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.toolStripDropDownButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
+            this.toolStripDropDownButton4.Size = new System.Drawing.Size(27, 22);
+            // 
+            // resetCurrentMonsterToolStripMenuItem
+            // 
+            this.resetCurrentMonsterToolStripMenuItem.Name = "resetCurrentMonsterToolStripMenuItem";
+            this.resetCurrentMonsterToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.resetCurrentMonsterToolStripMenuItem.Text = "Reset current monster";
+            this.resetCurrentMonsterToolStripMenuItem.Click += new System.EventHandler(this.resetCurrentMonsterToolStripMenuItem_Click);
+            // 
+            // resetCurrentBattleScriptToolStripMenuItem
+            // 
+            this.resetCurrentBattleScriptToolStripMenuItem.Name = "resetCurrentBattleScriptToolStripMenuItem";
+            this.resetCurrentBattleScriptToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.resetCurrentBattleScriptToolStripMenuItem.Text = "Reset current battle script";
+            this.resetCurrentBattleScriptToolStripMenuItem.Click += new System.EventHandler(this.resetCurrentBattleScriptToolStripMenuItem_Click);
+            // 
+            // toolStripDropDownButton3
+            // 
+            this.toolStripDropDownButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clear,
+            this.clearBattleScriptsToolStripMenuItem});
+            this.toolStripDropDownButton3.Image = global::LAZYSHELL.Properties.Resources.clear_small;
+            this.toolStripDropDownButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
+            this.toolStripDropDownButton3.Size = new System.Drawing.Size(26, 22);
             // 
             // clear
             // 
-            this.clear.Image = global::LAZYSHELL.Properties.Resources.clear_small;
-            this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(23, 22);
-            this.clear.ToolTipText = "Clear";
+            this.clear.Size = new System.Drawing.Size(184, 22);
+            this.clear.Text = "Clear monster(s)...";
             this.clear.Click += new System.EventHandler(this.clear_Click);
+            // 
+            // clearBattleScriptsToolStripMenuItem
+            // 
+            this.clearBattleScriptsToolStripMenuItem.Name = "clearBattleScriptsToolStripMenuItem";
+            this.clearBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.clearBattleScriptsToolStripMenuItem.Text = "Clear battle script(s)...";
+            this.clearBattleScriptsToolStripMenuItem.Click += new System.EventHandler(this.clearBattleScriptsToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -1496,6 +1510,50 @@
             this.baseConversion.Name = "baseConversion";
             this.baseConversion.Size = new System.Drawing.Size(23, 22);
             this.baseConversion.Text = "Show Base Conversion";
+            // 
+            // hackingTools
+            // 
+            this.hackingTools.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hackingTools.Image = global::LAZYSHELL.Properties.Resources.tools;
+            this.hackingTools.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.hackingTools.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.hackingTools.Name = "hackingTools";
+            this.hackingTools.Size = new System.Drawing.Size(23, 22);
+            this.hackingTools.Text = "Hacking tools";
+            this.hackingTools.Click += new System.EventHandler(this.hackingTools_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
+            // showMonster
+            // 
+            this.showMonster.Checked = true;
+            this.showMonster.CheckOnClick = true;
+            this.showMonster.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showMonster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.showMonster.Image = global::LAZYSHELL.Properties.Resources.mainMonsters;
+            this.showMonster.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showMonster.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.showMonster.Name = "showMonster";
+            this.showMonster.Size = new System.Drawing.Size(23, 22);
+            this.showMonster.Text = "Monsters";
+            this.showMonster.Click += new System.EventHandler(this.showMonster_Click);
+            // 
+            // showBattleScripts
+            // 
+            this.showBattleScripts.Checked = true;
+            this.showBattleScripts.CheckOnClick = true;
+            this.showBattleScripts.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showBattleScripts.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.showBattleScripts.Image = global::LAZYSHELL.Properties.Resources.mainBattleScripts;
+            this.showBattleScripts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showBattleScripts.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.showBattleScripts.Name = "showBattleScripts";
+            this.showBattleScripts.Size = new System.Drawing.Size(23, 22);
+            this.showBattleScripts.Text = "Battlescripts";
+            this.showBattleScripts.Click += new System.EventHandler(this.showBattleScripts_Click);
             // 
             // label2
             // 
@@ -1725,7 +1783,7 @@
             this.panel3.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.panel1);
-            this.panel3.Location = new System.Drawing.Point(12, 361);
+            this.panel3.Location = new System.Drawing.Point(3, 302);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(196, 148);
             this.panel3.TabIndex = 474;
@@ -1734,23 +1792,44 @@
             // 
             this.toolTip1.Active = false;
             // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.SystemColors.Control;
+            this.panel13.Controls.Add(this.panel25);
+            this.panel13.Controls.Add(this.panel3);
+            this.panel13.Controls.Add(this.panel23);
+            this.panel13.Controls.Add(this.panel136);
+            this.panel13.Controls.Add(this.panel135);
+            this.panel13.Controls.Add(this.panel138);
+            this.panel13.Controls.Add(this.panel24);
+            this.panel13.Controls.Add(this.panel134);
+            this.panel13.Controls.Add(this.panel137);
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel13.Location = new System.Drawing.Point(0, 0);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(336, 665);
+            this.panel13.TabIndex = 475;
+            this.panel13.Paint += new System.Windows.Forms.PaintEventHandler(this.panel13_Paint);
+            // 
+            // panel14
+            // 
+            this.panel14.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel14.Controls.Add(this.panel13);
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel14.Location = new System.Drawing.Point(0, 50);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(1026, 669);
+            this.panel14.TabIndex = 476;
+            // 
             // Monsters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 542);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel141);
-            this.Controls.Add(this.panel25);
-            this.Controls.Add(this.panel138);
+            this.ClientSize = new System.Drawing.Size(1026, 719);
+            this.Controls.Add(this.panel14);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip4);
-            this.Controls.Add(this.panel137);
-            this.Controls.Add(this.panel134);
-            this.Controls.Add(this.panel24);
-            this.Controls.Add(this.panel135);
-            this.Controls.Add(this.panel136);
-            this.Controls.Add(this.panel23);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(5, 5);
@@ -1758,11 +1837,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "MONSTERS - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Monsters_FormClosing);
-            this.panel141.ResumeLayout(false);
-            this.panel222.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValElevation)).EndInit();
             this.panel138.ResumeLayout(false);
             this.panel133.ResumeLayout(false);
@@ -1814,6 +1888,8 @@
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
+            this.panel14.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1821,8 +1897,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel141;
-        private System.Windows.Forms.PictureBox pictureBoxMonster;
         private System.Windows.Forms.Panel panel138;
         private System.Windows.Forms.Panel panel133;
         private System.Windows.Forms.Label label32;
@@ -1844,10 +1918,6 @@
         private System.Windows.Forms.Panel panel32;
         private System.Windows.Forms.Label label169;
         private System.Windows.Forms.CheckedListBox CheckboxMonsterElemNull;
-        private System.Windows.Forms.Panel panel222;
-        private System.Windows.Forms.NumericUpDown monsterTargetArrowY;
-        private System.Windows.Forms.NumericUpDown monsterTargetArrowX;
-        private System.Windows.Forms.Label label119;
         private System.Windows.Forms.Panel panel23;
         private System.Windows.Forms.Panel panel55;
         private System.Windows.Forms.NumericUpDown MonsterValFlowerOdds;
@@ -1923,9 +1993,6 @@
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton save;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripButton import;
-        private System.Windows.Forms.ToolStripButton export;
-        private System.Windows.Forms.ToolStripButton clear;
         private System.Windows.Forms.ComboBox MonsterMorphSuccess;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
@@ -1944,5 +2011,23 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton helpTips;
         private System.Windows.Forms.ToolStripButton baseConversion;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem import;
+        private System.Windows.Forms.ToolStripMenuItem importBattleScriptsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem export;
+        private System.Windows.Forms.ToolStripMenuItem exportBattleScriptsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
+        private System.Windows.Forms.ToolStripMenuItem clear;
+        private System.Windows.Forms.ToolStripMenuItem clearBattleScriptsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton showMonster;
+        private System.Windows.Forms.ToolStripButton showBattleScripts;
+        private System.Windows.Forms.ToolStripButton hackingTools;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton4;
+        private System.Windows.Forms.ToolStripMenuItem resetCurrentMonsterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetCurrentBattleScriptToolStripMenuItem;
     }
 }

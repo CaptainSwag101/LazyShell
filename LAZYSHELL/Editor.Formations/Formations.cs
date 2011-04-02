@@ -10,29 +10,29 @@ namespace LAZYSHELL
 {
     public partial class Formations : Form
     {
-        private Model model = State.Instance.Model;
-        private bool updating = false;
+                private bool updating = false;
         private bool waitBothCoords = false;
         private int overFM = 0;
         private int diffX, diffY;
         private Bitmap formationImage;
         private Bitmap formationBGImage;
-        private Battlefield[] battlefields { get { return model.Battlefields; } }
-        private PaletteSet[] paletteSets { get { return model.PaletteSetsBF; } }
-        private Formation[] formations { get { return model.Formations; } set { model.Formations = value; } }
+        private Battlefield[] battlefields { get { return Model.Battlefields; } }
+        private PaletteSet[] paletteSets { get { return Model.PaletteSetsBF; } }
+        private Formation[] formations { get { return Model.Formations; } set { Model.Formations = value; } }
         private Formation formation { get { return formations[Index]; } set { formations[Index] = value; } }
-        private DDlistName monsterNames { get { return model.MonsterNames; } set { model.MonsterNames = value; } }
-        private FontCharacter[] fontMenu { get { return model.FontMenu; } }
-        private int[] palette { get { return model.FontPaletteBattle.Palette; } }
-        private Monster[] monsters { get { return model.Monsters; } }
+        public Formation Formation { get { return formation; } set { formation = value; } }
+        private DDlistName monsterNames { get { return Model.MonsterNames; } set { Model.MonsterNames = value; } }
+        private FontCharacter[] fontMenu { get { return Model.FontMenu; } }
+        private int[] palette { get { return Model.FontPaletteBattle.Palette; } }
+        private Monster[] monsters { get { return Model.Monsters; } }
         public int Index { get { return (int)formationNum.Value; } set { formationNum.Value = value; } }
         public ToolStripTextBox FormationName { get { return nameTextBox; } }
         public System.Windows.Forms.ToolStripComboBox FormationNames { get { return formationNameList; } }
         public Search searchWindow;
         public Formations()
         {
-            this.model.MonsterNames = new DDlistName(monsters);
-            this.model.MonsterNames.SortAlpha();
+            Model.MonsterNames = new DDlistName(monsters);
+            Model.MonsterNames.SortAlpha();
             InitializeComponent();
             searchWindow = new Search(formationNum, nameTextBox, searchFormationNames, formationNameList.Items);
             InitializeStrings();
@@ -167,14 +167,14 @@ namespace LAZYSHELL
             this.formationNameList.Items.Clear();
             this.formationNameList.Items.AddRange(Lists.Numerize(formations));
             this.formationNameList.SelectedIndex = Index;
-            this.formationName1.Items.AddRange(model.MonsterNames.Names);
-            this.formationName2.Items.AddRange(model.MonsterNames.Names);
-            this.formationName3.Items.AddRange(model.MonsterNames.Names);
-            this.formationName4.Items.AddRange(model.MonsterNames.Names);
-            this.formationName5.Items.AddRange(model.MonsterNames.Names);
-            this.formationName6.Items.AddRange(model.MonsterNames.Names);
-            this.formationName7.Items.AddRange(model.MonsterNames.Names);
-            this.formationName8.Items.AddRange(model.MonsterNames.Names);
+            this.formationName1.Items.AddRange(Model.MonsterNames.Names);
+            this.formationName2.Items.AddRange(Model.MonsterNames.Names);
+            this.formationName3.Items.AddRange(Model.MonsterNames.Names);
+            this.formationName4.Items.AddRange(Model.MonsterNames.Names);
+            this.formationName5.Items.AddRange(Model.MonsterNames.Names);
+            this.formationName6.Items.AddRange(Model.MonsterNames.Names);
+            this.formationName7.Items.AddRange(Model.MonsterNames.Names);
+            this.formationName8.Items.AddRange(Model.MonsterNames.Names);
             this.battlefieldName.Items.AddRange(Lists.BattlefieldNames);
             this.musicTrack.Items.AddRange(Lists.MusicNames);
             updating = false;
@@ -228,7 +228,7 @@ namespace LAZYSHELL
             }
             this.musicTrack.Enabled = formationMusic.SelectedIndex != 8;
             if (formationMusic.SelectedIndex != 8)
-                this.musicTrack.SelectedIndex = model.FormationMusics[formationMusic.SelectedIndex];
+                this.musicTrack.SelectedIndex = Model.FormationMusics[formationMusic.SelectedIndex];
             else
                 this.musicTrack.SelectedIndex = 0;
             formationImage = new Bitmap(formation.FormationImage);
@@ -353,7 +353,7 @@ namespace LAZYSHELL
         }
         private void monsterName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Do.DrawName(sender, e, new MenuTextPreview(), monsterNames, fontMenu, palette, true);
+            Do.DrawName(sender, e, new MenuTextPreview(), monsterNames, fontMenu, palette, true, Model.MenuBackground_);
         }
         private void formationName1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -589,7 +589,7 @@ namespace LAZYSHELL
             updating = true;
             this.musicTrack.Enabled = formationMusic.SelectedIndex != 8;
             if (formationMusic.SelectedIndex != 8)
-                this.musicTrack.SelectedIndex = model.FormationMusics[formationMusic.SelectedIndex];
+                this.musicTrack.SelectedIndex = Model.FormationMusics[formationMusic.SelectedIndex];
             else
                 this.musicTrack.SelectedIndex = 0;
             updating = false;
@@ -624,7 +624,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
 
-            model.FormationMusics[formationMusic.SelectedIndex] = (byte)musicTrack.SelectedIndex;
+            Model.FormationMusics[formationMusic.SelectedIndex] = (byte)musicTrack.SelectedIndex;
         }
         private void pictureBoxFormation_MouseDown(object sender, MouseEventArgs e)
         {
@@ -724,5 +724,6 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(formationImage, 0, 0);
         }
         #endregion
+
     }
 }

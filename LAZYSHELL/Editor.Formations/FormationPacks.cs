@@ -10,14 +10,14 @@ namespace LAZYSHELL
 {
     public partial class FormationPacks : Form
     {
-        private delegate void Function(TreeView treeView);
+        private delegate void Function(TreeView treeView, StringComparison stringComparison, bool matchWholeWord);
         private int index { get { return (int)packNum.Value; } set { packNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
-        private Model model = State.Instance.Model;
-        private FormationPack[] packs { get { return model.FormationPacks; } set { model.FormationPacks = value; } }
+                private FormationPack[] packs { get { return Model.FormationPacks; } set { Model.FormationPacks = value; } }
         private FormationPack pack { get { return packs[index]; } set { packs[index] = value; } }
+        public FormationPack Pack { get { return pack; } set { pack = value; } }
         private bool updating = false;
-        private Formation[] formations { get { return model.Formations; } }
+        private Formation[] formations { get { return Model.Formations; } }
         private Formations formationsEditor;
         public Search searchWindow;
         public FormationPacks(Formations formationsEditor)
@@ -70,7 +70,7 @@ namespace LAZYSHELL
             this.richTextBox3.Text = formations[pack.PackFormations[1]].FormationListSet;
             this.richTextBox4.Text = formations[pack.PackFormations[2]].FormationListSet;
         }
-        private void LoadSearch(TreeView treeView)
+        private void LoadSearch(TreeView treeView, StringComparison stringComparison, bool matchWholeWord)
         {
             treeView.BeginUpdate();
             treeView.Nodes.Clear();
@@ -81,39 +81,38 @@ namespace LAZYSHELL
             }
             TreeNode tn;
             TreeNode cn;
-            int set = 0;
             foreach (FormationPack fp in packs)
             {
                 if (Do.Contains(
                     formations[fp.PackFormations[0]].ToString(),
-                    packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase) ||
+                    packNameTextBox.Text, stringComparison, matchWholeWord) ||
                     Do.Contains(
                     formations[fp.PackFormations[1]].ToString(),
-                    packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase) ||
+                    packNameTextBox.Text, stringComparison, matchWholeWord) ||
                     Do.Contains(
                     formations[fp.PackFormations[2]].ToString(),
-                    packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase))
+                    packNameTextBox.Text, stringComparison, matchWholeWord))
                 {
                     tn = treeView.Nodes.Add("PACK #" + fp.Index);
                     tn.Tag = (int)fp.Index;
 
                     if (Do.Contains(
                         formations[fp.PackFormations[0]].ToString(),
-                        packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase))
+                        packNameTextBox.Text, stringComparison, matchWholeWord))
                     {
                         cn = tn.Nodes.Add(formations[fp.PackFormations[0]].ToString());
                         cn.Tag = (int)fp.Index;
                     }
                     if (Do.Contains(
                         formations[fp.PackFormations[1]].ToString(),
-                        packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase))
+                        packNameTextBox.Text, stringComparison, matchWholeWord))
                     {
                         cn = tn.Nodes.Add(formations[fp.PackFormations[1]].ToString());
                         cn.Tag = (int)fp.Index;
                     }
                     if (Do.Contains(
                         formations[fp.PackFormations[2]].ToString(),
-                        packNameTextBox.Text, StringComparison.CurrentCultureIgnoreCase))
+                        packNameTextBox.Text, stringComparison, matchWholeWord))
                     {
                         cn = tn.Nodes.Add(formations[fp.PackFormations[2]].ToString());
                         cn.Tag = (int)fp.Index;

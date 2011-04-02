@@ -11,7 +11,7 @@ namespace LAZYSHELL.ScriptsEditor
     public class ActionQueue : Element
     {
         private int index; 
-        private ArrayList actionQueueCommands; public ArrayList ActionQueueCommands { get { return this.actionQueueCommands; } }
+        private ArrayList actionQueueCommands; public ArrayList Commands { get { return this.actionQueueCommands; } }
         private byte[] actionQueueData; public byte[] ActionQueueData { get { return actionQueueData; } set { actionQueueData = value; } }
         [NonSerialized()]
         private byte[] data = null; 
@@ -145,7 +145,7 @@ namespace LAZYSHELL.ScriptsEditor
             {
                 actionQueueCommands.Insert(index, aqc);
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("Action Queue insert index invalid");
             }
@@ -159,7 +159,7 @@ namespace LAZYSHELL.ScriptsEditor
                 actionQueueCommands.RemoveAt(index);
                 return len;
             }
-            catch (Exception ex)
+            catch
             {
                 throw new Exception("Action Script remove index invalid");
             }
@@ -192,7 +192,7 @@ namespace LAZYSHELL.ScriptsEditor
             offset = 0;
             foreach (ActionQueueCommand aqc in actionQueueCommands)
             {
-                aqc.QueueData.CopyTo(actionQueueData, offset);
+                aqc.EventData.CopyTo(actionQueueData, offset);
                 offset += aqc.QueueLength;
             }
         }

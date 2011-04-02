@@ -123,6 +123,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap buttonClickDrag {
+            get {
+                object obj = ResourceManager.GetObject("buttonClickDrag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap buttonEventField {
             get {
                 object obj = ResourceManager.GetObject("buttonEventField", resourceCulture);
@@ -217,6 +224,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap buttonTogglePixelGrid {
             get {
                 object obj = ResourceManager.GetObject("buttonTogglePixelGrid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap calculator {
+            get {
+                object obj = ResourceManager.GetObject("calculator", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -396,6 +410,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap fill_small {
+            get {
+                object obj = ResourceManager.GetObject("fill_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap flip_small {
             get {
                 object obj = ResourceManager.GetObject("flip_small", resourceCulture);
@@ -441,6 +462,20 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap help_small {
             get {
                 object obj = ResourceManager.GetObject("help_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap hexEditor {
+            get {
+                object obj = ResourceManager.GetObject("hexEditor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap icon_tools {
+            get {
+                object obj = ResourceManager.GetObject("icon-tools", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1096,6 +1131,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap tags {
+            get {
+                object obj = ResourceManager.GetObject("tags", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap template_small {
             get {
                 object obj = ResourceManager.GetObject("template_small", resourceCulture);
@@ -1120,6 +1162,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap title_stats_bg {
             get {
                 object obj = ResourceManager.GetObject("title_stats_bg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tools {
+            get {
+                object obj = ResourceManager.GetObject("tools", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -12,7 +12,6 @@ namespace LAZYSHELL
         public Tile8x8[] Subtiles { get { return subtiles; } set { subtiles = value; } }
 
         private int tileIndex;
-        private string sender;
         public int TileIndex { get { return tileIndex; } set { tileIndex = value; } }
 
         private bool mirror, invert;
@@ -38,6 +37,17 @@ namespace LAZYSHELL
                 if (invert)
                     Do.FlipVertical(pixels, 16, 16);
                 return pixels;
+            }
+            set
+            {
+                if (subtiles[0] != null)
+                    subtiles[0].Pixels = Do.GetPixelRegion(value, new Rectangle(0, 0, 8, 8), 16, 16);
+                if (subtiles[1] != null)
+                    subtiles[1].Pixels = Do.GetPixelRegion(value, new Rectangle(8, 0, 8, 8), 16, 16);
+                if (subtiles[2] != null)
+                    subtiles[2].Pixels = Do.GetPixelRegion(value, new Rectangle(0, 8, 8, 8), 16, 16);
+                if (subtiles[3] != null)
+                    subtiles[3].Pixels = Do.GetPixelRegion(value, new Rectangle(8, 8, 8, 8), 16, 16);
             }
         }
         public int[] Pixels_P1
@@ -79,6 +89,8 @@ namespace LAZYSHELL
                 Tile8x8 source = subtiles[i].Copy();
                 copy.Subtiles[i] = source;
             }
+            copy.Mirror = mirror;
+            copy.Invert = invert;
             return copy;
         }
         public void Clear()

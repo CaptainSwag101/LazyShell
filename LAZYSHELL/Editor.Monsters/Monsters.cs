@@ -13,26 +13,25 @@ namespace LAZYSHELL
     public partial class Monsters : Form
     {
         #region Variables
+        private long checksum;
         private bool updatingMonsters = false;
-        private Model model = State.Instance.Model;
-        private Monster[] monsters { get { return model.Monsters; } set { model.Monsters = value; } }
-        private Monster monster { get { return monsters[index]; } set { monsters[index] = value; } }
-        private FontCharacter[] fontDialogue { get { return model.FontDialogue; } }
-        private FontCharacter[] fontMenu { get { return model.FontMenu; } }
-        private int[] fontPaletteBattle { get { return model.FontPaletteBattle.Palettes[0]; } }
-        private int[] fontPaletteDialogue { get { return model.FontPaletteDialogue.Palettes[1]; } }
-        private Bitmap monsterImage;
-        private Bitmap psychopathBGImage { get { return model.BattleDialogueTilesetImage; } }
+        private Monster[] monsters { get { return Model.Monsters; } set { Model.Monsters = value; } }
+        private Monster monster { get { return monsters[Index]; } set { monsters[Index] = value; } }
+        private FontCharacter[] fontDialogue { get { return Model.FontDialogue; } }
+        private FontCharacter[] fontMenu { get { return Model.FontMenu; } }
+        private int[] fontPaletteBattle { get { return Model.FontPaletteBattle.Palettes[0]; } }
+        private int[] fontPaletteDialogue { get { return Model.FontPaletteDialogue.Palettes[1]; } }
+        private Bitmap psychopathBGImage { get { return Model.BattleDialogueTilesetImage; } }
         private Bitmap psychopathTextImage;
-        public int index { get { return (int)monsterNum.Value; } set { monsterNum.Value = value; } }
+        public int Index { get { return (int)monsterNum.Value; } set { monsterNum.Value = value; } }
         private bool textCodeFormat { get { return !byteOrTextView.Checked; } set { byteOrTextView.Checked = !value; } }
         private Settings settings = Settings.Default;
         private State state = State.Instance;
         private BattleDialoguePreview battleDialoguePreview = new BattleDialoguePreview();
         private MenuTextPreview menuTextPreview = new MenuTextPreview();
-        private bool waitBothCoords = false;
-        private bool overTarget = false;
         private TextHelper textHelper = TextHelper.Instance;
+        //
+        private BattleScripts battleScriptsEditor;
         #endregion
         #region Functions
         public Monsters()
@@ -43,25 +42,35 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip4, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip4, Keys.F2, baseConversion);
+            // create editors
+            battleScriptsEditor = new BattleScripts(this);
+            battleScriptsEditor.TopLevel = false;
+            battleScriptsEditor.Dock = DockStyle.Fill;
+            //battleScriptsEditor.SetToolTips(toolTip1);
+            panel14.Controls.Add(battleScriptsEditor);
+            battleScriptsEditor.BringToFront();
+            battleScriptsEditor.Visible = true;
+
             toolTip1.InitialDelay = 0;
             InitializeStrings();
             RefreshMonsterTab();
             SetDialogueImages();
             SetToolTips(toolTip1);
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
+            checksum = Do.GenerateChecksum(monsters);
         }
         private void InitializeStrings()
         {
             // monster names
             this.monsterName.Items.Clear();
-            this.monsterName.Items.AddRange(model.MonsterNames.Names);
+            this.monsterName.Items.AddRange(Model.MonsterNames.Names);
             // item names
             this.MonsterYoshiCookie.Items.Clear();
-            this.MonsterYoshiCookie.Items.AddRange(this.model.ItemNames.Names);
+            this.MonsterYoshiCookie.Items.AddRange(Model.ItemNames.Names);
             this.ItemWinA.Items.Clear();
-            this.ItemWinA.Items.AddRange(this.model.ItemNames.Names);
+            this.ItemWinA.Items.AddRange(Model.ItemNames.Names);
             this.ItemWinB.Items.Clear();
-            this.ItemWinB.Items.AddRange(this.model.ItemNames.Names);
+            this.ItemWinB.Items.AddRange(Model.ItemNames.Names);
         }
         private void RefreshMonsterTab()
         {
@@ -69,7 +78,7 @@ namespace LAZYSHELL
             {
                 Cursor.Current = Cursors.WaitCursor;
                 updatingMonsters = true;
-                this.monsterName.SelectedIndex = model.MonsterNames.GetIndexFromNum(index);
+                this.monsterName.SelectedIndex = Model.MonsterNames.GetIndexFromNum(Index);
                 this.TextBoxMonsterName.Text = Do.RawToASCII(monster.Name, settings.KeystrokesMenu);
                 this.MonsterValHP.Value = monster.HP;
                 this.MonsterValSpeed.Value = monster.Speed;
@@ -90,9 +99,9 @@ namespace LAZYSHELL
                 this.CheckboxMonsterElemNull.SetItemChecked(2, monster.ElemThunderNull);
                 this.CheckboxMonsterElemNull.SetItemChecked(3, monster.ElemJumpNull);
                 this.CheckboxMonsterProp.SetItemChecked(0, monster.Invincible);
-                this.CheckboxMonsterProp.SetItemChecked(1, monster.ProtectAgainstInstantDeath);
-                this.CheckboxMonsterProp.SetItemChecked(2, monster.LetBattleScriptRemove);
-                this.CheckboxMonsterProp.SetItemChecked(3, monster.UsedByCrystals);
+                this.CheckboxMonsterProp.SetItemChecked(1, monster.MortalityProtection);
+                this.CheckboxMonsterProp.SetItemChecked(2, monster.DisableAutoDeath);
+                this.CheckboxMonsterProp.SetItemChecked(3, monster.Palette2bpp);
                 this.CheckboxMonsterEfecNull.SetItemChecked(0, monster.EffectMuteNull);
                 this.CheckboxMonsterEfecNull.SetItemChecked(1, monster.EffectSleepNull);
                 this.CheckboxMonsterEfecNull.SetItemChecked(2, monster.EffectPoisonNull);
@@ -107,17 +116,13 @@ namespace LAZYSHELL
                 this.MonsterFlowerBonus.SelectedIndex = monster.FlowerBonus;
                 this.MonsterMorphSuccess.SelectedIndex = monster.MorphSuccessRate;
                 this.MonsterCoinSize.SelectedIndex = monster.CoinSize;
-                this.MonsterBehavior.SelectedIndex = monster.DeathAnimation;
+                this.MonsterBehavior.SelectedIndex = monster.SpriteBehavior;
                 this.MonsterEntranceStyle.SelectedIndex = monster.EntranceStyle;
                 this.MonsterSoundOther.SelectedIndex = monster.OtherSound;
                 this.MonsterSoundStrike.SelectedIndex = monster.StrikeSound;
-                this.MonsterYoshiCookie.SelectedIndex = model.ItemNames.GetIndexFromNum(monster.YoshiCookie);
-                this.ItemWinA.SelectedIndex = model.ItemNames.GetIndexFromNum(monster.ItemWinA);
-                this.ItemWinB.SelectedIndex = model.ItemNames.GetIndexFromNum(monster.ItemWinB);
-                this.monsterTargetArrowX.Value = monster.CursorX;
-                this.monsterTargetArrowY.Value = monster.CursorY;
-                monsterImage = new Bitmap(monster.Image);
-                pictureBoxMonster.Invalidate();
+                this.MonsterYoshiCookie.SelectedIndex = Model.ItemNames.GetIndexFromNum(monster.YoshiCookie);
+                this.ItemWinA.SelectedIndex = Model.ItemNames.GetIndexFromNum(monster.ItemWinA);
+                this.ItemWinB.SelectedIndex = Model.ItemNames.GetIndexFromNum(monster.ItemWinB);
                 CalculateFreeSpace();
                 updatingMonsters = false;
                 Cursor.Current = Cursors.Arrow;
@@ -308,13 +313,6 @@ namespace LAZYSHELL
                 "disables the flower bonus and a value of 15 indicates a\n" +
                 "100% success rate.");
 
-            toolTip1.SetToolTip(this.monsterTargetArrowX,
-                "The number of 8-pixel units the red target arrow is offset\n" +
-                "from the right.");
-            toolTip1.SetToolTip(this.monsterTargetArrowY,
-                "The number of 8-pixel units the red target arrow is offset\n" +
-                "from the bottom.");
-
             toolTip1.SetToolTip(this.TextboxMonsterPsychoMsg,
                 "The message displayed when the Psychopath spell is used\n" +
                 "on the monster.");
@@ -332,11 +330,20 @@ namespace LAZYSHELL
                 System.Windows.Forms.MessageBox.Show(
                     "The allotted space for psychopath dialogues has been exceeded. Not all psychopath dialogues have been saved.",
                     "LAZY SHELL");
+            battleScriptsEditor.Assemble();
         }
         #endregion
         #region Event Handlers
         private void Monsters_FormClosing(object sender, FormClosingEventArgs e)
         {
+            battleScriptsEditor.Close();
+            if (!battleScriptsEditor.IsDisposed)
+            {
+                e.Cancel = true;
+                return;
+            }
+            if (Do.GenerateChecksum(monsters) == checksum)
+                return;
             DialogResult result = MessageBox.Show(
                 "Monsters have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -344,8 +351,8 @@ namespace LAZYSHELL
                 Assemble();
             else if (result == DialogResult.No)
             {
-                model.Monsters = null;
-                model.MonsterNames = null;
+                Model.Monsters = null;
+                Model.MonsterNames = null;
                 return;
             }
             else if (result == DialogResult.Cancel)
@@ -358,29 +365,30 @@ namespace LAZYSHELL
         private void monsterNum_ValueChanged(object sender, EventArgs e)
         {
             RefreshMonsterTab();
+            battleScriptsEditor.InitializeBattleScriptsEditor();
         }
         private void monsterName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.monsterNum.Value = model.MonsterNames.GetNumFromIndex(monsterName.SelectedIndex);
+            this.monsterNum.Value = Model.MonsterNames.GetNumFromIndex(monsterName.SelectedIndex);
         }
         private void monsterName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Do.DrawName(sender, e, menuTextPreview, model.MonsterNames, fontMenu, fontPaletteBattle, true);
+            Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBackground_);
         }
         private void TextBoxMonsterName_TextChanged(object sender, EventArgs e)
         {
-            if (model.MonsterNames.GetNameByNum(monster.Index).CompareTo(this.TextBoxMonsterName.Text) != 0)
+            if (Model.MonsterNames.GetNameByNum(monster.Index).CompareTo(this.TextBoxMonsterName.Text) != 0)
             {
                 monster.Name = Do.ASCIIToRaw(this.TextBoxMonsterName.Text, settings.KeystrokesMenu, 13);
 
-                model.MonsterNames.SwapName(
+                Model.MonsterNames.SwapName(
                     monster.Index,
                     new string(monster.Name));
-                model.MonsterNames.SortAlpha();
+                Model.MonsterNames.SortAlpha();
 
                 this.monsterName.Items.Clear();
-                this.monsterName.Items.AddRange(model.MonsterNames.GetNames());
-                this.monsterName.SelectedIndex = model.MonsterNames.GetIndexFromNum(monster.Index);
+                this.monsterName.Items.AddRange(Model.MonsterNames.GetNames());
+                this.monsterName.SelectedIndex = Model.MonsterNames.GetIndexFromNum(monster.Index);
             }
         }
         // vital stats
@@ -431,19 +439,21 @@ namespace LAZYSHELL
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Do.DrawName(sender, e, menuTextPreview, model.ItemNames, fontMenu, fontPaletteBattle, true);
+            Do.DrawName(
+                sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
+                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, true, true, Model.MenuBackground_);
         }
         private void ItemWinA_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.ItemWinA = (byte)model.ItemNames.GetNumFromIndex(ItemWinA.SelectedIndex);
+            monster.ItemWinA = (byte)Model.ItemNames.GetNumFromIndex(ItemWinA.SelectedIndex);
         }
         private void ItemWinB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.ItemWinB = (byte)model.ItemNames.GetNumFromIndex(ItemWinB.SelectedIndex);
+            monster.ItemWinB = (byte)Model.ItemNames.GetNumFromIndex(ItemWinB.SelectedIndex);
         }
         private void MonsterYoshiCookie_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.YoshiCookie = (byte)model.ItemNames.GetNumFromIndex(MonsterYoshiCookie.SelectedIndex);
+            monster.YoshiCookie = (byte)Model.ItemNames.GetNumFromIndex(MonsterYoshiCookie.SelectedIndex);
         }
         // other properties
         private void MonsterMorphSuccess_SelectedIndexChanged(object sender, EventArgs e)
@@ -460,7 +470,7 @@ namespace LAZYSHELL
         }
         private void MonsterBehavior_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.DeathAnimation = (byte)MonsterBehavior.SelectedIndex;
+            monster.SpriteBehavior = (byte)MonsterBehavior.SelectedIndex;
         }
         private void MonsterSoundStrike_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -502,9 +512,9 @@ namespace LAZYSHELL
         private void CheckboxMonsterProp_SelectedIndexChanged(object sender, EventArgs e)
         {
             monster.Invincible = CheckboxMonsterProp.GetItemChecked(0);
-            monster.ProtectAgainstInstantDeath = CheckboxMonsterProp.GetItemChecked(1);
-            monster.LetBattleScriptRemove = CheckboxMonsterProp.GetItemChecked(2);
-            monster.UsedByCrystals = CheckboxMonsterProp.GetItemChecked(3);
+            monster.MortalityProtection = CheckboxMonsterProp.GetItemChecked(1);
+            monster.DisableAutoDeath = CheckboxMonsterProp.GetItemChecked(2);
+            monster.Palette2bpp = CheckboxMonsterProp.GetItemChecked(3);
         }
         private void MonsterFlowerBonus_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -513,79 +523,6 @@ namespace LAZYSHELL
         private void MonsterValFlowerOdds_ValueChanged(object sender, EventArgs e)
         {
             monster.FlowerOdds = (byte)MonsterValFlowerOdds.Value;
-        }
-        // image
-        private void pictureBoxMonster_MouseDown(object sender, MouseEventArgs e)
-        {
-        }
-        private void pictureBoxMonster_MouseMove(object sender, MouseEventArgs e)
-        {
-            int x = 15 - (e.X / 8); int y = 15 - (e.Y / 8);
-            if (x > 15) x = 15; if (x < 0) x = 0;
-            if (y > 15) y = 15; if (y < 0) y = 0;
-            if (e.Button == MouseButtons.Left)
-            {
-                if (overTarget)
-                {
-                    if (monsterTargetArrowX.Value != x && monsterTargetArrowY.Value != y)
-                        waitBothCoords = true;
-                    monsterTargetArrowX.Value = x;
-                    waitBothCoords = false;
-                    monsterTargetArrowY.Value = y;
-                }
-            }
-            else
-            {
-                if ((128 - (monsterTargetArrowX.Value * 8) > e.X && 128 - (monsterTargetArrowX.Value * 8) < e.X + 16) &&
-                    (128 - (monsterTargetArrowY.Value * 8) > e.Y && 128 - (monsterTargetArrowY.Value * 8) < e.Y + 16))
-                {
-                    pictureBoxMonster.Cursor = Cursors.Hand;
-                    overTarget = true;
-                }
-                else
-                {
-                    pictureBoxMonster.Cursor = Cursors.Arrow;
-                    overTarget = false;
-                }
-            }
-        }
-        private void pictureBoxMonster_MouseUp(object sender, MouseEventArgs e)
-        {
-            monsterImage = new Bitmap(monster.Image);
-            pictureBoxMonster.Invalidate();
-        }
-        private void pictureBoxMonster_Paint(object sender, PaintEventArgs e)
-        {
-            if (monsterImage != null)
-                e.Graphics.DrawImage(monsterImage, 0, 0);
-        }
-        private void monsterTargetArrowX_ValueChanged(object sender, EventArgs e)
-        {
-            monster.CursorX = (byte)monsterTargetArrowX.Value;
-
-            if (waitBothCoords) return;
-            monsterImage = new Bitmap(monster.Image);
-            pictureBoxMonster.Invalidate();
-        }
-        private void monsterTargetArrowY_ValueChanged(object sender, EventArgs e)
-        {
-            monster.CursorY = (byte)monsterTargetArrowY.Value;
-
-            if (waitBothCoords) return;
-            monsterImage = new Bitmap(monster.Image);
-            pictureBoxMonster.Invalidate();
-        }
-        private void buttonPreviousFrame_Click(object sender, EventArgs e)
-        {
-            monster.previousFrame();
-            monsterImage = new Bitmap(monster.Image);
-            pictureBoxMonster.Invalidate();
-        }
-        private void buttonNextFrame_Click(object sender, EventArgs e)
-        {
-            monster.nextFrame();
-            monsterImage = new Bitmap(monster.Image);
-            pictureBoxMonster.Invalidate();
         }
         // psychopath dialogue
         private void pictureBoxPsychopath_Paint(object sender, PaintEventArgs e)
@@ -694,18 +631,69 @@ namespace LAZYSHELL
         }
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements(monsters, index, "IMPORT MONSTERS...").ShowDialog();
+            new IOElements(monsters, Index, "IMPORT MONSTERS...").ShowDialog();
             RefreshMonsterTab();
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements(monsters, index, "EXPORT MONSTERS...").ShowDialog();
+            new IOElements(monsters, Index, "EXPORT MONSTERS...").ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {
-            new ClearElements(monsters, index, "CLEAR MONSTERS...").ShowDialog();
+            new ClearElements(monsters, Index, "CLEAR MONSTERS...").ShowDialog();
             RefreshMonsterTab();
         }
         #endregion
+
+        private void panel13_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder3D(e.Graphics, panel13.ClientRectangle, Border3DStyle.Raised, Border3DSide.All);
+        }
+
+        private void showMonster_Click(object sender, EventArgs e)
+        {
+            panel13.Visible = !panel13.Visible;
+        }
+
+        private void showBattleScripts_Click(object sender, EventArgs e)
+        {
+            battleScriptsEditor.Visible = !battleScriptsEditor.Visible;
+        }
+
+        private void importBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            battleScriptsEditor.Import();
+        }
+        private void exportBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            battleScriptsEditor.Export();
+        }
+        private void clearBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            battleScriptsEditor.Clear();
+        }
+
+        private delegate void Function();
+        private void hackingTools_Click(object sender, EventArgs e)
+        {
+            new HackingTools(new Function(RefreshMonsterTab)).ShowDialog();
+        }
+
+        private void resetCurrentMonsterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current monster. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            monster = new Monster(Model.Data, Index);
+            monsterNum_ValueChanged(null, null);
+        }
+        private void resetCurrentBattleScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current battle script. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            battleScriptsEditor.BattleScript = new LAZYSHELL.ScriptsEditor.BattleScript(Model.Data, battleScriptsEditor.index);
+            monsterNum_ValueChanged(null, null);
+        }
     }
 }

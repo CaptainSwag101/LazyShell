@@ -39,8 +39,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "",			// 0x17
             "",			// 0x18
             "",			// 0x19
-            "",			// 0x1A
-            "",			// 0x1B
+            "Enable ",			// 0x1A
+            "Disable ",			// 0x1B
             "",			// 0x1C
             "",			// 0x1D
             "",			// 0x1E
@@ -73,7 +73,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Clear AMEM $",			// 0x37
             "If set, AMEM $",			// 0x38
             "If clear, AMEM $",			// 0x39
-            "",			// 0x3A
+            "Timed attack timer begins",			// 0x3A
             "",			// 0x3B
             "",			// 0x3C
             "",			// 0x3D
@@ -118,12 +118,12 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "",			// 0x61
             "",			// 0x62
             "Display message from OMEM $60, message type: ",			// 0x63
-            "",			// 0x64
+            "Run synchronous queue @ $",			// 0x64
             "",			// 0x65
             "",			// 0x66
             "",			// 0x67
-            "Run action queue @ $",			// 0x68
-            "OMEM $60 = mem 00:072C",			// 0x69
+            "Run synchronous queue @ $",			// 0x68
+            "OMEM $60 = mem $072C",			// 0x69
             "Store random # between 0 and ",			// 0x6A
             "Store random # between 0 and ",			// 0x6B
             "",			// 0x6C
@@ -154,8 +154,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "",			// 0x83
             "",			// 0x84
             "Fade effect on action object: ",			// 0x85
-            "",			// 0x86
-            "",			// 0x87
+            "Shake object: ",			// 0x86
+            "Stop shaking object",			// 0x87
             "",			// 0x88
             "",			// 0x89
             "",			// 0x8A
@@ -163,7 +163,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "",			// 0x8C
             "",			// 0x8D
             "Screen flash color: ",			// 0x8E
-            "",			// 0x8F
+            "Screen flash color: ",			// 0x8F
 			
             "",			// 0x90
             "",			// 0x91
@@ -185,7 +185,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "",			// 0xA0
             "",			// 0xA1
             "",			// 0xA2
-            "",			// 0xA3
+            "Screen effect: ",			// 0xA3
             "",			// 0xA4
             "",			// 0xA5
             "",			// 0xA6
@@ -284,6 +284,30 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "",         // 0xFE
             ""			// 0xFF
         };
+        private static string[] ScreenEffects = new string[]
+        {
+            "Geno Flash",
+            "Snowy",
+            "Terrorize",
+            "Shocker",
+            "{unknown}",
+            "slash (instant death)",
+            "screen flashes white",
+            "change battlefield",
+            "Come Back",
+            "Geno Beam",
+            "Geno Blast",
+            "Howl",
+            "win battle window",
+            "set battlefield coords",
+            "squash big star",
+            "{unknown}",
+            "{unknown}",
+            "Corona",
+            "Mega-Drain",
+            "{unknown}",
+            "{unknown}"
+        };
         #endregion
         public string InterpretAnimationCommand(AnimationScriptCommand asc)
         {
@@ -325,7 +349,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0x03:
                     ushort temp = (ushort)(Bits.GetShort(asc.AnimationData, 3) & 0x3FF);
                     sb.Append(Lists.Numerize(Lists.SpriteNames, temp) + "\"");
-                    sb.Append(", playback seq = " + asc.AnimationData[5].ToString());
+                    sb.Append(", playback seq = " + (asc.AnimationData[5] & 15).ToString());
                     sb.Append(", coords = AMEM $32");
                     break;
                 case 0x04:
@@ -342,6 +366,15 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0x51:
                     sb.Append(((asc.InternalOffset & 0xFF0000) >> 16).ToString("X2"));
                     sb.Append(Bits.GetShort(asc.AnimationData, 1).ToString("X4"));
+                    break;
+                case 0x1A:
+                case 0x1B:
+                    if (asc.Option == 0)
+                        sb.Append("{nothing}");
+                    else if (asc.Option == 1)
+                        sb.Append("sprite visibility");
+                    else
+                        sb.Append("{unknown}");
                     break;
                 case 0x20:
                 case 0x21:
@@ -560,11 +593,16 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                         case 0x02: sb.Append("item name"); break;
                     }
                     break;
+                case 0x64:
                 case 0x68:
                     sb.Append(((asc.InternalOffset & 0xFF0000) >> 16).ToString("X2"));
                     sb.Append(Bits.GetShort(asc.AnimationData, 1).ToString("X4"));
-                    sb.Append(", packet = AMEM $60, animation = ");
-                    sb.Append(asc.AnimationData[3].ToString());
+                    sb.Append(", packet = AMEM $60");
+                    if (asc.Opcode == 0x68)
+                    {
+                        sb.Append(", animation = ");
+                        sb.Append(asc.AnimationData[3].ToString());
+                    }
                     break;
                 case 0x6A:
                     sb.Append(asc.AnimationData[2] + " to AMEM $");
@@ -578,11 +616,11 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     sb.Append("\"" + Lists.Numerize(Lists.EffectNames, asc.AnimationData[2]) + "\"");
                     break;
                 case 0x7A:
-                    switch (asc.Option)
+                    switch (asc.Option & 3)
                     {
                         case 0x00:
                             sb.Append("[" + asc.AnimationData[2].ToString("X2") + "] \"" +
-                                model.BattleDialogues[asc.AnimationData[2]].GetBattleDialogueStub() + "\", type = ");
+                                Model.BattleDialogues[asc.AnimationData[2]].GetBattleDialogueStub() + "\", type = ");
                             sb.Append("battle dialogue"); break;
                         case 0x01:
                             sb.Append("[" + asc.AnimationData[2].ToString("X2") + "] \"" +
@@ -663,12 +701,12 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     {
                         sb.Append("Remove item from" + (asc.Opcode == 0xBD ? " special" : "") + " item inventory: ");
                         sb.Append(
-                            model.ItemNames.GetNameByNum(Math.Abs((short)Bits.GetShort(asc.AnimationData, 1))));
+                            Model.ItemNames.GetNameByNum(Math.Abs((short)Bits.GetShort(asc.AnimationData, 1))));
                     }
                     else
                     {
                         sb.Append("Store item to" + (asc.Opcode == 0xBD ? " special" : "") + " item inventory: ");
-                        sb.Append(model.ItemNames.GetNameByNum(Bits.GetShort(asc.AnimationData, 1)));
+                        sb.Append(Model.ItemNames.GetNameByNum(Bits.GetShort(asc.AnimationData, 1)));
                     }
                     break;
                 case 0xBE:
@@ -677,8 +715,21 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xB6:
                     sb.Append(asc.Option + ", volume: " + asc.AnimationData[2]);
                     break;
+                case 0x86:
+                    ushort value = Bits.GetShort(asc.AnimationData,1);
+                    if (value == 1)
+                        sb.Append("screen, ");
+                    else if (value == 2)
+                        sb.Append("current object, ");
+                    else if (value == 4)
+                        sb.Append("screen and all objects, ");
+                    sb.Append("direction: " + asc.AnimationData[3] + ", ");
+                    sb.Append("intensity: " + asc.AnimationData[4] + ", ");
+                    sb.Append("amount: " + Bits.GetShort(asc.AnimationData, 5));
+                    break;
                 case 0x8E:
-                    switch (asc.Option & 0x0F)
+                case 0x8F:
+                    switch (asc.Option & 0x07)
                     {
                         case 0x00: sb.Append("{none}"); break;
                         case 0x01: sb.Append("red"); break;
@@ -689,10 +740,14 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                         case 0x06: sb.Append("aqua"); break;
                         case 0x07: sb.Append("white"); break;
                     }
-                    sb.Append(", duration: " + asc.AnimationData[2]);
+                    if (asc.Opcode == 0x8E)
+                        sb.Append(", duration: " + asc.AnimationData[2]);
                     break;
                 case 0xE1:
                     sb.Append(Bits.GetShort(asc.AnimationData, 1) + ", offset: " + asc.AnimationData[3]);
+                    break;
+                case 0xA3:
+                    sb.Append(ScreenEffects[asc.Option]);
                     break;
                 default:
                     if (AnimationScriptCommands[asc.Opcode] == "")

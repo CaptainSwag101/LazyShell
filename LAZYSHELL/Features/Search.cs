@@ -20,6 +20,16 @@ namespace LAZYSHELL
         private IList names; public IList Names { get { return names; } set { names = value; } }
         private bool searchFieldEnter = false;
         private bool initialized = false;
+        private StringComparison stringComparison
+        {
+            get
+            {
+                if (matchCase.Checked)
+                    return StringComparison.CurrentCulture;
+                else
+                    return StringComparison.CurrentCultureIgnoreCase;
+            }
+        }
         /// <summary>
         /// Loads a search form containing the results of a search query.
         /// </summary>
@@ -32,6 +42,7 @@ namespace LAZYSHELL
             InitializeComponent();
             this.listBox.Enabled = true;
             this.listBox.Show();
+            this.listBox.BringToFront();
             this.names = names;
             this.searchIndexNum = searchIndexNum;
             this.searchField = searchField;
@@ -52,6 +63,7 @@ namespace LAZYSHELL
             InitializeComponent();
             this.listBox.Enabled = true;
             this.listBox.Show();
+            this.listBox.BringToFront();
             this.names = names;
             this.searchIndexName = searchIndexName;
             this.searchField = searchField;
@@ -81,13 +93,15 @@ namespace LAZYSHELL
             {
                 this.treeView.Enabled = true;
                 this.treeView.Show();
-                this.function.DynamicInvoke(treeView);
+                this.treeView.BringToFront();
+                this.function.DynamicInvoke(treeView, stringComparison, matchWholeWord.Checked);
             }
             else if (type == "richTextBox")
             {
                 this.richTextBox.Enabled = true;
                 this.richTextBox.Show();
-                this.function.DynamicInvoke(richTextBox);
+                this.richTextBox.BringToFront();
+                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
             }
         }
         private void InitializeProperties()
@@ -108,19 +122,28 @@ namespace LAZYSHELL
             if (searchField.Text == "")
             {
                 listBox.EndUpdate();
-                this.Height = 32;
+                this.Height = 32 + panel1.Height;
                 return;
             }
             for (int i = 0; i < names.Count; i++)
             {
-                if (names[i].ToString().IndexOf(searchField.Text, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                string name = names[i].ToString();
+                int index = name.IndexOf(searchField.Text, stringComparison);
+                if (index >= 0)
                 {
-                    SearchItem searchItem = new SearchItem(i, (string)names[i]);
+                    if (matchWholeWord.Checked)
+                    {
+                        if (index + searchField.Text.Length < name.Length && Char.IsLetter(name, index + searchField.Text.Length))
+                            continue;
+                        if (index - 1 >= 0 && Char.IsLetter(name, index - 1))
+                            continue;
+                    }
+                    SearchItem searchItem = new SearchItem(i, name);
                     listBox.Items.Add(searchItem);
                 }
             }
             this.Height = Math.Min(
-                listBox.Items.Count * listBox.ItemHeight + 32,
+                listBox.Items.Count * listBox.ItemHeight + 32 + panel1.Height,
                 Screen.PrimaryScreen.WorkingArea.Height - this.Top - 16);
             listBox.EndUpdate();
         }
@@ -159,7 +182,7 @@ namespace LAZYSHELL
                 searchButton.Checked = true;
                 searchButton_Click(null, null);
                 if (richTextBox.Enabled)
-                    function.DynamicInvoke(richTextBox);
+                    function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
             }
         }
         private void searchField_KeyUp(object sender, KeyEventArgs e)
@@ -167,7 +190,7 @@ namespace LAZYSHELL
             if (listBox.Enabled)
                 this.function.DynamicInvoke();
             if (treeView.Enabled)
-                this.function.DynamicInvoke(treeView);
+                this.function.DynamicInvoke(treeView, stringComparison, matchWholeWord.Checked);
             searchField.Focus();
         }
         private void searchField_Leave(object sender, EventArgs e)
@@ -181,11 +204,11 @@ namespace LAZYSHELL
         }
         private void searchButton_Click(object sender, EventArgs e)
         {
-            searchField.Visible = searchButton.Checked;
+            //searchField.Visible = searchButton.Checked;
             this.Visible = searchButton.Checked;
             if (this.Visible && !initialized)
             {
-                this.Location = searchField.Control.PointToScreen(new Point(0, searchField.Height));
+                this.Location = searchField.Control.PointToScreen(new Point(searchField.Width, searchField.Height));
                 initialized = true;
             }
         }
@@ -210,6 +233,26 @@ namespace LAZYSHELL
             {
                 return this.Text;
             }
+        }
+        private void matchCase_CheckedChanged(object sender, EventArgs e)
+        {
+            if (listBox.Enabled)
+                this.function.DynamicInvoke();
+            if (treeView.Enabled)
+                this.function.DynamicInvoke(treeView, stringComparison, matchWholeWord.Checked);
+            if (richTextBox.Enabled)
+                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
+            searchField.Focus();
+        }
+        private void matchWholeWord_CheckedChanged(object sender, EventArgs e)
+        {
+            if (listBox.Enabled)
+                this.function.DynamicInvoke();
+            if (treeView.Enabled)
+                this.function.DynamicInvoke(treeView, stringComparison, matchWholeWord.Checked);
+            if (richTextBox.Enabled)
+                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
+            searchField.Focus();
         }
     }
 }

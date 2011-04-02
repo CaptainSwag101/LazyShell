@@ -16,7 +16,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -55,10 +55,6 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BNCtrls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\ComboBox_src\bin\BNCtrls.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -66,10 +62,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="ToolStripControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Visual Studio 2008\Projects\ToolStripControls\ToolStripControls\bin\Release\ToolStripControls.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="!Static\BRR.cs" />
@@ -89,10 +81,10 @@
     </Compile>
     <Compile Include="Editor.Audio\BRRSample.cs" />
     <Compile Include="Editor.Audio\SPC.cs" />
-    <Compile Include="Editor.Battle Scripts\BattleScripts.cs">
+    <Compile Include="Editor.Monsters\BattleScripts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor.Battle Scripts\BattleScripts.Designer.cs">
+    <Compile Include="Editor.Monsters\BattleScripts.Designer.cs">
       <DependentUpon>BattleScripts.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.Dialogues\DialogueTable.cs" />
@@ -111,7 +103,41 @@
     <Compile Include="Editor.Levels\Levels\LevelSolidMods.cs" />
     <Compile Include="Editor.Levels\Levels\LevelTileMods.cs" />
     <Compile Include="!Universal\Map.cs" />
+    <Compile Include="Features\HackingTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\HackingTools.Designer.cs">
+      <DependentUpon>HackingTools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ExportImages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\ExportImages.Designer.cs">
+      <DependentUpon>ExportImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\HexEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\HexEditor.designer.cs">
+      <DependentUpon>HexEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\IOArchitecture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\IOArchitecture.Designer.cs">
+      <DependentUpon>IOArchitecture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ListViewColumnSorter.cs" />
     <Compile Include="Features\NewCheckedListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Features\NewRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Features\NewToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Features\NewTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Features\Search.cs">
@@ -119,6 +145,12 @@
     </Compile>
     <Compile Include="Features\Search.Designer.cs">
       <DependentUpon>Search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\StatusCalculator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\StatusCalculator.Designer.cs">
+      <DependentUpon>StatusCalculator.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\ZoomPanel.cs">
       <SubType>Form</SubType>
@@ -294,11 +326,11 @@
     <Compile Include="Editors\GraphicEditor.Designer.cs">
       <DependentUpon>GraphicEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor.Levels\LevelsPhysicalTiles.cs">
+    <Compile Include="Editor.Levels\LevelsSolidTiles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor.Levels\LevelsPhysicalTiles.Designer.cs">
-      <DependentUpon>LevelsPhysicalTiles.cs</DependentUpon>
+    <Compile Include="Editor.Levels\LevelsSolidTiles.Designer.cs">
+      <DependentUpon>LevelsSolidTiles.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.Levels\LevelsTemplate.cs">
       <SubType>Form</SubType>
@@ -352,9 +384,6 @@
     <Compile Include="Editor.Levels\Levels.Overlaps.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor.Levels\Levels.ExtraFeatures.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Editor.Levels\Levels\LevelOverlaps.cs" />
     <Compile Include="Editor.Levels\Levels\NPCProperties.cs" />
     <Compile Include="Editor.Levels\Levels\NPCSpritePartitions.cs" />
@@ -386,10 +415,10 @@
     <Compile Include="Editors\NPCEditor.Designer.cs">
       <DependentUpon>NPCEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\SearchPhysicalTile.cs">
+    <Compile Include="Features\SearchPhysicalTile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\SearchPhysicalTile.Designer.cs">
+    <Compile Include="Features\SearchPhysicalTile.Designer.cs">
       <DependentUpon>SearchPhysicalTile.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.Levels\Levels\SerializedLevel.cs" />
@@ -418,7 +447,7 @@
     <Compile Include="Editor.Title\Title.Designer.cs">
       <DependentUpon>Title.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model.cs" />
+    <Compile Include="!Static\Model.cs" />
     <Compile Include="MRUManager.cs" />
     <Compile Include="Features\Notes.cs">
       <SubType>Form</SubType>
@@ -502,18 +531,19 @@
     <Compile Include="Editor.Animations\AnimationScriptCommand.cs" />
     <Compile Include="Editor.Animations\A_ScriptEnums.cs" />
     <Compile Include="Editor.Animations\A_ScriptIterator.cs" />
-    <Compile Include="Editor.Animations\A_TreeViewWrapper.cs" />
+    <Compile Include="Editor.Animations\A_TreeViewWrapper.cs">
+    </Compile>
     <Compile Include="Editor.Animations\Interpreter.AnimationScripts.cs" />
-    <Compile Include="Editor.Battle Scripts\BattleScript.cs" />
+    <Compile Include="Editor.Monsters\BattleScript.cs" />
     <Compile Include="Editor.Event Scripts\ActionQueueCommand.cs" />
-    <Compile Include="Editor.Battle Scripts\BattleCommands.cs" />
-    <Compile Include="Editor.Battle Scripts\BattleScriptCommand.cs" />
+    <Compile Include="Editor.Monsters\BattleCommands.cs" />
+    <Compile Include="Editor.Monsters\BattleScriptCommand.cs" />
     <Compile Include="Editor.Event Scripts\EventActionCommand.cs" />
     <Compile Include="Editor.Event Scripts\Interpreter.ActionQueues.cs" />
     <Compile Include="Editor.Event Scripts\Interpreter.cs" />
     <Compile Include="Editor.Event Scripts\EventScriptCommand.cs" />
     <Compile Include="Editor.Event Scripts\Interpreter.EventScripts.cs" />
-    <Compile Include="Editor.Battle Scripts\ScriptCommand.cs" />
+    <Compile Include="Editor.Monsters\ScriptCommand.cs" />
     <Compile Include="Editor.Event Scripts\ScriptIterator.cs" />
     <Compile Include="Editor.Event Scripts\EventScript.cs" />
     <Compile Include="Editor.Event Scripts\TreeViewWrapper.cs">
@@ -565,7 +595,7 @@
     </Compile>
     <Compile Include="Editor.Sprites\Animation.cs" />
     <Compile Include="Editor.Title\TitleTileset.cs" />
-    <Compile Include="!Universal\State.cs" />
+    <Compile Include="!Static\State.cs" />
     <Compile Include="Feature.Previewer\BattleDialoguePreview.cs" />
     <Compile Include="Feature.Previewer\MenuDescriptionPreview.cs" />
     <Compile Include="Editor.Attacks\Attack.cs" />
@@ -617,7 +647,7 @@
       <DependentUpon>AnimationScripts.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editor.Battle Scripts\BattleScripts.resx">
+    <EmbeddedResource Include="Editor.Monsters\BattleScripts.resx">
       <DependentUpon>BattleScripts.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -625,8 +655,28 @@
       <DependentUpon>EventScripts.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\HackingTools.resx">
+      <DependentUpon>HackingTools.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\ExportImages.resx">
+      <DependentUpon>ExportImages.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\HexEditor.resx">
+      <DependentUpon>HexEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\IOArchitecture.resx">
+      <DependentUpon>IOArchitecture.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\StatusCalculator.resx">
+      <DependentUpon>StatusCalculator.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\ZoomPanel.resx">
@@ -735,8 +785,8 @@
       <DependentUpon>GraphicEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editor.Levels\LevelsPhysicalTiles.resx">
-      <DependentUpon>LevelsPhysicalTiles.cs</DependentUpon>
+    <EmbeddedResource Include="Editor.Levels\LevelsSolidTiles.resx">
+      <DependentUpon>LevelsSolidTiles.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Levels\LevelsTemplate.resx">
@@ -763,7 +813,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>NPCEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\SearchPhysicalTile.resx">
+    <EmbeddedResource Include="Features\SearchPhysicalTile.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SearchPhysicalTile.cs</DependentUpon>
     </EmbeddedResource>
@@ -824,6 +874,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="bin\Debug\Lunar Compress.dll" />
+    <EmbeddedResource Include="CursorFill.cur" />
     <Content Include="LAZYSHELL_icon.ico" />
     <Content Include="Feature.Patches\PatchFormat.txt" />
     <None Include="Resources\RomPreviewBaseSave.000" />
@@ -848,6 +899,7 @@
     <None Include="Resources\broom.gif" />
     <None Include="Resources\apply.gif" />
     <None Include="Resources\alwaysOnTop.gif" />
+    <None Include="Resources\buttonClickDrag.gif" />
     <Content Include="Resources\buttonPhysical.gif" />
     <Content Include="Resources\buttonPhysicalTiles.gif" />
     <None Include="Resources\export_small.gif" />
@@ -866,6 +918,7 @@
     <None Include="Resources\cartridgeClose.gif" />
     <None Include="Resources\buttonSolidMods.gif" />
     <None Include="Resources\buttonTileMods.gif" />
+    <None Include="Resources\calculator.gif" />
     <Content Include="Resources\dropper_small.gif" />
     <None Include="Resources\endStringA.gif" />
     <None Include="Resources\endString.gif" />
@@ -875,6 +928,9 @@
     <None Include="Resources\expandAll.gif" />
     <None Include="Resources\keys_load.gif" />
     <None Include="Resources\keys_save.gif" />
+    <None Include="Resources\fill_small.gif" />
+    <None Include="Resources\hexEditor.gif" />
+    <None Include="Resources\icon-tools.gif" />
     <Content Include="Resources\label.gif" />
     <Content Include="Resources\LevelButtons\buttonEventField.gif" />
     <Content Include="Resources\LevelButtons\buttonExitField.gif" />
@@ -951,8 +1007,10 @@
     <None Include="Resources\signature.gif" />
     <Content Include="Resources\spaceAnalyzer.gif" />
     <None Include="Resources\textView.gif" />
+    <None Include="Resources\tags.gif" />
     <Content Include="Resources\Tiles\fieldBase.gif" />
     <Content Include="Resources\Tiles\fieldBlock.gif" />
+    <None Include="Resources\tools.gif" />
     <None Include="Resources\zoomBox.gif" />
     <None Include="Resources\update.gif" />
     <None Include="Resources\undock.gif" />

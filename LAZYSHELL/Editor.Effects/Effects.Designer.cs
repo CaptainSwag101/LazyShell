@@ -58,14 +58,15 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.import = new System.Windows.Forms.ToolStripButton();
             this.export = new System.Windows.Forms.ToolStripButton();
+            this.reset = new System.Windows.Forms.ToolStripButton();
             this.clear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.enableHelpTips = new System.Windows.Forms.ToolStripButton();
             this.showDecHex = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.name = new System.Windows.Forms.ToolStripComboBox();
-            this.searchEffectNames = new System.Windows.Forms.ToolStripButton();
             this.searchText = new System.Windows.Forms.ToolStripTextBox();
+            this.searchEffectNames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.showMain = new System.Windows.Forms.ToolStripButton();
             this.openMolds = new System.Windows.Forms.ToolStripButton();
@@ -100,7 +101,7 @@
             this.number.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.number.ForeColor = System.Drawing.SystemColors.Control;
             this.number.Hexadecimal = false;
-            this.number.Location = new System.Drawing.Point(224, 2);
+            this.number.Location = new System.Drawing.Point(219, 2);
             this.number.Maximum = new decimal(new int[] {
             127,
             0,
@@ -123,7 +124,7 @@
             // 
             // panel106
             // 
-            this.panel106.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel106.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel106.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel106.Controls.Add(this.label98);
             this.panel106.Controls.Add(this.yNegShift);
@@ -131,7 +132,7 @@
             this.panel106.Controls.Add(this.xNegShift);
             this.panel106.Controls.Add(this.e_paletteIndex);
             this.panel106.Controls.Add(this.label7);
-            this.panel106.Location = new System.Drawing.Point(6, 6);
+            this.panel106.Location = new System.Drawing.Point(3, 3);
             this.panel106.Name = "panel106";
             this.panel106.Size = new System.Drawing.Size(260, 57);
             this.panel106.TabIndex = 519;
@@ -216,9 +217,9 @@
             this.panel80.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel80.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel80.Controls.Add(this.panel85);
-            this.panel80.Location = new System.Drawing.Point(6, 69);
+            this.panel80.Location = new System.Drawing.Point(3, 62);
             this.panel80.Name = "panel80";
-            this.panel80.Size = new System.Drawing.Size(260, 114);
+            this.panel80.Size = new System.Drawing.Size(260, 111);
             this.panel80.TabIndex = 400;
             // 
             // panel85
@@ -243,7 +244,7 @@
             // panel97
             // 
             this.panel97.Controls.Add(this.e_codec);
-            this.panel97.Location = new System.Drawing.Point(129, 93);
+            this.panel97.Location = new System.Drawing.Point(129, 90);
             this.panel97.Name = "panel97";
             this.panel97.Size = new System.Drawing.Size(128, 17);
             this.panel97.TabIndex = 526;
@@ -264,14 +265,14 @@
             // e_availableBytes
             // 
             this.e_availableBytes.BackColor = System.Drawing.Color.Lime;
-            this.e_availableBytes.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.e_availableBytes.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.e_availableBytes.ForeColor = System.Drawing.SystemColors.ControlText;
             this.e_availableBytes.Location = new System.Drawing.Point(0, 38);
             this.e_availableBytes.Name = "e_availableBytes";
             this.e_availableBytes.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.e_availableBytes.Size = new System.Drawing.Size(256, 17);
+            this.e_availableBytes.Size = new System.Drawing.Size(256, 14);
             this.e_availableBytes.TabIndex = 451;
-            this.e_availableBytes.Text = "AVAILABLE BYTES: ";
+            this.e_availableBytes.Text = "0 bytes free";
             // 
             // label63
             // 
@@ -289,7 +290,7 @@
             // panel98
             // 
             this.panel98.Controls.Add(this.comboBox6);
-            this.panel98.Location = new System.Drawing.Point(129, 93);
+            this.panel98.Location = new System.Drawing.Point(129, 90);
             this.panel98.Name = "panel98";
             this.panel98.Size = new System.Drawing.Size(128, 17);
             this.panel98.TabIndex = 527;
@@ -314,7 +315,7 @@
             0,
             0,
             0});
-            this.e_paletteSetSize.Location = new System.Drawing.Point(129, 57);
+            this.e_paletteSetSize.Location = new System.Drawing.Point(129, 54);
             this.e_paletteSetSize.Maximum = new decimal(new int[] {
             256,
             0,
@@ -339,7 +340,7 @@
             // label107
             // 
             this.label107.BackColor = System.Drawing.SystemColors.Control;
-            this.label107.Location = new System.Drawing.Point(0, 57);
+            this.label107.Location = new System.Drawing.Point(0, 54);
             this.label107.Name = "label107";
             this.label107.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label107.Size = new System.Drawing.Size(128, 17);
@@ -367,7 +368,7 @@
             // label90
             // 
             this.label90.BackColor = System.Drawing.SystemColors.Control;
-            this.label90.Location = new System.Drawing.Point(0, 93);
+            this.label90.Location = new System.Drawing.Point(0, 90);
             this.label90.Name = "label90";
             this.label90.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label90.Size = new System.Drawing.Size(128, 17);
@@ -382,7 +383,7 @@
             0,
             0,
             0});
-            this.e_graphicSetSize.Location = new System.Drawing.Point(129, 75);
+            this.e_graphicSetSize.Location = new System.Drawing.Point(129, 72);
             this.e_graphicSetSize.Maximum = new decimal(new int[] {
             8192,
             0,
@@ -419,7 +420,7 @@
             // label89
             // 
             this.label89.BackColor = System.Drawing.SystemColors.Control;
-            this.label89.Location = new System.Drawing.Point(0, 75);
+            this.label89.Location = new System.Drawing.Point(0, 72);
             this.label89.Name = "label89";
             this.label89.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label89.Size = new System.Drawing.Size(128, 17);
@@ -434,6 +435,7 @@
             this.toolStripSeparator1,
             this.import,
             this.export,
+            this.reset,
             this.clear,
             this.toolStripSeparator12,
             this.enableHelpTips,
@@ -480,6 +482,17 @@
             this.export.ToolTipText = "Export";
             this.export.Click += new System.EventHandler(this.export_Click);
             // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.Text = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
             // clear
             // 
             this.clear.Image = global::LAZYSHELL.Properties.Resources.clear_small;
@@ -521,8 +534,8 @@
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.name,
             this.number,
-            this.searchEffectNames,
             this.searchText,
+            this.searchEffectNames,
             this.toolStripSeparator2,
             this.showMain,
             this.openMolds,
@@ -548,8 +561,13 @@
             this.name.ForeColor = System.Drawing.SystemColors.Control;
             this.name.IntegralHeight = false;
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(215, 25);
+            this.name.Size = new System.Drawing.Size(210, 25);
             this.name.SelectedIndexChanged += new System.EventHandler(this.name_SelectedIndexChanged);
+            // 
+            // searchText
+            // 
+            this.searchText.Name = "searchText";
+            this.searchText.Size = new System.Drawing.Size(200, 25);
             // 
             // searchEffectNames
             // 
@@ -560,12 +578,6 @@
             this.searchEffectNames.Name = "searchEffectNames";
             this.searchEffectNames.Size = new System.Drawing.Size(23, 22);
             this.searchEffectNames.Text = "Search for effect";
-            // 
-            // searchText
-            // 
-            this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(100, 25);
-            this.searchText.Visible = false;
             // 
             // toolStripSeparator2
             // 
@@ -651,7 +663,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(273, 647);
+            this.panel2.Size = new System.Drawing.Size(266, 647);
             this.panel2.TabIndex = 520;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             this.panel2.SizeChanged += new System.EventHandler(this.panel2_SizeChanged);
@@ -745,5 +757,6 @@
         private System.Windows.Forms.ToolStripButton enableHelpTips;
         private System.Windows.Forms.ToolStripButton showDecHex;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripButton reset;
     }
 }

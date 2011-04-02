@@ -10,8 +10,9 @@ namespace LAZYSHELL
 {
     public partial class EventScripts : Form
     {
-        private ActionQueue[] actionScripts { get { return model.ActionScripts; } set { model.ActionScripts = value; } }
+        private ActionQueue[] actionScripts { get { return Model.ActionScripts; } set { Model.ActionScripts = value; } }
         public ActionQueue[] ActionScripts { get { return actionScripts; } set { actionScripts = value; } }
+        private ActionQueue actionScript { get { return actionScripts[index]; } set { actionScripts[index] = value; } }
 
         private void ControlActionDisasmMethod()
         {
@@ -54,7 +55,7 @@ namespace LAZYSHELL
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true; evtNumC.Maximum = 0xFFFF; evtNumC.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1);
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1);
                     break;
 
                 // Palette
@@ -84,11 +85,11 @@ namespace LAZYSHELL
                     evtEffects.Enabled = true;
 
                     evtNumC.Value = aqc.Option & 0x07;
-                    evtNumD.Value = aqc.QueueData[2] & 0x7F;
+                    evtNumD.Value = aqc.EventData[2] & 0x7F;
                     evtEffects.SetItemChecked(0, (aqc.Option & 0x08) == 0x08);
                     evtEffects.SetItemChecked(1, (aqc.Option & 0x10) == 0x10);
                     evtEffects.SetItemChecked(2, (aqc.Option & 0x40) == 0x40);
-                    evtEffects.SetItemChecked(3, (aqc.QueueData[2] & 0x80) == 0x80);
+                    evtEffects.SetItemChecked(3, (aqc.EventData[2] & 0x80) == 0x80);
 
                     if (evtEffects.GetItemChecked(0)) labelEvtD.Text = "mold";
                     else labelEvtD.Text = "sequence";
@@ -123,7 +124,7 @@ namespace LAZYSHELL
                     labelEvtC.Text = "action #";
                     evtNumC.Maximum = 0x3FF; evtNumC.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1) & 0x3FF;
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1) & 0x3FF;
                     break;
 
                 // Sprite Animation
@@ -153,7 +154,7 @@ namespace LAZYSHELL
                     labelEvtC.Text = "amount";
                     evtNumC.Maximum = 65535; evtNumC.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1);
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1);
                     break;
 
                 // Shift 1px units
@@ -201,7 +202,7 @@ namespace LAZYSHELL
                         evtNumC.Maximum = evtNumD.Maximum = 127;
                     }
                     evtNumC.Value = aqc.Option;
-                    evtNumD.Value = aqc.QueueData[2];
+                    evtNumD.Value = aqc.EventData[2];
                     break;
                 case 0x87:
                 case 0x95:
@@ -226,9 +227,9 @@ namespace LAZYSHELL
                         evtNumC.Maximum = evtNumD.Maximum = 127;
                     }
 
-                    evtNumA.Value = aqc.QueueData[3];
+                    evtNumA.Value = aqc.EventData[3];
                     evtNumC.Value = aqc.Option;
-                    evtNumD.Value = aqc.QueueData[2];
+                    evtNumD.Value = aqc.EventData[2];
                     break;
                 case 0x92: labelTitleA.Text = "Transfer to isometric coords..."; goto case 0x94;
                 case 0x93: labelTitleA.Text = "Transfer isometric units..."; goto case 0x94;
@@ -247,10 +248,10 @@ namespace LAZYSHELL
                     evtNumC.Enabled = true;
                     evtNumD.Enabled = true;
 
-                    evtNameB.SelectedIndex = (aqc.QueueData[3] & 0xE0) >> 5;
-                    evtNumB.Value = aqc.QueueData[3] & 0x1F;
+                    evtNameB.SelectedIndex = (aqc.EventData[3] & 0xE0) >> 5;
+                    evtNumB.Value = aqc.EventData[3] & 0x1F;
                     evtNumC.Value = aqc.Option;
-                    evtNumD.Value = aqc.QueueData[2];
+                    evtNumD.Value = aqc.EventData[2];
                     break;
 
                 // Audio playback
@@ -268,7 +269,7 @@ namespace LAZYSHELL
                     evtNumC.Enabled = true;
 
                     evtNameA.SelectedIndex = aqc.Option;
-                    evtNumC.Value = aqc.QueueData[2];
+                    evtNumC.Value = aqc.EventData[2];
                     break;
                 case 0x9E:
                     labelTitleA.Text = "Playback fade-out sound, duration...";
@@ -278,7 +279,7 @@ namespace LAZYSHELL
                     evtNumD.Enabled = true;
 
                     evtNumC.Value = aqc.Option;
-                    evtNumD.Value = aqc.QueueData[2];
+                    evtNumD.Value = aqc.EventData[2];
                     break;
 
                 // Memory
@@ -314,7 +315,7 @@ namespace LAZYSHELL
                     evtNumD.Enabled = true;
 
                     evtNumC.Value = aqc.Option + 0x70A0;
-                    evtNumD.Value = aqc.QueueData[2];
+                    evtNumD.Value = aqc.EventData[2];
                     break;
                 case 0xAA:
                 case 0xAB:
@@ -341,7 +342,7 @@ namespace LAZYSHELL
                     evtNumD.Maximum = 65535; evtNumD.Enabled = true;
 
                     evtNumC.Value = (aqc.Option * 2) + 0x7000;
-                    evtNumD.Value = Bits.GetShort(aqc.QueueData, 2);
+                    evtNumD.Value = Bits.GetShort(aqc.EventData, 2);
                     break;
                 case 0xB2:
                 case 0xB3:
@@ -350,7 +351,7 @@ namespace LAZYSHELL
                     if (aqc.Opcode == 0xB2) labelTitleA.Text = "Increment mem (16-bit)...";
                     else if (aqc.Opcode == 0xB3) labelTitleA.Text = "Decrement mem (16-bit)...";
                     else if (aqc.Opcode == 0xB6) labelTitleA.Text = "Store to object mem from mem...";
-                    else labelTitleA.Text = "Store to mem from mem 00:700C (16-bit)...";
+                    else labelTitleA.Text = "Store to mem from mem $700C (16-bit)...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true; evtNumC.Increment = 2;
                     evtNumC.Maximum = 0x71FE; evtNumC.Minimum = 0x7000;
@@ -359,7 +360,7 @@ namespace LAZYSHELL
                     evtNumC.Value = (aqc.Option * 2) + 0x7000;
                     break;
                 case 0xB5:
-                    labelTitleA.Text = "Store to mem from mem 00:700C (8-bit)...";
+                    labelTitleA.Text = "Store to mem from mem $700C (8-bit)...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true;
                     evtNumC.Maximum = 0x719F; evtNumC.Minimum = 0x70A0;
@@ -377,7 +378,7 @@ namespace LAZYSHELL
                     evtNumD.Maximum = 65535; evtNumD.Enabled = true;
 
                     evtNumC.Value = (aqc.Option * 2) + 0x7000;
-                    evtNumD.Value = Bits.GetShort(aqc.QueueData, 2);
+                    evtNumD.Value = Bits.GetShort(aqc.EventData, 2);
                     break;
                 case 0xBC:
                 case 0xBD:
@@ -393,7 +394,7 @@ namespace LAZYSHELL
                     evtNumD.Enabled = true;
 
                     evtNumC.Value = (aqc.Option * 2) + 0x7000;
-                    evtNumD.Value = (aqc.QueueData[2] * 2) + 0x7000;
+                    evtNumD.Value = (aqc.EventData[2] * 2) + 0x7000;
                     break;
                 case 0xD8:
                 case 0xD9:
@@ -416,7 +417,7 @@ namespace LAZYSHELL
                     if (aqc.Opcode < 0xDC) evtNumC.Value = ((((aqc.Opcode - 0xD8) * 0x100) + aqc.Option) >> 3) + 0x7040;
                     else evtNumC.Value = ((((aqc.Opcode - 0xDC) * 0x100) + aqc.Option) >> 3) + 0x7040;
                     evtNumD.Value = aqc.Option & 7;
-                    evtNumE.Value = Bits.GetShort(aqc.QueueData, 2);
+                    evtNumE.Value = Bits.GetShort(aqc.EventData, 2);
                     break;
                 case 0xE0:
                 case 0xE1:
@@ -432,8 +433,8 @@ namespace LAZYSHELL
                     evtNumE.Hexadecimal = true; evtNumE.Maximum = 0xFFFF; evtNumE.Enabled = true;
 
                     evtNumC.Value = aqc.Option + 0x70A0;
-                    evtNumD.Value = aqc.QueueData[2];
-                    evtNumE.Value = Bits.GetShort(aqc.QueueData, 3);
+                    evtNumD.Value = aqc.EventData[2];
+                    evtNumE.Value = Bits.GetShort(aqc.EventData, 3);
                     break;
                 case 0xE4:
                 case 0xE5:
@@ -449,15 +450,15 @@ namespace LAZYSHELL
                     evtNumE.Hexadecimal = true; evtNumE.Maximum = 0xFFFF; evtNumE.Enabled = true;
 
                     evtNumC.Value = (aqc.Option * 2) + 0x7000;
-                    evtNumD.Value = Bits.GetShort(aqc.QueueData, 2);
-                    evtNumE.Value = Bits.GetShort(aqc.QueueData, 4);
+                    evtNumD.Value = Bits.GetShort(aqc.EventData, 2);
+                    evtNumE.Value = Bits.GetShort(aqc.EventData, 4);
                     break;
                 case 0xE8:
                     labelTitleA.Text = "If random # > 128, jump to...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true; evtNumC.Maximum = 0xFFFF; evtNumC.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1);
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1);
                     break;
                 case 0xE9:
                     labelTitleA.Text = "If random # > 66, jump to address A, else address B...";
@@ -466,23 +467,23 @@ namespace LAZYSHELL
                     evtNumC.Hexadecimal = true; evtNumC.Maximum = 0xFFFF; evtNumC.Enabled = true;
                     evtNumD.Hexadecimal = true; evtNumD.Maximum = 0xFFFF; evtNumD.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1);
-                    evtNumD.Value = Bits.GetShort(aqc.QueueData, 3);
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1);
+                    evtNumD.Value = Bits.GetShort(aqc.EventData, 3);
                     break;
 
-                // Memory 00:700C
-                case 0xAC: labelTitleA.Text = "Mem 00:700C =..."; goto case 0xC0;
-                case 0xAD: labelTitleA.Text = "Mem 00:700C +=..."; goto case 0xC0;
-                case 0xB6: labelTitleA.Text = "Mem 00:700C = random # less than..."; goto case 0xC0;
+                // Memory $700C
+                case 0xAC: labelTitleA.Text = "Mem $700C =..."; goto case 0xC0;
+                case 0xAD: labelTitleA.Text = "Mem $700C +=..."; goto case 0xC0;
+                case 0xB6: labelTitleA.Text = "Mem $700C = random # less than..."; goto case 0xC0;
                 case 0xC0:
-                    if (aqc.Opcode == 0xC0) labelTitleA.Text = "Mem 00:700C compare to...";
+                    if (aqc.Opcode == 0xC0) labelTitleA.Text = "Mem $700C compare to...";
                     labelEvtC.Text = "value";
                     evtNumC.Maximum = 65535; evtNumC.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1);
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1);
                     break;
                 case 0xB4:
-                    labelTitleA.Text = "Mem 00:700C = mem...";
+                    labelTitleA.Text = "Mem $700C = mem...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true;
                     evtNumC.Maximum = 0x719F; evtNumC.Minimum = 0x70A0;
@@ -490,11 +491,11 @@ namespace LAZYSHELL
 
                     evtNumC.Value = aqc.Option + 0x70A0;
                     break;
-                case 0xB8: labelTitleA.Text = "Mem 00:700C += mem..."; goto case 0xC1;
-                case 0xB9: labelTitleA.Text = "Mem 00:700C -= mem..."; goto case 0xC1;
-                case 0xBA: labelTitleA.Text = "Mem 00:700C = mem..."; goto case 0xC1;
+                case 0xB8: labelTitleA.Text = "Mem $700C += mem..."; goto case 0xC1;
+                case 0xB9: labelTitleA.Text = "Mem $700C -= mem..."; goto case 0xC1;
+                case 0xBA: labelTitleA.Text = "Mem $700C = mem..."; goto case 0xC1;
                 case 0xC1:
-                    if (aqc.Opcode == 0xC1) labelTitleA.Text = "Mem 00:700C compare to mem...";
+                    if (aqc.Opcode == 0xC1) labelTitleA.Text = "Mem $700C compare to mem...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true; evtNumC.Increment = 2;
                     evtNumC.Maximum = 0x71FE; evtNumC.Minimum = 0x7000;
@@ -502,10 +503,10 @@ namespace LAZYSHELL
 
                     evtNumC.Value = (aqc.Option * 2) + 0x7000;
                     break;
-                case 0xC4: labelTitleA.Text = "Mem 00:700C = object X coord..."; goto case 0xC6;
-                case 0xC5: labelTitleA.Text = "Mem 00:700C = object Y coord..."; goto case 0xC6;
+                case 0xC4: labelTitleA.Text = "Mem $700C = object X coord..."; goto case 0xC6;
+                case 0xC5: labelTitleA.Text = "Mem $700C = object Y coord..."; goto case 0xC6;
                 case 0xC6:
-                    if (aqc.Opcode == 0xC6) labelTitleA.Text = "Mem 00:700C = object Z coord...";
+                    if (aqc.Opcode == 0xC6) labelTitleA.Text = "Mem $700C = object Z coord...";
                     labelEvtA.Text = "object";
                     evtNameA.Items.AddRange(Lists.ObjectNames); evtNameA.Enabled = true;
                     evtEffects.Items.Add("isometric"); evtEffects.Enabled = true;
@@ -513,26 +514,26 @@ namespace LAZYSHELL
                     evtNameA.SelectedIndex = aqc.Option;
                     evtEffects.SetItemChecked(0, (aqc.Option & 0x80) == 0x80);
                     break;
-                case 0xDB: labelTitleA.Text = "If mem 00:700C bit(s) set, jump to..."; goto case 0xDF;
+                case 0xDB: labelTitleA.Text = "If mem $700C bit(s) set, jump to..."; goto case 0xDF;
                 case 0xDF:
-                    if (aqc.Opcode == 0xDF) labelTitleA.Text = "If mem 00:700C bit(s) clear, jump to...";
+                    if (aqc.Opcode == 0xDF) labelTitleA.Text = "If mem $700C bit(s) clear, jump to...";
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true; evtNumC.Maximum = 0xFFFF; evtNumC.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1);
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1);
                     break;
-                case 0xE2: labelTitleA.Text = "If mem 00:700C = value..."; labelEvtC.Text = "value"; goto case 0xE7;
-                case 0xE3: labelTitleA.Text = "If mem 00:700C != value..."; labelEvtC.Text = "value"; goto case 0xE7;
-                case 0xE6: labelTitleA.Text = "If mem 00:700C set, no bits..."; goto case 0xE7;
+                case 0xE2: labelTitleA.Text = "If mem $700C = value..."; labelEvtC.Text = "value"; goto case 0xE7;
+                case 0xE3: labelTitleA.Text = "If mem $700C != value..."; labelEvtC.Text = "value"; goto case 0xE7;
+                case 0xE6: labelTitleA.Text = "If mem $700C set, no bits..."; goto case 0xE7;
                 case 0xE7:
-                    if (aqc.Opcode == 0xE7) labelTitleA.Text = "If mem 00:700C set, any bits...";
+                    if (aqc.Opcode == 0xE7) labelTitleA.Text = "If mem $700C set, any bits...";
                     if (aqc.Opcode > 0xE3) labelEvtC.Text = "bits";
                     labelEvtD.Text = "jump to";
                     evtNumC.Maximum = 65535; evtNumC.Enabled = true;
                     evtNumD.Hexadecimal = true; evtNumD.Maximum = 0xFFFF; evtNumD.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1);
-                    evtNumD.Value = Bits.GetShort(aqc.QueueData, 3);
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1);
+                    evtNumD.Value = Bits.GetShort(aqc.EventData, 3);
                     break;
                 case 0xEA: labelTitleA.Text = "If equal to zero, jump to..."; goto case 0xEF;
                 case 0xEB: labelTitleA.Text = "If not equal to zero, jump to..."; goto case 0xEF;
@@ -544,7 +545,7 @@ namespace LAZYSHELL
                     labelEvtC.Text = "jump to";
                     evtNumC.Hexadecimal = true; evtNumC.Maximum = 0xFFFF; evtNumC.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1);
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1);
                     break;
 
                 // Jump to
@@ -556,7 +557,7 @@ namespace LAZYSHELL
                     labelEvtC.Text = "address";
                     evtNumC.Hexadecimal = true; evtNumC.Maximum = 0xFFFF; evtNumC.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1);
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1);
                     break;
                 case 0xD4:
                     labelTitleA.Text = "Loop start, loop count...";
@@ -567,8 +568,8 @@ namespace LAZYSHELL
                     break;
 
                 // Object memory
-                case 0xF2:         // Set object presence...  
-                case 0xF3:         // Set object engage type...
+                case 0xF2:         // Set obj presence...  
+                case 0xF3:         // Set obj engage type...
                 case 0xF8:         // If object in level ..., presence =...
                     if (aqc.Opcode == 0xF2)
                     {
@@ -595,12 +596,12 @@ namespace LAZYSHELL
                     if (aqc.Opcode == 0xF8)
                         evtNumE.Enabled = true; evtNumE.Hexadecimal = true; evtNumE.Maximum = 0xFFFF;
 
-                    evtNumA.Value = Bits.GetShort(aqc.QueueData, 1) & 0x1FF;
+                    evtNumA.Value = Bits.GetShort(aqc.EventData, 1) & 0x1FF;
                     evtNameA.SelectedIndex = (int)evtNumA.Value;
-                    evtNameB.SelectedIndex = (aqc.QueueData[2] >> 1) & 0x3F;
-                    evtEffects.SetItemChecked(0, (aqc.QueueData[2] & 0x80) == 0x80);
+                    evtNameB.SelectedIndex = (aqc.EventData[2] >> 1) & 0x3F;
+                    evtEffects.SetItemChecked(0, (aqc.EventData[2] & 0x80) == 0x80);
                     if (aqc.Opcode == 0xF8)
-                        evtNumE.Value = Bits.GetShort(aqc.QueueData, 3);
+                        evtNumE.Value = Bits.GetShort(aqc.EventData, 3);
                     /* 
                      * TODO
                      * synchronize evtNameA with evtNumA
@@ -620,7 +621,7 @@ namespace LAZYSHELL
                     labelEvtC.Text = "frames";
                     evtNumC.Maximum = 65535; evtNumC.Enabled = true;
 
-                    evtNumC.Value = Bits.GetShort(aqc.QueueData, 1);
+                    evtNumC.Value = Bits.GetShort(aqc.EventData, 1);
                     break;
 
                 case 0xFD:
@@ -631,7 +632,7 @@ namespace LAZYSHELL
                             labelEvtC.Text = "priority";
                             evtNumC.Maximum = 3; evtNumC.Enabled = true;
 
-                            evtNumC.Value = aqc.QueueData[2];
+                            evtNumC.Value = aqc.EventData[2];
                             break;
 
                         // Memory
@@ -644,30 +645,30 @@ namespace LAZYSHELL
                             evtNumC.Enabled = true;
                             evtNumD.Maximum = 256; evtNumD.Minimum = 1; evtNumD.Enabled = true;
 
-                            evtNumC.Value = (aqc.QueueData[2] * 2) + 0x7000;
-                            evtNumD.Value = (aqc.QueueData[3] ^ 0xFF) + 1;
+                            evtNumC.Value = (aqc.EventData[2] * 2) + 0x7000;
+                            evtNumD.Value = (aqc.EventData[3] ^ 0xFF) + 1;
                             break;
 
-                        // Memory 00:700C
-                        case 0xB0: labelTitleA.Text = "Mem 00:700C isolate bits =..."; goto case 0xB2;
-                        case 0xB1: labelTitleA.Text = "Mem 00:700C set bits =..."; goto case 0xB2;
+                        // Memory $700C
+                        case 0xB0: labelTitleA.Text = "Mem $700C isolate bits =..."; goto case 0xB2;
+                        case 0xB1: labelTitleA.Text = "Mem $700C set bits =..."; goto case 0xB2;
                         case 0xB2:
-                            if (aqc.Option == 0xB2) labelTitleA.Text = "Mem 00:700C xor bits =...";
+                            if (aqc.Option == 0xB2) labelTitleA.Text = "Mem $700C xor bits =...";
                             labelEvtC.Text = "bits";
                             evtNumC.Maximum = 65535; evtNumC.Enabled = true;
 
-                            evtNumC.Value = Bits.GetShort(aqc.QueueData, 2);
+                            evtNumC.Value = Bits.GetShort(aqc.EventData, 2);
                             break;
-                        case 0xB3: labelTitleA.Text = "Mem 00:700C isolate bits = mem..."; goto case 0xB5;
-                        case 0xB4: labelTitleA.Text = "Mem 00:700C set bits = mem..."; goto case 0xB5;
+                        case 0xB3: labelTitleA.Text = "Mem $700C isolate bits = mem..."; goto case 0xB5;
+                        case 0xB4: labelTitleA.Text = "Mem $700C set bits = mem..."; goto case 0xB5;
                         case 0xB5:
-                            if (aqc.Option == 0xB5) labelTitleA.Text = "Mem 00:700C xor bits = mem...";
+                            if (aqc.Option == 0xB5) labelTitleA.Text = "Mem $700C xor bits = mem...";
                             labelEvtC.Text = "address";
                             evtNumC.Hexadecimal = true; evtNumC.Increment = 2;
                             evtNumC.Maximum = 0x71FE; evtNumC.Minimum = 0x7000;
                             evtNumC.Enabled = true;
 
-                            evtNumC.Value = (aqc.QueueData[2] * 2) + 0x7000;
+                            evtNumC.Value = (aqc.EventData[2] * 2) + 0x7000;
                             break;
                     }
                     break;
@@ -687,13 +688,13 @@ namespace LAZYSHELL
                 case 0x15:
                 case 0x0C:
                     for (int i = 0; i < 8; i++)
-                        Bits.SetBit(aqc.QueueData, 1, i, evtEffects.GetItemChecked(i));
+                        Bits.SetBit(aqc.EventData, 1, i, evtEffects.GetItemChecked(i));
                     break;
                 case 0x13:
                     aqc.Option = (byte)evtNumC.Value;
                     break;
                 case 0x3D:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
                     break;
 
                 // Palette
@@ -705,11 +706,11 @@ namespace LAZYSHELL
                 // Sprite Sequence
                 case 0x08:
                     aqc.Option = (byte)evtNumC.Value;
-                    aqc.QueueData[2] = (byte)evtNumD.Value;
-                    Bits.SetBit(aqc.QueueData, 1, 3, evtEffects.GetItemChecked(0));
-                    Bits.SetBit(aqc.QueueData, 1, 4, evtEffects.GetItemChecked(1));
-                    Bits.SetBit(aqc.QueueData, 1, 6, evtEffects.GetItemChecked(2));
-                    Bits.SetBit(aqc.QueueData, 2, 7, evtEffects.GetItemChecked(3));
+                    aqc.EventData[2] = (byte)evtNumD.Value;
+                    Bits.SetBit(aqc.EventData, 1, 3, evtEffects.GetItemChecked(0));
+                    Bits.SetBit(aqc.EventData, 1, 4, evtEffects.GetItemChecked(1));
+                    Bits.SetBit(aqc.EventData, 1, 6, evtEffects.GetItemChecked(2));
+                    Bits.SetBit(aqc.EventData, 2, 7, evtEffects.GetItemChecked(3));
 
                     /*
                      * TODO
@@ -719,11 +720,11 @@ namespace LAZYSHELL
                     break;
                 case 0x10:
                     aqc.Option = (byte)evtNameA.SelectedIndex;
-                    Bits.SetBit(aqc.QueueData, 1, 6, evtEffects.GetItemChecked(0));
-                    Bits.SetBit(aqc.QueueData, 1, 7, evtEffects.GetItemChecked(1));
+                    Bits.SetBit(aqc.EventData, 1, 6, evtEffects.GetItemChecked(0));
+                    Bits.SetBit(aqc.EventData, 1, 7, evtEffects.GetItemChecked(1));
                     break;
                 case 0xD0:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
                     break;
 
                 // Sprite Animation
@@ -745,7 +746,7 @@ namespace LAZYSHELL
                     break;
                 case 0x7E:
                 case 0x7F:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
                     break;
 
                 // Shift 1px units
@@ -777,12 +778,12 @@ namespace LAZYSHELL
                     if (aqc.Opcode != 0x80 && aqc.Opcode != 0x82)
                     {
                         aqc.Option = (byte)((sbyte)evtNumC.Value);
-                        aqc.QueueData[2] = (byte)((sbyte)evtNumD.Value);
+                        aqc.EventData[2] = (byte)((sbyte)evtNumD.Value);
                     }
                     else
                     {
                         aqc.Option = (byte)evtNumC.Value;
-                        aqc.QueueData[2] = (byte)evtNumD.Value;
+                        aqc.EventData[2] = (byte)evtNumD.Value;
                     }
                     break;
                 case 0x87:
@@ -791,32 +792,32 @@ namespace LAZYSHELL
                     break;
                 case 0x90:
                 case 0x91:
-                    aqc.QueueData[3] = (byte)evtNumA.Value;
+                    aqc.EventData[3] = (byte)evtNumA.Value;
                     if (aqc.Opcode != 0x90)
                     {
                         aqc.Option = (byte)((sbyte)evtNumC.Value);
-                        aqc.QueueData[2] = (byte)((sbyte)evtNumD.Value);
+                        aqc.EventData[2] = (byte)((sbyte)evtNumD.Value);
                     }
                     else
                     {
                         aqc.Option = (byte)evtNumC.Value;
-                        aqc.QueueData[2] = (byte)evtNumD.Value;
+                        aqc.EventData[2] = (byte)evtNumD.Value;
                     }
                     break;
                 case 0x92:
                 case 0x93:
                 case 0x94:
-                    aqc.QueueData[3] = (byte)(evtNameB.SelectedIndex << 5);
-                    aqc.QueueData[3] &= 0xE0; aqc.QueueData[3] |= (byte)evtNumB.Value;
+                    aqc.EventData[3] = (byte)(evtNameB.SelectedIndex << 5);
+                    aqc.EventData[3] &= 0xE0; aqc.EventData[3] |= (byte)evtNumB.Value;
                     if (aqc.Opcode != 0x92)
                     {
                         aqc.Option = (byte)((sbyte)evtNumC.Value);
-                        aqc.QueueData[2] = (byte)((sbyte)evtNumD.Value);
+                        aqc.EventData[2] = (byte)((sbyte)evtNumD.Value);
                     }
                     else
                     {
                         aqc.Option = (byte)evtNumC.Value;
-                        aqc.QueueData[2] = (byte)evtNumD.Value;
+                        aqc.EventData[2] = (byte)evtNumD.Value;
                     }
                     break;
 
@@ -826,11 +827,11 @@ namespace LAZYSHELL
                     break;
                 case 0x9D:
                     aqc.Option = (byte)evtNameA.SelectedIndex;
-                    aqc.QueueData[2] = (byte)evtNumC.Value;
+                    aqc.EventData[2] = (byte)evtNumC.Value;
                     break;
                 case 0x9E:
                     aqc.Option = (byte)evtNumC.Value;
-                    aqc.QueueData[2] = (byte)evtNumD.Value;
+                    aqc.EventData[2] = (byte)evtNumD.Value;
                     break;
 
                 // Memory
@@ -851,7 +852,7 @@ namespace LAZYSHELL
                 case 0xA8:
                 case 0xA9:
                     aqc.Option = (byte)(evtNumC.Value - 0x70A0);
-                    aqc.QueueData[2] = (byte)evtNumD.Value;
+                    aqc.EventData[2] = (byte)evtNumD.Value;
                     break;
                 case 0xAA:
                 case 0xAB:
@@ -861,7 +862,7 @@ namespace LAZYSHELL
                 case 0xB1:
                 case 0xC2:
                     aqc.Option = (byte)((evtNumC.Value - 0x7000) / 2);
-                    Bits.SetShort(aqc.QueueData, 2, (ushort)evtNumD.Value);
+                    Bits.SetShort(aqc.EventData, 2, (ushort)evtNumD.Value);
                     break;
                 case 0xB2:
                 case 0xB3:
@@ -874,12 +875,12 @@ namespace LAZYSHELL
                     break;
                 case 0xB7:
                     aqc.Option = (byte)((evtNumC.Value - 0x7000) / 2);
-                    Bits.SetShort(aqc.QueueData, 2, (ushort)evtNumD.Value);
+                    Bits.SetShort(aqc.EventData, 2, (ushort)evtNumD.Value);
                     break;
                 case 0xBC:
                 case 0xBD:
                     aqc.Option = (byte)((evtNumC.Value - 0x7000) / 2);
-                    aqc.QueueData[2] = (byte)((evtNumD.Value - 0x7000) / 2);
+                    aqc.EventData[2] = (byte)((evtNumD.Value - 0x7000) / 2);
                     break;
                 case 0xD8:
                 case 0xD9:
@@ -887,7 +888,7 @@ namespace LAZYSHELL
                     aqc.Opcode = (byte)(((((byte)(evtNumC.Value - 0x7040) << 3) & 0x0F00) >> 8) + 0xD8);
                     aqc.Option = (byte)(((byte)(evtNumC.Value - 0x7040) << 3) & 0xF8);
                     aqc.Option &= 0xF8; aqc.Option |= (byte)evtNumD.Value;
-                    Bits.SetShort(aqc.QueueData, 2, (ushort)evtNumE.Value);
+                    Bits.SetShort(aqc.EventData, 2, (ushort)evtNumE.Value);
                     break;
                 case 0xDC:
                 case 0xDD:
@@ -895,34 +896,34 @@ namespace LAZYSHELL
                     aqc.Opcode = (byte)(((((byte)(evtNumC.Value - 0x7040) << 3) & 0x0F00) >> 8) + 0xDC);
                     aqc.Option = (byte)(((byte)(evtNumC.Value - 0x7040) << 3) & 0xF8);
                     aqc.Option &= 0xF8; aqc.Option |= (byte)evtNumD.Value;
-                    Bits.SetShort(aqc.QueueData, 2, (ushort)evtNumE.Value);
+                    Bits.SetShort(aqc.EventData, 2, (ushort)evtNumE.Value);
                     break;
                 case 0xE0:
                 case 0xE1:
                     aqc.Option = (byte)(evtNumC.Value - 0x70A0);
-                    aqc.QueueData[2] = (byte)evtNumD.Value;
-                    Bits.SetShort(aqc.QueueData, 3, (ushort)evtNumE.Value);
+                    aqc.EventData[2] = (byte)evtNumD.Value;
+                    Bits.SetShort(aqc.EventData, 3, (ushort)evtNumE.Value);
                     break;
                 case 0xE4:
                 case 0xE5:
                     aqc.Option = (byte)((evtNumC.Value - 0x7000) / 2);
-                    Bits.SetShort(aqc.QueueData, 2, (ushort)evtNumD.Value);
-                    Bits.SetShort(aqc.QueueData, 4, (ushort)evtNumE.Value);
+                    Bits.SetShort(aqc.EventData, 2, (ushort)evtNumD.Value);
+                    Bits.SetShort(aqc.EventData, 4, (ushort)evtNumE.Value);
                     break;
                 case 0xE8:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
                     break;
                 case 0xE9:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
-                    Bits.SetShort(aqc.QueueData, 3, (ushort)evtNumD.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 3, (ushort)evtNumD.Value);
                     break;
 
-                // Memory 00:700C
+                // Memory $700C
                 case 0xAC:
                 case 0xAD:
                 case 0xB6:
                 case 0xC0:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
                     break;
                 case 0xB4:
                     aqc.Option = (byte)(evtNumC.Value - 0x70A0);
@@ -937,18 +938,18 @@ namespace LAZYSHELL
                 case 0xC5:
                 case 0xC6:
                     aqc.Option = (byte)evtNameA.SelectedIndex;
-                    Bits.SetBit(aqc.QueueData, 1, 7, evtEffects.GetItemChecked(0));
+                    Bits.SetBit(aqc.EventData, 1, 7, evtEffects.GetItemChecked(0));
                     break;
                 case 0xDB:
                 case 0xDF:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
                     break;
                 case 0xE2:
                 case 0xE3:
                 case 0xE6:
                 case 0xE7:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
-                    Bits.SetShort(aqc.QueueData, 3, (ushort)evtNumD.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 3, (ushort)evtNumD.Value);
                     break;
                 case 0xEA:
                 case 0xEB:
@@ -956,27 +957,27 @@ namespace LAZYSHELL
                 case 0xED:
                 case 0xEE:
                 case 0xEF:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
                     break;
 
                 // Jump to
                 case 0xD2:
                 case 0xD3:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
                     break;
                 case 0xD4:
                     aqc.Option = (byte)evtNumC.Value;
                     break;
 
                 // Object memory
-                case 0xF2:         // Set object presence...  
-                case 0xF3:         // Set object engage type...
+                case 0xF2:         // Set obj presence...  
+                case 0xF3:         // Set obj engage type...
                 case 0xF8:         // If object in level ..., presence =...
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumA.Value);
-                    aqc.QueueData[2] &= 1; aqc.QueueData[2] |= (byte)(evtNameB.SelectedIndex << 1);
-                    Bits.SetBit(aqc.QueueData, 2, 7, evtEffects.GetItemChecked(0));    // set bit 7 if true
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumA.Value);
+                    aqc.EventData[2] &= 1; aqc.EventData[2] |= (byte)(evtNameB.SelectedIndex << 1);
+                    Bits.SetBit(aqc.EventData, 2, 7, evtEffects.GetItemChecked(0));    // set bit 7 if true
                     if (aqc.Opcode == 0xF8)
-                        Bits.SetShort(aqc.QueueData, 3, (ushort)evtNumE.Value);
+                        Bits.SetShort(aqc.EventData, 3, (ushort)evtNumE.Value);
                     /* 
                      * TODO
                      * synchronize evtNameA with evtNumA
@@ -988,32 +989,32 @@ namespace LAZYSHELL
                     aqc.Option = (byte)evtNumC.Value;
                     break;
                 case 0xF1:
-                    Bits.SetShort(aqc.QueueData, 1, (ushort)evtNumC.Value);
+                    Bits.SetShort(aqc.EventData, 1, (ushort)evtNumC.Value);
                     break;
 
                 case 0xFD:
                     switch (aqc.Option)
                     {
                         case 0x0F:
-                            aqc.QueueData[2] = (byte)evtNumC.Value;
+                            aqc.EventData[2] = (byte)evtNumC.Value;
                             break;
 
                         // Memory
                         case 0xB6:
-                            aqc.QueueData[2] = (byte)((evtNumC.Value - 0x7000) / 2);
-                            aqc.QueueData[3] = (byte)((byte)(evtNumD.Value - 1) ^ 0xFF);
+                            aqc.EventData[2] = (byte)((evtNumC.Value - 0x7000) / 2);
+                            aqc.EventData[3] = (byte)((byte)(evtNumD.Value - 1) ^ 0xFF);
                             break;
 
-                        // Memory 00:700C
+                        // Memory $700C
                         case 0xB0:
                         case 0xB1:
                         case 0xB2:
-                            Bits.SetShort(aqc.QueueData, 2, (ushort)evtNumC.Value);
+                            Bits.SetShort(aqc.EventData, 2, (ushort)evtNumC.Value);
                             break;
                         case 0xB3:
                         case 0xB4:
                         case 0xB5:
-                            aqc.QueueData[2] = (byte)((evtNumC.Value - 0x7000) / 2);
+                            aqc.EventData[2] = (byte)((evtNumC.Value - 0x7000) / 2);
                             break;
                     }
                     break;
@@ -1066,7 +1067,7 @@ namespace LAZYSHELL
 
             ActionQueue aq = treeViewWrapper.Action;
 
-            foreach (ActionQueueCommand aqc in aq.ActionQueueCommands)
+            foreach (ActionQueueCommand aqc in aq.Commands)
             {
                 if (aqc.CommandDelta != 0)
                     UpdatePointersToAction(aqc);
@@ -1079,7 +1080,7 @@ namespace LAZYSHELL
             {
                 if (aq.Index != treeViewWrapper.Action.Index)
                 {
-                    foreach (ActionQueueCommand aqcIterator in aq.ActionQueueCommands)
+                    foreach (ActionQueueCommand aqcIterator in aq.Commands)
                     {
                         if (aqcIterator.Opcode == 0xE9)
                         {

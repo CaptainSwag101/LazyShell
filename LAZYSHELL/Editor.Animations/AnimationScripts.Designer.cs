@@ -56,7 +56,7 @@
             this.aniNameB = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.aniTitleA = new System.Windows.Forms.Label();
-            this.animationScriptTree = new System.Windows.Forms.TreeView();
+            this.animationScriptTree = new LAZYSHELL.NewTreeView();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -290,7 +290,7 @@
             // aniNameA
             // 
             this.aniNameA.BackColor = System.Drawing.SystemColors.Window;
-            this.aniNameA.DropDownHeight = 314;
+            this.aniNameA.DropDownHeight = 317;
             this.aniNameA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.aniNameA.DropDownWidth = 200;
             this.aniNameA.Enabled = false;
@@ -380,7 +380,7 @@
             // aniNameB
             // 
             this.aniNameB.BackColor = System.Drawing.SystemColors.Window;
-            this.aniNameB.DropDownHeight = 314;
+            this.aniNameB.DropDownHeight = 317;
             this.aniNameB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.aniNameB.DropDownWidth = 200;
             this.aniNameB.Enabled = false;
@@ -522,15 +522,6 @@
             this.animationCategory.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.animationCategory.ForeColor = System.Drawing.SystemColors.Control;
             this.animationCategory.ItemHeight = 13;
-            this.animationCategory.Items.AddRange(new object[] {
-            "Monster Behaviors",
-            "Monster Spells",
-            "Monster Attacks",
-            "Monster Entrances",
-            "Items",
-            "Ally Spells",
-            "Weapons",
-            "Battle Events"});
             this.animationCategory.Location = new System.Drawing.Point(7, 1);
             this.animationCategory.Name = "animationCategory";
             this.animationCategory.SelectedIndex = -1;
@@ -544,7 +535,7 @@
             this.animationName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.animationName.DropDownHeight = 500;
             this.animationName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.animationName.DropDownWidth = 200;
+            this.animationName.DropDownWidth = 300;
             this.animationName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.animationName.ForeColor = System.Drawing.SystemColors.Control;
             this.animationName.ItemHeight = 15;
@@ -611,7 +602,6 @@
             this.aniMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.aniMoveUp.Name = "aniMoveUp";
             this.aniMoveUp.Size = new System.Drawing.Size(23, 22);
-            this.aniMoveUp.Text = "toolStripButton1";
             this.aniMoveUp.Click += new System.EventHandler(this.aniMoveUp_Click);
             // 
             // aniMoveDown
@@ -622,7 +612,6 @@
             this.aniMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.aniMoveDown.Name = "aniMoveDown";
             this.aniMoveDown.Size = new System.Drawing.Size(23, 22);
-            this.aniMoveDown.Text = "toolStripButton2";
             this.aniMoveDown.Click += new System.EventHandler(this.aniMoveDown_Click);
             // 
             // toolStripSeparator1
@@ -690,6 +679,7 @@
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip4);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(5, 5);
@@ -745,7 +735,7 @@
         private System.Windows.Forms.Panel panel42;
         private System.Windows.Forms.ComboBox aniNameB;
         private System.Windows.Forms.Label aniTitleA;
-        private System.Windows.Forms.TreeView animationScriptTree;
+        private LAZYSHELL.NewTreeView animationScriptTree;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton save;
         private System.Windows.Forms.ToolStrip toolStrip1;

@@ -152,7 +152,8 @@ namespace LAZYSHELL
             DoContrast();
             DoThreshold();
 
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             InitializeColor();
             SetColorMapImage();
             SetPaletteImage();
@@ -400,7 +401,7 @@ namespace LAZYSHELL
         //        fs.Close();
         //        br.Close();
         //    }
-        //    catch (Exception ex)
+        //    catch
         //    {
         //        MessageBox.Show("There was a problem loading the file.", "LAZY SHELL");
         //        return;
@@ -522,7 +523,8 @@ namespace LAZYSHELL
                 currentRed.Value = trackBar1.Value & 0xF8;
             if (updating) return;
             paletteSet.Reds[currentColor] = (int)currentRed.Value & 0xF8;
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
             currentRed.Focus();
@@ -535,7 +537,8 @@ namespace LAZYSHELL
                 currentGreen.Value = trackBar2.Value & 0xF8;
             if (updating) return;
             paletteSet.Greens[currentColor] = (int)currentGreen.Value & 0xF8;
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
             currentGreen.Focus();
@@ -548,55 +551,11 @@ namespace LAZYSHELL
                 currentBlue.Value = trackBar3.Value & 0xF8;
             if (updating) return;
             paletteSet.Blues[currentColor] = (int)currentBlue.Value & 0xF8;
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
             currentBlue.Focus();
-        }
-        private void currentHue_ValueChanged(object sender, EventArgs e)
-        {
-            //if (updating) return;
-            //double r, g, b;
-            //double h = (double)currentHue.Value / 255.0;
-            //double s = (double)Math.Round(currentSat.Value, 0, MidpointRounding.AwayFromZero) - 256;
-            //double l = (double)currentLum.Value;
-            //Do.HSLtoRGB(h, s, l, out r, out g, out b);
-            //paletteSet.Reds[currentColor] = (byte)((byte)r & 0xF8);
-            //paletteSet.Greens[currentColor] = (byte)((byte)g & 0xF8);
-            //paletteSet.Blues[currentColor] = (byte)((byte)b & 0xF8);
-            //update.DynamicInvoke();
-            //InitializeColor();
-            //SetPaletteImage();
-        }
-        private void currentSat_ValueChanged(object sender, EventArgs e)
-        {
-            //if (updating) return;
-            //double r, g, b;
-            //double h = (double)currentHue.Value / 255.0;
-            //double s = (double)Math.Round(currentSat.Value, 0, MidpointRounding.AwayFromZero) - 256;
-            //double l = (double)currentLum.Value;
-            //Do.HSLtoRGB(h, s, l, out r, out g, out b);
-            //paletteSet.Reds[currentColor] = (byte)((byte)r & 0xF8);
-            //paletteSet.Greens[currentColor] = (byte)((byte)g & 0xF8);
-            //paletteSet.Blues[currentColor] = (byte)((byte)b & 0xF8);
-            //update.DynamicInvoke();
-            //InitializeColor();
-            //SetPaletteImage();
-        }
-        private void currentLum_ValueChanged(object sender, EventArgs e)
-        {
-            //if (updating) return;
-            //double r, g, b;
-            //double h = (double)currentHue.Value / 255.0;
-            //double s = (double)Math.Round(currentSat.Value, 0, MidpointRounding.AwayFromZero) - 256;
-            //double l = (double)currentLum.Value;
-            //Do.HSLtoRGB(h, s, l, out r, out g, out b);
-            //paletteSet.Reds[currentColor] = (byte)((byte)r & 0xF8);
-            //paletteSet.Greens[currentColor] = (byte)((byte)g & 0xF8);
-            //paletteSet.Blues[currentColor] = (byte)((byte)b & 0xF8);
-            //update.DynamicInvoke();
-            //InitializeColor();
-            //SetPaletteImage();
         }
         private void currentHTML_TextChanged(object sender, EventArgs e)
         {
@@ -605,7 +564,8 @@ namespace LAZYSHELL
             paletteSet.Reds[currentColor] = Int32.Parse(currentHTML.Text.Substring(0, 2), NumberStyles.AllowHexSpecifier);
             paletteSet.Greens[currentColor] = Int32.Parse(currentHTML.Text.Substring(2, 2), NumberStyles.AllowHexSpecifier);
             paletteSet.Blues[currentColor] = Int32.Parse(currentHTML.Text.Substring(4, 2), NumberStyles.AllowHexSpecifier);
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
         }
@@ -730,6 +690,8 @@ namespace LAZYSHELL
         {
             paletteSet.CopyTo(paletteSetBackup);
             this.Close();
+            if (!autoUpdate.Checked)
+                update.DynamicInvoke();
         }
         private void buttonCancel_Click(object sender, EventArgs e)
         {
@@ -753,9 +715,6 @@ namespace LAZYSHELL
             updating = false;
             DoAdjustment();
             paletteSetBackup.CopyTo(paletteSet);
-            update.DynamicInvoke();
-            InitializeColor();
-            SetPaletteImage();
         }
 
         private void pictureBoxColorMap_Paint(object sender, PaintEventArgs e)
@@ -799,7 +758,8 @@ namespace LAZYSHELL
             paletteSet.Reds[currentColor] = Color.FromArgb(currentSwatchColor).R;
             paletteSet.Greens[currentColor] = Color.FromArgb(currentSwatchColor).G;
             paletteSet.Blues[currentColor] = Color.FromArgb(currentSwatchColor).B;
-            update.DynamicInvoke();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
             InitializeColor();
             SetPaletteImage();
         }
@@ -809,6 +769,10 @@ namespace LAZYSHELL
             int color = paletteSet.Palettes[currentColor / 16][currentColor % 16];
             SolidBrush brush = new SolidBrush(Color.FromArgb(color));
             e.Graphics.FillRectangle(brush, new Rectangle(0, 0, 64, 64));
+        }
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            update.DynamicInvoke();
         }
 
         private void importPaletteSetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -860,11 +824,15 @@ namespace LAZYSHELL
                 br.Close();
                 fs.Close();
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("There was a problem loading the file.", "LAZY SHELL");
                 return;
             }
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
+            InitializeColor();
+            SetPaletteImage();
         }
         private void exportPaletteSetToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -898,7 +866,7 @@ namespace LAZYSHELL
                         buffer[(i * 4) + 3 + 0x17] = (byte)paletteSet.Blues[i];
                     }
 
-                    fs = new FileStream(saveFileDialog.FileName + ".pal", FileMode.Create, FileAccess.ReadWrite);
+                    fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.ReadWrite);
                     bw = new BinaryWriter(fs);
                     bw.Write(buffer, 0, 448 + 0x17);
                     bw.Close();
@@ -918,7 +886,7 @@ namespace LAZYSHELL
                         Bits.SetShort(buffer, (i * 2), color);
                     }
 
-                    fs = new FileStream(saveFileDialog.FileName + ".bin", FileMode.Create, FileAccess.ReadWrite);
+                    fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.ReadWrite);
                     bw = new BinaryWriter(fs);
                     bw.Write(buffer, 0, 0xE0);
                     bw.Close();
@@ -927,6 +895,5 @@ namespace LAZYSHELL
             }
         }
         #endregion
-
     }
 }

@@ -128,6 +128,7 @@ namespace LAZYSHELL
         public PaletteSet Copy()
         {
             PaletteSet copy = new PaletteSet(data, index, offset, count, size, length);
+            copy.Data = data;
             reds.CopyTo(copy.Reds, 0);
             greens.CopyTo(copy.Greens, 0);
             blues.CopyTo(copy.Blues, 0);

@@ -30,19 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BattleScripts));
             this.listBoxCommands = new System.Windows.Forms.ListBox();
-            this.pictureBoxMonster = new System.Windows.Forms.PictureBox();
             this.panel28 = new System.Windows.Forms.Panel();
-            this.BatScrLabel4 = new System.Windows.Forms.Label();
-            this.buttonApply = new System.Windows.Forms.Button();
-            this.buttonInsert = new System.Windows.Forms.Button();
-            this.panelIfTargetValue = new System.Windows.Forms.Panel();
-            this.labelTargetA = new System.Windows.Forms.Label();
-            this.labelTargetC = new System.Windows.Forms.Label();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.target = new System.Windows.Forms.ComboBox();
-            this.effects = new System.Windows.Forms.CheckedListBox();
-            this.labelTargetB = new System.Windows.Forms.Label();
-            this.targetNum = new System.Windows.Forms.NumericUpDown();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelDoOneOfThree = new System.Windows.Forms.Panel();
             this.labelDoA = new System.Windows.Forms.Label();
             this.numA = new System.Windows.Forms.NumericUpDown();
@@ -73,10 +62,23 @@
             this.bit6 = new System.Windows.Forms.CheckBox();
             this.bit5 = new System.Windows.Forms.CheckBox();
             this.bit1 = new System.Windows.Forms.CheckBox();
-            this.BattleScriptTree = new System.Windows.Forms.TreeView();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.monsterName = new LAZYSHELL.ToolStripComboBox();
-            this.monsterNum = new LAZYSHELL.ToolStripNumericUpDown();
+            this.buttonApply = new System.Windows.Forms.Button();
+            this.buttonInsert = new System.Windows.Forms.Button();
+            this.panelIfTargetValue = new System.Windows.Forms.Panel();
+            this.labelTargetA = new System.Windows.Forms.Label();
+            this.labelTargetC = new System.Windows.Forms.Label();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.target = new System.Windows.Forms.ComboBox();
+            this.effects = new System.Windows.Forms.CheckedListBox();
+            this.labelTargetB = new System.Windows.Forms.Label();
+            this.targetNum = new System.Windows.Forms.NumericUpDown();
+            this.panel141 = new System.Windows.Forms.Panel();
+            this.panel222 = new System.Windows.Forms.Panel();
+            this.monsterTargetArrowY = new System.Windows.Forms.NumericUpDown();
+            this.monsterTargetArrowX = new System.Windows.Forms.NumericUpDown();
+            this.label119 = new System.Windows.Forms.Label();
+            this.pictureBoxMonster = new System.Windows.Forms.PictureBox();
+            this.BattleScriptTree = new LAZYSHELL.NewTreeView();
             this.BatScrMoveUp = new System.Windows.Forms.ToolStripButton();
             this.BatScrMoveDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -95,20 +97,9 @@
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
-            this.save = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.import = new System.Windows.Forms.ToolStripButton();
-            this.export = new System.Windows.Forms.ToolStripButton();
-            this.clear = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).BeginInit();
             this.panel28.SuspendLayout();
-            this.panelIfTargetValue.SuspendLayout();
-            this.panel19.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.targetNum)).BeginInit();
+            this.panel1.SuspendLayout();
             this.panelDoOneOfThree.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numB)).BeginInit();
@@ -120,14 +111,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.memory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comparison)).BeginInit();
             this.panelBits.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.toolStrip4.SuspendLayout();
+            this.panelIfTargetValue.SuspendLayout();
+            this.panel19.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.targetNum)).BeginInit();
+            this.panel141.SuspendLayout();
+            this.panel222.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxCommands
             // 
-            this.listBoxCommands.Dock = System.Windows.Forms.DockStyle.Right;
+            this.listBoxCommands.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBoxCommands.ColumnWidth = 126;
+            this.listBoxCommands.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxCommands.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxCommands.FormattingEnabled = true;
             this.listBoxCommands.IntegralHeight = false;
             this.listBoxCommands.Items.AddRange(new object[] {
@@ -175,176 +175,39 @@
             "If memory bits set",
             "If memory bits clear",
             "If attack phase ="});
-            this.listBoxCommands.Location = new System.Drawing.Point(843, 50);
+            this.listBoxCommands.Location = new System.Drawing.Point(0, 0);
+            this.listBoxCommands.MultiColumn = true;
             this.listBoxCommands.Name = "listBoxCommands";
-            this.listBoxCommands.Size = new System.Drawing.Size(149, 576);
+            this.listBoxCommands.Size = new System.Drawing.Size(256, 363);
             this.listBoxCommands.TabIndex = 59;
             this.listBoxCommands.SelectedIndexChanged += new System.EventHandler(this.listBoxCommands_SelectedIndexChanged);
-            // 
-            // pictureBoxMonster
-            // 
-            this.pictureBoxMonster.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBoxMonster.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBoxMonster.Location = new System.Drawing.Point(0, 287);
-            this.pictureBoxMonster.Name = "pictureBoxMonster";
-            this.pictureBoxMonster.Size = new System.Drawing.Size(256, 285);
-            this.pictureBoxMonster.TabIndex = 373;
-            this.pictureBoxMonster.TabStop = false;
-            this.pictureBoxMonster.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMonster_Paint);
             // 
             // panel28
             // 
             this.panel28.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel28.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel28.Controls.Add(this.pictureBoxMonster);
-            this.panel28.Controls.Add(this.BatScrLabel4);
-            this.panel28.Controls.Add(this.buttonApply);
-            this.panel28.Controls.Add(this.buttonInsert);
-            this.panel28.Controls.Add(this.panelIfTargetValue);
-            this.panel28.Controls.Add(this.panelDoOneOfThree);
-            this.panel28.Controls.Add(this.panelMemoryCompare);
+            this.panel28.Controls.Add(this.listBoxCommands);
+            this.panel28.Controls.Add(this.panel1);
+            this.panel28.Controls.Add(this.panel141);
             this.panel28.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel28.Location = new System.Drawing.Point(583, 50);
+            this.panel28.Location = new System.Drawing.Point(398, 0);
             this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(260, 576);
+            this.panel28.Size = new System.Drawing.Size(260, 734);
             this.panel28.TabIndex = 393;
             // 
-            // BatScrLabel4
+            // panel1
             // 
-            this.BatScrLabel4.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.BatScrLabel4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BatScrLabel4.ForeColor = System.Drawing.SystemColors.Control;
-            this.BatScrLabel4.Location = new System.Drawing.Point(0, 0);
-            this.BatScrLabel4.Name = "BatScrLabel4";
-            this.BatScrLabel4.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            this.BatScrLabel4.Size = new System.Drawing.Size(256, 17);
-            this.BatScrLabel4.TabIndex = 249;
-            this.BatScrLabel4.Text = "CURRENT COMMAND PROPERTIES";
-            // 
-            // buttonApply
-            // 
-            this.buttonApply.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonApply.Enabled = false;
-            this.buttonApply.Location = new System.Drawing.Point(136, 267);
-            this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(120, 19);
-            this.buttonApply.TabIndex = 58;
-            this.buttonApply.Text = "APPLY CHANGES";
-            this.buttonApply.UseCompatibleTextRendering = true;
-            this.buttonApply.UseVisualStyleBackColor = false;
-            this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
-            // 
-            // buttonInsert
-            // 
-            this.buttonInsert.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonInsert.Enabled = false;
-            this.buttonInsert.Location = new System.Drawing.Point(0, 267);
-            this.buttonInsert.Name = "buttonInsert";
-            this.buttonInsert.Size = new System.Drawing.Size(136, 19);
-            this.buttonInsert.TabIndex = 57;
-            this.buttonInsert.Text = "INSERT COMMAND";
-            this.buttonInsert.UseCompatibleTextRendering = true;
-            this.buttonInsert.UseVisualStyleBackColor = false;
-            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
-            // 
-            // panelIfTargetValue
-            // 
-            this.panelIfTargetValue.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panelIfTargetValue.Controls.Add(this.labelTargetA);
-            this.panelIfTargetValue.Controls.Add(this.labelTargetC);
-            this.panelIfTargetValue.Controls.Add(this.panel19);
-            this.panelIfTargetValue.Controls.Add(this.effects);
-            this.panelIfTargetValue.Controls.Add(this.labelTargetB);
-            this.panelIfTargetValue.Controls.Add(this.targetNum);
-            this.panelIfTargetValue.Enabled = false;
-            this.panelIfTargetValue.Location = new System.Drawing.Point(0, 92);
-            this.panelIfTargetValue.Name = "panelIfTargetValue";
-            this.panelIfTargetValue.Size = new System.Drawing.Size(256, 119);
-            this.panelIfTargetValue.TabIndex = 35;
-            // 
-            // labelTargetA
-            // 
-            this.labelTargetA.BackColor = System.Drawing.SystemColors.Control;
-            this.labelTargetA.Location = new System.Drawing.Point(0, 0);
-            this.labelTargetA.Name = "labelTargetA";
-            this.labelTargetA.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelTargetA.Size = new System.Drawing.Size(134, 17);
-            this.labelTargetA.TabIndex = 419;
-            // 
-            // labelTargetC
-            // 
-            this.labelTargetC.BackColor = System.Drawing.SystemColors.Control;
-            this.labelTargetC.Location = new System.Drawing.Point(0, 37);
-            this.labelTargetC.Name = "labelTargetC";
-            this.labelTargetC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelTargetC.Size = new System.Drawing.Size(256, 17);
-            this.labelTargetC.TabIndex = 406;
-            // 
-            // panel19
-            // 
-            this.panel19.Controls.Add(this.target);
-            this.panel19.Location = new System.Drawing.Point(136, 0);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(121, 17);
-            this.panel19.TabIndex = 51;
-            // 
-            // target
-            // 
-            this.target.BackColor = System.Drawing.SystemColors.Window;
-            this.target.Cursor = System.Windows.Forms.Cursors.Default;
-            this.target.DropDownHeight = 314;
-            this.target.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.target.DropDownWidth = 150;
-            this.target.FormattingEnabled = true;
-            this.target.IntegralHeight = false;
-            this.target.Location = new System.Drawing.Point(-2, -2);
-            this.target.Name = "target";
-            this.target.Size = new System.Drawing.Size(124, 21);
-            this.target.TabIndex = 1;
-            this.target.SelectedIndexChanged += new System.EventHandler(this.target_SelectedIndexChanged);
-            // 
-            // effects
-            // 
-            this.effects.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.effects.CheckOnClick = true;
-            this.effects.ColumnWidth = 126;
-            this.effects.FormattingEnabled = true;
-            this.effects.Location = new System.Drawing.Point(0, 55);
-            this.effects.MultiColumn = true;
-            this.effects.Name = "effects";
-            this.effects.Size = new System.Drawing.Size(256, 64);
-            this.effects.TabIndex = 53;
-            this.effects.SelectedIndexChanged += new System.EventHandler(this.effects_SelectedIndexChanged);
-            // 
-            // labelTargetB
-            // 
-            this.labelTargetB.BackColor = System.Drawing.SystemColors.Control;
-            this.labelTargetB.Location = new System.Drawing.Point(0, 18);
-            this.labelTargetB.Name = "labelTargetB";
-            this.labelTargetB.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelTargetB.Size = new System.Drawing.Size(134, 17);
-            this.labelTargetB.TabIndex = 420;
-            // 
-            // targetNum
-            // 
-            this.targetNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.targetNum.Increment = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.targetNum.Location = new System.Drawing.Point(136, 18);
-            this.targetNum.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.targetNum.Name = "targetNum";
-            this.targetNum.Size = new System.Drawing.Size(120, 17);
-            this.targetNum.TabIndex = 52;
-            this.targetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.targetNum.ValueChanged += new System.EventHandler(this.targetNum_ValueChanged);
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel1.Controls.Add(this.panelDoOneOfThree);
+            this.panel1.Controls.Add(this.panelMemoryCompare);
+            this.panel1.Controls.Add(this.buttonApply);
+            this.panel1.Controls.Add(this.buttonInsert);
+            this.panel1.Controls.Add(this.panelIfTargetValue);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 363);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(256, 125);
+            this.panel1.TabIndex = 250;
             // 
             // panelDoOneOfThree
             // 
@@ -360,11 +223,11 @@
             this.panelDoOneOfThree.Controls.Add(this.doNothingA);
             this.panelDoOneOfThree.Controls.Add(this.doNothingB);
             this.panelDoOneOfThree.Controls.Add(this.doNothingC);
-            this.panelDoOneOfThree.Enabled = false;
-            this.panelDoOneOfThree.Location = new System.Drawing.Point(0, 19);
+            this.panelDoOneOfThree.Location = new System.Drawing.Point(0, 2);
             this.panelDoOneOfThree.Name = "panelDoOneOfThree";
             this.panelDoOneOfThree.Size = new System.Drawing.Size(256, 71);
             this.panelDoOneOfThree.TabIndex = 34;
+            this.panelDoOneOfThree.VisibleChanged += new System.EventHandler(this.panelDoOneOfThree_VisibleChanged);
             // 
             // labelDoA
             // 
@@ -432,7 +295,7 @@
             // 
             this.nameA.BackColor = System.Drawing.SystemColors.Window;
             this.nameA.Cursor = System.Windows.Forms.Cursors.Default;
-            this.nameA.DropDownHeight = 314;
+            this.nameA.DropDownHeight = 317;
             this.nameA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nameA.FormattingEnabled = true;
             this.nameA.IntegralHeight = false;
@@ -454,7 +317,7 @@
             // 
             this.nameB.BackColor = System.Drawing.SystemColors.Window;
             this.nameB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.nameB.DropDownHeight = 314;
+            this.nameB.DropDownHeight = 317;
             this.nameB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nameB.FormattingEnabled = true;
             this.nameB.IntegralHeight = false;
@@ -485,7 +348,7 @@
             // 
             this.nameC.BackColor = System.Drawing.SystemColors.Window;
             this.nameC.Cursor = System.Windows.Forms.Cursors.Default;
-            this.nameC.DropDownHeight = 314;
+            this.nameC.DropDownHeight = 317;
             this.nameC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nameC.FormattingEnabled = true;
             this.nameC.IntegralHeight = false;
@@ -552,11 +415,12 @@
             this.panelMemoryCompare.Controls.Add(this.comparison);
             this.panelMemoryCompare.Controls.Add(this.labelMemoryC);
             this.panelMemoryCompare.Controls.Add(this.panelBits);
-            this.panelMemoryCompare.Enabled = false;
-            this.panelMemoryCompare.Location = new System.Drawing.Point(0, 213);
+            this.panelMemoryCompare.Location = new System.Drawing.Point(0, 2);
             this.panelMemoryCompare.Name = "panelMemoryCompare";
             this.panelMemoryCompare.Size = new System.Drawing.Size(256, 53);
             this.panelMemoryCompare.TabIndex = 36;
+            this.panelMemoryCompare.Visible = false;
+            this.panelMemoryCompare.VisibleChanged += new System.EventHandler(this.panelMemoryCompare_VisibleChanged);
             // 
             // labelMemoryA
             // 
@@ -754,16 +618,218 @@
             this.bit1.UseVisualStyleBackColor = false;
             this.bit1.CheckedChanged += new System.EventHandler(this.bit1_CheckedChanged);
             // 
+            // buttonApply
+            // 
+            this.buttonApply.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonApply.Enabled = false;
+            this.buttonApply.Location = new System.Drawing.Point(136, 106);
+            this.buttonApply.Name = "buttonApply";
+            this.buttonApply.Size = new System.Drawing.Size(120, 19);
+            this.buttonApply.TabIndex = 58;
+            this.buttonApply.Text = "APPLY CHANGES";
+            this.buttonApply.UseCompatibleTextRendering = true;
+            this.buttonApply.UseVisualStyleBackColor = false;
+            this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
+            // 
+            // buttonInsert
+            // 
+            this.buttonInsert.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonInsert.Enabled = false;
+            this.buttonInsert.Location = new System.Drawing.Point(0, 106);
+            this.buttonInsert.Name = "buttonInsert";
+            this.buttonInsert.Size = new System.Drawing.Size(136, 19);
+            this.buttonInsert.TabIndex = 57;
+            this.buttonInsert.Text = "INSERT COMMAND";
+            this.buttonInsert.UseCompatibleTextRendering = true;
+            this.buttonInsert.UseVisualStyleBackColor = false;
+            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
+            // 
+            // panelIfTargetValue
+            // 
+            this.panelIfTargetValue.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panelIfTargetValue.Controls.Add(this.labelTargetA);
+            this.panelIfTargetValue.Controls.Add(this.labelTargetC);
+            this.panelIfTargetValue.Controls.Add(this.panel19);
+            this.panelIfTargetValue.Controls.Add(this.effects);
+            this.panelIfTargetValue.Controls.Add(this.labelTargetB);
+            this.panelIfTargetValue.Controls.Add(this.targetNum);
+            this.panelIfTargetValue.Location = new System.Drawing.Point(0, 2);
+            this.panelIfTargetValue.Name = "panelIfTargetValue";
+            this.panelIfTargetValue.Size = new System.Drawing.Size(256, 103);
+            this.panelIfTargetValue.TabIndex = 35;
+            this.panelIfTargetValue.Visible = false;
+            this.panelIfTargetValue.VisibleChanged += new System.EventHandler(this.panelIfTargetValue_VisibleChanged);
+            // 
+            // labelTargetA
+            // 
+            this.labelTargetA.BackColor = System.Drawing.SystemColors.Control;
+            this.labelTargetA.Location = new System.Drawing.Point(0, 0);
+            this.labelTargetA.Name = "labelTargetA";
+            this.labelTargetA.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelTargetA.Size = new System.Drawing.Size(134, 17);
+            this.labelTargetA.TabIndex = 419;
+            // 
+            // labelTargetC
+            // 
+            this.labelTargetC.BackColor = System.Drawing.SystemColors.Control;
+            this.labelTargetC.Location = new System.Drawing.Point(0, 37);
+            this.labelTargetC.Name = "labelTargetC";
+            this.labelTargetC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelTargetC.Size = new System.Drawing.Size(256, 17);
+            this.labelTargetC.TabIndex = 406;
+            // 
+            // panel19
+            // 
+            this.panel19.Controls.Add(this.target);
+            this.panel19.Location = new System.Drawing.Point(136, 0);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(121, 17);
+            this.panel19.TabIndex = 51;
+            // 
+            // target
+            // 
+            this.target.BackColor = System.Drawing.SystemColors.Window;
+            this.target.Cursor = System.Windows.Forms.Cursors.Default;
+            this.target.DropDownHeight = 317;
+            this.target.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.target.DropDownWidth = 150;
+            this.target.FormattingEnabled = true;
+            this.target.IntegralHeight = false;
+            this.target.Location = new System.Drawing.Point(-2, -2);
+            this.target.Name = "target";
+            this.target.Size = new System.Drawing.Size(124, 21);
+            this.target.TabIndex = 1;
+            this.target.SelectedIndexChanged += new System.EventHandler(this.target_SelectedIndexChanged);
+            // 
+            // effects
+            // 
+            this.effects.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.effects.CheckOnClick = true;
+            this.effects.ColumnWidth = 84;
+            this.effects.FormattingEnabled = true;
+            this.effects.Location = new System.Drawing.Point(0, 55);
+            this.effects.MultiColumn = true;
+            this.effects.Name = "effects";
+            this.effects.Size = new System.Drawing.Size(256, 48);
+            this.effects.TabIndex = 53;
+            this.effects.SelectedIndexChanged += new System.EventHandler(this.effects_SelectedIndexChanged);
+            // 
+            // labelTargetB
+            // 
+            this.labelTargetB.BackColor = System.Drawing.SystemColors.Control;
+            this.labelTargetB.Location = new System.Drawing.Point(0, 18);
+            this.labelTargetB.Name = "labelTargetB";
+            this.labelTargetB.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelTargetB.Size = new System.Drawing.Size(134, 17);
+            this.labelTargetB.TabIndex = 420;
+            // 
+            // targetNum
+            // 
+            this.targetNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.targetNum.Increment = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.targetNum.Location = new System.Drawing.Point(136, 18);
+            this.targetNum.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.targetNum.Name = "targetNum";
+            this.targetNum.Size = new System.Drawing.Size(120, 17);
+            this.targetNum.TabIndex = 52;
+            this.targetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.targetNum.ValueChanged += new System.EventHandler(this.targetNum_ValueChanged);
+            // 
+            // panel141
+            // 
+            this.panel141.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel141.Controls.Add(this.panel222);
+            this.panel141.Controls.Add(this.pictureBoxMonster);
+            this.panel141.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel141.Location = new System.Drawing.Point(0, 488);
+            this.panel141.Name = "panel141";
+            this.panel141.Size = new System.Drawing.Size(256, 242);
+            this.panel141.TabIndex = 469;
+            // 
+            // panel222
+            // 
+            this.panel222.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel222.Controls.Add(this.monsterTargetArrowY);
+            this.panel222.Controls.Add(this.monsterTargetArrowX);
+            this.panel222.Controls.Add(this.label119);
+            this.panel222.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel222.Location = new System.Drawing.Point(0, 225);
+            this.panel222.Name = "panel222";
+            this.panel222.Size = new System.Drawing.Size(256, 17);
+            this.panel222.TabIndex = 18;
+            // 
+            // monsterTargetArrowY
+            // 
+            this.monsterTargetArrowY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.monsterTargetArrowY.Location = new System.Drawing.Point(191, 0);
+            this.monsterTargetArrowY.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.monsterTargetArrowY.Name = "monsterTargetArrowY";
+            this.monsterTargetArrowY.Size = new System.Drawing.Size(65, 17);
+            this.monsterTargetArrowY.TabIndex = 20;
+            this.monsterTargetArrowY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.monsterTargetArrowY.ValueChanged += new System.EventHandler(this.monsterTargetArrowY_ValueChanged);
+            // 
+            // monsterTargetArrowX
+            // 
+            this.monsterTargetArrowX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.monsterTargetArrowX.Location = new System.Drawing.Point(125, 0);
+            this.monsterTargetArrowX.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.monsterTargetArrowX.Name = "monsterTargetArrowX";
+            this.monsterTargetArrowX.Size = new System.Drawing.Size(65, 17);
+            this.monsterTargetArrowX.TabIndex = 19;
+            this.monsterTargetArrowX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.monsterTargetArrowX.ValueChanged += new System.EventHandler(this.monsterTargetArrowX_ValueChanged);
+            // 
+            // label119
+            // 
+            this.label119.BackColor = System.Drawing.SystemColors.Control;
+            this.label119.Location = new System.Drawing.Point(0, 0);
+            this.label119.Name = "label119";
+            this.label119.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label119.Size = new System.Drawing.Size(124, 17);
+            this.label119.TabIndex = 391;
+            this.label119.Text = "Target (X, Y)";
+            // 
+            // pictureBoxMonster
+            // 
+            this.pictureBoxMonster.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pictureBoxMonster.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxMonster.Name = "pictureBoxMonster";
+            this.pictureBoxMonster.Size = new System.Drawing.Size(256, 224);
+            this.pictureBoxMonster.TabIndex = 220;
+            this.pictureBoxMonster.TabStop = false;
+            this.pictureBoxMonster.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseMove);
+            this.pictureBoxMonster.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseDown);
+            this.pictureBoxMonster.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMonster_Paint);
+            this.pictureBoxMonster.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseUp);
+            // 
             // BattleScriptTree
             // 
             this.BattleScriptTree.CheckBoxes = true;
             this.BattleScriptTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BattleScriptTree.EnablePaint = true;
             this.BattleScriptTree.HideSelection = false;
             this.BattleScriptTree.HotTracking = true;
             this.BattleScriptTree.ItemHeight = 16;
-            this.BattleScriptTree.Location = new System.Drawing.Point(0, 50);
+            this.BattleScriptTree.Location = new System.Drawing.Point(0, 0);
             this.BattleScriptTree.Name = "BattleScriptTree";
-            this.BattleScriptTree.Size = new System.Drawing.Size(583, 551);
+            this.BattleScriptTree.Size = new System.Drawing.Size(398, 709);
             this.BattleScriptTree.TabIndex = 32;
             this.BattleScriptTree.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.BattleScriptTree_AfterCheck);
             this.BattleScriptTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BattleScriptTree_MouseDoubleClick);
@@ -771,85 +837,27 @@
             this.BattleScriptTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.BattleScriptTree_NodeMouseClick);
             this.BattleScriptTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Scripts_KeyDown);
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip1.CanOverflow = false;
-            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.monsterName,
-            this.monsterNum});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(992, 25);
-            this.toolStrip1.TabIndex = 473;
-            // 
-            // monsterName
-            // 
-            this.monsterName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.monsterName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.monsterName.DropDownHeight = 500;
-            this.monsterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.monsterName.DropDownWidth = 200;
-            this.monsterName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monsterName.ForeColor = System.Drawing.SystemColors.Control;
-            this.monsterName.ItemHeight = 15;
-            this.monsterName.Location = new System.Drawing.Point(7, 1);
-            this.monsterName.Name = "monsterName";
-            this.monsterName.SelectedIndex = -1;
-            this.monsterName.SelectedItem = null;
-            this.monsterName.Size = new System.Drawing.Size(160, 22);
-            this.monsterName.SelectedIndexChanged += new System.EventHandler(this.monsterName_SelectedIndexChanged);
-            this.monsterName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.monsterName_DrawItem);
-            // 
-            // monsterNum
-            // 
-            this.monsterNum.AutoSize = false;
-            this.monsterNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.monsterNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monsterNum.ForeColor = System.Drawing.SystemColors.Control;
-            this.monsterNum.Hexadecimal = false;
-            this.monsterNum.Location = new System.Drawing.Point(167, 1);
-            this.monsterNum.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.monsterNum.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.monsterNum.Name = "monsterNum";
-            this.monsterNum.Size = new System.Drawing.Size(60, 22);
-            this.monsterNum.Text = "0";
-            this.monsterNum.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.monsterNum.ValueChanged += new System.EventHandler(this.monsterNum_ValueChanged);
-            // 
             // BatScrMoveUp
             // 
+            this.BatScrMoveUp.AutoSize = false;
             this.BatScrMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BatScrMoveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
             this.BatScrMoveUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BatScrMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrMoveUp.Name = "BatScrMoveUp";
-            this.BatScrMoveUp.Size = new System.Drawing.Size(23, 22);
+            this.BatScrMoveUp.Size = new System.Drawing.Size(22, 22);
             this.BatScrMoveUp.Text = "Move Command Up";
             this.BatScrMoveUp.Click += new System.EventHandler(this.BatScrMoveUp_Click);
             // 
             // BatScrMoveDown
             // 
+            this.BatScrMoveDown.AutoSize = false;
             this.BatScrMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BatScrMoveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
             this.BatScrMoveDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BatScrMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrMoveDown.Name = "BatScrMoveDown";
-            this.BatScrMoveDown.Size = new System.Drawing.Size(23, 22);
+            this.BatScrMoveDown.Size = new System.Drawing.Size(22, 22);
             this.BatScrMoveDown.Text = "Move Command Down";
             this.BatScrMoveDown.Click += new System.EventHandler(this.BatScrMoveDown_Click);
             // 
@@ -860,67 +868,73 @@
             // 
             // BatScrCopyCommand
             // 
+            this.BatScrCopyCommand.AutoSize = false;
             this.BatScrCopyCommand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BatScrCopyCommand.Image = global::LAZYSHELL.Properties.Resources.copy_small;
             this.BatScrCopyCommand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BatScrCopyCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrCopyCommand.Name = "BatScrCopyCommand";
-            this.BatScrCopyCommand.Size = new System.Drawing.Size(23, 22);
+            this.BatScrCopyCommand.Size = new System.Drawing.Size(22, 22);
             this.BatScrCopyCommand.Text = "Copy Command";
             this.BatScrCopyCommand.Click += new System.EventHandler(this.BatScrCopyCommand_Click);
             // 
             // BatScrPasteCommand
             // 
+            this.BatScrPasteCommand.AutoSize = false;
             this.BatScrPasteCommand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BatScrPasteCommand.Image = global::LAZYSHELL.Properties.Resources.paste_small;
             this.BatScrPasteCommand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BatScrPasteCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrPasteCommand.Name = "BatScrPasteCommand";
-            this.BatScrPasteCommand.Size = new System.Drawing.Size(23, 22);
+            this.BatScrPasteCommand.Size = new System.Drawing.Size(22, 22);
             this.BatScrPasteCommand.Text = "Paste Command";
             this.BatScrPasteCommand.Click += new System.EventHandler(this.BatScrPasteCommand_Click);
             // 
             // BatScrDeleteCommand
             // 
+            this.BatScrDeleteCommand.AutoSize = false;
             this.BatScrDeleteCommand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BatScrDeleteCommand.Image = global::LAZYSHELL.Properties.Resources.delete_small;
             this.BatScrDeleteCommand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BatScrDeleteCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrDeleteCommand.Name = "BatScrDeleteCommand";
-            this.BatScrDeleteCommand.Size = new System.Drawing.Size(23, 22);
+            this.BatScrDeleteCommand.Size = new System.Drawing.Size(22, 22);
             this.BatScrDeleteCommand.Text = "Delete Command";
             this.BatScrDeleteCommand.Click += new System.EventHandler(this.BatScrDeleteCommand_Click);
             // 
             // BatScrEditCommand
             // 
+            this.BatScrEditCommand.AutoSize = false;
             this.BatScrEditCommand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BatScrEditCommand.Image = global::LAZYSHELL.Properties.Resources.edit_small;
             this.BatScrEditCommand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BatScrEditCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrEditCommand.Name = "BatScrEditCommand";
-            this.BatScrEditCommand.Size = new System.Drawing.Size(23, 22);
+            this.BatScrEditCommand.Size = new System.Drawing.Size(22, 22);
             this.BatScrEditCommand.Text = "Edit Command";
             this.BatScrEditCommand.Click += new System.EventHandler(this.BatScrEditCommand_Click);
             // 
             // BatScrExpandAll
             // 
+            this.BatScrExpandAll.AutoSize = false;
             this.BatScrExpandAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BatScrExpandAll.Image = global::LAZYSHELL.Properties.Resources.expandAll;
             this.BatScrExpandAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BatScrExpandAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrExpandAll.Name = "BatScrExpandAll";
-            this.BatScrExpandAll.Size = new System.Drawing.Size(23, 22);
+            this.BatScrExpandAll.Size = new System.Drawing.Size(22, 22);
             this.BatScrExpandAll.Text = "Expand All";
             this.BatScrExpandAll.Click += new System.EventHandler(this.BatScrExpandAll_Click);
             // 
             // BatScrCollapseAll
             // 
+            this.BatScrCollapseAll.AutoSize = false;
             this.BatScrCollapseAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BatScrCollapseAll.Image = global::LAZYSHELL.Properties.Resources.collapseAll;
             this.BatScrCollapseAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BatScrCollapseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrCollapseAll.Name = "BatScrCollapseAll";
-            this.BatScrCollapseAll.Size = new System.Drawing.Size(23, 22);
+            this.BatScrCollapseAll.Size = new System.Drawing.Size(22, 22);
             this.BatScrCollapseAll.Text = "Collapse All";
             this.BatScrCollapseAll.Click += new System.EventHandler(this.BatScrCollapseAll_Click);
             // 
@@ -931,12 +945,13 @@
             // 
             // battlePreview
             // 
+            this.battlePreview.AutoSize = false;
             this.battlePreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.battlePreview.Image = global::LAZYSHELL.Properties.Resources.preview;
             this.battlePreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.battlePreview.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.battlePreview.Name = "battlePreview";
-            this.battlePreview.Size = new System.Drawing.Size(23, 22);
+            this.battlePreview.Size = new System.Drawing.Size(22, 22);
             this.battlePreview.Text = "Open Previewer";
             this.battlePreview.Click += new System.EventHandler(this.battlePreview_Click);
             // 
@@ -959,8 +974,8 @@
             // label1
             // 
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 22);
-            this.label1.Text = "HEX: ";
+            this.label1.Size = new System.Drawing.Size(29, 22);
+            this.label1.Text = "HEX:";
             // 
             // toolStripTextBox1
             // 
@@ -968,7 +983,8 @@
             this.toolStripTextBox1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.ReadOnly = true;
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 25);
+            this.toolStripTextBox1.Size = new System.Drawing.Size(70, 25);
+            this.toolStripTextBox1.Text = "00-00-00-00";
             // 
             // toolStripSeparator2
             // 
@@ -979,84 +995,6 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStrip4
-            // 
-            this.toolStrip4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.save,
-            this.toolStripSeparator4,
-            this.import,
-            this.export,
-            this.clear,
-            this.toolStripSeparator8,
-            this.baseConvertor});
-            this.toolStrip4.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip4.Size = new System.Drawing.Size(992, 25);
-            this.toolStrip4.TabIndex = 474;
-            this.toolStrip4.Text = "toolStrip4";
-            // 
-            // save
-            // 
-            this.save.Image = global::LAZYSHELL.Properties.Resources.save_small;
-            this.save.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.save.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(23, 22);
-            this.save.ToolTipText = "Save";
-            this.save.Click += new System.EventHandler(this.save_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // import
-            // 
-            this.import.Image = global::LAZYSHELL.Properties.Resources.import_small;
-            this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.import.Name = "import";
-            this.import.Size = new System.Drawing.Size(23, 22);
-            this.import.ToolTipText = "Import";
-            this.import.Click += new System.EventHandler(this.import_Click);
-            // 
-            // export
-            // 
-            this.export.Image = global::LAZYSHELL.Properties.Resources.export_small;
-            this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(23, 22);
-            this.export.ToolTipText = "Export";
-            this.export.Click += new System.EventHandler(this.export_Click);
-            // 
-            // clear
-            // 
-            this.clear.Image = global::LAZYSHELL.Properties.Resources.clear_small;
-            this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(23, 22);
-            this.clear.ToolTipText = "Clear";
-            this.clear.Click += new System.EventHandler(this.clear_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
-            // 
-            // baseConvertor
-            // 
-            this.baseConvertor.CheckOnClick = true;
-            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.baseConvertor.Name = "baseConvertor";
-            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
-            this.baseConvertor.ToolTipText = "Base Conversion";
             // 
             // toolStrip2
             // 
@@ -1079,10 +1017,10 @@
             this.toolStripSeparator7,
             this.label1,
             this.toolStripTextBox1});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 601);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 709);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(583, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(398, 25);
             this.toolStrip2.TabIndex = 475;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -1090,26 +1028,25 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 626);
+            this.ClientSize = new System.Drawing.Size(658, 734);
+            this.ControlBox = false;
             this.Controls.Add(this.BattleScriptTree);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.panel28);
-            this.Controls.Add(this.listBoxCommands);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.toolStrip4);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(5, 5);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "BattleScripts";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "BATTLE SCRIPTS - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BattleScripts_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Scripts_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).EndInit();
             this.panel28.ResumeLayout(false);
-            this.panelIfTargetValue.ResumeLayout(false);
-            this.panel19.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.targetNum)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.panelDoOneOfThree.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numB)).EndInit();
@@ -1121,10 +1058,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.memory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comparison)).EndInit();
             this.panelBits.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.toolStrip4.ResumeLayout(false);
-            this.toolStrip4.PerformLayout();
+            this.panelIfTargetValue.ResumeLayout(false);
+            this.panel19.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.targetNum)).EndInit();
+            this.panel141.ResumeLayout(false);
+            this.panel222.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -1135,9 +1076,7 @@
         #endregion
 
         private System.Windows.Forms.ListBox listBoxCommands;
-        private System.Windows.Forms.PictureBox pictureBoxMonster;
         private System.Windows.Forms.Panel panel28;
-        private System.Windows.Forms.Label BatScrLabel4;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.Button buttonInsert;
         private System.Windows.Forms.Panel panelIfTargetValue;
@@ -1178,14 +1117,7 @@
         private System.Windows.Forms.CheckBox bit6;
         private System.Windows.Forms.CheckBox bit5;
         private System.Windows.Forms.CheckBox bit1;
-        private System.Windows.Forms.TreeView BattleScriptTree;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStrip toolStrip4;
-        private System.Windows.Forms.ToolStripButton save;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripButton import;
-        private System.Windows.Forms.ToolStripButton export;
-        private System.Windows.Forms.ToolStripButton clear;
+        private LAZYSHELL.NewTreeView BattleScriptTree;
         private System.Windows.Forms.ToolStripButton BatScrMoveUp;
         private System.Windows.Forms.ToolStripButton BatScrMoveDown;
         private System.Windows.Forms.ToolStripButton BatScrCopyCommand;
@@ -1196,8 +1128,6 @@
         private System.Windows.Forms.ToolStripButton BatScrCollapseAll;
         private System.Windows.Forms.ToolStripButton battlePreview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private LAZYSHELL.ToolStripComboBox monsterName;
-        private ToolStripNumericUpDown monsterNum;
         private System.Windows.Forms.ToolStripLabel BatScrLabel3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel label1;
@@ -1206,8 +1136,13 @@
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel141;
+        private System.Windows.Forms.Panel panel222;
+        private System.Windows.Forms.NumericUpDown monsterTargetArrowY;
+        private System.Windows.Forms.NumericUpDown monsterTargetArrowX;
+        private System.Windows.Forms.Label label119;
+        private System.Windows.Forms.PictureBox pictureBoxMonster;
     }
 }

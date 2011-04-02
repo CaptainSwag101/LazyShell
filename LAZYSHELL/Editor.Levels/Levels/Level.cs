@@ -6,8 +6,10 @@ using System.Text;
 // IE. a levelmap object containing GFXSETS, Mapsets, and Tilesets... ect
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class Level
     {
+        [NonSerialized()]
         private byte[] data;
         private int index;
         private int levelMap;

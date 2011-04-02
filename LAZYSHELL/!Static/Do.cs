@@ -11,10 +11,13 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
 using LAZYSHELL.Previewer;
+using LAZYSHELL.ScriptsEditor;
+using LAZYSHELL.ScriptsEditor.Commands;
 
 namespace LAZYSHELL
 {
@@ -975,14 +978,116 @@ namespace LAZYSHELL
         /// <param name="format">The format for 2bpp or 4bpp, 0x10 or 0x20, respectively.</param>
         public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, string action, int x, int y, int index, int color, int width, int height, byte format)
         {
+            return EditPixelBPP(src, srcOffset, palette, graphics, zoom, action, x, y, index, color, width, height, format, 0, 0);
+        }
+        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, string action, int x, int y, int index, int color, int width, int height, byte format, int x_plus, int y_plus)
+        {
             if (x < 0 || x >= (width * 8) * zoom || y < 0 || y >= (height * 8) * zoom)
                 return color;
             if (action == "") return color;
+            int bit = 0;
+            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit);
+            if (format == 0x20 && offset + 17 >= src.Length)
+                return color;
+            if (format == 0x10 && offset + 1 >= src.Length)
+                return color;
+            Rectangle c;
+            switch (action)
+            {
+                case "draw":
+                    c = new Rectangle((x / zoom * zoom) + x_plus, (y / zoom * zoom) + y_plus, zoom, zoom);
+                    graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[color])), c);
+                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, color);
+                    break;
+                case "erase":
+                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, 0);
+                    break;
+                case "select":
+                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format);
+                    break;
+                case "fill":
+                    int fillColor = color;
+                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format);
+                    if (color == fillColor) return color;
+                    Fill(src, color, fillColor, x, y, width * 8, height * 8, "", srcOffset, index, zoom, format);
+                    break;
+                case "replace":
+                    fillColor = color;
+                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format);
+                    if (color == fillColor) return color;
+                    for (int b = 0; b < height * 8; b++)
+                    {
+                        for (int a = 0; a < width * 8; a++)
+                        {
+                            int seeColor = GetBPPColor(src, a, b, srcOffset, index, 1, format);
+                            // if fillable, fill pixel and create spawn travelling west
+                            if (seeColor == color)
+                                SetBPPColor(src, a, b, srcOffset, index, 1, format, fillColor);
+                        }
+                    }
+                    break;
+            }
+            return color;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="src">BPP graphics</param>
+        /// <param name="color">Color to fill</param>
+        /// <param name="fillColor">Color to fill with</param>
+        /// <param name="x">X coord to start travelling from</param>
+        /// <param name="y">Y coord to start travelling from</param>
+        /// <param name="dir">Direction travelling from</param>
+        private static void Fill(byte[] src, int color, int fillColor, int x, int y, int width, int height, string dir, int srcOffset, int index, int zoom, byte format)
+        {
+            // the color seen when looking in a direction
+            int seeColor = 0;
+            // first, fill this pixel
+            SetBPPColor(src, x, y, srcOffset, index, zoom, format, fillColor);
 
+            // look WEST, if not travelling east or at boundary
+            if (dir != "east" && x > 0)
+            {
+                // see what color is to the west
+                seeColor = GetBPPColor(src, x - (1 * zoom), y, srcOffset, index, zoom, format);
+                // if fillable, fill pixel and create spawn travelling west
+                if (seeColor == color)
+                    Fill(src, color, fillColor, x - 1, y, width, height, "west", srcOffset, index, zoom, format);
+            }
+            //  look EAST, if not travelling west or at boundary
+            if (dir != "west" && x < width * 8)
+            {
+                // see what color is to the east
+                seeColor = GetBPPColor(src, x + (1 * zoom), y, srcOffset, index, zoom, format);
+                // if fillable, fill pixel and create spawn travelling east
+                if (seeColor == color)
+                    Fill(src, color, fillColor, x + 1, y, width, height, "east", srcOffset, index, zoom, format);
+            }
+            //  look NORTH, if not travelling south or at boundary
+            if (dir != "south" && y > 0)
+            {
+                // see what color is to the north
+                seeColor = GetBPPColor(src, x, y - (1 * zoom), srcOffset, index, zoom, format);
+                // if fillable, fill pixel and create spawn travelling north
+                if (seeColor == color)
+                    Fill(src, color, fillColor, x, y - 1, width, height, "north", srcOffset, index, zoom, format);
+            }
+            //  look SOUTH, if not travelling north or at boundary
+            if (dir != "north" && y < height * 8)
+            {
+                // see what color is to the south
+                seeColor = GetBPPColor(src, x, y + (1 * zoom), srcOffset, index, zoom, format);
+                // if fillable, fill pixel and create spawn travelling south
+                if (seeColor == color)
+                    Fill(src, color, fillColor, x, y + 1, width, height, "south", srcOffset, index, zoom, format);
+            }
+        }
+        private static int GetBPPOffset(int x, int y, int srcOffset, int index, int zoom, byte format, ref int bit)
+        {
             int offset = (y / (8 * zoom)) * 16 + (x / (8 * zoom));
             byte row = (byte)(y / zoom % 8);
             byte col = (byte)(x / zoom % 8);
-            byte bit = (byte)(col ^ 7);
+            bit = (byte)(col ^ 7);
             // for font dialogue characters only
             if (srcOffset == 0x18)
                 x += (8 * zoom);
@@ -993,48 +1098,38 @@ namespace LAZYSHELL
             offset += row * 2;
             offset += index * format;
             offset += srcOffset;
-            if (format == 0x20 && offset + 17 >= src.Length)
-                return color;
-            if (format == 0x10 && offset + 1 >= src.Length)
-                return color;
-            Point p;
-            Rectangle c;
-            switch (action)
+            return offset;
+        }
+        /// <summary>
+        /// Returns the color index of the BPP pixel at a given coordinate.
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <param name="format"></param>
+        /// <param name="bit"></param>
+        private static int GetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format)
+        {
+            int color = 0, bit = 0;
+            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit);
+            if (Bits.GetBit(src, offset, bit)) color |= 1;
+            if (Bits.GetBit(src, offset + 1, bit)) color |= 2;
+            if (format == 0x20)
             {
-                case "draw":
-                    Rectangle n = new Rectangle(new Point(x - (x % zoom), y - (y % zoom)), new Size(zoom, zoom));
-                    Bits.SetBit(src, offset, bit, (color & 1) == 1);
-                    Bits.SetBit(src, offset + 1, bit, (color & 2) == 2);
-                    if (format == 0x20)
-                    {
-                        Bits.SetBit(src, offset + 16, bit, (color & 4) == 4);
-                        Bits.SetBit(src, offset + 17, bit, (color & 8) == 8);
-                    }
-                    p = new Point(x / zoom * zoom, y / zoom * zoom);
-                    c = new Rectangle(p, new Size(zoom, zoom));
-                    graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[color])), c);
-                    break;
-                case "erase":
-                    Bits.SetBit(src, offset, bit, false);
-                    Bits.SetBit(src, offset + 1, bit, false);
-                    if (format == 0x20)
-                    {
-                        Bits.SetBit(src, offset + 16, bit, false);
-                        Bits.SetBit(src, offset + 17, bit, false);
-                    }
-                    break;
-                case "select":
-                    color = 0;
-                    if (Bits.GetBit(src, offset, bit)) color |= 1;
-                    if (Bits.GetBit(src, offset + 1, bit)) color |= 2;
-                    if (format == 0x20)
-                    {
-                        if (Bits.GetBit(src, offset + 16, bit)) color |= 4;
-                        if (Bits.GetBit(src, offset + 17, bit)) color |= 8;
-                    }
-                    break;
+                if (Bits.GetBit(src, offset + 16, bit)) color |= 4;
+                if (Bits.GetBit(src, offset + 17, bit)) color |= 8;
             }
             return color;
+        }
+        private static void SetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format, int color)
+        {
+            int bit = 0;
+            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit);
+            Bits.SetBit(src, offset, bit, (color & 1) == 1);
+            Bits.SetBit(src, offset + 1, bit, (color & 2) == 2);
+            if (format == 0x20)
+            {
+                Bits.SetBit(src, offset + 16, bit, (color & 4) == 4);
+                Bits.SetBit(src, offset + 17, bit, (color & 8) == 8);
+            }
         }
         /// <summary>
         /// Flip horizontally an array of pixels.
@@ -1237,7 +1332,9 @@ namespace LAZYSHELL
                     // first, flip the tiles
                     temp = tiles[(y * width) + a].Copy();
                     tiles[(y * width) + a] = tiles[(y * width) + b].Copy();
+                    tiles[(y * width) + a].TileIndex = (y * width) + a;
                     tiles[(y * width) + b] = temp.Copy();
+                    tiles[(y * width) + b].TileIndex = (y * width) + b;
                     // now flip subtiles in both tiles
                     Tile16x16 tile = tiles[(y * width) + a];
                     for (int c = 0; c < 2; c++)
@@ -1526,20 +1623,21 @@ namespace LAZYSHELL
         /// <summary>
         /// Returns a pixel array from a region in another pixel array.
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="src">The region of the pixel array to draw from.</param>
-        /// <param name="dst">The region of the pixel array to draw to.</param>
+        /// <param name="array">The array to get the region from.</param>
+        /// <param name="region">The region of the array to get.</param>
+        /// <param name="srcWidth">The width of the array being read.</param>
+        /// <param name="srcHeight">The height of the array being read.</param>
         /// <returns></returns>
-        public static int[] GetPixelRegion(int[] array, Rectangle src, Rectangle dst)
+        public static int[] GetPixelRegion(int[] array, Rectangle region, int srcWidth, int srcHeight)
         {
-            int[] temp = new int[dst.Width * dst.Height];
-            for (int y = 0; y < dst.Width; y++)
+            int[] temp = new int[region.Width * region.Height];
+            for (int y = 0; y < region.Height; y++)
             {
-                if (y + src.Y >= src.Height) break;
-                for (int x = 0; x < dst.Height; x++)
+                if (y + region.Y >= srcHeight) continue;
+                for (int x = 0; x < region.Width; x++)
                 {
-                    if (x + src.X >= src.Width) break;
-                    temp[y * dst.Width + x] = array[(y + src.Y) * src.Width + (x + src.X)];
+                    if (x + region.X >= srcWidth) continue;
+                    temp[y * region.Width + x] = array[(y + region.Y) * srcWidth + (x + region.X)];
                 }
             }
             return temp;
@@ -2266,6 +2364,185 @@ namespace LAZYSHELL
             palette[depth - 1] = darkest.ToArgb();
             return palette;
         }
+        /// <summary>
+        /// Colorize a pixel array.
+        /// </summary>
+        /// <param name="src">The pixel array to colorize.</param>
+        /// <param name="h">Hue (ie. the color).</param>
+        /// <param name="s">Saturation (ie. intensity of color).</param>
+        /// <param name="alpha">The opacity of the array.</param>
+        public static void Colorize(int[] src, double h, double s, double l_, int alpha)
+        {
+            h /= 360.0;
+            l_ /= 255.0;
+            for (int i = 0; i < src.Length; i++)
+            {
+                if (src[i] == 0)
+                    continue;
+                Color color = Color.FromArgb(src[i]);
+                double l = Math.Max(0, color.GetBrightness() + l_);
+                double r = 0, g = 0, b = 0;
+                double temp1, temp2;
+                if (l == 0)
+                {
+                    r = g = b = 0;
+                }
+                else
+                {
+                    if (s == 0)
+                    {
+                        r = g = b = l;
+                    }
+                    else
+                    {
+                        temp2 = ((l <= 0.5) ? l * (1.0 + s) : l + s - (l * s));
+                        temp1 = 2.0 * l - temp2;
+                        double[] t3 = new double[] { h + 1.0 / 3.0, h, h - 1.0 / 3.0 };
+                        double[] clr = new double[] { 0, 0, 0 };
+                        for (int a = 0; a < 3; a++)
+                        {
+                            if (t3[a] < 0)
+                                t3[a] += 1.0;
+                            if (t3[a] > 1)
+                                t3[a] -= 1.0;
+                            if (6.0 * t3[a] < 1.0)
+                                clr[a] = temp1 + (temp2 - temp1) * t3[a] * 6.0;
+                            else if (2.0 * t3[a] < 1.0)
+                                clr[a] = temp2;
+                            else if (3.0 * t3[a] < 2.0)
+                                clr[a] = (temp1 + (temp2 - temp1) * ((2.0 / 3.0) - t3[a]) * 6.0);
+                            else
+                                clr[a] = temp1;
+                        }
+                        r = clr[0];
+                        g = clr[1];
+                        b = clr[2];
+                    }
+                }
+                src[i] = Color.FromArgb(alpha, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255)).ToArgb();
+            }
+        }
+        public static void Colorize(int[] src, double h, double s)
+        {
+            Colorize(src, h, s, 0.0, 255);
+        }
+        /// <summary>
+        /// Apply a gradient effect to a pixel array.
+        /// </summary>
+        /// <param name="src">The pixel array to modify.</param>
+        /// <param name="width">Width, in pixels, of the array.</param>
+        /// <param name="height">Height, in pixels, of the array.</param>
+        /// <param name="lo">Brightness level to start at.</param>
+        /// <param name="hi">Brightness level to end at.</param>
+        /// <param name="vert">If set, gradient moves vertically; otherwise horizontally.</param>
+        /// <param name="dark">If set, gradient darkens; otherwise lightens.</param>
+        public static void Gradient(int[] src, int width, int height, double lo, double hi, bool vert)
+        {
+            double range = Math.Abs(hi - lo);
+            double l = lo;
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    if (src[y * width + x] == 0)
+                        continue;
+                    Color c = Color.FromArgb(src[y * width + x]);
+                    int r = (int)Math.Min(255, Math.Max(0, c.R + l));
+                    int g = (int)Math.Min(255, Math.Max(0, c.G + l));
+                    int b = (int)Math.Min(255, Math.Max(0, c.B + l));
+                    src[y * width + x] = Color.FromArgb((byte)r, (byte)g, (byte)b).ToArgb();
+                    if (!vert)
+                        GradientAdjust(ref l, width, lo > hi, range);
+                }
+                if (vert)
+                    GradientAdjust(ref l, height, lo > hi, range);
+                else
+                    l = 0;
+            }
+        }
+        private static void GradientAdjust(ref double l, int unit, bool dark, double range)
+        {
+            if (dark)
+                l -= range / (double)unit;
+            else
+                l += range / (double)unit;
+        }
+        public static void Border(int[] src, int width, int height, int size, Color color)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    if (src[y * width + x] == 0)
+                        continue;
+                    //Color c = Color.FromArgb(src[y * width + x]);
+                    //int r = Math.Min(255, c.R + 32);
+                    //int g = Math.Min(255, c.G + 32);
+                    //int b = Math.Min(255, c.B + 32);
+                    //int n = Color.FromArgb(r, g, b).ToArgb();
+                    int n = color.ToArgb();
+                    for (int e = size; e > 0; e--)
+                    {
+                        if (x - e < 0 || src[y * width + x - e] == 0)
+                            src[y * width + x] = n;
+                        if (x + e >= width || src[y * width + x + e] == 0)
+                            src[y * width + x] = n;
+                        if (y - e < 0 || src[(y - e) * width + x] == 0)
+                            src[y * width + x] = n;
+                        if (y + e >= height || src[(y + e) * width + x] == 0)
+                            src[y * width + x] = n;
+                    }
+                }
+            }
+        }
+        public static void Opacity(int[] src, int width, int height, byte opacity)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    if (src[y * width + x] == 0)
+                        continue;
+                    src[y * width + x] &= 0xFFFFFF;
+                    src[y * width + x] |= opacity << 24;
+                }
+            }
+        }
+        public static void Stipple(int[] src, int width, int height)
+        {
+            int e = 2;
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    if (src[y * width + x] == 0)
+                        continue;
+                    if (x - e >= 0 && src[y * width + x - e] != 0 &&
+                        x + e < width && src[y * width + x + e] != 0 &&
+                        y - e >= 0 && src[(y - e) * width + x] != 0 &&
+                        y + e < height && src[(y + e) * width + x] != 0)
+                        src[y * width + x] = 0;
+                    //else if (x + e >= width || src[y * width + x + e] == 0)
+                    //    src[y * width + x] = 0;
+                    //else if (y - e < 0 || src[(y - e) * width + x] == 0)
+                    //    src[y * width + x] = 0;
+                    //else if (y + e >= height || src[(y + e) * width + x] == 0)
+                    //    src[y * width + x] = 0;
+                }
+            }
+        }
+        public static void Tint(int[] src, Color tint)
+        {
+            for (int i = 0; i < src.Length; i++)
+            {
+                if (src[i] == 0) continue;
+                Color color = Color.FromArgb(src[i]);
+                int r = Math.Min(255, color.R + (tint.R / 2));
+                int g = Math.Min(255, color.G + (tint.G / 2));
+                int b = Math.Min(255, color.B + (tint.B / 2));
+                src[i] = Color.FromArgb(r, g, b).ToArgb();
+            }
+        }
         #endregion
         #region Text
         /// <summary>
@@ -2308,6 +2585,22 @@ namespace LAZYSHELL
         {
             index = original.IndexOf(value, comparisionType);
             return index >= 0;
+        }
+        public static bool Contains(string original, string value, StringComparison comparisionType, bool matchWholeWord)
+        {
+            int index = original.IndexOf(value, comparisionType);
+            if (!matchWholeWord)
+                return index >= 0;
+            else if (index >= 0)
+            {
+                if (index + value.Length < original.Length && Char.IsLetter(original, index + value.Length))
+                    return false;
+                if (index - 1 >= 0 && Char.IsLetter(original, index - 1))
+                    return false;
+                return true;
+            }
+            else
+                return false;
         }
         /// <summary>
         /// Searches for an occurrence of a tile within a tileset and returns the index of the occurrence if found.
@@ -2393,6 +2686,79 @@ namespace LAZYSHELL
         }
         public static void Search(object listControl, string name, bool ignoreCase)
         {
+        }
+        public static int IndexOf(string[] collection, string item)
+        {
+            for (int i = 0; i < collection.Length; i++)
+                if (item == collection[i])
+                    return i;
+            return -1;
+        }
+        public static string EventScriptToText(EventScript eventScript, int lines, int length)
+        {
+            StringBuilder sb = new StringBuilder();
+            ArrayList scriptCmds;
+            ArrayList actionQueues;
+            EventScriptCommand esc;
+            ActionQueueCommand aqc;
+            string command;
+            int line = 0;
+            scriptCmds = eventScript.Commands;
+            for (int j = 0; j < scriptCmds.Count && line < lines; j++, line++)
+            {
+                esc = (EventScriptCommand)scriptCmds[j];
+                if (esc.Opcode <= 0x2F && esc.Option <= 0xF1 && !esc.IsDummy)
+                {
+                    if (esc.Option == 0xF0 || esc.Option == 0xF1)
+                        sb.Append("   ");
+                    command = esc.ToString();
+                    if (command.Length > length)
+                        command = command.Remove(length) + "...";
+                    sb.Append(command + "\n");
+                    line++;
+                    if (esc.EmbeddedActionQueue.Commands != null)
+                    {
+                        actionQueues = esc.EmbeddedActionQueue.Commands;
+                        for (int k = 0; k < actionQueues.Count && line < lines; k++, line++)
+                        {
+                            aqc = (ActionQueueCommand)actionQueues[k];
+                            command = aqc.ToString();
+                            if (command.Length > length)
+                                command = command.Remove(length) + "...";
+                            sb.Append("   " + command + "\n");
+                        }
+                    }
+                }
+                else if (esc.IsDummy)   // 0xd01 and 0xe91 only
+                {
+                    sb.Append("NON-EMBEDDED ACTION QUEUE\n");
+                    line++;
+                    if (esc.EmbeddedActionQueue.Commands != null)
+                    {
+                        actionQueues = esc.EmbeddedActionQueue.Commands;
+                        for (int k = 0; k < actionQueues.Count && line < lines; k++, line++)
+                        {
+                            aqc = (ActionQueueCommand)actionQueues[k];
+                            command = aqc.ToString();
+                            if (command.Length > length)
+                                command = command.Remove(length) + "...";
+                            sb.Append("   " + command + "\n");
+                        }
+                    }
+                }
+                else
+                {
+                    command = esc.ToString();
+                    if (command.Length > length)
+                        command = command.Remove(length) + "...";
+                    sb.Append(command + "\n");
+                }
+            }
+            if (line >= lines)
+            {
+                sb.AppendLine("...");
+            }
+            return sb.ToString();
         }
         #endregion
         #region Data Managing
@@ -2759,20 +3125,25 @@ namespace LAZYSHELL
         }
         public static void DrawIcon(
             object sender, DrawItemEventArgs e, Preview preview, int iconIndex,
-            FontCharacter[] fontCharacters, int[] palette, bool shadow)
+            FontCharacter[] fontCharacters, int[] palette, bool shadow, Bitmap bgimage)
         {
             // set the pixels
             int[] temp = preview.GetPreview(fontCharacters, palette,
-                new char[] { (char)(e.Index + iconIndex) }, shadow);
+                new char[] { (char)(e.Index + iconIndex) }, shadow, false);
             int[] pixels = new int[256 * 14];
             for (int y = 0, c = 0; y < 14; y++, c++)
             {
                 for (int x = 2, a = 0; x < 256; x++, a++)
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
-            e.DrawBackground();
+            if (bgimage != null)
+            {
+                Rectangle background = new Rectangle(0, e.Index * 15 % bgimage.Height, bgimage.Width, 15);
+                e.Graphics.DrawImage(bgimage, e.Bounds.X, e.Bounds.Y, background, GraphicsUnit.Pixel);
+            }
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                e.DrawBackground();
             e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 14)), new Point(e.Bounds.X, e.Bounds.Y));
-            e.DrawFocusRectangle();
         }
         /// <summary>
         /// Paints the items in a DDList collection to a list control. 
@@ -2794,66 +3165,85 @@ namespace LAZYSHELL
         public static void DrawName(
             object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
             FontCharacter[] fontCharacters, int[] palette, int xOffset, int yOffset,
-            int startIndex, int endIndex, bool lastEmpty, bool shadow)
+            int startIndex, int endIndex, bool lastEmpty, bool shadow, Bitmap bgimage)
         {
             if (e.Index < 0 || e.Index >= names.Names.Length)
                 return;
+            string name;
             if (lastEmpty && names.GetNumFromIndex(e.Index) == names.Names.Length - 1)
-            {
-                e.DrawBackground();
-                e.Graphics.DrawString("{NOTHING}", e.Font, new SolidBrush(SystemColors.Control), e.Bounds);
-                e.DrawFocusRectangle();
-                return;
-            }
+                name = "NOTHING";
+            else
+                name = names.GetName(e.Index);
             // set the pixels
-            int[] temp = preview.GetPreview(fontCharacters, palette, names.GetName(e.Index).ToCharArray(), shadow);
+            int[] temp = preview.GetPreview(fontCharacters, palette, name.ToCharArray(), shadow, false);
             int[] pixels = new int[256 * 32];
             for (int y = 0, c = yOffset; y < 14; y++, c++)
             {
                 for (int x = 2, a = xOffset; x < 256; x++, a++)
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
-            e.DrawBackground();
+            if (bgimage != null)
+            {
+                Rectangle background = new Rectangle(0, e.Index * 15 % bgimage.Height, bgimage.Width, 15);
+                e.Graphics.DrawImage(bgimage, e.Bounds.X, e.Bounds.Y, background, GraphicsUnit.Pixel);
+            }
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                e.DrawBackground();
             e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 14)), new Point(e.Bounds.X, e.Bounds.Y));
-            e.DrawFocusRectangle();
+        }
+        public static void DrawName(
+            object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
+            FontCharacter[] fontCharacters, int[] palette, int xOffset, int yOffset,
+            int startIndex, int endIndex, bool lastEmpty, bool shadow)
+        {
+            DrawName(sender, e, preview, names, fontCharacters, palette, xOffset, yOffset, startIndex, endIndex, lastEmpty, shadow, null);
         }
         public static void DrawName(
             object sender, DrawItemEventArgs e, Preview preview, string[] names,
             FontCharacter[] fontCharacters, int[] palette, int xOffset, int yOffset,
-            int startIndex, int endIndex, bool lastEmpty, bool shadow)
+            int startIndex, int endIndex, bool lastEmpty, bool shadow, Bitmap bgimage)
         {
             if (e.Index < 0 || e.Index >= names.Length)
                 return;
+            string name;
             if (lastEmpty && e.Index == names.Length - 1)
-            {
-                e.DrawBackground();
-                e.Graphics.DrawString("{NOTHING}", e.Font, new SolidBrush(SystemColors.Control), e.Bounds);
-                e.DrawFocusRectangle();
-                return;
-            }
+                name = "NOTHING";
+            else
+                name = names[e.Index];
             // set the pixels
-            int[] temp = preview.GetPreview(fontCharacters, palette, names[e.Index].ToCharArray(), shadow);
+            int[] temp = preview.GetPreview(fontCharacters, palette, name.ToCharArray(), shadow, false);
             int[] pixels = new int[256 * 32];
             for (int y = 0, c = yOffset; y < 14; y++, c++)
             {
                 for (int x = 2, a = xOffset; x < 256; x++, a++)
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
-            e.DrawBackground();
+            if (bgimage != null)
+            {
+                Rectangle background = new Rectangle(0, e.Index * 15 % bgimage.Height, bgimage.Width, 16);
+                e.Graphics.DrawImage(bgimage, e.Bounds.X, e.Bounds.Y, background, GraphicsUnit.Pixel);
+            }
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                e.DrawBackground();
             e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 14)), new Point(e.Bounds.X, e.Bounds.Y));
-            e.DrawFocusRectangle();
         }
         public static void DrawName(
             object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
             FontCharacter[] fontCharacters, int[] palette, bool shadow)
         {
-            DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, false, shadow);
+            DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, false, shadow, null);
+        }
+        public static void DrawName(
+            object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
+            FontCharacter[] fontCharacters, int[] palette, bool shadow, Bitmap bgimage)
+        {
+            DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, false, shadow, bgimage);
         }
         public static void DrawName(
             object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
             FontCharacter[] fontCharacters, int[] palette)
         {
-            DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, false, false);
+            DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, false, false, null);
         }
         public static void SelectAllNodes(TreeNodeCollection nodes, bool selected)
         {
@@ -2862,6 +3252,13 @@ namespace LAZYSHELL
                 tn.Checked = selected;
                 SelectAllNodes(tn.Nodes, selected);
             }
+        }
+        public static void SelectAll(Control control, bool selected)
+        {
+            if (control.GetType() == typeof(CheckBox))
+                ((CheckBox)control).Checked = selected;
+            foreach (Control child in control.Controls)
+                SelectAll(child, selected);
         }
         /// <summary>
         /// Enable or disable all or some controls within a parent control, starting at the parent control.
@@ -2926,14 +3323,26 @@ namespace LAZYSHELL
         }
         public static void SetTreeViewScrollPos(TreeView treeView, Point scrollPosition)
         {
+            treeView.BeginUpdate();
             SetScrollPos((IntPtr)treeView.Handle, SB_HORZ, scrollPosition.X, true);
             SetScrollPos((IntPtr)treeView.Handle, SB_VERT, scrollPosition.Y, true);
+            treeView.EndUpdate();
+        }
+        public static void RemoveClickEvent(ToolStripMenuItem b)
+        {
+            FieldInfo f1 = typeof(Control).GetField("EventClick",
+                BindingFlags.Static | BindingFlags.NonPublic);
+            object obj = f1.GetValue(b);
+            PropertyInfo pi = b.GetType().GetProperty("Events",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+            EventHandlerList list = (EventHandlerList)pi.GetValue(b, null);
+            list.RemoveHandler(obj, list[obj]);
         }
         #endregion
         #region LAZYSHELL Functions
         public static bool Compare(Tile8x8 subtileA, Tile8x8 subtileB)
         {
-            if (subtileA.Pixels == subtileB.Pixels &&
+            if (Bits.Compare(subtileA.Pixels, subtileB.Pixels) &&
                 subtileA.PaletteIndex == subtileB.PaletteIndex &&
                 subtileA.TileIndex == subtileB.TileIndex &&
                 subtileA.PriorityOne == subtileB.PriorityOne &&
@@ -2956,6 +3365,107 @@ namespace LAZYSHELL
             Stream s = new MemoryStream(wav);
             soundPlayer.Stream = s;
             soundPlayer.Play();
+        }
+        public static bool Contains(List<HexEditor.Change> items, int offset)
+        {
+            foreach (HexEditor.Change change in items)
+                if (change.Offset == offset)
+                    return true;
+            return false;
+        }
+        public static HexEditor.Change FindOffset(List<HexEditor.Change> items, int offset)
+        {
+            foreach (HexEditor.Change change in items)
+                if (offset >= change.Offset && offset <= change.Offset + change.Values.Length)
+                    return change;
+            return null;
+        }
+        public static long GenerateChecksum(params object[] OBJECTS)
+        {
+            try
+            {
+                byte[] bytes;
+                int check = 0;
+                MemoryStream ms;
+                BinaryFormatter bf;
+                foreach (object OBJECT in OBJECTS)
+                {
+                    if (OBJECT.GetType() == typeof(byte[]))
+                        bytes = (byte[])OBJECT;
+                    else if (OBJECT.GetType() == typeof(byte[][]))
+                    {
+                        foreach (byte[] array in (byte[][])OBJECT)
+                        {
+                            for (int i = 0; array != null && i < array.Length; i++)
+                                check += array[i];
+                        }
+                        continue;
+                    }
+                    else if (OBJECT.GetType() == typeof(E_Animation[]))
+                    {
+                        foreach (E_Animation ea in (E_Animation[])OBJECT)
+                        {
+                            bytes = ea.SM;
+                            for (int i = 0; i < bytes.Length; i++)
+                                check += bytes[i];
+                        }
+                        continue;
+                    }
+                    else if (OBJECT.GetType() == typeof(EventScript[]))
+                    {
+                        foreach (EventScript es in (EventScript[])OBJECT)
+                        {
+                            bytes = es.Script;
+                            for (int i = 0; i < bytes.Length; i++)
+                                check += bytes[i];
+                        }
+                        continue;
+                    }
+                    else if (OBJECT.GetType() == typeof(ActionQueue[]))
+                    {
+                        foreach (ActionQueue ac in (ActionQueue[])OBJECT)
+                        {
+                            bytes = ac.ActionQueueData;
+                            for (int i = 0; i < bytes.Length; i++)
+                                check += bytes[i];
+                        }
+                        continue;
+                    }
+                    else if (OBJECT.GetType() == typeof(Animation[]))
+                    {
+                        foreach (Animation sa in (Animation[])OBJECT)
+                        {
+                            bytes = sa.SM;
+                            for (int i = 0; i < bytes.Length; i++)
+                                check += bytes[i];
+                        }
+                        continue;
+                    }
+                    else
+                    {
+                        ms = new MemoryStream();
+                        bf = new BinaryFormatter();
+                        bf.Serialize(ms, OBJECT);
+                        bytes = ms.ToArray();
+                    }
+                    for (int i = 0; i < bytes.Length; i++)
+                        check += bytes[i];
+                }
+                return check;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        public static Tile16x16 Contains(Tile16x16[] tileset, Tile16x16 tile)
+        {
+            for (int i = 0; i < tileset.Length; i++)
+            {
+                if (Compare(tileset[i], tile))
+                    return tileset[i];
+            }
+            return null;
         }
         #endregion
         #region Math Functions

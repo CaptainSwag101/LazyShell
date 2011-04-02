@@ -5,8 +5,10 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class MapPoint
     {
+        [NonSerialized()]
         private byte[] data;
         private int index; public int Index { get { return index; } }
         private char[] name; public char[] Name { get { return name; } set { name = value; } }
@@ -236,6 +238,10 @@ namespace LAZYSHELL
             toWestEnabled = false;
             toNorthEnabled = false;
             name = new char[0];
+        }
+        public override string ToString()
+        {
+            return Do.RawToASCII(name, LAZYSHELL.Properties.Settings.Default.Keystrokes);
         }
     }
 }

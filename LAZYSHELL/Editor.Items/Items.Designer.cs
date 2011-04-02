@@ -99,7 +99,6 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.itemName = new LAZYSHELL.ToolStripComboBox();
             this.itemNum = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.itemNameIcon = new LAZYSHELL.ToolStripComboBox();
             this.textBoxItemName = new System.Windows.Forms.ToolStripTextBox();
             this.lvl1TimingEnd = new System.Windows.Forms.TrackBar();
@@ -191,9 +190,9 @@
             this.panel190.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel190.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel190.Controls.Add(this.panel189);
-            this.panel190.Location = new System.Drawing.Point(218, 182);
+            this.panel190.Location = new System.Drawing.Point(203, 174);
             this.panel190.Name = "panel190";
-            this.panel190.Size = new System.Drawing.Size(178, 55);
+            this.panel190.Size = new System.Drawing.Size(177, 55);
             this.panel190.TabIndex = 551;
             // 
             // panel189
@@ -203,7 +202,7 @@
             this.panel189.Controls.Add(this.itemElemWeak);
             this.panel189.Location = new System.Drawing.Point(0, 0);
             this.panel189.Name = "panel189";
-            this.panel189.Size = new System.Drawing.Size(174, 51);
+            this.panel189.Size = new System.Drawing.Size(173, 51);
             this.panel189.TabIndex = 534;
             // 
             // label89
@@ -214,7 +213,7 @@
             this.label89.Location = new System.Drawing.Point(0, 0);
             this.label89.Name = "label89";
             this.label89.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label89.Size = new System.Drawing.Size(174, 17);
+            this.label89.Size = new System.Drawing.Size(173, 17);
             this.label89.TabIndex = 473;
             this.label89.Text = "ELEMENT WEAKNESSES...";
             // 
@@ -231,7 +230,7 @@
             this.itemElemWeak.Location = new System.Drawing.Point(0, 19);
             this.itemElemWeak.MultiColumn = true;
             this.itemElemWeak.Name = "itemElemWeak";
-            this.itemElemWeak.Size = new System.Drawing.Size(174, 32);
+            this.itemElemWeak.Size = new System.Drawing.Size(173, 32);
             this.itemElemWeak.TabIndex = 148;
             this.itemElemWeak.SelectedIndexChanged += new System.EventHandler(this.itemElemWeak_SelectedIndexChanged);
             // 
@@ -240,9 +239,9 @@
             this.panel187.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel187.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel187.Controls.Add(this.panel181);
-            this.panel187.Location = new System.Drawing.Point(218, 28);
+            this.panel187.Location = new System.Drawing.Point(203, 28);
             this.panel187.Name = "panel187";
-            this.panel187.Size = new System.Drawing.Size(178, 87);
+            this.panel187.Size = new System.Drawing.Size(177, 87);
             this.panel187.TabIndex = 549;
             // 
             // panel181
@@ -252,7 +251,7 @@
             this.panel181.Controls.Add(this.itemStatusEffect);
             this.panel181.Location = new System.Drawing.Point(0, 0);
             this.panel181.Name = "panel181";
-            this.panel181.Size = new System.Drawing.Size(174, 83);
+            this.panel181.Size = new System.Drawing.Size(173, 83);
             this.panel181.TabIndex = 526;
             // 
             // label101
@@ -263,7 +262,7 @@
             this.label101.Location = new System.Drawing.Point(0, 0);
             this.label101.Name = "label101";
             this.label101.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label101.Size = new System.Drawing.Size(174, 17);
+            this.label101.Size = new System.Drawing.Size(173, 17);
             this.label101.TabIndex = 474;
             this.label101.Text = "EFFECT";
             // 
@@ -283,7 +282,7 @@
             this.itemStatusEffect.Location = new System.Drawing.Point(0, 19);
             this.itemStatusEffect.MultiColumn = true;
             this.itemStatusEffect.Name = "itemStatusEffect";
-            this.itemStatusEffect.Size = new System.Drawing.Size(174, 64);
+            this.itemStatusEffect.Size = new System.Drawing.Size(173, 64);
             this.itemStatusEffect.TabIndex = 149;
             this.itemStatusEffect.SelectedIndexChanged += new System.EventHandler(this.itemStatusEffect_SelectedIndexChanged);
             // 
@@ -292,9 +291,9 @@
             this.panel185.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel185.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel185.Controls.Add(this.panel180);
-            this.panel185.Location = new System.Drawing.Point(218, 243);
+            this.panel185.Location = new System.Drawing.Point(203, 231);
             this.panel185.Name = "panel185";
-            this.panel185.Size = new System.Drawing.Size(178, 55);
+            this.panel185.Size = new System.Drawing.Size(177, 55);
             this.panel185.TabIndex = 552;
             // 
             // panel180
@@ -304,7 +303,7 @@
             this.panel180.Controls.Add(this.itemStatusChange);
             this.panel180.Location = new System.Drawing.Point(0, 0);
             this.panel180.Name = "panel180";
-            this.panel180.Size = new System.Drawing.Size(174, 51);
+            this.panel180.Size = new System.Drawing.Size(173, 51);
             this.panel180.TabIndex = 525;
             // 
             // label99
@@ -315,7 +314,7 @@
             this.label99.Location = new System.Drawing.Point(0, 0);
             this.label99.Name = "label99";
             this.label99.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label99.Size = new System.Drawing.Size(174, 17);
+            this.label99.Size = new System.Drawing.Size(173, 17);
             this.label99.TabIndex = 475;
             this.label99.Text = "STATUS CHANGE...";
             // 
@@ -332,7 +331,7 @@
             this.itemStatusChange.Location = new System.Drawing.Point(0, 19);
             this.itemStatusChange.MultiColumn = true;
             this.itemStatusChange.Name = "itemStatusChange";
-            this.itemStatusChange.Size = new System.Drawing.Size(174, 32);
+            this.itemStatusChange.Size = new System.Drawing.Size(173, 32);
             this.itemStatusChange.TabIndex = 150;
             this.itemStatusChange.SelectedIndexChanged += new System.EventHandler(this.itemStatusChange_SelectedIndexChanged);
             // 
@@ -341,9 +340,9 @@
             this.panel188.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel188.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel188.Controls.Add(this.panel183);
-            this.panel188.Location = new System.Drawing.Point(218, 121);
+            this.panel188.Location = new System.Drawing.Point(203, 117);
             this.panel188.Name = "panel188";
-            this.panel188.Size = new System.Drawing.Size(178, 55);
+            this.panel188.Size = new System.Drawing.Size(177, 55);
             this.panel188.TabIndex = 550;
             // 
             // panel183
@@ -353,7 +352,7 @@
             this.panel183.Controls.Add(this.itemElemNull);
             this.panel183.Location = new System.Drawing.Point(0, 0);
             this.panel183.Name = "panel183";
-            this.panel183.Size = new System.Drawing.Size(174, 51);
+            this.panel183.Size = new System.Drawing.Size(173, 51);
             this.panel183.TabIndex = 528;
             // 
             // label67
@@ -364,7 +363,7 @@
             this.label67.Location = new System.Drawing.Point(0, 0);
             this.label67.Name = "label67";
             this.label67.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label67.Size = new System.Drawing.Size(174, 17);
+            this.label67.Size = new System.Drawing.Size(173, 17);
             this.label67.TabIndex = 472;
             this.label67.Text = "ELEMENT NULLIFICATION...";
             // 
@@ -381,7 +380,7 @@
             this.itemElemNull.Location = new System.Drawing.Point(0, 19);
             this.itemElemNull.MultiColumn = true;
             this.itemElemNull.Name = "itemElemNull";
-            this.itemElemNull.Size = new System.Drawing.Size(174, 32);
+            this.itemElemNull.Size = new System.Drawing.Size(173, 32);
             this.itemElemNull.TabIndex = 147;
             this.itemElemNull.SelectedIndexChanged += new System.EventHandler(this.itemElemNull_SelectedIndexChanged);
             // 
@@ -390,9 +389,9 @@
             this.panel186.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel186.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel186.Controls.Add(this.panel182);
-            this.panel186.Location = new System.Drawing.Point(218, 304);
+            this.panel186.Location = new System.Drawing.Point(203, 288);
             this.panel186.Name = "panel186";
-            this.panel186.Size = new System.Drawing.Size(178, 71);
+            this.panel186.Size = new System.Drawing.Size(177, 71);
             this.panel186.TabIndex = 553;
             // 
             // panel182
@@ -402,7 +401,7 @@
             this.panel182.Controls.Add(this.itemWhoEquip);
             this.panel182.Location = new System.Drawing.Point(0, 0);
             this.panel182.Name = "panel182";
-            this.panel182.Size = new System.Drawing.Size(174, 67);
+            this.panel182.Size = new System.Drawing.Size(173, 67);
             this.panel182.TabIndex = 527;
             // 
             // label86
@@ -413,7 +412,7 @@
             this.label86.Location = new System.Drawing.Point(0, 0);
             this.label86.Name = "label86";
             this.label86.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label86.Size = new System.Drawing.Size(174, 17);
+            this.label86.Size = new System.Drawing.Size(173, 17);
             this.label86.TabIndex = 476;
             this.label86.Text = "WHO CAN EQUIP";
             // 
@@ -431,7 +430,7 @@
             this.itemWhoEquip.Location = new System.Drawing.Point(0, 19);
             this.itemWhoEquip.MultiColumn = true;
             this.itemWhoEquip.Name = "itemWhoEquip";
-            this.itemWhoEquip.Size = new System.Drawing.Size(174, 48);
+            this.itemWhoEquip.Size = new System.Drawing.Size(173, 48);
             this.itemWhoEquip.TabIndex = 151;
             this.itemWhoEquip.SelectedIndexChanged += new System.EventHandler(this.itemWhoEquip_SelectedIndexChanged);
             // 
@@ -440,7 +439,7 @@
             this.panel184.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel184.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel184.Controls.Add(this.panel179);
-            this.panel184.Location = new System.Drawing.Point(12, 381);
+            this.panel184.Location = new System.Drawing.Point(1, 373);
             this.panel184.Name = "panel184";
             this.panel184.Size = new System.Drawing.Size(200, 71);
             this.panel184.TabIndex = 554;
@@ -492,7 +491,7 @@
             this.textBoxItemDescription.Location = new System.Drawing.Point(0, 90);
             this.textBoxItemDescription.MaxLength = 127;
             this.textBoxItemDescription.Name = "textBoxItemDescription";
-            this.textBoxItemDescription.Size = new System.Drawing.Size(173, 37);
+            this.textBoxItemDescription.Size = new System.Drawing.Size(173, 45);
             this.textBoxItemDescription.TabIndex = 1;
             this.textBoxItemDescription.Text = "";
             this.textBoxItemDescription.TextChanged += new System.EventHandler(this.textBoxItemDescription_TextChanged);
@@ -502,7 +501,7 @@
             this.panel175.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel175.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel175.Controls.Add(this.panel60);
-            this.panel175.Location = new System.Drawing.Point(12, 458);
+            this.panel175.Location = new System.Drawing.Point(1, 446);
             this.panel175.Name = "panel175";
             this.panel175.Size = new System.Drawing.Size(200, 73);
             this.panel175.TabIndex = 555;
@@ -582,7 +581,7 @@
             this.panel173.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel173.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel173.Controls.Add(this.panel58);
-            this.panel173.Location = new System.Drawing.Point(12, 200);
+            this.panel173.Location = new System.Drawing.Point(1, 196);
             this.panel173.Name = "panel173";
             this.panel173.Size = new System.Drawing.Size(200, 175);
             this.panel173.TabIndex = 547;
@@ -780,7 +779,7 @@
             this.panel172.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel172.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel172.Controls.Add(this.panel93);
-            this.panel172.Location = new System.Drawing.Point(12, 28);
+            this.panel172.Location = new System.Drawing.Point(1, 28);
             this.panel172.Name = "panel172";
             this.panel172.Size = new System.Drawing.Size(200, 166);
             this.panel172.TabIndex = 546;
@@ -1054,29 +1053,28 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.itemName,
             this.itemNum,
-            this.toolStripSeparator1,
             this.itemNameIcon,
             this.textBoxItemName});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(408, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(381, 25);
             this.toolStrip1.TabIndex = 557;
             // 
             // itemName
             // 
             this.itemName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.itemName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.itemName.DropDownHeight = 506;
+            this.itemName.DropDownHeight = 497;
             this.itemName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemName.DropDownWidth = 200;
+            this.itemName.DropDownWidth = 146;
             this.itemName.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.itemName.ItemHeight = 15;
             this.itemName.Location = new System.Drawing.Point(7, 1);
             this.itemName.Name = "itemName";
             this.itemName.SelectedIndex = -1;
             this.itemName.SelectedItem = null;
-            this.itemName.Size = new System.Drawing.Size(160, 22);
+            this.itemName.Size = new System.Drawing.Size(146, 22);
             this.itemName.SelectedIndexChanged += new System.EventHandler(this.itemName_SelectedIndexChanged);
             this.itemName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             // 
@@ -1086,7 +1084,7 @@
             this.itemNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.itemNum.ForeColor = System.Drawing.SystemColors.Control;
             this.itemNum.Hexadecimal = false;
-            this.itemNum.Location = new System.Drawing.Point(167, 1);
+            this.itemNum.Location = new System.Drawing.Point(154, 1);
             this.itemNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1098,7 +1096,8 @@
             0,
             0});
             this.itemNum.Name = "itemNum";
-            this.itemNum.Size = new System.Drawing.Size(48, 22);
+            this.itemNum.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.itemNum.Size = new System.Drawing.Size(50, 22);
             this.itemNum.Text = "0";
             this.itemNum.Value = new decimal(new int[] {
             0,
@@ -1107,24 +1106,18 @@
             0});
             this.itemNum.ValueChanged += new System.EventHandler(this.itemNum_ValueChanged);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // itemNameIcon
             // 
             this.itemNameIcon.AutoSize = false;
             this.itemNameIcon.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.itemNameIcon.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.itemNameIcon.DropDownHeight = 500;
+            this.itemNameIcon.DropDownHeight = 497;
             this.itemNameIcon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemNameIcon.DropDownWidth = 100;
+            this.itemNameIcon.DropDownWidth = 40;
             this.itemNameIcon.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.itemNameIcon.ItemHeight = 15;
-            this.itemNameIcon.Location = new System.Drawing.Point(221, 2);
+            this.itemNameIcon.Location = new System.Drawing.Point(203, 2);
             this.itemNameIcon.Name = "itemNameIcon";
-            this.itemNameIcon.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.itemNameIcon.SelectedIndex = -1;
             this.itemNameIcon.SelectedItem = null;
             this.itemNameIcon.Size = new System.Drawing.Size(36, 21);
@@ -1145,7 +1138,7 @@
             this.lvl1TimingEnd.Location = new System.Drawing.Point(164, 73);
             this.lvl1TimingEnd.Maximum = 128;
             this.lvl1TimingEnd.Name = "lvl1TimingEnd";
-            this.lvl1TimingEnd.Size = new System.Drawing.Size(216, 17);
+            this.lvl1TimingEnd.Size = new System.Drawing.Size(211, 17);
             this.lvl1TimingEnd.TabIndex = 569;
             this.lvl1TimingEnd.TickStyle = System.Windows.Forms.TickStyle.None;
             this.lvl1TimingEnd.ValueChanged += new System.EventHandler(this.lvl1TimingEnd_ValueChanged);
@@ -1157,7 +1150,7 @@
             this.lvl2TimingStart.Location = new System.Drawing.Point(164, 37);
             this.lvl2TimingStart.Maximum = 128;
             this.lvl2TimingStart.Name = "lvl2TimingStart";
-            this.lvl2TimingStart.Size = new System.Drawing.Size(216, 17);
+            this.lvl2TimingStart.Size = new System.Drawing.Size(211, 17);
             this.lvl2TimingStart.TabIndex = 565;
             this.lvl2TimingStart.TickStyle = System.Windows.Forms.TickStyle.None;
             this.lvl2TimingStart.ValueChanged += new System.EventHandler(this.lvl2TimingStart_ValueChanged);
@@ -1169,7 +1162,7 @@
             this.lvl2TimingEnd.Location = new System.Drawing.Point(164, 55);
             this.lvl2TimingEnd.Maximum = 128;
             this.lvl2TimingEnd.Name = "lvl2TimingEnd";
-            this.lvl2TimingEnd.Size = new System.Drawing.Size(216, 17);
+            this.lvl2TimingEnd.Size = new System.Drawing.Size(211, 17);
             this.lvl2TimingEnd.TabIndex = 567;
             this.lvl2TimingEnd.TickStyle = System.Windows.Forms.TickStyle.None;
             this.lvl2TimingEnd.ValueChanged += new System.EventHandler(this.lvl2TimingEnd_ValueChanged);
@@ -1181,7 +1174,7 @@
             this.lvl1TimingStart.Location = new System.Drawing.Point(164, 19);
             this.lvl1TimingStart.Maximum = 128;
             this.lvl1TimingStart.Name = "lvl1TimingStart";
-            this.lvl1TimingStart.Size = new System.Drawing.Size(216, 17);
+            this.lvl1TimingStart.Size = new System.Drawing.Size(211, 17);
             this.lvl1TimingStart.TabIndex = 563;
             this.lvl1TimingStart.TickStyle = System.Windows.Forms.TickStyle.None;
             this.lvl1TimingStart.ValueChanged += new System.EventHandler(this.lvl1TimingStart_ValueChanged);
@@ -1291,9 +1284,9 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(12, 537);
+            this.panel1.Location = new System.Drawing.Point(1, 521);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(384, 94);
+            this.panel1.Size = new System.Drawing.Size(379, 94);
             this.panel1.TabIndex = 570;
             this.panel1.Visible = false;
             // 
@@ -1315,7 +1308,7 @@
             this.panel2.Controls.Add(this.label160);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(380, 90);
+            this.panel2.Size = new System.Drawing.Size(375, 90);
             this.panel2.TabIndex = 571;
             // 
             // label208
@@ -1326,7 +1319,7 @@
             this.label208.Location = new System.Drawing.Point(0, 0);
             this.label208.Name = "label208";
             this.label208.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label208.Size = new System.Drawing.Size(380, 17);
+            this.label208.Size = new System.Drawing.Size(375, 17);
             this.label208.TabIndex = 570;
             this.label208.Text = "WEAPON TIMING...";
             this.label208.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1337,9 +1330,9 @@
             this.panelItemDesc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelItemDesc.Controls.Add(this.panel45);
             this.panelItemDesc.Controls.Add(this.label55);
-            this.panelItemDesc.Location = new System.Drawing.Point(219, 381);
+            this.panelItemDesc.Location = new System.Drawing.Point(203, 361);
             this.panelItemDesc.Name = "panelItemDesc";
-            this.panelItemDesc.Size = new System.Drawing.Size(177, 150);
+            this.panelItemDesc.Size = new System.Drawing.Size(177, 158);
             this.panelItemDesc.TabIndex = 571;
             // 
             // panel45
@@ -1352,7 +1345,7 @@
             this.panel45.Controls.Add(this.pictureBoxItemDesc);
             this.panel45.Location = new System.Drawing.Point(0, 19);
             this.panel45.Name = "panel45";
-            this.panel45.Size = new System.Drawing.Size(173, 127);
+            this.panel45.Size = new System.Drawing.Size(173, 135);
             this.panel45.TabIndex = 111;
             // 
             // button33
@@ -1451,7 +1444,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 644);
+            this.ClientSize = new System.Drawing.Size(381, 616);
             this.ControlBox = false;
             this.Controls.Add(this.panelItemDesc);
             this.Controls.Add(this.panel1);
@@ -1616,7 +1609,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label208;
         private ToolStripNumericUpDown itemNum;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel panelItemDesc;
         private System.Windows.Forms.Panel panel45;
         private System.Windows.Forms.Button button33;
