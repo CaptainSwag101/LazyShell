@@ -385,6 +385,7 @@ namespace LAZYSHELL
                 {
                     for (int x = location.X, x_ = 0; x < location.X + size.Width; x++, x_++)
                     {
+                        if (x < 0 || y < 0 || x_ < 0 || y_ < 0) continue;
                         byte temp = src[y * srcSize.Width + x];
                         src[y * srcSize.Width + x] = changes[y_ * size.Width + x_];
                         changes[y_ * size.Width + x_] = temp;
@@ -403,7 +404,7 @@ namespace LAZYSHELL
             if (tilesetImage != null)
                 e.Graphics.DrawImage(tilesetImage, 0, 0, 128, (int)e_tileSetSize.Value / 64 * 16);
             if (e_moldShowGrid.Checked)
-                overlay.DrawCartographicGrid(e.Graphics, Color.Gray, pictureBoxEffectTileset.Size, new Size(16, 16), 1);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxEffectTileset.Size, new Size(16, 16), 1);
             if (overlay.SelectTS != null)
                 overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
         }
@@ -477,7 +478,7 @@ namespace LAZYSHELL
             if (mouseEnter && e.ClipRectangle.Size != new Size(16, 16))
                 DrawHoverBox(e.Graphics);
             if (e_moldShowGrid.Checked)
-                overlay.DrawCartographicGrid(e.Graphics, Color.Gray, pictureBoxE_Mold.Size, new Size(16, 16), zoom);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxE_Mold.Size, new Size(16, 16), zoom);
             if (select.Checked)
             {
                 if (overlay.Select != null)

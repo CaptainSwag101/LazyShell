@@ -15,14 +15,15 @@ namespace LAZYSHELL
         private int currentIndex;
         private int start = 0;
         private int end = 0;
-        private Type type;
-
+        private Type type = null;
+        // constructor
         public ClearElements(object element, int currentIndex, string title)
         {
             this.element = element;
             this.currentIndex = currentIndex;
             this.start = this.end = currentIndex;
-            this.type = element.GetType();
+            if (element != null)
+                this.type = element.GetType();
             InitializeComponent();
 
             this.Text = title;
@@ -41,20 +42,37 @@ namespace LAZYSHELL
                 toIndex.Value = toIndex.Maximum = Model.TileSetsBF.Length - 1;
             start = end = currentIndex;
         }
-
+        // event handlers
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                fromIndex.Enabled = false;
+                toIndex.Enabled = false;
+                start = end = currentIndex;
+            }
+        }
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked)
+            {
+                fromIndex.Enabled = true;
+                toIndex.Enabled = true;
+                start = (int)fromIndex.Value;
+                end = (int)toIndex.Value;
+            }
+        }
         private void fromDialogue_ValueChanged(object sender, EventArgs e)
         {
             toIndex.Minimum = fromIndex.Value;
             start = (int)fromIndex.Value;
         }
-
         private void toDialogue_ValueChanged(object sender, EventArgs e)
         {
             fromIndex.Maximum = toIndex.Value;
             end = (int)toIndex.Value;
         }
-
-        private void buttonOK_Click(object sender, EventArgs e)
+        public void buttonOK_Click(object sender, EventArgs e)
         {
             for (int i = start; type != null && i <= end; i++)
                 ((Element[])element)[i].Clear();
@@ -115,32 +133,10 @@ namespace LAZYSHELL
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton1.Checked)
-            {
-                fromIndex.Enabled = false;
-                toIndex.Enabled = false;
-                start = end = currentIndex;
-            }
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton2.Checked)
-            {
-                fromIndex.Enabled = true;
-                toIndex.Enabled = true;
-                start = (int)fromIndex.Value;
-                end = (int)toIndex.Value;
-            }
         }
     }
 }

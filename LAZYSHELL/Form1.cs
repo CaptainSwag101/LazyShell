@@ -29,8 +29,7 @@ namespace LAZYSHELL
         [DllImport("advapi32.dll", EntryPoint = "RegDeleteKey")]
         public static extern int RegDeleteKeyA(int hKey, string lpSubKey);
 
-        private ImportElements importElements;
-        private BaseConvertor baseConvertor;
+        private Restore importElements;
         public Panel Panel2 { get { return panel2; } set { panel2 = value; } }
         #endregion
         // Constructor
@@ -87,6 +86,8 @@ namespace LAZYSHELL
                 MessageBox.Show("All of the editor's windows must be closed before loading a new ROM.", "LAZY SHELL");
                 return;
             }
+            else if (Model.HexViewer != null && Model.HexViewer.Visible)
+                Model.HexViewer.Close();
             bool ret;
 
             if (filename == null) // Load the rom
@@ -156,6 +157,8 @@ namespace LAZYSHELL
         }
         private void CloseROM()
         {
+            if (AppControl.AssembleAndCloseWindows())
+                return;
             AppControl.CloseRomFile();
             toolStrip2.Enabled = false;
             toolStrip3.Enabled = false;
@@ -163,6 +166,8 @@ namespace LAZYSHELL
                 if (item != recentFiles && item != openSettings && item != toolStripButton5)
                     item.Enabled = false;
             this.removeHeader.Visible = false;
+            this.loadRomTextBox.Text = "";
+            this.romInfo.Text = "";
         }
         public void UpdateRomInfo()
         {
@@ -315,9 +320,8 @@ namespace LAZYSHELL
         {
             if (saveToolStripMenuItem.Enabled)
                 FinalizeAndSave(null, 0);
-            CloseROM();
-            this.loadRomTextBox.Text = "";
-            this.romInfo.Text = "";
+            if (!cancelAnotherLoad)
+                CloseROM();
         }
         private void showROMInfo_Click(object sender, EventArgs e)
         {
@@ -357,7 +361,7 @@ namespace LAZYSHELL
         }
         private void restoreElementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            importElements = new ImportElements();
+            importElements = new Restore();
             importElements.Show();
         }
         private void publishRomToolStripMenuItem_Click(object sender, EventArgs e)
@@ -370,10 +374,10 @@ namespace LAZYSHELL
             new SettingsEditor().ShowDialog();
         }
         // toolStripMenuitems : Help
-        private void baseConvertorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void hexViewer_Click(object sender, EventArgs e)
         {
-            baseConvertor = new BaseConvertor();
-            baseConvertor.Show();
+            Model.HexViewer.Show();
+            Model.HexViewer.BringToFront();
         }
         private void helpToolStripMenuItem1_Click(object sender, System.EventArgs e)
         {
@@ -541,10 +545,5 @@ namespace LAZYSHELL
             AppControl.ClearAll();
         }
         #endregion
-
-        private void hexViewer_Click(object sender, EventArgs e)
-        {
-            Model.HexViewer.Show();
-        }
     }
 }

@@ -123,13 +123,6 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap buttonClickDrag {
-            get {
-                object obj = ResourceManager.GetObject("buttonClickDrag", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap buttonEventField {
             get {
                 object obj = ResourceManager.GetObject("buttonEventField", resourceCulture);
@@ -210,13 +203,6 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap buttonToggleOrthGrid {
             get {
                 object obj = ResourceManager.GetObject("buttonToggleOrthGrid", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap buttonToggleP1 {
-            get {
-                object obj = ResourceManager.GetObject("buttonToggleP1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -322,6 +308,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap dock {
             get {
                 object obj = ResourceManager.GetObject("dock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap dragSolid {
+            get {
+                object obj = ResourceManager.GetObject("dragSolid", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -511,13 +504,6 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap label {
             get {
                 object obj = ResourceManager.GetObject("label", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap loadAll {
-            get {
-                object obj = ResourceManager.GetObject("loadAll", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1001,6 +987,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap removeHeader {
             get {
                 object obj = ResourceManager.GetObject("removeHeader", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap reset {
+            get {
+                object obj = ResourceManager.GetObject("reset", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

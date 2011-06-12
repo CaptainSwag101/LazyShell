@@ -128,7 +128,7 @@ namespace LAZYSHELL
             this.tabPage2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 20);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(371, 384);
+            this.tabPage2.Size = new System.Drawing.Size(371, 649);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "SOLIDITY MAPS";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -146,7 +146,7 @@ namespace LAZYSHELL
             this.soliditymapListView.GridLines = true;
             this.soliditymapListView.Location = new System.Drawing.Point(0, 0);
             this.soliditymapListView.Name = "soliditymapListView";
-            this.soliditymapListView.Size = new System.Drawing.Size(371, 384);
+            this.soliditymapListView.Size = new System.Drawing.Size(371, 649);
             this.soliditymapListView.TabIndex = 13;
             this.soliditymapListView.UseCompatibleStateImageBehavior = false;
             this.soliditymapListView.View = System.Windows.Forms.View.Details;

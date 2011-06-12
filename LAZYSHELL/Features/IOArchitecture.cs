@@ -12,12 +12,13 @@ namespace LAZYSHELL
     {
         private string action;
         private int index;
-                private LevelMap levelMap;
+        private LevelMap levelMap;
         private PaletteSet paletteSet;
         private TileSet tileSet;
         private TileMap tileMap;
         private PrioritySet prioritySet;
         private string fullPath;
+        // constructor
         public IOArchitecture(string action, int index, LevelMap levelMap, PaletteSet paletteSet, TileSet tileSet, TileMap tileMap, PrioritySet prioritySet)
         {
             this.action = action;
@@ -33,6 +34,7 @@ namespace LAZYSHELL
             else
                 groupBox1.Text = "Export the following elements to architecture file";
         }
+        // functions
         private void Export_Architecture()
         {
             byte[] array = new byte[0x80000];
@@ -257,6 +259,7 @@ namespace LAZYSHELL
             tileSet.AssembleIntoModel(16);
             tileMap.AssembleIntoModel();
         }
+        // event handlers
         private void browseCurrent_Click(object sender, EventArgs e)
         {
             string filter = "Binary files (*.bin)|*.bin|All files (*.*)|*.*";

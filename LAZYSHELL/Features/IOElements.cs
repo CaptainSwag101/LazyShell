@@ -23,7 +23,7 @@ namespace LAZYSHELL
         private int currentIndex;
         private string fullPath;
         private Type type;
-
+        // constructor
         public IOElements(object element, int currentIndex, string title)
         {
             this.element = element;
@@ -36,7 +36,7 @@ namespace LAZYSHELL
 
             this.Text = title;
         }
-
+        // event handlers
         private void radioButtonCurrent_CheckedChanged(object sender, EventArgs e)
         {
             browseAll.Enabled = false;
@@ -150,7 +150,7 @@ namespace LAZYSHELL
                     sLevel.tileMapL1 = Model.TileMaps[lMap.TileMapL1 + 0x40];
                     sLevel.tileMapL2 = Model.TileMaps[lMap.TileMapL2 + 0x40];
                     sLevel.tileMapL3 = Model.TileMaps[lMap.TileMapL3];
-                    sLevel.physicalMap = Model.SolidityMaps[lMap.SolidityMap];
+                    sLevel.solidityMap = Model.SolidityMaps[lMap.SolidityMap];
                     sLevel.levelNPCs = Model.Levels[currentIndex].LevelNPCs;
                     sLevel.levelExits = Model.Levels[currentIndex].LevelExits;
                     sLevel.levelEvents = Model.Levels[currentIndex].LevelEvents;
@@ -175,7 +175,7 @@ namespace LAZYSHELL
                         sLevels[i].tileMapL1 = Model.TileMaps[lMap.TileMapL1 + 0x40];
                         sLevels[i].tileMapL2 = Model.TileMaps[lMap.TileMapL2 + 0x40];
                         sLevels[i].tileMapL3 = Model.TileMaps[lMap.TileMapL3];
-                        sLevels[i].physicalMap = Model.SolidityMaps[lMap.SolidityMap];
+                        sLevels[i].solidityMap = Model.SolidityMaps[lMap.SolidityMap];
                         sLevels[i].levelNPCs = Model.Levels[i].LevelNPCs;
                         sLevels[i].levelExits = Model.Levels[i].LevelExits;
                         sLevels[i].levelEvents = Model.Levels[i].LevelEvents;
@@ -194,8 +194,9 @@ namespace LAZYSHELL
                     SerializedLevel sLevel = new SerializedLevel();
                     sLevel = (SerializedLevel)Do.Import(sLevel, fullPath);
                     Model.Levels[currentIndex].Layer = sLevel.levelLayer;
+                    Model.Levels[currentIndex].Layer.Data = Model.Data;
                     Model.Levels[currentIndex].LevelMap = sLevel.levelMapNum;
-                    LevelMap lMap = sLevel.levelMap;
+                    LevelMap lMap = sLevel.levelMap; lMap.Data = Model.Data;
                     Model.LevelMaps[Model.Levels[currentIndex].LevelMap] = lMap;
                     Model.TileSets[lMap.TileSetL1 + 0x20] = sLevel.tileSetL1;
                     Model.TileSets[lMap.TileSetL2 + 0x20] = sLevel.tileSetL2;
@@ -209,11 +210,16 @@ namespace LAZYSHELL
                     Model.EditTileMaps[lMap.TileMapL1 + 0x40] = true;
                     Model.EditTileMaps[lMap.TileMapL2 + 0x40] = true;
                     Model.EditTileMaps[lMap.TileMapL3] = true;
-                    Model.SolidityMaps[lMap.SolidityMap] = sLevel.physicalMap;
+                    Model.SolidityMaps[lMap.SolidityMap] = sLevel.solidityMap;
                     Model.EditSolidityMaps[lMap.SolidityMap] = true;
                     Model.Levels[currentIndex].LevelNPCs = sLevel.levelNPCs;
                     Model.Levels[currentIndex].LevelExits = sLevel.levelExits;
                     Model.Levels[currentIndex].LevelEvents = sLevel.levelEvents;
+                    Model.Levels[currentIndex].LevelOverlaps = sLevel.levelOverlaps;
+                    Model.Levels[currentIndex].LevelNPCs.Data = Model.Data;
+                    Model.Levels[currentIndex].LevelExits.Data = Model.Data;
+                    Model.Levels[currentIndex].LevelEvents.Data = Model.Data;
+                    Model.Levels[currentIndex].LevelOverlaps.Data = Model.Data;
                 }
                 else
                 {
@@ -224,8 +230,9 @@ namespace LAZYSHELL
                     for (int i = 0; i < sLevels.Length; i++)
                     {
                         Model.Levels[i].Layer = sLevels[i].levelLayer;
+                        Model.Levels[i].Layer.Data = Model.Data;
                         Model.Levels[i].LevelMap = sLevels[i].levelMapNum;
-                        LevelMap lMap = sLevels[i].levelMap;
+                        LevelMap lMap = sLevels[i].levelMap; lMap.Data = Model.Data;
                         Model.LevelMaps[Model.Levels[i].LevelMap] = lMap;
                         Model.TileSets[lMap.TileSetL1 + 0x20] = sLevels[i].tileSetL1;
                         Model.TileSets[lMap.TileSetL2 + 0x20] = sLevels[i].tileSetL2;
@@ -239,11 +246,16 @@ namespace LAZYSHELL
                         Model.EditTileMaps[lMap.TileMapL1 + 0x40] = true;
                         Model.EditTileMaps[lMap.TileMapL2 + 0x40] = true;
                         Model.EditTileMaps[lMap.TileMapL3] = true;
-                        Model.SolidityMaps[lMap.SolidityMap] = sLevels[i].physicalMap;
+                        Model.SolidityMaps[lMap.SolidityMap] = sLevels[i].solidityMap;
                         Model.EditSolidityMaps[lMap.SolidityMap] = true;
                         Model.Levels[i].LevelNPCs = sLevels[i].levelNPCs;
                         Model.Levels[i].LevelExits = sLevels[i].levelExits;
                         Model.Levels[i].LevelEvents = sLevels[i].levelEvents;
+                        Model.Levels[i].LevelOverlaps = sLevels[i].levelOverlaps;
+                        Model.Levels[i].LevelNPCs.Data = Model.Data;
+                        Model.Levels[i].LevelExits.Data = Model.Data;
+                        Model.Levels[i].LevelEvents.Data = Model.Data;
+                        Model.Levels[i].LevelOverlaps.Data = Model.Data;
                     }
                 }
             }

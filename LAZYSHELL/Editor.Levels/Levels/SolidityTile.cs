@@ -64,11 +64,9 @@ namespace LAZYSHELL
         // Initializes all local properties for this class
         private void InitializePhysicalTile(byte[] data)
         {
-            byte temp = 0;
-
             int offset = (index * 6) + 0x3DC000;
 
-            temp = data[offset]; offset++;
+            byte temp = data[offset]; offset++;
 
             baseTileHeight = (byte)(temp & 0x0F);
 
@@ -86,18 +84,7 @@ namespace LAZYSHELL
             if ((temp & 0x40) == 0x40) solidLowerLeftEdge = true;
             if ((temp & 0x80) == 0x80) solidLowerRightEdge = true;
 
-            switch (temp & 0xF0)
-            {
-                case 0x00: converyorBeltDirection = 0; break;
-                case 0x10: converyorBeltDirection = 1; break;
-                case 0x20: converyorBeltDirection = 2; break;
-                case 0x30: converyorBeltDirection = 3; break;
-                case 0x40: converyorBeltDirection = 4; break;
-                case 0x50: converyorBeltDirection = 5; break;
-                case 0x60: converyorBeltDirection = 6; break;
-                case 0x70: converyorBeltDirection = 7; break;
-                default: converyorBeltDirection = 0; break;
-            }
+            converyorBeltDirection = (byte)((temp >> 4) & 7);
 
             temp = data[offset]; offset++;
 
@@ -126,13 +113,18 @@ namespace LAZYSHELL
 
             waterTileCoordZ = (byte)(temp & 0x0F);
 
-            if ((temp & 0xF0) == 0x10) specialTileFormat = 1;
-            else if ((temp & 0xF0) == 0x80) specialTileFormat = 2;
-            else specialTileFormat = 0;
+            if ((temp & 0xF0) == 0x10)
+                specialTileFormat = 1;
+            else if ((temp & 0xF0) == 0x80)
+                specialTileFormat = 2;
+            else
+                specialTileFormat = 0;
 
             totalHeight = (baseTileHeight + overheadTileCoordZ + overheadTileHeight + waterTileCoordZ) * 16;
-            if (baseTileHeightPlusHalf) totalHeight += 8;
-            if (stairsDirection > 0) totalHeight += 32;
+            if (baseTileHeightPlusHalf)
+                totalHeight += 8;
+            if (stairsDirection > 0)
+                totalHeight += 32;
 
             door = (byte)((data[offset] & 0xE0) >> 5);
             byte5b0 = (data[offset] & 0x01) == 0x01;
@@ -140,6 +132,53 @@ namespace LAZYSHELL
             byte5b2 = (data[offset] & 0x04) == 0x04;
             byte5b3 = (data[offset] & 0x08) == 0x08;
             byte5b4 = (data[offset] & 0x10) == 0x10;
+        }
+        public void Assemble()
+        {
+            int offset = (index * 6) + 0x3DC000;
+
+            data[offset] = baseTileHeight;
+            Bits.SetBit(data, offset, 4, conveyorBeltFast);
+            Bits.SetBit(data, offset, 5, conveyorBeltNormal);
+            Bits.SetBit(data, offset, 6, baseTileHeightPlusHalf);
+            Bits.SetBit(data, offset, 7, solidTile);
+            offset++;
+            data[offset] = overheadTileCoordZ;
+            Bits.SetBit(data, offset, 4, solidUpperLeftEdge);
+            Bits.SetBit(data, offset, 5, solidUpperRightEdge);
+            Bits.SetBit(data, offset, 6, solidLowerLeftEdge);
+            Bits.SetBit(data, offset, 7, solidLowerRightEdge);
+            if (conveyorBeltFast || conveyorBeltNormal)
+                data[offset] = (byte)(converyorBeltDirection << 4);
+            offset++;
+            data[offset] = overheadTileHeight;
+            switch (stairsDirection)
+            {
+                case 1: data[offset] |= 0x90; break;
+                case 2: data[offset] |= 0xB0; break;
+            }
+            offset++;
+            Bits.SetBit(data, offset, 0, solidTopQuadrant);
+            Bits.SetBit(data, offset, 1, solidLeftQuadrant);
+            Bits.SetBit(data, offset, 2, solidRightQuadrant);
+            Bits.SetBit(data, offset, 3, solidBottomQuadrant);
+            Bits.SetBit(data, offset, 4, objectOnEdgePriority3);
+            Bits.SetBit(data, offset, 5, objectAboveEdgePriority3);
+            Bits.SetBit(data, offset, 6, objectOnTilePriority3);
+            Bits.SetBit(data, offset, 7, solidQuadrantFlag);
+            offset++;
+            data[offset] = waterTileCoordZ;
+            if (specialTileFormat == 1)
+                data[offset] |= 0x10;
+            else if (specialTileFormat == 2)
+                data[offset] |= 0x80;
+            offset++;
+            data[offset] = (byte)(door << 5);
+            Bits.SetBit(data, offset, 0, byte5b0);
+            Bits.SetBit(data, offset, 1, byte5b1);
+            Bits.SetBit(data, offset, 2, byte5b2);
+            Bits.SetBit(data, offset, 3, byte5b3);
+            Bits.SetBit(data, offset, 4, byte5b4);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace LAZYSHELL
 {
     public partial class Levels
     {
+        #region Variables
         private LevelTileMods tileMods
         {
             get
@@ -20,6 +21,22 @@ namespace LAZYSHELL
             }
         }
         private Object copyTileMod;
+        private LevelSolidMods solidMods
+        {
+            get
+            {
+                return level.LevelSolidMods;
+            }
+            set
+            {
+                level.LevelSolidMods = value;
+            }
+        }
+        private Object copySolidMod;
+        public TreeView TileModsFieldTree { get { return tileModsFieldTree; } set { tileModsFieldTree = value; } }
+        public TreeView SolidModsFieldTree { get { return solidModsFieldTree; } set { solidModsFieldTree = value; } }
+        #endregion
+        #region Functions
         private void InitializeTileModProperties()
         {
             updatingProperties = true;
@@ -162,7 +179,115 @@ namespace LAZYSHELL
                 MessageBox.Show("Could not insert the mod. The total number of tile mods for all levels has exceeded the maximum allotted space.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        public TreeView TileModsFieldTree { get { return tileModsFieldTree; } set { tileModsFieldTree = value; } }
+        //
+        private void InitializeSolidModProperties()
+        {
+            updatingProperties = true;
+
+            this.solidModsFieldTree.Nodes.Clear();
+
+            for (int i = 0; i < solidMods.Mods.Count; i++)
+                this.solidModsFieldTree.Nodes.Add(new TreeNode("SOLID MOD #" + i.ToString()));
+
+            if (solidModsFieldTree.Nodes.Count > 0)
+                this.solidModsFieldTree.SelectedNode = this.solidModsFieldTree.Nodes[0];
+
+            if (solidMods.Mods.Count != 0 && this.solidModsFieldTree.SelectedNode != null)
+            {
+                solidMods.CurrentMod = this.solidModsFieldTree.SelectedNode.Index;
+                solidModsX.Value = solidMods.X;
+                solidModsY.Value = solidMods.Y;
+                solidModsWidth.Value = solidMods.Width;
+                solidModsHeight.Value = solidMods.Height;
+                foreach (ToolStripItem item in toolStrip8.Items)
+                    item.Enabled = true;
+                panel44.Enabled = true;
+            }
+            else
+            {
+                solidModsX.Value = 0;
+                solidModsY.Value = 0;
+                solidModsWidth.Value = 0;
+                solidModsHeight.Value = 0;
+                foreach (ToolStripItem item in toolStrip8.Items)
+                    item.Enabled = false;
+                solidModsInsert.Enabled = true;
+                panel44.Enabled = false;
+            }
+            updatingProperties = false;
+        }
+        private void RefreshSolidModProperties()
+        {
+            updatingLevel = true;
+            if (solidMods.Mods.Count != 0 && this.solidModsFieldTree.SelectedNode != null)
+            {
+                solidMods.CurrentMod = this.solidModsFieldTree.SelectedNode.Index;
+                solidModsX.Value = solidMods.X;
+                solidModsY.Value = solidMods.Y;
+                solidModsWidth.Value = solidMods.Width;
+                solidModsHeight.Value = solidMods.Height;
+                foreach (ToolStripItem item in toolStrip8.Items)
+                    item.Enabled = true;
+                panel44.Enabled = true;
+            }
+            else
+            {
+                foreach (ToolStripItem item in toolStrip8.Items)
+                    item.Enabled = false;
+                solidModsInsert.Enabled = true;
+                panel44.Enabled = false;
+                solidModsX.Value = 0;
+                solidModsY.Value = 0;
+                solidModsWidth.Value = 0;
+                solidModsHeight.Value = 0;
+            }
+            updatingLevel = false;
+        }
+        private int CalculateFreeSolidModSpace()
+        {
+            int used = 0;
+            for (int i = 0; i < 512; i++)
+            {
+                foreach (LevelSolidMods.Mod mod in levels[i].LevelSolidMods.Mods)
+                    used += mod.Length;
+            }
+            return 0x08FF - used;
+        }
+        private void AddNewSolidMod(LevelSolidMods.Mod solidMod)
+        {
+            if (CalculateFreeSolidModSpace() >= solidMod.Length)
+            {
+                this.solidModsFieldTree.Focus();
+                if (solidMods.Mods.Count < 32)
+                {
+                    if (solidModsFieldTree.Nodes.Count > 0)
+                        solidMods.Insert(solidModsFieldTree.SelectedNode.Index + 1, solidMod);
+                    else
+                        solidMods.Insert(0, solidMod);
+                    int index;
+                    if (solidModsFieldTree.Nodes.Count > 0)
+                        index = solidModsFieldTree.SelectedNode.Index;
+                    else
+                        index = -1;
+                    this.solidModsFieldTree.BeginUpdate();
+                    this.solidModsFieldTree.Nodes.Clear();
+                    int i = 0;
+                    foreach (LevelSolidMods.Mod mod in solidMods.Mods)
+                        this.solidModsFieldTree.Nodes.Add("SOLID MOD #" + i++.ToString());
+                    this.solidModsFieldTree.ExpandAll();
+                    this.solidModsFieldTree.SelectedNode = this.solidModsFieldTree.Nodes[index + 1];
+                    this.solidModsFieldTree.EndUpdate();
+                }
+                else
+                    MessageBox.Show("Could not insert any more solid mods. The maximum number of solid mods allowed is 32.",
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("Could not insert the mod. The total number of solid mods for all levels has exceeded the maximum allotted space.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        #endregion
+        #region Event handlers
         private void tileModsFieldTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (tileModsFieldTree.SelectedNode.Parent == null)
@@ -178,19 +303,19 @@ namespace LAZYSHELL
                 tileMods.SelectedB = true;
             }
             RefreshTileModProperties();
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void tileModsX_ValueChanged(object sender, EventArgs e)
         {
             if (updatingProperties) return;
             tileMods.X = (int)tileModsX.Value;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void tileModsY_ValueChanged(object sender, EventArgs e)
         {
             if (updatingProperties) return;
             tileMods.Y = (int)tileModsY.Value;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void tileModsWidth_ValueChanged(object sender, EventArgs e)
         {
@@ -206,7 +331,7 @@ namespace LAZYSHELL
             tileMods.TilemapA = new TileMap(level, tileSet, tileMods.Mod_, false);
             if (tileMods.Set)
                 tileMods.TilemapB = new TileMap(level, tileSet, tileMods.Mod_, true);
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void tileModsHeight_ValueChanged(object sender, EventArgs e)
         {
@@ -222,7 +347,7 @@ namespace LAZYSHELL
             tileMods.TilemapA = new TileMap(level, tileSet, tileMods.Mod_, false);
             if (tileMods.Set)
                 tileMods.TilemapB = new TileMap(level, tileSet, tileMods.Mod_, true);
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void tileModsLayers_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -234,7 +359,7 @@ namespace LAZYSHELL
         }
         private void tileModsInsertField_Click(object sender, EventArgs e)
         {
-            Point p = new Point(Math.Abs(levelsTilemap.Picture.Left) / 16, Math.Abs(levelsTilemap.Picture.Top) / 16);
+            Point p = new Point(Math.Abs(picture.Left) / 16, Math.Abs(picture.Top) / 16);
             if (CalculateFreeTileModSpace() >= 8)
             {
                 this.tileModsFieldTree.Focus();
@@ -369,127 +494,7 @@ namespace LAZYSHELL
         {
             AddNewTileMod(tileMods.Mod_.Copy(level, tileSet));
         }
-
         // solidity mods
-        private LevelSolidMods solidMods
-        {
-            get
-            {
-                return level.LevelSolidMods;
-            }
-            set
-            {
-                level.LevelSolidMods = value;
-            }
-        }
-        private Object copySolidMod;
-        private void InitializeSolidModProperties()
-        {
-            updatingProperties = true;
-
-            this.solidModsFieldTree.Nodes.Clear();
-
-            for (int i = 0; i < solidMods.Mods.Count; i++)
-                this.solidModsFieldTree.Nodes.Add(new TreeNode("SOLID MOD #" + i.ToString()));
-
-            if (solidModsFieldTree.Nodes.Count > 0)
-                this.solidModsFieldTree.SelectedNode = this.solidModsFieldTree.Nodes[0];
-
-            if (solidMods.Mods.Count != 0 && this.solidModsFieldTree.SelectedNode != null)
-            {
-                solidMods.CurrentMod = this.solidModsFieldTree.SelectedNode.Index;
-                solidModsX.Value = solidMods.X;
-                solidModsY.Value = solidMods.Y;
-                solidModsWidth.Value = solidMods.Width;
-                solidModsHeight.Value = solidMods.Height;
-                foreach (ToolStripItem item in toolStrip8.Items)
-                    item.Enabled = true;
-                panel44.Enabled = true;
-            }
-            else
-            {
-                solidModsX.Value = 0;
-                solidModsY.Value = 0;
-                solidModsWidth.Value = 0;
-                solidModsHeight.Value = 0;
-                foreach (ToolStripItem item in toolStrip8.Items)
-                    item.Enabled = false;
-                solidModsInsert.Enabled = true;
-                panel44.Enabled = false;
-            }
-            updatingProperties = false;
-        }
-        private void RefreshSolidModProperties()
-        {
-            updatingLevel = true;
-            if (solidMods.Mods.Count != 0 && this.solidModsFieldTree.SelectedNode != null)
-            {
-                solidMods.CurrentMod = this.solidModsFieldTree.SelectedNode.Index;
-                solidModsX.Value = solidMods.X;
-                solidModsY.Value = solidMods.Y;
-                solidModsWidth.Value = solidMods.Width;
-                solidModsHeight.Value = solidMods.Height;
-                foreach (ToolStripItem item in toolStrip8.Items)
-                    item.Enabled = true;
-                panel44.Enabled = true;
-            }
-            else
-            {
-                foreach (ToolStripItem item in toolStrip8.Items)
-                    item.Enabled = false;
-                solidModsInsert.Enabled = true;
-                panel44.Enabled = false;
-                solidModsX.Value = 0;
-                solidModsY.Value = 0;
-                solidModsWidth.Value = 0;
-                solidModsHeight.Value = 0;
-            }
-            updatingLevel = false;
-        }
-        private int CalculateFreeSolidModSpace()
-        {
-            int used = 0;
-            for (int i = 0; i < 512; i++)
-            {
-                foreach (LevelSolidMods.Mod mod in levels[i].LevelSolidMods.Mods)
-                    used += mod.Length;
-            }
-            return 0x08FF - used;
-        }
-        private void AddNewSolidMod(LevelSolidMods.Mod solidMod)
-        {
-            if (CalculateFreeSolidModSpace() >= solidMod.Length)
-            {
-                this.solidModsFieldTree.Focus();
-                if (solidMods.Mods.Count < 32)
-                {
-                    if (solidModsFieldTree.Nodes.Count > 0)
-                        solidMods.Insert(solidModsFieldTree.SelectedNode.Index + 1, solidMod);
-                    else
-                        solidMods.Insert(0, solidMod);
-                    int index;
-                    if (solidModsFieldTree.Nodes.Count > 0)
-                        index = solidModsFieldTree.SelectedNode.Index;
-                    else
-                        index = -1;
-                    this.solidModsFieldTree.BeginUpdate();
-                    this.solidModsFieldTree.Nodes.Clear();
-                    int i = 0;
-                    foreach (LevelSolidMods.Mod mod in solidMods.Mods)
-                        this.solidModsFieldTree.Nodes.Add("SOLID MOD #" + i++.ToString());
-                    this.solidModsFieldTree.ExpandAll();
-                    this.solidModsFieldTree.SelectedNode = this.solidModsFieldTree.Nodes[index + 1];
-                    this.solidModsFieldTree.EndUpdate();
-                }
-                else
-                    MessageBox.Show("Could not insert any more solid mods. The maximum number of solid mods allowed is 32.",
-                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-                MessageBox.Show("Could not insert the mod. The total number of solid mods for all levels has exceeded the maximum allotted space.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        public TreeView SolidModsFieldTree { get { return solidModsFieldTree; } set { solidModsFieldTree = value; } }
         private void solidModsFieldTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             solidMods.CurrentMod = this.solidModsFieldTree.SelectedNode.Index;
@@ -497,21 +502,21 @@ namespace LAZYSHELL
 
             solidMods.CurrentMod = this.solidModsFieldTree.SelectedNode.Index;
             RefreshSolidModProperties();
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void solidModsX_ValueChanged(object sender, EventArgs e)
         {
             if (updatingProperties) return;
             solidMods.X = (int)solidModsX.Value;
             solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void solidModsY_ValueChanged(object sender, EventArgs e)
         {
             if (updatingProperties) return;
             solidMods.Y = (int)solidModsY.Value;
             solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void solidModsWidth_ValueChanged(object sender, EventArgs e)
         {
@@ -525,7 +530,7 @@ namespace LAZYSHELL
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void solidModsHeight_ValueChanged(object sender, EventArgs e)
         {
@@ -539,11 +544,11 @@ namespace LAZYSHELL
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void solidModsInsert_Click(object sender, EventArgs e)
         {
-            Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
+            Point o = new Point(Math.Abs(picture.Left) / zoom, Math.Abs(picture.Top) / zoom);
             Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeSolidModSpace() >= 4)
             {
@@ -640,5 +645,6 @@ namespace LAZYSHELL
         {
             AddNewSolidMod(solidMods.Mod_.Copy());
         }
+        #endregion
     }
 }

@@ -13,20 +13,20 @@ namespace LAZYSHELL
 {
     public partial class ExportImages : Form
     {
+        #region Variables
         private int currentIndex;
+        private string element;
         private Sprite[] sprites { get { return Model.Sprites; } }
         private Animation[] animations { get { return Model.Animations; } }
         private PaletteSet[] palettes { get { return Model.SpritePalettes; } }
         private GraphicPalette[] images { get { return Model.GraphicPalettes; } }
         private byte[] spriteGraphics { get { return Model.SpriteGraphics; } }
-        //
-        private string element;
         private Level[] levels { get { return Model.Levels; } }
         private LevelMap[] levelMaps { get { return Model.LevelMaps; } }
         private PaletteSet[] paletteSets { get { return Model.PaletteSets; } set { Model.PaletteSets = value; } }
         private PrioritySet[] prioritySets { get { return Model.PrioritySets; } set { Model.PrioritySets = value; } }
-        //
         private ProgressBar progressBar;
+        #endregion
         // Constructor
         public ExportImages(int currentIndex, string element)
         {
@@ -46,6 +46,7 @@ namespace LAZYSHELL
                 this.oneSpriteSheet.Visible = false;
             }
         }
+        // functions
         private void Export()
         {
             bool crop = oneImageCropped.Checked || oneSpriteSheet.Checked;
@@ -235,6 +236,16 @@ namespace LAZYSHELL
             if (progressBar != null && progressBar.Visible)
                 progressBar.Close();
         }
+        // event handlers
+        private void range_CheckedChanged(object sender, EventArgs e)
+        {
+            fromIndex.Enabled = range.Checked;
+            toIndex.Enabled = range.Checked;
+        }
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            maximumWidth.Enabled = oneSpriteSheet.Checked;
+        }
         private void ok_button_Click(object sender, EventArgs e)
         {
             Export();
@@ -243,17 +254,6 @@ namespace LAZYSHELL
         private void cancel_button_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            maximumWidth.Enabled = oneSpriteSheet.Checked;
-        }
-
-        private void range_CheckedChanged(object sender, EventArgs e)
-        {
-            fromIndex.Enabled = range.Checked;
-            toIndex.Enabled = range.Checked;
         }
     }
 }

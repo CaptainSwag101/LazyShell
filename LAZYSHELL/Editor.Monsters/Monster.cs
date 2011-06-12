@@ -545,7 +545,7 @@ namespace LAZYSHELL
             byte[] sm = Bits.GetByteArray(data, animationOffset, animationLength);
             offset = Bits.GetShort(sm, 4); offset += frame * 2;
             tMold = new Mold();
-            tMold.InitializeMold(sm, offset, new System.Collections.ArrayList());
+            tMold.InitializeMold(sm, offset, new List<Mold.Tile>());
             foreach (Mold.Tile t in tMold.Tiles)
             {
                 t.Set8x8Tiles(Bits.GetByteArray(data, graphicOffset, 0x4000), palette, tMold.Gridplane);
@@ -616,7 +616,7 @@ namespace LAZYSHELL
             byte[] sm = Bits.GetByteArray(data, animationOffset, animationLength);
             offset = Bits.GetShort(sm, 4); offset += frame * 2;
             tMold = new Mold();
-            tMold.InitializeMold(sm, offset, new System.Collections.ArrayList());
+            tMold.InitializeMold(sm, offset, new List<Mold.Tile>());
             foreach (Mold.Tile t in tMold.Tiles)
             {
                 t.Set8x8Tiles(Bits.GetByteArray(data, graphicOffset, 0x4000), palette, tMold.Gridplane);

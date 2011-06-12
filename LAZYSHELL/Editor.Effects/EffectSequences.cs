@@ -328,6 +328,7 @@ namespace LAZYSHELL
                 if (PlaybackSequence.CancellationPending) break;
                 if (i >= frames.Controls.Count) i = 0;
                 PlaybackSequence.ReportProgress(i);
+                duration_temp = ((E_Sequence.Frame)sequence.Frames[i]).Duration;
                 Thread.Sleep(duration_temp * (1000 / 60));
                 if (PlaybackSequence.CancellationPending) break;
             }
@@ -335,7 +336,6 @@ namespace LAZYSHELL
         private void PlaybackSequence_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             sequenceImage = new Bitmap((Bitmap)sequenceImages[e.ProgressPercentage]);
-            duration_temp = ((E_Sequence.Frame)sequence.Frames[e.ProgressPercentage]).Duration;
             pictureBoxSequence.Invalidate();
         }
         private void PlaybackSequence_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

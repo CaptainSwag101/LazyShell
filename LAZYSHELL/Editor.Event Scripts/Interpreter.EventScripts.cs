@@ -717,6 +717,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     sb.Append((Bits.GetShort(esc.EventData, 1) & 0xFFF).ToString());
                     break;
                 case 0x4B:
+                    sb.Append(Model.MapPoints[esc.Option].ToString());
+                    break;
                 case 0x4C:
                 case 0x4F:
                 case 0x52:
@@ -866,14 +868,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     sb.Append(Lists.Numerize(Lists.MusicNames, esc.Option));
                     break;
                 case 0x95:
-                    sb.Append(Lists.Numerize(Lists.MusicNames, esc.Option) + 
-                        ", min volume: " +
-                        esc.EventData[2].ToString());
-                    break;
                 case 0x9E:
-                    sb.Append(Lists.Numerize(Lists.SoundNames, esc.Option) + 
-                        ", min volume: " +
-                        esc.EventData[2].ToString());
+                    sb.Append(esc.Option + ", to volume: " + esc.EventData[2].ToString());
                     break;
                 case 0x97:
                     if (esc.EventData[2] >= 0xA1) { a = ", speed up"; b = (0x100 - esc.EventData[2]).ToString(); }

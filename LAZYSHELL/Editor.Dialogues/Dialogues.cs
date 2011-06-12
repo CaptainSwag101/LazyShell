@@ -704,14 +704,14 @@ namespace LAZYSHELL
             this.freeBytes.Text = temp.ToString() + " characters left";
             this.freeBytes.BackColor = temp >= 0 ? SystemColors.Control : Color.Red;
         }
-        private void dialogueTextBox_KeyDown_1(object sender, KeyEventArgs e)
+        private void dialogueTextBox_KeyDown(object sender, KeyEventArgs e)
         {
+            if ((e.KeyValue & 0x11) == 0x11) return;    // if ctrl+some other key, cancel
             int temp = dialogue.DuplicateDialogues;
             //DialogResult result;
             if (e.KeyValue >= 0 && e.KeyValue <= 0x9F)
             {
                 dialogue.DuplicateDialogues = index;
-
                 if (!isDialogueChanged[index])
                 {
                     if (index < 0x800)
@@ -751,11 +751,10 @@ namespace LAZYSHELL
                         }
                     }
                 }
-
                 isDialogueChanged[index] = true;
             }
         }
-        private void dialogueTextBox_Enter_1(object sender, EventArgs e)
+        private void dialogueTextBox_Enter(object sender, EventArgs e)
         {
             if (index != dialogue.DuplicateDialogues)
                 MessageBox.Show("This dialogue is a duplicate of another.\n\n" +
@@ -772,7 +771,7 @@ namespace LAZYSHELL
                 }
             }
         }
-        private void dialogueTextBox_Leave_1(object sender, EventArgs e)
+        private void dialogueTextBox_Leave(object sender, EventArgs e)
         {
             if (!dialogueTextBox.Text.EndsWith("[0]") && !dialogueTextBox.Text.EndsWith("[6]"))
             {
@@ -1102,8 +1101,6 @@ namespace LAZYSHELL
             new ClearElements(Model.BattleDialogues, battleDialogues.Index, "CLEAR BATTLE DIALOGUES...").ShowDialog();
             battleDialogues.RefreshBattleDialogue();
         }
-        #endregion
-
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current dialogue. Go ahead with reset?",
@@ -1114,5 +1111,6 @@ namespace LAZYSHELL
             RefreshDialogueEditor();
             SetTextImage();
         }
+        #endregion
     }
 }

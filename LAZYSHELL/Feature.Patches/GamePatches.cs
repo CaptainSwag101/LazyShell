@@ -14,19 +14,21 @@ namespace LAZYSHELL.Patches
 {
     public partial class GamePatches : Form
     {
-                private Settings settings = Settings.Default;
-
+        private Settings settings = Settings.Default;
         private string verifyType = "LAZYSHELL PATCH INFORMATION";
-        WebClient client = new WebClient();
-        WebClient IPSClient = new WebClient();
-        ArrayList patches = new ArrayList();
-        Timer clock;
+        private WebClient client = new WebClient();
+        private WebClient IPSClient = new WebClient();
+        private ArrayList patches = new ArrayList();
+        private Timer clock;
         private bool downloadingIPS = false;
-
+        private float red, green, blue;
+        private bool colorDirection = true; // darker
+        // constructor
         public GamePatches()
         {
             InitializeComponent();
         }
+        // functions
         public void StartDownloadingPatches()
         {
             this.Update();
@@ -45,66 +47,6 @@ namespace LAZYSHELL.Patches
             //clock.Stop();
             //this.downloadingLabel.Visible = false;
         }
-
-        float red, green, blue;
-        bool colorDirection = true; // darker
-        private void clock_Tick(object sender, EventArgs e)
-        {
-            if (red > 185 || red < 89)
-            {
-                if (colorDirection)
-                {
-                    red = 89;
-                    green = 99;
-                    blue = 219;
-                    colorDirection = false;
-                }
-                else
-                {
-                    red = 185;
-                    green = 189;
-                    blue = 240;
-                    colorDirection = true;
-                }
-            }
-
-            if (colorDirection) // get darker
-            {
-                red -= 96 / 30;
-                green -= 90 / 30;
-                blue -= 21 / 30;
-            }
-            else // Get Lighter
-            {
-                red += 96 / 30;
-                green += 90 / 30;
-                blue += 21 / 30;
-            }
-
-            this.downloadingLabel.BackColor = Color.FromArgb((int)red, (int)green, (int)blue);
-        }
-
-        private void client_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
-        {
-            try
-            {
-                char[] temp = verifyType.ToCharArray();
-                for (int i = 0; i < 0x1B; i++)
-                {
-                    if (e.Result[i] != temp[i])
-                        throw new Exception();
-                }
-                AddNewDownload(e.Result);
-                DownloadPatches(patches.Count + 1);
-            }
-            catch
-            {
-                clock.Stop();
-                this.downloadingLabel.Visible = false;
-                return;
-            }
-        }
-
         private void DownloadPatches(int pn)
         {
             try
@@ -117,7 +59,6 @@ namespace LAZYSHELL.Patches
                 PatchListBox.Items.Add("(no patches available)");
             }
         }
-
         private void AddNewDownload(byte[] data)
         {
             Patch patch = new Patch(patches.Count + 1, data);
@@ -157,18 +98,6 @@ namespace LAZYSHELL.Patches
                 return;
             }
         }
-        void PatchListBox_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            DisplayPatchInfo();
-        }
-
-        private void applyButton_Click(object sender, EventArgs e)
-        {
-            if (!downloadingIPS)
-                StartIPSDownload();
-            else
-                StopIPSDownload();
-        }
         private void StartIPSDownload()
         {
             downloadingIPS = true;
@@ -185,6 +114,66 @@ namespace LAZYSHELL.Patches
             this.downloadingLabel.Visible = false;
             this.applyButton.Text = "APPLY PATCH";
             IPSClient.CancelAsync();
+        }
+        // event handlers
+        private void clock_Tick(object sender, EventArgs e)
+        {
+            if (red > 185 || red < 89)
+            {
+                if (colorDirection)
+                {
+                    red = 89;
+                    green = 99;
+                    blue = 219;
+                    colorDirection = false;
+                }
+                else
+                {
+                    red = 185;
+                    green = 189;
+                    blue = 240;
+                    colorDirection = true;
+                }
+            }
+
+            if (colorDirection) // get darker
+            {
+                red -= 96 / 30;
+                green -= 90 / 30;
+                blue -= 21 / 30;
+            }
+            else // Get Lighter
+            {
+                red += 96 / 30;
+                green += 90 / 30;
+                blue += 21 / 30;
+            }
+
+            this.downloadingLabel.BackColor = Color.FromArgb((int)red, (int)green, (int)blue);
+        }
+        private void client_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
+        {
+            try
+            {
+                char[] temp = verifyType.ToCharArray();
+                for (int i = 0; i < 0x1B; i++)
+                {
+                    if (e.Result[i] != temp[i])
+                        throw new Exception();
+                }
+                AddNewDownload(e.Result);
+                DownloadPatches(patches.Count + 1);
+            }
+            catch
+            {
+                clock.Stop();
+                this.downloadingLabel.Visible = false;
+                return;
+            }
+        }
+        private void PatchListBox_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            DisplayPatchInfo();
         }
         private void IPSClient_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
         {
@@ -225,6 +214,12 @@ namespace LAZYSHELL.Patches
                 return;
             }
         }
-
+        private void applyButton_Click(object sender, EventArgs e)
+        {
+            if (!downloadingIPS)
+                StartIPSDownload();
+            else
+                StopIPSDownload();
+        }
     }
 }

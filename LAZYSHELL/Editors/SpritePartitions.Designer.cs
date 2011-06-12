@@ -593,6 +593,7 @@ namespace LAZYSHELL
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "PARTITIONS - Lazy Shell";
+            this.TopMost = true;
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

@@ -192,7 +192,7 @@ namespace LAZYSHELL
         public Overlay()
         {
         }
-        public void DrawCartographicGrid(Graphics g, Color c, Size s, Size u, int z)
+        public void DrawCartesianGrid(Graphics g, Color c, Size s, Size u, int z)
         {
             c = Color.FromArgb(alpha, c);
             Pen p = new Pen(new SolidBrush(c)); p.DashPattern = new float[] { 1, 1 };
@@ -376,7 +376,7 @@ namespace LAZYSHELL
             if (exits.Count > 0)
                 exits.CurrentExit = currentExit;
         }
-        public void DrawLevelExits(LevelExits exits, Graphics g)
+        public void DrawLevelExits(LevelExits exits, Graphics g, int z)
         {
             // draw exit strings
             Rectangle r = new Rectangle();
@@ -387,8 +387,8 @@ namespace LAZYSHELL
             Font font_ = new Font("Tahoma", 8.25F, FontStyle.Bold);
             foreach (Exit exit in exits.Exits)
             {
-                r.X = ((exit.X & 127) * 32) + (16 * (exit.Y & 1)) - 16;
-                r.Y = ((exit.Y & 127) * 8) - 8;
+                r.X = ((exit.X & 127) * 32) + (16 * (exit.Y & 1)) - 16; r.X *= z;
+                r.Y = ((exit.Y & 127) * 8) - 8; r.Y *= z;
                 string name;
                 if (exit.ExitType == 0)
                     name = "{" + exit.Destination.ToString("d3") + "} " + Lists.LevelNames[exit.Destination];
@@ -522,18 +522,18 @@ namespace LAZYSHELL
             if (events.Count > 0)
                 events.CurrentEvent = currentEvent;
         }
-        public void DrawLevelEvents(LevelEvents events, Graphics g)
+        public void DrawLevelEvents(LevelEvents events, Graphics g, int z)
         {
             // draw exit strings
             foreach (Event event_ in events.Events)
             {
                 if (event_ != events.Event_)
-                    DrawLevelEvent(g, events, event_);
+                    DrawLevelEvent(g, events, event_, z);
             }
             if (events.Event_ != null)
-                DrawLevelEvent(g, events, events.Event_);
+                DrawLevelEvent(g, events, events.Event_, z);
         }
-        private void DrawLevelEvent(Graphics g, LevelEvents events, Event temp)
+        private void DrawLevelEvent(Graphics g, LevelEvents events, Event temp, int z)
         {
             Rectangle r = new Rectangle();
             Pen pen = new Pen(Color.Yellow, 2);
@@ -544,8 +544,8 @@ namespace LAZYSHELL
             Font font_b = new Font("Tahoma", 8.25F, FontStyle.Bold);
             Font lucida = new Font("Lucida Console", 8.25F);
 
-            r.X = ((temp.X & 127) * 32) + (16 * (temp.Y & 1)) - 16;
-            r.Y = ((temp.Y & 127) * 8) - 8;
+            r.X = ((temp.X & 127) * 32) + (16 * (temp.Y & 1)) - 16; r.X *= z;
+            r.Y = ((temp.Y & 127) * 8) - 8; r.Y *= z;
 
             string name = "Event #" + temp.RunEvent.ToString();
             RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),
@@ -708,7 +708,7 @@ namespace LAZYSHELL
                     npcs.CurrentInstance = currentInstance;
             }
         }
-        public void DrawLevelNPCs(LevelNPCs npcs, Graphics g)
+        public void DrawLevelNPCs(LevelNPCs npcs, Graphics g, int z)
         {
             // draw exit strings
             int index = 0;
@@ -716,13 +716,13 @@ namespace LAZYSHELL
             foreach (NPC npc in npcs.Npcs)
             {
                 if (npc != npcs.Npc || npcs.IsInstanceSelected)
-                    DrawLevelNPC(npcs, g, npc, index++, false, null);
+                    DrawLevelNPC(npcs, g, npc, index++, false, null, z);
                 else
                     current = index++;
                 foreach (NPC instance in npc.Instances)
                 {
                     if (npc != npcs.Npc || instance != npcs.Npc.Instance_ || !npcs.IsInstanceSelected)
-                        DrawLevelNPC(npcs, g, instance, index++, false, null);
+                        DrawLevelNPC(npcs, g, instance, index++, false, null, z);
                     else
                         current = index++;
                 }
@@ -730,12 +730,12 @@ namespace LAZYSHELL
             if (npcs.Npc != null)
             {
                 if (!npcs.IsInstanceSelected)
-                    DrawLevelNPC(npcs, g, npcs.Npc, current, true, null);
+                    DrawLevelNPC(npcs, g, npcs.Npc, current, true, null, z);
                 else
-                    DrawLevelNPC(npcs, g, npcs.Npc.Instance_, current, true, npcs.Npc);
+                    DrawLevelNPC(npcs, g, npcs.Npc.Instance_, current, true, npcs.Npc, z);
             }
         }
-        private void DrawLevelNPC(LevelNPCs npcs, Graphics g, NPC npc, int index, bool selected, NPC parent)
+        private void DrawLevelNPC(LevelNPCs npcs, Graphics g, NPC npc, int index, bool selected, NPC parent, int z)
         {
             Rectangle r = new Rectangle();
             Pen pen = new Pen(Color.Yellow, 2);
@@ -746,8 +746,8 @@ namespace LAZYSHELL
             Font font_b = new Font("Tahoma", 8.25F, FontStyle.Bold);
             Font lucida = new Font("Lucida Console", 8.25F);
 
-            r.X = ((npc.X & 127) * 32) + (16 * (npc.Y & 1)) - 16;
-            r.Y = ((npc.Y & 127) * 8) - 8;
+            r.X = ((npc.X & 127) * 32) + (16 * (npc.Y & 1)) - 16; r.X *= z;
+            r.Y = ((npc.Y & 127) * 8) - 8; r.Y *= z;
 
             string name = "NPC #" + index;
             RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),

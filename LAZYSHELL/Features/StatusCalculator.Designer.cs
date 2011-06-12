@@ -37,45 +37,43 @@
             this.attackerMgDefense = new System.Windows.Forms.NumericUpDown();
             this.attackerMgAttack = new System.Windows.Forms.NumericUpDown();
             this.attackerDefense = new System.Windows.Forms.NumericUpDown();
-            this.panel28 = new System.Windows.Forms.Panel();
+            this.panelAttackerWeapon = new System.Windows.Forms.Panel();
             this.attackerWeapon = new System.Windows.Forms.ComboBox();
-            this.label133 = new System.Windows.Forms.Label();
-            this.panel120 = new System.Windows.Forms.Panel();
+            this.labelAttackerAccessory = new System.Windows.Forms.Label();
+            this.panelAttackerAccessory = new System.Windows.Forms.Panel();
             this.attackerAccessory = new System.Windows.Forms.ComboBox();
-            this.panel119 = new System.Windows.Forms.Panel();
+            this.panelAttackerArmor = new System.Windows.Forms.Panel();
             this.attackerArmor = new System.Windows.Forms.ComboBox();
-            this.label135 = new System.Windows.Forms.Label();
-            this.label134 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label235 = new System.Windows.Forms.Label();
+            this.labelAttackerWeapon = new System.Windows.Forms.Label();
+            this.labelAttackerArmor = new System.Windows.Forms.Label();
+            this.panelAttackerStats = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.attackerHP = new System.Windows.Forms.NumericUpDown();
             this.attackerStatus = new System.Windows.Forms.CheckedListBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.panelTargetStats = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelTargetWeapon = new System.Windows.Forms.Panel();
             this.targetWeapon = new System.Windows.Forms.ComboBox();
             this.targetDefense = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelTargetAccessory = new System.Windows.Forms.Label();
             this.targetMgAttack = new System.Windows.Forms.NumericUpDown();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panelTargetAccessory = new System.Windows.Forms.Panel();
             this.targetAccessory = new System.Windows.Forms.ComboBox();
             this.targetMgDefense = new System.Windows.Forms.NumericUpDown();
             this.targetHP = new System.Windows.Forms.NumericUpDown();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.panelTargetArmor = new System.Windows.Forms.Panel();
             this.targetArmor = new System.Windows.Forms.ComboBox();
             this.targetAttack = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelTargetWeapon = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.labelTargetArmor = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.targetStatus = new System.Windows.Forms.CheckedListBox();
             this.targetDefensePosition = new System.Windows.Forms.CheckBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.attackerTypeAlly = new System.Windows.Forms.RadioButton();
+            this.attackerTypeMonster = new System.Windows.Forms.RadioButton();
             this.panel6 = new System.Windows.Forms.Panel();
             this.attackerName = new System.Windows.Forms.ComboBox();
             this.attackerLevel = new System.Windows.Forms.NumericUpDown();
@@ -84,8 +82,8 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.attackerBonus = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.targetTypeAlly = new System.Windows.Forms.RadioButton();
+            this.targetTypeMonster = new System.Windows.Forms.RadioButton();
             this.panelTargetProperties = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.targetBonus = new System.Windows.Forms.ComboBox();
@@ -95,36 +93,36 @@
             this.label12 = new System.Windows.Forms.Label();
             this.targetLevel = new System.Windows.Forms.NumericUpDown();
             this.singleAttack = new System.Windows.Forms.TextBox();
-            this.timedAttackL1 = new System.Windows.Forms.CheckBox();
-            this.timedAttackL2 = new System.Windows.Forms.CheckBox();
             this.targetWeakness = new System.Windows.Forms.CheckedListBox();
-            this.panel12 = new System.Windows.Forms.Panel();
+            this.panelTargetWeakness = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView1 = new LAZYSHELL.NewListView();
             this.spellIndex = new System.Windows.Forms.ColumnHeader();
             this.spellName = new System.Windows.Forms.ColumnHeader();
             this.damage = new System.Windows.Forms.ColumnHeader();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.timedAttackL2 = new System.Windows.Forms.CheckBox();
+            this.timedAttackL1 = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonSwitch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.attackerAttack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.attackerMgDefense)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.attackerMgAttack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.attackerDefense)).BeginInit();
-            this.panel28.SuspendLayout();
-            this.panel120.SuspendLayout();
-            this.panel119.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelAttackerWeapon.SuspendLayout();
+            this.panelAttackerAccessory.SuspendLayout();
+            this.panelAttackerArmor.SuspendLayout();
+            this.panelAttackerStats.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attackerHP)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.panelTargetStats.SuspendLayout();
+            this.panelTargetWeapon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.targetDefense)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.targetMgAttack)).BeginInit();
-            this.panel4.SuspendLayout();
+            this.panelTargetAccessory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.targetMgDefense)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.targetHP)).BeginInit();
-            this.panel5.SuspendLayout();
+            this.panelTargetArmor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.targetAttack)).BeginInit();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attackerLevel)).BeginInit();
@@ -134,14 +132,15 @@
             this.panel10.SuspendLayout();
             this.panel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.targetLevel)).BeginInit();
-            this.panel12.SuspendLayout();
-            this.panel13.SuspendLayout();
+            this.panelTargetWeakness.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // LabelMonsterValMgDef
             // 
             this.LabelMonsterValMgDef.BackColor = System.Drawing.SystemColors.Control;
-            this.LabelMonsterValMgDef.Location = new System.Drawing.Point(0, 91);
+            this.LabelMonsterValMgDef.Location = new System.Drawing.Point(0, 72);
             this.LabelMonsterValMgDef.Name = "LabelMonsterValMgDef";
             this.LabelMonsterValMgDef.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.LabelMonsterValMgDef.Size = new System.Drawing.Size(92, 17);
@@ -151,7 +150,7 @@
             // LabelMonsterValMgAtk
             // 
             this.LabelMonsterValMgAtk.BackColor = System.Drawing.SystemColors.Control;
-            this.LabelMonsterValMgAtk.Location = new System.Drawing.Point(0, 73);
+            this.LabelMonsterValMgAtk.Location = new System.Drawing.Point(0, 54);
             this.LabelMonsterValMgAtk.Name = "LabelMonsterValMgAtk";
             this.LabelMonsterValMgAtk.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.LabelMonsterValMgAtk.Size = new System.Drawing.Size(92, 17);
@@ -161,7 +160,7 @@
             // LabelMonsterValAtk
             // 
             this.LabelMonsterValAtk.BackColor = System.Drawing.SystemColors.Control;
-            this.LabelMonsterValAtk.Location = new System.Drawing.Point(0, 37);
+            this.LabelMonsterValAtk.Location = new System.Drawing.Point(0, 18);
             this.LabelMonsterValAtk.Name = "LabelMonsterValAtk";
             this.LabelMonsterValAtk.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.LabelMonsterValAtk.Size = new System.Drawing.Size(92, 17);
@@ -171,7 +170,7 @@
             // LabelMonsterValDef
             // 
             this.LabelMonsterValDef.BackColor = System.Drawing.SystemColors.Control;
-            this.LabelMonsterValDef.Location = new System.Drawing.Point(0, 55);
+            this.LabelMonsterValDef.Location = new System.Drawing.Point(0, 36);
             this.LabelMonsterValDef.Name = "LabelMonsterValDef";
             this.LabelMonsterValDef.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.LabelMonsterValDef.Size = new System.Drawing.Size(92, 17);
@@ -181,7 +180,7 @@
             // attackerAttack
             // 
             this.attackerAttack.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.attackerAttack.Location = new System.Drawing.Point(93, 37);
+            this.attackerAttack.Location = new System.Drawing.Point(93, 18);
             this.attackerAttack.Maximum = new decimal(new int[] {
             255,
             0,
@@ -201,7 +200,7 @@
             // attackerMgDefense
             // 
             this.attackerMgDefense.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.attackerMgDefense.Location = new System.Drawing.Point(93, 91);
+            this.attackerMgDefense.Location = new System.Drawing.Point(93, 72);
             this.attackerMgDefense.Maximum = new decimal(new int[] {
             255,
             0,
@@ -221,7 +220,7 @@
             // attackerMgAttack
             // 
             this.attackerMgAttack.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.attackerMgAttack.Location = new System.Drawing.Point(93, 73);
+            this.attackerMgAttack.Location = new System.Drawing.Point(93, 54);
             this.attackerMgAttack.Maximum = new decimal(new int[] {
             255,
             0,
@@ -241,7 +240,7 @@
             // attackerDefense
             // 
             this.attackerDefense.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.attackerDefense.Location = new System.Drawing.Point(93, 55);
+            this.attackerDefense.Location = new System.Drawing.Point(93, 36);
             this.attackerDefense.Maximum = new decimal(new int[] {
             255,
             0,
@@ -253,13 +252,13 @@
             this.attackerDefense.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackerDefense.ValueChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // panel28
+            // panelAttackerWeapon
             // 
-            this.panel28.Controls.Add(this.attackerWeapon);
-            this.panel28.Location = new System.Drawing.Point(93, 109);
-            this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(104, 17);
-            this.panel28.TabIndex = 205;
+            this.panelAttackerWeapon.Controls.Add(this.attackerWeapon);
+            this.panelAttackerWeapon.Location = new System.Drawing.Point(93, 90);
+            this.panelAttackerWeapon.Name = "panelAttackerWeapon";
+            this.panelAttackerWeapon.Size = new System.Drawing.Size(104, 17);
+            this.panelAttackerWeapon.TabIndex = 205;
             // 
             // attackerWeapon
             // 
@@ -279,23 +278,23 @@
             this.attackerWeapon.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.attackerWeapon.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // label133
+            // labelAttackerAccessory
             // 
-            this.label133.BackColor = System.Drawing.SystemColors.Control;
-            this.label133.Location = new System.Drawing.Point(0, 145);
-            this.label133.Name = "label133";
-            this.label133.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label133.Size = new System.Drawing.Size(92, 17);
-            this.label133.TabIndex = 204;
-            this.label133.Text = "Accessory";
+            this.labelAttackerAccessory.BackColor = System.Drawing.SystemColors.Control;
+            this.labelAttackerAccessory.Location = new System.Drawing.Point(0, 126);
+            this.labelAttackerAccessory.Name = "labelAttackerAccessory";
+            this.labelAttackerAccessory.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelAttackerAccessory.Size = new System.Drawing.Size(92, 17);
+            this.labelAttackerAccessory.TabIndex = 204;
+            this.labelAttackerAccessory.Text = "Accessory";
             // 
-            // panel120
+            // panelAttackerAccessory
             // 
-            this.panel120.Controls.Add(this.attackerAccessory);
-            this.panel120.Location = new System.Drawing.Point(93, 145);
-            this.panel120.Name = "panel120";
-            this.panel120.Size = new System.Drawing.Size(104, 17);
-            this.panel120.TabIndex = 207;
+            this.panelAttackerAccessory.Controls.Add(this.attackerAccessory);
+            this.panelAttackerAccessory.Location = new System.Drawing.Point(93, 126);
+            this.panelAttackerAccessory.Name = "panelAttackerAccessory";
+            this.panelAttackerAccessory.Size = new System.Drawing.Size(104, 17);
+            this.panelAttackerAccessory.TabIndex = 207;
             // 
             // attackerAccessory
             // 
@@ -315,13 +314,13 @@
             this.attackerAccessory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.attackerAccessory.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // panel119
+            // panelAttackerArmor
             // 
-            this.panel119.Controls.Add(this.attackerArmor);
-            this.panel119.Location = new System.Drawing.Point(93, 127);
-            this.panel119.Name = "panel119";
-            this.panel119.Size = new System.Drawing.Size(104, 17);
-            this.panel119.TabIndex = 206;
+            this.panelAttackerArmor.Controls.Add(this.attackerArmor);
+            this.panelAttackerArmor.Location = new System.Drawing.Point(93, 108);
+            this.panelAttackerArmor.Name = "panelAttackerArmor";
+            this.panelAttackerArmor.Size = new System.Drawing.Size(104, 17);
+            this.panelAttackerArmor.TabIndex = 206;
             // 
             // attackerArmor
             // 
@@ -341,69 +340,56 @@
             this.attackerArmor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.attackerArmor.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // label135
+            // labelAttackerWeapon
             // 
-            this.label135.BackColor = System.Drawing.SystemColors.Control;
-            this.label135.Location = new System.Drawing.Point(0, 109);
-            this.label135.Name = "label135";
-            this.label135.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label135.Size = new System.Drawing.Size(92, 17);
-            this.label135.TabIndex = 202;
-            this.label135.Text = "Weapon";
+            this.labelAttackerWeapon.BackColor = System.Drawing.SystemColors.Control;
+            this.labelAttackerWeapon.Location = new System.Drawing.Point(0, 90);
+            this.labelAttackerWeapon.Name = "labelAttackerWeapon";
+            this.labelAttackerWeapon.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelAttackerWeapon.Size = new System.Drawing.Size(92, 17);
+            this.labelAttackerWeapon.TabIndex = 202;
+            this.labelAttackerWeapon.Text = "Weapon";
             // 
-            // label134
+            // labelAttackerArmor
             // 
-            this.label134.BackColor = System.Drawing.SystemColors.Control;
-            this.label134.Location = new System.Drawing.Point(0, 127);
-            this.label134.Name = "label134";
-            this.label134.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label134.Size = new System.Drawing.Size(92, 17);
-            this.label134.TabIndex = 203;
-            this.label134.Text = "Armor";
+            this.labelAttackerArmor.BackColor = System.Drawing.SystemColors.Control;
+            this.labelAttackerArmor.Location = new System.Drawing.Point(0, 108);
+            this.labelAttackerArmor.Name = "labelAttackerArmor";
+            this.labelAttackerArmor.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelAttackerArmor.Size = new System.Drawing.Size(92, 17);
+            this.labelAttackerArmor.TabIndex = 203;
+            this.labelAttackerArmor.Text = "Armor";
             // 
-            // panel1
+            // panelAttackerStats
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.label235);
-            this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.LabelMonsterValAtk);
-            this.panel1.Controls.Add(this.panel28);
-            this.panel1.Controls.Add(this.attackerDefense);
-            this.panel1.Controls.Add(this.label133);
-            this.panel1.Controls.Add(this.attackerMgAttack);
-            this.panel1.Controls.Add(this.panel120);
-            this.panel1.Controls.Add(this.attackerMgDefense);
-            this.panel1.Controls.Add(this.attackerHP);
-            this.panel1.Controls.Add(this.panel119);
-            this.panel1.Controls.Add(this.attackerAttack);
-            this.panel1.Controls.Add(this.label135);
-            this.panel1.Controls.Add(this.LabelMonsterValDef);
-            this.panel1.Controls.Add(this.label134);
-            this.panel1.Controls.Add(this.LabelMonsterValMgAtk);
-            this.panel1.Controls.Add(this.LabelMonsterValMgDef);
-            this.panel1.Location = new System.Drawing.Point(252, 89);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 166);
-            this.panel1.TabIndex = 208;
-            // 
-            // label235
-            // 
-            this.label235.BackColor = System.Drawing.SystemColors.Control;
-            this.label235.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label235.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label235.Location = new System.Drawing.Point(0, 0);
-            this.label235.Name = "label235";
-            this.label235.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label235.Size = new System.Drawing.Size(196, 17);
-            this.label235.TabIndex = 262;
-            this.label235.Text = "ATTACKER STATS";
-            this.label235.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.panelAttackerStats.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelAttackerStats.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelAttackerStats.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelAttackerStats.Controls.Add(this.label13);
+            this.panelAttackerStats.Controls.Add(this.LabelMonsterValAtk);
+            this.panelAttackerStats.Controls.Add(this.panelAttackerWeapon);
+            this.panelAttackerStats.Controls.Add(this.attackerDefense);
+            this.panelAttackerStats.Controls.Add(this.labelAttackerAccessory);
+            this.panelAttackerStats.Controls.Add(this.attackerMgAttack);
+            this.panelAttackerStats.Controls.Add(this.panelAttackerAccessory);
+            this.panelAttackerStats.Controls.Add(this.attackerMgDefense);
+            this.panelAttackerStats.Controls.Add(this.attackerHP);
+            this.panelAttackerStats.Controls.Add(this.panelAttackerArmor);
+            this.panelAttackerStats.Controls.Add(this.attackerAttack);
+            this.panelAttackerStats.Controls.Add(this.labelAttackerWeapon);
+            this.panelAttackerStats.Controls.Add(this.LabelMonsterValDef);
+            this.panelAttackerStats.Controls.Add(this.labelAttackerArmor);
+            this.panelAttackerStats.Controls.Add(this.LabelMonsterValMgAtk);
+            this.panelAttackerStats.Controls.Add(this.LabelMonsterValMgDef);
+            this.panelAttackerStats.Location = new System.Drawing.Point(6, 97);
+            this.panelAttackerStats.Name = "panelAttackerStats";
+            this.panelAttackerStats.Size = new System.Drawing.Size(200, 147);
+            this.panelAttackerStats.TabIndex = 208;
             // 
             // label13
             // 
             this.label13.BackColor = System.Drawing.SystemColors.Control;
-            this.label13.Location = new System.Drawing.Point(0, 19);
+            this.label13.Location = new System.Drawing.Point(0, 0);
             this.label13.Name = "label13";
             this.label13.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label13.Size = new System.Drawing.Size(92, 17);
@@ -413,7 +399,7 @@
             // attackerHP
             // 
             this.attackerHP.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.attackerHP.Location = new System.Drawing.Point(93, 19);
+            this.attackerHP.Location = new System.Drawing.Point(93, 0);
             this.attackerHP.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -437,63 +423,46 @@
             this.attackerStatus.FormattingEnabled = true;
             this.attackerStatus.Items.AddRange(new object[] {
             "Attack up",
-            "Defense up",
             "Mg.Attack up",
-            "Mg.Defense up",
             "Attack down",
-            "Defense down",
-            "Mg.Atk down",
-            "Mg.Def down"});
-            this.attackerStatus.Location = new System.Drawing.Point(252, 257);
+            "Mg.Atk down"});
+            this.attackerStatus.Location = new System.Drawing.Point(6, 246);
             this.attackerStatus.MultiColumn = true;
             this.attackerStatus.Name = "attackerStatus";
-            this.attackerStatus.Size = new System.Drawing.Size(200, 68);
+            this.attackerStatus.Size = new System.Drawing.Size(200, 36);
             this.attackerStatus.TabIndex = 263;
             this.attackerStatus.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // panel2
+            // panelTargetStats
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.targetDefense);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.targetMgAttack);
-            this.panel2.Controls.Add(this.panel4);
-            this.panel2.Controls.Add(this.targetMgDefense);
-            this.panel2.Controls.Add(this.targetHP);
-            this.panel2.Controls.Add(this.panel5);
-            this.panel2.Controls.Add(this.targetAttack);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Location = new System.Drawing.Point(458, 89);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 166);
-            this.panel2.TabIndex = 208;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label1.Size = new System.Drawing.Size(196, 17);
-            this.label1.TabIndex = 262;
-            this.label1.Text = "TARGET STATS";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.panelTargetStats.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelTargetStats.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelTargetStats.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelTargetStats.Controls.Add(this.label14);
+            this.panelTargetStats.Controls.Add(this.label2);
+            this.panelTargetStats.Controls.Add(this.panelTargetWeapon);
+            this.panelTargetStats.Controls.Add(this.targetDefense);
+            this.panelTargetStats.Controls.Add(this.labelTargetAccessory);
+            this.panelTargetStats.Controls.Add(this.targetMgAttack);
+            this.panelTargetStats.Controls.Add(this.panelTargetAccessory);
+            this.panelTargetStats.Controls.Add(this.targetMgDefense);
+            this.panelTargetStats.Controls.Add(this.targetHP);
+            this.panelTargetStats.Controls.Add(this.panelTargetArmor);
+            this.panelTargetStats.Controls.Add(this.targetAttack);
+            this.panelTargetStats.Controls.Add(this.labelTargetWeapon);
+            this.panelTargetStats.Controls.Add(this.label5);
+            this.panelTargetStats.Controls.Add(this.labelTargetArmor);
+            this.panelTargetStats.Controls.Add(this.label7);
+            this.panelTargetStats.Controls.Add(this.label8);
+            this.panelTargetStats.Location = new System.Drawing.Point(6, 97);
+            this.panelTargetStats.Name = "panelTargetStats";
+            this.panelTargetStats.Size = new System.Drawing.Size(200, 93);
+            this.panelTargetStats.TabIndex = 208;
             // 
             // label14
             // 
             this.label14.BackColor = System.Drawing.SystemColors.Control;
-            this.label14.Location = new System.Drawing.Point(0, 19);
+            this.label14.Location = new System.Drawing.Point(0, 0);
             this.label14.Name = "label14";
             this.label14.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label14.Size = new System.Drawing.Size(92, 17);
@@ -503,20 +472,20 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(0, 37);
+            this.label2.Location = new System.Drawing.Point(0, 18);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label2.Size = new System.Drawing.Size(92, 17);
             this.label2.TabIndex = 16;
             this.label2.Text = "Attack";
             // 
-            // panel3
+            // panelTargetWeapon
             // 
-            this.panel3.Controls.Add(this.targetWeapon);
-            this.panel3.Location = new System.Drawing.Point(93, 109);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(104, 17);
-            this.panel3.TabIndex = 205;
+            this.panelTargetWeapon.Controls.Add(this.targetWeapon);
+            this.panelTargetWeapon.Location = new System.Drawing.Point(93, 90);
+            this.panelTargetWeapon.Name = "panelTargetWeapon";
+            this.panelTargetWeapon.Size = new System.Drawing.Size(104, 17);
+            this.panelTargetWeapon.TabIndex = 205;
             // 
             // targetWeapon
             // 
@@ -539,7 +508,7 @@
             // targetDefense
             // 
             this.targetDefense.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.targetDefense.Location = new System.Drawing.Point(93, 55);
+            this.targetDefense.Location = new System.Drawing.Point(93, 36);
             this.targetDefense.Maximum = new decimal(new int[] {
             255,
             0,
@@ -556,20 +525,20 @@
             0});
             this.targetDefense.ValueChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // label3
+            // labelTargetAccessory
             // 
-            this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(0, 145);
-            this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label3.Size = new System.Drawing.Size(92, 17);
-            this.label3.TabIndex = 204;
-            this.label3.Text = "Accessory";
+            this.labelTargetAccessory.BackColor = System.Drawing.SystemColors.Control;
+            this.labelTargetAccessory.Location = new System.Drawing.Point(0, 126);
+            this.labelTargetAccessory.Name = "labelTargetAccessory";
+            this.labelTargetAccessory.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelTargetAccessory.Size = new System.Drawing.Size(92, 17);
+            this.labelTargetAccessory.TabIndex = 204;
+            this.labelTargetAccessory.Text = "Accessory";
             // 
             // targetMgAttack
             // 
             this.targetMgAttack.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.targetMgAttack.Location = new System.Drawing.Point(93, 73);
+            this.targetMgAttack.Location = new System.Drawing.Point(93, 54);
             this.targetMgAttack.Maximum = new decimal(new int[] {
             255,
             0,
@@ -581,13 +550,13 @@
             this.targetMgAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.targetMgAttack.ValueChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // panel4
+            // panelTargetAccessory
             // 
-            this.panel4.Controls.Add(this.targetAccessory);
-            this.panel4.Location = new System.Drawing.Point(93, 145);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(104, 17);
-            this.panel4.TabIndex = 207;
+            this.panelTargetAccessory.Controls.Add(this.targetAccessory);
+            this.panelTargetAccessory.Location = new System.Drawing.Point(93, 126);
+            this.panelTargetAccessory.Name = "panelTargetAccessory";
+            this.panelTargetAccessory.Size = new System.Drawing.Size(104, 17);
+            this.panelTargetAccessory.TabIndex = 207;
             // 
             // targetAccessory
             // 
@@ -610,7 +579,7 @@
             // targetMgDefense
             // 
             this.targetMgDefense.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.targetMgDefense.Location = new System.Drawing.Point(93, 91);
+            this.targetMgDefense.Location = new System.Drawing.Point(93, 72);
             this.targetMgDefense.Maximum = new decimal(new int[] {
             255,
             0,
@@ -630,7 +599,7 @@
             // targetHP
             // 
             this.targetHP.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.targetHP.Location = new System.Drawing.Point(93, 19);
+            this.targetHP.Location = new System.Drawing.Point(93, 0);
             this.targetHP.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -647,13 +616,13 @@
             0});
             this.targetHP.ValueChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // panel5
+            // panelTargetArmor
             // 
-            this.panel5.Controls.Add(this.targetArmor);
-            this.panel5.Location = new System.Drawing.Point(93, 127);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(104, 17);
-            this.panel5.TabIndex = 206;
+            this.panelTargetArmor.Controls.Add(this.targetArmor);
+            this.panelTargetArmor.Location = new System.Drawing.Point(93, 108);
+            this.panelTargetArmor.Name = "panelTargetArmor";
+            this.panelTargetArmor.Size = new System.Drawing.Size(104, 17);
+            this.panelTargetArmor.TabIndex = 206;
             // 
             // targetArmor
             // 
@@ -676,7 +645,7 @@
             // targetAttack
             // 
             this.targetAttack.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.targetAttack.Location = new System.Drawing.Point(93, 37);
+            this.targetAttack.Location = new System.Drawing.Point(93, 18);
             this.targetAttack.Maximum = new decimal(new int[] {
             255,
             0,
@@ -693,40 +662,40 @@
             0});
             this.targetAttack.ValueChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // label4
+            // labelTargetWeapon
             // 
-            this.label4.BackColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(0, 109);
-            this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label4.Size = new System.Drawing.Size(92, 17);
-            this.label4.TabIndex = 202;
-            this.label4.Text = "Weapon";
+            this.labelTargetWeapon.BackColor = System.Drawing.SystemColors.Control;
+            this.labelTargetWeapon.Location = new System.Drawing.Point(0, 90);
+            this.labelTargetWeapon.Name = "labelTargetWeapon";
+            this.labelTargetWeapon.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelTargetWeapon.Size = new System.Drawing.Size(92, 17);
+            this.labelTargetWeapon.TabIndex = 202;
+            this.labelTargetWeapon.Text = "Weapon";
             // 
             // label5
             // 
             this.label5.BackColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(0, 55);
+            this.label5.Location = new System.Drawing.Point(0, 36);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label5.Size = new System.Drawing.Size(92, 17);
             this.label5.TabIndex = 17;
             this.label5.Text = "Defense";
             // 
-            // label6
+            // labelTargetArmor
             // 
-            this.label6.BackColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(0, 127);
-            this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label6.Size = new System.Drawing.Size(92, 17);
-            this.label6.TabIndex = 203;
-            this.label6.Text = "Armor";
+            this.labelTargetArmor.BackColor = System.Drawing.SystemColors.Control;
+            this.labelTargetArmor.Location = new System.Drawing.Point(0, 108);
+            this.labelTargetArmor.Name = "labelTargetArmor";
+            this.labelTargetArmor.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelTargetArmor.Size = new System.Drawing.Size(92, 17);
+            this.labelTargetArmor.TabIndex = 203;
+            this.labelTargetArmor.Text = "Armor";
             // 
             // label7
             // 
             this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(0, 73);
+            this.label7.Location = new System.Drawing.Point(0, 54);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label7.Size = new System.Drawing.Size(92, 17);
@@ -736,7 +705,7 @@
             // label8
             // 
             this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(0, 91);
+            this.label8.Location = new System.Drawing.Point(0, 72);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label8.Size = new System.Drawing.Size(92, 17);
@@ -749,60 +718,58 @@
             this.targetStatus.ColumnWidth = 98;
             this.targetStatus.FormattingEnabled = true;
             this.targetStatus.Items.AddRange(new object[] {
-            "Attack up",
             "Defense up",
-            "Mg.Attack up",
             "Mg.Defense up",
-            "Attack down",
             "Defense down",
-            "Mg.Atk down",
             "Mg.Def down"});
-            this.targetStatus.Location = new System.Drawing.Point(458, 257);
+            this.targetStatus.Location = new System.Drawing.Point(6, 246);
             this.targetStatus.MultiColumn = true;
             this.targetStatus.Name = "targetStatus";
-            this.targetStatus.Size = new System.Drawing.Size(200, 68);
+            this.targetStatus.Size = new System.Drawing.Size(200, 36);
             this.targetStatus.TabIndex = 263;
             this.targetStatus.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
             // 
             // targetDefensePosition
             // 
             this.targetDefensePosition.AutoSize = true;
-            this.targetDefensePosition.Location = new System.Drawing.Point(463, 388);
+            this.targetDefensePosition.Location = new System.Drawing.Point(8, 345);
             this.targetDefensePosition.Name = "targetDefensePosition";
             this.targetDefensePosition.Size = new System.Drawing.Size(138, 17);
             this.targetDefensePosition.TabIndex = 265;
             this.targetDefensePosition.Text = "Defense position active";
             this.targetDefensePosition.UseVisualStyleBackColor = true;
+            this.targetDefensePosition.Visible = false;
             this.targetDefensePosition.CheckedChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // radioButton3
+            // attackerTypeAlly
             // 
-            this.radioButton3.BackColor = System.Drawing.SystemColors.Control;
-            this.radioButton3.Checked = true;
-            this.radioButton3.Location = new System.Drawing.Point(0, 0);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(93, 17);
-            this.radioButton3.TabIndex = 264;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Ally";
-            this.radioButton3.UseVisualStyleBackColor = false;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.loadProperties);
+            this.attackerTypeAlly.BackColor = System.Drawing.SystemColors.Control;
+            this.attackerTypeAlly.Checked = true;
+            this.attackerTypeAlly.Location = new System.Drawing.Point(7, 17);
+            this.attackerTypeAlly.Name = "attackerTypeAlly";
+            this.attackerTypeAlly.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.attackerTypeAlly.Size = new System.Drawing.Size(93, 17);
+            this.attackerTypeAlly.TabIndex = 264;
+            this.attackerTypeAlly.TabStop = true;
+            this.attackerTypeAlly.Text = "Ally";
+            this.attackerTypeAlly.UseVisualStyleBackColor = false;
+            this.attackerTypeAlly.CheckedChanged += new System.EventHandler(this.attackerType_CheckedChanged);
             // 
-            // radioButton4
+            // attackerTypeMonster
             // 
-            this.radioButton4.BackColor = System.Drawing.SystemColors.Control;
-            this.radioButton4.Location = new System.Drawing.Point(93, 0);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(103, 17);
-            this.radioButton4.TabIndex = 264;
-            this.radioButton4.Text = "Monster";
-            this.radioButton4.UseVisualStyleBackColor = false;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            this.attackerTypeMonster.BackColor = System.Drawing.SystemColors.Control;
+            this.attackerTypeMonster.Location = new System.Drawing.Point(102, 17);
+            this.attackerTypeMonster.Name = "attackerTypeMonster";
+            this.attackerTypeMonster.Size = new System.Drawing.Size(103, 17);
+            this.attackerTypeMonster.TabIndex = 264;
+            this.attackerTypeMonster.Text = "Monster";
+            this.attackerTypeMonster.UseVisualStyleBackColor = false;
+            this.attackerTypeMonster.CheckedChanged += new System.EventHandler(this.attackerType_CheckedChanged);
             // 
             // panel6
             // 
             this.panel6.Controls.Add(this.attackerName);
-            this.panel6.Location = new System.Drawing.Point(0, 18);
+            this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(196, 17);
             this.panel6.TabIndex = 267;
@@ -823,12 +790,12 @@
             this.attackerName.TabIndex = 109;
             this.attackerName.Tag = "";
             this.attackerName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.attackerName_DrawItem);
-            this.attackerName.SelectedIndexChanged += new System.EventHandler(this.comboBoxLoad);
+            this.attackerName.SelectedIndexChanged += new System.EventHandler(this.loadProperties);
             // 
             // attackerLevel
             // 
             this.attackerLevel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.attackerLevel.Location = new System.Drawing.Point(93, 36);
+            this.attackerLevel.Location = new System.Drawing.Point(93, 18);
             this.attackerLevel.Maximum = new decimal(new int[] {
             30,
             0,
@@ -853,7 +820,7 @@
             // label9
             // 
             this.label9.BackColor = System.Drawing.SystemColors.Control;
-            this.label9.Location = new System.Drawing.Point(0, 36);
+            this.label9.Location = new System.Drawing.Point(0, 18);
             this.label9.Name = "label9";
             this.label9.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label9.Size = new System.Drawing.Size(92, 17);
@@ -869,17 +836,15 @@
             this.panelAttackerProperties.Controls.Add(this.label10);
             this.panelAttackerProperties.Controls.Add(this.label9);
             this.panelAttackerProperties.Controls.Add(this.attackerLevel);
-            this.panelAttackerProperties.Controls.Add(this.radioButton3);
-            this.panelAttackerProperties.Controls.Add(this.radioButton4);
-            this.panelAttackerProperties.Location = new System.Drawing.Point(252, 12);
+            this.panelAttackerProperties.Location = new System.Drawing.Point(6, 38);
             this.panelAttackerProperties.Name = "panelAttackerProperties";
-            this.panelAttackerProperties.Size = new System.Drawing.Size(200, 75);
+            this.panelAttackerProperties.Size = new System.Drawing.Size(200, 57);
             this.panelAttackerProperties.TabIndex = 268;
             // 
             // panel8
             // 
             this.panel8.Controls.Add(this.attackerBonus);
-            this.panel8.Location = new System.Drawing.Point(93, 54);
+            this.panel8.Location = new System.Drawing.Point(93, 36);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(103, 17);
             this.panel8.TabIndex = 268;
@@ -899,41 +864,42 @@
             this.attackerBonus.Size = new System.Drawing.Size(107, 21);
             this.attackerBonus.TabIndex = 109;
             this.attackerBonus.Tag = "";
-            this.attackerBonus.SelectedIndexChanged += new System.EventHandler(this.comboBoxLoad);
+            this.attackerBonus.SelectedIndexChanged += new System.EventHandler(this.loadProperties);
             // 
             // label10
             // 
             this.label10.BackColor = System.Drawing.SystemColors.Control;
-            this.label10.Location = new System.Drawing.Point(0, 54);
+            this.label10.Location = new System.Drawing.Point(0, 36);
             this.label10.Name = "label10";
             this.label10.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label10.Size = new System.Drawing.Size(92, 17);
             this.label10.TabIndex = 16;
             this.label10.Text = "Level-up bonus";
             // 
-            // radioButton5
+            // targetTypeAlly
             // 
-            this.radioButton5.BackColor = System.Drawing.SystemColors.Control;
-            this.radioButton5.Location = new System.Drawing.Point(0, 0);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(93, 17);
-            this.radioButton5.TabIndex = 264;
-            this.radioButton5.Text = "Ally";
-            this.radioButton5.UseVisualStyleBackColor = false;
-            this.radioButton5.CheckedChanged += new System.EventHandler(this.loadProperties);
+            this.targetTypeAlly.BackColor = System.Drawing.SystemColors.Control;
+            this.targetTypeAlly.Location = new System.Drawing.Point(6, 17);
+            this.targetTypeAlly.Name = "targetTypeAlly";
+            this.targetTypeAlly.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.targetTypeAlly.Size = new System.Drawing.Size(93, 17);
+            this.targetTypeAlly.TabIndex = 264;
+            this.targetTypeAlly.Text = "Ally";
+            this.targetTypeAlly.UseVisualStyleBackColor = false;
+            this.targetTypeAlly.CheckedChanged += new System.EventHandler(this.attackerType_CheckedChanged);
             // 
-            // radioButton6
+            // targetTypeMonster
             // 
-            this.radioButton6.BackColor = System.Drawing.SystemColors.Control;
-            this.radioButton6.Checked = true;
-            this.radioButton6.Location = new System.Drawing.Point(93, 0);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(103, 17);
-            this.radioButton6.TabIndex = 264;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Monster";
-            this.radioButton6.UseVisualStyleBackColor = false;
-            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            this.targetTypeMonster.BackColor = System.Drawing.SystemColors.Control;
+            this.targetTypeMonster.Checked = true;
+            this.targetTypeMonster.Location = new System.Drawing.Point(101, 17);
+            this.targetTypeMonster.Name = "targetTypeMonster";
+            this.targetTypeMonster.Size = new System.Drawing.Size(103, 17);
+            this.targetTypeMonster.TabIndex = 264;
+            this.targetTypeMonster.TabStop = true;
+            this.targetTypeMonster.Text = "Monster";
+            this.targetTypeMonster.UseVisualStyleBackColor = false;
+            this.targetTypeMonster.CheckedChanged += new System.EventHandler(this.targetType_CheckedChanged);
             // 
             // panelTargetProperties
             // 
@@ -944,17 +910,15 @@
             this.panelTargetProperties.Controls.Add(this.label11);
             this.panelTargetProperties.Controls.Add(this.label12);
             this.panelTargetProperties.Controls.Add(this.targetLevel);
-            this.panelTargetProperties.Controls.Add(this.radioButton5);
-            this.panelTargetProperties.Controls.Add(this.radioButton6);
-            this.panelTargetProperties.Location = new System.Drawing.Point(458, 12);
+            this.panelTargetProperties.Location = new System.Drawing.Point(6, 38);
             this.panelTargetProperties.Name = "panelTargetProperties";
-            this.panelTargetProperties.Size = new System.Drawing.Size(200, 75);
+            this.panelTargetProperties.Size = new System.Drawing.Size(200, 21);
             this.panelTargetProperties.TabIndex = 268;
             // 
             // panel10
             // 
             this.panel10.Controls.Add(this.targetBonus);
-            this.panel10.Location = new System.Drawing.Point(93, 54);
+            this.panel10.Location = new System.Drawing.Point(93, 36);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(103, 17);
             this.panel10.TabIndex = 268;
@@ -962,7 +926,6 @@
             // targetBonus
             // 
             this.targetBonus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.targetBonus.Enabled = false;
             this.targetBonus.IntegralHeight = false;
             this.targetBonus.ItemHeight = 13;
             this.targetBonus.Items.AddRange(new object[] {
@@ -975,12 +938,12 @@
             this.targetBonus.Size = new System.Drawing.Size(107, 21);
             this.targetBonus.TabIndex = 109;
             this.targetBonus.Tag = "";
-            this.targetBonus.SelectedIndexChanged += new System.EventHandler(this.comboBoxLoad);
+            this.targetBonus.SelectedIndexChanged += new System.EventHandler(this.loadProperties);
             // 
             // panel11
             // 
             this.panel11.Controls.Add(this.targetName);
-            this.panel11.Location = new System.Drawing.Point(0, 18);
+            this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(196, 17);
             this.panel11.TabIndex = 267;
@@ -1001,12 +964,12 @@
             this.targetName.TabIndex = 109;
             this.targetName.Tag = "";
             this.targetName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.targetName_DrawItem);
-            this.targetName.SelectedIndexChanged += new System.EventHandler(this.comboBoxLoad);
+            this.targetName.SelectedIndexChanged += new System.EventHandler(this.loadProperties);
             // 
             // label11
             // 
             this.label11.BackColor = System.Drawing.SystemColors.Control;
-            this.label11.Location = new System.Drawing.Point(0, 54);
+            this.label11.Location = new System.Drawing.Point(0, 36);
             this.label11.Name = "label11";
             this.label11.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label11.Size = new System.Drawing.Size(92, 17);
@@ -1016,7 +979,7 @@
             // label12
             // 
             this.label12.BackColor = System.Drawing.SystemColors.Control;
-            this.label12.Location = new System.Drawing.Point(0, 36);
+            this.label12.Location = new System.Drawing.Point(0, 18);
             this.label12.Name = "label12";
             this.label12.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label12.Size = new System.Drawing.Size(92, 17);
@@ -1026,8 +989,7 @@
             // targetLevel
             // 
             this.targetLevel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.targetLevel.Enabled = false;
-            this.targetLevel.Location = new System.Drawing.Point(93, 36);
+            this.targetLevel.Location = new System.Drawing.Point(93, 18);
             this.targetLevel.Maximum = new decimal(new int[] {
             30,
             0,
@@ -1054,30 +1016,8 @@
             this.singleAttack.Location = new System.Drawing.Point(93, 12);
             this.singleAttack.Name = "singleAttack";
             this.singleAttack.ReadOnly = true;
-            this.singleAttack.Size = new System.Drawing.Size(153, 21);
+            this.singleAttack.Size = new System.Drawing.Size(111, 21);
             this.singleAttack.TabIndex = 270;
-            // 
-            // timedAttackL1
-            // 
-            this.timedAttackL1.AutoSize = true;
-            this.timedAttackL1.Location = new System.Drawing.Point(257, 388);
-            this.timedAttackL1.Name = "timedAttackL1";
-            this.timedAttackL1.Size = new System.Drawing.Size(87, 17);
-            this.timedAttackL1.TabIndex = 265;
-            this.timedAttackL1.Text = "Timed attack";
-            this.timedAttackL1.UseVisualStyleBackColor = true;
-            this.timedAttackL1.CheckedChanged += new System.EventHandler(this.calculateTotal);
-            // 
-            // timedAttackL2
-            // 
-            this.timedAttackL2.AutoSize = true;
-            this.timedAttackL2.Location = new System.Drawing.Point(257, 405);
-            this.timedAttackL2.Name = "timedAttackL2";
-            this.timedAttackL2.Size = new System.Drawing.Size(131, 17);
-            this.timedAttackL2.TabIndex = 265;
-            this.timedAttackL2.Text = "Perfectly timed attack";
-            this.timedAttackL2.UseVisualStyleBackColor = true;
-            this.timedAttackL2.CheckedChanged += new System.EventHandler(this.calculateTotal);
             // 
             // targetWeakness
             // 
@@ -1097,71 +1037,29 @@
             this.targetWeakness.TabIndex = 263;
             this.targetWeakness.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
             // 
-            // panel12
+            // panelTargetWeakness
             // 
-            this.panel12.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel12.Controls.Add(this.label15);
-            this.panel12.Controls.Add(this.targetWeakness);
-            this.panel12.Location = new System.Drawing.Point(458, 327);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(200, 55);
-            this.panel12.TabIndex = 272;
+            this.panelTargetWeakness.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelTargetWeakness.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelTargetWeakness.Controls.Add(this.label15);
+            this.panelTargetWeakness.Controls.Add(this.targetWeakness);
+            this.panelTargetWeakness.Location = new System.Drawing.Point(6, 284);
+            this.panelTargetWeakness.Name = "panelTargetWeakness";
+            this.panelTargetWeakness.Size = new System.Drawing.Size(200, 55);
+            this.panelTargetWeakness.TabIndex = 272;
             // 
             // label15
             // 
             this.label15.BackColor = System.Drawing.SystemColors.Control;
             this.label15.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label15.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label15.Location = new System.Drawing.Point(0, 0);
             this.label15.Name = "label15";
             this.label15.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.label15.Size = new System.Drawing.Size(196, 17);
             this.label15.TabIndex = 262;
-            this.label15.Text = "WEAK AGAINST";
+            this.label15.Text = "ELEMENT WEAKNESS";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel13
-            // 
-            this.panel13.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel13.Controls.Add(this.label16);
-            this.panel13.Controls.Add(this.checkedListBox1);
-            this.panel13.Location = new System.Drawing.Point(252, 327);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(200, 55);
-            this.panel13.TabIndex = 272;
-            // 
-            // label16
-            // 
-            this.label16.BackColor = System.Drawing.SystemColors.Control;
-            this.label16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label16.Location = new System.Drawing.Point(0, 0);
-            this.label16.Name = "label16";
-            this.label16.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label16.Size = new System.Drawing.Size(196, 17);
-            this.label16.TabIndex = 262;
-            this.label16.Text = "WEAK AGAINST";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkedListBox1.CheckOnClick = true;
-            this.checkedListBox1.ColumnWidth = 98;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "Ice",
-            "Thunder",
-            "Fire",
-            "Jump"});
-            this.checkedListBox1.Location = new System.Drawing.Point(0, 19);
-            this.checkedListBox1.MultiColumn = true;
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(196, 32);
-            this.checkedListBox1.TabIndex = 263;
-            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
             // 
             // label17
             // 
@@ -1174,6 +1072,8 @@
             // 
             // listView1
             // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.spellIndex,
             this.spellName,
@@ -1181,7 +1081,7 @@
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(3, 39);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(243, 671);
+            this.listView1.Size = new System.Drawing.Size(201, 671);
             this.listView1.TabIndex = 274;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -1190,40 +1090,96 @@
             // spellIndex
             // 
             this.spellIndex.Tag = "";
-            this.spellIndex.Text = "";
-            this.spellIndex.Width = 37;
+            this.spellIndex.Text = "#";
+            this.spellIndex.Width = 29;
             // 
             // spellName
             // 
             this.spellName.Tag = "";
             this.spellName.Text = "Spell";
-            this.spellName.Width = 127;
+            this.spellName.Width = 100;
             // 
             // damage
             // 
             this.damage.Tag = "";
             this.damage.Text = "Damage";
-            this.damage.Width = 59;
+            this.damage.Width = 52;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.panelAttackerProperties);
+            this.groupBox1.Controls.Add(this.panelAttackerStats);
+            this.groupBox1.Controls.Add(this.attackerStatus);
+            this.groupBox1.Controls.Add(this.timedAttackL2);
+            this.groupBox1.Controls.Add(this.timedAttackL1);
+            this.groupBox1.Controls.Add(this.attackerTypeMonster);
+            this.groupBox1.Controls.Add(this.attackerTypeAlly);
+            this.groupBox1.Location = new System.Drawing.Point(210, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(212, 370);
+            this.groupBox1.TabIndex = 275;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "ATTACKER STATS";
+            // 
+            // timedAttackL2
+            // 
+            this.timedAttackL2.AutoSize = true;
+            this.timedAttackL2.Location = new System.Drawing.Point(8, 305);
+            this.timedAttackL2.Name = "timedAttackL2";
+            this.timedAttackL2.Size = new System.Drawing.Size(131, 17);
+            this.timedAttackL2.TabIndex = 265;
+            this.timedAttackL2.Text = "Perfectly timed attack";
+            this.timedAttackL2.UseVisualStyleBackColor = true;
+            this.timedAttackL2.CheckedChanged += new System.EventHandler(this.calculateTotal);
+            // 
+            // timedAttackL1
+            // 
+            this.timedAttackL1.AutoSize = true;
+            this.timedAttackL1.Location = new System.Drawing.Point(8, 288);
+            this.timedAttackL1.Name = "timedAttackL1";
+            this.timedAttackL1.Size = new System.Drawing.Size(87, 17);
+            this.timedAttackL1.TabIndex = 265;
+            this.timedAttackL1.Text = "Timed attack";
+            this.timedAttackL1.UseVisualStyleBackColor = true;
+            this.timedAttackL1.CheckedChanged += new System.EventHandler(this.calculateTotal);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.panelTargetProperties);
+            this.groupBox2.Controls.Add(this.panelTargetStats);
+            this.groupBox2.Controls.Add(this.targetStatus);
+            this.groupBox2.Controls.Add(this.targetDefensePosition);
+            this.groupBox2.Controls.Add(this.panelTargetWeakness);
+            this.groupBox2.Controls.Add(this.targetTypeMonster);
+            this.groupBox2.Controls.Add(this.targetTypeAlly);
+            this.groupBox2.Location = new System.Drawing.Point(488, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(212, 370);
+            this.groupBox2.TabIndex = 276;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "TARGET STATS";
+            // 
+            // buttonSwitch
+            // 
+            this.buttonSwitch.Location = new System.Drawing.Point(428, 23);
+            this.buttonSwitch.Name = "buttonSwitch";
+            this.buttonSwitch.Size = new System.Drawing.Size(54, 23);
+            this.buttonSwitch.TabIndex = 277;
+            this.buttonSwitch.Text = "<< >>";
+            this.buttonSwitch.UseVisualStyleBackColor = true;
+            this.buttonSwitch.Click += new System.EventHandler(this.buttonSwitch_Click);
             // 
             // StatusCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 713);
+            this.ClientSize = new System.Drawing.Size(703, 713);
+            this.Controls.Add(this.buttonSwitch);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.panel13);
-            this.Controls.Add(this.panel12);
             this.Controls.Add(this.singleAttack);
-            this.Controls.Add(this.panelTargetProperties);
-            this.Controls.Add(this.panelAttackerProperties);
-            this.Controls.Add(this.timedAttackL2);
-            this.Controls.Add(this.timedAttackL1);
-            this.Controls.Add(this.targetDefensePosition);
-            this.Controls.Add(this.targetStatus);
-            this.Controls.Add(this.attackerStatus);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(5, 5);
@@ -1234,19 +1190,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.attackerMgDefense)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.attackerMgAttack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.attackerDefense)).EndInit();
-            this.panel28.ResumeLayout(false);
-            this.panel120.ResumeLayout(false);
-            this.panel119.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.panelAttackerWeapon.ResumeLayout(false);
+            this.panelAttackerAccessory.ResumeLayout(false);
+            this.panelAttackerArmor.ResumeLayout(false);
+            this.panelAttackerStats.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.attackerHP)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.panelTargetStats.ResumeLayout(false);
+            this.panelTargetWeapon.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.targetDefense)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.targetMgAttack)).EndInit();
-            this.panel4.ResumeLayout(false);
+            this.panelTargetAccessory.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.targetMgDefense)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.targetHP)).EndInit();
-            this.panel5.ResumeLayout(false);
+            this.panelTargetArmor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.targetAttack)).EndInit();
             this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.attackerLevel)).EndInit();
@@ -1256,8 +1212,11 @@
             this.panel10.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.targetLevel)).EndInit();
-            this.panel12.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
+            this.panelTargetWeakness.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1273,41 +1232,39 @@
         private System.Windows.Forms.NumericUpDown attackerMgDefense;
         private System.Windows.Forms.NumericUpDown attackerMgAttack;
         private System.Windows.Forms.NumericUpDown attackerDefense;
-        private System.Windows.Forms.Panel panel28;
+        private System.Windows.Forms.Panel panelAttackerWeapon;
         private System.Windows.Forms.ComboBox attackerWeapon;
-        private System.Windows.Forms.Label label133;
-        private System.Windows.Forms.Panel panel120;
+        private System.Windows.Forms.Label labelAttackerAccessory;
+        private System.Windows.Forms.Panel panelAttackerAccessory;
         private System.Windows.Forms.ComboBox attackerAccessory;
-        private System.Windows.Forms.Panel panel119;
+        private System.Windows.Forms.Panel panelAttackerArmor;
         private System.Windows.Forms.ComboBox attackerArmor;
-        private System.Windows.Forms.Label label135;
-        private System.Windows.Forms.Label label134;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label235;
+        private System.Windows.Forms.Label labelAttackerWeapon;
+        private System.Windows.Forms.Label labelAttackerArmor;
+        private System.Windows.Forms.Panel panelAttackerStats;
         private System.Windows.Forms.CheckedListBox attackerStatus;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panelTargetStats;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panelTargetWeapon;
         private System.Windows.Forms.ComboBox targetWeapon;
         private System.Windows.Forms.NumericUpDown targetDefense;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelTargetAccessory;
         private System.Windows.Forms.NumericUpDown targetMgAttack;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panelTargetAccessory;
         private System.Windows.Forms.ComboBox targetAccessory;
         private System.Windows.Forms.NumericUpDown targetMgDefense;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panelTargetArmor;
         private System.Windows.Forms.ComboBox targetArmor;
         private System.Windows.Forms.NumericUpDown targetAttack;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelTargetWeapon;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelTargetArmor;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckedListBox targetStatus;
         private System.Windows.Forms.CheckBox targetDefensePosition;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton attackerTypeAlly;
+        private System.Windows.Forms.RadioButton attackerTypeMonster;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ComboBox attackerName;
         private System.Windows.Forms.NumericUpDown attackerLevel;
@@ -1316,8 +1273,8 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.ComboBox attackerBonus;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton targetTypeAlly;
+        private System.Windows.Forms.RadioButton targetTypeMonster;
         private System.Windows.Forms.Panel panelTargetProperties;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.ComboBox targetBonus;
@@ -1327,23 +1284,23 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown targetLevel;
         private System.Windows.Forms.TextBox singleAttack;
-        private System.Windows.Forms.CheckBox timedAttackL1;
-        private System.Windows.Forms.CheckBox timedAttackL2;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown attackerHP;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.NumericUpDown targetHP;
         private System.Windows.Forms.CheckedListBox targetWeakness;
-        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panelTargetWeakness;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ListView listView1;
+        private LAZYSHELL.NewListView listView1;
         private System.Windows.Forms.ColumnHeader spellIndex;
         private System.Windows.Forms.ColumnHeader spellName;
         private System.Windows.Forms.ColumnHeader damage;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox timedAttackL2;
+        private System.Windows.Forms.CheckBox timedAttackL1;
+        private System.Windows.Forms.Button buttonSwitch;
 
     }
 }

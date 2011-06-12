@@ -26,6 +26,7 @@ namespace LAZYSHELL
             index = 0;
             RefreshShops();
         }
+        // functions
         private void InitializeStrings()
         {
             for (int i = 0; i < settings.ShopNames.Count; i++)
@@ -79,7 +80,7 @@ namespace LAZYSHELL
             this.shopItem13.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[12]);
             this.shopItem14.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[13]);
             this.shopItem15.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[14]);
-            updating = true;
+            updating = false;
         }
         public void RefreshShops()
         {

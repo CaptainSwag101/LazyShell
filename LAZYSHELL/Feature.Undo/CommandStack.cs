@@ -17,6 +17,7 @@ namespace LAZYSHELL.Undo
     class CommandStack
     {
         private Command[] commands;
+        public Command[] Commands { get { return commands; } set { commands = value; } }
         private Stack<Command> redoStack;
         private int index = 0;
         private int undo = 0;
@@ -31,6 +32,18 @@ namespace LAZYSHELL.Undo
         {
             commands = new Command[initialSize];
             redoStack = new Stack<Command>();
+        }
+        public void SetTilemaps(TileMap tilemap)
+        {
+            foreach (TileMapEditCommand command in commands)
+                if (command != null)
+                    command.Tilemap = tilemap;
+        }
+        public void SetSolidityMaps(Map tilemap)
+        {
+            foreach (SolidityEditCommand command in commands)
+                if (command != null)
+                    command.Tilemap = tilemap;
         }
         public void UndoCommand()
         {
@@ -72,7 +85,7 @@ namespace LAZYSHELL.Undo
                 if (!cmd.AutoRedo())
                     Push(cmd);
             }
-            
+
             redoing = false;
         }
         public void Push(Command cmd)

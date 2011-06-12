@@ -10,7 +10,8 @@ namespace LAZYSHELL
 {
     public partial class Formations : Form
     {
-                private bool updating = false;
+        #region Variables
+        private bool updating = false;
         private bool waitBothCoords = false;
         private int overFM = 0;
         private int diffX, diffY;
@@ -29,6 +30,8 @@ namespace LAZYSHELL
         public ToolStripTextBox FormationName { get { return nameTextBox; } }
         public System.Windows.Forms.ToolStripComboBox FormationNames { get { return formationNameList; } }
         public Search searchWindow;
+        #endregion
+        // Constructor
         public Formations()
         {
             Model.MonsterNames = new DDlistName(monsters);
@@ -40,6 +43,7 @@ namespace LAZYSHELL
             battlefieldName.SelectedIndex = 7;
             RefreshFormations();
         }
+        // functions
         public void SetToolTips(ToolTip toolTip1)
         {
             // FORMATIONS
@@ -252,7 +256,7 @@ namespace LAZYSHELL
             formationBGImage = new Bitmap(Do.PixelsToImage(pixels, 512, 512));
             pictureBoxFormation.Invalidate();
         }
-        #region Formations Event Handlers
+        #region Event Handlers
         private void formationNameList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
@@ -563,6 +567,7 @@ namespace LAZYSHELL
             formationImage = new Bitmap(this.formation.FormationImage);
             pictureBoxFormation.Invalidate();
         }
+        //
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
@@ -626,6 +631,7 @@ namespace LAZYSHELL
 
             Model.FormationMusics[formationMusic.SelectedIndex] = (byte)musicTrack.SelectedIndex;
         }
+        //
         private void pictureBoxFormation_MouseDown(object sender, MouseEventArgs e)
         {
             int x = e.X; int y = e.Y;
@@ -724,6 +730,5 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(formationImage, 0, 0);
         }
         #endregion
-
     }
 }

@@ -1438,7 +1438,7 @@
             this.toolStripDropDownButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resetCurrentMonsterToolStripMenuItem,
             this.resetCurrentBattleScriptToolStripMenuItem});
-            this.toolStripDropDownButton4.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.toolStripDropDownButton4.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.toolStripDropDownButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";

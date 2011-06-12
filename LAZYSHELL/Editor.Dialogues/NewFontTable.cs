@@ -11,6 +11,7 @@ namespace LAZYSHELL
 {
     public partial class NewFontTable : Form
     {
+        #region Variables
         private Fonts fontsEditor;
         private FontCharacter[] font { get { return fontsEditor.FontCharacters; } }
         private int fontType { get { return fontsEditor.FontType; } }
@@ -53,47 +54,50 @@ namespace LAZYSHELL
                 ' ',' ','*','\'','&',' ',' ',' ',
 
             };
+        #endregion
+        // constructor
         public NewFontTable(Fonts fontsEditor)
         {
             this.fontsEditor = fontsEditor;
             InitializeComponent();
             InitializeNewFontTable();
         }
+        // functions
         public void Reload()
         {
             InitializeNewFontTable();
         }
         public void SetToolTips(ToolTip toolTip1)
         {
-            this.fontFamily.ToolTipText = 
+            this.fontFamily.ToolTipText =
                 "Select a system-installed font to use in the new font table.";
 
-            this.fontSize.ToolTipText = 
+            this.fontSize.ToolTipText =
                 "Set the size of the font to use in the new font table.";
 
-            this.characterHeight.ToolTipText = 
+            this.characterHeight.ToolTipText =
                 "Set the height of all characters in the new font table.";
 
-            this.shiftTableUp.ToolTipText = 
+            this.shiftTableUp.ToolTipText =
                 "Move the new font table up 1 pixel.";
 
-            this.shiftTableDown.ToolTipText = 
+            this.shiftTableDown.ToolTipText =
                 "Move the new font table down 1 pixel.";
 
-            this.shiftTableLeft.ToolTipText = 
+            this.shiftTableLeft.ToolTipText =
                 "Move the new font table left 1 pixel.";
 
-            this.shiftTableRight.ToolTipText = 
+            this.shiftTableRight.ToolTipText =
                 "Move the new font table right 1 pixel.";
 
-            this.resetTable.ToolTipText = 
+            this.resetTable.ToolTipText =
                 "Reset the new font table's position.";
 
-            this.autoSetWidths.ToolTipText = 
+            this.autoSetWidths.ToolTipText =
                 "The width of each character will be automatically set based \n" +
                 "on a used pixel at the farthest right.";
 
-            this.padding.ToolTipText = 
+            this.padding.ToolTipText =
                 "This value will be added to the automatically set width of \n" +
                 "each character in the newly created font table.";
 
@@ -150,6 +154,7 @@ namespace LAZYSHELL
             fontTable.Height = s.Height * u.Height;
             fontTable.Visible = true;
         }
+        #region Event handlers
         private void fontUnderline_Click(object sender, EventArgs e)
         {
             try
@@ -317,5 +322,6 @@ namespace LAZYSHELL
         {
             ((RichTextBox)sender).SelectAll();
         }
+        #endregion
     }
 }

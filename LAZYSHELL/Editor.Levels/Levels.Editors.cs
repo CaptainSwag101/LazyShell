@@ -8,15 +8,16 @@ namespace LAZYSHELL
 {
     public partial class Levels
     {
+        #region Variables
         private delegate void Function();
-
         private PaletteEditor paletteEditor;
         private GraphicEditor graphicEditor;
         private LevelsTileset levelsTileset;
         private LevelsTilemap levelsTilemap;
-        private LevelsSolidTiles levelsPhysicalTiles;
+        private LevelsSolidTiles levelsSolidTiles;
         private LevelsTemplate levelsTemplate;
-
+        #endregion
+        #region Functions
         private void PaletteUpdate()
         {
             fullUpdate = false;
@@ -39,7 +40,14 @@ namespace LAZYSHELL
             fullUpdate = false;
             RefreshLevel();
         }
-
+        private void SolidityUpdate()
+        {
+            fullUpdate = true;
+            solidityMap = new LevelSolidMap(levelMap);
+            solidityMap.Image = null;
+            LoadTilemapEditor();
+        }
+        //
         private void LoadPaletteEditor()
         {
             if (paletteEditor == null)
@@ -67,14 +75,14 @@ namespace LAZYSHELL
             if (levelsTilemap == null)
             {
                 levelsTilemap = new LevelsTilemap(
-                    this, this.level, this.tileMap, this.physicalMap, this.tileSet, this.overlay,
-                    this.paletteEditor, this.levelsTileset, this.levelsPhysicalTiles, this.levelsTemplate);
+                    this, this.level, this.tileMap, this.solidityMap, this.tileSet, this.overlay,
+                    this.paletteEditor, this.levelsTileset, this.levelsSolidTiles, this.levelsTemplate);
                 levelsTilemap.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
                 levelsTilemap.Reload(
-                  this, this.level, this.tileMap, this.physicalMap, this.tileSet, this.overlay,
-                  this.paletteEditor, this.levelsTileset, this.levelsPhysicalTiles, this.levelsTemplate);
+                  this, this.level, this.tileMap, this.solidityMap, this.tileSet, this.overlay,
+                  this.paletteEditor, this.levelsTileset, this.levelsSolidTiles, this.levelsTemplate);
         }
         private void LoadTilesetEditor()
         {
@@ -86,10 +94,10 @@ namespace LAZYSHELL
             else
                 levelsTileset.Reload(this.tileSet, new Function(TilesetUpdate), this.paletteSet, this.overlay);
         }
-        private void LoadPhysicalTileset()
+        private void LoadSolidityTileset()
         {
-            levelsPhysicalTiles = new LevelsSolidTiles(solidTiles, solidity);
-            levelsPhysicalTiles.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            levelsSolidTiles = new LevelsSolidTiles(solidity, new Function(SolidityUpdate));
+            levelsSolidTiles.FormClosing += new FormClosingEventHandler(editor_FormClosing);
         }
         private void LoadTemplateEditor()
         {
@@ -101,12 +109,14 @@ namespace LAZYSHELL
             else
                 levelsTemplate.Reload(this, this.overlay);
         }
+        #endregion
+        #region Event handlers
         private void editor_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
             ((Form)sender).Hide();
         }
-
+        //
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             tabControl.Visible = propertiesButton.Checked;
@@ -134,9 +144,9 @@ namespace LAZYSHELL
         }
         private void openSolidTileset_Click(object sender, EventArgs e)
         {
-            levelsPhysicalTiles.Visible = openSolidTileset.Checked;
-            levelsPhysicalTiles.Location = new Point(
-                Screen.PrimaryScreen.WorkingArea.Width - levelsPhysicalTiles.Size.Width, this.Location.Y);
+            levelsSolidTiles.Visible = openSolidTileset.Checked;
+            levelsSolidTiles.Location = new Point(
+                Screen.PrimaryScreen.WorkingArea.Width - levelsSolidTiles.Size.Width, this.Location.Y);
         }
         private void openTemplates_Click(object sender, EventArgs e)
         {
@@ -144,5 +154,6 @@ namespace LAZYSHELL
             levelsTemplate.Location = new Point(
                 Screen.PrimaryScreen.WorkingArea.Width - levelsTemplate.Size.Width, this.Location.Y);
         }
+        #endregion
     }
 }

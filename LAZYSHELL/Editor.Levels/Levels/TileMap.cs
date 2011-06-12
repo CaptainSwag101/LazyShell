@@ -139,104 +139,19 @@ namespace LAZYSHELL
             }
             CreateMainscreen();
         }
-        private void DrawAllLayers()
+        public void AssembleIntoModel()
         {
-            if (prioritySets[levelLayer.PrioritySet].SubscreenL1 || prioritySets[levelLayer.PrioritySet].MainscreenL1)
+            for (int l = 0; l < 3; l++)
             {
-                DrawLayerByPriorityOne(layer1Priority0, 0, false);
-                DrawLayerByPriorityOne(layer1Priority1, 0, true);
+                if (layers[l] == null) continue;
+                for (int i = 0; i < layers[l].Length; i++)
+                {
+                    if (l < 2)
+                        Bits.SetShort(tileMaps[l], i * 2, (ushort)layers[l][i].TileIndex);
+                    else
+                        Bits.SetByte(tileMaps[2], i, (byte)layers[2][i].TileIndex);
+                }
             }
-            if (prioritySets[levelLayer.PrioritySet].SubscreenL2 || prioritySets[levelLayer.PrioritySet].MainscreenL2)
-            {
-                DrawLayerByPriorityOne(layer2Priority0, 1, false);
-                DrawLayerByPriorityOne(layer2Priority1, 1, true);
-            }
-            if ((prioritySets[levelLayer.PrioritySet].SubscreenL3 || prioritySets[levelLayer.PrioritySet].MainscreenL3) && levelMap.GraphicSetL3 != 0xFF)
-            {
-                DrawLayerByPriorityOne(layer3Priority0, 2, false);
-                DrawLayerByPriorityOne(layer3Priority1, 2, true);
-            }
-        }
-        public int[] GetRangePixels(int layer, Point p, Size s)
-        {
-            int[] pixels = new int[s.Width * s.Height];
-            switch (layer)
-            {
-                case 0:
-                    for (int b = 0, y = p.Y; b < s.Height; b++, y++)
-                    {
-                        for (int a = 0, x = p.X; a < s.Width; a++, x++)
-                        {
-                            pixels[b * s.Width + a] = layer1Priority0[y * width_p + x];
-                            if (layer1Priority1[y * width_p + x] != 0)
-                                pixels[b * s.Width + a] = layer1Priority1[y * width_p + x];
-                        }
-                    }
-                    break;
-                case 1:
-                    for (int b = 0, y = p.Y; b < s.Height; b++, y++)
-                    {
-                        for (int a = 0, x = p.X; a < s.Width; a++, x++)
-                        {
-                            pixels[b * s.Width + a] = layer2Priority0[y * width_p + x];
-                            if (layer2Priority1[y * width_p + x] != 0)
-                                pixels[b * s.Width + a] = layer2Priority1[y * width_p + x];
-                        }
-                    }
-                    break;
-                case 2:
-                    for (int b = 0, y = p.Y; b < s.Height; b++, y++)
-                    {
-                        for (int a = 0, x = p.X; a < s.Width; a++, x++)
-                        {
-                            pixels[b * s.Width + a] = layer3Priority0[y * width_p + x];
-                            if (layer3Priority1[y * width_p + x] != 0)
-                                pixels[b * s.Width + a] = layer3Priority1[y * width_p + x];
-                        }
-                    }
-                    break;
-                default:
-                    goto case 0;
-            }
-            return pixels;
-        }
-        public int[] GetRangePixels(Point p, Size s)
-        {
-            int[] pixels = new int[s.Width * s.Height];
-
-            for (int b = 0, y = p.Y; b < s.Height; b++, y++)
-            {
-                for (int a = 0, x = p.X; a < s.Width; a++, x++)
-                    pixels[b * s.Width + a] = Color.FromArgb(255, Color.FromArgb(mainscreen[y * width_p + x])).ToArgb();
-            }
-            return pixels;
-        }
-        /*
-         * This method just redraws an existing tilemap
-         */
-        public void RedrawTileMap()
-        {
-            layer1Priority1 = new int[width_p * height_p];
-            layer2Priority1 = new int[width_p * height_p];
-            layer3Priority1 = new int[width_p * height_p];
-
-            DrawAllLayers();
-
-            Bits.Clear(mainscreen);
-            if (subscreen != null)
-                Bits.Clear(subscreen);
-
-            if ((prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1) ||
-                    (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2) ||
-                    (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3) ||
-                    (prioritySets[levelLayer.PrioritySet].SubscreenOBJ && state.NPCs))
-            {
-                if (subscreen == null)
-                    subscreen = new int[width_p * height_p];
-                CreateSubscreen(); // Create the subscreen if needed
-            }
-
-            CreateMainscreen();
         }
         private void ChangeSingleTile(int layer, int placement, int tile, int x, int y)
         {
@@ -295,6 +210,31 @@ namespace LAZYSHELL
             ClearSingleTile(mainscreen, x, y);
             DrawSingleMainscreenTile(x, y);
         }
+        public void Clear(int count)
+        {
+            if (count == 1)
+            {
+                Model.TileMaps[levelMap.TileMapL1 + 0x40] = new byte[0x2000];
+                Model.TileMaps[levelMap.TileMapL2 + 0x40] = new byte[0x2000];
+                Model.TileMaps[levelMap.TileMapL3] = new byte[0x1000];
+
+                Model.EditTileMaps[levelMap.TileMapL1 + 0x40] = true;
+                Model.EditTileMaps[levelMap.TileMapL2 + 0x40] = true;
+                Model.EditTileMaps[levelMap.TileMapL3] = true;
+            }
+            else
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    if (i < 0x40)
+                        Model.TileMaps[i] = new byte[0x1000];
+                    else
+                        Model.TileMaps[i] = new byte[0x2000];
+                    Model.EditTileMaps[i] = true;
+                }
+            }
+            RedrawTileMap();
+        }
         private void ClearSingleTile(int[] arr, int x, int y)
         {
             int counter = 0;
@@ -307,87 +247,6 @@ namespace LAZYSHELL
                 {
                     y++;
                     counter = 0;
-                }
-            }
-        }
-        private void DrawSingleSubscreenTile(int x, int y)
-        {
-            if (levelMap.TopPriorityL3) //[3,0][2,0][1,0][2,1][1,1][3,1]
-            {
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                {
-                    tile = GetTileFromPriorityArray(layer3Priority0, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
-                {
-                    tile = GetTileFromPriorityArray(layer2Priority0, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
-                {
-                    tile = GetTileFromPriorityArray(layer1Priority0, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
-                {
-                    tile = GetTileFromPriorityArray(layer2Priority1, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
-                {
-                    tile = GetTileFromPriorityArray(layer1Priority1, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                {
-                    tile = GetTileFromPriorityArray(layer3Priority1, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-            }
-            else if (!levelMap.TopPriorityL3) //[3,0][3,1][2,0][1,0][2,1][1,1]
-            {
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                {
-                    tile = GetTileFromPriorityArray(layer3Priority0, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                {
-                    tile = GetTileFromPriorityArray(layer3Priority1, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
-                {
-                    tile = GetTileFromPriorityArray(layer2Priority0, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
-                {
-                    tile = GetTileFromPriorityArray(layer1Priority0, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
-                {
-                    tile = GetTileFromPriorityArray(layer2Priority1, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
-                }
-                if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
-                {
-                    tile = GetTileFromPriorityArray(layer1Priority1, x, y);
-                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
-                    Bits.Clear(tile);
                 }
             }
         }
@@ -408,265 +267,6 @@ namespace LAZYSHELL
             }
 
         }
-        private void DrawSingleMainscreenTile(int x, int y)
-        {
-            int bgcolor = paletteSet.Palette[16];
-            Bits.Clear(tile);
-            Bits.Clear(tileColorMath);
-            if (HaveSubscreen())
-            {
-                if (prioritySets[levelLayer.PrioritySet].ColorMathBG && state.BG)
-                {
-                    for (int i = 0; i < 256; i++)
-                        tileColorMath[i] = bgcolor;
-                    DoColorMathOnSingleTile(tileColorMath, x, y);
-                    CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                    Bits.Clear(tileColorMath);
-                }
-                else if (state.BG)
-                {
-                    for (int i = 0; i < 256; i++)
-                        tileColorMath[i] = bgcolor;
-                    CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                    Bits.Clear(tileColorMath);
-                }
-
-                if (levelMap.TopPriorityL3) // [3,0][2,0][1,0][2,1][1,1][3,1]
-                {
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer3Priority0, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer2Priority0, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer1Priority0, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer2Priority1, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer1Priority1, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer3Priority1, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                }
-                else if (!levelMap.TopPriorityL3) // [3,0][3,1][2,0][1,0][2,1][1,1]
-                {
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer3Priority0, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer3Priority1, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer2Priority0, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer1Priority0, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer2Priority1, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
-                    {
-                        tileColorMath = GetTileFromPriorityArray(layer1Priority1, x, y);
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
-                            DoColorMathOnSingleTile(tileColorMath, x, y);
-                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
-                        Bits.Clear(tileColorMath);
-                    }
-                }
-            }
-            else // No color math, we can go ahead and draw the mainscreen
-            {
-                if (levelMap.TopPriorityL3) // [3,0][2,0][1,0][2,1][1,1][3,1]
-                {
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer3Priority0, x, y), width_p, x, y);
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer2Priority0, x, y), width_p, x, y);
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer1Priority0, x, y), width_p, x, y);
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer2Priority1, x, y), width_p, x, y);
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer1Priority1, x, y), width_p, x, y);
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer3Priority1, x, y), width_p, x, y);
-                }
-                else if (!levelMap.TopPriorityL3) // [3,0][3,1][2,0][1,0][2,1][1,1]
-                {
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer3Priority0, x, y), width_p, x, y);
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer3Priority1, x, y), width_p, x, y);
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer2Priority0, x, y), width_p, x, y);
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer1Priority0, x, y), width_p, x, y);
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer2Priority1, x, y), width_p, x, y);
-                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
-                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer1Priority1, x, y), width_p, x, y);
-                }
-
-                // Apply BG color
-                if (state.BG)
-                {
-                    for (int b = y; b < y + 16; b++)
-                    {
-                        for (int a = x; a < x + 16; a++)
-                        {
-                            if (mainscreen[b * width_p + a] == 0)
-                                mainscreen[b * width_p + a] = bgcolor;
-                        }
-                    }
-                }
-            }
-        }
-        private int[] GetTileFromPriorityArray(int[] arr, int x, int y)
-        {
-            int counter = 0;
-            for (int i = 0; i < 256; i++)
-            {
-                if (arr[y * width_p + x + counter] != 0)
-                    tile[i] = arr[y * width_p + x + counter];
-
-                counter++;
-                if (counter % 16 == 0)
-                {
-                    y++;
-                    counter = 0;
-                }
-            }
-            return tile;
-
-        }
-        private void DoColorMathOnSingleTile(int[] tile, int x, int y)
-        {
-            // NEW CODE TEST
-            int r, g, b;
-
-            for (int w = 0; w < 16; w++)
-            {
-                for (int v = 0; v < 16; v++)
-                {
-                    if (subscreen[(y + w) * width_p + (x + v)] != 0 && tile[w * 16 + v] != 0)
-                    {
-                        r = Color.FromArgb(tile[w * 16 + v]).R;
-                        g = Color.FromArgb(tile[w * 16 + v]).G;
-                        b = Color.FromArgb(tile[w * 16 + v]).B;
-
-                        if (prioritySets[levelLayer.PrioritySet].ColorMathMinusSubscreen == 0)
-                        {
-                            if (prioritySets[levelLayer.PrioritySet].ColorMathHalfIntensity == 1)
-                            {
-                                r /= 2; g /= 2; b /= 2;
-                                r += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).R / 2;
-                                g += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).G / 2;
-                                b += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).B / 2;
-                            }
-                            else
-                            {
-                                r += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).R;
-                                g += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).G;
-                                b += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).B;
-                            }
-
-                            if (r > 255) r = 255; if (g > 255) g = 255; if (b > 255) b = 255;
-                        }
-                        else if (prioritySets[levelLayer.PrioritySet].ColorMathMinusSubscreen == 1)
-                        {
-                            if (prioritySets[levelLayer.PrioritySet].ColorMathHalfIntensity == 1)
-                            {
-                                r /= 2; g /= 2; b /= 2;
-                                r -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).R / 2;
-                                g -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).G / 2;
-                                b -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).B / 2;
-                            }
-                            else
-                            {
-                                r -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).R;
-                                g -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).G;
-                                b -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).B;
-                            }
-
-                            if (r < 0) r = 0; if (g < 0) g = 0; if (b < 0) b = 0;
-                        }
-
-                        tile[w * 16 + v] = Color.FromArgb(255, r, g, b).ToArgb();
-
-                    }
-                }
-            }
-        }
-        private bool HaveSubscreen()
-        {
-            if ((prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1) ||
-                (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2) ||
-                (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3) ||
-                (prioritySets[levelLayer.PrioritySet].SubscreenOBJ && state.NPCs))
-                return true;
-
-            return false;
-        }
         private void CopyToPixelArray(int[] dest, int[] source)
         {
             try
@@ -680,10 +280,42 @@ namespace LAZYSHELL
                 // overflow
             }
         }
-        /*
-         * This method draws the mainscreen from the subscreen and all required layers
-         * This method also handles the color math pixel by pixel
-         */
+        private void CreateLayer(int layer)
+        {
+            if (tileMaps[layer] == null) return;
+            if (tileset.TileSetLayers[layer] == null) return;
+
+            int offset = 0;
+            ushort tileNum;
+            byte increment = 2;
+
+            if (layer == 2)
+                increment = 1;
+
+            layers[layer] = new Tile16x16[width * height]; // Create our layer here
+            if (layer != 2) // Layers 1 and 2
+            {
+                for (int i = 0; i < tileMaps[layer].Length / increment; i++)
+                {
+                    tileNum = Bits.GetShort(tileMaps[layer], offset);
+                    if (tileNum > 0x1FF)
+                        tileNum = 0;
+                    offset += increment;
+                    layers[layer][i] = tileset.TileSetLayers[layer][tileNum];
+                }
+            }
+            else // Layer 3
+            {
+                for (int i = 0; i < tileMaps[layer].Length / increment; i++)
+                {
+                    tileNum = tileMaps[layer][offset];
+                    if (tileNum > 0xFF)
+                        tileNum = 0;
+                    offset += increment;
+                    layers[layer][i] = tileset.TileSetLayers[layer][tileNum];
+                }
+            }
+        }
         private void CreateMainscreen()
         {
             int bgcolor = paletteSet.Palette[16];
@@ -862,50 +494,42 @@ namespace LAZYSHELL
                 }
             }
         }
-        /*
-         * This method creates the specified layer if it is being drawn
-         * Done
-         */
-        private void CreateLayer(int layer)
+        private void CreateSubscreen()
         {
-            if (tileMaps[layer] == null) return;
-            if (tileset.TileSetLayers[layer] == null) return;
-
-            int offset = 0;
-            ushort tileNum;
-            byte increment = 2;
-
-            if (layer == 2)
-                increment = 1;
-
-            layers[layer] = new Tile16x16[width * height]; // Create our layer here
-            if (layer != 2) // Layers 1 and 2
+            // 2 possible cases
+            if (levelMap.TopPriorityL3) //[3,0][2,0][1,0][2,1][1,1][3,1]
             {
-                for (int i = 0; i < tileMaps[layer].Length / increment; i++)
-                {
-                    tileNum = Bits.GetShort(tileMaps[layer], offset);
-                    if (tileNum > 0x1FF)
-                        tileNum = 0;
-                    offset += increment;
-                    layers[layer][i] = tileset.TileSetLayers[layer][tileNum];
-                }
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                    CopyToPixelArray(subscreen, layer3Priority0);//DrawLayerByPriorityOne(subscreenPixels, 2, false);
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
+                    CopyToPixelArray(subscreen, layer2Priority0);//DrawLayerByPriorityOne(subscreenPixels, 1, false);
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
+                    CopyToPixelArray(subscreen, layer1Priority0);//DrawLayerByPriorityOne(subscreenPixels, 0, false);
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
+                    CopyToPixelArray(subscreen, layer2Priority1);//DrawLayerByPriorityOne(subscreenPixels, 1, true);
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
+                    CopyToPixelArray(subscreen, layer1Priority1);//DrawLayerByPriorityOne(subscreenPixels, 0, true);
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                    CopyToPixelArray(subscreen, layer3Priority1);//DrawLayerByPriorityOne(subscreenPixels, 2, true);
+
+
             }
-            else // Layer 3
+            else if (!levelMap.TopPriorityL3) //[3,0][3,1][2,0][1,0][2,1][1,1]
             {
-                for (int i = 0; i < tileMaps[layer].Length / increment; i++)
-                {
-                    tileNum = tileMaps[layer][offset];
-                    if (tileNum > 0xFF)
-                        tileNum = 0;
-                    offset += increment;
-                    layers[layer][i] = tileset.TileSetLayers[layer][tileNum];
-                }
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                    CopyToPixelArray(subscreen, layer3Priority0);//DrawLayerByPriorityOne(subscreenPixels, 2, false);
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                    CopyToPixelArray(subscreen, layer3Priority1);//DrawLayerByPriorityOne(subscreenPixels, 2, true);
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
+                    CopyToPixelArray(subscreen, layer2Priority0);//DrawLayerByPriorityOne(subscreenPixels, 1, false);
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
+                    CopyToPixelArray(subscreen, layer1Priority0);//DrawLayerByPriorityOne(subscreenPixels, 0, false);
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
+                    CopyToPixelArray(subscreen, layer2Priority1);//DrawLayerByPriorityOne(subscreenPixels, 1, true);
+                if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
+                    CopyToPixelArray(subscreen, layer1Priority1);//DrawLayerByPriorityOne(subscreenPixels, 0, true);
             }
         }
-        /*
-         * This method computes the color math using subscreenPixels and a layer
-         * It is done on a pixel per pixel basis
-         */
         private void DoColorMath(int[] layer)
         {
             // NEW CODE TEST
@@ -964,10 +588,82 @@ namespace LAZYSHELL
                 }
             }
         }
-        /*
-         * This Method draws a specified priority for a specified layer
-         * Dest must be an int[width_p * height_p]!
-         */
+        private void DoColorMathOnSingleTile(int[] tile, int x, int y)
+        {
+            // NEW CODE TEST
+            int r, g, b;
+
+            for (int w = 0; w < 16; w++)
+            {
+                for (int v = 0; v < 16; v++)
+                {
+                    if (subscreen[(y + w) * width_p + (x + v)] != 0 && tile[w * 16 + v] != 0)
+                    {
+                        r = Color.FromArgb(tile[w * 16 + v]).R;
+                        g = Color.FromArgb(tile[w * 16 + v]).G;
+                        b = Color.FromArgb(tile[w * 16 + v]).B;
+
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathMinusSubscreen == 0)
+                        {
+                            if (prioritySets[levelLayer.PrioritySet].ColorMathHalfIntensity == 1)
+                            {
+                                r /= 2; g /= 2; b /= 2;
+                                r += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).R / 2;
+                                g += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).G / 2;
+                                b += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).B / 2;
+                            }
+                            else
+                            {
+                                r += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).R;
+                                g += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).G;
+                                b += Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).B;
+                            }
+
+                            if (r > 255) r = 255; if (g > 255) g = 255; if (b > 255) b = 255;
+                        }
+                        else if (prioritySets[levelLayer.PrioritySet].ColorMathMinusSubscreen == 1)
+                        {
+                            if (prioritySets[levelLayer.PrioritySet].ColorMathHalfIntensity == 1)
+                            {
+                                r /= 2; g /= 2; b /= 2;
+                                r -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).R / 2;
+                                g -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).G / 2;
+                                b -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).B / 2;
+                            }
+                            else
+                            {
+                                r -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).R;
+                                g -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).G;
+                                b -= Color.FromArgb(subscreen[(y + w) * width_p + (x + v)]).B;
+                            }
+
+                            if (r < 0) r = 0; if (g < 0) g = 0; if (b < 0) b = 0;
+                        }
+
+                        tile[w * 16 + v] = Color.FromArgb(255, r, g, b).ToArgb();
+
+                    }
+                }
+            }
+        }
+        private void DrawAllLayers()
+        {
+            if (prioritySets[levelLayer.PrioritySet].SubscreenL1 || prioritySets[levelLayer.PrioritySet].MainscreenL1)
+            {
+                DrawLayerByPriorityOne(layer1Priority0, 0, false);
+                DrawLayerByPriorityOne(layer1Priority1, 0, true);
+            }
+            if (prioritySets[levelLayer.PrioritySet].SubscreenL2 || prioritySets[levelLayer.PrioritySet].MainscreenL2)
+            {
+                DrawLayerByPriorityOne(layer2Priority0, 1, false);
+                DrawLayerByPriorityOne(layer2Priority1, 1, true);
+            }
+            if ((prioritySets[levelLayer.PrioritySet].SubscreenL3 || prioritySets[levelLayer.PrioritySet].MainscreenL3) && levelMap.GraphicSetL3 != 0xFF)
+            {
+                DrawLayerByPriorityOne(layer3Priority0, 2, false);
+                DrawLayerByPriorityOne(layer3Priority1, 2, true);
+            }
+        }
         private int[] DrawLayerByPriorityOne(int[] dest, int layer, bool priority)
         {
             if (dest.Length != width_p * height_p || layers[layer] == null)
@@ -1004,49 +700,260 @@ namespace LAZYSHELL
             return dest;
 
         }
-        /*
-         * This method fills the int[] subscreenPixels based on the decompressed tileMaps and the priority order.
-         */
-        private void CreateSubscreen()
+        private void DrawSingleMainscreenTile(int x, int y)
         {
-            // 2 possible cases
+            int bgcolor = paletteSet.Palette[16];
+            Bits.Clear(tile);
+            Bits.Clear(tileColorMath);
+            if (HaveSubscreen())
+            {
+                if (prioritySets[levelLayer.PrioritySet].ColorMathBG && state.BG)
+                {
+                    for (int i = 0; i < 256; i++)
+                        tileColorMath[i] = bgcolor;
+                    DoColorMathOnSingleTile(tileColorMath, x, y);
+                    CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                    Bits.Clear(tileColorMath);
+                }
+                else if (state.BG)
+                {
+                    for (int i = 0; i < 256; i++)
+                        tileColorMath[i] = bgcolor;
+                    CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                    Bits.Clear(tileColorMath);
+                }
+
+                if (levelMap.TopPriorityL3) // [3,0][2,0][1,0][2,1][1,1][3,1]
+                {
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer3Priority0, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer2Priority0, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer1Priority0, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer2Priority1, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer1Priority1, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer3Priority1, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                }
+                else if (!levelMap.TopPriorityL3) // [3,0][3,1][2,0][1,0][2,1][1,1]
+                {
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer3Priority0, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer3Priority1, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer2Priority0, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer1Priority0, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer2Priority1, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
+                    {
+                        tileColorMath = GetTileFromPriorityArray(layer1Priority1, x, y);
+                        if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
+                            DoColorMathOnSingleTile(tileColorMath, x, y);
+                        CopySingleTileToArray(mainscreen, tileColorMath, width_p, x, y);
+                        Bits.Clear(tileColorMath);
+                    }
+                }
+            }
+            else // No color math, we can go ahead and draw the mainscreen
+            {
+                if (levelMap.TopPriorityL3) // [3,0][2,0][1,0][2,1][1,1][3,1]
+                {
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer3Priority0, x, y), width_p, x, y);
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer2Priority0, x, y), width_p, x, y);
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer1Priority0, x, y), width_p, x, y);
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer2Priority1, x, y), width_p, x, y);
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer1Priority1, x, y), width_p, x, y);
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer3Priority1, x, y), width_p, x, y);
+                }
+                else if (!levelMap.TopPriorityL3) // [3,0][3,1][2,0][1,0][2,1][1,1]
+                {
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer3Priority0, x, y), width_p, x, y);
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer3Priority1, x, y), width_p, x, y);
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer2Priority0, x, y), width_p, x, y);
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer1Priority0, x, y), width_p, x, y);
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer2Priority1, x, y), width_p, x, y);
+                    if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
+                        CopySingleTileToArray(mainscreen, GetTileFromPriorityArray(layer1Priority1, x, y), width_p, x, y);
+                }
+
+                // Apply BG color
+                if (state.BG)
+                {
+                    for (int b = y; b < y + 16; b++)
+                    {
+                        for (int a = x; a < x + 16; a++)
+                        {
+                            if (mainscreen[b * width_p + a] == 0)
+                                mainscreen[b * width_p + a] = bgcolor;
+                        }
+                    }
+                }
+            }
+        }
+        private void DrawSingleSubscreenTile(int x, int y)
+        {
             if (levelMap.TopPriorityL3) //[3,0][2,0][1,0][2,1][1,1][3,1]
             {
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                    CopyToPixelArray(subscreen, layer3Priority0);//DrawLayerByPriorityOne(subscreenPixels, 2, false);
+                {
+                    tile = GetTileFromPriorityArray(layer3Priority0, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
-                    CopyToPixelArray(subscreen, layer2Priority0);//DrawLayerByPriorityOne(subscreenPixels, 1, false);
+                {
+                    tile = GetTileFromPriorityArray(layer2Priority0, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
-                    CopyToPixelArray(subscreen, layer1Priority0);//DrawLayerByPriorityOne(subscreenPixels, 0, false);
+                {
+                    tile = GetTileFromPriorityArray(layer1Priority0, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
-                    CopyToPixelArray(subscreen, layer2Priority1);//DrawLayerByPriorityOne(subscreenPixels, 1, true);
+                {
+                    tile = GetTileFromPriorityArray(layer2Priority1, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
-                    CopyToPixelArray(subscreen, layer1Priority1);//DrawLayerByPriorityOne(subscreenPixels, 0, true);
+                {
+                    tile = GetTileFromPriorityArray(layer1Priority1, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                    CopyToPixelArray(subscreen, layer3Priority1);//DrawLayerByPriorityOne(subscreenPixels, 2, true);
-
-
+                {
+                    tile = GetTileFromPriorityArray(layer3Priority1, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
             }
             else if (!levelMap.TopPriorityL3) //[3,0][3,1][2,0][1,0][2,1][1,1]
             {
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                    CopyToPixelArray(subscreen, layer3Priority0);//DrawLayerByPriorityOne(subscreenPixels, 2, false);
+                {
+                    tile = GetTileFromPriorityArray(layer3Priority0, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
-                    CopyToPixelArray(subscreen, layer3Priority1);//DrawLayerByPriorityOne(subscreenPixels, 2, true);
+                {
+                    tile = GetTileFromPriorityArray(layer3Priority1, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
-                    CopyToPixelArray(subscreen, layer2Priority0);//DrawLayerByPriorityOne(subscreenPixels, 1, false);
+                {
+                    tile = GetTileFromPriorityArray(layer2Priority0, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
-                    CopyToPixelArray(subscreen, layer1Priority0);//DrawLayerByPriorityOne(subscreenPixels, 0, false);
+                {
+                    tile = GetTileFromPriorityArray(layer1Priority0, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2)
-                    CopyToPixelArray(subscreen, layer2Priority1);//DrawLayerByPriorityOne(subscreenPixels, 1, true);
+                {
+                    tile = GetTileFromPriorityArray(layer2Priority1, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1)
-                    CopyToPixelArray(subscreen, layer1Priority1);//DrawLayerByPriorityOne(subscreenPixels, 0, true);
+                {
+                    tile = GetTileFromPriorityArray(layer1Priority1, x, y);
+                    CopySingleTileToArray(subscreen, tile, width_p, x, y);
+                    Bits.Clear(tile);
+                }
             }
         }
-        /*
-        * This method fills the 16x16 pixel buf with the correct graphics from the
-        * 8x8 tiles, but only if we have all the subtiles
-        */
         public int[] GetPriority1Pixels()
         {
             int[] pixels = new int[width_p * height_p];
@@ -1063,6 +970,102 @@ namespace LAZYSHELL
             }
 
             return pixels;
+        }
+        public int[] GetRangePixels(int layer, Point p, Size s)
+        {
+            int[] pixels = new int[s.Width * s.Height];
+            switch (layer)
+            {
+                case 0:
+                    for (int b = 0, y = p.Y; b < s.Height; b++, y++)
+                    {
+                        for (int a = 0, x = p.X; a < s.Width; a++, x++)
+                        {
+                            pixels[b * s.Width + a] = layer1Priority0[y * width_p + x];
+                            if (layer1Priority1[y * width_p + x] != 0)
+                                pixels[b * s.Width + a] = layer1Priority1[y * width_p + x];
+                        }
+                    }
+                    break;
+                case 1:
+                    for (int b = 0, y = p.Y; b < s.Height; b++, y++)
+                    {
+                        for (int a = 0, x = p.X; a < s.Width; a++, x++)
+                        {
+                            pixels[b * s.Width + a] = layer2Priority0[y * width_p + x];
+                            if (layer2Priority1[y * width_p + x] != 0)
+                                pixels[b * s.Width + a] = layer2Priority1[y * width_p + x];
+                        }
+                    }
+                    break;
+                case 2:
+                    for (int b = 0, y = p.Y; b < s.Height; b++, y++)
+                    {
+                        for (int a = 0, x = p.X; a < s.Width; a++, x++)
+                        {
+                            pixels[b * s.Width + a] = layer3Priority0[y * width_p + x];
+                            if (layer3Priority1[y * width_p + x] != 0)
+                                pixels[b * s.Width + a] = layer3Priority1[y * width_p + x];
+                        }
+                    }
+                    break;
+                default:
+                    goto case 0;
+            }
+            return pixels;
+        }
+        public int[] GetRangePixels(Point p, Size s)
+        {
+            int[] pixels = new int[s.Width * s.Height];
+
+            for (int b = 0, y = p.Y; b < s.Height; b++, y++)
+            {
+                for (int a = 0, x = p.X; a < s.Width; a++, x++)
+                    pixels[b * s.Width + a] = Color.FromArgb(255, Color.FromArgb(mainscreen[y * width_p + x])).ToArgb();
+            }
+            return pixels;
+        }
+        public int GetTileNum(int layer, int x, int y)
+        {
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            if (x >= width_p) x = width_p - 1;
+            if (y >= height_p) y = height_p - 1;
+            y /= 16;
+            x /= 16;
+            int placement = y * width + x;
+
+            if (layer < 3 && layers[layer] != null)
+                return layers[layer][placement].TileIndex;
+            else return 0;
+        }
+        private int[] GetTileFromPriorityArray(int[] arr, int x, int y)
+        {
+            int counter = 0;
+            for (int i = 0; i < 256; i++)
+            {
+                if (arr[y * width_p + x + counter] != 0)
+                    tile[i] = arr[y * width_p + x + counter];
+
+                counter++;
+                if (counter % 16 == 0)
+                {
+                    y++;
+                    counter = 0;
+                }
+            }
+            return tile;
+
+        }
+        private bool HaveSubscreen()
+        {
+            if ((prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1) ||
+                (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2) ||
+                (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3) ||
+                (prioritySets[levelLayer.PrioritySet].SubscreenOBJ && state.NPCs))
+                return true;
+
+            return false;
         }
         public void MakeEdit(int tileNum, int layer, int x, int y)
         {
@@ -1090,58 +1093,28 @@ namespace LAZYSHELL
                 case 2: Model.EditTileMaps[levelMap.TileMapL3] = true; break;
             }
         }
-        public int GetTileNum(int layer, int x, int y)
+        public void RedrawTileMap()
         {
-            if (x < 0) x = 0;
-            if (y < 0) y = 0;
-            if (x >= width_p) x = width_p - 1;
-            if (y >= height_p) y = height_p - 1;
-            y /= 16;
-            x /= 16;
-            int placement = y * width + x;
+            layer1Priority1 = new int[width_p * height_p];
+            layer2Priority1 = new int[width_p * height_p];
+            layer3Priority1 = new int[width_p * height_p];
 
-            if (layer < 3 && layers[layer] != null)
-                return layers[layer][placement].TileIndex;
-            else return 0;
-        }
-        public void Clear(int count)
-        {
-            if (count == 1)
-            {
-                Model.TileMaps[levelMap.TileMapL1 + 0x40] = new byte[0x2000];
-                Model.TileMaps[levelMap.TileMapL2 + 0x40] = new byte[0x2000];
-                Model.TileMaps[levelMap.TileMapL3] = new byte[0x1000];
+            DrawAllLayers();
 
-                Model.EditTileMaps[levelMap.TileMapL1 + 0x40] = true;
-                Model.EditTileMaps[levelMap.TileMapL2 + 0x40] = true;
-                Model.EditTileMaps[levelMap.TileMapL3] = true;
-            }
-            else
+            Bits.Clear(mainscreen);
+            if (subscreen != null)
+                Bits.Clear(subscreen);
+
+            if ((prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1) ||
+                    (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2) ||
+                    (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3) ||
+                    (prioritySets[levelLayer.PrioritySet].SubscreenOBJ && state.NPCs))
             {
-                for (int i = 0; i < count; i++)
-                {
-                    if (i < 0x40)
-                        Model.TileMaps[i] = new byte[0x1000];
-                    else
-                        Model.TileMaps[i] = new byte[0x2000];
-                    Model.EditTileMaps[i] = true;
-                }
+                if (subscreen == null)
+                    subscreen = new int[width_p * height_p];
+                CreateSubscreen(); // Create the subscreen if needed
             }
-            RedrawTileMap();
-        }
-        public void AssembleIntoModel()
-        {
-            for (int l = 0; l < 3; l++)
-            {
-                if (layers[l] == null) continue;
-                for (int i = 0; i < layers[l].Length; i++)
-                {
-                    if (l < 2)
-                        Bits.SetShort(tileMaps[l], i * 2, (ushort)layers[l][i].TileIndex);
-                    else
-                        Bits.SetByte(tileMaps[2], i, (byte)layers[2][i].TileIndex);
-                }
-            }
+            CreateMainscreen();
         }
     }
 }

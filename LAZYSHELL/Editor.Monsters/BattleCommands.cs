@@ -661,16 +661,20 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 2:
                     for (int i = 0; i < 2; i++)
                     {
-                        if (commandData[i + 2] == 0xFB) name[i] = "{Do nothing}";
-                        else name[i] = "[" + commandData[i + 2].ToString("d3") + "]  " + names.GetNameByNum(commandData[i + 2]);
+                        if (commandData[i + 2] == 0xFB) 
+                            name[i] = "{Do nothing}";
+                        else 
+                            name[i] = "[" + commandData[i + 2].ToString("d3") + "]  " + names.GetNameByNum(commandData[i + 2]).Substring(1);
                         name[i] = name[i].Trim('\x20');
                     }
                     return "If attacked by spell:  " + name[0] + "  /  " + name[1];
                 case 3:
                     for (int i = 0; i < 2; i++)
                     {
-                        if (commandData[i + 2] == 0xFB) name[i] = "{Do nothing}";
-                        else name[i] = "[" + commandData[i + 2].ToString("d3") + "]  " + names.GetNameByNum(commandData[i + 2]);
+                        if (commandData[i + 2] == 0xFB) 
+                            name[i] = "{Do nothing}";
+                        else 
+                            name[i] = "[" + commandData[i + 2].ToString("d3") + "]  " + names.GetNameByNum(commandData[i + 2]).Substring(1);
                         name[i] = name[i].Trim('\x20');
                     }
                     return "If attacked by item:  " + name[0] + "  /  " + name[1];

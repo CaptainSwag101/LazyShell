@@ -10,27 +10,34 @@ namespace LAZYSHELL
 {
     public partial class LevelsSolidTiles : Form
     {
+        #region Variables
+        private delegate void Function();
+        private Delegate update;
         private int index { get { return (int)physicalTileNum.Value; } }
         public int Index { get { return (int)physicalTileNum.Value; } set { physicalTileNum.Value = value; } }
-        private SolidityTile[] solidityTiles;
+        private SolidityTile[] solidityTiles { get { return Model.SolidTiles; } set { Model.SolidTiles = value; } }
         private SolidityTile solidityTile { get { return solidityTiles[index]; } set { solidityTiles[index] = value; } }
         private bool updating = false;
         private Bitmap solidTileImage;
         private Solidity solids;
         public Solidity Solids { get { return solids; } }
         public SearchSolidTile searchSolidTile;
-
-        public LevelsSolidTiles(SolidityTile[] solidityTiles, Solidity solids)
+        #endregion
+        // Constructor
+        public LevelsSolidTiles(Solidity solids, Delegate update)
         {
-            this.solidityTiles = solidityTiles;
             this.solids = solids;
-            DrawPhysicalTiles();
+            this.update = update;
             InitializeComponent();
             RefreshPhysicalTile();
             searchSolidTile = new SearchSolidTile(this, solidityTiles);
         }
-        public void DrawPhysicalTiles()
+        #region Functions
+        public void SetSolidTileImage()
         {
+            int[] physicalTilePixels = solids.GetTilePixels(solidityTile);
+            solidTileImage = new Bitmap(Do.PixelsToImage(physicalTilePixels, 32, 784));
+            pictureBoxPhysicalTile.Invalidate();
         }
         private void RefreshPhysicalTile()
         {
@@ -66,12 +73,12 @@ namespace LAZYSHELL
             specialTile.SelectedIndex = solidityTile.SpecialTileFormat;
             doorFormat.SelectedIndex = solidityTile.Door;
 
-            int[] physicalTilePixels = solids.GetTilePixels(solidityTile);
-            solidTileImage = new Bitmap(Do.PixelsToImage(physicalTilePixels, 32, 784));
-            pictureBoxPhysicalTile.Invalidate();
+            SetSolidTileImage();
 
             updating = false;
         }
+        #endregion
+        #region Event handlers
         private void physicalTileNum_ValueChanged(object sender, EventArgs e)
         {
             RefreshPhysicalTile();
@@ -81,84 +88,110 @@ namespace LAZYSHELL
             searchSolidTile.Show();
             searchSolidTile.BringToFront();
         }
-
-        private void property_SelectedIndexChanged(object sender, EventArgs e)
+        private void reset_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void pictureBoxPhysicalTile_MouseDown(object sender, MouseEventArgs e)
-        {
-
+            if (MessageBox.Show("You're about to undo all changes to the current solidity tile. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            solidityTile = new SolidityTile(Model.Data, index);
+            physicalTileNum_ValueChanged(null, null);
         }
         private void pictureBoxPhysicalTile_Paint(object sender, PaintEventArgs e)
         {
             if (solidTileImage != null)
                 e.Graphics.DrawImage(solidTileImage, 0, 0);
         }
-        private void pictureBoxPhysicalTile_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-
-        }
-
         private void LevelsPhysicalTiles_FormClosed(object sender, FormClosedEventArgs e)
         {
         }
-
+        //
         private void heightOfBaseTile_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
             solidityTile.BaseTileHeight = (byte)heightOfBaseTile.Value;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void zCoordOverhead_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
             solidityTile.OverheadTileCoordZ = (byte)zCoordOverhead.Value;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void heightOverhead_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
             solidityTile.OverheadTileHeight = (byte)heightOverhead.Value;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void zCoordWater_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
             solidityTile.WaterTileCoordZ = (byte)zCoordWater.Value;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void zCoordPlusHalf_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
             solidityTile.BaseTileHeightPlusHalf = zCoordPlusHalf.SelectedIndex == 1;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void solidTile_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
             solidityTile.SolidTile = solidTile.SelectedIndex == 1;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void solidQuadrant_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
             solidityTile.SolidQuadrantFlag = solidQuadrant.SelectedIndex == 1;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void solidQuadrantN_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
             solidityTile.SolidTopQuadrant = solidQuadrantN.SelectedIndex == 1;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void solidQuadrantW_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            solidityTile.SolidLeftQuadrant = solidQuadrantN.SelectedIndex == 1;
+            solidityTile.SolidLeftQuadrant = solidQuadrantW.SelectedIndex == 1;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void solidQuadrantE_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            solidityTile.SolidRightQuadrant = solidQuadrantN.SelectedIndex == 1;
+            solidityTile.SolidRightQuadrant = solidQuadrantE.SelectedIndex == 1;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void solidQuadrantS_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            solidityTile.SolidBottomQuadrant = solidQuadrantN.SelectedIndex == 1;
+            solidityTile.SolidBottomQuadrant = solidQuadrantS.SelectedIndex == 1;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void solidEdgeNW_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -214,11 +247,17 @@ namespace LAZYSHELL
         {
             if (updating) return;
             solidityTile.StairsDirection = (byte)stairs.SelectedIndex;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void specialTile_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
             solidityTile.SpecialTileFormat = (byte)specialTile.SelectedIndex;
+
+            SetSolidTileImage();
+            update.DynamicInvoke();
         }
         private void doorFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -234,7 +273,7 @@ namespace LAZYSHELL
             solidityTile.Byte5b3 = unknownBits.GetItemChecked(3);
             solidityTile.Byte5b4 = unknownBits.GetItemChecked(4);
         }
-
+        //
         private void conditional_DrawItem(object sender, DrawItemEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
@@ -244,5 +283,6 @@ namespace LAZYSHELL
             e.Graphics.DrawString(comboBox.Items[e.Index].ToString(), e.Font, new SolidBrush(foreColor), e.Bounds, stringFormat);
             e.DrawFocusRectangle();
         }
+        #endregion
     }
 }

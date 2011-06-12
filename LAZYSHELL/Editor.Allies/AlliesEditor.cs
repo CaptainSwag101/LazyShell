@@ -12,10 +12,12 @@ namespace LAZYSHELL
 {
     public partial class AlliesEditor : Form
     {
+        // variables
         private long checksum;
-                private Settings settings = Settings.Default;
+        private Settings settings = Settings.Default;
         private Allies alliesEditor;
         private LevelUps levelUpsEditor;
+        // constructor
         public AlliesEditor()
         {
             checksum = Do.GenerateChecksum(Model.Characters, Model.Slots);
@@ -42,6 +44,7 @@ namespace LAZYSHELL
             alliesEditor.Visible = true;
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
         }
+        // functions
         public void Assemble()
         {
             foreach (Character c in Model.Characters)
@@ -49,6 +52,7 @@ namespace LAZYSHELL
             foreach (Slot s in Model.Slots)
                 s.Assemble();
         }
+        // event handlers
         private void AlliesEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(Model.Characters, Model.Slots) == this.checksum)

@@ -13,18 +13,16 @@ namespace LAZYSHELL
 
         private LevelMap levelMap { get { return levelMaps[level.LevelMap]; } set { levelMaps[level.LevelMap] = value; } }
         public LevelMap LevelMap { get { return levelMap; } }
-
         private PaletteSet paletteSet
         {
             get { return paletteSets[levelMaps[level.LevelMap].PaletteSet]; }
             set { paletteSets[levelMaps[level.LevelMap].PaletteSet] = value; }
         }
         public PaletteSet PaletteSet { get { return paletteSet; } }
-
         private TileMap tileMap; public TileMap TileMap { get { return tileMap; } }
         private TileSet tileSet; public TileSet TileSet { get { return tileSet; } }
 
-        private LevelSolidMap physicalMap; public LevelSolidMap PhysicalMap { get { return physicalMap; } }
+        private LevelSolidMap solidityMap; public LevelSolidMap SolidityMap { get { return solidityMap; } }
         #endregion
         #region Methods
 
@@ -98,7 +96,6 @@ namespace LAZYSHELL
             updatingProperties = false;
 
         }
-
         // set images
         private Image SetPaletteOverlay(Size s, Size u, int index)  // s = palette dimen, u = color dimen
         {
@@ -130,7 +127,6 @@ namespace LAZYSHELL
             }
             return Do.PixelsToImage(pixels, s.Width, s.Height);
         }
-
         // import / export
         private void graphicSetsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -211,7 +207,6 @@ namespace LAZYSHELL
         #endregion
         #region Event Handlers
 
-        // MAPS tab
         private void mapNum_ValueChanged(object sender, EventArgs e)
         {
             //SaveMapProperties(); // Save any changes must save changes prior to this point
@@ -456,8 +451,8 @@ namespace LAZYSHELL
             if (!updatingLevel)
             {
                 fullUpdate = true;
-                physicalMap = new LevelSolidMap(levelMap);
-                physicalMap.Image = null;
+                solidityMap = new LevelSolidMap(levelMap);
+                solidityMap.Image = null;
                 LoadTilemapEditor();
             }
         }

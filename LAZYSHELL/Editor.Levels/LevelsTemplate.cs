@@ -70,7 +70,7 @@ namespace LAZYSHELL
             template.Name = name;
             templates.Add(template);
             levels.TileMap.AssembleIntoModel();
-            template.Transfer(levels.TileMap.TileMaps, levels.LevelMap, levels.PhysicalMap, overlay.Select.Location, overlay.Select.Terminal);
+            template.Transfer(levels.TileMap.TileMaps, levels.LevelMap, levels.SolidityMap, overlay.Select.Location, overlay.Select.Terminal);
             // add to listbox
             templatesLoaded.BeginUpdate();
             templatesLoaded.Items.Add(template.Name);

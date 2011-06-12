@@ -1,0 +1,57 @@
+Attacks:
+- " ": It doesn't load Mario's stats in the ROM when calculator opens.
+
+Battlefields:
+- Reset doesn't work. Neither does clear (gives exception)
+
+Event Scripts:
+- I don't really know how the events are saved, but the "jump to" events get little buggy. I found one script that couldn't load because it was one byte off from the byte it was suppose to jump to. I dunno what you could do about this.
+
+Levels:
+- If you undo when editting tiles, it deletes the tile on the first click, then it reappears on the second. I understand that's how the editor works, but I was in a bit of a panic the first time I undid one tile.
+
+Sprites:
+- Pencil tool doesn't work
+
+Misc:
+- None of the 16th palettes save (all editors). They show up changed in the editor, but do not save.
+- The save window still isn't the frontmost window (maybe there could be a panic button? I found that alt+F4 fixes this dilemma)
+
+
+Suggestions
+
+Battlefields:
+- Put in a formation? Or Mario's party positions?
+- Maybe an undo button?
+- A "Screen" button like the levels editor?
+
+Status Calculator:
+- Perhaps attacks/spells that are used in a battle script are highlighted?
+- Maybe there could be a button next to the Physical attack number that multiplies the current number by x? (Since there is a damage multiplier on some monster's attacks)
+- Maybe add a notification that there is a damage range on the weapon being used in the calculation?
+- Maybe the options timed attack, perfectly timed attack, and defense position activate, could be selected on both sides, and if you choose one, the other options are disabled.
+
+Levels:
+- Lock the "Screen" option on the level
+- Could there maybe be a diagram of the positions Mario's party would be standing at during battle? Would be helpful when making a battlefield.
+
+Monsters:
+- Can the status calculator also be put here?
+- Battle scripts: Right-click to edit dialogue, battle event, or object sequence.
+
+Sprites:
+- Allow you to shift all tiles using select all?
+- Rename sprites
+- In the last editor, you could see the offset which subtiles were placed at. Can this be added back in? (even as a checkbox or something)
+- The ability to select subtiles by clicking them?
+
+Misc:
+- Add palette specific color switching back from 2.5
+- For searches, add a "No results" in the box if nothing pulls us.
+- Track/Sound previewer
+- An option to enable game debug options. Things like the debug menu (C106AF80), and quick exit battles (C28EFA05). (And perhaps a reminder of these options if they are enabled to be deactivated when you try to lock the ROM?)
+- If you try to quick load a file in the drop down menu, add a request to remove the file.
+
+Documentation:
+- I found a sound you didn't document. Sound 7A/122. Sounds like a parked car with the engine still on.
+- I don't know if you know this. The event scripts read the command as Movement Properties, Bit 4 makes the sprite act as if it's in water (at least for Mario, didn't test it with others). If you set all the bits except bit 4, Mario's acts if he is on water.

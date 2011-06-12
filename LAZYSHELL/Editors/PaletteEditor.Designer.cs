@@ -70,6 +70,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.levelsReds = new System.Windows.Forms.NumericUpDown();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.colorizeSaturation = new System.Windows.Forms.NumericUpDown();
+            this.colorizeSaturationBar = new System.Windows.Forms.TrackBar();
+            this.colorizeApply = new System.Windows.Forms.CheckBox();
+            this.colorizeHue = new System.Windows.Forms.NumericUpDown();
+            this.colorizeHueBar = new System.Windows.Forms.TrackBar();
             this.panel15 = new System.Windows.Forms.Panel();
             this.thresholdApply = new System.Windows.Forms.CheckBox();
             this.threshold = new System.Windows.Forms.NumericUpDown();
@@ -136,6 +143,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.levelsGreensBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelsReds)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.panel19.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorizeSaturation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorizeSaturationBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorizeHue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorizeHueBar)).BeginInit();
             this.panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.threshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarThreshold)).BeginInit();
@@ -642,6 +655,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.panel19);
             this.tabPage2.Controls.Add(this.panel15);
             this.tabPage2.Controls.Add(this.panel6);
             this.tabPage2.Controls.Add(this.panel5);
@@ -651,6 +665,121 @@
             this.tabPage2.Size = new System.Drawing.Size(252, 250);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Effects";
+            // 
+            // panel19
+            // 
+            this.panel19.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel19.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel19.Controls.Add(this.pictureBox1);
+            this.panel19.Controls.Add(this.colorizeSaturation);
+            this.panel19.Controls.Add(this.colorizeSaturationBar);
+            this.panel19.Controls.Add(this.colorizeApply);
+            this.panel19.Controls.Add(this.colorizeHue);
+            this.panel19.Controls.Add(this.colorizeHueBar);
+            this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel19.Location = new System.Drawing.Point(0, 159);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(252, 59);
+            this.panel19.TabIndex = 536;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(51, 20);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(197, 17);
+            this.pictureBox1.TabIndex = 537;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            // 
+            // colorizeSaturation
+            // 
+            this.colorizeSaturation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.colorizeSaturation.Enabled = false;
+            this.colorizeSaturation.Location = new System.Drawing.Point(0, 38);
+            this.colorizeSaturation.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.colorizeSaturation.Name = "colorizeSaturation";
+            this.colorizeSaturation.Size = new System.Drawing.Size(50, 17);
+            this.colorizeSaturation.TabIndex = 534;
+            this.colorizeSaturation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.colorizeSaturation.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.colorizeSaturation.ValueChanged += new System.EventHandler(this.colorizeSaturation_ValueChanged);
+            // 
+            // colorizeSaturationBar
+            // 
+            this.colorizeSaturationBar.AutoSize = false;
+            this.colorizeSaturationBar.BackColor = System.Drawing.SystemColors.Control;
+            this.colorizeSaturationBar.Enabled = false;
+            this.colorizeSaturationBar.LargeChange = 32;
+            this.colorizeSaturationBar.Location = new System.Drawing.Point(51, 38);
+            this.colorizeSaturationBar.Maximum = 255;
+            this.colorizeSaturationBar.Name = "colorizeSaturationBar";
+            this.colorizeSaturationBar.Size = new System.Drawing.Size(197, 17);
+            this.colorizeSaturationBar.SmallChange = 8;
+            this.colorizeSaturationBar.TabIndex = 535;
+            this.colorizeSaturationBar.TickFrequency = 8;
+            this.colorizeSaturationBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.colorizeSaturationBar.Value = 128;
+            this.colorizeSaturationBar.Scroll += new System.EventHandler(this.colorizeSaturationBar_Scroll);
+            // 
+            // colorizeApply
+            // 
+            this.colorizeApply.BackColor = System.Drawing.SystemColors.Control;
+            this.colorizeApply.Location = new System.Drawing.Point(0, 0);
+            this.colorizeApply.Name = "colorizeApply";
+            this.colorizeApply.Padding = new System.Windows.Forms.Padding(4, 0, 0, 2);
+            this.colorizeApply.Size = new System.Drawing.Size(248, 19);
+            this.colorizeApply.TabIndex = 533;
+            this.colorizeApply.Text = "Colorize";
+            this.colorizeApply.UseVisualStyleBackColor = false;
+            this.colorizeApply.CheckedChanged += new System.EventHandler(this.colorizeApply_CheckedChanged);
+            // 
+            // colorizeHue
+            // 
+            this.colorizeHue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.colorizeHue.Enabled = false;
+            this.colorizeHue.Location = new System.Drawing.Point(0, 20);
+            this.colorizeHue.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.colorizeHue.Name = "colorizeHue";
+            this.colorizeHue.Size = new System.Drawing.Size(50, 17);
+            this.colorizeHue.TabIndex = 20;
+            this.colorizeHue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.colorizeHue.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.colorizeHue.ValueChanged += new System.EventHandler(this.colorizeHue_ValueChanged);
+            // 
+            // colorizeHueBar
+            // 
+            this.colorizeHueBar.AutoSize = false;
+            this.colorizeHueBar.BackColor = System.Drawing.SystemColors.Control;
+            this.colorizeHueBar.Enabled = false;
+            this.colorizeHueBar.LargeChange = 32;
+            this.colorizeHueBar.Location = new System.Drawing.Point(51, 20);
+            this.colorizeHueBar.Maximum = 255;
+            this.colorizeHueBar.Name = "colorizeHueBar";
+            this.colorizeHueBar.Size = new System.Drawing.Size(197, 17);
+            this.colorizeHueBar.SmallChange = 8;
+            this.colorizeHueBar.TabIndex = 23;
+            this.colorizeHueBar.TickFrequency = 8;
+            this.colorizeHueBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.colorizeHueBar.Value = 128;
+            this.colorizeHueBar.Scroll += new System.EventHandler(this.colorizeHueBar_Scroll);
             // 
             // panel15
             // 
@@ -806,8 +935,13 @@
             // 
             this.brightness.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.brightness.Location = new System.Drawing.Point(0, 18);
+            this.brightness.Maximum = new decimal(new int[] {
+            248,
+            0,
+            0,
+            0});
             this.brightness.Minimum = new decimal(new int[] {
-            100,
+            248,
             0,
             0,
             -2147483648});
@@ -823,8 +957,8 @@
             this.trackBarBrightness.BackColor = System.Drawing.SystemColors.Control;
             this.trackBarBrightness.LargeChange = 32;
             this.trackBarBrightness.Location = new System.Drawing.Point(51, 18);
-            this.trackBarBrightness.Maximum = 100;
-            this.trackBarBrightness.Minimum = -100;
+            this.trackBarBrightness.Maximum = 248;
+            this.trackBarBrightness.Minimum = -248;
             this.trackBarBrightness.Name = "trackBarBrightness";
             this.trackBarBrightness.Size = new System.Drawing.Size(197, 17);
             this.trackBarBrightness.SmallChange = 8;
@@ -1314,6 +1448,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.levelsGreensBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelsReds)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.panel19.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorizeSaturation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorizeSaturationBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorizeHue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorizeHueBar)).EndInit();
             this.panel15.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.threshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarThreshold)).EndInit();
@@ -1440,6 +1580,13 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel19;
+        private System.Windows.Forms.NumericUpDown colorizeSaturation;
+        private System.Windows.Forms.TrackBar colorizeSaturationBar;
+        private System.Windows.Forms.CheckBox colorizeApply;
+        private System.Windows.Forms.NumericUpDown colorizeHue;
+        private System.Windows.Forms.TrackBar colorizeHueBar;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
     }
 }

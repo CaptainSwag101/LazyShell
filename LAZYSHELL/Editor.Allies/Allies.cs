@@ -387,23 +387,23 @@ namespace LAZYSHELL
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Spells, 32, 1),
                 Model.FontMenu, Model.FontPaletteMenu.Palette, -8, 10, 0, 0, false, false,
-                Model.MenuBackground__(109, 256));
+                Model.MenuBackground__(109, 255));
         }
         private void startingCoins_ValueChanged(object sender, EventArgs e)
         {
-            character.StartingCoins = (ushort)this.startingCoins.Value;
+            characters[0].StartingCoins = (ushort)this.startingCoins.Value;
         }
         private void startingFrogCoins_ValueChanged(object sender, EventArgs e)
         {
-            character.StartingFrogCoins = (ushort)this.startingFrogCoins.Value;
+            characters[0].StartingFrogCoins = (ushort)this.startingFrogCoins.Value;
         }
         private void startingCurrentFP_ValueChanged(object sender, EventArgs e)
         {
-            character.StartingCurrentFP = (byte)this.startingCurrentFP.Value;
+            characters[0].StartingCurrentFP = (byte)this.startingCurrentFP.Value;
         }
         private void startingMaximumFP_ValueChanged(object sender, EventArgs e)
         {
-            character.StartingMaximumFP = (byte)this.startingMaximumFP.Value;
+            characters[0].StartingMaximumFP = (byte)this.startingMaximumFP.Value;
         }
         // defense timing
         private void numericUpDown118_ValueChanged(object sender, EventArgs e)

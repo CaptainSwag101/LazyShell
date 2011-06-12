@@ -12,7 +12,8 @@ namespace LAZYSHELL
     public partial class ProgressBar : Form
     {
         private byte[] data;
-                private BackgroundWorker backgroundWorker;
+        private BackgroundWorker backgroundWorker;
+        // constructor
         public ProgressBar(byte[] data, string title, int max)
         {
             InitializeComponent();
@@ -47,10 +48,11 @@ namespace LAZYSHELL
 
             loadingWhat.Width += buttonCancel.Width + 2;
             buttonCancel.Visible = false;
-            
+
             this.Text = title;
             this.progressBar1.Maximum = max;
         }
+        // functions
         public void PerformStep(string labelText)
         {
             progressBar1.PerformStep();
@@ -63,6 +65,7 @@ namespace LAZYSHELL
             loadingWhat.Text = labelText;
             this.Update();
         }
+        // event handlers
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             backgroundWorker.CancelAsync();

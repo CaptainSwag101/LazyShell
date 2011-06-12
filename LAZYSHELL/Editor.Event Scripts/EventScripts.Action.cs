@@ -13,7 +13,7 @@ namespace LAZYSHELL
         private ActionQueue[] actionScripts { get { return Model.ActionScripts; } set { Model.ActionScripts = value; } }
         public ActionQueue[] ActionScripts { get { return actionScripts; } set { actionScripts = value; } }
         private ActionQueue actionScript { get { return actionScripts[index]; } set { actionScripts[index] = value; } }
-
+        //
         private void ControlActionDisasmMethod()
         {
             updatingControls = false;
@@ -274,7 +274,7 @@ namespace LAZYSHELL
                 case 0x9E:
                     labelTitleA.Text = "Playback fade-out sound, duration...";
                     labelEvtC.Text = "duration";
-                    labelEvtD.Text = "min volume";
+                    labelEvtD.Text = "to volume";
                     evtNumC.Enabled = true;
                     evtNumD.Enabled = true;
 
@@ -1020,7 +1020,7 @@ namespace LAZYSHELL
                     break;
             }
         }
-
+        //
         public void UpdateActionOffsets()
         {
             int delta = treeViewWrapper.ScriptDelta;
@@ -1101,12 +1101,12 @@ namespace LAZYSHELL
                 }
             }
         }
-
+        //
         private void UpdateActionScriptsFreeSpace()
         {
             int left = CalculateActionScriptsLength();
-            this.label1.Text = " " + left.ToString() + " bytes left ";
-            this.label1.BackColor = left < 0 ? Color.Red : SystemColors.Control;
+            this.EvtScrLabel3.Text = " " + left.ToString() + " bytes left ";
+            this.EvtScrLabel3.BackColor = left < 0 ? Color.Red : SystemColors.Control;
         }
         private int CalculateActionScriptsLength()
         {

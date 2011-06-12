@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BattleScripts));
             this.listBoxCommands = new System.Windows.Forms.ListBox();
             this.panel28 = new System.Windows.Forms.Panel();
@@ -98,6 +99,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.contextMenuStripGoto = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel28.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelDoOneOfThree.SuspendLayout();
@@ -120,6 +123,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).BeginInit();
             this.toolStrip2.SuspendLayout();
+            this.contextMenuStripGoto.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxCommands
@@ -303,6 +307,7 @@
             this.nameA.Name = "nameA";
             this.nameA.Size = new System.Drawing.Size(139, 21);
             this.nameA.TabIndex = 1;
+            this.nameA.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.name_DrawItem);
             this.nameA.SelectedIndexChanged += new System.EventHandler(this.nameA_SelectedIndexChanged);
             // 
             // panel17
@@ -325,6 +330,7 @@
             this.nameB.Name = "nameB";
             this.nameB.Size = new System.Drawing.Size(139, 21);
             this.nameB.TabIndex = 1;
+            this.nameB.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.name_DrawItem);
             this.nameB.SelectedIndexChanged += new System.EventHandler(this.nameB_SelectedIndexChanged);
             // 
             // labelDoB
@@ -356,6 +362,7 @@
             this.nameC.Name = "nameC";
             this.nameC.Size = new System.Drawing.Size(139, 21);
             this.nameC.TabIndex = 1;
+            this.nameC.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.name_DrawItem);
             this.nameC.SelectedIndexChanged += new System.EventHandler(this.nameC_SelectedIndexChanged);
             // 
             // doNothingA
@@ -1024,6 +1031,20 @@
             this.toolStrip2.TabIndex = 475;
             this.toolStrip2.Text = "toolStrip2";
             // 
+            // contextMenuStripGoto
+            // 
+            this.contextMenuStripGoto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.goToToolStripMenuItem});
+            this.contextMenuStripGoto.Name = "contextMenuStripGoto";
+            this.contextMenuStripGoto.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextMenuStripGoto.ShowImageMargin = false;
+            this.contextMenuStripGoto.Size = new System.Drawing.Size(128, 48);
+            // 
+            // goToToolStripMenuItem
+            // 
+            this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
+            this.goToToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            // 
             // BattleScripts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1068,6 +1089,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.contextMenuStripGoto.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1144,5 +1166,7 @@
         private System.Windows.Forms.NumericUpDown monsterTargetArrowX;
         private System.Windows.Forms.Label label119;
         private System.Windows.Forms.PictureBox pictureBoxMonster;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripGoto;
+        private System.Windows.Forms.ToolStripMenuItem goToToolStripMenuItem;
     }
 }

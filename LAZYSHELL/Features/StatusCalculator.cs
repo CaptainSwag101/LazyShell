@@ -23,6 +23,7 @@ namespace LAZYSHELL
         private Monster[] monsters { get { return Model.Monsters; } }
         private bool updating = false;
         private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+        // constructor
         public StatusCalculator()
         {
             updating = true;
@@ -41,12 +42,12 @@ namespace LAZYSHELL
             this.targetAccessory.Items.Clear();
             this.targetAccessory.Items.AddRange(itemNames.Names);
 
-            this.attackerWeapon.SelectedIndex = itemNames.GetNumFromIndex(0);
-            this.attackerArmor.SelectedIndex = itemNames.GetNumFromIndex(0);
-            this.attackerAccessory.SelectedIndex = itemNames.GetNumFromIndex(0);
-            this.targetWeapon.SelectedIndex = itemNames.GetNumFromIndex(0);
-            this.targetArmor.SelectedIndex = itemNames.GetNumFromIndex(0);
-            this.targetAccessory.SelectedIndex = itemNames.GetNumFromIndex(0);
+            this.attackerWeapon.SelectedIndex = itemNames.GetIndexFromNum(255);
+            this.attackerArmor.SelectedIndex = itemNames.GetIndexFromNum(255);
+            this.attackerAccessory.SelectedIndex = itemNames.GetIndexFromNum(255);
+            this.targetWeapon.SelectedIndex = itemNames.GetIndexFromNum(255);
+            this.targetArmor.SelectedIndex = itemNames.GetIndexFromNum(255);
+            this.targetAccessory.SelectedIndex = itemNames.GetIndexFromNum(255);
             // load entity
             for (int i = 0; i < Model.Characters.Length; i++)
                 this.attackerName.Items.Add(new string(Model.Characters[i].Name));
@@ -57,142 +58,17 @@ namespace LAZYSHELL
             this.targetBonus.SelectedIndex = 0;
             updating = false;
 
-            CalculateTotal();
+            CalculatePhysical();
             CalculateSpells();
 
             this.attackerBonus.SelectedIndex = 0;
             this.targetBonus.SelectedIndex = 0;
         }
-        private void itemName_DrawItem(object sender, DrawItemEventArgs e)
+        // functions
+        private void CalculateLevel(bool attacker)
         {
-            Do.DrawName(sender, e, menuTextPreview, itemNames, fontMenu, fontPaletteBattle, true, Model.MenuBackground_);
-        }
-        private void attackerName_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (radioButton3.Checked)
-                Do.DrawName(
-                    sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
-                    Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
-            else
-                Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBackground_);
-        }
-        private void targetName_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (radioButton5.Checked)
-                Do.DrawName(
-                    sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
-                    Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
-            else
-                Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBackground_);
-        }
-        private void calculateTotal(object sender, EventArgs e)
-        {
-            if (updating) return;
-            CalculateTotal();
-            CalculateSpells();
-        }
-        private void CalculateTotal()
-        {
-            double high;
-            double low = (double)attackerAttack.Value;
-            low += items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].Attack;
-            low += items[itemNames.GetNumFromIndex(attackerArmor.SelectedIndex)].Attack;
-            low += items[itemNames.GetNumFromIndex(attackerAccessory.SelectedIndex)].Attack;
-            low -= (double)targetDefense.Value;
-            low -= (double)items[itemNames.GetNumFromIndex(targetWeapon.SelectedIndex)].MagicDefense;
-            low -= (double)items[itemNames.GetNumFromIndex(targetArmor.SelectedIndex)].MagicDefense;
-            low -= (double)items[itemNames.GetNumFromIndex(targetAccessory.SelectedIndex)].MagicDefense;
-            high = low + items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange;
-            low -= items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange;
-            if (timedAttackL2.Checked)
-            {
-                low *= 2.0;
-                high *= 2.0;
-            }
-            else if (timedAttackL1.Checked)
-            {
-                low *= 1.5;
-                high *= 1.5;
-            }
-            if (targetDefensePosition.Checked)
-            {
-                low /= 2;
-                high /= 2;
-            }
-            if (attackerStatus.GetItemChecked(0))
-            {
-                low *= 1.5;
-                high *= 1.5;
-            }
-            if (low < 1)
-                low = 1;
-            if (items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange != 0)
-                singleAttack.Text = Math.Ceiling(low).ToString() + " to " + Math.Ceiling(high).ToString();
-            else
-                singleAttack.Text = Math.Ceiling(low).ToString();
-        }
-        private void CalculateSpells()
-        {
-            listView1.BeginUpdate();
-            listView1.Items.Clear();
-            foreach (Spell spell in spells)
-            {
-                //double high;
-                double low = spell.MagicPower;
-                low += (double)attackerMgAttack.Value;
-                low += items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].MagicAttack;
-                low += items[itemNames.GetNumFromIndex(attackerArmor.SelectedIndex)].MagicAttack;
-                low += items[itemNames.GetNumFromIndex(attackerAccessory.SelectedIndex)].MagicAttack;
-                low -= (double)targetMgDefense.Value;
-                low -= (double)items[itemNames.GetNumFromIndex(targetWeapon.SelectedIndex)].MagicDefense;
-                low -= (double)items[itemNames.GetNumFromIndex(targetArmor.SelectedIndex)].MagicDefense;
-                low -= (double)items[itemNames.GetNumFromIndex(targetAccessory.SelectedIndex)].MagicDefense;
-                //high = low + items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange;
-                //low -= items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange;
-                if (spell.InflictElement < 4 && targetWeakness.GetItemChecked(spell.InflictElement))
-                {
-                    low *= 2.0;
-                }
-                if (timedAttackL2.Checked)
-                {
-                    low *= 1.5;
-                    //high *= 2.0;
-                }
-                else if (timedAttackL1.Checked)
-                {
-                    low *= 1.25;
-                    //high *= 1.5;
-                }
-                if (targetDefensePosition.Checked)
-                {
-                    low /= 2;
-                    //high /= 2;
-                }
-                if (attackerStatus.GetItemChecked(2))
-                {
-                    low *= 1.5;
-                    //high *= 1.5;
-                }
-                if (low < 1)
-                    low = 1;
-                //if (items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange != 0)
-                //    singleAttack.Text = Math.Ceiling(low).ToString() + " to " + Math.Ceiling(high).ToString();
-                //else
-                int index = spell.Index;
-                ListViewItem item = new ListViewItem(new string[]
-                {
-                    index.ToString(),
-                    Model.SpellNames.GetNameByNum(spell.Index).Substring(1),
-                    Math.Ceiling(low).ToString()
-                });
-                listView1.Items.Add(item);
-            }
-            listView1.EndUpdate();
-        }
-        private void loadProperties(object sender, EventArgs e)
-        {
-            if (updating) return;
             updating = true;
+            ComboBox bonus;
             NumericUpDown hp_;
             NumericUpDown attack_;
             NumericUpDown defense_;
@@ -202,34 +78,36 @@ namespace LAZYSHELL
             RadioButton radioButton;
             ComboBox names;
             CheckedListBox weakness;
-            if (((Control)sender).Parent == panelAttackerProperties)
+            if (attacker)
             {
+                bonus = attackerBonus;
                 hp_ = attackerHP;
                 attack_ = attackerAttack;
                 defense_ = attackerDefense;
                 mgAttack_ = attackerMgAttack;
                 mgDefense_ = attackerMgDefense;
                 level_ = attackerLevel;
-                radioButton = radioButton3;
+                radioButton = attackerTypeAlly;
                 names = attackerName;
                 weakness = null;
             }
             else
             {
+                bonus = targetBonus;
                 hp_ = targetHP;
                 attack_ = targetAttack;
                 defense_ = targetDefense;
                 mgAttack_ = targetMgAttack;
                 mgDefense_ = targetMgDefense;
                 level_ = targetLevel;
-                radioButton = radioButton5;
+                radioButton = targetTypeAlly;
                 names = targetName;
                 weakness = targetWeakness;
             }
             if (radioButton.Checked)
             {
                 Character character = Model.Characters[names.SelectedIndex];
-                if (attackerLevel.Value == 1)
+                if (level_.Value == 1)
                 {
                     hp_.Value = character.StartingCurrentHP;
                     attack_.Value = character.StartingAttack;
@@ -253,7 +131,7 @@ namespace LAZYSHELL
                         defense += level.DefensePlus;
                         mgAttack += level.MgAttackPlus;
                         mgDefense += level.MgDefensePlus;
-                        if (attackerBonus.SelectedIndex == 0)
+                        if (bonus.SelectedIndex == 0)
                         {
                             if (level.AttackPlusBonus > level.MgAttackPlusBonus)
                             {
@@ -268,11 +146,11 @@ namespace LAZYSHELL
                             else
                                 hp += level.HpPlusBonus;
                         }
-                        else if (attackerBonus.SelectedIndex == 1)
+                        else if (bonus.SelectedIndex == 1)
                         {
                             hp += level.HpPlusBonus;
                         }
-                        else if (attackerBonus.SelectedIndex == 2)
+                        else if (bonus.SelectedIndex == 2)
                         {
                             mgAttack += level.MgAttackPlusBonus;
                             mgDefense += level.MgDefensePlusBonus;
@@ -306,57 +184,222 @@ namespace LAZYSHELL
                     weakness.SetItemChecked(3, monster.ElemJumpWeak);
                 }
             }
-            CalculateTotal();
+            CalculatePhysical();
             CalculateSpells();
             updating = false;
         }
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        private void CalculatePhysical()
+        {
+            double high;
+            double low = (double)attackerAttack.Value;
+            if (attackerTypeAlly.Checked)
+            {
+                low += items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].Attack;
+                low += items[itemNames.GetNumFromIndex(attackerArmor.SelectedIndex)].Attack;
+                low += items[itemNames.GetNumFromIndex(attackerAccessory.SelectedIndex)].Attack;
+            }
+            low -= (double)targetDefense.Value;
+            if (targetTypeAlly.Checked)
+            {
+                low -= (double)items[itemNames.GetNumFromIndex(targetWeapon.SelectedIndex)].MagicDefense;
+                low -= (double)items[itemNames.GetNumFromIndex(targetArmor.SelectedIndex)].MagicDefense;
+                low -= (double)items[itemNames.GetNumFromIndex(targetAccessory.SelectedIndex)].MagicDefense;
+            }
+            if (attackerTypeAlly.Checked)
+            {
+                high = low + items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange;
+                low -= items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange;
+            }
+            else
+                high = low;
+            if (timedAttackL2.Checked)
+            {
+                low *= 2.0;
+                high *= 2.0;
+            }
+            else if (timedAttackL1.Checked)
+            {
+                low *= 1.5;
+                high *= 1.5;
+            }
+            if (targetDefensePosition.Checked)
+            {
+                low /= 2;
+                high /= 2;
+            }
+            if (attackerStatus.GetItemChecked(0) || targetStatus.GetItemChecked(2))
+            {
+                low *= 1.5;
+                high *= 1.5;
+            }
+            if (attackerStatus.GetItemChecked(2) || targetStatus.GetItemChecked(0))
+            {
+                low /= 2.0;
+                high /= 2.0;
+            }
+            if (low < 1)
+                low = 1;
+            if (items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange != 0)
+                singleAttack.Text = Math.Ceiling(low).ToString() + " to " + Math.Ceiling(high).ToString();
+            else
+                singleAttack.Text = Math.Ceiling(low).ToString();
+        }
+        private void CalculateSpells()
+        {
+            listView1.BeginUpdate();
+            listView1.Items.Clear();
+            List<ListViewItem> listViewItems = new List<ListViewItem>();
+            foreach (Spell spell in spells)
+            {
+                //double high;
+                double low = spell.MagicPower;
+                low += (double)attackerMgAttack.Value;
+                if (attackerTypeAlly.Checked)
+                {
+                    low += items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].MagicAttack;
+                    low += items[itemNames.GetNumFromIndex(attackerArmor.SelectedIndex)].MagicAttack;
+                    low += items[itemNames.GetNumFromIndex(attackerAccessory.SelectedIndex)].MagicAttack;
+                }
+                low -= (double)targetMgDefense.Value;
+                if (targetTypeAlly.Checked)
+                {
+                    low -= (double)items[itemNames.GetNumFromIndex(targetWeapon.SelectedIndex)].MagicDefense;
+                    low -= (double)items[itemNames.GetNumFromIndex(targetArmor.SelectedIndex)].MagicDefense;
+                    low -= (double)items[itemNames.GetNumFromIndex(targetAccessory.SelectedIndex)].MagicDefense;
+                }
+                if (spell.InflictElement < 4 && targetWeakness.GetItemChecked(spell.InflictElement))
+                {
+                    low *= 2.0;
+                }
+                if (timedAttackL2.Checked)
+                {
+                    low *= 1.5;
+                }
+                else if (timedAttackL1.Checked)
+                {
+                    low *= 1.25;
+                }
+                if (targetDefensePosition.Checked)
+                {
+                    low /= 2.0;
+                }
+                if (attackerStatus.GetItemChecked(1) || targetStatus.GetItemChecked(3))
+                {
+                    low *= 1.5;
+                }
+                if (attackerStatus.GetItemChecked(3) || targetStatus.GetItemChecked(1))
+                {
+                    low /= 2.0;
+                }
+                if (low < 1)
+                    low = 1;
+                int index = spell.Index;
+                ListViewItem item = new ListViewItem(new string[]
+                {
+                    index.ToString(),
+                    Model.SpellNames.GetNameByNum(spell.Index).Substring(1),
+                    Math.Ceiling(low).ToString()
+                });
+                listViewItems.Add(item);
+            }
+            listView1.Items.AddRange(listViewItems.ToArray());
+            listView1.EndUpdate();
+        }
+        // event handlers
+        private void attackerType_CheckedChanged(object sender, EventArgs e)
         {
             updating = true;
-            if (!radioButton4.Checked)
+            if (!attackerTypeMonster.Checked)  // ally
             {
                 this.attackerName.Items.Clear();
                 for (int i = 0; i < Model.Characters.Length; i++)
                     this.attackerName.Items.Add(new string(Model.Characters[i].Name));
                 this.attackerName.SelectedIndex = 0;
-                this.attackerLevel.Enabled = true;
-                this.attackerBonus.Enabled = true;
+                this.panelAttackerProperties.Height = 57;
+                this.panelAttackerStats.Height = 147;
+                this.timedAttackL1.Visible = true;
+                this.timedAttackL2.Visible = true;
             }
             else
             {
                 this.attackerName.Items.Clear();
                 this.attackerName.Items.AddRange(Model.MonsterNames.Names);
                 this.attackerName.SelectedIndex = monsterNames.GetIndexFromNum(0);
-                this.attackerLevel.Enabled = false;
-                this.attackerBonus.Enabled = false;
+                this.panelAttackerProperties.Height = 21;
+                this.panelAttackerStats.Height = 93;
+                this.timedAttackL1.Visible = false;
+                this.timedAttackL2.Visible = false;
             }
             updating = false;
             loadProperties(sender, e);
         }
-        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        private void targetType_CheckedChanged(object sender, EventArgs e)
         {
-            if (!radioButton6.Checked)
+            updating = true;
+            if (!targetTypeMonster.Checked)  // ally
             {
                 this.targetName.Items.Clear();
                 for (int i = 0; i < Model.Characters.Length; i++)
                     this.targetName.Items.Add(new string(Model.Characters[i].Name));
                 this.targetName.SelectedIndex = 0;
-                this.targetLevel.Enabled = true;
-                this.targetBonus.Enabled = true;
+                this.panelTargetProperties.Height = 57;
+                this.panelTargetStats.Height = 147;
+                this.targetDefensePosition.Visible = true;
+                this.panelTargetWeakness.Visible = false;
             }
             else
             {
                 this.targetName.Items.Clear();
                 this.targetName.Items.AddRange(Model.MonsterNames.Names);
                 this.targetName.SelectedIndex = monsterNames.GetIndexFromNum(0);
-                this.targetLevel.Enabled = false;
-                this.targetBonus.Enabled = false;
+                this.panelTargetProperties.Height = 21;
+                this.panelTargetStats.Height = 93;
+                this.targetDefensePosition.Visible = false;
+                this.panelTargetWeakness.Visible = true;
             }
+            updating = false;
             loadProperties(sender, e);
         }
-        private void comboBoxLoad(object sender, EventArgs e)
+        private void attackerName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            loadProperties(((Control)sender).Parent, e);
+            if (attackerTypeAlly.Checked)
+                Do.DrawName(
+                    sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
+                    Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
+            else
+                Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBackground_);
+        }
+        private void targetName_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (targetTypeAlly.Checked)
+                Do.DrawName(
+                    sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
+                    Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
+            else
+                Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBackground_);
+        }
+        private void itemName_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Do.DrawName(sender, e, menuTextPreview, itemNames, fontMenu, fontPaletteBattle, true, true, Model.MenuBackground_);
+        }
+        private void loadProperties(object sender, EventArgs e)
+        {
+            if (updating) return;
+            CalculateLevel(
+                sender == attackerTypeAlly || 
+                sender == attackerLevel || 
+                sender == attackerName || 
+                sender == attackerBonus);
+        }
+        private void calculateTotal(object sender, EventArgs e)
+        {
+            if (updating) return;
+            if (sender == timedAttackL1 && timedAttackL1.Checked)
+                timedAttackL2.Checked = false;
+            if (sender == timedAttackL2 && timedAttackL2.Checked)
+                timedAttackL1.Checked = false;
+            CalculatePhysical();
+            CalculateSpells();
         }
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -381,6 +424,41 @@ namespace LAZYSHELL
             }
             // Perform the sort with these new sort options.
             listView.Sort();
+        }
+        private void buttonSwitch_Click(object sender, EventArgs e)
+        {
+            bool typeMonster = attackerTypeMonster.Checked;
+            int name = attackerName.SelectedIndex;
+            int level = (int)attackerLevel.Value;
+            int bonus = attackerBonus.SelectedIndex;
+            int weapon = attackerWeapon.SelectedIndex;
+            int armor = attackerArmor.SelectedIndex;
+            int accessory = attackerAccessory.SelectedIndex;
+            updating = true;
+            if (targetTypeMonster.Checked)
+                attackerTypeMonster.Checked = true;
+            else
+                attackerTypeAlly.Checked = true;
+            attackerName.SelectedIndex = targetName.SelectedIndex;
+            attackerLevel.Value = targetLevel.Value;
+            attackerBonus.SelectedIndex = targetBonus.SelectedIndex;
+            attackerWeapon.SelectedIndex = targetWeapon.SelectedIndex;
+            attackerArmor.SelectedIndex = targetArmor.SelectedIndex;
+            attackerAccessory.SelectedIndex = targetAccessory.SelectedIndex;
+            CalculateLevel(true);
+            //
+            if (typeMonster)
+                targetTypeMonster.Checked = true;
+            else
+                targetTypeAlly.Checked = true;
+            targetName.SelectedIndex = name;
+            targetLevel.Value = level;
+            targetBonus.SelectedIndex = bonus;
+            targetWeapon.SelectedIndex = weapon;
+            targetArmor.SelectedIndex = armor;
+            targetAccessory.SelectedIndex = accessory;
+            CalculateLevel(false);
+            updating = false;
         }
     }
 }

@@ -11,12 +11,14 @@ namespace LAZYSHELL
 {
     public partial class Attacks : Form
     {
-                private Settings settings = Settings.Default;
+        // variables
+        private Settings settings = Settings.Default;
         private bool updating = false;
         private Attack[] attacks { get { return Model.Attacks; } set { Model.Attacks = value; } }
         public Attack Attack { get { return attacks[index]; } set { attacks[index] = value; } }
         private int index { get { return (int)attackNum.Value; } set { attackNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
+        // constructor
         public Attacks()
         {
             this.settings.KeystrokesMenu[0x20] = "\x20";
@@ -24,6 +26,7 @@ namespace LAZYSHELL
             InitializeStrings();
             RefreshAttacks();
         }
+        // functions
         private void InitializeStrings()
         {
             this.attackName.Items.Clear();

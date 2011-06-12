@@ -92,6 +92,7 @@
             this.export = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportBattleDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reset = new System.Windows.Forms.ToolStripButton();
             this.clear = new System.Windows.Forms.ToolStripDropDownButton();
             this.clearDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearBattleDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,7 +104,6 @@
             this.showBattleDialogues = new System.Windows.Forms.ToolStripButton();
             this.showFonts = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.reset = new System.Windows.Forms.ToolStripButton();
             this.panel60.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -180,9 +180,9 @@
             this.dialogueTextBox.Size = new System.Drawing.Size(220, 331);
             this.dialogueTextBox.TabIndex = 178;
             this.dialogueTextBox.Text = "";
-            this.dialogueTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dialogueTextBox_KeyDown_1);
-            this.dialogueTextBox.Enter += new System.EventHandler(this.dialogueTextBox_Enter_1);
-            this.dialogueTextBox.Leave += new System.EventHandler(this.dialogueTextBox_Leave_1);
+            this.dialogueTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dialogueTextBox_KeyDown);
+            this.dialogueTextBox.Enter += new System.EventHandler(this.dialogueTextBox_Enter);
+            this.dialogueTextBox.Leave += new System.EventHandler(this.dialogueTextBox_Leave);
             this.dialogueTextBox.TextChanged += new System.EventHandler(this.dialogueTextBox_TextChanged);
             // 
             // toolStrip2
@@ -793,6 +793,17 @@
             this.exportBattleDialoguesToolStripMenuItem.Text = "Export Battle Dialogues...";
             this.exportBattleDialoguesToolStripMenuItem.Click += new System.EventHandler(this.exportBattleDialoguesToolStripMenuItem_Click);
             // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.Text = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
             // clear
             // 
             this.clear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -892,17 +903,6 @@
             // 
             this.toolTip1.Active = false;
             this.toolTip1.IsBalloon = true;
-            // 
-            // reset
-            // 
-            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.loadAll;
-            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(23, 22);
-            this.reset.Text = "Reset";
-            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // Dialogues
             // 

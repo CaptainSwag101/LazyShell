@@ -5,16 +5,17 @@ using System.Drawing;
 
 namespace LAZYSHELL.Undo
 {
-    class PhysicalMapEditCommand : Command
+    class SolidityEditCommand : Command
     {
-        Levels updater;
-        Map tilemap;
-        Solidity solidity = Solidity.Instance;
-        Point topLeft, bottomRight, tempStart;
-        byte[] changes;
-        bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
+        private Levels updater;
+        private Map tilemap;
+        public Map Tilemap { get { return tilemap; } set { tilemap = value; } }
+        private Solidity solidity = Solidity.Instance;
+        private Point topLeft, bottomRight, tempStart;
+        private byte[] changes;
+        private bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
 
-        public PhysicalMapEditCommand(
+        public SolidityEditCommand(
             Levels updater,
             Map tilemap,
             Point topLeft,

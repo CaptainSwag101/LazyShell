@@ -23,13 +23,24 @@ namespace LAZYSHELL.Previewer
         private bool snes9x;
         private int behaviour;
         private bool updating = false;
+        private int category;
+        private int index;
         private enum Behaviours
         {
             EventPreviewer,
             LevelPreviewer,
             ActionPreviewer,
-            BattlePreviewer
+            BattlePreviewer,
+            AnimationPreviewer
         }
+        private byte[] maxStats = new byte[]
+        {
+            0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x21,0x45,0x51,0x00,0x3F,0x00,0x00,0x00,
+            0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x22,0x44,0x5E,0x00,0xC0,0x0F,0x00,0x00,
+            0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x1E,0x43,0x5A,0x00,0x00,0xF0,0x00,0x00,
+            0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x1F,0x42,0x4D,0x00,0x00,0x00,0x1F,0x00,
+            0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x20,0x41,0x4B,0x00,0x00,0x00,0xE0,0x07
+        };
         #endregion
         // Constructor
         public Previewer(int num, int behaviour)
@@ -46,6 +57,30 @@ namespace LAZYSHELL.Previewer
                 this.selectNumericUpDown_ValueChanged(null, null);
             UpdateGUI();
 
+            if (settings.PreviewFirstTime)
+            {
+                DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews. Doing so will yield unpredictable results.\n\nDo you understand?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    settings.PreviewFirstTime = false;
+                    settings.Save();
+                }
+            }
+        }
+        public Previewer(int category, int index, bool automatic)
+        {
+            this.category = category;
+            this.index = index;
+
+            this.selectNum = index;
+            this.eventTriggers = new ArrayList();
+            this.behaviour = 4;
+            InitializeComponent();
+            InitializePreviewer();
+            this.emulator = GetEmulator();
+            if (index == 0)
+                this.selectNumericUpDown_ValueChanged(null, null);
+            UpdateGUI();
             if (settings.PreviewFirstTime)
             {
                 DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews. Doing so will yield unpredictable results.\n\nDo you understand?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -79,10 +114,36 @@ namespace LAZYSHELL.Previewer
                 }
             }
         }
+        public void Reload(int category, int index, bool automatic)
+        {
+            this.category = category;
+            this.index = index;
+
+            this.selectNum = index;
+            this.eventTriggers = new ArrayList();
+            this.behaviour = 4;
+            InitializePreviewer();
+            this.emulator = GetEmulator();
+            if (index == 0)
+                this.selectNumericUpDown_ValueChanged(null, null);
+            UpdateGUI();
+            if (settings.PreviewFirstTime)
+            {
+                DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews. Doing so will yield unpredictable results.\n\nDo you understand?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    settings.PreviewFirstTime = false;
+                    settings.Save();
+                }
+            }
+        }
         #region Functions
         private void InitializePreviewer()
         {
             this.initializing = true;
+            this.argsTextBox.Text = settings.PreviewArguments;
+            this.dynamicROMPath.Checked = settings.PreviewDynamicRomName;
+            this.level.Value = settings.PreviewLevel;
             if (behaviour == (int)Behaviours.EventPreviewer)
             {
                 this.Text = "PREVIEW EVENT - Lazy Shell";
@@ -115,9 +176,69 @@ namespace LAZYSHELL.Previewer
                 this.battleBGListBox.Enabled = true;
                 this.battleBGListBox.SelectedIndex = settings.PreviewBattlefield;
             }
-            this.argsTextBox.Text = settings.PreviewArguments;
-            this.dynamicROMPath.Checked = settings.PreviewDynamicRomName;
-            this.level.Value = settings.PreviewLevel;
+            else if (behaviour == (int)Behaviours.AnimationPreviewer)
+            {
+                this.Text = "PREVIEW ANIMATION - Lazy Shell";
+                this.label1.Text = "Monster #";
+                this.selectNumericUpDown.Maximum = 255;
+                if (category == 1)
+                    index += 64;
+                else if (category == 4)
+                {
+                    index += 96;
+                    this.selectNumericUpDown.Value = 0;
+                    goto Finish;
+                }
+                foreach (BattleScript bs in Model.BattleScripts)
+                {
+                    byte[] command = null;
+                    while ((command = bs.NextCommand()) != null)
+                    {
+                        switch (category)
+                        {
+                            case 1:
+                                if (command[0] == 0xEF && command[1] == index)
+                                {
+                                    this.selectNumericUpDown.Value = bs.Index;
+                                    bs.CommandIndex = 0;
+                                    goto Finish;
+                                }
+                                if (command[0] == 0xF0 && (command[1] == index || command[2] == index || command[3] == index))
+                                {
+                                    this.selectNumericUpDown.Value = bs.Index;
+                                    bs.CommandIndex = 0;
+                                    goto Finish;
+                                }
+                                break;
+                            case 2:
+                                if (command[0] < 0xE0 && command[0] == index)
+                                {
+                                    this.selectNumericUpDown.Value = bs.Index;
+                                    bs.CommandIndex = 0;
+                                    goto Finish;
+                                }
+                                if (command[0] == 0xE0 && (command[1] == index || command[2] == index || command[3] == index))
+                                {
+                                    this.selectNumericUpDown.Value = bs.Index;
+                                    bs.CommandIndex = 0;
+                                    goto Finish;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    bs.CommandIndex = 0;
+                }
+            Finish:
+                this.panel8.Enabled = false;
+                this.panel9.Enabled = true;
+
+                this.battleBGListBox.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
+                this.battleBGListBox.Visible = true;
+                this.battleBGListBox.Enabled = true;
+                this.battleBGListBox.SelectedIndex = settings.PreviewBattlefield;
+            }
             // ally stats
             this.allyName.Items.Clear();
             for (int i = 0; i < Model.Characters.Length; i++)
@@ -321,14 +442,6 @@ namespace LAZYSHELL.Previewer
             editSolidityMaps.CopyTo(Model.EditSolidityMaps, 0);
             return ret;
         }
-        private byte[] maxStats = new byte[]
-        {
-            0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x21,0x45,0x51,0x00,0x3F,0x00,0x00,0x00,
-            0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x22,0x44,0x5E,0x00,0xC0,0x0F,0x00,0x00,
-            0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x1E,0x43,0x5A,0x00,0x00,0xF0,0x00,0x00,
-            0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x1F,0x42,0x4D,0x00,0x00,0x00,0x1F,0x00,
-            0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x20,0x41,0x4B,0x00,0x00,0x00,0xE0,0x07
-        };
         private bool GeneratePreviewSaveState()
         {
             try
@@ -444,6 +557,10 @@ namespace LAZYSHELL.Previewer
                             Bits.SetBit(state, offset + (int)p, i & 7, spells[i]);
                     }
                 }
+                // if previewing item, add item to inventory
+                if (behaviour == (int)Behaviours.AnimationPreviewer && category == 4)
+                    state[snes9x ? 0x30509 : 0x20482] = (byte)index;
+
                 offset = snes9x ? 0x53C9D : 0x41533;
 
                 byte allyCount = 1;
@@ -519,6 +636,26 @@ namespace LAZYSHELL.Previewer
                 byte[] eventData = new byte[] { 0x4A, 0x00, 0x00, 0x00, 0xFE };
                 eventData[3] = (byte)this.battleBGListBox.SelectedIndex;
                 eventData.CopyTo(Model.Data, 0x1E0C00);
+            }
+            else if (this.behaviour == (int)Behaviours.AnimationPreviewer)
+            {
+                int monsterNum = (int)selectNumericUpDown.Value;
+                PrepareBattlePack(0xFFFF);
+                byte[] eventData = new byte[] { 0x4A, 0x00, 0x00, 0x00, 0xFE };
+                eventData[3] = (byte)this.battleBGListBox.SelectedIndex;
+                eventData.CopyTo(Model.Data, 0x1E0C00);
+                if (category == 1 || category == 2)
+                {
+                    Model.Monsters[monsterNum].FP = 255;
+                    Model.Monsters[monsterNum].Speed = 255;
+                    Model.Monsters[monsterNum].Assemble(0xA1D1);
+                    if (category == 1)
+                        Model.BattleScripts[monsterNum].Script = new byte[] { 0xEF, (byte)this.index, 0xEC, 0xFF, 0xFF };
+                    else if (category == 2)
+                        Model.BattleScripts[monsterNum].Script = new byte[] { (byte)this.index, 0xEC, 0xFF, 0xFF };
+                    Bits.SetShort(Model.Data, 0x3930AA + (monsterNum * 2), 0x32AA);
+                    Model.BattleScripts[monsterNum].Assemble(0x3932AA);
+                }
             }
             else
                 new byte[] { 0x70, 0xFE }.CopyTo(Model.Data, 0x1E0C00);
@@ -637,109 +774,86 @@ namespace LAZYSHELL.Previewer
         private void ScanForRunEvents()
         {
             Entrance ent;
-            int save;
             foreach (Level lvl in Model.Levels) // For every level
             {
-                save = lvl.LevelEvents.CurrentEvent; // Save current index to restore later
-                for (int i = 0; i < lvl.LevelEvents.Count; i++) // For every event in each level
+                foreach (Event event_ in lvl.LevelEvents.Events)
                 {
-                    lvl.LevelEvents.CurrentEvent = i;
-                    if (lvl.LevelEvents.RunEvent == this.selectNum)
+                    if (event_.RunEvent == this.selectNum) // If this exit points to the level we want
                     {
                         ent = new Entrance();
                         ent.LevelNum = (ushort)lvl.Index;
-                        ent.CoordX = lvl.LevelEvents.X;
-                        ent.CoordY = lvl.LevelEvents.Y;
-                        ent.CoordZ = lvl.LevelEvents.Z;
-                        ent.RadialPosition = lvl.LevelEvents.Facing;
+                        ent.CoordX = event_.X;
+                        ent.CoordY = event_.Y;
+                        ent.CoordZ = event_.Z;
+                        ent.RadialPosition = event_.Facing;
                         ent.ShowMessage = false;
                         ent.Flag = false;
                         eventTriggers.Add(ent); // Add the event trigger
                     }
                 }
-                lvl.LevelEvents.CurrentEvent = save; // Restore current index for this levels events                        
             }
         }
         private void ScanForEntrancesToLevel(int lvlNum)
         {
             Entrance ent;
-            int save;
-
             foreach (Level lvl in Model.Levels) // For every level
             {
-                save = lvl.LevelExits.CurrentExit; // Save current index to restore later
-                for (int i = 0; i < lvl.LevelExits.Count; i++) // For every event in each level
+                foreach (Exit exit in lvl.LevelExits.Exits)
                 {
-                    lvl.LevelExits.CurrentExit = i;
-                    if (lvl.LevelExits.Destination == lvlNum) // If this exit points to the level we want
+                    if (exit.Destination == lvlNum) // If this exit points to the level we want
                     {
                         ent = new Entrance();
                         ent.Source = (ushort)lvl.Index;
-                        ent.LevelNum = (ushort)lvl.Index;
-                        ent.CoordX = lvl.LevelExits.DestX;
-                        ent.CoordY = lvl.LevelExits.DestY;
-                        ent.CoordZ = lvl.LevelExits.DestZ;
-                        ent.RadialPosition = lvl.LevelExits.DestFace;
-                        ent.ShowMessage = lvl.LevelExits.ShowMessage;
+                        ent.LevelNum = (ushort)exit.Destination;
+                        ent.CoordX = exit.DestX;
+                        ent.CoordY = exit.DestY;
+                        ent.CoordZ = exit.DestZ;
+                        ent.RadialPosition = exit.DestFace;
+                        ent.ShowMessage = exit.ShowMessage;
                         ent.Flag = true; // Indicates an enter event
                         eventTriggers.Add(ent); // Add the event trigger
                     }
                 }
-                lvl.LevelExits.CurrentExit = save; // Restore current index for this levels events                        
             }
-
         }
         private void ScanForActionReferences(int actionNum)
         {
             Entrance ent;
-            int saveNPC, saveInstance;
-
             foreach (Level lvl in Model.Levels) // For every level
             {
-                saveNPC = lvl.LevelNPCs.CurrentNPC;
-
-                for (int i = 0; i < lvl.LevelNPCs.Count; i++) // For every NPC in each level
+                foreach (NPC npc in lvl.LevelNPCs.Npcs) // For every NPC in each level
                 {
-                    lvl.LevelNPCs.CurrentNPC = i;
-                    if (lvl.LevelNPCs.Movement + lvl.LevelNPCs.PropertyC == actionNum) // If this NPC has our action #
+                    if (npc.Movement + npc.PropertyC == actionNum) // If this NPC has our action #
                     {
                         ent = new Entrance();
-                        ent.Source = (ushort)lvl.LevelNPCs.NPCID;
+                        ent.Source = (ushort)npc.NPCID;
                         ent.LevelNum = (ushort)lvl.Index;
-                        ent.CoordX = (byte)((lvl.LevelNPCs.X + 2) & 0x3F);
-                        ent.CoordY = (byte)((lvl.LevelNPCs.Y + 2) & 0x7F);
-                        ent.CoordZ = lvl.LevelNPCs.Z;
+                        ent.CoordX = (byte)((npc.X + 2) & 0x3F);
+                        ent.CoordY = (byte)((npc.Y + 2) & 0x7F);
+                        ent.CoordZ = npc.Z;
                         ent.RadialPosition = 7;
                         ent.ShowMessage = false;
                         ent.Flag = true; // Indicates an NPC and not an Instance
                         eventTriggers.Add(ent); // Add the event trigger
                     }
-
-                    saveInstance = lvl.LevelNPCs.CurrentInstance;
-                    for (int x = 0; x < lvl.LevelNPCs.InstanceCount; x++) // test all instances
+                    foreach (NPC.Instance instance in npc.Instances) // test all instances
                     {
-                        lvl.LevelNPCs.CurrentInstance = x;
-
-                        if (lvl.LevelNPCs.Movement + lvl.LevelNPCs.InstancePropertyC == actionNum)
+                        if (instance.Movement + instance.InstancePropertyC == actionNum)
                         {
                             ent = new Entrance();
-                            ent.Source = (ushort)lvl.LevelNPCs.NPCID;
+                            ent.Source = (ushort)instance.NPCID;
                             ent.LevelNum = (ushort)lvl.Index;
-                            ent.CoordX = (byte)((lvl.LevelNPCs.InstanceCoordX + 2) & 0x3F);
-                            ent.CoordY = (byte)((lvl.LevelNPCs.InstanceCoordY + 2) & 0x7F);
-                            ent.CoordZ = lvl.LevelNPCs.InstanceCoordZ;
+                            ent.CoordX = (byte)((instance.InstanceCoordX + 2) & 0x3F);
+                            ent.CoordY = (byte)((instance.InstanceCoordY + 2) & 0x7F);
+                            ent.CoordZ = instance.InstanceCoordZ;
                             ent.RadialPosition = 7;
                             ent.ShowMessage = false;
                             ent.Flag = false; // Indicates an Instance
                             eventTriggers.Add(ent); // Add the event trigger
                         }
-                        lvl.LevelNPCs.CurrentInstance = saveInstance;
                     }
-
                 }
-                lvl.LevelNPCs.CurrentNPC = saveNPC;
             }
-
         }
         private bool ScanFormation(int monsterNum, Formation sfm)
         {
@@ -835,6 +949,7 @@ namespace LAZYSHELL.Previewer
                 UpdateGUI();
             }
         }
+        //
         private void eventListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = this.eventListBox.SelectedIndex;
@@ -876,6 +991,7 @@ namespace LAZYSHELL.Previewer
             settings.PreviewBattlefield = battleBGListBox.SelectedIndex;
             settings.Save();
         }
+        //
         private void alliesInParty_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating || initializing)
@@ -892,6 +1008,29 @@ namespace LAZYSHELL.Previewer
                 return;
             settings.PreviewLevel = (int)level.Value;
             settings.Save();
+        }
+        private void allyName_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Do.DrawName(
+                sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
+                Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
+        }
+        private void itemName_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+            Do.DrawName(
+                sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
+                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, true, false, Model.MenuBackground_);
+        }
+        private void allyName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating || initializing)
+                return;
+            updating = true;
+            this.allyWeapon.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
+            this.allyArmor.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
+            this.allyAccessory.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
+            updating = false;
         }
         private void allyWeapon_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -944,6 +1083,7 @@ namespace LAZYSHELL.Previewer
             this.allyArmor.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
             this.allyAccessory.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
         }
+        //
         private void launchButton_Click(object sender, EventArgs e)
         {
             if (Prelaunch())
@@ -965,30 +1105,6 @@ namespace LAZYSHELL.Previewer
             public ushort LevelNum;
             public bool Flag;
             public string msg;
-        }
-        private void allyName_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            Do.DrawName(
-                sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
-                Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
-        }
-        private void itemName_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0) return;
-            Do.DrawName(
-                sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
-                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, true, false, Model.MenuBackground_);
-        }
-
-        private void allyName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating || initializing)
-                return;
-            updating = true;
-            this.allyWeapon.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
-            this.allyArmor.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
-            this.allyAccessory.SelectedIndex = Model.ItemNames.GetIndexFromNum(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
-            updating = false;
         }
     }
 }

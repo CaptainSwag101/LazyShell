@@ -305,7 +305,8 @@ namespace LAZYSHELL
                     int index = y__ * 16 + x__;
                     index += ((x + x_) >> 4) * 256;
                     index += ((y + y_) >> 4) * 512;
-                    if (index >= tileset.TileSetLayer.Length) continue;
+                    if (index >= tileset.TileSetLayer.Length || index < 0) continue;
+                    if (y < 0 || x < 0) continue;
                     Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileset.TileSetLayer[index] = tile.Copy();
                     tileset.TileSetLayer[index].TileIndex = index;
@@ -655,7 +656,7 @@ namespace LAZYSHELL
                 DrawHoverBox(e.Graphics);
 
             if (buttonToggleCartGrid.Checked)
-                overlay.DrawCartographicGrid(e.Graphics, Color.Gray, pictureBoxBattlefield.Size, new Size(16, 16), 1);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxBattlefield.Size, new Size(16, 16), 1);
 
             if (overlay.SelectTS != null)
                 overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
@@ -878,8 +879,6 @@ namespace LAZYSHELL
         {
             Do.Export(battlefieldImage, "battlefield." + index.ToString("d2") + ".png");
         }
-        #endregion
-
         private void exportToBattlefieldToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Tile16x16[] tileset = new Tile16x16[32 * 32];
@@ -888,7 +887,6 @@ namespace LAZYSHELL
                 this.tileset.TileSetLayer[i] = tileset[i].Copy();
             this.tileset.DrawTileset(this.tileset.TileSetLayer, this.tileset.TileSet);
         }
-
         private void importTilesetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BattlefieldTileSet tileset = new BattlefieldTileSet();
@@ -909,7 +907,6 @@ namespace LAZYSHELL
 
             RefreshBattlefield();
         }
-
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current battlefield. Go ahead with reset?",
@@ -919,5 +916,6 @@ namespace LAZYSHELL
             Model.Decompress(Model.TileSetsBF, 0x150000, 0x160000, 0x2000, "", index, index + 1, false);
             RefreshBattlefield();
         }
+        #endregion
     }
 }

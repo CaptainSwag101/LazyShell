@@ -1,6 +1,79 @@
 Major changes/additions are indicated by ***
 
-v3.5
+v3.5 ALPHA
+--------------------------------------
+General changes:
+*Cleaned up the source code; moved resources into individual folders
+
+Editor-specific changes:
+*Battle Scripts: spell, attack, item lists now drawn with game's font
+*Damage Calculator: better labelling and organization
+*Levels: separated solidity and tilemap undo/redo stacks
+*Sprites: sprites in sequence frames all zoomed to normal size now
+*Palette Editor: brightness can now go from -248 to 248
+
+Additions:
+*Animations: previewer for item, spell, and attack animations
+*Audio: added guide to importing a WAV file of user's choosing
+*Damage Calculator: ability to switch attacker and target stats
+*Event Scripts: goto offset context-menu for action scripts pointer commands
+*Levels: fill tiles contiguously with edit-all-layers-simultaneously support
+*Levels: level info viewer shows offsets of elements for a level
+*Levels: solidity set image updates when solid tile properties changed
+*Levels: reset button for solid tile editor
+*Levels: numerized some lists in the maps tab
+*Levels: added label showing tile index # for tileset on mouseover
+*Monsters: right-click goto battle dialogue and goto event for battlescripts
+*Palette Editor: new colorize feature added under effects tab
+*Sprites: gridlines for tileset's tile in zoom box
+
+Fixes:
+*When closing a ROM, it closes ROM even if an editor window is still open
+*Allies: new game inventory stats not updating if Mario not selected
+*Battle Scripts: cut icon off of item names b/c were showing box character
+*Battlefields: dragging a selection beyond map bounds threw exception
+*Damage Calculator: target stats not updating when level changed
+*Damage Calculator: changing from ally to monster not updating monster stats
+*Dialogues: hitting ctrl+any other key modifies duplicate dialogues
+*Effects: dragging a selection beyond map bounds threw exception
+*Effects: animation not playing back with correct durations
+*Event Scripts: changing commands in large scripts took extremely long
+*Event Scripts: wrong labelling for bytes left and hex labels
+*Event Scripts: goto dialogue threw exception if dialogue window closed
+*Event Scripts: fixed some inaccurate command labelling
+*Hex Editor: doesn't close like other editors when opening a new ROM
+*Levels: changing NPC engage type wasn't updating some properties in NPC class
+*Levels: opening clear window threw an exception; trying to GetType() of null
+*Levels: dragging a selection in tileset beyond image bounds threw exception
+*Levels: changing gfx sets or tilesets would reset any changes made to tilemap
+*Levels: click/drag solid tile before cementing moved tiles shrunk solid map
+*Levels: partitions search not closing with level window
+*Levels: solidity tiles now save changes
+*Levels: tilemap L3 list names being added twice
+*Levels: import level data wasn't importing overlaps
+*Levels: import level data wasn't setting ROM data for level element classes
+*Levels: object tag coord placement not accommodating zoom status
+*Levels: error creating new object, zoomed in, and scrolled far right/bottom
+*Levels: right-click zoom out/in was showing context menu too
+*Main Title: dragging a selection beyond map bounds threw exception
+*Monsters: cancelling monster stats closing but not battle scripts has issues
+*Palettes: default white color above color map throwing an exception if set
+*Previewer: entrance event results in event previewer not loading right level
+*Shops: controls not updating when shop index changed
+*Space Analyzer: wouldn't open; threw exception because of coloring values
+*Sprites: selecting beyond tileset bounds broke the zoom panel image
+*Sprites: animation not playing back with correct durations
+*Sprites: threw exception if try to draw frame w/mold index beyond mold count
+*Sprites: last row in tileset wasn't showing in zoom box
+*Sprites: tileset selection box showing sometimes for gridplane molds
+*Sprites: context menu for mold image interfering with dragging tiles
+*Sprites: importing/exporting read from sprite index instead of animation
+*Sprites: dragging a selection beyond mold image boundaries corrupted image
+*World Maps: dragging a selection beyond map bounds threw exception
+*World Maps: run event control being casted as byte instead of ushort
+
+
+v3.5 BETA
 --------------------------------------
 General changes:
 *Changed target framework to NET 2.0

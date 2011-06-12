@@ -1028,7 +1028,7 @@ namespace LAZYSHELL.ScriptsEditor
                 eac = it.Next();
                 if (eac.Opcode == 0x42 || eac.Opcode == 0x67 || eac.Opcode == 0xE9)
                 {
-                    try // 0x42 and 0x67 will throw an exception if its an AQC
+                    if (eac.GetType() == typeof(EventScriptCommand) || eac.Opcode == 0xE9)
                     {
                         pointer = eac.ReadPointerSpecial(0);
                         if (pointer == (referencedCommand.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
@@ -1036,7 +1036,6 @@ namespace LAZYSHELL.ScriptsEditor
                             eac.WritePointerSpecial(0, (ushort)(referencedCommand.Offset & 0xFFFF));
                             eac.PointerChangedA = true;
                         }
-
                         pointer = eac.ReadPointerSpecial(1);
                         if (pointer == (referencedCommand.InternalOffset & 0xFFFF) && !eac.PointerChangedB)
                         {
@@ -1044,7 +1043,7 @@ namespace LAZYSHELL.ScriptsEditor
                             eac.PointerChangedB = true;
                         }
                     }
-                    catch
+                    else
                     {
                         pointer = eac.ReadPointer();
                         if (pointer == (referencedCommand.InternalOffset & 0xFFFF) && !eac.PointerChangedA)

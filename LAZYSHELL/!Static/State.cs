@@ -16,7 +16,7 @@ namespace LAZYSHELL
         private bool layer3 = true; public bool Layer3 { get { return layer3; } set { layer3 = value; } }
         private bool priority1 = false; public bool Priority1 { get { return priority1; } set { priority1 = value; } }
         private bool bg = true; public bool BG { get { return bg; } set { bg = value; } }
-        private bool physicalLayer = false; public bool SolidityLayer { get { return physicalLayer; } set { physicalLayer = value; } }
+        private bool solidityLayer = false; public bool SolidityLayer { get { return solidityLayer; } set { solidityLayer = value; } }
         private bool mask = false; public bool Mask { get { return mask; } set { mask = value; } }
         private bool npcs = false; public bool NPCs { get { return npcs; } set { npcs = value; } }
         private bool exits = false; public bool Exits { get { return exits; } set { exits = value; } }
@@ -30,8 +30,8 @@ namespace LAZYSHELL
         private bool draw = false; public bool Draw { get { return draw; } set { ClearDrawSelectErase(); draw = value; } }
         private bool select = false; public bool Select { get { return select; } set { ClearDrawSelectErase(); select = value; } }
         private bool erase = false; public bool Erase { get { return erase; } set { ClearDrawSelectErase(); erase = value; } }
-        private bool dropper = false; public bool Dropper { get { return dropper; } set { dropper = value; } }
-        private bool fill = false; public bool Fill { get { return fill; } set { fill = value; } }
+        private bool dropper = false; public bool Dropper { get { return dropper; } set { ClearDrawSelectErase(); dropper = value; } }
+        private bool fill = false; public bool Fill { get { return fill; } set { ClearDrawSelectErase(); fill = value; } }
         private bool move = false; public bool Move { get { return move; } set { move = value; } }
         private bool paste = false; public bool Paste { get { return paste; } set { paste = value; } }
         private bool autoPointerUpdate = true; public bool AutoPointerUpdate { get { return this.autoPointerUpdate; } set { this.autoPointerUpdate = value; } }
@@ -80,7 +80,7 @@ namespace LAZYSHELL
 
             }
         }
-        private void ClearDrawSelectErase()
+        public void ClearDrawSelectErase()
         {
             template = false;
             draw = false;

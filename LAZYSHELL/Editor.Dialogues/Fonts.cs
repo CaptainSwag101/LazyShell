@@ -384,7 +384,7 @@ namespace LAZYSHELL
                 case 2: s = new Size(8, 8); break;
             }
             if (showGrid.Checked && fontType.SelectedIndex != 3)
-                overlay.DrawCartographicGrid(e.Graphics, Color.Gray, new Size(fontTableImage.Width, fontTableImage.Height), s, 1);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, new Size(fontTableImage.Width, fontTableImage.Height), s, 1);
         }
         private void pictureBoxFontTable_MouseClick(object sender, MouseEventArgs e)
         {
@@ -448,7 +448,7 @@ namespace LAZYSHELL
                     e.Graphics.DrawImage(fontCharacterImage, rdst, rsrc, GraphicsUnit.Pixel);
 
             if (showGrid.Checked && zoom >= 4)
-                overlay.DrawCartographicGrid(e.Graphics, Color.Gray, new Size(fontCharacterImage.Width * zoom, fontCharacterImage.Height * zoom), new Size(1, 1), zoom);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, new Size(fontCharacterImage.Width * zoom, fontCharacterImage.Height * zoom), new Size(1, 1), zoom);
         }
         private void pictureBoxFontCharacter_MouseDown(object sender, MouseEventArgs e)
         {
@@ -557,6 +557,15 @@ namespace LAZYSHELL
         {
             e.Cancel = true;
             newFontTable.Hide();
+        }
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current font character. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            font[currentFontChar] = new FontCharacter(Model.Data, currentFontChar, fontType.SelectedIndex);
+            InitializeFontCharacter();
+            SetFontCharacterImage();
         }
         private void fontWidth_ValueChanged(object sender, EventArgs e)
         {
@@ -902,15 +911,5 @@ namespace LAZYSHELL
             insertIntoTextToolStripMenuItem.Enabled = fontType.SelectedIndex != 3;
         }
         #endregion
-
-        private void reset_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("You're about to undo all changes to the current font character. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return;
-            font[currentFontChar] = new FontCharacter(Model.Data, currentFontChar, fontType.SelectedIndex);
-            InitializeFontCharacter();
-            SetFontCharacterImage();
-        }
     }
 }

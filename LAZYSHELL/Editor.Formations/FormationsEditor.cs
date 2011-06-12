@@ -17,6 +17,7 @@ namespace LAZYSHELL
         private Settings settings = Settings.Default;
         public int FormationIndex { get { return formationsEditor.Index; } set { formationsEditor.Index = value; } }
         public int PackIndex { get { return packsEditor.Index; } set { packsEditor.Index = value; } }
+        // constructor
         public FormationsEditor()
         {
             settings.Keystrokes[0x20] = "\x20";
@@ -42,7 +43,7 @@ namespace LAZYSHELL
             //
             checksum = Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics);
         }
-        // tooltips
+        // functions
         public void Assemble()
         {
             foreach (Formation f in Model.Formations)
@@ -52,6 +53,7 @@ namespace LAZYSHELL
             for (int i = 0; i < Model.FormationMusics.Length; i++)
                 Model.Data[0x029F51 + i] = Model.FormationMusics[i];
         }
+        // event handlers
         private void FormationsEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics) == checksum)
@@ -108,15 +110,6 @@ namespace LAZYSHELL
             new ClearElements(Model.FormationPacks, packsEditor.Index, "CLEAR PACKS...").ShowDialog();
             packsEditor.RefreshFormationPacks();
         }
-        private void showFormations_Click(object sender, EventArgs e)
-        {
-            formationsEditor.Visible = showFormations.Checked;
-        }
-        private void showPacks_Click(object sender, EventArgs e)
-        {
-            packsEditor.Visible = showPacks.Checked;
-        }
-
         private void resetFormationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current formation. Go ahead with reset?",
@@ -125,7 +118,6 @@ namespace LAZYSHELL
             formationsEditor.Formation = new Formation(Model.Data, formationsEditor.Index);
             formationsEditor.RefreshFormations();
         }
-
         private void resetPackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current pack. Go ahead with reset?",
@@ -133,6 +125,14 @@ namespace LAZYSHELL
                 return;
             packsEditor.Pack = new FormationPack(Model.Data, packsEditor.Index);
             packsEditor.RefreshFormationPacks();
+        }
+        private void showFormations_Click(object sender, EventArgs e)
+        {
+            formationsEditor.Visible = showFormations.Checked;
+        }
+        private void showPacks_Click(object sender, EventArgs e)
+        {
+            packsEditor.Visible = showPacks.Checked;
         }
     }
 }

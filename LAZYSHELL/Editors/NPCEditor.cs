@@ -11,6 +11,7 @@ namespace LAZYSHELL
 {
     public partial class NPCEditor : Form
     {
+        #region Variables
         private NPCProperties _npcProperty;
         private Settings settings = Settings.Default;
         private NPCProperties[] npcProperties { get { return Model.NPCProperties; } set { Model.NPCProperties = value; } }
@@ -22,9 +23,9 @@ namespace LAZYSHELL
         private Levels level;
         private int index { get { return (int)npcNum.Value; } set { npcNum.Value = value; } }
         private Search searchWindow;
-
         private bool updating = false;
-
+        #endregion
+        // constructor
         public NPCEditor(Levels level, decimal npcID)
         {
             this.level = level;
@@ -36,6 +37,7 @@ namespace LAZYSHELL
             InitializeNPCs();
             searchWindow = new Search(searchSpriteName, spriteNameTextBox, searchSpriteNames, searchSpriteName.Items);
         }
+        // functions
         public void Reload(decimal npcID)
         {
             npcNum.Value = Math.Min(511, npcID);
@@ -80,7 +82,6 @@ namespace LAZYSHELL
             //if (level.npcs.NumberOfNPCs != 0)
             //    level.NPCID.Value = npcNum.Value;
         }
-
         private void LoadSearch()
         {
             searchResults.Items.Clear();
@@ -95,7 +96,6 @@ namespace LAZYSHELL
                     searchResults.Items.Add("NPC #" + i.ToString() + "\n");
             }
         }
-
         private void SetSpriteImage()
         {
             spritePixels = npcProperties[0].CreateImage(3, true, (int)spriteName.SelectedIndex);
@@ -105,11 +105,20 @@ namespace LAZYSHELL
             spriteImage = new Bitmap(Do.PixelsToImage(spritePixels, imageWidth, imageHeight));
             spritePictureBox.Invalidate();
         }
-
+        #region Event handlers
         private void npcNum_ValueChanged(object sender, EventArgs e)
         {
             _npcProperty = npcProperty.Copy();
             InitializeNPCs();
+        }
+        private void spritePictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            if (spriteImage != null)
+                e.Graphics.DrawImage(spriteImage, 128 - (spriteImage.Width / 2), 128 - (spriteImage.Height / 2));
+        }
+        private void spriteNum_ValueChanged(object sender, EventArgs e)
+        {
+            spriteName.SelectedIndex = (int)spriteNum.Value;
         }
         private void spriteName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -145,13 +154,21 @@ namespace LAZYSHELL
         {
             if (updating) return;
         }
-
-        private void spritePictureBox_Paint(object sender, PaintEventArgs e)
+        //
+        private void searchSpriteName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (spriteImage != null)
-                e.Graphics.DrawImage(spriteImage, 128 - (spriteImage.Width / 2), 128 - (spriteImage.Height / 2));
+            LoadSearch();
         }
-
+        private void searchResults_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            npcNum.Value = Convert.ToInt32(searchResults.SelectedItem.ToString().Substring(5));
+        }
+        //
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            npcProperty = _npcProperty.Copy();
+            InitializeNPCs();
+        }
         private void buttonOK_Click(object sender, EventArgs e)
         {
             npcProperty.Sprite = (ushort)spriteName.SelectedIndex;
@@ -194,33 +211,12 @@ namespace LAZYSHELL
         {
             this.Close();
         }
-
-        private void searchResults_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            npcNum.Value = Convert.ToInt32(searchResults.SelectedItem.ToString().Substring(5));
-        }
-
-        private void searchSpriteName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadSearch();
-        }
-
-        private void buttonReset_Click(object sender, EventArgs e)
-        {
-            npcProperty = _npcProperty.Copy();
-            InitializeNPCs();
-        }
-
         private void NPCEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             searchWindow.Hide();
             this.Hide();
             e.Cancel = true;
         }
-
-        private void spriteNum_ValueChanged(object sender, EventArgs e)
-        {
-            spriteName.SelectedIndex = (int)spriteNum.Value;
-        }
+        #endregion
     }
 }

@@ -13,6 +13,7 @@ namespace LAZYSHELL
     public partial class Monsters : Form
     {
         #region Variables
+        private delegate void Function();
         private long checksum;
         private bool updatingMonsters = false;
         private Monster[] monsters { get { return Model.Monsters; } set { Model.Monsters = value; } }
@@ -336,23 +337,23 @@ namespace LAZYSHELL
         #region Event Handlers
         private void Monsters_FormClosing(object sender, FormClosingEventArgs e)
         {
-            battleScriptsEditor.Close();
-            if (!battleScriptsEditor.IsDisposed)
-            {
-                e.Cancel = true;
-                return;
-            }
-            if (Do.GenerateChecksum(monsters) == checksum)
+            if (Do.GenerateChecksum(monsters) == checksum && battleScriptsEditor.ChecksumNotChanged())
                 return;
             DialogResult result = MessageBox.Show(
-                "Monsters have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
+                "Monsters and battlescripts have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
+            {
                 Assemble();
+                battleScriptsEditor.Assemble();
+                battleScriptsEditor.Close();
+            }
             else if (result == DialogResult.No)
             {
                 Model.Monsters = null;
                 Model.MonsterNames = null;
+                Model.BattleScripts = null;
+                battleScriptsEditor.Close();
                 return;
             }
             else if (result == DialogResult.Cancel)
@@ -643,23 +644,6 @@ namespace LAZYSHELL
             new ClearElements(monsters, Index, "CLEAR MONSTERS...").ShowDialog();
             RefreshMonsterTab();
         }
-        #endregion
-
-        private void panel13_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder3D(e.Graphics, panel13.ClientRectangle, Border3DStyle.Raised, Border3DSide.All);
-        }
-
-        private void showMonster_Click(object sender, EventArgs e)
-        {
-            panel13.Visible = !panel13.Visible;
-        }
-
-        private void showBattleScripts_Click(object sender, EventArgs e)
-        {
-            battleScriptsEditor.Visible = !battleScriptsEditor.Visible;
-        }
-
         private void importBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             battleScriptsEditor.Import();
@@ -672,13 +656,10 @@ namespace LAZYSHELL
         {
             battleScriptsEditor.Clear();
         }
-
-        private delegate void Function();
         private void hackingTools_Click(object sender, EventArgs e)
         {
-            new HackingTools(new Function(RefreshMonsterTab)).ShowDialog();
+            new HackingTools(new Function(RefreshMonsterTab)).Show();
         }
-
         private void resetCurrentMonsterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current monster. Go ahead with reset?",
@@ -695,5 +676,19 @@ namespace LAZYSHELL
             battleScriptsEditor.BattleScript = new LAZYSHELL.ScriptsEditor.BattleScript(Model.Data, battleScriptsEditor.index);
             monsterNum_ValueChanged(null, null);
         }
+        private void showMonster_Click(object sender, EventArgs e)
+        {
+            panel13.Visible = !panel13.Visible;
+        }
+        private void showBattleScripts_Click(object sender, EventArgs e)
+        {
+            battleScriptsEditor.Visible = !battleScriptsEditor.Visible;
+        }
+        //
+        private void panel13_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder3D(e.Graphics, panel13.ClientRectangle, Border3DStyle.Raised, Border3DSide.All);
+        }
+        #endregion
     }
 }

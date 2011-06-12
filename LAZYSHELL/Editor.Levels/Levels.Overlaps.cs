@@ -16,6 +16,9 @@ namespace LAZYSHELL
         private Bitmap overlapsImage;
         private int[] overlapsPixels;
         private LevelOverlaps.Overlap copyOverlap;
+        public TreeView OverlapFieldTree { get { return overlapFieldTree; } set { overlapFieldTree = value; } }
+        public NumericUpDown OverlapX { get { return overlapX; } set { overlapX = value; } }
+        public NumericUpDown OverlapY { get { return overlapY; } set { overlapY = value; } }
 
         #endregion
         #region Methods
@@ -149,7 +152,6 @@ namespace LAZYSHELL
 
             updatingProperties = false;
         }
-
         public int CalculateFreeOverlapSpace()
         {
             int used = 0;
@@ -160,11 +162,46 @@ namespace LAZYSHELL
             }
             return 0x11B8 - used;
         }
+        private void AddNewOverlap(LevelOverlaps.Overlap overlap)
+        {
+            if (CalculateFreeOverlapSpace() >= 4)
+            {
+                this.overlapFieldTree.Focus();
+                if (overlaps.Count < 28)
+                {
+                    if (overlapFieldTree.Nodes.Count > 0)
+                        overlaps.AddNewOverlap(overlapFieldTree.SelectedNode.Index + 1, overlap);
+                    else
+                        overlaps.AddNewOverlap(0, overlap);
+
+                    int reselect;
+
+                    if (overlapFieldTree.Nodes.Count > 0)
+                        reselect = overlapFieldTree.SelectedNode.Index;
+                    else
+                        reselect = -1;
+
+                    overlapFieldTree.BeginUpdate();
+                    this.overlapFieldTree.Nodes.Clear();
+
+                    for (int i = 0; i < overlaps.Count; i++)
+                        this.overlapFieldTree.Nodes.Add(new TreeNode("OVERLAP #" + i.ToString()));
+
+                    this.overlapFieldTree.SelectedNode = this.overlapFieldTree.Nodes[reselect + 1];
+                    overlapFieldTree.EndUpdate();
+                }
+                else
+                    MessageBox.Show("Could not insert any more overlaps. The maximum number of overlaps allowed is 28.",
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("Could not insert the field. The total number of overlaps for all levels has exceeded the maximum allotted space.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         #endregion
         #region Event Handlers
 
-        public TreeView OverlapFieldTree { get { return overlapFieldTree; } set { overlapFieldTree = value; } }
         private void overlapFieldTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
@@ -175,11 +212,11 @@ namespace LAZYSHELL
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             RefreshOverlapProperties();
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void overlapFieldInsert_Click(object sender, EventArgs e)
         {
-            Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
+            Point o = new Point(Math.Abs(picture.Left) / zoom, Math.Abs(picture.Top) / zoom);
             Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeOverlapSpace() >= 4)
             {
@@ -246,8 +283,6 @@ namespace LAZYSHELL
                 overlapFieldTree.EndUpdate();
             }
         }
-        public NumericUpDown OverlapX { get { return overlapX; } set { overlapX = value; } }
-        public NumericUpDown OverlapY { get { return overlapY; } set { overlapY = value; } }
         private void overlapCoordX_ValueChanged(object sender, EventArgs e)
         {
             if (updatingProperties) return;
@@ -331,48 +366,12 @@ namespace LAZYSHELL
                 overlapsImage = Do.PixelsToImage(overlapsPixels, 256, 416);
             }
             e.Graphics.DrawImage(overlapsImage, 0, 0);
-            overlay.DrawCartographicGrid(e.Graphics, Color.Gray, new Size(256, 416), new Size(32, 32), 1);
+            overlay.DrawCartesianGrid(e.Graphics, Color.Gray, new Size(256, 416), new Size(32, 32), 1);
             int x = (int)overlapType.Value % 8 * 32;
             int y = (int)overlapType.Value / 8 * 32;
             overlay.DrawSelectionBox(e.Graphics, new Point(x + 32, y + 32), new Point(x, y), 1);
         }
         //
-        private void AddNewOverlap(LevelOverlaps.Overlap overlap)
-        {
-            if (CalculateFreeOverlapSpace() >= 4)
-            {
-                this.overlapFieldTree.Focus();
-                if (overlaps.Count < 28)
-                {
-                    if (overlapFieldTree.Nodes.Count > 0)
-                        overlaps.AddNewOverlap(overlapFieldTree.SelectedNode.Index + 1, overlap);
-                    else
-                        overlaps.AddNewOverlap(0, overlap);
-
-                    int reselect;
-
-                    if (overlapFieldTree.Nodes.Count > 0)
-                        reselect = overlapFieldTree.SelectedNode.Index;
-                    else
-                        reselect = -1;
-
-                    overlapFieldTree.BeginUpdate();
-                    this.overlapFieldTree.Nodes.Clear();
-
-                    for (int i = 0; i < overlaps.Count; i++)
-                        this.overlapFieldTree.Nodes.Add(new TreeNode("OVERLAP #" + i.ToString()));
-
-                    this.overlapFieldTree.SelectedNode = this.overlapFieldTree.Nodes[reselect + 1];
-                    overlapFieldTree.EndUpdate();
-                }
-                else
-                    MessageBox.Show("Could not insert any more overlaps. The maximum number of overlaps allowed is 28.",
-                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-                MessageBox.Show("Could not insert the field. The total number of overlaps for all levels has exceeded the maximum allotted space.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
         private void overlapFieldCopy_Click(object sender, EventArgs e)
         {
             if (overlapFieldTree.SelectedNode != null)

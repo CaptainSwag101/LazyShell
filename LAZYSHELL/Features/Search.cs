@@ -11,6 +11,7 @@ namespace LAZYSHELL
 {
     public partial class Search : Form
     {
+        #region Variables
         private delegate void Function();
         private Delegate function;
         private ToolStripTextBox searchField;
@@ -30,6 +31,8 @@ namespace LAZYSHELL
                     return StringComparison.CurrentCultureIgnoreCase;
             }
         }
+        #endregion
+        // constructor
         /// <summary>
         /// Loads a search form containing the results of a search query.
         /// </summary>
@@ -104,6 +107,7 @@ namespace LAZYSHELL
                 this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
             }
         }
+        // functions
         private void InitializeProperties()
         {
             this.searchField.ForeColor = SystemColors.ControlDark;
@@ -146,6 +150,27 @@ namespace LAZYSHELL
                 listBox.Items.Count * listBox.ItemHeight + 32 + panel1.Height,
                 Screen.PrimaryScreen.WorkingArea.Height - this.Top - 16);
             listBox.EndUpdate();
+        }
+        #region Event handlers
+        private void matchCase_CheckedChanged(object sender, EventArgs e)
+        {
+            if (listBox.Enabled)
+                this.function.DynamicInvoke();
+            if (treeView.Enabled)
+                this.function.DynamicInvoke(treeView, stringComparison, matchWholeWord.Checked);
+            if (richTextBox.Enabled)
+                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
+            searchField.Focus();
+        }
+        private void matchWholeWord_CheckedChanged(object sender, EventArgs e)
+        {
+            if (listBox.Enabled)
+                this.function.DynamicInvoke();
+            if (treeView.Enabled)
+                this.function.DynamicInvoke(treeView, stringComparison, matchWholeWord.Checked);
+            if (richTextBox.Enabled)
+                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
+            searchField.Focus();
         }
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -220,6 +245,7 @@ namespace LAZYSHELL
                 this.Hide();
             }
         }
+        #endregion
         private class SearchItem
         {
             public int Index;
@@ -233,26 +259,6 @@ namespace LAZYSHELL
             {
                 return this.Text;
             }
-        }
-        private void matchCase_CheckedChanged(object sender, EventArgs e)
-        {
-            if (listBox.Enabled)
-                this.function.DynamicInvoke();
-            if (treeView.Enabled)
-                this.function.DynamicInvoke(treeView, stringComparison, matchWholeWord.Checked);
-            if (richTextBox.Enabled)
-                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
-            searchField.Focus();
-        }
-        private void matchWholeWord_CheckedChanged(object sender, EventArgs e)
-        {
-            if (listBox.Enabled)
-                this.function.DynamicInvoke();
-            if (treeView.Enabled)
-                this.function.DynamicInvoke(treeView, stringComparison, matchWholeWord.Checked);
-            if (richTextBox.Enabled)
-                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
-            searchField.Focus();
         }
     }
 }

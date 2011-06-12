@@ -12,9 +12,11 @@ namespace LAZYSHELL
 
         private LevelEvents events { get { return level.LevelEvents; } set { level.LevelEvents = value; } } // Events for the current level
         private Object copyEvent;
+        public TreeView EventsFieldTree { get { return eventsList; } set { eventsList = value; } }
+        public NumericUpDown EventX { get { return eventX; } set { eventX = value; } }
+        public NumericUpDown EventY { get { return eventY; } set { eventY = value; } }
 
         #endregion
-
         #region Methods
 
         private void InitializeEventFieldProperties()
@@ -157,7 +159,6 @@ namespace LAZYSHELL
 
             updatingProperties = false;
         }
-
         public int CalculateFreeEventSpace()
         {
             int used = 0;
@@ -170,12 +171,46 @@ namespace LAZYSHELL
             }
             return 0x1BFF - used;
         }
+        private void AddNewEvent(Event newEvent)
+        {
+            if (CalculateFreeEventSpace() >= 6)
+            {
+                this.eventsList.Focus();
+                if (events.Count < 28)
+                {
+                    if (eventsList.Nodes.Count > 0)
+                        events.AddNewEvent(eventsList.SelectedNode.Index + 1, newEvent);
+                    else
+                        events.AddNewEvent(0, newEvent);
+
+                    int reselect;
+
+                    if (eventsList.Nodes.Count > 0)
+                        reselect = eventsList.SelectedNode.Index;
+                    else
+                        reselect = -1;
+
+                    eventsList.BeginUpdate();
+                    this.eventsList.Nodes.Clear();
+
+                    for (int i = 0; i < events.Count; i++)
+                        this.eventsList.Nodes.Add(new TreeNode("EVENT #" + i.ToString()));
+
+                    this.eventsList.SelectedNode = this.eventsList.Nodes[reselect + 1];
+                    eventsList.EndUpdate();
+                }
+                else
+                    MessageBox.Show("Could not insert any more event fields. The maximum number of event fields allowed is 28.",
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("Could not insert the field. The total number of events for all levels has exceeded the maximum allotted space.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         #endregion
-
         #region Event Handlers
 
-        public TreeView EventsFieldTree { get { return eventsList; } set { eventsList = value; } }
         private void eventsFieldTree_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
         {
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
@@ -185,7 +220,7 @@ namespace LAZYSHELL
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             RefreshEventFieldProperties();
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void eventsExitEvent_ValueChanged(object sender, EventArgs e)
         {
@@ -204,7 +239,7 @@ namespace LAZYSHELL
             if (updatingProperties) return;
 
             events.RunEvent = (ushort)this.eventEvent.Value;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void eventsFieldHeight_ValueChanged(object sender, EventArgs e)
         {
@@ -217,7 +252,7 @@ namespace LAZYSHELL
 
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void eventsFieldLength_ValueChanged(object sender, EventArgs e)
         {
@@ -230,10 +265,8 @@ namespace LAZYSHELL
 
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
-        public NumericUpDown EventX { get { return eventX; } set { eventX = value; } }
-        public NumericUpDown EventY { get { return eventY; } set { eventY = value; } }
         private void eventsFieldZCoord_ValueChanged(object sender, EventArgs e)
         {
             if (updatingProperties) return;
@@ -245,7 +278,7 @@ namespace LAZYSHELL
 
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void eventsFieldYCoord_ValueChanged(object sender, EventArgs e)
         {
@@ -258,7 +291,7 @@ namespace LAZYSHELL
                 overlay.DrawLevelEvents(events);
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void eventsFieldXCoord_ValueChanged(object sender, EventArgs e)
         {
@@ -271,7 +304,7 @@ namespace LAZYSHELL
                 overlay.DrawLevelEvents(events);
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void eventsFieldRadialPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -283,11 +316,11 @@ namespace LAZYSHELL
             overlay.DrawLevelEvents(events);
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void eventsInsertField_Click(object sender, EventArgs e)
         {
-            Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
+            Point o = new Point(Math.Abs(picture.Left) / zoom, Math.Abs(picture.Top) / zoom);
             Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeEventSpace() >= 6)
             {
@@ -350,7 +383,7 @@ namespace LAZYSHELL
 
 
                     RefreshEventFieldProperties();
-                    levelsTilemap.Picture.Invalidate();
+                    picture.Invalidate();
                 }
                 eventsList.EndUpdate();
             }
@@ -385,7 +418,7 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             RefreshExitFieldProperties();
         }
-
+        //
         private void buttonGotoC_Click(object sender, EventArgs e)
         {
             if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
@@ -404,43 +437,7 @@ namespace LAZYSHELL
             Model.Program.EventScripts.EventNum.Value = eventEvent.Value;
             Model.Program.EventScripts.BringToFront();
         }
-
-        private void AddNewEvent(Event newEvent)
-        {
-            if (CalculateFreeEventSpace() >= 6)
-            {
-                this.eventsList.Focus();
-                if (events.Count < 28)
-                {
-                    if (eventsList.Nodes.Count > 0)
-                        events.AddNewEvent(eventsList.SelectedNode.Index + 1, newEvent);
-                    else
-                        events.AddNewEvent(0, newEvent);
-
-                    int reselect;
-
-                    if (eventsList.Nodes.Count > 0)
-                        reselect = eventsList.SelectedNode.Index;
-                    else
-                        reselect = -1;
-
-                    eventsList.BeginUpdate();
-                    this.eventsList.Nodes.Clear();
-
-                    for (int i = 0; i < events.Count; i++)
-                        this.eventsList.Nodes.Add(new TreeNode("EVENT #" + i.ToString()));
-
-                    this.eventsList.SelectedNode = this.eventsList.Nodes[reselect + 1];
-                    eventsList.EndUpdate();
-                }
-                else
-                    MessageBox.Show("Could not insert any more event fields. The maximum number of event fields allowed is 28.",
-                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-                MessageBox.Show("Could not insert the field. The total number of events for all levels has exceeded the maximum allotted space.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+        //
         private void eventsCopyField_Click(object sender, EventArgs e)
         {
             if (eventsList.SelectedNode != null)

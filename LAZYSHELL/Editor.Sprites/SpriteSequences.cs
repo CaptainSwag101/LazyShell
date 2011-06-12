@@ -26,9 +26,9 @@ namespace LAZYSHELL
         private int availableBytes { get { return spritesEditor.AvailableBytes; } set { spritesEditor.AvailableBytes = value; } }
         // local variables
         private bool updating = false;
-        private Mold mold { get { return (Mold)animation.Molds[(int)frameMold.Value]; } }
-        private Sequence sequence { get { return (Sequence)animation.Sequences[sequences.SelectedIndex]; } }
-        private Sequence.Frame frame { get { return (Sequence.Frame)sequence.Frames[index]; } }
+        private Mold mold { get { return animation.Molds[(int)frameMold.Value]; } }
+        private Sequence sequence { get { return animation.Sequences[sequences.SelectedIndex]; } }
+        private Sequence.Frame frame { get { return sequence.Frames[index]; } }
         private int index
         {
             get { return (int)frames.Tag; }
@@ -46,10 +46,11 @@ namespace LAZYSHELL
                     picture.Invalidate();
             }
         }
-        private ArrayList sequenceImages = new ArrayList();
+        private List<Bitmap> sequenceImages = new List<Bitmap>();
         private Bitmap sequenceImage;
         private Bitmap frameImage;
         private int duration_temp = 0;
+        private Sequence sequence_temp = null;
         // special controls
         #endregion
         #region Functions
@@ -104,26 +105,26 @@ namespace LAZYSHELL
                 "creating an animation that can be played back in the image \n" +
                 "to the right.");
 
-            this.newFrame.ToolTipText=
+            this.newFrame.ToolTipText =
                 "Insert a new frame after the currently selected frame.";
 
-            this.deleteFrame.ToolTipText=
+            this.deleteFrame.ToolTipText =
                 "Delete the currently selected frame.";
 
-            this.frameMold.ToolTipText=
+            this.frameMold.ToolTipText =
                 "The mold used by the currently selected frame. This value \n" +
                 "is based on the collection of molds under \"MOLDS\".";
 
-            this.duration.ToolTipText=
+            this.duration.ToolTipText =
                 "The duration of the currently selected frame, or how long \n" +
                 "the frame will pause before the next frame starts. This \n" +
                 "value refers to the # of frames based on a 60-frames-per-\n" +
                 "second unit.";
 
-            this.moveFrameBack.ToolTipText=
+            this.moveFrameBack.ToolTipText =
                 "Move the currently selected frame back.";
 
-            this.moveFrameFoward.ToolTipText=
+            this.moveFrameFoward.ToolTipText =
                 "Move the currently selected frame forward.";
         }
         private void RefreshSequence()
@@ -201,7 +202,7 @@ namespace LAZYSHELL
             this.listBoxFrames.BeginUpdate();
             this.listBoxFrames.Items.Clear();
             frames.Width = Math.Max(
-                sequence.Frames.Count * (256 / 2 + 4) + 4, panelFrames.Width - 4);
+                sequence.Frames.Count * (192 + 4) + 4, panelFrames.Width - 4);
             frames.Location = new Point(
                 0, Math.Max(0, (panelFrames.Height / 2) - (frames.Height / 2)));
             for (int i = 0; i < sequence.Frames.Count; i++)
@@ -209,9 +210,9 @@ namespace LAZYSHELL
                 PictureBox frame = new PictureBox();
                 frame.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
                 frame.BorderStyle = BorderStyle.None;
-                frame.Location = new Point(i * (256 / 2 + 4) + 4, 4);
+                frame.Location = new Point(i * (192 + 4) + 4, 4);
                 frame.Name = "frame" + i;
-                frame.Size = new Size(256 / 2, 256 / 2);
+                frame.Size = new Size(192, 192);
                 frame.Tag = i;
                 frame.MouseDown += new MouseEventHandler(frame_MouseDown);
                 frame.Paint += new PaintEventHandler(frame_Paint);
@@ -232,7 +233,7 @@ namespace LAZYSHELL
                 i++;
             }
             frames.Width = Math.Max(
-                sequence.Frames.Count * (256 / 2 + 4) + 4, panelFrames.Width - 4);
+                sequence.Frames.Count * (192 + 4) + 4, panelFrames.Width - 4);
             frames.Location = new Point(
                 0, Math.Max(0, (panelFrames.Height / 2) - (frames.Height / 2)));
         }
@@ -250,7 +251,7 @@ namespace LAZYSHELL
             {
                 if (frame.Mold < animation.Molds.Count)
                 {
-                    int[] pixels = ((Mold)animation.Molds[frame.Mold]).MoldPixels();
+                    int[] pixels = (animation.Molds[frame.Mold]).MoldPixels();
                     frameImage = new Bitmap(Do.PixelsToImage(pixels, 256, 256));
                     sequenceImages.Add(new Bitmap(frameImage));
                 }
@@ -292,26 +293,29 @@ namespace LAZYSHELL
             int index = (int)frame.Tag;
             if (molds.ShowBG)
                 e.Graphics.Clear(Color.FromArgb(palette[0]));
-            Rectangle dst = new Rectangle(0, 0, 128, 128);
+            Rectangle dst = new Rectangle(0, 0, 192, 192);
             Rectangle src;
-            if (((Mold)animation.Molds[((Sequence.Frame)sequence.Frames[index]).Mold]).Gridplane)
-                src = new Rectangle(64, 64, 128, 128);
-            else
-                src = new Rectangle(0, 0, 256, 256);
-            if (index < sequenceImages.Count)
-                e.Graphics.DrawImage((Bitmap)sequenceImages[index], dst, src, GraphicsUnit.Pixel);
+            if (sequence.Frames[index].Mold < animation.Molds.Count)
+            {
+                //if (animation.Molds[sequence.Frames[index].Mold].Gridplane)
+                src = new Rectangle(32, 32, 192, 192);
+                //else
+                //    src = new Rectangle(0, 0, 256, 256);
+                if (index < sequenceImages.Count)
+                    e.Graphics.DrawImage(sequenceImages[index], dst, src, GraphicsUnit.Pixel);
+            }
             if (this.index == index)
             {
                 e.Graphics.DrawRectangle(
                     new Pen(new SolidBrush(Color.Red)),
-                    new Rectangle(0, 0, 127, 127));
+                    new Rectangle(0, 0, 191, 191));
                 frame.Focus();
             }
             else
             {
                 e.Graphics.DrawRectangle(
                     new Pen(new SolidBrush(SystemColors.ControlDark)),
-                    new Rectangle(0, 0, 127, 127));
+                    new Rectangle(0, 0, 191, 191));
             }
         }
         private void frame_MouseDown(object sender, MouseEventArgs e)
@@ -332,7 +336,7 @@ namespace LAZYSHELL
         private void panelFrames_SizeChanged(object sender, EventArgs e)
         {
             frames.Width = Math.Max(
-                sequence.Frames.Count * (256 / 2 + 4) + 4, panelFrames.Width - 4);
+                sequence.Frames.Count * (192 + 4) + 4, panelFrames.Width - 4);
             frames.Location = new Point(
                 0, Math.Max(0, (panelFrames.Height / 2) - (frames.Height / 2)));
         }
@@ -370,6 +374,8 @@ namespace LAZYSHELL
         }
         private void play_Click(object sender, EventArgs e)
         {
+            sequence_temp = sequence;
+            if (sequence_temp == null) return;
             PlaybackSequence.CancelAsync();
             spritesEditor.EnableOnPlayback(false);
             panelSequence.BringToFront();
@@ -394,6 +400,7 @@ namespace LAZYSHELL
                 if (PlaybackSequence.CancellationPending) break;
                 if (i >= frames.Controls.Count) i = 0;
                 PlaybackSequence.ReportProgress(i);
+                duration_temp = sequence_temp.Frames[i].Duration;
                 Thread.Sleep(duration_temp * (1000 / 60));
                 if (PlaybackSequence.CancellationPending) break;
             }
@@ -401,7 +408,6 @@ namespace LAZYSHELL
         private void PlaybackSequence_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             sequenceImage = new Bitmap((Bitmap)sequenceImages[e.ProgressPercentage]);
-            duration_temp = ((Sequence.Frame)sequence.Frames[e.ProgressPercentage]).Duration;
             pictureBoxSequence.Invalidate();
         }
         private void PlaybackSequence_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -419,7 +425,7 @@ namespace LAZYSHELL
             {
                 int duration = (int)(((double)frame.Duration / 60.0 * 100.0) / 3);
                 while (duration-- > 0)
-                    ((Bitmap)sequenceImages[frameCounter]).Save(
+                    (sequenceImages[frameCounter]).Save(
                         "sprite." + sprite.Index.ToString("d4") + ".Sequence." +
                         index.ToString("d2") + ".Frame." + counter++.ToString("d3") + ".png");
                 frameCounter++;

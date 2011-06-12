@@ -457,8 +457,6 @@ namespace LAZYSHELL
                 animation.Assemble();
             RefreshEffectsEditor();
         }
-        #endregion
-
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current effect and animation index. Go ahead with reset?",
@@ -468,5 +466,6 @@ namespace LAZYSHELL
             effect = new Effect(Model.Data, index);
             number_ValueChanged(null, null);
         }
+        #endregion
     }
 }

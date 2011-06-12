@@ -67,6 +67,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.autoUpdate = new System.Windows.Forms.CheckBox();
+            this.labelTileIndex = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL1)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -355,7 +356,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Location = new System.Drawing.Point(0, 46);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(272, 544);
@@ -445,7 +446,8 @@
             this.lockEditing.Dock = System.Windows.Forms.DockStyle.Left;
             this.lockEditing.Location = new System.Drawing.Point(0, 0);
             this.lockEditing.Name = "lockEditing";
-            this.lockEditing.Size = new System.Drawing.Size(114, 26);
+            this.lockEditing.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.lockEditing.Size = new System.Drawing.Size(117, 26);
             this.lockEditing.TabIndex = 445;
             this.lockEditing.Text = "Lock tileset editing";
             this.lockEditing.UseVisualStyleBackColor = true;
@@ -456,7 +458,7 @@
             this.panel1.Controls.Add(this.autoUpdate);
             this.panel1.Controls.Add(this.lockEditing);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 569);
+            this.panel1.Location = new System.Drawing.Point(0, 590);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(272, 26);
             this.panel1.TabIndex = 446;
@@ -464,9 +466,9 @@
             // buttonUpdate
             // 
             this.buttonUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUpdate.Location = new System.Drawing.Point(198, 0);
+            this.buttonUpdate.Location = new System.Drawing.Point(201, 0);
             this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(74, 26);
+            this.buttonUpdate.Size = new System.Drawing.Size(71, 26);
             this.buttonUpdate.TabIndex = 447;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = true;
@@ -476,21 +478,33 @@
             // 
             this.autoUpdate.AutoSize = true;
             this.autoUpdate.Dock = System.Windows.Forms.DockStyle.Left;
-            this.autoUpdate.Location = new System.Drawing.Point(114, 0);
+            this.autoUpdate.Location = new System.Drawing.Point(117, 0);
             this.autoUpdate.Name = "autoUpdate";
             this.autoUpdate.Size = new System.Drawing.Size(84, 26);
             this.autoUpdate.TabIndex = 446;
             this.autoUpdate.Text = "Auto update";
             this.autoUpdate.UseVisualStyleBackColor = true;
             // 
+            // labelTileIndex
+            // 
+            this.labelTileIndex.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelTileIndex.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelTileIndex.Location = new System.Drawing.Point(0, 25);
+            this.labelTileIndex.Name = "labelTileIndex";
+            this.labelTileIndex.Size = new System.Drawing.Size(272, 21);
+            this.labelTileIndex.TabIndex = 2;
+            this.labelTileIndex.Text = "Tile index: 0 ($00)";
+            this.labelTileIndex.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // LevelsTileset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 599);
+            this.ClientSize = new System.Drawing.Size(272, 621);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.labelTileIndex);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -555,5 +569,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.CheckBox autoUpdate;
+        private System.Windows.Forms.Label labelTileIndex;
     }
 }

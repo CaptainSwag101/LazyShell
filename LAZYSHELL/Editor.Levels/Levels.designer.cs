@@ -503,6 +503,8 @@ namespace LAZYSHELL
             this.clearAllComponentsAll = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllComponentsCurrent = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.levelInfo = new LAZYSHELL.ToolStripListView();
             this.help = new System.Windows.Forms.ToolStripButton();
             this.baseConversion = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
@@ -3159,71 +3161,6 @@ namespace LAZYSHELL
             this.mapTilemapL3Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapTilemapL3Name.DropDownWidth = 200;
             this.mapTilemapL3Name.IntegralHeight = false;
-            this.mapTilemapL3Name.Items.AddRange(new object[] {
-            "{NOTHING}",
-            "Booster\'s Tower 1 ",
-            "Tadpole Pond 2 ",
-            "Mushroom Kingdom Castle ",
-            "Forest Maze 1",
-            "Forest Maze 2",
-            "Sunken Ship 1 ",
-            "Kero Sewers 1",
-            "Sunken Ship 2 ",
-            "Booster\'s Tower 2 ",
-            "____",
-            "Seashore",
-            "Midas River ",
-            "____",
-            "Waterfall ",
-            "____",
-            "various areas…",
-            "Sea",
-            "Tadpole Pond 1 ",
-            "Nimbus Clouds",
-            "Chapel, main hall ",
-            "Plains",
-            "Yo\'ster Isle ",
-            "Maps",
-            "Mushroom Kingdom",
-            "Sewers",
-            "Pipehouse ",
-            "Houses 1",
-            "Bowser\'s Keep Throne",
-            "Rose Way, area 1 ",
-            "Houses 2",
-            "____",
-            "Rose Way",
-            "Moleville shacks ",
-            "Houses 3",
-            "Suite",
-            "Sunken Ship 3",
-            "Star Hill 2",
-            "Vista Hill ",
-            "Seaside Town beach ",
-            "Grasslands 2",
-            "Marrymore Scene",
-            "____",
-            "Nimbus Land houses ",
-            "Jinx\'s Dojo ",
-            "Monstro Town houses",
-            "Bowser\'s Keep 6-doors 1",
-            "Pipe Rooms",
-            "Culex\'s Room ",
-            "Bowser\'s Keep 6-doors 2",
-            "Bowser\'s Keep 2",
-            "Bowser\'s Keep 3",
-            "Bowser\'s Keep 6-doors 3",
-            "Bowser\'s Keep 6-doors 4",
-            "Belome Temple",
-            "Land\'s End Desert",
-            "Bowser\'s Keep 4",
-            "Nimbus Land springs ",
-            "Smithy Factory",
-            "____",
-            "Smithy 2",
-            "___nothing",
-            "Star Hill 1",
-            "____"});
             this.mapTilemapL3Name.Location = new System.Drawing.Point(-2, -2);
             this.mapTilemapL3Name.Name = "mapTilemapL3Name";
             this.mapTilemapL3Name.Size = new System.Drawing.Size(133, 21);
@@ -3286,127 +3223,6 @@ namespace LAZYSHELL
             this.mapPhysicalMapName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapPhysicalMapName.DropDownWidth = 200;
             this.mapPhysicalMapName.IntegralHeight = false;
-            this.mapPhysicalMapName.Items.AddRange(new object[] {
-            "Debug Room",
-            "{NOTHING}",
-            "Kero Sewers 1",
-            "Bowser\'s Keep 1",
-            "____",
-            "Mushroom Kingdom Castle",
-            "____",
-            "____",
-            "Gardener\'s House",
-            "Seaside Town",
-            "____",
-            "Forest Maze 3",
-            "Midas River, waterfall",
-            "Forest Maze 4",
-            "Rose Town",
-            "____",
-            "Forest Maze 2",
-            "___underground areas",
-            "Sunken Ship 1",
-            "Sunken Ship 2",
-            "Tadpole Pond 2",
-            "____",
-            "____",
-            "Mushroom Kingdom",
-            "Mushroom Kingdom houses",
-            "Bowser\'s Keep Throne",
-            "Booster\'s Tower 2",
-            "Booster\'s Tower 1",
-            "Booster\'s Tower entrance",
-            "Rose Way",
-            "Moleville Mines 1",
-            "Moleville Mines 2",
-            "Moleville Mines 3",
-            "Seaside Town houses",
-            "____",
-            "Barrel Volcano 1",
-            "Barrel Volcano 2",
-            "Mario\'s Pad",
-            "Rose Town houses",
-            "Moleville shacks",
-            "Kero Sewers 2",
-            "____",
-            "____",
-            "Bowser\'s Keep 3",
-            "Grate Guy\'s Casino",
-            "Midas River",
-            "Plains",
-            "Grasslands",
-            "Forest Maze Underground",
-            "Forest Maze, area 7",
-            "Land\'s End Underground",
-            "Suite",
-            "____",
-            "Nimbus clouds",
-            "Nimbus Castle 1",
-            "Nimbus Castle 2",
-            "Barrel Volcano 3",
-            "____",
-            "Sea",
-            "Pipe Vault",
-            "Seashore",
-            "____",
-            "Smithy Factory 2",
-            "Smithy Factory 3",
-            "Smithy Factory 1",
-            "Tadpole Pond 1",
-            "Nimbus Land houses",
-            "Star Hill 2",
-            "Pipe Rooms",
-            "____",
-            "____",
-            "Chapel, main hall",
-            "Chapel sanctuary",
-            "Bowser\'s Keep Bridge",
-            "Belome\'s Temple 1",
-            "____",
-            "____",
-            "Bandit\'s Way 1",
-            "Bandit\'s Way 2",
-            "Pipehouse",
-            "Mushroom Way 1",
-            "____",
-            "Kero Sewers 1",
-            "Rose Way 1",
-            "Waterfall tunnels",
-            "Booster Pass 1",
-            "Moleville",
-            "Marrymore",
-            "Marrymore houses",
-            "Volcano map",
-            "Sunken Ship 2",
-            "Vista Hill",
-            "Booster Hill",
-            "Seaside Town beach",
-            "Seaside Town",
-            "Land\'s End 1",
-            "Land\'s End 2",
-            "Bean Valley",
-            "Beanstalks",
-            "____",
-            "Land\'s End 3",
-            "Land\'s End desert",
-            "Monstro Town houses",
-            "Monstro Town",
-            "Jinx\'s Dojo",
-            "Bowser’s Keep 6-door 1",
-            "____",
-            "Booster Pass secret",
-            "Bowser\'s Keep 4",
-            "Bowser\'s Keep 6-door 2",
-            "Bowser\'s Keep Magikoopa",
-            "Bowser\'s Keep 6-door 3",
-            "Bowser\'s Keep 6-door 4",
-            "Bowser\'s Keep 6-door 5",
-            "Factory Grounds 1",
-            "Factory Grounds 2",
-            "Bowser\'s Keep 5",
-            "Nimbus Clouds 2",
-            "Smithy Factory 4",
-            "Star Hill 1"});
             this.mapPhysicalMapName.Location = new System.Drawing.Point(-2, -2);
             this.mapPhysicalMapName.Name = "mapPhysicalMapName";
             this.mapPhysicalMapName.Size = new System.Drawing.Size(133, 21);
@@ -3525,101 +3341,6 @@ namespace LAZYSHELL
             this.mapPaletteSetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapPaletteSetName.DropDownWidth = 200;
             this.mapPaletteSetName.IntegralHeight = false;
-            this.mapPaletteSetName.Items.AddRange(new object[] {
-            "Bowser\'s Keep Throne",
-            "____",
-            "Moleville shacks",
-            "Rose Town",
-            "____",
-            "____",
-            "Grasslands 1",
-            "____",
-            "Bowser\'s Keep Lava",
-            "Bowser\'s Keep, outside",
-            "Mushroom Kingdom Castle",
-            "Forest Maze",
-            "Sunken Ship",
-            "Sewers",
-            "Mountains",
-            "Mushroom Kingdom",
-            "Marrymore",
-            "____",
-            "Booster Tower 1",
-            "Underground",
-            "Bowser\'s Keep 1",
-            "Houses",
-            "____",
-            "____",
-            "____",
-            "Seaside Town",
-            "Booster Tower entrance",
-            "Seashore",
-            "____",
-            "Booster Hill",
-            "Rose Way",
-            "Nimbus Clouds",
-            "Grasslands 2",
-            "Culex\'s Room",
-            "Plains 1",
-            "Plains 2",
-            "Nimbus Castle",
-            "Grasslands 3",
-            "Smithy Factory",
-            "____",
-            "Sea",
-            "Tadpole Pond",
-            "Yo\'ster Isle",
-            "____",
-            "Count Down",
-            "Chapel Sanctuary",
-            "Bowser\'s Keep Lava",
-            "Pipe Rooms",
-            "____",
-            "Mushroom Kingdom dark",
-            "Pipehouse",
-            "Waterfall tunnels",
-            "Rose Town houses",
-            "Rose Town houses",
-            "Sewers Gate",
-            "Rose Town dark",
-            "Booster Tower 2",
-            "Suite",
-            "Volcano Map",
-            "Houses",
-            "Star Hill",
-            "Marrymore houses",
-            "Sunken Ship 2",
-            "Vista Hill",
-            "Johnny\'s Room",
-            "Marrymore Scene",
-            "Booster Tower Balcony",
-            "Bean Valley",
-            "Nimbus Land houses",
-            "Jinx\'s Dojo",
-            "Monstro Town houses",
-            "Monstro Town",
-            "Bowser\'s Keep puzzles",
-            "Beanstalks",
-            "Land\'s End Desert",
-            "Seashore sunset",
-            "Belome Temple",
-            "Nimbus Land",
-            "Factory Grounds 2",
-            "Factory Grounds 1",
-            "Bowser\'s Keep repairs",
-            "Nimbus Castle 2",
-            "Ending: Toadofsky",
-            "Nimbus Land springs",
-            "Nimbus Land clouds",
-            "Smithy 2",
-            "____",
-            "Ending: Yo\'ster Isle",
-            "Smithy Pad",
-            "____",
-            "Ending: Nimbus Land",
-            "Casino entrance",
-            "Casino, inside",
-            "Count Down"});
             this.mapPaletteSetName.Location = new System.Drawing.Point(-2, -2);
             this.mapPaletteSetName.Name = "mapPaletteSetName";
             this.mapPaletteSetName.Size = new System.Drawing.Size(133, 21);
@@ -6139,7 +5860,7 @@ namespace LAZYSHELL
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.toolStripButton1.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
@@ -6364,6 +6085,7 @@ namespace LAZYSHELL
             this.toolStripDropDownButton1,
             this.clear,
             this.toolStripSeparator6,
+            this.toolStripDropDownButton2,
             this.help,
             this.baseConversion,
             this.hexEditor,
@@ -6539,7 +6261,7 @@ namespace LAZYSHELL
             this.resetSolidityMapToolStripMenuItem,
             this.toolStripSeparator4,
             this.resetAllComponentsToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -6773,6 +6495,28 @@ namespace LAZYSHELL
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripDropDownButton2
+            // 
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.levelInfo});
+            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.about_small;
+            this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(27, 22);
+            this.toolStripDropDownButton2.ToolTipText = "Level info";
+            // 
+            // levelInfo
+            // 
+            this.levelInfo.AutoSize = false;
+            this.levelInfo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            new ColumnHeader(),
+            new ColumnHeader()});
+            this.levelInfo.Name = "levelInfo";
+            this.levelInfo.Size = new System.Drawing.Size(140, 160);
+            this.levelInfo.View = View.Details;
             // 
             // help
             // 
@@ -7454,6 +7198,8 @@ namespace LAZYSHELL
         private ToolStripMenuItem resetAllComponentsToolStripMenuItem;
         private ToolStripMenuItem resetPaletteSetToolStripMenuItem;
         private ToolStripMenuItem resetGraphicSetToolStripMenuItem;
+        private ToolStripDropDownButton toolStripDropDownButton2;
+        private LAZYSHELL.ToolStripListView levelInfo;
     }
 }
 

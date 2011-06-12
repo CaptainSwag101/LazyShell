@@ -11,28 +11,22 @@ namespace LAZYSHELL.ScriptsEditor
         //pointers are stored 0x3930AA - 0x3932A9
         //battlescripts are stored 0x3932AA - 0x3959F3 cannot go past 0x3959F3 - 0x274A in total len
         [NonSerialized()]
-        private byte[] data; 
+        private byte[] data;
         public override byte[] Data { get { return this.data; } set { this.data = value; } }
-        public override int Index { get { return index; } set { index = value;} }
+        public override int Index { get { return index; } set { index = value; } }
         private byte[] script; public byte[] Script { get { return script; } set { script = value; } }
         public int ScriptLength { get { return script.Length; } }
-        
+
         private int index; public int MonsterNum { get { return index; } }
 
         private int commandIndex = 0; public int CommandIndex { get { return commandIndex; } set { commandIndex = value; } }
         public byte[] NextCommand()
         {
-            try
-            {
-                int len = GetOpcodeLength(script[commandIndex]);
-                commandIndex += len;
-
-                return Bits.GetByteArray(script, commandIndex - len, len);
-            }
-            catch
-            {
-                throw new Exception("No Battle Commands Left");
-            }
+            if (commandIndex >= script.Length)
+                return null;
+            int len = GetOpcodeLength(script[commandIndex]);
+            commandIndex += len;
+            return Bits.GetByteArray(script, commandIndex - len, len);
         }
         public BattleScript(byte[] data, int index)
         {
@@ -71,7 +65,7 @@ namespace LAZYSHELL.ScriptsEditor
                 }
 
                 len = GetOpcodeLength(opcode);
-                
+
                 totalLength += len;
                 offset += len;
             }

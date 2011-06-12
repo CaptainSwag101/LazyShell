@@ -9,6 +9,7 @@ namespace LAZYSHELL.Undo
     {
         private Levels updater;
         private TileMap tileMap;
+        public TileMap Tilemap { get { return tileMap; } set { tileMap = value; } }
         private Point topLeft, bottomRight;
         private State state = State.Instance;
         private int[][] changes = new int[3][];

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpriteSequences));
-            this.frameMold = new ToolStripNumericUpDown();
-            this.duration = new ToolStripNumericUpDown();
+            this.frameMold = new LAZYSHELL.ToolStripNumericUpDown();
+            this.duration = new LAZYSHELL.ToolStripNumericUpDown();
             this.panelSequence = new System.Windows.Forms.Panel();
             this.pictureBoxSequence = new System.Windows.Forms.PictureBox();
             this.frames = new System.Windows.Forms.Panel();
@@ -79,6 +79,11 @@
             0,
             0,
             0});
+            this.frameMold.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.frameMold.Name = "frameMold";
             this.frameMold.Size = new System.Drawing.Size(50, 17);
             this.frameMold.Text = "0";
@@ -96,6 +101,11 @@
             this.duration.Location = new System.Drawing.Point(140, 4);
             this.duration.Maximum = new decimal(new int[] {
             255,
+            0,
+            0,
+            0});
+            this.duration.Minimum = new decimal(new int[] {
+            0,
             0,
             0,
             0});
@@ -133,9 +143,9 @@
             // frames
             // 
             this.frames.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.frames.Location = new System.Drawing.Point(0, 60);
+            this.frames.Location = new System.Drawing.Point(0, 28);
             this.frames.Name = "frames";
-            this.frames.Size = new System.Drawing.Size(136, 136);
+            this.frames.Size = new System.Drawing.Size(200, 200);
             this.frames.TabIndex = 18;
             // 
             // sequences

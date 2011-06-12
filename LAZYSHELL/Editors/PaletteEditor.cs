@@ -19,7 +19,7 @@ namespace LAZYSHELL
         private PaletteSet paletteSetBackup;
         private Bitmap paletteImage, colorMapImage;
         private int[] palettePixels, colorMapPixels;
-        private int currentSwatchColor = Color.White.ToArgb();
+        private int currentSwatchColor = Color.FromArgb(248, 248, 248).ToArgb();
         private int count;
         private int start;
         private int currentColor = 0;
@@ -133,7 +133,7 @@ namespace LAZYSHELL
             paletteImage = new Bitmap(Do.PixelsToImage(palettePixels, 128, (count * 8) - (start * 8)));
             pictureBoxPalette.Invalidate();
         }
-
+        //
         private void DoAdjustment()
         {
             if (updating) return;
@@ -151,6 +151,7 @@ namespace LAZYSHELL
             DoBrightness();
             DoContrast();
             DoThreshold();
+            DoColorize();
 
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
@@ -263,45 +264,28 @@ namespace LAZYSHELL
                 int r = paletteSet.Reds[i];
                 int g = paletteSet.Greens[i];
                 int b = paletteSet.Blues[i];
-                r += (int)(r * ((double)brightness.Value / 100.0));
-                r = Math.Min(248, r); r &= 0xF8;
-                g += (int)(g * ((double)brightness.Value / 100.0));
-                g = Math.Min(248, g); g &= 0xF8;
-                b += (int)(b * ((double)brightness.Value / 100.0));
-                b = Math.Min(248, b); b &= 0xF8;
-                paletteSet.Reds[i] = r;
-                paletteSet.Greens[i] = g;
-                paletteSet.Blues[i] = b;
+                paletteSet.Reds[i] = Math.Min(248, Math.Max(0, r + (int)brightness.Value));
+                paletteSet.Greens[i] = Math.Min(248, Math.Max(0, g + (int)brightness.Value));
+                paletteSet.Blues[i] = Math.Min(248, Math.Max(0, b + (int)brightness.Value));
             }
         }
         private void DoContrast()
         {
-            if (contrast.Value == 0) return;
-            double contrast_ = ((double)contrast.Value + 100) / 100.0;
+            if (this.contrast.Value == 0) return;
+            double contrast = ((double)this.contrast.Value + 100) / 100.0;
             for (int i = start * 16; i < paletteSet.Palette.Length; i++)
             {
                 double r = paletteSet.Reds[i];
                 double g = paletteSet.Greens[i];
                 double b = paletteSet.Blues[i];
 
-                r /= 248f; g /= 248f; b /= 248f;
-                r -= 0.5f; g -= 0.5f; b -= 0.5f;
-                r *= contrast_;
-                g *= contrast_;
-                b *= contrast_;
-                r += 0.5f; g += 0.5f; b += 0.5f;
-                r *= 248; g *= 248; b *= 248;
-                r = Math.Min(248, Math.Max(0, r));
-                g = Math.Min(248, Math.Max(0, g));
-                b = Math.Min(248, Math.Max(0, b));
+                r = Math.Max(0, Math.Min(248, (r - 128) * contrast + 128));
+                g = Math.Max(0, Math.Min(248, (g - 128) * contrast + 128));
+                b = Math.Max(0, Math.Min(248, (b - 128) * contrast + 128));
 
-                int r_ = (int)Math.Round(r, 0, MidpointRounding.AwayFromZero); r_ &= 0xF8;
-                int g_ = (int)Math.Round(g, 0, MidpointRounding.AwayFromZero); g_ &= 0xF8;
-                int b_ = (int)Math.Round(b, 0, MidpointRounding.AwayFromZero); b_ &= 0xF8;
-
-                paletteSet.Reds[i] = r_;
-                paletteSet.Greens[i] = g_;
-                paletteSet.Blues[i] = b_;
+                paletteSet.Reds[i] = (int)r & 0xF8;
+                paletteSet.Greens[i] = (int)g & 0xF8;
+                paletteSet.Blues[i] = (int)b & 0xF8;
             }
         }
         private void DoThreshold()
@@ -319,6 +303,59 @@ namespace LAZYSHELL
                 paletteSet.Reds[i] = brightness >= threshold.Value ? 248 : 0;
                 paletteSet.Greens[i] = brightness >= threshold.Value ? 248 : 0;
                 paletteSet.Blues[i] = brightness >= threshold.Value ? 248 : 0;
+            }
+        }
+        private void DoColorize()
+        {
+            if (!colorizeApply.Checked) return;
+
+            double h = (double)colorizeHue.Value / 255.0;
+            double s = (double)colorizeSaturation.Value / 255.0;
+            for (int i = start * 16; i < paletteSet.Palette.Length; i++)
+            {
+                Color color = Color.FromArgb(paletteSet.Reds[i], paletteSet.Greens[i], paletteSet.Blues[i]);
+                double l = color.GetBrightness();
+                double r = 0, g = 0, b = 0;
+                double temp1, temp2;
+                if (l == 0)
+                {
+                    r = g = b = 0;
+                }
+                else
+                {
+                    if (s == 0)
+                    {
+                        r = g = b = l;
+                    }
+                    else
+                    {
+                        temp2 = ((l <= 0.5) ? l * (1.0 + s) : l + s - (l * s));
+                        temp1 = 2.0 * l - temp2;
+                        double[] t3 = new double[] { h + 1.0 / 3.0, h, h - 1.0 / 3.0 };
+                        double[] clr = new double[] { 0, 0, 0 };
+                        for (int a = 0; a < 3; a++)
+                        {
+                            if (t3[a] < 0)
+                                t3[a] += 1.0;
+                            if (t3[a] > 1)
+                                t3[a] -= 1.0;
+                            if (6.0 * t3[a] < 1.0)
+                                clr[a] = temp1 + (temp2 - temp1) * t3[a] * 6.0;
+                            else if (2.0 * t3[a] < 1.0)
+                                clr[a] = temp2;
+                            else if (3.0 * t3[a] < 2.0)
+                                clr[a] = (temp1 + (temp2 - temp1) * ((2.0 / 3.0) - t3[a]) * 6.0);
+                            else
+                                clr[a] = temp1;
+                        }
+                        r = clr[0];
+                        g = clr[1];
+                        b = clr[2];
+                    }
+                }
+                paletteSet.Reds[i] = (int)(r * 255.0) & 0xF8;
+                paletteSet.Greens[i] = (int)(g * 255.0) & 0xF8;
+                paletteSet.Blues[i] = (int)(b * 255.0) & 0xF8;
             }
         }
         //private void importPaletteSetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -514,7 +551,48 @@ namespace LAZYSHELL
             InitializeColor();
             pictureBoxPalette.Invalidate();
         }
-
+        private void pictureBoxCurrentColor_Paint(object sender, PaintEventArgs e)
+        {
+            int color = paletteSet.Palettes[currentColor / 16][currentColor % 16];
+            SolidBrush brush = new SolidBrush(Color.FromArgb(color));
+            e.Graphics.FillRectangle(brush, new Rectangle(0, 0, 64, 64));
+        }
+        private void pictureBoxColorMap_Paint(object sender, PaintEventArgs e)
+        {
+            if (colorMapImage != null)
+                e.Graphics.DrawImage(new Bitmap(colorMapImage), 0, 0, 186, 186);
+        }
+        private void pictureBoxColorMap_MouseClick(object sender, MouseEventArgs e)
+        {
+        }
+        private void pictureBoxColorMap_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+            int x = Math.Min(186, Math.Max(0, e.X));
+            int y = Math.Min(186, Math.Max(0, e.Y));
+            int color = colorMapPixels[y * 186 + x];
+            Color c = Color.FromArgb(color);
+            currentSwatchColor = c.ToArgb();
+            pictureBoxSwatchColor.BackColor = c;
+        }
+        private void pictureBoxColorMap_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+            if (e.X >= 186 || e.Y >= 186)
+                return;
+            int x = Math.Min(186, Math.Max(0, e.X));
+            int y = Math.Min(186, Math.Max(0, e.Y));
+            int color = colorMapPixels[y * 186 + x];
+            Color c = Color.FromArgb(color);
+            currentSwatchColor = c.ToArgb();
+            pictureBoxSwatchColor.BackColor = c;
+        }
+        private void pictureBoxColorMap_MouseUp(object sender, MouseEventArgs e)
+        {
+        }
+        //
         private void currentRed_ValueChanged(object sender, EventArgs e)
         {
             if (((Control)sender).Name == "currentRed")
@@ -569,7 +647,7 @@ namespace LAZYSHELL
             InitializeColor();
             SetPaletteImage();
         }
-
+        //
         private void levelsReds_ValueChanged(object sender, EventArgs e)
         {
             levelsRedsBar.Value = (int)levelsReds.Value;
@@ -685,7 +763,62 @@ namespace LAZYSHELL
         {
             DoAdjustment();
         }
-
+        private void colorizeApply_CheckedChanged(object sender, EventArgs e)
+        {
+            colorizeHue.Enabled =
+                colorizeHueBar.Enabled =
+                colorizeSaturation.Enabled =
+                colorizeSaturationBar.Enabled = colorizeApply.Checked;
+            DoAdjustment();
+        }
+        private void colorizeHue_ValueChanged(object sender, EventArgs e)
+        {
+            colorizeHueBar.Value = (int)colorizeHue.Value;
+            DoAdjustment();
+            pictureBox1.Invalidate();
+        }
+        private void colorizeSaturation_ValueChanged(object sender, EventArgs e)
+        {
+            colorizeSaturationBar.Value = (int)colorizeSaturation.Value;
+            pictureBox1.Invalidate();
+            DoAdjustment();
+        }
+        private void colorizeHueBar_Scroll(object sender, EventArgs e)
+        {
+            colorizeHue.Value = colorizeHueBar.Value;
+        }
+        private void colorizeSaturationBar_Scroll(object sender, EventArgs e)
+        {
+            colorizeSaturation.Value = colorizeSaturationBar.Value;
+        }
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            double increment = 197.0 / 255.0;
+            int x = 0;
+            for (double i = 0; i < 197; i += increment, x++)
+            {
+                Pen pen = new Pen(Do.HSLtoRGBColor(x / 255.0, (double)colorizeSaturation.Value / 255.0, 0.5));
+                e.Graphics.DrawLine(pen, (float)i, 0, (float)i, 17);
+            }
+            double ratio = (double)pictureBox1.Width / 255.0;
+            x = Math.Min(pictureBox1.Width, Math.Max(0, (int)((double)colorizeHue.Value * ratio)));
+            e.Graphics.DrawLine(new Pen(Color.Black), x, 0, x, 17);
+        }
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!colorizeApply.Checked) return;
+            int x = Math.Min(pictureBox1.Width, Math.Max(0, e.X));
+            colorizeHue.Value = (int)((double)x * (255.0 / (double)pictureBox1.Width));
+        }
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!colorizeApply.Checked) return;
+            if (e.Button != MouseButtons.Left)
+                return;
+            int x = Math.Min(pictureBox1.Width, Math.Max(0, e.X));
+            colorizeHue.Value = (int)((double)x * (255.0 / (double)pictureBox1.Width));
+        }
+        //
         private void buttonOK_Click(object sender, EventArgs e)
         {
             paletteSet.CopyTo(paletteSetBackup);
@@ -712,47 +845,18 @@ namespace LAZYSHELL
             contrast.Value = trackBarContrast.Value = 0;
             thresholdApply.Checked = false;
             threshold.Value = trackBarThreshold.Value = 128;
+            colorizeApply.Checked = false;
+            colorizeHue.Value = colorizeHueBar.Value = 128;
+            colorizeSaturation.Value = colorizeSaturationBar.Value = 128;
             updating = false;
             DoAdjustment();
             paletteSetBackup.CopyTo(paletteSet);
         }
-
-        private void pictureBoxColorMap_Paint(object sender, PaintEventArgs e)
+        private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if (colorMapImage != null)
-                e.Graphics.DrawImage(new Bitmap(colorMapImage), 0, 0, 186, 186);
+            update.DynamicInvoke();
         }
-        private void pictureBoxColorMap_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
-        private void pictureBoxColorMap_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Left)
-                return;
-            int x = Math.Min(186, Math.Max(0, e.X));
-            int y = Math.Min(186, Math.Max(0, e.Y));
-            int color = colorMapPixels[y * 186 + x];
-            Color c = Color.FromArgb(color);
-            currentSwatchColor = c.ToArgb();
-            pictureBoxSwatchColor.BackColor = c;
-        }
-        private void pictureBoxColorMap_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Left)
-                return;
-            if (e.X >= 186 || e.Y >= 186)
-                return;
-            int x = Math.Min(186, Math.Max(0, e.X));
-            int y = Math.Min(186, Math.Max(0, e.Y));
-            int color = colorMapPixels[y * 186 + x];
-            Color c = Color.FromArgb(color);
-            currentSwatchColor = c.ToArgb();
-            pictureBoxSwatchColor.BackColor = c;
-        }
-        private void pictureBoxColorMap_MouseUp(object sender, MouseEventArgs e)
-        {
-        }
-
+        //
         private void buttonSetToColor_Click(object sender, EventArgs e)
         {
             paletteSet.Reds[currentColor] = Color.FromArgb(currentSwatchColor).R;
@@ -763,18 +867,7 @@ namespace LAZYSHELL
             InitializeColor();
             SetPaletteImage();
         }
-
-        private void pictureBoxCurrentColor_Paint(object sender, PaintEventArgs e)
-        {
-            int color = paletteSet.Palettes[currentColor / 16][currentColor % 16];
-            SolidBrush brush = new SolidBrush(Color.FromArgb(color));
-            e.Graphics.FillRectangle(brush, new Rectangle(0, 0, 64, 64));
-        }
-        private void buttonUpdate_Click(object sender, EventArgs e)
-        {
-            update.DynamicInvoke();
-        }
-
+        //
         private void importPaletteSetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();

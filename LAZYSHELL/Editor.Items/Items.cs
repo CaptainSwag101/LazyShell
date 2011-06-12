@@ -11,6 +11,7 @@ namespace LAZYSHELL
 {
     public partial class Items : Form
     {
+        #region Variables
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Item[] items { get { return Model.Items; } set { Model.Items = value; } }
@@ -24,6 +25,8 @@ namespace LAZYSHELL
         private MenuDescriptionPreview menuDescPreview = new MenuDescriptionPreview();
         private TextHelperReduced textHelper = TextHelperReduced.Instance;
         private Shops shopsEditor;
+        #endregion
+        // constructor
         public Items(Shops shopsEditor)
         {
             this.shopsEditor = shopsEditor;
@@ -34,6 +37,7 @@ namespace LAZYSHELL
             InitializeStrings();
             RefreshItems();
         }
+        #region Functions
         private void InitializeStrings()
         {
             this.itemName.Items.Clear();
@@ -447,6 +451,7 @@ namespace LAZYSHELL
             toolTip1.SetToolTip(this.numericUpDown119,
                 toolTip1.GetToolTip(this.lvl1TimingEnd));
         }
+        #endregion
         #region Event Handlers
         private void itemNum_ValueChanged(object sender, EventArgs e)
         {

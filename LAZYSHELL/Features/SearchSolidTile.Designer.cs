@@ -48,7 +48,8 @@ namespace LAZYSHELL
             this.doorFormat = new System.Windows.Forms.ComboBox();
             this.searchResults = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.searchButton = new System.Windows.Forms.Button();
+            this.deselectAll = new System.Windows.Forms.Button();
+            this.selectAll = new System.Windows.Forms.Button();
             this.panel27 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel23 = new System.Windows.Forms.Panel();
@@ -123,8 +124,7 @@ namespace LAZYSHELL
             this.solidEdgeNW = new System.Windows.Forms.ComboBox();
             this.checkSolidEdgeSE = new System.Windows.Forms.CheckBox();
             this.checkSolidEdgeSW = new System.Windows.Forms.CheckBox();
-            this.selectAll = new System.Windows.Forms.Button();
-            this.deselectAll = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
             this.panel55.SuspendLayout();
             this.panel54.SuspendLayout();
             this.panel44.SuspendLayout();
@@ -315,17 +315,25 @@ namespace LAZYSHELL
             this.panel1.Size = new System.Drawing.Size(214, 658);
             this.panel1.TabIndex = 391;
             // 
-            // searchButton
+            // deselectAll
             // 
-            this.searchButton.BackColor = System.Drawing.SystemColors.Control;
-            this.searchButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchButton.Location = new System.Drawing.Point(214, 0);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(229, 23);
-            this.searchButton.TabIndex = 397;
-            this.searchButton.Text = "Search for tiles w/checked properties";
-            this.searchButton.UseVisualStyleBackColor = false;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            this.deselectAll.Location = new System.Drawing.Point(108, 0);
+            this.deselectAll.Name = "deselectAll";
+            this.deselectAll.Size = new System.Drawing.Size(104, 23);
+            this.deselectAll.TabIndex = 398;
+            this.deselectAll.Text = "Deselect All";
+            this.deselectAll.UseVisualStyleBackColor = true;
+            this.deselectAll.Click += new System.EventHandler(this.deselectAll_Click);
+            // 
+            // selectAll
+            // 
+            this.selectAll.Location = new System.Drawing.Point(3, 0);
+            this.selectAll.Name = "selectAll";
+            this.selectAll.Size = new System.Drawing.Size(104, 23);
+            this.selectAll.TabIndex = 398;
+            this.selectAll.Text = "Select All";
+            this.selectAll.UseVisualStyleBackColor = true;
+            this.selectAll.Click += new System.EventHandler(this.selectAll_Click);
             // 
             // panel27
             // 
@@ -1190,25 +1198,17 @@ namespace LAZYSHELL
             this.checkSolidEdgeSW.UseVisualStyleBackColor = false;
             this.checkSolidEdgeSW.CheckedChanged += new System.EventHandler(this.checkControl_CheckedChanged);
             // 
-            // selectAll
+            // searchButton
             // 
-            this.selectAll.Location = new System.Drawing.Point(3, 0);
-            this.selectAll.Name = "selectAll";
-            this.selectAll.Size = new System.Drawing.Size(104, 23);
-            this.selectAll.TabIndex = 398;
-            this.selectAll.Text = "Select All";
-            this.selectAll.UseVisualStyleBackColor = true;
-            this.selectAll.Click += new System.EventHandler(this.selectAll_Click);
-            // 
-            // deselectAll
-            // 
-            this.deselectAll.Location = new System.Drawing.Point(108, 0);
-            this.deselectAll.Name = "deselectAll";
-            this.deselectAll.Size = new System.Drawing.Size(104, 23);
-            this.deselectAll.TabIndex = 398;
-            this.deselectAll.Text = "Deselect All";
-            this.deselectAll.UseVisualStyleBackColor = true;
-            this.deselectAll.Click += new System.EventHandler(this.deselectAll_Click);
+            this.searchButton.BackColor = System.Drawing.SystemColors.Control;
+            this.searchButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchButton.Location = new System.Drawing.Point(214, 0);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(229, 23);
+            this.searchButton.TabIndex = 397;
+            this.searchButton.Text = "Search for tiles w/checked properties";
+            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // SearchSolidTile
             // 
@@ -1227,7 +1227,8 @@ namespace LAZYSHELL
             this.Name = "SearchSolidTile";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "SEARCH FOR SOLID TILES...";
+            this.Text = "SOLID TILE SEARCH - Lazy Shell";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchPhysicalTile_FormClosing);
             this.panel55.ResumeLayout(false);
             this.panel54.ResumeLayout(false);

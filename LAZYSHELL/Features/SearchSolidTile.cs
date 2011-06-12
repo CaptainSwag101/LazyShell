@@ -10,13 +10,13 @@ namespace LAZYSHELL
 {
     public partial class SearchSolidTile : Form
     {
-        private LevelsSolidTiles levelsPhysicalTiles;
-        private SolidityTile[] physicalTiles;
-
-        public SearchSolidTile(LevelsSolidTiles levelsPhysicalTiles, SolidityTile[] physicalTiles)
+        private LevelsSolidTiles levelsSolidTiles;
+        private SolidityTile[] solidTiles;
+        // constructor
+        public SearchSolidTile(LevelsSolidTiles levelsSolidTiles, SolidityTile[] solidTiles)
         {
-            this.levelsPhysicalTiles = levelsPhysicalTiles;
-            this.physicalTiles = physicalTiles;
+            this.levelsSolidTiles = levelsSolidTiles;
+            this.solidTiles = solidTiles;
 
             InitializeComponent();
 
@@ -41,11 +41,7 @@ namespace LAZYSHELL
             stairs.SelectedIndex = 0;
             zCoordPlusHalf.SelectedIndex = 0;
         }
-
-        private void searchButton_Click(object sender, System.EventArgs e)
-        {
-            LoadSearch();
-        }
+        // functions
         private void LoadSearch()
         {
             searchResults.Items.Clear();
@@ -84,88 +80,88 @@ namespace LAZYSHELL
             if (unknownBits.GetItemChecked(3)) withProp += "Byte 5, bit 3 set\n";
             if (unknownBits.GetItemChecked(4)) withProp += "Byte 5, bit 4 set\n";
 
-            for (int i = 0; i < physicalTiles.Length; i++)
+            for (int i = 0; i < solidTiles.Length; i++)
             {
                 notFound = false;
                 // SIZE/COORDS
-                if (checkHeightOfBaseTile.Checked) { if (heightOfBaseTile.Value != physicalTiles[i].BaseTileHeight) notFound = true; }
-                if (checkHeightOverhead.Checked) { if (heightOverhead.Value != physicalTiles[i].OverheadTileHeight) notFound = true; }
-                if (checkZCoordOverhead.Checked) { if (zCoordOverhead.Value != physicalTiles[i].OverheadTileCoordZ) notFound = true; }
-                if (checkZCoordWater.Checked) { if (zCoordWater.Value != physicalTiles[i].WaterTileCoordZ) notFound = true; }
+                if (checkHeightOfBaseTile.Checked) { if (heightOfBaseTile.Value != solidTiles[i].BaseTileHeight) notFound = true; }
+                if (checkHeightOverhead.Checked) { if (heightOverhead.Value != solidTiles[i].OverheadTileHeight) notFound = true; }
+                if (checkZCoordOverhead.Checked) { if (zCoordOverhead.Value != solidTiles[i].OverheadTileCoordZ) notFound = true; }
+                if (checkZCoordWater.Checked) { if (zCoordWater.Value != solidTiles[i].WaterTileCoordZ) notFound = true; }
                 if (checkZCoordPlusHalf.Checked)
                 {
-                    if (zCoordPlusHalf.SelectedIndex != (int)(physicalTiles[i].BaseTileHeightPlusHalf ? 1 : 0))
+                    if (zCoordPlusHalf.SelectedIndex != (int)(solidTiles[i].BaseTileHeightPlusHalf ? 1 : 0))
                         notFound = true;
                 }
                 // SOLID QUADRANTS
                 if (checkSolidTile.Checked)
                 {
-                    if (solidTile.SelectedIndex != (int)(physicalTiles[i].SolidTile ? 1 : 0)) notFound = true;
+                    if (solidTile.SelectedIndex != (int)(solidTiles[i].SolidTile ? 1 : 0)) notFound = true;
                 }
                 if (checkSolidQuadrant.Checked)
                 {
-                    if (solidQuadrant.SelectedIndex != (int)(physicalTiles[i].SolidQuadrantFlag ? 1 : 0)) notFound = true;
+                    if (solidQuadrant.SelectedIndex != (int)(solidTiles[i].SolidQuadrantFlag ? 1 : 0)) notFound = true;
                 }
                 if (checkSolidQuadrantN.Checked)
                 {
-                    if (solidQuadrantN.SelectedIndex != (int)(physicalTiles[i].SolidTopQuadrant ? 1 : 0)) notFound = true;
+                    if (solidQuadrantN.SelectedIndex != (int)(solidTiles[i].SolidTopQuadrant ? 1 : 0)) notFound = true;
                 }
                 if (checkSolidQuadrantW.Checked)
                 {
-                    if (solidQuadrantW.SelectedIndex != (int)(physicalTiles[i].SolidLeftQuadrant ? 1 : 0)) notFound = true;
+                    if (solidQuadrantW.SelectedIndex != (int)(solidTiles[i].SolidLeftQuadrant ? 1 : 0)) notFound = true;
                 }
                 if (checkSolidQuadrantS.Checked)
                 {
-                    if (solidQuadrantS.SelectedIndex != (int)(physicalTiles[i].SolidBottomQuadrant ? 1 : 0)) notFound = true;
+                    if (solidQuadrantS.SelectedIndex != (int)(solidTiles[i].SolidBottomQuadrant ? 1 : 0)) notFound = true;
                 }
                 if (checkSolidQuadrantE.Checked)
                 {
-                    if (solidQuadrantE.SelectedIndex != (int)(physicalTiles[i].SolidRightQuadrant ? 1 : 0)) notFound = true;
+                    if (solidQuadrantE.SelectedIndex != (int)(solidTiles[i].SolidRightQuadrant ? 1 : 0)) notFound = true;
                 }
                 // SOLID EDGES
                 if (checkSolidEdgeNW.Checked)
                 {
-                    if (solidEdgeNW.SelectedIndex != (int)(physicalTiles[i].SolidUpperLeftEdge ? 1 : 0)) notFound = true;
+                    if (solidEdgeNW.SelectedIndex != (int)(solidTiles[i].SolidUpperLeftEdge ? 1 : 0)) notFound = true;
                 }
                 if (checkSolidEdgeSW.Checked)
                 {
-                    if (solidEdgeSW.SelectedIndex != (int)(physicalTiles[i].SolidLowerLeftEdge ? 1 : 0)) notFound = true;
+                    if (solidEdgeSW.SelectedIndex != (int)(solidTiles[i].SolidLowerLeftEdge ? 1 : 0)) notFound = true;
                 }
                 if (checkSolidEdgeNE.Checked)
                 {
-                    if (solidEdgeNE.SelectedIndex != (int)(physicalTiles[i].SolidUpperRightEdge ? 1 : 0)) notFound = true;
+                    if (solidEdgeNE.SelectedIndex != (int)(solidTiles[i].SolidUpperRightEdge ? 1 : 0)) notFound = true;
                 }
                 if (checkSolidEdgeSE.Checked)
                 {
-                    if (solidEdgeSE.SelectedIndex != (int)(physicalTiles[i].SolidLowerRightEdge ? 1 : 0)) notFound = true;
+                    if (solidEdgeSE.SelectedIndex != (int)(solidTiles[i].SolidLowerRightEdge ? 1 : 0)) notFound = true;
                 }
                 // PRIORITY 3
                 if (checkP3OnEdge.Checked)
                 {
-                    if (p3OnEdge.SelectedIndex != (int)(physicalTiles[i].ObjectOnEdgePriority3 ? 1 : 0)) notFound = true;
+                    if (p3OnEdge.SelectedIndex != (int)(solidTiles[i].ObjectOnEdgePriority3 ? 1 : 0)) notFound = true;
                 }
                 if (checkP3OverEdge.Checked)
                 {
-                    if (p3OverEdge.SelectedIndex != (int)(physicalTiles[i].ObjectAboveEdgePriority3 ? 1 : 0)) notFound = true;
+                    if (p3OverEdge.SelectedIndex != (int)(solidTiles[i].ObjectAboveEdgePriority3 ? 1 : 0)) notFound = true;
                 }
                 if (checkP3OnTile.Checked)
                 {
-                    if (p3OnTile.SelectedIndex != (int)(physicalTiles[i].ObjectOnTilePriority3 ? 1 : 0)) notFound = true;
+                    if (p3OnTile.SelectedIndex != (int)(solidTiles[i].ObjectOnTilePriority3 ? 1 : 0)) notFound = true;
                 }
                 // CONVEYOR BELT
-                if (checkConveyor.Checked) { if (physicalTiles[i].ConveryorBeltDirection != conveyor.SelectedIndex) notFound = true; }
+                if (checkConveyor.Checked) { if (solidTiles[i].ConveryorBeltDirection != conveyor.SelectedIndex) notFound = true; }
                 if (checkConveyorBeltFast.Checked)
                 {
-                    if (conveyorBeltFast.SelectedIndex != (int)(physicalTiles[i].ConveyorBeltFast ? 1 : 0)) notFound = true;
+                    if (conveyorBeltFast.SelectedIndex != (int)(solidTiles[i].ConveyorBeltFast ? 1 : 0)) notFound = true;
                 }
                 if (checkConveyorBeltNormal.Checked)
                 {
-                    if (conveyorBeltNormal.SelectedIndex != (int)(physicalTiles[i].ConveyorBeltNormal ? 1 : 0)) notFound = true;
+                    if (conveyorBeltNormal.SelectedIndex != (int)(solidTiles[i].ConveyorBeltNormal ? 1 : 0)) notFound = true;
                 }
                 // OTHER
-                if (checkStairs.Checked) { if (physicalTiles[i].StairsDirection != stairs.SelectedIndex) notFound = true; }
-                if (checkSpecialTile.Checked) { if (physicalTiles[i].SpecialTileFormat != specialTile.SelectedIndex) notFound = true; }
-                if (checkDoorFormat.Checked) { if (doorFormat.SelectedIndex != physicalTiles[i].Door) notFound = true; }
+                if (checkStairs.Checked) { if (solidTiles[i].StairsDirection != stairs.SelectedIndex) notFound = true; }
+                if (checkSpecialTile.Checked) { if (solidTiles[i].SpecialTileFormat != specialTile.SelectedIndex) notFound = true; }
+                if (checkDoorFormat.Checked) { if (doorFormat.SelectedIndex != solidTiles[i].Door) notFound = true; }
 
                 if (!notFound)
                 {
@@ -178,25 +174,7 @@ namespace LAZYSHELL
             withProp += results.ToString() + " results";
             withProperties.Text = withProp;
         }
-
-        private void searchResults_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            levelsPhysicalTiles.Index = Convert.ToInt32(searchResults.SelectedItem.ToString().Substring(12));
-        }
-        private void SearchPhysicalTile_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            e.Cancel = true;
-            this.Hide();
-        }
-
-        private void checkControl_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-            string name = checkBox.Name.Substring(5, 1).ToLower() + checkBox.Name.Substring(6);
-            Control control = this.Controls.Find(name, true)[0];
-            control.Enabled = checkBox.Checked;
-        }
-
+        // event handlers
         private void selectAll_Click(object sender, EventArgs e)
         {
             Do.SelectAll(panel1, true);
@@ -204,6 +182,26 @@ namespace LAZYSHELL
         private void deselectAll_Click(object sender, EventArgs e)
         {
             Do.SelectAll(panel1, false);
+        }
+        private void checkControl_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            string name = checkBox.Name.Substring(5, 1).ToLower() + checkBox.Name.Substring(6);
+            Control control = this.Controls.Find(name, true)[0];
+            control.Enabled = checkBox.Checked;
+        }
+        private void searchButton_Click(object sender, System.EventArgs e)
+        {
+            LoadSearch();
+        }
+        private void searchResults_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            levelsSolidTiles.Index = Convert.ToInt32(searchResults.SelectedItem.ToString().Substring(12));
+        }
+        private void SearchPhysicalTile_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
         }
     }
 }

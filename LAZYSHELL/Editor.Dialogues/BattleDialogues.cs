@@ -57,7 +57,7 @@ namespace LAZYSHELL
         public bool textCodeFormat = true;
         // local variables
         private int index { get { return (int)battleDialogueNum.Value; } set { battleDialogueNum.Value = value; } }
-        public int Index { get { return index; } }
+        public int Index { get { return index; } set { index = value; } }
         private int mouseDownTile = 0;
         // editors
         private TileEditor tileEditor;
@@ -405,6 +405,14 @@ namespace LAZYSHELL
         {
 
         }
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current battle dialogue. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            dialogue = new BattleDialogue(Model.Data, index, battleDlgType.SelectedIndex);
+            RefreshBattleDialogue();
+        }
         // text insertion
         private void pageUp_Click(object sender, EventArgs e)
         {
@@ -479,14 +487,5 @@ namespace LAZYSHELL
             ((Form)sender).Hide();
         }
         #endregion
-
-        private void reset_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("You're about to undo all changes to the current battle dialogue. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return;
-            dialogue = new BattleDialogue(Model.Data, index, battleDlgType.SelectedIndex);
-            RefreshBattleDialogue();
-        }
     }
 }

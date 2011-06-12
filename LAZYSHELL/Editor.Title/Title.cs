@@ -268,6 +268,7 @@ namespace LAZYSHELL
             {
                 for (int x = 0; x < buffer.Width / 16; x++)
                 {
+                    if (y + y_ < 0 || x + x_ < 0) continue;
                     Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileSet.TileSetLayers[layer][(y + y_) * 16 + x + x_] = tile.Copy();
                     tileSet.TileSetLayers[layer][(y + y_) * 16 + x + x_].TileIndex = (y + y_) * 16 + x + x_;
@@ -535,7 +536,7 @@ namespace LAZYSHELL
             if (mouseEnter)
                 DrawHoverBox(e.Graphics);
             if (showGrid.Checked)
-                overlay.DrawCartographicGrid(e.Graphics, Color.Gray, pictureBoxTileset.Size, new Size(16, 16), 1);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxTileset.Size, new Size(16, 16), 1);
             if (overlay.SelectTS != null)
                 overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
         }

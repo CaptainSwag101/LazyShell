@@ -13,6 +13,7 @@ namespace LAZYSHELL
     {
         private EventScripts scripts;
         private TreeViewWrapper treeViewWrapper;
+        // constructor
         public FixPointers(EventScripts scripts, TreeViewWrapper treeViewWrapper)
         {
             this.scripts = scripts;
@@ -20,7 +21,7 @@ namespace LAZYSHELL
             InitializeComponent();
             //comboBox1.SelectedIndex = 0;
         }
-
+        // event handlers
         private void button1_Click(object sender, EventArgs e)
         {
             scripts.Delta = (int)numericUpDown1.Value;

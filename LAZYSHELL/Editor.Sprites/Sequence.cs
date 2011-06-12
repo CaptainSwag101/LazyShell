@@ -10,7 +10,7 @@ namespace LAZYSHELL
     public class Sequence
     {
         // Local
-        private ArrayList frames = new ArrayList(); public ArrayList Frames { get { return this.frames; } set { this.frames = value; } }
+        private List<Frame> frames = new List<Frame>(); public List<Frame> Frames { get { return this.frames; } set { this.frames = value; } }
 
         public void InitializeSequence(byte[] sm, int offset)
         {
@@ -56,13 +56,13 @@ namespace LAZYSHELL
         public Sequence New()
         {
             Sequence empty = new Sequence();
-            empty.Frames = new ArrayList();
+            empty.Frames = new List<Frame>();
             return empty;
         }
         public Sequence Copy()
         {
             Sequence copy = new Sequence();
-            copy.Frames = new ArrayList();
+            copy.Frames = new List<Frame>();
             foreach (Frame frame in this.Frames)
                 copy.Frames.Add(frame.Copy());
             return copy;

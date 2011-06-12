@@ -10,18 +10,18 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class ImportElements : Form
+    public partial class Restore : Form
     {
-                private Settings settings = Settings.Default;
+        private Settings settings = Settings.Default;
         private byte[] data;
         private string fileName;
-
-        public ImportElements()
+        // constructor
+        public Restore()
         {
             InitializeComponent();
             elements.ExpandAll();
         }
-
+        // functions
         public bool ReadRom()
         {
             try
@@ -47,7 +47,7 @@ namespace LAZYSHELL
             }
 
         }
-
+        // event handlers
         private void browseFreshRom_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -81,7 +81,21 @@ namespace LAZYSHELL
                 buttonOK.Enabled = true;
             }
         }
-
+        private void elements_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node == elements.Nodes["Stats"])
+                foreach (TreeNode tn in elements.Nodes["Stats"].Nodes)
+                    tn.Checked = elements.Nodes["Stats"].Checked;
+            if (e.Node == elements.Nodes["Levels"])
+                foreach (TreeNode tn in elements.Nodes["Levels"].Nodes)
+                    tn.Checked = elements.Nodes["Levels"].Checked;
+            if (e.Node == elements.Nodes["Scripts"])
+                foreach (TreeNode tn in elements.Nodes["Scripts"].Nodes)
+                    tn.Checked = elements.Nodes["Scripts"].Checked;
+            if (e.Node == elements.Nodes["Sprites"])
+                foreach (TreeNode tn in elements.Nodes["Sprites"].Nodes)
+                    tn.Checked = elements.Nodes["Sprites"].Checked;
+        }
         private void buttonOK_Click(object sender, EventArgs e)
         {
             TreeNode stats = elements.Nodes["Stats"];
@@ -265,22 +279,6 @@ namespace LAZYSHELL
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void elements_AfterCheck(object sender, TreeViewEventArgs e)
-        {
-            if (e.Node == elements.Nodes["Stats"])
-                foreach (TreeNode tn in elements.Nodes["Stats"].Nodes)
-                    tn.Checked = elements.Nodes["Stats"].Checked;
-            if (e.Node == elements.Nodes["Levels"])
-                foreach (TreeNode tn in elements.Nodes["Levels"].Nodes)
-                    tn.Checked = elements.Nodes["Levels"].Checked;
-            if (e.Node == elements.Nodes["Scripts"])
-                foreach (TreeNode tn in elements.Nodes["Scripts"].Nodes)
-                    tn.Checked = elements.Nodes["Scripts"].Checked;
-            if (e.Node == elements.Nodes["Sprites"])
-                foreach (TreeNode tn in elements.Nodes["Sprites"].Nodes)
-                    tn.Checked = elements.Nodes["Sprites"].Checked;
         }
     }
 }

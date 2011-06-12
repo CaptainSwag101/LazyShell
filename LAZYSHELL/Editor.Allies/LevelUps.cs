@@ -11,12 +11,15 @@ namespace LAZYSHELL
 {
     public partial class LevelUps : Form
     {
+        #region Variables
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Character[] characters { get { return Model.Characters; } set { Model.Characters = value; } }
         private Character character { get { return characters[index]; } set { characters[index] = value; } }
         private Character character_;
         private int index { get { return characterName.SelectedIndex; } set { characterName.SelectedIndex = value; } }
+        #endregion
+        // constructor
         public LevelUps()
         {
             InitializeComponent();
@@ -24,6 +27,7 @@ namespace LAZYSHELL
             index = 0;
             RefreshLevel();
         }
+        // functions
         private void InitializeStrings()
         {
             updating = true;
@@ -195,8 +199,7 @@ namespace LAZYSHELL
                 sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Spells, 33),
                 Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, true, false, Model.MenuBackground_);
         }
-        #endregion
-
+        //
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current character's level-up index. Go ahead with reset?",
@@ -205,5 +208,6 @@ namespace LAZYSHELL
             character = new Character(Model.Data, index);
             characterName_SelectedIndexChanged(null, null);
         }
+        #endregion
     }
 }

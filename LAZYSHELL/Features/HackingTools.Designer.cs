@@ -35,12 +35,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.selectAll = new System.Windows.Forms.Button();
             this.deselectAll = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.percentControl)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(93, 238);
+            this.buttonCancel.Location = new System.Drawing.Point(87, 246);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -50,7 +52,7 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(12, 238);
+            this.buttonOK.Location = new System.Drawing.Point(6, 246);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 5;
@@ -73,14 +75,14 @@
             "Mg.Evade",
             "Experience",
             "Coins"});
-            this.checkedListBox1.Location = new System.Drawing.Point(12, 12);
+            this.checkedListBox1.Location = new System.Drawing.Point(6, 20);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(156, 164);
             this.checkedListBox1.TabIndex = 7;
             // 
             // percentControl
             // 
-            this.percentControl.Location = new System.Drawing.Point(62, 211);
+            this.percentControl.Location = new System.Drawing.Point(56, 219);
             this.percentControl.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -98,7 +100,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 213);
+            this.label1.Location = new System.Drawing.Point(6, 221);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 9;
@@ -106,7 +108,7 @@
             // 
             // selectAll
             // 
-            this.selectAll.Location = new System.Drawing.Point(12, 182);
+            this.selectAll.Location = new System.Drawing.Point(6, 190);
             this.selectAll.Name = "selectAll";
             this.selectAll.Size = new System.Drawing.Size(75, 23);
             this.selectAll.TabIndex = 5;
@@ -116,7 +118,7 @@
             // 
             // deselectAll
             // 
-            this.deselectAll.Location = new System.Drawing.Point(93, 182);
+            this.deselectAll.Location = new System.Drawing.Point(87, 190);
             this.deselectAll.Name = "deselectAll";
             this.deselectAll.Size = new System.Drawing.Size(75, 23);
             this.deselectAll.TabIndex = 5;
@@ -124,25 +126,41 @@
             this.deselectAll.UseVisualStyleBackColor = true;
             this.deselectAll.Click += new System.EventHandler(this.deselectAll_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkedListBox1);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.buttonOK);
+            this.groupBox1.Controls.Add(this.percentControl);
+            this.groupBox1.Controls.Add(this.selectAll);
+            this.groupBox1.Controls.Add(this.deselectAll);
+            this.groupBox1.Controls.Add(this.buttonCancel);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(168, 275);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Adjust all monster stats";
+            // 
             // HackingTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(180, 273);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.percentControl);
-            this.Controls.Add(this.checkedListBox1);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.deselectAll);
-            this.Controls.Add(this.selectAll);
-            this.Controls.Add(this.buttonOK);
+            this.ClientSize = new System.Drawing.Size(192, 299);
+            this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "HackingTools";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "HACKING TOOLS";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.percentControl)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -155,5 +173,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button selectAll;
         private System.Windows.Forms.Button deselectAll;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

@@ -11,10 +11,12 @@ namespace LAZYSHELL
 {
     public partial class AttacksEditor : Form
     {
+        // variables
         private long checksum;
-                private Settings settings = Settings.Default;
+        private Settings settings = Settings.Default;
         public Spells spellsEditor;
         public Attacks attacksEditor;
+        // constructor
         public AttacksEditor()
         {
             checksum = Do.GenerateChecksum(Model.Attacks, Model.Spells);
@@ -41,6 +43,7 @@ namespace LAZYSHELL
             spellsEditor.Visible = true;
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
         }
+        // functions
         public void Assemble()
         {
             foreach (Attack a in Model.Attacks)
@@ -56,33 +59,7 @@ namespace LAZYSHELL
             if (i != Model.Spells.Length)
                 System.Windows.Forms.MessageBox.Show("Spell Descriptions total length exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
         }
-        private void AttacksEditor_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (Do.GenerateChecksum(Model.Attacks, Model.Spells) == this.checksum)
-                return;
-            DialogResult result = MessageBox.Show(
-                "Attacks and spells have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
-                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-                Assemble();
-            else if (result == DialogResult.No)
-            {
-                Model.Spells = null;
-                Model.Attacks = null;
-                Model.AttackNames = null;
-                Model.SpellNames = null;
-                return;
-            }
-            else if (result == DialogResult.Cancel)
-            {
-                e.Cancel = true;
-                return;
-            }
-        }
-        private void save_Click(object sender, EventArgs e)
-        {
-            Assemble();
-        }
+        // event handlers
         private void importSpellsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new IOElements((Element[])Model.Spells, spellsEditor.Index, "IMPORT SPELLS...").ShowDialog();
@@ -119,23 +96,39 @@ namespace LAZYSHELL
         {
             attacksEditor.Visible = showAttacks.Checked;
         }
-
-        private void AttacksEditor_KeyDown(object sender, KeyEventArgs e)
+        //
+        private void AttacksEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            if (Do.GenerateChecksum(Model.Attacks, Model.Spells) == this.checksum)
+                return;
+            DialogResult result = MessageBox.Show(
+                "Attacks and spells have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+                Assemble();
+            else if (result == DialogResult.No)
+            {
+                Model.Spells = null;
+                Model.Attacks = null;
+                Model.AttackNames = null;
+                Model.SpellNames = null;
+                return;
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+                return;
+            }
         }
-
-        private void AttacksEditor_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void save_Click(object sender, EventArgs e)
         {
-
+            Assemble();
         }
-
         private void damageCalculator_Click(object sender, EventArgs e)
         {
             StatusCalculator calculator = new StatusCalculator();
             calculator.Show();
         }
-
         private void resetSpellToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current spell. Go ahead with reset?",
@@ -144,7 +137,6 @@ namespace LAZYSHELL
             spellsEditor.Spell = new Spell(Model.Data, spellsEditor.Index);
             spellsEditor.RefreshSpells();
         }
-
         private void resetAttackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current attack. Go ahead with reset?",

@@ -103,6 +103,9 @@
     <Compile Include="Editor.Levels\Levels\LevelSolidMods.cs" />
     <Compile Include="Editor.Levels\Levels\LevelTileMods.cs" />
     <Compile Include="!Universal\Map.cs" />
+    <Compile Include="Features\ToolStripControls.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Features\HackingTools.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,16 +131,7 @@
       <DependentUpon>IOArchitecture.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\ListViewColumnSorter.cs" />
-    <Compile Include="Features\NewCheckedListBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Features\NewRichTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Features\NewToolStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Features\NewTreeView.cs">
+    <Compile Include="Features\NewControls.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Features\Search.cs">
@@ -287,12 +281,6 @@
     <Compile Include="Editor.Formations\FormationsEditor.Designer.cs">
       <DependentUpon>FormationsEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\BaseConvertor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Features\BaseConvertor.Designer.cs">
-      <DependentUpon>BaseConvertor.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataStructures\StreamBuf.cs" />
     <Compile Include="!Static\Bits.cs" />
     <Compile Include="!Static\Comp.cs" />
@@ -415,11 +403,11 @@
     <Compile Include="Editors\NPCEditor.Designer.cs">
       <DependentUpon>NPCEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\SearchPhysicalTile.cs">
+    <Compile Include="Features\SearchSolidTile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Features\SearchPhysicalTile.Designer.cs">
-      <DependentUpon>SearchPhysicalTile.cs</DependentUpon>
+    <Compile Include="Features\SearchSolidTile.Designer.cs">
+      <DependentUpon>SearchSolidTile.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.Levels\Levels\SerializedLevel.cs" />
     <Compile Include="Editor.Levels\SpaceAnalyzer.cs">
@@ -617,7 +605,7 @@
     <Compile Include="Editor.Dialogues\FontCharacter.cs" />
     <Compile Include="Feature.Undo\Command.cs" />
     <Compile Include="Feature.Undo\CommandStack.cs" />
-    <Compile Include="Feature.Undo\PhysicalMapEditCommand.cs" />
+    <Compile Include="Feature.Undo\SolidityEditCommand.cs" />
     <Compile Include="Feature.Undo\TileMapEditCommand.cs" />
     <Compile Include="Editor.World Maps\WorldMaps.cs">
       <SubType>Form</SubType>
@@ -630,12 +618,6 @@
     </Compile>
     <Compile Include="SettingsEditor.Designer.cs">
       <DependentUpon>SettingsEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Features\ToolStripComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Features\ToolStripNumericUpDown.cs">
-      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -763,10 +745,6 @@
       <DependentUpon>FormationsEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\BaseConvertor.resx">
-      <DependentUpon>BaseConvertor.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="CursorDraw.cur" />
     <EmbeddedResource Include="CursorErase.cur" />
     <EmbeddedResource Include="Features\FixPointers.resx">
@@ -813,9 +791,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>NPCEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\SearchPhysicalTile.resx">
+    <EmbeddedResource Include="Features\SearchSolidTile.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>SearchPhysicalTile.cs</DependentUpon>
+      <DependentUpon>SearchSolidTile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Levels\SpaceAnalyzer.resx">
       <SubType>Designer</SubType>
@@ -886,160 +864,164 @@
     <None Include="Resources\Tiles\stairsUpLeftLow.gif" />
     <None Include="Resources\Tiles\stairsUpRightHigh.gif" />
     <None Include="Resources\Tiles\stairsUpRightLow.gif" />
-    <None Include="Resources\back.gif" />
-    <None Include="Resources\foward.gif" />
-    <None Include="Resources\buttonTogglePixelGrid.gif" />
-    <None Include="Resources\buttonOverlaps.gif" />
-    <None Include="Resources\flip_small.gif" />
-    <None Include="Resources\heightDecrease.gif" />
-    <None Include="Resources\heightIncrease.gif" />
-    <None Include="Resources\buttonBoundaries.gif" />
-    <None Include="Resources\baseConversion.gif" />
-    <None Include="Resources\about_small.gif" />
-    <None Include="Resources\broom.gif" />
-    <None Include="Resources\apply.gif" />
-    <None Include="Resources\alwaysOnTop.gif" />
-    <None Include="Resources\buttonClickDrag.gif" />
-    <Content Include="Resources\buttonPhysical.gif" />
-    <Content Include="Resources\buttonPhysicalTiles.gif" />
-    <None Include="Resources\export_small.gif" />
-    <None Include="Resources\import_small.gif" />
-    <None Include="Resources\clear_small.gif" />
-    <None Include="Resources\help_small.gif" />
-    <None Include="Resources\editAllLayers.gif" />
-    <None Include="Resources\collapseAll.gif" />
-    <None Include="Resources\dock.gif" />
-    <None Include="Resources\cartridge.gif" />
-    <None Include="Resources\deleteInstance.gif" />
-    <None Include="Resources\closeAll.gif" />
-    <None Include="Resources\crop.gif" />
-    <None Include="Resources\clearModel.gif" />
-    <None Include="Resources\cartridgeReload.gif" />
-    <None Include="Resources\cartridgeClose.gif" />
-    <None Include="Resources\buttonSolidMods.gif" />
-    <None Include="Resources\buttonTileMods.gif" />
-    <None Include="Resources\calculator.gif" />
-    <Content Include="Resources\dropper_small.gif" />
-    <None Include="Resources\endStringA.gif" />
-    <None Include="Resources\endString.gif" />
-    <None Include="Resources\duplicate_small.gif" />
-    <None Include="Resources\insertIntoText.gif" />
-    <None Include="Resources\edit_small.gif" />
-    <None Include="Resources\expandAll.gif" />
-    <None Include="Resources\keys_load.gif" />
-    <None Include="Resources\keys_save.gif" />
-    <None Include="Resources\fill_small.gif" />
-    <None Include="Resources\hexEditor.gif" />
-    <None Include="Resources\icon-tools.gif" />
-    <Content Include="Resources\label.gif" />
-    <Content Include="Resources\LevelButtons\buttonEventField.gif" />
-    <Content Include="Resources\LevelButtons\buttonExitField.gif" />
-    <Content Include="Resources\LevelButtons\buttonNPC.gif" />
-    <Content Include="Resources\LevelButtons\buttonPhysical.gif" />
-    <Content Include="Resources\LevelButtons\buttonToggleGrid.gif" />
-    <Content Include="Resources\LevelButtons\buttonToggleMask.gif" />
-    <Content Include="Resources\LevelButtons\buttonToggleOrthGrid.gif" />
-    <None Include="Resources\preview.gif" />
-    <None Include="Resources\play.gif" />
-    <None Include="Resources\stop.gif" />
-    <None Include="Resources\movedown.gif" />
-    <None Include="Resources\moveup.gif" />
-    <None Include="Resources\search.gif" />
-    <None Include="Resources\new_small.gif" />
-    <None Include="Resources\open_small.gif" />
-    <None Include="Resources\save_small.gif" />
-    <None Include="Resources\template_small.gif" />
-    <None Include="Resources\mirror_small.gif" />
-    <None Include="Resources\openPalettes.gif" />
-    <None Include="Resources\openGraphics.gif" />
-    <None Include="Resources\openTilesets.gif" />
-    <None Include="Resources\openMap.gif" />
-    <None Include="Resources\openMolds.gif" />
-    <None Include="Resources\openSequences.gif" />
-    <None Include="Resources\openTemplates.gif" />
-    <None Include="Resources\openTileEditor.gif" />
-    <None Include="Resources\selectAll_small.gif" />
-    <None Include="Resources\mapPoint.gif" />
-    <None Include="Resources\pageBreak1.gif" />
-    <None Include="Resources\pause60f.gif" />
-    <None Include="Resources\pauseA.gif" />
-    <None Include="Resources\pauseFrames.gif" />
-    <None Include="Resources\pageDown.gif" />
-    <None Include="Resources\pageUp.gif" />
-    <None Include="Resources\openBattleDialogues.gif" />
-    <None Include="Resources\openDialogues.gif" />
-    <None Include="Resources\openFonts.gif" />
-    <None Include="Resources\mainBattlefields.gif" />
-    <None Include="Resources\mainWorldMaps.gif" />
-    <None Include="Resources\mainLevels.gif" />
-    <None Include="Resources\mainSprites.gif" />
-    <None Include="Resources\openEffectSequences.gif" />
-    <None Include="Resources\mainMainTitle.gif" />
-    <None Include="Resources\openNewFontTable.gif" />
-    <None Include="Resources\mainFormations.gif" />
-    <None Include="Resources\mainAllies.gif" />
-    <None Include="Resources\mainAnimations.gif" />
-    <None Include="Resources\mainBattleScripts.gif" />
-    <None Include="Resources\openLevelUps.gif" />
-    <None Include="Resources\openNewGame.gif" />
-    <None Include="Resources\openSpells.gif" />
-    <None Include="Resources\openAttacks.gif" />
-    <None Include="Resources\openPacks.gif" />
-    <None Include="Resources\openShops.gif" />
-    <None Include="Resources\publish.gif" />
-    <None Include="Resources\settings.gif" />
-    <None Include="Resources\romInfo.gif" />
-    <None Include="Resources\saveAs_small.gif" />
-    <None Include="Resources\recentFiles.gif" />
-    <None Include="Resources\removeHeader.gif" />
-    <None Include="Resources\opacity.gif" />
-    <None Include="Resources\newInstance.gif" />
-    <None Include="Resources\openNPCs.gif" />
-    <None Include="Resources\openPartitions.gif" />
-    <None Include="Resources\openAll.gif" />
-    <None Include="Resources\restoreAll.gif" />
-    <None Include="Resources\minimizeAll.gif" />
-    <None Include="Resources\loadAll.gif" />
-    <None Include="Resources\numerize.gif" />
-    <None Include="Resources\openAudio.gif" />
+    <Content Include="Resources\Data\apply.gif" />
+    <Content Include="Resources\Data\back.gif" />
+    <Content Include="Resources\Data\baseConversion.gif" />
+    <Content Include="Resources\Data\broom.gif" />
+    <Content Include="Resources\Data\calculator.gif" />
+    <Content Include="Resources\Data\cartridge.gif" />
+    <Content Include="Resources\Data\cartridgeClose.gif" />
+    <Content Include="Resources\Data\cartridgeReload.gif" />
+    <Content Include="Resources\Data\clearModel.gif" />
+    <Content Include="Resources\Data\clear_small.gif" />
+    <Content Include="Resources\Data\deleteInstance.gif" />
+    <Content Include="Resources\Data\duplicate_small.gif" />
+    <Content Include="Resources\Data\edit_small.gif" />
+    <Content Include="Resources\Data\export_small.gif" />
+    <Content Include="Resources\Data\foward.gif" />
+    <Content Include="Resources\Data\help_small.gif" />
+    <Content Include="Resources\Data\hexEditor.gif" />
+    <Content Include="Resources\Data\icon-tools.gif" />
+    <Content Include="Resources\Data\import_small.gif" />
+    <Content Include="Resources\Data\label.gif" />
+    <Content Include="Resources\Data\movedown.gif" />
+    <Content Include="Resources\Data\moveup.gif" />
+    <Content Include="Resources\Data\newInstance.gif" />
+    <Content Include="Resources\Data\new_small.gif" />
+    <Content Include="Resources\Data\open_small.gif" />
+    <Content Include="Resources\Data\play.gif" />
+    <Content Include="Resources\Data\publish.gif" />
+    <Content Include="Resources\Data\recentFiles.gif" />
+    <Content Include="Resources\Data\removeHeader.gif" />
+    <Content Include="Resources\Data\romInfo.gif" />
+    <Content Include="Resources\Data\saveAs_small.gif" />
+    <Content Include="Resources\Data\save_small.gif" />
+    <Content Include="Resources\Data\search.gif" />
+    <Content Include="Resources\Data\settings.gif" />
+    <Content Include="Resources\Data\signature.gif" />
+    <Content Include="Resources\Data\stop.gif" />
+    <Content Include="Resources\Data\tools.gif" />
+    <Content Include="Resources\Data\transfer_small.gif" />
+    <Content Include="Resources\Data\update.gif" />
+    <Content Include="Resources\Dialog\endString.gif" />
+    <Content Include="Resources\Dialog\endStringA.gif" />
+    <Content Include="Resources\Dialog\insertIntoText.gif" />
+    <Content Include="Resources\Dialog\keys_load.gif" />
+    <Content Include="Resources\Dialog\keys_save.gif" />
+    <Content Include="Resources\Dialog\newLine.gif" />
+    <Content Include="Resources\Dialog\newLineA.gif" />
+    <Content Include="Resources\Dialog\pageBreak.gif" />
+    <Content Include="Resources\Dialog\pageBreak1.gif" />
+    <Content Include="Resources\Dialog\pageBreakA.gif" />
+    <Content Include="Resources\Dialog\pageDown.gif" />
+    <Content Include="Resources\Dialog\pageUp.gif" />
+    <Content Include="Resources\Dialog\pause60f.gif" />
+    <Content Include="Resources\Dialog\pauseA.gif" />
+    <Content Include="Resources\Dialog\pauseFrames.gif" />
+    <Content Include="Resources\Dialog\textView.gif" />
+    <Content Include="Resources\Draw\dragSolid.gif" />
+    <Content Include="Resources\Draw\copy_small.gif" />
+    <Content Include="Resources\Draw\crop.gif" />
+    <Content Include="Resources\Draw\cut_small.gif" />
+    <Content Include="Resources\Draw\delete_small.gif" />
+    <Content Include="Resources\Draw\draw_small.gif" />
+    <Content Include="Resources\Draw\dropper_small.gif" />
+    <Content Include="Resources\Draw\editAllLayers.gif" />
+    <Content Include="Resources\Draw\erase_small.gif" />
+    <Content Include="Resources\Draw\fill_small.gif" />
+    <Content Include="Resources\Draw\flip_small.gif" />
+    <Content Include="Resources\Draw\heightDecrease.gif" />
+    <Content Include="Resources\Draw\heightIncrease.gif" />
+    <Content Include="Resources\Draw\mirror_small.gif" />
+    <Content Include="Resources\Draw\paste_small.gif" />
+    <Content Include="Resources\Draw\redo_small.gif" />
+    <Content Include="Resources\Draw\selectAll_small.gif" />
+    <Content Include="Resources\Draw\select_small.gif" />
+    <Content Include="Resources\Draw\template_small.gif" />
+    <Content Include="Resources\Draw\undo_small.gif" />
+    <Content Include="Resources\Draw\widthDecrease.gif" />
+    <Content Include="Resources\Draw\widthIncrease.gif" />
+    <Content Include="Resources\Draw\zoomin_small.gif" />
+    <Content Include="Resources\Draw\zoomout_small.gif" />
+    <Content Include="Resources\Editor\mainAllies.gif" />
+    <Content Include="Resources\Editor\mainAnimations.gif" />
+    <Content Include="Resources\Editor\mainAttacks.gif" />
+    <Content Include="Resources\Editor\mainBattlefields.gif" />
+    <Content Include="Resources\Editor\mainBattleScripts.gif" />
+    <Content Include="Resources\Editor\mainDialogues.gif" />
+    <Content Include="Resources\Editor\mainEffects.gif" />
+    <Content Include="Resources\Editor\mainEventScripts.gif" />
+    <Content Include="Resources\Editor\mainFormations.gif" />
+    <Content Include="Resources\Editor\mainItems.gif" />
+    <Content Include="Resources\Editor\mainLevels.gif" />
+    <Content Include="Resources\Editor\mainMainTitle.gif" />
+    <Content Include="Resources\Editor\mainMonsters.gif" />
+    <Content Include="Resources\Editor\mainNotes.gif" />
+    <Content Include="Resources\Editor\mainPatches.gif" />
+    <Content Include="Resources\Editor\mainSprites.gif" />
+    <Content Include="Resources\Editor\mainWorldMaps.gif" />
+    <Content Include="Resources\Editor\openAttacks.gif" />
+    <Content Include="Resources\Editor\openAudio.gif" />
+    <Content Include="Resources\Editor\openBattleDialogues.gif" />
+    <Content Include="Resources\Editor\openDialogues.gif" />
+    <Content Include="Resources\Editor\openEffectSequences.gif" />
+    <Content Include="Resources\Editor\openFonts.gif" />
+    <Content Include="Resources\Editor\openGraphics.gif" />
+    <Content Include="Resources\Editor\openLevelUps.gif" />
+    <Content Include="Resources\Editor\openMap.gif" />
+    <Content Include="Resources\Editor\openMolds.gif" />
+    <Content Include="Resources\Editor\openNewFontTable.gif" />
+    <Content Include="Resources\Editor\openNewGame.gif" />
+    <Content Include="Resources\Editor\openNPCs.gif" />
+    <Content Include="Resources\Editor\openPacks.gif" />
+    <Content Include="Resources\Editor\openPalettes.gif" />
+    <Content Include="Resources\Editor\openPartitions.gif" />
+    <Content Include="Resources\Editor\openSequences.gif" />
+    <Content Include="Resources\Editor\openShops.gif" />
+    <Content Include="Resources\Editor\openSpells.gif" />
+    <Content Include="Resources\Editor\openTemplates.gif" />
+    <Content Include="Resources\Editor\openTileEditor.gif" />
+    <Content Include="Resources\Editor\openTilesets.gif" />
+    <Content Include="Resources\Editor\preview.gif" />
+    <Content Include="Resources\Editor\spaceAnalyzer.gif" />
+    <Content Include="Resources\Forms\alwaysOnTop.gif" />
+    <Content Include="Resources\Forms\closeAll.gif" />
+    <Content Include="Resources\Forms\collapseAll.gif" />
+    <Content Include="Resources\Forms\dock.gif" />
+    <Content Include="Resources\Forms\expandAll.gif" />
+    <Content Include="Resources\Forms\reset.gif" />
+    <Content Include="Resources\Forms\minimizeAll.gif" />
+    <Content Include="Resources\Forms\numerize.gif" />
+    <Content Include="Resources\Forms\openAll.gif" />
+    <Content Include="Resources\Forms\restoreAll.gif" />
+    <Content Include="Resources\Forms\undock.gif" />
     <None Include="Resources\Lunar Compress.dll" />
-    <Content Include="Resources\showMain.gif" />
-    <None Include="Resources\signature.gif" />
-    <Content Include="Resources\spaceAnalyzer.gif" />
-    <None Include="Resources\textView.gif" />
-    <None Include="Resources\tags.gif" />
+    <Content Include="Resources\Main\about_small.gif" />
     <Content Include="Resources\Tiles\fieldBase.gif" />
     <Content Include="Resources\Tiles\fieldBlock.gif" />
-    <None Include="Resources\tools.gif" />
-    <None Include="Resources\zoomBox.gif" />
-    <None Include="Resources\update.gif" />
-    <None Include="Resources\undock.gif" />
-    <None Include="Resources\widthIncrease.gif" />
-    <None Include="Resources\widthDecrease.gif" />
+    <Content Include="Resources\Toggle\buttonBoundaries.gif" />
+    <Content Include="Resources\Toggle\buttonEventField.gif" />
+    <Content Include="Resources\Toggle\buttonExitField.gif" />
+    <Content Include="Resources\Toggle\buttonNPC.gif" />
+    <Content Include="Resources\Toggle\buttonOverlaps.gif" />
+    <Content Include="Resources\Toggle\buttonPhysical.gif" />
+    <Content Include="Resources\Toggle\buttonPhysicalTiles.gif" />
+    <Content Include="Resources\Toggle\buttonSolidMods.gif" />
+    <Content Include="Resources\Toggle\buttonTileMods.gif" />
+    <Content Include="Resources\Toggle\buttonToggleGrid.gif" />
+    <Content Include="Resources\Toggle\buttonToggleMask.gif" />
+    <Content Include="Resources\Toggle\buttonToggleOrthGrid.gif" />
+    <Content Include="Resources\Toggle\buttonTogglePixelGrid.gif" />
+    <Content Include="Resources\Toggle\mapPoint.gif" />
+    <Content Include="Resources\Toggle\opacity.gif" />
+    <Content Include="Resources\Toggle\showMain.gif" />
+    <Content Include="Resources\Toggle\tags.gif" />
+    <Content Include="Resources\Toggle\zoomBox.gif" />
     <None Include="Resources\_bg.gif" />
     <None Include="Resources\_transparent.gif" />
-    <None Include="Resources\transfer_small.gif" />
-    <None Include="Resources\Scripts\clearall.gif" />
-    <None Include="Resources\Scripts\collapseall.gif" />
-    <None Include="Resources\Scripts\delete.gif" />
-    <None Include="Resources\Scripts\edit.gif" />
-    <None Include="Resources\Scripts\expandall.gif" />
-    <None Include="Resources\Scripts\copy.gif" />
-    <None Include="Resources\LevelButtons\copy_small.gif" />
-    <None Include="Resources\LevelButtons\delete_small.gif" />
-    <None Include="Resources\LevelButtons\cut_small.gif" />
-    <None Include="Resources\LevelButtons\draw_small.gif" />
-    <None Include="Resources\LevelButtons\erase_small.gif" />
     <None Include="Resources\Main\HAMMER.gif" />
     <None Include="Resources\Main\title_smodrpg.gif" />
     <None Include="Resources\Main\title_stats_bg.gif" />
-    <None Include="Resources\LevelButtons\select_small.gif" />
-    <None Include="Resources\LevelButtons\paste_small.gif" />
-    <None Include="Resources\LevelButtons\undo_small.gif" />
-    <None Include="Resources\LevelButtons\redo_small.gif" />
-    <None Include="Resources\LevelButtons\zoomout_small.gif" />
-    <None Include="Resources\LevelButtons\zoomin_small.gif" />
-    <None Include="Resources\Scripts\paste.gif" />
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>

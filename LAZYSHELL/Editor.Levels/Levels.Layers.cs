@@ -13,7 +13,6 @@ namespace LAZYSHELL
         public LevelLayer Layer { get { return layer; } }// Layer for the current level
 
         #endregion
-
         #region Methods
 
         private void InitializeLayerProperties()
@@ -77,7 +76,6 @@ namespace LAZYSHELL
         }
 
         #endregion
-
         #region Event Handlers
 
         private void layerMessageBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -286,22 +284,22 @@ namespace LAZYSHELL
         private void layerMaskHighX_ValueChanged(object sender, EventArgs e)
         {
             layer.MaskHighX = (byte)layerMaskHighX.Value;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void layerMaskLowX_ValueChanged(object sender, EventArgs e)
         {
             layer.MaskLowX = (byte)layerMaskLowX.Value;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void layerMaskHighY_ValueChanged(object sender, EventArgs e)
         {
             layer.MaskHighY = (byte)layerMaskHighY.Value;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void layerMaskLowY_ValueChanged(object sender, EventArgs e)
         {
             layer.MaskLowY = (byte)layerMaskLowY.Value;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void layerLockMask_CheckedChanged(object sender, EventArgs e)
         {

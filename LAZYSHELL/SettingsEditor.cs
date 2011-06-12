@@ -12,11 +12,13 @@ namespace LAZYSHELL
     public partial class SettingsEditor : Form
     {
         private Settings settings = Settings.Default;
+        // constructor
         public SettingsEditor()
         {
             InitializeComponent();
             InitializeSettings();
         }
+        // functions
         private void InitializeSettings()
         {
             checkedListBox1.SetItemChecked(0, settings.LoadLastUsedROM);
@@ -52,7 +54,7 @@ namespace LAZYSHELL
             this.undoStackSize.Value = this.settings.UndoStackSize;
             this.patchHTTPServer.Text = this.settings.patchServerURL;
         }
-
+        // event handlers
         private void buttonCustomDirectory_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();

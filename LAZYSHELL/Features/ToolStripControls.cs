@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -172,6 +171,95 @@ namespace LAZYSHELL
                 }
                 this.AssignHandle(cbxinfo.hwndEdit);
             }
+        }
+    }
+    [ToolboxItemAttribute(true)]
+    public class ToolStripListView : ToolStripControlHost
+    {
+        public ToolStripListView()
+            : base(new ListView())
+        {
+            ListViewControl.GridLines = true;
+        }
+        private ListView ListViewControl
+        {
+            get { return Control as ListView; }
+        }
+        public ListView.ListViewItemCollection Items
+        {
+            get { return ListViewControl.Items; }
+        }
+        public ListView.ColumnHeaderCollection Columns
+        {
+            get { return ListViewControl.Columns; }
+        }
+        public View View
+        {
+            get { return ListViewControl.View; }
+            set { ListViewControl.View = value; }
+        }
+        protected override void OnSubscribeControlEvents(Control c)
+        {
+            base.OnSubscribeControlEvents(c);
+        }
+        protected override void OnUnsubscribeControlEvents(Control c)
+        {
+            base.OnUnsubscribeControlEvents(c);
+        }
+    }
+    [ToolboxItemAttribute(true)]
+    public class ToolStripNumericUpDown : ToolStripControlHost
+    {
+        public ToolStripNumericUpDown()
+            : base(new NumericUpDown())
+        {
+            this.NumericUpDownControl.TextAlign = HorizontalAlignment.Right;
+        }
+        private NumericUpDown NumericUpDownControl
+        {
+            get { return Control as NumericUpDown; }
+        }
+        public bool Hexadecimal { get { return NumericUpDownControl.Hexadecimal; } set { NumericUpDownControl.Hexadecimal = value; } }
+        public Point Location { get { return NumericUpDownControl.Location; } set { NumericUpDownControl.Location = value; } }
+        public decimal Maximum { get { return NumericUpDownControl.Maximum; } set { NumericUpDownControl.Maximum = value; } }
+        public decimal Minimum { get { return NumericUpDownControl.Minimum; } set { NumericUpDownControl.Minimum = value; } }
+        public decimal Value { get { return NumericUpDownControl.Value; } set { NumericUpDownControl.Value = value; } }
+        protected override void OnSubscribeControlEvents(Control c)
+        {
+            base.OnSubscribeControlEvents(c);
+            ((NumericUpDown)c).ValueChanged += new EventHandler(OnValueChanged);
+        }
+        protected override void OnUnsubscribeControlEvents(Control c)
+        {
+            base.OnUnsubscribeControlEvents(c);
+            ((NumericUpDown)c).ValueChanged -= new EventHandler(OnValueChanged);
+        }
+        public event EventHandler ValueChanged;
+        private void OnValueChanged(object sender, EventArgs e)
+        {
+            if (ValueChanged != null)
+                ValueChanged(this, e);
+        }
+    }
+    [ToolboxItemAttribute(true)]
+    public class ToolStripRichTextBox : ToolStripControlHost
+    {
+        public ToolStripRichTextBox()
+            : base(new RichTextBox())
+        {
+        }
+        private RichTextBox RichTextBoxControl
+        {
+            get { return Control as RichTextBox; }
+        }
+        public bool ReadOnly { get { return RichTextBoxControl.ReadOnly; } set { RichTextBoxControl.ReadOnly = value; } }
+        protected override void OnSubscribeControlEvents(Control c)
+        {
+            base.OnSubscribeControlEvents(c);
+        }
+        protected override void OnUnsubscribeControlEvents(Control c)
+        {
+            base.OnUnsubscribeControlEvents(c);
         }
     }
 }

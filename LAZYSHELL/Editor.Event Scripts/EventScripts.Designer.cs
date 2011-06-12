@@ -32,13 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EventScripts));
             this.label11 = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
-            this.labelTitleB = new System.Windows.Forms.Label();
-            this.labelTitleC = new System.Windows.Forms.Label();
-            this.evtNumF = new System.Windows.Forms.NumericUpDown();
-            this.evtEffects = new System.Windows.Forms.CheckedListBox();
-            this.labelEvtF = new System.Windows.Forms.Label();
-            this.labelEvtE = new System.Windows.Forms.Label();
-            this.evtNumE = new System.Windows.Forms.NumericUpDown();
             this.evtNumD = new System.Windows.Forms.NumericUpDown();
             this.evtNumC = new System.Windows.Forms.NumericUpDown();
             this.panel13 = new System.Windows.Forms.Panel();
@@ -52,11 +45,21 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.evtNameB = new System.Windows.Forms.ComboBox();
             this.labelTitleA = new System.Windows.Forms.Label();
+            this.labelTitleB = new System.Windows.Forms.Label();
+            this.labelTitleC = new System.Windows.Forms.Label();
+            this.evtNumF = new System.Windows.Forms.NumericUpDown();
+            this.evtEffects = new System.Windows.Forms.CheckedListBox();
+            this.labelEvtF = new System.Windows.Forms.Label();
+            this.labelEvtE = new System.Windows.Forms.Label();
+            this.evtNumE = new System.Windows.Forms.NumericUpDown();
             this.buttonInsertEvent = new System.Windows.Forms.Button();
             this.buttonApplyEvent = new System.Windows.Forms.Button();
             this.EventScriptTree = new LAZYSHELL.NewTreeView();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel22 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.CheckBox();
             this.commands = new System.Windows.Forms.ListBox();
@@ -116,44 +119,42 @@
             this.EvtScrCollapseAll = new System.Windows.Forms.ToolStripButton();
             this.EventPreview = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.panel14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.evtNumF)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.evtNumE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumC)).BeginInit();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumA)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.evtNumF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.evtNumE)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel22.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStripGoto.SuspendLayout();
             this.toolStrip2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label11
             // 
             this.label11.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.Control;
-            this.label11.Location = new System.Drawing.Point(0, 0);
+            this.label11.Location = new System.Drawing.Point(0, -2);
             this.label11.Name = "label11";
             this.label11.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label11.Size = new System.Drawing.Size(282, 19);
             this.label11.TabIndex = 398;
             this.label11.Text = "CURRENT COMMAND PROPERTIES...";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel14
             // 
@@ -170,90 +171,11 @@
             this.panel14.Controls.Add(this.labelEvtB);
             this.panel14.Controls.Add(this.panel2);
             this.panel14.Controls.Add(this.labelTitleA);
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel14.Location = new System.Drawing.Point(0, 19);
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel14.Location = new System.Drawing.Point(0, 17);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(282, 76);
             this.panel14.TabIndex = 18;
-            // 
-            // labelTitleB
-            // 
-            this.labelTitleB.BackColor = System.Drawing.SystemColors.Control;
-            this.labelTitleB.Location = new System.Drawing.Point(0, 0);
-            this.labelTitleB.Name = "labelTitleB";
-            this.labelTitleB.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelTitleB.Size = new System.Drawing.Size(279, 17);
-            this.labelTitleB.TabIndex = 423;
-            // 
-            // labelTitleC
-            // 
-            this.labelTitleC.BackColor = System.Drawing.SystemColors.Control;
-            this.labelTitleC.Location = new System.Drawing.Point(0, 0);
-            this.labelTitleC.Name = "labelTitleC";
-            this.labelTitleC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelTitleC.Size = new System.Drawing.Size(279, 17);
-            this.labelTitleC.TabIndex = 424;
-            // 
-            // evtNumF
-            // 
-            this.evtNumF.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.evtNumF.Enabled = false;
-            this.evtNumF.Location = new System.Drawing.Point(209, 19);
-            this.evtNumF.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.evtNumF.Name = "evtNumF";
-            this.evtNumF.Size = new System.Drawing.Size(69, 17);
-            this.evtNumF.TabIndex = 26;
-            this.evtNumF.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // evtEffects
-            // 
-            this.evtEffects.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.evtEffects.CheckOnClick = true;
-            this.evtEffects.Enabled = false;
-            this.evtEffects.FormattingEnabled = true;
-            this.evtEffects.Location = new System.Drawing.Point(0, 19);
-            this.evtEffects.MultiColumn = true;
-            this.evtEffects.Name = "evtEffects";
-            this.evtEffects.Size = new System.Drawing.Size(279, 64);
-            this.evtEffects.TabIndex = 24;
-            this.evtEffects.SelectedIndexChanged += new System.EventHandler(this.evtEffects_SelectedIndexChanged);
-            // 
-            // labelEvtF
-            // 
-            this.labelEvtF.BackColor = System.Drawing.SystemColors.Control;
-            this.labelEvtF.Location = new System.Drawing.Point(140, 19);
-            this.labelEvtF.Name = "labelEvtF";
-            this.labelEvtF.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelEvtF.Size = new System.Drawing.Size(68, 17);
-            this.labelEvtF.TabIndex = 418;
-            // 
-            // labelEvtE
-            // 
-            this.labelEvtE.BackColor = System.Drawing.SystemColors.Control;
-            this.labelEvtE.Location = new System.Drawing.Point(0, 19);
-            this.labelEvtE.Name = "labelEvtE";
-            this.labelEvtE.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.labelEvtE.Size = new System.Drawing.Size(68, 17);
-            this.labelEvtE.TabIndex = 417;
-            // 
-            // evtNumE
-            // 
-            this.evtNumE.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.evtNumE.Enabled = false;
-            this.evtNumE.Location = new System.Drawing.Point(69, 19);
-            this.evtNumE.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.evtNumE.Name = "evtNumE";
-            this.evtNumE.Size = new System.Drawing.Size(70, 17);
-            this.evtNumE.TabIndex = 25;
-            this.evtNumE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // evtNumD
             // 
@@ -473,6 +395,85 @@
             this.labelTitleA.Size = new System.Drawing.Size(279, 17);
             this.labelTitleA.TabIndex = 398;
             // 
+            // labelTitleB
+            // 
+            this.labelTitleB.BackColor = System.Drawing.SystemColors.Control;
+            this.labelTitleB.Location = new System.Drawing.Point(0, 0);
+            this.labelTitleB.Name = "labelTitleB";
+            this.labelTitleB.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelTitleB.Size = new System.Drawing.Size(279, 17);
+            this.labelTitleB.TabIndex = 423;
+            // 
+            // labelTitleC
+            // 
+            this.labelTitleC.BackColor = System.Drawing.SystemColors.Control;
+            this.labelTitleC.Location = new System.Drawing.Point(0, 0);
+            this.labelTitleC.Name = "labelTitleC";
+            this.labelTitleC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelTitleC.Size = new System.Drawing.Size(279, 17);
+            this.labelTitleC.TabIndex = 424;
+            // 
+            // evtNumF
+            // 
+            this.evtNumF.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.evtNumF.Enabled = false;
+            this.evtNumF.Location = new System.Drawing.Point(209, 19);
+            this.evtNumF.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.evtNumF.Name = "evtNumF";
+            this.evtNumF.Size = new System.Drawing.Size(69, 17);
+            this.evtNumF.TabIndex = 26;
+            this.evtNumF.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // evtEffects
+            // 
+            this.evtEffects.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.evtEffects.CheckOnClick = true;
+            this.evtEffects.Enabled = false;
+            this.evtEffects.FormattingEnabled = true;
+            this.evtEffects.Location = new System.Drawing.Point(0, 19);
+            this.evtEffects.MultiColumn = true;
+            this.evtEffects.Name = "evtEffects";
+            this.evtEffects.Size = new System.Drawing.Size(279, 64);
+            this.evtEffects.TabIndex = 24;
+            this.evtEffects.SelectedIndexChanged += new System.EventHandler(this.evtEffects_SelectedIndexChanged);
+            // 
+            // labelEvtF
+            // 
+            this.labelEvtF.BackColor = System.Drawing.SystemColors.Control;
+            this.labelEvtF.Location = new System.Drawing.Point(140, 19);
+            this.labelEvtF.Name = "labelEvtF";
+            this.labelEvtF.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelEvtF.Size = new System.Drawing.Size(68, 17);
+            this.labelEvtF.TabIndex = 418;
+            // 
+            // labelEvtE
+            // 
+            this.labelEvtE.BackColor = System.Drawing.SystemColors.Control;
+            this.labelEvtE.Location = new System.Drawing.Point(0, 19);
+            this.labelEvtE.Name = "labelEvtE";
+            this.labelEvtE.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.labelEvtE.Size = new System.Drawing.Size(68, 17);
+            this.labelEvtE.TabIndex = 417;
+            // 
+            // evtNumE
+            // 
+            this.evtNumE.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.evtNumE.Enabled = false;
+            this.evtNumE.Location = new System.Drawing.Point(69, 19);
+            this.evtNumE.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.evtNumE.Name = "evtNumE";
+            this.evtNumE.Size = new System.Drawing.Size(70, 17);
+            this.evtNumE.TabIndex = 25;
+            this.evtNumE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // buttonInsertEvent
             // 
             this.buttonInsertEvent.BackColor = System.Drawing.SystemColors.Control;
@@ -530,16 +531,54 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel1.Controls.Add(this.panel5);
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.panel14);
             this.panel1.Controls.Add(this.label11);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Controls.Add(this.panel14);
+            this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.panel5);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 393);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(282, 243);
             this.panel1.TabIndex = 562;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.labelTitleC);
+            this.panel4.Controls.Add(this.evtNumF);
+            this.panel4.Controls.Add(this.evtNumE);
+            this.panel4.Controls.Add(this.labelEvtF);
+            this.panel4.Controls.Add(this.labelEvtE);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 93);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(282, 40);
+            this.panel4.TabIndex = 566;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.labelTitleB);
+            this.panel3.Controls.Add(this.evtEffects);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 133);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(282, 87);
+            this.panel3.TabIndex = 565;
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.buttonInsertEvent);
+            this.panel5.Controls.Add(this.buttonApplyEvent);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(0, 220);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(282, 23);
+            this.panel5.TabIndex = 565;
             // 
             // panel22
             // 
@@ -549,10 +588,10 @@
             this.panel22.Controls.Add(this.labelCommands);
             this.panel22.Controls.Add(this.categories_es);
             this.panel22.Controls.Add(this.categories_aq);
-            this.panel22.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel22.Location = new System.Drawing.Point(0, 0);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(282, 393);
+            this.panel22.Size = new System.Drawing.Size(282, 636);
             this.panel22.TabIndex = 393;
             // 
             // button1
@@ -906,7 +945,7 @@
             // reset
             // 
             this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.reset.Name = "reset";
@@ -1158,44 +1197,6 @@
             // 
             this.toolTip1.Active = false;
             // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.labelTitleB);
-            this.panel3.Controls.Add(this.evtEffects);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 135);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(282, 87);
-            this.panel3.TabIndex = 565;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.labelTitleC);
-            this.panel4.Controls.Add(this.evtNumF);
-            this.panel4.Controls.Add(this.evtNumE);
-            this.panel4.Controls.Add(this.labelEvtF);
-            this.panel4.Controls.Add(this.labelEvtE);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 95);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(282, 40);
-            this.panel4.TabIndex = 566;
-            // 
-            // panel5
-            // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.buttonInsertEvent);
-            this.panel5.Controls.Add(this.buttonApplyEvent);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 222);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(282, 23);
-            this.panel5.TabIndex = 565;
-            // 
             // EventScripts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1214,16 +1215,19 @@
             this.Text = "EVENT SCRIPTS - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EventScripts_FormClosing);
             this.panel14.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.evtNumF)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.evtNumE)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumC)).EndInit();
             this.panel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.evtNumB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumA)).EndInit();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.evtNumF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.evtNumE)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.panel22.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -1233,9 +1237,6 @@
             this.contextMenuStripGoto.ResumeLayout(false);
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

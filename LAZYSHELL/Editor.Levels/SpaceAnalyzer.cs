@@ -11,7 +11,9 @@ namespace LAZYSHELL
 {
     public partial class SpaceAnalyzer : Form
     {
+        // variables
         private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+        // constructor
         public SpaceAnalyzer()
         {
             InitializeComponent();
@@ -19,6 +21,7 @@ namespace LAZYSHELL
             this.soliditymapListView.ListViewItemSorter = lvwColumnSorter;
             Initialize();
         }
+        // functions
         private void Initialize()
         {
             InitTileMaps();
@@ -37,7 +40,7 @@ namespace LAZYSHELL
             index = 0; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x00DA; // Set initial offset for this bank
-            bg = Color.LightGreen;
+            bg = Color.White;
 
             for (; index < 109; index++, bankIndex++)
             {
@@ -68,7 +71,7 @@ namespace LAZYSHELL
             index = 109; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x006C; // Set initial offset for this bank
-            bg = Color.LightBlue;
+            bg = Color.FromArgb(240, 240, 240);
 
             for (; index < 163; index++, bankIndex++)
             {
@@ -99,7 +102,7 @@ namespace LAZYSHELL
             index = 163; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x0070; // Set initial offset for this bank
-            bg = Color.LightSeaGreen;
+            bg = Color.FromArgb(224, 224, 224);
 
             for (; index < 219; index++, bankIndex++)
             {
@@ -130,7 +133,7 @@ namespace LAZYSHELL
             index = 219; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x0070; // Set initial offset for this bank
-            bg = Color.LightSteelBlue;
+            bg = Color.FromArgb(240, 240, 240);
 
             for (; index < 275; index++, bankIndex++)
             {
@@ -161,7 +164,7 @@ namespace LAZYSHELL
             index = 275; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x0044; // Set initial offset for this bank
-            bg = Color.LightSlateGray;
+            bg = Color.FromArgb(255, 255, 255);
 
             for (; index < 309; index++, bankIndex++)
             {
@@ -194,7 +197,7 @@ namespace LAZYSHELL
             index = 0; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x00A0; // Set initial offset for this bank
-            bg = Color.Khaki;
+            bg = Color.White;
 
             for (; index < 80; index++, bankIndex++)
             {
@@ -225,7 +228,7 @@ namespace LAZYSHELL
             index = 80; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x0050; // Set initial offset for this bank
-            bg = Color.DarkKhaki;
+            bg = Color.FromArgb(240, 240, 240);
 
             for (; index < 120; index++, bankIndex++)
             {
@@ -254,6 +257,7 @@ namespace LAZYSHELL
 
             pBar.Close();
         }
+        // event handlers
         private void listView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             ListView listView = (ListView)sender;

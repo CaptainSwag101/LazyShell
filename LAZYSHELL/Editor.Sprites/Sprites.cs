@@ -521,12 +521,12 @@ namespace LAZYSHELL
         }
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements(animations, index, "IMPORT SPRITE ANIMATIONS...").ShowDialog();
+            new IOElements(animations, (int)animationPacket.Value, "IMPORT SPRITE ANIMATIONS...").ShowDialog();
             RefreshSpritesEditor();
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements(animations, index, "EXPORT SPRITE ANIMATIONS...").ShowDialog();
+            new IOElements(animations, (int)animationPacket.Value, "EXPORT SPRITE ANIMATIONS...").ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {
@@ -535,6 +535,16 @@ namespace LAZYSHELL
             if (clearElements.DialogResult == DialogResult.Cancel)
                 return;
             RefreshSpritesEditor();
+        }
+        private void reset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current sprite and animation index. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            animation = new Animation(Model.Data, sprite.AnimationPacket);
+            image = new GraphicPalette(Model.Data, sprite.GraphicPalettePacket);
+            sprite = new Sprite(Model.Data, index);
+            number_ValueChanged(null, null);
         }
         private void hexViewer_Click(object sender, EventArgs e)
         {
@@ -553,16 +563,5 @@ namespace LAZYSHELL
 
         }
         #endregion
-
-        private void reset_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("You're about to undo all changes to the current sprite and animation index. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return;
-            animation = new Animation(Model.Data, sprite.AnimationPacket);
-            image = new GraphicPalette(Model.Data, sprite.GraphicPalettePacket);
-            sprite = new Sprite(Model.Data, index);
-            number_ValueChanged(null, null);
-        }
     }
 }

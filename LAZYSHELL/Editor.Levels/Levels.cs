@@ -24,7 +24,7 @@ namespace LAZYSHELL
         private State state = State.Instance;
         private Settings settings = Settings.Default;
         private Solidity solidity = Solidity.Instance;
-
+        // elements
         private Level[] levels { get { return Model.Levels; } set { Model.Levels = value; } }
         private LevelMap[] levelMaps { get { return Model.LevelMaps; } set { Model.LevelMaps = value; } }
         private PaletteSet[] paletteSets { get { return Model.PaletteSets; } set { Model.PaletteSets = value; } }
@@ -32,11 +32,12 @@ namespace LAZYSHELL
         private SolidityTile[] solidTiles { get { return Model.SolidTiles; } set { Model.SolidTiles = value; } }
         private NPCSpritePartitions[] npcSpritePartitions { get { return Model.NPCSpritePartitions; } }
         private NPCProperties[] npcProperties { get { return Model.NPCProperties; } set { Model.NPCProperties = value; } }
-
+        //
         private Level level { get { return levels[index]; } set { levels[index] = value; } }
         public Level Level { get { return level; } set { level = value; } }
         public System.Windows.Forms.ToolStripComboBox LevelName { get { return levelName; } set { levelName = value; } }
-        private ProgressBar progressBar;
+        private PictureBox picture { get { return levelsTilemap.Picture; } set { levelsTilemap.Picture = value; } }
+        private int zoom { get { return levelsTilemap.Zoom; } }
         private Level levelCheck; // Used to verify a level change
         private Overlay overlay = new Overlay(); // Object used to generate all the overlays for levels
         private bool updatingLevel = false; // Indicates that we are currently updating the level so we dont update during an update
@@ -54,6 +55,7 @@ namespace LAZYSHELL
         private Search searchWindow;
         private SpaceAnalyzer sa;
         #endregion
+        // Constructor
         public Levels()
         {
             settings.Keystrokes[0x20] = "\x20";
@@ -86,7 +88,9 @@ namespace LAZYSHELL
             this.mapTilesetL3Name.Items.AddRange(Lists.Numerize(Lists.TileSetL3Names));
             this.mapTilemapL1Name.Items.AddRange(Lists.Numerize(Lists.TileMapNames));
             this.mapTilemapL2Name.Items.AddRange(Lists.Numerize(Lists.TileMapNames));
-            this.mapTilemapL3Name.Items.AddRange(Lists.Numerize(Lists.TileMapNames));
+            this.mapTilemapL3Name.Items.AddRange(Lists.Numerize(Lists.TileMapL3Names));
+            this.mapPhysicalMapName.Items.AddRange(Lists.Numerize(Lists.SolidityMapNames));
+            this.mapPaletteSetName.Items.AddRange(Lists.Numerize(Lists.PaletteSetNames));
             this.eventMusic.Items.AddRange(Lists.Numerize(Lists.MusicNames));
 
             updatingLevel = true;
@@ -102,6 +106,7 @@ namespace LAZYSHELL
             }
             updatingLevel = false;
 
+            LoadSolidityTileset();
             if (!updatingLevel)
                 RefreshLevel();
 
@@ -115,7 +120,7 @@ namespace LAZYSHELL
                 Model.TileMaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
             findNPCNumber = new NPCEditor(this, npcID.Value);
         }
-        #region Methods
+        #region Functions
         private void InitializeSettings()
         {
             InitializeLayerProperties();
@@ -130,24 +135,18 @@ namespace LAZYSHELL
             overlapTileset = Model.OverlapTileset;
 
             // load the individual editors
-            LoadPaletteEditor();
-            LoadGraphicEditor();
-            LoadTilesetEditor();
-            LoadPhysicalTileset();
-            LoadTilemapEditor();
-            LoadTemplateEditor();
 
             levelsTileset.TopLevel = false;
             levelsTilemap.TopLevel = false;
-            levelsPhysicalTiles.TopLevel = false;
+            levelsSolidTiles.TopLevel = false;
             levelsTemplate.TopLevel = false;
             levelsTileset.Dock = DockStyle.Right;
             levelsTilemap.Dock = DockStyle.Fill;
-            levelsPhysicalTiles.Dock = DockStyle.Right;
+            levelsSolidTiles.Dock = DockStyle.Right;
             levelsTemplate.Dock = DockStyle.Right;
             panelLevels.Controls.Add(levelsTileset);
             panelLevels.Controls.Add(levelsTilemap);
-            panelLevels.Controls.Add(levelsPhysicalTiles);
+            panelLevels.Controls.Add(levelsSolidTiles);
             panelLevels.Controls.Add(levelsTemplate);
 
             openTilemap.Checked = true;
@@ -1076,6 +1075,8 @@ namespace LAZYSHELL
         private void CreateNewLevelData()
         {
             levelCheck = level;
+            if (tileMap != null)
+                tileMap.AssembleIntoModel();
             tileSet = new TileSet(levelMap, paletteSet);
             tileMap = new TileMap(level, tileSet);
             foreach (Level l in levels)
@@ -1091,7 +1092,7 @@ namespace LAZYSHELL
             }
             foreach (LevelSolidMods.Mod mod in solidMods.Mods)
                 mod.Pixels = solidity.GetTilemapPixels(mod);
-            physicalMap = new LevelSolidMap(levelMap);
+            solidityMap = new LevelSolidMap(levelMap);
             fullUpdate = false;
 
             // load the individual editors
@@ -1100,6 +1101,8 @@ namespace LAZYSHELL
             LoadTilesetEditor();
             LoadTilemapEditor();
             LoadTemplateEditor();
+
+            SetLevelInfo();
         }
         private void LevelChange()
         {
@@ -1136,6 +1139,37 @@ namespace LAZYSHELL
                 lp.Reload((int)this.levelNum.Value, 1);
             lp.Show();
             lp.BringToFront();
+        }
+        private void SetLevelInfo()
+        {
+            List<string[]> items = new List<string[]>();
+            items.Add(new string[] { "Layer", ((index * 18) + 0x1D0040).ToString("X6") });
+            items.Add(new string[] { "Map", ((index * 2) + 0x148000).ToString("X6") });
+            int pointer = Bits.GetShort(Model.Data, (index * 2) + 0x148000);
+            int offset = Bits.GetShort(Model.Data, pointer);
+            items.Add(new string[] { "NPC", (offset + 0x140000).ToString("X6") });
+            pointer = (index * 2) + 0x1D2D64;
+            offset = Bits.GetShort(Model.Data, pointer);
+            items.Add(new string[] { "Exit", (offset + 0x1D0000).ToString("X6") });
+            pointer = (index * 2) + 0x20E000;
+            offset = Bits.GetShort(Model.Data, pointer);
+            items.Add(new string[] { "Event", (offset + 0x200000).ToString("X6") });
+            pointer = (index * 2) + 0x1D4905;
+            offset = Bits.GetShort(Model.Data, pointer);
+            items.Add(new string[] { "Overlap", (offset + 0x1D0000).ToString("X6") });
+            pointer = (index * 2) + 0x1D5EBD;
+            offset = Bits.GetShort(Model.Data, pointer);
+            items.Add(new string[] { "Tile mod", (offset + 0x1D0000).ToString("X6") });
+            pointer = (index * 2) + 0x1D8DB0;
+            offset = Bits.GetShort(Model.Data, pointer);
+            items.Add(new string[] { "Solid mod", (offset + 0x1D0000).ToString("X6") });
+            ListViewItem[] listViewItems = new ListViewItem[items.Count];
+            for (int i = 0; i < items.Count; i++)
+                listViewItems[i] = new ListViewItem(items[i]);
+            levelInfo.Columns[0].Text = "Element";
+            levelInfo.Columns[1].Text = "Offset";
+            levelInfo.Items.Clear();
+            levelInfo.Items.AddRange(listViewItems);
         }
         // directories
         private bool CreateDir(string dir)
@@ -1189,6 +1223,8 @@ namespace LAZYSHELL
                 ps.Assemble(1);
             foreach (NPCProperties np in npcProperties)
                 np.Assemble();
+            foreach (SolidityTile st in solidTiles)
+                st.Assemble();
 
             ushort offsetStart = 0x3166;
             if (CalculateFreeExitSpace() >= 0)
@@ -1352,16 +1388,22 @@ namespace LAZYSHELL
         }
         private void clearTilesetsAll_Click(object sender, EventArgs e)
         {
-            if (new ClearElements(null, (int)mapTilesetL1Num.Value, "CLEAR TILESETS...").ShowDialog() == DialogResult.Cancel)
+            if (new ClearElements(null, (int)(levelMap.TileSetL1 + 0x20), "CLEAR TILESETS...").ShowDialog() == DialogResult.Cancel)
                 return;
+            new ClearElements(null, (int)(levelMap.TileSetL2 + 0x20), "CLEAR TILESETS...").buttonOK_Click(null, null);
+            if (levelMap.GraphicSetL3 != 0xFF)
+                new ClearElements(null, (int)(levelMap.TileSetL3), "CLEAR TILESETS...").buttonOK_Click(null, null);
             fullUpdate = true;
             if (!updatingLevel)
                 RefreshLevel();
         }
         private void clearTilemapsAll_Click(object sender, EventArgs e)
         {
-            if (new ClearElements(null, (int)mapTilemapL1Num.Value, "CLEAR TILEMAPS...").ShowDialog() == DialogResult.Cancel)
+            if (new ClearElements(null, (int)(levelMap.TileMapL1 + 0x40), "CLEAR TILEMAPS...").ShowDialog() == DialogResult.Cancel)
                 return;
+            new ClearElements(null, (int)(levelMap.TileMapL2 + 0x40), "CLEAR TILEMAPS...").buttonOK_Click(null, null);
+            if (levelMap.GraphicSetL3 != 0xFF)
+                new ClearElements(null, (int)(levelMap.TileMapL3), "CLEAR TILEMAPS...").buttonOK_Click(null, null);
             fullUpdate = true;
             if (!updatingLevel)
                 RefreshLevel();
@@ -1371,8 +1413,8 @@ namespace LAZYSHELL
             if (new ClearElements(null, (int)mapPhysicalMapNum.Value, "CLEAR SOLIDITY MAPS...").ShowDialog() == DialogResult.Cancel)
                 return;
             fullUpdate = true;
-            physicalMap = new LevelSolidMap(levelMap);
-            physicalMap.Image = null;
+            solidityMap = new LevelSolidMap(levelMap);
+            solidityMap.Image = null;
             LoadTilemapEditor();
         }
         private void clearAllComponentsAll_Click(object sender, EventArgs e)
@@ -1422,7 +1464,7 @@ namespace LAZYSHELL
             fullUpdate = true;
             if (!updatingLevel)
                 RefreshLevel();
-            physicalMap.Image = null;
+            solidityMap.Image = null;
         }
         private void clearAllComponentsCurrent_Click(object sender, EventArgs e)
         {
@@ -1446,12 +1488,12 @@ namespace LAZYSHELL
             Model.EditTileMaps[levelMap.TileMapL2 + 0x40] = true;
             Model.EditTileMaps[levelMap.TileMapL3] = true;
 
-            physicalMap.Clear(1);
+            solidityMap.Clear(1);
 
             fullUpdate = true;
             if (!updatingLevel)
                 RefreshLevel();
-            physicalMap.Image = null;
+            solidityMap.Image = null;
         }
         private void unusedGraphicSetsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1934,8 +1976,8 @@ namespace LAZYSHELL
                 return;
             Model.Decompress(Model.SolidityMaps, 0x1B0000, 0x1D0000, 0x20C2, "", levelMap.SolidityMap, levelMap.SolidityMap + 1, false);
             fullUpdate = true;
-            physicalMap = new LevelSolidMap(levelMap);
-            physicalMap.Image = null;
+            solidityMap = new LevelSolidMap(levelMap);
+            solidityMap.Image = null;
             LoadTilemapEditor();
         }
         private void resetAllComponentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2019,131 +2061,7 @@ namespace LAZYSHELL
         {
             toolStripTextBox1.Text = Lists.LevelNames[index];
         }
-        //// Draw border
-        //private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    TileSet aTileset;
-        //    PaletteSet aPaletteSet;
-        //    foreach (LevelMap lm in levelMaps)
-        //    {
-        //        if (backgroundWorker1.CancellationPending) break;
-        //        aPaletteSet = paletteSets[lm.PaletteSet];
-        //        aTileset = new TileSet(lm, aPaletteSet);
-        //        for (int l = 0; l < 2; l++) // for each layer in the tilesets
-        //        {
-        //            if (backgroundWorker1.CancellationPending) break;
-        //            for (int b = 0; b < 32; b++)    // for each row of 16 16x16 tiles in the tileset
-        //            {
-        //                for (int a = 0; a < 16; a++)    // for each 16x16 in a row in the tileset
-        //                {
-        //                    for (int c = 0; c < 4; c++) // for each subtile
-        //                    {
-        //                        // first create the Tile8x8
-        //                        Tile8x8 temp = aTileset.TileSetLayers[l][b * 16 + a].Subtiles[c];
-        //                        // in case mirrored or inverted, must use original unmodded tile
-        //                        int tileOffset = temp.TileIndex * 0x20;
-        //                        if (tileOffset > aTileset.Graphics.Length) tileOffset = 0;
-        //                        Tile8x8 tile = new Tile8x8(
-        //                            temp.TileIndex, aTileset.Graphics, tileOffset,
-        //                            aPaletteSet.Palettes[temp.PaletteIndex],
-        //                            temp.Mirror, temp.Invert, false, false);
-        //                        tile.PaletteIndex = temp.PaletteIndex;
-        //                        if (tile.Mirror || tile.Invert) continue;
-
-        //                        // next find the darkest color in the palette
-        //                        int darkestAverage = 248;
-        //                        int darkestColor = 0;
-        //                        for (int i = 0; i < 16; i++)
-        //                        {
-        //                            int index = tile.PaletteIndex;
-        //                            if (index < 0) index = 0;
-        //                            int average =
-        //                                (aPaletteSet.Reds[(index * 16) + i] +
-        //                                aPaletteSet.Greens[(index * 16) + i] +
-        //                                aPaletteSet.Blues[(index * 16) + i]) / 3;
-        //                            if (average < darkestAverage && average != 0)
-        //                            {
-        //                                darkestColor = i;
-        //                                darkestAverage = average;
-        //                            }
-        //                        }
-        //                        // next draw the border around the tile
-        //                        for (int i = 0; i < 64; i++)
-        //                        {
-        //                            // if pixel is empty, don't attempt to draw a border
-        //                            if (tile.Pixels[i] == 0) continue;
-        //                            // if not first or last in row, check previous and next pixel in row
-        //                            if ((i % 8) > 0 && (i % 8) < 7 && tile.Colors[i - 1] == 0)
-        //                            {
-        //                                tile.Colors[i] = darkestColor;   // the inner border
-        //                                tile.Colors[i + 1] = darkestColor;   // the outer border
-        //                            }
-        //                            if ((i % 8) < 7 && (i % 8) > 0 && tile.Colors[i + 1] == 0)
-        //                            {
-        //                                tile.Colors[i] = darkestColor;
-        //                                tile.Colors[i - 1] = darkestColor;   // the outer border
-        //                            }
-        //                            // if not first or last in column, check previous and next pixel in column
-        //                            if (i > 7 && i < 56 && tile.Colors[i - 8] == 0)
-        //                            {
-        //                                tile.Colors[i] = darkestColor;
-        //                                tile.Colors[i + 8] = darkestColor;   // the outer border
-        //                            }
-        //                            if (i < 56 && i > 7 && tile.Colors[i + 8] == 0)
-        //                            {
-        //                                tile.Colors[i] = darkestColor;
-        //                                tile.Colors[i - 8] = darkestColor;   // the outer border
-        //                            }
-        //                        }
-        //                        // finally, draw the Tile8x8 back to the 4bpp array
-        //                        byte[] array = aTileset.Graphics;
-        //                        for (int y = 0; y < 8; y++)
-        //                        {
-        //                            for (int x = 0; x < 8; x++)
-        //                            {
-        //                                int offset = tileOffset + (y * 2);
-        //                                int color = tile.Colors[y * 8 + x];
-        //                                byte bit = (byte)(x ^ 7);
-        //                                Bits.SetBit(array, offset, bit, (color & 1) == 1);
-        //                                Bits.SetBit(array, offset + 1, bit, (color & 2) == 2);
-        //                                Bits.SetBit(array, offset + 16, bit, (color & 4) == 4);
-        //                                Bits.SetBit(array, offset + 17, bit, (color & 8) == 8);
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        // finally, store the fused graphicSets into the Model.GraphicSets
-        //        Buffer.BlockCopy(aTileset.Graphics, 0, Model.GraphicSets[lm.GraphicSetA + 0x48], 0, 0x2000);
-        //        Buffer.BlockCopy(aTileset.Graphics, 0x2000, Model.GraphicSets[lm.GraphicSetB + 0x48], 0, 0x1000);
-        //        Buffer.BlockCopy(aTileset.Graphics, 0x3000, Model.GraphicSets[lm.GraphicSetC + 0x48], 0, 0x1000);
-        //        Buffer.BlockCopy(aTileset.Graphics, 0x4000, Model.GraphicSets[lm.GraphicSetD + 0x48], 0, 0x1000);
-        //        Buffer.BlockCopy(aTileset.Graphics, 0x5000, Model.GraphicSets[lm.GraphicSetE + 0x48], 0, 0x1000);
-
-        //        backgroundWorker1.ReportProgress(lm.LevelMapNum);
-        //    }
-        //}
-        //private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        //{
-        //    pBar.PerformStep("DRAWING BORDER FOR LEVEL MAP #" + e.ProgressPercentage + " OF 156");
-        //}
-        //private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
-        //    pBar.Close();
-        //    this.Enabled = true;
-
-        //    UpdateLevel();
-        //}
-        //private void applyBorderToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    this.Enabled = false;
-        //    pBar = new ProgressBar(this.model, Model.Data, "DRAWING BORDER AROUND LEVEL MAP GRAPHICS...", 156, backgroundWorker1);
-        //    pBar.Show();
-        //    backgroundWorker1.RunWorkerAsync();
-        //}
-
-        // levels form
+        //
         private void Levels_KeyDown(object sender, KeyEventArgs e)
         {
             //if (e.KeyData == Keys.Escape)
@@ -2187,11 +2105,13 @@ namespace LAZYSHELL
         Close:
             searchWindow.Close();
             levelsTileset.tileEditor.Close();
-            levelsPhysicalTiles.searchSolidTile.Close();
+            levelsSolidTiles.searchSolidTile.Close();
             if (lp != null)
                 lp.Close();
             if (sa != null)
                 sa.Close();
+            if (sp != null)
+                sp.Close();
             settings.Save();
         }
         private void Levels_FormClosed(object sender, FormClosedEventArgs e)

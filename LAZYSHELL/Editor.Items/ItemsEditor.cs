@@ -12,9 +12,10 @@ namespace LAZYSHELL
     public partial class ItemsEditor : Form
     {
         private long checksum;
-                private Settings settings = Settings.Default;
+        private Settings settings = Settings.Default;
         public Items itemsEditor;
         public Shops shopsEditor;
+        // constructor
         public ItemsEditor()
         {
             settings.Keystrokes[0x20] = "\x20";
@@ -41,6 +42,7 @@ namespace LAZYSHELL
             //
             checksum = Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops);
         }
+        // functions
         public void Assemble()
         {
             // Assemble the Model.Items
@@ -56,6 +58,7 @@ namespace LAZYSHELL
             foreach (Shop shop in Model.Shops)
                 shop.Assemble();
         }
+        #region Event handlers
         private void ItemsEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops) == checksum)
@@ -109,15 +112,6 @@ namespace LAZYSHELL
             new ClearElements(Model.Shops, shopsEditor.Index, "CLEAR SHOPS...").ShowDialog();
             shopsEditor.RefreshShops();
         }
-        private void showItems_Click(object sender, EventArgs e)
-        {
-            itemsEditor.Visible = showItems.Checked;
-        }
-        private void showShops_Click(object sender, EventArgs e)
-        {
-            shopsEditor.Visible = showShops.Checked;
-        }
-
         private void resetItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current item. Go ahead with reset?",
@@ -126,7 +120,6 @@ namespace LAZYSHELL
             itemsEditor.Item = new Item(Model.Data, itemsEditor.Index);
             itemsEditor.RefreshItems();
         }
-
         private void resetShopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current shop. Go ahead with reset?",
@@ -135,5 +128,14 @@ namespace LAZYSHELL
             shopsEditor.Shop = new Shop(Model.Data, shopsEditor.Index);
             shopsEditor.RefreshShops();
         }
+        private void showItems_Click(object sender, EventArgs e)
+        {
+            itemsEditor.Visible = showItems.Checked;
+        }
+        private void showShops_Click(object sender, EventArgs e)
+        {
+            shopsEditor.Visible = showShops.Checked;
+        }
+        #endregion
     }
 }

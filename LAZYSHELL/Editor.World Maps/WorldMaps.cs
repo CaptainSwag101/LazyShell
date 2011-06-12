@@ -567,6 +567,7 @@ namespace LAZYSHELL
             {
                 for (int x = 0; x < buffer.Width / 16; x++)
                 {
+                    if (y + y_ < 0 || x + x_ < 0) continue;
                     Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileSet.TileSetLayer[(y + y_) * 16 + x + x_] = tile.Copy();
                     tileSet.TileSetLayer[(y + y_) * 16 + x + x_].TileIndex = (y + y_) * 16 + x + x_;
@@ -749,7 +750,7 @@ namespace LAZYSHELL
                 DrawHoverBox(e.Graphics);
 
             if (buttonToggleCartGrid.Checked)
-                overlay.DrawCartographicGrid(e.Graphics, Color.Gray, pictureBoxTileset.Size, new Size(16, 16), 1);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxTileset.Size, new Size(16, 16), 1);
 
             if (overlay.SelectTS != null)
                 overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
@@ -990,6 +991,25 @@ namespace LAZYSHELL
                 return;
             RefreshWorldMap();
         }
+        private void resetWorldMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current world map. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            int pointer = Bits.GetShort(Model.Data, worldMap.Tileset * 2 + 0x3E0014);
+            int offset = 0x3E0000 + pointer + 1;
+            Model.WorldMapTileSets[worldMap.Tileset] = Comp.Decompress(Model.Data, offset, 0x800);
+            worldMap = new WorldMap(Model.Data, index);
+            RefreshWorldMap();
+        }
+        private void resetMapPointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current map point. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            mapPoint = new MapPoint(Model.Data, index_l);
+            RefreshMapPointEditor();
+        }
         // context menu strip
         private void mirrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1004,26 +1024,5 @@ namespace LAZYSHELL
             Do.Export(tileSetImage, "worldMap." + index.ToString("d2") + ".png");
         }
         #endregion
-
-        private void resetWorldMapToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("You're about to undo all changes to the current world map. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return;
-            int pointer = Bits.GetShort(Model.Data, worldMap.Tileset * 2 + 0x3E0014);
-            int offset = 0x3E0000 + pointer + 1;
-            Model.WorldMapTileSets[worldMap.Tileset] = Comp.Decompress(Model.Data, offset, 0x800);
-            worldMap = new WorldMap(Model.Data, index);
-            RefreshWorldMap();
-        }
-
-        private void resetMapPointToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("You're about to undo all changes to the current map point. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return;
-            mapPoint = new MapPoint(Model.Data, index_l);
-            RefreshMapPointEditor();
-        }
     }
 }

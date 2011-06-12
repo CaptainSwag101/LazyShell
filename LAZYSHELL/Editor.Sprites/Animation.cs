@@ -25,9 +25,9 @@ namespace LAZYSHELL
         private ushort vramAllocation; public ushort VramAllocation { get { return vramAllocation; } set { vramAllocation = value; } }
         private ushort unknown;
 
-        private ArrayList sequences = new ArrayList(); public ArrayList Sequences { get { return sequences; } set { sequences = value; } }
-        private ArrayList molds = new ArrayList(); public ArrayList Molds { get { return molds; } set { molds = value; } }
-        private ArrayList uniqueTiles = new ArrayList(); public ArrayList UniqueTiles { get { return uniqueTiles; } set { uniqueTiles = value; } }
+        private List<Sequence> sequences = new List<Sequence>(); public List<Sequence> Sequences { get { return sequences; } set { sequences = value; } }
+        private List<Mold> molds = new List<Mold>(); public List<Mold> Molds { get { return molds; } set { molds = value; } }
+        private List<Mold.Tile> uniqueTiles = new List<Mold.Tile>(); public List<Mold.Tile> UniqueTiles { get { return uniqueTiles; } set { uniqueTiles = value; } }
 
         // Start
         public Animation(byte[] data, int index)
@@ -39,9 +39,9 @@ namespace LAZYSHELL
         }
         public void Refresh()
         {
-            sequences = new ArrayList();
-            molds = new ArrayList();
-            uniqueTiles = new ArrayList();
+            sequences = new List<Sequence>();
+            molds = new List<Mold>();
+            uniqueTiles = new List<Mold.Tile>();
 
             Sequence tSequence;
             Mold tMold;
@@ -120,7 +120,7 @@ namespace LAZYSHELL
                 for (int a = 0; a < 8; a++)
                 {
                     if ((a + (b * 8)) >= uniqueTiles.Count) break;
-                    temp = (Mold.Tile)uniqueTiles[a + (b * 8)];
+                    temp = uniqueTiles[a + (b * 8)];
                     int[] theTile = temp.Get16x16TilePixels();
                     for (y = 0; y < 16; y++)
                     {
@@ -178,7 +178,7 @@ namespace LAZYSHELL
                     if (m.Gridplane)
                     {
                         Bits.SetShort(temp, offset, (ushort)(mOffset + offset + 0x8000));
-                        Mold.Tile tile = (Mold.Tile)m.Tiles[0];
+                        Mold.Tile tile = m.Tiles[0];
                         if (tile.SubTiles != null)
                             mOffset += tile.TileSize - 2;
                     }
@@ -201,7 +201,7 @@ namespace LAZYSHELL
                 if (m.Tiles.Count == 0) continue;
                 if (m.Gridplane)
                 {
-                    Mold.Tile tile = (Mold.Tile)m.Tiles[0];
+                    Mold.Tile tile = m.Tiles[0];
                     if (tile.SubTiles == null)
                         continue;
                     temp[offset] = (byte)(tile.TileFormat & 3);

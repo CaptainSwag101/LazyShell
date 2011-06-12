@@ -12,8 +12,9 @@ namespace LAZYSHELL
 {
     public partial class Audio : Form
     {
+        // variables
         private long checksum;
-                private SoundPlayer soundPlayer = new SoundPlayer();
+        private SoundPlayer soundPlayer = new SoundPlayer();
         private byte[] wav;
         private int index { get { return (int)sampleNum.Value; } set { sampleNum.Value = value; } }
         private BRRSample[] audioSamples { get { return Model.AudioSamples; } set { Model.AudioSamples = value; } }
@@ -33,12 +34,25 @@ namespace LAZYSHELL
                 return 8000;
             }
         }
+        // constructor
         public Audio()
         {
             checksum = Do.GenerateChecksum(audioSamples);
             InitializeComponent();
+            label1.Text =
+                "TIPS: follow these steps to successfully import a .WAV file of your choosing.\n\n" +
+                "1. Download and install Audacity, a good free audio editing program.\n" +
+                "2. Export any single sample file from the ROM to a .WAV file from Lazy Shell.\n" +
+                "3. Open the .WAV file you wish to import into Audacity.\n" +
+                "4. Copy the .WAV data (Ctrl+A, then Ctrl+C) from Audacity.\n" +
+                "5. Open the exported sample .WAV file into Audacity.\n" +
+                "6. Paste the .WAV data copied from the file you wish to import (Ctrl+A, then Ctrl+V).\n" +
+                "7. Export the modified .WAV file from Audacity into a new .WAV file.\n" +
+                "8. You can now safely import this new .WAV file into the ROM in Lazy Shell.\n\n" + 
+                "The reason this works is because by using the same exported file with modified WAV data, it retains some obscure data from the original sample which is necessary to have in order to successfully import a .WAV file.";
             wav = BRR.Decode(audioSample.Sample, sampleRate);
         }
+        // functions
         private void DrawWavelength(Graphics g, int width, int height, byte[] wav)
         {
             int size = Bits.Get32Bit(wav, 0x0028) / 2;
@@ -55,10 +69,15 @@ namespace LAZYSHELL
             }
             g.DrawLines(new Pen(Color.Lime), points.ToArray());
         }
+        // event handlers
         private void sampleNum_ValueChanged(object sender, EventArgs e)
         {
             wav = BRR.Decode(audioSample.Sample, sampleRate);
             pictureBox1.Invalidate();
+        }
+        private void sampleRate_CheckedChanged(object sender, EventArgs e)
+        {
+            wav = BRR.Decode(audioSample.Sample, sampleRate);
         }
         private void play_Click(object sender, EventArgs e)
         {
@@ -87,6 +106,23 @@ namespace LAZYSHELL
         {
             DrawWavelength(e.Graphics, pictureBox1.Width, pictureBox1.Height, wav);
         }
+        private void pictureBox1_SizeChanged(object sender, EventArgs e)
+        {
+            pictureBox1.Invalidate();
+        }
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+        //
         private void Audio_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(audioSamples) == checksum)
@@ -108,28 +144,6 @@ namespace LAZYSHELL
                 return;
             }
         }
-        private void pictureBox1_SizeChanged(object sender, EventArgs e)
-        {
-            pictureBox1.Invalidate();
-        }
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-
-        }
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-
-        }
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-
-        }
-
-        private void sampleRate_CheckedChanged(object sender, EventArgs e)
-        {
-            wav = BRR.Decode(audioSample.Sample, sampleRate);
-        }
-
         private void save_Click(object sender, EventArgs e)
         {
             int i = 0;

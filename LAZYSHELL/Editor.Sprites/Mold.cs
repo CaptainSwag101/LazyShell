@@ -13,7 +13,7 @@ namespace LAZYSHELL
         private byte[] sm;
 
         // Local
-        private ArrayList tiles = new ArrayList(); public ArrayList Tiles { get { return tiles; } set { tiles = value; } }
+        private List<Tile> tiles = new List<Tile>(); public List<Tile> Tiles { get { return tiles; } set { tiles = value; } }
 
         private bool gridplane;
         public bool Gridplane
@@ -27,7 +27,7 @@ namespace LAZYSHELL
             }
         }
 
-        public void InitializeMold(byte[] sm, int offset, ArrayList uniqueTiles)
+        public void InitializeMold(byte[] sm, int offset, List<Tile> uniqueTiles)
         {
             if (Bits.GetShort(sm, offset) == 0xFFFF)
                 return;
@@ -248,7 +248,7 @@ namespace LAZYSHELL
             }
             return false;
         }
-        public byte[] Recompress(int baseOffset, ArrayList molds)
+        public byte[] Recompress(int baseOffset, List<Mold> molds)
         {
             byte[] mold = new byte[0x10000];
             int offset = 0;

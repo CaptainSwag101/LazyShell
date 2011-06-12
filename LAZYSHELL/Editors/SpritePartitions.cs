@@ -12,7 +12,7 @@ namespace LAZYSHELL
     {
         private Levels level;
         private NPCSpritePartitions[] npcSpritePartitions;
-
+        // constructor
         public SpritePartitions(Levels level, NPCSpritePartitions[] npcSpritePartitions)
         {
             this.level = level;
@@ -26,11 +26,7 @@ namespace LAZYSHELL
             byte4a.SelectedIndex = 0;
             byte4b.SelectedIndex = 0;
         }
-
-        private void searchButton_Click(object sender, EventArgs e)
-        {
-            LoadSearch();
-        }
+        // functions
         private void LoadSearch()
         {
             listBox1.Items.Clear();
@@ -190,12 +186,15 @@ namespace LAZYSHELL
                 if (!notFound) listBox1.Items.Add("Partition #" + i.ToString());
             }
         }
-
+        // event handlers
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             level.NPCMapHeader.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(11));
         }
-
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            LoadSearch();
+        }
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();

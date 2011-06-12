@@ -12,14 +12,12 @@ namespace LAZYSHELL
 
         public LevelNPCs npcs { get { return level.LevelNPCs; } set { level.LevelNPCs = value; } }
         private Object copyNPC;
-
         public NumericUpDown NpcXCoord { get { return npcX; } set { npcX = value; } }
         public NumericUpDown NpcYCoord { get { return npcY; } set { npcY = value; } }
         public TreeView NpcObjectTree { get { return npcObjectTree; } set { npcObjectTree = value; } }
-
         private NPCEditor findNPCNumber;
+        private Form sp;
         #endregion
-
         #region Methods
 
         private void InitializeNPCProperties()
@@ -548,7 +546,6 @@ namespace LAZYSHELL
             else
                 findNPCNumber.Reload(npcID.Value);
         }
-
         private int CalculateFreeNPCSpace()
         {
             int used = 0;
@@ -565,10 +562,10 @@ namespace LAZYSHELL
             }
             return 0x7BFF - used;
         }
-
+        //
         private void AddNewNPC()
         {
-            Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
+            Point o = new Point(Math.Abs(picture.Left) / zoom, Math.Abs(picture.Top) / zoom);
             Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeNPCSpace() >= 12)
             {
@@ -613,7 +610,7 @@ namespace LAZYSHELL
         }
         private void AddNewInstance()
         {
-            Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
+            Point o = new Point(Math.Abs(picture.Left) / zoom, Math.Abs(picture.Top) / zoom);
             Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeNPCSpace() >= 4)
             {
@@ -664,7 +661,7 @@ namespace LAZYSHELL
         }
         private void AddNewNPC(NPC e)
         {
-            Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
+            Point o = new Point(Math.Abs(picture.Left) / zoom, Math.Abs(picture.Top) / zoom);
             Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeNPCSpace() >= 12)
             {
@@ -709,7 +706,7 @@ namespace LAZYSHELL
         }
         private void AddNewInstance(NPC.Instance e)
         {
-            Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
+            Point o = new Point(Math.Abs(picture.Left) / zoom, Math.Abs(picture.Top) / zoom);
             Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeNPCSpace() >= 4)
             {
@@ -759,7 +756,6 @@ namespace LAZYSHELL
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
-
         #region Event Handlers
 
         private void npcObjectTree_AfterSelect(object sender, TreeViewEventArgs e)
@@ -792,7 +788,7 @@ namespace LAZYSHELL
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
 
             RefreshNPCProperties();
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void npcInsertObject_Click(object sender, System.EventArgs e)
         {
@@ -859,18 +855,21 @@ namespace LAZYSHELL
         {
             AddNewInstance();
         }
-
+        //
         private void openPartitions_Click(object sender, System.EventArgs e)
         {
-            Form openSpritePartitions = new SpritePartitions(this, npcSpritePartitions);
-            openSpritePartitions.Show();
+            if (sp != null && sp.Visible)
+                sp.BringToFront();
+            else
+                sp = new SpritePartitions(this, npcSpritePartitions);
+            sp.Show();
         }
         private void findNPCNum_Click(object sender, EventArgs e)
         {
             findNPCNumber.Show();
             findNPCNumber.BringToFront();
         }
-
+        //
         private void npcSpeedPlus_ValueChanged(object sender, System.EventArgs e)
         {
             if (updatingProperties) return;
@@ -882,7 +881,7 @@ namespace LAZYSHELL
             if (updatingProperties) return;
 
             npcs.EventORpack = (ushort)this.npcEventORPack.Value;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         public void npcID_ValueChanged(object sender, System.EventArgs e)
         {
@@ -891,7 +890,7 @@ namespace LAZYSHELL
             npcs.NPCID = (ushort)this.npcID.Value;
             overlay.DrawLevelNPCs(npcs, npcProperties);
             npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void npcMovement_ValueChanged(object sender, System.EventArgs e)
         {
@@ -940,7 +939,7 @@ namespace LAZYSHELL
                 npcs.InstancePropertyB = (byte)this.npcPropertyB.Value;
             else
                 npcs.PropertyB = (byte)this.npcPropertyB.Value;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void npcPropertyC_ValueChanged(object sender, System.EventArgs e)
         {
@@ -974,7 +973,7 @@ namespace LAZYSHELL
             }
             else
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void npcZCoord_ValueChanged(object sender, System.EventArgs e)
         {
@@ -1001,7 +1000,7 @@ namespace LAZYSHELL
             }
             else
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void npcYCoord_ValueChanged(object sender, System.EventArgs e)
         {
@@ -1027,7 +1026,7 @@ namespace LAZYSHELL
             }
             else
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void npcXCoord_ValueChanged(object sender, System.EventArgs e)
         {
@@ -1053,7 +1052,7 @@ namespace LAZYSHELL
             }
             else
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void npcsShowNPC_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -1080,7 +1079,7 @@ namespace LAZYSHELL
             }
             else
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void npcsZCoordPlusHalf_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -1107,14 +1106,12 @@ namespace LAZYSHELL
             }
             else
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void npcEngageType_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (updatingProperties) return;
-
             npcs.EngageType = (byte)this.npcEngageType.SelectedIndex;
-            updatingProperties = true;
             if (this.npcEngageType.SelectedIndex == 0)
             {
                 this.label104.Text = "NPC #+";  //propertyA
@@ -1151,13 +1148,8 @@ namespace LAZYSHELL
                 this.npcEventORPack.Maximum = 255;
                 this.npcAfterBattle.Enabled = true;
             }
-            updatingProperties = false;
             if (!updatingLevel && state.NPCs)
-            {
                 overlay.DrawLevelNPCs(npcs, npcProperties);
-
-            }
-
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1165,6 +1157,7 @@ namespace LAZYSHELL
             }
             else
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
+            picture.Invalidate();
         }
         private void npcMapHeader_ValueChanged(object sender, System.EventArgs e)
         {
@@ -1190,7 +1183,7 @@ namespace LAZYSHELL
             npcs.B4b0 = this.npcAttributes.GetItemChecked(13);
             npcs.B4b1 = this.npcAttributes.GetItemChecked(14);
         }
-
+        //
         private void npcMoveUp_Click(object sender, EventArgs e)
         {
             if (this.npcObjectTree.SelectedNode == null) return;
@@ -1309,7 +1302,7 @@ namespace LAZYSHELL
             else
                 AddNewNPC(npcs.Npc);
         }
-
+        //
         private void buttonGotoA_Click(object sender, EventArgs e)
         {
             if (npcEngageType.SelectedIndex == 2)
@@ -1330,7 +1323,7 @@ namespace LAZYSHELL
             Model.Program.EventScripts.EventNum.Value = npcMovement.Value;
             Model.Program.EventScripts.BringToFront();
         }
-
+        //
         private void npcAfterBattle_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updatingProperties) return;

@@ -12,6 +12,7 @@ namespace LAZYSHELL
 {
     public partial class GraphicEditor : Form
     {
+        #region Variables
         private Delegate update;
         private byte[] graphics;
         private byte[] graphicsBackup;
@@ -37,17 +38,17 @@ namespace LAZYSHELL
                 return length / format / 2;
             }
         }
-
+        private Bitmap graphicsImage, paletteImage;
+        // check variables
         private int mouseOverSubtile;
         private string mouseOverControl;
-
         private int currentPixel = 0;
         private int currentColor = 0;
         private int currentColorBack = 0;
         private int currentPalette = 0;
         private int zoom = 2;
-        private Bitmap graphicsImage, paletteImage;
-
+        #endregion
+        // constructor
         /// <summary>
         /// Loads the BPP graphic editor.
         /// </summary>
@@ -67,37 +68,6 @@ namespace LAZYSHELL
         {
             this.index = index;
             InitializeGraphicEditor(update, graphics, length, offset, paletteSet, start, format);
-        }
-        private void InitializeGraphicEditor(Delegate update, byte[] graphics, int length, int offset, PaletteSet paletteSet, int start, byte format)
-        {
-            this.update = update;
-            this.offset = offset;
-            this.length = length;
-            this.start = start;
-            this.currentPalette = start;
-            this.graphics = graphics;
-            this.graphicsBackup = new byte[graphics.Length];
-            graphics.CopyTo(graphicsBackup, 0);
-            this.paletteSet = paletteSet;
-            this.format = format;
-            this.overlay = new Overlay();
-
-            InitializeComponent();
-
-            panel110.Height = paletteSet.Palettes.Length * 8 + 4 - (start * 8);
-            pictureBoxPalette.Height = paletteSet.Palettes.Length * 8 - (start * 8);
-            pictureBoxGraphicSet.Height = maxHeight * zoom;
-            panel110.Focus();
-            size.Width = pictureBoxGraphicSet.Width / zoom / 8;
-            size.Height = pictureBoxGraphicSet.Height / zoom / 8;
-
-            sizeLabel.Text = size.Width.ToString() + "x" + size.Height.ToString();
-
-            SetGraphicSetImage();
-            SetPaletteImage();
-            pictureBoxColor.Invalidate();
-            pictureBoxColorBack.Invalidate();
-            this.BringToFront();
         }
         public void Reload(Delegate update, byte[] graphics, int length, int offset, PaletteSet paletteSet, int start, byte format)
         {
@@ -136,6 +106,38 @@ namespace LAZYSHELL
             this.index = index;
             Reload(update, graphics, length, offset, paletteSet, start, format);
         }
+        #region Functions
+        private void InitializeGraphicEditor(Delegate update, byte[] graphics, int length, int offset, PaletteSet paletteSet, int start, byte format)
+        {
+            this.update = update;
+            this.offset = offset;
+            this.length = length;
+            this.start = start;
+            this.currentPalette = start;
+            this.graphics = graphics;
+            this.graphicsBackup = new byte[graphics.Length];
+            graphics.CopyTo(graphicsBackup, 0);
+            this.paletteSet = paletteSet;
+            this.format = format;
+            this.overlay = new Overlay();
+
+            InitializeComponent();
+
+            panel110.Height = paletteSet.Palettes.Length * 8 + 4 - (start * 8);
+            pictureBoxPalette.Height = paletteSet.Palettes.Length * 8 - (start * 8);
+            pictureBoxGraphicSet.Height = maxHeight * zoom;
+            panel110.Focus();
+            size.Width = pictureBoxGraphicSet.Width / zoom / 8;
+            size.Height = pictureBoxGraphicSet.Height / zoom / 8;
+
+            sizeLabel.Text = size.Width.ToString() + "x" + size.Height.ToString();
+
+            SetGraphicSetImage();
+            SetPaletteImage();
+            pictureBoxColor.Invalidate();
+            pictureBoxColorBack.Invalidate();
+            this.BringToFront();
+        }
         private void SetGraphicSetImage()
         {
             int[] palette;
@@ -158,10 +160,9 @@ namespace LAZYSHELL
             paletteImage = new Bitmap(Do.PixelsToImage(palettePixels, 128, paletteSet.Palettes.Length * 8 - (start * 8)));
             pictureBoxPalette.Invalidate();
         }
-
-        private void pictureBoxPalette_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
+        #endregion
+        #region Event handlers
+        // picture boxes
         private void pictureBoxPalette_Paint(object sender, PaintEventArgs e)
         {
             if (paletteImage != null)
@@ -169,7 +170,24 @@ namespace LAZYSHELL
             Point p = new Point(currentColor * 8, currentPalette * 8 - (start * 8));
             e.Graphics.DrawRectangle(new Pen(Color.Red), new Rectangle(p.X, p.Y, 7, 7));
         }
-
+        private void pictureBoxPalette_MouseClick(object sender, MouseEventArgs e)
+        {
+        }
+        private void pictureBoxPalette_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (format == 0x10 && e.X / 8 > 3)
+                return;
+            pictureBoxPalette.Focus();
+            currentPalette = e.Y / 8 + start;
+            if (e.Button == MouseButtons.Left)
+                currentColor = e.X / 8;
+            else if (e.Button == MouseButtons.Right)
+                currentColorBack = e.X / 8;
+            pictureBoxPalette.Invalidate();
+            pictureBoxColor.Invalidate();
+            pictureBoxColorBack.Invalidate();
+            SetGraphicSetImage();
+        }
         private void pictureBoxGraphicSet_Paint(object sender, PaintEventArgs e)
         {
             if (graphicsImage == null) return;
@@ -183,9 +201,9 @@ namespace LAZYSHELL
 
             Size s = new Size(graphicsImage.Width * zoom, graphicsImage.Height * zoom);
             if (zoom >= 4 && graphicShowPixelGrid.Checked)
-                overlay.DrawCartographicGrid(e.Graphics, Color.DarkRed, s, new Size(1, 1), zoom);
+                overlay.DrawCartesianGrid(e.Graphics, Color.DarkRed, s, new Size(1, 1), zoom);
             if (graphicShowGrid.Checked)
-                overlay.DrawCartographicGrid(e.Graphics, Color.Gray, s, new Size(8, 8), zoom);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, s, new Size(8, 8), zoom);
         }
         private void pictureBoxGraphicSet_MouseDown(object sender, MouseEventArgs e)
         {
@@ -277,8 +295,39 @@ namespace LAZYSHELL
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
         }
-
-        // Graphic Set Editor context menu items
+        private void pictureBoxColor_Paint(object sender, PaintEventArgs e)
+        {
+            int color = paletteSet.Palettes[currentPalette][currentColor];
+            SolidBrush brush = new SolidBrush(Color.FromArgb(color));
+            e.Graphics.FillRectangle(brush, new Rectangle(0, 0, 62, 62));
+        }
+        private void pictureBoxColorBack_Paint(object sender, PaintEventArgs e)
+        {
+            int color = paletteSet.Palettes[currentPalette][currentColorBack];
+            SolidBrush brush = new SolidBrush(Color.FromArgb(color));
+            e.Graphics.FillRectangle(brush, new Rectangle(0, 0, 62, 62));
+        }
+        private void panel109_Scroll(object sender, ScrollEventArgs e)
+        {
+            pictureBoxGraphicSet.Invalidate();
+            panel109.Invalidate();
+        }
+        private void panel109_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyData == (Keys.Shift | Keys.Left))
+                widthDecrease_Click(null, null);
+            else if (e.KeyData == (Keys.Shift | Keys.Right))
+                widthIncrease_Click(null, null);
+            else if (e.KeyData == (Keys.Shift | Keys.Up))
+                heightDecrease_Click(null, null);
+            else if (e.KeyData == (Keys.Shift | Keys.Down))
+                heightIncrease_Click(null, null);
+        }
+        private void panel109_MouseDown(object sender, MouseEventArgs e)
+        {
+            panel110.Focus();
+        }
+        // context menu items
         private void setSubtileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -363,8 +412,7 @@ namespace LAZYSHELL
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
         }
-
-        // Graphic Set Editor toolstrip buttons
+        // toolstrip buttons
         private void graphicZoomIn_Click(object sender, EventArgs e)
         {
             subtileDraw.Checked = false;
@@ -460,35 +508,6 @@ namespace LAZYSHELL
             else
                 pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorFill.cur");
         }
-
-        private void GraphicEditor_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            buttonReset_Click(null, null);
-        }
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            graphics.CopyTo(graphicsBackup, 0);
-            this.Close();
-            if (!autoUpdate.Checked)
-                update.DynamicInvoke();
-        }
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void buttonReset_Click(object sender, EventArgs e)
-        {
-            graphicsBackup.CopyTo(graphics, 0);
-            if (autoUpdate.Checked)
-                update.DynamicInvoke();
-            SetGraphicSetImage();
-        }
-        private void panel109_Scroll(object sender, ScrollEventArgs e)
-        {
-            pictureBoxGraphicSet.Invalidate();
-            panel109.Invalidate();
-        }
-
         private void widthDecrease_Click(object sender, EventArgs e)
         {
             if (size.Width == 1) return;
@@ -521,66 +540,40 @@ namespace LAZYSHELL
 
             sizeLabel.Text = size.Width.ToString() + "x" + size.Height.ToString();
         }
-        private void pictureBoxGraphicSet_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-        }
-
-        private void pictureBoxPalette_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (format == 0x10 && e.X / 8 > 3)
-                return;
-            pictureBoxPalette.Focus();
-            currentPalette = e.Y / 8 + start;
-            if (e.Button == MouseButtons.Left)
-                currentColor = e.X / 8;
-            else if (e.Button == MouseButtons.Right)
-                currentColorBack = e.X / 8;
-            pictureBoxPalette.Invalidate();
-            pictureBoxColor.Invalidate();
-            pictureBoxColorBack.Invalidate();
-            SetGraphicSetImage();
-        }
-
-        private void pictureBoxColor_Paint(object sender, PaintEventArgs e)
-        {
-            int color = paletteSet.Palettes[currentPalette][currentColor];
-            SolidBrush brush = new SolidBrush(Color.FromArgb(color));
-            e.Graphics.FillRectangle(brush, new Rectangle(0, 0, 62, 62));
-        }
-        private void pictureBoxColorBack_Paint(object sender, PaintEventArgs e)
-        {
-            int color = paletteSet.Palettes[currentPalette][currentColorBack];
-            SolidBrush brush = new SolidBrush(Color.FromArgb(color));
-            e.Graphics.FillRectangle(brush, new Rectangle(0, 0, 62, 62));
-        }
-
-        private void panel109_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyData == (Keys.Shift | Keys.Left))
-                widthDecrease_Click(null, null);
-            else if (e.KeyData == (Keys.Shift | Keys.Right))
-                widthIncrease_Click(null, null);
-            else if (e.KeyData == (Keys.Shift | Keys.Up))
-                heightDecrease_Click(null, null);
-            else if (e.KeyData == (Keys.Shift | Keys.Down))
-                heightIncrease_Click(null, null);
-        }
-
-        private void panel109_MouseDown(object sender, MouseEventArgs e)
-        {
-            panel110.Focus();
-        }
-
+        //
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             if (subtileDraw.Checked || subtileErase.Checked || subtileDropper.Checked ||
                 graphicZoomIn.Checked || graphicZoomOut.Checked)
                 e.Cancel = true;
         }
-
+        // closing/saving
+        private void GraphicEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            buttonReset_Click(null, null);
+        }
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            graphics.CopyTo(graphicsBackup, 0);
+            this.Close();
+            if (!autoUpdate.Checked)
+                update.DynamicInvoke();
+        }
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            graphicsBackup.CopyTo(graphics, 0);
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
+            SetGraphicSetImage();
+        }
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             update.DynamicInvoke();
         }
+        #endregion
     }
 }

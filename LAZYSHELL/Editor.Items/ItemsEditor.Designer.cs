@@ -250,7 +250,7 @@
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resetItemToolStripMenuItem,
             this.resetShopToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";

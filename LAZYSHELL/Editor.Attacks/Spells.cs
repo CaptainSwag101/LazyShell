@@ -11,6 +11,7 @@ namespace LAZYSHELL
 {
     public partial class Spells : Form
     {
+        #region Variables
         private bool updating = false;
         private Spell[] spells { get { return Model.Spells; } set { Model.Spells = value; } }
         private Spell spell { get { return spells[index]; } set { spells[index] = value; } }
@@ -22,6 +23,8 @@ namespace LAZYSHELL
         private bool textCodeFormat { get { return !byteOrText.Checked; } set { byteOrText.Checked = !value; } }
         private Bitmap descriptionFrame;
         private Bitmap descriptionText;
+        #endregion
+        // constructor
         public Spells()
         {
             this.settings.KeystrokesMenu[0x20] = "\x20";
@@ -31,6 +34,7 @@ namespace LAZYSHELL
             RefreshSpells();
             RefreshTimingSpellsTwo();
         }
+        #region Functions
         public void RefreshSpells()
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -462,6 +466,7 @@ namespace LAZYSHELL
                 "The maximum number of times the player can press an \n" +
                 "ABXY button to increase damage during the spell animation.");
         }
+        #endregion
         #region Event Handlers
         private void spellNum_ValueChanged(object sender, EventArgs e)
         {

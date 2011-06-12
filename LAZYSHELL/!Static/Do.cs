@@ -1029,6 +1029,194 @@ namespace LAZYSHELL
             }
             return color;
         }
+        private static int stacksize = -1;
+        public static void Fill(byte[] src, ushort value, ushort fillValue, int x, int y, int width, int height, string dir)
+        {
+            // first, fill this/these tile(s)
+            Bits.SetShort(src, Solidity.Instance.PixelTiles[y * 1024 + x] * 2, fillValue);
+            //
+            int seeValue = 0;
+            // look WEST, if not travelling east or at boundary
+            if (dir != "east" && x >= 32)
+            {
+                // see what tile is to the west
+                seeValue = Bits.GetShort(src, Solidity.Instance.PixelTiles[y * 1024 + x - 32] * 2);
+                // if fillable, fill tile and create spawn travelling west
+                if (seeValue == value)
+                    Fill(src, value, fillValue, x - 32, y, width, height, "west");
+            }
+            //  look EAST, if not travelling west or at boundary, and at least 1st row all fillable
+            if (dir != "west" && x < width - 32)
+            {
+                // see what color is to the east
+                seeValue = Bits.GetShort(src, Solidity.Instance.PixelTiles[y * 1024 + x + 32] * 2);
+                // if fillable, fill pixel and create spawn travelling east
+                if (seeValue == value)
+                    Fill(src, value, fillValue, x + 32, y, width, height, "east");
+            }
+            //  look NORTH, if not travelling south or at boundary
+            if (dir != "south" && y >= 16)
+            {
+                // see what color is to the north
+                seeValue = Bits.GetShort(src, Solidity.Instance.PixelTiles[(y - 16) * 1024 + x] * 2);
+                // if fillable, fill pixel and create spawn travelling north
+                if (seeValue == value)
+                    Fill(src, value, fillValue, x, y - 16, width, height, "north");
+            }
+            //  look SOUTH, if not travelling north or at boundary, and at least 1st column all fillable
+            if (dir != "north" && y < height - 16)
+            {
+                // see what color is to the south
+                seeValue = Bits.GetShort(src, Solidity.Instance.PixelTiles[(y + 16) * 1024 + x] * 2);
+                // if fillable, fill pixel and create spawn travelling south
+                if (seeValue == value)
+                    Fill(src, value, fillValue, x, y + 16, width, height, "south");
+            }
+
+
+            // look NORTHWEST, if not travelling southeast or at boundary
+            if (dir != "southeast" && x >= 16 && y >= 8)
+            {
+                // see what tile is to the NORTHWEST
+                seeValue = Bits.GetShort(src, Solidity.Instance.PixelTiles[(y - 8) * 1024 + x - 16] * 2);
+                // if fillable, fill tile and create spawn travelling northwest
+                if (seeValue == value)
+                    Fill(src, value, fillValue, x - 16, y - 8, width, height, "northwest");
+            }
+            //  look NORTHEAST, if not travelling southwest or at boundary
+            if (dir != "southwest" && x < width - 16 && y >= 8)
+            {
+                // see what color is to the NORTHEAST
+                seeValue = Bits.GetShort(src, Solidity.Instance.PixelTiles[(y - 8) * 1024 + x + 16] * 2);
+                // if fillable, fill pixel and create spawn travelling northeast
+                if (seeValue == value)
+                    Fill(src, value, fillValue, x + 16, y - 8, width, height, "northeast");
+            }
+            //  look SOUTHWEST, if not travelling northeast or at boundary
+            if (dir != "northeast" && x >= 16 && y < height - 8)
+            {
+                // see what color is to the SOUTHWEST
+                seeValue = Bits.GetShort(src, Solidity.Instance.PixelTiles[(y + 8) * 1024 + x - 16] * 2);
+                // if fillable, fill pixel and create spawn travelling southwest
+                if (seeValue == value)
+                    Fill(src, value, fillValue, x - 16, y + 8, width, height, "southwest");
+            }
+            //  look SOUTHEAST, if not travelling northwest or at boundary
+            if (dir != "northwest" && x < width - 16 && y < height - 8)
+            {
+                // see what color is to the SOUTHEAST
+                seeValue = Bits.GetShort(src, Solidity.Instance.PixelTiles[(y + 8) * 1024 + x + 16] * 2);
+                // if fillable, fill pixel and create spawn travelling southeast
+                if (seeValue == value)
+                    Fill(src, value, fillValue, x + 16, y + 8, width, height, "southeast");
+            }
+        }
+        public static void Fill(int[][] src, int layer, bool chkall, int value, int[] fillValues, int x, int y, int width, int height, int vwidth, int vheight, string dir)
+        {
+            stacksize++;
+            // first, fill this/these tile(s)
+            int[] otherlayers;
+            if (layer == 0)
+                otherlayers = new int[] { 1, 2 };
+            else if (layer == 1)
+                otherlayers = new int[] { 0, 2 };
+            else
+                otherlayers = new int[] { 0, 1 };
+            int a = 0;
+            int b = 0;
+            for (b = 0; b < vheight && y + b < height; b++)
+            {
+                if (src[layer][(y + b) * width + x] != value)
+                    break;
+                if (chkall &&
+                    (src[otherlayers[0]][(y + b) * width + x] != 0 ||
+                     src[otherlayers[1]][(y + b) * width + x] != 0))
+                    break;
+                for (a = 0; a < vwidth && x + a < width; a++)
+                {
+                    if (src[layer][(y + b) * width + x + a] != value)
+                        break;
+                    if (chkall &&
+                        (src[otherlayers[0]][(y + b) * width + x] != 0 ||
+                         src[otherlayers[1]][(y + b) * width + x] != 0))
+                        break;
+                    src[layer][(y + b) * width + x + a] = fillValues[b * vwidth + a];
+                }
+            }
+
+            // look WEST, if not travelling east or at boundary
+            if (dir != "east" && x - vwidth + 1 > 0)
+            {
+                // see what tile is to the west
+                bool[] fillable = new bool[] { true, true, true };
+                for (int l = 0; l < 3; l++)
+                    for (int c = 0; c < vwidth && x - c > 0; c++)
+                        if (l == layer && src[l][y * width + x - c - 1] != value)
+                            fillable[l] = false;
+                        else if (l != layer && src[l][y * width + x - c - 1] != 0)
+                            fillable[l] = false;
+                // if fillable, fill tile and create spawn travelling west
+                if (fillable[layer])
+                    if (!chkall)
+                        Fill(src, layer, chkall, value, fillValues, x - vwidth, y, width, height, vwidth, vheight, "west");
+                    else if (fillable[otherlayers[0]] && fillable[otherlayers[1]])
+                        Fill(src, layer, chkall, value, fillValues, x - vwidth, y, width, height, vwidth, vheight, "west");
+            }
+            //  look EAST, if not travelling west or at boundary, and at least 1st row all fillable
+            if (dir != "west" && x < width - vwidth && a == vwidth)
+            {
+                // see what color is to the east
+                bool[] fillable = new bool[] { true, true, true };
+                for (int l = 0; l < 3; l++)
+                    for (int c = 0; c < vwidth && x + c < width - vwidth; c++)
+                        if (l == layer && src[l][y * width + x + c + vwidth] != value)
+                            fillable[l] = false;
+                        else if (l != layer && src[l][y * width + x + c + vwidth] != 0)
+                            fillable[l] = false;
+                // if fillable, fill pixel and create spawn travelling east
+                if (fillable[layer])
+                    if (!chkall)
+                        Fill(src, layer, chkall, value, fillValues, x + vwidth, y, width, height, vwidth, vheight, "east");
+                    else if (fillable[otherlayers[0]] && fillable[otherlayers[1]])
+                        Fill(src, layer, chkall, value, fillValues, x + vwidth, y, width, height, vwidth, vheight, "east");
+            }
+            //  look NORTH, if not travelling south or at boundary
+            if (dir != "south" && y - vheight + 1 > 0)
+            {
+                // see what color is to the north
+                bool[] fillable = new bool[] { true, true, true };
+                for (int l = 0; l < 3; l++)
+                    for (int d = 0; d < vheight && y - d > 0; d++)
+                        if (l == layer && src[l][(y - d - 1) * width + x] != value)
+                            fillable[l] = false;
+                        else if (l != layer && src[l][(y - d - 1) * width + x] != 0)
+                            fillable[l] = false;
+                // if fillable, fill pixel and create spawn travelling north
+                if (fillable[layer])
+                    if (!chkall)
+                        Fill(src, layer, chkall, value, fillValues, x, y - vheight, width, height, vwidth, vheight, "north");
+                    else if (fillable[otherlayers[0]] && fillable[otherlayers[1]])
+                        Fill(src, layer, chkall, value, fillValues, x, y - vheight, width, height, vwidth, vheight, "north");
+            }
+            //  look SOUTH, if not travelling north or at boundary, and at least 1st column all fillable
+            if (dir != "north" && y < height - vheight && b == vheight)
+            {
+                // see what color is to the south
+                bool[] fillable = new bool[] { true, true, true };
+                for (int l = 0; l < 3; l++)
+                    for (int d = 0; d < vheight && y + d < height - vheight; d++)
+                        if (l == layer && src[l][(y + d + vheight) * width + x] != value)
+                            fillable[l] = false;
+                        else if (l != layer && src[l][(y + d + vheight) * width + x] != 0)
+                            fillable[l] = false;
+                // if fillable, fill pixel and create spawn travelling south
+                if (fillable[layer])
+                    if (!chkall)
+                        Fill(src, layer, chkall, value, fillValues, x, y + vheight, width, height, vwidth, vheight, "south");
+                    else if (fillable[otherlayers[0]] && fillable[otherlayers[1]])
+                        Fill(src, layer, chkall, value, fillValues, x, y + vheight, width, height, vwidth, vheight, "south");
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -2426,6 +2614,48 @@ namespace LAZYSHELL
         {
             Colorize(src, h, s, 0.0, 255);
         }
+        public static Color HSLtoRGBColor(double h, double s, double l)
+        {
+            double r = 0, g = 0, b = 0;
+            double temp1, temp2;
+            if (l == 0)
+            {
+                r = g = b = 0;
+            }
+            else
+            {
+                if (s == 0)
+                {
+                    r = g = b = l;
+                }
+                else
+                {
+                    temp2 = ((l <= 0.5) ? l * (1.0 + s) : l + s - (l * s));
+                    temp1 = 2.0 * l - temp2;
+                    double[] t3 = new double[] { h + 1.0 / 3.0, h, h - 1.0 / 3.0 };
+                    double[] clr = new double[] { 0, 0, 0 };
+                    for (int a = 0; a < 3; a++)
+                    {
+                        if (t3[a] < 0)
+                            t3[a] += 1.0;
+                        if (t3[a] > 1)
+                            t3[a] -= 1.0;
+                        if (6.0 * t3[a] < 1.0)
+                            clr[a] = temp1 + (temp2 - temp1) * t3[a] * 6.0;
+                        else if (2.0 * t3[a] < 1.0)
+                            clr[a] = temp2;
+                        else if (3.0 * t3[a] < 2.0)
+                            clr[a] = (temp1 + (temp2 - temp1) * ((2.0 / 3.0) - t3[a]) * 6.0);
+                        else
+                            clr[a] = temp1;
+                    }
+                    r = clr[0];
+                    g = clr[1];
+                    b = clr[2];
+                }
+            }
+            return Color.FromArgb((int)(r * 255.0) & 0xF8, (int)(g * 255.0) & 0xF8, (int)(b * 255.0) & 0xF8);
+        }
         /// <summary>
         /// Apply a gradient effect to a pixel array.
         /// </summary>
@@ -2653,6 +2883,8 @@ namespace LAZYSHELL
             string temp = "";
             for (int i = 0; i < chars.Length; i++)
             {
+                if (chars[i] >= keystrokes.Count)
+                    continue;
                 if (keystrokes[chars[i]] == "")
                     temp += "_";
                 temp += keystrokes[chars[i]];
@@ -3225,7 +3457,7 @@ namespace LAZYSHELL
             }
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
                 e.DrawBackground();
-            e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 14)), new Point(e.Bounds.X, e.Bounds.Y));
+            e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 15)), new Point(e.Bounds.X, e.Bounds.Y));
         }
         public static void DrawName(
             object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
@@ -3238,6 +3470,12 @@ namespace LAZYSHELL
             FontCharacter[] fontCharacters, int[] palette, bool shadow, Bitmap bgimage)
         {
             DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, false, shadow, bgimage);
+        }
+        public static void DrawName(
+            object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
+            FontCharacter[] fontCharacters, int[] palette, bool shadow, bool lastEmpty, Bitmap bgimage)
+        {
+            DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, lastEmpty, shadow, bgimage);
         }
         public static void DrawName(
             object sender, DrawItemEventArgs e, Preview preview, DDlistName names,

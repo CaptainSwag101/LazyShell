@@ -344,9 +344,9 @@ namespace LAZYSHELL
             this.searchResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchResults.FormattingEnabled = true;
             this.searchResults.IntegralHeight = false;
-            this.searchResults.Location = new System.Drawing.Point(2, 58);
+            this.searchResults.Location = new System.Drawing.Point(2, 60);
             this.searchResults.Name = "searchResults";
-            this.searchResults.Size = new System.Drawing.Size(228, 466);
+            this.searchResults.Size = new System.Drawing.Size(228, 464);
             this.searchResults.TabIndex = 329;
             this.searchResults.SelectedIndexChanged += new System.EventHandler(this.searchResults_SelectedIndexChanged);
             // 
@@ -546,7 +546,7 @@ namespace LAZYSHELL
             this.spriteNameTextBox,
             this.searchSpriteNames});
             this.toolStrip3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.toolStrip3.Location = new System.Drawing.Point(2, 16);
+            this.toolStrip3.Location = new System.Drawing.Point(2, 18);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(228, 42);
@@ -564,12 +564,13 @@ namespace LAZYSHELL
             // 
             // label8
             // 
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label8.Dock = System.Windows.Forms.DockStyle.Top;
             this.label8.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(2, 0);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label8.Size = new System.Drawing.Size(228, 16);
+            this.label8.Size = new System.Drawing.Size(228, 18);
             this.label8.TabIndex = 462;
             this.label8.Text = "FIND NPCS CONTAINING SPRITE...";
             this.label8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -589,6 +590,7 @@ namespace LAZYSHELL
             this.MinimizeBox = false;
             this.Name = "NPCEditor";
             this.Text = "NPCS - Lazy Shell";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NPCEditor_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.spritePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.yPixelShift)).EndInit();

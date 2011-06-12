@@ -2632,8 +2632,14 @@ namespace LAZYSHELL
             else
             {
                 ActionQueueCommand temp = (ActionQueueCommand)EventScriptTree.SelectedNode.Tag;
+                if (temp.ReadPointer() != 0)
+                {
+                    e.Node.ContextMenuStrip = contextMenuStripGoto;
+                    goToToolStripMenuItem.Text = "Goto offset...";
+                    goToToolStripMenuItem.Click += new EventHandler(goToOffset_Click);
+                }
                 // 0xa0 - 0xa6  // 0xd8 - 0xde
-                if (temp.Opcode == 0xA0 || temp.Opcode == 0xA1 || temp.Opcode == 0xA2 ||
+                else if (temp.Opcode == 0xA0 || temp.Opcode == 0xA1 || temp.Opcode == 0xA2 ||
                     temp.Opcode == 0xA4 || temp.Opcode == 0xA5 || temp.Opcode == 0xA6 ||
                     temp.Opcode == 0xD8 || temp.Opcode == 0xD9 || temp.Opcode == 0xDA ||
                     temp.Opcode == 0xDC || temp.Opcode == 0xDD || temp.Opcode == 0xDE)
@@ -2691,7 +2697,6 @@ namespace LAZYSHELL
                 editedNode = null;
                 buttonApplyEvent.Enabled = false;
             }
-
             try
             {
                 esc = (EventScriptCommand)eventScripts[currentScript].Commands[EventScriptTree.SelectedNode.Index];
@@ -3467,7 +3472,7 @@ namespace LAZYSHELL
             EventScriptCommand temp = (EventScriptCommand)EventScriptTree.SelectedNode.Tag;
             int num = Bits.GetShort(temp.EventData, 1) & 0xFFF;
 
-            if (Model.Program.Dialogues == null)
+            if (Model.Program.Dialogues == null || !Model.Program.Dialogues.Visible)
                 Model.Program.CreateDialoguesWindow();
 
             Model.Program.Dialogues.DialogueNum.Value = num;
@@ -3555,7 +3560,27 @@ namespace LAZYSHELL
         {
             if (EventScriptTree.SelectedNode == null) return;
             EventActionCommand temp = (EventActionCommand)EventScriptTree.SelectedNode.Tag;
-            int pointer = temp.ReadPointer() + (eventScript.BaseOffset & 0xFF0000);
+            int pointer;
+
+            if (isActionScript)
+            {
+                pointer = temp.ReadPointer() + (actionScript.Offset & 0xFF0000);
+                foreach (ActionQueue script in actionScripts)
+                {
+                    foreach (ActionQueueCommand action in script.Commands)
+                    {
+                        if (action.Offset + action.EventData.Length > pointer || action.Offset >= pointer)
+                        {
+                            index = script.Index;
+                            treeViewWrapper.SelectNode(action);
+                            return;
+                        }
+                    }
+                }
+                return;
+            }            
+
+            pointer = temp.ReadPointer() + (eventScript.BaseOffset & 0xFF0000);
             foreach (EventScript script in eventScripts)
             {
                 foreach (EventScriptCommand command in script.Commands)

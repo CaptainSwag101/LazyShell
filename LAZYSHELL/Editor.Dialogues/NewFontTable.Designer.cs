@@ -351,7 +351,7 @@
             // resetTable
             // 
             this.resetTable.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.resetTable.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.resetTable.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetTable.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetTable.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetTable.Name = "resetTable";

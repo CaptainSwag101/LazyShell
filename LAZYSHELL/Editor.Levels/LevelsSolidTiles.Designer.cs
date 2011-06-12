@@ -33,6 +33,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.physicalTileNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.reset = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.physicalTileSearchButton = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel27 = new System.Windows.Forms.Panel();
@@ -162,14 +164,14 @@
             this.panelPhysicalTile.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelPhysicalTile.Location = new System.Drawing.Point(217, 0);
             this.panelPhysicalTile.Name = "panelPhysicalTile";
-            this.panelPhysicalTile.Size = new System.Drawing.Size(36, 672);
+            this.panelPhysicalTile.Size = new System.Drawing.Size(36, 664);
             this.panelPhysicalTile.TabIndex = 173;
             // 
             // pictureBoxPhysicalTile
             // 
             this.pictureBoxPhysicalTile.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBoxPhysicalTile.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
-            this.pictureBoxPhysicalTile.Location = new System.Drawing.Point(0, -116);
+            this.pictureBoxPhysicalTile.Location = new System.Drawing.Point(0, -124);
             this.pictureBoxPhysicalTile.Name = "pictureBoxPhysicalTile";
             this.pictureBoxPhysicalTile.Size = new System.Drawing.Size(32, 784);
             this.pictureBoxPhysicalTile.TabIndex = 0;
@@ -181,6 +183,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.physicalTileNum,
             this.toolStripSeparator1,
+            this.reset,
+            this.toolStripSeparator2,
             this.physicalTileSearchButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -222,6 +226,22 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.Text = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // physicalTileSearchButton
             // 
             this.physicalTileSearchButton.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -246,7 +266,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(211, 647);
+            this.panel1.Size = new System.Drawing.Size(211, 639);
             this.panel1.TabIndex = 443;
             // 
             // panel27
@@ -1229,11 +1249,11 @@
             this.checkSolidEdgeSW.TabIndex = 389;
             this.checkSolidEdgeSW.Text = "SW edge solid";
             // 
-            // LevelsPhysicalTiles
+            // LevelsSolidTiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(253, 672);
+            this.ClientSize = new System.Drawing.Size(253, 664);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
@@ -1242,7 +1262,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "LevelsPhysicalTiles";
+            this.Name = "LevelsSolidTiles";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LevelsPhysicalTiles_FormClosed);
@@ -1379,5 +1399,7 @@
         private System.Windows.Forms.ComboBox solidEdgeNW;
         private System.Windows.Forms.Label checkSolidEdgeSE;
         private System.Windows.Forms.Label checkSolidEdgeSW;
+        private System.Windows.Forms.ToolStripButton reset;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

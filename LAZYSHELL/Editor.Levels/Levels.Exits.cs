@@ -12,6 +12,9 @@ namespace LAZYSHELL
 
         private LevelExits exits { get { return level.LevelExits; } set { level.LevelExits = value; } } // Exits for the current level
         private Object copyExit;
+        public TreeView ExitsFieldTree { get { return exitsFieldTree; } set { exitsFieldTree = value; } }
+        public NumericUpDown ExitX { get { return exitX; } set { exitX = value; } }
+        public NumericUpDown ExitY { get { return exitY; } set { exitY = value; } }
 
         #endregion
         #region Methods
@@ -251,9 +254,39 @@ namespace LAZYSHELL
             }
             return 0x179F - used;
         }
+        private void AddNewExit(Exit exit)
+        {
+            if (CalculateFreeExitSpace() >= 8)
+            {
+                this.exitsFieldTree.Focus();
+                if (exits.Count < 28)
+                {
+                    if (exitsFieldTree.Nodes.Count > 0)
+                        exits.AddNewExit(exitsFieldTree.SelectedNode.Index + 1, exit);
+                    else
+                        exits.AddNewExit(0, exit);
+                    int reselect;
+                    if (exitsFieldTree.Nodes.Count > 0)
+                        reselect = exitsFieldTree.SelectedNode.Index;
+                    else
+                        reselect = -1;
+                    exitsFieldTree.BeginUpdate();
+                    this.exitsFieldTree.Nodes.Clear();
+                    for (int i = 0; i < exits.Count; i++)
+                        this.exitsFieldTree.Nodes.Add(new TreeNode("EXIT #" + i.ToString()));
+                    this.exitsFieldTree.SelectedNode = this.exitsFieldTree.Nodes[reselect + 1];
+                    exitsFieldTree.EndUpdate();
+                }
+                else
+                    MessageBox.Show("Could not insert any more exit fields. The maximum number of exit fields allowed is 28.",
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("Could not insert the field. The total number of exits for all levels has exceeded the maximum allotted space.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         #endregion
         #region Event Handlers
-        public TreeView ExitsFieldTree { get { return exitsFieldTree; } set { exitsFieldTree = value; } }
         private void exitsFieldTree_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
         {
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
@@ -264,7 +297,7 @@ namespace LAZYSHELL
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             RefreshExitFieldProperties();
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void exits45LengthPlusHalf_CheckedChanged(object sender, EventArgs e)
         {
@@ -314,7 +347,7 @@ namespace LAZYSHELL
             {
                 this.exitType.SelectedIndex = 1;
             }
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void exitsMarioZCoord_ValueChanged(object sender, EventArgs e)
         {
@@ -352,7 +385,7 @@ namespace LAZYSHELL
             overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void exitsFieldLength_ValueChanged(object sender, EventArgs e)
         {
@@ -364,7 +397,7 @@ namespace LAZYSHELL
             overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void exitsMarioRadialPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -372,8 +405,6 @@ namespace LAZYSHELL
 
             exits.DestFace = (byte)this.exitDestFace.SelectedIndex;
         }
-        public NumericUpDown ExitX { get { return exitX; } set { exitX = value; } }
-        public NumericUpDown ExitY { get { return exitY; } set { exitY = value; } }
         private void exitsZ_ValueChanged(object sender, EventArgs e)
         {
             if (updatingProperties) return;
@@ -384,7 +415,7 @@ namespace LAZYSHELL
             overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void exitsY_ValueChanged(object sender, EventArgs e)
         {
@@ -397,7 +428,7 @@ namespace LAZYSHELL
                 overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void exitsX_ValueChanged(object sender, EventArgs e)
         {
@@ -410,7 +441,7 @@ namespace LAZYSHELL
                 overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void exitsFace_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -420,7 +451,7 @@ namespace LAZYSHELL
             exits.Face = (byte)this.exitFace.SelectedIndex;
             overlay.DrawLevelExits(exits);
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void exitsShowMessage_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -435,11 +466,11 @@ namespace LAZYSHELL
             if (updatingProperties) return;
 
             exits.Destination = (ushort)this.exitDest.SelectedIndex;
-            levelsTilemap.Picture.Invalidate();
+            picture.Invalidate();
         }
         private void exitsInsertField_Click(object sender, EventArgs e)
         {
-            Point o = new Point(Math.Abs(levelsTilemap.Picture.Left), Math.Abs(levelsTilemap.Picture.Top));
+            Point o = new Point(Math.Abs(picture.Left) / zoom, Math.Abs(picture.Top) / zoom);
             Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
             if (CalculateFreeExitSpace() >= 8)
             {
@@ -500,37 +531,6 @@ namespace LAZYSHELL
                 }
                 exitsFieldTree.EndUpdate();
             }
-        }
-        private void AddNewExit(Exit exit)
-        {
-            if (CalculateFreeExitSpace() >= 8)
-            {
-                this.exitsFieldTree.Focus();
-                if (exits.Count < 28)
-                {
-                    if (exitsFieldTree.Nodes.Count > 0)
-                        exits.AddNewExit(exitsFieldTree.SelectedNode.Index + 1, exit);
-                    else
-                        exits.AddNewExit(0, exit);
-                    int reselect;
-                    if (exitsFieldTree.Nodes.Count > 0)
-                        reselect = exitsFieldTree.SelectedNode.Index;
-                    else
-                        reselect = -1;
-                    exitsFieldTree.BeginUpdate();
-                    this.exitsFieldTree.Nodes.Clear();
-                    for (int i = 0; i < exits.Count; i++)
-                        this.exitsFieldTree.Nodes.Add(new TreeNode("EXIT #" + i.ToString()));
-                    this.exitsFieldTree.SelectedNode = this.exitsFieldTree.Nodes[reselect + 1];
-                    exitsFieldTree.EndUpdate();
-                }
-                else
-                    MessageBox.Show("Could not insert any more exit fields. The maximum number of exit fields allowed is 28.",
-                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-                MessageBox.Show("Could not insert the field. The total number of exits for all levels has exceeded the maximum allotted space.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void exitsCopyField_Click(object sender, EventArgs e)
         {

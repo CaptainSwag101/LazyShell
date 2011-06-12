@@ -229,6 +229,7 @@ namespace LAZYSHELL
             {
                 for (int x = 0; x < buffer.Width / 16; x++)
                 {
+                    if (y + y_ < 0 || x + x_ < 0) continue;
                     int index = (y + y_) * 16 + x + x_;
                     Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileSet.TileSetLayers[Layer][index] = tile.Copy();
@@ -358,7 +359,7 @@ namespace LAZYSHELL
                 DrawHoverBox(e.Graphics);
 
             if (buttonToggleCartGrid.Checked)
-                overlay.DrawCartographicGrid(e.Graphics, Color.Gray, pictureBox.Size, new Size(16, 16), 1);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBox.Size, new Size(16, 16), 1);
 
             if (overlay.SelectTS != null)
                 overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
@@ -429,6 +430,8 @@ namespace LAZYSHELL
             else
                 pictureBox.Cursor = Cursors.Cross;
             pictureBox.Invalidate();
+            int index = y / 16 * 16 + (x / 16);
+            labelTileIndex.Text = "Tile index: " + index + " ($" + index.ToString("X2") + ")";
         }
         public void PictureBoxTileset_MouseUp(object sender, MouseEventArgs e)
         {

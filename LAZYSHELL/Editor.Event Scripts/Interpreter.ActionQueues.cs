@@ -675,9 +675,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                         aqc.EventData[2].ToString());
                     break;
                 case 0x9E:
-                    sb.Append(aqc.Option.ToString() +
-                        ", min volume: " +
-                        aqc.EventData[2].ToString());
+                    sb.Append(aqc.Option + ", to volume: " + aqc.EventData[2]);
                     break;
                 case 0xA0:
                 case 0xA1:

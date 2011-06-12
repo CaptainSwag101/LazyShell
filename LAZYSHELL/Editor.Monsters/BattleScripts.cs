@@ -18,8 +18,8 @@ namespace LAZYSHELL
     {
         #region Variables
         private long checksum;
-                private Monsters monsterEditor;
-        private BattleScript[] battleScripts { get { return Model.BattleScripts; } set { Model.BattleScripts = value; } }
+        private Monsters monsterEditor;
+        public BattleScript[] battleScripts { get { return Model.BattleScripts; } set { Model.BattleScripts = value; } }
         private BattleScript battleScript { get { return battleScripts[index]; } set { battleScripts[index] = value; } }
         public BattleScript BattleScript { get { return battleScript; } set { battleScript = value; } }
         private DDlistName spellNames { get { return Model.SpellNames; } set { Model.SpellNames = value; } }
@@ -30,6 +30,7 @@ namespace LAZYSHELL
         private Bitmap monsterImage;
         private BattleScriptCommand command;
         private ArrayList battleCommands = new ArrayList();
+        public ArrayList BattleCommands { get { return battleCommands; } }
         private int treeCounter;
         private int currentDepth;
         private bool counterCmd;
@@ -52,7 +53,7 @@ namespace LAZYSHELL
             InitializeComponent();
             InitializeBattleScriptsEditor();
         }
-        #region Methods
+        #region Functions
         public void InitializeBattleScriptsEditor()
         {
             buttonInsert.Enabled = false;
@@ -106,7 +107,7 @@ namespace LAZYSHELL
             monsterImage = new Bitmap(monster.Image);
             pictureBoxMonster.Invalidate();
         }
-
+        //
         public TreeNode AddNode()
         {
             int thisDepth = currentDepth;
@@ -172,24 +173,15 @@ namespace LAZYSHELL
 
             return treeNode;
         }
+        //
         public void ParseBattleScript(BattleScript source)
         {
-            try
-            {
-                byte[] commandData;
-                battleCommands.Clear();
-
-                while (true)
-                {
-                    commandData = source.NextCommand();
-                    battleCommands.Add(CreateCommand(commandData));
-                }
-            }
-            catch
-            {
-                // done parsing Battle Script
-                source.CommandIndex = 0;
-            }
+            byte[] commandData;
+            battleCommands.Clear();
+            while ((commandData = source.NextCommand()) != null)
+                battleCommands.Add(CreateCommand(commandData));
+            // done parsing Battle Script
+            source.CommandIndex = 0;
         }
         private void AssembleBattleScript(BattleScript dest)
         {
@@ -214,7 +206,6 @@ namespace LAZYSHELL
 
             dest.Script = script;
         }
-
         private BattleScriptCommand CreateCommand(byte[] commandData)
         {
             BattleScriptCommand cmd;
@@ -490,7 +481,7 @@ namespace LAZYSHELL
                 CopyCommands(tn.Nodes);
             }
         }
-
+        //
         private void UpdateBattleScriptsFreeSpace()
         {
             int bytesLeft = CalculateBattleScriptsLength();
@@ -517,7 +508,7 @@ namespace LAZYSHELL
 
             return totalSize - length - 1;
         }
-
+        //
         private void SetInitialBits(byte bits)
         {
             updatingProperties = true;
@@ -572,6 +563,19 @@ namespace LAZYSHELL
 
             updatingProperties = false;
         }
+        private void AlignCommandGUI(Panel panel)
+        {
+            if (panel == null)
+            {
+                panel1.Height = 21;
+                buttonApply.Top = buttonInsert.Top = 1;
+            }
+            else if (panel.Visible)
+            {
+                panel1.Height = panel.Height + 23;
+                buttonApply.Top = buttonInsert.Top = panel.Height + 4;
+            }
+        }
         public void Assemble()
         {
             if (CalculateBattleScriptsLength() >= 0)
@@ -610,27 +614,16 @@ namespace LAZYSHELL
                 System.Windows.Forms.MessageBox.Show("Battle Scripts exceed max size, decrease total size to save correctly.\nNote: Saving stops when out of space.");
             // DONE ASSEMBLING BATTLE SCRIPT DATA
         }
-
+        public bool ChecksumNotChanged()
+        {
+            if (Do.GenerateChecksum(battleScripts) == this.checksum)
+                return true;
+            return false;
+        }
         #endregion
         #region Event Handlers
         private void BattleScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(battleScripts) == this.checksum)
-                return;
-            DialogResult result = MessageBox.Show(
-                "Battle scripts have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
-                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-                Assemble();
-            else if (result == DialogResult.No)
-            {
-                Model.BattleScripts = null;
-            }
-            else if (result == DialogResult.Cancel)
-            {
-                e.Cancel = true;
-                return;
-            }
             if (bp != null)
                 bp.Close();
         }
@@ -678,6 +671,64 @@ namespace LAZYSHELL
         }
         private void BattleScriptTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            BattleScriptTree.SelectedNode = e.Node;
+            if (e.Button != MouseButtons.Right) return;
+            goToToolStripMenuItem.Click -= goToDialogue_Click;
+            goToToolStripMenuItem.Click -= goToEvent_Click;
+            BattleScriptCommand temp = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
+            if (temp.CommandID == 0xE3)
+            {
+                e.Node.ContextMenuStrip = contextMenuStripGoto;
+                goToToolStripMenuItem.Text = "Edit dialogue...";
+                goToToolStripMenuItem.Click += new EventHandler(goToDialogue_Click);
+            }
+            else if (temp.CommandID == 0xE5)
+            {
+                e.Node.ContextMenuStrip = contextMenuStripGoto;
+                goToToolStripMenuItem.Text = "Edit event...";
+                goToToolStripMenuItem.Click += new EventHandler(goToEvent_Click);
+            }
+        }
+        // command panels
+        private void panelDoOneOfThree_VisibleChanged(object sender, EventArgs e)
+        {
+            AlignCommandGUI(panelDoOneOfThree);
+        }
+        private void panelMemoryCompare_VisibleChanged(object sender, EventArgs e)
+        {
+            AlignCommandGUI(panelMemoryCompare);
+        }
+        private void panelIfTargetValue_VisibleChanged(object sender, EventArgs e)
+        {
+            AlignCommandGUI(panelIfTargetValue);
+        }
+        // context menustrip
+        private void goToDialogue_Click(object sender, EventArgs e)
+        {
+            if (BattleScriptTree.SelectedNode == null) return;
+
+            BattleScriptCommand temp = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
+            int num = temp.CommandData[1];
+
+            if (Model.Program.Dialogues == null || !Model.Program.Dialogues.Visible)
+                Model.Program.CreateDialoguesWindow();
+
+            Model.Program.Dialogues.BattleDialogues.Index = num;
+            Model.Program.Dialogues.BringToFront();
+        }
+        private void goToEvent_Click(object sender, EventArgs e)
+        {
+            if (BattleScriptTree.SelectedNode == null) return;
+
+            BattleScriptCommand temp = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
+            int num = temp.CommandData[1];
+
+            if (Model.Program.Animations == null || !Model.Program.Animations.Visible)
+                Model.Program.CreateAnimationsWindow();
+
+            Model.Program.Animations.Category = 7;
+            Model.Program.Animations.Index = num;
+            Model.Program.Animations.BringToFront();
         }
         // Command properties
         private void listBoxCommands_SelectedIndexChanged(object sender, EventArgs e)
@@ -838,6 +889,35 @@ namespace LAZYSHELL
             BattleScriptTree.Focus();
             BatScrEditCommand_Click(null, null);
             buttonApply.Focus();
+        }
+        private void name_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (updatingProperties) return;
+            switch (command.CommandID)
+            {
+                case 0xFC:
+                    if (command.CommandData[1] == 0x02)
+                        goto case 0xF0;
+                    if (command.CommandData[1] == 0x03)
+                        Do.DrawName(
+                            sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
+                            Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
+                    break;
+                case 0xEF:
+                case 0xF0:
+                    Do.DrawName(
+                        sender, e, new BattleDialoguePreview(), Model.SpellNames,
+                        Model.SpellNames.GetNumFromIndex(e.Index) < 64 ? Model.FontMenu : Model.FontDialogue,
+                        Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
+                    break;
+                case 0xE0:
+                    goto default;
+                default:
+                    Do.DrawName(
+                        sender, e, new BattleDialoguePreview(), Model.AttackNames, Model.FontDialogue,
+                        Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, true, Model.MenuBackground_);
+                    break;
+            }
         }
         private void numA_ValueChanged(object sender, EventArgs e)
         {
@@ -1435,6 +1515,8 @@ namespace LAZYSHELL
             labelDoA.Text = "Attack..."; labelDoB.Text = "Number...";
 
             this.nameA.Items.AddRange(this.attackNames.GetNames());
+            this.nameA.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameA.ItemHeight = 15;
             numA.Maximum = 128;
 
             this.command = cmd;
@@ -1458,8 +1540,14 @@ namespace LAZYSHELL
             labelDoA.Text = "Attack..."; labelDoB.Text = "Number...";
 
             this.nameA.Items.AddRange(this.attackNames.GetNames());
+            this.nameA.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameA.ItemHeight = 15;
             this.nameB.Items.AddRange(this.attackNames.GetNames());
+            this.nameB.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameB.ItemHeight = 15;
             this.nameC.Items.AddRange(this.attackNames.GetNames());
+            this.nameC.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameC.ItemHeight = 15;
             numA.Maximum = numB.Maximum = numC.Maximum = 128;
 
             this.command = cmd;
@@ -1497,6 +1585,8 @@ namespace LAZYSHELL
             this.command = cmd;
 
             this.nameA.Items.AddRange(this.spellNames.GetNames());
+            this.nameA.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameA.ItemHeight = 15;
             numA.Maximum = 127;
             if (cmd.editable)
                 this.nameA.SelectedIndex = spellNames.GetIndexFromNum(cmd.CommandData[1]);
@@ -1514,8 +1604,14 @@ namespace LAZYSHELL
             this.command = cmd;
 
             this.nameA.Items.AddRange(this.spellNames.GetNames());
+            this.nameA.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameA.ItemHeight = 15;
             this.nameB.Items.AddRange(this.spellNames.GetNames());
+            this.nameB.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameB.ItemHeight = 15;
             this.nameC.Items.AddRange(this.spellNames.GetNames());
+            this.nameC.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameC.ItemHeight = 15;
             numA.Maximum = numB.Maximum = numC.Maximum = 127;
 
             if (cmd.editable)
@@ -1565,6 +1661,7 @@ namespace LAZYSHELL
 
             this.nameA.DropDownWidth = 256;
             this.nameA.Items.AddRange(cmd.GetBattleDialogueNames());
+            this.nameA.DrawMode = DrawMode.Normal;
             if (cmd.editable)
             {
                 this.nameA.SelectedIndex = cmd.CommandData[1];
@@ -1587,6 +1684,7 @@ namespace LAZYSHELL
             this.command = cmd;
 
             this.nameA.Items.AddRange(Lists.Numerize(Lists.BattleEventNames));
+            this.nameA.DrawMode = DrawMode.Normal;
             this.numA.Maximum = 0x66;
             if (cmd.editable)
                 nameA.SelectedIndex = cmd.CommandData[1];
@@ -1619,6 +1717,7 @@ namespace LAZYSHELL
             nameA.Items.AddRange(new object[] {
                         "Remove Items",
                         "Return Items"});
+            this.nameA.DrawMode = DrawMode.Normal;
             if (cmd.editable)
                 nameA.SelectedIndex = cmd.CommandData[2];
             else
@@ -1638,10 +1737,12 @@ namespace LAZYSHELL
                         "Attack",
                         "Special",
                         "Item"});
+            this.nameA.DrawMode = DrawMode.Normal;
             nameB.Items.AddRange(new object[] {
                         "Attack",
                         "Special",
                         "Item"});
+            this.nameB.DrawMode = DrawMode.Normal;
 
             if (cmd.editable)
             {
@@ -1665,7 +1766,11 @@ namespace LAZYSHELL
             this.command = cmd;
 
             this.nameA.Items.AddRange(Model.ItemNames.GetNames());
+            this.nameA.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameA.ItemHeight = 15;
             this.nameB.Items.AddRange(Model.ItemNames.GetNames());
+            this.nameB.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameB.ItemHeight = 15;
             if (cmd.editable)
             {
                 if (cmd.CommandData[2] != 0xFB)
@@ -1694,7 +1799,11 @@ namespace LAZYSHELL
             this.command = cmd;
 
             this.nameA.Items.AddRange(this.spellNames.GetNames());
+            this.nameA.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameA.ItemHeight = 15;
             this.nameB.Items.AddRange(this.spellNames.GetNames());
+            this.nameB.DrawMode = DrawMode.OwnerDrawFixed;
+            this.nameB.ItemHeight = 15;
 
             if (cmd.editable)
             {
@@ -2192,8 +2301,8 @@ namespace LAZYSHELL
         }
         private void BatScrWaitOneTurnRestart(BattleScriptCommand cmd)
         {
-            panelDoOneOfThree.Visible = false; 
-            panelIfTargetValue.Visible = false; 
+            panelDoOneOfThree.Visible = false;
+            panelIfTargetValue.Visible = false;
             panelMemoryCompare.Visible = false;
             this.command = cmd;
             AlignCommandGUI(null);
@@ -2276,31 +2385,5 @@ namespace LAZYSHELL
             InitializeBattleScriptsEditor();
         }
         #endregion
-
-        private void panelDoOneOfThree_VisibleChanged(object sender, EventArgs e)
-        {
-            AlignCommandGUI(panelDoOneOfThree);
-        }
-        private void panelMemoryCompare_VisibleChanged(object sender, EventArgs e)
-        {
-            AlignCommandGUI(panelMemoryCompare);
-        }
-        private void panelIfTargetValue_VisibleChanged(object sender, EventArgs e)
-        {
-            AlignCommandGUI(panelIfTargetValue);
-        }
-        private void AlignCommandGUI(Panel panel)
-        {
-            if (panel == null)
-            {
-                panel1.Height = 21;
-                buttonApply.Top = buttonInsert.Top = 1;
-            }
-            else if (panel.Visible)
-            {
-                panel1.Height = panel.Height + 23;
-                buttonApply.Top = buttonInsert.Top = panel.Height + 4;
-            }
-        }
     }
 }

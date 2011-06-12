@@ -1,6 +1,6 @@
 ﻿namespace LAZYSHELL
 {
-    partial class ImportElements
+    partial class Restore
     {
         /// <summary>
         /// Required designer variable.
@@ -96,7 +96,7 @@
             treeNode33,
             treeNode34,
             treeNode35});
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportElements));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Restore));
             this.elements = new System.Windows.Forms.TreeView();
             this.browseFreshRom = new System.Windows.Forms.Button();
             this.freshRomTextBox = new System.Windows.Forms.TextBox();

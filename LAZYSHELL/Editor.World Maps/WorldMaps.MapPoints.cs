@@ -492,7 +492,7 @@ namespace LAZYSHELL
             if (updatingMapPoints) return;
 
             if (!mapPoint.GoMapPoint)
-                mapPoint.RunEvent = (byte)runEvent.Value;
+                mapPoint.RunEvent = (ushort)runEvent.Value;
         }
         private void runEventEdit_Click(object sender, EventArgs e)
         {

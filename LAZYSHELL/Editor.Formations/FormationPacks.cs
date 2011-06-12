@@ -10,16 +10,19 @@ namespace LAZYSHELL
 {
     public partial class FormationPacks : Form
     {
+        #region Variables
         private delegate void Function(TreeView treeView, StringComparison stringComparison, bool matchWholeWord);
         private int index { get { return (int)packNum.Value; } set { packNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
-                private FormationPack[] packs { get { return Model.FormationPacks; } set { Model.FormationPacks = value; } }
+        private FormationPack[] packs { get { return Model.FormationPacks; } set { Model.FormationPacks = value; } }
         private FormationPack pack { get { return packs[index]; } set { packs[index] = value; } }
         public FormationPack Pack { get { return pack; } set { pack = value; } }
         private bool updating = false;
         private Formation[] formations { get { return Model.Formations; } }
         private Formations formationsEditor;
         public Search searchWindow;
+        #endregion
+        // constructor
         public FormationPacks(Formations formationsEditor)
         {
             this.formationsEditor = formationsEditor;
@@ -27,6 +30,7 @@ namespace LAZYSHELL
             searchWindow = new Search(packNum, packNameTextBox, searchFormationPacks, new Function(LoadSearch), "treeView");
             RefreshFormationPacks();
         }
+        // functions
         public void SetToolTips(ToolTip toolTip1)
         {
             // FORMATION PACKS
@@ -122,6 +126,7 @@ namespace LAZYSHELL
             treeView.ExpandAll();
             treeView.EndUpdate();
         }
+        // event handlers
         private void packNum_ValueChanged(object sender, EventArgs e)
         {
             RefreshFormationPacks();

@@ -15,7 +15,7 @@ namespace LAZYSHELL
         public byte[] tileMapL1;
         public byte[] tileMapL2;
         public byte[] tileMapL3;
-        public byte[] physicalMap;
+        public byte[] solidityMap;
         public LevelLayer levelLayer;
         public LevelNPCs levelNPCs;
         public LevelExits levelExits;

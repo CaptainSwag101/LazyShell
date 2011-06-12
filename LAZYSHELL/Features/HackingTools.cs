@@ -12,12 +12,31 @@ namespace LAZYSHELL
     {
         private double percent { get { return (double)percentControl.Value * 0.01; } }
         private Delegate update;
+        // constructor
         public HackingTools(Delegate update)
         {
             this.update = update;
             InitializeComponent();
         }
-
+        // functions
+        private int AddPercent(int value, int max)
+        {
+            double percentage = (double)value;
+            percentage += percentage * percent;
+            percentage = (int)Math.Ceiling(percentage);
+            return (int)Math.Max(0, Math.Min(max, percentage));
+        }
+        // event handlers
+        private void selectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                checkedListBox1.SetItemChecked(i, true);
+        }
+        private void deselectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                checkedListBox1.SetItemChecked(i, false);
+        }
         private void buttonOK_Click(object sender, EventArgs e)
         {
             foreach (Monster monster in Model.Monsters)
@@ -45,30 +64,10 @@ namespace LAZYSHELL
             }
             update.DynamicInvoke();
         }
-        private int AddPercent(int value, int max)
-        {
-            double percentage = (double)value;
-            percentage += percentage * percent;
-            percentage = (int)Math.Ceiling(percentage);
-            return (int)Math.Max(0, Math.Min(max, percentage));
-        }
-
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
-        }
-
-        private void selectAll_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < checkedListBox1.Items.Count; i++)
-                checkedListBox1.SetItemChecked(i, true);
-        }
-
-        private void deselectAll_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < checkedListBox1.Items.Count; i++)
-                checkedListBox1.SetItemChecked(i, false);
         }
     }
 }

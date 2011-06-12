@@ -31,31 +31,34 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnimationScripts));
             this.panelAniControls = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.applyAnimation = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel40 = new System.Windows.Forms.Panel();
-            this.aniTitleB = new System.Windows.Forms.Label();
-            this.aniBits = new System.Windows.Forms.CheckedListBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.aniTitleC = new System.Windows.Forms.Label();
-            this.aniNumF = new System.Windows.Forms.NumericUpDown();
             this.aniLabelF = new System.Windows.Forms.Label();
             this.aniNumE = new System.Windows.Forms.NumericUpDown();
+            this.aniNumF = new System.Windows.Forms.NumericUpDown();
             this.aniLabelE = new System.Windows.Forms.Label();
-            this.aniNumD = new System.Windows.Forms.NumericUpDown();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.aniTitleB = new System.Windows.Forms.Label();
+            this.aniBits = new System.Windows.Forms.CheckedListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.aniLabelC = new System.Windows.Forms.Label();
+            this.aniLabelD = new System.Windows.Forms.Label();
             this.aniNumC = new System.Windows.Forms.NumericUpDown();
+            this.aniNumD = new System.Windows.Forms.NumericUpDown();
+            this.panel40 = new System.Windows.Forms.Panel();
             this.panel41 = new System.Windows.Forms.Panel();
             this.aniNameA = new System.Windows.Forms.ComboBox();
             this.aniNumB = new System.Windows.Forms.NumericUpDown();
             this.aniLabelA = new System.Windows.Forms.Label();
             this.aniNumA = new System.Windows.Forms.NumericUpDown();
-            this.aniLabelD = new System.Windows.Forms.Label();
-            this.aniLabelC = new System.Windows.Forms.Label();
             this.aniLabelB = new System.Windows.Forms.Label();
             this.panel42 = new System.Windows.Forms.Panel();
             this.aniNameB = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.aniTitleA = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.animationScriptTree = new LAZYSHELL.NewTreeView();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
@@ -77,12 +80,18 @@
             this.applyAnimationMods = new System.Windows.Forms.ToolStripButton();
             this.labelConvertor = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.previewer = new System.Windows.Forms.ToolStripButton();
             this.panelAniControls.SuspendLayout();
-            this.panel40.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.aniNumF)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.aniNumE)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aniNumD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aniNumF)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.aniNumC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aniNumD)).BeginInit();
+            this.panel40.SuspendLayout();
             this.panel41.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.aniNumB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aniNumA)).BeginInit();
@@ -94,12 +103,12 @@
             // 
             // panelAniControls
             // 
-            this.panelAniControls.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelAniControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelAniControls.Controls.Add(this.panel4);
+            this.panelAniControls.Controls.Add(this.panel3);
+            this.panelAniControls.Controls.Add(this.panel2);
             this.panelAniControls.Controls.Add(this.panel1);
-            this.panelAniControls.Controls.Add(this.applyAnimation);
-            this.panelAniControls.Controls.Add(this.label6);
             this.panelAniControls.Controls.Add(this.panel40);
+            this.panelAniControls.Controls.Add(this.label6);
             this.panelAniControls.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelAniControls.Enabled = false;
             this.panelAniControls.Location = new System.Drawing.Point(738, 50);
@@ -107,22 +116,22 @@
             this.panelAniControls.Size = new System.Drawing.Size(282, 560);
             this.panelAniControls.TabIndex = 428;
             // 
-            // panel1
+            // panel4
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Location = new System.Drawing.Point(0, 355);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(278, 201);
-            this.panel1.TabIndex = 417;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.applyAnimation);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 344);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(282, 23);
+            this.panel4.TabIndex = 426;
             // 
             // applyAnimation
             // 
             this.applyAnimation.BackColor = System.Drawing.SystemColors.Control;
+            this.applyAnimation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.applyAnimation.Enabled = false;
-            this.applyAnimation.Location = new System.Drawing.Point(0, 335);
+            this.applyAnimation.Location = new System.Drawing.Point(0, 0);
             this.applyAnimation.Name = "applyAnimation";
             this.applyAnimation.Size = new System.Drawing.Size(278, 19);
             this.applyAnimation.TabIndex = 416;
@@ -131,49 +140,94 @@
             this.applyAnimation.UseVisualStyleBackColor = false;
             this.applyAnimation.Click += new System.EventHandler(this.applyAnimation_Click);
             // 
-            // label6
+            // panel3
             // 
-            this.label6.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label6.Size = new System.Drawing.Size(278, 17);
-            this.label6.TabIndex = 398;
-            this.label6.Text = "CURRENT COMMAND PROPERTIES...";
+            this.panel3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.aniTitleC);
+            this.panel3.Controls.Add(this.aniLabelF);
+            this.panel3.Controls.Add(this.aniNumE);
+            this.panel3.Controls.Add(this.aniNumF);
+            this.panel3.Controls.Add(this.aniLabelE);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 286);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(282, 58);
+            this.panel3.TabIndex = 425;
             // 
-            // panel40
+            // aniTitleC
             // 
-            this.panel40.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel40.Controls.Add(this.aniTitleB);
-            this.panel40.Controls.Add(this.aniBits);
-            this.panel40.Controls.Add(this.aniTitleC);
-            this.panel40.Controls.Add(this.aniNumF);
-            this.panel40.Controls.Add(this.aniLabelF);
-            this.panel40.Controls.Add(this.aniNumE);
-            this.panel40.Controls.Add(this.aniLabelE);
-            this.panel40.Controls.Add(this.aniNumD);
-            this.panel40.Controls.Add(this.aniNumC);
-            this.panel40.Controls.Add(this.panel41);
-            this.panel40.Controls.Add(this.aniNumB);
-            this.panel40.Controls.Add(this.aniLabelA);
-            this.panel40.Controls.Add(this.aniNumA);
-            this.panel40.Controls.Add(this.aniLabelD);
-            this.panel40.Controls.Add(this.aniLabelC);
-            this.panel40.Controls.Add(this.aniLabelB);
-            this.panel40.Controls.Add(this.panel42);
-            this.panel40.Controls.Add(this.label1);
-            this.panel40.Controls.Add(this.aniTitleA);
-            this.panel40.Location = new System.Drawing.Point(0, 19);
-            this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(278, 315);
-            this.panel40.TabIndex = 18;
+            this.aniTitleC.BackColor = System.Drawing.SystemColors.Control;
+            this.aniTitleC.Location = new System.Drawing.Point(0, 0);
+            this.aniTitleC.Name = "aniTitleC";
+            this.aniTitleC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.aniTitleC.Size = new System.Drawing.Size(278, 17);
+            this.aniTitleC.TabIndex = 421;
+            // 
+            // aniLabelF
+            // 
+            this.aniLabelF.BackColor = System.Drawing.SystemColors.Control;
+            this.aniLabelF.Location = new System.Drawing.Point(0, 37);
+            this.aniLabelF.Name = "aniLabelF";
+            this.aniLabelF.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.aniLabelF.Size = new System.Drawing.Size(138, 17);
+            this.aniLabelF.TabIndex = 418;
+            // 
+            // aniNumE
+            // 
+            this.aniNumE.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.aniNumE.Enabled = false;
+            this.aniNumE.Location = new System.Drawing.Point(139, 19);
+            this.aniNumE.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.aniNumE.Name = "aniNumE";
+            this.aniNumE.Size = new System.Drawing.Size(139, 17);
+            this.aniNumE.TabIndex = 25;
+            this.aniNumE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // aniNumF
+            // 
+            this.aniNumF.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.aniNumF.Enabled = false;
+            this.aniNumF.Location = new System.Drawing.Point(139, 37);
+            this.aniNumF.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.aniNumF.Name = "aniNumF";
+            this.aniNumF.Size = new System.Drawing.Size(139, 17);
+            this.aniNumF.TabIndex = 26;
+            this.aniNumF.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // aniLabelE
+            // 
+            this.aniLabelE.BackColor = System.Drawing.SystemColors.Control;
+            this.aniLabelE.Location = new System.Drawing.Point(0, 19);
+            this.aniLabelE.Name = "aniLabelE";
+            this.aniLabelE.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.aniLabelE.Size = new System.Drawing.Size(138, 17);
+            this.aniLabelE.TabIndex = 417;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.aniTitleB);
+            this.panel2.Controls.Add(this.aniBits);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 135);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(282, 151);
+            this.panel2.TabIndex = 424;
             // 
             // aniTitleB
             // 
             this.aniTitleB.BackColor = System.Drawing.SystemColors.Control;
-            this.aniTitleB.Location = new System.Drawing.Point(0, 112);
+            this.aniTitleB.Location = new System.Drawing.Point(0, 0);
             this.aniTitleB.Name = "aniTitleB";
             this.aniTitleB.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.aniTitleB.Size = new System.Drawing.Size(278, 17);
@@ -186,74 +240,74 @@
             this.aniBits.ColumnWidth = 138;
             this.aniBits.Enabled = false;
             this.aniBits.FormattingEnabled = true;
-            this.aniBits.Location = new System.Drawing.Point(0, 131);
+            this.aniBits.Location = new System.Drawing.Point(0, 19);
             this.aniBits.MultiColumn = true;
             this.aniBits.Name = "aniBits";
             this.aniBits.Size = new System.Drawing.Size(278, 128);
             this.aniBits.TabIndex = 24;
             // 
-            // aniTitleC
+            // panel1
             // 
-            this.aniTitleC.BackColor = System.Drawing.SystemColors.Control;
-            this.aniTitleC.Location = new System.Drawing.Point(0, 261);
-            this.aniTitleC.Name = "aniTitleC";
-            this.aniTitleC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.aniTitleC.Size = new System.Drawing.Size(278, 17);
-            this.aniTitleC.TabIndex = 421;
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.aniLabelC);
+            this.panel1.Controls.Add(this.aniLabelD);
+            this.panel1.Controls.Add(this.aniNumC);
+            this.panel1.Controls.Add(this.aniNumD);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 77);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(282, 58);
+            this.panel1.TabIndex = 417;
             // 
-            // aniNumF
+            // label1
             // 
-            this.aniNumF.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.aniNumF.Enabled = false;
-            this.aniNumF.Location = new System.Drawing.Point(139, 298);
-            this.aniNumF.Maximum = new decimal(new int[] {
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label1.Size = new System.Drawing.Size(278, 17);
+            this.label1.TabIndex = 398;
+            // 
+            // aniLabelC
+            // 
+            this.aniLabelC.BackColor = System.Drawing.SystemColors.Control;
+            this.aniLabelC.Location = new System.Drawing.Point(0, 19);
+            this.aniLabelC.Name = "aniLabelC";
+            this.aniLabelC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.aniLabelC.Size = new System.Drawing.Size(138, 17);
+            this.aniLabelC.TabIndex = 400;
+            // 
+            // aniLabelD
+            // 
+            this.aniLabelD.BackColor = System.Drawing.SystemColors.Control;
+            this.aniLabelD.Location = new System.Drawing.Point(0, 37);
+            this.aniLabelD.Name = "aniLabelD";
+            this.aniLabelD.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.aniLabelD.Size = new System.Drawing.Size(138, 17);
+            this.aniLabelD.TabIndex = 400;
+            // 
+            // aniNumC
+            // 
+            this.aniNumC.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.aniNumC.Enabled = false;
+            this.aniNumC.Location = new System.Drawing.Point(139, 19);
+            this.aniNumC.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.aniNumF.Name = "aniNumF";
-            this.aniNumF.Size = new System.Drawing.Size(139, 17);
-            this.aniNumF.TabIndex = 26;
-            this.aniNumF.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // aniLabelF
-            // 
-            this.aniLabelF.BackColor = System.Drawing.SystemColors.Control;
-            this.aniLabelF.Location = new System.Drawing.Point(0, 298);
-            this.aniLabelF.Name = "aniLabelF";
-            this.aniLabelF.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.aniLabelF.Size = new System.Drawing.Size(138, 17);
-            this.aniLabelF.TabIndex = 418;
-            // 
-            // aniNumE
-            // 
-            this.aniNumE.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.aniNumE.Enabled = false;
-            this.aniNumE.Location = new System.Drawing.Point(139, 280);
-            this.aniNumE.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.aniNumE.Name = "aniNumE";
-            this.aniNumE.Size = new System.Drawing.Size(139, 17);
-            this.aniNumE.TabIndex = 25;
-            this.aniNumE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // aniLabelE
-            // 
-            this.aniLabelE.BackColor = System.Drawing.SystemColors.Control;
-            this.aniLabelE.Location = new System.Drawing.Point(0, 280);
-            this.aniLabelE.Name = "aniLabelE";
-            this.aniLabelE.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.aniLabelE.Size = new System.Drawing.Size(138, 17);
-            this.aniLabelE.TabIndex = 417;
+            this.aniNumC.Name = "aniNumC";
+            this.aniNumC.Size = new System.Drawing.Size(139, 17);
+            this.aniNumC.TabIndex = 22;
+            this.aniNumC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // aniNumD
             // 
             this.aniNumD.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.aniNumD.Enabled = false;
-            this.aniNumD.Location = new System.Drawing.Point(139, 93);
+            this.aniNumD.Location = new System.Drawing.Point(139, 37);
             this.aniNumD.Maximum = new decimal(new int[] {
             255,
             0,
@@ -264,20 +318,22 @@
             this.aniNumD.TabIndex = 23;
             this.aniNumD.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // aniNumC
+            // panel40
             // 
-            this.aniNumC.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.aniNumC.Enabled = false;
-            this.aniNumC.Location = new System.Drawing.Point(139, 75);
-            this.aniNumC.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.aniNumC.Name = "aniNumC";
-            this.aniNumC.Size = new System.Drawing.Size(139, 17);
-            this.aniNumC.TabIndex = 22;
-            this.aniNumC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.panel40.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel40.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel40.Controls.Add(this.panel41);
+            this.panel40.Controls.Add(this.aniNumB);
+            this.panel40.Controls.Add(this.aniLabelA);
+            this.panel40.Controls.Add(this.aniNumA);
+            this.panel40.Controls.Add(this.aniLabelB);
+            this.panel40.Controls.Add(this.panel42);
+            this.panel40.Controls.Add(this.aniTitleA);
+            this.panel40.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel40.Location = new System.Drawing.Point(0, 19);
+            this.panel40.Name = "panel40";
+            this.panel40.Size = new System.Drawing.Size(282, 58);
+            this.panel40.TabIndex = 18;
             // 
             // panel41
             // 
@@ -342,24 +398,6 @@
             this.aniNumA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.aniNumA.ValueChanged += new System.EventHandler(this.aniNumA_ValueChanged);
             // 
-            // aniLabelD
-            // 
-            this.aniLabelD.BackColor = System.Drawing.SystemColors.Control;
-            this.aniLabelD.Location = new System.Drawing.Point(0, 93);
-            this.aniLabelD.Name = "aniLabelD";
-            this.aniLabelD.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.aniLabelD.Size = new System.Drawing.Size(138, 17);
-            this.aniLabelD.TabIndex = 400;
-            // 
-            // aniLabelC
-            // 
-            this.aniLabelC.BackColor = System.Drawing.SystemColors.Control;
-            this.aniLabelC.Location = new System.Drawing.Point(0, 75);
-            this.aniLabelC.Name = "aniLabelC";
-            this.aniLabelC.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.aniLabelC.Size = new System.Drawing.Size(138, 17);
-            this.aniLabelC.TabIndex = 400;
-            // 
             // aniLabelB
             // 
             this.aniLabelB.BackColor = System.Drawing.SystemColors.Control;
@@ -409,15 +447,6 @@
             this.aniNameB.Size = new System.Drawing.Size(144, 21);
             this.aniNameB.TabIndex = 1;
             // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(0, 56);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label1.Size = new System.Drawing.Size(278, 17);
-            this.label1.TabIndex = 398;
-            // 
             // aniTitleA
             // 
             this.aniTitleA.BackColor = System.Drawing.SystemColors.Control;
@@ -427,9 +456,24 @@
             this.aniTitleA.Size = new System.Drawing.Size(278, 17);
             this.aniTitleA.TabIndex = 398;
             // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.Control;
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label6.Size = new System.Drawing.Size(282, 19);
+            this.label6.TabIndex = 398;
+            this.label6.Text = "CURRENT COMMAND PROPERTIES...";
+            // 
             // animationScriptTree
             // 
             this.animationScriptTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.animationScriptTree.EnablePaint = true;
             this.animationScriptTree.FullRowSelect = true;
             this.animationScriptTree.HideSelection = false;
             this.animationScriptTree.HotTracking = true;
@@ -586,7 +630,9 @@
             this.toolStripLabel1,
             this.toolStripSeparator2,
             this.emptyAnimationMods,
-            this.applyAnimationMods});
+            this.applyAnimationMods,
+            this.toolStripSeparator5,
+            this.previewer});
             this.toolStrip2.Location = new System.Drawing.Point(0, 610);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -668,6 +714,22 @@
             // 
             this.toolTip1.Active = false;
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // previewer
+            // 
+            this.previewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.previewer.Image = global::LAZYSHELL.Properties.Resources.preview;
+            this.previewer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.previewer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.previewer.Name = "previewer";
+            this.previewer.Size = new System.Drawing.Size(23, 22);
+            this.previewer.ToolTipText = "Previewer";
+            this.previewer.Click += new System.EventHandler(this.previewer_Click);
+            // 
             // AnimationScripts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -689,11 +751,15 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AnimationScripts_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.animationScriptTree_KeyDown);
             this.panelAniControls.ResumeLayout(false);
-            this.panel40.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.aniNumF)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.aniNumE)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aniNumD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aniNumF)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.aniNumC)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aniNumD)).EndInit();
+            this.panel40.ResumeLayout(false);
             this.panel41.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.aniNumB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aniNumA)).EndInit();
@@ -758,5 +824,10 @@
         private System.Windows.Forms.ToolStripButton export;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton previewer;
     }
 }

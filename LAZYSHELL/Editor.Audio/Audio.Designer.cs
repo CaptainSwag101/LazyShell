@@ -52,6 +52,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -78,7 +79,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(409, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(467, 25);
             this.toolStrip1.TabIndex = 398;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -223,6 +224,8 @@
             // 
             // panel3
             // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
             this.panel3.Controls.Add(this.radioButton1);
             this.panel3.Controls.Add(this.radioButton3);
@@ -230,7 +233,7 @@
             this.panel3.Controls.Add(this.radioButton4);
             this.panel3.Location = new System.Drawing.Point(0, 19);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(172, 68);
+            this.panel3.Size = new System.Drawing.Size(96, 68);
             this.panel3.TabIndex = 267;
             // 
             // radioButton1
@@ -289,7 +292,7 @@
             this.label235.Location = new System.Drawing.Point(0, 0);
             this.label235.Name = "label235";
             this.label235.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label235.Size = new System.Drawing.Size(172, 17);
+            this.label235.Size = new System.Drawing.Size(96, 17);
             this.label235.TabIndex = 262;
             this.label235.Text = "SAMPLE RATE";
             this.label235.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -300,7 +303,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(305, 87);
+            this.pictureBox1.Size = new System.Drawing.Size(363, 87);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -313,7 +316,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(100, 25);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(309, 91);
+            this.panel2.Size = new System.Drawing.Size(367, 91);
             this.panel2.TabIndex = 400;
             // 
             // backgroundWorker1
@@ -324,14 +327,24 @@
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
+            // label1
+            // 
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label1.Location = new System.Drawing.Point(0, 116);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(467, 186);
+            this.label1.TabIndex = 401;
+            // 
             // Audio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 116);
+            this.ClientSize = new System.Drawing.Size(467, 302);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Audio";
@@ -374,5 +387,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label1;
     }
 }

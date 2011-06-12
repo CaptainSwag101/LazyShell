@@ -50,13 +50,15 @@ namespace LAZYSHELL
             }
         }
         private AnimationScriptCommand asc;
-        private int index { get { return (int)animationNum.Value; } set { animationNum.Value = value; } }
+        public int Index { get { return (int)animationNum.Value; } set { animationNum.Value = value; } }
+        public int Category { get { return animationCategory.SelectedIndex; } set { animationCategory.SelectedIndex = value; } }
         private Settings settings = Settings.Default;
         private BattleDialoguePreview battleDialoguePreview;
         private MenuTextPreview menuTextPreview;
         private ToolTipLabel toolTipLabel;
         private byte[] animationBank, battleBank;
         private bool updatingAnimations = false;
+        Previewer.Previewer ap;
         #endregion
         // constructor
         public AnimationScripts()
@@ -1014,6 +1016,10 @@ namespace LAZYSHELL
         #region Event Handlers
         private void animationCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            previewer.Enabled = 
+                animationCategory.SelectedIndex == 1 || 
+                animationCategory.SelectedIndex == 2 || 
+                animationCategory.SelectedIndex == 4;
             if (updatingAnimations) return;
 
             animationNum.Value = 0;
@@ -1026,12 +1032,12 @@ namespace LAZYSHELL
 
             if (animationCategory.SelectedIndex == 2)
             {
-                animationName.SelectedIndex = Model.AttackNames.GetIndexFromNum(index);
+                animationName.SelectedIndex = Model.AttackNames.GetIndexFromNum(Index);
                 a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
             }
             else
             {
-                animationName.SelectedIndex = index;
+                animationName.SelectedIndex = Index;
                 a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
             }
             if (this.animationScriptTree.Nodes.Count > 0)
@@ -1131,7 +1137,7 @@ namespace LAZYSHELL
                 e.Graphics.DrawString(animationName.Items[e.Index].ToString(), e.Font, new SolidBrush(animationName.ForeColor), e.Bounds);
             }
         }
-
+        //
         private void animationScriptTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             //if (asc == (AnimationScriptCommand)e.Node.Tag)
@@ -1177,7 +1183,7 @@ namespace LAZYSHELL
                     break;
             }
         }
-
+        //
         private void aniMoveDown_Click(object sender, EventArgs e)
         {
             a_treeViewWrapper.MoveDown(asc);
@@ -1246,7 +1252,16 @@ namespace LAZYSHELL
                     ((ToolStripNumericUpDown)item).Value = 0x0A;
             }
         }
-
+        private void previewer_Click(object sender, EventArgs e)
+        {
+            if (ap == null || !ap.Visible)
+                ap = new Previewer.Previewer(animationCategory.SelectedIndex, (int)animationNum.Value, true);
+            else
+                ap.Reload(animationCategory.SelectedIndex, (int)animationNum.Value, true);
+            ap.Show();
+            ap.BringToFront();
+        }
+        //
         private void applyAnimation_Click(object sender, EventArgs e)
         {
             Point p = Do.GetTreeViewScrollPos(animationScriptTree);
@@ -1301,7 +1316,7 @@ namespace LAZYSHELL
                     break;
             }
         }
-
+        //
         private void AnimationScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(Bits.GetByteArray(Model.Data, 0x350000, 0x10000), Bits.GetByteArray(Model.Data, 0x3A6000, 0xA000)) == this.checksum)

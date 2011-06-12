@@ -21,6 +21,7 @@ namespace LAZYSHELL
         private bool updatingSubtile;
         private int currentSubtile;
         private Bitmap tileImage, subtileImage;
+        // constructor
         /// <summary>
         /// View and edit the properties of a single 16x16 tile.
         /// </summary>
@@ -63,6 +64,7 @@ namespace LAZYSHELL
             SetSubtileImage();
             this.BringToFront();
         }
+        // functions
         private void InitializeSubtile()
         {
             updatingSubtile = true;
@@ -75,8 +77,6 @@ namespace LAZYSHELL
 
             updatingSubtile = false;
         }
-
-        // set images
         private void SetTileImage()
         {
             int[] temp = new int[16 * 16];
@@ -116,7 +116,6 @@ namespace LAZYSHELL
             subtileImage = new Bitmap(Do.PixelsToImage(pixels, 64, 64));
             pictureBoxSubtile.Invalidate();
         }
-
         private Tile8x8 CreateNewSubtile()
         {
             return Do.DrawTile8x8((ushort)this.subtileIndex.Value,
@@ -126,7 +125,6 @@ namespace LAZYSHELL
                 this.subtileStatus.GetItemChecked(2),
                 graphics, paletteSet.Palettes, format);
         }
-
         #region Event Handlers
 
         private void TileEditor_FormClosing(object sender, FormClosingEventArgs e)

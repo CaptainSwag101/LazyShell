@@ -158,7 +158,6 @@
             this.pictureBoxGraphicSet.Size = new System.Drawing.Size(256, 768);
             this.pictureBoxGraphicSet.TabIndex = 450;
             this.pictureBoxGraphicSet.TabStop = false;
-            this.pictureBoxGraphicSet.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxGraphicSet_PreviewKeyDown);
             this.pictureBoxGraphicSet.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGraphicSet_MouseMove);
             this.pictureBoxGraphicSet.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGraphicSet_MouseDoubleClick);
             this.pictureBoxGraphicSet.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGraphicSet_MouseDown);

@@ -910,7 +910,7 @@
             // reset
             // 
             this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.loadAll;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.reset.Name = "reset";
@@ -1123,6 +1123,7 @@
             // 
             // startingMagic
             // 
+            this.startingMagic.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.startingMagic.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.startingMagic.CheckOnClick = true;
             this.startingMagic.ColumnWidth = 109;
