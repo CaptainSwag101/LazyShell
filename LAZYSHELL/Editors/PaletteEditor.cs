@@ -17,6 +17,7 @@ namespace LAZYSHELL
         private Delegate update;
         private PaletteSet paletteSet;
         private PaletteSet paletteSetBackup;
+        private PaletteSet paletteSetBackup2;
         private Bitmap paletteImage, colorMapImage;
         private int[] palettePixels, colorMapPixels;
         private int currentSwatchColor = Color.FromArgb(248, 248, 248).ToArgb();
@@ -38,6 +39,7 @@ namespace LAZYSHELL
         public PaletteEditor(Delegate update, PaletteSet paletteSet, int count, int start)
         {
             this.update = update;
+            this.paletteSetBackup2 = paletteSet.Copy();
             this.paletteSetBackup = paletteSet.Copy();
             this.paletteSet = paletteSet;
             this.count = count;
@@ -57,6 +59,7 @@ namespace LAZYSHELL
         public void Reload(Delegate update, PaletteSet paletteSet, int count, int start)
         {
             this.update = update;
+            this.paletteSetBackup2 = paletteSet.Copy();
             this.paletteSetBackup = paletteSet.Copy();
             this.paletteSet = paletteSet;
             this.count = count;
@@ -601,6 +604,7 @@ namespace LAZYSHELL
                 currentRed.Value = trackBar1.Value & 0xF8;
             if (updating) return;
             paletteSet.Reds[currentColor] = (int)currentRed.Value & 0xF8;
+            paletteSetBackup.Reds[currentColor] = paletteSet.Reds[currentColor];
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
             InitializeColor();
@@ -615,6 +619,7 @@ namespace LAZYSHELL
                 currentGreen.Value = trackBar2.Value & 0xF8;
             if (updating) return;
             paletteSet.Greens[currentColor] = (int)currentGreen.Value & 0xF8;
+            paletteSetBackup.Greens[currentColor] = paletteSet.Greens[currentColor];
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
             InitializeColor();
@@ -629,6 +634,7 @@ namespace LAZYSHELL
                 currentBlue.Value = trackBar3.Value & 0xF8;
             if (updating) return;
             paletteSet.Blues[currentColor] = (int)currentBlue.Value & 0xF8;
+            paletteSetBackup.Blues[currentColor] = paletteSet.Blues[currentColor];
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
             InitializeColor();
@@ -642,6 +648,9 @@ namespace LAZYSHELL
             paletteSet.Reds[currentColor] = Int32.Parse(currentHTML.Text.Substring(0, 2), NumberStyles.AllowHexSpecifier);
             paletteSet.Greens[currentColor] = Int32.Parse(currentHTML.Text.Substring(2, 2), NumberStyles.AllowHexSpecifier);
             paletteSet.Blues[currentColor] = Int32.Parse(currentHTML.Text.Substring(4, 2), NumberStyles.AllowHexSpecifier);
+            paletteSetBackup.Reds[currentColor] = paletteSet.Reds[currentColor];
+            paletteSetBackup.Greens[currentColor] = paletteSet.Greens[currentColor];
+            paletteSetBackup.Blues[currentColor] = paletteSet.Blues[currentColor];
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
             InitializeColor();
@@ -822,6 +831,7 @@ namespace LAZYSHELL
         private void buttonOK_Click(object sender, EventArgs e)
         {
             paletteSet.CopyTo(paletteSetBackup);
+            paletteSet.CopyTo(paletteSetBackup2);
             this.Close();
             if (!autoUpdate.Checked)
                 update.DynamicInvoke();
@@ -849,8 +859,9 @@ namespace LAZYSHELL
             colorizeHue.Value = colorizeHueBar.Value = 128;
             colorizeSaturation.Value = colorizeSaturationBar.Value = 128;
             updating = false;
+            paletteSetBackup2.CopyTo(paletteSetBackup);
             DoAdjustment();
-            paletteSetBackup.CopyTo(paletteSet);
+            paletteSetBackup2.CopyTo(paletteSet);
         }
         private void buttonUpdate_Click(object sender, EventArgs e)
         {

@@ -149,6 +149,7 @@ namespace LAZYSHELL
             foreach (Battlefield bf in battlefields)
                 bf.Assemble();
             Model.Compress(Model.TileSetsBF, Model.EditTileSetsBF, 0x150000, 0x15FFFF, "BATTLEFIELD", 0);
+            checksum = Do.GenerateChecksum(battlefields, Model.TileSetsBF, paletteSets);
         }
         // Editor loading
         private void LoadPaletteEditor()

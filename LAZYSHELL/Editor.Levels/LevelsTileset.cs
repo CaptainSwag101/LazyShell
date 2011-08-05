@@ -475,13 +475,13 @@ namespace LAZYSHELL
         }
         private void pictureBoxTileset_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyData == (Keys.Control | Keys.V))
+            if (e.KeyData == (Keys.Control | Keys.V) && !lockEditing.Checked)
                 buttonEditPaste_Click(null, null);
-            if (e.KeyData == (Keys.Control | Keys.C))
+            if (e.KeyData == (Keys.Control | Keys.C) && !lockEditing.Checked)
                 buttonEditCopy_Click(null, null);
-            if (e.KeyData == Keys.Delete)
+            if (e.KeyData == Keys.Delete && !lockEditing.Checked)
                 buttonEditDelete_Click(null, null);
-            if (e.KeyData == (Keys.Control | Keys.X))
+            if (e.KeyData == (Keys.Control | Keys.X) && !lockEditing.Checked)
                 buttonEditCut_Click(null, null);
             if (e.KeyData == (Keys.Control | Keys.D))
             {

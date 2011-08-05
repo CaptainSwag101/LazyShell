@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public class TileMap
     {
         #region Variables
-                private TileSet tileset;
+        private TileSet tileset;
         private LevelMap levelMap;
         private PaletteSet paletteSet;
         private LevelLayer levelLayer;
@@ -295,7 +295,7 @@ namespace LAZYSHELL
             layers[layer] = new Tile16x16[width * height]; // Create our layer here
             if (layer != 2) // Layers 1 and 2
             {
-                for (int i = 0; i < tileMaps[layer].Length / increment; i++)
+                for (int i = 0; i < width * height && i < tileMaps[layer].Length / increment; i++)
                 {
                     tileNum = Bits.GetShort(tileMaps[layer], offset);
                     if (tileNum > 0x1FF)
@@ -306,7 +306,7 @@ namespace LAZYSHELL
             }
             else // Layer 3
             {
-                for (int i = 0; i < tileMaps[layer].Length / increment; i++)
+                for (int i = 0; i < width * height && i < tileMaps[layer].Length / increment; i++)
                 {
                     tileNum = tileMaps[layer][offset];
                     if (tileNum > 0xFF)

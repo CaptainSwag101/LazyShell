@@ -262,4 +262,33 @@ namespace LAZYSHELL
             base.OnUnsubscribeControlEvents(c);
         }
     }
+    [ToolboxItemAttribute(true)]
+    public class ToolStripCheckBox : ToolStripControlHost
+    {
+        public ToolStripCheckBox()
+            : base(new CheckBox())
+        {
+        }
+        private CheckBox CheckBoxControl
+        {
+            get { return Control as CheckBox; }
+        }
+        public bool Checked { get { return CheckBoxControl.Checked; } set { CheckBoxControl.Checked = value; } }
+        protected override void OnSubscribeControlEvents(Control c)
+        {
+            base.OnSubscribeControlEvents(c);
+            ((CheckBox)c).CheckedChanged += new EventHandler(OnCheckedChanged);
+        }
+        protected override void OnUnsubscribeControlEvents(Control c)
+        {
+            base.OnUnsubscribeControlEvents(c);
+            ((CheckBox)c).CheckedChanged -= new EventHandler(OnCheckedChanged);
+        }
+        public event EventHandler CheckedChanged;
+        private void OnCheckedChanged(object sender, EventArgs e)
+        {
+            if (CheckedChanged != null)
+                CheckedChanged(this, e);
+        }
+    }
 }

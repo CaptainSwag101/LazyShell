@@ -3576,6 +3576,23 @@ namespace LAZYSHELL
             EventHandlerList list = (EventHandlerList)pi.GetValue(b, null);
             list.RemoveHandler(obj, list[obj]);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="listView"></param>
+        /// <param name="unsorted">Return the item's original unsorted index</param>
+        /// <returns></returns>
+        public static int GetSelectedIndex(ListView listView, bool unsorted)
+        {
+            for (int i = 0; i < listView.Items.Count; i++)
+                if (listView.Items[i].Selected)
+                    return unsorted ? (int)listView.Items[i].Tag : i;
+            return -1;
+        }
+        public static int GetSelectedIndex(ListView listView)
+        {
+            return GetSelectedIndex(listView, false);
+        }
         #endregion
         #region LAZYSHELL Functions
         public static bool Compare(Tile8x8 subtileA, Tile8x8 subtileB)

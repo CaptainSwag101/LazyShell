@@ -351,7 +351,7 @@ namespace LAZYSHELL
                     graphics, new Size(import.Width / 8, import.Height / 8), paletteSet.Palettes[currentPalette], format);
                 Do.CopyOverBPPGraphics(graphics, this.graphics,
                     new Rectangle(mouseOverSubtile % 16, mouseOverSubtile / 16, import.Width / 8, import.Height / 8),
-                    16, this.offset + (mouseOverSubtile * format), format);
+                    16, this.offset, format);
             }
             else
             {

@@ -52,7 +52,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.RichTextBox();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -219,7 +219,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(100, 91);
+            this.panel1.Size = new System.Drawing.Size(100, 94);
             this.panel1.TabIndex = 399;
             // 
             // panel3
@@ -233,7 +233,7 @@
             this.panel3.Controls.Add(this.radioButton4);
             this.panel3.Location = new System.Drawing.Point(0, 19);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(96, 68);
+            this.panel3.Size = new System.Drawing.Size(96, 71);
             this.panel3.TabIndex = 267;
             // 
             // radioButton1
@@ -303,7 +303,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(363, 87);
+            this.pictureBox1.Size = new System.Drawing.Size(363, 90);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -316,7 +316,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(100, 25);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(367, 91);
+            this.panel2.Size = new System.Drawing.Size(367, 94);
             this.panel2.TabIndex = 400;
             // 
             // backgroundWorker1
@@ -329,18 +329,20 @@
             // 
             // label1
             // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Location = new System.Drawing.Point(0, 116);
+            this.label1.Location = new System.Drawing.Point(0, 119);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(467, 186);
+            this.label1.ReadOnly = true;
+            this.label1.Size = new System.Drawing.Size(467, 245);
             this.label1.TabIndex = 401;
+            this.label1.Text = "";
+            this.label1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.label1_LinkClicked);
             // 
             // Audio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 302);
+            this.ClientSize = new System.Drawing.Size(467, 364);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
@@ -387,6 +389,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox label1;
     }
 }

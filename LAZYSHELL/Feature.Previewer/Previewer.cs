@@ -325,41 +325,41 @@ namespace LAZYSHELL.Previewer
                 {
                     if (ent.Flag)
                         this.eventListBox.Items.Add(
-                            "Enter Event - X:" + ent.CoordX.ToString("00") +
-                            " Y:" + ent.CoordY.ToString("000") +
-                            " Z:" + ent.CoordZ.ToString("00") +
-                            " - Area: [" + ent.LevelNum.ToString("d3") + "] " + settings.LevelNames[ent.LevelNum]);
+                            "Enter Event (x:" + ent.CoordX.ToString() +
+                            " y:" + ent.CoordY.ToString() +
+                            " z:" + ent.CoordZ.ToString() +
+                            ") " + Lists.Numerize(settings.LevelNames, ent.LevelNum));
                     else // A run event
                         this.eventListBox.Items.Add(
-                            "Run Event - X:" + ent.CoordX.ToString("00") +
-                            " Y:" + ent.CoordY.ToString("000") +
-                            " Z:" + ent.CoordZ.ToString("00") +
-                            " - Area: [" + ent.LevelNum.ToString("d3") + "] " + settings.LevelNames[ent.LevelNum]);
+                            "Run Event (x:" + ent.CoordX.ToString() +
+                            " y:" + ent.CoordY.ToString() +
+                            " z:" + ent.CoordZ.ToString() +
+                            ") " + Lists.Numerize(settings.LevelNames, ent.LevelNum));
                 }
                 else if (this.behaviour == (int)Behaviours.LevelPreviewer)
                 {
                     this.eventListBox.Items.Add(
-                        "Enter - X:" + ent.CoordX.ToString("00") +
-                        " Y:" + ent.CoordY.ToString("000") +
-                        " Z:" + ent.CoordZ.ToString("00") +
-                        " - From Area: [" + ent.LevelNum.ToString("d3") + "] " + settings.LevelNames[ent.LevelNum]);
+                        "(x:" + ent.CoordX.ToString() +
+                        " y:" + ent.CoordY.ToString() +
+                        " z:" + ent.CoordZ.ToString() +
+                        ") " + Lists.Numerize(settings.LevelNames, ent.LevelNum));
                 }
                 else if (this.behaviour == (int)Behaviours.ActionPreviewer)
                 {
                     if (ent.Flag)
                         this.eventListBox.Items.Add(
-                            "NPC-ID: " + ent.Source.ToString() +
-                            " - NPC Action - Enter X:" + (ent.CoordX).ToString("00") +
-                            " Y:" + ent.CoordY.ToString("000") +
-                            " Z:" + ent.CoordZ.ToString("00") +
-                            " - Area: [" + ent.LevelNum.ToString("d3") + "] " + settings.LevelNames[ent.LevelNum]);
+                            "NPC #" + ent.Source.ToString() +
+                            " (x:" + (ent.CoordX).ToString() +
+                            " y:" + ent.CoordY.ToString() +
+                            " z:" + ent.CoordZ.ToString() +
+                            ") " + Lists.Numerize(settings.LevelNames, ent.LevelNum));
                     else
                         this.eventListBox.Items.Add(
-                            "NPC-ID: " + ent.Source.ToString() +
-                            " - NPC Instance Action - Enter X:" + ent.CoordX.ToString("00") +
-                            " Y:" + ent.CoordY.ToString("000") +
-                            " Z:" + ent.CoordZ.ToString("00") +
-                            " - Area: [" + ent.LevelNum.ToString("d3") + "] " + settings.LevelNames[ent.LevelNum]);
+                            "NPC #" + ent.Source.ToString() +
+                            " (x:" + ent.CoordX.ToString() +
+                            " y:" + ent.CoordY.ToString() +
+                            " z:" + ent.CoordZ.ToString() +
+                            ") " + Lists.Numerize(settings.LevelNames, ent.LevelNum));
                 }
                 else if (this.behaviour == (int)Behaviours.BattlePreviewer)
                 {
@@ -559,7 +559,7 @@ namespace LAZYSHELL.Previewer
                 }
                 // if previewing item, add item to inventory
                 if (behaviour == (int)Behaviours.AnimationPreviewer && category == 4)
-                    state[snes9x ? 0x30509 : 0x20482] = (byte)index;
+                    state[snes9x ? 0x30509 : 0x20495] = (byte)index;
 
                 offset = snes9x ? 0x53C9D : 0x41533;
 
@@ -821,12 +821,13 @@ namespace LAZYSHELL.Previewer
             Entrance ent;
             foreach (Level lvl in Model.Levels) // For every level
             {
+                int counter = 0;
                 foreach (NPC npc in lvl.LevelNPCs.Npcs) // For every NPC in each level
                 {
                     if (npc.Movement + npc.PropertyC == actionNum) // If this NPC has our action #
                     {
                         ent = new Entrance();
-                        ent.Source = (ushort)npc.NPCID;
+                        ent.Source = counter++;
                         ent.LevelNum = (ushort)lvl.Index;
                         ent.CoordX = (byte)((npc.X + 2) & 0x3F);
                         ent.CoordY = (byte)((npc.Y + 2) & 0x7F);
@@ -838,14 +839,14 @@ namespace LAZYSHELL.Previewer
                     }
                     foreach (NPC.Instance instance in npc.Instances) // test all instances
                     {
-                        if (instance.Movement + instance.InstancePropertyC == actionNum)
+                        if (instance.Movement + instance.PropertyC == actionNum)
                         {
                             ent = new Entrance();
-                            ent.Source = (ushort)instance.NPCID;
+                            ent.Source = counter++;
                             ent.LevelNum = (ushort)lvl.Index;
-                            ent.CoordX = (byte)((instance.InstanceCoordX + 2) & 0x3F);
-                            ent.CoordY = (byte)((instance.InstanceCoordY + 2) & 0x7F);
-                            ent.CoordZ = instance.InstanceCoordZ;
+                            ent.CoordX = (byte)((instance.X + 2) & 0x3F);
+                            ent.CoordY = (byte)((instance.Y + 2) & 0x7F);
+                            ent.CoordZ = instance.Z;
                             ent.RadialPosition = 7;
                             ent.ShowMessage = false;
                             ent.Flag = false; // Indicates an Instance
@@ -1096,7 +1097,7 @@ namespace LAZYSHELL.Previewer
         #endregion
         public struct Entrance
         {
-            public ushort Source;
+            public int Source;
             public bool ShowMessage;
             public byte CoordX;
             public byte CoordY;

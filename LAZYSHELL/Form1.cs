@@ -413,6 +413,8 @@ namespace LAZYSHELL
         }
         private void openAttacks_Click(object sender, EventArgs e)
         {
+            if (!LunarCompressExists())
+                return;
             AppControl.Attacks();
         }
         private void openAudio_Click(object sender, EventArgs e)
@@ -447,6 +449,8 @@ namespace LAZYSHELL
         }
         private void openItems_Click(object sender, EventArgs e)
         {
+            if (!LunarCompressExists())
+                return;
             AppControl.Items();
         }
         private void openLevels_Click(object sender, System.EventArgs e)

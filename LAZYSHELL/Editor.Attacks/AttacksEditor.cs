@@ -58,6 +58,7 @@ namespace LAZYSHELL
                 len += Model.Spells[i].Assemble(len);
             if (i != Model.Spells.Length)
                 System.Windows.Forms.MessageBox.Show("Spell Descriptions total length exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
+            checksum = Do.GenerateChecksum(Model.Attacks, Model.Spells);
         }
         // event handlers
         private void importSpellsToolStripMenuItem_Click(object sender, EventArgs e)

@@ -2313,6 +2313,7 @@ namespace LAZYSHELL
                 Model.HexViewer.SelectionStart = (actionScript.Offset & 15) * 3;
             }
             Model.HexViewer.Compare();
+            checksum = Do.GenerateChecksum(eventScripts, actionScripts);
         }
         public void AssembleAllEventScripts()
         {
@@ -2528,7 +2529,8 @@ namespace LAZYSHELL
             if (EventScriptTree.SelectedNode.Parent != null || isActionScript)
             {
                 button1.Visible = false;
-                if (!isActionSelected)
+                isActionSelected = true;
+                if (categories_aq.Parent.Controls.GetChildIndex(categories_aq) != 0)
                 {
                     categories_aq.BringToFront();
                     commands.Items.Clear();
@@ -2546,21 +2548,16 @@ namespace LAZYSHELL
             else
             {
                 tempEsc = (EventScriptCommand)eventScripts[currentScript].Commands[EventScriptTree.SelectedNode.Index];
-                if (tempEsc.Opcode <= 0x2F && tempEsc.Option < 0xF2)
+                button1.Checked = false;
+                button1.Visible = tempEsc.Opcode <= 0x2F && tempEsc.Option < 0xF2;
+                isActionSelected = false;
+                if (categories_es.Parent.Controls.GetChildIndex(categories_es) != 0)
                 {
-                    button1.Visible = true;
-                }
-                else
-                {
-                    button1.Visible = false;
-                    if (isActionSelected)
-                    {
-                        categories_es.BringToFront();
-                        commands.Items.Clear();
-                        commands.Items.AddRange(Lists.EventListBoxNames(categories_es.SelectedIndex));
-                        categories_es.SelectedIndex = 0;
-                        commands.SelectedIndex = 0;
-                    }
+                    categories_es.BringToFront();
+                    commands.Items.Clear();
+                    commands.Items.AddRange(Lists.EventListBoxNames(categories_es.SelectedIndex));
+                    categories_es.SelectedIndex = 0;
+                    commands.SelectedIndex = 0;
                 }
                 if (aqc != null && editedNode == null)    // if an action queue command is in the COMMAND PROPERTIES panel
                 {
@@ -2754,9 +2751,9 @@ namespace LAZYSHELL
         }
         private void EvtScrDeleteCommand_Click(object sender, EventArgs e)
         {
-            if (EventScriptTree.SelectedNode == null) return;
+            //if (EventScriptTree.SelectedNode == null) return;
 
-            if (EventScriptTree.SelectedNode == editedNode)
+            if (EventScriptTree.SelectedNode != null && EventScriptTree.SelectedNode == editedNode)
             {
                 editedNode = null;
                 buttonApplyEvent.Enabled = false;
@@ -2803,14 +2800,14 @@ namespace LAZYSHELL
 
             treeViewWrapper.EditedNode = editedNode;
         }
-        private void EvtScrExpandAll_Click(object sender, EventArgs e)
-        {
-            treeViewWrapper.ExpandAll();
-            UpdateCommandData();
-        }
         private void EvtScrCollapseAll_Click(object sender, EventArgs e)
         {
             treeViewWrapper.CollapseAll();
+            UpdateCommandData();
+        }
+        private void EvtScrExpandAll_Click(object sender, EventArgs e)
+        {
+            treeViewWrapper.ExpandAll();
             UpdateCommandData();
         }
         private void EvtScrClearAll_Click(object sender, EventArgs e)
@@ -3578,7 +3575,7 @@ namespace LAZYSHELL
                     }
                 }
                 return;
-            }            
+            }
 
             pointer = temp.ReadPointer() + (eventScript.BaseOffset & 0xFF0000);
             foreach (EventScript script in eventScripts)

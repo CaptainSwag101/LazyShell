@@ -84,6 +84,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.shopName = new LAZYSHELL.ToolStripComboBox();
             this.shopLabel = new System.Windows.Forms.ToolStripTextBox();
+            this.moveUp = new System.Windows.Forms.Button();
+            this.moveDown = new System.Windows.Forms.Button();
             this.panel192.SuspendLayout();
             this.panel194.SuspendLayout();
             this.panel59.SuspendLayout();
@@ -111,7 +113,7 @@
             this.panel192.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel192.Controls.Add(this.label102);
             this.panel192.Controls.Add(this.shopDiscounts);
-            this.panel192.Location = new System.Drawing.Point(1, 429);
+            this.panel192.Location = new System.Drawing.Point(1, 460);
             this.panel192.Name = "panel192";
             this.panel192.Size = new System.Drawing.Size(248, 87);
             this.panel192.TabIndex = 537;
@@ -152,7 +154,7 @@
             this.panel194.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel194.Controls.Add(this.label161);
             this.panel194.Controls.Add(this.shopBuyOptions);
-            this.panel194.Location = new System.Drawing.Point(1, 340);
+            this.panel194.Location = new System.Drawing.Point(1, 371);
             this.panel194.Name = "panel194";
             this.panel194.Size = new System.Drawing.Size(248, 87);
             this.panel194.TabIndex = 538;
@@ -248,6 +250,7 @@
             this.shopItem14.Tag = "";
             this.shopItem14.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem14.SelectedIndexChanged += new System.EventHandler(this.shopItem14_SelectedIndexChanged);
+            this.shopItem14.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel104
             // 
@@ -272,6 +275,7 @@
             this.shopItem13.Tag = "";
             this.shopItem13.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem13.SelectedIndexChanged += new System.EventHandler(this.shopItem13_SelectedIndexChanged);
+            this.shopItem13.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel102
             // 
@@ -296,6 +300,7 @@
             this.shopItem15.Tag = "";
             this.shopItem15.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem15.SelectedIndexChanged += new System.EventHandler(this.shopItem15_SelectedIndexChanged);
+            this.shopItem15.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel105
             // 
@@ -320,6 +325,7 @@
             this.shopItem12.Tag = "";
             this.shopItem12.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem12.SelectedIndexChanged += new System.EventHandler(this.shopItem12_SelectedIndexChanged);
+            this.shopItem12.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel106
             // 
@@ -344,6 +350,7 @@
             this.shopItem11.Tag = "";
             this.shopItem11.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem11.SelectedIndexChanged += new System.EventHandler(this.shopItem11_SelectedIndexChanged);
+            this.shopItem11.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel107
             // 
@@ -368,6 +375,7 @@
             this.shopItem10.Tag = "";
             this.shopItem10.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem10.SelectedIndexChanged += new System.EventHandler(this.shopItem10_SelectedIndexChanged);
+            this.shopItem10.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel108
             // 
@@ -392,6 +400,7 @@
             this.shopItem9.Tag = "";
             this.shopItem9.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem9.SelectedIndexChanged += new System.EventHandler(this.shopItem9_SelectedIndexChanged);
+            this.shopItem9.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel109
             // 
@@ -416,6 +425,7 @@
             this.shopItem8.Tag = "";
             this.shopItem8.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem8.SelectedIndexChanged += new System.EventHandler(this.shopItem8_SelectedIndexChanged);
+            this.shopItem8.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel110
             // 
@@ -440,6 +450,7 @@
             this.shopItem7.Tag = "";
             this.shopItem7.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem7.SelectedIndexChanged += new System.EventHandler(this.shopItem7_SelectedIndexChanged);
+            this.shopItem7.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel111
             // 
@@ -464,6 +475,7 @@
             this.shopItem6.Tag = "";
             this.shopItem6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem6.SelectedIndexChanged += new System.EventHandler(this.shopItem6_SelectedIndexChanged);
+            this.shopItem6.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel112
             // 
@@ -488,6 +500,7 @@
             this.shopItem5.Tag = "";
             this.shopItem5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem5.SelectedIndexChanged += new System.EventHandler(this.shopItem5_SelectedIndexChanged);
+            this.shopItem5.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel113
             // 
@@ -512,6 +525,7 @@
             this.shopItem4.Tag = "";
             this.shopItem4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem4.SelectedIndexChanged += new System.EventHandler(this.shopItem4_SelectedIndexChanged);
+            this.shopItem4.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel114
             // 
@@ -536,6 +550,7 @@
             this.shopItem3.Tag = "";
             this.shopItem3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem3.SelectedIndexChanged += new System.EventHandler(this.shopItem3_SelectedIndexChanged);
+            this.shopItem3.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel115
             // 
@@ -560,6 +575,7 @@
             this.shopItem2.Tag = "";
             this.shopItem2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem2.SelectedIndexChanged += new System.EventHandler(this.shopItem2_SelectedIndexChanged);
+            this.shopItem2.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // panel116
             // 
@@ -584,6 +600,7 @@
             this.shopItem1.Tag = "";
             this.shopItem1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem1.SelectedIndexChanged += new System.EventHandler(this.shopItem1_SelectedIndexChanged);
+            this.shopItem1.Click += new System.EventHandler(this.shopItem_Click);
             // 
             // label181
             // 
@@ -786,12 +803,34 @@
             this.shopLabel.Size = new System.Drawing.Size(248, 21);
             this.shopLabel.TextChanged += new System.EventHandler(this.shopLabel_TextChanged);
             // 
+            // moveUp
+            // 
+            this.moveUp.Location = new System.Drawing.Point(1, 342);
+            this.moveUp.Name = "moveUp";
+            this.moveUp.Size = new System.Drawing.Size(120, 23);
+            this.moveUp.TabIndex = 539;
+            this.moveUp.Text = "MOVE UP";
+            this.moveUp.UseVisualStyleBackColor = true;
+            this.moveUp.Click += new System.EventHandler(this.moveUp_Click);
+            // 
+            // moveDown
+            // 
+            this.moveDown.Location = new System.Drawing.Point(127, 342);
+            this.moveDown.Name = "moveDown";
+            this.moveDown.Size = new System.Drawing.Size(120, 23);
+            this.moveDown.TabIndex = 539;
+            this.moveDown.Text = "MOVE DOWN";
+            this.moveDown.UseVisualStyleBackColor = true;
+            this.moveDown.Click += new System.EventHandler(this.moveDown_Click);
+            // 
             // Shops
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(250, 517);
+            this.ClientSize = new System.Drawing.Size(250, 548);
             this.ControlBox = false;
+            this.Controls.Add(this.moveDown);
+            this.Controls.Add(this.moveUp);
             this.Controls.Add(this.panel192);
             this.Controls.Add(this.panel194);
             this.Controls.Add(this.panel59);
@@ -886,5 +925,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private LAZYSHELL.ToolStripComboBox shopName;
         private System.Windows.Forms.ToolStripTextBox shopLabel;
+        private System.Windows.Forms.Button moveUp;
+        private System.Windows.Forms.Button moveDown;
     }
 }

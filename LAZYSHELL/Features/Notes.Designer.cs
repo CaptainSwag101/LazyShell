@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Notes));
             this.elementType = new System.Windows.Forms.ComboBox();
-            this.elementIndexes = new System.Windows.Forms.ListBox();
             this.indexDescription = new System.Windows.Forms.RichTextBox();
             this.indexLabel = new System.Windows.Forms.TextBox();
             this.buttonMoveUp = new System.Windows.Forms.Button();
@@ -50,6 +49,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.addressBit = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.elementIndexes = new LAZYSHELL.NewListView();
+            this.index = new System.Windows.Forms.ColumnHeader();
+            this.label = new System.Windows.Forms.ColumnHeader();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonBrowse = new System.Windows.Forms.Button();
@@ -113,18 +115,6 @@
             this.elementType.Size = new System.Drawing.Size(336, 21);
             this.elementType.TabIndex = 2;
             this.elementType.SelectedIndexChanged += new System.EventHandler(this.elementType_SelectedIndexChanged);
-            // 
-            // elementIndexes
-            // 
-            this.elementIndexes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.elementIndexes.FormattingEnabled = true;
-            this.elementIndexes.Location = new System.Drawing.Point(0, 0);
-            this.elementIndexes.Name = "elementIndexes";
-            this.elementIndexes.Size = new System.Drawing.Size(336, 316);
-            this.elementIndexes.TabIndex = 1;
-            this.elementIndexes.SelectedIndexChanged += new System.EventHandler(this.elementIndexes_SelectedIndexChanged);
             // 
             // indexDescription
             // 
@@ -342,16 +332,48 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel1.Controls.Add(this.elementIndexes);
             this.panel1.Controls.Add(this.buttonLoad);
             this.panel1.Controls.Add(this.buttonDelete);
             this.panel1.Controls.Add(this.buttonMoveUp);
             this.panel1.Controls.Add(this.buttonMoveDown);
             this.panel1.Controls.Add(this.buttonAdd);
+            this.panel1.Controls.Add(this.elementIndexes);
             this.panel1.Location = new System.Drawing.Point(6, 33);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(336, 400);
             this.panel1.TabIndex = 3;
+            // 
+            // elementIndexes
+            // 
+            this.elementIndexes.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.elementIndexes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.elementIndexes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.index,
+            this.label});
+            this.elementIndexes.FullRowSelect = true;
+            this.elementIndexes.HideSelection = false;
+            this.elementIndexes.Location = new System.Drawing.Point(0, 0);
+            this.elementIndexes.MultiSelect = false;
+            this.elementIndexes.Name = "elementIndexes";
+            this.elementIndexes.Size = new System.Drawing.Size(336, 317);
+            this.elementIndexes.TabIndex = 275;
+            this.elementIndexes.UseCompatibleStateImageBehavior = false;
+            this.elementIndexes.View = System.Windows.Forms.View.Details;
+            this.elementIndexes.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.elementIndexes_ColumnClick);
+            this.elementIndexes.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.elementIndexes_ItemSelectionChanged);
+            // 
+            // index
+            // 
+            this.index.Tag = "";
+            this.index.Text = "Index";
+            this.index.Width = 44;
+            // 
+            // label
+            // 
+            this.label.Tag = "";
+            this.label.Text = "Label";
+            this.label.Width = 272;
             // 
             // buttonOK
             // 
@@ -522,13 +544,12 @@
             this.numerize.Name = "numerize";
             this.numerize.Size = new System.Drawing.Size(23, 22);
             this.numerize.Text = "Numbered Indexes";
+            this.numerize.Visible = false;
             this.numerize.Click += new System.EventHandler(this.tagIndexesWithNumbersToolStripMenuItem_Click);
             // 
             // alwaysOnTop
             // 
-            this.alwaysOnTop.Checked = true;
             this.alwaysOnTop.CheckOnClick = true;
-            this.alwaysOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
             this.alwaysOnTop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.alwaysOnTop.Image = global::LAZYSHELL.Properties.Resources.alwaysOnTop;
             this.alwaysOnTop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -553,7 +574,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Notes";
             this.Text = "NOTES - Lazy Shell";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Notes_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.indexNumber)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -578,7 +598,6 @@
         #endregion
 
         private System.Windows.Forms.ComboBox elementType;
-        private System.Windows.Forms.ListBox elementIndexes;
         private System.Windows.Forms.RichTextBox indexDescription;
         private System.Windows.Forms.TextBox indexLabel;
         private System.Windows.Forms.Button buttonMoveUp;
@@ -614,5 +633,8 @@
         private System.Windows.Forms.ToolStripButton numerize;
         private System.Windows.Forms.ToolStripButton alwaysOnTop;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private NewListView elementIndexes;
+        private System.Windows.Forms.ColumnHeader index;
+        private System.Windows.Forms.ColumnHeader label;
     }
 }

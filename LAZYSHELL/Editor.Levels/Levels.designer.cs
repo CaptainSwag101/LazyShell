@@ -508,6 +508,8 @@ namespace LAZYSHELL
             this.help = new System.Windows.Forms.ToolStripButton();
             this.baseConversion = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.tileModsBytesLeft = new System.Windows.Forms.Label();
+            this.solidModsBytesLeft = new System.Windows.Forms.Label();
             this.tabPage8.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.panel85.SuspendLayout();
@@ -5212,6 +5214,7 @@ namespace LAZYSHELL
             // panel8
             // 
             this.panel8.Controls.Add(this.panel15);
+            this.panel8.Controls.Add(this.tileModsBytesLeft);
             this.panel8.Controls.Add(this.tileModsFieldTree);
             this.panel8.Controls.Add(this.toolStrip7);
             this.panel8.Controls.Add(this.label69);
@@ -5237,9 +5240,9 @@ namespace LAZYSHELL
             this.panel15.Controls.Add(this.label36);
             this.panel15.Controls.Add(this.label50);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel15.Location = new System.Drawing.Point(125, 44);
+            this.panel15.Location = new System.Drawing.Point(125, 65);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(135, 256);
+            this.panel15.Size = new System.Drawing.Size(135, 235);
             this.panel15.TabIndex = 495;
             // 
             // tileModsLayers
@@ -5318,10 +5321,20 @@ namespace LAZYSHELL
             0,
             0,
             0});
+            this.tileModsHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.tileModsHeight.Name = "tileModsHeight";
             this.tileModsHeight.Size = new System.Drawing.Size(72, 17);
             this.tileModsHeight.TabIndex = 140;
             this.tileModsHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tileModsHeight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.tileModsHeight.ValueChanged += new System.EventHandler(this.tileModsHeight_ValueChanged);
             // 
             // tileModsWidth
@@ -5333,10 +5346,20 @@ namespace LAZYSHELL
             0,
             0,
             0});
+            this.tileModsWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.tileModsWidth.Name = "tileModsWidth";
             this.tileModsWidth.Size = new System.Drawing.Size(72, 17);
             this.tileModsWidth.TabIndex = 140;
             this.tileModsWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tileModsWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.tileModsWidth.ValueChanged += new System.EventHandler(this.tileModsWidth_ValueChanged);
             // 
             // label36
@@ -5412,7 +5435,7 @@ namespace LAZYSHELL
             this.tileModsInsertInstance.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tileModsInsertInstance.Name = "tileModsInsertInstance";
             this.tileModsInsertInstance.Size = new System.Drawing.Size(23, 22);
-            this.tileModsInsertInstance.Text = "New Tilemap Mod Instance";
+            this.tileModsInsertInstance.Text = "New Alternate Tilemap Mod";
             this.tileModsInsertInstance.Click += new System.EventHandler(this.tileModsInsertInstance_Click);
             // 
             // tileModsDeleteField
@@ -5519,6 +5542,7 @@ namespace LAZYSHELL
             // panel27
             // 
             this.panel27.Controls.Add(this.panel44);
+            this.panel27.Controls.Add(this.solidModsBytesLeft);
             this.panel27.Controls.Add(this.solidModsFieldTree);
             this.panel27.Controls.Add(this.toolStrip8);
             this.panel27.Controls.Add(this.label68);
@@ -5543,9 +5567,9 @@ namespace LAZYSHELL
             this.panel44.Controls.Add(this.label64);
             this.panel44.Controls.Add(this.label67);
             this.panel44.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel44.Location = new System.Drawing.Point(125, 44);
+            this.panel44.Location = new System.Drawing.Point(125, 65);
             this.panel44.Name = "panel44";
-            this.panel44.Size = new System.Drawing.Size(135, 296);
+            this.panel44.Size = new System.Drawing.Size(135, 275);
             this.panel44.TabIndex = 495;
             // 
             // label14
@@ -5588,7 +5612,7 @@ namespace LAZYSHELL
             this.solidModsX.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.solidModsX.Location = new System.Drawing.Point(59, 0);
             this.solidModsX.Maximum = new decimal(new int[] {
-            63,
+            31,
             0,
             0,
             0});
@@ -5607,10 +5631,20 @@ namespace LAZYSHELL
             0,
             0,
             0});
+            this.solidModsHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.solidModsHeight.Name = "solidModsHeight";
             this.solidModsHeight.Size = new System.Drawing.Size(72, 17);
             this.solidModsHeight.TabIndex = 140;
             this.solidModsHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.solidModsHeight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.solidModsHeight.ValueChanged += new System.EventHandler(this.solidModsHeight_ValueChanged);
             // 
             // solidModsWidth
@@ -5622,10 +5656,20 @@ namespace LAZYSHELL
             0,
             0,
             0});
+            this.solidModsWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.solidModsWidth.Name = "solidModsWidth";
             this.solidModsWidth.Size = new System.Drawing.Size(72, 17);
             this.solidModsWidth.TabIndex = 140;
             this.solidModsWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.solidModsWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.solidModsWidth.ValueChanged += new System.EventHandler(this.solidModsWidth_ValueChanged);
             // 
             // label64
@@ -6516,7 +6560,7 @@ namespace LAZYSHELL
             new ColumnHeader()});
             this.levelInfo.Name = "levelInfo";
             this.levelInfo.Size = new System.Drawing.Size(140, 160);
-            this.levelInfo.View = View.Details;
+            this.levelInfo.View = System.Windows.Forms.View.Details;
             // 
             // help
             // 
@@ -6542,6 +6586,34 @@ namespace LAZYSHELL
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
             this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tileModsBytesLeft
+            // 
+            this.tileModsBytesLeft.BackColor = System.Drawing.SystemColors.Control;
+            this.tileModsBytesLeft.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tileModsBytesLeft.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tileModsBytesLeft.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tileModsBytesLeft.Location = new System.Drawing.Point(125, 44);
+            this.tileModsBytesLeft.Name = "tileModsBytesLeft";
+            this.tileModsBytesLeft.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.tileModsBytesLeft.Size = new System.Drawing.Size(135, 21);
+            this.tileModsBytesLeft.TabIndex = 500;
+            this.tileModsBytesLeft.Text = "bytes left";
+            this.tileModsBytesLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // solidModsBytesLeft
+            // 
+            this.solidModsBytesLeft.BackColor = System.Drawing.SystemColors.Control;
+            this.solidModsBytesLeft.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.solidModsBytesLeft.Dock = System.Windows.Forms.DockStyle.Top;
+            this.solidModsBytesLeft.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.solidModsBytesLeft.Location = new System.Drawing.Point(125, 44);
+            this.solidModsBytesLeft.Name = "solidModsBytesLeft";
+            this.solidModsBytesLeft.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.solidModsBytesLeft.Size = new System.Drawing.Size(135, 21);
+            this.solidModsBytesLeft.TabIndex = 501;
+            this.solidModsBytesLeft.Text = "bytes left";
+            this.solidModsBytesLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Levels
             // 
@@ -7200,6 +7272,8 @@ namespace LAZYSHELL
         private ToolStripMenuItem resetGraphicSetToolStripMenuItem;
         private ToolStripDropDownButton toolStripDropDownButton2;
         private LAZYSHELL.ToolStripListView levelInfo;
+        private Label tileModsBytesLeft;
+        private Label solidModsBytesLeft;
     }
 }
 

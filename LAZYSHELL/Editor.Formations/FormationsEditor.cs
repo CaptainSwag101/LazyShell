@@ -52,6 +52,7 @@ namespace LAZYSHELL
                 fp.Assemble();
             for (int i = 0; i < Model.FormationMusics.Length; i++)
                 Model.Data[0x029F51 + i] = Model.FormationMusics[i];
+            checksum = Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics);
         }
         // event handlers
         private void FormationsEditor_FormClosing(object sender, FormClosingEventArgs e)

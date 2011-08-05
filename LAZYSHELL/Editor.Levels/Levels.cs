@@ -116,9 +116,10 @@ namespace LAZYSHELL
 
             updatingLevel = false;
 
+            findNPCNumber = new NPCEditor(this, npcID.Value);
+
             checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.TileSets,
                 Model.TileMaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
-            findNPCNumber = new NPCEditor(this, npcID.Value);
         }
         #region Functions
         private void InitializeSettings()
@@ -1280,6 +1281,9 @@ namespace LAZYSHELL
                 0, 58, 91);
 
             Model.HexViewer.Compare();
+
+            checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.TileSets,
+                Model.TileMaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
         }
         #endregion
         #region Event Handlers

@@ -16,16 +16,18 @@ namespace LAZYSHELL
     public partial class Notes : Form
     {
         #region Variables
-                private Settings settings = Settings.Default;
+        private Settings settings = Settings.Default;
         private ArrayList currentIndexes;
         private NotesDB.Index currentIndex;
         private State state = State.Instance;
         private NotesDB notes; public NotesDB ThisNotes { get { return notes; } set { notes = value; } }
         public ComboBox ElementType { get { return elementType; } set { elementType = value; } }
-        public ListBox ElementIndexes { get { return elementIndexes; } set { elementIndexes = value; } }
+        public NewListView ElementIndexes { get { return elementIndexes; } set { elementIndexes = value; } }
         public NumericUpDown IndexNumber { get { return indexNumber; } set { indexNumber = value; } }
         public TextBox IndexLabel { get { return indexLabel; } set { indexLabel = value; } }
         public RichTextBox IndexDescription { get { return indexDescription; } set { indexDescription = value; } }
+        private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+        private long checksum;
         private bool updating = false;
         #endregion
         // constructor
@@ -33,6 +35,7 @@ namespace LAZYSHELL
         {
             Model.Notes = notes;
             InitializeComponent();
+            this.elementIndexes.ListViewItemSorter = lvwColumnSorter;
             if (settings.LoadNotes)
             {
                 if (!File.Exists(settings.NotePathCustom))
@@ -54,6 +57,7 @@ namespace LAZYSHELL
                 save.Enabled = true;
                 saveAs.Enabled = true;
             }
+            checksum = Do.GenerateChecksum(notes);
         }
         #region Functions
         private void RefreshElementIndexes()
@@ -135,6 +139,7 @@ namespace LAZYSHELL
                     indexLabel.Text = "";
                     indexDescription.Text = "";
                     elementIndexes.EndUpdate();
+                    elementIndexes.EndUpdate();
                     updating = false;
                     return;
             }
@@ -152,13 +157,22 @@ namespace LAZYSHELL
                 indexDescription.Text = "";
             }
 
+            int counter = 0;
+            List<ListViewItem> listViewItems = new List<ListViewItem>();
             foreach (NotesDB.Index index in currentIndexes)
             {
-                if (numerize.Checked)
-                    elementIndexes.Items.Add("[" + index.IndexNumber.ToString("d4") + "]  " + index.IndexLabel);
-                else
-                    elementIndexes.Items.Add(index.IndexLabel);
+                ListViewItem item = new ListViewItem(new string[]
+                {
+                    (elementType.SelectedItem.ToString() == "  Memory Bits" ? 
+                    index.Address.ToString("X4") : index.IndexNumber.ToString()) + 
+                    (elementType.SelectedItem.ToString() == "  Memory Bits" ? 
+                    ":" + index.AddressBit.ToString() : ""),
+                    index.IndexLabel,
+                });
+                item.Tag = counter++;
+                listViewItems.Add(item);
             }
+            elementIndexes.Items.AddRange(listViewItems.ToArray());
             elementIndexes.EndUpdate();
 
             updating = false;
@@ -172,10 +186,12 @@ namespace LAZYSHELL
             buttonMoveUp.Enabled = true;
             buttonLoad.Enabled = true;
             groupBox1.Enabled = true;
-            currentIndex = (NotesDB.Index)currentIndexes[elementIndexes.SelectedIndex];
+            currentIndex = (NotesDB.Index)currentIndexes[Do.GetSelectedIndex(elementIndexes)];
             indexNumber.Value = currentIndex.IndexNumber;
             indexLabel.Text = currentIndex.IndexLabel;
             indexDescription.Text = currentIndex.IndexDescription;
+            address.Value = currentIndex.Address;
+            addressBit.Value = currentIndex.AddressBit;
 
             updating = false;
         }
@@ -278,22 +294,23 @@ namespace LAZYSHELL
             BinaryFormatter b = new BinaryFormatter();
             b.Serialize(s, notes);
             s.Close();
+            checksum = Do.GenerateChecksum(notes);
         }
         private void AddNewIndex()
         {
-            if (elementIndexes.SelectedIndex != -1)
-                notes.AddIndex(elementIndexes.SelectedIndex + 1, currentIndexes);
+            if (Do.GetSelectedIndex(elementIndexes) != -1)
+                notes.AddIndex(Do.GetSelectedIndex(elementIndexes) + 1, currentIndexes);
             else
                 notes.AddIndex(0, currentIndexes);
-            int selectedIndex = elementIndexes.SelectedIndex;
+            int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
-            elementIndexes.SelectedIndex = selectedIndex + 1;
+            elementIndexes.Items[selectedIndex + 1].Selected = true;
         }
         public void AddingFromEditor(int type, int number, string label, string description)
         {
             elementType.SelectedIndex = type;
             if (elementIndexes.Items.Count > 0)
-                elementIndexes.SelectedIndex = elementIndexes.Items.Count - 1;
+                elementIndexes.Items[elementIndexes.Items.Count - 1].Selected = true;
             AddNewIndex();
             indexNumber.Value = number;
             indexLabel.Text = label;
@@ -303,18 +320,53 @@ namespace LAZYSHELL
         {
             elementType.SelectedIndex = type;
             if (elementIndexes.Items.Count > 0)
-                elementIndexes.SelectedIndex = elementIndexes.Items.Count - 1;
+                elementIndexes.Items[elementIndexes.Items.Count - 1].Selected = true;
             AddNewIndex();
             this.address.Value = address;
             this.addressBit.Value = addressBit;
             indexLabel.Text = label;
             indexDescription.Text = "";
         }
+        private void SortIndexes(int column)
+        {
+            int count = currentIndexes.Count;
+            for (int y = 0; y < count - 1; y++)
+            {
+                for (int x = 0; x < count - 1 - y; x++)
+                {
+                    NotesDB.Index indexA = (NotesDB.Index)currentIndexes[x];
+                    NotesDB.Index indexB = (NotesDB.Index)currentIndexes[x + 1];
+                    if (column == 0)
+                    {
+                        if (elementType.SelectedItem.ToString() == "  Memory Bits")
+                        {
+                            if ((indexB.Address.ToString() + indexB.AddressBit.ToString()).CompareTo(
+                                (indexA.Address.ToString() + indexA.AddressBit.ToString())) < 0)
+                                currentIndexes.Reverse(x, 2);
+                        }
+                        else
+                        {
+                            if (indexB.IndexNumber.CompareTo(indexA.IndexNumber) < 0)
+                                currentIndexes.Reverse(x, 2);
+                        }
+                    }
+                    else if (column == 1)
+                    {
+                        if (indexB.IndexLabel.CompareTo(indexA.IndexLabel) < 0)
+                            currentIndexes.Reverse(x, 2);
+                    }
+                }
+            }
+        }
         #endregion
         #region Event Handlers
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (notes == null) return;
+            if (Do.GenerateChecksum(notes) == checksum)
+            {
+                return;
+            }
             DialogResult result = MessageBox.Show("Save changes to notes?", "LAZY SHELL",
             MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
@@ -450,29 +502,29 @@ namespace LAZYSHELL
         }
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (elementIndexes.SelectedIndex == -1)
+            if (Do.GetSelectedIndex(elementIndexes) == -1)
                 return;
-            notes.DeleteIndex(elementIndexes.SelectedIndex, currentIndexes);
-            int selectedIndex = elementIndexes.SelectedIndex;
+            notes.DeleteIndex(Do.GetSelectedIndex(elementIndexes), currentIndexes);
+            int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
             if (currentIndexes.Count > 0)
-                elementIndexes.SelectedIndex = Math.Min(selectedIndex, currentIndexes.Count - 1);
+                elementIndexes.Items[Math.Min(selectedIndex, currentIndexes.Count - 1)].Selected = true;
         }
         private void buttonMoveUp_Click(object sender, EventArgs e)
         {
-            if (elementIndexes.SelectedIndex == 0) return;
-            notes.SwitchIndex(elementIndexes.SelectedIndex - 1, currentIndexes);
-            int selectedIndex = elementIndexes.SelectedIndex;
+            if (Do.GetSelectedIndex(elementIndexes) == 0) return;
+            notes.SwitchIndex(Do.GetSelectedIndex(elementIndexes) - 1, currentIndexes);
+            int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
-            elementIndexes.SelectedIndex = selectedIndex - 1;
+            elementIndexes.Items[selectedIndex - 1].Selected = true;
         }
         private void buttonMoveDown_Click(object sender, EventArgs e)
         {
-            if (elementIndexes.SelectedIndex >= elementIndexes.Items.Count - 1) return;
-            notes.SwitchIndex(elementIndexes.SelectedIndex, currentIndexes);
-            int selectedIndex = elementIndexes.SelectedIndex;
+            if (Do.GetSelectedIndex(elementIndexes) >= elementIndexes.Items.Count - 1) return;
+            notes.SwitchIndex(Do.GetSelectedIndex(elementIndexes), currentIndexes);
+            int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
-            elementIndexes.SelectedIndex = selectedIndex + 1;
+            elementIndexes.Items[selectedIndex + 1].Selected = true;
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
@@ -485,25 +537,39 @@ namespace LAZYSHELL
             RefreshElementIndexes();
 
             if (elementIndexes.Items.Count > 0)
-                elementIndexes.SelectedIndex = 0;
+                elementIndexes.Items[0].Selected = true;
         }
-        private void elementIndexes_SelectedIndexChanged(object sender, EventArgs e)
+        private void elementIndexes_ColumnClick(object sender, ColumnClickEventArgs e)
         {
+            SortIndexes(e.Column);
+            int selectedIndex = Do.GetSelectedIndex(elementIndexes);
+            RefreshElementIndexes();
+            elementIndexes.Items[selectedIndex].Selected = true;
+        }
+        private void elementIndexes_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (!e.IsSelected) return;
             if (updating) return;
             RefreshIndex();
+            elementIndexes.BeginUpdate();
+            elementIndexes.Items[Do.GetSelectedIndex(elementIndexes)].EnsureVisible();
+            elementIndexes.EndUpdate();
         }
         private void indexNumber_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
             currentIndex.IndexNumber = (int)indexNumber.Value;
+            int selectedIndex = Do.GetSelectedIndex(elementIndexes);
+            RefreshElementIndexes();
+            elementIndexes.Items[selectedIndex].Selected = true;
         }
         private void indexLabel_TextChanged(object sender, EventArgs e)
         {
             if (updating) return;
             currentIndex.IndexLabel = indexLabel.Text;
-            int selectedIndex = elementIndexes.SelectedIndex;
+            int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
-            elementIndexes.SelectedIndex = selectedIndex;
+            elementIndexes.Items[selectedIndex].Selected = true;
         }
         private void indexDescription_TextChanged(object sender, EventArgs e)
         {
@@ -514,11 +580,17 @@ namespace LAZYSHELL
         {
             if (updating) return;
             currentIndex.Address = (int)address.Value;
+            int selectedIndex = Do.GetSelectedIndex(elementIndexes);
+            RefreshElementIndexes();
+            elementIndexes.Items[selectedIndex].Selected = true;
         }
         private void addressBit_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
             currentIndex.AddressBit = (int)addressBit.Value;
+            int selectedIndex = Do.GetSelectedIndex(elementIndexes);
+            RefreshElementIndexes();
+            elementIndexes.Items[selectedIndex].Selected = true;
         }
         private void generalNotes_TextChanged(object sender, EventArgs e)
         {
@@ -561,9 +633,9 @@ namespace LAZYSHELL
         }
         private void tagIndexesWithNumbersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int selectedIndex = elementIndexes.SelectedIndex;
+            int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
-            elementIndexes.SelectedIndex = selectedIndex;
+            elementIndexes.Items[selectedIndex].Selected = true;
         }
         #endregion
     }

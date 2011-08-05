@@ -17,7 +17,7 @@ namespace LAZYSHELL
         #region Variables
         public long checksum;
         // main
-        private delegate void Function(RichTextBox richTextBox, StringComparison stringComparison, bool matchWholeWord);
+        private delegate void Function(RichTextBox richTextBox, StringComparison stringComparison, bool matchWholeWord, bool replaceAll, string replaceWith);
         // accessors
         private Dialogue[] dialogues { get { return Model.Dialogues; } set { Model.Dialogues = value; } }
         private Dialogue dialogue { get { return dialogues[index]; } set { dialogues[index] = value; } }
@@ -99,7 +99,8 @@ namespace LAZYSHELL
             updatingDialogue = false;
             new ToolTipLabel(this, toolTip1, showDecHex, helpTips);
             //
-            checksum = Do.GenerateChecksum(dialogues, dialogueTables, fontDialogue, fontTriangle, fontPalette, Model.BattleDialogues, dialogueTileset);
+            checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, dialogueTileset, 
+                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu);
         }
         // tooltips
         private void SetToolTips(ToolTip toolTip1)
@@ -454,7 +455,7 @@ namespace LAZYSHELL
                 else dialogues[i].DuplicateDialogues = i;
             }
         }
-        private void LoadSearch(RichTextBox searchResults, StringComparison stringComparison, bool matchWholeWord)
+        private void LoadSearch(RichTextBox searchResults, StringComparison stringComparison, bool matchWholeWord, bool replaceAll, string replaceWith)
         {
             string dialogueSearch = "";
             int j = 0;
@@ -473,11 +474,21 @@ namespace LAZYSHELL
                             continue;
                     }
                     j++;
+                    if (replaceAll)
+                    {
+                        dialogue = dialogue.Replace(textBoxSearch.Text, replaceWith);
+                        dialogues[i].SetDialogue(dialogue, textCodeFormat);
+                    }
                     dialogueSearch += "[" + dialogues[i].Index.ToString() + "]\n";
                     dialogueSearch += dialogues[i].GetDialogue(textCodeFormat) + "\n\n";
                 }
             }
             searchResults.Text = j.ToString() + " results...\n\n" + dialogueSearch;
+            if (replaceAll)
+            {
+                MessageBox.Show(j.ToString() + " occurrences were replaced.", "LAZYSHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dialogueNum_ValueChanged(null, null);
+            }
         }
         // editors
         public void LoadFontEditor()
@@ -599,13 +610,16 @@ namespace LAZYSHELL
             else
                 MessageBox.Show("The dialogue in bank 3 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, dialogueTileset,
+                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu);
         }
         #endregion
         #region Event Handlers
         // main
         private void Dialogues_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(dialogues, dialogueTables, fontDialogue, fontTriangle, fontPalette, Model.BattleDialogues, dialogueTileset) == checksum)
+            if (Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, dialogueTileset, 
+                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu) == checksum)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Dialogues have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",

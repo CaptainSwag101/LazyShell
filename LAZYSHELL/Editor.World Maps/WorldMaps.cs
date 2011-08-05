@@ -340,6 +340,8 @@ namespace LAZYSHELL
             foreach (MapPoint mp in mapPoints)
                 mp.Assemble();
             AssembleAllMapPointTexts();
+            checksum = Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
+                Model.WorldMapSprites, Model.WorldMapTileSets, Model.MapPoints);
         }
         private void AddWorldMapPoints()
         {

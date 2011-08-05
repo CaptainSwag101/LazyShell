@@ -1,6 +1,53 @@
 Major changes/additions are indicated by ***
 
-v3.5 ALPHA
+v3.6.1 FINAL
+--------------------------------------
+Editor-specific changes:
+*Audio: added link to Audacity download; improved importing tips
+*Notes: elements now a listview, with sortable columns
+
+Additions:
+*Dialogues: search window now has replace all feature
+*Items: can change list order of items in shops
+*Levels: bytes left labels for tilemap & solidity mods tab
+*Levels: can now undo/redo changes to solidity mods
+*Monsters: hacking tools lets user edit either current or all monsters
+*Notes: uses checksum to see if changes made
+*Search: window now has close button in upper-right corner
+
+Fixes:
+*Graphics Editor: importing image not drawing to correct coordinates
+*Hex Editor button was enabled when no ROM loaded
+*Lunar Compress.dll not being created when Attacks & Items editors opened
+*Palette Editor: changed RGB values being ignored by effects changes
+*Animations: moving commands not modifying checksum, changes always saved
+*Dialogues: resetting font character not redrawing font table image
+*Dialogues: checksum not including battle messages, other fonts & palettes
+*Effects: effect properties weren't saving (everything else was, though)
+*Event Scripts: selecting a node not properly updating the command listboxes
+*Event Scripts: bad label for transfer/shift to isometric coords command
+*Event Scripts: a node must be selected to do an action; checked not enough!
+*Event Scripts: was showing initial symbol for item names in treeview
+*Levels: mask and screen window size not consistent with zoom status
+*Levels: selecting a "set mod" in solid or tilemap mods crashed level image
+*Levels: refreshing solid mods disabling updatingLevel instead of Properties
+*Levels: deleting last solid or tile mod not updating image
+*Levels: zooming caused keystroke shortcuts to be disabled temporarily
+*Levels: using keystroke shortcuts ignored "Lock tileset editing" option
+*Levels: tilemap & solidity mods width/height minimum should be 1, not 0
+*Levels: initial checksum calculating before finished loading everything
+*Levels: tiles array not complementing changed solidity mod width/height
+*Levels: adding tilemap mod "set" mod creating array for only layer 1
+*Levels: if NPC/event # plus NPC/event #+ > 4095 = thrown exception
+*Levels: solidity mod X coord maximum should be 31
+*Levels: bytes left label for tile & solid mods not updating sometimes
+*Notes: address and bit not loading when index changed
+*Previewer: item previewer not storing item to right address for .zst
+*Sprites: resetting a sprite was not resetting palette and graphics changes
+*Sprites: trying to add a frame to empty sequence threw exception
+
+
+v3.6 FINAL
 --------------------------------------
 General changes:
 *Cleaned up the source code; moved resources into individual folders

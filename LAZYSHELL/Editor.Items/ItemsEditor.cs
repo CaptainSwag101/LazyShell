@@ -57,6 +57,7 @@ namespace LAZYSHELL
                 System.Windows.Forms.MessageBox.Show("Item Descriptions total length exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
             foreach (Shop shop in Model.Shops)
                 shop.Assemble();
+            checksum = Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops);
         }
         #region Event handlers
         private void ItemsEditor_FormClosing(object sender, FormClosingEventArgs e)

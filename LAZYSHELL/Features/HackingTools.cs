@@ -12,10 +12,12 @@ namespace LAZYSHELL
     {
         private double percent { get { return (double)percentControl.Value * 0.01; } }
         private Delegate update;
+        private ToolStripNumericUpDown index;
         // constructor
-        public HackingTools(Delegate update)
+        public HackingTools(Delegate update, ToolStripNumericUpDown index)
         {
             this.update = update;
+            this.index = index;
             InitializeComponent();
         }
         // functions
@@ -39,8 +41,11 @@ namespace LAZYSHELL
         }
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            foreach (Monster monster in Model.Monsters)
+            int start = adjustAll.Checked ? 0 : (int)index.Value;
+            int end = adjustAll.Checked ? Model.Monsters.Length : (int)index.Value + 1;
+            for (int i = start; i < end; i++)
             {
+                Monster monster = Model.Monsters[i];
                 if (checkedListBox1.GetItemChecked(0))
                     monster.HP = (ushort)AddPercent(monster.HP, 65535);
                 if (checkedListBox1.GetItemChecked(1))

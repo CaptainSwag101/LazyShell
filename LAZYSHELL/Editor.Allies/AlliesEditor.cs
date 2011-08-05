@@ -51,6 +51,7 @@ namespace LAZYSHELL
                 c.Assemble();
             foreach (Slot s in Model.Slots)
                 s.Assemble();
+            checksum = Do.GenerateChecksum(Model.Characters, Model.Slots);
         }
         // event handlers
         private void AlliesEditor_FormClosing(object sender, FormClosingEventArgs e)

@@ -18,6 +18,7 @@ namespace LAZYSHELL
         private bool updating = false;
         private int index { get { return (int)shopName.SelectedIndex; } set { shopName.SelectedIndex = value; } }
         public int Index { get { return index; } set { index = value; } }
+        private ComboBox selectedItem;
         // Constructor
         public Shops()
         {
@@ -252,5 +253,42 @@ namespace LAZYSHELL
             shop.Discount50 = this.shopDiscounts.GetItemChecked(3);
         }
         #endregion
+
+        private void moveUp_Click(object sender, EventArgs e)
+        {
+            if (selectedItem == null)
+            {
+                MessageBox.Show("Must select an item first.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            int index = Convert.ToInt32(selectedItem.Name.Substring(8)) - 1;
+            if (index == 0) return;
+            int temp = shop.Items[index - 1];
+            shop.Items[index - 1] = shop.Items[index];
+            shop.Items[index] = (byte)temp;
+            selectedItem = (ComboBox)this.Controls.Find("shopItem" + index.ToString(), true)[0];
+            RefreshShops();
+            selectedItem.Focus();
+        }
+        private void moveDown_Click(object sender, EventArgs e)
+        {
+            if (selectedItem == null)
+            {
+                MessageBox.Show("Must select an item first.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            int index = Convert.ToInt32(selectedItem.Name.Substring(8)) - 1;
+            if (index == 14) return;
+            int temp = shop.Items[index + 1];
+            shop.Items[index + 1] = shop.Items[index];
+            shop.Items[index] = (byte)temp;
+            selectedItem = (ComboBox)this.Controls.Find("shopItem" + (index + 2).ToString(), true)[0];
+            RefreshShops();
+            selectedItem.Focus();
+        }
+        private void shopItem_Click(object sender, EventArgs e)
+        {
+            selectedItem = (ComboBox)sender;
+        }
     }
 }

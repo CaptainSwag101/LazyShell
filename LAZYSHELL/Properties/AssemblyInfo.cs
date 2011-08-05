@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("LAZYSHELL")]
-[assembly: AssemblyCopyright("Copyright ©  2007-2011  Omega & giangurgolo")]
+[assembly: AssemblyCopyright("Copyright ©  2007-2011  giangurgolo & Omega")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("3.5.0.0")]
-[assembly: AssemblyFileVersion("3.5.0.0")]
+[assembly: AssemblyVersion("3.6.1.0")]
+[assembly: AssemblyFileVersion("3.6.1.0")]

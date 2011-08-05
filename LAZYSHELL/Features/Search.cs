@@ -92,6 +92,12 @@ namespace LAZYSHELL
             this.searchButton = searchButton;
             InitializeProperties();
             this.function = function;
+
+            this.toolStripSeparator1.Visible = type == "richTextBox";
+            this.toolStripLabel1.Visible = type == "richTextBox";
+            this.replaceAllButton.Visible = type == "richTextBox";
+            this.replaceWithText.Visible = type == "richTextBox";
+
             if (type == "treeView")
             {
                 this.treeView.Enabled = true;
@@ -104,7 +110,7 @@ namespace LAZYSHELL
                 this.richTextBox.Enabled = true;
                 this.richTextBox.Show();
                 this.richTextBox.BringToFront();
-                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
+                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked, false, "");
             }
         }
         // functions
@@ -126,7 +132,7 @@ namespace LAZYSHELL
             if (searchField.Text == "")
             {
                 listBox.EndUpdate();
-                this.Height = 32 + panel1.Height;
+                this.Height = 32 + toolStrip1.Height;
                 return;
             }
             for (int i = 0; i < names.Count; i++)
@@ -147,7 +153,7 @@ namespace LAZYSHELL
                 }
             }
             this.Height = Math.Min(
-                listBox.Items.Count * listBox.ItemHeight + 32 + panel1.Height,
+                listBox.Items.Count * listBox.ItemHeight + 32 + toolStrip1.Height,
                 Screen.PrimaryScreen.WorkingArea.Height - this.Top - 16);
             listBox.EndUpdate();
         }
@@ -159,7 +165,7 @@ namespace LAZYSHELL
             if (treeView.Enabled)
                 this.function.DynamicInvoke(treeView, stringComparison, matchWholeWord.Checked);
             if (richTextBox.Enabled)
-                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
+                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked, false, "");
             searchField.Focus();
         }
         private void matchWholeWord_CheckedChanged(object sender, EventArgs e)
@@ -169,7 +175,16 @@ namespace LAZYSHELL
             if (treeView.Enabled)
                 this.function.DynamicInvoke(treeView, stringComparison, matchWholeWord.Checked);
             if (richTextBox.Enabled)
-                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
+                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked, false, "");
+            searchField.Focus();
+        }
+        private void replaceAllButton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You are about to replace all occurrences of the specified text in all 4096 dialogues.\n\n" +
+                "Are you sure you want to do this?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                return;
+            if (richTextBox.Enabled)
+                this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked, true, replaceWithText.Text);
             searchField.Focus();
         }
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -207,7 +222,7 @@ namespace LAZYSHELL
                 searchButton.Checked = true;
                 searchButton_Click(null, null);
                 if (richTextBox.Enabled)
-                    function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked);
+                    function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked, false, "");
             }
         }
         private void searchField_KeyUp(object sender, KeyEventArgs e)
@@ -244,6 +259,12 @@ namespace LAZYSHELL
                 this.searchButton.Checked = false;
                 this.Hide();
             }
+        }
+        private void Search_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.searchButton.Checked = false;
+            this.Hide();
         }
         #endregion
         private class SearchItem

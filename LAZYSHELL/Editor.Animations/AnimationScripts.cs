@@ -1187,10 +1187,12 @@ namespace LAZYSHELL
         private void aniMoveDown_Click(object sender, EventArgs e)
         {
             a_treeViewWrapper.MoveDown(asc);
+            checksum--;   // b/c switching colors won't modify checksum
         }
         private void aniMoveUp_Click(object sender, EventArgs e)
         {
             a_treeViewWrapper.MoveUp(asc);
+            checksum--;   // b/c switching colors won't modify checksum
         }
         private void applyAnimationMods_Click(object sender, EventArgs e)
         {

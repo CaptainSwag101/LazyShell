@@ -31,7 +31,13 @@ namespace LAZYSHELL
         private Sequence.Frame frame { get { return sequence.Frames[index]; } }
         private int index
         {
-            get { return (int)frames.Tag; }
+            get
+            {
+                if (frames.Tag != null)
+                    return (int)frames.Tag;
+                else
+                    return 0;
+            }
             set
             {
                 if (value < sequence.Frames.Count && value >= 0)
@@ -518,11 +524,9 @@ namespace LAZYSHELL
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            int index;
+            int index = 0;
             if (sequence.Frames.Count != 0)
                 index = this.index + 1;
-            else
-                index = this.index;
             sequence.Frames.Insert(index, new Sequence.Frame().New());
             DrawFrames();
             RefreshFrame();

@@ -133,6 +133,7 @@ namespace LAZYSHELL
         }
         private void Assemble()
         {
+            effect.Assemble();
             animation.Assemble();
 
             int i = 0;
@@ -161,6 +162,7 @@ namespace LAZYSHELL
             }
             if (i < 64)
                 MessageBox.Show("The available space for animation data in bank 0x340000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 63 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
+            checksum = Do.GenerateChecksum(animations, effects);
         }
         public void EnableOnPlayback(bool enable)
         {
@@ -297,6 +299,7 @@ namespace LAZYSHELL
             sequences.SetSequenceFrameImages();
             sequences.InvalidateImages();
             molds.LoadTileEditor();
+            checksum--;   // b/c switching colors won't modify checksum
         }
         #endregion
         #region Event handlers

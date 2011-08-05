@@ -580,9 +580,9 @@
             "{unknown}",
             "{unknown}",
             "{unknown}",
-            "NE,SE",
+            "NE,SW",
             "{unknown}",
-            "NE,SW"});
+            "NW,SE"});
             this.doorFormat.Location = new System.Drawing.Point(-2, -2);
             this.doorFormat.Name = "doorFormat";
             this.doorFormat.Size = new System.Drawing.Size(55, 21);

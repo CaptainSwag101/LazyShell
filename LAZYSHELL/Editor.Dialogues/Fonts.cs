@@ -566,6 +566,8 @@ namespace LAZYSHELL
             font[currentFontChar] = new FontCharacter(Model.Data, currentFontChar, fontType.SelectedIndex);
             InitializeFontCharacter();
             SetFontCharacterImage();
+            SetFontTableImage();
+            dialoguesEditor.RedrawText();
         }
         private void fontWidth_ValueChanged(object sender, EventArgs e)
         {

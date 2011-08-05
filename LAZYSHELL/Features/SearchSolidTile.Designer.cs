@@ -36,6 +36,7 @@ namespace LAZYSHELL
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchSolidTile));
             this.panel55 = new System.Windows.Forms.Panel();
             this.specialTile = new System.Windows.Forms.ComboBox();
             this.panel54 = new System.Windows.Forms.Panel();
@@ -278,9 +279,9 @@ namespace LAZYSHELL
             "{unknown}",
             "{unknown}",
             "{unknown}",
-            "NE,SE",
+            "NE,SW",
             "{unknown}",
-            "NE,SW"});
+            "NW,SE"});
             this.doorFormat.Location = new System.Drawing.Point(-2, -2);
             this.doorFormat.Name = "doorFormat";
             this.doorFormat.Size = new System.Drawing.Size(55, 21);
@@ -1221,14 +1222,11 @@ namespace LAZYSHELL
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "SearchSolidTile";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "SOLID TILE SEARCH - Lazy Shell";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchPhysicalTile_FormClosing);
             this.panel55.ResumeLayout(false);
             this.panel54.ResumeLayout(false);

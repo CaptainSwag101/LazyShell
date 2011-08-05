@@ -112,7 +112,7 @@ namespace LAZYSHELL
             sequences.Visible = true;
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             //
-            checksum = Do.GenerateChecksum(sprites, animations, images, graphics);
+            checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
         }
         private void RefreshSpritesEditor()
         {
@@ -235,6 +235,7 @@ namespace LAZYSHELL
             Model.HexViewer.Offset = animation.AnimationOffset & 0xFFFFF0;
             Model.HexViewer.SelectionStart = (animation.AnimationOffset & 15) * 3;
             Model.HexViewer.Compare();
+            checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
         }
         public void EnableOnPlayback(bool enable)
         {
@@ -364,7 +365,7 @@ namespace LAZYSHELL
         // main
         private void Sprites_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(sprites, animations, images, graphics) == checksum)
+            if (Do.GenerateChecksum(sprites, animations, images, palettes, graphics) == checksum)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Sprites have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -544,6 +545,9 @@ namespace LAZYSHELL
             animation = new Animation(Model.Data, sprite.AnimationPacket);
             image = new GraphicPalette(Model.Data, sprite.GraphicPalettePacket);
             sprite = new Sprite(Model.Data, index);
+            for (int i = image.PaletteNum; i < image.PaletteNum + 8; i++)
+                palettes[i] = new PaletteSet(Model.Data, i, 0x252FFE + (i * 30), 1, 16, 30);
+            Buffer.BlockCopy(Model.Data, image.GraphicOffset, Model.SpriteGraphics, image.GraphicOffset - 0x280000, 0x4000);
             number_ValueChanged(null, null);
         }
         private void hexViewer_Click(object sender, EventArgs e)

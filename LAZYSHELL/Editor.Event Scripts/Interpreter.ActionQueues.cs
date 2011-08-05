@@ -665,7 +665,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                         sb.Append(((sbyte)aqc.Option).ToString() + ", y=" + ((sbyte)aqc.EventData[2]).ToString());
                     else
                         sb.Append(aqc.Option.ToString() + ", y=" + aqc.EventData[2].ToString());
-                    sb.Append(", z=" + aqc.EventData[3].ToString() + ")");
+                    sb.Append(", z=" + (aqc.EventData[3] & 0x1F).ToString() + "), ");
+                    sb.Append("facing: " + DirectionNames[((aqc.EventData[3] & 0xE0) >> 5)]);
                     break;
                 case 0x95:
                     sb.Append(ObjectNames[aqc.Option]);

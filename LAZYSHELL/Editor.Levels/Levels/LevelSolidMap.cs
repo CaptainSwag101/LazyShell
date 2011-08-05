@@ -43,7 +43,7 @@ namespace LAZYSHELL
         {
             Model.EditSolidityMaps[levelMap.SolidityMap] = true;
         }
-        public ushort GetTileNum(int physTileNum)
+        public override int GetTileNum(int physTileNum)
         {
             return Bits.GetShort(tilemap, physTileNum * 2);
         }

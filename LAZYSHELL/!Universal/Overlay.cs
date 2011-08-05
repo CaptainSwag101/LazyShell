@@ -216,8 +216,9 @@ namespace LAZYSHELL
         }
         public void DrawLevelMask(Graphics g, Point stop, Point start, int z)
         {
-            Point p = new Point(start.X * 16 * z, start.Y * 16 * z);
-            Size s = new Size((stop.X - start.X) * 16 + 16 * z, (stop.Y - start.Y) * 16 + 16 * z);
+            int u = z * 16;
+            Point p = new Point(start.X * u, start.Y * u);
+            Size s = new Size((stop.X - start.X) * u + u, (stop.Y - start.Y) * u + u);
             Brush b = new SolidBrush(Color.FromArgb(75, Color.Orange));
             if (p.X == 0) p.X++; if (p.Y == 0) p.Y++;
             Rectangle r = new Rectangle(p, s);
@@ -227,10 +228,11 @@ namespace LAZYSHELL
         }
         public void DrawBoundaries(Graphics g, Point location, int z)
         {
+            Pen pen = new Pen(SystemColors.ControlDark); pen.Width = z; pen.Alignment = PenAlignment.Inset;
             location.X = location.X / 16 * 16;
             location.Y = location.Y / 16 * 16;
-            g.FillRectangle(new SolidBrush(Color.FromArgb(50, 0, 0, 0)), location.X, location.Y, 256, 224);
-            g.DrawRectangle(new Pen(SystemColors.ControlDark), location.X - 1, location.Y - 1, 258, 226);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(50, 0, 0, 0)), location.X * z, location.Y * z, 256 * z, 224 * z);
+            g.DrawRectangle(pen, location.X * z, location.Y * z, 256 * z, 224 * z);
         }
         public void DrawSelectionBox(Graphics g, Point stop, Point start, int z)
         {
@@ -615,11 +617,12 @@ namespace LAZYSHELL
                 npcs.CurrentNPC = i;
 
                 coordY[a] = npcs.Y;
+                int NPCID = Math.Min(511, npcs.NPCID + npcs.PropertyA);
                 if (npcs.EngageType == 0)
                 {
-                    pixels[a] = npcProperties[npcs.NPCID + npcs.PropertyA].CreateImage(npcs.Face, false, 0);
-                    size[a].Height = npcProperties[npcs.NPCID + npcs.PropertyA].ImageHeight;
-                    size[a].Width = npcProperties[npcs.NPCID + npcs.PropertyA].ImageWidth;
+                    pixels[a] = npcProperties[NPCID].CreateImage(npcs.Face, false, 0);
+                    size[a].Height = npcProperties[NPCID].ImageHeight;
+                    size[a].Width = npcProperties[NPCID].ImageWidth;
                 }
                 else
                 {
@@ -639,11 +642,12 @@ namespace LAZYSHELL
                     npcs.CurrentInstance = o;
 
                     coordY[a + 1] = npcs.InstanceCoordY;
+                    NPCID = Math.Min(511, npcs.NPCID + npcs.InstancePropertyA);
                     if (npcs.EngageType == 0)
                     {
-                        pixels[a + 1] = npcProperties[npcs.NPCID + npcs.InstancePropertyA].CreateImage(npcs.InstanceFace, false, 0);
-                        size[a + 1].Height = npcProperties[npcs.NPCID + npcs.InstancePropertyA].ImageHeight;
-                        size[a + 1].Width = npcProperties[npcs.NPCID + npcs.InstancePropertyA].ImageWidth;
+                        pixels[a + 1] = npcProperties[NPCID].CreateImage(npcs.InstanceFace, false, 0);
+                        size[a + 1].Height = npcProperties[NPCID].ImageHeight;
+                        size[a + 1].Width = npcProperties[NPCID].ImageWidth;
                     }
                     else
                     {
@@ -769,12 +773,12 @@ namespace LAZYSHELL
                 int property, engagetype;
                 if (parent == null)
                 {
-                    property = npc.EventORpack + npc.PropertyB;
+                    property = Math.Min(npc.EngageType > 1 ? 255 : 4095, npc.EventORpack + npc.PropertyB);
                     engagetype = npc.EngageType;
                 }
                 else
                 {
-                    property = parent.EventORpack + npc.PropertyB;
+                    property = Math.Min(parent.EngageType > 1 ? 255 : 4095, parent.EventORpack + npc.PropertyB);
                     engagetype = parent.EngageType;
                 }
                 if (engagetype == 0)   // default

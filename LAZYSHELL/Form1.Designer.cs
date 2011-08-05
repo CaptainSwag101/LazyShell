@@ -607,6 +607,7 @@ namespace LAZYSHELL
             // hexViewer
             // 
             this.hexViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hexViewer.Enabled = false;
             this.hexViewer.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
             this.hexViewer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.hexViewer.ImageTransparentColor = System.Drawing.Color.Magenta;

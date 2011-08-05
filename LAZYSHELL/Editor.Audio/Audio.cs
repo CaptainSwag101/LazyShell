@@ -40,16 +40,17 @@ namespace LAZYSHELL
             checksum = Do.GenerateChecksum(audioSamples);
             InitializeComponent();
             label1.Text =
-                "TIPS: follow these steps to successfully import a .WAV file of your choosing.\n\n" +
+                "TIPS: follow these steps to successfully import a .WAV file of your choosing. Say you have a .WAV file, \"MyWavFile.wav\", that you wish to replace one of the samples in this audio editor with. Here are the steps you need to take.\n\n" + 
                 "1. Download and install Audacity, a good free audio editing program.\n" +
-                "2. Export any single sample file from the ROM to a .WAV file from Lazy Shell.\n" +
-                "3. Open the .WAV file you wish to import into Audacity.\n" +
-                "4. Copy the .WAV data (Ctrl+A, then Ctrl+C) from Audacity.\n" +
-                "5. Open the exported sample .WAV file into Audacity.\n" +
-                "6. Paste the .WAV data copied from the file you wish to import (Ctrl+A, then Ctrl+V).\n" +
-                "7. Export the modified .WAV file from Audacity into a new .WAV file.\n" +
-                "8. You can now safely import this new .WAV file into the ROM in Lazy Shell.\n\n" + 
-                "The reason this works is because by using the same exported file with modified WAV data, it retains some obscure data from the original sample which is necessary to have in order to successfully import a .WAV file.";
+                "     http://audacity.sourceforge.net/download/\n" +
+                "2. In the Lazy Shell audio editor, export any sample to a file named \"OldSample.wav\".\n" +
+                "3. Open \"MyWavFile.wav\" into Audacity.\n" +
+                "4. While in Audacity, copy the audio data (Ctrl+A, Ctrl+C). Close Audacity.\n" +
+                "5. Open \"OldSample.wav\" into Audacity.\n" +
+                "6. While in Audacity, paste the copied audio data over the old data (Ctrl+A, Ctrl+V).\n" +
+                "7. Export to a .WAV file named \"NewSample.wav\".\n" +
+                "8. In the Lazy Shell audio editor, import \"NewSample.wav\".\n\n" +
+                "The reason this is the only way to do it is because by using the same exported file (\"OldSample.wav\") with the modified WAV data from \"MyWavFile.wav\", it retains some obscure data from \"OldSample.wav\" in \"NewSample.wav\" which is necessary to have in order to successfully import a .WAV file.";
             wav = BRR.Decode(audioSample.Sample, sampleRate);
         }
         // functions
@@ -166,6 +167,7 @@ namespace LAZYSHELL
 
             if (i < audioSamples.Length)
                 MessageBox.Show("Not enough space to save all samples. Stopped saving at index " + i.ToString("d3") + ".");
+            checksum = Do.GenerateChecksum(audioSamples);
         }
         private void import_Click(object sender, EventArgs e)
         {
@@ -182,6 +184,10 @@ namespace LAZYSHELL
             new ClearElements(Model.AudioSamples, index, "CLEAR SAMPLES...").ShowDialog();
             wav = BRR.Decode(audioSample.Sample, sampleRate);
             pictureBox1.Invalidate();
+        }
+        private void label1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
         }
     }
 }

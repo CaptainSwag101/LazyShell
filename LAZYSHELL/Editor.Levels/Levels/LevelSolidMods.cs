@@ -187,6 +187,7 @@ namespace LAZYSHELL
                 set
                 {
                     width = value;
+                    Array.Resize(ref tiles, (width * height) * 2);
                     CopyToTilemap();
                 }
             }
@@ -196,6 +197,7 @@ namespace LAZYSHELL
                 set
                 {
                     height = value;
+                    Array.Resize(ref tiles, (width * height) * 2);
                     CopyToTilemap();
                 }
             }
@@ -309,7 +311,7 @@ namespace LAZYSHELL
                 offset *= 2;
                 Bits.SetShort(tilemap, offset, (ushort)value);
             }
-            public ushort GetTileNum(int physTileNum)
+            public override int GetTileNum(int physTileNum)
             {
                 return Bits.GetShort(tilemap, physTileNum * 2);
             }

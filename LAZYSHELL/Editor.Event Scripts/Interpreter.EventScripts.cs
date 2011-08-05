@@ -187,29 +187,29 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Clear mem $",			// 0xA5
             "Clear mem $",			// 0xA6
             "Clear mem @ mem $7000",			// 0xA7
-            "mem $",			// 0xA8
-            "mem $",			// 0xA9
-            "mem $",			// 0xAA
-            "mem $",			// 0xAB
+            "Mem $",			// 0xA8
+            "Mem $",			// 0xA9
+            "Mem $",			// 0xAA
+            "Mem $",			// 0xAB
             "Mem $7000 = ",			// 0xAC
             "Mem $7000 += ",			// 0xAD
             "Mem $7000 increment",			// 0xAE
             "Mem $7000 increment",			// 0xAF
 			
-            "mem $",			// 0xB0
-            "mem $",			// 0xB1
-            "mem $",			// 0xB2
-            "mem $",			// 0xB3
+            "Mem $",			// 0xB0
+            "Mem $",			// 0xB1
+            "Mem $",			// 0xB2
+            "Mem $",			// 0xB3
             "Mem $7000 = mem $",			// 0xB4
-            "mem $",			// 0xB5
+            "Mem $",			// 0xB5
             "Mem $7000 = random # less than: ",			// 0xB6
-            "mem $",			// 0xB7
+            "Mem $",			// 0xB7
             "Mem $7000 += mem $",			// 0xB8
             "Mem $7000 -= mem $",			// 0xB9
             "Mem $7000 = mem $",			// 0xBA
-            "mem $",			// 0xBB
-            "mem $",			// 0xBC
-            "mem $",			// 0xBD
+            "Mem $",			// 0xBB
+            "Mem $",			// 0xBC
+            "Mem $",			// 0xBD
             "UNKCMD 0xBE",			// 0xBE
             "UNKCMD 0xBF",			// 0xBF
 			
@@ -477,7 +477,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Mem $7000 isolate bits = mem $",			// 0xB3
             "Mem $7000 set bits = mem $",			// 0xB4
             "Mem $7000 xor bits = mem $",			// 0xB5
-            "mem $",			// 0xB6
+            "Mem $",			// 0xB6
             "Generate random # less than mem $",			// 0xB7
             "UNKCMD 0xFD Option 0xB8",			// 0xB8
             "UNKCMD 0xFD Option 0xB9",			// 0xB9
@@ -1195,10 +1195,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         {
             int lastIndex = src.Length - 1;
 
-            while (src[lastIndex] == ' ' || src[lastIndex] == '\0')
+            while (lastIndex >= 0 && (src[lastIndex] == ' ' || src[lastIndex] == '\0'))
                 lastIndex--;
 
-            return src.Substring(0, lastIndex + 1);
+            return src.Substring(1, lastIndex + 1);
         }
     }
 }

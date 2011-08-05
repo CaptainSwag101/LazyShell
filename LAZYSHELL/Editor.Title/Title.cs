@@ -458,6 +458,7 @@ namespace LAZYSHELL
             else
             {
                 Bits.SetByteArray(Model.Data, 0x3F216F, compressed, 0, size - 1);
+                checksum = Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
             }
         }
         #endregion

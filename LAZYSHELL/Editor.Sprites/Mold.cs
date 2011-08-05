@@ -63,7 +63,10 @@ namespace LAZYSHELL
                             tTile = new Tile();
                             if ((sm[offset] & 0x03) == 2)
                             {
-                                MessageBox.Show("Something weird happened.");
+                                MessageBox.Show("Error at mold offset $" + offset.ToString("X4") + ". " +
+                                    "Data is corrupt: attempted to read a copy within a copy.\n\n" + 
+                                    "The sprites editor will continue to load anyways.");
+                                break;
                             }
                             else if ((sm[offset] & 0x03) == 1)
                             {
@@ -231,7 +234,7 @@ namespace LAZYSHELL
                     tileA.SubTiles[2] == tileB.SubTiles[2] &&
                     tileA.SubTiles[3] == tileB.SubTiles[3] &&
                     tileA.Mirror == tileB.Mirror &&
-                    tileA.Invert == tileB.Invert && 
+                    tileA.Invert == tileB.Invert &&
                     activeQuadrants > 2)
                     return true;
                 // if 16-bit and at least 2 active quadrants, make copy since will be saving space
@@ -303,7 +306,7 @@ namespace LAZYSHELL
                             thisTileB.SubTiles[2] == tileB.SubTiles[2] &&
                             thisTileB.SubTiles[3] == tileB.SubTiles[3] &&
                             thisTileB.Mirror == tileB.Mirror &&
-                            thisTileB.Invert == tileB.Invert && 
+                            thisTileB.Invert == tileB.Invert &&
                             copyDiffX == thisTileB.XCoord - tileB.XCoord &&
                             copyDiffY == thisTileB.YCoord - tileB.YCoord)
                         {
@@ -323,7 +326,7 @@ namespace LAZYSHELL
                                    thisTileC.SubTiles[1] == tileC.SubTiles[1] &&
                                    thisTileC.SubTiles[2] == tileC.SubTiles[2] &&
                                    thisTileC.SubTiles[3] == tileC.SubTiles[3] &&
-                                   thisTileC.Mirror == tileC.Mirror && 
+                                   thisTileC.Mirror == tileC.Mirror &&
                                    copyDiffX == thisTileC.XCoord - tileC.XCoord &&
                                    copyDiffY == thisTileC.YCoord - tileC.YCoord)
                             {

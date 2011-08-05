@@ -579,7 +579,10 @@ namespace LAZYSHELL
         public void Assemble()
         {
             if (CalculateBattleScriptsLength() >= 0)
+            {
                 AssembleAllBattleScripts();
+                checksum = Do.GenerateChecksum(battleScripts);
+            }
             else
                 MessageBox.Show("There is not enough available space to save the battle scripts to.\n\nThe battle scripts were not saved.", "LAZY SHELL");
         }

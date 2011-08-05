@@ -33,6 +33,7 @@ namespace LAZYSHELL
         private TextHelper textHelper = TextHelper.Instance;
         //
         private BattleScripts battleScriptsEditor;
+        private HackingTools hackingToolsWindow;
         #endregion
         #region Functions
         public Monsters()
@@ -48,6 +49,7 @@ namespace LAZYSHELL
             battleScriptsEditor.TopLevel = false;
             battleScriptsEditor.Dock = DockStyle.Fill;
             //battleScriptsEditor.SetToolTips(toolTip1);
+            hackingToolsWindow = new HackingTools(new Function(RefreshMonsterTab), monsterNum);
             panel14.Controls.Add(battleScriptsEditor);
             battleScriptsEditor.BringToFront();
             battleScriptsEditor.Visible = true;
@@ -332,13 +334,17 @@ namespace LAZYSHELL
                     "The allotted space for psychopath dialogues has been exceeded. Not all psychopath dialogues have been saved.",
                     "LAZY SHELL");
             battleScriptsEditor.Assemble();
+            checksum = Do.GenerateChecksum(monsters);
         }
         #endregion
         #region Event Handlers
         private void Monsters_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(monsters) == checksum && battleScriptsEditor.ChecksumNotChanged())
+            {
+                if (hackingToolsWindow.Visible) hackingToolsWindow.Close();
                 return;
+            }
             DialogResult result = MessageBox.Show(
                 "Monsters and battlescripts have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -347,6 +353,7 @@ namespace LAZYSHELL
                 Assemble();
                 battleScriptsEditor.Assemble();
                 battleScriptsEditor.Close();
+                if (hackingToolsWindow.Visible) hackingToolsWindow.Close();
             }
             else if (result == DialogResult.No)
             {
@@ -354,6 +361,7 @@ namespace LAZYSHELL
                 Model.MonsterNames = null;
                 Model.BattleScripts = null;
                 battleScriptsEditor.Close();
+                if (hackingToolsWindow.Visible) hackingToolsWindow.Close();
                 return;
             }
             else if (result == DialogResult.Cancel)
@@ -658,7 +666,9 @@ namespace LAZYSHELL
         }
         private void hackingTools_Click(object sender, EventArgs e)
         {
-            new HackingTools(new Function(RefreshMonsterTab)).Show();
+            if (!hackingToolsWindow.Visible)
+                hackingToolsWindow.Show();
+            hackingToolsWindow.BringToFront();
         }
         private void resetCurrentMonsterToolStripMenuItem_Click(object sender, EventArgs e)
         {

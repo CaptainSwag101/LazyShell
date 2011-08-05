@@ -1,6 +1,6 @@
 LAZY SHELL - Super Mario RPG Editor
-Version: 3.6
-Date: June 11, 2011
+Version: 3.6.1
+Date: August 4, 2011
 Home Page: http://home.comcast.net/~giangurgolo/smrpg/
 Written by giangurgolo and Omega
 
@@ -34,6 +34,7 @@ The editor is comprised of 15 individual editors.
 Various status editors include modification capabilities for the
 statuses of monsters, formations, formation packs, items, spells, 
 attacks, shops, new game properties, level-ups, and timing properties.
+The monsters editor contains a battle script editor for each monster.
 
 The Levels portion allows the user to modify the maps of areas (aka 
 locations) using a paint-like interface, the NPCs (ie the sprites in 
@@ -42,12 +43,13 @@ and the basic layering properties. A template creator/editor lets the
 user to store a separate portion of the map composed of all 3 layers 
 and the physical layer into a single file.
 
-The three scripts editors in Lazy Shell enable the user to modify
-the event scripts, battle scripts, and animations scripts. Commands 
-within event scripts and battle scripts may be added, modified, 
+The two scripts editors in Lazy Shell enable the user to modify
+the event scripts, action scripts, and animations scripts. Commands 
+within event scripts and action scripts may be added, modified, 
 deleted, moved, or copied and pasted. Commands within animation 
 scripts may be modified or moved, but adding or deleting commands 
-within animations is not supported.
+within animations is not supported and never will be due to the
+unusually fickle and erratic nature of the animation script engine.
 
 The Sprites editor is able to modify a sprite's graphics, palette, and 
 animations. The effects editor allows the user to edit spell effects 
@@ -189,3 +191,64 @@ versions are chronicled here.
 "readme.txt"
 
 This file.
+
+______________________________________________________________________
+
+BUGS, ERRORS, EXCEPTIONS AND COMPLICATIONS IN FUNCTIONALITY
+______________________________________________________________________
+
+The editor may occasionally crash or not function properly due to 
+certain errors in the code (although with each new bugfix I am aiming 
+to completely remove the possibility of this ever happening). Please 
+remember that this is almost certainly the programmer's fault and NOT 
+yours, the user's. As often is the case, when an error surfaces or the 
+program behaves in a buggy fashion, the user tends to immediately feel 
+that they are to blame or the programmer is blaming them for the error. 
+This is not correct: almost all of the time, it's the programmer's 
+fault. Incidences when it might be the fault of the user may be due to 
+a corrupt ROM being loaded (a corrupt ROM basically means any SMRPG 
+rom which has been modified in any way, shape or form). This includes 
+a ROM edited by Lazy Shell, but errors may occur if a ROM has been 
+modified outside of Lazy Shell (ie. a hex editor), or often times in 
+much older versions of Lazy Shell (v2.5 seems to be popular among 
+users who find problems with v3.x).
+
+If the editor crashes, make sure it is the latest version of Lazy 
+Shell by clicking the "i" button in the main window and comparing 
+the version there to the version posted on the home page 
+(http://home.comcast.net/~giangurgolo/smrpg/).
+
+If you are using the latest version, make a new post in this thread:
+http://acmlm.kafuka.org/board/thread.php?id=6770&page=2
+Explain exactly what you did to produce this error or cause this 
+disfunctionality to occur, what editor it was in, what order you did 
+your actions to produce this error or disfunctionality, etc. Also, 
+when the editor bugs out, an exception prompt appears. If you can 
+manage to copy no more than the FIRST TEN LINES following this line:
+************** Exception Text **************
+and include this in your post, it will definitely help. But most 
+importantly, you must explain in your post what you did. Only 
+posting the exception text alone will not be adequate enough.
+
+The suggestions above are only suggestions. Sometimes only five 
+words might be enough for me to quickly locate the bug and fix it. 
+Remember, an error or bug is most likely NOT YOUR FAULT. Don't be
+afraid to report an error should it occur. I do notice and try to fix
+every bug that is reported, so your post won't be in vain (unless 
+you're making a request for an addition to the editor, which I am
+now ignoring due to how time-consuming it can be).
+
+______________________________________________________________________
+
+SPECIAL THANKS
+______________________________________________________________________
+
+Yakibomb - discovered many bugs with later versions
+ElementalPowerStar - feedback, discovered several bugs
+Bregalad - source code for BRR encoding and decoding
+FuSoYa - for permission to use Lunar Compress.dll
+KP9000 - beta testing, discovered many bugs with pre-release version
+MathOnNapkins - helped with some coding
+Alex Farber - MRU list manager
+spel werdz rite - resolution for running program under a 64-bit OS
+romhacking community - various feedback
