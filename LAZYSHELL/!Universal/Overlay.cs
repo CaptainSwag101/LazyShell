@@ -617,7 +617,7 @@ namespace LAZYSHELL
                 npcs.CurrentNPC = i;
 
                 coordY[a] = npcs.Y;
-                int NPCID = Math.Min(511, npcs.NPCID + npcs.PropertyA);
+                int NPCID = npcs.EngageType == 0 ? Math.Min(511, npcs.NPCID + npcs.PropertyA) : Math.Min(511, (int)npcs.NPCID);
                 if (npcs.EngageType == 0)
                 {
                     pixels[a] = npcProperties[NPCID].CreateImage(npcs.Face, false, 0);
@@ -626,9 +626,9 @@ namespace LAZYSHELL
                 }
                 else
                 {
-                    pixels[a] = npcProperties[npcs.NPCID].CreateImage(npcs.Face, false, 0);
-                    size[a].Height = npcProperties[npcs.NPCID].ImageHeight;
-                    size[a].Width = npcProperties[npcs.NPCID].ImageWidth;
+                    pixels[a] = npcProperties[NPCID].CreateImage(npcs.Face, false, 0);
+                    size[a].Height = npcProperties[NPCID].ImageHeight;
+                    size[a].Width = npcProperties[NPCID].ImageWidth;
                 }
                 point[a].X = coords[a].X = ((npcs.X & 127) * 32) + (16 * (npcs.Y & 1)) - 16;
                 point[a].Y = ((npcs.Y & 127) * 8) - 8 - (npcs.Z * 16) - (npcs.CoordYBit7 ? 8 : 0);
@@ -642,7 +642,7 @@ namespace LAZYSHELL
                     npcs.CurrentInstance = o;
 
                     coordY[a + 1] = npcs.InstanceCoordY;
-                    NPCID = Math.Min(511, npcs.NPCID + npcs.InstancePropertyA);
+                    NPCID = npcs.EngageType == 0 ? Math.Min(511, npcs.NPCID + npcs.PropertyA) : Math.Min(511, (int)npcs.NPCID);
                     if (npcs.EngageType == 0)
                     {
                         pixels[a + 1] = npcProperties[NPCID].CreateImage(npcs.InstanceFace, false, 0);
@@ -651,9 +651,9 @@ namespace LAZYSHELL
                     }
                     else
                     {
-                        pixels[a + 1] = npcProperties[npcs.NPCID].CreateImage(npcs.InstanceFace, false, 0);
-                        size[a + 1].Height = npcProperties[npcs.NPCID].ImageHeight;
-                        size[a + 1].Width = npcProperties[npcs.NPCID].ImageWidth;
+                        pixels[a + 1] = npcProperties[NPCID].CreateImage(npcs.InstanceFace, false, 0);
+                        size[a + 1].Height = npcProperties[NPCID].ImageHeight;
+                        size[a + 1].Width = npcProperties[NPCID].ImageWidth;
                     }
                     point[a + 1].X = coords[a + 1].X = ((npcs.InstanceCoordX & 127) * 32) + (16 * (npcs.InstanceCoordY & 1)) - 16;
                     point[a + 1].Y = ((npcs.InstanceCoordY & 127) * 8) - 8 - (npcs.InstanceCoordZ * 16) - (npcs.InstanceCoordYBit7 ? 8 : 0);

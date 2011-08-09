@@ -67,7 +67,7 @@ namespace LAZYSHELL
             for (int i = 0; i < moldCount; i++)
             {
                 tMold = new Mold();
-                tMold.InitializeMold(sm, offset, uniqueTiles);
+                tMold.InitializeMold(sm, offset, uniqueTiles, index);
                 molds.Add(tMold);
                 offset += 2;
             }
@@ -103,7 +103,7 @@ namespace LAZYSHELL
             for (int i = 0; i < moldCount; i++)
             {
                 tMold = new Mold();
-                tMold.InitializeMold(sm, offset, uniqueTiles);
+                tMold.InitializeMold(sm, offset, uniqueTiles, index);
                 molds.Add(tMold);
                 offset += 2;
             }

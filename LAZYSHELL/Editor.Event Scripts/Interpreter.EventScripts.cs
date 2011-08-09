@@ -810,8 +810,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0x6A:
                 case 0x6B:
                     sb.Append((Bits.GetShort(esc.EventData, 1) & 0x1FF).ToString());
-                    sb.Append(", mod # = " + ((esc.EventData[2] & 0x3F) >> 1).ToString());
-                    sb.Append(", permanent = " + ((esc.EventData[2] & 0x80) == 0x80 ? "true" : "false"));
+                    sb.Append(", mod # = " + ((esc.EventData[2] & 0x3F) >> 1).ToString() + ", ");
+                    if (esc.Opcode == 0x6A) sb.Append("alternate");
+                    else sb.Append("permanent");
+                    sb.Append(" = " + ((esc.EventData[2] & 0x80) == 0x80 ? "true" : "false"));
                     break;
                 case 0x72:
                 case 0x73:

@@ -249,9 +249,9 @@ namespace LAZYSHELL
                             Array.Resize(ref tilemapsA[i], width * height);
                         if (set)
                             if (i < 2)
-                                Array.Resize(ref tilemapsA[i], (width * height) * 2);
+                                Array.Resize(ref tilemapsB[i], (width * height) * 2);
                             else
-                                Array.Resize(ref tilemapsA[i], width * height);
+                                Array.Resize(ref tilemapsB[i], width * height);
                     }
                 }
             }
@@ -269,9 +269,9 @@ namespace LAZYSHELL
                             Array.Resize(ref tilemapsA[i], width * height);
                         if (set)
                             if (i < 2)
-                                Array.Resize(ref tilemapsA[i], (width * height) * 2);
+                                Array.Resize(ref tilemapsB[i], (width * height) * 2);
                             else
-                                Array.Resize(ref tilemapsA[i], width * height);
+                                Array.Resize(ref tilemapsB[i], width * height);
                     }
                 }
             }

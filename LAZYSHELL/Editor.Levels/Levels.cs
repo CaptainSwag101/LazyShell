@@ -107,17 +107,16 @@ namespace LAZYSHELL
             updatingLevel = false;
 
             LoadSolidityTileset();
+            LoadPreviewer();
             if (!updatingLevel)
                 RefreshLevel();
 
             updatingLevel = true;
-
             InitializeSettings(); // Sets initial control settings
-
             updatingLevel = false;
 
             findNPCNumber = new NPCEditor(this, npcID.Value);
-
+            //
             checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.TileSets,
                 Model.TileMaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
         }
@@ -1122,6 +1121,7 @@ namespace LAZYSHELL
             LoadTilesetEditor();
             LoadTilemapEditor();
             LoadTemplateEditor();
+            LoadPreviewer();
 
             GC.Collect();
         }
@@ -1131,15 +1131,6 @@ namespace LAZYSHELL
             overlay.EventsImage = null;
             overlay.NPCsImage = null;
             overlay.OverlapsImage = null;
-        }
-        private void PreviewLevel()
-        {
-            if (lp == null || !lp.Visible)
-                lp = new LAZYSHELL.Previewer.Previewer((int)this.levelNum.Value, 1);
-            else
-                lp.Reload((int)this.levelNum.Value, 1);
-            lp.Show();
-            lp.BringToFront();
         }
         private void SetLevelInfo()
         {
@@ -1788,7 +1779,7 @@ namespace LAZYSHELL
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = "NPCS.txt";
+            saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - NPCS.txt";
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -2015,10 +2006,6 @@ namespace LAZYSHELL
             RefreshLevel();
         }
         // toolstrip buttons
-        private void levelPreviewToolStripButton_Click(object sender, EventArgs e)
-        {
-            PreviewLevel();
-        }
         private void SpaceAnalyzerMenuItem_Click(object sender, EventArgs e)
         {
             LevelChange();

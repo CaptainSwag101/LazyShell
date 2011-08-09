@@ -397,29 +397,26 @@ namespace LAZYSHELL
             if (mold.Gridplane) return;
             // make a cropped selection
             Rectangle region = Do.Crop(mold.MoldPixels(), 256, 256);
-            if (overlay.Select != null)
+            for (int y = region.Y; y < region.Bottom; y++)
             {
-                for (int y = region.Y; y < region.Bottom; y++)
+                for (int x = region.X; x < region.Right; x++)
                 {
-                    for (int x = region.X; x < region.Right; x++)
+                    if (mold.MoldTilesPerPixel[y * 256 + x] == 0xFF)
+                        continue;
+                    Mold.Tile tile = mold.Tiles[mold.MoldTilesPerPixel[y * 256 + x]];
+                    if (tile.AddedToBuffer)
+                        continue;
+                    if (type == "mirror")
                     {
-                        if (mold.MoldTilesPerPixel[y * 256 + x] == 0xFF)
-                            continue;
-                        Mold.Tile tile = mold.Tiles[mold.MoldTilesPerPixel[y * 256 + x]];
-                        if (tile.AddedToBuffer)
-                            continue;
-                        if (type == "mirror")
-                        {
-                            tile.XCoord = (byte)((region.Width - (tile.XCoord - region.X)) + region.X - 16);
-                            tile.Mirror = !tile.Mirror;
-                        }
-                        else if (type == "invert")
-                        {
-                            tile.YCoord = (byte)((region.Height - (tile.YCoord - region.Y)) + region.Y - 16);
-                            tile.Invert = !tile.Invert;
-                        }
-                        tile.AddedToBuffer = true;
+                        tile.XCoord = (byte)((region.Width - (tile.XCoord - region.X)) + region.X - 16);
+                        tile.Mirror = !tile.Mirror;
                     }
+                    else if (type == "invert")
+                    {
+                        tile.YCoord = (byte)((region.Height - (tile.YCoord - region.Y)) + region.Y - 16);
+                        tile.Invert = !tile.Invert;
+                    }
+                    tile.AddedToBuffer = true;
                 }
             }
             foreach (Mold.Tile tile in mold.Tiles)

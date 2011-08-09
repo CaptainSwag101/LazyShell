@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EffectMolds));
-            this.e_moldWidth = new ToolStripNumericUpDown();
-            this.e_moldHeight = new ToolStripNumericUpDown();
+            this.e_moldWidth = new LAZYSHELL.ToolStripNumericUpDown();
+            this.e_moldHeight = new LAZYSHELL.ToolStripNumericUpDown();
             this.panel99 = new System.Windows.Forms.Panel();
             this.pictureBoxE_Mold = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -100,9 +100,14 @@
             // 
             this.e_moldWidth.AutoSize = false;
             this.e_moldWidth.Hexadecimal = false;
-            this.e_moldWidth.Location = new System.Drawing.Point(275, 4);
+            this.e_moldWidth.Location = new System.Drawing.Point(107, 4);
             this.e_moldWidth.Maximum = new decimal(new int[] {
             16,
+            0,
+            0,
+            0});
+            this.e_moldWidth.Minimum = new decimal(new int[] {
+            0,
             0,
             0,
             0});
@@ -120,9 +125,14 @@
             // 
             this.e_moldHeight.AutoSize = false;
             this.e_moldHeight.Hexadecimal = false;
-            this.e_moldHeight.Location = new System.Drawing.Point(315, 4);
+            this.e_moldHeight.Location = new System.Drawing.Point(147, 4);
             this.e_moldHeight.Maximum = new decimal(new int[] {
             16,
+            0,
+            0,
+            0});
+            this.e_moldHeight.Minimum = new decimal(new int[] {
+            0,
             0,
             0,
             0});
@@ -144,7 +154,7 @@
             this.panel99.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel99.Location = new System.Drawing.Point(152, 25);
             this.panel99.Name = "panel99";
-            this.panel99.Size = new System.Drawing.Size(260, 260);
+            this.panel99.Size = new System.Drawing.Size(260, 302);
             this.panel99.TabIndex = 516;
             // 
             // pictureBoxE_Mold
@@ -266,7 +276,7 @@
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip6.Size = new System.Drawing.Size(24, 260);
+            this.toolStrip6.Size = new System.Drawing.Size(24, 302);
             this.toolStrip6.TabIndex = 51;
             this.toolStrip6.TabStop = true;
             this.toolStrip6.Text = "toolStrip1";
@@ -468,7 +478,7 @@
             this.panel105.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel105.Location = new System.Drawing.Point(412, 25);
             this.panel105.Name = "panel105";
-            this.panel105.Size = new System.Drawing.Size(132, 260);
+            this.panel105.Size = new System.Drawing.Size(132, 302);
             this.panel105.TabIndex = 517;
             // 
             // panel1
@@ -479,7 +489,7 @@
             this.panel1.Controls.Add(this.pictureBoxEffectTileset);
             this.panel1.Location = new System.Drawing.Point(0, 44);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(128, 212);
+            this.panel1.Size = new System.Drawing.Size(128, 254);
             this.panel1.TabIndex = 528;
             // 
             // pictureBoxEffectTileset
@@ -596,7 +606,7 @@
             this.e_molds.IntegralHeight = false;
             this.e_molds.Location = new System.Drawing.Point(0, 25);
             this.e_molds.Name = "e_molds";
-            this.e_molds.Size = new System.Drawing.Size(128, 260);
+            this.e_molds.Size = new System.Drawing.Size(128, 302);
             this.e_molds.TabIndex = 398;
             this.e_molds.SelectedIndexChanged += new System.EventHandler(this.e_molds_SelectedIndexChanged);
             // 
@@ -688,7 +698,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 285);
+            this.ClientSize = new System.Drawing.Size(544, 327);
             this.ControlBox = false;
             this.Controls.Add(this.panel99);
             this.Controls.Add(this.panel105);

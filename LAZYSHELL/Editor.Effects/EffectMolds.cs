@@ -448,7 +448,7 @@ namespace LAZYSHELL
                 {
                     int tileX = overlay.SelectTS.X + (x * 16);
                     int tileY = overlay.SelectTS.Y + (y * 16);
-                    selectedTiles[y * (overlay.SelectTS.Width / 16) + x] = (y + y_) * 16 + x + x_;
+                    selectedTiles[y * (overlay.SelectTS.Width / 16) + x] = (y + y_) * 8 + x + x_;
                 }
             }
             this.selectedTiles.Copy = selectedTiles;
@@ -736,7 +736,20 @@ namespace LAZYSHELL
         }
         private void e_moldWidth_ValueChanged(object sender, EventArgs e)
         {
+            if (updating) return;
+            int width = animation.Width;
             animation.Width = (byte)e_moldWidth.Value;
+            byte[] temp = Bits.Copy(mold.Mold);
+            for (int y = 0; y < animation.Height; y++)
+            {
+                for (int x = 0; x < animation.Width; x++)
+                {
+                    if (x >= width)
+                        mold.Mold[y * animation.Width + x] = 0xFF;
+                    else
+                        mold.Mold[y * animation.Width + x] = temp[y * width + x];
+                }
+            }
             SetTilemapImage();
             if (sequences != null)
             {
@@ -749,6 +762,7 @@ namespace LAZYSHELL
         }
         private void e_moldHeight_ValueChanged(object sender, EventArgs e)
         {
+            if (updating) return;
             animation.Height = (byte)e_moldHeight.Value;
             SetTilemapImage();
             if (sequences != null)
@@ -887,7 +901,7 @@ namespace LAZYSHELL
         }
         private void selectAll_Click(object sender, EventArgs e)
         {
-            if (!select.Checked) return;
+            select.Checked = true;
             if (draggedTiles != null)
                 PasteFinal(draggedTiles);
             overlay.Select = new Overlay.Selection(16, 0, 0, width, height);
@@ -1044,6 +1058,8 @@ namespace LAZYSHELL
             {
                 Do.CullTileset(this.tileset.Tileset, mold.Mold, 16, 16);
                 Rectangle region = Do.Crop(mold.Mold, 8, 16, 0xFF);
+                animation.Width = (byte)region.Width;
+                animation.Height = (byte)region.Height;
                 e_moldWidth.Value = region.Width;
                 e_moldHeight.Value = region.Height;
             }

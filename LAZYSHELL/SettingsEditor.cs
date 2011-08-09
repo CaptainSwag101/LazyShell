@@ -62,7 +62,7 @@ namespace LAZYSHELL
             folderBrowserDialog.Description = "Select directory to save backup ROMs to...";
             if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
                 return;
-            customDirectory.Text = folderBrowserDialog.SelectedPath + "\\";
+            customDirectoryTextBox.Text = folderBrowserDialog.SelectedPath + "\\";
         }
         private void buttonDefault_Click(object sender, EventArgs e)
         {
@@ -84,7 +84,7 @@ namespace LAZYSHELL
             settings.ShowEncryptionWarnings = checkedListBox1.GetItemChecked(6);
             settings.LastLevelRem = checkedListBox1.GetItemChecked(7);
             if (customDirectory.Checked)
-                settings.BackupROMDirectory = customDirectory.Text;
+                settings.BackupROMDirectory = customDirectoryTextBox.Text;
             else if (romDirectory.Checked)
                 settings.BackupROMDirectory = "";
             settings.VisualThemeSystem = visualThemeSystem.Checked;

@@ -294,6 +294,7 @@ namespace LAZYSHELL
                 overlay.DrawLevelOverlaps(overlaps, overlapTileset);
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
+            picture.Invalidate();
         }
         private void overlapCoordY_ValueChanged(object sender, EventArgs e)
         {
@@ -306,6 +307,7 @@ namespace LAZYSHELL
                 overlay.DrawLevelOverlaps(overlaps, overlapTileset);
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
+            picture.Invalidate();
         }
         private void overlapCoordZ_ValueChanged(object sender, EventArgs e)
         {
@@ -317,6 +319,7 @@ namespace LAZYSHELL
             overlay.DrawLevelOverlaps(overlaps, overlapTileset);
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
+            picture.Invalidate();
         }
         private void overlapCoordZPlusHalf_CheckedChanged(object sender, EventArgs e)
         {
@@ -343,6 +346,7 @@ namespace LAZYSHELL
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
 
             pictureBoxOverlaps.Invalidate();
+            picture.Invalidate();
         }
         private void overlapUnknownBits_SelectedIndexChanged(object sender, EventArgs e)
         {

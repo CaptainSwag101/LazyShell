@@ -235,12 +235,12 @@ namespace LAZYSHELL
             if (this.exitType.SelectedIndex == 0)
             {
                 this.exitDest.DropDownWidth = 490;
-                this.exitDest.Items.AddRange(Lists.Convert(settings.LevelNames));
+                this.exitDest.Items.AddRange(Lists.Numerize(Lists.Convert(settings.LevelNames)));
             }
             else
             {
                 this.exitDest.DropDownWidth = 200;
-                this.exitDest.Items.AddRange(Lists.Numerize(Model.MapPoints));
+                this.exitDest.Items.AddRange(Lists.Numerize(Lists.Numerize(Model.MapPoints)));
             }
         }
         public int CalculateFreeExitSpace()

@@ -93,6 +93,8 @@ namespace LAZYSHELL.Previewer
         }
         public void Reload(int num, int behaviour)
         {
+            if (this.selectNum == num && this.behaviour == behaviour)
+                return;
             this.selectNum = num;
             this.eventTriggers = new ArrayList();
             this.behaviour = behaviour;
@@ -342,7 +344,7 @@ namespace LAZYSHELL.Previewer
                         "(x:" + ent.CoordX.ToString() +
                         " y:" + ent.CoordY.ToString() +
                         " z:" + ent.CoordZ.ToString() +
-                        ") " + Lists.Numerize(settings.LevelNames, ent.LevelNum));
+                        ") " + Lists.Numerize(settings.LevelNames, ent.Source));
                 }
                 else if (this.behaviour == (int)Behaviours.ActionPreviewer)
                 {

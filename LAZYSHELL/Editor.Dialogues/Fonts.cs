@@ -16,7 +16,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
-                private Dialogues dialoguesEditor;
+        private Dialogues dialoguesEditor;
         private bool updating;
         private Overlay overlay;
         // accessors
@@ -481,7 +481,7 @@ namespace LAZYSHELL
                 font[currentFontChar].Graphics, srcOffset, palette,
                 pictureBoxFontCharacter.CreateGraphics(), zoom, action,
                 ((x / zoom) & 7) * zoom, ((y / zoom) & 7) * zoom, index, color,
-                font[currentFontChar].MaxWidth, font[currentFontChar].Height, 0x10, 
+                font[currentFontChar].MaxWidth, font[currentFontChar].Height, 0x10,
                 ((x / zoom) & 8) * zoom, ((y / zoom) & 8) * zoom);
             if (action == "erase")
                 pictureBoxFontCharacter.Invalidate(new Rectangle(x / zoom * zoom, y / zoom * zoom, 1 * zoom, 1 * zoom));
@@ -530,9 +530,9 @@ namespace LAZYSHELL
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             switch (fontType.SelectedIndex)
             {
-                case 0: saveFileDialog.FileName = "keystrokesMenu.txt"; break;
-                case 1: saveFileDialog.FileName = "keystrokesDialogue.txt"; break;
-                case 2: saveFileDialog.FileName = "keystrokesDescriptions.txt"; break;
+                case 0: saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - keystrokesMenu.txt"; break;
+                case 1: saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - keystrokesDialogue.txt"; break;
+                case 2: saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - keystrokesDescriptions.txt"; break;
             }
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 1;

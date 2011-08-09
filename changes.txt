@@ -1,5 +1,28 @@
 Major changes/additions are indicated by ***
 
+v3.6.2
+--------------------------------------
+General changes:
+*Text dumps now tagged with ROM name at beginning
+
+Editor-specific changes:
+*Effects: resizing mold now pads/crops and retains original tilemap
+*Previewer: level previewer now reloads when index changed
+*Sprites: no longer need to make a selection to mirror/invert tiles
+
+Fixes:
+*Dialogues: buttons for pause frames and memory variable not showing
+*Effects: not reading correct index from selected tiles in tileset
+*Levels: changing width/height of tilemap mod when alternate exists
+*Levels: exit destination needed to be tagged with index
+*Levels: changing properties of overlaps not redrawing level image
+*Monsters: opening hacking tools after closing threw exception
+*Monsters: allegedly DrawItem caused crash b/c out of bounds index
+*Palette Editor: exporting palette not exporting all rows
+*Previewer: level previewer listbox labels not showing correct source level
+*Settings: backup rom directory being set from wrong control
+
+
 v3.6.1 FINAL
 --------------------------------------
 Editor-specific changes:

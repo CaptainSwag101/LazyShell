@@ -870,6 +870,62 @@ namespace LAZYSHELL
             findNPCNumber.BringToFront();
         }
         //
+        private void npcEngageType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (updatingProperties) return;
+            npcs.EngageType = (byte)this.npcEngageType.SelectedIndex;
+            if (this.npcEngageType.SelectedIndex == 0)
+            {
+                this.label104.Text = "NPC #+";  //propertyA
+                this.label31.Text = "Event #+"; //propertyB
+                this.buttonGotoA.Text = "Event #"; //eventorpack
+                this.label116.Text = "Action #+";//propertyC
+                this.npcPropertyA.Maximum = 7;
+                this.npcPropertyA.Enabled = true;
+                this.npcPropertyB.Maximum = 7;
+                this.npcPropertyB.Enabled = true;
+                this.npcPropertyC.Enabled = true;
+                this.npcEventORPack.Maximum = 4095;
+                this.npcAfterBattle.Enabled = false;
+            }
+            else if (this.npcEngageType.SelectedIndex == 1)
+            {
+                this.label104.Text = "$70A7 = "; //propertyA
+                this.label31.Text = "{N/A}"; //propertyB
+                this.buttonGotoA.Text = "Event #"; //eventorpack
+                this.label116.Text = "{N/A}";   //propertyC
+                this.npcPropertyA.Maximum = 255;
+                this.npcPropertyA.Enabled = true;
+                this.npcPropertyB.Enabled = false;
+                this.npcPropertyC.Enabled = false;
+                this.npcEventORPack.Maximum = 4095;
+                this.npcAfterBattle.Enabled = false;
+            }
+            else if (this.npcEngageType.SelectedIndex == 2)
+            {
+                this.label104.Text = "Action #+";   //propertyA
+                this.label31.Text = "Pack #+";      //propertyB
+                this.buttonGotoA.Text = "Pack #";      //eventorpack
+                this.label116.Text = "{N/A}";       //propertyC
+                this.npcPropertyA.Maximum = 15;
+                this.npcPropertyA.Enabled = true;
+                this.npcPropertyB.Maximum = 15;
+                this.npcPropertyB.Enabled = true;
+                this.npcPropertyC.Enabled = false;
+                this.npcEventORPack.Maximum = 255;
+                this.npcAfterBattle.Enabled = true;
+            }
+            if (!updatingLevel && state.NPCs)
+                overlay.DrawLevelNPCs(npcs, npcProperties);
+            if (npcObjectTree.SelectedNode.Parent != null)
+            {
+                npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
+                npcs.CurrentInstance = this.npcObjectTree.SelectedNode.Index;
+            }
+            else
+                npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
+            picture.Invalidate();
+        }
         private void npcSpeedPlus_ValueChanged(object sender, System.EventArgs e)
         {
             if (updatingProperties) return;
@@ -1099,57 +1155,6 @@ namespace LAZYSHELL
                 npcs.CoordYBit7 = this.npcZ_half.Checked;
             }
             overlay.DrawLevelNPCs(npcs, npcProperties);
-            if (npcObjectTree.SelectedNode.Parent != null)
-            {
-                npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
-                npcs.CurrentInstance = this.npcObjectTree.SelectedNode.Index;
-            }
-            else
-                npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
-            picture.Invalidate();
-        }
-        private void npcEngageType_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            if (updatingProperties) return;
-            npcs.EngageType = (byte)this.npcEngageType.SelectedIndex;
-            if (this.npcEngageType.SelectedIndex == 0)
-            {
-                this.label104.Text = "NPC #+";  //propertyA
-                this.label31.Text = "Event #+"; //propertyB
-                this.buttonGotoA.Text = "Event #"; //eventorpack
-                this.label116.Text = "Action #+";//propertyC
-                this.npcPropertyA.Maximum = 7;
-                this.npcPropertyB.Maximum = 7;
-                this.npcPropertyC.Enabled = true;
-                this.npcEventORPack.Maximum = 4095;
-                this.npcAfterBattle.Enabled = false;
-            }
-            else if (this.npcEngageType.SelectedIndex == 1)
-            {
-                this.label104.Text = "$70A7 = "; //propertyA
-                this.label31.Text = "{N/A}"; //propertyB
-                this.buttonGotoA.Text = "Event #"; //eventorpack
-                this.label116.Text = "<...>";   //propertyC
-                this.npcPropertyA.Maximum = 255;
-                this.npcPropertyB.Enabled = false;
-                this.npcPropertyC.Enabled = false;
-                this.npcEventORPack.Maximum = 4095;
-                this.npcAfterBattle.Enabled = false;
-            }
-            else if (this.npcEngageType.SelectedIndex == 2)
-            {
-                this.label104.Text = "Action #+";   //propertyA
-                this.label31.Text = "Pack #+";      //propertyB
-                this.buttonGotoA.Text = "Pack #";      //eventorpack
-                this.label116.Text = "<...>";       //propertyC
-                this.npcPropertyA.Maximum = 15;
-                this.npcPropertyB.Maximum = 15;
-                this.npcPropertyC.Enabled = false;
-                this.npcEventORPack.Maximum = 255;
-                this.npcAfterBattle.Enabled = true;
-            }
-            if (!updatingLevel && state.NPCs)
-                overlay.DrawLevelNPCs(npcs, npcProperties);
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;

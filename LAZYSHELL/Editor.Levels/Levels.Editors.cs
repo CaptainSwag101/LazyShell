@@ -109,6 +109,16 @@ namespace LAZYSHELL
             else
                 levelsTemplate.Reload(this, this.overlay);
         }
+        private void LoadPreviewer()
+        {
+            if (lp == null)
+            {
+                lp = new LAZYSHELL.Previewer.Previewer((int)this.levelNum.Value, 1);
+                lp.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            }
+            else
+                lp.Reload((int)this.levelNum.Value, 1);
+        }
         #endregion
         #region Event handlers
         private void editor_FormClosing(object sender, FormClosingEventArgs e)
@@ -153,6 +163,10 @@ namespace LAZYSHELL
             levelsTemplate.Visible = openTemplates.Checked;
             levelsTemplate.Location = new Point(
                 Screen.PrimaryScreen.WorkingArea.Width - levelsTemplate.Size.Width, this.Location.Y);
+        }
+        private void levelPreviewToolStripButton_Click(object sender, EventArgs e)
+        {
+            lp.Visible = true;
         }
         #endregion
     }

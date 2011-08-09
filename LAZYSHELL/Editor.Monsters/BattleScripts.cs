@@ -908,6 +908,8 @@ namespace LAZYSHELL
                     break;
                 case 0xEF:
                 case 0xF0:
+                    if (e.Index >= 128)
+                        break;
                     Do.DrawName(
                         sender, e, new BattleDialoguePreview(), Model.SpellNames,
                         Model.SpellNames.GetNumFromIndex(e.Index) < 64 ? Model.FontMenu : Model.FontDialogue,

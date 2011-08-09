@@ -488,7 +488,7 @@
             0,
             0});
             this.pauseFrameNum.Name = "pauseFrameNum";
-            this.pauseFrameNum.Size = new System.Drawing.Size(130, 22);
+            this.pauseFrameNum.Size = new System.Drawing.Size(125, 22);
             this.pauseFrameNum.Text = "0";
             this.pauseFrameNum.Value = new decimal(new int[] {
             0,
@@ -540,7 +540,7 @@
             "Value @ $7000",
             "Value @ $7024"});
             this.variables.Name = "variables";
-            this.variables.Size = new System.Drawing.Size(130, 25);
+            this.variables.Size = new System.Drawing.Size(125, 25);
             // 
             // variablesInsert
             // 

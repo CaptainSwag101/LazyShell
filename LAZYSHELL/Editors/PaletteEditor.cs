@@ -913,16 +913,14 @@ namespace LAZYSHELL
                     else
                         br.ReadBytes((int)fs.Length).CopyTo(buffer, 0);
 
-                    double multiplier = 8; // 8;
                     ushort color = 0;
-
                     for (int i = 0; i < paletteSet.Reds.Length; i++) // 16 colors in palette
                     {
                         color = Bits.GetShort(buffer, (i * 2));
 
-                        paletteSet.Reds[i] = (byte)((color % 0x20) * multiplier);
-                        paletteSet.Greens[i] = (byte)(((color >> 5) % 0x20) * multiplier);
-                        paletteSet.Blues[i] = (byte)(((color >> 10) % 0x20) * multiplier);
+                        paletteSet.Reds[i] = (byte)((color % 0x20) * 8);
+                        paletteSet.Greens[i] = (byte)(((color >> 5) % 0x20) * 8);
+                        paletteSet.Blues[i] = (byte)(((color >> 10) % 0x20) * 8);
                     }
                 }
                 br.Close();
@@ -972,7 +970,7 @@ namespace LAZYSHELL
 
                     fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.ReadWrite);
                     bw = new BinaryWriter(fs);
-                    bw.Write(buffer, 0, 448 + 0x17);
+                    bw.Write(buffer, 0, 0x200 + 0x17);
                     bw.Close();
                     fs.Close();
                 }
@@ -992,7 +990,7 @@ namespace LAZYSHELL
 
                     fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.ReadWrite);
                     bw = new BinaryWriter(fs);
-                    bw.Write(buffer, 0, 0xE0);
+                    bw.Write(buffer, 0, 0x100);
                     bw.Close();
                     fs.Close();
                 }

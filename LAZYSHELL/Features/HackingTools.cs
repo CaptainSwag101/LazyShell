@@ -74,5 +74,10 @@ namespace LAZYSHELL
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+        private void HackingTools_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
     }
 }

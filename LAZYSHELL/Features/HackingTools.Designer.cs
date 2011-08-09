@@ -36,8 +36,8 @@
             this.selectAll = new System.Windows.Forms.Button();
             this.deselectAll = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.adjustCurrent = new System.Windows.Forms.RadioButton();
             this.adjustAll = new System.Windows.Forms.RadioButton();
+            this.adjustCurrent = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.percentControl)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -146,6 +146,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Adjust all monster stats";
             // 
+            // adjustAll
+            // 
+            this.adjustAll.AutoSize = true;
+            this.adjustAll.Location = new System.Drawing.Point(9, 37);
+            this.adjustAll.Name = "adjustAll";
+            this.adjustAll.Size = new System.Drawing.Size(83, 17);
+            this.adjustAll.TabIndex = 10;
+            this.adjustAll.Text = "All monsters";
+            this.adjustAll.UseVisualStyleBackColor = true;
+            // 
             // adjustCurrent
             // 
             this.adjustCurrent.AutoSize = true;
@@ -157,16 +167,6 @@
             this.adjustCurrent.TabStop = true;
             this.adjustCurrent.Text = "Current monster";
             this.adjustCurrent.UseVisualStyleBackColor = true;
-            // 
-            // adjustAll
-            // 
-            this.adjustAll.AutoSize = true;
-            this.adjustAll.Location = new System.Drawing.Point(9, 37);
-            this.adjustAll.Name = "adjustAll";
-            this.adjustAll.Size = new System.Drawing.Size(83, 17);
-            this.adjustAll.TabIndex = 10;
-            this.adjustAll.Text = "All monsters";
-            this.adjustAll.UseVisualStyleBackColor = true;
             // 
             // HackingTools
             // 
@@ -183,6 +183,7 @@
             this.ShowInTaskbar = false;
             this.Text = "HACKING TOOLS";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HackingTools_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.percentControl)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

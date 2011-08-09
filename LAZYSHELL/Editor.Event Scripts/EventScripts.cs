@@ -365,7 +365,8 @@ namespace LAZYSHELL
                     evtNameA.SelectedIndex = (int)evtNumA.Value;
                     evtNumC.Value = (esc.EventData[2] >> 1) & 0x3F;
 
-                    evtEffects.Items.AddRange(new object[] { "permanent" });
+                    if (esc.Opcode == 0x6A) evtEffects.Items.AddRange(new object[] { "alternate" });
+                    else evtEffects.Items.AddRange(new object[] { "permanent" });
                     evtEffects.Enabled = true;
                     evtEffects.SetItemChecked(0, (esc.EventData[2] & 0x80) == 0x80);
                     break;
@@ -3313,7 +3314,7 @@ namespace LAZYSHELL
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = "eventScripts.txt";
+            saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - eventScripts.txt";
             saveFileDialog.RestoreDirectory = true;
 
             ArrayList scriptCmds;
@@ -3395,7 +3396,7 @@ namespace LAZYSHELL
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = "actionScripts.txt";
+            saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - actionScripts.txt";
             saveFileDialog.RestoreDirectory = true;
 
             ArrayList scriptCmds;

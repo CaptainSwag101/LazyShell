@@ -198,7 +198,7 @@ namespace LAZYSHELL
             offset += moldNum * 2;
 
             tMold = new Mold();
-            tMold.InitializeMold(sm, offset, new List<Mold.Tile>());
+            tMold.InitializeMold(sm, offset, new List<Mold.Tile>(), animationNum);
 
             foreach (Mold.Tile t in tMold.Tiles)
             {
