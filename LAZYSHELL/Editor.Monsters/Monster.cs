@@ -146,28 +146,28 @@ namespace LAZYSHELL
 
             byte temp;
 
-            int monsterStatPtrA = Bits.GetShort(data, 0x390026 + index * 2);
-            int monsterStatOffsetA = 0x390000 + monsterStatPtrA; //ByteManage.GetShort(data, monsterStatPtrA);
+            int pointer = Bits.GetShort(data, 0x390026 + index * 2);
+            int offset = 0x390000 + pointer; //ByteManage.GetShort(data, monsterStatPtrA);
 
 
-            hp = Bits.GetShort(data, monsterStatOffsetA); monsterStatOffsetA += 2;
-            speed = data[monsterStatOffsetA]; monsterStatOffsetA++;
-            attack = data[monsterStatOffsetA]; monsterStatOffsetA++;
-            defense = data[monsterStatOffsetA]; monsterStatOffsetA++;
-            magicAttack = data[monsterStatOffsetA]; monsterStatOffsetA++;
-            magicDefense = data[monsterStatOffsetA]; monsterStatOffsetA++;
-            fp = data[monsterStatOffsetA]; monsterStatOffsetA++;
-            evadePercent = data[monsterStatOffsetA]; monsterStatOffsetA++;
-            magicEvadePercent = data[monsterStatOffsetA]; monsterStatOffsetA++;
+            hp = Bits.GetShort(data, offset); offset += 2;
+            speed = data[offset]; offset++;
+            attack = data[offset]; offset++;
+            defense = data[offset]; offset++;
+            magicAttack = data[offset]; offset++;
+            magicDefense = data[offset]; offset++;
+            fp = data[offset]; offset++;
+            evadePercent = data[offset]; offset++;
+            magicEvadePercent = data[offset]; offset++;
 
             // Byte 10
-            temp = data[monsterStatOffsetA]; monsterStatOffsetA++;
+            temp = data[offset]; offset++;
             // DOUBLE CHECK THIS            
             if ((temp & 0x01) == 1) letBattleScriptRemove = true; else letBattleScriptRemove = false;
             if ((temp & 0x02) == 2) usedByCrystals = true; else usedByCrystals = false;
             // DOUBLE CHECK THIS          
             // Byte 11
-            temp = data[monsterStatOffsetA]; monsterStatOffsetA++;
+            temp = data[offset]; offset++;
             if ((temp & 0x01) == 1) invincible = true; else invincible = false;
             if ((temp & 0x02) == 2) protectAgainstInstantDeath = true; else protectAgainstInstantDeath = false;
             switch (temp & 0x0C)						// MORPH SUCCESS RATE
@@ -198,14 +198,14 @@ namespace LAZYSHELL
             }
 
             // Byte 12
-            temp = data[monsterStatOffsetA]; monsterStatOffsetA++;
+            temp = data[offset]; offset++;
             elemIceNull = (temp & 0x10) == 0x10;
             elemThunderNull = (temp & 0x20) == 0x20;
             elemFireNull = (temp & 0x40) == 0x40;
             elemJumpNull = (temp & 0x80) == 0x80;
 
             // Byte 13
-            temp = data[monsterStatOffsetA]; monsterStatOffsetA++;
+            temp = data[offset]; offset++;
             switch (temp & 0x0F)						// OTHER SOUND
             {
                 case 0x00: otherSound = 0; break;			// none
@@ -225,7 +225,7 @@ namespace LAZYSHELL
             elemJumpWeak = (temp & 0x80) == 0x80;
 
             // Byte 14
-            temp = data[monsterStatOffsetA]; monsterStatOffsetA++;
+            temp = data[offset]; offset++;
             effectMuteNull = (temp & 0x01) == 0x01;
             effectSleepNull = (temp & 0x02) == 0x02;
             effectPoisonNull = (temp & 0x04) == 0x04;
@@ -235,7 +235,7 @@ namespace LAZYSHELL
             effectInvincibleNull = (temp & 0x80) == 0x80;
 
             // Byte 15
-            temp = data[monsterStatOffsetA]; monsterStatOffsetA++;
+            temp = data[offset]; offset++;
             entranceStyle = (byte)(temp & 0x0F);
             elevation = (byte)((temp & 0x30) >> 4);
 

@@ -48,6 +48,7 @@ namespace LAZYSHELL
             SetTileImage();
             SetSubtileImage();
             this.BringToFront();
+            new History(this);
         }
         public void Reload(Delegate update, Tile16x16 tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {

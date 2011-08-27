@@ -12,6 +12,7 @@ namespace LAZYSHELL
     public partial class Spells : Form
     {
         #region Variables
+        
         private bool updating = false;
         private Spell[] spells { get { return Model.Spells; } set { Model.Spells = value; } }
         private Spell spell { get { return spells[index]; } set { spells[index] = value; } }

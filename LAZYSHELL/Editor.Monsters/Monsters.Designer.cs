@@ -755,9 +755,10 @@
             // MonsterValFlowerOdds
             // 
             this.MonsterValFlowerOdds.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MonsterValFlowerOdds.Increment = 10;
             this.MonsterValFlowerOdds.Location = new System.Drawing.Point(62, 36);
             this.MonsterValFlowerOdds.Maximum = new decimal(new int[] {
-            15,
+            100,
             0,
             0,
             0});
@@ -785,7 +786,7 @@
             this.label30.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label30.Size = new System.Drawing.Size(61, 17);
             this.label30.TabIndex = 2;
-            this.label30.Text = "Odds";
+            this.label30.Text = "Success%";
             // 
             // label1
             // 

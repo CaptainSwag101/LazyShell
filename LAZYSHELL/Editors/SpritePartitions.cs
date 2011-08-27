@@ -25,6 +25,7 @@ namespace LAZYSHELL
             byte3b.SelectedIndex = 0;
             byte4a.SelectedIndex = 0;
             byte4b.SelectedIndex = 0;
+            new History(this);
         }
         // functions
         private void LoadSearch()

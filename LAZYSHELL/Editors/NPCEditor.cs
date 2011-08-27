@@ -36,6 +36,7 @@ namespace LAZYSHELL
             npcNum.Value = npcID;
             InitializeNPCs();
             searchWindow = new Search(searchSpriteName, spriteNameTextBox, searchSpriteNames, searchSpriteName.Items);
+            new History(this);
         }
         // functions
         public void Reload(decimal npcID)

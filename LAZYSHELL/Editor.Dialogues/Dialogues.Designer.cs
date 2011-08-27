@@ -538,7 +538,9 @@
             this.variables.Items.AddRange(new object[] {
             "Item name @ $70A7",
             "Value @ $7000",
-            "Value @ $7024"});
+            "Value @ $7024",
+            "Time @ 7000",
+            "Game slot's name"});
             this.variables.Name = "variables";
             this.variables.Size = new System.Drawing.Size(125, 25);
             // 

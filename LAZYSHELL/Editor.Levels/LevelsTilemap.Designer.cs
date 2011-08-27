@@ -87,7 +87,7 @@
             this.buttonZoomOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDragSolidity = new System.Windows.Forms.ToolStripButton();
-            this.panelLevelPicture = new System.Windows.Forms.Panel();
+            this.panelLevelPicture = new LAZYSHELL.NewPanel();
             this.pictureBoxLevel = new System.Windows.Forms.PictureBox();
             this.pictureBoxZoom = new System.Windows.Forms.PictureBox();
             this.toolStrip1.SuspendLayout();
@@ -858,7 +858,7 @@
         private System.Windows.Forms.ToolStripButton buttonZoomOut;
         private System.Windows.Forms.ToolStripButton opacityToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
-        private System.Windows.Forms.Panel panelLevelPicture;
+        private LAZYSHELL.NewPanel panelLevelPicture;
         private System.Windows.Forms.PictureBox pictureBoxLevel;
         private System.Windows.Forms.Panel panelOpacity;
         private System.Windows.Forms.TrackBar overlayOpacity;

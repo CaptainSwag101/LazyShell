@@ -1,26 +1,47 @@
 Major changes/additions are indicated by ***
 
-v3.6.2
+v3.7
 --------------------------------------
 General changes:
+*Custom exception window shows event history and provides link to report
 *Text dumps now tagged with ROM name at beginning
 
 Editor-specific changes:
 *Effects: resizing mold now pads/crops and retains original tilemap
-*Previewer: level previewer now reloads when index changed
+*Effects: importing images now more efficient; changed to import to tilemaps
+*Monsters: changed flower odds to % format out of 100%, max is 100%
 *Sprites: no longer need to make a selection to mirror/invert tiles
+
+Additions:
+*Always on top optional for graphics and palette editor windows
+*Dialogues: two more variables for showing time and game slot name
+*Effects: reverse frames button allows user to switch order of all frames
+*Effects: clean unused animation data button will free up thousands of bytes
+*Sprites: reverse frames button allows user to switch order of all frames
 
 Fixes:
 *Dialogues: buttons for pause frames and memory variable not showing
 *Effects: not reading correct index from selected tiles in tileset
+*Effects: pasted tiles in mold not always being cemented when needed
+*Effects: importing images or changing frame mold not updating frame images
+*Event Scripts: loading uneditable scripts was permanently disabling commands
+*Graphics Editor: problem with editing pixels when width not at 16 tiles
+*Graphics Editor: overflow (boundary) errors with continguous fill function
 *Levels: changing width/height of tilemap mod when alternate exists
 *Levels: exit destination needed to be tagged with index
 *Levels: changing properties of overlaps not redrawing level image
+*Levels: solidity was not nonserialized for level templates; saving crash
+*Levels: drawing template crashed b/c loading tilemap before template
+*Levels: was able to draw outside of solid mod boundaries/box
+*Levels: solid tile index maximum was supposed to be 1023, not 1024
+*Levels: mask was not drawing to correct size when zoomed in
 *Monsters: opening hacking tools after closing threw exception
 *Monsters: allegedly DrawItem caused crash b/c out of bounds index
 *Palette Editor: exporting palette not exporting all rows
 *Previewer: level previewer listbox labels not showing correct source level
+*Previewer: animation previewer was changing editor class and not raw ROM
 *Settings: backup rom directory being set from wrong control
+*Sprites: dragging selection beyond top & left boundaries crashed image
 
 
 v3.6.1 FINAL

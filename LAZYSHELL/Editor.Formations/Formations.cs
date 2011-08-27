@@ -11,6 +11,7 @@ namespace LAZYSHELL
     public partial class Formations : Form
     {
         #region Variables
+        
         private bool updating = false;
         private bool waitBothCoords = false;
         private int overFM = 0;

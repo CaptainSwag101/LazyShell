@@ -40,6 +40,7 @@ namespace LAZYSHELL
                 this.range.Text = "Export level images within level index range";
                 this.oneImageDefault.Text = "One image per level, default size (all levels will be 1024x1024!)";
                 this.oneImageCropped.Text = "One image per level, cropped to mask edges";
+                this.fromIndex.Maximum = 509;
                 this.toIndex.Maximum = 509;
                 this.maximumWidth.Visible = false;
                 this.label2.Visible = false;
@@ -55,23 +56,37 @@ namespace LAZYSHELL
             int start;
             int end;
             string fullPath;
-            if (current.Checked && oneSpriteSheet.Checked)
+            if (current.Checked)
             {
                 start = currentIndex;
                 end = currentIndex + 1;
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Image file (*.png)|*.png";
-                if (element == "levels")
-                    saveFileDialog.FileName = "Level #" + start.ToString("d4");
+                if (element == "levels" || (element == "sprites" && oneSpriteSheet.Checked))
+                {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "Image file (*.png)|*.png";
+                    if (element == "levels")
+                        saveFileDialog.FileName = "Level #" + start.ToString("d3");
+                    else
+                        saveFileDialog.FileName = "Sprite #" + start.ToString("d4");
+                    saveFileDialog.RestoreDirectory = true;
+                    saveFileDialog.Title = "Save Image";
+                    if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
+                        return;
+                    else
+                        Settings.Default.LastDirectory = saveFileDialog.FileName;
+                    fullPath = saveFileDialog.FileName;
+                }
                 else
-                    saveFileDialog.FileName = "Sprite #" + start.ToString("d4");
-                saveFileDialog.RestoreDirectory = true;
-                saveFileDialog.Title = "Save Image";
-                if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
-                    return;
-                else
-                    Settings.Default.LastDirectory = saveFileDialog.FileName;
-                fullPath = saveFileDialog.FileName;
+                {
+                    FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+                    folderBrowserDialog1.SelectedPath = Settings.Default.LastDirectory;
+                    folderBrowserDialog1.Description = "Select directory to export to";
+                    if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                        Settings.Default.LastDirectory = folderBrowserDialog1.SelectedPath;
+                    else
+                        return;
+                    fullPath = folderBrowserDialog1.SelectedPath + "\\";
+                }
             }
             else
             {
@@ -163,7 +178,10 @@ namespace LAZYSHELL
                             image = new Bitmap(region.Width, region.Height, region.Width * 4, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
                         }
                     }
-                    image.Save(fullPath + "Level #" + a.ToString("d3") + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                    if (!current)
+                        image.Save(fullPath + "Level #" + a.ToString("d3") + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                    else
+                        image.Save(fullPath, System.Drawing.Imaging.ImageFormat.Png);
                     continue;
                 }
                 // sprites

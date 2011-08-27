@@ -15,6 +15,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
+        
         private delegate void Function();
         // main editor accessed variables
         private Effects effectsEditor;
@@ -25,8 +26,8 @@ namespace LAZYSHELL
         public bool ShowBG { get { return showBG.Checked; } }
         // local variables
         private E_Tileset tileset { get { return animation.Tileset; } set { animation.Tileset = value; } }
-        private ArrayList molds { get { return animation.Molds; } }
-        private E_Mold mold { get { return (E_Mold)animation.Molds[e_molds.SelectedIndex]; } }
+        private List<E_Mold> molds { get { return animation.Molds; } }
+        private E_Mold mold { get { return animation.Molds[e_molds.SelectedIndex]; } }
         private int index { get { return e_molds.SelectedIndex; } set { e_molds.SelectedIndex = value; } }
         private Bitmap tilemapImage;
         private Bitmap tilesetImage;
@@ -294,6 +295,7 @@ namespace LAZYSHELL
         private void PasteFinal(CopyBuffer buffer)
         {
             if (buffer == null) return;
+            if (overlay.Select == null) return;
             Point location = new Point();
             location.X = overlay.Select.X / 16;
             location.Y = overlay.Select.Y / 16;
@@ -306,6 +308,16 @@ namespace LAZYSHELL
                 sequences.SetSequenceFrameImages();
                 sequences.RealignFrames();
             }
+        }
+        private void PasteClear()
+        {
+            if (draggedTiles != null)
+            {
+                PasteFinal(draggedTiles);
+                draggedTiles = null;
+            }
+            move = false;
+            overlay.Select = null;
         }
         private void Delete()
         {
@@ -739,15 +751,18 @@ namespace LAZYSHELL
             if (updating) return;
             int width = animation.Width;
             animation.Width = (byte)e_moldWidth.Value;
-            byte[] temp = Bits.Copy(mold.Mold);
-            for (int y = 0; y < animation.Height; y++)
+            for (int i = 0; i < molds.Count; i++)
             {
-                for (int x = 0; x < animation.Width; x++)
+                byte[] temp = Bits.Copy(molds[i].Mold);
+                for (int y = 0; y < animation.Height; y++)
                 {
-                    if (x >= width)
-                        mold.Mold[y * animation.Width + x] = 0xFF;
-                    else
-                        mold.Mold[y * animation.Width + x] = temp[y * width + x];
+                    for (int x = 0; x < animation.Width; x++)
+                    {
+                        if (x >= width)
+                            molds[i].Mold[y * animation.Width + x] = 0xFF;
+                        else
+                            molds[i].Mold[y * animation.Width + x] = temp[y * width + x];
+                    }
                 }
             }
             SetTilemapImage();
@@ -858,7 +873,7 @@ namespace LAZYSHELL
         {
             pictureBoxE_Mold.Invalidate();
             pictureBoxEffectTileset.Invalidate();
-            sequences.InvalidateImages();
+            sequences.InvalidateFrameImages();
         }
         private void draw_Click(object sender, EventArgs e)
         {
@@ -870,7 +885,7 @@ namespace LAZYSHELL
                 this.pictureBoxE_Mold.Cursor = new Cursor(GetType(), "CursorDraw.cur");
             else if (!draw.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
-            overlay.Select = null;
+            PasteClear();
             pictureBoxE_Mold.Invalidate();
         }
         private void erase_Click(object sender, EventArgs e)
@@ -883,7 +898,7 @@ namespace LAZYSHELL
                 this.pictureBoxE_Mold.Cursor = new Cursor(GetType(), "CursorErase.cur");
             else if (!erase.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
-            overlay.Select = null;
+            PasteClear();
             pictureBoxE_Mold.Invalidate();
         }
         private void select_Click(object sender, EventArgs e)
@@ -896,7 +911,7 @@ namespace LAZYSHELL
                 this.pictureBoxE_Mold.Cursor = Cursors.Cross;
             else if (!select.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
-            overlay.Select = null;
+            PasteClear();
             pictureBoxE_Mold.Invalidate();
         }
         private void selectAll_Click(object sender, EventArgs e)
@@ -951,7 +966,7 @@ namespace LAZYSHELL
                 this.pictureBoxE_Mold.Cursor = new Cursor(GetType(), "CursorZoomIn.cur");
             else if (!e_moldZoomIn.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
-            overlay.Select = null;
+            PasteClear();
             pictureBoxE_Mold.Invalidate();
         }
         private void e_moldZoomOut_Click(object sender, EventArgs e)
@@ -964,7 +979,7 @@ namespace LAZYSHELL
                 this.pictureBoxE_Mold.Cursor = new Cursor(GetType(), "CursorZoomOut.cur");
             else if (!e_moldZoomOut.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
-            overlay.Select = null;
+            PasteClear();
             pictureBoxE_Mold.Invalidate();
         }
         // contextmenustrip
@@ -1005,71 +1020,77 @@ namespace LAZYSHELL
                 "effectAnimation." + animation.Index.ToString("d3") + ".Mold." + index.ToString("d2") + ".png");
         }
         // tileset contextmenustrip
-        private void importIntoTilesetToolStripMenuItem_Click(object sender, EventArgs e)
+        private void importIntoTilemap_Click(object sender, EventArgs e)
         {
-            Bitmap import = new Bitmap(1, 1); import = (Bitmap)Do.Import(import);
-            if (import == null) return;
-            if (import.Width != 128 || import.Height % 16 != 0 || import.Height > 256)
+            Bitmap[] imports = new Bitmap[1]; imports = (Bitmap[])Do.Import(imports);
+            if (imports == null) return;
+            if (imports.Length == 0) return;
+            if (imports.Length > 32)
             {
-                if (MessageBox.Show(
-                    "The image does not have a width of 128 and a height a multiple of 16 and less than 256. " +
-                    "It is recommended that an imported image possess these attributes for accuracy.\n\n" +
-                    "Import into tileset anyways?", "LAZY SHELL",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
-                {
-                    import.Dispose();
-                    return;
-                }
+                MessageBox.Show("The maximum number of imported images must not exceed 32.", "LAZY SHELL");
+                return;
             }
-            int height = Math.Min(256, import.Height / 16 * 16);
-            int[] pixels = Do.ImageToPixels(import, new Size(128, height), new Rectangle(0, 0, 128, height));
-            if (MessageBox.Show(
-                "Would you like to create a new palette from the imported image?", "LAZY SHELL",
+            Bitmap import = new Bitmap(imports[0]);
+            //
+            byte[] graphics = new byte[0x10000];
+            int[] palette = animation.PaletteSet.Palettes[effect.PaletteIndex];
+            Tile16x16[] tiles = new Tile16x16[16 * 16];
+            byte[][] tilemaps = new byte[imports.Length][];
+            bool newPalette = false;
+            if (MessageBox.Show("Would you like to create a new palette from the imported image(s)?", "LAZY SHELL",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                newPalette = true;
+            Do.ImageToTilemap(ref imports, ref palette, index, animation.Codec == 1 ? (byte)0x10 : (byte)0x20,
+                ref graphics, ref tiles, ref tilemaps, newPalette);
+            for (int i = 0; i < palette.Length; i++)
             {
-                int[] palette = Do.ReduceColorDepth(pixels, 16, animation.PaletteSet.Palettes[effect.PaletteIndex][0]);
-                for (int i = 0; i < palette.Length; i++)
-                {
-                    animation.PaletteSet.Reds[i + (effect.PaletteIndex * 16)] = Color.FromArgb(palette[i]).R;
-                    animation.PaletteSet.Greens[i + (effect.PaletteIndex * 16)] = Color.FromArgb(palette[i]).G;
-                    animation.PaletteSet.Blues[i + (effect.PaletteIndex * 16)] = Color.FromArgb(palette[i]).B;
-                }
+                animation.PaletteSet.Reds[i + (effect.PaletteIndex * 16)] = Color.FromArgb(palette[i]).R;
+                animation.PaletteSet.Greens[i + (effect.PaletteIndex * 16)] = Color.FromArgb(palette[i]).G;
+                animation.PaletteSet.Blues[i + (effect.PaletteIndex * 16)] = Color.FromArgb(palette[i]).B;
             }
-            byte[] graphics = new byte[animation.Codec == 1 ? (byte)0x10 * 0x200 : (byte)0x20 * 0x200];
-            byte[] tileset = new byte[animation.TileSet.Length * 2];
-            Do.PixelsToBPP(
-                pixels, graphics, new Size(16, height / 8),
-                animation.PaletteSet.Palettes[effect.PaletteIndex],
-                animation.Codec == 1 ? (byte)0x10 : (byte)0x20);
-            if (Do.CopyToTileset(graphics, tileset, animation.PaletteSet.Palettes[effect.PaletteIndex],
-                0, false, true, animation.Codec == 1 ? (byte)0x10 : (byte)0x20, 2, new Size(128, height), 0) >
-                animation.GraphicSetLength)
-                MessageBox.Show(
-                    "Imported graphics exceed graphic set size. Increase the graphic set size to save all data.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            import.Dispose();
             Buffer.BlockCopy(graphics, 0, animation.GraphicSet, 0, Math.Min(graphics.Length, animation.GraphicSet.Length));
-            Buffer.BlockCopy(tileset, 0, animation.TileSet, 0, Math.Min(tileset.Length, animation.TileSet.Length));
+            effectsEditor.E_graphicSetSize.Value = Math.Min(graphics.Length, 8192);
+            if (graphics.Length > 8192)
+                MessageBox.Show("Not enough space to store the necessary amount of SNES graphics data for the imported images. The total required space (" +
+                    graphics.Length + " bytes) for the new SNES graphics data exceeds 8192 bytes.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // set tileset length
+            int temp = tiles.Length * 8;
+            animation.TileSetLength = Math.Min(tiles.Length * 8, 512);
+            animation.TileSetLength = animation.TileSetLength / 64 * 64;
+            if (animation.TileSetLength == 0)
+                animation.TileSetLength += 64;
+            else if (animation.TileSetLength <= 512 - 64 && temp % 64 != 0)
+                animation.TileSetLength += 64;
+            e_tileSetSize.Value = animation.TileSetLength;
+            if (tiles.Length * 8 > 512)
+                MessageBox.Show("Not enough space to draw the necessary amount of tiles in the tileset for the imported images. The total required space (" +
+                    (tiles.Length * 8).ToString() + " bytes) for the new tileset exceeds 512 bytes.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             // redraw data
+            animation.Tileset.DrawTileset(animation.TileSet, tiles);
             animation.Tileset = new E_Tileset(animation, effect.PaletteIndex);
-            // cull tileset
-            if (MessageBox.Show("Would you like to redraw the current mold from the imported image?", "LAZY SHELL",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            for (int i = 0; i < tilemaps.Length; i++)
             {
-                Do.CullTileset(this.tileset.Tileset, mold.Mold, 16, 16);
-                Rectangle region = Do.Crop(mold.Mold, 8, 16, 0xFF);
-                animation.Width = (byte)region.Width;
-                animation.Height = (byte)region.Height;
-                e_moldWidth.Value = region.Width;
-                e_moldHeight.Value = region.Height;
+                // add another mold if not enough
+                if (i >= molds.Count)
+                {
+                    index = molds.Count - 1;
+                    newMold_Click(null, null);
+                }
+                Bits.Fill(molds[i].Mold, (byte)0xFF);
+                Buffer.BlockCopy(tilemaps[i], 0, molds[i].Mold, 0, Math.Min(tilemaps[i].Length, molds[i].Mold.Length));
             }
-            else
-                Do.CullTileset(this.tileset.Tileset);
-            // set images
-            //tileset.DrawTileset(animation.TileSet, tileset.Tileset);
+            animation.Width = (byte)(import.Width / 16);
+            animation.Height = (byte)(import.Height / 16);
+            e_moldWidth.Value = import.Width / 16;
+            e_moldHeight.Value = import.Height / 16;
+            //
+            animation.Assemble();
             SetTilesetImage();
             SetTilemapImage();
             sequences.SetSequenceFrameImages();
+            sequences.RealignFrames();
             effectsEditor.LoadPaletteEditor();
             effectsEditor.LoadGraphicEditor();
         }

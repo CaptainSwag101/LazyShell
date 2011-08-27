@@ -12,6 +12,7 @@ namespace LAZYSHELL
     public partial class Attacks : Form
     {
         // variables
+        
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Attack[] attacks { get { return Model.Attacks; } set { Model.Attacks = value; } }

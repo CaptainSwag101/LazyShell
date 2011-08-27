@@ -14,6 +14,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
+        
         private delegate void Function();
         private Delegate update;
         public int Layer { get { return tabControl1.SelectedIndex; } set { tabControl1.SelectedIndex = value; } }
@@ -499,6 +500,13 @@ namespace LAZYSHELL
                 pictureBox.Invalidate();
             }
         }
+        private void lockEditing_CheckedChanged(object sender, System.EventArgs e)
+        {
+            buttonEditDelete.Enabled = !lockEditing.Checked;
+            buttonEditCut.Enabled = !lockEditing.Checked;
+            buttonEditCopy.Enabled = !lockEditing.Checked;
+            buttonEditPaste.Enabled = !lockEditing.Checked;
+        }
         // toolstrip
         private void buttonToggleTileEditor_Click(object sender, EventArgs e)
         {
@@ -518,18 +526,22 @@ namespace LAZYSHELL
         }
         private void buttonEditDelete_Click(object sender, EventArgs e)
         {
+            if (lockEditing.Checked) return;
             Delete();
         }
         private void buttonEditCut_Click(object sender, EventArgs e)
         {
+            if (lockEditing.Checked) return;
             Cut();
         }
         private void buttonEditCopy_Click(object sender, EventArgs e)
         {
+            if (lockEditing.Checked) return;
             Copy();
         }
         private void buttonEditPaste_Click(object sender, EventArgs e)
         {
+            if (lockEditing.Checked) return;
             if (draggedTiles != null)
                 PasteFinal(draggedTiles);
             Paste(new Point(16, 16), copiedTiles);
@@ -543,20 +555,35 @@ namespace LAZYSHELL
 
         }
         // contextmenustrip
+        private void contextMenuStrip2_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            cutToolStripMenuItem2.Enabled = !lockEditing.Checked;
+            copyToolStripMenuItem2.Enabled = !lockEditing.Checked;
+            pasteToolStripMenuItem2.Enabled = !lockEditing.Checked;
+            deleteToolStripMenuItem2.Enabled = !lockEditing.Checked;
+            priority1SetToolStripMenuItem.Enabled = !lockEditing.Checked;
+            priority1ClearToolStripMenuItem.Enabled = !lockEditing.Checked;
+            mirrorToolStripMenuItem.Enabled = !lockEditing.Checked;
+            invertToolStripMenuItem.Enabled = !lockEditing.Checked;
+        }
         private void priority1SetToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (lockEditing.Checked) return;
             Priority1(true);
         }
         private void priority1ClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (lockEditing.Checked) return;
             Priority1(false);
         }
         private void mirrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (lockEditing.Checked) return;
             Flip("mirror");
         }
         private void invertToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (lockEditing.Checked) return;
             Flip("invert");
         }
         private void saveImageAsToolStripMenuItem_Click(object sender, EventArgs e)

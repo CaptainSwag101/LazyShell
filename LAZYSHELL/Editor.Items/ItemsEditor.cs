@@ -11,6 +11,7 @@ namespace LAZYSHELL
 {
     public partial class ItemsEditor : Form
     {
+        
         private long checksum;
         private Settings settings = Settings.Default;
         public Items itemsEditor;
@@ -41,6 +42,7 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
             //
             checksum = Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops);
+            new History(this);
         }
         // functions
         public void Assemble()

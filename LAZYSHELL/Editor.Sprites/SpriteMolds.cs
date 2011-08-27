@@ -14,6 +14,7 @@ namespace LAZYSHELL
     public partial class SpriteMolds : Form
     {
         #region Variables
+        
         private delegate void Function();
         // main editor accessed variables
         private Sprites spritesEditor;
@@ -455,6 +456,7 @@ namespace LAZYSHELL
                     {
                         for (int x = overlay.Select.X; x < overlay.Select.Terminal.X; x++)
                         {
+                            if (y < 0 || x < 0) continue;
                             if (y >= 256 || x >= 256) continue;
                             if (mold.MoldTilesPerPixel[y * 256 + x] != 0xFF)
                             {
@@ -983,7 +985,7 @@ namespace LAZYSHELL
         }
         private void selectAll_Click(object sender, EventArgs e)
         {
-            if (!select.Checked) return;
+            select.Checked = true;
             overlay.Select = new Overlay.Selection(1, 0, 0, 256, 256);
             pictureBoxMold.Invalidate();
         }

@@ -24,8 +24,10 @@ namespace LAZYSHELL
         private byte width; public byte Width { get { return width; } set { width = value; } }
         private byte height; public byte Height { get { return height; } set { height = value; } }
         private ushort codec; public ushort Codec { get { return codec; } set { codec = value; } }
-        private ArrayList sequences = new ArrayList(); public ArrayList Sequences { get { return sequences; } set { sequences = value; } }
-        private ArrayList molds = new ArrayList(); public ArrayList Molds { get { return molds; } set { molds = value; } }
+        private List<E_Sequence> sequences = new List<E_Sequence>(); 
+        public List<E_Sequence> Sequences { get { return sequences; } set { sequences = value; } }
+        private List<E_Mold> molds = new List<E_Mold>(); 
+        public List<E_Mold> Molds { get { return molds; } set { molds = value; } }
         // Tileset
         private int tileSetLength; public int TileSetLength { get { return tileSetLength; } set { tileSetLength = value; } }
         private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
@@ -79,7 +81,7 @@ namespace LAZYSHELL
             paletteSetLength = (ushort)(tileSetPointer - paletteSetPointer);
             paletteSet = new PaletteSet(sm, 0, paletteSetPointer, 8, 16, 32);
             tileSetLength = sequencePacketPointer - tileSetPointer - 2;
-            tileSet = new byte[64 * 4 * 2];
+            tileSet = new byte[64 * 4 * 2 * 4];
             Buffer.BlockCopy(sm, tileSetPointer, tileSet, 0, tileSetLength);
 
             offset = sequencePacketPointer;

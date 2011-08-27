@@ -63,6 +63,7 @@
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.enableHelpTips = new System.Windows.Forms.ToolStripButton();
             this.showDecHex = new System.Windows.Forms.ToolStripButton();
+            this.cullAnimations = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.name = new System.Windows.Forms.ToolStripComboBox();
             this.searchText = new System.Windows.Forms.ToolStripTextBox();
@@ -437,6 +438,7 @@
             this.export,
             this.reset,
             this.clear,
+            this.cullAnimations,
             this.toolStripSeparator12,
             this.enableHelpTips,
             this.showDecHex});
@@ -527,6 +529,17 @@
             this.showDecHex.Name = "showDecHex";
             this.showDecHex.Size = new System.Drawing.Size(23, 22);
             this.showDecHex.ToolTipText = "Show Base Conversion";
+            // 
+            // cullAnimations
+            // 
+            this.cullAnimations.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cullAnimations.Image = global::LAZYSHELL.Properties.Resources.broom;
+            this.cullAnimations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cullAnimations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cullAnimations.Name = "cullAnimations";
+            this.cullAnimations.Size = new System.Drawing.Size(23, 22);
+            this.cullAnimations.ToolTipText = "Clean unused animation data";
+            this.cullAnimations.Click += new System.EventHandler(this.cullAnimations_Click);
             // 
             // toolStrip3
             // 
@@ -758,5 +771,6 @@
         private System.Windows.Forms.ToolStripButton showDecHex;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripButton reset;
+        private System.Windows.Forms.ToolStripButton cullAnimations;
     }
 }

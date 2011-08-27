@@ -17,6 +17,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main editor accessed variables
+        
         private Sprites spritesEditor;
         private Sprite sprite { get { return spritesEditor.Sprite; } set { spritesEditor.Sprite = value; } }
         private SpriteMolds molds { get { return spritesEditor.Molds; } set { spritesEditor.Molds = value; } }
@@ -144,6 +145,7 @@ namespace LAZYSHELL
                 duplicateFrame.Enabled = true;
                 moveFrameBack.Enabled = true;
                 moveFrameFoward.Enabled = true;
+                reverseFrames.Enabled = true;
                 panelSequence.Enabled = true;
                 frames.Enabled = true;
                 InitializeFrames();
@@ -155,6 +157,7 @@ namespace LAZYSHELL
                 duplicateFrame.Enabled = false;
                 moveFrameBack.Enabled = false;
                 moveFrameFoward.Enabled = false;
+                reverseFrames.Enabled = false;
                 panelSequence.Enabled = false;
                 frames.Enabled = false;
                 frames.Controls.Clear();
@@ -330,6 +333,8 @@ namespace LAZYSHELL
             PictureBox frame = (PictureBox)sender;
             frame.Focus();
             index = (int)frame.Tag;
+            if (panelFrames.HorizontalScroll.Visible)
+                panelFrames.HorizontalScroll.Value = index * (192 + 4);
         }
         private void frame_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -338,6 +343,8 @@ namespace LAZYSHELL
                 index++;
             if (e.KeyData == Keys.Left || e.KeyData == Keys.Up)
                 index--;
+            if (panelFrames.HorizontalScroll.Visible)
+                panelFrames.HorizontalScroll.Value = index * (192 + 4);
         }
         private void panelFrames_SizeChanged(object sender, EventArgs e)
         {
@@ -358,6 +365,8 @@ namespace LAZYSHELL
                 PlaybackSequence.CancelAsync();
             if (updating) return;
             index = listBoxFrames.SelectedIndex;
+            if (panelFrames.HorizontalScroll.Visible)
+                panelFrames.HorizontalScroll.Value = index * (192 + 4);
         }
         private void sequences_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -535,7 +544,8 @@ namespace LAZYSHELL
             // update free space
             animation.Assemble();
             spritesEditor.CalculateFreeSpace();
-            toolStrip1.Enabled = duplicateFrame.Enabled = deleteFrame.Enabled = moveFrameBack.Enabled = moveFrameFoward.Enabled = true;
+            toolStrip1.Enabled = duplicateFrame.Enabled = deleteFrame.Enabled = 
+                moveFrameBack.Enabled = moveFrameFoward.Enabled = reverseFrames.Enabled = true;
         }
         private void duplicateFrame_Click(object sender, EventArgs e)
         {
@@ -558,7 +568,8 @@ namespace LAZYSHELL
             // update free space
             animation.Assemble();
             spritesEditor.CalculateFreeSpace();
-            toolStrip1.Enabled = duplicateFrame.Enabled = deleteFrame.Enabled = moveFrameBack.Enabled = moveFrameFoward.Enabled = true;
+            toolStrip1.Enabled = duplicateFrame.Enabled = deleteFrame.Enabled =
+                moveFrameBack.Enabled = moveFrameFoward.Enabled = reverseFrames.Enabled = true;
         }
         private void deleteFrame_Click(object sender, EventArgs e)
         {
@@ -577,7 +588,8 @@ namespace LAZYSHELL
             animation.Assemble();
             spritesEditor.CalculateFreeSpace();
             if (sequence.Frames.Count == 0)
-                toolStrip1.Enabled = duplicateFrame.Enabled = deleteFrame.Enabled = moveFrameBack.Enabled = moveFrameFoward.Enabled = false;
+                toolStrip1.Enabled = duplicateFrame.Enabled = deleteFrame.Enabled =
+                    moveFrameBack.Enabled = moveFrameFoward.Enabled = reverseFrames.Enabled = false;
         }
         private void moveFrameBack_Click(object sender, EventArgs e)
         {
@@ -596,6 +608,22 @@ namespace LAZYSHELL
             sequenceImages.Reverse(index, 2);
             RealignFrames();
             this.index++;
+        }
+        private void reverseFrames_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You are about to reverse the order of all frames in the current sequence.\n\n" +
+                "Continue with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+            for (int i = 1; i < sequence.Frames.Count; i++)
+            {
+                for (int c = 0; c < sequence.Frames.Count - i; c++)
+                {
+                    sequence.Frames.Reverse(c, 2);
+                    sequenceImages.Reverse(c, 2);
+                }
+            }
+            index = 0;
+            RealignFrames();
         }
         #endregion
     }

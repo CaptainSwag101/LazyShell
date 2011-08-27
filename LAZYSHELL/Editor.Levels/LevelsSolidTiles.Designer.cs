@@ -202,7 +202,7 @@
             this.physicalTileNum.Hexadecimal = false;
             this.physicalTileNum.Location = new System.Drawing.Point(7, 1);
             this.physicalTileNum.Maximum = new decimal(new int[] {
-            1024,
+            1023,
             0,
             0,
             0});

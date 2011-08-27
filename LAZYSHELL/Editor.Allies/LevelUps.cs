@@ -12,6 +12,7 @@ namespace LAZYSHELL
     public partial class LevelUps : Form
     {
         #region Variables
+        
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Character[] characters { get { return Model.Characters; } set { Model.Characters = value; } }

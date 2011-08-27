@@ -70,6 +70,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.autoUpdate = new System.Windows.Forms.CheckBox();
+            this.alwaysOnTop = new System.Windows.Forms.CheckBox();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).BeginInit();
             this.panelImageGraphics.SuspendLayout();
@@ -87,7 +88,7 @@
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.pictureBoxColor);
-            this.panel3.Location = new System.Drawing.Point(202, 12);
+            this.panel3.Location = new System.Drawing.Point(150, 12);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(52, 52);
             this.panel3.TabIndex = 500;
@@ -139,7 +140,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel109.AutoScroll = true;
-            this.panel109.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.panel109.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel109.Controls.Add(this.pictureBoxGraphicSet);
             this.panel109.Location = new System.Drawing.Point(0, 43);
             this.panel109.Name = "panel109";
@@ -456,7 +457,7 @@
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.pictureBoxColorBack);
-            this.panel1.Location = new System.Drawing.Point(236, 28);
+            this.panel1.Location = new System.Drawing.Point(184, 28);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(52, 52);
             this.panel1.TabIndex = 500;
@@ -529,19 +530,33 @@
             this.autoUpdate.Text = "Auto-update";
             this.autoUpdate.UseVisualStyleBackColor = false;
             // 
+            // alwaysOnTop
+            // 
+            this.alwaysOnTop.AutoSize = true;
+            this.alwaysOnTop.Checked = true;
+            this.alwaysOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.alwaysOnTop.Location = new System.Drawing.Point(336, 12);
+            this.alwaysOnTop.Name = "alwaysOnTop";
+            this.alwaysOnTop.Size = new System.Drawing.Size(94, 17);
+            this.alwaysOnTop.TabIndex = 537;
+            this.alwaysOnTop.Text = "Always on top";
+            this.alwaysOnTop.UseVisualStyleBackColor = true;
+            this.alwaysOnTop.CheckedChanged += new System.EventHandler(this.alwaysOnTop_CheckedChanged);
+            // 
             // GraphicEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 594);
+            this.Controls.Add(this.alwaysOnTop);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.autoUpdate);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panelImageGraphics);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel110);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonCancel);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -613,6 +628,7 @@
         private System.Windows.Forms.CheckBox contiguous;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.CheckBox autoUpdate;
+        private System.Windows.Forms.CheckBox alwaysOnTop;
 
     }
 }

@@ -15,6 +15,7 @@ namespace LAZYSHELL
     public partial class WorldMaps : Form
     {
         #region Variables
+        
         private long checksum;
         // main
         private delegate void Function();
@@ -75,6 +76,7 @@ namespace LAZYSHELL
             LoadGraphicEditor();
             LoadTileEditor();
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
+            new History(this);
         }
         private void RefreshWorldMap()
         {

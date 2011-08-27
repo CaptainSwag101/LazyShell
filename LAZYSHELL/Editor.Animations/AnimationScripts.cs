@@ -15,6 +15,7 @@ namespace LAZYSHELL
     public partial class AnimationScripts : Form
     {
         #region Variables
+        
         private long checksum;
         private A_TreeViewWrapper a_treeViewWrapper;
         private AnimationScript[] animationScripts
@@ -88,6 +89,7 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip4, Keys.F2, showDecHex);
             InitializeAnimationScriptsEditor();
+            new History(this);
         }
         #region Methods
         private void InitializeAnimationScriptsEditor()

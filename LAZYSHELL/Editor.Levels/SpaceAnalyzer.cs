@@ -12,6 +12,7 @@ namespace LAZYSHELL
     public partial class SpaceAnalyzer : Form
     {
         // variables
+        
         private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         // constructor
         public SpaceAnalyzer()

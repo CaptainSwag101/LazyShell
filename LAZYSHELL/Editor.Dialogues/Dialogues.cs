@@ -15,6 +15,7 @@ namespace LAZYSHELL
     public partial class Dialogues : Form
     {
         #region Variables
+        
         public long checksum;
         // main
         private delegate void Function(RichTextBox richTextBox, StringComparison stringComparison, bool matchWholeWord, bool replaceAll, string replaceWith);
@@ -101,6 +102,7 @@ namespace LAZYSHELL
             //
             checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, dialogueTileset, 
                 fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu);
+            new History(this);
         }
         // tooltips
         private void SetToolTips(ToolTip toolTip1)

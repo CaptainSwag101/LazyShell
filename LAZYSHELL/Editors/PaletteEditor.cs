@@ -55,6 +55,7 @@ namespace LAZYSHELL
             SetColorMapImage();
             SetPaletteImage();
             this.BringToFront();
+            new History(this);
         }
         public void Reload(Delegate update, PaletteSet paletteSet, int count, int start)
         {
@@ -995,6 +996,10 @@ namespace LAZYSHELL
                     fs.Close();
                 }
             }
+        }
+        private void alwaysOnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TopMost = alwaysOnTop.Checked;
         }
         #endregion
     }

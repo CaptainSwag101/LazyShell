@@ -371,22 +371,22 @@ namespace LAZYSHELL
         /// <returns>Returns the final graphic size of the imported graphics.</returns>
         public static int CopyToTileset(byte[] src, byte[] tileset, int[] palette, int paletteIndex, bool checkIfFlipped, bool priority1, byte format, byte tileLength, Size tilesetSize, int tileIndexStart)
         {
-            ArrayList tiles_a = new ArrayList();    // the tileset, essentially, in array form
-            ArrayList tiles_b = new ArrayList();    // used for redrawing a culled 4bpp graphic block
+            List<Tile8x8> tiles_a = new List<Tile8x8>();    // the tileset, essentially, in array form
+            List<Tile8x8> tiles_b = new List<Tile8x8>();    // used for redrawing a culled 4bpp graphic block
             for (int i = 0; i < src.Length / format; i++)
             {
-                Tile8x8 temp = new Tile8x8(i, src, i * format, palette, false, false, false, false);
+                Tile8x8 temp = new Tile8x8(i, src, i * format, palette, false, false, false, format == 0x10);
                 tiles_a.Add(temp);
                 tiles_b.Add(temp);
             }
             // look through entire set of tiles for duplicates
             for (int a = 0; a < tiles_a.Count; a++)
             {
-                Tile8x8 tile_a = (Tile8x8)tiles_a[a];
+                Tile8x8 tile_a = tiles_a[a];
                 if (tile_a.TileIndex != a) continue;  // skip if already set as duplicate
                 for (int b = a; b < tiles_a.Count; b++)
                 {
-                    Tile8x8 tile_b = (Tile8x8)tiles_a[b];
+                    Tile8x8 tile_b = tiles_a[b];
                     if (a == b) continue;   // cannot be duplicate of self
                     if (Bits.Compare(tile_a.Pixels, tile_b.Pixels)) // if a duplicate...
                     {
@@ -736,11 +736,223 @@ namespace LAZYSHELL
                 return region;
             }
         }
+        public static byte[] CullGraphics(byte[] src, int[] palette, byte format, bool checkIfFlipped)
+        {
+            List<Tile8x8> tiles_a = new List<Tile8x8>();    // the tileset, essentially, in array form
+            List<Tile8x8> tiles_b = new List<Tile8x8>();    // used for redrawing a culled 4bpp graphic block
+            for (int i = 0; i < src.Length / format; i++)
+            {
+                Tile8x8 temp = new Tile8x8(i, src, i * format, palette, false, false, false, format == 0x10);
+                tiles_a.Add(temp);
+                tiles_b.Add(temp);
+            }
+            // look through entire set of tiles for duplicates
+            for (int a = 0; a < tiles_a.Count; a++)
+            {
+                Tile8x8 tile_a = tiles_a[a];
+                if (tile_a.TileIndex != a) continue;  // skip if already set as duplicate
+                for (int b = a; b < tiles_a.Count; b++)
+                {
+                    Tile8x8 tile_b = tiles_a[b];
+                    if (a == b) continue;   // cannot be duplicate of self
+                    if (Bits.Compare(tile_a.Pixels, tile_b.Pixels)) // if a duplicate...
+                    {
+                        // first set the tile to the one that it's a duplicate of
+                        tile_b.TileIndex = a;
+                        // then remove
+                        tiles_b.Remove(tile_b);
+                    }
+                    if (checkIfFlipped) // if effect tileset, don't bother setting status
+                    {
+                        byte status = GetFlippedStatus(tile_a.Pixels, tile_b.Pixels);
+                        if ((status & 0x40) == 0x40)
+                        {
+                            tile_b.Mirror = true;
+                            tile_b.TileIndex = a;
+                            tiles_b.Remove(tile_b);
+                        }
+                        if ((status & 0x80) == 0x80)
+                        {
+                            tile_b.Invert = true;
+                            tile_b.TileIndex = a;
+                            tiles_b.Remove(tile_b);
+                        }
+                    }
+                }
+            }
+            // redraw into newly culled graphic block, and reorganize tilenums
+            int c = 0; byte[] culledGraphics = new byte[src.Length];
+            foreach (Tile8x8 tile in tiles_b)
+            {
+                int orig = tile.TileIndex;
+                Buffer.BlockCopy(src, tile.TileIndex * format, culledGraphics, c * format, format);
+                tile.TileIndex = c;
+                // check for other duplicates or mirrors/inversions of this current tile
+                foreach (Tile8x8 check in tiles_a)
+                {
+                    if (check.TileIndex == orig)
+                        check.TileIndex = c;
+                }
+                c++;
+            }
+            Array.Resize<byte>(ref culledGraphics, tiles_b.Count * format);
+            return culledGraphics;
+        }
+        public static void ImageToTilemap(ref Bitmap[] images, ref int[] palette, int moldIndex, byte format,
+            ref byte[] graphics_, ref Tile16x16[] tiles_, ref byte[][] tilemaps_, bool newPalette)
+        {
+            int count = images.Length;
+            int width = images[0].Width / 16 * 16;
+            if (images[0].Width % 16 != 0) width += 16;
+            int height = images[0].Height / 16 * 16;
+            if (images[0].Height % 16 != 0) height += 16;
+            // pad dimensions to multiples of 16
+            Bitmap[] resized = new Bitmap[count];//(width, height);
+            for (int i = 0; i < resized.Length; i++)
+            {
+                resized[i] = new Bitmap(width, height);
+                Graphics temp = Graphics.FromImage(resized[i]);
+                temp.DrawImage(images[i], 0, 0, images[i].Width, images[i].Height);
+            }
+            // declare stuff
+            int[][] pixels = new int[count][];
+            byte[][] graphics = new byte[count][];
+            byte[][] graphicsCulled = new byte[count][];
+            byte[][] tilesets = new byte[count][];
+            Tile16x16[][] tiles = new Tile16x16[count][];//[(width / 16) * (height / 16)];
+            byte[][] tilemaps = new byte[count][];
+            int graphicsLength = 0;
+            int[] reducedPalette = null;
+            if (moldIndex < count)
+            {
+                pixels[moldIndex] = ImageToPixels(resized[moldIndex]);
+                // convert to BPP, create culled graphics
+                graphics[moldIndex] = new byte[0x10000]; // a BPP format copy of the original image
+                if (!newPalette)
+                    reducedPalette = palette;
+                else
+                    reducedPalette = Do.ReduceColorDepth(pixels[moldIndex], format == 0x10 ? 4 : 16, palette[0]);
+                PixelsToBPP(pixels[moldIndex], graphics[moldIndex], new Size(width / 8, height / 8), reducedPalette, format);
+                graphicsCulled[moldIndex] = CullGraphics(graphics[moldIndex], palette, format, false);
+                graphicsLength += graphicsCulled[moldIndex].Length;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                if (i == moldIndex && moldIndex < count)
+                    continue;
+                // convert to pixels
+                pixels[i] = ImageToPixels(resized[i]);
+                // convert to BPP, create culled graphics
+                graphics[i] = new byte[0x10000]; // a BPP format copy of the original image
+                if (reducedPalette == null)
+                    reducedPalette = Do.ReduceColorDepth(pixels[i], format == 0x10 ? 4 : 16, palette[0]);
+                PixelsToBPP(pixels[i], graphics[i], new Size(width / 8, height / 8), reducedPalette, format);
+                graphicsCulled[i] = CullGraphics(graphics[i], palette, format, false);
+                graphicsLength += graphicsCulled[i].Length;
+            }
+            // combine all images' graphics into one array
+            byte[] culledGraphics = new byte[graphicsLength];
+            for (int i = 0, position = 0; i < graphicsCulled.Length; i++)
+            {
+                graphicsCulled[i].CopyTo(culledGraphics, position);
+                position += graphicsCulled[i].Length;
+            }
+            // convert to raw tileset
+            for (int i = 0; i < tilesets.Length; i++)
+            {
+                tilesets[i] = new byte[0x1000];
+                for (int y = 0; y < height / 8; y++)
+                {
+                    for (int x = 0; x < width / 8; x++)
+                    {
+                        int index = y * (width / 8) + x;
+                        Tile8x8 subtileA = DrawTile8x8((ushort)index, 0x20, graphics[i], reducedPalette, format);
+                        for (int a = 0; a < culledGraphics.Length / format; a++)
+                        {
+                            Tile8x8 subtileB = DrawTile8x8((ushort)a, 0x20, culledGraphics, reducedPalette, format);
+                            if (Bits.Compare(subtileA.Pixels, subtileB.Pixels))
+                            {
+                                tilesets[i][index * 2] = (byte)a;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            // convert raw tileset data to array of Tile16x16[]
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                tiles[i] = new Tile16x16[(width / 16) * (height / 16)];
+                for (int a = 0; a < tiles[i].Length; a++)
+                    tiles[i][a] = new Tile16x16(a);
+            }
+            int tilesLength = 0;
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                for (int y = 0; y < height / 16; y++)
+                {
+                    for (int x = 0; x < width / 16; x++)
+                    {
+                        int index = y * (width / 16) + x;
+                        for (int z = 0; z < 4; z++)
+                        {
+                            int offset = y * (width / 2) + (x * 4);
+                            if (z % 2 == 1)
+                                offset += 2;
+                            if (z / 2 == 1)
+                                offset += (width / 8) * 2;
+                            ushort tile = tilesets[i][offset];
+                            byte prop = tilesets[i][offset + 1];
+                            Tile8x8 source = DrawTile8x8(tile, prop, culledGraphics, reducedPalette, format);
+                            tiles[i][index].Subtiles[z] = source;
+                        }
+                    }
+                }
+                // cull tileset
+                CullTileset(ref tiles[i]);
+                tilesLength += tiles[i].Length;
+            }
+            // combine into one tileset
+            Tile16x16[] culledTiles = new Tile16x16[tilesLength];
+            for (int i = 0, position = 0; i < tiles.Length; i++)
+            {
+                tiles[i].CopyTo(culledTiles, position);
+                position += tiles[i].Length;
+            }
+            // draw tilemap
+            for (int i = 0; i < tilemaps.Length; i++)
+            {
+                tilemaps[i] = new byte[(width / 16) * (height / 16)];
+                //pixels[i] = ImageToPixels(resized[i]);
+                for (int y = 0; y < height / 16; y++)
+                {
+                    for (int x = 0; x < width / 16; x++)
+                    {
+                        int index = y * (width / 16) + x;
+                        Rectangle region = new Rectangle(x * 16, y * 16, 16, 16);
+                        int[] regionA = GetPixelRegion(graphics[i], format, reducedPalette, width / 8, x * 2, y * 2, 2, 2, 0);
+                        for (int a = 0; a < culledTiles.Length; a++)
+                        {
+                            if (Bits.Compare(regionA, culledTiles[a].Pixels))
+                            {
+                                tilemaps[i][index] = (byte)a;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            images[0] = resized[0];
+            palette = reducedPalette;
+            graphics_ = culledGraphics;
+            tiles_ = culledTiles;
+            tilemaps_ = tilemaps;
+        }
         /// <summary>
         /// Reorder indexes of tiles in a tileset based on duplicates.
         /// </summary>
         /// <param name="tileset">The raw tileset to reduce the size of.</param>
-        public static void CullTileset(Tile16x16[] tileset)
+        public static void CullTileset(ref Tile16x16[] tileset)
         {
             // set duplicate tiles to originals
             ArrayList tilesetTiles = new ArrayList();
@@ -760,6 +972,7 @@ namespace LAZYSHELL
             c = 0;
             foreach (Tile16x16 tile in tilesetTiles)
                 tileset[c++] = tile;
+            Array.Resize<Tile16x16>(ref tileset, c);
         }
         /// <summary>
         /// Reorder indexes of tiles in a tileset based on duplicates and draws to a tilemap.
@@ -986,7 +1199,7 @@ namespace LAZYSHELL
                 return color;
             if (action == "") return color;
             int bit = 0;
-            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit);
+            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width);
             if (format == 0x20 && offset + 17 >= src.Length)
                 return color;
             if (format == 0x10 && offset + 1 >= src.Length)
@@ -997,32 +1210,32 @@ namespace LAZYSHELL
                 case "draw":
                     c = new Rectangle((x / zoom * zoom) + x_plus, (y / zoom * zoom) + y_plus, zoom, zoom);
                     graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[color])), c);
-                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, color);
+                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, color, width);
                     break;
                 case "erase":
-                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, 0);
+                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, 0, width);
                     break;
                 case "select":
-                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format);
+                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
                     break;
                 case "fill":
                     int fillColor = color;
-                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format);
+                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
                     if (color == fillColor) return color;
-                    Fill(src, color, fillColor, x, y, width * 8, height * 8, "", srcOffset, index, zoom, format);
+                    Fill(src, color, fillColor, x, y, width, height, "", srcOffset, index, zoom, format);
                     break;
                 case "replace":
                     fillColor = color;
-                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format);
+                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
                     if (color == fillColor) return color;
                     for (int b = 0; b < height * 8; b++)
                     {
                         for (int a = 0; a < width * 8; a++)
                         {
-                            int seeColor = GetBPPColor(src, a, b, srcOffset, index, 1, format);
+                            int seeColor = GetBPPColor(src, a, b, srcOffset, index, 1, format, width);
                             // if fillable, fill pixel and create spawn travelling west
                             if (seeColor == color)
-                                SetBPPColor(src, a, b, srcOffset, index, 1, format, fillColor);
+                                SetBPPColor(src, a, b, srcOffset, index, 1, format, fillColor, width);
                         }
                     }
                     break;
@@ -1231,48 +1444,48 @@ namespace LAZYSHELL
             // the color seen when looking in a direction
             int seeColor = 0;
             // first, fill this pixel
-            SetBPPColor(src, x, y, srcOffset, index, zoom, format, fillColor);
+            SetBPPColor(src, x, y, srcOffset, index, zoom, format, fillColor, width);
 
             // look WEST, if not travelling east or at boundary
-            if (dir != "east" && x > 0)
+            if (dir != "east" && x / zoom > 0)
             {
                 // see what color is to the west
-                seeColor = GetBPPColor(src, x - (1 * zoom), y, srcOffset, index, zoom, format);
+                seeColor = GetBPPColor(src, x - (1 * zoom), y, srcOffset, index, zoom, format, width);
                 // if fillable, fill pixel and create spawn travelling west
                 if (seeColor == color)
-                    Fill(src, color, fillColor, x - 1, y, width, height, "west", srcOffset, index, zoom, format);
+                    Fill(src, color, fillColor, x - (1 * zoom), y, width, height, "west", srcOffset, index, zoom, format);
             }
             //  look EAST, if not travelling west or at boundary
-            if (dir != "west" && x < width * 8)
+            if (dir != "west" && x < (width * 8 * zoom) - (1 * zoom))
             {
                 // see what color is to the east
-                seeColor = GetBPPColor(src, x + (1 * zoom), y, srcOffset, index, zoom, format);
+                seeColor = GetBPPColor(src, x + (1 * zoom), y, srcOffset, index, zoom, format, width);
                 // if fillable, fill pixel and create spawn travelling east
                 if (seeColor == color)
-                    Fill(src, color, fillColor, x + 1, y, width, height, "east", srcOffset, index, zoom, format);
+                    Fill(src, color, fillColor, x + (1 * zoom), y, width, height, "east", srcOffset, index, zoom, format);
             }
             //  look NORTH, if not travelling south or at boundary
-            if (dir != "south" && y > 0)
+            if (dir != "south" && y / zoom > 0)
             {
                 // see what color is to the north
-                seeColor = GetBPPColor(src, x, y - (1 * zoom), srcOffset, index, zoom, format);
+                seeColor = GetBPPColor(src, x, y - (1 * zoom), srcOffset, index, zoom, format, width);
                 // if fillable, fill pixel and create spawn travelling north
                 if (seeColor == color)
-                    Fill(src, color, fillColor, x, y - 1, width, height, "north", srcOffset, index, zoom, format);
+                    Fill(src, color, fillColor, x, y - (1 * zoom), width, height, "north", srcOffset, index, zoom, format);
             }
             //  look SOUTH, if not travelling north or at boundary
-            if (dir != "north" && y < height * 8)
+            if (dir != "north" && y < (height * 8 * zoom) - (1 * zoom))
             {
                 // see what color is to the south
-                seeColor = GetBPPColor(src, x, y + (1 * zoom), srcOffset, index, zoom, format);
+                seeColor = GetBPPColor(src, x, y + (1 * zoom), srcOffset, index, zoom, format, width);
                 // if fillable, fill pixel and create spawn travelling south
                 if (seeColor == color)
-                    Fill(src, color, fillColor, x, y + 1, width, height, "south", srcOffset, index, zoom, format);
+                    Fill(src, color, fillColor, x, y + (1 * zoom), width, height, "south", srcOffset, index, zoom, format);
             }
         }
-        private static int GetBPPOffset(int x, int y, int srcOffset, int index, int zoom, byte format, ref int bit)
+        private static int GetBPPOffset(int x, int y, int srcOffset, int index, int zoom, byte format, ref int bit, int width)
         {
-            int offset = (y / (8 * zoom)) * 16 + (x / (8 * zoom));
+            int offset = (y / (8 * zoom)) * width + (x / (8 * zoom));
             byte row = (byte)(y / zoom % 8);
             byte col = (byte)(x / zoom % 8);
             bit = (byte)(col ^ 7);
@@ -1294,10 +1507,10 @@ namespace LAZYSHELL
         /// <param name="offset"></param>
         /// <param name="format"></param>
         /// <param name="bit"></param>
-        private static int GetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format)
+        private static int GetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format, int width)
         {
             int color = 0, bit = 0;
-            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit);
+            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width);
             if (Bits.GetBit(src, offset, bit)) color |= 1;
             if (Bits.GetBit(src, offset + 1, bit)) color |= 2;
             if (format == 0x20)
@@ -1307,10 +1520,10 @@ namespace LAZYSHELL
             }
             return color;
         }
-        private static void SetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format, int color)
+        private static void SetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format, int color, int width)
         {
             int bit = 0;
-            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit);
+            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width);
             Bits.SetBit(src, offset, bit, (color & 1) == 1);
             Bits.SetBit(src, offset + 1, bit, (color & 2) == 2);
             if (format == 0x20)
@@ -1872,15 +2085,15 @@ namespace LAZYSHELL
         {
             Tile8x8 temp;
             int[] pixels = new int[(regWidth * 8) * (regHeight * 8)];
-            for (int y = regY; y < regY + regHeight; y++)
+            for (int y = regY, y_ = 0; y < regY + regHeight; y++, y_++)
             {
-                for (int x = regX; x < regX + regWidth; x++)
+                for (int x = regX, x_ = 0; x < regX + regWidth; x++, x_++)
                 {
-                    int tileIndex = y * regWidth + x;
+                    int tileIndex = y * srcWidth + x;
                     if ((tileIndex * format) + offset >= snes.Length)
                         continue;
                     temp = new Tile8x8(tileIndex, snes, tileIndex * format + offset, palette, false, false, false, format == 0x10);
-                    Do.PixelsToPixels(temp.Pixels, pixels, regWidth * 8, new Rectangle(x * 8, y * 8, 8, 8));
+                    Do.PixelsToPixels(temp.Pixels, pixels, regWidth * 8, new Rectangle(x_ * 8, y_ * 8, 8, 8));
                 }
             }
             return pixels;
@@ -3191,6 +3404,41 @@ namespace LAZYSHELL
             }
             return element;
         }
+        public static object[] Import(object[] elements, string[] fullPaths)
+        {
+            if (elements.GetType() == typeof(byte[][]))
+            {
+                elements = new byte[fullPaths.Length][];
+                for (int i = 0; i < fullPaths.Length; i++)
+                {
+                    FileStream fs = File.OpenRead(fullPaths[i]);
+                    BinaryReader br = new BinaryReader(fs);
+                    elements[i] = br.ReadBytes((int)fs.Length);
+                    br.Close();
+                    fs.Close();
+                }
+            }
+            else if (elements.GetType() == typeof(Bitmap[]))
+            {
+                elements = new Bitmap[fullPaths.Length];
+                for (int i = 0; i < fullPaths.Length; i++)
+                {
+                    elements[i] = new Bitmap(Image.FromFile(fullPaths[i]));
+                }
+            }
+            else
+            {
+                elements = new object[fullPaths.Length];
+                for (int i = 0; i < fullPaths.Length; i++)
+                {
+                    Stream s = File.OpenRead(fullPaths[i]);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    elements[i] = bf.Deserialize(s);
+                    s.Close();
+                }
+            }
+            return elements;
+        }
         /// <summary>
         /// Imports a file into an element.
         /// </summary>
@@ -3211,6 +3459,23 @@ namespace LAZYSHELL
             if (openFileDialog.ShowDialog() == DialogResult.Cancel)
                 return null;
             return Import(element, openFileDialog.FileName);
+        }
+        public static object[] Import(object[] elements)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            if (elements.GetType() == typeof(byte[][]))
+                openFileDialog.Filter = "Binary files (*.bin)|*.bin|All files (*.*)|*.*";
+            else if (elements.GetType() == typeof(Bitmap[]))
+                openFileDialog.Filter = "Image files (*.gif,*.jpg,*.png)|*.gif;*.jpg;*.png|All files (*.*)|*.*";
+            else
+                openFileDialog.Filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 0;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.Title = "Import";
+            if (openFileDialog.ShowDialog() == DialogResult.Cancel)
+                return null;
+            return Import(elements, openFileDialog.FileNames);
         }
         /// <summary>
         /// Imports a file into an element from a set of files in a specified folder.

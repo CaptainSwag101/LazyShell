@@ -11,6 +11,7 @@ namespace LAZYSHELL
     public partial class FormationPacks : Form
     {
         #region Variables
+        
         private delegate void Function(TreeView treeView, StringComparison stringComparison, bool matchWholeWord);
         private int index { get { return (int)packNum.Value; } set { packNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }

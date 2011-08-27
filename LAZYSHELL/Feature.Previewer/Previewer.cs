@@ -648,15 +648,16 @@ namespace LAZYSHELL.Previewer
                 eventData.CopyTo(Model.Data, 0x1E0C00);
                 if (category == 1 || category == 2)
                 {
-                    Model.Monsters[monsterNum].FP = 255;
-                    Model.Monsters[monsterNum].Speed = 255;
-                    Model.Monsters[monsterNum].Assemble(0xA1D1);
+                    int pointer = Bits.GetShort(Model.Data, 0x390026 + monsterNum * 2);
+                    int offset = 0x390000 + pointer; //ByteManage.GetShort(data, monsterStatPtrA);
+                    Model.Data[offset + 2] = 255;
+                    Model.Data[offset + 7] = 255;
+                    pointer = Bits.GetShort(Model.Data, 0x3930AA + (monsterNum * 2));
+                    offset = 0x390000 + pointer;
                     if (category == 1)
-                        Model.BattleScripts[monsterNum].Script = new byte[] { 0xEF, (byte)this.index, 0xEC, 0xFF, 0xFF };
+                        new byte[] { 0xEF, (byte)this.index, 0xEC, 0xFF, 0xFF }.CopyTo(Model.Data, offset);
                     else if (category == 2)
-                        Model.BattleScripts[monsterNum].Script = new byte[] { (byte)this.index, 0xEC, 0xFF, 0xFF };
-                    Bits.SetShort(Model.Data, 0x3930AA + (monsterNum * 2), 0x32AA);
-                    Model.BattleScripts[monsterNum].Assemble(0x3932AA);
+                        new byte[] { (byte)this.index, 0xEC, 0xFF, 0xFF }.CopyTo(Model.Data, offset);
                 }
             }
             else

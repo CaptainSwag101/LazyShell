@@ -17,6 +17,7 @@ namespace LAZYSHELL
     public partial class BattleScripts : Form
     {
         #region Variables
+        
         private long checksum;
         private Monsters monsterEditor;
         public BattleScript[] battleScripts { get { return Model.BattleScripts; } set { Model.BattleScripts = value; } }

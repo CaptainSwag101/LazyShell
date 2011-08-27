@@ -12,8 +12,9 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
+        
         private delegate void Function();
-                private Dialogues dialoguesEditor;
+        private Dialogues dialoguesEditor;
         private State state = State.Instance;
         private BattleDialoguePreview textPreview = new BattleDialoguePreview();
         private TextHelperReduced textHelper = TextHelperReduced.Instance;

@@ -12,6 +12,7 @@ namespace LAZYSHELL
     public partial class NewFontTable : Form
     {
         #region Variables
+        
         private Fonts fontsEditor;
         private FontCharacter[] font { get { return fontsEditor.FontCharacters; } }
         private int fontType { get { return fontsEditor.FontType; } }

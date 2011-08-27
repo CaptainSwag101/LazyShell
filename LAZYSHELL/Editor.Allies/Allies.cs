@@ -13,6 +13,7 @@ namespace LAZYSHELL
     public partial class Allies : Form
     {
         #region Variables
+
         private Settings settings = Settings.Default;
         private Character[] characters { get { return Model.Characters; } set { Model.Characters = value; } }
         private Character character { get { return characters[index]; } set { characters[index] = value; } }

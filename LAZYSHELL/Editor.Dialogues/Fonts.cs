@@ -16,6 +16,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
+        
         private Dialogues dialoguesEditor;
         private bool updating;
         private Overlay overlay;

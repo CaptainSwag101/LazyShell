@@ -11,6 +11,7 @@ namespace LAZYSHELL
     public partial class LevelsSolidTiles : Form
     {
         #region Variables
+        
         private delegate void Function();
         private Delegate update;
         private int index { get { return (int)physicalTileNum.Value; } }

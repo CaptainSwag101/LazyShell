@@ -22,7 +22,7 @@ namespace LAZYSHELL
             this.graphics = animation.GraphicSet;
             this.palette = animation.PaletteSet.Palettes[index];
 
-            tileset = new Tile16x16[8 * 8];
+            tileset = new Tile16x16[16 * 16];
             for (int i = 0; i < tileset.Length; i++)
                 tileset[i] = new Tile16x16(i);
 
@@ -52,7 +52,7 @@ namespace LAZYSHELL
             Tile8x8 source;
             int offset = 0;
             int i = 0;
-            for (; i < 64; i++)
+            for (; i < dst.Length; i++)
             {
                 if (i > 0 && i % 8 == 0) offset += 32;
                 if (Bits.GetShort(src, offset) == 0xFFFF) break;
@@ -102,7 +102,7 @@ namespace LAZYSHELL
             Tile8x8 source;
             int offset = 0;
             int i = 0;
-            for (; i < 64; i++)
+            for (; i < src.Length; i++)
             {
                 if (i > 0 && i % 8 == 0) offset += 32;
                 for (int z = 0; z < 2; z++)

@@ -126,6 +126,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.importPaletteSet = new System.Windows.Forms.ToolStripButton();
             this.exportPaletteSet = new System.Windows.Forms.ToolStripButton();
+            this.alwaysOnTop = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPalette)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -193,7 +194,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 86);
+            this.tabControl1.Location = new System.Drawing.Point(12, 109);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(260, 276);
@@ -1029,7 +1030,7 @@
             // buttonSetToColor
             // 
             this.buttonSetToColor.FlatAppearance.BorderSize = 2;
-            this.buttonSetToColor.Location = new System.Drawing.Point(334, 142);
+            this.buttonSetToColor.Location = new System.Drawing.Point(334, 165);
             this.buttonSetToColor.Name = "buttonSetToColor";
             this.buttonSetToColor.Size = new System.Drawing.Size(75, 23);
             this.buttonSetToColor.TabIndex = 524;
@@ -1156,7 +1157,7 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(231, 366);
+            this.buttonOK.Location = new System.Drawing.Point(231, 389);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 524;
@@ -1166,7 +1167,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(312, 366);
+            this.buttonCancel.Location = new System.Drawing.Point(312, 389);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 525;
@@ -1176,7 +1177,7 @@
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(393, 366);
+            this.buttonReset.Location = new System.Drawing.Point(393, 389);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 525;
@@ -1188,7 +1189,7 @@
             // 
             this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel13.Controls.Add(this.pictureBoxSwatchColor);
-            this.panel13.Location = new System.Drawing.Point(415, 114);
+            this.panel13.Location = new System.Drawing.Point(415, 137);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(52, 52);
             this.panel13.TabIndex = 530;
@@ -1197,7 +1198,7 @@
             // 
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel9.Controls.Add(this.pictureBoxCurrentColor);
-            this.panel9.Location = new System.Drawing.Point(204, 12);
+            this.panel9.Location = new System.Drawing.Point(204, 35);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(68, 68);
             this.panel9.TabIndex = 525;
@@ -1206,7 +1207,7 @@
             // 
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel11.Controls.Add(this.pictureBoxColorMap);
-            this.panel11.Location = new System.Drawing.Point(278, 172);
+            this.panel11.Location = new System.Drawing.Point(278, 195);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(190, 190);
             this.panel11.TabIndex = 528;
@@ -1217,7 +1218,7 @@
             this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel12.Controls.Add(this.panel14);
             this.panel12.Controls.Add(this.label19);
-            this.panel12.Location = new System.Drawing.Point(278, 12);
+            this.panel12.Location = new System.Drawing.Point(278, 35);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(190, 94);
             this.panel12.TabIndex = 529;
@@ -1311,7 +1312,7 @@
             // 
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel7.Controls.Add(this.pictureBoxPalette);
-            this.panel7.Location = new System.Drawing.Point(12, 12);
+            this.panel7.Location = new System.Drawing.Point(12, 35);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(132, 68);
             this.panel7.TabIndex = 524;
@@ -1344,7 +1345,7 @@
             this.autoUpdate.BackColor = System.Drawing.SystemColors.Control;
             this.autoUpdate.Checked = true;
             this.autoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.autoUpdate.Location = new System.Drawing.Point(93, 372);
+            this.autoUpdate.Location = new System.Drawing.Point(93, 395);
             this.autoUpdate.Name = "autoUpdate";
             this.autoUpdate.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.autoUpdate.Size = new System.Drawing.Size(91, 17);
@@ -1354,7 +1355,7 @@
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(12, 366);
+            this.buttonUpdate.Location = new System.Drawing.Point(12, 389);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdate.TabIndex = 532;
@@ -1369,7 +1370,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importPaletteSet,
             this.exportPaletteSet});
-            this.toolStrip1.Location = new System.Drawing.Point(147, 12);
+            this.toolStrip1.Location = new System.Drawing.Point(147, 35);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(49, 25);
@@ -1398,11 +1399,26 @@
             this.exportPaletteSet.Text = "Export palette set";
             this.exportPaletteSet.Click += new System.EventHandler(this.exportPaletteSetToolStripMenuItem_Click);
             // 
+            // alwaysOnTop
+            // 
+            this.alwaysOnTop.AutoSize = true;
+            this.alwaysOnTop.Checked = true;
+            this.alwaysOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.alwaysOnTop.Location = new System.Drawing.Point(374, 12);
+            this.alwaysOnTop.Name = "alwaysOnTop";
+            this.alwaysOnTop.Size = new System.Drawing.Size(94, 17);
+            this.alwaysOnTop.TabIndex = 538;
+            this.alwaysOnTop.Text = "Always on top";
+            this.alwaysOnTop.UseVisualStyleBackColor = true;
+            this.alwaysOnTop.CheckedChanged += new System.EventHandler(this.alwaysOnTop_CheckedChanged);
+            // 
             // PaletteEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 401);
+            this.ClientSize = new System.Drawing.Size(480, 424);
+            this.Controls.Add(this.alwaysOnTop);
+            this.Controls.Add(this.panel7);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.autoUpdate);
             this.Controls.Add(this.toolStrip1);
@@ -1414,7 +1430,6 @@
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel12);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -1587,6 +1602,7 @@
         private System.Windows.Forms.NumericUpDown colorizeHue;
         private System.Windows.Forms.TrackBar colorizeHueBar;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckBox alwaysOnTop;
 
     }
 }

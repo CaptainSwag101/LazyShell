@@ -13,6 +13,7 @@ namespace LAZYSHELL
     public partial class AlliesEditor : Form
     {
         // variables
+        
         private long checksum;
         private Settings settings = Settings.Default;
         private Allies alliesEditor;
@@ -43,6 +44,7 @@ namespace LAZYSHELL
             panel1.Controls.Add(alliesEditor);
             alliesEditor.Visible = true;
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
+            new History(this);
         }
         // functions
         public void Assemble()

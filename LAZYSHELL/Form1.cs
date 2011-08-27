@@ -59,6 +59,7 @@ namespace LAZYSHELL
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            new History(this);
         }
         #region Function
         public static void GuiMain(ProgramController AppControl)

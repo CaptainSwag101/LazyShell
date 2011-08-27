@@ -14,6 +14,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
+        
         private delegate void Function();
         public PictureBox Picture { get { return pictureBoxLevel; } set { pictureBoxLevel = value; } }
         private Levels levels;
@@ -339,6 +340,8 @@ namespace LAZYSHELL
                 x -= (tileMods.X * 16);
                 y -= (tileMods.Y * 16);
             }
+            if (state.SolidMods && !solidMods.WithinBounds(mouseOverSolidTile * 2))
+                return;
             TileMap tilemap;
             if (state.TileMods)
                 tilemap = levels.TileModsFieldTree.SelectedNode.Parent == null ? tileMods.TilemapA : tileMods.TilemapB;
@@ -415,6 +418,8 @@ namespace LAZYSHELL
                 x -= (tileMods.X * 16);
                 y -= (tileMods.Y * 16);
             }
+            if (state.SolidMods && !solidMods.WithinBounds(mouseOverSolidTile * 2))
+                return;
             TileMap tilemap;
             if (state.TileMods)
                 tilemap = levels.TileModsFieldTree.SelectedNode.Parent == null ? tileMods.TilemapA : tileMods.TilemapB;
@@ -949,7 +954,7 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(tilemapImage.Clone(clone, PixelFormat.DontCare), dest, source, GraphicsUnit.Pixel);
             }
             if (state.TileMods)
-                overlay.DrawLevelTileMods(tileMods, e.Graphics);
+                overlay.DrawLevelTileMods(tileMods, e.Graphics, ia, zoom);
             if (state.Move && selection != null)
             {
                 Rectangle rsrc = new Rectangle(0, 0, overlay.Select.Width, overlay.Select.Height);
@@ -989,8 +994,8 @@ namespace LAZYSHELL
             }
             if (state.SolidMods)
             {
-                overlay.DrawLevelSolidMods(solidMods, physicalTiles, e.Graphics);
-                overlay.DrawLevelSolidMods(solidMods, e.Graphics);
+                overlay.DrawLevelSolidMods(solidMods, physicalTiles, e.Graphics, rdst, ia, zoom);
+                overlay.DrawLevelSolidMods(solidMods, e.Graphics, zoom);
             }
             if (state.Exits)
             {
@@ -1318,7 +1323,7 @@ namespace LAZYSHELL
                 else
                     pictureBoxLevel.Invalidate();
             }
-            this.Focus();
+            pictureBoxLevel.Focus();
         }
         private void pictureBoxLevel_MouseMove(object sender, MouseEventArgs e)
         {
@@ -1614,7 +1619,7 @@ namespace LAZYSHELL
         {
             mouseEnter = true;
             if (GetForegroundWindow() == levels.Handle)
-                this.Focus();
+                pictureBoxLevel.Focus();
             pictureBoxLevel.Invalidate();
         }
         private void pictureBoxLevel_MouseLeave(object sender, EventArgs e)

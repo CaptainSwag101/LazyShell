@@ -13,6 +13,7 @@ namespace LAZYSHELL
     public partial class Audio : Form
     {
         // variables
+        
         private long checksum;
         private SoundPlayer soundPlayer = new SoundPlayer();
         private byte[] wav;
@@ -52,6 +53,7 @@ namespace LAZYSHELL
                 "8. In the Lazy Shell audio editor, import \"NewSample.wav\".\n\n" +
                 "The reason this is the only way to do it is because by using the same exported file (\"OldSample.wav\") with the modified WAV data from \"MyWavFile.wav\", it retains some obscure data from \"OldSample.wav\" in \"NewSample.wav\" which is necessary to have in order to successfully import a .WAV file.";
             wav = BRR.Decode(audioSample.Sample, sampleRate);
+            new History(this);
         }
         // functions
         private void DrawWavelength(Graphics g, int width, int height, byte[] wav)

@@ -14,7 +14,6 @@ namespace LAZYSHELL
 
         // Local
         private List<Tile> tiles = new List<Tile>(); public List<Tile> Tiles { get { return tiles; } set { tiles = value; } }
-        private int parent;
 
         private bool gridplane;
         public bool Gridplane
@@ -64,9 +63,10 @@ namespace LAZYSHELL
                             tTile = new Tile();
                             if ((sm[offset] & 0x03) == 2)
                             {
-                                MessageBox.Show("Error in animation #" + parent + " @ offset $" + offset.ToString("X4") + ". " +
-                                    "Data is corrupt: attempted to read a copy within a copy.\n\n" + 
-                                    "The sprites editor will continue to load anyways.");
+                                NewMessage.Show("LAZY SHELL", "Error in animation #" + parent + " @ offset $" + offset.ToString("X4") + ". " +
+                                    "Data is corrupt: attempted to read a copy within a copy.\n\n" +
+                                    "The sprites editor will continue to load anyways.\n\nAnimation Data:",
+                                    BitConverter.ToString(Bits.GetByteArray(sm, offset, 16), 0));
                                 break;
                             }
                             else if ((sm[offset] & 0x03) == 1)

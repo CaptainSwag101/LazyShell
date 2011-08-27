@@ -11,6 +11,7 @@ namespace LAZYSHELL
 {
     public partial class Shops : Form
     {
+        
         private Settings settings = Settings.Default;
         private Shop[] shops { get { return Model.Shops; } set { Model.Shops = value; } }
         private Shop shop { get { return shops[index]; } set { shops[index] = value; } }

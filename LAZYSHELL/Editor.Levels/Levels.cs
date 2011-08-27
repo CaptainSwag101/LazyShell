@@ -18,6 +18,7 @@ namespace LAZYSHELL
     public partial class Levels : Form
     {
         #region Variables
+        
         public long checksum;
         private int index { get { return (int)levelNum.Value; } set { levelNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
@@ -107,7 +108,6 @@ namespace LAZYSHELL
             updatingLevel = false;
 
             LoadSolidityTileset();
-            LoadPreviewer();
             if (!updatingLevel)
                 RefreshLevel();
 
@@ -119,6 +119,7 @@ namespace LAZYSHELL
             //
             checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.TileSets,
                 Model.TileMaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
+            new History(this);
         }
         #region Functions
         private void InitializeSettings()
@@ -1048,9 +1049,9 @@ namespace LAZYSHELL
                     tileSet.RedrawTilesets(); // Redraw all tilesets
                     tileMap.RedrawTileMap();
                     tileMods.RedrawTilemaps();
+                    LoadTemplateEditor();
                     LoadTilesetEditor();
                     LoadTilemapEditor();
-                    LoadTemplateEditor();
                 }
                 else
                 {
@@ -1098,9 +1099,9 @@ namespace LAZYSHELL
             // load the individual editors
             LoadPaletteEditor();
             LoadGraphicEditor();
+            LoadTemplateEditor();
             LoadTilesetEditor();
             LoadTilemapEditor();
-            LoadTemplateEditor();
 
             SetLevelInfo();
         }
@@ -1118,10 +1119,9 @@ namespace LAZYSHELL
             // load the individual editors
             LoadPaletteEditor();
             LoadGraphicEditor();
+            LoadTemplateEditor();
             LoadTilesetEditor();
             LoadTilemapEditor();
-            LoadTemplateEditor();
-            LoadPreviewer();
 
             GC.Collect();
         }

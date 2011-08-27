@@ -13,6 +13,7 @@ namespace LAZYSHELL
     public partial class Battlefields : Form
     {
         #region Variables
+        
         private long checksum;
         // main
         private delegate void Function();
@@ -92,6 +93,7 @@ namespace LAZYSHELL
             LoadGraphicEditor();
             LoadTileEditor();
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
+            new History(this);
         }
         public void RefreshBattlefield()
         {

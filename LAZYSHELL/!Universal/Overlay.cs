@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
 using LAZYSHELL.ScriptsEditor.Commands;
@@ -222,8 +223,8 @@ namespace LAZYSHELL
             Brush b = new SolidBrush(Color.FromArgb(75, Color.Orange));
             if (p.X == 0) p.X++; if (p.Y == 0) p.Y++;
             Rectangle r = new Rectangle(p, s);
-            if (r.Right >= 1024 - 1 * z) r.Width = 1024 - 2 * z;
-            if (r.Bottom >= 1024 - 1 * z) r.Height = 1024 - 2 * z;
+            if (r.Right >= (1024 - 1) * z) r.Width = (1024 - 2) * z;
+            if (r.Bottom >= (1024 - 1) * z) r.Height = (1024 - 2) * z;
             g.FillRectangle(b, r);
         }
         public void DrawBoundaries(Graphics g, Point location, int z)
@@ -871,56 +872,59 @@ namespace LAZYSHELL
             Do.Gradient(overlapFieldBasePixels, 32, 16, 128.0, -128.0, true);
         }
         // mods
-        public void DrawLevelTileMods(LevelTileMods tileMods, Graphics g)
+        public void DrawLevelTileMods(LevelTileMods tileMods, Graphics g, ImageAttributes ia, int z)
         {
-            Rectangle region;
+            Rectangle rsrc;
+            Rectangle rdst;
             Pen pen;
             foreach (LevelTileMods.Mod mod in tileMods.Mods)
             {
                 if (tileMods.Mod_ == mod && !tileMods.SelectedB)
                     continue;
-                g.DrawImage(mod.ImageA, new Point(mod.X * 16, mod.Y * 16));
-                region = new Rectangle(mod.X * 16, mod.Y * 16, mod.Width * 16, mod.Height * 16);
+                rsrc = new Rectangle(mod.X * 16, mod.Y * 16, mod.Width * 16, mod.Height * 16);
+                rdst = new Rectangle(mod.X * 16 * z, mod.Y * 16 * z, mod.Width * 16 * z, mod.Height * 16 * z);
+                g.DrawImage(mod.ImageA, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel, ia);
                 pen = new Pen(Color.Red);
                 pen.DashStyle = DashStyle.Dot;
                 pen.Alignment = PenAlignment.Outset;
-                pen.Width = 2;
-                region.X -= 1;
-                region.Y -= 1;
-                region.Width += 2;
-                region.Height += 2;
-                g.DrawRectangle(pen, region);
+                pen.Width = 2 * z;
+                rdst.X -= 1 * z;
+                rdst.Y -= 1 * z;
+                rdst.Width += 2 * z;
+                rdst.Height += 2 * z;
+                g.DrawRectangle(pen, rdst);
             }
             if (tileMods.Mods.Count == 0) return;
             LevelTileMods.Mod current = tileMods.Mod_;
+            rsrc = new Rectangle(current.X * 16, current.Y * 16, current.Width * 16, current.Height * 16);
+            rdst = new Rectangle(current.X * 16 * z, current.Y * 16 * z, current.Width * 16 * z, current.Height * 16 * z);
             if (!tileMods.SelectedB)
-                g.DrawImage(current.ImageA, new Point(current.X * 16, current.Y * 16));
+                g.DrawImage(current.ImageA, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel, ia);
             else
-                g.DrawImage(current.ImageB, new Point(current.X * 16, current.Y * 16));
-            region = new Rectangle(current.X * 16, current.Y * 16, current.Width * 16, current.Height * 16);
+                g.DrawImage(current.ImageB, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel, ia);
             pen = new Pen(Color.Red);
             pen.DashStyle = DashStyle.Dot;
             pen.Alignment = PenAlignment.Outset;
-            pen.Width = 4;
-            region.X -= 2;
-            region.Y -= 2;
-            region.Width += 4;
-            region.Height += 4;
-            g.DrawRectangle(pen, region);
+            pen.Width = 4 * z;
+            rdst.X -= 2 * z;
+            rdst.Y -= 2 * z;
+            rdst.Width += 4 * z;
+            rdst.Height += 4 * z;
+            g.DrawRectangle(pen, rdst);
         }
-        public void DrawLevelSolidMods(LevelSolidMods solidMods, SolidityTile[] tiles, Graphics g)
+        public void DrawLevelSolidMods(LevelSolidMods solidMods, SolidityTile[] tiles, Graphics g, Rectangle rdst, ImageAttributes ia, int z)
         {
             Solidity solidity = Solidity.Instance;
             foreach (LevelSolidMods.Mod mod in solidMods.Mods)
             {
                 if (mod == solidMods.Mod_)
                     continue;
-                g.DrawImage(mod.Image, 0, 0);
+                g.DrawImage(mod.Image, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
             }
             if (solidMods.Mods.Count == 0) return;
-            g.DrawImage(solidMods.Mod_.Image, 0, 0);
+            g.DrawImage(solidMods.Mod_.Image, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
         }
-        public void DrawLevelSolidMods(LevelSolidMods solidMods, Graphics g)
+        public void DrawLevelSolidMods(LevelSolidMods solidMods, Graphics g, int z)
         {
             foreach (LevelSolidMods.Mod mod in solidMods.Mods)
             {
@@ -930,12 +934,12 @@ namespace LAZYSHELL
                 Point right = new Point(top.X + (mod.Width * 16), y + (mod.Width * 8));
                 Point bottom = new Point(right.X - (mod.Height * 16), right.Y + (mod.Height * 8));
                 Point left = new Point(bottom.X - (mod.Width * 16), bottom.Y - (mod.Width * 8));
-                top.Y -= mod != solidMods.Mod_ ? 2 : 4;
-                right.X += mod != solidMods.Mod_ ? 4 : 6;
-                bottom.Y += mod != solidMods.Mod_ ? 2 : 4;
-                left.X -= mod != solidMods.Mod_ ? 4 : 6;
+                top.Y -= mod != solidMods.Mod_ ? 2 : 4; top.X *= z; top.Y *= z;
+                right.X += mod != solidMods.Mod_ ? 4 : 6; right.X *= z; right.Y *= z;
+                bottom.Y += mod != solidMods.Mod_ ? 2 : 4; bottom.X *= z; bottom.Y *= z;
+                left.X -= mod != solidMods.Mod_ ? 4 : 6; left.X *= z; left.Y *= z;
                 Pen pen = new Pen(Color.Red);
-                pen.Width = mod != solidMods.Mod_ ? 2 : 4; pen.DashStyle = DashStyle.Dot;
+                pen.Width = mod != solidMods.Mod_ ? 2 * z : 4 * z; pen.DashStyle = DashStyle.Dot;
                 g.DrawPolygon(pen, new Point[] { top, right, bottom, left, top });
             }
         }

@@ -70,6 +70,8 @@ namespace LAZYSHELL
                 dst[dstOffset] = src[srcOffset];
                 // make a filler tile only if next TWO tiles are the same
                 if (srcOffset < 0xFE &&
+                    srcOffset + 1 < src.Length &&
+                    srcOffset + 2 < src.Length &&
                     src[srcOffset] == src[srcOffset + 1] &&
                     src[srcOffset] == src[srcOffset + 2])
                 {
@@ -77,7 +79,10 @@ namespace LAZYSHELL
                     dstOffset++;
                     dst[dstOffset] = src[srcOffset];    // the tile to fill with
                     byte counter = 1;
-                    while (srcOffset < 0xFF && src[srcOffset] == src[srcOffset + 1])
+                    while (srcOffset < 0xFF && 
+                        srcOffset < src.Length &&
+                        srcOffset + 1 < src.Length &&
+                        src[srcOffset] == src[srcOffset + 1])
                     {
                         counter++;
                         srcOffset++;

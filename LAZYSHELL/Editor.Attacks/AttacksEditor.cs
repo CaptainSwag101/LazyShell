@@ -12,6 +12,7 @@ namespace LAZYSHELL
     public partial class AttacksEditor : Form
     {
         // variables
+        
         private long checksum;
         private Settings settings = Settings.Default;
         public Spells spellsEditor;
@@ -42,6 +43,7 @@ namespace LAZYSHELL
             panel1.Controls.Add(spellsEditor);
             spellsEditor.Visible = true;
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
+            new History(this);
         }
         // functions
         public void Assemble()

@@ -17,6 +17,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
+        
         private long checksum;
         private Settings settings = Settings.Default;
         private EventScript[] eventScripts { get { return Model.EventScripts; } set { Model.EventScripts = value; } }
@@ -59,6 +60,7 @@ namespace LAZYSHELL
             InitializeEventScriptsEditor();
             searchWindow = new Search(eventNum, searchLabelsText, searchLabels, settings.EventLabels);
             new ToolTipLabel(this, toolTip1, showDecHex, null);
+            new History(this);
         }
         private void InitializeEventScriptsEditor()
         {
@@ -2451,6 +2453,9 @@ namespace LAZYSHELL
                     break;
                 default:
                     EventScriptTree.Enabled = true;
+                    categories_es.Enabled = true;
+                    categories_aq.Enabled = true;
+                    commands.Enabled = true;
                     break;
             }
             if (!isActionScript)

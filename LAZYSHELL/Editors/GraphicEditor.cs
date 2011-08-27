@@ -137,6 +137,7 @@ namespace LAZYSHELL
             pictureBoxColor.Invalidate();
             pictureBoxColorBack.Invalidate();
             this.BringToFront();
+            new History(this);
         }
         private void SetGraphicSetImage()
         {
@@ -573,6 +574,10 @@ namespace LAZYSHELL
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             update.DynamicInvoke();
+        }
+        private void alwaysOnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TopMost = alwaysOnTop.Checked;
         }
         #endregion
     }

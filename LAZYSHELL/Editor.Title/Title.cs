@@ -12,6 +12,7 @@ namespace LAZYSHELL
     public partial class Title : Form
     {
         #region Variables
+        
         private long checksum;
         // main
         private delegate void Function();
@@ -75,6 +76,7 @@ namespace LAZYSHELL
             LoadSpritePaletteEditor();
             LoadSpriteGraphicEditor();
             GC.Collect();
+            new History(this);
         }
         // set images
         private void SetTilesetImage()

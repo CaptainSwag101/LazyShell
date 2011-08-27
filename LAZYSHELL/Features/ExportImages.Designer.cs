@@ -219,6 +219,7 @@
             // 
             this.fromIndex.Enabled = false;
             this.fromIndex.Location = new System.Drawing.Point(48, 52);
+            this.fromIndex.Maximum = 1023;
             this.fromIndex.Name = "fromIndex";
             this.fromIndex.Size = new System.Drawing.Size(79, 21);
             this.fromIndex.TabIndex = 10;

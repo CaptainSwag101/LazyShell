@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.frameMold = new ToolStripNumericUpDown();
-            this.duration = new ToolStripNumericUpDown();
+            this.frameMold = new LAZYSHELL.ToolStripNumericUpDown();
+            this.duration = new LAZYSHELL.ToolStripNumericUpDown();
             this.pictureBoxSequence = new System.Windows.Forms.PictureBox();
             this.panelSequence = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -52,6 +52,7 @@
             this.PlaybackSequence = new System.ComponentModel.BackgroundWorker();
             this.listBoxFrames = new System.Windows.Forms.ListBox();
             this.panelFrames = new System.Windows.Forms.Panel();
+            this.reverseFrames = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSequence)).BeginInit();
             this.panelSequence.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -66,6 +67,11 @@
             this.frameMold.Location = new System.Drawing.Point(36, 4);
             this.frameMold.Maximum = new decimal(new int[] {
             31,
+            0,
+            0,
+            0});
+            this.frameMold.Minimum = new decimal(new int[] {
+            0,
             0,
             0,
             0});
@@ -86,6 +92,11 @@
             this.duration.Location = new System.Drawing.Point(140, 4);
             this.duration.Maximum = new decimal(new int[] {
             255,
+            0,
+            0,
+            0});
+            this.duration.Minimum = new decimal(new int[] {
+            0,
             0,
             0,
             0});
@@ -214,6 +225,7 @@
             this.newFrame,
             this.deleteFrame,
             this.duplicate,
+            this.reverseFrames,
             this.toolStripSeparator1,
             this.moveFrameBack,
             this.moveFrameFoward});
@@ -320,6 +332,17 @@
             this.panelFrames.TabIndex = 0;
             this.panelFrames.SizeChanged += new System.EventHandler(this.panelFrames_SizeChanged);
             // 
+            // reverseFrames
+            // 
+            this.reverseFrames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reverseFrames.Image = global::LAZYSHELL.Properties.Resources.widthDecrease;
+            this.reverseFrames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reverseFrames.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reverseFrames.Name = "reverseFrames";
+            this.reverseFrames.Size = new System.Drawing.Size(23, 22);
+            this.reverseFrames.ToolTipText = "Reverse Frames";
+            this.reverseFrames.Click += new System.EventHandler(this.reverseFrames_Click);
+            // 
             // EffectSequences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -371,5 +394,6 @@
         private System.Windows.Forms.Panel panelFrames;
         private ToolStripNumericUpDown frameMold;
         private ToolStripNumericUpDown duration;
+        private System.Windows.Forms.ToolStripButton reverseFrames;
     }
 }

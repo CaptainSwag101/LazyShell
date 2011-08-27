@@ -16,6 +16,7 @@ namespace LAZYSHELL
     public partial class Effects : Form
     {
         #region Variables
+        
         private long checksum;
         // main
         private delegate void Function();
@@ -34,6 +35,7 @@ namespace LAZYSHELL
         public Effect Effect { get { return effect; } set { effect = value; } }
         public E_Animation Animation { get { return animation; } set { animation = value; } }
         public int AvailableBytes { get { return availableBytes; } set { availableBytes = value; } }
+        public NumericUpDown E_graphicSetSize { get { return e_graphicSetSize; } set { e_graphicSetSize = value; } }
         // editors
         private EffectMolds molds;
         public EffectMolds Molds { get { return molds; } set { molds = value; } }
@@ -88,6 +90,7 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             //
             checksum = Do.GenerateChecksum(animations, effects);
+            new History(this);
         }
         private void RefreshEffectsEditor()
         {
@@ -286,7 +289,7 @@ namespace LAZYSHELL
             molds.SetTilesetImage();
             molds.SetTilemapImage();
             sequences.SetSequenceFrameImages();
-            sequences.InvalidateImages();
+            sequences.InvalidateFrameImages();
             LoadGraphicEditor();
             molds.LoadTileEditor();
             checksum--;   // b/c switching colors won't modify checksum
@@ -297,7 +300,7 @@ namespace LAZYSHELL
             molds.SetTilesetImage();
             molds.SetTilemapImage();
             sequences.SetSequenceFrameImages();
-            sequences.InvalidateImages();
+            sequences.InvalidateFrameImages();
             molds.LoadTileEditor();
             checksum--;   // b/c switching colors won't modify checksum
         }
@@ -468,6 +471,83 @@ namespace LAZYSHELL
             animation = new E_Animation(Model.Data, effect.AnimationPacket);
             effect = new Effect(Model.Data, index);
             number_ValueChanged(null, null);
+        }
+        private void cullAnimations_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("This will clean all unused graphics, tiles, and palettes. " +
+                "It will increase the amount of free space by thousands of bytes.\n\n" +
+                "Go ahead with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+            foreach (E_Animation image in animations)
+            {
+                byte format = (byte)(image.Codec == 1 ? 0x10 : 0x20);
+                int highestTile = 0;
+                int highestSubtile = 0;
+                int highestPalette = 0;
+                int highestMold = 0;
+                // cull tileset size
+                // find highest tile in tilemaps
+                foreach (E_Mold mold in image.Molds)
+                {
+                    for (int a = 0; a < mold.Mold.Length; a++)
+                        if (mold.Mold[a] < 0xFE && (mold.Mold[a] & 0x3F) > highestTile)
+                            highestTile = mold.Mold[a] & 0x3F;
+                }
+                highestTile++;
+                if (highestTile * 8 < image.TileSetLength)
+                {
+                    int temp = highestTile * 8;
+                    image.TileSetLength = Math.Min(highestTile * 8, 512);
+                    image.TileSetLength = image.TileSetLength / 64 * 64;
+                    if (image.TileSetLength == 0)
+                        image.TileSetLength += 64;
+                    else if (image.TileSetLength <= 512 - 64 && temp % 64 != 0)
+                        image.TileSetLength += 64;
+                }
+                // cull graphics size
+                // find highest subtile index in tileset
+                for (int i = 0; i < image.TileSetLength; i += 2)
+                    if (image.TileSet[i] < 0xFF && image.TileSet[i] > highestSubtile)
+                        highestSubtile = image.TileSet[i];
+                highestSubtile++;
+                if (highestSubtile * format < image.GraphicSetLength)
+                    image.GraphicSetLength = highestSubtile * format;
+                // cull palette size
+                // find highest palette index in all animations
+                foreach (Effect effect in effects)
+                {
+                    if (effect.AnimationPacket == image.Index && effect.PaletteIndex > highestPalette)
+                        highestPalette = effect.PaletteIndex;
+                }
+                highestPalette++;
+                if (highestPalette * 32 < image.PaletteSetLength)
+                {
+                    int temp = highestPalette * 32;
+                    image.PaletteSetLength = (ushort)Math.Min(highestPalette * 32, 256);
+                    image.PaletteSetLength = (ushort)(image.PaletteSetLength / 32 * 32);
+                    if (image.PaletteSetLength == 0)
+                        image.PaletteSetLength += 32;
+                    else if (image.PaletteSetLength <= 256 - 32 && temp % 32 != 0)
+                        image.PaletteSetLength += 32;
+                }
+                // cull molds
+                // find highest mold index in sequence
+                foreach (E_Sequence.Frame frame in image.Sequences[0].Frames)
+                {
+                    if (frame.Mold > highestMold)
+                        highestMold = frame.Mold;
+                }
+                highestMold++;
+                if (highestMold < image.Molds.Count)
+                    image.Molds.RemoveRange(highestMold, image.Molds.Count - highestMold);
+            }
+            foreach (E_Animation animation in animations)
+            {
+                if (animation.Tileset != null)
+                    animation.Tileset = new E_Tileset(animation, palette);
+                animation.Assemble();
+            }
+            RefreshEffectsEditor();
         }
         #endregion
     }

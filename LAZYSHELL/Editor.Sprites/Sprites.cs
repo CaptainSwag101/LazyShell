@@ -19,6 +19,7 @@ namespace LAZYSHELL
     public partial class Sprites : Form
     {
         #region Variables
+        
         private long checksum;
         // main
         private delegate void Function();
@@ -113,6 +114,7 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             //
             checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
+            new History(this);
         }
         private void RefreshSpritesEditor()
         {

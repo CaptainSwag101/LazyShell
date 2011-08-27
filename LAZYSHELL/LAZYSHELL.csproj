@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="!Static\BRR.cs" />
     <Compile Include="!Universal\Element.cs" />
+    <Compile Include="!Universal\History.cs" />
     <Compile Include="!Universal\ToolTipLabel.cs" />
     <Compile Include="Editor.Audio\Audio.cs">
       <SubType>Form</SubType>
@@ -103,6 +104,18 @@
     <Compile Include="Editor.Levels\Levels\LevelSolidMods.cs" />
     <Compile Include="Editor.Levels\Levels\LevelTileMods.cs" />
     <Compile Include="!Universal\Map.cs" />
+    <Compile Include="Features\NewExceptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\NewExceptionForm.Designer.cs">
+      <DependentUpon>NewExceptionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\NewMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\NewMessageBox.Designer.cs">
+      <DependentUpon>NewMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\ToolStripControls.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -653,6 +666,14 @@
       <DependentUpon>IOArchitecture.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\NewExceptionForm.resx">
+      <DependentUpon>NewExceptionForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\NewMessageBox.resx">
+      <DependentUpon>NewMessageBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -996,6 +1017,7 @@
     <Content Include="Resources\Forms\restoreAll.gif" />
     <Content Include="Resources\Forms\undock.gif" />
     <None Include="Resources\Lunar Compress.dll" />
+    <None Include="Resources\history.gif" />
     <Content Include="Resources\Main\about_small.gif" />
     <Content Include="Resources\Tiles\fieldBase.gif" />
     <Content Include="Resources\Tiles\fieldBlock.gif" />

@@ -27,7 +27,7 @@ namespace LAZYSHELL
         {
             int offset = (index * 4) + 0x251000;
 
-            paletteIndex = data[offset]; offset++;
+            paletteIndex = (byte)(data[offset] & 7); offset++;
             animationPacket = data[offset]; offset++;
             xNegShift = data[offset]; offset++;
             yNegShift = data[offset]; offset++;

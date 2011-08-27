@@ -13,6 +13,7 @@ namespace LAZYSHELL
     public partial class Monsters : Form
     {
         #region Variables
+        
         private delegate void Function();
         private long checksum;
         private bool updatingMonsters = false;
@@ -61,6 +62,7 @@ namespace LAZYSHELL
             SetToolTips(toolTip1);
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
             checksum = Do.GenerateChecksum(monsters);
+            new History(this);
         }
         private void InitializeStrings()
         {
@@ -95,7 +97,7 @@ namespace LAZYSHELL
                 this.MonsterValExp.Value = monster.Experience;
                 this.MonsterValCoins.Value = monster.Coins;
                 this.MonsterValElevation.Value = monster.Elevation;
-                this.MonsterValFlowerOdds.Value = monster.FlowerOdds;
+                this.MonsterValFlowerOdds.Value = monster.FlowerOdds * 10;
                 this.TextboxMonsterPsychoMsg.Text = monster.GetPsychoMsg(textCodeFormat);
                 this.CheckboxMonsterElemNull.SetItemChecked(0, monster.ElemIceNull);
                 this.CheckboxMonsterElemNull.SetItemChecked(1, monster.ElemFireNull);
@@ -531,7 +533,10 @@ namespace LAZYSHELL
         }
         private void MonsterValFlowerOdds_ValueChanged(object sender, EventArgs e)
         {
-            monster.FlowerOdds = (byte)MonsterValFlowerOdds.Value;
+            if (MonsterValFlowerOdds.Value % 10 != 0)
+                MonsterValFlowerOdds.Value = (int)MonsterValFlowerOdds.Value / 10 * 10;
+            else
+                monster.FlowerOdds = (byte)(MonsterValFlowerOdds.Value / 10);
         }
         // psychopath dialogue
         private void pictureBoxPsychopath_Paint(object sender, PaintEventArgs e)

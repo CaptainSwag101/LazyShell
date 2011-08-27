@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
 using LAZYSHELL.Properties;
 using LAZYSHELL.Patches;
 using LAZYSHELL.ScriptsEditor;
@@ -54,7 +55,12 @@ namespace LAZYSHELL
         [STAThread]
         public static void Main(string[] args)
         {
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
             Program App = new Program();
+        }
+        private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            new NewExceptionForm(e.Exception).ShowDialog();
         }
         // Constructor
         public Program()

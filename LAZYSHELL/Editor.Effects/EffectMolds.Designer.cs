@@ -67,7 +67,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBoxEffectTileset = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.importIntoTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveImageAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.openTileEditor = new System.Windows.Forms.ToolStripButton();
@@ -83,6 +82,8 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.showBG = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.importIntoTilemap = new System.Windows.Forms.ToolStripButton();
             this.panel99.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxE_Mold)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -511,24 +512,16 @@
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importIntoTilesetToolStripMenuItem,
             this.saveImageAsToolStripMenuItem1});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip2.ShowImageMargin = false;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(151, 48);
-            // 
-            // importIntoTilesetToolStripMenuItem
-            // 
-            this.importIntoTilesetToolStripMenuItem.Name = "importIntoTilesetToolStripMenuItem";
-            this.importIntoTilesetToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.importIntoTilesetToolStripMenuItem.Text = "Import Into Tileset...";
-            this.importIntoTilesetToolStripMenuItem.Click += new System.EventHandler(this.importIntoTilesetToolStripMenuItem_Click);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(134, 26);
             // 
             // saveImageAsToolStripMenuItem1
             // 
             this.saveImageAsToolStripMenuItem1.Name = "saveImageAsToolStripMenuItem1";
-            this.saveImageAsToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
+            this.saveImageAsToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
             this.saveImageAsToolStripMenuItem1.Text = "Save Image As...";
             this.saveImageAsToolStripMenuItem1.Click += new System.EventHandler(this.saveImageAsToolStripMenuItem1_Click);
             // 
@@ -626,7 +619,9 @@
             this.showBG,
             this.toolStripSeparator8,
             this.e_moldZoomIn,
-            this.e_moldZoomOut});
+            this.e_moldZoomOut,
+            this.toolStripSeparator9,
+            this.importIntoTilemap});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -693,6 +688,22 @@
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
+            // 
+            // importIntoTilemap
+            // 
+            this.importIntoTilemap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.importIntoTilemap.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importIntoTilemap.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.importIntoTilemap.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.importIntoTilemap.Name = "importIntoTilemap";
+            this.importIntoTilemap.Size = new System.Drawing.Size(23, 22);
+            this.importIntoTilemap.ToolTipText = "Import Image(s)";
+            this.importIntoTilemap.Click += new System.EventHandler(this.importIntoTilemap_Click);
             // 
             // EffectMolds
             // 
@@ -779,8 +790,9 @@
         private ToolStripNumericUpDown e_moldWidth;
         private ToolStripNumericUpDown e_moldHeight;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem importIntoTilesetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveImageAsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripButton showBG;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton importIntoTilemap;
     }
 }

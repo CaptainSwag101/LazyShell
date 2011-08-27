@@ -16,6 +16,7 @@ namespace LAZYSHELL
     public partial class LevelsTemplate : Form
     {
         // variables
+        
         private Levels levels;
         private Overlay overlay;
         private LevelTemplate template; public LevelTemplate Template { get { return this.template; } }

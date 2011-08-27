@@ -118,6 +118,7 @@
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip2.ShowImageMargin = false;
             this.contextMenuStrip2.Size = new System.Drawing.Size(134, 214);
+            this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(contextMenuStrip2_Opening);
             // 
             // cutToolStripMenuItem2
             // 
@@ -276,6 +277,7 @@
             // buttonEditDelete
             // 
             this.buttonEditDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEditDelete.Enabled = false;
             this.buttonEditDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
             this.buttonEditDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -287,6 +289,7 @@
             // buttonEditCut
             // 
             this.buttonEditCut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEditCut.Enabled = false;
             this.buttonEditCut.Image = global::LAZYSHELL.Properties.Resources.cut_small;
             this.buttonEditCut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditCut.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -298,6 +301,7 @@
             // buttonEditCopy
             // 
             this.buttonEditCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEditCopy.Enabled = false;
             this.buttonEditCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
             this.buttonEditCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -309,6 +313,7 @@
             // buttonEditPaste
             // 
             this.buttonEditPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEditPaste.Enabled = false;
             this.buttonEditPaste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
             this.buttonEditPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -451,6 +456,7 @@
             this.lockEditing.TabIndex = 445;
             this.lockEditing.Text = "Lock tileset editing";
             this.lockEditing.UseVisualStyleBackColor = true;
+            this.lockEditing.CheckedChanged += new System.EventHandler(lockEditing_CheckedChanged);
             // 
             // panel1
             // 

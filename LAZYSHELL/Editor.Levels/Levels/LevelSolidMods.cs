@@ -75,6 +75,18 @@ namespace LAZYSHELL
                 mod.Pixels = null;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="offset">The offset in the byte[0x20C2] array.</param>
+        /// <returns></returns>
+        public bool WithinBounds(int offset)
+        {
+            if (mod != null)
+                return mod.WithinBounds(offset);
+            else
+                return false;
+        }
         public LevelSolidMods(byte[] data, int index)
         {
             this.data = data;
@@ -369,6 +381,26 @@ namespace LAZYSHELL
             }
             public override void MakeEdit()
             {
+            }
+            public bool WithinBounds(int offset)
+            {
+                int startOffset = 0x41 * (this.y / 2);
+                if (y % 2 != 0)
+                    startOffset += 0x21;
+                startOffset += x;
+                startOffset *= 2;
+                // check all offsets to see if parameter is one of them
+                for (int i = 0, c = 0; c < tiles.Length; i += 0x42)
+                {
+                    if (c != 0 && (c / 2) % width == 0)
+                        i = ((c / 2) / width) * 0x40;
+                    if (c >= tiles.Length || startOffset + i >= tilemap.Length) 
+                        return false;
+                    if (startOffset + i == offset)
+                        return true;
+                    c += 2;
+                }
+                return false;
             }
         }
         public void Clear()

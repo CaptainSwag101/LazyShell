@@ -12,6 +12,7 @@ namespace LAZYSHELL
     public partial class Items : Form
     {
         #region Variables
+        
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Item[] items { get { return Model.Items; } set { Model.Items = value; } }

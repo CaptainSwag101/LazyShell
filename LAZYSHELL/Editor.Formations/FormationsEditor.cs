@@ -11,6 +11,7 @@ namespace LAZYSHELL
 {
     public partial class FormationsEditor : Form
     {
+        
         private long checksum;
         private Formations formationsEditor;
         private FormationPacks packsEditor;
@@ -42,6 +43,7 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             //
             checksum = Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics);
+            new History(this);
         }
         // functions
         public void Assemble()

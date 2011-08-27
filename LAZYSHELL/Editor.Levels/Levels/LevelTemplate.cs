@@ -9,6 +9,7 @@ namespace LAZYSHELL
     public class LevelTemplate
     {
         private string name; public string Name { get { return name; } set { name = value; } }
+        [NonSerialized()]
         private Solidity solidity = Solidity.Instance;
 
         private byte[] soliditymap = new byte[0x20C2]; public byte[] Soliditymap { get { return soliditymap; } }
