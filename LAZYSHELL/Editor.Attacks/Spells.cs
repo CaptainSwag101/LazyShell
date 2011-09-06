@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public partial class Spells : Form
     {
         #region Variables
-        
+
         private bool updating = false;
         private Spell[] spells { get { return Model.Spells; } set { Model.Spells = value; } }
         private Spell spell { get { return spells[index]; } set { spells[index] = value; } }
@@ -131,13 +131,20 @@ namespace LAZYSHELL
             panelTimingRotation.Visible = index == 8 || index == 10 || index == 12 || index == 13 || index == 25;
             panelTimingRapid.Visible = index == 11 || index == 15;
             panelTimingFireball.Visible = index == 1 || index == 3 || index == 5;
-            if (panelTimingMultiple.Visible) RefreshTimingMultipleTiming();
-            if (panelTimingOne.Visible) RefreshTimingSpellsOne();
-            if (panelTimingTwo.Visible) RefreshTimingSpellsTwo();
-            if (panelTimingFireball.Visible) RefreshTimingFireballSpells();
-            if (panelTimingRotation.Visible) RefreshTimingRotaionSpells();
-            if (panelTimingGeno.Visible) RefreshTimingSpellsGeno();
-            if (panelTimingRapid.Visible) RefreshTimingRapidSpellMax();
+            if (index == 2 || index == 4 || index == 26)
+                RefreshTimingMultipleTiming();
+            if (index == 9 || index == 17 || index == 18 || index == 21 || index == 23)
+                RefreshTimingSpellsOne();
+            if (index == 0 || index == 6 || index == 7 || index == 14 || index == 22 || index == 24)
+                RefreshTimingSpellsTwo();
+            if (index == 16 || index == 19 || index == 20)
+                RefreshTimingSpellsGeno();
+            if (index == 8 || index == 10 || index == 12 || index == 13 || index == 25)
+                RefreshTimingRotaionSpells();
+            if (index == 11 || index == 15)
+                RefreshTimingRapidSpellMax();
+            if (index == 1 || index == 3 || index == 5)
+                RefreshTimingFireballSpells();
             updating = false;
             Cursor.Current = Cursors.Arrow;
         }
@@ -472,6 +479,7 @@ namespace LAZYSHELL
         private void spellNum_ValueChanged(object sender, EventArgs e)
         {
             RefreshSpells();
+            settings.LastSpell = index;
         }
         private void spellName_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -9,15 +9,15 @@ namespace LAZYSHELL
     public class TileSet
     {
         private LevelMap levelMap;
-        public PaletteSet paletteSet;
         private State state = State.Instance;
-
+        //
         private byte[][] tileSets = new byte[3][]; public byte[][] TileSets { get { return tileSets; } set { tileSets = value; } }
         private byte[] graphics; public byte[] Graphics { get { return graphics; } set { graphics = value; } }
         private byte[] graphicsL3; public byte[] GraphicsL3 { get { return graphicsL3; } set { graphicsL3 = value; } }
-        Tile16x16[][] tilesetLayers = new Tile16x16[3][];
+        private Tile16x16[][] tilesetLayers = new Tile16x16[3][];
         public Tile16x16[][] TileSetLayers { get { return tilesetLayers; } set { tilesetLayers = value; } }
-
+        public PaletteSet paletteSet;
+        //
         public TileSet(LevelMap levelMap, PaletteSet paletteSet)
         {
             this.levelMap = levelMap; // grab the current LevelMap
@@ -157,7 +157,7 @@ namespace LAZYSHELL
             if (layer == 2 && tilesetLayers[2] != null)// || layer == 3)
                 DrawTileset(tileSets[2], tilesetLayers[2], 2);
         }
-
+        //
         public int GetTileNum(int layer, int x, int y)
         {
             if (layer < 3)
@@ -190,7 +190,7 @@ namespace LAZYSHELL
             }
             for (int i = 0; i < 3; i++) RedrawTilesets(i);
         }
-
+        //
         public void AssembleIntoModel(int width, int layer)
         {
             if (tilesetLayers[layer] == null) return;

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using LAZYSHELL.Undo;
 
@@ -14,7 +15,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
-        
+
         private delegate void Function();
         public PictureBox Picture { get { return pictureBoxLevel; } set { pictureBoxLevel = value; } }
         private Levels levels;
@@ -40,7 +41,7 @@ namespace LAZYSHELL
         private LevelOverlaps overlaps { get { return level.LevelOverlaps; } set { level.LevelOverlaps = value; } }
         private LevelTileMods tileMods { get { return level.LevelTileMods; } set { level.LevelTileMods = value; } }
         private LevelSolidMods solidMods { get { return level.LevelSolidMods; } set { level.LevelSolidMods = value; } }
-        private SolidityTile[] physicalTiles { get { return Model.SolidTiles; } }
+        private SolidityTile[] solidTiles { get { return Model.SolidTiles; } }
         private LevelTemplate template { get { return levelsTemplate.Template; } }
         // buffers
         private CopyBuffer draggedTiles;
@@ -93,6 +94,15 @@ namespace LAZYSHELL
         private int mouseDownSolidMod = 0;
         private Point mousePosition = new Point(0, 0);
         private Point mouseDownPosition = new Point(0, 0);
+        private Point mouseTilePosition
+        {
+            get
+            {
+                return new Point(
+                    Math.Min(63, mousePosition.X / 16),
+                    Math.Min(63, mousePosition.Y / 16));
+            }
+        }
         private Point mouseIsometricPosition = new Point(0, 0);
         private Point mouseLastIsometricPosition = new Point(0, 0);
         private Point mouseDownIsometricPosition = new Point(0, 0);
@@ -178,6 +188,9 @@ namespace LAZYSHELL
 
             p1Image = null;
             p1SolidityImage = null;
+            selection = null;
+            draggedTiles = null;
+            overlay.Select = null;
 
             SetLevelImage();
         }
@@ -197,6 +210,21 @@ namespace LAZYSHELL
                 System.Convert.ToString(mouseIsometricPosition.X) + ", y: " +
                 System.Convert.ToString(mouseIsometricPosition.Y) + ") Isometric  |  ";
             this.labelTileCoords.Text += "(x: " + x + ", y: " + y + ") Pixel";
+        }
+        private void ToggleTilesets()
+        {
+            levels.OpenTileset.Checked = !buttonToggleSolidMods.Checked && !buttonTogglePhys.Checked;
+            levels.OpenSolidTileset.Checked = buttonToggleSolidMods.Checked || buttonTogglePhys.Checked;
+            if (levels.OpenTileset.Checked)
+            {
+                levels.openSolidTileset_Click(null, null);
+                levels.openTileset_Click(null, null);
+            }
+            else if (levels.OpenSolidTileset.Checked)
+            {
+                levels.openTileset_Click(null, null);
+                levels.openSolidTileset_Click(null, null);
+            }
         }
         // editing
         private bool CompareTiles(int x_, int y_, int layer)
@@ -333,9 +361,11 @@ namespace LAZYSHELL
         {
             if (state.TileMods)
             {
+                int x_ = x - (tileMods.X * 16);
+                int y_ = y - (tileMods.Y * 16);
                 if (!tileMods.WithinBounds(x / 16, y / 16) ||
-                    overlay.SelectTS.Width / 16 > tileMods.Width ||
-                    overlay.SelectTS.Height / 16 > tileMods.Height)
+                    overlay.SelectTS.Width / 16 + (x_ / 16) > tileMods.Width ||
+                    overlay.SelectTS.Height / 16 + (y_ / 16) > tileMods.Height)
                     return;
                 x -= (tileMods.X * 16);
                 y -= (tileMods.Y * 16);
@@ -391,13 +421,13 @@ namespace LAZYSHELL
                 // cancel if physical tile editor not open
                 if (levelsSolidTiles == null) return;
                 // cancel if overwriting the same tile over itself
-                if (solidityMap.GetTileNum(mouseOverSolidTile) == (ushort)levelsSolidTiles.Index)
+                Map map = state.SolidMods ? (Map)solidMods.Mod_ : solidityMap;
+                if (map.GetTileNum(mouseOverSolidTile) == (ushort)levelsSolidTiles.Index)
                     return;
                 Point initial = new Point(x, y);
                 Point final = new Point(x + 1, y + 1);
                 byte[] temp = new byte[0x20C2];
                 Bits.SetShort(temp, mouseOverSolidTile * 2, (ushort)levelsSolidTiles.Index);
-                Map map = state.SolidMods ? (Map)solidMods.Mod_ : solidityMap;
                 CommandStack commandStack_S = state.SolidMods ? this.commandStack_SM : this.commandStack_S;
                 commandStack_S.Push(new SolidityEditCommand(this.levels, map, initial, final, initial, temp));
                 if (state.SolidMods)
@@ -782,6 +812,7 @@ namespace LAZYSHELL
             overlay.Select = new Overlay.Selection(16, location, buffer.Size);
             pictureBoxLevel.Invalidate();
             pasteFinal = false;
+            //levels.AlertLabel();
         }
         /// <summary>
         /// "Cements" either a dragged selection or a newly pasted selection.
@@ -904,13 +935,6 @@ namespace LAZYSHELL
             }
         }
         //
-        private void ResetDrawButtons(ToolStripButton skip)
-        {
-            foreach (ToolStripItem item in toolStrip2.Items)
-                if (item.GetType() == typeof(ToolStripButton))
-                    if (item != skip)
-                        ((ToolStripButton)item).Checked = false;
-        }
         #endregion
         #region Event Handlers
         // main
@@ -919,10 +943,6 @@ namespace LAZYSHELL
         }
         private void pictureBoxLevel_Paint(object sender, PaintEventArgs e)
         {
-            if (levels.Index == 100 && mouseEnter == true)
-                panelLevelPicture.AutoScrollPosition = autoScrollPos;
-            else
-                panelLevelPicture.AutoScrollPosition = autoScrollPos;
             RectangleF clone = e.ClipRectangle;
             SizeF remainder = new SizeF((int)(clone.Width % zoom), (int)(clone.Height % zoom));
             clone.Location = new PointF((int)(clone.X / zoom), (int)(clone.Y / zoom));
@@ -962,6 +982,8 @@ namespace LAZYSHELL
                     overlay.Select.X * zoom, overlay.Select.Y * zoom,
                     rsrc.Width * zoom, rsrc.Height * zoom);
                 e.Graphics.DrawImage(new Bitmap(selection), rdst, rsrc, GraphicsUnit.Pixel);
+                Do.DrawString(e.Graphics, new Point(rdst.X, rdst.Y + rdst.Height),
+                    "click/drag", Color.White, Color.Black, new Font("Tahoma", 6.75F, FontStyle.Bold));
             }
             if (state.Priority1 && !state.SolidityLayer)
             {
@@ -994,50 +1016,44 @@ namespace LAZYSHELL
             }
             if (state.SolidMods)
             {
-                overlay.DrawLevelSolidMods(solidMods, physicalTiles, e.Graphics, rdst, ia, zoom);
+                overlay.DrawLevelSolidMods(solidMods, solidTiles, e.Graphics, rdst, ia, zoom);
                 overlay.DrawLevelSolidMods(solidMods, e.Graphics, zoom);
             }
             if (state.Exits)
             {
-                if (overlay.ExitsImage == null)
-                    overlay.DrawLevelExits(exits);
-                if (overlayOpacity.Value < 100)
-                    e.Graphics.DrawImage(overlay.ExitsImage, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
-                else
-                    e.Graphics.DrawImage(overlay.ExitsImage, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel);
+                //if (overlayOpacity.Value < 100)
+                //    overlay.DrawLevelExits(exits, e.Graphics, ia, zoom);
+                //else
+                overlay.DrawLevelExits(exits, e.Graphics, zoom);
                 if (tags.Checked)
-                    overlay.DrawLevelExits(exits, e.Graphics, zoom);
+                    overlay.DrawLevelExitTags(exits, e.Graphics, zoom);
             }
             if (state.Events)
             {
-                if (overlay.EventsImage == null)
-                    overlay.DrawLevelEvents(events);
-                if (overlayOpacity.Value < 100)
-                    e.Graphics.DrawImage(overlay.EventsImage, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
-                else
-                    e.Graphics.DrawImage(overlay.EventsImage, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel);
+                //if (overlayOpacity.Value < 100)
+                //    overlay.DrawLevelEvents(events, e.Graphics, ia, zoom);
+                //else
+                overlay.DrawLevelEvents(events, e.Graphics, zoom);
                 if (tags.Checked)
-                    overlay.DrawLevelEvents(events, e.Graphics, zoom);
+                    overlay.DrawLevelEventTags(events, e.Graphics, zoom);
             }
             if (state.NPCs)
             {
-                if (overlay.NPCsImage == null)
+                if (overlay.NPCImages == null)
                     overlay.DrawLevelNPCs(npcs, Model.NPCProperties);
-                if (overlayOpacity.Value < 100)
-                    e.Graphics.DrawImage(overlay.NPCsImage, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
-                else
-                    e.Graphics.DrawImage(overlay.NPCsImage, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel);
+                //if (overlayOpacity.Value < 100)
+                //    overlay.DrawLevelNPCs(npcs, e.Graphics, ia, zoom);
+                //else
+                overlay.DrawLevelNPCs(npcs, e.Graphics, zoom);
                 if (tags.Checked)
-                    overlay.DrawLevelNPCs(npcs, e.Graphics, zoom);
+                    overlay.DrawLevelNPCTags(npcs, e.Graphics, zoom);
             }
             if (state.Overlaps)
             {
-                if (overlay.OverlapsImage == null)
-                    overlay.DrawLevelOverlaps(overlaps, Model.OverlapTileset);
-                if (overlayOpacity.Value < 100)
-                    e.Graphics.DrawImage(overlay.OverlapsImage, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
-                else
-                    e.Graphics.DrawImage(overlay.OverlapsImage, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel);
+                //if (overlayOpacity.Value < 100)
+                //    overlay.DrawLevelOverlaps(overlaps, Model.OverlapTileset, e.Graphics, ia, zoom);
+                //else
+                overlay.DrawLevelOverlaps(overlaps, Model.OverlapTileset, e.Graphics, zoom);
             }
             if (!state.Dropper && mouseEnter)
                 DrawHoverBox(e.Graphics);
@@ -1057,7 +1073,6 @@ namespace LAZYSHELL
         }
         private void pictureBoxLevel_MouseDown(object sender, MouseEventArgs e)
         {
-            panelLevelPicture.AutoScrollPosition = autoScrollPos;
             // in case the tileset selection was dragged
             if (levelsTileset.DraggedTiles != null)
                 levelsTileset.PasteFinal(levelsTileset.DraggedTiles);
@@ -1078,7 +1093,6 @@ namespace LAZYSHELL
                     autoScrollPos.Y += e.Y;
                     pictureBoxLevel.Width = 1024 * zoom;
                     pictureBoxLevel.Height = 1024 * zoom;
-                    panelLevelPicture.Focus();
                     panelLevelPicture.AutoScrollPosition = autoScrollPos;
                     panelLevelPicture.VerticalScroll.SmallChange *= 2;
                     panelLevelPicture.HorizontalScroll.SmallChange *= 2;
@@ -1095,14 +1109,11 @@ namespace LAZYSHELL
                 if (zoom > 1)
                 {
                     zoom /= 2;
-
                     autoScrollPos = new Point(Math.Abs(pictureBoxLevel.Left), Math.Abs(pictureBoxLevel.Top));
                     autoScrollPos.X -= e.X / 2;
                     autoScrollPos.Y -= e.Y / 2;
-
                     pictureBoxLevel.Width = 1024 * zoom;
                     pictureBoxLevel.Height = 1024 * zoom;
-                    panelLevelPicture.Focus();
                     panelLevelPicture.AutoScrollPosition = autoScrollPos;
                     panelLevelPicture.VerticalScroll.SmallChange /= 2;
                     panelLevelPicture.HorizontalScroll.SmallChange /= 2;
@@ -1184,6 +1195,11 @@ namespace LAZYSHELL
             #region Object Selection
             if (!state.Template && !state.Draw && !state.Select && !state.Erase && e.Button == MouseButtons.Left)
             {
+                if (state.Mask && mouseOverObject.StartsWith("mask"))
+                {
+                    levels.TabControl.SelectedIndex = 1;
+                    mouseDownObject = mouseOverObject;
+                }
                 if (state.Exits && mouseOverObject == "exit")
                 {
                     levels.TabControl.SelectedIndex = 3;
@@ -1232,22 +1248,22 @@ namespace LAZYSHELL
                     mouseDownOverlap = mouseOverOverlap;
                     overlaps.CurrentOverlap = mouseDownOverlap;
                     overlaps.SelectedOverlap = mouseDownOverlap;
-                    overlay.OverlapsImage = null;
                     levels.OverlapFieldTree.SelectedNode = levels.OverlapFieldTree.Nodes[overlaps.CurrentOverlap];
                 }
-                if (state.TileMods && mouseOverObject == "tileMod" && mouseDownObject == null)
+                if (state.TileMods && mouseOverObject == "tilemod" && mouseDownObject == null)
                 {
                     levels.TabControl.SelectedIndex = 5;
-                    mouseDownObject = "tileMod";
+                    mouseDownObject = "tilemod";
                     mouseDownTileMod = mouseOverTileMod;
                     tileMods.CurrentMod = mouseDownTileMod;
                     tileMods.SelectedMod = mouseDownTileMod;
                     levels.TileModsFieldTree.SelectedNode = levels.TileModsFieldTree.Nodes[tileMods.CurrentMod];
+                    mouseDownPosition = new Point((x / 16) - tileMods.X, (y / 16) - tileMods.Y);
                 }
-                if (state.SolidMods && mouseOverObject == "solidMod" && mouseDownObject == null)
+                if (state.SolidMods && mouseOverObject == "solidmod" && mouseDownObject == null)
                 {
                     levels.TabControl.SelectedIndex = 5;
-                    mouseDownObject = "solidMod";
+                    mouseDownObject = "solidmod";
                     mouseDownSolidMod = mouseOverSolidMod;
                     solidMods.CurrentMod = mouseDownSolidMod;
                     solidMods.SelectedMod = mouseDownSolidMod;
@@ -1423,9 +1439,37 @@ namespace LAZYSHELL
                 #region Check if dragging a field
                 if (mouseDownObject != null && e.Button == MouseButtons.Left)  // if dragging a field
                 {
-                    if (Math.Abs(mouseIsometricPosition.X - mouseLastIsometricPosition.X) > 0 ||
-                        Math.Abs(mouseIsometricPosition.Y - mouseLastIsometricPosition.Y) > 0)
-                        return;
+                    //if (Math.Abs(mouseIsometricPosition.X - mouseLastIsometricPosition.X) > 0 ||
+                    //    Math.Abs(mouseIsometricPosition.Y - mouseLastIsometricPosition.Y) > 0)
+                    //    return;
+                    if (mouseDownObject == "maskNW")
+                    {
+                        levels.LayerMaskLowX.Value = Math.Min(mouseTilePosition.X, layer.MaskHighX);
+                        levels.LayerMaskLowY.Value = Math.Min(mouseTilePosition.Y, layer.MaskHighY);
+                    }
+                    if (mouseDownObject == "maskNE")
+                    {
+                        levels.LayerMaskHighX.Value = Math.Max(mouseTilePosition.X, layer.MaskLowX);
+                        levels.LayerMaskLowY.Value = Math.Min(mouseTilePosition.Y, layer.MaskHighY);
+                    }
+                    if (mouseDownObject == "maskSW")
+                    {
+                        levels.LayerMaskLowX.Value = Math.Min(mouseTilePosition.X, layer.MaskHighX);
+                        levels.LayerMaskHighY.Value = Math.Max(mouseTilePosition.Y, layer.MaskLowY);
+                    }
+                    if (mouseDownObject == "maskSE")
+                    {
+                        levels.LayerMaskHighX.Value = Math.Max(mouseTilePosition.X, layer.MaskLowX);
+                        levels.LayerMaskHighY.Value = Math.Max(mouseTilePosition.Y, layer.MaskLowY);
+                    }
+                    if (mouseDownObject == "maskW")
+                        levels.LayerMaskLowX.Value = Math.Min(mouseTilePosition.X, layer.MaskHighX);
+                    if (mouseDownObject == "maskE")
+                        levels.LayerMaskHighX.Value = Math.Max(mouseTilePosition.X, layer.MaskLowX);
+                    if (mouseDownObject == "maskN")
+                        levels.LayerMaskLowY.Value = Math.Min(mouseTilePosition.Y, layer.MaskHighY);
+                    if (mouseDownObject == "maskS")
+                        levels.LayerMaskHighY.Value = Math.Max(mouseTilePosition.Y, layer.MaskLowY);
                     if (mouseDownObject == "exit")
                     {
                         if (levels.ExitX.Value != mouseIsometricPosition.X &&
@@ -1462,6 +1506,26 @@ namespace LAZYSHELL
                         levels.UpdatingLevel = false;
                         levels.OverlapY.Value = mouseIsometricPosition.Y;
                     }
+                    if (mouseDownObject == "tilemod")
+                    {
+                        int a = Math.Min(Math.Max(0, mouseTilePosition.X - mouseDownPosition.X), 63);
+                        int b = Math.Min(Math.Max(0, mouseTilePosition.Y - mouseDownPosition.Y), 63);
+                        if (levels.TileModsX.Value != a &&
+                            levels.TileModsY.Value != b)
+                            levels.UpdatingLevel = true;
+                        levels.TileModsX.Value = a;
+                        levels.UpdatingLevel = false;
+                        levels.TileModsY.Value = b;
+                    }
+                    if (mouseDownObject == "solidmod")
+                    {
+                        if (levels.SolidModsX.Value != mouseIsometricPosition.X &&
+                            levels.SolidModsY.Value != mouseIsometricPosition.Y)
+                            levels.UpdatingLevel = true;
+                        levels.SolidModsX.Value = mouseIsometricPosition.X;
+                        levels.UpdatingLevel = false;
+                        levels.SolidModsY.Value = mouseIsometricPosition.Y;
+                    }
                     if (mouseDownObject == "solid tile")
                     {
                         selsolidt_location = solidity.TileCoords[mouseOverSolidTile];
@@ -1475,7 +1539,54 @@ namespace LAZYSHELL
                 else
                 {
                     pictureBoxLevel.Cursor = Cursors.Arrow;
-                    if (state.Exits && exits.Count != 0)
+                    if (state.Mask)
+                    {
+                        if (mouseTilePosition.X == layer.MaskLowX && mouseTilePosition.Y == layer.MaskLowY)
+                        {
+                            pictureBoxLevel.Cursor = Cursors.SizeNWSE;
+                            mouseOverObject = "maskNW";
+                        }
+                        else if (mouseTilePosition.X == layer.MaskLowX && mouseTilePosition.Y == layer.MaskHighY)
+                        {
+                            pictureBoxLevel.Cursor = Cursors.SizeNESW;
+                            mouseOverObject = "maskSW";
+                        }
+                        else if (mouseTilePosition.X == layer.MaskHighX && mouseTilePosition.Y == layer.MaskLowY)
+                        {
+                            pictureBoxLevel.Cursor = Cursors.SizeNESW;
+                            mouseOverObject = "maskNE";
+                        }
+                        else if (mouseTilePosition.X == layer.MaskHighX && mouseTilePosition.Y == layer.MaskHighY)
+                        {
+                            pictureBoxLevel.Cursor = Cursors.SizeNWSE;
+                            mouseOverObject = "maskSE";
+                        }
+                        else if (mouseTilePosition.X == layer.MaskLowX &&
+                            mouseTilePosition.Y <= layer.MaskHighY && mouseTilePosition.Y >= layer.MaskLowY)
+                        {
+                            pictureBoxLevel.Cursor = Cursors.SizeWE;
+                            mouseOverObject = "maskW";
+                        }
+                        else if (mouseTilePosition.Y == layer.MaskLowY &&
+                            mouseTilePosition.X <= layer.MaskHighX && mouseTilePosition.X >= layer.MaskLowX)
+                        {
+                            pictureBoxLevel.Cursor = Cursors.SizeNS;
+                            mouseOverObject = "maskN";
+                        }
+                        else if (mouseTilePosition.X == layer.MaskHighX &&
+                            mouseTilePosition.Y <= layer.MaskHighY && mouseTilePosition.Y >= layer.MaskLowY)
+                        {
+                            pictureBoxLevel.Cursor = Cursors.SizeWE;
+                            mouseOverObject = "maskE";
+                        }
+                        else if (mouseTilePosition.Y == layer.MaskHighY &&
+                            mouseTilePosition.X <= layer.MaskHighX && mouseTilePosition.X >= layer.MaskLowX)
+                        {
+                            pictureBoxLevel.Cursor = Cursors.SizeNS;
+                            mouseOverObject = "maskS";
+                        }
+                    }
+                    if (state.Exits && exits.Count != 0 && mouseOverObject == null)
                     {
                         int index_ext = 0;
                         foreach (Exit exit in exits.Exits)
@@ -1566,15 +1677,14 @@ namespace LAZYSHELL
                 finish:
                     if (state.Overlaps && overlaps.Count != 0 && mouseOverObject == null)
                     {
-                        int currentOverlap = overlaps.CurrentOverlap;
-                        for (int i = 0; i < overlaps.Count; i++)
+                        int index_ovr = 0;
+                        foreach (Overlap overlap in overlaps.Overlaps)
                         {
-                            overlaps.CurrentOverlap = i;
-                            if (overlaps.X == mouseIsometricPosition.X &&
-                                overlaps.Y == mouseIsometricPosition.Y)
+                            if (overlap.X == mouseIsometricPosition.X &&
+                                overlap.Y == mouseIsometricPosition.Y)
                             {
                                 this.pictureBoxLevel.Cursor = Cursors.Hand;
-                                mouseOverOverlap = i;
+                                mouseOverOverlap = index_ovr;
                                 mouseOverObject = "overlap";
                                 break;
                             }
@@ -1584,8 +1694,51 @@ namespace LAZYSHELL
                                 mouseOverOverlap = 0;
                                 mouseOverObject = null;
                             }
+                            index_ovr++;
                         }
-                        overlaps.CurrentOverlap = currentOverlap;
+                    }
+                    if (state.TileMods && tileMods.Count != 0 && mouseOverObject == null)
+                    {
+                        int index_tlm = 0;
+                        foreach (LevelTileMods.Mod mod in tileMods.Mods)
+                        {
+                            if (mod.WithinBounds(x / 16, y / 16))
+                            {
+                                this.pictureBoxLevel.Cursor = Cursors.Hand;
+                                mouseOverTileMod = index_tlm;
+                                mouseOverObject = "tilemod";
+                                break;
+                            }
+                            else
+                            {
+                                this.pictureBoxLevel.Cursor = Cursors.Arrow;
+                                mouseOverTileMod = 0;
+                                mouseOverObject = null;
+                            }
+                            index_tlm++;
+                        }
+                    }
+                    if (state.SolidMods && solidMods.Count != 0 && mouseOverObject == null)
+                    {
+                        int index_slm = 0;
+                        foreach (LevelSolidMods.Mod mod in solidMods.Mods)
+                        {
+                            if (mod.X == mouseIsometricPosition.X &&
+                                mod.Y == mouseIsometricPosition.Y)
+                            {
+                                this.pictureBoxLevel.Cursor = Cursors.Hand;
+                                mouseOverSolidMod = index_slm;
+                                mouseOverObject = "solidmod";
+                                break;
+                            }
+                            else
+                            {
+                                this.pictureBoxLevel.Cursor = Cursors.Arrow;
+                                mouseOverSolidMod = 0;
+                                mouseOverObject = null;
+                            }
+                            index_slm++;
+                        }
                     }
                     if (state.SolidityLayer && buttonDragSolidity.Checked)
                     {
@@ -1797,6 +1950,7 @@ namespace LAZYSHELL
             if (!buttonDragSolidity.Enabled)
                 buttonDragSolidity.Checked = false;
             pictureBoxLevel.Invalidate();
+            ToggleTilesets();
         }
         private void buttonToggleTileMods_Click(object sender, EventArgs e)
         {
@@ -1809,6 +1963,7 @@ namespace LAZYSHELL
             PasteClear();
             state.SolidMods = buttonToggleSolidMods.Checked;
             pictureBoxLevel.Invalidate();
+            ToggleTilesets();
         }
         private void buttonToggleNPCs_Click(object sender, EventArgs e)
         {
@@ -1851,7 +2006,7 @@ namespace LAZYSHELL
         private void buttonEditDraw_Click(object sender, EventArgs e)
         {
             state.Draw = buttonEditDraw.Checked;
-            ResetDrawButtons((ToolStripButton)sender);
+            Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (buttonEditDraw.Checked)
                 this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorDraw.cur");
             else if (!buttonEditDraw.Checked)
@@ -1862,7 +2017,7 @@ namespace LAZYSHELL
         private void buttonEditSelect_Click(object sender, EventArgs e)
         {
             state.Select = buttonEditSelect.Checked;
-            ResetDrawButtons((ToolStripButton)sender);
+            Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (state.Select)
                 this.pictureBoxLevel.Cursor = Cursors.Cross;
             else if (!state.Select)
@@ -1872,17 +2027,16 @@ namespace LAZYSHELL
         }
         private void selectAll_Click(object sender, EventArgs e)
         {
-            if (state.Select)
-            {
-                PasteClear();
-                overlay.Select = new Overlay.Selection(16, 0, 0, 1024, 1024);
-                pictureBoxLevel.Invalidate();
-            }
+            if (!state.Select)
+                buttonEditSelect.PerformClick();
+            PasteClear();
+            overlay.Select = new Overlay.Selection(16, 0, 0, 1024, 1024);
+            pictureBoxLevel.Invalidate();
         }
         private void buttonEditErase_Click(object sender, EventArgs e)
         {
             state.Erase = buttonEditErase.Checked;
-            ResetDrawButtons((ToolStripButton)sender);
+            Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (state.Erase)
                 this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorErase.cur");
             else if (!state.Erase)
@@ -1894,7 +2048,7 @@ namespace LAZYSHELL
         private void buttonEditDropper_Click(object sender, EventArgs e)
         {
             state.Dropper = buttonEditDropper.Checked;
-            ResetDrawButtons((ToolStripButton)sender);
+            Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (state.Dropper)
                 this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorDropper.cur");
             else if (!state.Dropper)
@@ -1906,7 +2060,7 @@ namespace LAZYSHELL
         private void buttonEditFill_Click(object sender, EventArgs e)
         {
             state.Fill = buttonEditFill.Checked;
-            ResetDrawButtons((ToolStripButton)sender);
+            Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (state.Fill)
                 this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorFill.cur");
             else if (!state.Fill)
@@ -1918,7 +2072,7 @@ namespace LAZYSHELL
         private void buttonEditTemplate_Click(object sender, EventArgs e)
         {
             state.Template = buttonEditTemplate.Checked;
-            ResetDrawButtons((ToolStripButton)sender);
+            Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (buttonEditTemplate.Checked)
                 this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorTemplate.cur");
             else if (!buttonEditTemplate.Checked)
@@ -1964,13 +2118,7 @@ namespace LAZYSHELL
         }
         private void buttonZoomIn_Click(object sender, EventArgs e)
         {
-            buttonEditTemplate.Checked = false;
-            buttonEditDraw.Checked = false;
-            buttonEditErase.Checked = false;
-            buttonEditDropper.Checked = false;
-            buttonEditFill.Checked = false;
-            buttonEditSelect.Checked = false;
-            buttonZoomOut.Checked = false;
+            Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (buttonZoomIn.Checked)
                 this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorZoomIn.cur");
             else if (!buttonZoomIn.Checked)
@@ -1978,36 +2126,16 @@ namespace LAZYSHELL
         }
         private void buttonZoomOut_Click(object sender, EventArgs e)
         {
-            buttonEditTemplate.Checked = false;
-            buttonEditDraw.Checked = false;
-            buttonEditErase.Checked = false;
-            buttonEditDropper.Checked = false;
-            buttonEditFill.Checked = false;
-            buttonEditSelect.Checked = false;
-            buttonZoomIn.Checked = false;
+            Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (buttonZoomOut.Checked)
                 this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorZoomOut.cur");
             else if (!buttonZoomOut.Checked)
                 this.pictureBoxLevel.Cursor = Cursors.Arrow;
         }
-        private void buttonZoomIn_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (buttonZoomIn.Checked)
-            //    pictureBoxLevel.ContextMenuStrip = null;
-            //else
-            //    pictureBoxLevel.ContextMenuStrip = contextMenuStrip1;
-        }
-        private void buttonZoomOut_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (buttonZoomOut.Checked)
-            //    pictureBoxLevel.ContextMenuStrip = null;
-            //else
-            //    pictureBoxLevel.ContextMenuStrip = contextMenuStrip1;
-        }
         private void buttonDragSolidity_Click(object sender, EventArgs e)
         {
             state.ClearDrawSelectErase();
-            ResetDrawButtons((ToolStripButton)sender);
+            Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             PasteClear();
             pictureBoxLevel.Invalidate();
         }
@@ -2070,20 +2198,95 @@ namespace LAZYSHELL
                 return;
             }
             int layer = 0;
-            index = tileMap.GetTileNum(0, mousePosition.X, mousePosition.Y);
+            index = tileMap.GetTileNum(0, mousePosition.X, mousePosition.Y, true);
             if (index == 0)
             {
                 layer++;
-                index = tileMap.GetTileNum(1, mousePosition.X, mousePosition.Y);
+                index = tileMap.GetTileNum(1, mousePosition.X, mousePosition.Y, true);
             }
             if (index == 0)
             {
                 layer++;
-                index = tileMap.GetTileNum(2, mousePosition.X, mousePosition.Y);
+                index = tileMap.GetTileNum(2, mousePosition.X, mousePosition.Y, true);
             }
             if (index != 0) // only if not all layers empty, otherwise stay at current layer tab
                 levelsTileset.Layer = layer;
             levelsTileset.MouseDownTile = index;
+        }
+        private void createTileModToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (overlay.Select == null)
+            {
+                MessageBox.Show("Must make a selection before creating a new tile mod.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (overlay.Select.Width / 16 >= 64 ||
+                overlay.Select.Height / 16 >= 64)
+            {
+                MessageBox.Show("Selection must be smaller than 64x64 tiles.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            levels.TabControl.SelectedIndex = 5;
+            bool instance = false;
+            if (levels.TileModsFieldTree.SelectedNode != null &&
+                levels.TileModsFieldTree.SelectedNode.Nodes.Count == 0 &&
+                levels.TileModsFieldTree.SelectedNode.Parent == null)
+                instance = MessageBox.Show("Create as an alternate tile mod?", "LAZY SHELL",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+            if (!instance && !levels.AddNewTileMod())
+                return;
+            if (instance && !levels.AddNewTileModInstance())
+                return;
+            if (!instance)
+            {
+                levels.TileModsX.Value = overlay.Select.X / 16;
+                levels.TileModsY.Value = overlay.Select.Y / 16;
+                levels.TileModsWidth.Value = overlay.Select.Width / 16;
+                levels.TileModsHeight.Value = overlay.Select.Height / 16;
+            }
+            bool[] empty = new bool[3];
+            byte[][] tilemaps = new byte[3][];
+            int width = instance ? tileMods.Width : overlay.Select.Width / 16;
+            int height = instance ? tileMods.Height : overlay.Select.Height / 16;
+            for (int l = 0; l < 3; l++)
+            {
+                if (l < 2)
+                    tilemaps[l] = new byte[(width * height) * 2];
+                else
+                    tilemaps[l] = new byte[width * height];
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        int tileX = overlay.Select.Location.X + (x * 16);
+                        int tileY = overlay.Select.Location.Y + (y * 16);
+                        int tile = this.tileMap.GetTileNum(l, tileX, tileY);
+                        if (tile != 0)
+                            empty[l] = false;
+                        int index = y * width + x;
+                        if (l < 2)
+                            Bits.SetShort(tilemaps[l], index * 2, (ushort)tile);
+                        else
+                            tilemaps[l][index] = (byte)tile;
+                    }
+                }
+                if (!instance)
+                {
+                    levels.TileModsLayers.SetItemChecked(l, !empty[l]);
+                    levels.tileModsLayers_SelectedIndexChanged(null, null);
+                    tileMods.TilemapsA[l] = tilemaps[l];
+                }
+                else
+                    tileMods.TilemapsB[l] = tilemaps[l];
+            }
+            if (!instance)
+                tileMods.TilemapA = new TileMap(level, tileSet, tileMods.Mod_, false);
+            else
+                tileMods.TilemapB = new TileMap(level, tileSet, tileMods.Mod_, true);
+            if (!buttonToggleTileMods.Checked)
+                buttonToggleTileMods.PerformClick();
+            tileMods.UpdateTilemaps();
+            pictureBoxLevel.Invalidate();
         }
         private void saveImageToolStripMenuItem_Click(object sender, EventArgs e)
         {

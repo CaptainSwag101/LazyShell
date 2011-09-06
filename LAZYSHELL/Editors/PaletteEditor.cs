@@ -14,6 +14,8 @@ namespace LAZYSHELL
     {
         #region Variables
         private bool updating = false;
+        private List<CheckBox> rows = new List<CheckBox>();
+        private List<CheckBox> cols = new List<CheckBox>();
         private Delegate update;
         private PaletteSet paletteSet;
         private PaletteSet paletteSetBackup;
@@ -47,6 +49,30 @@ namespace LAZYSHELL
             this.currentColor = start * 16;
 
             InitializeComponent();
+            // create checkbox rows
+            for (int i = 0; i < count - start; i++)
+            {
+                CheckBox checkBox = new CheckBox();
+                checkBox.Appearance = Appearance.Button;
+                checkBox.AutoSize = false;
+                checkBox.Checked = true;
+                checkBox.Location = new Point(12, i * 8 + 37);
+                checkBox.Size = new Size(8, 8);
+                this.rows.Add(checkBox);
+                this.Controls.Add(checkBox);
+            }
+            // create checkbox cols
+            for (int i = 0; i < 16; i++)
+            {
+                CheckBox checkBox = new CheckBox();
+                checkBox.Appearance = Appearance.Button;
+                checkBox.AutoSize = false;
+                checkBox.Checked = true;
+                checkBox.Location = new Point(i * 8 + 26, 23);
+                checkBox.Size = new Size(8, 8);
+                this.cols.Add(checkBox);
+                this.Controls.Add(checkBox);
+            }
 
             this.pictureBoxPalette.Height = (count * 8) - (start * 8);
             this.panel7.Height = (count * 8 + 4) - (start * 8);
@@ -73,6 +99,10 @@ namespace LAZYSHELL
             SetColorMapImage();
             SetPaletteImage();
             this.BringToFront();
+            foreach (CheckBox checkBox in rows)
+                checkBox.Checked = true;
+            foreach (CheckBox checkBox in cols)
+                checkBox.Checked = true;
         }
         #region Functions
         private void InitializeColor()
@@ -165,8 +195,10 @@ namespace LAZYSHELL
         }
         private void DoColorBalance()
         {
-            for (int i = start * 16; i < paletteSet.Palette.Length; i++)
+            for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
             {
+                if (!rows[o / 16].Checked || !cols[o % 16].Checked)
+                    continue;
                 int r = paletteSet.Reds[i];
                 int g = paletteSet.Greens[i];
                 int b = paletteSet.Blues[i];
@@ -199,12 +231,14 @@ namespace LAZYSHELL
             else
                 rgbB = paletteSet.Blues;
 
-            for (int c = start * 16; c < rgbA.Length; c++)
+            for (int i = start * 16, o = 0; i < rgbA.Length; i++, o++)
             {
-                int a = rgbA[c];
-                int b = rgbB[c];
-                rgbA[c] = b;
-                rgbB[c] = a;
+                if (!rows[o / 16].Checked || !cols[o % 16].Checked)
+                    continue;
+                int a = rgbA[i];
+                int b = rgbB[i];
+                rgbA[i] = b;
+                rgbB[i] = a;
             }
         }
         private void DoColorEquate()
@@ -225,18 +259,22 @@ namespace LAZYSHELL
             else
                 rgbB = paletteSet.Blues;
 
-            for (int c = start * 16; c < rgbA.Length; c++)
+            for (int i = start * 16, o = 0; i < rgbA.Length; i++, o++)
             {
-                int b = rgbB[c];
-                rgbA[c] = b;
+                if (!rows[o / 16].Checked || !cols[o % 16].Checked)
+                    continue;
+                int b = rgbB[i];
+                rgbA[i] = b;
             }
         }
         private void DoGreyscale()
         {
             if (greyscale.Checked)
             {
-                for (int i = start * 16; i < paletteSet.Palette.Length; i++)
+                for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
                 {
+                    if (!rows[o / 16].Checked || !cols[o % 16].Checked)
+                        continue;
                     int r = paletteSet.Reds[i];
                     int g = paletteSet.Greens[i];
                     int b = paletteSet.Blues[i];
@@ -252,8 +290,10 @@ namespace LAZYSHELL
         {
             if (negative.Checked)
             {
-                for (int i = start * 16; i < paletteSet.Palette.Length; i++)
+                for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
                 {
+                    if (!rows[o / 16].Checked || !cols[o % 16].Checked)
+                        continue;
                     paletteSet.Reds[i] ^= 248;
                     paletteSet.Greens[i] ^= 248;
                     paletteSet.Blues[i] ^= 248;
@@ -263,8 +303,10 @@ namespace LAZYSHELL
         private void DoBrightness()
         {
             if (brightness.Value == 0) return;
-            for (int i = start * 16; i < paletteSet.Palette.Length; i++)
+            for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
             {
+                if (!rows[o / 16].Checked || !cols[o % 16].Checked)
+                    continue;
                 int r = paletteSet.Reds[i];
                 int g = paletteSet.Greens[i];
                 int b = paletteSet.Blues[i];
@@ -277,8 +319,10 @@ namespace LAZYSHELL
         {
             if (this.contrast.Value == 0) return;
             double contrast = ((double)this.contrast.Value + 100) / 100.0;
-            for (int i = start * 16; i < paletteSet.Palette.Length; i++)
+            for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
             {
+                if (!rows[o / 16].Checked || !cols[o % 16].Checked)
+                    continue;
                 double r = paletteSet.Reds[i];
                 double g = paletteSet.Greens[i];
                 double b = paletteSet.Blues[i];
@@ -295,8 +339,10 @@ namespace LAZYSHELL
         private void DoThreshold()
         {
             if (!thresholdApply.Checked) return;
-            for (int i = start * 16; i < paletteSet.Palette.Length; i++)
+            for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
             {
+                if (!rows[o / 16].Checked || !cols[o % 16].Checked)
+                    continue;
                 int r = paletteSet.Reds[i];
                 int g = paletteSet.Greens[i];
                 int b = paletteSet.Blues[i];
@@ -315,8 +361,10 @@ namespace LAZYSHELL
 
             double h = (double)colorizeHue.Value / 255.0;
             double s = (double)colorizeSaturation.Value / 255.0;
-            for (int i = start * 16; i < paletteSet.Palette.Length; i++)
+            for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
             {
+                if (!rows[o / 16].Checked || !cols[o % 16].Checked)
+                    continue;
                 Color color = Color.FromArgb(paletteSet.Reds[i], paletteSet.Greens[i], paletteSet.Blues[i]);
                 double l = color.GetBrightness();
                 double r = 0, g = 0, b = 0;
@@ -1000,6 +1048,16 @@ namespace LAZYSHELL
         private void alwaysOnTop_CheckedChanged(object sender, EventArgs e)
         {
             this.TopMost = alwaysOnTop.Checked;
+        }
+        private void invertSelectedRows_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (CheckBox checkBox in rows)
+                checkBox.Checked = !checkBox.Checked;
+        }
+        private void invertSelectedCols_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (CheckBox checkBox in cols)
+                checkBox.Checked = !checkBox.Checked;
         }
         #endregion
     }

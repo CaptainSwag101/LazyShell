@@ -15,7 +15,7 @@ namespace LAZYSHELL
     public partial class WorldMaps : Form
     {
         #region Variables
-        
+
         private long checksum;
         // main
         private delegate void Function();
@@ -27,6 +27,8 @@ namespace LAZYSHELL
         private WorldMapTileSet tileSet;
         private Overlay overlay = new Overlay();
         private Bitmap tileSetImage, mapPointsImage;
+        private Bitmap mapPointImage;
+        private Bitmap mapPointImage_S;
         private Settings settings = Settings.Default;
         // mouse
         private int zoom = 1;
@@ -56,8 +58,6 @@ namespace LAZYSHELL
         // main
         public WorldMaps()
         {
-            checksum = Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
-                Model.WorldMapSprites, Model.WorldMapTileSets, Model.MapPoints);
             settings.Keystrokes[0x20] = "\x20";
             fontPalettes[0] = new PaletteSet(Model.Data, 0, 0x3DFEE0, 2, 16, 32);
             fontPalettes[1] = new PaletteSet(Model.Data, 0, 0x3E2D55, 2, 16, 32);
@@ -77,6 +77,8 @@ namespace LAZYSHELL
             LoadTileEditor();
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
             new History(this);
+            checksum = Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
+                Model.WorldMapSprites, Model.WorldMapTileSets, Model.MapPoints);
         }
         private void RefreshWorldMap()
         {
@@ -85,8 +87,8 @@ namespace LAZYSHELL
 
             this.worldMapTileset.Value = worldMap.Tileset;
             this.pointCount.Value = worldMap.PointCount;
-            this.worldMapXCoord.Value = worldMap.XCoord;
-            this.worldMapYCoord.Value = worldMap.YCoord;
+            this.worldMapXCoord.Value = worldMap.X;
+            this.worldMapYCoord.Value = worldMap.Y;
 
             AddWorldMapPoints();
             MapPoint temp;
@@ -373,7 +375,7 @@ namespace LAZYSHELL
         {
             pointActivePixels = new int[256 * 256];
             int[] pixels = new int[256 * 256];
-            int[] point = GetMapPointPixels();
+            int[] point = GetMapPointPixels(false);
             MapPoint temp;
 
             for (int i = 0; i < worldMap.PointCount; i++)
@@ -396,7 +398,7 @@ namespace LAZYSHELL
             }
             return pixels;
         }
-        private int[] GetMapPointPixels()
+        private int[] GetMapPointPixels(bool hilite)
         {
             int[] pixels = new int[8 * 16];
 
@@ -407,8 +409,16 @@ namespace LAZYSHELL
             {
                 for (int x = 0; x < 8; x++)
                 {
-                    pixels[y * 16 + x] = tempA.Pixels[y * 8 + x];
-                    pixels[y * 16 + x + 8] = tempB.Pixels[y * 8 + x];
+                    if (!hilite)
+                    {
+                        pixels[y * 16 + x] = tempA.Pixels[y * 8 + x];
+                        pixels[y * 16 + x + 8] = tempB.Pixels[y * 8 + x];
+                    }
+                    else
+                    {
+                        pixels[y * 16 + x] = tempA.Pixels[y * 8 + x] / 2 | (0xFF << 32);
+                        pixels[y * 16 + x + 8] = tempB.Pixels[y * 8 + x] / 2 | (0xFF << 32);
+                    }
                 }
             }
 
@@ -571,7 +581,9 @@ namespace LAZYSHELL
             {
                 for (int x = 0; x < buffer.Width / 16; x++)
                 {
-                    if (y + y_ < 0 || x + x_ < 0) continue;
+                    if (y + y_ < 0 || y + y_ >= 16 ||
+                        x + x_ < 0 || x + x_ >= 16)
+                        continue;
                     Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileSet.TileSetLayer[(y + y_) * 16 + x + x_] = tile.Copy();
                     tileSet.TileSetLayer[(y + y_) * 16 + x + x_].TileIndex = (y + y_) * 16 + x + x_;
@@ -656,6 +668,9 @@ namespace LAZYSHELL
             tileEditor.Close();
             paletteEditor.Close();
             graphicEditor.Close();
+            tileEditor.Dispose();
+            paletteEditor.Dispose();
+            graphicEditor.Dispose();
         }
         private void worldMapName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -670,8 +685,10 @@ namespace LAZYSHELL
                 if (draggedTiles != null)
                     PasteFinal(draggedTiles);
                 overlay.SelectTS = null;
-                pictureBoxTileset.Cursor = Cursors.Arrow;
+                pictureBoxTileset.Cursor = Cursors.SizeAll;
             }
+            else
+                pictureBoxTileset.Cursor = Cursors.Arrow;
             pictureBoxTileset.Invalidate();
         }
         private void pointCount_ValueChanged(object sender, EventArgs e)
@@ -694,13 +711,13 @@ namespace LAZYSHELL
         private void worldMapXCoord_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            worldMap.XCoord = (byte)worldMapXCoord.Value;
+            worldMap.X = (sbyte)worldMapXCoord.Value;
             pictureBoxTileset.Invalidate();
         }
         private void worldMapYCoord_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            worldMap.YCoord = (byte)worldMapYCoord.Value;
+            worldMap.Y = (sbyte)worldMapYCoord.Value;
             pictureBoxTileset.Invalidate();
         }
         // image
@@ -715,8 +732,8 @@ namespace LAZYSHELL
                 rdst.Y -= 8;
                 rdst.Width = (int)Do.PercentIncrease(third, 256.0);
                 rdst.Height = (int)Do.PercentIncrease(third, 256.0);
-                double x = (sbyte)((worldMap.XCoord ^ 0xFF) + 1);
-                double y = (sbyte)((worldMap.YCoord ^ 0xFF) + 1);
+                double x = worldMap.X;
+                double y = worldMap.Y;
                 x = (int)Do.PercentIncrease(third, x);
                 y = (int)Do.PercentIncrease(third, y);
                 x -= Do.PercentDecrease(third, 256) / 4.0;
@@ -729,8 +746,20 @@ namespace LAZYSHELL
 
             if (tileSetImage != null)
                 e.Graphics.DrawImage(tileSetImage, rdst, 0, 0, 256, 256, GraphicsUnit.Pixel);
-            if (mapPointsImage != null && showMapPoints.Checked)
-                e.Graphics.DrawImage(mapPointsImage, 0, 0);
+            if (showMapPoints.Checked)
+            {
+                foreach (MapPoint mapPoint in worldMapPoints[index])
+                {
+                    if (mapPointImage == null)
+                        mapPointImage = new Bitmap(Do.PixelsToImage(GetMapPointPixels(false), 16, 8));
+                    if (mapPointImage_S == null)
+                        mapPointImage_S = new Bitmap(Do.PixelsToImage(GetMapPointPixels(true), 16, 8));
+                    if (mapPoint.Index == mapPointNum.Value)
+                        e.Graphics.DrawImage(mapPointImage_S, mapPoint.X, mapPoint.Y);
+                    else
+                        e.Graphics.DrawImage(mapPointImage, mapPoint.X, mapPoint.Y);
+                }
+            }
             if (moving && selection != null)
             {
                 Rectangle rsrc = new Rectangle(0, 0, overlay.SelectTS.Width, overlay.SelectTS.Height);
@@ -738,6 +767,8 @@ namespace LAZYSHELL
                     overlay.SelectTS.X * zoom, overlay.SelectTS.Y * zoom,
                     rsrc.Width * zoom, rsrc.Height * zoom);
                 e.Graphics.DrawImage(new Bitmap(selection), rdst, rsrc, GraphicsUnit.Pixel);
+                Do.DrawString(e.Graphics, new Point(rdst.X, rdst.Y + rdst.Height),
+                    "click/drag", Color.White, Color.Black, new Font("Tahoma", 6.75F, FontStyle.Bold));
             }
 
             float[][] matrixItems ={ 
@@ -808,6 +839,12 @@ namespace LAZYSHELL
                     mouseDownObject = "location";
                     SetWorldMapPointsImage();
                 }
+                else
+                {
+                    diffX = (int)(x - worldMapXCoord.Value);
+                    diffY = (int)(y - worldMapYCoord.Value);
+                    mouseDownObject = "tileset";
+                }
             }
             mouseDownTile = y / 16 * 16 + (x / 16);
             LoadTileEditor();
@@ -848,11 +885,15 @@ namespace LAZYSHELL
                     {
                         x = Math.Max(0, Math.Min(e.X - diffX, pictureBoxTileset.Width));
                         y = Math.Max(0, Math.Min(e.Y - diffY, pictureBoxTileset.Height));
-                        if (mapPointXCoord.Value != x && mapPointYCoord.Value != y)
-                            updating = true;
-                        mapPointXCoord.Value = x;
-                        updating = false;
-                        mapPointYCoord.Value = y;
+                        mapPointXCoord.Value = Math.Min(255, x);
+                        mapPointYCoord.Value = Math.Min(255, y);
+                    }
+                    if (mouseDownObject == "tileset")
+                    {
+                        x = Math.Max(-128, Math.Min(e.X - diffX, pictureBoxTileset.Width));
+                        y = Math.Max(-128, Math.Min(e.Y - diffY, pictureBoxTileset.Height));
+                        worldMapXCoord.Value = Math.Min(127, x);
+                        worldMapYCoord.Value = Math.Min(127, y);
                     }
                 }
                 else
@@ -860,14 +901,14 @@ namespace LAZYSHELL
                     if (pointActivePixels[e.Y * 256 + e.X] != 0)
                         pictureBoxTileset.Cursor = Cursors.Hand;
                     else
-                        pictureBoxTileset.Cursor = Cursors.Arrow;
+                        pictureBoxTileset.Cursor = Cursors.SizeAll;
                 }
             }
             pictureBoxTileset.Invalidate();
         }
         private void pictureBoxTileset_MouseUp(object sender, MouseEventArgs e)
         {
-
+            SetWorldMapPointsImage();
         }
         private void pictureBoxTileset_MouseClick(object sender, MouseEventArgs e)
         {
@@ -998,7 +1039,7 @@ namespace LAZYSHELL
         private void resetWorldMapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current world map. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             int pointer = Bits.GetShort(Model.Data, worldMap.Tileset * 2 + 0x3E0014);
             int offset = 0x3E0000 + pointer + 1;
@@ -1009,10 +1050,12 @@ namespace LAZYSHELL
         private void resetMapPointToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current map point. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             mapPoint = new MapPoint(Model.Data, index_l);
+            AddWorldMapPoints();
             RefreshMapPointEditor();
+            SetWorldMapPointsImage();
         }
         // context menu strip
         private void mirrorToolStripMenuItem_Click(object sender, EventArgs e)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -13,6 +14,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
 using LAZYSHELL.Previewer;
@@ -27,6 +29,7 @@ namespace LAZYSHELL
     public static class Do
     {
         private static ProgressBar ProgressBar;
+        private static Stopwatch StopWatch;
         #region Drawing
         /// <summary>
         /// Applys a palette to a pixel array.
@@ -438,7 +441,7 @@ namespace LAZYSHELL
                 {
                     MessageBox.Show(
                         "Imported graphics were too large to fit into the tileset.",
-                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 }
                 culledTileset[c * tileLength] = (byte)(tile.TileIndex + tileIndexStart);
@@ -797,156 +800,6 @@ namespace LAZYSHELL
             }
             Array.Resize<byte>(ref culledGraphics, tiles_b.Count * format);
             return culledGraphics;
-        }
-        public static void ImageToTilemap(ref Bitmap[] images, ref int[] palette, int moldIndex, byte format,
-            ref byte[] graphics_, ref Tile16x16[] tiles_, ref byte[][] tilemaps_, bool newPalette)
-        {
-            int count = images.Length;
-            int width = images[0].Width / 16 * 16;
-            if (images[0].Width % 16 != 0) width += 16;
-            int height = images[0].Height / 16 * 16;
-            if (images[0].Height % 16 != 0) height += 16;
-            // pad dimensions to multiples of 16
-            Bitmap[] resized = new Bitmap[count];//(width, height);
-            for (int i = 0; i < resized.Length; i++)
-            {
-                resized[i] = new Bitmap(width, height);
-                Graphics temp = Graphics.FromImage(resized[i]);
-                temp.DrawImage(images[i], 0, 0, images[i].Width, images[i].Height);
-            }
-            // declare stuff
-            int[][] pixels = new int[count][];
-            byte[][] graphics = new byte[count][];
-            byte[][] graphicsCulled = new byte[count][];
-            byte[][] tilesets = new byte[count][];
-            Tile16x16[][] tiles = new Tile16x16[count][];//[(width / 16) * (height / 16)];
-            byte[][] tilemaps = new byte[count][];
-            int graphicsLength = 0;
-            int[] reducedPalette = null;
-            if (moldIndex < count)
-            {
-                pixels[moldIndex] = ImageToPixels(resized[moldIndex]);
-                // convert to BPP, create culled graphics
-                graphics[moldIndex] = new byte[0x10000]; // a BPP format copy of the original image
-                if (!newPalette)
-                    reducedPalette = palette;
-                else
-                    reducedPalette = Do.ReduceColorDepth(pixels[moldIndex], format == 0x10 ? 4 : 16, palette[0]);
-                PixelsToBPP(pixels[moldIndex], graphics[moldIndex], new Size(width / 8, height / 8), reducedPalette, format);
-                graphicsCulled[moldIndex] = CullGraphics(graphics[moldIndex], palette, format, false);
-                graphicsLength += graphicsCulled[moldIndex].Length;
-            }
-            for (int i = 0; i < count; i++)
-            {
-                if (i == moldIndex && moldIndex < count)
-                    continue;
-                // convert to pixels
-                pixels[i] = ImageToPixels(resized[i]);
-                // convert to BPP, create culled graphics
-                graphics[i] = new byte[0x10000]; // a BPP format copy of the original image
-                if (reducedPalette == null)
-                    reducedPalette = Do.ReduceColorDepth(pixels[i], format == 0x10 ? 4 : 16, palette[0]);
-                PixelsToBPP(pixels[i], graphics[i], new Size(width / 8, height / 8), reducedPalette, format);
-                graphicsCulled[i] = CullGraphics(graphics[i], palette, format, false);
-                graphicsLength += graphicsCulled[i].Length;
-            }
-            // combine all images' graphics into one array
-            byte[] culledGraphics = new byte[graphicsLength];
-            for (int i = 0, position = 0; i < graphicsCulled.Length; i++)
-            {
-                graphicsCulled[i].CopyTo(culledGraphics, position);
-                position += graphicsCulled[i].Length;
-            }
-            // convert to raw tileset
-            for (int i = 0; i < tilesets.Length; i++)
-            {
-                tilesets[i] = new byte[0x1000];
-                for (int y = 0; y < height / 8; y++)
-                {
-                    for (int x = 0; x < width / 8; x++)
-                    {
-                        int index = y * (width / 8) + x;
-                        Tile8x8 subtileA = DrawTile8x8((ushort)index, 0x20, graphics[i], reducedPalette, format);
-                        for (int a = 0; a < culledGraphics.Length / format; a++)
-                        {
-                            Tile8x8 subtileB = DrawTile8x8((ushort)a, 0x20, culledGraphics, reducedPalette, format);
-                            if (Bits.Compare(subtileA.Pixels, subtileB.Pixels))
-                            {
-                                tilesets[i][index * 2] = (byte)a;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            // convert raw tileset data to array of Tile16x16[]
-            for (int i = 0; i < tiles.Length; i++)
-            {
-                tiles[i] = new Tile16x16[(width / 16) * (height / 16)];
-                for (int a = 0; a < tiles[i].Length; a++)
-                    tiles[i][a] = new Tile16x16(a);
-            }
-            int tilesLength = 0;
-            for (int i = 0; i < tiles.Length; i++)
-            {
-                for (int y = 0; y < height / 16; y++)
-                {
-                    for (int x = 0; x < width / 16; x++)
-                    {
-                        int index = y * (width / 16) + x;
-                        for (int z = 0; z < 4; z++)
-                        {
-                            int offset = y * (width / 2) + (x * 4);
-                            if (z % 2 == 1)
-                                offset += 2;
-                            if (z / 2 == 1)
-                                offset += (width / 8) * 2;
-                            ushort tile = tilesets[i][offset];
-                            byte prop = tilesets[i][offset + 1];
-                            Tile8x8 source = DrawTile8x8(tile, prop, culledGraphics, reducedPalette, format);
-                            tiles[i][index].Subtiles[z] = source;
-                        }
-                    }
-                }
-                // cull tileset
-                CullTileset(ref tiles[i]);
-                tilesLength += tiles[i].Length;
-            }
-            // combine into one tileset
-            Tile16x16[] culledTiles = new Tile16x16[tilesLength];
-            for (int i = 0, position = 0; i < tiles.Length; i++)
-            {
-                tiles[i].CopyTo(culledTiles, position);
-                position += tiles[i].Length;
-            }
-            // draw tilemap
-            for (int i = 0; i < tilemaps.Length; i++)
-            {
-                tilemaps[i] = new byte[(width / 16) * (height / 16)];
-                //pixels[i] = ImageToPixels(resized[i]);
-                for (int y = 0; y < height / 16; y++)
-                {
-                    for (int x = 0; x < width / 16; x++)
-                    {
-                        int index = y * (width / 16) + x;
-                        Rectangle region = new Rectangle(x * 16, y * 16, 16, 16);
-                        int[] regionA = GetPixelRegion(graphics[i], format, reducedPalette, width / 8, x * 2, y * 2, 2, 2, 0);
-                        for (int a = 0; a < culledTiles.Length; a++)
-                        {
-                            if (Bits.Compare(regionA, culledTiles[a].Pixels))
-                            {
-                                tilemaps[i][index] = (byte)a;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            images[0] = resized[0];
-            palette = reducedPalette;
-            graphics_ = culledGraphics;
-            tiles_ = culledTiles;
-            tilemaps_ = tilemaps;
         }
         /// <summary>
         /// Reorder indexes of tiles in a tileset based on duplicates.
@@ -2174,6 +2027,156 @@ namespace LAZYSHELL
             }
             return temp;
         }
+        public static void ImageToTilemap(ref Bitmap[] images, ref int[] palette, int moldIndex, byte format,
+            ref byte[] graphics_, ref Tile16x16[] tiles_, ref byte[][] tilemaps_, bool newPalette)
+        {
+            int count = images.Length;
+            int width = Math.Min(256, images[0].Width / 16 * 16);
+            if (images[0].Width % 16 != 0) width += 16;
+            int height = Math.Min(256, images[0].Height / 16 * 16);
+            if (images[0].Height % 16 != 0) height += 16;
+            // pad dimensions to multiples of 16
+            Bitmap[] resized = new Bitmap[count];//(width, height);
+            for (int i = 0; i < resized.Length; i++)
+            {
+                resized[i] = new Bitmap(width, height);
+                Graphics temp = Graphics.FromImage(resized[i]);
+                temp.DrawImage(images[i], 0, 0, Math.Min(256, images[i].Width), Math.Min(256, images[i].Height));
+            }
+            // declare stuff
+            int[][] pixels = new int[count][];
+            byte[][] graphics = new byte[count][];
+            byte[][] graphicsCulled = new byte[count][];
+            byte[][] tilesets = new byte[count][];
+            Tile16x16[][] tiles = new Tile16x16[count][];//[(width / 16) * (height / 16)];
+            byte[][] tilemaps = new byte[count][];
+            int graphicsLength = 0;
+            int[] reducedPalette = null;
+            if (moldIndex < count)
+            {
+                pixels[moldIndex] = ImageToPixels(resized[moldIndex]);
+                // convert to BPP, create culled graphics
+                graphics[moldIndex] = new byte[0x10000]; // a BPP format copy of the original image
+                if (!newPalette)
+                    reducedPalette = palette;
+                else
+                    reducedPalette = Do.ReduceColorDepth(pixels[moldIndex], format == 0x10 ? 4 : 16, palette[0]);
+                PixelsToBPP(pixels[moldIndex], graphics[moldIndex], new Size(width / 8, height / 8), reducedPalette, format);
+                graphicsCulled[moldIndex] = CullGraphics(graphics[moldIndex], palette, format, false);
+                graphicsLength += graphicsCulled[moldIndex].Length;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                if (i == moldIndex && moldIndex < count)
+                    continue;
+                // convert to pixels
+                pixels[i] = ImageToPixels(resized[i]);
+                // convert to BPP, create culled graphics
+                graphics[i] = new byte[0x10000]; // a BPP format copy of the original image
+                if (reducedPalette == null)
+                    reducedPalette = Do.ReduceColorDepth(pixels[i], format == 0x10 ? 4 : 16, palette[0]);
+                PixelsToBPP(pixels[i], graphics[i], new Size(width / 8, height / 8), reducedPalette, format);
+                graphicsCulled[i] = CullGraphics(graphics[i], palette, format, false);
+                graphicsLength += graphicsCulled[i].Length;
+            }
+            // combine all images' graphics into one array
+            byte[] culledGraphics = new byte[graphicsLength];
+            for (int i = 0, position = 0; i < graphicsCulled.Length; i++)
+            {
+                graphicsCulled[i].CopyTo(culledGraphics, position);
+                position += graphicsCulled[i].Length;
+            }
+            // convert to raw tileset
+            for (int i = 0; i < tilesets.Length; i++)
+            {
+                tilesets[i] = new byte[0x1000];
+                for (int y = 0; y < height / 8; y++)
+                {
+                    for (int x = 0; x < width / 8; x++)
+                    {
+                        int index = y * (width / 8) + x;
+                        Tile8x8 subtileA = DrawTile8x8((ushort)index, 0x20, graphics[i], reducedPalette, format);
+                        for (int a = 0; a < culledGraphics.Length / format; a++)
+                        {
+                            Tile8x8 subtileB = DrawTile8x8((ushort)a, 0x20, culledGraphics, reducedPalette, format);
+                            if (Bits.Compare(subtileA.Pixels, subtileB.Pixels))
+                            {
+                                tilesets[i][index * 2] = (byte)a;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            // convert raw tileset data to array of Tile16x16[]
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                tiles[i] = new Tile16x16[(width / 16) * (height / 16)];
+                for (int a = 0; a < tiles[i].Length; a++)
+                    tiles[i][a] = new Tile16x16(a);
+            }
+            int tilesLength = 0;
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                for (int y = 0; y < height / 16; y++)
+                {
+                    for (int x = 0; x < width / 16; x++)
+                    {
+                        int index = y * (width / 16) + x;
+                        for (int z = 0; z < 4; z++)
+                        {
+                            int offset = y * (width / 2) + (x * 4);
+                            if (z % 2 == 1)
+                                offset += 2;
+                            if (z / 2 == 1)
+                                offset += (width / 8) * 2;
+                            ushort tile = tilesets[i][offset];
+                            byte prop = tilesets[i][offset + 1];
+                            Tile8x8 source = DrawTile8x8(tile, prop, culledGraphics, reducedPalette, format);
+                            tiles[i][index].Subtiles[z] = source;
+                        }
+                    }
+                }
+                // cull tileset
+                CullTileset(ref tiles[i]);
+                tilesLength += tiles[i].Length;
+            }
+            // combine into one tileset
+            Tile16x16[] culledTiles = new Tile16x16[tilesLength];
+            for (int i = 0, position = 0; i < tiles.Length; i++)
+            {
+                tiles[i].CopyTo(culledTiles, position);
+                position += tiles[i].Length;
+            }
+            // draw tilemap
+            for (int i = 0; i < tilemaps.Length; i++)
+            {
+                tilemaps[i] = new byte[(width / 16) * (height / 16)];
+                //pixels[i] = ImageToPixels(resized[i]);
+                for (int y = 0; y < height / 16; y++)
+                {
+                    for (int x = 0; x < width / 16; x++)
+                    {
+                        int index = y * (width / 16) + x;
+                        Rectangle region = new Rectangle(x * 16, y * 16, 16, 16);
+                        int[] regionA = GetPixelRegion(graphics[i], format, reducedPalette, width / 8, x * 2, y * 2, 2, 2, 0);
+                        for (int a = 0; a < culledTiles.Length; a++)
+                        {
+                            if (Bits.Compare(regionA, culledTiles[a].Pixels))
+                            {
+                                tilemaps[i][index] = (byte)a;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            images[0] = resized[0];
+            palette = reducedPalette;
+            graphics_ = culledGraphics;
+            tiles_ = culledTiles;
+            tilemaps_ = tilemaps;
+        }
         /// <summary>
         /// Draws a pixel array from a set of colors in a palette set.
         /// </summary>
@@ -2564,6 +2567,16 @@ namespace LAZYSHELL
                 }
             }
             return pixels;
+        }
+        public static bool WithinBounds(Rectangle regionA, Rectangle regionB)
+        {
+            if (regionA.X > regionB.X + regionB.Width || 
+                regionA.Y > regionB.Y + regionB.Height)
+                return false;
+            if (regionA.X + regionA.Width < regionB.X || 
+                regionA.Y + regionA.Height < regionB.Y)
+                return false;
+            return true;
         }
         #endregion
         #region Coloring
@@ -2985,6 +2998,22 @@ namespace LAZYSHELL
                 int b = Math.Min(255, color.B + (tint.B / 2));
                 src[i] = Color.FromArgb(r, g, b).ToArgb();
             }
+        }
+        public static Bitmap Hilite(Bitmap image, int width, int height)
+        {
+            int[] src = Do.ImageToPixels(image);
+            int[] dst = new int[src.Length];
+            for (int i = 0; i < src.Length; i++)
+            {
+                if (src[i] == 0) continue;
+                Color color = Color.FromArgb(src[i]);
+                int l = (int)(color.GetBrightness() * 255);
+                int r = Math.Min(255, 255 + l);
+                int g = Math.Min(255, l);
+                int b = Math.Min(255, 255 + l);
+                dst[i] = Color.FromArgb(r, g, b).ToArgb();
+            }
+            return new Bitmap(Do.PixelsToImage(dst, width, height));
         }
         #endregion
         #region Text
@@ -3858,6 +3887,86 @@ namespace LAZYSHELL
         {
             return GetSelectedIndex(listView, false);
         }
+        public static void ResetToolStripButtons(ToolStrip toolstrip, ToolStripButton skip1, ToolStripButton skip2)
+        {
+            foreach (ToolStripItem item in toolstrip.Items)
+                if (item.GetType() == typeof(ToolStripButton))
+                    if (item != skip1 && item != skip2)
+                        ((ToolStripButton)item).Checked = false;
+        }
+        public static void ResetToolStripButtons(ToolStrip toolstrip, ToolStripButton skip1)
+        {
+            ResetToolStripButtons(toolstrip, skip1, null);
+        }
+        public static void ResetToolStripButtons(ToolStrip toolstrip)
+        {
+            ResetToolStripButtons(toolstrip, null, null);
+        }
+        public static void AlertLabel(ToolStripLabel labelAlert, string message, Color color)
+        {
+            new Thread(unused => AlertLabelThread(labelAlert, message, color)).Start();
+        }
+        private static void AlertLabelThread(ToolStripLabel labelAlert, string message, Color color)
+        {
+            Color backcolor = labelAlert.BackColor;
+            labelAlert.Visible = true;
+            labelAlert.Text = message;
+            for (int i = 0; i < 3; i++)
+            {
+                labelAlert.BackColor = color;
+                Thread.Sleep(500);
+                labelAlert.BackColor = backcolor;
+                Thread.Sleep(500);
+            }
+            //int r = color.R;
+            //int g = color.G;
+            //int b = color.B;
+            //while (color.ToArgb() != backcolor.ToArgb())
+            //{
+            //    if (r > backcolor.R)
+            //        r--;
+            //    else if (r < backcolor.R)
+            //        r++;
+            //    if (g > backcolor.G)
+            //        g--;
+            //    else if (g < backcolor.G)
+            //        g++;
+            //    if (b > backcolor.B)
+            //        b--;
+            //    else if (b < backcolor.B)
+            //        b++;
+            //    color = Color.FromArgb(r, g, b);
+            //    labelAlert.BackColor = color;
+            //    Thread.Sleep(1);
+            //}
+            //labelAlert.BackColor = SystemColors.Control;
+            Thread.Sleep(500);
+            labelAlert.Text = "";
+            labelAlert.Visible = false;
+        }
+        public static void DrawString(Graphics g, Point p, string text, Color forecolor, Color backcolor, Font font)
+        {
+            RectangleF rdst = new RectangleF(new PointF(p.X, p.Y),
+                g.MeasureString(text, font, new PointF(0, 0), StringFormat.GenericDefault));
+            g.FillRectangle(new SolidBrush(Color.FromArgb(192, backcolor)), rdst);
+            g.DrawString(text, font,
+                new SolidBrush(forecolor), new PointF(rdst.X, rdst.Y));
+        }
+        public static string BitArrayToString(byte[] array, int bytesperline, bool tagoffset, bool tagsuboffset, int offsetstart)
+        {
+            string text = "ROM    | ANIM   | DATA\r\n-------+--------+-------------------------------------------------\r\n";
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i != 0 && i % bytesperline == 0)
+                    text += "\r\n";
+                if (i % bytesperline == 0 && tagoffset)
+                    text += (i + offsetstart).ToString("X6") + " | ";
+                if (i % bytesperline == 0 && tagsuboffset)
+                    text += i.ToString("X6") + " | ";
+                text += array[i].ToString("X2") + " ";
+            }
+            return text;
+        }
         #endregion
         #region LAZYSHELL Functions
         public static bool Compare(Tile8x8 subtileA, Tile8x8 subtileB)
@@ -3917,47 +4026,51 @@ namespace LAZYSHELL
                         foreach (byte[] array in (byte[][])OBJECT)
                         {
                             for (int i = 0; array != null && i < array.Length; i++)
-                                check += array[i];
+                                check += (byte)(array[i] * i + array[i]);
                         }
                         continue;
                     }
+                    // Effect animation
                     else if (OBJECT.GetType() == typeof(E_Animation[]))
                     {
                         foreach (E_Animation ea in (E_Animation[])OBJECT)
                         {
                             bytes = ea.SM;
                             for (int i = 0; i < bytes.Length; i++)
-                                check += bytes[i];
+                                check += (byte)(bytes[i] * i + bytes[i]);
                         }
                         continue;
                     }
+                    // Event script
                     else if (OBJECT.GetType() == typeof(EventScript[]))
                     {
                         foreach (EventScript es in (EventScript[])OBJECT)
                         {
                             bytes = es.Script;
                             for (int i = 0; i < bytes.Length; i++)
-                                check += bytes[i];
+                                check += (byte)(bytes[i] * i + bytes[i]);
                         }
                         continue;
                     }
+                    // Action script
                     else if (OBJECT.GetType() == typeof(ActionQueue[]))
                     {
                         foreach (ActionQueue ac in (ActionQueue[])OBJECT)
                         {
                             bytes = ac.ActionQueueData;
                             for (int i = 0; i < bytes.Length; i++)
-                                check += bytes[i];
+                                check += (byte)(bytes[i] * i + bytes[i]);
                         }
                         continue;
                     }
+                    // Sprite animation
                     else if (OBJECT.GetType() == typeof(Animation[]))
                     {
                         foreach (Animation sa in (Animation[])OBJECT)
                         {
                             bytes = sa.SM;
                             for (int i = 0; i < bytes.Length; i++)
-                                check += bytes[i];
+                                check += (byte)(bytes[i] * i + bytes[i]);
                         }
                         continue;
                     }
@@ -3969,7 +4082,7 @@ namespace LAZYSHELL
                         bytes = ms.ToArray();
                     }
                     for (int i = 0; i < bytes.Length; i++)
-                        check += bytes[i];
+                        check += (byte)(bytes[i] * i + bytes[i]);
                 }
                 return check;
             }
@@ -3986,6 +4099,93 @@ namespace LAZYSHELL
                     return tileset[i];
             }
             return null;
+        }
+        public static void StopWatchStart()
+        {
+            StopWatch = new Stopwatch();
+            StopWatch.Start();
+        }
+        public static void StopWatchStop(bool showMessage)
+        {
+            StopWatch.Stop();
+            if (!showMessage) return;
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan ts = StopWatch.Elapsed;
+            // Format and display the TimeSpan value.
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            MessageBox.Show(elapsedTime);
+        }
+        public static void StopWatchStop()
+        {
+            StopWatchStop(false);
+        }
+        public static void AddHistory(Form form, int index, TreeNode node, string action)
+        {
+            try
+            {
+                if (node == null) return;
+                string text = action + " | index " + index + ", offset 0x" + node.Text.Substring(1, 6) + " | ";
+                text += "Form \"" + form.Name + "\" | " + DateTime.Now.ToString() + "\r\n";
+                Model.History = Model.History.Insert(0, text);
+            }
+            catch { }
+        }
+        public static void AddHistory(Form form, int index, string action)
+        {
+            try
+            {
+                string text = action + " | index " + index + " | ";
+                text += "Form \"" + form.Name + "\" | " + DateTime.Now.ToString();
+                Model.History = Model.History.Insert(0, text);
+            }
+            catch { }
+        }
+        public static void AddHistory(string message)
+        {
+            string text = message + " | " + DateTime.Now.ToString() + "\r\n";
+            Model.History = Model.History.Insert(0, text);
+        }
+        public static void CompareImages()
+        {
+            string results = "";
+            // first, open and create directory
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            folderBrowserDialog1.SelectedPath = Settings.Default.LastDirectory;
+            folderBrowserDialog1.Description = "Select source directory of images";
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                Settings.Default.LastDirectory = folderBrowserDialog1.SelectedPath;
+            else
+                return;
+            string source = folderBrowserDialog1.SelectedPath;
+            folderBrowserDialog1 = new FolderBrowserDialog();
+            folderBrowserDialog1.SelectedPath = Settings.Default.LastDirectory;
+            folderBrowserDialog1.Description = "Select source directory of images";
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                Settings.Default.LastDirectory = folderBrowserDialog1.SelectedPath;
+            else
+                return;
+            string target = folderBrowserDialog1.SelectedPath;
+            string[] sourceFiles = Directory.GetFiles(source);
+            string[] targetFiles = Directory.GetFiles(target);
+            for (int i = 0; i < sourceFiles.Length && i < targetFiles.Length; i++)
+            {
+                FileStream sourceFile = File.OpenRead(sourceFiles[i]);
+                FileStream targetFile = File.OpenRead(targetFiles[i]);
+                BinaryReader sourceReader = new BinaryReader(sourceFile);
+                BinaryReader targetReader = new BinaryReader(targetFile);
+                if (sourceFile.Length != targetFile.Length)
+                {
+                    results += "Mismatched index: " + i + "\r\n";
+                    continue;
+                }
+                byte[] sourceBytes = sourceReader.ReadBytes((int)sourceFile.Length);
+                byte[] targetBytes = targetReader.ReadBytes((int)targetFile.Length);
+                if (!Bits.Compare(sourceBytes, targetBytes))
+                    results += "Mismatched index: " + i + "\r\n";
+            }
+            NewMessage.Show("MISMATCHED INDEXES", "Found the following mismatched indexes", results);
         }
         #endregion
         #region Math Functions

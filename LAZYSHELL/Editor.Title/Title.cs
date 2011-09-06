@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public partial class Title : Form
     {
         #region Variables
-        
+
         private long checksum;
         // main
         private delegate void Function();
@@ -31,6 +31,7 @@ namespace LAZYSHELL
             }
         }
         private Bitmap[] tilesetImage = new Bitmap[3];
+        private int height { get { return layer < 2 ? 32 : 6; } }
         // mouse
         private Point mousePosition;
         private Point mouseDownPosition;
@@ -64,8 +65,6 @@ namespace LAZYSHELL
         #region Functions
         public Title()
         {
-            checksum = Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
-            //
             InitializeComponent();
             Do.AddShortcut(toolStrip1, Keys.Control | Keys.S, new EventHandler(save_Click));
             SetTilesetImages();
@@ -77,6 +76,8 @@ namespace LAZYSHELL
             LoadSpriteGraphicEditor();
             GC.Collect();
             new History(this);
+            //
+            checksum = Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
         }
         // set images
         private void SetTilesetImage()
@@ -270,7 +271,9 @@ namespace LAZYSHELL
             {
                 for (int x = 0; x < buffer.Width / 16; x++)
                 {
-                    if (y + y_ < 0 || x + x_ < 0) continue;
+                    if (y + y_ < 0 || y + y_ >= height ||
+                        x + x_ < 0 || x + x_ >= 16) 
+                        continue;
                     Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileSet.TileSetLayers[layer][(y + y_) * 16 + x + x_] = tile.Copy();
                     tileSet.TileSetLayers[layer][(y + y_) * 16 + x + x_].TileIndex = (y + y_) * 16 + x + x_;
@@ -493,7 +496,12 @@ namespace LAZYSHELL
             spritePaletteEditor.Close();
             spriteGraphicEditor.Close();
             tileEditor.Close();
-        }
+            paletteEditor.Dispose();
+            graphicEditor.Dispose();
+            spritePaletteEditor.Dispose();
+            spriteGraphicEditor.Dispose();
+            tileEditor.Dispose();
+       }
         private void tabControl2_Deselecting(object sender, TabControlCancelEventArgs e)
         {
             mouseDownTile = 0;
@@ -535,6 +543,8 @@ namespace LAZYSHELL
                 Rectangle rsrc = new Rectangle(0, 0, overlay.SelectTS.Width, overlay.SelectTS.Height);
                 rdst = new Rectangle(overlay.SelectTS.X, overlay.SelectTS.Y, rsrc.Width, rsrc.Height);
                 e.Graphics.DrawImage(new Bitmap(selection), rdst, rsrc, GraphicsUnit.Pixel);
+                Do.DrawString(e.Graphics, new Point(rdst.X, rdst.Y + rdst.Height),
+                    "click/drag", Color.White, Color.Black, new Font("Tahoma", 6.75F, FontStyle.Bold));
             }
             if (mouseEnter)
                 DrawHoverBox(e.Graphics);

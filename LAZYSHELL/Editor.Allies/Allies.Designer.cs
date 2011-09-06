@@ -49,12 +49,9 @@
             this.startingAccessory = new System.Windows.Forms.ComboBox();
             this.panel119 = new System.Windows.Forms.Panel();
             this.startingArmor = new System.Windows.Forms.ComboBox();
-            this.label130 = new System.Windows.Forms.Label();
             this.startingSpeed = new System.Windows.Forms.NumericUpDown();
             this.label138 = new System.Windows.Forms.Label();
             this.startingCurrentHP = new System.Windows.Forms.NumericUpDown();
-            this.label125 = new System.Windows.Forms.Label();
-            this.label127 = new System.Windows.Forms.Label();
             this.label90 = new System.Windows.Forms.Label();
             this.label135 = new System.Windows.Forms.Label();
             this.label134 = new System.Windows.Forms.Label();
@@ -82,7 +79,6 @@
             this.startingFrogCoins = new System.Windows.Forms.NumericUpDown();
             this.startingCoins = new System.Windows.Forms.NumericUpDown();
             this.label165 = new System.Windows.Forms.Label();
-            this.label166 = new System.Windows.Forms.Label();
             this.label164 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.characterName = new LAZYSHELL.ToolStripComboBox();
@@ -105,6 +101,8 @@
             this.label160 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.startingMagic = new LAZYSHELL.NewCheckedListBox();
+            this.label125 = new System.Windows.Forms.Label();
+            this.label127 = new System.Windows.Forms.Label();
             this.panel198.SuspendLayout();
             this.panel118.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.startingMgAttack)).BeginInit();
@@ -153,7 +151,7 @@
             this.panel198.Controls.Add(this.panel118);
             this.panel198.Location = new System.Drawing.Point(1, 28);
             this.panel198.Name = "panel198";
-            this.panel198.Size = new System.Drawing.Size(223, 238);
+            this.panel198.Size = new System.Drawing.Size(223, 220);
             this.panel198.TabIndex = 7;
             // 
             // label235
@@ -178,19 +176,18 @@
             this.panel118.Controls.Add(this.startingMgDefense);
             this.panel118.Controls.Add(this.startingExperience);
             this.panel118.Controls.Add(this.startingDefense);
-            this.panel118.Controls.Add(this.startingAttack);
-            this.panel118.Controls.Add(this.startingLevel);
             this.panel118.Controls.Add(this.label128);
+            this.panel118.Controls.Add(this.startingCurrentHP);
+            this.panel118.Controls.Add(this.startingAttack);
+            this.panel118.Controls.Add(this.startingMaximumHP);
+            this.panel118.Controls.Add(this.startingLevel);
             this.panel118.Controls.Add(this.label131);
             this.panel118.Controls.Add(this.panel28);
             this.panel118.Controls.Add(this.label133);
-            this.panel118.Controls.Add(this.startingMaximumHP);
             this.panel118.Controls.Add(this.panel120);
             this.panel118.Controls.Add(this.panel119);
-            this.panel118.Controls.Add(this.label130);
             this.panel118.Controls.Add(this.startingSpeed);
             this.panel118.Controls.Add(this.label138);
-            this.panel118.Controls.Add(this.startingCurrentHP);
             this.panel118.Controls.Add(this.label125);
             this.panel118.Controls.Add(this.label127);
             this.panel118.Controls.Add(this.label90);
@@ -198,7 +195,7 @@
             this.panel118.Controls.Add(this.label134);
             this.panel118.Location = new System.Drawing.Point(0, 19);
             this.panel118.Name = "panel118";
-            this.panel118.Size = new System.Drawing.Size(219, 215);
+            this.panel118.Size = new System.Drawing.Size(219, 197);
             this.panel118.TabIndex = 193;
             // 
             // label188
@@ -214,7 +211,7 @@
             // label132
             // 
             this.label132.BackColor = System.Drawing.SystemColors.Control;
-            this.label132.Location = new System.Drawing.Point(0, 162);
+            this.label132.Location = new System.Drawing.Point(0, 180);
             this.label132.Name = "label132";
             this.label132.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label132.Size = new System.Drawing.Size(101, 17);
@@ -224,7 +221,7 @@
             // startingMgAttack
             // 
             this.startingMgAttack.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.startingMgAttack.Location = new System.Drawing.Point(102, 54);
+            this.startingMgAttack.Location = new System.Drawing.Point(102, 72);
             this.startingMgAttack.Maximum = new decimal(new int[] {
             255,
             0,
@@ -239,7 +236,7 @@
             // startingMgDefense
             // 
             this.startingMgDefense.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.startingMgDefense.Location = new System.Drawing.Point(102, 72);
+            this.startingMgDefense.Location = new System.Drawing.Point(102, 90);
             this.startingMgDefense.Maximum = new decimal(new int[] {
             255,
             0,
@@ -254,7 +251,7 @@
             // startingExperience
             // 
             this.startingExperience.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.startingExperience.Location = new System.Drawing.Point(102, 162);
+            this.startingExperience.Location = new System.Drawing.Point(102, 180);
             this.startingExperience.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -269,7 +266,7 @@
             // startingDefense
             // 
             this.startingDefense.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.startingDefense.Location = new System.Drawing.Point(102, 36);
+            this.startingDefense.Location = new System.Drawing.Point(102, 54);
             this.startingDefense.Maximum = new decimal(new int[] {
             255,
             0,
@@ -284,7 +281,7 @@
             // startingAttack
             // 
             this.startingAttack.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.startingAttack.Location = new System.Drawing.Point(102, 18);
+            this.startingAttack.Location = new System.Drawing.Point(102, 36);
             this.startingAttack.Maximum = new decimal(new int[] {
             255,
             0,
@@ -319,17 +316,17 @@
             // label128
             // 
             this.label128.BackColor = System.Drawing.SystemColors.Control;
-            this.label128.Location = new System.Drawing.Point(0, 180);
+            this.label128.Location = new System.Drawing.Point(0, 18);
             this.label128.Name = "label128";
             this.label128.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label128.Size = new System.Drawing.Size(101, 17);
             this.label128.TabIndex = 98;
-            this.label128.Text = "Current HP";
+            this.label128.Text = "HP";
             // 
             // label131
             // 
             this.label131.BackColor = System.Drawing.SystemColors.Control;
-            this.label131.Location = new System.Drawing.Point(0, 90);
+            this.label131.Location = new System.Drawing.Point(0, 108);
             this.label131.Name = "label131";
             this.label131.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label131.Size = new System.Drawing.Size(101, 17);
@@ -339,7 +336,7 @@
             // panel28
             // 
             this.panel28.Controls.Add(this.startingWeapon);
-            this.panel28.Location = new System.Drawing.Point(102, 108);
+            this.panel28.Location = new System.Drawing.Point(102, 126);
             this.panel28.Name = "panel28";
             this.panel28.Size = new System.Drawing.Size(118, 17);
             this.panel28.TabIndex = 199;
@@ -365,7 +362,7 @@
             // label133
             // 
             this.label133.BackColor = System.Drawing.SystemColors.Control;
-            this.label133.Location = new System.Drawing.Point(0, 144);
+            this.label133.Location = new System.Drawing.Point(0, 162);
             this.label133.Name = "label133";
             this.label133.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label133.Size = new System.Drawing.Size(101, 17);
@@ -375,14 +372,14 @@
             // startingMaximumHP
             // 
             this.startingMaximumHP.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.startingMaximumHP.Location = new System.Drawing.Point(102, 198);
+            this.startingMaximumHP.Location = new System.Drawing.Point(161, 18);
             this.startingMaximumHP.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.startingMaximumHP.Name = "startingMaximumHP";
-            this.startingMaximumHP.Size = new System.Drawing.Size(117, 17);
+            this.startingMaximumHP.Size = new System.Drawing.Size(58, 17);
             this.startingMaximumHP.TabIndex = 204;
             this.startingMaximumHP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingMaximumHP.ValueChanged += new System.EventHandler(this.startingMaximumHP_ValueChanged);
@@ -390,7 +387,7 @@
             // panel120
             // 
             this.panel120.Controls.Add(this.startingAccessory);
-            this.panel120.Location = new System.Drawing.Point(102, 144);
+            this.panel120.Location = new System.Drawing.Point(102, 162);
             this.panel120.Name = "panel120";
             this.panel120.Size = new System.Drawing.Size(118, 17);
             this.panel120.TabIndex = 201;
@@ -416,7 +413,7 @@
             // panel119
             // 
             this.panel119.Controls.Add(this.startingArmor);
-            this.panel119.Location = new System.Drawing.Point(102, 126);
+            this.panel119.Location = new System.Drawing.Point(102, 144);
             this.panel119.Name = "panel119";
             this.panel119.Size = new System.Drawing.Size(118, 17);
             this.panel119.TabIndex = 200;
@@ -439,20 +436,10 @@
             this.startingArmor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.startingArmor.SelectedIndexChanged += new System.EventHandler(this.startingArmor_SelectedIndexChanged);
             // 
-            // label130
-            // 
-            this.label130.BackColor = System.Drawing.SystemColors.Control;
-            this.label130.Location = new System.Drawing.Point(0, 198);
-            this.label130.Name = "label130";
-            this.label130.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label130.Size = new System.Drawing.Size(101, 17);
-            this.label130.TabIndex = 99;
-            this.label130.Text = "Maximum HP";
-            // 
             // startingSpeed
             // 
             this.startingSpeed.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.startingSpeed.Location = new System.Drawing.Point(102, 90);
+            this.startingSpeed.Location = new System.Drawing.Point(102, 108);
             this.startingSpeed.Maximum = new decimal(new int[] {
             255,
             0,
@@ -467,7 +454,7 @@
             // label138
             // 
             this.label138.BackColor = System.Drawing.SystemColors.Control;
-            this.label138.Location = new System.Drawing.Point(0, 54);
+            this.label138.Location = new System.Drawing.Point(0, 72);
             this.label138.Name = "label138";
             this.label138.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label138.Size = new System.Drawing.Size(101, 17);
@@ -477,42 +464,22 @@
             // startingCurrentHP
             // 
             this.startingCurrentHP.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.startingCurrentHP.Location = new System.Drawing.Point(102, 180);
+            this.startingCurrentHP.Location = new System.Drawing.Point(102, 18);
             this.startingCurrentHP.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.startingCurrentHP.Name = "startingCurrentHP";
-            this.startingCurrentHP.Size = new System.Drawing.Size(117, 17);
+            this.startingCurrentHP.Size = new System.Drawing.Size(58, 17);
             this.startingCurrentHP.TabIndex = 203;
             this.startingCurrentHP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingCurrentHP.ValueChanged += new System.EventHandler(this.startingCurrentHP_ValueChanged);
             // 
-            // label125
-            // 
-            this.label125.BackColor = System.Drawing.SystemColors.Control;
-            this.label125.Location = new System.Drawing.Point(0, 72);
-            this.label125.Name = "label125";
-            this.label125.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label125.Size = new System.Drawing.Size(101, 17);
-            this.label125.TabIndex = 103;
-            this.label125.Text = "Magic Defense";
-            // 
-            // label127
-            // 
-            this.label127.BackColor = System.Drawing.SystemColors.Control;
-            this.label127.Location = new System.Drawing.Point(0, 36);
-            this.label127.Name = "label127";
-            this.label127.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label127.Size = new System.Drawing.Size(101, 17);
-            this.label127.TabIndex = 102;
-            this.label127.Text = "Defense";
-            // 
             // label90
             // 
             this.label90.BackColor = System.Drawing.SystemColors.Control;
-            this.label90.Location = new System.Drawing.Point(0, 18);
+            this.label90.Location = new System.Drawing.Point(0, 36);
             this.label90.Name = "label90";
             this.label90.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label90.Size = new System.Drawing.Size(101, 17);
@@ -522,7 +489,7 @@
             // label135
             // 
             this.label135.BackColor = System.Drawing.SystemColors.Control;
-            this.label135.Location = new System.Drawing.Point(0, 108);
+            this.label135.Location = new System.Drawing.Point(0, 126);
             this.label135.Name = "label135";
             this.label135.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label135.Size = new System.Drawing.Size(101, 17);
@@ -532,7 +499,7 @@
             // label134
             // 
             this.label134.BackColor = System.Drawing.SystemColors.Control;
-            this.label134.Location = new System.Drawing.Point(0, 126);
+            this.label134.Location = new System.Drawing.Point(0, 144);
             this.label134.Name = "label134";
             this.label134.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label134.Size = new System.Drawing.Size(101, 17);
@@ -558,7 +525,7 @@
             this.panel196.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel196.Controls.Add(this.panel11);
             this.panel196.Controls.Add(this.label194);
-            this.panel196.Location = new System.Drawing.Point(226, 124);
+            this.panel196.Location = new System.Drawing.Point(226, 106);
             this.panel196.Name = "panel196";
             this.panel196.Size = new System.Drawing.Size(217, 94);
             this.panel196.TabIndex = 9;
@@ -738,7 +705,7 @@
             this.panel22.Controls.Add(this.panel121);
             this.panel22.Location = new System.Drawing.Point(226, 28);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(217, 94);
+            this.panel22.Size = new System.Drawing.Size(217, 76);
             this.panel22.TabIndex = 8;
             // 
             // label193
@@ -763,11 +730,10 @@
             this.panel121.Controls.Add(this.startingFrogCoins);
             this.panel121.Controls.Add(this.startingCoins);
             this.panel121.Controls.Add(this.label165);
-            this.panel121.Controls.Add(this.label166);
             this.panel121.Controls.Add(this.label164);
             this.panel121.Location = new System.Drawing.Point(0, 19);
             this.panel121.Name = "panel121";
-            this.panel121.Size = new System.Drawing.Size(213, 71);
+            this.panel121.Size = new System.Drawing.Size(213, 53);
             this.panel121.TabIndex = 206;
             // 
             // label163
@@ -783,14 +749,14 @@
             // startingMaximumFP
             // 
             this.startingMaximumFP.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.startingMaximumFP.Location = new System.Drawing.Point(97, 54);
+            this.startingMaximumFP.Location = new System.Drawing.Point(155, 36);
             this.startingMaximumFP.Maximum = new decimal(new int[] {
             99,
             0,
             0,
             0});
             this.startingMaximumFP.Name = "startingMaximumFP";
-            this.startingMaximumFP.Size = new System.Drawing.Size(116, 17);
+            this.startingMaximumFP.Size = new System.Drawing.Size(58, 17);
             this.startingMaximumFP.TabIndex = 209;
             this.startingMaximumFP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingMaximumFP.ValueChanged += new System.EventHandler(this.startingMaximumFP_ValueChanged);
@@ -805,7 +771,7 @@
             0,
             0});
             this.startingCurrentFP.Name = "startingCurrentFP";
-            this.startingCurrentFP.Size = new System.Drawing.Size(116, 17);
+            this.startingCurrentFP.Size = new System.Drawing.Size(57, 17);
             this.startingCurrentFP.TabIndex = 208;
             this.startingCurrentFP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingCurrentFP.ValueChanged += new System.EventHandler(this.startingCurrentFP_ValueChanged);
@@ -848,17 +814,7 @@
             this.label165.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label165.Size = new System.Drawing.Size(96, 17);
             this.label165.TabIndex = 331;
-            this.label165.Text = "Current FP";
-            // 
-            // label166
-            // 
-            this.label166.BackColor = System.Drawing.SystemColors.Control;
-            this.label166.Location = new System.Drawing.Point(0, 54);
-            this.label166.Name = "label166";
-            this.label166.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label166.Size = new System.Drawing.Size(96, 17);
-            this.label166.TabIndex = 332;
-            this.label166.Text = "Max FP";
+            this.label165.Text = "FP";
             // 
             // label164
             // 
@@ -923,7 +879,7 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(1, 421);
+            this.panel1.Location = new System.Drawing.Point(1, 403);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(442, 94);
             this.panel1.TabIndex = 571;
@@ -1116,7 +1072,7 @@
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.startingMagic);
             this.panel4.Controls.Add(this.label91);
-            this.panel4.Location = new System.Drawing.Point(1, 268);
+            this.panel4.Location = new System.Drawing.Point(1, 250);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(442, 151);
             this.panel4.TabIndex = 573;
@@ -1136,11 +1092,31 @@
             this.startingMagic.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.startingMagic_DrawItem);
             this.startingMagic.SelectedIndexChanged += new System.EventHandler(this.startingMagic_SelectedIndexChanged);
             // 
+            // label125
+            // 
+            this.label125.BackColor = System.Drawing.SystemColors.Control;
+            this.label125.Location = new System.Drawing.Point(0, 90);
+            this.label125.Name = "label125";
+            this.label125.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label125.Size = new System.Drawing.Size(101, 17);
+            this.label125.TabIndex = 103;
+            this.label125.Text = "Magic Defense";
+            // 
+            // label127
+            // 
+            this.label127.BackColor = System.Drawing.SystemColors.Control;
+            this.label127.Location = new System.Drawing.Point(0, 54);
+            this.label127.Name = "label127";
+            this.label127.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label127.Size = new System.Drawing.Size(101, 17);
+            this.label127.TabIndex = 102;
+            this.label127.Text = "Defense";
+            // 
             // Allies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 516);
+            this.ClientSize = new System.Drawing.Size(444, 498);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel4);
@@ -1222,12 +1198,9 @@
         private System.Windows.Forms.ComboBox startingAccessory;
         private System.Windows.Forms.Panel panel119;
         private System.Windows.Forms.ComboBox startingArmor;
-        private System.Windows.Forms.Label label130;
         private System.Windows.Forms.NumericUpDown startingSpeed;
         private System.Windows.Forms.Label label138;
         private System.Windows.Forms.NumericUpDown startingCurrentHP;
-        private System.Windows.Forms.Label label125;
-        private System.Windows.Forms.Label label127;
         private System.Windows.Forms.Label label90;
         private System.Windows.Forms.Label label91;
         private System.Windows.Forms.Label label135;
@@ -1256,7 +1229,6 @@
         private System.Windows.Forms.NumericUpDown startingFrogCoins;
         private System.Windows.Forms.NumericUpDown startingCoins;
         private System.Windows.Forms.Label label165;
-        private System.Windows.Forms.Label label166;
         private System.Windows.Forms.Label label164;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private LAZYSHELL.ToolStripComboBox characterName;
@@ -1278,6 +1250,8 @@
         private System.Windows.Forms.Label label160;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ToolStripButton reset;
+        private System.Windows.Forms.Label label125;
+        private System.Windows.Forms.Label label127;
 
     }
 }

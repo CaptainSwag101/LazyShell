@@ -15,7 +15,7 @@ namespace LAZYSHELL
         private OverlapTileset overlapTileset;
         private Bitmap overlapsImage;
         private int[] overlapsPixels;
-        private LevelOverlaps.Overlap copyOverlap;
+        private Overlap copyOverlap;
         public TreeView OverlapFieldTree { get { return overlapFieldTree; } set { overlapFieldTree = value; } }
         public NumericUpDown OverlapX { get { return overlapX; } set { overlapX = value; } }
         public NumericUpDown OverlapY { get { return overlapY; } set { overlapY = value; } }
@@ -157,12 +157,12 @@ namespace LAZYSHELL
             int used = 0;
             foreach (Level level in levels)
             {
-                foreach (LevelOverlaps.Overlap overlap in level.LevelOverlaps.Overlaps)
+                foreach (Overlap overlap in level.LevelOverlaps.Overlaps)
                     used += 4;
             }
             return 0x11B8 - used;
         }
-        private void AddNewOverlap(LevelOverlaps.Overlap overlap)
+        private void AddNewOverlap(Overlap overlap)
         {
             if (CalculateFreeOverlapSpace() >= 4)
             {
@@ -206,9 +206,6 @@ namespace LAZYSHELL
         {
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.SelectedOverlap = this.overlapFieldTree.SelectedNode.Index;
-
-            overlay.DrawLevelOverlaps(overlaps, overlapTileset);
-
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             RefreshOverlapProperties();
@@ -274,10 +271,6 @@ namespace LAZYSHELL
                 else
                 {
                     this.overlapFieldTree.SelectedNode = null;
-
-                    overlay.DrawLevelOverlaps(overlaps, overlapTileset);
-
-
                     RefreshOverlapProperties();
                 }
                 overlapFieldTree.EndUpdate();
@@ -290,9 +283,6 @@ namespace LAZYSHELL
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.X = (byte)this.overlapX.Value;
 
-            if (!updatingLevel)
-                overlay.DrawLevelOverlaps(overlaps, overlapTileset);
-
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             picture.Invalidate();
         }
@@ -303,9 +293,6 @@ namespace LAZYSHELL
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.Y = (byte)this.overlapY.Value;
 
-            if (!updatingLevel)
-                overlay.DrawLevelOverlaps(overlaps, overlapTileset);
-
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             picture.Invalidate();
         }
@@ -315,8 +302,6 @@ namespace LAZYSHELL
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.Z = (byte)this.overlapZ.Value;
-
-            overlay.DrawLevelOverlaps(overlaps, overlapTileset);
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             picture.Invalidate();
@@ -330,9 +315,8 @@ namespace LAZYSHELL
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.B1b7 = this.overlapCoordZPlusHalf.Checked;
 
-            overlay.DrawLevelOverlaps(overlaps, overlapTileset);
-
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
+            picture.Invalidate();
         }
         private void overlapType_ValueChanged(object sender, EventArgs e)
         {
@@ -340,8 +324,6 @@ namespace LAZYSHELL
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.Type = (byte)this.overlapType.Value;
-
-            overlay.DrawLevelOverlaps(overlaps, overlapTileset);
 
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
 
@@ -383,7 +365,7 @@ namespace LAZYSHELL
         }
         private void overlapFieldPaste_Click(object sender, EventArgs e)
         {
-            AddNewOverlap((LevelOverlaps.Overlap)copyOverlap);
+            AddNewOverlap((Overlap)copyOverlap);
         }
         private void overlapFieldDuplicate_Click(object sender, EventArgs e)
         {

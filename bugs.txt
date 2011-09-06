@@ -1,9 +1,0 @@
-Animations - Cannot right-click dialogues to quickly edit them.
-Attacks: - " " It doesn't load Mario's stats in the ROM when calculator opens.
-Event Scripts - I don't really know how the events are saved, but the "jump to" events get little buggy. I found one script that couldn't load because it was one byte off from the byte it was suppose to jump to. I dunno what you could do about this.
-Levels - If you undo when editting tiles, it deletes the tile on the first click, then it reappears on the second. I understand that's how the editor works, but I was in a bit of a panic the first time I undid one tile.
-Sprites - Pencil tool doesn't work
-
-Misc:
-- None of the 16th palettes save (all editors). They show up changed in the editor, but do not save.
-- The save window still isn't the frontmost window (maybe there could be a panic button? I found that alt+F4 fixes this dilemma)

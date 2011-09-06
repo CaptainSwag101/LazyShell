@@ -42,8 +42,10 @@ namespace LAZYSHELL
             formationsEditor.Visible = true;
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             //
-            checksum = Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics);
             new History(this);
+            packsEditor.Index = Settings.Default.LastFormationPack;
+            formationsEditor.Index = Settings.Default.LastFormation;
+            checksum = Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics);
         }
         // functions
         public void Assemble()
@@ -116,7 +118,7 @@ namespace LAZYSHELL
         private void resetFormationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current formation. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             formationsEditor.Formation = new Formation(Model.Data, formationsEditor.Index);
             formationsEditor.RefreshFormations();
@@ -124,7 +126,7 @@ namespace LAZYSHELL
         private void resetPackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current pack. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             packsEditor.Pack = new FormationPack(Model.Data, packsEditor.Index);
             packsEditor.RefreshFormationPacks();

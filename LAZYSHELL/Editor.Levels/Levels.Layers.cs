@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
@@ -11,6 +12,10 @@ namespace LAZYSHELL
 
         private LevelLayer layer { get { return level.Layer; } set { level.Layer = value; } }
         public LevelLayer Layer { get { return layer; } }// Layer for the current level
+        public NumericUpDown LayerMaskHighX { get { return layerMaskHighX; } set { layerMaskHighX = value; } }
+        public NumericUpDown LayerMaskHighY { get { return layerMaskHighY; } set { layerMaskHighY = value; } }
+        public NumericUpDown LayerMaskLowX { get { return layerMaskLowX; } set { layerMaskLowX = value; } }
+        public NumericUpDown LayerMaskLowY { get { return layerMaskLowY; } set { layerMaskLowY = value; } }
 
         #endregion
         #region Methods

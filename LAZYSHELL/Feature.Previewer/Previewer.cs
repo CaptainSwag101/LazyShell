@@ -788,7 +788,7 @@ namespace LAZYSHELL.Previewer
                         ent.CoordX = event_.X;
                         ent.CoordY = event_.Y;
                         ent.CoordZ = event_.Z;
-                        ent.RadialPosition = event_.Facing;
+                        ent.RadialPosition = event_.Face;
                         ent.ShowMessage = false;
                         ent.Flag = false;
                         eventTriggers.Add(ent); // Add the event trigger
@@ -1079,7 +1079,7 @@ namespace LAZYSHELL.Previewer
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to clear all equipement for all allies. Go ahead with process?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             settings.AllyEquipment = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
             settings.Save();

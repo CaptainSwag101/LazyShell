@@ -81,7 +81,7 @@ namespace LAZYSHELL
         public bool WidthXPlusHalf { get { return event_.WidthXPlusHalf; } set { event_.WidthXPlusHalf = value; } }
         public bool WidthYPlusHalf { get { return event_.WidthYPlusHalf; } set { event_.WidthYPlusHalf = value; } }
         public byte Width { get { return event_.Width; } set { event_.Width = value; } }
-        public byte Facing { get { return event_.Facing; } set { event_.Facing = value; } }
+        public byte Facing { get { return event_.Face; } set { event_.Face = value; } }
 
         public LevelEvents(byte[] data, int index)
         {
@@ -166,7 +166,9 @@ namespace LAZYSHELL
         private bool widthXPlusHalf; public bool WidthXPlusHalf { get { return widthXPlusHalf; } set { widthXPlusHalf = value; } }
         private bool widthYPlusHalf; public bool WidthYPlusHalf { get { return widthYPlusHalf; } set { widthYPlusHalf = value; } }
         private byte width; public byte Width { get { return width; } set { width = value; } }
-        private byte facing; public byte Facing { get { return facing; } set { facing = value; } }
+        private byte facing; public byte Face { get { return facing; } set { facing = value; } }
+        public int Index = 0;
+        public bool Hilite = false;
 
         public Event()
         {
@@ -224,11 +226,11 @@ namespace LAZYSHELL
             copy.Y = y;
             copy.Z = z;
             copy.Height = height;
-            copy.Facing = facing;
+            copy.Face = facing;
             copy.Width = width;
             copy.WidthXPlusHalf = widthXPlusHalf;
             copy.WidthYPlusHalf = widthYPlusHalf;
-            copy.Facing = facing;
+            copy.Face = facing;
             return copy;
         }
         public int GetEventLength()

@@ -500,7 +500,7 @@ namespace LAZYSHELL
         private int moldX = 0;
         private int moldY = 0;
         public Image Image { get { return new Bitmap(CreateImage(currentFrame)); } }
-        public int[,] PixelBuffer { get { return CreatePixelBuffer(0); } }
+        public int[] Pixels { get { return CreatePixelBuffer(); } }
         public int MoldGridPlaneWidth { get { return moldX; } }
         public int MoldGridPlaneHeight { get { return moldY; } }
         public void nextFrame() { if (currentFrame >= maxFrame) { return; } currentFrame++; }
@@ -545,7 +545,7 @@ namespace LAZYSHELL
             byte[] sm = Bits.GetByteArray(data, animationOffset, animationLength);
             offset = Bits.GetShort(sm, 4); offset += frame * 2;
             tMold = new Mold();
-            tMold.InitializeMold(sm, offset, new List<Mold.Tile>(), animationNum);
+            tMold.InitializeMold(sm, offset, new List<Mold.Tile>(), animationNum, animationOffset);
             foreach (Mold.Tile t in tMold.Tiles)
             {
                 t.Set8x8Tiles(Bits.GetByteArray(data, graphicOffset, 0x4000), palette, tMold.Gridplane);
@@ -577,9 +577,9 @@ namespace LAZYSHELL
             }
             return (Image)image;
         }
-        private int[,] CreatePixelBuffer(int frame)
+        private int[] CreatePixelBuffer()
         {
-            int[,] pixels = new int[256, 256];
+            int[] pixels = new int[256 * 256];
             Mold tMold;
             int num = index + 0x100;
             int offset = num * 4 + 0x250000;
@@ -614,20 +614,14 @@ namespace LAZYSHELL
             maxFrame = data[animationOffset + 7] - 1;
 
             byte[] sm = Bits.GetByteArray(data, animationOffset, animationLength);
-            offset = Bits.GetShort(sm, 4); offset += frame * 2;
+            offset = Bits.GetShort(sm, 4);
             tMold = new Mold();
-            tMold.InitializeMold(sm, offset, new List<Mold.Tile>(), animationNum);
+            tMold.InitializeMold(sm, offset, new List<Mold.Tile>(), animationNum, animationOffset);
             foreach (Mold.Tile t in tMold.Tiles)
             {
                 t.Set8x8Tiles(Bits.GetByteArray(data, graphicOffset, 0x4000), palette, tMold.Gridplane);
             }
-            int[] temp = tMold.MoldPixels();
-            for (int y = 0; y < 256; y++)
-            {
-                for (int x = 0; x < 256; x++)
-                    pixels[x, y] = temp[y * 256 + x];
-            }
-            return pixels;
+            return tMold.MoldPixels();
         }
         private int[] CursorPixels()
         {

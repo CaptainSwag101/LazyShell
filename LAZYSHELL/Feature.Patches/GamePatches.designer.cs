@@ -33,7 +33,7 @@ namespace LAZYSHELL.Patches
             this.PatchListBox = new System.Windows.Forms.ListBox();
             this.AuthorLabel = new System.Windows.Forms.Label();
             this.DateCreatedLabel = new System.Windows.Forms.Label();
-            this.DescriptionTextBox = new System.Windows.Forms.TextBox();
+            this.DescriptionTextBox = new System.Windows.Forms.RichTextBox();
             this.PatchNameLabel = new System.Windows.Forms.Label();
             this.SizeLabel = new System.Windows.Forms.Label();
             this.applyButton = new System.Windows.Forms.Button();
@@ -42,8 +42,8 @@ namespace LAZYSHELL.Patches
             this.GameHackLabel = new System.Windows.Forms.Label();
             this.AssemblyHackLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePictureBox)).BeginInit();
             this.panel3.SuspendLayout();
@@ -88,12 +88,12 @@ namespace LAZYSHELL.Patches
             // DescriptionTextBox
             // 
             this.DescriptionTextBox.Location = new System.Drawing.Point(165, 12);
-            this.DescriptionTextBox.Multiline = true;
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.ReadOnly = true;
-            this.DescriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.DescriptionTextBox.Size = new System.Drawing.Size(209, 253);
+            this.DescriptionTextBox.Size = new System.Drawing.Size(300, 253);
             this.DescriptionTextBox.TabIndex = 6;
+            this.DescriptionTextBox.Text = "";
+            this.DescriptionTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.DescriptionTextBox_LinkClicked);
             // 
             // PatchNameLabel
             // 
@@ -130,7 +130,7 @@ namespace LAZYSHELL.Patches
             this.downloadingLabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.downloadingLabel.Location = new System.Drawing.Point(165, 272);
             this.downloadingLabel.Name = "downloadingLabel";
-            this.downloadingLabel.Size = new System.Drawing.Size(209, 23);
+            this.downloadingLabel.Size = new System.Drawing.Size(300, 23);
             this.downloadingLabel.TabIndex = 396;
             this.downloadingLabel.Text = "              ...INITIALIZING...              ";
             this.downloadingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -183,21 +183,10 @@ namespace LAZYSHELL.Patches
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label12);
-            this.panel3.Location = new System.Drawing.Point(380, 12);
+            this.panel3.Location = new System.Drawing.Point(471, 12);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(260, 283);
             this.panel3.TabIndex = 396;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(0, 262);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label2.Size = new System.Drawing.Size(256, 17);
-            this.label2.TabIndex = 392;
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
             // 
@@ -209,6 +198,17 @@ namespace LAZYSHELL.Patches
             this.label1.Size = new System.Drawing.Size(256, 17);
             this.label1.TabIndex = 392;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.SystemColors.Control;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(0, 262);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.label2.Size = new System.Drawing.Size(256, 17);
+            this.label2.TabIndex = 392;
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label12
             // 
@@ -225,7 +225,7 @@ namespace LAZYSHELL.Patches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 307);
+            this.ClientSize = new System.Drawing.Size(743, 307);
             this.Controls.Add(this.downloadingLabel);
             this.Controls.Add(this.PatchListBox);
             this.Controls.Add(this.applyButton);
@@ -256,7 +256,7 @@ namespace LAZYSHELL.Patches
         private System.Windows.Forms.ListBox PatchListBox;
         private System.Windows.Forms.Label AuthorLabel;
         private System.Windows.Forms.Label DateCreatedLabel;
-        private System.Windows.Forms.TextBox DescriptionTextBox;
+        private System.Windows.Forms.RichTextBox DescriptionTextBox;
         private System.Windows.Forms.Label PatchNameLabel;
         private System.Windows.Forms.Label SizeLabel;
         private System.Windows.Forms.Button applyButton;

@@ -20,8 +20,6 @@ namespace LAZYSHELL
         // constructor
         public AttacksEditor()
         {
-            checksum = Do.GenerateChecksum(Model.Attacks, Model.Spells);
-            //
             settings.Keystrokes[0x20] = "\x20";
             settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
@@ -44,6 +42,10 @@ namespace LAZYSHELL
             spellsEditor.Visible = true;
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
             new History(this);
+            //
+            spellsEditor.Index = settings.LastSpell;
+            attacksEditor.Index = settings.LastAttack;
+            checksum = Do.GenerateChecksum(Model.Attacks, Model.Spells);
         }
         // functions
         public void Assemble()
@@ -135,7 +137,7 @@ namespace LAZYSHELL
         private void resetSpellToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current spell. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             spellsEditor.Spell = new Spell(Model.Data, spellsEditor.Index);
             spellsEditor.RefreshSpells();
@@ -143,7 +145,7 @@ namespace LAZYSHELL
         private void resetAttackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current attack. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             attacksEditor.Attack = new Attack(Model.Data, attacksEditor.Index);
             attacksEditor.RefreshAttacks();

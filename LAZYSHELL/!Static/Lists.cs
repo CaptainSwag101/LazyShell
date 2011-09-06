@@ -1038,11 +1038,11 @@ namespace LAZYSHELL
             "Corkpedite",
             "J Puzzle Block",
             "Yellow Stepping Block",
-            "Water Droplet",
+            "Whirlpool (water)",
             "Hinopio",
             "Factory Hex-Nut",
             "Green Switch",
-            "Discolored Treasure Chest?",
+            "Treasure Chest (bad palette)",
             "Nimbusland Bus Driver",
             "Mushroom Boy",
             "Marrymore Man (green)",
@@ -1067,7 +1067,7 @@ namespace LAZYSHELL
             "Moleville Mine Cart",
             "Knife Guy Juggler (still, red balls)",
             "Knife Guy Juggler",
-            "White Mine Cart?",
+            "Mine Cart (bad palette)",
             "Discolored Mine Cart",
             "Fireball (surface from lava)",
             "Piranha Plant",
@@ -1129,7 +1129,7 @@ namespace LAZYSHELL
             "Frog Coin",
             "Flower",
             "Big Flower",
-            "Sparkle? (sideways)",
+            "Sparkle (sideways)",
             "Sparkle (downwards)",
             "Sparkle (circular winding)",
             "Explosion",
@@ -1151,7 +1151,7 @@ namespace LAZYSHELL
             "Czar Dragon (body)",
             "Growing Vine Beanstalk",
             "Brick Beanstalk Block",
-            "Yellow Dot?",
+            "Whirlpool (desert)",
             "Yellow Letter",
             "Yaridovich (out of battle)",
             "Banana Peel",
@@ -1724,7 +1724,7 @@ namespace LAZYSHELL
             "Water Crystal",
             "plasm water droplet (blue-green)",
             "Ice Rock",
-            "Ice Rock (grey)",
+            "black rock",
             "big pink heart",
             "dark red/yellow fireball",
             "light green stars",
@@ -4303,6 +4303,10 @@ namespace LAZYSHELL
         #endregion
         #endregion
         #region Functions
+        public static string Numerize(string item, int index, int length)
+        {
+            return "{" + index.ToString("d" + length) + "}  " + item;
+        }
         public static string Numerize(string[] list, int index, int length)
         {
             return "{" + index.ToString("d" + length) + "}  " + list[index];

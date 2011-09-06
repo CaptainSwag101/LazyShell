@@ -16,6 +16,7 @@ namespace LAZYSHELL
         public byte[] Data { get { return this.data; } set { this.data = value; } }
         private List<Mod> mods = new List<Mod>();
         public List<Mod> Mods { get { return mods; } set { mods = value; } }
+        public int Count { get { return mods.Count; } }
         private int currentMod = 0;
         public int CurrentMod
         {

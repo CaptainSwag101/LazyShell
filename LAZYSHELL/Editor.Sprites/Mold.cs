@@ -27,7 +27,7 @@ namespace LAZYSHELL
             }
         }
 
-        public void InitializeMold(byte[] sm, int offset, List<Tile> uniqueTiles, int parent)
+        public void InitializeMold(byte[] sm, int offset, List<Tile> uniqueTiles, int parent, int parentoffset)
         {
             if (Bits.GetShort(sm, offset) == 0xFFFF)
                 return;
@@ -64,9 +64,9 @@ namespace LAZYSHELL
                             if ((sm[offset] & 0x03) == 2)
                             {
                                 NewMessage.Show("LAZY SHELL", "Error in animation #" + parent + " @ offset $" + offset.ToString("X4") + ". " +
-                                    "Data is corrupt: attempted to read a copy within a copy.\n\n" +
+                                    "Data is corrupt: attempted to read a copy within a copy. " +
                                     "The sprites editor will continue to load anyways.\n\nAnimation Data:",
-                                    BitConverter.ToString(Bits.GetByteArray(sm, offset, 16), 0));
+                                    Do.BitArrayToString(sm, 16, true, true, parentoffset), "Lucida Console");
                                 break;
                             }
                             else if ((sm[offset] & 0x03) == 1)
@@ -311,6 +311,9 @@ namespace LAZYSHELL
                             copyDiffX == thisTileB.XCoord - tileB.XCoord &&
                             copyDiffY == thisTileB.YCoord - tileB.YCoord)
                         {
+                            // v3.8: set TileOffset to 0 to prevent later molds from using as a copy
+                            thisTileA.TileOffset = 0;
+                            thisTileB.TileOffset = 0;
                             // we will be making a copy of at least 2
                             copySize = 2;
                             // now keep moving to find more copies
@@ -335,6 +338,8 @@ namespace LAZYSHELL
                                 // it is probably a copy itself, so we shouldn't add it
                                 if (tileC.TileOffset == 0)
                                     break;
+                                // v3.8: set TileOffset to 0 to prevent later molds from using as a copy
+                                thisTileC.TileOffset = 0;
                                 // adding another copy
                                 copySize++;
                                 // now set to check next one
@@ -355,6 +360,8 @@ namespace LAZYSHELL
                         // must have at least 3 quadrants active
                         else if (CompareTiles(thisTileA, tileA, true))
                         {
+                            // v3.8: set TileOffset to 0 to prevent later molds from using as a copy
+                            thisTileA.TileOffset = 0;
                             // we will be making a copy
                             copyOffset = tileA.TileOffset;
                             copyDiffX = thisTileA.XCoord - tileA.XCoord;

@@ -13,7 +13,7 @@ namespace LAZYSHELL
         [NonSerialized()]
         private byte[] data;
         public override byte[] Data { get { return this.data; } set { this.data = value; } }
-        public override int Index { get { return index; } set { index = value;} }
+        public override int Index { get { return index; } set { index = value; } }
 
         #region Fomation Stats
         private int index;
@@ -29,10 +29,7 @@ namespace LAZYSHELL
         private bool formationCantRun;
         private byte formationUnknown;
         private int elevation;
-        // ???
-        private int[] gridWidth = new int[8];
-        private int[] gridHeight = new int[8];
-        private int[] pixelAssn;
+        private int[] pixelIndexes;
 
         #endregion
         #region Accessors
@@ -48,78 +45,47 @@ namespace LAZYSHELL
         public byte FormationUnknown { get { return this.formationUnknown; } set { this.formationUnknown = value; } }
         public int Elevation { get { return this.elevation; } set { this.elevation = value; } }
 
-        // WHY MUST WE HAVE THESE?
-        public int[] GridWidth { get { return gridWidth; } }
-        public int[] GridHeight { get { return gridHeight; } }
-        public int[] PixelAssn
+        public int[] PixelIndexes
         {
             get
             {
-                if (pixelAssn == null)
-                    new Bitmap(FormationImage);
-                return pixelAssn;
+                if (pixelIndexes == null)
+                    SetPixelIndexes();
+                return pixelIndexes;
             }
+            set { pixelIndexes = value; }
         }
-
-        public Image FormationImage
+        private void SetPixelIndexes()
         {
-            get
+            pixelIndexes = new int[256 * 256];
+            int[] order = new int[8];
+            for (int i = 0; i < 8; i++)
+                order[i] = i;
+            byte[] temp = Bits.Copy(formationCoordY);
+            Array.Sort(temp, order);
+            for (int g = 0; g < 8; g++)
             {
-                Bitmap image = null;
-                int[,] monster = null;
-                int[] pixels = new int[256 * 256];
-                pixelAssn = new int[256 * 256];
-
-                int[] order = new int[8];
-                for (int i = 0; i < 8; i++)
-                    order[i] = i;
-                byte[] temp = new byte[FormationCoordY.Length]; FormationCoordY.CopyTo(temp, 0);
-                Array.Sort(temp, order);
-
-                for (int g = 0; g < 8; g++)
+                int i = order[g];
+                // If monster is used in formation
+                if (formationUse[i])
                 {
-                    int i = order[g];
-
-                    // If monster is used in formation
-                    if (formationUse[i])
+                    // Get correct monster image
+                    int[] monster = Model.Monsters[formationMonster[i]].Pixels;
+                    int elevation = Model.Monsters[formationMonster[i]].Elevation * 16;
+                    for (int y = 0; y < 256; y++)
                     {
-                        // Get correct monster image
-                        monster = Model.Monsters[formationMonster[i]].PixelBuffer;
-                        elevation = Model.Monsters[formationMonster[i]].Elevation * 16;
-
-                        for (int y = 0; y < 256; y++)
+                        for (int x = 0; x < 256; x++)
                         {
-                            for (int x = 0; x < 256; x++)
+                            int x_ = formationCoordX[i] + x - 128;
+                            int y_ = formationCoordY[i] + y - 96 - elevation;
+                            if ((monster[y * 256 + x] & 0xFF000000) != 0)
                             {
-
-                                if ((monster[x, y] & 0xFF000000) != 0)
-                                {
-                                    if (formationCoordX[i] + x - 128 > 0 && formationCoordX[i] + x - 128 < 256)
-                                    {
-                                        if (formationCoordY[i] + y - 96 - elevation > 0 && formationCoordY[i] + y - 96 - elevation < 256)
-                                        {
-                                            pixels[((((formationCoordY[i] + y - 96 - elevation) - 1) * 256) + formationCoordX[i] + x - 128)] = monster[x, y];
-                                            pixelAssn[((((formationCoordY[i] + y - 96 - elevation) - 1) * 256) + formationCoordX[i] + x - 128)] = i + 1;
-                                        }
-                                    }
-                                }
+                                if (x_ > 0 && x_ < 256 && y_ > 0 && y_ < 256)
+                                    pixelIndexes[(y_ - 1) * 256 + x_] = i + 1;
                             }
                         }
                     }
                 }
-
-                unsafe
-                {
-                    fixed (void* firstPixel = &pixels[0])
-                    {
-                        IntPtr ip = new IntPtr(firstPixel);
-                        if (image != null)
-                            image.Dispose();
-                        image = new Bitmap(256, 256, 256 * 4, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
-                    }
-                }
-
-                return (Image)image;
             }
         }
         public string[] FormationName

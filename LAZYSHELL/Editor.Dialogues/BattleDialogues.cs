@@ -62,9 +62,9 @@ namespace LAZYSHELL
         private int mouseDownTile = 0;
         // editors
         private TileEditor tileEditor;
-        private GraphicEditor graphicEditor;
-        private PaletteEditor paletteEditor;
-        private PaletteEditor paletteEditorMenu;
+        public GraphicEditor graphicEditor;
+        public PaletteEditor paletteEditor;
+        public PaletteEditor paletteEditorMenu;
         #endregion
         #region Functions
         public BattleDialogues(Dialogues dialoguesEditor)
@@ -94,6 +94,11 @@ namespace LAZYSHELL
             paletteEditorMenu.Close();
             tileEditor.Close();
             graphicEditor.Close();
+            search.Dispose();
+            paletteEditor.Dispose();
+            paletteEditorMenu.Dispose();
+            tileEditor.Dispose();
+            graphicEditor.Dispose();
         }
         public void SetToolTips(ToolTip toolTip1)
         {
@@ -341,7 +346,7 @@ namespace LAZYSHELL
             tileset = new BattleDialogueTileset(fontPalette);
             SetTilesetImage();
             SetTextImage();
-            dialoguesEditor.checksum--;
+            dialoguesEditor.checksum--;   // b/c switching colors won't modify checksum
         }
         private void PaletteMenuUpdate()
         {
@@ -409,7 +414,7 @@ namespace LAZYSHELL
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current battle dialogue. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             dialogue = new BattleDialogue(Model.Data, index, battleDlgType.SelectedIndex);
             RefreshBattleDialogue();

@@ -133,7 +133,7 @@ namespace LAZYSHELL
         private void buttonOK_Click(object sender, EventArgs e)
         {
             #region Levels
-            if (this.Text == "EXPORT LEVEL DATA...")
+            if (this.Text == "EXPORT LEVELS...")
             {
                 this.Enabled = false;
                 if (radioButtonCurrent.Checked)
@@ -192,9 +192,18 @@ namespace LAZYSHELL
                 if (radioButtonCurrent.Checked)
                 {
                     SerializedLevel sLevel = new SerializedLevel();
-                    sLevel = (SerializedLevel)Do.Import(sLevel, fullPath);
+                    try
+                    {
+                        sLevel = (SerializedLevel)Do.Import(sLevel, fullPath);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("File not a level data file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
                     Model.Levels[currentIndex].Layer = sLevel.levelLayer;
                     Model.Levels[currentIndex].Layer.Data = Model.Data;
+                    Model.Levels[currentIndex].Layer.Index = currentIndex;
                     Model.Levels[currentIndex].LevelMap = sLevel.levelMapNum;
                     LevelMap lMap = sLevel.levelMap; lMap.Data = Model.Data;
                     Model.LevelMaps[Model.Levels[currentIndex].LevelMap] = lMap;
@@ -220,17 +229,30 @@ namespace LAZYSHELL
                     Model.Levels[currentIndex].LevelExits.Data = Model.Data;
                     Model.Levels[currentIndex].LevelEvents.Data = Model.Data;
                     Model.Levels[currentIndex].LevelOverlaps.Data = Model.Data;
+                    Model.Levels[currentIndex].LevelNPCs.Index = currentIndex;
+                    Model.Levels[currentIndex].LevelExits.Index = currentIndex;
+                    Model.Levels[currentIndex].LevelEvents.Index = currentIndex;
+                    Model.Levels[currentIndex].LevelOverlaps.Index = currentIndex;
                 }
                 else
                 {
                     SerializedLevel[] sLevels = new SerializedLevel[510];
                     for (int i = 0; i < sLevels.Length; i++)
                         sLevels[i] = new SerializedLevel();
-                    Do.Import(sLevels, fullPath + "\\" + "level", "LEVEL", true);
+                    try
+                    {
+                        Do.Import(sLevels, fullPath + "\\" + "level", "LEVEL", true);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("One or more files not a level data file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
                     for (int i = 0; i < sLevels.Length; i++)
                     {
                         Model.Levels[i].Layer = sLevels[i].levelLayer;
                         Model.Levels[i].Layer.Data = Model.Data;
+                        Model.Levels[i].Layer.Index = currentIndex;
                         Model.Levels[i].LevelMap = sLevels[i].levelMapNum;
                         LevelMap lMap = sLevels[i].levelMap; lMap.Data = Model.Data;
                         Model.LevelMaps[Model.Levels[i].LevelMap] = lMap;
@@ -256,6 +278,10 @@ namespace LAZYSHELL
                         Model.Levels[i].LevelExits.Data = Model.Data;
                         Model.Levels[i].LevelEvents.Data = Model.Data;
                         Model.Levels[i].LevelOverlaps.Data = Model.Data;
+                        Model.Levels[i].LevelNPCs.Index = currentIndex;
+                        Model.Levels[i].LevelExits.Index = currentIndex;
+                        Model.Levels[i].LevelEvents.Index = currentIndex;
+                        Model.Levels[i].LevelOverlaps.Index = currentIndex;
                     }
                 }
             }
@@ -271,7 +297,7 @@ namespace LAZYSHELL
                     serialized[i] = new SerializedBattlefield(Model.TileSetsBF[battlefields[i].TileSet],
                         paletteSets[battlefields[i++].PaletteSet], battlefield);
                 if (radioButtonCurrent.Checked)
-                    Do.Export(serialized[currentIndex], "battlefield." + currentIndex.ToString("d2") + ".dat");
+                    Do.Export(serialized[currentIndex], null, fullPath);
                 else
                     Do.Export(serialized,
                         fullPath + "\\" + Model.GetFileNameWithoutPath() + " - Battlefields\\" + "battlefield",
@@ -283,7 +309,15 @@ namespace LAZYSHELL
                 if (radioButtonCurrent.Checked)
                 {
                     SerializedBattlefield battlefield = new SerializedBattlefield();
-                    battlefield = (SerializedBattlefield)Do.Import(battlefield, fullPath);
+                    try
+                    {
+                        battlefield = (SerializedBattlefield)Do.Import(battlefield, fullPath);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("File not a battlefield data file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
                     Model.TileSetsBF[battlefields[currentIndex].TileSet] = battlefield.tileset;
                     battlefields[currentIndex].GraphicSetA = battlefield.graphicSetA;
                     battlefields[currentIndex].GraphicSetB = battlefield.graphicSetB;
@@ -298,7 +332,15 @@ namespace LAZYSHELL
                     SerializedBattlefield[] battlefield = new SerializedBattlefield[battlefields.Length];
                     for (int i = 0; i < battlefield.Length; i++)
                         battlefield[i] = new SerializedBattlefield();
-                    Do.Import(battlefield, fullPath + "\\" + "battlefield", "BATTLEFIELD", true);
+                    try
+                    {
+                        Do.Import(battlefield, fullPath + "\\" + "battlefield", "BATTLEFIELD", true);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("One or more files not a battlefield data file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
                     for (int i = 0; i < battlefield.Length; i++)
                     {
                         Model.TileSetsBF[battlefields[i].TileSet] = battlefield[i].tileset;
@@ -337,13 +379,29 @@ namespace LAZYSHELL
             {
                 if (radioButtonCurrent.Checked)
                 {
-                    byte[] sample = (byte[])Do.Import(new byte[1], fullPath);
-                    Model.AudioSamples[currentIndex].Sample = BRR.Encode(sample);
+                    try
+                    {
+                        byte[] sample = (byte[])Do.Import(new byte[1], fullPath);
+                        Model.AudioSamples[currentIndex].Sample = BRR.Encode(sample);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error encoding .wav file(s).", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
                 }
                 else
                 {
                     byte[][] samples = new byte[Model.AudioSamples.Length][];
-                    Do.Import(samples, fullPath + "\\" + "sample", "SAMPLE", true);
+                    try
+                    {
+                        Do.Import(samples, fullPath + "\\" + "sample", "SAMPLE", true);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error encoding .wav file(s).", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
                     int i = 0;
                     foreach (BRRSample sample in Model.AudioSamples)
                         sample.Sample = BRR.Encode(samples[i++]);
@@ -373,13 +431,29 @@ namespace LAZYSHELL
                 {
                     if (radioButtonCurrent.Checked)
                     {
-                        array[currentIndex] = (Element)Do.Import(array[currentIndex], fullPath);
+                        try
+                        {
+                            array[currentIndex] = (Element)Do.Import(array[currentIndex], fullPath);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Incorrect data file type.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            return;
+                        }
                         array[currentIndex].Index = currentIndex;
                         array[currentIndex].Data = Model.Data;
                     }
                     else
                     {
-                        Do.Import(array, fullPath + "\\" + name, name.ToUpper(), true);
+                        try
+                        {
+                            Do.Import(array, fullPath + "\\" + name, name.ToUpper(), true);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("One or more files incorrect data file type.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            return;
+                        }
                         int i = 0;
                         foreach (Element item in array)
                         {

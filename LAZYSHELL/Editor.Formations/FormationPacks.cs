@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
@@ -131,6 +132,7 @@ namespace LAZYSHELL
         private void packNum_ValueChanged(object sender, EventArgs e)
         {
             RefreshFormationPacks();
+            Settings.Default.LastFormationPack = index;
         }
         private void packFormation1_ValueChanged(object sender, EventArgs e)
         {

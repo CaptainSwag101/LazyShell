@@ -282,6 +282,8 @@ namespace LAZYSHELL
         }
 
         private bool isInstanceSelected; public bool IsInstanceSelected { get { return isInstanceSelected; } set { isInstanceSelected = value; } }
+        public bool Hilite = false;
+        public int Index = 0;
 
         private byte instanceAmount; public byte InstanceAmount { get { return instanceAmount; } set { instanceAmount = value; } }
         private byte engageType; public byte EngageType { get { return engageType; } set { engageType = value; } }

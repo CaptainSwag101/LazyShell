@@ -22,21 +22,25 @@ namespace LAZYSHELL
             label1.Links.Add(label1.Text.Length, forumthread.Length, forumthread);
             label1.Text += forumthread;
             //
-            richTextBox1.Text += "**************Exception Text**************\n";
-            richTextBox1.Text += exception.Message + "\n";
+            richTextBox1.Text += "**************Exception Text**************\r\n";
+            richTextBox1.Text += exception.Message + "\r\n";
             StringReader reader = new StringReader(exception.StackTrace);
             string line;
             int number = 0;
-            while ((line = reader.ReadLine()) != null && line.StartsWith("   at LAZYSHELL"))
-                richTextBox1.Text += line + "\n";
-            richTextBox1.Text += "\n";
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (!line.StartsWith("   at LAZYSHELL"))
+                    continue;
+                richTextBox1.Text += line + "\r\n";
+            }
+            richTextBox1.Text += "\r\n";
             //
-            richTextBox1.Text += "**************Recent Event History**************\n";
+            richTextBox1.Text += "**************Recent Event History**************\r\n";
             reader = new StringReader(Model.History);
             line = null;
             number = 0;
             while ((line = reader.ReadLine()) != null && number++ < 10)
-                richTextBox1.Text += line + "\n";
+                richTextBox1.Text += line + "\r\n";
         }
         //
         private void copyContents_Click(object sender, EventArgs e)

@@ -216,8 +216,7 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.SelectedEvent = this.eventsList.SelectedNode.Index;
 
-            overlay.DrawLevelEvents(events);
-
+            
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             RefreshEventFieldProperties();
             picture.Invalidate();
@@ -248,8 +247,7 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Height = (byte)this.eventHeight.Value;
 
-            overlay.DrawLevelEvents(events);
-
+            
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
@@ -261,8 +259,7 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Width = (byte)(this.eventLength.Value - 1);
 
-            overlay.DrawLevelEvents(events);
-
+            
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
@@ -274,8 +271,7 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Z = (byte)this.eventZ.Value;
 
-            overlay.DrawLevelEvents(events);
-
+            
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
@@ -287,8 +283,6 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Y = (byte)this.eventY.Value;
 
-            if (!updatingLevel)
-                overlay.DrawLevelEvents(events);
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
@@ -300,8 +294,6 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.X = (byte)this.eventX.Value;
 
-            if (!updatingLevel)
-                overlay.DrawLevelEvents(events);
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
@@ -313,8 +305,7 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Facing = (byte)this.eventFace.SelectedIndex;
 
-            overlay.DrawLevelEvents(events);
-
+            
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
         }
@@ -379,8 +370,7 @@ namespace LAZYSHELL
                 {
                     this.eventsList.SelectedNode = null;
 
-                    overlay.DrawLevelEvents(events);
-
+                    
 
                     RefreshEventFieldProperties();
                     picture.Invalidate();
@@ -397,8 +387,7 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.WidthXPlusHalf = this.eventsWidthXPlusHalf.Checked;
 
-            overlay.DrawLevelEvents(events);
-
+            
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             RefreshEventFieldProperties();
@@ -412,8 +401,7 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.WidthYPlusHalf = this.eventsWidthYPlusHalf.Checked;
 
-            overlay.DrawLevelEvents(events);
-
+            
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             RefreshExitFieldProperties();

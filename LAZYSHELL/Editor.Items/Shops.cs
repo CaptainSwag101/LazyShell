@@ -20,9 +20,11 @@ namespace LAZYSHELL
         private int index { get { return (int)shopName.SelectedIndex; } set { shopName.SelectedIndex = value; } }
         public int Index { get { return index; } set { index = value; } }
         private ComboBox selectedItem;
+        private ItemsEditor itemsEditor;
         // Constructor
-        public Shops()
+        public Shops(ItemsEditor itemsEditor)
         {
+            this.itemsEditor = itemsEditor;
             InitializeComponent();
             InitializeStrings();
             index = 0;
@@ -253,8 +255,6 @@ namespace LAZYSHELL
             shop.Discount25 = this.shopDiscounts.GetItemChecked(2);
             shop.Discount50 = this.shopDiscounts.GetItemChecked(3);
         }
-        #endregion
-
         private void moveUp_Click(object sender, EventArgs e)
         {
             if (selectedItem == null)
@@ -291,5 +291,6 @@ namespace LAZYSHELL
         {
             selectedItem = (ComboBox)sender;
         }
+        #endregion
     }
 }

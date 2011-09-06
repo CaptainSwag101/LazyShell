@@ -342,14 +342,15 @@
             // 
             // toolStripSeparator3
             // 
+            this.toolStripSeparator3.AutoSize = false;
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(8, 25);
             // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(64, 22);
-            this.toolStripLabel3.Text = "Fill sel. with";
+            this.toolStripLabel3.Size = new System.Drawing.Size(56, 22);
+            this.toolStripLabel3.Text = "Fill sel. w/";
             // 
             // fillWith
             // 
@@ -357,7 +358,7 @@
             this.fillWith.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fillWith.MaxLength = 2;
             this.fillWith.Name = "fillWith";
-            this.fillWith.Size = new System.Drawing.Size(30, 25);
+            this.fillWith.Size = new System.Drawing.Size(36, 25);
             this.fillWith.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fillWith_KeyDown);
             // 
             // toolStripSeparator4

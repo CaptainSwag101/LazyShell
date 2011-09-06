@@ -79,7 +79,6 @@
             this.label21 = new System.Windows.Forms.Label();
             this.worldMapTileset = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
             this.worldMapXCoord = new System.Windows.Forms.NumericUpDown();
             this.pointCount = new System.Windows.Forms.NumericUpDown();
             this.panel26 = new System.Windows.Forms.Panel();
@@ -869,7 +868,6 @@
             this.panel48.Controls.Add(this.label21);
             this.panel48.Controls.Add(this.worldMapTileset);
             this.panel48.Controls.Add(this.label12);
-            this.panel48.Controls.Add(this.label47);
             this.panel48.Controls.Add(this.worldMapXCoord);
             this.panel48.Controls.Add(this.pointCount);
             this.panel48.Location = new System.Drawing.Point(27, 315);
@@ -880,14 +878,19 @@
             // worldMapYCoord
             // 
             this.worldMapYCoord.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.worldMapYCoord.Location = new System.Drawing.Point(192, 18);
+            this.worldMapYCoord.Location = new System.Drawing.Point(193, 18);
             this.worldMapYCoord.Maximum = new decimal(new int[] {
-            255,
+            127,
             0,
             0,
             0});
+            this.worldMapYCoord.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            -2147483648});
             this.worldMapYCoord.Name = "worldMapYCoord";
-            this.worldMapYCoord.Size = new System.Drawing.Size(64, 17);
+            this.worldMapYCoord.Size = new System.Drawing.Size(63, 17);
             this.worldMapYCoord.TabIndex = 73;
             this.worldMapYCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.worldMapYCoord.ValueChanged += new System.EventHandler(this.worldMapYCoord_ValueChanged);
@@ -905,24 +908,24 @@
             // label21
             // 
             this.label21.BackColor = System.Drawing.SystemColors.Control;
-            this.label21.Location = new System.Drawing.Point(129, 0);
+            this.label21.Location = new System.Drawing.Point(0, 18);
             this.label21.Name = "label21";
             this.label21.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label21.Size = new System.Drawing.Size(62, 17);
+            this.label21.Size = new System.Drawing.Size(128, 17);
             this.label21.TabIndex = 471;
-            this.label21.Text = "Horizontal";
+            this.label21.Text = "(X, Y) coord";
             // 
             // worldMapTileset
             // 
             this.worldMapTileset.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.worldMapTileset.Location = new System.Drawing.Point(64, 18);
+            this.worldMapTileset.Location = new System.Drawing.Point(193, 0);
             this.worldMapTileset.Maximum = new decimal(new int[] {
             8,
             0,
             0,
             0});
             this.worldMapTileset.Name = "worldMapTileset";
-            this.worldMapTileset.Size = new System.Drawing.Size(64, 17);
+            this.worldMapTileset.Size = new System.Drawing.Size(63, 17);
             this.worldMapTileset.TabIndex = 72;
             this.worldMapTileset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.worldMapTileset.ValueChanged += new System.EventHandler(this.worldMapTileset_ValueChanged);
@@ -930,34 +933,29 @@
             // label12
             // 
             this.label12.BackColor = System.Drawing.SystemColors.Control;
-            this.label12.Location = new System.Drawing.Point(0, 18);
+            this.label12.Location = new System.Drawing.Point(129, 0);
             this.label12.Name = "label12";
             this.label12.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label12.Size = new System.Drawing.Size(63, 17);
             this.label12.TabIndex = 471;
             this.label12.Text = "Tileset";
             // 
-            // label47
-            // 
-            this.label47.BackColor = System.Drawing.SystemColors.Control;
-            this.label47.Location = new System.Drawing.Point(129, 18);
-            this.label47.Name = "label47";
-            this.label47.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label47.Size = new System.Drawing.Size(62, 17);
-            this.label47.TabIndex = 471;
-            this.label47.Text = "Vertical";
-            // 
             // worldMapXCoord
             // 
             this.worldMapXCoord.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.worldMapXCoord.Location = new System.Drawing.Point(192, 0);
+            this.worldMapXCoord.Location = new System.Drawing.Point(129, 18);
             this.worldMapXCoord.Maximum = new decimal(new int[] {
-            255,
+            127,
             0,
             0,
             0});
+            this.worldMapXCoord.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            -2147483648});
             this.worldMapXCoord.Name = "worldMapXCoord";
-            this.worldMapXCoord.Size = new System.Drawing.Size(64, 17);
+            this.worldMapXCoord.Size = new System.Drawing.Size(63, 17);
             this.worldMapXCoord.TabIndex = 71;
             this.worldMapXCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.worldMapXCoord.ValueChanged += new System.EventHandler(this.worldMapXCoord_ValueChanged);
@@ -1695,7 +1693,6 @@
         private System.Windows.Forms.NumericUpDown worldMapTileset;
         private System.Windows.Forms.NumericUpDown worldMapXCoord;
         private System.Windows.Forms.NumericUpDown pointCount;
-        private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label46;

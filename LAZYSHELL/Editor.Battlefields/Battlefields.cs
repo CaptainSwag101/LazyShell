@@ -7,13 +7,14 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
 using LAZYSHELL.Undo;
+using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
     public partial class Battlefields : Form
     {
         #region Variables
-        
+
         private long checksum;
         // main
         private delegate void Function();
@@ -21,6 +22,7 @@ namespace LAZYSHELL
         private int index
         {
             get { return (int)battlefieldNum.Value; }
+            set { battlefieldNum.Value = value; }
         }
         private int palette
         {
@@ -73,8 +75,6 @@ namespace LAZYSHELL
         // Main
         public Battlefields()
         {
-            checksum = Do.GenerateChecksum(battlefields, Model.TileSetsBF, paletteSets);
-            //
             this.overlay = new Overlay();
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
@@ -94,6 +94,9 @@ namespace LAZYSHELL
             LoadTileEditor();
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             new History(this);
+            index = Settings.Default.LastBattlefield;
+            //
+            checksum = Do.GenerateChecksum(battlefields, Model.TileSetsBF, paletteSets);
         }
         public void RefreshBattlefield()
         {
@@ -318,6 +321,20 @@ namespace LAZYSHELL
             tileset.DrawTileset(tileset.TileSetLayer, tileset.TileSet);
             SetBattlefieldImage();
         }
+        private void PasteClear()
+        {
+            // if copied tiles were pasted and not dragging a non-copied selection
+            if (copiedTiles != null && draggedTiles == null)
+                PasteFinal(copiedTiles);
+            if (draggedTiles != null)
+            {
+                PasteFinal(draggedTiles);
+                draggedTiles = null;
+            }
+            overlay.SelectTS = null;
+            selection = null;
+            moving = false;
+        }
         private void Delete()
         {
             if (overlay.SelectTS == null) return;
@@ -477,12 +494,20 @@ namespace LAZYSHELL
             tileEditor.Close();
             paletteEditor.Close();
             graphicEditor.Close();
+            tileEditor.Dispose();
+            paletteEditor.Dispose();
+            graphicEditor.Dispose();
         }
         private void battlefieldNum_ValueChanged(object sender, EventArgs e)
         {
             battlefieldName.SelectedIndex = (int)battlefieldNum.Value;
             tileset.AssembleIntoModel(16, 16);
+            draggedTiles = null;
+            overlay.SelectTS = null;
+            selection = null;
+            moving = false;
             RefreshBattlefield();
+            Settings.Default.LastBattlefield = index;
         }
         private void battlefieldName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -643,6 +668,8 @@ namespace LAZYSHELL
                     overlay.SelectTS.X * zoom, overlay.SelectTS.Y * zoom,
                     rsrc.Width * zoom, rsrc.Height * zoom);
                 e.Graphics.DrawImage(new Bitmap(selection), rdst, rsrc, GraphicsUnit.Pixel);
+                Do.DrawString(e.Graphics, new Point(rdst.X, rdst.Y + rdst.Height),
+                    "click/drag", Color.White, Color.Black, new Font("Tahoma", 6.75F, FontStyle.Bold));
             }
 
             float[][] matrixItems ={ 
@@ -844,6 +871,7 @@ namespace LAZYSHELL
                 this.pictureBoxBattlefield.Cursor = System.Windows.Forms.Cursors.Cross;
             else
                 this.pictureBoxBattlefield.Cursor = System.Windows.Forms.Cursors.Arrow;
+            PasteClear();
         }
         // menu strip
         private void save_Click(object sender, EventArgs e)
@@ -913,7 +941,7 @@ namespace LAZYSHELL
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current battlefield. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             battlefield = new Battlefield(Model.Data, index);
             Model.Decompress(Model.TileSetsBF, 0x150000, 0x160000, 0x2000, "", index, index + 1, false);

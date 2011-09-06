@@ -1,5 +1,68 @@
 Major changes/additions are indicated by ***
 
+v3.8 (2011-09-06)
+--------------------------------------
+Editor-specific changes:
+*Effects: tile shift left/up changed to X,Y
+*Formations: click/drag monsters now much faster
+*Levels: click/drag exits, events, npcs, overlaps now much faster
+*Levels: levels load much faster now b/c of method for clearing arrays
+*Levels: show/hide solidity automatically shows/hides solidity tileset
+*Levels: find-in-tileset now determines by pixel the exact tile clicked
+*Settings: removed "remember last loaded level", it is now default
+*Sprites: click/drag tiles now much faster
+*World Maps: horizontal/vertical changed to X,Y; uses +/- values
+*World Maps: click/drag map points a little faster
+
+Additions:
+*Most editors now automatically load last viewed index
+*Event Scripts: navigation buttons let user move back/forth between scripts
+*Levels: create a tile mod from a selection
+*Levels: can click/drag tile and solid mods
+*Levels: pasted/moved selection tagged with "click/drag" label
+*Levels: can easily resize mask with click/drag of mask edges
+*Levels: navigation buttons let user move back/forth between levels
+*Main: History button in main form shows past actions (ie. clicked controls)
+*Palette Editor: now able to modify individual rows/columns
+*Patches: ability to click direct link to IPS patch file
+*Restore: added restore for tile mods and solid mods
+*World Maps: click/drag the map to change X,Y position
+
+Fixes:
+*Some palette/graphics editors needed to be disposed b/c crashing
+*Battlefields: issues with dragging selection and then changing index
+*Dialogues: issues with retaining an empty page after clearing it
+*Effects: importing reading from effect index and not image index
+*Effects: problems with selecting, dragging, pasting and copy buffers
+*Effects: problems with clicking buttons, button resetting, etc.
+*Effects: minimum width/height of molds should be 1
+*Effects: clear effects passing index instead of image num as parameter
+*Effects: issues with realignment of frames when width/height changed
+*Effects: pasted/dragged selection not finalizing when changing mold index
+*Import/Export: now cancels import if opened file not correct data type
+*Import/Export: not resetting index of imported level elements
+*Main Title: crash when dragging selection beyond lower edges
+*Levels: crash when open level previewer b/c null form
+*Levels: solid mods, not reading from correct map (solidity, not mods)
+*Levels: crash when try to draw tile chunk beyond tile mod's boundaries
+*Levels: eliminated flickering of level image with simple foolproof method
+*Levels: not checking if enough space for tile/solid mods before saving
+*Levels: map destination items in exit tab double-tagged with index
+*Levels: edit all layers button unchecks when other buttons checked
+*Levels: problems with clicking buttons, button resetting, etc.
+*Levels: crash when dragging tileset selection beyond lower edges
+*Levels: pasted/dragged selection not nulling after changing level
+*Patches: extremely slow patch retrieval from server b/c web proxy not null
+*Settings: custom ROM directory not being loaded into textbox
+*Sprites: clear function for animations wasn't even written at all
+*Sprites: flipping tiles not registering as a change to prompt save
+*Sprites: long standing problem with assembler making copies of copies
+*Sprites: moving tiles not set as false when mouse button released
+*World Maps: crash when dragging selection beyond lower edges
+*World Maps: crash when dragging map point beyond image boundaries
+*World Maps: resetting map point not redrawing map points on image
+
+
 v3.7
 --------------------------------------
 General changes:

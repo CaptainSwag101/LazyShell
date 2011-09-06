@@ -14,7 +14,7 @@ namespace LAZYSHELL
     public partial class SpriteMolds : Form
     {
         #region Variables
-        
+
         private delegate void Function();
         // main editor accessed variables
         private Sprites spritesEditor;
@@ -38,6 +38,7 @@ namespace LAZYSHELL
         private Mold.Tile unique_tile { get { return animation.UniqueTiles[index_tile]; } set { animation.UniqueTiles[index_tile] = value; } }
         private Bitmap tilemapImage;
         private Bitmap tilesetImage;
+        private List<Bitmap> tileImages = new List<Bitmap>();
         private bool updating = false;
         private Overlay overlay;
         private int zoom = 1;
@@ -250,8 +251,15 @@ namespace LAZYSHELL
         }
         public void SetTilemapImage()
         {
-            int[] pixels = mold.MoldPixels();
-            tilemapImage = new Bitmap(Do.PixelsToImage(pixels, 256, 256));
+            tileImages = new List<Bitmap>();
+            tilemapImage = new Bitmap(Do.PixelsToImage(mold.MoldPixels(), 256, 256));
+            if (mold.Gridplane)
+                tileImages.Add(tilemapImage);
+            else
+            {
+                foreach (Mold.Tile tile in mold.Tiles)
+                    tileImages.Add(new Bitmap(Do.PixelsToImage(tile.Get16x16TilePixels(), 16, 16)));
+            }
             pictureBoxMold.Invalidate();
         }
         // drawing
@@ -277,7 +285,8 @@ namespace LAZYSHELL
                     if (index != 0xFF)
                     {
                         Mold.Tile tile = mold.Tiles[index];
-                        if (tile.AddedToBuffer) continue;
+                        if (tile.AddedToBuffer) 
+                            continue;
                         tile.AddedToBuffer = true;
                         tiles.Add(tile);
                     }
@@ -344,6 +353,7 @@ namespace LAZYSHELL
             else if (mouseOverTile != 0xFF)
                 tiles.RemoveAt(mouseOverTile);
             SetTilemapImage();
+            animation.Assemble();
         }
         private void Cut()
         {
@@ -392,6 +402,7 @@ namespace LAZYSHELL
             }
             overlay.Select = null;
             SetTilemapImage();
+            animation.Assemble();
         }
         private void Flip(string type)
         {
@@ -423,6 +434,7 @@ namespace LAZYSHELL
             foreach (Mold.Tile tile in mold.Tiles)
                 tile.AddedToBuffer = false;
             SetTilemapImage();
+            animation.Assemble();
         }
         #endregion
         #region Event Handlers
@@ -434,11 +446,21 @@ namespace LAZYSHELL
             if (showBG.Checked)
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[0])),
                     new Rectangle(new Point(0, 0), pictureBoxMold.Size));
-            if (tilemapImage != null)
+            //if (tilemapImage != null)
+            //{
+            //    Rectangle src = new Rectangle(0, 0, tilemapImage.Width, tilemapImage.Height);
+            //    Rectangle dst = new Rectangle(0, 0, tilemapImage.Width * zoom, tilemapImage.Height * zoom);
+            //    e.Graphics.DrawImage(tilemapImage, dst, src, GraphicsUnit.Pixel);
+            //}
+            if (tileImages.Count > 0)
             {
-                Rectangle src = new Rectangle(0, 0, tilemapImage.Width, tilemapImage.Height);
-                Rectangle dst = new Rectangle(0, 0, tilemapImage.Width * zoom, tilemapImage.Height * zoom);
-                e.Graphics.DrawImage(tilemapImage, dst, src, GraphicsUnit.Pixel);
+                for (int i = tileImages.Count - 1; i >= 0; i--)
+                {
+                    Rectangle src = new Rectangle(0, 0, tileImages[i].Width, tileImages[i].Height);
+                    Rectangle dst = new Rectangle(tiles[i].XCoord * zoom, tiles[i].YCoord * zoom,
+                        tileImages[0].Width * zoom, tileImages[0].Height * zoom);
+                    e.Graphics.DrawImage(tileImages[i], dst, src, GraphicsUnit.Pixel);
+                }
             }
             if (!select.Checked && !mold.Gridplane && mouseOverTile != 0xFF)
             {
@@ -452,18 +474,10 @@ namespace LAZYSHELL
                 if (overlay.Select != null)
                 {
                     overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, zoom);
-                    for (int y = overlay.Select.Y; y < overlay.Select.Terminal.Y; y++)
+                    foreach (Mold.Tile tile in mold.Tiles)
                     {
-                        for (int x = overlay.Select.X; x < overlay.Select.Terminal.X; x++)
-                        {
-                            if (y < 0 || x < 0) continue;
-                            if (y >= 256 || x >= 256) continue;
-                            if (mold.MoldTilesPerPixel[y * 256 + x] != 0xFF)
-                            {
-                                Mold.Tile tile = mold.Tiles[mold.MoldTilesPerPixel[y * 256 + x]];
-                                DrawHoverBox(e.Graphics, tile.XCoord, tile.YCoord, zoom, tile);
-                            }
-                        }
+                        if (Do.WithinBounds(overlay.Select.Region, new Rectangle(tile.XCoord, tile.YCoord, 16, 16)))
+                            DrawHoverBox(e.Graphics, tile.XCoord, tile.YCoord, zoom, tile);
                     }
                 }
             }
@@ -639,7 +653,11 @@ namespace LAZYSHELL
                         tile.XCoord = (byte)(x + tile.MouseDownPosition.X);
                         tile.YCoord = (byte)(y + tile.MouseDownPosition.Y);
                     }
-                    SetTilemapImage();
+                    // copy tile images to tilemapImage
+                    tilemapImage = new Bitmap(256, 256);
+                    Graphics graphics = Graphics.FromImage(tilemapImage);
+                    for (int i = tileImages.Count - 1; i >= 0; i--)
+                        graphics.DrawImage(tileImages[i], tiles[i].XCoord, tiles[i].YCoord);
                     return;
                 }
                 // if mouse not clicked and within the current selection
@@ -664,7 +682,11 @@ namespace LAZYSHELL
                 updating = false;
                 tile.XCoord = (byte)(x - mouseDownPosition.X);
                 tile.YCoord = (byte)(y - mouseDownPosition.Y);
-                SetTilemapImage();
+                // copy tile images to tilemapImage
+                tilemapImage = new Bitmap(256, 256);
+                Graphics graphics = Graphics.FromImage(tilemapImage);
+                for (int i = tileImages.Count - 1; i >= 0; i--)
+                    graphics.DrawImage(tileImages[i], tiles[i].XCoord, tiles[i].YCoord);
             }
             else if (!select.Checked)
             {
@@ -682,12 +704,14 @@ namespace LAZYSHELL
         }
         private void pictureBoxMold_MouseUp(object sender, MouseEventArgs e)
         {
+            move = false;
             mouseDownPosition = new Point(-1, -1);
             Point p = new Point(Math.Abs(pictureBoxMold.Left), Math.Abs(pictureBoxMold.Top));
             pictureBoxMold.Focus();
             panelMoldImage.AutoScrollPosition = p;
             animation.Assemble();
             spritesEditor.CalculateFreeSpace();
+            SetTilemapImage();
         }
         private void pictureBoxMold_MouseLeave(object sender, EventArgs e)
         {
@@ -732,10 +756,9 @@ namespace LAZYSHELL
             if (tilemapImage != null)
             {
                 int z = 4;
-                RectangleF source, dest, clone;
-                source = new RectangleF(0, 0, pictureBoxZoom.Width / 4, pictureBoxZoom.Height / 4);
-                dest = new RectangleF(0, 0, pictureBoxZoom.Width / 4 * z, pictureBoxZoom.Height / 4 * z);
-                clone = new RectangleF(
+                RectangleF src = new RectangleF(0, 0, pictureBoxZoom.Width / 4, pictureBoxZoom.Height / 4);
+                RectangleF dst = new RectangleF(0, 0, pictureBoxZoom.Width / 4 * z, pictureBoxZoom.Height / 4 * z);
+                RectangleF clone = new RectangleF(
                     Math.Min(208, Math.Max(0, mousePosition.X - (pictureBoxZoom.Width / 8))),
                     Math.Min(208, Math.Max(0, mousePosition.Y - (pictureBoxZoom.Height / 8))),
                     pictureBoxZoom.Width / 4, pictureBoxZoom.Height / 4);
@@ -743,7 +766,7 @@ namespace LAZYSHELL
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 e.Graphics.DrawImage(
                     new Bitmap(tilemapImage.Clone(clone, PixelFormat.DontCare)),
-                    dest, source, GraphicsUnit.Pixel);
+                    dst, src, GraphicsUnit.Pixel);
                 if (showMoldPixelGrid.Checked)
                 {
                     Pen p = new Pen(new SolidBrush(Color.Gray));
@@ -939,31 +962,28 @@ namespace LAZYSHELL
         }
         private void select_Click(object sender, EventArgs e)
         {
-            overlay.Select = null;
-            erase.Checked = false;
-            draw.Checked = false;
+            Do.ResetToolStripButtons(toolStrip4, (ToolStripButton)sender);
             moldZoomIn.Checked = false;
             moldZoomOut.Checked = false;
+            overlay.Select = null;
             pictureBoxMold.Cursor = select.Checked ? Cursors.Cross : Cursors.Arrow;
             pictureBoxMold.Invalidate();
         }
         private void erase_Click(object sender, EventArgs e)
         {
-            overlay.Select = null;
-            select.Checked = false;
-            draw.Checked = false;
+            Do.ResetToolStripButtons(toolStrip4, (ToolStripButton)sender);
             moldZoomIn.Checked = false;
             moldZoomOut.Checked = false;
+            overlay.Select = null;
             pictureBoxMold.Cursor = erase.Checked ? new Cursor(GetType(), "CursorErase.cur") : Cursors.Arrow;
             pictureBoxMold.Invalidate();
         }
         private void draw_Click(object sender, EventArgs e)
         {
-            overlay.Select = null;
-            erase.Checked = false;
-            select.Checked = false;
+            Do.ResetToolStripButtons(toolStrip4, (ToolStripButton)sender);
             moldZoomIn.Checked = false;
             moldZoomOut.Checked = false;
+            overlay.Select = null;
             pictureBoxMold.Cursor = draw.Checked ? new Cursor(GetType(), "CursorDraw.cur") : Cursors.Arrow;
             pictureBoxMold.Invalidate();
         }
@@ -985,7 +1005,8 @@ namespace LAZYSHELL
         }
         private void selectAll_Click(object sender, EventArgs e)
         {
-            select.Checked = true;
+            if (!select.Checked)
+                select.PerformClick();
             overlay.Select = new Overlay.Selection(1, 0, 0, 256, 256);
             pictureBoxMold.Invalidate();
         }
@@ -1014,20 +1035,16 @@ namespace LAZYSHELL
         }
         private void moldZoomIn_Click(object sender, EventArgs e)
         {
-            overlay.Select = null;
-            erase.Checked = false;
-            draw.Checked = false;
-            select.Checked = false;
+            Do.ResetToolStripButtons(toolStrip4, (ToolStripButton)sender);
             moldZoomOut.Checked = false;
+            overlay.Select = null;
             pictureBoxMold.Cursor = moldZoomIn.Checked ? new Cursor(GetType(), "CursorZoomIn.cur") : Cursors.Arrow;
         }
         private void moldZoomOut_Click(object sender, EventArgs e)
         {
-            overlay.Select = null;
-            erase.Checked = false;
-            draw.Checked = false;
+            Do.ResetToolStripButtons(toolStrip4, (ToolStripButton)sender);
             moldZoomIn.Checked = false;
-            select.Checked = false;
+            overlay.Select = null;
             pictureBoxMold.Cursor = moldZoomOut.Checked ? new Cursor(GetType(), "CursorZoomOut.cur") : Cursors.Arrow;
         }
         private void toggleZoomBox_Click(object sender, EventArgs e)
@@ -1153,7 +1170,7 @@ namespace LAZYSHELL
                 tile.Width = (int)moldTileXCoord.Value;
             if (mold.Gridplane)
                 SetTilesetImage();
-            SetTilemapImage();
+            pictureBoxMold.Invalidate();
             sequences.SetSequenceFrameImages();
             // update free space
             if (mold.Gridplane)
@@ -1171,7 +1188,7 @@ namespace LAZYSHELL
                 tile.Height = (int)moldTileYCoord.Value;
             if (mold.Gridplane)
                 SetTilesetImage();
-            SetTilemapImage();
+            pictureBoxMold.Invalidate();
             sequences.SetSequenceFrameImages();
             // update free space
             if (mold.Gridplane)

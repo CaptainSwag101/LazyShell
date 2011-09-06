@@ -60,6 +60,7 @@ namespace LAZYSHELL
                 }
             }
             new History(this);
+            Do.AddHistory("LOADED LAZY SHELL APPLICATION");
         }
         #region Function
         public static void GuiMain(ProgramController AppControl)
@@ -363,7 +364,7 @@ namespace LAZYSHELL
         private void restoreElementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             importElements = new Restore();
-            importElements.Show();
+            importElements.ShowDialog();
         }
         private void publishRomToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -375,6 +376,13 @@ namespace LAZYSHELL
             new SettingsEditor().ShowDialog();
         }
         // toolStripMenuitems : Help
+        private void history_Click(object sender, EventArgs e)
+        {
+            NewMessage.Show("EVENT HISTORY - Lazy Shell",
+                "This is a list of past actions performed by the user exclusively within the Lazy Shell application. " +
+                "This is to be used for debugging purposes, chiefly for reproducing bugs and other defects encountered by the user.",
+                Model.History, 600, 600, true);
+        }
         private void hexViewer_Click(object sender, EventArgs e)
         {
             Model.HexViewer.Show();
@@ -400,8 +408,12 @@ namespace LAZYSHELL
         // other
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Do.AddHistory("CLOSED LAZY SHELL APPLICATION");
             FinalizeAndSave(e, 1);
             settings.Save();
+        }
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
         }
         // Editor buttons
         private void openAllies_Click(object sender, EventArgs e)
@@ -474,6 +486,7 @@ namespace LAZYSHELL
         }
         private void openSprites_Click(object sender, System.EventArgs e)
         {
+            //Do.CompareImages();
             AppControl.Sprites();
         }
         private void openWorldMaps_Click(object sender, EventArgs e)
@@ -502,7 +515,7 @@ namespace LAZYSHELL
         private void openAll_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You are about to open all 15 editor windows.\n\nAre you sure you want to do this?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 return;
             openAllies_Click(null, null);
             openAnimations_Click(null, null);

@@ -98,7 +98,7 @@
             // packNameTextBox
             // 
             this.packNameTextBox.Name = "packNameTextBox";
-            this.packNameTextBox.Size = new System.Drawing.Size(325, 25);
+            this.packNameTextBox.Size = new System.Drawing.Size(305, 25);
             // 
             // searchFormationPacks
             // 

@@ -67,7 +67,7 @@ namespace LAZYSHELL
             for (int i = 0; i < moldCount; i++)
             {
                 tMold = new Mold();
-                tMold.InitializeMold(sm, offset, uniqueTiles, index);
+                tMold.InitializeMold(sm, offset, uniqueTiles, index, animationOffset);
                 molds.Add(tMold);
                 offset += 2;
             }
@@ -103,7 +103,7 @@ namespace LAZYSHELL
             for (int i = 0; i < moldCount; i++)
             {
                 tMold = new Mold();
-                tMold.InitializeMold(sm, offset, uniqueTiles, index);
+                tMold.InitializeMold(sm, offset, uniqueTiles, index, animationOffset);
                 molds.Add(tMold);
                 offset += 2;
             }
@@ -173,6 +173,8 @@ namespace LAZYSHELL
             int mOffset = molds.Count * 2 + 2;    // offset of first mold tilemap
             foreach (Mold m in molds)
             {
+                if (index == 162 && mOffset == 0x132)
+                    index = 162;
                 if (m.Tiles.Count != 0)
                 {
                     if (m.Gridplane)
@@ -236,6 +238,21 @@ namespace LAZYSHELL
         }
         public override void Clear()
         {
+            vramAllocation = 2048;
+            int moldCount = molds.Count;
+            for (int i = 1; i < moldCount; i++)
+                molds.RemoveAt(1);
+            int tileCount = molds[0].Tiles.Count;
+            for (int i = 1; i < tileCount; i++)
+                molds[0].Tiles.RemoveAt(1);
+            molds[0].Gridplane = false;
+            if (molds[0].Tiles.Count > 0)
+                molds[0].Tiles[0] = molds[0].Tiles[0].New(false);
+            uniqueTiles = new List<Mold.Tile>();
+            int sequenceCount = sequences.Count;
+            for (int i = 1; i < sequenceCount; i++)
+                sequences.RemoveAt(1);
+            sequences[0].Frames = new List<Sequence.Frame>();
         }
     }
 }

@@ -37,6 +37,7 @@ namespace LAZYSHELL
             itemName.BackgroundImage = Model.MenuBackground;
             InitializeStrings();
             RefreshItems();
+            index = settings.LastItem;
         }
         #region Functions
         private void InitializeStrings()
@@ -457,6 +458,7 @@ namespace LAZYSHELL
         private void itemNum_ValueChanged(object sender, EventArgs e)
         {
             RefreshItems();
+            settings.LastItem = index;
         }
         private void itemName_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -93,6 +93,7 @@ namespace LAZYSHELL
             fonts.BringToFront();
             // set controls
             updatingDialogue = true;
+            index = Settings.Default.LastDialogue;
             variables.SelectedIndex = 0;
             RefreshDialogueEditor();
             CalculateFreeTableSpace();
@@ -100,9 +101,9 @@ namespace LAZYSHELL
             updatingDialogue = false;
             new ToolTipLabel(this, toolTip1, showDecHex, helpTips);
             //
+            new History(this);
             checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, dialogueTileset, 
                 fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu);
-            new History(this);
         }
         // tooltips
         private void SetToolTips(ToolTip toolTip1)
@@ -554,7 +555,7 @@ namespace LAZYSHELL
             }
             else
                 MessageBox.Show("The dialogue in bank 1 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             if (FreeSpace(0x800))
             {
@@ -575,7 +576,7 @@ namespace LAZYSHELL
             }
             else
                 MessageBox.Show("The dialogue in bank 2 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             if (FreeSpace(0xC00))
             {
@@ -611,7 +612,7 @@ namespace LAZYSHELL
             }
             else
                 MessageBox.Show("The dialogue in bank 3 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, dialogueTileset,
                 fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu);
         }
@@ -668,6 +669,7 @@ namespace LAZYSHELL
 
             RefreshDialogueEditor();
             SetTextImage();
+            Settings.Default.LastDialogue = index;
         }
         private void textView_Click(object sender, EventArgs e)
         {
@@ -957,7 +959,7 @@ namespace LAZYSHELL
         {
             if (MessageBox.Show(
                 "You are about to apply the compression table to all dialogues, which involves re-encoding all 4,096 dialogues. This procedure may take up to half a minute to complete.\n\nGo ahead with process?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Information) != DialogResult.Yes)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 return;
             // reencode all dialogues
             ProgressBar progressBar = new ProgressBar("ENCODING DIALOGUES...", 4096);
@@ -1120,7 +1122,7 @@ namespace LAZYSHELL
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current dialogue. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             dialogue = new Dialogue(Model.Data, index);
             dialoguePreview.Reset();

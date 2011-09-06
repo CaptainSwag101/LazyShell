@@ -52,6 +52,7 @@ namespace LAZYSHELL.Patches
             try
             {
                 Uri link = new Uri(settings.patchServerURL + "patch" + pn.ToString() + "/patch" + pn.ToString() + ".bin");
+                WebRequest.DefaultWebProxy = null;
                 client.DownloadDataAsync(link);
             }
             catch
@@ -85,8 +86,9 @@ namespace LAZYSHELL.Patches
                 DescriptionTextBox.Text += "Size: " + patch.Size + "\r\n\r\n";
                 DescriptionTextBox.Text += "Description:\r\n";
                 DescriptionTextBox.Text += patch.Description + "\r\n\r\n";
-                DescriptionTextBox.Text += patch.Extra + "\r\n\r\n";
-                DescriptionTextBox.Text += "Direct Link: \r\n";
+                if (patch.Extra != "")
+                    DescriptionTextBox.Text += patch.Extra + "\r\n\r\n";
+                DescriptionTextBox.Text += "Direct Link:\r\n";
                 DescriptionTextBox.Text += patch.PatchURI;
                 AssemblyHackLabel.Visible = patch.AssemblyHack;
                 GameHackLabel.Visible = patch.GameHack;
@@ -191,7 +193,11 @@ namespace LAZYSHELL.Patches
 
                 if (ips.Verified)
                 {
-                    DialogResult result = MessageBox.Show("Apply this patch to the currently open ROM image?\n\nNote: This will modify the current rom image, and cannot be undone.\nNote: You may want to save the patched ROM image to disk once done.", "LAZY SHELL", MessageBoxButtons.YesNo);
+                    DialogResult result = MessageBox.Show(
+                        "Apply this patch to the currently open ROM image?\n\n" +
+                        "Note: This will modify the current rom image, and cannot be undone. " +
+                        "You may want to save the patched ROM image to disk once done.",
+                        "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
                         if (ips.ApplyTo(Model.Data))
@@ -220,6 +226,10 @@ namespace LAZYSHELL.Patches
                 StartIPSDownload();
             else
                 StopIPSDownload();
+        }
+        private void DescriptionTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
         }
     }
 }

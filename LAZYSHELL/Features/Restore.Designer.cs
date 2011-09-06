@@ -53,14 +53,16 @@
             System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Exits");
             System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Events");
             System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Overlaps");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Tilemaps");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Tilesets");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Graphics");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Solidity maps");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Battlefields");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Battlefield tilesets");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Battlefield Graphics");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Levels", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Tile mods");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Solid mods");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Tilemaps");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Tilesets");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Graphics");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Solidity maps");
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Battlefields");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Battlefield tilesets");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Battlefield Graphics");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Levels", new System.Windows.Forms.TreeNode[] {
             treeNode11,
             treeNode12,
             treeNode13,
@@ -73,29 +75,31 @@
             treeNode20,
             treeNode21,
             treeNode22,
-            treeNode23});
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Event scripts");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Action scripts");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Battle scripts");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Animation scripts");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Scripts", new System.Windows.Forms.TreeNode[] {
-            treeNode25,
-            treeNode26,
+            treeNode23,
+            treeNode24,
+            treeNode25});
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Event scripts");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Action scripts");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Battle scripts");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Animation scripts");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Scripts", new System.Windows.Forms.TreeNode[] {
             treeNode27,
-            treeNode28});
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Sprites");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Spell effects");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Dialogues");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Fonts, backgrounds");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("World map tilesets");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("World maps");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Sprites", new System.Windows.Forms.TreeNode[] {
-            treeNode30,
-            treeNode31,
+            treeNode28,
+            treeNode29,
+            treeNode30});
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Sprites");
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Spell effects");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Dialogues");
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Fonts, backgrounds");
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("World map tilesets");
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("World maps");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Sprites", new System.Windows.Forms.TreeNode[] {
             treeNode32,
             treeNode33,
             treeNode34,
-            treeNode35});
+            treeNode35,
+            treeNode36,
+            treeNode37});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Restore));
             this.elements = new System.Windows.Forms.TreeView();
             this.browseFreshRom = new System.Windows.Forms.Button();
@@ -144,52 +148,56 @@
             treeNode15.Text = "Events";
             treeNode16.Name = "Overlaps";
             treeNode16.Text = "Overlaps";
-            treeNode17.Name = "Tilemaps";
-            treeNode17.Text = "Tilemaps";
-            treeNode18.Name = "Tilesets";
-            treeNode18.Text = "Tilesets";
-            treeNode19.Name = "Graphics";
-            treeNode19.Text = "Graphics";
-            treeNode20.Name = "SolidityMaps";
-            treeNode20.Text = "Solidity maps";
-            treeNode21.Name = "Battlefields";
-            treeNode21.Text = "Battlefields";
-            treeNode22.Name = "BattlefieldTilesets";
-            treeNode22.Text = "Battlefield tilesets";
-            treeNode23.Name = "BattlefieldGraphics";
-            treeNode23.Text = "Battlefield Graphics";
-            treeNode24.Name = "Levels";
-            treeNode24.Text = "Levels";
-            treeNode25.Name = "EventScripts";
-            treeNode25.Text = "Event scripts";
-            treeNode26.Name = "ActionScripts";
-            treeNode26.Text = "Action scripts";
-            treeNode27.Name = "BattleScripts";
-            treeNode27.Text = "Battle scripts";
-            treeNode28.Name = "AnimationScripts";
-            treeNode28.Text = "Animation scripts";
-            treeNode29.Name = "Scripts";
-            treeNode29.Text = "Scripts";
-            treeNode30.Name = "Sprites";
-            treeNode30.Text = "Sprites";
-            treeNode31.Name = "SpellEffects";
-            treeNode31.Text = "Spell effects";
-            treeNode32.Name = "Dialogues";
-            treeNode32.Text = "Dialogues";
-            treeNode33.Name = "FontsBackgrounds";
-            treeNode33.Text = "Fonts, backgrounds";
-            treeNode34.Name = "WorldMapTilesets";
-            treeNode34.Text = "World map tilesets";
-            treeNode35.Name = "WorldMaps";
-            treeNode35.Text = "World maps";
-            treeNode36.Name = "Sprites";
-            treeNode36.Text = "Sprites";
+            treeNode17.Name = "TileMods";
+            treeNode17.Text = "Tile mods";
+            treeNode18.Name = "SolidMods";
+            treeNode18.Text = "Solid mods";
+            treeNode19.Name = "Tilemaps";
+            treeNode19.Text = "Tilemaps";
+            treeNode20.Name = "Tilesets";
+            treeNode20.Text = "Tilesets";
+            treeNode21.Name = "Graphics";
+            treeNode21.Text = "Graphics";
+            treeNode22.Name = "SolidityMaps";
+            treeNode22.Text = "Solidity maps";
+            treeNode23.Name = "Battlefields";
+            treeNode23.Text = "Battlefields";
+            treeNode24.Name = "BattlefieldTilesets";
+            treeNode24.Text = "Battlefield tilesets";
+            treeNode25.Name = "BattlefieldGraphics";
+            treeNode25.Text = "Battlefield Graphics";
+            treeNode26.Name = "Levels";
+            treeNode26.Text = "Levels";
+            treeNode27.Name = "EventScripts";
+            treeNode27.Text = "Event scripts";
+            treeNode28.Name = "ActionScripts";
+            treeNode28.Text = "Action scripts";
+            treeNode29.Name = "BattleScripts";
+            treeNode29.Text = "Battle scripts";
+            treeNode30.Name = "AnimationScripts";
+            treeNode30.Text = "Animation scripts";
+            treeNode31.Name = "Scripts";
+            treeNode31.Text = "Scripts";
+            treeNode32.Name = "Sprites";
+            treeNode32.Text = "Sprites";
+            treeNode33.Name = "SpellEffects";
+            treeNode33.Text = "Spell effects";
+            treeNode34.Name = "Dialogues";
+            treeNode34.Text = "Dialogues";
+            treeNode35.Name = "FontsBackgrounds";
+            treeNode35.Text = "Fonts, backgrounds";
+            treeNode36.Name = "WorldMapTilesets";
+            treeNode36.Text = "World map tilesets";
+            treeNode37.Name = "WorldMaps";
+            treeNode37.Text = "World maps";
+            treeNode38.Name = "Sprites";
+            treeNode38.Text = "Sprites";
             this.elements.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode10,
-            treeNode24,
-            treeNode29,
-            treeNode36});
-            this.elements.Size = new System.Drawing.Size(333, 458);
+            treeNode26,
+            treeNode31,
+            treeNode38});
+            this.elements.Size = new System.Drawing.Size(333, 491);
             this.elements.TabIndex = 0;
             this.elements.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.elements_AfterCheck);
             // 
@@ -211,14 +219,14 @@
             this.freshRomTextBox.Location = new System.Drawing.Point(12, 14);
             this.freshRomTextBox.Name = "freshRomTextBox";
             this.freshRomTextBox.ReadOnly = true;
-            this.freshRomTextBox.Size = new System.Drawing.Size(333, 20);
+            this.freshRomTextBox.Size = new System.Drawing.Size(333, 21);
             this.freshRomTextBox.TabIndex = 2;
             // 
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(189, 533);
+            this.buttonOK.Location = new System.Drawing.Point(189, 566);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 3;
@@ -229,7 +237,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(270, 533);
+            this.buttonCancel.Location = new System.Drawing.Point(270, 566);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 4;
@@ -237,18 +245,21 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // ImportElements
+            // Restore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 568);
+            this.ClientSize = new System.Drawing.Size(357, 601);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.freshRomTextBox);
             this.Controls.Add(this.browseFreshRom);
             this.Controls.Add(this.elements);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ImportElements";
+            this.Location = new System.Drawing.Point(5, 5);
+            this.Name = "Restore";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "IMPORT ELEMENTS FROM ANOTHER ROM...";
             this.ResumeLayout(false);
             this.PerformLayout();

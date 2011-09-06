@@ -13,6 +13,7 @@ namespace LAZYSHELL
     {
         
         private long checksum;
+        public long Checksum { get { return checksum; } set { checksum = value; } }
         private Settings settings = Settings.Default;
         public Items itemsEditor;
         public Shops shopsEditor;
@@ -27,7 +28,7 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.F2, baseConversion);
             this.toolTip1.InitialDelay = 0;
             // create editors
-            shopsEditor = new Shops();
+            shopsEditor = new Shops(this);
             shopsEditor.TopLevel = false;
             shopsEditor.Dock = DockStyle.Left;
             shopsEditor.SetToolTips(toolTip1);
@@ -41,8 +42,8 @@ namespace LAZYSHELL
             itemsEditor.Visible = true;
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
             //
-            checksum = Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops);
             new History(this);
+            checksum = Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops);
         }
         // functions
         public void Assemble()
@@ -118,7 +119,7 @@ namespace LAZYSHELL
         private void resetItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current item. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             itemsEditor.Item = new Item(Model.Data, itemsEditor.Index);
             itemsEditor.RefreshItems();
@@ -126,7 +127,7 @@ namespace LAZYSHELL
         private void resetShopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current shop. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             shopsEditor.Shop = new Shop(Model.Data, shopsEditor.Index);
             shopsEditor.RefreshShops();

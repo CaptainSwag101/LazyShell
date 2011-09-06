@@ -72,7 +72,7 @@
             this.openTileEditor = new System.Windows.Forms.ToolStripButton();
             this.label86 = new System.Windows.Forms.Label();
             this.e_tileSetSize = new System.Windows.Forms.NumericUpDown();
-            this.e_molds = new System.Windows.Forms.ListBox();
+            this.e_molds = new LAZYSHELL.NewListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.newMold = new System.Windows.Forms.ToolStripButton();
             this.deleteMold = new System.Windows.Forms.ToolStripButton();
@@ -108,15 +108,15 @@
             0,
             0});
             this.e_moldWidth.Minimum = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
             this.e_moldWidth.Name = "e_moldWidth";
             this.e_moldWidth.Size = new System.Drawing.Size(40, 17);
-            this.e_moldWidth.Text = "0";
+            this.e_moldWidth.Text = "1";
             this.e_moldWidth.Value = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
@@ -133,15 +133,15 @@
             0,
             0});
             this.e_moldHeight.Minimum = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
             this.e_moldHeight.Name = "e_moldHeight";
             this.e_moldHeight.Size = new System.Drawing.Size(40, 17);
-            this.e_moldHeight.Text = "0";
+            this.e_moldHeight.Text = "1";
             this.e_moldHeight.Value = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
@@ -753,7 +753,7 @@
         private System.Windows.Forms.PictureBox pictureBoxEffectTileset;
         private System.Windows.Forms.Label label86;
         private System.Windows.Forms.NumericUpDown e_tileSetSize;
-        private System.Windows.Forms.ListBox e_molds;
+        private LAZYSHELL.NewListBox e_molds;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton newMold;
         private System.Windows.Forms.ToolStripButton deleteMold;

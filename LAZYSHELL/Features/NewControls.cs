@@ -130,30 +130,14 @@ namespace LAZYSHELL
     }
     public class NewPanel : Panel
     {
-        private const int WM_ERASEBKGND = 0x14;
-        private const int WM_PAINT = 0x0F;
-        private bool enablePaint = true;
-          /// <summary>
-        /// Manually enables or disables painting of the TreeView.
-        /// </summary>
-        public bool EnablePaint { get { return enablePaint; } set { enablePaint = value; } }
-        public NewPanel()
+        protected override Point ScrollToControl(Control activeControl)
         {
+            return this.DisplayRectangle.Location;
         }
-        protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case WM_PAINT:
-                    if (EnablePaint)
-                        base.WndProc(ref m);
-                    break;
-                case WM_ERASEBKGND:
-                    break;
-                default:
-                    base.WndProc(ref m);
-                    break;
-            }
-        }
-  }
+    }
+    public class NewListBox : ListBox
+    {
+        private int lastSelectedIndex = -1;
+        public int LastSelectedIndex { get { return lastSelectedIndex; } set { lastSelectedIndex = value; } }
+    }
 }

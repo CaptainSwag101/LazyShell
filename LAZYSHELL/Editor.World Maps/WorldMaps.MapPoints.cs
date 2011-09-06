@@ -406,7 +406,7 @@ namespace LAZYSHELL
 
             if (updating) return;
 
-            SetWorldMapPointsImage();
+            pictureBoxTileset.Invalidate();
         }
         private void mapPointYCoord_ValueChanged(object sender, EventArgs e)
         {
@@ -416,7 +416,7 @@ namespace LAZYSHELL
 
             if (updating) return;
 
-            SetWorldMapPointsImage();
+            pictureBoxTileset.Invalidate();
         }
         private void showCheckAddress_ValueChanged(object sender, EventArgs e)
         {

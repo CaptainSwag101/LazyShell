@@ -13,8 +13,8 @@ namespace LAZYSHELL
 
         private byte paletteIndex; public byte PaletteIndex { get { return paletteIndex; } set { paletteIndex = value; } }
         private byte animationPacket; public byte AnimationPacket { get { return animationPacket; } set { animationPacket = value; } }
-        private byte xNegShift; public byte XNegShift { get { return xNegShift; } set { xNegShift = value; } }
-        private byte yNegShift; public byte YNegShift { get { return yNegShift; } set { yNegShift = value; } }
+        private byte x; public byte X { get { return x; } set { x = value; } }
+        private byte y; public byte Y { get { return y; } set { y = value; } }
 
         public Effect(byte[] data, int effectNum)
         {
@@ -29,8 +29,8 @@ namespace LAZYSHELL
 
             paletteIndex = (byte)(data[offset] & 7); offset++;
             animationPacket = data[offset]; offset++;
-            xNegShift = data[offset]; offset++;
-            yNegShift = data[offset]; offset++;
+            x = (byte)(data[offset] - 1 ^ 255); offset++;
+            y = (byte)(data[offset] - 1 ^ 255); offset++;
         }
         public void Assemble()
         {
@@ -38,8 +38,8 @@ namespace LAZYSHELL
 
             data[offset] = paletteIndex; offset++;
             data[offset] = animationPacket; offset++;
-            data[offset] = xNegShift; offset++;
-            data[offset] = yNegShift; offset++;
+            data[offset] = (byte)(x - 1 ^ 255); offset++;
+            data[offset] = (byte)(y - 1 ^ 255); offset++;
         }
     }
 }

@@ -48,14 +48,14 @@
             this.pauseA = new System.Windows.Forms.ToolStripButton();
             this.pauseFrames = new System.Windows.Forms.ToolStripButton();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.reset = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.openTileEditor = new System.Windows.Forms.ToolStripButton();
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
             this.openPalettes = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.openPaletteMenu = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.reset = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBattleDialogue)).BeginInit();
             this.toolStrip2.SuspendLayout();
@@ -300,6 +300,22 @@
             this.toolStrip4.TabIndex = 538;
             this.toolStrip4.Text = "toolStrip4";
             // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.Text = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // openTileEditor
             // 
             this.openTileEditor.Image = global::LAZYSHELL.Properties.Resources.openTileEditor;
@@ -361,22 +377,6 @@
             this.toolStrip3.Size = new System.Drawing.Size(24, 115);
             this.toolStrip3.TabIndex = 539;
             this.toolStrip3.Text = "toolStrip3";
-            // 
-            // reset
-            // 
-            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(23, 22);
-            this.reset.Text = "Reset";
-            this.reset.Click += new System.EventHandler(this.reset_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // BattleDialogues
             // 

@@ -5,18 +5,18 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
     public partial class Formations : Form
     {
         #region Variables
-        
+
         private bool updating = false;
         private bool waitBothCoords = false;
         private int overFM = 0;
         private int diffX, diffY;
-        private Bitmap formationImage;
         private Bitmap formationBGImage;
         private Battlefield[] battlefields { get { return Model.Battlefields; } }
         private PaletteSet[] paletteSets { get { return Model.PaletteSetsBF; } }
@@ -31,6 +31,7 @@ namespace LAZYSHELL
         public ToolStripTextBox FormationName { get { return nameTextBox; } }
         public System.Windows.Forms.ToolStripComboBox FormationNames { get { return formationNameList; } }
         public Search searchWindow;
+        private List<Bitmap> monsterImages = new List<Bitmap>();
         #endregion
         // Constructor
         public Formations()
@@ -236,10 +237,21 @@ namespace LAZYSHELL
                 this.musicTrack.SelectedIndex = Model.FormationMusics[formationMusic.SelectedIndex];
             else
                 this.musicTrack.SelectedIndex = 0;
-            formationImage = new Bitmap(formation.FormationImage);
+            RefreshMonsterImages();
             pictureBoxFormation.Invalidate();
             updating = false;
             Cursor.Current = Cursors.Arrow;
+        }
+        private void RefreshMonsterImages()
+        {
+            monsterImages = new List<Bitmap>();
+            for (int i = 0; i < 8; i++)
+            {
+                int[] pixels = Model.Monsters[formation.FormationMonster[i]].Pixels;
+                monsterImages.Add(Do.PixelsToImage(pixels, 256, 256));
+            }
+            formation.PixelIndexes = null;
+            pictureBoxFormation.Invalidate();
         }
         private void RefreshFormationBattlefield()
         {
@@ -267,6 +279,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
             RefreshFormations();
+            Settings.Default.LastFormation = Index;
         }
         private void formationByte1_ValueChanged(object sender, EventArgs e)
         {
@@ -274,10 +287,9 @@ namespace LAZYSHELL
 
             this.formation.FormationMonster[0] = (byte)this.formationByte1.Value;
             this.formationName1.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte1.Value);
-            this.formationNameList.Items[formationNameList.SelectedIndex] = formation;
+            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
 
-            formationImage = new Bitmap(this.formation.FormationImage);
-            pictureBoxFormation.Invalidate();
+            RefreshMonsterImages();
         }
         private void formationByte2_ValueChanged(object sender, EventArgs e)
         {
@@ -285,10 +297,9 @@ namespace LAZYSHELL
 
             this.formation.FormationMonster[1] = (byte)this.formationByte2.Value;
             this.formationName2.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte2.Value);
-            this.formationNameList.Items[formationNameList.SelectedIndex] = formation;
+            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
 
-            formationImage = new Bitmap(this.formation.FormationImage);
-            pictureBoxFormation.Invalidate();
+            RefreshMonsterImages();
         }
         private void formationByte3_ValueChanged(object sender, EventArgs e)
         {
@@ -296,10 +307,9 @@ namespace LAZYSHELL
 
             this.formation.FormationMonster[2] = (byte)this.formationByte3.Value;
             this.formationName3.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte3.Value);
-            this.formationNameList.Items[formationNameList.SelectedIndex] = formation;
+            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
 
-            formationImage = new Bitmap(this.formation.FormationImage);
-            pictureBoxFormation.Invalidate();
+            RefreshMonsterImages();
         }
         private void formationByte4_ValueChanged(object sender, EventArgs e)
         {
@@ -307,10 +317,9 @@ namespace LAZYSHELL
 
             this.formation.FormationMonster[3] = (byte)this.formationByte4.Value;
             this.formationName4.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte4.Value);
-            this.formationNameList.Items[formationNameList.SelectedIndex] = formation;
+            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
 
-            formationImage = new Bitmap(this.formation.FormationImage);
-            pictureBoxFormation.Invalidate();
+            RefreshMonsterImages();
         }
         private void formationByte5_ValueChanged(object sender, EventArgs e)
         {
@@ -318,10 +327,9 @@ namespace LAZYSHELL
 
             this.formation.FormationMonster[4] = (byte)this.formationByte5.Value;
             this.formationName5.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte5.Value);
-            this.formationNameList.Items[formationNameList.SelectedIndex] = formation;
+            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
 
-            formationImage = new Bitmap(this.formation.FormationImage);
-            pictureBoxFormation.Invalidate();
+            RefreshMonsterImages();
         }
         private void formationByte6_ValueChanged(object sender, EventArgs e)
         {
@@ -329,10 +337,9 @@ namespace LAZYSHELL
 
             this.formation.FormationMonster[5] = (byte)this.formationByte6.Value;
             this.formationName6.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte6.Value);
-            this.formationNameList.Items[formationNameList.SelectedIndex] = formation;
+            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
 
-            formationImage = new Bitmap(this.formation.FormationImage);
-            pictureBoxFormation.Invalidate();
+            RefreshMonsterImages();
         }
         private void formationByte7_ValueChanged(object sender, EventArgs e)
         {
@@ -340,10 +347,9 @@ namespace LAZYSHELL
 
             this.formation.FormationMonster[6] = (byte)this.formationByte7.Value;
             this.formationName7.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte7.Value);
-            this.formationNameList.Items[formationNameList.SelectedIndex] = formation;
+            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
 
-            formationImage = new Bitmap(this.formation.FormationImage);
-            pictureBoxFormation.Invalidate();
+            RefreshMonsterImages();
         }
         private void formationByte8_ValueChanged(object sender, EventArgs e)
         {
@@ -351,10 +357,9 @@ namespace LAZYSHELL
 
             this.formation.FormationMonster[7] = (byte)this.formationByte8.Value;
             this.formationName8.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte8.Value);
-            this.formationNameList.Items[formationNameList.SelectedIndex] = formation;
+            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
 
-            formationImage = new Bitmap(this.formation.FormationImage);
-            pictureBoxFormation.Invalidate();
+            RefreshMonsterImages();
         }
         private void monsterName_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -415,7 +420,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordX[0] = (byte)this.formationCoordX1.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordX2_ValueChanged(object sender, EventArgs e)
@@ -425,7 +430,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordX[1] = (byte)this.formationCoordX2.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordX3_ValueChanged(object sender, EventArgs e)
@@ -435,7 +440,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordX[2] = (byte)this.formationCoordX3.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordX4_ValueChanged(object sender, EventArgs e)
@@ -445,7 +450,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordX[3] = (byte)this.formationCoordX4.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordX5_ValueChanged(object sender, EventArgs e)
@@ -455,7 +460,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordX[4] = (byte)this.formationCoordX5.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordX6_ValueChanged(object sender, EventArgs e)
@@ -465,7 +470,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordX[5] = (byte)this.formationCoordX6.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordX7_ValueChanged(object sender, EventArgs e)
@@ -475,7 +480,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordX[6] = (byte)this.formationCoordX7.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordX8_ValueChanged(object sender, EventArgs e)
@@ -485,7 +490,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordX[7] = (byte)this.formationCoordX8.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordY1_ValueChanged(object sender, EventArgs e)
@@ -495,7 +500,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordY[0] = (byte)this.formationCoordY1.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordY2_ValueChanged(object sender, EventArgs e)
@@ -505,7 +510,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordY[1] = (byte)this.formationCoordY2.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordY3_ValueChanged(object sender, EventArgs e)
@@ -515,7 +520,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordY[2] = (byte)this.formationCoordY3.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordY4_ValueChanged(object sender, EventArgs e)
@@ -525,7 +530,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordY[3] = (byte)this.formationCoordY4.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordY5_ValueChanged(object sender, EventArgs e)
@@ -535,7 +540,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordY[4] = (byte)this.formationCoordY5.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordY6_ValueChanged(object sender, EventArgs e)
@@ -545,7 +550,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordY[5] = (byte)this.formationCoordY6.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordY7_ValueChanged(object sender, EventArgs e)
@@ -555,7 +560,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordY[6] = (byte)this.formationCoordY7.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         private void formationCoordY8_ValueChanged(object sender, EventArgs e)
@@ -565,7 +570,7 @@ namespace LAZYSHELL
             this.formation.FormationCoordY[7] = (byte)this.formationCoordY8.Value;
 
             if (waitBothCoords) return;
-            formationImage = new Bitmap(this.formation.FormationImage);
+
             pictureBoxFormation.Invalidate();
         }
         //
@@ -576,8 +581,8 @@ namespace LAZYSHELL
             for (int i = 0; i < 8; i++)
                 this.formation.FormationUse[i] = checkedListBox1.GetItemChecked(i);
 
-            formationImage = new Bitmap(this.formation.FormationImage);
-            pictureBoxFormation.Invalidate();
+            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
+            RefreshMonsterImages();
         }
         private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -704,7 +709,7 @@ namespace LAZYSHELL
                 for (int j = 0; j < 8; j++)
                 {
                     if (e.X > 0 && e.X < 256 && e.Y > 0 && e.Y < 256 &&
-                        this.formation.PixelAssn[e.Y * 256 + e.X] == (int)(j + 1))
+                        this.formation.PixelIndexes[e.Y * 256 + e.X] == (int)(j + 1))
                     {
                         pictureBoxFormation.Cursor = Cursors.Hand;
                         overFM = j + 1;
@@ -720,15 +725,27 @@ namespace LAZYSHELL
         }
         private void pictureBoxFormation_MouseUp(object sender, MouseEventArgs e)
         {
-            formationImage = new Bitmap(this.formation.FormationImage);
+            formation.PixelIndexes = null;
             pictureBoxFormation.Invalidate();
         }
         private void pictureBoxFormation_Paint(object sender, PaintEventArgs e)
         {
             if (formationBGImage != null)
                 e.Graphics.DrawImage(formationBGImage, -8, 26);
-            if (formationImage != null)
-                e.Graphics.DrawImage(formationImage, 0, 0);
+            byte[] items = new byte[8];
+            for (byte i = 0; i < 8; i++)
+                items[i] = i;
+            byte[] keys = Bits.Copy(formation.FormationCoordY);
+            Array.Sort(keys, items);
+            for (int a = 0; a < 8; a++)
+            {
+                int i = items[a];
+                if (!formation.FormationUse[i]) continue;
+                int elevation = monsters[formation.FormationMonster[i]].Elevation * 16;
+                int x = formation.FormationCoordX[i] - 128;
+                int y = formation.FormationCoordY[i] - 96 - elevation - 1;
+                e.Graphics.DrawImage(monsterImages[i], x, y);
+            }
         }
         #endregion
     }

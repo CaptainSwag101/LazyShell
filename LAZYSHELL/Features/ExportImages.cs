@@ -113,7 +113,7 @@ namespace LAZYSHELL
             Export_Worker.ProgressChanged += new ProgressChangedEventHandler(Export_Worker_ProgressChanged);
             Export_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Export_Worker_RunWorkerCompleted);
             if (element == "levels")
-                progressBar = new ProgressBar("EXPORTING LEVEL IMAGES...", sprites.Length, Export_Worker);
+                progressBar = new ProgressBar("EXPORTING LEVEL IMAGES...", levels.Length, Export_Worker);
             else
                 progressBar = new ProgressBar("EXPORTING SPRITE MOLD IMAGES...", sprites.Length, Export_Worker);
             progressBar.Show();
@@ -247,7 +247,10 @@ namespace LAZYSHELL
         private void Export_Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if (progressBar != null && progressBar.Visible)
-                progressBar.PerformStep("EXPORTING SPRITE #" + e.ProgressPercentage + " MOLD IMAGES");
+                if (element == "levels")
+                    progressBar.PerformStep("EXPORTING LEVEL #" + e.ProgressPercentage + " IMAGE");
+                else
+                    progressBar.PerformStep("EXPORTING SPRITE #" + e.ProgressPercentage + " MOLD IMAGES");
         }
         private void Export_Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {

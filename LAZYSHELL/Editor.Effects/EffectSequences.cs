@@ -425,7 +425,7 @@ namespace LAZYSHELL
         private void reverseFrames_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You are about to reverse the order of all frames in the effect sequence.\n\n" +
-                "Continue with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                "Continue with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 return;
             for (int i = 1; i < sequence.Frames.Count; i++)
             {

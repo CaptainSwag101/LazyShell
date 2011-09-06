@@ -120,6 +120,7 @@ namespace LAZYSHELL
         private void attackNum_ValueChanged(object sender, EventArgs e)
         {
             RefreshAttacks();
+            settings.LastAttack = index;
         }
         private void attackName_SelectedIndexChanged(object sender, EventArgs e)
         {

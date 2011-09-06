@@ -11,70 +11,39 @@ namespace LAZYSHELL
         private FontCharacter[] fontCharacters;
         private FontCharacter[] fontTriangles;
         private int[] palette;
-        private int[] tripal;
-                private DialogueTable[] tables { get { return Model.DialogueTables; } }
-
+        private int[] palette_t;
+        private DialogueTable[] tables { get { return Model.DialogueTables; } }
         private Point p;
         private int next = 0;
-        private bool drawTrianglePageBreak;
-        private bool[] drawTriangleOptions;
+        private bool drawPageBreak;
+        private bool[] drawOptions;
         private int[] lineNext = new int[3];
-
         private Stack<int> pages = new Stack<int>();
-
+        // main
         public DialoguePreview()
         {
             pages.Push(0);
         }
-
-        public void Reset()
-        {
-            next = 0;
-            pages.Clear();
-            pages.Push(0);
-            p = new Point(0, 0);
-        }
-        public void PageUp()
-        {
-            if (pages.Count > 1)
-            {
-                pages.Pop();
-                p = new Point(0, 0);
-            }
-        }
-        public void PageDown(int maxLen)
-        {
-            if (next != pages.Peek())
-            {
-                pages.Push(next);
-                p = new Point(0, 0);
-            }
-        }
-
-        public int[] GetPreview(FontCharacter[] fontCharacters, FontCharacter[] fontTriangles, int[] palette, int[] tripal, char[] dlg, int left)
+        public int[] GetPreview(FontCharacter[] fontCharacters, FontCharacter[] fontTriangles, int[] palette, int[] palette_t, char[] dlg, int left)
         {
             this.fontCharacters = fontCharacters;
             this.fontTriangles = fontTriangles;
             this.palette = palette;
-            this.tripal = tripal;
+            this.palette_t = palette_t;
             int line = 0;
-
             int charPtr = pages.Peek();
-
             int[] pixels = new int[256 * 56];
 
-            drawTriangleOptions = new bool[3];
-            drawTrianglePageBreak = false;
-
+            drawOptions = new bool[3];
+            drawPageBreak = false;
             p = new Point(left + 1, 6);
 
             int height, width, maxWidth, wordWidth;
             int[] font;
 
             dlg = ConvertSpecialCases(dlg);
-
-            if (dlg.Length < pages.Peek())
-                Reset();
+            if (dlg.Length <= pages.Peek() + 1)
+                PageUp();
 
             ArrayList words = new ArrayList();
             AddWords(words, dlg, charPtr);
@@ -150,7 +119,7 @@ namespace LAZYSHELL
                                 p.X = left + 1; p.Y += 16;
                                 break;
                             case 0x03:  // Page Break Press A
-                                drawTrianglePageBreak = true;
+                                drawPageBreak = true;
                                 goto case 0x04;
                             case 0x04:
                                 charPtr++;
@@ -158,7 +127,7 @@ namespace LAZYSHELL
                                 AddBorder(pixels);
                                 AddTriangles(pixels);
                                 return pixels;
-                            case 0x07: drawTriangleOptions[line] = true; break;
+                            case 0x07: drawOptions[line] = true; break;
                             default: break;
                         }
                     }
@@ -170,7 +139,52 @@ namespace LAZYSHELL
 
             return pixels;
         }
+        private char[] ConvertSpecialCases(char[] dlg)
+        {
+            ArrayList n = new ArrayList();
+            for (int i = 0; i < dlg.Length; i++)
+            {
+                if (dlg[i] >= 0x0E && dlg[i] <= 0x17)
+                {
+                    n.AddRange(tables[dlg[i] - 0x0E].RawDialogue);
+                    continue;
+                }
+                switch ((byte)dlg[i])
+                {
+                    // eliminate, will NOT affect drawing
+                    case 0x05: break;
+                    case 0x0C: break;
+                    case 0x0D: i++; break;
+                    case 0x1A: break;
+                    case 0x1C: i++; break;
 
+                    // 2 or more characters
+                    case 0x08: n.AddRange("  ".ToCharArray()); break;
+                    case 0x09: n.AddRange("   ".ToCharArray()); break;
+                    case 0x0A: n.AddRange("    ".ToCharArray()); break;
+                    case 0x0B:
+                        i++;
+                        for (int a = 0; i < dlg.Length && a < dlg[i]; a++)
+                            n.Add((char)0x20);
+                        break;
+                    // 1 regular character >= 0x20
+                    default: n.Add(dlg[i]); break;
+                }
+            }
+            dlg = new char[n.Count];
+            n.CopyTo(dlg); return dlg;
+        }
+        private int WordWidth(ArrayList word)
+        {
+            int width = 0;
+            foreach (char l in word)
+            {
+                if (l >= 0x20 && l <= 0x9F)
+                    width += fontCharacters[l - 32].Width + 1;
+            }
+            return width;
+        }
+        // draw dialogue attributes
         private void AddBorder(int[] pixels)
         {
             int[] borderCalc = { -1, 1, -256, 256, -257, 257, -255, 255 };
@@ -190,11 +204,11 @@ namespace LAZYSHELL
         private void AddTriangles(int[] pixels)
         {
             Point t = new Point(17, 4);
-            int[] triangle = fontTriangles[0].GetCharacterPixels(tripal);
+            int[] triangle = fontTriangles[0].GetCharacterPixels(palette_t);
             for (int i = 0; i < 3; i++)
             {
                 t.Y = i * 16 + 4;
-                if (drawTriangleOptions[i])
+                if (drawOptions[i])
                 {
                     for (int y = 0, b = t.Y; y < 16; y++, b++) // # of rows
                     {
@@ -203,9 +217,9 @@ namespace LAZYSHELL
                     }
                 }
             }
-            if (drawTrianglePageBreak)
+            if (drawPageBreak)
             {
-                triangle = fontTriangles[7].GetCharacterPixels(tripal);
+                triangle = fontTriangles[7].GetCharacterPixels(palette_t);
                 t = new Point(224, 44);
                 for (int y = 0, b = t.Y; y < 8; y++, b++) // # of rows
                 {
@@ -244,51 +258,29 @@ namespace LAZYSHELL
                 words.Add(letters);
             }
         }
-        private char[] ConvertSpecialCases(char[] dlg)
+        // moving between pages
+        public void Reset()
         {
-            ArrayList n = new ArrayList();
-            for (int i = 0; i < dlg.Length; i++)
-            {
-                if (dlg[i] >= 0x0E && dlg[i] <= 0x17)
-                {
-                    n.AddRange(tables[dlg[i] - 0x0E].RawDialogue);
-                    continue;
-                }
-                switch ((byte)dlg[i])
-                {
-                    // eliminate, will NOT affect drawing
-                    case 0x05: break;
-                    case 0x0C: break;
-                    case 0x0D: i++; break;
-                    case 0x1A: break;
-                    case 0x1C: i++; break;
-
-                    // 2 or more characters
-                    case 0x08: n.AddRange("  ".ToCharArray()); break;
-                    case 0x09: n.AddRange("   ".ToCharArray()); break;
-                    case 0x0A: n.AddRange("    ".ToCharArray()); break;
-                    case 0x0B:
-                        i++;
-                        for (int a = 0; i < dlg.Length && a < dlg[i]; a++)
-                            n.Add((char)0x20);
-                        break;
-                    // 1 regular character >= 0x20
-                    default: n.Add(dlg[i]); break;
-                }
-            }
-            dlg = new char[n.Count];
-            n.CopyTo(dlg); return dlg;
+            next = 0;
+            pages.Clear();
+            pages.Push(0);
+            p = new Point(0, 0);
         }
-
-        private int WordWidth(ArrayList word)
+        public void PageUp()
         {
-            int width = 0;
-            foreach (char l in word)
+            if (pages.Count > 1)
             {
-                if (l >= 0x20 && l <= 0x9F)
-                    width += fontCharacters[l - 32].Width + 1;
+                pages.Pop();
+                p = new Point(0, 0);
             }
-            return width;
+        }
+        public void PageDown(int maxLen)
+        {
+            if (next != pages.Peek())
+            {
+                pages.Push(next);
+                p = new Point(0, 0);
+            }
         }
     }
 }

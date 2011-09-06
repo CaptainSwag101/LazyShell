@@ -284,8 +284,6 @@ namespace LAZYSHELL
                 this.buttonGotoB.Enabled = false;
             }
 
-            overlay.DrawLevelNPCs(npcs, npcProperties);
-
             npcsBytesLeft.Text = CalculateFreeNPCSpace() + " bytes left";
             npcsBytesLeft.BackColor = CalculateFreeNPCSpace() >= 0 ? SystemColors.Control : Color.Red;
 
@@ -777,8 +775,6 @@ namespace LAZYSHELL
                 npcs.IsInstanceSelected = false;
             }
 
-            overlay.DrawLevelNPCs(npcs, npcProperties);
-
             if (this.npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -793,6 +789,7 @@ namespace LAZYSHELL
         private void npcInsertObject_Click(object sender, System.EventArgs e)
         {
             AddNewNPC();
+            overlay.NPCImages = null;
         }
         private void npcRemoveObject_Click(object sender, System.EventArgs e)
         {
@@ -821,7 +818,6 @@ namespace LAZYSHELL
                 else
                 {
                     this.npcObjectTree.SelectedNode = null;
-                    overlay.DrawLevelNPCs(npcs, npcProperties);
                     RefreshNPCProperties();
                 }
                 npcObjectTree.EndUpdate();
@@ -850,10 +846,13 @@ namespace LAZYSHELL
                     this.npcObjectTree.SelectedNode = this.npcObjectTree.Nodes[reselectP];
                 this.npcObjectTree.EndUpdate();
             }
+            overlay.NPCImages = null;
+            picture.Invalidate();
         }
         private void npcInsertInstance_Click(object sender, System.EventArgs e)
         {
             AddNewInstance();
+            overlay.NPCImages = null;
         }
         //
         private void openPartitions_Click(object sender, System.EventArgs e)
@@ -916,7 +915,7 @@ namespace LAZYSHELL
                 this.npcAfterBattle.Enabled = true;
             }
             if (!updatingLevel && state.NPCs)
-                overlay.DrawLevelNPCs(npcs, npcProperties);
+                overlay.NPCImages = null;
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -924,6 +923,7 @@ namespace LAZYSHELL
             }
             else
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
+            overlay.NPCImages = null;
             picture.Invalidate();
         }
         private void npcSpeedPlus_ValueChanged(object sender, System.EventArgs e)
@@ -944,8 +944,8 @@ namespace LAZYSHELL
             if (updatingProperties) return;
             npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
             npcs.NPCID = (ushort)this.npcID.Value;
-            overlay.DrawLevelNPCs(npcs, npcProperties);
             npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
+            overlay.NPCImages = null;
             picture.Invalidate();
         }
         private void npcMovement_ValueChanged(object sender, System.EventArgs e)
@@ -975,10 +975,7 @@ namespace LAZYSHELL
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
                 npcs.PropertyA = (byte)this.npcPropertyA.Value;
             }
-
-            overlay.DrawLevelNPCs(npcs, npcProperties);
-
-
+            overlay.NPCImages = null;
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -986,6 +983,7 @@ namespace LAZYSHELL
             }
             else
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
+            picture.Invalidate();
         }
         private void npcPropertyB_ValueChanged(object sender, System.EventArgs e)
         {
@@ -1021,7 +1019,7 @@ namespace LAZYSHELL
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
                 npcs.Face = (byte)this.npcFace.SelectedIndex;
             }
-            overlay.DrawLevelNPCs(npcs, npcProperties);
+            overlay.NPCImages = null;
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1046,9 +1044,6 @@ namespace LAZYSHELL
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
                 npcs.Z = (byte)this.npcZ.Value;
             }
-            overlay.DrawLevelNPCs(npcs, npcProperties);
-
-
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1073,8 +1068,6 @@ namespace LAZYSHELL
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
                 npcs.Y = (byte)this.npcY.Value;
             }
-            if (!updatingLevel)
-                overlay.DrawLevelNPCs(npcs, npcProperties);
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1099,8 +1092,6 @@ namespace LAZYSHELL
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
                 npcs.X = (byte)this.npcX.Value;
             }
-            if (!updatingLevel)
-                overlay.DrawLevelNPCs(npcs, npcProperties);
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1127,7 +1118,6 @@ namespace LAZYSHELL
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
                 npcs.CoordXBit7 = this.npcVisible.Checked;
             }
-            overlay.DrawLevelNPCs(npcs, npcProperties);
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1154,7 +1144,6 @@ namespace LAZYSHELL
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
                 npcs.CoordYBit7 = this.npcZ_half.Checked;
             }
-            overlay.DrawLevelNPCs(npcs, npcProperties);
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;

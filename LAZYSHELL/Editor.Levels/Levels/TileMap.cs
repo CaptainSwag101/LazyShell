@@ -319,31 +319,25 @@ namespace LAZYSHELL
         private void CreateMainscreen()
         {
             int bgcolor = paletteSet.Palette[16];
-
             if (HaveSubscreen()) // We are doing color math by the layer
             {
-
                 if (colorMath == null)
                     colorMath = new int[width_p * height_p];
                 else
-                    Bits.Clear(colorMath);
-
+                    Array.Clear(colorMath, 0, colorMath.Length);
                 if (prioritySets[levelLayer.PrioritySet].ColorMathBG && state.BG)
                 {
                     for (int i = 0; i < width_p * height_p; i++)
                         colorMath[i] = bgcolor;
                     DoColorMath(colorMath);
                     CopyToPixelArray(mainscreen, colorMath);
-                    Bits.Clear(colorMath);
+                    Array.Clear(colorMath, 0, colorMath.Length);
                 }
                 else if (state.BG)
                 {
                     for (int i = 0; i < width_p * height_p; i++)
-                    {
                         mainscreen[i] = bgcolor;
-                    }
                 }
-
                 if (levelMap.TopPriorityL3) // [3,0][2,0][1,0][2,1][1,1][3,1]
                 {
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
@@ -352,7 +346,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
                     {
@@ -360,7 +354,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
                     {
@@ -368,7 +362,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
                     {
@@ -376,7 +370,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
                     {
@@ -384,7 +378,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
                     {
@@ -392,7 +386,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                 }
                 else if (!levelMap.TopPriorityL3) // [3,0][3,1][2,0][1,0][2,1][1,1]
@@ -403,7 +397,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
                     {
@@ -411,7 +405,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
                     {
@@ -419,7 +413,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
                     {
@@ -427,7 +421,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
                     {
@@ -435,7 +429,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
                     {
@@ -443,15 +437,12 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
                             DoColorMath(colorMath);
                         CopyToPixelArray(mainscreen, colorMath);
-                        Bits.Clear(colorMath);
+                        Array.Clear(colorMath, 0, colorMath.Length);
                     }
                 }
-
             }
             else // No color math, we can go ahead and draw the mainscreen
             {
-
-
                 if (levelMap.TopPriorityL3) // [3,0][2,0][1,0][2,1][1,1][3,1]
                 {
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
@@ -482,7 +473,6 @@ namespace LAZYSHELL
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
                         CopyToPixelArray(mainscreen, layer1Priority1);
                 }
-
                 // Apply BG color
                 if (state.BG)
                 {
@@ -496,7 +486,6 @@ namespace LAZYSHELL
         }
         private void CreateSubscreen()
         {
-            // 2 possible cases
             if (levelMap.TopPriorityL3) //[3,0][2,0][1,0][2,1][1,1][3,1]
             {
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
@@ -511,8 +500,6 @@ namespace LAZYSHELL
                     CopyToPixelArray(subscreen, layer1Priority1);//DrawLayerByPriorityOne(subscreenPixels, 0, true);
                 if (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
                     CopyToPixelArray(subscreen, layer3Priority1);//DrawLayerByPriorityOne(subscreenPixels, 2, true);
-
-
             }
             else if (!levelMap.TopPriorityL3) //[3,0][3,1][2,0][1,0][2,1][1,1]
             {
@@ -664,16 +651,15 @@ namespace LAZYSHELL
                 DrawLayerByPriorityOne(layer3Priority1, 2, true);
             }
         }
-        private int[] DrawLayerByPriorityOne(int[] dest, int layer, bool priority)
+        private int[] DrawLayerByPriorityOne(int[] dest, int layer, bool priority1)
         {
             if (dest.Length != width_p * height_p || layers[layer] == null)
                 return null;
-
             for (int i = 0; i < layers[layer].Length; i++)
             {
                 for (int z = 0; z < 4; z++)
                 {
-                    if (layers[layer][i].Subtiles[z].PriorityOne == priority)
+                    if (layers[layer][i].Subtiles[z].PriorityOne == priority1)
                     {
                         switch (z)
                         {
@@ -694,11 +680,8 @@ namespace LAZYSHELL
                         }
                     }
                 }
-
             }
-
             return dest;
-
         }
         private void DrawSingleMainscreenTile(int x, int y)
         {
@@ -1025,19 +1008,31 @@ namespace LAZYSHELL
             }
             return pixels;
         }
-        public int GetTileNum(int layer, int x, int y)
+        public int GetTileNum(int layer, int x, int y, bool checkpixel)
         {
             if (x < 0) x = 0;
             if (y < 0) y = 0;
             if (x >= width_p) x = width_p - 1;
             if (y >= height_p) y = height_p - 1;
+            Point p = new Point(x % 16, y % 16);
             y /= 16;
             x /= 16;
             int placement = y * width + x;
-
             if (layer < 3 && layers[layer] != null)
-                return layers[layer][placement].TileIndex;
-            else return 0;
+            {
+                if (!checkpixel)
+                    return layers[layer][placement].TileIndex;
+                else if (layers[layer][placement].Pixels[p.Y * 16 + p.X] != 0)
+                    return layers[layer][placement].TileIndex;
+                else
+                    return 0;
+            }
+            else 
+                return 0;
+        }
+        public int GetTileNum(int layer, int x, int y)
+        {
+            return GetTileNum(layer, x, y, false);
         }
         private int[] GetTileFromPriorityArray(int[] arr, int x, int y)
         {
@@ -1101,9 +1096,9 @@ namespace LAZYSHELL
 
             DrawAllLayers();
 
-            Bits.Clear(mainscreen);
+            Array.Clear(mainscreen, 0, mainscreen.Length);
             if (subscreen != null)
-                Bits.Clear(subscreen);
+                Array.Clear(subscreen, 0, subscreen.Length);
 
             if ((prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1) ||
                     (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2) ||

@@ -61,8 +61,10 @@ namespace LAZYSHELL
             SetDialogueImages();
             SetToolTips(toolTip1);
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
-            checksum = Do.GenerateChecksum(monsters);
             new History(this);
+            //
+            Index = settings.LastMonster;
+            checksum = Do.GenerateChecksum(monsters);
         }
         private void InitializeStrings()
         {
@@ -377,6 +379,7 @@ namespace LAZYSHELL
         {
             RefreshMonsterTab();
             battleScriptsEditor.InitializeBattleScriptsEditor();
+            settings.LastMonster = Index;
         }
         private void monsterName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -678,7 +681,7 @@ namespace LAZYSHELL
         private void resetCurrentMonsterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current monster. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             monster = new Monster(Model.Data, Index);
             monsterNum_ValueChanged(null, null);
@@ -686,7 +689,7 @@ namespace LAZYSHELL
         private void resetCurrentBattleScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current battle script. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             battleScriptsEditor.BattleScript = new LAZYSHELL.ScriptsEditor.BattleScript(Model.Data, battleScriptsEditor.index);
             monsterNum_ValueChanged(null, null);

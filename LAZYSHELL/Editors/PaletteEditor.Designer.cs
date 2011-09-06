@@ -127,6 +127,9 @@
             this.importPaletteSet = new System.Windows.Forms.ToolStripButton();
             this.exportPaletteSet = new System.Windows.Forms.ToolStripButton();
             this.alwaysOnTop = new System.Windows.Forms.CheckBox();
+            this.invertSelectedCols = new System.Windows.Forms.Button();
+            this.invertSelectedRows = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPalette)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -1150,7 +1153,7 @@
             // 
             this.pictureBoxCurrentColor.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxCurrentColor.Name = "pictureBoxCurrentColor";
-            this.pictureBoxCurrentColor.Size = new System.Drawing.Size(64, 64);
+            this.pictureBoxCurrentColor.Size = new System.Drawing.Size(48, 48);
             this.pictureBoxCurrentColor.TabIndex = 0;
             this.pictureBoxCurrentColor.TabStop = false;
             this.pictureBoxCurrentColor.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxCurrentColor_Paint);
@@ -1198,9 +1201,9 @@
             // 
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel9.Controls.Add(this.pictureBoxCurrentColor);
-            this.panel9.Location = new System.Drawing.Point(204, 35);
+            this.panel9.Location = new System.Drawing.Point(220, 35);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(68, 68);
+            this.panel9.Size = new System.Drawing.Size(52, 52);
             this.panel9.TabIndex = 525;
             // 
             // panel11
@@ -1312,7 +1315,7 @@
             // 
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel7.Controls.Add(this.pictureBoxPalette);
-            this.panel7.Location = new System.Drawing.Point(12, 35);
+            this.panel7.Location = new System.Drawing.Point(24, 35);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(132, 68);
             this.panel7.TabIndex = 524;
@@ -1370,7 +1373,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importPaletteSet,
             this.exportPaletteSet});
-            this.toolStrip1.Location = new System.Drawing.Point(147, 35);
+            this.toolStrip1.Location = new System.Drawing.Point(163, 37);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(49, 25);
@@ -1412,20 +1415,42 @@
             this.alwaysOnTop.UseVisualStyleBackColor = true;
             this.alwaysOnTop.CheckedChanged += new System.EventHandler(this.alwaysOnTop_CheckedChanged);
             // 
+            // invertSelectedCols
+            // 
+            this.invertSelectedCols.Location = new System.Drawing.Point(19, 24);
+            this.invertSelectedCols.Name = "invertSelectedCols";
+            this.invertSelectedCols.Size = new System.Drawing.Size(6, 6);
+            this.invertSelectedCols.TabIndex = 539;
+            this.toolTip1.SetToolTip(this.invertSelectedCols, "Invert checked columns");
+            this.invertSelectedCols.UseVisualStyleBackColor = true;
+            this.invertSelectedCols.Click += new System.EventHandler(this.invertSelectedCols_CheckedChanged);
+            // 
+            // invertSelectedRows
+            // 
+            this.invertSelectedRows.Location = new System.Drawing.Point(13, 30);
+            this.invertSelectedRows.Name = "invertSelectedRows";
+            this.invertSelectedRows.Size = new System.Drawing.Size(6, 6);
+            this.invertSelectedRows.TabIndex = 539;
+            this.toolTip1.SetToolTip(this.invertSelectedRows, "Invert checked rows");
+            this.invertSelectedRows.UseVisualStyleBackColor = true;
+            this.invertSelectedRows.Click += new System.EventHandler(this.invertSelectedRows_CheckedChanged);
+            // 
             // PaletteEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 424);
+            this.Controls.Add(this.invertSelectedRows);
+            this.Controls.Add(this.invertSelectedCols);
             this.Controls.Add(this.alwaysOnTop);
-            this.Controls.Add(this.panel7);
             this.Controls.Add(this.buttonUpdate);
+            this.Controls.Add(this.panel7);
             this.Controls.Add(this.autoUpdate);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel13);
-            this.Controls.Add(this.panel9);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.buttonReset);
+            this.Controls.Add(this.panel9);
             this.Controls.Add(this.buttonSetToColor);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.panel11);
@@ -1603,6 +1628,9 @@
         private System.Windows.Forms.TrackBar colorizeHueBar;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.CheckBox alwaysOnTop;
+        private System.Windows.Forms.Button invertSelectedCols;
+        private System.Windows.Forms.Button invertSelectedRows;
+        private System.Windows.Forms.ToolTip toolTip1;
 
     }
 }

@@ -426,7 +426,7 @@ namespace LAZYSHELL
             this.solidModsDuplicate = new System.Windows.Forms.ToolStripButton();
             this.label68 = new System.Windows.Forms.Label();
             this.panel45 = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLevel = new System.Windows.Forms.ToolStrip();
             this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchLevelNames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -454,7 +454,7 @@ namespace LAZYSHELL
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelLevels = new System.Windows.Forms.Panel();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripToggle = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.import = new System.Windows.Forms.ToolStripDropDownButton();
@@ -510,6 +510,9 @@ namespace LAZYSHELL
             this.help = new System.Windows.Forms.ToolStripButton();
             this.baseConversion = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.navigateFwd = new System.Windows.Forms.ToolStripButton();
+            this.navigateBck = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.tabPage8.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.panel85.SuspendLayout();
@@ -654,9 +657,9 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.solidModsHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.solidModsWidth)).BeginInit();
             this.toolStrip8.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.toolStripLevel.SuspendLayout();
             this.panelLevels.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
+            this.toolStripToggle.SuspendLayout();
             this.SuspendLayout();
             // 
             // levelNum
@@ -5865,18 +5868,21 @@ namespace LAZYSHELL
             this.panel45.Size = new System.Drawing.Size(121, 164);
             this.panel45.TabIndex = 493;
             // 
-            // toolStrip1
+            // toolStripLevel
             // 
-            this.toolStrip1.CanOverflow = false;
-            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLevel.CanOverflow = false;
+            this.toolStripLevel.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLevel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.levelName,
             this.levelNum,
+            this.navigateBck,
+            this.navigateFwd,
+            this.toolStripSeparator17,
             this.nameTextBox,
             this.searchLevelNames,
             this.toolStripSeparator7,
-            this.changeLevelName,
             this.toolStripTextBox1,
+            this.changeLevelName,
             this.toolStripButton1,
             this.toolStripSeparator21,
             this.buttonGotoC,
@@ -5884,16 +5890,16 @@ namespace LAZYSHELL
             this.toolStripSeparator16,
             this.toolStripLabel2,
             this.eventMusic});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(1020, 25);
-            this.toolStrip1.TabIndex = 2;
+            this.toolStripLevel.Location = new System.Drawing.Point(0, 25);
+            this.toolStripLevel.Name = "toolStripLevel";
+            this.toolStripLevel.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStripLevel.Size = new System.Drawing.Size(1020, 25);
+            this.toolStripLevel.TabIndex = 2;
             // 
             // nameTextBox
             // 
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(150, 25);
+            this.nameTextBox.Size = new System.Drawing.Size(145, 25);
             // 
             // searchLevelNames
             // 
@@ -5925,7 +5931,7 @@ namespace LAZYSHELL
             // toolStripTextBox1
             // 
             this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(160, 25);
+            this.toolStripTextBox1.Size = new System.Drawing.Size(145, 25);
             this.toolStripTextBox1.Visible = false;
             this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
             this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
@@ -5962,7 +5968,7 @@ namespace LAZYSHELL
             this.eventExit.AutoSize = false;
             this.eventExit.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventExit.Hexadecimal = false;
-            this.eventExit.Location = new System.Drawing.Point(531, 2);
+            this.eventExit.Location = new System.Drawing.Point(578, 2);
             this.eventExit.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -5974,10 +5980,10 @@ namespace LAZYSHELL
             0,
             0});
             this.eventExit.Name = "eventExit";
-            this.eventExit.Size = new System.Drawing.Size(60, 21);
-            this.eventExit.Text = "0";
+            this.eventExit.Size = new System.Drawing.Size(54, 21);
+            this.eventExit.Text = "4095";
             this.eventExit.Value = new decimal(new int[] {
-            0,
+            4095,
             0,
             0,
             0});
@@ -6002,7 +6008,7 @@ namespace LAZYSHELL
             this.eventMusic.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.eventMusic.IntegralHeight = false;
             this.eventMusic.Name = "eventMusic";
-            this.eventMusic.Size = new System.Drawing.Size(180, 25);
+            this.eventMusic.Size = new System.Drawing.Size(170, 25);
             this.eventMusic.SelectedIndexChanged += new System.EventHandler(this.eventsAreaMusic_SelectedIndexChanged);
             // 
             // hexEditor
@@ -6146,10 +6152,10 @@ namespace LAZYSHELL
             this.panelLevels.Size = new System.Drawing.Size(1020, 670);
             this.panelLevels.TabIndex = 506;
             // 
-            // toolStrip2
+            // toolStripToggle
             // 
-            this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripToggle.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripToggle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.save,
             this.toolStripSeparator5,
             this.import,
@@ -6173,12 +6179,12 @@ namespace LAZYSHELL
             this.openTemplates,
             this.levelPreviewToolStripButton,
             this.spaceAnalyzer});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(1020, 25);
-            this.toolStrip2.TabIndex = 507;
-            this.toolStrip2.Text = "toolStrip2";
+            this.toolStripToggle.Location = new System.Drawing.Point(0, 0);
+            this.toolStripToggle.Name = "toolStripToggle";
+            this.toolStripToggle.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStripToggle.Size = new System.Drawing.Size(1020, 25);
+            this.toolStripToggle.TabIndex = 507;
+            this.toolStripToggle.Text = "toolStrip2";
             // 
             // save
             // 
@@ -6615,14 +6621,43 @@ namespace LAZYSHELL
             this.toolStripSeparator15.Name = "toolStripSeparator15";
             this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
             // 
+            // navigateFwd
+            // 
+            this.navigateFwd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.navigateFwd.Enabled = false;
+            this.navigateFwd.Image = global::LAZYSHELL.Properties.Resources.foward;
+            this.navigateFwd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.navigateFwd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.navigateFwd.Name = "navigateFwd";
+            this.navigateFwd.Size = new System.Drawing.Size(23, 22);
+            this.navigateFwd.ToolTipText = "Navigate Forward";
+            this.navigateFwd.Click += new System.EventHandler(this.navigateFwd_Click);
+            // 
+            // navigateBck
+            // 
+            this.navigateBck.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.navigateBck.Enabled = false;
+            this.navigateBck.Image = global::LAZYSHELL.Properties.Resources.back;
+            this.navigateBck.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.navigateBck.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.navigateBck.Name = "navigateBck";
+            this.navigateBck.Size = new System.Drawing.Size(23, 22);
+            this.navigateBck.ToolTipText = "Navigate Backward";
+            this.navigateBck.Click += new System.EventHandler(this.navigateBck_Click);
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
+            // 
             // Levels
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 720);
             this.Controls.Add(this.panelLevels);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.toolStrip2);
+            this.Controls.Add(this.toolStripLevel);
+            this.Controls.Add(this.toolStripToggle);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -6790,11 +6825,11 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.solidModsWidth)).EndInit();
             this.toolStrip8.ResumeLayout(false);
             this.toolStrip8.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStripLevel.ResumeLayout(false);
+            this.toolStripLevel.PerformLayout();
             this.panelLevels.ResumeLayout(false);
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.toolStripToggle.ResumeLayout(false);
+            this.toolStripToggle.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -7088,7 +7123,7 @@ namespace LAZYSHELL
         private TabPage tabPage4;
         private TabPage tabPage8;
         private TabPage tabPage9;
-        private ToolStrip toolStrip1;
+        private ToolStrip toolStripLevel;
         private ToolStripButton levelPreviewToolStripButton;
         private ToolStripButton openGraphicEditor;
         private ToolStripButton openPaletteEditor;
@@ -7137,7 +7172,7 @@ namespace LAZYSHELL
         private ToolStripTextBox toolStripTextBox1;
         private ToolStripButton toolStripButton1;
         private ToolStripTextBox nameTextBox;
-        private ToolStrip toolStrip2;
+        private ToolStrip toolStripToggle;
         private ToolStripButton save;
         private ToolStripDropDownButton import;
         private ToolStripDropDownButton export;
@@ -7274,6 +7309,9 @@ namespace LAZYSHELL
         private LAZYSHELL.ToolStripListView levelInfo;
         private Label tileModsBytesLeft;
         private Label solidModsBytesLeft;
+        private ToolStripButton navigateBck;
+        private ToolStripButton navigateFwd;
+        private ToolStripSeparator toolStripSeparator17;
     }
 }
 

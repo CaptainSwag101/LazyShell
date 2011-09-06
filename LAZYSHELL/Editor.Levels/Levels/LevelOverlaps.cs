@@ -135,75 +135,76 @@ namespace LAZYSHELL
 
             return offsetStart;
         }
+    }
+    [Serializable()]
+    public class Overlap
+    {
+        private byte x; public byte X { get { return x; } set { x = value; } }
+        private byte y; public byte Y { get { return y; } set { y = value; } }
+        private byte z; public byte Z { get { return z; } set { z = value; } }
+        private byte type; public byte Type { get { return type; } set { type = value; } }
+        private bool b0b7; public bool B0b7 { get { return b0b7; } set { b0b7 = value; } }
+        private bool b1b7; public bool B1b7 { get { return b1b7; } set { b1b7 = value; } }
+        private bool b2b5; public bool B2b5 { get { return b2b5; } set { b2b5 = value; } }
+        private bool b2b6; public bool B2b6 { get { return b2b6; } set { b2b6 = value; } }
+        private bool b2b7; public bool B2b7 { get { return b2b7; } set { b2b7 = value; } }
+        public int Index = 0;
+        public bool Hilite = false;
 
-        [Serializable()]
-        public class Overlap
+        public Overlap()
         {
-            private byte x; public byte X { get { return x; } set { x = value; } }
-            private byte y; public byte Y { get { return y; } set { y = value; } }
-            private byte z; public byte Z { get { return z; } set { z = value; } }
-            private byte type; public byte Type { get { return type; } set { type = value; } }
-            private bool b0b7; public bool B0b7 { get { return b0b7; } set { b0b7 = value; } }
-            private bool b1b7; public bool B1b7 { get { return b1b7; } set { b1b7 = value; } }
-            private bool b2b5; public bool B2b5 { get { return b2b5; } set { b2b5 = value; } }
-            private bool b2b6; public bool B2b6 { get { return b2b6; } set { b2b6 = value; } }
-            private bool b2b7; public bool B2b7 { get { return b2b7; } set { b2b7 = value; } }
 
-            public Overlap()
-            {
+        }
+        public void NullOverlap()
+        {
+            x = 0;
+            y = 0;
+            z = 0;
+            type = 0;
+            b0b7 = false;
+            b1b7 = false;
+            b2b5 = false;
+            b2b6 = false;
+            b2b7 = false;
+        }
 
-            }
-            public void NullOverlap()
-            {
-                x = 0;
-                y = 0;
-                z = 0;
-                type = 0;
-                b0b7 = false;
-                b1b7 = false;
-                b2b5 = false;
-                b2b6 = false;
-                b2b7 = false;
-            }
-
-            public void InitializeOverlap(byte[] data, int offset)
-            {
-                x = (byte)(data[offset] & 0x7F);
-                b0b7 = (data[offset] & 0x80) == 0x80; offset++;
-                y = (byte)(data[offset] & 0x7F);
-                b1b7 = (data[offset] & 0x80) == 0x80; offset++;
-                z = data[offset];
-                b2b5 = (data[offset] & 0x20) == 0x20;
-                b2b6 = (data[offset] & 0x40) == 0x40;
-                b2b7 = (data[offset] & 0x80) == 0x80; offset++;
-                type = data[offset];
-            }
-            public void AssembleOverlap(byte[] data, int offset)
-            {
-                data[offset] = x;
-                Bits.SetBit(data, offset, 7, b0b7); offset++;
-                data[offset] = y;
-                Bits.SetBit(data, offset, 7, b1b7); offset++;
-                data[offset] = z;
-                Bits.SetBit(data, offset, 5, b2b5);
-                Bits.SetBit(data, offset, 6, b2b6);
-                Bits.SetBit(data, offset, 7, b2b7); offset++;
-                data[offset] = type;
-            }
-            public Overlap Copy()
-            {
-                Overlap copy = new Overlap();
-                copy.B0b7 = b0b7;
-                copy.B1b7 = b1b7;
-                copy.B2b5 = b2b5;
-                copy.B2b6 = b2b6;
-                copy.B2b7 = b2b7;
-                copy.X = x;
-                copy.Y = y;
-                copy.Z = z;
-                copy.Type = type;
-                return copy;
-            }
+        public void InitializeOverlap(byte[] data, int offset)
+        {
+            x = (byte)(data[offset] & 0x7F);
+            b0b7 = (data[offset] & 0x80) == 0x80; offset++;
+            y = (byte)(data[offset] & 0x7F);
+            b1b7 = (data[offset] & 0x80) == 0x80; offset++;
+            z = data[offset];
+            b2b5 = (data[offset] & 0x20) == 0x20;
+            b2b6 = (data[offset] & 0x40) == 0x40;
+            b2b7 = (data[offset] & 0x80) == 0x80; offset++;
+            type = data[offset];
+        }
+        public void AssembleOverlap(byte[] data, int offset)
+        {
+            data[offset] = x;
+            Bits.SetBit(data, offset, 7, b0b7); offset++;
+            data[offset] = y;
+            Bits.SetBit(data, offset, 7, b1b7); offset++;
+            data[offset] = z;
+            Bits.SetBit(data, offset, 5, b2b5);
+            Bits.SetBit(data, offset, 6, b2b6);
+            Bits.SetBit(data, offset, 7, b2b7); offset++;
+            data[offset] = type;
+        }
+        public Overlap Copy()
+        {
+            Overlap copy = new Overlap();
+            copy.B0b7 = b0b7;
+            copy.B1b7 = b1b7;
+            copy.B2b5 = b2b5;
+            copy.B2b6 = b2b6;
+            copy.B2b7 = b2b7;
+            copy.X = x;
+            copy.Y = y;
+            copy.Z = z;
+            copy.Type = type;
+            return copy;
         }
     }
 }

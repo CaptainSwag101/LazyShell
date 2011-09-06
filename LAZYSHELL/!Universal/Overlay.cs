@@ -16,22 +16,22 @@ namespace LAZYSHELL
         #region Variables
         private State state = State.Instance;
         // overlay objects
-        private int[] exitFieldBasePixels;
-        private int[] exitFieldBlockPixels;
-        private int[] eventFieldBasePixels;
-        private int[] eventFieldBlockPixels;
-        private int[] npcFieldBasePixels;
-        private int[] overlapFieldBasePixels;
-        private int[] fieldBaseShadow;
-        private Bitmap npcsImage, exitsImage, eventsImage, overlapsImage;
-        //private IList<Bitmap> solidModsImages;
-        //private IList<Bitmap> tileModsImages;
-        public Bitmap NPCsImage { get { return npcsImage; } set { npcsImage = value; } }
-        public Bitmap ExitsImage { get { return exitsImage; } set { exitsImage = value; } }
-        public Bitmap EventsImage { get { return eventsImage; } set { eventsImage = value; } }
-        public Bitmap OverlapsImage { get { return overlapsImage; } set { overlapsImage = value; } }
+        public List<Bitmap> NPCImages;
+        private Bitmap npcFieldBaseImage;
+        private Bitmap npcFieldBaseImageH;
+        private Bitmap exitFieldBaseImage;
+        private Bitmap exitFieldBaseImageH;
+        private Bitmap exitFieldBlockImage;
+        private Bitmap exitFieldBlockImageH;
+        private Bitmap eventFieldBaseImage;
+        private Bitmap eventFieldBaseImageH;
+        private Bitmap eventFieldBlockImage;
+        private Bitmap eventFieldBlockImageH;
+        private Bitmap fieldBaseShadowImage;
+        private Bitmap fieldBaseShadowImageH;
+        private Bitmap overlapFieldBaseImage;
+        private Bitmap overlapFieldBaseImageH;
         public int alpha = 255;
-        private bool highlight;
         // selecting
         public Selection Select;
         public Selection SelectTS;
@@ -257,130 +257,126 @@ namespace LAZYSHELL
         {
             DrawSelectionBox(g, new Point(x_terminal, y_terminal), new Point(x_initial, y_initial), z);
         }
-        private void CopySuboverlayToOverlay(int[] dst, int dstWidth, int[] src, int srcWidth, int srcHeight, int x_, int y_)
-        {
-            for (int y = 0; y < srcHeight; y++)
-            {
-                for (int x = 0; x < srcWidth; x++)
-                {
-                    if (src[y * srcWidth + x] == 0) continue;
-                    Color color = Color.FromArgb(src[y * srcWidth + x]);
-                    int l = (int)(color.GetBrightness() * 255);
-                    int r = Math.Min(255, 255 + l);
-                    int g = Math.Min(255, l);
-                    int b = Math.Min(255, 255 + l);
-                    if (y_ + y >= 0 && x_ + x >= 0)
-                    {
-                        if (highlight)
-                            dst[((y_ + y) * dstWidth) + (x_ + x)] = Color.FromArgb(r, g, b).ToArgb();
-                        else
-                            dst[((y_ + y) * dstWidth) + (x_ + x)] = src[y * srcWidth + x];
-                    }
-                }
-            }
-        }
         // exits
-        public void DrawLevelExits(LevelExits exits)
+        private void GenerateExitFields()
         {
-            int[] pixels = new int[1024 * 1024];
-            int currentExit = exits.CurrentExit;
-            highlight = false;
+            Bitmap exitFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
+            Bitmap exitFieldBlock = global::LAZYSHELL.Properties.Resources.fieldBlock;
+            int[] exitFieldBasePixels = Do.ImageToPixels(exitFieldBase);
+            int[] exitFieldBlockPixels = Do.ImageToPixels(exitFieldBlock);
 
-            int x, y;
+            Do.Colorize(exitFieldBasePixels, 60.0, 1.0);
+            Do.Colorize(exitFieldBlockPixels, 60.0, 1.0);
+            Do.Gradient(exitFieldBasePixels, 32, 16, 128.0, -128.0, true);
+            Do.Gradient(exitFieldBlockPixels, 32, 16, 128.0, 0, true);
 
-            if (exitFieldBasePixels == null || exitFieldBlockPixels == null)
-                GenerateExitPixels();
-            if (fieldBaseShadow == null)
-                GenerateNPCPixels();
-
-            int[] order = new int[exits.Count];
-            int[] coordY = new int[exits.Count];
-            for (int i = 0; i < exits.Count; i++)
-            {
-                exits.CurrentExit = i;
-                coordY[i] = exits.Y;
-            }
-
-            for (int i = 0; i < exits.Count; i++)
-                order[i] = i;
-            int[] temp = new int[coordY.Length]; coordY.CopyTo(temp, 0);
-            Array.Sort(temp, order);
-
-            for (int g = 0; g < exits.Count; g++)
-            {
-                int i = order[g];
-
-                exits.CurrentExit = i;
-
-                highlight = i == exits.SelectedExit;
-
-                x = ((exits.X & 127) * 32) + (16 * (exits.Y & 1)) - 16;
-                y = ((exits.Y & 127) * 8) - 8;
-
-                // Draw the complete # of blocks
-                if (exits.Width > 0)
-                {
-                    if (exits.Face == 0)
-                    {
-                        y -= exits.Width * 8;
-                        x += exits.Width * 16;
-                    }
-                    for (int w = 0; w <= exits.Width; w++)
-                    {
-                        // draw shadow
-                        if (exits.Z > 0)
-                        {
-                            if (exits.Face == 0)
-                                CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, -(w * 16) + x, w * 8 + y);
-                            else
-                                CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, w * 16 + x, w * 8 + y);
-                        }
-                    }
-                    for (int w = 0; w <= exits.Width; w++)
-                    {
-                        if (w == 0) y -= exits.Z * 16;
-
-                        // draw the whole field
-                        if (exits.Height == 0)
-                            CopySuboverlayToOverlay(pixels, 1024, exitFieldBasePixels, 32, 16, x, y);
-                        else if (exits.Height > 0)
-                        {
-                            y -= 16;
-                            for (int h = 0; h < exits.Height; h++)
-                                CopySuboverlayToOverlay(pixels, 1024, exitFieldBlockPixels, 32, 32, x, y - (h * 16));
-                            y += 16;
-                        }
-                        x += exits.Face == 0 ? -16 : 16;
-                        y += 8;
-                    }
-                }
-                else
-                {
-                    // draw shadow
-                    if (exits.Z > 0)
-                        CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, x, y);
-
-                    y -= exits.Z * 16;
-
-                    if (exits.Height == 0)
-                        CopySuboverlayToOverlay(pixels, 1024, exitFieldBasePixels, 32, 16, x, y);
-                    else if (exits.Height > 0)
-                    {
-                        y -= 16;
-                        for (int h = 0; h < exits.Height; h++)
-                            CopySuboverlayToOverlay(pixels, 1024, exitFieldBlockPixels, 32, 32, x, y - (h * 16));
-                    }
-                }
-                // End Drawing
-            }
-            exitsImage = new Bitmap(Do.PixelsToImage(pixels, 1024, 1024));
-            pixels = null;
-
-            if (exits.Count > 0)
-                exits.CurrentExit = currentExit;
+            exitFieldBaseImage = Do.PixelsToImage(exitFieldBasePixels, 32, 16);
+            exitFieldBlockImage = Do.PixelsToImage(exitFieldBlockPixels, 32, 32);
+            exitFieldBaseImageH = Do.Hilite(exitFieldBaseImage, 32, 16);
+            exitFieldBlockImageH = Do.Hilite(exitFieldBlockImage, 32, 32);
         }
         public void DrawLevelExits(LevelExits exits, Graphics g, int z)
         {
+            int index = 0;
+            int total = 0;
+            List<Exit> sorted = new List<Exit>();
+            foreach (Exit exit in exits.Exits)
+            {
+                exit.Hilite = exits.SelectedExit == index;
+                exit.Index = total++;
+                sorted.Add(exit);
+                index++;
+            }
+            sorted.Sort(delegate(Exit exit1, Exit exit2) { return exit1.Y.CompareTo(exit2.Y); });
+            foreach (Exit exit in sorted)
+                DrawLevelExit(exit, g, z);
+        }
+        private void DrawLevelExit(Exit exit, Graphics g, int z)
+        {
+            if (exitFieldBaseImage == null)
+                GenerateExitFields();
+            if (fieldBaseShadowImage == null)
+                GenerateNPCFields();
+            int x = ((exit.X & 127) * 32) + (16 * (exit.Y & 1)) - 16;
+            int y = ((exit.Y & 127) * 8) - 8;
+            Rectangle rsrc, rdst;
+            // Draw the complete # of blocks
+            if (exit.Width > 0)
+            {
+                if (exit.Face == 0)
+                {
+                    y -= exit.Width * 8;
+                    x += exit.Width * 16;
+                }
+                // draw shadow
+                for (int w = 0; w <= exit.Width; w++)
+                {
+                    if (exit.Z > 0)
+                    {
+                        if (exit.Face == 0)
+                            rsrc = new Rectangle(-(w * 16) + x, w * 8 + y, 32, 16);
+                        else
+                            rsrc = new Rectangle(w * 16 + x, w * 8 + y, 32, 16);
+                        rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                        g.DrawImage(exit.Hilite ? fieldBaseShadowImageH : fieldBaseShadowImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                    }
+                }
+                // draw field base
+                for (int w = 0; w <= exit.Width; w++)
+                {
+                    if (w == 0)
+                        y -= exit.Z * 16;
+                    if (exit.Height == 0)
+                    {
+                        rsrc = new Rectangle(x, y, 32, 16);
+                        rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                        g.DrawImage(exit.Hilite ? exitFieldBaseImageH : exitFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                    }
+                    else if (exit.Height > 0)
+                    {
+                        y -= 16;
+                        for (int h = 0; h < exit.Height; h++)
+                        {
+                            rsrc = new Rectangle(x, y - (h * 16), 32, 32);
+                            rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                            g.DrawImage(exit.Hilite ? exitFieldBlockImageH : exitFieldBlockImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                        }
+                        y += 16;
+                    }
+                    x += exit.Face == 0 ? -16 : 16;
+                    y += 8;
+                }
+            }
+            else
+            {
+                if (exit.Z > 0)
+                {
+                    rsrc = new Rectangle(x, y, 32, 16);
+                    rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                    g.DrawImage(exit.Hilite ? fieldBaseShadowImageH : fieldBaseShadowImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                }
+                y -= exit.Z * 16;
+                if (exit.Height == 0)
+                {
+                    rsrc = new Rectangle(x, y, 32, 16);
+                    rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                    g.DrawImage(exit.Hilite ? exitFieldBaseImageH : exitFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                }
+                else if (exit.Height > 0)
+                {
+                    y -= 16;
+                    for (int h = 0; h < exit.Height; h++)
+                    {
+                        rsrc = new Rectangle(x, y - (h * 16), 32, 32);
+                        rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                        g.DrawImage(exit.Hilite ? exitFieldBlockImageH : exitFieldBlockImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                    }
+                }
+            }
+        }
+        public void DrawLevelExitTags(LevelExits exits, Graphics g, int z)
+        {
+            if (exits.Count == 0) return;
             // draw exit strings
             Rectangle r = new Rectangle();
             Pen pen = new Pen(Color.Yellow, 2);
@@ -413,130 +409,136 @@ namespace LAZYSHELL
                 g.DrawRectangle(pen, r);
             }
         }
-        private void GenerateExitPixels()
-        {
-            Bitmap exitFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
-            Bitmap exitFieldBlock = global::LAZYSHELL.Properties.Resources.fieldBlock;
-            exitFieldBasePixels = Do.ImageToPixels(exitFieldBase);
-            exitFieldBlockPixels = Do.ImageToPixels(exitFieldBlock);
-
-            Do.Colorize(exitFieldBasePixels, 60.0, 1.0);
-            Do.Colorize(exitFieldBlockPixels, 60.0, 1.0);
-            Do.Gradient(exitFieldBasePixels, 32, 16, 128.0, -128.0, true);
-            Do.Gradient(exitFieldBlockPixels, 32, 16, 128.0, 0, true);
-        }
         // events
-        public void DrawLevelEvents(LevelEvents events)
+        private void GenerateEventFields()
         {
-            int[] pixels = new int[1024 * 1024];
-            int currentEvent = events.CurrentEvent;
-            highlight = false;
+            Bitmap eventFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
+            Bitmap eventFieldBlock = global::LAZYSHELL.Properties.Resources.fieldBlock;
+            int[] eventFieldBasePixels = Do.ImageToPixels(eventFieldBase);
+            int[] eventFieldBlockPixels = Do.ImageToPixels(eventFieldBlock);
 
-            int x, y;
+            Do.Colorize(eventFieldBasePixels, 120.0, 1.0);
+            Do.Colorize(eventFieldBlockPixels, 120.0, 1.0);
+            Do.Gradient(eventFieldBasePixels, 32, 16, 128.0, -128.0, true);
+            Do.Gradient(eventFieldBlockPixels, 32, 16, 128.0, 0, true);
 
-            if (eventFieldBasePixels == null || eventFieldBlockPixels == null)
-                GenerateEventPixels();
-            if (fieldBaseShadow == null)
-                GenerateNPCPixels();
-
-            int[] order = new int[events.Count];
-            int[] coordY = new int[events.Count];
-            for (int i = 0; i < events.Count; i++)
-            {
-                events.CurrentEvent = i;
-                coordY[i] = events.Y;
-            }
-
-            for (int i = 0; i < events.Count; i++)
-                order[i] = i;
-            int[] temp = new int[coordY.Length]; coordY.CopyTo(temp, 0);
-            Array.Sort(temp, order);
-
-            for (int g = 0; g < events.Count; g++)
-            {
-                int i = order[g];
-
-                events.CurrentEvent = i;
-
-                highlight = i == events.SelectedEvent;
-
-                x = ((events.X & 127) * 32) + (16 * (events.Y & 1)) - 16;
-                y = ((events.Y & 127) * 8) - 8;
-
-                // Draw the complete # of blocks
-                if (events.Width > 0)
-                {
-                    if (events.Facing == 0)
-                    {
-                        y -= events.Width * 8;
-                        x += events.Width * 16;
-                    }
-                    for (int w = 0; w <= events.Width; w++)
-                    {
-                        // draw shadow
-                        if (events.Z > 0)
-                        {
-                            if (events.Facing == 0)
-                                CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, -(w * 16) + x, w * 8 + y);
-                            else
-                                CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, w * 16 + x, w * 8 + y);
-                        }
-                    }
-                    for (int w = 0; w <= events.Width; w++)
-                    {
-                        if (w == 0) y -= events.Z * 16;
-
-                        // draw the whole field
-                        if (events.Height == 0)
-                            CopySuboverlayToOverlay(pixels, 1024, eventFieldBasePixels, 32, 16, x, y);
-                        else if (events.Height > 0)
-                        {
-                            y -= 16;
-                            for (int h = 0; h < events.Height; h++)
-                                CopySuboverlayToOverlay(pixels, 1024, eventFieldBlockPixels, 32, 32, x, y - (h * 16));
-                            y += 16;
-                        }
-                        x += events.Facing == 0 ? -16 : 16;
-                        y += 8;
-                    }
-                }
-                else
-                {
-                    // draw shadow
-                    if (events.Z > 0)
-                        CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, x, y);
-
-                    y -= events.Z * 16;
-
-                    if (events.Height == 0)
-                        CopySuboverlayToOverlay(pixels, 1024, eventFieldBasePixels, 32, 16, x, y);
-                    else if (events.Height > 0)
-                    {
-                        y -= 16;
-                        for (int h = 0; h < events.Height; h++)
-                            CopySuboverlayToOverlay(pixels, 1024, eventFieldBlockPixels, 32, 32, x, y - (h * 16));
-                    }
-                }
-                // End Drawing
-            }
-            eventsImage = new Bitmap(Do.PixelsToImage(pixels, 1024, 1024));
-            pixels = null;
-
-            if (events.Count > 0)
-                events.CurrentEvent = currentEvent;
+            eventFieldBaseImage = Do.PixelsToImage(eventFieldBasePixels, 32, 16);
+            eventFieldBlockImage = Do.PixelsToImage(eventFieldBlockPixels, 32, 32);
+            eventFieldBaseImageH = Do.Hilite(eventFieldBaseImage, 32, 16);
+            eventFieldBlockImageH = Do.Hilite(eventFieldBlockImage, 32, 32);
         }
         public void DrawLevelEvents(LevelEvents events, Graphics g, int z)
         {
-            // draw exit strings
+            int index = 0;
+            int total = 0;
+            List<Event> sorted = new List<Event>();
+            foreach (Event event_ in events.Events)
+            {
+                event_.Hilite = events.SelectedEvent == index;
+                event_.Index = total++;
+                sorted.Add(event_);
+                index++;
+            }
+            sorted.Sort(delegate(Event event1, Event event2) { return event1.Y.CompareTo(event2.Y); });
+            foreach (Event event_ in sorted)
+                DrawLevelEvent(event_, g, z);
+        }
+        private void DrawLevelEvent(Event event_, Graphics g, int z)
+        {
+            if (eventFieldBaseImage == null)
+                GenerateEventFields();
+            if (fieldBaseShadowImage == null)
+                GenerateNPCFields();
+            int x = ((event_.X & 127) * 32) + (16 * (event_.Y & 1)) - 16;
+            int y = ((event_.Y & 127) * 8) - 8;
+            Rectangle rsrc, rdst;
+            // Draw the complete # of blocks
+            if (event_.Width > 0)
+            {
+                if (event_.Face == 0)
+                {
+                    y -= event_.Width * 8;
+                    x += event_.Width * 16;
+                }
+                // draw shadow
+                for (int w = 0; w <= event_.Width; w++)
+                {
+                    if (event_.Z > 0)
+                    {
+                        if (event_.Face == 0)
+                            rsrc = new Rectangle(-(w * 16) + x, w * 8 + y, 32, 16);
+                        else
+                            rsrc = new Rectangle(w * 16 + x, w * 8 + y, 32, 16);
+                        rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                        g.DrawImage(event_.Hilite ? fieldBaseShadowImageH : fieldBaseShadowImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                    }
+                }
+                // draw field base
+                for (int w = 0; w <= event_.Width; w++)
+                {
+                    if (w == 0)
+                        y -= event_.Z * 16;
+                    if (event_.Height == 0)
+                    {
+                        rsrc = new Rectangle(x, y, 32, 16);
+                        rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                        g.DrawImage(event_.Hilite ? eventFieldBaseImageH : eventFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                    }
+                    else if (event_.Height > 0)
+                    {
+                        y -= 16;
+                        for (int h = 0; h < event_.Height; h++)
+                        {
+                            rsrc = new Rectangle(x, y - (h * 16), 32, 32);
+                            rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                            g.DrawImage(event_.Hilite ? eventFieldBlockImageH : eventFieldBlockImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                        }
+                        y += 16;
+                    }
+                    x += event_.Face == 0 ? -16 : 16;
+                    y += 8;
+                }
+            }
+            else
+            {
+                if (event_.Z > 0)
+                {
+                    rsrc = new Rectangle(x, y, 32, 16);
+                    rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                    g.DrawImage(event_.Hilite ? fieldBaseShadowImageH : fieldBaseShadowImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                }
+                y -= event_.Z * 16;
+                if (event_.Height == 0)
+                {
+                    rsrc = new Rectangle(x, y, 32, 16);
+                    rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                    g.DrawImage(event_.Hilite ? eventFieldBaseImageH : eventFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                }
+                else if (event_.Height > 0)
+                {
+                    y -= 16;
+                    for (int h = 0; h < event_.Height; h++)
+                    {
+                        rsrc = new Rectangle(x, y - (h * 16), 32, 32);
+                        rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
+                        g.DrawImage(event_.Hilite ? eventFieldBlockImageH : eventFieldBlockImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                    }
+                }
+            }
+        }
+        public void DrawLevelEventTags(LevelEvents events, Graphics g, int z)
+        {
+            if (events.Count == 0) return;
+            // draw event strings
             foreach (Event event_ in events.Events)
             {
                 if (event_ != events.Event_)
-                    DrawLevelEvent(g, events, event_, z);
+                    DrawLevelEventTag(g, events, event_, z);
             }
             if (events.Event_ != null)
-                DrawLevelEvent(g, events, events.Event_, z);
+                DrawLevelEventTag(g, events, events.Event_, z);
         }
-        private void DrawLevelEvent(Graphics g, LevelEvents events, Event temp, int z)
+        private void DrawLevelEventTag(Graphics g, LevelEvents events, Event temp, int z)
         {
             Rectangle r = new Rectangle();
             Pen pen = new Pen(Color.Yellow, 2);
@@ -572,162 +574,114 @@ namespace LAZYSHELL
             }
             g.DrawRectangle(pen, r);
         }
-        private void GenerateEventPixels()
-        {
-            Bitmap eventFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
-            Bitmap eventFieldBlock = global::LAZYSHELL.Properties.Resources.fieldBlock;
-            eventFieldBasePixels = Do.ImageToPixels(eventFieldBase);
-            eventFieldBlockPixels = Do.ImageToPixels(eventFieldBlock);
-
-            Do.Colorize(eventFieldBasePixels, 120.0, 1.0);
-            Do.Colorize(eventFieldBlockPixels, 120.0, 1.0);
-            Do.Gradient(eventFieldBasePixels, 32, 16, 128.0, -128.0, true);
-            Do.Gradient(eventFieldBlockPixels, 32, 16, 128.0, 0, true);
-        }
         // npcs
+        private void GenerateNPCFields()
+        {
+            Bitmap npcFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
+            int[] npcFieldBasePixels = Do.ImageToPixels(npcFieldBase);
+            Do.Colorize(npcFieldBasePixels, 0.0, 1.0);
+            Do.Gradient(npcFieldBasePixels, 32, 16, 128.0, -128.0, true);
+            int[] fieldBaseShadow = new int[32 * 16];
+            for (int y = 0; y < 16; y++)
+            {
+                for (int x = 0; x < 32; x++)
+                {
+                    if (npcFieldBasePixels[y * 32 + x] != 0)
+                        fieldBaseShadow[y * 32 + x] = Color.FromArgb(64 - (y * 4), 64 - (y * 4), 64 - (y * 4)).ToArgb();
+                }
+            }
+            npcFieldBaseImage = Do.PixelsToImage(npcFieldBasePixels, 32, 16);
+            npcFieldBaseImageH = Do.Hilite(npcFieldBaseImage, 32, 16);
+            fieldBaseShadowImage = Do.PixelsToImage(fieldBaseShadow, 32, 16);
+            fieldBaseShadowImageH = Do.Hilite(fieldBaseShadowImage, 32, 16);
+        }
         public void DrawLevelNPCs(LevelNPCs npcs, NPCProperties[] npcProperties)
         {
-            int[] whole = new int[1024 * 1024];
-            int currentNPC = npcs.CurrentNPC;
-            int currentInstance = 0;
-            if (npcs.Count > 0)
-                currentInstance = npcs.CurrentInstance;
-
-            highlight = false;
-
-            if (npcFieldBasePixels == null)
-                GenerateNPCPixels();
-
-            int total = 0;
-            for (int i = 0; i < npcs.Count; i++, total++)
+            NPCImages = new List<Bitmap>();
+            foreach (NPC npc in npcs.Npcs)
             {
-                npcs.CurrentNPC = i;
-                total += npcs.InstanceCount;
+                DrawLevelNPC(npc, npcProperties, npc.NPCID, npc.EngageType);
+                foreach (NPC instance in npc.Instances)
+                    DrawLevelNPC(instance, npcProperties, npc.NPCID, npc.EngageType);
             }
-            int[] order = new int[total];
-            int[] coordY = new int[total];
-            int[][] pixels = new int[total][];      // the sprite image
-            Point[] point = new Point[total];       // exact pixel coords to draw to
-            Point[] coords = new Point[total];      // actual coords of sprite
-            Size[] size = new Size[total];          // size of the sprite image
-            bool[] floating = new bool[total];
-            bool[] show = new bool[total];
-            bool[] selected = new bool[total];
-            for (int i = 0, a = 0; i < npcs.Count; i++, a++)
-            {
-                npcs.CurrentNPC = i;
-
-                coordY[a] = npcs.Y;
-                int NPCID = npcs.EngageType == 0 ? Math.Min(511, npcs.NPCID + npcs.PropertyA) : Math.Min(511, (int)npcs.NPCID);
-                if (npcs.EngageType == 0)
-                {
-                    pixels[a] = npcProperties[NPCID].CreateImage(npcs.Face, false, 0);
-                    size[a].Height = npcProperties[NPCID].ImageHeight;
-                    size[a].Width = npcProperties[NPCID].ImageWidth;
-                }
-                else
-                {
-                    pixels[a] = npcProperties[NPCID].CreateImage(npcs.Face, false, 0);
-                    size[a].Height = npcProperties[NPCID].ImageHeight;
-                    size[a].Width = npcProperties[NPCID].ImageWidth;
-                }
-                point[a].X = coords[a].X = ((npcs.X & 127) * 32) + (16 * (npcs.Y & 1)) - 16;
-                point[a].Y = ((npcs.Y & 127) * 8) - 8 - (npcs.Z * 16) - (npcs.CoordYBit7 ? 8 : 0);
-                coords[a].Y = ((npcs.Y & 127) * 8) - 8;
-                floating[a] = npcs.Z > 0 || npcs.CoordYBit7;
-                show[a] = npcs.CoordXBit7;
-                selected[a] = i == npcs.SelectedNPC && !npcs.IsInstanceSelected;
-
-                for (int o = 0; o < npcs.InstanceCount; o++, a++)
-                {
-                    npcs.CurrentInstance = o;
-
-                    coordY[a + 1] = npcs.InstanceCoordY;
-                    NPCID = npcs.EngageType == 0 ? Math.Min(511, npcs.NPCID + npcs.PropertyA) : Math.Min(511, (int)npcs.NPCID);
-                    if (npcs.EngageType == 0)
-                    {
-                        pixels[a + 1] = npcProperties[NPCID].CreateImage(npcs.InstanceFace, false, 0);
-                        size[a + 1].Height = npcProperties[NPCID].ImageHeight;
-                        size[a + 1].Width = npcProperties[NPCID].ImageWidth;
-                    }
-                    else
-                    {
-                        pixels[a + 1] = npcProperties[NPCID].CreateImage(npcs.InstanceFace, false, 0);
-                        size[a + 1].Height = npcProperties[NPCID].ImageHeight;
-                        size[a + 1].Width = npcProperties[NPCID].ImageWidth;
-                    }
-                    point[a + 1].X = coords[a + 1].X = ((npcs.InstanceCoordX & 127) * 32) + (16 * (npcs.InstanceCoordY & 1)) - 16;
-                    point[a + 1].Y = ((npcs.InstanceCoordY & 127) * 8) - 8 - (npcs.InstanceCoordZ * 16) - (npcs.InstanceCoordYBit7 ? 8 : 0);
-                    coords[a + 1].Y = ((npcs.InstanceCoordY & 127) * 8) - 8;
-                    floating[a + 1] = npcs.InstanceCoordZ > 0 || npcs.InstanceCoordYBit7;
-                    show[a + 1] = npcs.InstanceCoordXBit7;
-                    selected[a + 1] = i == npcs.SelectedNPC && o == npcs.SelectedInstance && npcs.IsInstanceSelected;
-                }
-            }
-
-            for (int i = 0; i < total; i++)
-                order[i] = i;
-            int[] temp = new int[coordY.Length]; coordY.CopyTo(temp, 0);
-            Array.Sort(temp, order);
-
-            int x, y;
-
-            if (npcs.Count > 0)
-            {
-                npcs.CurrentNPC = currentNPC;
-                if (npcs.InstanceCount > 0)
-                    npcs.CurrentInstance = currentInstance;
-            }
-
-            for (int g = 0; g < total; g++)
-            {
-                int i = order[g];
-
-                // Draw dark grey shadow at actual coords
-                highlight = selected[i];
-                if (floating[i])
-                    CopySuboverlayToOverlay(whole, 1024, fieldBaseShadow, 32, 16, coords[i].X, coords[i].Y);
-
-                // Draw red field base at exact pixel coords
-                x = point[i].X;
-                y = point[i].Y;
-
-                CopySuboverlayToOverlay(whole, 1024, npcFieldBasePixels, 32, 16, x, y);
-                highlight = false;
-
-                x += 32 - size[i].Width / 2 - 16;
-                y -= size[i].Height - 4 - 8;
-
-                // draw the npc
-                if (show[i])
-                    CopySuboverlayToOverlay(whole, 1024, pixels[i], size[i].Width, size[i].Height, x, y);
-            }
-            npcsImage = new Bitmap(Do.PixelsToImage(whole, 1024, 1024));
-            pixels = null;
-            whole = null;
-
-            if (npcs.Count > 0)
-            {
-                npcs.CurrentNPC = currentNPC;
-                if (npcs.InstanceCount > 0)
-                    npcs.CurrentInstance = currentInstance;
-            }
+        }
+        private void DrawLevelNPC(NPC npc, NPCProperties[] npcProperties, int npcid, int engagetype)
+        {
+            int NPCID = engagetype == 0 ? Math.Min(511, npcid + npc.PropertyA) : Math.Min(511, (int)npcid);
+            int[] pixels = npcProperties[NPCID].CreateImage(npc.Face, false, 0);
+            int height = npcProperties[NPCID].ImageHeight;
+            int width = npcProperties[NPCID].ImageWidth;
+            Bitmap image = Do.PixelsToImage(pixels, width, height);
+            NPCImages.Add(image);
         }
         public void DrawLevelNPCs(LevelNPCs npcs, Graphics g, int z)
         {
-            // draw exit strings
+            int index = 0;
+            int total = 0;
+            List<NPC> sorted = new List<NPC>();
+            foreach (NPC npc in npcs.Npcs)
+            {
+                npc.Hilite = !npcs.IsInstanceSelected && npcs.SelectedNPC == index;
+                npc.Index = total++;
+                sorted.Add(npc);
+                int index_ = 0;
+                foreach (NPC instance in npc.Instances)
+                {
+                    instance.Hilite = npcs.SelectedNPC == index && npcs.IsInstanceSelected && npcs.SelectedInstance == index_;
+                    instance.Index = total++;
+                    sorted.Add(instance);
+                    index_++;
+                }
+                index++;
+            }
+            sorted.Sort(delegate(NPC npc1, NPC npc2) { return npc1.Y.CompareTo(npc2.Y); });
+            foreach (NPC npc in sorted)
+                DrawLevelNPC(npc, g, z);
+        }
+        private void DrawLevelNPC(NPC npc, Graphics g, int z)
+        {
+            if (npcFieldBaseImage == null)
+                GenerateNPCFields();
+            int x = ((npc.X & 127) * 32) + (16 * (npc.Y & 1)) - 16;
+            int y = ((npc.Y & 127) * 8) - 8;
+            Rectangle rdst, rsrc;
+            rsrc = new Rectangle(x, y, 32, 16);
+            rdst = new Rectangle(x * z, y * z, 32 * z, 16 * z);
+            if (!npc.Hilite)
+                g.DrawImage(fieldBaseShadowImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+            else
+                g.DrawImage(fieldBaseShadowImageH, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+            y -= npc.Z * 16;
+            y -= npc.CoordYBit7 ? 8 : 0;
+            rsrc = new Rectangle(x, y, 32, 16);
+            rdst = new Rectangle(x * z, y * z, 32 * z, 16 * z);
+            if (!npc.Hilite)
+                g.DrawImage(npcFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+            else
+                g.DrawImage(npcFieldBaseImageH, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+            x += 32 - NPCImages[npc.Index].Width / 2 - 16;
+            y -= NPCImages[npc.Index].Height - 4 - 8;
+            rsrc = new Rectangle(x, y, NPCImages[npc.Index].Width, NPCImages[npc.Index].Height);
+            rdst = new Rectangle(x * z, y * z, rsrc.Width * z, rsrc.Height * z);
+            if (npc.CoordXBit7)
+                g.DrawImage(NPCImages[npc.Index], rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+        }
+        public void DrawLevelNPCTags(LevelNPCs npcs, Graphics g, int z)
+        {
+            if (npcs.Count == 0) return;
+            // draw npc strings
             int index = 0;
             int current = 0;
             foreach (NPC npc in npcs.Npcs)
             {
                 if (npc != npcs.Npc || npcs.IsInstanceSelected)
-                    DrawLevelNPC(npcs, g, npc, index++, false, null, z);
+                    DrawLevelNPCTag(npcs, g, npc, index++, null, z);
                 else
                     current = index++;
                 foreach (NPC instance in npc.Instances)
                 {
                     if (npc != npcs.Npc || instance != npcs.Npc.Instance_ || !npcs.IsInstanceSelected)
-                        DrawLevelNPC(npcs, g, instance, index++, false, null, z);
+                        DrawLevelNPCTag(npcs, g, instance, index++, null, z);
                     else
                         current = index++;
                 }
@@ -735,12 +689,12 @@ namespace LAZYSHELL
             if (npcs.Npc != null)
             {
                 if (!npcs.IsInstanceSelected)
-                    DrawLevelNPC(npcs, g, npcs.Npc, current, true, null, z);
+                    DrawLevelNPCTag(npcs, g, npcs.Npc, current, null, z);
                 else
-                    DrawLevelNPC(npcs, g, npcs.Npc.Instance_, current, true, npcs.Npc, z);
+                    DrawLevelNPCTag(npcs, g, npcs.Npc.Instance_, current, npcs.Npc, z);
             }
         }
-        private void DrawLevelNPC(LevelNPCs npcs, Graphics g, NPC npc, int index, bool selected, NPC parent, int z)
+        private void DrawLevelNPCTag(LevelNPCs npcs, Graphics g, NPC npc, int index, NPC parent, int z)
         {
             Rectangle r = new Rectangle();
             Pen pen = new Pen(Color.Yellow, 2);
@@ -758,7 +712,7 @@ namespace LAZYSHELL
             RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),
                 g.MeasureString(name, font_, new PointF(0, 0), StringFormat.GenericDefault));
 
-            if (!selected)
+            if (!npc.Hilite)
             {
                 g.FillRectangle(new SolidBrush(Color.FromArgb(128, Color.Black)), label);
                 g.DrawString(name, font, brush, r.X, r.Y + 24);
@@ -807,73 +761,58 @@ namespace LAZYSHELL
             }
             g.DrawRectangle(pen, r);
         }
-        private void GenerateNPCPixels()
-        {
-            Bitmap npcFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
-            npcFieldBasePixels = Do.ImageToPixels(npcFieldBase);
-            Do.Colorize(npcFieldBasePixels, 0.0, 1.0);
-            Do.Gradient(npcFieldBasePixels, 32, 16, 128.0, -128.0, true);
-
-            fieldBaseShadow = new int[32 * 16];
-            for (int y = 0; y < 16; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    if (npcFieldBasePixels[y * 32 + x] != 0)
-                        fieldBaseShadow[y * 32 + x] = Color.FromArgb(64 - (y * 4), 64 - (y * 4), 64 - (y * 4)).ToArgb();
-                }
-            }
-        }
         // overlaps
-        public void DrawLevelOverlaps(LevelOverlaps overlaps, OverlapTileset overlapTileset)
-        {
-            int[] pixels = new int[1024 * 1024];
-            int currentOverlap = overlaps.CurrentOverlap;
-            highlight = false;
-
-            if (overlapFieldBasePixels == null)
-                GenerateOverlapPixels();
-
-            int x, y;
-
-            for (int g = 0; g < overlaps.Count; g++)
-            {
-                overlaps.CurrentOverlap = g;
-
-                x = ((overlaps.X & 127) * 32) + (16 * (overlaps.Y & 1)) - 16;
-                y = ((overlaps.Y & 127) * 8) - 8;
-
-                // Draw dark grey shadow at actual coords
-                highlight = g == overlaps.SelectedOverlap;
-                if (overlaps.Z > 0)
-                    CopySuboverlayToOverlay(pixels, 1024, fieldBaseShadow, 32, 16, x, y);
-
-                y = ((overlaps.Y & 127) * 8) - 8 - (overlaps.Z * 16) - (overlaps.B1b7 ? 8 : 0);
-
-                // Draw blue field base at exact pixel coords
-                CopySuboverlayToOverlay(pixels, 1024, overlapFieldBasePixels, 32, 16, x, y);
-                int[] tilepixels = Bits.Copy(overlapTileset.OverlapTiles[overlaps.Type].Pixels);
-                Do.Gradient(tilepixels, 32, 32, 0, 64, false);
-                Do.Opacity(tilepixels, 32, 32, 224);
-                CopySuboverlayToOverlay(pixels, 1024, tilepixels, 32, 32, x, y - 16);
-                highlight = false;
-            }
-            overlapsImage = new Bitmap(Do.PixelsToImage(pixels, 1024, 1024));
-            pixels = null;
-
-            if (overlaps.Count > 0)
-                overlaps.CurrentOverlap = currentOverlap;
-        }
-        private void GenerateOverlapPixels()
+        private void GenerateOverlapFields()
         {
             Bitmap overlapFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
-            overlapFieldBasePixels = Do.ImageToPixels(overlapFieldBase);
+            int[] overlapFieldBasePixels = Do.ImageToPixels(overlapFieldBase);
             Do.Colorize(overlapFieldBasePixels, 240.0, 1.0);
             Do.Gradient(overlapFieldBasePixels, 32, 16, 128.0, -128.0, true);
+            overlapFieldBaseImage = Do.PixelsToImage(overlapFieldBasePixels, 32, 16);
+            overlapFieldBaseImageH = Do.Hilite(overlapFieldBaseImage, 32, 16);
+        }
+        public void DrawLevelOverlaps(LevelOverlaps overlaps, OverlapTileset overlapTileset, Graphics g, int z)
+        {
+            if (overlapFieldBaseImage == null)
+                GenerateOverlapFields();
+            if (fieldBaseShadowImage == null)
+                GenerateNPCFields();
+            int index = 0;
+            Rectangle rsrc, rdst;
+            foreach (Overlap overlap in overlaps.Overlaps)
+            {
+                int x = ((overlap.X & 127) * 32) + (16 * (overlap.Y & 1)) - 16;
+                int y = ((overlap.Y & 127) * 8) - 8;
+                overlap.Hilite = overlaps.SelectedOverlap == index;
+                overlap.Index = index++;
+                rsrc = new Rectangle(x, y, 32, 16);
+                rdst = new Rectangle(x * z, y * z, 32 * z, 16 * z);
+                if (!overlap.Hilite)
+                    g.DrawImage(fieldBaseShadowImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                else
+                    g.DrawImage(fieldBaseShadowImageH, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                int[] pixels = Bits.Copy(overlapTileset.OverlapTiles[overlap.Type].Pixels);
+                Do.Gradient(pixels, 32, 32, 0, 64, false);
+                Do.Opacity(pixels, 32, 32, 224);
+                Bitmap tile = Do.PixelsToImage(pixels, 32, 32);
+                if (overlap.Hilite)
+                    tile = Do.Hilite(tile, 32, 32);
+                y = ((overlap.Y & 127) * 8) - 8 - (overlap.Z * 16) - (overlap.B1b7 ? 8 : 0);
+                rsrc = new Rectangle(x, y, 32, 16);
+                rdst = new Rectangle(x * z, y * z, 32 * z, 16 * z);
+                if (!overlap.Hilite)
+                    g.DrawImage(overlapFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                else
+                    g.DrawImage(overlapFieldBaseImageH, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                rsrc.Height = 32; rsrc.Y -= 16;
+                rdst.Height = 32 * z; rdst.Y -= 16 * z;
+                g.DrawImage(tile, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+            }
         }
         // mods
         public void DrawLevelTileMods(LevelTileMods tileMods, Graphics g, ImageAttributes ia, int z)
         {
+            if (tileMods.Count == 0) return;
             Rectangle rsrc;
             Rectangle rdst;
             Pen pen;
@@ -926,6 +865,7 @@ namespace LAZYSHELL
         }
         public void DrawLevelSolidMods(LevelSolidMods solidMods, Graphics g, int z)
         {
+            if (solidMods.Count == 0) return;
             foreach (LevelSolidMods.Mod mod in solidMods.Mods)
             {
                 int x = ((mod.X & 127) * 32) + (16 * (mod.Y & 1)) - 16;

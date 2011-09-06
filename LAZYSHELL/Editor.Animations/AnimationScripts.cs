@@ -15,7 +15,7 @@ namespace LAZYSHELL
     public partial class AnimationScripts : Form
     {
         #region Variables
-        
+
         private long checksum;
         private A_TreeViewWrapper a_treeViewWrapper;
         private AnimationScript[] animationScripts
@@ -90,6 +90,10 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip4, Keys.F2, showDecHex);
             InitializeAnimationScriptsEditor();
             new History(this);
+            //
+            animationCategory.SelectedIndex = settings.LastAnimationCat;
+            animationNum.Value = Math.Min((int)animationNum.Maximum, settings.LastAnimation);
+            checksum = Do.GenerateChecksum(animationBank, battleBank);
         }
         #region Methods
         private void InitializeAnimationScriptsEditor()
@@ -98,8 +102,6 @@ namespace LAZYSHELL
 
             animationBank = Bits.GetByteArray(Model.Data, 0x350000, 0x10000);
             battleBank = Bits.GetByteArray(Model.Data, 0x3A6000, 0xA000);
-
-            checksum = Do.GenerateChecksum(animationBank, battleBank);
             //
             this.menuTextPreview = new MenuTextPreview();
             this.battleDialoguePreview = new BattleDialoguePreview();
@@ -1018,14 +1020,17 @@ namespace LAZYSHELL
         #region Event Handlers
         private void animationCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            previewer.Enabled = 
-                animationCategory.SelectedIndex == 1 || 
-                animationCategory.SelectedIndex == 2 || 
+            previewer.Enabled =
+                animationCategory.SelectedIndex == 1 ||
+                animationCategory.SelectedIndex == 2 ||
                 animationCategory.SelectedIndex == 4;
             if (updatingAnimations) return;
 
             animationNum.Value = 0;
             RefreshAnimationScriptsEditor();
+            //
+            settings.LastAnimationCat = animationCategory.SelectedIndex;
+            settings.LastAnimation = (int)animationNum.Value;
         }
         private void animationNum_ValueChanged(object sender, EventArgs e)
         {
@@ -1045,6 +1050,9 @@ namespace LAZYSHELL
             if (this.animationScriptTree.Nodes.Count > 0)
                 this.animationScriptTree.SelectedNode = this.animationScriptTree.Nodes[0];
             Cursor.Current = Cursors.Arrow;
+            //
+            settings.LastAnimationCat = animationCategory.SelectedIndex;
+            settings.LastAnimation = (int)animationNum.Value;
         }
         private void animationName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1189,12 +1197,10 @@ namespace LAZYSHELL
         private void aniMoveDown_Click(object sender, EventArgs e)
         {
             a_treeViewWrapper.MoveDown(asc);
-            checksum--;   // b/c switching colors won't modify checksum
         }
         private void aniMoveUp_Click(object sender, EventArgs e)
         {
             a_treeViewWrapper.MoveUp(asc);
-            checksum--;   // b/c switching colors won't modify checksum
         }
         private void applyAnimationMods_Click(object sender, EventArgs e)
         {

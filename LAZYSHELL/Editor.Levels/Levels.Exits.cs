@@ -123,7 +123,6 @@ namespace LAZYSHELL
                 this.marioZCoordPlusHalf.Checked = false;
             }
 
-            overlay.DrawLevelExits(exits);
             exitsBytesLeft.Text = CalculateFreeExitSpace() + " bytes left";
             exitsBytesLeft.BackColor = CalculateFreeExitSpace() >= 0 ? SystemColors.Control : Color.Red;
 
@@ -240,16 +239,16 @@ namespace LAZYSHELL
             else
             {
                 this.exitDest.DropDownWidth = 200;
-                this.exitDest.Items.AddRange(Lists.Numerize(Lists.Numerize(Model.MapPoints)));
+                this.exitDest.Items.AddRange(Lists.Numerize(Model.MapPoints));
             }
         }
         public int CalculateFreeExitSpace()
         {
             int used = 0;
 
-            foreach(Level level in levels)
+            foreach (Level level in levels)
             {
-                foreach(Exit exit in level.LevelExits.Exits)
+                foreach (Exit exit in level.LevelExits.Exits)
                     used += exit.GetExitLength();
             }
             return 0x179F - used;
@@ -292,7 +291,6 @@ namespace LAZYSHELL
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.SelectedExit = this.exitsFieldTree.SelectedNode.Index;
 
-            overlay.DrawLevelExits(exits);
 
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
@@ -308,7 +306,6 @@ namespace LAZYSHELL
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.WidthXPlusHalf = this.exits45LengthPlusHalf.Checked;
 
-            overlay.DrawLevelExits(exits);
 
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
@@ -323,7 +320,6 @@ namespace LAZYSHELL
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.WidthYPlusHalf = this.exits135LengthPlusHalf.Checked;
 
-            overlay.DrawLevelExits(exits);
 
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
@@ -382,7 +378,6 @@ namespace LAZYSHELL
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Height = (byte)this.exitHeight.Value;
 
-            overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             picture.Invalidate();
@@ -394,7 +389,6 @@ namespace LAZYSHELL
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Width = (byte)(this.exitLength.Value - 1);
 
-            overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             picture.Invalidate();
@@ -412,7 +406,6 @@ namespace LAZYSHELL
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Z = (byte)this.exitZ.Value;
 
-            overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             picture.Invalidate();
@@ -424,8 +417,6 @@ namespace LAZYSHELL
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Y = (byte)this.exitY.Value;
 
-            if (!updatingLevel)
-                overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             picture.Invalidate();
@@ -437,8 +428,6 @@ namespace LAZYSHELL
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.X = (byte)this.exitX.Value;
 
-            if (!updatingLevel)
-                overlay.DrawLevelExits(exits);
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             picture.Invalidate();
@@ -449,7 +438,6 @@ namespace LAZYSHELL
 
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Face = (byte)this.exitFace.SelectedIndex;
-            overlay.DrawLevelExits(exits);
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             picture.Invalidate();
         }
@@ -524,10 +512,10 @@ namespace LAZYSHELL
                 {
                     this.exitsFieldTree.SelectedNode = null;
 
-                    overlay.DrawLevelExits(exits);
 
 
                     RefreshExitFieldProperties();
+                    picture.Invalidate();
                 }
                 exitsFieldTree.EndUpdate();
             }

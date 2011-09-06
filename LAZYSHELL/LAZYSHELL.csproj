@@ -131,10 +131,10 @@
     <Compile Include="Features\ExportImages.Designer.cs">
       <DependentUpon>ExportImages.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\HexEditor.cs">
+    <Compile Include="Editors\HexEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Features\HexEditor.designer.cs">
+    <Compile Include="Editors\HexEditor.designer.cs">
       <DependentUpon>HexEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\IOArchitecture.cs">
@@ -658,7 +658,7 @@
       <DependentUpon>ExportImages.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\HexEditor.resx">
+    <EmbeddedResource Include="Editors\HexEditor.resx">
       <DependentUpon>HexEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

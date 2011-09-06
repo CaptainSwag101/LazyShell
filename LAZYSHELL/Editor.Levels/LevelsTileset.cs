@@ -45,7 +45,7 @@ namespace LAZYSHELL
         private PaletteSet paletteSet;
         private Bitmap tileSetImage, priority1;
         private Overlay overlay;
-        public TileEditor tileEditor;
+        public TileEditor TileEditor;
         // mouse
         private int zoom = 1;
         private bool mouseEnter = false;
@@ -121,28 +121,28 @@ namespace LAZYSHELL
             switch (Layer)
             {
                 case 2: // layer 3
-                    if (tileEditor == null)
+                    if (TileEditor == null)
                     {
-                        tileEditor = new TileEditor(new Function(TileUpdate),
+                        TileEditor = new TileEditor(new Function(TileUpdate),
                             this.tileSet.TileSetLayers[Layer][mouseDownTile],
                             tileSet.GraphicsL3, paletteSet, 0x10);
-                        tileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+                        TileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
                     }
                     else
-                        tileEditor.Reload(new Function(TileUpdate),
+                        TileEditor.Reload(new Function(TileUpdate),
                             this.tileSet.TileSetLayers[Layer][mouseDownTile],
                             tileSet.GraphicsL3, paletteSet, 0x10);
                     break;
                 default:
-                    if (tileEditor == null)
+                    if (TileEditor == null)
                     {
-                        tileEditor = new TileEditor(new Function(TileUpdate),
+                        TileEditor = new TileEditor(new Function(TileUpdate),
                         this.tileSet.TileSetLayers[Layer][mouseDownTile],
                         tileSet.Graphics, paletteSet, 0x20);
-                        tileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+                        TileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
                     }
                     else
-                        tileEditor.Reload(new Function(TileUpdate),
+                        TileEditor.Reload(new Function(TileUpdate),
                         this.tileSet.TileSetLayers[Layer][mouseDownTile],
                         tileSet.Graphics, paletteSet, 0x20);
                     break;
@@ -230,7 +230,9 @@ namespace LAZYSHELL
             {
                 for (int x = 0; x < buffer.Width / 16; x++)
                 {
-                    if (y + y_ < 0 || x + x_ < 0) continue;
+                    if (y + y_ < 0 || y + y_ >= 32 ||
+                        x + x_ < 0 || x + x_ >= 16)
+                        continue;
                     int index = (y + y_) * 16 + x + x_;
                     Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileSet.TileSetLayers[Layer][index] = tile.Copy();
@@ -341,6 +343,8 @@ namespace LAZYSHELL
                     overlay.SelectTS.X * zoom, overlay.SelectTS.Y * zoom,
                     rsrc.Width * zoom, rsrc.Height * zoom);
                 e.Graphics.DrawImage(new Bitmap(selection), rdst, rsrc, GraphicsUnit.Pixel);
+                Do.DrawString(e.Graphics, new Point(rdst.X, rdst.Y + rdst.Height),
+                    "click/drag", Color.White, Color.Black, new Font("Tahoma", 6.75F, FontStyle.Bold));
             }
 
             float[][] matrixItems ={ 
@@ -510,7 +514,7 @@ namespace LAZYSHELL
         // toolstrip
         private void buttonToggleTileEditor_Click(object sender, EventArgs e)
         {
-            tileEditor.Visible = true;
+            TileEditor.Visible = true;
         }
         private void buttonToggleCartGrid_Click(object sender, EventArgs e)
         {

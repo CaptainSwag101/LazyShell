@@ -193,6 +193,14 @@ namespace LAZYSHELL
             {
                 Buffer.BlockCopy(data, 0x3B0000, Model.Data, 0x3B0000, 0x2C000);
             }
+            if (levels.Nodes["TileMods"].Checked)
+            {
+                Buffer.BlockCopy(data, 0x1D5EBD, Model.Data, 0x1D5EBD, 0x2EF3);
+            }
+            if (levels.Nodes["SolidMods"].Checked)
+            {
+                Buffer.BlockCopy(data, 0x1D8DB0, Model.Data, 0x1D8DB0, 0xCFF);
+            }
             if (levels.Nodes["Graphics"].Checked)   // graphics
             {
                 Buffer.BlockCopy(data, 0x0A0000, Model.Data, 0x0A0000, 0x60000);

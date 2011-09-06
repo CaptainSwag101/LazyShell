@@ -18,7 +18,7 @@ namespace LAZYSHELL
             this.form = form;
             foreach (Control c in form.Controls)
             {
-                c.KeyDown += new KeyEventHandler(ControlKeyDown);
+                //c.KeyDown += new KeyEventHandler(ControlKeyDown);
                 c.MouseDown += new MouseEventHandler(ControlMouseDown);
                 SetEventHandlers(c);
             }
@@ -31,7 +31,7 @@ namespace LAZYSHELL
             else
                 foreach (Control c in control.Controls)
                 {
-                    c.KeyDown += new KeyEventHandler(ControlKeyDown);
+                    //c.KeyDown += new KeyEventHandler(ControlKeyDown);
                     c.MouseDown += new MouseEventHandler(ControlMouseDown);
                     SetEventHandlers(c);
                 }
@@ -39,15 +39,13 @@ namespace LAZYSHELL
         private void AddValue(Control control, ref string temp)
         {
             if (control.GetType() == typeof(NumericUpDown))
-                temp += ", value = " + ((NumericUpDown)control).Value + "\n";
+                temp += "value=" + ((NumericUpDown)control).Value + " | ";
             else if (control.GetType() == typeof(ComboBox))
-                temp += ", index = " + ((ComboBox)control).SelectedIndex + "\n";
+                temp += "index=" + ((ComboBox)control).SelectedIndex + " | ";
             else if (control.GetType() == typeof(CheckedListBox) ||
                 control.GetType() == typeof(NewCheckedListBox) ||
                 control.GetType() == typeof(ListBox))
-                temp += ", index = " + ((ListBox)control).SelectedIndex + "\n";
-            else
-                temp += "\n";
+                temp += "index=" + ((ListBox)control).SelectedIndex + " | ";
         }
         // event handlers
         private void ControlKeyDown(object sender, KeyEventArgs e)
@@ -55,16 +53,17 @@ namespace LAZYSHELL
             Control control = (Control)sender;
             if (control.Name == "")
                 return;
-            string temp = "(Form: \"" + form.Name + "\") @ " + DateTime.Now.ToString() + ": KeyDown \"" + control.Name + "\"";
+            string temp = "KeyDown \"" + control.Name + "\" | ";
             AddValue(control, ref temp);
+            temp += "Form \"" + form.Name + "\" | " + DateTime.Now.ToString() + "\r\n";
             Model.History = Model.History.Insert(0, temp);
         }
         private void ToolStripItemMouseDown(object sender, MouseEventArgs e)
         {
             //if (e.Button == MouseButtons.None) return;
             ToolStripItem item = (ToolStripItem)sender;
-            string temp = "(Form: \"" + form.Name + "\") @ " + DateTime.Now.ToString() + ": MouseDown \"" + item.Name + "\"";
-            temp += "\n";
+            string temp = "MouseDown \"" + item.Name + "\" | X:" + e.X + ",Y:" + e.Y + " | ";
+            temp += "Form \"" + form.Name + "\" | " + DateTime.Now.ToString() + "\r\n";
             Model.History = Model.History.Insert(0, temp);
         }
         private void ControlMouseDown(object sender, MouseEventArgs e)
@@ -73,8 +72,9 @@ namespace LAZYSHELL
             Control control = (Control)sender;
             if (control.Parent != null && control.Parent.GetType() == typeof(NumericUpDown))
                 control = control.Parent;
-            string temp = "(Form: \"" + form.Name + "\") @ " + DateTime.Now.ToString() + ": MouseDown \"" + control.Name + "\"";
+            string temp = "MouseDown \"" + control.Name + "\" | X:" + e.X + ",Y:" + e.Y + " | ";
             AddValue(control, ref temp);
+            temp += "Form \"" + form.Name + "\" | " + DateTime.Now.ToString() + "\r\n";
             Model.History = Model.History.Insert(0, temp);
         }
     }

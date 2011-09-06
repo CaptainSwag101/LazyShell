@@ -19,8 +19,9 @@ namespace LAZYSHELL
     public partial class Sprites : Form
     {
         #region Variables
-        
+
         private long checksum;
+        public long Checksum { get { return checksum; } set { checksum = value; } }
         // main
         private delegate void Function();
         private byte[] data;
@@ -90,7 +91,8 @@ namespace LAZYSHELL
             // controls
             updating = true;
             name.Items.AddRange(Lists.Numerize(Lists.SpriteNames));
-            name.SelectedIndex = 0;
+            name.SelectedIndex = settings.LastSprite;
+            number.Value = settings.LastSprite;
             foreach (Animation a in animations)
                 a.Assemble();
             RefreshSpritesEditor();
@@ -113,8 +115,8 @@ namespace LAZYSHELL
             sequences.Visible = true;
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             //
-            checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
             new History(this);
+            checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
         }
         private void RefreshSpritesEditor()
         {
@@ -238,6 +240,7 @@ namespace LAZYSHELL
             Model.HexViewer.SelectionStart = (animation.AnimationOffset & 15) * 3;
             Model.HexViewer.Compare();
             checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
+            Do.AddHistory(this, index, "SaveSprites");
         }
         public void EnableOnPlayback(bool enable)
         {
@@ -373,13 +376,9 @@ namespace LAZYSHELL
                 "Sprites have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
-            {
-                graphicEditor.Close();
                 Assemble();
-            }
             else if (result == DialogResult.No)
             {
-                graphicEditor.Close();
                 Model.Sprites = null;
                 Model.SpriteGraphics = null;
                 Model.SpritePalettes = null;
@@ -392,17 +391,24 @@ namespace LAZYSHELL
                 return;
             }
         Close:
+            graphicEditor.Close();
             paletteEditor.Close();
             searchWindow.Close();
+            graphicEditor.Dispose();
+            paletteEditor.Dispose();
+            searchWindow.Dispose();
         }
         private void number_ValueChanged(object sender, EventArgs e)
         {
+            if (updating) return;
             name.SelectedIndex = (int)number.Value;
             animation.Assemble();
             RefreshSpritesEditor();
+            settings.LastSprite = index;
         }
         private void name_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (updating) return;
             number.Value = name.SelectedIndex;
         }
         private void paletteIndex_ValueChanged(object sender, EventArgs e)
@@ -525,6 +531,8 @@ namespace LAZYSHELL
         private void import_Click(object sender, EventArgs e)
         {
             new IOElements(animations, (int)animationPacket.Value, "IMPORT SPRITE ANIMATIONS...").ShowDialog();
+            foreach (Animation sm in animations)
+                sm.Assemble();
             RefreshSpritesEditor();
         }
         private void export_Click(object sender, EventArgs e)
@@ -533,16 +541,18 @@ namespace LAZYSHELL
         }
         private void clear_Click(object sender, EventArgs e)
         {
-            ClearElements clearElements = new ClearElements(animations, index, "CLEAR SPRITE ANIMATIONS...");
+            ClearElements clearElements = new ClearElements(animations, (int)animationPacket.Value, "CLEAR SPRITE ANIMATIONS...");
             clearElements.ShowDialog();
             if (clearElements.DialogResult == DialogResult.Cancel)
                 return;
+            foreach (Animation sm in animations)
+                sm.Assemble();
             RefreshSpritesEditor();
         }
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current sprite and animation index. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             animation = new Animation(Model.Data, sprite.AnimationPacket);
             image = new GraphicPalette(Model.Data, sprite.GraphicPalettePacket);

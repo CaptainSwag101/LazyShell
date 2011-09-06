@@ -35,6 +35,13 @@ namespace LAZYSHELL
         private Object copySolidMod;
         public TreeView TileModsFieldTree { get { return tileModsFieldTree; } set { tileModsFieldTree = value; } }
         public TreeView SolidModsFieldTree { get { return solidModsFieldTree; } set { solidModsFieldTree = value; } }
+        public NumericUpDown TileModsX { get { return tileModsX; } set { tileModsX = value; } }
+        public NumericUpDown TileModsY { get { return tileModsY; } set { tileModsY = value; } }
+        public NumericUpDown TileModsWidth { get { return tileModsWidth; } set { tileModsWidth = value; } }
+        public NumericUpDown TileModsHeight { get { return tileModsHeight; } set { tileModsHeight = value; } }
+        public CheckedListBox TileModsLayers { get { return tileModsLayers; } set { tileModsLayers = value; } }
+        public NumericUpDown SolidModsX { get { return solidModsX; } set { solidModsX = value; } }
+        public NumericUpDown SolidModsY { get { return solidModsY; } set { solidModsY = value; } }
         #endregion
         #region Functions
         private void InitializeTileModProperties()
@@ -187,6 +194,84 @@ namespace LAZYSHELL
             else
                 MessageBox.Show("Could not insert the mod. The total number of tile mods for all levels has exceeded the maximum allotted space.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        public bool AddNewTileMod()
+        {
+            Point p = new Point(Math.Abs(picture.Left) / 16, Math.Abs(picture.Top) / 16);
+            if (CalculateFreeTileModSpace() >= 8)
+            {
+                this.tileModsFieldTree.Focus();
+                if (tileMods.Mods.Count < 32)
+                {
+                    int index = 0;
+                    if (tileModsFieldTree.SelectedNode != null)
+                        index = tileModsFieldTree.SelectedNode.Parent == null ?
+                            tileModsFieldTree.SelectedNode.Index : tileModsFieldTree.SelectedNode.Parent.Index;
+                    if (tileModsFieldTree.Nodes.Count > 0)
+                        tileMods.Insert(index + 1, p, level, tileSet);
+                    else
+                        tileMods.Insert(0, p, level, tileSet);
+                    if (tileModsFieldTree.Nodes.Count == 0)
+                        index = -1;
+                    this.tileModsFieldTree.BeginUpdate();
+                    this.tileModsFieldTree.Nodes.Clear();
+                    int i = 0;
+                    foreach (LevelTileMods.Mod mod in tileMods.Mods)
+                    {
+                        TreeNode node = new TreeNode("TILE MOD #" + i++.ToString());
+                        if (mod.Set)
+                            node.Nodes.Add("ALTERNATE");
+                        this.tileModsFieldTree.Nodes.Add(node);
+                    }
+                    this.tileModsFieldTree.ExpandAll();
+                    this.tileModsFieldTree.SelectedNode = this.tileModsFieldTree.Nodes[index + 1];
+                    this.tileModsFieldTree.EndUpdate();
+                }
+                else
+                {
+                    MessageBox.Show("Could not insert any more tile mods. The maximum number of tile mods allowed is 32.",
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Could not insert the mod. The total number of tile mods for all levels has exceeded the maximum allotted space.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            return true;
+        }
+        public bool AddNewTileModInstance()
+        {
+            if (CalculateFreeTileModSpace() < 0)
+            {
+                MessageBox.Show("Could not insert the alternate mod. The total number of tile mods for all levels has exceeded the maximum allotted space.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            tileMods.Set = true;
+            if (tileMods.TilemapsA[0] != null)
+            {
+                tileMods.TilemapsB[0] = new byte[tileMods.TilemapsA[0].Length];
+                tileMods.TilemapsA[0].CopyTo(tileMods.TilemapsB[0], 0);
+            }
+            if (tileMods.TilemapsA[1] != null)
+            {
+                tileMods.TilemapsB[1] = new byte[tileMods.TilemapsA[1].Length];
+                tileMods.TilemapsA[1].CopyTo(tileMods.TilemapsB[1], 0);
+            }
+            if (tileMods.TilemapsA[2] != null)
+            {
+                tileMods.TilemapsB[2] = new byte[tileMods.TilemapsA[2].Length];
+                tileMods.TilemapsA[2].CopyTo(tileMods.TilemapsB[2], 0);
+            }
+            tileMods.TilemapB = new TileMap(level, tileSet, tileMods.Mod_, true);
+            this.tileModsFieldTree.BeginUpdate();
+            this.tileModsFieldTree.SelectedNode.Nodes.Add("ALTERNATE");
+            this.tileModsFieldTree.SelectedNode = this.tileModsFieldTree.SelectedNode.Nodes[0];
+            this.tileModsFieldTree.EndUpdate();
+            return true;
         }
         //
         private void InitializeSolidModProperties()
@@ -372,7 +457,7 @@ namespace LAZYSHELL
             tileModsBytesLeft.BackColor = CalculateFreeTileModSpace() >= 0 ? SystemColors.Control : Color.Red;
             picture.Invalidate();
         }
-        private void tileModsLayers_SelectedIndexChanged(object sender, EventArgs e)
+        public void tileModsLayers_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updatingProperties) return;
             tileMods.Layer1 = tileModsLayers.GetItemChecked(0);
@@ -384,73 +469,11 @@ namespace LAZYSHELL
         }
         private void tileModsInsertField_Click(object sender, EventArgs e)
         {
-            Point p = new Point(Math.Abs(picture.Left) / 16, Math.Abs(picture.Top) / 16);
-            if (CalculateFreeTileModSpace() >= 8)
-            {
-                this.tileModsFieldTree.Focus();
-                if (tileMods.Mods.Count < 32)
-                {
-                    int index = 0;
-                    if (tileModsFieldTree.SelectedNode != null)
-                        index = tileModsFieldTree.SelectedNode.Parent == null ?
-                            tileModsFieldTree.SelectedNode.Index : tileModsFieldTree.SelectedNode.Parent.Index;
-                    if (tileModsFieldTree.Nodes.Count > 0)
-                        tileMods.Insert(index + 1, p, level, tileSet);
-                    else
-                        tileMods.Insert(0, p, level, tileSet);
-                    if (tileModsFieldTree.Nodes.Count == 0)
-                        index = -1;
-                    this.tileModsFieldTree.BeginUpdate();
-                    this.tileModsFieldTree.Nodes.Clear();
-                    int i = 0;
-                    foreach (LevelTileMods.Mod mod in tileMods.Mods)
-                    {
-                        TreeNode node = new TreeNode("TILE MOD #" + i++.ToString());
-                        if (mod.Set)
-                            node.Nodes.Add("ALTERNATE");
-                        this.tileModsFieldTree.Nodes.Add(node);
-                    }
-                    this.tileModsFieldTree.ExpandAll();
-                    this.tileModsFieldTree.SelectedNode = this.tileModsFieldTree.Nodes[index + 1];
-                    this.tileModsFieldTree.EndUpdate();
-                }
-                else
-                    MessageBox.Show("Could not insert any more tile mods. The maximum number of tile mods allowed is 32.",
-                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-                MessageBox.Show("Could not insert the mod. The total number of tile mods for all levels has exceeded the maximum allotted space.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            AddNewTileMod();
         }
         private void tileModsInsertInstance_Click(object sender, EventArgs e)
         {
-            if (CalculateFreeTileModSpace() < 0)
-            {
-                MessageBox.Show("Could not insert the alternate mod. The total number of tile mods for all levels has exceeded the maximum allotted space.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            tileMods.Set = true;
-            if (tileMods.TilemapsA[0] != null)
-            {
-                tileMods.TilemapsB[0] = new byte[tileMods.TilemapsA[0].Length];
-                tileMods.TilemapsA[0].CopyTo(tileMods.TilemapsB[0], 0);
-            }
-            if (tileMods.TilemapsA[1] != null)
-            {
-                tileMods.TilemapsB[1] = new byte[tileMods.TilemapsA[1].Length];
-                tileMods.TilemapsA[1].CopyTo(tileMods.TilemapsB[1], 0);
-            }
-            if (tileMods.TilemapsA[2] != null)
-            {
-                tileMods.TilemapsB[2] = new byte[tileMods.TilemapsA[2].Length];
-                tileMods.TilemapsA[2].CopyTo(tileMods.TilemapsB[2], 0);
-            }
-            tileMods.TilemapB = new TileMap(level, tileSet, tileMods.Mod_, true);
-            this.tileModsFieldTree.BeginUpdate();
-            this.tileModsFieldTree.SelectedNode.Nodes.Add("ALTERNATE");
-            this.tileModsFieldTree.SelectedNode = this.tileModsFieldTree.SelectedNode.Nodes[0];
-            this.tileModsFieldTree.EndUpdate();
+            AddNewTileModInstance();
         }
         private void tileModsDeleteField_Click(object sender, EventArgs e)
         {

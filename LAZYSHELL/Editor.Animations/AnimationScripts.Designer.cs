@@ -684,7 +684,6 @@
             this.emptyAnimationMods.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.emptyAnimationMods.Name = "emptyAnimationMods";
             this.emptyAnimationMods.Size = new System.Drawing.Size(23, 22);
-            this.emptyAnimationMods.ToolTipText = "Empty Command";
             this.emptyAnimationMods.Click += new System.EventHandler(this.emptyAnimationMods_Click);
             // 
             // applyAnimationMods
@@ -695,7 +694,6 @@
             this.applyAnimationMods.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.applyAnimationMods.Name = "applyAnimationMods";
             this.applyAnimationMods.Size = new System.Drawing.Size(23, 22);
-            this.applyAnimationMods.Text = "Apply Changes";
             this.applyAnimationMods.Click += new System.EventHandler(this.applyAnimationMods_Click);
             // 
             // labelConvertor
@@ -727,7 +725,6 @@
             this.previewer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.previewer.Name = "previewer";
             this.previewer.Size = new System.Drawing.Size(23, 22);
-            this.previewer.ToolTipText = "Previewer";
             this.previewer.Click += new System.EventHandler(this.previewer_Click);
             // 
             // AnimationScripts

@@ -17,7 +17,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
-        
+
         private long checksum;
         private Settings settings = Settings.Default;
         private EventScript[] eventScripts { get { return Model.EventScripts; } set { Model.EventScripts = value; } }
@@ -28,7 +28,12 @@ namespace LAZYSHELL
         private bool isActionScript = false;
         private bool isActionSelected = false;
         private int index { get { return (int)eventNum.Value; } set { eventNum.Value = value; } }
+        private int type { get { return eventName.SelectedIndex; } set { eventName.SelectedIndex = value; } }
         private int currentScript = 0;
+        private Stack<Navigate> navigateBackward = new Stack<Navigate>();
+        private Stack<Navigate> navigateForward = new Stack<Navigate>();
+        private Navigate lastNavigate;
+        private bool disableNavigate;
         //
         private EventScriptCommand esc;
         private ActionQueueCommand aqc;
@@ -47,12 +52,21 @@ namespace LAZYSHELL
         private ClearElements clearElements;
         private IOElements ioElements;
         private Search searchWindow;
+        private class Navigate
+        {
+            public int Index;
+            public int Type;
+            public Navigate(int index, int type)
+            {
+                this.Index = index;
+                this.Type = type;
+            }
+        }
         #endregion
         #region Functions
         // Constructor
         public EventScripts()
         {
-            checksum = Do.GenerateChecksum(eventScripts, actionScripts);
             settings.Keystrokes[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
@@ -61,6 +75,13 @@ namespace LAZYSHELL
             searchWindow = new Search(eventNum, searchLabelsText, searchLabels, settings.EventLabels);
             new ToolTipLabel(this, toolTip1, showDecHex, null);
             new History(this);
+            disableNavigate = true;
+            int lastEventScript = settings.LastEventScript;
+            type = Math.Max(0, settings.LastEventScriptCat);
+            index = Math.Min((int)eventNum.Maximum, lastEventScript);
+            disableNavigate = false;
+            lastNavigate = new Navigate(index, type);
+            checksum = Do.GenerateChecksum(eventScripts, actionScripts);
         }
         private void InitializeEventScriptsEditor()
         {
@@ -96,9 +117,69 @@ namespace LAZYSHELL
             treeViewWrapper.ChangeScript(eventScripts[(int)this.eventNum.Value]);
 
             this.autoPointerUpdate.Checked = autoPointerUpdate.Checked;
-            eventName.SelectedIndex = 0; // Editing Event Scripts
 
             UpdateEventScriptsFreeSpace();
+        }
+        private void RefreshEventScript()
+        {
+            if (isActionScript)
+            {
+                foreach (ActionQueueCommand aq in actionScripts[currentScript].Commands)
+                    aq.Set = false;
+            }
+            else
+            {
+                foreach (EventScriptCommand es in eventScripts[currentScript].Commands)
+                {
+                    es.Set = false;
+                    if (es.EmbeddedActionQueue == null) continue;
+                    foreach (ActionQueueCommand aq in es.EmbeddedActionQueue.Commands)
+                        aq.Set = false;
+                }
+            }
+            // Update Event Script Offsets
+            currentScript = (int)this.eventNum.Value;
+            ResetAllEventLists();
+            if (isActionScript)
+            {
+                UpdateActionOffsets();
+                treeViewWrapper.ChangeScript(actionScripts[(int)this.eventNum.Value]);
+            }
+            else
+            {
+                UpdateScriptOffsets();
+                treeViewWrapper.ChangeScript(eventScripts[(int)this.eventNum.Value]);
+            }
+            UpdateCommandData();
+            if (isActionScript)
+                return;
+            switch (currentScript)
+            {
+                case 0x1D6:
+                case 0x72D:
+                case 0x72F:
+                case 0xD01:
+                case 0xE91:
+                    EventScriptTree.Enabled = false;
+                    categories_es.Enabled = false;
+                    categories_aq.Enabled = false;
+                    commands.Enabled = false;
+                    MessageBox.Show(
+                        "Editing of script #" + currentScript.ToString() + " is not allowed due to parsing issues.",
+                        "LAZY SHELL",
+                        MessageBoxButtons.OK);
+                    break;
+                default:
+                    EventScriptTree.Enabled = true;
+                    categories_es.Enabled = true;
+                    categories_aq.Enabled = true;
+                    commands.Enabled = true;
+                    break;
+            }
+            if (!isActionScript)
+                eventLabel.Text = settings.EventLabels[currentScript];
+            else
+                eventLabel.Text = settings.ActionLabels[currentScript];
         }
         // GUI settings
         private void ControlEventDisasmMethod()
@@ -2226,11 +2307,12 @@ namespace LAZYSHELL
             ResetAllEventControls();
             buttonInsertEvent.Enabled = false;
             buttonApplyEvent.Enabled = false;
-            if (eventName.SelectedIndex == 1)   // Action Scripts
+            if (type == 1)   // Action Scripts
             {
                 eventNum.Maximum = 1023;
                 categories_aq.BringToFront();
                 categories_aq.SelectedIndex = 0;
+                categories_aq_SelectedIndexChanged(null, null);
                 isActionScript = true;
                 treeViewWrapper.ActionScript = true;
             }
@@ -2239,6 +2321,7 @@ namespace LAZYSHELL
                 eventNum.Maximum = 4095;
                 categories_es.BringToFront();
                 categories_es.SelectedIndex = 0;
+                categories_es_SelectedIndexChanged(null, null);
                 isActionScript = false;
                 treeViewWrapper.ActionScript = false;
             }
@@ -2377,9 +2460,9 @@ namespace LAZYSHELL
         private void PreviewEventOrAction()
         {
             if (ep == null || !ep.Visible)
-                ep = new Previewer.Previewer(this.currentScript, this.eventName.SelectedIndex == 0 ? 0 : 2);
+                ep = new Previewer.Previewer(this.currentScript, this.type == 0 ? 0 : 2);
             else
-                ep.Reload(this.currentScript, this.eventName.SelectedIndex == 0 ? 0 : 2);
+                ep.Reload(this.currentScript, this.type == 0 ? 0 : 2);
             ep.Show();
         }
         private void SaveEventNotes()
@@ -2398,97 +2481,48 @@ namespace LAZYSHELL
         private void eventNum_ValueChanged(object sender, EventArgs e)
         {
             if (!updatingScript) return;
-
-            if (isActionScript)
+            RefreshEventScript();
+            //
+            if (!disableNavigate && lastNavigate != null)
             {
-                foreach (ActionQueueCommand aq in actionScripts[currentScript].Commands)
-                    aq.Set = false;
+                navigateBackward.Push(new Navigate(lastNavigate.Index, lastNavigate.Type));
+                navigateBck.Enabled = true;
             }
-            else
-            {
-                foreach (EventScriptCommand es in eventScripts[currentScript].Commands)
-                {
-                    es.Set = false;
-                    if (es.EmbeddedActionQueue == null) continue;
-                    foreach (ActionQueueCommand aq in es.EmbeddedActionQueue.Commands)
-                        aq.Set = false;
-                }
-            }
-
-            // Update Event Script Offsets
-            currentScript = (int)this.eventNum.Value;
-
-            ResetAllEventLists();
-            if (isActionScript)
-            {
-                UpdateActionOffsets();
-                treeViewWrapper.ChangeScript(actionScripts[(int)this.eventNum.Value]);
-            }
-            else
-            {
-                UpdateScriptOffsets();
-                treeViewWrapper.ChangeScript(eventScripts[(int)this.eventNum.Value]);
-            }
-
-            UpdateCommandData();
-
-            if (isActionScript)
-                return;
-
-            switch (currentScript)
-            {
-                case 0x1D6:
-                case 0x72D:
-                case 0x72F:
-                case 0xD01:
-                case 0xE91:
-                    EventScriptTree.Enabled = false;
-                    categories_es.Enabled = false;
-                    categories_aq.Enabled = false;
-                    commands.Enabled = false;
-                    MessageBox.Show(
-                        "Editing of script #" + currentScript.ToString() + " is not allowed due to parsing issues.",
-                        "LAZY SHELL",
-                        MessageBoxButtons.OK);
-                    break;
-                default:
-                    EventScriptTree.Enabled = true;
-                    categories_es.Enabled = true;
-                    categories_aq.Enabled = true;
-                    commands.Enabled = true;
-                    break;
-            }
-            if (!isActionScript)
-                eventLabel.Text = settings.EventLabels[currentScript];
-            else
-                eventLabel.Text = settings.ActionLabels[currentScript];
+            if (!disableNavigate)
+                lastNavigate = new Navigate(index, type);
+            settings.LastEventScript = index;
+            settings.LastEventScriptCat = type;
         }
         private void eventName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!updatingScript) return;
             updatingScript = false;
-
             eventNum.Value = currentScript = 0;
-
             if (!isActionScript)
                 UpdateScriptOffsets();
             else
                 UpdateActionOffsets();
-
             ResetAllEventLists();
-
             if (isActionScript)
                 treeViewWrapper.ChangeScript(actionScripts[(int)this.eventNum.Value]);
             else
                 treeViewWrapper.ChangeScript(eventScripts[(int)this.eventNum.Value]);
-
             UpdateCommandData();
-
             if (!isActionScript)
                 eventLabel.Text = settings.EventLabels[currentScript];
             else
                 eventLabel.Text = settings.ActionLabels[currentScript];
-
             updatingScript = true;
+            //
+            if (!disableNavigate && lastNavigate != null)
+            {
+                navigateBackward.Push(new Navigate(lastNavigate.Index, lastNavigate.Type));
+                navigateBck.Enabled = true;
+            }
+            if (!disableNavigate)
+                lastNavigate = new Navigate(index, type);
+            settings.LastEventScript = index;
+            settings.LastEventScriptCat = type;
         }
         private void EventScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -2514,6 +2548,40 @@ namespace LAZYSHELL
             searchWindow.Close();
             if (ep != null)
                 ep.Close();
+        }
+        private void navigateBck_Click(object sender, EventArgs e)
+        {
+            if (navigateBackward.Count < 1)
+                return;
+            navigateForward.Push(new Navigate(index, type));
+            //
+            disableNavigate = true;
+            type = navigateBackward.Peek().Type;
+            index = navigateBackward.Peek().Index;
+            disableNavigate = false;
+            //
+            RefreshEventScript();
+            lastNavigate = new Navigate(index, type);
+            navigateBackward.Pop();
+            navigateBck.Enabled = navigateBackward.Count > 0;
+            navigateFwd.Enabled = true;
+        }
+        private void navigateFwd_Click(object sender, EventArgs e)
+        {
+            if (navigateForward.Count < 1)
+                return;
+            navigateBackward.Push(new Navigate(index, type));
+            //
+            disableNavigate = true;
+            type = navigateForward.Peek().Type;
+            index = navigateForward.Peek().Index;
+            disableNavigate = false;
+            //
+            RefreshEventScript();
+            lastNavigate = new Navigate(index, type);
+            navigateForward.Pop();
+            navigateFwd.Enabled = navigateForward.Count > 0;
+            navigateBck.Enabled = true;
         }
         private void eventLabel_TextChanged(object sender, EventArgs e)
         {
@@ -2583,6 +2651,8 @@ namespace LAZYSHELL
         }
         private void EventScriptTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            Do.AddHistory(this, index, EventScriptTree.SelectedNode, "NodeMouseClick");
+            //
             EventScriptTree.SelectedNode = e.Node;
             if (e.Button != MouseButtons.Right) return;
             goToToolStripMenuItem.Click -= goToDialogue_Click;
@@ -2610,6 +2680,12 @@ namespace LAZYSHELL
                     e.Node.ContextMenuStrip = contextMenuStripGoto;
                     goToToolStripMenuItem.Text = "Goto offset...";
                     goToToolStripMenuItem.Click += new EventHandler(goToOffset_Click);
+                }
+                else if (temp.Opcode <= 0x2F && temp.Option >= 0xF2 && temp.Option <= 0xF5)
+                {
+                    e.Node.ContextMenuStrip = contextMenuStripGoto;
+                    goToToolStripMenuItem.Text = "Edit action script...";
+                    goToToolStripMenuItem.Click += new EventHandler(goToAction_Click);
                 }
                 // 0xa0 - 0xa6  // 0xd8 - 0xde
                 else if (temp.Opcode == 0xA0 || temp.Opcode == 0xA1 || temp.Opcode == 0xA2 ||
@@ -2640,6 +2716,12 @@ namespace LAZYSHELL
                     e.Node.ContextMenuStrip = contextMenuStripGoto;
                     goToToolStripMenuItem.Text = "Goto offset...";
                     goToToolStripMenuItem.Click += new EventHandler(goToOffset_Click);
+                }
+                else if (temp.Opcode == 0xD0)
+                {
+                    e.Node.ContextMenuStrip = contextMenuStripGoto;
+                    goToToolStripMenuItem.Text = "Edit action script...";
+                    goToToolStripMenuItem.Click += new EventHandler(goToAction_Click);
                 }
                 // 0xa0 - 0xa6  // 0xd8 - 0xde
                 else if (temp.Opcode == 0xA0 || temp.Opcode == 0xA1 || temp.Opcode == 0xA2 ||
@@ -2708,9 +2790,10 @@ namespace LAZYSHELL
             {
             }
             treeViewWrapper.MoveUp();
-            checksum--;   // b/c switching colors won't modify checksum
+            checksum--;
 
             updatingScript = true;
+            Do.AddHistory(this, index, EventScriptTree.SelectedNode, "MoveUpCommand");
         }
         private void EvtScrMoveDown_Click(object sender, EventArgs e)
         {
@@ -2732,15 +2815,17 @@ namespace LAZYSHELL
             {
             }
             treeViewWrapper.MoveDown();
-            checksum--;   // b/c switching colors won't modify checksum
+            checksum--;
 
             updatingScript = true;
+            Do.AddHistory(this, index, EventScriptTree.SelectedNode, "MoveDownCommand");
         }
         private void EvtScrCopyCommand_Click(object sender, EventArgs e)
         {
             if (EventScriptTree.SelectedNode == null) return;
 
             treeViewWrapper.Copy();
+            Do.AddHistory(this, index, EventScriptTree.SelectedNode, "CopyCommand");
         }
         private void EvtScrPasteCommand_Click(object sender, EventArgs e)
         {
@@ -2754,6 +2839,7 @@ namespace LAZYSHELL
             UpdateCommandData();
 
             EventScriptTree.SelectedNode = treeViewWrapper.SelectedNode;
+            Do.AddHistory(this, index, EventScriptTree.SelectedNode, "PasteCommand");
         }
         private void EvtScrDeleteCommand_Click(object sender, EventArgs e)
         {
@@ -2768,6 +2854,7 @@ namespace LAZYSHELL
             UpdateCommandData();
 
             EventScriptTree.SelectedNode = treeViewWrapper.SelectedNode;
+            Do.AddHistory(this, index, EventScriptTree.SelectedNode, "DeleteCommand");
         }
         private void EvtScrEditCommand_Click(object sender, EventArgs e)
         {
@@ -2819,13 +2906,14 @@ namespace LAZYSHELL
         private void EvtScrClearAll_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-            "Delete all commands in the current script?",
+            "You are about to clear the current script of all commands.\n\nGo ahead with process?",
             "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
             if (result != DialogResult.Yes) return;
 
             treeViewWrapper.ClearAll();
             UpdateCommandData();
+            Do.AddHistory(this, index, "ClearAll");
         }
         private void EventPreview_Click(object sender, EventArgs e)
         {
@@ -3152,6 +3240,7 @@ namespace LAZYSHELL
             UpdateCommandData();
 
             EvtScrEditCommand_Click(null, null);
+            Do.AddHistory(this, index, EventScriptTree.SelectedNode, "EditCommand");
         }
         // menustrip
         private void save_Click(object sender, EventArgs e)
@@ -3447,7 +3536,7 @@ namespace LAZYSHELL
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current script. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             int length;
             if (!isActionScript)
@@ -3614,6 +3703,26 @@ namespace LAZYSHELL
                     }
                 }
             }
+        }
+        private void goToAction_Click(object sender, EventArgs e)
+        {
+            if (EventScriptTree.SelectedNode == null) return;
+
+            int num = index;
+            if (EventScriptTree.SelectedNode.Tag.GetType() == typeof(EventScriptCommand))
+            {
+                EventScriptCommand temp = (EventScriptCommand)EventScriptTree.SelectedNode.Tag;
+                num = Bits.GetShort(temp.EventData, 2);
+            }
+            else
+            {
+                ActionQueueCommand temp = (ActionQueueCommand)EventScriptTree.SelectedNode.Tag;
+                num = Bits.GetShort(temp.EventData, 1);
+            }
+            disableNavigate = true;
+            type = 1;
+            disableNavigate = false;
+            eventNum.Value = num;
         }
         #endregion
     }

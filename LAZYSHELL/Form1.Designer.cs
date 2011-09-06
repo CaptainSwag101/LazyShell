@@ -70,6 +70,7 @@ namespace LAZYSHELL
             this.openSettings = new System.Windows.Forms.ToolStripButton();
             this.restoreElementsToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.history = new System.Windows.Forms.ToolStripButton();
             this.showROMInfo = new System.Windows.Forms.ToolStripButton();
             this.hexViewer = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -488,6 +489,7 @@ namespace LAZYSHELL
             this.openSettings,
             this.restoreElementsToolStripMenuItem,
             this.toolStripSeparator15,
+            this.history,
             this.showROMInfo,
             this.hexViewer,
             this.toolStripButton5});
@@ -589,6 +591,17 @@ namespace LAZYSHELL
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
             this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
+            // 
+            // history
+            // 
+            this.history.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.history.Image = global::LAZYSHELL.Properties.Resources.history;
+            this.history.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.history.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.history.Name = "history";
+            this.history.Size = new System.Drawing.Size(23, 22);
+            this.history.Text = "toolStripButton1";
+            this.history.Click += new System.EventHandler(this.history_Click);
             // 
             // showROMInfo
             // 
@@ -757,6 +770,7 @@ namespace LAZYSHELL
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "LAZY SHELL - Super Mario RPG Editor";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -831,6 +845,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton openAudio;
         private System.Windows.Forms.ToolStripButton hexViewer;
+        private System.Windows.Forms.ToolStripButton history;
     }
 }
 

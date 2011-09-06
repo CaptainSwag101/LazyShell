@@ -69,7 +69,9 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.eventName = new System.Windows.Forms.ToolStripComboBox();
             this.eventNum = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.navigateBck = new System.Windows.Forms.ToolStripButton();
+            this.navigateFwd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.eventLabel = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -699,7 +701,9 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.eventName,
             this.eventNum,
-            this.toolStripSeparator7,
+            this.navigateBck,
+            this.navigateFwd,
+            this.toolStripSeparator10,
             this.toolStripButton1,
             this.eventLabel,
             this.toolStripSeparator8,
@@ -754,10 +758,34 @@
             0});
             this.eventNum.ValueChanged += new System.EventHandler(this.eventNum_ValueChanged);
             // 
-            // toolStripSeparator7
+            // navigateBck
             // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+            this.navigateBck.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.navigateBck.Enabled = false;
+            this.navigateBck.Image = global::LAZYSHELL.Properties.Resources.back;
+            this.navigateBck.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.navigateBck.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.navigateBck.Name = "navigateBck";
+            this.navigateBck.Size = new System.Drawing.Size(23, 22);
+            this.navigateBck.ToolTipText = "Navigate Backward";
+            this.navigateBck.Click += new System.EventHandler(this.navigateBck_Click);
+            // 
+            // navigateFwd
+            // 
+            this.navigateFwd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.navigateFwd.Enabled = false;
+            this.navigateFwd.Image = global::LAZYSHELL.Properties.Resources.foward;
+            this.navigateFwd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.navigateFwd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.navigateFwd.Name = "navigateFwd";
+            this.navigateFwd.Size = new System.Drawing.Size(23, 22);
+            this.navigateFwd.ToolTipText = "Navigate Forward";
+            this.navigateFwd.Click += new System.EventHandler(this.navigateFwd_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton1
             // 
@@ -1296,7 +1324,6 @@
         private System.Windows.Forms.ToolStripDropDownButton clear;
         private System.Windows.Forms.ToolStripComboBox eventName;
         private ToolStripNumericUpDown eventNum;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripTextBox eventLabel;
         private System.Windows.Forms.ToolStripButton searchLabels;
@@ -1333,5 +1360,8 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.ToolStripButton navigateBck;
+        private System.Windows.Forms.ToolStripButton navigateFwd;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     }
 }

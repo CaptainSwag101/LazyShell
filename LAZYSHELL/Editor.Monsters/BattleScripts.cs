@@ -443,7 +443,6 @@ namespace LAZYSHELL
         private int MoveUpCommand(TreeNodeCollection nodes, int count)
         {
             if (nodes.Count <= 0) return count;
-            checksum--;   // moving commands won't modify the checksum, so have to modify manually
             foreach (TreeNode tn in nodes)
             {
                 if (tn.Checked)
@@ -455,7 +454,6 @@ namespace LAZYSHELL
         private int MoveDownCommand(TreeNodeCollection nodes, int count)
         {
             if (nodes.Count <= 0) return count;
-            checksum--;   // moving commands won't modify the checksum, so have to modify manually
             TreeNode tn;
             for (int i = nodes.Count - 1; i >= 0; i--, count--)
             {
@@ -1492,7 +1490,7 @@ namespace LAZYSHELL
         private void BatScrClearAll_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-                "Delete all commands in the current monster's battle script?",
+                "You are about to clear all commands from the current script.\n\nGo ahead with process?",
                 "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)

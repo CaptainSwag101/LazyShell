@@ -168,6 +168,8 @@ namespace LAZYSHELL
         private ushort destination; public ushort Destination { get { return destination; } set { destination = value; } }
         private byte exitType; public byte ExitType { get { return exitType; } set { exitType = value; } }
         private bool showMessage; public bool ShowMessage { get { return showMessage; } set { showMessage = value; } }
+        public int Index = 0;
+        public bool Hilite = false;
 
         private byte x; public byte X { get { return x; } set { x = value; } }
         private byte y; public byte Y { get { return y; } set { y = value; } }

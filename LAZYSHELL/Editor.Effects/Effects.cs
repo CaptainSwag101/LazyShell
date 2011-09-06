@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
@@ -18,6 +19,7 @@ namespace LAZYSHELL
         #region Variables
         
         private long checksum;
+        public long Checksum { get { return checksum; } set { checksum = value; } }
         // main
         private delegate void Function();
         private Overlay overlay = new Overlay();
@@ -89,8 +91,9 @@ namespace LAZYSHELL
             sequences.Visible = true;
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             //
-            checksum = Do.GenerateChecksum(animations, effects);
             new History(this);
+            index = Settings.Default.LastEffect;
+            checksum = Do.GenerateChecksum(animations, effects);
         }
         private void RefreshEffectsEditor()
         {
@@ -99,8 +102,8 @@ namespace LAZYSHELL
             // main properties
             imageNum.Value = effect.AnimationPacket;
             e_paletteIndex.Value = palette = effect.PaletteIndex;
-            xNegShift.Value = effect.XNegShift;
-            yNegShift.Value = effect.YNegShift;
+            xNegShift.Value = effect.X;
+            yNegShift.Value = effect.Y;
             // image properties
             e_paletteSetSize.Value = animation.PaletteSetLength;
             e_graphicSetSize.Minimum = animation.Codec == 1 ? 16 : 32;
@@ -330,6 +333,10 @@ namespace LAZYSHELL
             graphicEditor.Close();
             searchWindow.Close();
             molds.tileEditor.Close();
+            paletteEditor.Dispose();
+            graphicEditor.Dispose();
+            searchWindow.Dispose();
+            molds.tileEditor.Dispose();
         }
         private void number_ValueChanged(object sender, EventArgs e)
         {
@@ -338,6 +345,7 @@ namespace LAZYSHELL
             if (animation.Tileset != null)
                 animations[(int)imageNum.Value].Assemble();
             RefreshEffectsEditor();
+            Settings.Default.LastEffect = index;
         }
         private void name_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -365,12 +373,12 @@ namespace LAZYSHELL
         private void xNegShift_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            effect.XNegShift = (byte)xNegShift.Value;
+            effect.X = (byte)xNegShift.Value;
         }
         private void yNegShift_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            effect.YNegShift = (byte)yNegShift.Value;
+            effect.Y = (byte)yNegShift.Value;
         }
         private void imageNum_ValueChanged(object sender, EventArgs e)
         {
@@ -446,18 +454,19 @@ namespace LAZYSHELL
         }
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements(animations, index, "IMPORT EFFECT ANIMATIONS...").ShowDialog();
+            new IOElements(animations, (int)imageNum.Value, "IMPORT EFFECT ANIMATIONS...").ShowDialog();
+            this.animation.PaletteSet.Data = Model.Data;
             foreach (E_Animation animation in animations)
                 animation.Assemble();
             RefreshEffectsEditor();
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements(animations, index, "EXPORT EFFECT ANIMATIONS...").ShowDialog();
+            new IOElements(animations, (int)imageNum.Value, "EXPORT EFFECT ANIMATIONS...").ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {
-            ClearElements clearElements = new ClearElements(animations, index, "CLEAR EFFECT ANIMATIONS...");
+            ClearElements clearElements = new ClearElements(animations, (int)imageNum.Value, "CLEAR EFFECT ANIMATIONS...");
             clearElements.ShowDialog();
             foreach (E_Animation animation in animations)
                 animation.Assemble();
@@ -466,7 +475,7 @@ namespace LAZYSHELL
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current effect and animation index. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             animation = new E_Animation(Model.Data, effect.AnimationPacket);
             effect = new Effect(Model.Data, index);
@@ -476,7 +485,7 @@ namespace LAZYSHELL
         {
             if (MessageBox.Show("This will clean all unused graphics, tiles, and palettes. " +
                 "It will increase the amount of free space by thousands of bytes.\n\n" +
-                "Go ahead with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                "Go ahead with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 return;
             foreach (E_Animation image in animations)
             {

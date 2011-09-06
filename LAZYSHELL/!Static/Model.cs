@@ -48,16 +48,15 @@ namespace LAZYSHELL
         private static byte[] dataHash;
         public static byte[] DataHash { get { return dataHash; } set { dataHash = value; } }
         private static long checkSum = 0;
-        private static string history = "";
         public static string History
         {
             get
             {
-                return history;
+                return settings.History;
             }
             set
             {
-                history = value;
+                settings.History = value;
             }
         }
         #region Audio

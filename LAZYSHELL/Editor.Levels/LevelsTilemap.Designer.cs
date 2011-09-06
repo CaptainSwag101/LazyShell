@@ -59,6 +59,7 @@
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.findInTileset = new System.Windows.Forms.ToolStripMenuItem();
+            this.createTileModToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.saveImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToBattlefieldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,7 +131,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(8, 0, 1, 0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(840, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(836, 25);
             this.toolStrip1.TabIndex = 3;
             // 
             // buttonToggleCartGrid
@@ -379,29 +380,30 @@
             // 
             this.toolStripSeparator13.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(27, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(21, 6);
             // 
             // toolStripSeparator46
             // 
             this.toolStripSeparator46.Name = "toolStripSeparator46";
-            this.toolStripSeparator46.Size = new System.Drawing.Size(29, 6);
+            this.toolStripSeparator46.Size = new System.Drawing.Size(23, 6);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(27, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(21, 6);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(27, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(21, 6);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.findInTileset,
+            this.createTileModToolStripMenuItem,
             this.toolStripSeparator24,
             this.saveImageToolStripMenuItem,
             this.exportToBattlefieldToolStripMenuItem,
@@ -409,7 +411,7 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 120);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // findInTileset
@@ -418,6 +420,13 @@
             this.findInTileset.Size = new System.Drawing.Size(157, 22);
             this.findInTileset.Text = "Find in tileset";
             this.findInTileset.Click += new System.EventHandler(this.findInTileset_Click);
+            // 
+            // createTileModToolStripMenuItem
+            // 
+            this.createTileModToolStripMenuItem.Name = "createTileModToolStripMenuItem";
+            this.createTileModToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.createTileModToolStripMenuItem.Text = "Create tile mod";
+            this.createTileModToolStripMenuItem.Click += new System.EventHandler(this.createTileModToolStripMenuItem_Click);
             // 
             // toolStripSeparator24
             // 
@@ -490,10 +499,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTileCoords.BackColor = System.Drawing.SystemColors.Control;
             this.labelTileCoords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelTileCoords.Location = new System.Drawing.Point(29, 633);
+            this.labelTileCoords.Location = new System.Drawing.Point(29, 629);
             this.labelTileCoords.Name = "labelTileCoords";
             this.labelTileCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.labelTileCoords.Size = new System.Drawing.Size(811, 24);
+            this.labelTileCoords.Size = new System.Drawing.Size(807, 24);
             this.labelTileCoords.TabIndex = 194;
             this.labelTileCoords.Text = "(x: 0, y: 0)  Tile  |  (x: 0, y: 0) Isometric  |  (x: 0, y: 0) Pixel";
             this.labelTileCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -529,7 +538,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 25);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(32, 632);
+            this.toolStrip2.Size = new System.Drawing.Size(26, 628);
             this.toolStrip2.TabIndex = 505;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -541,13 +550,13 @@
             this.editAllLayers.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.editAllLayers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editAllLayers.Name = "editAllLayers";
-            this.editAllLayers.Size = new System.Drawing.Size(29, 17);
+            this.editAllLayers.Size = new System.Drawing.Size(23, 17);
             this.editAllLayers.Text = "Edit All Layers Simultaneously";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(29, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(23, 6);
             // 
             // buttonEditDraw
             // 
@@ -557,7 +566,7 @@
             this.buttonEditDraw.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditDraw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditDraw.Name = "buttonEditDraw";
-            this.buttonEditDraw.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditDraw.Size = new System.Drawing.Size(23, 17);
             this.buttonEditDraw.Text = "Draw Tile";
             this.buttonEditDraw.Click += new System.EventHandler(this.buttonEditDraw_Click);
             // 
@@ -569,7 +578,7 @@
             this.buttonEditErase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditErase.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditErase.Name = "buttonEditErase";
-            this.buttonEditErase.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditErase.Size = new System.Drawing.Size(23, 17);
             this.buttonEditErase.Text = "Erase Tile";
             this.buttonEditErase.Click += new System.EventHandler(this.buttonEditErase_Click);
             // 
@@ -581,7 +590,7 @@
             this.buttonEditSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditSelect.Name = "buttonEditSelect";
-            this.buttonEditSelect.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditSelect.Size = new System.Drawing.Size(23, 17);
             this.buttonEditSelect.Text = "Select Tile(s)";
             this.buttonEditSelect.Click += new System.EventHandler(this.buttonEditSelect_Click);
             // 
@@ -592,7 +601,7 @@
             this.selectAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.selectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.selectAll.Name = "selectAll";
-            this.selectAll.Size = new System.Drawing.Size(29, 17);
+            this.selectAll.Size = new System.Drawing.Size(23, 17);
             this.selectAll.Text = "Select All";
             this.selectAll.Click += new System.EventHandler(this.selectAll_Click);
             // 
@@ -604,7 +613,7 @@
             this.buttonEditDropper.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditDropper.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditDropper.Name = "buttonEditDropper";
-            this.buttonEditDropper.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditDropper.Size = new System.Drawing.Size(23, 17);
             this.buttonEditDropper.Text = "Select Color";
             this.buttonEditDropper.Click += new System.EventHandler(this.buttonEditDropper_Click);
             // 
@@ -616,7 +625,7 @@
             this.buttonEditFill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditFill.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditFill.Name = "buttonEditFill";
-            this.buttonEditFill.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditFill.Size = new System.Drawing.Size(23, 17);
             this.buttonEditFill.Text = "Fill with tile";
             this.buttonEditFill.Click += new System.EventHandler(this.buttonEditFill_Click);
             // 
@@ -628,7 +637,7 @@
             this.buttonEditTemplate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditTemplate.Name = "buttonEditTemplate";
-            this.buttonEditTemplate.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditTemplate.Size = new System.Drawing.Size(23, 17);
             this.buttonEditTemplate.Text = "Draw Template";
             this.buttonEditTemplate.Click += new System.EventHandler(this.buttonEditTemplate_Click);
             // 
@@ -639,7 +648,7 @@
             this.buttonEditDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditDelete.Name = "buttonEditDelete";
-            this.buttonEditDelete.Size = new System.Drawing.Size(29, 15);
+            this.buttonEditDelete.Size = new System.Drawing.Size(23, 15);
             this.buttonEditDelete.Text = "Delete";
             this.buttonEditDelete.Click += new System.EventHandler(this.buttonEditDelete_Click);
             // 
@@ -650,7 +659,7 @@
             this.buttonEditCut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditCut.Name = "buttonEditCut";
-            this.buttonEditCut.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditCut.Size = new System.Drawing.Size(23, 17);
             this.buttonEditCut.Text = "Cut";
             this.buttonEditCut.Click += new System.EventHandler(this.buttonEditCut_Click);
             // 
@@ -661,7 +670,7 @@
             this.buttonEditCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditCopy.Name = "buttonEditCopy";
-            this.buttonEditCopy.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditCopy.Size = new System.Drawing.Size(23, 17);
             this.buttonEditCopy.Text = "Copy";
             this.buttonEditCopy.Click += new System.EventHandler(this.buttonEditCopy_Click);
             // 
@@ -672,7 +681,7 @@
             this.buttonEditPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditPaste.Name = "buttonEditPaste";
-            this.buttonEditPaste.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditPaste.Size = new System.Drawing.Size(23, 17);
             this.buttonEditPaste.Text = "Paste";
             this.buttonEditPaste.Click += new System.EventHandler(this.buttonEditPaste_Click);
             // 
@@ -683,7 +692,7 @@
             this.buttonEditUndo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditUndo.Name = "buttonEditUndo";
-            this.buttonEditUndo.Size = new System.Drawing.Size(29, 12);
+            this.buttonEditUndo.Size = new System.Drawing.Size(23, 12);
             this.buttonEditUndo.Text = "Undo";
             this.buttonEditUndo.Click += new System.EventHandler(this.buttonEditUndo_Click);
             // 
@@ -694,7 +703,7 @@
             this.buttonEditRedo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditRedo.Name = "buttonEditRedo";
-            this.buttonEditRedo.Size = new System.Drawing.Size(29, 12);
+            this.buttonEditRedo.Size = new System.Drawing.Size(23, 12);
             this.buttonEditRedo.Text = "Redo";
             this.buttonEditRedo.Click += new System.EventHandler(this.buttonEditRedo_Click);
             // 
@@ -706,7 +715,7 @@
             this.buttonZoomIn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonZoomIn.Name = "buttonZoomIn";
-            this.buttonZoomIn.Size = new System.Drawing.Size(29, 17);
+            this.buttonZoomIn.Size = new System.Drawing.Size(23, 17);
             this.buttonZoomIn.Text = "Zoom In";
             this.buttonZoomIn.Click += new System.EventHandler(this.buttonZoomIn_Click);
             // 
@@ -718,14 +727,14 @@
             this.buttonZoomOut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonZoomOut.Name = "buttonZoomOut";
-            this.buttonZoomOut.Size = new System.Drawing.Size(29, 17);
+            this.buttonZoomOut.Size = new System.Drawing.Size(23, 17);
             this.buttonZoomOut.Text = "Zoom Out";
             this.buttonZoomOut.Click += new System.EventHandler(this.buttonZoomOut_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(29, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(23, 6);
             // 
             // buttonDragSolidity
             // 
@@ -736,7 +745,7 @@
             this.buttonDragSolidity.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonDragSolidity.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonDragSolidity.Name = "buttonDragSolidity";
-            this.buttonDragSolidity.Size = new System.Drawing.Size(29, 20);
+            this.buttonDragSolidity.Size = new System.Drawing.Size(23, 20);
             this.buttonDragSolidity.ToolTipText = "Click/drag solidity tiles";
             this.buttonDragSolidity.Click += new System.EventHandler(this.buttonDragSolidity_Click);
             // 
@@ -751,7 +760,7 @@
             this.panelLevelPicture.Controls.Add(this.pictureBoxLevel);
             this.panelLevelPicture.Location = new System.Drawing.Point(29, 31);
             this.panelLevelPicture.Name = "panelLevelPicture";
-            this.panelLevelPicture.Size = new System.Drawing.Size(807, 601);
+            this.panelLevelPicture.Size = new System.Drawing.Size(803, 597);
             this.panelLevelPicture.TabIndex = 192;
             this.panelLevelPicture.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panelLevelPicture_Scroll);
             // 
@@ -789,7 +798,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(840, 657);
+            this.ClientSize = new System.Drawing.Size(836, 653);
             this.ControlBox = false;
             this.Controls.Add(this.labelTileCoords);
             this.Controls.Add(this.panelOpacity);
@@ -882,5 +891,6 @@
         private System.Windows.Forms.ToolStripMenuItem objectFunctionToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton buttonDragSolidity;
+        private System.Windows.Forms.ToolStripMenuItem createTileModToolStripMenuItem;
     }
 }

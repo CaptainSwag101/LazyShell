@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Effects));
             this.number = new LAZYSHELL.ToolStripNumericUpDown();
             this.panel106 = new System.Windows.Forms.Panel();
-            this.label98 = new System.Windows.Forms.Label();
             this.yNegShift = new System.Windows.Forms.NumericUpDown();
             this.label96 = new System.Windows.Forms.Label();
             this.xNegShift = new System.Windows.Forms.NumericUpDown();
@@ -60,10 +59,10 @@
             this.export = new System.Windows.Forms.ToolStripButton();
             this.reset = new System.Windows.Forms.ToolStripButton();
             this.clear = new System.Windows.Forms.ToolStripButton();
+            this.cullAnimations = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.enableHelpTips = new System.Windows.Forms.ToolStripButton();
             this.showDecHex = new System.Windows.Forms.ToolStripButton();
-            this.cullAnimations = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.name = new System.Windows.Forms.ToolStripComboBox();
             this.searchText = new System.Windows.Forms.ToolStripTextBox();
@@ -127,7 +126,6 @@
             // 
             this.panel106.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel106.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel106.Controls.Add(this.label98);
             this.panel106.Controls.Add(this.yNegShift);
             this.panel106.Controls.Add(this.label96);
             this.panel106.Controls.Add(this.xNegShift);
@@ -135,30 +133,20 @@
             this.panel106.Controls.Add(this.label7);
             this.panel106.Location = new System.Drawing.Point(3, 3);
             this.panel106.Name = "panel106";
-            this.panel106.Size = new System.Drawing.Size(260, 57);
+            this.panel106.Size = new System.Drawing.Size(260, 21);
             this.panel106.TabIndex = 519;
-            // 
-            // label98
-            // 
-            this.label98.BackColor = System.Drawing.SystemColors.Control;
-            this.label98.Location = new System.Drawing.Point(0, 36);
-            this.label98.Name = "label98";
-            this.label98.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label98.Size = new System.Drawing.Size(128, 17);
-            this.label98.TabIndex = 396;
-            this.label98.Text = "Tile Shift Up";
             // 
             // yNegShift
             // 
             this.yNegShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.yNegShift.Location = new System.Drawing.Point(129, 36);
+            this.yNegShift.Location = new System.Drawing.Point(212, 0);
             this.yNegShift.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.yNegShift.Name = "yNegShift";
-            this.yNegShift.Size = new System.Drawing.Size(127, 17);
+            this.yNegShift.Size = new System.Drawing.Size(44, 17);
             this.yNegShift.TabIndex = 395;
             this.yNegShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.yNegShift.ValueChanged += new System.EventHandler(this.yNegShift_ValueChanged);
@@ -166,24 +154,24 @@
             // label96
             // 
             this.label96.BackColor = System.Drawing.SystemColors.Control;
-            this.label96.Location = new System.Drawing.Point(0, 18);
+            this.label96.Location = new System.Drawing.Point(129, 0);
             this.label96.Name = "label96";
             this.label96.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label96.Size = new System.Drawing.Size(128, 17);
+            this.label96.Size = new System.Drawing.Size(37, 17);
             this.label96.TabIndex = 396;
-            this.label96.Text = "Tile Shift Left";
+            this.label96.Text = "X,Y";
             // 
             // xNegShift
             // 
             this.xNegShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.xNegShift.Location = new System.Drawing.Point(129, 18);
+            this.xNegShift.Location = new System.Drawing.Point(167, 0);
             this.xNegShift.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.xNegShift.Name = "xNegShift";
-            this.xNegShift.Size = new System.Drawing.Size(127, 17);
+            this.xNegShift.Size = new System.Drawing.Size(44, 17);
             this.xNegShift.TabIndex = 395;
             this.xNegShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.xNegShift.ValueChanged += new System.EventHandler(this.xNegShift_ValueChanged);
@@ -191,14 +179,14 @@
             // e_paletteIndex
             // 
             this.e_paletteIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.e_paletteIndex.Location = new System.Drawing.Point(129, 0);
+            this.e_paletteIndex.Location = new System.Drawing.Point(82, 0);
             this.e_paletteIndex.Maximum = new decimal(new int[] {
             7,
             0,
             0,
             0});
             this.e_paletteIndex.Name = "e_paletteIndex";
-            this.e_paletteIndex.Size = new System.Drawing.Size(127, 17);
+            this.e_paletteIndex.Size = new System.Drawing.Size(46, 17);
             this.e_paletteIndex.TabIndex = 4;
             this.e_paletteIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_paletteIndex.ValueChanged += new System.EventHandler(this.e_paletteIndex_ValueChanged);
@@ -209,7 +197,7 @@
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label7.Size = new System.Drawing.Size(128, 17);
+            this.label7.Size = new System.Drawing.Size(81, 17);
             this.label7.TabIndex = 394;
             this.label7.Text = "Palette Index";
             // 
@@ -218,7 +206,7 @@
             this.panel80.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel80.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel80.Controls.Add(this.panel85);
-            this.panel80.Location = new System.Drawing.Point(3, 62);
+            this.panel80.Location = new System.Drawing.Point(3, 26);
             this.panel80.Name = "panel80";
             this.panel80.Size = new System.Drawing.Size(260, 111);
             this.panel80.TabIndex = 400;
@@ -505,6 +493,17 @@
             this.clear.ToolTipText = "Clear";
             this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
+            // cullAnimations
+            // 
+            this.cullAnimations.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cullAnimations.Image = global::LAZYSHELL.Properties.Resources.broom;
+            this.cullAnimations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cullAnimations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cullAnimations.Name = "cullAnimations";
+            this.cullAnimations.Size = new System.Drawing.Size(23, 22);
+            this.cullAnimations.ToolTipText = "Clean unused animation data";
+            this.cullAnimations.Click += new System.EventHandler(this.cullAnimations_Click);
+            // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
@@ -529,17 +528,6 @@
             this.showDecHex.Name = "showDecHex";
             this.showDecHex.Size = new System.Drawing.Size(23, 22);
             this.showDecHex.ToolTipText = "Show Base Conversion";
-            // 
-            // cullAnimations
-            // 
-            this.cullAnimations.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.cullAnimations.Image = global::LAZYSHELL.Properties.Resources.broom;
-            this.cullAnimations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.cullAnimations.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cullAnimations.Name = "cullAnimations";
-            this.cullAnimations.Size = new System.Drawing.Size(23, 22);
-            this.cullAnimations.ToolTipText = "Clean unused animation data";
-            this.cullAnimations.Click += new System.EventHandler(this.cullAnimations_Click);
             // 
             // toolStrip3
             // 
@@ -725,7 +713,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel106;
-        private System.Windows.Forms.Label label98;
         private System.Windows.Forms.NumericUpDown yNegShift;
         private System.Windows.Forms.Label label96;
         private System.Windows.Forms.NumericUpDown xNegShift;

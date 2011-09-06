@@ -196,6 +196,8 @@ namespace LAZYSHELL
         }
         private void searchResults_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (searchResults.SelectedItem == null)
+                return;
             levelsSolidTiles.Index = Convert.ToInt32(searchResults.SelectedItem.ToString().Substring(12));
         }
         private void SearchPhysicalTile_FormClosing(object sender, FormClosingEventArgs e)

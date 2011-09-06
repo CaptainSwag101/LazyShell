@@ -162,6 +162,8 @@ namespace LAZYSHELL
         }
         private void searchResults_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (searchResults.SelectedItem == null)
+                return;
             npcNum.Value = Convert.ToInt32(searchResults.SelectedItem.ToString().Substring(5));
         }
         //

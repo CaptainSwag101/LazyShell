@@ -58,6 +58,7 @@ namespace LAZYSHELL
         private Bitmap frameImage;
         private int duration_temp = 0;
         private Sequence sequence_temp = null;
+        private ArrayList skip = new ArrayList();
         // special controls
         #endregion
         #region Functions
@@ -431,7 +432,6 @@ namespace LAZYSHELL
             panelFrames.BringToFront();
             RefreshFrame();
         }
-        private ArrayList skip = new ArrayList();
         private void saveSequenceImages_Click(object sender, EventArgs e)
         {
             int counter = 0;
@@ -612,7 +612,7 @@ namespace LAZYSHELL
         private void reverseFrames_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You are about to reverse the order of all frames in the current sequence.\n\n" +
-                "Continue with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                "Continue with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 return;
             for (int i = 1; i < sequence.Frames.Count; i++)
             {
