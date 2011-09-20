@@ -102,7 +102,7 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, showDecHex, helpTips);
             //
             new History(this);
-            checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, dialogueTileset, 
+            checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset, 
                 fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu);
         }
         // tooltips
@@ -613,7 +613,7 @@ namespace LAZYSHELL
             else
                 MessageBox.Show("The dialogue in bank 3 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, dialogueTileset,
+            checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
                 fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu);
         }
         #endregion
@@ -621,7 +621,7 @@ namespace LAZYSHELL
         // main
         private void Dialogues_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, dialogueTileset, 
+            if (Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset, 
                 fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu) == checksum)
                 goto Close;
             DialogResult result = MessageBox.Show(

@@ -146,7 +146,7 @@ namespace LAZYSHELL
             {
                 if (battleDialogueTilesetImage == null)
                     battleDialogueTilesetImage = new Bitmap(Do.PixelsToImage(
-                        Do.TilesetToPixels(BattleDialogueTileset.TilesetLayer,
+                        Do.TilesetToPixels(BattleDialogueTileset.TileSetLayer,
                         16, 2, 0, false), 256, 32));
                 return battleDialogueTilesetImage;
             }

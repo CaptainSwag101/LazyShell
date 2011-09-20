@@ -15,18 +15,18 @@ namespace LAZYSHELL
     {
         #region Variables
         [NonSerialized()]
-        private byte[] data; 
+        private byte[] data;
         public override byte[] Data { get { return this.data; } set { this.data = value; } }
-        public override int Index { get { return index; } set { index = value;} }
+        public override int Index { get { return index; } set { index = value; } }
         private byte[] sm; public byte[] SM { get { return sm; } set { sm = value; } }    // sequence mold data
         private int index;
         private int animationOffset; public int AnimationOffset { get { return animationOffset; } set { index = value; } }
         private byte width; public byte Width { get { return width; } set { width = value; } }
         private byte height; public byte Height { get { return height; } set { height = value; } }
         private ushort codec; public ushort Codec { get { return codec; } set { codec = value; } }
-        private List<E_Sequence> sequences = new List<E_Sequence>(); 
+        private List<E_Sequence> sequences = new List<E_Sequence>();
         public List<E_Sequence> Sequences { get { return sequences; } set { sequences = value; } }
-        private List<E_Mold> molds = new List<E_Mold>(); 
+        private List<E_Mold> molds = new List<E_Mold>();
         public List<E_Mold> Molds { get { return molds; } set { molds = value; } }
         // Tileset
         private int tileSetLength; public int TileSetLength { get { return tileSetLength; } set { tileSetLength = value; } }
@@ -127,6 +127,7 @@ namespace LAZYSHELL
             offset += paletteSetLength;
             // Tileset
             Bits.SetShort(temp, 16, (ushort)offset);
+            int tilesetoffset = offset;
             foreach (Tile16x16 t in tileset.Tileset)
             {
                 if (t.TileIndex >= tileSetLength / 8)
@@ -135,11 +136,22 @@ namespace LAZYSHELL
                 if (t.TileIndex > 0 && t.TileIndex % 8 == 0)
                     offset += 32;
 
-                Bits.SetShort(temp, offset, (byte)t.Subtiles[0].TileIndex); offset += 2;
-                Bits.SetShort(temp, offset, (byte)t.Subtiles[1].TileIndex); offset += 30;
-                Bits.SetShort(temp, offset, (byte)t.Subtiles[2].TileIndex); offset += 2;
-                Bits.SetShort(temp, offset, (byte)t.Subtiles[3].TileIndex); offset -= 30;
+                for (int i = 0; i < 4; i++)
+                {
+                    Bits.SetShort(temp, offset, (byte)t.Subtiles[i].TileIndex); offset++;
+                    Bits.SetBit(temp, offset, 5, t.Subtiles[i].PriorityOne);
+                    Bits.SetBit(temp, offset, 6, t.Subtiles[i].Mirror);
+                    Bits.SetBit(temp, offset, 7, t.Subtiles[i].Invert);
+                    if (i % 2 == 0) 
+                        offset++;
+                    else if (i == 1)
+                        offset += 29;
+                    else if (i == 3)
+                        offset -= 31;
+                }
             }
+            Buffer.BlockCopy(temp, tilesetoffset, tileSet, 0, tileSet.Length);
+            //
             offset += 32;
             Bits.SetShort(temp, offset, 0xFFFF); offset += 2;
             // Sequences

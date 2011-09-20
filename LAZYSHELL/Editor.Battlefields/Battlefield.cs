@@ -12,21 +12,16 @@ namespace LAZYSHELL
     {
         [NonSerialized()]
         private byte[] data; public byte[] Data { get { return this.data; } set { this.data = value; } }
-
         private int index; public int Index { get { return index; } set { index = value; } }
-
         private byte graphicSetA; public byte GraphicSetA { get { return graphicSetA; } set { graphicSetA = value; } }
         private byte graphicSetB; public byte GraphicSetB { get { return graphicSetB; } set { graphicSetB = value; } }
         private byte graphicSetC; public byte GraphicSetC { get { return graphicSetC; } set { graphicSetC = value; } }
         private byte graphicSetD; public byte GraphicSetD { get { return graphicSetD; } set { graphicSetD = value; } }
         private byte graphicSetE; public byte GraphicSetE { get { return graphicSetE; } set { graphicSetE = value; } }
-
         private byte tileSet; public byte TileSet { get { return tileSet; } set { tileSet = value; } }
-
         private byte paletteSet; public byte PaletteSet { get { return paletteSet; } set { paletteSet = value; } }
-
+        //
         public int PaletteSetOffset { get { return GetPaletteSetOffset(); } }
-
         public Battlefield(byte[] data, int battlefieldNum)
         {
             this.data = data;
@@ -52,6 +47,10 @@ namespace LAZYSHELL
             tileSet = data[offset]; offset++;
             paletteSet = data[offset]; offset++;
         }
+        private int GetPaletteSetOffset()
+        {
+            return (paletteSet * 0xB6) + 0x34D000 - 30;
+        }
         public void Assemble()
         {
             int offset = (index * 8) + 0x39B644;
@@ -70,28 +69,5 @@ namespace LAZYSHELL
             Bits.SetByte(data, offset, tileSet); offset++;
             Bits.SetByte(data, offset, paletteSet); offset++;
         }
-
-        private int GetPaletteSetOffset()
-        {
-            return (paletteSet * 0xB6) + 0x34D000 - 30;
-        }
-        public int GetBGColor()
-        {
-            ushort bgColor = Bits.GetShort(data, GetPaletteSetOffset());
-
-            // Set the background color for the level
-            double multiplier = 8; // 8;
-
-            byte bgColorRed = (byte)((bgColor % 0x20) * multiplier); if (bgColorRed != 0) bgColorRed++;
-            byte bgColorGreen = (byte)(((bgColor >> 5) % 0x20) * multiplier); if (bgColorGreen != 0) bgColorGreen++;
-            byte bgColorBlue = (byte)(((bgColor >> 10) % 0x20) * multiplier); if (bgColorBlue != 0) bgColorBlue++;
-
-            return Color.FromArgb(255, bgColorRed, bgColorGreen, bgColorBlue).ToArgb();
-        }
-        public byte[] GetPalette(int paletteNum)
-        {
-            return Bits.GetByteArray(data, GetPaletteSetOffset() + (paletteNum * 30), 32);
-        }
-
     }
 }

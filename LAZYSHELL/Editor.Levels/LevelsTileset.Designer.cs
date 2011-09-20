@@ -221,6 +221,7 @@
             // buttonToggleTileEditor
             // 
             this.buttonToggleTileEditor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleTileEditor.Enabled = false;
             this.buttonToggleTileEditor.Image = global::LAZYSHELL.Properties.Resources.openTileEditor;
             this.buttonToggleTileEditor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonToggleTileEditor.ImageTransparentColor = System.Drawing.Color.Magenta;

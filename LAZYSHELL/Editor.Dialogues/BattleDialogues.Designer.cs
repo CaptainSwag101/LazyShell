@@ -50,12 +50,14 @@
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.reset = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.grid = new System.Windows.Forms.ToolStripButton();
             this.openTileEditor = new System.Windows.Forms.ToolStripButton();
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
             this.openPalettes = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.openPaletteMenu = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.toggleText = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBattleDialogue)).BeginInit();
             this.toolStrip2.SuspendLayout();
@@ -288,6 +290,8 @@
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reset,
             this.toolStripSeparator2,
+            this.toggleText,
+            this.grid,
             this.openTileEditor,
             this.openGraphics,
             this.openPalettes,
@@ -315,6 +319,18 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // grid
+            // 
+            this.grid.CheckOnClick = true;
+            this.grid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.grid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleGrid;
+            this.grid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.grid.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.grid.Name = "grid";
+            this.grid.Size = new System.Drawing.Size(23, 22);
+            this.grid.ToolTipText = "Show/Hide Grid";
+            this.grid.Click += new System.EventHandler(this.grid_Click);
             // 
             // openTileEditor
             // 
@@ -378,6 +394,19 @@
             this.toolStrip3.TabIndex = 539;
             this.toolStrip3.Text = "toolStrip3";
             // 
+            // toggleText
+            // 
+            this.toggleText.Checked = true;
+            this.toggleText.CheckOnClick = true;
+            this.toggleText.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toggleText.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toggleText.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleText.Name = "toggleText";
+            this.toggleText.Size = new System.Drawing.Size(30, 22);
+            this.toggleText.Text = "TXT";
+            this.toggleText.ToolTipText = "Show/Hide Dialogue Text";
+            this.toggleText.Click += new System.EventHandler(this.toggleText_Click);
+            // 
             // BattleDialogues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,5 +465,7 @@
         private System.Windows.Forms.ToolStripButton openPaletteMenu;
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton grid;
+        private System.Windows.Forms.ToolStripButton toggleText;
     }
 }

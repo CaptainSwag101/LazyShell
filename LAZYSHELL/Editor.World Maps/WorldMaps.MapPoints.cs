@@ -252,6 +252,8 @@ namespace LAZYSHELL
                     dOffset += pointNames[i].Length;
                     pointer += (ushort)pointNames[i].Length;
                     Model.Data[dOffset] = 6; dOffset++; pointer++;
+                    if (i != mapPoints.Length - 1 && !isdup[i + 1] && dOffset > 0x3EFF1F)
+                        MessageBox.Show("The total compressed size of all map point names is too large. Some data might not have been saved correctly. Please reduce the length of one or more map point names.", "LAZY SHELL");
                 }
             }
             // set duplicates
@@ -391,12 +393,12 @@ namespace LAZYSHELL
                     pointer += (ushort)pointNames[i].Length;
                     dOffset++; pointer++;
                     if (i != mapPoints.Length - 1 && !isdup[i + 1] && dOffset > 0x3EFF1F)
-                    {
-                        MessageBox.Show("The total size of all map point names is too large.\nPlease reduce the length of one or more map point names.", "LAZY SHELL");
                         break;
-                    }
                 }
             }
+            dOffset--;
+            nameFreeSpace.Text = (0x3EFF1F - dOffset).ToString() + " characters left";
+            nameFreeSpace.BackColor = dOffset > 0x3EFF1F ? Color.Red : SystemColors.Control;
         }
         private void mapPointXCoord_ValueChanged(object sender, EventArgs e)
         {

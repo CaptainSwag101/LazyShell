@@ -12,13 +12,14 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
-        
+
         private delegate void Function();
         private Dialogues dialoguesEditor;
         private State state = State.Instance;
         private BattleDialoguePreview textPreview = new BattleDialoguePreview();
         private TextHelperReduced textHelper = TextHelperReduced.Instance;
         private BattleDialogueTileset tileset { get { return Model.BattleDialogueTileset; } set { Model.BattleDialogueTileset = value; } }
+        public BattleDialogueTileset Tileset { get { return tileset; } }
         private Bitmap tilesetImage { get { return Model.BattleDialogueTilesetImage; } set { Model.BattleDialogueTilesetImage = value; } }
         private Bitmap textImage;
         private Overlay overlay;
@@ -136,7 +137,7 @@ namespace LAZYSHELL
         private void SetTilesetImage()
         {
             tilesetImage = new Bitmap(Do.PixelsToImage(
-                Do.TilesetToPixels(tileset.TilesetLayer, 16, 2, 0, false), 256, 32));
+                Do.TilesetToPixels(tileset.TileSetLayer, 16, 2, 0, false), 256, 32));
             pictureBoxBattleDialogue.BackColor = Color.FromArgb(fontPalette.Palette[0]);
             pictureBoxBattleDialogue.Invalidate();
         }
@@ -325,17 +326,18 @@ namespace LAZYSHELL
             if (tileEditor == null)
             {
                 tileEditor = new TileEditor(new Function(TileUpdate),
-                tileset.TilesetLayer[mouseDownTile], graphics,
+                tileset.TileSetLayer[mouseDownTile], graphics,
                 fontPalette, 0x20);
                 tileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
                 tileEditor.Reload(new Function(TileUpdate),
-                tileset.TilesetLayer[mouseDownTile], graphics,
+                tileset.TileSetLayer[mouseDownTile], graphics,
                 fontPalette, 0x20);
         }
         private void TileUpdate()
         {
+            tileset.DrawTileset(tileset.TileSetLayer, tileset.TileSet);
             SetTilesetImage();
         }
         private void PaletteUpdate()
@@ -395,8 +397,10 @@ namespace LAZYSHELL
         {
             if (tilesetImage != null)
                 e.Graphics.DrawImage(tilesetImage, 0, 0, 256, 32);
-            if (textImage != null)
+            if (textImage != null && toggleText.Checked)
                 e.Graphics.DrawImage(textImage, 0, 0, 256, 32);
+            if (grid.Checked)
+                overlay.DrawCartesianGrid(e.Graphics, Color.Black, pictureBoxBattleDialogue.Size, new Size(16, 16), 1);
         }
         private void pictureBoxBattleDialogue_MouseDown(object sender, MouseEventArgs e)
         {
@@ -471,6 +475,14 @@ namespace LAZYSHELL
                 InsertIntoBattleDialogueText("[delayInput]");
         }
         // editors
+        private void toggleText_Click(object sender, EventArgs e)
+        {
+            pictureBoxBattleDialogue.Invalidate();
+        }
+        private void grid_Click(object sender, EventArgs e)
+        {
+            pictureBoxBattleDialogue.Invalidate();
+        }
         private void openTileEditor_Click(object sender, EventArgs e)
         {
             tileEditor.Show();

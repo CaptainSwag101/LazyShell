@@ -472,7 +472,7 @@ namespace LAZYSHELL
             {
                 tileEditor = new TileEditor(new Function(TileUpdate),
                 this.tileSet.TileSetLayer[mouseDownTile],
-                tileSet.Graphics, palettes, 0x20);
+                tileSet.Graphics, palettes, 0x20, true);
                 tileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else

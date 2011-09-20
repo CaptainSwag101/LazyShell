@@ -7,13 +7,14 @@ using System.IO;
 using System.Media;
 using System.Text;
 using System.Windows.Forms;
+using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
     public partial class Audio : Form
     {
         // variables
-        
+
         private long checksum;
         private SoundPlayer soundPlayer = new SoundPlayer();
         private byte[] wav;
@@ -24,14 +25,18 @@ namespace LAZYSHELL
         {
             get
             {
-                if (radioButton1.Checked)
+                if (rate8000Hz.Checked)
                     return 8000;
-                if (radioButton2.Checked)
+                if (rate16000Hz.Checked)
                     return 16000;
-                if (radioButton3.Checked)
+                if (rate22050Hz.Checked)
                     return 22050;
-                if (radioButton4.Checked)
+                if (rate32000Hz.Checked)
+                    return 32000;
+                if (rate44100Hz.Checked)
                     return 44100;
+                if (rateManual.Checked)
+                    return (int)rateManualValue.Value;
                 return 8000;
             }
         }
@@ -40,19 +45,10 @@ namespace LAZYSHELL
         {
             checksum = Do.GenerateChecksum(audioSamples);
             InitializeComponent();
-            label1.Text =
-                "TIPS: follow these steps to successfully import a .WAV file of your choosing. Say you have a .WAV file, \"MyWavFile.wav\", that you wish to replace one of the samples in this audio editor with. Here are the steps you need to take.\n\n" + 
-                "1. Download and install Audacity, a good free audio editing program.\n" +
-                "     http://audacity.sourceforge.net/download/\n" +
-                "2. In the Lazy Shell audio editor, export any sample to a file named \"OldSample.wav\".\n" +
-                "3. Open \"MyWavFile.wav\" into Audacity.\n" +
-                "4. While in Audacity, copy the audio data (Ctrl+A, Ctrl+C). Close Audacity.\n" +
-                "5. Open \"OldSample.wav\" into Audacity.\n" +
-                "6. While in Audacity, paste the copied audio data over the old data (Ctrl+A, Ctrl+V).\n" +
-                "7. Export to a .WAV file named \"NewSample.wav\".\n" +
-                "8. In the Lazy Shell audio editor, import \"NewSample.wav\".\n\n" +
-                "The reason this is the only way to do it is because by using the same exported file (\"OldSample.wav\") with the modified WAV data from \"MyWavFile.wav\", it retains some obscure data from \"OldSample.wav\" in \"NewSample.wav\" which is necessary to have in order to successfully import a .WAV file.";
-            wav = BRR.Decode(audioSample.Sample, sampleRate);
+            if (Settings.Default.LastAudioSample == 0)
+                wav = BRR.Decode(audioSample.Sample, sampleRate);
+            else
+                sampleNum.Value = Settings.Default.LastAudioSample;
             new History(this);
         }
         // functions
@@ -77,8 +73,14 @@ namespace LAZYSHELL
         {
             wav = BRR.Decode(audioSample.Sample, sampleRate);
             pictureBox1.Invalidate();
+            Settings.Default.LastAudioSample = (int)sampleNum.Value;
         }
         private void sampleRate_CheckedChanged(object sender, EventArgs e)
+        {
+            wav = BRR.Decode(audioSample.Sample, sampleRate);
+            rateManualValue.Enabled = rateManual.Checked;
+        }
+        private void rateManualValue_ValueChanged(object sender, EventArgs e)
         {
             wav = BRR.Decode(audioSample.Sample, sampleRate);
         }
@@ -179,7 +181,7 @@ namespace LAZYSHELL
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])Model.AudioSamples, index, "EXPORT SAMPLES...").ShowDialog();
+            new IOElements((Element[])Model.AudioSamples, index, "EXPORT SAMPLES...", sampleRate).ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {

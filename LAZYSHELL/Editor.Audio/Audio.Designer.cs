@@ -44,10 +44,13 @@
             this.foward = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.rateManualValue = new System.Windows.Forms.NumericUpDown();
+            this.rate8000Hz = new System.Windows.Forms.RadioButton();
+            this.rateManual = new System.Windows.Forms.RadioButton();
+            this.rate44100Hz = new System.Windows.Forms.RadioButton();
+            this.rate16000Hz = new System.Windows.Forms.RadioButton();
+            this.rate22050Hz = new System.Windows.Forms.RadioButton();
+            this.rate32000Hz = new System.Windows.Forms.RadioButton();
             this.label235 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -56,6 +59,7 @@
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rateManualValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +83,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(467, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(572, 25);
             this.toolStrip1.TabIndex = 398;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -219,7 +223,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(100, 94);
+            this.panel1.Size = new System.Drawing.Size(100, 146);
             this.panel1.TabIndex = 399;
             // 
             // panel3
@@ -227,62 +231,109 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.radioButton1);
-            this.panel3.Controls.Add(this.radioButton3);
-            this.panel3.Controls.Add(this.radioButton2);
-            this.panel3.Controls.Add(this.radioButton4);
+            this.panel3.Controls.Add(this.rateManualValue);
+            this.panel3.Controls.Add(this.rate8000Hz);
+            this.panel3.Controls.Add(this.rateManual);
+            this.panel3.Controls.Add(this.rate44100Hz);
+            this.panel3.Controls.Add(this.rate16000Hz);
+            this.panel3.Controls.Add(this.rate22050Hz);
+            this.panel3.Controls.Add(this.rate32000Hz);
             this.panel3.Location = new System.Drawing.Point(0, 19);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(96, 71);
+            this.panel3.Size = new System.Drawing.Size(96, 123);
             this.panel3.TabIndex = 267;
             // 
-            // radioButton1
+            // rateManualValue
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(3, 2);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(64, 17);
-            this.radioButton1.TabIndex = 263;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "8000 Hz";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
+            this.rateManualValue.Enabled = false;
+            this.rateManualValue.Location = new System.Drawing.Point(3, 100);
+            this.rateManualValue.Maximum = new decimal(new int[] {
+            48000,
+            0,
+            0,
+            0});
+            this.rateManualValue.Minimum = new decimal(new int[] {
+            8000,
+            0,
+            0,
+            0});
+            this.rateManualValue.Name = "rateManualValue";
+            this.rateManualValue.Size = new System.Drawing.Size(91, 21);
+            this.rateManualValue.TabIndex = 267;
+            this.rateManualValue.Value = new decimal(new int[] {
+            32000,
+            0,
+            0,
+            0});
+            this.rateManualValue.ValueChanged += new System.EventHandler(this.rateManualValue_ValueChanged);
             // 
-            // radioButton3
+            // rate8000Hz
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(3, 50);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(70, 17);
-            this.radioButton3.TabIndex = 266;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "44100 Hz";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
+            this.rate8000Hz.AutoSize = true;
+            this.rate8000Hz.Location = new System.Drawing.Point(3, 2);
+            this.rate8000Hz.Name = "rate8000Hz";
+            this.rate8000Hz.Size = new System.Drawing.Size(64, 17);
+            this.rate8000Hz.TabIndex = 263;
+            this.rate8000Hz.Text = "8000 Hz";
+            this.rate8000Hz.UseVisualStyleBackColor = true;
+            this.rate8000Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
             // 
-            // radioButton2
+            // rateManual
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(3, 18);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(70, 17);
-            this.radioButton2.TabIndex = 264;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "16000 Hz";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
+            this.rateManual.AutoSize = true;
+            this.rateManual.Location = new System.Drawing.Point(3, 82);
+            this.rateManual.Name = "rateManual";
+            this.rateManual.Size = new System.Drawing.Size(57, 17);
+            this.rateManual.TabIndex = 266;
+            this.rateManual.Text = "Other:";
+            this.rateManual.UseVisualStyleBackColor = true;
+            this.rateManual.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
             // 
-            // radioButton4
+            // rate44100Hz
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(3, 34);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(70, 17);
-            this.radioButton4.TabIndex = 265;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "22050 Hz";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
+            this.rate44100Hz.AutoSize = true;
+            this.rate44100Hz.Location = new System.Drawing.Point(3, 66);
+            this.rate44100Hz.Name = "rate44100Hz";
+            this.rate44100Hz.Size = new System.Drawing.Size(70, 17);
+            this.rate44100Hz.TabIndex = 266;
+            this.rate44100Hz.Text = "44100 Hz";
+            this.rate44100Hz.UseVisualStyleBackColor = true;
+            this.rate44100Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
+            // 
+            // rate16000Hz
+            // 
+            this.rate16000Hz.AutoSize = true;
+            this.rate16000Hz.Location = new System.Drawing.Point(3, 18);
+            this.rate16000Hz.Name = "rate16000Hz";
+            this.rate16000Hz.Size = new System.Drawing.Size(70, 17);
+            this.rate16000Hz.TabIndex = 264;
+            this.rate16000Hz.Text = "16000 Hz";
+            this.rate16000Hz.UseVisualStyleBackColor = true;
+            this.rate16000Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
+            // 
+            // rate22050Hz
+            // 
+            this.rate22050Hz.AutoSize = true;
+            this.rate22050Hz.Location = new System.Drawing.Point(3, 34);
+            this.rate22050Hz.Name = "rate22050Hz";
+            this.rate22050Hz.Size = new System.Drawing.Size(70, 17);
+            this.rate22050Hz.TabIndex = 265;
+            this.rate22050Hz.Text = "22050 Hz";
+            this.rate22050Hz.UseVisualStyleBackColor = true;
+            this.rate22050Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
+            // 
+            // rate32000Hz
+            // 
+            this.rate32000Hz.AutoSize = true;
+            this.rate32000Hz.Checked = true;
+            this.rate32000Hz.Location = new System.Drawing.Point(3, 50);
+            this.rate32000Hz.Name = "rate32000Hz";
+            this.rate32000Hz.Size = new System.Drawing.Size(70, 17);
+            this.rate32000Hz.TabIndex = 265;
+            this.rate32000Hz.TabStop = true;
+            this.rate32000Hz.Text = "32000 Hz";
+            this.rate32000Hz.UseVisualStyleBackColor = true;
+            this.rate32000Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
             // 
             // label235
             // 
@@ -303,7 +354,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(363, 90);
+            this.pictureBox1.Size = new System.Drawing.Size(468, 142);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -316,7 +367,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(100, 25);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(367, 94);
+            this.panel2.Size = new System.Drawing.Size(472, 146);
             this.panel2.TabIndex = 400;
             // 
             // backgroundWorker1
@@ -330,19 +381,19 @@
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Location = new System.Drawing.Point(0, 119);
+            this.label1.Location = new System.Drawing.Point(0, 171);
             this.label1.Name = "label1";
             this.label1.ReadOnly = true;
-            this.label1.Size = new System.Drawing.Size(467, 245);
+            this.label1.Size = new System.Drawing.Size(572, 245);
             this.label1.TabIndex = 401;
-            this.label1.Text = "";
+            this.label1.Text = resources.GetString("label1.Text");
             this.label1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.label1_LinkClicked);
             // 
             // Audio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 364);
+            this.ClientSize = new System.Drawing.Size(572, 416);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
@@ -357,6 +408,7 @@
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rateManualValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -381,14 +433,17 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rate44100Hz;
+        private System.Windows.Forms.RadioButton rate32000Hz;
+        private System.Windows.Forms.RadioButton rate16000Hz;
+        private System.Windows.Forms.RadioButton rate8000Hz;
         private System.Windows.Forms.Label label235;
         private System.Windows.Forms.Panel panel2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RichTextBox label1;
+        private System.Windows.Forms.RadioButton rateManual;
+        private System.Windows.Forms.RadioButton rate22050Hz;
+        private System.Windows.Forms.NumericUpDown rateManualValue;
     }
 }

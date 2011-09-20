@@ -747,5 +747,17 @@ namespace LAZYSHELL.Properties {
                 this["LastFormationPack"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastAudioSample {
+            get {
+                return ((int)(this["LastAudioSample"]));
+            }
+            set {
+                this["LastAudioSample"] = value;
+            }
+        }
     }
 }

@@ -438,10 +438,6 @@ namespace LAZYSHELL
             int index = y / 16 * 16 + (x / 16);
             labelTileIndex.Text = "Tile index: " + index + " ($" + index.ToString("X2") + ")";
         }
-        public void PictureBoxTileset_MouseUp(object sender, MouseEventArgs e)
-        {
-            pictureBoxTileset_MouseUp(sender, e);
-        }
         private void pictureBoxTileset_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right) return;
@@ -506,6 +502,7 @@ namespace LAZYSHELL
         }
         private void lockEditing_CheckedChanged(object sender, System.EventArgs e)
         {
+            buttonToggleTileEditor.Enabled = !lockEditing.Checked;
             buttonEditDelete.Enabled = !lockEditing.Checked;
             buttonEditCut.Enabled = !lockEditing.Checked;
             buttonEditCopy.Enabled = !lockEditing.Checked;

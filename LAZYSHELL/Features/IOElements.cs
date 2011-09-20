@@ -23,11 +23,13 @@ namespace LAZYSHELL
         private int currentIndex;
         private string fullPath;
         private Type type;
+        private object[] args;
         // constructor
-        public IOElements(object element, int currentIndex, string title)
+        public IOElements(object element, int currentIndex, string title, params object[] args)
         {
             this.element = element;
             this.currentIndex = currentIndex;
+            this.args = args;
             this.type = element.GetType();
 
             this.TopLevel = true;
@@ -359,14 +361,14 @@ namespace LAZYSHELL
             if (this.Text == "EXPORT SAMPLES...")
             {
                 if (radioButtonCurrent.Checked)
-                    Do.Export(BRR.Decode(Model.AudioSamples[currentIndex].Sample, 8000),
+                    Do.Export(BRR.Decode(Model.AudioSamples[currentIndex].Sample, (int)args[0]),
                         "sample." + currentIndex.ToString("d3") + ".wav", fullPath);
                 else
                 {
                     byte[][] samples = new byte[Model.AudioSamples.Length][];
                     int i = 0;
                     foreach (BRRSample s in Model.AudioSamples)
-                        samples[i++] = BRR.Decode(s.Sample, 8000);
+                        samples[i++] = BRR.Decode(s.Sample, (int)args[0]);
                     Do.Export(samples,
                         fullPath + "\\" + Model.GetFileNameWithoutPath() + " - Samples\\" + "sample",
                         "SAMPLE", true);

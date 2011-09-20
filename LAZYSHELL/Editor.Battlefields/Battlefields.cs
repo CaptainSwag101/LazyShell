@@ -150,7 +150,7 @@ namespace LAZYSHELL
         {
             tileset.AssembleIntoModel(16, 16);
             foreach (PaletteSet ps in paletteSets)
-                ps.Assemble(1);
+                ps.Assemble(2);
             foreach (Battlefield bf in battlefields)
                 bf.Assemble();
             Model.Compress(Model.TileSetsBF, Model.EditTileSetsBF, 0x150000, 0x15FFFF, "BATTLEFIELD", 0);
@@ -161,11 +161,11 @@ namespace LAZYSHELL
         {
             if (paletteEditor == null)
             {
-                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSets[palette], 8, 1);
+                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSets[palette], 8, 2);
                 paletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditor.Reload(new Function(PaletteUpdate), paletteSets[palette], 8, 1);
+                paletteEditor.Reload(new Function(PaletteUpdate), paletteSets[palette], 8, 2);
         }
         private void LoadGraphicEditor()
         {
@@ -658,7 +658,7 @@ namespace LAZYSHELL
             Rectangle rdst = new Rectangle(0, 0, 512, 512);
 
             if (buttonToggleBG.Checked)
-                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(paletteSets[palette].Palette[16])), rdst);
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(paletteSets[palette].Palette[0])), rdst);
 
             e.Graphics.DrawImage(battlefieldImage, rdst, 0, 0, 512, 512, GraphicsUnit.Pixel);
             if (moving && selection != null)

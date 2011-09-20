@@ -55,7 +55,7 @@ namespace LAZYSHELL
                     tile = (ushort)(Bits.GetShort(src, offset) & 0x03FF); offset++;
                     temp = src[offset]; offset++;
                     source = Do.DrawTile8x8(tile, temp, graphics, palettes.Palettes, 0x20);
-                    dst[i].Subtiles[a] = source; ;
+                    dst[i].Subtiles[a] = source;
                 }
                 if ((i - 15) % 16 == 0)
                     offset += 64;

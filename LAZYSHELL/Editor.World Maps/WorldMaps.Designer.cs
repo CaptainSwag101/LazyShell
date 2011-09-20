@@ -108,6 +108,8 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.textBoxMapPoint = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.nameFreeSpace = new System.Windows.Forms.ToolStripLabel();
             this.mapPointYCoord = new System.Windows.Forms.NumericUpDown();
             this.label59 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
@@ -231,7 +233,7 @@
             this.mapPointNum.Hexadecimal = false;
             this.mapPointNum.Location = new System.Drawing.Point(203, 2);
             this.mapPointNum.Maximum = new decimal(new int[] {
-            63,
+            55,
             0,
             0,
             0});
@@ -1233,7 +1235,9 @@
             // 
             this.toolStrip5.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.textBoxMapPoint});
+            this.textBoxMapPoint,
+            this.toolStripSeparator9,
+            this.nameFreeSpace});
             this.toolStrip5.Location = new System.Drawing.Point(0, 25);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -1245,8 +1249,20 @@
             // 
             this.textBoxMapPoint.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxMapPoint.Name = "textBoxMapPoint";
-            this.textBoxMapPoint.Size = new System.Drawing.Size(256, 25);
+            this.textBoxMapPoint.Size = new System.Drawing.Size(130, 25);
             this.textBoxMapPoint.TextChanged += new System.EventHandler(this.textBoxMapPoint_TextChanged);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
+            // 
+            // nameFreeSpace
+            // 
+            this.nameFreeSpace.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameFreeSpace.Name = "nameFreeSpace";
+            this.nameFreeSpace.Size = new System.Drawing.Size(88, 22);
+            this.nameFreeSpace.Text = "0 characters left";
             // 
             // mapPointYCoord
             // 
@@ -1754,5 +1770,7 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem resetWorldMapToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetMapPointToolStripMenuItem;
+        private System.Windows.Forms.ToolStripLabel nameFreeSpace;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
     }
 }

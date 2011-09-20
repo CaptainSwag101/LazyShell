@@ -281,11 +281,14 @@ namespace LAZYSHELL
             {
                 for (int x = overlay.Select.X; x < overlay.Select.Terminal.X; x++)
                 {
+                    if (y < 0 || y >= 256 ||
+                        x < 0 || x >= 256)
+                        continue;
                     int index = mold.MoldTilesPerPixel[y * 256 + x];
                     if (index != 0xFF)
                     {
                         Mold.Tile tile = mold.Tiles[index];
-                        if (tile.AddedToBuffer) 
+                        if (tile.AddedToBuffer)
                             continue;
                         tile.AddedToBuffer = true;
                         tiles.Add(tile);

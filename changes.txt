@@ -1,5 +1,29 @@
 Major changes/additions are indicated by ***
 
+v3.8.1 (2011-09-20)
+--------------------------------------
+Editor-specific changes:
+*World Maps: warning doesn't pop up anymore when editing map point names
+
+Additions:
+*Audio: remembers last loaded sample index
+*Audio: added 32000 Hz as default, and a custom sample rate setting
+*Dialogues: show/hide text and grid for battle dialogue image
+*World Maps: added label showing characters left for map point name
+
+Fixes:
+*Audio: radio buttons for 22050 Hz and 44100 Hz were switched around
+*Audio: exporting samples should have been exporting to selected Hz rate
+*Battlefields: only six palettes should be loading and saving, not seven
+*Dialogues: when assembling, tileset wasn't being drawn to raw byte array
+*Dialogues: checksum should read battle dialogue tileset not dialogue
+*Effects: when assembling, tileset wasn't being drawn to raw byte array
+*Levels: tile editor button now disables/enables when lock editing changed
+*Sprites: crash when dragging selected tiles which overflowed boundaries
+*World Maps: flipped and priority 1 status redundant in tile editor
+*World Maps: maximum map point index should have been 55
+
+
 v3.8 (2011-09-06)
 --------------------------------------
 Editor-specific changes:

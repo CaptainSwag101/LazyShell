@@ -31,6 +31,17 @@ namespace LAZYSHELL
         /// <param name="paletteSet">The palette set used by the tile.</param>
         /// <param name="format">Either 0x10 or 0x20 for 2bpp or 4bpp format, respectively.</param>
         /// <param name="sender">The control that was double-clicked to open the tile editor.</param>
+        public TileEditor(Delegate update, Tile16x16 tile, byte[] graphics, PaletteSet paletteSet, byte format, bool disableattr)
+        {
+            this.update = update;
+            this.tile = tile;
+            this.tileBackup = tile.Copy();
+            this.graphics = graphics;
+            this.paletteSet = paletteSet;
+            this.format = format;
+            InitializeTile();
+            subtileStatus.Enabled = !disableattr;
+        }
         public TileEditor(Delegate update, Tile16x16 tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {
             this.update = update;
@@ -39,16 +50,7 @@ namespace LAZYSHELL
             this.graphics = graphics;
             this.paletteSet = paletteSet;
             this.format = format;
-
-            currentSubtile = 0;
-
-            InitializeComponent();
-
-            InitializeSubtile();
-            SetTileImage();
-            SetSubtileImage();
-            this.BringToFront();
-            new History(this);
+            InitializeTile();
         }
         public void Reload(Delegate update, Tile16x16 tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {
@@ -66,6 +68,16 @@ namespace LAZYSHELL
             this.BringToFront();
         }
         // functions
+        private void InitializeTile()
+        {
+            currentSubtile = 0;
+            InitializeComponent();
+            InitializeSubtile();
+            SetTileImage();
+            SetSubtileImage();
+            this.BringToFront();
+            new History(this);
+        }
         private void InitializeSubtile()
         {
             updatingSubtile = true;
