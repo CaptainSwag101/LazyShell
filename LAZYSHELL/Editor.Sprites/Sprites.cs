@@ -91,8 +91,13 @@ namespace LAZYSHELL
             // controls
             updating = true;
             name.Items.AddRange(Lists.Numerize(Lists.SpriteNames));
-            name.SelectedIndex = settings.LastSprite;
-            number.Value = settings.LastSprite;
+            if (settings.RememberLastIndex)
+            {
+                name.SelectedIndex = settings.LastSprite;
+                number.Value = settings.LastSprite;
+            }
+            else
+                name.SelectedIndex = 0;
             foreach (Animation a in animations)
                 a.Assemble();
             RefreshSpritesEditor();

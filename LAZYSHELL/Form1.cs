@@ -55,7 +55,7 @@ namespace LAZYSHELL
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Could not load list for most recently used ROM(s).\n\n" + e.Message,
+                    MessageBox.Show("Could not load most recently used ROM.\n\n" + e.Message,
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -72,15 +72,6 @@ namespace LAZYSHELL
             Application.Run(new Form1(AppControl));
         }
         // Loading
-        private bool LunarCompressExists()
-        {
-            if (!File.Exists("Lunar Compress.dll"))
-            {
-                byte[] lc = Resources.Lunar_Compress;
-                File.WriteAllBytes(Path.GetDirectoryName(Application.ExecutablePath) + '\\' + "Lunar Compress.dll", lc);
-            }
-            return true;
-        }
         private void Open(string filename)
         {
             if (AppControl.AssembleAndCloseWindows())
@@ -250,7 +241,7 @@ namespace LAZYSHELL
             }
             catch (Exception e)
             {
-                MessageBox.Show("Could not load list for most recently used ROM(s).\n\n" + e.Message,
+                MessageBox.Show("Could not load most recently used ROM.\n\n" + e.Message,
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -426,7 +417,7 @@ namespace LAZYSHELL
         }
         private void openAttacks_Click(object sender, EventArgs e)
         {
-            if (!LunarCompressExists())
+            if (!Comp.LunarCompressExists())
                 return;
             AppControl.Attacks();
         }
@@ -436,13 +427,13 @@ namespace LAZYSHELL
         }
         private void openBattlefields_Click(object sender, EventArgs e)
         {
-            if (!LunarCompressExists())
+            if (!Comp.LunarCompressExists())
                 return;
             AppControl.Battlefields();
         }
         private void openDialogues_Click(object sender, EventArgs e)
         {
-            if (!LunarCompressExists())
+            if (!Comp.LunarCompressExists())
                 return;
             AppControl.Dialogues();
         }
@@ -456,31 +447,31 @@ namespace LAZYSHELL
         }
         private void openFormations_Click(object sender, EventArgs e)
         {
-            if (!LunarCompressExists())
+            if (!Comp.LunarCompressExists())
                 return;
             AppControl.Formations();
         }
         private void openItems_Click(object sender, EventArgs e)
         {
-            if (!LunarCompressExists())
+            if (!Comp.LunarCompressExists())
                 return;
             AppControl.Items();
         }
         private void openLevels_Click(object sender, System.EventArgs e)
         {
-            if (!LunarCompressExists())
+            if (!Comp.LunarCompressExists())
                 return;
             AppControl.Levels();
         }
         private void openMainTitle_Click(object sender, EventArgs e)
         {
-            if (!LunarCompressExists())
+            if (!Comp.LunarCompressExists())
                 return;
             AppControl.MainTitle();
         }
         private void openMonsters_Click(object sender, EventArgs e)
         {
-            if (!LunarCompressExists())
+            if (!Comp.LunarCompressExists())
                 return;
             AppControl.Monsters();
         }
@@ -491,7 +482,7 @@ namespace LAZYSHELL
         }
         private void openWorldMaps_Click(object sender, EventArgs e)
         {
-            if (!LunarCompressExists())
+            if (!Comp.LunarCompressExists())
                 return;
             AppControl.WorldMaps();
         }

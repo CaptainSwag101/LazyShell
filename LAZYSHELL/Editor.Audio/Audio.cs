@@ -16,6 +16,7 @@ namespace LAZYSHELL
         // variables
 
         private long checksum;
+        private Settings settings = Settings.Default;
         private SoundPlayer soundPlayer = new SoundPlayer();
         private byte[] wav;
         private int index { get { return (int)sampleNum.Value; } set { sampleNum.Value = value; } }
@@ -45,10 +46,10 @@ namespace LAZYSHELL
         {
             checksum = Do.GenerateChecksum(audioSamples);
             InitializeComponent();
-            if (Settings.Default.LastAudioSample == 0)
+            if (settings.LastAudioSample == 0)
                 wav = BRR.Decode(audioSample.Sample, sampleRate);
             else
-                sampleNum.Value = Settings.Default.LastAudioSample;
+                sampleNum.Value = settings.LastAudioSample;
             new History(this);
         }
         // functions
@@ -73,7 +74,8 @@ namespace LAZYSHELL
         {
             wav = BRR.Decode(audioSample.Sample, sampleRate);
             pictureBox1.Invalidate();
-            Settings.Default.LastAudioSample = (int)sampleNum.Value;
+            if (settings.RememberLastIndex)
+                settings.LastAudioSample = (int)sampleNum.Value;
         }
         private void sampleRate_CheckedChanged(object sender, EventArgs e)
         {

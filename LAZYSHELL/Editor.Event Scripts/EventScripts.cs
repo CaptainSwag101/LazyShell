@@ -76,9 +76,14 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, showDecHex, null);
             new History(this);
             disableNavigate = true;
-            int lastEventScript = settings.LastEventScript;
-            type = Math.Max(0, settings.LastEventScriptCat);
-            index = Math.Min((int)eventNum.Maximum, lastEventScript);
+            if (settings.RememberLastIndex)
+            {
+                int lastEventScript = settings.LastEventScript;
+                type = Math.Max(0, settings.LastEventScriptCat);
+                index = Math.Min((int)eventNum.Maximum, lastEventScript);
+            }
+            else
+                type = 0;
             disableNavigate = false;
             lastNavigate = new Navigate(index, type);
             checksum = Do.GenerateChecksum(eventScripts, actionScripts);
@@ -2651,7 +2656,7 @@ namespace LAZYSHELL
         }
         private void EventScriptTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            Do.AddHistory(this, index, EventScriptTree.SelectedNode, "NodeMouseClick");
+            Do.AddHistory(this, index, e.Node, "NodeMouseClick");
             //
             EventScriptTree.SelectedNode = e.Node;
             if (e.Button != MouseButtons.Right) return;

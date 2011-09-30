@@ -1,5 +1,20 @@
 Major changes/additions are indicated by ***
 
+v3.8.2
+--------------------------------------
+Additions:
+*Monsters: history remembers nodes clicked
+*Settings: option to remember last loaded indexes
+
+Fixes:
+*Not creating LunarCompress.dll if needed when auto-loading editor data
+*Animations: not remembering last loaded animation index (does for category)
+*Monsters: psychopath TextChanged not invoked if initial monster not Terrapin
+*Monsters: problem trying to DrawItem in spell or attack name of "Do Nothing"
+*Spells: description TextChanged not invoked if initial spell a monster spell
+*Spells: toolstrip above description textbox wasn't being disabled/enabled
+
+
 v3.8.1 (2011-09-20)
 --------------------------------------
 Editor-specific changes:

@@ -2570,10 +2570,10 @@ namespace LAZYSHELL
         }
         public static bool WithinBounds(Rectangle regionA, Rectangle regionB)
         {
-            if (regionA.X > regionB.X + regionB.Width || 
+            if (regionA.X > regionB.X + regionB.Width ||
                 regionA.Y > regionB.Y + regionB.Height)
                 return false;
-            if (regionA.X + regionA.Width < regionB.X || 
+            if (regionA.X + regionA.Width < regionB.X ||
                 regionA.Y + regionA.Height < regionB.Y)
                 return false;
             return true;
@@ -4121,16 +4121,24 @@ namespace LAZYSHELL
         {
             StopWatchStop(false);
         }
-        public static void AddHistory(Form form, int index, TreeNode node, string action)
+        public static void AddHistory(Form form, int index, TreeNode node, string action, bool noreadoffset)
         {
             try
             {
                 if (node == null) return;
-                string text = action + " | index " + index + ", offset 0x" + node.Text.Substring(1, 6) + " | ";
+                string text;
+                if (!noreadoffset)
+                    text = action + " | index " + index + ", offset 0x" + node.Text.Substring(1, 6) + " | ";
+                else
+                    text = action + " | index " + index + ", \"" + node.Text.Substring(0, Math.Min(30, node.Text.Length)) + "\" | ";
                 text += "Form \"" + form.Name + "\" | " + DateTime.Now.ToString() + "\r\n";
                 Model.History = Model.History.Insert(0, text);
             }
             catch { }
+        }
+        public static void AddHistory(Form form, int index, TreeNode node, string action)
+        {
+            AddHistory(form, index, node, action, false);
         }
         public static void AddHistory(Form form, int index, string action)
         {

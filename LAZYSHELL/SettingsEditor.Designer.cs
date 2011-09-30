@@ -62,7 +62,8 @@
             "Create back-up ROM on save",
             "Create back-up ROM on load",
             "Verify ROM",
-            "Show encryption warnings"});
+            "Show encryption warnings",
+            "Remember last loaded indexes"});
             this.checkedListBox1.Location = new System.Drawing.Point(12, 12);
             this.checkedListBox1.MultiColumn = true;
             this.checkedListBox1.Name = "checkedListBox1";

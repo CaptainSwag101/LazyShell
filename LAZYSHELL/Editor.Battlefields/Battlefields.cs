@@ -16,6 +16,7 @@ namespace LAZYSHELL
         #region Variables
 
         private long checksum;
+        private Settings settings = Settings.Default;
         // main
         private delegate void Function();
         private bool updating = false;
@@ -94,7 +95,8 @@ namespace LAZYSHELL
             LoadTileEditor();
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             new History(this);
-            index = Settings.Default.LastBattlefield;
+            if (settings.RememberLastIndex)
+                index = settings.LastBattlefield;
             //
             checksum = Do.GenerateChecksum(battlefields, Model.TileSetsBF, paletteSets);
         }
@@ -507,7 +509,7 @@ namespace LAZYSHELL
             selection = null;
             moving = false;
             RefreshBattlefield();
-            Settings.Default.LastBattlefield = index;
+            settings.LastBattlefield = index;
         }
         private void battlefieldName_SelectedIndexChanged(object sender, EventArgs e)
         {

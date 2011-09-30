@@ -47,14 +47,17 @@ namespace LAZYSHELL
             this.spellHitRate.Value = spell.HitRate;
             this.spellNameIcon.SelectedIndex = (int)(spell.Name[0] - 0x20);
             this.spellNameIcon.Invalidate();
-            if (spellNum.Value < 64)
+            if (index < 64)
                 this.textBoxSpellName.Text = Do.RawToASCII(spell.Name, settings.KeystrokesMenu).Substring(1);
             else
                 this.textBoxSpellName.Text = Do.RawToASCII(spell.Name, settings.Keystrokes).Substring(1);
-            if (index > 0x1A)
+            if (index > 26)
             {
                 this.textBoxSpellDescription.Text = " This spell[1] cannot have a[1] description";
+                if (spell.RawDescription == null)
+                    this.textBoxSpellDescription_TextChanged(null, null);
                 this.textBoxSpellDescription.Enabled = false;
+                this.toolStrip2.Enabled = false;
                 this.button34.Enabled = false; // Break
                 this.button33.Enabled = false; // End
             }
@@ -63,12 +66,14 @@ namespace LAZYSHELL
                 if (this.textBoxSpellDescription.Enabled == false)
                 {
                     this.textBoxSpellDescription.Enabled = true;
+                    this.toolStrip2.Enabled = true;
                     this.button34.Enabled = true; // Break
                     this.button33.Enabled = true; // End
                 }
-                if (spellNum.Value <= 0x1A)
+                if (index <= 26)
                 {
                     this.textBoxSpellDescription.Enabled = true;
+                    this.toolStrip2.Enabled = true;
                     this.button33.Enabled = true;
                     this.button34.Enabled = true;
                     this.textBoxSpellDescription.Text = spell.GetDescription(textCodeFormat);
@@ -76,6 +81,7 @@ namespace LAZYSHELL
                 else
                 {
                     this.textBoxSpellDescription.Enabled = false;
+                    this.toolStrip2.Enabled = false;
                     this.button33.Enabled = false;
                     this.button34.Enabled = false;
                     this.textBoxSpellDescription.Text = " This spell[1] cannot have a[1] description";
@@ -668,6 +674,8 @@ namespace LAZYSHELL
         }
         private void pictureBoxSpellDesc_Paint(object sender, PaintEventArgs e)
         {
+            if (spell.RawDescription == null)
+                return;
             e.Graphics.DrawImage(Model.MenuBackground, 0, 0);
             if (descriptionText == null)
                 SetDescriptionText();

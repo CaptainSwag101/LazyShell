@@ -17,9 +17,10 @@ namespace LAZYSHELL
     public partial class Effects : Form
     {
         #region Variables
-        
+
         private long checksum;
         public long Checksum { get { return checksum; } set { checksum = value; } }
+        private Settings settings = Settings.Default;
         // main
         private delegate void Function();
         private Overlay overlay = new Overlay();
@@ -92,7 +93,8 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             //
             new History(this);
-            index = Settings.Default.LastEffect;
+            if (settings.RememberLastIndex)
+                index = settings.LastEffect;
             checksum = Do.GenerateChecksum(animations, effects);
         }
         private void RefreshEffectsEditor()
@@ -345,7 +347,7 @@ namespace LAZYSHELL
             if (animation.Tileset != null)
                 animations[(int)imageNum.Value].Assemble();
             RefreshEffectsEditor();
-            Settings.Default.LastEffect = index;
+            settings.LastEffect = index;
         }
         private void name_SelectedIndexChanged(object sender, EventArgs e)
         {

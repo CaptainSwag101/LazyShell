@@ -600,7 +600,7 @@ namespace LAZYSHELL
             this.history.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.history.Name = "history";
             this.history.Size = new System.Drawing.Size(23, 22);
-            this.history.Text = "toolStripButton1";
+            this.history.ToolTipText = "Event History";
             this.history.Click += new System.EventHandler(this.history_Click);
             // 
             // showROMInfo

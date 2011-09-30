@@ -38,7 +38,7 @@
             this.label63 = new System.Windows.Forms.Label();
             this.panel138 = new System.Windows.Forms.Panel();
             this.panel133 = new System.Windows.Forms.Panel();
-            this.TextboxMonsterPsychoMsg = new System.Windows.Forms.RichTextBox();
+            this.MonsterPsychopath = new System.Windows.Forms.RichTextBox();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.newLine = new System.Windows.Forms.ToolStripButton();
             this.endString = new System.Windows.Forms.ToolStripButton();
@@ -57,24 +57,24 @@
             this.panel137 = new System.Windows.Forms.Panel();
             this.panel53 = new System.Windows.Forms.Panel();
             this.label87 = new System.Windows.Forms.Label();
-            this.CheckboxMonsterProp = new System.Windows.Forms.CheckedListBox();
+            this.MonsterProperties = new System.Windows.Forms.CheckedListBox();
             this.panel136 = new System.Windows.Forms.Panel();
             this.panel31 = new System.Windows.Forms.Panel();
             this.label96 = new System.Windows.Forms.Label();
-            this.CheckboxMonsterElemWeak = new System.Windows.Forms.CheckedListBox();
+            this.MonsterElementsWeakness = new System.Windows.Forms.CheckedListBox();
             this.panel135 = new System.Windows.Forms.Panel();
             this.panel35 = new System.Windows.Forms.Panel();
             this.label182 = new System.Windows.Forms.Label();
-            this.CheckboxMonsterEfecNull = new System.Windows.Forms.CheckedListBox();
+            this.MonsterEffectsNullify = new System.Windows.Forms.CheckedListBox();
             this.panel134 = new System.Windows.Forms.Panel();
             this.panel32 = new System.Windows.Forms.Panel();
             this.label169 = new System.Windows.Forms.Label();
-            this.CheckboxMonsterElemNull = new System.Windows.Forms.CheckedListBox();
+            this.MonsterElementsNullify = new System.Windows.Forms.CheckedListBox();
             this.panel23 = new System.Windows.Forms.Panel();
             this.panel55 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.MonsterFlowerBonus = new System.Windows.Forms.ComboBox();
-            this.MonsterValFlowerOdds = new System.Windows.Forms.NumericUpDown();
+            this.MonsterFlowerOdds = new System.Windows.Forms.NumericUpDown();
             this.label34 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -119,7 +119,7 @@
             this.monsterName = new LAZYSHELL.ToolStripComboBox();
             this.monsterNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.TextBoxMonsterName = new System.Windows.Forms.ToolStripTextBox();
+            this.monsterNameText = new System.Windows.Forms.ToolStripTextBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -177,7 +177,7 @@
             this.panel23.SuspendLayout();
             this.panel55.SuspendLayout();
             this.panel12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MonsterValFlowerOdds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MonsterFlowerOdds)).BeginInit();
             this.panel25.SuspendLayout();
             this.panel29.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValAtk)).BeginInit();
@@ -310,7 +310,7 @@
             // panel133
             // 
             this.panel133.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel133.Controls.Add(this.TextboxMonsterPsychoMsg);
+            this.panel133.Controls.Add(this.MonsterPsychopath);
             this.panel133.Controls.Add(this.toolStrip3);
             this.panel133.Controls.Add(this.toolStrip2);
             this.panel133.Controls.Add(this.pictureBoxPsychopath);
@@ -323,16 +323,16 @@
             // 
             // TextboxMonsterPsychoMsg
             // 
-            this.TextboxMonsterPsychoMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.MonsterPsychopath.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextboxMonsterPsychoMsg.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TextboxMonsterPsychoMsg.Location = new System.Drawing.Point(0, 74);
-            this.TextboxMonsterPsychoMsg.Name = "TextboxMonsterPsychoMsg";
-            this.TextboxMonsterPsychoMsg.Size = new System.Drawing.Size(301, 132);
-            this.TextboxMonsterPsychoMsg.TabIndex = 35;
-            this.TextboxMonsterPsychoMsg.Text = "";
-            this.TextboxMonsterPsychoMsg.TextChanged += new System.EventHandler(this.TextboxMonsterPsychoMsg_TextChanged);
+            this.MonsterPsychopath.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MonsterPsychopath.Location = new System.Drawing.Point(0, 74);
+            this.MonsterPsychopath.Name = "TextboxMonsterPsychoMsg";
+            this.MonsterPsychopath.Size = new System.Drawing.Size(301, 132);
+            this.MonsterPsychopath.TabIndex = 35;
+            this.MonsterPsychopath.Text = "";
+            this.MonsterPsychopath.TextChanged += new System.EventHandler(this.MonsterPsychopath_TextChanged);
             // 
             // toolStrip3
             // 
@@ -515,7 +515,7 @@
             // 
             this.panel53.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel53.Controls.Add(this.label87);
-            this.panel53.Controls.Add(this.CheckboxMonsterProp);
+            this.panel53.Controls.Add(this.MonsterProperties);
             this.panel53.Location = new System.Drawing.Point(0, 0);
             this.panel53.Name = "panel53";
             this.panel53.Size = new System.Drawing.Size(128, 83);
@@ -536,18 +536,18 @@
             // 
             // CheckboxMonsterProp
             // 
-            this.CheckboxMonsterProp.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CheckboxMonsterProp.CheckOnClick = true;
-            this.CheckboxMonsterProp.Items.AddRange(new object[] {
+            this.MonsterProperties.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MonsterProperties.CheckOnClick = true;
+            this.MonsterProperties.Items.AddRange(new object[] {
             "Invincible",
             "Mortality Protection",
             "Disable Auto-Death",
             "Share palette"});
-            this.CheckboxMonsterProp.Location = new System.Drawing.Point(0, 19);
-            this.CheckboxMonsterProp.Name = "CheckboxMonsterProp";
-            this.CheckboxMonsterProp.Size = new System.Drawing.Size(128, 64);
-            this.CheckboxMonsterProp.TabIndex = 29;
-            this.CheckboxMonsterProp.SelectedIndexChanged += new System.EventHandler(this.CheckboxMonsterProp_SelectedIndexChanged);
+            this.MonsterProperties.Location = new System.Drawing.Point(0, 19);
+            this.MonsterProperties.Name = "CheckboxMonsterProp";
+            this.MonsterProperties.Size = new System.Drawing.Size(128, 64);
+            this.MonsterProperties.TabIndex = 29;
+            this.MonsterProperties.SelectedIndexChanged += new System.EventHandler(this.MonsterProperties_SelectedIndexChanged);
             // 
             // panel136
             // 
@@ -563,7 +563,7 @@
             // 
             this.panel31.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel31.Controls.Add(this.label96);
-            this.panel31.Controls.Add(this.CheckboxMonsterElemWeak);
+            this.panel31.Controls.Add(this.MonsterElementsWeakness);
             this.panel31.Location = new System.Drawing.Point(0, 0);
             this.panel31.Name = "panel31";
             this.panel31.Size = new System.Drawing.Size(128, 67);
@@ -584,20 +584,20 @@
             // 
             // CheckboxMonsterElemWeak
             // 
-            this.CheckboxMonsterElemWeak.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CheckboxMonsterElemWeak.CheckOnClick = true;
-            this.CheckboxMonsterElemWeak.ColumnWidth = 60;
-            this.CheckboxMonsterElemWeak.Items.AddRange(new object[] {
+            this.MonsterElementsWeakness.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MonsterElementsWeakness.CheckOnClick = true;
+            this.MonsterElementsWeakness.ColumnWidth = 60;
+            this.MonsterElementsWeakness.Items.AddRange(new object[] {
             "Ice",
             "Fire",
             "Thunder",
             "Jump"});
-            this.CheckboxMonsterElemWeak.Location = new System.Drawing.Point(0, 19);
-            this.CheckboxMonsterElemWeak.MultiColumn = true;
-            this.CheckboxMonsterElemWeak.Name = "CheckboxMonsterElemWeak";
-            this.CheckboxMonsterElemWeak.Size = new System.Drawing.Size(128, 48);
-            this.CheckboxMonsterElemWeak.TabIndex = 27;
-            this.CheckboxMonsterElemWeak.SelectedIndexChanged += new System.EventHandler(this.CheckboxMonsterElemWeak_SelectedIndexChanged);
+            this.MonsterElementsWeakness.Location = new System.Drawing.Point(0, 19);
+            this.MonsterElementsWeakness.MultiColumn = true;
+            this.MonsterElementsWeakness.Name = "CheckboxMonsterElemWeak";
+            this.MonsterElementsWeakness.Size = new System.Drawing.Size(128, 48);
+            this.MonsterElementsWeakness.TabIndex = 27;
+            this.MonsterElementsWeakness.SelectedIndexChanged += new System.EventHandler(this.MonsterElementsWeakness_SelectedIndexChanged);
             // 
             // panel135
             // 
@@ -613,7 +613,7 @@
             // 
             this.panel35.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel35.Controls.Add(this.label182);
-            this.panel35.Controls.Add(this.CheckboxMonsterEfecNull);
+            this.panel35.Controls.Add(this.MonsterEffectsNullify);
             this.panel35.Location = new System.Drawing.Point(0, 0);
             this.panel35.Name = "panel35";
             this.panel35.Size = new System.Drawing.Size(128, 131);
@@ -634,10 +634,10 @@
             // 
             // CheckboxMonsterEfecNull
             // 
-            this.CheckboxMonsterEfecNull.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CheckboxMonsterEfecNull.CheckOnClick = true;
-            this.CheckboxMonsterEfecNull.ColumnWidth = 96;
-            this.CheckboxMonsterEfecNull.Items.AddRange(new object[] {
+            this.MonsterEffectsNullify.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MonsterEffectsNullify.CheckOnClick = true;
+            this.MonsterEffectsNullify.ColumnWidth = 96;
+            this.MonsterEffectsNullify.Items.AddRange(new object[] {
             "Mute",
             "Sleep",
             "Poison",
@@ -645,12 +645,12 @@
             "Mushroom",
             "Scarecrow",
             "Invincibility"});
-            this.CheckboxMonsterEfecNull.Location = new System.Drawing.Point(0, 19);
-            this.CheckboxMonsterEfecNull.MultiColumn = true;
-            this.CheckboxMonsterEfecNull.Name = "CheckboxMonsterEfecNull";
-            this.CheckboxMonsterEfecNull.Size = new System.Drawing.Size(128, 112);
-            this.CheckboxMonsterEfecNull.TabIndex = 30;
-            this.CheckboxMonsterEfecNull.SelectedIndexChanged += new System.EventHandler(this.CheckboxMonsterEfecNull_SelectedIndexChanged);
+            this.MonsterEffectsNullify.Location = new System.Drawing.Point(0, 19);
+            this.MonsterEffectsNullify.MultiColumn = true;
+            this.MonsterEffectsNullify.Name = "CheckboxMonsterEfecNull";
+            this.MonsterEffectsNullify.Size = new System.Drawing.Size(128, 112);
+            this.MonsterEffectsNullify.TabIndex = 30;
+            this.MonsterEffectsNullify.SelectedIndexChanged += new System.EventHandler(this.MonsterEffectsNullify_SelectedIndexChanged);
             // 
             // panel134
             // 
@@ -666,7 +666,7 @@
             // 
             this.panel32.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel32.Controls.Add(this.label169);
-            this.panel32.Controls.Add(this.CheckboxMonsterElemNull);
+            this.panel32.Controls.Add(this.MonsterElementsNullify);
             this.panel32.Location = new System.Drawing.Point(0, 0);
             this.panel32.Name = "panel32";
             this.panel32.Size = new System.Drawing.Size(128, 67);
@@ -687,20 +687,20 @@
             // 
             // CheckboxMonsterElemNull
             // 
-            this.CheckboxMonsterElemNull.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CheckboxMonsterElemNull.CheckOnClick = true;
-            this.CheckboxMonsterElemNull.ColumnWidth = 60;
-            this.CheckboxMonsterElemNull.Items.AddRange(new object[] {
+            this.MonsterElementsNullify.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MonsterElementsNullify.CheckOnClick = true;
+            this.MonsterElementsNullify.ColumnWidth = 60;
+            this.MonsterElementsNullify.Items.AddRange(new object[] {
             "Ice",
             "Fire",
             "Thunder",
             "Jump"});
-            this.CheckboxMonsterElemNull.Location = new System.Drawing.Point(0, 19);
-            this.CheckboxMonsterElemNull.MultiColumn = true;
-            this.CheckboxMonsterElemNull.Name = "CheckboxMonsterElemNull";
-            this.CheckboxMonsterElemNull.Size = new System.Drawing.Size(128, 48);
-            this.CheckboxMonsterElemNull.TabIndex = 28;
-            this.CheckboxMonsterElemNull.SelectedIndexChanged += new System.EventHandler(this.CheckboxMonsterElemNull_SelectedIndexChanged);
+            this.MonsterElementsNullify.Location = new System.Drawing.Point(0, 19);
+            this.MonsterElementsNullify.MultiColumn = true;
+            this.MonsterElementsNullify.Name = "CheckboxMonsterElemNull";
+            this.MonsterElementsNullify.Size = new System.Drawing.Size(128, 48);
+            this.MonsterElementsNullify.TabIndex = 28;
+            this.MonsterElementsNullify.SelectedIndexChanged += new System.EventHandler(this.MonsterElementsNullify_SelectedIndexChanged);
             // 
             // panel23
             // 
@@ -716,7 +716,7 @@
             // 
             this.panel55.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel55.Controls.Add(this.panel12);
-            this.panel55.Controls.Add(this.MonsterValFlowerOdds);
+            this.panel55.Controls.Add(this.MonsterFlowerOdds);
             this.panel55.Controls.Add(this.label34);
             this.panel55.Controls.Add(this.label30);
             this.panel55.Controls.Add(this.label1);
@@ -754,19 +754,19 @@
             // 
             // MonsterValFlowerOdds
             // 
-            this.MonsterValFlowerOdds.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.MonsterValFlowerOdds.Increment = 10;
-            this.MonsterValFlowerOdds.Location = new System.Drawing.Point(62, 36);
-            this.MonsterValFlowerOdds.Maximum = new decimal(new int[] {
+            this.MonsterFlowerOdds.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MonsterFlowerOdds.Increment = 10;
+            this.MonsterFlowerOdds.Location = new System.Drawing.Point(62, 36);
+            this.MonsterFlowerOdds.Maximum = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.MonsterValFlowerOdds.Name = "MonsterValFlowerOdds";
-            this.MonsterValFlowerOdds.Size = new System.Drawing.Size(66, 17);
-            this.MonsterValFlowerOdds.TabIndex = 4;
-            this.MonsterValFlowerOdds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.MonsterValFlowerOdds.ValueChanged += new System.EventHandler(this.MonsterValFlowerOdds_ValueChanged);
+            this.MonsterFlowerOdds.Name = "MonsterValFlowerOdds";
+            this.MonsterFlowerOdds.Size = new System.Drawing.Size(66, 17);
+            this.MonsterFlowerOdds.TabIndex = 4;
+            this.MonsterFlowerOdds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.MonsterFlowerOdds.ValueChanged += new System.EventHandler(this.MonsterFlowerOdds_ValueChanged);
             // 
             // label34
             // 
@@ -1276,7 +1276,7 @@
             this.monsterName,
             this.monsterNum,
             this.toolStripSeparator3,
-            this.TextBoxMonsterName});
+            this.monsterNameText});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -1337,10 +1337,10 @@
             // 
             // TextBoxMonsterName
             // 
-            this.TextBoxMonsterName.MaxLength = 13;
-            this.TextBoxMonsterName.Name = "TextBoxMonsterName";
-            this.TextBoxMonsterName.Size = new System.Drawing.Size(190, 25);
-            this.TextBoxMonsterName.TextChanged += new System.EventHandler(this.TextBoxMonsterName_TextChanged);
+            this.monsterNameText.MaxLength = 13;
+            this.monsterNameText.Name = "TextBoxMonsterName";
+            this.monsterNameText.Size = new System.Drawing.Size(190, 25);
+            this.monsterNameText.TextChanged += new System.EventHandler(this.monsterNameText_TextChanged);
             // 
             // toolStrip4
             // 
@@ -1858,7 +1858,7 @@
             this.panel23.ResumeLayout(false);
             this.panel55.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.MonsterValFlowerOdds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MonsterFlowerOdds)).EndInit();
             this.panel25.ResumeLayout(false);
             this.panel29.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValAtk)).EndInit();
@@ -1902,26 +1902,26 @@
         private System.Windows.Forms.Panel panel133;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.PictureBox pictureBoxPsychopath;
-        private System.Windows.Forms.RichTextBox TextboxMonsterPsychoMsg;
+        private System.Windows.Forms.RichTextBox MonsterPsychopath;
         private System.Windows.Forms.Panel panel137;
         private System.Windows.Forms.Panel panel53;
         private System.Windows.Forms.Label label87;
-        private System.Windows.Forms.CheckedListBox CheckboxMonsterProp;
+        private System.Windows.Forms.CheckedListBox MonsterProperties;
         private System.Windows.Forms.Panel panel136;
         private System.Windows.Forms.Panel panel31;
         private System.Windows.Forms.Label label96;
-        private System.Windows.Forms.CheckedListBox CheckboxMonsterElemWeak;
+        private System.Windows.Forms.CheckedListBox MonsterElementsWeakness;
         private System.Windows.Forms.Panel panel135;
         private System.Windows.Forms.Panel panel35;
         private System.Windows.Forms.Label label182;
-        private System.Windows.Forms.CheckedListBox CheckboxMonsterEfecNull;
+        private System.Windows.Forms.CheckedListBox MonsterEffectsNullify;
         private System.Windows.Forms.Panel panel134;
         private System.Windows.Forms.Panel panel32;
         private System.Windows.Forms.Label label169;
-        private System.Windows.Forms.CheckedListBox CheckboxMonsterElemNull;
+        private System.Windows.Forms.CheckedListBox MonsterElementsNullify;
         private System.Windows.Forms.Panel panel23;
         private System.Windows.Forms.Panel panel55;
-        private System.Windows.Forms.NumericUpDown MonsterValFlowerOdds;
+        private System.Windows.Forms.NumericUpDown MonsterFlowerOdds;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label1;
@@ -1975,7 +1975,7 @@
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private LAZYSHELL.ToolStripComboBox monsterName;
-        private System.Windows.Forms.ToolStripTextBox TextBoxMonsterName;
+        private System.Windows.Forms.ToolStripTextBox monsterNameText;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton pageUp;
         private System.Windows.Forms.ToolStripButton pageDown;

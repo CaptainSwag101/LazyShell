@@ -43,8 +43,11 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
             //
             new History(this);
-            packsEditor.Index = Settings.Default.LastFormationPack;
-            formationsEditor.Index = Settings.Default.LastFormation;
+            if (settings.RememberLastIndex)
+            {
+                packsEditor.Index = Settings.Default.LastFormationPack;
+                formationsEditor.Index = Settings.Default.LastFormation;
+            }
             checksum = Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics);
         }
         // functions

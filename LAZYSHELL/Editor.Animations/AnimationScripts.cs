@@ -91,8 +91,14 @@ namespace LAZYSHELL
             InitializeAnimationScriptsEditor();
             new History(this);
             //
-            animationCategory.SelectedIndex = settings.LastAnimationCat;
-            animationNum.Value = Math.Min((int)animationNum.Maximum, settings.LastAnimation);
+            if (settings.RememberLastIndex)
+            {
+                updatingAnimations = true;
+                animationCategory.SelectedIndex = settings.LastAnimationCat;
+                updatingAnimations = false;
+                RefreshAnimationScriptsEditor();
+                animationNum.Value = Math.Min((int)animationNum.Maximum, settings.LastAnimation);
+            }
             checksum = Do.GenerateChecksum(animationBank, battleBank);
         }
         #region Methods

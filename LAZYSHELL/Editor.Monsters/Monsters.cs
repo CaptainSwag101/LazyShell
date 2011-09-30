@@ -63,7 +63,8 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
             new History(this);
             //
-            Index = settings.LastMonster;
+            if (settings.RememberLastIndex)
+                Index = settings.LastMonster;
             checksum = Do.GenerateChecksum(monsters);
         }
         private void InitializeStrings()
@@ -86,7 +87,7 @@ namespace LAZYSHELL
                 Cursor.Current = Cursors.WaitCursor;
                 updatingMonsters = true;
                 this.monsterName.SelectedIndex = Model.MonsterNames.GetIndexFromNum(Index);
-                this.TextBoxMonsterName.Text = Do.RawToASCII(monster.Name, settings.KeystrokesMenu);
+                this.monsterNameText.Text = Do.RawToASCII(monster.Name, settings.KeystrokesMenu);
                 this.MonsterValHP.Value = monster.HP;
                 this.MonsterValSpeed.Value = monster.Speed;
                 this.MonsterValAtk.Value = monster.Attack;
@@ -99,27 +100,28 @@ namespace LAZYSHELL
                 this.MonsterValExp.Value = monster.Experience;
                 this.MonsterValCoins.Value = monster.Coins;
                 this.MonsterValElevation.Value = monster.Elevation;
-                this.MonsterValFlowerOdds.Value = monster.FlowerOdds * 10;
-                this.TextboxMonsterPsychoMsg.Text = monster.GetPsychoMsg(textCodeFormat);
-                this.CheckboxMonsterElemNull.SetItemChecked(0, monster.ElemIceNull);
-                this.CheckboxMonsterElemNull.SetItemChecked(1, monster.ElemFireNull);
-                this.CheckboxMonsterElemNull.SetItemChecked(2, monster.ElemThunderNull);
-                this.CheckboxMonsterElemNull.SetItemChecked(3, monster.ElemJumpNull);
-                this.CheckboxMonsterProp.SetItemChecked(0, monster.Invincible);
-                this.CheckboxMonsterProp.SetItemChecked(1, monster.MortalityProtection);
-                this.CheckboxMonsterProp.SetItemChecked(2, monster.DisableAutoDeath);
-                this.CheckboxMonsterProp.SetItemChecked(3, monster.Palette2bpp);
-                this.CheckboxMonsterEfecNull.SetItemChecked(0, monster.EffectMuteNull);
-                this.CheckboxMonsterEfecNull.SetItemChecked(1, monster.EffectSleepNull);
-                this.CheckboxMonsterEfecNull.SetItemChecked(2, monster.EffectPoisonNull);
-                this.CheckboxMonsterEfecNull.SetItemChecked(3, monster.EffectFearNull);
-                this.CheckboxMonsterEfecNull.SetItemChecked(4, monster.EffectMushroomNull);
-                this.CheckboxMonsterEfecNull.SetItemChecked(5, monster.EffectScarecrowNull);
-                this.CheckboxMonsterEfecNull.SetItemChecked(6, monster.EffectInvincibleNull);
-                this.CheckboxMonsterElemWeak.SetItemChecked(0, monster.ElemIceWeak);
-                this.CheckboxMonsterElemWeak.SetItemChecked(1, monster.ElemFireWeak);
-                this.CheckboxMonsterElemWeak.SetItemChecked(2, monster.ElemThunderWeak);
-                this.CheckboxMonsterElemWeak.SetItemChecked(3, monster.ElemJumpWeak);
+                this.MonsterFlowerOdds.Value = monster.FlowerOdds * 10;
+                this.MonsterPsychopath.Text = monster.GetPsychoMsg(textCodeFormat);
+                this.MonsterPsychopath_TextChanged(null, null);
+                this.MonsterElementsNullify.SetItemChecked(0, monster.ElemIceNull);
+                this.MonsterElementsNullify.SetItemChecked(1, monster.ElemFireNull);
+                this.MonsterElementsNullify.SetItemChecked(2, monster.ElemThunderNull);
+                this.MonsterElementsNullify.SetItemChecked(3, monster.ElemJumpNull);
+                this.MonsterProperties.SetItemChecked(0, monster.Invincible);
+                this.MonsterProperties.SetItemChecked(1, monster.MortalityProtection);
+                this.MonsterProperties.SetItemChecked(2, monster.DisableAutoDeath);
+                this.MonsterProperties.SetItemChecked(3, monster.Palette2bpp);
+                this.MonsterEffectsNullify.SetItemChecked(0, monster.EffectMuteNull);
+                this.MonsterEffectsNullify.SetItemChecked(1, monster.EffectSleepNull);
+                this.MonsterEffectsNullify.SetItemChecked(2, monster.EffectPoisonNull);
+                this.MonsterEffectsNullify.SetItemChecked(3, monster.EffectFearNull);
+                this.MonsterEffectsNullify.SetItemChecked(4, monster.EffectMushroomNull);
+                this.MonsterEffectsNullify.SetItemChecked(5, monster.EffectScarecrowNull);
+                this.MonsterEffectsNullify.SetItemChecked(6, monster.EffectInvincibleNull);
+                this.MonsterElementsWeakness.SetItemChecked(0, monster.ElemIceWeak);
+                this.MonsterElementsWeakness.SetItemChecked(1, monster.ElemFireWeak);
+                this.MonsterElementsWeakness.SetItemChecked(2, monster.ElemThunderWeak);
+                this.MonsterElementsWeakness.SetItemChecked(3, monster.ElemJumpWeak);
                 this.MonsterFlowerBonus.SelectedIndex = monster.FlowerBonus;
                 this.MonsterMorphSuccess.SelectedIndex = monster.MorphSuccessRate;
                 this.MonsterCoinSize.SelectedIndex = monster.CoinSize;
@@ -139,7 +141,7 @@ namespace LAZYSHELL
         {
             pictureBoxPsychopath.BackColor = Color.FromArgb(fontPaletteDialogue[0]);
             pictureBoxPsychopath.Invalidate();
-            TextboxMonsterPsychoMsg_TextChanged(null, null);
+            MonsterPsychopath_TextChanged(null, null);
         }
         private void CalculateFreeSpace()
         {
@@ -161,21 +163,21 @@ namespace LAZYSHELL
         }
         private void InsertIntoText(string toInsert)
         {
-            char[] newText = new char[TextboxMonsterPsychoMsg.Text.Length + toInsert.Length];
+            char[] newText = new char[MonsterPsychopath.Text.Length + toInsert.Length];
 
-            TextboxMonsterPsychoMsg.Text.CopyTo(0, newText, 0, TextboxMonsterPsychoMsg.SelectionStart);
-            toInsert.CopyTo(0, newText, TextboxMonsterPsychoMsg.SelectionStart, toInsert.Length);
-            TextboxMonsterPsychoMsg.Text.CopyTo(TextboxMonsterPsychoMsg.SelectionStart, newText, TextboxMonsterPsychoMsg.SelectionStart + toInsert.Length, this.TextboxMonsterPsychoMsg.Text.Length - this.TextboxMonsterPsychoMsg.SelectionStart);
+            MonsterPsychopath.Text.CopyTo(0, newText, 0, MonsterPsychopath.SelectionStart);
+            toInsert.CopyTo(0, newText, MonsterPsychopath.SelectionStart, toInsert.Length);
+            MonsterPsychopath.Text.CopyTo(MonsterPsychopath.SelectionStart, newText, MonsterPsychopath.SelectionStart + toInsert.Length, this.MonsterPsychopath.Text.Length - this.MonsterPsychopath.SelectionStart);
             if (textCodeFormat)
-                monster.CaretPositionSymbol = this.TextboxMonsterPsychoMsg.SelectionStart + toInsert.Length;
+                monster.CaretPositionSymbol = this.MonsterPsychopath.SelectionStart + toInsert.Length;
             else
-                monster.CaretPositionNotSymbol = this.TextboxMonsterPsychoMsg.SelectionStart + toInsert.Length;
+                monster.CaretPositionNotSymbol = this.MonsterPsychopath.SelectionStart + toInsert.Length;
             monster.SetPsychoMsg(new string(newText), textCodeFormat);
-            this.TextboxMonsterPsychoMsg.Text = monster.GetPsychoMsg(textCodeFormat);
+            this.MonsterPsychopath.Text = monster.GetPsychoMsg(textCodeFormat);
             if (textCodeFormat)
-                this.TextboxMonsterPsychoMsg.SelectionStart = monster.CaretPositionSymbol;
+                this.MonsterPsychopath.SelectionStart = monster.CaretPositionSymbol;
             else
-                this.TextboxMonsterPsychoMsg.SelectionStart = monster.CaretPositionNotSymbol;
+                this.MonsterPsychopath.SelectionStart = monster.CaretPositionNotSymbol;
         }
         private bool FreeSpace(bool message)
         {
@@ -192,7 +194,7 @@ namespace LAZYSHELL
             this.monsterNum.ToolTipText =
                 "Set the monster to edit by #. These are all exclusively in-\n" +
                 "battle properties.";
-            this.TextBoxMonsterName.ToolTipText =
+            this.monsterNameText.ToolTipText =
                 "The monster\'s displayed name when targetted.";
 
             toolTip1.SetToolTip(this.MonsterValHP,
@@ -284,22 +286,22 @@ namespace LAZYSHELL
                 "The number of 16-pixel units a monster is raised above the\n" +
                 "ground.");
 
-            toolTip1.SetToolTip(this.CheckboxMonsterEfecNull,
+            toolTip1.SetToolTip(this.MonsterEffectsNullify,
                 "The effects that will have no effect if an effect-based\n" +
                 "attack is used on the monster, eg. Poison Gas (Poison),\n" +
                 "Terrorize (Fear), Bad Mushroom (Poison), etc.");
-            toolTip1.SetToolTip(this.CheckboxMonsterElemWeak,
+            toolTip1.SetToolTip(this.MonsterElementsWeakness,
                 "The elements that will double the damage done to the\n" +
                 "monster by an element-based attack. These refer to magic-\n" +
                 "based attacks or items, such as Snowy (Ice) or Fire Bomb\n" +
                 "(Fire), eg. Fire Bomb will normally do 120 damage, but if\n" +
                 "used on a monster with a weakness for Fire it will double it\n" +
                 "to 240.");
-            toolTip1.SetToolTip(this.CheckboxMonsterElemNull,
+            toolTip1.SetToolTip(this.MonsterElementsNullify,
                 "The elements that will have no effect if an element-based\n" +
                 "attack is used on the monster, eg. Ice Bomb and Snowy will\n" +
                 "have no effect on a monster with a nullification of Ice.");
-            toolTip1.SetToolTip(this.CheckboxMonsterProp,
+            toolTip1.SetToolTip(this.MonsterProperties,
                 "\"Invincible\" will nullify all damage done to the monster, ie.\n" +
                 "all attacks, spells and items used on the monster will yield 0\n" +
                 "damage.\n\n" +
@@ -314,13 +316,13 @@ namespace LAZYSHELL
             toolTip1.SetToolTip(this.MonsterFlowerBonus,
                 "The Flower Bonus rewarded when the monster is defeated,\n" +
                 "based on the odds.");
-            toolTip1.SetToolTip(this.MonsterValFlowerOdds,
+            toolTip1.SetToolTip(this.MonsterFlowerOdds,
                 "The ratio to 15 that the Flower Bonus will be rewarded\n" +
                 "when the monster is defeated. A value of 0 completely\n" +
                 "disables the flower bonus and a value of 15 indicates a\n" +
                 "100% success rate.");
 
-            toolTip1.SetToolTip(this.TextboxMonsterPsychoMsg,
+            toolTip1.SetToolTip(this.MonsterPsychopath,
                 "The message displayed when the Psychopath spell is used\n" +
                 "on the monster.");
         }
@@ -389,11 +391,11 @@ namespace LAZYSHELL
         {
             Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBackground_);
         }
-        private void TextBoxMonsterName_TextChanged(object sender, EventArgs e)
+        private void monsterNameText_TextChanged(object sender, EventArgs e)
         {
-            if (Model.MonsterNames.GetNameByNum(monster.Index).CompareTo(this.TextBoxMonsterName.Text) != 0)
+            if (Model.MonsterNames.GetNameByNum(monster.Index).CompareTo(this.monsterNameText.Text) != 0)
             {
-                monster.Name = Do.ASCIIToRaw(this.TextBoxMonsterName.Text, settings.KeystrokesMenu, 13);
+                monster.Name = Do.ASCIIToRaw(this.monsterNameText.Text, settings.KeystrokesMenu, 13);
 
                 Model.MonsterNames.SwapName(
                     monster.Index,
@@ -499,65 +501,58 @@ namespace LAZYSHELL
             monster.Elevation = (byte)MonsterValElevation.Value;
         }
         // effects, elements
-        private void CheckboxMonsterEfecNull_SelectedIndexChanged(object sender, EventArgs e)
+        private void MonsterEffectsNullify_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.EffectMuteNull = CheckboxMonsterEfecNull.GetItemChecked(0);
-            monster.EffectSleepNull = CheckboxMonsterEfecNull.GetItemChecked(1);
-            monster.EffectPoisonNull = CheckboxMonsterEfecNull.GetItemChecked(2);
-            monster.EffectFearNull = CheckboxMonsterEfecNull.GetItemChecked(3);
-            monster.EffectMushroomNull = CheckboxMonsterEfecNull.GetItemChecked(4);
-            monster.EffectScarecrowNull = CheckboxMonsterEfecNull.GetItemChecked(5);
-            monster.EffectInvincibleNull = CheckboxMonsterEfecNull.GetItemChecked(6);
+            monster.EffectMuteNull = MonsterEffectsNullify.GetItemChecked(0);
+            monster.EffectSleepNull = MonsterEffectsNullify.GetItemChecked(1);
+            monster.EffectPoisonNull = MonsterEffectsNullify.GetItemChecked(2);
+            monster.EffectFearNull = MonsterEffectsNullify.GetItemChecked(3);
+            monster.EffectMushroomNull = MonsterEffectsNullify.GetItemChecked(4);
+            monster.EffectScarecrowNull = MonsterEffectsNullify.GetItemChecked(5);
+            monster.EffectInvincibleNull = MonsterEffectsNullify.GetItemChecked(6);
         }
-        private void CheckboxMonsterElemWeak_SelectedIndexChanged(object sender, EventArgs e)
+        private void MonsterElementsWeakness_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.ElemIceWeak = CheckboxMonsterElemWeak.GetItemChecked(0);
-            monster.ElemFireWeak = CheckboxMonsterElemWeak.GetItemChecked(1);
-            monster.ElemThunderWeak = CheckboxMonsterElemWeak.GetItemChecked(2);
-            monster.ElemJumpWeak = CheckboxMonsterElemWeak.GetItemChecked(3);
+            monster.ElemIceWeak = MonsterElementsWeakness.GetItemChecked(0);
+            monster.ElemFireWeak = MonsterElementsWeakness.GetItemChecked(1);
+            monster.ElemThunderWeak = MonsterElementsWeakness.GetItemChecked(2);
+            monster.ElemJumpWeak = MonsterElementsWeakness.GetItemChecked(3);
         }
-        private void CheckboxMonsterElemNull_SelectedIndexChanged(object sender, EventArgs e)
+        private void MonsterElementsNullify_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.ElemIceNull = CheckboxMonsterElemNull.GetItemChecked(0);
-            monster.ElemFireNull = CheckboxMonsterElemNull.GetItemChecked(1);
-            monster.ElemThunderNull = CheckboxMonsterElemNull.GetItemChecked(2);
-            monster.ElemJumpNull = CheckboxMonsterElemNull.GetItemChecked(3);
+            monster.ElemIceNull = MonsterElementsNullify.GetItemChecked(0);
+            monster.ElemFireNull = MonsterElementsNullify.GetItemChecked(1);
+            monster.ElemThunderNull = MonsterElementsNullify.GetItemChecked(2);
+            monster.ElemJumpNull = MonsterElementsNullify.GetItemChecked(3);
         }
-        private void CheckboxMonsterProp_SelectedIndexChanged(object sender, EventArgs e)
+        private void MonsterProperties_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.Invincible = CheckboxMonsterProp.GetItemChecked(0);
-            monster.MortalityProtection = CheckboxMonsterProp.GetItemChecked(1);
-            monster.DisableAutoDeath = CheckboxMonsterProp.GetItemChecked(2);
-            monster.Palette2bpp = CheckboxMonsterProp.GetItemChecked(3);
+            monster.Invincible = MonsterProperties.GetItemChecked(0);
+            monster.MortalityProtection = MonsterProperties.GetItemChecked(1);
+            monster.DisableAutoDeath = MonsterProperties.GetItemChecked(2);
+            monster.Palette2bpp = MonsterProperties.GetItemChecked(3);
         }
         private void MonsterFlowerBonus_SelectedIndexChanged(object sender, EventArgs e)
         {
             monster.FlowerBonus = (byte)MonsterFlowerBonus.SelectedIndex;
         }
-        private void MonsterValFlowerOdds_ValueChanged(object sender, EventArgs e)
+        private void MonsterFlowerOdds_ValueChanged(object sender, EventArgs e)
         {
-            if (MonsterValFlowerOdds.Value % 10 != 0)
-                MonsterValFlowerOdds.Value = (int)MonsterValFlowerOdds.Value / 10 * 10;
+            if (MonsterFlowerOdds.Value % 10 != 0)
+                MonsterFlowerOdds.Value = (int)MonsterFlowerOdds.Value / 10 * 10;
             else
-                monster.FlowerOdds = (byte)(MonsterValFlowerOdds.Value / 10);
+                monster.FlowerOdds = (byte)(MonsterFlowerOdds.Value / 10);
         }
         // psychopath dialogue
-        private void pictureBoxPsychopath_Paint(object sender, PaintEventArgs e)
+        private void MonsterPsychopath_TextChanged(object sender, EventArgs e)
         {
-            if (psychopathBGImage != null)
-                e.Graphics.DrawImage(psychopathBGImage, 0, 0);
-            if (psychopathTextImage != null)
-                e.Graphics.DrawImage(psychopathTextImage, 0, 0);
-        }
-        private void TextboxMonsterPsychoMsg_TextChanged(object sender, EventArgs e)
-        {
-            char[] text = TextboxMonsterPsychoMsg.Text.ToCharArray();
+            char[] text = MonsterPsychopath.Text.ToCharArray();
             char[] swap;
             for (int i = 0; i < text.Length; i++)
             {
                 if (text[i] == '\n')
                 {
-                    int tempSel = TextboxMonsterPsychoMsg.SelectionStart;
+                    int tempSel = MonsterPsychopath.SelectionStart;
                     swap = new char[text.Length + 2];
                     for (int x = 0; x < i; x++)
                         swap[x] = text[x];
@@ -566,22 +561,22 @@ namespace LAZYSHELL
                     swap[i + 2] = ']';
                     for (int x = i + 3; x < swap.Length; x++)
                         swap[x] = text[x - 2];
-                    TextboxMonsterPsychoMsg.Text = new string(swap);
-                    text = TextboxMonsterPsychoMsg.Text.ToCharArray();
+                    MonsterPsychopath.Text = new string(swap);
+                    text = MonsterPsychopath.Text.ToCharArray();
                     i += 2;
-                    TextboxMonsterPsychoMsg.SelectionStart = tempSel + 2;
+                    MonsterPsychopath.SelectionStart = tempSel + 2;
                 }
             }
 
-            bool flag = textHelper.VerifyCorrectSymbols(this.TextboxMonsterPsychoMsg.Text.ToCharArray(), textCodeFormat);
+            bool flag = textHelper.VerifyCorrectSymbols(this.MonsterPsychopath.Text.ToCharArray(), textCodeFormat);
             if (flag)
             {
-                this.TextboxMonsterPsychoMsg.BackColor = SystemColors.Window;
-                monster.SetPsychoMsg(this.TextboxMonsterPsychoMsg.Text, textCodeFormat);
+                this.MonsterPsychopath.BackColor = SystemColors.Window;
+                monster.SetPsychoMsg(this.MonsterPsychopath.Text, textCodeFormat);
 
                 if (!monster.PsychoMsgError)
                 {
-                    monster.SetPsychoMsg(TextboxMonsterPsychoMsg.Text, textCodeFormat);
+                    monster.SetPsychoMsg(MonsterPsychopath.Text, textCodeFormat);
                     int[] pixels = battleDialoguePreview.GetPreview(fontDialogue, fontPaletteDialogue, monster.RawPsychoMsg, false);
 
                     psychopathTextImage = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
@@ -589,22 +584,29 @@ namespace LAZYSHELL
                 }
             }
             if (!flag || monster.PsychoMsgError)
-                this.TextboxMonsterPsychoMsg.BackColor = Color.Red;
+                this.MonsterPsychopath.BackColor = Color.Red;
             CalculateFreeSpace();
+        }
+        private void pictureBoxPsychopath_Paint(object sender, PaintEventArgs e)
+        {
+            if (psychopathBGImage != null)
+                e.Graphics.DrawImage(psychopathBGImage, 0, 0);
+            if (psychopathTextImage != null)
+                e.Graphics.DrawImage(psychopathTextImage, 0, 0);
         }
         private void pageUp_Click(object sender, EventArgs e)
         {
             battleDialoguePreview.PageUp();
-            TextboxMonsterPsychoMsg_TextChanged(null, null);
+            MonsterPsychopath_TextChanged(null, null);
         }
         private void pageDown_Click(object sender, EventArgs e)
         {
             battleDialoguePreview.PageDown(monster.RawPsychoMsg.Length);
-            TextboxMonsterPsychoMsg_TextChanged(null, null);
+            MonsterPsychopath_TextChanged(null, null);
         }
         private void byteOrTextView_Click(object sender, EventArgs e)
         {
-            TextboxMonsterPsychoMsg.Text = monster.GetPsychoMsg(textCodeFormat);
+            MonsterPsychopath.Text = monster.GetPsychoMsg(textCodeFormat);
         }
         private void newLine_Click(object sender, EventArgs e)
         {

@@ -759,5 +759,17 @@ namespace LAZYSHELL.Properties {
                 this["LastAudioSample"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RememberLastIndex {
+            get {
+                return ((bool)(this["RememberLastIndex"]));
+            }
+            set {
+                this["RememberLastIndex"] = value;
+            }
+        }
     }
 }

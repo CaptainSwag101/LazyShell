@@ -174,7 +174,9 @@ namespace LAZYSHELL
             if (!IsSortedAlpha())
                 SortAlpha();
 
-            return nums[index];
+            if (index < nums.Length)
+                return nums[index];
+            return 0;
         }
         public void SwapName(int num, string name)
         {

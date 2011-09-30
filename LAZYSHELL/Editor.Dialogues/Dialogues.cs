@@ -15,8 +15,9 @@ namespace LAZYSHELL
     public partial class Dialogues : Form
     {
         #region Variables
-        
+
         public long checksum;
+        private Settings settings = Settings.Default;
         // main
         private delegate void Function(RichTextBox richTextBox, StringComparison stringComparison, bool matchWholeWord, bool replaceAll, string replaceWith);
         // accessors
@@ -93,7 +94,8 @@ namespace LAZYSHELL
             fonts.BringToFront();
             // set controls
             updatingDialogue = true;
-            index = Settings.Default.LastDialogue;
+            if (settings.RememberLastIndex)
+                index = settings.LastDialogue;
             variables.SelectedIndex = 0;
             RefreshDialogueEditor();
             CalculateFreeTableSpace();
@@ -102,7 +104,7 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, showDecHex, helpTips);
             //
             new History(this);
-            checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset, 
+            checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
                 fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu);
         }
         // tooltips
@@ -621,7 +623,7 @@ namespace LAZYSHELL
         // main
         private void Dialogues_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset, 
+            if (Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
                 fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu) == checksum)
                 goto Close;
             DialogResult result = MessageBox.Show(
@@ -669,7 +671,7 @@ namespace LAZYSHELL
 
             RefreshDialogueEditor();
             SetTextImage();
-            Settings.Default.LastDialogue = index;
+            settings.LastDialogue = index;
         }
         private void textView_Click(object sender, EventArgs e)
         {

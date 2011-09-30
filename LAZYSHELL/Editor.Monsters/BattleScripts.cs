@@ -673,6 +673,8 @@ namespace LAZYSHELL
         }
         private void BattleScriptTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            Do.AddHistory(this, index, e.Node, "NodeMouseClick", true);
+            //
             BattleScriptTree.SelectedNode = e.Node;
             if (e.Button != MouseButtons.Right) return;
             goToToolStripMenuItem.Click -= goToDialogue_Click;
@@ -907,7 +909,7 @@ namespace LAZYSHELL
                     break;
                 case 0xEF:
                 case 0xF0:
-                    if (e.Index >= 128)
+                    if (e.Index < 0 || e.Index >= 128)
                         break;
                     Do.DrawName(
                         sender, e, new BattleDialoguePreview(), Model.SpellNames,

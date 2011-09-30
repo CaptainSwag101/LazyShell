@@ -28,6 +28,7 @@ namespace LAZYSHELL
             checkedListBox1.SetItemChecked(4, settings.CreateBackupROM);
             checkedListBox1.SetItemChecked(5, settings.UnverifiedRomWarning);
             checkedListBox1.SetItemChecked(6, settings.ShowEncryptionWarnings);
+            checkedListBox1.SetItemChecked(7, settings.RememberLastIndex);
             if (settings.BackupROMDirectory == "")
             {
                 romDirectory.Checked = true;
@@ -82,6 +83,7 @@ namespace LAZYSHELL
             settings.CreateBackupROM = checkedListBox1.GetItemChecked(4);
             settings.UnverifiedRomWarning = checkedListBox1.GetItemChecked(5);
             settings.ShowEncryptionWarnings = checkedListBox1.GetItemChecked(6);
+            settings.RememberLastIndex = checkedListBox1.GetItemChecked(7);
             if (customDirectory.Checked)
                 settings.BackupROMDirectory = customDirectoryTextBox.Text;
             else if (romDirectory.Checked)

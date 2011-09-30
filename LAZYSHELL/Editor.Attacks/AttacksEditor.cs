@@ -43,8 +43,11 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
             new History(this);
             //
-            spellsEditor.Index = settings.LastSpell;
-            attacksEditor.Index = settings.LastAttack;
+            if (settings.RememberLastIndex)
+            {
+                spellsEditor.Index = settings.LastSpell;
+                attacksEditor.Index = settings.LastAttack;
+            }
             checksum = Do.GenerateChecksum(Model.Attacks, Model.Spells);
         }
         // functions

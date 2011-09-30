@@ -98,8 +98,13 @@ namespace LAZYSHELL
             this.eventMusic.Items.AddRange(Lists.Numerize(Lists.MusicNames));
 
             updatingLevel = true;
-            levelNum.Value = settings.LastLevel;
-            levelName.SelectedIndex = settings.LastLevel;
+            if (settings.RememberLastIndex)
+            {
+                levelNum.Value = settings.LastLevel;
+                levelName.SelectedIndex = settings.LastLevel;
+            }
+            else
+                levelName.SelectedIndex = 0;
             updatingLevel = false;
 
             LoadSolidityTileset();
