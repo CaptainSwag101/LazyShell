@@ -16,7 +16,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
-        
+
         private Dialogues dialoguesEditor;
         private bool updating;
         private Overlay overlay;
@@ -61,7 +61,8 @@ namespace LAZYSHELL
         // font character variables
         private int currentFontChar = 0;
         private int overFontChar = 0;
-        private byte[] fontBuffer;
+        private class FontBuffer { public byte[] Graphics; public byte Width; }
+        private FontBuffer fontBuffer;
         private int zoom = 16;
         private int edit = 0;
         private Bitmap
@@ -150,7 +151,7 @@ namespace LAZYSHELL
         {
             updating = true;
 
-            switch (fontType.SelectedIndex)
+            switch (FontType)
             {
                 case 0: fontWidth.Enabled = true; fontWidth.Maximum = 8; break;
                 case 1: fontWidth.Enabled = true; fontWidth.Maximum = 16; break;
@@ -164,7 +165,7 @@ namespace LAZYSHELL
         private void InitializeFontCharacter()
         {
             updating = true;
-            if (fontType.SelectedIndex < 3)
+            if (FontType < 3)
             {
                 charKeystroke.Text = keystrokes[currentFontChar + 32];
                 fontWidth.Value = font[currentFontChar].Width;
@@ -195,7 +196,7 @@ namespace LAZYSHELL
         // set images
         private void SetFontPaletteImage()
         {
-            fontPaletteImage = new Bitmap(Do.PixelsToImage(Do.PaletteToPixels(palette, 16, 16, 16, 1), 256, 16));
+            fontPaletteImage = new Bitmap(Do.PixelsToImage(Do.PaletteToPixels(palette, 16, 16, 16, 1, 1), 256, 16));
             colors.Invalidate();
         }
         private void SetFontTableImage()
@@ -335,13 +336,18 @@ namespace LAZYSHELL
         }
         private void Copy()
         {
-            fontBuffer = new byte[font[currentFontChar].Graphics.Length];
-            font[currentFontChar].Graphics.CopyTo(fontBuffer, 0);
+            byte[] graphics = new byte[font[currentFontChar].Graphics.Length];
+            font[currentFontChar].Graphics.CopyTo(graphics, 0);
+            fontBuffer = new FontBuffer();
+            fontBuffer.Graphics = graphics;
+            fontBuffer.Width = (byte)fontWidth.Value;
         }
         private void Paste()
         {
             if (fontBuffer == null) return;
-            font[currentFontChar].Graphics = fontBuffer;
+            font[currentFontChar].Graphics = new byte[fontBuffer.Graphics.Length];
+            fontBuffer.Graphics.CopyTo(font[currentFontChar].Graphics, 0);
+            fontWidth.Value = fontBuffer.Width;
             SetFontCharacterImage();
             SetFontTableImage();
             dialoguesEditor.RedrawText();
@@ -392,7 +398,7 @@ namespace LAZYSHELL
             pictureBoxFontTable.Focus();
 
             int before = currentFontChar;
-            switch (fontType.SelectedIndex)
+            switch (FontType)
             {
                 case 0: currentFontChar = e.Y / 12 * 16 + (e.X / 8); break;
                 case 1: currentFontChar = e.Y / 12 * 8 + (e.X / 16); break;
@@ -416,7 +422,7 @@ namespace LAZYSHELL
             indexLabel.BringToFront();
             indexLabel.Left = e.X + 30;
             indexLabel.Top = e.Y + 35;
-            switch (fontType.SelectedIndex)
+            switch (FontType)
             {
                 case 0: overFontChar = e.Y / 12 * 16 + (e.X / 8) + 32; break;
                 case 1: overFontChar = e.Y / 12 * 8 + (e.X / 16) + 32; break;
@@ -525,11 +531,12 @@ namespace LAZYSHELL
                 keystrokes[i] = line;
             }
             keystrokes[0x20] = "\x20";
+            charKeystroke.Text = keystrokes[currentFontChar + 32];
         }
         private void saveKeystrokes_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            switch (fontType.SelectedIndex)
+            switch (FontType)
             {
                 case 0: saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - keystrokesMenu.txt"; break;
                 case 1: saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - keystrokesDialogue.txt"; break;
@@ -549,9 +556,15 @@ namespace LAZYSHELL
             }
             sr.Close();
         }
+        private void charKeystroke_TextChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            if (FontType < 3)
+                keystrokes[currentFontChar + 32] = charKeystroke.Text;
+        }
         private void openNewFontTable_Click(object sender, EventArgs e)
         {
-            if (fontType.SelectedIndex < 3)
+            if (FontType < 3)
                 newFontTable.Show();
         }
         private void newFontTable_FormClosing(object sender, FormClosingEventArgs e)
@@ -564,7 +577,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current font character. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            font[currentFontChar] = new FontCharacter(Model.Data, currentFontChar, fontType.SelectedIndex);
+            font[currentFontChar] = new FontCharacter(Model.Data, currentFontChar, FontType);
             InitializeFontCharacter();
             SetFontCharacterImage();
             SetFontTableImage();
@@ -686,7 +699,7 @@ namespace LAZYSHELL
                     byte colB = (byte)b;
                     byte bitB = (byte)((colB & 7) ^ 7);
                     int offsetB = rowB * 2;
-                    switch (fontType.SelectedIndex)
+                    switch (FontType)
                     {
                         case 0:
                         case 2:
@@ -731,7 +744,7 @@ namespace LAZYSHELL
                     byte colB = (byte)x;
                     byte bitB = (byte)((colB & 7) ^ 7);
                     int offsetB = rowB * 2;
-                    switch (fontType.SelectedIndex)
+                    switch (FontType)
                     {
                         case 0:
                         case 2:
@@ -785,7 +798,7 @@ namespace LAZYSHELL
                 Do.PixelsToBPP(
                     Do.ImageToPixels(import, new Size(import.Width, import.Height)),
                     graphicBlock, new Size(import.Width / 8, import.Height / 8), palette, 0x10);
-                switch (fontType.SelectedIndex)
+                switch (FontType)
                 {
                     case 0:
                         Do.CopyOverFontTable(graphicBlock, font, new Size(import.Width / 8, import.Height / 12), palette);
@@ -798,7 +811,7 @@ namespace LAZYSHELL
             else
             {
                 br = new BinaryReader(fs);
-                switch (fontType.SelectedIndex)
+                switch (FontType)
                 {
                     case 0:
                         graphicBlock = new byte[0xC00];
@@ -844,7 +857,7 @@ namespace LAZYSHELL
             try
             {
                 // Create the file to store the level data
-                switch (fontType.SelectedIndex)
+                switch (FontType)
                 {
                     case 0:
                         saveFileDialog.FileName = "fontMenuGraphic.bin";
@@ -893,7 +906,7 @@ namespace LAZYSHELL
         }
         private void saveImageAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            switch (fontType.SelectedIndex)
+            switch (FontType)
             {
                 case 0: Do.Export(fontTableImage, "fontTableMenu.png"); break;
                 case 1: Do.Export(fontTableImage, "fontTableDialogue.png"); break;
@@ -911,7 +924,7 @@ namespace LAZYSHELL
         }
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            insertIntoTextToolStripMenuItem.Enabled = fontType.SelectedIndex != 3;
+            insertIntoTextToolStripMenuItem.Enabled = FontType != 3;
         }
         #endregion
     }

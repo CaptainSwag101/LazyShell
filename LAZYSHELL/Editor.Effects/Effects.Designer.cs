@@ -101,7 +101,7 @@
             this.number.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.number.ForeColor = System.Drawing.SystemColors.Control;
             this.number.Hexadecimal = false;
-            this.number.Location = new System.Drawing.Point(219, 2);
+            this.number.Location = new System.Drawing.Point(223, 2);
             this.number.Maximum = new decimal(new int[] {
             127,
             0,
@@ -133,20 +133,20 @@
             this.panel106.Controls.Add(this.label7);
             this.panel106.Location = new System.Drawing.Point(3, 3);
             this.panel106.Name = "panel106";
-            this.panel106.Size = new System.Drawing.Size(260, 21);
+            this.panel106.Size = new System.Drawing.Size(215, 21);
             this.panel106.TabIndex = 519;
             // 
             // yNegShift
             // 
             this.yNegShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.yNegShift.Location = new System.Drawing.Point(212, 0);
+            this.yNegShift.Location = new System.Drawing.Point(172, 0);
             this.yNegShift.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.yNegShift.Name = "yNegShift";
-            this.yNegShift.Size = new System.Drawing.Size(44, 17);
+            this.yNegShift.Size = new System.Drawing.Size(39, 17);
             this.yNegShift.TabIndex = 395;
             this.yNegShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.yNegShift.ValueChanged += new System.EventHandler(this.yNegShift_ValueChanged);
@@ -154,24 +154,24 @@
             // label96
             // 
             this.label96.BackColor = System.Drawing.SystemColors.Control;
-            this.label96.Location = new System.Drawing.Point(129, 0);
+            this.label96.Location = new System.Drawing.Point(105, 0);
             this.label96.Name = "label96";
             this.label96.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label96.Size = new System.Drawing.Size(37, 17);
+            this.label96.Size = new System.Drawing.Size(26, 17);
             this.label96.TabIndex = 396;
             this.label96.Text = "X,Y";
             // 
             // xNegShift
             // 
             this.xNegShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.xNegShift.Location = new System.Drawing.Point(167, 0);
+            this.xNegShift.Location = new System.Drawing.Point(132, 0);
             this.xNegShift.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.xNegShift.Name = "xNegShift";
-            this.xNegShift.Size = new System.Drawing.Size(44, 17);
+            this.xNegShift.Size = new System.Drawing.Size(39, 17);
             this.xNegShift.TabIndex = 395;
             this.xNegShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.xNegShift.ValueChanged += new System.EventHandler(this.xNegShift_ValueChanged);
@@ -179,14 +179,14 @@
             // e_paletteIndex
             // 
             this.e_paletteIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.e_paletteIndex.Location = new System.Drawing.Point(82, 0);
+            this.e_paletteIndex.Location = new System.Drawing.Point(68, 0);
             this.e_paletteIndex.Maximum = new decimal(new int[] {
             7,
             0,
             0,
             0});
             this.e_paletteIndex.Name = "e_paletteIndex";
-            this.e_paletteIndex.Size = new System.Drawing.Size(46, 17);
+            this.e_paletteIndex.Size = new System.Drawing.Size(36, 17);
             this.e_paletteIndex.TabIndex = 4;
             this.e_paletteIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_paletteIndex.ValueChanged += new System.EventHandler(this.e_paletteIndex_ValueChanged);
@@ -197,9 +197,9 @@
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label7.Size = new System.Drawing.Size(81, 17);
+            this.label7.Size = new System.Drawing.Size(67, 17);
             this.label7.TabIndex = 394;
-            this.label7.Text = "Palette Index";
+            this.label7.Text = "Palette Row";
             // 
             // panel80
             // 
@@ -208,7 +208,7 @@
             this.panel80.Controls.Add(this.panel85);
             this.panel80.Location = new System.Drawing.Point(3, 26);
             this.panel80.Name = "panel80";
-            this.panel80.Size = new System.Drawing.Size(260, 111);
+            this.panel80.Size = new System.Drawing.Size(215, 111);
             this.panel80.TabIndex = 400;
             // 
             // panel85
@@ -233,9 +233,9 @@
             // panel97
             // 
             this.panel97.Controls.Add(this.e_codec);
-            this.panel97.Location = new System.Drawing.Point(129, 90);
+            this.panel97.Location = new System.Drawing.Point(105, 90);
             this.panel97.Name = "panel97";
-            this.panel97.Size = new System.Drawing.Size(128, 17);
+            this.panel97.Size = new System.Drawing.Size(107, 17);
             this.panel97.TabIndex = 526;
             // 
             // e_codec
@@ -247,7 +247,7 @@
             "2bpp"});
             this.e_codec.Location = new System.Drawing.Point(-2, -2);
             this.e_codec.Name = "e_codec";
-            this.e_codec.Size = new System.Drawing.Size(131, 21);
+            this.e_codec.Size = new System.Drawing.Size(110, 21);
             this.e_codec.TabIndex = 41;
             this.e_codec.SelectedIndexChanged += new System.EventHandler(this.e_codec_SelectedIndexChanged);
             // 
@@ -259,7 +259,7 @@
             this.e_availableBytes.Location = new System.Drawing.Point(0, 38);
             this.e_availableBytes.Name = "e_availableBytes";
             this.e_availableBytes.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.e_availableBytes.Size = new System.Drawing.Size(256, 14);
+            this.e_availableBytes.Size = new System.Drawing.Size(211, 14);
             this.e_availableBytes.TabIndex = 451;
             this.e_availableBytes.Text = "0 bytes free";
             // 
@@ -271,7 +271,7 @@
             this.label63.Location = new System.Drawing.Point(0, 0);
             this.label63.Name = "label63";
             this.label63.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label63.Size = new System.Drawing.Size(256, 17);
+            this.label63.Size = new System.Drawing.Size(211, 17);
             this.label63.TabIndex = 417;
             this.label63.Text = "EFFECT IMAGE";
             this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -279,9 +279,9 @@
             // panel98
             // 
             this.panel98.Controls.Add(this.comboBox6);
-            this.panel98.Location = new System.Drawing.Point(129, 90);
+            this.panel98.Location = new System.Drawing.Point(105, 90);
             this.panel98.Name = "panel98";
-            this.panel98.Size = new System.Drawing.Size(128, 17);
+            this.panel98.Size = new System.Drawing.Size(107, 17);
             this.panel98.TabIndex = 527;
             // 
             // comboBox6
@@ -304,7 +304,7 @@
             0,
             0,
             0});
-            this.e_paletteSetSize.Location = new System.Drawing.Point(129, 54);
+            this.e_paletteSetSize.Location = new System.Drawing.Point(105, 54);
             this.e_paletteSetSize.Maximum = new decimal(new int[] {
             256,
             0,
@@ -316,7 +316,7 @@
             0,
             0});
             this.e_paletteSetSize.Name = "e_paletteSetSize";
-            this.e_paletteSetSize.Size = new System.Drawing.Size(127, 17);
+            this.e_paletteSetSize.Size = new System.Drawing.Size(106, 17);
             this.e_paletteSetSize.TabIndex = 16;
             this.e_paletteSetSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_paletteSetSize.Value = new decimal(new int[] {
@@ -332,7 +332,7 @@
             this.label107.Location = new System.Drawing.Point(0, 54);
             this.label107.Name = "label107";
             this.label107.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label107.Size = new System.Drawing.Size(128, 17);
+            this.label107.Size = new System.Drawing.Size(104, 17);
             this.label107.TabIndex = 394;
             this.label107.Text = "Palette Size";
             // 
@@ -342,14 +342,14 @@
             this.imageNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.imageNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.imageNum.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.imageNum.Location = new System.Drawing.Point(129, 19);
+            this.imageNum.Location = new System.Drawing.Point(105, 19);
             this.imageNum.Maximum = new decimal(new int[] {
             63,
             0,
             0,
             0});
             this.imageNum.Name = "imageNum";
-            this.imageNum.Size = new System.Drawing.Size(127, 17);
+            this.imageNum.Size = new System.Drawing.Size(106, 17);
             this.imageNum.TabIndex = 3;
             this.imageNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.imageNum.ValueChanged += new System.EventHandler(this.imageNum_ValueChanged);
@@ -360,7 +360,7 @@
             this.label90.Location = new System.Drawing.Point(0, 90);
             this.label90.Name = "label90";
             this.label90.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label90.Size = new System.Drawing.Size(128, 17);
+            this.label90.Size = new System.Drawing.Size(104, 17);
             this.label90.TabIndex = 394;
             this.label90.Text = "BPP Codec";
             // 
@@ -372,7 +372,7 @@
             0,
             0,
             0});
-            this.e_graphicSetSize.Location = new System.Drawing.Point(129, 72);
+            this.e_graphicSetSize.Location = new System.Drawing.Point(105, 72);
             this.e_graphicSetSize.Maximum = new decimal(new int[] {
             8192,
             0,
@@ -384,7 +384,7 @@
             0,
             0});
             this.e_graphicSetSize.Name = "e_graphicSetSize";
-            this.e_graphicSetSize.Size = new System.Drawing.Size(127, 17);
+            this.e_graphicSetSize.Size = new System.Drawing.Size(106, 17);
             this.e_graphicSetSize.TabIndex = 16;
             this.e_graphicSetSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_graphicSetSize.Value = new decimal(new int[] {
@@ -402,7 +402,7 @@
             this.label2.Location = new System.Drawing.Point(0, 19);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label2.Size = new System.Drawing.Size(128, 17);
+            this.label2.Size = new System.Drawing.Size(104, 17);
             this.label2.TabIndex = 394;
             this.label2.Text = "Image";
             // 
@@ -412,7 +412,7 @@
             this.label89.Location = new System.Drawing.Point(0, 72);
             this.label89.Name = "label89";
             this.label89.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label89.Size = new System.Drawing.Size(128, 17);
+            this.label89.Size = new System.Drawing.Size(104, 17);
             this.label89.TabIndex = 394;
             this.label89.Text = "Graphic Size";
             // 
@@ -562,7 +562,7 @@
             this.name.ForeColor = System.Drawing.SystemColors.Control;
             this.name.IntegralHeight = false;
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(210, 25);
+            this.name.Size = new System.Drawing.Size(214, 25);
             this.name.SelectedIndexChanged += new System.EventHandler(this.name_SelectedIndexChanged);
             // 
             // searchText
@@ -664,7 +664,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(266, 647);
+            this.panel2.Size = new System.Drawing.Size(221, 647);
             this.panel2.TabIndex = 520;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             this.panel2.SizeChanged += new System.EventHandler(this.panel2_SizeChanged);

@@ -9,7 +9,7 @@ namespace LAZYSHELL
     public class E_Sequence
     {
         // Local
-        private ArrayList frames = new ArrayList(); public ArrayList Frames { get { return this.frames; } set { this.frames = value; } }
+        private List<Frame> frames = new List<Frame>(); public List<Frame> Frames { get { return this.frames; } set { this.frames = value; } }
         public void InitializeSequence(byte[] sm, int offset)
         {
             Frame tFrame;

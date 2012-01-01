@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -22,6 +23,8 @@ namespace LAZYSHELL
             label1.Links.Add(label1.Text.Length, forumthread.Length, forumthread);
             label1.Text += forumthread;
             //
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            richTextBox1.Text = assembly.ToString() + "\r\n\r\n";
             richTextBox1.Text += "**************Exception Text**************\r\n";
             richTextBox1.Text += exception.Message + "\r\n";
             StringReader reader = new StringReader(exception.StackTrace);

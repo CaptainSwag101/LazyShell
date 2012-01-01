@@ -204,7 +204,7 @@ namespace LAZYSHELL
                 }
                 else
                 {
-                    MessageBox.Show("Mold for frame #" + i.ToString() + " is not valid. Change to lower value.", "LAZY SHELL");
+                    //MessageBox.Show("Mold for frame #" + i.ToString() + " is not valid. Change to lower value.", "LAZY SHELL");
                     sequenceImages.Add(new Bitmap(256, 256));
                 }
                 i++;
@@ -240,6 +240,14 @@ namespace LAZYSHELL
             Rectangle src = new Rectangle(0, 0, width, height);
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bicubic;
             e.Graphics.DrawImage((Bitmap)sequenceImages[(int)frame.Tag], dst, src, GraphicsUnit.Pixel);
+            //
+            if (sequence.Frames[(int)frame.Tag].Mold >= animation.Molds.Count)
+            {
+                Font font = new Font("Tahoma", 10F, FontStyle.Bold);
+                SizeF size = e.Graphics.MeasureString("(INVALID MOLD INDEX)", font, new PointF(0, 0), StringFormat.GenericDefault);
+                Point point = new Point((frame.Width - (int)size.Width) / 2, (frame.Height - (int)size.Height) / 2);
+                Do.DrawString(e.Graphics, point, "(INVALID MOLD INDEX)", Color.Black, Color.Red, font);
+            }
             if (index == (int)frame.Tag)
             {
                 e.Graphics.DrawRectangle(
@@ -248,9 +256,11 @@ namespace LAZYSHELL
                 frame.Focus();
             }
             else
+            {
                 e.Graphics.DrawRectangle(
                     new Pen(new SolidBrush(SystemColors.ControlDark)),
                     new Rectangle(0, 0, frame.Width - 1, frame.Height - 1));
+            }
         }
         private void frame_MouseDown(object sender, MouseEventArgs e)
         {

@@ -267,7 +267,7 @@ namespace LAZYSHELL
                 default: flowerBonus = 0; break;
             }
 
-            flowerOdds = (byte)((temp & 0xF0) >> 4);			// Odds			[numericUpDown]
+            flowerOdds = (byte)Math.Min(10, (temp & 0xF0) >> 4);			// Odds			[numericUpDown]
 
             int deathAnimationOffset = index * 2 + 0x350202;
 
@@ -418,6 +418,8 @@ namespace LAZYSHELL
         }
         public override void Clear()
         {
+            Bits.Fill(name, '\x20');
+            psychoMsg = new char[0];
             hp = 0;
             speed = 0;
             attack = 0;
@@ -460,8 +462,6 @@ namespace LAZYSHELL
             deathAnimation = 0;
             strikeSound = 0;
             otherSound = 0;
-            psychoMsg = new char[0];
-            name = new char[0];
         }
 
         private char[] ParsePsychoMsg(byte[] data)

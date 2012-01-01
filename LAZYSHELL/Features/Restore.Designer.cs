@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Monsters");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Formations");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Spells");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Attacks");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Items");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Shops");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Level-ups");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Starting stats");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Timings");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Stats", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Audio");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Monsters");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Formations");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Spells");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Attacks");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Items");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Shops");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Level-ups");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Starting stats");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Timings");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Stats", new System.Windows.Forms.TreeNode[] {
             treeNode2,
             treeNode3,
             treeNode4,
@@ -46,24 +46,24 @@
             treeNode6,
             treeNode7,
             treeNode8,
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Layers");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Maps");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("NPCs");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Exits");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Events");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Overlaps");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Tile mods");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Solid mods");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Tilemaps");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Tilesets");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Graphics");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Solidity maps");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Battlefields");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Battlefield tilesets");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Battlefield Graphics");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Levels", new System.Windows.Forms.TreeNode[] {
-            treeNode11,
+            treeNode9,
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Layers");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Maps");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("NPCs");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Exits");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Events");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Overlaps");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Tile mods");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Solid mods");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Tilemaps");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Tilesets");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Graphics");
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Solidity maps");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Battlefields");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Battlefield tilesets");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Battlefield Graphics");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Levels", new System.Windows.Forms.TreeNode[] {
             treeNode12,
             treeNode13,
             treeNode14,
@@ -77,29 +77,33 @@
             treeNode22,
             treeNode23,
             treeNode24,
-            treeNode25});
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Event scripts");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Action scripts");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Battle scripts");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Animation scripts");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Scripts", new System.Windows.Forms.TreeNode[] {
-            treeNode27,
+            treeNode25,
+            treeNode26});
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Event scripts");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Action scripts");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Battle scripts");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Animation scripts");
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Scripts", new System.Windows.Forms.TreeNode[] {
             treeNode28,
             treeNode29,
-            treeNode30});
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Sprites");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Spell effects");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Dialogues");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Fonts, backgrounds");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("World map tilesets");
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("World maps");
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Sprites", new System.Windows.Forms.TreeNode[] {
-            treeNode32,
+            treeNode30,
+            treeNode31});
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Sprites");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Spell effects");
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Dialogues");
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Battle Dialogues");
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Fonts, backgrounds");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("World map tilesets");
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("World maps");
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("Sprites", new System.Windows.Forms.TreeNode[] {
             treeNode33,
             treeNode34,
             treeNode35,
             treeNode36,
-            treeNode37});
+            treeNode37,
+            treeNode38,
+            treeNode39});
+            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("Main Title");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Restore));
             this.elements = new System.Windows.Forms.TreeView();
             this.browseFreshRom = new System.Windows.Forms.Button();
@@ -116,87 +120,95 @@
             this.elements.CheckBoxes = true;
             this.elements.Location = new System.Drawing.Point(12, 69);
             this.elements.Name = "elements";
-            treeNode1.Name = "Monsters";
-            treeNode1.Text = "Monsters";
-            treeNode2.Name = "Formations";
-            treeNode2.Text = "Formations";
-            treeNode3.Name = "Spells";
-            treeNode3.Text = "Spells";
-            treeNode4.Name = "Attacks";
-            treeNode4.Text = "Attacks";
-            treeNode5.Name = "Items";
-            treeNode5.Text = "Items";
-            treeNode6.Name = "Shops";
-            treeNode6.Text = "Shops";
-            treeNode7.Name = "LevelUps";
-            treeNode7.Text = "Level-ups";
-            treeNode8.Name = "StartingStats";
-            treeNode8.Text = "Starting stats";
-            treeNode9.Name = "Timings";
-            treeNode9.Text = "Timings";
-            treeNode10.Name = "Stats";
-            treeNode10.Text = "Stats";
-            treeNode11.Name = "Layers";
-            treeNode11.Text = "Layers";
-            treeNode12.Name = "Maps";
-            treeNode12.Text = "Maps";
-            treeNode13.Name = "NPCs";
-            treeNode13.Text = "NPCs";
-            treeNode14.Name = "Exits";
-            treeNode14.Text = "Exits";
-            treeNode15.Name = "Events";
-            treeNode15.Text = "Events";
-            treeNode16.Name = "Overlaps";
-            treeNode16.Text = "Overlaps";
-            treeNode17.Name = "TileMods";
-            treeNode17.Text = "Tile mods";
-            treeNode18.Name = "SolidMods";
-            treeNode18.Text = "Solid mods";
-            treeNode19.Name = "Tilemaps";
-            treeNode19.Text = "Tilemaps";
-            treeNode20.Name = "Tilesets";
-            treeNode20.Text = "Tilesets";
-            treeNode21.Name = "Graphics";
-            treeNode21.Text = "Graphics";
-            treeNode22.Name = "SolidityMaps";
-            treeNode22.Text = "Solidity maps";
-            treeNode23.Name = "Battlefields";
-            treeNode23.Text = "Battlefields";
-            treeNode24.Name = "BattlefieldTilesets";
-            treeNode24.Text = "Battlefield tilesets";
-            treeNode25.Name = "BattlefieldGraphics";
-            treeNode25.Text = "Battlefield Graphics";
-            treeNode26.Name = "Levels";
-            treeNode26.Text = "Levels";
-            treeNode27.Name = "EventScripts";
-            treeNode27.Text = "Event scripts";
-            treeNode28.Name = "ActionScripts";
-            treeNode28.Text = "Action scripts";
-            treeNode29.Name = "BattleScripts";
-            treeNode29.Text = "Battle scripts";
-            treeNode30.Name = "AnimationScripts";
-            treeNode30.Text = "Animation scripts";
-            treeNode31.Name = "Scripts";
-            treeNode31.Text = "Scripts";
-            treeNode32.Name = "Sprites";
-            treeNode32.Text = "Sprites";
-            treeNode33.Name = "SpellEffects";
-            treeNode33.Text = "Spell effects";
-            treeNode34.Name = "Dialogues";
-            treeNode34.Text = "Dialogues";
-            treeNode35.Name = "FontsBackgrounds";
-            treeNode35.Text = "Fonts, backgrounds";
-            treeNode36.Name = "WorldMapTilesets";
-            treeNode36.Text = "World map tilesets";
-            treeNode37.Name = "WorldMaps";
-            treeNode37.Text = "World maps";
-            treeNode38.Name = "Sprites";
-            treeNode38.Text = "Sprites";
+            treeNode1.Name = "Audio";
+            treeNode1.Text = "Audio";
+            treeNode2.Name = "Monsters";
+            treeNode2.Text = "Monsters";
+            treeNode3.Name = "Formations";
+            treeNode3.Text = "Formations";
+            treeNode4.Name = "Spells";
+            treeNode4.Text = "Spells";
+            treeNode5.Name = "Attacks";
+            treeNode5.Text = "Attacks";
+            treeNode6.Name = "Items";
+            treeNode6.Text = "Items";
+            treeNode7.Name = "Shops";
+            treeNode7.Text = "Shops";
+            treeNode8.Name = "LevelUps";
+            treeNode8.Text = "Level-ups";
+            treeNode9.Name = "StartingStats";
+            treeNode9.Text = "Starting stats";
+            treeNode10.Name = "Timings";
+            treeNode10.Text = "Timings";
+            treeNode11.Name = "Stats";
+            treeNode11.Text = "Stats";
+            treeNode12.Name = "Layers";
+            treeNode12.Text = "Layers";
+            treeNode13.Name = "Maps";
+            treeNode13.Text = "Maps";
+            treeNode14.Name = "NPCs";
+            treeNode14.Text = "NPCs";
+            treeNode15.Name = "Exits";
+            treeNode15.Text = "Exits";
+            treeNode16.Name = "Events";
+            treeNode16.Text = "Events";
+            treeNode17.Name = "Overlaps";
+            treeNode17.Text = "Overlaps";
+            treeNode18.Name = "TileMods";
+            treeNode18.Text = "Tile mods";
+            treeNode19.Name = "SolidMods";
+            treeNode19.Text = "Solid mods";
+            treeNode20.Name = "Tilemaps";
+            treeNode20.Text = "Tilemaps";
+            treeNode21.Name = "Tilesets";
+            treeNode21.Text = "Tilesets";
+            treeNode22.Name = "Graphics";
+            treeNode22.Text = "Graphics";
+            treeNode23.Name = "SolidityMaps";
+            treeNode23.Text = "Solidity maps";
+            treeNode24.Name = "Battlefields";
+            treeNode24.Text = "Battlefields";
+            treeNode25.Name = "BattlefieldTilesets";
+            treeNode25.Text = "Battlefield tilesets";
+            treeNode26.Name = "BattlefieldGraphics";
+            treeNode26.Text = "Battlefield Graphics";
+            treeNode27.Name = "Levels";
+            treeNode27.Text = "Levels";
+            treeNode28.Name = "EventScripts";
+            treeNode28.Text = "Event scripts";
+            treeNode29.Name = "ActionScripts";
+            treeNode29.Text = "Action scripts";
+            treeNode30.Name = "BattleScripts";
+            treeNode30.Text = "Battle scripts";
+            treeNode31.Name = "AnimationScripts";
+            treeNode31.Text = "Animation scripts";
+            treeNode32.Name = "Scripts";
+            treeNode32.Text = "Scripts";
+            treeNode33.Name = "Sprites";
+            treeNode33.Text = "Sprites";
+            treeNode34.Name = "SpellEffects";
+            treeNode34.Text = "Spell effects";
+            treeNode35.Name = "Dialogues";
+            treeNode35.Text = "Dialogues";
+            treeNode36.Name = "BattleDialogues";
+            treeNode36.Text = "Battle Dialogues";
+            treeNode37.Name = "FontsBackgrounds";
+            treeNode37.Text = "Fonts, backgrounds";
+            treeNode38.Name = "WorldMapTilesets";
+            treeNode38.Text = "World map tilesets";
+            treeNode39.Name = "WorldMaps";
+            treeNode39.Text = "World maps";
+            treeNode40.Name = "Sprites";
+            treeNode40.Text = "Sprites";
+            treeNode41.Name = "Title";
+            treeNode41.Text = "Main Title";
             this.elements.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10,
-            treeNode26,
-            treeNode31,
-            treeNode38});
+            treeNode1,
+            treeNode11,
+            treeNode27,
+            treeNode32,
+            treeNode40,
+            treeNode41});
             this.elements.Size = new System.Drawing.Size(333, 491);
             this.elements.TabIndex = 0;
             this.elements.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.elements_AfterCheck);

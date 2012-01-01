@@ -427,7 +427,7 @@ namespace LAZYSHELL
         }
         public override void Clear()
         {
-            name = new char[10];
+            Bits.Fill(name, '\x20');
             startingLevel = 1;
             startingCurrentHP = 0;
             startingMaxHP = 0;

@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EffectMolds));
             this.e_moldWidth = new LAZYSHELL.ToolStripNumericUpDown();
             this.e_moldHeight = new LAZYSHELL.ToolStripNumericUpDown();
-            this.panel99 = new System.Windows.Forms.Panel();
+            this.panelMoldImage = new LAZYSHELL.NewPanel();
             this.pictureBoxE_Mold = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,6 +74,8 @@
             this.e_tileSetSize = new System.Windows.Forms.NumericUpDown();
             this.e_molds = new LAZYSHELL.NewListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.importIntoTilemap = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.newMold = new System.Windows.Forms.ToolStripButton();
             this.deleteMold = new System.Windows.Forms.ToolStripButton();
             this.duplicateMold = new System.Windows.Forms.ToolStripButton();
@@ -82,9 +84,8 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.showBG = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.importIntoTilemap = new System.Windows.Forms.ToolStripButton();
-            this.panel99.SuspendLayout();
+            this.labelCoords = new System.Windows.Forms.Label();
+            this.panelMoldImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxE_Mold)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip6.SuspendLayout();
@@ -101,7 +102,7 @@
             // 
             this.e_moldWidth.AutoSize = false;
             this.e_moldWidth.Hexadecimal = false;
-            this.e_moldWidth.Location = new System.Drawing.Point(107, 4);
+            this.e_moldWidth.Location = new System.Drawing.Point(136, 4);
             this.e_moldWidth.Maximum = new decimal(new int[] {
             16,
             0,
@@ -126,7 +127,7 @@
             // 
             this.e_moldHeight.AutoSize = false;
             this.e_moldHeight.Hexadecimal = false;
-            this.e_moldHeight.Location = new System.Drawing.Point(147, 4);
+            this.e_moldHeight.Location = new System.Drawing.Point(176, 4);
             this.e_moldHeight.Maximum = new decimal(new int[] {
             16,
             0,
@@ -147,16 +148,17 @@
             0});
             this.e_moldHeight.ValueChanged += new System.EventHandler(this.e_moldHeight_ValueChanged);
             // 
-            // panel99
+            // panelMoldImage
             // 
-            this.panel99.AutoScroll = true;
-            this.panel99.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel99.Controls.Add(this.pictureBoxE_Mold);
-            this.panel99.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel99.Location = new System.Drawing.Point(152, 25);
-            this.panel99.Name = "panel99";
-            this.panel99.Size = new System.Drawing.Size(260, 302);
-            this.panel99.TabIndex = 516;
+            this.panelMoldImage.AutoScroll = true;
+            this.panelMoldImage.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelMoldImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelMoldImage.Controls.Add(this.pictureBoxE_Mold);
+            this.panelMoldImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMoldImage.Location = new System.Drawing.Point(102, 25);
+            this.panelMoldImage.Name = "panelMoldImage";
+            this.panelMoldImage.Size = new System.Drawing.Size(310, 278);
+            this.panelMoldImage.TabIndex = 516;
             // 
             // pictureBoxE_Mold
             // 
@@ -273,7 +275,7 @@
             this.toolStripSeparator2,
             this.mirror,
             this.invert});
-            this.toolStrip6.Location = new System.Drawing.Point(128, 25);
+            this.toolStrip6.Location = new System.Drawing.Point(78, 25);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -597,9 +599,10 @@
             this.e_molds.Dock = System.Windows.Forms.DockStyle.Left;
             this.e_molds.FormattingEnabled = true;
             this.e_molds.IntegralHeight = false;
+            this.e_molds.LastSelectedIndex = -1;
             this.e_molds.Location = new System.Drawing.Point(0, 25);
             this.e_molds.Name = "e_molds";
-            this.e_molds.Size = new System.Drawing.Size(128, 302);
+            this.e_molds.Size = new System.Drawing.Size(78, 302);
             this.e_molds.TabIndex = 398;
             this.e_molds.SelectedIndexChanged += new System.EventHandler(this.e_molds_SelectedIndexChanged);
             // 
@@ -607,6 +610,8 @@
             // 
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importIntoTilemap,
+            this.toolStripSeparator9,
             this.newMold,
             this.deleteMold,
             this.duplicateMold,
@@ -619,15 +624,29 @@
             this.showBG,
             this.toolStripSeparator8,
             this.e_moldZoomIn,
-            this.e_moldZoomOut,
-            this.toolStripSeparator9,
-            this.importIntoTilemap});
+            this.e_moldZoomOut});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(544, 25);
             this.toolStrip1.TabIndex = 404;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // importIntoTilemap
+            // 
+            this.importIntoTilemap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.importIntoTilemap.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importIntoTilemap.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.importIntoTilemap.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.importIntoTilemap.Name = "importIntoTilemap";
+            this.importIntoTilemap.Size = new System.Drawing.Size(23, 22);
+            this.importIntoTilemap.ToolTipText = "Import Image(s)";
+            this.importIntoTilemap.Click += new System.EventHandler(this.importIntoTilemap_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
             // 
             // newMold
             // 
@@ -689,21 +708,17 @@
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripSeparator9
+            // labelCoords
             // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
-            // 
-            // importIntoTilemap
-            // 
-            this.importIntoTilemap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.importIntoTilemap.Image = global::LAZYSHELL.Properties.Resources.import_small;
-            this.importIntoTilemap.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.importIntoTilemap.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.importIntoTilemap.Name = "importIntoTilemap";
-            this.importIntoTilemap.Size = new System.Drawing.Size(23, 22);
-            this.importIntoTilemap.ToolTipText = "Import Image(s)";
-            this.importIntoTilemap.Click += new System.EventHandler(this.importIntoTilemap_Click);
+            this.labelCoords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelCoords.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.labelCoords.Location = new System.Drawing.Point(102, 303);
+            this.labelCoords.Name = "labelCoords";
+            this.labelCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
+            this.labelCoords.Size = new System.Drawing.Size(310, 24);
+            this.labelCoords.TabIndex = 523;
+            this.labelCoords.Text = "(x: 0, y: 0) Pixel";
+            this.labelCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // EffectMolds
             // 
@@ -711,7 +726,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(544, 327);
             this.ControlBox = false;
-            this.Controls.Add(this.panel99);
+            this.Controls.Add(this.panelMoldImage);
+            this.Controls.Add(this.labelCoords);
             this.Controls.Add(this.panel105);
             this.Controls.Add(this.toolStrip6);
             this.Controls.Add(this.e_molds);
@@ -719,7 +735,7 @@
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EffectMolds";
-            this.panel99.ResumeLayout(false);
+            this.panelMoldImage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxE_Mold)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip6.ResumeLayout(false);
@@ -740,7 +756,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel99;
+        private LAZYSHELL.NewPanel panelMoldImage;
         private System.Windows.Forms.PictureBox pictureBoxE_Mold;
         private System.Windows.Forms.ToolStrip toolStrip6;
         private System.Windows.Forms.ToolStripButton e_moldShowGrid;
@@ -792,7 +808,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem saveImageAsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripButton showBG;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripButton importIntoTilemap;
+        private System.Windows.Forms.Label labelCoords;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
     }
 }

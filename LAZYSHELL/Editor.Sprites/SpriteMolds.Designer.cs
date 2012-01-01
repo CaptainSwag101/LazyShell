@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpriteMolds));
-            this.panelMoldImage = new System.Windows.Forms.Panel();
-            this.pictureBoxMold = new System.Windows.Forms.PictureBox();
+            this.panelMoldImage = new LAZYSHELL.NewPanel();
+            this.pictureBoxMold = new LAZYSHELL.NewPictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +59,30 @@
             this.moldZoomOut = new System.Windows.Forms.ToolStripButton();
             this.showMoldPixelGrid = new System.Windows.Forms.ToolStripButton();
             this.listBoxMolds = new System.Windows.Forms.ListBox();
-            this.panel38 = new System.Windows.Forms.Panel();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.importIntoTilemap = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.newMold = new System.Windows.Forms.ToolStripButton();
+            this.deleteMold = new System.Windows.Forms.ToolStripButton();
+            this.duplicateMold = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.moveMoldBack = new System.Windows.Forms.ToolStripButton();
+            this.moveMoldFoward = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.showBG = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toggleZoomBox = new System.Windows.Forms.ToolStripButton();
+            this.coordinatorButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.vramRequirement = new System.Windows.Forms.ToolStripLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBoxZoom = new System.Windows.Forms.PictureBox();
+            this.pictureBoxZoom_TS = new System.Windows.Forms.PictureBox();
+            this.labelCoords = new System.Windows.Forms.Label();
+            this.panel38 = new LAZYSHELL.NewPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.moldTileProperties = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -77,25 +100,18 @@
             this.deleteTile = new System.Windows.Forms.ToolStripButton();
             this.duplicateTile = new System.Windows.Forms.ToolStripButton();
             this.pictureBoxTileset = new System.Windows.Forms.PictureBox();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.newMold = new System.Windows.Forms.ToolStripButton();
-            this.deleteMold = new System.Windows.Forms.ToolStripButton();
-            this.duplicateMold = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.showBG = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toggleZoomBox = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBoxZoom = new System.Windows.Forms.PictureBox();
-            this.pictureBoxZoom_TS = new System.Windows.Forms.PictureBox();
+            this.bringToFrontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sendToBackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.panelMoldImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMold)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip4.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom_TS)).BeginInit();
             this.panel38.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.subtile)).BeginInit();
@@ -105,25 +121,18 @@
             this.panel2.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTileset)).BeginInit();
-            this.contextMenuStrip2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom_TS)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMoldImage
             // 
-            this.panelMoldImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMoldImage.AutoScroll = true;
             this.panelMoldImage.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panelMoldImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelMoldImage.Controls.Add(this.pictureBoxMold);
-            this.panelMoldImage.Location = new System.Drawing.Point(159, 25);
+            this.panelMoldImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMoldImage.Location = new System.Drawing.Point(101, 25);
             this.panelMoldImage.Name = "panelMoldImage";
-            this.panelMoldImage.Size = new System.Drawing.Size(373, 260);
+            this.panelMoldImage.Size = new System.Drawing.Size(416, 260);
             this.panelMoldImage.TabIndex = 517;
             // 
             // pictureBoxMold
@@ -136,7 +145,6 @@
             this.pictureBoxMold.TabIndex = 396;
             this.pictureBoxMold.TabStop = false;
             this.pictureBoxMold.MouseLeave += new System.EventHandler(this.pictureBoxMold_MouseLeave);
-            this.pictureBoxMold.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxMold_PreviewKeyDown);
             this.pictureBoxMold.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseMove);
             this.pictureBoxMold.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseDown);
             this.pictureBoxMold.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMold_Paint);
@@ -153,11 +161,14 @@
             this.mirrorToolStripMenuItem,
             this.invertToolStripMenuItem,
             this.toolStripSeparator5,
+            this.bringToFrontToolStripMenuItem,
+            this.sendToBackToolStripMenuItem,
+            this.toolStripSeparator11,
             this.saveImageAsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 170);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 242);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // cutToolStripMenuItem
@@ -235,11 +246,11 @@
             this.toolStripSeparator4,
             this.mirror,
             this.invert});
-            this.toolStrip4.Location = new System.Drawing.Point(134, 25);
+            this.toolStrip4.Location = new System.Drawing.Point(78, 25);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip4.Size = new System.Drawing.Size(23, 260);
+            this.toolStrip4.Size = new System.Drawing.Size(23, 284);
             this.toolStrip4.TabIndex = 51;
             this.toolStrip4.TabStop = true;
             this.toolStrip4.Text = "toolStrip1";
@@ -410,9 +421,235 @@
             this.listBoxMolds.IntegralHeight = false;
             this.listBoxMolds.Location = new System.Drawing.Point(0, 0);
             this.listBoxMolds.Name = "listBoxMolds";
-            this.listBoxMolds.Size = new System.Drawing.Size(134, 260);
+            this.listBoxMolds.Size = new System.Drawing.Size(78, 284);
             this.listBoxMolds.TabIndex = 35;
             this.listBoxMolds.SelectedIndexChanged += new System.EventHandler(this.listBoxMolds_SelectedIndexChanged);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importToolStripMenuItem,
+            this.exportToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextMenuStrip2.ShowImageMargin = false;
+            this.contextMenuStrip2.Size = new System.Drawing.Size(134, 48);
+            this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.importToolStripMenuItem.Text = "Import Image...";
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.exportToolStripMenuItem.Text = "Save Image As...";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importIntoTilemap,
+            this.toolStripSeparator10,
+            this.newMold,
+            this.deleteMold,
+            this.duplicateMold,
+            this.toolStripSeparator9,
+            this.moveMoldBack,
+            this.moveMoldFoward,
+            this.toolStripSeparator2,
+            this.showMoldPixelGrid,
+            this.showBG,
+            this.toolStripSeparator3,
+            this.moldZoomIn,
+            this.moldZoomOut,
+            this.toggleZoomBox,
+            this.coordinatorButton,
+            this.toolStripSeparator7,
+            this.vramRequirement});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(665, 25);
+            this.toolStrip1.TabIndex = 519;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // importIntoTilemap
+            // 
+            this.importIntoTilemap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.importIntoTilemap.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importIntoTilemap.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.importIntoTilemap.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.importIntoTilemap.Name = "importIntoTilemap";
+            this.importIntoTilemap.Size = new System.Drawing.Size(23, 22);
+            this.importIntoTilemap.ToolTipText = "Import Image(s)";
+            this.importIntoTilemap.Click += new System.EventHandler(this.importIntoTilemap_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
+            // 
+            // newMold
+            // 
+            this.newMold.Image = global::LAZYSHELL.Properties.Resources.new_small;
+            this.newMold.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.newMold.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newMold.Name = "newMold";
+            this.newMold.Size = new System.Drawing.Size(23, 22);
+            this.newMold.ToolTipText = "New Mold";
+            this.newMold.Click += new System.EventHandler(this.newMold_Click);
+            // 
+            // deleteMold
+            // 
+            this.deleteMold.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.deleteMold.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.deleteMold.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.deleteMold.Name = "deleteMold";
+            this.deleteMold.Size = new System.Drawing.Size(23, 22);
+            this.deleteMold.ToolTipText = "Delete Mold";
+            this.deleteMold.Click += new System.EventHandler(this.deleteMold_Click);
+            // 
+            // duplicateMold
+            // 
+            this.duplicateMold.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
+            this.duplicateMold.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.duplicateMold.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.duplicateMold.Name = "duplicateMold";
+            this.duplicateMold.Size = new System.Drawing.Size(23, 22);
+            this.duplicateMold.ToolTipText = "Duplicate Mold";
+            this.duplicateMold.Click += new System.EventHandler(this.duplicateMold_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
+            // 
+            // moveMoldBack
+            // 
+            this.moveMoldBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.moveMoldBack.Image = global::LAZYSHELL.Properties.Resources.back;
+            this.moveMoldBack.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.moveMoldBack.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.moveMoldBack.Name = "moveMoldBack";
+            this.moveMoldBack.Size = new System.Drawing.Size(23, 22);
+            this.moveMoldBack.Text = "Shift Back";
+            this.moveMoldBack.Click += new System.EventHandler(this.moveMoldBack_Click);
+            // 
+            // moveMoldFoward
+            // 
+            this.moveMoldFoward.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.moveMoldFoward.Image = global::LAZYSHELL.Properties.Resources.foward;
+            this.moveMoldFoward.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.moveMoldFoward.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.moveMoldFoward.Name = "moveMoldFoward";
+            this.moveMoldFoward.Size = new System.Drawing.Size(23, 22);
+            this.moveMoldFoward.Text = "Shift Foward";
+            this.moveMoldFoward.Click += new System.EventHandler(this.moveMoldFoward_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // showBG
+            // 
+            this.showBG.CheckOnClick = true;
+            this.showBG.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showBG.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.showBG.Name = "showBG";
+            this.showBG.Size = new System.Drawing.Size(23, 22);
+            this.showBG.Text = "BG";
+            this.showBG.Click += new System.EventHandler(this.showBG_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toggleZoomBox
+            // 
+            this.toggleZoomBox.Checked = true;
+            this.toggleZoomBox.CheckOnClick = true;
+            this.toggleZoomBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toggleZoomBox.Image = global::LAZYSHELL.Properties.Resources.zoomBox;
+            this.toggleZoomBox.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toggleZoomBox.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleZoomBox.Name = "toggleZoomBox";
+            this.toggleZoomBox.Size = new System.Drawing.Size(23, 22);
+            this.toggleZoomBox.ToolTipText = "Zoom Box";
+            this.toggleZoomBox.Click += new System.EventHandler(this.toggleZoomBox_Click);
+            // 
+            // coordinatorButton
+            // 
+            this.coordinatorButton.CheckOnClick = true;
+            this.coordinatorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.coordinatorButton.Image = global::LAZYSHELL.Properties.Resources.coordinator;
+            this.coordinatorButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.coordinatorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.coordinatorButton.Name = "coordinatorButton";
+            this.coordinatorButton.Size = new System.Drawing.Size(23, 22);
+            this.coordinatorButton.Text = "Coordinator";
+            this.coordinatorButton.Click += new System.EventHandler(this.coordinatorButton_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+            // 
+            // vramRequirement
+            // 
+            this.vramRequirement.Name = "vramRequirement";
+            this.vramRequirement.Size = new System.Drawing.Size(101, 22);
+            this.vramRequirement.Text = "VRAM Req: 0 bytes";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.listBoxMolds);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(78, 284);
+            this.panel1.TabIndex = 520;
+            // 
+            // pictureBoxZoom
+            // 
+            this.pictureBoxZoom.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBoxZoom.Location = new System.Drawing.Point(1, 1);
+            this.pictureBoxZoom.Margin = new System.Windows.Forms.Padding(1);
+            this.pictureBoxZoom.Name = "pictureBoxZoom";
+            this.pictureBoxZoom.Size = new System.Drawing.Size(192, 192);
+            this.pictureBoxZoom.TabIndex = 450;
+            this.pictureBoxZoom.TabStop = false;
+            this.pictureBoxZoom.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxZoom_Paint);
+            // 
+            // pictureBoxZoom_TS
+            // 
+            this.pictureBoxZoom_TS.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBoxZoom_TS.Location = new System.Drawing.Point(1, 1);
+            this.pictureBoxZoom_TS.Margin = new System.Windows.Forms.Padding(1);
+            this.pictureBoxZoom_TS.Name = "pictureBoxZoom_TS";
+            this.pictureBoxZoom_TS.Size = new System.Drawing.Size(64, 64);
+            this.pictureBoxZoom_TS.TabIndex = 521;
+            this.pictureBoxZoom_TS.TabStop = false;
+            this.pictureBoxZoom_TS.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxZoom_TS_Paint);
+            // 
+            // labelCoords
+            // 
+            this.labelCoords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelCoords.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.labelCoords.Location = new System.Drawing.Point(101, 285);
+            this.labelCoords.Name = "labelCoords";
+            this.labelCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
+            this.labelCoords.Size = new System.Drawing.Size(416, 24);
+            this.labelCoords.TabIndex = 522;
+            this.labelCoords.Text = "(x: 0, y: 0) Pixel";
+            this.labelCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel38
             // 
@@ -421,9 +658,9 @@
             this.panel38.Controls.Add(this.panel3);
             this.panel38.Controls.Add(this.panel2);
             this.panel38.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel38.Location = new System.Drawing.Point(533, 25);
+            this.panel38.Location = new System.Drawing.Point(517, 25);
             this.panel38.Name = "panel38";
-            this.panel38.Size = new System.Drawing.Size(132, 260);
+            this.panel38.Size = new System.Drawing.Size(148, 284);
             this.panel38.TabIndex = 41;
             // 
             // panel4
@@ -436,7 +673,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 179);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(132, 54);
+            this.panel4.Size = new System.Drawing.Size(148, 54);
             this.panel4.TabIndex = 426;
             // 
             // moldTileProperties
@@ -463,21 +700,21 @@
             this.label1.Location = new System.Drawing.Point(0, 33);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label1.Size = new System.Drawing.Size(64, 17);
+            this.label1.Size = new System.Drawing.Size(79, 17);
             this.label1.TabIndex = 425;
             this.label1.Text = "Subtile";
             // 
             // subtile
             // 
             this.subtile.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.subtile.Location = new System.Drawing.Point(65, 33);
+            this.subtile.Location = new System.Drawing.Point(80, 33);
             this.subtile.Maximum = new decimal(new int[] {
             511,
             0,
             0,
             0});
             this.subtile.Name = "subtile";
-            this.subtile.Size = new System.Drawing.Size(63, 17);
+            this.subtile.Size = new System.Drawing.Size(48, 17);
             this.subtile.TabIndex = 424;
             this.subtile.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.subtile.ValueChanged += new System.EventHandler(this.subtile_ValueChanged);
@@ -492,7 +729,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 158);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(132, 21);
+            this.panel3.Size = new System.Drawing.Size(148, 21);
             this.panel3.TabIndex = 425;
             // 
             // moldTileYCoord
@@ -539,14 +776,14 @@
             // 
             this.panel2.AutoSize = true;
             this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.toolStrip2);
             this.panel2.Controls.Add(this.pictureBoxTileset);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(132, 158);
+            this.panel2.Size = new System.Drawing.Size(148, 158);
             this.panel2.TabIndex = 424;
             // 
             // toolStrip2
@@ -564,7 +801,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(128, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(144, 25);
             this.toolStrip2.TabIndex = 43;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -652,160 +889,34 @@
             this.pictureBoxTileset.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTileset_Paint);
             this.pictureBoxTileset.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
             // 
-            // contextMenuStrip2
+            // bringToFrontToolStripMenuItem
             // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importToolStripMenuItem,
-            this.exportToolStripMenuItem});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip2.ShowImageMargin = false;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(134, 48);
-            this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
+            this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
+            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.bringToFrontToolStripMenuItem.Text = "Bring to Front";
+            this.bringToFrontToolStripMenuItem.Click += new System.EventHandler(this.bringToFrontToolStripMenuItem_Click);
             // 
-            // importToolStripMenuItem
+            // sendToBackToolStripMenuItem
             // 
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.importToolStripMenuItem.Text = "Import Image...";
-            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            this.sendToBackToolStripMenuItem.Name = "sendToBackToolStripMenuItem";
+            this.sendToBackToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.sendToBackToolStripMenuItem.Text = "Send to Back";
+            this.sendToBackToolStripMenuItem.Click += new System.EventHandler(this.sendToBackToolStripMenuItem_Click);
             // 
-            // exportToolStripMenuItem
+            // toolStripSeparator11
             // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.exportToolStripMenuItem.Text = "Save Image As...";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newMold,
-            this.deleteMold,
-            this.duplicateMold,
-            this.toolStripSeparator2,
-            this.showMoldPixelGrid,
-            this.showBG,
-            this.toolStripSeparator3,
-            this.moldZoomIn,
-            this.moldZoomOut,
-            this.toolStripSeparator7,
-            this.toggleZoomBox});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(665, 25);
-            this.toolStrip1.TabIndex = 519;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // newMold
-            // 
-            this.newMold.Image = global::LAZYSHELL.Properties.Resources.new_small;
-            this.newMold.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.newMold.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newMold.Name = "newMold";
-            this.newMold.Size = new System.Drawing.Size(23, 22);
-            this.newMold.ToolTipText = "New Mold";
-            this.newMold.Click += new System.EventHandler(this.newMold_Click);
-            // 
-            // deleteMold
-            // 
-            this.deleteMold.Image = global::LAZYSHELL.Properties.Resources.delete_small;
-            this.deleteMold.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.deleteMold.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.deleteMold.Name = "deleteMold";
-            this.deleteMold.Size = new System.Drawing.Size(23, 22);
-            this.deleteMold.ToolTipText = "Delete Mold";
-            this.deleteMold.Click += new System.EventHandler(this.deleteMold_Click);
-            // 
-            // duplicateMold
-            // 
-            this.duplicateMold.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
-            this.duplicateMold.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.duplicateMold.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.duplicateMold.Name = "duplicateMold";
-            this.duplicateMold.Size = new System.Drawing.Size(23, 22);
-            this.duplicateMold.ToolTipText = "Duplicate Mold";
-            this.duplicateMold.Click += new System.EventHandler(this.duplicateMold_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // showBG
-            // 
-            this.showBG.CheckOnClick = true;
-            this.showBG.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showBG.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showBG.Name = "showBG";
-            this.showBG.Size = new System.Drawing.Size(23, 22);
-            this.showBG.Text = "BG";
-            this.showBG.Click += new System.EventHandler(this.showBG_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toggleZoomBox
-            // 
-            this.toggleZoomBox.Checked = true;
-            this.toggleZoomBox.CheckOnClick = true;
-            this.toggleZoomBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toggleZoomBox.Image = global::LAZYSHELL.Properties.Resources.zoomBox;
-            this.toggleZoomBox.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toggleZoomBox.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toggleZoomBox.Name = "toggleZoomBox";
-            this.toggleZoomBox.Size = new System.Drawing.Size(23, 22);
-            this.toggleZoomBox.ToolTipText = "Zoom Box";
-            this.toggleZoomBox.Click += new System.EventHandler(this.toggleZoomBox_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.listBoxMolds);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(134, 260);
-            this.panel1.TabIndex = 520;
-            // 
-            // pictureBoxZoom
-            // 
-            this.pictureBoxZoom.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBoxZoom.Location = new System.Drawing.Point(1, 1);
-            this.pictureBoxZoom.Margin = new System.Windows.Forms.Padding(1);
-            this.pictureBoxZoom.Name = "pictureBoxZoom";
-            this.pictureBoxZoom.Size = new System.Drawing.Size(192, 192);
-            this.pictureBoxZoom.TabIndex = 450;
-            this.pictureBoxZoom.TabStop = false;
-            this.pictureBoxZoom.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxZoom_Paint);
-            // 
-            // pictureBoxZoom_TS
-            // 
-            this.pictureBoxZoom_TS.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBoxZoom_TS.Location = new System.Drawing.Point(1, 1);
-            this.pictureBoxZoom_TS.Margin = new System.Windows.Forms.Padding(1);
-            this.pictureBoxZoom_TS.Name = "pictureBoxZoom_TS";
-            this.pictureBoxZoom_TS.Size = new System.Drawing.Size(64, 64);
-            this.pictureBoxZoom_TS.TabIndex = 521;
-            this.pictureBoxZoom_TS.TabStop = false;
-            this.pictureBoxZoom_TS.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxZoom_TS_Paint);
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(130, 6);
             // 
             // SpriteMolds
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 285);
+            this.ClientSize = new System.Drawing.Size(665, 309);
             this.ControlBox = false;
-            this.Controls.Add(this.panel38);
             this.Controls.Add(this.panelMoldImage);
+            this.Controls.Add(this.labelCoords);
+            this.Controls.Add(this.panel38);
             this.Controls.Add(this.toolStrip4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
@@ -819,6 +930,12 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
+            this.contextMenuStrip2.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom_TS)).EndInit();
             this.panel38.ResumeLayout(false);
             this.panel38.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -831,12 +948,6 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTileset)).EndInit();
-            this.contextMenuStrip2.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom_TS)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -844,14 +955,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panelMoldImage;
+        private LAZYSHELL.NewPanel panelMoldImage;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton showMoldPixelGrid;
         private System.Windows.Forms.ToolStripButton moldZoomIn;
         private System.Windows.Forms.ToolStripButton moldZoomOut;
-        private System.Windows.Forms.PictureBox pictureBoxMold;
+        private LAZYSHELL.NewPictureBox pictureBoxMold;
         private System.Windows.Forms.ListBox listBoxMolds;
-        private System.Windows.Forms.Panel panel38;
+        private LAZYSHELL.NewPanel panel38;
         private System.Windows.Forms.CheckedListBox moldTileProperties;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown moldTileYCoord;
@@ -889,7 +1000,6 @@
         private System.Windows.Forms.ToolStripMenuItem invertToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem saveImageAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton toggleZoomBox;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton invert;
@@ -906,5 +1016,17 @@
         private System.Windows.Forms.ToolStripButton newTile;
         private System.Windows.Forms.ToolStripButton deleteTile;
         private System.Windows.Forms.ToolStripButton duplicateTile;
+        private System.Windows.Forms.ToolStripButton importIntoTilemap;
+        private System.Windows.Forms.Label labelCoords;
+        private System.Windows.Forms.ToolStripButton coordinatorButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton moveMoldBack;
+        private System.Windows.Forms.ToolStripButton moveMoldFoward;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripLabel vramRequirement;
+        private System.Windows.Forms.ToolStripMenuItem bringToFrontToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sendToBackToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
     }
 }

@@ -36,6 +36,7 @@ namespace LAZYSHELL
         public int index { get { return (int)dialogueNum.Value; } set { dialogueNum.Value = value; } }
         private bool updatingDialogue;
         private bool[] isDialogueChanged = new bool[4096];
+        private bool warning;
         private Bitmap
             dialogueBGImage,
             dialogueTextImage;
@@ -139,6 +140,10 @@ namespace LAZYSHELL
         {
             updatingDialogue = true;
 
+            if (dialogue.DuplicateDialogues != index)
+                dialogueTextBox.BackColor = SystemColors.Info;
+            else
+                dialogueTextBox.BackColor = SystemColors.Window;
             this.dialogueTextBox.Text = dialogue.GetDialogue(textCodeFormat);
             this.dialogueTextBox.SelectionStart = dialogue.GetCaretPosition(textCodeFormat);
 
@@ -677,6 +682,15 @@ namespace LAZYSHELL
         {
             this.dialogueTextBox.Text = dialogue.GetDialogue(textCodeFormat);
         }
+        private void synchronizeDupes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (synchronizeDupes.Checked || warning)
+                return;
+            MessageBox.Show("Unchecking this will disable sychronization of duplicate dialogues.\n\n" +
+                "Modifying any duplicate dialogues might result in a significant loss of available byte space.",
+                "LAZY SHELL");
+            warning = true;
+        }
         private void showDialogues_Click(object sender, EventArgs e)
         {
             panel60.Visible = showDialogues.Checked;
@@ -723,73 +737,72 @@ namespace LAZYSHELL
             int temp = CalculateFreeSpace();
             this.freeBytes.Text = temp.ToString() + " characters left";
             this.freeBytes.BackColor = temp >= 0 ? SystemColors.Control : Color.Red;
+            if (dialogue.DuplicateDialogues != index)
+                dialogueTextBox.BackColor = SystemColors.Info;
+            else
+                dialogueTextBox.BackColor = SystemColors.Window;
         }
-        private void dialogueTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void dialogueTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if ((e.KeyValue & 0x11) == 0x11) return;    // if ctrl+some other key, cancel
+            if ((e.KeyValue & 0x11) == 0x11)
+                return;    // if ctrl+some other key, cancel
+            if (e.KeyValue >= 0xA0)
+                return;
             int temp = dialogue.DuplicateDialogues;
             //DialogResult result;
-            if (e.KeyValue >= 0 && e.KeyValue <= 0x9F)
-            {
+            if (!synchronizeDupes.Checked)
                 dialogue.DuplicateDialogues = index;
-                if (!isDialogueChanged[index])
+            if (!isDialogueChanged[index])
+            {
+                if (index < 0x800)
                 {
-                    if (index < 0x800)
+                    for (int i = 0; i < 0x800; i++)
                     {
-                        for (int i = 0; i < 0x800; i++)
-                        {
-                            if (dialogues[i].DuplicateDialogues == index)
-                            {
-                                dialogues[i].DuplicateDialogues = i;
-                            }
-                            if (dialogues[i].WithinDialogues == index)
-                                dialogues[i].WithinDialogues = 0;
-                        }
-                    }
-                    else if (index < 0xC00)
-                    {
-                        for (int i = 0x800; i < 0xC00; i++)
-                        {
-                            if (dialogues[i].DuplicateDialogues == index)
-                            {
-                                dialogues[i].DuplicateDialogues = i;
-                            }
-                            if (dialogues[i].WithinDialogues == index)
-                                dialogues[i].WithinDialogues = 0;
-                        }
-                    }
-                    else if (index < 0x1000)
-                    {
-                        for (int i = 0xC00; i < 0x1000; i++)
-                        {
-                            if (dialogues[i].DuplicateDialogues == index)
-                            {
-                                dialogues[i].DuplicateDialogues = i;
-                            }
-                            if (dialogues[i].WithinDialogues == index)
-                                dialogues[i].WithinDialogues = 0;
-                        }
+                        if (!synchronizeDupes.Checked && dialogues[i].DuplicateDialogues == index)
+                            dialogues[i].DuplicateDialogues = i;
+                        else if (synchronizeDupes.Checked && dialogues[i].DuplicateDialogues == dialogues[index].DuplicateDialogues)
+                            dialogues[i].RawDialogue = dialogues[index].RawDialogue;
+                        if (dialogues[i].WithinDialogues == index)
+                            dialogues[i].WithinDialogues = 0;
                     }
                 }
-                isDialogueChanged[index] = true;
+                else if (index < 0xC00)
+                {
+                    for (int i = 0x800; i < 0xC00; i++)
+                    {
+                        if (!synchronizeDupes.Checked && dialogues[i].DuplicateDialogues == index)
+                            dialogues[i].DuplicateDialogues = i;
+                        else if (synchronizeDupes.Checked && dialogues[i].DuplicateDialogues == dialogues[index].DuplicateDialogues)
+                            dialogues[i].RawDialogue = dialogues[index].RawDialogue;
+                        if (dialogues[i].WithinDialogues == index)
+                            dialogues[i].WithinDialogues = 0;
+                    }
+                }
+                else if (index < 0x1000)
+                {
+                    for (int i = 0xC00; i < 0x1000; i++)
+                    {
+                        if (!synchronizeDupes.Checked && dialogues[i].DuplicateDialogues == index)
+                            dialogues[i].DuplicateDialogues = i;
+                        else if (synchronizeDupes.Checked && dialogues[i].DuplicateDialogues == dialogues[index].DuplicateDialogues)
+                            dialogues[i].RawDialogue = dialogues[index].RawDialogue;
+                        if (dialogues[i].WithinDialogues == index)
+                            dialogues[i].WithinDialogues = 0;
+                    }
+                }
             }
+            if (!synchronizeDupes.Checked)
+                isDialogueChanged[index] = true;
+            int freebytes = CalculateFreeSpace();
+            this.freeBytes.Text = freebytes.ToString() + " characters left";
+            this.freeBytes.BackColor = freebytes >= 0 ? SystemColors.Control : Color.Red;
+            if (dialogue.DuplicateDialogues != index)
+                dialogueTextBox.BackColor = SystemColors.Info;
+            else
+                dialogueTextBox.BackColor = SystemColors.Window;
         }
         private void dialogueTextBox_Enter(object sender, EventArgs e)
         {
-            if (index != dialogue.DuplicateDialogues)
-                MessageBox.Show("This dialogue is a duplicate of another.\n\n" +
-                    "Modifying it might result in a significant loss of available byte space.",
-                    "LAZY SHELL");
-            for (int i = 0; i < dialogues.Length; i++)
-            {
-                if (i != index && index == dialogues[i].DuplicateDialogues)
-                {
-                    MessageBox.Show("This dialogue is a template for one or more duplicates.\n\n" +
-                        "Modifying it might result in a significant loss of available byte space.",
-                        "LAZY SHELL");
-                    break;
-                }
-            }
         }
         private void dialogueTextBox_Leave(object sender, EventArgs e)
         {

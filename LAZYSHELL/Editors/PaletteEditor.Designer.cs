@@ -185,6 +185,7 @@
             // 
             // pictureBoxPalette
             // 
+            this.pictureBoxPalette.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.pictureBoxPalette.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxPalette.Name = "pictureBoxPalette";
             this.pictureBoxPalette.Size = new System.Drawing.Size(128, 64);

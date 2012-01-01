@@ -28,15 +28,15 @@ namespace LAZYSHELL
         }
         private Tile16x16[] tiles; public Tile16x16[] Tiles { get { return tiles; } set { tiles = value; } }
         private int[] pixels; public int[] Pixels { get { return pixels; } set { pixels = value; } }
-        private ArrayList mold_tiles = new ArrayList(); 
-        public ArrayList Mold_tiles { get { return mold_tiles; } set { mold_tiles = value; } }
-        public CopyBuffer(ArrayList mold_tiles, int width, int height)
+        private List<Mold.Tile> mold_tiles = new List<Mold.Tile>();
+        public List<Mold.Tile> Mold_tiles { get { return mold_tiles; } set { mold_tiles = value; } }
+        public CopyBuffer(List<Mold.Tile> mold_tiles, int width, int height)
         {
             this.mold_tiles = mold_tiles;
             this.width = width;
             this.height = height;
         }
-        public CopyBuffer(ArrayList mold_tiles)
+        public CopyBuffer(List<Mold.Tile> mold_tiles)
         {
             this.mold_tiles = mold_tiles;
         }

@@ -52,6 +52,7 @@
             this.pageUp = new System.Windows.Forms.ToolStripButton();
             this.pageDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.synchronizeDupes = new System.Windows.Forms.ToolStripButton();
             this.byteOrTextView = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.freeBytes = new System.Windows.Forms.ToolStripLabel();
@@ -180,9 +181,9 @@
             this.dialogueTextBox.Size = new System.Drawing.Size(220, 331);
             this.dialogueTextBox.TabIndex = 178;
             this.dialogueTextBox.Text = "";
-            this.dialogueTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dialogueTextBox_KeyDown);
             this.dialogueTextBox.Enter += new System.EventHandler(this.dialogueTextBox_Enter);
             this.dialogueTextBox.Leave += new System.EventHandler(this.dialogueTextBox_Leave);
+            this.dialogueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dialogueTextBox_KeyUp);
             this.dialogueTextBox.TextChanged += new System.EventHandler(this.dialogueTextBox_TextChanged);
             // 
             // toolStrip2
@@ -337,6 +338,7 @@
             this.pageUp,
             this.pageDown,
             this.toolStripSeparator1,
+            this.synchronizeDupes,
             this.byteOrTextView,
             this.toolStripSeparator2,
             this.freeBytes});
@@ -373,6 +375,19 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // synchronizeDupes
+            // 
+            this.synchronizeDupes.Checked = true;
+            this.synchronizeDupes.CheckOnClick = true;
+            this.synchronizeDupes.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.synchronizeDupes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.synchronizeDupes.Image = global::LAZYSHELL.Properties.Resources.synchronize;
+            this.synchronizeDupes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.synchronizeDupes.Name = "synchronizeDupes";
+            this.synchronizeDupes.Size = new System.Drawing.Size(23, 22);
+            this.synchronizeDupes.ToolTipText = "Synchronize Duplicates";
+            this.synchronizeDupes.CheckedChanged += new System.EventHandler(this.synchronizeDupes_CheckedChanged);
             // 
             // byteOrTextView
             // 
@@ -540,7 +555,7 @@
             "Value @ $7000",
             "Value @ $7024",
             "Time @ 7000",
-            "Game slot's name"});
+            "Game slot\'s name"});
             this.variables.Name = "variables";
             this.variables.Size = new System.Drawing.Size(125, 25);
             // 
@@ -1023,5 +1038,6 @@
         private System.Windows.Forms.ToolStripLabel freeTableBytes;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private System.Windows.Forms.ToolStripButton reset;
+        private System.Windows.Forms.ToolStripButton synchronizeDupes;
     }
 }

@@ -885,6 +885,7 @@
     <None Include="Resources\Tiles\stairsUpLeftLow.gif" />
     <None Include="Resources\Tiles\stairsUpRightHigh.gif" />
     <None Include="Resources\Tiles\stairsUpRightLow.gif" />
+    <None Include="Resources\coordinator.gif" />
     <Content Include="Resources\Data\apply.gif" />
     <Content Include="Resources\Data\back.gif" />
     <Content Include="Resources\Data\baseConversion.gif" />
@@ -1019,6 +1020,7 @@
     <None Include="Resources\Lunar Compress.dll" />
     <None Include="Resources\history.gif" />
     <Content Include="Resources\Main\about_small.gif" />
+    <None Include="Resources\synchronize.gif" />
     <Content Include="Resources\Tiles\fieldBase.gif" />
     <Content Include="Resources\Tiles\fieldBlock.gif" />
     <Content Include="Resources\Toggle\buttonBoundaries.gif" />

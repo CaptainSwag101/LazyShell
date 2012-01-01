@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Drawing;
 using System.Text;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Collections;
 using LAZYSHELL.Properties;
@@ -25,6 +26,7 @@ namespace LAZYSHELL.Previewer
         private bool updating = false;
         private int category;
         private int index;
+        //
         private enum Behaviours
         {
             EventPreviewer,
@@ -41,6 +43,13 @@ namespace LAZYSHELL.Previewer
             0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x1F,0x42,0x4D,0x00,0x00,0x00,0x1F,0x00,
             0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x20,0x41,0x4B,0x00,0x00,0x00,0xE0,0x07
         };
+        //
+        private const uint WM_KEYDOWN = 0x0100;
+        private const uint WM_KEYUP = 0x0101;
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
         #endregion
         // Constructor
         public Previewer(int num, int behaviour)
@@ -749,13 +758,18 @@ namespace LAZYSHELL.Previewer
             else
                 return Model.GetEditorPathWithoutFileName() + "PreviewRom" + ext;
         }
-        private void LaunchEmulator(string zsnesPath, string romPath, string args)
+        private void LaunchEmulator(string emulatorPath, string romPath, string args)
         {
             System.Diagnostics.Process proc = new System.Diagnostics.Process();
             proc.EnableRaisingEvents = false;
-            proc.StartInfo.FileName = zsnesPath;
+            proc.StartInfo.FileName = emulatorPath;
             proc.StartInfo.Arguments = args + " " + "\"" + romPath + "\"";
             proc.Start();
+            if (snes9x)
+            {
+                //PostMessage(proc.MainWindowHandle, WM_KEYDOWN, (IntPtr)Keys.F1, (IntPtr)0x003B0001);
+                //PostMessage(proc.MainWindowHandle, WM_KEYUP, (IntPtr)Keys.F1, (IntPtr)0x003B0001);
+            }
         }
         // scanning data
         private void ScanForEvents()

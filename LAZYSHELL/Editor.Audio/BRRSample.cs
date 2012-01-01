@@ -36,7 +36,8 @@ namespace LAZYSHELL
         }
         public override void Clear()
         {
-            Array.Clear(sample, 0, sample.Length);
+            if (sample != null)
+                Array.Clear(sample, 0, sample.Length);
         }
         public void Assemble(ref int offset)
         {

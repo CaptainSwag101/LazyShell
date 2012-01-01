@@ -566,8 +566,8 @@ namespace LAZYSHELL
         }
         public override void Clear()
         {
-            name = new char[15];
-            description = new char[] { '\x00' };
+            Bits.Fill(name, '\x20');
+            description = new char[1];
             fpCost = 0;
             magicPower = 0;
             hitRate = 0;

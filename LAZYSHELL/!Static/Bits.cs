@@ -401,9 +401,16 @@ namespace LAZYSHELL
                     return false;
             return true;
         }
-        public static void Fill(IList src, int value)
+        public static bool Empty(int[] source)
         {
-            for (int i = 0; i < src.Count; i++)
+            for (int i = 0; i < source.Length; i++)
+                if (source[i] != 0)
+                    return false;
+            return true;
+        }
+        public static void Fill(int[] src, int value)
+        {
+            for (int i = 0; i < src.Length; i++)
                 src[i] = value;
         }
         public static void Fill(byte[] src, byte value)
@@ -414,6 +421,11 @@ namespace LAZYSHELL
         public static void Fill(byte[] src, byte value, int start, int size)
         {
             for (int i = start; i < size + start; i++)
+                src[i] = value;
+        }
+        public static void Fill(char[] src, char value)
+        {
+            for (int i = 0; i < src.Length; i++)
                 src[i] = value;
         }
         public static int Find(byte[] data, byte[] value, int startOffset)

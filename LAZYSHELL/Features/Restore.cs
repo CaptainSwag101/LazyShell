@@ -103,10 +103,18 @@ namespace LAZYSHELL
             TreeNode scripts = elements.Nodes["Scripts"];
             TreeNode sprites = elements.Nodes["Sprites"];
 
+            if (elements.Nodes["Audio"].Checked)
+            {
+                Buffer.BlockCopy(data, 0x042333, Model.Data, 0x042333, 116 * 3);    // audio sample pointers
+                Buffer.BlockCopy(data, 0x060939, Model.Data, 0x060939, 0x094000 - 0x060939);    // audio samples
+                Buffer.BlockCopy(data, 0x146000, Model.Data, 0x146000, 0x148000 - 0x146000);    // audio samples
+                Buffer.BlockCopy(data, 0x1C8000, Model.Data, 0x1C8000, 0x1CEA00 - 0x1C8000);    // audio samples
+            }
+
             // STATS
             if (stats.Nodes["Monsters"].Checked)
             {
-                Buffer.BlockCopy(data, 0x350202, Model.Data, 0x390202, 0x200);  // monster death animation
+                Buffer.BlockCopy(data, 0x350202, Model.Data, 0x350202, 0x200);  // monster death animation
                 Buffer.BlockCopy(data, 0x390026, Model.Data, 0x390026, 0x1120); // monsters
                 Buffer.BlockCopy(data, 0x39142A, Model.Data, 0x39142A, 0xE00);  // monster rewards
                 Buffer.BlockCopy(data, 0x3992D1, Model.Data, 0x3992D1, 0x2373); // monster names, psycho
@@ -263,6 +271,9 @@ namespace LAZYSHELL
                 Buffer.BlockCopy(data, 0x006935, Model.Data, 0x006935, 0x8);    // compression table pointers
                 Buffer.BlockCopy(data, 0x220000, Model.Data, 0x220000, 0x29140);    //dialogues
                 Buffer.BlockCopy(data, 0x37E000, Model.Data, 0x37E000, 0x2000); // pointers
+            }
+            if (sprites.Nodes["BattleDialogues"].Checked)
+            {
                 Buffer.BlockCopy(data, 0x396554, Model.Data, 0x396554, 0x2D7D); // battle dialogues
             }
             if (sprites.Nodes["FontsBackgrounds"].Checked)   // fonts, backgrounds
@@ -281,6 +292,11 @@ namespace LAZYSHELL
                 Buffer.BlockCopy(data, 0x3EFD00, Model.Data, 0x3EFD00, 0x220);  // map point names
             }
 
+            if (elements.Nodes["Title"].Checked)
+            {
+                Buffer.BlockCopy(data, 0x3F216F, Model.Data, 0x3F216F, 0x3FA000 - 0x3F216F);    // compressed data
+                Buffer.BlockCopy(data, 0x3F0088, Model.Data, 0x3F0088, 0x3F0228 - 0x3F0088);    // palettes
+            }
 
             this.Close();
         }

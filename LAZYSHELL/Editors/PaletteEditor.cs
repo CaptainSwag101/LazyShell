@@ -24,7 +24,7 @@ namespace LAZYSHELL
         private int[] palettePixels, colorMapPixels;
         private int currentSwatchColor = Color.FromArgb(248, 248, 248).ToArgb();
         private int count;
-        private int start;
+        private int startRow;
         private int currentColor = 0;
         public int CurrentColor
         {
@@ -45,7 +45,7 @@ namespace LAZYSHELL
             this.paletteSetBackup = paletteSet.Copy();
             this.paletteSet = paletteSet;
             this.count = count;
-            this.start = start;
+            this.startRow = start;
             this.currentColor = start * 16;
 
             InitializeComponent();
@@ -90,7 +90,7 @@ namespace LAZYSHELL
             this.paletteSetBackup = paletteSet.Copy();
             this.paletteSet = paletteSet;
             this.count = count;
-            this.start = start;
+            this.startRow = start;
 
             this.pictureBoxPalette.Height = (count * 8) - (start * 8);
             this.panel7.Height = (count * 8 + 4) - (start * 8);
@@ -163,15 +163,15 @@ namespace LAZYSHELL
         }
         private void SetPaletteImage()
         {
-            palettePixels = Do.PaletteToPixels(paletteSet.Palettes, 8, 8, 16, count, start);
-            paletteImage = new Bitmap(Do.PixelsToImage(palettePixels, 128, (count * 8) - (start * 8)));
+            palettePixels = Do.PaletteToPixels(paletteSet.Palettes, 8, 8, 16, count, startRow, (32 - paletteSet.Length) / 2);
+            paletteImage = new Bitmap(Do.PixelsToImage(palettePixels, 128, (count * 8) - (startRow * 8)));
             pictureBoxPalette.Invalidate();
         }
         //
         private void DoAdjustment()
         {
             if (updating) return;
-            for (int i = start * 16; i < paletteSetBackup.Palette.Length; i++)
+            for (int i = startRow * 16; i < paletteSetBackup.Palette.Length; i++)
             {
                 paletteSet.Reds[i] = paletteSetBackup.Reds[i];
                 paletteSet.Greens[i] = paletteSetBackup.Greens[i];
@@ -195,7 +195,7 @@ namespace LAZYSHELL
         }
         private void DoColorBalance()
         {
-            for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -231,7 +231,7 @@ namespace LAZYSHELL
             else
                 rgbB = paletteSet.Blues;
 
-            for (int i = start * 16, o = 0; i < rgbA.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < rgbA.Length; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -259,7 +259,7 @@ namespace LAZYSHELL
             else
                 rgbB = paletteSet.Blues;
 
-            for (int i = start * 16, o = 0; i < rgbA.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < rgbA.Length; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -271,7 +271,7 @@ namespace LAZYSHELL
         {
             if (greyscale.Checked)
             {
-                for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+                for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
                 {
                     if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                         continue;
@@ -290,7 +290,7 @@ namespace LAZYSHELL
         {
             if (negative.Checked)
             {
-                for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+                for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
                 {
                     if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                         continue;
@@ -303,7 +303,7 @@ namespace LAZYSHELL
         private void DoBrightness()
         {
             if (brightness.Value == 0) return;
-            for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -319,7 +319,7 @@ namespace LAZYSHELL
         {
             if (this.contrast.Value == 0) return;
             double contrast = ((double)this.contrast.Value + 100) / 100.0;
-            for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -339,7 +339,7 @@ namespace LAZYSHELL
         private void DoThreshold()
         {
             if (!thresholdApply.Checked) return;
-            for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -361,7 +361,7 @@ namespace LAZYSHELL
 
             double h = (double)colorizeHue.Value / 255.0;
             double s = (double)colorizeSaturation.Value / 255.0;
-            for (int i = start * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -592,14 +592,14 @@ namespace LAZYSHELL
         private void pictureBoxPalette_Paint(object sender, PaintEventArgs e)
         {
             if (paletteImage != null)
-                e.Graphics.DrawImage(paletteImage, 0, 0, 128, (count * 8) - (start * 8));
+                e.Graphics.DrawImage(paletteImage, 0, 0, 128, (count * 8) - (startRow * 8));
 
-            Point p = new Point(currentColor % 16 * 8, currentColor / 16 * 8 - (start * 8));
+            Point p = new Point(currentColor % 16 * 8, currentColor / 16 * 8 - (startRow * 8));
             e.Graphics.DrawRectangle(new Pen(Color.Red), new Rectangle(p.X, p.Y, 7, 7));
         }
         private void pictureBoxPalette_MouseClick(object sender, MouseEventArgs e)
         {
-            currentColor = (e.Y / 8 * 16) + (e.X / 8) + (start * 16);
+            currentColor = (e.Y / 8 * 16) + (e.X / 8) + (startRow * 16);
             InitializeColor();
             pictureBoxPalette.Invalidate();
         }

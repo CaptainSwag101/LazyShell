@@ -74,9 +74,9 @@
             this.saveKeystrokes = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.openNewFontTable = new System.Windows.Forms.ToolStripButton();
-            this.indexLabel = new System.Windows.Forms.Label();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.reset = new System.Windows.Forms.ToolStripButton();
+            this.indexLabel = new System.Windows.Forms.Label();
             this.panel30.SuspendLayout();
             this.panel25.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -400,6 +400,7 @@
             this.charKeystroke.MaxLength = 1;
             this.charKeystroke.Name = "charKeystroke";
             this.charKeystroke.Size = new System.Drawing.Size(25, 25);
+            this.charKeystroke.TextChanged += new System.EventHandler(this.charKeystroke_TextChanged);
             // 
             // toolStripSeparator3
             // 
@@ -572,18 +573,6 @@
             this.openNewFontTable.ToolTipText = "New Font Table";
             this.openNewFontTable.Click += new System.EventHandler(this.openNewFontTable_Click);
             // 
-            // indexLabel
-            // 
-            this.indexLabel.BackColor = System.Drawing.SystemColors.Info;
-            this.indexLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.indexLabel.Location = new System.Drawing.Point(0, 0);
-            this.indexLabel.Name = "indexLabel";
-            this.indexLabel.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.indexLabel.Size = new System.Drawing.Size(100, 18);
-            this.indexLabel.TabIndex = 527;
-            this.indexLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.indexLabel.Visible = false;
-            // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
@@ -599,6 +588,18 @@
             this.reset.Size = new System.Drawing.Size(23, 22);
             this.reset.Text = "Reset";
             this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
+            // indexLabel
+            // 
+            this.indexLabel.BackColor = System.Drawing.SystemColors.Info;
+            this.indexLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.indexLabel.Location = new System.Drawing.Point(0, 0);
+            this.indexLabel.Name = "indexLabel";
+            this.indexLabel.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.indexLabel.Size = new System.Drawing.Size(100, 18);
+            this.indexLabel.TabIndex = 527;
+            this.indexLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.indexLabel.Visible = false;
             // 
             // Fonts
             // 

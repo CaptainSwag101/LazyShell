@@ -14,6 +14,7 @@ namespace LAZYSHELL
 
         private int offset, index, count, size, length;
         private int[] reds, greens, blues;
+        public int Length { get { return length; } }
         public int[] Reds { get { return reds; } set { reds = value; } }
         public int[] Greens { get { return greens; } set { greens = value; } }
         public int[] Blues { get { return blues; } set { blues = value; } }
@@ -87,7 +88,7 @@ namespace LAZYSHELL
         {
             for (int i = 0; i < count; i++)
             {
-                for (int a = 0; a < size; a++)
+                for (int a = (32 - length) / 2; a < size; a++)
                 {
                     int r = reds[i * size + a] / 8;
                     int g = greens[i * size + a] / 8;
@@ -101,7 +102,7 @@ namespace LAZYSHELL
         {
             for (int i = startIndex; i < count; i++)
             {
-                for (int a = 0; a < size; a++)
+                for (int a = (32 - length) / 2; a < size; a++)
                 {
                     int r = reds[i * size + a] / 8;
                     int g = greens[i * size + a] / 8;
@@ -115,7 +116,7 @@ namespace LAZYSHELL
         {
             for (int i = 0; i < count; i++)
             {
-                for (int a = 0; a < size; a++)
+                for (int a = (32 - length) / 2; a < size; a++)
                 {
                     int r = reds[i * size + a] / 8;
                     int g = greens[i * size + a] / 8;

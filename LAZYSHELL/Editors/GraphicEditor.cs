@@ -18,7 +18,7 @@ namespace LAZYSHELL
         private byte[] graphicsBackup;
         private int offset = 0;
         private int length = 0;
-        private int start;
+        private int startRow;
         private int index;
         private Size size = new Size(16, 48);
         private PaletteSet paletteSet;
@@ -74,7 +74,7 @@ namespace LAZYSHELL
             this.update = update;
             this.offset = offset;
             this.length = length;
-            this.start = start;
+            this.startRow = start;
             this.currentPalette = start;
             if (!Bits.Compare(graphics, graphicsBackup))
             {
@@ -107,13 +107,13 @@ namespace LAZYSHELL
             Reload(update, graphics, length, offset, paletteSet, start, format);
         }
         #region Functions
-        private void InitializeGraphicEditor(Delegate update, byte[] graphics, int length, int offset, PaletteSet paletteSet, int start, byte format)
+        private void InitializeGraphicEditor(Delegate update, byte[] graphics, int length, int offset, PaletteSet paletteSet, int startRow, byte format)
         {
             this.update = update;
             this.offset = offset;
             this.length = length;
-            this.start = start;
-            this.currentPalette = start;
+            this.startRow = startRow;
+            this.currentPalette = startRow;
             this.graphics = graphics;
             this.graphicsBackup = new byte[graphics.Length];
             graphics.CopyTo(graphicsBackup, 0);
@@ -123,8 +123,8 @@ namespace LAZYSHELL
 
             InitializeComponent();
 
-            panel110.Height = paletteSet.Palettes.Length * 8 + 4 - (start * 8);
-            pictureBoxPalette.Height = paletteSet.Palettes.Length * 8 - (start * 8);
+            panel110.Height = paletteSet.Palettes.Length * 8 + 4 - (startRow * 8);
+            pictureBoxPalette.Height = paletteSet.Palettes.Length * 8 - (startRow * 8);
             pictureBoxGraphicSet.Height = maxHeight * zoom;
             panel110.Focus();
             size.Width = pictureBoxGraphicSet.Width / zoom / 8;
@@ -157,8 +157,8 @@ namespace LAZYSHELL
         }
         private void SetPaletteImage()
         {
-            int[] palettePixels = Do.PaletteToPixels(paletteSet.Palettes, 8, 8, 16, paletteSet.Palettes.Length, start);
-            paletteImage = new Bitmap(Do.PixelsToImage(palettePixels, 128, paletteSet.Palettes.Length * 8 - (start * 8)));
+            int[] palettePixels = Do.PaletteToPixels(paletteSet.Palettes, 8, 8, 16, paletteSet.Palettes.Length, startRow, (32 - paletteSet.Length) / 2);
+            paletteImage = new Bitmap(Do.PixelsToImage(palettePixels, 128, paletteSet.Palettes.Length * 8 - (startRow * 8)));
             pictureBoxPalette.Invalidate();
         }
         #endregion
@@ -168,7 +168,7 @@ namespace LAZYSHELL
         {
             if (paletteImage != null)
                 e.Graphics.DrawImage(paletteImage, 0, 0);
-            Point p = new Point(currentColor * 8, currentPalette * 8 - (start * 8));
+            Point p = new Point(currentColor * 8, currentPalette * 8 - (startRow * 8));
             e.Graphics.DrawRectangle(new Pen(Color.Red), new Rectangle(p.X, p.Y, 7, 7));
         }
         private void pictureBoxPalette_MouseClick(object sender, MouseEventArgs e)
@@ -179,7 +179,7 @@ namespace LAZYSHELL
             if (format == 0x10 && e.X / 8 > 3)
                 return;
             pictureBoxPalette.Focus();
-            currentPalette = e.Y / 8 + start;
+            currentPalette = e.Y / 8 + startRow;
             if (e.Button == MouseButtons.Left)
                 currentColor = e.X / 8;
             else if (e.Button == MouseButtons.Right)
@@ -295,6 +295,10 @@ namespace LAZYSHELL
                 SetGraphicSetImage();
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
+        }
+        private void pictureBoxGraphicSet_MouseLeave(object sender, EventArgs e)
+        {
+            coordsLabel.Text = "";
         }
         private void pictureBoxColor_Paint(object sender, PaintEventArgs e)
         {

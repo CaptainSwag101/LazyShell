@@ -130,6 +130,9 @@ namespace LAZYSHELL
     }
     public class NewPanel : Panel
     {
+        public NewPanel()
+        {
+        }
         protected override Point ScrollToControl(Control activeControl)
         {
             return this.DisplayRectangle.Location;
@@ -139,5 +142,40 @@ namespace LAZYSHELL
     {
         private int lastSelectedIndex = -1;
         public int LastSelectedIndex { get { return lastSelectedIndex; } set { lastSelectedIndex = value; } }
+    }
+    public class NewPictureBox : PictureBox
+    {
+        public NewPictureBox()
+        {
+            this.SetStyle(ControlStyles.Selectable, true);
+            this.TabStop = true;
+        }
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            this.Focus();
+            base.OnMouseDown(e);
+        }
+        protected override bool IsInputKey(Keys keyData)
+        {
+            if (keyData == Keys.Up || keyData == Keys.Down)
+                return true;
+            if (keyData == Keys.Left || keyData == Keys.Right)
+                return true;
+            return base.IsInputKey(keyData);
+        }
+        protected override void OnEnter(EventArgs e)
+        {
+            this.Invalidate();
+            base.OnEnter(e);
+        }
+        protected override void OnLeave(EventArgs e)
+        {
+            this.Invalidate();
+            base.OnLeave(e);
+        }
+        protected override void OnPaint(PaintEventArgs pe)
+        {
+            base.OnPaint(pe);
+        }
     }
 }

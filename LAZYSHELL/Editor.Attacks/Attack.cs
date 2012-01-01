@@ -136,7 +136,7 @@ namespace LAZYSHELL
         }
         public override void Clear()
         {
-            name = new char[13];
+            Bits.Fill(name, '\x20');
             hitRate = 0;
             attackLevel = 0;
             effectMute = false;

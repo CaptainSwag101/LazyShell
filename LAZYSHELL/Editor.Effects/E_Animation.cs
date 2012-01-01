@@ -212,7 +212,7 @@ namespace LAZYSHELL
         public override void Clear()
         {
             foreach (E_Sequence s in sequences)
-                s.Frames = new ArrayList();
+                s.Frames = new List<E_Sequence.Frame>();
             int moldCount = molds.Count;
             for (int i = 1; i < moldCount; i++)
                 molds.RemoveAt(1);

@@ -156,7 +156,7 @@ namespace LAZYSHELL
             toolStrip2.Enabled = false;
             toolStrip3.Enabled = false;
             foreach (ToolStripItem item in toolStrip4.Items)
-                if (item != recentFiles && item != openSettings && item != toolStripButton5)
+                if (item != recentFiles && item != openSettings && item != info)
                     item.Enabled = false;
             this.removeHeader.Visible = false;
             this.loadRomTextBox.Text = "";
@@ -354,6 +354,11 @@ namespace LAZYSHELL
         }
         private void restoreElementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (AppControl.AssembleAndCloseWindows())
+            {
+                MessageBox.Show("All of the editor's windows must be closed before importing data from another ROM.", "LAZY SHELL");
+                return;
+            }
             importElements = new Restore();
             importElements.ShowDialog();
         }

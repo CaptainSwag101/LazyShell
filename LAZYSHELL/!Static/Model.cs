@@ -56,7 +56,12 @@ namespace LAZYSHELL
             }
             set
             {
-                settings.History = value;
+                StringReader reader = new StringReader(value);
+                string lines = "";
+                string line;
+                for (int i = 0; i < 256 && (line = reader.ReadLine()) != null; i++)
+                    lines += line + "\r\n";
+                settings.History = lines;
             }
         }
         #region Audio

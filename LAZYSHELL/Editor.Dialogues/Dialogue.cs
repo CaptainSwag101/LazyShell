@@ -16,7 +16,7 @@ namespace LAZYSHELL
         public override byte[] Data { get { return data; } set { data = value; } }
         public override int Index { get { return index; } set { index = value; } }
         private int index;
-        private char[] dialogue;
+        private char[] rawDialogue;
         private int dialogueOffset;
         private int dialoguePtr;
         private ushort[] dialoguePointer = new ushort[8];
@@ -33,15 +33,15 @@ namespace LAZYSHELL
         /*****************************************************************************
          * Get Methods
          * **************************************************************************/
-        public char[] RawDialogue { get { return dialogue; } }
+        public char[] RawDialogue { get { return rawDialogue; } set { rawDialogue = value; } }
         public string GetDialogue(bool symbols)
         {
             if (!error)
-                return new string(textHelper.DecodeText(dialogue, symbols, false));
+                return new string(textHelper.DecodeText(rawDialogue, symbols, false));
             else 
-                return new string(dialogue);
+                return new string(rawDialogue);
         } // Text with symbols, not byte values - Symbols true = {02} - false = {Line Break (press A)}
-        public int DialogueLen { get { return dialogue.Length; } }
+        public int DialogueLen { get { return rawDialogue.Length; } }
         public int DialogueOffset { get { return dialogueOffset; } set { dialogueOffset = value; } }
         public int DialoguePtr { get { return Bits.GetShort(data, 0x37E000 + index * 2); } }    // this is used to find duplicates
         public int GetCaretPosition(bool symbol) { if (symbol) return caretPositionSymbol; else return caretPositionNotSymbol; }
@@ -50,7 +50,7 @@ namespace LAZYSHELL
          * **************************************************************************/
         public bool SetDialogue(string value, bool symbols)
         {
-            this.dialogue = textHelper.EncodeText(value.ToCharArray(), symbols, false);
+            this.rawDialogue = textHelper.EncodeText(value.ToCharArray(), symbols, false);
             this.error = textHelper.Error;
             return !error;
         } // Text with byte values, not symbols
@@ -68,7 +68,7 @@ namespace LAZYSHELL
         // Dissasembler
         private void InitializeDialogue(byte[] data)
         {
-            dialogue = GetDialogue(data);
+            rawDialogue = GetDialogue(data);
         }
         public ushort Assemble(ushort offset)
         {
@@ -91,8 +91,8 @@ namespace LAZYSHELL
             else
                 dlgOffset = offset + 0x220000;
 
-            Bits.SetCharArray(data, dlgOffset, dialogue);
-            return (ushort)dialogue.Length;
+            Bits.SetCharArray(data, dlgOffset, rawDialogue);
+            return (ushort)rawDialogue.Length;
         }
         private char[] GetDialogue(byte[] data)
         {
@@ -172,13 +172,13 @@ namespace LAZYSHELL
 
         public bool CompatibleWithGame()
         {
-            for (int i = 0; i < dialogue.Length; i++)
+            for (int i = 0; i < rawDialogue.Length; i++)
             {
-                if (dialogue[i] == '\x0b' || dialogue[i] == '\x0d')
+                if (rawDialogue[i] == '\x0b' || rawDialogue[i] == '\x0d')
                 {
                     i += 2;
                 }
-                if (!IsValidCharTmp(dialogue[i]))
+                if (!IsValidCharTmp(rawDialogue[i]))
                     return false;
             }
             return true;
@@ -209,7 +209,7 @@ namespace LAZYSHELL
         }
         public override void Clear()
         {
-            dialogue = new char[0];
+            rawDialogue = new char[0];
         }
         public FileStream Serialize()
         {

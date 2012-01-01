@@ -45,6 +45,7 @@
             this.newFrame = new System.Windows.Forms.ToolStripButton();
             this.deleteFrame = new System.Windows.Forms.ToolStripButton();
             this.duplicate = new System.Windows.Forms.ToolStripButton();
+            this.reverseFrames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.moveFrameBack = new System.Windows.Forms.ToolStripButton();
             this.moveFrameFoward = new System.Windows.Forms.ToolStripButton();
@@ -52,7 +53,6 @@
             this.PlaybackSequence = new System.ComponentModel.BackgroundWorker();
             this.listBoxFrames = new System.Windows.Forms.ListBox();
             this.panelFrames = new System.Windows.Forms.Panel();
-            this.reverseFrames = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSequence)).BeginInit();
             this.panelSequence.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -125,9 +125,9 @@
             this.panelSequence.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelSequence.Controls.Add(this.pictureBoxSequence);
             this.panelSequence.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSequence.Location = new System.Drawing.Point(96, 50);
+            this.panelSequence.Location = new System.Drawing.Point(78, 50);
             this.panelSequence.Name = "panelSequence";
-            this.panelSequence.Size = new System.Drawing.Size(290, 260);
+            this.panelSequence.Size = new System.Drawing.Size(308, 260);
             this.panelSequence.TabIndex = 441;
             this.panelSequence.SizeChanged += new System.EventHandler(this.panelSequence_SizeChanged);
             // 
@@ -145,10 +145,10 @@
             this.pause,
             this.back,
             this.foward});
-            this.toolStrip1.Location = new System.Drawing.Point(96, 25);
+            this.toolStrip1.Location = new System.Drawing.Point(78, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(290, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(308, 25);
             this.toolStrip1.TabIndex = 397;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -266,6 +266,17 @@
             this.duplicate.ToolTipText = "Duplicate Frame";
             this.duplicate.Click += new System.EventHandler(this.duplicate_Click);
             // 
+            // reverseFrames
+            // 
+            this.reverseFrames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reverseFrames.Image = global::LAZYSHELL.Properties.Resources.widthDecrease;
+            this.reverseFrames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reverseFrames.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reverseFrames.Name = "reverseFrames";
+            this.reverseFrames.Size = new System.Drawing.Size(23, 22);
+            this.reverseFrames.ToolTipText = "Reverse Frames";
+            this.reverseFrames.Click += new System.EventHandler(this.reverseFrames_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -316,7 +327,7 @@
             this.listBoxFrames.IntegralHeight = false;
             this.listBoxFrames.Location = new System.Drawing.Point(0, 25);
             this.listBoxFrames.Name = "listBoxFrames";
-            this.listBoxFrames.Size = new System.Drawing.Size(96, 285);
+            this.listBoxFrames.Size = new System.Drawing.Size(78, 285);
             this.listBoxFrames.TabIndex = 444;
             this.listBoxFrames.SelectedIndexChanged += new System.EventHandler(this.listBoxFrames_SelectedIndexChanged);
             // 
@@ -326,22 +337,11 @@
             this.panelFrames.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelFrames.Controls.Add(this.frames);
             this.panelFrames.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFrames.Location = new System.Drawing.Point(96, 50);
+            this.panelFrames.Location = new System.Drawing.Point(78, 50);
             this.panelFrames.Name = "panelFrames";
-            this.panelFrames.Size = new System.Drawing.Size(290, 260);
+            this.panelFrames.Size = new System.Drawing.Size(308, 260);
             this.panelFrames.TabIndex = 0;
             this.panelFrames.SizeChanged += new System.EventHandler(this.panelFrames_SizeChanged);
-            // 
-            // reverseFrames
-            // 
-            this.reverseFrames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.reverseFrames.Image = global::LAZYSHELL.Properties.Resources.widthDecrease;
-            this.reverseFrames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.reverseFrames.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.reverseFrames.Name = "reverseFrames";
-            this.reverseFrames.Size = new System.Drawing.Size(23, 22);
-            this.reverseFrames.ToolTipText = "Reverse Frames";
-            this.reverseFrames.Click += new System.EventHandler(this.reverseFrames_Click);
             // 
             // EffectSequences
             // 

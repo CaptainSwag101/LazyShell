@@ -74,9 +74,6 @@ namespace LAZYSHELL
         }
         private void InitializeAnimation(byte[] data)
         {
-            Sequence tSequence;
-            Mold tMold;
-
             animationOffset = Bits.Get24Bit(data, 0x252000 + (index * 3)) - 0xC00000;
             ushort animationLength = Bits.GetShort(data, animationOffset);
 
@@ -92,7 +89,7 @@ namespace LAZYSHELL
             offset = sequencePacketPointer;
             for (int i = 0; i < sequenceCount; i++)
             {
-                tSequence = new Sequence();
+                Sequence tSequence = new Sequence();
                 tSequence.InitializeSequence(sm, offset);
                 sequences.Add(tSequence);
                 offset += 2;
@@ -102,7 +99,7 @@ namespace LAZYSHELL
             offset = moldPacketPointer;
             for (int i = 0; i < moldCount; i++)
             {
-                tMold = new Mold();
+                Mold tMold = new Mold();
                 tMold.InitializeMold(sm, offset, uniqueTiles, index, animationOffset);
                 molds.Add(tMold);
                 offset += 2;

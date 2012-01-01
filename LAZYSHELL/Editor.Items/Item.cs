@@ -458,6 +458,8 @@ namespace LAZYSHELL
         }
         public override void Clear()
         {
+            Bits.Fill(name, '\x20');
+            description = new char[0];
             coinValue = 0;
             speed = 0;
             attack = 0;
@@ -508,8 +510,6 @@ namespace LAZYSHELL
             itemType = 0;
             cursorBehavior = 0;
             inflictFunction = 0;
-            name = new char[0];
-            description = new char[0];
         }
 
         private char[] ParseDescription(byte[] data)

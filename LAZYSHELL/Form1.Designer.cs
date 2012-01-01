@@ -73,7 +73,7 @@ namespace LAZYSHELL
             this.history = new System.Windows.Forms.ToolStripButton();
             this.showROMInfo = new System.Windows.Forms.ToolStripButton();
             this.hexViewer = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.info = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.openAll = new System.Windows.Forms.ToolStripButton();
             this.closeAll = new System.Windows.Forms.ToolStripButton();
@@ -492,7 +492,7 @@ namespace LAZYSHELL
             this.history,
             this.showROMInfo,
             this.hexViewer,
-            this.toolStripButton5});
+            this.info});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -629,15 +629,15 @@ namespace LAZYSHELL
             this.hexViewer.Text = "Open Hex Editor";
             this.hexViewer.Click += new System.EventHandler(this.hexViewer_Click);
             // 
-            // toolStripButton5
+            // info
             // 
-            this.toolStripButton5.Image = global::LAZYSHELL.Properties.Resources.about_small;
-            this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.ToolTipText = "About";
-            this.toolStripButton5.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.info.Image = global::LAZYSHELL.Properties.Resources.about_small;
+            this.info.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.info.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.info.Name = "info";
+            this.info.Size = new System.Drawing.Size(23, 22);
+            this.info.ToolTipText = "About";
+            this.info.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // toolStrip3
             // 
@@ -825,7 +825,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton restoreElementsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton info;
         private System.Windows.Forms.ToolStripButton openSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripButton showROMInfo;

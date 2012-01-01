@@ -17,7 +17,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main editor accessed variables
-        
+
         private Sprites spritesEditor;
         private Sprite sprite { get { return spritesEditor.Sprite; } set { spritesEditor.Sprite = value; } }
         private SpriteMolds molds { get { return spritesEditor.Molds; } set { spritesEditor.Molds = value; } }
@@ -59,6 +59,8 @@ namespace LAZYSHELL
         private int duration_temp = 0;
         private Sequence sequence_temp = null;
         private ArrayList skip = new ArrayList();
+        private int width = 256;
+        private int height = 256;
         // special controls
         #endregion
         #region Functions
@@ -194,7 +196,7 @@ namespace LAZYSHELL
                 this.duration.Enabled = true;
                 this.frameMold.Value = frame.Mold;
                 this.duration.Value = frame.Duration;
-                this.panelFrames.AutoScrollPosition = new Point(index * ((256 / 2) + 4), 0);
+                this.panelFrames.AutoScrollPosition = new Point(index * ((this.width / 2) + 4), 0);
             }
             else
             {
@@ -212,17 +214,15 @@ namespace LAZYSHELL
             this.listBoxFrames.BeginUpdate();
             this.listBoxFrames.Items.Clear();
             frames.Width = Math.Max(
-                sequence.Frames.Count * (192 + 4) + 4, panelFrames.Width - 4);
-            frames.Location = new Point(
-                0, Math.Max(0, (panelFrames.Height / 2) - (frames.Height / 2)));
+                sequence.Frames.Count * (this.width + 4) + 4, panelFrames.Width - 4);
             for (int i = 0; i < sequence.Frames.Count; i++)
             {
                 PictureBox frame = new PictureBox();
                 frame.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
                 frame.BorderStyle = BorderStyle.None;
-                frame.Location = new Point(i * (192 + 4) + 4, 4);
+                frame.Location = new Point(i * (this.width + 4) + 4, 4);
                 frame.Name = "frame" + i;
-                frame.Size = new Size(192, 192);
+                frame.Size = new Size(this.width, this.height);
                 frame.Tag = i;
                 frame.MouseDown += new MouseEventHandler(frame_MouseDown);
                 frame.Paint += new PaintEventHandler(frame_Paint);
@@ -243,7 +243,7 @@ namespace LAZYSHELL
                 i++;
             }
             frames.Width = Math.Max(
-                sequence.Frames.Count * (192 + 4) + 4, panelFrames.Width - 4);
+                sequence.Frames.Count * (this.width + 4) + 4, panelFrames.Width - 4);
             frames.Location = new Point(
                 0, Math.Max(0, (panelFrames.Height / 2) - (frames.Height / 2)));
         }
@@ -267,7 +267,7 @@ namespace LAZYSHELL
                 }
                 else
                 {
-                    MessageBox.Show("Mold for frame #" + i.ToString() + " is not valid. Change to lower value.", "LAZY SHELL");
+                    //MessageBox.Show("Mold for frame #" + i.ToString() + " is not valid. Change to lower value.", "LAZY SHELL");
                     sequenceImages.Add(new Bitmap(256, 256));
                 }
                 i++;
@@ -303,29 +303,33 @@ namespace LAZYSHELL
             int index = (int)frame.Tag;
             if (molds.ShowBG)
                 e.Graphics.Clear(Color.FromArgb(palette[0]));
-            Rectangle dst = new Rectangle(0, 0, 192, 192);
+            Rectangle dst = new Rectangle(0, 0, 256, 256);
             Rectangle src;
             if (sequence.Frames[index].Mold < animation.Molds.Count)
             {
-                //if (animation.Molds[sequence.Frames[index].Mold].Gridplane)
-                src = new Rectangle(32, 32, 192, 192);
-                //else
-                //    src = new Rectangle(0, 0, 256, 256);
+                src = new Rectangle(0, 0, 256, 256);
                 if (index < sequenceImages.Count)
                     e.Graphics.DrawImage(sequenceImages[index], dst, src, GraphicsUnit.Pixel);
+            }
+            else
+            {
+                Font font = new Font("Tahoma", 10F, FontStyle.Bold);
+                SizeF size = e.Graphics.MeasureString("(INVALID MOLD INDEX)", font, new PointF(0, 0), StringFormat.GenericDefault);
+                Point point = new Point((frame.Width - (int)size.Width) / 2, (frame.Height - (int)size.Height) / 2);
+                Do.DrawString(e.Graphics, point, "(INVALID MOLD INDEX)", Color.Black, Color.Red, font);
             }
             if (this.index == index)
             {
                 e.Graphics.DrawRectangle(
                     new Pen(new SolidBrush(Color.Red)),
-                    new Rectangle(0, 0, 191, 191));
+                    new Rectangle(0, 0, this.width - 1, this.height - 1));
                 frame.Focus();
             }
             else
             {
                 e.Graphics.DrawRectangle(
                     new Pen(new SolidBrush(SystemColors.ControlDark)),
-                    new Rectangle(0, 0, 191, 191));
+                    new Rectangle(0, 0, this.width - 1, this.height - 1));
             }
         }
         private void frame_MouseDown(object sender, MouseEventArgs e)
@@ -335,7 +339,7 @@ namespace LAZYSHELL
             frame.Focus();
             index = (int)frame.Tag;
             if (panelFrames.HorizontalScroll.Visible)
-                panelFrames.HorizontalScroll.Value = index * (192 + 4);
+                panelFrames.HorizontalScroll.Value = index * (this.width + 4);
         }
         private void frame_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -345,14 +349,12 @@ namespace LAZYSHELL
             if (e.KeyData == Keys.Left || e.KeyData == Keys.Up)
                 index--;
             if (panelFrames.HorizontalScroll.Visible)
-                panelFrames.HorizontalScroll.Value = index * (192 + 4);
+                panelFrames.HorizontalScroll.Value = index * (this.width + 4);
         }
         private void panelFrames_SizeChanged(object sender, EventArgs e)
         {
             frames.Width = Math.Max(
-                sequence.Frames.Count * (192 + 4) + 4, panelFrames.Width - 4);
-            frames.Location = new Point(
-                0, Math.Max(0, (panelFrames.Height / 2) - (frames.Height / 2)));
+                sequence.Frames.Count * (this.width + 4) + 4, panelFrames.Width - 4);
         }
         private void panelSequence_SizeChanged(object sender, EventArgs e)
         {
@@ -367,7 +369,7 @@ namespace LAZYSHELL
             if (updating) return;
             index = listBoxFrames.SelectedIndex;
             if (panelFrames.HorizontalScroll.Visible)
-                panelFrames.HorizontalScroll.Value = index * (192 + 4);
+                panelFrames.HorizontalScroll.Value = index * (this.width + 4);
         }
         private void sequences_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -425,6 +427,8 @@ namespace LAZYSHELL
         {
             sequenceImage = new Bitmap((Bitmap)sequenceImages[e.ProgressPercentage]);
             pictureBoxSequence.Invalidate();
+            if (!infinitePlayback.Checked)
+                PlaybackSequence.CancelAsync();
         }
         private void PlaybackSequence_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -544,7 +548,7 @@ namespace LAZYSHELL
             // update free space
             animation.Assemble();
             spritesEditor.CalculateFreeSpace();
-            toolStrip1.Enabled = duplicateFrame.Enabled = deleteFrame.Enabled = 
+            toolStrip1.Enabled = duplicateFrame.Enabled = deleteFrame.Enabled =
                 moveFrameBack.Enabled = moveFrameFoward.Enabled = reverseFrames.Enabled = true;
         }
         private void duplicateFrame_Click(object sender, EventArgs e)

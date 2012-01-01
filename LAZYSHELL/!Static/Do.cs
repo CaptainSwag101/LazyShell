@@ -150,6 +150,50 @@ namespace LAZYSHELL
             }
         }
         /// <summary>
+        /// Resizes the canvas of a bitmap image.
+        /// </summary>
+        /// <param name="image">The image to modify.</param>
+        /// <param name="width">The new width of the canvas.</param>
+        /// <param name="height">The new height of the canvas.</param>
+        /// <returns></returns>
+        public static Bitmap CanvasSize(Bitmap image, int width, int height)
+        {
+            Bitmap resized = new Bitmap(width, height);
+            Graphics temp = Graphics.FromImage(resized);
+            temp.DrawImage(image, 0, 0, image.Width, image.Height);
+            return resized;
+        }
+        public static Bitmap CombineImages(Bitmap[] images, int maxwidth, int maxheight, int tilesize, bool padedges)
+        {
+            if (images.Length == 0)
+                return null;
+            // pad dimensions to multiples of tilesize
+            Bitmap sheet = new Bitmap(maxwidth, maxheight);
+            int rowheight = 0;
+            for (int i = 0, x = 0, y = 0; i < images.Length; i++)
+            {
+                // if need to move to a new row
+                if (images[i].Width + x >= maxwidth)
+                {
+                    x = 0;
+                    y += rowheight;
+                    if (padedges && y % tilesize != 0)
+                        y += tilesize - (y % tilesize);
+                }
+                // raise the row's height if needed
+                if (images[i].Height > rowheight)
+                    rowheight = images[i].Height;
+                // draw image to sheet
+                Graphics temp = Graphics.FromImage(sheet);
+                temp.DrawImage(images[i], x, y, Math.Min(256, images[i].Width), Math.Min(256, images[i].Height));
+                //
+                x += images[i].Width;
+                if (padedges && x % tilesize != 0)
+                    x += tilesize - (x % tilesize);
+            }
+            return sheet;
+        }
+        /// <summary>
         /// Copy a block of BPP graphics into a region in another block of BPP graphics.
         /// </summary>
         /// <param name="src">The source graphics to copy from.</param>
@@ -2027,7 +2071,173 @@ namespace LAZYSHELL
             }
             return temp;
         }
-        public static void ImageToTilemap(ref Bitmap[] images, ref int[] palette, int moldIndex, byte format,
+        public static void ImagesToMolds(List<Mold> molds, List<Mold.Tile> uniqueTiles, Bitmap[] images, ref int[] palette, ref byte[] graphics, 
+            int startingIndex, bool replaceMolds, bool replacePalette)
+        {
+            Bitmap sheet = CombineImages(images, 128, 512, 8, true);
+            int[] pixels = ImageToPixels(sheet);
+            int[] rpalette;
+            if (replacePalette)
+                rpalette = Do.ReduceColorDepth(pixels, 16, palette[0]);
+            else
+                rpalette = palette;
+            PixelsToBPP(pixels, graphics, new Size(16, 64), rpalette, 0x20);
+            graphics = CullGraphics(graphics, rpalette, 0x20, false);
+            // create pixel array of culled graphics for easy reading
+            int[] pixels_graphics = GetPixelRegion(graphics, 0x20, rpalette, 16, 0, 0, 16, 32, 0);
+            // create a mold of each image
+            if (replaceMolds)
+            {
+                uniqueTiles.Clear();
+                molds.Clear();
+            }
+            for (int i = 0; i < images.Length; i++)
+            {
+                Bitmap image = images[i];
+                // set width/height
+                int width = Math.Min(128, image.Width / 8 * 8);
+                if (image.Width % 8 != 0)
+                    width += 8;
+                int height = Math.Min(256, image.Height / 8 * 8);
+                if (image.Height % 8 != 0)
+                    height += 8;
+                // if to be tilemap, add another 8 if needed
+                if (width > 32 || height > 32)
+                {
+                    if (width % 16 != 0)
+                        width += 8;
+                    if (height % 16 != 0)
+                        height += 8;
+                }
+                image = CanvasSize(image, width, height);
+                // create mold from image
+                Mold mold = new Mold();
+                // create pixel array of image for easy reading
+                int[] pixels_image = ImageToPixels(image);
+                byte[] temp = new byte[width * height * 0x20];
+                PixelsToBPP(pixels_image, temp, new Size(width / 8, height / 8), rpalette, 0x20);
+                pixels_image = GetPixelRegion(temp, 0x20, rpalette, width / 8, 0, 0, width / 8, height / 8, 0);
+                //
+                #region create tilemap mold
+                if ((width <= 16 && height <= 16) || width > 32 || height > 32)
+                {
+                    mold.Gridplane = false;
+                    mold.Tiles = new List<Mold.Tile>();
+                    // read each 16x16 tile in mold image
+                    for (int y = 0; y < height / 16; y++)
+                    {
+                        for (int x = 0; x < width / 16; x++)
+                        {
+                            Mold.Tile tile = new Mold.Tile();
+                            tile.SubTiles = new ushort[4];
+                            tile.XCoord = (byte)(x * 16);
+                            tile.YCoord = (byte)(y * 16);
+                            // create pixel array of 16x16 tile
+                            int[] dst_tile = GetPixelRegion(pixels_image, width, height, 16, 16, x * 16, y * 16);
+                            // if no pixels in tile, skip
+                            if (Bits.Empty(dst_tile))
+                                continue;
+                            // read each 8x8 subtile in tile
+                            for (int s = 0; s < 4; s++)
+                            {
+                                int[] dst = GetPixelRegion(dst_tile, 16, 16, 8, 8, (s % 2) * 8, (s / 2) * 8);
+                                if (Bits.Empty(dst))
+                                {
+                                    tile.SubTiles[s] = 0;
+                                    continue;
+                                }
+                                // read each 8x8 tile from culled graphic set and assign indexes
+                                for (int b = 0; b < 32; b++)
+                                {
+                                    for (int a = 0; a < 16; a++)
+                                    {
+                                        int index = b * 16 + a;
+                                        int[] src = GetPixelRegion(pixels_graphics, 128, 256, 8, 8, a * 8, b * 8);
+                                        if (Bits.Compare(src, dst))
+                                        {
+                                            // set index of subtile
+                                            tile.SubTiles[s] = (ushort)Math.Min(512, index + 1 + startingIndex);
+                                            // if index over 255, needs to be 16bit
+                                            if (index > 255)
+                                                tile.TileFormat = 1;
+                                        }
+                                    }
+                                }
+                            }
+                            mold.Tiles.Add(tile);
+                            uniqueTiles.Add(tile);
+                        }
+                    }
+                    // center mold in 256x256 map
+                    foreach (Mold.Tile tile in mold.Tiles)
+                    {
+                        tile.XCoord += (byte)((256 - image.Width) / 2);
+                        tile.YCoord += (byte)((256 - image.Height) / 2);
+                    }
+                }
+                #endregion
+                #region create gridplane mold
+                else
+                {
+                    mold.Gridplane = true;
+                    mold.Tiles = new List<Mold.Tile>();
+                    // create tile and initialize properties
+                    Mold.Tile tile = new Mold.Tile();
+                    tile.Gridplane = true;
+                    tile.TileSize = (width / 8) * (height / 8);
+                    tile.SubTiles = new ushort[tile.TileSize];
+                    if (width == 24 && height == 24) tile.TileFormat = 0;
+                    else if (width == 24 && height == 32) tile.TileFormat = 1;
+                    else if (width == 32 && height == 24) tile.TileFormat = 2;
+                    else if (width == 32 && height == 32) tile.TileFormat = 3;
+                    // read each 8x8 tile in mold image
+                    for (int y = 0; y < height / 8; y++)
+                    {
+                        for (int x = 0; x < width / 8; x++)
+                        {
+                            // read each 8x8 tile from culled graphic set and assign indexes
+                            for (int b = 0; b < 32; b++)
+                            {
+                                for (int a = 0; a < 16; a++)
+                                {
+                                    int index = b * 16 + a;
+                                    int[] src = GetPixelRegion(pixels_graphics, 128, 256, 8, 8, a * 8, b * 8);
+                                    int[] dst = GetPixelRegion(pixels_image, width, height, 8, 8, x * 8, y * 8);
+                                    if (Bits.Empty(dst))
+                                        tile.SubTiles[y * (width / 8) + x] = 0;
+                                    if (Bits.Compare(src, dst))
+                                    {
+                                        // set index of subtile
+                                        tile.SubTiles[y * (width / 8) + x] = (ushort)Math.Min(512, index + 1 + startingIndex);
+                                        // if index over 255, needs to be 16bit
+                                        if (index > 255)
+                                            tile.Is16bit = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (tile.Is16bit)
+                        tile.TileSize += 2;
+                    //
+                    mold.Tiles.Add(tile);
+                }
+                #endregion
+                molds.Add(mold);
+            }
+            // set new palette
+            palette = rpalette;
+        }
+        /// <summary>
+        /// Combines several bitmaps into a single bitmap.
+        /// </summary>
+        /// <param name="images">The collection of bitmaps.</param>
+        /// <param name="maxwidth">The maximum width of the bitmap sheet.</param>
+        /// <param name="maxheight">The maximum height of the bitmap sheet.</param>
+        /// <param name="tilesize">The default tile size. Typically 8 or 16.</param>
+        /// <param name="padedges">Each image will be padded to fit a multiple of the tile size.</param>
+        /// <returns></returns>
+        public static void ImagesToTilemaps(ref Bitmap[] images, ref int[] palette, int moldIndex, byte format,
             ref byte[] graphics_, ref Tile16x16[] tiles_, ref byte[][] tilemaps_, bool newPalette)
         {
             int count = images.Length;
@@ -2185,13 +2395,13 @@ namespace LAZYSHELL
         /// <param name="cols">The number of color rows the pixel array will have.</param>
         /// <param name="rows">The number of color columns the pixel array will have</param>
         /// <returns></returns>
-        public static int[] PaletteToPixels(int[] palette, int colorWidth, int colorHeight, int cols, int rows)
+        public static int[] PaletteToPixels(int[] palette, int colorWidth, int colorHeight, int cols, int rows, int startCol)
         {
             Size size = new Size(colorWidth * cols, colorHeight * rows);
             int[] pixels = new int[size.Width * size.Height];
             for (int i = 0; i < rows; i++)
             {
-                for (int a = 0; a < cols; a++)
+                for (int a = startCol; a < cols; a++)
                 {
                     for (int y = 0; y < colorHeight; y++)
                     {
@@ -2211,19 +2421,20 @@ namespace LAZYSHELL
         /// <param name="cols">The number of color rows the pixel array will have.</param>
         /// <param name="rows">The number of color columns the pixel array will have</param>
         /// <param name="start">The palette to start drawing from</param>
+        /// <param name="startColor">The column to start drawing from</param>
         /// <returns></returns>
-        public static int[] PaletteToPixels(int[][] palette, int colorWidth, int colorHeight, int cols, int rows, int start)
+        public static int[] PaletteToPixels(int[][] palette, int colorWidth, int colorHeight, int cols, int rows, int startRow, int startCol)
         {
             Size size = new Size(colorWidth * cols, colorHeight * rows);
             int[] pixels = new int[size.Width * size.Height];
-            for (int i = 0; i < rows - start && i < palette.Length; i++)
+            for (int i = 0; i < rows - startRow && i < palette.Length; i++)
             {
-                for (int a = 0; a < cols; a++)
+                for (int a = startCol; a < cols; a++)
                 {
                     for (int y = 0; y < colorHeight; y++)
                     {
                         for (int x = 0; x < colorWidth; x++)
-                            pixels[((y + (i * colorHeight)) * size.Width) + x + (a * colorWidth)] = palette[i + start][a];
+                            pixels[((y + (i * colorHeight)) * size.Width) + x + (a * colorWidth)] = palette[i + startRow][a];
                     }
                 }
             }

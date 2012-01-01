@@ -1195,7 +1195,7 @@ namespace LAZYSHELL
             #region Object Selection
             if (!state.Template && !state.Draw && !state.Select && !state.Erase && e.Button == MouseButtons.Left)
             {
-                if (state.Mask && mouseOverObject.StartsWith("mask"))
+                if (state.Mask && mouseOverObject != null && mouseOverObject.StartsWith("mask"))
                 {
                     levels.TabControl.SelectedIndex = 1;
                     mouseDownObject = mouseOverObject;

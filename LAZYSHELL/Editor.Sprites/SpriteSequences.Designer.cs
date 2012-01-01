@@ -51,6 +51,8 @@
             this.pause = new System.Windows.Forms.ToolStripButton();
             this.back = new System.Windows.Forms.ToolStripButton();
             this.foward = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.infinitePlayback = new LAZYSHELL.ToolStripCheckBox();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.newFrame = new System.Windows.Forms.ToolStripButton();
             this.deleteFrame = new System.Windows.Forms.ToolStripButton();
@@ -125,9 +127,9 @@
             this.panelSequence.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelSequence.Controls.Add(this.pictureBoxSequence);
             this.panelSequence.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSequence.Location = new System.Drawing.Point(192, 75);
+            this.panelSequence.Location = new System.Drawing.Point(156, 75);
             this.panelSequence.Name = "panelSequence";
-            this.panelSequence.Size = new System.Drawing.Size(476, 260);
+            this.panelSequence.Size = new System.Drawing.Size(512, 284);
             this.panelSequence.TabIndex = 6;
             this.panelSequence.SizeChanged += new System.EventHandler(this.panelSequence_SizeChanged);
             // 
@@ -144,9 +146,9 @@
             // frames
             // 
             this.frames.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.frames.Location = new System.Drawing.Point(0, 28);
+            this.frames.Location = new System.Drawing.Point(0, 0);
             this.frames.Name = "frames";
-            this.frames.Size = new System.Drawing.Size(200, 200);
+            this.frames.Size = new System.Drawing.Size(264, 264);
             this.frames.TabIndex = 18;
             // 
             // sequences
@@ -156,7 +158,7 @@
             this.sequences.IntegralHeight = false;
             this.sequences.Location = new System.Drawing.Point(0, 25);
             this.sequences.Name = "sequences";
-            this.sequences.Size = new System.Drawing.Size(96, 310);
+            this.sequences.Size = new System.Drawing.Size(78, 334);
             this.sequences.TabIndex = 19;
             this.sequences.SelectedIndexChanged += new System.EventHandler(this.sequences_SelectedIndexChanged);
             // 
@@ -248,11 +250,13 @@
             this.play,
             this.pause,
             this.back,
-            this.foward});
-            this.toolStrip1.Location = new System.Drawing.Point(192, 50);
+            this.foward,
+            this.toolStripSeparator5,
+            this.infinitePlayback});
+            this.toolStrip1.Location = new System.Drawing.Point(156, 50);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(476, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(512, 25);
             this.toolStrip1.TabIndex = 444;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -322,6 +326,18 @@
             this.foward.Text = "Foward 1 frame";
             this.foward.Click += new System.EventHandler(this.foward_Click);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // infinitePlayback
+            // 
+            this.infinitePlayback.Checked = true;
+            this.infinitePlayback.Name = "infinitePlayback";
+            this.infinitePlayback.Size = new System.Drawing.Size(109, 22);
+            this.infinitePlayback.Text = "Infinite Playback";
+            // 
             // toolStrip3
             // 
             this.toolStrip3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -333,10 +349,10 @@
             this.toolStripSeparator4,
             this.moveFrameBack,
             this.moveFrameFoward});
-            this.toolStrip3.Location = new System.Drawing.Point(96, 25);
+            this.toolStrip3.Location = new System.Drawing.Point(78, 25);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(572, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(590, 25);
             this.toolStrip3.TabIndex = 445;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -421,9 +437,9 @@
             this.listBoxFrames.Dock = System.Windows.Forms.DockStyle.Left;
             this.listBoxFrames.FormattingEnabled = true;
             this.listBoxFrames.IntegralHeight = false;
-            this.listBoxFrames.Location = new System.Drawing.Point(96, 50);
+            this.listBoxFrames.Location = new System.Drawing.Point(78, 50);
             this.listBoxFrames.Name = "listBoxFrames";
-            this.listBoxFrames.Size = new System.Drawing.Size(96, 285);
+            this.listBoxFrames.Size = new System.Drawing.Size(78, 309);
             this.listBoxFrames.TabIndex = 446;
             this.listBoxFrames.SelectedIndexChanged += new System.EventHandler(this.listBoxFrames_SelectedIndexChanged);
             // 
@@ -433,9 +449,9 @@
             this.panelFrames.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelFrames.Controls.Add(this.frames);
             this.panelFrames.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFrames.Location = new System.Drawing.Point(192, 75);
+            this.panelFrames.Location = new System.Drawing.Point(156, 75);
             this.panelFrames.Name = "panelFrames";
-            this.panelFrames.Size = new System.Drawing.Size(476, 260);
+            this.panelFrames.Size = new System.Drawing.Size(512, 284);
             this.panelFrames.TabIndex = 447;
             this.panelFrames.SizeChanged += new System.EventHandler(this.panelFrames_SizeChanged);
             // 
@@ -443,7 +459,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 335);
+            this.ClientSize = new System.Drawing.Size(668, 359);
             this.ControlBox = false;
             this.Controls.Add(this.panelFrames);
             this.Controls.Add(this.panelSequence);
@@ -504,5 +520,7 @@
         private ToolStripNumericUpDown frameMold = new ToolStripNumericUpDown();
         private ToolStripNumericUpDown duration = new ToolStripNumericUpDown();
         private System.Windows.Forms.ToolStripButton reverseFrames;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private LAZYSHELL.ToolStripCheckBox infinitePlayback;
     }
 }

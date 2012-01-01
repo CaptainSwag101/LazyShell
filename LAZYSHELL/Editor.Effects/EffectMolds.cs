@@ -513,8 +513,8 @@ namespace LAZYSHELL
             int y = Math.Max(0, Math.Min(e.Y / zoom, height));
             #region Zooming
             Point p = new Point();
-            p.X = Math.Abs(panel99.AutoScrollPosition.X);
-            p.Y = Math.Abs(panel99.AutoScrollPosition.Y);
+            p.X = Math.Abs(panelMoldImage.AutoScrollPosition.X);
+            p.Y = Math.Abs(panelMoldImage.AutoScrollPosition.Y);
             if ((e_moldZoomIn.Checked && e.Button == MouseButtons.Left) || (e_moldZoomOut.Checked && e.Button == MouseButtons.Right))
             {
                 if (zoom < 8)
@@ -525,12 +525,12 @@ namespace LAZYSHELL
                     p.Y += e.Y;
                     pictureBoxE_Mold.Width = width * zoom;
                     pictureBoxE_Mold.Height = height * zoom;
-                    panel99.Focus();
-                    panel99.AutoScrollPosition = p;
-                    panel99.VerticalScroll.SmallChange *= 2;
-                    panel99.HorizontalScroll.SmallChange *= 2;
-                    panel99.VerticalScroll.LargeChange *= 2;
-                    panel99.HorizontalScroll.LargeChange *= 2;
+                    panelMoldImage.Focus();
+                    panelMoldImage.AutoScrollPosition = p;
+                    panelMoldImage.VerticalScroll.SmallChange *= 2;
+                    panelMoldImage.HorizontalScroll.SmallChange *= 2;
+                    panelMoldImage.VerticalScroll.LargeChange *= 2;
+                    panelMoldImage.HorizontalScroll.LargeChange *= 2;
                     pictureBoxE_Mold.Invalidate();
                     return;
                 }
@@ -548,12 +548,12 @@ namespace LAZYSHELL
 
                     pictureBoxE_Mold.Width = width * zoom;
                     pictureBoxE_Mold.Height = height * zoom;
-                    panel99.Focus();
-                    panel99.AutoScrollPosition = p;
-                    panel99.VerticalScroll.SmallChange /= 2;
-                    panel99.HorizontalScroll.SmallChange /= 2;
-                    panel99.VerticalScroll.LargeChange /= 2;
-                    panel99.HorizontalScroll.LargeChange /= 2;
+                    panelMoldImage.Focus();
+                    panelMoldImage.AutoScrollPosition = p;
+                    panelMoldImage.VerticalScroll.SmallChange /= 2;
+                    panelMoldImage.HorizontalScroll.SmallChange /= 2;
+                    panelMoldImage.VerticalScroll.LargeChange /= 2;
+                    panelMoldImage.HorizontalScroll.LargeChange /= 2;
                     pictureBoxE_Mold.Invalidate();
                     return;
                 }
@@ -597,19 +597,19 @@ namespace LAZYSHELL
                 if (draw.Checked)
                 {
                     Draw(pictureBoxE_Mold.CreateGraphics(), x, y);
-                    panel99.AutoScrollPosition = p;
+                    panelMoldImage.AutoScrollPosition = p;
                     return;
                 }
                 if (erase.Checked)
                 {
                     Erase(x, y);
                     pictureBoxE_Mold.Invalidate(new Rectangle(x / 16 * 16, y / 16 * 16, 16, 16));
-                    panel99.AutoScrollPosition = p;
+                    panelMoldImage.AutoScrollPosition = p;
                     return;
                 }
             }
             #endregion
-            panel99.AutoScrollPosition = p;
+            panelMoldImage.AutoScrollPosition = p;
             pictureBoxE_Mold.Invalidate();
         }
         private void pictureBoxE_Mold_MouseMove(object sender, MouseEventArgs e)
@@ -617,6 +617,7 @@ namespace LAZYSHELL
             // set a floor and ceiling for the coordinates
             int x = Math.Max(0, Math.Min(e.X / zoom, width));
             int y = Math.Max(0, Math.Min(e.Y / zoom, height));
+            labelCoords.Text = "(x: " + x + ", y: " + y + ") Pixel";
             // must first check if within same bounds as last call of MouseMove event
             mouseWithinSameBounds = mouseOverTile == (y / 16 * 64) + (x / 16);
             // now set the properties
@@ -693,7 +694,7 @@ namespace LAZYSHELL
             }
             Point p = new Point(Math.Abs(pictureBoxE_Mold.Left), Math.Abs(pictureBoxE_Mold.Top));
             pictureBoxE_Mold.Focus();
-            panel99.AutoScrollPosition = p;
+            panelMoldImage.AutoScrollPosition = p;
             // update free space
             animation.Assemble();
             effectsEditor.CalculateFreeSpace();
@@ -1058,7 +1059,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("Would you like to create a new palette from the imported image(s)?", "LAZY SHELL",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 newPalette = true;
-            Do.ImageToTilemap(ref imports, ref palette, index, animation.Codec == 1 ? (byte)0x10 : (byte)0x20,
+            Do.ImagesToTilemaps(ref imports, ref palette, index, animation.Codec == 1 ? (byte)0x10 : (byte)0x20,
                 ref graphics, ref tiles, ref tilemaps, newPalette);
             for (int i = 0; i < palette.Length; i++)
             {

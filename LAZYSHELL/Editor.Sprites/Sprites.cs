@@ -238,7 +238,7 @@ namespace LAZYSHELL
             foreach (GraphicPalette gp in images)
                 gp.Assemble();
             foreach (PaletteSet p in palettes)
-                p.Assemble();
+                p.Assemble(0);
             Buffer.BlockCopy(Model.SpriteGraphics, 0, data, 0x280000, 0xB4000);
 
             Model.HexViewer.Offset = animation.AnimationOffset & 0xFFFFF0;
@@ -307,7 +307,7 @@ namespace LAZYSHELL
                 "such as Culex use larger values.");
         }
         // editors
-        private void LoadPaletteEditor()
+        public void LoadPaletteEditor()
         {
             if (paletteEditor == null)
             {
@@ -317,7 +317,7 @@ namespace LAZYSHELL
             else
                 paletteEditor.Reload(new Function(PaletteUpdate), paletteSet, 1, 0);
         }
-        private void LoadGraphicEditor()
+        public void LoadGraphicEditor()
         {
             if (graphicEditor == null)
             {
@@ -343,7 +343,7 @@ namespace LAZYSHELL
             else
                 sequences.Reload(this);
         }
-        private void PaletteUpdate()
+        public void PaletteUpdate()
         {
             foreach (Mold mold in animation.Molds)
             {
@@ -370,6 +370,15 @@ namespace LAZYSHELL
             sequences.InvalidateImages();
             graphics.CopyTo(Model.SpriteGraphics, image.GraphicOffset - 0x280000);
         }
+        private void CloseEditors()
+        {
+            graphicEditor.Close();
+            paletteEditor.Close();
+            searchWindow.Close();
+            graphicEditor.Dispose();
+            paletteEditor.Dispose();
+            searchWindow.Dispose();
+        }
         #endregion
         #region Event Handlers
         // main
@@ -384,11 +393,13 @@ namespace LAZYSHELL
                 Assemble();
             else if (result == DialogResult.No)
             {
+                CloseEditors();
                 Model.Sprites = null;
                 Model.SpriteGraphics = null;
                 Model.SpritePalettes = null;
                 Model.Animations = null;
                 Model.GraphicPalettes = null;
+                return;
             }
             else if (result == DialogResult.Cancel)
             {
@@ -396,12 +407,7 @@ namespace LAZYSHELL
                 return;
             }
         Close:
-            graphicEditor.Close();
-            paletteEditor.Close();
-            searchWindow.Close();
-            graphicEditor.Dispose();
-            paletteEditor.Dispose();
-            searchWindow.Dispose();
+            CloseEditors();
         }
         private void number_ValueChanged(object sender, EventArgs e)
         {
@@ -491,6 +497,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
             animation.VramAllocation = (ushort)animationVRAM.Value;
+            molds.SetAvailableVRAM();
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {

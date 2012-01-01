@@ -1493,7 +1493,7 @@ namespace LAZYSHELL
                     Model.TileSets[i] = new byte[0x2000];
                 Model.EditTileSets[i] = true;
             }
-            for (int i = 0; i <= Model.TileMaps.Length; i++)
+            for (int i = 0; i < Model.TileMaps.Length; i++)
             {
                 if (i < 0x40)
                     Model.TileMaps[i] = new byte[0x1000];
