@@ -427,7 +427,8 @@ namespace LAZYSHELL
         {
             sequenceImage = new Bitmap((Bitmap)sequenceImages[e.ProgressPercentage]);
             pictureBoxSequence.Invalidate();
-            if (!infinitePlayback.Checked)
+            // if at last frame and no infinite playback
+            if (e.ProgressPercentage >= sequenceImages.Count - 1 && !infinitePlayback.Checked)
                 PlaybackSequence.CancelAsync();
         }
         private void PlaybackSequence_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

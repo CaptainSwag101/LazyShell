@@ -132,6 +132,7 @@ namespace LAZYSHELL
     {
         public NewPanel()
         {
+
         }
         protected override Point ScrollToControl(Control activeControl)
         {

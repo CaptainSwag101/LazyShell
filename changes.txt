@@ -1,5 +1,23 @@
 Major changes/additions are indicated by ***
 
+v3.9.1 (2012-01-09)
+--------------------------------------
+Additions:
+*Sprites: manually adjust coords of current/all molds by amount
+
+Fixes:
+*Events: crash if paste action command to blank event script
+*Events: couldn't paste action commands into blank action script
+*Levels: resetting NPCs crash b/c not nulling npc images
+*Sprites: old import feature not updating graphic editor, graphics
+*Sprites: crash when import image into gridplane smaller than size
+*Sprites: maximum subtile value should be 512, not 511
+*Sprites: image(s) to gridplane conversion problems with empty indexes
+*Sprites: if selected mold not 0, crash when import image(s)
+*Sprites: sequence playback immediately stopped if not infinite playback
+*World Maps: changing map point name messed up combobox selected index
+
+
 v3.9.0 (2012-01-01)
 --------------------------------------
 Additions:

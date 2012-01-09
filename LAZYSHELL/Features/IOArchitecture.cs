@@ -147,7 +147,7 @@ namespace LAZYSHELL
         private void ImportGraphics(byte[] array, int offset)
         {
             if (checkBox2.Checked)
-                Buffer.BlockCopy(array, 0x200, tileSet.Graphics, 0, tileSet.Graphics.Length);
+                Buffer.BlockCopy(array, offset, tileSet.Graphics, 0, tileSet.Graphics.Length);
         }
         private void ImportTileset(byte[] array, int layer, int offset)
         {

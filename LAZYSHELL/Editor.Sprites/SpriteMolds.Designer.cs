@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpriteMolds));
-            this.panelMoldImage = new LAZYSHELL.NewPanel();
-            this.pictureBoxMold = new LAZYSHELL.NewPictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +39,9 @@
             this.mirrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.bringToFrontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sendToBackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.saveImageAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.draw = new System.Windows.Forms.ToolStripButton();
@@ -55,6 +56,8 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mirror = new System.Windows.Forms.ToolStripButton();
             this.invert = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.adjustCoords = new System.Windows.Forms.ToolStripButton();
             this.moldZoomIn = new System.Windows.Forms.ToolStripButton();
             this.moldZoomOut = new System.Windows.Forms.ToolStripButton();
             this.showMoldPixelGrid = new System.Windows.Forms.ToolStripButton();
@@ -82,7 +85,9 @@
             this.pictureBoxZoom = new System.Windows.Forms.PictureBox();
             this.pictureBoxZoom_TS = new System.Windows.Forms.PictureBox();
             this.labelCoords = new System.Windows.Forms.Label();
-            this.panel38 = new LAZYSHELL.NewPanel();
+            this.panelMoldImage = new LAZYSHELL.NewPanel();
+            this.pictureBoxMold = new LAZYSHELL.NewPictureBox();
+            this.panelTileset = new LAZYSHELL.NewPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.moldTileProperties = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -100,11 +105,7 @@
             this.deleteTile = new System.Windows.Forms.ToolStripButton();
             this.duplicateTile = new System.Windows.Forms.ToolStripButton();
             this.pictureBoxTileset = new System.Windows.Forms.PictureBox();
-            this.bringToFrontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sendToBackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.panelMoldImage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMold)).BeginInit();
+            this.label2 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
@@ -112,7 +113,9 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom_TS)).BeginInit();
-            this.panel38.SuspendLayout();
+            this.panelMoldImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMold)).BeginInit();
+            this.panelTileset.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.subtile)).BeginInit();
             this.panel3.SuspendLayout();
@@ -122,33 +125,6 @@
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTileset)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panelMoldImage
-            // 
-            this.panelMoldImage.AutoScroll = true;
-            this.panelMoldImage.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelMoldImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelMoldImage.Controls.Add(this.pictureBoxMold);
-            this.panelMoldImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMoldImage.Location = new System.Drawing.Point(101, 25);
-            this.panelMoldImage.Name = "panelMoldImage";
-            this.panelMoldImage.Size = new System.Drawing.Size(416, 260);
-            this.panelMoldImage.TabIndex = 517;
-            // 
-            // pictureBoxMold
-            // 
-            this.pictureBoxMold.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxMold.BackgroundImage")));
-            this.pictureBoxMold.ContextMenuStrip = this.contextMenuStrip1;
-            this.pictureBoxMold.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxMold.Name = "pictureBoxMold";
-            this.pictureBoxMold.Size = new System.Drawing.Size(256, 256);
-            this.pictureBoxMold.TabIndex = 396;
-            this.pictureBoxMold.TabStop = false;
-            this.pictureBoxMold.MouseLeave += new System.EventHandler(this.pictureBoxMold_MouseLeave);
-            this.pictureBoxMold.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseMove);
-            this.pictureBoxMold.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseDown);
-            this.pictureBoxMold.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMold_Paint);
-            this.pictureBoxMold.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseUp);
             // 
             // contextMenuStrip1
             // 
@@ -168,7 +144,7 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 242);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 220);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // cutToolStripMenuItem
@@ -223,6 +199,25 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(130, 6);
             // 
+            // bringToFrontToolStripMenuItem
+            // 
+            this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
+            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.bringToFrontToolStripMenuItem.Text = "Bring to Front";
+            this.bringToFrontToolStripMenuItem.Click += new System.EventHandler(this.bringToFrontToolStripMenuItem_Click);
+            // 
+            // sendToBackToolStripMenuItem
+            // 
+            this.sendToBackToolStripMenuItem.Name = "sendToBackToolStripMenuItem";
+            this.sendToBackToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.sendToBackToolStripMenuItem.Text = "Send to Back";
+            this.sendToBackToolStripMenuItem.Click += new System.EventHandler(this.sendToBackToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(130, 6);
+            // 
             // saveImageAsToolStripMenuItem
             // 
             this.saveImageAsToolStripMenuItem.Name = "saveImageAsToolStripMenuItem";
@@ -245,7 +240,9 @@
             this.delete,
             this.toolStripSeparator4,
             this.mirror,
-            this.invert});
+            this.invert,
+            this.toolStripSeparator12,
+            this.adjustCoords});
             this.toolStrip4.Location = new System.Drawing.Point(78, 25);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.Padding = new System.Windows.Forms.Padding(0);
@@ -377,6 +374,22 @@
             this.invert.Size = new System.Drawing.Size(22, 17);
             this.invert.Text = "Invert Selection";
             this.invert.Click += new System.EventHandler(this.invert_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(22, 6);
+            // 
+            // adjustCoords
+            // 
+            this.adjustCoords.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.adjustCoords.Image = global::LAZYSHELL.Properties.Resources.moveall;
+            this.adjustCoords.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.adjustCoords.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.adjustCoords.Name = "adjustCoords";
+            this.adjustCoords.Size = new System.Drawing.Size(22, 15);
+            this.adjustCoords.Text = "Adjust all tile coords";
+            this.adjustCoords.Click += new System.EventHandler(this.adjustCoords_Click);
             // 
             // moldZoomIn
             // 
@@ -651,17 +664,45 @@
             this.labelCoords.Text = "(x: 0, y: 0) Pixel";
             this.labelCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // panel38
+            // panelMoldImage
             // 
-            this.panel38.AutoScroll = true;
-            this.panel38.Controls.Add(this.panel4);
-            this.panel38.Controls.Add(this.panel3);
-            this.panel38.Controls.Add(this.panel2);
-            this.panel38.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel38.Location = new System.Drawing.Point(517, 25);
-            this.panel38.Name = "panel38";
-            this.panel38.Size = new System.Drawing.Size(148, 284);
-            this.panel38.TabIndex = 41;
+            this.panelMoldImage.AutoScroll = true;
+            this.panelMoldImage.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelMoldImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelMoldImage.Controls.Add(this.pictureBoxMold);
+            this.panelMoldImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMoldImage.Location = new System.Drawing.Point(101, 25);
+            this.panelMoldImage.Name = "panelMoldImage";
+            this.panelMoldImage.Size = new System.Drawing.Size(416, 260);
+            this.panelMoldImage.TabIndex = 517;
+            // 
+            // pictureBoxMold
+            // 
+            this.pictureBoxMold.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxMold.BackgroundImage")));
+            this.pictureBoxMold.ContextMenuStrip = this.contextMenuStrip1;
+            this.pictureBoxMold.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxMold.Name = "pictureBoxMold";
+            this.pictureBoxMold.Size = new System.Drawing.Size(256, 256);
+            this.pictureBoxMold.TabIndex = 396;
+            this.pictureBoxMold.TabStop = false;
+            this.pictureBoxMold.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMold_Paint);
+            this.pictureBoxMold.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseDown);
+            this.pictureBoxMold.MouseLeave += new System.EventHandler(this.pictureBoxMold_MouseLeave);
+            this.pictureBoxMold.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseMove);
+            this.pictureBoxMold.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseUp);
+            // 
+            // panelTileset
+            // 
+            this.panelTileset.AutoScroll = true;
+            this.panelTileset.Controls.Add(this.panel4);
+            this.panelTileset.Controls.Add(this.panel3);
+            this.panelTileset.Controls.Add(this.panel2);
+            this.panelTileset.Controls.Add(this.label2);
+            this.panelTileset.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelTileset.Location = new System.Drawing.Point(517, 25);
+            this.panelTileset.Name = "panelTileset";
+            this.panelTileset.Size = new System.Drawing.Size(148, 284);
+            this.panelTileset.TabIndex = 41;
             // 
             // panel4
             // 
@@ -673,7 +714,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 179);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(148, 54);
+            this.panel4.Size = new System.Drawing.Size(132, 54);
             this.panel4.TabIndex = 426;
             // 
             // moldTileProperties
@@ -709,7 +750,7 @@
             this.subtile.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.subtile.Location = new System.Drawing.Point(80, 33);
             this.subtile.Maximum = new decimal(new int[] {
-            511,
+            512,
             0,
             0,
             0});
@@ -729,7 +770,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 158);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(148, 21);
+            this.panel3.Size = new System.Drawing.Size(132, 21);
             this.panel3.TabIndex = 425;
             // 
             // moldTileYCoord
@@ -783,7 +824,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(148, 158);
+            this.panel2.Size = new System.Drawing.Size(132, 158);
             this.panel2.TabIndex = 424;
             // 
             // toolStrip2
@@ -801,7 +842,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(144, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(128, 25);
             this.toolStrip2.TabIndex = 43;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -883,30 +924,19 @@
             this.pictureBoxTileset.Size = new System.Drawing.Size(128, 128);
             this.pictureBoxTileset.TabIndex = 42;
             this.pictureBoxTileset.TabStop = false;
+            this.pictureBoxTileset.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTileset_Paint);
+            this.pictureBoxTileset.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
             this.pictureBoxTileset.MouseLeave += new System.EventHandler(this.pictureBoxTileset_MouseLeave);
             this.pictureBoxTileset.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseMove);
-            this.pictureBoxTileset.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
-            this.pictureBoxTileset.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTileset_Paint);
             this.pictureBoxTileset.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
             // 
-            // bringToFrontToolStripMenuItem
+            // label2
             // 
-            this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
-            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.bringToFrontToolStripMenuItem.Text = "Bring to Front";
-            this.bringToFrontToolStripMenuItem.Click += new System.EventHandler(this.bringToFrontToolStripMenuItem_Click);
-            // 
-            // sendToBackToolStripMenuItem
-            // 
-            this.sendToBackToolStripMenuItem.Name = "sendToBackToolStripMenuItem";
-            this.sendToBackToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.sendToBackToolStripMenuItem.Text = "Send to Back";
-            this.sendToBackToolStripMenuItem.Click += new System.EventHandler(this.sendToBackToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(130, 6);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(0, 272);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 13);
+            this.label2.TabIndex = 427;
             // 
             // SpriteMolds
             // 
@@ -916,7 +946,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.panelMoldImage);
             this.Controls.Add(this.labelCoords);
-            this.Controls.Add(this.panel38);
+            this.Controls.Add(this.panelTileset);
             this.Controls.Add(this.toolStrip4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
@@ -925,8 +955,6 @@
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SpriteMolds";
-            this.panelMoldImage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMold)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
@@ -936,8 +964,10 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoom_TS)).EndInit();
-            this.panel38.ResumeLayout(false);
-            this.panel38.PerformLayout();
+            this.panelMoldImage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMold)).EndInit();
+            this.panelTileset.ResumeLayout(false);
+            this.panelTileset.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.subtile)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -962,7 +992,7 @@
         private System.Windows.Forms.ToolStripButton moldZoomOut;
         private LAZYSHELL.NewPictureBox pictureBoxMold;
         private System.Windows.Forms.ListBox listBoxMolds;
-        private LAZYSHELL.NewPanel panel38;
+        private LAZYSHELL.NewPanel panelTileset;
         private System.Windows.Forms.CheckedListBox moldTileProperties;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown moldTileYCoord;
@@ -1028,5 +1058,8 @@
         private System.Windows.Forms.ToolStripMenuItem bringToFrontToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sendToBackToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripButton adjustCoords;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -11,26 +11,10 @@ namespace LAZYSHELL.ScriptsEditor
 {
     public class TreeViewWrapper
     {
-        TreeView treeView;
-        EventScript script; public EventScript Script { get { return this.script; } set { this.script = value; } }
-        ActionQueue action; public ActionQueue Action { get { return this.action; } set { this.action = value; } }
-        bool actionScript; public bool ActionScript { get { return this.actionScript; } set { this.actionScript = value; } }
-
-        ArrayList eventCopies;
-
-        private int scriptDelta = 0; public int ScriptDelta { get { return this.scriptDelta; } set { this.scriptDelta = value; } }
-
+        #region Variables
+        private TreeView treeView;
         private TreeNode selectedNode; public TreeNode SelectedNode { get { return selectedNode; } set { selectedNode = value; } }
         private TreeNode editedNode; public TreeNode EditedNode { get { return editedNode; } set { editedNode = value; } }
-
-        // Get / set the scrollbar position of the treeview
-        [DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-        public static extern int GetScrollPos(int hWnd, int nBar);
-        [DllImport("user32.dll")]
-        static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
-        private const int SB_HORZ = 0x0;
-        private const int SB_VERT = 0x1;
-
         public byte[] CurrentNodeData
         {
             get
@@ -65,11 +49,25 @@ namespace LAZYSHELL.ScriptsEditor
                 return aqc.EventData;
             }
         }
-
+        private EventScript script; public EventScript Script { get { return this.script; } set { this.script = value; } }
+        private ActionQueue action; public ActionQueue Action { get { return this.action; } set { this.action = value; } }
+        private bool actionScript; public bool ActionScript { get { return this.actionScript; } set { this.actionScript = value; } }
+        private int scriptDelta = 0; public int ScriptDelta { get { return this.scriptDelta; } set { this.scriptDelta = value; } }
+        private ArrayList commandCopies;
+        // Get / set the scrollbar position of the treeview
+        private const int SB_HORZ = 0x0;
+        private const int SB_VERT = 0x1;
+        [DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        public static extern int GetScrollPos(int hWnd, int nBar);
+        [DllImport("user32.dll")]
+        static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+        #endregion
+        // constructor
         public TreeViewWrapper(TreeView control)
         {
             this.treeView = control;
         }
+        #region Functions
         public void ChangeScript(EventScript script)
         {
             this.script = script;
@@ -805,7 +803,7 @@ namespace LAZYSHELL.ScriptsEditor
 
                 byte[] temp;
                 bool tnChecked = false, childChecked = false;
-                eventCopies = new ArrayList();
+                commandCopies = new ArrayList();
                 foreach (TreeNode tn in treeView.Nodes)
                 {
                     foreach (TreeNode child in tn.Nodes)
@@ -820,14 +818,14 @@ namespace LAZYSHELL.ScriptsEditor
                                 "Cannot create a copy buffer that contains both event and action\n" +
                                 "commands. Please uncheck all action OR event commands.",
                                 "LAZY SHELL");
-                            eventCopies = null;
+                            commandCopies = null;
                             return;
                         }
 
                         aqc = (ActionQueueCommand)child.Tag; aqc.Assemble();
                         temp = new byte[aqc.EventData.Length]; aqc.EventData.CopyTo(temp, 0);
                         aqcCopy = new ActionQueueCommand(temp, aqc.Offset);
-                        eventCopies.Add(aqcCopy);
+                        commandCopies.Add(aqcCopy);
                     }
                     if (!tn.Checked) continue;
 
@@ -839,7 +837,7 @@ namespace LAZYSHELL.ScriptsEditor
                             "Cannot create a copy buffer that contains both event and action\n" +
                             "commands. Please uncheck all action OR event commands.",
                             "LAZY SHELL");
-                        eventCopies = null;
+                        commandCopies = null;
                         return;
                     }
 
@@ -848,14 +846,14 @@ namespace LAZYSHELL.ScriptsEditor
                         esc = (EventScriptCommand)tn.Tag; esc.Assemble();
                         temp = new byte[esc.EventData.Length]; esc.EventData.CopyTo(temp, 0);
                         escCopy = new EventScriptCommand(temp, esc.Offset);
-                        eventCopies.Add(escCopy);
+                        commandCopies.Add(escCopy);
                     }
                     else
                     {
                         aqc = (ActionQueueCommand)tn.Tag; aqc.Assemble();
                         temp = new byte[aqc.EventData.Length]; aqc.EventData.CopyTo(temp, 0);
                         aqcCopy = new ActionQueueCommand(temp, aqc.Offset);
-                        eventCopies.Add(aqcCopy);
+                        commandCopies.Add(aqcCopy);
                     }
                 }
             }
@@ -877,11 +875,12 @@ namespace LAZYSHELL.ScriptsEditor
             byte[] commandData;
             int offset;
             TreeNode temp = treeView.SelectedNode;
-            if ((treeView.SelectedNode == null || IsRootNode(treeView.SelectedNode)) && eventCopies != null && !actionScript)
+            // pasting event command in event script
+            if (commandCopies != null && !actionScript && (treeView.SelectedNode == null || IsRootNode(treeView.SelectedNode)))
             {
                 try
                 {
-                    foreach (EventScriptCommand escCopy in eventCopies)
+                    foreach (EventScriptCommand escCopy in commandCopies)
                     {
                         commandData = new byte[escCopy.EventData.Length];
                         escCopy.EventData.CopyTo(commandData, 0); offset = escCopy.Offset;
@@ -891,9 +890,9 @@ namespace LAZYSHELL.ScriptsEditor
                 }
                 catch
                 {
-                    if (treeView.SelectedNode.BackColor == Color.FromArgb(255, 128, 160, 255))
+                    if (treeView.SelectedNode != null && treeView.SelectedNode.BackColor == Color.FromArgb(255, 128, 160, 255))
                     {
-                        foreach (ActionQueueCommand aqcCopy in eventCopies)
+                        foreach (ActionQueueCommand aqcCopy in commandCopies)
                         {
                             commandData = new byte[aqcCopy.EventData.Length];
                             aqcCopy.EventData.CopyTo(commandData, 0); offset = aqcCopy.Offset;
@@ -910,11 +909,12 @@ namespace LAZYSHELL.ScriptsEditor
                     }
                 }
             }
-            else if (treeView.SelectedNode != null && eventCopies != null)
+            // pasting action command in event script
+            else if (commandCopies != null)
             {
                 try
                 {
-                    foreach (ActionQueueCommand aqcCopy in eventCopies)
+                    foreach (ActionQueueCommand aqcCopy in commandCopies)
                     {
                         commandData = new byte[aqcCopy.EventData.Length];
                         aqcCopy.EventData.CopyTo(commandData, 0); offset = aqcCopy.Offset;
@@ -1064,7 +1064,7 @@ namespace LAZYSHELL.ScriptsEditor
                 }
             }
         }
-
+        //
         private Point GetTreeViewScrollPos(TreeView treeView)
         {
             return new Point(
@@ -1076,5 +1076,6 @@ namespace LAZYSHELL.ScriptsEditor
             SetScrollPos((IntPtr)treeView.Handle, SB_HORZ, scrollPosition.X, true);
             SetScrollPos((IntPtr)treeView.Handle, SB_VERT, scrollPosition.Y, true);
         }
+        #endregion
     }
 }

@@ -274,10 +274,10 @@ namespace LAZYSHELL
             foreach (Mold.Tile tile in tiles)
             {
                 foreach (ushort subtile in tile.SubTiles)
-                    used += 0x40;
+                    used += 64;
             }
             int available = animation.VramAllocation - used;
-            vramRequirement.Text = "Available VRAM: " + available + " bytes";
+            vramRequirement.Text = "Available VRAM: " + (available / 256) + " tiles (" + available + " bytes)";
             if (available < 0)
                 vramRequirement.BackColor = Color.Red;
             else
@@ -1138,6 +1138,37 @@ namespace LAZYSHELL
         {
             Flip("invert");
         }
+        private void adjustCoords_Click(object sender, EventArgs e)
+        {
+            CoordAdjust form = new CoordAdjust();
+            if (form.ShowDialog() != DialogResult.OK)
+                return;
+            Point point = form.Point;
+            if (form.ApplyToAll)
+            {
+                foreach (Mold mold in molds)
+                {
+                    if (mold.Gridplane)
+                        continue;
+                    foreach (Mold.Tile tile in mold.Tiles)
+                    {
+                        tile.XCoord = (byte)(tile.XCoord + point.X);
+                        tile.YCoord = (byte)(tile.YCoord + point.Y);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Mold.Tile tile in tiles)
+                {
+                    tile.XCoord = (byte)(tile.XCoord + point.X);
+                    tile.YCoord = (byte)(tile.YCoord + point.Y);
+                }
+            }
+            SetTilemapImage();
+            sequences.SetSequenceFrameImages();
+            animation.Assemble();
+        }
         private void bringToFrontToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // one single unselected tile
@@ -1337,10 +1368,11 @@ namespace LAZYSHELL
                     if (tile.SubTiles[y * (tile.Width / 8) + x] == 0)
                         continue;
                     int offset_src = (y * 4 + x) * 0x20;
-                    Buffer.BlockCopy(graphics, offset_src, this.graphics,
-                        (tile.SubTiles[y * (tile.Width / 8) + x] * 0x20) - 0x20, 0x20);
+                    int offset_dst = tile.SubTiles[y * (tile.Width / 8) + x] * 0x20;
+                    Buffer.BlockCopy(graphics, offset_src, this.graphics, offset_dst - 0x20, 0x20);
                 }
             }
+            spritesEditor.GraphicUpdate();
             spritesEditor.LoadGraphicEditor();
         }
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1582,15 +1614,12 @@ namespace LAZYSHELL
                 paletteSet.Greens[i] = Color.FromArgb(palette[i]).G;
                 paletteSet.Blues[i] = Color.FromArgb(palette[i]).B;
             }
-            spritesEditor.LoadPaletteEditor();
             for (int i = startingIndex * 0x20, a = 0; i < this.graphics.Length && a < graphics.Length; i++, a++)
                 this.graphics[i] = graphics[a];
             if (startingIndex * 0x20 + graphics.Length > 16384)
                 MessageBox.Show("Not enough space to store the necessary amount of SNES graphics data for the imported images. The total required space (" +
                     (startingIndex * 0x20 + graphics.Length) + " bytes) for the new SNES graphics data exceeds 16384 bytes.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            spritesEditor.GraphicUpdate();
-            spritesEditor.LoadGraphicEditor();
             //
             updating = true;
             listBoxMolds.BeginUpdate();
@@ -1605,6 +1634,9 @@ namespace LAZYSHELL
                     tile.Set8x8Tiles(this.graphics, paletteSet.Palette, tile.Gridplane);
             }
             this.index = 0;
+            spritesEditor.LoadPaletteEditor();
+            spritesEditor.GraphicUpdate();
+            spritesEditor.LoadGraphicEditor();
             //
             foreach (Mold.Tile tile in animation.UniqueTiles)
                 tile.Set8x8Tiles(this.graphics, paletteSet.Palette, tile.Gridplane);

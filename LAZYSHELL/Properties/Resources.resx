@@ -118,14 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="mainMonsters" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\mainMonsters.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="synchronize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\synchronize.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="openNewGame" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openNewGame.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="duplicate_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Data\duplicate_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pageBreakA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dialog\pageBreakA.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\_transparent.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,14 +136,23 @@
   <data name="openAttacks" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openAttacks.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="history" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\history.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="buttonToggleMask" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Toggle\buttontogglemask.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Forms\dock.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="openSpells" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openSpells.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="endStringA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dialog\endStringA.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="buttonTogglePixelGrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Toggle\buttonTogglePixelGrid.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RomPreviewBaseSave1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RomPreviewBaseSave.zst;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="recentFiles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\recentFiles.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,11 +160,11 @@
   <data name="textView" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dialog\textView.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="signature" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\signature.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="collapseAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Forms\collapseAll.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="synchronize" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\synchronize.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="publish" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\publish.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,20 +181,17 @@
   <data name="about_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Main\about_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="widthIncrease" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Draw\widthIncrease.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mainEffects" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\mainEffects.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="openNPCs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\openNPCs.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Data\search.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="zoomin_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Draw\zoomin_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="openPartitions" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openPartitions.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="newLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Dialog\newLine.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="removeHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\removeHeader.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="restoreAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Forms\restoreAll.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,8 +217,14 @@
   <data name="moveup" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\moveup.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pageBreakA" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Dialog\pageBreakA.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="buttonNPC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Toggle\buttonnpc.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heightIncrease" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Draw\heightIncrease.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Forms\reset.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="openGraphics" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openGraphics.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,17 +235,17 @@
   <data name="mainEventScripts" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\mainEventScripts.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="undo_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Draw\undo_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="import_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Data\import_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fieldBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\tiles\fieldblock.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="quadBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\tiles\quadblock.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="heightDecrease" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Draw\heightDecrease.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="duplicate_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\duplicate_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="label" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\label.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -252,6 +264,9 @@
   </data>
   <data name="buttonEventField" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Toggle\buttoneventfield.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HAMMER" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\main\hammer.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="clearModel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\clearModel.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -286,8 +301,8 @@
   <data name="openPalettes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openPalettes.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="minimizeAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Forms\minimizeAll.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Lunar_Compress" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lunar Compress.dll;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cartridgeClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\cartridgeClose.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -313,11 +328,14 @@
   <data name="pauseA" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dialog\pauseA.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dropper_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Draw\dropper_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mainAnimations" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\mainAnimations.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="buttonExitField" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Toggle\buttonexitfield.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dropper_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Draw\dropper_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mainNotes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\mainNotes.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -325,8 +343,8 @@
   <data name="save_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\save_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mainAnimations" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\mainAnimations.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="openAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Forms\openAll.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pause60f" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dialog\pause60f.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -337,32 +355,35 @@
   <data name="buttonTileMods" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Toggle\buttonTileMods.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="coordinator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coordinator.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="mirror_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Draw\mirror_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="openSequences" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openSequences.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="openTileEditor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\openTileEditor.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="transfer_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\transfer_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="buttonSolidMods" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Toggle\buttonSolidMods.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="buttonNPC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Toggle\buttonnpc.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="mainFormations" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\mainFormations.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="back" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Data\back.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="opacity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Toggle\opacity.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Forms\reset.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="import_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\import_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pageUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dialog\pageUp.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="buttonBoundaries" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Toggle\buttonBoundaries.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="openMap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openMap.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -388,23 +409,14 @@
   <data name="dragSolid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Draw\dragSolid.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="openShops" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\openShops.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="keys_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dialog\keys_save.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="movedown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\movedown.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="openNewFontTable" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\openNewFontTable.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mainBattleScripts" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\mainBattleScripts.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="editAllLayers" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Draw\editAllLayers.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mainMonsters" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\mainMonsters.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="title_smodrpg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\main\title_smodrpg.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -412,17 +424,14 @@
   <data name="openEffectSequences" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openEffectSequences.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="endString" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Dialog\endString.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\preview.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="fieldBase" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\tiles\fieldbase.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="signature" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Data\signature.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="history" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\history.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="buttonToggleOrthGrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Toggle\buttontoggleorthgrid.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -433,6 +442,9 @@
   <data name="mainSprites" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\mainSprites.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="export_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\export_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="hexEditor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\hexEditor.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -442,17 +454,11 @@
   <data name="mainWorldMaps" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\mainWorldMaps.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mainAttacks" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\mainAttacks.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="minimizeAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Forms\minimizeAll.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="openAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Forms\openAll.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="fill_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Draw\fill_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="halfQuadBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\tiles\halfquadblock.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="openNPCs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\openNPCs.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="undock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Forms\undock.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -460,11 +466,14 @@
   <data name="openDialogues" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openDialogues.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="endStringA" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Dialog\endStringA.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="openShops" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\openShops.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="foward" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\foward.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redo_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Draw\redo_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="buttonOverlaps" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Toggle\buttonOverlaps.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -478,8 +487,8 @@
   <data name="spaceAnalyzer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\spaceAnalyzer.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="opacity" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Toggle\opacity.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="endString" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dialog\endString.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mainLevels" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\mainLevels.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -496,11 +505,8 @@
   <data name="pageBreak" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dialog\pageBreak.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="openBattleDialogues" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\openBattleDialogues.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zoomin_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Draw\zoomin_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="back" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\back.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="buttonToggleGrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Toggle\buttontogglegrid.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -511,17 +517,17 @@
   <data name="RomPreviewBaseSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RomPreviewBaseSave.000;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="transfer_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Data\transfer_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="undo_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Draw\undo_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="stairsUpLeftLow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\tiles\stairsupleftlow.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Data\play.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="romInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\romInfo.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="openLevelUps" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\openLevelUps.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="zoomout_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Draw\zoomout_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -532,8 +538,8 @@
   <data name="buttonPhysical1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Toggle\buttonPhysical.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lunar_Compress" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Lunar Compress.dll;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="newLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dialog\newLine.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="buttonPhysicalTiles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Toggle\buttonPhysicalTiles.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -550,8 +556,8 @@
   <data name="stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\stop.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="export_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Data\export_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="openBattleDialogues" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\openBattleDialogues.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pageDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dialog\pageDown.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -562,20 +568,17 @@
   <data name="help_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\help_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mainEffects" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\mainEffects.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="openNewFontTable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\openNewFontTable.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="numerize" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Forms\numerize.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="openLevelUps" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\openLevelUps.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mainAttacks" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\mainAttacks.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="closeAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Forms\closeAll.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="redo_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Draw\redo_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="openTileEditor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\openTileEditor.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cut_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Draw\cut_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -592,40 +595,40 @@
   <data name="new_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\new_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="buttonToggleMask" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Toggle\buttontogglemask.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mainBattleScripts" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\mainBattleScripts.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="baseConversion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\baseConversion.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="HAMMER" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\main\hammer.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="halfQuadBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\tiles\halfquadblock.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mainDialogues" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\mainDialogues.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fieldBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\tiles\fieldblock.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fill_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Draw\fill_small.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="heightIncrease" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Draw\heightIncrease.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="editAllLayers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Draw\editAllLayers.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="stairsUpRightLow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\tiles\stairsuprightlow.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="removeHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Data\removeHeader.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="widthIncrease" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Draw\widthIncrease.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RomPreviewBaseSave1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RomPreviewBaseSave.zst;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\search.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Forms\dock.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\play.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="buttonBoundaries" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Toggle\buttonBoundaries.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="closeAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Forms\closeAll.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="coordinator" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\coordinator.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="moveall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\moveall.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -337,8 +337,8 @@ namespace LAZYSHELL
             mapPoint.Name = Do.ASCIIToRaw(textBoxMapPoint.Text, settings.Keystrokes, textBoxMapPoint.Text.Length);
 
             updatingMapPoints = true;
-            mapPointName.Items.RemoveAt(index_l);
-            mapPointName.Items.Insert(index_l, textBoxMapPoint.Text);
+            //mapPointName.Items.RemoveAt(index_l);
+            //mapPointName.Items.Insert(index_l, textBoxMapPoint.Text);
             mapPointName.Text = textBoxMapPoint.Text;
             mapPointName.Invalidate();
             updatingMapPoints = false;

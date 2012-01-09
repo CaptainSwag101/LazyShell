@@ -1917,6 +1917,7 @@ namespace LAZYSHELL
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             npcs = new LevelNPCs(Model.Data, index);
+            overlay.NPCImages = null;
             InitializeNPCProperties();
         }
         private void resetEventDataToolStripMenuItem_Click(object sender, EventArgs e)

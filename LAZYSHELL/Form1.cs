@@ -47,7 +47,7 @@ namespace LAZYSHELL
             mruManager = new MRUManager();
             mruManager.Initialize(this, recentFiles, registryPath);
 
-            if (settings.LoadLastUsedROM)
+            if (settings.LoadLastUsedROM && mruManager.MRUList.Count > 0)
             {
                 try
                 {

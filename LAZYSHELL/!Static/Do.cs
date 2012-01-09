@@ -2064,9 +2064,9 @@ namespace LAZYSHELL
         public static int[] ImageToPixels(Bitmap image, Size size, Rectangle region)
         {
             int[] temp = new int[region.Width * region.Height];
-            for (int y = 0, y_ = region.Y; y < size.Height && y < region.Height && y_ < region.Y + region.Height; y++, y_++)
+            for (int y = 0, y_ = region.Y; y < size.Height && y < region.Height && y_ < image.Height; y++, y_++)
             {
-                for (int x = 0, x_ = region.X; x < size.Width && x < region.Width && x_ < region.X + region.Width; x++, x_++)
+                for (int x = 0, x_ = region.X; x < size.Width && x < region.Width && x_ < image.Width; x++, x_++)
                     temp[y * region.Width + x] = image.GetPixel(x_, y_).ToArgb();
             }
             return temp;
@@ -2195,6 +2195,12 @@ namespace LAZYSHELL
                     {
                         for (int x = 0; x < width / 8; x++)
                         {
+                            int[] dst = GetPixelRegion(pixels_image, width, height, 8, 8, x * 8, y * 8);
+                            if (Bits.Empty(dst))
+                            {
+                                tile.SubTiles[y * (width / 8) + x] = 0;
+                                continue;
+                            }
                             // read each 8x8 tile from culled graphic set and assign indexes
                             for (int b = 0; b < 32; b++)
                             {
@@ -2202,9 +2208,6 @@ namespace LAZYSHELL
                                 {
                                     int index = b * 16 + a;
                                     int[] src = GetPixelRegion(pixels_graphics, 128, 256, 8, 8, a * 8, b * 8);
-                                    int[] dst = GetPixelRegion(pixels_image, width, height, 8, 8, x * 8, y * 8);
-                                    if (Bits.Empty(dst))
-                                        tile.SubTiles[y * (width / 8) + x] = 0;
                                     if (Bits.Compare(src, dst))
                                     {
                                         // set index of subtile
