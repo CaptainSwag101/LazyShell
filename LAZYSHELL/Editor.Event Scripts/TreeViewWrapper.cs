@@ -53,6 +53,7 @@ namespace LAZYSHELL.ScriptsEditor
         private ActionQueue action; public ActionQueue Action { get { return this.action; } set { this.action = value; } }
         private bool actionScript; public bool ActionScript { get { return this.actionScript; } set { this.actionScript = value; } }
         private int scriptDelta = 0; public int ScriptDelta { get { return this.scriptDelta; } set { this.scriptDelta = value; } }
+        public int conditionOffset = 0;
         private ArrayList commandCopies;
         // Get / set the scrollbar position of the treeview
         private const int SB_HORZ = 0x0;
@@ -224,6 +225,7 @@ namespace LAZYSHELL.ScriptsEditor
                 }
 
                 RefreshScript(); // Update offsets and descriptions
+                this.conditionOffset = esc.Offset;
 
                 this.treeView.EndUpdate();
 
@@ -375,6 +377,7 @@ namespace LAZYSHELL.ScriptsEditor
                 }
 
                 RefreshScript(); // Update offsets and descriptions
+                this.conditionOffset = aqc.Offset;
 
                 this.treeView.EndUpdate();
 
@@ -646,45 +649,34 @@ namespace LAZYSHELL.ScriptsEditor
             {
                 this.treeView.BeginUpdate();
                 int index1, index2;
-
                 TreeNode tn, child;
                 for (int i = treeView.Nodes.Count - 1; i >= 0; i--)
                 {
                     tn = treeView.Nodes[i];
-
                     for (int a = tn.Nodes.Count - 1; a >= 0; a--)
                     {
                         child = tn.Nodes[a];
-
                         if (!child.Checked) continue;
                         if (child.Index == tn.Nodes.Count - 1) break;
-
                         treeView.SelectedNode = child;
-
                         if (treeView.SelectedNode == null)
                             return;
                         index1 = treeView.SelectedNode.Index;
-
                         if (treeView.SelectedNode.NextNode == null)
                             return;
                         index2 = treeView.SelectedNode.NextNode.Index;
-
                         Move(index1, index2);
                     }
-
+                    //
                     if (!tn.Checked) continue;
                     if (tn.Index == treeView.Nodes.Count - 1) break;
-
                     treeView.SelectedNode = tn;
-
                     if (treeView.SelectedNode == null)
                         return;
                     index1 = treeView.SelectedNode.Index;
-
                     if (treeView.SelectedNode.NextNode == null)
                         return;
                     index2 = treeView.SelectedNode.NextNode.Index;
-
                     Move(index1, index2);
                 }
             }
@@ -698,11 +690,9 @@ namespace LAZYSHELL.ScriptsEditor
                     parent = isChild ? treeView.TopNode.Parent.Index : treeView.TopNode.Index;
                     child = isChild ? treeView.TopNode.Index : 0;
                 }
-
-                RefreshScript(); // Update offsets and descriptions
-
+                // Update offsets and descriptions
+                RefreshScript(); 
                 this.treeView.EndUpdate();
-
                 if (this.treeView.Nodes.Count != 0)
                 {
                     if (isChild && treeView.Nodes[parent].Nodes.Count != 0)
@@ -933,6 +923,26 @@ namespace LAZYSHELL.ScriptsEditor
 
             this.treeView.Select();
         }
+        //
+        public void RefreshScript()
+        {
+            Point p = GetTreeViewScrollPos(treeView);
+            RefreshOffsets();
+            UpdateInternalPointers();
+            Populate();
+            //
+            if (treeView.Nodes.Count != 0 && selectedNode != null)
+            {
+                if (selectedNode.Parent != null)
+                    selectedNode = treeView.Nodes[selectedNode.Parent.Index].Nodes[selectedNode.Index];
+                else
+                    selectedNode = treeView.Nodes[selectedNode.Index];
+
+                treeView.SelectedNode = selectedNode;
+            }
+            p.X = 0;
+            SetTreeViewScrollPos(treeView, p);
+        }
         private void RefreshOffsets()
         {
             int offset = actionScript ? action.Offset : script.BaseOffset;
@@ -954,56 +964,24 @@ namespace LAZYSHELL.ScriptsEditor
                 }
             }
         }
-        public void RefreshScript()
-        {
-            Point p = GetTreeViewScrollPos(treeView);
-            RefreshOffsets();
-            UpdateInternalPointers();
-            Populate();
-
-            if (treeView.Nodes.Count != 0 && selectedNode != null)
-            {
-                if (selectedNode.Parent != null)
-                    selectedNode = treeView.Nodes[selectedNode.Parent.Index].Nodes[selectedNode.Index];
-                else
-                    selectedNode = treeView.Nodes[selectedNode.Index];
-
-                treeView.SelectedNode = selectedNode;
-            }
-            p.X = 0;
-            SetTreeViewScrollPos(treeView, p);
-        }
         private void UpdateInternalPointers()
         {
             ScriptIterator it;
             EventActionCommand eac;
-
-            /* added 2008-12-20:
-             * to fix the pointer recalculation
-             * the pointers would continue changing even after
-             * being changed before, if the new pointer was
-             * equal to an offset of any other command, which
-             * could happen any number of times
-             * the variable "pointerChanged" was created in
-             * EventActionCommand.cs to fix this
-             */
             if (actionScript)
                 it = new ScriptIterator(action);
             else
                 it = new ScriptIterator(script);
-
             while (!it.IsDone)
             {
                 eac = it.Next();
                 eac.PointerChangedA = false;
                 eac.PointerChangedB = false;
             }
-
             if (actionScript)
                 it = new ScriptIterator(action);
             else
                 it = new ScriptIterator(script);
-
             while (!it.IsDone)
             {
                 eac = it.Next();
@@ -1017,12 +995,10 @@ namespace LAZYSHELL.ScriptsEditor
             ushort pointer;
             ScriptIterator it;
             EventActionCommand eac;
-
             if (actionScript)
                 it = new ScriptIterator(action);
             else
                 it = new ScriptIterator(script);
-
             while (!it.IsDone)
             {
                 eac = it.Next();

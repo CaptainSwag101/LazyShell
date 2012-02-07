@@ -157,7 +157,7 @@
             this.panelMoldImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMoldImage.Location = new System.Drawing.Point(102, 25);
             this.panelMoldImage.Name = "panelMoldImage";
-            this.panelMoldImage.Size = new System.Drawing.Size(310, 278);
+            this.panelMoldImage.Size = new System.Drawing.Size(431, 260);
             this.panelMoldImage.TabIndex = 516;
             // 
             // pictureBoxE_Mold
@@ -169,14 +169,14 @@
             this.pictureBoxE_Mold.Size = new System.Drawing.Size(256, 256);
             this.pictureBoxE_Mold.TabIndex = 399;
             this.pictureBoxE_Mold.TabStop = false;
-            this.pictureBoxE_Mold.MouseLeave += new System.EventHandler(this.pictureBoxE_Mold_MouseLeave);
-            this.pictureBoxE_Mold.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxE_Mold_PreviewKeyDown);
-            this.pictureBoxE_Mold.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxE_Mold_MouseMove);
+            this.pictureBoxE_Mold.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxE_Mold_Paint);
             this.pictureBoxE_Mold.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxE_Mold_MouseClick);
             this.pictureBoxE_Mold.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxE_Mold_MouseDown);
-            this.pictureBoxE_Mold.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxE_Mold_Paint);
-            this.pictureBoxE_Mold.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxE_Mold_MouseUp);
             this.pictureBoxE_Mold.MouseEnter += new System.EventHandler(this.pictureBoxE_Mold_MouseEnter);
+            this.pictureBoxE_Mold.MouseLeave += new System.EventHandler(this.pictureBoxE_Mold_MouseLeave);
+            this.pictureBoxE_Mold.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxE_Mold_MouseMove);
+            this.pictureBoxE_Mold.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxE_Mold_MouseUp);
+            this.pictureBoxE_Mold.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxE_Mold_PreviewKeyDown);
             // 
             // contextMenuStrip1
             // 
@@ -279,7 +279,7 @@
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip6.Size = new System.Drawing.Size(24, 302);
+            this.toolStrip6.Size = new System.Drawing.Size(24, 284);
             this.toolStrip6.TabIndex = 51;
             this.toolStrip6.TabStop = true;
             this.toolStrip6.Text = "toolStrip1";
@@ -479,9 +479,9 @@
             this.panel105.Controls.Add(this.label86);
             this.panel105.Controls.Add(this.e_tileSetSize);
             this.panel105.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel105.Location = new System.Drawing.Point(412, 25);
+            this.panel105.Location = new System.Drawing.Point(533, 25);
             this.panel105.Name = "panel105";
-            this.panel105.Size = new System.Drawing.Size(132, 302);
+            this.panel105.Size = new System.Drawing.Size(132, 284);
             this.panel105.TabIndex = 517;
             // 
             // panel1
@@ -492,7 +492,7 @@
             this.panel1.Controls.Add(this.pictureBoxEffectTileset);
             this.panel1.Location = new System.Drawing.Point(0, 44);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(128, 254);
+            this.panel1.Size = new System.Drawing.Size(128, 236);
             this.panel1.TabIndex = 528;
             // 
             // pictureBoxEffectTileset
@@ -506,9 +506,9 @@
             this.pictureBoxEffectTileset.Size = new System.Drawing.Size(128, 128);
             this.pictureBoxEffectTileset.TabIndex = 397;
             this.pictureBoxEffectTileset.TabStop = false;
-            this.pictureBoxEffectTileset.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxEffectTileset_MouseMove);
-            this.pictureBoxEffectTileset.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxEffectTileset_MouseDown);
             this.pictureBoxEffectTileset.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxEffectTileset_Paint);
+            this.pictureBoxEffectTileset.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxEffectTileset_MouseDown);
+            this.pictureBoxEffectTileset.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxEffectTileset_MouseMove);
             this.pictureBoxEffectTileset.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxEffectTileset_MouseUp);
             // 
             // contextMenuStrip2
@@ -602,7 +602,7 @@
             this.e_molds.LastSelectedIndex = -1;
             this.e_molds.Location = new System.Drawing.Point(0, 25);
             this.e_molds.Name = "e_molds";
-            this.e_molds.Size = new System.Drawing.Size(78, 302);
+            this.e_molds.Size = new System.Drawing.Size(78, 284);
             this.e_molds.TabIndex = 398;
             this.e_molds.SelectedIndexChanged += new System.EventHandler(this.e_molds_SelectedIndexChanged);
             // 
@@ -628,7 +628,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(544, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(665, 25);
             this.toolStrip1.TabIndex = 404;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -712,10 +712,10 @@
             // 
             this.labelCoords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelCoords.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelCoords.Location = new System.Drawing.Point(102, 303);
+            this.labelCoords.Location = new System.Drawing.Point(102, 285);
             this.labelCoords.Name = "labelCoords";
             this.labelCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.labelCoords.Size = new System.Drawing.Size(310, 24);
+            this.labelCoords.Size = new System.Drawing.Size(431, 24);
             this.labelCoords.TabIndex = 523;
             this.labelCoords.Text = "(x: 0, y: 0) Pixel";
             this.labelCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -724,7 +724,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 327);
+            this.ClientSize = new System.Drawing.Size(665, 309);
             this.ControlBox = false;
             this.Controls.Add(this.panelMoldImage);
             this.Controls.Add(this.labelCoords);

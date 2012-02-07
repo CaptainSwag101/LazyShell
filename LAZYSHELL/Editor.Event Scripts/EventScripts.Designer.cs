@@ -514,10 +514,10 @@
             this.EventScriptTree.Size = new System.Drawing.Size(710, 611);
             this.EventScriptTree.TabIndex = 3;
             this.EventScriptTree.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.EventScriptTree_AfterCheck);
-            this.EventScriptTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.EventScriptTree_MouseDoubleClick);
             this.EventScriptTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.EventScriptTree_AfterSelect);
             this.EventScriptTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.EventScriptTree_NodeMouseClick);
             this.EventScriptTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EventScriptTree_KeyDown);
+            this.EventScriptTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.EventScriptTree_MouseDoubleClick);
             // 
             // panel8
             // 

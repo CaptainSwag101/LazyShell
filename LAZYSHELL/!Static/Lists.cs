@@ -3531,7 +3531,7 @@ namespace LAZYSHELL
             new int[]   // 12
             {
                 0x90,0x91,0x92,0x93,0x94,0x95,0x97,0x98,
-                0x9B,0x9C,0x9D,0x9E,0xFD,0xFD,0xFD
+                0x9B,0x9C,0x9D,0x9E,0xFD,0xFD,0xFD,0xFD
             },
             new int[]   // 13
             {
@@ -3571,7 +3571,7 @@ namespace LAZYSHELL
             new int[]{0,0,0,0,0x4D,0x4E,0x4F,0x66,0x67,0xF8},
             new int[0x06],
             new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x30,0x31},
-            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0x9C,0xA4,0xA5},
+            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0x94,0x9C,0xA4,0xA5},
             new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0xB6,0xB7},
             new int[]
             {
@@ -4182,6 +4182,7 @@ namespace LAZYSHELL
 
                     /********FD OPTIONS********/
 
+                    "Set inactive sound channels...",        // 0x94
                     "Playback start, sound (sync)...",             // 0x9C
                     "Playback, slow down track",			// 0xA4
                     "Playback, speed up track to normal"			// 0xA5

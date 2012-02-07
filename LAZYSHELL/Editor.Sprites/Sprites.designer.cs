@@ -226,8 +226,8 @@ namespace LAZYSHELL
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(221, 680);
             this.panel1.TabIndex = 516;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.SizeChanged += new System.EventHandler(this.panel1_SizeChanged);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel45
             // 
@@ -263,7 +263,7 @@ namespace LAZYSHELL
             this.label73.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label73.Size = new System.Drawing.Size(104, 17);
             this.label73.TabIndex = 394;
-            this.label73.Text = "Palette Index";
+            this.label73.Text = "Palette Row";
             // 
             // panel22
             // 

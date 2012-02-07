@@ -1,5 +1,26 @@
 Major changes/additions are indicated by ***
 
+v3.9.2 (2012-02-06)
+--------------------------------------
+Additions:
+*Effects: looping for moving between frames in sequence editor
+*Events: isolate sound channels command added to event scripts
+*Sprites: looping for moving between frames in sequence editor
+
+Changes:
+*Effects: made sequence panel much wider for easier sequencing
+*Sprites: made sequence panel much wider for easier sequencing
+
+Fixes:
+*Effects: moving between frames caused flicker
+*Events: pointer updating wasn't staying within same bank
+*Events: improved pointer updating, removed unnecessary functions
+*Levels: resetting all components crash b/c not nulling npc images
+*Levels: pasting NPCs crash b/c not nulling npc images
+*Levels: importing architecture not updating L1 tilemap
+*Sprites: moving between frames caused flicker
+
+
 v3.9.1 (2012-01-09)
 --------------------------------------
 Additions:

@@ -79,14 +79,14 @@ namespace LAZYSHELL
             molds.TopLevel = false;
             molds.Dock = DockStyle.Fill;
             molds.SetToolTips(toolTip1);
-            panel1.Controls.Add(molds);
+            panelEffects.Controls.Add(molds);
             molds.BringToFront();
             openMolds.Checked = true;
             molds.Visible = true;
             sequences.TopLevel = false;
             sequences.Dock = DockStyle.Bottom;
             sequences.SetToolTips(toolTip1);
-            panel1.Controls.Add(sequences);
+            panelEffects.Controls.Add(sequences);
             sequences.SendToBack();
             openSequences.Checked = true;
             sequences.Visible = true;
@@ -175,10 +175,10 @@ namespace LAZYSHELL
         public void EnableOnPlayback(bool enable)
         {
             foreach (Control control in this.Controls)
-                if (control != panel1)
+                if (control != panelEffects)
                     control.Enabled = enable;
                 else
-                    foreach (Control parent in panel1.Controls)
+                    foreach (Control parent in panelEffects.Controls)
                         if (parent != sequences)
                             parent.Enabled = enable;
                         else

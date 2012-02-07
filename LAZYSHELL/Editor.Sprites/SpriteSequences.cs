@@ -41,7 +41,11 @@ namespace LAZYSHELL
             }
             set
             {
-                if (value < sequence.Frames.Count && value >= 0)
+                if (value >= sequence.Frames.Count)
+                    value = 0;
+                if (value < 0)
+                    value = sequence.Frames.Count - 1;
+                if (sequence.Frames.Count > 0)
                 {
                     frames.Tag = value;
                     updating = true;
@@ -196,7 +200,7 @@ namespace LAZYSHELL
                 this.duration.Enabled = true;
                 this.frameMold.Value = frame.Mold;
                 this.duration.Value = frame.Duration;
-                this.panelFrames.AutoScrollPosition = new Point(index * ((this.width / 2) + 4), 0);
+                //this.panelFrames.AutoScrollPosition = new Point(index * ((this.width / 2) + 4), 0);
             }
             else
             {
@@ -213,8 +217,7 @@ namespace LAZYSHELL
             this.frames.Controls.Clear();
             this.listBoxFrames.BeginUpdate();
             this.listBoxFrames.Items.Clear();
-            frames.Width = Math.Max(
-                sequence.Frames.Count * (this.width + 4) + 4, panelFrames.Width - 4);
+            frames.Width = sequence.Frames.Count * (this.width + 4) + Screen.PrimaryScreen.WorkingArea.Width;
             for (int i = 0; i < sequence.Frames.Count; i++)
             {
                 PictureBox frame = new PictureBox();
@@ -242,10 +245,7 @@ namespace LAZYSHELL
                 listBoxFrames.Items[i] = "Frame " + i;
                 i++;
             }
-            frames.Width = Math.Max(
-                sequence.Frames.Count * (this.width + 4) + 4, panelFrames.Width - 4);
-            frames.Location = new Point(
-                0, Math.Max(0, (panelFrames.Height / 2) - (frames.Height / 2)));
+            frames.Width = sequence.Frames.Count * (this.width + 4) + Screen.PrimaryScreen.WorkingArea.Width;
         }
         public void InvalidateImages()
         {
@@ -353,8 +353,7 @@ namespace LAZYSHELL
         }
         private void panelFrames_SizeChanged(object sender, EventArgs e)
         {
-            frames.Width = Math.Max(
-                sequence.Frames.Count * (this.width + 4) + 4, panelFrames.Width - 4);
+            frames.Width = sequence.Frames.Count * (this.width + 4) + Screen.PrimaryScreen.WorkingArea.Width;
         }
         private void panelSequence_SizeChanged(object sender, EventArgs e)
         {

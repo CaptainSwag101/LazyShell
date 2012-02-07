@@ -1322,6 +1322,14 @@ namespace LAZYSHELL
                                 break;
 
                             // Playback audio
+                            case 0x94:
+                                labelTitleA.Text = "Set inactive sound channels...";
+                                labelTitleB.Text = "channels";
+                                evtEffects.Items.AddRange(new string[] { "0", "1", "2", "3", "4", "5", "6", "7" });
+                                evtEffects.Enabled = true;
+                                for (int i = 1, j = 0; j < 8; i *= 2, j++)
+                                    evtEffects.SetItemChecked(j, (esc.EventData[2] & i) == i);
+                                break;
                             case 0x9C:
                                 labelTitleA.Text = "Playback start, sound...";
                                 labelEvtA.Text = "sound";
@@ -1960,6 +1968,10 @@ namespace LAZYSHELL
                                 break;
 
                             // Playback audio
+                            case 0x94:
+                                for (int i = 0; i < 8; i++)
+                                    Bits.SetBit(esc.EventData, 2, i, evtEffects.GetItemChecked(i));
+                                break;
                             case 0x9C:
                                 esc.EventData[2] = (byte)evtNameA.SelectedIndex;
                                 break;
@@ -2056,221 +2068,46 @@ namespace LAZYSHELL
         // Update offsets
         public void UpdateScriptOffsets()
         {
-            int delta = treeViewWrapper.ScriptDelta;
-            int eventNum = treeViewWrapper.Script.Index;
+            int index = treeViewWrapper.Script.Index;
             int end, start;
             int conditionOffset = 0;
-
-            if (eventNum >= 0 && eventNum <= 1535)
+            //
+            if (index >= 0 && index <= 1535)
             {
-                start = 0;
-                end = 1535; // Bank 1E
-
-                if (eventNum < end)
-                    conditionOffset = eventScripts[eventNum + 1].BaseOffset;
-                else
-                    conditionOffset = eventScripts[eventNum].BaseOffset + eventScripts[eventNum].ScriptLength; // Dont need to update anything after this event if its the last one                    
+                start = 0; end = 1535; // Bank 1E
             }
-            else if (eventNum >= 1536 && eventNum <= 3071)
+            else if (index >= 1536 && index <= 3071)
             {
-                start = 1536;
-                end = 3071; // Bank 1F
-
-                if (eventNum < end)
-                    conditionOffset = eventScripts[eventNum + 1].BaseOffset;
-                else
-                    conditionOffset = eventScripts[eventNum].BaseOffset + eventScripts[eventNum].ScriptLength; // Dont need to update anything after this event if its the last one
+                start = 1536; end = 3071; // Bank 1F
             }
-            else if (eventNum >= 3072 && eventNum <= 4095)
+            else if (index >= 3072 && index <= 4095)
             {
-                start = 3072;
-                end = 4095; // Bank 20
-
-                if (eventNum < end)
-                    conditionOffset = eventScripts[eventNum + 1].BaseOffset;
-                else
-                    conditionOffset = eventScripts[eventNum].BaseOffset + eventScripts[eventNum].ScriptLength; // Dont need to update anything after this event if its the last one
+                start = 3072; end = 4095; // Bank 20
             }
             else
                 throw new Exception("Invalid event num");
-
-            if (!autoPointerUpdate.Checked)
-                conditionOffset = 0x7FFFFFFF;
-
-            if (autoPointerUpdate.Checked)
+            //
+            if (index < end)
+                conditionOffset = eventScripts[index + 1].BaseOffset;
+            else
+                conditionOffset = eventScripts[index].BaseOffset + eventScripts[index].ScriptLength;
+            // set the conditionOffset based on the earliest command whose offset was changed in the current script
+            foreach (EventScriptCommand esc in eventScripts[index].Commands)
             {
-                // Update all pointers before eventOffset
-                for (int i = start; i < eventNum; i++)
-                    eventScripts[i].UpdateAllOffsets(delta, conditionOffset);
+                if (esc.Offset != esc.OriginalOffset)
+                {
+                    conditionOffset = esc.Offset;
+                    break;
+                }
             }
-
-            // Update all events and pointers after edited event
-            for (int i = eventNum + 1; i <= end; i++)
-                eventScripts[i].UpdateAllOffsets(delta, conditionOffset);
-
-            if (autoPointerUpdate.Checked)
+            foreach (EventScript es in eventScripts)
             {
-                // Update all pointers to edited event
-                UpdateCurrentScriptReferencePointers();
+                if (es.Index > end)
+                    break;
+                if (es.Index >= start && es.Index != index)
+                    es.UpdateAllOffsets(treeViewWrapper.ScriptDelta, conditionOffset);
             }
             treeViewWrapper.ScriptDelta = 0;
-        }
-        private void UpdateCurrentScriptReferencePointers()
-        {
-
-            EventScript es = treeViewWrapper.Script;
-
-            foreach (EventScriptCommand esc in es.Commands)
-            {
-                if (esc.IsActionQueueTrigger && esc.EmbeddedActionQueue.Commands != null)
-                {
-                    foreach (ActionQueueCommand aqc in esc.EmbeddedActionQueue.Commands)
-                    {
-                        if (aqc.CommandDelta != 0)
-                            UpdatePointersToCommand(aqc);
-                    }
-                }
-                else
-                {
-                    if (esc.CommandDelta != 0)
-                        UpdatePointersToCommand(esc);
-                }
-            }
-        }
-        private void UpdatePointersToCommand(ActionQueueCommand aqcRef)
-        {
-            ushort pointer;
-
-            foreach (EventScript es in eventScripts)
-            {
-                /* 12-31-08
-                 * UpdateInternalPointers() in TreeViewWrapper.cs already does this
-                 * for the current event script; doing it again for the current script
-                 * would screw up the pointers in the current script
-                 * thus, the following conditional is needed
-                 */
-                if (es.Index != treeViewWrapper.Script.Index)
-                {
-                    foreach (EventScriptCommand escIterator in es.Commands)
-                    {
-                        if (escIterator.IsActionQueueTrigger && escIterator.EmbeddedActionQueue.Commands != null)
-                        {
-                            foreach (ActionQueueCommand aqcIterator in escIterator.EmbeddedActionQueue.Commands)
-                            {
-                                if (aqcIterator.Opcode == 0xE9)
-                                {
-                                    pointer = aqcIterator.ReadPointerSpecial(0);
-                                    if (pointer == (aqcRef.OriginalOffset & 0xFFFF))
-                                    {
-                                        aqcIterator.WritePointerSpecial(0, (ushort)(pointer + aqcRef.CommandDelta));
-                                    }
-                                    pointer = aqcIterator.ReadPointerSpecial(1);
-                                    if (pointer == (aqcRef.OriginalOffset & 0xFFFF))
-                                    {
-                                        aqcIterator.WritePointerSpecial(1, (ushort)(pointer + aqcRef.CommandDelta));
-                                    }
-                                }
-                                else
-                                {
-                                    pointer = aqcIterator.ReadPointer();
-                                    if (pointer == (aqcRef.OriginalOffset & 0xFFFF))
-                                    {
-                                        aqcIterator.WritePointer((ushort)(pointer + aqcRef.CommandDelta));
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (escIterator.Opcode == 0x42 || escIterator.Opcode == 0xE9 || escIterator.Opcode == 0x67)
-                            {
-                                pointer = escIterator.ReadPointerSpecial(0);
-                                if (pointer == (aqcRef.OriginalOffset & 0xFFFF))
-                                {
-                                    escIterator.WritePointerSpecial(0, (ushort)(pointer + aqcRef.CommandDelta));
-                                }
-                                pointer = escIterator.ReadPointerSpecial(1);
-                                if (pointer == (aqcRef.OriginalOffset & 0xFFFF))
-                                {
-                                    escIterator.WritePointerSpecial(1, (ushort)(pointer + aqcRef.CommandDelta));
-                                }
-                            }
-                            else
-                            {
-                                pointer = escIterator.ReadPointer();
-                                if (pointer == (aqcRef.OriginalOffset & 0xFFFF))
-                                {
-                                    escIterator.WritePointer((ushort)(pointer + aqcRef.CommandDelta));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        private void UpdatePointersToCommand(EventScriptCommand escRef)
-        {
-            ushort pointer;
-            foreach (EventScript es in eventScripts)
-            {
-                if (es.Index != treeViewWrapper.Script.Index)
-                {
-                    foreach (EventScriptCommand escIterator in es.Commands)
-                    {
-                        if (escIterator.IsActionQueueTrigger && escIterator.EmbeddedActionQueue.Commands != null)
-                        {
-                            foreach (ActionQueueCommand aqcIterator in escIterator.EmbeddedActionQueue.Commands)
-                            {
-                                if (aqcIterator.Opcode == 0xE9)
-                                {
-                                    pointer = aqcIterator.ReadPointerSpecial(0);
-                                    if (pointer == (escRef.OriginalOffset & 0xFFFF))
-                                    {
-                                        aqcIterator.WritePointerSpecial(0, (ushort)(pointer + escRef.CommandDelta));
-                                    }
-                                    pointer = aqcIterator.ReadPointerSpecial(1);
-                                    if (pointer == (escRef.OriginalOffset & 0xFFFF))
-                                    {
-                                        aqcIterator.WritePointerSpecial(1, (ushort)(pointer + escRef.CommandDelta));
-                                    }
-                                }
-                                else
-                                {
-                                    pointer = aqcIterator.ReadPointer();
-                                    if (pointer == (escRef.OriginalOffset & 0xFFFF))
-                                    {
-                                        aqcIterator.WritePointer((ushort)(pointer + escRef.CommandDelta));
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (escIterator.Opcode == 0x42 || escIterator.Opcode == 0xE9 || escIterator.Opcode == 0x67)
-                            {
-                                pointer = escIterator.ReadPointerSpecial(0);
-                                if (pointer == (escRef.OriginalOffset & 0xFFFF))
-                                {
-                                    escIterator.WritePointerSpecial(0, (ushort)(pointer + escRef.CommandDelta));
-                                }
-                                pointer = escIterator.ReadPointerSpecial(1);
-                                if (pointer == (escRef.OriginalOffset & 0xFFFF))
-                                {
-                                    escIterator.WritePointerSpecial(1, (ushort)(pointer + escRef.CommandDelta));
-                                }
-                            }
-                            else
-                            {
-                                pointer = escIterator.ReadPointer();
-                                if (pointer == (escRef.OriginalOffset & 0xFFFF))
-                                {
-                                    escIterator.WritePointer((ushort)(pointer + escRef.CommandDelta));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
         // Update controls
         private void UpdateEventScriptsFreeSpace()
@@ -2857,7 +2694,7 @@ namespace LAZYSHELL
             }
             treeViewWrapper.RemoveNode();
             UpdateCommandData();
-
+            //
             EventScriptTree.SelectedNode = treeViewWrapper.SelectedNode;
             Do.AddHistory(this, index, EventScriptTree.SelectedNode, "DeleteCommand");
         }

@@ -1278,15 +1278,19 @@ namespace LAZYSHELL
         {
             try
             {
-                if (npcObjectTree.SelectedNode.Parent != null)
+                if (npcObjectTree.SelectedNode == null)
+                    AddNewNPC((NPC)copyNPC);
+                else if (npcObjectTree.SelectedNode.Parent != null)
                     AddNewInstance((NPC.Instance)copyNPC);
                 else
                     AddNewNPC((NPC)copyNPC);
+                overlay.NPCImages = null;
             }
-            catch
+            catch //(Exception ex)
             {
                 MessageBox.Show("Cannot paste an NPC into another NPC's instance collection.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //new NewExceptionForm(ex).ShowDialog();
             }
         }
         private void npcDuplicate_Click(object sender, EventArgs e)

@@ -49,7 +49,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.moveFrameBack = new System.Windows.Forms.ToolStripButton();
             this.moveFrameFoward = new System.Windows.Forms.ToolStripButton();
-            this.frames = new System.Windows.Forms.Panel();
+            this.frames = new LAZYSHELL.NewPanel();
             this.PlaybackSequence = new System.ComponentModel.BackgroundWorker();
             this.listBoxFrames = new System.Windows.Forms.ListBox();
             this.panelFrames = new System.Windows.Forms.Panel();
@@ -127,7 +127,7 @@
             this.panelSequence.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelSequence.Location = new System.Drawing.Point(78, 50);
             this.panelSequence.Name = "panelSequence";
-            this.panelSequence.Size = new System.Drawing.Size(308, 260);
+            this.panelSequence.Size = new System.Drawing.Size(308, 287);
             this.panelSequence.TabIndex = 441;
             this.panelSequence.SizeChanged += new System.EventHandler(this.panelSequence_SizeChanged);
             // 
@@ -307,7 +307,7 @@
             // frames
             // 
             this.frames.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.frames.Location = new System.Drawing.Point(0, 76);
+            this.frames.Location = new System.Drawing.Point(0, 0);
             this.frames.Name = "frames";
             this.frames.Size = new System.Drawing.Size(104, 104);
             this.frames.TabIndex = 443;
@@ -317,8 +317,8 @@
             this.PlaybackSequence.WorkerReportsProgress = true;
             this.PlaybackSequence.WorkerSupportsCancellation = true;
             this.PlaybackSequence.DoWork += new System.ComponentModel.DoWorkEventHandler(this.PlaybackSequence_DoWork);
-            this.PlaybackSequence.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.PlaybackSequence_RunWorkerCompleted);
             this.PlaybackSequence.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.PlaybackSequence_ProgressChanged);
+            this.PlaybackSequence.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.PlaybackSequence_RunWorkerCompleted);
             // 
             // listBoxFrames
             // 
@@ -327,7 +327,7 @@
             this.listBoxFrames.IntegralHeight = false;
             this.listBoxFrames.Location = new System.Drawing.Point(0, 25);
             this.listBoxFrames.Name = "listBoxFrames";
-            this.listBoxFrames.Size = new System.Drawing.Size(78, 285);
+            this.listBoxFrames.Size = new System.Drawing.Size(78, 312);
             this.listBoxFrames.TabIndex = 444;
             this.listBoxFrames.SelectedIndexChanged += new System.EventHandler(this.listBoxFrames_SelectedIndexChanged);
             // 
@@ -339,7 +339,7 @@
             this.panelFrames.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFrames.Location = new System.Drawing.Point(78, 50);
             this.panelFrames.Name = "panelFrames";
-            this.panelFrames.Size = new System.Drawing.Size(308, 260);
+            this.panelFrames.Size = new System.Drawing.Size(308, 287);
             this.panelFrames.TabIndex = 0;
             this.panelFrames.SizeChanged += new System.EventHandler(this.panelFrames_SizeChanged);
             // 
@@ -347,7 +347,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(386, 310);
+            this.ClientSize = new System.Drawing.Size(386, 337);
             this.ControlBox = false;
             this.Controls.Add(this.panelFrames);
             this.Controls.Add(this.panelSequence);
@@ -381,7 +381,7 @@
         private System.Windows.Forms.ToolStripButton newFrame;
         private System.Windows.Forms.ToolStripButton deleteFrame;
         private System.Windows.Forms.ToolStripButton duplicate;
-        private System.Windows.Forms.Panel frames;
+        private LAZYSHELL.NewPanel frames;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;

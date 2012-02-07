@@ -74,7 +74,7 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.openPalettes = new System.Windows.Forms.ToolStripButton();
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelEffects = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel106.SuspendLayout();
@@ -90,7 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.e_graphicSetSize)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.toolStrip3.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelEffects.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -433,7 +433,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(843, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(1015, 25);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -547,7 +547,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 25);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(843, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(1015, 25);
             this.toolStrip3.TabIndex = 3;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -647,14 +647,14 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 50);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(843, 651);
-            this.panel1.TabIndex = 520;
+            this.panelEffects.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelEffects.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelEffects.Controls.Add(this.panel2);
+            this.panelEffects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelEffects.Location = new System.Drawing.Point(0, 50);
+            this.panelEffects.Name = "panel1";
+            this.panelEffects.Size = new System.Drawing.Size(1015, 684);
+            this.panelEffects.TabIndex = 520;
             // 
             // panel2
             // 
@@ -664,10 +664,10 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(221, 647);
+            this.panel2.Size = new System.Drawing.Size(221, 680);
             this.panel2.TabIndex = 520;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             this.panel2.SizeChanged += new System.EventHandler(this.panel2_SizeChanged);
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // toolTip1
             // 
@@ -677,8 +677,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 701);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1015, 734);
+            this.Controls.Add(this.panelEffects);
             this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.toolStrip2);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -703,7 +703,7 @@
             this.toolStrip2.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.panelEffects.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -747,7 +747,7 @@
         private System.Windows.Forms.ToolStripButton openSequences;
         private System.Windows.Forms.ToolStripButton openMolds;
         private System.Windows.Forms.ToolStripTextBox searchText;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelEffects;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripButton showMain;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;

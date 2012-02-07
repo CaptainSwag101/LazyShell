@@ -14,7 +14,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main editor accessed variables
-        
+
         private Effects effectsEditor;
         private Effect effect { get { return effectsEditor.Effect; } set { effectsEditor.Effect = value; } }
         private EffectMolds molds { get { return effectsEditor.Molds; } set { effectsEditor.Molds = value; } }
@@ -31,7 +31,11 @@ namespace LAZYSHELL
             get { return (int)frames.Tag; }
             set
             {
-                if (value < sequence.Frames.Count && value >= 0)
+                if (value >= sequence.Frames.Count)
+                    value = 0;
+                if (value < 0)
+                    value = sequence.Frames.Count - 1;
+                if (sequence.Frames.Count > 0)
                 {
                     frames.Tag = value;
                     updating = true;
@@ -83,26 +87,26 @@ namespace LAZYSHELL
                 "under \"MOLDS\" and a duration, creating an animation that \n" +
                 "can be played back in the image to the right.");
 
-            this.newFrame.ToolTipText = 
+            this.newFrame.ToolTipText =
                 "Insert a new frame after the currently selected frame.";
 
-            this.deleteFrame.ToolTipText = 
+            this.deleteFrame.ToolTipText =
                 "Delete the currently selected frame.";
 
-            this.frameMold.ToolTipText = 
+            this.frameMold.ToolTipText =
                 "The mold used by the currently selected frame. This value \n" +
                 "is based on the collection of molds under \"MOLDS\".";
 
-            this.duration.ToolTipText = 
+            this.duration.ToolTipText =
                 "The duration of the currently selected frame, or how long \n" +
                 "the frame will pause before the next frame starts. This \n" +
                 "value refers to the # of frames based on a 60-frames-per-\n" +
                 "second unit.";
 
-            this.moveFrameBack.ToolTipText = 
+            this.moveFrameBack.ToolTipText =
                 "Move the currently selected frame back.";
 
-            this.moveFrameFoward.ToolTipText = 
+            this.moveFrameFoward.ToolTipText =
                 "Move the currently selected frame forward.";
         }
         private void InitializeFrames()
@@ -146,18 +150,15 @@ namespace LAZYSHELL
             this.frames.Controls.Clear();
             this.listBoxFrames.BeginUpdate();
             this.listBoxFrames.Items.Clear();
-            this.frames.Width = Math.Max(
-                (Math.Min((int)(ratio * 96), width) + 4) * sequence.Frames.Count + 4, panelFrames.Width - 4);
-            this.frames.Height = Math.Min(104, height + 8);
-            frames.Location = new Point(
-                0, Math.Max(0, (panelFrames.Height / 2) - (frames.Height / 2)));
+            this.frames.Width = (width + 4) * sequence.Frames.Count + Screen.PrimaryScreen.WorkingArea.Width;
+            this.frames.Height = height + 8;
             for (int i = 0; i < sequence.Frames.Count; i++)
             {
                 PictureBox frame = new PictureBox();
                 frame.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
                 frame.BorderStyle = BorderStyle.None;
                 frame.Name = "frame" + i;
-                frame.Size = new Size(Math.Min((int)(ratio * 96), width), Math.Min(96, height));
+                frame.Size = new Size(width, height);
                 frame.Location = new Point((frame.Width + 4) * i + 4, 4);
                 frame.Tag = i;
                 frame.MouseDown += new MouseEventHandler(frame_MouseDown);
@@ -170,16 +171,13 @@ namespace LAZYSHELL
         }
         public void RealignFrames()
         {
-            this.frames.Width = Math.Max(
-                (Math.Min((int)(ratio * 96), width) + 4) * sequence.Frames.Count + 4, panelFrames.Width - 4);
-            this.frames.Height = Math.Min(104, height + 8);
-            frames.Location = new Point(
-                0, Math.Max(0, (panelFrames.Height / 2) - (frames.Height / 2)));
+            this.frames.Width = (width + 4) * sequence.Frames.Count + Screen.PrimaryScreen.WorkingArea.Width;
+            this.frames.Height = height + 8;
             int i = 0;
             foreach (PictureBox frame in frames.Controls)
             {
                 frame.Location = new Point((frame.Width + 4) * i + 4, 4);
-                frame.Size = new Size(Math.Min((int)(ratio * 96), width), Math.Min(96, height));
+                frame.Size = new Size(width, height);
                 frame.Tag = i;
                 listBoxFrames.Items[i] = "Frame " + i++;
             }
@@ -288,10 +286,7 @@ namespace LAZYSHELL
         private void panelFrames_SizeChanged(object sender, EventArgs e)
         {
             double ratio = (double)width / (double)height;
-            frames.Width = Math.Max(
-                (Math.Min((int)(ratio * 96), width) + 4) * sequence.Frames.Count + 4, panelFrames.Width - 4);
-            frames.Location = new Point(
-                0, Math.Max(0, (panelFrames.Height / 2) - (frames.Height / 2)));
+            frames.Width = (width + 4) * sequence.Frames.Count + Screen.PrimaryScreen.WorkingArea.Width;
         }
         private void listBoxFrames_SelectedIndexChanged(object sender, EventArgs e)
         {

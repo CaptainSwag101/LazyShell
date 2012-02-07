@@ -143,6 +143,10 @@ namespace LAZYSHELL
     {
         private int lastSelectedIndex = -1;
         public int LastSelectedIndex { get { return lastSelectedIndex; } set { lastSelectedIndex = value; } }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+        }
     }
     public class NewPictureBox : PictureBox
     {

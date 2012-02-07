@@ -33,7 +33,7 @@
             this.duration = new LAZYSHELL.ToolStripNumericUpDown();
             this.panelSequence = new System.Windows.Forms.Panel();
             this.pictureBoxSequence = new System.Windows.Forms.PictureBox();
-            this.frames = new System.Windows.Forms.Panel();
+            this.frames = new LAZYSHELL.NewPanel();
             this.sequences = new System.Windows.Forms.ListBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.newSequence = new System.Windows.Forms.ToolStripButton();
@@ -429,8 +429,8 @@
             this.PlaybackSequence.WorkerReportsProgress = true;
             this.PlaybackSequence.WorkerSupportsCancellation = true;
             this.PlaybackSequence.DoWork += new System.ComponentModel.DoWorkEventHandler(this.PlaybackSequence_DoWork);
-            this.PlaybackSequence.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.PlaybackSequence_RunWorkerCompleted);
             this.PlaybackSequence.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.PlaybackSequence_ProgressChanged);
+            this.PlaybackSequence.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.PlaybackSequence_RunWorkerCompleted);
             // 
             // listBoxFrames
             // 
@@ -488,7 +488,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panelSequence;
-        private System.Windows.Forms.Panel frames;
+        private LAZYSHELL.NewPanel frames;
         private System.Windows.Forms.ListBox sequences;
         private System.Windows.Forms.PictureBox pictureBoxSequence;
         private System.Windows.Forms.ToolStrip toolStrip2;

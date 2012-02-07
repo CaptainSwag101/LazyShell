@@ -1394,9 +1394,9 @@ namespace LAZYSHELL
         {
             if (new IOArchitecture("import", index, levelMap, paletteSet, tileSet, tileMap, prioritySets[layer.PrioritySet]).ShowDialog() == DialogResult.Cancel)
                 return;
-            fullUpdate = false;
-            RefreshLevel();
-            return;
+            fullUpdate = true;
+            if (!updatingLevel)
+                RefreshLevel();
         }
         private void exportArchitectureToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2040,6 +2040,7 @@ namespace LAZYSHELL
             levelMap = new LevelMap(Model.Data, level.LevelMap);
             layer = new LevelLayer(Model.Data, index);
             npcs = new LevelNPCs(Model.Data, index);
+            overlay.NPCImages = null;
             events = new LevelEvents(Model.Data, index);
             exits = new LevelExits(Model.Data, index);
             overlaps = new LevelOverlaps(Model.Data, index);

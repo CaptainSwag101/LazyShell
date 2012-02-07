@@ -1023,83 +1023,38 @@ namespace LAZYSHELL
         //
         public void UpdateActionOffsets()
         {
-            int delta = treeViewWrapper.ScriptDelta;
-            int actionNum = treeViewWrapper.Action.Index;
+            int index = treeViewWrapper.Action.Index;
             int end, start;
             int conditionOffset = 0;
-
-            if (actionNum >= 0 && actionNum <= 1023)
+            //
+            if (index >= 0 && index <= 1023)
             {
-                start = 0;
-                end = 1023; // Bank 1E
-
-                if (actionNum < end)
-                    conditionOffset = actionScripts[actionNum + 1].Offset;
-                else
-                    conditionOffset = actionScripts[actionNum].Offset + actionScripts[actionNum].ActionQueueLength; // Dont need to update anything after this event if its the last one                    
+                start = 0; end = 1023; // Bank 1E
             }
             else
                 throw new Exception("Invalid action num");
-
-            if (!autoPointerUpdate.Checked)
-                conditionOffset = 0x7FFFFFFF;
-
-            if (autoPointerUpdate.Checked)
+            //
+            if (index < end)
+                conditionOffset = actionScripts[index + 1].Offset;
+            else
+                conditionOffset = actionScripts[index].Offset + actionScripts[index].ActionQueueLength; // Dont need to update anything after this event if its the last one                    
+            // set the conditionOffset based on the earliest command whose offset was changed in the current script
+            foreach (ActionQueueCommand aqc in actionScripts[index].Commands)
             {
-                // Update all pointers before eventOffset
-                for (int i = start; i < actionNum; i++)
-                    actionScripts[i].UpdateAllOffsets(delta, conditionOffset);
-            }
-
-            // Update all events and pointers after edited event
-            for (int i = actionNum + 1; i <= end; i++)
-                actionScripts[i].UpdateAllOffsets(delta, conditionOffset);
-
-            if (autoPointerUpdate.Checked)
-            {
-                // Update all pointers to edited event
-                UpdateCurrentActionReferencePointers();
-            }
-            treeViewWrapper.ScriptDelta = 0;
-        }
-        private void UpdateCurrentActionReferencePointers()
-        {
-
-            ActionQueue aq = treeViewWrapper.Action;
-
-            foreach (ActionQueueCommand aqc in aq.Commands)
-            {
-                if (aqc.CommandDelta != 0)
-                    UpdatePointersToAction(aqc);
-            }
-        }
-        private void UpdatePointersToAction(ActionQueueCommand aqcRef)
-        {
-            ushort pointer;
-            foreach (ActionQueue aq in actionScripts)
-            {
-                if (aq.Index != treeViewWrapper.Action.Index)
+                if (aqc.Offset != aqc.OriginalOffset)
                 {
-                    foreach (ActionQueueCommand aqcIterator in aq.Commands)
-                    {
-                        if (aqcIterator.Opcode == 0xE9)
-                        {
-                            pointer = aqcIterator.ReadPointerSpecial(0);
-                            if (pointer == (aqcRef.OriginalOffset & 0xFFFF))
-                                aqcIterator.WritePointerSpecial(0, (ushort)(pointer + aqcRef.CommandDelta));
-                            pointer = aqcIterator.ReadPointerSpecial(1);
-                            if (pointer == (aqcRef.OriginalOffset & 0xFFFF))
-                                aqcIterator.WritePointerSpecial(1, (ushort)(pointer + aqcRef.CommandDelta));
-                        }
-                        else
-                        {
-                            pointer = aqcIterator.ReadPointer();
-                            if (pointer == (aqcRef.OriginalOffset & 0xFFFF))
-                                aqcIterator.WritePointer((ushort)(pointer + aqcRef.CommandDelta));
-                        }
-                    }
+                    conditionOffset = aqc.Offset;
+                    break;
                 }
             }
+            foreach (ActionQueue aq in actionScripts)
+            {
+                if (aq.Index > end)
+                    break;
+                if (aq.Index >= start && aq.Index != index)
+                    aq.UpdateAllOffsets(treeViewWrapper.ScriptDelta, conditionOffset);
+            }
+            treeViewWrapper.ScriptDelta = 0;
         }
         //
         private void UpdateActionScriptsFreeSpace()

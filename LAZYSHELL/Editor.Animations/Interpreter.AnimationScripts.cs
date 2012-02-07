@@ -716,7 +716,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     sb.Append(asc.Option + ", volume: " + asc.AnimationData[2]);
                     break;
                 case 0x86:
-                    ushort value = Bits.GetShort(asc.AnimationData,1);
+                    ushort value = Bits.GetShort(asc.AnimationData, 1);
                     if (value == 1)
                         sb.Append("screen, ");
                     else if (value == 2)
@@ -768,7 +768,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 {
                     if (pre && j > 0)
                         bit[j] = ", ";
-                    bit[j] += names[j];
+                    if (names != null)
+                        bit[j] += names[j];
+                    else
+                        bit[j] += j;
                     pre = true;
                 }
                 else bit[j] = "";
