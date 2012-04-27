@@ -597,9 +597,9 @@ namespace LAZYSHELL
             if (overlay.SelectTS == null) return;
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
-            for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
+            for (int y = 0; y < overlay.SelectTS.Height / 16 && y + y_ < 0x100; y++)
             {
-                for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
+                for (int x = 0; x < overlay.SelectTS.Width / 16 && x + x_ < 0x100; x++)
                     tileSet.TileSetLayer[(y + y_) * 16 + x + x_].Clear();
             }
             tileSet.DrawTileset(tileSet.TileSetLayer, tileSet.TileSet);

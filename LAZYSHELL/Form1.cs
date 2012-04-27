@@ -35,6 +35,20 @@ namespace LAZYSHELL
         // Constructor
         public Form1(ProgramController controls)
         {
+            if (!settings.FirstLoad)
+                MessageBox.Show(
+                    "If this is your first time using Lazy Shell, please take the time to read the following advice:\n\n" +
+                    "1. When plannning a hack project, the wisest thing to do is to make sure you have the back-up option enabled in the settings. Click the cog icon and check either \"Create Back-up ROM on Load\" or \"Create Back-up ROM on Save\" to enable it. I often hear about users throwing in the towel when the application corrupts the ROM, never having bothered to use the back-up feature.\n\n" +
+                    "2. If you receive an error prompt, please follow the directions in the prompt window and copy ALL of the contents of the error message and post them to the given link in the window. Unless you do this, there is little hope of the bug ever being fixed unless someone else encounters it and posts it to the link. Keep in mind, I do read bug reports and I do attempt to fix the reported bugs, so your post will not be a waste of time.\n\n" +
+                    "3. If the unfortunate occasion might arise that the application actually does corrupt your ROM, you can try resetting the corrupted elements by importing those specific elements from a fresh SMRPG ROM. Click the button \"Import elements from another ROM\" (a down-arrow over a small white box), select a fresh ROM, and check the elements you want to import.\n\n" +
+                    "Should you encounter any issues, errors, problems, or irritations using the application, please post them to the following link:\n\n" +
+                    "http://acmlm.kafuka.org/board/thread.php?id=7005\n\n" +
+                    "Press Ctrl+Ins to copy the contents of this message box to the clipboard.\n\n" +
+                    "Thank you for using the program.",
+                    "LAZY SHELL",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            settings.FirstLoad = true;
+
             this.AppControl = controls;
             //notes = Notes.Instance;
 

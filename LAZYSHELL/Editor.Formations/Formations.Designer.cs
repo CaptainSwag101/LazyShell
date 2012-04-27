@@ -227,9 +227,9 @@
             this.pictureBoxFormation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxFormation.TabIndex = 286;
             this.pictureBoxFormation.TabStop = false;
-            this.pictureBoxFormation.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFormation_MouseMove);
-            this.pictureBoxFormation.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFormation_MouseDown);
             this.pictureBoxFormation.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxFormation_Paint);
+            this.pictureBoxFormation.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFormation_MouseDown);
+            this.pictureBoxFormation.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFormation_MouseMove);
             this.pictureBoxFormation.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFormation_MouseUp);
             // 
             // panel143
@@ -1169,7 +1169,7 @@
             this.formationNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formationNum.ForeColor = System.Drawing.SystemColors.Control;
             this.formationNum.Hexadecimal = false;
-            this.formationNum.Location = new System.Drawing.Point(263, 1);
+            this.formationNum.Location = new System.Drawing.Point(265, 1);
             this.formationNum.Maximum = new decimal(new int[] {
             511,
             0,
@@ -1194,7 +1194,7 @@
             // 
             this.nameTextBox.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(245, 25);
+            this.nameTextBox.Size = new System.Drawing.Size(240, 25);
             // 
             // searchFormationNames
             // 

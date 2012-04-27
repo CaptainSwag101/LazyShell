@@ -1,5 +1,29 @@
 Major changes/additions are indicated by ***
 
+v3.9.3 (2012-04-27)
+--------------------------------------
+Additions:
+*Added FAQ and glossary sections to the end of the readme.txt file
+*Dialogues: option to insert font character into battle dialogue
+*Events: goto specific address
+
+Changes:
+*Levels: changed NPC & Partition search toolstrip buttons to label-buttons
+
+Fixes:
+*Some toolstrip comboboxes were hiding buttons in Windows 7 theme
+*Animations: lighter highlights like events and battle scripts
+*Effects: crash when deleting selection beyond boundaries
+*Events: lighter highlights not changed everywhere, affecting pasting
+*Levels: applying changes in NPC editor crashed if no NPCs in level
+*Levels: not checking if null selection when deleting
+*Main Title: crash when deleting selection beyond boundaries
+*Monsters: fixed backcolors on battle script dropdownlists
+*Sprites: if mirrored/inverted, click subtile in tilemap not accurate
+*Sprites: selectedTiles being nulled when clicking drawing buttons
+*World Maps: crash when deleting selection beyond boundaries
+
+
 v3.9.2 (2012-02-06)
 --------------------------------------
 Additions:
@@ -739,3 +763,8 @@ Fixes:
 *Stats: some timing controls and variables were redundant, so they were removed
 *Stats: starting coins/frog coins were being read as bytes instead of ushorts
 *Stats: starting items weren't even saving!
+
+
+v1.0 (2009-01-22)
+--------------------------------------
+***Premiere release of Lazy Shell***

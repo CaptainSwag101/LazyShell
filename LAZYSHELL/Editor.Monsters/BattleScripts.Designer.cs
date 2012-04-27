@@ -297,7 +297,7 @@
             // 
             // nameA
             // 
-            this.nameA.BackColor = System.Drawing.SystemColors.Window;
+            this.nameA.BackColor = System.Drawing.SystemColors.ControlDark;
             this.nameA.Cursor = System.Windows.Forms.Cursors.Default;
             this.nameA.DropDownHeight = 317;
             this.nameA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -320,7 +320,7 @@
             // 
             // nameB
             // 
-            this.nameB.BackColor = System.Drawing.SystemColors.Window;
+            this.nameB.BackColor = System.Drawing.SystemColors.ControlDark;
             this.nameB.Cursor = System.Windows.Forms.Cursors.Default;
             this.nameB.DropDownHeight = 317;
             this.nameB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -352,7 +352,7 @@
             // 
             // nameC
             // 
-            this.nameC.BackColor = System.Drawing.SystemColors.Window;
+            this.nameC.BackColor = System.Drawing.SystemColors.ControlDark;
             this.nameC.Cursor = System.Windows.Forms.Cursors.Default;
             this.nameC.DropDownHeight = 317;
             this.nameC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -821,9 +821,9 @@
             this.pictureBoxMonster.Size = new System.Drawing.Size(256, 224);
             this.pictureBoxMonster.TabIndex = 220;
             this.pictureBoxMonster.TabStop = false;
-            this.pictureBoxMonster.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseMove);
-            this.pictureBoxMonster.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseDown);
             this.pictureBoxMonster.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMonster_Paint);
+            this.pictureBoxMonster.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseDown);
+            this.pictureBoxMonster.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseMove);
             this.pictureBoxMonster.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMonster_MouseUp);
             // 
             // BattleScriptTree
@@ -839,10 +839,10 @@
             this.BattleScriptTree.Size = new System.Drawing.Size(398, 709);
             this.BattleScriptTree.TabIndex = 32;
             this.BattleScriptTree.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.BattleScriptTree_AfterCheck);
-            this.BattleScriptTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BattleScriptTree_MouseDoubleClick);
             this.BattleScriptTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.BattleScriptTree_AfterSelect);
             this.BattleScriptTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.BattleScriptTree_NodeMouseClick);
             this.BattleScriptTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Scripts_KeyDown);
+            this.BattleScriptTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BattleScriptTree_MouseDoubleClick);
             // 
             // BatScrMoveUp
             // 

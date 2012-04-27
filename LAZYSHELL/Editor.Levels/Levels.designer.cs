@@ -51,9 +51,6 @@ namespace LAZYSHELL
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.npcMoveUp = new System.Windows.Forms.ToolStripButton();
             this.npcMoveDown = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.findNPCNum = new System.Windows.Forms.ToolStripButton();
-            this.openPartitions = new System.Windows.Forms.ToolStripButton();
             this.panel85 = new System.Windows.Forms.Panel();
             this.npcAttributes = new System.Windows.Forms.CheckedListBox();
             this.label65 = new System.Windows.Forms.Label();
@@ -63,7 +60,6 @@ namespace LAZYSHELL
             this.npcAfterBattle = new System.Windows.Forms.ComboBox();
             this.panel83 = new System.Windows.Forms.Panel();
             this.npcID = new System.Windows.Forms.NumericUpDown();
-            this.label49 = new System.Windows.Forms.Label();
             this.npcMovement = new System.Windows.Forms.NumericUpDown();
             this.npcSpeedPlus = new System.Windows.Forms.NumericUpDown();
             this.npcEventORPack = new System.Windows.Forms.NumericUpDown();
@@ -77,7 +73,6 @@ namespace LAZYSHELL
             this.panel53 = new System.Windows.Forms.Panel();
             this.npcEngageTrigger = new System.Windows.Forms.ComboBox();
             this.panel80 = new System.Windows.Forms.Panel();
-            this.label48 = new System.Windows.Forms.Label();
             this.npcMapHeader = new System.Windows.Forms.NumericUpDown();
             this.npcsBytesLeft = new System.Windows.Forms.Label();
             this.npcObjectTree = new System.Windows.Forms.TreeView();
@@ -427,11 +422,14 @@ namespace LAZYSHELL
             this.label68 = new System.Windows.Forms.Label();
             this.panel45 = new System.Windows.Forms.Panel();
             this.toolStripLevel = new System.Windows.Forms.ToolStrip();
+            this.navigateBck = new System.Windows.Forms.ToolStripButton();
+            this.navigateFwd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchLevelNames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.changeLevelName = new System.Windows.Forms.ToolStripButton();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.changeLevelName = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonGotoC = new System.Windows.Forms.ToolStripButton();
@@ -510,9 +508,8 @@ namespace LAZYSHELL
             this.help = new System.Windows.Forms.ToolStripButton();
             this.baseConversion = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.navigateFwd = new System.Windows.Forms.ToolStripButton();
-            this.navigateBck = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.findNPCNum = new System.Windows.Forms.Button();
+            this.openPartitions = new System.Windows.Forms.Button();
             this.tabPage8.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.panel85.SuspendLayout();
@@ -736,10 +733,7 @@ namespace LAZYSHELL
             this.npcDuplicate,
             this.toolStripSeparator10,
             this.npcMoveUp,
-            this.npcMoveDown,
-            this.toolStripSeparator9,
-            this.findNPCNum,
-            this.openPartitions});
+            this.npcMoveDown});
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -749,7 +743,6 @@ namespace LAZYSHELL
             // 
             // npcInsertObject
             // 
-            this.npcInsertObject.AutoSize = false;
             this.npcInsertObject.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcInsertObject.Image = global::LAZYSHELL.Properties.Resources.new_small;
             this.npcInsertObject.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -761,7 +754,6 @@ namespace LAZYSHELL
             // 
             // npcInsertInstance
             // 
-            this.npcInsertInstance.AutoSize = false;
             this.npcInsertInstance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcInsertInstance.Image = global::LAZYSHELL.Properties.Resources.newInstance;
             this.npcInsertInstance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -773,7 +765,6 @@ namespace LAZYSHELL
             // 
             // npcRemoveObject
             // 
-            this.npcRemoveObject.AutoSize = false;
             this.npcRemoveObject.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcRemoveObject.Image = global::LAZYSHELL.Properties.Resources.delete_small;
             this.npcRemoveObject.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -785,7 +776,6 @@ namespace LAZYSHELL
             // 
             // npcCopy
             // 
-            this.npcCopy.AutoSize = false;
             this.npcCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
             this.npcCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -797,7 +787,6 @@ namespace LAZYSHELL
             // 
             // npcPaste
             // 
-            this.npcPaste.AutoSize = false;
             this.npcPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcPaste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
             this.npcPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -809,7 +798,6 @@ namespace LAZYSHELL
             // 
             // npcDuplicate
             // 
-            this.npcDuplicate.AutoSize = false;
             this.npcDuplicate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcDuplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate_small;
             this.npcDuplicate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -826,7 +814,6 @@ namespace LAZYSHELL
             // 
             // npcMoveUp
             // 
-            this.npcMoveUp.AutoSize = false;
             this.npcMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcMoveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
             this.npcMoveUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -838,7 +825,6 @@ namespace LAZYSHELL
             // 
             // npcMoveDown
             // 
-            this.npcMoveDown.AutoSize = false;
             this.npcMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.npcMoveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
             this.npcMoveDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -847,33 +833,6 @@ namespace LAZYSHELL
             this.npcMoveDown.Size = new System.Drawing.Size(23, 22);
             this.npcMoveDown.Text = "Move NPC Down";
             this.npcMoveDown.Click += new System.EventHandler(this.npcMoveDown_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
-            // 
-            // findNPCNum
-            // 
-            this.findNPCNum.AutoSize = false;
-            this.findNPCNum.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.findNPCNum.Image = global::LAZYSHELL.Properties.Resources.openNPCs;
-            this.findNPCNum.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.findNPCNum.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.findNPCNum.Name = "findNPCNum";
-            this.findNPCNum.Size = new System.Drawing.Size(23, 22);
-            this.findNPCNum.Click += new System.EventHandler(this.findNPCNum_Click);
-            // 
-            // openPartitions
-            // 
-            this.openPartitions.AutoSize = false;
-            this.openPartitions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openPartitions.Image = global::LAZYSHELL.Properties.Resources.openPartitions;
-            this.openPartitions.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openPartitions.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openPartitions.Name = "openPartitions";
-            this.openPartitions.Size = new System.Drawing.Size(23, 22);
-            this.openPartitions.Click += new System.EventHandler(this.openPartitions_Click);
             // 
             // panel85
             // 
@@ -982,8 +941,8 @@ namespace LAZYSHELL
             // 
             this.panel83.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel83.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel83.Controls.Add(this.findNPCNum);
             this.panel83.Controls.Add(this.npcID);
-            this.panel83.Controls.Add(this.label49);
             this.panel83.Controls.Add(this.npcMovement);
             this.panel83.Controls.Add(this.npcSpeedPlus);
             this.panel83.Controls.Add(this.npcEventORPack);
@@ -1013,16 +972,6 @@ namespace LAZYSHELL
             this.npcID.TabIndex = 98;
             this.npcID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcID.ValueChanged += new System.EventHandler(this.npcID_ValueChanged);
-            // 
-            // label49
-            // 
-            this.label49.BackColor = System.Drawing.SystemColors.Control;
-            this.label49.Location = new System.Drawing.Point(0, 76);
-            this.label49.Name = "label49";
-            this.label49.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label49.Size = new System.Drawing.Size(67, 17);
-            this.label49.TabIndex = 452;
-            this.label49.Text = "NPC #";
             // 
             // npcMovement
             // 
@@ -1198,22 +1147,12 @@ namespace LAZYSHELL
             // 
             this.panel80.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel80.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel80.Controls.Add(this.label48);
+            this.panel80.Controls.Add(this.openPartitions);
             this.panel80.Controls.Add(this.npcMapHeader);
             this.panel80.Location = new System.Drawing.Point(128, 28);
             this.panel80.Name = "panel80";
             this.panel80.Size = new System.Drawing.Size(132, 21);
             this.panel80.TabIndex = 480;
-            // 
-            // label48
-            // 
-            this.label48.BackColor = System.Drawing.SystemColors.Control;
-            this.label48.Location = new System.Drawing.Point(0, 0);
-            this.label48.Name = "label48";
-            this.label48.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label48.Size = new System.Drawing.Size(67, 17);
-            this.label48.TabIndex = 449;
-            this.label48.Text = "Partition #";
             // 
             // npcMapHeader
             // 
@@ -1892,8 +1831,8 @@ namespace LAZYSHELL
             this.pictureBoxOverlaps.Size = new System.Drawing.Size(256, 416);
             this.pictureBoxOverlaps.TabIndex = 0;
             this.pictureBoxOverlaps.TabStop = false;
-            this.pictureBoxOverlaps.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOverlaps_MouseDown);
             this.pictureBoxOverlaps.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxOverlaps_Paint);
+            this.pictureBoxOverlaps.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOverlaps_MouseDown);
             // 
             // tabPage9
             // 
@@ -5896,6 +5835,35 @@ namespace LAZYSHELL
             this.toolStripLevel.Size = new System.Drawing.Size(1020, 25);
             this.toolStripLevel.TabIndex = 2;
             // 
+            // navigateBck
+            // 
+            this.navigateBck.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.navigateBck.Enabled = false;
+            this.navigateBck.Image = global::LAZYSHELL.Properties.Resources.back;
+            this.navigateBck.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.navigateBck.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.navigateBck.Name = "navigateBck";
+            this.navigateBck.Size = new System.Drawing.Size(23, 22);
+            this.navigateBck.ToolTipText = "Navigate Backward";
+            this.navigateBck.Click += new System.EventHandler(this.navigateBck_Click);
+            // 
+            // navigateFwd
+            // 
+            this.navigateFwd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.navigateFwd.Enabled = false;
+            this.navigateFwd.Image = global::LAZYSHELL.Properties.Resources.foward;
+            this.navigateFwd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.navigateFwd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.navigateFwd.Name = "navigateFwd";
+            this.navigateFwd.Size = new System.Drawing.Size(23, 22);
+            this.navigateFwd.ToolTipText = "Navigate Forward";
+            this.navigateFwd.Click += new System.EventHandler(this.navigateFwd_Click);
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
+            // 
             // nameTextBox
             // 
             this.nameTextBox.Name = "nameTextBox";
@@ -5916,6 +5884,14 @@ namespace LAZYSHELL
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(145, 25);
+            this.toolStripTextBox1.Visible = false;
+            this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
+            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
+            // 
             // changeLevelName
             // 
             this.changeLevelName.CheckOnClick = true;
@@ -5927,14 +5903,6 @@ namespace LAZYSHELL
             this.changeLevelName.Size = new System.Drawing.Size(23, 22);
             this.changeLevelName.Text = "Edit level name";
             this.changeLevelName.Click += new System.EventHandler(this.changeLevelName_Click);
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(145, 25);
-            this.toolStripTextBox1.Visible = false;
-            this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
-            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
             // 
             // toolStripButton1
             // 
@@ -6621,34 +6589,37 @@ namespace LAZYSHELL
             this.toolStripSeparator15.Name = "toolStripSeparator15";
             this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
             // 
-            // navigateFwd
+            // findNPCNum
             // 
-            this.navigateFwd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.navigateFwd.Enabled = false;
-            this.navigateFwd.Image = global::LAZYSHELL.Properties.Resources.foward;
-            this.navigateFwd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.navigateFwd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.navigateFwd.Name = "navigateFwd";
-            this.navigateFwd.Size = new System.Drawing.Size(23, 22);
-            this.navigateFwd.ToolTipText = "Navigate Forward";
-            this.navigateFwd.Click += new System.EventHandler(this.navigateFwd_Click);
+            this.findNPCNum.BackColor = System.Drawing.SystemColors.Control;
+            this.findNPCNum.FlatAppearance.BorderSize = 0;
+            this.findNPCNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.findNPCNum.Location = new System.Drawing.Point(0, 76);
+            this.findNPCNum.Name = "findNPCNum";
+            this.findNPCNum.Size = new System.Drawing.Size(68, 18);
+            this.findNPCNum.TabIndex = 478;
+            this.findNPCNum.Text = "NPC #";
+            this.findNPCNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.findNPCNum, "Edit NPC event...");
+            this.findNPCNum.UseCompatibleTextRendering = true;
+            this.findNPCNum.UseVisualStyleBackColor = false;
+            this.findNPCNum.Click += new System.EventHandler(this.findNPCNum_Click);
             // 
-            // navigateBck
+            // openPartitions
             // 
-            this.navigateBck.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.navigateBck.Enabled = false;
-            this.navigateBck.Image = global::LAZYSHELL.Properties.Resources.back;
-            this.navigateBck.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.navigateBck.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.navigateBck.Name = "navigateBck";
-            this.navigateBck.Size = new System.Drawing.Size(23, 22);
-            this.navigateBck.ToolTipText = "Navigate Backward";
-            this.navigateBck.Click += new System.EventHandler(this.navigateBck_Click);
-            // 
-            // toolStripSeparator17
-            // 
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
+            this.openPartitions.BackColor = System.Drawing.SystemColors.Control;
+            this.openPartitions.FlatAppearance.BorderSize = 0;
+            this.openPartitions.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openPartitions.Location = new System.Drawing.Point(0, 0);
+            this.openPartitions.Name = "openPartitions";
+            this.openPartitions.Size = new System.Drawing.Size(68, 17);
+            this.openPartitions.TabIndex = 100;
+            this.openPartitions.Text = "Partition";
+            this.openPartitions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.openPartitions, "Edit NPC event...");
+            this.openPartitions.UseCompatibleTextRendering = true;
+            this.openPartitions.UseVisualStyleBackColor = false;
+            this.openPartitions.Click += new System.EventHandler(this.openPartitions_Click);
             // 
             // Levels
             // 
@@ -6666,8 +6637,8 @@ namespace LAZYSHELL
             this.Name = "Levels";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "LEVELS - Lazy Shell";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Levels_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Levels_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Levels_FormClosed);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Levels_KeyDown);
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
@@ -6967,8 +6938,6 @@ namespace LAZYSHELL
         private Label label45;
         private Label label46;
         private Label label47;
-        private Label label48;
-        private Label label49;
         private Label label5;
         private Label label52;
         private Label label53;
@@ -7194,13 +7163,10 @@ namespace LAZYSHELL
         private ToolStripButton npcCopy;
         private ToolStripButton npcPaste;
         private ToolStripButton npcDuplicate;
-        private ToolStripSeparator toolStripSeparator9;
         private ToolStripButton npcInsertObject;
         private ToolStripButton npcRemoveObject;
         private ToolStripButton npcInsertInstance;
         private ToolStripSeparator toolStripSeparator10;
-        private ToolStripButton findNPCNum;
-        private ToolStripButton openPartitions;
         private ToolStrip toolStrip4;
         private ToolStripButton overlapFieldInsert;
         private ToolStripButton overlapFieldDelete;
@@ -7312,6 +7278,8 @@ namespace LAZYSHELL
         private ToolStripButton navigateBck;
         private ToolStripButton navigateFwd;
         private ToolStripSeparator toolStripSeparator17;
+        private Button findNPCNum;
+        private Button openPartitions;
     }
 }
 

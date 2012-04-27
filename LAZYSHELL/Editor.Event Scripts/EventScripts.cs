@@ -2366,6 +2366,83 @@ namespace LAZYSHELL
             settings.LastEventScript = index;
             settings.LastEventScriptCat = type;
         }
+        private void gotoAddr_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData != Keys.Enter)
+                return;
+            int input = 0;
+            try
+            {
+                input = Convert.ToInt32(gotoAddr.Text, 16);
+            }
+            catch
+            {
+                MessageBox.Show("Invalid input: address must be in hexadecimal format.");
+                return;
+            }
+            if (isActionScript)
+            {
+                if (input < 0x210000)
+                {
+                    MessageBox.Show("Action script offset too low. Must be between $210000 and $21BFFF.");
+                    return;
+                }
+                if (input >= 0x21C000)
+                {
+                    MessageBox.Show("Action script offset too high. Must be between $210000 and $21BFFF.");
+                    return;
+                }
+                foreach (ActionQueue script in actionScripts)
+                {
+                    foreach (ActionQueueCommand action in script.Commands)
+                    {
+                        if (action.Offset + action.EventData.Length > input || action.Offset >= input)
+                        {
+                            index = script.Index;
+                            treeViewWrapper.SelectNode(action);
+                            return;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (input < 0x1E0000)
+                {
+                    MessageBox.Show("Event script offset too low. Must be between $1E0000 and $20FFFF.");
+                    return;
+                }
+                if (input >= 0x210000)
+                {
+                    MessageBox.Show("Event script offset too high. Must be between $1E0000 and $20FFFF.");
+                    return;
+                }
+                foreach (EventScript script in eventScripts)
+                {
+                    foreach (EventScriptCommand command in script.Commands)
+                    {
+                        if (command.EmbeddedActionQueue != null)
+                        {
+                            foreach (ActionQueueCommand action in command.EmbeddedActionQueue.Commands)
+                            {
+                                if (action.Offset + action.EventData.Length > input || action.Offset >= input)
+                                {
+                                    index = script.Index;
+                                    treeViewWrapper.SelectNode(action);
+                                    return;
+                                }
+                            }
+                        }
+                        if (command.Offset + command.EventLength > input || command.Offset >= input)
+                        {
+                            index = script.Index;
+                            treeViewWrapper.SelectNode(command);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
         private void EventScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(eventScripts, actionScripts) == checksum)

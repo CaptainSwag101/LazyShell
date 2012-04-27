@@ -19,7 +19,7 @@ namespace LAZYSHELL
             pictureBox1.Size = icon.Size;
             pictureBox1.Image = icon;
             string forumthread = "http://acmlm.no-ip.org/board/thread.php?id=7005";
-            label1.Text = "Lazy Shell has encountered an error. Please copy the contents of the box below and post them as a new reply to this thread:\n\n";
+            label1.Text = "Lazy Shell has encountered an error. Please copy ALL of the contents of the box below and post them as a new reply to this thread:\n\n";
             label1.Links.Add(label1.Text.Length, forumthread.Length, forumthread);
             label1.Text += forumthread;
             //

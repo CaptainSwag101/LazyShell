@@ -77,6 +77,7 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.reset = new System.Windows.Forms.ToolStripButton();
             this.indexLabel = new System.Windows.Forms.Label();
+            this.insertIntoBattleDialogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel30.SuspendLayout();
             this.panel25.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -161,9 +162,9 @@
             this.pictureBoxFontCharacter.Size = new System.Drawing.Size(16, 12);
             this.pictureBoxFontCharacter.TabIndex = 447;
             this.pictureBoxFontCharacter.TabStop = false;
-            this.pictureBoxFontCharacter.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontCharacter_MouseMove);
-            this.pictureBoxFontCharacter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontCharacter_MouseDown);
             this.pictureBoxFontCharacter.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxFontCharacter_Paint);
+            this.pictureBoxFontCharacter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontCharacter_MouseDown);
+            this.pictureBoxFontCharacter.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontCharacter_MouseMove);
             this.pictureBoxFontCharacter.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontCharacter_MouseUp);
             // 
             // panel3
@@ -183,8 +184,8 @@
             this.colors.Size = new System.Drawing.Size(256, 16);
             this.colors.TabIndex = 448;
             this.colors.TabStop = false;
-            this.colors.MouseDown += new System.Windows.Forms.MouseEventHandler(this.colors_MouseDown);
             this.colors.Paint += new System.Windows.Forms.PaintEventHandler(this.colors_Paint);
+            this.colors.MouseDown += new System.Windows.Forms.MouseEventHandler(this.colors_MouseDown);
             // 
             // toolStrip2
             // 
@@ -447,11 +448,11 @@
             this.pictureBoxFontTable.Size = new System.Drawing.Size(128, 192);
             this.pictureBoxFontTable.TabIndex = 447;
             this.pictureBoxFontTable.TabStop = false;
+            this.pictureBoxFontTable.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxFontTable_Paint);
+            this.pictureBoxFontTable.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontTable_MouseClick);
+            this.pictureBoxFontTable.MouseEnter += new System.EventHandler(this.pictureBoxFontTable_MouseEnter);
             this.pictureBoxFontTable.MouseLeave += new System.EventHandler(this.pictureBoxFontTable_MouseLeave);
             this.pictureBoxFontTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontTable_MouseMove);
-            this.pictureBoxFontTable.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontTable_MouseClick);
-            this.pictureBoxFontTable.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxFontTable_Paint);
-            this.pictureBoxFontTable.MouseEnter += new System.EventHandler(this.pictureBoxFontTable_MouseEnter);
             // 
             // contextMenuStrip1
             // 
@@ -460,44 +461,45 @@
             this.exportToolStripMenuItem,
             this.saveImageAsToolStripMenuItem,
             this.toolStripSeparator5,
-            this.insertIntoTextToolStripMenuItem});
+            this.insertIntoTextToolStripMenuItem,
+            this.insertIntoBattleDialogueToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(174, 142);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.importToolStripMenuItem.Text = "Import...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // saveImageAsToolStripMenuItem
             // 
             this.saveImageAsToolStripMenuItem.Name = "saveImageAsToolStripMenuItem";
-            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.saveImageAsToolStripMenuItem.Text = "Save Image As...";
             this.saveImageAsToolStripMenuItem.Click += new System.EventHandler(this.saveImageAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(170, 6);
             // 
             // insertIntoTextToolStripMenuItem
             // 
             this.insertIntoTextToolStripMenuItem.Name = "insertIntoTextToolStripMenuItem";
-            this.insertIntoTextToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.insertIntoTextToolStripMenuItem.Text = "Insert Into Text";
+            this.insertIntoTextToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.insertIntoTextToolStripMenuItem.Text = "Insert into dialogue";
             this.insertIntoTextToolStripMenuItem.Click += new System.EventHandler(this.insertIntoTextToolStripMenuItem_Click);
             // 
             // toolStrip7
@@ -601,6 +603,13 @@
             this.indexLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.indexLabel.Visible = false;
             // 
+            // insertIntoBattleDialogueToolStripMenuItem
+            // 
+            this.insertIntoBattleDialogueToolStripMenuItem.Name = "insertIntoBattleDialogueToolStripMenuItem";
+            this.insertIntoBattleDialogueToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.insertIntoBattleDialogueToolStripMenuItem.Text = "Insert into battle dialogue";
+            this.insertIntoBattleDialogueToolStripMenuItem.Click += new System.EventHandler(this.insertIntoBattleDialogueToolStripMenuItem_Click);
+            // 
             // Fonts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -683,5 +692,6 @@
         private System.Windows.Forms.ToolStripButton fontEditFill;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripButton reset;
+        private System.Windows.Forms.ToolStripMenuItem insertIntoBattleDialogueToolStripMenuItem;
     }
 }

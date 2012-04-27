@@ -567,11 +567,11 @@
             this.characterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.characterName.DropDownWidth = 120;
             this.characterName.ItemHeight = 15;
-            this.characterName.Location = new System.Drawing.Point(7, 1);
+            this.characterName.Location = new System.Drawing.Point(9, 1);
             this.characterName.Name = "characterName";
             this.characterName.SelectedIndex = -1;
             this.characterName.SelectedItem = null;
-            this.characterName.Size = new System.Drawing.Size(190, 22);
+            this.characterName.Size = new System.Drawing.Size(185, 22);
             this.characterName.SelectedIndexChanged += new System.EventHandler(this.characterName_SelectedIndexChanged);
             this.characterName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.characterName_DrawItem);
             // 

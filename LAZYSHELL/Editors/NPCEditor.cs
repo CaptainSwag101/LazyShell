@@ -208,7 +208,8 @@ namespace LAZYSHELL
             npcProperty.B5b6 = unknownBits.GetItemChecked(13);
             npcProperty.B5b7 = unknownBits.GetItemChecked(14);
             npcProperty.B6b2 = unknownBits.GetItemChecked(15);
-            level.npcID_ValueChanged(null, null);
+            level.overlay.NPCImages = null;
+            level.picture.Invalidate();
         }
         private void buttonCancel_Click(object sender, EventArgs e)
         {

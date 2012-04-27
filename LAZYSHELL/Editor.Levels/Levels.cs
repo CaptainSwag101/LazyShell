@@ -41,10 +41,10 @@ namespace LAZYSHELL
         private Level level { get { return levels[index]; } set { levels[index] = value; } }
         public Level Level { get { return level; } set { level = value; } }
         public System.Windows.Forms.ToolStripComboBox LevelName { get { return levelName; } set { levelName = value; } }
-        private PictureBox picture { get { return levelsTilemap.Picture; } set { levelsTilemap.Picture = value; } }
+        public PictureBox picture { get { return levelsTilemap.Picture; } set { levelsTilemap.Picture = value; } }
         private int zoom { get { return levelsTilemap.Zoom; } }
         private Level levelCheck; // Used to verify a level change
-        private Overlay overlay = new Overlay(); // Object used to generate all the overlays for levels
+        public Overlay overlay = new Overlay(); // Object used to generate all the overlays for levels
         private bool updatingLevel = false; // Indicates that we are currently updating the level so we dont update during an update
         public bool UpdatingLevel { get { return updatingLevel; } set { updatingLevel = value; } }
         private bool fullUpdate = false; // Indicates that we need to do a complete update instead of a fast update
@@ -600,8 +600,8 @@ namespace LAZYSHELL
                 "when they playback an animation sequence there might be \n" +
                 "problems.");
 
-            this.openPartitions.ToolTipText =
-                "Find a partition with specific properties.";
+            this.toolTip1.SetToolTip(this.openPartitions,
+                "Find a partition with specific properties.");
 
             this.npcInsertObject.ToolTipText =
                 "Insert a new NPC after the currently selected NPC.";
@@ -627,10 +627,10 @@ namespace LAZYSHELL
             this.toolTip1.SetToolTip(this.npcID,
                 "The NPC assigned to the currently selected NPC.");
 
-            this.findNPCNum.ToolTipText =
+            this.toolTip1.SetToolTip(this.findNPCNum,
                 "Since NPC's don't refer to the actual Sprite # as seen in the \n" +
                 "Sprites editor, this search feature is required to find NPC's \n" +
-                "that use a specific sprite #.";
+                "that use a specific sprite #.");
 
             this.toolTip1.SetToolTip(this.npcEventORPack,
                 "If the NPC TYPE is set to \"Object\" or \"Treasure\", this is the \n" +

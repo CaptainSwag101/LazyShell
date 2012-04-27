@@ -1007,6 +1007,10 @@ namespace LAZYSHELL
                 {
                     index_tile = (y / 16) * 8 + (x / 16);
                     index_subtile = (y % 16 / 8) * 2 + (x % 16 / 8);
+                    if (unique_tile.Mirror)
+                        index_subtile ^= 1;
+                    if (unique_tile.Invert)
+                        index_subtile ^= 2;
                     subtile.Value = unique_tile.SubTiles[index_subtile];
                     updating = false;
                     // if making a new selection
@@ -1102,7 +1106,6 @@ namespace LAZYSHELL
             Do.ResetToolStripButtons(toolStrip4, (ToolStripButton)sender);
             moldZoomIn.Checked = false;
             moldZoomOut.Checked = false;
-            selectedTiles = null;
             overlay.Select = null;
             pictureBoxMold.Cursor = draw.Checked ? new Cursor(GetType(), "CursorDraw.cur") : Cursors.Arrow;
             pictureBoxMold.Invalidate();

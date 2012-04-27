@@ -922,6 +922,14 @@ namespace LAZYSHELL
             else
                 dialoguesEditor.InsertIntoDialogueText(keystrokes[overFontChar]);
         }
+        private void insertIntoBattleDialogueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (keystrokes == null) return;
+            if (keystrokes[overFontChar] == "")
+                battleDialogues.InsertIntoBattleDialogueText("[" + overFontChar + "]");
+            else
+                battleDialogues.InsertIntoBattleDialogueText(keystrokes[overFontChar]);
+        }
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             insertIntoTextToolStripMenuItem.Enabled = FontType != 3;

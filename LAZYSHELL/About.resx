@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Lazy Shell, Version 3.9.2
+    <value>Lazy Shell, Version 3.9.3
 Copyright © 2007-2012  giangurgolo &amp; Omega
 
 Created by Omega &amp; giangurgolo
@@ -126,9 +126,8 @@ Created by Omega &amp; giangurgolo
 Home Page:   http://home.comcast.net/~giangurgolo/smrpg/
 
 Main Contributors and Supporters:
-Yakibomb - principle bug-finder and tester
-ElementalPowerStar - principle bug-finder, positive feedback
-Aric Carter - notable donator
+ElementalPowerStar -  notable donator, principle bug-finder, positive feedback
+Yakibomb - principle bug-finder and tester, feedback
 
 Special Thanks:
 Bregalad - source code for BRR encoding and decoding
@@ -136,7 +135,7 @@ FuSoYa - for permission to use Lunar Compress.dll
 KP9000 - beta testing, discovered many bugs with pre-release version
 MathOnNapkins - helped with some coding
 Alex Farber - MRU list manager
-spel werdz rite - resolution for running program under a 64-bit OS
+spel werdz rite - original resolution for running program under a 64-bit OS
 romhacking community - various feedback</value>
   </data>
 </root>

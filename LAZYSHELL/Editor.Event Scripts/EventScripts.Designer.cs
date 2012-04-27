@@ -72,6 +72,9 @@
             this.navigateBck = new System.Windows.Forms.ToolStripButton();
             this.navigateFwd = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.gotoAddr = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.eventLabel = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -704,6 +707,9 @@
             this.navigateBck,
             this.navigateFwd,
             this.toolStripSeparator10,
+            this.toolStripLabel1,
+            this.gotoAddr,
+            this.toolStripSeparator7,
             this.toolStripButton1,
             this.eventLabel,
             this.toolStripSeparator8,
@@ -786,6 +792,24 @@
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
             this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(70, 22);
+            this.toolStripLabel1.Text = "GOTO ADDR:";
+            // 
+            // gotoAddr
+            // 
+            this.gotoAddr.MaxLength = 6;
+            this.gotoAddr.Name = "gotoAddr";
+            this.gotoAddr.Size = new System.Drawing.Size(60, 25);
+            this.gotoAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gotoAddr_KeyDown);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton1
             // 
@@ -1363,5 +1387,8 @@
         private System.Windows.Forms.ToolStripButton navigateBck;
         private System.Windows.Forms.ToolStripButton navigateFwd;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripTextBox gotoAddr;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     }
 }

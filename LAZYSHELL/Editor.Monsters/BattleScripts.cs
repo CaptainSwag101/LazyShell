@@ -527,8 +527,11 @@ namespace LAZYSHELL
         {
             updatingProperties = true;
 
+            nameA.BackColor = SystemColors.ControlDark;
             nameA.Items.Clear(); nameA.ResetText();
+            nameB.BackColor = SystemColors.ControlDark;
             nameB.Items.Clear(); nameB.ResetText();
+            nameC.BackColor = SystemColors.ControlDark;
             nameC.Items.Clear(); nameC.ResetText();
             numA.Minimum = 0; numA.Maximum = 255; numA.Value = 0;
             numB.Minimum = 0; numB.Maximum = 255; numB.Value = 0;
@@ -1518,7 +1521,7 @@ namespace LAZYSHELL
             panelDoOneOfThree.Visible = true;
             panelIfTargetValue.Visible = false;
             panelMemoryCompare.Visible = false;
-            labelDoA.Text = "Attack..."; labelDoB.Text = "Number...";
+            labelDoA.Text = "Attack..."; labelDoB.Text = "Index...";
 
             this.nameA.Items.AddRange(this.attackNames.GetNames());
             this.nameA.DrawMode = DrawMode.OwnerDrawFixed;
@@ -1543,7 +1546,7 @@ namespace LAZYSHELL
             numB.Enabled = true; nameB.Enabled = true; doNothingB.Enabled = true;
             numC.Enabled = true; nameC.Enabled = true; doNothingC.Enabled = true;
             panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
-            labelDoA.Text = "Attack..."; labelDoB.Text = "Number...";
+            labelDoA.Text = "Attack..."; labelDoB.Text = "Index...";
 
             this.nameA.Items.AddRange(this.attackNames.GetNames());
             this.nameA.DrawMode = DrawMode.OwnerDrawFixed;
@@ -1586,7 +1589,7 @@ namespace LAZYSHELL
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
             panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
-            labelDoA.Text = "Spell..."; labelDoB.Text = "Number...";
+            labelDoA.Text = "Spell..."; labelDoB.Text = "Index...";
 
             this.command = cmd;
 
@@ -1605,7 +1608,7 @@ namespace LAZYSHELL
             numB.Enabled = true; nameB.Enabled = true; doNothingB.Enabled = true;
             numC.Enabled = true; nameC.Enabled = true; doNothingC.Enabled = true;
             panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
-            labelDoA.Text = "Spell..."; labelDoB.Text = "Number...";
+            labelDoA.Text = "Spell..."; labelDoB.Text = "Index...";
 
             this.command = cmd;
 
@@ -1648,7 +1651,7 @@ namespace LAZYSHELL
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
             panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
-            labelDoA.Text = ""; labelDoB.Text = "Number...";
+            labelDoA.Text = ""; labelDoB.Text = "Index...";
 
             this.command = cmd;
 
@@ -1661,10 +1664,11 @@ namespace LAZYSHELL
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
             panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
-            labelDoA.Text = "Battle Dialogue..."; labelDoB.Text = "Number...";
+            labelDoA.Text = "Battle Dialogue..."; labelDoB.Text = "Index...";
 
             this.command = cmd;
 
+            this.nameA.BackColor = SystemColors.Window;
             this.nameA.DropDownWidth = 256;
             this.nameA.Items.AddRange(cmd.GetBattleDialogueNames());
             this.nameA.DrawMode = DrawMode.Normal;
@@ -1685,10 +1689,11 @@ namespace LAZYSHELL
             numB.Enabled = false; nameB.Enabled = false; doNothingB.Enabled = false;
             numC.Enabled = false; nameC.Enabled = false; doNothingC.Enabled = false;
             panelDoOneOfThree.Visible = true; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = false;
-            labelDoA.Text = "Battle Event..."; labelDoB.Text = "Number...";
+            labelDoA.Text = "Battle Event..."; labelDoB.Text = "Index...";
 
             this.command = cmd;
 
+            this.nameA.BackColor = SystemColors.Window;
             this.nameA.Items.AddRange(Lists.Numerize(Lists.BattleEventNames));
             this.nameA.DrawMode = DrawMode.Normal;
             this.numA.Maximum = 0x66;
@@ -1720,7 +1725,8 @@ namespace LAZYSHELL
 
             this.command = cmd;
 
-            nameA.Items.AddRange(new object[] {
+            this.nameA.BackColor = SystemColors.Window;
+            this.nameA.Items.AddRange(new object[] {
                         "Remove Items",
                         "Return Items"});
             this.nameA.DrawMode = DrawMode.Normal;
@@ -1739,12 +1745,14 @@ namespace LAZYSHELL
 
             this.command = cmd;
 
-            nameA.Items.AddRange(new object[] {
+            this.nameA.BackColor = SystemColors.Window;
+            this.nameA.Items.AddRange(new object[] {
                         "Attack",
                         "Special",
                         "Item"});
             this.nameA.DrawMode = DrawMode.Normal;
-            nameB.Items.AddRange(new object[] {
+            this.nameB.BackColor = SystemColors.Window;
+            this.nameB.Items.AddRange(new object[] {
                         "Attack",
                         "Special",
                         "Item"});

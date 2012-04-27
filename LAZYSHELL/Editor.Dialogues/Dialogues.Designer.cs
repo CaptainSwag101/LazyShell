@@ -125,7 +125,7 @@
             this.dialogueNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dialogueNum.ForeColor = System.Drawing.SystemColors.Control;
             this.dialogueNum.Hexadecimal = false;
-            this.dialogueNum.Location = new System.Drawing.Point(7, 2);
+            this.dialogueNum.Location = new System.Drawing.Point(9, 2);
             this.dialogueNum.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -181,10 +181,10 @@
             this.dialogueTextBox.Size = new System.Drawing.Size(220, 331);
             this.dialogueTextBox.TabIndex = 178;
             this.dialogueTextBox.Text = "";
-            this.dialogueTextBox.Enter += new System.EventHandler(this.dialogueTextBox_Enter);
-            this.dialogueTextBox.Leave += new System.EventHandler(this.dialogueTextBox_Leave);
-            this.dialogueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dialogueTextBox_KeyUp);
             this.dialogueTextBox.TextChanged += new System.EventHandler(this.dialogueTextBox_TextChanged);
+            this.dialogueTextBox.Enter += new System.EventHandler(this.dialogueTextBox_Enter);
+            this.dialogueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dialogueTextBox_KeyUp);
+            this.dialogueTextBox.Leave += new System.EventHandler(this.dialogueTextBox_Leave);
             // 
             // toolStrip2
             // 
@@ -450,7 +450,7 @@
             // textBoxSearch
             // 
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(150, 25);
+            this.textBoxSearch.Size = new System.Drawing.Size(145, 25);
             // 
             // search
             // 
@@ -467,6 +467,7 @@
             this.toolStrip4.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip4.CanOverflow = false;
             this.toolStrip4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel2,
             this.pauseFrameNum,
@@ -490,7 +491,7 @@
             // 
             this.pauseFrameNum.AutoSize = false;
             this.pauseFrameNum.Hexadecimal = false;
-            this.pauseFrameNum.Location = new System.Drawing.Point(94, 1);
+            this.pauseFrameNum.Location = new System.Drawing.Point(96, 3);
             this.pauseFrameNum.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.pauseFrameNum.Maximum = new decimal(new int[] {
             255,
@@ -503,7 +504,7 @@
             0,
             0});
             this.pauseFrameNum.Name = "pauseFrameNum";
-            this.pauseFrameNum.Size = new System.Drawing.Size(125, 22);
+            this.pauseFrameNum.Size = new System.Drawing.Size(120, 18);
             this.pauseFrameNum.Text = "0";
             this.pauseFrameNum.Value = new decimal(new int[] {
             0,
@@ -527,6 +528,7 @@
             this.toolStrip6.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip6.CanOverflow = false;
             this.toolStrip6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip6.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.variables,
@@ -543,21 +545,22 @@
             this.toolStripLabel1.AutoSize = false;
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(86, 22);
-            this.toolStripLabel1.Text = "Memory Variable";
+            this.toolStripLabel1.Text = "Memory Value";
             this.toolStripLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // variables
             // 
             this.variables.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.variables.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.variables.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.variables.Items.AddRange(new object[] {
             "Item name @ $70A7",
             "Value @ $7000",
             "Value @ $7024",
-            "Time @ 7000",
+            "Timer @ $7000",
             "Game slot\'s name"});
             this.variables.Name = "variables";
-            this.variables.Size = new System.Drawing.Size(125, 25);
+            this.variables.Size = new System.Drawing.Size(120, 25);
             // 
             // variablesInsert
             // 
@@ -935,8 +938,8 @@
             this.Name = "Dialogues";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "DIALOGUES - Lazy Shell";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Dialogues_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Dialogues_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Dialogues_FormClosed);
             this.panel60.ResumeLayout(false);
             this.panel60.PerformLayout();
             this.toolStrip2.ResumeLayout(false);

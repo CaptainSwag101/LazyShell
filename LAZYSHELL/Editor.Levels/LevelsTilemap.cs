@@ -864,6 +864,8 @@ namespace LAZYSHELL
         }
         private void Delete()
         {
+            if (overlay.Select == null) return;
+            if (overlay.Select.Size == new Size(0, 0)) return;
             if (!state.SolidityLayer && !state.SolidMods)
             {
                 int layer = levelsTileset.Layer;
@@ -897,8 +899,6 @@ namespace LAZYSHELL
             }
             else
             {
-                if (overlay.Select.Size == new Size(0, 0)) return;
-                if (overlay.Select == null) return;
                 int index = 0;
                 int pushes = 0;
                 Map map = state.SolidMods ? (Map)solidMods.Mod_ : solidityMap;

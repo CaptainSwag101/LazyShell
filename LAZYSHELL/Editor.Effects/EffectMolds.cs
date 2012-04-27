@@ -400,9 +400,9 @@ namespace LAZYSHELL
             }
             public void Execute()
             {
-                for (int y = location.Y, y_ = 0; y < location.Y + size.Height; y++, y_++)
+                for (int y = location.Y, y_ = 0; y < location.Y + size.Height && y < 16; y++, y_++)
                 {
-                    for (int x = location.X, x_ = 0; x < location.X + size.Width; x++, x_++)
+                    for (int x = location.X, x_ = 0; x < location.X + size.Width && x < 16; x++, x_++)
                     {
                         if (x < 0 || y < 0 || x_ < 0 || y_ < 0) continue;
                         byte temp = src[y * srcSize.Width + x];

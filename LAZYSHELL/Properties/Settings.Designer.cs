@@ -771,5 +771,17 @@ namespace LAZYSHELL.Properties {
                 this["RememberLastIndex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FirstLoad {
+            get {
+                return ((bool)(this["FirstLoad"]));
+            }
+            set {
+                this["FirstLoad"] = value;
+            }
+        }
     }
 }

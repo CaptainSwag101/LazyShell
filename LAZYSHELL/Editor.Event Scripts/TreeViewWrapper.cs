@@ -195,12 +195,12 @@ namespace LAZYSHELL.ScriptsEditor
                     if (esc.IsActionQueueTrigger)
                     {
                         selectedNode = new TreeNode("[" + (esc.Offset).ToString("X6") + "]   " + esc.ToString());
-                        selectedNode.BackColor = Color.FromArgb(255, 128, 160, 255);
+                        selectedNode.BackColor = Color.FromArgb(255, 192, 224, 255);
                     }
                     else if (esc.Opcode >= 0xFE)
                     {
                         selectedNode = new TreeNode("[" + (esc.Offset).ToString("X6") + "]   " + esc.ToString());
-                        selectedNode.BackColor = Color.FromArgb(255, 255, 255, 0);
+                        selectedNode.BackColor = Color.FromArgb(255, 255, 255, 160);
                     }
                     else
                         selectedNode = new TreeNode("[" + (esc.Offset).ToString("X6") + "]   " + esc.ToString());
@@ -321,7 +321,7 @@ namespace LAZYSHELL.ScriptsEditor
                     if (aqc.Opcode >= 0xFE)
                     {
                         selectedNode = new TreeNode("[" + (aqc.Offset).ToString("X6") + "]   " + aqc.ToString());
-                        selectedNode.BackColor = Color.FromArgb(255, 255, 255, 0);
+                        selectedNode.BackColor = Color.FromArgb(255, 255, 255, 160);
                     }
                     else
                         selectedNode = new TreeNode("[" + (aqc.Offset).ToString("X6") + "]   " + aqc.ToString());
@@ -351,7 +351,7 @@ namespace LAZYSHELL.ScriptsEditor
                         if (aqc.Opcode >= 0xFE)
                         {
                             selectedNode = new TreeNode("[" + (aqc.Offset).ToString("X6") + "]   " + aqc.ToString());
-                            selectedNode.BackColor = Color.FromArgb(255, 255, 255, 0);
+                            selectedNode.BackColor = Color.FromArgb(255, 255, 255, 160);
                         }
                         else
                             selectedNode = new TreeNode("[" + (aqc.Offset).ToString("X6") + "]   " + aqc.ToString());
@@ -880,7 +880,7 @@ namespace LAZYSHELL.ScriptsEditor
                 }
                 catch
                 {
-                    if (treeView.SelectedNode != null && treeView.SelectedNode.BackColor == Color.FromArgb(255, 128, 160, 255))
+                    if (treeView.SelectedNode != null && treeView.SelectedNode.BackColor == Color.FromArgb(255, 192, 224, 255))
                     {
                         foreach (ActionQueueCommand aqcCopy in commandCopies)
                         {

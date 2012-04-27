@@ -55,20 +55,20 @@ namespace LAZYSHELL.ScriptsEditor
                 case 0x07:
                 case 0x11:
                 case 0x5E:
-                    node.BackColor = Color.FromArgb(255, 255, 255, 0); break;
+                    node.BackColor = Color.FromArgb(255, 255, 255, 160); break;
 
                 case 0x09:
                 case 0x10:
                 case 0x5D:
                 case 0x64:
                 case 0x68:
-                    node.BackColor = Color.FromArgb(255, 128, 160, 255);
+                    node.BackColor = Color.FromArgb(255, 192, 224, 255);
                     AddNode(asc, node);
                     break;
                 default:
                     if (asc.Opcode >= 0x24 && asc.Opcode <= 0x2B)
                     {
-                        node.BackColor = Color.FromArgb(255, 128, 160, 255);
+                        node.BackColor = Color.FromArgb(255, 192, 224, 255);
                         AddNode(asc, node);
                     }
                     break;
@@ -90,20 +90,20 @@ namespace LAZYSHELL.ScriptsEditor
                     case 0x07:
                     case 0x11:
                     case 0x5E:
-                        child.BackColor = Color.FromArgb(255, 255, 255, 0); break;
+                        child.BackColor = Color.FromArgb(255, 255, 255, 160); break;
 
                     case 0x09:
                     case 0x10:
                     case 0x5D:
                     case 0x64:
                     case 0x68:
-                        child.BackColor = Color.FromArgb(255, 128, 160, 255);
+                        child.BackColor = Color.FromArgb(255, 192, 224, 255);
                         AddNode(sub, child);
                         break;
                     default:
                         if (sub.Opcode >= 0x24 && sub.Opcode <= 0x2B)
                         {
-                            child.BackColor = Color.FromArgb(255, 128, 160, 255);
+                            child.BackColor = Color.FromArgb(255, 192, 224, 255);
                             AddNode(sub, child);
                         }
                         break;
