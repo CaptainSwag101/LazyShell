@@ -109,7 +109,7 @@ namespace LAZYSHELL
                     if (mold[y * animation.Width + x] == 0xFF)
                         continue;
                     int[] tile = new int[16 * 16];
-                    ((Tile16x16)tileset.Tileset[mold[y * animation.Width + x] & 0x3F]).Pixels.CopyTo(tile, 0);
+                    ((Tile)tileset.Tileset[mold[y * animation.Width + x] & 0x3F]).Pixels.CopyTo(tile, 0);
                     if ((mold[y * animation.Width + x] & 0x40) == 0x40)
                         Do.FlipHorizontal(tile, 16, 16);
                     if ((mold[y * animation.Width + x] & 0x80) == 0x80)

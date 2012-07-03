@@ -488,6 +488,18 @@ namespace LAZYSHELL
                 return;
             AppControl.MainTitle();
         }
+        private void openMenus_Click(object sender, EventArgs e)
+        {
+            if (!Comp.LunarCompressExists())
+                return;
+            AppControl.Menus();
+        }
+        private void openMiniGames_Click(object sender, EventArgs e)
+        {
+            if (!Comp.LunarCompressExists())
+                return;
+            AppControl.MiniGames();
+        }
         private void openMonsters_Click(object sender, EventArgs e)
         {
             if (!Comp.LunarCompressExists())

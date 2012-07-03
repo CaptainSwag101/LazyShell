@@ -28,235 +28,97 @@ namespace LAZYSHELL
         /// </summary>
         private void InitializeComponent()
         {
-            this.byte1 = new System.Windows.Forms.CheckedListBox();
-            this.byte2 = new System.Windows.Forms.CheckedListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.byte3 = new System.Windows.Forms.CheckedListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.byte4 = new System.Windows.Forms.CheckedListBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.byte3 = new System.Windows.Forms.CheckBox();
             this.byte2a = new System.Windows.Forms.ComboBox();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.byte3a = new System.Windows.Forms.ComboBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.byte4a = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.byte2b = new System.Windows.Forms.ComboBox();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.byte3b = new System.Windows.Forms.ComboBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.byte4b = new System.Windows.Forms.ComboBox();
-            this.vramIndex = new System.Windows.Forms.NumericUpDown();
-            this.paletteIndex = new System.Windows.Forms.NumericUpDown();
-            this.checkVramIndex = new System.Windows.Forms.CheckedListBox();
-            this.checkPaletteIndex = new System.Windows.Forms.CheckedListBox();
-            this.checkByte2a = new System.Windows.Forms.CheckedListBox();
-            this.checkByte2b = new System.Windows.Forms.CheckedListBox();
-            this.checkByte3a = new System.Windows.Forms.CheckedListBox();
-            this.checkByte3b = new System.Windows.Forms.CheckedListBox();
-            this.checkByte4a = new System.Windows.Forms.CheckedListBox();
-            this.checkByte4b = new System.Windows.Forms.CheckedListBox();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel88 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.extraSpriteBuffer = new System.Windows.Forms.NumericUpDown();
+            this.allyCount = new System.Windows.Forms.NumericUpDown();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.byte4a = new System.Windows.Forms.ComboBox();
+            this.byte4b = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.byte4 = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.byte2 = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.noWaterPalettes = new System.Windows.Forms.CheckBox();
+            this.extraSprites = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.partitionNum = new System.Windows.Forms.NumericUpDown();
+            this.buttonOK = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)(this.extraSpriteBuffer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.allyCount)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.partitionNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.vramIndex)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
-            this.panel88.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.panel11.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // byte1
-            // 
-            this.byte1.BackColor = System.Drawing.SystemColors.Window;
-            this.byte1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.byte1.CheckOnClick = true;
-            this.byte1.ColumnWidth = 50;
-            this.byte1.Items.AddRange(new object[] {
-            "Bit 4",
-            "Sprite palettes start at #0"});
-            this.byte1.Location = new System.Drawing.Point(0, 55);
-            this.byte1.Name = "byte1";
-            this.byte1.Size = new System.Drawing.Size(254, 32);
-            this.byte1.TabIndex = 386;
-            // 
-            // byte2
-            // 
-            this.byte2.BackColor = System.Drawing.SystemColors.Window;
-            this.byte2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.byte2.CheckOnClick = true;
-            this.byte2.ColumnWidth = 50;
-            this.byte2.Items.AddRange(new object[] {
-            "Only allow sprite VRAM"});
-            this.byte2.Location = new System.Drawing.Point(0, 55);
-            this.byte2.Name = "byte2";
-            this.byte2.Size = new System.Drawing.Size(254, 16);
-            this.byte2.TabIndex = 386;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label1.Size = new System.Drawing.Size(254, 17);
-            this.label1.TabIndex = 387;
-            this.label1.Text = "VRAM BLOCK A";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // byte3
             // 
-            this.byte3.BackColor = System.Drawing.SystemColors.Window;
-            this.byte3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.byte3.CheckOnClick = true;
-            this.byte3.ColumnWidth = 50;
-            this.byte3.Items.AddRange(new object[] {
-            "Only allow sprite VRAM"});
-            this.byte3.Location = new System.Drawing.Point(0, 55);
+            this.byte3.AutoSize = true;
+            this.byte3.Location = new System.Drawing.Point(6, 66);
             this.byte3.Name = "byte3";
-            this.byte3.Size = new System.Drawing.Size(254, 16);
+            this.byte3.Size = new System.Drawing.Size(166, 17);
             this.byte3.TabIndex = 386;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label2.Size = new System.Drawing.Size(254, 17);
-            this.label2.TabIndex = 387;
-            this.label2.Text = "VRAM BLOCK B";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // byte4
-            // 
-            this.byte4.BackColor = System.Drawing.SystemColors.Window;
-            this.byte4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.byte4.CheckOnClick = true;
-            this.byte4.ColumnWidth = 50;
-            this.byte4.Items.AddRange(new object[] {
-            "Only allow sprite VRAM"});
-            this.byte4.Location = new System.Drawing.Point(0, 55);
-            this.byte4.Name = "byte4";
-            this.byte4.Size = new System.Drawing.Size(254, 16);
-            this.byte4.TabIndex = 386;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label3.Size = new System.Drawing.Size(254, 17);
-            this.label3.TabIndex = 387;
-            this.label3.Text = "VRAM BLOCK C";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.Controls.Add(this.byte2a);
-            this.panel1.Location = new System.Drawing.Point(133, 19);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(121, 17);
-            this.panel1.TabIndex = 389;
+            this.byte3.Text = "Sprite indexing in main buffer";
+            this.byte3.UseVisualStyleBackColor = false;
+            this.byte3.CheckedChanged += new System.EventHandler(this.byte3_CheckedChanged);
             // 
             // byte2a
             // 
             this.byte2a.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.byte2a.DropDownWidth = 160;
             this.byte2a.IntegralHeight = false;
             this.byte2a.Items.AddRange(new object[] {
-            "32px wide",
-            "24px wide",
+            "3 sprites per row",
+            "4 sprites per row",
             "treasure chest",
             "empty treasure chest",
-            "NPC packet (coin, bag, etc.)",
-            "large sprite (tilemap)"});
-            this.byte2a.Location = new System.Drawing.Point(-2, -2);
+            "coins",
+            "empty buffer",
+            "empty buffer",
+            "empty buffer"});
+            this.byte2a.Location = new System.Drawing.Point(128, 18);
             this.byte2a.Name = "byte2a";
-            this.byte2a.Size = new System.Drawing.Size(125, 21);
+            this.byte2a.Size = new System.Drawing.Size(124, 21);
             this.byte2a.TabIndex = 370;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Window;
-            this.panel2.Controls.Add(this.byte3a);
-            this.panel2.Location = new System.Drawing.Point(133, 19);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(121, 17);
-            this.panel2.TabIndex = 389;
+            this.byte2a.SelectedIndexChanged += new System.EventHandler(this.byte2a_SelectedIndexChanged);
             // 
             // byte3a
             // 
             this.byte3a.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.byte3a.DropDownWidth = 160;
             this.byte3a.IntegralHeight = false;
             this.byte3a.Items.AddRange(new object[] {
-            "32px wide",
-            "24px wide",
+            "3 sprites per row",
+            "4 sprites per row",
             "treasure chest",
             "empty treasure chest",
-            "NPC packet (coin, bag, etc.)",
-            "large sprite (tilemap)"});
-            this.byte3a.Location = new System.Drawing.Point(-2, -2);
+            "coins",
+            "empty buffer",
+            "empty buffer",
+            "empty buffer"});
+            this.byte3a.Location = new System.Drawing.Point(128, 18);
             this.byte3a.Name = "byte3a";
-            this.byte3a.Size = new System.Drawing.Size(125, 21);
+            this.byte3a.Size = new System.Drawing.Size(124, 21);
             this.byte3a.TabIndex = 370;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Window;
-            this.panel3.Controls.Add(this.byte4a);
-            this.panel3.Location = new System.Drawing.Point(133, 19);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(121, 17);
-            this.panel3.TabIndex = 389;
-            // 
-            // byte4a
-            // 
-            this.byte4a.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.byte4a.DropDownWidth = 160;
-            this.byte4a.IntegralHeight = false;
-            this.byte4a.Items.AddRange(new object[] {
-            "32px wide",
-            "24px wide",
-            "treasure chest",
-            "empty treasure chest",
-            "NPC packet (coin, bag, etc.)",
-            "large sprite (tilemap)"});
-            this.byte4a.Location = new System.Drawing.Point(-2, -2);
-            this.byte4a.Name = "byte4a";
-            this.byte4a.Size = new System.Drawing.Size(125, 21);
-            this.byte4a.TabIndex = 370;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.Window;
-            this.panel4.Controls.Add(this.byte2b);
-            this.panel4.Location = new System.Drawing.Point(133, 37);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(121, 17);
-            this.panel4.TabIndex = 389;
+            this.byte3a.SelectedIndexChanged += new System.EventHandler(this.byte3a_SelectedIndexChanged);
             // 
             // byte2b
             // 
@@ -270,19 +132,11 @@ namespace LAZYSHELL
             "1280 bytes",
             "1536 bytes",
             "1792 bytes"});
-            this.byte2b.Location = new System.Drawing.Point(-2, -2);
+            this.byte2b.Location = new System.Drawing.Point(128, 39);
             this.byte2b.Name = "byte2b";
-            this.byte2b.Size = new System.Drawing.Size(125, 21);
+            this.byte2b.Size = new System.Drawing.Size(124, 21);
             this.byte2b.TabIndex = 370;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.Window;
-            this.panel5.Controls.Add(this.byte3b);
-            this.panel5.Location = new System.Drawing.Point(133, 37);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(121, 17);
-            this.panel5.TabIndex = 389;
+            this.byte2b.SelectedIndexChanged += new System.EventHandler(this.byte2b_SelectedIndexChanged);
             // 
             // byte3b
             // 
@@ -296,19 +150,69 @@ namespace LAZYSHELL
             "1280 bytes",
             "1536 bytes",
             "1792 bytes"});
-            this.byte3b.Location = new System.Drawing.Point(-2, -2);
+            this.byte3b.Location = new System.Drawing.Point(128, 39);
             this.byte3b.Name = "byte3b";
-            this.byte3b.Size = new System.Drawing.Size(125, 21);
+            this.byte3b.Size = new System.Drawing.Size(124, 21);
             this.byte3b.TabIndex = 370;
+            this.byte3b.SelectedIndexChanged += new System.EventHandler(this.byte3b_SelectedIndexChanged);
             // 
-            // panel6
+            // extraSpriteBuffer
             // 
-            this.panel6.BackColor = System.Drawing.SystemColors.Window;
-            this.panel6.Controls.Add(this.byte4b);
-            this.panel6.Location = new System.Drawing.Point(133, 37);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(121, 17);
-            this.panel6.TabIndex = 389;
+            this.extraSpriteBuffer.Enabled = false;
+            this.extraSpriteBuffer.Location = new System.Drawing.Point(139, 70);
+            this.extraSpriteBuffer.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.extraSpriteBuffer.Name = "extraSpriteBuffer";
+            this.extraSpriteBuffer.Size = new System.Drawing.Size(113, 21);
+            this.extraSpriteBuffer.TabIndex = 388;
+            this.extraSpriteBuffer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.extraSpriteBuffer.ValueChanged += new System.EventHandler(this.extraSpriteBuffer_ValueChanged);
+            // 
+            // allyCount
+            // 
+            this.allyCount.Location = new System.Drawing.Point(139, 20);
+            this.allyCount.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.allyCount.Name = "allyCount";
+            this.allyCount.Size = new System.Drawing.Size(113, 21);
+            this.allyCount.TabIndex = 388;
+            this.allyCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.allyCount.ValueChanged += new System.EventHandler(this.allyCount_ValueChanged);
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCancel.Location = new System.Drawing.Point(201, 454);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(63, 23);
+            this.buttonCancel.TabIndex = 392;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // byte4a
+            // 
+            this.byte4a.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.byte4a.IntegralHeight = false;
+            this.byte4a.Items.AddRange(new object[] {
+            "3 sprites per row",
+            "4 sprites per row",
+            "treasure chest",
+            "empty treasure chest",
+            "coins",
+            "empty buffer",
+            "empty buffer",
+            "empty buffer"});
+            this.byte4a.Location = new System.Drawing.Point(128, 18);
+            this.byte4a.Name = "byte4a";
+            this.byte4a.Size = new System.Drawing.Size(124, 21);
+            this.byte4a.TabIndex = 370;
+            this.byte4a.SelectedIndexChanged += new System.EventHandler(this.byte4a_SelectedIndexChanged);
             // 
             // byte4b
             // 
@@ -322,269 +226,266 @@ namespace LAZYSHELL
             "1280 bytes",
             "1536 bytes",
             "1792 bytes"});
-            this.byte4b.Location = new System.Drawing.Point(-2, -2);
+            this.byte4b.Location = new System.Drawing.Point(128, 39);
             this.byte4b.Name = "byte4b";
-            this.byte4b.Size = new System.Drawing.Size(125, 21);
+            this.byte4b.Size = new System.Drawing.Size(124, 21);
             this.byte4b.TabIndex = 370;
+            this.byte4b.SelectedIndexChanged += new System.EventHandler(this.byte4b_SelectedIndexChanged);
             // 
-            // vramIndex
+            // groupBox1
             // 
-            this.vramIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.vramIndex.Location = new System.Drawing.Point(133, 19);
-            this.vramIndex.Maximum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.vramIndex.Name = "vramIndex";
-            this.vramIndex.Size = new System.Drawing.Size(121, 17);
-            this.vramIndex.TabIndex = 388;
-            this.vramIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.byte4);
+            this.groupBox1.Controls.Add(this.byte4a);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.byte4b);
+            this.groupBox1.Location = new System.Drawing.Point(12, 324);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(258, 87);
+            this.groupBox1.TabIndex = 501;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Clone Buffer C";
             // 
-            // paletteIndex
+            // label9
             // 
-            this.paletteIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.paletteIndex.Location = new System.Drawing.Point(133, 37);
-            this.paletteIndex.Maximum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.paletteIndex.Name = "paletteIndex";
-            this.paletteIndex.Size = new System.Drawing.Size(121, 17);
-            this.paletteIndex.TabIndex = 388;
-            this.paletteIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 42);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(114, 13);
+            this.label9.TabIndex = 507;
+            this.label9.Text = "Use main buffer space";
             // 
-            // checkVramIndex
+            // byte4
             // 
-            this.checkVramIndex.BackColor = System.Drawing.SystemColors.Control;
-            this.checkVramIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkVramIndex.CheckOnClick = true;
-            this.checkVramIndex.ColumnWidth = 118;
-            this.checkVramIndex.IntegralHeight = false;
-            this.checkVramIndex.Items.AddRange(new object[] {
-            "Sprite GFX index #"});
-            this.checkVramIndex.Location = new System.Drawing.Point(0, 19);
-            this.checkVramIndex.Name = "checkVramIndex";
-            this.checkVramIndex.Size = new System.Drawing.Size(132, 17);
-            this.checkVramIndex.TabIndex = 390;
+            this.byte4.AutoSize = true;
+            this.byte4.Location = new System.Drawing.Point(6, 66);
+            this.byte4.Name = "byte4";
+            this.byte4.Size = new System.Drawing.Size(166, 17);
+            this.byte4.TabIndex = 502;
+            this.byte4.Text = "Sprite indexing in main buffer";
+            this.byte4.UseVisualStyleBackColor = true;
+            this.byte4.CheckedChanged += new System.EventHandler(this.byte4_CheckedChanged);
             // 
-            // checkPaletteIndex
+            // label8
             // 
-            this.checkPaletteIndex.BackColor = System.Drawing.SystemColors.Control;
-            this.checkPaletteIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkPaletteIndex.CheckOnClick = true;
-            this.checkPaletteIndex.ColumnWidth = 118;
-            this.checkPaletteIndex.IntegralHeight = false;
-            this.checkPaletteIndex.Items.AddRange(new object[] {
-            "Sprite palette index #"});
-            this.checkPaletteIndex.Location = new System.Drawing.Point(0, 37);
-            this.checkPaletteIndex.Name = "checkPaletteIndex";
-            this.checkPaletteIndex.Size = new System.Drawing.Size(132, 17);
-            this.checkPaletteIndex.TabIndex = 390;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 21);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(62, 13);
+            this.label8.TabIndex = 507;
+            this.label8.Text = "Buffer type";
             // 
-            // checkByte2a
+            // groupBox2
             // 
-            this.checkByte2a.BackColor = System.Drawing.SystemColors.Control;
-            this.checkByte2a.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkByte2a.CheckOnClick = true;
-            this.checkByte2a.ColumnWidth = 118;
-            this.checkByte2a.IntegralHeight = false;
-            this.checkByte2a.Items.AddRange(new object[] {
-            "Sprite Type"});
-            this.checkByte2a.Location = new System.Drawing.Point(0, 19);
-            this.checkByte2a.Name = "checkByte2a";
-            this.checkByte2a.Size = new System.Drawing.Size(132, 17);
-            this.checkByte2a.TabIndex = 390;
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.byte2b);
+            this.groupBox2.Controls.Add(this.byte2a);
+            this.groupBox2.Controls.Add(this.byte2);
+            this.groupBox2.Location = new System.Drawing.Point(12, 138);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(258, 87);
+            this.groupBox2.TabIndex = 502;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Clone Buffer A";
             // 
-            // checkByte2b
+            // label5
             // 
-            this.checkByte2b.BackColor = System.Drawing.SystemColors.Control;
-            this.checkByte2b.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkByte2b.CheckOnClick = true;
-            this.checkByte2b.ColumnWidth = 118;
-            this.checkByte2b.IntegralHeight = false;
-            this.checkByte2b.Items.AddRange(new object[] {
-            "Extra VRAM Usage"});
-            this.checkByte2b.Location = new System.Drawing.Point(0, 37);
-            this.checkByte2b.Name = "checkByte2b";
-            this.checkByte2b.Size = new System.Drawing.Size(132, 17);
-            this.checkByte2b.TabIndex = 390;
-            // 
-            // checkByte3a
-            // 
-            this.checkByte3a.BackColor = System.Drawing.SystemColors.Control;
-            this.checkByte3a.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkByte3a.CheckOnClick = true;
-            this.checkByte3a.ColumnWidth = 118;
-            this.checkByte3a.IntegralHeight = false;
-            this.checkByte3a.Items.AddRange(new object[] {
-            "Sprite Type"});
-            this.checkByte3a.Location = new System.Drawing.Point(0, 19);
-            this.checkByte3a.Name = "checkByte3a";
-            this.checkByte3a.Size = new System.Drawing.Size(132, 17);
-            this.checkByte3a.TabIndex = 390;
-            // 
-            // checkByte3b
-            // 
-            this.checkByte3b.BackColor = System.Drawing.SystemColors.Control;
-            this.checkByte3b.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkByte3b.CheckOnClick = true;
-            this.checkByte3b.ColumnWidth = 118;
-            this.checkByte3b.IntegralHeight = false;
-            this.checkByte3b.Items.AddRange(new object[] {
-            "Extra VRAM Usage"});
-            this.checkByte3b.Location = new System.Drawing.Point(0, 37);
-            this.checkByte3b.Name = "checkByte3b";
-            this.checkByte3b.Size = new System.Drawing.Size(132, 17);
-            this.checkByte3b.TabIndex = 390;
-            // 
-            // checkByte4a
-            // 
-            this.checkByte4a.BackColor = System.Drawing.SystemColors.Control;
-            this.checkByte4a.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkByte4a.CheckOnClick = true;
-            this.checkByte4a.ColumnWidth = 118;
-            this.checkByte4a.IntegralHeight = false;
-            this.checkByte4a.Items.AddRange(new object[] {
-            "Sprite Type"});
-            this.checkByte4a.Location = new System.Drawing.Point(0, 19);
-            this.checkByte4a.Name = "checkByte4a";
-            this.checkByte4a.Size = new System.Drawing.Size(132, 17);
-            this.checkByte4a.TabIndex = 390;
-            // 
-            // checkByte4b
-            // 
-            this.checkByte4b.BackColor = System.Drawing.SystemColors.Control;
-            this.checkByte4b.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkByte4b.CheckOnClick = true;
-            this.checkByte4b.ColumnWidth = 118;
-            this.checkByte4b.IntegralHeight = false;
-            this.checkByte4b.Items.AddRange(new object[] {
-            "Extra VRAM Usage"});
-            this.checkByte4b.Location = new System.Drawing.Point(0, 37);
-            this.checkByte4b.Name = "checkByte4b";
-            this.checkByte4b.Size = new System.Drawing.Size(132, 17);
-            this.checkByte4b.TabIndex = 390;
-            // 
-            // searchButton
-            // 
-            this.searchButton.Location = new System.Drawing.Point(311, 338);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(75, 23);
-            this.searchButton.TabIndex = 392;
-            this.searchButton.Text = "Search";
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 42);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(114, 13);
+            this.label5.TabIndex = 507;
+            this.label5.Text = "Use main buffer space";
             // 
             // label4
             // 
-            this.label4.BackColor = System.Drawing.SystemColors.Control;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 21);
             this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label4.Size = new System.Drawing.Size(254, 17);
-            this.label4.TabIndex = 391;
-            this.label4.Text = "VRAM OFFSETS";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label4.Size = new System.Drawing.Size(62, 13);
+            this.label4.TabIndex = 507;
+            this.label4.Text = "Buffer type";
             // 
-            // panel88
+            // byte2
             // 
-            this.panel88.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel88.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel88.Controls.Add(this.label4);
-            this.panel88.Controls.Add(this.byte1);
-            this.panel88.Controls.Add(this.vramIndex);
-            this.panel88.Controls.Add(this.paletteIndex);
-            this.panel88.Controls.Add(this.checkVramIndex);
-            this.panel88.Controls.Add(this.checkPaletteIndex);
-            this.panel88.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel88.Location = new System.Drawing.Point(210, 0);
-            this.panel88.Name = "panel88";
-            this.panel88.Size = new System.Drawing.Size(258, 91);
-            this.panel88.TabIndex = 496;
+            this.byte2.AutoSize = true;
+            this.byte2.Location = new System.Drawing.Point(6, 66);
+            this.byte2.Name = "byte2";
+            this.byte2.Size = new System.Drawing.Size(166, 17);
+            this.byte2.TabIndex = 386;
+            this.byte2.Text = "Sprite indexing in main buffer";
+            this.byte2.UseVisualStyleBackColor = false;
+            this.byte2.CheckedChanged += new System.EventHandler(this.byte2_CheckedChanged);
             // 
-            // panel9
+            // groupBox3
             // 
-            this.panel9.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel9.Controls.Add(this.label1);
-            this.panel9.Controls.Add(this.byte2);
-            this.panel9.Controls.Add(this.panel1);
-            this.panel9.Controls.Add(this.panel4);
-            this.panel9.Controls.Add(this.checkByte2a);
-            this.panel9.Controls.Add(this.checkByte2b);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(210, 91);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(258, 75);
-            this.panel9.TabIndex = 497;
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.byte3b);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.byte3a);
+            this.groupBox3.Controls.Add(this.byte3);
+            this.groupBox3.Location = new System.Drawing.Point(12, 231);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(258, 87);
+            this.groupBox3.TabIndex = 503;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Clone Buffer B";
             // 
-            // panel10
+            // label7
             // 
-            this.panel10.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel10.Controls.Add(this.label2);
-            this.panel10.Controls.Add(this.byte3);
-            this.panel10.Controls.Add(this.panel5);
-            this.panel10.Controls.Add(this.panel2);
-            this.panel10.Controls.Add(this.checkByte3a);
-            this.panel10.Controls.Add(this.checkByte3b);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(210, 166);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(258, 75);
-            this.panel10.TabIndex = 498;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 42);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(114, 13);
+            this.label7.TabIndex = 507;
+            this.label7.Text = "Use main buffer space";
             // 
-            // panel11
+            // label6
             // 
-            this.panel11.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel11.Controls.Add(this.label3);
-            this.panel11.Controls.Add(this.byte4);
-            this.panel11.Controls.Add(this.panel6);
-            this.panel11.Controls.Add(this.panel3);
-            this.panel11.Controls.Add(this.checkByte4a);
-            this.panel11.Controls.Add(this.checkByte4b);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel11.Location = new System.Drawing.Point(210, 241);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(258, 75);
-            this.panel11.TabIndex = 499;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(62, 13);
+            this.label6.TabIndex = 507;
+            this.label6.Text = "Buffer type";
             // 
-            // listBox1
+            // label3
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.IntegralHeight = false;
-            this.listBox1.Location = new System.Drawing.Point(0, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(210, 362);
-            this.listBox1.TabIndex = 500;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 13);
+            this.label3.TabIndex = 507;
+            this.label3.Text = "Ally sprite buffer size";
             // 
-            // buttonCancel
+            // label2
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(392, 338);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 392;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 72);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(117, 13);
+            this.label2.TabIndex = 507;
+            this.label2.Text = "Extra sprite buffer size";
+            // 
+            // noWaterPalettes
+            // 
+            this.noWaterPalettes.AutoSize = true;
+            this.noWaterPalettes.Location = new System.Drawing.Point(12, 423);
+            this.noWaterPalettes.Name = "noWaterPalettes";
+            this.noWaterPalettes.Size = new System.Drawing.Size(245, 17);
+            this.noWaterPalettes.TabIndex = 386;
+            this.noWaterPalettes.Text = "8-row palette buffer (no underwater allowed)";
+            this.noWaterPalettes.UseVisualStyleBackColor = false;
+            this.noWaterPalettes.CheckedChanged += new System.EventHandler(this.noWaterPalettes_CheckedChanged);
+            // 
+            // extraSprites
+            // 
+            this.extraSprites.AutoSize = true;
+            this.extraSprites.Location = new System.Drawing.Point(6, 48);
+            this.extraSprites.Name = "extraSprites";
+            this.extraSprites.Size = new System.Drawing.Size(246, 17);
+            this.extraSprites.TabIndex = 386;
+            this.extraSprites.Text = "Extra sprite buffer (clouds, level-up text, etc)";
+            this.extraSprites.UseVisualStyleBackColor = false;
+            this.extraSprites.CheckedChanged += new System.EventHandler(this.extraSprites_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 506;
+            this.label1.Text = "Partition #";
+            // 
+            // partitionNum
+            // 
+            this.partitionNum.Location = new System.Drawing.Point(76, 7);
+            this.partitionNum.Maximum = new decimal(new int[] {
+            119,
+            0,
+            0,
+            0});
+            this.partitionNum.Name = "partitionNum";
+            this.partitionNum.Size = new System.Drawing.Size(58, 21);
+            this.partitionNum.TabIndex = 505;
+            this.partitionNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.partitionNum.ValueChanged += new System.EventHandler(this.partitionNum_ValueChanged);
+            // 
+            // buttonOK
+            // 
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.Location = new System.Drawing.Point(132, 454);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(63, 23);
+            this.buttonOK.TabIndex = 392;
+            this.buttonOK.Text = "OK";
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(128, 256);
+            this.pictureBox1.TabIndex = 507;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Location = new System.Drawing.Point(276, 33);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(132, 260);
+            this.panel1.TabIndex = 508;
+            // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.Control;
+            this.label10.Location = new System.Drawing.Point(276, 9);
+            this.label10.Name = "label10";
+            this.label10.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.label10.Size = new System.Drawing.Size(132, 23);
+            this.label10.TabIndex = 509;
+            this.label10.Text = "VRAM PREVIEW";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.extraSprites);
+            this.groupBox4.Controls.Add(this.allyCount);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.extraSpriteBuffer);
+            this.groupBox4.Location = new System.Drawing.Point(12, 34);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(258, 98);
+            this.groupBox4.TabIndex = 510;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Main Buffer";
             // 
             // SpritePartitions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 362);
-            this.Controls.Add(this.panel11);
-            this.Controls.Add(this.panel10);
-            this.Controls.Add(this.panel9);
-            this.Controls.Add(this.panel88);
-            this.Controls.Add(this.listBox1);
+            this.ClientSize = new System.Drawing.Size(276, 489);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.partitionNum);
+            this.Controls.Add(this.noWaterPalettes);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
@@ -594,61 +495,58 @@ namespace LAZYSHELL
             this.ShowInTaskbar = false;
             this.Text = "PARTITIONS - Lazy Shell";
             this.TopMost = true;
+            ((System.ComponentModel.ISupportInitialize)(this.extraSpriteBuffer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.allyCount)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.partitionNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.vramIndex)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).EndInit();
-            this.panel88.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
 
         #endregion
 
-        private System.Windows.Forms.CheckedListBox byte1;
-        private System.Windows.Forms.CheckedListBox byte2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckedListBox byte3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckedListBox byte4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox byte3;
         private System.Windows.Forms.ComboBox byte2a;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox byte3a;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ComboBox byte4a;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ComboBox byte2b;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.ComboBox byte3b;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.ComboBox byte4b;
-        private System.Windows.Forms.NumericUpDown vramIndex;
-        private System.Windows.Forms.NumericUpDown paletteIndex;
-        private System.Windows.Forms.CheckedListBox checkVramIndex;
-        private System.Windows.Forms.CheckedListBox checkPaletteIndex;
-        private System.Windows.Forms.CheckedListBox checkByte2a;
-        private System.Windows.Forms.CheckedListBox checkByte2b;
-        private System.Windows.Forms.CheckedListBox checkByte3a;
-        private System.Windows.Forms.CheckedListBox checkByte3b;
-        private System.Windows.Forms.CheckedListBox checkByte4a;
-        private System.Windows.Forms.CheckedListBox checkByte4b;
-        private System.Windows.Forms.Button searchButton;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel88;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.NumericUpDown extraSpriteBuffer;
+        private System.Windows.Forms.NumericUpDown allyCount;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.ComboBox byte4a;
+        private System.Windows.Forms.ComboBox byte4b;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox byte4;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown partitionNum;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox byte2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonOK;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox noWaterPalettes;
+        private System.Windows.Forms.CheckBox extraSprites;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }

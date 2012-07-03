@@ -600,7 +600,7 @@ namespace LAZYSHELL
         {
             return GetTilePixels(tile, 255);
         }
-        public int[] GetTilemapPixels(Map map)
+        public int[] GetTilemapPixels(Tilemap map)
         {
             /*********DRAW THE PHYSICAL MAP FROM BUFFER*********/
             SolidityTile[] tiles = Model.SolidTiles;
@@ -612,9 +612,9 @@ namespace LAZYSHELL
             int offset = 0;
             int xPixel = 0;
             int yPixel = 0;
-            while (offset < map.Tilemap.Length)
+            while (offset < map.Tilemap_Bytes.Length)
             {
-                tileNum = Bits.GetShort(map.Tilemap, offset);
+                tileNum = Bits.GetShort(map.Tilemap_Bytes, offset);
                 currTilePosX = tileCoords[offset / 2].X;
                 currTilePosY = tileCoords[offset / 2].Y;
                 if (tileNum != 0)
@@ -639,7 +639,7 @@ namespace LAZYSHELL
             }
             return pixels;
         }
-        public int[] GetPriority1Pixels(Map map)
+        public int[] GetPriority1Pixels(Tilemap map)
         {
             /*********DRAW THE PHYSICAL MAP FROM BUFFER*********/
             SolidityTile[] tiles = Model.SolidTiles;
@@ -651,9 +651,9 @@ namespace LAZYSHELL
             int offset = 0;
             int xPixel = 0;
             int yPixel = 0;
-            while (offset < map.Tilemap.Length)
+            while (offset < map.Tilemap_Bytes.Length)
             {
-                tileNum = Bits.GetShort(map.Tilemap, offset);
+                tileNum = Bits.GetShort(map.Tilemap_Bytes, offset);
                 currTilePosX = tileCoords[offset / 2].X;
                 currTilePosY = tileCoords[offset / 2].Y;
                 if (tileNum != 0 && tiles[tileNum].ObjectOnTilePriority3)
@@ -677,7 +677,7 @@ namespace LAZYSHELL
             }
             return pixels;
         }
-        public void RefreshTilemapImage(Map map, int offset)
+        public void RefreshTilemapImage(Tilemap map, int offset)
         {
             SolidityTile[] tiles = Model.SolidTiles;
             int[] tilePixels = new int[32 * 784];
@@ -699,12 +699,12 @@ namespace LAZYSHELL
             }
             offset *= 2;
             // do the loop
-            while (offset < map.Tilemap.Length)
+            while (offset < map.Tilemap_Bytes.Length)
             {
                 if (twoTiles)
                 {
                     // ...draw eastern half of left tile
-                    tileNum = Bits.GetShort(map.Tilemap, offset);
+                    tileNum = Bits.GetShort(map.Tilemap_Bytes, offset);
                     currTilePosX = tileCoords[offset / 2].X;
                     currTilePosY = tileCoords[offset / 2].Y;
 
@@ -743,10 +743,10 @@ namespace LAZYSHELL
 
                     offset += 2;
 
-                    if (offset >= map.Tilemap.Length) break;
+                    if (offset >= map.Tilemap_Bytes.Length) break;
 
                     // ...draw western half of right tile
-                    tileNum = Bits.GetShort(map.Tilemap, offset);
+                    tileNum = Bits.GetShort(map.Tilemap_Bytes, offset);
                     currTilePosX = tileCoords[offset / 2].X;
                     currTilePosY = tileCoords[offset / 2].Y;
 
@@ -785,12 +785,12 @@ namespace LAZYSHELL
 
                     offset += 64;
 
-                    if (offset >= map.Tilemap.Length) break;
+                    if (offset >= map.Tilemap_Bytes.Length) break;
                 }
                 else
                 {
                     // ...draw full tile
-                    tileNum = Bits.GetShort(map.Tilemap, offset);
+                    tileNum = Bits.GetShort(map.Tilemap_Bytes, offset);
                     currTilePosX = tileCoords[offset / 2].X;
                     currTilePosY = tileCoords[offset / 2].Y;
 
@@ -829,7 +829,7 @@ namespace LAZYSHELL
 
                     offset += 64;
 
-                    if (offset >= map.Tilemap.Length) break;
+                    if (offset >= map.Tilemap_Bytes.Length) break;
                 }
                 twoTiles = !twoTiles;
             }

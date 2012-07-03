@@ -1053,7 +1053,7 @@ namespace LAZYSHELL
             //
             byte[] graphics = new byte[0x10000];
             int[] palette = animation.PaletteSet.Palettes[effect.PaletteIndex];
-            Tile16x16[] tiles = new Tile16x16[16 * 16];
+            Tile[] tiles = new Tile[16 * 16];
             byte[][] tilemaps = new byte[imports.Length][];
             bool newPalette = false;
             if (MessageBox.Show("Would you like to create a new palette from the imported image(s)?", "LAZY SHELL",

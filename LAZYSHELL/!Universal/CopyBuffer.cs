@@ -26,7 +26,7 @@ namespace LAZYSHELL
                 return arr;
             }
         }
-        private Tile16x16[] tiles; public Tile16x16[] Tiles { get { return tiles; } set { tiles = value; } }
+        private Tile[] tiles; public Tile[] Tiles { get { return tiles; } set { tiles = value; } }
         private int[] pixels; public int[] Pixels { get { return pixels; } set { pixels = value; } }
         private List<Mold.Tile> mold_tiles = new List<Mold.Tile>();
         public List<Mold.Tile> Mold_tiles { get { return mold_tiles; } set { mold_tiles = value; } }
@@ -57,7 +57,7 @@ namespace LAZYSHELL
             this.height = height;
             this.copies = copies;
         }
-        public CopyBuffer(int width, int height, Tile16x16[] tiles)
+        public CopyBuffer(int width, int height, Tile[] tiles)
         {
             this.width = width;
             this.height = height;

@@ -11,12 +11,14 @@ namespace LAZYSHELL
     {
         // Local
         private List<Frame> frames = new List<Frame>(); public List<Frame> Frames { get { return this.frames; } set { this.frames = value; } }
+        private bool active; public bool Active { get { return this.active; } set { this.active = value; } }
 
         public void InitializeSequence(byte[] sm, int offset)
         {
             Frame tFrame;
             if (Bits.GetShort(sm, offset) == 0xFFFF)
                 return;
+            active = true;  //
             offset = (ushort)(Bits.GetShort(sm, offset) & 0x7FFF);
             while (offset != 0x7FFF && sm[offset] != 0)
             {

@@ -14,22 +14,22 @@ namespace LAZYSHELL
         private bool byte1bit1; public bool Byte1bit1 { get { return byte1bit1; } set { byte1bit1 = value; } }
         private bool byte1bit2; public bool Byte1bit2 { get { return byte1bit2; } set { byte1bit2 = value; } }
         private bool byte1bit3; public bool Byte1bit3 { get { return byte1bit3; } set { byte1bit3 = value; } }
-        private bool byte1bit4; public bool Byte1bit4 { get { return byte1bit4; } set { byte1bit4 = value; } }
-        private bool byte1bit7; public bool Byte1bit7 { get { return byte1bit7; } set { byte1bit7 = value; } }
-        private byte palIndexPlus; public byte PalIndexPlus { get { return palIndexPlus; } set { palIndexPlus = value; } }
-        private byte vramIndex; public byte VramIndex { get { return vramIndex; } set { vramIndex = value; } }
+        private bool extraSprites; public bool ExtraSprites { get { return extraSprites; } set { extraSprites = value; } }
+        private bool fullPaletteBuffer; public bool FullPaletteBuffer { get { return fullPaletteBuffer; } set { fullPaletteBuffer = value; } }
+        private byte allySpriteBuffer; public byte AllySpriteBuffer { get { return allySpriteBuffer; } set { allySpriteBuffer = value; } }
+        private byte extraSpriteBuffer; public byte ExtraSpriteBuffer { get { return extraSpriteBuffer; } set { extraSpriteBuffer = value; } }
 
-        private byte byte2a; public byte Byte2a { get { return byte2a; } set { byte2a = value; } }
-        private byte byte2b; public byte Byte2b { get { return byte2b; } set { byte2b = value; } }
-        private bool byte2bit7; public bool Byte2bit7 { get { return byte2bit7; } set { byte2bit7 = value; } }
+        private byte cloneAsprite; public byte CloneASprite { get { return cloneAsprite; } set { cloneAsprite = value; } }
+        private byte cloneAmain; public byte CloneAMain { get { return cloneAmain; } set { cloneAmain = value; } }
+        private bool cloneAindexing; public bool Byte2bit7 { get { return cloneAindexing; } set { cloneAindexing = value; } }
 
-        private byte byte3a; public byte Byte3a { get { return byte3a; } set { byte3a = value; } }
-        private byte byte3b; public byte Byte3b { get { return byte3b; } set { byte3b = value; } }
-        private bool byte3bit7; public bool Byte3bit7 { get { return byte3bit7; } set { byte3bit7 = value; } }
+        private byte cloneBsprite; public byte CloneBSprite { get { return cloneBsprite; } set { cloneBsprite = value; } }
+        private byte cloneBmain; public byte CloneBMain { get { return cloneBmain; } set { cloneBmain = value; } }
+        private bool cloneBindexing; public bool CloneBIndexing { get { return cloneBindexing; } set { cloneBindexing = value; } }
 
-        private byte byte4a; public byte Byte4a { get { return byte4a; } set { byte4a = value; } }
-        private byte byte4b; public byte Byte4b { get { return byte4b; } set { byte4b = value; } }
-        private bool byte4bit7; public bool Byte4bit7 { get { return byte4bit7; } set { byte4bit7 = value; } }
+        private byte cloneCsprite; public byte CloneCSprite { get { return cloneCsprite; } set { cloneCsprite = value; } }
+        private byte cloneCmain; public byte CloneCMain { get { return cloneCmain; } set { cloneCmain = value; } }
+        private bool cloneCindexing; public bool CloneCIndexing { get { return cloneCindexing; } set { cloneCindexing = value; } }
 
         public NPCSpritePartitions(byte[] data, int index)
         {
@@ -37,44 +37,57 @@ namespace LAZYSHELL
             this.index = index;
             InitializeSpritePartitions(data);
         }
-
         private void InitializeSpritePartitions(byte[] data)
         {
             int offset = index * 4 + 0x1DDE00;
             byte temp = 0;
 
             temp = data[offset]; offset++;
-            if ((temp & 0x10) == 0x10) byte1bit4 = true;
-            if ((temp & 0x80) == 0x80) byte1bit7 = true;
-            palIndexPlus = (byte)((temp & 0x60) >> 5);
-            vramIndex = (byte)(temp & 0x0F);
+            if ((temp & 0x10) == 0x10) extraSprites = true;
+            if ((temp & 0x80) == 0x80) fullPaletteBuffer = true;
+            allySpriteBuffer = (byte)((temp & 0x60) >> 5);
+            extraSpriteBuffer = (byte)(temp & 0x0F);
 
             temp = data[offset]; offset++;
-            switch (temp & 0x07)
-            {
-                case 7: byte2a = 5; break;
-                default: byte2a = (byte)(temp & 0x07); break;
-            }
-            byte2b = (byte)((temp & 0x70) >> 4);
-            if ((temp & 0x80) == 0x80) byte2bit7 = true;
+            cloneAsprite = (byte)(temp & 0x07);
+            cloneAmain = (byte)((temp & 0x70) >> 4);
+            if ((temp & 0x80) == 0x80) cloneAindexing = true;
 
             temp = data[offset]; offset++;
-            switch (temp & 0x07)
-            {
-                case 7: byte3a = 5; break;
-                default: byte3a = (byte)(temp & 0x07); break;
-            }
-            byte3b = (byte)((temp & 0x70) >> 4);
-            if ((temp & 0x80) == 0x80) byte3bit7 = true;
+            cloneBsprite = (byte)(temp & 0x07);
+            cloneBmain = (byte)((temp & 0x70) >> 4);
+            if ((temp & 0x80) == 0x80) cloneBindexing = true;
 
             temp = data[offset]; offset++;
-            switch (temp & 0x07)
-            {
-                case 7: byte4a = 5; break;
-                default: byte4a = (byte)(temp & 0x07); break;
-            }
-            byte4b = (byte)((temp & 0x70) >> 4);
-            if ((temp & 0x80) == 0x80) byte4bit7 = true;
+            cloneCsprite = (byte)(temp & 0x07);
+            cloneCmain = (byte)((temp & 0x70) >> 4);
+            if ((temp & 0x80) == 0x80) cloneCindexing = true;
+        }
+        public void Assemble()
+        {
+            int offset = index * 4 + 0x1DDE00;
+            //
+            data[offset] = 0;
+            data[offset] = (byte)(allySpriteBuffer << 5);
+            data[offset] |= extraSpriteBuffer;
+            Bits.SetBit(data, offset, 4, extraSprites);
+            Bits.SetBit(data, offset, 7, fullPaletteBuffer);
+            offset++;
+            //
+            data[offset] = cloneAsprite;
+            data[offset] |= (byte)(cloneAmain << 4);
+            Bits.SetBit(data, offset, 7, cloneAindexing);
+            offset++;
+            //
+            data[offset] = cloneBsprite;
+            data[offset] |= (byte)(cloneBmain << 4);
+            Bits.SetBit(data, offset, 7, cloneBindexing);
+            offset++;
+            //
+            data[offset] = cloneCsprite;
+            data[offset] |= (byte)(cloneCmain << 4);
+            Bits.SetBit(data, offset, 7, cloneCindexing);
+            offset++;
         }
     }
 }

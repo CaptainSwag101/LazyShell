@@ -121,11 +121,8 @@
             // dialogueNum
             // 
             this.dialogueNum.AutoSize = false;
-            this.dialogueNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dialogueNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dialogueNum.ForeColor = System.Drawing.SystemColors.Control;
             this.dialogueNum.Hexadecimal = false;
-            this.dialogueNum.Location = new System.Drawing.Point(9, 2);
+            this.dialogueNum.Location = new System.Drawing.Point(7, 2);
             this.dialogueNum.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -148,6 +145,9 @@
             // 
             // panelDialogues
             // 
+            this.panelDialogues.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelDialogues.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panelDialogues.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelDialogues.Location = new System.Drawing.Point(244, 25);
@@ -157,7 +157,6 @@
             // 
             // panel60
             // 
-            this.panel60.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel60.Controls.Add(this.dialogueTextBox);
             this.panel60.Controls.Add(this.toolStrip2);
             this.panel60.Controls.Add(this.toolStrip1);
@@ -332,7 +331,6 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pageUp,
@@ -414,7 +412,6 @@
             // 
             // panel69
             // 
-            this.panel69.BackColor = System.Drawing.SystemColors.Control;
             this.panel69.Controls.Add(this.pictureBoxDialogue);
             this.panel69.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel69.Location = new System.Drawing.Point(0, 25);
@@ -434,7 +431,6 @@
             // 
             // toolStrip5
             // 
-            this.toolStrip5.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip5.CanOverflow = false;
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dialogueNum,
@@ -491,7 +487,7 @@
             // 
             this.pauseFrameNum.AutoSize = false;
             this.pauseFrameNum.Hexadecimal = false;
-            this.pauseFrameNum.Location = new System.Drawing.Point(96, 3);
+            this.pauseFrameNum.Location = new System.Drawing.Point(94, 3);
             this.pauseFrameNum.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.pauseFrameNum.Maximum = new decimal(new int[] {
             255,
@@ -596,7 +592,6 @@
             // 
             // toolStrip7
             // 
-            this.toolStrip7.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip7.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel4,
@@ -622,7 +617,6 @@
             // 
             // dctApply
             // 
-            this.dctApply.BackColor = System.Drawing.SystemColors.Control;
             this.dctApply.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dctApply.Location = new System.Drawing.Point(0, 101);
             this.dctApply.Name = "dctApply";

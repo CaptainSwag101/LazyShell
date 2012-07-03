@@ -5,8 +5,11 @@ using System.Drawing;
 
 namespace LAZYSHELL
 {
+    /// <summary>
+    /// Generic 8x8 subtile used anywhere.
+    /// </summary>
     [Serializable()]
-    public class Tile8x8
+    public class Subtile
     {
         private int[] pixels = new int[64];
         public int[] Pixels
@@ -28,22 +31,22 @@ namespace LAZYSHELL
         }
         private bool twobpp;
 
-        private bool priorityOne, mirror, invert;
-        public bool PriorityOne { get { return priorityOne; } set { priorityOne = value; } }
+        private bool priority1, mirror, invert;
+        public bool Priority1 { get { return priority1; } set { priority1 = value; } }
         public bool Mirror { get { return mirror; } set { mirror = value; } }
         public bool Invert { get { return invert; } set { invert = value; } }
 
-        private int tileIndex, paletteIndex;
-        public int TileIndex { get { return tileIndex; } set { tileIndex = value; } }
-        public int PaletteIndex { get { return this.paletteIndex; } set { this.paletteIndex = value; } }
+        private int index, palette;
+        public int Index { get { return index; } set { index = value; } }
+        public int Palette { get { return this.palette; } set { this.palette = value; } }
 
-        public Tile8x8(int tileIndex, byte[] tileData, int offset, int[] palette,
-            bool mirror, bool invert, bool priorityOne, bool twobpp)
+        public Subtile(int index, byte[] graphics, int offset, int[] palette,
+            bool mirror, bool invert, bool priority1, bool twobpp)
         {
             this.mirror = mirror;
             this.invert = invert;
-            this.priorityOne = priorityOne;
-            this.tileIndex = tileIndex;
+            this.priority1 = priority1;
+            this.index = index;
             this.twobpp = twobpp;
 
             if (twobpp == false)
@@ -54,16 +57,16 @@ namespace LAZYSHELL
                     byte[] row = new byte[8];
 
                     for (int i = 7, b = 1; i >= 0; i--, b *= 2)
-                        if ((tileData[offset + r * 2 + 0x11] & b) == b)
+                        if ((graphics[offset + r * 2 + 0x11] & b) == b)
                             row[i] += 8;
                     for (int i = 7, b = 1; i >= 0; i--, b *= 2)
-                        if ((tileData[offset + r * 2 + 0x10] & b) == b)
+                        if ((graphics[offset + r * 2 + 0x10] & b) == b)
                             row[i] += 4;
                     for (int i = 7, b = 1; i >= 0; i--, b *= 2)
-                        if ((tileData[offset + r * 2 + 1] & b) == b)
+                        if ((graphics[offset + r * 2 + 1] & b) == b)
                             row[i] += 2;
                     for (int i = 7, b = 1; i >= 0; i--, b *= 2)
-                        if ((tileData[offset + r * 2] & b) == b)
+                        if ((graphics[offset + r * 2] & b) == b)
                             row[i]++;
 
                     for (int c = 0; c < 8; c++) // Number of Columns in an 8x8 Tile
@@ -82,8 +85,8 @@ namespace LAZYSHELL
                     pal[i] = palette[i];
                 for (byte i = 0; i < 8; i++)
                 {
-                    b1 = tileData[offset];
-                    b2 = tileData[offset + 1];
+                    b1 = graphics[offset];
+                    b2 = graphics[offset + 1];
                     for (byte z = 7; col < 8; z--)
                     {
                         t1 = (byte)((b1 >> z) & 1);
@@ -100,29 +103,46 @@ namespace LAZYSHELL
             if (mirror) Do.FlipHorizontal(pixels, 8, 8);
             if (invert) Do.FlipVertical(pixels, 8, 8);
         }
-        private Tile8x8()
+        public Subtile(int index, byte[] graphics, int offset, int[] palette)
+        {
+            this.index = index;
+            for (int i = 0; i < 64; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    pixels[i] = palette[graphics[offset + (i / 2)] & 0x0F];
+                    colors[i] = graphics[offset + (i / 2)] & 0x0F;
+                }
+                else
+                {
+                    pixels[i] = palette[(graphics[offset + (i / 2)] & 0xF0) >> 4];
+                    colors[i] = (graphics[offset + (i / 2)] & 0xF0) >> 4;
+                }
+            }
+        }
+        private Subtile()
         {
 
         }
-        public Tile8x8 Copy()
+        public Subtile Copy()
         {
-            Tile8x8 copy = new Tile8x8();
+            Subtile copy = new Subtile();
 
             copy.Pixels = new int[this.pixels.Length]; this.Pixels.CopyTo(copy.Pixels, 0);
             copy.Colors = new int[this.colors.Length]; this.Colors.CopyTo(copy.Colors, 0);
-            copy.PriorityOne = this.priorityOne;
+            copy.Priority1 = this.priority1;
             copy.Mirror = this.mirror;
             copy.Invert = this.invert;
-            copy.TileIndex = this.tileIndex;
-            copy.PaletteIndex = this.paletteIndex;
+            copy.Index = this.index;
+            copy.Palette = this.palette;
 
             return copy;
         }
-        public void CopyTo(Tile8x8 dest)
+        public void CopyTo(Subtile dest)
         {
-            dest.TileIndex = this.tileIndex;
-            dest.PaletteIndex = this.paletteIndex;
-            dest.PriorityOne = this.priorityOne;
+            dest.Index = this.index;
+            dest.Palette = this.palette;
+            dest.Priority1 = this.priority1;
             dest.Mirror = this.mirror;
             dest.Invert = this.invert;
             this.pixels.CopyTo(dest.Pixels, 0);
@@ -132,11 +152,11 @@ namespace LAZYSHELL
         {
             mirror = false;
             invert = false;
-            priorityOne = false;
+            priority1 = false;
             pixels = new int[64];
             colors = new int[64];
-            tileIndex = 0;
-            paletteIndex = 0;
+            index = 0;
+            palette = 0;
         }
     }
 }

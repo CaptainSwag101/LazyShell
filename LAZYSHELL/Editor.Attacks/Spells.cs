@@ -58,8 +58,6 @@ namespace LAZYSHELL
                     this.textBoxSpellDescription_TextChanged(null, null);
                 this.textBoxSpellDescription.Enabled = false;
                 this.toolStrip2.Enabled = false;
-                this.button34.Enabled = false; // Break
-                this.button33.Enabled = false; // End
             }
             else
             {
@@ -67,23 +65,17 @@ namespace LAZYSHELL
                 {
                     this.textBoxSpellDescription.Enabled = true;
                     this.toolStrip2.Enabled = true;
-                    this.button34.Enabled = true; // Break
-                    this.button33.Enabled = true; // End
                 }
                 if (index <= 26)
                 {
                     this.textBoxSpellDescription.Enabled = true;
                     this.toolStrip2.Enabled = true;
-                    this.button33.Enabled = true;
-                    this.button34.Enabled = true;
                     this.textBoxSpellDescription.Text = spell.GetDescription(textCodeFormat);
                 }
                 else
                 {
                     this.textBoxSpellDescription.Enabled = false;
                     this.toolStrip2.Enabled = false;
-                    this.button33.Enabled = false;
-                    this.button34.Enabled = false;
                     this.textBoxSpellDescription.Text = " This spell[1] cannot have a[1] description";
                 }
             }
@@ -116,18 +108,18 @@ namespace LAZYSHELL
             this.spellInflictElement.SelectedIndex = spell.InflictElement;
             if (spell.EffectType == 0)
             {
-                this.label62.Text = "EFFECT <INFLICT>";
-                this.label61.Text = "STATUS <UP>";
+                this.groupBox8.Text = "Effect <INFLICT>";
+                this.groupBox9.Text = "Status <UP>";
             }
             else if (spell.EffectType == 1)
             {
-                this.label62.Text = "EFFECT <NULLIFY>";
-                this.label61.Text = "STATUS <DOWN>";
+                this.groupBox8.Text = "Effect <NULLIFY>";
+                this.groupBox9.Text = "Status <DOWN>";
             }
             else if (spell.EffectType == 2)
             {
-                this.label62.Text = "EFFECT <. . . .>";
-                this.label61.Text = "STATUS <. . . .>";
+                this.groupBox8.Text = "Effect <. . . .>";
+                this.groupBox9.Text = "Status <. . . .>";
             }
             // timing
             panelTimingMultiple.Visible = index == 2 || index == 4 || index == 26;
@@ -156,63 +148,55 @@ namespace LAZYSHELL
         }
         private void RefreshTimingSpellsOne()
         {
-            this.spell1TimingFrameSpan.Value = spell.OneLevelSpellSpan;
-            this.numericUpDown100.Value = this.spell1TimingFrameSpan.Value;
+            this.timingOne.Value = spell.OneLevelSpellSpan;
         }
         private void RefreshTimingSpellsTwo()
         {
-            this.spell2Level2FrameStart.Value = spell.TwoLevelSpellStartLevel2;
-            this.spell2Level2FrameEnd.Value = spell.TwoLevelSpellEndLevel2;
-            this.spell2Level1FrameEnd.Value = spell.TwoLevelSpellEndLevel1;
-            this.numericUpDown107.Value = this.spell2Level2FrameStart.Value;
-            this.numericUpDown110.Value = this.spell2Level2FrameEnd.Value;
-            this.numericUpDown108.Value = this.spell2Level1FrameEnd.Value;
+            this.timingTwoStart.Value = spell.TwoLevelSpellStartLevel2;
+            this.timingTwoEnd.Value = spell.TwoLevelSpellEndLevel2;
+            this.timingOneEnd.Value = spell.TwoLevelSpellEndLevel1;
         }
         private void RefreshTimingSpellsGeno()
         {
-            this.GenoLevel2Frame.Value = spell.ChargeSpellStartLevel2;
-            this.GenoLevel3Frame.Value = spell.ChargeSpellStartLevel3;
-            this.GenoLevel4Frame.Value = spell.ChargeSpellStartLevel4;
-            this.GenoChargeOverflow.Value = spell.ChargeSpellOverflow;
-            this.numericUpDown113.Value = this.GenoLevel2Frame.Value;
-            this.numericUpDown111.Value = this.GenoLevel3Frame.Value;
-            this.numericUpDown114.Value = this.GenoLevel4Frame.Value;
-            this.numericUpDown112.Value = this.GenoChargeOverflow.Value;
+            this.timingGeno2Frame.Value = spell.ChargeSpellStartLevel2;
+            this.timingGeno3Frame.Value = spell.ChargeSpellStartLevel3;
+            this.timingGeno4Frame.Value = spell.ChargeSpellStartLevel4;
+            this.timingGenoOverflow.Value = spell.ChargeSpellOverflow;
         }
         private void RefreshTimingFireballSpells()
         {
-            this.numericUpDown106.Value = spell.FireballSpellRange;
-            this.numericUpDown105.Value = spell.FireballSpellOrbs;
+            this.timingFireballSpan.Value = spell.FireballSpellRange;
+            this.timingFireballMax.Value = spell.FireballSpellOrbs;
         }
         private void RefreshTimingRotaionSpells()
         {
-            this.numericUpDown104.Value = spell.RotationSpellStart;
-            this.numericUpDown103.Value = spell.RotationSpellMax;
+            this.timingRotationStart.Value = spell.RotationSpellStart;
+            this.timingRotationMax.Value = spell.RotationSpellMax;
         }
         private void RefreshTimingRapidSpellMax()
         {
-            this.numericUpDown102.Value = spell.RapidSpellMax;
+            this.timingRapid.Value = spell.RapidSpellMax;
         }
         private void RefreshTimingMultipleTiming()
         {
-            this.instanceNumberName.Items.Clear();
+            this.timingInstanceNumber.Items.Clear();
             if (index == 2 || index == 4)
             {
                 int count = (index == 2) ? 14 : 17;
                 for (int i = 0; i < count; i++)
-                    this.instanceNumberName.Items.Add(
+                    this.timingInstanceNumber.Items.Add(
                         this.spellName.SelectedItem.ToString().Trim() + " " + i.ToString());
-                this.instanceNumberName.SelectedIndex = 0;
-                this.instanceNumberName.Enabled = true;
+                this.timingInstanceNumber.SelectedIndex = 0;
+                this.timingInstanceNumber.Enabled = true;
             }
             else
             {
-                this.instanceNumberName.Items.Add("");
-                this.instanceNumberName.SelectedIndex = 0;
-                this.instanceNumberName.Enabled = false;
+                this.timingInstanceNumber.Items.Add("");
+                this.timingInstanceNumber.SelectedIndex = 0;
+                this.timingInstanceNumber.Enabled = false;
             }
-            this.numericUpDown7.Value = spell.MultipleSpellInstanceMax;
-            this.numericUpDown8.Value = spell.MultipleSpellInstanceRange[instanceNumberName.SelectedIndex];
+            this.timingInstanceMax.Value = spell.MultipleSpellInstanceMax;
+            this.timingInstanceSpan.Value = spell.MultipleSpellInstanceRange[timingInstanceNumber.SelectedIndex];
         }
         private void InitializeStrings()
         {
@@ -317,15 +301,6 @@ namespace LAZYSHELL
             toolTip1.SetToolTip(this.textBoxSpellDescription,
                 "The description that appears in the lower-right corner of\n" +
                 "the overworld menu when the cursor is on the spell.");
-            toolTip1.SetToolTip(this.button34,
-                "Creates a break and starts a new line in the description.\n" +
-                "These must be inserted to prevent the text from\n" +
-                "overflowing past the sub-window's margins.\n\n" +
-                "Value is [1].");
-            toolTip1.SetToolTip(this.button33,
-                "Terminates the string from the place it is inserted and\n" +
-                "onward. All descriptions must end with a [0].\n\n" +
-                "Value is [0].");
             toolTip1.SetToolTip(this.spellTargetting,
                 "\"Other Targets\" will limit the target to a single ally or\n" +
                 "enemy. This must NOT be checked with \"Entire Party\".\n\n" +
@@ -361,15 +336,13 @@ namespace LAZYSHELL
                 "Magic Attack, and Magic Defense power by 50% (ie. it\n" +
                 "halves them).");
             // timing
-            toolTip1.SetToolTip(this.spell1TimingFrameSpan,
+            toolTip1.SetToolTip(this.timingOne,
                 "The # of frames from the start of the spell's animation \n" +
                 "when the user can trigger level 1 timing. The spell's damage \n" +
                 "will be increased by 50% if an ABXY button is pressed \n" +
                 "within this range. ");
-            toolTip1.SetToolTip(this.numericUpDown100,
-                toolTip1.GetToolTip(this.spell1TimingFrameSpan));
 
-            toolTip1.SetToolTip(this.spell2Level2FrameStart,
+            toolTip1.SetToolTip(this.timingTwoStart,
                 "The frame # from the start of the spell animation where the \n" +
                 "level 2 timing begins.\n" +
                 "\n" +
@@ -378,9 +351,7 @@ namespace LAZYSHELL
                 "from the start of the Jump animation (ie. when Mario jumps \n" +
                 "off the ground) the damage is increased by at least 100% \n" +
                 "(ie. doubled).");
-            toolTip1.SetToolTip(this.numericUpDown107,
-                toolTip1.GetToolTip(this.spell2Level2FrameStart));
-            toolTip1.SetToolTip(this.spell2Level2FrameEnd,
+            toolTip1.SetToolTip(this.timingTwoEnd,
                 "The frame # from the start of the spell animation when the \n" +
                 "level 2 timing ends.\n" +
                 "\n" +
@@ -389,9 +360,7 @@ namespace LAZYSHELL
                 "have passed from the start of the Jump animation (ie. \n" +
                 "when Mario jumps off the ground) the opportunity to \n" +
                 "increase the damage by 100% (ie. doubled) is gone.");
-            toolTip1.SetToolTip(this.numericUpDown110,
-                toolTip1.GetToolTip(this.spell2Level2FrameEnd));
-            toolTip1.SetToolTip(this.spell2Level1FrameEnd,
+            toolTip1.SetToolTip(this.timingOneEnd,
                 "The frame # from the start of the spell animation where the \n" +
                 "level 1 timing ends.\n" +
                 "\n" +
@@ -400,68 +369,58 @@ namespace LAZYSHELL
                 "have passed from the start of the Jump animation, the \n" +
                 "opportunity to time the attack for any damage increase is \n" +
                 "gone.");
-            toolTip1.SetToolTip(this.numericUpDown108,
-                toolTip1.GetToolTip(this.spell2Level1FrameEnd));
 
-            toolTip1.SetToolTip(this.GenoLevel2Frame,
+            toolTip1.SetToolTip(this.timingGeno2Frame,
                 "The frame # from the start of the spell animation when, if \n" +
                 "the button is held to this point, the damage is increased by \n" +
                 "at least 50%. This is by default around when the first red \n" +
                 "star appears on screen.");
-            toolTip1.SetToolTip(this.numericUpDown113,
-                toolTip1.GetToolTip(this.GenoLevel2Frame));
-            toolTip1.SetToolTip(this.GenoLevel3Frame,
+            toolTip1.SetToolTip(this.timingGeno3Frame,
                 "The frame # from the start of the spell animation when, if \n" +
                 "the button is held to this point, the damage is increased by \n" +
                 "at least 75%. This is by default around when the second \n" +
                 "red star appears on screen.");
-            toolTip1.SetToolTip(this.numericUpDown111,
-                toolTip1.GetToolTip(this.GenoLevel3Frame));
-            toolTip1.SetToolTip(this.GenoLevel4Frame,
+            toolTip1.SetToolTip(this.timingGeno4Frame,
                 "The frame # from the start of the spell animation when, if \n" +
                 "the button is held to this point, the damage is increased by \n" +
                 "at least 100%. This is by default around when the third red \n" +
                 "star appears on screen.");
-            toolTip1.SetToolTip(this.numericUpDown114,
-                toolTip1.GetToolTip(this.GenoLevel4Frame));
-            toolTip1.SetToolTip(this.GenoChargeOverflow,
+            toolTip1.SetToolTip(this.timingGenoOverflow,
                 "The frame # from the start of the spell animation when, if \n" +
                 "the button is held to this point and beyond, the damage \n" +
                 "\"overflows\" and is reset to the base value, ie. no damage \n" +
                 "increase.");
-            toolTip1.SetToolTip(this.numericUpDown112,
-                toolTip1.GetToolTip(this.GenoChargeOverflow));
 
-            toolTip1.SetToolTip(this.numericUpDown106,
+            toolTip1.SetToolTip(this.timingFireballSpan,
                 "The \"speed\" of the firing, or the # of frames the player \n" +
                 "must wait between button presses in order to \"fire\" another \n" +
                 "fireball.\n" +
                 "NOTE: values less than the default may cause the game to \n" +
                 "freeze if the button is consistently pressed for each frame \n" +
                 "span between fireballs.");
-            toolTip1.SetToolTip(this.numericUpDown105,
+            toolTip1.SetToolTip(this.timingFireballMax,
                 "The maximum number of orbs the player can fire before the \n" +
                 "spell is over. The accumulative damage is increased with \n" +
                 "each fireball, so lowering/raising this value will affect the \n" +
                 "maximum accumulative damage as well.");
 
-            toolTip1.SetToolTip(this.numericUpDown104,
+            toolTip1.SetToolTip(this.timingRotationStart,
                 "The frame # from the start of the spell animation when the \n" +
                 "player has the opportunity to rotate the directional pad to \n" +
                 "increase damage.");
-            toolTip1.SetToolTip(this.numericUpDown103,
+            toolTip1.SetToolTip(this.timingRotationMax,
                 "The maximum number of quarter rotations (a quarter \n" +
                 "rotation would be, for example, from DOWN to DOWN-LEFT \n" +
                 "to LEFT) allowed to increase damage. Raising/lowering this \n" +
                 "value will affect the maximum accumulative damage.");
 
-            toolTip1.SetToolTip(this.numericUpDown7,
+            toolTip1.SetToolTip(this.timingInstanceMax,
                 "The maximum number of times the player can execute \n" +
                 "another \"jump\" or \"star rain\" by timing it. Values above 127 \n" +
                 "will likely cause anomalies (ie. the spell caster might only be \n" +
                 "able to do 13 jumps, even if the maximum is set to 200 for \n" +
                 "example).");
-            toolTip1.SetToolTip(this.instanceNumberName,
+            toolTip1.SetToolTip(this.timingInstanceNumber,
                 "The instance selected. The rest of the instances have the \n" +
                 "same \"Instance Frame Duration\" as the last one in the list \n" +
                 "of instances. For example, Super Jump instances 14 \n" +
@@ -469,14 +428,14 @@ namespace LAZYSHELL
                 "as instance 13.\n" +
                 "NOTE: star rain's \"Instance Frame Duration\" is the same for \n" +
                 "all instances, so there isn't a list for them.");
-            toolTip1.SetToolTip(this.numericUpDown8,
+            toolTip1.SetToolTip(this.timingInstanceSpan,
                 "The # of frames before either Mario or the Star lands on \n" +
                 "the target that the player is able to time the spell to \n" +
                 "increment damage and allow another instance to be timed.\n" +
                 "NOTE: star rain's \"Instance Frame Duration\" is the same for \n" +
                 "all instances, so there isn't a list for them.");
 
-            toolTip1.SetToolTip(this.numericUpDown102,
+            toolTip1.SetToolTip(this.timingRapid,
                 "The maximum number of times the player can press an \n" +
                 "ABXY button to increase damage during the spell animation.");
         }
@@ -497,7 +456,7 @@ namespace LAZYSHELL
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.SpellNames,
                 Model.SpellNames.GetNumFromIndex(e.Index) < 64 ? Model.FontMenu : Model.FontDialogue,
-                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
+                Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
         }
         private void spellNameIcon_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -514,7 +473,7 @@ namespace LAZYSHELL
         }
         private void spellNameIcon_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Do.DrawIcon(sender, e, new MenuTextPreview(), 32, Model.FontMenu, Model.FontPaletteMenu.Palette, false, Model.MenuBackground_);
+            Do.DrawIcon(sender, e, new MenuTextPreview(), 32, Model.FontMenu, Model.FontPaletteMenu.Palettes[0], false, Model.MenuBG_);
         }
         private void textBoxSpellName_TextChanged(object sender, EventArgs e)
         {
@@ -567,18 +526,18 @@ namespace LAZYSHELL
 
             if (spell.EffectType == 0)
             {
-                this.label62.Text = "EFFECT <INFLICT>";
-                this.label61.Text = "STATUS <UP>";
+                this.groupBox8.Text = "Effect <INFLICT>";
+                this.groupBox9.Text = "Status <UP>";
             }
             else if (spell.EffectType == 1)
             {
-                this.label62.Text = "EFFECT <NULLIFY>";
-                this.label61.Text = "STATUS <DOWN>";
+                this.groupBox8.Text = "Effect <NULLIFY>";
+                this.groupBox9.Text = "Status <DOWN>";
             }
             else if (spell.EffectType == 2)
             {
-                this.label62.Text = "EFFECT <. . . .>";
-                this.label61.Text = "STATUS <. . . .>";
+                this.groupBox8.Text = "Effect <. . . .>";
+                this.groupBox9.Text = "Status <. . . .>";
             }
         }
         private void spellFunction_SelectedIndexChanged(object sender, EventArgs e)
@@ -676,19 +635,19 @@ namespace LAZYSHELL
         {
             if (spell.RawDescription == null)
                 return;
-            e.Graphics.DrawImage(Model.MenuBackground, 0, 0);
+            e.Graphics.DrawImage(Model.MenuBG, 0, 0);
             if (descriptionText == null)
                 SetDescriptionText();
             e.Graphics.DrawImage(descriptionText, 0, 0);
             if (descriptionFrame == null)
                 descriptionFrame = Do.PixelsToImage(
-                    Do.DrawMenuFrame(new Size(15, 8), Model.MenuFrame, Model.MenuFramePalette.Palette), 120, 64);
+                    Do.DrawMenuFrame(new Size(15, 8), Model.MenuFrameGraphics, Model.MenuFramePalette.Palette), 120, 64);
             e.Graphics.DrawImage(descriptionFrame, 0, 0);
         }
         private void SetDescriptionText()
         {
             int[] pixels = new MenuDescriptionPreview().GetPreview(
-                Model.FontDescription, Model.FontPaletteMenu.Palette, spell.RawDescription,
+                Model.FontDescription, Model.FontPaletteMenu.Palettes[0], spell.RawDescription,
                 new Size(120, 88), new Point(8, 8), 6);
             descriptionText = new Bitmap(Do.PixelsToImage(pixels, 120, 88));
             pictureBoxSpellDesc.Invalidate();
@@ -700,141 +659,101 @@ namespace LAZYSHELL
         // level 1 timing
         private void numericUpDown100_ValueChanged(object sender, EventArgs e)
         {
-            this.spell1TimingFrameSpan.Value = (int)this.numericUpDown100.Value;
-            this.spell.OneLevelSpellSpan = (byte)numericUpDown100.Value;
-        }
-        private void spell1TimingFrameSpan_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown100.Value = this.spell1TimingFrameSpan.Value;
+            this.spell.OneLevelSpellSpan = (byte)timingOne.Value;
         }
         // level 2 timing
         private void numericUpDown107_ValueChanged(object sender, EventArgs e)
         {
-            this.spell2Level2FrameStart.Value = (int)this.numericUpDown107.Value;
-            this.spell.TwoLevelSpellStartLevel2 = (byte)numericUpDown107.Value;
+            this.spell.TwoLevelSpellStartLevel2 = (byte)timingTwoStart.Value;
             if (index == 6)
-                this.spells[7].TwoLevelSpellStartLevel2 = (byte)numericUpDown107.Value;
+                this.spells[7].TwoLevelSpellStartLevel2 = (byte)timingTwoStart.Value;
             if (index == 7)
-                this.spells[6].TwoLevelSpellStartLevel2 = (byte)numericUpDown107.Value;
-        }
-        private void spell2Level2FrameStart_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown107.Value = (int)this.spell2Level2FrameStart.Value;
+                this.spells[6].TwoLevelSpellStartLevel2 = (byte)timingTwoStart.Value;
         }
         private void numericUpDown110_ValueChanged(object sender, EventArgs e)
         {
-            this.spell2Level2FrameEnd.Value = (int)this.numericUpDown110.Value;
-            this.spell.TwoLevelSpellEndLevel2 = (byte)numericUpDown110.Value;
+            this.spell.TwoLevelSpellEndLevel2 = (byte)timingTwoEnd.Value;
             if (index == 6)
-                this.spells[7].TwoLevelSpellEndLevel2 = (byte)numericUpDown110.Value;
+                this.spells[7].TwoLevelSpellEndLevel2 = (byte)timingTwoEnd.Value;
             if (index == 7)
-                this.spells[6].TwoLevelSpellEndLevel2 = (byte)numericUpDown110.Value;
-        }
-        private void spell2Level2FrameEnd_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown110.Value = this.spell2Level2FrameEnd.Value;
+                this.spells[6].TwoLevelSpellEndLevel2 = (byte)timingTwoEnd.Value;
         }
         private void numericUpDown108_ValueChanged(object sender, EventArgs e)
         {
-            this.spell2Level1FrameEnd.Value = (int)this.numericUpDown108.Value;
-            this.spell.TwoLevelSpellEndLevel1 = (byte)numericUpDown108.Value;
+            this.spell.TwoLevelSpellEndLevel1 = (byte)timingOneEnd.Value;
             if (index == 6)
-                this.spells[7].TwoLevelSpellEndLevel1 = (byte)numericUpDown108.Value;
+                this.spells[7].TwoLevelSpellEndLevel1 = (byte)timingOneEnd.Value;
             if (index == 7)
-                this.spells[6].TwoLevelSpellEndLevel1 = (byte)numericUpDown108.Value;
-        }
-        private void spell2Level1FrameEnd_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown108.Value = this.spell2Level1FrameEnd.Value;
+                this.spells[6].TwoLevelSpellEndLevel1 = (byte)timingOneEnd.Value;
         }
         // charge spell timing
-        private void numericUpDown113_ValueChanged(object sender, EventArgs e)
+        private void timingGeno2Frame_ValueChanged(object sender, EventArgs e)
         {
-            this.GenoLevel2Frame.Value = (int)this.numericUpDown113.Value;
-            this.spells[16].ChargeSpellStartLevel2 = (byte)numericUpDown113.Value;
-            this.spells[19].ChargeSpellStartLevel2 = (byte)numericUpDown113.Value;
-            this.spells[20].ChargeSpellStartLevel2 = (byte)numericUpDown113.Value;
+            this.spells[16].ChargeSpellStartLevel2 = (byte)timingGeno2Frame.Value;
+            this.spells[19].ChargeSpellStartLevel2 = (byte)timingGeno2Frame.Value;
+            this.spells[20].ChargeSpellStartLevel2 = (byte)timingGeno2Frame.Value;
         }
-        private void GenoLevel2Frame_ValueChanged(object sender, EventArgs e)
+        private void timingGeno3Frame_ValueChanged(object sender, EventArgs e)
         {
-            this.numericUpDown113.Value = this.GenoLevel2Frame.Value;
-        }
-        private void numericUpDown111_ValueChanged(object sender, EventArgs e)
-        {
-            this.GenoLevel3Frame.Value = (int)this.numericUpDown111.Value;
-            this.spells[16].ChargeSpellStartLevel3 = (byte)numericUpDown111.Value;
-            this.spells[19].ChargeSpellStartLevel3 = (byte)numericUpDown111.Value;
-            this.spells[20].ChargeSpellStartLevel3 = (byte)numericUpDown111.Value;
-        }
-        private void GenoLevel3Frame_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown111.Value = this.GenoLevel3Frame.Value;
+            this.spells[16].ChargeSpellStartLevel3 = (byte)timingGeno3Frame.Value;
+            this.spells[19].ChargeSpellStartLevel3 = (byte)timingGeno3Frame.Value;
+            this.spells[20].ChargeSpellStartLevel3 = (byte)timingGeno3Frame.Value;
         }
         private void numericUpDown114_ValueChanged(object sender, EventArgs e)
         {
-            this.GenoLevel4Frame.Value = (int)this.numericUpDown114.Value;
-            this.spells[16].ChargeSpellStartLevel4 = (byte)numericUpDown114.Value;
-            this.spells[19].ChargeSpellStartLevel4 = (byte)numericUpDown114.Value;
-            this.spells[20].ChargeSpellStartLevel4 = (byte)numericUpDown114.Value;
-        }
-        private void GenoLevel4Frame_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown114.Value = this.GenoLevel4Frame.Value;
+            this.spells[16].ChargeSpellStartLevel4 = (byte)timingGeno4Frame.Value;
+            this.spells[19].ChargeSpellStartLevel4 = (byte)timingGeno4Frame.Value;
+            this.spells[20].ChargeSpellStartLevel4 = (byte)timingGeno4Frame.Value;
         }
         private void numericUpDown112_ValueChanged(object sender, EventArgs e)
         {
-            this.GenoChargeOverflow.Value = (int)this.numericUpDown112.Value;
-            this.spells[16].ChargeSpellOverflow = (byte)numericUpDown112.Value;
-            this.spells[19].ChargeSpellOverflow = (byte)numericUpDown112.Value;
-            this.spells[20].ChargeSpellOverflow = (byte)numericUpDown112.Value;
-        }
-        private void GenoChargeOverflow_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown112.Value = this.GenoChargeOverflow.Value;
+            this.spells[16].ChargeSpellOverflow = (byte)timingGenoOverflow.Value;
+            this.spells[19].ChargeSpellOverflow = (byte)timingGenoOverflow.Value;
+            this.spells[20].ChargeSpellOverflow = (byte)timingGenoOverflow.Value;
         }
         // fireball timing
         private void numericUpDown106_ValueChanged(object sender, EventArgs e)
         {
-            this.spell.FireballSpellRange = (byte)numericUpDown106.Value;
+            this.spell.FireballSpellRange = (byte)timingFireballSpan.Value;
         }
         private void numericUpDown105_ValueChanged(object sender, EventArgs e)
         {
-            this.spell.FireballSpellOrbs = (byte)numericUpDown105.Value;
+            this.spell.FireballSpellOrbs = (byte)timingFireballMax.Value;
         }
         // rotation timing
         private void numericUpDown104_ValueChanged(object sender, EventArgs e)
         {
-            this.spell.RotationSpellStart = (byte)numericUpDown104.Value;
+            this.spell.RotationSpellStart = (byte)timingRotationStart.Value;
         }
         private void numericUpDown103_ValueChanged(object sender, EventArgs e)
         {
-            this.spell.RotationSpellMax = (byte)numericUpDown103.Value;
+            this.spell.RotationSpellMax = (byte)timingRotationMax.Value;
         }
         // multiple instance timing
         private void numericUpDown7_ValueChanged(object sender, EventArgs e)
         {
-            this.spell.MultipleSpellInstanceMax = (byte)numericUpDown7.Value;
+            this.spell.MultipleSpellInstanceMax = (byte)timingInstanceMax.Value;
         }
         private void instanceNumberName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.numericUpDown8.Value = spell.MultipleSpellInstanceRange[instanceNumberName.SelectedIndex];
+            this.timingInstanceSpan.Value = spell.MultipleSpellInstanceRange[timingInstanceNumber.SelectedIndex];
         }
         private void instanceNumberName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            string[] array = Lists.Convert(instanceNumberName.Items);
+            string[] array = Lists.Convert(timingInstanceNumber.Items);
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), array, Model.FontMenu,
-                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
+                Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
         }
         private void numericUpDown8_ValueChanged(object sender, EventArgs e)
         {
-            this.spell.MultipleSpellInstanceRange[instanceNumberName.SelectedIndex] = (byte)numericUpDown8.Value;
+            this.spell.MultipleSpellInstanceRange[timingInstanceNumber.SelectedIndex] = (byte)timingInstanceSpan.Value;
         }
         // rapid spell timing
         private void numericUpDown102_ValueChanged(object sender, EventArgs e)
         {
-            this.spells[11].RapidSpellMax = (byte)numericUpDown102.Value;
-            this.spells[15].RapidSpellMax = (byte)numericUpDown102.Value;
+            this.spells[11].RapidSpellMax = (byte)timingRapid.Value;
+            this.spells[15].RapidSpellMax = (byte)timingRapid.Value;
         }
         #endregion
     }

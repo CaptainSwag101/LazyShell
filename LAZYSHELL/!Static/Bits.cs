@@ -53,7 +53,7 @@ namespace LAZYSHELL
             }
             return ret;
         }
-        public static ushort GetShortBigEndian(byte[] data, int offset)
+        public static ushort GetShortReversed(byte[] data, int offset)
         {
             ushort ret = 0;
             try
@@ -65,6 +65,23 @@ namespace LAZYSHELL
             catch
             {
                 MessageBox.Show("Error reading short from byte[] data at offset " + offset + " \n data size: " + data.Length, "LAZY SHELL");
+                throw new Exception();
+            }
+            return ret;
+        }
+        public static int GetInteger(byte[] data, int offset, int length)
+        {
+            int ret = 0;
+            try
+            {
+                for (int i = 0, p = length - 1; i < length && p >= 0; i++, p--)
+                    ret += (ushort)(data[offset + length - 1] << (p * 8));
+                ret += (ushort)(data[offset]);
+            }
+
+            catch
+            {
+                MessageBox.Show("Error reading integer from byte[] data at offset " + offset + " \n data size: " + data.Length, "LAZY SHELL");
                 throw new Exception();
             }
             return ret;
@@ -259,19 +276,35 @@ namespace LAZYSHELL
                 throw new Exception();
             }
         }
-        public static void SetByteArray(byte[] data, int offset, byte[] toSet)
+        public static void SetByteBits(byte[] data, int offset, byte set, byte check)
+        {
+            // "check" are the bits to set exclusively
+            try
+            {
+                // clear the bits to set
+                data[offset] &= (byte)(check ^ 0xFF);
+
+                // set the byte bits
+                data[offset] |= (byte)set;
+            }
+            catch
+            {
+
+            }
+        }
+        public static void SetByteArray(byte[] data, int offset, byte[] src)
         {
             try
             {
-                for (int i = 0; i < toSet.Length && i < data.Length; i++)
+                for (int i = 0; i < src.Length && i < data.Length; i++)
                 {
-                    data[offset + i] = toSet[i];
+                    data[offset + i] = src[i];
                 }
             }
 
             catch
             {
-                MessageBox.Show("Error Setting byte[] at " + offset + "\ndata size: " + data.Length + "\nsubarray size: " + toSet.Length + "\nPlease report this", "LAZY SHELL");
+                MessageBox.Show("Error Setting byte[] at " + offset + "\ndata size: " + data.Length + "\nsubarray size: " + src.Length + "\nPlease report this", "LAZY SHELL");
                 throw new Exception();
             }
 

@@ -26,6 +26,8 @@ namespace LAZYSHELL
         private ItemsEditor items; public ItemsEditor Items { get { return items; } }
         private Levels levels; public Levels Levels { get { return levels; } }
         private Title mainTitle; public Title MainTitle { get { return mainTitle; } }
+        private MenusEditor menus; public MenusEditor Menus { get { return menus; } }
+        private MiniGames miniGames; public MiniGames MiniGames { get { return miniGames; } }
         private Monsters monsters; public Monsters Monsters { get { return monsters; } }
         private EventScripts eventScripts; public EventScripts EventScripts { get { return eventScripts; } }
         private Sprites sprites; public Sprites Sprites { get { return sprites; } }
@@ -331,6 +333,30 @@ namespace LAZYSHELL
                 Cursor.Current = Cursors.Arrow;
             }
             mainTitle.BringToFront();
+        }
+        public void CreateMenusWindow()
+        {
+            if (menus == null || !menus.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                menus = new MenusEditor();
+                if (dockEditors) Do.AddControl(form1.Panel2, menus);
+                else menus.Show();
+                Cursor.Current = Cursors.Arrow;
+            }
+            menus.BringToFront();
+        }
+        public void CreateMiniGamesWindow()
+        {
+            if (miniGames == null || !miniGames.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                miniGames = new MiniGames();
+                if (dockEditors) Do.AddControl(form1.Panel2, miniGames);
+                else miniGames.Show();
+                Cursor.Current = Cursors.Arrow;
+            }
+            miniGames.BringToFront();
         }
         public void CreateSpritesWindow()
         {

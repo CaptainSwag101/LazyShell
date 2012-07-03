@@ -33,13 +33,13 @@ namespace LAZYSHELL.Undo
             commands = new Command[initialSize];
             redoStack = new Stack<Command>();
         }
-        public void SetTilemaps(TileMap tilemap)
+        public void SetTilemaps(Tilemap tilemap)
         {
             foreach (TileMapEditCommand command in commands)
                 if (command != null)
                     command.Tilemap = tilemap;
         }
-        public void SetSolidityMaps(Map tilemap)
+        public void SetSolidityMaps(Tilemap tilemap)
         {
             foreach (SolidityEditCommand command in commands)
                 if (command != null)

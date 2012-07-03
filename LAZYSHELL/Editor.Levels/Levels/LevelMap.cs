@@ -26,13 +26,13 @@ namespace LAZYSHELL
         private byte graphicSetD; public byte GraphicSetD { get { return graphicSetD; } set { graphicSetD = value; } }
         private byte graphicSetE; public byte GraphicSetE { get { return graphicSetE; } set { graphicSetE = value; } }
 
-        private byte tileSetL1; public byte TileSetL1 { get { return tileSetL1; } set { tileSetL1 = value; } }
-        private byte tileSetL2; public byte TileSetL2 { get { return tileSetL2; } set { tileSetL2 = value; } }
+        private byte tileSetL1; public byte TilesetL1 { get { return tileSetL1; } set { tileSetL1 = value; } }
+        private byte tileSetL2; public byte TilesetL2 { get { return tileSetL2; } set { tileSetL2 = value; } }
 
         private bool topPriorityL3; public bool TopPriorityL3 { get { return topPriorityL3; } set { topPriorityL3 = value; } }
 
-        private byte tileMapL1; public byte TileMapL1 { get { return tileMapL1; } set { tileMapL1 = value; } }
-        private byte tileMapL2; public byte TileMapL2 { get { return tileMapL2; } set { tileMapL2 = value; } }
+        private byte tileMapL1; public byte TilemapL1 { get { return tileMapL1; } set { tileMapL1 = value; } }
+        private byte tileMapL2; public byte TilemapL2 { get { return tileMapL2; } set { tileMapL2 = value; } }
         private byte solidityMap; public byte SolidityMap { get { return solidityMap; } set { solidityMap = value; } }
 
         private byte paletteSet; public byte PaletteSet { get { return paletteSet; } set { paletteSet = value; } }
@@ -43,8 +43,8 @@ namespace LAZYSHELL
         private int[] paletteColorBlue = new int[7 * 16]; public int[] PaletteColorBlue { get { return paletteColorBlue; } set { paletteColorBlue = value; } }
 
         private byte graphicSetL3; public byte GraphicSetL3 { get { return graphicSetL3; } set { graphicSetL3 = value; } }
-        private byte tileSetL3; public byte TileSetL3 { get { return tileSetL3; } set { tileSetL3 = value; } }
-        private byte tileMapL3; public byte TileMapL3 { get { return tileMapL3; } set { tileMapL3 = value; } }
+        private byte tileSetL3; public byte TilesetL3 { get { return tileSetL3; } set { tileSetL3 = value; } }
+        private byte tileMapL3; public byte TilemapL3 { get { return tileMapL3; } set { tileMapL3 = value; } }
 
         private byte battlefield; public byte Battlefield { get { return battlefield; } set { battlefield = value; } }
         public int PaletteSetOffset { get { return GetPaletteSetOffset(); } }

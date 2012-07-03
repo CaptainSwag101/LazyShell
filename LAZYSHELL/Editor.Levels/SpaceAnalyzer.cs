@@ -45,7 +45,7 @@ namespace LAZYSHELL
 
             for (; index < 109; index++, bankIndex++)
             {
-                size = Comp.Compress(Model.TileMaps[index], null);
+                size = Comp.Compress(Model.Tilemaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -76,7 +76,7 @@ namespace LAZYSHELL
 
             for (; index < 163; index++, bankIndex++)
             {
-                size = Comp.Compress(Model.TileMaps[index], null);
+                size = Comp.Compress(Model.Tilemaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -107,7 +107,7 @@ namespace LAZYSHELL
 
             for (; index < 219; index++, bankIndex++)
             {
-                size = Comp.Compress(Model.TileMaps[index], null);
+                size = Comp.Compress(Model.Tilemaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -138,7 +138,7 @@ namespace LAZYSHELL
 
             for (; index < 275; index++, bankIndex++)
             {
-                size = Comp.Compress(Model.TileMaps[index], null);
+                size = Comp.Compress(Model.Tilemaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;
@@ -169,7 +169,7 @@ namespace LAZYSHELL
 
             for (; index < 309; index++, bankIndex++)
             {
-                size = Comp.Compress(Model.TileMaps[index], null);
+                size = Comp.Compress(Model.Tilemaps[index], null);
                 if (offset + size > 0xFFFF) // Do we pass the bounds of this bank?
                 {
                     bg = Color.Red;

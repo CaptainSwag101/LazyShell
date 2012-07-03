@@ -12,8 +12,8 @@ namespace LAZYSHELL
     public partial class TileEditor : Form
     {
         private Delegate update;
-        private Tile16x16 tile;
-        private Tile16x16 tileBackup;
+        private Tile tile;
+        private Tile tileBackup;
         private byte[] graphics;
         private PaletteSet paletteSet;
         private byte format;
@@ -31,7 +31,7 @@ namespace LAZYSHELL
         /// <param name="paletteSet">The palette set used by the tile.</param>
         /// <param name="format">Either 0x10 or 0x20 for 2bpp or 4bpp format, respectively.</param>
         /// <param name="sender">The control that was double-clicked to open the tile editor.</param>
-        public TileEditor(Delegate update, Tile16x16 tile, byte[] graphics, PaletteSet paletteSet, byte format, bool disableattr)
+        public TileEditor(Delegate update, Tile tile, byte[] graphics, PaletteSet paletteSet, byte format, bool disableattr)
         {
             this.update = update;
             this.tile = tile;
@@ -42,7 +42,7 @@ namespace LAZYSHELL
             InitializeTile();
             subtileStatus.Enabled = !disableattr;
         }
-        public TileEditor(Delegate update, Tile16x16 tile, byte[] graphics, PaletteSet paletteSet, byte format)
+        public TileEditor(Delegate update, Tile tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {
             this.update = update;
             this.tile = tile;
@@ -52,7 +52,7 @@ namespace LAZYSHELL
             this.format = format;
             InitializeTile();
         }
-        public void Reload(Delegate update, Tile16x16 tile, byte[] graphics, PaletteSet paletteSet, byte format)
+        public void Reload(Delegate update, Tile tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {
             this.update = update;
             this.tile = tile;
@@ -82,9 +82,9 @@ namespace LAZYSHELL
         {
             updatingSubtile = true;
 
-            subtileIndex.Value = tile.Subtiles[currentSubtile].TileIndex;
-            subtilePalette.Value = tile.Subtiles[currentSubtile].PaletteIndex;
-            subtileStatus.SetItemChecked(0, tile.Subtiles[currentSubtile].PriorityOne);
+            subtileIndex.Value = tile.Subtiles[currentSubtile].Index;
+            subtilePalette.Value = tile.Subtiles[currentSubtile].Palette;
+            subtileStatus.SetItemChecked(0, tile.Subtiles[currentSubtile].Priority1);
             subtileStatus.SetItemChecked(1, tile.Subtiles[currentSubtile].Mirror);
             subtileStatus.SetItemChecked(2, tile.Subtiles[currentSubtile].Invert);
 
@@ -129,9 +129,9 @@ namespace LAZYSHELL
             subtileImage = new Bitmap(Do.PixelsToImage(pixels, 64, 64));
             pictureBoxSubtile.Invalidate();
         }
-        private Tile8x8 CreateNewSubtile()
+        private Subtile CreateNewSubtile()
         {
-            return Do.DrawTile8x8((ushort)this.subtileIndex.Value,
+            return Do.DrawSubtile((ushort)this.subtileIndex.Value,
                 (byte)this.subtilePalette.Value,
                 this.subtileStatus.GetItemChecked(0),
                 this.subtileStatus.GetItemChecked(1),

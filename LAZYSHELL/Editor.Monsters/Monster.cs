@@ -639,14 +639,14 @@ namespace LAZYSHELL
 
                 palette[i] = Color.FromArgb(r, g, b).ToArgb();
             }
-            Tile8x8 temp;
-            Tile16x16 cursor = new Tile16x16(0);
+            Subtile temp;
+            Tile cursor = new Tile(0);
             for (int i = 0; i < 4; i++)
             {
                 offset = 0x03F980 + ((i % 2) * 0x20);
                 if (i > 1)
                     offset += 0x200;
-                temp = new Tile8x8(i, Bits.GetByteArray(data, offset, 0x20), 0, palette, false, false, false, false);
+                temp = new Subtile(i, Bits.GetByteArray(data, offset, 0x20), 0, palette, false, false, false, false);
                 cursor.Subtiles[i] = temp;
             }
             return cursor.Pixels;

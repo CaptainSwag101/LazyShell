@@ -1470,7 +1470,7 @@ namespace LAZYSHELL
             "red spark",
             "rainbow rain",
             "mushroom spores",
-            "Lazy Shell (Heavy Troopa)",
+            "Lazy shell, Heavy Troopa, nok-nok shell",
             "Orange Lazy Shell",
             "Green Lazy Shell (Tub-O-Troopa)",
             "Snowy eyes",
@@ -2365,7 +2365,7 @@ namespace LAZYSHELL
             "Belome Temple, Area 08 (Belome's room)",
             "ENDING CREDITS: Nimbus Land, Prince Mallow",
             "Land's End secret underground, Area 01 (leads to Kero Sewers)",
-            "Moleville Mines, Area 17 (Punchinello's room)",
+            "Moleville Mines, Area 17 (Punchinello's room, after battle)",
             "Moleville Mines, Area 11 (bombed room w/singing Moles)",
             "Moleville Mines, Area 04 (w/trampoline)",
             "Moleville Mines, Area 02",
@@ -2383,7 +2383,7 @@ namespace LAZYSHELL
             "Moleville Mines, Area 12 (2-level room, leads to long minecart tracks room)",
             "Moleville Mines, Area 14 (2-level room from long minecart tracks room)",
             "Moleville Mines, Area 16 (large save-point room w/four Bob-ombs)",
-            "Moleville Mines, Area 17 (Punchinello's room)",
+            "Moleville Mines, Area 17 (Punchinello's room, before battle)",
             "Moleville Mines, Area 19 (from outside after paying)",
             "GAME INTRO: Booster Tower, 7F (parachuting Spookums)",
             "____unmapped house room",
@@ -2549,9 +2549,9 @@ namespace LAZYSHELL
             "Bowser's Keep, Area 06 (save point w/Croco shop)",
             "Bowser's Keep, Area 05 (dark tunnel, after throne room)",
             "Bowser's Keep, Area 08 (room with 6 doors)",
+            "Bowser's Keep 6-door, Action Room 2-C (very slow moving circling platforms)",
             "Bowser's Keep 6-door, Action Room 1-C (Gorilla throwing barrels)",
             "Bowser's Keep 6-door, Action Room 2-B (cannonball riding)",
-            "Bowser's Keep 6-door, Action Room 2-C (very slow moving circling platforms)",
             "Bowser's Keep 6-door, Action Room 1-B (moving platforms)",
             "Bowser's Keep 6-door, Battle Room 1-A (1st fight: Terra Cotta)",
             "Bowser's Keep 6-door, Battle Room 1-B (1st fight: Alley Rat)",
@@ -2603,7 +2603,7 @@ namespace LAZYSHELL
             "ENDING CREDITS: Marrymore Chapel, Booster wedding Valentina",
             "Smithy Factory, Area 08 (Trampoline after Count Down)",
             "Smithy Factory, Area 14 (w/save point)",
-            "Factory Grounds, Smithy's Pad" 
+            "Factory Grounds, Smithy's Pad"
         };
         public static string[] GraphicSetNames = new string[]
         {
@@ -4024,7 +4024,7 @@ namespace LAZYSHELL
                 case 2:
                     return new string[] 
                     { 
-                    "Activate party member...",			// 0x36
+                    "Add/remove party member...",			// 0x36
                     "Equip item to character...",			// 0x54
                     "HP -= mem $7000, character...",			// 0x56
 

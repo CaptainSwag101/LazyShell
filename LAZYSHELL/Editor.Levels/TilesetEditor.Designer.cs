@@ -1,6 +1,6 @@
 ﻿namespace LAZYSHELL
 {
-    partial class LevelsTileset
+    partial class TilesetEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelsTileset));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TilesetEditor));
             this.pictureBoxTilesetL1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,15 +90,15 @@
             this.pictureBoxTilesetL1.Size = new System.Drawing.Size(256, 512);
             this.pictureBoxTilesetL1.TabIndex = 1;
             this.pictureBoxTilesetL1.TabStop = false;
-            this.pictureBoxTilesetL1.MouseLeave += new System.EventHandler(this.pictureBoxTileset_MouseLeave);
-            this.pictureBoxTilesetL1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxTileset_PreviewKeyDown);
-            this.pictureBoxTilesetL1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseMove);
-            this.pictureBoxTilesetL1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDoubleClick);
-            this.pictureBoxTilesetL1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseClick);
-            this.pictureBoxTilesetL1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
             this.pictureBoxTilesetL1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTileset_Paint);
-            this.pictureBoxTilesetL1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
+            this.pictureBoxTilesetL1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseClick);
+            this.pictureBoxTilesetL1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDoubleClick);
+            this.pictureBoxTilesetL1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
             this.pictureBoxTilesetL1.MouseEnter += new System.EventHandler(this.pictureBoxTileset_MouseEnter);
+            this.pictureBoxTilesetL1.MouseLeave += new System.EventHandler(this.pictureBoxTileset_MouseLeave);
+            this.pictureBoxTilesetL1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseMove);
+            this.pictureBoxTilesetL1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
+            this.pictureBoxTilesetL1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxTileset_PreviewKeyDown);
             // 
             // contextMenuStrip2
             // 
@@ -118,7 +118,7 @@
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip2.ShowImageMargin = false;
             this.contextMenuStrip2.Size = new System.Drawing.Size(134, 214);
-            this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(contextMenuStrip2_Opening);
+            this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
             // 
             // cutToolStripMenuItem2
             // 
@@ -360,25 +360,25 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 46);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(272, 544);
+            this.tabControl1.Size = new System.Drawing.Size(272, 547);
             this.tabControl1.TabIndex = 444;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             this.tabControl1.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Deselecting);
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabPage1.Controls.Add(this.pictureBoxTilesetL1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(264, 516);
+            this.tabPage1.Size = new System.Drawing.Size(264, 520);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "LAYER 1";
             // 
@@ -386,10 +386,10 @@
             // 
             this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabPage2.Controls.Add(this.pictureBoxTilesetL2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 23);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(264, 516);
+            this.tabPage2.Size = new System.Drawing.Size(260, 516);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "LAYER 2";
             // 
@@ -403,24 +403,24 @@
             this.pictureBoxTilesetL2.Size = new System.Drawing.Size(256, 512);
             this.pictureBoxTilesetL2.TabIndex = 2;
             this.pictureBoxTilesetL2.TabStop = false;
-            this.pictureBoxTilesetL2.MouseLeave += new System.EventHandler(this.pictureBoxTileset_MouseLeave);
-            this.pictureBoxTilesetL2.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxTileset_PreviewKeyDown);
-            this.pictureBoxTilesetL2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseMove);
-            this.pictureBoxTilesetL2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDoubleClick);
-            this.pictureBoxTilesetL2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseClick);
-            this.pictureBoxTilesetL2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
             this.pictureBoxTilesetL2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTileset_Paint);
-            this.pictureBoxTilesetL2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
+            this.pictureBoxTilesetL2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseClick);
+            this.pictureBoxTilesetL2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDoubleClick);
+            this.pictureBoxTilesetL2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
             this.pictureBoxTilesetL2.MouseEnter += new System.EventHandler(this.pictureBoxTileset_MouseEnter);
+            this.pictureBoxTilesetL2.MouseLeave += new System.EventHandler(this.pictureBoxTileset_MouseLeave);
+            this.pictureBoxTilesetL2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseMove);
+            this.pictureBoxTilesetL2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
+            this.pictureBoxTilesetL2.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxTileset_PreviewKeyDown);
             // 
             // tabPage3
             // 
             this.tabPage3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabPage3.Controls.Add(this.pictureBoxTilesetL3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Location = new System.Drawing.Point(4, 23);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(264, 516);
+            this.tabPage3.Size = new System.Drawing.Size(260, 516);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "LAYER 3";
             // 
@@ -434,15 +434,15 @@
             this.pictureBoxTilesetL3.Size = new System.Drawing.Size(256, 512);
             this.pictureBoxTilesetL3.TabIndex = 2;
             this.pictureBoxTilesetL3.TabStop = false;
-            this.pictureBoxTilesetL3.MouseLeave += new System.EventHandler(this.pictureBoxTileset_MouseLeave);
-            this.pictureBoxTilesetL3.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxTileset_PreviewKeyDown);
-            this.pictureBoxTilesetL3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseMove);
-            this.pictureBoxTilesetL3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDoubleClick);
-            this.pictureBoxTilesetL3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseClick);
-            this.pictureBoxTilesetL3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
             this.pictureBoxTilesetL3.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTileset_Paint);
-            this.pictureBoxTilesetL3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
+            this.pictureBoxTilesetL3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseClick);
+            this.pictureBoxTilesetL3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDoubleClick);
+            this.pictureBoxTilesetL3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
             this.pictureBoxTilesetL3.MouseEnter += new System.EventHandler(this.pictureBoxTileset_MouseEnter);
+            this.pictureBoxTilesetL3.MouseLeave += new System.EventHandler(this.pictureBoxTileset_MouseLeave);
+            this.pictureBoxTilesetL3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseMove);
+            this.pictureBoxTilesetL3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
+            this.pictureBoxTilesetL3.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxTileset_PreviewKeyDown);
             // 
             // lockEditing
             // 
@@ -457,15 +457,15 @@
             this.lockEditing.TabIndex = 445;
             this.lockEditing.Text = "Lock tileset editing";
             this.lockEditing.UseVisualStyleBackColor = true;
-            this.lockEditing.CheckedChanged += new System.EventHandler(lockEditing_CheckedChanged);
+            this.lockEditing.CheckedChanged += new System.EventHandler(this.lockEditing_CheckedChanged);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.buttonUpdate);
             this.panel1.Controls.Add(this.autoUpdate);
             this.panel1.Controls.Add(this.lockEditing);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 590);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 593);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(272, 26);
             this.panel1.TabIndex = 446;
@@ -473,9 +473,9 @@
             // buttonUpdate
             // 
             this.buttonUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUpdate.Location = new System.Drawing.Point(201, 0);
+            this.buttonUpdate.Location = new System.Drawing.Point(203, 0);
             this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(71, 26);
+            this.buttonUpdate.Size = new System.Drawing.Size(69, 26);
             this.buttonUpdate.TabIndex = 447;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = true;
@@ -487,7 +487,7 @@
             this.autoUpdate.Dock = System.Windows.Forms.DockStyle.Left;
             this.autoUpdate.Location = new System.Drawing.Point(117, 0);
             this.autoUpdate.Name = "autoUpdate";
-            this.autoUpdate.Size = new System.Drawing.Size(84, 26);
+            this.autoUpdate.Size = new System.Drawing.Size(86, 26);
             this.autoUpdate.TabIndex = 446;
             this.autoUpdate.Text = "Auto update";
             this.autoUpdate.UseVisualStyleBackColor = true;
@@ -503,21 +503,22 @@
             this.labelTileIndex.Text = "Tile index: 0 ($00)";
             this.labelTileIndex.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // LevelsTileset
+            // TilesetEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 621);
+            this.ClientSize = new System.Drawing.Size(272, 619);
             this.ControlBox = false;
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.labelTileIndex);
             this.Controls.Add(this.toolStrip1);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "LevelsTileset";
+            this.Name = "TilesetEditor";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL1)).EndInit();

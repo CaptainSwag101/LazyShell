@@ -150,7 +150,6 @@
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(308, 25);
             this.toolStrip1.TabIndex = 397;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripLabel2
             // 
@@ -220,7 +219,6 @@
             // 
             // toolStrip2
             // 
-            this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newFrame,
             this.deleteFrame,
@@ -234,7 +232,6 @@
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(386, 25);
             this.toolStrip2.TabIndex = 442;
-            this.toolStrip2.Text = "toolStrip2";
             // 
             // newFrame
             // 

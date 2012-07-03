@@ -12,7 +12,6 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
-
         private delegate void Function();
         private Dialogues dialoguesEditor;
         private State state = State.Instance;
@@ -293,21 +292,21 @@ namespace LAZYSHELL
         {
             if (paletteEditor == null)
             {
-                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), fontPalette, 2, 1);
+                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), fontPalette, 2, 1,1);
                 paletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditor.Reload(new Function(PaletteUpdate), fontPalette, 2, 1);
+                paletteEditor.Reload(new Function(PaletteUpdate), fontPalette, 2, 1,1);
         }
         public void LoadPaletteMenuEditor()
         {
             if (paletteEditorMenu == null)
             {
-                paletteEditorMenu = new PaletteEditor(new Function(PaletteMenuUpdate), Model.FontPaletteMenu, 1, 0);
+                paletteEditorMenu = new PaletteEditor(new Function(PaletteMenuUpdate), Model.FontPaletteMenu, 1, 0, 1);
                 paletteEditorMenu.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditorMenu.Reload(new Function(PaletteMenuUpdate), Model.FontPaletteMenu, 1, 0);
+                paletteEditorMenu.Reload(new Function(PaletteMenuUpdate), Model.FontPaletteMenu, 1, 0, 1);
         }
         public void LoadGraphicEditor()
         {

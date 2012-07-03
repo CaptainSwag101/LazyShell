@@ -1,6 +1,6 @@
 ﻿namespace LAZYSHELL
 {
-    partial class LevelsTilemap
+    partial class TilemapEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelsTilemap));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TilemapEditor));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.buttonToggleCartGrid = new System.Windows.Forms.ToolStripButton();
             this.buttonToggleOrthGrid = new System.Windows.Forms.ToolStripButton();
@@ -43,6 +43,7 @@
             this.buttonToggleSolidMods = new System.Windows.Forms.ToolStripButton();
             this.buttonToggleP1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonToggleMushrooms = new System.Windows.Forms.ToolStripButton();
             this.buttonToggleNPCs = new System.Windows.Forms.ToolStripButton();
             this.buttonToggleExits = new System.Windows.Forms.ToolStripButton();
             this.buttonToggleEvents = new System.Windows.Forms.ToolStripButton();
@@ -117,6 +118,7 @@
             this.buttonToggleSolidMods,
             this.buttonToggleP1,
             this.toolStripSeparator14,
+            this.buttonToggleMushrooms,
             this.buttonToggleNPCs,
             this.buttonToggleExits,
             this.buttonToggleEvents,
@@ -268,6 +270,19 @@
             this.toolStripSeparator14.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStripSeparator14.Name = "toolStripSeparator14";
             this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
+            // 
+            // buttonToggleMushrooms
+            // 
+            this.buttonToggleMushrooms.CheckOnClick = true;
+            this.buttonToggleMushrooms.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonToggleMushrooms.Image = global::LAZYSHELL.Properties.Resources.buttonMushroom;
+            this.buttonToggleMushrooms.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonToggleMushrooms.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonToggleMushrooms.Name = "buttonToggleMushrooms";
+            this.buttonToggleMushrooms.Size = new System.Drawing.Size(23, 22);
+            this.buttonToggleMushrooms.Text = "Mushrooms";
+            this.buttonToggleMushrooms.Visible = false;
+            this.buttonToggleMushrooms.Click += new System.EventHandler(this.buttonToggleMushrooms_Click);
             // 
             // buttonToggleNPCs
             // 
@@ -755,7 +770,6 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelLevelPicture.AutoScroll = true;
-            this.panelLevelPicture.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.panelLevelPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelLevelPicture.Controls.Add(this.pictureBoxLevel);
             this.panelLevelPicture.Location = new System.Drawing.Point(29, 31);
@@ -773,15 +787,15 @@
             this.pictureBoxLevel.Size = new System.Drawing.Size(1024, 1024);
             this.pictureBoxLevel.TabIndex = 0;
             this.pictureBoxLevel.TabStop = false;
-            this.pictureBoxLevel.MouseLeave += new System.EventHandler(this.pictureBoxLevel_MouseLeave);
-            this.pictureBoxLevel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxLevel_PreviewKeyDown);
-            this.pictureBoxLevel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseMove);
+            this.pictureBoxLevel.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxLevel_Paint);
             this.pictureBoxLevel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseDoubleClick);
             this.pictureBoxLevel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseDown);
-            this.pictureBoxLevel.MouseHover += new System.EventHandler(this.pictureBoxLevel_MouseHover);
-            this.pictureBoxLevel.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxLevel_Paint);
-            this.pictureBoxLevel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseUp);
             this.pictureBoxLevel.MouseEnter += new System.EventHandler(this.pictureBoxLevel_MouseEnter);
+            this.pictureBoxLevel.MouseLeave += new System.EventHandler(this.pictureBoxLevel_MouseLeave);
+            this.pictureBoxLevel.MouseHover += new System.EventHandler(this.pictureBoxLevel_MouseHover);
+            this.pictureBoxLevel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseMove);
+            this.pictureBoxLevel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseUp);
+            this.pictureBoxLevel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxLevel_PreviewKeyDown);
             // 
             // pictureBoxZoom
             // 
@@ -794,7 +808,7 @@
             this.pictureBoxZoom.TabStop = false;
             this.pictureBoxZoom.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxLevelZoom_Paint);
             // 
-            // LevelsTilemap
+            // TilemapEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -811,7 +825,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "LevelsTilemap";
+            this.Name = "TilemapEditor";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxLevel_PreviewKeyDown);
@@ -892,5 +906,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton buttonDragSolidity;
         private System.Windows.Forms.ToolStripMenuItem createTileModToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton buttonToggleMushrooms;
     }
 }

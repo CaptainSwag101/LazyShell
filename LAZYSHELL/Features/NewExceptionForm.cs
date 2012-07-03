@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -69,6 +70,14 @@ namespace LAZYSHELL
         private void label1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+        }
+        private void reportError_Click(object sender, EventArgs e)
+        {
+            string url = "http://acmlm.kafuka.org/board/newreply.php?id=7005";
+            Process proc = new System.Diagnostics.Process();
+            ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(url);
+            proc.StartInfo = startInfo;
+            proc.Start();
         }
     }
 }

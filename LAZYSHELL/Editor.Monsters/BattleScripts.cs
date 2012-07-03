@@ -299,7 +299,11 @@ namespace LAZYSHELL
 
             int index = 0;
             if (!Do.GetNodeIndex(BattleScriptTree.SelectedNode, BattleScriptTree.Nodes, ref index))
+            {
+                MessageBox.Show("Must select a command in the command list to the left before inserting a new command.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
+            }
             if (index + 1 < this.BattleScriptTree.GetNodeCount(true))
                 battleCommands.Insert(index + 1, cmd);
             else if (index + 1 == this.BattleScriptTree.GetNodeCount(true))
@@ -527,11 +531,11 @@ namespace LAZYSHELL
         {
             updatingProperties = true;
 
-            nameA.BackColor = SystemColors.ControlDark;
+            nameA.BackColor = SystemColors.ControlDarkDark;
             nameA.Items.Clear(); nameA.ResetText();
-            nameB.BackColor = SystemColors.ControlDark;
+            nameB.BackColor = SystemColors.ControlDarkDark;
             nameB.Items.Clear(); nameB.ResetText();
-            nameC.BackColor = SystemColors.ControlDark;
+            nameC.BackColor = SystemColors.ControlDarkDark;
             nameC.Items.Clear(); nameC.ResetText();
             numA.Minimum = 0; numA.Maximum = 255; numA.Value = 0;
             numB.Minimum = 0; numB.Maximum = 255; numB.Value = 0;
@@ -565,17 +569,17 @@ namespace LAZYSHELL
 
             updatingProperties = false;
         }
-        private void AlignCommandGUI(Panel panel)
+        private void AlignCommandGUI(GroupBox panel)
         {
             if (panel == null)
             {
-                panel1.Height = 21;
-                buttonApply.Top = buttonInsert.Top = 1;
+                panel1.Height = 28;
+                panel2.Top = 0;
             }
             else if (panel.Visible)
             {
-                panel1.Height = panel.Height + 23;
-                buttonApply.Top = buttonInsert.Top = panel.Height + 4;
+                panel1.Height = panel.Height + 28;
+                panel2.Top = panel.Height;
             }
         }
         public void Assemble()
@@ -908,7 +912,7 @@ namespace LAZYSHELL
                     if (command.CommandData[1] == 0x03)
                         Do.DrawName(
                             sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
-                            Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
+                            Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
                     break;
                 case 0xEF:
                 case 0xF0:
@@ -917,14 +921,14 @@ namespace LAZYSHELL
                     Do.DrawName(
                         sender, e, new BattleDialoguePreview(), Model.SpellNames,
                         Model.SpellNames.GetNumFromIndex(e.Index) < 64 ? Model.FontMenu : Model.FontDialogue,
-                        Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
+                        Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
                     break;
                 case 0xE0:
                     goto default;
                 default:
                     Do.DrawName(
                         sender, e, new BattleDialoguePreview(), Model.AttackNames, Model.FontDialogue,
-                        Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, true, Model.MenuBackground_);
+                        Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, true, Model.MenuBG_);
                     break;
             }
         }
@@ -1451,14 +1455,14 @@ namespace LAZYSHELL
             ResetAllControls();
             buttonInsert.Enabled = false;
             buttonApply.Enabled = false;
+            //
             panelDoOneOfThree.Visible = false;
             panelIfTargetValue.Visible = false;
             panelMemoryCompare.Visible = false;
-
+            AlignCommandGUI(null);
+            //
             BattleScriptTree.ExpandAll();
-
             RemoveCommand(BattleScriptTree.Nodes, BattleScriptTree.GetNodeCount(true) - 1);
-
             AssembleBattleScript(battleScript);
             RefreshBattleScriptsEditor();
         }

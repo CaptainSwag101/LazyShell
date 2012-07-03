@@ -130,6 +130,8 @@ namespace LAZYSHELL
                     for (int i = 0; i < animationScripts.Length; i++)
                         this.animationName.Items.Add("Script #" + i.ToString());
                     animationName.DropDownWidth = animationName.Width;
+                    animationName.DrawMode = DrawMode.Normal;
+                    animationName.BackColor = SystemColors.Window;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 1:
@@ -138,6 +140,8 @@ namespace LAZYSHELL
                     for (int i = 0; i < animationScripts.Length; i++)
                         this.animationName.Items.Add(Model.SpellNames.GetNameByNum(i + 0x40));
                     animationName.DropDownWidth = animationName.Width;
+                    animationName.DrawMode = DrawMode.OwnerDrawFixed;
+                    animationName.BackColor = SystemColors.ControlDarkDark;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 2:
@@ -145,6 +149,8 @@ namespace LAZYSHELL
                     animationName.Items.Clear();
                     this.animationName.Items.AddRange(Model.AttackNames.Names);
                     animationName.DropDownWidth = animationName.Width;
+                    animationName.DrawMode = DrawMode.OwnerDrawFixed;
+                    animationName.BackColor = SystemColors.ControlDarkDark;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 3:
@@ -168,6 +174,8 @@ namespace LAZYSHELL
                         "spread from middle",
                         "ready to attack"});
                     animationName.DropDownWidth = animationName.Width;
+                    animationName.DrawMode = DrawMode.Normal;
+                    animationName.BackColor = SystemColors.Window;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 4:
@@ -176,6 +184,8 @@ namespace LAZYSHELL
                     for (int i = 0; i < animationScripts.Length; i++)
                         this.animationName.Items.Add(Model.ItemNames.GetNameByNum(i + 0x60));
                     animationName.DropDownWidth = animationName.Width;
+                    animationName.DrawMode = DrawMode.OwnerDrawFixed;
+                    animationName.BackColor = SystemColors.ControlDarkDark;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 5:
@@ -184,6 +194,8 @@ namespace LAZYSHELL
                     for (int i = 0; i < animationScripts.Length; i++)
                         this.animationName.Items.Add(Model.SpellNames.GetNameByNum(i));
                     animationName.DropDownWidth = animationName.Width;
+                    animationName.DrawMode = DrawMode.OwnerDrawFixed;
+                    animationName.BackColor = SystemColors.ControlDarkDark;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 6:
@@ -192,6 +204,8 @@ namespace LAZYSHELL
                     for (int i = 0; i < animationScripts.Length; i++)
                         this.animationName.Items.Add(Model.ItemNames.GetNameByNum(i));
                     animationName.DropDownWidth = animationName.Width;
+                    animationName.DrawMode = DrawMode.OwnerDrawFixed;
+                    animationName.BackColor = SystemColors.ControlDarkDark;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 7:
@@ -199,6 +213,8 @@ namespace LAZYSHELL
                     animationName.Items.Clear();
                     this.animationName.Items.AddRange(Lists.Numerize(Lists.BattleEventNames));
                     animationName.DropDownWidth = 500;
+                    animationName.DrawMode = DrawMode.Normal;
+                    animationName.BackColor = SystemColors.Window;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
             }
@@ -1069,7 +1085,7 @@ namespace LAZYSHELL
         }
         private void animationName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Bitmap bgimage = Model.MenuBackground_;
+            Bitmap bgimage = Model.MenuBG_;
             switch (animationCategory.SelectedIndex)
             {
                 case 0: if (e.Index < 0 || e.Index > 53) return; break;

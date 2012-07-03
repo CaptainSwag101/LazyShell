@@ -14,19 +14,19 @@ namespace LAZYSHELL
         private int index;
         private LevelMap levelMap;
         private PaletteSet paletteSet;
-        private TileSet tileSet;
-        private TileMap tileMap;
+        private Tileset tileset;
+        private Tilemap tilemap;
         private PrioritySet prioritySet;
         private string fullPath;
         // constructor
-        public IOArchitecture(string action, int index, LevelMap levelMap, PaletteSet paletteSet, TileSet tileSet, TileMap tileMap, PrioritySet prioritySet)
+        public IOArchitecture(string action, int index, LevelMap levelMap, PaletteSet paletteSet, Tileset tileSet, Tilemap tileMap, PrioritySet prioritySet)
         {
             this.action = action;
             this.index = index;
             this.levelMap = levelMap;
             this.paletteSet = paletteSet;
-            this.tileSet = tileSet;
-            this.tileMap = tileMap;
+            this.tileset = tileSet;
+            this.tilemap = tileMap;
             this.prioritySet = prioritySet;
             InitializeComponent();
             if (action == "import")
@@ -63,19 +63,19 @@ namespace LAZYSHELL
         private void ExportGraphics(byte[] array, int offset)
         {
             if (checkBox2.Checked)
-                Buffer.BlockCopy(tileSet.Graphics, 0, array, offset, tileSet.Graphics.Length);
+                Buffer.BlockCopy(tileset.Graphics, 0, array, offset, tileset.Graphics.Length);
         }
         private void ExportTileset(byte[] array, int layer, int offset)
         {
-            if (checkBox3.Checked && tileSet.TileSetLayers.Length >= layer + 1 && tileSet.TileSetLayers[layer] != null)
-                foreach (Tile16x16 tile in tileSet.TileSetLayers[layer])
+            if (checkBox3.Checked && tileset.Tilesets_Tiles.Length >= layer + 1 && tileset.Tilesets_Tiles[layer] != null)
+                foreach (Tile tile in tileset.Tilesets_Tiles[layer])
                 {
-                    foreach (Tile8x8 subtile in tile.Subtiles)
+                    foreach (Subtile subtile in tile.Subtiles)
                     {
-                        Bits.SetShort(array, offset, subtile.TileIndex);
+                        Bits.SetShort(array, offset, subtile.Index);
                         offset += 2;
-                        array[offset] = (byte)subtile.PaletteIndex;
-                        Bits.SetBit(array, offset, 5, subtile.PriorityOne);
+                        array[offset] = (byte)subtile.Palette;
+                        Bits.SetBit(array, offset, 5, subtile.Priority1);
                         Bits.SetBit(array, offset, 6, subtile.Mirror);
                         Bits.SetBit(array, offset, 7, subtile.Invert);
                         offset++;
@@ -84,8 +84,8 @@ namespace LAZYSHELL
         }
         private void ExportTilemap(byte[] array, int layer, int offset)
         {
-            if (checkBox4.Checked && tileMap.Layers.Length >= 1 && tileMap.Layers[layer] != null)
-                foreach (Tile16x16 tile in tileMap.Layers[layer])
+            if (checkBox4.Checked && tilemap.Tilemaps_Tiles.Length >= 1 && tilemap.Tilemaps_Tiles[layer] != null)
+                foreach (Tile tile in tilemap.Tilemaps_Tiles[layer])
                 {
                     if (tile == null)
                     {
@@ -147,28 +147,39 @@ namespace LAZYSHELL
         private void ImportGraphics(byte[] array, int offset)
         {
             if (checkBox2.Checked)
-                Buffer.BlockCopy(array, offset, tileSet.Graphics, 0, tileSet.Graphics.Length);
+                Buffer.BlockCopy(array, offset, tileset.Graphics, 0, tileset.Graphics.Length);
         }
         private void ImportTileset(byte[] array, int layer, int offset)
         {
-            if (!checkBox3.Checked || tileSet.TileSetLayers[layer] == null)
+            if (!checkBox3.Checked || tileset.Tilesets_Tiles[layer] == null)
                 return;
-            byte format = (byte)(layer != 2 ? 0x20 : 0x10);
-            foreach (Tile16x16 tile in tileSet.TileSetLayers[layer])
+            int length;
+            byte format;
+            if (layer == 2)
+            {
+                length = tileset.GraphicsL3.Length;
+                format = 0x10;
+            }
+            else
+            {
+                length = tileset.Graphics.Length;
+                format = 0x20;
+            }
+            foreach (Tile tile in tileset.Tilesets_Tiles[layer])
             {
                 if (tile == null)
                 {
                     offset += 3;
                     continue;
                 }
-                foreach (Tile8x8 subtile in tile.Subtiles)
+                foreach (Subtile subtile in tile.Subtiles)
                 {
-                    subtile.TileIndex = Bits.GetShort(array, offset);
-                    if (subtile.TileIndex * format >= (layer != 2 ? tileSet.Graphics.Length : tileSet.GraphicsL3.Length))
-                        subtile.TileIndex = 0;
+                    subtile.Index = Bits.GetShort(array, offset);
+                    if (subtile.Index * format >= length)
+                        subtile.Index = 0;
                     offset += 2;
-                    subtile.PaletteIndex = array[offset] & 7;
-                    subtile.PriorityOne = Bits.GetBit(array, offset, 5);
+                    subtile.Palette = array[offset] & 7;
+                    subtile.Priority1 = Bits.GetBit(array, offset, 5);
                     subtile.Mirror = Bits.GetBit(array, offset, 6);
                     subtile.Invert = Bits.GetBit(array, offset, 7);
                     offset++;
@@ -177,49 +188,49 @@ namespace LAZYSHELL
         }
         private void ImportTilemap(byte[] array, int layer, int offset)
         {
-            if (!checkBox4.Checked || tileMap.Layers[layer] == null)
+            if (!checkBox4.Checked || tilemap.Tilemaps_Tiles[layer] == null)
                 return;
             int counter = 0;
             int extratiles = 256;
             bool mirror, invert;
-            for (int i = 0; i < tileMap.Layers[layer].Length; i++)
+            for (int i = 0; i < tilemap.Tilemaps_Tiles[layer].Length; i++)
             {
                 int tile = Bits.GetShort(array, offset) & 0x1FF;
                 mirror = Bits.GetBit(array, offset + 1, 6);
                 invert = Bits.GetBit(array, offset + 1, 7);
-                tileMap.Layers[layer][i] = tileSet.TileSetLayers[layer][tile];
+                tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_Tiles[layer][tile];
                 if (layer != 2)
                 {
-                    Bits.SetShort(tileMap.TileMaps[layer], counter, tile);
+                    Bits.SetShort(tilemap.Tilemaps_Bytes[layer], counter, tile);
                     counter += 2; offset += 2;
                 }
                 else
                 {
-                    tileMap.TileMaps[layer][counter] = (byte)tile;
+                    tilemap.Tilemaps_Bytes[layer][counter] = (byte)tile;
                     counter++; offset += 2;
                 }
-                if (tileSet.TileSetLayers[layer] == null || tileSet.TileSetLayers[layer].Length != 512)
+                if (tileset.Tilesets_Tiles[layer] == null || tileset.Tilesets_Tiles[layer].Length != 512)
                     continue;
                 if (mirror || invert)
                 {
-                    Tile16x16 copy = tileSet.TileSetLayers[layer][tile].Copy();
+                    Tile copy = tileset.Tilesets_Tiles[layer][tile].Copy();
                     if (mirror)
                         Do.FlipHorizontal(copy);
                     if (invert)
                         Do.FlipVertical(copy);
-                    Tile16x16 contains = Do.Contains(tileSet.TileSetLayers[layer], copy);
+                    Tile contains = Do.Contains(tileset.Tilesets_Tiles[layer], copy);
                     if (contains == null)
                     {
-                        tileSet.TileSetLayers[layer][extratiles] = copy;
-                        tileSet.TileSetLayers[layer][extratiles].TileIndex = extratiles;
-                        tileMap.Layers[layer][i] = tileSet.TileSetLayers[layer][extratiles];
-                        Bits.SetShort(tileMap.TileMaps[layer], counter - 2, extratiles);
+                        tileset.Tilesets_Tiles[layer][extratiles] = copy;
+                        tileset.Tilesets_Tiles[layer][extratiles].TileIndex = extratiles;
+                        tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_Tiles[layer][extratiles];
+                        Bits.SetShort(tilemap.Tilemaps_Bytes[layer], counter - 2, extratiles);
                         extratiles++;
                     }
                     else
                     {
-                        tileMap.Layers[layer][i] = tileSet.TileSetLayers[layer][contains.TileIndex];
-                        Bits.SetShort(tileMap.TileMaps[layer], counter - 2, contains.TileIndex);
+                        tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_Tiles[layer][contains.TileIndex];
+                        Bits.SetShort(tilemap.Tilemaps_Bytes[layer], counter - 2, contains.TileIndex);
                     }
                 }
             }
@@ -244,20 +255,20 @@ namespace LAZYSHELL
                 prioritySet.ColorMathHalfIntensity = array[offset++];
                 prioritySet.ColorMathMinusSubscreen = array[offset++];
             }
-            Model.EditTileMaps[levelMap.TileMapL1 + 0x40] = true;
-            Model.EditTileMaps[levelMap.TileMapL2 + 0x40] = true;
-            Model.EditTileMaps[levelMap.TileMapL3] = true;
-            Model.EditTileSets[levelMap.TileSetL1 + 0x20] = true;
-            Model.EditTileSets[levelMap.TileSetL2 + 0x20] = true;
-            Model.EditTileSets[levelMap.TileSetL3] = true;
+            Model.EditTileMaps[levelMap.TilemapL1 + 0x40] = true;
+            Model.EditTileMaps[levelMap.TilemapL2 + 0x40] = true;
+            Model.EditTileMaps[levelMap.TilemapL3] = true;
+            Model.EditTileSets[levelMap.TilesetL1 + 0x20] = true;
+            Model.EditTileSets[levelMap.TilesetL2 + 0x20] = true;
+            Model.EditTileSets[levelMap.TilesetL3] = true;
             Model.EditGraphicSets[levelMap.GraphicSetA + 0x48] = true;
             Model.EditGraphicSets[levelMap.GraphicSetB + 0x48] = true;
             Model.EditGraphicSets[levelMap.GraphicSetC + 0x48] = true;
             Model.EditGraphicSets[levelMap.GraphicSetD + 0x48] = true;
             Model.EditGraphicSets[levelMap.GraphicSetE + 0x48] = true;
             Model.EditGraphicSets[levelMap.GraphicSetL3] = true;
-            tileSet.AssembleIntoModel(16);
-            tileMap.AssembleIntoModel();
+            tileset.Assemble(16);
+            tilemap.Assemble();
         }
         // event handlers
         private void browseCurrent_Click(object sender, EventArgs e)

@@ -1,6 +1,6 @@
 LAZY SHELL - Super Mario RPG Editor
-Version: 3.9.3
-Date: April 27, 2012
+Version: 3.10.0 BETA
+Date: July 3, 2012
 Home Page: http://home.comcast.net/~giangurgolo/smrpg/
 Written by giangurgolo and Omega
 
@@ -29,7 +29,7 @@ ______________________________________________________________________
 MAIN FEATURES
 ______________________________________________________________________
 
-The editor is comprised of 15 individual editors.
+The editor is comprised of 17 individual editors.
 
 Various status editors include modification capabilities for the
 statuses of monsters, formations, formation packs, items, spells, 
@@ -70,6 +70,12 @@ The Audio editor can export, import, clear, and playback the audio
 samples used by the ROM's SPC engine. Importing/exporting features
 are limited to .wav files, which can be edited in a third party 
 freeware application such as Audacity.
+
+The mini-games editor so far can modify the minecart mini game maps
+for all four stages and the objects in the same manner as levels. The
+menus editor allows the user to modify the menu palettes and import an
+external image into the menu backgrounds, as well as import an image
+into the frame image.
 
 ______________________________________________________________________
 
@@ -122,12 +128,12 @@ ______________________________________________________________________
 UNSUPPORTED FEATURES
 ______________________________________________________________________
 
-Lazy Shell can NOT edit the Moleville Mountain tracks, raw SPC music/sfx 
-data, menu graphics, the new game intro sequence and graphics, or the end 
-credits. It cannot make any changes to 65c816 assembly code in the ROM 
-image (with the exception of defense timing). Additionally, ROM expansion 
-is also not supported by the application due to the complications of the 
-SA-1 chip in the game's engine.
+Lazy Shell can NOT edit raw SPC music/sfx data, the new game intro 
+sequence and graphics, the end credits graphics, or battle and end 
+credits fonts. It cannot make any changes to 65c816 assembly code in 
+the ROM image (with the exception of defense timing). Additionally, 
+ROM expansion is also not supported by the application due to the 
+complications of the SA-1 chip in the game's engine.
 
 ______________________________________________________________________
 
@@ -259,25 +265,54 @@ ______________________________________________________________________
 F.A.Q. (Frequently Asked Questions)
 ______________________________________________________________________
 
-Q: I have no idea what _____ means!
-A: Enable the help feature in the editor. If this feature is enabled, 
+Q: The editor will not run at all.
+A: You need .NET Framework 2 or higher installed on your system.
+
+Q: I have no idea what this stuff means!
+A: First, look in the glossary at the end of this readme file. Also,
+   enable the help feature in the editor. If this feature is enabled, 
    you'll be able to see a description of the property and what it 
    does by moving the mouse over it. Click the (?) icon at the top of 
    most editors or press F1 to enable/disable the help feature.
+   
+Q: I want to design or write a new _____. Where do I start?
+A: If you're new to this, study the editor. Play around with it for a 
+   while before delving into a new project. Tweak or mess around with
+   things that already exist (ex: scripts, levels, monsters, sprites,
+   etc.) to gain an understanding of how everything works or operates.
+   Then, when you want to start something new or original, use the
+   "template-based" approach which I have always used in my own hacks:
+   try thinking of something in the game that most closely resembles
+   what you want to do or create, find that element in the editors,
+   study it and it's properties/details, and use that as a template
+   for your custom-made whatever. Example: copy event script commands
+   into your own script that are similar, modify levels that are
+   closest in resemblance to what you want to create, use existing
+   monsters that are most characteristic of your custom monsters.
+   The OREFFEZEPS hack, for example, was made entirely through this
+   method of template hacking: I tweaked existing spells/attacks to
+   varying degrees to make new original ones. The Bob-omb Mafia's
+   forest levels used touched-up tilemaps of dummied maps which
+   already existed (as well as the sewers levels).
 
-Q: How do I add a new _____?
-A: You cannot add new indexes of any element, but you can replace the
-   properties of existing elements. That is the basic rule of hacking
+Q: How do I add a new ally, item, monster, etc.?
+A: You cannot add new indexes to any element, but you can replace the
+   properties of existing indexes. That is the basic rule of hacking
    SMRPG. Many elements, like sprites, have dummied or unused indexes
    which you may edit or modify to "add" new stuff. Lazy Shell should
    not be viewed as an expansion tool but as a modification tool.
+   
+Q: Can Super Mario RPG be expanded?
+A: Not with Lazy Shell, but I do believe there was an expansion hack
+   project that successfully expanded the ROM. Lunar Expand is
+   incapable of expanding SMRPG due to SA-1 chip complications.
 
-Q: I'm looking specifically for the _____.
+Q: I'm looking specifically for _____ matching a name/description.
 A: Most of the editors have a search field to the right of the index
    list, tagged with a magnifying glass icon. Use that to search for a
    specific index with a general description, name, or whatever.
 
-Q: The editor crashed and I lost my work!
+Q: The editor crashed and/or corrupted the ROM and I lost my work!
 A: First, try clicking "Ignore Error" and saving as a separate ROM.
    Then, try exporting the indexes that didn't glitch out into .dat 
    files and import those into a fresh, uncorrupted ROM. In the 
@@ -285,7 +320,7 @@ A: First, try clicking "Ignore Error" and saving as a separate ROM.
    the grey cog icon in the main window to open the settings. There 
    are two types of back-ups: you can back-up on load and/or save.
    Thus you can roll back to an earlier edit before the ROM got
-   corrupted by the program. 
+   corrupted by the program.
    
 Q: What do these "B#,b#" things mean?
 A: These are unknown bits. "B0,b0" means "Byte 0, bit 0" and refers
@@ -294,42 +329,235 @@ A: These are unknown bits. "B0,b0" means "Byte 0, bit 0" and refers
    do, feel free to post it in the bug report thread:
    http://acmlm.kafuka.org/board/thread.php?id=6770
 
+Q: Is there free space in the ROM where I can insert graphics?
+A: Only the space that you see in the editor's own graphics editor can
+   be modified. You can import external images into it, or use the
+   more powerful import features. For example, in the sprites editor.
+   
+Q: I have no idea how scripts work.
+A: There are three types of scripts, each with their own scripting
+   language: event, battle, and animation scripts. See the glossary
+   for a more detailed explanation of scripts and how each different
+   type of script works.
+   
+Q: Why do the images I import decrease in quality?
+A: The number of colors are reduced to 15 (or 3 in 2bpp cases). So
+   if you're trying to import a Caravaggio painting, you won't have
+   much luck keeping the quality. Palettes are 16 or 4 colors, with
+   the first color being reserved for transparent pixels.
+   
+Q: What's a .dat file?
+A: Exported elements into external files that can be imported into 
+   other indexes of the same element.
+
+Q: My ROM hack's checksum is bad/failed!
+A: Only fresh, unsaved, unmodified ROMs will have a good checksum
+   (0x3bb4). The ROM's checksum always fails after a save. It's not a 
+   bug because the slightest change in the ROM data will create a bad 
+   checksum. However if you are loading a fresh, supposedly unaltered
+   ROM and get a failed checksum, then there may be issues.
+
+Q: Sometimes it asks to save even if I haven't done anything.
+A: In some editors, like the sprites editor, switching between indexes
+   will reassemble the last loaded index's data thus changing the data
+   in the process. This is not a bug, and none of the properties are 
+   actually changed; just sometimes the raw hex data is slightly
+   rearranged from the original order.
+
 Q: What are Lazy Shell's most powerful features?
 A: 1. The "Import Image(s)" functions in the sprites and effects
       editors allow the user to replace existing sprites with entirely
-	  new sprite animations from external image files. These were 
-	  quite difficult to write the code for, but very rewarding in
-	  that they ultimately added a lot more muscle to the editor.
+      new sprite animations from external image files. These were 
+      quite difficult to write the code for, but very rewarding in
+      that they ultimately added a lot more muscle to the editor.
    2. The palette editor's "Adjust RGB" and "Effects" features let
       the user apply all kinds of effects to the colors, from RGB
-	  swapping, grayscale, contrast/brightness, colorizing, and more.
-	  You can create your own palette swaps of sprites, levels, etc.
+      swapping, grayscale, contrast/brightness, colorizing, and more.
+      You can create your own palette swaps of sprites, levels, etc.
    3. The "New Font Table" feature in the dialogues editor in the
       font editor panel lets you replace the SMRPG font with any font
-	  installed on your system.
+      installed on your system.
    4. You can flip entire battlefields by just selecting the whole
       battlefield, right-click, and click "mirror" or "invert".
    5. A built-in hex editor lets the user edit the raw hex data of
       several elements in the game.
+_____________
+ALLIES EDITOR
+¯¯¯¯¯¯¯¯¯¯¯¯¯
+Q: Is it possible to add new allies?
+A: No, you can only modify the existing five allies.
+
+Q: Can I move another ally to the front to appear in the overworld?
+A: Not in Lazy Shell, but with ASM hacking it is possible.
+
+Q: Is it possible to start with other characters besides Mario?
+A: You would have to switch the Mario sprite with another character's.
+
+Q: Can I raise the experience to 5 digits and the coins to 4?
+Q: Can I edit the maximum experience?
+Q: Can I extend the level cap?
+A: Not in Lazy Shell.
 ________________
 ANIMATION EDITOR
 ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+Q: How do I add things to a weapon or spell script?
+A: These are called commands in the animation script editor, and you
+   cannot add new ones: only replace, move or edit existing ones.
+
 Q: I want to add new commands.
-A: You cannot do this, you can only replace or edit commands.
+A: You cannot do this, you can only replace, move or edit commands.
+
+Q: How do I replace commands?
+A: Select the command and at the bottom of the editor replace the 
+   first hex value with the opcode of the command you want to 
+   replace it with.
 
 Q: Where's the list of command opcodes for animations?
 A: Download the documents archive at:
    http://home.comcast.net/~giangurgolo/smrpg/smrpg_docs.zip
    The docs_ani-code.txt file contains all opcodes decoded thus far.
 
+Q: How do I make custom items with custom animations?
+A: The easiest things to customize in the animations editor are the
+   sprites used, the sound effects, and dialogues. "Current object = 
+   sprite: whatever" "Current sprite: whatever" "Current action object
+   = effect: whatever" "Playback sound: whatever" are among them.
+   It's better to start simple before working with stuff like memory.
+
 Q: I want to change a sprite in an animation to something else.
 A: You'll want to modify the "Current object = sprite: whatever" 
    commands. Modify its properties in the "CURRENT COMMAND PROPERTIES"
    panel on the right and click apply when you are finished.
    Alternatively you can change the hex values below.
+
+Q: How do I make allies use enemy spells/attacks?
+A: This would require comprehensive animation script editing,
+   including but not limited to careful repositioning of many effect
+   and sprite graphics and changing behavior of the sprites, as well
+   as changing the object memory addresses, etc. Example: "Light Beam"
+   is specifically scripted to shift leftwards towards the allies, so
+   to make it realistically target the monsters the initial position 
+   and direction would need to be changed among other things.
+
+Q: Where are the locations of the dummy spell animation scripts?
+A: There are none; dummy spells (except for the 4 nameless ones used
+   by Smithy) have no pointers and no scripts.
+
+Q: How do you modify damage in an animation script?
+A: I cannot say for sure, but none of the animation scripts appear to
+   contain commands that modify damage, aside from the CC command
+   found only in ally spells that append damage.
+
+Q: How do I replace Mushroom and Scarecrow with new effects?
+A: Most likely it requires ASM hacking, but as this is an unexplored
+   territory in the SMRPG ROM I cannot be sure.   
+____________
+AUDIO EDITOR
+¯¯¯¯¯¯¯¯¯¯¯¯
+Q: Is there any way to add music to a SMRPG Rom?
+A: Not in Lazy Shell; you can only modify the audio samples used by
+   the music SPCs.
+
+Q: Can I add sound effects?
+A: Sound effects are also SPCs that use audio samples. Therefore the
+   answer is no, like the above question.
+________________
+DIALOGUES EDITOR
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+Q: I need some extra letters that my native language uses.
+A: Use the empty slots in the font table. Letters that have accents
+   or other diacritic marks can be drawn onto the new letters
+   or imported as a new font table.
+
+Q: How do I edit the names in the Level-up bonus screen?
+A: This is found by selecting "Battle messages" in the battle
+   dialogues editor.
+____________________
+EVENT SCRIPTS EDITOR
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+Q: I want to change an NPC's sprite's mold or sequence.
+A: This must be done in an action queue. First insert an action queue
+   with "Objects" > "Action queue...". Select the NPC from the menu.
+   Then add the command "Sprite sequence" > "Seq playback, sprite +=".
+
+Q: Can I make an NPC change colors/palettes?
+A: This must be done in an action queue, using one of three types of
+   commands. In the "Palette" category, choose one of the commands to
+   shift the NPC's sprite's palette index forward. View the palettes
+   using the sprites editor.
+
+Q: Is there a default event script that is always running?
+A: Not by default, but you can point the level's event script to a 
+   separate synchronous event that contains the memory-checking
+   commands you want to run.
+
+Q: How do I make a custom ending?
+A: You can't edit the default ending sequence with Lazy Shell, but you
+   can write a custom event script to run instead as long as the
+   Smithy battle sequence doesn't run.
+
+Q: How do I change a character's animation during a dialogue?
+A: Make sure the "Run dlg: whatever" command has the dialogue
+   property "asynchronous" unchecked so any following commands that
+   would change a sprite's animation sequence or whatever will run
+   while the dialogue is playing. Use the "Pause script, resume on
+   next dlg page" commands to pause the script after the animation
+   is complete.
+
+Q: I told my script to jump to index $11C, #284.
+A: "Jump to $whatever" commands do NOT jump to indexes, they jump to
+   addresses as seen in the [] to the left of each command.
+
+Q: How do I make _____ the only active party member?
+A: Through an event script use the command "Add/remove party member"
+   in the "Party members" category.
+
+Q: When I press The X button the inventory menu does not appear.
+A: It must be made accessible using one of the "Joypad enable"
+   commands in the "Joypad" category.
+_________________
+FORMATIONS EDITOR
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+Q: Some of the monsters in my formation are glitchy or discolored.
+A: Too many monsters or having several large monsters in the same
+   formation will overload the game's video memory and start
+   smothering the graphics of other monsters and sprites. Do not
+   put more than 6 monsters in a formation.
+
+Q: My monster inexplicably changes palettes in battle.
+A: See the previous question.
+____________
+ITEMS EDITOR
+¯¯¯¯¯¯¯¯¯¯¯¯
+Q: I made a DUMMY item a weapon, but it freezes when used.
+A: That's because it doesn't have an animation script. Unfortunately
+   you cannot create or edit scripts for the DUMMY items in the
+   animations editor because the ROM provides no extra space for it.
+
+Q: Can I make new "inflict functions" for a custom item?
+A: This involves ASM, thus you cannot do this in Lazy Shell.
+
+Q: In the shops, there are two "Buy only, no selling" options.
+A: They both do exactly the same thing.
 _____________
 LEVELS EDITOR
 ¯¯¯¯¯¯¯¯¯¯¯¯¯
+Q: My custom level just appears black in-game, music playing.
+A: Make sure the layer mask's boundaries are within those of your
+   new custom level and that Mario appears within those boundaries.
+
+Q: How do I add something like an NPC to a level?
+A: The tabs on the left panel, ex: the "NPCs" tab, contain buttons
+   at the top of the tab window that let you insert, delete, copy,
+   etc. NPCs, events, exits, overlaps, or mods.
+
+Q: I notice that the NPC # does not correspond to the sprite #.
+A: The help labels for the editor explain this. Hit F1 in the editor
+   or click the (?) icon at the top of the levels editor.
+
+Q: The NPCs are not showing.
+A: Make sure "Show NPC instance" is checked.
+
 Q: Some tiles keep overlapping the NPCs.
 A: Those tiles most likely have priority 1 enabled on one or more of
    their subtiles. To stop this, replace the solidity tile at that
@@ -337,30 +565,158 @@ A: Those tiles most likely have priority 1 enabled on one or more of
    enabled for objects on tile" checked. Otherwise, it could be an
    overlap tile. To stop this, delete the overlap at that spot.
 
-Q: My custom level just appears black in-game, music playing.
-A: Make sure the layer mask's boundaries are within those of your
-   new custom level.
+Q: When I stand on the edge of a block it overlaps Mario and NPCs.
+A: Look for a solidity tile with "Priority 3 for object on edge"
+   enabled in the solidity tile search and draw it there.
 
-Q: How do I add something like an NPC to a level?
-A: The tabs on the left panel, ex: the "NPCs" tab, contain buttons
-   at the top of the tab window that let you insert, delete, copy,
-   etc. NPCs, events, exits, overlaps, or mods.
-
+Q: How do I get an NPC to start a dialogue?
+A: The dialogues for NPCs are initiated in the NPC's event script.
+   Open the NPC's event script or assign a new script # and insert a
+   "Run dlg: whatever" command.
+   
 Q: The NPC graphics are glitchy in-game.
 A: You'll want to try changing the "Partition" property. You can
    look for the best partition index for the level by using the
    parition searcher (accessible with the "Partition" button).
    Keep in mind the game only has so much video memory to store the
    sprites to, so too many large NPCs may just be impossible to show.
+
+Q: I have no idea how these partitioning properties work.
+A: Unfortunately, this is a grey area in my knowledge, as I am not
+   completely sure how the game organizes video memory for NPC
+   sprites on loading a level. Just try switching between indexes
+   to find the best one. I usually find that if the "Sprite Type" is
+   set to "large sprite (tilemap)" it increases the likelihood that
+   larger sprites will show properly. If the earlier NPC indexes
+   use gridplane-based sprites try setting those to 32px or 24px wide.
+   Probably each partition was especially designed for each individual 
+   level which is why it might be difficult to find the best one for a 
+   custom NPC map.
+   
+Q: What does "Could not insert the _____" mean?
+A: You'll need to delete other exits, events, npcs, or overlaps to
+   insert new ones.
+   
+Q: Walking off an edge causes Mario to fall and get stuck.
+A: Most likely you forgot to draw in a solidity tile somewhere. The
+   isometric orientation of the solidity map sometimes makes it tricky
+   to fill in all tiles. Also, make sure to seal off the edges of the
+   walkable area with impassable tiles (usually with solid tile #255).
+
+Q: How can I prevent a monster from reappearing after battle?
+A: Look in the "AFTER BATTLE..." panel.
+
+Q: Mario's Pipehouse is completely black.
+A: For some reason the game applies the proper palette through ASM only
+   for this level. If you want to see the level to edit it, change the
+   palette to {21} temporarily then back to {50} when finished.
+
+Q: I want a script to play infinitely in the background.
+A: The level's "EVENT #" script must jump to a synchronous event that
+   loops indefinitely during gameplay.
+   
+Q: I want to add a warp trampoline or pipe to another level.
+A: Copy/paste a warp trampoline NPC from another level and edit the 
+   script to point to the desired target level. For the pipes, copy/
+   paste the event field at the pipe's coords from another level
+   and edit the script likewise. Keep in mind you will be changing the
+   target level for the original trampoline/pipe you copied from the
+   other level as well.
+   
+Q: I want to add a monster to the level that starts a battle.
+A: Set the "NPC TYPE" to "Battle" and the "Pack #" to the desired
+   pack index. Remember, this is a pack index; not a formation index.
+   Packs are three formations each, where one of the three is randomly
+   selected for battle.
+__________
+MAIN TITLE
+¯¯¯¯¯¯¯¯¯¯
+Q: How do I make my own title screen?
+A: The easiest way is to make an image outside of Lazy Shell with a 
+   paint program (with the same dimensions as the title) and import
+   the external image file in the Main Title editor. Right-click the
+   layer 3 title logo and import the image. Creating an entirely new
+   title screen is a very limited operation as there's only enough
+   space for any new graphics and/or palettes that are imported.
+_________________
+MINI-GAMES EDITOR
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+Q: Why aren't the rails arching in stage 4?
+A: This is probably an effect applied by some code in the assembly I
+   am not familiar with. Thus the rails appear flat in the editor.
+_______________
+MONSTERS EDITOR
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+Q: On a game over, things keep happening in battle.
+A: Most likely the monster who inflicted the fatal blow has several
+   consecutive attacks that need to have conditionals added to its
+   script. "If target alive: at least one opponent" should be added
+   before the commands following the initial attack.
+
+Q: Battle commands keep executing one after another without stopping.
+A: You'll need to add a "Wait 1 turn, restart script" or a "Wait 1
+   turn" command. The first is used within an "If" statement.
+_____________
+SPELLS EDITOR
+¯¯¯¯¯¯¯¯¯¯¯¯¯
+Q: Can I make new "inflict functions" for a custom spell?
+A: This involves ASM, thus you cannot do this in Lazy Shell.
 ______________
 SPRITES EDITOR
 ¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-Q: I want to make a new sprite animation from image files.
+Q: How do I add custom sprites?
+A: You can only edit existing ones. You can import sprite images
+   through several methods: import image files into a graphic set,
+   import image files into the molds, etc. I strongly recommend
+   importing images into the molds as the easiest way to make your
+   own custom sprites from external image files.
+
+Q: I want to replace a sprite with a new one from image files.
 A: Use the mold import feature: the black down arrow and white box [v]
    icon directly over the mold list tagged "Import Image(s)". You may 
    import one or more images over the current molds or append to the 
    current molds.
+
+Q: I want to change a monster's sprite to a different one.
+A: Monster sprites are found in sprite indexes 256-511. If you want 
+   to change a specific sprite to another existing sprite, you'll
+   need to change the "Image" and "Animation" values to that other
+   sprite's image and animation values.
+
+Q: How do I add tiles to a sprite?
+A: You can only do this for tilemap formatted molds, not gridplanes.
+   Select the tiles in the mold's tileset you want to draw and use the
+   pencil tool to draw them.
    
+Q: How do I create new tiles to draw with?
+A: Once again, you can only to this for tilemap molds. Click "Insert
+   new tile" (paper icon) at the top of the panel on the far right
+   and manually set the subtiles.
+
+Q: Are there any unused animation sequences?
+A: http://tcrf.net/Super_Mario_RPG:_Legend_of_the_Seven_Stars
+   Scroll down to the "Unused _____" sections.
+   
+Q: I get glitchy sprites when I load a save state.
+A: This is not a bug with the editor nor the emulator. It is simply a
+   matter of unsychronized memory: the newly edited ROM data for
+   sprites is not sychronized with the save-state memory thus the 
+   glitchy sprites. This can be remedied by re-entering the area, 
+   which refreshes the memory.
+
+Q: I want to make _____ a different color, or Mario without a hat.
+A: Edit the palette and edit the graphics with the respective editors.
+
+Q: Battle portraits appear discolored in the editor.
+A: It appears like that in the editor, but the assembly manually
+   applies the correct palette to the battle portraits.
+   
+Q: I can't find some sprites, even in the search.
+A: Some sprites are within other sprites, nestled among the mold
+   indexes. The nok-nok shell, for example, is molds 2-4 within the
+   lazy shell sprite.
+
+
 ______________________________________________________________________
 
 GLOSSARY
@@ -373,29 +729,77 @@ maximum of 4 colors, whereas 4bpp graphics can use up to 16 colors.
 The Big Boo in Bowser's Terrorize spell only needs 4 colors, thus
 the graphics are in 2bpp format to conserve ROM space.
 
+"action queue"
+A group of commands in an event script which behave like a custom
+embedded action script, containing movement commands for a given NPC.
+
+"action script"
+A script comprised of commands which create a series of movements 
+ascribed to an NPC in a level. A townsperson walking back and forth
+randomly is controlled by an action script. A wiggler's unique
+behavior is governed by a special action script.
+
+"animation script"
+The scripts which animate everything seen in battle. Attacks, spells,
+events, etc. are all governed by animation scripts. Animation scripts
+are, like battle and event scripts, written in their own scripting
+language. The animation scripting language is the most complicated and
+difficult to write for, as they tend to jump around wildly throughout
+the current bank by means of animation packets and memory-checking 
+mini-scripts. The animations editor contains many powerful features, 
+but unfortunately also many limitations on innovation. Some scripts
+are painfully large because many of the mini-scripts within a script
+are repeated numerous times.
+
+"ASM" or "assembly"
+This is essentially the game's raw code which runs when the game is 
+started. SNES games are generally written in assembly. Most everything
+that Lazy Shell modifies is arranged in data chunks and dynamic 
+scripts and does not involve assembly programming code. Anything Lazy 
+Shell is incapable of modifying, outside of the defense timing values.
+"ASM hacking" is modifying the assembly code outside of Lazy Shell.
+
 "bit"
-One-eighth of a byte. Sort of like sub-slots in a memory address.
-Generally, bytes are either read as a single value from 0 to 255, or
-as a set of 8 bits. Example: the item slots are single byte values and
-are not read bit-wise. Conversely, the new game ally spells known are 
-individual bits that not read byte-wise and require four bytes (32
-bits) for their data. Bits are either "set" or "clear". For instance,
-the "Jump" bit (bit 0) for new game ally spells known for Mario is set
-but "Fire Orb" and the rest are not.
+These behave like flags or switches that are turned on or off.
+The game knows what has been done so far in the game because of the
+bits that are set or clear. Defeating the Hammer Bros. sets a bit.
+Each time you enter that level, an event script checks if the switch 
+is turned on in order to determine whether or not to show the Hammer 
+Bros NPC and execute the associated cut scene. The "Jump" bit is 
+already switched on when you start a new game, and can be switched off
+in the allies editor. Checkboxes in the editor are usually associated 
+with bit-wise data while number values are byte-wise. Example: monster 
+HP is read byte-wise while elemental weaknesses are read bit-wise.
 
 "command"
-Example: in the first encounter with Terrapins, the script contains a
-command "Engage battle, pack: 1, battlefield: [07]" which initiates
-the battle with the Terrapins.
+These are what comprise the many scripts in the ROM.
+Example: in the first encounter with Terrapins, an event script
+contains a command "Engage battle, pack: 1, battlefield: [07]" which 
+initiates the battle with the Terrapins.
 
 "element"
-Generally a part of the ROM that has multiple indexes. Monsters are
-an element that has 256 indexes (0 to 255). Levels are another
-element that contains 510 indexes, etc.
+The different things in the ROM that Lazy Shell can modify. The
+individual editors can usually edit one or two types of elements.
+Elements often have multiple indexes. Monsters are an element that 
+has 256 indexes (0 to 255). Levels are another element that contains 
+510 indexes, event scripts have 4096 indexes.
 
-"event"
-A script that can be initiated a number of ways. Mainly through event
-fields.
+"event script"
+The game basically progresses by event scripts. Everything you see
+happening in a level that isn't controlled by the player (ie. Mario)
+is executed by the commands in an event script. Scripts are usually
+initialized by a trigger in the level, when Mario comes into contact
+with either an event field or an NPC. An event script is also
+automatically initialized every time when entering a new level. This
+script is the level's own event script (set with the "EVENT #") that
+usually contains commands for preparing primarily NPC and memory
+related elements before the level is completely loaded.
+
+"event field"
+A field which, when Mario touches it, will initiate an event script.
+Event fields can actually be made to behave exactly like exit fields
+and they often are when other commands must be executed. In these
+cases the scripts contain a command pointing to the target level.
 
 "exit field"
 A field which, when Mario touches it, will load a new level. Other
@@ -422,6 +826,14 @@ can modify the properties of each index by switching to or among
 them in the editors using either its drop down list or immediately 
 with its numeric up/down.
 
+"isometric"
+The pseudo 3-D orientation of Super Mario RPG. Other games like Final
+Fantasy Tactics and Tactics Ogre are isometrically oriented. Something
+is called "isometric" when, instead of being in a flat gridplane, it
+is shaped like a diamond and arranged at an angle. Nevertheless Mario
+RPG's levels are drawn with square 16x16 tiles and not diamond-shaped
+tiles, whereas the solidity tiles are.
+
 "layer"
 SMRPG uses five layers: L1, L2, L3, NPCs, BG. By default, NPCs
 appear on top of all other layers (excluding priority 1 tiles). After
@@ -435,7 +847,7 @@ refer to these as "locations".
 "memory address"
 A "slot" where the game stores information that it needs to access
 later. Example: the 30 slots for items (7F:F882 to 7F:F89F) have 
-memory addresses. The memory addresses  are the items. Completed 
+memory addresses. The memory addresses are the items. Completed 
 events, like defeating the Hammer Bros (00:7052, bit 6), are stored as
 a bit in a memory address. A memory address has 8 bits.
 
@@ -444,6 +856,14 @@ These can change the tiles or solidity tiles of a level. In the levels
 editor, there are two types of mods: tile mods and solidity mods.
 Example: Croco blowing up the wall in Moleville Mines.
 Example: the green button in Rose Town removing/adding stairs outside.
+
+"mold"
+An arrangement of tiles that form a complete image (ie. a sprite 
+image). A mold is similar to  the orientation of a tilemap, except 
+that sprite molds can either be in a format that arranges the tiles 
+in a grid (gridplane) or a coordinate system (tilemap). One or more 
+molds may be contained in a sprite or effect and are used to create a 
+sequence animation.
 
 "npc"
 Abbreviation for "non-playable character". They are basically the
@@ -457,14 +877,29 @@ A set of colors used to draw something. Almost all palettes are 16
 colors, except for layer 3 graphics, fonts, and some effect graphics.
 SNES games like SMRPG are somewhat limited in the number of colors
 they can display, which is why imported image files can decrease
-dramatically in quality.
+dramatically in quality. Many paint programs have features which can
+decrease the color depth of an image to 16 colors.
 
 "script"
-Examples: event scripts, action scripts, battle scripts, animations.
 A list of 0 or more commands that carry out an action on screen
 in the game, such as Toad running into Mario near the beginning of
-the game, or Bowser using "Crusher" in battle, or randomly 
-selecting either "Lighting Orb" or "Bolt" used by THE BIG BOO.
+the game, or Bowser's "Crusher" battle animation, or The Big Boo 
+randomly selecting either "Lighting Orb" or "Bolt" to use in battle.
+Examples: event scripts, action scripts, battle scripts, animations.
+
+"sequence"
+An animation. Two types of elements use sequences: sprites and 
+effects. A sequence is a collection of frames. Each frame is assigned
+a mold index from the sprite or effect's mold collection and plays
+back the frames as a fully animated sequence.
+
+"solidity"
+Also varyingly called called "physical field" or "collision tiles".
+The physical properties of something, like a map. Levels in most games
+have solidity maps, but usually as tilesets associated with the
+regular graphical tileset. As tilesets in SMRPG are grid-based and
+not isometric like the solidity tiles, the tilemaps and not the
+tilesets have their own solidity maps.
 
 "tilemap"
 An example: Levels are 64 rows of tiles, each row is 64 tiles.
@@ -476,5 +911,7 @@ levels. Do not mistake tilemaps with tilesets.
 A collection or "palette" of tiles used to draw to a tilemap.
 
 "trigger"
-To cause something to happen, such as an event, when Mario comes into
-contact with something.
+When Mario comes into contact with something like an NPC or event
+field, and an event script is initiated, it is "triggered". NPCs have
+a trigger property which sets the conditions for the script's
+initiation when Mario collides with it.

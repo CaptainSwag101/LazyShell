@@ -8,19 +8,20 @@ namespace LAZYSHELL.Undo
     class TileMapEditCommand : Command
     {
         private Levels updater;
-        private TileMap tileMap;
-        public TileMap Tilemap { get { return tileMap; } set { tileMap = value; } }
+        private Tilemap tilemap;
+        public Tilemap Tilemap { get { return tilemap; } set { tilemap = value; } }
         private Point topLeft, bottomRight;
         private State state = State.Instance;
         private int[][] changes = new int[3][];
         private bool allLayers;
         private int layer;
         private bool pasting;
+        private bool transparent;
         private bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
-        public TileMapEditCommand(Levels updater, TileMap tileMap, int layer, Point topLeft, Point bottomRight, int[][] changes, bool pasting, bool allLayers)
+        public TileMapEditCommand(Levels updater, Tilemap tilemap, int layer, Point topLeft, Point bottomRight, int[][] changes, bool pasting, bool transparent, bool allLayers)
         {
             this.updater = updater;
-            this.tileMap = tileMap;
+            this.tilemap = tilemap;
             this.allLayers = allLayers;
             if (topLeft.Y < bottomRight.Y)
             {
@@ -45,6 +46,7 @@ namespace LAZYSHELL.Undo
                 changes[i].CopyTo(this.changes[i], 0);
             }
             this.pasting = pasting;
+            this.transparent = transparent;
             Execute();
         }
         public void Execute()
@@ -59,38 +61,36 @@ namespace LAZYSHELL.Undo
                 {
                     tileX = topLeft.X + (x * 16);
                     tileY = topLeft.Y + (y * 16);
-
                     if (allLayers)
                     {
-                        for (int i = 0; i < 3; i++)
+                        for (int l = 0; l < 3; l++)
                         {
-                            if (i == 2 && updater.LevelMap.GraphicSetL3 == 0xFF)
+                            if (l == 2 && updater.LevelMap.GraphicSetL3 == 0xFF)
                                 break;
-                            if (changes[i] == null) continue;
-                            temp = tileMap.GetTileNum(i, tileX, tileY); // Save the current tileNum for later undo
-
-                            empty = changes[i][x + y * deltaX] == 0;
-                            if (temp != changes[i][x + y * deltaX])
+                            if (changes[l] == null) continue;
+                            temp = tilemap.GetTileNum(l, tileX, tileY); // Save the current tileNum for later undo
+                            empty = changes[l][x + y * deltaX] == 0;
+                            if (temp != changes[l][x + y * deltaX])
                             {
-                                tileMap.MakeEdit(changes[i][x + y * deltaX], i, tileX, tileY); // Set the tile to the new tileNum
-                                changes[i][x + y * deltaX] = temp; // Replace the change with the old tileNum, so that all we have to do is Execute to undo this command
+                                tilemap.SetTileNum(changes[l][x + y * deltaX], l, tileX, tileY); // Set the tile to the new tileNum
+                                changes[l][x + y * deltaX] = temp; // Replace the change with the old tileNum, so that all we have to do is Execute to undo this command
                             }
-                            if (pasting && empty && state.Move)
-                                tileMap.MakeEdit(temp, i, tileX, tileY);
+                            if (pasting && transparent && empty && state.Move)
+                                tilemap.SetTileNum(temp, l, tileX, tileY);
                         }
                     }
                     else
                     {
                         if (changes[layer] == null) continue;
-                        temp = tileMap.GetTileNum(layer, tileX, tileY); // Save the current tileNum for later undo
+                        temp = tilemap.GetTileNum(layer, tileX, tileY); // Save the current tileNum for later undo
                         empty = changes[layer][x + y * deltaX] == 0;
                         if (temp != changes[layer][x + y * deltaX])
                         {
-                            tileMap.MakeEdit(changes[layer][x + y * deltaX], layer, tileX, tileY); // Set the tile to the new tileNum
+                            tilemap.SetTileNum(changes[layer][x + y * deltaX], layer, tileX, tileY); // Set the tile to the new tileNum
                             changes[layer][x + y * deltaX] = temp; // Replace the change with the old tileNum, so that all we have to do is Execute to undo this command
                         }
-                        if (pasting && empty && state.Move)
-                            tileMap.MakeEdit(temp, layer, tileX, tileY);
+                        if (pasting && transparent && empty && state.Move)
+                            tilemap.SetTileNum(temp, layer, tileX, tileY);
                     }
                 }
             }

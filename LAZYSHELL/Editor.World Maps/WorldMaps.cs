@@ -65,6 +65,8 @@ namespace LAZYSHELL
             for (int i = 0; i < fontDialogue.Length; i++)
                 fontDialogue[i] = new FontCharacter(Model.Data, i, 1);
             InitializeComponent();
+            this.music.Items.AddRange(Lists.Numerize(Lists.MusicNames));
+            this.music.SelectedIndex = Model.Data[0x037DCF];
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip3, Keys.F2, baseConversion);
@@ -290,9 +292,9 @@ namespace LAZYSHELL
         }
         public void Assemble()
         {
+            Model.Data[0x03462D] = (byte)this.music.SelectedIndex;
             foreach (WorldMap wm in worldMaps)
                 wm.Assemble();
-
             // Palette set
             palettes.Assemble(Model.WorldMapPalettes, 0);
             byte[] compressed = new byte[0x100];
@@ -303,7 +305,6 @@ namespace LAZYSHELL
                     "LAZY SHELL");
             else
                 Bits.SetByteArray(Model.Data, 0x3E988D, compressed, 0, totalSize - 1);
-
             // Tilesets
             byte[] compress = new byte[0x800];
             totalSize = 0;
@@ -330,7 +331,6 @@ namespace LAZYSHELL
                     pOffset += 2;
                 }
             }
-
             // Graphics
             compressed = new byte[0x8000];
             totalSize = Comp.Compress(Model.WorldMapGraphics, compressed);
@@ -402,8 +402,8 @@ namespace LAZYSHELL
         {
             int[] pixels = new int[8 * 16];
 
-            Tile8x8 tempA = new Tile8x8(16, Model.WorldMapSprites, 0x200, GetPointPalette(), false, false, false, false);
-            Tile8x8 tempB = new Tile8x8(17, Model.WorldMapSprites, 0x220, GetPointPalette(), false, false, false, false);
+            Subtile tempA = new Subtile(16, Model.WorldMapSprites, 0x200, GetPointPalette(), false, false, false, false);
+            Subtile tempB = new Subtile(17, Model.WorldMapSprites, 0x220, GetPointPalette(), false, false, false, false);
 
             for (int y = 0; y < 8; y++)
             {
@@ -448,11 +448,11 @@ namespace LAZYSHELL
         {
             if (paletteEditor == null)
             {
-                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), palettes, 8, 0);
+                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), palettes, 8, 0,8);
                 paletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditor.Reload(new Function(PaletteUpdate), palettes, 8, 0);
+                paletteEditor.Reload(new Function(PaletteUpdate), palettes, 8, 0,8);
         }
         private void LoadGraphicEditor()
         {
@@ -496,7 +496,7 @@ namespace LAZYSHELL
         }
         private void GraphicUpdate()
         {
-            this.tileSet.AssembleIntoModel(16, 16);
+            this.tileSet.Assemble(16, 16);
             this.tileSet = new WorldMapTileSet(worldMap, palettes);
             SetWorldMapImage();
             LoadTileEditor();
@@ -519,7 +519,7 @@ namespace LAZYSHELL
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             this.copiedTiles = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
-            Tile16x16[] copiedTiles = new Tile16x16[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
+            Tile[] copiedTiles = new Tile[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
@@ -540,7 +540,7 @@ namespace LAZYSHELL
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             this.draggedTiles = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
-            Tile16x16[] draggedTiles = new Tile16x16[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
+            Tile[] draggedTiles = new Tile[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
@@ -584,7 +584,7 @@ namespace LAZYSHELL
                     if (y + y_ < 0 || y + y_ >= 16 ||
                         x + x_ < 0 || x + x_ >= 16)
                         continue;
-                    Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
+                    Tile tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileSet.TileSetLayer[(y + y_) * 16 + x + x_] = tile.Copy();
                     tileSet.TileSetLayer[(y + y_) * 16 + x + x_].TileIndex = (y + y_) * 16 + x + x_;
                 }
@@ -613,7 +613,7 @@ namespace LAZYSHELL
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             CopyBuffer buffer = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
-            Tile16x16[] copiedTiles = new Tile16x16[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
+            Tile[] copiedTiles = new Tile[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
@@ -1071,5 +1071,6 @@ namespace LAZYSHELL
             Do.Export(tileSetImage, "worldMap." + index.ToString("d2") + ".png");
         }
         #endregion
+
     }
 }

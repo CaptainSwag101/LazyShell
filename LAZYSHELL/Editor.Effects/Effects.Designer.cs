@@ -31,20 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Effects));
             this.number = new LAZYSHELL.ToolStripNumericUpDown();
-            this.panel106 = new System.Windows.Forms.Panel();
             this.yNegShift = new System.Windows.Forms.NumericUpDown();
             this.label96 = new System.Windows.Forms.Label();
             this.xNegShift = new System.Windows.Forms.NumericUpDown();
             this.e_paletteIndex = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel80 = new System.Windows.Forms.Panel();
-            this.panel85 = new System.Windows.Forms.Panel();
-            this.panel97 = new System.Windows.Forms.Panel();
             this.e_codec = new System.Windows.Forms.ComboBox();
             this.e_availableBytes = new System.Windows.Forms.Label();
-            this.label63 = new System.Windows.Forms.Label();
-            this.panel98 = new System.Windows.Forms.Panel();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.e_paletteSetSize = new System.Windows.Forms.NumericUpDown();
             this.label107 = new System.Windows.Forms.Label();
             this.imageNum = new System.Windows.Forms.NumericUpDown();
@@ -76,15 +69,11 @@
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
             this.panelEffects = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel106.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.yNegShift)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xNegShift)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e_paletteIndex)).BeginInit();
-            this.panel80.SuspendLayout();
-            this.panel85.SuspendLayout();
-            this.panel97.SuspendLayout();
-            this.panel98.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e_paletteSetSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e_graphicSetSize)).BeginInit();
@@ -92,14 +81,12 @@
             this.toolStrip3.SuspendLayout();
             this.panelEffects.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // number
             // 
             this.number.AutoSize = false;
-            this.number.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.number.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.number.ForeColor = System.Drawing.SystemColors.Control;
             this.number.Hexadecimal = false;
             this.number.Location = new System.Drawing.Point(223, 2);
             this.number.Maximum = new decimal(new int[] {
@@ -113,7 +100,7 @@
             0,
             0});
             this.number.Name = "number";
-            this.number.Size = new System.Drawing.Size(50, 17);
+            this.number.Size = new System.Drawing.Size(50, 21);
             this.number.Text = "0";
             this.number.Value = new decimal(new int[] {
             0,
@@ -122,121 +109,65 @@
             0});
             this.number.ValueChanged += new System.EventHandler(this.number_ValueChanged);
             // 
-            // panel106
-            // 
-            this.panel106.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel106.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel106.Controls.Add(this.yNegShift);
-            this.panel106.Controls.Add(this.label96);
-            this.panel106.Controls.Add(this.xNegShift);
-            this.panel106.Controls.Add(this.e_paletteIndex);
-            this.panel106.Controls.Add(this.label7);
-            this.panel106.Location = new System.Drawing.Point(3, 3);
-            this.panel106.Name = "panel106";
-            this.panel106.Size = new System.Drawing.Size(215, 21);
-            this.panel106.TabIndex = 519;
-            // 
             // yNegShift
             // 
-            this.yNegShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.yNegShift.Location = new System.Drawing.Point(172, 0);
+            this.yNegShift.Location = new System.Drawing.Point(89, 148);
             this.yNegShift.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.yNegShift.Name = "yNegShift";
-            this.yNegShift.Size = new System.Drawing.Size(39, 17);
+            this.yNegShift.Size = new System.Drawing.Size(39, 21);
             this.yNegShift.TabIndex = 395;
             this.yNegShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.yNegShift.ValueChanged += new System.EventHandler(this.yNegShift_ValueChanged);
             // 
             // label96
             // 
-            this.label96.BackColor = System.Drawing.SystemColors.Control;
-            this.label96.Location = new System.Drawing.Point(105, 0);
+            this.label96.AutoSize = true;
+            this.label96.Location = new System.Drawing.Point(10, 150);
             this.label96.Name = "label96";
-            this.label96.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label96.Size = new System.Drawing.Size(26, 17);
+            this.label96.Size = new System.Drawing.Size(31, 13);
             this.label96.TabIndex = 396;
-            this.label96.Text = "X,Y";
+            this.label96.Text = "(X,Y)";
             // 
             // xNegShift
             // 
-            this.xNegShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.xNegShift.Location = new System.Drawing.Point(132, 0);
+            this.xNegShift.Location = new System.Drawing.Point(49, 148);
             this.xNegShift.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.xNegShift.Name = "xNegShift";
-            this.xNegShift.Size = new System.Drawing.Size(39, 17);
+            this.xNegShift.Size = new System.Drawing.Size(39, 21);
             this.xNegShift.TabIndex = 395;
             this.xNegShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.xNegShift.ValueChanged += new System.EventHandler(this.xNegShift_ValueChanged);
             // 
             // e_paletteIndex
             // 
-            this.e_paletteIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.e_paletteIndex.Location = new System.Drawing.Point(68, 0);
+            this.e_paletteIndex.Location = new System.Drawing.Point(161, 6);
             this.e_paletteIndex.Maximum = new decimal(new int[] {
             7,
             0,
             0,
             0});
             this.e_paletteIndex.Name = "e_paletteIndex";
-            this.e_paletteIndex.Size = new System.Drawing.Size(36, 17);
+            this.e_paletteIndex.Size = new System.Drawing.Size(49, 21);
             this.e_paletteIndex.TabIndex = 4;
             this.e_paletteIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_paletteIndex.ValueChanged += new System.EventHandler(this.e_paletteIndex_ValueChanged);
             // 
             // label7
             // 
-            this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(112, 8);
             this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label7.Size = new System.Drawing.Size(67, 17);
+            this.label7.Size = new System.Drawing.Size(41, 13);
             this.label7.TabIndex = 394;
-            this.label7.Text = "Palette Row";
-            // 
-            // panel80
-            // 
-            this.panel80.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel80.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel80.Controls.Add(this.panel85);
-            this.panel80.Location = new System.Drawing.Point(3, 26);
-            this.panel80.Name = "panel80";
-            this.panel80.Size = new System.Drawing.Size(215, 111);
-            this.panel80.TabIndex = 400;
-            // 
-            // panel85
-            // 
-            this.panel85.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel85.Controls.Add(this.panel97);
-            this.panel85.Controls.Add(this.e_availableBytes);
-            this.panel85.Controls.Add(this.label63);
-            this.panel85.Controls.Add(this.panel98);
-            this.panel85.Controls.Add(this.e_paletteSetSize);
-            this.panel85.Controls.Add(this.label107);
-            this.panel85.Controls.Add(this.imageNum);
-            this.panel85.Controls.Add(this.label90);
-            this.panel85.Controls.Add(this.e_graphicSetSize);
-            this.panel85.Controls.Add(this.label2);
-            this.panel85.Controls.Add(this.label89);
-            this.panel85.Location = new System.Drawing.Point(0, 0);
-            this.panel85.Name = "panel85";
-            this.panel85.Size = new System.Drawing.Size(256, 110);
-            this.panel85.TabIndex = 7;
-            // 
-            // panel97
-            // 
-            this.panel97.Controls.Add(this.e_codec);
-            this.panel97.Location = new System.Drawing.Point(105, 90);
-            this.panel97.Name = "panel97";
-            this.panel97.Size = new System.Drawing.Size(107, 17);
-            this.panel97.TabIndex = 526;
+            this.label7.Text = "Palette";
             // 
             // e_codec
             // 
@@ -245,66 +176,34 @@
             this.e_codec.Items.AddRange(new object[] {
             "4bpp",
             "2bpp"});
-            this.e_codec.Location = new System.Drawing.Point(-2, -2);
+            this.e_codec.Location = new System.Drawing.Point(79, 82);
             this.e_codec.Name = "e_codec";
-            this.e_codec.Size = new System.Drawing.Size(110, 21);
+            this.e_codec.Size = new System.Drawing.Size(62, 21);
             this.e_codec.TabIndex = 41;
             this.e_codec.SelectedIndexChanged += new System.EventHandler(this.e_codec_SelectedIndexChanged);
             // 
             // e_availableBytes
             // 
             this.e_availableBytes.BackColor = System.Drawing.Color.Lime;
+            this.e_availableBytes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.e_availableBytes.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.e_availableBytes.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.e_availableBytes.Location = new System.Drawing.Point(0, 38);
+            this.e_availableBytes.Location = new System.Drawing.Point(6, 17);
             this.e_availableBytes.Name = "e_availableBytes";
             this.e_availableBytes.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.e_availableBytes.Size = new System.Drawing.Size(211, 14);
+            this.e_availableBytes.Size = new System.Drawing.Size(203, 20);
             this.e_availableBytes.TabIndex = 451;
             this.e_availableBytes.Text = "0 bytes free";
-            // 
-            // label63
-            // 
-            this.label63.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label63.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label63.ForeColor = System.Drawing.SystemColors.Control;
-            this.label63.Location = new System.Drawing.Point(0, 0);
-            this.label63.Name = "label63";
-            this.label63.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label63.Size = new System.Drawing.Size(211, 17);
-            this.label63.TabIndex = 417;
-            this.label63.Text = "EFFECT IMAGE";
-            this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel98
-            // 
-            this.panel98.Controls.Add(this.comboBox6);
-            this.panel98.Location = new System.Drawing.Point(105, 90);
-            this.panel98.Name = "panel98";
-            this.panel98.Size = new System.Drawing.Size(107, 17);
-            this.panel98.TabIndex = 527;
-            // 
-            // comboBox6
-            // 
-            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Items.AddRange(new object[] {
-            "Gridplane",
-            "16x16 mapped"});
-            this.comboBox6.Location = new System.Drawing.Point(-2, -2);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(53, 21);
-            this.comboBox6.TabIndex = 400;
+            this.e_availableBytes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // e_paletteSetSize
             // 
-            this.e_paletteSetSize.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.e_paletteSetSize.Increment = new decimal(new int[] {
             32,
             0,
             0,
             0});
-            this.e_paletteSetSize.Location = new System.Drawing.Point(105, 54);
+            this.e_paletteSetSize.Location = new System.Drawing.Point(79, 40);
             this.e_paletteSetSize.Maximum = new decimal(new int[] {
             256,
             0,
@@ -316,7 +215,7 @@
             0,
             0});
             this.e_paletteSetSize.Name = "e_paletteSetSize";
-            this.e_paletteSetSize.Size = new System.Drawing.Size(106, 17);
+            this.e_paletteSetSize.Size = new System.Drawing.Size(62, 21);
             this.e_paletteSetSize.TabIndex = 16;
             this.e_paletteSetSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_paletteSetSize.Value = new decimal(new int[] {
@@ -328,51 +227,44 @@
             // 
             // label107
             // 
-            this.label107.BackColor = System.Drawing.SystemColors.Control;
-            this.label107.Location = new System.Drawing.Point(0, 54);
+            this.label107.AutoSize = true;
+            this.label107.Location = new System.Drawing.Point(6, 42);
             this.label107.Name = "label107";
-            this.label107.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label107.Size = new System.Drawing.Size(104, 17);
+            this.label107.Size = new System.Drawing.Size(63, 13);
             this.label107.TabIndex = 394;
             this.label107.Text = "Palette Size";
             // 
             // imageNum
             // 
-            this.imageNum.BackColor = System.Drawing.SystemColors.Control;
-            this.imageNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.imageNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imageNum.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.imageNum.Location = new System.Drawing.Point(105, 19);
+            this.imageNum.Location = new System.Drawing.Point(55, 6);
             this.imageNum.Maximum = new decimal(new int[] {
             63,
             0,
             0,
             0});
             this.imageNum.Name = "imageNum";
-            this.imageNum.Size = new System.Drawing.Size(106, 17);
+            this.imageNum.Size = new System.Drawing.Size(49, 21);
             this.imageNum.TabIndex = 3;
             this.imageNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.imageNum.ValueChanged += new System.EventHandler(this.imageNum_ValueChanged);
             // 
             // label90
             // 
-            this.label90.BackColor = System.Drawing.SystemColors.Control;
-            this.label90.Location = new System.Drawing.Point(0, 90);
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(6, 84);
             this.label90.Name = "label90";
-            this.label90.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label90.Size = new System.Drawing.Size(104, 17);
+            this.label90.Size = new System.Drawing.Size(58, 13);
             this.label90.TabIndex = 394;
             this.label90.Text = "BPP Codec";
             // 
             // e_graphicSetSize
             // 
-            this.e_graphicSetSize.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.e_graphicSetSize.Increment = new decimal(new int[] {
             32,
             0,
             0,
             0});
-            this.e_graphicSetSize.Location = new System.Drawing.Point(105, 72);
+            this.e_graphicSetSize.Location = new System.Drawing.Point(79, 61);
             this.e_graphicSetSize.Maximum = new decimal(new int[] {
             8192,
             0,
@@ -384,7 +276,7 @@
             0,
             0});
             this.e_graphicSetSize.Name = "e_graphicSetSize";
-            this.e_graphicSetSize.Size = new System.Drawing.Size(106, 17);
+            this.e_graphicSetSize.Size = new System.Drawing.Size(62, 21);
             this.e_graphicSetSize.TabIndex = 16;
             this.e_graphicSetSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_graphicSetSize.Value = new decimal(new int[] {
@@ -396,29 +288,24 @@
             // 
             // label2
             // 
-            this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label2.Location = new System.Drawing.Point(0, 19);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 8);
             this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label2.Size = new System.Drawing.Size(104, 17);
+            this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 394;
             this.label2.Text = "Image";
             // 
             // label89
             // 
-            this.label89.BackColor = System.Drawing.SystemColors.Control;
-            this.label89.Location = new System.Drawing.Point(0, 72);
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(6, 63);
             this.label89.Name = "label89";
-            this.label89.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label89.Size = new System.Drawing.Size(104, 17);
+            this.label89.Size = new System.Drawing.Size(65, 13);
             this.label89.TabIndex = 394;
             this.label89.Text = "Graphic Size";
             // 
             // toolStrip2
             // 
-            this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.save,
             this.toolStripSeparator1,
@@ -531,7 +418,6 @@
             // 
             // toolStrip3
             // 
-            this.toolStrip3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.name,
             this.number,
@@ -553,13 +439,10 @@
             // 
             // name
             // 
-            this.name.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.name.DropDownHeight = 500;
             this.name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.name.DropDownWidth = 310;
             this.name.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.name.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.name.ForeColor = System.Drawing.SystemColors.Control;
             this.name.IntegralHeight = false;
             this.name.Name = "name";
             this.name.Size = new System.Drawing.Size(214, 25);
@@ -645,22 +528,28 @@
             this.openGraphics.ToolTipText = "BPP Graphics";
             this.openGraphics.Click += new System.EventHandler(this.openGraphics_Click);
             // 
-            // panel1
+            // panelEffects
             // 
             this.panelEffects.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panelEffects.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelEffects.Controls.Add(this.panel2);
             this.panelEffects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEffects.Location = new System.Drawing.Point(0, 50);
-            this.panelEffects.Name = "panel1";
+            this.panelEffects.Name = "panelEffects";
             this.panelEffects.Size = new System.Drawing.Size(1015, 684);
             this.panelEffects.TabIndex = 520;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.panel106);
-            this.panel2.Controls.Add(this.panel80);
+            this.panel2.Controls.Add(this.yNegShift);
+            this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.Controls.Add(this.label96);
+            this.panel2.Controls.Add(this.xNegShift);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.e_paletteIndex);
+            this.panel2.Controls.Add(this.imageNum);
+            this.panel2.Controls.Add(this.label7);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -668,6 +557,22 @@
             this.panel2.TabIndex = 520;
             this.panel2.SizeChanged += new System.EventHandler(this.panel2_SizeChanged);
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.e_codec);
+            this.groupBox1.Controls.Add(this.e_availableBytes);
+            this.groupBox1.Controls.Add(this.label89);
+            this.groupBox1.Controls.Add(this.e_graphicSetSize);
+            this.groupBox1.Controls.Add(this.label90);
+            this.groupBox1.Controls.Add(this.e_paletteSetSize);
+            this.groupBox1.Controls.Add(this.label107);
+            this.groupBox1.Location = new System.Drawing.Point(3, 33);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(215, 109);
+            this.groupBox1.TabIndex = 520;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Image Properties";
             // 
             // toolTip1
             // 
@@ -688,14 +593,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "EFFECTS - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Effects_FormClosing);
-            this.panel106.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.yNegShift)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xNegShift)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e_paletteIndex)).EndInit();
-            this.panel80.ResumeLayout(false);
-            this.panel85.ResumeLayout(false);
-            this.panel97.ResumeLayout(false);
-            this.panel98.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.e_paletteSetSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e_graphicSetSize)).EndInit();
@@ -705,6 +605,9 @@
             this.toolStrip3.PerformLayout();
             this.panelEffects.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -712,20 +615,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel106;
         private System.Windows.Forms.NumericUpDown yNegShift;
         private System.Windows.Forms.Label label96;
         private System.Windows.Forms.NumericUpDown xNegShift;
         private System.Windows.Forms.NumericUpDown e_paletteIndex;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panel80;
-        private System.Windows.Forms.Panel panel85;
-        private System.Windows.Forms.Panel panel97;
         private System.Windows.Forms.ComboBox e_codec;
         private System.Windows.Forms.Label e_availableBytes;
-        private System.Windows.Forms.Label label63;
-        private System.Windows.Forms.Panel panel98;
-        private System.Windows.Forms.ComboBox comboBox6;
         private System.Windows.Forms.NumericUpDown e_paletteSetSize;
         private System.Windows.Forms.Label label107;
         private System.Windows.Forms.NumericUpDown imageNum;
@@ -759,5 +655,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.ToolStripButton cullAnimations;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

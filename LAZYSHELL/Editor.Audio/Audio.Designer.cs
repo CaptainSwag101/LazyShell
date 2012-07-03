@@ -42,23 +42,20 @@
             this.pause = new System.Windows.Forms.ToolStripButton();
             this.back = new System.Windows.Forms.ToolStripButton();
             this.foward = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rateManualValue = new System.Windows.Forms.NumericUpDown();
             this.rate8000Hz = new System.Windows.Forms.RadioButton();
             this.rateManual = new System.Windows.Forms.RadioButton();
-            this.rate44100Hz = new System.Windows.Forms.RadioButton();
-            this.rate16000Hz = new System.Windows.Forms.RadioButton();
-            this.rate22050Hz = new System.Windows.Forms.RadioButton();
             this.rate32000Hz = new System.Windows.Forms.RadioButton();
-            this.label235 = new System.Windows.Forms.Label();
+            this.rate44100Hz = new System.Windows.Forms.RadioButton();
+            this.rate22050Hz = new System.Windows.Forms.RadioButton();
+            this.rate16000Hz = new System.Windows.Forms.RadioButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.label1 = new System.Windows.Forms.RichTextBox();
             this.toolStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rateManualValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -66,7 +63,6 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sampleNum,
             this.toolStripSeparator4,
@@ -85,14 +81,10 @@
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(572, 25);
             this.toolStrip1.TabIndex = 398;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // sampleNum
             // 
             this.sampleNum.AutoSize = false;
-            this.sampleNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.sampleNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleNum.ForeColor = System.Drawing.SystemColors.Control;
             this.sampleNum.Hexadecimal = false;
             this.sampleNum.Location = new System.Drawing.Point(7, 2);
             this.sampleNum.Maximum = new decimal(new int[] {
@@ -214,39 +206,27 @@
             this.foward.Text = "Play Next";
             this.foward.Click += new System.EventHandler(this.foward_Click);
             // 
-            // panel1
+            // groupBox1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.label235);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(100, 146);
-            this.panel1.TabIndex = 399;
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.rateManualValue);
-            this.panel3.Controls.Add(this.rate8000Hz);
-            this.panel3.Controls.Add(this.rateManual);
-            this.panel3.Controls.Add(this.rate44100Hz);
-            this.panel3.Controls.Add(this.rate16000Hz);
-            this.panel3.Controls.Add(this.rate22050Hz);
-            this.panel3.Controls.Add(this.rate32000Hz);
-            this.panel3.Location = new System.Drawing.Point(0, 19);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(96, 123);
-            this.panel3.TabIndex = 267;
+            this.groupBox1.Controls.Add(this.rateManualValue);
+            this.groupBox1.Controls.Add(this.rate8000Hz);
+            this.groupBox1.Controls.Add(this.rateManual);
+            this.groupBox1.Controls.Add(this.rate32000Hz);
+            this.groupBox1.Controls.Add(this.rate44100Hz);
+            this.groupBox1.Controls.Add(this.rate22050Hz);
+            this.groupBox1.Controls.Add(this.rate16000Hz);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Location = new System.Drawing.Point(0, 25);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(104, 146);
+            this.groupBox1.TabIndex = 399;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Sample Rate";
             // 
             // rateManualValue
             // 
             this.rateManualValue.Enabled = false;
-            this.rateManualValue.Location = new System.Drawing.Point(3, 100);
+            this.rateManualValue.Location = new System.Drawing.Point(7, 119);
             this.rateManualValue.Maximum = new decimal(new int[] {
             48000,
             0,
@@ -270,9 +250,9 @@
             // rate8000Hz
             // 
             this.rate8000Hz.AutoSize = true;
-            this.rate8000Hz.Location = new System.Drawing.Point(3, 2);
+            this.rate8000Hz.Location = new System.Drawing.Point(6, 20);
             this.rate8000Hz.Name = "rate8000Hz";
-            this.rate8000Hz.Size = new System.Drawing.Size(64, 17);
+            this.rate8000Hz.Size = new System.Drawing.Size(65, 17);
             this.rate8000Hz.TabIndex = 263;
             this.rate8000Hz.Text = "8000 Hz";
             this.rate8000Hz.UseVisualStyleBackColor = true;
@@ -281,72 +261,59 @@
             // rateManual
             // 
             this.rateManual.AutoSize = true;
-            this.rateManual.Location = new System.Drawing.Point(3, 82);
+            this.rateManual.Location = new System.Drawing.Point(6, 100);
             this.rateManual.Name = "rateManual";
-            this.rateManual.Size = new System.Drawing.Size(57, 17);
+            this.rateManual.Size = new System.Drawing.Size(54, 17);
             this.rateManual.TabIndex = 266;
             this.rateManual.Text = "Other:";
             this.rateManual.UseVisualStyleBackColor = true;
             this.rateManual.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
             // 
-            // rate44100Hz
-            // 
-            this.rate44100Hz.AutoSize = true;
-            this.rate44100Hz.Location = new System.Drawing.Point(3, 66);
-            this.rate44100Hz.Name = "rate44100Hz";
-            this.rate44100Hz.Size = new System.Drawing.Size(70, 17);
-            this.rate44100Hz.TabIndex = 266;
-            this.rate44100Hz.Text = "44100 Hz";
-            this.rate44100Hz.UseVisualStyleBackColor = true;
-            this.rate44100Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
-            // 
-            // rate16000Hz
-            // 
-            this.rate16000Hz.AutoSize = true;
-            this.rate16000Hz.Location = new System.Drawing.Point(3, 18);
-            this.rate16000Hz.Name = "rate16000Hz";
-            this.rate16000Hz.Size = new System.Drawing.Size(70, 17);
-            this.rate16000Hz.TabIndex = 264;
-            this.rate16000Hz.Text = "16000 Hz";
-            this.rate16000Hz.UseVisualStyleBackColor = true;
-            this.rate16000Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
-            // 
-            // rate22050Hz
-            // 
-            this.rate22050Hz.AutoSize = true;
-            this.rate22050Hz.Location = new System.Drawing.Point(3, 34);
-            this.rate22050Hz.Name = "rate22050Hz";
-            this.rate22050Hz.Size = new System.Drawing.Size(70, 17);
-            this.rate22050Hz.TabIndex = 265;
-            this.rate22050Hz.Text = "22050 Hz";
-            this.rate22050Hz.UseVisualStyleBackColor = true;
-            this.rate22050Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
-            // 
             // rate32000Hz
             // 
             this.rate32000Hz.AutoSize = true;
             this.rate32000Hz.Checked = true;
-            this.rate32000Hz.Location = new System.Drawing.Point(3, 50);
+            this.rate32000Hz.Location = new System.Drawing.Point(6, 68);
             this.rate32000Hz.Name = "rate32000Hz";
-            this.rate32000Hz.Size = new System.Drawing.Size(70, 17);
+            this.rate32000Hz.Size = new System.Drawing.Size(71, 17);
             this.rate32000Hz.TabIndex = 265;
             this.rate32000Hz.TabStop = true;
             this.rate32000Hz.Text = "32000 Hz";
             this.rate32000Hz.UseVisualStyleBackColor = true;
             this.rate32000Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
             // 
-            // label235
+            // rate44100Hz
             // 
-            this.label235.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label235.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label235.ForeColor = System.Drawing.SystemColors.Control;
-            this.label235.Location = new System.Drawing.Point(0, 0);
-            this.label235.Name = "label235";
-            this.label235.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label235.Size = new System.Drawing.Size(96, 17);
-            this.label235.TabIndex = 262;
-            this.label235.Text = "SAMPLE RATE";
-            this.label235.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.rate44100Hz.AutoSize = true;
+            this.rate44100Hz.Location = new System.Drawing.Point(6, 84);
+            this.rate44100Hz.Name = "rate44100Hz";
+            this.rate44100Hz.Size = new System.Drawing.Size(71, 17);
+            this.rate44100Hz.TabIndex = 266;
+            this.rate44100Hz.Text = "44100 Hz";
+            this.rate44100Hz.UseVisualStyleBackColor = true;
+            this.rate44100Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
+            // 
+            // rate22050Hz
+            // 
+            this.rate22050Hz.AutoSize = true;
+            this.rate22050Hz.Location = new System.Drawing.Point(6, 52);
+            this.rate22050Hz.Name = "rate22050Hz";
+            this.rate22050Hz.Size = new System.Drawing.Size(71, 17);
+            this.rate22050Hz.TabIndex = 265;
+            this.rate22050Hz.Text = "22050 Hz";
+            this.rate22050Hz.UseVisualStyleBackColor = true;
+            this.rate22050Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
+            // 
+            // rate16000Hz
+            // 
+            this.rate16000Hz.AutoSize = true;
+            this.rate16000Hz.Location = new System.Drawing.Point(6, 36);
+            this.rate16000Hz.Name = "rate16000Hz";
+            this.rate16000Hz.Size = new System.Drawing.Size(71, 17);
+            this.rate16000Hz.TabIndex = 264;
+            this.rate16000Hz.Text = "16000 Hz";
+            this.rate16000Hz.UseVisualStyleBackColor = true;
+            this.rate16000Hz.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
             // 
             // pictureBox1
             // 
@@ -354,20 +321,20 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(468, 142);
+            this.pictureBox1.Size = new System.Drawing.Size(464, 142);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.SizeChanged += new System.EventHandler(this.pictureBox1_SizeChanged);
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(100, 25);
+            this.panel2.Location = new System.Drawing.Point(104, 25);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(472, 146);
+            this.panel2.Size = new System.Drawing.Size(468, 146);
             this.panel2.TabIndex = 400;
             // 
             // backgroundWorker1
@@ -375,8 +342,8 @@
             this.backgroundWorker1.WorkerReportsProgress = true;
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // label1
             // 
@@ -395,7 +362,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(572, 416);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -405,9 +372,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Audio_FormClosing);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rateManualValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -431,16 +397,14 @@
         private System.Windows.Forms.ToolStripButton export;
         private System.Windows.Forms.ToolStripButton clear;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.RadioButton rate44100Hz;
         private System.Windows.Forms.RadioButton rate32000Hz;
         private System.Windows.Forms.RadioButton rate16000Hz;
         private System.Windows.Forms.RadioButton rate8000Hz;
-        private System.Windows.Forms.Label label235;
         private System.Windows.Forms.Panel panel2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RichTextBox label1;
         private System.Windows.Forms.RadioButton rateManual;
         private System.Windows.Forms.RadioButton rate22050Hz;

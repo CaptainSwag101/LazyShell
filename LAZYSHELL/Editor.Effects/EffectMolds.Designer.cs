@@ -277,7 +277,6 @@
             this.invert});
             this.toolStrip6.Location = new System.Drawing.Point(78, 25);
             this.toolStrip6.Name = "toolStrip6";
-            this.toolStrip6.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip6.Size = new System.Drawing.Size(24, 284);
             this.toolStrip6.TabIndex = 51;
@@ -292,7 +291,7 @@
             this.draw.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.draw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.draw.Name = "draw";
-            this.draw.Size = new System.Drawing.Size(23, 17);
+            this.draw.Size = new System.Drawing.Size(22, 17);
             this.draw.Text = "Draw";
             this.draw.Click += new System.EventHandler(this.draw_Click);
             // 
@@ -304,7 +303,7 @@
             this.erase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.erase.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.erase.Name = "erase";
-            this.erase.Size = new System.Drawing.Size(23, 17);
+            this.erase.Size = new System.Drawing.Size(22, 17);
             this.erase.Text = "Erase";
             this.erase.Click += new System.EventHandler(this.erase_Click);
             // 
@@ -316,7 +315,7 @@
             this.select.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.select.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.select.Name = "select";
-            this.select.Size = new System.Drawing.Size(23, 17);
+            this.select.Size = new System.Drawing.Size(22, 17);
             this.select.Text = "Select tile(s)";
             this.select.Click += new System.EventHandler(this.select_Click);
             // 
@@ -327,14 +326,14 @@
             this.selectAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.selectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.selectAll.Name = "selectAll";
-            this.selectAll.Size = new System.Drawing.Size(23, 17);
+            this.selectAll.Size = new System.Drawing.Size(22, 17);
             this.selectAll.Text = "Select All";
             this.selectAll.Click += new System.EventHandler(this.selectAll_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(23, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(22, 6);
             // 
             // cut
             // 
@@ -343,7 +342,7 @@
             this.cut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cut.Name = "cut";
-            this.cut.Size = new System.Drawing.Size(23, 17);
+            this.cut.Size = new System.Drawing.Size(22, 17);
             this.cut.Text = "Cut Selection";
             this.cut.Click += new System.EventHandler(this.cut_Click);
             // 
@@ -354,7 +353,7 @@
             this.copy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.copy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copy.Name = "copy";
-            this.copy.Size = new System.Drawing.Size(23, 17);
+            this.copy.Size = new System.Drawing.Size(22, 17);
             this.copy.Text = "Copy Selection";
             this.copy.Click += new System.EventHandler(this.copy_Click);
             // 
@@ -365,7 +364,7 @@
             this.paste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.paste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.paste.Name = "paste";
-            this.paste.Size = new System.Drawing.Size(23, 17);
+            this.paste.Size = new System.Drawing.Size(22, 17);
             this.paste.Text = "Paste";
             this.paste.Click += new System.EventHandler(this.paste_Click);
             // 
@@ -376,14 +375,14 @@
             this.delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.delete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(23, 15);
+            this.delete.Size = new System.Drawing.Size(22, 15);
             this.delete.Text = "Delete Selection";
             this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(23, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(22, 6);
             // 
             // undoButton
             // 
@@ -392,7 +391,7 @@
             this.undoButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.undoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.undoButton.Name = "undoButton";
-            this.undoButton.Size = new System.Drawing.Size(23, 12);
+            this.undoButton.Size = new System.Drawing.Size(22, 12);
             this.undoButton.Text = "Undo";
             this.undoButton.Click += new System.EventHandler(this.undoButton_Click);
             // 
@@ -403,14 +402,14 @@
             this.redoButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.redoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.redoButton.Name = "redoButton";
-            this.redoButton.Size = new System.Drawing.Size(23, 12);
+            this.redoButton.Size = new System.Drawing.Size(22, 12);
             this.redoButton.Text = "Redo";
             this.redoButton.Click += new System.EventHandler(this.redoButton_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(23, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(22, 6);
             // 
             // mirror
             // 
@@ -419,7 +418,7 @@
             this.mirror.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mirror.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mirror.Name = "mirror";
-            this.mirror.Size = new System.Drawing.Size(23, 15);
+            this.mirror.Size = new System.Drawing.Size(22, 15);
             this.mirror.Text = "Mirror Selection";
             this.mirror.Click += new System.EventHandler(this.mirror_Click);
             // 
@@ -430,7 +429,7 @@
             this.invert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.invert.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.invert.Name = "invert";
-            this.invert.Size = new System.Drawing.Size(23, 17);
+            this.invert.Size = new System.Drawing.Size(22, 17);
             this.invert.Text = "Invert Selection";
             this.invert.Click += new System.EventHandler(this.invert_Click);
             // 
@@ -473,7 +472,6 @@
             // panel105
             // 
             this.panel105.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel105.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel105.Controls.Add(this.panel1);
             this.panel105.Controls.Add(this.toolStrip2);
             this.panel105.Controls.Add(this.label86);
@@ -489,10 +487,11 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.pictureBoxEffectTileset);
-            this.panel1.Location = new System.Drawing.Point(0, 44);
+            this.panel1.Location = new System.Drawing.Point(0, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(128, 236);
+            this.panel1.Size = new System.Drawing.Size(132, 238);
             this.panel1.TabIndex = 528;
             // 
             // pictureBoxEffectTileset
@@ -536,12 +535,10 @@
             this.openTileEditor});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(128, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(132, 25);
             this.toolStrip2.TabIndex = 527;
             this.toolStrip2.TabStop = true;
-            this.toolStrip2.Text = "toolStrip1";
             // 
             // openTileEditor
             // 
@@ -557,22 +554,23 @@
             // label86
             // 
             this.label86.BackColor = System.Drawing.SystemColors.Control;
-            this.label86.Location = new System.Drawing.Point(0, 26);
+            this.label86.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label86.Location = new System.Drawing.Point(0, 25);
             this.label86.Name = "label86";
-            this.label86.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label86.Size = new System.Drawing.Size(64, 17);
+            this.label86.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.label86.Size = new System.Drawing.Size(67, 21);
             this.label86.TabIndex = 394;
             this.label86.Text = "Size";
+            this.label86.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // e_tileSetSize
             // 
-            this.e_tileSetSize.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.e_tileSetSize.Increment = new decimal(new int[] {
             64,
             0,
             0,
             0});
-            this.e_tileSetSize.Location = new System.Drawing.Point(65, 26);
+            this.e_tileSetSize.Location = new System.Drawing.Point(67, 25);
             this.e_tileSetSize.Maximum = new decimal(new int[] {
             512,
             0,
@@ -584,7 +582,7 @@
             0,
             0});
             this.e_tileSetSize.Name = "e_tileSetSize";
-            this.e_tileSetSize.Size = new System.Drawing.Size(63, 17);
+            this.e_tileSetSize.Size = new System.Drawing.Size(65, 21);
             this.e_tileSetSize.TabIndex = 16;
             this.e_tileSetSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_tileSetSize.Value = new decimal(new int[] {
@@ -630,7 +628,6 @@
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(665, 25);
             this.toolStrip1.TabIndex = 404;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // importIntoTilemap
             // 

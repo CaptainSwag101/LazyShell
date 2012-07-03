@@ -70,6 +70,7 @@
     <Compile Include="!Static\BRR.cs" />
     <Compile Include="!Universal\Element.cs" />
     <Compile Include="!Universal\History.cs" />
+    <Compile Include="!Universal\Tilemap.cs" />
     <Compile Include="!Universal\ToolTipLabel.cs" />
     <Compile Include="Editor.Audio\Audio.cs">
       <SubType>Form</SubType>
@@ -85,6 +86,45 @@
     </Compile>
     <Compile Include="Editor.Audio\BRRSample.cs" />
     <Compile Include="Editor.Audio\SPC.cs" />
+    <Compile Include="Editor.Menus\GameSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Menus\GameSelect.Designer.cs">
+      <DependentUpon>GameSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor.Menus\Overworld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Menus\Overworld.Designer.cs">
+      <DependentUpon>Overworld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor.Menus\MenusEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Menus\MenusEditor.Designer.cs">
+      <DependentUpon>MenusEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor.Mini Games\BeetleMania.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Mini Games\BeetleMania.Designer.cs">
+      <DependentUpon>BeetleMania.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor.Mini Games\MinecartData.cs" />
+    <Compile Include="Editor.Mini Games\MiniGames.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Mini Games\MiniGames.Designer.cs">
+      <DependentUpon>MiniGames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor.Mini Games\MineCart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Mini Games\MineCart.Designer.cs">
+      <DependentUpon>MineCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor.Mini Games\Mode7Tilemap.cs" />
+    <Compile Include="Editor.Mini Games\SideTilemap.cs" />
     <Compile Include="Editor.Monsters\BattleScripts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,7 +146,6 @@
     </Compile>
     <Compile Include="Editor.Levels\Levels\LevelSolidMods.cs" />
     <Compile Include="Editor.Levels\Levels\LevelTileMods.cs" />
-    <Compile Include="!Universal\Map.cs" />
     <Compile Include="Features\CoordAdjust.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -348,17 +387,17 @@
     <Compile Include="Editor.Levels\LevelsTemplate.Designer.cs">
       <DependentUpon>LevelsTemplate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor.Levels\LevelsTilemap.cs">
+    <Compile Include="Editor.Levels\TilemapEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor.Levels\LevelsTilemap.Designer.cs">
-      <DependentUpon>LevelsTilemap.cs</DependentUpon>
+    <Compile Include="Editor.Levels\TilemapEditor.Designer.cs">
+      <DependentUpon>TilemapEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor.Levels\LevelsTileset.cs">
+    <Compile Include="Editor.Levels\TilesetEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor.Levels\LevelsTileset.Designer.cs">
-      <DependentUpon>LevelsTileset.cs</DependentUpon>
+    <Compile Include="Editor.Levels\TilesetEditor.Designer.cs">
+      <DependentUpon>TilesetEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Editors\PaletteEditor.cs">
       <SubType>Form</SubType>
@@ -444,11 +483,11 @@
     <Compile Include="Editor.Levels\Levels\OverlapTileset.cs" />
     <Compile Include="Editor.Levels\Levels\LevelSolidMap.cs" />
     <Compile Include="Editor.Levels\Levels\SolidityTile.cs" />
-    <Compile Include="!Universal\Tile16x16.cs" />
-    <Compile Include="!Universal\Tile8x8.cs" />
-    <Compile Include="Editor.Levels\Levels\TileMap.cs" />
-    <Compile Include="!Universal\Tile32x32.cs" />
-    <Compile Include="Editor.Levels\Levels\TileSet.cs" />
+    <Compile Include="!Universal\Tile.cs" />
+    <Compile Include="!Universal\Subtile.cs" />
+    <Compile Include="Editor.Levels\Levels\LevelTilemap.cs" />
+    <Compile Include="!Universal\OverlapTile.cs" />
+    <Compile Include="!Universal\Tileset.cs" />
     <Compile Include="Editor.Levels\Levels\LevelTemplate.cs" />
     <Compile Include="!Static\Lists.cs" />
     <Compile Include="Editor.Title\Title.cs">
@@ -493,6 +532,21 @@
     <EmbeddedResource Include="About.resx">
       <SubType>Designer</SubType>
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.Menus\GameSelect.resx">
+      <DependentUpon>GameSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.Menus\Overworld.resx">
+      <DependentUpon>Overworld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.Menus\MenusEditor.resx">
+      <DependentUpon>MenusEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.Mini Games\MiniGames.resx">
+      <DependentUpon>MiniGames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.Mini Games\MineCart.resx">
+      <DependentUpon>MineCart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -592,7 +646,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor.World Maps\WorldMapTileset.cs" />
-    <Compile Include="Editor.Sprites\MenuTileset.cs" />
+    <Compile Include="Editor.Menus\MenuTileset.cs" />
     <Compile Include="Editor.Sprites\Mold.cs" />
     <Compile Include="Editor.Sprites\Sequence.cs" />
     <Compile Include="Editor.Sprites\Sprite.cs" />
@@ -805,12 +859,12 @@
       <DependentUpon>LevelsTemplate.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editor.Levels\LevelsTilemap.resx">
-      <DependentUpon>LevelsTilemap.cs</DependentUpon>
+    <EmbeddedResource Include="Editor.Levels\TilemapEditor.resx">
+      <DependentUpon>TilemapEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editor.Levels\LevelsTileset.resx">
-      <DependentUpon>LevelsTileset.cs</DependentUpon>
+    <EmbeddedResource Include="Editor.Levels\TilesetEditor.resx">
+      <DependentUpon>TilesetEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editors\SpritePartitions.resx">
@@ -899,6 +953,8 @@
     <None Include="Resources\Tiles\stairsUpRightHigh.gif" />
     <None Include="Resources\Tiles\stairsUpRightLow.gif" />
     <None Include="Resources\coordinator.gif" />
+    <None Include="Resources\buttonMushroom.gif" />
+    <None Include="Resources\buttonSSObjects.gif" />
     <Content Include="Resources\Data\apply.gif" />
     <Content Include="Resources\Data\back.gif" />
     <Content Include="Resources\Data\baseConversion.gif" />
@@ -1032,6 +1088,8 @@
     <Content Include="Resources\Forms\undock.gif" />
     <None Include="Resources\Lunar Compress.dll" />
     <None Include="Resources\history.gif" />
+    <None Include="Resources\mainMenus.gif" />
+    <None Include="Resources\mainMiniGames.png" />
     <Content Include="Resources\Main\about_small.gif" />
     <None Include="Resources\synchronize.gif" />
     <None Include="Resources\moveall.gif" />

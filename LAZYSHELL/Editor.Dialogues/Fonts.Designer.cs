@@ -67,6 +67,7 @@
             this.saveImageAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.insertIntoTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertIntoBattleDialogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
             this.fontType = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -77,7 +78,6 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.reset = new System.Windows.Forms.ToolStripButton();
             this.indexLabel = new System.Windows.Forms.Label();
-            this.insertIntoBattleDialogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel30.SuspendLayout();
             this.panel25.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -179,6 +179,7 @@
             // 
             // colors
             // 
+            this.colors.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.colors.Location = new System.Drawing.Point(0, 0);
             this.colors.Name = "colors";
             this.colors.Size = new System.Drawing.Size(256, 16);
@@ -502,6 +503,13 @@
             this.insertIntoTextToolStripMenuItem.Text = "Insert into dialogue";
             this.insertIntoTextToolStripMenuItem.Click += new System.EventHandler(this.insertIntoTextToolStripMenuItem_Click);
             // 
+            // insertIntoBattleDialogueToolStripMenuItem
+            // 
+            this.insertIntoBattleDialogueToolStripMenuItem.Name = "insertIntoBattleDialogueToolStripMenuItem";
+            this.insertIntoBattleDialogueToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.insertIntoBattleDialogueToolStripMenuItem.Text = "Insert into battle dialogue";
+            this.insertIntoBattleDialogueToolStripMenuItem.Click += new System.EventHandler(this.insertIntoBattleDialogueToolStripMenuItem_Click);
+            // 
             // toolStrip7
             // 
             this.toolStrip7.BackColor = System.Drawing.SystemColors.Control;
@@ -602,13 +610,6 @@
             this.indexLabel.TabIndex = 527;
             this.indexLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.indexLabel.Visible = false;
-            // 
-            // insertIntoBattleDialogueToolStripMenuItem
-            // 
-            this.insertIntoBattleDialogueToolStripMenuItem.Name = "insertIntoBattleDialogueToolStripMenuItem";
-            this.insertIntoBattleDialogueToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.insertIntoBattleDialogueToolStripMenuItem.Text = "Insert into battle dialogue";
-            this.insertIntoBattleDialogueToolStripMenuItem.Click += new System.EventHandler(this.insertIntoBattleDialogueToolStripMenuItem_Click);
             // 
             // Fonts
             // 

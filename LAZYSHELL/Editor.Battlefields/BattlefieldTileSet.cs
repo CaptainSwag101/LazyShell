@@ -16,8 +16,8 @@ namespace LAZYSHELL
         public PaletteSet PaletteSet { get { return paletteSet; } set { paletteSet = value; } }
         private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
         private byte[] graphics; public byte[] Graphics { get { return graphics; } set { graphics = value; } }
-        private Tile16x16[] tilesetLayer;
-        public Tile16x16[] TileSetLayer { get { return tilesetLayer; } set { tilesetLayer = value; } }
+        private Tile[] tilesetLayer;
+        public Tile[] TileSetLayer { get { return tilesetLayer; } set { tilesetLayer = value; } }
         public BattlefieldTileSet(Battlefield map, PaletteSet paletteSet)
         {
             this.battlefield = map; // grab the current LevelMap
@@ -37,14 +37,14 @@ namespace LAZYSHELL
             if (battlefield.GraphicSetE < 0xC8)
                 Buffer.BlockCopy(Model.GraphicSets[battlefield.GraphicSetE + 0x48], 0, graphics, 0x5000, 0x1000);
 
-            tilesetLayer = new Tile16x16[32 * 32];
+            tilesetLayer = new Tile[32 * 32];
 
             for (int i = 0; i < tilesetLayer.Length; i++)
-                tilesetLayer[i] = new Tile16x16(i);
+                tilesetLayer[i] = new Tile(i);
 
             DrawTileset(tileSet, tilesetLayer);
         }
-        public BattlefieldTileSet(Battlefield map, PaletteSet paletteSet, Tile16x16[] tilesetLayer)
+        public BattlefieldTileSet(Battlefield map, PaletteSet paletteSet, Tile[] tilesetLayer)
         {
             this.battlefield = map; // grab the current LevelMap
             this.paletteSet = paletteSet; // grab the current Palette Set
@@ -66,11 +66,11 @@ namespace LAZYSHELL
         public BattlefieldTileSet()
         {
         }
-        public void DrawTileset(byte[] src, Tile16x16[] dst)
+        public void DrawTileset(byte[] src, Tile[] dst)
         {
             byte temp;
             ushort tile;
-            Tile8x8 source;
+            Subtile source;
             int offset = 0;
 
             for (int i = 0; i < dst.Length; i++)
@@ -79,7 +79,7 @@ namespace LAZYSHELL
                 {
                     tile = (ushort)(Bits.GetShort(src, offset) & 0x03FF); offset++;
                     temp = src[offset]; offset++;
-                    source = Do.DrawTile8x8(tile, temp, graphics, paletteSet.Palettes, 0x20);
+                    source = Do.DrawSubtile(tile, temp, graphics, paletteSet.Palettes, 0x20);
                     dst[i].Subtiles[z] = source;
                 }
                 offset += 60; // jump forward in buffer to grab correct 8x8 tiles
@@ -87,7 +87,7 @@ namespace LAZYSHELL
                 {
                     tile = (ushort)(Bits.GetShort(src, offset) & 0x03FF); offset++;
                     temp = src[offset]; offset++;
-                    source = Do.DrawTile8x8(tile, temp, graphics, paletteSet.Palettes, 0x20);
+                    source = Do.DrawSubtile(tile, temp, graphics, paletteSet.Palettes, 0x20);
                     dst[i].Subtiles[a] = source;;
                 }
                 if ((i - 15) % 16 == 0)
@@ -95,20 +95,20 @@ namespace LAZYSHELL
                 offset -= 64; // jump back in buffer so that we can start the next 16x16 tile
             }
         }
-        public void DrawTileset(Tile16x16[] src, byte[] dst)
+        public void DrawTileset(Tile[] src, byte[] dst)
         {
             ushort tile;
-            Tile8x8 source;
+            Subtile source;
             int offset = 0;
             for (int i = 0; i < src.Length; i++)
             {
                 for (int z = 0; z < 2; z++)
                 {
                     source = src[i].Subtiles[z];
-                    tile = (ushort)source.TileIndex;
+                    tile = (ushort)source.Index;
                     Bits.SetShort(dst, offset, tile); offset++;
-                    dst[offset] |= (byte)(source.PaletteIndex << 2);
-                    Bits.SetBit(dst, offset, 5, source.PriorityOne);
+                    dst[offset] |= (byte)(source.Palette << 2);
+                    Bits.SetBit(dst, offset, 5, source.Priority1);
                     Bits.SetBit(dst, offset, 6, source.Mirror);
                     Bits.SetBit(dst, offset, 7, source.Invert); offset++;
                 }
@@ -116,10 +116,10 @@ namespace LAZYSHELL
                 for (int a = 2; a < 4; a++)
                 {
                     source = src[i].Subtiles[a];
-                    tile = (ushort)source.TileIndex;
+                    tile = (ushort)source.Index;
                     Bits.SetShort(dst, offset, tile); offset++;
-                    dst[offset] |= (byte)(source.PaletteIndex << 2);
-                    Bits.SetBit(dst, offset, 5, source.PriorityOne);
+                    dst[offset] |= (byte)(source.Palette << 2);
+                    Bits.SetBit(dst, offset, 5, source.Priority1);
                     Bits.SetBit(dst, offset, 6, source.Mirror);
                     Bits.SetBit(dst, offset, 7, source.Invert); offset++;
                 }
@@ -132,7 +132,7 @@ namespace LAZYSHELL
         {
             DrawTileset(tileSet, tilesetLayer);
         }
-        public void AssembleIntoModel(int width, int height)
+        public void Assemble(int width, int height)
         {
             int offset = 0;
             for (int q = 0; q < 4; q++)
@@ -141,7 +141,7 @@ namespace LAZYSHELL
                 {
                     for (int x = 0; x < width; x++)
                     {
-                        Tile16x16 tile = tilesetLayer[(y * width + x) + (q * 256)];
+                        Tile tile = tilesetLayer[(y * width + x) + (q * 256)];
                         if (tile == null) continue;
                         for (int s = 0; s < 4; s++)
                         {
@@ -149,11 +149,11 @@ namespace LAZYSHELL
                             offset += (s % 2) * 2;
                             offset += (s / 2) * (width * 2 * 2);
                             offset += (q * 256) * 8;
-                            Tile8x8 subtile = tile.Subtiles[s];
+                            Subtile subtile = tile.Subtiles[s];
                             if (subtile == null) continue;
-                            Bits.SetShort(tileSet, offset, (ushort)subtile.TileIndex);
-                            tileSet[offset + 1] |= (byte)(subtile.PaletteIndex << 2);
-                            Bits.SetBit(tileSet, offset + 1, 5, subtile.PriorityOne);
+                            Bits.SetShort(tileSet, offset, (ushort)subtile.Index);
+                            tileSet[offset + 1] |= (byte)(subtile.Palette << 2);
+                            Bits.SetBit(tileSet, offset + 1, 5, subtile.Priority1);
                             Bits.SetBit(tileSet, offset + 1, 6, subtile.Mirror);
                             Bits.SetBit(tileSet, offset + 1, 7, subtile.Invert);
                         }

@@ -80,11 +80,11 @@ namespace LAZYSHELL.Patches
             IPSRecord record = new IPSRecord();
 
             record.offset = Bits.Get24BitBigEndian(patch, index); index += 3;
-            record.size = Bits.GetShortBigEndian(patch, index); index += 2;
+            record.size = Bits.GetShortReversed(patch, index); index += 2;
 
             if (record.size == 0) // RLE encoded
             {
-                record.size = Bits.GetShortBigEndian(patch, index); index += 2;
+                record.size = Bits.GetShortReversed(patch, index); index += 2;
                 record.recordData = new Byte[record.size];
                 byte value = patch[index]; index++;
 

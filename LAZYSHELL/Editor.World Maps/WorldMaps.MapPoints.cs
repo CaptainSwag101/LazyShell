@@ -54,6 +54,7 @@ namespace LAZYSHELL
 
             if (mapPoint.GoMapPoint)
             {
+                label52.Text = "If memory bit set";
                 label55.Text = "lead to destination";
                 label56.Text = "else lead to destination";
                 whichPointCheckAddress.Enabled = true;
@@ -70,6 +71,7 @@ namespace LAZYSHELL
             {
                 runEvent.BringToFront();
                 runEventEdit.BringToFront();
+                label52.Text = "";
                 label55.Text = "assigned event #";
                 label56.Text = "";
                 whichPointCheckAddress.Enabled = false;
@@ -319,7 +321,7 @@ namespace LAZYSHELL
             }
 
             Bitmap icon = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
-            Bitmap bgimage = Model.MenuBackground_;
+            Bitmap bgimage = Model.MenuBG_;
             if (bgimage != null)
             {
                 Rectangle background = new Rectangle(0, e.Index * 15 % bgimage.Height, bgimage.Width, 15);
@@ -449,6 +451,7 @@ namespace LAZYSHELL
                 }
                 whichPointCheckAddress.Enabled = true;
                 whichPointCheckBit.Enabled = true;
+                label52.Text = "If memory bit set";
                 label55.Text = "lead to destination";
                 label56.Text = "else lead to destination";
                 goMapPointA.Enabled = true;
@@ -461,6 +464,7 @@ namespace LAZYSHELL
             {
                 runEvent.BringToFront();
                 runEventEdit.BringToFront();
+                label52.Text = "";
                 label55.Text = "assigned event #";
                 label56.Text = "";
                 whichPointCheckAddress.Enabled = false;

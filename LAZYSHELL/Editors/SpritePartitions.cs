@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,194 +12,305 @@ namespace LAZYSHELL
     public partial class SpritePartitions : Form
     {
         private Levels level;
-        private NPCSpritePartitions[] npcSpritePartitions;
+        private int index { get { return (int)partitionNum.Value; } set { partitionNum.Value = value; } }
+        private NPCSpritePartitions[] partitions;
+        private NPCSpritePartitions partition { get { return partitions[index]; } set { partitions[index] = value; } }
+        private Bitmap previewImage;
+        private LevelNPCs levelNPCs { get { return level.Level.LevelNPCs; } }
+        private List<NPC> npcs { get { return levelNPCs.Npcs; } }
+        private bool updating;
         // constructor
-        public SpritePartitions(Levels level, NPCSpritePartitions[] npcSpritePartitions)
+        public SpritePartitions(Levels level, NPCSpritePartitions[] partitions, int index)
         {
-            this.level = level;
-            this.npcSpritePartitions = npcSpritePartitions;
             InitializeComponent();
-
-            byte2a.SelectedIndex = 0;
-            byte2b.SelectedIndex = 0;
-            byte3a.SelectedIndex = 0;
-            byte3b.SelectedIndex = 0;
-            byte4a.SelectedIndex = 0;
-            byte4b.SelectedIndex = 0;
+            this.level = level;
+            this.partitions = partitions;
+            this.index = index;
+            RefreshPartition();
             new History(this);
         }
-        // functions
-        private void LoadSearch()
+        public void Reload(int index)
         {
-            listBox1.Items.Clear();
-
-            bool
-                notFound,
-                notFoundInByte1, notFoundInByte2, notFoundInByte3, notFoundInByte4,
-                notFoundBlockAinByte2, notFoundBlockAinByte3, notFoundBlockAinByte4,
-                notFoundBlockBinByte2, notFoundBlockBinByte3, notFoundBlockBinByte4,
-                notFoundBlockCinByte2, notFoundBlockCinByte3, notFoundBlockCinByte4;
-
-            for (int i = 0; i < npcSpritePartitions.Length; i++)
+            this.index = index;
+        }
+        // functions
+        private void RefreshPartition()
+        {
+            updating = true;
+            extraSpriteBuffer.Value = partition.ExtraSpriteBuffer;
+            allyCount.Value = partition.AllySpriteBuffer;
+            extraSprites.Checked = partition.ExtraSprites;
+            noWaterPalettes.Checked = partition.FullPaletteBuffer;
+            byte2a.SelectedIndex = partition.CloneASprite;
+            byte2b.SelectedIndex = partition.CloneAMain;
+            byte2.Checked = partition.Byte2bit7;
+            byte3a.SelectedIndex = partition.CloneBSprite;
+            byte3b.SelectedIndex = partition.CloneBMain;
+            byte3.Checked = partition.CloneBIndexing;
+            byte4a.SelectedIndex = partition.CloneCSprite;
+            byte4b.SelectedIndex = partition.CloneCMain;
+            byte4.Checked = partition.CloneCIndexing;
+            SetPreviewImage();
+            updating = false;
+        }
+        private void SetPreviewImage()
+        {
+            return;
+            //
+            int[] pixels = new int[128 * 256];
+            List<int> cloneSprites = new List<int>();
+            List<int> dynamicSprites = new List<int>();
+            foreach (NPC levelNPC in npcs)
             {
-                notFound = false;
+                int NPCID = levelNPC.EngageType == 0 ? Math.Min(511, levelNPC.NPCID + levelNPC.PropertyA) : Math.Min(511, (int)levelNPC.NPCID);
+                NPCProperties npc = Model.NPCProperties[NPCID];
+                if (cloneSprites.Count < 3 && !npc.ActiveVRAM && !cloneSprites.Contains((int)npc.Sprite))
+                    cloneSprites.Add((int)npc.Sprite);
+                else if (!cloneSprites.Contains((int)npc.Sprite))
+                    dynamicSprites.Add((int)npc.Sprite);
+            }
+            // draw clone VRAM
+            int counter = 0;
+            int x = 32;
+            int y = 64;
+            foreach (int sprite in cloneSprites)
+            {
+                x = 32;
+                if (counter == 0 && partition.CloneASprite == 7)
+                    y += 64;   // start a block after;
+                if (counter == 1 && partition.CloneBSprite == 7)
+                    y += 64;   // start a block after;
+                if (counter == 2 && partition.CloneCSprite == 7)
+                    y += 64;   // start a block after;
+                int y_ref = y;
+                DrawNPCToVRAM(pixels, ref x, ref y_ref, sprite, 0, false);
+                y += 64;
+                counter++;
+            }
+            // draw shadows
 
-                notFoundInByte1 = false;
-                notFoundInByte2 = false;
-                notFoundInByte3 = false;
-                notFoundInByte4 = false;
-                notFoundBlockAinByte2 = false;
-                notFoundBlockAinByte3 = false;
-                notFoundBlockAinByte4 = false;
-                notFoundBlockBinByte2 = false;
-                notFoundBlockBinByte3 = false;
-                notFoundBlockBinByte4 = false;
-                notFoundBlockCinByte2 = false;
-                notFoundBlockCinByte3 = false;
-                notFoundBlockCinByte4 = false;
-
-                if (checkVramIndex.GetItemChecked(0))
+            // draw dynamic VRAM
+            x = y = 0;
+            DrawNPCToVRAM(pixels, ref x, ref y, 0, 0, true);    // Mario
+            x = y = 0;
+            if (partition.AllySpriteBuffer == 1)
+                x = 64;
+            if (partition.AllySpriteBuffer == 2)
+                y = 16;
+            if (partition.AllySpriteBuffer == 2)
+            {
+                x = 64;
+                y = 16;
+            }
+            foreach (int sprite in dynamicSprites)
+                DrawNPCToVRAM(pixels, ref x, ref y, sprite, 0, true);
+            // 
+            previewImage = Do.PixelsToImage(pixels, 128, 256);
+            pictureBox1.Invalidate();
+        }
+        private void DrawNPCToVRAM(int[] dst, ref int x, ref int y, int spriteIndex, int moldIndex, bool dynamic)
+        {
+            Sprite sprite = Model.Sprites[spriteIndex];
+            Animation animation = Model.Animations[sprite.AnimationPacket];
+            GraphicPalette image = Model.GraphicPalettes[sprite.GraphicPalettePacket];
+            byte[] graphics = image.Graphics(Model.SpriteGraphics);
+            int[] palette = Model.SpritePalettes[image.PaletteNum + sprite.PaletteIndex].Palette;
+            //
+            for (int i = 0; i < animation.Molds.Count; i++)
+            {
+                if (dynamic && i > 0)
+                    break;
+                Mold mold;
+                if (dynamic)
+                    mold = animation.Molds[moldIndex];
+                else
+                    mold = animation.Molds[i];
+                int counter = 3;
+                foreach (Mold.Tile tile in mold.Tiles)
                 {
-                    if (vramIndex.Value != npcSpritePartitions[i].VramIndex) notFoundInByte1 = true;
+                    tile.Set8x8Tiles(graphics, palette, mold.Gridplane);
+                    Rectangle srcRegion;
+                    Rectangle dstRegion;
+                    int[] src = mold.Gridplane ? tile.GetGridplanePixels() : tile.Get16x16TilePixels();
+                    if (dynamic)
+                    {
+                        if (x + tile.Width > 128)
+                        {
+                            x = 0;
+                            y += 16;
+                        }
+                        srcRegion = new Rectangle(0, 0, tile.Width, 16);
+                        dstRegion = new Rectangle(x, y, tile.Width, 16);
+                        Do.PixelsToPixels(src, dst, mold.Gridplane ? 32 : 16, 128, srcRegion, dstRegion);
+                        if (mold.Gridplane) // draw bottom half of sprite
+                        {
+                            srcRegion.Y += 16;
+                            dstRegion.X += tile.Width;
+                            Do.PixelsToPixels(src, dst, 32, 128, srcRegion, dstRegion);
+                            x += 64;
+                        }
+                        else
+                            x += tile.Width;
+                    }
+                    else
+                    {
+                        if (x + tile.Width > 128)
+                        {
+                            x = 32;
+                            y += 32;
+                        }
+                        if (mold.Gridplane)
+                        {
+                            srcRegion = new Rectangle(0, 0, tile.Width, 32);
+                            dstRegion = new Rectangle(x, y, tile.Width, 32);
+                            Do.PixelsToPixels(src, dst, 32, 128, srcRegion, dstRegion);
+                            x += tile.Width;
+                        }
+                        else
+                        {
+                            srcRegion = new Rectangle(0, 0, tile.Width, 16);
+                            if (counter == 3)
+                                dstRegion = new Rectangle(x + 16, y + 16, 16, 16);
+                            else if (counter == 2)
+                                dstRegion = new Rectangle(x, y + 16, 16, 16);
+                            else if (counter == 1)
+                                dstRegion = new Rectangle(x + 16, y, 16, 16);
+                            else
+                                dstRegion = new Rectangle(x, y, 16, 16);
+                            Do.PixelsToPixels(src, dst, 16, 128, srcRegion, dstRegion);
+                            counter--;
+                            if (counter < 0)
+                                x += 32;
+                        }
+                    }
                 }
-                if (checkPaletteIndex.GetItemChecked(0))
+            }
+        }
+        private void FindIdentical(NPCSpritePartitions partition, StreamWriter total)
+        {
+            foreach (NPCSpritePartitions p in partitions)
+            {
+                if (p.Index <= partition.Index)
+                    continue;
+                if (p.AllySpriteBuffer == partition.AllySpriteBuffer &&
+                    p.Byte1bit0 == partition.Byte1bit0 &&
+                    p.Byte1bit1 == partition.Byte1bit1 &&
+                    p.Byte1bit2 == partition.Byte1bit2 &&
+                    p.Byte1bit3 == partition.Byte1bit3 &&
+                    p.CloneASprite == partition.CloneASprite &&
+                    p.CloneAMain == partition.CloneAMain &&
+                    p.Byte2bit7 == partition.Byte2bit7 &&
+                    p.CloneBSprite == partition.CloneBSprite &&
+                    p.CloneBMain == partition.CloneBMain &&
+                    p.CloneBIndexing == partition.CloneBIndexing &&
+                    p.CloneCSprite == partition.CloneCSprite &&
+                    p.CloneCMain == partition.CloneCMain &&
+                    p.CloneCIndexing == partition.CloneCIndexing &&
+                    p.ExtraSprites != partition.ExtraSprites &&
+                    p.Index != partition.Index &&
+                    p.FullPaletteBuffer == partition.FullPaletteBuffer &&
+                    p.ExtraSpriteBuffer == partition.ExtraSpriteBuffer)
                 {
-                    if (paletteIndex.Value != npcSpritePartitions[i].PalIndexPlus) notFoundInByte1 = true;
+                    total.WriteLine(partition.Index + " (" + partition.ExtraSprites + ") and " + p.Index + " (" + p.ExtraSprites + ")");
                 }
-                if (byte1.GetItemChecked(0))
-                {
-                    if (!npcSpritePartitions[i].Byte1bit4) notFoundInByte1 = true;
-                }
-                if (byte1.GetItemChecked(1))
-                {
-                    if (!npcSpritePartitions[i].Byte1bit7) notFoundInByte1 = true;
-                }
-
-                // search byte 2 for VRAM block A's properties
-                if (checkByte2a.GetItemChecked(0))
-                    notFoundInByte2 = byte2a.SelectedIndex != npcSpritePartitions[i].Byte2a;
-                if (!notFoundInByte2 && checkByte2b.GetItemChecked(0))
-                    notFoundInByte2 = byte2b.SelectedIndex != npcSpritePartitions[i].Byte2b;
-                if (!notFoundInByte2 && byte2.GetItemChecked(0))
-                    notFoundInByte2 = !npcSpritePartitions[i].Byte2bit7;
-                notFoundBlockAinByte2 = notFoundInByte2;
-                notFoundInByte2 = false;
-
-                // search byte 3 for VRAM block A's properties
-                if (checkByte2a.GetItemChecked(0))
-                    notFoundInByte3 = byte2a.SelectedIndex != npcSpritePartitions[i].Byte3a;
-                if (!notFoundInByte3 && checkByte2b.GetItemChecked(0))
-                    notFoundInByte3 = byte2b.SelectedIndex != npcSpritePartitions[i].Byte3b;
-                if (!notFoundInByte3 && byte2.GetItemChecked(0))
-                    notFoundInByte3 = !npcSpritePartitions[i].Byte3bit7;
-                notFoundBlockAinByte3 = notFoundInByte3;
-                notFoundInByte3 = false;
-
-                // search byte 4 for VRAM block A's properties
-                if (checkByte2a.GetItemChecked(0))
-                    notFoundInByte4 = byte2a.SelectedIndex != npcSpritePartitions[i].Byte4a;
-                if (!notFoundInByte4 && checkByte2b.GetItemChecked(0))
-                    notFoundInByte4 = byte2b.SelectedIndex != npcSpritePartitions[i].Byte4b;
-                if (!notFoundInByte4 && byte2.GetItemChecked(0))
-                    notFoundInByte4 = !npcSpritePartitions[i].Byte4bit7;
-                notFoundBlockAinByte4 = notFoundInByte4;
-                notFoundInByte4 = false;
-
-
-                // search byte 2 for VRAM block B's properties
-                if (checkByte3a.GetItemChecked(0))
-                    notFoundInByte2 = byte3a.SelectedIndex != npcSpritePartitions[i].Byte2a;
-                if (!notFoundInByte2 && checkByte3b.GetItemChecked(0))
-                    notFoundInByte2 = byte3b.SelectedIndex != npcSpritePartitions[i].Byte2b;
-                if (!notFoundInByte2 && byte3.GetItemChecked(0))
-                    notFoundInByte2 = !npcSpritePartitions[i].Byte2bit7;
-                notFoundBlockBinByte2 = notFoundInByte2;
-                notFoundInByte2 = false;
-
-                // search byte 3 for VRAM block B's properties
-                if (checkByte3a.GetItemChecked(0))
-                    notFoundInByte3 = byte3a.SelectedIndex != npcSpritePartitions[i].Byte3a;
-                if (!notFoundInByte3 && checkByte3b.GetItemChecked(0))
-                    notFoundInByte3 = byte3b.SelectedIndex != npcSpritePartitions[i].Byte3b;
-                if (!notFoundInByte3 && byte3.GetItemChecked(0))
-                    notFoundInByte3 = !npcSpritePartitions[i].Byte3bit7;
-                notFoundBlockBinByte3 = notFoundInByte3;
-                notFoundInByte3 = false;
-
-                // search byte 4 for VRAM block B's properties
-                if (checkByte3a.GetItemChecked(0))
-                    notFoundInByte4 = byte3a.SelectedIndex != npcSpritePartitions[i].Byte4a;
-                if (!notFoundInByte4 && checkByte3b.GetItemChecked(0))
-                    notFoundInByte4 = byte3b.SelectedIndex != npcSpritePartitions[i].Byte4b;
-                if (!notFoundInByte4 && byte3.GetItemChecked(0))
-                    notFoundInByte4 = !npcSpritePartitions[i].Byte4bit7;
-                notFoundBlockBinByte4 = notFoundInByte4;
-                notFoundInByte4 = false;
-
-
-                // search byte 2 for VRAM block C's properties
-                if (checkByte4a.GetItemChecked(0))
-                    notFoundInByte2 = byte4a.SelectedIndex != npcSpritePartitions[i].Byte2a;
-                if (!notFoundInByte2 && checkByte4b.GetItemChecked(0))
-                    notFoundInByte2 = byte4b.SelectedIndex != npcSpritePartitions[i].Byte2b;
-                if (!notFoundInByte2 && byte4.GetItemChecked(0))
-                    notFoundInByte2 = !npcSpritePartitions[i].Byte2bit7;
-                notFoundBlockCinByte2 = notFoundInByte2;
-                notFoundInByte2 = false;
-
-                // search byte 3 for VRAM block C's properties
-                if (checkByte4a.GetItemChecked(0))
-                    notFoundInByte3 = byte4a.SelectedIndex != npcSpritePartitions[i].Byte3a;
-                if (!notFoundInByte3 && checkByte4b.GetItemChecked(0))
-                    notFoundInByte3 = byte4b.SelectedIndex != npcSpritePartitions[i].Byte3b;
-                if (!notFoundInByte3 && byte4.GetItemChecked(0))
-                    notFoundInByte3 = !npcSpritePartitions[i].Byte3bit7;
-                notFoundBlockCinByte3 = notFoundInByte3;
-                notFoundInByte3 = false;
-
-                // search byte 4 for VRAM block C's properties
-                if (checkByte4a.GetItemChecked(0))
-                    notFoundInByte4 = byte4a.SelectedIndex != npcSpritePartitions[i].Byte4a;
-                if (!notFoundInByte4 && checkByte4b.GetItemChecked(0))
-                    notFoundInByte4 = byte4b.SelectedIndex != npcSpritePartitions[i].Byte4b;
-                if (!notFoundInByte4 && byte4.GetItemChecked(0))
-                    notFoundInByte4 = !npcSpritePartitions[i].Byte4bit7;
-                notFoundBlockCinByte4 = notFoundInByte4;
-                notFoundInByte4 = false;
-
-                // A2,B3,C4
-                // A2,B4,C3
-                // A3,B2,C4
-                // A3,B4,C2
-                // A4,B2,C3
-                // A4,B3,C2
-                notFound = !(!notFoundInByte1 && !notFoundBlockAinByte2 && !notFoundBlockBinByte3 && !notFoundBlockCinByte4);
-                if (notFound)
-                    notFound = !(!notFoundInByte1 && !notFoundBlockAinByte2 && !notFoundBlockBinByte4 && !notFoundBlockCinByte3);
-                if (notFound)
-                    notFound = !(!notFoundInByte1 && !notFoundBlockAinByte3 && !notFoundBlockBinByte2 && !notFoundBlockCinByte4);
-                if (notFound)
-                    notFound = !(!notFoundInByte1 && !notFoundBlockAinByte3 && !notFoundBlockBinByte4 && !notFoundBlockCinByte2);
-                if (notFound)
-                    notFound = !(!notFoundInByte1 && !notFoundBlockAinByte4 && !notFoundBlockBinByte2 && !notFoundBlockCinByte3);
-                if (notFound)
-                    notFound = !(!notFoundInByte1 && !notFoundBlockAinByte4 && !notFoundBlockBinByte3 && !notFoundBlockCinByte2);
-                
-                if (!notFound) listBox1.Items.Add("Partition #" + i.ToString());
             }
         }
         // event handlers
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void buttonOK_Click(object sender, EventArgs e)
         {
-            level.NPCMapHeader.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(11));
-        }
-        private void searchButton_Click(object sender, EventArgs e)
-        {
-            LoadSearch();
+            this.Close();
         }
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void partitionNum_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshPartition();
+        }
+        //
+        private void extraSpriteBuffer_ValueChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.ExtraSpriteBuffer = (byte)extraSpriteBuffer.Value;
+        }
+        private void allyCount_ValueChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.AllySpriteBuffer = (byte)allyCount.Value;
+            SetPreviewImage();
+        }
+        private void extraSprites_CheckedChanged(object sender, EventArgs e)
+        {
+            extraSpriteBuffer.Enabled = extraSprites.Checked;
+            if (updating) return;
+            partition.ExtraSprites = extraSprites.Checked;
+            SetPreviewImage();
+        }
+        private void noWaterPalettes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.FullPaletteBuffer = noWaterPalettes.Checked;
+        }
+        private void byte2a_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.CloneASprite = (byte)byte2a.SelectedIndex;
+            SetPreviewImage();
+        }
+        private void byte2b_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.CloneAMain = (byte)byte2b.SelectedIndex;
+            SetPreviewImage();
+        }
+        private void byte2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.Byte2bit7 = byte2.Checked;
+            SetPreviewImage();
+        }
+        private void byte3a_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.CloneBSprite = (byte)byte3a.SelectedIndex;
+            SetPreviewImage();
+        }
+        private void byte3b_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.CloneBMain = (byte)byte3b.SelectedIndex;
+            SetPreviewImage();
+        }
+        private void byte3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.CloneBIndexing = byte3.Checked;
+            SetPreviewImage();
+        }
+        private void byte4a_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.CloneCSprite = (byte)byte4a.SelectedIndex;
+            SetPreviewImage();
+        }
+        private void byte4b_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.CloneCMain = (byte)byte4b.SelectedIndex;
+            SetPreviewImage();
+        }
+        private void byte4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            partition.CloneCIndexing = byte4.Checked;
+            SetPreviewImage();
+        }
+        //
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            if (previewImage != null)
+                e.Graphics.DrawImage(previewImage, 0, 0);
         }
     }
 }

@@ -5,11 +5,14 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    /// <summary>
+    /// Generic 16x16 tile used in a tilemap, containing 4 subtiles.
+    /// </summary>
     [Serializable()]
-    public class Tile16x16
+    public class Tile
     {
-        private Tile8x8[] subtiles = new Tile8x8[4];
-        public Tile8x8[] Subtiles { get { return subtiles; } set { subtiles = value; } }
+        private Subtile[] subtiles = new Subtile[4];
+        public Subtile[] Subtiles { get { return subtiles; } set { subtiles = value; } }
 
         private int tileIndex;
         public int TileIndex { get { return tileIndex; } set { tileIndex = value; } }
@@ -55,13 +58,13 @@ namespace LAZYSHELL
             get
             {
                 int[] pixels = new int[16 * 16];
-                if (subtiles[0] != null && subtiles[0].PriorityOne)
+                if (subtiles[0] != null && subtiles[0].Priority1)
                     Do.PixelsToPixels(subtiles[0].Pixels, pixels, 16, new Rectangle(0, 0, 8, 8));
-                if (subtiles[1] != null && subtiles[1].PriorityOne)
+                if (subtiles[1] != null && subtiles[1].Priority1)
                     Do.PixelsToPixels(subtiles[1].Pixels, pixels, 16, new Rectangle(8, 0, 8, 8));
-                if (subtiles[2] != null && subtiles[2].PriorityOne)
+                if (subtiles[2] != null && subtiles[2].Priority1)
                     Do.PixelsToPixels(subtiles[2].Pixels, pixels, 16, new Rectangle(0, 8, 8, 8));
-                if (subtiles[3] != null && subtiles[3].PriorityOne)
+                if (subtiles[3] != null && subtiles[3].Priority1)
                     Do.PixelsToPixels(subtiles[3].Pixels, pixels, 16, new Rectangle(8, 8, 8, 8));
                 if (mirror)
                     Do.FlipHorizontal(pixels, 16, 16);
@@ -73,20 +76,20 @@ namespace LAZYSHELL
             }
         }
 
-        public Tile16x16(int tileIndex)
+        public Tile(int tileIndex)
         {
             this.tileIndex = tileIndex; // set tile Number
             this.pixels = new int[16 * 16];
             for (int p = 0; p < 4; p++)
-                subtiles[p] = new Tile8x8(0, new byte[0x20], 0, new int[16], false, false, false, false);
+                subtiles[p] = new Subtile(0, new byte[0x20], 0, new int[16], false, false, false, false);
         }
 
-        public Tile16x16 Copy()
+        public Tile Copy()
         {
-            Tile16x16 copy = new Tile16x16(this.tileIndex);
+            Tile copy = new Tile(this.tileIndex);
             for (int i = 0; i < 4; i++)
             {
-                Tile8x8 source = subtiles[i].Copy();
+                Subtile source = subtiles[i].Copy();
                 copy.Subtiles[i] = source;
             }
             copy.Mirror = mirror;
@@ -95,7 +98,7 @@ namespace LAZYSHELL
         }
         public void Clear()
         {
-            foreach (Tile8x8 tile in subtiles)
+            foreach (Subtile tile in subtiles)
                 tile.Clear();
         }
     }

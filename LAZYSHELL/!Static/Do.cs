@@ -163,6 +163,60 @@ namespace LAZYSHELL
             temp.DrawImage(image, 0, 0, image.Width, image.Height);
             return resized;
         }
+        /// <summary>
+        /// Performs color math on a pixel.
+        /// </summary>
+        /// <param name="src">The pixel to draw onto.</param>
+        /// <param name="dst">The pixel being drawn.</param>
+        /// <returns></returns>
+        public static int ColorMath(int src, int dst, bool halfIntensity, bool minusSubscreen)
+        {
+            int rsrc = Color.FromArgb(src).R;
+            int gsrc = Color.FromArgb(src).G;
+            int bsrc = Color.FromArgb(src).B;
+            int rdst = Color.FromArgb(dst).R;
+            int gdst = Color.FromArgb(dst).G;
+            int bdst = Color.FromArgb(dst).B;
+            if (minusSubscreen)
+            {
+                if (halfIntensity)
+                {
+                    rsrc /= 2; gsrc /= 2; bsrc /= 2;
+                    rsrc -= rdst / 2;
+                    gsrc -= gdst / 2;
+                    bsrc -= bdst / 2;
+                }
+                else
+                {
+                    rsrc -= rdst;
+                    gsrc -= gdst;
+                    bsrc -= bdst;
+                }
+                if (rsrc < 0) rsrc = 0;
+                if (gsrc < 0) gsrc = 0;
+                if (bsrc < 0) bsrc = 0;
+            }
+            else
+            {
+                if (halfIntensity)
+                {
+                    rsrc /= 2; gsrc /= 2; bsrc /= 2;
+                    rsrc += rdst / 2;
+                    gsrc += gdst / 2;
+                    bsrc += bdst / 2;
+                }
+                else
+                {
+                    rsrc += rdst;
+                    gsrc += gdst;
+                    bsrc += bdst;
+                }
+                if (rsrc > 255) rsrc = 255;
+                if (gsrc > 255) gsrc = 255;
+                if (bsrc > 255) bsrc = 255;
+            }
+            return Color.FromArgb(rsrc, gsrc, bsrc).ToArgb();
+        }
         public static Bitmap CombineImages(Bitmap[] images, int maxwidth, int maxheight, int tilesize, bool padedges)
         {
             if (images.Length == 0)
@@ -329,7 +383,7 @@ namespace LAZYSHELL
             ArrayList tiles_c = new ArrayList();
             for (int i = 0; i < src.Length / tileSize; i++)
             {
-                Tile8x8 temp = new Tile8x8(i, src, i * tileSize, palettes[paletteIndexes[i]], false, false, false, false);
+                Subtile temp = new Subtile(i, src, i * tileSize, palettes[paletteIndexes[i]], false, false, false, false);
                 tiles_a.Add(temp);
                 tiles_b.Add(temp);
                 tiles_c.Add(temp);
@@ -337,16 +391,16 @@ namespace LAZYSHELL
             // look through entire set of tiles for duplicates
             for (int a = 0; a < tiles_a.Count; a++)
             {
-                Tile8x8 tile_a = (Tile8x8)tiles_a[a];
-                if (tile_a.TileIndex != a) continue;  // skip if already set as duplicate
+                Subtile tile_a = (Subtile)tiles_a[a];
+                if (tile_a.Index != a) continue;  // skip if already set as duplicate
                 for (int b = a; b < tiles_a.Count; b++)
                 {
-                    Tile8x8 tile_b = (Tile8x8)tiles_a[b];
+                    Subtile tile_b = (Subtile)tiles_a[b];
                     if (a == b) continue;   // cannot be duplicate of self
                     if (Bits.Compare(tile_a.Pixels, tile_b.Pixels)) // if a duplicate...
                     {
                         // first set the tile to the one that it's a duplicate of
-                        tile_b.TileIndex = a;
+                        tile_b.Index = a;
                         // then remove
                         tiles_b.Remove(tile_b);
                     }
@@ -356,13 +410,13 @@ namespace LAZYSHELL
                         if ((status & 0x40) == 0x40)
                         {
                             tile_b.Mirror = true;
-                            tile_b.TileIndex = a;
+                            tile_b.Index = a;
                             tiles_b.Remove(tile_b);
                         }
                         if ((status & 0x80) == 0x80)
                         {
                             tile_b.Invert = true;
-                            tile_b.TileIndex = a;
+                            tile_b.Index = a;
                             tiles_b.Remove(tile_b);
                         }
                     }
@@ -370,29 +424,29 @@ namespace LAZYSHELL
             }
             // redraw into newly culled graphic block, and reorganize tilenums
             int c = 0; byte[] culledGraphics = new byte[src.Length];
-            foreach (Tile8x8 tile in tiles_b)
+            foreach (Subtile tile in tiles_b)
             {
-                int orig = tile.TileIndex;
-                Buffer.BlockCopy(src, tile.TileIndex * tileSize, culledGraphics, c * tileSize, tileSize);
-                tile.TileIndex = c;
+                int orig = tile.Index;
+                Buffer.BlockCopy(src, tile.Index * tileSize, culledGraphics, c * tileSize, tileSize);
+                tile.Index = c;
                 // check for other duplicates or mirrors/inversions of this current tile
-                foreach (Tile8x8 check in tiles_a)
+                foreach (Subtile check in tiles_a)
                 {
-                    if (check.TileIndex == orig)
-                        check.TileIndex = c;
+                    if (check.Index == orig)
+                        check.Index = c;
                 }
                 c++;
             }
             // now rewrite tileset data using tiles_a
             c = 0; byte[] culledTileset = new byte[tileset.Length];
 
-            foreach (Tile8x8 tile in tiles_a)
+            foreach (Subtile tile in tiles_a)
             {
-                culledTileset[c * tileLength] = (byte)(tile.TileIndex + tileIndexStart);
+                culledTileset[c * tileLength] = (byte)(tile.Index + tileIndexStart);
                 if (tileLength == 2)
                 {
                     culledTileset[c * tileLength + 1] = (byte)(paletteIndexes[c] << 2);    // set the palette index
-                    culledTileset[c * tileLength + 1] |= (byte)(tile.TileIndex >> 8); // set the graphic index
+                    culledTileset[c * tileLength + 1] |= (byte)(tile.Index >> 8); // set the graphic index
                     Bits.SetBit(culledTileset, c * tileLength + 1, 5, priority1);
                     Bits.SetBit(culledTileset, c * tileLength + 1, 6, tile.Mirror);
                     Bits.SetBit(culledTileset, c * tileLength + 1, 7, tile.Invert);
@@ -403,7 +457,7 @@ namespace LAZYSHELL
             Buffer.BlockCopy(culledGraphics, 0, src, 0, src.Length);
         }
         /// <summary>
-        /// Copy a block of 4bpp graphics into a tileset.
+        /// Copy a block of 4bpp graphics into a tileset and returns the final size of the imported graphics.
         /// </summary>
         /// <param name="src">The raw graphics to copy from.</param>
         /// <param name="tileset">The raw tileset to copy to.</param>
@@ -415,30 +469,30 @@ namespace LAZYSHELL
         /// <param name="tileLength">Length, in bytes, of an 8x8 tile in a tileset. Either one or two.</param>
         /// <param name="tilesetSize">Size, in pixels, of the tileset being drawn to.</param>
         /// <param name="tileIndexStart">The index to start writing tilenums to the tileset. Normally 0, 1, or 2</param>
-        /// <returns>Returns the final graphic size of the imported graphics.</returns>
+        /// <returns></returns>
         public static int CopyToTileset(byte[] src, byte[] tileset, int[] palette, int paletteIndex, bool checkIfFlipped, bool priority1, byte format, byte tileLength, Size tilesetSize, int tileIndexStart)
         {
-            List<Tile8x8> tiles_a = new List<Tile8x8>();    // the tileset, essentially, in array form
-            List<Tile8x8> tiles_b = new List<Tile8x8>();    // used for redrawing a culled 4bpp graphic block
+            List<Subtile> tiles_a = new List<Subtile>();    // the tileset, essentially, in array form
+            List<Subtile> tiles_b = new List<Subtile>();    // used for redrawing a culled 4bpp graphic block
             for (int i = 0; i < src.Length / format; i++)
             {
-                Tile8x8 temp = new Tile8x8(i, src, i * format, palette, false, false, false, format == 0x10);
+                Subtile temp = new Subtile(i, src, i * format, palette, false, false, false, format == 0x10);
                 tiles_a.Add(temp);
                 tiles_b.Add(temp);
             }
             // look through entire set of tiles for duplicates
             for (int a = 0; a < tiles_a.Count; a++)
             {
-                Tile8x8 tile_a = tiles_a[a];
-                if (tile_a.TileIndex != a) continue;  // skip if already set as duplicate
+                Subtile tile_a = tiles_a[a];
+                if (tile_a.Index != a) continue;  // skip if already set as duplicate
                 for (int b = a; b < tiles_a.Count; b++)
                 {
-                    Tile8x8 tile_b = tiles_a[b];
+                    Subtile tile_b = tiles_a[b];
                     if (a == b) continue;   // cannot be duplicate of self
                     if (Bits.Compare(tile_a.Pixels, tile_b.Pixels)) // if a duplicate...
                     {
                         // first set the tile to the one that it's a duplicate of
-                        tile_b.TileIndex = a;
+                        tile_b.Index = a;
                         // then remove
                         tiles_b.Remove(tile_b);
                     }
@@ -448,13 +502,13 @@ namespace LAZYSHELL
                         if ((status & 0x40) == 0x40)
                         {
                             tile_b.Mirror = true;
-                            tile_b.TileIndex = a;
+                            tile_b.Index = a;
                             tiles_b.Remove(tile_b);
                         }
                         if ((status & 0x80) == 0x80)
                         {
                             tile_b.Invert = true;
-                            tile_b.TileIndex = a;
+                            tile_b.Index = a;
                             tiles_b.Remove(tile_b);
                         }
                     }
@@ -462,16 +516,16 @@ namespace LAZYSHELL
             }
             // redraw into newly culled graphic block, and reorganize tilenums
             int c = 0; byte[] culledGraphics = new byte[src.Length];
-            foreach (Tile8x8 tile in tiles_b)
+            foreach (Subtile tile in tiles_b)
             {
-                int orig = tile.TileIndex;
-                Buffer.BlockCopy(src, tile.TileIndex * format, culledGraphics, c * format, format);
-                tile.TileIndex = c;
+                int orig = tile.Index;
+                Buffer.BlockCopy(src, tile.Index * format, culledGraphics, c * format, format);
+                tile.Index = c;
                 // check for other duplicates or mirrors/inversions of this current tile
-                foreach (Tile8x8 check in tiles_a)
+                foreach (Subtile check in tiles_a)
                 {
-                    if (check.TileIndex == orig)
-                        check.TileIndex = c;
+                    if (check.Index == orig)
+                        check.Index = c;
                 }
                 c++;
             }
@@ -479,7 +533,7 @@ namespace LAZYSHELL
             // now rewrite tileset data using tiles_a
             c = 0; byte[] culledTileset = new byte[tileset.Length];
 
-            foreach (Tile8x8 tile in tiles_a)
+            foreach (Subtile tile in tiles_a)
             {
                 if (c * tileLength >= culledTileset.Length)
                 {
@@ -488,11 +542,11 @@ namespace LAZYSHELL
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 }
-                culledTileset[c * tileLength] = (byte)(tile.TileIndex + tileIndexStart);
+                Bits.SetShort(culledTileset, c * tileLength, (ushort)(tile.Index + tileIndexStart));
                 if (tileLength == 2)
                 {
-                    culledTileset[c * tileLength + 1] = (byte)(paletteIndex << 2);    // set the palette index
-                    culledTileset[c * tileLength + 1] |= (byte)(tile.TileIndex >> 8); // set the graphic index
+                    culledTileset[c * tileLength + 1] |= (byte)(paletteIndex << 2);    // set the palette index
+                    culledTileset[c * tileLength + 1] |= (byte)(tile.Index >> 8); // set the graphic index
                     Bits.SetBit(culledTileset, c * tileLength + 1, 5, priority1);
                     Bits.SetBit(culledTileset, c * tileLength + 1, 6, tile.Mirror);
                     Bits.SetBit(culledTileset, c * tileLength + 1, 7, tile.Invert);
@@ -785,27 +839,27 @@ namespace LAZYSHELL
         }
         public static byte[] CullGraphics(byte[] src, int[] palette, byte format, bool checkIfFlipped)
         {
-            List<Tile8x8> tiles_a = new List<Tile8x8>();    // the tileset, essentially, in array form
-            List<Tile8x8> tiles_b = new List<Tile8x8>();    // used for redrawing a culled 4bpp graphic block
+            List<Subtile> tiles_a = new List<Subtile>();    // the tileset, essentially, in array form
+            List<Subtile> tiles_b = new List<Subtile>();    // used for redrawing a culled 4bpp graphic block
             for (int i = 0; i < src.Length / format; i++)
             {
-                Tile8x8 temp = new Tile8x8(i, src, i * format, palette, false, false, false, format == 0x10);
+                Subtile temp = new Subtile(i, src, i * format, palette, false, false, false, format == 0x10);
                 tiles_a.Add(temp);
                 tiles_b.Add(temp);
             }
             // look through entire set of tiles for duplicates
             for (int a = 0; a < tiles_a.Count; a++)
             {
-                Tile8x8 tile_a = tiles_a[a];
-                if (tile_a.TileIndex != a) continue;  // skip if already set as duplicate
+                Subtile tile_a = tiles_a[a];
+                if (tile_a.Index != a) continue;  // skip if already set as duplicate
                 for (int b = a; b < tiles_a.Count; b++)
                 {
-                    Tile8x8 tile_b = tiles_a[b];
+                    Subtile tile_b = tiles_a[b];
                     if (a == b) continue;   // cannot be duplicate of self
                     if (Bits.Compare(tile_a.Pixels, tile_b.Pixels)) // if a duplicate...
                     {
                         // first set the tile to the one that it's a duplicate of
-                        tile_b.TileIndex = a;
+                        tile_b.Index = a;
                         // then remove
                         tiles_b.Remove(tile_b);
                     }
@@ -815,13 +869,13 @@ namespace LAZYSHELL
                         if ((status & 0x40) == 0x40)
                         {
                             tile_b.Mirror = true;
-                            tile_b.TileIndex = a;
+                            tile_b.Index = a;
                             tiles_b.Remove(tile_b);
                         }
                         if ((status & 0x80) == 0x80)
                         {
                             tile_b.Invert = true;
-                            tile_b.TileIndex = a;
+                            tile_b.Index = a;
                             tiles_b.Remove(tile_b);
                         }
                     }
@@ -829,16 +883,16 @@ namespace LAZYSHELL
             }
             // redraw into newly culled graphic block, and reorganize tilenums
             int c = 0; byte[] culledGraphics = new byte[src.Length];
-            foreach (Tile8x8 tile in tiles_b)
+            foreach (Subtile tile in tiles_b)
             {
-                int orig = tile.TileIndex;
-                Buffer.BlockCopy(src, tile.TileIndex * format, culledGraphics, c * format, format);
-                tile.TileIndex = c;
+                int orig = tile.Index;
+                Buffer.BlockCopy(src, tile.Index * format, culledGraphics, c * format, format);
+                tile.Index = c;
                 // check for other duplicates or mirrors/inversions of this current tile
-                foreach (Tile8x8 check in tiles_a)
+                foreach (Subtile check in tiles_a)
                 {
-                    if (check.TileIndex == orig)
-                        check.TileIndex = c;
+                    if (check.Index == orig)
+                        check.Index = c;
                 }
                 c++;
             }
@@ -849,11 +903,11 @@ namespace LAZYSHELL
         /// Reorder indexes of tiles in a tileset based on duplicates.
         /// </summary>
         /// <param name="tileset">The raw tileset to reduce the size of.</param>
-        public static void CullTileset(ref Tile16x16[] tileset)
+        public static void CullTileset(ref Tile[] tileset)
         {
             // set duplicate tiles to originals
             ArrayList tilesetTiles = new ArrayList();
-            foreach (Tile16x16 tile in tileset)
+            foreach (Tile tile in tileset)
             {
                 int contains = Contains(tile, tileset);
                 if (tile.TileIndex == contains)
@@ -863,13 +917,13 @@ namespace LAZYSHELL
             }
             // renumber tile indexes
             int c = 0;
-            foreach (Tile16x16 tile in tilesetTiles)
+            foreach (Tile tile in tilesetTiles)
                 tile.TileIndex = c++;
             // finally cull the original tileset
             c = 0;
-            foreach (Tile16x16 tile in tilesetTiles)
+            foreach (Tile tile in tilesetTiles)
                 tileset[c++] = tile;
-            Array.Resize<Tile16x16>(ref tileset, c);
+            Array.Resize<Tile>(ref tileset, c);
         }
         /// <summary>
         /// Reorder indexes of tiles in a tileset based on duplicates and draws to a tilemap.
@@ -878,11 +932,11 @@ namespace LAZYSHELL
         /// <param name="tilemap">The tilemap to draw to.</param>
         /// <param name="width">The width, in 16x16 tiles, of the tilemap.</param>
         /// <param name="height">The height, in 16x16 tiles, of the tilemap.</param>
-        public static void CullTileset(Tile16x16[] tileset, byte[] tilemap, int width, int height)
+        public static void CullTileset(Tile[] tileset, byte[] tilemap, int width, int height)
         {
             // set duplicate tiles to originals
             ArrayList tilesetTiles = new ArrayList();
-            foreach (Tile16x16 tile in tileset)
+            foreach (Tile tile in tileset)
             {
                 int contains = Contains(tile, tileset);
                 if (Bits.Compare(tile.Pixels, new int[16 * 16]))
@@ -894,7 +948,7 @@ namespace LAZYSHELL
             }
             // renumber tile indexes
             int c = 0;
-            foreach (Tile16x16 tile in tilesetTiles)
+            foreach (Tile tile in tilesetTiles)
                 tile.TileIndex = c++;
             // draw to tilemap with culled indexes
             for (int y = 0; y < height; y++)
@@ -909,10 +963,10 @@ namespace LAZYSHELL
             }
             // finally cull the original tileset
             c = 0;
-            foreach (Tile16x16 tile in tilesetTiles)
+            foreach (Tile tile in tilesetTiles)
                 tileset[c++] = tile;
             while (c < tileset.Length)
-                tileset[c++] = new Tile16x16(c);
+                tileset[c++] = new Tile(c);
         }
         /// <summary>
         /// Draws an overworld menu frame with a certain size.
@@ -925,29 +979,34 @@ namespace LAZYSHELL
         {
             int[] pixels = new int[(size.Width * 8) * (size.Height * 8)];
             // set tileset
-            Tile8x8[] frameTileset = new Tile8x8[16 * 2];
+            Subtile[] frameTileset = new Subtile[16 * 2];
             for (int i = 0; i < frameTileset.Length; i++)
-                frameTileset[i] = new Tile8x8(i, graphics, i * 0x10, palette, false, false, false, true);
+                frameTileset[i] = new Subtile(i, graphics, i * 0x10, palette, false, false, false, true);
             // draw tiles to pixels
+            // top-left corner
             PixelsToPixels(frameTileset[0x00].Pixels, pixels, size.Width * 8, new Rectangle(0, 0, 8, 8));
             PixelsToPixels(frameTileset[0x01].Pixels, pixels, size.Width * 8, new Rectangle(8, 0, 8, 8));
+            PixelsToPixels(frameTileset[0x10].Pixels, pixels, size.Width * 8, new Rectangle(0, 8, 8, 8));
+            // top-right corner
             PixelsToPixels(frameTileset[0x03].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 2) * 8, 0, 8, 8));
             PixelsToPixels(frameTileset[0x04].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, 0, 8, 8));
-            PixelsToPixels(frameTileset[0x10].Pixels, pixels, size.Width * 8, new Rectangle(0, 8, 8, 8));
             PixelsToPixels(frameTileset[0x14].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, 8, 8, 8));
-
+            // bottom-left corner
+            PixelsToPixels(frameTileset[0x15].Pixels, pixels, size.Width * 8, new Rectangle(0, (size.Height - 3) * 8, 8, 8));
+            PixelsToPixels(frameTileset[0x07].Pixels, pixels, size.Width * 8, new Rectangle(0, (size.Height - 2) * 8, 8, 8));
             PixelsToPixels(frameTileset[0x17].Pixels, pixels, size.Width * 8, new Rectangle(0, (size.Height - 1) * 8, 8, 8));
             PixelsToPixels(frameTileset[0x18].Pixels, pixels, size.Width * 8, new Rectangle(8, (size.Height - 1) * 8, 8, 8));
+            // bottom-right corner
+            PixelsToPixels(frameTileset[0x16].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, (size.Height - 3) * 8, 8, 8));
+            PixelsToPixels(frameTileset[0x0B].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, (size.Height - 2) * 8, 8, 8));
             PixelsToPixels(frameTileset[0x1A].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 2) * 8, (size.Height - 1) * 8, 8, 8));
             PixelsToPixels(frameTileset[0x1B].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, (size.Height - 1) * 8, 8, 8));
-            PixelsToPixels(frameTileset[0x10].Pixels, pixels, size.Width * 8, new Rectangle(0, (size.Height - 2) * 8, 8, 8));
-            PixelsToPixels(frameTileset[0x14].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, (size.Height - 2) * 8, 8, 8));
             for (int x = 2; x < size.Width - 2; x++)
             {
                 PixelsToPixels(frameTileset[0x02].Pixels, pixels, size.Width * 8, new Rectangle(x * 8, 0, 8, 8));
                 PixelsToPixels(frameTileset[0x19].Pixels, pixels, size.Width * 8, new Rectangle(x * 8, (size.Height - 1) * 8, 8, 8));
             }
-            for (int y = 2; y < size.Height - 2; y++)
+            for (int y = 2; y < size.Height - 3; y++)
             {
                 PixelsToPixels(frameTileset[0x05].Pixels, pixels, size.Width * 8, new Rectangle(0, y * 8, 8, 8));
                 PixelsToPixels(frameTileset[0x06].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, y * 8, 8, 8));
@@ -955,6 +1014,43 @@ namespace LAZYSHELL
             return pixels;
         }
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tiles"></param>
+        /// <param name="g"></param>
+        /// <param name="region">The location (in pixels) and size (in 8x8 tiles) of the menu frame.</param>
+        public static void DrawMenuFrame(Bitmap[] tiles, Graphics g, int x, int y, int width, int height)
+        {
+            width *= 8; height *= 8;
+            // upper-left corner
+            g.DrawImage(tiles[0 * 5 + 0], 0 + x, 0 + y, 8, 8);
+            g.DrawImage(tiles[0 * 5 + 1], 8 + x, 0 + y, 8, 8);
+            g.DrawImage(tiles[1 * 5 + 0], 0 + x, 8 + y, 8, 8);
+            // upper-right corner
+            g.DrawImage(tiles[0 * 5 + 3], width - 16 + x, 0 + y, 8, 8);
+            g.DrawImage(tiles[0 * 5 + 4], width - 8 + x, 0 + y, 8, 8);
+            g.DrawImage(tiles[1 * 5 + 4], width - 8 + x, 8 + y, 8, 8);
+            // lower-left corner
+            g.DrawImage(tiles[3 * 5 + 0], 0 + x, height - 16 + y, 8, 8);
+            g.DrawImage(tiles[4 * 5 + 0], 0 + x, height - 8 + y, 8, 8);
+            g.DrawImage(tiles[4 * 5 + 1], 8 + x, height - 8 + y, 8, 8);
+            // lower-right corner
+            g.DrawImage(tiles[3 * 5 + 4], width - 8 + x, height - 16 + y, 8, 8);
+            g.DrawImage(tiles[4 * 5 + 4], width - 8 + x, height - 8 + y, 8, 8);
+            g.DrawImage(tiles[4 * 5 + 3], width - 16 + x, height - 8 + y, 8, 8);
+            // tiles between
+            for (int a = 2; a < (width / 8) - 2; a++)
+            {
+                g.DrawImage(tiles[0 * 5 + 2], a * 8 + x, y);
+                g.DrawImage(tiles[4 * 5 + 2], a * 8 + x, height - 8 + y);
+            }
+            for (int b = 2; b < (height / 8) - 2; b++)
+            {
+                g.DrawImage(tiles[2 * 5 + 0], x, b * 8 + y);
+                g.DrawImage(tiles[2 * 5 + 4], width - 8 + x, b * 8 + y);
+            }
+        }
+        /// <summary>
         /// Creates an 8x8 tile class.
         /// </summary>
         /// <param name="num">The tile's number or index.</param>
@@ -964,7 +1060,7 @@ namespace LAZYSHELL
         /// <param name="tileSize">The byte size of the tile. Either 0x10 or 0x20 (2bpp and 4bpp, respectively).</param>
         /// <param name="paletteIndexOffset">The palette index to start reading at.</param>
         /// <returns></returns>
-        public static Tile8x8 DrawTile8x8(ushort num, byte status, byte[] graphics, int[][] palettes, byte tileSize)
+        public static Subtile DrawSubtile(ushort num, byte status, byte[] graphics, int[][] palettes, byte tileSize)
         {
             byte paletteIndex = (byte)((status >> 2) & 0x07);
 
@@ -987,8 +1083,8 @@ namespace LAZYSHELL
             }
             else
                 palette = palettes[paletteIndex];
-            Tile8x8 tile = new Tile8x8(num, graphics, offset, palette, mirrored, inverted, priorityOne, twobpp);
-            tile.PaletteIndex = paletteIndex;
+            Subtile tile = new Subtile(num, graphics, offset, palette, mirrored, inverted, priorityOne, twobpp);
+            tile.Palette = paletteIndex;
             return tile;
         }
         /// <summary>
@@ -1001,7 +1097,7 @@ namespace LAZYSHELL
         /// <param name="tileSize">The byte size of the tile. Either 0x10 or 0x20 (2bpp and 4bpp, respectively).</param>
         /// <param name="paletteIndexOffset">The palette index to start reading at.</param>
         /// <returns></returns>
-        public static Tile8x8 DrawTile8x8(ushort num, byte status, byte[] graphics, int[] palette, byte tileSize)
+        public static Subtile DrawSubtile(ushort num, byte status, byte[] graphics, int[] palette, byte tileSize)
         {
             byte paletteIndex = (byte)((status >> 2) & 0x07);
             bool priorityOne = (status & 0x20) == 0x20;
@@ -1012,8 +1108,8 @@ namespace LAZYSHELL
             int offset = num * tileSize;
             if (offset >= graphics.Length) offset = 0;
 
-            Tile8x8 tile = new Tile8x8(num, graphics, offset, palette, mirrored, inverted, priorityOne, twobpp);
-            tile.PaletteIndex = paletteIndex;
+            Subtile tile = new Subtile(num, graphics, offset, palette, mirrored, inverted, priorityOne, twobpp);
+            tile.Palette = paletteIndex;
             return tile;
         }
         /// <summary>
@@ -1026,7 +1122,7 @@ namespace LAZYSHELL
         /// <param name="tileSize">The byte size of the tile. Either 0x10 or 0x20 (2bpp and 4bpp, respectively).</param>
         /// <param name="paletteIndexOffset">The palette index to start reading at.</param>
         /// <returns></returns>
-        public static Tile8x8 DrawTile8x8(ushort num, byte paletteIndex, bool priorityOne, bool mirrored, bool inverted, byte[] graphics, int[][] palettes, byte tileSize)
+        public static Subtile DrawSubtile(ushort num, byte paletteIndex, bool priorityOne, bool mirrored, bool inverted, byte[] graphics, int[][] palettes, byte tileSize)
         {
             if (paletteIndex >= palettes.Length) paletteIndex = 0;
 
@@ -1044,8 +1140,8 @@ namespace LAZYSHELL
             }
             else
                 palette = palettes[paletteIndex];
-            Tile8x8 tile = new Tile8x8(num, graphics, offset, palette, mirrored, inverted, priorityOne, twobpp);
-            tile.PaletteIndex = paletteIndex;
+            Subtile tile = new Subtile(num, graphics, offset, palette, mirrored, inverted, priorityOne, twobpp);
+            tile.Palette = paletteIndex;
             return tile;
         }
         /// <summary>
@@ -1058,15 +1154,35 @@ namespace LAZYSHELL
         /// <param name="tileSize">The byte size of the tile. Either 0x10 or 0x20 (2bpp and 4bpp, respectively).</param>
         /// <param name="paletteIndexOffset">The palette index to start reading at.</param>
         /// <returns></returns>
-        public static Tile8x8 DrawTile8x8(ushort num, byte paletteIndex, bool priorityOne, bool mirrored, bool inverted, byte[] graphics, int[] palette, byte tileSize)
+        public static Subtile DrawSubtile(ushort num, byte paletteIndex, bool priorityOne, bool mirrored, bool inverted, byte[] graphics, int[] palette, byte tileSize)
         {
             bool twobpp = tileSize == 0x10;
 
             int offset = num * tileSize;
             if (offset >= graphics.Length) offset = 0;
 
-            Tile8x8 tile = new Tile8x8(num, graphics, offset, palette, mirrored, inverted, priorityOne, twobpp);
-            tile.PaletteIndex = paletteIndex;
+            Subtile tile = new Subtile(num, graphics, offset, palette, mirrored, inverted, priorityOne, twobpp);
+            tile.Palette = paletteIndex;
+            return tile;
+        }
+        public static Subtile DrawSubtileM7(ushort num, byte paletteIndex, byte[] graphics, int[][] palettes, byte tileSize)
+        {
+            if (paletteIndex >= palettes.Length) paletteIndex = 0;
+
+            int offset = num * tileSize;
+            if (offset >= graphics.Length) offset = 0;
+
+            int[] palette;
+            if (tileSize == 0x10)
+            {
+                palette = new int[4];
+                for (int i = 0; i < 4; i++)
+                    palette[i] = palettes[paletteIndex / 4][((paletteIndex % 4) * 4) + i];
+            }
+            else
+                palette = palettes[paletteIndex];
+            Subtile tile = new Subtile(num, graphics, offset, palette);
+            tile.Palette = paletteIndex;
             return tile;
         }
         /// <summary>
@@ -1260,11 +1376,15 @@ namespace LAZYSHELL
                 // see what tile is to the west
                 bool[] fillable = new bool[] { true, true, true };
                 for (int l = 0; l < 3; l++)
+                {
+                    if (src[l] == null)
+                        continue;
                     for (int c = 0; c < vwidth && x - c > 0; c++)
                         if (l == layer && src[l][y * width + x - c - 1] != value)
                             fillable[l] = false;
                         else if (l != layer && src[l][y * width + x - c - 1] != 0)
                             fillable[l] = false;
+                }
                 // if fillable, fill tile and create spawn travelling west
                 if (fillable[layer])
                     if (!chkall)
@@ -1278,11 +1398,15 @@ namespace LAZYSHELL
                 // see what color is to the east
                 bool[] fillable = new bool[] { true, true, true };
                 for (int l = 0; l < 3; l++)
+                {
+                    if (src[l] == null)
+                        continue;
                     for (int c = 0; c < vwidth && x + c < width - vwidth; c++)
                         if (l == layer && src[l][y * width + x + c + vwidth] != value)
                             fillable[l] = false;
                         else if (l != layer && src[l][y * width + x + c + vwidth] != 0)
                             fillable[l] = false;
+                }
                 // if fillable, fill pixel and create spawn travelling east
                 if (fillable[layer])
                     if (!chkall)
@@ -1296,11 +1420,15 @@ namespace LAZYSHELL
                 // see what color is to the north
                 bool[] fillable = new bool[] { true, true, true };
                 for (int l = 0; l < 3; l++)
+                {
+                    if (src[l] == null)
+                        continue;
                     for (int d = 0; d < vheight && y - d > 0; d++)
                         if (l == layer && src[l][(y - d - 1) * width + x] != value)
                             fillable[l] = false;
                         else if (l != layer && src[l][(y - d - 1) * width + x] != 0)
                             fillable[l] = false;
+                }
                 // if fillable, fill pixel and create spawn travelling north
                 if (fillable[layer])
                     if (!chkall)
@@ -1314,11 +1442,15 @@ namespace LAZYSHELL
                 // see what color is to the south
                 bool[] fillable = new bool[] { true, true, true };
                 for (int l = 0; l < 3; l++)
+                {
+                    if (src[l] == null)
+                        continue;
                     for (int d = 0; d < vheight && y + d < height - vheight; d++)
                         if (l == layer && src[l][(y + d + vheight) * width + x] != value)
                             fillable[l] = false;
                         else if (l != layer && src[l][(y + d + vheight) * width + x] != 0)
                             fillable[l] = false;
+                }
                 // if fillable, fill pixel and create spawn travelling south
                 if (fillable[layer])
                     if (!chkall)
@@ -1541,7 +1673,7 @@ namespace LAZYSHELL
         /// Flip horizontally a 16x16 tile.
         /// </summary>
         /// <param name="tile">The tile to flip horizontally.</param>
-        public static void FlipHorizontal(Tile16x16 tile)
+        public static void FlipHorizontal(Tile tile)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -1549,7 +1681,7 @@ namespace LAZYSHELL
                 FlipHorizontal(tile.Subtiles[i].Pixels, 8, 8);
                 FlipHorizontal(tile.Subtiles[i].Colors, 8, 8);
             }
-            Tile8x8 temp = tile.Subtiles[0].Copy();
+            Subtile temp = tile.Subtiles[0].Copy();
             tile.Subtiles[1].CopyTo(tile.Subtiles[0]);
             temp.CopyTo(tile.Subtiles[1]);
             temp = tile.Subtiles[2].Copy();
@@ -1560,7 +1692,7 @@ namespace LAZYSHELL
         /// Flip vertically a 16x16 tile.
         /// </summary>
         /// <param name="tile">The tile to flip vertically.</param>
-        public static void FlipVertical(Tile16x16 tile)
+        public static void FlipVertical(Tile tile)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -1568,7 +1700,7 @@ namespace LAZYSHELL
                 FlipVertical(tile.Subtiles[i].Pixels, 8, 8);
                 FlipVertical(tile.Subtiles[i].Colors, 8, 8);
             }
-            Tile8x8 temp = tile.Subtiles[0].Copy();
+            Subtile temp = tile.Subtiles[0].Copy();
             tile.Subtiles[2].CopyTo(tile.Subtiles[0]);
             temp.CopyTo(tile.Subtiles[2]);
             temp = tile.Subtiles[1].Copy();
@@ -1587,7 +1719,7 @@ namespace LAZYSHELL
                 FlipHorizontal(tile.Subtiles[i].Pixels, 8, 8);
                 FlipHorizontal(tile.Subtiles[i].Colors, 8, 8);
             }
-            Tile8x8 temp = tile.Subtiles[0].Copy();
+            Subtile temp = tile.Subtiles[0].Copy();
             tile.Subtiles[1].CopyTo(tile.Subtiles[0]);
             temp.CopyTo(tile.Subtiles[1]);
             temp = tile.Subtiles[2].Copy();
@@ -1606,7 +1738,7 @@ namespace LAZYSHELL
                 FlipVertical(tile.Subtiles[i].Pixels, 8, 8);
                 FlipVertical(tile.Subtiles[i].Colors, 8, 8);
             }
-            Tile8x8 temp = tile.Subtiles[0].Copy();
+            Subtile temp = tile.Subtiles[0].Copy();
             tile.Subtiles[2].CopyTo(tile.Subtiles[0]);
             temp.CopyTo(tile.Subtiles[2]);
             temp = tile.Subtiles[1].Copy();
@@ -1619,9 +1751,9 @@ namespace LAZYSHELL
         /// <param name="tiles">The tiles to flip horizontally.</param>
         /// <param name="width">The width, in 16x16 tile units, of the tile set.</param>
         /// <param name="height">The height, in 16x16 tile units, of the tile set.</param>
-        public static void FlipHorizontal(Tile16x16[] tiles, int width, int height)
+        public static void FlipHorizontal(Tile[] tiles, int width, int height)
         {
-            Tile16x16 temp;
+            Tile temp;
             for (int y = 0; y < height; y++)
             {
                 int a = 0;
@@ -1634,7 +1766,7 @@ namespace LAZYSHELL
                     tiles[(y * width) + b] = temp.Copy();
                     tiles[(y * width) + b].TileIndex = (y * width) + b;
                     // now flip subtiles in both tiles
-                    Tile16x16 tile = tiles[(y * width) + a];
+                    Tile tile = tiles[(y * width) + a];
                     for (int c = 0; c < 2; c++)
                     {
                         for (int i = 0; i < 4; i++)
@@ -1643,7 +1775,7 @@ namespace LAZYSHELL
                             FlipHorizontal(tile.Subtiles[i].Pixels, 8, 8);
                             FlipHorizontal(tile.Subtiles[i].Colors, 8, 8);
                         }
-                        Tile8x8 subtile = tile.Subtiles[0].Copy();
+                        Subtile subtile = tile.Subtiles[0].Copy();
                         tile.Subtiles[1].CopyTo(tile.Subtiles[0]);
                         subtile.CopyTo(tile.Subtiles[1]);
                         subtile = tile.Subtiles[2].Copy();
@@ -1667,9 +1799,9 @@ namespace LAZYSHELL
         /// <param name="tiles">The tiles to flip vertically.</param>
         /// <param name="width">The width, in 16x16 tile units, of the tile set.</param>
         /// <param name="height">The height, in 16x16 tile units, of the tile set.</param>
-        public static void FlipVertical(Tile16x16[] tiles, int width, int height)
+        public static void FlipVertical(Tile[] tiles, int width, int height)
         {
-            Tile16x16 temp;
+            Tile temp;
             for (int x = 0; x < width; x++)
             {
                 int a = 0;
@@ -1680,7 +1812,7 @@ namespace LAZYSHELL
                     tiles[(a * width) + x] = tiles[(b * width) + x];
                     tiles[(b * width) + x] = temp;
                     // now flip subtiles in both tiles
-                    Tile16x16 tile = tiles[(a * width) + x];
+                    Tile tile = tiles[(a * width) + x];
                     for (int c = 0; c < 2; c++)
                     {
                         for (int i = 0; i < 4; i++)
@@ -1689,7 +1821,7 @@ namespace LAZYSHELL
                             FlipVertical(tile.Subtiles[i].Pixels, 8, 8);
                             FlipVertical(tile.Subtiles[i].Colors, 8, 8);
                         }
-                        Tile8x8 subtile = tile.Subtiles[0].Copy();
+                        Subtile subtile = tile.Subtiles[0].Copy();
                         tile.Subtiles[2].CopyTo(tile.Subtiles[0]);
                         subtile.CopyTo(tile.Subtiles[2]);
                         subtile = tile.Subtiles[1].Copy();
@@ -1980,7 +2112,7 @@ namespace LAZYSHELL
         /// <returns></returns>
         public static int[] GetPixelRegion(byte[] snes, int format, int[] palette, int srcWidth, int regX, int regY, int regWidth, int regHeight, int offset)
         {
-            Tile8x8 temp;
+            Subtile temp;
             int[] pixels = new int[(regWidth * 8) * (regHeight * 8)];
             for (int y = regY, y_ = 0; y < regY + regHeight; y++, y_++)
             {
@@ -1989,7 +2121,7 @@ namespace LAZYSHELL
                     int tileIndex = y * srcWidth + x;
                     if ((tileIndex * format) + offset >= snes.Length)
                         continue;
-                    temp = new Tile8x8(tileIndex, snes, tileIndex * format + offset, palette, false, false, false, format == 0x10);
+                    temp = new Subtile(tileIndex, snes, tileIndex * format + offset, palette, false, false, false, format == 0x10);
                     Do.PixelsToPixels(temp.Pixels, pixels, regWidth * 8, new Rectangle(x_ * 8, y_ * 8, 8, 8));
                 }
             }
@@ -2071,7 +2203,7 @@ namespace LAZYSHELL
             }
             return temp;
         }
-        public static void ImagesToMolds(List<Mold> molds, List<Mold.Tile> uniqueTiles, Bitmap[] images, ref int[] palette, ref byte[] graphics, 
+        public static void ImagesToMolds(List<Mold> molds, List<Mold.Tile> uniqueTiles, Bitmap[] images, ref int[] palette, ref byte[] graphics,
             int startingIndex, bool replaceMolds, bool replacePalette)
         {
             Bitmap sheet = CombineImages(images, 128, 512, 8, true);
@@ -2184,8 +2316,8 @@ namespace LAZYSHELL
                     // create tile and initialize properties
                     Mold.Tile tile = new Mold.Tile();
                     tile.Gridplane = true;
-                    tile.TileSize = (width / 8) * (height / 8);
-                    tile.SubTiles = new ushort[tile.TileSize];
+                    tile.TileSize = (width / 8) * (height / 8) + 1;
+                    tile.SubTiles = new ushort[16];
                     if (width == 24 && height == 24) tile.TileFormat = 0;
                     else if (width == 24 && height == 32) tile.TileFormat = 1;
                     else if (width == 32 && height == 24) tile.TileFormat = 2;
@@ -2241,7 +2373,7 @@ namespace LAZYSHELL
         /// <param name="padedges">Each image will be padded to fit a multiple of the tile size.</param>
         /// <returns></returns>
         public static void ImagesToTilemaps(ref Bitmap[] images, ref int[] palette, int moldIndex, byte format,
-            ref byte[] graphics_, ref Tile16x16[] tiles_, ref byte[][] tilemaps_, bool newPalette)
+            ref byte[] graphics_, ref Tile[] tiles_, ref byte[][] tilemaps_, bool newPalette)
         {
             int count = images.Length;
             int width = Math.Min(256, images[0].Width / 16 * 16);
@@ -2261,7 +2393,7 @@ namespace LAZYSHELL
             byte[][] graphics = new byte[count][];
             byte[][] graphicsCulled = new byte[count][];
             byte[][] tilesets = new byte[count][];
-            Tile16x16[][] tiles = new Tile16x16[count][];//[(width / 16) * (height / 16)];
+            Tile[][] tiles = new Tile[count][];//[(width / 16) * (height / 16)];
             byte[][] tilemaps = new byte[count][];
             int graphicsLength = 0;
             int[] reducedPalette = null;
@@ -2308,10 +2440,10 @@ namespace LAZYSHELL
                     for (int x = 0; x < width / 8; x++)
                     {
                         int index = y * (width / 8) + x;
-                        Tile8x8 subtileA = DrawTile8x8((ushort)index, 0x20, graphics[i], reducedPalette, format);
+                        Subtile subtileA = DrawSubtile((ushort)index, 0x20, graphics[i], reducedPalette, format);
                         for (int a = 0; a < culledGraphics.Length / format; a++)
                         {
-                            Tile8x8 subtileB = DrawTile8x8((ushort)a, 0x20, culledGraphics, reducedPalette, format);
+                            Subtile subtileB = DrawSubtile((ushort)a, 0x20, culledGraphics, reducedPalette, format);
                             if (Bits.Compare(subtileA.Pixels, subtileB.Pixels))
                             {
                                 tilesets[i][index * 2] = (byte)a;
@@ -2324,9 +2456,9 @@ namespace LAZYSHELL
             // convert raw tileset data to array of Tile16x16[]
             for (int i = 0; i < tiles.Length; i++)
             {
-                tiles[i] = new Tile16x16[(width / 16) * (height / 16)];
+                tiles[i] = new Tile[(width / 16) * (height / 16)];
                 for (int a = 0; a < tiles[i].Length; a++)
-                    tiles[i][a] = new Tile16x16(a);
+                    tiles[i][a] = new Tile(a);
             }
             int tilesLength = 0;
             for (int i = 0; i < tiles.Length; i++)
@@ -2345,7 +2477,7 @@ namespace LAZYSHELL
                                 offset += (width / 8) * 2;
                             ushort tile = tilesets[i][offset];
                             byte prop = tilesets[i][offset + 1];
-                            Tile8x8 source = DrawTile8x8(tile, prop, culledGraphics, reducedPalette, format);
+                            Subtile source = DrawSubtile(tile, prop, culledGraphics, reducedPalette, format);
                             tiles[i][index].Subtiles[z] = source;
                         }
                     }
@@ -2355,7 +2487,7 @@ namespace LAZYSHELL
                 tilesLength += tiles[i].Length;
             }
             // combine into one tileset
-            Tile16x16[] culledTiles = new Tile16x16[tilesLength];
+            Tile[] culledTiles = new Tile[tilesLength];
             for (int i = 0, position = 0; i < tiles.Length; i++)
             {
                 tiles[i].CopyTo(culledTiles, position);
@@ -2608,18 +2740,13 @@ namespace LAZYSHELL
         /// <param name="region">The region of the pixel array to draw to.</param>
         public static void PixelsToPixels(int[] src, int[] dst, int dstWidth, Rectangle region)
         {
-            for (int y = region.Y, y_ = 0; y < region.Y + region.Height; y++, y_++)
-            {
-                for (int x = region.X, x_ = 0; x < region.X + region.Width; x++, x_++)
-                {
-                    if (y < 0 || x < 0) continue;
-                    if (y * dstWidth + x >= dst.Length) continue;
-                    if (y_ * region.Width + x_ >= src.Length) continue;
-                    dst[y * dstWidth + x] = src[y_ * region.Width + x_];
-                }
-            }
+            PixelsToPixels(src, dst, dstWidth, region, false, false);
         }
         public static void PixelsToPixels(int[] src, int[] dst, int dstWidth, Rectangle region, bool drawAsTransparent)
+        {
+            PixelsToPixels(src, dst, dstWidth, region, true, false);
+        }
+        public static void PixelsToPixels(int[] src, int[] dst, int dstWidth, Rectangle region, bool drawAsTransparent, bool colorMath)
         {
             for (int y = region.Y, y_ = 0; y < region.Y + region.Height; y++, y_++)
             {
@@ -2629,7 +2756,10 @@ namespace LAZYSHELL
                     if (y * dstWidth + x >= dst.Length) continue;
                     if (y_ * region.Width + x_ >= src.Length) continue;
                     if (src[y_ * region.Width + x_] == 0 && drawAsTransparent) continue;
-                    dst[y * dstWidth + x] = src[y_ * region.Width + x_];
+                    if (colorMath)
+                        dst[y * dstWidth + x] = ColorMath(src[y_ * region.Width + x_], dst[y * dstWidth + x], false, false);
+                    else
+                        dst[y * dstWidth + x] = src[y_ * region.Width + x_];
                 }
             }
         }
@@ -2741,7 +2871,7 @@ namespace LAZYSHELL
         /// <param name="startAtTile">The tile to start drawing from in the tileset</param>
         /// <param name="priority1">Sets whether to draw the tileset as a blue priority 1 silhouette.</param>
         /// <returns></returns>
-        public static int[] TilesetToPixels(Tile16x16[] tileset, int width, int height, int startAtTile, bool priority1)
+        public static int[] TilesetToPixels(Tile[] tileset, int width, int height, int startAtTile, bool priority1)
         {
             int[] pixels = new int[(width * 16) * (height * 16)];
             for (int y = 0; y < height; y++)
@@ -2768,7 +2898,7 @@ namespace LAZYSHELL
         /// <param name="height">The height, in 32x32 tile units, of the tileset.</param>
         /// <param name="startAtTile">The tile to start drawing from in the tileset</param>
         /// <returns></returns>
-        public static int[] TilesetToPixels(Tile32x32[] tileset, int width, int height, int startAtTile)
+        public static int[] TilesetToPixels(OverlapTile[] tileset, int width, int height, int startAtTile)
         {
             int[] pixels = new int[(width * 32) * (height * 32)];
 
@@ -2951,9 +3081,9 @@ namespace LAZYSHELL
         /// <summary>
         /// Reduces the color depth of a pixel array. Returns a newly created palette.
         /// </summary>
-        /// <param name="src"></param>
-        /// <param name="depth"></param>
-        /// <param name="transparent"></param>
+        /// <param name="src">The pixel array.</param>
+        /// <param name="depth">The new color depth.</param>
+        /// <param name="transparent">The transparent color.</param>
         public static int[] ReduceColorDepth(int[] src, int depth, int transparent)
         {
             List<int> colors = new List<int>();
@@ -3295,9 +3425,9 @@ namespace LAZYSHELL
         /// <param name="value"></param>
         /// <param name="collection"></param>
         /// <returns></returns>
-        public static int Contains(Tile16x16 value, Tile16x16[] collection)
+        public static int Contains(Tile value, Tile[] collection)
         {
-            foreach (Tile16x16 item in collection)
+            foreach (Tile item in collection)
                 if (item == value)
                     return value.TileIndex;
                 else if (Bits.Compare(item.Pixels, value.Pixels))
@@ -3991,6 +4121,11 @@ namespace LAZYSHELL
         {
             DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, false, false, null);
         }
+        public static void DrawText(string text, int x, int y, Graphics g, Preview preview, FontCharacter[] fontCharacters, int[] palette)
+        {
+            int[] temp = preview.GetPreview(fontCharacters, palette, text.ToCharArray(), false, false);
+            g.DrawImage(new Bitmap(Do.PixelsToImage(temp, 256, 14)), x, y);
+        }
         public static void SelectAllNodes(TreeNodeCollection nodes, bool selected)
         {
             foreach (TreeNode tn in nodes)
@@ -4183,19 +4318,19 @@ namespace LAZYSHELL
         }
         #endregion
         #region LAZYSHELL Functions
-        public static bool Compare(Tile8x8 subtileA, Tile8x8 subtileB)
+        public static bool Compare(Subtile subtileA, Subtile subtileB)
         {
             if (Bits.Compare(subtileA.Pixels, subtileB.Pixels) &&
-                subtileA.PaletteIndex == subtileB.PaletteIndex &&
-                subtileA.TileIndex == subtileB.TileIndex &&
-                subtileA.PriorityOne == subtileB.PriorityOne &&
+                subtileA.Palette == subtileB.Palette &&
+                subtileA.Index == subtileB.Index &&
+                subtileA.Priority1 == subtileB.Priority1 &&
                 Bits.Compare(subtileA.Colors, subtileB.Colors) &&
                 subtileA.Mirror == subtileB.Mirror &&
                 subtileA.Invert == subtileB.Invert)
                 return true;
             return false;
         }
-        public static bool Compare(Tile16x16 tileA, Tile16x16 tileB)
+        public static bool Compare(Tile tileA, Tile tileB)
         {
             for (int i = 0; i < 4; i++)
                 if (!Compare(tileA.Subtiles[i], tileB.Subtiles[i]))
@@ -4305,7 +4440,7 @@ namespace LAZYSHELL
                 return 0;
             }
         }
-        public static Tile16x16 Contains(Tile16x16[] tileset, Tile16x16 tile)
+        public static Tile Contains(Tile[] tileset, Tile tile)
         {
             for (int i = 0; i < tileset.Length; i++)
             {

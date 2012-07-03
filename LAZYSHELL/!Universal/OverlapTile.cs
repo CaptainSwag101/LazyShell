@@ -5,11 +5,11 @@ using System.Text;
 
 namespace LAZYSHELL
 {
-    public class Tile32x32
+    public class OverlapTile
     {
         private int tileNumber; public int TileNumber { get { return tileNumber; } }
-        private Tile16x16[] subtiles = new Tile16x16[4];
-        private Tile16x16[] preview;
+        private Tile[] subtiles = new Tile[4];
+        private Tile[] preview;
         public int[] Pixels
         {
             get
@@ -32,7 +32,7 @@ namespace LAZYSHELL
             }
         }
 
-        public Tile16x16 GetSubtile(int placement)
+        public Tile GetSubtile(int placement)
         {
             if (this.isBeingModified)
                 return preview[placement];
@@ -50,7 +50,7 @@ namespace LAZYSHELL
                 this.isBeingModified = value;
                 if (this.isBeingModified && this.preview == null)
                 {
-                    preview = new Tile16x16[4];
+                    preview = new Tile[4];
                     for (int i = 0; i < 4; i++)
                         preview[i] = subtiles[i];
                 }
@@ -60,11 +60,11 @@ namespace LAZYSHELL
                 }
             }
         }
-        public Tile32x32(int tileNumber)
+        public OverlapTile(int tileNumber)
         {
             this.tileNumber = tileNumber; // set tile Number
         }
-        public void SetSubtile(Tile16x16 tile, int placement)
+        public void SetSubtile(Tile tile, int placement)
         {
             //[0][1]
             //[2][3]

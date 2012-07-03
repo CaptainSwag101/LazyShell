@@ -42,7 +42,7 @@ namespace LAZYSHELL
         {
             if (template == null) return;
             pictureBoxTemplate.Size = template.Size;
-            templateImage = new Bitmap(Do.PixelsToImage(template.GetTemplatePixels(levels.Level, levels.TileSet),
+            templateImage = new Bitmap(Do.PixelsToImage(template.GetTemplatePixels(levels.Level, levels.Tileset),
                 template.Size.Width, template.Size.Height));
             pictureBoxTemplate.Invalidate();
         }
@@ -70,8 +70,8 @@ namespace LAZYSHELL
             }
             template.Name = name;
             templates.Add(template);
-            levels.TileMap.AssembleIntoModel();
-            template.Transfer(levels.TileMap.TileMaps, levels.LevelMap, levels.SolidityMap, overlay.Select.Location, overlay.Select.Terminal);
+            levels.Tilemap.Assemble();
+            template.Transfer(levels.Tilemap.Tilemaps_Bytes, levels.LevelMap, levels.SolidityMap, overlay.Select.Location, overlay.Select.Terminal);
             // add to listbox
             templatesLoaded.BeginUpdate();
             templatesLoaded.Items.Add(template.Name);

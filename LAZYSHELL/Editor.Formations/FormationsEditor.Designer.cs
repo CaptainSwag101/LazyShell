@@ -39,6 +39,9 @@
             this.export = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportFormationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportPacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.resetFormationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clear = new System.Windows.Forms.ToolStripDropDownButton();
             this.clearFormationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearPacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,9 +53,6 @@
             this.showPacks = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.resetFormationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +75,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(605, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(644, 25);
             this.toolStrip3.TabIndex = 446;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -145,6 +145,32 @@
             this.exportPacksToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.exportPacksToolStripMenuItem.Text = "Export Packs...";
             this.exportPacksToolStripMenuItem.Click += new System.EventHandler(this.exportPacksToolStripMenuItem_Click);
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetFormationToolStripMenuItem,
+            this.resetPackToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(27, 22);
+            // 
+            // resetFormationToolStripMenuItem
+            // 
+            this.resetFormationToolStripMenuItem.Name = "resetFormationToolStripMenuItem";
+            this.resetFormationToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.resetFormationToolStripMenuItem.Text = "Reset formation";
+            this.resetFormationToolStripMenuItem.Click += new System.EventHandler(this.resetFormationToolStripMenuItem_Click);
+            // 
+            // resetPackToolStripMenuItem
+            // 
+            this.resetPackToolStripMenuItem.Name = "resetPackToolStripMenuItem";
+            this.resetPackToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.resetPackToolStripMenuItem.Text = "Reset pack";
+            this.resetPackToolStripMenuItem.Click += new System.EventHandler(this.resetPackToolStripMenuItem_Click);
             // 
             // clear
             // 
@@ -235,44 +261,18 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(605, 471);
+            this.panel1.Size = new System.Drawing.Size(644, 500);
             this.panel1.TabIndex = 447;
             // 
             // toolTip1
             // 
             this.toolTip1.Active = false;
             // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resetFormationToolStripMenuItem,
-            this.resetPackToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(27, 22);
-            // 
-            // resetFormationToolStripMenuItem
-            // 
-            this.resetFormationToolStripMenuItem.Name = "resetFormationToolStripMenuItem";
-            this.resetFormationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resetFormationToolStripMenuItem.Text = "Reset formation";
-            this.resetFormationToolStripMenuItem.Click += new System.EventHandler(this.resetFormationToolStripMenuItem_Click);
-            // 
-            // resetPackToolStripMenuItem
-            // 
-            this.resetPackToolStripMenuItem.Name = "resetPackToolStripMenuItem";
-            this.resetPackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resetPackToolStripMenuItem.Text = "Reset pack";
-            this.resetPackToolStripMenuItem.Click += new System.EventHandler(this.resetPackToolStripMenuItem_Click);
-            // 
             // FormationsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 496);
+            this.ClientSize = new System.Drawing.Size(644, 525);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

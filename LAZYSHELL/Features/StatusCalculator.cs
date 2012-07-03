@@ -315,8 +315,8 @@ namespace LAZYSHELL
                 for (int i = 0; i < Model.Characters.Length; i++)
                     this.attackerName.Items.Add(new string(Model.Characters[i].Name));
                 this.attackerName.SelectedIndex = 0;
-                this.panelAttackerProperties.Height = 57;
-                this.panelAttackerStats.Height = 147;
+                this.panelAttackerProperties.Height = 69;
+                this.panelAttackerStats.Height = 168;
                 this.timedAttackL1.Visible = true;
                 this.timedAttackL2.Visible = true;
             }
@@ -326,7 +326,7 @@ namespace LAZYSHELL
                 this.attackerName.Items.AddRange(Model.MonsterNames.Names);
                 this.attackerName.SelectedIndex = monsterNames.GetIndexFromNum(0);
                 this.panelAttackerProperties.Height = 21;
-                this.panelAttackerStats.Height = 93;
+                this.panelAttackerStats.Height = 105;
                 this.timedAttackL1.Visible = false;
                 this.timedAttackL2.Visible = false;
             }
@@ -342,10 +342,10 @@ namespace LAZYSHELL
                 for (int i = 0; i < Model.Characters.Length; i++)
                     this.targetName.Items.Add(new string(Model.Characters[i].Name));
                 this.targetName.SelectedIndex = 0;
-                this.panelTargetProperties.Height = 57;
-                this.panelTargetStats.Height = 147;
+                this.panelTargetProperties.Height = 69;
+                this.panelTargetStats.Height = 168;
                 this.targetDefensePosition.Visible = true;
-                this.panelTargetWeakness.Visible = false;
+                this.targetWeakness.Visible = false;
             }
             else
             {
@@ -353,9 +353,9 @@ namespace LAZYSHELL
                 this.targetName.Items.AddRange(Model.MonsterNames.Names);
                 this.targetName.SelectedIndex = monsterNames.GetIndexFromNum(0);
                 this.panelTargetProperties.Height = 21;
-                this.panelTargetStats.Height = 93;
+                this.panelTargetStats.Height = 105;
                 this.targetDefensePosition.Visible = false;
-                this.panelTargetWeakness.Visible = true;
+                this.targetWeakness.Visible = true;
             }
             updating = false;
             loadProperties(sender, e);
@@ -365,22 +365,22 @@ namespace LAZYSHELL
             if (attackerTypeAlly.Checked)
                 Do.DrawName(
                     sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
-                    Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
+                    Model.FontMenu, Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 0, false, false, Model.MenuBG_);
             else
-                Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBackground_);
+                Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBG_);
         }
         private void targetName_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (targetTypeAlly.Checked)
                 Do.DrawName(
                     sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
-                    Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
+                    Model.FontMenu, Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 0, false, false, Model.MenuBG_);
             else
-                Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBackground_);
+                Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBG_);
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Do.DrawName(sender, e, menuTextPreview, itemNames, fontMenu, fontPaletteBattle, true, true, Model.MenuBackground_);
+            Do.DrawName(sender, e, menuTextPreview, itemNames, fontMenu, fontPaletteBattle, true, true, Model.MenuBG_);
         }
         private void loadProperties(object sender, EventArgs e)
         {

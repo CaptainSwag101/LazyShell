@@ -51,6 +51,8 @@ namespace LAZYSHELL
             this.openItems = new System.Windows.Forms.ToolStripButton();
             this.openLevels = new System.Windows.Forms.ToolStripButton();
             this.openMainTitle = new System.Windows.Forms.ToolStripButton();
+            this.openMenus = new System.Windows.Forms.ToolStripButton();
+            this.openMiniGames = new System.Windows.Forms.ToolStripButton();
             this.openMonsters = new System.Windows.Forms.ToolStripButton();
             this.openSprites = new System.Windows.Forms.ToolStripButton();
             this.openWorldMaps = new System.Windows.Forms.ToolStripButton();
@@ -218,6 +220,8 @@ namespace LAZYSHELL
             this.openItems,
             this.openLevels,
             this.openMainTitle,
+            this.openMenus,
+            this.openMiniGames,
             this.openMonsters,
             this.openSprites,
             this.openWorldMaps,
@@ -228,7 +232,7 @@ namespace LAZYSHELL
             this.toolStrip2.Location = new System.Drawing.Point(0, 104);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(96, 434);
+            this.toolStrip2.Size = new System.Drawing.Size(96, 489);
             this.toolStrip2.TabIndex = 329;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -388,6 +392,32 @@ namespace LAZYSHELL
             this.openMainTitle.ToolTipText = "Edit the main title logo and backgrounds";
             this.openMainTitle.Click += new System.EventHandler(this.openMainTitle_Click);
             // 
+            // openMenus
+            // 
+            this.openMenus.Image = global::LAZYSHELL.Properties.Resources.mainMenus;
+            this.openMenus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openMenus.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openMenus.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openMenus.Name = "openMenus";
+            this.openMenus.Size = new System.Drawing.Size(94, 22);
+            this.openMenus.Text = "Menus";
+            this.openMenus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openMenus.ToolTipText = "Edit the overworld menus";
+            this.openMenus.Click += new System.EventHandler(this.openMenus_Click);
+            // 
+            // openMiniGames
+            // 
+            this.openMiniGames.Image = global::LAZYSHELL.Properties.Resources.mainMiniGames;
+            this.openMiniGames.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openMiniGames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openMiniGames.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openMiniGames.Name = "openMiniGames";
+            this.openMiniGames.Size = new System.Drawing.Size(94, 22);
+            this.openMiniGames.Text = "Mini-games";
+            this.openMiniGames.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openMiniGames.ToolTipText = "Edit the minecart and beetle mania mini-games";
+            this.openMiniGames.Click += new System.EventHandler(this.openMiniGames_Click);
+            // 
             // openMonsters
             // 
             this.openMonsters.Image = global::LAZYSHELL.Properties.Resources.mainMonsters;
@@ -447,7 +477,7 @@ namespace LAZYSHELL
             this.openNotes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openNotes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openNotes.Name = "openNotes";
-            this.openNotes.Size = new System.Drawing.Size(94, 22);
+            this.openNotes.Size = new System.Drawing.Size(55, 22);
             this.openNotes.Text = "Notes";
             this.openNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openNotes.ToolTipText = "Open the notes database";
@@ -472,7 +502,7 @@ namespace LAZYSHELL
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(96, 129);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(487, 409);
+            this.panel2.Size = new System.Drawing.Size(487, 464);
             this.panel2.TabIndex = 333;
             // 
             // toolStrip4
@@ -758,7 +788,7 @@ namespace LAZYSHELL
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 538);
+            this.ClientSize = new System.Drawing.Size(583, 593);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.toolStrip2);
@@ -770,8 +800,8 @@ namespace LAZYSHELL
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "LAZY SHELL - Super Mario RPG Editor";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -846,6 +876,8 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton openAudio;
         private System.Windows.Forms.ToolStripButton hexViewer;
         private System.Windows.Forms.ToolStripButton history;
+        private System.Windows.Forms.ToolStripButton openMenus;
+        private System.Windows.Forms.ToolStripButton openMiniGames;
     }
 }
 

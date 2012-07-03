@@ -30,10 +30,8 @@ namespace LAZYSHELL
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NPCEditor));
             this.spritePictureBox = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.unknownBits = new System.Windows.Forms.CheckedListBox();
             this.layerPriority = new System.Windows.Forms.CheckedListBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.yPixelShift = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.axisAcute = new System.Windows.Forms.NumericUpDown();
@@ -42,24 +40,31 @@ namespace LAZYSHELL
             this.label5 = new System.Windows.Forms.Label();
             this.height = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.shadow = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.searchResults = new System.Windows.Forms.ListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.npcNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.spriteNameTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchSpriteNames = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.spriteName = new System.Windows.Forms.ToolStripComboBox();
             this.spriteNum = new LAZYSHELL.ToolStripNumericUpDown();
+            this.editSprite = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.byte1a = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cannotClone = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.byte1b = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.showShadow = new System.Windows.Forms.CheckBox();
             this.buttonReset = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
@@ -70,13 +75,14 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.axisAcute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axisObtuse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.height)).BeginInit();
-            this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.byte1b)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
@@ -88,86 +94,50 @@ namespace LAZYSHELL
             this.spritePictureBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.spritePictureBox.Location = new System.Drawing.Point(0, 25);
             this.spritePictureBox.Name = "spritePictureBox";
-            this.spritePictureBox.Size = new System.Drawing.Size(260, 256);
+            this.spritePictureBox.Size = new System.Drawing.Size(260, 224);
             this.spritePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.spritePictureBox.TabIndex = 451;
             this.spritePictureBox.TabStop = false;
             this.spritePictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.spritePictureBox_Paint);
             // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label1.Size = new System.Drawing.Size(118, 17);
-            this.label1.TabIndex = 461;
-            this.label1.Text = "UNKNOWN BITS";
-            // 
             // unknownBits
             // 
-            this.unknownBits.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.unknownBits.CheckOnClick = true;
-            this.unknownBits.ColumnWidth = 55;
+            this.unknownBits.ColumnWidth = 50;
             this.unknownBits.FormattingEnabled = true;
-            this.unknownBits.IntegralHeight = false;
             this.unknownBits.Items.AddRange(new object[] {
-            "B1,b2",
-            "B1,b3",
-            "B1,b4",
-            "B1,b5",
-            "B1,b6",
-            "B1,b7",
             "B2,b0",
             "B2,b1",
             "B2,b2",
             "B2,b3",
             "B2,b4",
-            "B3,b7",
-            "B5,b5",
             "B5,b6",
             "B5,b7",
             "B6,b2"});
-            this.unknownBits.Location = new System.Drawing.Point(0, 19);
+            this.unknownBits.Location = new System.Drawing.Point(6, 20);
             this.unknownBits.MultiColumn = true;
             this.unknownBits.Name = "unknownBits";
-            this.unknownBits.Size = new System.Drawing.Size(118, 162);
+            this.unknownBits.Size = new System.Drawing.Size(108, 68);
             this.unknownBits.TabIndex = 464;
             this.unknownBits.SelectedIndexChanged += new System.EventHandler(this.unknownBits_SelectedIndexChanged);
             // 
             // layerPriority
             // 
-            this.layerPriority.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.layerPriority.CheckOnClick = true;
             this.layerPriority.FormattingEnabled = true;
             this.layerPriority.Items.AddRange(new object[] {
             "priority 0 tiles",
             "priority 1 tiles",
             "priority 2 tiles"});
-            this.layerPriority.Location = new System.Drawing.Point(0, 19);
+            this.layerPriority.Location = new System.Drawing.Point(6, 20);
             this.layerPriority.Name = "layerPriority";
-            this.layerPriority.Size = new System.Drawing.Size(129, 48);
+            this.layerPriority.Size = new System.Drawing.Size(122, 52);
             this.layerPriority.TabIndex = 465;
             this.layerPriority.SelectedIndexChanged += new System.EventHandler(this.layerPriority_SelectedIndexChanged);
             // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label2.Size = new System.Drawing.Size(129, 17);
-            this.label2.TabIndex = 461;
-            this.label2.Text = "OVERLAP PRIORITY";
-            // 
             // yPixelShift
             // 
-            this.yPixelShift.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.yPixelShift.Location = new System.Drawing.Point(70, 87);
+            this.yPixelShift.Location = new System.Drawing.Point(73, 117);
             this.yPixelShift.Maximum = new decimal(new int[] {
             15,
             0,
@@ -179,113 +149,93 @@ namespace LAZYSHELL
             0,
             -2147483648});
             this.yPixelShift.Name = "yPixelShift";
-            this.yPixelShift.Size = new System.Drawing.Size(59, 17);
+            this.yPixelShift.Size = new System.Drawing.Size(56, 21);
             this.yPixelShift.TabIndex = 454;
             this.yPixelShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.yPixelShift.ValueChanged += new System.EventHandler(this.yPixelShift_ValueChanged);
             // 
             // label3
             // 
-            this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(0, 87);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 120);
             this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label3.Size = new System.Drawing.Size(69, 17);
+            this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 461;
             this.label3.Text = "Y pixel shift";
             // 
             // axisAcute
             // 
-            this.axisAcute.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.axisAcute.Location = new System.Drawing.Point(70, 19);
+            this.axisAcute.Location = new System.Drawing.Point(76, 20);
             this.axisAcute.Maximum = new decimal(new int[] {
             15,
             0,
             0,
             0});
             this.axisAcute.Name = "axisAcute";
-            this.axisAcute.Size = new System.Drawing.Size(59, 17);
+            this.axisAcute.Size = new System.Drawing.Size(53, 21);
             this.axisAcute.TabIndex = 454;
             this.axisAcute.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.axisAcute.ValueChanged += new System.EventHandler(this.axisAcute_ValueChanged);
             // 
             // label4
             // 
-            this.label4.BackColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(0, 19);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 22);
             this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label4.Size = new System.Drawing.Size(69, 17);
+            this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 461;
             this.label4.Text = "Acute axis";
             // 
             // axisObtuse
             // 
-            this.axisObtuse.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.axisObtuse.Location = new System.Drawing.Point(70, 37);
+            this.axisObtuse.Location = new System.Drawing.Point(76, 41);
             this.axisObtuse.Maximum = new decimal(new int[] {
             15,
             0,
             0,
             0});
             this.axisObtuse.Name = "axisObtuse";
-            this.axisObtuse.Size = new System.Drawing.Size(59, 17);
+            this.axisObtuse.Size = new System.Drawing.Size(53, 21);
             this.axisObtuse.TabIndex = 454;
             this.axisObtuse.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.axisObtuse.ValueChanged += new System.EventHandler(this.axisObtuse_ValueChanged);
             // 
             // label5
             // 
-            this.label5.BackColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(0, 37);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 43);
             this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label5.Size = new System.Drawing.Size(69, 17);
+            this.label5.Size = new System.Drawing.Size(64, 13);
             this.label5.TabIndex = 461;
             this.label5.Text = "Obtuse axis";
             // 
             // height
             // 
-            this.height.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.height.Location = new System.Drawing.Point(70, 55);
+            this.height.Location = new System.Drawing.Point(76, 62);
             this.height.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
             this.height.Name = "height";
-            this.height.Size = new System.Drawing.Size(59, 17);
+            this.height.Size = new System.Drawing.Size(53, 21);
             this.height.TabIndex = 454;
             this.height.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.height.ValueChanged += new System.EventHandler(this.height_ValueChanged);
             // 
             // label6
             // 
-            this.label6.BackColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(0, 55);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 64);
             this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label6.Size = new System.Drawing.Size(69, 17);
+            this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 461;
             this.label6.Text = "Height";
             // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label7.Size = new System.Drawing.Size(129, 17);
-            this.label7.TabIndex = 461;
-            this.label7.Text = "SOLIDITY FIELD";
-            // 
             // buttonOK
             // 
-            this.buttonOK.BackColor = System.Drawing.SystemColors.Control;
             this.buttonOK.FlatAppearance.BorderSize = 0;
-            this.buttonOK.Location = new System.Drawing.Point(23, 500);
+            this.buttonOK.Location = new System.Drawing.Point(19, 522);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 453;
@@ -295,9 +245,8 @@ namespace LAZYSHELL
             // 
             // buttonCancel
             // 
-            this.buttonCancel.BackColor = System.Drawing.SystemColors.Control;
             this.buttonCancel.FlatAppearance.BorderSize = 0;
-            this.buttonCancel.Location = new System.Drawing.Point(185, 500);
+            this.buttonCancel.Location = new System.Drawing.Point(181, 522);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 453;
@@ -305,37 +254,28 @@ namespace LAZYSHELL
             this.buttonCancel.UseVisualStyleBackColor = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.Controls.Add(this.shadow);
-            this.panel1.Location = new System.Drawing.Point(70, 69);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(59, 17);
-            this.panel1.TabIndex = 460;
-            // 
             // shadow
             // 
             this.shadow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shadow.DropDownWidth = 70;
             this.shadow.IntegralHeight = false;
             this.shadow.Items.AddRange(new object[] {
-            "{NONE}",
-            "circle (small)",
-            "circle (med)",
+            "oval (small)",
+            "oval (med)",
+            "oval (big)",
             "block"});
-            this.shadow.Location = new System.Drawing.Point(-2, -2);
+            this.shadow.Location = new System.Drawing.Point(73, 96);
             this.shadow.Name = "shadow";
-            this.shadow.Size = new System.Drawing.Size(63, 21);
+            this.shadow.Size = new System.Drawing.Size(56, 21);
             this.shadow.TabIndex = 370;
             this.shadow.SelectedIndexChanged += new System.EventHandler(this.shadow_SelectedIndexChanged);
             // 
             // label9
             // 
-            this.label9.BackColor = System.Drawing.SystemColors.Control;
-            this.label9.Location = new System.Drawing.Point(0, 69);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 99);
             this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label9.Size = new System.Drawing.Size(69, 17);
+            this.label9.Size = new System.Drawing.Size(45, 13);
             this.label9.TabIndex = 461;
             this.label9.Text = "Shadow";
             // 
@@ -344,16 +284,17 @@ namespace LAZYSHELL
             this.searchResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchResults.FormattingEnabled = true;
             this.searchResults.IntegralHeight = false;
-            this.searchResults.Location = new System.Drawing.Point(2, 60);
+            this.searchResults.Location = new System.Drawing.Point(2, 67);
             this.searchResults.Name = "searchResults";
-            this.searchResults.Size = new System.Drawing.Size(228, 464);
+            this.searchResults.Size = new System.Drawing.Size(228, 484);
             this.searchResults.TabIndex = 329;
             this.searchResults.SelectedIndexChanged += new System.EventHandler(this.searchResults_SelectedIndexChanged);
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
             this.npcNum});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -362,14 +303,18 @@ namespace LAZYSHELL
             this.toolStrip1.TabIndex = 467;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(42, 22);
+            this.toolStripLabel1.Text = " NPC # ";
+            // 
             // npcNum
             // 
             this.npcNum.AutoSize = false;
-            this.npcNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.npcNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.npcNum.ForeColor = System.Drawing.SystemColors.Control;
+            this.npcNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.npcNum.Hexadecimal = false;
-            this.npcNum.Location = new System.Drawing.Point(7, 1);
+            this.npcNum.Location = new System.Drawing.Point(49, 2);
             this.npcNum.Maximum = new decimal(new int[] {
             511,
             0,
@@ -381,7 +326,7 @@ namespace LAZYSHELL
             0,
             0});
             this.npcNum.Name = "npcNum";
-            this.npcNum.Size = new System.Drawing.Size(70, 22);
+            this.npcNum.Size = new System.Drawing.Size(70, 21);
             this.npcNum.Text = "0";
             this.npcNum.Value = new decimal(new int[] {
             0,
@@ -407,12 +352,12 @@ namespace LAZYSHELL
             // 
             // toolStrip2
             // 
-            this.toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip2.CanOverflow = false;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.spriteName,
-            this.spriteNum});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 281);
+            this.spriteNum,
+            this.editSprite});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 249);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(260, 25);
@@ -428,14 +373,14 @@ namespace LAZYSHELL
             this.spriteName.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.spriteName.IntegralHeight = false;
             this.spriteName.Name = "spriteName";
-            this.spriteName.Size = new System.Drawing.Size(190, 21);
+            this.spriteName.Size = new System.Drawing.Size(160, 21);
             this.spriteName.SelectedIndexChanged += new System.EventHandler(this.spriteName_SelectedIndexChanged);
             // 
             // spriteNum
             // 
             this.spriteNum.AutoSize = false;
             this.spriteNum.Hexadecimal = false;
-            this.spriteNum.Location = new System.Drawing.Point(199, 2);
+            this.spriteNum.Location = new System.Drawing.Point(169, 2);
             this.spriteNum.Maximum = new decimal(new int[] {
             1023,
             0,
@@ -447,7 +392,7 @@ namespace LAZYSHELL
             0,
             0});
             this.spriteNum.Name = "spriteNum";
-            this.spriteNum.Size = new System.Drawing.Size(60, 20);
+            this.spriteNum.Size = new System.Drawing.Size(50, 21);
             this.spriteNum.Text = "0";
             this.spriteNum.Value = new decimal(new int[] {
             0,
@@ -456,12 +401,22 @@ namespace LAZYSHELL
             0});
             this.spriteNum.ValueChanged += new System.EventHandler(this.spriteNum_ValueChanged);
             // 
+            // editSprite
+            // 
+            this.editSprite.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editSprite.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.editSprite.Name = "editSprite";
+            this.editSprite.Size = new System.Drawing.Size(40, 22);
+            this.editSprite.Text = " EDIT ";
+            this.editSprite.Click += new System.EventHandler(this.editSprite_Click);
+            // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.panel5);
-            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.groupBox4);
+            this.panel2.Controls.Add(this.groupBox3);
+            this.panel2.Controls.Add(this.groupBox2);
+            this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Controls.Add(this.buttonCancel);
-            this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.buttonReset);
             this.panel2.Controls.Add(this.buttonOK);
             this.panel2.Controls.Add(this.toolStrip2);
@@ -470,56 +425,145 @@ namespace LAZYSHELL
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(260, 524);
+            this.panel2.Size = new System.Drawing.Size(260, 551);
             this.panel2.TabIndex = 469;
             // 
-            // panel5
+            // groupBox4
             // 
-            this.panel5.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.label1);
-            this.panel5.Controls.Add(this.unknownBits);
-            this.panel5.Location = new System.Drawing.Point(138, 309);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(122, 185);
-            this.panel5.TabIndex = 471;
+            this.groupBox4.Controls.Add(this.unknownBits);
+            this.groupBox4.Location = new System.Drawing.Point(140, 379);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(120, 137);
+            this.groupBox4.TabIndex = 463;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Unknown";
             // 
-            // panel4
+            // groupBox3
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.label7);
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Controls.Add(this.axisObtuse);
-            this.panel4.Controls.Add(this.label6);
-            this.panel4.Controls.Add(this.axisAcute);
-            this.panel4.Controls.Add(this.height);
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Location = new System.Drawing.Point(3, 418);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(133, 76);
-            this.panel4.TabIndex = 470;
+            this.groupBox3.Controls.Add(this.byte1a);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.cannotClone);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.byte1b);
+            this.groupBox3.Location = new System.Drawing.Point(140, 277);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(120, 96);
+            this.groupBox3.TabIndex = 463;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "VRAM Buffer";
             // 
-            // panel3
+            // byte1a
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.layerPriority);
-            this.panel3.Controls.Add(this.panel1);
-            this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.yPixelShift);
-            this.panel3.Location = new System.Drawing.Point(3, 309);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(133, 108);
-            this.panel3.TabIndex = 469;
+            this.byte1a.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.byte1a.DropDownWidth = 100;
+            this.byte1a.IntegralHeight = false;
+            this.byte1a.Items.AddRange(new object[] {
+            "SW/SE, NW/NE",
+            "SW/SE, NW/NE, S",
+            "SW/SE",
+            "SW/SE, NW/NE",
+            "all directions",
+            "____",
+            "____",
+            "all directions"});
+            this.byte1a.Location = new System.Drawing.Point(45, 21);
+            this.byte1a.Name = "byte1a";
+            this.byte1a.Size = new System.Drawing.Size(69, 21);
+            this.byte1a.TabIndex = 370;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 23);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 13);
+            this.label11.TabIndex = 461;
+            this.label11.Text = "Store";
+            // 
+            // cannotClone
+            // 
+            this.cannotClone.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cannotClone.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cannotClone.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.cannotClone.Location = new System.Drawing.Point(5, 68);
+            this.cannotClone.Name = "cannotClone";
+            this.cannotClone.Size = new System.Drawing.Size(109, 21);
+            this.cannotClone.TabIndex = 472;
+            this.cannotClone.Text = "CANNOT CLONE";
+            this.cannotClone.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.cannotClone.UseVisualStyleBackColor = false;
+            this.cannotClone.CheckedChanged += new System.EventHandler(this.cannotClone_CheckedChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 44);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(26, 13);
+            this.label12.TabIndex = 461;
+            this.label12.Text = "Size";
+            // 
+            // byte1b
+            // 
+            this.byte1b.Location = new System.Drawing.Point(45, 42);
+            this.byte1b.Maximum = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.byte1b.Name = "byte1b";
+            this.byte1b.Size = new System.Drawing.Size(69, 21);
+            this.byte1b.TabIndex = 454;
+            this.byte1b.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.axisObtuse);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.axisAcute);
+            this.groupBox2.Controls.Add(this.height);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Location = new System.Drawing.Point(0, 427);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(134, 89);
+            this.groupBox2.TabIndex = 471;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Solidity Field";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.shadow);
+            this.groupBox1.Controls.Add(this.showShadow);
+            this.groupBox1.Controls.Add(this.yPixelShift);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.layerPriority);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Location = new System.Drawing.Point(0, 277);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(134, 144);
+            this.groupBox1.TabIndex = 463;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Priority";
+            // 
+            // showShadow
+            // 
+            this.showShadow.Appearance = System.Windows.Forms.Appearance.Button;
+            this.showShadow.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showShadow.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.showShadow.Location = new System.Drawing.Point(6, 73);
+            this.showShadow.Name = "showShadow";
+            this.showShadow.Size = new System.Drawing.Size(122, 21);
+            this.showShadow.TabIndex = 472;
+            this.showShadow.Text = "SHOW SHADOW";
+            this.showShadow.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.showShadow.UseVisualStyleBackColor = false;
+            this.showShadow.CheckedChanged += new System.EventHandler(this.showShadow_CheckedChanged);
             // 
             // buttonReset
             // 
-            this.buttonReset.BackColor = System.Drawing.SystemColors.Control;
             this.buttonReset.FlatAppearance.BorderSize = 0;
-            this.buttonReset.Location = new System.Drawing.Point(104, 500);
+            this.buttonReset.Location = new System.Drawing.Point(100, 522);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 453;
@@ -536,7 +580,7 @@ namespace LAZYSHELL
             this.panel6.Location = new System.Drawing.Point(260, 0);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.panel6.Size = new System.Drawing.Size(230, 524);
+            this.panel6.Size = new System.Drawing.Size(230, 551);
             this.panel6.TabIndex = 470;
             // 
             // toolStrip3
@@ -546,7 +590,7 @@ namespace LAZYSHELL
             this.spriteNameTextBox,
             this.searchSpriteNames});
             this.toolStrip3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.toolStrip3.Location = new System.Drawing.Point(2, 18);
+            this.toolStrip3.Location = new System.Drawing.Point(2, 25);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(228, 42);
@@ -569,17 +613,17 @@ namespace LAZYSHELL
             this.label8.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(2, 0);
             this.label8.Name = "label8";
-            this.label8.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label8.Size = new System.Drawing.Size(228, 18);
+            this.label8.Padding = new System.Windows.Forms.Padding(4, 1, 0, 2);
+            this.label8.Size = new System.Drawing.Size(228, 25);
             this.label8.TabIndex = 462;
             this.label8.Text = "FIND NPCS CONTAINING SPRITE...";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // NPCEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 524);
+            this.ClientSize = new System.Drawing.Size(490, 551);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel2);
             this.DoubleBuffered = true;
@@ -597,16 +641,20 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.axisAcute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axisObtuse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.height)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.byte1b)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
@@ -618,10 +666,8 @@ namespace LAZYSHELL
         #endregion
 
         private System.Windows.Forms.PictureBox spritePictureBox;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckedListBox unknownBits;
         private System.Windows.Forms.CheckedListBox layerPriority;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown yPixelShift;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown axisAcute;
@@ -630,10 +676,8 @@ namespace LAZYSHELL
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown height;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox shadow;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ListBox searchResults;
@@ -643,9 +687,6 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripComboBox spriteName;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripTextBox spriteNameTextBox;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.ToolStripButton searchSpriteNames;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ToolStrip toolStrip3;
@@ -653,5 +694,17 @@ namespace LAZYSHELL
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.Label label8;
         private ToolStripNumericUpDown spriteNum;
+        private System.Windows.Forms.CheckBox cannotClone;
+        private System.Windows.Forms.CheckBox showShadow;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown byte1b;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox byte1a;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripButton editSprite;
     }
 }

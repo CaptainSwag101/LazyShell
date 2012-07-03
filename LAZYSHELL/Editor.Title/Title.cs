@@ -115,11 +115,11 @@ namespace LAZYSHELL
         {
             if (paletteEditor == null)
             {
-                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSet, 8, 0);
+                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSet, 8, 0, 8);
                 paletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditor.Reload(new Function(PaletteUpdate), paletteSet, 8, 0);
+                paletteEditor.Reload(new Function(PaletteUpdate), paletteSet, 8, 0, 8);
         }
         private void LoadGraphicEditor()
         {
@@ -141,11 +141,11 @@ namespace LAZYSHELL
         {
             if (spritePaletteEditor == null)
             {
-                spritePaletteEditor = new PaletteEditor(new Function(SpritePaletteUpdate), spritePaletteSet, 5, 0);
+                spritePaletteEditor = new PaletteEditor(new Function(SpritePaletteUpdate), spritePaletteSet, 5, 0, 5);
                 spritePaletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                spritePaletteEditor.Reload(new Function(SpritePaletteUpdate), spritePaletteSet, 5, 0);
+                spritePaletteEditor.Reload(new Function(SpritePaletteUpdate), spritePaletteSet, 5, 0, 5);
         }
         private void LoadSpriteGraphicEditor()
         {
@@ -161,7 +161,7 @@ namespace LAZYSHELL
         }
         private void TileUpdate()
         {
-            this.tileSet.AssembleIntoModel(16, layer);
+            this.tileSet.Assemble(16, layer);
             SetTilesetImages();
             pictureBoxTitle.Invalidate();
         }
@@ -176,7 +176,7 @@ namespace LAZYSHELL
         }
         private void GraphicUpdate()
         {
-            tileSet.AssembleIntoModel(16);
+            tileSet.Assemble(16);
             tileSet = new TitleTileset(paletteSet);
             SetTilesetImages();
             pictureBoxTitle.Invalidate();
@@ -207,7 +207,7 @@ namespace LAZYSHELL
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             this.copiedTiles = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
-            Tile16x16[] copiedTiles = new Tile16x16[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
+            Tile[] copiedTiles = new Tile[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
@@ -228,7 +228,7 @@ namespace LAZYSHELL
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             this.draggedTiles = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
-            Tile16x16[] draggedTiles = new Tile16x16[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
+            Tile[] draggedTiles = new Tile[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
@@ -272,9 +272,9 @@ namespace LAZYSHELL
                 for (int x = 0; x < buffer.Width / 16; x++)
                 {
                     if (y + y_ < 0 || y + y_ >= height ||
-                        x + x_ < 0 || x + x_ >= 16) 
+                        x + x_ < 0 || x + x_ >= 16)
                         continue;
-                    Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
+                    Tile tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileSet.TileSetLayers[layer][(y + y_) * 16 + x + x_] = tile.Copy();
                     tileSet.TileSetLayers[layer][(y + y_) * 16 + x + x_].TileIndex = (y + y_) * 16 + x + x_;
                 }
@@ -306,7 +306,7 @@ namespace LAZYSHELL
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             CopyBuffer buffer = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
-            Tile16x16[] copiedTiles = new Tile16x16[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
+            Tile[] copiedTiles = new Tile[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
@@ -448,23 +448,10 @@ namespace LAZYSHELL
             // Palette set
             paletteSet.Assemble();
             spritePaletteSet.Assemble();
-            tileSet.AssembleIntoModel(16);
+            tileSet.Assemble(16);
             // Tilesets
-            byte[] compressed = new byte[0xDA60];
-            int size = Comp.Compress(Model.TitleData, compressed);
-            int totalSize = size + 1;
-            if (totalSize > 0x7E91)
-            {
-                MessageBox.Show(
-                    "Recompressed data exceeds allotted ROM space by " +
-                    (totalSize - 0x7E91).ToString() + " bytes.\nMain title was not saved.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                Bits.SetByteArray(Model.Data, 0x3F216F, compressed, 0, size - 1);
+            if (Model.Compress(Model.TitleData, 0x3F216F, 0xDA60, 0x7E91, "Main title"))
                 checksum = Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
-            }
         }
         #endregion
         #region Event Handlers
@@ -501,7 +488,7 @@ namespace LAZYSHELL
             spritePaletteEditor.Dispose();
             spriteGraphicEditor.Dispose();
             tileEditor.Dispose();
-       }
+        }
         private void tabControl2_Deselecting(object sender, TabControlCancelEventArgs e)
         {
             mouseDownTile = 0;

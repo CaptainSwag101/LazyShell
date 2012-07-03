@@ -707,19 +707,17 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.moldTileProperties);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.subtile);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 179);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(132, 54);
+            this.panel4.Size = new System.Drawing.Size(132, 57);
             this.panel4.TabIndex = 426;
             // 
             // moldTileProperties
             // 
-            this.moldTileProperties.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.moldTileProperties.CheckOnClick = true;
             this.moldTileProperties.ColumnWidth = 63;
             this.moldTileProperties.FormattingEnabled = true;
@@ -731,31 +729,32 @@
             this.moldTileProperties.Location = new System.Drawing.Point(0, 0);
             this.moldTileProperties.MultiColumn = true;
             this.moldTileProperties.Name = "moldTileProperties";
-            this.moldTileProperties.Size = new System.Drawing.Size(128, 32);
+            this.moldTileProperties.Size = new System.Drawing.Size(132, 36);
             this.moldTileProperties.TabIndex = 46;
             this.moldTileProperties.SelectedIndexChanged += new System.EventHandler(this.moldTileProperties_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(0, 33);
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Location = new System.Drawing.Point(0, 36);
             this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label1.Size = new System.Drawing.Size(79, 17);
+            this.label1.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.label1.Size = new System.Drawing.Size(81, 21);
             this.label1.TabIndex = 425;
             this.label1.Text = "Subtile";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // subtile
             // 
-            this.subtile.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.subtile.Location = new System.Drawing.Point(80, 33);
+            this.subtile.Location = new System.Drawing.Point(81, 36);
             this.subtile.Maximum = new decimal(new int[] {
             512,
             0,
             0,
             0});
             this.subtile.Name = "subtile";
-            this.subtile.Size = new System.Drawing.Size(48, 17);
+            this.subtile.Size = new System.Drawing.Size(51, 21);
             this.subtile.TabIndex = 424;
             this.subtile.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.subtile.ValueChanged += new System.EventHandler(this.subtile_ValueChanged);
@@ -763,7 +762,6 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.moldTileYCoord);
             this.panel3.Controls.Add(this.label13);
             this.panel3.Controls.Add(this.moldTileXCoord);
@@ -775,15 +773,14 @@
             // 
             // moldTileYCoord
             // 
-            this.moldTileYCoord.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.moldTileYCoord.Location = new System.Drawing.Point(80, 0);
+            this.moldTileYCoord.Location = new System.Drawing.Point(81, 0);
             this.moldTileYCoord.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.moldTileYCoord.Name = "moldTileYCoord";
-            this.moldTileYCoord.Size = new System.Drawing.Size(48, 17);
+            this.moldTileYCoord.Size = new System.Drawing.Size(51, 21);
             this.moldTileYCoord.TabIndex = 48;
             this.moldTileYCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.moldTileYCoord.ValueChanged += new System.EventHandler(this.moldTileYCoord_ValueChanged);
@@ -791,24 +788,25 @@
             // label13
             // 
             this.label13.BackColor = System.Drawing.SystemColors.Control;
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label13.Location = new System.Drawing.Point(0, 0);
             this.label13.Name = "label13";
-            this.label13.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label13.Size = new System.Drawing.Size(30, 17);
+            this.label13.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.label13.Size = new System.Drawing.Size(30, 21);
             this.label13.TabIndex = 423;
             this.label13.Text = "Size";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // moldTileXCoord
             // 
-            this.moldTileXCoord.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.moldTileXCoord.Location = new System.Drawing.Point(31, 0);
+            this.moldTileXCoord.Location = new System.Drawing.Point(30, 0);
             this.moldTileXCoord.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.moldTileXCoord.Name = "moldTileXCoord";
-            this.moldTileXCoord.Size = new System.Drawing.Size(48, 17);
+            this.moldTileXCoord.Size = new System.Drawing.Size(51, 21);
             this.moldTileXCoord.TabIndex = 47;
             this.moldTileXCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.moldTileXCoord.ValueChanged += new System.EventHandler(this.moldTileXCoord_ValueChanged);

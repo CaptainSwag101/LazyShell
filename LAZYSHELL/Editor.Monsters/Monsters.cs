@@ -66,6 +66,7 @@ namespace LAZYSHELL
             if (settings.RememberLastIndex)
                 Index = settings.LastMonster;
             checksum = Do.GenerateChecksum(monsters);
+            //MessageBox.Show(battleScriptsEditor.Width + " x " + battleScriptsEditor.Height);
         }
         private void InitializeStrings()
         {
@@ -389,7 +390,7 @@ namespace LAZYSHELL
         }
         private void monsterName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBackground_);
+            Do.DrawName(sender, e, menuTextPreview, Model.MonsterNames, fontMenu, fontPaletteBattle, true, Model.MenuBG_);
         }
         private void monsterNameText_TextChanged(object sender, EventArgs e)
         {
@@ -457,7 +458,7 @@ namespace LAZYSHELL
         {
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
-                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, true, true, Model.MenuBackground_);
+                Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, true, true, Model.MenuBG_);
         }
         private void ItemWinA_SelectedIndexChanged(object sender, EventArgs e)
         {

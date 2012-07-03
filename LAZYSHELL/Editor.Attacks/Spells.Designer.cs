@@ -28,52 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel160 = new System.Windows.Forms.Panel();
-            this.panel156 = new System.Windows.Forms.Panel();
-            this.label170 = new System.Windows.Forms.Label();
             this.spellTargetting = new System.Windows.Forms.CheckedListBox();
-            this.panel159 = new System.Windows.Forms.Panel();
-            this.panel155 = new System.Windows.Forms.Panel();
-            this.label44 = new System.Windows.Forms.Label();
             this.spellAttackProp = new System.Windows.Forms.CheckedListBox();
-            this.panel158 = new System.Windows.Forms.Panel();
-            this.panel154 = new System.Windows.Forms.Panel();
-            this.label61 = new System.Windows.Forms.Label();
             this.spellStatusChange = new System.Windows.Forms.CheckedListBox();
-            this.panel157 = new System.Windows.Forms.Panel();
-            this.panel153 = new System.Windows.Forms.Panel();
-            this.label62 = new System.Windows.Forms.Label();
             this.spellStatusEffect = new System.Windows.Forms.CheckedListBox();
-            this.panel152 = new System.Windows.Forms.Panel();
-            this.panel45 = new System.Windows.Forms.Panel();
             this.textBoxSpellDescription = new System.Windows.Forms.RichTextBox();
-            this.button33 = new System.Windows.Forms.Button();
-            this.button34 = new System.Windows.Forms.Button();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.byteOrText = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.newLine = new System.Windows.Forms.ToolStripButton();
             this.endString = new System.Windows.Forms.ToolStripButton();
             this.pictureBoxSpellDesc = new System.Windows.Forms.PictureBox();
-            this.label55 = new System.Windows.Forms.Label();
-            this.panel40 = new System.Windows.Forms.Panel();
-            this.panel57 = new System.Windows.Forms.Panel();
-            this.panel89 = new System.Windows.Forms.Panel();
             this.spellInflictElement = new System.Windows.Forms.ComboBox();
-            this.panel90 = new System.Windows.Forms.Panel();
             this.spellFunction = new System.Windows.Forms.ComboBox();
-            this.panel91 = new System.Windows.Forms.Panel();
             this.spellEffectType = new System.Windows.Forms.ComboBox();
-            this.label172 = new System.Windows.Forms.Label();
             this.label171 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.panel84 = new System.Windows.Forms.Panel();
             this.spellAttackType = new System.Windows.Forms.ComboBox();
-            this.panel151 = new System.Windows.Forms.Panel();
-            this.panel38 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
             this.spellHitRate = new System.Windows.Forms.NumericUpDown();
@@ -86,170 +59,95 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.spellNameIcon = new LAZYSHELL.ToolStripComboBox();
             this.textBoxSpellName = new System.Windows.Forms.ToolStripTextBox();
-            this.panelTimingRotation = new System.Windows.Forms.Panel();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.label183 = new System.Windows.Forms.Label();
             this.label142 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
-            this.numericUpDown104 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown103 = new System.Windows.Forms.NumericUpDown();
-            this.panelTimingFireball = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.label186 = new System.Windows.Forms.Label();
-            this.numericUpDown106 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown105 = new System.Windows.Forms.NumericUpDown();
+            this.timingRotationStart = new System.Windows.Forms.NumericUpDown();
+            this.timingRotationMax = new System.Windows.Forms.NumericUpDown();
+            this.timingFireballSpan = new System.Windows.Forms.NumericUpDown();
+            this.timingFireballMax = new System.Windows.Forms.NumericUpDown();
             this.label145 = new System.Windows.Forms.Label();
             this.label146 = new System.Windows.Forms.Label();
-            this.panelTimingRapid = new System.Windows.Forms.Panel();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.label184 = new System.Windows.Forms.Label();
             this.label143 = new System.Windows.Forms.Label();
-            this.numericUpDown102 = new System.Windows.Forms.NumericUpDown();
-            this.panelTimingMultiple = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.label202 = new System.Windows.Forms.Label();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.instanceNumberName = new System.Windows.Forms.ComboBox();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
+            this.timingRapid = new System.Windows.Forms.NumericUpDown();
+            this.timingInstanceNumber = new System.Windows.Forms.ComboBox();
+            this.timingInstanceMax = new System.Windows.Forms.NumericUpDown();
+            this.timingInstanceSpan = new System.Windows.Forms.NumericUpDown();
             this.label155 = new System.Windows.Forms.Label();
             this.label156 = new System.Windows.Forms.Label();
             this.label177 = new System.Windows.Forms.Label();
-            this.panelTimingGeno = new System.Windows.Forms.Panel();
-            this.panel129 = new System.Windows.Forms.Panel();
-            this.GenoChargeOverflow = new System.Windows.Forms.TrackBar();
-            this.label167 = new System.Windows.Forms.Label();
-            this.GenoLevel4Frame = new System.Windows.Forms.TrackBar();
             this.label151 = new System.Windows.Forms.Label();
-            this.GenoLevel3Frame = new System.Windows.Forms.TrackBar();
             this.label154 = new System.Windows.Forms.Label();
-            this.GenoLevel2Frame = new System.Windows.Forms.TrackBar();
             this.label152 = new System.Windows.Forms.Label();
-            this.numericUpDown114 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown113 = new System.Windows.Forms.NumericUpDown();
+            this.timingGeno4Frame = new System.Windows.Forms.NumericUpDown();
+            this.timingGeno2Frame = new System.Windows.Forms.NumericUpDown();
             this.label153 = new System.Windows.Forms.Label();
-            this.numericUpDown112 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown111 = new System.Windows.Forms.NumericUpDown();
-            this.panelTimingTwo = new System.Windows.Forms.Panel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.spell2Level1FrameEnd = new System.Windows.Forms.TrackBar();
-            this.spell2Level2FrameEnd = new System.Windows.Forms.TrackBar();
-            this.label123 = new System.Windows.Forms.Label();
-            this.spell2Level2FrameStart = new System.Windows.Forms.TrackBar();
+            this.timingGenoOverflow = new System.Windows.Forms.NumericUpDown();
+            this.timingGeno3Frame = new System.Windows.Forms.NumericUpDown();
             this.label147 = new System.Windows.Forms.Label();
             this.label148 = new System.Windows.Forms.Label();
             this.label149 = new System.Windows.Forms.Label();
-            this.numericUpDown107 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown108 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown110 = new System.Windows.Forms.NumericUpDown();
-            this.panelTimingOne = new System.Windows.Forms.Panel();
-            this.panel128 = new System.Windows.Forms.Panel();
-            this.spell1TimingFrameSpan = new System.Windows.Forms.TrackBar();
-            this.label197 = new System.Windows.Forms.Label();
-            this.numericUpDown100 = new System.Windows.Forms.NumericUpDown();
+            this.timingTwoStart = new System.Windows.Forms.NumericUpDown();
+            this.timingOneEnd = new System.Windows.Forms.NumericUpDown();
+            this.timingTwoEnd = new System.Windows.Forms.NumericUpDown();
+            this.timingOne = new System.Windows.Forms.NumericUpDown();
             this.label144 = new System.Windows.Forms.Label();
-            this.panel160.SuspendLayout();
-            this.panel156.SuspendLayout();
-            this.panel159.SuspendLayout();
-            this.panel155.SuspendLayout();
-            this.panel158.SuspendLayout();
-            this.panel154.SuspendLayout();
-            this.panel157.SuspendLayout();
-            this.panel153.SuspendLayout();
-            this.panel152.SuspendLayout();
-            this.panel45.SuspendLayout();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.panelTimingOne = new System.Windows.Forms.GroupBox();
+            this.panelTimingRapid = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.panelTimingTwo = new System.Windows.Forms.GroupBox();
+            this.panelTimingGeno = new System.Windows.Forms.GroupBox();
+            this.panelTimingRotation = new System.Windows.Forms.GroupBox();
+            this.panelTimingMultiple = new System.Windows.Forms.GroupBox();
+            this.panelTimingFireball = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpellDesc)).BeginInit();
-            this.panel40.SuspendLayout();
-            this.panel57.SuspendLayout();
-            this.panel89.SuspendLayout();
-            this.panel90.SuspendLayout();
-            this.panel91.SuspendLayout();
-            this.panel84.SuspendLayout();
-            this.panel151.SuspendLayout();
-            this.panel38.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spellHitRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spellFPCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spellMagPower)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            this.panelTimingRotation.SuspendLayout();
-            this.panel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown104)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown103)).BeginInit();
-            this.panelTimingFireball.SuspendLayout();
-            this.panel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown106)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown105)).BeginInit();
-            this.panelTimingRapid.SuspendLayout();
-            this.panel21.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown102)).BeginInit();
-            this.panelTimingMultiple.SuspendLayout();
-            this.panel15.SuspendLayout();
-            this.panel18.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
-            this.panelTimingGeno.SuspendLayout();
-            this.panel129.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GenoChargeOverflow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GenoLevel4Frame)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GenoLevel3Frame)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GenoLevel2Frame)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown114)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown113)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown112)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown111)).BeginInit();
-            this.panelTimingTwo.SuspendLayout();
-            this.panel14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spell2Level1FrameEnd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spell2Level2FrameEnd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spell2Level2FrameStart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown107)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown108)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown110)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingRotationStart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingRotationMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingFireballSpan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingFireballMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingRapid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingInstanceMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingInstanceSpan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingGeno4Frame)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingGeno2Frame)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingGenoOverflow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingGeno3Frame)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingTwoStart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingOneEnd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingTwoEnd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingOne)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.panelTimingOne.SuspendLayout();
-            this.panel128.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spell1TimingFrameSpan)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown100)).BeginInit();
+            this.panelTimingRapid.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.panelTimingTwo.SuspendLayout();
+            this.panelTimingGeno.SuspendLayout();
+            this.panelTimingRotation.SuspendLayout();
+            this.panelTimingMultiple.SuspendLayout();
+            this.panelTimingFireball.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel160
-            // 
-            this.panel160.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel160.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel160.Controls.Add(this.panel156);
-            this.panel160.Location = new System.Drawing.Point(204, 201);
-            this.panel160.Name = "panel160";
-            this.panel160.Size = new System.Drawing.Size(128, 119);
-            this.panel160.TabIndex = 12;
-            // 
-            // panel156
-            // 
-            this.panel156.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel156.Controls.Add(this.label170);
-            this.panel156.Controls.Add(this.spellTargetting);
-            this.panel156.Location = new System.Drawing.Point(0, 0);
-            this.panel156.Name = "panel156";
-            this.panel156.Size = new System.Drawing.Size(124, 115);
-            this.panel156.TabIndex = 504;
-            // 
-            // label170
-            // 
-            this.label170.BackColor = System.Drawing.SystemColors.Control;
-            this.label170.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label170.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label170.Location = new System.Drawing.Point(0, 0);
-            this.label170.Name = "label170";
-            this.label170.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label170.Size = new System.Drawing.Size(124, 17);
-            this.label170.TabIndex = 165;
-            this.label170.Text = "TARGETTING";
-            this.label170.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // spellTargetting
             // 
-            this.spellTargetting.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.spellTargetting.CheckOnClick = true;
-            this.spellTargetting.ColumnWidth = 96;
+            this.spellTargetting.ColumnWidth = 100;
             this.spellTargetting.Items.AddRange(new object[] {
             "Other Targets",
             "Enemy Party",
@@ -257,48 +155,15 @@
             "Wounded Only",
             "One Party Only",
             "Not Self"});
-            this.spellTargetting.Location = new System.Drawing.Point(0, 19);
+            this.spellTargetting.Location = new System.Drawing.Point(6, 20);
+            this.spellTargetting.MultiColumn = true;
             this.spellTargetting.Name = "spellTargetting";
-            this.spellTargetting.Size = new System.Drawing.Size(124, 96);
+            this.spellTargetting.Size = new System.Drawing.Size(183, 100);
             this.spellTargetting.TabIndex = 117;
             this.spellTargetting.SelectedIndexChanged += new System.EventHandler(this.spellTargetting_SelectedIndexChanged);
             // 
-            // panel159
-            // 
-            this.panel159.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel159.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel159.Controls.Add(this.panel155);
-            this.panel159.Location = new System.Drawing.Point(1, 201);
-            this.panel159.Name = "panel159";
-            this.panel159.Size = new System.Drawing.Size(201, 119);
-            this.panel159.TabIndex = 11;
-            // 
-            // panel155
-            // 
-            this.panel155.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel155.Controls.Add(this.label44);
-            this.panel155.Controls.Add(this.spellAttackProp);
-            this.panel155.Location = new System.Drawing.Point(0, 0);
-            this.panel155.Name = "panel155";
-            this.panel155.Size = new System.Drawing.Size(197, 115);
-            this.panel155.TabIndex = 503;
-            // 
-            // label44
-            // 
-            this.label44.BackColor = System.Drawing.SystemColors.Control;
-            this.label44.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label44.Location = new System.Drawing.Point(0, 0);
-            this.label44.Name = "label44";
-            this.label44.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label44.Size = new System.Drawing.Size(197, 17);
-            this.label44.TabIndex = 484;
-            this.label44.Text = "OTHER PROPERTIES...";
-            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // spellAttackProp
             // 
-            this.spellAttackProp.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.spellAttackProp.CheckOnClick = true;
             this.spellAttackProp.Items.AddRange(new object[] {
             "Check Caster/Target Atk/Def",
@@ -307,99 +172,32 @@
             "Usable in overworld menu",
             "9999 Damage/Heal",
             "Hide Battle Numerals"});
-            this.spellAttackProp.Location = new System.Drawing.Point(0, 19);
+            this.spellAttackProp.Location = new System.Drawing.Point(6, 20);
             this.spellAttackProp.Name = "spellAttackProp";
-            this.spellAttackProp.Size = new System.Drawing.Size(197, 96);
+            this.spellAttackProp.Size = new System.Drawing.Size(183, 100);
             this.spellAttackProp.TabIndex = 116;
             this.spellAttackProp.SelectedIndexChanged += new System.EventHandler(this.spellAttackProp_SelectedIndexChanged);
             // 
-            // panel158
-            // 
-            this.panel158.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel158.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel158.Controls.Add(this.panel154);
-            this.panel158.Location = new System.Drawing.Point(204, 322);
-            this.panel158.Name = "panel158";
-            this.panel158.Size = new System.Drawing.Size(128, 87);
-            this.panel158.TabIndex = 14;
-            // 
-            // panel154
-            // 
-            this.panel154.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel154.Controls.Add(this.label61);
-            this.panel154.Controls.Add(this.spellStatusChange);
-            this.panel154.Location = new System.Drawing.Point(0, 0);
-            this.panel154.Name = "panel154";
-            this.panel154.Size = new System.Drawing.Size(124, 83);
-            this.panel154.TabIndex = 502;
-            // 
-            // label61
-            // 
-            this.label61.BackColor = System.Drawing.SystemColors.Control;
-            this.label61.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label61.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label61.Location = new System.Drawing.Point(0, 0);
-            this.label61.Name = "label61";
-            this.label61.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label61.Size = new System.Drawing.Size(124, 17);
-            this.label61.TabIndex = 362;
-            this.label61.Text = "STATUS";
-            this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // spellStatusChange
             // 
-            this.spellStatusChange.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.spellStatusChange.CheckOnClick = true;
-            this.spellStatusChange.ColumnWidth = 91;
+            this.spellStatusChange.ColumnWidth = 89;
             this.spellStatusChange.Items.AddRange(new object[] {
             "Attack",
             "Defense",
-            "Magic Attack",
-            "Magic Defense"});
-            this.spellStatusChange.Location = new System.Drawing.Point(0, 19);
+            "Mg. Attack",
+            "Mg. Defense"});
+            this.spellStatusChange.Location = new System.Drawing.Point(6, 20);
+            this.spellStatusChange.MultiColumn = true;
             this.spellStatusChange.Name = "spellStatusChange";
-            this.spellStatusChange.Size = new System.Drawing.Size(124, 64);
+            this.spellStatusChange.Size = new System.Drawing.Size(183, 36);
             this.spellStatusChange.TabIndex = 115;
             this.spellStatusChange.SelectedIndexChanged += new System.EventHandler(this.spellStatusChange_SelectedIndexChanged);
             // 
-            // panel157
-            // 
-            this.panel157.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel157.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel157.Controls.Add(this.panel153);
-            this.panel157.Location = new System.Drawing.Point(1, 322);
-            this.panel157.Name = "panel157";
-            this.panel157.Size = new System.Drawing.Size(201, 87);
-            this.panel157.TabIndex = 13;
-            // 
-            // panel153
-            // 
-            this.panel153.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel153.Controls.Add(this.label62);
-            this.panel153.Controls.Add(this.spellStatusEffect);
-            this.panel153.Location = new System.Drawing.Point(0, 0);
-            this.panel153.Name = "panel153";
-            this.panel153.Size = new System.Drawing.Size(197, 83);
-            this.panel153.TabIndex = 501;
-            // 
-            // label62
-            // 
-            this.label62.BackColor = System.Drawing.SystemColors.Control;
-            this.label62.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label62.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label62.Location = new System.Drawing.Point(0, 0);
-            this.label62.Name = "label62";
-            this.label62.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label62.Size = new System.Drawing.Size(197, 17);
-            this.label62.TabIndex = 358;
-            this.label62.Text = "EFFECT";
-            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // spellStatusEffect
             // 
-            this.spellStatusEffect.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.spellStatusEffect.CheckOnClick = true;
-            this.spellStatusEffect.ColumnWidth = 96;
+            this.spellStatusEffect.ColumnWidth = 89;
             this.spellStatusEffect.Items.AddRange(new object[] {
             "Mute",
             "Sleep",
@@ -408,84 +206,35 @@
             "Mushroom",
             "Scarecrow",
             "Invincible"});
-            this.spellStatusEffect.Location = new System.Drawing.Point(0, 19);
+            this.spellStatusEffect.Location = new System.Drawing.Point(6, 20);
             this.spellStatusEffect.MultiColumn = true;
             this.spellStatusEffect.Name = "spellStatusEffect";
-            this.spellStatusEffect.Size = new System.Drawing.Size(197, 64);
+            this.spellStatusEffect.Size = new System.Drawing.Size(183, 68);
             this.spellStatusEffect.TabIndex = 114;
             this.spellStatusEffect.SelectedIndexChanged += new System.EventHandler(this.spellStatusEffect_SelectedIndexChanged);
             // 
-            // panel152
-            // 
-            this.panel152.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel152.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel152.Controls.Add(this.panel45);
-            this.panel152.Controls.Add(this.label55);
-            this.panel152.Location = new System.Drawing.Point(204, 28);
-            this.panel152.Name = "panel152";
-            this.panel152.Size = new System.Drawing.Size(128, 171);
-            this.panel152.TabIndex = 10;
-            // 
-            // panel45
-            // 
-            this.panel45.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel45.Controls.Add(this.textBoxSpellDescription);
-            this.panel45.Controls.Add(this.button33);
-            this.panel45.Controls.Add(this.button34);
-            this.panel45.Controls.Add(this.toolStrip2);
-            this.panel45.Controls.Add(this.pictureBoxSpellDesc);
-            this.panel45.Location = new System.Drawing.Point(0, 19);
-            this.panel45.Name = "panel45";
-            this.panel45.Size = new System.Drawing.Size(124, 152);
-            this.panel45.TabIndex = 111;
-            // 
             // textBoxSpellDescription
             // 
-            this.textBoxSpellDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxSpellDescription.Location = new System.Drawing.Point(0, 90);
+            this.textBoxSpellDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxSpellDescription.Location = new System.Drawing.Point(3, 110);
             this.textBoxSpellDescription.MaxLength = 255;
             this.textBoxSpellDescription.Name = "textBoxSpellDescription";
-            this.textBoxSpellDescription.Size = new System.Drawing.Size(124, 58);
+            this.textBoxSpellDescription.Size = new System.Drawing.Size(189, 68);
             this.textBoxSpellDescription.TabIndex = 170;
             this.textBoxSpellDescription.Text = "";
             this.textBoxSpellDescription.TextChanged += new System.EventHandler(this.textBoxSpellDescription_TextChanged);
             // 
-            // button33
-            // 
-            this.button33.BackColor = System.Drawing.SystemColors.Window;
-            this.button33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button33.Location = new System.Drawing.Point(64, 153);
-            this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(57, 19);
-            this.button33.TabIndex = 113;
-            this.button33.Text = "END";
-            this.button33.UseCompatibleTextRendering = true;
-            this.button33.UseVisualStyleBackColor = false;
-            // 
-            // button34
-            // 
-            this.button34.BackColor = System.Drawing.SystemColors.Window;
-            this.button34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button34.Location = new System.Drawing.Point(-1, 153);
-            this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(66, 19);
-            this.button34.TabIndex = 112;
-            this.button34.Text = "NEW LINE";
-            this.button34.UseCompatibleTextRendering = true;
-            this.button34.UseVisualStyleBackColor = false;
-            // 
             // toolStrip2
             // 
-            this.toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.byteOrText,
             this.toolStripSeparator2,
             this.newLine,
             this.endString});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 64);
+            this.toolStrip2.Location = new System.Drawing.Point(3, 85);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(124, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(189, 25);
             this.toolStrip2.TabIndex = 173;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -529,62 +278,14 @@
             // 
             // pictureBoxSpellDesc
             // 
-            this.pictureBoxSpellDesc.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBoxSpellDesc.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBoxSpellDesc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxSpellDesc.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxSpellDesc.Name = "pictureBoxSpellDesc";
-            this.pictureBoxSpellDesc.Size = new System.Drawing.Size(124, 64);
+            this.pictureBoxSpellDesc.Size = new System.Drawing.Size(185, 64);
             this.pictureBoxSpellDesc.TabIndex = 0;
             this.pictureBoxSpellDesc.TabStop = false;
             this.pictureBoxSpellDesc.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxSpellDesc_Paint);
-            // 
-            // label55
-            // 
-            this.label55.BackColor = System.Drawing.SystemColors.Control;
-            this.label55.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label55.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label55.Location = new System.Drawing.Point(0, 0);
-            this.label55.Name = "label55";
-            this.label55.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label55.Size = new System.Drawing.Size(124, 17);
-            this.label55.TabIndex = 172;
-            this.label55.Text = "DESCRIPTION";
-            this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel40
-            // 
-            this.panel40.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel40.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel40.Controls.Add(this.panel57);
-            this.panel40.Location = new System.Drawing.Point(1, 106);
-            this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(201, 93);
-            this.panel40.TabIndex = 9;
-            // 
-            // panel57
-            // 
-            this.panel57.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel57.Controls.Add(this.panel89);
-            this.panel57.Controls.Add(this.panel90);
-            this.panel57.Controls.Add(this.panel91);
-            this.panel57.Controls.Add(this.label172);
-            this.panel57.Controls.Add(this.label171);
-            this.panel57.Controls.Add(this.label12);
-            this.panel57.Controls.Add(this.label13);
-            this.panel57.Controls.Add(this.label17);
-            this.panel57.Controls.Add(this.panel84);
-            this.panel57.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel57.Location = new System.Drawing.Point(0, 0);
-            this.panel57.Name = "panel57";
-            this.panel57.Size = new System.Drawing.Size(197, 89);
-            this.panel57.TabIndex = 106;
-            // 
-            // panel89
-            // 
-            this.panel89.Controls.Add(this.spellInflictElement);
-            this.panel89.Location = new System.Drawing.Point(102, 72);
-            this.panel89.Name = "panel89";
-            this.panel89.Size = new System.Drawing.Size(96, 17);
-            this.panel89.TabIndex = 110;
             // 
             // spellInflictElement
             // 
@@ -597,19 +298,11 @@
             "Fire",
             "Jump",
             "{NONE}"});
-            this.spellInflictElement.Location = new System.Drawing.Point(-2, -2);
+            this.spellInflictElement.Location = new System.Drawing.Point(90, 79);
             this.spellInflictElement.Name = "spellInflictElement";
             this.spellInflictElement.Size = new System.Drawing.Size(99, 21);
             this.spellInflictElement.TabIndex = 445;
             this.spellInflictElement.SelectedIndexChanged += new System.EventHandler(this.spellInflictElement_SelectedIndexChanged);
-            // 
-            // panel90
-            // 
-            this.panel90.Controls.Add(this.spellFunction);
-            this.panel90.Location = new System.Drawing.Point(102, 54);
-            this.panel90.Name = "panel90";
-            this.panel90.Size = new System.Drawing.Size(96, 17);
-            this.panel90.TabIndex = 109;
             // 
             // spellFunction
             // 
@@ -623,19 +316,11 @@
             "Revive/Heal",
             "Jump Power",
             "{NONE}"});
-            this.spellFunction.Location = new System.Drawing.Point(-2, -2);
+            this.spellFunction.Location = new System.Drawing.Point(90, 58);
             this.spellFunction.Name = "spellFunction";
             this.spellFunction.Size = new System.Drawing.Size(99, 21);
             this.spellFunction.TabIndex = 245;
             this.spellFunction.SelectedIndexChanged += new System.EventHandler(this.spellFunction_SelectedIndexChanged);
-            // 
-            // panel91
-            // 
-            this.panel91.Controls.Add(this.spellEffectType);
-            this.panel91.Location = new System.Drawing.Point(102, 36);
-            this.panel91.Name = "panel91";
-            this.panel91.Size = new System.Drawing.Size(96, 17);
-            this.panel91.TabIndex = 108;
             // 
             // spellEffectType
             // 
@@ -646,72 +331,47 @@
             "Inflict",
             "Nullify",
             "{NONE}"});
-            this.spellEffectType.Location = new System.Drawing.Point(-2, -2);
+            this.spellEffectType.Location = new System.Drawing.Point(90, 37);
             this.spellEffectType.Name = "spellEffectType";
             this.spellEffectType.Size = new System.Drawing.Size(99, 21);
             this.spellEffectType.TabIndex = 245;
             this.spellEffectType.SelectedIndexChanged += new System.EventHandler(this.spellEffectType_SelectedIndexChanged);
             // 
-            // label172
-            // 
-            this.label172.BackColor = System.Drawing.SystemColors.Control;
-            this.label172.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label172.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label172.Location = new System.Drawing.Point(0, -1);
-            this.label172.Name = "label172";
-            this.label172.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label172.Size = new System.Drawing.Size(197, 17);
-            this.label172.TabIndex = 168;
-            this.label172.Text = "ATTACK PROPERTIES";
-            this.label172.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label171
             // 
-            this.label171.BackColor = System.Drawing.SystemColors.Control;
-            this.label171.Location = new System.Drawing.Point(0, 54);
+            this.label171.AutoSize = true;
+            this.label171.Location = new System.Drawing.Point(6, 61);
             this.label171.Name = "label171";
-            this.label171.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label171.Size = new System.Drawing.Size(101, 17);
+            this.label171.Size = new System.Drawing.Size(78, 13);
             this.label171.TabIndex = 167;
             this.label171.Text = "Inflict Function";
             // 
             // label12
             // 
-            this.label12.BackColor = System.Drawing.SystemColors.Control;
-            this.label12.Location = new System.Drawing.Point(0, 36);
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 40);
             this.label12.Name = "label12";
-            this.label12.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label12.Size = new System.Drawing.Size(101, 17);
+            this.label12.Size = new System.Drawing.Size(63, 13);
             this.label12.TabIndex = 167;
             this.label12.Text = "Effect Type";
             // 
             // label13
             // 
-            this.label13.BackColor = System.Drawing.SystemColors.Control;
-            this.label13.Location = new System.Drawing.Point(0, 18);
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 19);
             this.label13.Name = "label13";
-            this.label13.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label13.Size = new System.Drawing.Size(101, 17);
+            this.label13.Size = new System.Drawing.Size(65, 13);
             this.label13.TabIndex = 167;
             this.label13.Text = "Attack Type";
             // 
             // label17
             // 
-            this.label17.BackColor = System.Drawing.SystemColors.Control;
-            this.label17.Location = new System.Drawing.Point(0, 72);
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 82);
             this.label17.Name = "label17";
-            this.label17.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label17.Size = new System.Drawing.Size(101, 17);
+            this.label17.Size = new System.Drawing.Size(75, 13);
             this.label17.TabIndex = 444;
             this.label17.Text = "Inflict Element";
-            // 
-            // panel84
-            // 
-            this.panel84.Controls.Add(this.spellAttackType);
-            this.panel84.Location = new System.Drawing.Point(102, 18);
-            this.panel84.Name = "panel84";
-            this.panel84.Size = new System.Drawing.Size(96, 17);
-            this.panel84.TabIndex = 107;
             // 
             // spellAttackType
             // 
@@ -721,121 +381,77 @@
             this.spellAttackType.Items.AddRange(new object[] {
             "Damage",
             "Heal"});
-            this.spellAttackType.Location = new System.Drawing.Point(-2, -2);
+            this.spellAttackType.Location = new System.Drawing.Point(90, 16);
             this.spellAttackType.Name = "spellAttackType";
             this.spellAttackType.Size = new System.Drawing.Size(99, 21);
             this.spellAttackType.TabIndex = 245;
             this.spellAttackType.SelectedIndexChanged += new System.EventHandler(this.spellAttackType_SelectedIndexChanged);
             // 
-            // panel151
-            // 
-            this.panel151.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel151.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel151.Controls.Add(this.panel38);
-            this.panel151.Location = new System.Drawing.Point(1, 28);
-            this.panel151.Name = "panel151";
-            this.panel151.Size = new System.Drawing.Size(201, 76);
-            this.panel151.TabIndex = 8;
-            // 
-            // panel38
-            // 
-            this.panel38.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel38.Controls.Add(this.label10);
-            this.panel38.Controls.Add(this.label65);
-            this.panel38.Controls.Add(this.label64);
-            this.panel38.Controls.Add(this.spellHitRate);
-            this.panel38.Controls.Add(this.label56);
-            this.panel38.Controls.Add(this.spellFPCost);
-            this.panel38.Controls.Add(this.spellMagPower);
-            this.panel38.Location = new System.Drawing.Point(0, 0);
-            this.panel38.Name = "panel38";
-            this.panel38.Size = new System.Drawing.Size(197, 72);
-            this.panel38.TabIndex = 103;
-            // 
-            // label10
-            // 
-            this.label10.BackColor = System.Drawing.SystemColors.Control;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label10.Location = new System.Drawing.Point(0, 0);
-            this.label10.Name = "label10";
-            this.label10.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label10.Size = new System.Drawing.Size(197, 17);
-            this.label10.TabIndex = 160;
-            this.label10.Text = "STATS";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label65
             // 
-            this.label65.BackColor = System.Drawing.SystemColors.Control;
-            this.label65.Location = new System.Drawing.Point(0, 19);
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(6, 22);
             this.label65.Name = "label65";
-            this.label65.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label65.Size = new System.Drawing.Size(101, 17);
+            this.label65.Size = new System.Drawing.Size(44, 13);
             this.label65.TabIndex = 145;
             this.label65.Text = "FP Cost";
             // 
             // label64
             // 
-            this.label64.BackColor = System.Drawing.SystemColors.Control;
-            this.label64.Location = new System.Drawing.Point(0, 37);
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(6, 43);
             this.label64.Name = "label64";
-            this.label64.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label64.Size = new System.Drawing.Size(101, 17);
+            this.label64.Size = new System.Drawing.Size(67, 13);
             this.label64.TabIndex = 146;
             this.label64.Text = "Magic Power";
             // 
             // spellHitRate
             // 
-            this.spellHitRate.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.spellHitRate.Location = new System.Drawing.Point(102, 55);
+            this.spellHitRate.Location = new System.Drawing.Point(79, 62);
             this.spellHitRate.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.spellHitRate.Name = "spellHitRate";
-            this.spellHitRate.Size = new System.Drawing.Size(95, 17);
+            this.spellHitRate.Size = new System.Drawing.Size(110, 21);
             this.spellHitRate.TabIndex = 105;
             this.spellHitRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spellHitRate.ValueChanged += new System.EventHandler(this.spellHitRate_ValueChanged);
             // 
             // label56
             // 
-            this.label56.BackColor = System.Drawing.SystemColors.Control;
-            this.label56.Location = new System.Drawing.Point(0, 55);
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(6, 64);
             this.label56.Name = "label56";
-            this.label56.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label56.Size = new System.Drawing.Size(101, 17);
+            this.label56.Size = new System.Drawing.Size(57, 13);
             this.label56.TabIndex = 147;
             this.label56.Text = "Hit Rate%";
             // 
             // spellFPCost
             // 
-            this.spellFPCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.spellFPCost.Location = new System.Drawing.Point(102, 19);
+            this.spellFPCost.Location = new System.Drawing.Point(79, 20);
             this.spellFPCost.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
             this.spellFPCost.Name = "spellFPCost";
-            this.spellFPCost.Size = new System.Drawing.Size(95, 17);
+            this.spellFPCost.Size = new System.Drawing.Size(110, 21);
             this.spellFPCost.TabIndex = 103;
             this.spellFPCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spellFPCost.ValueChanged += new System.EventHandler(this.spellFPCost_ValueChanged);
             // 
             // spellMagPower
             // 
-            this.spellMagPower.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.spellMagPower.Location = new System.Drawing.Point(102, 37);
+            this.spellMagPower.Location = new System.Drawing.Point(79, 41);
             this.spellMagPower.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.spellMagPower.Name = "spellMagPower";
-            this.spellMagPower.Size = new System.Drawing.Size(95, 17);
+            this.spellMagPower.Size = new System.Drawing.Size(110, 21);
             this.spellMagPower.TabIndex = 104;
             this.spellMagPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spellMagPower.ValueChanged += new System.EventHandler(this.spellMagPower_ValueChanged);
@@ -853,7 +469,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(333, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(408, 25);
             this.toolStrip1.TabIndex = 473;
             // 
             // spellName
@@ -863,23 +479,20 @@
             this.spellName.DropDownHeight = 497;
             this.spellName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.spellName.DropDownWidth = 130;
-            this.spellName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spellName.ItemHeight = 15;
             this.spellName.Location = new System.Drawing.Point(7, 1);
             this.spellName.Name = "spellName";
             this.spellName.SelectedIndex = -1;
             this.spellName.SelectedItem = null;
-            this.spellName.Size = new System.Drawing.Size(130, 22);
+            this.spellName.Size = new System.Drawing.Size(150, 22);
             this.spellName.SelectedIndexChanged += new System.EventHandler(this.spellName_SelectedIndexChanged);
             this.spellName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.spellName_DrawItem);
             // 
             // spellNum
             // 
-            this.spellNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.spellNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.spellNum.ForeColor = System.Drawing.SystemColors.Control;
+            this.spellNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spellNum.Hexadecimal = false;
-            this.spellNum.Location = new System.Drawing.Point(137, 1);
+            this.spellNum.Location = new System.Drawing.Point(157, 1);
             this.spellNum.Maximum = new decimal(new int[] {
             127,
             0,
@@ -891,7 +504,7 @@
             0,
             0});
             this.spellNum.Name = "spellNum";
-            this.spellNum.Size = new System.Drawing.Size(48, 22);
+            this.spellNum.Size = new System.Drawing.Size(45, 22);
             this.spellNum.Text = "0";
             this.spellNum.Value = new decimal(new int[] {
             0,
@@ -913,9 +526,8 @@
             this.spellNameIcon.DropDownHeight = 497;
             this.spellNameIcon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.spellNameIcon.DropDownWidth = 40;
-            this.spellNameIcon.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spellNameIcon.ItemHeight = 15;
-            this.spellNameIcon.Location = new System.Drawing.Point(191, 2);
+            this.spellNameIcon.Location = new System.Drawing.Point(208, 2);
             this.spellNameIcon.Name = "spellNameIcon";
             this.spellNameIcon.SelectedIndex = -1;
             this.spellNameIcon.SelectedItem = null;
@@ -927,805 +539,588 @@
             // 
             this.textBoxSpellName.MaxLength = 14;
             this.textBoxSpellName.Name = "textBoxSpellName";
-            this.textBoxSpellName.Size = new System.Drawing.Size(104, 25);
+            this.textBoxSpellName.Size = new System.Drawing.Size(154, 25);
             this.textBoxSpellName.TextChanged += new System.EventHandler(this.textBoxSpellName_TextChanged);
-            // 
-            // panelTimingRotation
-            // 
-            this.panelTimingRotation.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelTimingRotation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelTimingRotation.Controls.Add(this.panel13);
-            this.panelTimingRotation.Location = new System.Drawing.Point(1, 411);
-            this.panelTimingRotation.Name = "panelTimingRotation";
-            this.panelTimingRotation.Size = new System.Drawing.Size(331, 58);
-            this.panelTimingRotation.TabIndex = 475;
-            this.panelTimingRotation.Visible = false;
-            // 
-            // panel13
-            // 
-            this.panel13.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel13.Controls.Add(this.label183);
-            this.panel13.Controls.Add(this.label142);
-            this.panel13.Controls.Add(this.label141);
-            this.panel13.Controls.Add(this.numericUpDown104);
-            this.panel13.Controls.Add(this.numericUpDown103);
-            this.panel13.Location = new System.Drawing.Point(0, 0);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(327, 54);
-            this.panel13.TabIndex = 302;
-            // 
-            // label183
-            // 
-            this.label183.BackColor = System.Drawing.SystemColors.Control;
-            this.label183.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label183.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label183.Location = new System.Drawing.Point(0, 0);
-            this.label183.Name = "label183";
-            this.label183.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label183.Size = new System.Drawing.Size(327, 17);
-            this.label183.TabIndex = 239;
-            this.label183.Text = "TIMING PROPERTIES";
-            this.label183.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label142
             // 
-            this.label142.BackColor = System.Drawing.SystemColors.Control;
-            this.label142.Location = new System.Drawing.Point(0, 19);
+            this.label142.AutoSize = true;
+            this.label142.Location = new System.Drawing.Point(6, 22);
             this.label142.Name = "label142";
-            this.label142.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label142.Size = new System.Drawing.Size(163, 17);
+            this.label142.Size = new System.Drawing.Size(97, 13);
             this.label142.TabIndex = 309;
             this.label142.Text = "Timing Frame Start";
             // 
             // label141
             // 
-            this.label141.BackColor = System.Drawing.SystemColors.Control;
-            this.label141.Location = new System.Drawing.Point(0, 37);
+            this.label141.AutoSize = true;
+            this.label141.Location = new System.Drawing.Point(6, 43);
             this.label141.Name = "label141";
-            this.label141.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label141.Size = new System.Drawing.Size(163, 17);
+            this.label141.Size = new System.Drawing.Size(72, 13);
             this.label141.TabIndex = 310;
-            this.label141.Text = "Max Number of Quarter Rotations";
+            this.label141.Text = "1/4 Rotations";
             // 
-            // numericUpDown104
+            // timingRotationStart
             // 
-            this.numericUpDown104.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown104.Location = new System.Drawing.Point(164, 19);
-            this.numericUpDown104.Maximum = new decimal(new int[] {
+            this.timingRotationStart.Location = new System.Drawing.Point(109, 20);
+            this.timingRotationStart.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.numericUpDown104.Name = "numericUpDown104";
-            this.numericUpDown104.Size = new System.Drawing.Size(163, 17);
-            this.numericUpDown104.TabIndex = 303;
-            this.numericUpDown104.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown104.ValueChanged += new System.EventHandler(this.numericUpDown104_ValueChanged);
+            this.timingRotationStart.Name = "timingRotationStart";
+            this.timingRotationStart.Size = new System.Drawing.Size(80, 21);
+            this.timingRotationStart.TabIndex = 303;
+            this.timingRotationStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingRotationStart.ValueChanged += new System.EventHandler(this.numericUpDown104_ValueChanged);
             // 
-            // numericUpDown103
+            // timingRotationMax
             // 
-            this.numericUpDown103.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown103.Location = new System.Drawing.Point(164, 37);
-            this.numericUpDown103.Maximum = new decimal(new int[] {
+            this.timingRotationMax.Location = new System.Drawing.Point(109, 41);
+            this.timingRotationMax.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.numericUpDown103.Name = "numericUpDown103";
-            this.numericUpDown103.Size = new System.Drawing.Size(163, 17);
-            this.numericUpDown103.TabIndex = 304;
-            this.numericUpDown103.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown103.ValueChanged += new System.EventHandler(this.numericUpDown103_ValueChanged);
+            this.timingRotationMax.Name = "timingRotationMax";
+            this.timingRotationMax.Size = new System.Drawing.Size(80, 21);
+            this.timingRotationMax.TabIndex = 304;
+            this.timingRotationMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingRotationMax.ValueChanged += new System.EventHandler(this.numericUpDown103_ValueChanged);
             // 
-            // panelTimingFireball
+            // timingFireballSpan
             // 
-            this.panelTimingFireball.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelTimingFireball.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelTimingFireball.Controls.Add(this.panel9);
-            this.panelTimingFireball.Location = new System.Drawing.Point(1, 411);
-            this.panelTimingFireball.Name = "panelTimingFireball";
-            this.panelTimingFireball.Size = new System.Drawing.Size(331, 58);
-            this.panelTimingFireball.TabIndex = 474;
-            this.panelTimingFireball.Visible = false;
-            // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel9.Controls.Add(this.label186);
-            this.panel9.Controls.Add(this.numericUpDown106);
-            this.panel9.Controls.Add(this.numericUpDown105);
-            this.panel9.Controls.Add(this.label145);
-            this.panel9.Controls.Add(this.label146);
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(327, 54);
-            this.panel9.TabIndex = 298;
-            // 
-            // label186
-            // 
-            this.label186.BackColor = System.Drawing.SystemColors.Control;
-            this.label186.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label186.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label186.Location = new System.Drawing.Point(0, 0);
-            this.label186.Name = "label186";
-            this.label186.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label186.Size = new System.Drawing.Size(327, 17);
-            this.label186.TabIndex = 239;
-            this.label186.Text = "TIMING PROPERTIES";
-            this.label186.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // numericUpDown106
-            // 
-            this.numericUpDown106.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown106.Location = new System.Drawing.Point(164, 19);
-            this.numericUpDown106.Maximum = new decimal(new int[] {
+            this.timingFireballSpan.Location = new System.Drawing.Point(97, 20);
+            this.timingFireballSpan.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.numericUpDown106.Name = "numericUpDown106";
-            this.numericUpDown106.Size = new System.Drawing.Size(163, 17);
-            this.numericUpDown106.TabIndex = 300;
-            this.numericUpDown106.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown106.ValueChanged += new System.EventHandler(this.numericUpDown106_ValueChanged);
+            this.timingFireballSpan.Name = "timingFireballSpan";
+            this.timingFireballSpan.Size = new System.Drawing.Size(92, 21);
+            this.timingFireballSpan.TabIndex = 300;
+            this.timingFireballSpan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingFireballSpan.ValueChanged += new System.EventHandler(this.numericUpDown106_ValueChanged);
             // 
-            // numericUpDown105
+            // timingFireballMax
             // 
-            this.numericUpDown105.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown105.Location = new System.Drawing.Point(164, 37);
-            this.numericUpDown105.Maximum = new decimal(new int[] {
+            this.timingFireballMax.Location = new System.Drawing.Point(97, 41);
+            this.timingFireballMax.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.numericUpDown105.Name = "numericUpDown105";
-            this.numericUpDown105.Size = new System.Drawing.Size(163, 17);
-            this.numericUpDown105.TabIndex = 301;
-            this.numericUpDown105.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown105.ValueChanged += new System.EventHandler(this.numericUpDown105_ValueChanged);
+            this.timingFireballMax.Name = "timingFireballMax";
+            this.timingFireballMax.Size = new System.Drawing.Size(92, 21);
+            this.timingFireballMax.TabIndex = 301;
+            this.timingFireballMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingFireballMax.ValueChanged += new System.EventHandler(this.numericUpDown105_ValueChanged);
             // 
             // label145
             // 
-            this.label145.BackColor = System.Drawing.SystemColors.Control;
-            this.label145.Location = new System.Drawing.Point(0, 37);
+            this.label145.AutoSize = true;
+            this.label145.Location = new System.Drawing.Point(6, 43);
             this.label145.Name = "label145";
-            this.label145.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label145.Size = new System.Drawing.Size(163, 17);
+            this.label145.Size = new System.Drawing.Size(77, 13);
             this.label145.TabIndex = 302;
-            this.label145.Text = "Maximum Number of Orbs";
+            this.label145.Text = "Maximum Orbs";
             // 
             // label146
             // 
-            this.label146.BackColor = System.Drawing.SystemColors.Control;
-            this.label146.Location = new System.Drawing.Point(0, 19);
+            this.label146.AutoSize = true;
+            this.label146.Location = new System.Drawing.Point(6, 22);
             this.label146.Name = "label146";
-            this.label146.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label146.Size = new System.Drawing.Size(163, 17);
+            this.label146.Size = new System.Drawing.Size(85, 13);
             this.label146.TabIndex = 301;
-            this.label146.Text = "Frame Range Between Orbs";
-            // 
-            // panelTimingRapid
-            // 
-            this.panelTimingRapid.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelTimingRapid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelTimingRapid.Controls.Add(this.panel21);
-            this.panelTimingRapid.Location = new System.Drawing.Point(1, 411);
-            this.panelTimingRapid.Name = "panelTimingRapid";
-            this.panelTimingRapid.Size = new System.Drawing.Size(331, 40);
-            this.panelTimingRapid.TabIndex = 477;
-            this.panelTimingRapid.Visible = false;
-            // 
-            // panel21
-            // 
-            this.panel21.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel21.Controls.Add(this.label184);
-            this.panel21.Controls.Add(this.label143);
-            this.panel21.Controls.Add(this.numericUpDown102);
-            this.panel21.Location = new System.Drawing.Point(0, 0);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(327, 36);
-            this.panel21.TabIndex = 309;
-            // 
-            // label184
-            // 
-            this.label184.BackColor = System.Drawing.SystemColors.Control;
-            this.label184.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label184.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label184.Location = new System.Drawing.Point(0, 0);
-            this.label184.Name = "label184";
-            this.label184.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label184.Size = new System.Drawing.Size(327, 17);
-            this.label184.TabIndex = 239;
-            this.label184.Text = "TIMING PROPERTIES";
-            this.label184.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label146.Text = "Orb Frame Span";
             // 
             // label143
             // 
-            this.label143.BackColor = System.Drawing.SystemColors.Control;
-            this.label143.Location = new System.Drawing.Point(0, 19);
+            this.label143.AutoSize = true;
+            this.label143.Location = new System.Drawing.Point(6, 22);
             this.label143.Name = "label143";
-            this.label143.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label143.Size = new System.Drawing.Size(164, 17);
+            this.label143.Size = new System.Drawing.Size(105, 13);
             this.label143.TabIndex = 303;
-            this.label143.Text = "Maximum number of power-ups";
+            this.label143.Text = "Maximum power-ups";
             // 
-            // numericUpDown102
+            // timingRapid
             // 
-            this.numericUpDown102.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown102.Location = new System.Drawing.Point(165, 19);
-            this.numericUpDown102.Maximum = new decimal(new int[] {
+            this.timingRapid.Location = new System.Drawing.Point(117, 20);
+            this.timingRapid.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.numericUpDown102.Name = "numericUpDown102";
-            this.numericUpDown102.Size = new System.Drawing.Size(162, 17);
-            this.numericUpDown102.TabIndex = 309;
-            this.numericUpDown102.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown102.ValueChanged += new System.EventHandler(this.numericUpDown102_ValueChanged);
+            this.timingRapid.Name = "timingRapid";
+            this.timingRapid.Size = new System.Drawing.Size(71, 21);
+            this.timingRapid.TabIndex = 309;
+            this.timingRapid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingRapid.ValueChanged += new System.EventHandler(this.numericUpDown102_ValueChanged);
             // 
-            // panelTimingMultiple
+            // timingInstanceNumber
             // 
-            this.panelTimingMultiple.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelTimingMultiple.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelTimingMultiple.Controls.Add(this.panel15);
-            this.panelTimingMultiple.Location = new System.Drawing.Point(1, 411);
-            this.panelTimingMultiple.Name = "panelTimingMultiple";
-            this.panelTimingMultiple.Size = new System.Drawing.Size(331, 76);
-            this.panelTimingMultiple.TabIndex = 476;
-            this.panelTimingMultiple.Visible = false;
+            this.timingInstanceNumber.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.timingInstanceNumber.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.timingInstanceNumber.DropDownHeight = 223;
+            this.timingInstanceNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.timingInstanceNumber.IntegralHeight = false;
+            this.timingInstanceNumber.ItemHeight = 15;
+            this.timingInstanceNumber.Location = new System.Drawing.Point(76, 41);
+            this.timingInstanceNumber.Name = "timingInstanceNumber";
+            this.timingInstanceNumber.Size = new System.Drawing.Size(113, 21);
+            this.timingInstanceNumber.TabIndex = 353;
+            this.timingInstanceNumber.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.instanceNumberName_DrawItem);
+            this.timingInstanceNumber.SelectedIndexChanged += new System.EventHandler(this.instanceNumberName_SelectedIndexChanged);
             // 
-            // panel15
+            // timingInstanceMax
             // 
-            this.panel15.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel15.Controls.Add(this.label202);
-            this.panel15.Controls.Add(this.panel18);
-            this.panel15.Controls.Add(this.numericUpDown7);
-            this.panel15.Controls.Add(this.numericUpDown8);
-            this.panel15.Controls.Add(this.label155);
-            this.panel15.Controls.Add(this.label156);
-            this.panel15.Controls.Add(this.label177);
-            this.panel15.Location = new System.Drawing.Point(0, 0);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(327, 72);
-            this.panel15.TabIndex = 305;
-            // 
-            // label202
-            // 
-            this.label202.BackColor = System.Drawing.SystemColors.Control;
-            this.label202.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label202.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label202.Location = new System.Drawing.Point(0, 0);
-            this.label202.Name = "label202";
-            this.label202.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label202.Size = new System.Drawing.Size(327, 17);
-            this.label202.TabIndex = 239;
-            this.label202.Text = "TIMING PROPERTIES";
-            this.label202.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel18
-            // 
-            this.panel18.Controls.Add(this.instanceNumberName);
-            this.panel18.Location = new System.Drawing.Point(165, 37);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(163, 17);
-            this.panel18.TabIndex = 307;
-            // 
-            // instanceNumberName
-            // 
-            this.instanceNumberName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.instanceNumberName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.instanceNumberName.DropDownHeight = 223;
-            this.instanceNumberName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.instanceNumberName.IntegralHeight = false;
-            this.instanceNumberName.ItemHeight = 15;
-            this.instanceNumberName.Location = new System.Drawing.Point(-2, -2);
-            this.instanceNumberName.Name = "instanceNumberName";
-            this.instanceNumberName.Size = new System.Drawing.Size(166, 21);
-            this.instanceNumberName.TabIndex = 353;
-            this.instanceNumberName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.instanceNumberName_DrawItem);
-            this.instanceNumberName.SelectedIndexChanged += new System.EventHandler(this.instanceNumberName_SelectedIndexChanged);
-            // 
-            // numericUpDown7
-            // 
-            this.numericUpDown7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown7.Location = new System.Drawing.Point(165, 19);
-            this.numericUpDown7.Maximum = new decimal(new int[] {
+            this.timingInstanceMax.Location = new System.Drawing.Point(76, 20);
+            this.timingInstanceMax.Maximum = new decimal(new int[] {
             127,
             0,
             0,
             0});
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Size = new System.Drawing.Size(162, 17);
-            this.numericUpDown7.TabIndex = 306;
-            this.numericUpDown7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown7.ValueChanged += new System.EventHandler(this.numericUpDown7_ValueChanged);
+            this.timingInstanceMax.Name = "timingInstanceMax";
+            this.timingInstanceMax.Size = new System.Drawing.Size(113, 21);
+            this.timingInstanceMax.TabIndex = 306;
+            this.timingInstanceMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingInstanceMax.ValueChanged += new System.EventHandler(this.numericUpDown7_ValueChanged);
             // 
-            // numericUpDown8
+            // timingInstanceSpan
             // 
-            this.numericUpDown8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown8.Location = new System.Drawing.Point(165, 55);
-            this.numericUpDown8.Maximum = new decimal(new int[] {
+            this.timingInstanceSpan.Location = new System.Drawing.Point(76, 62);
+            this.timingInstanceSpan.Maximum = new decimal(new int[] {
             127,
             0,
             0,
             0});
-            this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Size = new System.Drawing.Size(162, 17);
-            this.numericUpDown8.TabIndex = 308;
-            this.numericUpDown8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown8.ValueChanged += new System.EventHandler(this.numericUpDown8_ValueChanged);
+            this.timingInstanceSpan.Name = "timingInstanceSpan";
+            this.timingInstanceSpan.Size = new System.Drawing.Size(113, 21);
+            this.timingInstanceSpan.TabIndex = 308;
+            this.timingInstanceSpan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingInstanceSpan.ValueChanged += new System.EventHandler(this.numericUpDown8_ValueChanged);
             // 
             // label155
             // 
-            this.label155.BackColor = System.Drawing.SystemColors.Control;
-            this.label155.Location = new System.Drawing.Point(0, 55);
+            this.label155.AutoSize = true;
+            this.label155.Location = new System.Drawing.Point(6, 66);
             this.label155.Name = "label155";
-            this.label155.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label155.Size = new System.Drawing.Size(164, 17);
+            this.label155.Size = new System.Drawing.Size(64, 13);
             this.label155.TabIndex = 40;
-            this.label155.Text = "Instance Frame Duration";
+            this.label155.Text = "Frame Span";
             // 
             // label156
             // 
-            this.label156.BackColor = System.Drawing.SystemColors.Control;
-            this.label156.Location = new System.Drawing.Point(0, 19);
+            this.label156.AutoSize = true;
+            this.label156.Location = new System.Drawing.Point(6, 22);
             this.label156.Name = "label156";
-            this.label156.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label156.Size = new System.Drawing.Size(164, 17);
+            this.label156.Size = new System.Drawing.Size(51, 13);
             this.label156.TabIndex = 39;
-            this.label156.Text = "Maximum Instances";
+            this.label156.Text = "Maximum";
             // 
             // label177
             // 
-            this.label177.BackColor = System.Drawing.SystemColors.Control;
-            this.label177.Location = new System.Drawing.Point(0, 37);
+            this.label177.AutoSize = true;
+            this.label177.Location = new System.Drawing.Point(6, 44);
             this.label177.Name = "label177";
-            this.label177.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label177.Size = new System.Drawing.Size(164, 17);
+            this.label177.Size = new System.Drawing.Size(15, 13);
             this.label177.TabIndex = 39;
-            this.label177.Text = "Instance Number";
-            // 
-            // panelTimingGeno
-            // 
-            this.panelTimingGeno.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelTimingGeno.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelTimingGeno.Controls.Add(this.panel129);
-            this.panelTimingGeno.Location = new System.Drawing.Point(1, 411);
-            this.panelTimingGeno.Name = "panelTimingGeno";
-            this.panelTimingGeno.Size = new System.Drawing.Size(331, 94);
-            this.panelTimingGeno.TabIndex = 480;
-            this.panelTimingGeno.Visible = false;
-            // 
-            // panel129
-            // 
-            this.panel129.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel129.Controls.Add(this.GenoChargeOverflow);
-            this.panel129.Controls.Add(this.label167);
-            this.panel129.Controls.Add(this.GenoLevel4Frame);
-            this.panel129.Controls.Add(this.label151);
-            this.panel129.Controls.Add(this.GenoLevel3Frame);
-            this.panel129.Controls.Add(this.label154);
-            this.panel129.Controls.Add(this.GenoLevel2Frame);
-            this.panel129.Controls.Add(this.label152);
-            this.panel129.Controls.Add(this.numericUpDown114);
-            this.panel129.Controls.Add(this.numericUpDown113);
-            this.panel129.Controls.Add(this.label153);
-            this.panel129.Controls.Add(this.numericUpDown112);
-            this.panel129.Controls.Add(this.numericUpDown111);
-            this.panel129.Location = new System.Drawing.Point(0, 0);
-            this.panel129.Name = "panel129";
-            this.panel129.Size = new System.Drawing.Size(327, 90);
-            this.panel129.TabIndex = 290;
-            // 
-            // GenoChargeOverflow
-            // 
-            this.GenoChargeOverflow.AutoSize = false;
-            this.GenoChargeOverflow.BackColor = System.Drawing.SystemColors.Control;
-            this.GenoChargeOverflow.Location = new System.Drawing.Point(164, 73);
-            this.GenoChargeOverflow.Maximum = 128;
-            this.GenoChargeOverflow.Name = "GenoChargeOverflow";
-            this.GenoChargeOverflow.Size = new System.Drawing.Size(163, 17);
-            this.GenoChargeOverflow.TabIndex = 297;
-            this.GenoChargeOverflow.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.GenoChargeOverflow.ValueChanged += new System.EventHandler(this.GenoChargeOverflow_ValueChanged);
-            // 
-            // label167
-            // 
-            this.label167.BackColor = System.Drawing.SystemColors.Control;
-            this.label167.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label167.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label167.Location = new System.Drawing.Point(0, 0);
-            this.label167.Name = "label167";
-            this.label167.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label167.Size = new System.Drawing.Size(329, 17);
-            this.label167.TabIndex = 318;
-            this.label167.Text = "TIMING PROPERTIES";
-            this.label167.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // GenoLevel4Frame
-            // 
-            this.GenoLevel4Frame.AutoSize = false;
-            this.GenoLevel4Frame.BackColor = System.Drawing.SystemColors.Control;
-            this.GenoLevel4Frame.Location = new System.Drawing.Point(164, 55);
-            this.GenoLevel4Frame.Maximum = 128;
-            this.GenoLevel4Frame.Name = "GenoLevel4Frame";
-            this.GenoLevel4Frame.Size = new System.Drawing.Size(163, 17);
-            this.GenoLevel4Frame.TabIndex = 295;
-            this.GenoLevel4Frame.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.GenoLevel4Frame.ValueChanged += new System.EventHandler(this.GenoLevel4Frame_ValueChanged);
+            this.label177.Text = "#";
             // 
             // label151
             // 
-            this.label151.BackColor = System.Drawing.SystemColors.Control;
-            this.label151.Location = new System.Drawing.Point(0, 73);
+            this.label151.AutoSize = true;
+            this.label151.Location = new System.Drawing.Point(6, 85);
             this.label151.Name = "label151";
-            this.label151.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label151.Size = new System.Drawing.Size(117, 17);
+            this.label151.Size = new System.Drawing.Size(89, 13);
             this.label151.TabIndex = 40;
             this.label151.Text = "Charge Overflow";
             // 
-            // GenoLevel3Frame
-            // 
-            this.GenoLevel3Frame.AutoSize = false;
-            this.GenoLevel3Frame.BackColor = System.Drawing.SystemColors.Control;
-            this.GenoLevel3Frame.Location = new System.Drawing.Point(164, 37);
-            this.GenoLevel3Frame.Maximum = 128;
-            this.GenoLevel3Frame.Name = "GenoLevel3Frame";
-            this.GenoLevel3Frame.Size = new System.Drawing.Size(163, 17);
-            this.GenoLevel3Frame.TabIndex = 293;
-            this.GenoLevel3Frame.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.GenoLevel3Frame.ValueChanged += new System.EventHandler(this.GenoLevel3Frame_ValueChanged);
-            // 
             // label154
             // 
-            this.label154.BackColor = System.Drawing.SystemColors.Control;
-            this.label154.Location = new System.Drawing.Point(0, 19);
+            this.label154.AutoSize = true;
+            this.label154.Location = new System.Drawing.Point(6, 22);
             this.label154.Name = "label154";
-            this.label154.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label154.Size = new System.Drawing.Size(117, 17);
+            this.label154.Size = new System.Drawing.Size(74, 13);
             this.label154.TabIndex = 37;
             this.label154.Text = "Level 2 Frame";
             // 
-            // GenoLevel2Frame
-            // 
-            this.GenoLevel2Frame.AutoSize = false;
-            this.GenoLevel2Frame.BackColor = System.Drawing.SystemColors.Control;
-            this.GenoLevel2Frame.Location = new System.Drawing.Point(164, 19);
-            this.GenoLevel2Frame.Maximum = 128;
-            this.GenoLevel2Frame.Name = "GenoLevel2Frame";
-            this.GenoLevel2Frame.Size = new System.Drawing.Size(163, 17);
-            this.GenoLevel2Frame.TabIndex = 291;
-            this.GenoLevel2Frame.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.GenoLevel2Frame.ValueChanged += new System.EventHandler(this.GenoLevel2Frame_ValueChanged);
-            // 
             // label152
             // 
-            this.label152.BackColor = System.Drawing.SystemColors.Control;
-            this.label152.Location = new System.Drawing.Point(0, 55);
+            this.label152.AutoSize = true;
+            this.label152.Location = new System.Drawing.Point(6, 64);
             this.label152.Name = "label152";
-            this.label152.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label152.Size = new System.Drawing.Size(117, 17);
+            this.label152.Size = new System.Drawing.Size(74, 13);
             this.label152.TabIndex = 39;
             this.label152.Text = "Level 4 Frame";
             // 
-            // numericUpDown114
+            // timingGeno4Frame
             // 
-            this.numericUpDown114.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown114.Location = new System.Drawing.Point(118, 55);
-            this.numericUpDown114.Maximum = new decimal(new int[] {
+            this.timingGeno4Frame.Location = new System.Drawing.Point(105, 62);
+            this.timingGeno4Frame.Maximum = new decimal(new int[] {
             128,
             0,
             0,
             0});
-            this.numericUpDown114.Name = "numericUpDown114";
-            this.numericUpDown114.Size = new System.Drawing.Size(45, 17);
-            this.numericUpDown114.TabIndex = 294;
-            this.numericUpDown114.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown114.ValueChanged += new System.EventHandler(this.numericUpDown114_ValueChanged);
+            this.timingGeno4Frame.Name = "timingGeno4Frame";
+            this.timingGeno4Frame.Size = new System.Drawing.Size(84, 21);
+            this.timingGeno4Frame.TabIndex = 294;
+            this.timingGeno4Frame.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingGeno4Frame.ValueChanged += new System.EventHandler(this.numericUpDown114_ValueChanged);
             // 
-            // numericUpDown113
+            // timingGeno2Frame
             // 
-            this.numericUpDown113.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown113.Location = new System.Drawing.Point(118, 19);
-            this.numericUpDown113.Maximum = new decimal(new int[] {
+            this.timingGeno2Frame.Location = new System.Drawing.Point(105, 20);
+            this.timingGeno2Frame.Maximum = new decimal(new int[] {
             128,
             0,
             0,
             0});
-            this.numericUpDown113.Name = "numericUpDown113";
-            this.numericUpDown113.Size = new System.Drawing.Size(45, 17);
-            this.numericUpDown113.TabIndex = 290;
-            this.numericUpDown113.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown113.ValueChanged += new System.EventHandler(this.numericUpDown113_ValueChanged);
+            this.timingGeno2Frame.Name = "timingGeno2Frame";
+            this.timingGeno2Frame.Size = new System.Drawing.Size(84, 21);
+            this.timingGeno2Frame.TabIndex = 290;
+            this.timingGeno2Frame.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingGeno2Frame.ValueChanged += new System.EventHandler(this.timingGeno2Frame_ValueChanged);
             // 
             // label153
             // 
-            this.label153.BackColor = System.Drawing.SystemColors.Control;
-            this.label153.Location = new System.Drawing.Point(0, 37);
+            this.label153.AutoSize = true;
+            this.label153.Location = new System.Drawing.Point(6, 43);
             this.label153.Name = "label153";
-            this.label153.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label153.Size = new System.Drawing.Size(117, 17);
+            this.label153.Size = new System.Drawing.Size(74, 13);
             this.label153.TabIndex = 38;
             this.label153.Text = "Level 3 Frame";
             // 
-            // numericUpDown112
+            // timingGenoOverflow
             // 
-            this.numericUpDown112.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown112.Location = new System.Drawing.Point(118, 73);
-            this.numericUpDown112.Maximum = new decimal(new int[] {
+            this.timingGenoOverflow.Location = new System.Drawing.Point(105, 83);
+            this.timingGenoOverflow.Maximum = new decimal(new int[] {
             128,
             0,
             0,
             0});
-            this.numericUpDown112.Name = "numericUpDown112";
-            this.numericUpDown112.Size = new System.Drawing.Size(45, 17);
-            this.numericUpDown112.TabIndex = 296;
-            this.numericUpDown112.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown112.ValueChanged += new System.EventHandler(this.numericUpDown112_ValueChanged);
+            this.timingGenoOverflow.Name = "timingGenoOverflow";
+            this.timingGenoOverflow.Size = new System.Drawing.Size(84, 21);
+            this.timingGenoOverflow.TabIndex = 296;
+            this.timingGenoOverflow.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingGenoOverflow.ValueChanged += new System.EventHandler(this.numericUpDown112_ValueChanged);
             // 
-            // numericUpDown111
+            // timingGeno3Frame
             // 
-            this.numericUpDown111.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown111.Location = new System.Drawing.Point(118, 37);
-            this.numericUpDown111.Maximum = new decimal(new int[] {
+            this.timingGeno3Frame.Location = new System.Drawing.Point(105, 41);
+            this.timingGeno3Frame.Maximum = new decimal(new int[] {
             128,
             0,
             0,
             0});
-            this.numericUpDown111.Name = "numericUpDown111";
-            this.numericUpDown111.Size = new System.Drawing.Size(45, 17);
-            this.numericUpDown111.TabIndex = 292;
-            this.numericUpDown111.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown111.ValueChanged += new System.EventHandler(this.numericUpDown111_ValueChanged);
-            // 
-            // panelTimingTwo
-            // 
-            this.panelTimingTwo.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelTimingTwo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelTimingTwo.Controls.Add(this.panel14);
-            this.panelTimingTwo.Location = new System.Drawing.Point(1, 411);
-            this.panelTimingTwo.Name = "panelTimingTwo";
-            this.panelTimingTwo.Size = new System.Drawing.Size(331, 76);
-            this.panelTimingTwo.TabIndex = 479;
-            this.panelTimingTwo.Visible = false;
-            // 
-            // panel14
-            // 
-            this.panel14.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel14.Controls.Add(this.spell2Level1FrameEnd);
-            this.panel14.Controls.Add(this.spell2Level2FrameEnd);
-            this.panel14.Controls.Add(this.label123);
-            this.panel14.Controls.Add(this.spell2Level2FrameStart);
-            this.panel14.Controls.Add(this.label147);
-            this.panel14.Controls.Add(this.label148);
-            this.panel14.Controls.Add(this.label149);
-            this.panel14.Controls.Add(this.numericUpDown107);
-            this.panel14.Controls.Add(this.numericUpDown108);
-            this.panel14.Controls.Add(this.numericUpDown110);
-            this.panel14.Location = new System.Drawing.Point(0, 0);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(327, 72);
-            this.panel14.TabIndex = 281;
-            // 
-            // spell2Level1FrameEnd
-            // 
-            this.spell2Level1FrameEnd.AutoSize = false;
-            this.spell2Level1FrameEnd.BackColor = System.Drawing.SystemColors.Control;
-            this.spell2Level1FrameEnd.Location = new System.Drawing.Point(164, 55);
-            this.spell2Level1FrameEnd.Maximum = 128;
-            this.spell2Level1FrameEnd.Name = "spell2Level1FrameEnd";
-            this.spell2Level1FrameEnd.Size = new System.Drawing.Size(163, 17);
-            this.spell2Level1FrameEnd.TabIndex = 289;
-            this.spell2Level1FrameEnd.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.spell2Level1FrameEnd.ValueChanged += new System.EventHandler(this.spell2Level1FrameEnd_ValueChanged);
-            // 
-            // spell2Level2FrameEnd
-            // 
-            this.spell2Level2FrameEnd.AutoSize = false;
-            this.spell2Level2FrameEnd.BackColor = System.Drawing.SystemColors.Control;
-            this.spell2Level2FrameEnd.Location = new System.Drawing.Point(164, 37);
-            this.spell2Level2FrameEnd.Maximum = 128;
-            this.spell2Level2FrameEnd.Name = "spell2Level2FrameEnd";
-            this.spell2Level2FrameEnd.Size = new System.Drawing.Size(163, 17);
-            this.spell2Level2FrameEnd.TabIndex = 287;
-            this.spell2Level2FrameEnd.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.spell2Level2FrameEnd.ValueChanged += new System.EventHandler(this.spell2Level2FrameEnd_ValueChanged);
-            // 
-            // label123
-            // 
-            this.label123.BackColor = System.Drawing.SystemColors.Control;
-            this.label123.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label123.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label123.Location = new System.Drawing.Point(0, 0);
-            this.label123.Name = "label123";
-            this.label123.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label123.Size = new System.Drawing.Size(327, 17);
-            this.label123.TabIndex = 318;
-            this.label123.Text = "TIMING PROPERTIES";
-            this.label123.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // spell2Level2FrameStart
-            // 
-            this.spell2Level2FrameStart.AutoSize = false;
-            this.spell2Level2FrameStart.BackColor = System.Drawing.SystemColors.Control;
-            this.spell2Level2FrameStart.Location = new System.Drawing.Point(164, 19);
-            this.spell2Level2FrameStart.Maximum = 128;
-            this.spell2Level2FrameStart.Name = "spell2Level2FrameStart";
-            this.spell2Level2FrameStart.Size = new System.Drawing.Size(163, 17);
-            this.spell2Level2FrameStart.TabIndex = 285;
-            this.spell2Level2FrameStart.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.spell2Level2FrameStart.ValueChanged += new System.EventHandler(this.spell2Level2FrameStart_ValueChanged);
+            this.timingGeno3Frame.Name = "timingGeno3Frame";
+            this.timingGeno3Frame.Size = new System.Drawing.Size(84, 21);
+            this.timingGeno3Frame.TabIndex = 292;
+            this.timingGeno3Frame.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingGeno3Frame.ValueChanged += new System.EventHandler(this.timingGeno3Frame_ValueChanged);
             // 
             // label147
             // 
-            this.label147.BackColor = System.Drawing.SystemColors.Control;
-            this.label147.Location = new System.Drawing.Point(0, 55);
+            this.label147.AutoSize = true;
+            this.label147.Location = new System.Drawing.Point(6, 64);
             this.label147.Name = "label147";
-            this.label147.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label147.Size = new System.Drawing.Size(117, 17);
+            this.label147.Size = new System.Drawing.Size(80, 13);
             this.label147.TabIndex = 32;
             this.label147.Text = "LV1 Timing END";
             // 
             // label148
             // 
-            this.label148.BackColor = System.Drawing.SystemColors.Control;
-            this.label148.Location = new System.Drawing.Point(0, 37);
+            this.label148.AutoSize = true;
+            this.label148.Location = new System.Drawing.Point(6, 43);
             this.label148.Name = "label148";
-            this.label148.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label148.Size = new System.Drawing.Size(117, 17);
+            this.label148.Size = new System.Drawing.Size(80, 13);
             this.label148.TabIndex = 31;
             this.label148.Text = "LV2 Timing END";
             // 
             // label149
             // 
-            this.label149.BackColor = System.Drawing.SystemColors.Control;
-            this.label149.Location = new System.Drawing.Point(0, 19);
+            this.label149.AutoSize = true;
+            this.label149.Location = new System.Drawing.Point(6, 22);
             this.label149.Name = "label149";
-            this.label149.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label149.Size = new System.Drawing.Size(117, 17);
+            this.label149.Size = new System.Drawing.Size(92, 13);
             this.label149.TabIndex = 30;
             this.label149.Text = "LV2 Timing START";
             // 
-            // numericUpDown107
+            // timingTwoStart
             // 
-            this.numericUpDown107.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown107.Location = new System.Drawing.Point(118, 19);
-            this.numericUpDown107.Maximum = new decimal(new int[] {
+            this.timingTwoStart.Location = new System.Drawing.Point(104, 20);
+            this.timingTwoStart.Maximum = new decimal(new int[] {
             128,
             0,
             0,
             0});
-            this.numericUpDown107.Name = "numericUpDown107";
-            this.numericUpDown107.Size = new System.Drawing.Size(45, 17);
-            this.numericUpDown107.TabIndex = 284;
-            this.numericUpDown107.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown107.ValueChanged += new System.EventHandler(this.numericUpDown107_ValueChanged);
+            this.timingTwoStart.Name = "timingTwoStart";
+            this.timingTwoStart.Size = new System.Drawing.Size(85, 21);
+            this.timingTwoStart.TabIndex = 284;
+            this.timingTwoStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingTwoStart.ValueChanged += new System.EventHandler(this.numericUpDown107_ValueChanged);
             // 
-            // numericUpDown108
+            // timingOneEnd
             // 
-            this.numericUpDown108.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown108.Location = new System.Drawing.Point(118, 55);
-            this.numericUpDown108.Maximum = new decimal(new int[] {
+            this.timingOneEnd.Location = new System.Drawing.Point(104, 62);
+            this.timingOneEnd.Maximum = new decimal(new int[] {
             128,
             0,
             0,
             0});
-            this.numericUpDown108.Name = "numericUpDown108";
-            this.numericUpDown108.Size = new System.Drawing.Size(45, 17);
-            this.numericUpDown108.TabIndex = 288;
-            this.numericUpDown108.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown108.ValueChanged += new System.EventHandler(this.numericUpDown108_ValueChanged);
+            this.timingOneEnd.Name = "timingOneEnd";
+            this.timingOneEnd.Size = new System.Drawing.Size(85, 21);
+            this.timingOneEnd.TabIndex = 288;
+            this.timingOneEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingOneEnd.ValueChanged += new System.EventHandler(this.numericUpDown108_ValueChanged);
             // 
-            // numericUpDown110
+            // timingTwoEnd
             // 
-            this.numericUpDown110.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown110.Location = new System.Drawing.Point(118, 37);
-            this.numericUpDown110.Maximum = new decimal(new int[] {
+            this.timingTwoEnd.Location = new System.Drawing.Point(104, 41);
+            this.timingTwoEnd.Maximum = new decimal(new int[] {
             128,
             0,
             0,
             0});
-            this.numericUpDown110.Name = "numericUpDown110";
-            this.numericUpDown110.Size = new System.Drawing.Size(45, 17);
-            this.numericUpDown110.TabIndex = 286;
-            this.numericUpDown110.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown110.ValueChanged += new System.EventHandler(this.numericUpDown110_ValueChanged);
+            this.timingTwoEnd.Name = "timingTwoEnd";
+            this.timingTwoEnd.Size = new System.Drawing.Size(85, 21);
+            this.timingTwoEnd.TabIndex = 286;
+            this.timingTwoEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingTwoEnd.ValueChanged += new System.EventHandler(this.numericUpDown110_ValueChanged);
             // 
-            // panelTimingOne
+            // timingOne
             // 
-            this.panelTimingOne.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelTimingOne.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelTimingOne.Controls.Add(this.panel128);
-            this.panelTimingOne.Location = new System.Drawing.Point(1, 411);
-            this.panelTimingOne.Name = "panelTimingOne";
-            this.panelTimingOne.Size = new System.Drawing.Size(331, 40);
-            this.panelTimingOne.TabIndex = 478;
-            this.panelTimingOne.Visible = false;
-            // 
-            // panel128
-            // 
-            this.panel128.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel128.Controls.Add(this.spell1TimingFrameSpan);
-            this.panel128.Controls.Add(this.label197);
-            this.panel128.Controls.Add(this.numericUpDown100);
-            this.panel128.Controls.Add(this.label144);
-            this.panel128.Location = new System.Drawing.Point(0, 0);
-            this.panel128.Name = "panel128";
-            this.panel128.Size = new System.Drawing.Size(327, 36);
-            this.panel128.TabIndex = 276;
-            // 
-            // spell1TimingFrameSpan
-            // 
-            this.spell1TimingFrameSpan.AutoSize = false;
-            this.spell1TimingFrameSpan.BackColor = System.Drawing.SystemColors.Control;
-            this.spell1TimingFrameSpan.Location = new System.Drawing.Point(164, 19);
-            this.spell1TimingFrameSpan.Maximum = 128;
-            this.spell1TimingFrameSpan.Name = "spell1TimingFrameSpan";
-            this.spell1TimingFrameSpan.Size = new System.Drawing.Size(163, 17);
-            this.spell1TimingFrameSpan.TabIndex = 280;
-            this.spell1TimingFrameSpan.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.spell1TimingFrameSpan.ValueChanged += new System.EventHandler(this.spell1TimingFrameSpan_ValueChanged);
-            // 
-            // label197
-            // 
-            this.label197.BackColor = System.Drawing.SystemColors.Control;
-            this.label197.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label197.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label197.Location = new System.Drawing.Point(0, 0);
-            this.label197.Name = "label197";
-            this.label197.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label197.Size = new System.Drawing.Size(327, 17);
-            this.label197.TabIndex = 318;
-            this.label197.Text = "TIMING PROPERTIES";
-            this.label197.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // numericUpDown100
-            // 
-            this.numericUpDown100.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown100.Location = new System.Drawing.Point(118, 19);
-            this.numericUpDown100.Maximum = new decimal(new int[] {
+            this.timingOne.Location = new System.Drawing.Point(109, 20);
+            this.timingOne.Maximum = new decimal(new int[] {
             128,
             0,
             0,
             0});
-            this.numericUpDown100.Name = "numericUpDown100";
-            this.numericUpDown100.Size = new System.Drawing.Size(45, 17);
-            this.numericUpDown100.TabIndex = 279;
-            this.numericUpDown100.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown100.ValueChanged += new System.EventHandler(this.numericUpDown100_ValueChanged);
+            this.timingOne.Name = "timingOne";
+            this.timingOne.Size = new System.Drawing.Size(80, 21);
+            this.timingOne.TabIndex = 279;
+            this.timingOne.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timingOne.ValueChanged += new System.EventHandler(this.numericUpDown100_ValueChanged);
             // 
             // label144
             // 
-            this.label144.BackColor = System.Drawing.SystemColors.Control;
-            this.label144.Location = new System.Drawing.Point(0, 19);
+            this.label144.AutoSize = true;
+            this.label144.Location = new System.Drawing.Point(6, 22);
             this.label144.Name = "label144";
-            this.label144.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label144.Size = new System.Drawing.Size(117, 17);
+            this.label144.Size = new System.Drawing.Size(97, 13);
             this.label144.TabIndex = 317;
             this.label144.Text = "Timing Frame Span";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label65);
+            this.groupBox1.Controls.Add(this.spellMagPower);
+            this.groupBox1.Controls.Add(this.label64);
+            this.groupBox1.Controls.Add(this.spellFPCost);
+            this.groupBox1.Controls.Add(this.spellHitRate);
+            this.groupBox1.Controls.Add(this.label56);
+            this.groupBox1.Location = new System.Drawing.Point(6, 28);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(195, 89);
+            this.groupBox1.TabIndex = 481;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Spell Status";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.spellInflictElement);
+            this.groupBox2.Controls.Add(this.spellFunction);
+            this.groupBox2.Controls.Add(this.spellEffectType);
+            this.groupBox2.Controls.Add(this.spellAttackType);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.label171);
+            this.groupBox2.Location = new System.Drawing.Point(6, 123);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(195, 106);
+            this.groupBox2.TabIndex = 481;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Attack Properties";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBoxSpellDescription);
+            this.groupBox3.Controls.Add(this.toolStrip2);
+            this.groupBox3.Controls.Add(this.panel1);
+            this.groupBox3.Location = new System.Drawing.Point(207, 28);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(195, 181);
+            this.groupBox3.TabIndex = 481;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Description";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.spellTargetting);
+            this.groupBox4.Location = new System.Drawing.Point(6, 367);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(195, 126);
+            this.groupBox4.TabIndex = 481;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Targetting";
+            // 
+            // panelTimingOne
+            // 
+            this.panelTimingOne.Controls.Add(this.label144);
+            this.panelTimingOne.Controls.Add(this.timingOne);
+            this.panelTimingOne.Location = new System.Drawing.Point(207, 383);
+            this.panelTimingOne.Name = "panelTimingOne";
+            this.panelTimingOne.Size = new System.Drawing.Size(195, 47);
+            this.panelTimingOne.TabIndex = 481;
+            this.panelTimingOne.TabStop = false;
+            this.panelTimingOne.Text = "Timing Properties";
+            // 
+            // panelTimingRapid
+            // 
+            this.panelTimingRapid.Controls.Add(this.label143);
+            this.panelTimingRapid.Controls.Add(this.timingRapid);
+            this.panelTimingRapid.Location = new System.Drawing.Point(207, 383);
+            this.panelTimingRapid.Name = "panelTimingRapid";
+            this.panelTimingRapid.Size = new System.Drawing.Size(195, 48);
+            this.panelTimingRapid.TabIndex = 481;
+            this.panelTimingRapid.TabStop = false;
+            this.panelTimingRapid.Text = "Timing Properties";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.spellAttackProp);
+            this.groupBox7.Location = new System.Drawing.Point(6, 235);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(195, 126);
+            this.groupBox7.TabIndex = 481;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Other Properties";
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.spellStatusEffect);
+            this.groupBox8.Location = new System.Drawing.Point(207, 215);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(195, 94);
+            this.groupBox8.TabIndex = 481;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Effects";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.spellStatusChange);
+            this.groupBox9.Location = new System.Drawing.Point(207, 315);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(195, 62);
+            this.groupBox9.TabIndex = 481;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Status Effects";
+            // 
+            // panelTimingTwo
+            // 
+            this.panelTimingTwo.Controls.Add(this.label149);
+            this.panelTimingTwo.Controls.Add(this.timingTwoEnd);
+            this.panelTimingTwo.Controls.Add(this.timingOneEnd);
+            this.panelTimingTwo.Controls.Add(this.timingTwoStart);
+            this.panelTimingTwo.Controls.Add(this.label147);
+            this.panelTimingTwo.Controls.Add(this.label148);
+            this.panelTimingTwo.Location = new System.Drawing.Point(207, 383);
+            this.panelTimingTwo.Name = "panelTimingTwo";
+            this.panelTimingTwo.Size = new System.Drawing.Size(195, 89);
+            this.panelTimingTwo.TabIndex = 481;
+            this.panelTimingTwo.TabStop = false;
+            this.panelTimingTwo.Text = "Timing Properties";
+            // 
+            // panelTimingGeno
+            // 
+            this.panelTimingGeno.Controls.Add(this.label154);
+            this.panelTimingGeno.Controls.Add(this.timingGeno3Frame);
+            this.panelTimingGeno.Controls.Add(this.timingGenoOverflow);
+            this.panelTimingGeno.Controls.Add(this.label151);
+            this.panelTimingGeno.Controls.Add(this.label153);
+            this.panelTimingGeno.Controls.Add(this.timingGeno2Frame);
+            this.panelTimingGeno.Controls.Add(this.timingGeno4Frame);
+            this.panelTimingGeno.Controls.Add(this.label152);
+            this.panelTimingGeno.Location = new System.Drawing.Point(207, 383);
+            this.panelTimingGeno.Name = "panelTimingGeno";
+            this.panelTimingGeno.Size = new System.Drawing.Size(195, 110);
+            this.panelTimingGeno.TabIndex = 482;
+            this.panelTimingGeno.TabStop = false;
+            this.panelTimingGeno.Text = "Timing Properties";
+            // 
+            // panelTimingRotation
+            // 
+            this.panelTimingRotation.Controls.Add(this.label142);
+            this.panelTimingRotation.Controls.Add(this.timingRotationMax);
+            this.panelTimingRotation.Controls.Add(this.label141);
+            this.panelTimingRotation.Controls.Add(this.timingRotationStart);
+            this.panelTimingRotation.Location = new System.Drawing.Point(207, 383);
+            this.panelTimingRotation.Name = "panelTimingRotation";
+            this.panelTimingRotation.Size = new System.Drawing.Size(195, 68);
+            this.panelTimingRotation.TabIndex = 483;
+            this.panelTimingRotation.TabStop = false;
+            this.panelTimingRotation.Text = "Timing Properties";
+            // 
+            // panelTimingMultiple
+            // 
+            this.panelTimingMultiple.Controls.Add(this.timingInstanceNumber);
+            this.panelTimingMultiple.Controls.Add(this.label156);
+            this.panelTimingMultiple.Controls.Add(this.label177);
+            this.panelTimingMultiple.Controls.Add(this.timingInstanceMax);
+            this.panelTimingMultiple.Controls.Add(this.label155);
+            this.panelTimingMultiple.Controls.Add(this.timingInstanceSpan);
+            this.panelTimingMultiple.Location = new System.Drawing.Point(207, 383);
+            this.panelTimingMultiple.Name = "panelTimingMultiple";
+            this.panelTimingMultiple.Size = new System.Drawing.Size(195, 89);
+            this.panelTimingMultiple.TabIndex = 484;
+            this.panelTimingMultiple.TabStop = false;
+            this.panelTimingMultiple.Text = "Timing Properties";
+            // 
+            // panelTimingFireball
+            // 
+            this.panelTimingFireball.Controls.Add(this.label146);
+            this.panelTimingFireball.Controls.Add(this.timingFireballSpan);
+            this.panelTimingFireball.Controls.Add(this.label145);
+            this.panelTimingFireball.Controls.Add(this.timingFireballMax);
+            this.panelTimingFireball.Location = new System.Drawing.Point(207, 383);
+            this.panelTimingFireball.Name = "panelTimingFireball";
+            this.panelTimingFireball.Size = new System.Drawing.Size(195, 68);
+            this.panelTimingFireball.TabIndex = 485;
+            this.panelTimingFireball.TabStop = false;
+            this.panelTimingFireball.Text = "Timing Properties";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.pictureBoxSpellDesc);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 17);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(189, 68);
+            this.panel1.TabIndex = 486;
             // 
             // Spells
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 506);
+            this.ClientSize = new System.Drawing.Size(408, 498);
             this.ControlBox = false;
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.panel160);
-            this.Controls.Add(this.panel159);
-            this.Controls.Add(this.panel158);
-            this.Controls.Add(this.panel157);
-            this.Controls.Add(this.panel152);
-            this.Controls.Add(this.panel40);
-            this.Controls.Add(this.panel151);
-            this.Controls.Add(this.panelTimingRapid);
-            this.Controls.Add(this.panelTimingOne);
-            this.Controls.Add(this.panelTimingTwo);
-            this.Controls.Add(this.panelTimingGeno);
-            this.Controls.Add(this.panelTimingRotation);
             this.Controls.Add(this.panelTimingFireball);
             this.Controls.Add(this.panelTimingMultiple);
+            this.Controls.Add(this.panelTimingRotation);
+            this.Controls.Add(this.panelTimingGeno);
+            this.Controls.Add(this.panelTimingTwo);
+            this.Controls.Add(this.panelTimingOne);
+            this.Controls.Add(this.groupBox9);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox8);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox7);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.panelTimingRapid);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -1733,71 +1128,54 @@
             this.Name = "Spells";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.panel160.ResumeLayout(false);
-            this.panel156.ResumeLayout(false);
-            this.panel159.ResumeLayout(false);
-            this.panel155.ResumeLayout(false);
-            this.panel158.ResumeLayout(false);
-            this.panel154.ResumeLayout(false);
-            this.panel157.ResumeLayout(false);
-            this.panel153.ResumeLayout(false);
-            this.panel152.ResumeLayout(false);
-            this.panel45.ResumeLayout(false);
-            this.panel45.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpellDesc)).EndInit();
-            this.panel40.ResumeLayout(false);
-            this.panel57.ResumeLayout(false);
-            this.panel89.ResumeLayout(false);
-            this.panel90.ResumeLayout(false);
-            this.panel91.ResumeLayout(false);
-            this.panel84.ResumeLayout(false);
-            this.panel151.ResumeLayout(false);
-            this.panel38.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spellHitRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spellFPCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spellMagPower)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.panelTimingRotation.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown104)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown103)).EndInit();
-            this.panelTimingFireball.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown106)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown105)).EndInit();
-            this.panelTimingRapid.ResumeLayout(false);
-            this.panel21.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown102)).EndInit();
-            this.panelTimingMultiple.ResumeLayout(false);
-            this.panel15.ResumeLayout(false);
-            this.panel18.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
-            this.panelTimingGeno.ResumeLayout(false);
-            this.panel129.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.GenoChargeOverflow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GenoLevel4Frame)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GenoLevel3Frame)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GenoLevel2Frame)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown114)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown113)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown112)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown111)).EndInit();
-            this.panelTimingTwo.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.spell2Level1FrameEnd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spell2Level2FrameEnd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spell2Level2FrameStart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown107)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown108)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown110)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingRotationStart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingRotationMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingFireballSpan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingFireballMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingRapid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingInstanceMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingInstanceSpan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingGeno4Frame)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingGeno2Frame)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingGenoOverflow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingGeno3Frame)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingTwoStart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingOneEnd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingTwoEnd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timingOne)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.panelTimingOne.ResumeLayout(false);
-            this.panel128.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.spell1TimingFrameSpan)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown100)).EndInit();
+            this.panelTimingOne.PerformLayout();
+            this.panelTimingRapid.ResumeLayout(false);
+            this.panelTimingRapid.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.panelTimingTwo.ResumeLayout(false);
+            this.panelTimingTwo.PerformLayout();
+            this.panelTimingGeno.ResumeLayout(false);
+            this.panelTimingGeno.PerformLayout();
+            this.panelTimingRotation.ResumeLayout(false);
+            this.panelTimingRotation.PerformLayout();
+            this.panelTimingMultiple.ResumeLayout(false);
+            this.panelTimingMultiple.PerformLayout();
+            this.panelTimingFireball.ResumeLayout(false);
+            this.panelTimingFireball.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1805,47 +1183,20 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel160;
-        private System.Windows.Forms.Panel panel156;
-        private System.Windows.Forms.Label label170;
         private System.Windows.Forms.CheckedListBox spellTargetting;
-        private System.Windows.Forms.Panel panel159;
-        private System.Windows.Forms.Panel panel155;
-        private System.Windows.Forms.Label label44;
         private System.Windows.Forms.CheckedListBox spellAttackProp;
-        private System.Windows.Forms.Panel panel158;
-        private System.Windows.Forms.Panel panel154;
-        private System.Windows.Forms.Label label61;
         private System.Windows.Forms.CheckedListBox spellStatusChange;
-        private System.Windows.Forms.Panel panel157;
-        private System.Windows.Forms.Panel panel153;
-        private System.Windows.Forms.Label label62;
         private System.Windows.Forms.CheckedListBox spellStatusEffect;
-        private System.Windows.Forms.Panel panel152;
-        private System.Windows.Forms.Panel panel45;
         private System.Windows.Forms.PictureBox pictureBoxSpellDesc;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.Button button33;
         private System.Windows.Forms.RichTextBox textBoxSpellDescription;
-        private System.Windows.Forms.Button button34;
-        private System.Windows.Forms.Panel panel40;
-        private System.Windows.Forms.Panel panel57;
-        private System.Windows.Forms.Panel panel89;
         private System.Windows.Forms.ComboBox spellInflictElement;
-        private System.Windows.Forms.Panel panel90;
         private System.Windows.Forms.ComboBox spellFunction;
-        private System.Windows.Forms.Panel panel91;
         private System.Windows.Forms.ComboBox spellEffectType;
-        private System.Windows.Forms.Label label172;
         private System.Windows.Forms.Label label171;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Panel panel84;
         private System.Windows.Forms.ComboBox spellAttackType;
-        private System.Windows.Forms.Panel panel151;
-        private System.Windows.Forms.Panel panel38;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label65;
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.NumericUpDown spellHitRate;
@@ -1856,67 +1207,37 @@
         private LAZYSHELL.ToolStripComboBox spellName;
         private System.Windows.Forms.ToolStripTextBox textBoxSpellName;
         private LAZYSHELL.ToolStripComboBox spellNameIcon;
-        private System.Windows.Forms.Panel panelTimingRotation;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Label label183;
         private System.Windows.Forms.Label label142;
         private System.Windows.Forms.Label label141;
-        private System.Windows.Forms.NumericUpDown numericUpDown104;
-        private System.Windows.Forms.NumericUpDown numericUpDown103;
-        private System.Windows.Forms.Panel panelTimingFireball;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Label label186;
-        private System.Windows.Forms.NumericUpDown numericUpDown106;
-        private System.Windows.Forms.NumericUpDown numericUpDown105;
+        private System.Windows.Forms.NumericUpDown timingRotationStart;
+        private System.Windows.Forms.NumericUpDown timingRotationMax;
+        private System.Windows.Forms.NumericUpDown timingFireballSpan;
+        private System.Windows.Forms.NumericUpDown timingFireballMax;
         private System.Windows.Forms.Label label145;
         private System.Windows.Forms.Label label146;
-        private System.Windows.Forms.Panel panelTimingRapid;
-        private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.Label label184;
         private System.Windows.Forms.Label label143;
-        private System.Windows.Forms.NumericUpDown numericUpDown102;
-        private System.Windows.Forms.Panel panelTimingMultiple;
-        private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Label label202;
-        private System.Windows.Forms.Panel panel18;
-        private System.Windows.Forms.ComboBox instanceNumberName;
-        private System.Windows.Forms.NumericUpDown numericUpDown7;
-        private System.Windows.Forms.NumericUpDown numericUpDown8;
+        private System.Windows.Forms.NumericUpDown timingRapid;
+        private System.Windows.Forms.ComboBox timingInstanceNumber;
+        private System.Windows.Forms.NumericUpDown timingInstanceMax;
+        private System.Windows.Forms.NumericUpDown timingInstanceSpan;
         private System.Windows.Forms.Label label155;
         private System.Windows.Forms.Label label156;
         private System.Windows.Forms.Label label177;
-        private System.Windows.Forms.Panel panelTimingGeno;
-        private System.Windows.Forms.Panel panel129;
-        private System.Windows.Forms.TrackBar GenoChargeOverflow;
-        private System.Windows.Forms.Label label167;
-        private System.Windows.Forms.TrackBar GenoLevel4Frame;
         private System.Windows.Forms.Label label151;
-        private System.Windows.Forms.TrackBar GenoLevel3Frame;
         private System.Windows.Forms.Label label154;
-        private System.Windows.Forms.TrackBar GenoLevel2Frame;
         private System.Windows.Forms.Label label152;
-        private System.Windows.Forms.NumericUpDown numericUpDown114;
-        private System.Windows.Forms.NumericUpDown numericUpDown113;
+        private System.Windows.Forms.NumericUpDown timingGeno4Frame;
+        private System.Windows.Forms.NumericUpDown timingGeno2Frame;
         private System.Windows.Forms.Label label153;
-        private System.Windows.Forms.NumericUpDown numericUpDown112;
-        private System.Windows.Forms.NumericUpDown numericUpDown111;
-        private System.Windows.Forms.Panel panelTimingTwo;
-        private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.TrackBar spell2Level1FrameEnd;
-        private System.Windows.Forms.TrackBar spell2Level2FrameEnd;
-        private System.Windows.Forms.Label label123;
-        private System.Windows.Forms.TrackBar spell2Level2FrameStart;
+        private System.Windows.Forms.NumericUpDown timingGenoOverflow;
+        private System.Windows.Forms.NumericUpDown timingGeno3Frame;
         private System.Windows.Forms.Label label147;
         private System.Windows.Forms.Label label148;
         private System.Windows.Forms.Label label149;
-        private System.Windows.Forms.NumericUpDown numericUpDown107;
-        private System.Windows.Forms.NumericUpDown numericUpDown108;
-        private System.Windows.Forms.NumericUpDown numericUpDown110;
-        private System.Windows.Forms.Panel panelTimingOne;
-        private System.Windows.Forms.Panel panel128;
-        private System.Windows.Forms.TrackBar spell1TimingFrameSpan;
-        private System.Windows.Forms.Label label197;
-        private System.Windows.Forms.NumericUpDown numericUpDown100;
+        private System.Windows.Forms.NumericUpDown timingTwoStart;
+        private System.Windows.Forms.NumericUpDown timingOneEnd;
+        private System.Windows.Forms.NumericUpDown timingTwoEnd;
+        private System.Windows.Forms.NumericUpDown timingOne;
         private System.Windows.Forms.Label label144;
         private ToolStripNumericUpDown spellNum;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -1925,5 +1246,20 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton newLine;
         private System.Windows.Forms.ToolStripButton endString;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox panelTimingOne;
+        private System.Windows.Forms.GroupBox panelTimingRapid;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox panelTimingTwo;
+        private System.Windows.Forms.GroupBox panelTimingGeno;
+        private System.Windows.Forms.GroupBox panelTimingRotation;
+        private System.Windows.Forms.GroupBox panelTimingMultiple;
+        private System.Windows.Forms.GroupBox panelTimingFireball;
+        private System.Windows.Forms.Panel panel1;
     }
 }

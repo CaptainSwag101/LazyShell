@@ -150,7 +150,7 @@ namespace LAZYSHELL
         }
         public void Assemble()
         {
-            tileset.AssembleIntoModel(16, 16);
+            tileset.Assemble(16, 16);
             foreach (PaletteSet ps in paletteSets)
                 ps.Assemble(2);
             foreach (Battlefield bf in battlefields)
@@ -163,11 +163,11 @@ namespace LAZYSHELL
         {
             if (paletteEditor == null)
             {
-                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSets[palette], 8, 2);
+                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSets[palette], 8, 2,6);
                 paletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditor.Reload(new Function(PaletteUpdate), paletteSets[palette], 8, 2);
+                paletteEditor.Reload(new Function(PaletteUpdate), paletteSets[palette], 8, 2,6);
         }
         private void LoadGraphicEditor()
         {
@@ -211,7 +211,7 @@ namespace LAZYSHELL
         }
         private void GraphicUpdate()
         {
-            this.tileset.AssembleIntoModel(16, 2);
+            this.tileset.Assemble(16, 2);
             this.tileset.RedrawTileset();
             SetBattlefieldImage();
             LoadTileEditor();
@@ -234,7 +234,7 @@ namespace LAZYSHELL
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             this.copiedTiles = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
-            Tile16x16[] copiedTiles = new Tile16x16[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
+            Tile[] copiedTiles = new Tile[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
@@ -261,7 +261,7 @@ namespace LAZYSHELL
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             this.draggedTiles = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
-            Tile16x16[] draggedTiles = new Tile16x16[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
+            Tile[] draggedTiles = new Tile[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
@@ -315,7 +315,7 @@ namespace LAZYSHELL
                     index += ((y + y_) >> 4) * 512;
                     if (index >= tileset.TileSetLayer.Length || index < 0) continue;
                     if (y < 0 || x < 0) continue;
-                    Tile16x16 tile = buffer.Tiles[y * (buffer.Width / 16) + x];
+                    Tile tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileset.TileSetLayer[index] = tile.Copy();
                     tileset.TileSetLayer[index].TileIndex = index;
                 }
@@ -367,7 +367,7 @@ namespace LAZYSHELL
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             CopyBuffer buffer = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
-            Tile16x16[] copiedTiles = new Tile16x16[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
+            Tile[] copiedTiles = new Tile[(overlay.SelectTS.Width / 16) * (overlay.SelectTS.Height / 16)];
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
@@ -503,7 +503,7 @@ namespace LAZYSHELL
         private void battlefieldNum_ValueChanged(object sender, EventArgs e)
         {
             battlefieldName.SelectedIndex = (int)battlefieldNum.Value;
-            tileset.AssembleIntoModel(16, 16);
+            tileset.Assemble(16, 16);
             draggedTiles = null;
             overlay.SelectTS = null;
             selection = null;
@@ -914,8 +914,8 @@ namespace LAZYSHELL
         }
         private void exportToBattlefieldToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Tile16x16[] tileset = new Tile16x16[32 * 32];
-            tileset = (Tile16x16[])Do.Import(tileset);
+            Tile[] tileset = new Tile[32 * 32];
+            tileset = (Tile[])Do.Import(tileset);
             for (int i = 0; i < 32 * 32; i++)
                 this.tileset.TileSetLayer[i] = tileset[i].Copy();
             this.tileset.DrawTileset(this.tileset.TileSetLayer, this.tileset.TileSet);
@@ -924,6 +924,9 @@ namespace LAZYSHELL
         {
             BattlefieldTileSet tileset = new BattlefieldTileSet();
             tileset = (BattlefieldTileSet)Do.Import(tileset);
+            if (tileset == null)
+                return;
+            //
             tileset.PaletteSet.Data = Model.Data;
             this.battlefield.GraphicSetA = tileset.Battlefield.GraphicSetA;
             this.battlefield.GraphicSetB = tileset.Battlefield.GraphicSetB;
@@ -936,7 +939,7 @@ namespace LAZYSHELL
             this.tileset.TileSetLayer = tileset.TileSetLayer;
             this.tileset.DrawTileset(this.tileset.TileSetLayer, this.tileset.TileSet);
 
-            this.tileset.AssembleIntoModel(16, 16);
+            this.tileset.Assemble(16, 16);
 
             RefreshBattlefield();
         }

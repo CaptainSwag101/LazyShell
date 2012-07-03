@@ -22,6 +22,7 @@ namespace LAZYSHELL
         private bool exits = false; public bool Exits { get { return exits; } set { exits = value; } }
         private bool events = false; public bool Events { get { return events; } set { events = value; } }
         private bool overlaps = false; public bool Overlaps { get { return overlaps; } set { overlaps = value; } }
+        private bool mushrooms = false; public bool Mushrooms { get { return mushrooms; } set { mushrooms = value; } }
         private bool tileMods = false; public bool TileMods { get { return tileMods; } set { tileMods = value; } }
         private bool solidMods = false; public bool SolidMods { get { return solidMods; } set { solidMods = value; } }
         private bool cartesianGrid = false; public bool CartesianGrid { get { return cartesianGrid; } set { cartesianGrid = value; } }

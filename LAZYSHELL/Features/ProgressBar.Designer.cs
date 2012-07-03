@@ -54,7 +54,6 @@ namespace LAZYSHELL
             // 
             // buttonCancel
             // 
-            this.buttonCancel.BackColor = System.Drawing.SystemColors.Control;
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.Location = new System.Drawing.Point(339, 12);
             this.buttonCancel.Name = "buttonCancel";

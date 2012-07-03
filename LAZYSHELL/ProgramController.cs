@@ -180,6 +180,14 @@ namespace LAZYSHELL
         {
             App.CreateMainTitleWindow();
         }
+        public void Menus()
+        {
+            App.CreateMenusWindow();
+        }
+        public void MiniGames()
+        {
+            App.CreateMiniGamesWindow();
+        }
         public void Monsters()
         {
             App.CreateMonstersWindow();

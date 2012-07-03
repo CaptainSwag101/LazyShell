@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BattleDialogues));
             this.battleDialogueTextBox = new System.Windows.Forms.RichTextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.battleDlgType = new System.Windows.Forms.ToolStripComboBox();
@@ -50,14 +51,14 @@
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.reset = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toggleText = new System.Windows.Forms.ToolStripButton();
             this.grid = new System.Windows.Forms.ToolStripButton();
             this.openTileEditor = new System.Windows.Forms.ToolStripButton();
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
-            this.openPalettes = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.openPaletteMenu = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.openPalettes = new System.Windows.Forms.ToolStripMenuItem();
+            this.openPaletteMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.toggleText = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBattleDialogue)).BeginInit();
             this.toolStrip2.SuspendLayout();
@@ -73,8 +74,8 @@
             this.battleDialogueTextBox.Size = new System.Drawing.Size(369, 115);
             this.battleDialogueTextBox.TabIndex = 1;
             this.battleDialogueTextBox.Text = "";
-            this.battleDialogueTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.battleDialogueTextBox_KeyDown);
             this.battleDialogueTextBox.TextChanged += new System.EventHandler(this.battleDialogueTextBox_TextChanged);
+            this.battleDialogueTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.battleDialogueTextBox_KeyDown);
             // 
             // toolStrip1
             // 
@@ -106,11 +107,9 @@
             // battleDialogueNum
             // 
             this.battleDialogueNum.AutoSize = false;
-            this.battleDialogueNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.battleDialogueNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.battleDialogueNum.ForeColor = System.Drawing.SystemColors.Control;
+            this.battleDialogueNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.battleDialogueNum.Hexadecimal = false;
-            this.battleDialogueNum.Location = new System.Drawing.Point(160, 1);
+            this.battleDialogueNum.Location = new System.Drawing.Point(160, 2);
             this.battleDialogueNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -122,7 +121,7 @@
             0,
             0});
             this.battleDialogueNum.Name = "battleDialogueNum";
-            this.battleDialogueNum.Size = new System.Drawing.Size(60, 22);
+            this.battleDialogueNum.Size = new System.Drawing.Size(60, 21);
             this.battleDialogueNum.Text = "0";
             this.battleDialogueNum.Value = new decimal(new int[] {
             0,
@@ -155,10 +154,10 @@
             this.pictureBoxBattleDialogue.Size = new System.Drawing.Size(393, 32);
             this.pictureBoxBattleDialogue.TabIndex = 520;
             this.pictureBoxBattleDialogue.TabStop = false;
-            this.pictureBoxBattleDialogue.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxBattleDialogue_PreviewKeyDown);
-            this.pictureBoxBattleDialogue.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBattleDialogue_MouseMove);
-            this.pictureBoxBattleDialogue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBattleDialogue_MouseDown);
             this.pictureBoxBattleDialogue.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxBattleDialogue_Paint);
+            this.pictureBoxBattleDialogue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBattleDialogue_MouseDown);
+            this.pictureBoxBattleDialogue.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBattleDialogue_MouseMove);
+            this.pictureBoxBattleDialogue.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxBattleDialogue_PreviewKeyDown);
             // 
             // toolStrip2
             // 
@@ -294,9 +293,7 @@
             this.grid,
             this.openTileEditor,
             this.openGraphics,
-            this.openPalettes,
-            this.toolStripSeparator3,
-            this.openPaletteMenu});
+            this.toolStripDropDownButton1});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -319,6 +316,19 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toggleText
+            // 
+            this.toggleText.Checked = true;
+            this.toggleText.CheckOnClick = true;
+            this.toggleText.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toggleText.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toggleText.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleText.Name = "toggleText";
+            this.toggleText.Size = new System.Drawing.Size(30, 22);
+            this.toggleText.Text = "TXT";
+            this.toggleText.ToolTipText = "Show/Hide Dialogue Text";
+            this.toggleText.Click += new System.EventHandler(this.toggleText_Click);
             // 
             // grid
             // 
@@ -352,30 +362,34 @@
             this.openGraphics.ToolTipText = "BPP Graphics";
             this.openGraphics.Click += new System.EventHandler(this.openGraphics_Click);
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openPalettes,
+            this.openPaletteMenu});
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(31, 22);
+            // 
             // openPalettes
             // 
-            this.openPalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.openPalettes.Image = ((System.Drawing.Image)(resources.GetObject("openPalettes.Image")));
             this.openPalettes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openPalettes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openPalettes.Name = "openPalettes";
-            this.openPalettes.Size = new System.Drawing.Size(23, 22);
-            this.openPalettes.ToolTipText = "Dialogue Palette";
+            this.openPalettes.Size = new System.Drawing.Size(179, 24);
+            this.openPalettes.Text = "Dialogue Font Palette";
             this.openPalettes.Click += new System.EventHandler(this.openPalettes_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // openPaletteMenu
             // 
-            this.openPaletteMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openPaletteMenu.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.openPaletteMenu.Image = ((System.Drawing.Image)(resources.GetObject("openPaletteMenu.Image")));
             this.openPaletteMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openPaletteMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openPaletteMenu.Name = "openPaletteMenu";
-            this.openPaletteMenu.Size = new System.Drawing.Size(23, 22);
-            this.openPaletteMenu.ToolTipText = "Menu Palette";
+            this.openPaletteMenu.Size = new System.Drawing.Size(179, 24);
+            this.openPaletteMenu.Text = "Menu Font Palette";
             this.openPaletteMenu.Click += new System.EventHandler(this.openPaletteMenu_Click);
             // 
             // toolStrip3
@@ -393,19 +407,6 @@
             this.toolStrip3.Size = new System.Drawing.Size(24, 115);
             this.toolStrip3.TabIndex = 539;
             this.toolStrip3.Text = "toolStrip3";
-            // 
-            // toggleText
-            // 
-            this.toggleText.Checked = true;
-            this.toggleText.CheckOnClick = true;
-            this.toggleText.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toggleText.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toggleText.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toggleText.Name = "toggleText";
-            this.toggleText.Size = new System.Drawing.Size(30, 22);
-            this.toggleText.Text = "TXT";
-            this.toggleText.ToolTipText = "Show/Hide Dialogue Text";
-            this.toggleText.Click += new System.EventHandler(this.toggleText_Click);
             // 
             // BattleDialogues
             // 
@@ -455,17 +456,17 @@
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton openTileEditor;
         private System.Windows.Forms.ToolStripButton openGraphics;
-        private System.Windows.Forms.ToolStripButton openPalettes;
         private System.Windows.Forms.ToolStripButton searchButton;
         private System.Windows.Forms.ToolStripButton byteOrTextView;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripTextBox searchBox;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton openPaletteMenu;
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton grid;
         private System.Windows.Forms.ToolStripButton toggleText;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem openPalettes;
+        private System.Windows.Forms.ToolStripMenuItem openPaletteMenu;
     }
 }

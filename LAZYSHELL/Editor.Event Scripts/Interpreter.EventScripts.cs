@@ -66,7 +66,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "UNKCMD 0x33",			// 0x33
             "Joypad (reset @ return) disable: ",			// 0x34
             "Joypad disable: ",			// 0x35
-            "Activate party member: ",			// 0x36
+            "",			// 0x36
             "Mem $7000 = party capacity",			// 0x37
             "Mem $7000 = character @ slot: ",			// 0x38
             "If Mario on top of obj: ",			// 0x39
@@ -669,8 +669,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     sb.Append(GetBits((byte)(esc.Option ^ 0xFF), ButtonNames, 8) + ",  enable: " + GetBits(esc.Option, ButtonNames, 8));
                     break;
                 case 0x36:
-                    a = (esc.EventData[1] & 0x80) == 0x80 ? ", party capacity +1" : "";
-                    sb.Append(CharacterNames[esc.Option & 0x1F] + a);
+                    a = (esc.EventData[1] & 0x80) == 0x80 ? "Add character to party: " : "Remove character from party: ";
+                    sb.Append(a + CharacterNames[esc.Option & 0x1F]);
                     break;
                 case 0x38:
                     sb.Append((esc.Option - 8).ToString());

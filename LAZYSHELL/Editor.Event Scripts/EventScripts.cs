@@ -322,13 +322,14 @@ namespace LAZYSHELL
 
                 // Party Members
                 case 0x36:
-                    labelTitleA.Text = "Add character to party...";
+                    labelTitleA.Text = "Add/remove party member...";
                     labelEvtA.Text = "character";
+                    labelEvtB.Text = "add/remove";
                     evtNameA.Items.AddRange(Lists.CharacterNames); evtNameA.Enabled = true;
-                    evtEffects.Items.AddRange(new string[] { "increment party capacity" }); evtEffects.Enabled = true;
+                    evtNameB.Items.AddRange(new string[] { "remove from party", "add to party" }); evtNameB.Enabled = true;
 
-                    evtNameA.SelectedIndex = esc.Option & 7;
-                    evtEffects.SetItemChecked(0, (esc.Option & 0x80) == 0x80);
+                    evtNameA.SelectedIndex = esc.Option & 0x07;
+                    evtNameB.SelectedIndex = esc.Option >> 7;
                     break;
                 case 0x54:
                     labelTitleA.Text = "Equip item to character...";
@@ -1478,7 +1479,7 @@ namespace LAZYSHELL
                 // Party Members
                 case 0x36:
                     esc.Option = (byte)evtNameA.SelectedIndex;
-                    Bits.SetBit(esc.EventData, 1, 7, evtEffects.GetItemChecked(0));
+                    Bits.SetBit(esc.EventData, 1, 7, evtNameB.SelectedIndex == 1);
                     break;
                 case 0x54:
                     esc.Option = (byte)evtNameA.SelectedIndex;

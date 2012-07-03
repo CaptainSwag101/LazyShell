@@ -440,7 +440,7 @@ namespace LAZYSHELL
             private bool addedToBuffer;
             public bool AddedToBuffer { get { return addedToBuffer; } set { addedToBuffer = value; } }
             private bool gridplane; public bool Gridplane { get { return gridplane; } set { gridplane = value; } }
-            private Tile8x8[] subtiles; public Tile8x8[] Subtiles { get { return this.subtiles; } }
+            private Subtile[] subtiles; public Subtile[] Subtiles { get { return this.subtiles; } }
             // used by assembly only
             private int tileOffset; public int TileOffset { get { return tileOffset; } set { tileOffset = value; } }
 
@@ -474,7 +474,13 @@ namespace LAZYSHELL
 
             public int Width
             {
-                get { return (tileFormat & 2) == 2 ? 32 : 24; }
+                get
+                {
+                    if (gridplane)
+                        return (tileFormat & 2) == 2 ? 32 : 24;
+                    else
+                        return 16;
+                }
                 set
                 {
                     if (value == 24 && Height == 24) tileFormat = 0;
@@ -496,7 +502,13 @@ namespace LAZYSHELL
             }
             public int Height
             {
-                get { return (tileFormat & 1) == 1 ? 32 : 24; }
+                get
+                {
+                    if (gridplane)
+                        return (tileFormat & 1) == 1 ? 32 : 24;
+                    else
+                        return 16;
+                }
                 set
                 {
                     if (value == 24 && Width == 24) tileFormat = 0;
@@ -674,24 +686,24 @@ namespace LAZYSHELL
                         case 2: stop = 12; break;
                         case 3: stop = 16; break;
                     }
-                    subtiles = new Tile8x8[16];
+                    subtiles = new Subtile[16];
                     for (int i = 0; i < stop; i++)
                     {
                         if (subTiles[i] != 0)
-                            subtiles[i] = new Tile8x8(subTiles[i] - 1, graphics, (subTiles[i] - 1) * 0x20, palette, false, false, false, false);
+                            subtiles[i] = new Subtile(subTiles[i] - 1, graphics, (subTiles[i] - 1) * 0x20, palette, false, false, false, false);
                         else
-                            subtiles[i] = new Tile8x8(0, new byte[0x20], 0, new int[16], false, false, false, false);
+                            subtiles[i] = new Subtile(0, new byte[0x20], 0, new int[16], false, false, false, false);
                     }
                 }
                 else
                 {
-                    subtiles = new Tile8x8[4];
+                    subtiles = new Subtile[4];
                     for (int i = 0; i < 4; i++)
                     {
                         if (subTiles[i] != 0)
-                            subtiles[i] = new Tile8x8(subTiles[i] - 1, graphics, (subTiles[i] - 1) * 0x20, palette, false, false, false, false);
+                            subtiles[i] = new Subtile(subTiles[i] - 1, graphics, (subTiles[i] - 1) * 0x20, palette, false, false, false, false);
                         else
-                            subtiles[i] = new Tile8x8(0, new byte[0x20], 0, new int[16], false, false, false, false);
+                            subtiles[i] = new Subtile(0, new byte[0x20], 0, new int[16], false, false, false, false);
                     }
                 }
             }

@@ -25,6 +25,7 @@ namespace LAZYSHELL
         private int currentSwatchColor = Color.FromArgb(248, 248, 248).ToArgb();
         private int count;
         private int startRow;
+        private int max;
         private int currentColor = 0;
         public int CurrentColor
         {
@@ -38,7 +39,15 @@ namespace LAZYSHELL
         }
         private Overlay overlay = new Overlay();
         #endregion
-        public PaletteEditor(Delegate update, PaletteSet paletteSet, int count, int start)
+        /// <summary>
+        /// Loads the palette editor.
+        /// </summary>
+        /// <param name="update">Functiont to execute when updating.</param>
+        /// <param name="paletteSet">The palette set to use.</param>
+        /// <param name="count">The total number of palettes in the set.</param>
+        /// <param name="start">The palette row (index) to start at.</param>
+        /// <param name="max">The maximum number of palettes to show.</param>
+        public PaletteEditor(Delegate update, PaletteSet paletteSet, int count, int start, int max)
         {
             this.update = update;
             this.paletteSetBackup2 = paletteSet.Copy();
@@ -46,11 +55,12 @@ namespace LAZYSHELL
             this.paletteSet = paletteSet;
             this.count = count;
             this.startRow = start;
+            this.max = max;
             this.currentColor = start * 16;
 
             InitializeComponent();
             // create checkbox rows
-            for (int i = 0; i < count - start; i++)
+            for (int i = 0; i < count - start && i < max; i++)
             {
                 CheckBox checkBox = new CheckBox();
                 checkBox.Appearance = Appearance.Button;
@@ -74,8 +84,8 @@ namespace LAZYSHELL
                 this.Controls.Add(checkBox);
             }
 
-            this.pictureBoxPalette.Height = (count * 8) - (start * 8);
-            this.panel7.Height = (count * 8 + 4) - (start * 8);
+            this.pictureBoxPalette.Height = Math.Min((count * 8) - (start * 8), max * 8);
+            this.panel7.Height = Math.Min((count * 8 + 4) - (start * 8), max * 8 + 4);
 
             InitializeColor();
             SetColorMapImage();
@@ -83,7 +93,7 @@ namespace LAZYSHELL
             this.BringToFront();
             new History(this);
         }
-        public void Reload(Delegate update, PaletteSet paletteSet, int count, int start)
+        public void Reload(Delegate update, PaletteSet paletteSet, int count, int start, int max)
         {
             this.update = update;
             this.paletteSetBackup2 = paletteSet.Copy();
@@ -91,9 +101,10 @@ namespace LAZYSHELL
             this.paletteSet = paletteSet;
             this.count = count;
             this.startRow = start;
+            this.max = max;
 
-            this.pictureBoxPalette.Height = (count * 8) - (start * 8);
-            this.panel7.Height = (count * 8 + 4) - (start * 8);
+            this.pictureBoxPalette.Height = Math.Min((count * 8) - (start * 8), max * 8);
+            this.panel7.Height = Math.Min((count * 8 + 4) - (start * 8), max * 8 + 4);
 
             InitializeColor();
             SetColorMapImage();
@@ -195,7 +206,7 @@ namespace LAZYSHELL
         }
         private void DoColorBalance()
         {
-            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -231,7 +242,7 @@ namespace LAZYSHELL
             else
                 rgbB = paletteSet.Blues;
 
-            for (int i = startRow * 16, o = 0; i < rgbA.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < rgbA.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -259,7 +270,7 @@ namespace LAZYSHELL
             else
                 rgbB = paletteSet.Blues;
 
-            for (int i = startRow * 16, o = 0; i < rgbA.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < rgbA.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -271,7 +282,7 @@ namespace LAZYSHELL
         {
             if (greyscale.Checked)
             {
-                for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+                for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
                 {
                     if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                         continue;
@@ -290,7 +301,7 @@ namespace LAZYSHELL
         {
             if (negative.Checked)
             {
-                for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+                for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
                 {
                     if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                         continue;
@@ -303,7 +314,7 @@ namespace LAZYSHELL
         private void DoBrightness()
         {
             if (brightness.Value == 0) return;
-            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -319,7 +330,7 @@ namespace LAZYSHELL
         {
             if (this.contrast.Value == 0) return;
             double contrast = ((double)this.contrast.Value + 100) / 100.0;
-            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -339,7 +350,7 @@ namespace LAZYSHELL
         private void DoThreshold()
         {
             if (!thresholdApply.Checked) return;
-            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -361,7 +372,7 @@ namespace LAZYSHELL
 
             double h = (double)colorizeHue.Value / 255.0;
             double s = (double)colorizeSaturation.Value / 255.0;
-            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length; i++, o++)
+            for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
                     continue;
@@ -948,11 +959,11 @@ namespace LAZYSHELL
                     else
                         br.ReadBytes((int)fs.Length).CopyTo(buffer, 0);
 
-                    for (int i = 0; i < paletteSet.Reds.Length; i++) // 16 colors in palette
+                    for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++) // 16 colors in palette
                     {
-                        paletteSet.Reds[i] = buffer[(i * 4) + 1 + 0x17];
-                        paletteSet.Greens[i] = buffer[(i * 4) + 2 + 0x17];
-                        paletteSet.Blues[i] = buffer[(i * 4) + 3 + 0x17];
+                        paletteSet.Reds[i] = buffer[(o * 4) + 1 + 0x17];
+                        paletteSet.Greens[i] = buffer[(o * 4) + 2 + 0x17];
+                        paletteSet.Blues[i] = buffer[(o * 4) + 3 + 0x17];
                     }
                 }
                 else
@@ -963,9 +974,9 @@ namespace LAZYSHELL
                         br.ReadBytes((int)fs.Length).CopyTo(buffer, 0);
 
                     ushort color = 0;
-                    for (int i = 0; i < paletteSet.Reds.Length; i++) // 16 colors in palette
+                    for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++) // 16 colors in palette
                     {
-                        color = Bits.GetShort(buffer, (i * 2));
+                        color = Bits.GetShort(buffer, (o * 2));
 
                         paletteSet.Reds[i] = (byte)((color % 0x20) * 8);
                         paletteSet.Greens[i] = (byte)(((color >> 5) % 0x20) * 8);
@@ -1010,11 +1021,11 @@ namespace LAZYSHELL
 
                     Bits.SetShort(buffer, 0x10, 448 + 3);
 
-                    for (int i = 0; i < paletteSet.Reds.Length; i++) // 16 colors in palette
+                    for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++) // 16 colors in palette
                     {
-                        buffer[(i * 4) + 1 + 0x17] = (byte)paletteSet.Reds[i];
-                        buffer[(i * 4) + 2 + 0x17] = (byte)paletteSet.Greens[i];
-                        buffer[(i * 4) + 3 + 0x17] = (byte)paletteSet.Blues[i];
+                        buffer[(o * 4) + 1 + 0x17] = (byte)paletteSet.Reds[i];
+                        buffer[(o * 4) + 2 + 0x17] = (byte)paletteSet.Greens[i];
+                        buffer[(o * 4) + 3 + 0x17] = (byte)paletteSet.Blues[i];
                     }
 
                     fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.ReadWrite);
@@ -1028,13 +1039,13 @@ namespace LAZYSHELL
                     ushort color = 0;
                     int r, g, b;
 
-                    for (int i = 0; i < paletteSet.Reds.Length; i++) // 16 colors in palette
+                    for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++) // 16 colors in palette
                     {
                         r = (int)(paletteSet.Reds[i] / 8);
                         g = (int)(paletteSet.Greens[i] / 8);
                         b = (int)(paletteSet.Blues[i] / 8);
                         color = (ushort)((b << 10) | (g << 5) | r);
-                        Bits.SetShort(buffer, (i * 2), color);
+                        Bits.SetShort(buffer, (o * 2), color);
                     }
 
                     fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.ReadWrite);

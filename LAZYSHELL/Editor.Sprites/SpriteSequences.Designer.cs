@@ -42,6 +42,8 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.moveSequenceBack = new System.Windows.Forms.ToolStripButton();
             this.moveSeqeuenceFoward = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.sequenceActive = new LAZYSHELL.ToolStripCheckBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -172,7 +174,9 @@
             this.duplicateSequence,
             this.toolStripSeparator3,
             this.moveSequenceBack,
-            this.moveSeqeuenceFoward});
+            this.moveSeqeuenceFoward,
+            this.toolStripSeparator6,
+            this.sequenceActive});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -236,6 +240,19 @@
             this.moveSeqeuenceFoward.Size = new System.Drawing.Size(23, 22);
             this.moveSeqeuenceFoward.Text = "Shift Foward";
             this.moveSeqeuenceFoward.Click += new System.EventHandler(this.moveSeqeuenceFoward_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
+            // sequenceActive
+            // 
+            this.sequenceActive.Checked = false;
+            this.sequenceActive.Name = "sequenceActive";
+            this.sequenceActive.Size = new System.Drawing.Size(56, 22);
+            this.sequenceActive.Text = "Active";
+            this.sequenceActive.CheckedChanged += new System.EventHandler(this.sequenceActive_CheckedChanged);
             // 
             // toolStrip1
             // 
@@ -522,5 +539,7 @@
         private System.Windows.Forms.ToolStripButton reverseFrames;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private LAZYSHELL.ToolStripCheckBox infinitePlayback;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private ToolStripCheckBox sequenceActive;
     }
 }

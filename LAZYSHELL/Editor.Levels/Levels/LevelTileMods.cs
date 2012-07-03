@@ -70,8 +70,8 @@ namespace LAZYSHELL
         public bool Set { get { return mod.Set; } set { mod.Set = value; } }
         public byte[][] TilemapsA { get { return mod.TilemapsA; } set { mod.TilemapsA = value; } }
         public byte[][] TilemapsB { get { return mod.TilemapsB; } set { mod.TilemapsB = value; } }
-        public TileMap TilemapA { get { return mod.TilemapA; } set { mod.TilemapA = value; } }
-        public TileMap TilemapB { get { return mod.TilemapB; } set { mod.TilemapB = value; } }
+        public LevelTilemap TilemapA { get { return mod.TilemapA; } set { mod.TilemapA = value; } }
+        public LevelTilemap TilemapB { get { return mod.TilemapB; } set { mod.TilemapB = value; } }
         public void UpdateTilemaps()
         {
             foreach (Mod mod in mods)
@@ -159,9 +159,9 @@ namespace LAZYSHELL
         {
             foreach (Mod mod in mods)
             {
-                mod.TilemapA.RedrawTileMap();
+                mod.TilemapA.RedrawTilemaps();
                 if (mod.Set)
-                    mod.TilemapB.RedrawTileMap();
+                    mod.TilemapB.RedrawTilemaps();
             }
             ClearImages();
         }
@@ -169,12 +169,12 @@ namespace LAZYSHELL
         {
             mods.Reverse(index, 2);
         }
-        public void Insert(int index, Point p, Level level, TileSet tileset)
+        public void Insert(int index, Point p, Level level, Tileset tileset)
         {
             Mod m = new Mod();
             m.X = (byte)p.X;
             m.Y = (byte)p.Y;
-            m.TilemapA = new TileMap(level, tileset, m, false);
+            m.TilemapA = new LevelTilemap(level, tileset, m, false);
             if (index < mods.Count)
                 mods.Insert(index, m);
             else
@@ -191,11 +191,11 @@ namespace LAZYSHELL
         public class Mod
         {
             [NonSerialized()]
-            private TileMap tilemapA;
-            public TileMap TilemapA { get { return tilemapA; } set { tilemapA = value; } }
+            private LevelTilemap tilemapA;
+            public LevelTilemap TilemapA { get { return tilemapA; } set { tilemapA = value; } }
             [NonSerialized()]
-            private TileMap tilemapB;
-            public TileMap TilemapB { get { return tilemapB; } set { tilemapB = value; } }
+            private LevelTilemap tilemapB;
+            public LevelTilemap TilemapB { get { return tilemapB; } set { tilemapB = value; } }
             [NonSerialized()]
             private Bitmap imageA;
             public Bitmap ImageA
@@ -203,7 +203,7 @@ namespace LAZYSHELL
                 get
                 {
                     if (imageA == null && tilemapA != null)
-                        imageA = Do.PixelsToImage(tilemapA.Mainscreen, width * 16, height * 16);
+                        imageA = Do.PixelsToImage(tilemapA.Pixels, width * 16, height * 16);
                     return imageA;
                 }
                 set { imageA = value; }
@@ -215,7 +215,7 @@ namespace LAZYSHELL
                 get
                 {
                     if (imageB == null && tilemapB != null)
-                        imageB = Do.PixelsToImage(tilemapB.Mainscreen, width * 16, height * 16);
+                        imageB = Do.PixelsToImage(tilemapB.Pixels, width * 16, height * 16);
                     return imageB;
                 }
                 set { imageB = value; }
@@ -516,9 +516,9 @@ namespace LAZYSHELL
                         {
                             if (layer < 2)
                             {
-                                tilemapsA[layer][y * width + x] = tilemapA.TileMaps[layer][y * width + x];
+                                tilemapsA[layer][y * width + x] = tilemapA.Tilemaps_Bytes[layer][y * width + x];
                                 if (set)
-                                    tilemapsB[layer][y * width + x] = tilemapB.TileMaps[layer][y * width + x];
+                                    tilemapsB[layer][y * width + x] = tilemapB.Tilemaps_Bytes[layer][y * width + x];
                             }
                         }
                     }
@@ -577,7 +577,7 @@ namespace LAZYSHELL
                     return length;
                 }
             }
-            public Mod Copy(Level level, TileSet tileset)
+            public Mod Copy(Level level, Tileset tileset)
             {
                 Mod copy = new Mod();
                 copy.B0b7 = b0b7;
@@ -589,13 +589,13 @@ namespace LAZYSHELL
                 copy.TilemapsA[0] = Bits.Copy(tilemapsA[0]);
                 copy.TilemapsA[1] = Bits.Copy(tilemapsA[1]);
                 copy.TilemapsA[2] = Bits.Copy(tilemapsA[2]);
-                copy.TilemapA = new TileMap(level, tileset, this, false);
+                copy.TilemapA = new LevelTilemap(level, tileset, this, false);
                 if (this.set)
                 {
                     copy.TilemapsB[0] = Bits.Copy(tilemapsB[0]);
                     copy.TilemapsB[1] = Bits.Copy(tilemapsB[1]);
                     copy.TilemapsB[2] = Bits.Copy(tilemapsB[2]);
-                    copy.TilemapB = new TileMap(level, tileset, this, true);
+                    copy.TilemapB = new LevelTilemap(level, tileset, this, true);
                 }
                 copy.Width = width;
                 copy.X = x;

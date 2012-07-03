@@ -34,7 +34,7 @@ namespace LAZYSHELL
             this.settings.KeystrokesMenu[0x20] = "\x20";
             this.settings.KeystrokesDesc[0x20] = "\x20";
             InitializeComponent();
-            itemName.BackgroundImage = Model.MenuBackground;
+            itemName.BackgroundImage = Model.MenuBG;
             InitializeStrings();
             RefreshItems();
             if (settings.RememberLastIndex)
@@ -72,12 +72,12 @@ namespace LAZYSHELL
             if (this.itemNum.Value > 0xB0)
             {
                 this.textBoxItemDescription.Text = " This item[1] cannot have a[1] description";
-                this.panelItemDesc.Enabled = false;
+                this.groupBox11.Enabled = false;
             }
             else
             {
                 this.textBoxItemDescription.Text = item.GetDescription(textCodeFormat);
-                this.panelItemDesc.Enabled = true;
+                this.groupBox11.Enabled = true;
             }
             this.itemStatusEffect.SetItemChecked(0, item.EffectMute);
             this.itemStatusEffect.SetItemChecked(1, item.EffectSleep);
@@ -123,7 +123,7 @@ namespace LAZYSHELL
             this.itemCursor.SelectedIndex = item.CursorBehavior;
             UpdateAttackType();
             // timing
-            panel1.Visible = index < 37;
+            groupBox11.Visible = index < 37;
             if (index < 37)
             {
                 this.lvl1TimingStart.Value = item.WeaponStartLevel1;
@@ -138,23 +138,23 @@ namespace LAZYSHELL
         {
             if (item.AttackType == 0)
             {
-                this.label101.Text = "EFFECT <INFLICT>";
-                this.label99.Text = "STATUS <UP>";
+                this.groupBox3.Text = "Effect <INFLICT>";
+                this.groupBox9.Text = "Status <UP>";
             }
             else if (item.AttackType == 1)
             {
-                this.label101.Text = "EFFECT <PROTECT>";
-                this.label99.Text = "STATUS <. . . .>";
+                this.groupBox3.Text = "Effect <PROTECT>";
+                this.groupBox9.Text = "Status <. . . .>";
             }
             else if (item.AttackType == 2)
             {
-                this.label101.Text = "EFFECT <NULLIFY>";
-                this.label99.Text = "STATUS <DOWN>";
+                this.groupBox3.Text = "Effect <NULLIFY>";
+                this.groupBox9.Text = "Status <DOWN>";
             }
             else if (item.AttackType == 3)
             {
-                this.label101.Text = "EFFECT <. . . .>";
-                this.label99.Text = "STATUS <. . . .>";
+                this.groupBox3.Text = "Effect <. . . .>";
+                this.groupBox9.Text = "Status <. . . .>";
             }
         }
         private void SetDescriptionImage()
@@ -162,22 +162,22 @@ namespace LAZYSHELL
             if (item.ItemType == 3)
             {
                 int[] pixels = menuDescPreview.GetPreview(
-                    Model.FontDescription, Model.FontPaletteMenu.Palette,
+                    Model.FontDescription, Model.FontPaletteMenu.Palettes[0],
                     item.RawDescription,
                     new Size(120, 48), new Point(8, 8), 4);
                 descriptionText = new Bitmap(Do.PixelsToImage(pixels, 120, 48));
                 descriptionFrame = Do.PixelsToImage(
-                    Do.DrawMenuFrame(new Size(15, 6), Model.MenuFrame, Model.MenuFramePalette.Palette), 120, 48);
+                    Do.DrawMenuFrame(new Size(15, 6), Model.MenuFrameGraphics, Model.MenuFramePalette.Palette), 120, 48);
             }
             else
             {
                 int[] pixels = menuDescPreview.GetPreview(
-                    Model.FontDescription, Model.FontPaletteMenu.Palette,
+                    Model.FontDescription, Model.FontPaletteMenu.Palettes[0],
                     item.RawDescription,
                     new Size(136, 64), new Point(16, 16), 4);
                 descriptionText = new Bitmap(Do.PixelsToImage(pixels, 136, 64));
                 descriptionFrame = Do.PixelsToImage(
-                    Do.DrawMenuFrame(new Size(17, 8), Model.MenuFrame, Model.MenuFramePalette.Palette), 136, 64);
+                    Do.DrawMenuFrame(new Size(17, 8), Model.MenuFrameGraphics, Model.MenuFramePalette.Palette), 136, 64);
             }
             pictureBoxItemDesc.Invalidate();
         }
@@ -378,7 +378,7 @@ namespace LAZYSHELL
                 "The Level 1 timing range is when the player is able to \n" +
                 "increase the damage (for weapons) or decrease the \n" +
                 "damage (for defense) by 50% by pressing an ABXY button.");
-            toolTip1.SetToolTip(this.numericUpDown118,
+            toolTip1.SetToolTip(this.lvl1TimingStart,
                 toolTip1.GetToolTip(this.lvl1TimingStart));
             toolTip1.SetToolTip(this.lvl2TimingStart,
                 "For WEAPONS:\n" +
@@ -402,7 +402,7 @@ namespace LAZYSHELL
                 "increase the damage (for weapons) or decrease the \n" +
                 "damage (for defense) by 100% (ie. 0 damage) by pressing \n" +
                 "an ABXY button.");
-            toolTip1.SetToolTip(this.numericUpDown120,
+            toolTip1.SetToolTip(this.lvl2TimingStart,
                 toolTip1.GetToolTip(this.lvl2TimingStart));
             toolTip1.SetToolTip(this.lvl2TimingEnd,
                 "For WEAPONS:\n" +
@@ -427,7 +427,7 @@ namespace LAZYSHELL
                 "increase the damage (for weapons) or decrease the \n" +
                 "damage (for defense) by 100% (ie. 0 damage) by pressing \n" +
                 "an ABXY button.");
-            toolTip1.SetToolTip(this.numericUpDown117,
+            toolTip1.SetToolTip(this.lvl2TimingEnd,
                 toolTip1.GetToolTip(this.lvl2TimingEnd));
             toolTip1.SetToolTip(this.lvl1TimingEnd,
                 "For WEAPONS:\n" +
@@ -451,7 +451,7 @@ namespace LAZYSHELL
                 "The Level 1 timing range is when the player is able to \n" +
                 "increase the damage (for weapons) or decrease the \n" +
                 "damage (for defense) by 50% by pressing an ABXY button.");
-            toolTip1.SetToolTip(this.numericUpDown119,
+            toolTip1.SetToolTip(this.lvl1TimingEnd,
                 toolTip1.GetToolTip(this.lvl1TimingEnd));
         }
         #endregion
@@ -470,7 +470,7 @@ namespace LAZYSHELL
             if (e.Index < 0) return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
-                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
+                Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
         }
         private void textBoxItemName_TextChanged(object sender, EventArgs e)
         {
@@ -507,7 +507,7 @@ namespace LAZYSHELL
         }
         private void itemNameIcon_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Do.DrawIcon(sender, e, new MenuTextPreview(), 32, Model.FontMenu, Model.FontPaletteMenu.Palette, false, Model.MenuBackground_);
+            Do.DrawIcon(sender, e, new MenuTextPreview(), 32, Model.FontMenu, Model.FontPaletteMenu.Palettes[0], false, Model.MenuBG_);
         }
         private void itemCoinValue_ValueChanged(object sender, EventArgs e)
         {
@@ -661,7 +661,7 @@ namespace LAZYSHELL
         }
         private void pictureBoxItemDesc_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(Model.MenuBackground, 0, 0);
+            e.Graphics.DrawImage(Model.MenuBG, 0, 0);
             if (descriptionText == null)
                 SetDescriptionImage();
             e.Graphics.DrawImage(descriptionText, 0, 0);
@@ -690,39 +690,19 @@ namespace LAZYSHELL
         // defense timing
         private void numericUpDown118_ValueChanged(object sender, EventArgs e)
         {
-            item.WeaponStartLevel1 = (byte)this.numericUpDown118.Value;
-            this.lvl1TimingStart.Value = (int)this.numericUpDown118.Value;
-        }
-        private void lvl1TimingStart_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown118.Value = this.lvl1TimingStart.Value;
+            item.WeaponStartLevel1 = (byte)this.lvl1TimingStart.Value;
         }
         private void numericUpDown120_ValueChanged(object sender, EventArgs e)
         {
-            item.WeaponStartLevel2 = (byte)this.numericUpDown120.Value;
-            this.lvl2TimingStart.Value = (int)this.numericUpDown120.Value;
-        }
-        private void lvl2TimingStart_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown120.Value = this.lvl2TimingStart.Value;
+            item.WeaponStartLevel2 = (byte)this.lvl2TimingStart.Value;
         }
         private void numericUpDown117_ValueChanged(object sender, EventArgs e)
         {
-            item.WeaponEndLevel2 = (byte)this.numericUpDown117.Value;
-            this.lvl2TimingEnd.Value = (int)this.numericUpDown117.Value;
-        }
-        private void lvl2TimingEnd_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown117.Value = this.lvl2TimingEnd.Value;
+            item.WeaponEndLevel2 = (byte)this.lvl2TimingEnd.Value;
         }
         private void numericUpDown119_ValueChanged(object sender, EventArgs e)
         {
-            item.WeaponEndLevel1 = (byte)this.numericUpDown119.Value;
-            this.lvl1TimingEnd.Value = (int)this.numericUpDown119.Value;
-        }
-        private void lvl1TimingEnd_ValueChanged(object sender, EventArgs e)
-        {
-            this.numericUpDown119.Value = this.lvl1TimingEnd.Value;
+            item.WeaponEndLevel1 = (byte)this.lvl1TimingEnd.Value;
         }
         #endregion
     }

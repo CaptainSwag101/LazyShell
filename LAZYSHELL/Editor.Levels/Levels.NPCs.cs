@@ -16,10 +16,9 @@ namespace LAZYSHELL
         public NumericUpDown NpcYCoord { get { return npcY; } set { npcY = value; } }
         public TreeView NpcObjectTree { get { return npcObjectTree; } set { npcObjectTree = value; } }
         private NPCEditor findNPCNumber;
-        private Form sp;
+        private SpritePartitions sp;
         #endregion
         #region Methods
-
         private void InitializeNPCProperties()
         {
             updatingProperties = true;
@@ -599,7 +598,7 @@ namespace LAZYSHELL
                     npcObjectTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.",
+                    MessageBox.Show("Could not insert any more NPCs. The maximum number of NPCs plus NPC clones allowed is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -650,7 +649,7 @@ namespace LAZYSHELL
                     npcObjectTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.",
+                    MessageBox.Show("Could not insert any more NPCs. The maximum number of NPCs plus NPC clones allowed is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -695,7 +694,7 @@ namespace LAZYSHELL
                     npcObjectTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.",
+                    MessageBox.Show("Could not insert any more NPCs. The maximum number of NPCs plus NPC clones allowed is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -746,7 +745,7 @@ namespace LAZYSHELL
                     npcObjectTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more NPCs. The maximum number of NPCs plus instance NPCs allowed is 28.",
+                    MessageBox.Show("Could not insert any more NPCs. The maximum number of NPCs plus NPC clones allowed is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -755,7 +754,6 @@ namespace LAZYSHELL
         }
         #endregion
         #region Event Handlers
-
         private void npcObjectTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (updatingProperties) return;
@@ -858,9 +856,12 @@ namespace LAZYSHELL
         private void openPartitions_Click(object sender, System.EventArgs e)
         {
             if (sp != null && sp.Visible)
+            {
+                sp.Reload((int)npcs.MapHeader);
                 sp.BringToFront();
+            }
             else
-                sp = new SpritePartitions(this, npcSpritePartitions);
+                sp = new SpritePartitions(this, npcSpritePartitions, (int)npcs.MapHeader);
             sp.Show();
         }
         private void findNPCNum_Click(object sender, EventArgs e)
@@ -1181,11 +1182,9 @@ namespace LAZYSHELL
         private void npcMoveUp_Click(object sender, EventArgs e)
         {
             if (this.npcObjectTree.SelectedNode == null) return;
-
             int reselectP = 0;
             int reselectC = 0;
             bool instanceSelected = false;
-
             if (this.npcObjectTree.SelectedNode.Parent != null && npcs.CurrentInstance > 0)
             {
                 instanceSelected = true;
@@ -1199,9 +1198,7 @@ namespace LAZYSHELL
                 npcs.ReverseNPC(npcs.CurrentNPC - 1);
             }
             else return;
-
             this.npcObjectTree.BeginUpdate();
-
             this.npcObjectTree.Nodes.Clear();
             for (int i = 0, a = 0; i < npcs.Count; i++, a++)
             {
@@ -1211,15 +1208,15 @@ namespace LAZYSHELL
                 for (int j = 0; j < npcs.InstanceAmount; j++, a++)
                     this.npcObjectTree.Nodes[i].Nodes.Add(new TreeNode("NPC #" + (a + 1).ToString()));
             }
-
             this.npcObjectTree.ExpandAll();
-
             if (instanceSelected)
                 this.npcObjectTree.SelectedNode = this.npcObjectTree.Nodes[reselectP].Nodes[reselectC];
             else
                 this.npcObjectTree.SelectedNode = this.npcObjectTree.Nodes[reselectP];
-
             this.npcObjectTree.EndUpdate();
+            //
+            overlay.NPCImages = null;
+            picture.Invalidate();
         }
         private void npcMoveDown_Click(object sender, EventArgs e)
         {
@@ -1228,7 +1225,6 @@ namespace LAZYSHELL
             int reselectP = 0;
             int reselectC = 0;
             bool instanceSelected = false;
-
             if (this.npcObjectTree.SelectedNode.Parent != null && npcs.CurrentInstance < npcs.InstanceCount - 1)
             {
                 instanceSelected = true;
@@ -1242,9 +1238,7 @@ namespace LAZYSHELL
                 npcs.ReverseNPC(npcs.CurrentNPC);
             }
             else return;
-
             this.npcObjectTree.BeginUpdate();
-
             this.npcObjectTree.Nodes.Clear();
             for (int i = 0, a = 0; i < npcs.Count; i++, a++)
             {
@@ -1254,15 +1248,15 @@ namespace LAZYSHELL
                 for (int j = 0; j < npcs.InstanceAmount; j++, a++)
                     this.npcObjectTree.Nodes[i].Nodes.Add(new TreeNode("NPC #" + (a + 1).ToString()));
             }
-
             this.npcObjectTree.ExpandAll();
-
             if (instanceSelected)
                 this.npcObjectTree.SelectedNode = this.npcObjectTree.Nodes[reselectP].Nodes[reselectC];
             else
                 this.npcObjectTree.SelectedNode = this.npcObjectTree.Nodes[reselectP];
-
             this.npcObjectTree.EndUpdate();
+            //
+            overlay.NPCImages = null;
+            picture.Invalidate();
         }
         private void npcCopy_Click(object sender, EventArgs e)
         {
@@ -1288,7 +1282,7 @@ namespace LAZYSHELL
             }
             catch //(Exception ex)
             {
-                MessageBox.Show("Cannot paste an NPC into another NPC's instance collection.",
+                MessageBox.Show("Cannot paste an NPC into another NPC's clone collection.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //new NewExceptionForm(ex).ShowDialog();
             }
@@ -1328,7 +1322,6 @@ namespace LAZYSHELL
 
             npcs.AfterBattle = (byte)npcAfterBattle.SelectedIndex;
         }
-
         #endregion
     }
 }

@@ -45,7 +45,7 @@
             this.radioButtonCurrent.Size = new System.Drawing.Size(364, 17);
             this.radioButtonCurrent.TabIndex = 0;
             this.radioButtonCurrent.TabStop = true;
-            this.radioButtonCurrent.Text = "Current element as single file...";
+            this.radioButtonCurrent.Text = "Current index as single file...";
             this.radioButtonCurrent.UseVisualStyleBackColor = true;
             this.radioButtonCurrent.CheckedChanged += new System.EventHandler(this.radioButtonCurrent_CheckedChanged);
             // 
@@ -56,7 +56,7 @@
             this.radioButtonAll.Size = new System.Drawing.Size(364, 17);
             this.radioButtonAll.TabIndex = 1;
             this.radioButtonAll.TabStop = true;
-            this.radioButtonAll.Text = "All elements as directory of files...";
+            this.radioButtonAll.Text = "All indexes as directory of files...";
             this.radioButtonAll.UseVisualStyleBackColor = true;
             this.radioButtonAll.CheckedChanged += new System.EventHandler(this.radioButtonAll_CheckedChanged);
             // 

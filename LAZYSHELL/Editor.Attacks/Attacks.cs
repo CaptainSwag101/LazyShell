@@ -131,7 +131,7 @@ namespace LAZYSHELL
             if (e.Index < 0) return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.AttackNames, Model.FontDialogue,
-                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, true, Model.MenuBackground_);
+                Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, true, Model.MenuBG_);
         }
         private void textBoxAttackName_TextChanged(object sender, EventArgs e)
         {

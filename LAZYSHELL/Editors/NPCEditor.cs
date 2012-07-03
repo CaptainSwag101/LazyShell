@@ -57,24 +57,21 @@ namespace LAZYSHELL
             this.axisObtuse.Value = npcProperty.ObtuseAxis;
             this.height.Value = npcProperty.Height;
 
+            this.showShadow.Checked = npcProperty.ShowShadow;
             this.shadow.SelectedIndex = npcProperty.Shadow;
+            this.cannotClone.Checked = npcProperty.ActiveVRAM;
 
-            this.unknownBits.SetItemChecked(0, npcProperty.B1b2);
-            this.unknownBits.SetItemChecked(1, npcProperty.B1b3);
-            this.unknownBits.SetItemChecked(2, npcProperty.B1b4);
-            this.unknownBits.SetItemChecked(3, npcProperty.B1b5);
-            this.unknownBits.SetItemChecked(4, npcProperty.B1b6);
-            this.unknownBits.SetItemChecked(5, npcProperty.B1b7);
-            this.unknownBits.SetItemChecked(6, npcProperty.B2b0);
-            this.unknownBits.SetItemChecked(7, npcProperty.B2b1);
-            this.unknownBits.SetItemChecked(8, npcProperty.B2b2);
-            this.unknownBits.SetItemChecked(9, npcProperty.B2b3);
-            this.unknownBits.SetItemChecked(10, npcProperty.B2b4);
-            this.unknownBits.SetItemChecked(11, npcProperty.B3b7);
-            this.unknownBits.SetItemChecked(12, npcProperty.B5b5);
-            this.unknownBits.SetItemChecked(13, npcProperty.B5b6);
-            this.unknownBits.SetItemChecked(14, npcProperty.B5b7);
-            this.unknownBits.SetItemChecked(15, npcProperty.B6b2);
+            this.byte1a.SelectedIndex = npcProperty.Byte1a;
+            this.byte1b.Value = npcProperty.Byte1b;
+
+            this.unknownBits.SetItemChecked(0, npcProperty.B2b0);
+            this.unknownBits.SetItemChecked(1, npcProperty.B2b1);
+            this.unknownBits.SetItemChecked(2, npcProperty.B2b2);
+            this.unknownBits.SetItemChecked(3, npcProperty.B2b3);
+            this.unknownBits.SetItemChecked(4, npcProperty.B2b4);
+            this.unknownBits.SetItemChecked(5, npcProperty.B5b6);
+            this.unknownBits.SetItemChecked(6, npcProperty.B5b7);
+            this.unknownBits.SetItemChecked(7, npcProperty.B6b2);
 
             SetSpriteImage();
 
@@ -127,9 +124,21 @@ namespace LAZYSHELL
             if (updating) return;
             SetSpriteImage();
         }
+        private void editSprite_Click(object sender, EventArgs e)
+        {
+            if (Model.Program.Sprites == null || !Model.Program.Sprites.Visible)
+                Model.Program.CreateSpritesWindow();
+
+            Model.Program.Sprites.index = (int)spriteNum.Value;
+            Model.Program.Sprites.BringToFront();
+        }
         private void layerPriority_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
+        }
+        private void showShadow_CheckedChanged(object sender, EventArgs e)
+        {
+            showShadow.ForeColor = showShadow.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
         }
         private void yPixelShift_ValueChanged(object sender, EventArgs e)
         {
@@ -150,6 +159,10 @@ namespace LAZYSHELL
         private void shadow_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
+        }
+        private void cannotClone_CheckedChanged(object sender, EventArgs e)
+        {
+            cannotClone.ForeColor = cannotClone.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
         }
         private void unknownBits_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -191,23 +204,19 @@ namespace LAZYSHELL
             npcProperty.AcuteAxis = (byte)axisAcute.Value;
             npcProperty.ObtuseAxis = (byte)axisObtuse.Value;
             npcProperty.Height = (byte)height.Value;
+            npcProperty.ShowShadow = showShadow.Checked;
             npcProperty.Shadow = (byte)shadow.SelectedIndex;
-            npcProperty.B1b2 = unknownBits.GetItemChecked(0);
-            npcProperty.B1b3 = unknownBits.GetItemChecked(1);
-            npcProperty.B1b4 = unknownBits.GetItemChecked(2);
-            npcProperty.B1b5 = unknownBits.GetItemChecked(3);
-            npcProperty.B1b6 = unknownBits.GetItemChecked(4);
-            npcProperty.B1b7 = unknownBits.GetItemChecked(5);
-            npcProperty.B2b0 = unknownBits.GetItemChecked(6);
-            npcProperty.B2b1 = unknownBits.GetItemChecked(7);
-            npcProperty.B2b2 = unknownBits.GetItemChecked(8);
-            npcProperty.B2b3 = unknownBits.GetItemChecked(9);
-            npcProperty.B2b4 = unknownBits.GetItemChecked(10);
-            npcProperty.B3b7 = unknownBits.GetItemChecked(11);
-            npcProperty.B5b5 = unknownBits.GetItemChecked(12);
-            npcProperty.B5b6 = unknownBits.GetItemChecked(13);
-            npcProperty.B5b7 = unknownBits.GetItemChecked(14);
-            npcProperty.B6b2 = unknownBits.GetItemChecked(15);
+            npcProperty.ActiveVRAM = cannotClone.Checked;
+            npcProperty.Byte1a = (byte)byte1a.SelectedIndex;
+            npcProperty.Byte1b = (byte)byte1b.Value;
+            npcProperty.B2b0 = unknownBits.GetItemChecked(0);
+            npcProperty.B2b1 = unknownBits.GetItemChecked(1);
+            npcProperty.B2b2 = unknownBits.GetItemChecked(2);
+            npcProperty.B2b3 = unknownBits.GetItemChecked(3);
+            npcProperty.B2b4 = unknownBits.GetItemChecked(4);
+            npcProperty.B5b6 = unknownBits.GetItemChecked(5);
+            npcProperty.B5b7 = unknownBits.GetItemChecked(6);
+            npcProperty.B6b2 = unknownBits.GetItemChecked(7);
             level.overlay.NPCImages = null;
             level.picture.Invalidate();
         }

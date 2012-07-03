@@ -42,16 +42,13 @@ namespace LAZYSHELL.Patches
             this.GameHackLabel = new System.Windows.Forms.Label();
             this.AssemblyHackLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePictureBox)).BeginInit();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // ImagePictureBox
             // 
-            this.ImagePictureBox.BackColor = System.Drawing.SystemColors.Control;
+            this.ImagePictureBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.ImagePictureBox.Location = new System.Drawing.Point(0, 0);
             this.ImagePictureBox.Name = "ImagePictureBox";
             this.ImagePictureBox.Size = new System.Drawing.Size(256, 224);
@@ -65,7 +62,7 @@ namespace LAZYSHELL.Patches
             this.PatchListBox.IntegralHeight = false;
             this.PatchListBox.Location = new System.Drawing.Point(12, 12);
             this.PatchListBox.Name = "PatchListBox";
-            this.PatchListBox.Size = new System.Drawing.Size(147, 253);
+            this.PatchListBox.Size = new System.Drawing.Size(147, 265);
             this.PatchListBox.TabIndex = 3;
             this.PatchListBox.SelectedIndexChanged += new System.EventHandler(this.PatchListBox_SelectedIndexChanged);
             // 
@@ -90,7 +87,7 @@ namespace LAZYSHELL.Patches
             this.DescriptionTextBox.Location = new System.Drawing.Point(165, 12);
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.ReadOnly = true;
-            this.DescriptionTextBox.Size = new System.Drawing.Size(300, 253);
+            this.DescriptionTextBox.Size = new System.Drawing.Size(300, 270);
             this.DescriptionTextBox.TabIndex = 6;
             this.DescriptionTextBox.Text = "";
             this.DescriptionTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.DescriptionTextBox_LinkClicked);
@@ -113,7 +110,7 @@ namespace LAZYSHELL.Patches
             // 
             // applyButton
             // 
-            this.applyButton.Location = new System.Drawing.Point(12, 271);
+            this.applyButton.Location = new System.Drawing.Point(12, 283);
             this.applyButton.Name = "applyButton";
             this.applyButton.Size = new System.Drawing.Size(147, 23);
             this.applyButton.TabIndex = 391;
@@ -128,106 +125,66 @@ namespace LAZYSHELL.Patches
             this.downloadingLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.downloadingLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.downloadingLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.downloadingLabel.Location = new System.Drawing.Point(165, 272);
+            this.downloadingLabel.Location = new System.Drawing.Point(165, 285);
             this.downloadingLabel.Name = "downloadingLabel";
-            this.downloadingLabel.Size = new System.Drawing.Size(300, 23);
+            this.downloadingLabel.Size = new System.Drawing.Size(300, 21);
             this.downloadingLabel.TabIndex = 396;
             this.downloadingLabel.Text = "              ...INITIALIZING...              ";
             this.downloadingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FreshRomLabel
             // 
-            this.FreshRomLabel.AutoSize = true;
-            this.FreshRomLabel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.FreshRomLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FreshRomLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FreshRomLabel.Location = new System.Drawing.Point(10, 263);
+            this.FreshRomLabel.Location = new System.Drawing.Point(471, 285);
             this.FreshRomLabel.Name = "FreshRomLabel";
-            this.FreshRomLabel.Size = new System.Drawing.Size(238, 15);
+            this.FreshRomLabel.Size = new System.Drawing.Size(260, 21);
             this.FreshRomLabel.TabIndex = 395;
             this.FreshRomLabel.Text = "This hack must be applied to a fresh rom";
+            this.FreshRomLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GameHackLabel
             // 
-            this.GameHackLabel.AutoSize = true;
-            this.GameHackLabel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.GameHackLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.GameHackLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GameHackLabel.Location = new System.Drawing.Point(92, 245);
+            this.GameHackLabel.Location = new System.Drawing.Point(471, 264);
             this.GameHackLabel.Name = "GameHackLabel";
-            this.GameHackLabel.Size = new System.Drawing.Size(73, 15);
+            this.GameHackLabel.Size = new System.Drawing.Size(260, 21);
             this.GameHackLabel.TabIndex = 394;
             this.GameHackLabel.Text = "Game Hack";
+            this.GameHackLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AssemblyHackLabel
             // 
-            this.AssemblyHackLabel.AutoSize = true;
-            this.AssemblyHackLabel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.AssemblyHackLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AssemblyHackLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AssemblyHackLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.AssemblyHackLabel.Location = new System.Drawing.Point(82, 227);
+            this.AssemblyHackLabel.Location = new System.Drawing.Point(471, 243);
             this.AssemblyHackLabel.Name = "AssemblyHackLabel";
-            this.AssemblyHackLabel.Size = new System.Drawing.Size(95, 15);
+            this.AssemblyHackLabel.Size = new System.Drawing.Size(260, 21);
             this.AssemblyHackLabel.TabIndex = 393;
             this.AssemblyHackLabel.Text = "Assembly Hack";
+            this.AssemblyHackLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.FreshRomLabel);
             this.panel3.Controls.Add(this.ImagePictureBox);
-            this.panel3.Controls.Add(this.GameHackLabel);
-            this.panel3.Controls.Add(this.AssemblyHackLabel);
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.label12);
             this.panel3.Location = new System.Drawing.Point(471, 12);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(260, 283);
+            this.panel3.Size = new System.Drawing.Size(260, 228);
             this.panel3.TabIndex = 396;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 244);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label1.Size = new System.Drawing.Size(256, 17);
-            this.label1.TabIndex = 392;
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(0, 262);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label2.Size = new System.Drawing.Size(256, 17);
-            this.label2.TabIndex = 392;
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label12
-            // 
-            this.label12.BackColor = System.Drawing.SystemColors.Control;
-            this.label12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(0, 226);
-            this.label12.Name = "label12";
-            this.label12.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label12.Size = new System.Drawing.Size(256, 17);
-            this.label12.TabIndex = 392;
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // GamePatches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(743, 307);
+            this.ClientSize = new System.Drawing.Size(743, 315);
+            this.Controls.Add(this.FreshRomLabel);
             this.Controls.Add(this.downloadingLabel);
+            this.Controls.Add(this.GameHackLabel);
             this.Controls.Add(this.PatchListBox);
+            this.Controls.Add(this.AssemblyHackLabel);
             this.Controls.Add(this.applyButton);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.SizeLabel);
@@ -244,7 +201,6 @@ namespace LAZYSHELL.Patches
             this.Text = "PATCHES - Lazy Shell";
             ((System.ComponentModel.ISupportInitialize)(this.ImagePictureBox)).EndInit();
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,8 +221,5 @@ namespace LAZYSHELL.Patches
         private System.Windows.Forms.Label GameHackLabel;
         private System.Windows.Forms.Label downloadingLabel;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label12;
     }
 }

@@ -152,7 +152,7 @@ namespace LAZYSHELL.Previewer
         private void InitializePreviewer()
         {
             this.initializing = true;
-            this.argsTextBox.Text = settings.PreviewArguments;
+            this.zsnesArgs.Text = settings.PreviewArguments;
             this.dynamicROMPath.Checked = settings.PreviewDynamicRomName;
             this.level.Value = settings.PreviewLevel;
             if (behaviour == (int)Behaviours.EventPreviewer)
@@ -179,8 +179,8 @@ namespace LAZYSHELL.Previewer
                 this.label1.Text = "Monster #";
                 this.selectNumericUpDown.Maximum = 255;
 
-                this.panel8.Enabled = false;
-                this.panel9.Enabled = true;
+                this.groupBox1.Enabled = false;
+                this.groupBox2.Enabled = true;
 
                 this.battleBGListBox.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
                 this.battleBGListBox.Visible = true;
@@ -242,8 +242,8 @@ namespace LAZYSHELL.Previewer
                     bs.CommandIndex = 0;
                 }
             Finish:
-                this.panel8.Enabled = false;
-                this.panel9.Enabled = true;
+                this.groupBox1.Enabled = false;
+                this.groupBox2.Enabled = true;
 
                 this.battleBGListBox.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
                 this.battleBGListBox.Visible = true;
@@ -394,10 +394,10 @@ namespace LAZYSHELL.Previewer
         }
         private void Launch()
         {
-            settings.PreviewArguments = argsTextBox.Text;
+            settings.PreviewArguments = zsnesArgs.Text;
             settings.Save();
             if (rom && emulator && savestate && eventchoice)
-                LaunchEmulator(this.emulatorPath, this.romPath, snes9x ? textBox1.Text : argsTextBox.Text);
+                LaunchEmulator(this.emulatorPath, this.romPath, snes9x ? snes9xArgs.Text : zsnesArgs.Text);
             else
             {
                 if (!rom)
@@ -932,11 +932,11 @@ namespace LAZYSHELL.Previewer
         }
         private void defaultZSNES_Click(object sender, EventArgs e)
         {
-            this.argsTextBox.Text = settings.PreviewArgsDefault;
+            this.zsnesArgs.Text = settings.PreviewArgsDefault;
         }
         private void defaultSNES9X_Click(object sender, EventArgs e)
         {
-            this.textBox1.Text = "";
+            this.snes9xArgs.Text = "";
         }
         private void dynamicROMPath_CheckedChanged(object sender, EventArgs e)
         {
@@ -1031,14 +1031,14 @@ namespace LAZYSHELL.Previewer
         {
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
-                Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
+                Model.FontMenu, Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 0, false, false, Model.MenuBG_);
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
-                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, true, false, Model.MenuBackground_);
+                Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, true, false, Model.MenuBG_);
         }
         private void allyName_SelectedIndexChanged(object sender, EventArgs e)
         {

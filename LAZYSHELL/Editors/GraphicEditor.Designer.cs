@@ -146,9 +146,9 @@
             this.panel109.Name = "panel109";
             this.panel109.Size = new System.Drawing.Size(414, 402);
             this.panel109.TabIndex = 498;
-            this.panel109.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panel109_PreviewKeyDown);
             this.panel109.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel109_Scroll);
             this.panel109.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel109_MouseDown);
+            this.panel109.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panel109_PreviewKeyDown);
             // 
             // pictureBoxGraphicSet
             // 
@@ -159,11 +159,11 @@
             this.pictureBoxGraphicSet.Size = new System.Drawing.Size(256, 768);
             this.pictureBoxGraphicSet.TabIndex = 450;
             this.pictureBoxGraphicSet.TabStop = false;
-            this.pictureBoxGraphicSet.MouseLeave += new System.EventHandler(this.pictureBoxGraphicSet_MouseLeave);
-            this.pictureBoxGraphicSet.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGraphicSet_MouseMove);
+            this.pictureBoxGraphicSet.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxGraphicSet_Paint);
             this.pictureBoxGraphicSet.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGraphicSet_MouseDoubleClick);
             this.pictureBoxGraphicSet.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGraphicSet_MouseDown);
-            this.pictureBoxGraphicSet.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxGraphicSet_Paint);
+            this.pictureBoxGraphicSet.MouseLeave += new System.EventHandler(this.pictureBoxGraphicSet_MouseLeave);
+            this.pictureBoxGraphicSet.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGraphicSet_MouseMove);
             this.pictureBoxGraphicSet.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGraphicSet_MouseUp);
             // 
             // contextMenuStrip
@@ -451,8 +451,8 @@
             this.pictureBoxPalette.Size = new System.Drawing.Size(128, 64);
             this.pictureBoxPalette.TabIndex = 450;
             this.pictureBoxPalette.TabStop = false;
-            this.pictureBoxPalette.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPalette_MouseDown);
             this.pictureBoxPalette.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxPalette_Paint);
+            this.pictureBoxPalette.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPalette_MouseDown);
             // 
             // panel1
             // 
@@ -520,7 +520,6 @@
             // 
             this.autoUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.autoUpdate.AutoSize = true;
-            this.autoUpdate.BackColor = System.Drawing.SystemColors.Control;
             this.autoUpdate.Checked = true;
             this.autoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoUpdate.Location = new System.Drawing.Point(93, 565);

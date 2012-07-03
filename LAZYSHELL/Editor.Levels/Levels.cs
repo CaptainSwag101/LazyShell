@@ -65,6 +65,7 @@ namespace LAZYSHELL
             settings.Keystrokes[0x20] = "\x20";
 
             InitializeComponent();
+            this.levelInfo.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader() });
             Do.AddShortcut(toolStripToggle, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStripToggle, Keys.F1, help);
             Do.AddShortcut(toolStripToggle, Keys.F2, baseConversion);
@@ -119,8 +120,8 @@ namespace LAZYSHELL
             //
             new History(this);
             lastNavigate = index;
-            checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.TileSets,
-                Model.TileMaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
+            checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.Tilesets,
+                Model.Tilemaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
         }
         #region Functions
         private void InitializeSettings()
@@ -569,20 +570,20 @@ namespace LAZYSHELL
                 "Add NPC's by clicking \"INSERT\" under \"NPC...\" or remove \n" +
                 "them by selecting the NPC to remove and clicking \"DELETE\".\n\n" +
                 "You will notice in this treeview the \"child nodes\" for certain \n" +
-                "NPC's, which here are referred to as \"Instances\" of an \n" +
-                "NPC. An NPC instance is an NPC that shares all of the same \n" +
+                "NPC's, which here are referred to as \"Clones\" of an \n" +
+                "NPC. An NPC clone is an NPC that shares all of the same \n" +
                 "properties of its parent NPC (ie. the NPC it is an instance \n" +
-                "of) save for those properties in the \"INSTANCE...\" panel. \n" +
+                "of) save for those properties in the \"CLONE...\" panel. \n" +
                 "Each instance has its own set of properties defined in this \n" +
                 "panel.\n\n" +
                 "Add or remove instances by clicking \"INSERT\" or \"DELETE\" \n" +
-                "under \"NPC INSTANCE...\".");
+                "under \"NPC CLONE...\".");
 
             this.npcMoveUp.ToolTipText =
-                "Move an NPC or NPC instance up in the collection.";
+                "Move an NPC or NPC clone up in the collection.";
 
             this.npcMoveDown.ToolTipText =
-                "Move an NPC or NPC instance down in the collection.";
+                "Move an NPC or NPC clone down in the collection.";
 
             this.toolTip1.SetToolTip(this.npcMapHeader,
                 "The partition used by a level assigns the partitioning of the \n" +
@@ -610,7 +611,7 @@ namespace LAZYSHELL
                 "Delete the currently selected NPC.";
 
             this.npcInsertInstance.ToolTipText =
-                "Insert a new instance for the currently selected NPC.";
+                "Insert a new clone for the currently selected NPC.";
 
             this.toolTip1.SetToolTip(this.npcEngageType,
                 "The NPC Type refers to the overall behavior and function \n" +
@@ -658,12 +659,12 @@ namespace LAZYSHELL
 
             this.toolTip1.SetToolTip(this.npcPropertyA,
                 "If the NPC TYPE is set to \"Object\", this value is added to \n" +
-                "the NPC # used by the currently selected NPC Instance. \n" +
+                "the NPC # used by the currently selected NPC Clone. \n" +
                 "The purpose of this is to allow instances to use a different \n" +
                 "NPC # than their parent, but only within an index range of \n" +
                 "7.\n" +
                 "Example: if \"NPC #+\" is 3 and the \"NPC #\" is 15, then the \n" +
-                "instance will be assigned NPC # 18.\n\n" +
+                "clone will be assigned NPC # 18.\n\n" +
 
                 "If the NPC TYPE is set to \"Treasure\", this value is what \n" +
                 "memory address $70A7 is set to for use in event scripts \n" +
@@ -672,21 +673,21 @@ namespace LAZYSHELL
                 "given or shown for the treasure chest.\n\n" +
 
                 "If the NPC TYPE is set to \"Battle\", this value is added to the \n" +
-                "\"Action #\" used by the currently selected NPC instance. \n" +
+                "\"Action #\" used by the currently selected NPC clone. \n" +
                 "The purpose of this is to allow instances to use a different \n" +
                 "action # than their parent, but only within an index range \n" +
                 "of 15.\n" +
                 "Example: if \"Action #+\" is 3 and the \"Action #\" is 15, then \n" +
-                "the instance will be assigned Action # 18.");
+                "the clone will be assigned Action # 18.");
 
             this.toolTip1.SetToolTip(this.npcPropertyB,
                 "If the NPC TYPE is set to \"Object\", this value is added to \n" +
-                "the Event # used by the currently selected NPC Instance. \n" +
+                "the Event # used by the currently selected NPC clone. \n" +
                 "The purpose of this is to allow instances to use a different \n" +
                 "Event # than their parent, but only within an index range \n" +
                 "of 7.\n" +
                 "Example: if \"Event #+\" is 3 and the \"Event #\" is 15, then \n" +
-                "the instance will be assigned Event # 18.\n\n" +
+                "the clone will be assigned Event # 18.\n\n" +
 
                 "If the NPC TYPE is set to \"Treasure\", this value refers to \n" +
                 "\"Treasure\" or the type of treasure the NPC will give you if it \n" +
@@ -699,37 +700,37 @@ namespace LAZYSHELL
                 "rewards, but this is usually declared by an event script.\n\n" +
 
                 "If the NPC TYPE is set to \"Battle\", this value is added to the \n" +
-                "\"Pack #\" used by the currently selected NPC instance. The \n" +
+                "\"Pack #\" used by the currently selected NPC clone. The \n" +
                 "purpose of this is to allow instances to use a different \n" +
                 "action # than their parent, but only within an index range \n" +
                 "of 15.\n" +
                 "Example: if \"Pack #+\" is 3 and the \"Pack #\" is 15, then the \n" +
-                "instance will be assigned Pack # 18.");
+                "clone will be assigned Pack # 18.");
 
             this.toolTip1.SetToolTip(this.npcPropertyC,
                 "If the NPC TYPE is set to \"Object\", this value is added to \n" +
-                "the \"Action #\" used by the currently selected NPC instance. \n" +
+                "the \"Action #\" used by the currently selected NPC clone. \n" +
                 "The purpose of this is to allow instances to use a different \n" +
                 "action # than their parent, but only within an index range \n" +
                 "of 3.\n" +
                 "Example: if \"Action #+\" is 3 and the \"Action #\" is 15, then \n" +
-                "the instance will be assigned Action # 18.");
+                "the clone will be assigned Action # 18.");
 
             this.toolTip1.SetToolTip(this.npcX,
-                "The isometric X coord of the NPC or NPC instance. To \n" +
+                "The isometric X coord of the NPC or NPC clone. To \n" +
                 "determine the desired placement of the NPC use the values \n" +
                 "displayed in the \"Isometric Coords\" label below the level \n" +
                 "image.");
 
             this.toolTip1.SetToolTip(this.npcY,
-                "The isometric Y coord of the NPC or NPC instance. To \n" +
+                "The isometric Y coord of the NPC or NPC clone. To \n" +
                 "determine the desired placement of the NPC use the values \n" +
                 "displayed in the \"Isometric Coords\" label below the level \n" +
                 "image.");
 
             this.toolTip1.SetToolTip(this.npcZ,
                 "The isometric Z coord, or the elevation above the ground, \n" +
-                "of the NPC or NPC instance.");
+                "of the NPC or NPC clone.");
 
             this.toolTip1.SetToolTip(this.npcZ_half,
                 "If enabled, the Z coord is increased by half a unit.");
@@ -1047,8 +1048,8 @@ namespace LAZYSHELL
             {
                 if (levelCheck.Index == index && !fullUpdate)
                 {
-                    tileSet.RedrawTilesets(); // Redraw all tilesets
-                    tileMap.RedrawTileMap();
+                    tileset.RedrawTilesets(); // Redraw all tilesets
+                    tilemap.RedrawTilemaps();
                     tileMods.RedrawTilemaps();
                     LoadTemplateEditor();
                     LoadTilesetEditor();
@@ -1077,10 +1078,10 @@ namespace LAZYSHELL
         private void CreateNewLevelData()
         {
             levelCheck = level;
-            if (tileMap != null)
-                tileMap.AssembleIntoModel();
-            tileSet = new TileSet(levelMap, paletteSet);
-            tileMap = new TileMap(level, tileSet);
+            if (tilemap != null)
+                tilemap.Assemble();
+            tileset = new Tileset(levelMap, paletteSet);
+            tilemap = new LevelTilemap(level, tileset);
             foreach (Level l in levels)
             {
                 l.LevelTileMods.ClearTilemaps();
@@ -1088,11 +1089,11 @@ namespace LAZYSHELL
             }
             foreach (LevelTileMods.Mod mod in tileMods.Mods)
             {
-                mod.TilemapA = new TileMap(level, tileSet, mod, false);
+                mod.TilemapA = new LevelTilemap(level, tileset, mod, false);
                 if (mod.Set)
-                    mod.TilemapB = new TileMap(level, tileSet, mod, true);
+                    mod.TilemapB = new LevelTilemap(level, tileset, mod, true);
             }
-            foreach (LevelSolidMods.Mod mod in solidMods.Mods)
+            foreach (LevelSolidMods.LevelMod mod in solidMods.Mods)
                 mod.Pixels = solidity.GetTilemapPixels(mod);
             solidityMap = new LevelSolidMap(levelMap);
             fullUpdate = false;
@@ -1109,7 +1110,7 @@ namespace LAZYSHELL
         private void LevelChange()
         {
             // Code that must happen before a level changes goes here
-            tileMap.AssembleIntoModel(); // Assemble the edited tileMap into the model
+            tilemap.Assemble(); // Assemble the edited tileMap into the model
 
             ResetOverlay();
             RefreshLevel();
@@ -1219,6 +1220,8 @@ namespace LAZYSHELL
                 np.Assemble();
             foreach (SolidityTile st in solidTiles)
                 st.Assemble();
+            foreach (NPCSpritePartitions sp in npcSpritePartitions)
+                sp.Assemble();
 
             ushort offsetStart = 0x3166;
             if (CalculateFreeExitSpace() >= 0)
@@ -1275,22 +1278,21 @@ namespace LAZYSHELL
 
             Model.Compress(Model.GraphicSets, Model.EditGraphicSets, 0x0A0000, 0x146000, "GRAPHIC SET",
                 0, 78, 94, 111, 129, 147, 167, 184, 204, 236, 261);
-            tileMap.AssembleIntoModel();
-            Model.Compress(Model.TileMaps, Model.EditTileMaps, 0x160000, 0x1A8000, "TILE MAP",
+            tilemap.Assemble();
+            Model.Compress(Model.Tilemaps, Model.EditTileMaps, 0x160000, 0x1A8000, "TILE MAP",
                 0, 109, 163, 219, 275);
             Model.Compress(Model.SolidityMaps, Model.EditSolidityMaps, 0x1B0000, 0x1C8000, "SOLIDITY MAP",
                 0, 80);
-            Model.Compress(Model.TileSets, Model.EditTileSets, 0x3B0000, 0x3DC000, "TILE SET",
+            Model.Compress(Model.Tilesets, Model.EditTileSets, 0x3B0000, 0x3DC000, "TILE SET",
                 0, 58, 91);
 
             Model.HexViewer.Compare();
 
-            checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.TileSets,
-                Model.TileMaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
+            checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.Tilesets,
+                Model.Tilemaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
         }
         #endregion
         #region Event Handlers
-
         private void levelNum_ValueChanged(object sender, EventArgs e)
         {
             if (updatingLevel) return;
@@ -1392,7 +1394,7 @@ namespace LAZYSHELL
         }
         private void importArchitectureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (new IOArchitecture("import", index, levelMap, paletteSet, tileSet, tileMap, prioritySets[layer.PrioritySet]).ShowDialog() == DialogResult.Cancel)
+            if (new IOArchitecture("import", index, levelMap, paletteSet, tileset, tilemap, prioritySets[layer.PrioritySet]).ShowDialog() == DialogResult.Cancel)
                 return;
             fullUpdate = true;
             if (!updatingLevel)
@@ -1400,7 +1402,7 @@ namespace LAZYSHELL
         }
         private void exportArchitectureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new IOArchitecture("export", index, levelMap, paletteSet, tileSet, tileMap, prioritySets[layer.PrioritySet]).ShowDialog();
+            new IOArchitecture("export", index, levelMap, paletteSet, tileset, tilemap, prioritySets[layer.PrioritySet]).ShowDialog();
         }
         private void importLevelDataAll_Click(object sender, EventArgs e)
         {
@@ -1439,22 +1441,22 @@ namespace LAZYSHELL
         }
         private void clearTilesetsAll_Click(object sender, EventArgs e)
         {
-            if (new ClearElements(null, (int)(levelMap.TileSetL1 + 0x20), "CLEAR TILESETS...").ShowDialog() == DialogResult.Cancel)
+            if (new ClearElements(null, (int)(levelMap.TilesetL1 + 0x20), "CLEAR TILESETS...").ShowDialog() == DialogResult.Cancel)
                 return;
-            new ClearElements(null, (int)(levelMap.TileSetL2 + 0x20), "CLEAR TILESETS...").buttonOK_Click(null, null);
+            new ClearElements(null, (int)(levelMap.TilesetL2 + 0x20), "CLEAR TILESETS...").buttonOK_Click(null, null);
             if (levelMap.GraphicSetL3 != 0xFF)
-                new ClearElements(null, (int)(levelMap.TileSetL3), "CLEAR TILESETS...").buttonOK_Click(null, null);
+                new ClearElements(null, (int)(levelMap.TilesetL3), "CLEAR TILESETS...").buttonOK_Click(null, null);
             fullUpdate = true;
             if (!updatingLevel)
                 RefreshLevel();
         }
         private void clearTilemapsAll_Click(object sender, EventArgs e)
         {
-            if (new ClearElements(null, (int)(levelMap.TileMapL1 + 0x40), "CLEAR TILEMAPS...").ShowDialog() == DialogResult.Cancel)
+            if (new ClearElements(null, (int)(levelMap.TilemapL1 + 0x40), "CLEAR TILEMAPS...").ShowDialog() == DialogResult.Cancel)
                 return;
-            new ClearElements(null, (int)(levelMap.TileMapL2 + 0x40), "CLEAR TILEMAPS...").buttonOK_Click(null, null);
+            new ClearElements(null, (int)(levelMap.TilemapL2 + 0x40), "CLEAR TILEMAPS...").buttonOK_Click(null, null);
             if (levelMap.GraphicSetL3 != 0xFF)
-                new ClearElements(null, (int)(levelMap.TileMapL3), "CLEAR TILEMAPS...").buttonOK_Click(null, null);
+                new ClearElements(null, (int)(levelMap.TilemapL3), "CLEAR TILEMAPS...").buttonOK_Click(null, null);
             fullUpdate = true;
             if (!updatingLevel)
                 RefreshLevel();
@@ -1485,20 +1487,20 @@ namespace LAZYSHELL
                 levels[i].LevelNPCs.Clear();
                 levels[i].LevelOverlaps.Clear();
             }
-            for (int i = 0; i < Model.TileSets.Length; i++)
+            for (int i = 0; i < Model.Tilesets.Length; i++)
             {
                 if (i < 0x20)
-                    Model.TileSets[i] = new byte[0x1000];
+                    Model.Tilesets[i] = new byte[0x1000];
                 else
-                    Model.TileSets[i] = new byte[0x2000];
+                    Model.Tilesets[i] = new byte[0x2000];
                 Model.EditTileSets[i] = true;
             }
-            for (int i = 0; i < Model.TileMaps.Length; i++)
+            for (int i = 0; i < Model.Tilemaps.Length; i++)
             {
                 if (i < 0x40)
-                    Model.TileMaps[i] = new byte[0x1000];
+                    Model.Tilemaps[i] = new byte[0x1000];
                 else
-                    Model.TileMaps[i] = new byte[0x2000];
+                    Model.Tilemaps[i] = new byte[0x2000];
                 Model.EditTileMaps[i] = true;
             }
             for (int i = 0; i < Model.SolidityMaps.Length; i++)
@@ -1525,19 +1527,19 @@ namespace LAZYSHELL
             level.LevelNPCs.Clear();
             level.LevelOverlaps.Clear();
 
-            Model.TileSets[levelMap.TileSetL1 + 0x20] = new byte[0x2000];
-            Model.TileSets[levelMap.TileSetL2 + 0x20] = new byte[0x2000];
-            Model.TileSets[levelMap.TileSetL3] = new byte[0x1000];
-            Model.EditTileSets[levelMap.TileSetL1 + 0x20] = true;
-            Model.EditTileSets[levelMap.TileSetL2 + 0x20] = true;
-            Model.EditTileSets[levelMap.TileSetL3] = true;
+            Model.Tilesets[levelMap.TilesetL1 + 0x20] = new byte[0x2000];
+            Model.Tilesets[levelMap.TilesetL2 + 0x20] = new byte[0x2000];
+            Model.Tilesets[levelMap.TilesetL3] = new byte[0x1000];
+            Model.EditTileSets[levelMap.TilesetL1 + 0x20] = true;
+            Model.EditTileSets[levelMap.TilesetL2 + 0x20] = true;
+            Model.EditTileSets[levelMap.TilesetL3] = true;
 
-            Model.TileMaps[levelMap.TileMapL1 + 0x40] = new byte[0x2000];
-            Model.TileMaps[levelMap.TileMapL2 + 0x40] = new byte[0x2000];
-            Model.TileMaps[levelMap.TileMapL3] = new byte[0x1000];
-            Model.EditTileMaps[levelMap.TileMapL1 + 0x40] = true;
-            Model.EditTileMaps[levelMap.TileMapL2 + 0x40] = true;
-            Model.EditTileMaps[levelMap.TileMapL3] = true;
+            Model.Tilemaps[levelMap.TilemapL1 + 0x40] = new byte[0x2000];
+            Model.Tilemaps[levelMap.TilemapL2 + 0x40] = new byte[0x2000];
+            Model.Tilemaps[levelMap.TilemapL3] = new byte[0x1000];
+            Model.EditTileMaps[levelMap.TilemapL1 + 0x40] = true;
+            Model.EditTileMaps[levelMap.TilemapL2 + 0x40] = true;
+            Model.EditTileMaps[levelMap.TilemapL3] = true;
 
             solidityMap.Clear(1);
 
@@ -1569,7 +1571,7 @@ namespace LAZYSHELL
                 used[lm.GraphicSetL3] = true;
             }
 
-            for (int i = 0; i < Model.TileSets.Length; i++)
+            for (int i = 0; i < Model.Tilesets.Length; i++)
             {
                 if (!used[i])
                 {
@@ -1592,21 +1594,21 @@ namespace LAZYSHELL
                 return;
 
             // Clear unused tilesets
-            bool[] used = new bool[Model.TileSets.Length];
+            bool[] used = new bool[Model.Tilesets.Length];
             LevelMap lm;
             foreach (Level lv in levels)
             {
                 lm = levelMaps[lv.LevelMap];
-                used[lm.TileSetL1 + 0x20] = true;
-                used[lm.TileSetL2 + 0x20] = true;
-                used[lm.TileSetL3] = true;
+                used[lm.TilesetL1 + 0x20] = true;
+                used[lm.TilesetL2 + 0x20] = true;
+                used[lm.TilesetL3] = true;
             }
 
-            for (int i = 0; i < Model.TileSets.Length; i++)
+            for (int i = 0; i < Model.Tilesets.Length; i++)
             {
                 if (!used[i])
                 {
-                    Model.TileSets[i] = new byte[i < 0x20 ? 0x1000 : 0x2000];
+                    Model.Tilesets[i] = new byte[i < 0x20 ? 0x1000 : 0x2000];
                     Model.EditTileSets[i] = true;
                 }
             }
@@ -1625,21 +1627,21 @@ namespace LAZYSHELL
                 return;
 
             // Clear unused tilemaps
-            bool[] used = new bool[Model.TileMaps.Length];
+            bool[] used = new bool[Model.Tilemaps.Length];
             LevelMap lm;
             foreach (Level lv in levels)
             {
                 lm = levelMaps[lv.LevelMap];
-                used[lm.TileMapL1 + 0x40] = true;
-                used[lm.TileMapL2 + 0x40] = true;
-                used[lm.TileMapL3] = true;
+                used[lm.TilemapL1 + 0x40] = true;
+                used[lm.TilemapL2 + 0x40] = true;
+                used[lm.TilemapL3] = true;
             }
 
-            for (int i = 0; i < Model.TileMaps.Length; i++)
+            for (int i = 0; i < Model.Tilemaps.Length; i++)
             {
                 if (!used[i])
                 {
-                    Model.TileMaps[i] = new byte[i < 0x40 ? 0x1000 : 0x2000];
+                    Model.Tilemaps[i] = new byte[i < 0x40 ? 0x1000 : 0x2000];
                     Model.EditTileMaps[i] = true;
                 }
             }
@@ -1718,21 +1720,21 @@ namespace LAZYSHELL
                 bw.Close();
                 fs.Close();
             }
-            for (int i = 0; i < Model.TileMaps.Length; i++)
+            for (int i = 0; i < Model.Tilemaps.Length; i++)
             {
                 CreateDir(fullPath + "Tile Maps\\");
                 fs = new FileStream(fullPath + "Tile Maps\\tileMap." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
                 bw = new BinaryWriter(fs);
-                bw.Write(Model.TileMaps[i], 0, Model.TileMaps[i].Length);
+                bw.Write(Model.Tilemaps[i], 0, Model.Tilemaps[i].Length);
                 bw.Close();
                 fs.Close();
             }
-            for (int i = 0; i < Model.TileSets.Length; i++)
+            for (int i = 0; i < Model.Tilesets.Length; i++)
             {
                 CreateDir(fullPath + "Tile Sets\\");
                 fs = new FileStream(fullPath + "Tile Sets\\tileSet." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
                 bw = new BinaryWriter(fs);
-                bw.Write(Model.TileSets[i], 0, Model.TileSets[i].Length);
+                bw.Write(Model.Tilesets[i], 0, Model.Tilesets[i].Length);
                 bw.Close();
                 fs.Close();
             }
@@ -1785,25 +1787,25 @@ namespace LAZYSHELL
 
                     Model.EditSolidityMaps[i] = true;
                 }
-                for (int i = 0; i < Model.TileMaps.Length; i++)
+                for (int i = 0; i < Model.Tilemaps.Length; i++)
                 {
                     if (!File.Exists(fullPath + "Tile Maps\\tileMap." + i.ToString("d3") + ".bin"))
                         continue;
                     fs = File.OpenRead(fullPath + "Tile Maps\\tileMap." + i.ToString("d3") + ".bin");
                     br = new BinaryReader(fs);
-                    Model.TileMaps[i] = br.ReadBytes(Model.TileMaps[i].Length);
+                    Model.Tilemaps[i] = br.ReadBytes(Model.Tilemaps[i].Length);
                     br.Close();
                     fs.Close();
 
                     Model.EditTileMaps[i] = true;
                 }
-                for (int i = 0; i < Model.TileSets.Length; i++)
+                for (int i = 0; i < Model.Tilesets.Length; i++)
                 {
                     if (!File.Exists(fullPath + "Tile Sets\\tileSet." + i.ToString("d3") + ".bin"))
                         continue;
                     fs = File.OpenRead(fullPath + "Tile Sets\\tileSet." + i.ToString("d3") + ".bin");
                     br = new BinaryReader(fs);
-                    Model.TileSets[i] = br.ReadBytes(Model.TileSets[i].Length);
+                    Model.Tilesets[i] = br.ReadBytes(Model.Tilesets[i].Length);
                     br.Close();
                     fs.Close();
 
@@ -1847,7 +1849,14 @@ namespace LAZYSHELL
             int offset;
             int cnt;
             string temp;
-
+            //
+            //for (int i = 0; i < Lists.LevelNames.Length; i++)
+            //{
+            //    npcrip.WriteLine("{" + levels[i].LevelNPCs.MapHeader.ToString("d3") + "} " + Lists.Numerize(Lists.LevelNames, i, 3));
+            //}
+            //npcrip.Close();
+            //return;
+            //
             for (int i = 0; i < levels.Length; i++)
             {
                 cnt = 0;
@@ -1954,9 +1963,9 @@ namespace LAZYSHELL
                 l.LevelTileMods.ClearTilemaps();
             foreach (LevelTileMods.Mod mod in tileMods.Mods)
             {
-                mod.TilemapA = new TileMap(level, tileSet, mod, false);
+                mod.TilemapA = new LevelTilemap(level, tileset, mod, false);
                 if (mod.Set)
-                    mod.TilemapB = new TileMap(level, tileSet, mod, true);
+                    mod.TilemapB = new LevelTilemap(level, tileset, mod, true);
             }
             InitializeTileModProperties();
         }
@@ -1968,7 +1977,7 @@ namespace LAZYSHELL
             solidMods = new LevelSolidMods(Model.Data, index);
             foreach (Level l in levels)
                 l.LevelSolidMods.ClearTilemaps();
-            foreach (LevelSolidMods.Mod mod in solidMods.Mods)
+            foreach (LevelSolidMods.LevelMod mod in solidMods.Mods)
                 mod.Pixels = solidity.GetTilemapPixels(mod);
             InitializeSolidModProperties();
         }
@@ -2002,9 +2011,9 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current tilesets. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            Model.Decompress(Model.TileSets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TileSetL1 + 0x20, levelMap.TileSetL1 + 0x21, false);
-            Model.Decompress(Model.TileSets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TileSetL2 + 0x20, levelMap.TileSetL2 + 0x21, false);
-            Model.Decompress(Model.TileSets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TileSetL3, levelMap.TileSetL2 + 1, false);
+            Model.Decompress(Model.Tilesets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TilesetL1 + 0x20, levelMap.TilesetL1 + 0x21, false);
+            Model.Decompress(Model.Tilesets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TilesetL2 + 0x20, levelMap.TilesetL2 + 0x21, false);
+            Model.Decompress(Model.Tilesets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TilesetL3, levelMap.TilesetL2 + 1, false);
             fullUpdate = true;
             if (!updatingLevel)
                 RefreshLevel();
@@ -2014,9 +2023,9 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current tilemaps. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            Model.Decompress(Model.TileMaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TileMapL1 + 0x40, levelMap.TileMapL1 + 0x41, false);
-            Model.Decompress(Model.TileMaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TileMapL2 + 0x40, levelMap.TileMapL2 + 0x41, false);
-            Model.Decompress(Model.TileMaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TileMapL3, levelMap.TileMapL3 + 1, false);
+            Model.Decompress(Model.Tilemaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TilemapL1 + 0x40, levelMap.TilemapL1 + 0x41, false);
+            Model.Decompress(Model.Tilemaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TilemapL2 + 0x40, levelMap.TilemapL2 + 0x41, false);
+            Model.Decompress(Model.Tilemaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TilemapL3, levelMap.TilemapL3 + 1, false);
             fullUpdate = true;
             if (!updatingLevel)
                 RefreshLevel();
@@ -2053,12 +2062,12 @@ namespace LAZYSHELL
             Model.Decompress(Model.GraphicSets, 0x0A0000, 0x150000, 0x2000, "", levelMap.GraphicSetC + 0x48, levelMap.GraphicSetC + 0x49, false);
             Model.Decompress(Model.GraphicSets, 0x0A0000, 0x150000, 0x2000, "", levelMap.GraphicSetD + 0x48, levelMap.GraphicSetD + 0x49, false);
             Model.Decompress(Model.GraphicSets, 0x0A0000, 0x150000, 0x2000, "", levelMap.GraphicSetE + 0x48, levelMap.GraphicSetE + 0x49, false);
-            Model.Decompress(Model.TileSets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TileSetL1 + 0x20, levelMap.TileSetL1 + 0x21, false);
-            Model.Decompress(Model.TileSets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TileSetL2 + 0x20, levelMap.TileSetL2 + 0x21, false);
-            Model.Decompress(Model.TileSets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TileSetL3, levelMap.TileSetL2 + 1, false);
-            Model.Decompress(Model.TileMaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TileMapL1 + 0x40, levelMap.TileMapL1 + 0x41, false);
-            Model.Decompress(Model.TileMaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TileMapL2 + 0x40, levelMap.TileMapL2 + 0x41, false);
-            Model.Decompress(Model.TileMaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TileMapL3, levelMap.TileMapL3 + 1, false);
+            Model.Decompress(Model.Tilesets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TilesetL1 + 0x20, levelMap.TilesetL1 + 0x21, false);
+            Model.Decompress(Model.Tilesets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TilesetL2 + 0x20, levelMap.TilesetL2 + 0x21, false);
+            Model.Decompress(Model.Tilesets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TilesetL3, levelMap.TilesetL2 + 1, false);
+            Model.Decompress(Model.Tilemaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TilemapL1 + 0x40, levelMap.TilemapL1 + 0x41, false);
+            Model.Decompress(Model.Tilemaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TilemapL2 + 0x40, levelMap.TilemapL2 + 0x41, false);
+            Model.Decompress(Model.Tilemaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TilemapL3, levelMap.TilemapL3 + 1, false);
             Model.Decompress(Model.SolidityMaps, 0x1B0000, 0x1D0000, 0x20C2, "", levelMap.SolidityMap, levelMap.SolidityMap + 1, false);
             fullUpdate = true;
             RefreshLevel();
@@ -2118,8 +2127,8 @@ namespace LAZYSHELL
         }
         private void Levels_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.TileSets,
-                Model.TileMaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties) == checksum)
+            if (Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.Tilesets,
+                Model.Tilemaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties) == checksum)
                 goto Close;
             state.Draw = false;
             state.Erase = false;
@@ -2139,8 +2148,8 @@ namespace LAZYSHELL
                 Model.NPCProperties = null;
                 Model.PaletteSets = null;
                 Model.PrioritySets = null;
-                Model.TileMaps[0] = null;
-                Model.TileSets[0] = null;
+                Model.Tilemaps[0] = null;
+                Model.Tilesets[0] = null;
                 Model.GraphicSets[0] = null;
                 Model.SolidityMaps[0] = null;
             }
@@ -2155,11 +2164,13 @@ namespace LAZYSHELL
             levelsSolidTiles.SearchSolidTile.Close();
             paletteEditor.Close();
             graphicEditor.Close();
+            findNPCNumber.Close();
             searchWindow.Dispose();
             levelsTileset.TileEditor.Dispose();
             levelsSolidTiles.SearchSolidTile.Dispose();
             paletteEditor.Dispose();
             graphicEditor.Dispose();
+            findNPCNumber.Dispose();
             if (lp != null)
                 lp.Close();
             if (sa != null)
@@ -2172,7 +2183,6 @@ namespace LAZYSHELL
         {
             GC.Collect();
         }
-
         #endregion
     }
 }

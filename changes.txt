@@ -1,5 +1,36 @@
 Major changes/additions are indicated by ***
 
+v3.10.0 BETA (2012-07-03)
+--------------------------------------
+Additions:
+***Overworld/game select menu editor***
+***Mine cart mini-game editor***
+*Levels: sprite partitions editing support
+*Levels: a couple new properties to edit in the NPC editor
+*World Maps: option to change world map music track index
+
+Changes:
+*Moved multiple palette/graphics editor buttons into one dropdownbutton
+*Changed colors, appearance of labels and controls in all editors
+*Changed panels to group boxes, removed a lot of unnecessary properties
+*Event Scripts: command category list now combobox to save space
+*Levels: more accurate, relevant descriptions of partition properties
+*Monsters: battle scripts command list now a combobox to save space
+
+Fixes:
+*Menu frames weren't drawing exactly as in game
+*Import into tileset function not setting subtiles as ushorts
+*Battle Scripts: not aligning command panel after deleting command
+*Battlefields: not checking null if tileset import cancelled
+*Dialogues: compression table wasn't even saving!
+*Events: command to add/remove party members incorrectly written
+*Levels: sprites facing south not supposed to be mirrored
+*Levels: moving NPCs up/down not updating sprite image correctly
+*Levels: NPC editor not closing after closing levels
+*Sprites: some sequences empty but actively used in game, so new option
+*Sprites: imported mold images not setting subtiles array to 16
+
+
 v3.9.3 (2012-04-27)
 --------------------------------------
 Additions:

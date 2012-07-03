@@ -32,6 +32,8 @@ namespace LAZYSHELL
         public System.Windows.Forms.ToolStripComboBox FormationNames { get { return formationNameList; } }
         public Search searchWindow;
         private List<Bitmap> monsterImages = new List<Bitmap>();
+        private CheckBox[] use = new CheckBox[8];
+        private CheckBox[] hide = new CheckBox[8];
         #endregion
         // Constructor
         public Formations()
@@ -39,6 +41,25 @@ namespace LAZYSHELL
             Model.MonsterNames = new DDlistName(monsters);
             Model.MonsterNames.SortAlpha();
             InitializeComponent();
+            for (int i = 0; i < 8; i++)
+            {
+                use[i] = new CheckBox();
+                use[i].AutoSize = true;
+                use[i].Location = new Point(261, i * 21 + 23);
+                use[i].Name = "use" + i;
+                use[i].Text = "Use";
+                use[i].Tag = i;
+                use[i].CheckedChanged += new EventHandler(use_CheckedChanged);
+                groupBox1.Controls.Add(use[i]);
+                hide[i] = new CheckBox();
+                hide[i].AutoSize = true;
+                hide[i].Location = new Point(307, i * 21 + 23);
+                hide[i].Name = "hide" + i;
+                hide[i].Text = "Hide";
+                hide[i].Tag = i;
+                hide[i].CheckedChanged += new EventHandler(hide_CheckedChanged);
+                groupBox1.Controls.Add(hide[i]);
+            }
             searchWindow = new Search(formationNum, nameTextBox, searchFormationNames, formationNameList.Items);
             InitializeStrings();
             this.formationNameList.SelectedIndex = 0;
@@ -126,16 +147,6 @@ namespace LAZYSHELL
                 "The 8th monster's X coordinate in the formation.");
             toolTip1.SetToolTip(this.formationCoordY8,
                 "The 8th monster's Y coordinate in the formation.");
-            toolTip1.SetToolTip(this.checkedListBox1,
-                "The monsters enabled in the formation. This must be\n" +
-                "checked for a monster that is to have any presence in the\n" +
-                "battle at all.\n\n" +
-                "it is not recommended to have more than 6\n" +
-                "monsters enabled in one formation, due to VRAM capacity.");
-            toolTip1.SetToolTip(this.checkedListBox2,
-                "The monsters not present in the formation at the start of\n" +
-                "the battle. Monsters with this property checked can be\n" +
-                "later called to battle through the battle-script.");
 
             toolTip1.SetToolTip(this.formationBattleEvent,
                 "The battle event sequence that plays at the start of the\n" +
@@ -159,6 +170,19 @@ namespace LAZYSHELL
             toolTip1.SetToolTip(this.formationCantRun,
                 "If checked, it is impossible to run away from the formation\n" +
                 "in battle.");
+            for (int i = 0; i < 8; i++)
+            {
+                toolTip1.SetToolTip(use[i],
+                    "The monsters enabled in the formation. This must be\n" +
+                    "checked for a monster that is to have any presence in the\n" +
+                    "battle at all.\n\n" +
+                    "it is not recommended to have more than 6\n" +
+                    "monsters enabled in one formation, due to VRAM capacity.");
+                toolTip1.SetToolTip(hide[i],
+                    "The monsters not present in the formation at the start of\n" +
+                    "the battle. Monsters with this property checked can be\n" +
+                    "later called to battle through the battle-script.");
+            }
 
             toolTip1.SetToolTip(this.pictureBoxFormation,
                 "Click and drag the monsters in the formation.");
@@ -229,8 +253,8 @@ namespace LAZYSHELL
             this.formationCantRun.Checked = formation.FormationCantRun;
             for (int i = 0; i < 8; i++)
             {
-                this.checkedListBox1.SetItemChecked(i, formation.FormationUse[i]);
-                this.checkedListBox2.SetItemChecked(i, formation.FormationHide[i]);
+                this.use[i].Checked = formation.FormationUse[i];
+                this.hide[i].Checked = formation.FormationHide[i];
             }
             this.musicTrack.Enabled = formationMusic.SelectedIndex != 8;
             if (formationMusic.SelectedIndex != 8)
@@ -363,7 +387,7 @@ namespace LAZYSHELL
         }
         private void monsterName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Do.DrawName(sender, e, new MenuTextPreview(), monsterNames, fontMenu, palette, true, Model.MenuBackground_);
+            Do.DrawName(sender, e, new MenuTextPreview(), monsterNames, fontMenu, palette, true, Model.MenuBG_);
         }
         private void formationName1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -574,22 +598,21 @@ namespace LAZYSHELL
             pictureBoxFormation.Invalidate();
         }
         //
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void use_CheckedChanged(object sender, EventArgs e)
         {
             if (updating) return;
-
-            for (int i = 0; i < 8; i++)
-                this.formation.FormationUse[i] = checkedListBox1.GetItemChecked(i);
-
-            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
-            RefreshMonsterImages();
+            CheckBox use = (CheckBox)sender;
+            int index = (int)use.Tag;
+            this.formation.FormationUse[index] = use.Checked;
+            pictureBoxFormation.Invalidate();
         }
-        private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void hide_CheckedChanged(object sender, EventArgs e)
         {
             if (updating) return;
-
-            for (int i = 0; i < 8; i++)
-                this.formation.FormationHide[i] = checkedListBox2.GetItemChecked(i);
+            CheckBox hide = (CheckBox)sender;
+            int index = (int)hide.Tag;
+            this.formation.FormationHide[index] = hide.Checked;
+            pictureBoxFormation.Invalidate();
         }
         private void formationMusic_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -706,13 +729,13 @@ namespace LAZYSHELL
             }
             else
             {
-                for (int j = 0; j < 8; j++)
+                for (int i = 0; i < 8; i++)
                 {
                     if (e.X > 0 && e.X < 256 && e.Y > 0 && e.Y < 256 &&
-                        this.formation.PixelIndexes[e.Y * 256 + e.X] == (int)(j + 1))
+                        this.formation.PixelIndexes[e.Y * 256 + e.X] == (int)(i + 1))
                     {
                         pictureBoxFormation.Cursor = Cursors.Hand;
-                        overFM = j + 1;
+                        overFM = i + 1;
                         break;
                     }
                     else

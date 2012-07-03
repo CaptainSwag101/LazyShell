@@ -8,8 +8,8 @@ namespace LAZYSHELL.Undo
     class SolidityEditCommand : Command
     {
         private Levels updater;
-        private Map tilemap;
-        public Map Tilemap { get { return tilemap; } set { tilemap = value; } }
+        private Tilemap tilemap;
+        public Tilemap Tilemap { get { return tilemap; } set { tilemap = value; } }
         private Solidity solidity = Solidity.Instance;
         private Point topLeft, bottomRight, tempStart;
         private byte[] changes;
@@ -17,7 +17,7 @@ namespace LAZYSHELL.Undo
 
         public SolidityEditCommand(
             Levels updater,
-            Map tilemap,
+            Tilemap tilemap,
             Point topLeft,
             Point bottomRight,
             Point tempStart,
@@ -75,16 +75,16 @@ namespace LAZYSHELL.Undo
 
                         if (!made[p / 2])
                         {
-                            temp = tilemap.Tilemap[p];
-                            tilemap.Tilemap[p] = changes[r];
+                            temp = tilemap.Tilemap_Bytes[p];
+                            tilemap.Tilemap_Bytes[p] = changes[r];
                             changes[r] = temp;
 
-                            temp = tilemap.Tilemap[p + 1];
-                            tilemap.Tilemap[p + 1] = changes[r + 1];
+                            temp = tilemap.Tilemap_Bytes[p + 1];
+                            tilemap.Tilemap_Bytes[p + 1] = changes[r + 1];
                             changes[r + 1] = temp;
 
                             made[p / 2] = true;
-                            tilemap.MakeEdit();
+                            tilemap.SetTileNum();
                         }
                     }
                 }

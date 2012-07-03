@@ -7,15 +7,15 @@ namespace LAZYSHELL
 {
     public class OverlapTileset
     {
-        private Tile32x32[] overlapTiles; public Tile32x32[] OverlapTiles { get { return overlapTiles; } }
+        private OverlapTile[] overlapTiles; public OverlapTile[] OverlapTiles { get { return overlapTiles; } }
         public byte[] graphicSet;
 
         public OverlapTileset()
         {
-            overlapTiles = new Tile32x32[104];
+            overlapTiles = new OverlapTile[104];
 
             for (int i = 0; i < overlapTiles.Length; i++)
-                overlapTiles[i] = new Tile32x32(i);
+                overlapTiles[i] = new OverlapTile(i);
 
             DrawOverlapsGraphicSet();
             DrawOverlapsTileSet(overlapTiles);
@@ -65,21 +65,21 @@ namespace LAZYSHELL
                 }
             }
         }
-        public void DrawOverlapsTileSet(Tile32x32[] tileset)
+        public void DrawOverlapsTileSet(OverlapTile[] tileset)
         {
             int offset = 0x1CEA00;
             int index = 0, loc = 0, place = 0;
             int[] palette = new int[16];
             for (int i = 0; i < palette.Length; i++)
                 palette[i] = Color.Black.ToArgb();
-            Tile8x8 source;
-            Tile16x16[] subtiles;
+            Subtile source;
+            Tile[] subtiles;
 
             for (int i = 0; i < tileset.Length; i++)   // for all 104 overlap tiles
             {
-                subtiles = new Tile16x16[4];
+                subtiles = new Tile[4];
                 for (int o = 0; o < subtiles.Length; o++)
-                    subtiles[o] = new Tile16x16(o);
+                    subtiles[o] = new Tile(o);
 
                 for (int a = 0; a < 4; a++) // the four 16x16 tiles in an overlap tile
                 {
@@ -96,18 +96,18 @@ namespace LAZYSHELL
                         loc = index % 8 * 0x40;
                         loc += index / 8 * 0x400;
 
-                        source = new Tile8x8(index, graphicSet, loc, palette, false, false, false, false);
+                        source = new Subtile(index, graphicSet, loc, palette, false, false, false, false);
                         subtiles[a].Subtiles[0] = source;
-                        source = new Tile8x8(index, graphicSet, loc + 0x20, palette, false, false, false, false);
+                        source = new Subtile(index, graphicSet, loc + 0x20, palette, false, false, false, false);
                         subtiles[a].Subtiles[1] = source;
-                        source = new Tile8x8(index, graphicSet, loc + 0x200, palette, false, false, false, false);
+                        source = new Subtile(index, graphicSet, loc + 0x200, palette, false, false, false, false);
                         subtiles[a].Subtiles[2] = source;
-                        source = new Tile8x8(index, graphicSet, loc + 0x220, palette, false, false, false, false);
+                        source = new Subtile(index, graphicSet, loc + 0x220, palette, false, false, false, false);
                         subtiles[a].Subtiles[3] = source;
                     }
                     else
                     {
-                        source = new Tile8x8(index, new byte[0x20], 0, palette, false, false, false, false);
+                        source = new Subtile(index, new byte[0x20], 0, palette, false, false, false, false);
                         subtiles[a].Subtiles[0] = source;
                         subtiles[a].Subtiles[1] = source;
                         subtiles[a].Subtiles[2] = source;

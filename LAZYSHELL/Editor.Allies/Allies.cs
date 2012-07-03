@@ -228,7 +228,7 @@ namespace LAZYSHELL
                 "The Level 1 timing range is when the player is able to \n" +
                 "decrease the damage (for defense) by 50% by pressing an \n" +
                 "ABXY button.");
-            toolTip1.SetToolTip(this.numericUpDown118,
+            toolTip1.SetToolTip(this.lvl1TimingStart,
                 toolTip1.GetToolTip(this.lvl1TimingStart));
             toolTip1.SetToolTip(this.lvl2TimingStart,
                 "The frame # from the start of the monster's attack \n" +
@@ -239,7 +239,7 @@ namespace LAZYSHELL
                 "The Level 2 timing range is when the player is able to \n" +
                 "decrease the damage (for defense) by 100% (ie. 0 damage)\n" +
                 "by pressing an ABXY button.");
-            toolTip1.SetToolTip(this.numericUpDown120,
+            toolTip1.SetToolTip(this.lvl2TimingStart,
                 toolTip1.GetToolTip(this.lvl2TimingStart));
             toolTip1.SetToolTip(this.lvl2TimingEnd,
                 "The frame # from the start of the monster's attack \n" +
@@ -250,7 +250,7 @@ namespace LAZYSHELL
                 "The Level 2 timing range is when the player is able to \n" +
                 "decrease the damage (for defense) by 100% (ie. 0 damage)\n" +
                 "by pressing an ABXY button.");
-            toolTip1.SetToolTip(this.numericUpDown117,
+            toolTip1.SetToolTip(this.lvl2TimingEnd,
                 toolTip1.GetToolTip(this.lvl2TimingEnd));
             toolTip1.SetToolTip(this.lvl1TimingEnd,
                 "The frame # from the start of the monster's attack \n" +
@@ -261,7 +261,7 @@ namespace LAZYSHELL
                 "The Level 1 timing range is when the player is able to \n" +
                 "decrease the damage (for defense) by 50% by pressing an\n" +
                 "ABXY button.");
-            toolTip1.SetToolTip(this.numericUpDown119,
+            toolTip1.SetToolTip(this.lvl1TimingEnd,
                 toolTip1.GetToolTip(this.lvl1TimingEnd));
         }
         #endregion
@@ -276,14 +276,14 @@ namespace LAZYSHELL
         {
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
-                Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
+                Model.FontMenu, Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 0, false, false, Model.MenuBG_);
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
-                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, true, false, Model.MenuBackground_);
+                Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, true, false, Model.MenuBG_);
         }
         private void textBoxCharacterName_TextChanged(object sender, EventArgs e)
         {
@@ -387,8 +387,8 @@ namespace LAZYSHELL
         {
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Spells, 32, 1),
-                Model.FontMenu, Model.FontPaletteMenu.Palette, -8, 10, 0, 0, false, false,
-                Model.MenuBackground__(109, 255));
+                Model.FontMenu, Model.FontPaletteMenu.Palettes[0], -8, 10, 0, 0, false, false,
+                Model.MenuBG__(startingMagic.ColumnWidth, 255));
         }
         private void startingCoins_ValueChanged(object sender, EventArgs e)
         {
@@ -407,41 +407,21 @@ namespace LAZYSHELL
             characters[0].StartingMaximumFP = (byte)this.startingMaximumFP.Value;
         }
         // defense timing
-        private void numericUpDown118_ValueChanged(object sender, EventArgs e)
-        {
-            characters[0].DefenseStartLevel1 = (byte)this.numericUpDown118.Value;
-            this.lvl1TimingStart.Value = (int)this.numericUpDown118.Value;
-        }
         private void lvl1TimingStart_ValueChanged(object sender, EventArgs e)
         {
-            this.numericUpDown118.Value = this.lvl1TimingStart.Value;
-        }
-        private void numericUpDown120_ValueChanged(object sender, EventArgs e)
-        {
-            characters[0].DefenseStartLevel2 = (byte)this.numericUpDown120.Value;
-            this.lvl2TimingStart.Value = (int)this.numericUpDown120.Value;
+            characters[0].DefenseStartLevel1 = (byte)this.lvl1TimingStart.Value;
         }
         private void lvl2TimingStart_ValueChanged(object sender, EventArgs e)
         {
-            this.numericUpDown120.Value = this.lvl2TimingStart.Value;
-        }
-        private void numericUpDown117_ValueChanged(object sender, EventArgs e)
-        {
-            characters[0].DefenseEndLevel2 = (byte)this.numericUpDown117.Value;
-            this.lvl2TimingEnd.Value = (int)this.numericUpDown117.Value;
+            characters[0].DefenseStartLevel2 = (byte)this.lvl2TimingStart.Value;
         }
         private void lvl2TimingEnd_ValueChanged(object sender, EventArgs e)
         {
-            this.numericUpDown117.Value = this.lvl2TimingEnd.Value;
-        }
-        private void numericUpDown119_ValueChanged(object sender, EventArgs e)
-        {
-            characters[0].DefenseEndLevel1 = (byte)this.numericUpDown119.Value;
-            this.lvl1TimingEnd.Value = (int)this.numericUpDown119.Value;
+            characters[0].DefenseEndLevel2 = (byte)this.lvl2TimingEnd.Value;
         }
         private void lvl1TimingEnd_ValueChanged(object sender, EventArgs e)
         {
-            this.numericUpDown119.Value = this.lvl1TimingEnd.Value;
+            characters[0].DefenseEndLevel1 = (byte)this.lvl1TimingEnd.Value;
         }
         // slots
         private void slotNum_ValueChanged(object sender, EventArgs e)

@@ -34,7 +34,6 @@
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonInvertTile = new System.Windows.Forms.Button();
             this.buttonMirrorTile = new System.Windows.Forms.Button();
-            this.panel113 = new System.Windows.Forms.Panel();
             this.label141 = new System.Windows.Forms.Label();
             this.label142 = new System.Windows.Forms.Label();
             this.subtileStatus = new System.Windows.Forms.CheckedListBox();
@@ -46,19 +45,20 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.autoUpdate = new System.Windows.Forms.CheckBox();
-            this.panel113.SuspendLayout();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.subtileIndex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subtilePalette)).BeginInit();
             this.panel111.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSubtile)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
             this.buttonOK.FlatAppearance.BorderSize = 0;
-            this.buttonOK.Location = new System.Drawing.Point(12, 180);
+            this.buttonOK.Location = new System.Drawing.Point(12, 217);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 5;
@@ -68,7 +68,7 @@
             // buttonCancel
             // 
             this.buttonCancel.FlatAppearance.BorderSize = 0;
-            this.buttonCancel.Location = new System.Drawing.Point(93, 180);
+            this.buttonCancel.Location = new System.Drawing.Point(93, 217);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -78,7 +78,7 @@
             // buttonReset
             // 
             this.buttonReset.FlatAppearance.BorderSize = 0;
-            this.buttonReset.Location = new System.Drawing.Point(174, 180);
+            this.buttonReset.Location = new System.Drawing.Point(174, 217);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 6;
@@ -105,82 +105,63 @@
             this.buttonMirrorTile.Text = "Mirror";
             this.buttonMirrorTile.Click += new System.EventHandler(this.buttonMirrorTile_Click);
             // 
-            // panel113
-            // 
-            this.panel113.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel113.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel113.Controls.Add(this.label141);
-            this.panel113.Controls.Add(this.label142);
-            this.panel113.Controls.Add(this.subtileStatus);
-            this.panel113.Controls.Add(this.subtileIndex);
-            this.panel113.Controls.Add(this.subtilePalette);
-            this.panel113.Location = new System.Drawing.Point(12, 86);
-            this.panel113.Name = "panel113";
-            this.panel113.Size = new System.Drawing.Size(142, 88);
-            this.panel113.TabIndex = 496;
-            // 
             // label141
             // 
-            this.label141.BackColor = System.Drawing.SystemColors.Control;
-            this.label141.Location = new System.Drawing.Point(0, 0);
+            this.label141.AutoSize = true;
+            this.label141.Location = new System.Drawing.Point(6, 22);
             this.label141.Name = "label141";
-            this.label141.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label141.Size = new System.Drawing.Size(65, 17);
+            this.label141.Size = new System.Drawing.Size(35, 13);
             this.label141.TabIndex = 442;
-            this.label141.Text = "Tile Index";
+            this.label141.Text = "Index";
             // 
             // label142
             // 
-            this.label142.BackColor = System.Drawing.SystemColors.Control;
-            this.label142.Location = new System.Drawing.Point(0, 18);
+            this.label142.AutoSize = true;
+            this.label142.Location = new System.Drawing.Point(6, 43);
             this.label142.Name = "label142";
-            this.label142.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label142.Size = new System.Drawing.Size(65, 17);
+            this.label142.Size = new System.Drawing.Size(41, 13);
             this.label142.TabIndex = 444;
             this.label142.Text = "Palette";
             // 
             // subtileStatus
             // 
             this.subtileStatus.BackColor = System.Drawing.SystemColors.Window;
-            this.subtileStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.subtileStatus.CheckOnClick = true;
             this.subtileStatus.ColumnWidth = 60;
             this.subtileStatus.Items.AddRange(new object[] {
             "Priority 1",
             "Mirror",
             "Invert"});
-            this.subtileStatus.Location = new System.Drawing.Point(0, 36);
+            this.subtileStatus.Location = new System.Drawing.Point(6, 68);
             this.subtileStatus.Name = "subtileStatus";
-            this.subtileStatus.Size = new System.Drawing.Size(138, 48);
+            this.subtileStatus.Size = new System.Drawing.Size(130, 52);
             this.subtileStatus.TabIndex = 4;
             this.subtileStatus.SelectedIndexChanged += new System.EventHandler(this.tileAttributes_SelectedIndexChanged);
             // 
             // subtileIndex
             // 
-            this.subtileIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.subtileIndex.Location = new System.Drawing.Point(66, 0);
+            this.subtileIndex.Location = new System.Drawing.Point(53, 20);
             this.subtileIndex.Maximum = new decimal(new int[] {
             1023,
             0,
             0,
             0});
             this.subtileIndex.Name = "subtileIndex";
-            this.subtileIndex.Size = new System.Drawing.Size(72, 17);
+            this.subtileIndex.Size = new System.Drawing.Size(83, 21);
             this.subtileIndex.TabIndex = 2;
             this.subtileIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.subtileIndex.ValueChanged += new System.EventHandler(this.tile8x8Tile_ValueChanged);
             // 
             // subtilePalette
             // 
-            this.subtilePalette.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.subtilePalette.Location = new System.Drawing.Point(66, 18);
+            this.subtilePalette.Location = new System.Drawing.Point(53, 41);
             this.subtilePalette.Maximum = new decimal(new int[] {
             7,
             0,
             0,
             0});
             this.subtilePalette.Name = "subtilePalette";
-            this.subtilePalette.Size = new System.Drawing.Size(72, 17);
+            this.subtilePalette.Size = new System.Drawing.Size(83, 21);
             this.subtilePalette.TabIndex = 441;
             this.subtilePalette.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.subtilePalette.ValueChanged += new System.EventHandler(this.tilePalette_ValueChanged);
@@ -202,8 +183,8 @@
             this.pictureBoxTile.Size = new System.Drawing.Size(64, 64);
             this.pictureBoxTile.TabIndex = 446;
             this.pictureBoxTile.TabStop = false;
-            this.pictureBoxTile.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTile_MouseClick);
             this.pictureBoxTile.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTile_Paint);
+            this.pictureBoxTile.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTile_MouseClick);
             // 
             // pictureBoxSubtile
             // 
@@ -226,7 +207,7 @@
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(174, 151);
+            this.buttonUpdate.Location = new System.Drawing.Point(174, 188);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdate.TabIndex = 538;
@@ -240,25 +221,38 @@
             this.autoUpdate.BackColor = System.Drawing.SystemColors.Control;
             this.autoUpdate.Checked = true;
             this.autoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.autoUpdate.Location = new System.Drawing.Point(170, 128);
+            this.autoUpdate.Location = new System.Drawing.Point(170, 165);
             this.autoUpdate.Name = "autoUpdate";
-            this.autoUpdate.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.autoUpdate.Size = new System.Drawing.Size(91, 17);
             this.autoUpdate.TabIndex = 537;
             this.autoUpdate.Text = "Auto-update";
             this.autoUpdate.UseVisualStyleBackColor = false;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label141);
+            this.groupBox1.Controls.Add(this.label142);
+            this.groupBox1.Controls.Add(this.subtileStatus);
+            this.groupBox1.Controls.Add(this.subtileIndex);
+            this.groupBox1.Controls.Add(this.subtilePalette);
+            this.groupBox1.Location = new System.Drawing.Point(12, 86);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(142, 125);
+            this.groupBox1.TabIndex = 539;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Subtile Properties";
+            // 
             // TileEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(261, 215);
+            this.ClientSize = new System.Drawing.Size(261, 252);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.autoUpdate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonInvertTile);
             this.Controls.Add(this.buttonMirrorTile);
-            this.Controls.Add(this.panel113);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.panel111);
             this.Controls.Add(this.buttonCancel);
@@ -274,13 +268,14 @@
             this.Text = "TILE EDITOR";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TileEditor_FormClosing);
-            this.panel113.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.subtileIndex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subtilePalette)).EndInit();
             this.panel111.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSubtile)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,7 +288,6 @@
         private System.Windows.Forms.Panel panel111;
         private System.Windows.Forms.PictureBox pictureBoxSubtile;
         private System.Windows.Forms.PictureBox pictureBoxTile;
-        private System.Windows.Forms.Panel panel113;
         private System.Windows.Forms.Label label141;
         private System.Windows.Forms.NumericUpDown subtilePalette;
         private System.Windows.Forms.NumericUpDown subtileIndex;
@@ -305,5 +299,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.CheckBox autoUpdate;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

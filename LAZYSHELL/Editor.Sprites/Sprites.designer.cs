@@ -50,26 +50,21 @@ namespace LAZYSHELL
             this.characterNumLabel = new System.Windows.Forms.Label();
             this.panelSprites = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel45 = new System.Windows.Forms.Panel();
             this.paletteIndex = new System.Windows.Forms.NumericUpDown();
-            this.label73 = new System.Windows.Forms.Label();
-            this.panel22 = new System.Windows.Forms.Panel();
-            this.panel24 = new System.Windows.Forms.Panel();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label72 = new System.Windows.Forms.Label();
-            this.animationVRAM = new System.Windows.Forms.NumericUpDown();
-            this.label17 = new System.Windows.Forms.Label();
-            this.animationPacket = new System.Windows.Forms.NumericUpDown();
-            this.animationAvailableBytes = new System.Windows.Forms.Label();
-            this.panel54 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label88 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.graphicOffset = new System.Windows.Forms.NumericUpDown();
-            this.imageNum = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.paletteOffset = new System.Windows.Forms.NumericUpDown();
             this.label71 = new System.Windows.Forms.Label();
+            this.label73 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.paletteOffset = new System.Windows.Forms.NumericUpDown();
+            this.graphicOffset = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.animationAvailableBytes = new System.Windows.Forms.Label();
+            this.animationVRAM = new System.Windows.Forms.NumericUpDown();
+            this.imageNum = new System.Windows.Forms.NumericUpDown();
+            this.animationPacket = new System.Windows.Forms.NumericUpDown();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.labelToolTip = new System.Windows.Forms.Label();
@@ -102,17 +97,14 @@ namespace LAZYSHELL
             this.contextMenuStrip2.SuspendLayout();
             this.panelSprites.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel45.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
-            this.panel22.SuspendLayout();
-            this.panel24.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.animationVRAM)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.animationPacket)).BeginInit();
-            this.panel54.SuspendLayout();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.graphicOffset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageNum)).BeginInit();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paletteOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphicOffset)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.animationVRAM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.animationPacket)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
@@ -120,9 +112,6 @@ namespace LAZYSHELL
             // number
             // 
             this.number.AutoSize = false;
-            this.number.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.number.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.number.ForeColor = System.Drawing.SystemColors.Control;
             this.number.Hexadecimal = false;
             this.number.Location = new System.Drawing.Point(223, 2);
             this.number.Maximum = new decimal(new int[] {
@@ -136,7 +125,7 @@ namespace LAZYSHELL
             0,
             0});
             this.number.Name = "number";
-            this.number.Size = new System.Drawing.Size(50, 17);
+            this.number.Size = new System.Drawing.Size(50, 21);
             this.number.Text = "0";
             this.number.Value = new decimal(new int[] {
             0,
@@ -218,9 +207,14 @@ namespace LAZYSHELL
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.panel45);
-            this.panel1.Controls.Add(this.panel22);
-            this.panel1.Controls.Add(this.panel54);
+            this.panel1.Controls.Add(this.paletteIndex);
+            this.panel1.Controls.Add(this.label71);
+            this.panel1.Controls.Add(this.label73);
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Controls.Add(this.label72);
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.imageNum);
+            this.panel1.Controls.Add(this.animationPacket);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -229,219 +223,83 @@ namespace LAZYSHELL
             this.panel1.SizeChanged += new System.EventHandler(this.panel1_SizeChanged);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // panel45
-            // 
-            this.panel45.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel45.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel45.Controls.Add(this.paletteIndex);
-            this.panel45.Controls.Add(this.label73);
-            this.panel45.Location = new System.Drawing.Point(3, 3);
-            this.panel45.Name = "panel45";
-            this.panel45.Size = new System.Drawing.Size(215, 21);
-            this.panel45.TabIndex = 2;
-            // 
             // paletteIndex
             // 
-            this.paletteIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.paletteIndex.Location = new System.Drawing.Point(105, 0);
+            this.paletteIndex.Location = new System.Drawing.Point(161, 6);
             this.paletteIndex.Maximum = new decimal(new int[] {
             7,
             0,
             0,
             0});
             this.paletteIndex.Name = "paletteIndex";
-            this.paletteIndex.Size = new System.Drawing.Size(106, 17);
+            this.paletteIndex.Size = new System.Drawing.Size(49, 21);
             this.paletteIndex.TabIndex = 4;
             this.paletteIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.paletteIndex.ValueChanged += new System.EventHandler(this.paletteIndex_ValueChanged);
             // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(10, 10);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(37, 13);
+            this.label71.TabIndex = 394;
+            this.label71.Text = "Image";
+            // 
             // label73
             // 
-            this.label73.BackColor = System.Drawing.SystemColors.Control;
-            this.label73.Location = new System.Drawing.Point(0, 0);
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(112, 10);
             this.label73.Name = "label73";
-            this.label73.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label73.Size = new System.Drawing.Size(104, 17);
+            this.label73.Size = new System.Drawing.Size(41, 13);
             this.label73.TabIndex = 394;
-            this.label73.Text = "Palette Row";
+            this.label73.Text = "Palette";
             // 
-            // panel22
+            // groupBox2
             // 
-            this.panel22.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel22.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel22.Controls.Add(this.panel24);
-            this.panel22.Location = new System.Drawing.Point(3, 104);
-            this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(215, 75);
-            this.panel22.TabIndex = 8;
-            // 
-            // panel24
-            // 
-            this.panel24.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel24.Controls.Add(this.label18);
-            this.panel24.Controls.Add(this.label72);
-            this.panel24.Controls.Add(this.animationVRAM);
-            this.panel24.Controls.Add(this.label17);
-            this.panel24.Controls.Add(this.animationPacket);
-            this.panel24.Controls.Add(this.animationAvailableBytes);
-            this.panel24.Location = new System.Drawing.Point(0, 0);
-            this.panel24.Name = "panel24";
-            this.panel24.Size = new System.Drawing.Size(256, 74);
-            this.panel24.TabIndex = 7;
-            // 
-            // label18
-            // 
-            this.label18.BackColor = System.Drawing.SystemColors.Control;
-            this.label18.Location = new System.Drawing.Point(0, 54);
-            this.label18.Name = "label18";
-            this.label18.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label18.Size = new System.Drawing.Size(104, 17);
-            this.label18.TabIndex = 394;
-            this.label18.Text = "VRAM Size";
-            // 
-            // label72
-            // 
-            this.label72.BackColor = System.Drawing.SystemColors.Control;
-            this.label72.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label72.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label72.Location = new System.Drawing.Point(0, 19);
-            this.label72.Name = "label72";
-            this.label72.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label72.Size = new System.Drawing.Size(104, 17);
-            this.label72.TabIndex = 394;
-            this.label72.Text = "Animation";
-            // 
-            // animationVRAM
-            // 
-            this.animationVRAM.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.animationVRAM.Increment = new decimal(new int[] {
-            2048,
-            0,
-            0,
-            0});
-            this.animationVRAM.Location = new System.Drawing.Point(105, 54);
-            this.animationVRAM.Maximum = new decimal(new int[] {
-            8192,
-            0,
-            0,
-            0});
-            this.animationVRAM.Minimum = new decimal(new int[] {
-            2048,
-            0,
-            0,
-            0});
-            this.animationVRAM.Name = "animationVRAM";
-            this.animationVRAM.Size = new System.Drawing.Size(106, 17);
-            this.animationVRAM.TabIndex = 6;
-            this.animationVRAM.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.animationVRAM.Value = new decimal(new int[] {
-            2048,
-            0,
-            0,
-            0});
-            this.animationVRAM.ValueChanged += new System.EventHandler(this.animationVRAM_ValueChanged);
-            // 
-            // label17
-            // 
-            this.label17.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.SystemColors.Control;
-            this.label17.Location = new System.Drawing.Point(0, 0);
-            this.label17.Name = "label17";
-            this.label17.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label17.Size = new System.Drawing.Size(211, 17);
-            this.label17.TabIndex = 417;
-            this.label17.Text = "SPRITE ANIMATION";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // animationPacket
-            // 
-            this.animationPacket.BackColor = System.Drawing.SystemColors.Control;
-            this.animationPacket.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.animationPacket.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.animationPacket.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.animationPacket.Location = new System.Drawing.Point(105, 19);
-            this.animationPacket.Maximum = new decimal(new int[] {
-            443,
-            0,
-            0,
-            0});
-            this.animationPacket.Name = "animationPacket";
-            this.animationPacket.Size = new System.Drawing.Size(106, 17);
-            this.animationPacket.TabIndex = 5;
-            this.animationPacket.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.animationPacket.ValueChanged += new System.EventHandler(this.animationPacket_ValueChanged);
-            // 
-            // animationAvailableBytes
-            // 
-            this.animationAvailableBytes.BackColor = System.Drawing.Color.Lime;
-            this.animationAvailableBytes.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.animationAvailableBytes.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.animationAvailableBytes.Location = new System.Drawing.Point(0, 38);
-            this.animationAvailableBytes.Name = "animationAvailableBytes";
-            this.animationAvailableBytes.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.animationAvailableBytes.Size = new System.Drawing.Size(211, 14);
-            this.animationAvailableBytes.TabIndex = 451;
-            this.animationAvailableBytes.Text = "0 bytes free";
-            // 
-            // panel54
-            // 
-            this.panel54.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel54.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel54.Controls.Add(this.panel5);
-            this.panel54.Location = new System.Drawing.Point(3, 26);
-            this.panel54.Name = "panel54";
-            this.panel54.Size = new System.Drawing.Size(215, 76);
-            this.panel54.TabIndex = 3;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel5.Controls.Add(this.label88);
-            this.panel5.Controls.Add(this.label23);
-            this.panel5.Controls.Add(this.graphicOffset);
-            this.panel5.Controls.Add(this.imageNum);
-            this.panel5.Controls.Add(this.label9);
-            this.panel5.Controls.Add(this.paletteOffset);
-            this.panel5.Controls.Add(this.label71);
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(256, 72);
-            this.panel5.TabIndex = 7;
-            // 
-            // label88
-            // 
-            this.label88.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label88.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label88.ForeColor = System.Drawing.SystemColors.Control;
-            this.label88.Location = new System.Drawing.Point(0, 0);
-            this.label88.Name = "label88";
-            this.label88.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.label88.Size = new System.Drawing.Size(211, 17);
-            this.label88.TabIndex = 417;
-            this.label88.Text = "SPRITE IMAGE";
-            this.label88.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.groupBox2.Controls.Add(this.label23);
+            this.groupBox2.Controls.Add(this.paletteOffset);
+            this.groupBox2.Controls.Add(this.graphicOffset);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Location = new System.Drawing.Point(3, 33);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(215, 69);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Image Properties";
             // 
             // label23
             // 
-            this.label23.BackColor = System.Drawing.SystemColors.Control;
-            this.label23.Location = new System.Drawing.Point(0, 37);
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(6, 22);
             this.label23.Name = "label23";
-            this.label23.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label23.Size = new System.Drawing.Size(104, 17);
+            this.label23.Size = new System.Drawing.Size(60, 13);
             this.label23.TabIndex = 394;
             this.label23.Text = "Palette Set";
             // 
+            // paletteOffset
+            // 
+            this.paletteOffset.Location = new System.Drawing.Point(111, 20);
+            this.paletteOffset.Maximum = new decimal(new int[] {
+            818,
+            0,
+            0,
+            0});
+            this.paletteOffset.Name = "paletteOffset";
+            this.paletteOffset.Size = new System.Drawing.Size(83, 21);
+            this.paletteOffset.TabIndex = 8;
+            this.paletteOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.paletteOffset.ValueChanged += new System.EventHandler(this.paletteOffset_ValueChanged);
+            // 
             // graphicOffset
             // 
-            this.graphicOffset.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.graphicOffset.Hexadecimal = true;
             this.graphicOffset.Increment = new decimal(new int[] {
             32,
             0,
             0,
             0});
-            this.graphicOffset.Location = new System.Drawing.Point(105, 55);
+            this.graphicOffset.Location = new System.Drawing.Point(111, 41);
             this.graphicOffset.Maximum = new decimal(new int[] {
             3342320,
             0,
@@ -453,7 +311,7 @@ namespace LAZYSHELL
             0,
             0});
             this.graphicOffset.Name = "graphicOffset";
-            this.graphicOffset.Size = new System.Drawing.Size(106, 17);
+            this.graphicOffset.Size = new System.Drawing.Size(83, 21);
             this.graphicOffset.TabIndex = 16;
             this.graphicOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.graphicOffset.Value = new decimal(new int[] {
@@ -463,60 +321,116 @@ namespace LAZYSHELL
             0});
             this.graphicOffset.ValueChanged += new System.EventHandler(this.graphicOffset_ValueChanged);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 43);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(81, 13);
+            this.label9.TabIndex = 394;
+            this.label9.Text = "BPP GFX Offset";
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(10, 114);
+            this.label72.Name = "label72";
+            this.label72.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.label72.Size = new System.Drawing.Size(56, 16);
+            this.label72.TabIndex = 394;
+            this.label72.Text = "Animation";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.animationAvailableBytes);
+            this.groupBox1.Controls.Add(this.animationVRAM);
+            this.groupBox1.Location = new System.Drawing.Point(3, 139);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(215, 67);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Animation Properties";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 43);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(57, 13);
+            this.label18.TabIndex = 394;
+            this.label18.Text = "VRAM Size";
+            // 
+            // animationAvailableBytes
+            // 
+            this.animationAvailableBytes.BackColor = System.Drawing.Color.Lime;
+            this.animationAvailableBytes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.animationAvailableBytes.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.animationAvailableBytes.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.animationAvailableBytes.Location = new System.Drawing.Point(6, 17);
+            this.animationAvailableBytes.Name = "animationAvailableBytes";
+            this.animationAvailableBytes.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
+            this.animationAvailableBytes.Size = new System.Drawing.Size(203, 20);
+            this.animationAvailableBytes.TabIndex = 451;
+            this.animationAvailableBytes.Text = "0 bytes free";
+            this.animationAvailableBytes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // animationVRAM
+            // 
+            this.animationVRAM.Increment = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
+            this.animationVRAM.Location = new System.Drawing.Point(71, 39);
+            this.animationVRAM.Maximum = new decimal(new int[] {
+            8192,
+            0,
+            0,
+            0});
+            this.animationVRAM.Minimum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
+            this.animationVRAM.Name = "animationVRAM";
+            this.animationVRAM.Size = new System.Drawing.Size(60, 21);
+            this.animationVRAM.TabIndex = 6;
+            this.animationVRAM.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.animationVRAM.Value = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
+            this.animationVRAM.ValueChanged += new System.EventHandler(this.animationVRAM_ValueChanged);
+            // 
             // imageNum
             // 
-            this.imageNum.BackColor = System.Drawing.SystemColors.Control;
-            this.imageNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.imageNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imageNum.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.imageNum.Location = new System.Drawing.Point(105, 19);
+            this.imageNum.Location = new System.Drawing.Point(55, 6);
             this.imageNum.Maximum = new decimal(new int[] {
             511,
             0,
             0,
             0});
             this.imageNum.Name = "imageNum";
-            this.imageNum.Size = new System.Drawing.Size(106, 17);
+            this.imageNum.Size = new System.Drawing.Size(49, 21);
             this.imageNum.TabIndex = 3;
             this.imageNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.imageNum.ValueChanged += new System.EventHandler(this.imageNum_ValueChanged);
             // 
-            // label9
+            // animationPacket
             // 
-            this.label9.BackColor = System.Drawing.SystemColors.Control;
-            this.label9.Location = new System.Drawing.Point(0, 55);
-            this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label9.Size = new System.Drawing.Size(104, 17);
-            this.label9.TabIndex = 394;
-            this.label9.Text = "BPP GFX Offset";
-            // 
-            // paletteOffset
-            // 
-            this.paletteOffset.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.paletteOffset.Location = new System.Drawing.Point(105, 37);
-            this.paletteOffset.Maximum = new decimal(new int[] {
-            818,
+            this.animationPacket.Location = new System.Drawing.Point(72, 112);
+            this.animationPacket.Maximum = new decimal(new int[] {
+            443,
             0,
             0,
             0});
-            this.paletteOffset.Name = "paletteOffset";
-            this.paletteOffset.Size = new System.Drawing.Size(106, 17);
-            this.paletteOffset.TabIndex = 8;
-            this.paletteOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.paletteOffset.ValueChanged += new System.EventHandler(this.paletteOffset_ValueChanged);
-            // 
-            // label71
-            // 
-            this.label71.BackColor = System.Drawing.SystemColors.Control;
-            this.label71.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label71.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label71.Location = new System.Drawing.Point(0, 19);
-            this.label71.Name = "label71";
-            this.label71.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.label71.Size = new System.Drawing.Size(104, 17);
-            this.label71.TabIndex = 394;
-            this.label71.Text = "Image";
+            this.animationPacket.Name = "animationPacket";
+            this.animationPacket.Size = new System.Drawing.Size(49, 21);
+            this.animationPacket.TabIndex = 5;
+            this.animationPacket.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.animationPacket.ValueChanged += new System.EventHandler(this.animationPacket_ValueChanged);
             // 
             // toolTip1
             // 
@@ -682,7 +596,6 @@ namespace LAZYSHELL
             // 
             // toolStrip3
             // 
-            this.toolStrip3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.name,
             this.number,
@@ -700,17 +613,13 @@ namespace LAZYSHELL
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(1015, 25);
             this.toolStrip3.TabIndex = 529;
-            this.toolStrip3.Text = "toolStrip3";
             // 
             // name
             // 
-            this.name.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.name.DropDownHeight = 500;
             this.name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.name.DropDownWidth = 400;
             this.name.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.name.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.name.ForeColor = System.Drawing.SystemColors.Control;
             this.name.IntegralHeight = false;
             this.name.Name = "name";
             this.name.Size = new System.Drawing.Size(214, 25);
@@ -822,17 +731,17 @@ namespace LAZYSHELL
             this.contextMenuStrip2.ResumeLayout(false);
             this.panelSprites.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel45.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).EndInit();
-            this.panel22.ResumeLayout(false);
-            this.panel24.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.animationVRAM)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.animationPacket)).EndInit();
-            this.panel54.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.graphicOffset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageNum)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paletteOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphicOffset)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.animationVRAM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.animationPacket)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
@@ -851,8 +760,6 @@ namespace LAZYSHELL
         private ToolStripSeparator toolStripSeparator7;
         private ToolStripSeparator toolStripSeparator8;
         private Label animationAvailableBytes;
-        private Panel panel5;
-        private Label label88;
         private Label label23;
         private NumericUpDown paletteOffset;
         private Label label9;
@@ -865,8 +772,6 @@ namespace LAZYSHELL
         private Label label71;
         private NumericUpDown paletteIndex;
         private NumericUpDown imageNum;
-        private Panel panel45;
-        private Panel panel54;
         private ToolTip toolTip1;
         private Panel panelSprites;
         private ToolTip toolTip2;
@@ -875,9 +780,6 @@ namespace LAZYSHELL
         private Label labelConvertor;
         private ContextMenuStrip contextMenuStrip2;
         private ToolStripMenuItem addThisToNotesDatabaseToolStripMenuItem;
-        private Panel panel22;
-        private Panel panel24;
-        private Label label17;
         private ToolStrip toolStrip2;
         private ToolStripButton save;
         private ToolStripSeparator toolStripSeparator11;
@@ -905,6 +807,8 @@ namespace LAZYSHELL
         private ToolTip toolTip3;
         private ToolStripButton hexViewer;
         private ToolStripButton reset;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
     }
 }
 

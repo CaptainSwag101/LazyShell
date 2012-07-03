@@ -142,10 +142,15 @@ namespace LAZYSHELL
             int fOffset = sequences.Count * 2 + 2;  // offset of first frame packet
             foreach (Sequence s in sequences)
             {
-                if (s.Frames.Count != 0)
+                if (s.Frames.Count != 0 && s.Active)
                 {
                     Bits.SetShort(temp, offset, (ushort)(fOffset + offset));
                     fOffset += s.Frames.Count * 2 - 1;
+                }
+                else if (s.Active)
+                {
+                    Bits.SetShort(temp, offset, (ushort)(fOffset + offset));
+                    fOffset -= 1;
                 }
                 else
                 {
@@ -162,7 +167,7 @@ namespace LAZYSHELL
                     Bits.SetByte(temp, offset++, f.Duration);
                     Bits.SetByte(temp, offset++, f.Mold);
                 }
-                if (s.Frames.Count != 0)
+                if (s.Active)
                     Bits.SetByte(temp, offset++, 0);
             }
             // Molds

@@ -854,7 +854,7 @@ namespace LAZYSHELL
         public void DrawLevelSolidMods(LevelSolidMods solidMods, SolidityTile[] tiles, Graphics g, Rectangle rdst, ImageAttributes ia, int z)
         {
             Solidity solidity = Solidity.Instance;
-            foreach (LevelSolidMods.Mod mod in solidMods.Mods)
+            foreach (LevelSolidMods.LevelMod mod in solidMods.Mods)
             {
                 if (mod == solidMods.Mod_)
                     continue;
@@ -866,7 +866,7 @@ namespace LAZYSHELL
         public void DrawLevelSolidMods(LevelSolidMods solidMods, Graphics g, int z)
         {
             if (solidMods.Count == 0) return;
-            foreach (LevelSolidMods.Mod mod in solidMods.Mods)
+            foreach (LevelSolidMods.LevelMod mod in solidMods.Mods)
             {
                 int x = ((mod.X & 127) * 32) + (16 * (mod.Y & 1)) - 16;
                 int y = ((mod.Y & 127) * 8) - 8;
@@ -881,6 +881,19 @@ namespace LAZYSHELL
                 Pen pen = new Pen(Color.Red);
                 pen.Width = mod != solidMods.Mod_ ? 2 * z : 4 * z; pen.DashStyle = DashStyle.Dot;
                 g.DrawPolygon(pen, new Point[] { top, right, bottom, left, top });
+            }
+        }
+        // mushrooms
+        public void DrawLevelMushrooms(MinecartData minecartData, MCObject[] mushrooms, Graphics g, int z)
+        {
+            foreach (MCObject mushroom in mushrooms)
+            {
+                int x = mushroom.X * 16;
+                int y = mushroom.Y * 16;
+                Rectangle rsrc = new Rectangle(x, y, 16, 16);
+                Rectangle rdst = new Rectangle(x * z, y * z, 16 * z, 16 * z);
+                g.DrawRectangle(new Pen(Color.Red, z), rdst);
+                g.DrawImage(minecartData.Mushroom, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
             }
         }
         #endregion

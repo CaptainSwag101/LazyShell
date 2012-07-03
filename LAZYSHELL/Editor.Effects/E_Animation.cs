@@ -128,7 +128,7 @@ namespace LAZYSHELL
             // Tileset
             Bits.SetShort(temp, 16, (ushort)offset);
             int tilesetoffset = offset;
-            foreach (Tile16x16 t in tileset.Tileset)
+            foreach (Tile t in tileset.Tileset)
             {
                 if (t.TileIndex >= tileSetLength / 8)
                     break;
@@ -138,8 +138,8 @@ namespace LAZYSHELL
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Bits.SetShort(temp, offset, (byte)t.Subtiles[i].TileIndex); offset++;
-                    Bits.SetBit(temp, offset, 5, t.Subtiles[i].PriorityOne);
+                    Bits.SetShort(temp, offset, (byte)t.Subtiles[i].Index); offset++;
+                    Bits.SetBit(temp, offset, 5, t.Subtiles[i].Priority1);
                     Bits.SetBit(temp, offset, 6, t.Subtiles[i].Mirror);
                     Bits.SetBit(temp, offset, 7, t.Subtiles[i].Invert);
                     if (i % 2 == 0) 
@@ -225,9 +225,9 @@ namespace LAZYSHELL
             codec = 0;
             width = 1;
             height = 1;
-            foreach (Tile16x16 tile in tileset.Tileset)
+            foreach (Tile tile in tileset.Tileset)
                 for (int i = 0; i < 4; i++)
-                    tile.Subtiles[i] = new Tile8x8(0, new byte[0x20], 0, new int[16], false, false, false, codec == 1);
+                    tile.Subtiles[i] = new Subtile(0, new byte[0x20], 0, new int[16], false, false, false, codec == 1);
         }
         #endregion
     }

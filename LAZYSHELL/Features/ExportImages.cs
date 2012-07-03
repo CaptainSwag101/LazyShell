@@ -151,8 +151,8 @@ namespace LAZYSHELL
                     LevelMap lmap = levelMaps[levels[a].LevelMap];
                     LevelLayer layr = levels[a].Layer;
                     PaletteSet pset = paletteSets[levelMaps[levels[a].LevelMap].PaletteSet];
-                    TileSet tset = new TileSet(lmap, pset);
-                    TileMap tmap = new TileMap(levels[a], tset);
+                    Tileset tset = new Tileset(lmap, pset);
+                    LevelTilemap tmap = new LevelTilemap(levels[a], tset);
                     int[] pixels;
                     Rectangle region;
                     if (crop)
@@ -161,12 +161,12 @@ namespace LAZYSHELL
                                 layr.MaskLowX * 16, layr.MaskLowY * 16,
                                 (layr.MaskHighX - layr.MaskLowX) * 16 + 16,
                                 (layr.MaskHighY - layr.MaskLowY) * 16 + 16);
-                        pixels = Do.GetPixelRegion(tmap.Mainscreen, region, 1024, 1024);
+                        pixels = Do.GetPixelRegion(tmap.Pixels, region, 1024, 1024);
                     }
                     else
                     {
                         region = new Rectangle(0, 0, 1024, 1024);
-                        pixels = tmap.Mainscreen;
+                        pixels = tmap.Pixels;
                     }
                     unsafe
                     {

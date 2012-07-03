@@ -31,19 +31,15 @@ namespace LAZYSHELL
         private byte obtuseAxis; public byte ObtuseAxis { get { return obtuseAxis; } set { obtuseAxis = value; } }
         private byte height; public byte Height { get { return height; } set { height = value; } }
         private byte shadow; public byte Shadow { get { return shadow; } set { shadow = value; } }
-        private bool b1b2; public bool B1b2 { get { return b1b2; } set { b1b2 = value; } }
-        private bool b1b3; public bool B1b3 { get { return b1b3; } set { b1b3 = value; } }
-        private bool b1b4; public bool B1b4 { get { return b1b4; } set { b1b4 = value; } }
-        private bool b1b5; public bool B1b5 { get { return b1b5; } set { b1b5 = value; } }
-        private bool b1b6; public bool B1b6 { get { return b1b6; } set { b1b6 = value; } }
-        private bool b1b7; public bool B1b7 { get { return b1b7; } set { b1b7 = value; } }
+        private byte byte1a; public byte Byte1a { get { return byte1a; } set { byte1a = value; } }
+        private byte byte1b; public byte Byte1b { get { return byte1b; } set { byte1b = value; } }
         private bool b2b0; public bool B2b0 { get { return b2b0; } set { b2b0 = value; } }
         private bool b2b1; public bool B2b1 { get { return b2b1; } set { b2b1 = value; } }
         private bool b2b2; public bool B2b2 { get { return b2b2; } set { b2b2 = value; } }
         private bool b2b3; public bool B2b3 { get { return b2b3; } set { b2b3 = value; } }
         private bool b2b4; public bool B2b4 { get { return b2b4; } set { b2b4 = value; } }
-        private bool b3b7; public bool B3b7 { get { return b3b7; } set { b3b7 = value; } }
-        private bool b5b5; public bool B5b5 { get { return b5b5; } set { b5b5 = value; } }
+        private bool activeVRAM; public bool ActiveVRAM { get { return activeVRAM; } set { activeVRAM = value; } }
+        private bool showShadow; public bool ShowShadow { get { return showShadow; } set { showShadow = value; } }
         private bool b5b6; public bool B5b6 { get { return b5b6; } set { b5b6 = value; } }
         private bool b5b7; public bool B5b7 { get { return b5b7; } set { b5b7 = value; } }
         private bool b6b2; public bool B6b2 { get { return b6b2; } set { b6b2 = value; } }
@@ -65,12 +61,8 @@ namespace LAZYSHELL
             offset++;
 
             sprite = (ushort)(temp & 0x03FF);
-            b1b2 = (data[offset] & 0x04) == 0x04;
-            b1b3 = (data[offset] & 0x08) == 0x08;
-            b1b4 = (data[offset] & 0x10) == 0x10;
-            b1b5 = (data[offset] & 0x20) == 0x20;
-            b1b6 = (data[offset] & 0x40) == 0x40;
-            b1b7 = (data[offset] & 0x80) == 0x80;
+            byte1a = (byte)((data[offset] >> 2) & 7);
+            byte1b = (byte)(data[offset] >> 5);
             offset++;
 
             priority0 = (data[offset] & 0x20) == 0x20;
@@ -86,7 +78,7 @@ namespace LAZYSHELL
             yPixelShiftUp = (byte)(data[offset] & 0x0F);
             shift16pxDown = (data[offset] & 0x10) == 0x10;
             shadow = (byte)((data[offset] & 0x60) >> 5);
-            b3b7 = (data[offset] & 0x80) == 0x80;
+            activeVRAM = (data[offset] & 0x80) == 0x80;
             offset++;
 
             acuteAxis = (byte)(data[offset] & 0x0F);
@@ -94,7 +86,7 @@ namespace LAZYSHELL
             offset++;
 
             height = (byte)(data[offset] & 0x1F);
-            b5b5 = (data[offset] & 0x20) == 0x20;
+            showShadow = (data[offset] & 0x20) == 0x20;
             b5b6 = (data[offset] & 0x40) == 0x40;
             b5b7 = (data[offset] & 0x80) == 0x80;
             offset++;
@@ -106,12 +98,8 @@ namespace LAZYSHELL
             int offset = index * 7 + 0x1DB800;
 
             Bits.SetShort(data, offset, sprite); offset++;
-            Bits.SetBit(data, offset, 2, b1b2);
-            Bits.SetBit(data, offset, 3, b1b3);
-            Bits.SetBit(data, offset, 4, b1b4);
-            Bits.SetBit(data, offset, 5, b1b5);
-            Bits.SetBit(data, offset, 6, b1b6);
-            Bits.SetBit(data, offset, 7, b1b7);
+            data[offset] |= (byte)(byte1a << 2);
+            data[offset] |= (byte)(byte1b << 5);
             offset++;
 
             Bits.SetBit(data, offset, 5, priority0);
@@ -128,7 +116,7 @@ namespace LAZYSHELL
             Bits.SetBit(data, offset, 4, shift16pxDown);
             data[offset] &= 0x9F;
             data[offset] |= (byte)(shadow << 5);
-            Bits.SetBit(data, offset, 7, b3b7);
+            Bits.SetBit(data, offset, 7, activeVRAM);
             offset++;
 
             data[offset] = acuteAxis;
@@ -136,7 +124,7 @@ namespace LAZYSHELL
             offset++;
 
             data[offset] = height;
-            Bits.SetBit(data, offset, 5, b5b5);
+            Bits.SetBit(data, offset, 5, showShadow);
             Bits.SetBit(data, offset, 6, b5b6);
             Bits.SetBit(data, offset, 7, b5b7);
             offset++;
@@ -185,7 +173,7 @@ namespace LAZYSHELL
             {
                 case 0: mirror = true; if (sm[6] < 13) break; offset += 24; break;
                 case 1: mirror = true; break;
-                case 2: mirror = true; if (sm[6] < 11) break; offset += 20; break;
+                case 2: mirror = false; if (sm[6] < 11) break; offset += 20; break;
                 case 4: mirror = false; if (sm[6] < 13) break; offset += 24; break;
                 case 5: mirror = false; if (sm[6] < 2) break; offset += 2; break;
                 case 6: mirror = false; if (sm[6] < 12) break; offset += 22; break;

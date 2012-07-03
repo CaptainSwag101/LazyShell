@@ -78,6 +78,7 @@ namespace LAZYSHELL
             for (int i = 0; i < animation.Sequences.Count; i++)
                 this.sequences.Items.Add("Sequence " + i.ToString());
             sequences.SelectedIndex = 0;
+            sequenceActive.Checked = sequence.Active;
             InitializeFrames();
             index = 0;
             updating = false;
@@ -92,6 +93,7 @@ namespace LAZYSHELL
             for (int i = 0; i < animation.Sequences.Count; i++)
                 this.sequences.Items.Add("Sequence " + i.ToString());
             sequences.SelectedIndex = 0;
+            sequenceActive.Checked = sequence.Active;
             InitializeFrames();
             index = 0;
             updating = false;
@@ -145,6 +147,9 @@ namespace LAZYSHELL
         {
             if (PlaybackSequence.IsBusy)
                 PlaybackSequence.CancelAsync();
+            updating = true;
+            sequenceActive.Checked = sequence.Active;
+            updating = false;
             if (sequence.Frames.Count != 0)
             {
                 toolStrip1.Enabled = true;
@@ -451,6 +456,11 @@ namespace LAZYSHELL
             }
         }
         // adding,deleting
+        private void sequenceActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            sequence.Active = sequenceActive.Checked;
+        }
         private void newSequence_Click(object sender, EventArgs e)
         {
             if (animation.Sequences.Count == 16)

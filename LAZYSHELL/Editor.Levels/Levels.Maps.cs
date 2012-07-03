@@ -15,12 +15,18 @@ namespace LAZYSHELL
         public LevelMap LevelMap { get { return levelMap; } }
         private PaletteSet paletteSet
         {
-            get { return paletteSets[levelMaps[level.LevelMap].PaletteSet]; }
-            set { paletteSets[levelMaps[level.LevelMap].PaletteSet] = value; }
+            get
+            {
+                return paletteSets[levelMaps[level.LevelMap].PaletteSet];
+            }
+            set
+            {
+                paletteSets[levelMaps[level.LevelMap].PaletteSet] = value;
+            }
         }
         public PaletteSet PaletteSet { get { return paletteSet; } }
-        private TileMap tileMap; public TileMap TileMap { get { return tileMap; } }
-        private TileSet tileSet; public TileSet TileSet { get { return tileSet; } }
+        private Tilemap tilemap; public Tilemap Tilemap { get { return tilemap; } }
+        private Tileset tileset; public Tileset Tileset { get { return tileset; } }
 
         private LevelSolidMap solidityMap; public LevelSolidMap SolidityMap { get { return solidityMap; } }
         #endregion
@@ -55,19 +61,19 @@ namespace LAZYSHELL
                 this.mapGFXSetL3Num.Value = levelMap.GraphicSetL3;
                 this.mapGFXSetL3Name.SelectedIndex = levelMap.GraphicSetL3;
             }
-            this.mapTilesetL1Num.Value = levelMap.TileSetL1;
-            this.mapTilesetL1Name.SelectedIndex = levelMap.TileSetL1;
-            this.mapTilesetL2Num.Value = levelMap.TileSetL2;
-            this.mapTilesetL2Name.SelectedIndex = levelMap.TileSetL2;
-            this.mapTilesetL3Num.Value = levelMap.TileSetL3;
-            this.mapTilesetL3Name.SelectedIndex = levelMap.TileSetL3;
+            this.mapTilesetL1Num.Value = levelMap.TilesetL1;
+            this.mapTilesetL1Name.SelectedIndex = levelMap.TilesetL1;
+            this.mapTilesetL2Num.Value = levelMap.TilesetL2;
+            this.mapTilesetL2Name.SelectedIndex = levelMap.TilesetL2;
+            this.mapTilesetL3Num.Value = levelMap.TilesetL3;
+            this.mapTilesetL3Name.SelectedIndex = levelMap.TilesetL3;
 
-            this.mapTilemapL1Num.Value = levelMap.TileMapL1;
-            this.mapTilemapL1Name.SelectedIndex = levelMap.TileMapL1;
-            this.mapTilemapL2Num.Value = levelMap.TileMapL2;
-            this.mapTilemapL2Name.SelectedIndex = levelMap.TileMapL2;
-            this.mapTilemapL3Num.Value = levelMap.TileMapL3;
-            this.mapTilemapL3Name.SelectedIndex = levelMap.TileMapL3;
+            this.mapTilemapL1Num.Value = levelMap.TilemapL1;
+            this.mapTilemapL1Name.SelectedIndex = levelMap.TilemapL1;
+            this.mapTilemapL2Num.Value = levelMap.TilemapL2;
+            this.mapTilemapL2Name.SelectedIndex = levelMap.TilemapL2;
+            this.mapTilemapL3Num.Value = levelMap.TilemapL3;
+            this.mapTilemapL3Name.SelectedIndex = levelMap.TilemapL3;
             this.mapPhysicalMapNum.Value = levelMap.SolidityMap;
             this.mapPhysicalMapName.SelectedIndex = levelMap.SolidityMap;
             this.mapBattlefieldNum.Value = levelMap.Battlefield;
@@ -212,7 +218,7 @@ namespace LAZYSHELL
             //SaveMapProperties(); // Save any changes must save changes prior to this point
             // Every property has to save itself
             if (updatingProperties) return;
-            tileMap.AssembleIntoModel(); // Assemble the edited tileMap into the model
+            tilemap.Assemble(); // Assemble the edited tileMap into the model
 
             level.LevelMap = (int)mapNum.Value; // Set the levels mapNum to the new value
 
@@ -340,7 +346,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
             mapTilesetL1Name.SelectedIndex = (int)mapTilesetL1Num.Value;
-            levelMap.TileSetL1 = (byte)this.mapTilesetL1Num.Value;
+            levelMap.TilesetL1 = (byte)this.mapTilesetL1Num.Value;
             if (!updatingLevel)
             {
                 fullUpdate = true;
@@ -356,7 +362,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
             mapTilesetL2Name.SelectedIndex = (int)mapTilesetL2Num.Value;
-            levelMap.TileSetL2 = (byte)this.mapTilesetL2Num.Value;
+            levelMap.TilesetL2 = (byte)this.mapTilesetL2Num.Value;
             if (!updatingLevel)
             {
                 fullUpdate = true;
@@ -372,7 +378,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
             mapTilesetL3Name.SelectedIndex = (int)mapTilesetL3Num.Value;
-            levelMap.TileSetL3 = (byte)this.mapTilesetL3Num.Value;
+            levelMap.TilesetL3 = (byte)this.mapTilesetL3Num.Value;
             if (!updatingLevel)
             {
                 fullUpdate = true;
@@ -388,7 +394,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
             mapTilemapL1Name.SelectedIndex = (int)mapTilemapL1Num.Value;
-            levelMap.TileMapL1 = (byte)this.mapTilemapL1Num.Value;
+            levelMap.TilemapL1 = (byte)this.mapTilemapL1Num.Value;
             if (!updatingLevel)
             {
                 fullUpdate = true;
@@ -404,7 +410,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
             mapTilemapL2Name.SelectedIndex = (int)mapTilemapL2Num.Value;
-            levelMap.TileMapL2 = (byte)this.mapTilemapL2Num.Value;
+            levelMap.TilemapL2 = (byte)this.mapTilemapL2Num.Value;
             if (!updatingLevel)
             {
                 fullUpdate = true;
@@ -420,7 +426,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
             mapTilemapL3Name.SelectedIndex = (int)mapTilemapL3Num.Value;
-            levelMap.TileMapL3 = (byte)this.mapTilemapL3Num.Value;
+            levelMap.TilemapL3 = (byte)this.mapTilemapL3Num.Value;
             if (!updatingLevel)
             {
                 fullUpdate = true;

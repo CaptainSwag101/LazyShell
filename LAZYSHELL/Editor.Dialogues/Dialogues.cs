@@ -255,7 +255,7 @@ namespace LAZYSHELL
             }
             return size - used;
         }
-        private void CalculateFreeTableSpace()
+        private int CalculateFreeTableSpace()
         {
             int used = 0;
             for (int i = 0; i < 10; i++)
@@ -263,6 +263,7 @@ namespace LAZYSHELL
             int left = 0x40 - used;
             this.freeTableBytes.Text = "(" + left.ToString() + " characters left)";
             this.freeTableBytes.BackColor = left >= 0 ? SystemColors.Control : Color.Red;
+            return left;
         }
         private bool FreeSpace(int current)
         {
@@ -529,6 +530,17 @@ namespace LAZYSHELL
         // assembler
         public void Assemble()
         {
+            // Assemble the overworld menu palette
+            Model.FontPaletteMenu.Assemble(Model.MenuPalettes, 0);
+            byte[] compressed = new byte[0x200];
+            int totalSize = Comp.Compress(Model.MenuPalettes, compressed);
+            if (totalSize > 0x12E)
+                MessageBox.Show("Not enough space for compressed menu palettes. The total required space (" +
+                    totalSize + " bytes) exceeds 302 bytes.\n\n" + "The menu palettes were not saved.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                Bits.SetByteArray(Model.Data, 0x3E2D54, compressed, 0, totalSize - 1);
+            //
             fonts.Assemble();
             battleDialogues.Assemble();
             if (!dialogueTextBox.IsDisposed && !dialogueTextBox.Text.EndsWith("[0]") && !dialogueTextBox.Text.EndsWith("[6]"))
@@ -541,6 +553,15 @@ namespace LAZYSHELL
             int temp = index;
             ushort len = 0;
             int i = 0;
+            // assemble table
+            if (CalculateFreeTableSpace() >= 0)
+            {
+                for (i = 0; i < dialogueTables.Length && len + dialogueTables[i].DialogueLen < 0x40; i++)
+                    len += dialogueTables[i].Assemble((ushort)dialogueTables[i].DialoguePtr);
+            }
+            else
+                MessageBox.Show("The dialogue table was not saved. Please delete the necessary number of bytes for space.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             // 000 - 1ff
             if (FreeSpace(0))
             {

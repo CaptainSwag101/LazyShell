@@ -158,7 +158,7 @@ namespace LAZYSHELL
         {
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Lists.Convert(settings.ShopNames),
-                Model.FontDialogue, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
+                Model.FontDialogue, Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 0, false, false, Model.MenuBG_);
         }
         private void shopLabel_TextChanged(object sender, EventArgs e)
         {
@@ -179,7 +179,7 @@ namespace LAZYSHELL
             if (e.Index < 0) return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
-                Model.FontPaletteMenu.Palette, 8, 10, 0, 128, false, false, Model.MenuBackground_);
+                Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
         }
         private void shopItem1_SelectedIndexChanged(object sender, EventArgs e)
         {

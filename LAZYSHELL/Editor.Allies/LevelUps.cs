@@ -138,7 +138,7 @@ namespace LAZYSHELL
         {
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Characters),
-                Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, false, false, Model.MenuBackground_);
+                Model.FontMenu, Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 0, false, false, Model.MenuBG_);
         }
         private void levelNum_ValueChanged(object sender, EventArgs e)
         {
@@ -198,7 +198,7 @@ namespace LAZYSHELL
         {
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Lists.Convert(Model.Spells, 33),
-                Model.FontMenu, Model.FontPaletteMenu.Palette, 8, 10, 0, 0, true, false, Model.MenuBackground_);
+                Model.FontMenu, Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 0, true, false, Model.MenuBG_);
         }
         //
         private void reset_Click(object sender, EventArgs e)

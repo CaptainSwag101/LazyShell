@@ -56,7 +56,6 @@
             // toolStrip2
             // 
             this.toolStrip2.CanOverflow = false;
-            this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.packNum,
             this.packNameTextBox,
@@ -64,17 +63,14 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(595, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(532, 25);
             this.toolStrip2.TabIndex = 563;
             // 
             // packNum
             // 
             this.packNum.AutoSize = false;
-            this.packNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.packNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.packNum.ForeColor = System.Drawing.SystemColors.Control;
             this.packNum.Hexadecimal = false;
-            this.packNum.Location = new System.Drawing.Point(7, 1);
+            this.packNum.Location = new System.Drawing.Point(7, 2);
             this.packNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -86,7 +82,7 @@
             0,
             0});
             this.packNum.Name = "packNum";
-            this.packNum.Size = new System.Drawing.Size(60, 22);
+            this.packNum.Size = new System.Drawing.Size(60, 21);
             this.packNum.Text = "0";
             this.packNum.Value = new decimal(new int[] {
             0,
@@ -98,7 +94,7 @@
             // packNameTextBox
             // 
             this.packNameTextBox.Name = "packNameTextBox";
-            this.packNameTextBox.Size = new System.Drawing.Size(305, 25);
+            this.packNameTextBox.Size = new System.Drawing.Size(105, 25);
             // 
             // searchFormationPacks
             // 
@@ -120,7 +116,7 @@
             0,
             0});
             this.packFormation3.Name = "packFormation3";
-            this.packFormation3.Size = new System.Drawing.Size(196, 21);
+            this.packFormation3.Size = new System.Drawing.Size(172, 21);
             this.packFormation3.TabIndex = 94;
             this.packFormation3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.packFormation3.ValueChanged += new System.EventHandler(this.packFormation3_ValueChanged);
@@ -135,18 +131,17 @@
             0,
             0});
             this.packFormation1.Name = "packFormation1";
-            this.packFormation1.Size = new System.Drawing.Size(197, 21);
+            this.packFormation1.Size = new System.Drawing.Size(172, 21);
             this.packFormation1.TabIndex = 87;
             this.packFormation1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.packFormation1.ValueChanged += new System.EventHandler(this.packFormation1_ValueChanged);
             // 
             // packFormationButton1
             // 
-            this.packFormationButton1.BackColor = System.Drawing.SystemColors.Control;
             this.packFormationButton1.FlatAppearance.BorderSize = 0;
             this.packFormationButton1.Location = new System.Drawing.Point(1, 161);
             this.packFormationButton1.Name = "packFormationButton1";
-            this.packFormationButton1.Size = new System.Drawing.Size(195, 22);
+            this.packFormationButton1.Size = new System.Drawing.Size(172, 22);
             this.packFormationButton1.TabIndex = 89;
             this.packFormationButton1.Text = "LOAD";
             this.packFormationButton1.UseVisualStyleBackColor = false;
@@ -159,17 +154,16 @@
             this.richTextBox4.Location = new System.Drawing.Point(0, 21);
             this.richTextBox4.Name = "richTextBox4";
             this.richTextBox4.ReadOnly = true;
-            this.richTextBox4.Size = new System.Drawing.Size(196, 110);
+            this.richTextBox4.Size = new System.Drawing.Size(172, 110);
             this.richTextBox4.TabIndex = 95;
             this.richTextBox4.Text = "";
             // 
             // packFormationButton3
             // 
-            this.packFormationButton3.BackColor = System.Drawing.SystemColors.Control;
             this.packFormationButton3.FlatAppearance.BorderSize = 0;
-            this.packFormationButton3.Location = new System.Drawing.Point(398, 161);
+            this.packFormationButton3.Location = new System.Drawing.Point(357, 161);
             this.packFormationButton3.Name = "packFormationButton3";
-            this.packFormationButton3.Size = new System.Drawing.Size(195, 22);
+            this.packFormationButton3.Size = new System.Drawing.Size(172, 22);
             this.packFormationButton3.TabIndex = 96;
             this.packFormationButton3.Text = "LOAD";
             this.packFormationButton3.UseVisualStyleBackColor = false;
@@ -182,17 +176,16 @@
             this.richTextBox2.Location = new System.Drawing.Point(0, 21);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(197, 110);
+            this.richTextBox2.Size = new System.Drawing.Size(172, 110);
             this.richTextBox2.TabIndex = 88;
             this.richTextBox2.Text = "";
             // 
             // packFormationButton2
             // 
-            this.packFormationButton2.BackColor = System.Drawing.SystemColors.Control;
             this.packFormationButton2.FlatAppearance.BorderSize = 0;
-            this.packFormationButton2.Location = new System.Drawing.Point(200, 161);
+            this.packFormationButton2.Location = new System.Drawing.Point(179, 161);
             this.packFormationButton2.Name = "packFormationButton2";
-            this.packFormationButton2.Size = new System.Drawing.Size(195, 22);
+            this.packFormationButton2.Size = new System.Drawing.Size(172, 22);
             this.packFormationButton2.TabIndex = 93;
             this.packFormationButton2.Text = "LOAD";
             this.packFormationButton2.UseVisualStyleBackColor = false;
@@ -208,7 +201,7 @@
             0,
             0});
             this.packFormation2.Name = "packFormation2";
-            this.packFormation2.Size = new System.Drawing.Size(196, 21);
+            this.packFormation2.Size = new System.Drawing.Size(172, 21);
             this.packFormation2.TabIndex = 90;
             this.packFormation2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.packFormation2.ValueChanged += new System.EventHandler(this.packFormation2_ValueChanged);
@@ -220,7 +213,7 @@
             this.richTextBox3.Location = new System.Drawing.Point(0, 21);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.Size = new System.Drawing.Size(196, 110);
+            this.richTextBox3.Size = new System.Drawing.Size(172, 110);
             this.richTextBox3.TabIndex = 92;
             this.richTextBox3.Text = "";
             // 
@@ -231,7 +224,7 @@
             this.panel1.Controls.Add(this.packFormation1);
             this.panel1.Location = new System.Drawing.Point(1, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(197, 131);
+            this.panel1.Size = new System.Drawing.Size(172, 131);
             this.panel1.TabIndex = 565;
             // 
             // panel2
@@ -239,9 +232,9 @@
             this.panel2.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel2.Controls.Add(this.richTextBox3);
             this.panel2.Controls.Add(this.packFormation2);
-            this.panel2.Location = new System.Drawing.Point(200, 28);
+            this.panel2.Location = new System.Drawing.Point(179, 28);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(196, 131);
+            this.panel2.Size = new System.Drawing.Size(172, 131);
             this.panel2.TabIndex = 566;
             // 
             // panel6
@@ -249,16 +242,16 @@
             this.panel6.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel6.Controls.Add(this.richTextBox4);
             this.panel6.Controls.Add(this.packFormation3);
-            this.panel6.Location = new System.Drawing.Point(398, 28);
+            this.panel6.Location = new System.Drawing.Point(357, 28);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(196, 131);
+            this.panel6.Size = new System.Drawing.Size(172, 131);
             this.panel6.TabIndex = 567;
             // 
             // FormationPacks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 185);
+            this.ClientSize = new System.Drawing.Size(532, 185);
             this.ControlBox = false;
             this.Controls.Add(this.packFormationButton1);
             this.Controls.Add(this.packFormationButton3);

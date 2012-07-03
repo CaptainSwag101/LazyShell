@@ -48,20 +48,20 @@ namespace LAZYSHELL
                 for (int x = start.X; x < stop.X; x++)
                 {
                     p = solidity.PixelTiles[y * 1024 + x] * 2;
-                    soliditymap[p] = solidityMap.Tilemap[p];
-                    soliditymap[p + 1] = solidityMap.Tilemap[p + 1];
+                    soliditymap[p] = solidityMap.Tilemap_Bytes[p];
+                    soliditymap[p + 1] = solidityMap.Tilemap_Bytes[p + 1];
                 }
             }
         }
-        public int[] GetTemplatePixels(Level level, TileSet tileset)
+        public int[] GetTemplatePixels(Level level, Tileset tileset)
         {
-            TileMap tilemap = new TileMap(level, tileset, this);
-            int[] mainscreen = tilemap.Mainscreen;
+            LevelTilemap tilemap = new LevelTilemap(level, tileset, this);
+            int[] pixels = tilemap.Pixels;
             int[] temp = new int[size.Width * size.Height];
             for (int y = 0; y < size.Height; y++)
             {
                 for (int x = 0; x < size.Width; x++)
-                    temp[y * size.Width + x] = mainscreen[y * 1024 + x];
+                    temp[y * size.Width + x] = pixels[y * 1024 + x];
             }
             return temp;
         }
