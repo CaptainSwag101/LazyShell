@@ -1,6 +1,6 @@
 LAZY SHELL - Super Mario RPG Editor
-Version: 3.10.0 BETA
-Date: July 3, 2012
+Version: 3.11.0
+Date: August 5, 2012
 Home Page: http://home.comcast.net/~giangurgolo/smrpg/
 Written by giangurgolo and Omega
 
@@ -584,14 +584,15 @@ A: You'll want to try changing the "Partition" property. You can
 Q: I have no idea how these partitioning properties work.
 A: Unfortunately, this is a grey area in my knowledge, as I am not
    completely sure how the game organizes video memory for NPC
-   sprites on loading a level. Just try switching between indexes
-   to find the best one. I usually find that if the "Sprite Type" is
-   set to "large sprite (tilemap)" it increases the likelihood that
-   larger sprites will show properly. If the earlier NPC indexes
-   use gridplane-based sprites try setting those to 32px or 24px wide.
-   Probably each partition was especially designed for each individual 
-   level which is why it might be difficult to find the best one for a 
-   custom NPC map.
+   sprites on loading a level. Clone sprites (ex: multiple townspeople
+   in the town levels) should be first in the NPC collection, and a
+   partition that has the clone VRAM properties should be set to
+   store them (3 or 4 sprites per row). Additionally, cloned sprites
+   can only be gridplane format sprites. 3 sprites per row is set for
+   32px width sprites, 4 per row is for 24px width. Large sprites that
+   overflow and write over cloned sprites might be fixed by setting
+   clone buffer A to "empty buffer" to provide extra space for the large
+   sprite.
    
 Q: What does "Could not insert the _____" mean?
 A: You'll need to delete other exits, events, npcs, or overlaps to
@@ -641,7 +642,10 @@ A: The easiest way is to make an image outside of Lazy Shell with a
 _________________
 MINI-GAMES EDITOR
 ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-Q: Why aren't the rails arching in stage 4?
+Q: How do I delete/add mushrooms to stages 1 & 2?
+A: You can't, the mushroom count is fixed to 8 for both stages.
+
+Q: Why aren't the rails arching in stage 4 like in-game?
 A: This is probably an effect applied by some code in the assembly I
    am not familiar with. Thus the rails appear flat in the editor.
 _______________
@@ -879,6 +883,14 @@ SNES games like SMRPG are somewhat limited in the number of colors
 they can display, which is why imported image files can decrease
 dramatically in quality. Many paint programs have features which can
 decrease the color depth of an image to 16 colors.
+
+"priority"
+A tile or sprite's priority determines how it will overlap other tiles
+or how other tiles will overlap it. "Priority 1" means someting will
+overlap all other parts of a level that aren't also set to priority 1.
+Higher priority numbers mean it will appear under other things.
+Highlighting priority 1 tiles in a level will show what parts of the
+level will typically overlap Mario and NPCs.
 
 "script"
 A list of 0 or more commands that carry out an action on screen

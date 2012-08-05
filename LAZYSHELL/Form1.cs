@@ -362,7 +362,11 @@ namespace LAZYSHELL
         {
             AppControl.Assemble();
             if (AppControl.SaveRomFileAs())
+            {
                 UpdateRomInfo();
+                mruManager.Add(AppControl.GetPathWithoutFileName() + AppControl.GetFileNameWithoutPath());
+                settings.Save();
+            }
             else
                 MessageBox.Show("Lazy Shell could not save the ROM.\n\nMake sure that the file is not currently in use by another appliaction.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

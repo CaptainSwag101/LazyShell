@@ -6,12 +6,13 @@ using System.Drawing;
 
 namespace LAZYSHELL
 {
+    [Serializable()]
     public class Tileset
     {
         private LevelMap levelMap;
-        private State state = State.Instance;
         public int Width;
         public int Height;
+        public int HeightL3;
         public string Type;
         private int tilesize;
         //
@@ -31,18 +32,32 @@ namespace LAZYSHELL
         private byte[] palette_bytes;
         public byte[] Subtile_Bytes { get { return subtile_bytes; } set { subtile_bytes = value; } }
         public byte[] Palette_Bytes { get { return palette_bytes; } set { palette_bytes = value; } }
-        /// <summary>
-        /// Draw a level tileset from a level map's properties.
-        /// </summary>
-        /// <param name="levelMap">The level map to read from.</param>
-        /// <param name="paletteSet">The palette set to use.</param>
-        /// <param name="height">The height, in 16x16 tiles, of the tileset.</param>
+        //
+        public Tileset(byte[] tileset_Bytes, byte[] graphics, PaletteSet paletteSet, int width, int height, string type)
+        {
+            this.paletteSet = paletteSet;
+            this.Tileset_Bytes = tileset_Bytes;
+            this.Width = width;
+            this.Height = height;
+            this.tilesize = 2;
+            this.Type = type;
+            //
+            this.graphics = graphics;
+            //
+            Tileset_Tiles = new Tile[Width * Height];
+            for (int i = 0; i < Tileset_Tiles.Length; i++)
+                Tileset_Tiles[i] = new Tile(i);
+            DrawTileset(Tileset_Bytes, Tileset_Tiles, graphics, 0x20);
+            this.tilesets_Bytes[0] = this.Tileset_Bytes;
+            this.tilesets_Tiles[0] = this.Tileset_Tiles;
+        }
         public Tileset(LevelMap levelMap, PaletteSet paletteSet)
         {
             this.levelMap = levelMap; // grab the current LevelMap
             this.paletteSet = paletteSet; // grab the current Palette Set
             this.Width = 16;
             this.Height = 32;
+            this.HeightL3 = 8;
             this.tilesize = 2;
             this.Type = "level";
             // set tileset byte arrays
@@ -62,7 +77,7 @@ namespace LAZYSHELL
             tilesets_Tiles[0] = new Tile[Width * Height];
             tilesets_Tiles[1] = new Tile[Width * Height];
             if (levelMap.GraphicSetL3 != 0xFF)
-                tilesets_Tiles[2] = new Tile[Width * Height];
+                tilesets_Tiles[2] = new Tile[Width * HeightL3];
             for (int l = 0; l < 3; l++)
             {
                 if (tilesets_Tiles[l] == null)
@@ -76,23 +91,34 @@ namespace LAZYSHELL
             if (levelMap.GraphicSetL3 != 0xFF)
                 DrawTileset(tilesets_Bytes[2], tilesets_Tiles[2], graphicsL3, 0x10);
         }
-        public Tileset(byte[] tileset_Bytes, PaletteSet paletteSet, int width)
+        public Tileset(PaletteSet paletteSet, string type)
         {
             this.paletteSet = paletteSet;
-            this.Tileset_Bytes = tileset_Bytes;
-            this.Width = width;
-            this.Height = 16;
+            this.Width = 16;
+            this.Height = 32;
+            this.HeightL3 = 6;
             this.tilesize = 2;
-            this.Type = "side";
+            this.Type = "title";
+            // Decompress data at offsets
+            tilesets_Bytes[0] = Bits.GetByteArray(Model.TitleData, 0x0000, 0x1000);
+            tilesets_Bytes[1] = Bits.GetByteArray(Model.TitleData, 0x1000, 0x1000);
+            tilesets_Bytes[2] = Bits.GetByteArray(Model.TitleData, 0xBBE0, 0x300);
+            // Create buffer the size of the combined graphicSets
+            graphics = Bits.GetByteArray(Model.TitleData, 0x6C00, 0x4FE0);
+            graphicsL3 = Bits.GetByteArray(Model.TitleData, 0xBEA0, 0x1BC0);
             //
-            graphics = Model.MinecartSSGraphics;
-            //
-            Tileset_Tiles = new Tile[Width * Height];
-            for (int i = 0; i < Tileset_Tiles.Length; i++)
-                Tileset_Tiles[i] = new Tile(i);
-            DrawTileset(Tileset_Bytes, Tileset_Tiles, graphics, 0x20);
-            this.tilesets_Bytes[0] = this.Tileset_Bytes;
-            this.tilesets_Tiles[0] = this.Tileset_Tiles;
+            tilesets_Tiles[0] = new Tile[16 * 32];
+            tilesets_Tiles[1] = new Tile[16 * 32];
+            tilesets_Tiles[2] = new Tile[16 * 6];
+            for (int i = 0; i < tilesets_Tiles[0].Length; i++)
+                tilesets_Tiles[0][i] = new Tile(i);
+            for (int i = 0; i < tilesets_Tiles[1].Length; i++)
+                tilesets_Tiles[1][i] = new Tile(i);
+            for (int i = 0; i < tilesets_Tiles[2].Length; i++)
+                tilesets_Tiles[2][i] = new Tile(i);
+            DrawTileset(tilesets_Bytes[0], tilesets_Tiles[0], graphics, 0x20);
+            DrawTileset(tilesets_Bytes[1], tilesets_Tiles[1], graphics, 0x20);
+            DrawTileset(tilesets_Bytes[2], tilesets_Tiles[2], graphicsL3, 0x20);
         }
         public Tileset(PaletteSet paletteSet)
         {
@@ -111,6 +137,7 @@ namespace LAZYSHELL
                 Tileset_Tiles[i] = new Tile(i);
             DrawTileset(subtile_bytes, Tileset_Tiles, graphics, 0x20);
         }
+        //
         private void DrawTileset(byte[] src, Tile[] dst, byte[] graphics, byte format)
         {
             byte status = 0;
@@ -124,6 +151,8 @@ namespace LAZYSHELL
                     for (int x = i * 16; x < i * 16 + 16; x++)
                     {
                         int index = y * Width + x;
+                        if (index >= dst.Length)
+                            continue;
                         for (int z = 0; z < 4; z++)
                         {
                             if (z == 2)
@@ -157,6 +186,8 @@ namespace LAZYSHELL
                 for (int x = 0; x < 16; x++)
                 {
                     int index = y * Width + x;
+                    if (index >= src.Length)
+                        continue;
                     for (int z = 0; z < 4; z++)
                     {
                         if (z == 2)
@@ -189,7 +220,7 @@ namespace LAZYSHELL
             {
                 if (tilesets_Tiles[l] != null)
                 {
-                    byte format = (byte)(l != 2 ? 0x20 : 0x10);
+                    byte format = (byte)(l != 2 || Type == "title" ? 0x20 : 0x10);
                     byte[] graphics = l != 2 ? this.graphics : this.graphicsL3;
                     //
                     if (tilesize == 2)
@@ -201,7 +232,7 @@ namespace LAZYSHELL
         }
         public void RedrawTilesets(int layer)
         {
-            byte format = (byte)(layer != 2 ? 0x20 : 0x10);
+            byte format = (byte)(layer != 2 || Type == "title" ? 0x20 : 0x10);
             byte[] graphics = layer != 2 ? this.graphics : this.graphicsL3;
             //
             if (tilesets_Tiles[layer] != null)
@@ -256,18 +287,21 @@ namespace LAZYSHELL
             if (tilesets_Tiles[layer] == null) return;
             //
             int offset = 0;
-            if (Type == "level")
+            if (Type == "level" || Type == "title")
             {
                 for (int y = 0; y < tilesets_Tiles[layer].Length / width; y++)
                 {
                     for (int x = 0; x < width; x++)
                     {
-                        Tile tile = tilesets_Tiles[layer][y * width + x];
+                        int index = y * width + x;
+                        if (index >= tilesets_Tiles[layer].Length)
+                            continue;
+                        Tile tile = tilesets_Tiles[layer][index];
                         for (int s = 0; s < 4; s++)
                         {
-                            offset = y * (width * 2 * 2 * 2) + (x * 2 * 2);
+                            offset = y * (width * 8) + (x * 4);
                             offset += (s % 2) * 2;
-                            offset += (s / 2) * (width * 2 * 2);
+                            offset += (s / 2) * (width * 4);
                             Subtile subtile = tile.Subtiles[s];
                             if (subtile == null) continue;
                             Bits.SetShort(tilesets_Bytes[layer], offset, (ushort)subtile.Index);
@@ -278,24 +312,35 @@ namespace LAZYSHELL
                         }
                     }
                 }
-                if (layer == 0)
-                    Model.EditTileSets[levelMap.TilesetL1 + 0x20] = true;
-                if (layer == 1)
-                    Model.EditTileSets[levelMap.TilesetL2 + 0x20] = true;
-                if (layer == 2)
-                    Model.EditTileSets[levelMap.TilesetL3] = true;
-                //
-                Buffer.BlockCopy(graphics, 0, Model.GraphicSets[levelMap.GraphicSetA + 0x48], 0, 0x2000);
-                Buffer.BlockCopy(graphics, 0x2000, Model.GraphicSets[levelMap.GraphicSetB + 0x48], 0, 0x1000);
-                Buffer.BlockCopy(graphics, 0x3000, Model.GraphicSets[levelMap.GraphicSetC + 0x48], 0, 0x1000);
-                Buffer.BlockCopy(graphics, 0x4000, Model.GraphicSets[levelMap.GraphicSetD + 0x48], 0, 0x1000);
-                Buffer.BlockCopy(graphics, 0x5000, Model.GraphicSets[levelMap.GraphicSetE + 0x48], 0, 0x1000);
-                //
-                Model.EditGraphicSets[levelMap.GraphicSetA + 0x48] = true;
-                Model.EditGraphicSets[levelMap.GraphicSetB + 0x48] = true;
-                Model.EditGraphicSets[levelMap.GraphicSetC + 0x48] = true;
-                Model.EditGraphicSets[levelMap.GraphicSetD + 0x48] = true;
-                Model.EditGraphicSets[levelMap.GraphicSetE + 0x48] = true;
+                if (Type == "level")
+                {
+                    if (layer == 0)
+                        Model.EditTileSets[levelMap.TilesetL1 + 0x20] = true;
+                    if (layer == 1)
+                        Model.EditTileSets[levelMap.TilesetL2 + 0x20] = true;
+                    if (layer == 2)
+                        Model.EditTileSets[levelMap.TilesetL3] = true;
+                    //
+                    Buffer.BlockCopy(graphics, 0, Model.GraphicSets[levelMap.GraphicSetA + 0x48], 0, 0x2000);
+                    Buffer.BlockCopy(graphics, 0x2000, Model.GraphicSets[levelMap.GraphicSetB + 0x48], 0, 0x1000);
+                    Buffer.BlockCopy(graphics, 0x3000, Model.GraphicSets[levelMap.GraphicSetC + 0x48], 0, 0x1000);
+                    Buffer.BlockCopy(graphics, 0x4000, Model.GraphicSets[levelMap.GraphicSetD + 0x48], 0, 0x1000);
+                    Buffer.BlockCopy(graphics, 0x5000, Model.GraphicSets[levelMap.GraphicSetE + 0x48], 0, 0x1000);
+                    //
+                    Model.EditGraphicSets[levelMap.GraphicSetA + 0x48] = true;
+                    Model.EditGraphicSets[levelMap.GraphicSetB + 0x48] = true;
+                    Model.EditGraphicSets[levelMap.GraphicSetC + 0x48] = true;
+                    Model.EditGraphicSets[levelMap.GraphicSetD + 0x48] = true;
+                    Model.EditGraphicSets[levelMap.GraphicSetE + 0x48] = true;
+                }
+                else if (Type == "title")
+                {
+                    Buffer.BlockCopy(tilesets_Bytes[0], 0, Model.TitleData, 0, 0x1000);
+                    Buffer.BlockCopy(tilesets_Bytes[1], 0, Model.TitleData, 0x1000, 0x1000);
+                    Buffer.BlockCopy(tilesets_Bytes[2], 0, Model.TitleData, 0xBBE0, 0x300);
+                    Buffer.BlockCopy(graphics, 0, Model.TitleData, 0x6C00, 0x4FE0);
+                    Buffer.BlockCopy(graphicsL3, 0x40, Model.TitleData, 0xBEE0, 0x1B80);
+                }
             }
             else
                 Assemble(width);
@@ -351,8 +396,16 @@ namespace LAZYSHELL
                 {
                     Buffer.BlockCopy(graphics, 0, Model.MinecartSSGraphics, 0, graphics.Length);
                 }
+                else if (Type == "title")
+                {
+                    Buffer.BlockCopy(tilesets_Bytes[0], 0, Model.TitleData, 0, 0x1000);
+                    Buffer.BlockCopy(tilesets_Bytes[1], 0, Model.TitleData, 0x1000, 0x1000);
+                    Buffer.BlockCopy(tilesets_Bytes[2], 0, Model.TitleData, 0xBBE0, 0x300);
+                    Buffer.BlockCopy(graphics, 0, Model.TitleData, 0x6C00, 0x4FE0);
+                    Buffer.BlockCopy(graphicsL3, 0x40, Model.TitleData, 0xBEE0, 0x1B80);
+                }
             }
-            else if (Type == "mode7")
+            else
             {
                 if (Tileset_Tiles == null) return;
                 for (int y = 0; y < 16; y++)

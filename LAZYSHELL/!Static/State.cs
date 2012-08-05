@@ -7,6 +7,7 @@ namespace LAZYSHELL
     public sealed class State
     {
         static State instance = null;
+        static State instance2 = null;
         static readonly object padlock = new object();
 
         // Initial settings
@@ -23,6 +24,7 @@ namespace LAZYSHELL
         private bool events = false; public bool Events { get { return events; } set { events = value; } }
         private bool overlaps = false; public bool Overlaps { get { return overlaps; } set { overlaps = value; } }
         private bool mushrooms = false; public bool Mushrooms { get { return mushrooms; } set { mushrooms = value; } }
+        private bool rails = false; public bool Rails { get { return rails; } set { rails = value; } }
         private bool tileMods = false; public bool TileMods { get { return tileMods; } set { tileMods = value; } }
         private bool solidMods = false; public bool SolidMods { get { return solidMods; } set { solidMods = value; } }
         private bool cartesianGrid = false; public bool CartesianGrid { get { return cartesianGrid; } set { cartesianGrid = value; } }
@@ -77,6 +79,21 @@ namespace LAZYSHELL
                         instance = new State();
                     }
                     return instance;
+                }
+
+            }
+        }
+        public static State Instance2
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance2 == null)
+                    {
+                        instance2 = new State();
+                    }
+                    return instance2;
                 }
 
             }

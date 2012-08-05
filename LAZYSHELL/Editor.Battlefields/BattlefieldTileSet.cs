@@ -9,7 +9,6 @@ namespace LAZYSHELL
     class BattlefieldTileSet
     {
         [NonSerialized()]
-        private State state = State.Instance;
         private Battlefield battlefield;
         public Battlefield Battlefield { get { return battlefield; } set { battlefield = value; } }
         private PaletteSet paletteSet;

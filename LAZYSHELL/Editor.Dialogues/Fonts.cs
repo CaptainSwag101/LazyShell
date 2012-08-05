@@ -16,7 +16,7 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
-
+        private delegate void Function();
         private Dialogues dialoguesEditor;
         private bool updating;
         private Overlay overlay;
@@ -27,21 +27,23 @@ namespace LAZYSHELL
         {
             get
             {
-                switch (fontType.SelectedIndex)
+                switch (FontType)
                 {
                     case 0: return fontMenu;
                     case 1: return fontDialogue;
                     case 2: return fontDescription;
+                    case 4: return fontBattleMenu;
                     default: return fontTriangle;
                 }
             }
             set
             {
-                switch (fontType.SelectedIndex)
+                switch (FontType)
                 {
                     case 0: fontMenu = value; break;
                     case 1: fontDialogue = value; break;
                     case 2: fontDescription = value; break;
+                    case 4: fontBattleMenu = value; break;
                     default: fontTriangle = value; break;
                 }
             }
@@ -50,8 +52,12 @@ namespace LAZYSHELL
         private FontCharacter[] fontDialogue { get { return Model.FontDialogue; } set { Model.FontDialogue = value; } }
         private FontCharacter[] fontDescription { get { return Model.FontDescription; } set { Model.FontDescription = value; } }
         private FontCharacter[] fontTriangle { get { return Model.FontTriangle; } set { Model.FontTriangle = value; } }
+        private FontCharacter[] fontBattleMenu { get { return Model.FontBattleMenu; } set { Model.FontBattleMenu = value; } }
         private PaletteSet fontPalettesDialogue { get { return Model.FontPaletteDialogue; } set { Model.FontPaletteDialogue = value; } }
         private PaletteSet fontPalettesMenu { get { return Model.FontPaletteMenu; } set { Model.FontPaletteMenu = value; } }
+        private PaletteSet fontPalettesBattle { get { return Model.BattleMenuPalette; } set { Model.BattleMenuPalette = value; } }
+        private GraphicEditor numeralGraphicEditor;
+        private PaletteEditor numeralPaletteEditor;
         // font palette variables
         private int currentColor = 0;
         private int currentColorBack = 0;
@@ -75,7 +81,7 @@ namespace LAZYSHELL
         {
             get
             {
-                switch (fontType.SelectedIndex)
+                switch (FontType)
                 {
                     case 0: return Settings.Default.KeystrokesMenu;
                     case 1: return Settings.Default.Keystrokes;
@@ -89,10 +95,11 @@ namespace LAZYSHELL
         {
             get
             {
-                switch (fontType.SelectedIndex)
+                switch (FontType)
                 {
                     case 0:
                     case 2: return fontPalettesMenu.Palettes[0];
+                    case 4: return fontPalettesBattle.Palettes[0];
                     default: return fontPalettesDialogue.Palettes[1];
                 }
             }
@@ -109,14 +116,17 @@ namespace LAZYSHELL
             InitializeComponent();
 
             updating = true;
-            fontType.SelectedIndex = 1;
+            FontType = 1;
             InitializeFonts();
             InitializeFontCharacter();
             SetFontPaletteImage();
             SetFontTableImage();
             SetFontCharacterImage();
             updating = false;
-
+            //
+            LoadPaletteEditor();
+            LoadGraphicEditor();
+            //
             newFontTable = new NewFontTable(this);
             newFontTable.FormClosing += new FormClosingEventHandler(newFontTable_FormClosing);
         }
@@ -156,7 +166,7 @@ namespace LAZYSHELL
                 case 0: fontWidth.Enabled = true; fontWidth.Maximum = 8; break;
                 case 1: fontWidth.Enabled = true; fontWidth.Maximum = 16; break;
                 case 2: fontWidth.Enabled = true; fontWidth.Maximum = 8; break;
-                case 3: fontWidth.Enabled = false; break;
+                default: fontWidth.Enabled = false; break;
             }
             InitializeFontCharacter();
 
@@ -192,6 +202,9 @@ namespace LAZYSHELL
 
             Bits.SetByteArray(data, 0x3DF000, Model.DialogueGraphics, 0, 0x700);
             Bits.SetByteArray(data, 0x015943, Model.BattleDialogueTileSet, 0, 0x100);
+            //
+            Bits.SetByteArray(data, 0x03F800, Model.NumeralGraphics, 0, 0x400);
+            Model.NumeralPaletteSet.Assemble();
         }
         // set images
         private void SetFontPaletteImage()
@@ -203,7 +216,7 @@ namespace LAZYSHELL
         {
             int[] pixels = new int[1], palette = new int[1];
             int width = 0, height = 0, hspan = 0, vspan = 0;
-            switch (fontType.SelectedIndex)
+            switch (FontType)
             {
                 case 0:
                     width = 128; height = 96; hspan = 16; vspan = 8;
@@ -223,6 +236,9 @@ namespace LAZYSHELL
                     for (int x = 0; x < 7; x++) // up-down triangles
                         CopyOverCharTile(fontTriangle[x + 7].GetCharacterPixels(palette), pixels, 112, x, 2);
                     break;
+                case 4:
+                    width = 128; height = 64; hspan = 16; vspan = 4;
+                    pixels = new int[128 * height]; goto default;
                 default:
                     palette = this.palette;
                     for (int y = 0; y < vspan; y++)
@@ -236,8 +252,10 @@ namespace LAZYSHELL
             pictureBoxFontTable.Width = width;
             pictureBoxFontTable.Height = height;
             fontTableImage = new Bitmap(Do.PixelsToImage(pixels, width, height));
-            if (fontType.SelectedIndex == 3)
+            if (FontType == 3)
                 pictureBoxFontTable.BackColor = Color.FromArgb(palette[0]);
+            else if (FontType == 4)
+                pictureBoxFontTable.BackColor = Color.FromArgb(palette[1]);
             else
                 pictureBoxFontTable.BackColor = Color.FromArgb(palette[3]);
             pictureBoxFontTable.Invalidate();
@@ -247,7 +265,7 @@ namespace LAZYSHELL
             int width = 0, height = 0, maxWidth = 0;
             int[] temp, pixels;
             int[] palette = this.palette;
-            switch (fontType.SelectedIndex)
+            switch (FontType)
             {
                 case 0:
                     width = fontMenu[currentFontChar].Width; height = 12;
@@ -264,6 +282,11 @@ namespace LAZYSHELL
                     maxWidth = 8;
                     temp = fontDescription[currentFontChar].GetCharacterPixels(palette);
                     break;
+                case 4:
+                    width = fontBattleMenu[currentFontChar].Width; height = 8;
+                    maxWidth = 8;
+                    temp = fontBattleMenu[currentFontChar].GetCharacterPixels(palette);
+                    break;
                 default:
                     maxWidth = width = currentFontChar < 7 ? 8 : 16;
                     height = currentFontChar < 7 ? 16 : 8;
@@ -279,8 +302,10 @@ namespace LAZYSHELL
                     pixels[y * width + x] = temp[y * maxWidth + x];
             }
 
-            if (fontType.SelectedIndex == 3)
+            if (FontType == 3)
                 pictureBoxFontCharacter.BackColor = Color.FromArgb(palette[0]);
+            else if (FontType == 4)
+                pictureBoxFontCharacter.BackColor = Color.FromArgb(palette[1]);
             else
                 pictureBoxFontCharacter.BackColor = Color.FromArgb(palette[3]);
             if (width == 0)
@@ -295,11 +320,12 @@ namespace LAZYSHELL
         private void CopyOverCharTile(int[] source, int[] dest, int destinationWidth, int x, int y)
         {
             int width = 0, height = 0;
-            switch (fontType.SelectedIndex)
+            switch (FontType)
             {
                 case 0: width = 8; height = 12; break;
                 case 1: width = 16; height = 12; break;
                 case 2: width = 8; height = 8; break;
+                case 4: width = 8; height = 8; break;
                 case 3:
                     if (y == 0) { width = 8; height = 16; }
                     else { width = 16; height = 8; }
@@ -323,12 +349,13 @@ namespace LAZYSHELL
         }
         private void Delete()
         {
-            switch (fontType.SelectedIndex)
+            switch (FontType)
             {
                 case 0: fontMenu[currentFontChar].Graphics = new byte[0x18]; break;
                 case 1: fontDialogue[currentFontChar].Graphics = new byte[0x30]; break;
                 case 2: fontDescription[currentFontChar].Graphics = new byte[0x10]; break;
                 case 3: fontTriangle[currentFontChar].Graphics = new byte[0x20]; break;
+                case 4: fontBattleMenu[currentFontChar].Graphics = new byte[0x20]; break;
             }
             SetFontCharacterImage();
             SetFontTableImage();
@@ -352,6 +379,37 @@ namespace LAZYSHELL
             SetFontTableImage();
             dialoguesEditor.RedrawText();
         }
+        //
+        private void LoadGraphicEditor()
+        {
+            if (numeralGraphicEditor == null)
+            {
+                numeralGraphicEditor = new GraphicEditor(new Function(GraphicUpdate),
+                    Model.NumeralGraphics, Model.NumeralGraphics.Length, 0, Model.NumeralPaletteSet, 0, 0x20);
+                numeralGraphicEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            }
+            else
+                numeralGraphicEditor.Reload(new Function(GraphicUpdate),
+                    Model.NumeralGraphics, Model.NumeralGraphics.Length, 0, Model.NumeralPaletteSet, 0, 0x20);
+        }
+        private void LoadPaletteEditor()
+        {
+            if (numeralPaletteEditor == null)
+            {
+                numeralPaletteEditor = new PaletteEditor(new Function(PaletteUpdate), Model.NumeralPaletteSet, 2, 0, 2);
+                numeralPaletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            }
+            else
+                numeralPaletteEditor.Reload(new Function(PaletteUpdate), Model.NumeralPaletteSet, 2, 0, 2);
+        }
+        private void GraphicUpdate()
+        {
+        }
+        private void PaletteUpdate()
+        {
+            LoadGraphicEditor();
+            dialoguesEditor.Checksum--;
+        }
         #endregion
         #region Event handlers
         private void fontType_SelectedIndexChanged(object sender, EventArgs e)
@@ -361,12 +419,12 @@ namespace LAZYSHELL
             currentFontChar = 0;
 
             updating = true;
-            fontWidth.Enabled = fontType.SelectedIndex != 3;
-            charKeystroke.Enabled = fontType.SelectedIndex != 3;
-            openKeystrokes.Enabled = fontType.SelectedIndex != 3;
-            saveKeystrokes.Enabled = fontType.SelectedIndex != 3;
-            openNewFontTable.Enabled = fontType.SelectedIndex != 3;
-            if (fontType.SelectedIndex == 3)
+            fontWidth.Enabled = FontType < 3;
+            charKeystroke.Enabled = FontType < 3;
+            openKeystrokes.Enabled = FontType < 3;
+            saveKeystrokes.Enabled = FontType < 3;
+            openNewFontTable.Enabled = FontType < 3;
+            if (FontType >= 3)
                 charKeystroke.Text = "";
             updating = false;
 
@@ -374,24 +432,33 @@ namespace LAZYSHELL
             SetFontPaletteImage();
             SetFontTableImage();
             SetFontCharacterImage();
-            if (fontType.SelectedIndex < 3)
+            if (FontType < 3)
                 newFontTable.Reload();
             else
                 newFontTable.Hide();
+        }
+        private void numeralGraphicsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            numeralGraphicEditor.Show();
+        }
+        private void numeralPalettesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            numeralPaletteEditor.Show();
         }
         private void pictureBoxFontTable_Paint(object sender, PaintEventArgs e)
         {
             if (fontTableImage != null)
                 e.Graphics.DrawImage(fontTableImage, 0, 0);
             Size s = new Size();
-            switch (fontType.SelectedIndex)
+            switch (FontType)
             {
                 case 0: s = new Size(8, 12); break;
                 case 1: s = new Size(16, 12); break;
                 case 2: s = new Size(8, 8); break;
+                case 4: s = new Size(8, 8); break;
             }
-            if (showGrid.Checked && fontType.SelectedIndex != 3)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, new Size(fontTableImage.Width, fontTableImage.Height), s, 1);
+            if (showGrid.Checked && FontType != 3)
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, new Size(fontTableImage.Width, fontTableImage.Height), s, 1, true);
         }
         private void pictureBoxFontTable_MouseClick(object sender, MouseEventArgs e)
         {
@@ -403,6 +470,7 @@ namespace LAZYSHELL
                 case 0: currentFontChar = e.Y / 12 * 16 + (e.X / 8); break;
                 case 1: currentFontChar = e.Y / 12 * 8 + (e.X / 16); break;
                 case 2: currentFontChar = e.Y / 8 * 16 + (e.X / 8); break;
+                case 4: currentFontChar = e.Y / 8 * 16 + (e.X / 8); break;
                 case 3:
                     if (e.X > 112) return;
                     currentFontChar = e.Y / 16 * 7 + (e.X / 16); break;
@@ -427,6 +495,7 @@ namespace LAZYSHELL
                 case 0: overFontChar = e.Y / 12 * 16 + (e.X / 8) + 32; break;
                 case 1: overFontChar = e.Y / 12 * 8 + (e.X / 16) + 32; break;
                 case 2: overFontChar = e.Y / 8 * 16 + (e.X / 8) + 32; break;
+                case 4: overFontChar = e.Y / 8 * 16 + (e.X / 8); break;
                 case 3: if (e.X > 112) return; overFontChar = e.Y / 16 * 7 + (e.X / 16); break;
             }
             indexLabel.Text = "[" + overFontChar + "]";
@@ -455,7 +524,7 @@ namespace LAZYSHELL
                     e.Graphics.DrawImage(fontCharacterImage, rdst, rsrc, GraphicsUnit.Pixel);
 
             if (showGrid.Checked && zoom >= 4)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, new Size(fontCharacterImage.Width * zoom, fontCharacterImage.Height * zoom), new Size(1, 1), zoom);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, new Size(fontCharacterImage.Width * zoom, fontCharacterImage.Height * zoom), new Size(1, 1), zoom, true);
         }
         private void pictureBoxFontCharacter_MouseDown(object sender, MouseEventArgs e)
         {
@@ -487,7 +556,7 @@ namespace LAZYSHELL
             color = Do.EditPixelBPP(
                 font[currentFontChar].Graphics, srcOffset, palette,
                 pictureBoxFontCharacter.CreateGraphics(), zoom, action,
-                ((x / zoom) & 7) * zoom, ((y / zoom) & 7) * zoom, index, color,
+                ((x / zoom) & 7) * zoom, ((y / zoom) & 7) * zoom, index, color, color,
                 font[currentFontChar].MaxWidth, font[currentFontChar].Height, 0x10,
                 ((x / zoom) & 8) * zoom, ((y / zoom) & 8) * zoom);
             if (action == "erase")
@@ -682,90 +751,14 @@ namespace LAZYSHELL
         }
         private void fontEditMirror_Click(object sender, EventArgs e)
         {
-            FontCharacter chr = font[currentFontChar];
-            int maxY = chr.GetBottomMostPixel(palette);
-            int maxX = chr.GetRightMostPixel(palette);
-            int minY = chr.GetTopMostPixel(palette);
-            int minX = chr.GetLeftMostPixel(palette);
-            for (int y = minY; y < maxY + 1; y++)
-            {
-                for (int a = minX, b = maxX; a < b; a++, b--)
-                {
-                    byte rowA = (byte)y;
-                    byte colA = (byte)a;
-                    byte bitA = (byte)((colA & 7) ^ 7);
-                    int offsetA = rowA * 2;
-                    byte rowB = (byte)y;
-                    byte colB = (byte)b;
-                    byte bitB = (byte)((colB & 7) ^ 7);
-                    int offsetB = rowB * 2;
-                    switch (FontType)
-                    {
-                        case 0:
-                        case 2:
-                            bool tempM = Bits.GetBit(chr.Graphics, offsetA, bitA);
-                            bool tempN = Bits.GetBit(chr.Graphics, offsetA + 1, bitA);
-                            Bits.SetBit(chr.Graphics, offsetA, bitA, Bits.GetBit(chr.Graphics, offsetB, bitB));
-                            Bits.SetBit(chr.Graphics, offsetA + 1, bitA, Bits.GetBit(chr.Graphics, offsetB + 1, bitB));
-                            Bits.SetBit(chr.Graphics, offsetB, bitB, tempM);
-                            Bits.SetBit(chr.Graphics, offsetB + 1, bitB, tempN);
-                            break;
-                        case 1:
-                            offsetA += colA >= 8 ? 24 : 0;
-                            offsetB += colB >= 8 ? 24 : 0;
-                            goto case 0;
-                        case 3:
-                            offsetA += colA >= 8 ? 16 : 0;
-                            offsetB += colB >= 8 ? 16 : 0;
-                            goto case 0;
-                    }
-                }
-            }
+            font[currentFontChar].Mirror(palette);
             SetFontCharacterImage();
             SetFontTableImage();
             dialoguesEditor.RedrawText();
         }
         private void fontEditInvert_Click(object sender, EventArgs e)
         {
-            FontCharacter chr = font[currentFontChar];
-            int maxY = chr.GetBottomMostPixel(palette);
-            int maxX = chr.GetRightMostPixel(palette);
-            int minY = chr.GetTopMostPixel(palette);
-            int minX = chr.GetLeftMostPixel(palette);
-            for (int x = minX; x < maxX + 1; x++)
-            {
-                for (int a = minY, b = maxY; a < b; a++, b--)
-                {
-                    byte rowA = (byte)a;
-                    byte colA = (byte)x;
-                    byte bitA = (byte)((colA & 7) ^ 7);
-                    int offsetA = rowA * 2;
-                    byte rowB = (byte)b;
-                    byte colB = (byte)x;
-                    byte bitB = (byte)((colB & 7) ^ 7);
-                    int offsetB = rowB * 2;
-                    switch (FontType)
-                    {
-                        case 0:
-                        case 2:
-                            bool tempM = Bits.GetBit(chr.Graphics, offsetA, bitA);
-                            bool tempN = Bits.GetBit(chr.Graphics, offsetA + 1, bitA);
-                            Bits.SetBit(chr.Graphics, offsetA, bitA, Bits.GetBit(chr.Graphics, offsetB, bitB));
-                            Bits.SetBit(chr.Graphics, offsetA + 1, bitA, Bits.GetBit(chr.Graphics, offsetB + 1, bitB));
-                            Bits.SetBit(chr.Graphics, offsetB, bitB, tempM);
-                            Bits.SetBit(chr.Graphics, offsetB + 1, bitB, tempN);
-                            break;
-                        case 1:
-                            offsetA += colA >= 8 ? 24 : 0;
-                            offsetB += colB >= 8 ? 24 : 0;
-                            goto case 0;
-                        case 3:
-                            offsetA += colA >= 8 ? 16 : 0;
-                            offsetB += colB >= 8 ? 16 : 0;
-                            goto case 0;
-                    }
-                }
-            }
+            font[currentFontChar].Invert(palette);
             SetFontCharacterImage();
             SetFontTableImage();
             dialoguesEditor.RedrawText();
@@ -886,6 +879,15 @@ namespace LAZYSHELL
                         foreach (FontCharacter f in fontDescription)
                             bw.Write(f.Graphics, 0, 0x10);
                         break;
+                    case 4:
+                        saveFileDialog.FileName = "fontBattleMenuGraphic.bin";
+                        if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
+                            return;
+                        fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.ReadWrite);
+                        bw = new BinaryWriter(fs);
+                        foreach (FontCharacter f in fontBattleMenu)
+                            bw.Write(f.Graphics, 0, 0x20);
+                        break;
                     default:
                         saveFileDialog.FileName = "fontTrianglesGraphic.bin";
                         if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
@@ -912,6 +914,7 @@ namespace LAZYSHELL
                 case 1: Do.Export(fontTableImage, "fontTableDialogue.png"); break;
                 case 2: Do.Export(fontTableImage, "fontTableDescription.png"); break;
                 case 3: Do.Export(fontTableImage, "fontTableTriangles.png"); break;
+                case 4: Do.Export(fontTableImage, "fontTableBattleMenu.png"); break;
             }
         }
         private void insertIntoTextToolStripMenuItem_Click(object sender, EventArgs e)
@@ -932,7 +935,12 @@ namespace LAZYSHELL
         }
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            insertIntoTextToolStripMenuItem.Enabled = FontType != 3;
+            insertIntoTextToolStripMenuItem.Enabled = FontType < 3;
+        }
+        private void editor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            ((Form)sender).Hide();
         }
         #endregion
     }

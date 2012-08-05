@@ -37,6 +37,10 @@
             this.resetCurrentTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetCurrentTilemapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.startX = new LAZYSHELL.ToolStripNumericUpDown();
+            this.startY = new LAZYSHELL.ToolStripNumericUpDown();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.music = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -46,6 +50,8 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.stageGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spriteGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previewButton = new System.Windows.Forms.ToolStripButton();
+            this.railColorKey = new System.Windows.Forms.Label();
             this.panelScreens = new LAZYSHELL.NewPanel();
             this.screens = new System.Windows.Forms.Panel();
             this.pictureBoxScreens = new System.Windows.Forms.PictureBox();
@@ -100,7 +106,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 326);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(835, 329);
+            this.panel1.Size = new System.Drawing.Size(835, 308);
             this.panel1.TabIndex = 0;
             // 
             // toolStrip1
@@ -110,11 +116,16 @@
             this.levelName,
             this.toolStripDropDownButton3,
             this.toolStripSeparator1,
+            this.toolStripLabel5,
+            this.startX,
+            this.startY,
+            this.toolStripSeparator6,
             this.toolStripLabel1,
             this.music,
             this.toolStripSeparator5,
             this.toolStripDropDownButton2,
-            this.toolStripDropDownButton1});
+            this.toolStripDropDownButton1,
+            this.previewButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -124,9 +135,7 @@
             // 
             // levelName
             // 
-            this.levelName.DropDownHeight = 400;
             this.levelName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.levelName.DropDownWidth = 300;
             this.levelName.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.levelName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.levelName.IntegralHeight = false;
@@ -184,6 +193,65 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel5
+            // 
+            this.toolStripLabel5.Name = "toolStripLabel5";
+            this.toolStripLabel5.Size = new System.Drawing.Size(66, 22);
+            this.toolStripLabel5.Text = " Start (X,Y) ";
+            // 
+            // startX
+            // 
+            this.startX.AutoSize = false;
+            this.startX.Hexadecimal = false;
+            this.startX.Location = new System.Drawing.Point(322, 4);
+            this.startX.Maximum = new decimal(new int[] {
+            1023,
+            0,
+            0,
+            0});
+            this.startX.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.startX.Name = "startX";
+            this.startX.Size = new System.Drawing.Size(60, 17);
+            this.startX.Text = "0";
+            this.startX.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // startY
+            // 
+            this.startY.AutoSize = false;
+            this.startY.Hexadecimal = false;
+            this.startY.Location = new System.Drawing.Point(382, 4);
+            this.startY.Maximum = new decimal(new int[] {
+            1023,
+            0,
+            0,
+            0});
+            this.startY.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.startY.Name = "startY";
+            this.startY.Size = new System.Drawing.Size(60, 17);
+            this.startY.Text = "0";
+            this.startY.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripLabel1
             // 
@@ -267,6 +335,30 @@
             this.spriteGraphicsToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.spriteGraphicsToolStripMenuItem.Text = "Sprite Graphics";
             this.spriteGraphicsToolStripMenuItem.Click += new System.EventHandler(this.spriteGraphicsToolStripMenuItem_Click);
+            // 
+            // previewButton
+            // 
+            this.previewButton.Image = global::LAZYSHELL.Properties.Resources.preview;
+            this.previewButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.previewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.previewButton.Name = "previewButton";
+            this.previewButton.Size = new System.Drawing.Size(23, 22);
+            this.previewButton.ToolTipText = "Previewer";
+            this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
+            // 
+            // railColorKey
+            // 
+            this.railColorKey.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.railColorKey.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.railColorKey.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.railColorKey.Location = new System.Drawing.Point(0, 634);
+            this.railColorKey.Name = "railColorKey";
+            this.railColorKey.Size = new System.Drawing.Size(835, 21);
+            this.railColorKey.TabIndex = 0;
+            this.railColorKey.Text = "[RAIL COLOR KEY]  GREEN = normal speed | RED = must slow down | BLUE = enter next" +
+                " stage | AQUA = unused, same as blue";
+            this.railColorKey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.railColorKey.Visible = false;
             // 
             // panelScreens
             // 
@@ -717,6 +809,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelScreens);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.railColorKey);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MineCart";
             this.toolStrip1.ResumeLayout(false);
@@ -793,6 +886,12 @@
         private System.Windows.Forms.ToolStripMenuItem resetAllObjectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetCurrentTilesetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetCurrentTilemapToolStripMenuItem;
+        private System.Windows.Forms.Label railColorKey;
+        private System.Windows.Forms.ToolStripButton previewButton;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
+        private ToolStripNumericUpDown startX;
+        private ToolStripNumericUpDown startY;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
 
     }
 }

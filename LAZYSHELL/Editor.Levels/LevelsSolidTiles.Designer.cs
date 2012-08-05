@@ -147,9 +147,6 @@
             // physicalTileNum
             // 
             this.physicalTileNum.AutoSize = false;
-            this.physicalTileNum.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.physicalTileNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.physicalTileNum.ForeColor = System.Drawing.SystemColors.Control;
             this.physicalTileNum.Hexadecimal = false;
             this.physicalTileNum.Location = new System.Drawing.Point(7, 1);
             this.physicalTileNum.Maximum = new decimal(new int[] {

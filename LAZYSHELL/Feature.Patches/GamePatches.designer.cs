@@ -62,7 +62,7 @@ namespace LAZYSHELL.Patches
             this.PatchListBox.IntegralHeight = false;
             this.PatchListBox.Location = new System.Drawing.Point(12, 12);
             this.PatchListBox.Name = "PatchListBox";
-            this.PatchListBox.Size = new System.Drawing.Size(147, 265);
+            this.PatchListBox.Size = new System.Drawing.Size(147, 270);
             this.PatchListBox.TabIndex = 3;
             this.PatchListBox.SelectedIndexChanged += new System.EventHandler(this.PatchListBox_SelectedIndexChanged);
             // 
@@ -110,9 +110,9 @@ namespace LAZYSHELL.Patches
             // 
             // applyButton
             // 
-            this.applyButton.Location = new System.Drawing.Point(12, 283);
+            this.applyButton.Location = new System.Drawing.Point(12, 285);
             this.applyButton.Name = "applyButton";
-            this.applyButton.Size = new System.Drawing.Size(147, 23);
+            this.applyButton.Size = new System.Drawing.Size(147, 21);
             this.applyButton.TabIndex = 391;
             this.applyButton.Text = "APPLY PATCH";
             this.applyButton.UseCompatibleTextRendering = true;

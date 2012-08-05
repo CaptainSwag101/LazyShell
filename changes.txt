@@ -1,5 +1,80 @@
 Major changes/additions are indicated by ***
 
+v3.11.0 (2012-08-05)
+--------------------------------------
+Additions:
+*Color replacing tool in graphic editor
+*Option to click "Retry" if load ROM attempt failed
+*Added icon images to dropdownbutton toolstripitems
+*Dialogues: option to edit battle numeral graphics, palettes
+*Events: added a few new command(s)
+*Formations: monster shadows, isometric grid, show/hide ally sprites
+*Formations: snap to guides for moving monsters
+*Levels: holding shift key on map hilites tile index in tileset
+*Menus: shop menu's background palette can now be edited
+*Menus: menu text and dialogue can now be edited
+*Menus: option to preview each of the 11 different menus
+*Menus: can now edit sprite used by cursors in game select menu
+*Menus: save image, finished import image code for game select menu
+*Mini-games: four rail tile types color-coded to aid map building
+*Mini-games: previewer for all four levels
+*Mini-games: set starting X,Y coord for Mode7 stages
+*Sprites: can now save tileset images of tilemap format molds too
+*Sprites: import image into tileset for tilemap format molds too
+*Sprites: import image as new single 16x16 tile into tileset
+*Sprites: instant duplicate a tile with Ctrl+click/drag
+*World Maps: ability to view and modify logos and banners
+
+Changes:
+*Selection box easier to see if grid enabled
+*Zoom panels now more accurate, synchronized with zoom factor
+*Save as now stores saved file path to MRU list
+*Main title,menus,world map editors load a little faster
+*Spell and item description frames now drawn translucent like in-game
+*Formations: event control now a combobox with event descriptions
+*Main Title: now uses universal tileset editor to edit tileset
+*Menus: dynamic recompression creates more space
+*Mini-games: cutting, deleting, erasing replaces Mode7 tiles with 0x4F
+*Sprites: changed coordinator to square b/c more practical
+*Sprites: selecting tiles in map now has pixel-perfect precision
+*Sprites: pixel grid no longer creates lag in mold image
+
+Fixes:
+*Coord label in sprites & effects was flickering b/c of docking
+*Open/close/restore all editors not working for mini-games & menus
+*Color reduction in imported images not isolating top 5 bits of RGB colors
+*Dialogues: problems importing dialogues with different text viewing status
+*Events: clear, reset, clear reads tree nodes, but w/empty script
+*Events: wrong command inserted w/insert button if command being edited
+*Events: sync updating duplicated commands inserted from edited command
+*Levels: conflicts between toggle minecart & levels elements
+*Levels: crash if L3 tab selected when switching to level w/null L3
+*Levels: crash drawing region from tileset beyond boundaries of tilemap
+*Levels: not resetting NPC images after duplicating NPC
+*Levels: using Ctrl to quick copy solidity tiles wasn't always working
+*Main Title: checksum not generating b/c not serialized tileset
+*Menus: several palettes weren't updating
+*Menus: editing certain graphics not updating images for both menus
+*Menus: loading/saving frame palette from completely wrong offset
+*Menus: cursor graphics assembly code wasn't written at all
+*Menus: loading/saving game select BG palette from wrong offset
+*Mini-games: deleting screens code not even written yet
+*Mini-games: removing/adding screens not resetting total image width
+*Mini-games: find in tileset shouldn't ignore transparent in mini-games
+*Mini-games: crash drawing region from tileset beyond boundaries of tilemap
+*Mini-games: crash if try to save minecart tilemap image
+*Mini-games: importing tilemap/tileset not refreshing map/tileset image
+*Notes: trying to create checksum with null notes when opening if no notes
+*Sprites: clearing molds not leaving at least 1 tile in unique tiles
+*Sprites: deleting tiles not decrementing tile index if last tile selected
+*Sprites: coordinator size/location not synchronized to zoom status
+*Sprites: x,y truncation not figuring zoomed mold image size in zoom status
+*Sprites: crash if try to draw a tile when no tiles selected
+*Sprites: crash if bring to front/send to back and no tile(s) selected
+*World Maps: music being saved to game select music
+*World Maps: only 7 world map tilesets, not 9
+
+
 v3.10.0 BETA (2012-07-03)
 --------------------------------------
 Additions:

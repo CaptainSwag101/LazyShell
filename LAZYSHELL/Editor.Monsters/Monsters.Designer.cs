@@ -844,7 +844,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(1042, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1042, 26);
             this.toolStrip1.TabIndex = 471;
             // 
             // monsterName
@@ -855,12 +855,12 @@
             this.monsterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.monsterName.DropDownWidth = 197;
             this.monsterName.ItemHeight = 15;
-            this.monsterName.Location = new System.Drawing.Point(8, 1);
+            this.monsterName.Location = new System.Drawing.Point(10, 2);
             this.monsterName.Name = "monsterName";
             this.monsterName.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.monsterName.SelectedIndex = -1;
             this.monsterName.SelectedItem = null;
-            this.monsterName.Size = new System.Drawing.Size(174, 22);
+            this.monsterName.Size = new System.Drawing.Size(174, 23);
             this.monsterName.SelectedIndexChanged += new System.EventHandler(this.monsterName_SelectedIndexChanged);
             this.monsterName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.monsterName_DrawItem);
             // 
@@ -868,7 +868,7 @@
             // 
             this.monsterNum.AutoSize = false;
             this.monsterNum.Hexadecimal = false;
-            this.monsterNum.Location = new System.Drawing.Point(181, 1);
+            this.monsterNum.Location = new System.Drawing.Point(183, 2);
             this.monsterNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -880,7 +880,7 @@
             0,
             0});
             this.monsterNum.Name = "monsterNum";
-            this.monsterNum.Size = new System.Drawing.Size(60, 22);
+            this.monsterNum.Size = new System.Drawing.Size(60, 21);
             this.monsterNum.Text = "0";
             this.monsterNum.Value = new decimal(new int[] {
             0,
@@ -892,13 +892,13 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 26);
             // 
             // monsterNameText
             // 
             this.monsterNameText.MaxLength = 13;
             this.monsterNameText.Name = "monsterNameText";
-            this.monsterNameText.Size = new System.Drawing.Size(140, 25);
+            this.monsterNameText.Size = new System.Drawing.Size(140, 26);
             this.monsterNameText.TextChanged += new System.EventHandler(this.monsterNameText_TextChanged);
             // 
             // toolStrip4
@@ -954,6 +954,8 @@
             // 
             // import
             // 
+            this.import.Image = ((System.Drawing.Image)(resources.GetObject("import.Image")));
+            this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(192, 22);
             this.import.Text = "Import monster(s)...";
@@ -961,6 +963,8 @@
             // 
             // importBattleScriptsToolStripMenuItem
             // 
+            this.importBattleScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importBattleScriptsToolStripMenuItem.Image")));
+            this.importBattleScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importBattleScriptsToolStripMenuItem.Name = "importBattleScriptsToolStripMenuItem";
             this.importBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.importBattleScriptsToolStripMenuItem.Text = "Import battle script(s)...";
@@ -980,6 +984,8 @@
             // 
             // export
             // 
+            this.export.Image = ((System.Drawing.Image)(resources.GetObject("export.Image")));
+            this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(190, 22);
             this.export.Text = "Export monster(s)...";
@@ -987,6 +993,8 @@
             // 
             // exportBattleScriptsToolStripMenuItem
             // 
+            this.exportBattleScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportBattleScriptsToolStripMenuItem.Image")));
+            this.exportBattleScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportBattleScriptsToolStripMenuItem.Name = "exportBattleScriptsToolStripMenuItem";
             this.exportBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.exportBattleScriptsToolStripMenuItem.Text = "Export battle script(s)...";
@@ -1006,6 +1014,8 @@
             // 
             // resetCurrentMonsterToolStripMenuItem
             // 
+            this.resetCurrentMonsterToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetCurrentMonsterToolStripMenuItem.Image")));
+            this.resetCurrentMonsterToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetCurrentMonsterToolStripMenuItem.Name = "resetCurrentMonsterToolStripMenuItem";
             this.resetCurrentMonsterToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.resetCurrentMonsterToolStripMenuItem.Text = "Reset current monster";
@@ -1013,6 +1023,8 @@
             // 
             // resetCurrentBattleScriptToolStripMenuItem
             // 
+            this.resetCurrentBattleScriptToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetCurrentBattleScriptToolStripMenuItem.Image")));
+            this.resetCurrentBattleScriptToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetCurrentBattleScriptToolStripMenuItem.Name = "resetCurrentBattleScriptToolStripMenuItem";
             this.resetCurrentBattleScriptToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.resetCurrentBattleScriptToolStripMenuItem.Text = "Reset current battle script";
@@ -1032,6 +1044,8 @@
             // 
             // clear
             // 
+            this.clear.Image = ((System.Drawing.Image)(resources.GetObject("clear.Image")));
+            this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(184, 22);
             this.clear.Text = "Clear monster(s)...";
@@ -1039,6 +1053,8 @@
             // 
             // clearBattleScriptsToolStripMenuItem
             // 
+            this.clearBattleScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearBattleScriptsToolStripMenuItem.Image")));
+            this.clearBattleScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearBattleScriptsToolStripMenuItem.Name = "clearBattleScriptsToolStripMenuItem";
             this.clearBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.clearBattleScriptsToolStripMenuItem.Text = "Clear battle script(s)...";
@@ -1273,7 +1289,7 @@
             this.panel13.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel13.Location = new System.Drawing.Point(0, 0);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(388, 675);
+            this.panel13.Size = new System.Drawing.Size(388, 674);
             this.panel13.TabIndex = 475;
             this.panel13.Paint += new System.Windows.Forms.PaintEventHandler(this.panel13_Paint);
             // 
@@ -1417,9 +1433,9 @@
             this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel14.Controls.Add(this.panel13);
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel14.Location = new System.Drawing.Point(0, 50);
+            this.panel14.Location = new System.Drawing.Point(0, 51);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(1042, 679);
+            this.panel14.Size = new System.Drawing.Size(1042, 678);
             this.panel14.TabIndex = 476;
             // 
             // Monsters

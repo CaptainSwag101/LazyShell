@@ -11,7 +11,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         private byte[] eventData; public byte[] EventData { get { return this.eventData; } set { this.eventData = value; } }
         private ActionQueue embeddedActionQueue; public ActionQueue EmbeddedActionQueue { get { return this.embeddedActionQueue; } set { this.embeddedActionQueue = value; } }
         private bool set; public bool Set { get { return this.set; } set { this.set = value; } }
-        public int EventLength
+        public int CommandLength
         {
             get
             {
@@ -84,7 +84,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 foreach (ActionQueueCommand aqc in embeddedActionQueue.Commands)
                 {
                     aqc.EventData.CopyTo(eventData, start);
-                    start += aqc.QueueLength;
+                    start += aqc.CommandLength;
                 }
             }
             else if (IsActionQueueTrigger && embeddedActionQueue != null)
@@ -99,7 +99,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 foreach (ActionQueueCommand aqc in embeddedActionQueue.Commands)
                 {
                     aqc.Assemble();
-                    offset += aqc.QueueLength;
+                    offset += aqc.CommandLength;
                 }
 
                 eventData = new byte[offset];
@@ -111,7 +111,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 foreach (ActionQueueCommand aqc in embeddedActionQueue.Commands)
                 {
                     aqc.EventData.CopyTo(eventData, start);
-                    start += aqc.QueueLength;
+                    start += aqc.CommandLength;
                 }
             }
         }
@@ -126,7 +126,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 foreach (ActionQueueCommand aqc in embeddedActionQueue.Commands)
                 {
                     aqc.Offset = offset;
-                    offset += aqc.QueueLength;
+                    offset += aqc.CommandLength;
                 }
             }
             if (IsActionQueueTrigger && embeddedActionQueue != null)
@@ -135,7 +135,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 foreach (ActionQueueCommand aqc in embeddedActionQueue.Commands)
                 {
                     aqc.Offset = offset;
-                    offset += aqc.QueueLength;
+                    offset += aqc.CommandLength;
                 }
             }
         }
@@ -351,6 +351,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 foreach (ActionQueueCommand aqc in embeddedActionQueue.Commands)
                     aqc.ResetOriginalOffset();
             }
+        }
+        public EventScriptCommand Copy()
+        {
+            return new EventScriptCommand(Bits.Copy(eventData), this.offset);
         }
     }
 }

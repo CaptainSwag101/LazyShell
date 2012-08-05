@@ -118,9 +118,15 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.showMapPoints = new System.Windows.Forms.ToolStripButton();
+            this.showBanner = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.openPalettes = new System.Windows.Forms.ToolStripButton();
-            this.openGraphics = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.worldMapPalettesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoBannerPalettesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.worldMapGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.worldMapLogoBannerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spriteGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openTileEditor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonToggleCartGrid = new System.Windows.Forms.ToolStripButton();
@@ -175,7 +181,7 @@
             this.mapPointName.Font = this.worldMapName.Font;
             this.mapPointName.ForeColor = this.worldMapName.ForeColor;
             this.mapPointName.ItemHeight = 15;
-            this.mapPointName.Location = new System.Drawing.Point(7, 2);
+            this.mapPointName.Location = new System.Drawing.Point(9, 2);
             this.mapPointName.Name = "mapPointName";
             this.mapPointName.SelectedIndex = -1;
             this.mapPointName.SelectedItem = null;
@@ -211,7 +217,7 @@
             this.mapPointNum.Font = this.worldMapName.Font;
             this.mapPointNum.ForeColor = this.worldMapName.ForeColor;
             this.mapPointNum.Hexadecimal = false;
-            this.mapPointNum.Location = new System.Drawing.Point(199, 2);
+            this.mapPointNum.Location = new System.Drawing.Point(271, 24);
             this.mapPointNum.Maximum = new decimal(new int[] {
             55,
             0,
@@ -714,7 +720,7 @@
             // 
             this.worldMapTileset.Location = new System.Drawing.Point(69, 40);
             this.worldMapTileset.Maximum = new decimal(new int[] {
-            8,
+            6,
             0,
             0,
             0});
@@ -1182,6 +1188,8 @@
             // 
             // resetWorldMapToolStripMenuItem
             // 
+            this.resetWorldMapToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetWorldMapToolStripMenuItem.Image")));
+            this.resetWorldMapToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetWorldMapToolStripMenuItem.Name = "resetWorldMapToolStripMenuItem";
             this.resetWorldMapToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.resetWorldMapToolStripMenuItem.Text = "Reset world map";
@@ -1189,6 +1197,8 @@
             // 
             // resetMapPointToolStripMenuItem
             // 
+            this.resetMapPointToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetMapPointToolStripMenuItem.Image")));
+            this.resetMapPointToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetMapPointToolStripMenuItem.Name = "resetMapPointToolStripMenuItem";
             this.resetMapPointToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.resetMapPointToolStripMenuItem.Text = "Reset map point";
@@ -1261,9 +1271,10 @@
             this.worldMapName,
             this.toolStripSeparator3,
             this.showMapPoints,
+            this.showBanner,
             this.toolStripSeparator2,
-            this.openPalettes,
-            this.openGraphics,
+            this.toolStripDropDownButton2,
+            this.toolStripDropDownButton3,
             this.openTileEditor,
             this.toolStripSeparator1,
             this.buttonToggleCartGrid,
@@ -1287,33 +1298,95 @@
             this.showMapPoints.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.showMapPoints.Name = "showMapPoints";
             this.showMapPoints.Size = new System.Drawing.Size(23, 22);
-            this.showMapPoints.ToolTipText = "Location View";
+            this.showMapPoints.ToolTipText = "Show Locations";
             this.showMapPoints.Click += new System.EventHandler(this.showMapPoints_Click);
+            // 
+            // showBanner
+            // 
+            this.showBanner.CheckOnClick = true;
+            this.showBanner.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.showBanner.Image = global::LAZYSHELL.Properties.Resources.mapBanner;
+            this.showBanner.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showBanner.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.showBanner.Name = "showBanner";
+            this.showBanner.Size = new System.Drawing.Size(36, 22);
+            this.showBanner.ToolTipText = "Show Banner";
+            this.showBanner.Click += new System.EventHandler(this.showBanner_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // openPalettes
+            // toolStripDropDownButton2
             // 
-            this.openPalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
-            this.openPalettes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openPalettes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openPalettes.Name = "openPalettes";
-            this.openPalettes.Size = new System.Drawing.Size(23, 22);
-            this.openPalettes.ToolTipText = "Palettes";
-            this.openPalettes.Click += new System.EventHandler(this.openPalettes_Click);
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.worldMapPalettesToolStripMenuItem,
+            this.logoBannerPalettesToolStripMenuItem});
+            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(31, 22);
             // 
-            // openGraphics
+            // worldMapPalettesToolStripMenuItem
             // 
-            this.openGraphics.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
-            this.openGraphics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openGraphics.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openGraphics.Name = "openGraphics";
-            this.openGraphics.Size = new System.Drawing.Size(23, 22);
-            this.openGraphics.ToolTipText = "BPP Graphics";
-            this.openGraphics.Click += new System.EventHandler(this.openGraphics_Click);
+            this.worldMapPalettesToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.worldMapPalettesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.worldMapPalettesToolStripMenuItem.Name = "worldMapPalettesToolStripMenuItem";
+            this.worldMapPalettesToolStripMenuItem.Size = new System.Drawing.Size(182, 24);
+            this.worldMapPalettesToolStripMenuItem.Text = "World Map Palettes";
+            this.worldMapPalettesToolStripMenuItem.Click += new System.EventHandler(this.openPalettes_Click);
+            // 
+            // logoBannerPalettesToolStripMenuItem
+            // 
+            this.logoBannerPalettesToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.logoBannerPalettesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.logoBannerPalettesToolStripMenuItem.Name = "logoBannerPalettesToolStripMenuItem";
+            this.logoBannerPalettesToolStripMenuItem.Size = new System.Drawing.Size(182, 24);
+            this.logoBannerPalettesToolStripMenuItem.Text = "Logo, Banner Palettes";
+            this.logoBannerPalettesToolStripMenuItem.Click += new System.EventHandler(this.logoBannerPalettesToolStripMenuItem_Click);
+            // 
+            // toolStripDropDownButton3
+            // 
+            this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.worldMapGraphicsToolStripMenuItem,
+            this.worldMapLogoBannerToolStripMenuItem,
+            this.spriteGraphicsToolStripMenuItem});
+            this.toolStripDropDownButton3.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
+            this.toolStripDropDownButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
+            this.toolStripDropDownButton3.Size = new System.Drawing.Size(31, 22);
+            // 
+            // worldMapGraphicsToolStripMenuItem
+            // 
+            this.worldMapGraphicsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("worldMapGraphicsToolStripMenuItem.Image")));
+            this.worldMapGraphicsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.worldMapGraphicsToolStripMenuItem.Name = "worldMapGraphicsToolStripMenuItem";
+            this.worldMapGraphicsToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
+            this.worldMapGraphicsToolStripMenuItem.Text = "World Map Graphics";
+            this.worldMapGraphicsToolStripMenuItem.Click += new System.EventHandler(this.openGraphics_Click);
+            // 
+            // worldMapLogoBannerToolStripMenuItem
+            // 
+            this.worldMapLogoBannerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("worldMapLogoBannerToolStripMenuItem.Image")));
+            this.worldMapLogoBannerToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.worldMapLogoBannerToolStripMenuItem.Name = "worldMapLogoBannerToolStripMenuItem";
+            this.worldMapLogoBannerToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
+            this.worldMapLogoBannerToolStripMenuItem.Text = "Logo, Banner Graphics";
+            this.worldMapLogoBannerToolStripMenuItem.Click += new System.EventHandler(this.openLogos_Click);
+            // 
+            // spriteGraphicsToolStripMenuItem
+            // 
+            this.spriteGraphicsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
+            this.spriteGraphicsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.spriteGraphicsToolStripMenuItem.Name = "spriteGraphicsToolStripMenuItem";
+            this.spriteGraphicsToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
+            this.spriteGraphicsToolStripMenuItem.Text = "Sprite Graphics";
+            this.spriteGraphicsToolStripMenuItem.Visible = false;
+            this.spriteGraphicsToolStripMenuItem.Click += new System.EventHandler(this.spriteGraphicsToolStripMenuItem_Click);
             // 
             // openTileEditor
             // 
@@ -1550,8 +1623,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton showMapPoints;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton openPalettes;
-        private System.Windows.Forms.ToolStripButton openGraphics;
         private System.Windows.Forms.ToolStripButton openTileEditor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton buttonToggleCartGrid;
@@ -1597,5 +1668,13 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ToolStripButton showBanner;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
+        private System.Windows.Forms.ToolStripMenuItem worldMapGraphicsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem worldMapLogoBannerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem worldMapPalettesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logoBannerPalettesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spriteGraphicsToolStripMenuItem;
     }
 }

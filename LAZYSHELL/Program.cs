@@ -440,6 +440,10 @@ namespace LAZYSHELL
                 Do.AddControl(form1.Panel2, levels);
             if (mainTitle != null && mainTitle.Visible)
                 Do.AddControl(form1.Panel2, mainTitle);
+            if (menus != null && menus.Visible)
+                Do.AddControl(form1.Panel2, menus);
+            if (miniGames != null && miniGames.Visible)
+                Do.AddControl(form1.Panel2, miniGames);
             if (monsters != null && monsters.Visible)
                 Do.AddControl(form1.Panel2, monsters);
             if (sprites != null && sprites.Visible)
@@ -471,6 +475,10 @@ namespace LAZYSHELL
                 Do.RemoveControl(levels);
             if (mainTitle != null && mainTitle.Visible)
                 Do.RemoveControl(mainTitle);
+            if (menus != null && menus.Visible)
+                Do.RemoveControl(menus);
+            if (miniGames != null && miniGames.Visible)
+                Do.RemoveControl(miniGames);
             if (monsters != null && monsters.Visible)
                 Do.RemoveControl(monsters);
             if (sprites != null && sprites.Visible)
@@ -502,6 +510,10 @@ namespace LAZYSHELL
                 levels.WindowState = FormWindowState.Minimized;
             if (mainTitle != null && mainTitle.Visible)
                 mainTitle.WindowState = FormWindowState.Minimized;
+            if (menus != null && menus.Visible)
+                menus.WindowState = FormWindowState.Minimized;
+            if (miniGames != null && miniGames.Visible)
+                miniGames.WindowState = FormWindowState.Minimized;
             if (monsters != null && monsters.Visible)
                 monsters.WindowState = FormWindowState.Minimized;
             if (sprites != null && sprites.Visible)
@@ -533,6 +545,10 @@ namespace LAZYSHELL
                 levels.WindowState = FormWindowState.Normal;
             if (mainTitle != null && mainTitle.Visible)
                 mainTitle.WindowState = FormWindowState.Normal;
+            if (menus != null && menus.Visible)
+                menus.WindowState = FormWindowState.Normal;
+            if (miniGames != null && miniGames.Visible)
+                miniGames.WindowState = FormWindowState.Normal;
             if (monsters != null && monsters.Visible)
                 monsters.WindowState = FormWindowState.Normal;
             if (sprites != null && sprites.Visible)
@@ -568,6 +584,10 @@ namespace LAZYSHELL
                 sprites.Close();
             if (mainTitle != null && mainTitle.Visible)
                 mainTitle.Close();
+            if (menus != null && menus.Visible)
+                menus.Close();
+            if (miniGames != null && miniGames.Visible)
+                miniGames.Close();
             if (worldMaps != null && worldMaps.Visible)
                 worldMaps.Close();
             if ((allies != null && allies.Visible) ||
@@ -583,6 +603,8 @@ namespace LAZYSHELL
                 (monsters != null && monsters.Visible) ||
                 (sprites != null && sprites.Visible) ||
                 (mainTitle != null && mainTitle.Visible) ||
+                (menus != null && menus.Visible) ||
+                (miniGames != null && miniGames.Visible) ||
                 (worldMaps != null && worldMaps.Visible))
                 return true;
             return false;

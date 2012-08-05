@@ -43,6 +43,7 @@
             this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
             this.saveImageAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.buttonToggleTileEditor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -113,11 +114,12 @@
             this.mirrorToolStripMenuItem,
             this.invertToolStripMenuItem,
             this.toolStripSeparator25,
-            this.saveImageAsToolStripMenuItem});
+            this.saveImageAsToolStripMenuItem,
+            this.importImageToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip2.ShowImageMargin = false;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(134, 214);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(134, 258);
             this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
             // 
             // cutToolStripMenuItem2
@@ -192,6 +194,13 @@
             this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.saveImageAsToolStripMenuItem.Text = "Save Image As...";
             this.saveImageAsToolStripMenuItem.Click += new System.EventHandler(this.saveImageAsToolStripMenuItem_Click);
+            // 
+            // importImageToolStripMenuItem
+            // 
+            this.importImageToolStripMenuItem.Name = "importImageToolStripMenuItem";
+            this.importImageToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.importImageToolStripMenuItem.Text = "Import Image...";
+            this.importImageToolStripMenuItem.Click += new System.EventHandler(this.importImageToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -365,7 +374,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 46);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(272, 547);
+            this.tabControl1.Size = new System.Drawing.Size(272, 539);
             this.tabControl1.TabIndex = 444;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
@@ -378,7 +387,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(264, 520);
+            this.tabPage1.Size = new System.Drawing.Size(264, 512);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "LAYER 1";
             // 
@@ -465,7 +474,7 @@
             this.panel1.Controls.Add(this.autoUpdate);
             this.panel1.Controls.Add(this.lockEditing);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 593);
+            this.panel1.Location = new System.Drawing.Point(0, 585);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(272, 26);
             this.panel1.TabIndex = 446;
@@ -507,7 +516,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 619);
+            this.ClientSize = new System.Drawing.Size(272, 611);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
@@ -578,5 +587,6 @@
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.CheckBox autoUpdate;
         private System.Windows.Forms.Label labelTileIndex;
+        private System.Windows.Forms.ToolStripMenuItem importImageToolStripMenuItem;
     }
 }

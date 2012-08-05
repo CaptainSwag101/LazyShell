@@ -51,6 +51,12 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.music = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.cursorName = new System.Windows.Forms.ToolStripComboBox();
+            this.cursorSpriteNum = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.cursorSequence = new LAZYSHELL.ToolStripNumericUpDown();
             this.contextMenuStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -58,6 +64,7 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFG)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // importImageToolStripMenuItem
@@ -65,12 +72,14 @@
             this.importImageToolStripMenuItem.Name = "importImageToolStripMenuItem";
             this.importImageToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.importImageToolStripMenuItem.Text = "Import image...";
+            this.importImageToolStripMenuItem.Click += new System.EventHandler(this.importFGToolStripMenuItem_Click);
             // 
             // saveImageAsToolStripMenuItem
             // 
             this.saveImageAsToolStripMenuItem.Name = "saveImageAsToolStripMenuItem";
             this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.saveImageAsToolStripMenuItem.Text = "Save image as...";
+            this.saveImageAsToolStripMenuItem.Click += new System.EventHandler(this.saveImageAsToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -80,16 +89,16 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(131, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(131, 70);
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.panel1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 25);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(520, 260);
+            this.panel3.Size = new System.Drawing.Size(566, 260);
             this.panel3.TabIndex = 563;
             // 
             // panel4
@@ -100,7 +109,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(260, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(260, 260);
+            this.panel4.Size = new System.Drawing.Size(306, 260);
             this.panel4.TabIndex = 561;
             // 
             // pictureBoxPreview
@@ -216,7 +225,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(520, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(566, 25);
             this.toolStrip1.TabIndex = 562;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -263,13 +272,94 @@
             this.music.Name = "music";
             this.music.Size = new System.Drawing.Size(214, 25);
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel2,
+            this.cursorName,
+            this.cursorSpriteNum,
+            this.toolStripLabel3,
+            this.cursorSequence});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 285);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip2.Size = new System.Drawing.Size(566, 25);
+            this.toolStrip2.TabIndex = 564;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(94, 22);
+            this.toolStripLabel2.Text = " SPRITE CURSOR ";
+            // 
+            // cursorName
+            // 
+            this.cursorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cursorName.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.cursorName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cursorName.IntegralHeight = false;
+            this.cursorName.Items.AddRange(new object[] {
+            "Entering menu",
+            "Idol in menu",
+            "Leaving menu",
+            "Enter name",
+            "Saved to slot"});
+            this.cursorName.Name = "cursorName";
+            this.cursorName.Size = new System.Drawing.Size(130, 25);
+            this.cursorName.SelectedIndexChanged += new System.EventHandler(this.cursorName_SelectedIndexChanged);
+            // 
+            // cursorSpriteNum
+            // 
+            this.cursorSpriteNum.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cursorSpriteNum.DropDownWidth = 300;
+            this.cursorSpriteNum.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.cursorSpriteNum.Name = "cursorSpriteNum";
+            this.cursorSpriteNum.Size = new System.Drawing.Size(200, 25);
+            this.cursorSpriteNum.SelectedIndexChanged += new System.EventHandler(this.cursorSpriteNum_SelectedIndexChanged);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(64, 22);
+            this.toolStripLabel3.Text = " SEQUENCE ";
+            // 
+            // cursorSequence
+            // 
+            this.cursorSequence.AutoSize = false;
+            this.cursorSequence.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cursorSequence.Hexadecimal = false;
+            this.cursorSequence.Location = new System.Drawing.Point(499, 1);
+            this.cursorSequence.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.cursorSequence.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.cursorSequence.Name = "cursorSequence";
+            this.cursorSequence.Size = new System.Drawing.Size(50, 22);
+            this.cursorSequence.Text = "0";
+            this.cursorSequence.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.cursorSequence.ValueChanged += new System.EventHandler(this.cursorSequence_ValueChanged);
+            // 
             // GameSelect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 285);
+            this.ClientSize = new System.Drawing.Size(566, 310);
             this.ControlBox = false;
             this.Controls.Add(this.panel3);
+            this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -282,6 +372,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFG)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,5 +402,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripComboBox music;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripComboBox cursorName;
+        private System.Windows.Forms.ToolStripComboBox cursorSpriteNum;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private ToolStripNumericUpDown cursorSequence;
     }
 }

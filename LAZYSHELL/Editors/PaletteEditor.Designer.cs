@@ -183,6 +183,7 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(12, 109);
@@ -862,7 +863,7 @@
             this.negative.AutoSize = true;
             this.negative.Location = new System.Drawing.Point(88, 6);
             this.negative.Name = "negative";
-            this.negative.Size = new System.Drawing.Size(102, 17);
+            this.negative.Size = new System.Drawing.Size(101, 17);
             this.negative.TabIndex = 0;
             this.negative.Text = "Negative Image";
             this.negative.Click += new System.EventHandler(this.negative_CheckedChanged);
@@ -891,6 +892,7 @@
             // 
             // buttonSetToColor
             // 
+            this.buttonSetToColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonSetToColor.FlatAppearance.BorderSize = 2;
             this.buttonSetToColor.Location = new System.Drawing.Point(351, 165);
             this.buttonSetToColor.Name = "buttonSetToColor";
@@ -1012,6 +1014,7 @@
             // 
             // buttonOK
             // 
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonOK.Location = new System.Drawing.Point(231, 389);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
@@ -1022,6 +1025,7 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCancel.Location = new System.Drawing.Point(312, 389);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -1032,6 +1036,7 @@
             // 
             // buttonReset
             // 
+            this.buttonReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonReset.Location = new System.Drawing.Point(393, 389);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
@@ -1042,6 +1047,7 @@
             // 
             // panel13
             // 
+            this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel13.Controls.Add(this.pictureBoxSwatchColor);
             this.panel13.Location = new System.Drawing.Point(432, 153);
@@ -1060,6 +1066,7 @@
             // 
             // panel11
             // 
+            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel11.Controls.Add(this.pictureBoxColorMap);
             this.panel11.Location = new System.Drawing.Point(278, 195);
@@ -1142,6 +1149,7 @@
             // 
             // autoUpdate
             // 
+            this.autoUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.autoUpdate.AutoSize = true;
             this.autoUpdate.Checked = true;
             this.autoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1154,6 +1162,7 @@
             // 
             // buttonUpdate
             // 
+            this.buttonUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonUpdate.Location = new System.Drawing.Point(12, 389);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);

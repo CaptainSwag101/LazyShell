@@ -119,6 +119,8 @@
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "CoordAdjust";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "ADJUST COORDS";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CoordAdjust_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.coordX)).EndInit();

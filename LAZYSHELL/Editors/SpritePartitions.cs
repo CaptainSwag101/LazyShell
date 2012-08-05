@@ -55,58 +55,56 @@ namespace LAZYSHELL
         }
         private void SetPreviewImage()
         {
-            return;
-            //
-            int[] pixels = new int[128 * 256];
-            List<int> cloneSprites = new List<int>();
-            List<int> dynamicSprites = new List<int>();
-            foreach (NPC levelNPC in npcs)
-            {
-                int NPCID = levelNPC.EngageType == 0 ? Math.Min(511, levelNPC.NPCID + levelNPC.PropertyA) : Math.Min(511, (int)levelNPC.NPCID);
-                NPCProperties npc = Model.NPCProperties[NPCID];
-                if (cloneSprites.Count < 3 && !npc.ActiveVRAM && !cloneSprites.Contains((int)npc.Sprite))
-                    cloneSprites.Add((int)npc.Sprite);
-                else if (!cloneSprites.Contains((int)npc.Sprite))
-                    dynamicSprites.Add((int)npc.Sprite);
-            }
-            // draw clone VRAM
-            int counter = 0;
-            int x = 32;
-            int y = 64;
-            foreach (int sprite in cloneSprites)
-            {
-                x = 32;
-                if (counter == 0 && partition.CloneASprite == 7)
-                    y += 64;   // start a block after;
-                if (counter == 1 && partition.CloneBSprite == 7)
-                    y += 64;   // start a block after;
-                if (counter == 2 && partition.CloneCSprite == 7)
-                    y += 64;   // start a block after;
-                int y_ref = y;
-                DrawNPCToVRAM(pixels, ref x, ref y_ref, sprite, 0, false);
-                y += 64;
-                counter++;
-            }
-            // draw shadows
+            //int[] pixels = new int[128 * 256];
+            //List<int> cloneSprites = new List<int>();
+            //List<int> dynamicSprites = new List<int>();
+            //foreach (NPC levelNPC in npcs)
+            //{
+            //    int NPCID = levelNPC.EngageType == 0 ? Math.Min(511, levelNPC.NPCID + levelNPC.PropertyA) : Math.Min(511, (int)levelNPC.NPCID);
+            //    NPCProperties npc = Model.NPCProperties[NPCID];
+            //    if (cloneSprites.Count < 3 && !npc.ActiveVRAM && !cloneSprites.Contains((int)npc.Sprite))
+            //        cloneSprites.Add((int)npc.Sprite);
+            //    else if (!cloneSprites.Contains((int)npc.Sprite))
+            //        dynamicSprites.Add((int)npc.Sprite);
+            //}
+            //// draw clone VRAM
+            //int counter = 0;
+            //int x = 32;
+            //int y = 64;
+            //foreach (int sprite in cloneSprites)
+            //{
+            //    x = 32;
+            //    if (counter == 0 && partition.CloneASprite == 7)
+            //        y += 64;   // start a block after;
+            //    if (counter == 1 && partition.CloneBSprite == 7)
+            //        y += 64;   // start a block after;
+            //    if (counter == 2 && partition.CloneCSprite == 7)
+            //        y += 64;   // start a block after;
+            //    int y_ref = y;
+            //    DrawNPCToVRAM(pixels, ref x, ref y_ref, sprite, 0, false);
+            //    y += 64;
+            //    counter++;
+            //}
+            //// draw shadows
 
-            // draw dynamic VRAM
-            x = y = 0;
-            DrawNPCToVRAM(pixels, ref x, ref y, 0, 0, true);    // Mario
-            x = y = 0;
-            if (partition.AllySpriteBuffer == 1)
-                x = 64;
-            if (partition.AllySpriteBuffer == 2)
-                y = 16;
-            if (partition.AllySpriteBuffer == 2)
-            {
-                x = 64;
-                y = 16;
-            }
-            foreach (int sprite in dynamicSprites)
-                DrawNPCToVRAM(pixels, ref x, ref y, sprite, 0, true);
-            // 
-            previewImage = Do.PixelsToImage(pixels, 128, 256);
-            pictureBox1.Invalidate();
+            //// draw dynamic VRAM
+            //x = y = 0;
+            //DrawNPCToVRAM(pixels, ref x, ref y, 0, 0, true);    // Mario
+            //x = y = 0;
+            //if (partition.AllySpriteBuffer == 1)
+            //    x = 64;
+            //if (partition.AllySpriteBuffer == 2)
+            //    y = 16;
+            //if (partition.AllySpriteBuffer == 2)
+            //{
+            //    x = 64;
+            //    y = 16;
+            //}
+            //foreach (int sprite in dynamicSprites)
+            //    DrawNPCToVRAM(pixels, ref x, ref y, sprite, 0, true);
+            //// 
+            //previewImage = Do.PixelsToImage(pixels, 128, 256);
+            //pictureBox1.Invalidate();
         }
         private void DrawNPCToVRAM(int[] dst, ref int x, ref int y, int spriteIndex, int moldIndex, bool dynamic)
         {

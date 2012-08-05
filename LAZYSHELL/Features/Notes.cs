@@ -19,7 +19,6 @@ namespace LAZYSHELL
         private Settings settings = Settings.Default;
         private ArrayList currentIndexes;
         private NotesDB.Index currentIndex;
-        private State state = State.Instance;
         private NotesDB notes; public NotesDB ThisNotes { get { return notes; } set { notes = value; } }
         public ComboBox ElementType { get { return elementType; } set { elementType = value; } }
         public NewListView ElementIndexes { get { return elementIndexes; } set { elementIndexes = value; } }
@@ -56,8 +55,8 @@ namespace LAZYSHELL
                 buttonOK.Enabled = true;
                 save.Enabled = true;
                 saveAs.Enabled = true;
+                checksum = Do.GenerateChecksum(notes);
             }
-            checksum = Do.GenerateChecksum(notes);
         }
         #region Functions
         private void RefreshElementIndexes()
@@ -233,7 +232,7 @@ namespace LAZYSHELL
             buttonOK.Enabled = true;
             save.Enabled = true;
             saveAs.Enabled = true;
-
+            checksum = Do.GenerateChecksum(notes);
             return true;
         }
         private bool CreateNewNotes()
@@ -276,7 +275,7 @@ namespace LAZYSHELL
             buttonOK.Enabled = true;
             save.Enabled = true;
             saveAs.Enabled = true;
-
+            checksum = Do.GenerateChecksum(notes);
             return true;
         }
         private void SaveNewNotes(string path)

@@ -479,7 +479,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Mem $7000 xor bits = mem $",			// 0xB5
             "Mem $",			// 0xB6
             "Generate random # less than mem $",			// 0xB7
-            "UNKCMD 0xFD Option 0xB8",			// 0xB8
+            "Mem $7000 = Moleville Mountain timer",			// 0xB8
             "UNKCMD 0xFD Option 0xB9",			// 0xB9
             "UNKCMD 0xFD Option 0xBA",			// 0xBA
             "UNKCMD 0xFD Option 0xBB",			// 0xBB
@@ -1195,7 +1195,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             }
             return sb.ToString();
         }
-
         private string TrimTailSpaces(string src)
         {
             int lastIndex = src.Length - 1;

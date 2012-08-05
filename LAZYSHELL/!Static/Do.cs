@@ -30,6 +30,7 @@ namespace LAZYSHELL
     {
         private static ProgressBar ProgressBar;
         private static Stopwatch StopWatch;
+        public static Bitmap ScreenImage;
         #region Drawing
         /// <summary>
         /// Applys a palette to a pixel array.
@@ -148,6 +149,61 @@ namespace LAZYSHELL
                         array[y * src.Width + x] = nearest_color;
                 }
             }
+        }
+        public static int[] BPPtoPixels(byte[] subtile, int[] palette, bool twobpp)
+        {
+            int offset = 0;
+            int[] pixels = new int[8 * 8];
+            if (twobpp == false)
+            {
+                for (int r = 0; r < 8; r++) // Number of Rows in an 8x8 Tile
+                {
+                    // Get all the pixels in a row
+                    byte[] row = new byte[8];
+
+                    for (int i = 7, b = 1; i >= 0; i--, b *= 2)
+                        if ((subtile[offset + r * 2 + 0x11] & b) == b)
+                            row[i] += 8;
+                    for (int i = 7, b = 1; i >= 0; i--, b *= 2)
+                        if ((subtile[offset + r * 2 + 0x10] & b) == b)
+                            row[i] += 4;
+                    for (int i = 7, b = 1; i >= 0; i--, b *= 2)
+                        if ((subtile[offset + r * 2 + 1] & b) == b)
+                            row[i] += 2;
+                    for (int i = 7, b = 1; i >= 0; i--, b *= 2)
+                        if ((subtile[offset + r * 2] & b) == b)
+                            row[i]++;
+
+                    for (int c = 0; c < 8; c++) // Number of Columns in an 8x8 Tile
+                    {
+                        if (row[c] != 0)
+                            pixels[r * 8 + c] = palette[row[c]]; // Set pixel in 8x8 tile
+                    }
+                }
+            }
+            else
+            {
+                byte b1, b2, t1, t2, col = 0;
+                int[] pal = new int[4];
+                for (int i = 0; i < 4; i++)
+                    pal[i] = palette[i];
+                for (byte i = 0; i < 8; i++)
+                {
+                    b1 = subtile[offset];
+                    b2 = subtile[offset + 1];
+                    for (byte z = 7; col < 8; z--)
+                    {
+                        t1 = (byte)((b1 >> z) & 1);
+                        t2 = (byte)((b2 >> z) & 1);
+                        if ((t2 * 2) + t1 != 0)
+                            pixels[(i * 8) + col] = pal[(t2 * 2) + t1];
+                        col++;
+                    }
+                    col = 0;
+                    offset += 2;
+                }
+            }
+            return pixels;
         }
         /// <summary>
         /// Resizes the canvas of a bitmap image.
@@ -625,7 +681,7 @@ namespace LAZYSHELL
         /// <param name="width">The width of the source array.</param>
         /// <param name="height">The height of the source array.</param>
         /// <returns></returns>
-        public static Rectangle Crop(int[] src, out int[] dst, int width, int height)
+        public static Rectangle Crop(int[] src, out int[] dst, int width, int height, bool left, bool bottom, bool right, bool top)
         {
             int leftEdge = 0, bottomEdge = 0, rightEdge = 0, topEdge = 0;
             // find top edge
@@ -672,6 +728,11 @@ namespace LAZYSHELL
                     }
             }
         Done:
+            if (!top) topEdge = 0;
+            if (!bottom) bottomEdge = height;
+            if (!left) leftEdge = 0;
+            if (!right) rightEdge = width;
+            //
             if (rightEdge - leftEdge <= 0 ||
                 bottomEdge - topEdge <= 0)
             {
@@ -684,6 +745,10 @@ namespace LAZYSHELL
                     rightEdge - leftEdge + 1, bottomEdge - topEdge + 1, leftEdge, topEdge);
                 return new Rectangle(leftEdge, topEdge, rightEdge - leftEdge + 1, bottomEdge - topEdge + 1);
             }
+        }
+        public static Rectangle Crop(int[] src, out int[] dst, int width, int height)
+        {
+            return Crop(src, out dst, width, height, true, true, true, true);
         }
         /// <summary>
         /// Crop several pixel arrays to the largest boundary of all arrays and returns the boundary.
@@ -969,49 +1034,68 @@ namespace LAZYSHELL
                 tileset[c++] = new Tile(c);
         }
         /// <summary>
-        /// Draws an overworld menu frame with a certain size.
+        /// Draws an overworld menu frame to a pixel array.
         /// </summary>
-        /// <param name="size">The size, in 8x8 tiles, of the menu frame.</param>
-        /// <param name="graphics">The 2bpp menu frame graphics.</param>
-        /// <param name="palette">The 16-color menu frame palette.</param>
+        /// <param name="dst">The pixel array to draw to.</param>
+        /// <param name="dstWidth">The width of the pixel array.</param>
+        /// <param name="r">The location (in pixels) and size (in 8x8 tiles) of the frame.</param>
         /// <returns></returns>
-        public static int[] DrawMenuFrame(Size size, byte[] graphics, int[] palette)
+        public static void DrawMenuFrame(int[] dst, int dstWidth, Rectangle r, byte[] graphics, int[] palette)
         {
-            int[] pixels = new int[(size.Width * 8) * (size.Height * 8)];
             // set tileset
             Subtile[] frameTileset = new Subtile[16 * 2];
+            int[] framePalette = Bits.GetIntArray(palette, 12, 4);
             for (int i = 0; i < frameTileset.Length; i++)
-                frameTileset[i] = new Subtile(i, graphics, i * 0x10, palette, false, false, false, true);
+                frameTileset[i] = new Subtile(i, graphics, i * 0x10, framePalette, false, false, false, true);
             // draw tiles to pixels
+            for (int x = 2; x < r.Width - 2; x++)
+            {
+                if (x * 8 + r.X < dstWidth)
+                {
+                    PixelsToPixels(frameTileset[0x02].Pixels, dst, dstWidth, new Rectangle(x * 8 + r.X, r.Y, 8, 8), true, true);
+                    PixelsToPixels(frameTileset[0x19].Pixels, dst, dstWidth, new Rectangle(x * 8 + r.X, (r.Height - 1) * 8 + r.Y, 8, 8), true, true);
+                }
+            }
+            for (int y = 2; y < r.Height - 3; y++)
+            {
+                PixelsToPixels(frameTileset[0x05].Pixels, dst, dstWidth, new Rectangle(r.X, y * 8 + r.Y, 8, 8), true, true);
+                if ((r.Width - 1) * 8 + r.X < dstWidth)
+                    PixelsToPixels(frameTileset[0x06].Pixels, dst, dstWidth, new Rectangle((r.Width - 1) * 8 + r.X, y * 8 + r.Y, 8, 8), true, true);
+            }
             // top-left corner
-            PixelsToPixels(frameTileset[0x00].Pixels, pixels, size.Width * 8, new Rectangle(0, 0, 8, 8));
-            PixelsToPixels(frameTileset[0x01].Pixels, pixels, size.Width * 8, new Rectangle(8, 0, 8, 8));
-            PixelsToPixels(frameTileset[0x10].Pixels, pixels, size.Width * 8, new Rectangle(0, 8, 8, 8));
+            PixelsToPixels(frameTileset[0x00].Pixels, dst, dstWidth, new Rectangle(r.X, r.Y, 8, 8), true, true);
+            PixelsToPixels(frameTileset[0x01].Pixels, dst, dstWidth, new Rectangle(r.X + 8, r.Y, 8, 8), true, true);
+            PixelsToPixels(frameTileset[0x10].Pixels, dst, dstWidth, new Rectangle(r.X, r.Y + 8, 8, 8), true, true);
             // top-right corner
-            PixelsToPixels(frameTileset[0x03].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 2) * 8, 0, 8, 8));
-            PixelsToPixels(frameTileset[0x04].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, 0, 8, 8));
-            PixelsToPixels(frameTileset[0x14].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, 8, 8, 8));
+            if ((r.Width - 2) * 8 + r.X < dstWidth)
+                PixelsToPixels(frameTileset[0x03].Pixels, dst, dstWidth, new Rectangle((r.Width - 2) * 8 + r.X, r.Y, 8, 8), true, true);
+            if ((r.Width - 1) * 8 + r.X < dstWidth)
+            {
+                PixelsToPixels(frameTileset[0x04].Pixels, dst, dstWidth, new Rectangle((r.Width - 1) * 8 + r.X, r.Y, 8, 8), true, true);
+                PixelsToPixels(frameTileset[0x14].Pixels, dst, dstWidth, new Rectangle((r.Width - 1) * 8 + r.X, r.Y + 8, 8, 8), true, true);
+            }
             // bottom-left corner
-            PixelsToPixels(frameTileset[0x15].Pixels, pixels, size.Width * 8, new Rectangle(0, (size.Height - 3) * 8, 8, 8));
-            PixelsToPixels(frameTileset[0x07].Pixels, pixels, size.Width * 8, new Rectangle(0, (size.Height - 2) * 8, 8, 8));
-            PixelsToPixels(frameTileset[0x17].Pixels, pixels, size.Width * 8, new Rectangle(0, (size.Height - 1) * 8, 8, 8));
-            PixelsToPixels(frameTileset[0x18].Pixels, pixels, size.Width * 8, new Rectangle(8, (size.Height - 1) * 8, 8, 8));
+            if (r.Height > 3)
+                PixelsToPixels(frameTileset[0x15].Pixels, dst, dstWidth, new Rectangle(r.X, (r.Height - 3) * 8 + r.Y, 8, 8), true, true);
+            PixelsToPixels(frameTileset[0x07].Pixels, dst, dstWidth, new Rectangle(r.X, (r.Height - 2) * 8 + r.Y, 8, 8), true, true);
+            PixelsToPixels(frameTileset[0x17].Pixels, dst, dstWidth, new Rectangle(r.X, (r.Height - 1) * 8 + r.Y, 8, 8), true, true);
+            PixelsToPixels(frameTileset[0x18].Pixels, dst, dstWidth, new Rectangle(r.X + 8, (r.Height - 1) * 8 + r.Y, 8, 8), true, true);
             // bottom-right corner
-            PixelsToPixels(frameTileset[0x16].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, (size.Height - 3) * 8, 8, 8));
-            PixelsToPixels(frameTileset[0x0B].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, (size.Height - 2) * 8, 8, 8));
-            PixelsToPixels(frameTileset[0x1A].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 2) * 8, (size.Height - 1) * 8, 8, 8));
-            PixelsToPixels(frameTileset[0x1B].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, (size.Height - 1) * 8, 8, 8));
-            for (int x = 2; x < size.Width - 2; x++)
+            if ((r.Width - 1) * 8 + r.X < dstWidth)
             {
-                PixelsToPixels(frameTileset[0x02].Pixels, pixels, size.Width * 8, new Rectangle(x * 8, 0, 8, 8));
-                PixelsToPixels(frameTileset[0x19].Pixels, pixels, size.Width * 8, new Rectangle(x * 8, (size.Height - 1) * 8, 8, 8));
+                if (r.Height > 3)
+                    PixelsToPixels(frameTileset[0x16].Pixels, dst, dstWidth, new Rectangle((r.Width - 1) * 8 + r.X, (r.Height - 3) * 8 + r.Y, 8, 8), true, true);
+                PixelsToPixels(frameTileset[0x0B].Pixels, dst, dstWidth, new Rectangle((r.Width - 1) * 8 + r.X, (r.Height - 2) * 8 + r.Y, 8, 8), true, true);
+                PixelsToPixels(frameTileset[0x1B].Pixels, dst, dstWidth, new Rectangle((r.Width - 1) * 8 + r.X, (r.Height - 1) * 8 + r.Y, 8, 8), true, true);
             }
-            for (int y = 2; y < size.Height - 3; y++)
-            {
-                PixelsToPixels(frameTileset[0x05].Pixels, pixels, size.Width * 8, new Rectangle(0, y * 8, 8, 8));
-                PixelsToPixels(frameTileset[0x06].Pixels, pixels, size.Width * 8, new Rectangle((size.Width - 1) * 8, y * 8, 8, 8));
-            }
-            return pixels;
+            if ((r.Width - 2) * 8 + r.X < dstWidth)
+                PixelsToPixels(frameTileset[0x1A].Pixels, dst, dstWidth, new Rectangle((r.Width - 2) * 8 + r.X, (r.Height - 1) * 8 + r.Y, 8, 8), true, true);
+        }
+        public static int[] DrawMenuFrame(Size dstSize, byte[] graphics, int[] palette)
+        {
+            int[] dst = new int[(dstSize.Width * 8) * (dstSize.Height * 8)];
+            DrawMenuFrame(dst, dstSize.Width * 8, new Rectangle(new Point(0, 0), dstSize), graphics, palette);
+            return dst;
         }
         /// <summary>
         /// 
@@ -1204,9 +1288,13 @@ namespace LAZYSHELL
         /// <param name="format">The format for 2bpp or 4bpp, 0x10 or 0x20, respectively.</param>
         public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, string action, int x, int y, int index, int color, int width, int height, byte format)
         {
-            return EditPixelBPP(src, srcOffset, palette, graphics, zoom, action, x, y, index, color, width, height, format, 0, 0);
+            return EditPixelBPP(src, srcOffset, palette, graphics, zoom, action, x, y, index, color, color, width, height, format, 0, 0);
         }
-        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, string action, int x, int y, int index, int color, int width, int height, byte format, int x_plus, int y_plus)
+        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, string action, int x, int y, int index, int color, int colorBack, int width, int height, byte format)
+        {
+            return EditPixelBPP(src, srcOffset, palette, graphics, zoom, action, x, y, index, color, colorBack, width, height, format, 0, 0);
+        }
+        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, string action, int x, int y, int index, int color, int colorBack, int width, int height, byte format, int x_plus, int y_plus)
         {
             if (x < 0 || x >= (width * 8) * zoom || y < 0 || y >= (height * 8) * zoom)
                 return color;
@@ -1230,6 +1318,15 @@ namespace LAZYSHELL
                     break;
                 case "select":
                     color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
+                    break;
+                case "replaceColor":
+                    int selectColor = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
+                    // if pixel not color to replace, return
+                    if (selectColor != colorBack)
+                        return color;
+                    c = new Rectangle((x / zoom * zoom) + x_plus, (y / zoom * zoom) + y_plus, zoom, zoom);
+                    graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[color])), c);
+                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, color, width);
                     break;
                 case "fill":
                     int fillColor = color;
@@ -2204,7 +2301,7 @@ namespace LAZYSHELL
             return temp;
         }
         public static void ImagesToMolds(List<Mold> molds, List<Mold.Tile> uniqueTiles, Bitmap[] images, ref int[] palette, ref byte[] graphics,
-            int startingIndex, bool replaceMolds, bool replacePalette)
+            int startingIndex, bool replaceMolds, bool replacePalette, string type)
         {
             Bitmap sheet = CombineImages(images, 128, 512, 8, true);
             int[] pixels = ImageToPixels(sheet);
@@ -2221,7 +2318,8 @@ namespace LAZYSHELL
             if (replaceMolds)
             {
                 uniqueTiles.Clear();
-                molds.Clear();
+                if (type == "molds")
+                    molds.Clear();
             }
             for (int i = 0; i < images.Length; i++)
             {
@@ -2262,8 +2360,8 @@ namespace LAZYSHELL
                         {
                             Mold.Tile tile = new Mold.Tile();
                             tile.SubTiles = new ushort[4];
-                            tile.XCoord = (byte)(x * 16);
-                            tile.YCoord = (byte)(y * 16);
+                            tile.X = (byte)(x * 16);
+                            tile.Y = (byte)(y * 16);
                             // create pixel array of 16x16 tile
                             int[] dst_tile = GetPixelRegion(pixels_image, width, height, 16, 16, x * 16, y * 16);
                             // if no pixels in tile, skip
@@ -2303,8 +2401,8 @@ namespace LAZYSHELL
                     // center mold in 256x256 map
                     foreach (Mold.Tile tile in mold.Tiles)
                     {
-                        tile.XCoord += (byte)((256 - image.Width) / 2);
-                        tile.YCoord += (byte)((256 - image.Height) / 2);
+                        tile.X += (byte)((256 - image.Width) / 2);
+                        tile.Y += (byte)((256 - image.Height) / 2);
                     }
                 }
                 #endregion
@@ -2358,7 +2456,8 @@ namespace LAZYSHELL
                     mold.Tiles.Add(tile);
                 }
                 #endregion
-                molds.Add(mold);
+                if (type == "molds")
+                    molds.Add(mold);
             }
             // set new palette
             palette = rpalette;
@@ -2878,11 +2977,14 @@ namespace LAZYSHELL
             {
                 for (int x = 0; x < width; x++)
                 {
+                    int index = (y * width + x) + startAtTile;
+                    if (index >= tileset.Length)
+                        continue;
                     if (!priority1)
-                        Do.PixelsToPixels(tileset[(y * width + x) + startAtTile].Pixels, pixels, width * 16,
+                        Do.PixelsToPixels(tileset[index].Pixels, pixels, width * 16,
                             new Rectangle(x * 16, y * 16, 16, 16));
                     else
-                        Do.PixelsToPixels(tileset[(y * width + x) + startAtTile].Pixels_P1, pixels, width * 16,
+                        Do.PixelsToPixels(tileset[index].Pixels_P1, pixels, width * 16,
                             new Rectangle(x * 16, y * 16, 16, 16));
                 }
             }
@@ -2921,6 +3023,39 @@ namespace LAZYSHELL
                 regionA.Y + regionA.Height < regionB.Y)
                 return false;
             return true;
+        }
+        public static bool WithinBounds(Rectangle regionA, Rectangle regionB, Mold.Tile tile)
+        {
+            if (regionA.X > regionB.X + regionB.Width ||
+                regionA.Y > regionB.Y + regionB.Height)
+                return false;
+            if (regionA.X + regionA.Width < regionB.X ||
+                regionA.Y + regionA.Height < regionB.Y)
+                return false;
+            for (int b = 0; b < 2; b++)
+            {
+                for (int a = 0; a < 2; a++)
+                {
+                    Subtile subtile = tile.Subtiles[b * 2 + a];
+                    for (int y = 0; y < 8; y++)
+                    {
+                        for (int x = 0; x < 8; x++)
+                        {
+                            int x_ = a * 8 + x;
+                            int y_ = b * 8 + y;
+                            if (subtile.Pixels[y * 8 + x] != 0)
+                            {
+                                if (regionA.X < regionB.X + x_ + 1 &&
+                                    regionA.Y < regionB.Y + y_ + 1 &&
+                                    regionA.X + regionA.Width > regionB.X + x_ &&
+                                    regionA.Y + regionA.Height > regionB.Y + y_)
+                                    return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
         }
         #endregion
         #region Coloring
@@ -3110,16 +3245,20 @@ namespace LAZYSHELL
                 palette[0] = transparent;
                 for (int i = 1, a = 0; a < colors.Count; i++, a++)
                     palette[i] = colors[a];
-                return palette;
             }
             // find the median colors in the list of colors for a total based on the depth
-            colors.Sort();
-            int increment = colors.Count / (depth - 1);
-            for (int i = 0, p = 2; i < colors.Count && p < palette.Length - 1; i += increment, p++)
-                palette[p] = colors[i];
-            palette[0] = transparent;
-            palette[1] = lightest.ToArgb();
-            palette[depth - 1] = darkest.ToArgb();
+            else
+            {
+                colors.Sort();
+                int increment = colors.Count / (depth - 1);
+                for (int i = 0, p = 2; i < colors.Count && p < palette.Length - 1; i += increment, p++)
+                    palette[p] = colors[i];
+                palette[0] = transparent;
+                palette[1] = lightest.ToArgb();
+                palette[depth - 1] = darkest.ToArgb();
+            }
+            for (int i = 0; i < palette.Length; i++)
+                palette[i] &= unchecked((int)0xFFF8F8F8);
             return palette;
         }
         /// <summary>
@@ -3346,6 +3485,11 @@ namespace LAZYSHELL
         public static Bitmap Hilite(Bitmap image, int width, int height)
         {
             int[] src = Do.ImageToPixels(image);
+            int[] dst = Hilite(src, width, height);
+            return new Bitmap(Do.PixelsToImage(dst, width, height));
+        }
+        public static int[] Hilite(int[] src, int width, int height)
+        {
             int[] dst = new int[src.Length];
             for (int i = 0; i < src.Length; i++)
             {
@@ -3357,7 +3501,7 @@ namespace LAZYSHELL
                 int b = Math.Min(255, 255 + l);
                 dst[i] = Color.FromArgb(r, g, b).ToArgb();
             }
-            return new Bitmap(Do.PixelsToImage(dst, width, height));
+            return dst;
         }
         #endregion
         #region Text
@@ -3457,6 +3601,10 @@ namespace LAZYSHELL
             for (; i < temp.Length; i++)
                 temp[i] = '\x20';
             return temp;
+        }
+        public static char[] ASCIIToRaw(string text, StringCollection keystrokes)
+        {
+            return ASCIIToRaw(text, keystrokes, text.Length);
         }
         /// <summary>
         /// Convert a raw char array to viewable ASCII format using a table of keystrokes.
@@ -4126,6 +4274,23 @@ namespace LAZYSHELL
             int[] temp = preview.GetPreview(fontCharacters, palette, text.ToCharArray(), false, false);
             g.DrawImage(new Bitmap(Do.PixelsToImage(temp, 256, 14)), x, y);
         }
+        public static void DrawText(int[] dst, int dstWidth, char[] text, int x, int y, int rowHeight, FontCharacter[] fontCharacters, int[] palette)
+        {
+            int left = x;
+            foreach (char letter in text)
+            {
+                if (letter == '\n' || letter == '\r')
+                {
+                    x = left;
+                    y += rowHeight;
+                    continue;
+                }
+                FontCharacter character = fontCharacters[(byte)letter];
+                int[] pixels = character.GetCharacterPixels(palette);
+                PixelsToPixels(pixels, dst, dstWidth, new Rectangle(x, y, character.Width, character.Height));
+                x += character.Width;
+            }
+        }
         public static void SelectAllNodes(TreeNodeCollection nodes, bool selected)
         {
             foreach (TreeNode tn in nodes)
@@ -4435,9 +4600,10 @@ namespace LAZYSHELL
                 }
                 return check;
             }
-            catch
+            catch (Exception ex)
             {
-                return 0;
+                throw new Exception(ex.Message);
+                //return 0;
             }
         }
         public static Tile Contains(Tile[] tileset, Tile tile)

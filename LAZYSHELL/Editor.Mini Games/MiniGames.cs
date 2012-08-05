@@ -11,7 +11,7 @@ namespace LAZYSHELL
     public partial class MiniGames : Form
     {
         private MineCart minecart; public MineCart Minecart { get { return minecart; } set { minecart = value; } }
-        private State state = State.Instance;
+        private State state = State.Instance2;
         //
         public MiniGames()
         {
@@ -38,7 +38,7 @@ namespace LAZYSHELL
             else
                 minecart.Reload(this);
         }
-        private void Assemble()
+        public void Assemble()
         {
             minecart.Assemble();
         }
@@ -55,6 +55,7 @@ namespace LAZYSHELL
             if (var != null) Model.MinecartM7TilesetPalettes = var;
             var = (byte[])Do.Import(Model.MinecartSSTileset);
             if (var != null) Model.MinecartSSTileset = var;
+            minecart.RefreshLevel();
         }
         private void importTilemapsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -64,6 +65,7 @@ namespace LAZYSHELL
             if (var != null) Model.MinecartM7TilemapB = var;
             var = (byte[])Do.Import(Model.MinecartSSTilemap);
             if (var != null) Model.MinecartSSTilemap = var;
+            minecart.RefreshLevel();
         }
         private void exportTilesetsToolStripMenuItem_Click(object sender, EventArgs e)
         {

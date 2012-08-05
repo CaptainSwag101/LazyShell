@@ -423,9 +423,14 @@ namespace LAZYSHELL
             if (tilesetImage != null)
                 e.Graphics.DrawImage(tilesetImage, 0, 0, 128, (int)e_tileSetSize.Value / 64 * 16);
             if (e_moldShowGrid.Checked)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxEffectTileset.Size, new Size(16, 16), 1);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxEffectTileset.Size, new Size(16, 16), 1, true);
             if (overlay.SelectTS != null)
-                overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
+            {
+                if (e_moldShowGrid.Checked)
+                    overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1, Color.Yellow);
+                else
+                    overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
+            }
         }
         private void pictureBoxEffectTileset_MouseDown(object sender, MouseEventArgs e)
         {
@@ -499,10 +504,12 @@ namespace LAZYSHELL
             if (mouseEnter && e.ClipRectangle.Size != new Size(16, 16))
                 DrawHoverBox(e.Graphics);
             if (e_moldShowGrid.Checked)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxE_Mold.Size, new Size(16, 16), zoom);
-            if (select.Checked)
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxE_Mold.Size, new Size(16, 16), zoom, true);
+            if (select.Checked && overlay.Select != null)
             {
-                if (overlay.Select != null)
+                if (e_moldShowGrid.Checked)
+                    overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, zoom, Color.Yellow);
+                else
                     overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, zoom);
             }
         }

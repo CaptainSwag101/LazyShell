@@ -12,7 +12,6 @@ namespace LAZYSHELL
     public partial class Formations : Form
     {
         #region Variables
-
         private bool updating = false;
         private bool waitBothCoords = false;
         private int overFM = 0;
@@ -32,6 +31,10 @@ namespace LAZYSHELL
         public System.Windows.Forms.ToolStripComboBox FormationNames { get { return formationNameList; } }
         public Search searchWindow;
         private List<Bitmap> monsterImages = new List<Bitmap>();
+        private List<Bitmap> shadowImages = new List<Bitmap>();
+        private Bitmap[] allyImages;
+        private Bitmap[] statImages;
+        private Bitmap[] portraits;
         private CheckBox[] use = new CheckBox[8];
         private CheckBox[] hide = new CheckBox[8];
         #endregion
@@ -186,10 +189,10 @@ namespace LAZYSHELL
 
             toolTip1.SetToolTip(this.pictureBoxFormation,
                 "Click and drag the monsters in the formation.");
-            toolTip1.SetToolTip(this.battlefieldName,
+            this.battlefieldName.ToolTipText =
                 "Select the background to preview the formation in. This is\n" +
                 "only for preview purposes; changing this will have no effect\n" +
-                "on the ROM.");
+                "on the ROM.";
         }
         private void InitializeStrings()
         {
@@ -206,7 +209,24 @@ namespace LAZYSHELL
             this.formationName7.Items.AddRange(Model.MonsterNames.Names);
             this.formationName8.Items.AddRange(Model.MonsterNames.Names);
             this.battlefieldName.Items.AddRange(Lists.BattlefieldNames);
+            this.formationBattleEvent.Items.AddRange(Lists.Numerize(Lists.BattleEventNames));
             this.musicTrack.Items.AddRange(Lists.MusicNames);
+            this.formationCoordX1.Tag = 0;
+            this.formationCoordX2.Tag = 1;
+            this.formationCoordX3.Tag = 2;
+            this.formationCoordX4.Tag = 3;
+            this.formationCoordX5.Tag = 4;
+            this.formationCoordX6.Tag = 5;
+            this.formationCoordX7.Tag = 6;
+            this.formationCoordX8.Tag = 7;
+            this.formationCoordY1.Tag = 0;
+            this.formationCoordY2.Tag = 1;
+            this.formationCoordY3.Tag = 2;
+            this.formationCoordY4.Tag = 3;
+            this.formationCoordY5.Tag = 4;
+            this.formationCoordY6.Tag = 5;
+            this.formationCoordY7.Tag = 6;
+            this.formationCoordY8.Tag = 7;
             updating = false;
         }
         public void RefreshFormations()
@@ -248,7 +268,7 @@ namespace LAZYSHELL
             this.formationCoordY7.Value = formation.FormationCoordY[6];
             this.formationCoordY8.Value = formation.FormationCoordY[7];
             this.formationMusic.SelectedIndex = formation.FormationMusic;
-            this.formationBattleEvent.Value = formation.FormationBattleEvent;
+            this.formationBattleEvent.SelectedIndex = formation.FormationBattleEvent;
             this.formationUnknown.Value = formation.FormationUnknown;
             this.formationCantRun.Checked = formation.FormationCantRun;
             for (int i = 0; i < 8; i++)
@@ -269,10 +289,13 @@ namespace LAZYSHELL
         private void RefreshMonsterImages()
         {
             monsterImages = new List<Bitmap>();
+            shadowImages = new List<Bitmap>();
             for (int i = 0; i < 8; i++)
             {
-                int[] pixels = Model.Monsters[formation.FormationMonster[i]].Pixels;
+                int[] pixels = Model.Monsters[formation.FormationMonster[i]].Pixels();
                 monsterImages.Add(Do.PixelsToImage(pixels, 256, 256));
+                pixels = Model.Monsters[formation.FormationMonster[i]].Shadow();
+                shadowImages.Add(Do.PixelsToImage(pixels, 16, 16));
             }
             formation.PixelIndexes = null;
             pictureBoxFormation.Invalidate();
@@ -292,6 +315,34 @@ namespace LAZYSHELL
             Do.PixelsToPixels(quadrant4, pixels, 512, new Rectangle(256, 256, 256, 256));
             formationBGImage = new Bitmap(Do.PixelsToImage(pixels, 512, 512));
             pictureBoxFormation.Invalidate();
+        }
+        private void SetAllyImages()
+        {
+            allyImages = new Bitmap[5];
+            statImages = new Bitmap[5];
+            portraits = new Bitmap[5];
+            for (int i = 0; i < allyImages.Length; i++)
+            {
+                int[] pixels = Model.NPCProperties[i].CreateImage(7, false, i, false);
+                int height = Model.NPCProperties[i].ImageHeight;
+                int width = Model.NPCProperties[i].ImageWidth;
+                allyImages[i] = Do.PixelsToImage(pixels, width, height);
+                //
+                pixels = new int[128 * 24];
+                int[] palette = Model.BattleMenuPalette.Palette;
+                char[] text = new char[]
+                {
+                    '\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x02','\n' ,
+                    '\x00','9','9','9','\x16','9','9','9','\x10','\n',
+                    '\x11','\x11','\x11','\x11','\x11','\x11','\x11','\x11','\x12'
+                };
+                Do.DrawText(pixels, 128, text, 0, 0, 8, Model.FontBattleMenu, palette);
+                statImages[i] = Do.PixelsToImage(pixels, 128, 24);
+                //
+                palette = Model.Sprites[Model.NPCProperties[i].Sprite].Palette;
+                pixels = Model.NPCProperties[i].CreateImage(0, true, i + 40, false, true, palette);
+                portraits[i] = Do.PixelsToImage(pixels, 256, 256);
+            }
         }
         #region Event Handlers
         private void formationNameList_SelectedIndexChanged(object sender, EventArgs e)
@@ -437,164 +488,24 @@ namespace LAZYSHELL
 
             this.formationByte8.Value = this.monsterNames.GetNumFromIndex(this.formationName8.SelectedIndex);
         }
-        private void formationCoordX1_ValueChanged(object sender, EventArgs e)
+        private void formationCoordX_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
-            this.formation.FormationCoordX[0] = (byte)this.formationCoordX1.Value;
-
-            if (waitBothCoords) return;
-
+            if (updating)
+                return;
+            NumericUpDown x = (NumericUpDown)sender;
+            this.formation.FormationCoordX[(int)x.Tag] = (byte)x.Value;
+            if (waitBothCoords)
+                return;
             pictureBoxFormation.Invalidate();
         }
-        private void formationCoordX2_ValueChanged(object sender, EventArgs e)
+        private void formationCoordY_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
-            this.formation.FormationCoordX[1] = (byte)this.formationCoordX2.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordX3_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordX[2] = (byte)this.formationCoordX3.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordX4_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordX[3] = (byte)this.formationCoordX4.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordX5_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordX[4] = (byte)this.formationCoordX5.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordX6_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordX[5] = (byte)this.formationCoordX6.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordX7_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordX[6] = (byte)this.formationCoordX7.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordX8_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordX[7] = (byte)this.formationCoordX8.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordY1_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordY[0] = (byte)this.formationCoordY1.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordY2_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordY[1] = (byte)this.formationCoordY2.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordY3_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordY[2] = (byte)this.formationCoordY3.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordY4_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordY[3] = (byte)this.formationCoordY4.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordY5_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordY[4] = (byte)this.formationCoordY5.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordY6_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordY[5] = (byte)this.formationCoordY6.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordY7_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordY[6] = (byte)this.formationCoordY7.Value;
-
-            if (waitBothCoords) return;
-
-            pictureBoxFormation.Invalidate();
-        }
-        private void formationCoordY8_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationCoordY[7] = (byte)this.formationCoordY8.Value;
-
-            if (waitBothCoords) return;
-
+            if (updating)
+                return;
+            NumericUpDown y = (NumericUpDown)sender;
+            this.formation.FormationCoordY[(int)y.Tag] = (byte)y.Value;
+            if (waitBothCoords)
+                return;
             pictureBoxFormation.Invalidate();
         }
         //
@@ -648,11 +559,19 @@ namespace LAZYSHELL
 
             RefreshFormationBattlefield();
         }
-        private void formationBattleEvent_ValueChanged(object sender, EventArgs e)
+        private void toggleAllies_Click(object sender, EventArgs e)
+        {
+            pictureBoxFormation.Invalidate();
+        }
+        private void isometricGrid_Click(object sender, EventArgs e)
+        {
+            pictureBoxFormation.Invalidate();
+        }
+        private void formationBattleEvent_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
 
-            formation.FormationBattleEvent = (byte)formationBattleEvent.Value;
+            formation.FormationBattleEvent = (byte)formationBattleEvent.SelectedIndex;
         }
         private void musicTrack_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -678,11 +597,70 @@ namespace LAZYSHELL
         }
         private void pictureBoxFormation_MouseMove(object sender, MouseEventArgs e)
         {
+            labelCoords.Text = "(x: " + e.X + ", y: " + e.Y + ")";
             int x = e.X - diffX; int y = e.Y - diffY;
-            if (x > 255) x = 255; if (x < 0) x = 0;
-            if (y > 255) y = 255; if (y < 0) y = 0;
+            x = Math.Min(255, Math.Max(0, x));
+            y = Math.Min(255, Math.Max(0, y));
+            //
             if (e.Button == MouseButtons.Left)
             {
+                if (snapIsometricLeft.Checked && snapIsometricRight.Checked)
+                {
+                    x = x / 16 * 16;
+                    if ((x / 2) - y < 0)
+                    {
+                        if (Math.Abs((x / 2) - y) % 16 >= 8)
+                            y += 16 - (Math.Abs((x / 2) - y) % 16);
+                        else
+                            y -= Math.Abs((x / 2) - y) % 16;
+                    }
+                    else
+                    {
+                        if (Math.Abs((x / 2) - y) % 16 >= 8)
+                            y -= 16 - (Math.Abs((x / 2) - y) % 16);
+                        else
+                            y += Math.Abs((x / 2) - y) % 16;
+                    }
+                }
+                else if (snapIsometricLeft.Checked)
+                {
+                    x = x / 2 * 2;
+                    if ((x / 2) - y < 0)
+                    {
+                        if (Math.Abs((x / 2) - y) % 16 >= 8)
+                            y += 16 - (Math.Abs((x / 2) - y) % 16);
+                        else
+                            y -= Math.Abs((x / 2) - y) % 16;
+                    }
+                    else
+                    {
+                        if (Math.Abs((x / 2) - y) % 16 >= 8)
+                            y -= 16 - (Math.Abs((x / 2) - y) % 16);
+                        else
+                            y += Math.Abs((x / 2) - y) % 16;
+                    }
+                }
+                else if (snapIsometricRight.Checked)
+                {
+                    x = x / 2 * 2;
+                    if (((1024 - x) / 2) - y < 0)
+                    {
+                        if (Math.Abs(((1024 - x) / 2) - y) % 16 >= 8)
+                            y += 16 - (Math.Abs(((1024 - x) / 2) - y) % 16);
+                        else
+                            y -= Math.Abs(((1024 - x) / 2) - y) % 16;
+                    }
+                    else
+                    {
+                        if (Math.Abs(((1024 - x) / 2) - y) % 16 >= 8)
+                            y -= 16 - (Math.Abs(((1024 - x) / 2) - y) % 16);
+                        else
+                            y += Math.Abs(((1024 - x) / 2) - y) % 16;
+                    }
+                }
+                x = Math.Min(255, Math.Max(0, x));
+                y = Math.Min(255, Math.Max(0, y));
+                //
                 switch (overFM)
                 {
                     case 1:
@@ -755,6 +733,8 @@ namespace LAZYSHELL
         {
             if (formationBGImage != null)
                 e.Graphics.DrawImage(formationBGImage, -8, 26);
+            if (isometricGrid.Checked)
+                new Overlay().DrawIsometricGrid(e.Graphics, Color.Gray, pictureBoxFormation.Size, new Size(16, 16), 1);
             byte[] items = new byte[8];
             for (byte i = 0; i < 8; i++)
                 items[i] = i;
@@ -765,9 +745,30 @@ namespace LAZYSHELL
                 int i = items[a];
                 if (!formation.FormationUse[i]) continue;
                 int elevation = monsters[formation.FormationMonster[i]].Elevation * 16;
-                int x = formation.FormationCoordX[i] - 128;
-                int y = formation.FormationCoordY[i] - 96 - elevation - 1;
+                int x = formation.FormationCoordX[i] - 8;
+                int y = formation.FormationCoordY[i] + 14;
+                if (elevation > 0)
+                    e.Graphics.DrawImage(shadowImages[i], x, y);
+                //
+                x = formation.FormationCoordX[i] - 128;
+                y = formation.FormationCoordY[i] - 96 - elevation - 1;
                 e.Graphics.DrawImage(monsterImages[i], x, y);
+            }
+            if (toggleAllies.Checked)
+            {
+                if (allyImages == null || portraits == null)
+                    SetAllyImages();
+                e.Graphics.DrawImage(allyImages[0], Model.Data[0x0296BD] - 128, Model.Data[0x0296BE] - 96 - 1);
+                e.Graphics.DrawImage(allyImages[2], Model.Data[0x0296BF] - 128, Model.Data[0x0296C0] - 96 - 1);
+                e.Graphics.DrawImage(allyImages[3], Model.Data[0x0296C1] - 128, Model.Data[0x0296C2] - 96 - 1);
+                // draw HPs
+                e.Graphics.DrawImage(statImages[0], 24, 94);
+                e.Graphics.DrawImage(statImages[2], 48, 70);
+                e.Graphics.DrawImage(statImages[3], 72, 46);
+                // draw portraits
+                e.Graphics.DrawImage(portraits[0], 20 - 128, 82 - 96 - 1);
+                e.Graphics.DrawImage(portraits[2], 44 - 128, 58 - 96 - 1);
+                e.Graphics.DrawImage(portraits[3], 68 - 128, 34 - 96 - 1);
             }
         }
         #endregion

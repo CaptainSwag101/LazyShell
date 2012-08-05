@@ -284,6 +284,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap colorreplace {
+            get {
+                object obj = ResourceManager.GetObject("colorreplace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap coordinator {
             get {
                 object obj = ResourceManager.GetObject("coordinator", resourceCulture);
@@ -676,9 +683,23 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap mapBanner {
+            get {
+                object obj = ResourceManager.GetObject("mapBanner", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap mapPoint {
             get {
                 object obj = ResourceManager.GetObject("mapPoint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap marioicon {
+            get {
+                object obj = ResourceManager.GetObject("marioicon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -742,6 +763,20 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap newLineA {
             get {
                 object obj = ResourceManager.GetObject("newLineA", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap notepad {
+            get {
+                object obj = ResourceManager.GetObject("notepad", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap numerals {
+            get {
+                object obj = ResourceManager.GetObject("numerals", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1019,6 +1054,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap railicon {
+            get {
+                object obj = ResourceManager.GetObject("railicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap recentFiles {
             get {
                 object obj = ResourceManager.GetObject("recentFiles", resourceCulture);
@@ -1127,6 +1169,20 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap signature {
             get {
                 object obj = ResourceManager.GetObject("signature", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap snapIsometricLeft {
+            get {
+                object obj = ResourceManager.GetObject("snapIsometricLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap snapIsometricRight {
+            get {
+                object obj = ResourceManager.GetObject("snapIsometricRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -118,15 +118,19 @@
             // 
             // importItemsToolStripMenuItem
             // 
+            this.importItemsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importItemsToolStripMenuItem.Image")));
+            this.importItemsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importItemsToolStripMenuItem.Name = "importItemsToolStripMenuItem";
-            this.importItemsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.importItemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.importItemsToolStripMenuItem.Text = "Import Items...";
             this.importItemsToolStripMenuItem.Click += new System.EventHandler(this.importItemsToolStripMenuItem_Click);
             // 
             // importShopsToolStripMenuItem
             // 
+            this.importShopsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importShopsToolStripMenuItem.Image")));
+            this.importShopsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importShopsToolStripMenuItem.Name = "importShopsToolStripMenuItem";
-            this.importShopsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.importShopsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.importShopsToolStripMenuItem.Text = "Import Shops...";
             this.importShopsToolStripMenuItem.Click += new System.EventHandler(this.importShopsToolStripMenuItem_Click);
             // 
@@ -144,15 +148,19 @@
             // 
             // exportItemsToolStripMenuItem
             // 
+            this.exportItemsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportItemsToolStripMenuItem.Image")));
+            this.exportItemsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportItemsToolStripMenuItem.Name = "exportItemsToolStripMenuItem";
-            this.exportItemsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.exportItemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportItemsToolStripMenuItem.Text = "Export Items...";
             this.exportItemsToolStripMenuItem.Click += new System.EventHandler(this.exportItemsToolStripMenuItem_Click);
             // 
             // exportShopsToolStripMenuItem
             // 
+            this.exportShopsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportShopsToolStripMenuItem.Image")));
+            this.exportShopsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportShopsToolStripMenuItem.Name = "exportShopsToolStripMenuItem";
-            this.exportShopsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.exportShopsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportShopsToolStripMenuItem.Text = "Export Shops...";
             this.exportShopsToolStripMenuItem.Click += new System.EventHandler(this.exportShopsToolStripMenuItem_Click);
             // 
@@ -170,15 +178,19 @@
             // 
             // resetItemToolStripMenuItem
             // 
+            this.resetItemToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetItemToolStripMenuItem.Image")));
+            this.resetItemToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetItemToolStripMenuItem.Name = "resetItemToolStripMenuItem";
-            this.resetItemToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.resetItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetItemToolStripMenuItem.Text = "Reset item";
             this.resetItemToolStripMenuItem.Click += new System.EventHandler(this.resetItemToolStripMenuItem_Click);
             // 
             // resetShopToolStripMenuItem
             // 
+            this.resetShopToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetShopToolStripMenuItem.Image")));
+            this.resetShopToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetShopToolStripMenuItem.Name = "resetShopToolStripMenuItem";
-            this.resetShopToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.resetShopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetShopToolStripMenuItem.Text = "Reset shop";
             this.resetShopToolStripMenuItem.Click += new System.EventHandler(this.resetShopToolStripMenuItem_Click);
             // 
@@ -196,15 +208,19 @@
             // 
             // clearItemsToolStripMenuItem
             // 
+            this.clearItemsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearItemsToolStripMenuItem.Image")));
+            this.clearItemsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearItemsToolStripMenuItem.Name = "clearItemsToolStripMenuItem";
-            this.clearItemsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.clearItemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearItemsToolStripMenuItem.Text = "Clear Items...";
             this.clearItemsToolStripMenuItem.Click += new System.EventHandler(this.clearItemsToolStripMenuItem_Click);
             // 
             // clearShopsToolStripMenuItem
             // 
+            this.clearShopsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearShopsToolStripMenuItem.Image")));
+            this.clearShopsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearShopsToolStripMenuItem.Name = "clearShopsToolStripMenuItem";
-            this.clearShopsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.clearShopsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearShopsToolStripMenuItem.Text = "Clear Shops...";
             this.clearShopsToolStripMenuItem.Click += new System.EventHandler(this.clearShopsToolStripMenuItem_Click);
             // 

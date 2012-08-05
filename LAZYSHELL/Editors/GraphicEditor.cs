@@ -145,8 +145,9 @@ namespace LAZYSHELL
             if (format == 0x10)
             {
                 palette = new int[16];
+                int index = currentColor / 4 * 4;
                 for (int i = 0; i < 4; i++)
-                    palette[i] = paletteSet.Palettes[currentPalette / 4][((currentPalette % 4) * 4) + i];
+                    palette[i] = paletteSet.Palettes[currentPalette / 4][((currentPalette % 4) * 4) + i + index];
             }
             else
                 palette = paletteSet.Palettes[currentPalette];
@@ -176,8 +177,8 @@ namespace LAZYSHELL
         }
         private void pictureBoxPalette_MouseDown(object sender, MouseEventArgs e)
         {
-            if (format == 0x10 && e.X / 8 > 3)
-                return;
+            //if (format == 0x10 && e.X / 8 > 3)
+            //    return;
             pictureBoxPalette.Focus();
             currentPalette = e.Y / 8 + startRow;
             if (e.Button == MouseButtons.Left)
@@ -202,9 +203,9 @@ namespace LAZYSHELL
 
             Size s = new Size(graphicsImage.Width * zoom, graphicsImage.Height * zoom);
             if (zoom >= 4 && graphicShowPixelGrid.Checked)
-                overlay.DrawCartesianGrid(e.Graphics, Color.DarkRed, s, new Size(1, 1), zoom);
+                overlay.DrawCartesianGrid(e.Graphics, Color.DarkRed, s, new Size(1, 1), zoom, false);
             if (graphicShowGrid.Checked)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, s, new Size(8, 8), zoom);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, s, new Size(8, 8), zoom, true);
         }
         private void pictureBoxGraphicSet_MouseDown(object sender, MouseEventArgs e)
         {
@@ -265,16 +266,22 @@ namespace LAZYSHELL
                 action = "erase";
             else if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && subtileDropper.Checked)
                 action = "select";
+            else if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && subtileReplaceColor.Checked)
+                action = "replaceColor";
             else if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && subtileFill.Checked)
                 action = contiguous.Checked ? "fill" : "replace";
             int color = currentColor;
+            int colorBack = currentColorBack;
             if (e.Button == MouseButtons.Right)
+            {
                 color = currentColorBack;
+                colorBack = currentColor;
+            }
 
             color = Do.EditPixelBPP(
                 graphics, this.offset, paletteSet.Palettes[currentPalette],
                 pictureBoxGraphicSet.CreateGraphics(), zoom, action,
-                x, y, 0, color, size.Width, size.Height, format);
+                x, y, 0, color, colorBack, size.Width, size.Height, format);
             if (action == "erase")
                 pictureBoxGraphicSet.Invalidate(new Rectangle(x / zoom * zoom, y / zoom * zoom, 1 * zoom, 1 * zoom));
 
@@ -464,9 +471,11 @@ namespace LAZYSHELL
         {
             subtileErase.Checked = false;
             subtileDropper.Checked = false;
+            subtileReplaceColor.Checked = false;
             subtileFill.Checked = false;
             graphicZoomIn.Checked = false;
             graphicZoomOut.Checked = false;
+            contiguous.Visible = false;
 
             if (!subtileDraw.Checked)
                 pictureBoxGraphicSet.Cursor = Cursors.Arrow;
@@ -477,9 +486,11 @@ namespace LAZYSHELL
         {
             subtileDraw.Checked = false;
             subtileDropper.Checked = false;
+            subtileReplaceColor.Checked = false;
             subtileFill.Checked = false;
             graphicZoomIn.Checked = false;
             graphicZoomOut.Checked = false;
+            contiguous.Visible = false;
 
             if (!subtileErase.Checked)
                 pictureBoxGraphicSet.Cursor = Cursors.Arrow;
@@ -490,20 +501,38 @@ namespace LAZYSHELL
         {
             subtileDraw.Checked = false;
             subtileErase.Checked = false;
+            subtileReplaceColor.Checked = false;
             subtileFill.Checked = false;
             graphicZoomIn.Checked = false;
             graphicZoomOut.Checked = false;
+            contiguous.Visible = false;
 
             if (!subtileDropper.Checked)
                 pictureBoxGraphicSet.Cursor = Cursors.Arrow;
             else
                 pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorDropper.cur");
         }
+        private void subtileReplaceColor_Click(object sender, EventArgs e)
+        {
+            subtileDraw.Checked = false;
+            subtileErase.Checked = false;
+            subtileDropper.Checked = false;
+            subtileFill.Checked = false;
+            graphicZoomIn.Checked = false;
+            graphicZoomOut.Checked = false;
+            contiguous.Visible = false;
+
+            if (!subtileReplaceColor.Checked)
+                pictureBoxGraphicSet.Cursor = Cursors.Arrow;
+            else
+                pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorDraw.cur");
+        }
         private void subtileFill_Click(object sender, EventArgs e)
         {
             subtileDraw.Checked = false;
             subtileErase.Checked = false;
             subtileDropper.Checked = false;
+            subtileReplaceColor.Checked = false;
             graphicZoomIn.Checked = false;
             graphicZoomOut.Checked = false;
             contiguous.Visible = subtileFill.Checked;
@@ -549,7 +578,7 @@ namespace LAZYSHELL
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             if (subtileDraw.Checked || subtileErase.Checked || subtileDropper.Checked ||
-                graphicZoomIn.Checked || graphicZoomOut.Checked)
+                subtileReplaceColor.Checked || graphicZoomIn.Checked || graphicZoomOut.Checked)
                 e.Cancel = true;
         }
         // closing/saving

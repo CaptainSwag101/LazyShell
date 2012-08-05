@@ -248,9 +248,12 @@ namespace LAZYSHELL
             for (int i = 1; i < tileCount; i++)
                 molds[0].Tiles.RemoveAt(1);
             molds[0].Gridplane = false;
-            if (molds[0].Tiles.Count > 0)
-                molds[0].Tiles[0] = molds[0].Tiles[0].New(false);
             uniqueTiles = new List<Mold.Tile>();
+            if (molds[0].Tiles.Count > 0)
+            {
+                molds[0].Tiles[0] = molds[0].Tiles[0].New(false);
+                uniqueTiles.Add(molds[0].Tiles[0]);
+            }
             int sequenceCount = sequences.Count;
             for (int i = 1; i < sequenceCount; i++)
                 sequences.RemoveAt(1);

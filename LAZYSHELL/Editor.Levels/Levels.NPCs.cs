@@ -1293,6 +1293,7 @@ namespace LAZYSHELL
                 AddNewInstance(npcs.Npc.Instance_);
             else
                 AddNewNPC(npcs.Npc);
+            overlay.NPCImages = null;
         }
         //
         private void buttonGotoA_Click(object sender, EventArgs e)

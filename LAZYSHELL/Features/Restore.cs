@@ -24,6 +24,7 @@ namespace LAZYSHELL
         // functions
         public bool ReadRom()
         {
+        Retry:
             try
             {
                 FileInfo fInfo = new FileInfo(fileName);
@@ -39,8 +40,9 @@ namespace LAZYSHELL
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + ex.Message,
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + ex.Message,
+                    "LAZY SHELL", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) != DialogResult.Cancel)
+                    goto Retry;
 
                 fileName = "Invalid File";
                 return false;

@@ -92,6 +92,7 @@
     <Compile Include="Editor.Menus\GameSelect.Designer.cs">
       <DependentUpon>GameSelect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor.Menus\MenuTexts.cs" />
     <Compile Include="Editor.Menus\Overworld.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,12 +104,6 @@
     </Compile>
     <Compile Include="Editor.Menus\MenusEditor.Designer.cs">
       <DependentUpon>MenusEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editor.Mini Games\BeetleMania.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor.Mini Games\BeetleMania.Designer.cs">
-      <DependentUpon>BeetleMania.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.Mini Games\MinecartData.cs" />
     <Compile Include="Editor.Mini Games\MiniGames.cs">
@@ -146,10 +141,10 @@
     </Compile>
     <Compile Include="Editor.Levels\Levels\LevelSolidMods.cs" />
     <Compile Include="Editor.Levels\Levels\LevelTileMods.cs" />
-    <Compile Include="Features\CoordAdjust.cs">
+    <Compile Include="Editor.Sprites\CoordAdjust.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Features\CoordAdjust.Designer.cs">
+    <Compile Include="Editor.Sprites\CoordAdjust.Designer.cs">
       <DependentUpon>CoordAdjust.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\NewExceptionForm.cs">
@@ -645,7 +640,6 @@
     <Compile Include="Editor.World Maps\WorldMaps.MapPoints.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor.World Maps\WorldMapTileset.cs" />
     <Compile Include="Editor.Menus\MenuTileset.cs" />
     <Compile Include="Editor.Sprites\Mold.cs" />
     <Compile Include="Editor.Sprites\Sequence.cs" />
@@ -658,7 +652,6 @@
       <DependentUpon>Sprites.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.Sprites\Animation.cs" />
-    <Compile Include="Editor.Title\TitleTileset.cs" />
     <Compile Include="!Static\State.cs" />
     <Compile Include="Feature.Previewer\BattleDialoguePreview.cs" />
     <Compile Include="Feature.Previewer\MenuDescriptionPreview.cs" />
@@ -713,7 +706,7 @@
       <DependentUpon>EventScripts.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\CoordAdjust.resx">
+    <EmbeddedResource Include="Editor.Sprites\CoordAdjust.resx">
       <DependentUpon>CoordAdjust.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -955,6 +948,7 @@
     <None Include="Resources\coordinator.gif" />
     <None Include="Resources\buttonMushroom.gif" />
     <None Include="Resources\buttonSSObjects.gif" />
+    <None Include="Resources\colorreplace.gif" />
     <Content Include="Resources\Data\apply.gif" />
     <Content Include="Resources\Data\back.gif" />
     <Content Include="Resources\Data\baseConversion.gif" />
@@ -1093,6 +1087,13 @@
     <Content Include="Resources\Main\about_small.gif" />
     <None Include="Resources\synchronize.gif" />
     <None Include="Resources\moveall.gif" />
+    <None Include="Resources\mapBanner.gif" />
+    <None Include="Resources\notepad.gif" />
+    <None Include="Resources\railicon.gif" />
+    <None Include="Resources\numerals.gif" />
+    <None Include="Resources\marioicon.gif" />
+    <None Include="Resources\snapIsometricLeft.gif" />
+    <None Include="Resources\snapIsometricRight.gif" />
     <Content Include="Resources\Tiles\fieldBase.gif" />
     <Content Include="Resources\Tiles\fieldBlock.gif" />
     <Content Include="Resources\Toggle\buttonBoundaries.gif" />

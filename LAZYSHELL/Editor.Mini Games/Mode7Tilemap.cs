@@ -14,7 +14,7 @@ namespace LAZYSHELL
         #region Variables
         private Tileset tileset;
         private PaletteSet paletteSet;
-        private State state = State.Instance;
+        private State state = State.Instance2;
         private int Width = 64;
         private int Height = 64;
         public override int Width_p { get { return Width * 16; } set { Width = value / 16; } }
@@ -57,6 +57,7 @@ namespace LAZYSHELL
             Do.PixelsToPixels(source.Subtiles[1].Pixels, this.pixels, Width_p, new Rectangle((x + 8), y, 8, 8));
             Do.PixelsToPixels(source.Subtiles[2].Pixels, this.pixels, Width_p, new Rectangle(x, (y + 8), 8, 8));
             Do.PixelsToPixels(source.Subtiles[3].Pixels, this.pixels, Width_p, new Rectangle((x + 8), (y + 8), 8, 8));
+            DrawSingleMainscreenTile(x, y);
         }
         public void Clear(int count)
         {
@@ -165,15 +166,12 @@ namespace LAZYSHELL
             int bgcolor = paletteSet.Palette[16];
             CopySingleTileToArray(pixels, Do.GetPixelRegion(pixels, 1024, 1024, 16, 16, x, y), Width_p, x, y);
             // Apply BG color
-            if (state.BG)
+            for (int b = y; b < y + 16; b++)
             {
-                for (int b = y; b < y + 16; b++)
+                for (int a = x; a < x + 16; a++)
                 {
-                    for (int a = x; a < x + 16; a++)
-                    {
-                        if (pixels[b * Width_p + a] == 0)
-                            pixels[b * Width_p + a] = bgcolor;
-                    }
+                    if (pixels[b * Width_p + a] == 0)
+                        pixels[b * Width_p + a] = bgcolor;
                 }
             }
         }
@@ -213,10 +211,8 @@ namespace LAZYSHELL
         }
         public override void SetTileNum(int tilenum, int layer, int x, int y)
         {
-            if (x < 0) x = 0;
-            if (y < 0) y = 0;
-            if (x >= Width_p) x = Width_p - 1;
-            if (y >= Height_p) y = Height_p - 1;
+            if (x < 0 || y < 0 || x >= Width_p || y >= Height_p)
+                return;
             y /= 16;
             x /= 16;
             int index = y * Width + x;
@@ -234,13 +230,23 @@ namespace LAZYSHELL
             CreateLayer();
             DrawMainscreen();
         }
-        public override int[] GetPixels(int layer, Point location, Size size)
+        public override int[] GetPixels(int layer, Point p, Size s)
         {
-            int[] pixels = new int[size.Width * size.Height];
-            for (int b = 0, y = location.Y; b < size.Height; b++, y++)
+            int[] pixels = new int[s.Width * s.Height];
+            int bgcolor = paletteSet.Palette[16];
+            for (int b = 0, y = p.Y; b < s.Height; b++, y++)
             {
-                for (int a = 0, x = location.X; a < size.Width; a++, x++)
-                    pixels[b * size.Width + a] = this.pixels[y * Width_p + x];
+                for (int a = 0, x = p.X; a < s.Width; a++, x++)
+                {
+                    int srcIndex = y * Width_p + x;
+                    int dstIndex = b * s.Width + a;
+                    if (srcIndex >= this.pixels.Length || dstIndex >= pixels.Length)
+                        continue;
+                    if (this.pixels[srcIndex] != 0)
+                        pixels[dstIndex] = this.pixels[srcIndex];
+                    else
+                        pixels[dstIndex] = bgcolor;
+                }
             }
             return pixels;
         }

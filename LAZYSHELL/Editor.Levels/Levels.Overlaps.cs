@@ -352,10 +352,10 @@ namespace LAZYSHELL
                 overlapsImage = Do.PixelsToImage(overlapsPixels, 256, 416);
             }
             e.Graphics.DrawImage(overlapsImage, 0, 0);
-            overlay.DrawCartesianGrid(e.Graphics, Color.Gray, new Size(256, 416), new Size(32, 32), 1);
+            overlay.DrawCartesianGrid(e.Graphics, Color.Gray, new Size(256, 416), new Size(32, 32), 1, true);
             int x = (int)overlapType.Value % 8 * 32;
             int y = (int)overlapType.Value / 8 * 32;
-            overlay.DrawSelectionBox(e.Graphics, new Point(x + 32, y + 32), new Point(x, y), 1);
+            overlay.DrawSelectionBox(e.Graphics, new Point(x + 32, y + 32), new Point(x, y), 1, Color.Yellow);
         }
         //
         private void overlapFieldCopy_Click(object sender, EventArgs e)

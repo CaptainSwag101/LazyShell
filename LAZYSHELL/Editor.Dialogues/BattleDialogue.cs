@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using System.Windows.Forms;
+using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
@@ -15,58 +16,77 @@ namespace LAZYSHELL
         [NonSerialized()]
         private byte[] data;
         public override byte[] Data { get { return data; } set { data = value; } }
-        public override int Index { get { return index; } set { index = value;} }
+        public override int Index { get { return index; } set { index = value; } }
         private int index;
-        private char[] battleDialogue;
-        private int battleDialogueOffset;
+        private char[] text;
+        private int offset;
         private bool error = false;
         private int caretPositionSymbol;
         private int caretPositionNotSymbol;
         [NonSerialized()]
         private TextHelperReduced textHelperReduced;
-        private int type;
+        private int pointerOffset;
+        private int baseOffset;
 
         /*****************************************************************************
          * Get Methods
          * **************************************************************************/
-        public int BattleDialogueNum { get { return index; } set { index = value; } }
-        public string GetBattleDialogue(bool symbols) { if (!error) return new string(textHelperReduced.DecodeText(battleDialogue, symbols, 0)); else return new string(battleDialogue); }
-        public int BattleDialogueOffset { get { return battleDialogueOffset; } set { battleDialogueOffset = value; } }
-        public int BattleDialogueLen { get { return battleDialogue.Length; } }
-        public char[] RawBattleDialogue { get { return battleDialogue; } }
-        public int GetCaretPosition(bool symbol) { if (symbol) return caretPositionSymbol; else return caretPositionNotSymbol; }
+        public string GetText(bool symbols)
+        {
+            if (!error)
+                return new string(textHelperReduced.DecodeText(text, symbols, 0, Settings.Default.Keystrokes));
+            else
+                return new string(text);
+        }
+        public int Offset { get { return offset; } set { offset = value; } }
+        public int Length { get { return text.Length; } }
+        public char[] Text { get { return text; } }
+        public int GetCaretPosition(bool symbol)
+        {
+            if (symbol)
+                return caretPositionSymbol;
+            else
+                return caretPositionNotSymbol;
+        }
 
         /*****************************************************************************
          * Set Methods
          * **************************************************************************/
-        public bool SetBattleDialogue(string value, bool symbols) // Text with byte values, not symbols
+        public bool SetText(string value, bool symbols) // Text with byte values, not symbols
         {
-            this.battleDialogue = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 0);
+            this.text = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 0, Settings.Default.Keystrokes);
             this.error = textHelperReduced.Error;
             return !error;
         }
-        public void SetCaretPosition(int value, bool symbol) { if (symbol) this.caretPositionSymbol = value; else this.caretPositionNotSymbol = value; }
+        public void SetCaretPosition(int value, bool symbol)
+        {
+            if (symbol)
+                this.caretPositionSymbol = value;
+            else
+                this.caretPositionNotSymbol = value;
+        }
 
 
         // Constructor
-        public BattleDialogue(byte[] data, int battleDialogueNum, int type)
+        public BattleDialogue(byte[] data, int index, int pointerOffset, int baseOffset)
         {
             this.data = data;
-            this.index = battleDialogueNum;
-            this.type = type;
+            this.index = index;
+            this.pointerOffset = pointerOffset;
+            this.baseOffset = baseOffset;
             this.textHelperReduced = TextHelperReduced.Instance;
-            InitializeBattleDialogue(data);
+            Initialize(data);
         }
 
         // Dissasembler
-        private void InitializeBattleDialogue(byte[] data)
+        private void Initialize(byte[] data)
         {
-            battleDialogue = GetBattleDialogue(data);
+            text = GetText(data);
         }
 
-        public string GetBattleDialogueStub()
+        public string GetStub()
         {
-            string temp = this.GetBattleDialogue(true);
+            string temp = this.GetText(true);
             if (temp.Length > 40)
             {
                 temp = temp.Substring(0, 37);
@@ -77,36 +97,17 @@ namespace LAZYSHELL
         }
         public ushort Assemble(ushort offset)
         {
-            if (type == 0)
-            {
-                Bits.SetShort(data, 0x396554 + index * 2, offset);
-                battleDialogueOffset = offset + 0x390000;
-            }
-            else
-            {
-                Bits.SetShort(data, 0x3A26F1 + index * 2, offset);
-                battleDialogueOffset = offset + 0x3A0000;
-            }
-
-            Bits.SetCharArray(data, battleDialogueOffset, battleDialogue);
-            return (ushort)battleDialogue.Length;
+            Bits.SetShort(data, pointerOffset + index * 2, offset);
+            this.offset = offset + baseOffset;
+            //
+            Bits.SetCharArray(data, this.offset, text);
+            return (ushort)text.Length;
         }
-        private char[] GetBattleDialogue(byte[] data)
+        private char[] GetText(byte[] data)
         {
-            int battleDialoguePtr;
+            this.offset = Bits.GetShort(data, pointerOffset + index * 2) + baseOffset;
 
-            if (type == 0)
-            {
-                battleDialoguePtr = Bits.GetShort(data, 0x396554 + index * 2);
-                battleDialogueOffset = battleDialoguePtr + 0x390000;
-            }
-            else
-            {
-                battleDialoguePtr = Bits.GetShort(data, 0x3A26F1 + index * 2);
-                battleDialogueOffset = battleDialoguePtr + 0x3A0000;
-            }
-
-            int count = battleDialogueOffset;
+            int count = this.offset;
             int len = 0;
             byte ptr = 0x01;
 
@@ -126,18 +127,18 @@ namespace LAZYSHELL
 
             for (int i = 0; i < len; i++)
             {
-                battleDialogue[i] = (char)data[battleDialogueOffset + i];
+                battleDialogue[i] = (char)data[this.offset + i];
             }
 
             return battleDialogue;
         }
         public override void Clear()
         {
-            battleDialogue = new char[0];
+            text = new char[0];
         }
         public override string ToString()
         {
-            return "[" + index.ToString("d3") + "]  " + GetBattleDialogue(true);
+            return "[" + index.ToString("d3") + "]  " + GetText(true);
         }
     }
 }

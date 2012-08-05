@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public partial class Items : Form
     {
         #region Variables
-        
+
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Item[] items { get { return Model.Items; } set { Model.Items = value; } }
@@ -21,7 +21,8 @@ namespace LAZYSHELL
         private int index { get { return (int)itemNum.Value; } set { itemNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
         private bool textCodeFormat { get { return !byteOrText.Checked; } set { byteOrText.Checked = !value; } }
-        private Bitmap descriptionFrame;
+        private Bitmap descriptionBGEquip;
+        private Bitmap descriptionBGItem;
         private Bitmap descriptionText;
         private MenuDescriptionPreview menuDescPreview = new MenuDescriptionPreview();
         private TextHelperReduced textHelper = TextHelperReduced.Instance;
@@ -166,8 +167,12 @@ namespace LAZYSHELL
                     item.RawDescription,
                     new Size(120, 48), new Point(8, 8), 4);
                 descriptionText = new Bitmap(Do.PixelsToImage(pixels, 120, 48));
-                descriptionFrame = Do.PixelsToImage(
-                    Do.DrawMenuFrame(new Size(15, 6), Model.MenuFrameGraphics, Model.MenuFramePalette.Palette), 120, 48);
+                if (descriptionBGEquip == null)
+                {
+                    int[] bgPixels = Do.ImageToPixels(Model.MenuBG);
+                    Do.DrawMenuFrame(bgPixels, 256, new Rectangle(0, 0, 15, 6), Model.MenuFrameGraphics, Model.FontPaletteMenu.Palette);
+                    descriptionBGEquip = Do.PixelsToImage(bgPixels, 256, 256);
+                }
             }
             else
             {
@@ -176,8 +181,12 @@ namespace LAZYSHELL
                     item.RawDescription,
                     new Size(136, 64), new Point(16, 16), 4);
                 descriptionText = new Bitmap(Do.PixelsToImage(pixels, 136, 64));
-                descriptionFrame = Do.PixelsToImage(
-                    Do.DrawMenuFrame(new Size(17, 8), Model.MenuFrameGraphics, Model.MenuFramePalette.Palette), 136, 64);
+                if (descriptionBGItem == null)
+                {
+                    int[] bgPixels = Do.ImageToPixels(Model.MenuBG);
+                    Do.DrawMenuFrame(bgPixels, 256, new Rectangle(0, 0, 17, 8), Model.MenuFrameGraphics, Model.FontPaletteMenu.Palette);
+                    descriptionBGItem = Do.PixelsToImage(bgPixels, 256, 256);
+                }
             }
             pictureBoxItemDesc.Invalidate();
         }
@@ -661,13 +670,13 @@ namespace LAZYSHELL
         }
         private void pictureBoxItemDesc_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(Model.MenuBG, 0, 0);
+            if (item.ItemType == 3 && descriptionBGEquip != null)
+                e.Graphics.DrawImage(descriptionBGEquip, 0, 0);
+            else if (descriptionBGItem != null)
+                e.Graphics.DrawImage(descriptionBGItem, 0, 0);
             if (descriptionText == null)
                 SetDescriptionImage();
             e.Graphics.DrawImage(descriptionText, 0, 0);
-            if (descriptionFrame == null)
-                SetDescriptionImage();
-            e.Graphics.DrawImage(descriptionFrame, 0, 0);
         }
         private void byteOrText_Click(object sender, EventArgs e)
         {

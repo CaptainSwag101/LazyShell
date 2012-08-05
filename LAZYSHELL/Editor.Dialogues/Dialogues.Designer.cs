@@ -134,7 +134,7 @@
             0,
             0});
             this.dialogueNum.Name = "dialogueNum";
-            this.dialogueNum.Size = new System.Drawing.Size(60, 17);
+            this.dialogueNum.Size = new System.Drawing.Size(60, 21);
             this.dialogueNum.Text = "0";
             this.dialogueNum.Value = new decimal(new int[] {
             0,
@@ -177,7 +177,7 @@
             this.dialogueTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dialogueTextBox.Location = new System.Drawing.Point(0, 106);
             this.dialogueTextBox.Name = "dialogueTextBox";
-            this.dialogueTextBox.Size = new System.Drawing.Size(220, 331);
+            this.dialogueTextBox.Size = new System.Drawing.Size(220, 303);
             this.dialogueTextBox.TabIndex = 178;
             this.dialogueTextBox.Text = "";
             this.dialogueTextBox.TextChanged += new System.EventHandler(this.dialogueTextBox_TextChanged);
@@ -207,7 +207,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(220, 106);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(24, 331);
+            this.toolStrip2.Size = new System.Drawing.Size(24, 303);
             this.toolStrip2.TabIndex = 564;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -468,7 +468,7 @@
             this.toolStripLabel2,
             this.pauseFrameNum,
             this.pauseFramesInsert});
-            this.toolStrip4.Location = new System.Drawing.Point(0, 437);
+            this.toolStrip4.Location = new System.Drawing.Point(0, 409);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip4.Size = new System.Drawing.Size(244, 25);
@@ -529,7 +529,7 @@
             this.toolStripLabel1,
             this.variables,
             this.variablesInsert});
-            this.toolStrip6.Location = new System.Drawing.Point(0, 462);
+            this.toolStrip6.Location = new System.Drawing.Point(0, 434);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip6.Size = new System.Drawing.Size(244, 25);
@@ -571,7 +571,6 @@
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.toolStrip7);
             this.panel1.Controls.Add(this.dctApply);
             this.panel1.Controls.Add(this.dct17);
@@ -585,9 +584,9 @@
             this.panel1.Controls.Add(this.dct14);
             this.panel1.Controls.Add(this.dct13);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 487);
+            this.panel1.Location = new System.Drawing.Point(0, 459);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(244, 128);
+            this.panel1.Size = new System.Drawing.Size(244, 156);
             this.panel1.TabIndex = 217;
             // 
             // toolStrip7
@@ -599,7 +598,7 @@
             this.toolStrip7.Location = new System.Drawing.Point(0, 0);
             this.toolStrip7.Name = "toolStrip7";
             this.toolStrip7.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip7.Size = new System.Drawing.Size(240, 25);
+            this.toolStrip7.Size = new System.Drawing.Size(244, 25);
             this.toolStrip7.TabIndex = 539;
             this.toolStrip7.Text = "toolStrip7";
             // 
@@ -618,9 +617,9 @@
             // dctApply
             // 
             this.dctApply.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dctApply.Location = new System.Drawing.Point(0, 101);
+            this.dctApply.Location = new System.Drawing.Point(0, 133);
             this.dctApply.Name = "dctApply";
-            this.dctApply.Size = new System.Drawing.Size(240, 23);
+            this.dctApply.Size = new System.Drawing.Size(244, 23);
             this.dctApply.TabIndex = 419;
             this.dctApply.Text = "APPLY CHANGES";
             this.dctApply.UseVisualStyleBackColor = false;
@@ -628,91 +627,81 @@
             // 
             // dct17
             // 
-            this.dct17.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dct17.Location = new System.Drawing.Point(120, 86);
+            this.dct17.Location = new System.Drawing.Point(122, 110);
             this.dct17.Name = "dct17";
-            this.dct17.Size = new System.Drawing.Size(120, 14);
+            this.dct17.Size = new System.Drawing.Size(122, 21);
             this.dct17.TabIndex = 8;
             this.dct17.TextChanged += new System.EventHandler(this.dct_TextChanged);
             // 
             // dct16
             // 
-            this.dct16.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dct16.Location = new System.Drawing.Point(120, 71);
+            this.dct16.Location = new System.Drawing.Point(122, 89);
             this.dct16.Name = "dct16";
-            this.dct16.Size = new System.Drawing.Size(120, 14);
+            this.dct16.Size = new System.Drawing.Size(122, 21);
             this.dct16.TabIndex = 9;
             this.dct16.TextChanged += new System.EventHandler(this.dct_TextChanged);
             // 
             // dct0E
             // 
-            this.dct0E.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dct0E.Location = new System.Drawing.Point(0, 26);
             this.dct0E.Name = "dct0E";
-            this.dct0E.Size = new System.Drawing.Size(119, 14);
+            this.dct0E.Size = new System.Drawing.Size(122, 21);
             this.dct0E.TabIndex = 7;
             this.dct0E.TextChanged += new System.EventHandler(this.dct_TextChanged);
             // 
             // dct11
             // 
-            this.dct11.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dct11.Location = new System.Drawing.Point(0, 71);
+            this.dct11.Location = new System.Drawing.Point(0, 89);
             this.dct11.Name = "dct11";
-            this.dct11.Size = new System.Drawing.Size(119, 14);
+            this.dct11.Size = new System.Drawing.Size(122, 21);
             this.dct11.TabIndex = 6;
             this.dct11.TextChanged += new System.EventHandler(this.dct_TextChanged);
             // 
             // dct10
             // 
-            this.dct10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dct10.Location = new System.Drawing.Point(0, 56);
+            this.dct10.Location = new System.Drawing.Point(0, 68);
             this.dct10.Name = "dct10";
-            this.dct10.Size = new System.Drawing.Size(119, 14);
+            this.dct10.Size = new System.Drawing.Size(122, 21);
             this.dct10.TabIndex = 5;
             this.dct10.TextChanged += new System.EventHandler(this.dct_TextChanged);
             // 
             // dct0F
             // 
-            this.dct0F.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dct0F.Location = new System.Drawing.Point(0, 41);
+            this.dct0F.Location = new System.Drawing.Point(0, 47);
             this.dct0F.Name = "dct0F";
-            this.dct0F.Size = new System.Drawing.Size(119, 14);
+            this.dct0F.Size = new System.Drawing.Size(122, 21);
             this.dct0F.TabIndex = 4;
             this.dct0F.TextChanged += new System.EventHandler(this.dct_TextChanged);
             // 
             // dct12
             // 
-            this.dct12.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dct12.Location = new System.Drawing.Point(0, 86);
+            this.dct12.Location = new System.Drawing.Point(0, 110);
             this.dct12.Name = "dct12";
-            this.dct12.Size = new System.Drawing.Size(119, 14);
+            this.dct12.Size = new System.Drawing.Size(122, 21);
             this.dct12.TabIndex = 3;
             this.dct12.TextChanged += new System.EventHandler(this.dct_TextChanged);
             // 
             // dct15
             // 
-            this.dct15.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dct15.Location = new System.Drawing.Point(120, 56);
+            this.dct15.Location = new System.Drawing.Point(122, 68);
             this.dct15.Name = "dct15";
-            this.dct15.Size = new System.Drawing.Size(120, 14);
+            this.dct15.Size = new System.Drawing.Size(122, 21);
             this.dct15.TabIndex = 2;
             this.dct15.TextChanged += new System.EventHandler(this.dct_TextChanged);
             // 
             // dct14
             // 
-            this.dct14.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dct14.Location = new System.Drawing.Point(120, 41);
+            this.dct14.Location = new System.Drawing.Point(122, 47);
             this.dct14.Name = "dct14";
-            this.dct14.Size = new System.Drawing.Size(120, 14);
+            this.dct14.Size = new System.Drawing.Size(122, 21);
             this.dct14.TabIndex = 1;
             this.dct14.TextChanged += new System.EventHandler(this.dct_TextChanged);
             // 
             // dct13
             // 
-            this.dct13.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dct13.Location = new System.Drawing.Point(120, 26);
+            this.dct13.Location = new System.Drawing.Point(122, 26);
             this.dct13.Name = "dct13";
-            this.dct13.Size = new System.Drawing.Size(120, 14);
+            this.dct13.Size = new System.Drawing.Size(122, 21);
             this.dct13.TabIndex = 0;
             this.dct13.TextChanged += new System.EventHandler(this.dct_TextChanged);
             // 
@@ -769,6 +758,8 @@
             // 
             // importDialoguesToolStripMenuItem
             // 
+            this.importDialoguesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importDialoguesToolStripMenuItem.Image")));
+            this.importDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importDialoguesToolStripMenuItem.Name = "importDialoguesToolStripMenuItem";
             this.importDialoguesToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.importDialoguesToolStripMenuItem.Text = "Import Dialogues...";
@@ -776,6 +767,8 @@
             // 
             // importBattleDialoguesToolStripMenuItem
             // 
+            this.importBattleDialoguesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importBattleDialoguesToolStripMenuItem.Image")));
+            this.importBattleDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importBattleDialoguesToolStripMenuItem.Name = "importBattleDialoguesToolStripMenuItem";
             this.importBattleDialoguesToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.importBattleDialoguesToolStripMenuItem.Text = "Import Battle Dialogues...";
@@ -795,6 +788,8 @@
             // 
             // exportDialoguesToolStripMenuItem
             // 
+            this.exportDialoguesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportDialoguesToolStripMenuItem.Image")));
+            this.exportDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportDialoguesToolStripMenuItem.Name = "exportDialoguesToolStripMenuItem";
             this.exportDialoguesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.exportDialoguesToolStripMenuItem.Text = "Export Dialogues...";
@@ -802,6 +797,8 @@
             // 
             // exportBattleDialoguesToolStripMenuItem
             // 
+            this.exportBattleDialoguesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportBattleDialoguesToolStripMenuItem.Image")));
+            this.exportBattleDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportBattleDialoguesToolStripMenuItem.Name = "exportBattleDialoguesToolStripMenuItem";
             this.exportBattleDialoguesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.exportBattleDialoguesToolStripMenuItem.Text = "Export Battle Dialogues...";
@@ -832,6 +829,8 @@
             // 
             // clearDialoguesToolStripMenuItem
             // 
+            this.clearDialoguesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearDialoguesToolStripMenuItem.Image")));
+            this.clearDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearDialoguesToolStripMenuItem.Name = "clearDialoguesToolStripMenuItem";
             this.clearDialoguesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.clearDialoguesToolStripMenuItem.Text = "Clear Dialogues...";
@@ -839,6 +838,8 @@
             // 
             // clearBattleDialoguesToolStripMenuItem
             // 
+            this.clearBattleDialoguesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearBattleDialoguesToolStripMenuItem.Image")));
+            this.clearBattleDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearBattleDialoguesToolStripMenuItem.Name = "clearBattleDialoguesToolStripMenuItem";
             this.clearBattleDialoguesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.clearBattleDialoguesToolStripMenuItem.Text = "Clear Battle Dialogues...";

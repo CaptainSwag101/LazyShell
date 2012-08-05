@@ -131,7 +131,11 @@ namespace LAZYSHELL
 
             Bits.SetBit(data, offset, 2, b6b2);
         }
-        public int[] CreateImage(int radialPosition, bool fromSprite, int fromSpriteNum)
+        public int[] CreateImage(int radialPosition, bool fromSprite, int fromSpriteNum, bool crop)
+        {
+            return CreateImage(radialPosition, fromSprite, fromSpriteNum, crop, false, null);
+        }
+        public int[] CreateImage(int radialPosition, bool fromSprite, int fromSpriteNum, bool crop, bool mirror, int[] palette)
         {
             Mold tMold;
             int num = fromSprite ? fromSpriteNum : sprite;
@@ -147,38 +151,26 @@ namespace LAZYSHELL
             // set palette to use
             int paletteOffset = (int)(Bits.GetShort(data, offset) + 0x250000);
             paletteOffset += graphicPalettePacketShift * 30;
-            int[] palette = new int[16];
-            int r, g, b;
-            double multiplier = 8; // 8;
-            ushort color = 0;
-            for (int i = 0; i < 16; i++) // 16 colors in palette
-            {
-                color = i == 0 ? (ushort)0 : (ushort)Bits.GetShort(data, i * 2 + paletteOffset - 2);
-                r = (byte)((color % 0x20) * multiplier);
-                g = (byte)(((color >> 5) % 0x20) * multiplier);
-                b = (byte)(((color >> 10) % 0x20) * multiplier);
-                palette[i] = Color.FromArgb(255, r, g, b).ToArgb();
-            }
-
+            if (palette == null)
+                palette = Model.Sprites[num].Palette;
             //
             int animationNum = Bits.GetShort(data, num * 4 + 0x250002);
             int animationOffset = Bits.Get24Bit(data, 0x252000 + (animationNum * 3)) - 0xC00000;
             int animationLength = Bits.GetShort(data, animationOffset);
 
             int moldNum;
-            bool mirror;
             byte[] sm = Bits.GetByteArray(data, animationOffset, animationLength);
             offset = Bits.GetShort(sm, 2);
             switch (radialPosition)
             {
-                case 0: mirror = true; if (sm[6] < 13) break; offset += 24; break;
-                case 1: mirror = true; break;
-                case 2: mirror = false; if (sm[6] < 11) break; offset += 20; break;
-                case 4: mirror = false; if (sm[6] < 13) break; offset += 24; break;
-                case 5: mirror = false; if (sm[6] < 2) break; offset += 2; break;
-                case 6: mirror = false; if (sm[6] < 12) break; offset += 22; break;
-                case 7: mirror = true; if (sm[6] < 2) break; offset += 2; break;
-                default: mirror = false; break;
+                case 0: mirror = !mirror; if (sm[6] < 13) break; offset += 24; break;
+                case 1: mirror = !mirror; break;
+                case 2: if (sm[6] < 11) break; offset += 20; break;
+                case 4: if (sm[6] < 13) break; offset += 24; break;
+                case 5: if (sm[6] < 2) break; offset += 2; break;
+                case 6: if (sm[6] < 12) break; offset += 22; break;
+                case 7: mirror = !mirror; if (sm[6] < 2) break; offset += 2; break;
+                default: break;
             }
             offset = Bits.GetShort(sm, offset);
             moldNum = offset != 0xFFFF && sm[offset + 1] != 0 && sm[offset + 1] < sm[7] ? (int)sm[offset + 1] : 0;
@@ -197,48 +189,54 @@ namespace LAZYSHELL
 
             // crop image
             int lowY = 0, highY = 0, lowX = 0, highX = 0;
-            bool stop = false;
-            for (int y = 0; y < 256 && !stop; y++)
+            if (crop)
             {
-                for (int x = 0; x < 256; x++)
-                    if (pixels[y * 256 + x] != 0) { lowY = y; lowX = x; stop = true; break; }
+                bool stop = false;
+                for (int y = 0; y < 256 && !stop; y++)
+                {
+                    for (int x = 0; x < 256; x++)
+                        if (pixels[y * 256 + x] != 0) { lowY = y; lowX = x; stop = true; break; }
+                }
+                stop = false;
+                for (int y = 255; y >= 0 && !stop; y--)
+                {
+                    for (int x = 255; x >= 0; x--)
+                        if (pixels[y * 256 + x] != 0) { highY = y; highX = x; stop = true; break; }
+                }
+                stop = false;
+                for (int y = 0; y < 256; y++)
+                {
+                    for (int x = 0; x < 256; x++)
+                        if (pixels[y * 256 + x] != 0 && x < lowX) { lowX = x; break; }
+                }
+                stop = false;
+                for (int y = 255; y >= 0; y--)
+                {
+                    for (int x = 255; x >= 0; x--)
+                        if (pixels[y * 256 + x] != 0 && x > highX) { highX = x; break; }
+                }
+                stop = false;
+                highY++; highX++;
             }
-            stop = false;
-            for (int y = 255; y >= 0 && !stop; y--)
+            else
             {
-                for (int x = 255; x >= 0; x--)
-                    if (pixels[y * 256 + x] != 0) { highY = y; highX = x; stop = true; break; }
+                highY = 256;
+                highX = 256;
             }
-            stop = false;
-            for (int y = 0; y < 256; y++)
-            {
-                for (int x = 0; x < 256; x++)
-                    if (pixels[y * 256 + x] != 0 && x < lowX) { lowX = x; break; }
-            }
-            stop = false;
-            for (int y = 255; y >= 0; y--)
-            {
-                for (int x = 255; x >= 0; x--)
-                    if (pixels[y * 256 + x] != 0 && x > highX) { highX = x; break; }
-            }
-            stop = false;
-
-            highY++; highX++;
             imageHeight = highY - lowY;
             imageWidth = highX - lowX;
-
-            int[] tempPixels = new int[imageWidth * imageHeight];
-
-            for (int y = 0; y < imageHeight; y++)
+            if (crop)
             {
-                for (int x = 0; x < imageWidth; x++)
+                int[] tempPixels = new int[imageWidth * imageHeight];
+                for (int y = 0; y < imageHeight; y++)
                 {
-                    tempPixels[y * imageWidth + x] = pixels[(y + lowY) * 256 + x + lowX];
+                    for (int x = 0; x < imageWidth; x++)
+                    {
+                        tempPixels[y * imageWidth + x] = pixels[(y + lowY) * 256 + x + lowX];
+                    }
                 }
+                pixels = tempPixels;
             }
-
-            pixels = tempPixels;
-
             int temp;
             if (mirror)
             {

@@ -383,36 +383,36 @@ namespace LAZYSHELL.Properties {
             "<string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />" +
             "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <strin" +
             "g />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
-            "tring />\r\n  <string />\r\n  <string />\r\n  <string>:</string>\r\n  <string>,</string>" +
-            "\r\n  <string />\r\n  <string>.</string>\r\n  <string>/</string>\r\n  <string>0</string>" +
-            "\r\n  <string>1</string>\r\n  <string>2</string>\r\n  <string>3</string>\r\n  <string>4<" +
-            "/string>\r\n  <string>5</string>\r\n  <string>6</string>\r\n  <string>7</string>\r\n  <s" +
-            "tring>8</string>\r\n  <string>9</string>\r\n  <string>~</string>\r\n  <string />\r\n  <s" +
-            "tring />\r\n  <string />\r\n  <string />\r\n  <string>?</string>\r\n  <string />\r\n  <str" +
-            "ing>A</string>\r\n  <string>B</string>\r\n  <string>C</string>\r\n  <string>D</string>" +
-            "\r\n  <string>E</string>\r\n  <string>F</string>\r\n  <string>G</string>\r\n  <string>H<" +
-            "/string>\r\n  <string>I</string>\r\n  <string>J</string>\r\n  <string>K</string>\r\n  <s" +
-            "tring>L</string>\r\n  <string>M</string>\r\n  <string>N</string>\r\n  <string>O</strin" +
-            "g>\r\n  <string>P</string>\r\n  <string>Q</string>\r\n  <string>R</string>\r\n  <string>" +
-            "S</string>\r\n  <string>T</string>\r\n  <string>U</string>\r\n  <string>V</string>\r\n  " +
-            "<string>W</string>\r\n  <string>X</string>\r\n  <string>Y</string>\r\n  <string>Z</str" +
-            "ing>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
-            "tring />\r\n  <string>a</string>\r\n  <string>b</string>\r\n  <string>c</string>\r\n  <s" +
-            "tring>d</string>\r\n  <string>e</string>\r\n  <string>f</string>\r\n  <string>g</strin" +
-            "g>\r\n  <string>h</string>\r\n  <string>i</string>\r\n  <string>j</string>\r\n  <string>" +
-            "k</string>\r\n  <string>l</string>\r\n  <string>m</string>\r\n  <string>n</string>\r\n  " +
-            "<string>o</string>\r\n  <string>p</string>\r\n  <string>q</string>\r\n  <string>r</str" +
-            "ing>\r\n  <string>s</string>\r\n  <string>t</string>\r\n  <string>u</string>\r\n  <strin" +
-            "g>v</string>\r\n  <string>w</string>\r\n  <string>x</string>\r\n  <string>y</string>\r\n" +
-            "  <string>z</string>\r\n  <string>!</string>\r\n  <string>#</string>\r\n  <string>-</s" +
-            "tring>\r\n  <string>’</string>\r\n  <string />\r\n  <string>:</string>\r\n  <string>.</s" +
-            "tring>\r\n  <string>“</string>\r\n  <string>”</string>\r\n  <string />\r\n  <string />\r\n" +
-            "  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string " +
-            "/>\r\n  <string />\r\n  <string />\r\n  <string>:</string>\r\n  <string>;</string>\r\n  <s" +
-            "tring>&lt;</string>\r\n  <string>&gt;</string>\r\n  <string />\r\n  <string>#</string>" +
-            "\r\n  <string>+</string>\r\n  <string>×</string>\r\n  <string>%</string>\r\n  <string />" +
-            "\r\n  <string />\r\n  <string />\r\n  <string>*</string>\r\n  <string>\'</string>\r\n  <str" +
-            "ing />\r\n  <string />\r\n  <string />\r\n  <string />\r\n</ArrayOfString>")]
+            "tring />\r\n  <string />\r\n  <string>.</string>\r\n  <string>:</string>\r\n  <string>,<" +
+            "/string>\r\n  <string />\r\n  <string>.</string>\r\n  <string>/</string>\r\n  <string>0<" +
+            "/string>\r\n  <string>1</string>\r\n  <string>2</string>\r\n  <string>3</string>\r\n  <s" +
+            "tring>4</string>\r\n  <string>5</string>\r\n  <string>6</string>\r\n  <string>7</strin" +
+            "g>\r\n  <string>8</string>\r\n  <string>9</string>\r\n  <string>~</string>\r\n  <string " +
+            "/>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string>?</string>\r\n  <string />" +
+            "\r\n  <string>A</string>\r\n  <string>B</string>\r\n  <string>C</string>\r\n  <string>D<" +
+            "/string>\r\n  <string>E</string>\r\n  <string>F</string>\r\n  <string>G</string>\r\n  <s" +
+            "tring>H</string>\r\n  <string>I</string>\r\n  <string>J</string>\r\n  <string>K</strin" +
+            "g>\r\n  <string>L</string>\r\n  <string>M</string>\r\n  <string>N</string>\r\n  <string>" +
+            "O</string>\r\n  <string>P</string>\r\n  <string>Q</string>\r\n  <string>R</string>\r\n  " +
+            "<string>S</string>\r\n  <string>T</string>\r\n  <string>U</string>\r\n  <string>V</str" +
+            "ing>\r\n  <string>W</string>\r\n  <string>X</string>\r\n  <string>Y</string>\r\n  <strin" +
+            "g>Z</string>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string " +
+            "/>\r\n  <string />\r\n  <string>a</string>\r\n  <string>b</string>\r\n  <string>c</strin" +
+            "g>\r\n  <string>d</string>\r\n  <string>e</string>\r\n  <string>f</string>\r\n  <string>" +
+            "g</string>\r\n  <string>h</string>\r\n  <string>i</string>\r\n  <string>j</string>\r\n  " +
+            "<string>k</string>\r\n  <string>l</string>\r\n  <string>m</string>\r\n  <string>n</str" +
+            "ing>\r\n  <string>o</string>\r\n  <string>p</string>\r\n  <string>q</string>\r\n  <strin" +
+            "g>r</string>\r\n  <string>s</string>\r\n  <string>t</string>\r\n  <string>u</string>\r\n" +
+            "  <string>v</string>\r\n  <string>w</string>\r\n  <string>x</string>\r\n  <string>y</s" +
+            "tring>\r\n  <string>z</string>\r\n  <string>!</string>\r\n  <string>#</string>\r\n  <str" +
+            "ing>-</string>\r\n  <string>’</string>\r\n  <string />\r\n  <string>:</string>\r\n  <str" +
+            "ing>.</string>\r\n  <string>“</string>\r\n  <string>”</string>\r\n  <string />\r\n  <str" +
+            "ing />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  " +
+            "<string />\r\n  <string />\r\n  <string />\r\n  <string>:</string>\r\n  <string>;</strin" +
+            "g>\r\n  <string>&lt;</string>\r\n  <string>&gt;</string>\r\n  <string />\r\n  <string>#<" +
+            "/string>\r\n  <string>+</string>\r\n  <string>×</string>\r\n  <string>%</string>\r\n  <s" +
+            "tring />\r\n  <string />\r\n  <string />\r\n  <string>*</string>\r\n  <string>\'</string>" +
+            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection KeystrokesMenu {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["KeystrokesMenu"]));

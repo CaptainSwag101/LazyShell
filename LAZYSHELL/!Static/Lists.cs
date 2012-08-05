@@ -1452,7 +1452,7 @@ namespace LAZYSHELL
             "Bomb Explosion",
             "Small White Cloud",
             "Drain Explosion",
-            "alphabet + symbols",
+            "battle alphabet + symbols",
             "light blue stars",
             "Come Back rainbow star",
             "yellow cure stars",
@@ -3547,7 +3547,7 @@ namespace LAZYSHELL
                 0xC1,0xC3,0xC4,0xC5,0xC6,0xCA,0xCB,0xDB,
                 0xDF,0xE2,0xE3,0xE6,0xE7,0xEA,0xEB,0xEC,
                 0xED,0xEE,0xEF,0xFD,0xFD,0xFD,0xFD,0xFD,
-                0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD
+                0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD
             },
             new int[]   // 15
             {
@@ -3576,7 +3576,7 @@ namespace LAZYSHELL
             new int[]
             {
                 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                0x58,0x59,0x5A,0x5D,0x5E,0xAC,0xB0,0xB1,0xB2,0xB3,0xB4,0xB5
+                0x58,0x59,0x5A,0x5D,0x5E,0xAC,0xB0,0xB1,0xB2,0xB3,0xB4,0xB5,0xB8
             },
             new int[]{0,0,0x60,0x61},
             new int[0x02],
@@ -4275,7 +4275,8 @@ namespace LAZYSHELL
                     "Mem $7000 xor bits =...",			// 0xB2
                     "Mem $7000 isolate bits = mem...",			// 0xB3
                     "Mem $7000 set bits = mem...",			// 0xB4
-                    "Mem $7000 xor bits = mem..."			// 0xB5
+                    "Mem $7000 xor bits = mem...",			// 0xB5
+                    "Mem $7000 = Moleville Mountain timer"			// 0xB8
                     };
 
                 case 14:

@@ -52,6 +52,7 @@
             this.subtileDraw = new System.Windows.Forms.ToolStripButton();
             this.subtileErase = new System.Windows.Forms.ToolStripButton();
             this.subtileDropper = new System.Windows.Forms.ToolStripButton();
+            this.subtileReplaceColor = new System.Windows.Forms.ToolStripButton();
             this.subtileFill = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator34 = new System.Windows.Forms.ToolStripSeparator();
             this.graphicZoomIn = new System.Windows.Forms.ToolStripButton();
@@ -254,6 +255,7 @@
             this.subtileDraw,
             this.subtileErase,
             this.subtileDropper,
+            this.subtileReplaceColor,
             this.subtileFill,
             this.toolStripSeparator34,
             this.graphicZoomIn,
@@ -337,6 +339,18 @@
             this.subtileDropper.Size = new System.Drawing.Size(23, 22);
             this.subtileDropper.Text = "Choose Color";
             this.subtileDropper.Click += new System.EventHandler(this.subtileDropper_Click);
+            // 
+            // subtileReplaceColor
+            // 
+            this.subtileReplaceColor.CheckOnClick = true;
+            this.subtileReplaceColor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.subtileReplaceColor.Image = global::LAZYSHELL.Properties.Resources.colorreplace;
+            this.subtileReplaceColor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.subtileReplaceColor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.subtileReplaceColor.Name = "subtileReplaceColor";
+            this.subtileReplaceColor.Size = new System.Drawing.Size(23, 22);
+            this.subtileReplaceColor.Text = "Color Replacer";
+            this.subtileReplaceColor.Click += new System.EventHandler(this.subtileReplaceColor_Click);
             // 
             // subtileFill
             // 
@@ -629,6 +643,7 @@
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.CheckBox autoUpdate;
         private System.Windows.Forms.CheckBox alwaysOnTop;
+        private System.Windows.Forms.ToolStripButton subtileReplaceColor;
 
     }
 }

@@ -23,11 +23,13 @@ namespace LAZYSHELL
         private Tileset bgtileset;
         private Overlay overlay = new Overlay();
         private PaletteSet paletteSet;
+        private State state = State.Instance2;
         //
         private PaletteEditor stagePaletteEditor;
         private GraphicEditor stageGraphicEditor;
         private PaletteEditor spritePaletteEditor;
         private GraphicEditor spriteGraphicEditor;
+        private Previewer.Previewer previewer;
         private TilemapEditor tilemapEditor;
         private TilesetEditor tilesetEditor;
         public MinecartData MinecartData;
@@ -121,6 +123,7 @@ namespace LAZYSHELL
                     MinecartData.L2Screens = value;
             }
         }
+        public Label RailColorKey { get { return railColorKey; } set { railColorKey = value; } }
         //
         private int diffX, diffY;
         private int mouseOverObject = -1;
@@ -163,7 +166,7 @@ namespace LAZYSHELL
         {
             this.MiniGames = miniGames;
         }
-        private void RefreshLevel()
+        public void RefreshLevel()
         {
             if (Index < 2)
             {
@@ -173,19 +176,29 @@ namespace LAZYSHELL
                     tilemap = new Mode7Tilemap(Model.MinecartM7TilemapA, tileset, paletteSet);
                 else
                     tilemap = new Mode7Tilemap(Model.MinecartM7TilemapB, tileset, paletteSet);
+                toolStripLabel5.Visible = true;
+                startX.Visible = true;
+                startY.Visible = true;
+                toolStripSeparator6.Visible = true;
+                startX.Value = Bits.GetShort(Model.Data, 0x039670);
+                startY.Value = Bits.GetShort(Model.Data, 0x039679);
                 panelScreens.Hide();
             }
             else
             {
                 paletteSet = Model.MinecartSSPaletteSet;
-                tileset = new Tileset(Model.MinecartSSTileset, paletteSet, 16);
-                bgtileset = new Tileset(Model.MinecartSSBGTileset, paletteSet, 32);
+                tileset = new Tileset(Model.MinecartSSTileset, Model.MinecartSSGraphics, paletteSet, 16, 16, "side");
+                bgtileset = new Tileset(Model.MinecartSSBGTileset, Model.MinecartSSGraphics, paletteSet, 32, 16, "side");
                 tilemap = new SideTilemap(Model.MinecartSSTilemap, null, tileset, paletteSet);
                 //
                 if (Index == 2)
                     screenWidth.Value = MinecartData.WidthA;
                 else
                     screenWidth.Value = MinecartData.WidthB;
+                toolStripLabel5.Visible = false;
+                startX.Visible = false;
+                startY.Visible = false;
+                toolStripSeparator6.Visible = false;
                 InitializeScreens();
                 InitializeObjects();
                 panelScreens.Show();
@@ -196,6 +209,9 @@ namespace LAZYSHELL
             LoadSpriteGraphicEditor();
             LoadTilesetEditor();
             LoadTilemapEditor();
+            //
+            railColorKey.Visible = state.Rails && Index < 2;
+            tilesetEditor.Rails = state.Rails && Index < 2;
         }
         private void InitializeObjects()
         {
@@ -317,6 +333,8 @@ namespace LAZYSHELL
             spriteGraphicEditor.Dispose();
             stageGraphicEditor.Dispose();
             stagePaletteEditor.Dispose();
+            if (previewer != null)
+                previewer.Close();
         }
         //
         private void StagePaletteUpdate()
@@ -446,6 +464,16 @@ namespace LAZYSHELL
                 tilesetEditor.Reload(this.tileset, new Function(TilesetUpdate), this.paletteSet, this.overlay);
             tilesetEditor.DisableLayers(false, true, true);
         }
+        private void LoadPreviewer()
+        {
+            if (previewer == null)
+            {
+                previewer = new LAZYSHELL.Previewer.Previewer(Index, 5);
+                previewer.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            }
+            else
+                previewer.Reload(Index, 5);
+        }
         //
         public void Assemble()
         {
@@ -505,6 +533,8 @@ namespace LAZYSHELL
                 return;
             //
             Bits.SetByteArray(Model.Data, 0x388000, dst);
+            Bits.SetShort(Model.Data, 0x039670, (ushort)startX.Value);
+            Bits.SetShort(Model.Data, 0x039679, (ushort)startY.Value);
         }
         #endregion
         #region Event Handlers
@@ -569,6 +599,11 @@ namespace LAZYSHELL
         private void spriteGraphicsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             spriteGraphicEditor.Show();
+        }
+        private void previewButton_Click(object sender, EventArgs e)
+        {
+            LoadPreviewer();
+            previewer.Show();
         }
         private void buttonObjects_Click(object sender, EventArgs e)
         {
@@ -742,14 +777,30 @@ namespace LAZYSHELL
                 L2Indexes.Insert(screenIndex, 0);
             screenImages.Insert(screenIndex, new Bitmap(256, 256));
             screenIndex++;
+            //
+            pictureBoxScreens.Width = L1Indexes.Count * 256;
+            int autoScrollPosX = Math.Abs(screens.AutoScrollPosition.X);
+            int autoScrollPosY = Math.Abs(screens.AutoScrollPosition.Y);
+            screens.AutoScrollPosition = new Point(autoScrollPosX + 256, autoScrollPosY);
+            //
             SetScreenImage();
         }
         private void deleteScreen_Click(object sender, EventArgs e)
         {
-            L1Indexes.Insert(screenIndex, 0);
+            if (L1Indexes.Count == 0)
+                return;
+            int index = screenIndex;
+            L1Indexes.RemoveAt(screenIndex);
             if (Index == 2)
-                L2Indexes.Insert(screenIndex, 0);
-            SetScreenImage();
+                L2Indexes.RemoveAt(screenIndex);
+            screenImages.RemoveAt(screenIndex);
+            if (index >= L1Indexes.Count)
+                screenIndex--;
+            //
+            pictureBoxScreens.Width = L1Indexes.Count * 256;
+            int autoScrollPosX = Math.Abs(screens.AutoScrollPosition.X);
+            int autoScrollPosY = Math.Abs(screens.AutoScrollPosition.Y);
+            screens.AutoScrollPosition = new Point(autoScrollPosX - 256, autoScrollPosY);
         }
         private void duplicateScreen_Click(object sender, EventArgs e)
         {
@@ -763,6 +814,12 @@ namespace LAZYSHELL
                 L2Indexes.Insert(screenIndex, L2Indexes[screenIndex]);
             screenImages.Insert(screenIndex, screenImages[screenIndex]);
             screenIndex++;
+            //
+            pictureBoxScreens.Width = L1Indexes.Count * 256;
+            int autoScrollPosX = Math.Abs(screens.AutoScrollPosition.X);
+            int autoScrollPosY = Math.Abs(screens.AutoScrollPosition.Y);
+            screens.AutoScrollPosition = new Point(autoScrollPosX + 256, autoScrollPosY);
+            //
             SetScreenImage();
         }
         private void moveScreenBack_Click(object sender, EventArgs e)
@@ -774,6 +831,11 @@ namespace LAZYSHELL
                 L2Indexes.Reverse(screenIndex - 1, 2);
             screenImages.Reverse(screenIndex - 1, 2);
             screenIndex--;
+            //
+            int autoScrollPosX = Math.Abs(screens.AutoScrollPosition.X);
+            int autoScrollPosY = Math.Abs(screens.AutoScrollPosition.Y);
+            screens.AutoScrollPosition = new Point(autoScrollPosX - 256, autoScrollPosY);
+            //
             pictureBoxScreens.Invalidate();
         }
         private void moveScreenFoward_Click(object sender, EventArgs e)
@@ -785,6 +847,11 @@ namespace LAZYSHELL
                 L2Indexes.Reverse(screenIndex, 2);
             screenImages.Reverse(screenIndex, 2);
             screenIndex++;
+            //
+            int autoScrollPosX = Math.Abs(screens.AutoScrollPosition.X);
+            int autoScrollPosY = Math.Abs(screens.AutoScrollPosition.Y);
+            screens.AutoScrollPosition = new Point(autoScrollPosX + 256, autoScrollPosY);
+            //
             pictureBoxScreens.Invalidate();
         }
         // object data

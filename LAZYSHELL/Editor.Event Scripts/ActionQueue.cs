@@ -103,7 +103,7 @@ namespace LAZYSHELL.ScriptsEditor
             else
                 option = 0;
 
-            return ScriptEnums.GetActionQueueOpcodeLength(opcode, option);
+            return ScriptEnums.GetActionOpcodeLength(opcode, option);
         }
         private int StrChr(int offset, byte chr, int maxLen, byte[] data)
         {
@@ -155,7 +155,7 @@ namespace LAZYSHELL.ScriptsEditor
             try
             {
                 ActionQueueCommand aqc = (ActionQueueCommand)actionQueueCommands[index];
-                int len = aqc.QueueLength;
+                int len = aqc.CommandLength;
                 actionQueueCommands.RemoveAt(index);
                 return len;
             }
@@ -185,7 +185,7 @@ namespace LAZYSHELL.ScriptsEditor
             foreach (ActionQueueCommand aqc in actionQueueCommands)
             {
                 aqc.Assemble();
-                offset += aqc.QueueLength;
+                offset += aqc.CommandLength;
             }
             actionQueueData = new byte[offset];
 
@@ -193,7 +193,7 @@ namespace LAZYSHELL.ScriptsEditor
             foreach (ActionQueueCommand aqc in actionQueueCommands)
             {
                 aqc.EventData.CopyTo(actionQueueData, offset);
-                offset += aqc.QueueLength;
+                offset += aqc.CommandLength;
             }
         }
         public void UpdateAllOffsets(int delta, int conditionOffset)

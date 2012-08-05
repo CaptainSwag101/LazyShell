@@ -14,7 +14,6 @@ namespace LAZYSHELL
     public class Overlay
     {
         #region Variables
-        private State state = State.Instance;
         // overlay objects
         public List<Bitmap> NPCImages;
         private Bitmap npcFieldBaseImage;
@@ -193,10 +192,12 @@ namespace LAZYSHELL
         public Overlay()
         {
         }
-        public void DrawCartesianGrid(Graphics g, Color c, Size s, Size u, int z)
+        public void DrawCartesianGrid(Graphics g, Color c, Size s, Size u, int z, bool dashed)
         {
             c = Color.FromArgb(alpha, c);
-            Pen p = new Pen(new SolidBrush(c)); p.DashPattern = new float[] { 1, 1 };
+            Pen p = new Pen(new SolidBrush(c));
+            if (dashed)
+                p.DashPattern = new float[] { 1, 1 };
             Point h = new Point();
             Point v = new Point();
             for (h.Y = z * u.Height; h.Y < s.Height; h.Y += z * u.Height)
@@ -221,11 +222,18 @@ namespace LAZYSHELL
             Point p = new Point(start.X * u, start.Y * u);
             Size s = new Size((stop.X - start.X) * u + u, (stop.Y - start.Y) * u + u);
             Brush b = new SolidBrush(Color.FromArgb(75, Color.Orange));
-            if (p.X == 0) p.X++; if (p.Y == 0) p.Y++;
+            if (p.X == 0) 
+                p.X++; 
+            if (p.Y == 0) 
+                p.Y++;
             Rectangle r = new Rectangle(p, s);
-            if (r.Right >= (1024 - 1) * z) r.Width = (1024 - 2) * z;
-            if (r.Bottom >= (1024 - 1) * z) r.Height = (1024 - 2) * z;
+            if (r.Right >= (1024 - 1) * z) 
+                r.Width = (1024 - 2) * z;
+            if (r.Bottom >= (1024 - 1) * z) 
+                r.Height = (1024 - 2) * z;
             g.FillRectangle(b, r);
+            Pen pen = new Pen(Color.Orange); 
+            g.DrawRectangle(pen, r);
         }
         public void DrawBoundaries(Graphics g, Point location, int z)
         {
@@ -235,7 +243,7 @@ namespace LAZYSHELL
             g.FillRectangle(new SolidBrush(Color.FromArgb(50, 0, 0, 0)), location.X * z, location.Y * z, 256 * z, 224 * z);
             g.DrawRectangle(pen, location.X * z, location.Y * z, 256 * z, 224 * z);
         }
-        public void DrawSelectionBox(Graphics g, Point stop, Point start, int z)
+        public void DrawSelectionBox(Graphics g, Point stop, Point start, int z, Color color)
         {
             if (stop.X == start.X) return;
             if (stop.Y == start.Y) return;
@@ -243,15 +251,21 @@ namespace LAZYSHELL
             Point p = new Point(start.X * z, start.Y * z);
             Size s = new Size((stop.X * z) - (start.X * z) - 1, (stop.Y * z) - (start.Y * z) - 1);
 
-            Pen penw = new Pen(Color.White);
-            Pen penb = new Pen(Color.Black); penb.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            Rectangle ro = new Rectangle(p, s); p.X++; p.Y++; s.Width -= 2; s.Height -= 2;
+            Pen penw = new Pen(color);
+            Pen penb = new Pen(Color.FromArgb(color.R / 4, color.G / 4, color.B / 4));
+            penb.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            Rectangle ro = new Rectangle(p, s);
+            p.X++; p.Y++; s.Width -= 2; s.Height -= 2;
             Rectangle ri = new Rectangle(p, s);
 
             g.DrawRectangle(penw, ro);
             g.DrawRectangle(penw, ri);
             g.DrawRectangle(penb, ro);
             g.DrawRectangle(penb, ri);
+        }
+        public void DrawSelectionBox(Graphics g, Point stop, Point start, int z)
+        {
+            DrawSelectionBox(g, stop, start, z, Color.White);
         }
         public void DrawSelectionBox(Graphics g, int x_initial, int y_initial, int x_terminal, int y_terminal, int z)
         {
@@ -608,7 +622,7 @@ namespace LAZYSHELL
         private void DrawLevelNPC(NPC npc, NPCProperties[] npcProperties, int npcid, int engagetype)
         {
             int NPCID = engagetype == 0 ? Math.Min(511, npcid + npc.PropertyA) : Math.Min(511, (int)npcid);
-            int[] pixels = npcProperties[NPCID].CreateImage(npc.Face, false, 0);
+            int[] pixels = npcProperties[NPCID].CreateImage(npc.Face, false, 0, true);
             int height = npcProperties[NPCID].ImageHeight;
             int width = npcProperties[NPCID].ImageWidth;
             Bitmap image = Do.PixelsToImage(pixels, width, height);
@@ -894,6 +908,34 @@ namespace LAZYSHELL
                 Rectangle rdst = new Rectangle(x * z, y * z, 16 * z, 16 * z);
                 g.DrawRectangle(new Pen(Color.Red, z), rdst);
                 g.DrawImage(minecartData.Mushroom, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+            }
+        }
+        public void DrawRailProperties(byte[] bytes, int width, int height, Graphics g, int z)
+        {
+            Font font = new Font("Tahoma", 9F, FontStyle.Bold);
+            Brush pass = new SolidBrush(Color.FromArgb(128, 0, 255, 0));
+            Brush slow = new SolidBrush(Color.FromArgb(128, 255, 0, 0));
+            Brush exit = new SolidBrush(Color.FromArgb(128, 0, 0, 255));
+            Brush what = new SolidBrush(Color.FromArgb(128, 0, 255, 255));
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    Rectangle coord = new Rectangle(x * 16 * z, y * 16 * z, 16 * z, 16 * z);
+                    int tile;
+                    if (bytes != null)
+                        tile = bytes[y * width + x];
+                    else
+                        tile = y * width + x;
+                    if (tile >= 0 && tile < 16)
+                        g.FillRectangle(pass, coord);
+                    if (tile >= 16 && tile < 32)
+                        g.FillRectangle(slow, coord);
+                    if (tile >= 32 && tile < 48)
+                        g.FillRectangle(exit, coord);
+                    if (tile >= 48 && tile < 64)
+                        g.FillRectangle(what, coord);
+                }
             }
         }
         #endregion

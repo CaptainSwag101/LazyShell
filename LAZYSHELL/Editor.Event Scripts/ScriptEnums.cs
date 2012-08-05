@@ -107,10 +107,8 @@ namespace LAZYSHELL.ScriptsEditor
     }
     static class ScriptEnums
     {
-
-
         // Average Length: 1
-        private static int[] EventScriptLengths = new int[]
+        private static int[] EventLengths = new int[]
         {
          // 0 1 2 3 4 5 6 7   8 9 A B C D E F
             0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0, // 0x00
@@ -137,7 +135,7 @@ namespace LAZYSHELL.ScriptsEditor
             5,5,5,5,6,6,5,5,  3,5,3,3,3,3,3,3, // 0xE0
             2,3,3,3,1,1,1,1,  5,1,1,1,1,0,1,1  // 0xF0
         };
-        private static int[] EventScriptOptionFDLengths = new int[]
+        private static int[] EventOptionFDLengths = new int[]
         {
          // 0 1 2 3 4 5 6 7   8 9 A B C D E F
             0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0, // 0x00
@@ -162,10 +160,9 @@ namespace LAZYSHELL.ScriptsEditor
             2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2, // 0xD0
 
             2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2, // 0xE0
-            6,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2  // 0xF0
-        
+            6,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2  // 0xF0        
         };
-        private static int[] ActionQueueLengths = new int[]
+        private static int[] ActionLengths = new int[]
         {
          // 0 1 2 3 4 5 6 7   8 9 A B C D E F
             1,1,1,1,1,1,1,1,  3,1,2,2,2,2,2,1, // 0x00
@@ -191,9 +188,8 @@ namespace LAZYSHELL.ScriptsEditor
 
             5,5,5,5,6,6,5,5,  3,5,3,3,3,3,3,3, // 0xE0
             2,3,3,3,1,1,1,1,  5,1,1,1,1,0,1,1  // 0xF0
-
         };
-        private static int[] ActionQueueOptionFDLengths = new int[]
+        private static int[] ActionOptionFDLengths = new int[]
         {
          // 0 1 2 3 4 5 6 7   8 9 A B C D E F
             2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,3, // 0x00
@@ -218,16 +214,14 @@ namespace LAZYSHELL.ScriptsEditor
             2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2, // 0xD0
 
             2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2, // 0xE0
-            2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2, // 0xF0
-
-        
+            2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2, // 0xF0        
         };
         public static int GetEventOpcodeLength(int script, int option)
         {
-            int len = EventScriptLengths[script];
+            int len = EventLengths[script];
 
             if (len == 0 && (int)script > 0x2F)
-                len = EventScriptOptionFDLengths[option];
+                len = EventOptionFDLengths[option];
             if (len == 0 && (script <= 0x2F && option >= 0xF2))
             {
                 if (option >= 0 && option <= 0x7F || option >= 0xF6 && option <= 0xFF)
@@ -253,14 +247,14 @@ namespace LAZYSHELL.ScriptsEditor
 
             return len;
         }
-        public static int GetActionQueueOpcodeLength(int queue, int option)
+        public static int GetActionOpcodeLength(int queue, int option)
         {
             int len;
 
             if ((int)queue == 0xFD)
-                len = ActionQueueOptionFDLengths[option];
+                len = ActionOptionFDLengths[option];
             else
-                len = ActionQueueLengths[queue];
+                len = ActionLengths[queue];
 
             if (len == 0)
                 throw new Exception("Invalid Length");

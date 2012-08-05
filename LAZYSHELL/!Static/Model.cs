@@ -202,7 +202,7 @@ namespace LAZYSHELL
                 {
                     battleDialogues = new BattleDialogue[256];
                     for (int i = 0; i < battleDialogues.Length; i++)
-                        battleDialogues[i] = new BattleDialogue(data, i, 0);
+                        battleDialogues[i] = new BattleDialogue(data, i, 0x396554, 0x390000);
                 }
                 return battleDialogues;
             }
@@ -216,7 +216,7 @@ namespace LAZYSHELL
                 {
                     battleMessages = new BattleDialogue[46];
                     for (int i = 0; i < battleMessages.Length; i++)
-                        battleMessages[i] = new BattleDialogue(data, i, 1);
+                        battleMessages[i] = new BattleDialogue(data, i, 0x3A26F1, 0x3A0000);
                 }
                 return battleMessages;
             }
@@ -304,9 +304,14 @@ namespace LAZYSHELL
         private static FontCharacter[] fontMenu;
         private static FontCharacter[] fontDescription;
         private static FontCharacter[] fontTriangle;
+        private static FontCharacter[] fontBattleMenu;
         private static PaletteSet fontPaletteDialogue;
         private static PaletteSet fontPaletteBattle;
         private static PaletteSet fontPaletteMenu;
+        private static byte[] numeralGraphics;
+        private static PaletteSet numeralPaletteSet;
+        private static byte[] battleMenuGraphics;
+        private static PaletteSet battleMenuPalette;
         public static FontCharacter[] FontDialogue
         {
             get
@@ -392,6 +397,64 @@ namespace LAZYSHELL
                 return fontPaletteMenu;
             }
             set { palettes = value; }
+        }
+        public static byte[] NumeralGraphics
+        {
+            get
+            {
+                if (numeralGraphics == null)
+                    numeralGraphics = Bits.GetByteArray(data, 0x03F800, 0x400);
+                return numeralGraphics;
+            }
+            set { numeralGraphics = value; }
+        }
+        public static PaletteSet NumeralPaletteSet
+        {
+            get
+            {
+                if (numeralPaletteSet == null)
+                    numeralPaletteSet = new PaletteSet(data, 0, 0x03FC00, 2, 16, 32);
+                return numeralPaletteSet;
+            }
+            set { numeralPaletteSet = value; }
+        }
+        public static byte[] BattleMenuGraphics
+        {
+            get
+            {
+                if (battleMenuGraphics == null)
+                {
+                    battleMenuGraphics = new byte[0x800];
+                    Buffer.BlockCopy(data, 0x1F200, battleMenuGraphics, 0, 0x600);
+                    Buffer.BlockCopy(data, 0x1ED00, battleMenuGraphics, 0x600, 0x200);
+                }
+                return battleMenuGraphics;
+            }
+            set { battleMenuGraphics = value; }
+        }
+        public static PaletteSet BattleMenuPalette
+        {
+            get
+            {
+                if (battleMenuPalette == null)
+                    battleMenuPalette = new PaletteSet(data, 0, 0x01EF20, 1, 16, 32);
+                return battleMenuPalette;
+            }
+            set { battleMenuPalette = value; }
+        }
+        public static FontCharacter[] FontBattleMenu
+        {
+            get
+            {
+                if (fontBattleMenu == null)
+                {
+                    fontBattleMenu = new FontCharacter[64];
+                    for (int i = 0; i < fontBattleMenu.Length; i++)
+                        fontBattleMenu[i] = new FontCharacter(BattleMenuGraphics, i, 4);
+                }
+                return fontBattleMenu;
+            }
+            set { fontBattleMenu = value; }
         }
         #endregion
         #region Levels
@@ -563,16 +626,18 @@ namespace LAZYSHELL
         #region Menus
         private static byte[] menuBGGraphics;
         private static byte[] menuBGTileset;
+        private static byte[] unkTileset3E2C80;
         private static byte[] menuFrameGraphics;
         private static byte[] menuCursorGraphics;
         private static byte[] menuPalettes;
         private static PaletteSet cursorPaletteSet;
+        private static MenuTexts[] menuTexts;
         public static byte[] MenuBGGraphics
         {
             get
             {
                 if (menuBGGraphics == null)
-                    menuBGGraphics = Comp.Decompress(data, 0x3E0E69, 0x2000);
+                    menuBGGraphics = Decompress(data, 0x3E0002, 0x3E0000, 0x2000);
                 return menuBGGraphics;
             }
             set { menuBGGraphics = value; }
@@ -582,7 +647,7 @@ namespace LAZYSHELL
             get
             {
                 if (menuFrameGraphics == null)
-                    menuFrameGraphics = Comp.Decompress(data, 0x3E2607, 0x200);
+                    menuFrameGraphics = Decompress(data, 0x3E0004, 0x3E0000, 0x200);
                 return menuFrameGraphics;
             }
             set { menuFrameGraphics = value; }
@@ -592,7 +657,7 @@ namespace LAZYSHELL
             get
             {
                 if (menuCursorGraphics == null)
-                    menuCursorGraphics = Comp.Decompress(data, 0x3E269E, 0x400);
+                    menuCursorGraphics = Decompress(data, 0x3E0006, 0x3E0000, 0x400);
                 return menuCursorGraphics;
             }
             set { menuCursorGraphics = value; }
@@ -602,17 +667,27 @@ namespace LAZYSHELL
             get
             {
                 if (menuBGTileset == null)
-                    menuBGTileset = Comp.Decompress(data, 0x3E286A, 0x800);
+                    menuBGTileset = Decompress(data, 0x3E0008, 0x3E0000, 0x800);
                 return menuBGTileset;
             }
             set { menuBGTileset = value; }
+        }
+        public static byte[] UNKTileset3E2C80
+        {
+            get
+            {
+                if (unkTileset3E2C80 == null)
+                    unkTileset3E2C80 = Decompress(data, 0x3E000A, 0x3E0000, 0x800);
+                return unkTileset3E2C80;
+            }
+            set { unkTileset3E2C80 = value; }
         }
         public static byte[] MenuPalettes
         {
             get
             {
                 if (menuPalettes == null)
-                    menuPalettes = Comp.Decompress(data, 0x3E2D54, 0x200);
+                    menuPalettes = Decompress(data, 0x3E000C, 0x3E0000, 0x200);
                 return menuPalettes;
             }
             set { menuPalettes = value; }
@@ -627,18 +702,21 @@ namespace LAZYSHELL
             }
             set { palettes = value; }
         }
-        public static bool EditMenuTileSet;
-        private static PaletteSet menuFramePalette;
-        public static PaletteSet MenuFramePalette
+        public static MenuTexts[] MenuTexts
         {
             get
             {
-                if (menuFramePalette == null)
-                    menuFramePalette = new PaletteSet(data, 0, 0x24C83A, 1, 16, 30);
-                return menuFramePalette;
+                if (menuTexts == null)
+                {
+                    menuTexts = new MenuTexts[118];
+                    for (int i = 0; i < menuTexts.Length; i++)
+                        menuTexts[i] = new MenuTexts(i);
+                }
+                return menuTexts;
             }
-            set { menuFramePalette = value; }
+            set { menuTexts = value; }
         }
+        public static bool EditMenuTileSet;
         private static PaletteSet menuBGPalette;
         public static PaletteSet MenuBGPalette
         {
@@ -650,7 +728,19 @@ namespace LAZYSHELL
             }
             set { menuBGPalette = value; }
         }
+        private static PaletteSet shopBGPalette;
+        public static PaletteSet ShopBGPalette
+        {
+            get
+            {
+                if (shopBGPalette == null)
+                    shopBGPalette = new PaletteSet(data, 0, 0x3E9A05, 1, 16, 32);
+                return shopBGPalette;
+            }
+            set { shopBGPalette = value; }
+        }
         private static Bitmap menuBG;
+        private static Bitmap shopBG;
         public static Bitmap MenuBG
         {
             get
@@ -662,6 +752,18 @@ namespace LAZYSHELL
                 return menuBG;
             }
             set { menuBG = value; }
+        }
+        public static Bitmap ShopBG
+        {
+            get
+            {
+                if (shopBG == null)
+                    shopBG = Do.PixelsToImage(
+                        Do.TilesetToPixels(
+                        new MenuTileset(ShopBGPalette, MenuBGTileset, MenuBGGraphics).Tileset, 16, 16, 0, false), 256, 256);
+                return shopBG;
+            }
+            set { shopBG = value; }
         }
         public static Bitmap MenuBG_
         {
@@ -680,6 +782,7 @@ namespace LAZYSHELL
         private static byte[] gameSelectGraphics;
         private static byte[] gameSelectPalettes;
         private static PaletteSet gameSelectPaletteSet;
+        public static PaletteSet gameSelectBGPalette;
         private static byte[] gameSelectTileset;
         private static byte[] gameSelectSpeakers;
         public static byte[] GameSelectGraphics
@@ -721,6 +824,16 @@ namespace LAZYSHELL
                 return gameSelectPaletteSet;
             }
             set { gameSelectPaletteSet = value; }
+        }
+        public static PaletteSet GameSelectBGPalette
+        {
+            get
+            {
+                if (gameSelectBGPalette == null)
+                    gameSelectBGPalette = new PaletteSet(data, 0, 0x3E99E2, 1, 16, 32);
+                return gameSelectBGPalette;
+            }
+            set { gameSelectBGPalette = value; }
         }
         public static byte[] GameSelectSpeakers
         {
@@ -1413,7 +1526,7 @@ namespace LAZYSHELL
         #endregion
         #region Title
         private static byte[] titleData;
-        private static TitleTileset titleTileSet;
+        private static Tileset titleTileSet;
         private static PaletteSet titlePalettes;
         private static PaletteSet titleSpritePalettes;
         private static byte[] titleSpriteGraphics;
@@ -1427,12 +1540,12 @@ namespace LAZYSHELL
             }
             set { titleData = value; }
         }
-        public static TitleTileset TitleTileSet
+        public static Tileset TitleTileSet
         {
             get
             {
                 if (titleTileSet == null)
-                    titleTileSet = new TitleTileset(TitlePalettes);
+                    titleTileSet = new Tileset(TitlePalettes, "title");
                 return titleTileSet;
             }
             set { titleTileSet = value; }
@@ -1474,8 +1587,11 @@ namespace LAZYSHELL
         private static PaletteSet palettes;
         private static byte[] worldMapGraphics;
         private static byte[] worldMapPalettes;
-        private static byte[][] worldMapTileSets = new byte[9][];
+        private static byte[][] worldMapTileSets = new byte[7][];
         private static byte[] worldMapSprites;
+        private static byte[] worldMapLogos;
+        private static byte[] worldMapLogoTileset;
+        public static PaletteSet worldMapLogoPalette;
         public static WorldMap[] WorldMaps
         {
             get
@@ -1534,13 +1650,13 @@ namespace LAZYSHELL
             }
             set { worldMapPalettes = value; }
         }
-        public static byte[][] WorldMapTileSets
+        public static byte[][] WorldMapTilesets
         {
             get
             {
                 if (worldMapTileSets[0] == null)
                 {
-                    for (int i = 0; i < 9; i++)
+                    for (int i = 0; i < 7; i++)
                     {
                         int pointer = Bits.GetShort(data, i * 2 + 0x3E0014);
                         int offset = 0x3E0000 + pointer + 1;
@@ -1560,6 +1676,40 @@ namespace LAZYSHELL
                 return worldMapSprites;
             }
             set { worldMapSprites = value; }
+        }
+        public static byte[] WorldMapLogos
+        {
+            get
+            {
+                if (worldMapLogos == null)
+                    worldMapLogos = Decompress(data, 0x3E0000, 0x3E0000, 0x2000);
+                return worldMapLogos;
+            }
+            set { worldMapLogos = value; }
+        }
+        public static byte[] WorldMapLogoTileset
+        {
+            get
+            {
+                if (worldMapLogoTileset == null)
+                {
+                    int pointer = Bits.GetShort(data, 0x3E0022);
+                    int offset = 0x3E0000 + pointer + 1;
+                    worldMapLogoTileset = Comp.Decompress(data, offset, 0x800);
+                }
+                return worldMapLogoTileset;
+            }
+            set { worldMapLogoTileset = value; }
+        }
+        public static PaletteSet WorldMapLogoPalette
+        {
+            get
+            {
+                if (worldMapLogoPalette == null)
+                    worldMapLogoPalette = new PaletteSet(MenuPalettes, 7, 0xE0, 1, 16, 32);
+                return worldMapLogoPalette;
+            }
+            set { worldMapLogoPalette = value; }
         }
         #endregion
         #region Previewer
@@ -1656,6 +1806,7 @@ namespace LAZYSHELL
         }
         public static bool ReadRom()
         {
+        Retry:
             try
             {
                 FileInfo fInfo = new FileInfo(fileName);
@@ -1698,8 +1849,9 @@ namespace LAZYSHELL
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + e.Message,
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + e.Message,
+                    "LAZY SHELL", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) != DialogResult.Cancel)
+                    goto Retry;
 
                 fileName = "Invalid File";
                 return false;
@@ -2013,7 +2165,7 @@ namespace LAZYSHELL
             progressBar.Close();
         }
         /// <summary>
-        /// Compress and store single array to ROM. Returns success of compression function.
+        /// Compress and store single array to ROM. Returns success of compression function. Includes 0x01 at start.
         /// </summary>
         /// <param name="src">The array in the Model class to compress.</param>
         /// <param name="offset">The offset in the ROM to store at.</param>
@@ -2023,8 +2175,8 @@ namespace LAZYSHELL
         /// <returns></returns>
         public static bool Compress(byte[] src, int offset, int maxDecomp, int maxComp, string label)
         {
-            byte[] compressed = new byte[maxDecomp];
-            int size = Comp.Compress(src, compressed);
+            byte[] comp = new byte[maxDecomp];
+            int size = Comp.Compress(src, comp);
             int totalSize = size + 1;
             if (totalSize > maxComp)
             {
@@ -2034,19 +2186,29 @@ namespace LAZYSHELL
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            else
-            {
-                Bits.SetByteArray(Model.Data, offset, compressed, 0, size - 1);
-                return true;
-            }
+            Model.Data[offset] = 0x01;
+            Bits.SetByteArray(Model.Data, offset + 1, comp, 0, size);
+            return true;
         }
+        /// <summary>
+        /// Compress and store single array to another array. Returns success of compression function. Includes 0x01 at start.
+        /// </summary>
+        /// <param name="src">The array in the Model class to compress.</param>
+        /// <param name="dst">The array to store the compressed data to.</param>
+        /// <param name="offset">The offset in the ROM to store at.</param>
+        /// <param name="maxComp">The maximum size of the compressed data.</param>
+        /// <param name="label">The name/label of the data, title-case.</param>
+        /// <returns></returns>
         public static bool Compress(byte[] src, byte[] dst, ref int offset, int maxComp, string label)
         {
             byte[] comp = new byte[maxComp];
             int size = Comp.Compress(src, comp) + 1;
             if (offset + size >= maxComp)
             {
-                MessageBox.Show("Compressed " + label + " too large. Data not saved.");
+                MessageBox.Show(
+                    label + " recompressed data exceeds allotted ROM space by " +
+                    (size - maxComp).ToString() + " bytes.\n" + label + " was not saved.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             dst[offset] = 0x01;
@@ -2104,11 +2266,13 @@ namespace LAZYSHELL
             dummy = MapPoints;
             dummy = MenuBG;
             dummy = MenuBGPalette;
+            dummy = ShopBGPalette;
             dummy = MenuFrameGraphics;
-            dummy = MenuFramePalette;
+            dummy = FontPaletteMenu;
             dummy = MenuBGGraphics;
             dummy = MenuBGTileset;
             dummy = MenuCursorGraphics;
+            dummy = MenuTexts;
             dummy = MinecartM7Graphics;
             dummy = MinecartM7Palettes;
             dummy = MinecartM7PaletteSet;
@@ -2133,6 +2297,8 @@ namespace LAZYSHELL
             dummy = Notes;
             dummy = NPCProperties;
             dummy = NPCSpritePartitions;
+            dummy = NumeralGraphics;
+            dummy = NumeralPaletteSet;
             dummy = OverlapTileset;
             dummy = Palettes;
             dummy = PaletteSets;
@@ -2162,7 +2328,10 @@ namespace LAZYSHELL
             dummy = WorldMapPalettes;
             dummy = WorldMaps;
             dummy = WorldMapSprites;
-            dummy = WorldMapTileSets[0];
+            dummy = WorldMapTilesets[0];
+            dummy = WorldMapLogos;
+            dummy = WorldMapLogoTileset;
+            dummy = WorldMapLogoPalette;
         }
         public static void ClearModel()
         {
@@ -2212,11 +2381,12 @@ namespace LAZYSHELL
             mapPoints = null;
             menuBG = null;
             menuBGPalette = null;
+            shopBGPalette = null;
             menuFrameGraphics = null;
-            menuFramePalette = null;
             menuBGGraphics = null;
             menuBGTileset = null;
             menuPalettes = null;
+            menuTexts = null;
             minecartM7Graphics = null;
             minecartM7Palettes = null;
             minecartM7PaletteSet = null;
@@ -2241,6 +2411,8 @@ namespace LAZYSHELL
             notes = null;
             npcProperties = null;
             npcSpritePartitions = null;
+            numeralGraphics = null;
+            numeralPaletteSet = null;
             overlapTileset = null;
             palettes = null;
             paletteSets = null;
@@ -2271,6 +2443,9 @@ namespace LAZYSHELL
             worldMaps = null;
             worldMapSprites = null;
             worldMapTileSets[0] = null;
+            worldMapLogos = null;
+            worldMapLogoPalette = null;
+            worldMapLogoTileset = null;
         }
         #endregion
         #endregion

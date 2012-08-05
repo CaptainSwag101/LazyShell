@@ -210,7 +210,7 @@ namespace LAZYSHELL.ScriptsEditor
                     // Insert into script at same index
                     esc.Set = true;
                     this.script.Insert(index, esc);
-                    this.scriptDelta += esc.EventLength;
+                    this.scriptDelta += esc.CommandLength;
                 }
             }
             finally
@@ -293,28 +293,28 @@ namespace LAZYSHELL.ScriptsEditor
                         if ((esc.Option & 0x80) == 0x80) bit7 = 111;
                         else bit7 = 127;
 
-                        if ((esc.EventLength - 2 + aqc.QueueLength) > bit7)
+                        if ((esc.CommandLength - 2 + aqc.CommandLength) > bit7)
                         {
                             MessageBox.Show(
                                 "Could not add any more action queue commands to the queue trigger.",
                                 "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
-                        esc.Option += (byte)aqc.QueueLength;
+                        esc.Option += (byte)aqc.CommandLength;
                     }
                     else
                     {
                         if ((esc.EventData[2] & 0x80) == 0x80) bit7 = 111;
                         else bit7 = 127;
 
-                        if ((esc.EventLength - 3 + aqc.QueueLength) > bit7)
+                        if ((esc.CommandLength - 3 + aqc.CommandLength) > bit7)
                         {
                             MessageBox.Show(
                                 "Could not add any more action queue commands to the queue trigger.",
                                 "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
-                        esc.EventData[2] += (byte)aqc.QueueLength;
+                        esc.EventData[2] += (byte)aqc.CommandLength;
                     }
 
                     // Insert into treeview
@@ -331,7 +331,7 @@ namespace LAZYSHELL.ScriptsEditor
                     // Insert into action queue at same index
                     aqc.Set = true;
                     this.script.Insert(node.Index, index, aqc);
-                    this.scriptDelta += aqc.QueueLength;
+                    this.scriptDelta += aqc.CommandLength;
 
                     treeView.ExpandAll();
                 }
@@ -361,7 +361,7 @@ namespace LAZYSHELL.ScriptsEditor
                         // Insert into script at same index
                         aqc.Set = true;
                         this.action.Insert(index, aqc);
-                        this.scriptDelta += aqc.QueueLength;
+                        this.scriptDelta += aqc.CommandLength;
                     }
                 }
             }
@@ -528,9 +528,9 @@ namespace LAZYSHELL.ScriptsEditor
                         esc = ((EventScriptCommand)script.Commands[node.Index]);
                         aqc = (ActionQueueCommand)esc.EmbeddedActionQueue.Commands[index];
                         if (esc.Option < 0xF0)
-                            esc.Option -= (byte)aqc.QueueLength;
+                            esc.Option -= (byte)aqc.CommandLength;
                         else
-                            esc.EventData[2] -= (byte)aqc.QueueLength;
+                            esc.EventData[2] -= (byte)aqc.CommandLength;
 
                         // Remove action command
                         child.Remove();
@@ -691,7 +691,7 @@ namespace LAZYSHELL.ScriptsEditor
                     child = isChild ? treeView.TopNode.Index : 0;
                 }
                 // Update offsets and descriptions
-                RefreshScript(); 
+                RefreshScript();
                 this.treeView.EndUpdate();
                 if (this.treeView.Nodes.Count != 0)
                 {
@@ -782,16 +782,12 @@ namespace LAZYSHELL.ScriptsEditor
             try
             {
                 this.treeView.BeginUpdate();
-
-                EventScriptCommand esc, escCopy;
-                ActionQueueCommand aqc, aqcCopy;
-
+                EventScriptCommand esc;
+                ActionQueueCommand aqc;
                 TreeNode node = this.treeView.SelectedNode;
                 if (node == null)
                     return;
                 int index = this.treeView.SelectedNode.Index;
-
-                byte[] temp;
                 bool tnChecked = false, childChecked = false;
                 commandCopies = new ArrayList();
                 foreach (TreeNode tn in treeView.Nodes)
@@ -812,15 +808,13 @@ namespace LAZYSHELL.ScriptsEditor
                             return;
                         }
 
-                        aqc = (ActionQueueCommand)child.Tag; aqc.Assemble();
-                        temp = new byte[aqc.EventData.Length]; aqc.EventData.CopyTo(temp, 0);
-                        aqcCopy = new ActionQueueCommand(temp, aqc.Offset);
-                        commandCopies.Add(aqcCopy);
+                        aqc = (ActionQueueCommand)child.Tag;
+                        aqc.Assemble();
+                        commandCopies.Add(aqc.Copy());
                     }
-                    if (!tn.Checked) continue;
-
+                    if (!tn.Checked)
+                        continue;
                     tnChecked = true;
-
                     if (childChecked)
                     {
                         MessageBox.Show(
@@ -830,20 +824,17 @@ namespace LAZYSHELL.ScriptsEditor
                         commandCopies = null;
                         return;
                     }
-
                     if (!actionScript)
                     {
-                        esc = (EventScriptCommand)tn.Tag; esc.Assemble();
-                        temp = new byte[esc.EventData.Length]; esc.EventData.CopyTo(temp, 0);
-                        escCopy = new EventScriptCommand(temp, esc.Offset);
-                        commandCopies.Add(escCopy);
+                        esc = (EventScriptCommand)tn.Tag;
+                        esc.Assemble();
+                        commandCopies.Add(esc.Copy());
                     }
                     else
                     {
-                        aqc = (ActionQueueCommand)tn.Tag; aqc.Assemble();
-                        temp = new byte[aqc.EventData.Length]; aqc.EventData.CopyTo(temp, 0);
-                        aqcCopy = new ActionQueueCommand(temp, aqc.Offset);
-                        commandCopies.Add(aqcCopy);
+                        aqc = (ActionQueueCommand)tn.Tag;
+                        aqc.Assemble();
+                        commandCopies.Add(aqc.Copy());
                     }
                 }
             }
@@ -952,7 +943,7 @@ namespace LAZYSHELL.ScriptsEditor
                 foreach (EventScriptCommand esc in script.Commands)
                 {
                     esc.RefreshOffsets(offset);
-                    offset += esc.EventLength;
+                    offset += esc.CommandLength;
                 }
             }
             else
@@ -960,7 +951,7 @@ namespace LAZYSHELL.ScriptsEditor
                 foreach (ActionQueueCommand aqc in action.Commands)
                 {
                     aqc.Offset = offset;
-                    offset += aqc.QueueLength;
+                    offset += aqc.CommandLength;
                 }
             }
         }

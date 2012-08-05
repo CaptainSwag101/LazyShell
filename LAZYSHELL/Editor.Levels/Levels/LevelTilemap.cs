@@ -945,10 +945,14 @@ namespace LAZYSHELL
             {
                 for (int a = 0, x = p.X; a < s.Width; a++, x++)
                 {
-                    if (this.pixels[y * Width_p + x] != 0)
-                        pixels[b * s.Width + a] = Color.FromArgb(this.pixels[y * Width_p + x]).ToArgb();
+                    int srcIndex = y * Width_p + x;
+                    int dstIndex = b * s.Width + a;
+                    if (srcIndex >= this.pixels.Length || dstIndex >= pixels.Length)
+                        continue;
+                    if (this.pixels[srcIndex] != 0)
+                        pixels[dstIndex] = Color.FromArgb(this.pixels[srcIndex]).ToArgb();
                     else
-                        pixels[b * s.Width + a] = Color.FromArgb(bgcolor).ToArgb();
+                        pixels[dstIndex] = Color.FromArgb(bgcolor).ToArgb();
                 }
             }
             return pixels;
@@ -1013,10 +1017,8 @@ namespace LAZYSHELL
         }
         public override void SetTileNum(int tilenum, int layer, int x, int y)
         {
-            if (x < 0) x = 0;
-            if (y < 0) y = 0;
-            if (x >= Width_p) x = Width_p - 1;
-            if (y >= Height_p) y = Height_p - 1;
+            if (x < 0 || y < 0 || x >= Width_p || y >= Height_p) 
+                return;
             y /= 16;
             x /= 16;
             int index = y * Width + x;

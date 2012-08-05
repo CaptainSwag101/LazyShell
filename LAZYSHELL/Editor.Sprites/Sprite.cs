@@ -30,6 +30,13 @@ namespace LAZYSHELL
             paletteIndex = (byte)((data[offset] & 0x0E) >> 1); offset++;
             animationPacket = Bits.GetShort(data, offset);
         }
+        public int[] Palette
+        {
+            get
+            {
+                return Model.SpritePalettes[Model.GraphicPalettes[graphicPalettePacket].PaletteNum].Palettes[paletteIndex];
+            }
+        }
         public void Assemble()
         {
             int offset = (index * 4) + 0x250000;

@@ -28,7 +28,6 @@ namespace LAZYSHELL
         public int Index { get { return (int)monsterNum.Value; } set { monsterNum.Value = value; } }
         private bool textCodeFormat { get { return !byteOrTextView.Checked; } set { byteOrTextView.Checked = !value; } }
         private Settings settings = Settings.Default;
-        private State state = State.Instance;
         private BattleDialoguePreview battleDialoguePreview = new BattleDialoguePreview();
         private MenuTextPreview menuTextPreview = new MenuTextPreview();
         private TextHelper textHelper = TextHelper.Instance;

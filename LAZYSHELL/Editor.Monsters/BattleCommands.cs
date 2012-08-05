@@ -189,7 +189,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
 
         public override string ToString()
         {
-            return "Run battle dialogue:  [" + commandData[1].ToString("d3") + "] \"" + battleDialogues[commandData[1]].GetBattleDialogueStub() + "\"";
+            return "Run battle dialogue:  [" + commandData[1].ToString("d3") + "] \"" + battleDialogues[commandData[1]].GetStub() + "\"";
         }
 
     }

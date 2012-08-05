@@ -16,7 +16,7 @@ namespace LAZYSHELL
     {
         #region Variables
 
-        public long checksum;
+        public long Checksum;
         private Settings settings = Settings.Default;
         // main
         private delegate void Function(RichTextBox richTextBox, StringComparison stringComparison, bool matchWholeWord, bool replaceAll, string replaceWith);
@@ -29,7 +29,6 @@ namespace LAZYSHELL
         private PaletteSet fontPalette { get { return Model.FontPaletteDialogue; } set { Model.FontPaletteDialogue = value; } }
         // public accessors
         public ToolStripNumericUpDown DialogueNum { get { return dialogueNum; } set { dialogueNum = value; } }
-        private State state = State.Instance;
         private DialoguePreview dialoguePreview;
         private TextHelper textHelper;
         private bool textCodeFormat { get { return !byteOrTextView.Checked; } set { byteOrTextView.Checked = !value; } }
@@ -105,8 +104,8 @@ namespace LAZYSHELL
             new ToolTipLabel(this, toolTip1, showDecHex, helpTips);
             //
             new History(this);
-            checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
-                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu);
+            Checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
+                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, Model.NumeralGraphics);
         }
         // tooltips
         private void SetToolTips(ToolTip toolTip1)
@@ -641,8 +640,8 @@ namespace LAZYSHELL
             else
                 MessageBox.Show("The dialogue in bank 3 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
-                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu);
+            Checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
+                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, Model.NumeralGraphics);
         }
         #endregion
         #region Event Handlers
@@ -650,7 +649,7 @@ namespace LAZYSHELL
         private void Dialogues_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
-                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, fontPalette, Model.FontPaletteMenu) == checksum)
+                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, Model.NumeralGraphics) == Checksum)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Dialogues have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -671,6 +670,8 @@ namespace LAZYSHELL
                 Model.FontPaletteBattle = null;
                 Model.FontPaletteDialogue = null;
                 Model.FontPaletteMenu = null;
+                Model.NumeralGraphics = null;
+                Model.NumeralPaletteSet = null;
             }
             else if (result == DialogResult.Cancel)
             {
@@ -1034,23 +1035,25 @@ namespace LAZYSHELL
             string path = openFileDialog.FileName;
             TextReader tr;
             BinaryFormatter b = new BinaryFormatter();
+            ProgressBar progressBar = new ProgressBar("IMPORTING DIALOGUES...", 4096);
+            progressBar.Show();
             try
             {
                 tr = new StreamReader(path);
                 while (tr.Peek() != -1)
                 {
                     string line = tr.ReadLine();
-                    int number = Convert.ToInt32(line.Substring(1, 4), 10);
+                    int index = Convert.ToInt32(line.Substring(1, 4), 10);
                     line = line.Remove(0, 7);
-                    if (textCodeFormat)
-                    {
-                        if (!line.EndsWith("[0]") && !line.EndsWith("[6]")) line += "[0]";
-                    }
+                    if (this.textCodeFormat)
+                        if (!line.EndsWith("[0]") && !line.EndsWith("[6]")) 
+                            line += "[0]";
                     else
                         if (!line.EndsWith("[endInput]") && !line.EndsWith("[end]"))
                             line += "[endInput]";
-                    dialogues[number].SetDialogue(line, textCodeFormat);
-                    dialogues[number].Data = Model.Data;
+                    dialogues[index].SetDialogue(line, line.EndsWith("[0]") || line.EndsWith("[6]"));
+                    dialogues[index].Data = Model.Data;
+                    progressBar.PerformStep("IMPORTING DIALOGUE #" + index.ToString("d4"));
                 }
                 dialogueNum_ValueChanged(null, null);
             }
@@ -1061,6 +1064,7 @@ namespace LAZYSHELL
                     "Each line must begin with a 4-digit index enclosed in {}, followed by a tab character, then the raw dialogue.",
                     "LAZY SHELL");
             }
+            progressBar.Close();
         }
         private void importBattleDialoguesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1091,7 +1095,7 @@ namespace LAZYSHELL
                     else
                         if (!line.EndsWith("[endInput]") && !line.EndsWith("[end]"))
                             line += "[endInput]";
-                    Model.BattleDialogues[number].SetBattleDialogue(line, battleDialogues.textCodeFormat);
+                    Model.BattleDialogues[number].SetText(line, battleDialogues.textCodeFormat);
                 }
                 dialogueNum_ValueChanged(null, null);
             }
@@ -1140,7 +1144,7 @@ namespace LAZYSHELL
                 {
                     dialogues.WriteLine(
                         "{" + i.ToString("d4") + "}\t" +
-                        Model.BattleDialogues[i].GetBattleDialogue(battleDialogues.textCodeFormat));
+                        Model.BattleDialogues[i].GetText(battleDialogues.textCodeFormat));
                 }
                 dialogues.Close();
             }

@@ -205,6 +205,7 @@ namespace LAZYSHELL.Patches
                             // Needed to reset state for new rom image
                             Model.ClearModel();
                             State.Instance.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
+                            State.Instance2.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
                             MessageBox.Show("Patch Applied Succesfully", "LAZY SHELL");
                         }
                         else

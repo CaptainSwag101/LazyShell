@@ -316,7 +316,7 @@
   &lt;string /&gt;
   &lt;string /&gt;
   &lt;string /&gt;
-  &lt;string /&gt;
+  &lt;string&gt;.&lt;/string&gt;
   &lt;string&gt;:&lt;/string&gt;
   &lt;string&gt;,&lt;/string&gt;
   &lt;string /&gt;
@@ -430,7 +430,6 @@
   &lt;string /&gt;
   &lt;string&gt;*&lt;/string&gt;
   &lt;string&gt;'&lt;/string&gt;
-  &lt;string /&gt;
   &lt;string /&gt;
   &lt;string /&gt;
   &lt;string /&gt;

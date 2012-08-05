@@ -28,12 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.battlefieldName = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.pictureBoxFormation = new System.Windows.Forms.PictureBox();
             this.formationCantRun = new System.Windows.Forms.CheckBox();
-            this.formationBattleEvent = new System.Windows.Forms.NumericUpDown();
             this.label176 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.formationUnknown = new System.Windows.Forms.NumericUpDown();
@@ -81,9 +78,20 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.formationBattleEvent = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.isometricGrid = new System.Windows.Forms.ToolStripButton();
+            this.snapIsometricLeft = new System.Windows.Forms.ToolStripButton();
+            this.snapIsometricRight = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toggleAllies = new System.Windows.Forms.ToolStripButton();
+            this.labelCoords = new System.Windows.Forms.ToolStripLabel();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.battlefieldName = new System.Windows.Forms.ToolStripComboBox();
             this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFormation)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.formationBattleEvent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.formationUnknown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.formationByte1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.formationByte2)).BeginInit();
@@ -113,42 +121,26 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // battlefieldName
-            // 
-            this.battlefieldName.DropDownHeight = 262;
-            this.battlefieldName.DropDownWidth = 220;
-            this.battlefieldName.IntegralHeight = false;
-            this.battlefieldName.Location = new System.Drawing.Point(71, 248);
-            this.battlefieldName.Name = "battlefieldName";
-            this.battlefieldName.Size = new System.Drawing.Size(188, 21);
-            this.battlefieldName.TabIndex = 84;
-            this.battlefieldName.SelectedIndexChanged += new System.EventHandler(this.battlefieldName_SelectedIndexChanged);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(2, 251);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(61, 13);
-            this.label20.TabIndex = 536;
-            this.label20.Text = "BG Preview";
             // 
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.SystemColors.Window;
             this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel10.Controls.Add(this.pictureBoxFormation);
-            this.panel10.Location = new System.Drawing.Point(3, 28);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(0, 25);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(256, 218);
+            this.panel10.Size = new System.Drawing.Size(260, 224);
             this.panel10.TabIndex = 539;
             // 
             // pictureBoxFormation
             // 
             this.pictureBoxFormation.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
-            this.pictureBoxFormation.Location = new System.Drawing.Point(0, -38);
+            this.pictureBoxFormation.Location = new System.Drawing.Point(0, -32);
             this.pictureBoxFormation.Name = "pictureBoxFormation";
             this.pictureBoxFormation.Size = new System.Drawing.Size(512, 512);
             this.pictureBoxFormation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -165,9 +157,9 @@
             this.formationCantRun.BackColor = System.Drawing.SystemColors.Control;
             this.formationCantRun.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formationCantRun.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.formationCantRun.Location = new System.Drawing.Point(6, 20);
+            this.formationCantRun.Location = new System.Drawing.Point(99, 41);
             this.formationCantRun.Name = "formationCantRun";
-            this.formationCantRun.Size = new System.Drawing.Size(75, 19);
+            this.formationCantRun.Size = new System.Drawing.Size(79, 19);
             this.formationCantRun.TabIndex = 502;
             this.formationCantRun.Text = "CAN\'T RUN";
             this.formationCantRun.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -175,24 +167,10 @@
             this.formationCantRun.UseVisualStyleBackColor = false;
             this.formationCantRun.CheckedChanged += new System.EventHandler(this.formationCantRun_CheckedChanged);
             // 
-            // formationBattleEvent
-            // 
-            this.formationBattleEvent.Location = new System.Drawing.Point(132, 17);
-            this.formationBattleEvent.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.formationBattleEvent.Name = "formationBattleEvent";
-            this.formationBattleEvent.Size = new System.Drawing.Size(46, 21);
-            this.formationBattleEvent.TabIndex = 81;
-            this.formationBattleEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationBattleEvent.ValueChanged += new System.EventHandler(this.formationBattleEvent_ValueChanged);
-            // 
             // label176
             // 
             this.label176.AutoSize = true;
-            this.label176.Location = new System.Drawing.Point(87, 19);
+            this.label176.Location = new System.Drawing.Point(6, 20);
             this.label176.Name = "label176";
             this.label176.Size = new System.Drawing.Size(35, 13);
             this.label176.TabIndex = 499;
@@ -201,7 +179,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(87, 40);
+            this.label6.Location = new System.Drawing.Point(6, 42);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 13);
             this.label6.TabIndex = 501;
@@ -209,7 +187,7 @@
             // 
             // formationUnknown
             // 
-            this.formationUnknown.Location = new System.Drawing.Point(132, 38);
+            this.formationUnknown.Location = new System.Drawing.Point(47, 39);
             this.formationUnknown.Maximum = new decimal(new int[] {
             255,
             0,
@@ -527,7 +505,7 @@
             this.formationCoordY1.Size = new System.Drawing.Size(45, 21);
             this.formationCoordY1.TabIndex = 48;
             this.formationCoordY1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordY1.ValueChanged += new System.EventHandler(this.formationCoordY1_ValueChanged);
+            this.formationCoordY1.ValueChanged += new System.EventHandler(this.formationCoordY_ValueChanged);
             // 
             // formationCoordY2
             // 
@@ -541,7 +519,7 @@
             this.formationCoordY2.Size = new System.Drawing.Size(45, 21);
             this.formationCoordY2.TabIndex = 52;
             this.formationCoordY2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordY2.ValueChanged += new System.EventHandler(this.formationCoordY2_ValueChanged);
+            this.formationCoordY2.ValueChanged += new System.EventHandler(this.formationCoordY_ValueChanged);
             // 
             // formationCoordY3
             // 
@@ -555,7 +533,7 @@
             this.formationCoordY3.Size = new System.Drawing.Size(45, 21);
             this.formationCoordY3.TabIndex = 56;
             this.formationCoordY3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordY3.ValueChanged += new System.EventHandler(this.formationCoordY3_ValueChanged);
+            this.formationCoordY3.ValueChanged += new System.EventHandler(this.formationCoordY_ValueChanged);
             // 
             // formationCoordY8
             // 
@@ -569,7 +547,7 @@
             this.formationCoordY8.Size = new System.Drawing.Size(45, 21);
             this.formationCoordY8.TabIndex = 76;
             this.formationCoordY8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordY8.ValueChanged += new System.EventHandler(this.formationCoordY8_ValueChanged);
+            this.formationCoordY8.ValueChanged += new System.EventHandler(this.formationCoordY_ValueChanged);
             // 
             // formationCoordY5
             // 
@@ -583,7 +561,7 @@
             this.formationCoordY5.Size = new System.Drawing.Size(45, 21);
             this.formationCoordY5.TabIndex = 64;
             this.formationCoordY5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordY5.ValueChanged += new System.EventHandler(this.formationCoordY5_ValueChanged);
+            this.formationCoordY5.ValueChanged += new System.EventHandler(this.formationCoordY_ValueChanged);
             // 
             // formationCoordY7
             // 
@@ -597,7 +575,7 @@
             this.formationCoordY7.Size = new System.Drawing.Size(45, 21);
             this.formationCoordY7.TabIndex = 72;
             this.formationCoordY7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordY7.ValueChanged += new System.EventHandler(this.formationCoordY7_ValueChanged);
+            this.formationCoordY7.ValueChanged += new System.EventHandler(this.formationCoordY_ValueChanged);
             // 
             // formationCoordY6
             // 
@@ -611,7 +589,7 @@
             this.formationCoordY6.Size = new System.Drawing.Size(45, 21);
             this.formationCoordY6.TabIndex = 68;
             this.formationCoordY6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordY6.ValueChanged += new System.EventHandler(this.formationCoordY6_ValueChanged);
+            this.formationCoordY6.ValueChanged += new System.EventHandler(this.formationCoordY_ValueChanged);
             // 
             // formationCoordY4
             // 
@@ -625,7 +603,7 @@
             this.formationCoordY4.Size = new System.Drawing.Size(45, 21);
             this.formationCoordY4.TabIndex = 60;
             this.formationCoordY4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordY4.ValueChanged += new System.EventHandler(this.formationCoordY4_ValueChanged);
+            this.formationCoordY4.ValueChanged += new System.EventHandler(this.formationCoordY_ValueChanged);
             // 
             // formationCoordX1
             // 
@@ -639,7 +617,7 @@
             this.formationCoordX1.Size = new System.Drawing.Size(45, 21);
             this.formationCoordX1.TabIndex = 47;
             this.formationCoordX1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordX1.ValueChanged += new System.EventHandler(this.formationCoordX1_ValueChanged);
+            this.formationCoordX1.ValueChanged += new System.EventHandler(this.formationCoordX_ValueChanged);
             // 
             // formationCoordX2
             // 
@@ -653,7 +631,7 @@
             this.formationCoordX2.Size = new System.Drawing.Size(45, 21);
             this.formationCoordX2.TabIndex = 51;
             this.formationCoordX2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordX2.ValueChanged += new System.EventHandler(this.formationCoordX2_ValueChanged);
+            this.formationCoordX2.ValueChanged += new System.EventHandler(this.formationCoordX_ValueChanged);
             // 
             // formationCoordX3
             // 
@@ -667,7 +645,7 @@
             this.formationCoordX3.Size = new System.Drawing.Size(45, 21);
             this.formationCoordX3.TabIndex = 55;
             this.formationCoordX3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordX3.ValueChanged += new System.EventHandler(this.formationCoordX3_ValueChanged);
+            this.formationCoordX3.ValueChanged += new System.EventHandler(this.formationCoordX_ValueChanged);
             // 
             // formationCoordX8
             // 
@@ -681,7 +659,7 @@
             this.formationCoordX8.Size = new System.Drawing.Size(45, 21);
             this.formationCoordX8.TabIndex = 75;
             this.formationCoordX8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordX8.ValueChanged += new System.EventHandler(this.formationCoordX8_ValueChanged);
+            this.formationCoordX8.ValueChanged += new System.EventHandler(this.formationCoordX_ValueChanged);
             // 
             // formationCoordX5
             // 
@@ -695,7 +673,7 @@
             this.formationCoordX5.Size = new System.Drawing.Size(45, 21);
             this.formationCoordX5.TabIndex = 63;
             this.formationCoordX5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordX5.ValueChanged += new System.EventHandler(this.formationCoordX5_ValueChanged);
+            this.formationCoordX5.ValueChanged += new System.EventHandler(this.formationCoordX_ValueChanged);
             // 
             // formationCoordX7
             // 
@@ -709,7 +687,7 @@
             this.formationCoordX7.Size = new System.Drawing.Size(45, 21);
             this.formationCoordX7.TabIndex = 71;
             this.formationCoordX7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordX7.ValueChanged += new System.EventHandler(this.formationCoordX7_ValueChanged);
+            this.formationCoordX7.ValueChanged += new System.EventHandler(this.formationCoordX_ValueChanged);
             // 
             // formationCoordX6
             // 
@@ -723,7 +701,7 @@
             this.formationCoordX6.Size = new System.Drawing.Size(45, 21);
             this.formationCoordX6.TabIndex = 67;
             this.formationCoordX6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordX6.ValueChanged += new System.EventHandler(this.formationCoordX6_ValueChanged);
+            this.formationCoordX6.ValueChanged += new System.EventHandler(this.formationCoordX_ValueChanged);
             // 
             // formationCoordX4
             // 
@@ -737,7 +715,7 @@
             this.formationCoordX4.Size = new System.Drawing.Size(45, 21);
             this.formationCoordX4.TabIndex = 59;
             this.formationCoordX4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.formationCoordX4.ValueChanged += new System.EventHandler(this.formationCoordX4_ValueChanged);
+            this.formationCoordX4.ValueChanged += new System.EventHandler(this.formationCoordX_ValueChanged);
             // 
             // toolStrip1
             // 
@@ -750,7 +728,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(634, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(638, 25);
             this.toolStrip1.TabIndex = 561;
             // 
             // formationNameList
@@ -761,14 +739,14 @@
             this.formationNameList.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.formationNameList.IntegralHeight = false;
             this.formationNameList.Name = "formationNameList";
-            this.formationNameList.Size = new System.Drawing.Size(254, 25);
+            this.formationNameList.Size = new System.Drawing.Size(258, 25);
             this.formationNameList.SelectedIndexChanged += new System.EventHandler(this.formationNameList_SelectedIndexChanged);
             // 
             // formationNum
             // 
             this.formationNum.AutoSize = false;
             this.formationNum.Hexadecimal = false;
-            this.formationNum.Location = new System.Drawing.Point(263, 1);
+            this.formationNum.Location = new System.Drawing.Point(267, 2);
             this.formationNum.Maximum = new decimal(new int[] {
             511,
             0,
@@ -780,7 +758,7 @@
             0,
             0});
             this.formationNum.Name = "formationNum";
-            this.formationNum.Size = new System.Drawing.Size(60, 22);
+            this.formationNum.Size = new System.Drawing.Size(60, 21);
             this.formationNum.Text = "0";
             this.formationNum.Value = new decimal(new int[] {
             0,
@@ -839,7 +817,7 @@
             this.groupBox1.Controls.Add(this.formationCoordX8);
             this.groupBox1.Controls.Add(this.formationCoordX3);
             this.groupBox1.Controls.Add(this.formationCoordX7);
-            this.groupBox1.Location = new System.Drawing.Point(267, 28);
+            this.groupBox1.Location = new System.Drawing.Point(271, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(360, 194);
             this.groupBox1.TabIndex = 563;
@@ -852,7 +830,7 @@
             this.groupBox2.Controls.Add(this.formationMusic);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.label150);
-            this.groupBox2.Location = new System.Drawing.Point(457, 228);
+            this.groupBox2.Location = new System.Drawing.Point(461, 228);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(170, 65);
             this.groupBox2.TabIndex = 564;
@@ -861,29 +839,157 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.formationCantRun);
             this.groupBox3.Controls.Add(this.formationBattleEvent);
+            this.groupBox3.Controls.Add(this.formationCantRun);
             this.groupBox3.Controls.Add(this.formationUnknown);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label176);
-            this.groupBox3.Location = new System.Drawing.Point(265, 228);
+            this.groupBox3.Location = new System.Drawing.Point(271, 228);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(186, 65);
+            this.groupBox3.Size = new System.Drawing.Size(184, 65);
             this.groupBox3.TabIndex = 565;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Formation Properties";
+            // 
+            // formationBattleEvent
+            // 
+            this.formationBattleEvent.BackColor = System.Drawing.SystemColors.Window;
+            this.formationBattleEvent.DropDownHeight = 300;
+            this.formationBattleEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.formationBattleEvent.DropDownWidth = 400;
+            this.formationBattleEvent.IntegralHeight = false;
+            this.formationBattleEvent.Location = new System.Drawing.Point(47, 17);
+            this.formationBattleEvent.Name = "formationBattleEvent";
+            this.formationBattleEvent.Size = new System.Drawing.Size(131, 21);
+            this.formationBattleEvent.TabIndex = 503;
+            this.formationBattleEvent.SelectedIndexChanged += new System.EventHandler(this.formationBattleEvent_SelectedIndexChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.panel10);
+            this.panel1.Controls.Add(this.toolStrip3);
+            this.panel1.Controls.Add(this.toolStrip2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(260, 274);
+            this.panel1.TabIndex = 566;
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.CanOverflow = false;
+            this.toolStrip3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.isometricGrid,
+            this.snapIsometricLeft,
+            this.snapIsometricRight,
+            this.toolStripSeparator1,
+            this.toggleAllies,
+            this.labelCoords});
+            this.toolStrip3.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip3.Size = new System.Drawing.Size(260, 25);
+            this.toolStrip3.TabIndex = 540;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // isometricGrid
+            // 
+            this.isometricGrid.CheckOnClick = true;
+            this.isometricGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.isometricGrid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleOrthGrid;
+            this.isometricGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.isometricGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.isometricGrid.Name = "isometricGrid";
+            this.isometricGrid.Size = new System.Drawing.Size(23, 22);
+            this.isometricGrid.Text = "Show/hide isometric grid";
+            this.isometricGrid.Click += new System.EventHandler(this.isometricGrid_Click);
+            // 
+            // snapIsometricLeft
+            // 
+            this.snapIsometricLeft.CheckOnClick = true;
+            this.snapIsometricLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.snapIsometricLeft.Image = global::LAZYSHELL.Properties.Resources.snapIsometricLeft;
+            this.snapIsometricLeft.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.snapIsometricLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.snapIsometricLeft.Name = "snapIsometricLeft";
+            this.snapIsometricLeft.Size = new System.Drawing.Size(23, 22);
+            this.snapIsometricLeft.Text = "Snap to left";
+            // 
+            // snapIsometricRight
+            // 
+            this.snapIsometricRight.CheckOnClick = true;
+            this.snapIsometricRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.snapIsometricRight.Image = global::LAZYSHELL.Properties.Resources.snapIsometricRight;
+            this.snapIsometricRight.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.snapIsometricRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.snapIsometricRight.Name = "snapIsometricRight";
+            this.snapIsometricRight.Size = new System.Drawing.Size(23, 22);
+            this.snapIsometricRight.Text = "Snap to right";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toggleAllies
+            // 
+            this.toggleAllies.CheckOnClick = true;
+            this.toggleAllies.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toggleAllies.Image = global::LAZYSHELL.Properties.Resources.marioicon;
+            this.toggleAllies.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toggleAllies.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleAllies.Name = "toggleAllies";
+            this.toggleAllies.Size = new System.Drawing.Size(23, 22);
+            this.toggleAllies.Text = "Show/hide allies";
+            this.toggleAllies.Click += new System.EventHandler(this.toggleAllies_Click);
+            // 
+            // labelCoords
+            // 
+            this.labelCoords.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.labelCoords.Name = "labelCoords";
+            this.labelCoords.Size = new System.Drawing.Size(59, 22);
+            this.labelCoords.Text = "(x: 0, y: 0)";
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.CanOverflow = false;
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.battlefieldName});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 249);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip2.Size = new System.Drawing.Size(260, 25);
+            this.toolStrip2.TabIndex = 0;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(25, 22);
+            this.toolStripLabel1.Text = " BG ";
+            // 
+            // battlefieldName
+            // 
+            this.battlefieldName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battlefieldName.DropDownWidth = 250;
+            this.battlefieldName.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.battlefieldName.Name = "battlefieldName";
+            this.battlefieldName.Size = new System.Drawing.Size(226, 25);
+            this.battlefieldName.SelectedIndexChanged += new System.EventHandler(this.battlefieldName_SelectedIndexChanged);
             // 
             // Formations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 299);
+            this.ClientSize = new System.Drawing.Size(638, 299);
             this.ControlBox = false;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.panel10);
-            this.Controls.Add(this.battlefieldName);
-            this.Controls.Add(this.label20);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -895,7 +1001,6 @@
             this.ShowInTaskbar = false;
             this.panel10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFormation)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.formationBattleEvent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.formationUnknown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.formationByte1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.formationByte2)).EndInit();
@@ -928,6 +1033,12 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -935,15 +1046,12 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox battlefieldName;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.PictureBox pictureBoxFormation;
         private System.Windows.Forms.CheckBox formationCantRun;
         private System.Windows.Forms.ComboBox musicTrack;
         private System.Windows.Forms.ComboBox formationMusic;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown formationBattleEvent;
         private System.Windows.Forms.NumericUpDown formationUnknown;
         private System.Windows.Forms.Label label176;
         private System.Windows.Forms.Label label150;
@@ -988,5 +1096,17 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripComboBox battlefieldName;
+        private System.Windows.Forms.ComboBox formationBattleEvent;
+        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStripButton isometricGrid;
+        private System.Windows.Forms.ToolStripButton toggleAllies;
+        private System.Windows.Forms.ToolStripLabel labelCoords;
+        private System.Windows.Forms.ToolStripButton snapIsometricLeft;
+        private System.Windows.Forms.ToolStripButton snapIsometricRight;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

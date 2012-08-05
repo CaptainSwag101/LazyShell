@@ -18,6 +18,7 @@ namespace LAZYSHELL
         private LevelsTemplate levelsTemplate;
         public ToolStripButton OpenTileset { get { return openTileset; } set { openTileset = value; } }
         public ToolStripButton OpenSolidTileset { get { return openSolidTileset; } set { openSolidTileset = value; } }
+        private Previewer.Previewer lp;
         #endregion
         #region Functions
         private void PaletteUpdate()
@@ -115,7 +116,7 @@ namespace LAZYSHELL
         {
             if (lp == null)
             {
-                lp = new LAZYSHELL.Previewer.Previewer((int)this.levelNum.Value, 1);
+                lp = new LAZYSHELL.Previewer.Previewer((int)this.levelNum.Value, Index);
                 lp.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else

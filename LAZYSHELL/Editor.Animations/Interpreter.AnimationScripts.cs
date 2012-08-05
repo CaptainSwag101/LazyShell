@@ -620,7 +620,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     {
                         case 0x00:
                             sb.Append("[" + asc.AnimationData[2].ToString("X2") + "] \"" +
-                                Model.BattleDialogues[asc.AnimationData[2]].GetBattleDialogueStub() + "\", type = ");
+                                Model.BattleDialogues[asc.AnimationData[2]].GetStub() + "\", type = ");
                             sb.Append("battle dialogue"); break;
                         case 0x01:
                             sb.Append("[" + asc.AnimationData[2].ToString("X2") + "] \"" +

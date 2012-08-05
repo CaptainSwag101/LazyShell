@@ -14,7 +14,7 @@ namespace LAZYSHELL
         #region Variables
         private Tileset tileset;
         private PaletteSet paletteSet;
-        private State state = State.Instance;
+        private State state = State.Instance2;
         public int Width = 16;
         public int Height = 16;
         public override int Width_p { get { return Width * 16; } set { Width = value / 16; } }

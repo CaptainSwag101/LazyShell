@@ -34,6 +34,7 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.openPalettesFrame = new System.Windows.Forms.ToolStripMenuItem();
             this.openPalettesBG = new System.Windows.Forms.ToolStripMenuItem();
+            this.shopBGPaletteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPaletteCursors = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
             this.openGraphicsFrame = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +43,9 @@
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.importFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importBackgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.previewType = new System.Windows.Forms.ToolStripComboBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.saveImageAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +73,10 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1,
             this.toolStripDropDownButton3,
-            this.toolStripDropDownButton2});
+            this.toolStripDropDownButton2,
+            this.toolStripSeparator1,
+            this.toolStripLabel1,
+            this.previewType});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -83,6 +90,7 @@
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openPalettesFrame,
             this.openPalettesBG,
+            this.shopBGPaletteToolStripMenuItem,
             this.openPaletteCursors});
             this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -106,6 +114,15 @@
             this.openPalettesBG.Size = new System.Drawing.Size(170, 24);
             this.openPalettesBG.Text = "Background Palette";
             this.openPalettesBG.Click += new System.EventHandler(this.openPalettesBG_Click);
+            // 
+            // shopBGPaletteToolStripMenuItem
+            // 
+            this.shopBGPaletteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.shopBGPaletteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.shopBGPaletteToolStripMenuItem.Name = "shopBGPaletteToolStripMenuItem";
+            this.shopBGPaletteToolStripMenuItem.Size = new System.Drawing.Size(170, 24);
+            this.shopBGPaletteToolStripMenuItem.Text = "Shop BG Palette";
+            this.shopBGPaletteToolStripMenuItem.Click += new System.EventHandler(this.shopBGPaletteToolStripMenuItem_Click);
             // 
             // openPaletteCursors
             // 
@@ -185,6 +202,38 @@
             this.importBackgroundToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.importBackgroundToolStripMenuItem.Text = "Import Background";
             this.importBackgroundToolStripMenuItem.Click += new System.EventHandler(this.importImageToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(58, 22);
+            this.toolStripLabel1.Text = " PREVIEW ";
+            // 
+            // previewType
+            // 
+            this.previewType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.previewType.DropDownWidth = 200;
+            this.previewType.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.previewType.Items.AddRange(new object[] {
+            "Overworld Menu",
+            "Overworld Menu - Item",
+            "Overworld Menu - Status",
+            "Overworld Menu - Special",
+            "Overworld Menu - Equip",
+            "Overworld Menu - Special Item",
+            "Overworld Menu - Switch",
+            "Shop Menu",
+            "Shop Menu - Buy",
+            "Shop Menu - Sell Items",
+            "Shop Menu - Sell Weapons"});
+            this.previewType.Name = "previewType";
+            this.previewType.Size = new System.Drawing.Size(200, 25);
+            this.previewType.SelectedIndexChanged += new System.EventHandler(this.previewType_SelectedIndexChanged);
             // 
             // contextMenuStrip1
             // 
@@ -335,6 +384,10 @@
         private System.Windows.Forms.PictureBox pictureBoxBG;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBoxFrame;
+        private System.Windows.Forms.ToolStripMenuItem shopBGPaletteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripComboBox previewType;
 
     }
 }

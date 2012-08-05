@@ -75,7 +75,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(644, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(648, 25);
             this.toolStrip3.TabIndex = 446;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -108,6 +108,8 @@
             // 
             // importFormationsToolStripMenuItem
             // 
+            this.importFormationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importFormationsToolStripMenuItem.Image")));
+            this.importFormationsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importFormationsToolStripMenuItem.Name = "importFormationsToolStripMenuItem";
             this.importFormationsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.importFormationsToolStripMenuItem.Text = "Import Formations...";
@@ -115,6 +117,8 @@
             // 
             // importPacksToolStripMenuItem
             // 
+            this.importPacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importPacksToolStripMenuItem.Image")));
+            this.importPacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importPacksToolStripMenuItem.Name = "importPacksToolStripMenuItem";
             this.importPacksToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.importPacksToolStripMenuItem.Text = "Import Packs...";
@@ -134,6 +138,8 @@
             // 
             // exportFormationsToolStripMenuItem
             // 
+            this.exportFormationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportFormationsToolStripMenuItem.Image")));
+            this.exportFormationsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportFormationsToolStripMenuItem.Name = "exportFormationsToolStripMenuItem";
             this.exportFormationsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.exportFormationsToolStripMenuItem.Text = "Export Formations...";
@@ -141,6 +147,8 @@
             // 
             // exportPacksToolStripMenuItem
             // 
+            this.exportPacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportPacksToolStripMenuItem.Image")));
+            this.exportPacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportPacksToolStripMenuItem.Name = "exportPacksToolStripMenuItem";
             this.exportPacksToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.exportPacksToolStripMenuItem.Text = "Export Packs...";
@@ -160,6 +168,8 @@
             // 
             // resetFormationToolStripMenuItem
             // 
+            this.resetFormationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetFormationToolStripMenuItem.Image")));
+            this.resetFormationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetFormationToolStripMenuItem.Name = "resetFormationToolStripMenuItem";
             this.resetFormationToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.resetFormationToolStripMenuItem.Text = "Reset formation";
@@ -167,6 +177,8 @@
             // 
             // resetPackToolStripMenuItem
             // 
+            this.resetPackToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetPackToolStripMenuItem.Image")));
+            this.resetPackToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetPackToolStripMenuItem.Name = "resetPackToolStripMenuItem";
             this.resetPackToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.resetPackToolStripMenuItem.Text = "Reset pack";
@@ -186,6 +198,8 @@
             // 
             // clearFormationsToolStripMenuItem
             // 
+            this.clearFormationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearFormationsToolStripMenuItem.Image")));
+            this.clearFormationsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearFormationsToolStripMenuItem.Name = "clearFormationsToolStripMenuItem";
             this.clearFormationsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.clearFormationsToolStripMenuItem.Text = "Clear Formations...";
@@ -193,6 +207,8 @@
             // 
             // clearPacksToolStripMenuItem
             // 
+            this.clearPacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearPacksToolStripMenuItem.Image")));
+            this.clearPacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearPacksToolStripMenuItem.Name = "clearPacksToolStripMenuItem";
             this.clearPacksToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.clearPacksToolStripMenuItem.Text = "Clear Packs...";
@@ -261,7 +277,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(644, 500);
+            this.panel1.Size = new System.Drawing.Size(648, 500);
             this.panel1.TabIndex = 447;
             // 
             // toolTip1
@@ -272,7 +288,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 525);
+            this.ClientSize = new System.Drawing.Size(648, 525);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

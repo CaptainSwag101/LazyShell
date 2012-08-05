@@ -550,7 +550,7 @@ namespace LAZYSHELL
             this.levelNum.AutoSize = false;
             this.levelNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.levelNum.Hexadecimal = false;
-            this.levelNum.Location = new System.Drawing.Point(209, 2);
+            this.levelNum.Location = new System.Drawing.Point(211, 2);
             this.levelNum.Maximum = new decimal(new int[] {
             509,
             0,
@@ -1270,12 +1270,12 @@ namespace LAZYSHELL
             this.contextMenuStrip4.Name = "contextMenuStrip4";
             this.contextMenuStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip4.ShowImageMargin = false;
-            this.contextMenuStrip4.Size = new System.Drawing.Size(217, 26);
+            this.contextMenuStrip4.Size = new System.Drawing.Size(226, 26);
             // 
             // addThisLevelToNotesDatabaseToolStripMenuItem
             // 
             this.addThisLevelToNotesDatabaseToolStripMenuItem.Name = "addThisLevelToNotesDatabaseToolStripMenuItem";
-            this.addThisLevelToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.addThisLevelToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.addThisLevelToNotesDatabaseToolStripMenuItem.Text = "Add this level to notes database...";
             this.addThisLevelToNotesDatabaseToolStripMenuItem.Click += new System.EventHandler(this.addThisLevelToNotesDatabaseToolStripMenuItem_Click);
             // 
@@ -4896,7 +4896,7 @@ namespace LAZYSHELL
             this.eventExit.AutoSize = false;
             this.eventExit.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventExit.Hexadecimal = false;
-            this.eventExit.Location = new System.Drawing.Point(578, 2);
+            this.eventExit.Location = new System.Drawing.Point(580, 2);
             this.eventExit.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -5146,6 +5146,8 @@ namespace LAZYSHELL
             // 
             // allToolStripMenuItem
             // 
+            this.allToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("allToolStripMenuItem.Image")));
+            this.allToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
             this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.allToolStripMenuItem.Text = "Import Level Data...";
@@ -5153,6 +5155,8 @@ namespace LAZYSHELL
             // 
             // importArchitectureToolStripMenuItem
             // 
+            this.importArchitectureToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importArchitectureToolStripMenuItem.Image")));
+            this.importArchitectureToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importArchitectureToolStripMenuItem.Name = "importArchitectureToolStripMenuItem";
             this.importArchitectureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importArchitectureToolStripMenuItem.Text = "Import Architecture...";
@@ -5165,6 +5169,8 @@ namespace LAZYSHELL
             // 
             // arraysToolStripMenuItem1
             // 
+            this.arraysToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("arraysToolStripMenuItem1.Image")));
+            this.arraysToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.arraysToolStripMenuItem1.Name = "arraysToolStripMenuItem1";
             this.arraysToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.arraysToolStripMenuItem1.Text = "Import Arrays...";
@@ -5172,6 +5178,8 @@ namespace LAZYSHELL
             // 
             // graphicSetsToolStripMenuItem1
             // 
+            this.graphicSetsToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("graphicSetsToolStripMenuItem1.Image")));
+            this.graphicSetsToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.graphicSetsToolStripMenuItem1.Name = "graphicSetsToolStripMenuItem1";
             this.graphicSetsToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.graphicSetsToolStripMenuItem1.Text = "Import Graphic Set...";
@@ -5197,6 +5205,8 @@ namespace LAZYSHELL
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
+            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(182, 22);
             this.toolStripMenuItem1.Text = "Export Level Data...";
@@ -5204,6 +5214,8 @@ namespace LAZYSHELL
             // 
             // exportArchitectureToolStripMenuItem
             // 
+            this.exportArchitectureToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportArchitectureToolStripMenuItem.Image")));
+            this.exportArchitectureToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportArchitectureToolStripMenuItem.Name = "exportArchitectureToolStripMenuItem";
             this.exportArchitectureToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.exportArchitectureToolStripMenuItem.Text = "Export Architecture...";
@@ -5216,6 +5228,8 @@ namespace LAZYSHELL
             // 
             // arraysToolStripMenuItem
             // 
+            this.arraysToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("arraysToolStripMenuItem.Image")));
+            this.arraysToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.arraysToolStripMenuItem.Name = "arraysToolStripMenuItem";
             this.arraysToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.arraysToolStripMenuItem.Text = "Export Arrays...";
@@ -5223,6 +5237,8 @@ namespace LAZYSHELL
             // 
             // graphicSetsToolStripMenuItem
             // 
+            this.graphicSetsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("graphicSetsToolStripMenuItem.Image")));
+            this.graphicSetsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.graphicSetsToolStripMenuItem.Name = "graphicSetsToolStripMenuItem";
             this.graphicSetsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.graphicSetsToolStripMenuItem.Text = "Export Graphic Sets...";
@@ -5230,6 +5246,8 @@ namespace LAZYSHELL
             // 
             // exportLevelImagesToolStripMenuItem1
             // 
+            this.exportLevelImagesToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("exportLevelImagesToolStripMenuItem1.Image")));
+            this.exportLevelImagesToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportLevelImagesToolStripMenuItem1.Name = "exportLevelImagesToolStripMenuItem1";
             this.exportLevelImagesToolStripMenuItem1.Size = new System.Drawing.Size(182, 22);
             this.exportLevelImagesToolStripMenuItem1.Text = "Export Level Images...";
@@ -5242,6 +5260,8 @@ namespace LAZYSHELL
             // 
             // dumpTextToolStripMenuItem
             // 
+            this.dumpTextToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.notepad;
+            this.dumpTextToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpTextToolStripMenuItem.Name = "dumpTextToolStripMenuItem";
             this.dumpTextToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.dumpTextToolStripMenuItem.Text = "Dump NPCs to Text...";
@@ -5275,6 +5295,8 @@ namespace LAZYSHELL
             // 
             // resetLevelMapToolStripMenuItem
             // 
+            this.resetLevelMapToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetLevelMapToolStripMenuItem.Image")));
+            this.resetLevelMapToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetLevelMapToolStripMenuItem.Name = "resetLevelMapToolStripMenuItem";
             this.resetLevelMapToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetLevelMapToolStripMenuItem.Text = "Reset level map";
@@ -5282,6 +5304,8 @@ namespace LAZYSHELL
             // 
             // resetLayerDataToolStripMenuItem
             // 
+            this.resetLayerDataToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetLayerDataToolStripMenuItem.Image")));
+            this.resetLayerDataToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetLayerDataToolStripMenuItem.Name = "resetLayerDataToolStripMenuItem";
             this.resetLayerDataToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetLayerDataToolStripMenuItem.Text = "Reset layer data";
@@ -5289,6 +5313,8 @@ namespace LAZYSHELL
             // 
             // resetNPCDataToolStripMenuItem
             // 
+            this.resetNPCDataToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetNPCDataToolStripMenuItem.Image")));
+            this.resetNPCDataToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetNPCDataToolStripMenuItem.Name = "resetNPCDataToolStripMenuItem";
             this.resetNPCDataToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetNPCDataToolStripMenuItem.Text = "Reset NPCs";
@@ -5296,6 +5322,8 @@ namespace LAZYSHELL
             // 
             // resetEventDataToolStripMenuItem
             // 
+            this.resetEventDataToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetEventDataToolStripMenuItem.Image")));
+            this.resetEventDataToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetEventDataToolStripMenuItem.Name = "resetEventDataToolStripMenuItem";
             this.resetEventDataToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetEventDataToolStripMenuItem.Text = "Reset event fields";
@@ -5303,6 +5331,8 @@ namespace LAZYSHELL
             // 
             // resetExitDataToolStripMenuItem
             // 
+            this.resetExitDataToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetExitDataToolStripMenuItem.Image")));
+            this.resetExitDataToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetExitDataToolStripMenuItem.Name = "resetExitDataToolStripMenuItem";
             this.resetExitDataToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetExitDataToolStripMenuItem.Text = "Reset exit fields";
@@ -5310,6 +5340,8 @@ namespace LAZYSHELL
             // 
             // resetOverlapDataToolStripMenuItem
             // 
+            this.resetOverlapDataToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetOverlapDataToolStripMenuItem.Image")));
+            this.resetOverlapDataToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetOverlapDataToolStripMenuItem.Name = "resetOverlapDataToolStripMenuItem";
             this.resetOverlapDataToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetOverlapDataToolStripMenuItem.Text = "Reset overlaps";
@@ -5317,6 +5349,8 @@ namespace LAZYSHELL
             // 
             // resetTilemapModsToolStripMenuItem
             // 
+            this.resetTilemapModsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetTilemapModsToolStripMenuItem.Image")));
+            this.resetTilemapModsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetTilemapModsToolStripMenuItem.Name = "resetTilemapModsToolStripMenuItem";
             this.resetTilemapModsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetTilemapModsToolStripMenuItem.Text = "Reset tilemap mods";
@@ -5324,6 +5358,8 @@ namespace LAZYSHELL
             // 
             // resetSolidityModsToolStripMenuItem
             // 
+            this.resetSolidityModsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetSolidityModsToolStripMenuItem.Image")));
+            this.resetSolidityModsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetSolidityModsToolStripMenuItem.Name = "resetSolidityModsToolStripMenuItem";
             this.resetSolidityModsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetSolidityModsToolStripMenuItem.Text = "Reset solidity mods";
@@ -5336,6 +5372,8 @@ namespace LAZYSHELL
             // 
             // resetPaletteSetToolStripMenuItem
             // 
+            this.resetPaletteSetToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetPaletteSetToolStripMenuItem.Image")));
+            this.resetPaletteSetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetPaletteSetToolStripMenuItem.Name = "resetPaletteSetToolStripMenuItem";
             this.resetPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetPaletteSetToolStripMenuItem.Text = "Reset palette set";
@@ -5343,6 +5381,8 @@ namespace LAZYSHELL
             // 
             // resetGraphicSetToolStripMenuItem
             // 
+            this.resetGraphicSetToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetGraphicSetToolStripMenuItem.Image")));
+            this.resetGraphicSetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetGraphicSetToolStripMenuItem.Name = "resetGraphicSetToolStripMenuItem";
             this.resetGraphicSetToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetGraphicSetToolStripMenuItem.Text = "Reset graphic set";
@@ -5350,6 +5390,8 @@ namespace LAZYSHELL
             // 
             // resetTilesetsToolStripMenuItem
             // 
+            this.resetTilesetsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetTilesetsToolStripMenuItem.Image")));
+            this.resetTilesetsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetTilesetsToolStripMenuItem.Name = "resetTilesetsToolStripMenuItem";
             this.resetTilesetsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetTilesetsToolStripMenuItem.Text = "Reset tilesets";
@@ -5357,6 +5399,8 @@ namespace LAZYSHELL
             // 
             // resetTilemapsToolStripMenuItem
             // 
+            this.resetTilemapsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetTilemapsToolStripMenuItem.Image")));
+            this.resetTilemapsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetTilemapsToolStripMenuItem.Name = "resetTilemapsToolStripMenuItem";
             this.resetTilemapsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetTilemapsToolStripMenuItem.Text = "Reset tilemaps";
@@ -5364,6 +5408,8 @@ namespace LAZYSHELL
             // 
             // resetSolidityMapToolStripMenuItem
             // 
+            this.resetSolidityMapToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetSolidityMapToolStripMenuItem.Image")));
+            this.resetSolidityMapToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetSolidityMapToolStripMenuItem.Name = "resetSolidityMapToolStripMenuItem";
             this.resetSolidityMapToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetSolidityMapToolStripMenuItem.Text = "Reset solidity map";
@@ -5376,6 +5422,8 @@ namespace LAZYSHELL
             // 
             // resetAllComponentsToolStripMenuItem
             // 
+            this.resetAllComponentsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetAllComponentsToolStripMenuItem.Image")));
+            this.resetAllComponentsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetAllComponentsToolStripMenuItem.Name = "resetAllComponentsToolStripMenuItem";
             this.resetAllComponentsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.resetAllComponentsToolStripMenuItem.Text = "Reset all components";
@@ -5407,6 +5455,8 @@ namespace LAZYSHELL
             // 
             // clearLevelDataAll
             // 
+            this.clearLevelDataAll.Image = ((System.Drawing.Image)(resources.GetObject("clearLevelDataAll.Image")));
+            this.clearLevelDataAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearLevelDataAll.Name = "clearLevelDataAll";
             this.clearLevelDataAll.Size = new System.Drawing.Size(207, 22);
             this.clearLevelDataAll.Text = "Level Data...";
@@ -5419,6 +5469,8 @@ namespace LAZYSHELL
             // 
             // clearTilesetsAll
             // 
+            this.clearTilesetsAll.Image = ((System.Drawing.Image)(resources.GetObject("clearTilesetsAll.Image")));
+            this.clearTilesetsAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearTilesetsAll.Name = "clearTilesetsAll";
             this.clearTilesetsAll.Size = new System.Drawing.Size(207, 22);
             this.clearTilesetsAll.Text = "Tilesets...";
@@ -5426,6 +5478,8 @@ namespace LAZYSHELL
             // 
             // clearTilemapsAll
             // 
+            this.clearTilemapsAll.Image = ((System.Drawing.Image)(resources.GetObject("clearTilemapsAll.Image")));
+            this.clearTilemapsAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearTilemapsAll.Name = "clearTilemapsAll";
             this.clearTilemapsAll.Size = new System.Drawing.Size(207, 22);
             this.clearTilemapsAll.Text = "Tilemaps...";
@@ -5433,6 +5487,8 @@ namespace LAZYSHELL
             // 
             // clearPhysicalMapsAll
             // 
+            this.clearPhysicalMapsAll.Image = ((System.Drawing.Image)(resources.GetObject("clearPhysicalMapsAll.Image")));
+            this.clearPhysicalMapsAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearPhysicalMapsAll.Name = "clearPhysicalMapsAll";
             this.clearPhysicalMapsAll.Size = new System.Drawing.Size(207, 22);
             this.clearPhysicalMapsAll.Text = "Solidity Maps...";
@@ -5445,6 +5501,8 @@ namespace LAZYSHELL
             // 
             // unusedGraphicSetsToolStripMenuItem
             // 
+            this.unusedGraphicSetsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("unusedGraphicSetsToolStripMenuItem.Image")));
+            this.unusedGraphicSetsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.unusedGraphicSetsToolStripMenuItem.Name = "unusedGraphicSetsToolStripMenuItem";
             this.unusedGraphicSetsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.unusedGraphicSetsToolStripMenuItem.Text = "Unused graphic sets...";
@@ -5452,6 +5510,8 @@ namespace LAZYSHELL
             // 
             // unusedToolStripMenuItem
             // 
+            this.unusedToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("unusedToolStripMenuItem.Image")));
+            this.unusedToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.unusedToolStripMenuItem.Name = "unusedToolStripMenuItem";
             this.unusedToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.unusedToolStripMenuItem.Text = "Unused tilesets...";
@@ -5459,6 +5519,8 @@ namespace LAZYSHELL
             // 
             // unusedToolStripMenuItem1
             // 
+            this.unusedToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("unusedToolStripMenuItem1.Image")));
+            this.unusedToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.unusedToolStripMenuItem1.Name = "unusedToolStripMenuItem1";
             this.unusedToolStripMenuItem1.Size = new System.Drawing.Size(207, 22);
             this.unusedToolStripMenuItem1.Text = "Unused tilemaps...";
@@ -5466,6 +5528,8 @@ namespace LAZYSHELL
             // 
             // unusedToolStripMenuItem2
             // 
+            this.unusedToolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("unusedToolStripMenuItem2.Image")));
+            this.unusedToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.unusedToolStripMenuItem2.Name = "unusedToolStripMenuItem2";
             this.unusedToolStripMenuItem2.Size = new System.Drawing.Size(207, 22);
             this.unusedToolStripMenuItem2.Text = "Unused solidity maps...";
@@ -5473,6 +5537,8 @@ namespace LAZYSHELL
             // 
             // unusedToolStripMenuItem3
             // 
+            this.unusedToolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("unusedToolStripMenuItem3.Image")));
+            this.unusedToolStripMenuItem3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.unusedToolStripMenuItem3.Name = "unusedToolStripMenuItem3";
             this.unusedToolStripMenuItem3.Size = new System.Drawing.Size(207, 22);
             this.unusedToolStripMenuItem3.Text = "Unused (all components)...";
@@ -5485,6 +5551,8 @@ namespace LAZYSHELL
             // 
             // clearAllComponentsAll
             // 
+            this.clearAllComponentsAll.Image = ((System.Drawing.Image)(resources.GetObject("clearAllComponentsAll.Image")));
+            this.clearAllComponentsAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearAllComponentsAll.Name = "clearAllComponentsAll";
             this.clearAllComponentsAll.Size = new System.Drawing.Size(207, 22);
             this.clearAllComponentsAll.Text = "All Components (all)...";
@@ -5492,6 +5560,8 @@ namespace LAZYSHELL
             // 
             // clearAllComponentsCurrent
             // 
+            this.clearAllComponentsCurrent.Image = ((System.Drawing.Image)(resources.GetObject("clearAllComponentsCurrent.Image")));
+            this.clearAllComponentsCurrent.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearAllComponentsCurrent.Name = "clearAllComponentsCurrent";
             this.clearAllComponentsCurrent.Size = new System.Drawing.Size(207, 22);
             this.clearAllComponentsCurrent.Text = "All Components (current)...";

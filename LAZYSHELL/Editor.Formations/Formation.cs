@@ -70,7 +70,7 @@ namespace LAZYSHELL
                 if (formationUse[i])
                 {
                     // Get correct monster image
-                    int[] monster = Model.Monsters[formationMonster[i]].Pixels;
+                    int[] monster = Model.Monsters[formationMonster[i]].Pixels();
                     int elevation = Model.Monsters[formationMonster[i]].Elevation * 16;
                     for (int y = 0; y < 256; y++)
                     {

@@ -340,10 +340,25 @@ namespace LAZYSHELL
                     data[offset + i] = (byte)toSet[i];
                 }
             }
-
             catch
             {
                 MessageBox.Show("Error Setting byte[] at " + offset + "\ndata size: " + data.Length + "\nsubarray size: " + toSet.Length + "\nPlease report this", "LAZY SHELL");
+                throw new Exception();
+            }
+        }
+        public static void SetCharArray(char[] dst, int offset, char[] src)
+        {
+            try
+            {
+                for (int i = 0; i < src.Length; i++)
+                {
+                    dst[offset + i] = src[i];
+                }
+            }
+
+            catch
+            {
+                MessageBox.Show("Error Setting byte[] at " + offset + "\ndata size: " + dst.Length + "\nsubarray size: " + src.Length + "\nPlease report this", "LAZY SHELL");
                 throw new Exception();
             }
 
@@ -379,6 +394,12 @@ namespace LAZYSHELL
             }
 
             return true;
+        }
+        public static bool Compare(char[] a, char[] b)
+        {
+            if (a.Length != b.Length)
+                return false;
+            return Compare(a, b, 0, 0);
         }
         public static bool Compare(char[] a, char[] b, int loc_a, int loc_b)
         {
@@ -426,6 +447,13 @@ namespace LAZYSHELL
             int[] temp = new int[source.Length];
             source.CopyTo(temp, 0);
             return temp;
+        }
+        public static bool Empty(ushort[] source)
+        {
+            for (int i = 0; i < source.Length; i++)
+                if (source[i] != 0)
+                    return false;
+            return true;
         }
         public static bool Empty(byte[] source)
         {

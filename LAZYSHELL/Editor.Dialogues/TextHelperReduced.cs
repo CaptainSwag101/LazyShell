@@ -40,9 +40,8 @@ namespace LAZYSHELL
         private const string code0C = "delay";  // SURROUNDED BY {   }
         private const string code1C = "memNum..."; // no idea
 
-        public char[] DecodeText(char[] decode, bool symbols, int textType)
+        public char[] DecodeText(char[] decode, bool symbols, int textType, StringCollection keystrokes)
         {
-            StringCollection sc = textType == 0 ? settings.Keystrokes : settings.KeystrokesDesc;
             ArrayList arrayList = new ArrayList();
             bool lastBrace = true;
 
@@ -50,7 +49,7 @@ namespace LAZYSHELL
             {
                 if (symbols) // We are decoding to numbers
                 {
-                    if (sc[decode[i]] == "") // Is encoded character
+                    if (keystrokes[decode[i]] == "") // Is encoded character
                     {
                         switch ((byte)decode[i]) // Since the byte is encoded, it musts coorespond to one of these cases
                         // All case numbers are for decoding to text for the plain text
@@ -83,11 +82,11 @@ namespace LAZYSHELL
                         }
                     }
                     else // Not encoded character
-                        arrayList.Add(Convert.ToChar(sc[decode[i]]));
+                        arrayList.Add(Convert.ToChar(keystrokes[decode[i]]));
                 }
                 else // We are decoding to words
                 {
-                    if (sc[decode[i]] == "") // Current byte is encoded
+                    if (keystrokes[decode[i]] == "") // Current byte is encoded
                     {
                         lastBrace = true;
                         switch ((byte)decode[i])
@@ -138,7 +137,7 @@ namespace LAZYSHELL
                             arrayList.Add(']');
                     }
                     else
-                        arrayList.Add(Convert.ToChar(sc[decode[i]]));
+                        arrayList.Add(Convert.ToChar(keystrokes[decode[i]]));
                 }
             }
 
@@ -147,7 +146,7 @@ namespace LAZYSHELL
 
             return decodedStr;
         }
-        public char[] EncodeText(char[] array, bool symbols, int textType)
+        public char[] EncodeText(char[] array, bool symbols, int textType, StringCollection keystrokes)
         {
             bool openQuote = true;
             ArrayList arrayList = new ArrayList();
@@ -290,10 +289,7 @@ namespace LAZYSHELL
                         }
                     }
                     else
-                        if (textType == 0)
-                            arrayList.Add(StringIndex(settings.Keystrokes, array[i]));
-                        else if (textType == 1)
-                            arrayList.Add(StringIndex(settings.KeystrokesDesc, array[i]));
+                        arrayList.Add(StringIndex(keystrokes, array[i]));
                 }
             }
 

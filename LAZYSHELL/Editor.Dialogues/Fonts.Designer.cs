@@ -70,6 +70,9 @@
             this.insertIntoBattleDialogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
             this.fontType = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.numeralGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.numeralPalettesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.openKeystrokes = new System.Windows.Forms.ToolStripButton();
             this.saveKeystrokes = new System.Windows.Forms.ToolStripButton();
@@ -467,7 +470,7 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(174, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(174, 120);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // importToolStripMenuItem
@@ -516,6 +519,7 @@
             this.toolStrip7.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fontType,
+            this.toolStripDropDownButton1,
             this.toolStripSeparator1,
             this.openKeystrokes,
             this.saveKeystrokes,
@@ -543,6 +547,37 @@
             this.fontType.Name = "fontType";
             this.fontType.Size = new System.Drawing.Size(126, 25);
             this.fontType.SelectedIndexChanged += new System.EventHandler(this.fontType_SelectedIndexChanged);
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.numeralGraphicsToolStripMenuItem,
+            this.numeralPalettesToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.numerals;
+            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButton1.Text = "Battle Numerals";
+            // 
+            // numeralGraphicsToolStripMenuItem
+            // 
+            this.numeralGraphicsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
+            this.numeralGraphicsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.numeralGraphicsToolStripMenuItem.Name = "numeralGraphicsToolStripMenuItem";
+            this.numeralGraphicsToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
+            this.numeralGraphicsToolStripMenuItem.Text = "Numeral Graphics";
+            this.numeralGraphicsToolStripMenuItem.Click += new System.EventHandler(this.numeralGraphicsToolStripMenuItem_Click);
+            // 
+            // numeralPalettesToolStripMenuItem
+            // 
+            this.numeralPalettesToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.numeralPalettesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.numeralPalettesToolStripMenuItem.Name = "numeralPalettesToolStripMenuItem";
+            this.numeralPalettesToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
+            this.numeralPalettesToolStripMenuItem.Text = "Numeral Palettes";
+            this.numeralPalettesToolStripMenuItem.Click += new System.EventHandler(this.numeralPalettesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -694,5 +729,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.ToolStripMenuItem insertIntoBattleDialogueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem numeralGraphicsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem numeralPalettesToolStripMenuItem;
     }
 }

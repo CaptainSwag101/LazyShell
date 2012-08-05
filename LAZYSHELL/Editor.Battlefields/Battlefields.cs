@@ -163,11 +163,11 @@ namespace LAZYSHELL
         {
             if (paletteEditor == null)
             {
-                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSets[palette], 8, 2,6);
+                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSets[palette], 8, 2, 6);
                 paletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditor.Reload(new Function(PaletteUpdate), paletteSets[palette], 8, 2,6);
+                paletteEditor.Reload(new Function(PaletteUpdate), paletteSets[palette], 8, 2, 6);
         }
         private void LoadGraphicEditor()
         {
@@ -688,10 +688,15 @@ namespace LAZYSHELL
                 DrawHoverBox(e.Graphics);
 
             if (buttonToggleCartGrid.Checked)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxBattlefield.Size, new Size(16, 16), 1);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxBattlefield.Size, new Size(16, 16), 1, true);
 
             if (overlay.SelectTS != null)
-                overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
+            {
+                if (buttonToggleCartGrid.Checked)
+                    overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1, Color.Yellow);
+                else
+                    overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
+            }
         }
         private void pictureBoxBattlefield_MouseClick(object sender, MouseEventArgs e)
         {

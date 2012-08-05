@@ -113,7 +113,7 @@ namespace LAZYSHELL
             // 
             this.number.AutoSize = false;
             this.number.Hexadecimal = false;
-            this.number.Location = new System.Drawing.Point(223, 2);
+            this.number.Location = new System.Drawing.Point(225, 2);
             this.number.Maximum = new decimal(new int[] {
             1023,
             0,
@@ -525,6 +525,8 @@ namespace LAZYSHELL
             // 
             // animationsToolStripMenuItem
             // 
+            this.animationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("animationsToolStripMenuItem.Image")));
+            this.animationsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.animationsToolStripMenuItem.Name = "animationsToolStripMenuItem";
             this.animationsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.animationsToolStripMenuItem.Text = "Animation(s)...";
@@ -532,6 +534,8 @@ namespace LAZYSHELL
             // 
             // allMoldImagesToolStripMenuItem
             // 
+            this.allMoldImagesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("allMoldImagesToolStripMenuItem.Image")));
+            this.allMoldImagesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.allMoldImagesToolStripMenuItem.Name = "allMoldImagesToolStripMenuItem";
             this.allMoldImagesToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.allMoldImagesToolStripMenuItem.Text = "Sprite image(s)...";

@@ -67,6 +67,7 @@ namespace LAZYSHELL
             copy.Frames = new List<Frame>();
             foreach (Frame frame in this.Frames)
                 copy.Frames.Add(frame.Copy());
+            copy.Active = active;
             return copy;
         }
     }

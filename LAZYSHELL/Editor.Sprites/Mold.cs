@@ -79,8 +79,8 @@ namespace LAZYSHELL
                                 tTile.InitializeTile(sm, offset, gridplane, i);
                                 offset += tTile.TileSize;
                             }
-                            tTile.XCoord = (byte)(x + tTile.XCoord);
-                            tTile.YCoord = (byte)(y + tTile.YCoord);
+                            tTile.X = (byte)(x + tTile.X);
+                            tTile.Y = (byte)(y + tTile.Y);
                             tiles.Add(tTile);
                         }
                         offset = temp;
@@ -168,7 +168,7 @@ namespace LAZYSHELL
                 else
                 {
                     theTile = temp.Get16x16TilePixels();
-                    yc = temp.YCoord; xc = temp.XCoord; w = h = 16;
+                    yc = temp.Y; xc = temp.X; w = h = 16;
                 }
                 for (int y = 0; y < h; y++)
                 {
@@ -292,8 +292,8 @@ namespace LAZYSHELL
                         {
                             counter++; continue;
                         }
-                        copyDiffX = thisTileA.XCoord - tileA.XCoord;
-                        copyDiffY = thisTileA.YCoord - tileA.YCoord;
+                        copyDiffX = thisTileA.X - tileA.X;
+                        copyDiffY = thisTileA.Y - tileA.Y;
                         // first check to see if going to be making a copy of more than one, regardless of active quadrants
                         if (tileB.TileOffset != 0 &&
                             thisTileA.SubTiles[0] == tileA.SubTiles[0] &&
@@ -308,8 +308,8 @@ namespace LAZYSHELL
                             thisTileB.SubTiles[3] == tileB.SubTiles[3] &&
                             thisTileB.Mirror == tileB.Mirror &&
                             thisTileB.Invert == tileB.Invert &&
-                            copyDiffX == thisTileB.XCoord - tileB.XCoord &&
-                            copyDiffY == thisTileB.YCoord - tileB.YCoord)
+                            copyDiffX == thisTileB.X - tileB.X &&
+                            copyDiffY == thisTileB.Y - tileB.Y)
                         {
                             // v3.8: set TileOffset to 0 to prevent later molds from using as a copy
                             thisTileA.TileOffset = 0;
@@ -331,8 +331,8 @@ namespace LAZYSHELL
                                    thisTileC.SubTiles[2] == tileC.SubTiles[2] &&
                                    thisTileC.SubTiles[3] == tileC.SubTiles[3] &&
                                    thisTileC.Mirror == tileC.Mirror &&
-                                   copyDiffX == thisTileC.XCoord - tileC.XCoord &&
-                                   copyDiffY == thisTileC.YCoord - tileC.YCoord)
+                                   copyDiffX == thisTileC.X - tileC.X &&
+                                   copyDiffY == thisTileC.Y - tileC.Y)
                             {
                                 // stop adding copies if the tile doesn't have an offset
                                 // it is probably a copy itself, so we shouldn't add it
@@ -364,8 +364,8 @@ namespace LAZYSHELL
                             thisTileA.TileOffset = 0;
                             // we will be making a copy
                             copyOffset = tileA.TileOffset;
-                            copyDiffX = thisTileA.XCoord - tileA.XCoord;
-                            copyDiffY = thisTileA.YCoord - tileA.YCoord;
+                            copyDiffX = thisTileA.X - tileA.X;
+                            copyDiffY = thisTileA.Y - tileA.Y;
                             copySize++;
                             // move for next tile
                             thisCounter++;
@@ -411,8 +411,8 @@ namespace LAZYSHELL
                     Bits.SetBit(mold, offset, 2, tile.Mirror);
                     Bits.SetBit(mold, offset, 3, tile.Invert);
                     offset++;
-                    mold[offset] = (byte)(tile.YCoord ^ 0x80); offset++;
-                    mold[offset] = (byte)(tile.XCoord ^ 0x80); offset++;
+                    mold[offset] = (byte)(tile.Y ^ 0x80); offset++;
+                    mold[offset] = (byte)(tile.X ^ 0x80); offset++;
                     for (int s = 0; s < 4; s++)
                     {
                         if (tile.SubTiles[s] != 0)
@@ -580,8 +580,8 @@ namespace LAZYSHELL
             private byte yPlusOne; public byte YPlusOne { get { return yPlusOne; } set { yPlusOne = value; } }
             private byte yMinusOne; public byte YMinusOne { get { return yMinusOne; } set { yMinusOne = value; } }
 
-            private byte xCoord; public byte XCoord { get { return xCoord; } set { xCoord = value; } }
-            private byte yCoord; public byte YCoord { get { return yCoord; } set { yCoord = value; } }
+            private byte xCoord; public byte X { get { return xCoord; } set { xCoord = value; } }
+            private byte yCoord; public byte Y { get { return yCoord; } set { yCoord = value; } }
 
             public void InitializeTile(byte[] sm, int offset, bool gridplane, int tileNum)
             {
@@ -710,7 +710,24 @@ namespace LAZYSHELL
             public int[] Get16x16TilePixels()
             {
                 int[] pixels = new int[16 * 16];
-                if (subtiles == null) return pixels;
+                int color = 0;
+                if (subtiles == null)
+                    color = Color.Red.ToArgb();
+                if (Bits.Empty(subTiles))
+                    color = Color.Gray.ToArgb();
+                if (subtiles == null || Bits.Empty(subTiles))
+                {
+                    for (int i = 0; i < 16; i++)
+                    {
+                        pixels[i * 16 + i] = color; // UL to LR
+                        pixels[i * 16 + 15 - i] = color; // UR to LL
+                        pixels[i] = color; // top line
+                        pixels[i * 16] = color; // left line
+                        pixels[i * 16 + 15] = color; // right line
+                        pixels[15 * 16 + i] = color; // bottom line
+                    }
+                    return pixels;
+                }
                 for (int i = 0, a = 0, b = 0; i < 4; i++)
                 {
                     a = (i == 0) || (i == 2) ? 0 : 8;
@@ -775,8 +792,8 @@ namespace LAZYSHELL
                 {
                     empty.TileSize = 3;
                     empty.SubTiles = new ushort[4];
-                    empty.XCoord = 0x80;
-                    empty.YCoord = 0x80;
+                    empty.X = 0x80;
+                    empty.Y = 0x80;
                 }
                 return empty;
             }
@@ -791,8 +808,8 @@ namespace LAZYSHELL
                 copy.TileFormat = tileFormat;
                 copy.TileOffset = tileOffset;
                 copy.TileSize = tileSize;
-                copy.XCoord = xCoord;
-                copy.YCoord = yCoord;
+                copy.X = xCoord;
+                copy.Y = yCoord;
                 copy.YMinusOne = yMinusOne;
                 copy.YPlusOne = yPlusOne;
                 return copy;
@@ -801,8 +818,7 @@ namespace LAZYSHELL
         public Mold New(bool gridplane)
         {
             Mold empty = new Mold();
-            Tile tile = new Tile();
-            empty.Tiles.Add(tile.New(gridplane));
+            empty.Tiles.Add(new Mold.Tile().New(gridplane));
             empty.Gridplane = gridplane;
             return empty;
         }

@@ -177,7 +177,7 @@ namespace LAZYSHELL.ScriptsEditor
                     else
                         aq_option = 0;
 
-                    i += ScriptEnums.GetActionQueueOpcodeLength(aq_opcode, aq_option);
+                    i += ScriptEnums.GetActionOpcodeLength(aq_opcode, aq_option);
                 }
             }
             return len;
@@ -244,7 +244,7 @@ namespace LAZYSHELL.ScriptsEditor
             try
             {
                 EventScriptCommand esc = (EventScriptCommand)commands[index];
-                int len = esc.EventLength;
+                int len = esc.CommandLength;
                 commands.RemoveAt(index);
                 return len;
             }
@@ -264,7 +264,7 @@ namespace LAZYSHELL.ScriptsEditor
                 if (esc.IsActionQueueTrigger)
                 {
                     aqc = (ActionQueueCommand)esc.EmbeddedActionQueue.Commands[childIndex];
-                    len = aqc.QueueLength;
+                    len = aqc.CommandLength;
                     esc.EmbeddedActionQueue.RemoveAt(childIndex);
 
                 }
@@ -296,7 +296,7 @@ namespace LAZYSHELL.ScriptsEditor
             foreach (EventScriptCommand esc in commands)
             {
                 esc.Assemble();
-                offset += esc.EventLength;
+                offset += esc.CommandLength;
             }
             script = new byte[offset];
 
@@ -304,7 +304,7 @@ namespace LAZYSHELL.ScriptsEditor
             foreach (EventScriptCommand esc in commands)
             {
                 esc.EventData.CopyTo(script, offset);
-                offset += esc.EventLength;
+                offset += esc.CommandLength;
             }
         }
         public void UpdateAllOffsets(int delta, int conditionOffset)

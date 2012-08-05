@@ -305,13 +305,8 @@ namespace LAZYSHELL
             if (e.Index < 0 || e.Index > 55)
                 return;
 
-            // set the palette
-            int[] palette = new int[16];
-            for (int i = 0; i < 16; i++) // 16 colors in palette
-                palette[i] = Color.FromArgb(fontPalettes[2].Palettes[0][i]).ToArgb();
-
             // set the pixels
-            int[] temp = drawName.GetPreview(fontDialogue, palette, mapPoints[e.Index].Name, false);
+            int[] temp = drawName.GetPreview(fontDialogue, fontPalettes[2].Palettes[0], mapPoints[e.Index].Name, false);
             int[] pixels = new int[256 * 32];
 
             for (int y = 2, c = 10; c < 32; y++, c++)
@@ -401,6 +396,8 @@ namespace LAZYSHELL
             dOffset--;
             nameFreeSpace.Text = (0x3EFF1F - dOffset).ToString() + " characters left";
             nameFreeSpace.BackColor = dOffset > 0x3EFF1F ? Color.Red : SystemColors.Control;
+            //
+            SetWorldMapTextImage();
         }
         private void mapPointXCoord_ValueChanged(object sender, EventArgs e)
         {

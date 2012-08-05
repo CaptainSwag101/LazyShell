@@ -96,7 +96,7 @@ namespace LAZYSHELL
         }
         private void SetSpriteImage()
         {
-            spritePixels = npcProperties[0].CreateImage(3, true, (int)spriteName.SelectedIndex);
+            spritePixels = npcProperties[0].CreateImage(3, true, (int)spriteName.SelectedIndex, true);
             imageWidth = npcProperties[0].ImageWidth;
             imageHeight = npcProperties[0].ImageHeight;
             if (spritePixels.Length == 0) { spritePixels = new int[2]; imageWidth = 1; imageHeight = 1; }

@@ -25,7 +25,6 @@ namespace LAZYSHELL
         // main
         private delegate void Function();
         private byte[] data;
-        private State state = State.Instance;
         private Settings settings = Settings.Default;
         private Overlay overlay;
         private bool updating = false;

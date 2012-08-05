@@ -86,6 +86,7 @@ namespace LAZYSHELL
 
             this.pictureBoxPalette.Height = Math.Min((count * 8) - (start * 8), max * 8);
             this.panel7.Height = Math.Min((count * 8 + 4) - (start * 8), max * 8 + 4);
+            this.Height = Math.Max(446, 446 + panel7.Height - 68);
 
             InitializeColor();
             SetColorMapImage();
@@ -105,6 +106,7 @@ namespace LAZYSHELL
 
             this.pictureBoxPalette.Height = Math.Min((count * 8) - (start * 8), max * 8);
             this.panel7.Height = Math.Min((count * 8 + 4) - (start * 8), max * 8 + 4);
+            this.Height = Math.Max(446, 446 + panel7.Height - 68);
 
             InitializeColor();
             SetColorMapImage();

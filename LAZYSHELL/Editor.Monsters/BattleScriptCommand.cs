@@ -29,7 +29,7 @@ namespace LAZYSHELL.ScriptsEditor
             String[] names = new String[battleDialogues.Length];
 
             for (int i = 0; i < battleDialogues.Length; i++)
-                names[i] = battleDialogues[i].GetBattleDialogueStub();
+                names[i] = battleDialogues[i].GetStub();
 
             return names;
         }

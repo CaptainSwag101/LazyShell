@@ -635,14 +635,16 @@ namespace LAZYSHELL
         {
             if (spell.RawDescription == null)
                 return;
-            e.Graphics.DrawImage(Model.MenuBG, 0, 0);
+            if (descriptionFrame == null)
+            {
+                int[] bgPixels = Do.ImageToPixels(Model.MenuBG);
+                Do.DrawMenuFrame(bgPixels, 256, new Rectangle(0, 0, 15, 8), Model.MenuFrameGraphics, Model.FontPaletteMenu.Palette);
+                descriptionFrame = Do.PixelsToImage(bgPixels, 256, 256);
+            }
+            e.Graphics.DrawImage(descriptionFrame, 0, 0);
             if (descriptionText == null)
                 SetDescriptionText();
             e.Graphics.DrawImage(descriptionText, 0, 0);
-            if (descriptionFrame == null)
-                descriptionFrame = Do.PixelsToImage(
-                    Do.DrawMenuFrame(new Size(15, 8), Model.MenuFrameGraphics, Model.MenuFramePalette.Palette), 120, 64);
-            e.Graphics.DrawImage(descriptionFrame, 0, 0);
         }
         private void SetDescriptionText()
         {

@@ -71,11 +71,17 @@ namespace LAZYSHELL
         public char[] Name { get { return this.name; } set { this.name = value; } }
         public bool SetPsychoMsg(string value, bool symbols)
         {
-            this.psychoMsg = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 0);
+            this.psychoMsg = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 0, Settings.Default.Keystrokes);
             this.psychoMsgError = textHelperReduced.Error;
             return !psychoMsgError;
         }
-        public string GetPsychoMsg(bool symbols) { if (!psychoMsgError) return new string(textHelperReduced.DecodeText(psychoMsg, symbols, 0)); else return new string(psychoMsg); }
+        public string GetPsychoMsg(bool symbols)
+        {
+            if (!psychoMsgError) 
+                return new string(textHelperReduced.DecodeText(psychoMsg, symbols, 0, Settings.Default.Keystrokes));
+            else
+                return new string(psychoMsg);
+        }
         public char[] RawPsychoMsg { get { return this.psychoMsg; } }
         public bool PsychoMsgError { get { return this.psychoMsgError; } set { this.psychoMsgError = value; } }
         public ushort HP { get { return this.hp; } set { this.hp = value; } }
@@ -500,7 +506,6 @@ namespace LAZYSHELL
         private int moldX = 0;
         private int moldY = 0;
         public Image Image { get { return new Bitmap(CreateImage(currentFrame)); } }
-        public int[] Pixels { get { return CreatePixelBuffer(); } }
         public int MoldGridPlaneWidth { get { return moldX; } }
         public int MoldGridPlaneHeight { get { return moldY; } }
         public void nextFrame() { if (currentFrame >= maxFrame) { return; } currentFrame++; }
@@ -577,7 +582,7 @@ namespace LAZYSHELL
             }
             return (Image)image;
         }
-        private int[] CreatePixelBuffer()
+        public int[] Pixels()
         {
             int[] pixels = new int[256 * 256];
             Mold tMold;
@@ -622,6 +627,35 @@ namespace LAZYSHELL
                 t.Set8x8Tiles(Bits.GetByteArray(data, graphicOffset, 0x4000), palette, tMold.Gridplane);
             }
             return tMold.MoldPixels();
+        }
+        public int[] Shadow()
+        {
+            int num = index + 0x100;
+            int offset = num * 4 + 0x250000;
+            int graphicPalettePacket = Bits.GetShort(data, offset) & 0x1FF; offset++;
+            int graphicPalettePacketShift = (data[offset] & 0x0E) >> 1;
+
+            // set graphics
+            offset = graphicPalettePacket * 4 + 0x251800;
+            int bank = (int)(((data[offset] & 0x0F) << 16) + 0x280000);
+            int graphicOffset = (int)((Bits.GetShort(data, offset) & 0xFFF0) + bank); offset += 2;
+
+            // set palette to use
+            int paletteOffset = (int)(Bits.GetShort(data, offset) + 0x250000);
+            paletteOffset += graphicPalettePacketShift * 30;
+            int[] palette = new int[16];
+            int r, g, b;
+            double multiplier = 8; // 8;
+            ushort color = 0;
+            for (int i = 0; i < 16; i++) // 16 colors in palette
+            {
+                color = i == 0 ? (ushort)0 : (ushort)Bits.GetShort(data, i * 2 + paletteOffset - 2);
+                r = (byte)((color % 0x20) * multiplier);
+                g = (byte)(((color >> 5) % 0x20) * multiplier);
+                b = (byte)(((color >> 10) % 0x20) * multiplier);
+                palette[i] = Color.FromArgb(255, r, g, b).ToArgb();
+            }
+            return Do.GetPixelRegion(Model.NumeralGraphics, 0x20, palette, 16, 14, 0, 2, 2, 0);
         }
         private int[] CursorPixels()
         {

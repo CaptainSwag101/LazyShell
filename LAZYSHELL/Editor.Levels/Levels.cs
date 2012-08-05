@@ -49,7 +49,6 @@ namespace LAZYSHELL
         public bool UpdatingLevel { get { return updatingLevel; } set { updatingLevel = value; } }
         private bool fullUpdate = false; // Indicates that we need to do a complete update instead of a fast update
         private bool updatingProperties = false; // indicated whether to update or save properties
-        private Previewer.Previewer lp;
         // for the separate physical tile search window
         public NumericUpDown NPCMapHeader { get { return npcMapHeader; } set { npcMapHeader = value; } }
         public NumericUpDown NPCID { get { return npcID; } set { npcID = value; } }

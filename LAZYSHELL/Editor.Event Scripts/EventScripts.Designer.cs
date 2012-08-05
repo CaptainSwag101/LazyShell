@@ -53,9 +53,12 @@
             this.labelTitleA = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.CheckBox();
             this.commands = new System.Windows.Forms.ListBox();
+            this.categories_es = new System.Windows.Forms.ComboBox();
+            this.labelCommands = new System.Windows.Forms.Label();
             this.labelTitleB = new System.Windows.Forms.GroupBox();
             this.labelTitleC = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.categories_aq = new System.Windows.Forms.ComboBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.eventName = new System.Windows.Forms.ToolStripComboBox();
             this.eventNum = new LAZYSHELL.ToolStripNumericUpDown();
@@ -114,9 +117,6 @@
             this.EvtScrCollapseAll = new System.Windows.Forms.ToolStripButton();
             this.EventPreview = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.categories_es = new System.Windows.Forms.ComboBox();
-            this.categories_aq = new System.Windows.Forms.ComboBox();
-            this.labelCommands = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumB)).BeginInit();
@@ -495,6 +495,42 @@
             this.commands.TabIndex = 15;
             this.commands.SelectedIndexChanged += new System.EventHandler(this.commands_SelectedIndexChanged);
             // 
+            // categories_es
+            // 
+            this.categories_es.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categories_es.FormattingEnabled = true;
+            this.categories_es.Items.AddRange(new object[] {
+            "Objects",
+            "Joypad",
+            "Party members",
+            "Inventory",
+            "Battle",
+            "Levels",
+            "Menus",
+            "Dialogues",
+            "Events",
+            "Jump to",
+            "Screen effects",
+            "Audio playback",
+            "Memory",
+            "Memory $7000",
+            "Pause script",
+            "Return"});
+            this.categories_es.Location = new System.Drawing.Point(94, 0);
+            this.categories_es.Name = "categories_es";
+            this.categories_es.Size = new System.Drawing.Size(119, 21);
+            this.categories_es.TabIndex = 565;
+            this.categories_es.SelectedIndexChanged += new System.EventHandler(this.categories_es_SelectedIndexChanged);
+            // 
+            // labelCommands
+            // 
+            this.labelCommands.AutoSize = true;
+            this.labelCommands.Location = new System.Drawing.Point(6, 4);
+            this.labelCommands.Name = "labelCommands";
+            this.labelCommands.Size = new System.Drawing.Size(82, 13);
+            this.labelCommands.TabIndex = 413;
+            this.labelCommands.Text = "Select category";
+            // 
             // labelTitleB
             // 
             this.labelTitleB.Controls.Add(this.evtEffects);
@@ -527,6 +563,33 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(282, 29);
             this.panel1.TabIndex = 565;
+            // 
+            // categories_aq
+            // 
+            this.categories_aq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categories_aq.FormattingEnabled = true;
+            this.categories_aq.Items.AddRange(new object[] {
+            "Properties",
+            "Palette",
+            "Sprite sequence",
+            "Sprite animation",
+            "Shift x1 step",
+            "Shift isometric",
+            "Shift 1px units",
+            "Face direction",
+            "Shift to coords",
+            "Audio playback",
+            "Memory",
+            "Memory $700C",
+            "Jump to",
+            "Object memory",
+            "Pause script",
+            "Return"});
+            this.categories_aq.Location = new System.Drawing.Point(94, 0);
+            this.categories_aq.Name = "categories_aq";
+            this.categories_aq.Size = new System.Drawing.Size(119, 21);
+            this.categories_aq.TabIndex = 566;
+            this.categories_aq.SelectedIndexChanged += new System.EventHandler(this.categories_aq_SelectedIndexChanged);
             // 
             // toolStrip1
             // 
@@ -571,7 +634,7 @@
             this.eventNum.AutoSize = false;
             this.eventNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventNum.Hexadecimal = false;
-            this.eventNum.Location = new System.Drawing.Point(209, 1);
+            this.eventNum.Location = new System.Drawing.Point(211, 1);
             this.eventNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -762,6 +825,8 @@
             // 
             // importEventScriptsToolStripMenuItem
             // 
+            this.importEventScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importEventScriptsToolStripMenuItem.Image")));
+            this.importEventScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importEventScriptsToolStripMenuItem.Name = "importEventScriptsToolStripMenuItem";
             this.importEventScriptsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.importEventScriptsToolStripMenuItem.Text = "Import Event Scripts...";
@@ -769,6 +834,8 @@
             // 
             // importActionScriptsToolStripMenuItem
             // 
+            this.importActionScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importActionScriptsToolStripMenuItem.Image")));
+            this.importActionScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importActionScriptsToolStripMenuItem.Name = "importActionScriptsToolStripMenuItem";
             this.importActionScriptsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.importActionScriptsToolStripMenuItem.Text = "Import Action Scripts...";
@@ -791,6 +858,8 @@
             // 
             // exportEventScriptsToolStripMenuItem
             // 
+            this.exportEventScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportEventScriptsToolStripMenuItem.Image")));
+            this.exportEventScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportEventScriptsToolStripMenuItem.Name = "exportEventScriptsToolStripMenuItem";
             this.exportEventScriptsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.exportEventScriptsToolStripMenuItem.Text = "Export Event Scripts...";
@@ -798,6 +867,8 @@
             // 
             // exportActionScriptsToolStripMenuItem
             // 
+            this.exportActionScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportActionScriptsToolStripMenuItem.Image")));
+            this.exportActionScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportActionScriptsToolStripMenuItem.Name = "exportActionScriptsToolStripMenuItem";
             this.exportActionScriptsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.exportActionScriptsToolStripMenuItem.Text = "Export Action Scripts...";
@@ -810,6 +881,8 @@
             // 
             // dumpEventScriptTextToolStripMenuItem
             // 
+            this.dumpEventScriptTextToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dumpEventScriptTextToolStripMenuItem.Image")));
+            this.dumpEventScriptTextToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpEventScriptTextToolStripMenuItem.Name = "dumpEventScriptTextToolStripMenuItem";
             this.dumpEventScriptTextToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.dumpEventScriptTextToolStripMenuItem.Text = "Dump Event Script Text...";
@@ -817,6 +890,8 @@
             // 
             // dumpActionScriptTextToolStripMenuItem
             // 
+            this.dumpActionScriptTextToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dumpActionScriptTextToolStripMenuItem.Image")));
+            this.dumpActionScriptTextToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpActionScriptTextToolStripMenuItem.Name = "dumpActionScriptTextToolStripMenuItem";
             this.dumpActionScriptTextToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.dumpActionScriptTextToolStripMenuItem.Text = "Dump Action Script Text...";
@@ -847,6 +922,8 @@
             // 
             // clearEventScriptsToolStripMenuItem
             // 
+            this.clearEventScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearEventScriptsToolStripMenuItem.Image")));
+            this.clearEventScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearEventScriptsToolStripMenuItem.Name = "clearEventScriptsToolStripMenuItem";
             this.clearEventScriptsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.clearEventScriptsToolStripMenuItem.Text = "Clear Event Scripts...";
@@ -854,6 +931,8 @@
             // 
             // clearActionScriptsToolStripMenuItem
             // 
+            this.clearActionScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearActionScriptsToolStripMenuItem.Image")));
+            this.clearActionScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearActionScriptsToolStripMenuItem.Name = "clearActionScriptsToolStripMenuItem";
             this.clearActionScriptsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.clearActionScriptsToolStripMenuItem.Text = "Clear Action Scripts...";
@@ -924,12 +1003,12 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(192, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 26);
             // 
             // addThisToNotesDatabaseToolStripMenuItem
             // 
             this.addThisToNotesDatabaseToolStripMenuItem.Name = "addThisToNotesDatabaseToolStripMenuItem";
-            this.addThisToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.addThisToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.addThisToNotesDatabaseToolStripMenuItem.Text = "Add this to notes database...";
             // 
             // contextMenuStripGoto
@@ -1076,69 +1155,6 @@
             // toolTip1
             // 
             this.toolTip1.Active = false;
-            // 
-            // categories_es
-            // 
-            this.categories_es.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.categories_es.FormattingEnabled = true;
-            this.categories_es.Items.AddRange(new object[] {
-            "Objects",
-            "Joypad",
-            "Party members",
-            "Inventory",
-            "Battle",
-            "Levels",
-            "Menus",
-            "Dialogues",
-            "Events",
-            "Jump to",
-            "Screen effects",
-            "Audio playback",
-            "Memory",
-            "Memory $7000",
-            "Pause script",
-            "Return"});
-            this.categories_es.Location = new System.Drawing.Point(94, 0);
-            this.categories_es.Name = "categories_es";
-            this.categories_es.Size = new System.Drawing.Size(119, 21);
-            this.categories_es.TabIndex = 565;
-            this.categories_es.SelectedIndexChanged += new System.EventHandler(this.categories_es_SelectedIndexChanged);
-            // 
-            // categories_aq
-            // 
-            this.categories_aq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.categories_aq.FormattingEnabled = true;
-            this.categories_aq.Items.AddRange(new object[] {
-            "Properties",
-            "Palette",
-            "Sprite sequence",
-            "Sprite animation",
-            "Shift x1 step",
-            "Shift isometric",
-            "Shift 1px units",
-            "Face direction",
-            "Shift to coords",
-            "Audio playback",
-            "Memory",
-            "Memory $700C",
-            "Jump to",
-            "Object memory",
-            "Pause script",
-            "Return"});
-            this.categories_aq.Location = new System.Drawing.Point(94, 0);
-            this.categories_aq.Name = "categories_aq";
-            this.categories_aq.Size = new System.Drawing.Size(119, 21);
-            this.categories_aq.TabIndex = 566;
-            this.categories_aq.SelectedIndexChanged += new System.EventHandler(this.categories_aq_SelectedIndexChanged);
-            // 
-            // labelCommands
-            // 
-            this.labelCommands.AutoSize = true;
-            this.labelCommands.Location = new System.Drawing.Point(6, 4);
-            this.labelCommands.Name = "labelCommands";
-            this.labelCommands.Size = new System.Drawing.Size(82, 13);
-            this.labelCommands.TabIndex = 413;
-            this.labelCommands.Text = "Select category";
             // 
             // EventScripts
             // 

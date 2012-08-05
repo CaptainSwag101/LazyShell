@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
@@ -39,13 +40,14 @@ namespace LAZYSHELL
             }
         }
         public PictureBox PictureBox { get { return pictureBox; } set { pictureBox = value; } }
-        private State state = State.Instance;
+        public bool AutoUpdate { get { return autoUpdate.Checked; } set { autoUpdate.Checked = value; } }
         private Tileset tileset;
         private PaletteSet paletteSet;
         private Bitmap tilesetImage, priority1;
         private Overlay overlay;
         public TileEditor TileEditor;
         private int height { get { return tileset.Height * 16; } }
+        public bool Rails;
         // mouse
         private int zoom = 1;
         private bool mouseEnter = false;
@@ -64,7 +66,8 @@ namespace LAZYSHELL
         private string mouseOverObject;
         private string mouseDownObject;
         private Point mouseDownPosition;
-        private Point mousePosition;
+        public Point mousePosition;
+        public bool HiliteTile = false;
         private bool moving = false;
         // buffers and stacks
         private Bitmap selection;
@@ -86,6 +89,8 @@ namespace LAZYSHELL
             this.pictureBoxTilesetL1.Height = height;
             this.pictureBoxTilesetL2.Height = height;
             this.pictureBoxTilesetL3.Height = height;
+            if (this.tileset.Tilesets_Tiles[Layer] == null)
+                this.Layer = 0;
             LoadTileEditor();
             SetTileSetImage();
         }
@@ -99,6 +104,8 @@ namespace LAZYSHELL
             this.paletteSet = paletteSet;
             this.overlay = overlay;
             this.update = update;
+            if (this.tileset.Tilesets_Tiles[Layer] == null)
+                this.Layer = 0;
             LoadTileEditor();
             SetTileSetImage();
         }
@@ -115,10 +122,12 @@ namespace LAZYSHELL
         {
             if (tileset.Tilesets_Tiles[Layer] != null)
             {
-                int[] tileSetPixels = Do.TilesetToPixels(tileset.Tilesets_Tiles[Layer], 16, tileset.Height, 0, false);
-                int[] priority1Pixels = Do.TilesetToPixels(tileset.Tilesets_Tiles[Layer], 16, tileset.Height, 0, true);
-                tilesetImage = new Bitmap(Do.PixelsToImage(tileSetPixels, 256, tileset.Height * 16));
-                priority1 = new Bitmap(Do.PixelsToImage(priority1Pixels, 256, tileset.Height * 16));
+                int height = Layer < 2 ? tileset.Height : tileset.HeightL3;
+                int[] tileSetPixels = Do.TilesetToPixels(tileset.Tilesets_Tiles[Layer], 16, height, 0, false);
+                int[] priority1Pixels = Do.TilesetToPixels(tileset.Tilesets_Tiles[Layer], 16, height, 0, true);
+                tilesetImage = new Bitmap(Do.PixelsToImage(tileSetPixels, 256, height * 16));
+                priority1 = new Bitmap(Do.PixelsToImage(priority1Pixels, 256, height * 16));
+                pictureBox.Height = height * 16;
                 pictureBox.Invalidate();
             }
         }
@@ -132,6 +141,8 @@ namespace LAZYSHELL
         }
         private void LoadTileEditor()
         {
+            if (tileset.Tilesets_Tiles[Layer] == null)
+                return;
             switch (Layer)
             {
                 case 2: // layer 3
@@ -164,6 +175,11 @@ namespace LAZYSHELL
         }
         // editing
         private void DrawHoverBox(Graphics g)
+        {
+            Rectangle r = new Rectangle(mousePosition.X / 16 * 16 * zoom, mousePosition.Y / 16 * 16 * zoom, 16 * zoom, 16 * zoom);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(96, 0, 0, 0)), r);
+        }
+        public void DrawHiliteBox(Graphics g)
         {
             Rectangle r = new Rectangle(mousePosition.X / 16 * 16 * zoom, mousePosition.Y / 16 * 16 * zoom, 16 * zoom, 16 * zoom);
             g.FillRectangle(new SolidBrush(Color.FromArgb(96, 0, 0, 0)), r);
@@ -321,6 +337,115 @@ namespace LAZYSHELL
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
         }
+        // import/export
+        private void ImportTitle()
+        {
+            Layer = 0;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = LAZYSHELL.Properties.Settings.Default.LastRomPath;
+            openFileDialog1.Title = "Import Layer 1";
+            openFileDialog1.Filter = "Image files (*.gif,*.jpg,*.png)|*.gif;*.jpg;*.png";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+            if (openFileDialog1.FileName == null)
+                return;
+            Bitmap importL1 = new Bitmap(Image.FromFile(openFileDialog1.FileName));
+            if (importL1.Width != 256 || importL1.Height != 512)
+            {
+                MessageBox.Show(
+                    "The dimensions of the imported image must be exactly 256 x 512.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            int[] importL1pixels = Do.ImageToPixels(importL1, new Size(256, 512), new Rectangle(0, 0, 256, 512));
+            Layer = 1;
+            openFileDialog1.Title = "Import Layer 2";
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+            if (openFileDialog1.FileName == null)
+                return;
+            Bitmap importL2 = new Bitmap(Image.FromFile(openFileDialog1.FileName));
+            if (importL2.Width != 256 || importL2.Height != 512)
+            {
+                MessageBox.Show(
+                    "The dimensions of the imported image must be exactly 256 x 512.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            int[] importL2pixels = Do.ImageToPixels(importL2, new Size(256, 512), new Rectangle(0, 0, 256, 512));
+            // now combine the two into one pixel array
+            int[] importPixels = new int[256 * 1024];
+            for (int y = 0; y < 512; y++)
+            {
+                for (int x = 0; x < 256; x++)
+                {
+                    importPixels[y * 256 + x] = importL1pixels[y * 256 + x];
+                    importPixels[(y + 512) * 256 + x] = importL2pixels[y * 256 + x];
+                }
+            }
+            byte[] graphics = new byte[0x20000];
+            int[][] palettes = new int[8][];
+            for (int i = 0; i < 8; i++)
+                palettes[i] = paletteSet.Palettes[i];
+            int[] paletteIndexes = Do.PixelsToBPP(
+                importPixels, graphics,
+                new Size(256 / 8, 1024 / 8), palettes, 0x20);
+            if (paletteIndexes == null) return;
+            byte[] tileset = new byte[0x2000];
+            Do.CopyToTileset(graphics, tileset, palettes, paletteIndexes, true, false, 0x20, 2, new Size(256, 1024), 0);
+            Buffer.BlockCopy(tileset, 0, Model.TitleData, 0, 0x2000);
+            Buffer.BlockCopy(graphics, 0, Model.TitleData, 0x6C00, 0x4FE0);
+            Model.TitleTileSet = new Tileset(paletteSet, "title");
+            this.tileset = Model.TitleTileSet;
+        }
+        private void ImportTitleLogo()
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = LAZYSHELL.Properties.Settings.Default.LastRomPath;
+            openFileDialog1.Title = "Import title logo";
+            openFileDialog1.Filter = "Image files (*.gif,*.jpg,*.png)|*.gif;*.jpg;*.png";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+            if (openFileDialog1.FileName == null)
+                return;
+            Bitmap import = new Bitmap(Image.FromFile(openFileDialog1.FileName));
+            if (import.Width != 256 || import.Height != 96)
+            {
+                MessageBox.Show(
+                    "The dimensions of the imported image must be 256 x 96.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            byte[] graphics = new byte[0x3000];
+            byte[] gameTitle = new byte[0x1C00];
+            byte[] gameCopyright = new byte[0x1400];
+            int[] palette = paletteSet.Palettes[3];
+            Do.PixelsToBPP(
+                Do.ImageToPixels(import, new Size(256, 56), new Rectangle(0, 0, 256, 56)), gameTitle,
+                new Size(256 / 8, 56 / 8), palette, 0x20);
+            palette = paletteSet.Palettes[6];
+            Do.PixelsToBPP(
+                Do.ImageToPixels(import, new Size(256, 56), new Rectangle(0, 56, 256, 40)), gameCopyright,
+                new Size(256 / 8, 40 / 8), palette, 0x20);
+            Buffer.BlockCopy(gameTitle, 0, graphics, 0, 0x1C00);
+            Buffer.BlockCopy(gameCopyright, 0, graphics, 0x1C00, 0x1400);
+            byte[] tileset = new byte[0x300];
+            byte[] tilesetTitle = new byte[0x300];
+            byte[] tilesetCopyright = new byte[0x300];
+            byte[] temp = new byte[graphics.Length]; graphics.CopyTo(temp, 0);
+            Do.CopyToTileset(graphics, tilesetTitle, palette, 3, true, true, 0x20, 2, new Size(256, 96), 2);
+            Do.CopyToTileset(temp, tilesetCopyright, palette, 6, true, true, 0x20, 2, new Size(256, 96), 2);
+            Buffer.BlockCopy(tilesetTitle, 0, tileset, 0, 0x300);
+            Buffer.BlockCopy(tilesetCopyright, 0x1C0, tileset, 0x1C0, 0x140);
+            Buffer.BlockCopy(tileset, 0, Model.TitleData, 0xBBE0, 0x300);
+            Buffer.BlockCopy(graphics, 0, Model.TitleData, 0xBEE0, 0x1B80);
+            Model.TitleTileSet = new Tileset(paletteSet, "title");
+            this.tileset = Model.TitleTileSet;
+        }
         #endregion
         #region Event handlers
         // main
@@ -376,12 +501,22 @@ namespace LAZYSHELL
 
             if (mouseEnter)
                 DrawHoverBox(e.Graphics);
+            if (HiliteTile)
+                DrawHiliteBox(e.Graphics);
+
+            if (Rails)
+                overlay.DrawRailProperties(null, 16, 16, e.Graphics, 1);
 
             if (buttonToggleCartGrid.Checked)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBox.Size, new Size(16, 16), 1);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBox.Size, new Size(16, 16), 1, true);
 
             if (overlay.SelectTS != null)
-                overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
+            {
+                if (buttonToggleCartGrid.Checked)
+                    overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1, Color.Yellow);
+                else
+                    overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
+            }
         }
         private void pictureBoxTileset_MouseDown(object sender, MouseEventArgs e)
         {
@@ -580,6 +715,7 @@ namespace LAZYSHELL
             priority1ClearToolStripMenuItem.Enabled = !lockEditing.Checked;
             mirrorToolStripMenuItem.Enabled = !lockEditing.Checked;
             invertToolStripMenuItem.Enabled = !lockEditing.Checked;
+            importImageToolStripMenuItem.Visible = tileset.Type == "title";
         }
         private void priority1SetToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -604,6 +740,17 @@ namespace LAZYSHELL
         private void saveImageAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Do.Export(tilesetImage, "tileSet.png");
+        }
+        private void importImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Layer < 2)
+                ImportTitle();
+            else
+                ImportTitleLogo();
+            //
+            SetTileSetImage();
+            if (autoUpdate.Checked)
+                update.DynamicInvoke();
         }
         // editors
         private void buttonUpdate_Click(object sender, EventArgs e)

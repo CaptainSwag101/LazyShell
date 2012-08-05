@@ -11,7 +11,7 @@ namespace LAZYSHELL.Undo
         private Tilemap tilemap;
         public Tilemap Tilemap { get { return tilemap; } set { tilemap = value; } }
         private Point topLeft, bottomRight;
-        private State state = State.Instance;
+        private State state;
         private int[][] changes = new int[3][];
         private bool allLayers;
         private int layer;
@@ -20,6 +20,10 @@ namespace LAZYSHELL.Undo
         private bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
         public TileMapEditCommand(Levels updater, Tilemap tilemap, int layer, Point topLeft, Point bottomRight, int[][] changes, bool pasting, bool transparent, bool allLayers)
         {
+            if (updater != null)
+                state = State.Instance;
+            else
+                state = State.Instance2;
             this.updater = updater;
             this.tilemap = tilemap;
             this.allLayers = allLayers;

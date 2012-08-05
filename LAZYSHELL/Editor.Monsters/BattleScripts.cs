@@ -2178,7 +2178,7 @@ namespace LAZYSHELL
             panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
-            labelMemoryA.Text = "Decrement memory address";
+            labelMemoryA.Text = "Decrement mem addr";
             if (cmd.editable)
                 this.memory.Value = 0x7EE000 + cmd.CommandData[2];
         }
@@ -2188,7 +2188,7 @@ namespace LAZYSHELL
             panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
-            labelMemoryA.Text = "Increment memory address";
+            labelMemoryA.Text = "Increment mem addr";
             if (cmd.editable)
                 this.memory.Value = 0x7EE000 + cmd.CommandData[2];
         }
@@ -2226,12 +2226,16 @@ namespace LAZYSHELL
             panelDoOneOfThree.Visible = false; panelIfTargetValue.Visible = false; panelMemoryCompare.Visible = true;
             this.command = cmd;
 
-            labelMemoryB.Text = "If attack phase (7EE006) equals";
+            labelMemoryB.Text = "If attack phase =";
 
             if (cmd.editable)
-                comparison.Value = cmd.CommandData[2];
+            {
+                this.comparison.Value = cmd.CommandData[2];
+            }
             else
-                comparison.Value = 0;
+            {
+                this.comparison.Value = 0;
+            }
         }
         private void BatScrMemoryClearBits(BattleScriptCommand cmd)
         {

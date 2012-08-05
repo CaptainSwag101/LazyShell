@@ -24,7 +24,6 @@ namespace LAZYSHELL
         // main
         private delegate void Function();
         private Overlay overlay = new Overlay();
-        private State state = State.Instance;
         private bool updating = false;
         private Effect[] effects { get { return Model.Effects; } set { Model.Effects = value; } }
         private E_Animation[] animations { get { return Model.E_animations; } set { Model.E_animations = value; } }

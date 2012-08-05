@@ -1412,7 +1412,6 @@ namespace LAZYSHELL
 
                                 evtNumC.Value = (esc.EventData[2] * 2) + 0x7000;
                                 break;
-
                             default: break;
                         }
                     }
@@ -2022,48 +2021,18 @@ namespace LAZYSHELL
             return names;
         }
         // Editing
-        private void EditCommand(EventScriptCommand dest, bool insert)
-        {
-
-        }
-        private void EditCommand(ActionQueueCommand dest, bool insert)
-        {
-
-        }
         private void InsertEventCommand()
         {
-            byte[] temp;
-            int opcode;
-            int option;
-
-            opcode = Lists.EventListBoxOpcodes[categories_es.SelectedIndex][commands.SelectedIndex];
-            option = Lists.EventListBoxFDOpcodes[categories_es.SelectedIndex][commands.SelectedIndex];
-
-            temp = new byte[ScriptEnums.GetEventOpcodeLength(opcode, option)];
-            temp[0] = (byte)opcode;
-            if (temp.Length > 1)
-                temp[1] = (byte)option;
-            esc = new EventScriptCommand(temp, 0);
-
             ControlEventAsmMethod();
+            if (editedNode != null)
+                esc = esc.Copy(); // set as new fresh copy
             treeViewWrapper.InsertNode(esc);
         }
         private void InsertActionCommand()
         {
-            byte[] temp;
-            int opcode;
-            int option;
-
-            opcode = Lists.ActionListBoxOpcodes[categories_aq.SelectedIndex][commands.SelectedIndex];
-            option = Lists.ActionListBoxFDOpcodes[categories_aq.SelectedIndex][commands.SelectedIndex];
-
-            temp = new byte[ScriptEnums.GetActionQueueOpcodeLength(opcode, option)];
-            temp[0] = (byte)opcode;
-            if (temp.Length > 1)
-                temp[1] = (byte)option;
-            aqc = new ActionQueueCommand(temp, 0);
-
             ControlActionAsmMethod();
+            if (editedNode != null)
+                aqc = aqc.Copy(); // set as new fresh copy
             treeViewWrapper.InsertNode(aqc);
         }
         // Update offsets
@@ -2434,7 +2403,7 @@ namespace LAZYSHELL
                                 }
                             }
                         }
-                        if (command.Offset + command.EventLength > input || command.Offset >= input)
+                        if (command.Offset + command.CommandLength > input || command.Offset >= input)
                         {
                             index = script.Index;
                             treeViewWrapper.SelectNode(command);
@@ -2514,8 +2483,8 @@ namespace LAZYSHELL
         private void EventScriptTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (!updatingScript) return;
-            if (!EventScriptTree.Enabled)
-                return;
+            if (!EventScriptTree.Enabled) return;
+            if (eventScript.Commands.Count == 0) return;
             UpdateCommandData();
             // Set command/category listboxes based on selected node
             EventScriptCommand tempEsc;
@@ -2565,7 +2534,6 @@ namespace LAZYSHELL
         {
             if (!EventScriptTree.Enabled)
                 return;
-
             // Edit Event/ActionQueue
             EvtScrEditCommand_Click(null, null);
         }
@@ -2810,7 +2778,6 @@ namespace LAZYSHELL
 
             editedNode = EventScriptTree.SelectedNode;
             EventScriptTree.SelectedNode = treeViewWrapper.SelectedNode;
-
             treeViewWrapper.EditedNode = editedNode;
         }
         private void EvtScrCollapseAll_Click(object sender, EventArgs e)
@@ -2859,7 +2826,6 @@ namespace LAZYSHELL
             byte[] temp;
             int opcode;
             int option;
-
             if (!isActionSelected)
             {
                 opcode = Lists.EventListBoxOpcodes[categories_es.SelectedIndex][commands.SelectedIndex];
@@ -2875,13 +2841,12 @@ namespace LAZYSHELL
             {
                 opcode = Lists.ActionListBoxOpcodes[categories_aq.SelectedIndex][commands.SelectedIndex];
                 option = Lists.ActionListBoxFDOpcodes[categories_aq.SelectedIndex][commands.SelectedIndex];
-                temp = new byte[ScriptEnums.GetActionQueueOpcodeLength(opcode, option)];
+                temp = new byte[ScriptEnums.GetActionOpcodeLength(opcode, option)];
                 temp[0] = (byte)opcode;
                 if (temp.Length > 1)
                     temp[1] = (byte)option;
                 aqc = new ActionQueueCommand(temp, 0);
             }
-
             editedNode = null;  // the COMMAND PROPERTIES panel now contains a new node instead (2008-11-09)
             ResetAllEventControls();
             if (!isActionSelected)
@@ -3123,19 +3088,27 @@ namespace LAZYSHELL
                     if (tempEsc.IsActionQueueTrigger && isActionSelected)
                         InsertActionCommand();
                     // if inserting an event command
-                    else InsertEventCommand();
+                    else
+                        InsertEventCommand();
                 }
             }
             // if inserting action command to a blank action script
             else if (isActionScript)
                 InsertActionCommand();
             // if inserting event command to a blank event script
-            else InsertEventCommand();
+            else
+                InsertEventCommand();
             if (!isActionScript)
                 UpdateEventScriptsFreeSpace();
             else
                 UpdateActionScriptsFreeSpace();
             UpdateCommandData();
+            //
+            if (editedNode != null)
+            {
+                editedNode = EventScriptTree.SelectedNode;
+                treeViewWrapper.EditedNode = editedNode;
+            }
         }
         private void buttonApplyEvent_Click(object sender, EventArgs e)
         {
@@ -3284,7 +3257,6 @@ namespace LAZYSHELL
             clearElements.ShowDialog();
             if (clearElements.DialogResult == DialogResult.Cancel)
                 return;
-
             eventNum_ValueChanged(null, null);
         }
         private void clearAllActionScripts_Click(object sender, EventArgs e)
@@ -3368,7 +3340,7 @@ namespace LAZYSHELL
                                     aqc = (ActionQueueCommand)actionQueues[k];
                                     evtscr.Write("   " + (aqc.Offset).ToString("X6") + ": ");
                                     evtscr.Write("{" + BitConverter.ToString(aqc.EventData) + "}");
-                                    for (int l = aqc.QueueLength; l < 7; l++)
+                                    for (int l = aqc.CommandLength; l < 7; l++)
                                         evtscr.Write("   ");
                                     evtscr.Write(aqc.ToString() + "\n");
                                 }
@@ -3385,7 +3357,7 @@ namespace LAZYSHELL
                                     aqc = (ActionQueueCommand)actionQueues[k];
                                     evtscr.Write("   " + (aqc.Offset).ToString("X6") + ": ");
                                     evtscr.Write("{" + BitConverter.ToString(aqc.EventData) + "}");
-                                    for (int l = aqc.QueueLength; l < 7; l++)
+                                    for (int l = aqc.CommandLength; l < 7; l++)
                                         evtscr.Write("   ");
                                     evtscr.Write(aqc.ToString() + "\n");
                                 }
@@ -3394,7 +3366,7 @@ namespace LAZYSHELL
                         else
                         {
                             evtscr.Write("{" + BitConverter.ToString(esc.EventData) + "}");
-                            for (int k = esc.EventLength; k < 7; k++)
+                            for (int k = esc.CommandLength; k < 7; k++)
                                 evtscr.Write("   ");
 
                             evtscr.Write(esc.ToString() + "\n");
@@ -3433,7 +3405,7 @@ namespace LAZYSHELL
                             aqc = (ActionQueueCommand)scriptCmds[k];
                             actScr.Write((aqc.Offset).ToString("X6") + ": ");
                             actScr.Write("{" + BitConverter.ToString(aqc.EventData) + "}");
-                            for (int l = aqc.QueueLength; l < 7; l++)
+                            for (int l = aqc.CommandLength; l < 7; l++)
                                 actScr.Write("   ");
                             actScr.Write(aqc.ToString() + "\n");
                         }
@@ -3603,7 +3575,7 @@ namespace LAZYSHELL
                         {
                             if (action.Offset + action.EventData.Length > pointer || action.Offset >= pointer)
                             {
-                                if (command.Offset + command.EventLength > pointer || command.Offset >= pointer)
+                                if (command.Offset + command.CommandLength > pointer || command.Offset >= pointer)
                                 {
                                     index = script.Index;
                                     treeViewWrapper.SelectNode(command);
@@ -3615,7 +3587,7 @@ namespace LAZYSHELL
                             }
                         }
                     }
-                    if (command.Offset + command.EventLength > pointer || command.Offset >= pointer)
+                    if (command.Offset + command.CommandLength > pointer || command.Offset >= pointer)
                     {
                         index = script.Index;
                         treeViewWrapper.SelectNode(command);

@@ -150,11 +150,13 @@
             // 
             // panelMoldImage
             // 
+            this.panelMoldImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMoldImage.AutoScroll = true;
             this.panelMoldImage.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panelMoldImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelMoldImage.Controls.Add(this.pictureBoxE_Mold);
-            this.panelMoldImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMoldImage.Location = new System.Drawing.Point(102, 25);
             this.panelMoldImage.Name = "panelMoldImage";
             this.panelMoldImage.Size = new System.Drawing.Size(431, 260);
@@ -707,8 +709,9 @@
             // 
             // labelCoords
             // 
+            this.labelCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCoords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelCoords.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelCoords.Location = new System.Drawing.Point(102, 285);
             this.labelCoords.Name = "labelCoords";
             this.labelCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);

@@ -128,6 +128,8 @@
             // 
             // importSpellsToolStripMenuItem
             // 
+            this.importSpellsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importSpellsToolStripMenuItem.Image")));
+            this.importSpellsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importSpellsToolStripMenuItem.Name = "importSpellsToolStripMenuItem";
             this.importSpellsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.importSpellsToolStripMenuItem.Text = "Import Spells...";
@@ -135,6 +137,8 @@
             // 
             // importAttacksToolStripMenuItem
             // 
+            this.importAttacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importAttacksToolStripMenuItem.Image")));
+            this.importAttacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importAttacksToolStripMenuItem.Name = "importAttacksToolStripMenuItem";
             this.importAttacksToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.importAttacksToolStripMenuItem.Text = "Import Attacks...";
@@ -154,6 +158,8 @@
             // 
             // exportSpellsToolStripMenuItem
             // 
+            this.exportSpellsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportSpellsToolStripMenuItem.Image")));
+            this.exportSpellsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportSpellsToolStripMenuItem.Name = "exportSpellsToolStripMenuItem";
             this.exportSpellsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.exportSpellsToolStripMenuItem.Text = "Export Spells...";
@@ -161,6 +167,8 @@
             // 
             // exportAttacksToolStripMenuItem
             // 
+            this.exportAttacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportAttacksToolStripMenuItem.Image")));
+            this.exportAttacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportAttacksToolStripMenuItem.Name = "exportAttacksToolStripMenuItem";
             this.exportAttacksToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.exportAttacksToolStripMenuItem.Text = "Export Attacks...";
@@ -180,15 +188,19 @@
             // 
             // resetSpellToolStripMenuItem
             // 
+            this.resetSpellToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetSpellToolStripMenuItem.Image")));
+            this.resetSpellToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetSpellToolStripMenuItem.Name = "resetSpellToolStripMenuItem";
-            this.resetSpellToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.resetSpellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetSpellToolStripMenuItem.Text = "Reset spell";
             this.resetSpellToolStripMenuItem.Click += new System.EventHandler(this.resetSpellToolStripMenuItem_Click);
             // 
             // resetAttackToolStripMenuItem
             // 
+            this.resetAttackToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetAttackToolStripMenuItem.Image")));
+            this.resetAttackToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetAttackToolStripMenuItem.Name = "resetAttackToolStripMenuItem";
-            this.resetAttackToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.resetAttackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetAttackToolStripMenuItem.Text = "Reset attack";
             this.resetAttackToolStripMenuItem.Click += new System.EventHandler(this.resetAttackToolStripMenuItem_Click);
             // 
@@ -206,15 +218,19 @@
             // 
             // clearSpellsToolStripMenuItem
             // 
+            this.clearSpellsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearSpellsToolStripMenuItem.Image")));
+            this.clearSpellsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearSpellsToolStripMenuItem.Name = "clearSpellsToolStripMenuItem";
-            this.clearSpellsToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.clearSpellsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearSpellsToolStripMenuItem.Text = "Clear Spells...";
             this.clearSpellsToolStripMenuItem.Click += new System.EventHandler(this.clearSpellsToolStripMenuItem_Click);
             // 
             // clearAttacksToolStripMenuItem
             // 
+            this.clearAttacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearAttacksToolStripMenuItem.Image")));
+            this.clearAttacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearAttacksToolStripMenuItem.Name = "clearAttacksToolStripMenuItem";
-            this.clearAttacksToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.clearAttacksToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearAttacksToolStripMenuItem.Text = "Clear Attacks...";
             this.clearAttacksToolStripMenuItem.Click += new System.EventHandler(this.clearAttacksToolStripMenuItem_Click);
             // 

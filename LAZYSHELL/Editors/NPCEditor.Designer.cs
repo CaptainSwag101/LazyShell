@@ -284,9 +284,9 @@ namespace LAZYSHELL
             this.searchResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchResults.FormattingEnabled = true;
             this.searchResults.IntegralHeight = false;
-            this.searchResults.Location = new System.Drawing.Point(2, 67);
+            this.searchResults.Location = new System.Drawing.Point(2, 71);
             this.searchResults.Name = "searchResults";
-            this.searchResults.Size = new System.Drawing.Size(228, 484);
+            this.searchResults.Size = new System.Drawing.Size(228, 480);
             this.searchResults.TabIndex = 329;
             this.searchResults.SelectedIndexChanged += new System.EventHandler(this.searchResults_SelectedIndexChanged);
             // 
@@ -314,7 +314,7 @@ namespace LAZYSHELL
             this.npcNum.AutoSize = false;
             this.npcNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.npcNum.Hexadecimal = false;
-            this.npcNum.Location = new System.Drawing.Point(49, 2);
+            this.npcNum.Location = new System.Drawing.Point(51, 2);
             this.npcNum.Maximum = new decimal(new int[] {
             511,
             0,
@@ -338,7 +338,7 @@ namespace LAZYSHELL
             // spriteNameTextBox
             // 
             this.spriteNameTextBox.Name = "spriteNameTextBox";
-            this.spriteNameTextBox.Size = new System.Drawing.Size(200, 21);
+            this.spriteNameTextBox.Size = new System.Drawing.Size(200, 23);
             // 
             // searchSpriteNames
             // 
@@ -367,13 +367,13 @@ namespace LAZYSHELL
             // spriteName
             // 
             this.spriteName.AutoSize = false;
-            this.spriteName.DropDownHeight = 200;
+            this.spriteName.DropDownHeight = 300;
             this.spriteName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.spriteName.DropDownWidth = 400;
+            this.spriteName.DropDownWidth = 300;
             this.spriteName.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.spriteName.IntegralHeight = false;
             this.spriteName.Name = "spriteName";
-            this.spriteName.Size = new System.Drawing.Size(160, 21);
+            this.spriteName.Size = new System.Drawing.Size(158, 23);
             this.spriteName.SelectedIndexChanged += new System.EventHandler(this.spriteName_SelectedIndexChanged);
             // 
             // spriteNum
@@ -408,6 +408,7 @@ namespace LAZYSHELL
             this.editSprite.Name = "editSprite";
             this.editSprite.Size = new System.Drawing.Size(40, 22);
             this.editSprite.Text = " EDIT ";
+            this.editSprite.ToolTipText = "Edit sprite";
             this.editSprite.Click += new System.EventHandler(this.editSprite_Click);
             // 
             // panel2
@@ -593,7 +594,7 @@ namespace LAZYSHELL
             this.toolStrip3.Location = new System.Drawing.Point(2, 25);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(228, 42);
+            this.toolStrip3.Size = new System.Drawing.Size(228, 46);
             this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -603,7 +604,7 @@ namespace LAZYSHELL
             this.searchSpriteName.DropDownWidth = 400;
             this.searchSpriteName.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.searchSpriteName.Name = "searchSpriteName";
-            this.searchSpriteName.Size = new System.Drawing.Size(200, 21);
+            this.searchSpriteName.Size = new System.Drawing.Size(200, 23);
             this.searchSpriteName.SelectedIndexChanged += new System.EventHandler(this.searchSpriteName_SelectedIndexChanged);
             // 
             // label8

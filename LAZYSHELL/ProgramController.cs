@@ -8,7 +8,6 @@ namespace LAZYSHELL
     public class ProgramController
     {
         private Program App;
-                private State state = State.Instance;
         public bool DockEditors { get { return App.DockEditors; } set { App.DockEditors = value; } }
         // Constructor
         public ProgramController(Program app)
@@ -21,7 +20,8 @@ namespace LAZYSHELL
             if (App.OpenRomFile())
             {
                 Model.ClearModel();
-                state.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
+                State.Instance.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
+                State.Instance2.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
                 if (!VerifyRom())
                     return false;
                 return true;
@@ -36,7 +36,8 @@ namespace LAZYSHELL
             if (App.OpenRomFile(filename))
             {
                 Model.ClearModel();
-                state.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
+                State.Instance.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
+                State.Instance2.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
                 if (!VerifyRom())
                     return false;
                 return true;
@@ -55,7 +56,8 @@ namespace LAZYSHELL
         public void CloseRomFile()
         {
             Model.ClearModel();
-            state.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
+            State.Instance.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
+            State.Instance2.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
             App.CloseRomFile();
         }
         public bool VerifyRom()

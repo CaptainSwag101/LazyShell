@@ -12,7 +12,7 @@ namespace LAZYSHELL
         [NonSerialized()]
         private byte[] data;
         public override byte[] Data { get { return data; } set { data = value; } }
-        public override int Index { get { return index;} set { index = value;} }
+        public override int Index { get { return index; } set { index = value; } }
 
         #region Spell Stats
         private int index;
@@ -77,12 +77,18 @@ namespace LAZYSHELL
 
         public bool SetDescription(string value, bool symbols)
         {
-            this.description = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 1);
+            this.description = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 1, Settings.Default.KeystrokesMenu);
             this.descriptionError = textHelperReduced.Error;
 
             return !descriptionError;
         }
-        public string GetDescription(bool symbols) { if (!descriptionError) return new string(textHelperReduced.DecodeText(description, symbols, 1)); else return new string(description); }
+        public string GetDescription(bool symbols)
+        {
+            if (!descriptionError)
+                return new string(textHelperReduced.DecodeText(description, symbols, 1, Settings.Default.KeystrokesMenu));
+            else
+                return new string(description);
+        }
         public char[] RawDescription { get { return this.description; } set { this.description = value; } }
         public byte FPCost { get { return this.fpCost; } set { this.fpCost = value; } }
         public byte MagicPower { get { return this.magicPower; } set { this.magicPower = value; } }

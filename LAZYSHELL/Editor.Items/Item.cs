@@ -81,14 +81,16 @@ namespace LAZYSHELL
         }
         public bool SetDescription(string value, bool symbols)
         {
-            this.description = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 1);
+            this.description = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 1, Settings.Default.KeystrokesDesc);
             this.descriptionError = textHelperReduced.Error;
             return !descriptionError;
         }
         public string GetDescription(bool symbols)
         {
-            if (!descriptionError) return new string(textHelperReduced.DecodeText(description, symbols, 1));
-            else return new string(description);
+            if (!descriptionError)
+                return new string(textHelperReduced.DecodeText(description, symbols, 1, Settings.Default.KeystrokesDesc));
+            else 
+                return new string(description);
         }
         public char[] RawDescription { get { return this.description; } set { this.description = value; } }
         public ushort CoinValue { get { return this.coinValue; } set { this.coinValue = value; } }
@@ -455,6 +457,10 @@ namespace LAZYSHELL
                 Bits.SetByte(data, offset, weaponEndLevel1); offset++;
             }
             return retLength;
+        }
+        public override string ToString()
+        {
+            return new string(name);
         }
         public override void Clear()
         {

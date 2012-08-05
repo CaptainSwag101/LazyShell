@@ -9,43 +9,43 @@ namespace LAZYSHELL.ScriptsEditor.Commands
     public class ActionQueueCommand : EventActionCommand
     {
 
-        private byte[] queueData; public byte[] EventData { get { return this.queueData; } set { this.queueData = value; } }
+        private byte[] eventData; public byte[] EventData { get { return this.eventData; } set { this.eventData = value; } }
 
-        public int QueueLength { get { return this.queueData.Length; } }
+        public int CommandLength { get { return this.eventData.Length; } }
         private bool isEmbedded = false; public bool IsEmbedded { get { return this.isEmbedded; } set { this.isEmbedded = value; } }
         private bool set; public bool Set { get { return this.set; } set { this.set = value; } }
 
         protected override byte GetOpcode()
         {
-            if (this.queueData.Length > 0) return this.queueData[0]; else return 0; 
+            if (this.eventData.Length > 0) return this.eventData[0]; else return 0; 
         }
         protected override void SetOpcode(byte opcode)
         {
-            this.queueData[0] = opcode;
+            this.eventData[0] = opcode;
         }
         protected override byte GetOption()
         {
-            if (this.queueData.Length > 1) return this.queueData[1]; else return 0; 
+            if (this.eventData.Length > 1) return this.eventData[1]; else return 0; 
         }
         protected override void SetOption(byte option)
         {
-            this.queueData[1] = option; 
+            this.eventData[1] = option; 
         } 
 
-        public ActionQueueCommand(byte[] queueData, int offset)
+        public ActionQueueCommand(byte[] eventData, int offset)
         {
-            this.queueData = queueData;
+            this.eventData = eventData;
             this.offset = offset;
             this.originalOffset = offset;
             this.internalOffset = offset;
         }
         public void ModifyByte(int byteToSet, byte value)
         {
-            queueData[byteToSet] = value;
+            eventData[byteToSet] = value;
         }
         public void ModifyBit(int byteToSet, int bitToSet, bool bit)
         {
-            Bits.SetBit(queueData, byteToSet, bitToSet, bit);
+            Bits.SetBit(eventData, byteToSet, bitToSet, bit);
         }
         public override string ToString()
         {
@@ -68,7 +68,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
 
             conditionOffset &= 0xFFFF;
 
-            if (queueData[0] == 0xE9)
+            if (eventData[0] == 0xE9)
             {
                 pointer = ReadPointerSpecial(0);
                 if (pointer >= conditionOffset)
@@ -87,33 +87,33 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         }
         public override void WritePointerSpecial(int index, ushort write)
         {
-            if (queueData[0] != 0xE9)
+            if (eventData[0] != 0xE9)
                 throw new Exception("Not Command 0xE9");
 
             if (index == 0)
-                Bits.SetShort(queueData, 1, write);
+                Bits.SetShort(eventData, 1, write);
             else if (index == 1)
-                Bits.SetShort(queueData, 3, write);
+                Bits.SetShort(eventData, 3, write);
         }
         public override ushort ReadPointerSpecial(int index)
         {
-            if (queueData[0] != 0xE9)
+            if (eventData[0] != 0xE9)
                 throw new Exception("Not Command 0xE9");
             if (index == 0)
-                return Bits.GetShort(queueData, 1);
+                return Bits.GetShort(eventData, 1);
             else if (index == 1)
-                return Bits.GetShort(queueData, 3);
+                return Bits.GetShort(eventData, 3);
             return 0;
         }
         public override ushort ReadPointer()
         {
-            switch (queueData[0])
+            switch (eventData[0])
             {
                 case 0x3A:
                 case 0x3B:
                 case 0xE4:
                 case 0xE5:
-                    return Bits.GetShort(queueData, 4);
+                    return Bits.GetShort(eventData, 4);
                 case 0x3C:
                 case 0x3E:
                 case 0xE0:
@@ -123,7 +123,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xE6:
                 case 0xE7:
                 case 0xF8:
-                    return Bits.GetShort(queueData, 3);
+                    return Bits.GetShort(eventData, 3);
                 case 0x3F:
                 case 0xD8:
                 case 0xD9:
@@ -131,7 +131,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xDC:
                 case 0xDD:
                 case 0xDE:
-                    return Bits.GetShort(queueData, 2);
+                    return Bits.GetShort(eventData, 2);
                 case 0x3D:
                 case 0xD2:
                 case 0xD3:
@@ -144,17 +144,17 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xED:
                 case 0xEE:
                 case 0xEF:
-                    return Bits.GetShort(queueData, 1);
+                    return Bits.GetShort(eventData, 1);
                 case 0xE9:
                     throw new Exception("E9"); 
                 case 0xFD:
-                    switch (queueData[1])
+                    switch (eventData[1])
                     {
                         case 0x3D:
                         case 0x3F:
-                            return Bits.GetShort(queueData, 3);
+                            return Bits.GetShort(eventData, 3);
                         case 0x3E:
-                            return Bits.GetShort(queueData, 5);
+                            return Bits.GetShort(eventData, 5);
                         default:
                             return 0;
                     }
@@ -164,13 +164,13 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         }
         public override void WritePointer(ushort pointer)
         {
-            switch (queueData[0])
+            switch (eventData[0])
             {
                 case 0x3A:
                 case 0x3B:
                 case 0xE4:
                 case 0xE5: 
-                    Bits.SetShort(queueData, 4, pointer); break;
+                    Bits.SetShort(eventData, 4, pointer); break;
                 case 0x3C:
                 case 0x3E:
                 case 0xE0:
@@ -180,7 +180,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xE6:
                 case 0xE7:
                 case 0xF8: 
-                    Bits.SetShort(queueData, 3, pointer); break;
+                    Bits.SetShort(eventData, 3, pointer); break;
                 case 0x3F:
                 case 0xD8:
                 case 0xD9:
@@ -188,7 +188,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xDC:
                 case 0xDD:
                 case 0xDE: 
-                    Bits.SetShort(queueData, 2, pointer); break;
+                    Bits.SetShort(eventData, 2, pointer); break;
                 case 0x3D:
                 case 0xD2:
                 case 0xD3:
@@ -201,17 +201,17 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xED:
                 case 0xEE:
                 case 0xEF: 
-                    Bits.SetShort(queueData, 1, pointer); break;
+                    Bits.SetShort(eventData, 1, pointer); break;
                 case 0xE9:
                     throw new Exception("E9");
                 case 0xFD:
-                    switch (queueData[1])
+                    switch (eventData[1])
                     {
                         case 0x3D:
                         case 0x3F: 
-                            Bits.SetShort(queueData, 3, pointer); break;
+                            Bits.SetShort(eventData, 3, pointer); break;
                         case 0x3E: 
-                            Bits.SetShort(queueData, 5, pointer); break;
+                            Bits.SetShort(eventData, 5, pointer); break;
                         default:
                             break;
                     }
@@ -223,6 +223,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         public void ResetOriginalOffset()
         {
             this.originalOffset = this.offset;
+        }
+        public ActionQueueCommand Copy()
+        {
+            return new ActionQueueCommand(Bits.Copy(eventData), this.offset);
         }
     }
 }
