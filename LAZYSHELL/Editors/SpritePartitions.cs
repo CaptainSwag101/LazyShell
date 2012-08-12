@@ -15,7 +15,7 @@ namespace LAZYSHELL
         private int index { get { return (int)partitionNum.Value; } set { partitionNum.Value = value; } }
         private NPCSpritePartitions[] partitions;
         private NPCSpritePartitions partition { get { return partitions[index]; } set { partitions[index] = value; } }
-        private Bitmap previewImage;
+        //private Bitmap previewImage;
         private LevelNPCs levelNPCs { get { return level.Level.LevelNPCs; } }
         private List<NPC> npcs { get { return levelNPCs.Npcs; } }
         private bool updating;
@@ -307,8 +307,8 @@ namespace LAZYSHELL
         //
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            if (previewImage != null)
-                e.Graphics.DrawImage(previewImage, 0, 0);
+            //if (previewImage != null)
+            //    e.Graphics.DrawImage(previewImage, 0, 0);
         }
     }
 }

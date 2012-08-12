@@ -323,10 +323,10 @@ namespace LAZYSHELL
             portraits = new Bitmap[5];
             for (int i = 0; i < allyImages.Length; i++)
             {
-                int[] pixels = Model.NPCProperties[i].CreateImage(7, false, i, false);
-                int height = Model.NPCProperties[i].ImageHeight;
-                int width = Model.NPCProperties[i].ImageWidth;
-                allyImages[i] = Do.PixelsToImage(pixels, width, height);
+                Size size = new Size(0, 0);
+                Sprite sprite = Model.Sprites[Model.NPCProperties[i].Sprite];
+                int[] pixels = sprite.GetPixels(false, true, 0, 7, false, false, ref size);
+                allyImages[i] = Do.PixelsToImage(pixels, size.Width, size.Height);
                 //
                 pixels = new int[128 * 24];
                 int[] palette = Model.BattleMenuPalette.Palette;
@@ -340,7 +340,7 @@ namespace LAZYSHELL
                 statImages[i] = Do.PixelsToImage(pixels, 128, 24);
                 //
                 palette = Model.Sprites[Model.NPCProperties[i].Sprite].Palette;
-                pixels = Model.NPCProperties[i].CreateImage(0, true, i + 40, false, true, palette);
+                pixels = Model.Sprites[i + 40].GetPixels(true, false, 0, 0, true, false);
                 portraits[i] = Do.PixelsToImage(pixels, 256, 256);
             }
         }

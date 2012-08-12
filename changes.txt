@@ -1,5 +1,34 @@
 Major changes/additions are indicated by ***
 
+v3.11.1
+--------------------------------------
+Additions:
+*Dialogue: two new compression table indexes
+*Menus: sprite cursor included in preview image
+*Menus: load text in text editor by clicking on preview image
+
+Changes:
+*Levels: NPC sprites now draw to exact perfect coordinates
+*Menus: combined overworld and game select panels into one
+*Monsters: battlescript command list sorted alphabetically
+*Sprites: can now import more than 1 tile into tileset at once
+*Sprites: sequence list names displayed as functions for monster sprites
+
+Fixes:
+*Crash if draw sprite w/1+ palette index in several editors
+*Opening all editors at once not opening menus or mini-games
+*Animations: scrollbar was still moving when editing commands
+*Effects: frame duration should have a minimum of 1
+*Items: crash if first loaded item has no description
+*Levels: wrong behavior when loading preview
+*Levels: previewer nulling entrance event for levels
+*Levels: layer 3 tileset should be twice as big, some levels crashing
+*Menus: sprites in overworld menu not using correct index/sequence
+*Menus: changing mono/stereo graphics not updating the image
+*Palettes: greyscale not isolating top 5 bits of colors
+*Sprites: frame duration should have a minimum of 1
+
+
 v3.11.0 (2012-08-05)
 --------------------------------------
 Additions:

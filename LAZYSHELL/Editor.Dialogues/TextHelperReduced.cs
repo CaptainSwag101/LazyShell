@@ -40,14 +40,14 @@ namespace LAZYSHELL
         private const string code0C = "delay";  // SURROUNDED BY {   }
         private const string code1C = "memNum..."; // no idea
 
-        public char[] DecodeText(char[] decode, bool symbols, int textType, StringCollection keystrokes)
+        public char[] DecodeText(char[] decode, bool byteView, int textType, StringCollection keystrokes)
         {
             ArrayList arrayList = new ArrayList();
             bool lastBrace = true;
 
             for (int i = 0; i < decode.Length; i++) // For every character of text
             {
-                if (symbols) // We are decoding to numbers
+                if (byteView) // We are decoding to numbers
                 {
                     if (keystrokes[decode[i]] == "") // Is encoded character
                     {
@@ -146,7 +146,7 @@ namespace LAZYSHELL
 
             return decodedStr;
         }
-        public char[] EncodeText(char[] array, bool symbols, int textType, StringCollection keystrokes)
+        public char[] EncodeText(char[] array, bool byteView, int textType, StringCollection keystrokes)
         {
             bool openQuote = true;
             ArrayList arrayList = new ArrayList();
@@ -154,7 +154,7 @@ namespace LAZYSHELL
 
             for (int i = 0; i < array.Length; i++)
             {
-                if (symbols)
+                if (byteView)
                 {
                     if (array[i] == '[' ||
                         array[i] == '\x20' ||
@@ -232,7 +232,7 @@ namespace LAZYSHELL
                             arrayList.Add(StringIndex(settings.KeystrokesDesc, array[i]));
                     }
                 }
-                else //!symbols
+                else
                 {
                     if (array[i] == '[' ||
                         array[i] == '\x22' ||
@@ -374,7 +374,7 @@ namespace LAZYSHELL
                 if (temp != "" && Convert.ToChar(temp) == toTest) return true;
             return false;
         }
-        public bool VerifyCorrectSymbols(char[] toVerify, bool format)
+        public bool VerifyCorrectSymbols(char[] toVerify, bool byteView)
         {
             bool symbol = false, found = false;
             try
@@ -389,7 +389,7 @@ namespace LAZYSHELL
                             symbol = false;
                         found = true;
                     }
-                    if (format != symbol && found)
+                    if (byteView != symbol && found)
                         return false;
                 }
                 return true;

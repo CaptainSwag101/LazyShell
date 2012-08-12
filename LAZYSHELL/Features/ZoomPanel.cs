@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
 
@@ -37,8 +38,8 @@ namespace LAZYSHELL
         }
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
+            e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
             //
             Size size = new Size(pictureBox.Width / zoom, pictureBox.Height / zoom);
             Bitmap screenImage = new Bitmap(size.Width, size.Height);

@@ -151,7 +151,7 @@
             this.pictureBoxMonster.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pictureBoxMonster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBoxMonster.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBoxMonster.Location = new System.Drawing.Point(3, 17);
+            this.pictureBoxMonster.Location = new System.Drawing.Point(3, 16);
             this.pictureBoxMonster.Name = "pictureBoxMonster";
             this.pictureBoxMonster.Size = new System.Drawing.Size(250, 250);
             this.pictureBoxMonster.TabIndex = 220;
@@ -729,50 +729,50 @@
             this.listBoxCommands.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.listBoxCommands.FormattingEnabled = true;
             this.listBoxCommands.Items.AddRange(new object[] {
+            "Command disable",
+            "Command enable",
             "Do 1 attack",
             "Do 1 of 3 attacks",
-            "Do 1 spell",
             "Do 1 of 3 spells",
+            "Do 1 spell",
+            "Exit battle",
+            "Generate random # <",
+            "If attack phase =",
+            "If attacked",
+            "If attacked by command",
+            "If attacked by element",
+            "If attacked by item",
+            "If attacked by spell",
+            "If HP is below",
+            "If in formation",
+            "If memory bits clear",
+            "If memory bits set",
+            "If memory greater than",
+            "If memory less than",
+            "If only one alive",
+            "If target affected by",
+            "If target alive",
+            "If target dead",
+            "If target HP is below",
+            "If target not affected by",
+            "Memory clear",
+            "Memory clear bits",
+            "Memory decrement",
+            "Memory increment",
+            "Memory set bits",
             "Run battle dialogue",
             "Run battle event",
             "Run object sequence",
-            "Target set",
+            "Set items",
+            "Target call",
             "Target disable",
             "Target enable",
-            "Target remove",
-            "Target call",
-            "Target set invicibility",
             "Target null invincibility",
-            "Command disable",
-            "Command enable",
-            "Set items",
-            "Generate random # <",
-            "Memory increment",
-            "Memory decrement",
-            "Memory set bits",
-            "Memory clear bits",
-            "Memory clear",
-            "Exit battle",
+            "Target remove",
+            "Target set",
+            "Target set invicibility",
             "Wait 1 turn",
-            "Wait 1 turn, return all",
-            "If attacked by command",
-            "If attacked by spell",
-            "If attacked by item",
-            "If attacked by element",
-            "If attacked",
-            "If target HP is below",
-            "If target affected by",
-            "If target not affected by",
-            "If target alive",
-            "If target dead",
-            "If HP is below",
-            "If in formation",
-            "If only one alive",
-            "If memory >=",
-            "If memory <",
-            "If memory bits set",
-            "If memory bits clear",
-            "If attack phase ="});
+            "Wait 1 turn, return all"});
             this.listBoxCommands.Location = new System.Drawing.Point(96, 0);
             this.listBoxCommands.Name = "listBoxCommands";
             this.listBoxCommands.Size = new System.Drawing.Size(160, 21);

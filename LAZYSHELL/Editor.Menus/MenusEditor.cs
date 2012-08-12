@@ -14,11 +14,10 @@ namespace LAZYSHELL
     {
         public long Checksum;
         private Overworld overworld; public Overworld Overworld { get { return overworld; } set { overworld = value; } }
-        private GameSelect gameSelect; public GameSelect GameSelect { get { return gameSelect; } set { gameSelect = value; } }
         private Settings settings = Settings.Default;
         private TextHelperReduced textHelper = TextHelperReduced.Instance;
-        private int index { get { return menuTextName.SelectedIndex; } set { menuTextName.SelectedIndex = value; } }
-        private MenuTexts menuText { get { return Model.MenuTexts[index]; } set { Model.MenuTexts[index] = value; } }
+        public int Index { get { return menuTextName.SelectedIndex; } set { menuTextName.SelectedIndex = value; } }
+        private MenuTexts menuText { get { return Model.MenuTexts[Index]; } set { Model.MenuTexts[Index] = value; } }
         private bool updating;
         //
         public MenusEditor()
@@ -27,21 +26,13 @@ namespace LAZYSHELL
             settings.KeystrokesMenu[0x20] = "\x20";
             //
             InitializeComponent();
-            Do.AddShortcut(toolStrip1, Keys.Control | Keys.S, new EventHandler(save_Click));
+            Do.AddShortcut(toolStrip2, Keys.Control | Keys.S, new EventHandler(save_Click));
             LoadOverworldEditor();
-            LoadGameSelectEditor();
             //
             for (int i = 0; i < Model.MenuTexts.Length; i++)
-                this.menuTextName.Items.Add(Model.MenuTexts[i].GetMenuString(textCodeFormat.Checked));
-            this.index = 0;
+                this.menuTextName.Items.Add(Model.MenuTexts[i].GetMenuString(textView.Checked));
+            this.Index = 0;
             //
-            gameSelect.TopLevel = false;
-            gameSelect.Dock = DockStyle.Top;
-            //gameSelect.SetToolTips(toolTip1);
-            panel1.Controls.Add(gameSelect);
-            gameSelect.BringToFront();
-            //openGameSelect.Checked = true;
-            gameSelect.Visible = true;
             overworld.TopLevel = false;
             overworld.Dock = DockStyle.Fill;
             //overworld.SetToolTips(toolTip1);
@@ -59,7 +50,7 @@ namespace LAZYSHELL
         private void RefreshMenuText()
         {
             updating = true;
-            this.menuTextBox.Text = menuText.GetMenuString(textCodeFormat.Checked);
+            this.menuTextBox.Text = menuText.GetMenuString(textView.Checked);
             CalculateFreeSpace();
             updating = false;
         }
@@ -69,13 +60,6 @@ namespace LAZYSHELL
                 overworld = new Overworld(this);
             else
                 overworld.Reload(this);
-        }
-        private void LoadGameSelectEditor()
-        {
-            if (gameSelect == null)
-                gameSelect = new GameSelect(this);
-            else
-                gameSelect.Reload(this);
         }
         private int CalculateFreeSpace()
         {
@@ -122,7 +106,6 @@ namespace LAZYSHELL
             Bits.SetByteArray(Model.Data, 0x3EF000, temp);
             //Bits.SetShort(Model.Data, 0x3EF600, 0x344F);
             overworld.Assemble();
-            gameSelect.Assemble();
             Checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
                 Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers);
         }
@@ -164,7 +147,6 @@ namespace LAZYSHELL
                 return;
             }
         Close:
-            gameSelect.Close();
             overworld.Close();
         }
         private void menuTextNum_ValueChanged(object sender, EventArgs e)
@@ -208,24 +190,23 @@ namespace LAZYSHELL
                     menuTextBox.SelectionStart = tempSel + 2;
                 }
             }
-            if (textHelper.VerifyCorrectSymbols(this.menuTextBox.Text.ToCharArray(), !textCodeFormat.Checked))
+            if (textHelper.VerifyCorrectSymbols(this.menuTextBox.Text.ToCharArray(), !textView.Checked))
             {
-                menuText.SetMenuString(menuTextBox.Text, textCodeFormat.Checked);
+                menuText.SetMenuString(menuTextBox.Text, textView.Checked);
                 menuText.Error = textHelper.Error;
                 updating = true;
-                int index = this.index;
+                int index = this.Index;
                 menuTextName.Items.RemoveAt(index);
                 menuTextName.Items.Insert(index, menuTextBox.Text);
                 menuTextName.Text = menuTextBox.Text;
                 menuTextName.Invalidate();
-                this.index = index;
+                this.Index = index;
                 updating = false;
             }
             CalculateFreeSpace();
             overworld.Picture.Invalidate();
-            gameSelect.Picture.Invalidate();
         }
-        private void textCodeFormat_CheckedChanged(object sender, EventArgs e)
+        private void textView_CheckedChanged(object sender, EventArgs e)
         {
 
         }

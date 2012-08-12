@@ -277,7 +277,7 @@
             // labelEvtA
             // 
             this.labelEvtA.AutoSize = true;
-            this.labelEvtA.Location = new System.Drawing.Point(9, 23);
+            this.labelEvtA.Location = new System.Drawing.Point(6, 23);
             this.labelEvtA.Name = "labelEvtA";
             this.labelEvtA.Size = new System.Drawing.Size(19, 13);
             this.labelEvtA.TabIndex = 397;
@@ -301,7 +301,7 @@
             // labelEvtD
             // 
             this.labelEvtD.AutoSize = true;
-            this.labelEvtD.Location = new System.Drawing.Point(141, 65);
+            this.labelEvtD.Location = new System.Drawing.Point(138, 65);
             this.labelEvtD.Name = "labelEvtD";
             this.labelEvtD.Size = new System.Drawing.Size(19, 13);
             this.labelEvtD.TabIndex = 400;
@@ -310,7 +310,7 @@
             // labelEvtC
             // 
             this.labelEvtC.AutoSize = true;
-            this.labelEvtC.Location = new System.Drawing.Point(9, 65);
+            this.labelEvtC.Location = new System.Drawing.Point(6, 65);
             this.labelEvtC.Name = "labelEvtC";
             this.labelEvtC.Size = new System.Drawing.Size(19, 13);
             this.labelEvtC.TabIndex = 400;
@@ -319,7 +319,7 @@
             // labelEvtB
             // 
             this.labelEvtB.AutoSize = true;
-            this.labelEvtB.Location = new System.Drawing.Point(9, 44);
+            this.labelEvtB.Location = new System.Drawing.Point(6, 44);
             this.labelEvtB.Name = "labelEvtB";
             this.labelEvtB.Size = new System.Drawing.Size(19, 13);
             this.labelEvtB.TabIndex = 400;
@@ -342,6 +342,7 @@
             // evtEffects
             // 
             this.evtEffects.CheckOnClick = true;
+            this.evtEffects.ColumnWidth = 132;
             this.evtEffects.Enabled = false;
             this.evtEffects.FormattingEnabled = true;
             this.evtEffects.Location = new System.Drawing.Point(6, 20);
@@ -354,7 +355,7 @@
             // labelEvtF
             // 
             this.labelEvtF.AutoSize = true;
-            this.labelEvtF.Location = new System.Drawing.Point(141, 22);
+            this.labelEvtF.Location = new System.Drawing.Point(138, 22);
             this.labelEvtF.Name = "labelEvtF";
             this.labelEvtF.Size = new System.Drawing.Size(19, 13);
             this.labelEvtF.TabIndex = 418;
@@ -363,7 +364,7 @@
             // labelEvtE
             // 
             this.labelEvtE.AutoSize = true;
-            this.labelEvtE.Location = new System.Drawing.Point(9, 22);
+            this.labelEvtE.Location = new System.Drawing.Point(6, 22);
             this.labelEvtE.Name = "labelEvtE";
             this.labelEvtE.Size = new System.Drawing.Size(19, 13);
             this.labelEvtE.TabIndex = 417;
@@ -634,7 +635,7 @@
             this.eventNum.AutoSize = false;
             this.eventNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventNum.Hexadecimal = false;
-            this.eventNum.Location = new System.Drawing.Point(211, 1);
+            this.eventNum.Location = new System.Drawing.Point(209, 1);
             this.eventNum.Maximum = new decimal(new int[] {
             255,
             0,

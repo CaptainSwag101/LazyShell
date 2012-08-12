@@ -72,20 +72,20 @@ namespace LAZYSHELL
         public char[] Name { get { return this.name; } set { this.name = value; } }
         private bool descriptionError = false; public bool DescriptionError { get { return this.descriptionError; } set { this.descriptionError = value; } }
         private TextHelperReduced textHelperReduced { get { return TextHelperReduced.Instance; } }
-        private int caretPositionSymbol = 0; public int CaretPositionSymbol { get { return this.caretPositionSymbol; } set { this.caretPositionSymbol = value; } }
-        private int caretPositionNotSymbol = 0; public int CaretPositionNotSymbol { get { return this.caretPositionNotSymbol; } set { this.caretPositionNotSymbol = value; } }
+        private int caretPositionByteView = 0; public int CaretPositionByteView { get { return this.caretPositionByteView; } set { this.caretPositionByteView = value; } }
+        private int caretPositionTextView = 0; public int CaretPositionTextView { get { return this.caretPositionTextView; } set { this.caretPositionTextView = value; } }
 
-        public bool SetDescription(string value, bool symbols)
+        public bool SetDescription(string value, bool byteView)
         {
-            this.description = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 1, Settings.Default.KeystrokesMenu);
+            this.description = textHelperReduced.EncodeText(value.ToCharArray(), byteView, 1, Settings.Default.KeystrokesMenu);
             this.descriptionError = textHelperReduced.Error;
 
             return !descriptionError;
         }
-        public string GetDescription(bool symbols)
+        public string GetDescription(bool byteView)
         {
             if (!descriptionError)
-                return new string(textHelperReduced.DecodeText(description, symbols, 1, Settings.Default.KeystrokesMenu));
+                return new string(textHelperReduced.DecodeText(description, byteView, 1, Settings.Default.KeystrokesMenu));
             else
                 return new string(description);
         }

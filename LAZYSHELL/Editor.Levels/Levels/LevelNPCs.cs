@@ -38,6 +38,19 @@ namespace LAZYSHELL
         private int index; public int Index { get { return index; } set { index = value; } }
 
         public int Count { get { return npcs.Count; } }
+        public int CountAll
+        {
+            get
+            {
+                int count = 0;
+                foreach (NPC npc in npcs)
+                {
+                    count++;
+                    count += npc.Clones.Count;
+                }
+                return count;
+            }
+        }
         public void RemoveCurrentNPC()
         {
             if (currentNPC < npcs.Count)
@@ -57,7 +70,7 @@ namespace LAZYSHELL
             e.NullNPC();
             e.X = (byte)p.X;
             e.Y = (byte)p.Y;
-            e.CoordXBit7 = true;
+            e.XBit7 = true;
             if (index < npcs.Count)
                 npcs.Insert(index, e);
             else
@@ -80,7 +93,7 @@ namespace LAZYSHELL
         public bool IsInstanceSelected { get { return npc.IsInstanceSelected; } set { npc.IsInstanceSelected = value; } }
 
         public int CurrentInstance { get { return npc.CurrentInstance; } set { npc.CurrentInstance = value; } }
-        public int SelectedInstance { get { return npc.SelectedInstance; } set { npc.SelectedInstance = value; } }
+        public int SelectedInstance { get { return npc.SelectedClone; } set { npc.SelectedClone = value; } }
         public int InstanceCount { get { return npc.Count; } }
         public void RemoveCurrentInstance()
         {
@@ -90,7 +103,7 @@ namespace LAZYSHELL
         {
             npc.AddNewInstance(index, p);
         }
-        public void AddNewInstance(int index, NPC.Instance e)
+        public void AddNewInstance(int index, NPC.Clone e)
         {
             npc.AddNewInstance(index, e);
         }
@@ -101,7 +114,7 @@ namespace LAZYSHELL
 
         private byte mapHeader; public byte MapHeader { get { return mapHeader; } set { mapHeader = value; } }
 
-        public byte InstanceAmount { get { return npc.InstanceAmount; } set { npc.InstanceAmount = value; } }
+        public byte InstanceAmount { get { return npc.CloneAmount; } set { npc.CloneAmount = value; } }
         public byte EngageType { get { return npc.EngageType; } set { npc.EngageType = value; } }
 
         public byte SpeedPlus { get { return npc.SpeedPlus; } set { npc.SpeedPlus = value; } }
@@ -142,18 +155,18 @@ namespace LAZYSHELL
         public byte PropertyA { get { return npc.PropertyA; } set { npc.PropertyA = value; } }
         public byte PropertyB { get { return npc.PropertyB; } set { npc.PropertyB = value; } }
         public byte PropertyC { get { return npc.PropertyC; } set { npc.PropertyC = value; } }
-        public bool CoordXBit7 { get { return npc.CoordXBit7; } set { npc.CoordXBit7 = value; } }
-        public bool CoordYBit7 { get { return npc.CoordYBit7; } set { npc.CoordYBit7 = value; } }
+        public bool CoordXBit7 { get { return npc.XBit7; } set { npc.XBit7 = value; } }
+        public bool CoordYBit7 { get { return npc.YBit7; } set { npc.YBit7 = value; } }
 
-        public byte InstanceCoordX { get { return npc.InstanceCoordX; } set { npc.InstanceCoordX = value; } }
-        public byte InstanceCoordY { get { return npc.InstanceCoordY; } set { npc.InstanceCoordY = value; } }
-        public byte InstanceCoordZ { get { return npc.InstanceCoordZ; } set { npc.InstanceCoordZ = value; } }
-        public byte InstanceFace { get { return npc.InstanceFace; } set { npc.InstanceFace = value; } }
-        public byte InstancePropertyA { get { return npc.InstancePropertyA; } set { npc.InstancePropertyA = value; } }
-        public byte InstancePropertyB { get { return npc.InstancePropertyB; } set { npc.InstancePropertyB = value; } }
-        public byte InstancePropertyC { get { return npc.InstancePropertyC; } set { npc.InstancePropertyC = value; } }
-        public bool InstanceCoordXBit7 { get { return npc.InstanceCoordXBit7; } set { npc.InstanceCoordXBit7 = value; } }
-        public bool InstanceCoordYBit7 { get { return npc.InstanceCoordYBit7; } set { npc.InstanceCoordYBit7 = value; } }
+        public byte InstanceCoordX { get { return npc.CloneX; } set { npc.CloneX = value; } }
+        public byte InstanceCoordY { get { return npc.CloneY; } set { npc.CloneY = value; } }
+        public byte InstanceCoordZ { get { return npc.CloneZ; } set { npc.CloneZ = value; } }
+        public byte InstanceFace { get { return npc.CloneFace; } set { npc.CloneFace = value; } }
+        public byte InstancePropertyA { get { return npc.ClonePropertyA; } set { npc.ClonePropertyA = value; } }
+        public byte InstancePropertyB { get { return npc.ClonePropertyB; } set { npc.ClonePropertyB = value; } }
+        public byte InstancePropertyC { get { return npc.ClonePropertyC; } set { npc.ClonePropertyC = value; } }
+        public bool InstanceCoordXBit7 { get { return npc.CloneXBit7; } set { npc.CloneXBit7 = value; } }
+        public bool InstanceCoordYBit7 { get { return npc.CloneYBit7; } set { npc.CloneYBit7 = value; } }
 
         public LevelNPCs(byte[] data, int index)
         {
@@ -193,7 +206,7 @@ namespace LAZYSHELL
 
                 offset += 12;
 
-                for (int i = 0; i < tNPC.InstanceAmount; i++)
+                for (int i = 0; i < tNPC.CloneAmount; i++)
                 {
                     offset += 4;
                 }
@@ -224,7 +237,7 @@ namespace LAZYSHELL
     [Serializable()]
     public class NPC
     {
-        public List<Instance> Instances = new List<Instance>();
+        public List<Clone> Clones = new List<Clone>();
         private int currentInstance = 0;
         public int CurrentInstance
         {
@@ -234,58 +247,58 @@ namespace LAZYSHELL
             }
             set
             {
-                instance = (Instance)Instances[value];
+                clone = (Clone)Clones[value];
                 this.currentInstance = value;
             }
         }
 
-        private int selectedInstance; public int SelectedInstance { get { return this.selectedInstance; } set { selectedInstance = value; } }
+        private int selectedClone; public int SelectedClone { get { return this.selectedClone; } set { selectedClone = value; } }
 
-        private Instance instance;
-        public Instance Instance_ { get { return instance; } }
+        private Clone clone;
+        public Clone Clone_ { get { return clone; } }
 
-        public int Count { get { return Instances.Count; } }
+        public int Count { get { return Clones.Count; } }
         public void RemoveCurrentInstance()
         {
-            if (currentInstance < Instances.Count)
+            if (currentInstance < Clones.Count)
             {
-                Instances.Remove(Instances[currentInstance]);
+                Clones.Remove(Clones[currentInstance]);
                 this.currentInstance = 0;
-                instanceAmount--;
+                cloneAmount--;
             }
         }
         public void AddNewInstance(int index, Point p)
         {
-            Instance e = new Instance();
-            e.NullInstance();
+            Clone e = new Clone();
+            e.NullClone();
             e.X = (byte)p.X;
             e.Y = (byte)p.Y;
-            if (index < Instances.Count)
-                Instances.Insert(index, e);
+            if (index < Clones.Count)
+                Clones.Insert(index, e);
             else
-                Instances.Add(e);
-            instanceAmount++;
+                Clones.Add(e);
+            cloneAmount++;
         }
-        public void AddNewInstance(int index, Instance copy)
+        public void AddNewInstance(int index, Clone copy)
         {
-            Instance e = new Instance();
-            e.CopyOverInstance(copy);
-            if (index < Instances.Count)
-                Instances.Insert(index, e);
+            Clone e = new Clone();
+            e.CopyOverClone(copy);
+            if (index < Clones.Count)
+                Clones.Insert(index, e);
             else
-                Instances.Add(e);
-            instanceAmount++;
+                Clones.Add(e);
+            cloneAmount++;
         }
         public void ReverseInstance(int index)
         {
-            Instances.Reverse(index, 2);
+            Clones.Reverse(index, 2);
         }
 
         private bool isInstanceSelected; public bool IsInstanceSelected { get { return isInstanceSelected; } set { isInstanceSelected = value; } }
         public bool Hilite = false;
         public int Index = 0;
 
-        private byte instanceAmount; public byte InstanceAmount { get { return instanceAmount; } set { instanceAmount = value; } }
+        private byte cloneAmount; public byte CloneAmount { get { return cloneAmount; } set { cloneAmount = value; } }
         private byte engageType; public byte EngageType { get { return engageType; } set { engageType = value; } }
 
         private byte speedPlus; public byte SpeedPlus { get { return speedPlus; } set { speedPlus = value; } }
@@ -327,23 +340,23 @@ namespace LAZYSHELL
         private byte propertyA; public byte PropertyA { get { return propertyA; } set { propertyA = value; } }
         private byte propertyB; public byte PropertyB { get { return propertyB; } set { propertyB = value; } }
         private byte propertyC; public byte PropertyC { get { return propertyC; } set { propertyC = value; } }
-        private bool coordXBit7; public bool CoordXBit7 { get { return coordXBit7; } set { coordXBit7 = value; } }
-        private bool coordYBit7; public bool CoordYBit7 { get { return coordYBit7; } set { coordYBit7 = value; } }
+        private bool xBit7; public bool XBit7 { get { return xBit7; } set { xBit7 = value; } }
+        private bool yBit7; public bool YBit7 { get { return yBit7; } set { yBit7 = value; } }
 
         // for the child NPC instance
-        public byte InstanceCoordX { get { return instance.X; } set { instance.X = value; } }
-        public byte InstanceCoordY { get { return instance.Y; } set { instance.Y = value; } }
-        public byte InstanceCoordZ { get { return instance.Z; } set { instance.Z = value; } }
-        public byte InstanceFace { get { return instance.Face; } set { instance.Face = value; } }
-        public byte InstancePropertyA { get { return instance.PropertyA; } set { instance.PropertyA = value; } }
-        public byte InstancePropertyB { get { return instance.PropertyB; } set { instance.PropertyB = value; } }
-        public byte InstancePropertyC { get { return instance.PropertyC; } set { instance.PropertyC = value; } }
-        public bool InstanceCoordXBit7 { get { return instance.CoordXBit7; } set { instance.CoordXBit7 = value; } }
-        public bool InstanceCoordYBit7 { get { return instance.CoordYBit7; } set { instance.CoordYBit7 = value; } }
+        public byte CloneX { get { return clone.X; } set { clone.X = value; } }
+        public byte CloneY { get { return clone.Y; } set { clone.Y = value; } }
+        public byte CloneZ { get { return clone.Z; } set { clone.Z = value; } }
+        public byte CloneFace { get { return clone.Face; } set { clone.Face = value; } }
+        public byte ClonePropertyA { get { return clone.PropertyA; } set { clone.PropertyA = value; } }
+        public byte ClonePropertyB { get { return clone.PropertyB; } set { clone.PropertyB = value; } }
+        public byte ClonePropertyC { get { return clone.PropertyC; } set { clone.PropertyC = value; } }
+        public bool CloneXBit7 { get { return clone.XBit7; } set { clone.XBit7 = value; } }
+        public bool CloneYBit7 { get { return clone.YBit7; } set { clone.YBit7 = value; } }
 
         public void NullNPC()
         {
-            instanceAmount = 0;
+            cloneAmount = 0;
             engageType = 0;
             speedPlus = 0;
             b2b3 = false;
@@ -371,8 +384,8 @@ namespace LAZYSHELL
             x = 0;
             y = 0;
             z = 0;
-            coordXBit7 = true;
-            coordYBit7 = false;
+            xBit7 = true;
+            yBit7 = false;
             face = 0;
             propertyA = 0;
             propertyB = 0;
@@ -380,7 +393,7 @@ namespace LAZYSHELL
         }
         public void CopyOverNPC(NPC copy)
         {
-            instanceAmount = copy.InstanceAmount;
+            cloneAmount = copy.CloneAmount;
             engageType = copy.EngageType;
             speedPlus = copy.SpeedPlus;
             b2b3 = copy.B2b3;
@@ -408,18 +421,18 @@ namespace LAZYSHELL
             x = copy.X;
             y = copy.Y;
             z = copy.Z;
-            coordXBit7 = copy.CoordXBit7;
-            coordYBit7 = copy.CoordYBit7;
+            xBit7 = copy.XBit7;
+            yBit7 = copy.YBit7;
             face = copy.Face;
             propertyA = copy.PropertyA;
             propertyB = copy.PropertyB;
             propertyC = copy.PropertyC;
-            Instance tInstance;
-            foreach (Instance i in copy.Instances)
+            Clone tInstance;
+            foreach (Clone i in copy.Clones)
             {
-                tInstance = new Instance();
-                tInstance.CopyOverInstance(i);
-                Instances.Add(tInstance);
+                tInstance = new Clone();
+                tInstance.CopyOverClone(i);
+                Clones.Add(tInstance);
             }
         }
 
@@ -428,10 +441,10 @@ namespace LAZYSHELL
             byte temp = 0;
             ushort tempShort = 0;
 
-            Instance tInstance;
+            Clone tInstance;
 
             temp = data[offset]; offset++;
-            instanceAmount = (byte)(temp & 0x0F);
+            cloneAmount = (byte)(temp & 0x0F);
             engageType = (byte)((temp & 0x30) >> 4);
             temp = data[offset]; offset++;
             speedPlus = (byte)(temp & 0x07);
@@ -493,26 +506,26 @@ namespace LAZYSHELL
 
             temp = data[offset]; offset++;
             x = (byte)(temp & 0x7F);
-            if ((temp & 0x80) == 0x80) coordXBit7 = true;
+            if ((temp & 0x80) == 0x80) xBit7 = true;
             temp = data[offset]; offset++;
             y = (byte)(temp & 0x7F);
-            if ((temp & 0x80) == 0x80) coordYBit7 = true;
+            if ((temp & 0x80) == 0x80) yBit7 = true;
             temp = data[offset]; offset++;
             z = (byte)(temp & 0x1F);
             face = (byte)((temp & 0xF0) >> 5);
 
-            for (int i = 0; i < instanceAmount; i++)
+            for (int i = 0; i < cloneAmount; i++)
             {
-                tInstance = new Instance();
+                tInstance = new Clone();
                 tInstance.InitializeInstance(data, offset, engageType);
-                Instances.Add(tInstance);
+                Clones.Add(tInstance);
 
                 offset += 4;
             }
         }
         public int AssembleNPC(byte[] data, int offset)
         {
-            Bits.SetByte(data, offset, instanceAmount);
+            Bits.SetByte(data, offset, cloneAmount);
             Bits.SetBitsByByte(data, offset, (byte)(engageType << 4), true); offset++;
 
             Bits.SetByte(data, offset, speedPlus);
@@ -566,43 +579,43 @@ namespace LAZYSHELL
             offset++;
 
             Bits.SetByte(data, offset, x);
-            Bits.SetBit(data, offset, 7, coordXBit7); offset++;
+            Bits.SetBit(data, offset, 7, xBit7); offset++;
             Bits.SetByte(data, offset, y);
-            Bits.SetBit(data, offset, 7, coordYBit7); offset++;
+            Bits.SetBit(data, offset, 7, yBit7); offset++;
             Bits.SetByte(data, offset, z);
             Bits.SetBitsByByte(data, offset, (byte)(face << 5), true); offset++;
 
-            for (int i = 0; i < instanceAmount; i++)
+            for (int i = 0; i < cloneAmount; i++)
             {
                 this.CurrentInstance = i;
-                offset = instance.AssembleInstance(data, offset, engageType);
+                offset = clone.AssembleInstance(data, offset, engageType);
             }
 
             return offset;
         }
 
         [Serializable()]
-        public class Instance : NPC
+        public class Clone : NPC
         {
-            public void NullInstance()
+            public void NullClone()
             {
                 x = 0;
                 y = 0;
                 z = 0;
-                coordXBit7 = true;
-                coordYBit7 = false;
+                xBit7 = true;
+                yBit7 = false;
                 face = 0;
                 propertyA = 0;
                 propertyB = 0;
                 propertyC = 0;
             }
-            public void CopyOverInstance(Instance copy)
+            public void CopyOverClone(Clone copy)
             {
                 x = copy.X;
                 y = copy.Y;
                 z = copy.Z;
-                coordXBit7 = copy.coordXBit7;
-                coordYBit7 = copy.coordYBit7;
+                xBit7 = copy.xBit7;
+                yBit7 = copy.yBit7;
                 face = copy.Face;
                 propertyA = copy.PropertyA;
                 propertyB = copy.PropertyB;
@@ -625,10 +638,10 @@ namespace LAZYSHELL
 
                 temp = data[offset]; offset++;
                 x = (byte)(temp & 0x7F);
-                if ((temp & 0x80) == 0x80) coordXBit7 = true;
+                if ((temp & 0x80) == 0x80) xBit7 = true;
                 temp = data[offset]; offset++;
                 y = (byte)(temp & 0x7F);
-                if ((temp & 0x80) == 0x80) coordYBit7 = true;
+                if ((temp & 0x80) == 0x80) yBit7 = true;
                 temp = data[offset]; offset++;
                 z = (byte)(temp & 0x1F);
                 face = (byte)((temp & 0xF0) >> 5);
@@ -645,9 +658,9 @@ namespace LAZYSHELL
                 offset++;
 
                 Bits.SetByte(data, offset, x);
-                Bits.SetBit(data, offset, 7, coordXBit7); offset++;
+                Bits.SetBit(data, offset, 7, xBit7); offset++;
                 Bits.SetByte(data, offset, y);
-                Bits.SetBit(data, offset, 7, coordYBit7); offset++;
+                Bits.SetBit(data, offset, 7, yBit7); offset++;
                 Bits.SetByte(data, offset, z);
                 Bits.SetBitsByByte(data, offset, (byte)(face << 5), true); offset++;
 

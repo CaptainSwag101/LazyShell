@@ -183,14 +183,14 @@ namespace LAZYSHELL.ScriptsEditor
 
             // redraw the treeview
             ChangeScript(script, false);
+            treeView.EnablePaint = true;
+            treeView.EndUpdate();
 
             // set the selected node
             int internalOffset = select == 0 ? tempA.InternalOffset : tempB.InternalOffset;
             SetSelectedNode(internalOffset);
             p.X = 0;
             Do.SetTreeViewScrollPos(treeView, p);
-            treeView.EnablePaint = true;
-            treeView.EndUpdate();
         }
         public void SetSelectedNode(int internalOffset)
         {

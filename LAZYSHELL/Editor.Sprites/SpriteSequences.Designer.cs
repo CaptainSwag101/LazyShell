@@ -110,15 +110,15 @@
             0,
             0});
             this.duration.Minimum = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
             this.duration.Name = "duration";
             this.duration.Size = new System.Drawing.Size(50, 17);
-            this.duration.Text = "0";
+            this.duration.Text = "1";
             this.duration.Value = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
@@ -533,7 +533,6 @@
         private System.Windows.Forms.ToolStripButton moveFrameBack;
         private System.Windows.Forms.ToolStripButton moveFrameFoward;
         private System.Windows.Forms.Panel panelFrames;
-        private System.Windows.Forms.ToolStripButton newSequence;
         private ToolStripNumericUpDown frameMold = new ToolStripNumericUpDown();
         private ToolStripNumericUpDown duration = new ToolStripNumericUpDown();
         private System.Windows.Forms.ToolStripButton reverseFrames;
@@ -541,5 +540,6 @@
         private LAZYSHELL.ToolStripCheckBox infinitePlayback;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private ToolStripCheckBox sequenceActive;
+        private System.Windows.Forms.ToolStripButton newSequence;
     }
 }

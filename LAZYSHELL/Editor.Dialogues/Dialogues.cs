@@ -31,7 +31,7 @@ namespace LAZYSHELL
         public ToolStripNumericUpDown DialogueNum { get { return dialogueNum; } set { dialogueNum = value; } }
         private DialoguePreview dialoguePreview;
         private TextHelper textHelper;
-        private bool textCodeFormat { get { return !byteOrTextView.Checked; } set { byteOrTextView.Checked = !value; } }
+        private bool byteView { get { return !textView.Checked; } set { textView.Checked = !value; } }
         public int index { get { return (int)dialogueNum.Value; } set { dialogueNum.Value = value; } }
         private bool updatingDialogue;
         private bool[] isDialogueChanged = new bool[4096];
@@ -70,16 +70,18 @@ namespace LAZYSHELL
             SetTilesetImage();
             // compression table
             updatingDialogue = true;
-            this.dct0E.Text = dialogueTables[0].GetDialogue(textCodeFormat); dct0E.Tag = 0;
-            this.dct0F.Text = dialogueTables[1].GetDialogue(textCodeFormat); dct0F.Tag = 1;
-            this.dct10.Text = dialogueTables[2].GetDialogue(textCodeFormat); dct10.Tag = 2;
-            this.dct11.Text = dialogueTables[3].GetDialogue(textCodeFormat); dct11.Tag = 3;
-            this.dct12.Text = dialogueTables[4].GetDialogue(textCodeFormat); dct12.Tag = 4;
-            this.dct13.Text = dialogueTables[5].GetDialogue(textCodeFormat); dct13.Tag = 5;
-            this.dct14.Text = dialogueTables[6].GetDialogue(textCodeFormat); dct14.Tag = 6;
-            this.dct15.Text = dialogueTables[7].GetDialogue(textCodeFormat); dct15.Tag = 7;
-            this.dct16.Text = dialogueTables[8].GetDialogue(textCodeFormat); dct16.Tag = 8;
-            this.dct17.Text = dialogueTables[9].GetDialogue(textCodeFormat); dct17.Tag = 9;
+            this.dct0E.Text = dialogueTables[0].GetDialogue(byteView); dct0E.Tag = 0;
+            this.dct0F.Text = dialogueTables[1].GetDialogue(byteView); dct0F.Tag = 1;
+            this.dct10.Text = dialogueTables[2].GetDialogue(byteView); dct10.Tag = 2;
+            this.dct11.Text = dialogueTables[3].GetDialogue(byteView); dct11.Tag = 3;
+            this.dct12.Text = dialogueTables[4].GetDialogue(byteView); dct12.Tag = 4;
+            this.dct13.Text = dialogueTables[5].GetDialogue(byteView); dct13.Tag = 5;
+            this.dct14.Text = dialogueTables[6].GetDialogue(byteView); dct14.Tag = 6;
+            this.dct15.Text = dialogueTables[7].GetDialogue(byteView); dct15.Tag = 7;
+            this.dct16.Text = dialogueTables[8].GetDialogue(byteView); dct16.Tag = 8;
+            this.dct17.Text = dialogueTables[9].GetDialogue(byteView); dct17.Tag = 9;
+            this.dct18.Text = dialogueTables[10].GetDialogue(byteView); dct18.Tag = 10;
+            this.dct19.Text = dialogueTables[11].GetDialogue(byteView); dct19.Tag = 11;
             updatingDialogue = false;
             // editors
             LoadFontEditor();
@@ -123,7 +125,7 @@ namespace LAZYSHELL
                 "To find a dialogue, use the \"SEARCH DIALOGUE...\" panel \n" +
                 "below.";
 
-            this.byteOrTextView.ToolTipText =
+            this.textView.ToolTipText =
                 "Enable or disable text viewing in the dialogue textbox. This \n" +
                 "is for easily identifying what the numerals in [] mean.";
 
@@ -143,8 +145,8 @@ namespace LAZYSHELL
                 dialogueTextBox.BackColor = SystemColors.Info;
             else
                 dialogueTextBox.BackColor = SystemColors.Window;
-            this.dialogueTextBox.Text = dialogue.GetDialogue(textCodeFormat);
-            this.dialogueTextBox.SelectionStart = dialogue.GetCaretPosition(textCodeFormat);
+            this.dialogueTextBox.Text = dialogue.GetDialogue(byteView);
+            this.dialogueTextBox.SelectionStart = dialogue.GetCaretPosition(byteView);
 
             int temp = CalculateFreeSpace();
             this.freeBytes.Text = temp.ToString() + " characters left";
@@ -178,7 +180,7 @@ namespace LAZYSHELL
 
                     while (temp < text.Length && text[temp] != ']')
                     {
-                        if (textCodeFormat)
+                        if (byteView)
                         {
                             if (!(text[temp] >= '0' && text[temp] <= '9'))
                                 fail = true;
@@ -210,7 +212,7 @@ namespace LAZYSHELL
             }
             if (preview && valid && !fail)
             {
-                dialogue.SetDialogue(dialogueTextBox.Text, textCodeFormat);
+                dialogue.SetDialogue(dialogueTextBox.Text, byteView);
                 int[] pixels = dialoguePreview.GetPreview(fontDialogue, fontTriangle, fontPalette.Palettes[1], fontPalette.Palettes[1], dialogue.RawDialogue, 16);
                 dialogueTextImage = new Bitmap(Do.PixelsToImage(pixels, 256, 56));
             }
@@ -257,7 +259,7 @@ namespace LAZYSHELL
         private int CalculateFreeTableSpace()
         {
             int used = 0;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < dialogueTables.Length; i++)
                 used += dialogueTables[i].DialogueLen + 1;
             int left = 0x40 - used;
             this.freeTableBytes.Text = "(" + left.ToString() + " characters left)";
@@ -323,8 +325,8 @@ namespace LAZYSHELL
             toInsert.CopyTo(0, newText, dialogueTextBox.SelectionStart, toInsert.Length);
             dialogueTextBox.Text.CopyTo(dialogueTextBox.SelectionStart, newText, dialogueTextBox.SelectionStart + toInsert.Length, this.dialogueTextBox.Text.Length - this.dialogueTextBox.SelectionStart);
 
-            dialogue.SetCaretPosition(this.dialogueTextBox.SelectionStart + toInsert.Length, textCodeFormat);
-            dialogue.SetDialogue(new string(newText), textCodeFormat);
+            dialogue.SetCaretPosition(this.dialogueTextBox.SelectionStart + toInsert.Length, byteView);
+            dialogue.SetDialogue(new string(newText), byteView);
             RefreshDialogueEditor();
             SetTextImage();
         }
@@ -348,7 +350,7 @@ namespace LAZYSHELL
 
                     while (temp < text.Length && text[temp] != ']')
                     {
-                        if (textCodeFormat)
+                        if (byteView)
                         {
                             if (!(text[temp] >= '0' && text[temp] <= '9'))
                                 fail = true;
@@ -379,7 +381,7 @@ namespace LAZYSHELL
                 }
             }
             if (preview && valid && !fail)
-                dialogueTables[(int)textBox.Tag].SetDialogue(textBox.Text, textCodeFormat);
+                dialogueTables[(int)textBox.Tag].SetDialogue(textBox.Text, byteView);
             CalculateFreeTableSpace();
         }
         // duplicate dialogues
@@ -472,7 +474,7 @@ namespace LAZYSHELL
 
             for (int i = 0; i < dialogues.Length; i++)
             {
-                string dialogue = dialogues[i].GetDialogue(textCodeFormat);
+                string dialogue = dialogues[i].GetDialogue(byteView);
                 int index = dialogue.IndexOf(textBoxSearch.Text, stringComparison);
                 if (index >= 0)
                 {
@@ -487,10 +489,10 @@ namespace LAZYSHELL
                     if (replaceAll)
                     {
                         dialogue = dialogue.Replace(textBoxSearch.Text, replaceWith);
-                        dialogues[i].SetDialogue(dialogue, textCodeFormat);
+                        dialogues[i].SetDialogue(dialogue, byteView);
                     }
                     dialogueSearch += "[" + dialogues[i].Index.ToString() + "]\n";
-                    dialogueSearch += dialogues[i].GetDialogue(textCodeFormat) + "\n\n";
+                    dialogueSearch += dialogues[i].GetDialogue(byteView) + "\n\n";
                 }
             }
             searchResults.Text = j.ToString() + " results...\n\n" + dialogueSearch;
@@ -702,7 +704,7 @@ namespace LAZYSHELL
         }
         private void textView_Click(object sender, EventArgs e)
         {
-            this.dialogueTextBox.Text = dialogue.GetDialogue(textCodeFormat);
+            this.dialogueTextBox.Text = dialogue.GetDialogue(byteView);
         }
         private void synchronizeDupes_CheckedChanged(object sender, EventArgs e)
         {
@@ -837,63 +839,63 @@ namespace LAZYSHELL
         // inserts
         private void newLine_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDialogueText("[1]");
             else
                 InsertIntoDialogueText("[newLine]");
         }
         private void newLineA_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDialogueText("[2]");
             else
                 InsertIntoDialogueText("[newLineInput]");
         }
         private void newPage_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDialogueText("[4]");
             else
                 InsertIntoDialogueText("[newPage]");
         }
         private void newPageA_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDialogueText("[3]");
             else
                 InsertIntoDialogueText("[newPageInput]");
         }
         private void endString_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDialogueText("[6]");
             else
                 InsertIntoDialogueText("[end]");
         }
         private void endStringA_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDialogueText("[0]");
             else
                 InsertIntoDialogueText("[endInput]");
         }
         private void pause60f_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDialogueText("[12]");
             else
                 InsertIntoDialogueText("[delay]");
         }
         private void pauseA_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDialogueText("[5]");
             else
                 InsertIntoDialogueText("[pauseInput]");
         }
         private void pauseFramesInsert_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDialogueText("[13][" + this.pauseFrameNum.Value.ToString() + "]");
             else
                 InsertIntoDialogueText("[FRAME DELAY][ " + this.pauseFrameNum.Value.ToString() + "]");
@@ -902,7 +904,7 @@ namespace LAZYSHELL
         private void variablesInsert_Click(object sender, EventArgs e)
         {
             int variable = this.variables.SelectedIndex;
-            if (textCodeFormat)
+            if (byteView)
             {
                 if (variable > 0)
                 {
@@ -926,7 +928,7 @@ namespace LAZYSHELL
         }
         private void option_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDialogueText("[7]");
             else
                 InsertIntoDialogueText("[option]");
@@ -1003,7 +1005,7 @@ namespace LAZYSHELL
             progressBar.Show();
             for (int i = 0; i < dialogues.Length; i++)
             {
-                dialogues[i].SetDialogue(dialogues[i].GetDialogue(textCodeFormat), textCodeFormat);
+                dialogues[i].SetDialogue(dialogues[i].GetDialogue(byteView), byteView);
                 progressBar.PerformStep("ENCODING DIALOGUE #" + i.ToString("d4"));
             }
             progressBar.Close();
@@ -1045,7 +1047,7 @@ namespace LAZYSHELL
                     string line = tr.ReadLine();
                     int index = Convert.ToInt32(line.Substring(1, 4), 10);
                     line = line.Remove(0, 7);
-                    if (this.textCodeFormat)
+                    if (this.byteView)
                         if (!line.EndsWith("[0]") && !line.EndsWith("[6]")) 
                             line += "[0]";
                     else
@@ -1088,14 +1090,14 @@ namespace LAZYSHELL
                     string line = tr.ReadLine();
                     int number = Convert.ToInt32(line.Substring(1, 4), 10);
                     line = line.Remove(0, 7);
-                    if (battleDialogues.textCodeFormat)
+                    if (battleDialogues.byteView)
                     {
                         if (!line.EndsWith("[0]") && !line.EndsWith("[6]")) line += "[0]";
                     }
                     else
                         if (!line.EndsWith("[endInput]") && !line.EndsWith("[end]"))
                             line += "[endInput]";
-                    Model.BattleDialogues[number].SetText(line, battleDialogues.textCodeFormat);
+                    Model.BattleDialogues[number].SetText(line, battleDialogues.byteView);
                 }
                 dialogueNum_ValueChanged(null, null);
             }
@@ -1123,7 +1125,7 @@ namespace LAZYSHELL
                 {
                     dialogues.WriteLine(
                         "{" + i.ToString("d4") + "}\t" +
-                        this.dialogues[i].GetDialogue(textCodeFormat));
+                        this.dialogues[i].GetDialogue(byteView));
                 }
                 dialogues.Close();
             }
@@ -1144,7 +1146,7 @@ namespace LAZYSHELL
                 {
                     dialogues.WriteLine(
                         "{" + i.ToString("d4") + "}\t" +
-                        Model.BattleDialogues[i].GetText(battleDialogues.textCodeFormat));
+                        Model.BattleDialogues[i].GetText(battleDialogues.byteView));
                 }
                 dialogues.Close();
             }

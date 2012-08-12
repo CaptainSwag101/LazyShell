@@ -54,7 +54,7 @@ namespace LAZYSHELL
         private byte[] graphics { get { return Model.DialogueGraphics; } set { Model.DialogueGraphics = value; } }
         private FontCharacter[] fontDialogue { get { return Model.FontDialogue; } set { Model.FontDialogue = value; } }
         private PaletteSet fontPalette { get { return Model.FontPaletteDialogue; } set { Model.FontPaletteDialogue = value; } }
-        public bool textCodeFormat = true;
+        public bool byteView = true;
         // local variables
         private int index { get { return (int)battleDialogueNum.Value; } set { battleDialogueNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
@@ -120,13 +120,13 @@ namespace LAZYSHELL
             this.index = (int)this.battleDialogueNum.Value;
             if (battleDlgType.SelectedIndex == 0)
             {
-                this.battleDialogueTextBox.Text = Model.BattleDialogues[index].GetText(textCodeFormat);
-                this.battleDialogueTextBox.SelectionStart = Model.BattleDialogues[index].GetCaretPosition(textCodeFormat);
+                this.battleDialogueTextBox.Text = Model.BattleDialogues[index].GetText(byteView);
+                this.battleDialogueTextBox.SelectionStart = Model.BattleDialogues[index].GetCaretPosition(byteView);
             }
             else
             {
-                this.battleDialogueTextBox.Text = Model.BattleMessages[index].GetText(textCodeFormat);
-                this.battleDialogueTextBox.SelectionStart = Model.BattleMessages[index].GetCaretPosition(textCodeFormat);
+                this.battleDialogueTextBox.Text = Model.BattleMessages[index].GetText(byteView);
+                this.battleDialogueTextBox.SelectionStart = Model.BattleMessages[index].GetCaretPosition(byteView);
             }
             CalculateFreeSpace();
             SetTextImage();
@@ -155,7 +155,7 @@ namespace LAZYSHELL
                     temp = ++i;
                     while (temp < text.Length && text[temp] != ']')
                     {
-                        if (textCodeFormat)
+                        if (byteView)
                         {
                             if (!(text[temp] >= '0' && text[temp] <= '9'))
                                 fail = true;
@@ -186,7 +186,7 @@ namespace LAZYSHELL
             }
             if (preview && valid && !fail)
             {
-                dialogue.SetText(battleDialogueTextBox.Text, textCodeFormat);
+                dialogue.SetText(battleDialogueTextBox.Text, byteView);
                 int[] pixels = textPreview.GetPreview(fontDialogue, fontPalette.Palettes[1], dialogue.Text, false);
                 textImage = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
             }
@@ -248,13 +248,13 @@ namespace LAZYSHELL
 
             if (battleDlgType.SelectedIndex == 0)
             {
-                Model.BattleDialogues[index].SetCaretPosition(this.battleDialogueTextBox.SelectionStart + toInsert.Length, textCodeFormat);
-                Model.BattleDialogues[index].SetText(new string(newText), textCodeFormat);
+                Model.BattleDialogues[index].SetCaretPosition(this.battleDialogueTextBox.SelectionStart + toInsert.Length, byteView);
+                Model.BattleDialogues[index].SetText(new string(newText), byteView);
             }
             else
             {
-                dialogue.SetCaretPosition(this.battleDialogueTextBox.SelectionStart + toInsert.Length, textCodeFormat);
-                dialogue.SetText(new string(newText), textCodeFormat);
+                dialogue.SetCaretPosition(this.battleDialogueTextBox.SelectionStart + toInsert.Length, byteView);
+                dialogue.SetText(new string(newText), byteView);
             }
             RefreshBattleDialogue();
             SetTextImage();
@@ -435,42 +435,42 @@ namespace LAZYSHELL
             textPreview.PageDown(dialogue.Text.Length);
             SetTextImage();
         }
-        private void byteOrTextView_Click(object sender, EventArgs e)
+        private void textView_Click(object sender, EventArgs e)
         {
-            textCodeFormat = !byteOrTextView.Checked;
-            battleDialogueTextBox.Text = dialogue.GetText(textCodeFormat);
+            byteView = !textView.Checked;
+            battleDialogueTextBox.Text = dialogue.GetText(byteView);
         }
         private void newLine_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoBattleDialogueText("[1]");
             else
                 InsertIntoBattleDialogueText("[newLine]");
         }
         private void endString_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoBattleDialogueText("[0]");
             else
                 InsertIntoBattleDialogueText("[end]");
         }
         private void pause60f_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoBattleDialogueText("[12]");
             else
                 InsertIntoBattleDialogueText("[delay]");
         }
         private void pauseA_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoBattleDialogueText("[2]");
             else
                 InsertIntoBattleDialogueText("[pauseInput]");
         }
         private void pauseFrames_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoBattleDialogueText("[3]");
             else
                 InsertIntoBattleDialogueText("[delayInput]");

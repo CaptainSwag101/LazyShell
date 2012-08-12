@@ -555,6 +555,8 @@ namespace LAZYSHELL
             openItems_Click(null, null);
             openLevels_Click(null, null);
             openMainTitle_Click(null, null);
+            openMenus_Click(null, null);
+            openMiniGames_Click(null, null);
             openMonsters_Click(null, null);
             openSprites_Click(null, null);
             openWorldMaps_Click(null, null);

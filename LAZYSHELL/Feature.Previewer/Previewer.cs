@@ -253,9 +253,7 @@ namespace LAZYSHELL.Previewer
                     bs.CommandIndex = 0;
                 }
             Finish:
-                this.groupBox1.Enabled = false;
-                this.groupBox2.Enabled = true;
-
+                this.groupBox1.Visible = false;
                 this.battleBGListBox.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
                 this.battleBGListBox.Visible = true;
                 this.battleBGListBox.Enabled = true;
@@ -656,14 +654,20 @@ namespace LAZYSHELL.Previewer
             storage.DestY = (byte)this.adjustYNumericUpDown.Value;
             storage.DestZ = (byte)this.adjustZNumericUpDown.Value;
 
-            ushort save = Model.Levels[storage.Destination].LevelEvents.ExitEvent;
-            Model.Levels[storage.Destination].LevelEvents.ExitEvent = 0;
+            ushort save = Model.Levels[storage.Destination].LevelEvents.EntranceEvent;
+            Model.Levels[storage.Destination].LevelEvents.EntranceEvent = 0;
             if (this.behavior == (int)Behaviors.BattlePreviewer)
             {
                 PrepareBattlePack(ent.Source);
                 byte[] eventData = new byte[] { 0x4A, 0x00, 0x00, 0x00, 0xFE };
                 eventData[3] = (byte)this.battleBGListBox.SelectedIndex;
                 eventData.CopyTo(Model.Data, 0x1E0C00);
+            }
+            else if (this.behavior == (int)Behaviors.LevelPreviewer)
+            {
+                byte[] command = new byte[] { 0xD0, 0, 0 };
+                Bits.SetShort(command, 1, save);
+                command.CopyTo(Model.Data, 0x1E0C00);
             }
             else if (this.behavior == (int)Behaviors.MineCartPreviewer)
             {
@@ -702,7 +706,7 @@ namespace LAZYSHELL.Previewer
                 new byte[] { 0x70, 0xFE }.CopyTo(Model.Data, 0x1E0C00);
 
             SaveLevelExitEvents();
-            Model.Levels[storage.Destination].LevelEvents.ExitEvent = save;
+            Model.Levels[storage.Destination].LevelEvents.EntranceEvent = save;
 
             storage.Assemble(0x3166);
             this.eventchoice = true;
@@ -811,7 +815,7 @@ namespace LAZYSHELL.Previewer
         {
             foreach (Level lvl in Model.Levels)
             {
-                if (lvl.LevelEvents.ExitEvent == this.selectNum)
+                if (lvl.LevelEvents.EntranceEvent == this.selectNum)
                 {
                     ScanForEntrancesToLevel(lvl.Index);
                 }
@@ -883,7 +887,7 @@ namespace LAZYSHELL.Previewer
                         ent.Flag = true; // Indicates an NPC and not an Instance
                         eventTriggers.Add(ent); // Add the event trigger
                     }
-                    foreach (NPC.Instance instance in npc.Instances) // test all instances
+                    foreach (NPC.Clone instance in npc.Clones) // test all instances
                     {
                         if (instance.Movement + instance.PropertyC == actionNum)
                         {

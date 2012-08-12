@@ -21,8 +21,8 @@ namespace LAZYSHELL
         private int dialoguePtr;
         private ushort[] dialoguePointer = new ushort[8];
         private bool error = false;
-        private int caretPositionSymbol;
-        private int caretPositionNotSymbol;
+        private int caretPositionByteView;
+        private int caretPositionTextView;
         [NonSerialized()]
         private TextHelper textHelper;
 
@@ -34,27 +34,39 @@ namespace LAZYSHELL
          * Get Methods
          * **************************************************************************/
         public char[] RawDialogue { get { return rawDialogue; } set { rawDialogue = value; } }
-        public string GetDialogue(bool symbols)
+        public string GetDialogue(bool byteView)
         {
             if (!error)
-                return new string(textHelper.DecodeText(rawDialogue, symbols, false));
-            else 
+                return new string(textHelper.DecodeText(rawDialogue, byteView, false));
+            else
                 return new string(rawDialogue);
-        } // Text with symbols, not byte values - Symbols true = {02} - false = {Line Break (press A)}
+        }
         public int DialogueLen { get { return rawDialogue.Length; } }
         public int DialogueOffset { get { return dialogueOffset; } set { dialogueOffset = value; } }
         public int DialoguePtr { get { return Bits.GetShort(data, 0x37E000 + index * 2); } }    // this is used to find duplicates
-        public int GetCaretPosition(bool symbol) { if (symbol) return caretPositionSymbol; else return caretPositionNotSymbol; }
+        public int GetCaretPosition(bool byteView)
+        {
+            if (byteView)
+                return caretPositionByteView;
+            else
+                return caretPositionTextView;
+        }
         /*****************************************************************************
          * Set Methods
          * **************************************************************************/
-        public bool SetDialogue(string value, bool symbols)
+        public bool SetDialogue(string value, bool byteView)
         {
-            this.rawDialogue = textHelper.EncodeText(value.ToCharArray(), symbols, false);
+            this.rawDialogue = textHelper.EncodeText(value.ToCharArray(), byteView, false);
             this.error = textHelper.Error;
             return !error;
-        } // Text with byte values, not symbols
-        public void SetCaretPosition(int value, bool symbol) { if (symbol) this.caretPositionSymbol = value; else this.caretPositionNotSymbol = value; }
+        }
+        public void SetCaretPosition(int value, bool byteView)
+        {
+            if (byteView)
+                this.caretPositionByteView = value;
+            else
+                this.caretPositionTextView = value;
+        }
 
         // Constructor
         public Dialogue(byte[] data, int dialogueNum)
@@ -196,9 +208,9 @@ namespace LAZYSHELL
             return false;
         }
 
-        public string GetDialogueStub(bool textCodeFormat)
+        public string GetDialogueStub(bool byteView)
         {
-            string temp = GetDialogue(textCodeFormat);
+            string temp = GetDialogue(byteView);
             if (temp.Length > 40)
             {
                 temp = temp.Substring(0, 37);

@@ -71,7 +71,7 @@ namespace LAZYSHELL
 
         // these two do not belong to a specific event, they belong to the level
         private byte music; public byte Music { get { return music; } set { music = value; } }
-        private ushort exitEvent; public ushort ExitEvent { get { return exitEvent; } set { exitEvent = value; } }
+        private ushort entranceEvent; public ushort EntranceEvent { get { return entranceEvent; } set { entranceEvent = value; } }
 
         public ushort RunEvent { get { return event_.RunEvent; } set { event_.RunEvent = value; } }
         public byte X { get { return event_.X; } set { event_.X = value; } }
@@ -108,7 +108,7 @@ namespace LAZYSHELL
             offset = offsetStart + 0x200000;
 
             music = data[offset]; offset++;
-            exitEvent = Bits.GetShort(data, offset); offset += 2;
+            entranceEvent = Bits.GetShort(data, offset); offset += 2;
 
             while (offset < offsetEnd + 0x200000)
             {
@@ -130,7 +130,7 @@ namespace LAZYSHELL
             offset = offsetStart + 0x200000;
 
             Bits.SetByte(data, offset, music); offset++;
-            Bits.SetShort(data, offset, exitEvent); offset += 2;
+            Bits.SetShort(data, offset, entranceEvent); offset += 2;
 
             offsetStart = (ushort)(offset - 0x200000);
 

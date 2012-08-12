@@ -17,9 +17,8 @@ namespace LAZYSHELL
         private NPCProperties[] npcProperties { get { return Model.NPCProperties; } set { Model.NPCProperties = value; } }
         private NPCProperties npcProperty { get { return npcProperties[index]; } set { npcProperties[index] = value; } }
         private Bitmap spriteImage;
+        private Sprite sprite { get { return Model.Sprites[(int)spriteName.SelectedIndex]; } }
         private int[] spritePixels;
-        private int imageWidth;
-        private int imageHeight;
         private Levels level;
         private int index { get { return (int)npcNum.Value; } set { npcNum.Value = value; } }
         private Search searchWindow;
@@ -96,11 +95,15 @@ namespace LAZYSHELL
         }
         private void SetSpriteImage()
         {
-            spritePixels = npcProperties[0].CreateImage(3, true, (int)spriteName.SelectedIndex, true);
-            imageWidth = npcProperties[0].ImageWidth;
-            imageHeight = npcProperties[0].ImageHeight;
-            if (spritePixels.Length == 0) { spritePixels = new int[2]; imageWidth = 1; imageHeight = 1; }
-            spriteImage = new Bitmap(Do.PixelsToImage(spritePixels, imageWidth, imageHeight));
+            Size size = new Size(0, 0);
+            spritePixels = sprite.GetPixels(false, true, 0, 3, false, true, ref size);
+            if (spritePixels.Length == 0)
+            {
+                spritePixels = new int[2]; 
+                size.Width = 1; 
+                size.Height = 1;
+            }
+            spriteImage = new Bitmap(Do.PixelsToImage(spritePixels, size.Width, size.Height));
             spritePictureBox.Invalidate();
         }
         #region Event handlers
@@ -129,7 +132,7 @@ namespace LAZYSHELL
             if (Model.Program.Sprites == null || !Model.Program.Sprites.Visible)
                 Model.Program.CreateSpritesWindow();
 
-            Model.Program.Sprites.index = (int)spriteNum.Value;
+            Model.Program.Sprites.Index = (int)spriteNum.Value;
             Model.Program.Sprites.BringToFront();
         }
         private void layerPriority_SelectedIndexChanged(object sender, EventArgs e)

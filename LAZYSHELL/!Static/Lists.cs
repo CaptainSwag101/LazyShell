@@ -4347,6 +4347,13 @@ namespace LAZYSHELL
         {
             return Numerize(Convert(list));
         }
+        public static string[] Resize(string[] list, int count)
+        {
+            string[] temp = new string[count];
+            for (int i = 0; i < list.Length && i < count; i++)
+                temp[i] = list[i];
+            return temp;
+        }
         public static string[] Convert(StringCollection list)
         {
             string[] temp = new string[list.Count];

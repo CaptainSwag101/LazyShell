@@ -45,8 +45,8 @@ namespace LAZYSHELL
         }
         private byte[] spriteGraphics { get { return Model.SpriteGraphics; } }
         // indexed variables
-        public int index { get { return (int)number.Value; } set { number.Value = value; } }
-        private Sprite sprite { get { return sprites[index]; } set { sprites[index] = value; } }
+        public int Index { get { return (int)number.Value; } set { number.Value = value; } }
+        private Sprite sprite { get { return sprites[Index]; } set { sprites[Index] = value; } }
         private GraphicPalette image { get { return images[sprite.GraphicPalettePacket]; } set { images[sprite.GraphicPalettePacket] = value; } }
         private Animation animation { get { return animations[sprite.AnimationPacket]; } set { animations[sprite.AnimationPacket] = value; } }
         private PaletteSet paletteSet { get { return palettes[image.PaletteNum + sprite.PaletteIndex]; } set { palettes[image.PaletteNum + sprite.PaletteIndex] = value; } }
@@ -244,7 +244,7 @@ namespace LAZYSHELL
             Model.HexViewer.SelectionStart = (animation.AnimationOffset & 15) * 3;
             Model.HexViewer.Compare();
             checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
-            Do.AddHistory(this, index, "SaveSprites");
+            Do.AddHistory(this, Index, "SaveSprites");
         }
         public void EnableOnPlayback(bool enable)
         {
@@ -414,7 +414,7 @@ namespace LAZYSHELL
             name.SelectedIndex = (int)number.Value;
             animation.Assemble();
             RefreshSpritesEditor();
-            settings.LastSprite = index;
+            settings.LastSprite = Index;
         }
         private void name_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -567,7 +567,7 @@ namespace LAZYSHELL
                 return;
             animation = new Animation(Model.Data, sprite.AnimationPacket);
             image = new GraphicPalette(Model.Data, sprite.GraphicPalettePacket);
-            sprite = new Sprite(Model.Data, index);
+            sprite = new Sprite(Model.Data, Index);
             for (int i = image.PaletteNum; i < image.PaletteNum + 8; i++)
                 palettes[i] = new PaletteSet(Model.Data, i, 0x252FFE + (i * 30), 1, 16, 30);
             Buffer.BlockCopy(Model.Data, image.GraphicOffset, Model.SpriteGraphics, image.GraphicOffset - 0x280000, 0x4000);
@@ -582,7 +582,7 @@ namespace LAZYSHELL
         }
         private void allMoldImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ExportImages exportImages = new ExportImages(index, "sprites");
+            ExportImages exportImages = new ExportImages(Index, "sprites");
             exportImages.ShowDialog();
         }
         private void allSequenceImagesToolStripMenuItem_Click(object sender, EventArgs e)

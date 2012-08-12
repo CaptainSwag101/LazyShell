@@ -70,20 +70,20 @@
             this.characterName = new LAZYSHELL.ToolStripComboBox();
             this.textBoxCharacterName = new System.Windows.Forms.ToolStripTextBox();
             this.reset = new System.Windows.Forms.ToolStripButton();
-            this.label158 = new System.Windows.Forms.Label();
-            this.label159 = new System.Windows.Forms.Label();
             this.lvl2TimingEnd = new System.Windows.Forms.NumericUpDown();
             this.lvl2TimingStart = new System.Windows.Forms.NumericUpDown();
-            this.label157 = new System.Windows.Forms.Label();
             this.lvl1TimingStart = new System.Windows.Forms.NumericUpDown();
             this.lvl1TimingEnd = new System.Windows.Forms.NumericUpDown();
-            this.label160 = new System.Windows.Forms.Label();
             this.startingMagic = new LAZYSHELL.NewCheckedListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label157 = new System.Windows.Forms.Label();
+            this.label159 = new System.Windows.Forms.Label();
+            this.label160 = new System.Windows.Forms.Label();
+            this.label158 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.startingMgAttack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startingMgDefense)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startingExperience)).BeginInit();
@@ -629,24 +629,6 @@
             this.reset.ToolTipText = "Reset";
             this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
-            // label158
-            // 
-            this.label158.AutoSize = true;
-            this.label158.Location = new System.Drawing.Point(6, 23);
-            this.label158.Name = "label158";
-            this.label158.Size = new System.Drawing.Size(72, 13);
-            this.label158.TabIndex = 558;
-            this.label158.Text = "1/2 dmg start";
-            // 
-            // label159
-            // 
-            this.label159.AutoSize = true;
-            this.label159.Location = new System.Drawing.Point(6, 65);
-            this.label159.Name = "label159";
-            this.label159.Size = new System.Drawing.Size(57, 13);
-            this.label159.TabIndex = 560;
-            this.label159.Text = "0 dmg end";
-            // 
             // lvl2TimingEnd
             // 
             this.lvl2TimingEnd.Location = new System.Drawing.Point(84, 63);
@@ -675,15 +657,6 @@
             this.lvl2TimingStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lvl2TimingStart.ValueChanged += new System.EventHandler(this.lvl2TimingStart_ValueChanged);
             // 
-            // label157
-            // 
-            this.label157.AutoSize = true;
-            this.label157.Location = new System.Drawing.Point(6, 86);
-            this.label157.Name = "label157";
-            this.label157.Size = new System.Drawing.Size(67, 13);
-            this.label157.TabIndex = 561;
-            this.label157.Text = "1/2 dmg end";
-            // 
             // lvl1TimingStart
             // 
             this.lvl1TimingStart.Location = new System.Drawing.Point(84, 21);
@@ -711,15 +684,6 @@
             this.lvl1TimingEnd.TabIndex = 568;
             this.lvl1TimingEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lvl1TimingEnd.ValueChanged += new System.EventHandler(this.lvl1TimingEnd_ValueChanged);
-            // 
-            // label160
-            // 
-            this.label160.AutoSize = true;
-            this.label160.Location = new System.Drawing.Point(6, 44);
-            this.label160.Name = "label160";
-            this.label160.Size = new System.Drawing.Size(62, 13);
-            this.label160.TabIndex = 559;
-            this.label160.Text = "0 dmg start";
             // 
             // startingMagic
             // 
@@ -825,6 +789,42 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Defense Timing";
             // 
+            // label157
+            // 
+            this.label157.AutoSize = true;
+            this.label157.Location = new System.Drawing.Point(6, 86);
+            this.label157.Name = "label157";
+            this.label157.Size = new System.Drawing.Size(67, 13);
+            this.label157.TabIndex = 561;
+            this.label157.Text = "1/2 dmg end";
+            // 
+            // label159
+            // 
+            this.label159.AutoSize = true;
+            this.label159.Location = new System.Drawing.Point(6, 65);
+            this.label159.Name = "label159";
+            this.label159.Size = new System.Drawing.Size(57, 13);
+            this.label159.TabIndex = 560;
+            this.label159.Text = "0 dmg end";
+            // 
+            // label160
+            // 
+            this.label160.AutoSize = true;
+            this.label160.Location = new System.Drawing.Point(6, 44);
+            this.label160.Name = "label160";
+            this.label160.Size = new System.Drawing.Size(62, 13);
+            this.label160.TabIndex = 559;
+            this.label160.Text = "0 dmg start";
+            // 
+            // label158
+            // 
+            this.label158.AutoSize = true;
+            this.label158.Location = new System.Drawing.Point(6, 23);
+            this.label158.Name = "label158";
+            this.label158.Size = new System.Drawing.Size(72, 13);
+            this.label158.TabIndex = 558;
+            this.label158.Text = "1/2 dmg start";
+            // 
             // Allies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -922,14 +922,10 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private LAZYSHELL.ToolStripComboBox characterName;
         private System.Windows.Forms.ToolStripTextBox textBoxCharacterName;
-        private System.Windows.Forms.Label label158;
-        private System.Windows.Forms.Label label159;
         private System.Windows.Forms.NumericUpDown lvl2TimingEnd;
         private System.Windows.Forms.NumericUpDown lvl2TimingStart;
-        private System.Windows.Forms.Label label157;
         private System.Windows.Forms.NumericUpDown lvl1TimingStart;
         private System.Windows.Forms.NumericUpDown lvl1TimingEnd;
-        private System.Windows.Forms.Label label160;
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.Label label125;
         private System.Windows.Forms.Label label127;
@@ -938,6 +934,10 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label158;
+        private System.Windows.Forms.Label label160;
+        private System.Windows.Forms.Label label159;
+        private System.Windows.Forms.Label label157;
 
     }
 }

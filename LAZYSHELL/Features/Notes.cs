@@ -432,7 +432,7 @@ namespace LAZYSHELL
             {
                 if (Model.Program.Sprites == null || !Model.Program.Sprites.Visible)
                     Model.Program.CreateSpritesWindow();
-                Model.Program.Sprites.index = (int)indexNumber.Value;
+                Model.Program.Sprites.Index = (int)indexNumber.Value;
                 Model.Program.Sprites.BringToFront();
             }
             if (elementType.SelectedIndex == 11)

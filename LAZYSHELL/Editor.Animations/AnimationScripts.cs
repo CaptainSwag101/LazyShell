@@ -1268,13 +1268,13 @@ namespace LAZYSHELL
                 // redraw the treeview
                 a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value], false);
             }
+            animationScriptTree.EnablePaint = true;
+            animationScriptTree.EndUpdate();
 
             // set the selected node
             a_treeViewWrapper.SetSelectedNode(asc.InternalOffset);
             p.X = 0;
             Do.SetTreeViewScrollPos(animationScriptTree, p);
-            animationScriptTree.EnablePaint = true;
-            animationScriptTree.EndUpdate();
         }
         private void emptyAnimationMods_Click(object sender, EventArgs e)
         {
@@ -1308,13 +1308,13 @@ namespace LAZYSHELL
             // redraw the treeview
             animationScripts[(int)animationNum.Value].RefreshAnimationScript();
             a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value], false);
+            animationScriptTree.EnablePaint = true;
+            animationScriptTree.EndUpdate();
 
             // set the selected node
             a_treeViewWrapper.SetSelectedNode(asc.InternalOffset);
             p.X = 0;
             Do.SetTreeViewScrollPos(animationScriptTree, p);
-            animationScriptTree.EnablePaint = true;
-            animationScriptTree.EndUpdate();
         }
         private void aniNameA_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -86,12 +86,6 @@
     </Compile>
     <Compile Include="Editor.Audio\BRRSample.cs" />
     <Compile Include="Editor.Audio\SPC.cs" />
-    <Compile Include="Editor.Menus\GameSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor.Menus\GameSelect.Designer.cs">
-      <DependentUpon>GameSelect.cs</DependentUpon>
-    </Compile>
     <Compile Include="Editor.Menus\MenuTexts.cs" />
     <Compile Include="Editor.Menus\Overworld.cs">
       <SubType>Form</SubType>
@@ -527,9 +521,6 @@
     <EmbeddedResource Include="About.resx">
       <SubType>Designer</SubType>
       <DependentUpon>About.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editor.Menus\GameSelect.resx">
-      <DependentUpon>GameSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Menus\Overworld.resx">
       <DependentUpon>Overworld.cs</DependentUpon>

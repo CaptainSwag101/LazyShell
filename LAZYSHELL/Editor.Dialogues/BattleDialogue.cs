@@ -21,8 +21,8 @@ namespace LAZYSHELL
         private char[] text;
         private int offset;
         private bool error = false;
-        private int caretPositionSymbol;
-        private int caretPositionNotSymbol;
+        private int caretPositionByteView;
+        private int caretPositionTextView;
         [NonSerialized()]
         private TextHelperReduced textHelperReduced;
         private int pointerOffset;
@@ -31,39 +31,39 @@ namespace LAZYSHELL
         /*****************************************************************************
          * Get Methods
          * **************************************************************************/
-        public string GetText(bool symbols)
+        public string GetText(bool byteView)
         {
             if (!error)
-                return new string(textHelperReduced.DecodeText(text, symbols, 0, Settings.Default.Keystrokes));
+                return new string(textHelperReduced.DecodeText(text, byteView, 0, Settings.Default.Keystrokes));
             else
                 return new string(text);
         }
         public int Offset { get { return offset; } set { offset = value; } }
         public int Length { get { return text.Length; } }
         public char[] Text { get { return text; } }
-        public int GetCaretPosition(bool symbol)
+        public int GetCaretPosition(bool byteView)
         {
-            if (symbol)
-                return caretPositionSymbol;
+            if (byteView)
+                return caretPositionByteView;
             else
-                return caretPositionNotSymbol;
+                return caretPositionTextView;
         }
 
         /*****************************************************************************
          * Set Methods
          * **************************************************************************/
-        public bool SetText(string value, bool symbols) // Text with byte values, not symbols
+        public bool SetText(string value, bool byteView) // Text with byte values, not text
         {
-            this.text = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 0, Settings.Default.Keystrokes);
+            this.text = textHelperReduced.EncodeText(value.ToCharArray(), byteView, 0, Settings.Default.Keystrokes);
             this.error = textHelperReduced.Error;
             return !error;
         }
-        public void SetCaretPosition(int value, bool symbol)
+        public void SetCaretPosition(int value, bool byteView)
         {
-            if (symbol)
-                this.caretPositionSymbol = value;
+            if (byteView)
+                this.caretPositionByteView = value;
             else
-                this.caretPositionNotSymbol = value;
+                this.caretPositionTextView = value;
         }
 
 

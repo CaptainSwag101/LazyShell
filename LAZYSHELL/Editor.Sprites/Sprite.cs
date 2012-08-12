@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace LAZYSHELL
@@ -30,11 +31,147 @@ namespace LAZYSHELL
             paletteIndex = (byte)((data[offset] & 0x0E) >> 1); offset++;
             animationPacket = Bits.GetShort(data, offset);
         }
+        /// <summary>
+        /// Creates a pixel array of the sprite.
+        /// </summary>
+        /// <param name="byMold">Create the pixels by mold index.</param>
+        /// <param name="byFacing">Create the pixels by facing index.</param>
+        /// <param name="moldIndex">The index of the mold (ignored if byMold == false).</param>
+        /// <param name="facingIndex">The index of the facing (ignored if byFacing == false)</param>
+        /// <param name="mirror">Mirror the sprite pixels.</param>
+        /// <param name="crop">Crop the sprite pixels to their edges.</param>
+        /// <returns></returns>
+        public int[] GetPixels(bool byMold, bool byFacing, int moldIndex, int facingIndex, bool mirror, bool crop, ref Size size)
+        {
+            Mold tMold;
+            int offset = this.index * 4 + 0x250000;
+            int graphicPalettePacket = Bits.GetShort(data, offset) & 0x1FF; offset++;
+            int graphicPalettePacketShift = (data[offset] & 0x0E) >> 1;
+
+            // set graphics
+            offset = graphicPalettePacket * 4 + 0x251800;
+            int bank = (int)(((data[offset] & 0x0F) << 16) + 0x280000);
+            int graphicOffset = (int)((Bits.GetShort(data, offset) & 0xFFF0) + bank); offset += 2;
+
+            // set palette to use
+            int[] palette = Palette;
+            //
+            int animationNum = Bits.GetShort(data, this.index * 4 + 0x250002);
+            int animationOffset = Bits.Get24Bit(data, 0x252000 + (animationNum * 3)) - 0xC00000;
+            int animationLength = Bits.GetShort(data, animationOffset);
+
+            byte[] sm = Bits.GetByteArray(data, animationOffset, animationLength);
+            offset = Bits.GetShort(sm, 2);
+            if (byFacing)
+                switch (facingIndex)
+                {
+                    case 0: mirror = !mirror; if (sm[6] < 13) break; offset += 24; break;
+                    case 1: mirror = !mirror; break;
+                    case 2: if (sm[6] < 11) break; offset += 20; break;
+                    case 4: if (sm[6] < 13) break; offset += 24; break;
+                    case 5: if (sm[6] < 2) break; offset += 2; break;
+                    case 6: if (sm[6] < 12) break; offset += 22; break;
+                    case 7: mirror = !mirror; if (sm[6] < 2) break; offset += 2; break;
+                    default: break;
+                }
+            offset = Bits.GetShort(sm, offset);
+            if (!byMold)
+                moldIndex = offset != 0xFFFF && sm[offset + 1] != 0 && sm[offset + 1] < sm[7] ? (int)sm[offset + 1] : 0;
+            offset = Bits.GetShort(sm, 4);
+            offset += moldIndex * 2;
+
+            tMold = new Mold();
+            tMold.InitializeMold(sm, offset, new List<Mold.Tile>(), animationNum, animationOffset);
+
+            foreach (Mold.Tile t in tMold.Tiles)
+            {
+                t.Set8x8Tiles(Bits.GetByteArray(data, graphicOffset, 0x4000), palette, tMold.Gridplane);
+            }
+
+            int[] pixels = tMold.MoldPixels();
+
+            // crop image
+            int lowY = 0, highY = 0, lowX = 0, highX = 0;
+            if (crop)
+            {
+                bool stop = false;
+                for (int y = 0; y < 256 && !stop; y++)
+                {
+                    for (int x = 0; x < 256; x++)
+                        if (pixels[y * 256 + x] != 0) { lowY = y; lowX = x; stop = true; break; }
+                }
+                stop = false;
+                for (int y = 255; y >= 0 && !stop; y--)
+                {
+                    for (int x = 255; x >= 0; x--)
+                        if (pixels[y * 256 + x] != 0) { highY = y; highX = x; stop = true; break; }
+                }
+                stop = false;
+                for (int y = 0; y < 256; y++)
+                {
+                    for (int x = 0; x < 256; x++)
+                        if (pixels[y * 256 + x] != 0 && x < lowX) { lowX = x; break; }
+                }
+                stop = false;
+                for (int y = 255; y >= 0; y--)
+                {
+                    for (int x = 255; x >= 0; x--)
+                        if (pixels[y * 256 + x] != 0 && x > highX) { highX = x; break; }
+                }
+                stop = false;
+                highY++; highX++;
+            }
+            else
+            {
+                highY = 256;
+                highX = 256;
+            }
+            int imageHeight = highY - lowY;
+            int imageWidth = highX - lowX;
+            if (crop)
+            {
+                int[] tempPixels = new int[imageWidth * imageHeight];
+                for (int y = 0; y < imageHeight; y++)
+                {
+                    for (int x = 0; x < imageWidth; x++)
+                    {
+                        tempPixels[y * imageWidth + x] = pixels[(y + lowY) * 256 + x + lowX];
+                    }
+                }
+                pixels = tempPixels;
+            }
+            int temp;
+            if (mirror)
+            {
+                for (int y = 0; y < imageHeight; y++)
+                {
+                    for (int a = 0, c = imageWidth - 1; a < imageWidth / 2; a++, c--)
+                    {
+                        temp = pixels[(y * imageWidth) + a];
+                        pixels[(y * imageWidth) + a] = pixels[(y * imageWidth) + c];
+                        pixels[(y * imageWidth) + c] = temp;
+                    }
+                }
+            }
+            size = new Size(imageWidth, imageHeight);
+            return pixels;
+        }
+        public int[] GetPixels(bool byMold, bool byFacing, int moldIndex, int facingIndex, bool mirror, bool crop)
+        {
+            Size size = new Size(0, 0);
+            return GetPixels(byMold, byFacing, moldIndex, facingIndex, mirror, crop, ref size);
+        }
+        public int[] GetPixels()
+        {
+            Size size = new Size(0, 0);
+            return GetPixels(false, false, 0, 0, false, false, ref size);
+        }
         public int[] Palette
         {
             get
             {
-                return Model.SpritePalettes[Model.GraphicPalettes[graphicPalettePacket].PaletteNum].Palettes[paletteIndex];
+                int index = Math.Min(Model.SpritePalettes.Length, Model.GraphicPalettes[graphicPalettePacket].PaletteNum + paletteIndex);
+                return Model.SpritePalettes[index].Palettes[0];
             }
         }
         public void Assemble()

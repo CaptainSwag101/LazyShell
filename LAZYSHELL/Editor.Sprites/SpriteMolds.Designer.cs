@@ -885,14 +885,13 @@
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(24, 22);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
             // 
             // newTile
             // 
             this.newTile.Image = global::LAZYSHELL.Properties.Resources.new_small;
             this.newTile.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newTile.Name = "newTile";
-            this.newTile.Size = new System.Drawing.Size(136, 22);
+            this.newTile.Size = new System.Drawing.Size(152, 22);
             this.newTile.Text = "New Tile";
             this.newTile.Click += new System.EventHandler(this.newTile_Click);
             // 
@@ -901,8 +900,8 @@
             this.importTile.Image = global::LAZYSHELL.Properties.Resources.import_small;
             this.importTile.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importTile.Name = "importTile";
-            this.importTile.Size = new System.Drawing.Size(136, 22);
-            this.importTile.Text = "Import Tile...";
+            this.importTile.Size = new System.Drawing.Size(152, 22);
+            this.importTile.Text = "Import Tile(s)...";
             this.importTile.Click += new System.EventHandler(this.importTile_Click);
             // 
             // deleteTile

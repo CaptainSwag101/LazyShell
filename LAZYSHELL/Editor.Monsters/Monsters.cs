@@ -26,7 +26,7 @@ namespace LAZYSHELL
         private Bitmap psychopathBGImage { get { return Model.BattleDialogueTilesetImage; } }
         private Bitmap psychopathTextImage;
         public int Index { get { return (int)monsterNum.Value; } set { monsterNum.Value = value; } }
-        private bool textCodeFormat { get { return !byteOrTextView.Checked; } set { byteOrTextView.Checked = !value; } }
+        private bool byteView { get { return !textView.Checked; } set { textView.Checked = !value; } }
         private Settings settings = Settings.Default;
         private BattleDialoguePreview battleDialoguePreview = new BattleDialoguePreview();
         private MenuTextPreview menuTextPreview = new MenuTextPreview();
@@ -101,7 +101,7 @@ namespace LAZYSHELL
                 this.MonsterValCoins.Value = monster.Coins;
                 this.MonsterValElevation.Value = monster.Elevation;
                 this.MonsterFlowerOdds.Value = monster.FlowerOdds * 10;
-                this.MonsterPsychopath.Text = monster.GetPsychoMsg(textCodeFormat);
+                this.MonsterPsychopath.Text = monster.GetPsychoMsg(byteView);
                 this.MonsterPsychopath_TextChanged(null, null);
                 this.MonsterElementsNullify.SetItemChecked(0, monster.ElemIceNull);
                 this.MonsterElementsNullify.SetItemChecked(1, monster.ElemFireNull);
@@ -168,16 +168,16 @@ namespace LAZYSHELL
             MonsterPsychopath.Text.CopyTo(0, newText, 0, MonsterPsychopath.SelectionStart);
             toInsert.CopyTo(0, newText, MonsterPsychopath.SelectionStart, toInsert.Length);
             MonsterPsychopath.Text.CopyTo(MonsterPsychopath.SelectionStart, newText, MonsterPsychopath.SelectionStart + toInsert.Length, this.MonsterPsychopath.Text.Length - this.MonsterPsychopath.SelectionStart);
-            if (textCodeFormat)
-                monster.CaretPositionSymbol = this.MonsterPsychopath.SelectionStart + toInsert.Length;
+            if (byteView)
+                monster.CaretPositionByteView = this.MonsterPsychopath.SelectionStart + toInsert.Length;
             else
-                monster.CaretPositionNotSymbol = this.MonsterPsychopath.SelectionStart + toInsert.Length;
-            monster.SetPsychoMsg(new string(newText), textCodeFormat);
-            this.MonsterPsychopath.Text = monster.GetPsychoMsg(textCodeFormat);
-            if (textCodeFormat)
-                this.MonsterPsychopath.SelectionStart = monster.CaretPositionSymbol;
+                monster.CaretPositionTextView = this.MonsterPsychopath.SelectionStart + toInsert.Length;
+            monster.SetPsychoMsg(new string(newText), byteView);
+            this.MonsterPsychopath.Text = monster.GetPsychoMsg(byteView);
+            if (byteView)
+                this.MonsterPsychopath.SelectionStart = monster.CaretPositionByteView;
             else
-                this.MonsterPsychopath.SelectionStart = monster.CaretPositionNotSymbol;
+                this.MonsterPsychopath.SelectionStart = monster.CaretPositionTextView;
         }
         private bool FreeSpace(bool message)
         {
@@ -568,15 +568,15 @@ namespace LAZYSHELL
                 }
             }
 
-            bool flag = textHelper.VerifyCorrectSymbols(this.MonsterPsychopath.Text.ToCharArray(), textCodeFormat);
+            bool flag = textHelper.VerifyCorrectSymbols(this.MonsterPsychopath.Text.ToCharArray(), byteView);
             if (flag)
             {
                 this.MonsterPsychopath.BackColor = SystemColors.Window;
-                monster.SetPsychoMsg(this.MonsterPsychopath.Text, textCodeFormat);
+                monster.SetPsychoMsg(this.MonsterPsychopath.Text, byteView);
 
                 if (!monster.PsychoMsgError)
                 {
-                    monster.SetPsychoMsg(MonsterPsychopath.Text, textCodeFormat);
+                    monster.SetPsychoMsg(MonsterPsychopath.Text, byteView);
                     int[] pixels = battleDialoguePreview.GetPreview(fontDialogue, fontPaletteDialogue, monster.RawPsychoMsg, false);
 
                     psychopathTextImage = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
@@ -606,39 +606,39 @@ namespace LAZYSHELL
         }
         private void byteOrTextView_Click(object sender, EventArgs e)
         {
-            MonsterPsychopath.Text = monster.GetPsychoMsg(textCodeFormat);
+            MonsterPsychopath.Text = monster.GetPsychoMsg(byteView);
         }
         private void newLine_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoText("[1]");
             else
                 InsertIntoText("[newLine]");
         }
         private void endString_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoText("[0]");
             else
                 InsertIntoText("[end]");
         }
         private void pause60f_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoText("[12]");
             else
                 InsertIntoText("[delay]");
         }
         private void pauseA_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoText("[2]");
             else
                 InsertIntoText("[pauseInput]");
         }
         private void pauseFrames_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoText("[3]");
             else
                 InsertIntoText("[delayInput]");

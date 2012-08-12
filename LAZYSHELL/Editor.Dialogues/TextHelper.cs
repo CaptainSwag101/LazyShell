@@ -14,7 +14,7 @@ namespace LAZYSHELL
         static readonly object padlock = new object();
         private bool error = false; public bool Error { get { return this.error; } }
         private Settings settings = Settings.Default;
-                private DialogueTable[] tables { get { return Model.DialogueTables; } }
+        private DialogueTable[] tables { get { return Model.DialogueTables; } }
 
         TextHelper()
         {
@@ -50,7 +50,7 @@ namespace LAZYSHELL
         private const string code1A = "memItem"; // SURROUNDED BY {   }
         private const string code1C = "memNum..."; // no idea
 
-        public char[] DecodeText(char[] decode, bool symbols, bool table)
+        public char[] DecodeText(char[] decode, bool byteView, bool table)
         {
             ArrayList arrayList = new ArrayList();
             bool lastBrace = true;
@@ -58,13 +58,13 @@ namespace LAZYSHELL
             for (int i = 0; i < decode.Length; i++) // For every character of text
             {
                 // if a table
-                if (!table && decode[i] >= 0x0E && decode[i] <= 0x17)
+                if (!table && decode[i] >= 0x0E && decode[i] <= 0x19)
                 {
-                    AddCharsToArrayList(arrayList, tables[decode[i] - 0x0E].GetDialogue(symbols).ToCharArray());
+                    AddCharsToArrayList(arrayList, tables[decode[i] - 0x0E].GetDialogue(byteView).ToCharArray());
                     continue;
                 }
                 #region BYTE VIEW
-                if (symbols) // We are decoding to numbers
+                if (byteView) // We are decoding to numbers
                 {
                     if (settings.Keystrokes[decode[i]] == "") // Is encoded character
                     {
@@ -236,7 +236,7 @@ namespace LAZYSHELL
 
             return decodedStr;
         }
-        public char[] EncodeText(char[] array, bool symbols, bool table)
+        public char[] EncodeText(char[] array, bool byteView, bool table)
         {
             bool openQuote = true;
             ArrayList arrayList = new ArrayList();
@@ -248,9 +248,9 @@ namespace LAZYSHELL
                 if (!table)
                 {
                     bool cont = false;
-                    for (int a = 0; a < 10; a++)
+                    for (int a = 0; a < 12; a++)
                     {
-                        if (SearchForSubstring(array, i, tables[a].GetDialogue(symbols)))
+                        if (SearchForSubstring(array, i, tables[a].GetDialogue(byteView)))
                         {
                             arrayList.Add((char)(a + 0x0E));
                             i += tables[a].DialogueLen - 1;
@@ -262,7 +262,7 @@ namespace LAZYSHELL
                     if (cont) continue;
                 }
                 #region BYTE VIEW
-                if (symbols)
+                if (byteView)
                 {
                     // check for byte characters, multiple spaces, or open quotes
                     if (array[i] == '[' || array[i] == '\x20' || array[i] == '\x22')
@@ -345,7 +345,7 @@ namespace LAZYSHELL
                 }
                 #endregion
                 #region TEXT VIEW
-                else //!symbols
+                else
                 {
                     if (array[i] == '[' || array[i] == '\x20' || array[i] == '\x22')
                     {
@@ -580,7 +580,7 @@ namespace LAZYSHELL
                 return true;
             return false;
         }
-        public bool VerifyCorrectSymbols(char[] toVerify, bool format)
+        public bool VerifyCorrectSymbols(char[] toVerify, bool byteView)
         {
             bool symbol = false, found = false;
             try
@@ -595,7 +595,7 @@ namespace LAZYSHELL
                             symbol = false;
                         found = true;
                     }
-                    if (format != symbol && found)
+                    if (byteView != symbol && found)
                         return false;
                 }
                 return true;

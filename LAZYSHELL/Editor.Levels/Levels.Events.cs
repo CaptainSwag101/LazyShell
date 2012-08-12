@@ -24,7 +24,7 @@ namespace LAZYSHELL
             updatingProperties = true;
 
             this.eventMusic.SelectedIndex = events.Music;
-            this.eventExit.Value = events.ExitEvent;
+            this.eventExit.Value = events.EntranceEvent;
 
             this.eventsList.Nodes.Clear();
 
@@ -225,7 +225,7 @@ namespace LAZYSHELL
         {
             if (updatingProperties) return;
 
-            events.ExitEvent = (ushort)this.eventExit.Value;
+            events.EntranceEvent = (ushort)this.eventExit.Value;
         }
         private void eventsAreaMusic_SelectedIndexChanged(object sender, EventArgs e)
         {

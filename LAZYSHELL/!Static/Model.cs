@@ -228,10 +228,16 @@ namespace LAZYSHELL
             {
                 if (dialogues == null)
                 {
+                    //set the charcode to read from table
+                    Bits.SetByte(data, 0x6935, 0xEF);
+                    Bits.SetByte(data, 0x6937, 0xEF);
                     // create dialogues
                     dialogues = new Dialogue[4096];
                     for (int i = 0; i < dialogues.Length; i++)
+                    {
                         dialogues[i] = new Dialogue(data, i);
+                        //dialogues[i].SetDialogue(dialogues[i].GetDialogue(true), true);
+                    }
                 }
                 return dialogues;
             }
@@ -255,7 +261,7 @@ namespace LAZYSHELL
                 if (dialogueTables == null)
                 {
                     // create dialogues
-                    dialogueTables = new DialogueTable[10];
+                    dialogueTables = new DialogueTable[12];
                     for (int i = 0; i < dialogueTables.Length; i++)
                         dialogueTables[i] = new DialogueTable(data, i);
                 }
@@ -741,6 +747,7 @@ namespace LAZYSHELL
         }
         private static Bitmap menuBG;
         private static Bitmap shopBG;
+        private static Bitmap gameBG;
         public static Bitmap MenuBG
         {
             get
@@ -764,6 +771,18 @@ namespace LAZYSHELL
                 return shopBG;
             }
             set { shopBG = value; }
+        }
+        public static Bitmap GameBG
+        {
+            get
+            {
+                if (gameBG == null)
+                    gameBG = Do.PixelsToImage(
+                        Do.TilesetToPixels(
+                        new MenuTileset(GameSelectBGPalette, MenuBGTileset, MenuBGGraphics).Tileset, 16, 16, 0, false), 256, 256);
+                return gameBG;
+            }
+            set { gameBG = value; }
         }
         public static Bitmap MenuBG_
         {

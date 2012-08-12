@@ -553,7 +553,7 @@ namespace LAZYSHELL
                 foreach (NPC npc in level.LevelNPCs.Npcs)
                 {
                     used += 12;
-                    foreach (NPC.Instance instance in npc.Instances)
+                    foreach (NPC.Clone instance in npc.Clones)
                         used += 4;
                 }
             }
@@ -701,7 +701,7 @@ namespace LAZYSHELL
                 MessageBox.Show("Could not insert the NPC. The total number of NPCs for all levels has exceeded the maximum allotted space.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        private void AddNewInstance(NPC.Instance e)
+        private void AddNewInstance(NPC.Clone e)
         {
             Point o = new Point(Math.Abs(picture.Left) / zoom, Math.Abs(picture.Top) / zoom);
             Point p = new Point(solidity.PixelCoords[o.Y * 1024 + o.X].X + 2, solidity.PixelCoords[o.Y * 1024 + o.X].Y + 4);
@@ -1263,7 +1263,7 @@ namespace LAZYSHELL
             if (npcObjectTree.SelectedNode != null)
             {
                 if (npcObjectTree.SelectedNode.Parent != null)
-                    copyNPC = npcs.Npc.Instance_;
+                    copyNPC = npcs.Npc.Clone_;
                 else
                     copyNPC = npcs.Npc;
             }
@@ -1275,7 +1275,7 @@ namespace LAZYSHELL
                 if (npcObjectTree.SelectedNode == null)
                     AddNewNPC((NPC)copyNPC);
                 else if (npcObjectTree.SelectedNode.Parent != null)
-                    AddNewInstance((NPC.Instance)copyNPC);
+                    AddNewInstance((NPC.Clone)copyNPC);
                 else
                     AddNewNPC((NPC)copyNPC);
                 overlay.NPCImages = null;
@@ -1290,7 +1290,7 @@ namespace LAZYSHELL
         private void npcDuplicate_Click(object sender, EventArgs e)
         {
             if (npcObjectTree.SelectedNode.Parent != null)
-                AddNewInstance(npcs.Npc.Instance_);
+                AddNewInstance(npcs.Npc.Clone_);
             else
                 AddNewNPC(npcs.Npc);
             overlay.NPCImages = null;

@@ -17,7 +17,7 @@ namespace LAZYSHELL
     public partial class BattleScripts : Form
     {
         #region Variables
-        
+
         private long checksum;
         private Monsters monsterEditor;
         public BattleScript[] battleScripts { get { return Model.BattleScripts; } set { Model.BattleScripts = value; } }
@@ -420,329 +420,8 @@ namespace LAZYSHELL
                     break;
             }
         }
-        private int RemoveCommand(TreeNodeCollection nodes, int count)
-        {
-            if (nodes.Count <= 0) return count;
-
-            TreeNode tn;
-            for (int i = nodes.Count - 1; i >= 0; i--, count--)
-            {
-                tn = nodes[i];
-                count = RemoveCommand(tn.Nodes, count);
-                if (tn.Checked)
-                    battleCommands.RemoveAt(count);
-            }
-            return count;
-        }
-        private void RemoveAllCommands()
-        {
-            BattleScriptCommand cmd = new BattleCommandFF(new byte[] { 0xFF });
-            battleCommands.Clear();
-            battleCommands.Add(cmd);
-            battleCommands.Add(cmd);
-
-            AssembleBattleScript(battleScript);
-            RefreshBattleScriptsEditor();
-        }
-        private int MoveUpCommand(TreeNodeCollection nodes, int count)
-        {
-            if (nodes.Count <= 0) return count;
-            foreach (TreeNode tn in nodes)
-            {
-                if (tn.Checked)
-                    battleCommands.Reverse(count - 1, 2);
-                count = MoveUpCommand(tn.Nodes, count + 1);
-            }
-            return count;
-        }
-        private int MoveDownCommand(TreeNodeCollection nodes, int count)
-        {
-            if (nodes.Count <= 0) return count;
-            TreeNode tn;
-            for (int i = nodes.Count - 1; i >= 0; i--, count--)
-            {
-                tn = nodes[i];
-                count = MoveDownCommand(tn.Nodes, count);
-                if (tn.Checked)
-                    battleCommands.Reverse(count, 2);
-            }
-            return count;
-        }
-        private void CopyCommands(TreeNodeCollection nodes)
-        {
-            BattleScriptCommand bat, batCopy;
-            byte[] temp;
-            foreach (TreeNode tn in nodes)
-            {
-                if (tn.Checked)
-                {
-                    bat = (BattleScriptCommand)tn.Tag;
-                    temp = new byte[bat.Length]; bat.CommandData.CopyTo(temp, 0);
-                    batCopy = CreateCommand(temp);
-                    copiedCmds.Add(batCopy);
-                }
-                CopyCommands(tn.Nodes);
-            }
-        }
-        //
-        private void UpdateBattleScriptsFreeSpace()
-        {
-            int bytesLeft = CalculateBattleScriptsLength();
-            this.BatScrLabel3.Text = " " + bytesLeft.ToString() + " bytes left";
-            this.BatScrLabel3.BackColor = bytesLeft < 0 ? Color.Red : SystemColors.Control;
-        }
-        private int CalculateBattleScriptsLength()
-        {
-            int block1Size = 0x274A;//0x3959F3 - 0x3932AA;
-            int block2Size = 0x0C00;//0x39FFFF - 0x39F400;
-            int totalSize = block1Size + block2Size;
-
-            int length = 0;
-
-            int i = 0;
-            for (; i < battleScripts.Length && length + battleScripts[i].ScriptLength < block1Size; i++)
-                length += battleScripts[i].ScriptLength;
-
-            if (i < battleScripts.Length - 1)
-                length = block1Size;
-
-            for (; i < battleScripts.Length; i++)
-                length += battleScripts[i].ScriptLength;
-
-            return totalSize - length - 1;
-        }
-        //
-        private void SetInitialBits(byte bits)
-        {
-            updatingProperties = true;
-
-            if ((bits & 0x01) != 0) bit0.Checked = true;
-            if ((bits & 0x02) != 0) bit1.Checked = true;
-            if ((bits & 0x04) != 0) bit2.Checked = true;
-            if ((bits & 0x08) != 0) bit3.Checked = true;
-            if ((bits & 0x10) != 0) bit4.Checked = true;
-            if ((bits & 0x20) != 0) bit5.Checked = true;
-            if ((bits & 0x40) != 0) bit6.Checked = true;
-            if ((bits & 0x80) != 0) bit7.Checked = true;
-
-            updatingProperties = false;
-        }
-        private void ResetAllControls()
-        {
-            updatingProperties = true;
-
-            nameA.BackColor = SystemColors.ControlDarkDark;
-            nameA.Items.Clear(); nameA.ResetText();
-            nameB.BackColor = SystemColors.ControlDarkDark;
-            nameB.Items.Clear(); nameB.ResetText();
-            nameC.BackColor = SystemColors.ControlDarkDark;
-            nameC.Items.Clear(); nameC.ResetText();
-            numA.Minimum = 0; numA.Maximum = 255; numA.Value = 0;
-            numB.Minimum = 0; numB.Maximum = 255; numB.Value = 0;
-            numC.Minimum = 0; numC.Maximum = 255; numC.Value = 0;
-            doNothingA.Checked = false;
-            doNothingB.Checked = false;
-            doNothingC.Checked = false;
-            labelDoA.Text = "";
-            labelDoB.Text = "";
-
-            target.Items.Clear(); target.ResetText();
-            targetNum.Value = 0;
-            effects.Items.Clear();
-            labelTargetA.Text = "";
-            labelTargetB.Text = "";
-            labelTargetC.Text = "";
-
-            memory.Minimum = 0x7EE000; memory.Maximum = 0x7EE00F; memory.Value = 0x7EE000;
-            comparison.Minimum = 0; comparison.Maximum = 255; comparison.Value = 0;
-            labelMemoryA.Text = "";
-            labelMemoryB.Text = "";
-            labelMemoryC.Text = "";
-            bit0.Checked = false;
-            bit1.Checked = false;
-            bit2.Checked = false;
-            bit3.Checked = false;
-            bit4.Checked = false;
-            bit5.Checked = false;
-            bit6.Checked = false;
-            bit7.Checked = false;
-
-            updatingProperties = false;
-        }
-        private void AlignCommandGUI(GroupBox panel)
-        {
-            if (panel == null)
-            {
-                panel1.Height = 28;
-                panel2.Top = 0;
-            }
-            else if (panel.Visible)
-            {
-                panel1.Height = panel.Height + 28;
-                panel2.Top = panel.Height;
-            }
-        }
-        public void Assemble()
-        {
-            if (CalculateBattleScriptsLength() >= 0)
-            {
-                AssembleAllBattleScripts();
-                checksum = Do.GenerateChecksum(battleScripts);
-            }
-            else
-                MessageBox.Show("There is not enough available space to save the battle scripts to.\n\nThe battle scripts were not saved.", "LAZY SHELL");
-        }
-        public void AssembleAllBattleScripts()
-        {
-            // Assemble BattleScript Data
-            // Block 1
-            ushort offset = 0x32AA; // Starting point for storage
-            int bank = 0x390000;
-            int i = 0;
-
-            int pointerTable = 0x3930AA;
-
-            for (; i < battleScripts.Length && offset + battleScripts[i].ScriptLength <= 0x59F3; i++)
-            {
-                // write to the pointer array
-                Bits.SetShort(Model.Data, pointerTable + (i * 2), offset);
-                // write to the data
-                offset += battleScripts[i].Assemble(bank + offset);
-            }
-            // Block 2
-            offset = 0xF400;
-            for (; i < battleScripts.Length && offset + battleScripts[i].ScriptLength <= 0xFFFF; i++)
-            {
-                // write to the pointer array
-                Bits.SetShort(Model.Data, pointerTable + (i * 2), offset);
-                // write to the data
-                offset += battleScripts[i].Assemble(bank + offset);
-            }
-
-            if (i != battleScripts.Length)
-                System.Windows.Forms.MessageBox.Show("Battle Scripts exceed max size, decrease total size to save correctly.\nNote: Saving stops when out of space.");
-            // DONE ASSEMBLING BATTLE SCRIPT DATA
-        }
-        public bool ChecksumNotChanged()
-        {
-            if (Do.GenerateChecksum(battleScripts) == this.checksum)
-                return true;
-            return false;
-        }
-        #endregion
-        #region Event Handlers
-        private void BattleScripts_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (bp != null)
-                bp.Close();
-        }
-        private void Scripts_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (!BattleScriptTree.Enabled)
-                return;
-            if (!BattleScriptTree.Focused)
-                return;
-
-            switch (e.KeyData)
-            {
-                case Keys.Control | Keys.A: Do.SelectAllNodes(BattleScriptTree.Nodes, true); break;
-                case Keys.Control | Keys.D: Do.SelectAllNodes(BattleScriptTree.Nodes, false); break;
-                case Keys.Control | Keys.C: BatScrCopyCommand_Click(null, null); break;
-                case Keys.Control | Keys.V: BatScrPasteCommand_Click(null, null); break;
-                case Keys.Control | Keys.Up:
-                case Keys.Shift | Keys.Up: BatScrMoveUp_Click(null, null); break;
-                case Keys.Control | Keys.Down:
-                case Keys.Shift | Keys.Down: BatScrMoveDown_Click(null, null); break;
-                case Keys.Delete: BatScrDeleteCommand_Click(null, null); break;
-            }
-        }
-        private void BattleScriptTree_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            BattleScriptCommand bsc = (BattleScriptCommand)e.Node.Tag;
-
-            toolStripTextBox1.Text = BitConverter.ToString(bsc.CommandData);
-        }
-        private void BattleScriptTree_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            BatScrEditCommand_Click(null, null);
-        }
-        private void BattleScriptTree_AfterCheck(object sender, TreeViewEventArgs e)
-        {
-            BattleScriptCommand bsc = (BattleScriptCommand)e.Node.Tag;
-            if (bsc.CommandID == 0xFF && e.Node.Checked)
-            {
-                e.Node.Checked = false;
-                bsc.Set = false;
-                return;
-            }
-            else
-                bsc.Set = e.Node.Checked;
-        }
-        private void BattleScriptTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            Do.AddHistory(this, index, e.Node, "NodeMouseClick", true);
-            //
-            BattleScriptTree.SelectedNode = e.Node;
-            if (e.Button != MouseButtons.Right) return;
-            goToToolStripMenuItem.Click -= goToDialogue_Click;
-            goToToolStripMenuItem.Click -= goToEvent_Click;
-            BattleScriptCommand temp = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
-            if (temp.CommandID == 0xE3)
-            {
-                e.Node.ContextMenuStrip = contextMenuStripGoto;
-                goToToolStripMenuItem.Text = "Edit dialogue...";
-                goToToolStripMenuItem.Click += new EventHandler(goToDialogue_Click);
-            }
-            else if (temp.CommandID == 0xE5)
-            {
-                e.Node.ContextMenuStrip = contextMenuStripGoto;
-                goToToolStripMenuItem.Text = "Edit event...";
-                goToToolStripMenuItem.Click += new EventHandler(goToEvent_Click);
-            }
-        }
-        // command panels
-        private void panelDoOneOfThree_VisibleChanged(object sender, EventArgs e)
-        {
-            AlignCommandGUI(panelDoOneOfThree);
-        }
-        private void panelMemoryCompare_VisibleChanged(object sender, EventArgs e)
-        {
-            AlignCommandGUI(panelMemoryCompare);
-        }
-        private void panelIfTargetValue_VisibleChanged(object sender, EventArgs e)
-        {
-            AlignCommandGUI(panelIfTargetValue);
-        }
-        // context menustrip
-        private void goToDialogue_Click(object sender, EventArgs e)
-        {
-            if (BattleScriptTree.SelectedNode == null) return;
-
-            BattleScriptCommand temp = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
-            int num = temp.CommandData[1];
-
-            if (Model.Program.Dialogues == null || !Model.Program.Dialogues.Visible)
-                Model.Program.CreateDialoguesWindow();
-
-            Model.Program.Dialogues.BattleDialogues.Index = num;
-            Model.Program.Dialogues.BringToFront();
-        }
-        private void goToEvent_Click(object sender, EventArgs e)
-        {
-            if (BattleScriptTree.SelectedNode == null) return;
-
-            BattleScriptCommand temp = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
-            int num = temp.CommandData[1];
-
-            if (Model.Program.Animations == null || !Model.Program.Animations.Visible)
-                Model.Program.CreateAnimationsWindow();
-
-            Model.Program.Animations.Category = 7;
-            Model.Program.Animations.Index = num;
-            Model.Program.Animations.BringToFront();
-        }
-        // Command properties
-        private void listBoxCommands_SelectedIndexChanged(object sender, EventArgs e)
+        // Disassembler Commands
+        private void ControlDisassemble()
         {
             buttonInsert.Enabled = true;
             buttonApply.Enabled = false;
@@ -750,773 +429,56 @@ namespace LAZYSHELL
 
             switch (listBoxCommands.SelectedIndex)
             {
-                case 0:
-                    BatScrDoOneAttack(new BattleCommandLE0(new byte[] { 0x00 }, this.attackNames));
-                    break;
-                case 1:
-                    BatScrDoOneOfThreeAttacks(new BattleCommandE0(new byte[] { 0xE0, 0x00, 0x00, 0x00 }, this.attackNames));
-                    break;
-                case 2:
-                    BatScrDoOneSpell(new BattleCommandEF(new byte[] { 0xEF, 0x00 }, this.spellNames));
-                    break;
-                case 3:
-                    BatScrDoOneOfThreeSpells(new BattleCommandF0(new byte[] { 0xF0, 0x00, 0x00, 0x00 }, this.spellNames));
-                    break;
-                case 4:
-                    BatScrRunBattleDialogue(new BattleCommandE3(new byte[] { 0xE3, 0x00 }, Model.BattleDialogues));
-                    break;
-                case 5:
-                    BatScrRunBattleEvent(new BattleCommandE5(new byte[] { 0xE5, 0x00 }));
-                    break;
-                case 6:
-                    BatScrRunObjectSequence(new BattleCommandF1(new byte[] { 0xF1, 0x00 }));
-                    break;
-                case 7:
-                    BatScrTargetSet(new BattleCommandE2(new byte[] { 0xE2, 0x00 }));
-                    break;
-                case 8:
-                    BatScrTargetDisable(new BattleCommandF2(new byte[] { 0xF2, 0x00, 0x00 }));
-                    break;
-                case 9:
-                    BatScrTargetEnable(new BattleCommandF2(new byte[] { 0xF2, 0x01, 0x00 }));
-                    break;
-                case 10:
-                    BatScrTargetRemove(new BattleCommandEA(new byte[] { 0xEA, 0x00, 0x00, 0x00 }));
-                    break;
-                case 11:
-                    BatScrTargetCall(new BattleCommandEA(new byte[] { 0xEA, 0x01, 0x00, 0x00 }));
-                    break;
-                case 12:
-                    BatScrTargetSetInvincibility(new BattleCommandEB(new byte[] { 0xEB, 0x00, 0x00 }));
-                    break;
-                case 13:
-                    BatScrTargetNullInvincibility(new BattleCommandEB(new byte[] { 0xEB, 0x01, 0x00 }));
-                    break;
-                case 14:
-                    BatScrCommandDisable(new BattleCommandF3(new byte[] { 0xF3, 0x01, 0x00 }));
-                    break;
-                case 15:
-                    BatScrCommandEnable(new BattleCommandF3(new byte[] { 0xF3, 0x00, 0x00 }));
-                    break;
-                case 16:
-                    BatScrSetItems(new BattleCommandF4(new byte[] { 0xF4, 0x00, 0x00, 0x00 }));
-                    break;
-                case 17:
-                    BatScrGenerateRandomNumber(new BattleCommandED(new byte[] { 0xED, 0x00 }));
-                    break;
-                case 18:
-                    BatScrMemoryIncrement(new BattleCommandE6(new byte[] { 0xE6, 0x00, 0x00 }));
-                    break;
-                case 19:
-                    BatScrMemoryDecrement(new BattleCommandE6(new byte[] { 0xE6, 0x01, 0x00 }));
-                    break;
-                case 20:
-                    BatScrMemorySetBits(new BattleCommandE7(new byte[] { 0xE7, 0x00, 0x00, 0x00 }));
-                    break;
-                case 21:
-                    BatScrMemoryClearBits(new BattleCommandE7(new byte[] { 0xE7, 0x01, 0x00, 0x00 }));
-                    break;
-                case 22:
-                    BatScrMemoryClear(new BattleCommandE8(new byte[] { 0xE8, 0x00 }));
-                    break;
-                case 23:
-                    BatScrExitBattle(new BattleCommandEC(new byte[] { 0xEC }));
-                    break;
-                case 24:
-                    BatScrWaitOneTurn(new BattleCommandFD(new byte[] { 0xFD }));
-                    break;
-                case 25:
-                    BatScrWaitOneTurnRestart(new BattleCommandFE(new byte[] { 0xFE }));
-                    break;
-                case 26:
-                    BatScrIfAttackedByCommand(new BattleCommandFC(new byte[] { 0xFC, 0x01, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 27:
-                    BatScrIfAttackedBySpell(new BattleCommandFC(new byte[] { 0xFC, 0x02, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 28:
-                    BatScrIfAttackedByItem(new BattleCommandFC(new byte[] { 0xFC, 0x03, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 29:
-                    BatScrIfAttackedByElement(new BattleCommandFC(new byte[] { 0xFC, 0x04, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 30:
-                    BatScrIfAttacked(new BattleCommandFC(new byte[] { 0xFC, 0x05, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 31:
-                    BatScrIfTargetHPIsBelow(new BattleCommandFC(new byte[] { 0xFC, 0x06, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 32:
-                    BatScrIfTargetAffectedBy(new BattleCommandFC(new byte[] { 0xFC, 0x08, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 33:
-                    BatScrIfTargetNotAffectedBy(new BattleCommandFC(new byte[] { 0xFC, 0x09, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 34:
-                    BatScrIfTargetAlive(new BattleCommandFC(new byte[] { 0xFC, 0x10, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 35:
-                    BatScrIfTargetDead(new BattleCommandFC(new byte[] { 0xFC, 0x10, 0x01, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 36:
-                    BatScrIfHPIsBelow(new BattleCommandFC(new byte[] { 0xFC, 0x07, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 37:
-                    BatScrIfInFormation(new BattleCommandFC(new byte[] { 0xFC, 0x13, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 38:
-                    BatScrIfOnlyOneAlive(new BattleCommandFC(new byte[] { 0xFC, 0x14, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 39:
-                    BatScrIfMemoryGreaterThan(new BattleCommandFC(new byte[] { 0xFC, 0x0D, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 40:
-                    BatScrIfMemoryLessThan(new BattleCommandFC(new byte[] { 0xFC, 0x0C, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 41:
-                    BatScrIfMemoryBitsSet(new BattleCommandFC(new byte[] { 0xFC, 0x11, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 42:
-                    BatScrIfMemoryBitsClear(new BattleCommandFC(new byte[] { 0xFC, 0x12, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                case 43:
-                    BatScrIfAttackPhaseEqualTo(new BattleCommandFC(new byte[] { 0xFC, 0x0A, 0x00, 0x00 }, this.spellNames, Model.ItemNames));
-                    break;
-                default: AlignCommandGUI(null);
-                    break;
+                case 0: BatScrCommandDisable(new BattleCommandF3(new byte[] { 0xF3, 0x01, 0x00 })); break;
+                case 1: BatScrCommandEnable(new BattleCommandF3(new byte[] { 0xF3, 0x00, 0x00 })); break;
+                case 2: BatScrDoOneAttack(new BattleCommandLE0(new byte[] { 0x00 }, this.attackNames)); break;
+                case 3: BatScrDoOneOfThreeAttacks(new BattleCommandE0(new byte[] { 0xE0, 0x00, 0x00, 0x00 }, this.attackNames)); break;
+                case 4: BatScrDoOneOfThreeSpells(new BattleCommandF0(new byte[] { 0xF0, 0x00, 0x00, 0x00 }, this.spellNames)); break;
+                case 5: BatScrDoOneSpell(new BattleCommandEF(new byte[] { 0xEF, 0x00 }, this.spellNames)); break;
+                case 6: BatScrExitBattle(new BattleCommandEC(new byte[] { 0xEC })); break;
+                case 7: BatScrGenerateRandomNumber(new BattleCommandED(new byte[] { 0xED, 0x00 })); break;
+                case 8: BatScrIfAttackPhaseEqualTo(new BattleCommandFC(new byte[] { 0xFC, 0x0A, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 9: BatScrIfAttacked(new BattleCommandFC(new byte[] { 0xFC, 0x05, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 10: BatScrIfAttackedByCommand(new BattleCommandFC(new byte[] { 0xFC, 0x01, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 11: BatScrIfAttackedByElement(new BattleCommandFC(new byte[] { 0xFC, 0x04, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 12: BatScrIfAttackedByItem(new BattleCommandFC(new byte[] { 0xFC, 0x03, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 13: BatScrIfAttackedBySpell(new BattleCommandFC(new byte[] { 0xFC, 0x02, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 14: BatScrIfHPIsBelow(new BattleCommandFC(new byte[] { 0xFC, 0x07, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 15: BatScrIfInFormation(new BattleCommandFC(new byte[] { 0xFC, 0x13, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 16: BatScrIfMemoryBitsClear(new BattleCommandFC(new byte[] { 0xFC, 0x12, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 17: BatScrIfMemoryBitsSet(new BattleCommandFC(new byte[] { 0xFC, 0x11, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 18: BatScrIfMemoryGreaterThan(new BattleCommandFC(new byte[] { 0xFC, 0x0D, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 19: BatScrIfMemoryLessThan(new BattleCommandFC(new byte[] { 0xFC, 0x0C, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 20: BatScrIfOnlyOneAlive(new BattleCommandFC(new byte[] { 0xFC, 0x14, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 21: BatScrIfTargetAffectedBy(new BattleCommandFC(new byte[] { 0xFC, 0x08, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 22: BatScrIfTargetAlive(new BattleCommandFC(new byte[] { 0xFC, 0x10, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 23: BatScrIfTargetDead(new BattleCommandFC(new byte[] { 0xFC, 0x10, 0x01, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 24: BatScrIfTargetHPIsBelow(new BattleCommandFC(new byte[] { 0xFC, 0x06, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 25: BatScrIfTargetNotAffectedBy(new BattleCommandFC(new byte[] { 0xFC, 0x09, 0x00, 0x00 }, this.spellNames, Model.ItemNames)); break;
+                case 26: BatScrMemoryClear(new BattleCommandE8(new byte[] { 0xE8, 0x00 })); break;
+                case 27: BatScrMemoryClearBits(new BattleCommandE7(new byte[] { 0xE7, 0x01, 0x00, 0x00 })); break;
+                case 28: BatScrMemoryDecrement(new BattleCommandE6(new byte[] { 0xE6, 0x01, 0x00 })); break;
+                case 29: BatScrMemoryIncrement(new BattleCommandE6(new byte[] { 0xE6, 0x00, 0x00 })); break;
+                case 30: BatScrMemorySetBits(new BattleCommandE7(new byte[] { 0xE7, 0x00, 0x00, 0x00 })); break;
+                case 31: BatScrRunBattleDialogue(new BattleCommandE3(new byte[] { 0xE3, 0x00 }, Model.BattleDialogues)); break;
+                case 32: BatScrRunBattleEvent(new BattleCommandE5(new byte[] { 0xE5, 0x00 })); break;
+                case 33: BatScrRunObjectSequence(new BattleCommandF1(new byte[] { 0xF1, 0x00 })); break;
+                case 34: BatScrSetItems(new BattleCommandF4(new byte[] { 0xF4, 0x00, 0x00, 0x00 })); break;
+                case 35: BatScrTargetCall(new BattleCommandEA(new byte[] { 0xEA, 0x01, 0x00, 0x00 })); break;
+                case 36: BatScrTargetDisable(new BattleCommandF2(new byte[] { 0xF2, 0x00, 0x00 })); break;
+                case 37: BatScrTargetEnable(new BattleCommandF2(new byte[] { 0xF2, 0x01, 0x00 })); break;
+                case 38: BatScrTargetNullInvincibility(new BattleCommandEB(new byte[] { 0xEB, 0x01, 0x00 })); break;
+                case 39: BatScrTargetRemove(new BattleCommandEA(new byte[] { 0xEA, 0x00, 0x00, 0x00 })); break;
+                case 40: BatScrTargetSet(new BattleCommandE2(new byte[] { 0xE2, 0x00 })); break;
+                case 41: BatScrTargetSetInvincibility(new BattleCommandEB(new byte[] { 0xEB, 0x00, 0x00 })); break;
+                case 42: BatScrWaitOneTurn(new BattleCommandFD(new byte[] { 0xFD })); break;
+                case 43: BatScrWaitOneTurnRestart(new BattleCommandFE(new byte[] { 0xFE })); break;
+                default: AlignCommandGUI(null); break;
             }
         }
-        private void buttonInsert_Click(object sender, EventArgs e)
+        private void ControlAssemble()
         {
-            byte[] commandData = new byte[command.Length];
-            command.CommandData.CopyTo(commandData, 0);
-            AddCommand(CreateCommand(commandData));
-            listBoxCommands.Focus();
         }
-        private void buttonApply_Click(object sender, EventArgs e)
-        {
-            if (editedBatNode == null) return;
-            ReplaceCommand(command);
-            BattleScriptTree.Focus();
-            BatScrEditCommand_Click(null, null);
-            buttonApply.Focus();
-        }
-        private void name_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (updatingProperties) return;
-            switch (command.CommandID)
-            {
-                case 0xFC:
-                    if (command.CommandData[1] == 0x02)
-                        goto case 0xF0;
-                    if (command.CommandData[1] == 0x03)
-                        Do.DrawName(
-                            sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
-                            Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
-                    break;
-                case 0xEF:
-                case 0xF0:
-                    if (e.Index < 0 || e.Index >= 128)
-                        break;
-                    Do.DrawName(
-                        sender, e, new BattleDialoguePreview(), Model.SpellNames,
-                        Model.SpellNames.GetNumFromIndex(e.Index) < 64 ? Model.FontMenu : Model.FontDialogue,
-                        Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
-                    break;
-                case 0xE0:
-                    goto default;
-                default:
-                    Do.DrawName(
-                        sender, e, new BattleDialoguePreview(), Model.AttackNames, Model.FontDialogue,
-                        Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, true, Model.MenuBG_);
-                    break;
-            }
-        }
-        private void numA_ValueChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            switch (command.CommandID)
-            {
-                case 0xED:
-                case 0xF1:
-                case 0xF3:
-                case 0xF4:
-                    command.ModifyCommand(0, (byte)numA.Value);
-                    break;
-                case 0xE0:
-                    command.ModifyCommand(1, (byte)numA.Value);
-                    nameA.SelectedIndex = attackNames.GetIndexFromNum((int)numA.Value);
-                    break;
-                case 0xE3:
-                case 0xE5:
-                    command.ModifyCommand(1, (byte)numA.Value);
-                    nameA.SelectedIndex = (int)numA.Value;
-                    break;
-                case 0xEF:
-                case 0xF0:
-                    command.ModifyCommand(1, (byte)numA.Value);
-                    nameA.SelectedIndex = spellNames.GetIndexFromNum((int)numA.Value);
-                    break;
-                case 0xFC:
-                    switch (command.Option)
-                    {
-                        case 0x02:
-                            command.ModifyCommand(2, (byte)numA.Value);
-                            nameA.SelectedIndex = spellNames.GetIndexFromNum((int)numA.Value); break;
-                        case 0x03:
-                            command.ModifyCommand(2, (byte)numA.Value);
-                            nameA.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)numA.Value); break;
-                        case 0x07:
-                        case 0x13:
-                            Bits.SetShort(command.CommandData, 2, (ushort)numA.Value);
-                            break;
-                    }
-                    break;
-                default:
-                    command.ModifyCommand(0, (byte)numA.Value);
-                    nameA.SelectedIndex = attackNames.GetIndexFromNum((int)numA.Value);
-                    break;
-            }
-        }
-        private void nameA_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            switch (command.CommandID)
-            {
-                case 0xE0:
-                    command.ModifyCommand(1, (byte)numA.Value);
-                    numA.Value = attackNames.GetNumFromIndex(nameA.SelectedIndex);
-                    break;
-                case 0xE3:
-                case 0xE5:
-                    command.ModifyCommand(1, (byte)numA.Value);
-                    numA.Value = nameA.SelectedIndex;
-                    break;
-                case 0xEF:
-                case 0xF0:
-                    command.ModifyCommand(1, (byte)numA.Value);
-                    numA.Value = spellNames.GetNumFromIndex(nameA.SelectedIndex);
-                    break;
-                case 0xFC:
-                    switch (command.Option)
-                    {
-                        case 0x01:
-                            command.ModifyCommand(2, (byte)(nameA.SelectedIndex + 2));
-                            break;
-                        case 0x02:
-                            command.ModifyCommand(2, (byte)numA.Value);
-                            numA.Value = spellNames.GetNumFromIndex(nameA.SelectedIndex);
-                            break;
-                        case 0x03:
-                            command.ModifyCommand(2, (byte)numA.Value);
-                            numA.Value = Model.ItemNames.GetNumFromIndex(nameA.SelectedIndex);
-                            break;
-                    }
-                    break;
-                default:
-                    command.ModifyCommand(0, (byte)numA.Value);
-                    numA.Value = attackNames.GetNumFromIndex(nameA.SelectedIndex);
-                    break;
-            }
-        }
-        private void numB_ValueChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            switch (command.CommandID)
-            {
-                case 0xE0:
-                    command.ModifyCommand(2, (byte)numB.Value);
-                    nameB.SelectedIndex = attackNames.GetIndexFromNum((int)numB.Value);
-                    break;
-                case 0xEF:
-                case 0xF0:
-                    command.ModifyCommand(2, (byte)numB.Value);
-                    nameB.SelectedIndex = spellNames.GetIndexFromNum((int)numB.Value);
-                    break;
-                case 0xFC:
-                    switch (command.Option)
-                    {
-                        case 0x02:
-                            command.ModifyCommand(3, (byte)numB.Value);
-                            nameB.SelectedIndex = spellNames.GetIndexFromNum((int)numB.Value); break;
-                        case 0x03:
-                            command.ModifyCommand(3, (byte)numB.Value);
-                            nameB.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)numB.Value); break;
-                    }
-                    break;
-                default:
-                    command.ModifyCommand(2, (byte)numB.Value);
-                    break;
-            }
-        }
-        private void nameB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            switch (command.CommandID)
-            {
-                case 0xE0:
-                    command.ModifyCommand(2, (byte)numB.Value);
-                    numB.Value = attackNames.GetNumFromIndex(nameB.SelectedIndex);
-                    break;
-                case 0xEF:
-                case 0xF0:
-                    command.ModifyCommand(2, (byte)numB.Value);
-                    numB.Value = spellNames.GetNumFromIndex(nameB.SelectedIndex);
-                    break;
-                case 0xFC:
-                    switch (command.Option)
-                    {
-                        case 0x01:
-                            command.ModifyCommand(3, (byte)(nameB.SelectedIndex + 2));
-                            break;
-                        case 0x02:
-                            command.ModifyCommand(3, (byte)numB.Value);
-                            numB.Value = spellNames.GetNumFromIndex(nameB.SelectedIndex);
-                            break;
-                        case 0x03:
-                            command.ModifyCommand(3, (byte)numB.Value);
-                            numB.Value = Model.ItemNames.GetNumFromIndex(nameB.SelectedIndex);
-                            break;
-                    }
-                    break;
-                default:
-                    command.ModifyCommand(2, (byte)numB.Value);
-                    numB.Value = nameB.SelectedIndex;
-                    break;
-            }
-        }
-        private void numC_ValueChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            switch (command.CommandID)
-            {
-                case 0xE0:
-                    command.ModifyCommand(3, (byte)numC.Value);
-                    nameC.SelectedIndex = attackNames.GetIndexFromNum((int)numC.Value);
-                    break;
-                case 0xEF:
-                case 0xF0:
-                    command.ModifyCommand(3, (byte)numC.Value);
-                    nameC.SelectedIndex = spellNames.GetIndexFromNum((int)numC.Value);
-                    break;
-                default:
-                    command.ModifyCommand(3, (byte)numC.Value);
-                    break;
-            }
-        }
-        private void nameC_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            switch (command.CommandID)
-            {
-                case 0xE0:
-                    command.ModifyCommand(3, (byte)numC.Value);
-                    numC.Value = attackNames.GetNumFromIndex(nameC.SelectedIndex);
-                    break;
-                case 0xEF:
-                case 0xF0:
-                    command.ModifyCommand(3, (byte)numC.Value);
-                    numC.Value = spellNames.GetNumFromIndex(nameC.SelectedIndex);
-                    break;
-                default:
-                    command.ModifyCommand(3, (byte)numC.Value);
-                    numC.Value = nameC.SelectedIndex;
-                    break;
-            }
-        }
-        private void doNothingA_CheckedChanged(object sender, EventArgs e)
-        {
-            doNothingA.ForeColor = doNothingA.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            if (doNothingA.Checked)
-            {
-                nameA.Enabled = false;
-                numA.Enabled = false;
-                switch (command.CommandID)
-                {
-                    case 0xE0:
-                    case 0xE3:
-                    case 0xE5:
-                    case 0xEF:
-                    case 0xF0:
-                        command.ModifyCommand(1, 0xFB);
-                        break;
-                    case 0xFC:
-                        switch (command.Option)
-                        {
-                            case 0x02:
-                            case 0x03: command.ModifyCommand(2, 0xFB); break;
-                        }
-                        break;
-                    default: command.ModifyCommand(0, 0xFB); break;
-                }
-            }
-            else
-            {
-                nameA.Enabled = true;
-                numA.Enabled = true;
-                numA_ValueChanged(null, null);
-            }
-        }
-        private void doNothingB_CheckedChanged(object sender, EventArgs e)
-        {
-            doNothingB.ForeColor = doNothingB.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            if (doNothingB.Checked)
-            {
-                nameB.Enabled = false;
-                numB.Enabled = false;
-                switch (command.CommandID)
-                {
-                    case 0xFC:
-                        switch (command.Option)
-                        {
-                            case 0x02:
-                            case 0x03:
-                                command.ModifyCommand(3, 0xFB); break;
-                        }
-                        break;
-                    default: command.ModifyCommand(2, 0xFB); break;
-                }
-            }
-            else
-            {
-                nameB.Enabled = true;
-                numB.Enabled = true;
-                numB_ValueChanged(null, null);
-            }
-        }
-        private void doNothingC_CheckedChanged(object sender, EventArgs e)
-        {
-            doNothingC.ForeColor = doNothingC.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            if (doNothingC.Checked)
-            {
-                nameC.Enabled = false;
-                numC.Enabled = false;
-                command.ModifyCommand(3, 0xFB);
-            }
-            else
-            {
-                nameC.Enabled = true;
-                numC.Enabled = true;
-                numC_ValueChanged(null, null);
-            }
-        }
-        private void target_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            switch (command.CommandID)
-            {
-                case 0xE2:
-                    command.ModifyCommand(1, (byte)target.SelectedIndex); break;
-                case 0xEA:
-                    command.ModifyCommand(3, (byte)target.SelectedIndex); break;
-                case 0xFC:
-                    switch (command.Option)
-                    {
-                        case 0x10: command.ModifyCommand(3, (byte)target.SelectedIndex); break;
-                        default: command.ModifyCommand(2, (byte)target.SelectedIndex); break;
-                    }
-                    break;
-                default:
-                    command.ModifyCommand(2, (byte)target.SelectedIndex); break;
-            }
-        }
-        private void targetNum_ValueChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            command.ModifyCommand(3, (byte)(targetNum.Value / 16));
-        }
-        private void effects_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            byte temp = 0;
-
-            if (command.CommandID == 0xFC && (command.Option == 0x08 || command.Option == 0x09))
-            {
-                if (effects.GetItemChecked(0)) temp |= 0x01;
-                if (effects.GetItemChecked(1)) temp |= 0x02;
-                if (effects.GetItemChecked(2)) temp |= 0x04;
-                if (effects.GetItemChecked(3)) temp |= 0x08;
-                if (effects.GetItemChecked(4)) temp |= 0x20;
-                if (effects.GetItemChecked(5)) temp |= 0x40;
-                if (effects.GetItemChecked(6)) temp |= 0x80;
-                command.ModifyCommand(3, temp);
-            }
-            else if (command.CommandID == 0xFC && command.Option == 0x04)
-            {
-                if (effects.GetItemChecked(0)) temp |= 0x10;
-                if (effects.GetItemChecked(1)) temp |= 0x20;
-                if (effects.GetItemChecked(2)) temp |= 0x40;
-                if (effects.GetItemChecked(3)) temp |= 0x80;
-                command.ModifyCommand(2, temp);
-            }
-            else
-            {
-                if (effects.GetItemChecked(0)) temp |= 0x01;
-                if (effects.GetItemChecked(1)) temp |= 0x02;
-                if (effects.GetItemChecked(2)) temp |= 0x04;
-                command.ModifyCommand(2, temp);
-            }
-        }
-        private void memory_ValueChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            switch (command.CommandID)
-            {
-                case 0xE8:
-                    command.ModifyCommand(1, (byte)((ulong)(memory.Value) & 0x0F)); break;
-                case 0xE6:
-                    command.ModifyCommand(2, (byte)((ulong)(memory.Value) & 0x0F)); break;
-                case 0xFC:
-                    switch (command.Option)
-                    {
-                        case 0x0A: command.ModifyCommand(2, (byte)memory.Value); break;
-                        case 0x0C:
-                        case 0x0D:
-                            command.ModifyCommand(2, (byte)((ulong)(memory.Value) & 0x0F)); break;
-                        default:
-                            command.ModifyCommand(2, (byte)((ulong)(memory.Value) & 0x0F)); break;
-                    }
-                    break;
-                default:
-                    command.ModifyCommand(2, (byte)((ulong)(memory.Value) & 0x0F));
-                    break;
-            }
-        }
-        private void comparison_ValueChanged(object sender, EventArgs e)
-        {
-            if (updatingProperties) return;
-            if (command.CommandID == 0xFC && command.Option == 0x0A)
-                command.ModifyCommand(2, (byte)comparison.Value);
-            else
-                command.ModifyCommand(3, (byte)comparison.Value);
-        }
-        private void bit0_CheckedChanged(object sender, EventArgs e)
-        {
-            bit0.ForeColor = bit0.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            byte temp = 0;
-            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
-            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
-            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
-            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
-            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
-            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
-            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
-            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
-        }
-        private void bit1_CheckedChanged(object sender, EventArgs e)
-        {
-            bit1.ForeColor = bit1.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            byte temp = 0;
-            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
-            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
-            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
-            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
-            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
-            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
-            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
-            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
-        }
-        private void bit2_CheckedChanged(object sender, EventArgs e)
-        {
-            bit2.ForeColor = bit2.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            byte temp = 0;
-            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
-            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
-            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
-            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
-            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
-            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
-            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
-            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
-        }
-        private void bit3_CheckedChanged(object sender, EventArgs e)
-        {
-            bit3.ForeColor = bit3.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            byte temp = 0;
-            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
-            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
-            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
-            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
-            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
-            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
-            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
-            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
-        }
-        private void bit4_CheckedChanged(object sender, EventArgs e)
-        {
-            bit4.ForeColor = bit4.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            byte temp = 0;
-            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
-            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
-            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
-            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
-            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
-            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
-            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
-            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
-        }
-        private void bit5_CheckedChanged(object sender, EventArgs e)
-        {
-            bit5.ForeColor = bit5.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            byte temp = 0;
-            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
-            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
-            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
-            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
-            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
-            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
-            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
-            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
-        }
-        private void bit6_CheckedChanged(object sender, EventArgs e)
-        {
-            bit6.ForeColor = bit6.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            byte temp = 0;
-            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
-            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
-            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
-            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
-            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
-            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
-            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
-            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
-        }
-        private void bit7_CheckedChanged(object sender, EventArgs e)
-        {
-            bit7.ForeColor = bit7.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingProperties) return;
-            byte temp = 0;
-            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
-            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
-            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
-            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
-            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
-            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
-            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
-            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
-        }
-        // Editing Buttons
-        private void BatScrCopyCommand_Click(object sender, EventArgs e)
-        {
-            copiedCmds = new ArrayList();
-            BattleScriptTree.ExpandAll();
-            CopyCommands(BattleScriptTree.Nodes);
-        }
-        private void BatScrMoveUp_Click(object sender, EventArgs e)
-        {
-            BattleScriptCommand bat = (BattleScriptCommand)battleCommands[0];
-            if (!bat.Set)
-            {
-                BattleScriptTree.ExpandAll();
-                MoveUpCommand(BattleScriptTree.Nodes, 0);
-
-                AssembleBattleScript(battleScript);
-                RefreshBattleScriptsEditor();
-            }
-        }
-        private void BatScrMoveDown_Click(object sender, EventArgs e)
-        {
-            BattleScriptCommand bat = (BattleScriptCommand)battleCommands[battleCommands.Count - 2];
-            if (!bat.Set)
-            {
-                BattleScriptTree.ExpandAll();
-                MoveDownCommand(BattleScriptTree.Nodes, BattleScriptTree.GetNodeCount(true) - 1);
-
-                AssembleBattleScript(battleScript);
-                RefreshBattleScriptsEditor();
-            }
-        }
-        private void BatScrPasteCommand_Click(object sender, EventArgs e)
-        {
-            if (copiedCmds == null) return;
-            byte[] commandData;
-            foreach (BattleScriptCommand bat in copiedCmds)
-            {
-                commandData = new byte[bat.Length];
-                bat.CommandData.CopyTo(commandData, 0);
-                AddCommand(CreateCommand(commandData));
-            }
-
-            AssembleBattleScript(battleScript);
-            RefreshBattleScriptsEditor();
-        }
-        private void BatScrDeleteCommand_Click(object sender, EventArgs e)
-        {
-            ResetAllControls();
-            buttonInsert.Enabled = false;
-            buttonApply.Enabled = false;
-            //
-            panelDoOneOfThree.Visible = false;
-            panelIfTargetValue.Visible = false;
-            panelMemoryCompare.Visible = false;
-            AlignCommandGUI(null);
-            //
-            BattleScriptTree.ExpandAll();
-            RemoveCommand(BattleScriptTree.Nodes, BattleScriptTree.GetNodeCount(true) - 1);
-            AssembleBattleScript(battleScript);
-            RefreshBattleScriptsEditor();
-        }
-        private void BatScrEditCommand_Click(object sender, EventArgs e)
-        {
-            if (BattleScriptTree.SelectedNode == null) return;
-
-            ResetAllControls();
-
-            this.command = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
-            this.editedBatNode = BattleScriptTree.SelectedNode;
-
-            // Edit Command
-            if (command.CommandID != 0xFF)
-            {
-                BattleScriptTree.ExpandAll();
-                EditCurrentCommand();
-            }
-            else
-                MessageBox.Show(
-                    "Cannot edit command(s).\n\nThe two counter command barriers cannot be removed, modified, or moved.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void BatScrExpandAll_Click(object sender, EventArgs e)
-        {
-            BattleScriptTree.ExpandAll();
-            BattleScriptTree.Focus();
-        }
-        private void BatScrCollapseAll_Click(object sender, EventArgs e)
-        {
-            BattleScriptTree.CollapseAll();
-            BattleScriptTree.Focus();
-        }
-        private void BatScrClearAll_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(
-                "You are about to clear all commands from the current script.\n\nGo ahead with process?",
-                "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
-                RemoveAllCommands();
-
-            BattleScriptTree.Focus();
-        }
-        private void battlePreview_Click(object sender, EventArgs e)
-        {
-            if (bp == null || !bp.Visible)
-                bp = new Previewer.Previewer(index, 3);
-            else
-                bp.Reload(index, 3);
-            bp.Show();
-            bp.BringToFront();
-        }
-        // Disassembler Commands
         private void BatScrDoOneAttack(BattleScriptCommand cmd)
         {
             numA.Enabled = true; nameA.Enabled = true; doNothingA.Enabled = true;
@@ -2328,6 +1290,963 @@ namespace LAZYSHELL
             panelMemoryCompare.Visible = false;
             this.command = cmd;
             AlignCommandGUI(null);
+        }
+        // modify commands
+        private int RemoveCommand(TreeNodeCollection nodes, int count)
+        {
+            if (nodes.Count <= 0) return count;
+
+            TreeNode tn;
+            for (int i = nodes.Count - 1; i >= 0; i--, count--)
+            {
+                tn = nodes[i];
+                count = RemoveCommand(tn.Nodes, count);
+                if (tn.Checked)
+                    battleCommands.RemoveAt(count);
+            }
+            return count;
+        }
+        private void RemoveAllCommands()
+        {
+            BattleScriptCommand cmd = new BattleCommandFF(new byte[] { 0xFF });
+            battleCommands.Clear();
+            battleCommands.Add(cmd);
+            battleCommands.Add(cmd);
+
+            AssembleBattleScript(battleScript);
+            RefreshBattleScriptsEditor();
+        }
+        private int MoveUpCommand(TreeNodeCollection nodes, int count)
+        {
+            if (nodes.Count <= 0) return count;
+            foreach (TreeNode tn in nodes)
+            {
+                if (tn.Checked)
+                    battleCommands.Reverse(count - 1, 2);
+                count = MoveUpCommand(tn.Nodes, count + 1);
+            }
+            return count;
+        }
+        private int MoveDownCommand(TreeNodeCollection nodes, int count)
+        {
+            if (nodes.Count <= 0) return count;
+            TreeNode tn;
+            for (int i = nodes.Count - 1; i >= 0; i--, count--)
+            {
+                tn = nodes[i];
+                count = MoveDownCommand(tn.Nodes, count);
+                if (tn.Checked)
+                    battleCommands.Reverse(count, 2);
+            }
+            return count;
+        }
+        private void CopyCommands(TreeNodeCollection nodes)
+        {
+            BattleScriptCommand bat, batCopy;
+            byte[] temp;
+            foreach (TreeNode tn in nodes)
+            {
+                if (tn.Checked)
+                {
+                    bat = (BattleScriptCommand)tn.Tag;
+                    temp = new byte[bat.Length]; bat.CommandData.CopyTo(temp, 0);
+                    batCopy = CreateCommand(temp);
+                    copiedCmds.Add(batCopy);
+                }
+                CopyCommands(tn.Nodes);
+            }
+        }
+        //
+        private void UpdateBattleScriptsFreeSpace()
+        {
+            int bytesLeft = CalculateBattleScriptsLength();
+            this.BatScrLabel3.Text = " " + bytesLeft.ToString() + " bytes left";
+            this.BatScrLabel3.BackColor = bytesLeft < 0 ? Color.Red : SystemColors.Control;
+        }
+        private int CalculateBattleScriptsLength()
+        {
+            int block1Size = 0x274A;//0x3959F3 - 0x3932AA;
+            int block2Size = 0x0C00;//0x39FFFF - 0x39F400;
+            int totalSize = block1Size + block2Size;
+
+            int length = 0;
+
+            int i = 0;
+            for (; i < battleScripts.Length && length + battleScripts[i].ScriptLength < block1Size; i++)
+                length += battleScripts[i].ScriptLength;
+
+            if (i < battleScripts.Length - 1)
+                length = block1Size;
+
+            for (; i < battleScripts.Length; i++)
+                length += battleScripts[i].ScriptLength;
+
+            return totalSize - length - 1;
+        }
+        //
+        private void SetInitialBits(byte bits)
+        {
+            updatingProperties = true;
+
+            if ((bits & 0x01) != 0) bit0.Checked = true;
+            if ((bits & 0x02) != 0) bit1.Checked = true;
+            if ((bits & 0x04) != 0) bit2.Checked = true;
+            if ((bits & 0x08) != 0) bit3.Checked = true;
+            if ((bits & 0x10) != 0) bit4.Checked = true;
+            if ((bits & 0x20) != 0) bit5.Checked = true;
+            if ((bits & 0x40) != 0) bit6.Checked = true;
+            if ((bits & 0x80) != 0) bit7.Checked = true;
+
+            updatingProperties = false;
+        }
+        private void ResetAllControls()
+        {
+            updatingProperties = true;
+
+            nameA.BackColor = SystemColors.ControlDarkDark;
+            nameA.Items.Clear(); nameA.ResetText();
+            nameB.BackColor = SystemColors.ControlDarkDark;
+            nameB.Items.Clear(); nameB.ResetText();
+            nameC.BackColor = SystemColors.ControlDarkDark;
+            nameC.Items.Clear(); nameC.ResetText();
+            numA.Minimum = 0; numA.Maximum = 255; numA.Value = 0;
+            numB.Minimum = 0; numB.Maximum = 255; numB.Value = 0;
+            numC.Minimum = 0; numC.Maximum = 255; numC.Value = 0;
+            doNothingA.Checked = false;
+            doNothingB.Checked = false;
+            doNothingC.Checked = false;
+            labelDoA.Text = "";
+            labelDoB.Text = "";
+
+            target.Items.Clear(); target.ResetText();
+            targetNum.Value = 0;
+            effects.Items.Clear();
+            labelTargetA.Text = "";
+            labelTargetB.Text = "";
+            labelTargetC.Text = "";
+
+            memory.Minimum = 0x7EE000; memory.Maximum = 0x7EE00F; memory.Value = 0x7EE000;
+            comparison.Minimum = 0; comparison.Maximum = 255; comparison.Value = 0;
+            labelMemoryA.Text = "";
+            labelMemoryB.Text = "";
+            labelMemoryC.Text = "";
+            bit0.Checked = false;
+            bit1.Checked = false;
+            bit2.Checked = false;
+            bit3.Checked = false;
+            bit4.Checked = false;
+            bit5.Checked = false;
+            bit6.Checked = false;
+            bit7.Checked = false;
+
+            updatingProperties = false;
+        }
+        private void AlignCommandGUI(GroupBox panel)
+        {
+            if (panel == null)
+            {
+                panel1.Height = 28;
+                panel2.Top = 0;
+            }
+            else if (panel.Visible)
+            {
+                panel1.Height = panel.Height + 28;
+                panel2.Top = panel.Height;
+            }
+        }
+        public void Assemble()
+        {
+            if (CalculateBattleScriptsLength() >= 0)
+            {
+                AssembleAllBattleScripts();
+                checksum = Do.GenerateChecksum(battleScripts);
+            }
+            else
+                MessageBox.Show("There is not enough available space to save the battle scripts to.\n\nThe battle scripts were not saved.", "LAZY SHELL");
+        }
+        public void AssembleAllBattleScripts()
+        {
+            // Assemble BattleScript Data
+            // Block 1
+            ushort offset = 0x32AA; // Starting point for storage
+            int bank = 0x390000;
+            int i = 0;
+
+            int pointerTable = 0x3930AA;
+
+            for (; i < battleScripts.Length && offset + battleScripts[i].ScriptLength <= 0x59F3; i++)
+            {
+                // write to the pointer array
+                Bits.SetShort(Model.Data, pointerTable + (i * 2), offset);
+                // write to the data
+                offset += battleScripts[i].Assemble(bank + offset);
+            }
+            // Block 2
+            offset = 0xF400;
+            for (; i < battleScripts.Length && offset + battleScripts[i].ScriptLength <= 0xFFFF; i++)
+            {
+                // write to the pointer array
+                Bits.SetShort(Model.Data, pointerTable + (i * 2), offset);
+                // write to the data
+                offset += battleScripts[i].Assemble(bank + offset);
+            }
+
+            if (i != battleScripts.Length)
+                System.Windows.Forms.MessageBox.Show("Battle Scripts exceed max size, decrease total size to save correctly.\nNote: Saving stops when out of space.");
+            // DONE ASSEMBLING BATTLE SCRIPT DATA
+        }
+        public bool ChecksumNotChanged()
+        {
+            if (Do.GenerateChecksum(battleScripts) == this.checksum)
+                return true;
+            return false;
+        }
+        #endregion
+        #region Event Handlers
+        private void BattleScripts_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (bp != null)
+                bp.Close();
+        }
+        private void Scripts_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!BattleScriptTree.Enabled)
+                return;
+            if (!BattleScriptTree.Focused)
+                return;
+
+            switch (e.KeyData)
+            {
+                case Keys.Control | Keys.A: Do.SelectAllNodes(BattleScriptTree.Nodes, true); break;
+                case Keys.Control | Keys.D: Do.SelectAllNodes(BattleScriptTree.Nodes, false); break;
+                case Keys.Control | Keys.C: BatScrCopyCommand_Click(null, null); break;
+                case Keys.Control | Keys.V: BatScrPasteCommand_Click(null, null); break;
+                case Keys.Control | Keys.Up:
+                case Keys.Shift | Keys.Up: BatScrMoveUp_Click(null, null); break;
+                case Keys.Control | Keys.Down:
+                case Keys.Shift | Keys.Down: BatScrMoveDown_Click(null, null); break;
+                case Keys.Delete: BatScrDeleteCommand_Click(null, null); break;
+            }
+        }
+        private void BattleScriptTree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            BattleScriptCommand bsc = (BattleScriptCommand)e.Node.Tag;
+
+            toolStripTextBox1.Text = BitConverter.ToString(bsc.CommandData);
+        }
+        private void BattleScriptTree_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            BatScrEditCommand_Click(null, null);
+        }
+        private void BattleScriptTree_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            BattleScriptCommand bsc = (BattleScriptCommand)e.Node.Tag;
+            if (bsc.CommandID == 0xFF && e.Node.Checked)
+            {
+                e.Node.Checked = false;
+                bsc.Set = false;
+                return;
+            }
+            else
+                bsc.Set = e.Node.Checked;
+        }
+        private void BattleScriptTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            Do.AddHistory(this, index, e.Node, "NodeMouseClick", true);
+            //
+            BattleScriptTree.SelectedNode = e.Node;
+            if (e.Button != MouseButtons.Right) return;
+            goToToolStripMenuItem.Click -= goToDialogue_Click;
+            goToToolStripMenuItem.Click -= goToEvent_Click;
+            BattleScriptCommand temp = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
+            if (temp.CommandID == 0xE3)
+            {
+                e.Node.ContextMenuStrip = contextMenuStripGoto;
+                goToToolStripMenuItem.Text = "Edit dialogue...";
+                goToToolStripMenuItem.Click += new EventHandler(goToDialogue_Click);
+            }
+            else if (temp.CommandID == 0xE5)
+            {
+                e.Node.ContextMenuStrip = contextMenuStripGoto;
+                goToToolStripMenuItem.Text = "Edit event...";
+                goToToolStripMenuItem.Click += new EventHandler(goToEvent_Click);
+            }
+        }
+        // command panels
+        private void panelDoOneOfThree_VisibleChanged(object sender, EventArgs e)
+        {
+            AlignCommandGUI(panelDoOneOfThree);
+        }
+        private void panelMemoryCompare_VisibleChanged(object sender, EventArgs e)
+        {
+            AlignCommandGUI(panelMemoryCompare);
+        }
+        private void panelIfTargetValue_VisibleChanged(object sender, EventArgs e)
+        {
+            AlignCommandGUI(panelIfTargetValue);
+        }
+        // context menustrip
+        private void goToDialogue_Click(object sender, EventArgs e)
+        {
+            if (BattleScriptTree.SelectedNode == null) return;
+
+            BattleScriptCommand temp = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
+            int num = temp.CommandData[1];
+
+            if (Model.Program.Dialogues == null || !Model.Program.Dialogues.Visible)
+                Model.Program.CreateDialoguesWindow();
+
+            Model.Program.Dialogues.BattleDialogues.Index = num;
+            Model.Program.Dialogues.BringToFront();
+        }
+        private void goToEvent_Click(object sender, EventArgs e)
+        {
+            if (BattleScriptTree.SelectedNode == null) return;
+
+            BattleScriptCommand temp = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
+            int num = temp.CommandData[1];
+
+            if (Model.Program.Animations == null || !Model.Program.Animations.Visible)
+                Model.Program.CreateAnimationsWindow();
+
+            Model.Program.Animations.Category = 7;
+            Model.Program.Animations.Index = num;
+            Model.Program.Animations.BringToFront();
+        }
+        // Command properties
+        private void listBoxCommands_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ControlDisassemble();
+        }
+        private void buttonInsert_Click(object sender, EventArgs e)
+        {
+            byte[] commandData = new byte[command.Length];
+            command.CommandData.CopyTo(commandData, 0);
+            AddCommand(CreateCommand(commandData));
+            listBoxCommands.Focus();
+        }
+        private void buttonApply_Click(object sender, EventArgs e)
+        {
+            if (editedBatNode == null) return;
+            ReplaceCommand(command);
+            BattleScriptTree.Focus();
+            BatScrEditCommand_Click(null, null);
+            buttonApply.Focus();
+        }
+        private void name_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (updatingProperties) return;
+            switch (command.CommandID)
+            {
+                case 0xFC:
+                    if (command.CommandData[1] == 0x02)
+                        goto case 0xF0;
+                    if (command.CommandData[1] == 0x03)
+                        Do.DrawName(
+                            sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
+                            Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
+                    break;
+                case 0xEF:
+                case 0xF0:
+                    if (e.Index < 0 || e.Index >= 128)
+                        break;
+                    Do.DrawName(
+                        sender, e, new BattleDialoguePreview(), Model.SpellNames,
+                        Model.SpellNames.GetNumFromIndex(e.Index) < 64 ? Model.FontMenu : Model.FontDialogue,
+                        Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
+                    break;
+                case 0xE0:
+                    goto default;
+                default:
+                    Do.DrawName(
+                        sender, e, new BattleDialoguePreview(), Model.AttackNames, Model.FontDialogue,
+                        Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, true, Model.MenuBG_);
+                    break;
+            }
+        }
+        private void numA_ValueChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            switch (command.CommandID)
+            {
+                case 0xED:
+                case 0xF1:
+                case 0xF3:
+                case 0xF4:
+                    command.ModifyCommand(0, (byte)numA.Value);
+                    break;
+                case 0xE0:
+                    command.ModifyCommand(1, (byte)numA.Value);
+                    nameA.SelectedIndex = attackNames.GetIndexFromNum((int)numA.Value);
+                    break;
+                case 0xE3:
+                case 0xE5:
+                    command.ModifyCommand(1, (byte)numA.Value);
+                    nameA.SelectedIndex = (int)numA.Value;
+                    break;
+                case 0xEF:
+                case 0xF0:
+                    command.ModifyCommand(1, (byte)numA.Value);
+                    nameA.SelectedIndex = spellNames.GetIndexFromNum((int)numA.Value);
+                    break;
+                case 0xFC:
+                    switch (command.Option)
+                    {
+                        case 0x02:
+                            command.ModifyCommand(2, (byte)numA.Value);
+                            nameA.SelectedIndex = spellNames.GetIndexFromNum((int)numA.Value); break;
+                        case 0x03:
+                            command.ModifyCommand(2, (byte)numA.Value);
+                            nameA.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)numA.Value); break;
+                        case 0x07:
+                        case 0x13:
+                            Bits.SetShort(command.CommandData, 2, (ushort)numA.Value);
+                            break;
+                    }
+                    break;
+                default:
+                    command.ModifyCommand(0, (byte)numA.Value);
+                    nameA.SelectedIndex = attackNames.GetIndexFromNum((int)numA.Value);
+                    break;
+            }
+        }
+        private void nameA_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            switch (command.CommandID)
+            {
+                case 0xE0:
+                    command.ModifyCommand(1, (byte)numA.Value);
+                    numA.Value = attackNames.GetNumFromIndex(nameA.SelectedIndex);
+                    break;
+                case 0xE3:
+                case 0xE5:
+                    command.ModifyCommand(1, (byte)numA.Value);
+                    numA.Value = nameA.SelectedIndex;
+                    break;
+                case 0xEF:
+                case 0xF0:
+                    command.ModifyCommand(1, (byte)numA.Value);
+                    numA.Value = spellNames.GetNumFromIndex(nameA.SelectedIndex);
+                    break;
+                case 0xFC:
+                    switch (command.Option)
+                    {
+                        case 0x01:
+                            command.ModifyCommand(2, (byte)(nameA.SelectedIndex + 2));
+                            break;
+                        case 0x02:
+                            command.ModifyCommand(2, (byte)numA.Value);
+                            numA.Value = spellNames.GetNumFromIndex(nameA.SelectedIndex);
+                            break;
+                        case 0x03:
+                            command.ModifyCommand(2, (byte)numA.Value);
+                            numA.Value = Model.ItemNames.GetNumFromIndex(nameA.SelectedIndex);
+                            break;
+                    }
+                    break;
+                default:
+                    command.ModifyCommand(0, (byte)numA.Value);
+                    numA.Value = attackNames.GetNumFromIndex(nameA.SelectedIndex);
+                    break;
+            }
+        }
+        private void numB_ValueChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            switch (command.CommandID)
+            {
+                case 0xE0:
+                    command.ModifyCommand(2, (byte)numB.Value);
+                    nameB.SelectedIndex = attackNames.GetIndexFromNum((int)numB.Value);
+                    break;
+                case 0xEF:
+                case 0xF0:
+                    command.ModifyCommand(2, (byte)numB.Value);
+                    nameB.SelectedIndex = spellNames.GetIndexFromNum((int)numB.Value);
+                    break;
+                case 0xFC:
+                    switch (command.Option)
+                    {
+                        case 0x02:
+                            command.ModifyCommand(3, (byte)numB.Value);
+                            nameB.SelectedIndex = spellNames.GetIndexFromNum((int)numB.Value); break;
+                        case 0x03:
+                            command.ModifyCommand(3, (byte)numB.Value);
+                            nameB.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)numB.Value); break;
+                    }
+                    break;
+                default:
+                    command.ModifyCommand(2, (byte)numB.Value);
+                    break;
+            }
+        }
+        private void nameB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            switch (command.CommandID)
+            {
+                case 0xE0:
+                    command.ModifyCommand(2, (byte)numB.Value);
+                    numB.Value = attackNames.GetNumFromIndex(nameB.SelectedIndex);
+                    break;
+                case 0xEF:
+                case 0xF0:
+                    command.ModifyCommand(2, (byte)numB.Value);
+                    numB.Value = spellNames.GetNumFromIndex(nameB.SelectedIndex);
+                    break;
+                case 0xFC:
+                    switch (command.Option)
+                    {
+                        case 0x01:
+                            command.ModifyCommand(3, (byte)(nameB.SelectedIndex + 2));
+                            break;
+                        case 0x02:
+                            command.ModifyCommand(3, (byte)numB.Value);
+                            numB.Value = spellNames.GetNumFromIndex(nameB.SelectedIndex);
+                            break;
+                        case 0x03:
+                            command.ModifyCommand(3, (byte)numB.Value);
+                            numB.Value = Model.ItemNames.GetNumFromIndex(nameB.SelectedIndex);
+                            break;
+                    }
+                    break;
+                default:
+                    command.ModifyCommand(2, (byte)numB.Value);
+                    numB.Value = nameB.SelectedIndex;
+                    break;
+            }
+        }
+        private void numC_ValueChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            switch (command.CommandID)
+            {
+                case 0xE0:
+                    command.ModifyCommand(3, (byte)numC.Value);
+                    nameC.SelectedIndex = attackNames.GetIndexFromNum((int)numC.Value);
+                    break;
+                case 0xEF:
+                case 0xF0:
+                    command.ModifyCommand(3, (byte)numC.Value);
+                    nameC.SelectedIndex = spellNames.GetIndexFromNum((int)numC.Value);
+                    break;
+                default:
+                    command.ModifyCommand(3, (byte)numC.Value);
+                    break;
+            }
+        }
+        private void nameC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            switch (command.CommandID)
+            {
+                case 0xE0:
+                    command.ModifyCommand(3, (byte)numC.Value);
+                    numC.Value = attackNames.GetNumFromIndex(nameC.SelectedIndex);
+                    break;
+                case 0xEF:
+                case 0xF0:
+                    command.ModifyCommand(3, (byte)numC.Value);
+                    numC.Value = spellNames.GetNumFromIndex(nameC.SelectedIndex);
+                    break;
+                default:
+                    command.ModifyCommand(3, (byte)numC.Value);
+                    numC.Value = nameC.SelectedIndex;
+                    break;
+            }
+        }
+        private void doNothingA_CheckedChanged(object sender, EventArgs e)
+        {
+            doNothingA.ForeColor = doNothingA.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            if (doNothingA.Checked)
+            {
+                nameA.Enabled = false;
+                numA.Enabled = false;
+                switch (command.CommandID)
+                {
+                    case 0xE0:
+                    case 0xE3:
+                    case 0xE5:
+                    case 0xEF:
+                    case 0xF0:
+                        command.ModifyCommand(1, 0xFB);
+                        break;
+                    case 0xFC:
+                        switch (command.Option)
+                        {
+                            case 0x02:
+                            case 0x03: command.ModifyCommand(2, 0xFB); break;
+                        }
+                        break;
+                    default: command.ModifyCommand(0, 0xFB); break;
+                }
+            }
+            else
+            {
+                nameA.Enabled = true;
+                numA.Enabled = true;
+                numA_ValueChanged(null, null);
+            }
+        }
+        private void doNothingB_CheckedChanged(object sender, EventArgs e)
+        {
+            doNothingB.ForeColor = doNothingB.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            if (doNothingB.Checked)
+            {
+                nameB.Enabled = false;
+                numB.Enabled = false;
+                switch (command.CommandID)
+                {
+                    case 0xFC:
+                        switch (command.Option)
+                        {
+                            case 0x02:
+                            case 0x03:
+                                command.ModifyCommand(3, 0xFB); break;
+                        }
+                        break;
+                    default: command.ModifyCommand(2, 0xFB); break;
+                }
+            }
+            else
+            {
+                nameB.Enabled = true;
+                numB.Enabled = true;
+                numB_ValueChanged(null, null);
+            }
+        }
+        private void doNothingC_CheckedChanged(object sender, EventArgs e)
+        {
+            doNothingC.ForeColor = doNothingC.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            if (doNothingC.Checked)
+            {
+                nameC.Enabled = false;
+                numC.Enabled = false;
+                command.ModifyCommand(3, 0xFB);
+            }
+            else
+            {
+                nameC.Enabled = true;
+                numC.Enabled = true;
+                numC_ValueChanged(null, null);
+            }
+        }
+        private void target_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            switch (command.CommandID)
+            {
+                case 0xE2:
+                    command.ModifyCommand(1, (byte)target.SelectedIndex); break;
+                case 0xEA:
+                    command.ModifyCommand(3, (byte)target.SelectedIndex); break;
+                case 0xFC:
+                    switch (command.Option)
+                    {
+                        case 0x10: command.ModifyCommand(3, (byte)target.SelectedIndex); break;
+                        default: command.ModifyCommand(2, (byte)target.SelectedIndex); break;
+                    }
+                    break;
+                default:
+                    command.ModifyCommand(2, (byte)target.SelectedIndex); break;
+            }
+        }
+        private void targetNum_ValueChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            command.ModifyCommand(3, (byte)(targetNum.Value / 16));
+        }
+        private void effects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            byte temp = 0;
+
+            if (command.CommandID == 0xFC && (command.Option == 0x08 || command.Option == 0x09))
+            {
+                if (effects.GetItemChecked(0)) temp |= 0x01;
+                if (effects.GetItemChecked(1)) temp |= 0x02;
+                if (effects.GetItemChecked(2)) temp |= 0x04;
+                if (effects.GetItemChecked(3)) temp |= 0x08;
+                if (effects.GetItemChecked(4)) temp |= 0x20;
+                if (effects.GetItemChecked(5)) temp |= 0x40;
+                if (effects.GetItemChecked(6)) temp |= 0x80;
+                command.ModifyCommand(3, temp);
+            }
+            else if (command.CommandID == 0xFC && command.Option == 0x04)
+            {
+                if (effects.GetItemChecked(0)) temp |= 0x10;
+                if (effects.GetItemChecked(1)) temp |= 0x20;
+                if (effects.GetItemChecked(2)) temp |= 0x40;
+                if (effects.GetItemChecked(3)) temp |= 0x80;
+                command.ModifyCommand(2, temp);
+            }
+            else
+            {
+                if (effects.GetItemChecked(0)) temp |= 0x01;
+                if (effects.GetItemChecked(1)) temp |= 0x02;
+                if (effects.GetItemChecked(2)) temp |= 0x04;
+                command.ModifyCommand(2, temp);
+            }
+        }
+        private void memory_ValueChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            switch (command.CommandID)
+            {
+                case 0xE8:
+                    command.ModifyCommand(1, (byte)((ulong)(memory.Value) & 0x0F)); break;
+                case 0xE6:
+                    command.ModifyCommand(2, (byte)((ulong)(memory.Value) & 0x0F)); break;
+                case 0xFC:
+                    switch (command.Option)
+                    {
+                        case 0x0A: command.ModifyCommand(2, (byte)memory.Value); break;
+                        case 0x0C:
+                        case 0x0D:
+                            command.ModifyCommand(2, (byte)((ulong)(memory.Value) & 0x0F)); break;
+                        default:
+                            command.ModifyCommand(2, (byte)((ulong)(memory.Value) & 0x0F)); break;
+                    }
+                    break;
+                default:
+                    command.ModifyCommand(2, (byte)((ulong)(memory.Value) & 0x0F));
+                    break;
+            }
+        }
+        private void comparison_ValueChanged(object sender, EventArgs e)
+        {
+            if (updatingProperties) return;
+            if (command.CommandID == 0xFC && command.Option == 0x0A)
+                command.ModifyCommand(2, (byte)comparison.Value);
+            else
+                command.ModifyCommand(3, (byte)comparison.Value);
+        }
+        private void bit0_CheckedChanged(object sender, EventArgs e)
+        {
+            bit0.ForeColor = bit0.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            byte temp = 0;
+            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
+            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
+            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
+            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
+            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
+            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
+            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
+            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
+        }
+        private void bit1_CheckedChanged(object sender, EventArgs e)
+        {
+            bit1.ForeColor = bit1.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            byte temp = 0;
+            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
+            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
+            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
+            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
+            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
+            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
+            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
+            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
+        }
+        private void bit2_CheckedChanged(object sender, EventArgs e)
+        {
+            bit2.ForeColor = bit2.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            byte temp = 0;
+            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
+            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
+            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
+            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
+            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
+            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
+            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
+            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
+        }
+        private void bit3_CheckedChanged(object sender, EventArgs e)
+        {
+            bit3.ForeColor = bit3.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            byte temp = 0;
+            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
+            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
+            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
+            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
+            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
+            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
+            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
+            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
+        }
+        private void bit4_CheckedChanged(object sender, EventArgs e)
+        {
+            bit4.ForeColor = bit4.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            byte temp = 0;
+            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
+            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
+            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
+            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
+            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
+            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
+            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
+            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
+        }
+        private void bit5_CheckedChanged(object sender, EventArgs e)
+        {
+            bit5.ForeColor = bit5.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            byte temp = 0;
+            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
+            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
+            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
+            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
+            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
+            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
+            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
+            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
+        }
+        private void bit6_CheckedChanged(object sender, EventArgs e)
+        {
+            bit6.ForeColor = bit6.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            byte temp = 0;
+            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
+            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
+            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
+            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
+            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
+            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
+            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
+            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
+        }
+        private void bit7_CheckedChanged(object sender, EventArgs e)
+        {
+            bit7.ForeColor = bit7.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingProperties) return;
+            byte temp = 0;
+            if (bit0.Checked) temp |= 0x01; command.ModifyCommand(3, temp);
+            if (bit1.Checked) temp |= 0x02; command.ModifyCommand(3, temp);
+            if (bit2.Checked) temp |= 0x04; command.ModifyCommand(3, temp);
+            if (bit3.Checked) temp |= 0x08; command.ModifyCommand(3, temp);
+            if (bit4.Checked) temp |= 0x10; command.ModifyCommand(3, temp);
+            if (bit5.Checked) temp |= 0x20; command.ModifyCommand(3, temp);
+            if (bit6.Checked) temp |= 0x40; command.ModifyCommand(3, temp);
+            if (bit7.Checked) temp |= 0x80; command.ModifyCommand(3, temp);
+        }
+        // Editing Buttons
+        private void BatScrCopyCommand_Click(object sender, EventArgs e)
+        {
+            copiedCmds = new ArrayList();
+            BattleScriptTree.ExpandAll();
+            CopyCommands(BattleScriptTree.Nodes);
+        }
+        private void BatScrMoveUp_Click(object sender, EventArgs e)
+        {
+            BattleScriptCommand bat = (BattleScriptCommand)battleCommands[0];
+            if (!bat.Set)
+            {
+                BattleScriptTree.ExpandAll();
+                MoveUpCommand(BattleScriptTree.Nodes, 0);
+
+                AssembleBattleScript(battleScript);
+                RefreshBattleScriptsEditor();
+            }
+        }
+        private void BatScrMoveDown_Click(object sender, EventArgs e)
+        {
+            BattleScriptCommand bat = (BattleScriptCommand)battleCommands[battleCommands.Count - 2];
+            if (!bat.Set)
+            {
+                BattleScriptTree.ExpandAll();
+                MoveDownCommand(BattleScriptTree.Nodes, BattleScriptTree.GetNodeCount(true) - 1);
+
+                AssembleBattleScript(battleScript);
+                RefreshBattleScriptsEditor();
+            }
+        }
+        private void BatScrPasteCommand_Click(object sender, EventArgs e)
+        {
+            if (copiedCmds == null) return;
+            byte[] commandData;
+            foreach (BattleScriptCommand bat in copiedCmds)
+            {
+                commandData = new byte[bat.Length];
+                bat.CommandData.CopyTo(commandData, 0);
+                AddCommand(CreateCommand(commandData));
+            }
+
+            AssembleBattleScript(battleScript);
+            RefreshBattleScriptsEditor();
+        }
+        private void BatScrDeleteCommand_Click(object sender, EventArgs e)
+        {
+            ResetAllControls();
+            buttonInsert.Enabled = false;
+            buttonApply.Enabled = false;
+            //
+            panelDoOneOfThree.Visible = false;
+            panelIfTargetValue.Visible = false;
+            panelMemoryCompare.Visible = false;
+            AlignCommandGUI(null);
+            //
+            BattleScriptTree.ExpandAll();
+            RemoveCommand(BattleScriptTree.Nodes, BattleScriptTree.GetNodeCount(true) - 1);
+            AssembleBattleScript(battleScript);
+            RefreshBattleScriptsEditor();
+        }
+        private void BatScrEditCommand_Click(object sender, EventArgs e)
+        {
+            if (BattleScriptTree.SelectedNode == null) return;
+
+            ResetAllControls();
+
+            this.command = (BattleScriptCommand)BattleScriptTree.SelectedNode.Tag;
+            this.editedBatNode = BattleScriptTree.SelectedNode;
+
+            // Edit Command
+            if (command.CommandID != 0xFF)
+            {
+                BattleScriptTree.ExpandAll();
+                EditCurrentCommand();
+            }
+            else
+                MessageBox.Show(
+                    "Cannot edit command(s).\n\nThe two counter command barriers cannot be removed, modified, or moved.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void BatScrExpandAll_Click(object sender, EventArgs e)
+        {
+            BattleScriptTree.ExpandAll();
+            BattleScriptTree.Focus();
+        }
+        private void BatScrCollapseAll_Click(object sender, EventArgs e)
+        {
+            BattleScriptTree.CollapseAll();
+            BattleScriptTree.Focus();
+        }
+        private void BatScrClearAll_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "You are about to clear all commands from the current script.\n\nGo ahead with process?",
+                "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+                RemoveAllCommands();
+
+            BattleScriptTree.Focus();
+        }
+        private void battlePreview_Click(object sender, EventArgs e)
+        {
+            if (bp == null || !bp.Visible)
+                bp = new Previewer.Previewer(index, 3);
+            else
+                bp.Reload(index, 3);
+            bp.Show();
+            bp.BringToFront();
         }
         // image
         private void pictureBoxMonster_MouseDown(object sender, MouseEventArgs e)

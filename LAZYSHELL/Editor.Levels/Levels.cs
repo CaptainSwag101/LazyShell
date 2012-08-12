@@ -1844,7 +1844,7 @@ namespace LAZYSHELL
             StreamWriter npcrip = File.CreateText(saveFileDialog.FileName);
             Level tlvl;
             NPC tnpc;
-            NPC.Instance tins;
+            NPC.Clone tins;
             int offset;
             int cnt;
             string temp;
@@ -1874,9 +1874,9 @@ namespace LAZYSHELL
                     npcrip.Write("NPC #" + cnt.ToString("d2") + ", event: " + temp +
                         ", action: " + (tnpc.Movement + tnpc.PropertyC).ToString("d4") + "\n");
 
-                    for (int k = 0; k < tnpc.Instances.Count; k++)
+                    for (int k = 0; k < tnpc.Clones.Count; k++)
                     {
-                        tins = (NPC.Instance)tnpc.Instances[k];
+                        tins = (NPC.Clone)tnpc.Clones[k];
                         if (tnpc.EngageType == 0) temp = (tins.PropertyB + tnpc.EventORpack).ToString("d4");
                         else temp = "N/A";
 

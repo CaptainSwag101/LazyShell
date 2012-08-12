@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Drawing;
 using System.Text;
 using LAZYSHELL.Properties;
 
@@ -16,16 +17,16 @@ namespace LAZYSHELL
         public bool Error;
         public int Length { get { return MenuText.Length; } }
         public int Offset;
-        public string GetMenuString(bool textCodeFormat)
+        public string GetMenuString(bool textView)
         {
             if (!this.Error)
-                return new string(textHelper.DecodeText(MenuText, !textCodeFormat, 1, Keystrokes));
+                return new string(textHelper.DecodeText(MenuText, !textView, 1, Keystrokes));
             else
                 return new string(MenuText);
         }
-        public void SetMenuString(string value, bool textCodeFormat)
+        public void SetMenuString(string value, bool textView)
         {
-            MenuText = textHelper.EncodeText(value.ToCharArray(), !textCodeFormat, 1, Keystrokes);
+            MenuText = textHelper.EncodeText(value.ToCharArray(), !textView, 1, Keystrokes);
         }
         public StringCollection Keystrokes
         {
@@ -62,6 +63,22 @@ namespace LAZYSHELL
             while (Model.Data[offset] != 0)
                 characters.Add((char)Model.Data[offset++]);
             MenuText = characters.ToArray();
+        }
+        public Size Size
+        {
+            get
+            {
+                int[] palette = Model.FontPaletteMenu.Palette;
+                MenuTextPreview preview = new MenuTextPreview();
+                int[] pixels = preview.GetPreview(Model.FontMenu, palette, MenuText, false, false);
+                Rectangle rectangle = Do.Crop(pixels, 256, 12);
+                return new Size(rectangle.Width, rectangle.Height);
+            }
+        }
+        public Rectangle Rectangle(int x, int y)
+        {
+            Size size = Size;
+            return new Rectangle(x, y, size.Width, size.Height);
         }
         public override string ToString()
         {

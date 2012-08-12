@@ -76,7 +76,20 @@ namespace LAZYSHELL
             updating = true;
             this.sequences.Items.Clear();
             for (int i = 0; i < animation.Sequences.Count; i++)
-                this.sequences.Items.Add("Sequence " + i.ToString());
+            {
+                if (spritesEditor.Index >= 256 && spritesEditor.Index <= 511)
+                    switch (i)
+                    {
+                        case 0: this.sequences.Items.Add("Idle front"); break;
+                        case 1: this.sequences.Items.Add("Idle back"); break;
+                        case 2: this.sequences.Items.Add("Recoil"); break;
+                        case 3: this.sequences.Items.Add("Attack"); break;
+                        case 4: this.sequences.Items.Add("Cast"); break;
+                        default: this.sequences.Items.Add("Sequence " + i.ToString()); break;
+                    }
+                else
+                    this.sequences.Items.Add("Sequence " + i.ToString());
+            }
             sequences.SelectedIndex = 0;
             sequenceActive.Checked = sequence.Active;
             InitializeFrames();
@@ -91,7 +104,20 @@ namespace LAZYSHELL
             updating = true;
             this.sequences.Items.Clear();
             for (int i = 0; i < animation.Sequences.Count; i++)
-                this.sequences.Items.Add("Sequence " + i.ToString());
+            {
+                if (spritesEditor.Index >= 256 && spritesEditor.Index <= 511)
+                    switch (i)
+                    {
+                        case 0: this.sequences.Items.Add("Idle front"); break;
+                        case 1: this.sequences.Items.Add("Idle back"); break;
+                        case 2: this.sequences.Items.Add("Recoil"); break;
+                        case 3: this.sequences.Items.Add("Attack"); break;
+                        case 4: this.sequences.Items.Add("Cast"); break;
+                        default: this.sequences.Items.Add("Sequence " + i.ToString()); break;
+                    }
+                else
+                    this.sequences.Items.Add("Sequence " + i.ToString());
+            }
             sequences.SelectedIndex = 0;
             sequenceActive.Checked = sequence.Active;
             InitializeFrames();
@@ -419,12 +445,18 @@ namespace LAZYSHELL
         {
             for (int i = 0; !PlaybackSequence.CancellationPending; i++)
             {
-                if (PlaybackSequence.CancellationPending) break;
-                if (i >= frames.Controls.Count) i = 0;
+                if (PlaybackSequence.CancellationPending)
+                    break;
+                if (i >= frames.Controls.Count)
+                    i = 0;
                 PlaybackSequence.ReportProgress(i);
                 duration_temp = sequence_temp.Frames[i].Duration;
-                Thread.Sleep(duration_temp * (1000 / 60));
-                if (PlaybackSequence.CancellationPending) break;
+                if (duration_temp >= 1)
+                    Thread.Sleep(duration_temp * (1000 / 60));
+                else
+                    Thread.Sleep(1000 / 60);
+                if (PlaybackSequence.CancellationPending)
+                    break;
             }
         }
         private void PlaybackSequence_ProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -53,7 +53,7 @@
             this.pageDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.synchronizeDupes = new System.Windows.Forms.ToolStripButton();
-            this.byteOrTextView = new System.Windows.Forms.ToolStripButton();
+            this.textView = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.freeBytes = new System.Windows.Forms.ToolStripLabel();
             this.panel69 = new System.Windows.Forms.Panel();
@@ -74,6 +74,8 @@
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.freeTableBytes = new System.Windows.Forms.ToolStripLabel();
             this.dctApply = new System.Windows.Forms.Button();
+            this.dct19 = new System.Windows.Forms.TextBox();
+            this.dct18 = new System.Windows.Forms.TextBox();
             this.dct17 = new System.Windows.Forms.TextBox();
             this.dct16 = new System.Windows.Forms.TextBox();
             this.dct0E = new System.Windows.Forms.TextBox();
@@ -177,7 +179,7 @@
             this.dialogueTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dialogueTextBox.Location = new System.Drawing.Point(0, 106);
             this.dialogueTextBox.Name = "dialogueTextBox";
-            this.dialogueTextBox.Size = new System.Drawing.Size(220, 303);
+            this.dialogueTextBox.Size = new System.Drawing.Size(220, 281);
             this.dialogueTextBox.TabIndex = 178;
             this.dialogueTextBox.Text = "";
             this.dialogueTextBox.TextChanged += new System.EventHandler(this.dialogueTextBox_TextChanged);
@@ -207,7 +209,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(220, 106);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(24, 303);
+            this.toolStrip2.Size = new System.Drawing.Size(24, 281);
             this.toolStrip2.TabIndex = 564;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -337,7 +339,7 @@
             this.pageDown,
             this.toolStripSeparator1,
             this.synchronizeDupes,
-            this.byteOrTextView,
+            this.textView,
             this.toolStripSeparator2,
             this.freeBytes});
             this.toolStrip1.Location = new System.Drawing.Point(0, 81);
@@ -389,15 +391,15 @@
             // 
             // byteOrTextView
             // 
-            this.byteOrTextView.CheckOnClick = true;
-            this.byteOrTextView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.byteOrTextView.Image = global::LAZYSHELL.Properties.Resources.textView;
-            this.byteOrTextView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.byteOrTextView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.byteOrTextView.Name = "byteOrTextView";
-            this.byteOrTextView.Size = new System.Drawing.Size(23, 22);
-            this.byteOrTextView.Text = "Text View";
-            this.byteOrTextView.Click += new System.EventHandler(this.textView_Click);
+            this.textView.CheckOnClick = true;
+            this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
+            this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.textView.Name = "byteOrTextView";
+            this.textView.Size = new System.Drawing.Size(23, 22);
+            this.textView.Text = "Text View";
+            this.textView.Click += new System.EventHandler(this.textView_Click);
             // 
             // toolStripSeparator2
             // 
@@ -468,7 +470,7 @@
             this.toolStripLabel2,
             this.pauseFrameNum,
             this.pauseFramesInsert});
-            this.toolStrip4.Location = new System.Drawing.Point(0, 409);
+            this.toolStrip4.Location = new System.Drawing.Point(0, 387);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip4.Size = new System.Drawing.Size(244, 25);
@@ -529,7 +531,7 @@
             this.toolStripLabel1,
             this.variables,
             this.variablesInsert});
-            this.toolStrip6.Location = new System.Drawing.Point(0, 434);
+            this.toolStrip6.Location = new System.Drawing.Point(0, 412);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip6.Size = new System.Drawing.Size(244, 25);
@@ -573,6 +575,8 @@
             // 
             this.panel1.Controls.Add(this.toolStrip7);
             this.panel1.Controls.Add(this.dctApply);
+            this.panel1.Controls.Add(this.dct19);
+            this.panel1.Controls.Add(this.dct18);
             this.panel1.Controls.Add(this.dct17);
             this.panel1.Controls.Add(this.dct16);
             this.panel1.Controls.Add(this.dct0E);
@@ -584,9 +588,9 @@
             this.panel1.Controls.Add(this.dct14);
             this.panel1.Controls.Add(this.dct13);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 459);
+            this.panel1.Location = new System.Drawing.Point(0, 437);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(244, 156);
+            this.panel1.Size = new System.Drawing.Size(244, 178);
             this.panel1.TabIndex = 217;
             // 
             // toolStrip7
@@ -617,7 +621,7 @@
             // dctApply
             // 
             this.dctApply.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dctApply.Location = new System.Drawing.Point(0, 133);
+            this.dctApply.Location = new System.Drawing.Point(0, 155);
             this.dctApply.Name = "dctApply";
             this.dctApply.Size = new System.Drawing.Size(244, 23);
             this.dctApply.TabIndex = 419;
@@ -625,9 +629,25 @@
             this.dctApply.UseVisualStyleBackColor = false;
             this.dctApply.Click += new System.EventHandler(this.dctApply_Click);
             // 
+            // dct19
+            // 
+            this.dct19.Location = new System.Drawing.Point(122, 131);
+            this.dct19.Name = "dct19";
+            this.dct19.Size = new System.Drawing.Size(122, 21);
+            this.dct19.TabIndex = 8;
+            this.dct19.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            // 
+            // dct18
+            // 
+            this.dct18.Location = new System.Drawing.Point(122, 110);
+            this.dct18.Name = "dct18";
+            this.dct18.Size = new System.Drawing.Size(122, 21);
+            this.dct18.TabIndex = 8;
+            this.dct18.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            // 
             // dct17
             // 
-            this.dct17.Location = new System.Drawing.Point(122, 110);
+            this.dct17.Location = new System.Drawing.Point(122, 89);
             this.dct17.Name = "dct17";
             this.dct17.Size = new System.Drawing.Size(122, 21);
             this.dct17.TabIndex = 8;
@@ -635,7 +655,7 @@
             // 
             // dct16
             // 
-            this.dct16.Location = new System.Drawing.Point(122, 89);
+            this.dct16.Location = new System.Drawing.Point(122, 68);
             this.dct16.Name = "dct16";
             this.dct16.Size = new System.Drawing.Size(122, 21);
             this.dct16.TabIndex = 9;
@@ -683,7 +703,7 @@
             // 
             // dct15
             // 
-            this.dct15.Location = new System.Drawing.Point(122, 68);
+            this.dct15.Location = new System.Drawing.Point(122, 47);
             this.dct15.Name = "dct15";
             this.dct15.Size = new System.Drawing.Size(122, 21);
             this.dct15.TabIndex = 2;
@@ -691,7 +711,7 @@
             // 
             // dct14
             // 
-            this.dct14.Location = new System.Drawing.Point(122, 47);
+            this.dct14.Location = new System.Drawing.Point(122, 26);
             this.dct14.Name = "dct14";
             this.dct14.Size = new System.Drawing.Size(122, 21);
             this.dct14.TabIndex = 1;
@@ -699,7 +719,7 @@
             // 
             // dct13
             // 
-            this.dct13.Location = new System.Drawing.Point(122, 26);
+            this.dct13.Location = new System.Drawing.Point(0, 131);
             this.dct13.Name = "dct13";
             this.dct13.Size = new System.Drawing.Size(122, 21);
             this.dct13.TabIndex = 0;
@@ -982,7 +1002,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel freeBytes;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton byteOrTextView;
+        private System.Windows.Forms.ToolStripButton textView;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton endStringA;
         private System.Windows.Forms.ToolStripButton endString;
@@ -1037,5 +1057,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.ToolStripButton synchronizeDupes;
+        private System.Windows.Forms.TextBox dct19;
+        private System.Windows.Forms.TextBox dct18;
     }
 }

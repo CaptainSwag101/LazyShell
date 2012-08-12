@@ -57,7 +57,7 @@ namespace LAZYSHELL
             this.paletteSet = paletteSet; // grab the current Palette Set
             this.Width = 16;
             this.Height = 32;
-            this.HeightL3 = 8;
+            this.HeightL3 = 16;
             this.tilesize = 2;
             this.Type = "level";
             // set tileset byte arrays

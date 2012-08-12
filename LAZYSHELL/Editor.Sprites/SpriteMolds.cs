@@ -135,6 +135,7 @@ namespace LAZYSHELL
             //
             bool replacePalette = true;
             bool replaceMolds = true;
+            bool alwaysTilemap = true;
             int startingIndex = 0;
             if (MessageBox.Show("Replace current " + type + " with imported image(s)?", "LAZY SHELL",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
@@ -148,6 +149,9 @@ namespace LAZYSHELL
                             startingIndex = subtile;
                 }
             }
+            if (type != "molds" || MessageBox.Show("Import all molds as tilemaps? Selecting no will import smaller images as gridplanes.", 
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                alwaysTilemap = false;
             if (MessageBox.Show("Would you like to create a new palette from the imported image(s)?", "LAZY SHELL",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 replacePalette = false;
@@ -158,7 +162,8 @@ namespace LAZYSHELL
                 return;
             }
             //
-            Do.ImagesToMolds(molds, animation.UniqueTiles, imports, ref palette, ref graphics, startingIndex, replaceMolds, replacePalette, type);
+            Do.ImagesToMolds(molds, animation.UniqueTiles, imports, ref palette, ref graphics, startingIndex, 
+                replaceMolds, replacePalette, type, alwaysTilemap);
             for (int i = 0; i < palette.Length; i++)
             {
                 paletteSet.Reds[i] = Color.FromArgb(palette[i]).R;
@@ -1366,40 +1371,44 @@ namespace LAZYSHELL
         }
         private void importTile_Click(object sender, EventArgs e)
         {
-            Bitmap import = new Bitmap(1, 1); import = (Bitmap)Do.Import(import);
-            if (import == null) return;
+            Bitmap[] imports = new Bitmap[1]; imports = (Bitmap[])Do.Import(imports);
+            if (imports == null || imports.Length == 0)
+                return;
             //
-            int[] pixels = Do.ImageToPixels(import, new Size(16, 16), new Rectangle(0, 0, 16, 16));
-            //
-            int startingIndex = 0;
-            foreach (Mold.Tile tile in animation.UniqueTiles)
+            foreach (Bitmap import in imports)
             {
-                foreach (ushort subtile in tile.SubTiles)
-                    if (subtile > startingIndex)
-                        startingIndex = subtile;
-            }
-            startingIndex++;
-            //
-            byte[] graphics = new byte[0x80];
-            Do.PixelsToBPP(pixels, graphics, new Size(2, 2), this.palette, (byte)0x20);
-            Mold.Tile uniqueTile = new Mold.Tile().New(false);
-            for (int y = 0; y < uniqueTile.Height / 8; y++)
-            {
-                for (int x = 0; x < uniqueTile.Width / 8; x++)
+                int[] pixels = Do.ImageToPixels(import, new Size(16, 16), new Rectangle(0, 0, 16, 16));
+                //
+                int startingIndex = 0;
+                foreach (Mold.Tile tile in animation.UniqueTiles)
                 {
-                    byte[] subtile = Bits.GetByteArray(graphics, (y * 2 + x) * 0x20, 0x20);
-                    if (Bits.Empty(subtile))
-                    {
-                        uniqueTile.SubTiles[y * 2 + x] = 0;
-                        continue;
-                    }
-                    int offset_dst = (y * 2 + x + startingIndex) * 0x20;
-                    uniqueTile.SubTiles[y * 2 + x] = (ushort)(y * 2 + x + startingIndex);
-                    Buffer.BlockCopy(subtile, 0, this.graphics, offset_dst - 0x20, 0x20);
+                    foreach (ushort subtile in tile.SubTiles)
+                        if (subtile > startingIndex)
+                            startingIndex = subtile;
                 }
+                startingIndex++;
+                //
+                byte[] graphics = new byte[0x80];
+                Do.PixelsToBPP(pixels, graphics, new Size(2, 2), this.palette, (byte)0x20);
+                Mold.Tile uniqueTile = new Mold.Tile().New(false);
+                for (int y = 0; y < uniqueTile.Height / 8; y++)
+                {
+                    for (int x = 0; x < uniqueTile.Width / 8; x++)
+                    {
+                        byte[] subtile = Bits.GetByteArray(graphics, (y * 2 + x) * 0x20, 0x20);
+                        if (Bits.Empty(subtile))
+                        {
+                            uniqueTile.SubTiles[y * 2 + x] = 0;
+                            continue;
+                        }
+                        int offset_dst = (y * 2 + x + startingIndex) * 0x20;
+                        uniqueTile.SubTiles[y * 2 + x] = (ushort)(y * 2 + x + startingIndex);
+                        Buffer.BlockCopy(subtile, 0, this.graphics, offset_dst - 0x20, 0x20);
+                    }
+                }
+                //
+                animation.UniqueTiles.Add(uniqueTile);
             }
-            //
-            animation.UniqueTiles.Add(uniqueTile);
             foreach (Mold.Tile tile in animation.UniqueTiles)
                 tile.Set8x8Tiles(this.graphics, paletteSet.Palette, tile.Gridplane);
             //

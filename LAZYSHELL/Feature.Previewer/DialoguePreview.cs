@@ -144,7 +144,7 @@ namespace LAZYSHELL
             ArrayList n = new ArrayList();
             for (int i = 0; i < dlg.Length; i++)
             {
-                if (dlg[i] >= 0x0E && dlg[i] <= 0x17)
+                if (dlg[i] >= 0x0E && dlg[i] <= 0x19)
                 {
                     n.AddRange(tables[dlg[i] - 0x0E].RawDialogue);
                     continue;
@@ -247,7 +247,7 @@ namespace LAZYSHELL
                         // stop adding characters if next character is...
                         if (dlg[charPtr] >= 0x00 && dlg[charPtr] <= 0x04) break;
                         if (dlg[charPtr] == 0x06) break;
-                        if (dlg[charPtr] >= 0x0E && dlg[charPtr] <= 0x17) break;
+                        if (dlg[charPtr] >= 0x0E && dlg[charPtr] <= 0x19) break;
                         if (dlg[charPtr] == 0x1B) break;
                         if (dlg[charPtr] == 0x20) break;
 

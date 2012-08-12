@@ -16,69 +16,181 @@ namespace LAZYSHELL
         private long checksum { get { return menusEditor.Checksum; } set { menusEditor.Checksum = value; } }
         // main
         private delegate void Function();
-        private PaletteSet framePaletteSet { get { return Model.FontPaletteMenu; } set { Model.FontPaletteMenu = value; } }
-        private PaletteSet bgPaletteSet { get { return Model.MenuBGPalette; } set { Model.MenuBGPalette = value; } }
+        private int index { get { return menuName.SelectedIndex; } set { menuName.SelectedIndex = value; } }
+        private PaletteSet bgPaletteSet
+        {
+            get
+            {
+                if (index == 0)
+                    return Model.GameSelectBGPalette;
+                else if (index < 8)
+                    return Model.MenuBGPalette;
+                else
+                    return Model.ShopBGPalette;
+            }
+            set
+            {
+                if (index == 0)
+                    Model.GameSelectBGPalette = value;
+                else if (index < 8)
+                    Model.MenuBGPalette = value;
+                else
+                    Model.ShopBGPalette = value;
+            }
+        }
+        private PaletteSet fgPaletteSet
+        {
+            get
+            {
+                if (index == 0)
+                    return Model.GameSelectPaletteSet;
+                else
+                    return Model.FontPaletteMenu;
+            }
+            set
+            {
+                if (index == 0)
+                    Model.GameSelectPaletteSet = value;
+                else
+                    Model.FontPaletteMenu = value;
+            }
+        }
+        private byte[] fgGraphics
+        {
+            get
+            {
+                if (index == 0)
+                    return Model.GameSelectGraphics;
+                else
+                    return Model.MenuFrameGraphics;
+            }
+            set
+            {
+                if (index == 0)
+                    Model.GameSelectGraphics = value;
+                else
+                    Model.MenuFrameGraphics = value;
+            }
+        }
         private PaletteSet cursorPaletteSet { get { return Model.CursorPaletteSet; } set { Model.CursorPaletteSet = value; } }
         private Bitmap bgImage;
-        private Bitmap frameImage;
+        private Bitmap fgImage;
+        private Bitmap stereoImage;
+        private Bitmap monoImage;
+        private Bitmap cursorImage;
         private Bitmap previewImage;
+        private bool editTileset;
         private Bitmap[] allyImages;
         private Bitmap[] cursorImages;
+        private CursorSprite[] cursorSprites;
+        private CursorSprite cursorSprite
+        {
+            get
+            { return cursorSprites[cursorName.SelectedIndex]; }
+            set
+            { cursorSprites[cursorName.SelectedIndex] = value; }
+        }
         private Settings settings = Settings.Default;
         public PictureBox Picture { get { return pictureBoxPreview; } set { pictureBoxPreview = value; } }
+        //
+        private List<TextObject> textObjects;
+        private int mouseOverTextObject = -1;
+        //
         private bool updating;
         // editors
         private MenusEditor menusEditor;
-        private PaletteEditor framePaletteEditor;
-        private GraphicEditor frameGraphicEditor;
         private PaletteEditor bgPaletteEditor;
-        private PaletteEditor shopBGPaletteEditor;
         private GraphicEditor bgGraphicEditor;
+        private PaletteEditor fgPaletteEditor;
+        private GraphicEditor fgGraphicEditor;
         private PaletteEditor cursorsPaletteEditor;
         private GraphicEditor cursorsGraphicEditor;
+        private PaletteEditor speakersPaletteEditor;
+        private GraphicEditor speakersGraphicEditor;
         #endregion
         public Overworld(MenusEditor menusEditor)
         {
             this.menusEditor = menusEditor;
             InitializeComponent();
-            SetAllyImages();
-            SetFrameImage();
-            SetBackgroundImage();
-            SetCursorImages();
-            SetPreviewImage();
+            this.music.Items.AddRange(Lists.Numerize(Lists.MusicNames));
+            this.music.SelectedIndex = Model.Data[0x03462D];
+            //
+            cursorSpriteNum.Items.AddRange(Lists.Resize(Lists.Numerize(3, Lists.SpriteNames), 256));
+            cursorSprites = new CursorSprite[5];
+            for (int i = 0; i < cursorSprites.Length; i++)
+                cursorSprites[i] = new CursorSprite(i);
+            cursorName.SelectedIndex = 0;
+            //
             updating = true;
-            previewType.SelectedIndex = 0;
+            index = 0;
             updating = false;
             //
-            //LoadFramePaletteEditor();
-            //LoadFrameGraphicEditor();
-            //LoadBGPaletteEditor();
-            //LoadShopBGPaletteEditor();
-            //LoadBGGraphicEditor();
-            //LoadCursorsPaletteEditor();
-            //LoadCursorsGraphicEditor();
+            SetAllyImages();
+            SetBackgroundImage();
+            SetForegroundImage();
+            SetSpeakersImages();
+            SetCursorImages();
+            SetPreviewImage();
+            SetTextObjects();
         }
         public void Reload(MenusEditor menusEditor)
         {
-            SetAllyImages();
-            SetFrameImage();
-            SetBackgroundImage();
-            SetCursorImages();
-            SetPreviewImage();
+            this.music.Items.AddRange(Lists.Numerize(Lists.MusicNames));
+            this.music.SelectedIndex = Model.Data[0x03462D];
+            //
+            cursorSpriteNum.Items.AddRange(Lists.Resize(Lists.Numerize(3, Lists.SpriteNames), 256));
+            cursorSprites = new CursorSprite[5];
+            for (int i = 0; i < cursorSprites.Length; i++)
+                cursorSprites[i] = new CursorSprite(i);
+            cursorName.SelectedIndex = 0;
+            //
             updating = true;
-            previewType.SelectedIndex = 0;
+            index = 0;
             updating = false;
             //
-            //LoadFramePaletteEditor();
-            //LoadFrameGraphicEditor();
-            //LoadBGPaletteEditor();
-            //LoadShopBGPaletteEditor();
-            //LoadBGGraphicEditor();
-            //LoadCursorsPaletteEditor();
-            //LoadCursorsGraphicEditor();
+            SetAllyImages();
+            SetBackgroundImage();
+            SetForegroundImage();
+            SetSpeakersImages();
+            SetCursorImages();
+            SetPreviewImage();
+            SetTextObjects();
+            //
             GC.Collect();
         }
         #region Functions
+        private void RefreshMenu()
+        {
+            toolStrip2.Visible = index == 0;
+            music.Visible = index == 0;
+            labelMusic.Visible = index == 0;
+            toolStripSeparator2.Visible = index == 0;
+            importFGToolStripMenuItem.Text = index == 0 ? "Import Foreground" : "Import Frame";
+            openPalettesFG.Text = index == 0 ? "Foreground Palettes" : "Frame Palette";
+            openGraphicsFG.Text = index == 0 ? "Foreground Graphics" : "Frame Graphics";
+            LoadBGGraphicEditor();
+            LoadFGGraphicEditor();
+            LoadBGPaletteEditor();
+            LoadFGPaletteEditor();
+            SetBackgroundImage();
+            SetForegroundImage();
+            SetPreviewImage();
+            SetTextObjects();
+        }
+        private void SetCursorImage()
+        {
+            Size size = new Size(0, 0);
+            Sprite sprite = Model.Sprites[cursorSprite.Sprite];
+            Animation animation = Model.Animations[sprite.AnimationPacket];
+            Sequence sequence = null;
+            if (cursorSprite.Sequence < animation.Sequences.Count)
+                sequence = animation.Sequences[cursorSprite.Sequence];
+            int moldIndex = 0;
+            if (sequence != null && sequence.Frames.Count >= 0)
+                moldIndex = sequence.Frames[0].Mold;
+            int[] pixels = sprite.GetPixels(true, false, moldIndex, 0, false, true, ref size);
+            cursorImage = Do.PixelsToImage(pixels, size.Width, size.Height);
+        }
         private void SetCursorImages()
         {
             cursorImages = new Bitmap[5];
@@ -99,35 +211,71 @@ namespace LAZYSHELL
             allyImages = new Bitmap[5];
             for (int i = 0; i < allyImages.Length; i++)
             {
-                int[] pixels = Model.NPCProperties[i].CreateImage(2, false, i, true);
-                int height = Model.NPCProperties[i].ImageHeight;
-                int width = Model.NPCProperties[i].ImageWidth;
-                allyImages[i] = Do.PixelsToImage(pixels, width, height);
+                Size size = new Size(0, 0);
+                int index = Model.Data[0x0318A3 + i];
+                Sprite sprite = Model.Sprites[index];
+                Animation animation = Model.Animations[sprite.AnimationPacket];
+                Sequence sequence = null;
+                int sequenceIndex = Model.Data[0x031881];
+                if (sequenceIndex < animation.Sequences.Count)
+                    sequence = animation.Sequences[sequenceIndex];
+                int moldIndex = 0;
+                if (sequence != null && sequence.Frames.Count >= 0)
+                    moldIndex = sequence.Frames[0].Mold;
+                int[] pixels = sprite.GetPixels(true, false, moldIndex, 0, false, false, ref size);
+                allyImages[i] = Do.PixelsToImage(pixels, size.Width, size.Height);
             }
-        }
-        private void SetFrameImage()
-        {
-            frameImage = Do.PixelsToImage(
-                Do.DrawMenuFrame(new Size(5, 6), Model.MenuFrameGraphics, Model.FontPaletteMenu.Palette), 40, 48);
-            pictureBoxFrame.Invalidate();
         }
         private void SetBackgroundImage()
         {
-            if (previewType.SelectedIndex < 7)
+            if (index == 0)
+                bgImage = Model.GameBG;
+            else if (index < 8)
                 bgImage = Model.MenuBG;
             else
                 bgImage = Model.ShopBG;
             pictureBoxBG.Invalidate();
         }
+        private void SetForegroundImage()
+        {
+            if (index == 0)
+            {
+                Tile[] tileset = new MenuTileset(fgPaletteSet, Model.GameSelectTileset, fgGraphics).Tileset;
+                int[] pixels = Do.TilesetToPixels(tileset, 16, 16, 0, false);
+                fgImage = Do.PixelsToImage(pixels, 256, 256);
+                pictureBoxFG.Size = new Size(256, 256);
+            }
+            else
+            {
+                fgImage = Do.PixelsToImage(
+                    Do.DrawMenuFrame(new Size(5, 6), fgGraphics, fgPaletteSet.Palette), 40, 48);
+                pictureBoxFG.Size = new Size(40, 48);
+            }
+            pictureBoxFG.Invalidate();
+            pictureBoxPreview.Invalidate();
+        }
+        private void SetSpeakersImages()
+        {
+            int[] pixels = Do.GetPixelRegion(Model.GameSelectSpeakers, 0x20, fgPaletteSet.Palettes[14], 16, 8, 0, 7, 3, 0);
+            stereoImage = Do.PixelsToImage(pixels, 56, 24);
+            pixels = Do.GetPixelRegion(Model.GameSelectSpeakers, 0x20, fgPaletteSet.Palettes[15], 16, 0, 0, 7, 3, 0);
+            monoImage = Do.PixelsToImage(pixels, 56, 24);
+            pictureBoxPreview.Invalidate();
+        }
         private void SetPreviewImage()
         {
+            if (index == 0)
+            {
+                pictureBoxPreview.Invalidate();
+                return;
+            }
             int[] bgPixels;
-            if (previewType.SelectedIndex < 7)
+            if (index < 8)
                 bgPixels = Do.ImageToPixels(Model.MenuBG);
             else
                 bgPixels = Do.ImageToPixels(Model.ShopBG);
             Rectangle[] frames;
-            switch (previewType.SelectedIndex)
+            switch (index)
             {
                 default: frames = new Rectangle[] // Overworld
                     {
@@ -138,7 +286,7 @@ namespace LAZYSHELL
                         new Rectangle(144, 127, 12, 11)
                     };
                     break;
-                case 1: frames = new Rectangle[] // Overworld - Items
+                case 2: frames = new Rectangle[] // Overworld - Items
                     {
                         new Rectangle(8, 7, 15, 6),
                         new Rectangle(8, 55, 15, 6),
@@ -148,7 +296,7 @@ namespace LAZYSHELL
                         new Rectangle(128, 7, 17, 25)
                     };
                     break;
-                case 2: frames = new Rectangle[] // Overworld - status
+                case 3: frames = new Rectangle[] // Overworld - status
                     {
                         new Rectangle(8, 7, 15, 6),
                         new Rectangle(8, 55, 15, 6),
@@ -156,7 +304,7 @@ namespace LAZYSHELL
                         new Rectangle(128, 7, 15, 25)
                     };
                     break;
-                case 3: frames = new Rectangle[] // Overworld - special
+                case 4: frames = new Rectangle[] // Overworld - special
                     {
                         new Rectangle(8, 7, 15, 6),
                         new Rectangle(8, 55, 15, 6),
@@ -166,7 +314,7 @@ namespace LAZYSHELL
                         new Rectangle(128, 127, 15, 11)
                     };
                     break;
-                case 4: frames = new Rectangle[] // Overworld - equip
+                case 5: frames = new Rectangle[] // Overworld - equip
                     {
                         new Rectangle(0, 7, 17, 6),
                         new Rectangle(0, 55, 17, 6),
@@ -175,13 +323,13 @@ namespace LAZYSHELL
                         new Rectangle(136, 7, 17, 25)
                     };
                     break;
-                case 5: frames = new Rectangle[] // Overworld - special item
+                case 6: frames = new Rectangle[] // Overworld - special item
                     {
                         new Rectangle(8, 39, 30, 14),
                         new Rectangle(64, 151, 16, 6)
                     };
                     break;
-                case 6: frames = new Rectangle[] // Overworld - switch
+                case 7: frames = new Rectangle[] // Overworld - switch
                     {
                         new Rectangle(8, 7, 15, 6),
                         new Rectangle(8, 55, 15, 6),
@@ -191,27 +339,27 @@ namespace LAZYSHELL
                         new Rectangle(136, 159, 13, 6)
                     };
                     break;
-                case 7: frames = new Rectangle[] // Shop
+                case 8: frames = new Rectangle[] // Shop
                     {
                         new Rectangle(8, 7, 15, 8),
                         new Rectangle(8, 79, 15, 3),
                         new Rectangle(128, 7, 15, 26)
                     };
                     break;
-                case 8: frames = new Rectangle[] // Shop - buy
+                case 9: frames = new Rectangle[] // Shop - buy
                     {
                         new Rectangle(8, 7, 15, 15),
                         new Rectangle(8, 127, 15, 8),
                         new Rectangle(128, 7, 15, 25)
                     };
                     break;
-                case 9: frames = new Rectangle[] // Shop - sell items
+                case 10: frames = new Rectangle[] // Shop - sell items
                     {
                         new Rectangle(8, 7, 15, 15),
                         new Rectangle(128, 7, 17, 25)
                     };
                     break;
-                case 10: frames = new Rectangle[] // Shop - sell weapons
+                case 11: frames = new Rectangle[] // Shop - sell weapons
                     {
                         new Rectangle(8, 7, 15, 15),
                         new Rectangle(8, 127, 15, 8),
@@ -224,27 +372,99 @@ namespace LAZYSHELL
             previewImage = Do.PixelsToImage(bgPixels, 256, 224);
             pictureBoxPreview.Invalidate();
         }
-        private void LoadFramePaletteEditor()
+        private void SetTextObjects()
         {
-            if (framePaletteEditor == null)
+            textObjects = new List<TextObject>();
+            switch (index)
             {
-                framePaletteEditor = new PaletteEditor(new Function(FramePaletteUpdate), framePaletteSet, 1, 0, 1);
-                framePaletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+                case 0:
+                    textObjects.Add(new TextObject(43, 95, 24));
+                    textObjects.Add(new TextObject(109, 47, 56));
+                    textObjects.Add(new TextObject(110, 47, 96));
+                    textObjects.Add(new TextObject(111, 47, 136));
+                    textObjects.Add(new TextObject(112, 47, 176));
+                    break;
+                case 8:
+                    textObjects.Add(new TextObject(76, 23, 12));
+                    textObjects.Add(new TextObject(77, 23, 24));
+                    textObjects.Add(new TextObject(78, 23, 36));
+                    textObjects.Add(new TextObject(0, 23, 48));
+                    //
+                    textObjects.Add(new TextObject(27, 23, 84));
+                    textObjects.Add(new TextObject(32, 23, 192));
+                    break;
+                case 9:
+                    textObjects.Add(new TextObject(76, 15, 12));
+                    textObjects.Add(new TextObject(80, 15, 72));
+                    textObjects.Add(new TextObject(27, 15, 96));
+                    textObjects.Add(new TextObject(79, 15, 108));
+                    break;
+                case 10:
+                    textObjects.Add(new TextObject(77, 15, 12));
+                    textObjects.Add(new TextObject(80, 15, 72));
+                    textObjects.Add(new TextObject(27, 15, 96));
+                    textObjects.Add(new TextObject(79, 15, 108));
+                    break;
+                case 11:
+                    textObjects.Add(new TextObject(78, 15, 12));
+                    textObjects.Add(new TextObject(80, 15, 72));
+                    textObjects.Add(new TextObject(27, 15, 96));
+                    textObjects.Add(new TextObject(79, 15, 108));
+                    break;
+                default:
+                    textObjects.Add(new TextObject(31, 39, 24));
+                    textObjects.Add(new TextObject(12, 39, 36));
+                    textObjects.Add(new TextObject(31, 39, 72));
+                    textObjects.Add(new TextObject(12, 39, 84));
+                    textObjects.Add(new TextObject(31, 39, 120));
+                    textObjects.Add(new TextObject(12, 39, 132));
+                    if (index == 1) // Overworld - main
+                    {
+                        textObjects.Add(new TextObject(1, 143, 12));
+                        textObjects.Add(new TextObject(3, 143, 24));
+                        textObjects.Add(new TextObject(2, 143, 36));
+                        textObjects.Add(new TextObject(0, 143, 48));
+                        textObjects.Add(new TextObject(4, 143, 60));
+                        textObjects.Add(new TextObject(5, 143, 72));
+                        textObjects.Add(new TextObject(6, 143, 84));
+                        textObjects.Add(new TextObject(7, 143, 96));
+                        textObjects.Add(new TextObject(8, 143, 108));
+                        //
+                        textObjects.Add(new TextObject(55, 151, 132));
+                        textObjects.Add(new TextObject(27, 151, 156));
+                        textObjects.Add(new TextObject(56, 151, 180));
+                    }
+                    else if (index == 2) // Overworld - items
+                    {
+                        textObjects.Add(new TextObject(55, 15, 156));
+                    }
+                    else if (index == 3) // Overworld - status
+                    {
+                        textObjects.Add(new TextObject(19, 168, 12));
+                        textObjects.Add(new TextObject(15, 160, 48));
+                        textObjects.Add(new TextObject(16, 151, 72));
+                        textObjects.Add(new TextObject(17, 135, 96));
+                        textObjects.Add(new TextObject(18, 135, 120));
+                        textObjects.Add(new TextObject(14, 135, 156));
+                    }
+                    else if (index == 4) // Overworld - special
+                    {
+                        textObjects.Add(new TextObject(55, 135, 108));
+                    }
+                    else if (index == 7) // Overworld - switch
+                    {
+                        textObjects.Add(new TextObject(31, 159, 72));
+                        textObjects.Add(new TextObject(12, 159, 84));
+                        //
+                        textObjects.Add(new TextObject(31, 159, 120));
+                        textObjects.Add(new TextObject(12, 159, 132));
+                        //
+                        textObjects.Add(new TextObject(14, 15, 156));
+                        textObjects.Add(new TextObject(20, 143, 168));
+                        textObjects.Add(new TextObject(21, 151, 180));
+                    }
+                    break;
             }
-            else
-                framePaletteEditor.Reload(new Function(FramePaletteUpdate), framePaletteSet, 1, 0, 1);
-        }
-        private void LoadFrameGraphicEditor()
-        {
-            if (frameGraphicEditor == null)
-            {
-                frameGraphicEditor = new GraphicEditor(new Function(FrameGraphicUpdate),
-                    Model.MenuFrameGraphics, Model.MenuFrameGraphics.Length, 0, framePaletteSet, 0, 0x10);
-                frameGraphicEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
-            }
-            else
-                frameGraphicEditor.Reload(new Function(FrameGraphicUpdate),
-                    Model.MenuFrameGraphics, Model.MenuFrameGraphics.Length, 0, framePaletteSet, 0, 0x10);
         }
         private void LoadBGPaletteEditor()
         {
@@ -255,16 +475,6 @@ namespace LAZYSHELL
             }
             else
                 bgPaletteEditor.Reload(new Function(BGPaletteUpdate), bgPaletteSet, 1, 0, 1);
-        }
-        private void LoadShopBGPaletteEditor()
-        {
-            if (shopBGPaletteEditor == null)
-            {
-                shopBGPaletteEditor = new PaletteEditor(new Function(ShopBGPaletteUpdate), Model.ShopBGPalette, 1, 0, 1);
-                shopBGPaletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
-            }
-            else
-                shopBGPaletteEditor.Reload(new Function(ShopBGPaletteUpdate), Model.ShopBGPalette, 1, 0, 1);
         }
         private void LoadBGGraphicEditor()
         {
@@ -277,6 +487,36 @@ namespace LAZYSHELL
             else
                 bgGraphicEditor.Reload(new Function(BGGraphicUpdate),
                     Model.MenuBGGraphics, Model.MenuBGGraphics.Length, 0, bgPaletteSet, 0, 0x20);
+        }
+        private void LoadFGPaletteEditor()
+        {
+            if (fgPaletteEditor == null)
+            {
+                if (index == 0)
+                    fgPaletteEditor = new PaletteEditor(new Function(FGPaletteUpdate), fgPaletteSet, 16, 1, 5);
+                else
+                    fgPaletteEditor = new PaletteEditor(new Function(FGPaletteUpdate), fgPaletteSet, 1, 0, 1);
+                fgPaletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            }
+            else
+            {
+                if (index == 0)
+                    fgPaletteEditor.Reload(new Function(FGPaletteUpdate), fgPaletteSet, 16, 1, 5);
+                else
+                    fgPaletteEditor.Reload(new Function(FGPaletteUpdate), fgPaletteSet, 1, 0, 1);
+            }
+        }
+        private void LoadFGGraphicEditor()
+        {
+            if (fgGraphicEditor == null)
+            {
+                fgGraphicEditor = new GraphicEditor(new Function(FGGraphicUpdate),
+                    fgGraphics, fgGraphics.Length, 0, fgPaletteSet, 0, (byte)(index == 0 ? 0x20 : 0x10));
+                fgGraphicEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            }
+            else
+                fgGraphicEditor.Reload(new Function(FGGraphicUpdate),
+                    fgGraphics, fgGraphics.Length, 0, fgPaletteSet, 0, (byte)(index == 0 ? 0x20 : 0x10));
         }
         private void LoadCursorsPaletteEditor()
         {
@@ -300,48 +540,58 @@ namespace LAZYSHELL
                 cursorsGraphicEditor.Reload(new Function(CursorsGraphicUpdate),
                     Model.MenuCursorGraphics, Model.MenuCursorGraphics.Length, 0, cursorPaletteSet, 0, 0x20);
         }
-        private void FramePaletteUpdate()
+        private void LoadSpeakersPaletteEditor()
         {
-            SetFrameImage();
-            SetPreviewImage();
-            LoadFrameGraphicEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            if (speakersPaletteEditor == null)
+            {
+                speakersPaletteEditor = new PaletteEditor(new Function(SpeakersPaletteUpdate), fgPaletteSet, 16, 14, 2);
+                speakersPaletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            }
+            else
+                speakersPaletteEditor.Reload(new Function(SpeakersPaletteUpdate), fgPaletteSet, 16, 14, 2);
         }
-        private void FrameGraphicUpdate()
+        private void LoadSpeakersGraphicEditor()
         {
-            SetFrameImage();
-            SetPreviewImage();
-            checksum--;   // b/c switching colors won't modify checksum
+            if (speakersGraphicEditor == null)
+            {
+                speakersGraphicEditor = new GraphicEditor(new Function(SpeakersGraphicUpdate),
+                    Model.GameSelectSpeakers, Model.GameSelectSpeakers.Length, 0, fgPaletteSet, 14, 0x20);
+                speakersGraphicEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            }
+            else
+                speakersGraphicEditor.Reload(new Function(SpeakersGraphicUpdate),
+                    Model.GameSelectSpeakers, Model.GameSelectSpeakers.Length, 0, fgPaletteSet, 14, 0x20);
         }
         private void BGPaletteUpdate()
         {
             Model.MenuBG = null;
-            if (previewType.SelectedIndex < 7)
-            {
-                SetBackgroundImage();
-                SetPreviewImage();
-                LoadBGGraphicEditor();
-            }
-            checksum--;   // b/c switching colors won't modify checksum
-        }
-        private void ShopBGPaletteUpdate()
-        {
             Model.ShopBG = null;
-            if (previewType.SelectedIndex >= 7)
-            {
-                SetBackgroundImage();
-                SetPreviewImage();
-                LoadBGGraphicEditor();
-            }
+            Model.GameBG = null;
+            SetBackgroundImage();
+            SetPreviewImage();
+            LoadBGGraphicEditor();
             checksum--;   // b/c switching colors won't modify checksum
         }
         private void BGGraphicUpdate()
         {
             Model.MenuBG = null;
             Model.ShopBG = null;
+            Model.GameBG = null;
             SetBackgroundImage();
             SetPreviewImage();
-            menusEditor.GameSelect.SetBackgroundImage();
+            checksum--;   // b/c switching colors won't modify checksum
+        }
+        private void FGPaletteUpdate()
+        {
+            SetForegroundImage();
+            SetPreviewImage();
+            LoadFGGraphicEditor();
+            checksum--;   // b/c switching colors won't modify checksum
+        }
+        private void FGGraphicUpdate()
+        {
+            SetForegroundImage();
+            SetPreviewImage();
             checksum--;   // b/c switching colors won't modify checksum
         }
         private void CursorsPaletteUpdate()
@@ -353,6 +603,17 @@ namespace LAZYSHELL
         }
         private void CursorsGraphicUpdate()
         {
+            checksum--;   // b/c switching colors won't modify checksum
+        }
+        private void SpeakersPaletteUpdate()
+        {
+            SetSpeakersImages();
+            LoadSpeakersGraphicEditor();
+            checksum--;   // b/c switching colors won't modify checksum
+        }
+        private void SpeakersGraphicUpdate()
+        {
+            SetSpeakersImages();
             checksum--;   // b/c switching colors won't modify checksum
         }
         //
@@ -371,9 +632,9 @@ namespace LAZYSHELL
             int[] palette = Do.ReduceColorDepth(pixels, 16, 0);
             for (int i = 0; i < palette.Length; i++)
             {
-                Model.MenuBGPalette.Reds[i] = Color.FromArgb(palette[i]).R;
-                Model.MenuBGPalette.Greens[i] = Color.FromArgb(palette[i]).G;
-                Model.MenuBGPalette.Blues[i] = Color.FromArgb(palette[i]).B;
+                bgPaletteSet.Reds[i] = Color.FromArgb(palette[i]).R;
+                bgPaletteSet.Greens[i] = Color.FromArgb(palette[i]).G;
+                bgPaletteSet.Blues[i] = Color.FromArgb(palette[i]).B;
             }
             Do.PixelsToBPP(pixels, graphics, new Size(256 / 8, 256 / 8), palette, 0x20);
             //
@@ -389,61 +650,112 @@ namespace LAZYSHELL
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //
             Model.MenuBG = null;
+            Model.ShopBG = null;
+            Model.GameBG = null;
             SetBackgroundImage();
             SetPreviewImage();
             LoadBGGraphicEditor();
             LoadBGPaletteEditor();
             checksum--;
         }
-        private void ImportFrame(Bitmap import)
+        private void ImportForeground(Bitmap import)
         {
-            if (import.Width != 40 || import.Height != 48)
+            if (index == 0)
             {
-                MessageBox.Show(
-                    "The dimensions of the imported image must be exactly 40 x 48.",
-                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                if (import.Width > 256 || import.Height > 256)
+                {
+                    MessageBox.Show(
+                        "The dimensions of the imported image must be no larger than 256 x 256.",
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                //
+                byte[] graphics = new byte[0x8000];
+                int[] pixels = Do.ImageToPixels(import, new Size(256, 256), new Rectangle(0, 0, 256, 256));
+                int[] palette = Do.ReduceColorDepth(pixels, 16, 0);
+                for (int i = 0; i < palette.Length; i++)
+                {
+                    fgPaletteSet.Reds[16 * 4 + i] = Color.FromArgb(palette[i]).R;
+                    fgPaletteSet.Greens[16 * 4 + i] = Color.FromArgb(palette[i]).G;
+                    fgPaletteSet.Blues[16 * 4 + i] = Color.FromArgb(palette[i]).B;
+                }
+                Do.PixelsToBPP(pixels, graphics, new Size(256 / 8, 256 / 8), palette, 0x20);
+                //
+                byte[] tileset = new byte[0x800];
+                byte[] temp = new byte[graphics.Length]; graphics.CopyTo(temp, 0);
+                int size = Do.CopyToTileset(graphics, tileset, palette, 4, true, false, 0x20, 2, new Size(256, 256), 0);
+                //
+                Buffer.BlockCopy(tileset, 0, Model.GameSelectTileset, 0, 0x800);
+                Buffer.BlockCopy(graphics, 0, Model.GameSelectGraphics, 0, 0x2000);
+                if (size > 8192)
+                    MessageBox.Show("Not enough space to store the necessary amount of SNES graphics data for the imported images. The total required space (" +
+                        size + " bytes) for the new SNES graphics data exceeds 8192 bytes.",
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //
+                editTileset = true;
             }
-            //
-            byte[] graphics = new byte[0x1E0];
-            int[] pixels = Do.ImageToPixels(import, new Size(40, 48), new Rectangle(0, 0, 40, 48));
-            int[] palette = Do.ReduceColorDepth(pixels, 4, 0);
-            Do.PixelsToBPP(pixels, graphics, new Size(5, 6), palette, 0x10);
-            for (int i = 0; i < palette.Length; i++)
+            else
             {
-                Model.FontPaletteMenu.Reds[i] = Color.FromArgb(palette[i]).R;
-                Model.FontPaletteMenu.Greens[i] = Color.FromArgb(palette[i]).G;
-                Model.FontPaletteMenu.Blues[i] = Color.FromArgb(palette[i]).B;
+                if (import.Width != 40 || import.Height != 48)
+                {
+                    MessageBox.Show(
+                        "The dimensions of the imported image must be exactly 40 x 48.",
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                //
+                byte[] graphics = new byte[0x1E0];
+                int[] pixels = Do.ImageToPixels(import, new Size(40, 48), new Rectangle(0, 0, 40, 48));
+                int[] palette = Do.ReduceColorDepth(pixels, 4, 0);
+                Do.PixelsToBPP(pixels, graphics, new Size(5, 6), palette, 0x10);
+                for (int i = 0; i < palette.Length; i++)
+                {
+                    Model.FontPaletteMenu.Reds[i] = Color.FromArgb(palette[i]).R;
+                    Model.FontPaletteMenu.Greens[i] = Color.FromArgb(palette[i]).G;
+                    Model.FontPaletteMenu.Blues[i] = Color.FromArgb(palette[i]).B;
+                }
+                // top
+                for (int a = 0; a < 0x50; a++)
+                    Model.MenuFrameGraphics[a] = graphics[a];
+                for (int a = 0x100, b = 0x50; a < 0x150 && b < 0xA0; a++, b++)
+                    Model.MenuFrameGraphics[a] = graphics[b];
+                // bottom
+                for (int a = 0x170, b = 0x190; a < 0x1C0 && b < 0x1E0; a++, b++)
+                    Model.MenuFrameGraphics[a] = graphics[b];
+                for (int a = 0x70, b = 0x140; a < 0xC0 && b < 0x190; a++, b++)
+                    Model.MenuFrameGraphics[a] = graphics[b];
+                // sides
+                for (int a = 0x50, b = 0xA0; a < 0x60 && b < 0xB0; a++, b++)
+                    Model.MenuFrameGraphics[a] = graphics[b];
+                for (int a = 0x60, b = 0xE0; a < 0x70 && b < 0xF0; a++, b++)
+                    Model.MenuFrameGraphics[a] = graphics[b];
+                for (int a = 0x150, b = 0xF0; a < 0x160 && b < 0x100; a++, b++)
+                    Model.MenuFrameGraphics[a] = graphics[b];
+                for (int a = 0x160, b = 0x130; a < 0x160 && b < 0x140; a++, b++)
+                    Model.MenuFrameGraphics[a] = graphics[b];
+                //
             }
-            // top
-            for (int a = 0; a < 0x50; a++)
-                Model.MenuFrameGraphics[a] = graphics[a];
-            for (int a = 0x100, b = 0x50; a < 0x150 && b < 0xA0; a++, b++)
-                Model.MenuFrameGraphics[a] = graphics[b];
-            // bottom
-            for (int a = 0x170, b = 0x190; a < 0x1C0 && b < 0x1E0; a++, b++)
-                Model.MenuFrameGraphics[a] = graphics[b];
-            for (int a = 0x70, b = 0x140; a < 0xC0 && b < 0x190; a++, b++)
-                Model.MenuFrameGraphics[a] = graphics[b];
-            // sides
-            for (int a = 0x50, b = 0xA0; a < 0x60 && b < 0xB0; a++, b++)
-                Model.MenuFrameGraphics[a] = graphics[b];
-            for (int a = 0x60, b = 0xE0; a < 0x70 && b < 0xF0; a++, b++)
-                Model.MenuFrameGraphics[a] = graphics[b];
-            for (int a = 0x150, b = 0xF0; a < 0x160 && b < 0x100; a++, b++)
-                Model.MenuFrameGraphics[a] = graphics[b];
-            for (int a = 0x160, b = 0x130; a < 0x160 && b < 0x140; a++, b++)
-                Model.MenuFrameGraphics[a] = graphics[b];
-            //
-            SetFrameImage();
+            SetForegroundImage();
             SetPreviewImage();
-            LoadFrameGraphicEditor();
-            LoadFramePaletteEditor();
+            LoadFGGraphicEditor();
+            LoadFGPaletteEditor();
             checksum--;
         }
         //
         public void Assemble()
         {
+            Model.Data[0x03462D] = (byte)this.music.SelectedIndex;
+            Model.Compress(Model.GameSelectGraphics, 0x3E9A49, 0x2000, 0x3EB2CD - 0x3E9A49, "Game select graphics");
+            if (editTileset)
+                Model.Compress(Model.GameSelectTileset, 0x3EB2CD, 0x800, 0x3EB50F - 0x3EB2CD, "Game select tileset");
+            Model.Compress(Model.GameSelectPalettes, 0x3EB50F, 0x200, 0x3EB624 - 0x3EB50F, "Game select palettes");
+            Model.Compress(Model.GameSelectSpeakers, 0x3EB624, 0x600, 0x3EB94A - 0x3EB624, "Game select speakers");
+            //
+            for (int i = 0; i < cursorSprites.Length; i++)
+                cursorSprites[i].Assemble();
+            //
+            Model.GameSelectPaletteSet.Assemble();
+            Model.GameSelectBGPalette.Assemble();
             Model.FontPaletteMenu.Assemble();
             Model.MenuBGPalette.Assemble();
             Model.ShopBGPalette.Assemble();
@@ -476,52 +788,166 @@ namespace LAZYSHELL
         }
         public new void Close()
         {
-            if (framePaletteEditor != null)
-                framePaletteEditor.Close();
-            if (frameGraphicEditor != null)
-                frameGraphicEditor.Close();
             if (bgPaletteEditor != null)
+            {
                 bgPaletteEditor.Close();
-            if (shopBGPaletteEditor != null)
-                shopBGPaletteEditor.Close();
+                bgPaletteEditor.Dispose();
+            }
             if (bgGraphicEditor != null)
+            {
                 bgGraphicEditor.Close();
+                bgGraphicEditor.Dispose();
+            }
+            if (fgPaletteEditor != null)
+            {
+                fgPaletteEditor.Close();
+                fgPaletteEditor.Dispose();
+            }
+            if (fgGraphicEditor != null)
+            {
+                fgGraphicEditor.Close();
+                fgGraphicEditor.Dispose();
+            }
             if (cursorsGraphicEditor != null)
+            {
                 cursorsGraphicEditor.Close();
+                cursorsGraphicEditor.Dispose();
+            }
             if (cursorsPaletteEditor != null)
+            {
                 cursorsPaletteEditor.Close();
+                cursorsPaletteEditor.Dispose();
+            }
+            if (speakersGraphicEditor != null)
+            {
+                speakersGraphicEditor.Close();
+                speakersGraphicEditor.Dispose();
+            }
+            if (speakersPaletteEditor != null)
+            {
+                speakersPaletteEditor.Close();
+                speakersPaletteEditor.Dispose();
+            }
         }
         #endregion
         #region Event Handlers
-        private void pictureBoxFrame_Paint(object sender, PaintEventArgs e)
-        {
-            if (frameImage == null)
-                return;
-            e.Graphics.DrawImage(frameImage, 0, 0);
-        }
         private void pictureBoxBG_Paint(object sender, PaintEventArgs e)
         {
             if (bgImage == null)
                 return;
             e.Graphics.DrawImage(bgImage, 0, 0);
         }
+        private void pictureBoxFG_Paint(object sender, PaintEventArgs e)
+        {
+            if (fgImage != null)
+                e.Graphics.DrawImage(fgImage, 0, 0);
+        }
         private void pictureBoxPreview_Paint(object sender, PaintEventArgs e)
         {
-            if (previewImage == null)
-                return;
-            e.Graphics.DrawImage(previewImage, 0, 0);
-            //
+            if (index != 0 && previewImage != null)
+                e.Graphics.DrawImage(previewImage, 0, 0);
             int[] pal = Model.FontPaletteMenu.Palette;
             MenuTextPreview pre = new MenuTextPreview();
             //
-            switch (previewType.SelectedIndex)
+            switch (index)
             {
+                case 0: // game select
+                    if (bgImage != null)
+                        e.Graphics.DrawImage(bgImage, 0, 0);
+                    if (fgImage != null)
+                        e.Graphics.DrawImage(fgImage, 0, 0);
+                    if (stereoImage != null)
+                        e.Graphics.DrawImage(stereoImage, 8, 15);
+                    if (monoImage != null)
+                        e.Graphics.DrawImage(monoImage, 192, 17);
+                    //
+                    Do.DrawText(Model.MenuTexts[43].ToString(), 95, 24, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[109].ToString(), 47, 56, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[110].ToString(), 47, 96, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[111].ToString(), 47, 136, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[112].ToString(), 47, 176, e.Graphics, pre, Model.FontMenu, pal);
+                    //
+                    if (cursorImage == null)
+                        SetCursorImage();
+                    e.Graphics.DrawImage(cursorImage, 28, 55);
+                    break;
+                case 5: // Overworld - equip
+                    if (allyImages != null)
+                    {
+                        e.Graphics.DrawImage(allyImages[0], 16 - 128, 12 - 96 - 1);
+                        e.Graphics.DrawImage(allyImages[2], 16 - 128, 60 - 96 - 1);
+                        e.Graphics.DrawImage(allyImages[4], 16 - 128, 108 - 96 - 1);
+                    }
+                    Do.DrawText(Model.Items[33].ToString(), 23, 12, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.Items[69].ToString(), 23, 24, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.Items[81].ToString(), 23, 36, e.Graphics, pre, Model.FontMenu, pal);
+                    //
+                    Do.DrawText(Model.Items[30].ToString(), 23, 60, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.Items[67].ToString(), 23, 72, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.Items[94].ToString(), 23, 84, e.Graphics, pre, Model.FontMenu, pal);
+                    //
+                    Do.DrawText(Model.Items[31].ToString(), 23, 108, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.Items[66].ToString(), 23, 120, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.Items[90].ToString(), 23, 132, e.Graphics, pre, Model.FontMenu, pal);
+                    //
+                    if (cursorImages != null)
+                    {
+                        e.Graphics.DrawImage(cursorImages[0], 4, 13);
+                        e.Graphics.DrawImage(cursorImages[1], 232, 191);
+                        e.Graphics.DrawImage(cursorImages[4], 60, 141);
+                    }
+                    break;
+                case 6: // Overworld - special item
+                    if (cursorImages != null)
+                        e.Graphics.DrawImage(cursorImages[0], 0, 49);
+                    break;
+                case 8: // Shop
+                    Do.DrawText(Model.MenuTexts[76].ToString(), 23, 12, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[77].ToString(), 23, 24, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[78].ToString(), 23, 36, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[0].ToString(), 23, 48, e.Graphics, pre, Model.FontMenu, pal);
+                    //
+                    Do.DrawText(Model.MenuTexts[27].ToString(), 23, 84, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[32].ToString(), 23, 192, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText("999", 87, 84, e.Graphics, pre, Model.FontMenu, pal);
+                    e.Graphics.DrawImage(cursorImages[0], 4, 13);
+                    break;
+                case 9: // Shop - Buy
+                    Do.DrawText(Model.MenuTexts[76].ToString(), 15, 12, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[80].ToString(), 15, 72, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText("999", 95, 72, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[27].ToString(), 15, 96, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText("999", 95, 96, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[79].ToString(), 15, 108, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText("99", 103, 108, e.Graphics, pre, Model.FontMenu, pal);
+                    e.Graphics.DrawImage(cursorImages[0], 116, 13);
+                    break;
+                case 10: // Shop - Sell Items
+                    Do.DrawText(Model.MenuTexts[77].ToString(), 15, 12, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[80].ToString(), 15, 72, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText("999", 95, 72, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[27].ToString(), 15, 96, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText("999", 95, 96, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[79].ToString(), 15, 108, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText("99", 103, 108, e.Graphics, pre, Model.FontMenu, pal);
+                    e.Graphics.DrawImage(cursorImages[0], 116, 13);
+                    break;
+                case 11: // Shop - Sell Weapons
+                    Do.DrawText(Model.MenuTexts[78].ToString(), 15, 12, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[80].ToString(), 15, 72, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText("999", 95, 72, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[27].ToString(), 15, 96, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText("999", 95, 96, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.MenuTexts[79].ToString(), 15, 108, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText("99", 103, 108, e.Graphics, pre, Model.FontMenu, pal);
+                    e.Graphics.DrawImage(cursorImages[0], 116, 13);
+                    break;
                 default:
                     if (allyImages != null)
                     {
-                        e.Graphics.DrawImage(allyImages[0], 28 - (allyImages[0].Width / 2), 17);
-                        e.Graphics.DrawImage(allyImages[2], 28 - (allyImages[2].Width / 2), 55);
-                        e.Graphics.DrawImage(allyImages[4], 28 - (allyImages[4].Width / 2), 111);
+                        e.Graphics.DrawImage(allyImages[0], 28 - 128, 12 - 96 - 1);
+                        e.Graphics.DrawImage(allyImages[2], 28 - 128, 60 - 96 - 1);
+                        e.Graphics.DrawImage(allyImages[4], 28 - 128, 108 - 96 - 1);
                     }
                     //
                     Do.DrawText(Model.Characters[0].ToString(), 39, 12, e.Graphics, pre, Model.FontMenu, pal);
@@ -542,7 +968,7 @@ namespace LAZYSHELL
                     Do.DrawText("30          ", 71, 120, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText("195/195     ", 63, 132, e.Graphics, pre, Model.FontMenu, pal);
                     //
-                    if (previewType.SelectedIndex == 0)
+                    if (index == 1) // Overworld - main
                     {
                         Do.DrawText(Model.MenuTexts[1].ToString(), 143, 12, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText(Model.MenuTexts[3].ToString(), 143, 24, e.Graphics, pre, Model.FontMenu, pal);
@@ -562,15 +988,9 @@ namespace LAZYSHELL
                         Do.DrawText("999         ", 207, 193, e.Graphics, pre, Model.FontMenu, pal);
                         //
                         if (cursorImages != null)
-                        {
                             e.Graphics.DrawImage(cursorImages[0], 124, 13);
-                            //e.Graphics.DrawImage(cursorImages[1], 32, 160);
-                            //e.Graphics.DrawImage(cursorImages[2], 48, 160);
-                            //e.Graphics.DrawImage(cursorImages[3], 64, 160);
-                            //e.Graphics.DrawImage(cursorImages[4], 80, 160);
-                        }
                     }
-                    else if (previewType.SelectedIndex == 1) // Overworld - items
+                    else if (index == 2) // Overworld - items
                     {
                         Do.DrawText(Model.MenuTexts[55].ToString(), 15, 156, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText("99/99       ", 79, 156, e.Graphics, pre, Model.FontMenu, pal);
@@ -580,7 +1000,7 @@ namespace LAZYSHELL
                             e.Graphics.DrawImage(cursorImages[1], 232, 191);
                         }
                     }
-                    else if (previewType.SelectedIndex == 2) // Overworld - status
+                    else if (index == 3) // Overworld - status
                     {
                         Do.DrawText(Model.MenuTexts[19].ToString(), 168, 12, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText(Model.MenuTexts[15].ToString(), 160, 48, e.Graphics, pre, Model.FontMenu, pal);
@@ -601,7 +1021,7 @@ namespace LAZYSHELL
                         if (cursorImages != null)
                             e.Graphics.DrawImage(cursorImages[0], 4, 23);
                     }
-                    else if (previewType.SelectedIndex == 3) // Overworld - special
+                    else if (index == 4) // Overworld - special
                     {
                         Do.DrawText(Model.MenuTexts[55].ToString(), 135, 108, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText("99/99       ", 200, 108, e.Graphics, pre, Model.FontMenu, pal);
@@ -614,12 +1034,12 @@ namespace LAZYSHELL
                         if (cursorImages != null)
                             e.Graphics.DrawImage(cursorImages[0], 4, 23);
                     }
-                    else if (previewType.SelectedIndex == 6) // Overworld - switch
+                    else if (index == 7) // Overworld - switch
                     {
                         if (allyImages != null)
                         {
-                            e.Graphics.DrawImage(allyImages[1], 148 - (allyImages[1].Width / 2), 63);
-                            e.Graphics.DrawImage(allyImages[3], 148 - (allyImages[3].Width / 2), 120);
+                            e.Graphics.DrawImage(allyImages[1], 148 - 128, 60 - 96 - 1);
+                            e.Graphics.DrawImage(allyImages[3], 148 - 128, 108 - 96 - 1);
                         }
                         //
                         Do.DrawText(Model.Characters[1].ToString(), 159, 60, e.Graphics, pre, Model.FontMenu, pal);
@@ -642,96 +1062,38 @@ namespace LAZYSHELL
                             e.Graphics.DrawImage(cursorImages[0], 4, 71);
                     }
                     break;
-                case 4: // Overworld - equip
-                    if (allyImages != null)
-                    {
-                        e.Graphics.DrawImage(allyImages[0], 16 - (allyImages[0].Width / 2), 17);
-                        e.Graphics.DrawImage(allyImages[2], 16 - (allyImages[2].Width / 2), 55);
-                        e.Graphics.DrawImage(allyImages[4], 16 - (allyImages[4].Width / 2), 111);
-                    }
-                    Do.DrawText(Model.Items[33].ToString(), 23, 12, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.Items[69].ToString(), 23, 24, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.Items[81].ToString(), 23, 36, e.Graphics, pre, Model.FontMenu, pal);
-                    //
-                    Do.DrawText(Model.Items[30].ToString(), 23, 60, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.Items[67].ToString(), 23, 72, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.Items[94].ToString(), 23, 84, e.Graphics, pre, Model.FontMenu, pal);
-                    //
-                    Do.DrawText(Model.Items[31].ToString(), 23, 108, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.Items[66].ToString(), 23, 120, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.Items[90].ToString(), 23, 132, e.Graphics, pre, Model.FontMenu, pal);
-                    //
-                    if (cursorImages != null)
-                    {
-                        e.Graphics.DrawImage(cursorImages[0], 4, 13);
-                        e.Graphics.DrawImage(cursorImages[1], 232, 191);
-                        e.Graphics.DrawImage(cursorImages[4], 60, 141);
-                    }
-                    break;
-                case 5: // Overworld - special item
-                    if (cursorImages != null)
-                        e.Graphics.DrawImage(cursorImages[0], 0, 49);
-                    break;
-                case 7: // Shop
-                    Do.DrawText(Model.MenuTexts[76].ToString(), 23, 12, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[77].ToString(), 23, 24, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[78].ToString(), 23, 36, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[0].ToString(), 23, 48, e.Graphics, pre, Model.FontMenu, pal);
-                    //
-                    Do.DrawText(Model.MenuTexts[27].ToString(), 23, 84, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[32].ToString(), 23, 192, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText("999", 87, 84, e.Graphics, pre, Model.FontMenu, pal);
-                    e.Graphics.DrawImage(cursorImages[0], 4, 13);
-                    break;
-                case 8: // Shop - Buy
-                    Do.DrawText(Model.MenuTexts[76].ToString(), 15, 12, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[80].ToString(), 15, 72, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText("999", 95, 72, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[27].ToString(), 15, 96, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText("999", 95, 96, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[79].ToString(), 15, 108, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText("99", 103, 108, e.Graphics, pre, Model.FontMenu, pal);
-                    e.Graphics.DrawImage(cursorImages[0], 116, 13);
-                    break;
-                case 9: // Shop - Sell Items
-                    Do.DrawText(Model.MenuTexts[77].ToString(), 15, 12, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[80].ToString(), 15, 72, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText("999", 95, 72, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[27].ToString(), 15, 96, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText("999", 95, 96, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[79].ToString(), 15, 108, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText("99", 103, 108, e.Graphics, pre, Model.FontMenu, pal);
-                    e.Graphics.DrawImage(cursorImages[0], 116, 13);
-                    break;
-                case 10: // Shop - Sell Weapons
-                    Do.DrawText(Model.MenuTexts[78].ToString(), 15, 12, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[80].ToString(), 15, 72, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText("999", 95, 72, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[27].ToString(), 15, 96, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText("999", 95, 96, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.MenuTexts[79].ToString(), 15, 108, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText("99", 103, 108, e.Graphics, pre, Model.FontMenu, pal);
-                    e.Graphics.DrawImage(cursorImages[0], 116, 13);
-                    break;
             }
         }
-        private void previewType_SelectedIndexChanged(object sender, EventArgs e)
+        private void pictureBoxPreview_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (textObjects == null)
+                return;
+            //
+            foreach (TextObject textObject in textObjects)
+            {
+                if (e.X >= textObject.X && e.X < textObject.X + textObject.Width &&
+                    e.Y >= textObject.Y && e.Y < textObject.Y + textObject.Height)
+                {
+                    mouseOverTextObject = textObject.Index;
+                    pictureBoxPreview.Cursor = Cursors.Hand;
+                    break;
+                }
+                else
+                {
+                    mouseOverTextObject = -1;
+                    pictureBoxPreview.Cursor = Cursors.Arrow;
+                }
+            }
+        }
+        private void pictureBoxPreview_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (mouseOverTextObject >= 0 && mouseOverTextObject < Model.MenuTexts.Length)
+                menusEditor.Index = mouseOverTextObject;
+        }
+        private void menuName_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            SetBackgroundImage();
-            SetPreviewImage();
-        }
-        private void openPalettesFrame_Click(object sender, EventArgs e)
-        {
-            if (framePaletteEditor == null)
-                LoadFramePaletteEditor();
-            framePaletteEditor.Show();
-        }
-        private void openGraphicsFrame_Click(object sender, EventArgs e)
-        {
-            if (frameGraphicEditor == null)
-                LoadFrameGraphicEditor();
-            frameGraphicEditor.Show();
+            RefreshMenu();
         }
         private void openPalettesBG_Click(object sender, EventArgs e)
         {
@@ -739,17 +1101,23 @@ namespace LAZYSHELL
                 LoadBGPaletteEditor();
             bgPaletteEditor.Show();
         }
-        private void shopBGPaletteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openPalettesFG_Click(object sender, EventArgs e)
         {
-            if (shopBGPaletteEditor == null)
-                LoadShopBGPaletteEditor();
-            shopBGPaletteEditor.Show();
+            if (fgPaletteEditor == null)
+                LoadFGPaletteEditor();
+            fgPaletteEditor.Show();
         }
         private void openGraphicsBG_Click(object sender, EventArgs e)
         {
             if (bgGraphicEditor == null)
                 LoadBGGraphicEditor();
             bgGraphicEditor.Show();
+        }
+        private void openGraphicsFG_Click(object sender, EventArgs e)
+        {
+            if (fgGraphicEditor == null)
+                LoadFGGraphicEditor();
+            fgGraphicEditor.Show();
         }
         private void openPaletteCursors_Click(object sender, EventArgs e)
         {
@@ -763,15 +1131,22 @@ namespace LAZYSHELL
                 LoadCursorsGraphicEditor();
             cursorsGraphicEditor.Show();
         }
-        private void editor_FormClosing(object sender, FormClosingEventArgs e)
+        private void openPaletteSpeakers_Click(object sender, EventArgs e)
         {
-            e.Cancel = true;
-            ((Form)sender).Hide();
+            if (speakersPaletteEditor == null)
+                LoadSpeakersPaletteEditor();
+            speakersPaletteEditor.Show();
+        }
+        private void openGraphicsSpeakers_Click(object sender, EventArgs e)
+        {
+            if (speakersGraphicEditor == null)
+                LoadSpeakersGraphicEditor();
+            speakersGraphicEditor.Show();
         }
         private void saveImageAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (contextMenuStrip1.SourceControl == pictureBoxFrame)
-                Do.Export(frameImage, "menuFrame.png");
+            if (contextMenuStrip1.SourceControl == pictureBoxFG)
+                Do.Export(fgImage, "menuFG.png");
             else if (contextMenuStrip1.SourceControl == pictureBoxBG)
                 Do.Export(bgImage, "menuBG.png");
             else if (contextMenuStrip1.SourceControl == pictureBoxPreview)
@@ -791,11 +1166,108 @@ namespace LAZYSHELL
                 return;
             Bitmap import = new Bitmap(Image.FromFile(openFileDialog1.FileName));
             //
-            if (contextMenuStrip1.SourceControl == pictureBoxBG || sender == importBackgroundToolStripMenuItem)
+            if (contextMenuStrip1.SourceControl == pictureBoxBG || sender == importBGToolStripMenuItem)
                 ImportBackground(import);
-            else if (contextMenuStrip1.SourceControl == pictureBoxFrame || sender == importFrameToolStripMenuItem)
-                ImportFrame(import);
+            else if (contextMenuStrip1.SourceControl == pictureBoxFG || sender == importFGToolStripMenuItem)
+                ImportForeground(import);
+        }
+        private void cursorName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cursorSpriteNum.SelectedIndex = cursorSprite.Sprite;
+            cursorSequence.Value = cursorSprite.Sequence;
+            cursorImage = null;
+            pictureBoxPreview.Invalidate();
+        }
+        private void cursorSpriteNum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cursorSprite.Sprite = cursorSpriteNum.SelectedIndex;
+            cursorImage = null;
+            pictureBoxPreview.Invalidate();
+        }
+        private void cursorSequence_ValueChanged(object sender, EventArgs e)
+        {
+            cursorSprite.Sequence = (int)cursorSequence.Value;
+            cursorImage = null;
+            pictureBoxPreview.Invalidate();
+        }
+        private void editor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            ((Form)sender).Hide();
         }
         #endregion
+        private class CursorSprite
+        {
+            private int index;
+            public int Sprite;
+            public int Sequence;
+            public CursorSprite(int index)
+            {
+                this.index = index;
+                switch (index)
+                {
+                    case 0:
+                        Sprite = Bits.GetShort(Model.Data, 0x034757);
+                        Sequence = Bits.GetShort(Model.Data, 0x03475C);
+                        break;
+                    case 1:
+                        Sprite = Bits.GetShort(Model.Data, 0x03489A);
+                        Sequence = Bits.GetShort(Model.Data, 0x03489F);
+                        break;
+                    case 2:
+                        Sprite = Bits.GetShort(Model.Data, 0x034EE7);
+                        Sequence = Bits.GetShort(Model.Data, 0x034EEC);
+                        break;
+                    case 3:
+                        Sprite = Bits.GetShort(Model.Data, 0x0340AA);
+                        Sequence = Bits.GetShort(Model.Data, 0x0340AF);
+                        break;
+                    case 4:
+                        Sprite = Bits.GetShort(Model.Data, 0x03501E);
+                        Sequence = Bits.GetShort(Model.Data, 0x035021);
+                        break;
+                }
+            }
+            public void Assemble()
+            {
+                switch (index)
+                {
+                    case 0:
+                        Bits.SetShort(Model.Data, 0x034757, Sprite);
+                        Bits.SetShort(Model.Data, 0x03475C, Sequence);
+                        break;
+                    case 1:
+                        Bits.SetShort(Model.Data, 0x03489A, Sprite);
+                        Bits.SetShort(Model.Data, 0x03489F, Sequence);
+                        break;
+                    case 2:
+                        Bits.SetShort(Model.Data, 0x034EE7, Sprite);
+                        Bits.SetShort(Model.Data, 0x034EEC, Sequence);
+                        break;
+                    case 3:
+                        Bits.SetShort(Model.Data, 0x0340AA, Sprite);
+                        Bits.SetShort(Model.Data, 0x0340AF, Sequence);
+                        break;
+                    case 4:
+                        Bits.SetShort(Model.Data, 0x03501E, Sprite);
+                        Bits.SetShort(Model.Data, 0x035021, Sequence);
+                        break;
+                }
+            }
+        }
+        private class TextObject
+        {
+            public Rectangle Rectangle;
+            public int Index;
+            public int X { get { return Rectangle.X; } }
+            public int Y { get { return Rectangle.Y; } }
+            public int Width { get { return Rectangle.Width; } }
+            public int Height { get { return Rectangle.Height; } }
+            public TextObject(int index, int x, int y)
+            {
+                this.Index = index;
+                this.Rectangle = Model.MenuTexts[index].Rectangle(x, y);
+            }
+        }
     }
 }

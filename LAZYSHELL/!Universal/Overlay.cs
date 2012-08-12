@@ -615,17 +615,17 @@ namespace LAZYSHELL
             foreach (NPC npc in npcs.Npcs)
             {
                 DrawLevelNPC(npc, npcProperties, npc.NPCID, npc.EngageType);
-                foreach (NPC instance in npc.Instances)
+                foreach (NPC instance in npc.Clones)
                     DrawLevelNPC(instance, npcProperties, npc.NPCID, npc.EngageType);
             }
         }
         private void DrawLevelNPC(NPC npc, NPCProperties[] npcProperties, int npcid, int engagetype)
         {
             int NPCID = engagetype == 0 ? Math.Min(511, npcid + npc.PropertyA) : Math.Min(511, (int)npcid);
-            int[] pixels = npcProperties[NPCID].CreateImage(npc.Face, false, 0, true);
-            int height = npcProperties[NPCID].ImageHeight;
-            int width = npcProperties[NPCID].ImageWidth;
-            Bitmap image = Do.PixelsToImage(pixels, width, height);
+            Size size = new Size(0, 0);
+            Sprite sprite = Model.Sprites[npcProperties[NPCID].Sprite];
+            int[] pixels = sprite.GetPixels(false, true, 0, npc.Face, false, false, ref size);
+            Bitmap image = Do.PixelsToImage(pixels, size.Width, size.Height);
             NPCImages.Add(image);
         }
         public void DrawLevelNPCs(LevelNPCs npcs, Graphics g, int z)
@@ -639,7 +639,7 @@ namespace LAZYSHELL
                 npc.Index = total++;
                 sorted.Add(npc);
                 int index_ = 0;
-                foreach (NPC instance in npc.Instances)
+                foreach (NPC instance in npc.Clones)
                 {
                     instance.Hilite = npcs.SelectedNPC == index && npcs.IsInstanceSelected && npcs.SelectedInstance == index_;
                     instance.Index = total++;
@@ -666,18 +666,18 @@ namespace LAZYSHELL
             else
                 g.DrawImage(fieldBaseShadowImageH, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
             y -= npc.Z * 16;
-            y -= npc.CoordYBit7 ? 8 : 0;
+            y -= npc.YBit7 ? 8 : 0;
             rsrc = new Rectangle(x, y, 32, 16);
             rdst = new Rectangle(x * z, y * z, 32 * z, 16 * z);
             if (!npc.Hilite)
                 g.DrawImage(npcFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
             else
                 g.DrawImage(npcFieldBaseImageH, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
-            x += 32 - NPCImages[npc.Index].Width / 2 - 16;
-            y -= NPCImages[npc.Index].Height - 4 - 8;
+            x = x - 112;//x += 32 - NPCImages[npc.Index].Width / 2 - 16;
+            y = y - 120 - 1;//y -= NPCImages[npc.Index].Height - 4 - 8;
             rsrc = new Rectangle(x, y, NPCImages[npc.Index].Width, NPCImages[npc.Index].Height);
             rdst = new Rectangle(x * z, y * z, rsrc.Width * z, rsrc.Height * z);
-            if (npc.CoordXBit7)
+            if (npc.XBit7)
                 g.DrawImage(NPCImages[npc.Index], rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
         }
         public void DrawLevelNPCTags(LevelNPCs npcs, Graphics g, int z)
@@ -692,9 +692,9 @@ namespace LAZYSHELL
                     DrawLevelNPCTag(npcs, g, npc, index++, null, z);
                 else
                     current = index++;
-                foreach (NPC instance in npc.Instances)
+                foreach (NPC instance in npc.Clones)
                 {
-                    if (npc != npcs.Npc || instance != npcs.Npc.Instance_ || !npcs.IsInstanceSelected)
+                    if (npc != npcs.Npc || instance != npcs.Npc.Clone_ || !npcs.IsInstanceSelected)
                         DrawLevelNPCTag(npcs, g, instance, index++, null, z);
                     else
                         current = index++;
@@ -705,7 +705,7 @@ namespace LAZYSHELL
                 if (!npcs.IsInstanceSelected)
                     DrawLevelNPCTag(npcs, g, npcs.Npc, current, null, z);
                 else
-                    DrawLevelNPCTag(npcs, g, npcs.Npc.Instance_, current, npcs.Npc, z);
+                    DrawLevelNPCTag(npcs, g, npcs.Npc.Clone_, current, npcs.Npc, z);
             }
         }
         private void DrawLevelNPCTag(LevelNPCs npcs, Graphics g, NPC npc, int index, NPC parent, int z)

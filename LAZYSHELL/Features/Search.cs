@@ -117,7 +117,7 @@ namespace LAZYSHELL
         private void InitializeProperties()
         {
             this.searchField.ForeColor = SystemColors.ControlDark;
-            this.searchField.Text = "Search...";
+            this.searchField.Text = "Find...";
             this.searchField.KeyDown += new KeyEventHandler(searchField_KeyDown);
             this.searchField.KeyUp += new KeyEventHandler(searchField_KeyUp);
             this.searchField.MouseDown += new MouseEventHandler(searchField_MouseDown);
@@ -237,7 +237,7 @@ namespace LAZYSHELL
         {
             if (searchField.Text == "")
             {
-                searchField.Text = "Search...";
+                searchField.Text = "Find...";
                 searchField.ForeColor = SystemColors.ControlDark;
                 searchFieldEnter = false;
             }

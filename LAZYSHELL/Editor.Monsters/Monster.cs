@@ -69,16 +69,16 @@ namespace LAZYSHELL
         #endregion
         #region Accessors
         public char[] Name { get { return this.name; } set { this.name = value; } }
-        public bool SetPsychoMsg(string value, bool symbols)
+        public bool SetPsychoMsg(string value, bool byteView)
         {
-            this.psychoMsg = textHelperReduced.EncodeText(value.ToCharArray(), symbols, 0, Settings.Default.Keystrokes);
+            this.psychoMsg = textHelperReduced.EncodeText(value.ToCharArray(), byteView, 0, Settings.Default.Keystrokes);
             this.psychoMsgError = textHelperReduced.Error;
             return !psychoMsgError;
         }
-        public string GetPsychoMsg(bool symbols)
+        public string GetPsychoMsg(bool byteView)
         {
-            if (!psychoMsgError) 
-                return new string(textHelperReduced.DecodeText(psychoMsg, symbols, 0, Settings.Default.Keystrokes));
+            if (!psychoMsgError)
+                return new string(textHelperReduced.DecodeText(psychoMsg, byteView, 0, Settings.Default.Keystrokes));
             else
                 return new string(psychoMsg);
         }
@@ -497,8 +497,30 @@ namespace LAZYSHELL
         }
         #region Text Helper Code
         private TextHelperReduced textHelperReduced { get { return TextHelperReduced.Instance; } }
-        private int caretPositionSymbol = 0; public int CaretPositionSymbol { get { return this.caretPositionSymbol; } set { this.caretPositionSymbol = value; } }
-        private int caretPositionNotSymbol = 0; public int CaretPositionNotSymbol { get { return this.caretPositionNotSymbol; } set { this.caretPositionNotSymbol = value; } }
+        private int caretPositionByteView = 0;
+        public int CaretPositionByteView
+        {
+            get
+            {
+                return this.caretPositionByteView;
+            }
+            set
+            {
+                this.caretPositionByteView = value;
+            }
+        }
+        private int caretPositionTextView = 0;
+        public int CaretPositionTextView
+        {
+            get
+            {
+                return this.caretPositionTextView;
+            }
+            set
+            {
+                this.caretPositionTextView = value;
+            }
+        }
         #endregion
         #region Monster Image Code
         private int currentFrame = 0;

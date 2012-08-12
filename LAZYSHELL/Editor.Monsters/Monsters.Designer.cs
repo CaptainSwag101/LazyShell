@@ -47,7 +47,7 @@
             this.pageUp = new System.Windows.Forms.ToolStripButton();
             this.pageDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.byteOrTextView = new System.Windows.Forms.ToolStripButton();
+            this.textView = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.freeBytes = new System.Windows.Forms.ToolStripLabel();
             this.pictureBoxPsychopath = new System.Windows.Forms.PictureBox();
@@ -332,7 +332,7 @@
             this.pageUp,
             this.pageDown,
             this.toolStripSeparator1,
-            this.byteOrTextView,
+            this.textView,
             this.toolStripSeparator2,
             this.freeBytes});
             this.toolStrip2.Location = new System.Drawing.Point(3, 49);
@@ -371,15 +371,15 @@
             // 
             // byteOrTextView
             // 
-            this.byteOrTextView.CheckOnClick = true;
-            this.byteOrTextView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.byteOrTextView.Image = global::LAZYSHELL.Properties.Resources.textView;
-            this.byteOrTextView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.byteOrTextView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.byteOrTextView.Name = "byteOrTextView";
-            this.byteOrTextView.Size = new System.Drawing.Size(23, 22);
-            this.byteOrTextView.Text = "Text View";
-            this.byteOrTextView.Click += new System.EventHandler(this.byteOrTextView_Click);
+            this.textView.CheckOnClick = true;
+            this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
+            this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.textView.Name = "byteOrTextView";
+            this.textView.Size = new System.Drawing.Size(23, 22);
+            this.textView.Text = "Text View";
+            this.textView.Click += new System.EventHandler(this.byteOrTextView_Click);
             // 
             // toolStripSeparator2
             // 
@@ -1555,7 +1555,7 @@
         private System.Windows.Forms.ToolStripButton pageUp;
         private System.Windows.Forms.ToolStripButton pageDown;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton byteOrTextView;
+        private System.Windows.Forms.ToolStripButton textView;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel freeBytes;
         private System.Windows.Forms.ToolStrip toolStrip3;

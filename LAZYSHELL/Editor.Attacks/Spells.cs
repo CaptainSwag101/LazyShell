@@ -21,7 +21,7 @@ namespace LAZYSHELL
         public int Index { get { return index; } set { index = value; } }
         private Settings settings = Settings.Default;
         private TextHelperReduced textHelper = TextHelperReduced.Instance;
-        private bool textCodeFormat { get { return !byteOrText.Checked; } set { byteOrText.Checked = !value; } }
+        private bool byteView { get { return !textView.Checked; } set { textView.Checked = !value; } }
         private Bitmap descriptionFrame;
         private Bitmap descriptionText;
         #endregion
@@ -61,23 +61,9 @@ namespace LAZYSHELL
             }
             else
             {
-                if (this.textBoxSpellDescription.Enabled == false)
-                {
-                    this.textBoxSpellDescription.Enabled = true;
-                    this.toolStrip2.Enabled = true;
-                }
-                if (index <= 26)
-                {
-                    this.textBoxSpellDescription.Enabled = true;
-                    this.toolStrip2.Enabled = true;
-                    this.textBoxSpellDescription.Text = spell.GetDescription(textCodeFormat);
-                }
-                else
-                {
-                    this.textBoxSpellDescription.Enabled = false;
-                    this.toolStrip2.Enabled = false;
-                    this.textBoxSpellDescription.Text = " This spell[1] cannot have a[1] description";
-                }
+                this.textBoxSpellDescription.Enabled = true;
+                this.toolStrip2.Enabled = true;
+                this.textBoxSpellDescription.Text = spell.GetDescription(byteView);
             }
             this.spellAttackProp.SetItemChecked(0, spell.CheckStats);
             this.spellAttackProp.SetItemChecked(1, spell.IgnoreDefense);
@@ -215,12 +201,12 @@ namespace LAZYSHELL
             textBoxSpellDescription.Text.CopyTo(0, newText, 0, textBoxSpellDescription.SelectionStart);
             toInsert.CopyTo(0, newText, textBoxSpellDescription.SelectionStart, toInsert.Length);
             textBoxSpellDescription.Text.CopyTo(textBoxSpellDescription.SelectionStart, newText, textBoxSpellDescription.SelectionStart + toInsert.Length, this.textBoxSpellDescription.Text.Length - this.textBoxSpellDescription.SelectionStart);
-            if (textCodeFormat)
-                spell.CaretPositionSymbol = this.textBoxSpellDescription.SelectionStart + toInsert.Length;
+            if (byteView)
+                spell.CaretPositionByteView = this.textBoxSpellDescription.SelectionStart + toInsert.Length;
             else
-                spell.CaretPositionNotSymbol = this.textBoxSpellDescription.SelectionStart + toInsert.Length;
-            spell.SetDescription(new string(newText), textCodeFormat);
-            textBoxSpellDescription.Text = spell.GetDescription(textCodeFormat);
+                spell.CaretPositionTextView = this.textBoxSpellDescription.SelectionStart + toInsert.Length;
+            spell.SetDescription(new string(newText), byteView);
+            textBoxSpellDescription.Text = spell.GetDescription(byteView);
         }
         public void SetToolTips(ToolTip toolTip1)
         {
@@ -606,11 +592,11 @@ namespace LAZYSHELL
                     textBoxSpellDescription.SelectionStart = tempSel + 2;
                 }
             }
-            bool flag = textHelper.VerifyCorrectSymbols(this.textBoxSpellDescription.Text.ToCharArray(), textCodeFormat);
+            bool flag = textHelper.VerifyCorrectSymbols(this.textBoxSpellDescription.Text.ToCharArray(), byteView);
             if (flag)
             {
                 this.textBoxSpellDescription.BackColor = Color.FromArgb(255, 255, 255, 255);
-                spell.SetDescription(this.textBoxSpellDescription.Text, textCodeFormat);
+                spell.SetDescription(this.textBoxSpellDescription.Text, byteView);
             }
             if (!flag || spell.DescriptionError)
                 this.textBoxSpellDescription.BackColor = Color.Red;
@@ -619,14 +605,14 @@ namespace LAZYSHELL
         }
         private void newLine_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDescriptionText("[1]");
             else
                 InsertIntoDescriptionText("[newLine]");
         }
         private void endString_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDescriptionText("[0]");
             else
                 InsertIntoDescriptionText("[endInput]");
@@ -656,7 +642,7 @@ namespace LAZYSHELL
         }
         private void byteOrText_Click(object sender, EventArgs e)
         {
-            this.textBoxSpellDescription.Text = spell.GetDescription(textCodeFormat);
+            this.textBoxSpellDescription.Text = spell.GetDescription(byteView);
         }
         // level 1 timing
         private void numericUpDown100_ValueChanged(object sender, EventArgs e)

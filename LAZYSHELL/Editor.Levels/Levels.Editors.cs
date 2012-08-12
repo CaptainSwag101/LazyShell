@@ -116,7 +116,7 @@ namespace LAZYSHELL
         {
             if (lp == null)
             {
-                lp = new LAZYSHELL.Previewer.Previewer((int)this.levelNum.Value, Index);
+                lp = new LAZYSHELL.Previewer.Previewer(Index, 1);
                 lp.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else

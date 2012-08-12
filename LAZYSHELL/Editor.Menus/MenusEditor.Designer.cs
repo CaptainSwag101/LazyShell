@@ -29,30 +29,47 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenusEditor));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.save = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.save = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.menuTextName = new System.Windows.Forms.ToolStripComboBox();
             this.menuTextNum = new LAZYSHELL.ToolStripNumericUpDown();
-            this.textCodeFormat = new System.Windows.Forms.ToolStripButton();
+            this.textView = new System.Windows.Forms.ToolStripButton();
             this.menuTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.charactersLeft = new System.Windows.Forms.ToolStripLabel();
-            this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // toolStrip1
+            // panel1
             // 
-            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.save});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(576, 25);
-            this.toolStrip1.TabIndex = 557;
-            this.toolStrip1.Text = "toolStrip1";
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(792, 322);
+            this.panel1.TabIndex = 558;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.save,
+            this.toolStripSeparator1,
+            this.toolStripLabel1,
+            this.menuTextName,
+            this.menuTextNum,
+            this.textView,
+            this.menuTextBox,
+            this.charactersLeft});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip2.Size = new System.Drawing.Size(792, 25);
+            this.toolStrip2.TabIndex = 558;
+            this.toolStrip2.Text = "toolStrip2";
             // 
             // save
             // 
@@ -62,33 +79,17 @@
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(23, 22);
             this.save.ToolTipText = "Save";
-            this.save.Click += new System.EventHandler(this.save_Click);
             // 
-            // panel1
+            // toolStripSeparator1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 50);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(576, 588);
-            this.panel1.TabIndex = 558;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStrip2
+            // toolStripLabel1
             // 
-            this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuTextName,
-            this.menuTextNum,
-            this.textCodeFormat,
-            this.menuTextBox,
-            this.charactersLeft});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 25);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(576, 25);
-            this.toolStrip2.TabIndex = 558;
-            this.toolStrip2.Text = "toolStrip2";
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(38, 22);
+            this.toolStripLabel1.Text = " TEXT ";
             // 
             // menuTextName
             // 
@@ -96,7 +97,7 @@
             this.menuTextName.DropDownWidth = 300;
             this.menuTextName.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.menuTextName.Name = "menuTextName";
-            this.menuTextName.Size = new System.Drawing.Size(150, 25);
+            this.menuTextName.Size = new System.Drawing.Size(200, 25);
             this.menuTextName.SelectedIndexChanged += new System.EventHandler(this.menuTextName_SelectedIndexChanged);
             // 
             // menuTextNum
@@ -104,7 +105,7 @@
             this.menuTextNum.AutoSize = false;
             this.menuTextNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuTextNum.Hexadecimal = false;
-            this.menuTextNum.Location = new System.Drawing.Point(159, 1);
+            this.menuTextNum.Location = new System.Drawing.Point(276, 1);
             this.menuTextNum.Maximum = new decimal(new int[] {
             117,
             0,
@@ -125,23 +126,23 @@
             0});
             this.menuTextNum.ValueChanged += new System.EventHandler(this.menuTextNum_ValueChanged);
             // 
-            // textCodeFormat
+            // textView
             // 
-            this.textCodeFormat.CheckOnClick = true;
-            this.textCodeFormat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.textCodeFormat.Image = global::LAZYSHELL.Properties.Resources.textView;
-            this.textCodeFormat.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.textCodeFormat.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.textCodeFormat.Name = "textCodeFormat";
-            this.textCodeFormat.Size = new System.Drawing.Size(23, 22);
-            this.textCodeFormat.Text = "Text View";
-            this.textCodeFormat.Visible = false;
-            this.textCodeFormat.CheckedChanged += new System.EventHandler(this.textCodeFormat_CheckedChanged);
+            this.textView.CheckOnClick = true;
+            this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
+            this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.textView.Name = "textView";
+            this.textView.Size = new System.Drawing.Size(23, 22);
+            this.textView.Text = "Text View";
+            this.textView.Visible = false;
+            this.textView.CheckedChanged += new System.EventHandler(this.textView_CheckedChanged);
             // 
             // menuTextBox
             // 
             this.menuTextBox.Name = "menuTextBox";
-            this.menuTextBox.Size = new System.Drawing.Size(200, 25);
+            this.menuTextBox.Size = new System.Drawing.Size(300, 25);
             this.menuTextBox.TextChanged += new System.EventHandler(this.menuTextBox_TextChanged);
             // 
             // charactersLeft
@@ -154,10 +155,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 638);
+            this.ClientSize = new System.Drawing.Size(792, 347);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip2);
-            this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(5, 5);
@@ -165,8 +165,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "MENUS - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenusEditor_FormClosing);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -176,14 +174,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton save;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripComboBox menuTextName;
         private System.Windows.Forms.ToolStripLabel charactersLeft;
         private System.Windows.Forms.ToolStripTextBox menuTextBox;
-        private System.Windows.Forms.ToolStripButton textCodeFormat;
+        private System.Windows.Forms.ToolStripButton textView;
         private ToolStripNumericUpDown menuTextNum;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripButton save;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

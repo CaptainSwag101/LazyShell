@@ -20,7 +20,7 @@ namespace LAZYSHELL
         public Item Item { get { return item; } set { item = value; } }
         private int index { get { return (int)itemNum.Value; } set { itemNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
-        private bool textCodeFormat { get { return !byteOrText.Checked; } set { byteOrText.Checked = !value; } }
+        private bool byteView { get { return !textView.Checked; } set { textView.Checked = !value; } }
         private Bitmap descriptionBGEquip;
         private Bitmap descriptionBGItem;
         private Bitmap descriptionText;
@@ -73,11 +73,13 @@ namespace LAZYSHELL
             if (this.itemNum.Value > 0xB0)
             {
                 this.textBoxItemDescription.Text = " This item[1] cannot have a[1] description";
+                if (item.RawDescription == null)
+                    this.textBoxItemDescription_TextChanged(null, null);
                 this.groupBox11.Enabled = false;
             }
             else
             {
-                this.textBoxItemDescription.Text = item.GetDescription(textCodeFormat);
+                this.textBoxItemDescription.Text = item.GetDescription(byteView);
                 this.groupBox11.Enabled = true;
             }
             this.itemStatusEffect.SetItemChecked(0, item.EffectMute);
@@ -198,13 +200,13 @@ namespace LAZYSHELL
             toInsert.CopyTo(0, newText, textBoxItemDescription.SelectionStart, toInsert.Length);
             textBoxItemDescription.Text.CopyTo(textBoxItemDescription.SelectionStart, newText, textBoxItemDescription.SelectionStart + toInsert.Length, this.textBoxItemDescription.Text.Length - this.textBoxItemDescription.SelectionStart);
 
-            if (textCodeFormat)
-                item.CaretPositionSymbol = this.textBoxItemDescription.SelectionStart + toInsert.Length;
+            if (byteView)
+                item.CaretPositionByteView = this.textBoxItemDescription.SelectionStart + toInsert.Length;
             else
-                item.CaretPositionNotSymbol = this.textBoxItemDescription.SelectionStart + toInsert.Length;
-            item.SetDescription(new string(newText), textCodeFormat);
+                item.CaretPositionTextView = this.textBoxItemDescription.SelectionStart + toInsert.Length;
+            item.SetDescription(new string(newText), byteView);
 
-            textBoxItemDescription.Text = item.GetDescription(textCodeFormat);
+            textBoxItemDescription.Text = item.GetDescription(byteView);
         }
         public void SetToolTips(ToolTip toolTip1)
         {
@@ -658,11 +660,11 @@ namespace LAZYSHELL
                 }
             }
 
-            bool flag = textHelper.VerifyCorrectSymbols(this.textBoxItemDescription.Text.ToCharArray(), textCodeFormat);
+            bool flag = textHelper.VerifyCorrectSymbols(this.textBoxItemDescription.Text.ToCharArray(), byteView);
             if (flag)
             {
                 this.textBoxItemDescription.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                item.SetDescription(this.textBoxItemDescription.Text, textCodeFormat);
+                item.SetDescription(this.textBoxItemDescription.Text, byteView);
             }
             if (!flag || item.DescriptionError)
                 this.textBoxItemDescription.BackColor = System.Drawing.Color.Red;
@@ -678,20 +680,20 @@ namespace LAZYSHELL
                 SetDescriptionImage();
             e.Graphics.DrawImage(descriptionText, 0, 0);
         }
-        private void byteOrText_Click(object sender, EventArgs e)
+        private void textView_Click(object sender, EventArgs e)
         {
-            this.textBoxItemDescription.Text = item.GetDescription(textCodeFormat);
+            this.textBoxItemDescription.Text = item.GetDescription(byteView);
         }
         private void newLine_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDescriptionText("[1]");
             else
                 InsertIntoDescriptionText("[newLine]");
         }
         private void endString_Click(object sender, EventArgs e)
         {
-            if (textCodeFormat)
+            if (byteView)
                 InsertIntoDescriptionText("[0]");
             else
                 InsertIntoDescriptionText("[endInput]");

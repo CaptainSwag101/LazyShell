@@ -1819,7 +1819,7 @@ namespace LAZYSHELL
                             }
                             // for all of the instances
                             int index_ins = 0;
-                            foreach (NPC.Instance instance in npc.Instances)
+                            foreach (NPC.Clone instance in npc.Clones)
                             {
                                 if (instance.X == mouseIsometricPosition.X &&
                                     instance.Y == mouseIsometricPosition.Y)
@@ -2560,8 +2560,8 @@ namespace LAZYSHELL
                 List<int> tag = (List<int>)objectFunctionToolStripMenuItem.Tag;
                 NPC npc = npcs.Npcs[tag[0]];
                 NPC instance = null;
-                if (npc.Instances.Count > 0 && tag[1] >= 0)
-                    instance = npc.Instances[tag[1]];
+                if (npc.Clones.Count > 0 && tag[1] >= 0)
+                    instance = npc.Clones[tag[1]];
                 if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
                     Model.Program.CreateEventScriptsWindow();
                 Model.Program.EventScripts.EventName.SelectedIndex = 0;
@@ -2576,8 +2576,8 @@ namespace LAZYSHELL
                 List<int> tag = (List<int>)objectFunctionToolStripMenuItem.Tag;
                 NPC npc = npcs.Npcs[tag[0]];
                 NPC instance = null;
-                if (npc.Instances.Count > 0 && tag[1] >= 0)
-                    instance = npc.Instances[tag[1]];
+                if (npc.Clones.Count > 0 && tag[1] >= 0)
+                    instance = npc.Clones[tag[1]];
                 if (Model.Program.Formations == null || !Model.Program.Formations.Visible)
                     Model.Program.CreateFormationsWindow();
                 int pack = npc.EventORpack + (instance == null ? npc.PropertyB : instance.PropertyB);

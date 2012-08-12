@@ -2301,7 +2301,7 @@ namespace LAZYSHELL
             return temp;
         }
         public static void ImagesToMolds(List<Mold> molds, List<Mold.Tile> uniqueTiles, Bitmap[] images, ref int[] palette, ref byte[] graphics,
-            int startingIndex, bool replaceMolds, bool replacePalette, string type)
+            int startingIndex, bool replaceMolds, bool replacePalette, string type, bool alwaysTilemap)
         {
             Bitmap sheet = CombineImages(images, 128, 512, 8, true);
             int[] pixels = ImageToPixels(sheet);
@@ -2349,7 +2349,7 @@ namespace LAZYSHELL
                 pixels_image = GetPixelRegion(temp, 0x20, rpalette, width / 8, 0, 0, width / 8, height / 8, 0);
                 //
                 #region create tilemap mold
-                if ((width <= 16 && height <= 16) || width > 32 || height > 32)
+                if (alwaysTilemap || (width <= 16 && height <= 16) || width > 32 || height > 32)
                 {
                     mold.Gridplane = false;
                     mold.Tiles = new List<Mold.Tile>();
@@ -4369,10 +4369,10 @@ namespace LAZYSHELL
         }
         public static void SetTreeViewScrollPos(TreeView treeView, Point scrollPosition)
         {
-            treeView.BeginUpdate();
+            //treeView.BeginUpdate();
             SetScrollPos((IntPtr)treeView.Handle, SB_HORZ, scrollPosition.X, true);
             SetScrollPos((IntPtr)treeView.Handle, SB_VERT, scrollPosition.Y, true);
-            treeView.EndUpdate();
+            //treeView.EndUpdate();
         }
         public static void RemoveClickEvent(ToolStripMenuItem b)
         {

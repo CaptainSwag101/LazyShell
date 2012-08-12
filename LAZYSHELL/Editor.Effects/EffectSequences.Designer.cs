@@ -96,15 +96,15 @@
             0,
             0});
             this.duration.Minimum = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
             this.duration.Name = "duration";
             this.duration.Size = new System.Drawing.Size(50, 17);
-            this.duration.Text = "0";
+            this.duration.Text = "1";
             this.duration.Value = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});

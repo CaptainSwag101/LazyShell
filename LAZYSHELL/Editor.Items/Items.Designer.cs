@@ -74,7 +74,7 @@
             this.lvl1TimingEnd = new System.Windows.Forms.NumericUpDown();
             this.lvl2TimingStart = new System.Windows.Forms.NumericUpDown();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.byteOrText = new System.Windows.Forms.ToolStripButton();
+            this.textView = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.newLine = new System.Windows.Forms.ToolStripButton();
             this.endString = new System.Windows.Forms.ToolStripButton();
@@ -746,7 +746,7 @@
             // 
             this.toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.byteOrText,
+            this.textView,
             this.toolStripSeparator2,
             this.newLine,
             this.endString});
@@ -759,14 +759,14 @@
             // 
             // byteOrText
             // 
-            this.byteOrText.CheckOnClick = true;
-            this.byteOrText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.byteOrText.Image = global::LAZYSHELL.Properties.Resources.textView;
-            this.byteOrText.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.byteOrText.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.byteOrText.Name = "byteOrText";
-            this.byteOrText.Size = new System.Drawing.Size(23, 22);
-            this.byteOrText.Click += new System.EventHandler(this.byteOrText_Click);
+            this.textView.CheckOnClick = true;
+            this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
+            this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.textView.Name = "byteOrText";
+            this.textView.Size = new System.Drawing.Size(23, 22);
+            this.textView.Click += new System.EventHandler(this.textView_Click);
             // 
             // toolStripSeparator2
             // 
@@ -1056,7 +1056,7 @@
         private System.Windows.Forms.NumericUpDown lvl2TimingStart;
         private ToolStripNumericUpDown itemNum;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton byteOrText;
+        private System.Windows.Forms.ToolStripButton textView;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton newLine;
         private System.Windows.Forms.ToolStripButton endString;

@@ -103,7 +103,30 @@ namespace LAZYSHELL
             this.count = count;
             this.startRow = start;
             this.max = max;
-
+            // create checkbox rows, but only if diff number
+            if (rows.Count != Math.Min(count - start, max))
+            {
+                foreach (CheckBox checkBox in this.rows)
+                    this.Controls.Remove(checkBox);
+                List<CheckBox> rows_temp = new List<CheckBox>();
+                for (int i = 0; i < count - start && i < max; i++)
+                {
+                    CheckBox checkBox = new CheckBox();
+                    checkBox.Appearance = Appearance.Button;
+                    checkBox.AutoSize = false;
+                    if (i < this.rows.Count)
+                        checkBox.Checked = this.rows[i].Checked;
+                    else
+                        checkBox.Checked = true;
+                    checkBox.Location = new Point(12, i * 8 + 37);
+                    checkBox.Size = new Size(8, 8);
+                    rows_temp.Add(checkBox);
+                    this.Controls.Add(checkBox);
+                }
+                this.currentColor = 0;
+                this.rows = rows_temp;
+            }
+            //
             this.pictureBoxPalette.Height = Math.Min((count * 8) - (start * 8), max * 8);
             this.panel7.Height = Math.Min((count * 8 + 4) - (start * 8), max * 8 + 4);
             this.Height = Math.Max(446, 446 + panel7.Height - 68);
@@ -293,9 +316,9 @@ namespace LAZYSHELL
                     int b = paletteSet.Blues[i];
                     if (r == g && r == b) continue;
                     double grey = (r * 0.3) + (g * 0.59) + (b * 0.11);
-                    paletteSet.Reds[i] = (int)Math.Round(grey, MidpointRounding.ToEven);
-                    paletteSet.Greens[i] = (int)Math.Round(grey, MidpointRounding.ToEven);
-                    paletteSet.Blues[i] = (int)Math.Round(grey, MidpointRounding.ToEven);
+                    paletteSet.Reds[i] = (int)Math.Round(grey, MidpointRounding.ToEven) & 0xF8;
+                    paletteSet.Greens[i] = (int)Math.Round(grey, MidpointRounding.ToEven) & 0xF8;
+                    paletteSet.Blues[i] = (int)Math.Round(grey, MidpointRounding.ToEven) & 0xF8;
                 }
             }
         }
@@ -323,9 +346,9 @@ namespace LAZYSHELL
                 int r = paletteSet.Reds[i];
                 int g = paletteSet.Greens[i];
                 int b = paletteSet.Blues[i];
-                paletteSet.Reds[i] = Math.Min(248, Math.Max(0, r + (int)brightness.Value));
-                paletteSet.Greens[i] = Math.Min(248, Math.Max(0, g + (int)brightness.Value));
-                paletteSet.Blues[i] = Math.Min(248, Math.Max(0, b + (int)brightness.Value));
+                paletteSet.Reds[i] = Math.Max(0, r + (int)brightness.Value) & 0xF8;
+                paletteSet.Greens[i] = Math.Max(0, g + (int)brightness.Value) & 0xF8;
+                paletteSet.Blues[i] = Math.Max(0, b + (int)brightness.Value) & 0xF8;
             }
         }
         private void DoContrast()

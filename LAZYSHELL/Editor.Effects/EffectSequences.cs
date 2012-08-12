@@ -336,7 +336,10 @@ namespace LAZYSHELL
                 if (i >= frames.Controls.Count) i = 0;
                 PlaybackSequence.ReportProgress(i);
                 duration_temp = ((E_Sequence.Frame)sequence.Frames[i]).Duration;
-                Thread.Sleep(duration_temp * (1000 / 60));
+                if (duration_temp >= 1)
+                    Thread.Sleep(duration_temp * (1000 / 60));
+                else
+                    Thread.Sleep(1000 / 60);
                 if (PlaybackSequence.CancellationPending) break;
             }
         }
