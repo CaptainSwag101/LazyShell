@@ -113,8 +113,8 @@ namespace LAZYSHELL
             else
                 MessageBox.Show("There are not enough map points left to add to the current world map.\nTry reducing the amount of points used by earlier world maps.", "LAZY SHELL");
 
-            tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, "world map");
-            logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, "world map logo");
+            tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, TilesetType.WorldMap);
+            logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, TilesetType.WorldMapLogo);
 
             SetWorldMapImage();
             SetWorldMapPointsImage();
@@ -529,7 +529,7 @@ namespace LAZYSHELL
         }
         private void PaletteUpdate()
         {
-            this.tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, "world map");
+            this.tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, TilesetType.WorldMap);
             SetWorldMapImage();
             LoadGraphicEditor();
             LoadTileEditor();
@@ -537,20 +537,20 @@ namespace LAZYSHELL
         }
         private void GraphicUpdate()
         {
-            this.tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, "world map");
+            this.tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, TilesetType.WorldMap);
             SetWorldMapImage();
             LoadTileEditor();
         }
         private void LogoPaletteUpdate()
         {
-            logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, "world map logo");
+            logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, TilesetType.WorldMapLogo);
             SetWorldMapBannerImage();
             LoadLogoGraphicEditor();
             checksum--;
         }
         private void LogoGraphicUpdate()
         {
-            logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, "world map logo");
+            logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, TilesetType.WorldMapLogo);
             SetWorldMapBannerImage();
             checksum--;
         }
@@ -788,7 +788,7 @@ namespace LAZYSHELL
             if (updating) return;
 
             worldMap.Tileset = (byte)worldMapTileset.Value;
-            tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, "world map");
+            tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, TilesetType.WorldMap);
 
             SetWorldMapImage();
         }

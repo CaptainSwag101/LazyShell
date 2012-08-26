@@ -66,7 +66,7 @@
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(688, 25);
-            this.toolStrip3.TabIndex = 447;
+            this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // save
@@ -180,7 +180,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(688, 444);
-            this.panel1.TabIndex = 448;
+            this.panel1.TabIndex = 1;
             // 
             // toolTip1
             // 

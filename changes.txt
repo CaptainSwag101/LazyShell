@@ -1,6 +1,36 @@
 Major changes/additions are indicated by ***
 
-v3.11.1
+v3.12.0 (2012-08-26)
+--------------------------------------
+Additions:
+***SPC instrument and track editor***
+*Animations: added support for one more command (bonus message)
+*Audio: samples are labled with instrument/sound fx names
+*Audio: infinite loop playback for samples
+*Dialogues: can now edit battle menu graphics/numerals
+*Dialogues: can now edit flower bonus message text
+*Formations: move up/down monster in formation monster list
+*Formations: select and drag several monsters at once
+*Sprites: copy/paste added for frame editing
+*Sprites: multi-select frames
+
+Changes:
+*Reorganized tab order of controls
+*Now uses icon images for right-click context menu items
+*Audio: sample rate options closer to SPC settings
+*Monsters: option to set flower bonus to nothing
+
+Fixes:
+*Formations: changing coords not resetting object location pixels
+*Levels: hilite hover solidity tiles not at correct coords if zoomed in
+*Menus: save event handler got reset
+*Menus: changing cursor sprite indexes not prompting for save
+*Sprites: drawing multiple selected tiles from tileset not working
+*Sprites: not unchecking toolstrip button when selecting different mold
+*Sprites: import images to molds not always padding for tilemaps
+
+
+v3.11.1 (2012-08-12)
 --------------------------------------
 Additions:
 *Dialogue: two new compression table indexes
@@ -23,6 +53,7 @@ Fixes:
 *Levels: wrong behavior when loading preview
 *Levels: previewer nulling entrance event for levels
 *Levels: layer 3 tileset should be twice as big, some levels crashing
+*Levels: dropper not selecting correct color if clicking layer 3 pixel
 *Menus: sprites in overworld menu not using correct index/sequence
 *Menus: changing mono/stereo graphics not updating the image
 *Palettes: greyscale not isolating top 5 bits of colors

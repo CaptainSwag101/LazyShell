@@ -19,21 +19,22 @@ namespace LAZYSHELL
         private bool updatingMonsters = false;
         private Monster[] monsters { get { return Model.Monsters; } set { Model.Monsters = value; } }
         private Monster monster { get { return monsters[Index]; } set { monsters[Index] = value; } }
-        private FontCharacter[] fontDialogue { get { return Model.FontDialogue; } }
         private FontCharacter[] fontMenu { get { return Model.FontMenu; } }
         private int[] fontPaletteBattle { get { return Model.FontPaletteBattle.Palettes[0]; } }
-        private int[] fontPaletteDialogue { get { return Model.FontPaletteDialogue.Palettes[1]; } }
-        private Bitmap psychopathBGImage { get { return Model.BattleDialogueTilesetImage; } }
-        private Bitmap psychopathTextImage;
         public int Index { get { return (int)monsterNum.Value; } set { monsterNum.Value = value; } }
-        private bool byteView { get { return !textView.Checked; } set { textView.Checked = !value; } }
         private Settings settings = Settings.Default;
-        private BattleDialoguePreview battleDialoguePreview = new BattleDialoguePreview();
         private MenuTextPreview menuTextPreview = new MenuTextPreview();
-        private TextHelper textHelper = TextHelper.Instance;
         //
         private BattleScripts battleScriptsEditor;
         private HackingTools hackingToolsWindow;
+        //
+        private bool byteView { get { return !textView.Checked; } set { textView.Checked = !value; } }
+        private Bitmap psychopathBGImage { get { return Model.BattleDialogueTilesetImage; } }
+        private Bitmap psychopathTextImage;
+        private TextHelper textHelper = TextHelper.Instance;
+        private BattleDialoguePreview battleDialoguePreview = new BattleDialoguePreview();
+        private FontCharacter[] fontDialogue { get { return Model.FontDialogue; } }
+        private int[] fontPaletteDialogue { get { return Model.FontPaletteDialogue.Palettes[1]; } }
         #endregion
         #region Functions
         public Monsters()
@@ -57,7 +58,6 @@ namespace LAZYSHELL
             toolTip1.InitialDelay = 0;
             InitializeStrings();
             RefreshMonsterTab();
-            SetDialogueImages();
             SetToolTips(toolTip1);
             new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
             new History(this);
@@ -101,8 +101,6 @@ namespace LAZYSHELL
                 this.MonsterValCoins.Value = monster.Coins;
                 this.MonsterValElevation.Value = monster.Elevation;
                 this.MonsterFlowerOdds.Value = monster.FlowerOdds * 10;
-                this.MonsterPsychopath.Text = monster.GetPsychoMsg(byteView);
-                this.MonsterPsychopath_TextChanged(null, null);
                 this.MonsterElementsNullify.SetItemChecked(0, monster.ElemIceNull);
                 this.MonsterElementsNullify.SetItemChecked(1, monster.ElemFireNull);
                 this.MonsterElementsNullify.SetItemChecked(2, monster.ElemThunderNull);
@@ -132,34 +130,15 @@ namespace LAZYSHELL
                 this.MonsterYoshiCookie.SelectedIndex = Model.ItemNames.GetIndexFromNum(monster.YoshiCookie);
                 this.ItemWinA.SelectedIndex = Model.ItemNames.GetIndexFromNum(monster.ItemWinA);
                 this.ItemWinB.SelectedIndex = Model.ItemNames.GetIndexFromNum(monster.ItemWinB);
+                //
+                this.MonsterPsychopath.Text = monster.GetPsychoMsg(byteView);
+                this.MonsterPsychopath_TextChanged(null, null);
                 CalculateFreeSpace();
+                SetDialogueImages();
+                //
                 updatingMonsters = false;
                 Cursor.Current = Cursors.Arrow;
             }
-        }
-        private void SetDialogueImages()
-        {
-            pictureBoxPsychopath.BackColor = Color.FromArgb(fontPaletteDialogue[0]);
-            pictureBoxPsychopath.Invalidate();
-            MonsterPsychopath_TextChanged(null, null);
-        }
-        private void CalculateFreeSpace()
-        {
-            int used = 0; int size = 0xb641 + 0x2229;
-            for (int i = 0; i < monsters.Length - 1; i++)
-            {
-                used += monsters[i].RawPsychoMsg.Length;
-                if (used + monsters[i].RawPsychoMsg.Length > size)
-                {
-                    bool test = size >= used + monsters[i].RawPsychoMsg.Length;
-                    if (!test)
-                    {
-                        freeBytes.Text = "Entry " + i++.ToString() + " Too Long - Cannot Save";
-                        return;
-                    }
-                }
-            }
-            freeBytes.Text = ((double)(size - used)).ToString() + " characters left";
         }
         private void InsertIntoText(string toInsert)
         {
@@ -179,12 +158,29 @@ namespace LAZYSHELL
             else
                 this.MonsterPsychopath.SelectionStart = monster.CaretPositionTextView;
         }
-        private bool FreeSpace(bool message)
+        private void CalculateFreeSpace()
         {
             int used = 0; int size = 0xb641 + 0x2229;
             for (int i = 0; i < monsters.Length - 1; i++)
+            {
                 used += monsters[i].RawPsychoMsg.Length;
-            return size - used < 0;
+                if (used + monsters[i].RawPsychoMsg.Length > size)
+                {
+                    bool test = size >= used + monsters[i].RawPsychoMsg.Length;
+                    if (!test)
+                    {
+                        freeBytes.Text = "Entry " + i++.ToString() + " Too Long - Cannot Save";
+                        return;
+                    }
+                }
+            }
+            freeBytes.Text = ((double)(size - used)).ToString() + " characters left";
+        }
+        private void SetDialogueImages()
+        {
+            pictureBoxPsychopath.BackColor = Color.FromArgb(fontPaletteDialogue[0]);
+            pictureBoxPsychopath.Invalidate();
+            MonsterPsychopath_TextChanged(null, null);
         }
         private void SetToolTips(ToolTip toolTip1)
         {
@@ -322,9 +318,6 @@ namespace LAZYSHELL
                 "disables the flower bonus and a value of 15 indicates a\n" +
                 "100% success rate.");
 
-            toolTip1.SetToolTip(this.MonsterPsychopath,
-                "The message displayed when the Psychopath spell is used\n" +
-                "on the monster.");
         }
         public void Assemble()
         {
@@ -543,6 +536,67 @@ namespace LAZYSHELL
             else
                 monster.FlowerOdds = (byte)(MonsterFlowerOdds.Value / 10);
         }
+        // menustrip
+        private void save_Click(object sender, EventArgs e)
+        {
+            Assemble();
+        }
+        private void import_Click(object sender, EventArgs e)
+        {
+            new IOElements(monsters, Index, "IMPORT MONSTERS...").ShowDialog();
+            RefreshMonsterTab();
+        }
+        private void export_Click(object sender, EventArgs e)
+        {
+            new IOElements(monsters, Index, "EXPORT MONSTERS...").ShowDialog();
+        }
+        private void clear_Click(object sender, EventArgs e)
+        {
+            new ClearElements(monsters, Index, "CLEAR MONSTERS...").ShowDialog();
+            RefreshMonsterTab();
+        }
+        private void importBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            battleScriptsEditor.Import();
+        }
+        private void exportBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            battleScriptsEditor.Export();
+        }
+        private void clearBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            battleScriptsEditor.Clear();
+        }
+        private void hackingTools_Click(object sender, EventArgs e)
+        {
+            if (!hackingToolsWindow.Visible)
+                hackingToolsWindow.Show();
+            hackingToolsWindow.BringToFront();
+        }
+        private void resetCurrentMonsterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current monster. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                return;
+            monster = new Monster(Model.Data, Index);
+            monsterNum_ValueChanged(null, null);
+        }
+        private void resetCurrentBattleScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You're about to undo all changes to the current battle script. Go ahead with reset?",
+                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                return;
+            battleScriptsEditor.BattleScript = new LAZYSHELL.ScriptsEditor.BattleScript(Model.Data, battleScriptsEditor.index);
+            monsterNum_ValueChanged(null, null);
+        }
+        private void showMonster_Click(object sender, EventArgs e)
+        {
+            panel13.Visible = !panel13.Visible;
+        }
+        private void showBattleScripts_Click(object sender, EventArgs e)
+        {
+            battleScriptsEditor.Visible = !battleScriptsEditor.Visible;
+        }
         // psychopath dialogue
         private void MonsterPsychopath_TextChanged(object sender, EventArgs e)
         {
@@ -638,71 +692,7 @@ namespace LAZYSHELL
         }
         private void pauseFrames_Click(object sender, EventArgs e)
         {
-            if (byteView)
-                InsertIntoText("[3]");
-            else
-                InsertIntoText("[delayInput]");
-        }
-        // menustrip
-        private void save_Click(object sender, EventArgs e)
-        {
-            Assemble();
-        }
-        private void import_Click(object sender, EventArgs e)
-        {
-            new IOElements(monsters, Index, "IMPORT MONSTERS...").ShowDialog();
-            RefreshMonsterTab();
-        }
-        private void export_Click(object sender, EventArgs e)
-        {
-            new IOElements(monsters, Index, "EXPORT MONSTERS...").ShowDialog();
-        }
-        private void clear_Click(object sender, EventArgs e)
-        {
-            new ClearElements(monsters, Index, "CLEAR MONSTERS...").ShowDialog();
-            RefreshMonsterTab();
-        }
-        private void importBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            battleScriptsEditor.Import();
-        }
-        private void exportBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            battleScriptsEditor.Export();
-        }
-        private void clearBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            battleScriptsEditor.Clear();
-        }
-        private void hackingTools_Click(object sender, EventArgs e)
-        {
-            if (!hackingToolsWindow.Visible)
-                hackingToolsWindow.Show();
-            hackingToolsWindow.BringToFront();
-        }
-        private void resetCurrentMonsterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("You're about to undo all changes to the current monster. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                return;
-            monster = new Monster(Model.Data, Index);
-            monsterNum_ValueChanged(null, null);
-        }
-        private void resetCurrentBattleScriptToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("You're about to undo all changes to the current battle script. Go ahead with reset?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                return;
-            battleScriptsEditor.BattleScript = new LAZYSHELL.ScriptsEditor.BattleScript(Model.Data, battleScriptsEditor.index);
-            monsterNum_ValueChanged(null, null);
-        }
-        private void showMonster_Click(object sender, EventArgs e)
-        {
-            panel13.Visible = !panel13.Visible;
-        }
-        private void showBattleScripts_Click(object sender, EventArgs e)
-        {
-            battleScriptsEditor.Visible = !battleScriptsEditor.Visible;
+
         }
         //
         private void panel13_Paint(object sender, PaintEventArgs e)

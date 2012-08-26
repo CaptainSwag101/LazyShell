@@ -94,6 +94,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.panelTimingOne = new System.Windows.Forms.GroupBox();
             this.panelTimingRapid = new System.Windows.Forms.GroupBox();
@@ -105,7 +106,6 @@
             this.panelTimingRotation = new System.Windows.Forms.GroupBox();
             this.panelTimingMultiple = new System.Windows.Forms.GroupBox();
             this.panelTimingFireball = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpellDesc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spellHitRate)).BeginInit();
@@ -130,6 +130,7 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.panelTimingOne.SuspendLayout();
             this.panelTimingRapid.SuspendLayout();
@@ -141,7 +142,6 @@
             this.panelTimingRotation.SuspendLayout();
             this.panelTimingMultiple.SuspendLayout();
             this.panelTimingFireball.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // spellTargetting
@@ -159,7 +159,7 @@
             this.spellTargetting.MultiColumn = true;
             this.spellTargetting.Name = "spellTargetting";
             this.spellTargetting.Size = new System.Drawing.Size(183, 100);
-            this.spellTargetting.TabIndex = 117;
+            this.spellTargetting.TabIndex = 0;
             this.spellTargetting.SelectedIndexChanged += new System.EventHandler(this.spellTargetting_SelectedIndexChanged);
             // 
             // spellAttackProp
@@ -175,7 +175,7 @@
             this.spellAttackProp.Location = new System.Drawing.Point(6, 20);
             this.spellAttackProp.Name = "spellAttackProp";
             this.spellAttackProp.Size = new System.Drawing.Size(183, 100);
-            this.spellAttackProp.TabIndex = 116;
+            this.spellAttackProp.TabIndex = 0;
             this.spellAttackProp.SelectedIndexChanged += new System.EventHandler(this.spellAttackProp_SelectedIndexChanged);
             // 
             // spellStatusChange
@@ -191,7 +191,7 @@
             this.spellStatusChange.MultiColumn = true;
             this.spellStatusChange.Name = "spellStatusChange";
             this.spellStatusChange.Size = new System.Drawing.Size(183, 36);
-            this.spellStatusChange.TabIndex = 115;
+            this.spellStatusChange.TabIndex = 0;
             this.spellStatusChange.SelectedIndexChanged += new System.EventHandler(this.spellStatusChange_SelectedIndexChanged);
             // 
             // spellStatusEffect
@@ -210,7 +210,7 @@
             this.spellStatusEffect.MultiColumn = true;
             this.spellStatusEffect.Name = "spellStatusEffect";
             this.spellStatusEffect.Size = new System.Drawing.Size(183, 68);
-            this.spellStatusEffect.TabIndex = 114;
+            this.spellStatusEffect.TabIndex = 0;
             this.spellStatusEffect.SelectedIndexChanged += new System.EventHandler(this.spellStatusEffect_SelectedIndexChanged);
             // 
             // textBoxSpellDescription
@@ -220,7 +220,7 @@
             this.textBoxSpellDescription.MaxLength = 255;
             this.textBoxSpellDescription.Name = "textBoxSpellDescription";
             this.textBoxSpellDescription.Size = new System.Drawing.Size(189, 68);
-            this.textBoxSpellDescription.TabIndex = 170;
+            this.textBoxSpellDescription.TabIndex = 2;
             this.textBoxSpellDescription.Text = "";
             this.textBoxSpellDescription.TextChanged += new System.EventHandler(this.textBoxSpellDescription_TextChanged);
             // 
@@ -235,17 +235,17 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(189, 25);
-            this.toolStrip2.TabIndex = 173;
+            this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
-            // byteOrText
+            // textView
             // 
             this.textView.CheckOnClick = true;
             this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
             this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.textView.Name = "byteOrText";
+            this.textView.Name = "textView";
             this.textView.Size = new System.Drawing.Size(23, 22);
             this.textView.Click += new System.EventHandler(this.byteOrText_Click);
             // 
@@ -301,7 +301,7 @@
             this.spellInflictElement.Location = new System.Drawing.Point(90, 79);
             this.spellInflictElement.Name = "spellInflictElement";
             this.spellInflictElement.Size = new System.Drawing.Size(99, 21);
-            this.spellInflictElement.TabIndex = 445;
+            this.spellInflictElement.TabIndex = 7;
             this.spellInflictElement.SelectedIndexChanged += new System.EventHandler(this.spellInflictElement_SelectedIndexChanged);
             // 
             // spellFunction
@@ -319,7 +319,7 @@
             this.spellFunction.Location = new System.Drawing.Point(90, 58);
             this.spellFunction.Name = "spellFunction";
             this.spellFunction.Size = new System.Drawing.Size(99, 21);
-            this.spellFunction.TabIndex = 245;
+            this.spellFunction.TabIndex = 5;
             this.spellFunction.SelectedIndexChanged += new System.EventHandler(this.spellFunction_SelectedIndexChanged);
             // 
             // spellEffectType
@@ -334,7 +334,7 @@
             this.spellEffectType.Location = new System.Drawing.Point(90, 37);
             this.spellEffectType.Name = "spellEffectType";
             this.spellEffectType.Size = new System.Drawing.Size(99, 21);
-            this.spellEffectType.TabIndex = 245;
+            this.spellEffectType.TabIndex = 3;
             this.spellEffectType.SelectedIndexChanged += new System.EventHandler(this.spellEffectType_SelectedIndexChanged);
             // 
             // label171
@@ -343,7 +343,7 @@
             this.label171.Location = new System.Drawing.Point(6, 61);
             this.label171.Name = "label171";
             this.label171.Size = new System.Drawing.Size(78, 13);
-            this.label171.TabIndex = 167;
+            this.label171.TabIndex = 4;
             this.label171.Text = "Inflict Function";
             // 
             // label12
@@ -352,7 +352,7 @@
             this.label12.Location = new System.Drawing.Point(6, 40);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(63, 13);
-            this.label12.TabIndex = 167;
+            this.label12.TabIndex = 2;
             this.label12.Text = "Effect Type";
             // 
             // label13
@@ -361,7 +361,7 @@
             this.label13.Location = new System.Drawing.Point(6, 19);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 13);
-            this.label13.TabIndex = 167;
+            this.label13.TabIndex = 0;
             this.label13.Text = "Attack Type";
             // 
             // label17
@@ -370,7 +370,7 @@
             this.label17.Location = new System.Drawing.Point(6, 82);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(75, 13);
-            this.label17.TabIndex = 444;
+            this.label17.TabIndex = 6;
             this.label17.Text = "Inflict Element";
             // 
             // spellAttackType
@@ -384,7 +384,7 @@
             this.spellAttackType.Location = new System.Drawing.Point(90, 16);
             this.spellAttackType.Name = "spellAttackType";
             this.spellAttackType.Size = new System.Drawing.Size(99, 21);
-            this.spellAttackType.TabIndex = 245;
+            this.spellAttackType.TabIndex = 1;
             this.spellAttackType.SelectedIndexChanged += new System.EventHandler(this.spellAttackType_SelectedIndexChanged);
             // 
             // label65
@@ -393,7 +393,7 @@
             this.label65.Location = new System.Drawing.Point(6, 22);
             this.label65.Name = "label65";
             this.label65.Size = new System.Drawing.Size(44, 13);
-            this.label65.TabIndex = 145;
+            this.label65.TabIndex = 0;
             this.label65.Text = "FP Cost";
             // 
             // label64
@@ -402,7 +402,7 @@
             this.label64.Location = new System.Drawing.Point(6, 43);
             this.label64.Name = "label64";
             this.label64.Size = new System.Drawing.Size(67, 13);
-            this.label64.TabIndex = 146;
+            this.label64.TabIndex = 2;
             this.label64.Text = "Magic Power";
             // 
             // spellHitRate
@@ -415,7 +415,7 @@
             0});
             this.spellHitRate.Name = "spellHitRate";
             this.spellHitRate.Size = new System.Drawing.Size(110, 21);
-            this.spellHitRate.TabIndex = 105;
+            this.spellHitRate.TabIndex = 5;
             this.spellHitRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spellHitRate.ValueChanged += new System.EventHandler(this.spellHitRate_ValueChanged);
             // 
@@ -425,7 +425,7 @@
             this.label56.Location = new System.Drawing.Point(6, 64);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(57, 13);
-            this.label56.TabIndex = 147;
+            this.label56.TabIndex = 4;
             this.label56.Text = "Hit Rate%";
             // 
             // spellFPCost
@@ -438,7 +438,7 @@
             0});
             this.spellFPCost.Name = "spellFPCost";
             this.spellFPCost.Size = new System.Drawing.Size(110, 21);
-            this.spellFPCost.TabIndex = 103;
+            this.spellFPCost.TabIndex = 1;
             this.spellFPCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spellFPCost.ValueChanged += new System.EventHandler(this.spellFPCost_ValueChanged);
             // 
@@ -452,7 +452,7 @@
             0});
             this.spellMagPower.Name = "spellMagPower";
             this.spellMagPower.Size = new System.Drawing.Size(110, 21);
-            this.spellMagPower.TabIndex = 104;
+            this.spellMagPower.TabIndex = 3;
             this.spellMagPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spellMagPower.ValueChanged += new System.EventHandler(this.spellMagPower_ValueChanged);
             // 
@@ -470,7 +470,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(408, 25);
-            this.toolStrip1.TabIndex = 473;
+            this.toolStrip1.TabIndex = 0;
             // 
             // spellName
             // 
@@ -548,7 +548,7 @@
             this.label142.Location = new System.Drawing.Point(6, 22);
             this.label142.Name = "label142";
             this.label142.Size = new System.Drawing.Size(97, 13);
-            this.label142.TabIndex = 309;
+            this.label142.TabIndex = 0;
             this.label142.Text = "Timing Frame Start";
             // 
             // label141
@@ -557,7 +557,7 @@
             this.label141.Location = new System.Drawing.Point(6, 43);
             this.label141.Name = "label141";
             this.label141.Size = new System.Drawing.Size(72, 13);
-            this.label141.TabIndex = 310;
+            this.label141.TabIndex = 2;
             this.label141.Text = "1/4 Rotations";
             // 
             // timingRotationStart
@@ -570,7 +570,7 @@
             0});
             this.timingRotationStart.Name = "timingRotationStart";
             this.timingRotationStart.Size = new System.Drawing.Size(80, 21);
-            this.timingRotationStart.TabIndex = 303;
+            this.timingRotationStart.TabIndex = 1;
             this.timingRotationStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingRotationStart.ValueChanged += new System.EventHandler(this.numericUpDown104_ValueChanged);
             // 
@@ -584,7 +584,7 @@
             0});
             this.timingRotationMax.Name = "timingRotationMax";
             this.timingRotationMax.Size = new System.Drawing.Size(80, 21);
-            this.timingRotationMax.TabIndex = 304;
+            this.timingRotationMax.TabIndex = 3;
             this.timingRotationMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingRotationMax.ValueChanged += new System.EventHandler(this.numericUpDown103_ValueChanged);
             // 
@@ -598,7 +598,7 @@
             0});
             this.timingFireballSpan.Name = "timingFireballSpan";
             this.timingFireballSpan.Size = new System.Drawing.Size(92, 21);
-            this.timingFireballSpan.TabIndex = 300;
+            this.timingFireballSpan.TabIndex = 1;
             this.timingFireballSpan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingFireballSpan.ValueChanged += new System.EventHandler(this.numericUpDown106_ValueChanged);
             // 
@@ -612,7 +612,7 @@
             0});
             this.timingFireballMax.Name = "timingFireballMax";
             this.timingFireballMax.Size = new System.Drawing.Size(92, 21);
-            this.timingFireballMax.TabIndex = 301;
+            this.timingFireballMax.TabIndex = 3;
             this.timingFireballMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingFireballMax.ValueChanged += new System.EventHandler(this.numericUpDown105_ValueChanged);
             // 
@@ -622,7 +622,7 @@
             this.label145.Location = new System.Drawing.Point(6, 43);
             this.label145.Name = "label145";
             this.label145.Size = new System.Drawing.Size(77, 13);
-            this.label145.TabIndex = 302;
+            this.label145.TabIndex = 2;
             this.label145.Text = "Maximum Orbs";
             // 
             // label146
@@ -631,7 +631,7 @@
             this.label146.Location = new System.Drawing.Point(6, 22);
             this.label146.Name = "label146";
             this.label146.Size = new System.Drawing.Size(85, 13);
-            this.label146.TabIndex = 301;
+            this.label146.TabIndex = 0;
             this.label146.Text = "Orb Frame Span";
             // 
             // label143
@@ -640,7 +640,7 @@
             this.label143.Location = new System.Drawing.Point(6, 22);
             this.label143.Name = "label143";
             this.label143.Size = new System.Drawing.Size(105, 13);
-            this.label143.TabIndex = 303;
+            this.label143.TabIndex = 0;
             this.label143.Text = "Maximum power-ups";
             // 
             // timingRapid
@@ -653,7 +653,7 @@
             0});
             this.timingRapid.Name = "timingRapid";
             this.timingRapid.Size = new System.Drawing.Size(71, 21);
-            this.timingRapid.TabIndex = 309;
+            this.timingRapid.TabIndex = 1;
             this.timingRapid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingRapid.ValueChanged += new System.EventHandler(this.numericUpDown102_ValueChanged);
             // 
@@ -668,7 +668,7 @@
             this.timingInstanceNumber.Location = new System.Drawing.Point(76, 41);
             this.timingInstanceNumber.Name = "timingInstanceNumber";
             this.timingInstanceNumber.Size = new System.Drawing.Size(113, 21);
-            this.timingInstanceNumber.TabIndex = 353;
+            this.timingInstanceNumber.TabIndex = 3;
             this.timingInstanceNumber.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.instanceNumberName_DrawItem);
             this.timingInstanceNumber.SelectedIndexChanged += new System.EventHandler(this.instanceNumberName_SelectedIndexChanged);
             // 
@@ -682,7 +682,7 @@
             0});
             this.timingInstanceMax.Name = "timingInstanceMax";
             this.timingInstanceMax.Size = new System.Drawing.Size(113, 21);
-            this.timingInstanceMax.TabIndex = 306;
+            this.timingInstanceMax.TabIndex = 1;
             this.timingInstanceMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingInstanceMax.ValueChanged += new System.EventHandler(this.numericUpDown7_ValueChanged);
             // 
@@ -696,7 +696,7 @@
             0});
             this.timingInstanceSpan.Name = "timingInstanceSpan";
             this.timingInstanceSpan.Size = new System.Drawing.Size(113, 21);
-            this.timingInstanceSpan.TabIndex = 308;
+            this.timingInstanceSpan.TabIndex = 5;
             this.timingInstanceSpan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingInstanceSpan.ValueChanged += new System.EventHandler(this.numericUpDown8_ValueChanged);
             // 
@@ -706,7 +706,7 @@
             this.label155.Location = new System.Drawing.Point(6, 66);
             this.label155.Name = "label155";
             this.label155.Size = new System.Drawing.Size(64, 13);
-            this.label155.TabIndex = 40;
+            this.label155.TabIndex = 4;
             this.label155.Text = "Frame Span";
             // 
             // label156
@@ -715,7 +715,7 @@
             this.label156.Location = new System.Drawing.Point(6, 22);
             this.label156.Name = "label156";
             this.label156.Size = new System.Drawing.Size(51, 13);
-            this.label156.TabIndex = 39;
+            this.label156.TabIndex = 0;
             this.label156.Text = "Maximum";
             // 
             // label177
@@ -724,7 +724,7 @@
             this.label177.Location = new System.Drawing.Point(6, 44);
             this.label177.Name = "label177";
             this.label177.Size = new System.Drawing.Size(15, 13);
-            this.label177.TabIndex = 39;
+            this.label177.TabIndex = 2;
             this.label177.Text = "#";
             // 
             // label151
@@ -733,7 +733,7 @@
             this.label151.Location = new System.Drawing.Point(6, 85);
             this.label151.Name = "label151";
             this.label151.Size = new System.Drawing.Size(89, 13);
-            this.label151.TabIndex = 40;
+            this.label151.TabIndex = 6;
             this.label151.Text = "Charge Overflow";
             // 
             // label154
@@ -742,7 +742,7 @@
             this.label154.Location = new System.Drawing.Point(6, 22);
             this.label154.Name = "label154";
             this.label154.Size = new System.Drawing.Size(74, 13);
-            this.label154.TabIndex = 37;
+            this.label154.TabIndex = 0;
             this.label154.Text = "Level 2 Frame";
             // 
             // label152
@@ -751,7 +751,7 @@
             this.label152.Location = new System.Drawing.Point(6, 64);
             this.label152.Name = "label152";
             this.label152.Size = new System.Drawing.Size(74, 13);
-            this.label152.TabIndex = 39;
+            this.label152.TabIndex = 4;
             this.label152.Text = "Level 4 Frame";
             // 
             // timingGeno4Frame
@@ -764,7 +764,7 @@
             0});
             this.timingGeno4Frame.Name = "timingGeno4Frame";
             this.timingGeno4Frame.Size = new System.Drawing.Size(84, 21);
-            this.timingGeno4Frame.TabIndex = 294;
+            this.timingGeno4Frame.TabIndex = 5;
             this.timingGeno4Frame.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingGeno4Frame.ValueChanged += new System.EventHandler(this.numericUpDown114_ValueChanged);
             // 
@@ -778,7 +778,7 @@
             0});
             this.timingGeno2Frame.Name = "timingGeno2Frame";
             this.timingGeno2Frame.Size = new System.Drawing.Size(84, 21);
-            this.timingGeno2Frame.TabIndex = 290;
+            this.timingGeno2Frame.TabIndex = 1;
             this.timingGeno2Frame.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingGeno2Frame.ValueChanged += new System.EventHandler(this.timingGeno2Frame_ValueChanged);
             // 
@@ -788,7 +788,7 @@
             this.label153.Location = new System.Drawing.Point(6, 43);
             this.label153.Name = "label153";
             this.label153.Size = new System.Drawing.Size(74, 13);
-            this.label153.TabIndex = 38;
+            this.label153.TabIndex = 2;
             this.label153.Text = "Level 3 Frame";
             // 
             // timingGenoOverflow
@@ -801,7 +801,7 @@
             0});
             this.timingGenoOverflow.Name = "timingGenoOverflow";
             this.timingGenoOverflow.Size = new System.Drawing.Size(84, 21);
-            this.timingGenoOverflow.TabIndex = 296;
+            this.timingGenoOverflow.TabIndex = 7;
             this.timingGenoOverflow.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingGenoOverflow.ValueChanged += new System.EventHandler(this.numericUpDown112_ValueChanged);
             // 
@@ -815,7 +815,7 @@
             0});
             this.timingGeno3Frame.Name = "timingGeno3Frame";
             this.timingGeno3Frame.Size = new System.Drawing.Size(84, 21);
-            this.timingGeno3Frame.TabIndex = 292;
+            this.timingGeno3Frame.TabIndex = 3;
             this.timingGeno3Frame.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingGeno3Frame.ValueChanged += new System.EventHandler(this.timingGeno3Frame_ValueChanged);
             // 
@@ -825,7 +825,7 @@
             this.label147.Location = new System.Drawing.Point(6, 64);
             this.label147.Name = "label147";
             this.label147.Size = new System.Drawing.Size(80, 13);
-            this.label147.TabIndex = 32;
+            this.label147.TabIndex = 4;
             this.label147.Text = "LV1 Timing END";
             // 
             // label148
@@ -834,7 +834,7 @@
             this.label148.Location = new System.Drawing.Point(6, 43);
             this.label148.Name = "label148";
             this.label148.Size = new System.Drawing.Size(80, 13);
-            this.label148.TabIndex = 31;
+            this.label148.TabIndex = 2;
             this.label148.Text = "LV2 Timing END";
             // 
             // label149
@@ -843,7 +843,7 @@
             this.label149.Location = new System.Drawing.Point(6, 22);
             this.label149.Name = "label149";
             this.label149.Size = new System.Drawing.Size(92, 13);
-            this.label149.TabIndex = 30;
+            this.label149.TabIndex = 0;
             this.label149.Text = "LV2 Timing START";
             // 
             // timingTwoStart
@@ -856,7 +856,7 @@
             0});
             this.timingTwoStart.Name = "timingTwoStart";
             this.timingTwoStart.Size = new System.Drawing.Size(85, 21);
-            this.timingTwoStart.TabIndex = 284;
+            this.timingTwoStart.TabIndex = 1;
             this.timingTwoStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingTwoStart.ValueChanged += new System.EventHandler(this.numericUpDown107_ValueChanged);
             // 
@@ -870,7 +870,7 @@
             0});
             this.timingOneEnd.Name = "timingOneEnd";
             this.timingOneEnd.Size = new System.Drawing.Size(85, 21);
-            this.timingOneEnd.TabIndex = 288;
+            this.timingOneEnd.TabIndex = 5;
             this.timingOneEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingOneEnd.ValueChanged += new System.EventHandler(this.numericUpDown108_ValueChanged);
             // 
@@ -884,7 +884,7 @@
             0});
             this.timingTwoEnd.Name = "timingTwoEnd";
             this.timingTwoEnd.Size = new System.Drawing.Size(85, 21);
-            this.timingTwoEnd.TabIndex = 286;
+            this.timingTwoEnd.TabIndex = 3;
             this.timingTwoEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingTwoEnd.ValueChanged += new System.EventHandler(this.numericUpDown110_ValueChanged);
             // 
@@ -898,7 +898,7 @@
             0});
             this.timingOne.Name = "timingOne";
             this.timingOne.Size = new System.Drawing.Size(80, 21);
-            this.timingOne.TabIndex = 279;
+            this.timingOne.TabIndex = 1;
             this.timingOne.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.timingOne.ValueChanged += new System.EventHandler(this.numericUpDown100_ValueChanged);
             // 
@@ -908,7 +908,7 @@
             this.label144.Location = new System.Drawing.Point(6, 22);
             this.label144.Name = "label144";
             this.label144.Size = new System.Drawing.Size(97, 13);
-            this.label144.TabIndex = 317;
+            this.label144.TabIndex = 0;
             this.label144.Text = "Timing Frame Span";
             // 
             // groupBox1
@@ -922,7 +922,7 @@
             this.groupBox1.Location = new System.Drawing.Point(6, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(195, 89);
-            this.groupBox1.TabIndex = 481;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Spell Status";
             // 
@@ -939,7 +939,7 @@
             this.groupBox2.Location = new System.Drawing.Point(6, 123);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(195, 106);
-            this.groupBox2.TabIndex = 481;
+            this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Attack Properties";
             // 
@@ -951,9 +951,19 @@
             this.groupBox3.Location = new System.Drawing.Point(207, 28);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(195, 181);
-            this.groupBox3.TabIndex = 481;
+            this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Description";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.pictureBoxSpellDesc);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 17);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(189, 68);
+            this.panel1.TabIndex = 0;
             // 
             // groupBox4
             // 
@@ -961,7 +971,7 @@
             this.groupBox4.Location = new System.Drawing.Point(6, 367);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(195, 126);
-            this.groupBox4.TabIndex = 481;
+            this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Targetting";
             // 
@@ -972,7 +982,7 @@
             this.panelTimingOne.Location = new System.Drawing.Point(207, 383);
             this.panelTimingOne.Name = "panelTimingOne";
             this.panelTimingOne.Size = new System.Drawing.Size(195, 47);
-            this.panelTimingOne.TabIndex = 481;
+            this.panelTimingOne.TabIndex = 12;
             this.panelTimingOne.TabStop = false;
             this.panelTimingOne.Text = "Timing Properties";
             // 
@@ -983,7 +993,7 @@
             this.panelTimingRapid.Location = new System.Drawing.Point(207, 383);
             this.panelTimingRapid.Name = "panelTimingRapid";
             this.panelTimingRapid.Size = new System.Drawing.Size(195, 48);
-            this.panelTimingRapid.TabIndex = 481;
+            this.panelTimingRapid.TabIndex = 13;
             this.panelTimingRapid.TabStop = false;
             this.panelTimingRapid.Text = "Timing Properties";
             // 
@@ -993,7 +1003,7 @@
             this.groupBox7.Location = new System.Drawing.Point(6, 235);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(195, 126);
-            this.groupBox7.TabIndex = 481;
+            this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Other Properties";
             // 
@@ -1003,7 +1013,7 @@
             this.groupBox8.Location = new System.Drawing.Point(207, 215);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(195, 94);
-            this.groupBox8.TabIndex = 481;
+            this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Effects";
             // 
@@ -1013,7 +1023,7 @@
             this.groupBox9.Location = new System.Drawing.Point(207, 315);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(195, 62);
-            this.groupBox9.TabIndex = 481;
+            this.groupBox9.TabIndex = 7;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Status Effects";
             // 
@@ -1028,7 +1038,7 @@
             this.panelTimingTwo.Location = new System.Drawing.Point(207, 383);
             this.panelTimingTwo.Name = "panelTimingTwo";
             this.panelTimingTwo.Size = new System.Drawing.Size(195, 89);
-            this.panelTimingTwo.TabIndex = 481;
+            this.panelTimingTwo.TabIndex = 10;
             this.panelTimingTwo.TabStop = false;
             this.panelTimingTwo.Text = "Timing Properties";
             // 
@@ -1045,7 +1055,7 @@
             this.panelTimingGeno.Location = new System.Drawing.Point(207, 383);
             this.panelTimingGeno.Name = "panelTimingGeno";
             this.panelTimingGeno.Size = new System.Drawing.Size(195, 110);
-            this.panelTimingGeno.TabIndex = 482;
+            this.panelTimingGeno.TabIndex = 11;
             this.panelTimingGeno.TabStop = false;
             this.panelTimingGeno.Text = "Timing Properties";
             // 
@@ -1058,7 +1068,7 @@
             this.panelTimingRotation.Location = new System.Drawing.Point(207, 383);
             this.panelTimingRotation.Name = "panelTimingRotation";
             this.panelTimingRotation.Size = new System.Drawing.Size(195, 68);
-            this.panelTimingRotation.TabIndex = 483;
+            this.panelTimingRotation.TabIndex = 9;
             this.panelTimingRotation.TabStop = false;
             this.panelTimingRotation.Text = "Timing Properties";
             // 
@@ -1073,7 +1083,7 @@
             this.panelTimingMultiple.Location = new System.Drawing.Point(207, 383);
             this.panelTimingMultiple.Name = "panelTimingMultiple";
             this.panelTimingMultiple.Size = new System.Drawing.Size(195, 89);
-            this.panelTimingMultiple.TabIndex = 484;
+            this.panelTimingMultiple.TabIndex = 8;
             this.panelTimingMultiple.TabStop = false;
             this.panelTimingMultiple.Text = "Timing Properties";
             // 
@@ -1086,19 +1096,9 @@
             this.panelTimingFireball.Location = new System.Drawing.Point(207, 383);
             this.panelTimingFireball.Name = "panelTimingFireball";
             this.panelTimingFireball.Size = new System.Drawing.Size(195, 68);
-            this.panelTimingFireball.TabIndex = 485;
+            this.panelTimingFireball.TabIndex = 14;
             this.panelTimingFireball.TabStop = false;
             this.panelTimingFireball.Text = "Timing Properties";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.pictureBoxSpellDesc);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 17);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(189, 68);
-            this.panel1.TabIndex = 486;
             // 
             // Spells
             // 
@@ -1106,7 +1106,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 498);
             this.ControlBox = false;
-            this.Controls.Add(this.panelTimingFireball);
             this.Controls.Add(this.panelTimingMultiple);
             this.Controls.Add(this.panelTimingRotation);
             this.Controls.Add(this.panelTimingGeno);
@@ -1121,6 +1120,7 @@
             this.Controls.Add(this.panelTimingRapid);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.panelTimingFireball);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -1157,6 +1157,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.panelTimingOne.ResumeLayout(false);
             this.panelTimingOne.PerformLayout();
@@ -1175,7 +1176,6 @@
             this.panelTimingMultiple.PerformLayout();
             this.panelTimingFireball.ResumeLayout(false);
             this.panelTimingFireball.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

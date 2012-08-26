@@ -222,17 +222,13 @@ namespace LAZYSHELL
             Point p = new Point(start.X * u, start.Y * u);
             Size s = new Size((stop.X - start.X) * u + u, (stop.Y - start.Y) * u + u);
             Brush b = new SolidBrush(Color.FromArgb(75, Color.Orange));
-            if (p.X == 0) 
-                p.X++; 
-            if (p.Y == 0) 
-                p.Y++;
             Rectangle r = new Rectangle(p, s);
-            if (r.Right >= (1024 - 1) * z) 
-                r.Width = (1024 - 2) * z;
-            if (r.Bottom >= (1024 - 1) * z) 
-                r.Height = (1024 - 2) * z;
+            if (r.Right >= 1024 * z)
+                r.Width = (1024 - 1) * z;
+            if (r.Bottom >= 1024 * z)
+                r.Height = (1024 - 1) * z;
             g.FillRectangle(b, r);
-            Pen pen = new Pen(Color.Orange); 
+            Pen pen = new Pen(Color.Orange);
             g.DrawRectangle(pen, r);
         }
         public void DrawBoundaries(Graphics g, Point location, int z)
@@ -270,6 +266,20 @@ namespace LAZYSHELL
         public void DrawSelectionBox(Graphics g, int x_initial, int y_initial, int x_terminal, int y_terminal, int z)
         {
             DrawSelectionBox(g, new Point(x_terminal, y_terminal), new Point(x_initial, y_initial), z);
+        }
+        public void DrawHoverBox(Graphics g, Point location, int zoom, bool fill)
+        {
+            int x = location.X;
+            int y = location.Y;
+            Rectangle r = new Rectangle(x * zoom, y * zoom, zoom, zoom);
+            if (fill)
+                g.FillRectangle(new SolidBrush(Color.FromArgb(96, 0, 0, 0)), r);
+            else
+            {
+                r.Width--;
+                r.Height--;
+                g.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), r);
+            }
         }
         // exits
         private void GenerateExitFields()

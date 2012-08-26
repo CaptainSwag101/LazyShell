@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using System.Collections;
+using System.Threading;
 using LAZYSHELL.Properties;
 
 namespace LAZYSHELL.Patches
@@ -19,7 +20,6 @@ namespace LAZYSHELL.Patches
         private WebClient client = new WebClient();
         private WebClient IPSClient = new WebClient();
         private ArrayList patches = new ArrayList();
-        private Timer clock;
         private bool downloadingIPS = false;
         private float red, green, blue;
         private bool colorDirection = true; // darker
@@ -34,18 +34,12 @@ namespace LAZYSHELL.Patches
             this.Update();
 
             this.downloadingLabel.Text = "            ...DOWNLOADING...            ";
-            clock = new Timer();
-            clock.Interval = 1000 / 30;
-            clock.Tick += new EventHandler(clock_Tick);
-            clock.Start();
+            clock.RunWorkerAsync();
 
             client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(client_DownloadDataCompleted);
             IPSClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(IPSClient_DownloadDataCompleted);
 
             DownloadPatches(1);
-
-            //clock.Stop();
-            //this.downloadingLabel.Visible = false;
         }
         private void DownloadPatches(int pn)
         {
@@ -104,7 +98,7 @@ namespace LAZYSHELL.Patches
         {
             downloadingIPS = true;
             this.downloadingLabel.Visible = true;
-            clock.Start();
+            clock.RunWorkerAsync();
 
             this.applyButton.Text = "CANCEL PATCH";
             IPSClient.DownloadDataAsync(((Patch)patches[PatchListBox.SelectedIndex]).PatchURI);
@@ -112,46 +106,18 @@ namespace LAZYSHELL.Patches
         private void StopIPSDownload()
         {
             downloadingIPS = false;
-            clock.Stop();
+            clock.CancelAsync();
             this.downloadingLabel.Visible = false;
             this.applyButton.Text = "APPLY PATCH";
             IPSClient.CancelAsync();
         }
         // event handlers
-        private void clock_Tick(object sender, EventArgs e)
+        private void applyButton_Click(object sender, EventArgs e)
         {
-            if (red > 185 || red < 89)
-            {
-                if (colorDirection)
-                {
-                    red = 89;
-                    green = 99;
-                    blue = 219;
-                    colorDirection = false;
-                }
-                else
-                {
-                    red = 185;
-                    green = 189;
-                    blue = 240;
-                    colorDirection = true;
-                }
-            }
-
-            if (colorDirection) // get darker
-            {
-                red -= 96 / 30;
-                green -= 90 / 30;
-                blue -= 21 / 30;
-            }
-            else // Get Lighter
-            {
-                red += 96 / 30;
-                green += 90 / 30;
-                blue += 21 / 30;
-            }
-
-            this.downloadingLabel.BackColor = Color.FromArgb((int)red, (int)green, (int)blue);
+            if (!downloadingIPS)
+                StartIPSDownload();
+            else
+                StopIPSDownload();
         }
         private void client_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
         {
@@ -165,10 +131,11 @@ namespace LAZYSHELL.Patches
                 }
                 AddNewDownload(e.Result);
                 DownloadPatches(patches.Count + 1);
+                this.applyButton.Enabled = true;
             }
             catch
             {
-                clock.Stop();
+                clock.CancelAsync();
                 this.downloadingLabel.Visible = false;
                 return;
             }
@@ -181,7 +148,7 @@ namespace LAZYSHELL.Patches
         {
             try
             {
-                clock.Stop();
+                clock.CancelAsync();
                 this.downloadingLabel.Visible = false;
                 this.applyButton.Text = "APPLY PATCH";
 
@@ -221,16 +188,59 @@ namespace LAZYSHELL.Patches
                 return;
             }
         }
-        private void applyButton_Click(object sender, EventArgs e)
-        {
-            if (!downloadingIPS)
-                StartIPSDownload();
-            else
-                StopIPSDownload();
-        }
         private void DescriptionTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(e.LinkText);
+        }
+        private void clock_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (!e.Cancel)
+            {
+                Thread.Sleep(1000 / 30);
+                if (red > 185 || red < 89)
+                {
+                    if (colorDirection)
+                    {
+                        red = 89;
+                        green = 99;
+                        blue = 219;
+                        colorDirection = false;
+                    }
+                    else
+                    {
+                        red = 185;
+                        green = 189;
+                        blue = 240;
+                        colorDirection = true;
+                    }
+                }
+                if (colorDirection) // get darker
+                {
+                    red -= 96 / 30;
+                    green -= 90 / 30;
+                    blue -= 21 / 30;
+                }
+                else // Get Lighter
+                {
+                    red += 96 / 30;
+                    green += 90 / 30;
+                    blue += 21 / 30;
+                }
+                clock.ReportProgress(0);
+            }
+        }
+        private void clock_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            this.downloadingLabel.BackColor = Color.FromArgb((int)red, (int)green, (int)blue);
+        }
+        private void clock_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+        private void GamePatches_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (clock.IsBusy)
+                clock.CancelAsync();
         }
     }
 }

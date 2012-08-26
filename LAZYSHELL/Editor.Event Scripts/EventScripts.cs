@@ -48,7 +48,7 @@ namespace LAZYSHELL
         private bool apply; public bool Apply { get { return apply; } set { apply = value; } }
         private int delta; public int Delta { get { return delta; } set { delta = value; } }
         // other
-        private Previewer.Previewer ep;
+        private Previewer ep;
         private ClearElements clearElements;
         private IOElements ioElements;
         private Search searchWindow;
@@ -2272,9 +2272,9 @@ namespace LAZYSHELL
         private void PreviewEventOrAction()
         {
             if (ep == null || !ep.Visible)
-                ep = new Previewer.Previewer(this.currentScript, this.type == 0 ? 0 : 2);
+                ep = new Previewer(this.currentScript, this.type == 0 ? PreviewType.Event : PreviewType.Action);
             else
-                ep.Reload(this.currentScript, this.type == 0 ? 0 : 2);
+                ep.Reload(this.currentScript, this.type == 0 ? PreviewType.Event : PreviewType.Action);
             ep.Show();
         }
         private void SaveEventNotes()

@@ -13,7 +13,7 @@ namespace LAZYSHELL
         public int Width;
         public int Height;
         public int HeightL3;
-        public string Type;
+        public TilesetType Type;
         private int tilesize;
         //
         private byte[][] tilesets_Bytes = new byte[3][];
@@ -33,7 +33,7 @@ namespace LAZYSHELL
         public byte[] Subtile_Bytes { get { return subtile_bytes; } set { subtile_bytes = value; } }
         public byte[] Palette_Bytes { get { return palette_bytes; } set { palette_bytes = value; } }
         //
-        public Tileset(byte[] tileset_Bytes, byte[] graphics, PaletteSet paletteSet, int width, int height, string type)
+        public Tileset(byte[] tileset_Bytes, byte[] graphics, PaletteSet paletteSet, int width, int height, TilesetType type)
         {
             this.paletteSet = paletteSet;
             this.Tileset_Bytes = tileset_Bytes;
@@ -59,7 +59,7 @@ namespace LAZYSHELL
             this.Height = 32;
             this.HeightL3 = 16;
             this.tilesize = 2;
-            this.Type = "level";
+            this.Type = TilesetType.Level;
             // set tileset byte arrays
             tilesets_Bytes[0] = Model.Tilesets[levelMap.TilesetL1 + 0x20];
             tilesets_Bytes[1] = Model.Tilesets[levelMap.TilesetL2 + 0x20];
@@ -98,7 +98,7 @@ namespace LAZYSHELL
             this.Height = 32;
             this.HeightL3 = 6;
             this.tilesize = 2;
-            this.Type = "title";
+            this.Type = TilesetType.Title;
             // Decompress data at offsets
             tilesets_Bytes[0] = Bits.GetByteArray(Model.TitleData, 0x0000, 0x1000);
             tilesets_Bytes[1] = Bits.GetByteArray(Model.TitleData, 0x1000, 0x1000);
@@ -126,7 +126,7 @@ namespace LAZYSHELL
             this.Width = 16;
             this.Height = 16;
             this.tilesize = 1;
-            this.Type = "mode7";
+            this.Type = TilesetType.Mode7;
             //
             subtile_bytes = Model.MinecartM7TilesetSubtiles;
             palette_bytes = Model.MinecartM7TilesetPalettes;
@@ -220,7 +220,7 @@ namespace LAZYSHELL
             {
                 if (tilesets_Tiles[l] != null)
                 {
-                    byte format = (byte)(l != 2 || Type == "title" ? 0x20 : 0x10);
+                    byte format = (byte)(l != 2 || Type == TilesetType.Title ? 0x20 : 0x10);
                     byte[] graphics = l != 2 ? this.graphics : this.graphicsL3;
                     //
                     if (tilesize == 2)
@@ -232,7 +232,7 @@ namespace LAZYSHELL
         }
         public void RedrawTilesets(int layer)
         {
-            byte format = (byte)(layer != 2 || Type == "title" ? 0x20 : 0x10);
+            byte format = (byte)(layer != 2 || Type == TilesetType.Title ? 0x20 : 0x10);
             byte[] graphics = layer != 2 ? this.graphics : this.graphicsL3;
             //
             if (tilesets_Tiles[layer] != null)
@@ -247,7 +247,7 @@ namespace LAZYSHELL
         }
         public void Clear(int count)
         {
-            if (Type == "level")
+            if (Type == TilesetType.Level)
             {
                 if (count == 1)
                 {
@@ -270,7 +270,7 @@ namespace LAZYSHELL
                     }
                 }
             }
-            else if (Type == "mode7")
+            else if (Type == TilesetType.Mode7)
             {
                 // Minecart tileset
                 for (int i = 0; i < 0x400; i++)
@@ -287,7 +287,7 @@ namespace LAZYSHELL
             if (tilesets_Tiles[layer] == null) return;
             //
             int offset = 0;
-            if (Type == "level" || Type == "title")
+            if (Type == TilesetType.Level || Type == TilesetType.Title)
             {
                 for (int y = 0; y < tilesets_Tiles[layer].Length / width; y++)
                 {
@@ -312,7 +312,7 @@ namespace LAZYSHELL
                         }
                     }
                 }
-                if (Type == "level")
+                if (Type == TilesetType.Level)
                 {
                     if (layer == 0)
                         Model.EditTileSets[levelMap.TilesetL1 + 0x20] = true;
@@ -333,7 +333,7 @@ namespace LAZYSHELL
                     Model.EditGraphicSets[levelMap.GraphicSetD + 0x48] = true;
                     Model.EditGraphicSets[levelMap.GraphicSetE + 0x48] = true;
                 }
-                else if (Type == "title")
+                else if (Type == TilesetType.Title)
                 {
                     Buffer.BlockCopy(tilesets_Bytes[0], 0, Model.TitleData, 0, 0x1000);
                     Buffer.BlockCopy(tilesets_Bytes[1], 0, Model.TitleData, 0x1000, 0x1000);
@@ -348,7 +348,7 @@ namespace LAZYSHELL
         public void Assemble(int width)
         {
             int offset = 0;
-            if (Type != "mode7")
+            if (Type != TilesetType.Mode7)
             {
                 for (int l = 0; l < tilesets_Tiles.Length; l++)
                 {
@@ -374,7 +374,7 @@ namespace LAZYSHELL
                         }
                     }
                 }
-                if (Type == "level")
+                if (Type == TilesetType.Level)
                 {
                     Model.EditTileSets[levelMap.TilesetL1 + 0x20] = true;
                     Model.EditTileSets[levelMap.TilesetL2 + 0x20] = true;
@@ -392,11 +392,11 @@ namespace LAZYSHELL
                     Model.EditGraphicSets[levelMap.GraphicSetD + 0x48] = true;
                     Model.EditGraphicSets[levelMap.GraphicSetE + 0x48] = true;
                 }
-                else if (Type == "side")
+                else if (Type == TilesetType.SideScrolling)
                 {
                     Buffer.BlockCopy(graphics, 0, Model.MinecartSSGraphics, 0, graphics.Length);
                 }
-                else if (Type == "title")
+                else if (Type == TilesetType.Title)
                 {
                     Buffer.BlockCopy(tilesets_Bytes[0], 0, Model.TitleData, 0, 0x1000);
                     Buffer.BlockCopy(tilesets_Bytes[1], 0, Model.TitleData, 0x1000, 0x1000);

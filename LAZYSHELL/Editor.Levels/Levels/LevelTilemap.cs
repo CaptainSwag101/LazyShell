@@ -15,7 +15,7 @@ namespace LAZYSHELL
         private Tileset tileset;
         private PaletteSet paletteSet;
         private State state = State.Instance;
-        private string type = "";
+        private TilemapType type = TilemapType.None;
         public int Width = 64;
         public int Height = 64;
         public override int Width_p { get { return Width * 16; } set { Width = value / 16; } }
@@ -53,7 +53,7 @@ namespace LAZYSHELL
             this.paletteSet = Model.PaletteSets[levelMap.PaletteSet];
             this.prioritySets = Model.PrioritySets;
             this.levelLayer = level.Layer;
-            this.type = "level";
+            this.type = TilemapType.Level;
             tilemaps_Bytes[0] = Model.Tilemaps[levelMap.TilemapL1 + 0x40];
             tilemaps_Bytes[1] = Model.Tilemaps[levelMap.TilemapL2 + 0x40];
             tilemaps_Bytes[2] = Model.Tilemaps[levelMap.TilemapL3];
@@ -78,7 +78,7 @@ namespace LAZYSHELL
             this.paletteSet = Model.PaletteSets[levelMap.PaletteSet];
             this.prioritySets = Model.PrioritySets;
             this.levelLayer = level.Layer;
-            this.type = "template";
+            this.type = TilemapType.Template;
             tilemaps_Bytes[0] = new byte[0x2000];
             tilemaps_Bytes[1] = new byte[0x2000];
             tilemaps_Bytes[2] = new byte[0x1000];
@@ -114,7 +114,7 @@ namespace LAZYSHELL
             this.paletteSet = Model.PaletteSets[levelMap.PaletteSet];
             this.prioritySets = Model.PrioritySets;
             this.levelLayer = level.Layer;
-            this.type = "mod";
+            this.type = TilemapType.Mod;
             this.Width = mod.Width;
             this.Height = mod.Height;
             L1Priority0 = new int[Width_p * Height_p];
@@ -1024,7 +1024,7 @@ namespace LAZYSHELL
             int index = y * Width + x;
             if (index < 0x1000)
                 ChangeSingleTile(layer, index, tilenum, x * 16, y * 16);
-            if (type == "mod")
+            if (type == TilemapType.Mod)
             {
                 if (layer < 2)
                     Bits.SetShort(tilemaps_Bytes[layer], (y * Width + x) * 2, (ushort)tilenum);

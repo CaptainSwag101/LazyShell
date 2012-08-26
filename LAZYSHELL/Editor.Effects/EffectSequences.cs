@@ -140,7 +140,7 @@ namespace LAZYSHELL
             else
             {
                 frameMold.Enabled = false; frameMold.Value = 0;
-                duration.Enabled = false; duration.Value = 0;
+                duration.Enabled = false; duration.Value = 1;
                 sequenceImage = null;
             }
             updating = false;

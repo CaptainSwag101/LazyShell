@@ -43,21 +43,21 @@
             // 
             // browseCurrent
             // 
-            this.browseCurrent.Location = new System.Drawing.Point(380, 12);
+            this.browseCurrent.Location = new System.Drawing.Point(428, 12);
             this.browseCurrent.Name = "browseCurrent";
-            this.browseCurrent.Size = new System.Drawing.Size(75, 23);
-            this.browseCurrent.TabIndex = 7;
-            this.browseCurrent.Text = "Browse...";
+            this.browseCurrent.Size = new System.Drawing.Size(27, 23);
+            this.browseCurrent.TabIndex = 0;
+            this.browseCurrent.Text = "...";
             this.browseCurrent.UseVisualStyleBackColor = true;
             this.browseCurrent.Click += new System.EventHandler(this.browseCurrent_Click);
             // 
             // textBoxCurrent
             // 
-            this.textBoxCurrent.Location = new System.Drawing.Point(12, 38);
+            this.textBoxCurrent.Location = new System.Drawing.Point(13, 12);
             this.textBoxCurrent.Name = "textBoxCurrent";
             this.textBoxCurrent.ReadOnly = true;
-            this.textBoxCurrent.Size = new System.Drawing.Size(443, 21);
-            this.textBoxCurrent.TabIndex = 6;
+            this.textBoxCurrent.Size = new System.Drawing.Size(409, 21);
+            this.textBoxCurrent.TabIndex = 1;
             // 
             // checkBox1
             // 
@@ -67,7 +67,7 @@
             this.checkBox1.Location = new System.Drawing.Point(10, 24);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(78, 17);
-            this.checkBox1.TabIndex = 8;
+            this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Palette set";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -79,7 +79,7 @@
             this.checkBox2.Location = new System.Drawing.Point(94, 24);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(67, 17);
-            this.checkBox2.TabIndex = 8;
+            this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "Graphics";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
@@ -91,7 +91,7 @@
             this.checkBox3.Location = new System.Drawing.Point(167, 24);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(62, 17);
-            this.checkBox3.TabIndex = 8;
+            this.checkBox3.TabIndex = 2;
             this.checkBox3.Text = "Tilesets";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
@@ -103,7 +103,7 @@
             this.checkBox4.Location = new System.Drawing.Point(235, 24);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(67, 17);
-            this.checkBox4.TabIndex = 8;
+            this.checkBox4.TabIndex = 3;
             this.checkBox4.Text = "Tilemaps";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
@@ -115,7 +115,7 @@
             this.checkBox5.Location = new System.Drawing.Point(308, 24);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(78, 17);
-            this.checkBox5.TabIndex = 9;
+            this.checkBox5.TabIndex = 4;
             this.checkBox5.Text = "Priority set";
             this.checkBox5.UseVisualStyleBackColor = true;
             // 
@@ -126,18 +126,18 @@
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.checkBox4);
             this.groupBox1.Controls.Add(this.checkBox3);
-            this.groupBox1.Location = new System.Drawing.Point(12, 65);
+            this.groupBox1.Location = new System.Drawing.Point(13, 39);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(443, 52);
-            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(380, 123);
+            this.buttonCancel.Location = new System.Drawing.Point(381, 97);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 12;
+            this.buttonCancel.TabIndex = 4;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -145,10 +145,10 @@
             // buttonOK
             // 
             this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(299, 123);
+            this.buttonOK.Location = new System.Drawing.Point(300, 97);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 11;
+            this.buttonOK.TabIndex = 3;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -157,7 +157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 158);
+            this.ClientSize = new System.Drawing.Size(467, 132);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.groupBox1);

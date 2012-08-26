@@ -32,9 +32,7 @@
             this.pictureBoxPhysicalTile = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.physicalTileNum = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.reset = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.physicalTileSearchButton = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -115,14 +113,14 @@
             this.panelPhysicalTile.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelPhysicalTile.Location = new System.Drawing.Point(218, 0);
             this.panelPhysicalTile.Name = "panelPhysicalTile";
-            this.panelPhysicalTile.Size = new System.Drawing.Size(36, 699);
-            this.panelPhysicalTile.TabIndex = 173;
+            this.panelPhysicalTile.Size = new System.Drawing.Size(36, 707);
+            this.panelPhysicalTile.TabIndex = 2;
             // 
             // pictureBoxPhysicalTile
             // 
             this.pictureBoxPhysicalTile.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBoxPhysicalTile.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
-            this.pictureBoxPhysicalTile.Location = new System.Drawing.Point(0, -89);
+            this.pictureBoxPhysicalTile.Location = new System.Drawing.Point(0, -81);
             this.pictureBoxPhysicalTile.Name = "pictureBoxPhysicalTile";
             this.pictureBoxPhysicalTile.Size = new System.Drawing.Size(32, 784);
             this.pictureBoxPhysicalTile.TabIndex = 0;
@@ -133,15 +131,13 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.physicalTileNum,
-            this.toolStripSeparator1,
             this.reset,
-            this.toolStripSeparator2,
             this.physicalTileSearchButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(218, 25);
-            this.toolStrip1.TabIndex = 442;
+            this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // physicalTileNum
@@ -169,11 +165,6 @@
             0});
             this.physicalTileNum.ValueChanged += new System.EventHandler(this.physicalTileNum_ValueChanged);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // reset
             // 
             this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -184,11 +175,6 @@
             this.reset.Size = new System.Drawing.Size(23, 22);
             this.reset.Text = "Reset";
             this.reset.Click += new System.EventHandler(this.reset_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // physicalTileSearchButton
             // 
@@ -213,8 +199,8 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(211, 674);
-            this.panel1.TabIndex = 443;
+            this.panel1.Size = new System.Drawing.Size(211, 682);
+            this.panel1.TabIndex = 1;
             // 
             // groupBox6
             // 
@@ -228,7 +214,7 @@
             this.groupBox6.Location = new System.Drawing.Point(0, 547);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(211, 131);
-            this.groupBox6.TabIndex = 449;
+            this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Other";
             // 
@@ -247,7 +233,7 @@
             this.doorFormat.Location = new System.Drawing.Point(150, 62);
             this.doorFormat.Name = "doorFormat";
             this.doorFormat.Size = new System.Drawing.Size(55, 21);
-            this.doorFormat.TabIndex = 371;
+            this.doorFormat.TabIndex = 5;
             this.doorFormat.SelectedIndexChanged += new System.EventHandler(this.doorFormat_SelectedIndexChanged);
             // 
             // unknownBits
@@ -264,7 +250,7 @@
             this.unknownBits.MultiColumn = true;
             this.unknownBits.Name = "unknownBits";
             this.unknownBits.Size = new System.Drawing.Size(199, 36);
-            this.unknownBits.TabIndex = 388;
+            this.unknownBits.TabIndex = 6;
             this.unknownBits.SelectedIndexChanged += new System.EventHandler(this.unknownBits_SelectedIndexChanged);
             // 
             // specialTile
@@ -277,7 +263,7 @@
             this.specialTile.Location = new System.Drawing.Point(150, 41);
             this.specialTile.Name = "specialTile";
             this.specialTile.Size = new System.Drawing.Size(55, 21);
-            this.specialTile.TabIndex = 371;
+            this.specialTile.TabIndex = 3;
             this.specialTile.SelectedIndexChanged += new System.EventHandler(this.specialTile_SelectedIndexChanged);
             // 
             // stairs
@@ -290,7 +276,7 @@
             this.stairs.Location = new System.Drawing.Point(150, 20);
             this.stairs.Name = "stairs";
             this.stairs.Size = new System.Drawing.Size(55, 21);
-            this.stairs.TabIndex = 372;
+            this.stairs.TabIndex = 1;
             this.stairs.SelectedIndexChanged += new System.EventHandler(this.stairs_SelectedIndexChanged);
             // 
             // checkStairs
@@ -299,7 +285,7 @@
             this.checkStairs.Location = new System.Drawing.Point(6, 23);
             this.checkStairs.Name = "checkStairs";
             this.checkStairs.Size = new System.Drawing.Size(57, 13);
-            this.checkStairs.TabIndex = 389;
+            this.checkStairs.TabIndex = 0;
             this.checkStairs.Text = "Stairs lead";
             // 
             // checkSpecialTile
@@ -308,7 +294,7 @@
             this.checkSpecialTile.Location = new System.Drawing.Point(6, 44);
             this.checkSpecialTile.Name = "checkSpecialTile";
             this.checkSpecialTile.Size = new System.Drawing.Size(92, 13);
-            this.checkSpecialTile.TabIndex = 389;
+            this.checkSpecialTile.TabIndex = 2;
             this.checkSpecialTile.Text = "Special tile format";
             // 
             // checkDoorFormat
@@ -317,7 +303,7 @@
             this.checkDoorFormat.Location = new System.Drawing.Point(6, 65);
             this.checkDoorFormat.Name = "checkDoorFormat";
             this.checkDoorFormat.Size = new System.Drawing.Size(65, 13);
-            this.checkDoorFormat.TabIndex = 389;
+            this.checkDoorFormat.TabIndex = 4;
             this.checkDoorFormat.Text = "Door format";
             // 
             // groupBox5
@@ -331,7 +317,7 @@
             this.groupBox5.Location = new System.Drawing.Point(0, 452);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(211, 89);
-            this.groupBox5.TabIndex = 448;
+            this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Conveyor Belt";
             // 
@@ -346,7 +332,7 @@
             this.conveyorBeltNormal.Location = new System.Drawing.Point(150, 62);
             this.conveyorBeltNormal.Name = "conveyorBeltNormal";
             this.conveyorBeltNormal.Size = new System.Drawing.Size(55, 21);
-            this.conveyorBeltNormal.TabIndex = 370;
+            this.conveyorBeltNormal.TabIndex = 5;
             this.conveyorBeltNormal.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.conveyorBeltNormal.SelectedIndexChanged += new System.EventHandler(this.conveyorBeltNormal_SelectedIndexChanged);
             // 
@@ -361,7 +347,7 @@
             this.conveyorBeltFast.Location = new System.Drawing.Point(150, 41);
             this.conveyorBeltFast.Name = "conveyorBeltFast";
             this.conveyorBeltFast.Size = new System.Drawing.Size(55, 21);
-            this.conveyorBeltFast.TabIndex = 370;
+            this.conveyorBeltFast.TabIndex = 3;
             this.conveyorBeltFast.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.conveyorBeltFast.SelectedIndexChanged += new System.EventHandler(this.conveyorBeltFast_SelectedIndexChanged);
             // 
@@ -380,7 +366,7 @@
             this.conveyor.Location = new System.Drawing.Point(150, 20);
             this.conveyor.Name = "conveyor";
             this.conveyor.Size = new System.Drawing.Size(55, 21);
-            this.conveyor.TabIndex = 370;
+            this.conveyor.TabIndex = 1;
             this.conveyor.SelectedIndexChanged += new System.EventHandler(this.conveyor_SelectedIndexChanged);
             // 
             // checkConveyor
@@ -389,7 +375,7 @@
             this.checkConveyor.Location = new System.Drawing.Point(6, 23);
             this.checkConveyor.Name = "checkConveyor";
             this.checkConveyor.Size = new System.Drawing.Size(99, 13);
-            this.checkConveyor.TabIndex = 389;
+            this.checkConveyor.TabIndex = 0;
             this.checkConveyor.Text = "Conveyor belt runs";
             // 
             // checkConveyorBeltFast
@@ -398,7 +384,7 @@
             this.checkConveyorBeltFast.Location = new System.Drawing.Point(6, 44);
             this.checkConveyorBeltFast.Name = "checkConveyorBeltFast";
             this.checkConveyorBeltFast.Size = new System.Drawing.Size(101, 13);
-            this.checkConveyorBeltFast.TabIndex = 389;
+            this.checkConveyorBeltFast.TabIndex = 2;
             this.checkConveyorBeltFast.Text = "Conveyor belt, fast";
             // 
             // checkConveyorBeltNormal
@@ -407,7 +393,7 @@
             this.checkConveyorBeltNormal.Location = new System.Drawing.Point(6, 65);
             this.checkConveyorBeltNormal.Name = "checkConveyorBeltNormal";
             this.checkConveyorBeltNormal.Size = new System.Drawing.Size(114, 13);
-            this.checkConveyorBeltNormal.TabIndex = 389;
+            this.checkConveyorBeltNormal.TabIndex = 4;
             this.checkConveyorBeltNormal.Text = "Conveyor belt, normal";
             // 
             // groupBox4
@@ -421,7 +407,7 @@
             this.groupBox4.Location = new System.Drawing.Point(0, 357);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(211, 89);
-            this.groupBox4.TabIndex = 447;
+            this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Priority";
             // 
@@ -436,7 +422,7 @@
             this.p3OnTile.Location = new System.Drawing.Point(150, 62);
             this.p3OnTile.Name = "p3OnTile";
             this.p3OnTile.Size = new System.Drawing.Size(55, 21);
-            this.p3OnTile.TabIndex = 370;
+            this.p3OnTile.TabIndex = 5;
             this.p3OnTile.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.p3OnTile.SelectedIndexChanged += new System.EventHandler(this.p3OnTile_SelectedIndexChanged);
             // 
@@ -451,7 +437,7 @@
             this.p3OverEdge.Location = new System.Drawing.Point(150, 41);
             this.p3OverEdge.Name = "p3OverEdge";
             this.p3OverEdge.Size = new System.Drawing.Size(55, 21);
-            this.p3OverEdge.TabIndex = 370;
+            this.p3OverEdge.TabIndex = 3;
             this.p3OverEdge.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.p3OverEdge.SelectedIndexChanged += new System.EventHandler(this.p3OverEdge_SelectedIndexChanged);
             // 
@@ -466,7 +452,7 @@
             this.p3OnEdge.Location = new System.Drawing.Point(150, 20);
             this.p3OnEdge.Name = "p3OnEdge";
             this.p3OnEdge.Size = new System.Drawing.Size(55, 21);
-            this.p3OnEdge.TabIndex = 370;
+            this.p3OnEdge.TabIndex = 1;
             this.p3OnEdge.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.p3OnEdge.SelectedIndexChanged += new System.EventHandler(this.p3OnEdge_SelectedIndexChanged);
             // 
@@ -476,7 +462,7 @@
             this.checkP3OnEdge.Location = new System.Drawing.Point(6, 23);
             this.checkP3OnEdge.Name = "checkP3OnEdge";
             this.checkP3OnEdge.Size = new System.Drawing.Size(111, 13);
-            this.checkP3OnEdge.TabIndex = 389;
+            this.checkP3OnEdge.TabIndex = 0;
             this.checkP3OnEdge.Text = "P3 for object on edge";
             // 
             // checkP3OverEdge
@@ -485,7 +471,7 @@
             this.checkP3OverEdge.Location = new System.Drawing.Point(6, 44);
             this.checkP3OverEdge.Name = "checkP3OverEdge";
             this.checkP3OverEdge.Size = new System.Drawing.Size(121, 13);
-            this.checkP3OverEdge.TabIndex = 389;
+            this.checkP3OverEdge.TabIndex = 2;
             this.checkP3OverEdge.Text = "P3 for object over edge";
             // 
             // checkP3OnTile
@@ -494,7 +480,7 @@
             this.checkP3OnTile.Location = new System.Drawing.Point(6, 65);
             this.checkP3OnTile.Name = "checkP3OnTile";
             this.checkP3OnTile.Size = new System.Drawing.Size(101, 13);
-            this.checkP3OnTile.TabIndex = 389;
+            this.checkP3OnTile.TabIndex = 4;
             this.checkP3OnTile.Text = "P3 for object on tile";
             // 
             // groupBox3
@@ -510,7 +496,7 @@
             this.groupBox3.Location = new System.Drawing.Point(0, 283);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(211, 68);
-            this.groupBox3.TabIndex = 446;
+            this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Solid Edges";
             // 
@@ -525,7 +511,7 @@
             this.solidEdgeSE.Location = new System.Drawing.Point(150, 41);
             this.solidEdgeSE.Name = "solidEdgeSE";
             this.solidEdgeSE.Size = new System.Drawing.Size(55, 21);
-            this.solidEdgeSE.TabIndex = 370;
+            this.solidEdgeSE.TabIndex = 7;
             this.solidEdgeSE.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.solidEdgeSE.SelectedIndexChanged += new System.EventHandler(this.solidEdgeSE_SelectedIndexChanged);
             // 
@@ -540,7 +526,7 @@
             this.solidEdgeSW.Location = new System.Drawing.Point(36, 41);
             this.solidEdgeSW.Name = "solidEdgeSW";
             this.solidEdgeSW.Size = new System.Drawing.Size(55, 21);
-            this.solidEdgeSW.TabIndex = 370;
+            this.solidEdgeSW.TabIndex = 5;
             this.solidEdgeSW.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.solidEdgeSW.SelectedIndexChanged += new System.EventHandler(this.solidEdgeSW_SelectedIndexChanged);
             // 
@@ -555,7 +541,7 @@
             this.solidEdgeNE.Location = new System.Drawing.Point(150, 20);
             this.solidEdgeNE.Name = "solidEdgeNE";
             this.solidEdgeNE.Size = new System.Drawing.Size(55, 21);
-            this.solidEdgeNE.TabIndex = 370;
+            this.solidEdgeNE.TabIndex = 3;
             this.solidEdgeNE.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.solidEdgeNE.SelectedIndexChanged += new System.EventHandler(this.solidEdgeNE_SelectedIndexChanged);
             // 
@@ -570,7 +556,7 @@
             this.solidEdgeNW.Location = new System.Drawing.Point(36, 20);
             this.solidEdgeNW.Name = "solidEdgeNW";
             this.solidEdgeNW.Size = new System.Drawing.Size(55, 21);
-            this.solidEdgeNW.TabIndex = 370;
+            this.solidEdgeNW.TabIndex = 1;
             this.solidEdgeNW.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.solidEdgeNW.SelectedIndexChanged += new System.EventHandler(this.solidEdgeNW_SelectedIndexChanged);
             // 
@@ -580,7 +566,7 @@
             this.checkSolidEdgeNW.Location = new System.Drawing.Point(6, 23);
             this.checkSolidEdgeNW.Name = "checkSolidEdgeNW";
             this.checkSolidEdgeNW.Size = new System.Drawing.Size(24, 13);
-            this.checkSolidEdgeNW.TabIndex = 389;
+            this.checkSolidEdgeNW.TabIndex = 0;
             this.checkSolidEdgeNW.Text = "NW";
             // 
             // checkSolidEdgeSW
@@ -589,7 +575,7 @@
             this.checkSolidEdgeSW.Location = new System.Drawing.Point(6, 44);
             this.checkSolidEdgeSW.Name = "checkSolidEdgeSW";
             this.checkSolidEdgeSW.Size = new System.Drawing.Size(23, 13);
-            this.checkSolidEdgeSW.TabIndex = 389;
+            this.checkSolidEdgeSW.TabIndex = 4;
             this.checkSolidEdgeSW.Text = "SW";
             // 
             // checkSolidEdgeSE
@@ -598,7 +584,7 @@
             this.checkSolidEdgeSE.Location = new System.Drawing.Point(124, 44);
             this.checkSolidEdgeSE.Name = "checkSolidEdgeSE";
             this.checkSolidEdgeSE.Size = new System.Drawing.Size(19, 13);
-            this.checkSolidEdgeSE.TabIndex = 389;
+            this.checkSolidEdgeSE.TabIndex = 6;
             this.checkSolidEdgeSE.Text = "SE";
             // 
             // checkSolidEdgeNE
@@ -607,7 +593,7 @@
             this.checkSolidEdgeNE.Location = new System.Drawing.Point(124, 23);
             this.checkSolidEdgeNE.Name = "checkSolidEdgeNE";
             this.checkSolidEdgeNE.Size = new System.Drawing.Size(20, 13);
-            this.checkSolidEdgeNE.TabIndex = 389;
+            this.checkSolidEdgeNE.TabIndex = 2;
             this.checkSolidEdgeNE.Text = "NE";
             // 
             // groupBox2
@@ -627,7 +613,7 @@
             this.groupBox2.Location = new System.Drawing.Point(0, 140);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(211, 137);
-            this.groupBox2.TabIndex = 445;
+            this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Solid Quadrants";
             // 
@@ -642,7 +628,7 @@
             this.solidQuadrantS.Location = new System.Drawing.Point(88, 62);
             this.solidQuadrantS.Name = "solidQuadrantS";
             this.solidQuadrantS.Size = new System.Drawing.Size(55, 21);
-            this.solidQuadrantS.TabIndex = 370;
+            this.solidQuadrantS.TabIndex = 7;
             this.solidQuadrantS.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.solidQuadrantS.SelectedIndexChanged += new System.EventHandler(this.solidQuadrantS_SelectedIndexChanged);
             // 
@@ -657,7 +643,7 @@
             this.solidQuadrantE.Location = new System.Drawing.Point(150, 41);
             this.solidQuadrantE.Name = "solidQuadrantE";
             this.solidQuadrantE.Size = new System.Drawing.Size(55, 21);
-            this.solidQuadrantE.TabIndex = 370;
+            this.solidQuadrantE.TabIndex = 5;
             this.solidQuadrantE.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.solidQuadrantE.SelectedIndexChanged += new System.EventHandler(this.solidQuadrantE_SelectedIndexChanged);
             // 
@@ -672,7 +658,7 @@
             this.solidQuadrantW.Location = new System.Drawing.Point(29, 41);
             this.solidQuadrantW.Name = "solidQuadrantW";
             this.solidQuadrantW.Size = new System.Drawing.Size(55, 21);
-            this.solidQuadrantW.TabIndex = 370;
+            this.solidQuadrantW.TabIndex = 3;
             this.solidQuadrantW.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.solidQuadrantW.SelectedIndexChanged += new System.EventHandler(this.solidQuadrantW_SelectedIndexChanged);
             // 
@@ -687,7 +673,7 @@
             this.solidQuadrantN.Location = new System.Drawing.Point(88, 20);
             this.solidQuadrantN.Name = "solidQuadrantN";
             this.solidQuadrantN.Size = new System.Drawing.Size(55, 21);
-            this.solidQuadrantN.TabIndex = 370;
+            this.solidQuadrantN.TabIndex = 1;
             this.solidQuadrantN.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.solidQuadrantN.SelectedIndexChanged += new System.EventHandler(this.solidQuadrantN_SelectedIndexChanged);
             // 
@@ -702,7 +688,7 @@
             this.solidQuadrant.Location = new System.Drawing.Point(150, 110);
             this.solidQuadrant.Name = "solidQuadrant";
             this.solidQuadrant.Size = new System.Drawing.Size(55, 21);
-            this.solidQuadrant.TabIndex = 370;
+            this.solidQuadrant.TabIndex = 11;
             this.solidQuadrant.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.solidQuadrant.SelectedIndexChanged += new System.EventHandler(this.solidQuadrant_SelectedIndexChanged);
             // 
@@ -712,7 +698,7 @@
             this.checkSolidQuadrantN.Location = new System.Drawing.Point(68, 23);
             this.checkSolidQuadrantN.Name = "checkSolidQuadrantN";
             this.checkSolidQuadrantN.Size = new System.Drawing.Size(14, 13);
-            this.checkSolidQuadrantN.TabIndex = 389;
+            this.checkSolidQuadrantN.TabIndex = 0;
             this.checkSolidQuadrantN.Text = "N";
             // 
             // checkSolidQuadrantE
@@ -721,7 +707,7 @@
             this.checkSolidQuadrantE.Location = new System.Drawing.Point(131, 44);
             this.checkSolidQuadrantE.Name = "checkSolidQuadrantE";
             this.checkSolidQuadrantE.Size = new System.Drawing.Size(13, 13);
-            this.checkSolidQuadrantE.TabIndex = 389;
+            this.checkSolidQuadrantE.TabIndex = 4;
             this.checkSolidQuadrantE.Text = "E";
             // 
             // solidTile
@@ -735,7 +721,7 @@
             this.solidTile.Location = new System.Drawing.Point(150, 89);
             this.solidTile.Name = "solidTile";
             this.solidTile.Size = new System.Drawing.Size(55, 21);
-            this.solidTile.TabIndex = 370;
+            this.solidTile.TabIndex = 9;
             this.solidTile.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.solidTile.SelectedIndexChanged += new System.EventHandler(this.solidTile_SelectedIndexChanged);
             // 
@@ -745,7 +731,7 @@
             this.checkSolidQuadrantS.Location = new System.Drawing.Point(69, 65);
             this.checkSolidQuadrantS.Name = "checkSolidQuadrantS";
             this.checkSolidQuadrantS.Size = new System.Drawing.Size(13, 13);
-            this.checkSolidQuadrantS.TabIndex = 389;
+            this.checkSolidQuadrantS.TabIndex = 6;
             this.checkSolidQuadrantS.Text = "S";
             // 
             // checkSolidTile
@@ -754,7 +740,7 @@
             this.checkSolidTile.Location = new System.Drawing.Point(6, 92);
             this.checkSolidTile.Name = "checkSolidTile";
             this.checkSolidTile.Size = new System.Drawing.Size(46, 13);
-            this.checkSolidTile.TabIndex = 389;
+            this.checkSolidTile.TabIndex = 8;
             this.checkSolidTile.Text = "Solid tile";
             // 
             // checkSolidQuadrant
@@ -763,7 +749,7 @@
             this.checkSolidQuadrant.Location = new System.Drawing.Point(6, 113);
             this.checkSolidQuadrant.Name = "checkSolidQuadrant";
             this.checkSolidQuadrant.Size = new System.Drawing.Size(97, 13);
-            this.checkSolidQuadrant.TabIndex = 389;
+            this.checkSolidQuadrant.TabIndex = 10;
             this.checkSolidQuadrant.Text = "Solid quadrant flag";
             // 
             // checkSolidQuadrantW
@@ -772,7 +758,7 @@
             this.checkSolidQuadrantW.Location = new System.Drawing.Point(6, 44);
             this.checkSolidQuadrantW.Name = "checkSolidQuadrantW";
             this.checkSolidQuadrantW.Size = new System.Drawing.Size(17, 13);
-            this.checkSolidQuadrantW.TabIndex = 389;
+            this.checkSolidQuadrantW.TabIndex = 2;
             this.checkSolidQuadrantW.Text = "W";
             // 
             // groupBox1
@@ -790,7 +776,7 @@
             this.groupBox1.Location = new System.Drawing.Point(0, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(211, 131);
-            this.groupBox1.TabIndex = 444;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tile height / coordinates";
             // 
@@ -805,7 +791,7 @@
             this.zCoordPlusHalf.Location = new System.Drawing.Point(150, 104);
             this.zCoordPlusHalf.Name = "zCoordPlusHalf";
             this.zCoordPlusHalf.Size = new System.Drawing.Size(55, 21);
-            this.zCoordPlusHalf.TabIndex = 370;
+            this.zCoordPlusHalf.TabIndex = 9;
             this.zCoordPlusHalf.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.conditional_DrawItem);
             this.zCoordPlusHalf.SelectedIndexChanged += new System.EventHandler(this.zCoordPlusHalf_SelectedIndexChanged);
             // 
@@ -819,7 +805,7 @@
             0});
             this.heightOfBaseTile.Name = "heightOfBaseTile";
             this.heightOfBaseTile.Size = new System.Drawing.Size(55, 21);
-            this.heightOfBaseTile.TabIndex = 394;
+            this.heightOfBaseTile.TabIndex = 1;
             this.heightOfBaseTile.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.heightOfBaseTile.ValueChanged += new System.EventHandler(this.heightOfBaseTile_ValueChanged);
             // 
@@ -833,7 +819,7 @@
             0});
             this.zCoordOverhead.Name = "zCoordOverhead";
             this.zCoordOverhead.Size = new System.Drawing.Size(55, 21);
-            this.zCoordOverhead.TabIndex = 397;
+            this.zCoordOverhead.TabIndex = 5;
             this.zCoordOverhead.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.zCoordOverhead.ValueChanged += new System.EventHandler(this.zCoordOverhead_ValueChanged);
             // 
@@ -843,7 +829,7 @@
             this.checkHeightOfBaseTile.Location = new System.Drawing.Point(6, 22);
             this.checkHeightOfBaseTile.Name = "checkHeightOfBaseTile";
             this.checkHeightOfBaseTile.Size = new System.Drawing.Size(94, 13);
-            this.checkHeightOfBaseTile.TabIndex = 389;
+            this.checkHeightOfBaseTile.TabIndex = 0;
             this.checkHeightOfBaseTile.Text = "Height of base tile";
             // 
             // heightOverhead
@@ -856,7 +842,7 @@
             0});
             this.heightOverhead.Name = "heightOverhead";
             this.heightOverhead.Size = new System.Drawing.Size(55, 21);
-            this.heightOverhead.TabIndex = 396;
+            this.heightOverhead.TabIndex = 3;
             this.heightOverhead.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.heightOverhead.ValueChanged += new System.EventHandler(this.heightOverhead_ValueChanged);
             // 
@@ -866,7 +852,7 @@
             this.checkZCoordPlusHalf.Location = new System.Drawing.Point(6, 106);
             this.checkZCoordPlusHalf.Name = "checkZCoordPlusHalf";
             this.checkZCoordPlusHalf.Size = new System.Drawing.Size(84, 13);
-            this.checkZCoordPlusHalf.TabIndex = 389;
+            this.checkZCoordPlusHalf.TabIndex = 8;
             this.checkZCoordPlusHalf.Text = "Z coord plus 1/2";
             // 
             // zCoordWater
@@ -879,7 +865,7 @@
             0});
             this.zCoordWater.Name = "zCoordWater";
             this.zCoordWater.Size = new System.Drawing.Size(55, 21);
-            this.zCoordWater.TabIndex = 395;
+            this.zCoordWater.TabIndex = 7;
             this.zCoordWater.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.zCoordWater.ValueChanged += new System.EventHandler(this.zCoordWater_ValueChanged);
             // 
@@ -889,7 +875,7 @@
             this.checkZCoordWater.Location = new System.Drawing.Point(6, 85);
             this.checkZCoordWater.Name = "checkZCoordWater";
             this.checkZCoordWater.Size = new System.Drawing.Size(104, 13);
-            this.checkZCoordWater.TabIndex = 389;
+            this.checkZCoordWater.TabIndex = 6;
             this.checkZCoordWater.Text = "Z coord of water tile";
             // 
             // checkHeightOverhead
@@ -898,7 +884,7 @@
             this.checkHeightOverhead.Location = new System.Drawing.Point(6, 43);
             this.checkHeightOverhead.Name = "checkHeightOverhead";
             this.checkHeightOverhead.Size = new System.Drawing.Size(117, 13);
-            this.checkHeightOverhead.TabIndex = 389;
+            this.checkHeightOverhead.TabIndex = 2;
             this.checkHeightOverhead.Text = "Height of overhead tile";
             // 
             // checkZCoordOverhead
@@ -907,14 +893,14 @@
             this.checkZCoordOverhead.Location = new System.Drawing.Point(6, 64);
             this.checkZCoordOverhead.Name = "checkZCoordOverhead";
             this.checkZCoordOverhead.Size = new System.Drawing.Size(122, 13);
-            this.checkZCoordOverhead.TabIndex = 389;
+            this.checkZCoordOverhead.TabIndex = 4;
             this.checkZCoordOverhead.Text = "Z coord of overhead tile";
             // 
             // LevelsSolidTiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 699);
+            this.ClientSize = new System.Drawing.Size(254, 707);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
@@ -960,7 +946,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton physicalTileSearchButton;
         private ToolStripNumericUpDown physicalTileNum;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckedListBox unknownBits;
         private System.Windows.Forms.NumericUpDown heightOfBaseTile;
@@ -1012,7 +997,6 @@
         private System.Windows.Forms.Label checkSolidEdgeSE;
         private System.Windows.Forms.Label checkSolidEdgeSW;
         private System.Windows.Forms.ToolStripButton reset;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;

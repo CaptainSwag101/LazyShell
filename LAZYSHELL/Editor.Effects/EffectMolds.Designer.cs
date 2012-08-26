@@ -160,7 +160,7 @@
             this.panelMoldImage.Location = new System.Drawing.Point(102, 25);
             this.panelMoldImage.Name = "panelMoldImage";
             this.panelMoldImage.Size = new System.Drawing.Size(431, 260);
-            this.panelMoldImage.TabIndex = 516;
+            this.panelMoldImage.TabIndex = 3;
             // 
             // pictureBoxE_Mold
             // 
@@ -194,66 +194,79 @@
             this.saveImageAsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 170);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(159, 192);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // cutToolStripMenuItem
             // 
+            this.cutToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.cut_small;
+            this.cutToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
             // 
+            this.copyToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.copyToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
+            this.pasteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.pasteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
+            this.deleteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.deleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(155, 6);
             // 
             // mirrorToolStripMenuItem
             // 
+            this.mirrorToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.mirror_small;
+            this.mirrorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
-            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.mirrorToolStripMenuItem.Text = "Mirror";
             this.mirrorToolStripMenuItem.Click += new System.EventHandler(this.mirrorToolStripMenuItem_Click);
             // 
             // invertToolStripMenuItem
             // 
+            this.invertToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.flip_small;
+            this.invertToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            this.invertToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(155, 6);
             // 
             // saveImageAsToolStripMenuItem
             // 
+            this.saveImageAsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImageAsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveImageAsToolStripMenuItem.Name = "saveImageAsToolStripMenuItem";
-            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.saveImageAsToolStripMenuItem.Text = "Save Image As...";
             this.saveImageAsToolStripMenuItem.Click += new System.EventHandler(this.saveImageAsToolStripMenuItem_Click);
             // 
@@ -281,7 +294,7 @@
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip6.Size = new System.Drawing.Size(24, 284);
-            this.toolStrip6.TabIndex = 51;
+            this.toolStrip6.TabIndex = 2;
             this.toolStrip6.TabStop = true;
             this.toolStrip6.Text = "toolStrip1";
             // 
@@ -482,7 +495,7 @@
             this.panel105.Location = new System.Drawing.Point(533, 25);
             this.panel105.Name = "panel105";
             this.panel105.Size = new System.Drawing.Size(132, 284);
-            this.panel105.TabIndex = 517;
+            this.panel105.TabIndex = 5;
             // 
             // panel1
             // 
@@ -494,7 +507,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 46);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(132, 238);
-            this.panel1.TabIndex = 528;
+            this.panel1.TabIndex = 3;
             // 
             // pictureBoxEffectTileset
             // 
@@ -518,13 +531,14 @@
             this.saveImageAsToolStripMenuItem1});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip2.ShowImageMargin = false;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(134, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(159, 26);
             // 
             // saveImageAsToolStripMenuItem1
             // 
+            this.saveImageAsToolStripMenuItem1.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImageAsToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveImageAsToolStripMenuItem1.Name = "saveImageAsToolStripMenuItem1";
-            this.saveImageAsToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+            this.saveImageAsToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
             this.saveImageAsToolStripMenuItem1.Text = "Save Image As...";
             this.saveImageAsToolStripMenuItem1.Click += new System.EventHandler(this.saveImageAsToolStripMenuItem1_Click);
             // 
@@ -539,7 +553,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(132, 25);
-            this.toolStrip2.TabIndex = 527;
+            this.toolStrip2.TabIndex = 0;
             this.toolStrip2.TabStop = true;
             // 
             // openTileEditor
@@ -561,7 +575,7 @@
             this.label86.Name = "label86";
             this.label86.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.label86.Size = new System.Drawing.Size(67, 21);
-            this.label86.TabIndex = 394;
+            this.label86.TabIndex = 1;
             this.label86.Text = "Size";
             this.label86.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -585,7 +599,7 @@
             0});
             this.e_tileSetSize.Name = "e_tileSetSize";
             this.e_tileSetSize.Size = new System.Drawing.Size(65, 21);
-            this.e_tileSetSize.TabIndex = 16;
+            this.e_tileSetSize.TabIndex = 2;
             this.e_tileSetSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_tileSetSize.Value = new decimal(new int[] {
             64,
@@ -603,7 +617,7 @@
             this.e_molds.Location = new System.Drawing.Point(0, 25);
             this.e_molds.Name = "e_molds";
             this.e_molds.Size = new System.Drawing.Size(78, 284);
-            this.e_molds.TabIndex = 398;
+            this.e_molds.TabIndex = 1;
             this.e_molds.SelectedIndexChanged += new System.EventHandler(this.e_molds_SelectedIndexChanged);
             // 
             // toolStrip1
@@ -629,12 +643,12 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(665, 25);
-            this.toolStrip1.TabIndex = 404;
+            this.toolStrip1.TabIndex = 0;
             // 
             // importIntoTilemap
             // 
             this.importIntoTilemap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.importIntoTilemap.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importIntoTilemap.Image = global::LAZYSHELL.Properties.Resources.importImage;
             this.importIntoTilemap.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importIntoTilemap.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.importIntoTilemap.Name = "importIntoTilemap";
@@ -716,7 +730,7 @@
             this.labelCoords.Name = "labelCoords";
             this.labelCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
             this.labelCoords.Size = new System.Drawing.Size(431, 24);
-            this.labelCoords.TabIndex = 523;
+            this.labelCoords.TabIndex = 4;
             this.labelCoords.Text = "(x: 0, y: 0) Pixel";
             this.labelCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 

@@ -22,8 +22,8 @@ namespace LAZYSHELL
             {
                 zoom = value;
                 this.pictureBox.Size = new Size(48 * zoom, 48 * zoom);
-                this.pictureBox.Left = -((48 * zoom - (this.Width - 8)) / 2);
-                this.pictureBox.Top = -((48 * zoom - (this.Height - 8)) / 2);
+                this.pictureBox.Left = -((48 * zoom - this.Width) / 2);
+                this.pictureBox.Top = -((48 * zoom - this.Height) / 2);
             }
         }
         public PictureBox PictureBox
@@ -60,6 +60,11 @@ namespace LAZYSHELL
                     width * zoom, width * zoom);
             if (Cursor.Current != null)
                 Cursor.Current.DrawStretched(e.Graphics, cursorBounds);
+            Rectangle clip = e.ClipRectangle;
+            clip.Width--;
+            clip.Height--;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.None;
+            e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), clip);
         }
     }
 }

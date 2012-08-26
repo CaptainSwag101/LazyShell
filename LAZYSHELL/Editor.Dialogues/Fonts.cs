@@ -58,6 +58,8 @@ namespace LAZYSHELL
         private PaletteSet fontPalettesBattle { get { return Model.BattleMenuPalette; } set { Model.BattleMenuPalette = value; } }
         private GraphicEditor numeralGraphicEditor;
         private PaletteEditor numeralPaletteEditor;
+        private GraphicEditor menuGraphicEditor;
+        private PaletteEditor menuPaletteEditor;
         // font palette variables
         private int currentColor = 0;
         private int currentColorBack = 0;
@@ -126,6 +128,8 @@ namespace LAZYSHELL
             //
             LoadPaletteEditor();
             LoadGraphicEditor();
+            LoadMenuPaletteEditor();
+            LoadMenuGraphicEditor();
             //
             newFontTable = new NewFontTable(this);
             newFontTable.FormClosing += new FormClosingEventHandler(newFontTable_FormClosing);
@@ -205,6 +209,9 @@ namespace LAZYSHELL
             //
             Bits.SetByteArray(data, 0x03F800, Model.NumeralGraphics, 0, 0x400);
             Model.NumeralPaletteSet.Assemble();
+            Buffer.BlockCopy(Model.BattleMenuGraphics, 0, data, 0x1F200, 0x600);
+            Buffer.BlockCopy(Model.BattleMenuGraphics, 0x600, data, 0x1ED00, 0x140);
+            Model.BattleMenuPalette.Assemble();
         }
         // set images
         private void SetFontPaletteImage()
@@ -410,6 +417,36 @@ namespace LAZYSHELL
             LoadGraphicEditor();
             dialoguesEditor.Checksum--;
         }
+        private void LoadMenuGraphicEditor()
+        {
+            if (menuGraphicEditor == null)
+            {
+                menuGraphicEditor = new GraphicEditor(new Function(MenuGraphicUpdate),
+                    Model.BattleMenuGraphics, Model.BattleMenuGraphics.Length, 0, Model.BattleMenuPalette, 0, 0x20);
+                menuGraphicEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            }
+            else
+                menuGraphicEditor.Reload(new Function(MenuGraphicUpdate),
+                    Model.BattleMenuGraphics, Model.BattleMenuGraphics.Length, 0, Model.BattleMenuPalette, 0, 0x20);
+        }
+        private void LoadMenuPaletteEditor()
+        {
+            if (menuPaletteEditor == null)
+            {
+                menuPaletteEditor = new PaletteEditor(new Function(MenuPaletteUpdate), Model.BattleMenuPalette, 2, 0, 2);
+                menuPaletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+            }
+            else
+                menuPaletteEditor.Reload(new Function(MenuPaletteUpdate), Model.BattleMenuPalette, 2, 0, 2);
+        }
+        private void MenuGraphicUpdate()
+        {
+        }
+        private void MenuPaletteUpdate()
+        {
+            LoadMenuGraphicEditor();
+            dialoguesEditor.Checksum--;
+        }
         #endregion
         #region Event handlers
         private void fontType_SelectedIndexChanged(object sender, EventArgs e)
@@ -444,6 +481,14 @@ namespace LAZYSHELL
         private void numeralPalettesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             numeralPaletteEditor.Show();
+        }
+        private void battleMenuGraphicsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            menuGraphicEditor.Show();
+        }
+        private void battleMenuPalettesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            menuPaletteEditor.Show();
         }
         private void pictureBoxFontTable_Paint(object sender, PaintEventArgs e)
         {

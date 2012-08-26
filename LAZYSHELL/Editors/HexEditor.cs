@@ -126,10 +126,12 @@ namespace LAZYSHELL
                     bytes3 += (original[i * 16 + offset_line + a]).ToString("X2") + " ";
                 }
             }
-            richTextBox.BeginUpdate();
+            //
             richTextBox1.BeginUpdate();
             richTextBox1.Text = offsets;
             richTextBox1.EndUpdate();
+            //
+            richTextBox.BeginUpdate();
             richTextBox2.Text = bytes2;
             richTextBox3.Text = bytes3;
             richTextBox2.SelectionStart = 0;
@@ -171,6 +173,7 @@ namespace LAZYSHELL
             richTextBox2.SelectionLength = richTextBox3.SelectionLength = selectionLength;
             richTextBox.Focus();
             richTextBox.EndUpdate();
+            //
             UpdateInformationLabels();
             updating = false;
         }

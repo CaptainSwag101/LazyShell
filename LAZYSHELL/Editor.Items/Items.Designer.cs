@@ -143,7 +143,7 @@
             this.itemElemWeak.MultiColumn = true;
             this.itemElemWeak.Name = "itemElemWeak";
             this.itemElemWeak.Size = new System.Drawing.Size(173, 36);
-            this.itemElemWeak.TabIndex = 148;
+            this.itemElemWeak.TabIndex = 0;
             this.itemElemWeak.SelectedIndexChanged += new System.EventHandler(this.itemElemWeak_SelectedIndexChanged);
             // 
             // itemStatusEffect
@@ -162,7 +162,7 @@
             this.itemStatusEffect.MultiColumn = true;
             this.itemStatusEffect.Name = "itemStatusEffect";
             this.itemStatusEffect.Size = new System.Drawing.Size(173, 68);
-            this.itemStatusEffect.TabIndex = 149;
+            this.itemStatusEffect.TabIndex = 0;
             this.itemStatusEffect.SelectedIndexChanged += new System.EventHandler(this.itemStatusEffect_SelectedIndexChanged);
             // 
             // itemStatusChange
@@ -178,7 +178,7 @@
             this.itemStatusChange.MultiColumn = true;
             this.itemStatusChange.Name = "itemStatusChange";
             this.itemStatusChange.Size = new System.Drawing.Size(173, 36);
-            this.itemStatusChange.TabIndex = 150;
+            this.itemStatusChange.TabIndex = 0;
             this.itemStatusChange.SelectedIndexChanged += new System.EventHandler(this.itemStatusChange_SelectedIndexChanged);
             // 
             // itemElemNull
@@ -194,7 +194,7 @@
             this.itemElemNull.MultiColumn = true;
             this.itemElemNull.Name = "itemElemNull";
             this.itemElemNull.Size = new System.Drawing.Size(173, 36);
-            this.itemElemNull.TabIndex = 147;
+            this.itemElemNull.TabIndex = 0;
             this.itemElemNull.SelectedIndexChanged += new System.EventHandler(this.itemElemNull_SelectedIndexChanged);
             // 
             // itemWhoEquip
@@ -211,7 +211,7 @@
             this.itemWhoEquip.MultiColumn = true;
             this.itemWhoEquip.Name = "itemWhoEquip";
             this.itemWhoEquip.Size = new System.Drawing.Size(173, 52);
-            this.itemWhoEquip.TabIndex = 151;
+            this.itemWhoEquip.TabIndex = 0;
             this.itemWhoEquip.SelectedIndexChanged += new System.EventHandler(this.itemWhoEquip_SelectedIndexChanged);
             // 
             // itemTargetting
@@ -229,7 +229,7 @@
             this.itemTargetting.MultiColumn = true;
             this.itemTargetting.Name = "itemTargetting";
             this.itemTargetting.Size = new System.Drawing.Size(204, 52);
-            this.itemTargetting.TabIndex = 152;
+            this.itemTargetting.TabIndex = 0;
             this.itemTargetting.SelectedIndexChanged += new System.EventHandler(this.itemTargetting_SelectedIndexChanged);
             // 
             // textBoxItemDescription
@@ -239,7 +239,7 @@
             this.textBoxItemDescription.MaxLength = 127;
             this.textBoxItemDescription.Name = "textBoxItemDescription";
             this.textBoxItemDescription.Size = new System.Drawing.Size(179, 122);
-            this.textBoxItemDescription.TabIndex = 1;
+            this.textBoxItemDescription.TabIndex = 2;
             this.textBoxItemDescription.Text = "";
             this.textBoxItemDescription.TextChanged += new System.EventHandler(this.textBoxItemDescription_TextChanged);
             // 
@@ -253,7 +253,7 @@
             this.itemCursorRestore.Location = new System.Drawing.Point(86, 20);
             this.itemCursorRestore.Name = "itemCursorRestore";
             this.itemCursorRestore.Size = new System.Drawing.Size(124, 36);
-            this.itemCursorRestore.TabIndex = 158;
+            this.itemCursorRestore.TabIndex = 1;
             this.itemCursorRestore.SelectedIndexChanged += new System.EventHandler(this.itemCursorRestore_SelectedIndexChanged);
             // 
             // itemCursor
@@ -267,7 +267,7 @@
             this.itemCursor.Location = new System.Drawing.Point(6, 20);
             this.itemCursor.Name = "itemCursor";
             this.itemCursor.Size = new System.Drawing.Size(74, 21);
-            this.itemCursor.TabIndex = 481;
+            this.itemCursor.TabIndex = 0;
             this.itemCursor.SelectedIndexChanged += new System.EventHandler(this.itemCursor_SelectedIndexChanged);
             // 
             // itemUsage
@@ -282,7 +282,7 @@
             this.itemUsage.Location = new System.Drawing.Point(5, 109);
             this.itemUsage.Name = "itemUsage";
             this.itemUsage.Size = new System.Drawing.Size(204, 84);
-            this.itemUsage.TabIndex = 146;
+            this.itemUsage.TabIndex = 8;
             this.itemUsage.SelectedIndexChanged += new System.EventHandler(this.itemUsage_SelectedIndexChanged);
             // 
             // itemType
@@ -298,7 +298,7 @@
             this.itemType.Location = new System.Drawing.Point(90, 19);
             this.itemType.Name = "itemType";
             this.itemType.Size = new System.Drawing.Size(120, 21);
-            this.itemType.TabIndex = 435;
+            this.itemType.TabIndex = 1;
             this.itemType.SelectedIndexChanged += new System.EventHandler(this.itemType_SelectedIndexChanged);
             // 
             // itemAttackType
@@ -314,7 +314,7 @@
             this.itemAttackType.Location = new System.Drawing.Point(90, 40);
             this.itemAttackType.Name = "itemAttackType";
             this.itemAttackType.Size = new System.Drawing.Size(120, 21);
-            this.itemAttackType.TabIndex = 436;
+            this.itemAttackType.TabIndex = 3;
             this.itemAttackType.SelectedIndexChanged += new System.EventHandler(this.itemAttackType_SelectedIndexChanged);
             // 
             // itemFunction
@@ -334,7 +334,7 @@
             this.itemFunction.Location = new System.Drawing.Point(90, 61);
             this.itemFunction.Name = "itemFunction";
             this.itemFunction.Size = new System.Drawing.Size(120, 21);
-            this.itemFunction.TabIndex = 428;
+            this.itemFunction.TabIndex = 5;
             this.itemFunction.SelectedIndexChanged += new System.EventHandler(this.itemFunction_SelectedIndexChanged);
             // 
             // itemElemAttack
@@ -351,7 +351,7 @@
             this.itemElemAttack.Location = new System.Drawing.Point(90, 82);
             this.itemElemAttack.Name = "itemElemAttack";
             this.itemElemAttack.Size = new System.Drawing.Size(120, 21);
-            this.itemElemAttack.TabIndex = 443;
+            this.itemElemAttack.TabIndex = 7;
             this.itemElemAttack.SelectedIndexChanged += new System.EventHandler(this.itemElemAttack_SelectedIndexChanged);
             // 
             // label109
@@ -360,7 +360,7 @@
             this.label109.Location = new System.Drawing.Point(6, 22);
             this.label109.Name = "label109";
             this.label109.Size = new System.Drawing.Size(56, 13);
-            this.label109.TabIndex = 469;
+            this.label109.TabIndex = 0;
             this.label109.Text = "Item Type";
             // 
             // label107
@@ -369,7 +369,7 @@
             this.label107.Location = new System.Drawing.Point(6, 43);
             this.label107.Name = "label107";
             this.label107.Size = new System.Drawing.Size(63, 13);
-            this.label107.TabIndex = 470;
+            this.label107.TabIndex = 2;
             this.label107.Text = "Effect Type";
             // 
             // label100
@@ -378,7 +378,7 @@
             this.label100.Location = new System.Drawing.Point(6, 85);
             this.label100.Name = "label100";
             this.label100.Size = new System.Drawing.Size(75, 13);
-            this.label100.TabIndex = 467;
+            this.label100.TabIndex = 6;
             this.label100.Text = "Inflict Element";
             // 
             // label97
@@ -387,7 +387,7 @@
             this.label97.Location = new System.Drawing.Point(6, 64);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(78, 13);
-            this.label97.TabIndex = 468;
+            this.label97.TabIndex = 4;
             this.label97.Text = "Inflict Function";
             // 
             // label104
@@ -396,7 +396,7 @@
             this.label104.Location = new System.Drawing.Point(6, 22);
             this.label104.Name = "label104";
             this.label104.Size = new System.Drawing.Size(57, 13);
-            this.label104.TabIndex = 459;
+            this.label104.TabIndex = 0;
             this.label104.Text = "Coin Value";
             // 
             // itemSpeed
@@ -414,7 +414,7 @@
             -2147483648});
             this.itemSpeed.Name = "itemSpeed";
             this.itemSpeed.Size = new System.Drawing.Size(110, 21);
-            this.itemSpeed.TabIndex = 136;
+            this.itemSpeed.TabIndex = 3;
             this.itemSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.itemSpeed.ValueChanged += new System.EventHandler(this.itemSpeed_ValueChanged);
             // 
@@ -433,7 +433,7 @@
             -2147483648});
             this.itemAttack.Name = "itemAttack";
             this.itemAttack.Size = new System.Drawing.Size(110, 21);
-            this.itemAttack.TabIndex = 139;
+            this.itemAttack.TabIndex = 9;
             this.itemAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.itemAttack.ValueChanged += new System.EventHandler(this.itemAttack_ValueChanged);
             // 
@@ -452,7 +452,7 @@
             -2147483648});
             this.itemDefense.Name = "itemDefense";
             this.itemDefense.Size = new System.Drawing.Size(110, 21);
-            this.itemDefense.TabIndex = 140;
+            this.itemDefense.TabIndex = 11;
             this.itemDefense.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.itemDefense.ValueChanged += new System.EventHandler(this.itemDefense_ValueChanged);
             // 
@@ -471,7 +471,7 @@
             -2147483648});
             this.itemMagicDefense.Name = "itemMagicDefense";
             this.itemMagicDefense.Size = new System.Drawing.Size(110, 21);
-            this.itemMagicDefense.TabIndex = 142;
+            this.itemMagicDefense.TabIndex = 15;
             this.itemMagicDefense.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.itemMagicDefense.ValueChanged += new System.EventHandler(this.itemMagicDefense_ValueChanged);
             // 
@@ -485,7 +485,7 @@
             0});
             this.itemAttackRange.Name = "itemAttackRange";
             this.itemAttackRange.Size = new System.Drawing.Size(110, 21);
-            this.itemAttackRange.TabIndex = 137;
+            this.itemAttackRange.TabIndex = 5;
             this.itemAttackRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.itemAttackRange.ValueChanged += new System.EventHandler(this.itemAttackRange_ValueChanged);
             // 
@@ -504,7 +504,7 @@
             -2147483648});
             this.itemMagicAttack.Name = "itemMagicAttack";
             this.itemMagicAttack.Size = new System.Drawing.Size(110, 21);
-            this.itemMagicAttack.TabIndex = 141;
+            this.itemMagicAttack.TabIndex = 13;
             this.itemMagicAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.itemMagicAttack.ValueChanged += new System.EventHandler(this.itemMagicAttack_ValueChanged);
             // 
@@ -518,7 +518,7 @@
             0});
             this.itemPower.Name = "itemPower";
             this.itemPower.Size = new System.Drawing.Size(110, 21);
-            this.itemPower.TabIndex = 138;
+            this.itemPower.TabIndex = 7;
             this.itemPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.itemPower.ValueChanged += new System.EventHandler(this.itemPower_ValueChanged);
             // 
@@ -532,7 +532,7 @@
             0});
             this.itemCoinValue.Name = "itemCoinValue";
             this.itemCoinValue.Size = new System.Drawing.Size(110, 21);
-            this.itemCoinValue.TabIndex = 135;
+            this.itemCoinValue.TabIndex = 1;
             this.itemCoinValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.itemCoinValue.ValueChanged += new System.EventHandler(this.itemCoinValue_ValueChanged);
             // 
@@ -542,7 +542,7 @@
             this.label108.Location = new System.Drawing.Point(6, 43);
             this.label108.Name = "label108";
             this.label108.Size = new System.Drawing.Size(37, 13);
-            this.label108.TabIndex = 460;
+            this.label108.TabIndex = 2;
             this.label108.Text = "Speed";
             // 
             // label106
@@ -551,7 +551,7 @@
             this.label106.Location = new System.Drawing.Point(6, 64);
             this.label106.Name = "label106";
             this.label106.Size = new System.Drawing.Size(72, 13);
-            this.label106.TabIndex = 465;
+            this.label106.TabIndex = 4;
             this.label106.Text = "Attack Range";
             // 
             // label105
@@ -560,7 +560,7 @@
             this.label105.Location = new System.Drawing.Point(6, 85);
             this.label105.Name = "label105";
             this.label105.Size = new System.Drawing.Size(88, 13);
-            this.label105.TabIndex = 466;
+            this.label105.TabIndex = 6;
             this.label105.Text = "Infliction Amount";
             // 
             // label103
@@ -569,7 +569,7 @@
             this.label103.Location = new System.Drawing.Point(6, 127);
             this.label103.Name = "label103";
             this.label103.Size = new System.Drawing.Size(47, 13);
-            this.label103.TabIndex = 462;
+            this.label103.TabIndex = 10;
             this.label103.Text = "Defense";
             // 
             // label93
@@ -578,7 +578,7 @@
             this.label93.Location = new System.Drawing.Point(6, 106);
             this.label93.Name = "label93";
             this.label93.Size = new System.Drawing.Size(38, 13);
-            this.label93.TabIndex = 461;
+            this.label93.TabIndex = 8;
             this.label93.Text = "Attack";
             // 
             // label33
@@ -587,7 +587,7 @@
             this.label33.Location = new System.Drawing.Point(6, 148);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(68, 13);
-            this.label33.TabIndex = 463;
+            this.label33.TabIndex = 12;
             this.label33.Text = "Magic Attack";
             // 
             // label29
@@ -596,7 +596,7 @@
             this.label29.Location = new System.Drawing.Point(6, 169);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(77, 13);
-            this.label29.TabIndex = 464;
+            this.label29.TabIndex = 14;
             this.label29.Text = "Magic Defense";
             // 
             // toolStrip1
@@ -611,7 +611,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(415, 25);
-            this.toolStrip1.TabIndex = 557;
+            this.toolStrip1.TabIndex = 0;
             // 
             // itemName
             // 
@@ -683,7 +683,7 @@
             this.label158.Location = new System.Drawing.Point(7, 20);
             this.label158.Name = "label158";
             this.label158.Size = new System.Drawing.Size(202, 13);
-            this.label158.TabIndex = 558;
+            this.label158.TabIndex = 0;
             this.label158.Text = "[1.5x —— (2x —————  2x) —— 1.5x]";
             // 
             // lvl2TimingEnd
@@ -696,7 +696,7 @@
             0});
             this.lvl2TimingEnd.Name = "lvl2TimingEnd";
             this.lvl2TimingEnd.Size = new System.Drawing.Size(51, 21);
-            this.lvl2TimingEnd.TabIndex = 566;
+            this.lvl2TimingEnd.TabIndex = 3;
             this.lvl2TimingEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lvl2TimingEnd.ValueChanged += new System.EventHandler(this.numericUpDown117_ValueChanged);
             // 
@@ -710,7 +710,7 @@
             0});
             this.lvl1TimingStart.Name = "lvl1TimingStart";
             this.lvl1TimingStart.Size = new System.Drawing.Size(51, 21);
-            this.lvl1TimingStart.TabIndex = 562;
+            this.lvl1TimingStart.TabIndex = 1;
             this.lvl1TimingStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lvl1TimingStart.ValueChanged += new System.EventHandler(this.numericUpDown118_ValueChanged);
             // 
@@ -724,7 +724,7 @@
             0});
             this.lvl1TimingEnd.Name = "lvl1TimingEnd";
             this.lvl1TimingEnd.Size = new System.Drawing.Size(51, 21);
-            this.lvl1TimingEnd.TabIndex = 568;
+            this.lvl1TimingEnd.TabIndex = 4;
             this.lvl1TimingEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lvl1TimingEnd.ValueChanged += new System.EventHandler(this.numericUpDown119_ValueChanged);
             // 
@@ -738,7 +738,7 @@
             0});
             this.lvl2TimingStart.Name = "lvl2TimingStart";
             this.lvl2TimingStart.Size = new System.Drawing.Size(51, 21);
-            this.lvl2TimingStart.TabIndex = 564;
+            this.lvl2TimingStart.TabIndex = 2;
             this.lvl2TimingStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lvl2TimingStart.ValueChanged += new System.EventHandler(this.numericUpDown120_ValueChanged);
             // 
@@ -754,17 +754,17 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(179, 25);
-            this.toolStrip2.TabIndex = 173;
+            this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
-            // byteOrText
+            // textView
             // 
             this.textView.CheckOnClick = true;
             this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
             this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.textView.Name = "byteOrText";
+            this.textView.Name = "textView";
             this.textView.Size = new System.Drawing.Size(23, 22);
             this.textView.Click += new System.EventHandler(this.textView_Click);
             // 
@@ -816,7 +816,7 @@
             this.groupBox1.Location = new System.Drawing.Point(4, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(216, 194);
-            this.groupBox1.TabIndex = 572;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Status";
             // 
@@ -826,7 +826,7 @@
             this.groupBox2.Location = new System.Drawing.Point(4, 433);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(216, 78);
-            this.groupBox2.TabIndex = 572;
+            this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Targetting";
             // 
@@ -836,7 +836,7 @@
             this.groupBox3.Location = new System.Drawing.Point(226, 28);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(185, 94);
-            this.groupBox3.TabIndex = 572;
+            this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Effects";
             // 
@@ -846,7 +846,7 @@
             this.groupBox4.Location = new System.Drawing.Point(226, 128);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(185, 62);
-            this.groupBox4.TabIndex = 572;
+            this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Element Nullification";
             // 
@@ -856,7 +856,7 @@
             this.groupBox5.Location = new System.Drawing.Point(226, 332);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(185, 78);
-            this.groupBox5.TabIndex = 572;
+            this.groupBox5.TabIndex = 10;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Who Can Equip";
             // 
@@ -874,7 +874,7 @@
             this.groupBox6.Location = new System.Drawing.Point(4, 228);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(216, 199);
-            this.groupBox6.TabIndex = 572;
+            this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Item Properties";
             // 
@@ -884,7 +884,7 @@
             this.groupBox7.Location = new System.Drawing.Point(226, 196);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(185, 62);
-            this.groupBox7.TabIndex = 572;
+            this.groupBox7.TabIndex = 8;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Element Weaknesses";
             // 
@@ -895,7 +895,7 @@
             this.groupBox8.Location = new System.Drawing.Point(4, 517);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(216, 62);
-            this.groupBox8.TabIndex = 572;
+            this.groupBox8.TabIndex = 4;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Menu Cursor Behavior";
             // 
@@ -905,7 +905,7 @@
             this.groupBox9.Location = new System.Drawing.Point(226, 264);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(185, 62);
-            this.groupBox9.TabIndex = 572;
+            this.groupBox9.TabIndex = 9;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Status Change";
             // 
@@ -917,7 +917,7 @@
             this.groupBox10.Location = new System.Drawing.Point(226, 416);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(185, 235);
-            this.groupBox10.TabIndex = 572;
+            this.groupBox10.TabIndex = 11;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Description";
             // 
@@ -929,7 +929,7 @@
             this.panel1.Location = new System.Drawing.Point(3, 17);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(179, 68);
-            this.panel1.TabIndex = 174;
+            this.panel1.TabIndex = 0;
             // 
             // groupBox11
             // 
@@ -941,7 +941,7 @@
             this.groupBox11.Location = new System.Drawing.Point(4, 585);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(216, 66);
-            this.groupBox11.TabIndex = 573;
+            this.groupBox11.TabIndex = 5;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Weapon Damage Timing";
             // 

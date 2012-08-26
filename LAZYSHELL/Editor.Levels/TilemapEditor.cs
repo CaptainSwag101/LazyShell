@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Threading;
@@ -387,7 +388,7 @@ namespace LAZYSHELL
                 Bitmap image = HightlightedTile(mouseOverSolidTileNum);
                 Point p = new Point(
                     solidity.TileCoords[mouseOverSolidTile].X * zoom,
-                    solidity.TileCoords[mouseOverSolidTile].Y * zoom - 768);
+                    solidity.TileCoords[mouseOverSolidTile].Y * zoom - (768 * zoom));
                 Rectangle rsrc = new Rectangle(0, 0, 32, 784);
                 Rectangle rdst = new Rectangle(p.X, p.Y, zoom * 32, zoom * 784);
                 g.DrawImage(image, rdst, rsrc, GraphicsUnit.Pixel);
@@ -456,7 +457,7 @@ namespace LAZYSHELL
                 tiles[1][i] = Bits.GetShort(template.Tilemaps[1], i * 2);
                 tiles[2][i] = template.Tilemaps[2][i];
             }
-            commandStack.Push(new TileMapEditCommand(this.levels, tilemap, 0, tL, bR, tiles, true, true, true));
+            commandStack.Push(new TilemapEditCommand(this.levels, tilemap, 0, tL, bR, tiles, true, true, true));
             commandStack_S.Push(new SolidityEditCommand(this.levels, this.solidityMap, tL, bR, template.Start, template.Soliditymap));
             solidityMap.Image = null;
             tilemap.RedrawTilemaps();
@@ -500,7 +501,7 @@ namespace LAZYSHELL
                 bool transparent = minecart == null || minecart.Index > 1;
                 CommandStack commandStack = state.TileMods ? this.commandStack_TM : this.commandStack;
                 commandStack.Push(
-                    new TileMapEditCommand(
+                    new TilemapEditCommand(
                         levels, tilemap, layer, location, terminal,
                         tilesetEditor.SelectedTiles.Copies, false, transparent, editAllLayers.Checked));
                 if (state.TileMods)
@@ -572,7 +573,7 @@ namespace LAZYSHELL
                 bool transparent = minecart == null || minecart.Index > 1;
                 CommandStack commandStack = state.TileMods ? this.commandStack_TM : this.commandStack;
                 commandStack.Push(
-                    new TileMapEditCommand(
+                    new TilemapEditCommand(
                         this.levels, tilemap, layer, new Point(x, y), new Point(x + 16, y + 16),
                         new int[][] { new int[] { erase }, new int[] { erase }, new int[] { erase }, new int[] { erase } },
                         false, transparent, editAllLayers.Checked));
@@ -619,8 +620,9 @@ namespace LAZYSHELL
             int placement = ((x % 16) / 8) + (((y % 16) / 8) * 2);
             Tile tile = this.tileset.Tilesets_Tiles[layer][tilemap.GetTileNum(layer, x, y)];
             Subtile subtile = tile.Subtiles[placement];
+            int multiplier = layer < 2 ? 16 : 4;
             paletteEditor.CurrentColor =
-                (subtile.Palette * 16) + subtile.Colors[((y % 16) % 8) * 8 + ((x % 16) % 8)];
+                (subtile.Palette * multiplier) + subtile.Colors[((y % 16) % 8) * 8 + ((x % 16) % 8)];
             paletteEditor.Show();
         }
         private void Fill(Graphics g, int x, int y)
@@ -683,7 +685,7 @@ namespace LAZYSHELL
                     }
                 bool transparent = minecart == null || minecart.Index > 1;
                 commandStack.Push(
-                    new TileMapEditCommand(levels, tilemap, layer, location, terminal, changes, false, transparent, false));
+                    new TilemapEditCommand(levels, tilemap, layer, location, terminal, changes, false, transparent, false));
             }
             else
             {
@@ -937,7 +939,7 @@ namespace LAZYSHELL
             bool transparent = minecart == null || minecart.Index > 1;
             CommandStack commandStack = state.TileMods ? this.commandStack_TM : this.commandStack;
             commandStack.Push(
-                new TileMapEditCommand(levels, tilemap, layer, location, terminal, buffer.Copies, true, transparent, editAllLayers.Checked));
+                new TilemapEditCommand(levels, tilemap, layer, location, terminal, buffer.Copies, true, transparent, editAllLayers.Checked));
             p1Image = null;
             SetLevelImage();
             if (level != null)
@@ -991,7 +993,7 @@ namespace LAZYSHELL
                 bool transparent = minecart == null || minecart.Index > 1;
                 CommandStack commandStack = state.TileMods ? this.commandStack_TM : this.commandStack;
                 commandStack.Push(
-                    new TileMapEditCommand(
+                    new TilemapEditCommand(
                         levels, tilemap, layer, location, terminal,
                         changes, false, transparent, editAllLayers.Checked));
                 p1Image = null;
@@ -1063,8 +1065,8 @@ namespace LAZYSHELL
             if (overlayOpacity.Value < 100)
                 ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
             Rectangle rdst = new Rectangle(0, 0, zoom * width, zoom * height);
-            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
+            e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
             if (tilemapImage != null)
             {
                 clone.Width = Math.Min(tilemapImage.Width, clone.X + clone.Width) - clone.X;
@@ -1175,11 +1177,16 @@ namespace LAZYSHELL
             if (state.IsometricGrid)
                 overlay.DrawIsometricGrid(e.Graphics, Color.Gray, pictureBoxLevel.Size, new Size(16, 16), zoom);
             if (state.Mask)
+            {
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.None;
                 overlay.DrawLevelMask(e.Graphics, new Point(layer.MaskHighX, layer.MaskHighY), new Point(layer.MaskLowX, layer.MaskLowY), zoom);
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
+            }
             if (state.ShowBoundaries && mouseEnter)
                 overlay.DrawBoundaries(e.Graphics, mousePosition, zoom);
-            if (state.Select&&overlay.Select != null)
+            if (state.Select && overlay.Select != null)
             {
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
                 if (state.CartesianGrid)
                     overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, zoom, Color.Yellow);
                 else
@@ -2454,7 +2461,8 @@ namespace LAZYSHELL
         {
             if (overlay.Select == null)
             {
-                MessageBox.Show("Must make a selection before exporting to battlefield.");
+                MessageBox.Show("Must make a selection before exporting to battlefield.", "LAZY SHELL",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             Tile[] tiles = new Tile[32 * 32];

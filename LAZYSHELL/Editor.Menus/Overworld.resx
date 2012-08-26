@@ -159,6 +159,22 @@
         27odS0RFigAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="importBGToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAYAAAAmlE46AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAACASURBVDhPrZIBEoAgCATvbfz/TwYkKqJmFs3NWMNySABA
+        OhTS28hGHgRxB6xVBFAhe/hMfI1eUtCBDsqwQJxVpO+/gVqpbRXEZvTsaMNQWCFjyN0ztFpAB1W4nXKc
+        am7vdoyqxXVpPizA6cqJ6yjKj54l9N9nS7/F9/AWZEnLVi+1NoaXW1Mo6wAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="importFGToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAYAAAAmlE46AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAACASURBVDhPrZIBEoAgCATvbfz/TwYkKqJmFs3NWMNySABA
+        OhTS28hGHgRxB6xVBFAhe/hMfI1eUtCBDsqwQJxVpO+/gVqpbRXEZvTsaMNQWCFjyN0ztFpAB1W4nXKc
+        am7vdoyqxXVpPizA6cqJ6yjKj54l9N9nS7/F9/AWZEnLVi+1NoaXW1Mo6wAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>116, 17</value>
   </metadata>

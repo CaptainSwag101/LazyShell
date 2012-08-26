@@ -124,7 +124,7 @@
             this.LabelMonsterValMgDef.Location = new System.Drawing.Point(0, 86);
             this.LabelMonsterValMgDef.Name = "LabelMonsterValMgDef";
             this.LabelMonsterValMgDef.Size = new System.Drawing.Size(68, 13);
-            this.LabelMonsterValMgDef.TabIndex = 19;
+            this.LabelMonsterValMgDef.TabIndex = 4;
             this.LabelMonsterValMgDef.Text = "Mg. Defense";
             // 
             // LabelMonsterValMgAtk
@@ -133,7 +133,7 @@
             this.LabelMonsterValMgAtk.Location = new System.Drawing.Point(0, 65);
             this.LabelMonsterValMgAtk.Name = "LabelMonsterValMgAtk";
             this.LabelMonsterValMgAtk.Size = new System.Drawing.Size(59, 13);
-            this.LabelMonsterValMgAtk.TabIndex = 18;
+            this.LabelMonsterValMgAtk.TabIndex = 3;
             this.LabelMonsterValMgAtk.Text = "Mg. Attack";
             // 
             // LabelMonsterValAtk
@@ -142,7 +142,7 @@
             this.LabelMonsterValAtk.Location = new System.Drawing.Point(0, 23);
             this.LabelMonsterValAtk.Name = "LabelMonsterValAtk";
             this.LabelMonsterValAtk.Size = new System.Drawing.Size(38, 13);
-            this.LabelMonsterValAtk.TabIndex = 16;
+            this.LabelMonsterValAtk.TabIndex = 1;
             this.LabelMonsterValAtk.Text = "Attack";
             // 
             // LabelMonsterValDef
@@ -151,7 +151,7 @@
             this.LabelMonsterValDef.Location = new System.Drawing.Point(0, 44);
             this.LabelMonsterValDef.Name = "LabelMonsterValDef";
             this.LabelMonsterValDef.Size = new System.Drawing.Size(47, 13);
-            this.LabelMonsterValDef.TabIndex = 17;
+            this.LabelMonsterValDef.TabIndex = 2;
             this.LabelMonsterValDef.Text = "Defense";
             // 
             // attackerAttack
@@ -164,7 +164,7 @@
             0});
             this.attackerAttack.Name = "attackerAttack";
             this.attackerAttack.Size = new System.Drawing.Size(103, 21);
-            this.attackerAttack.TabIndex = 20;
+            this.attackerAttack.TabIndex = 9;
             this.attackerAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackerAttack.Value = new decimal(new int[] {
             20,
@@ -183,7 +183,7 @@
             0});
             this.attackerMgDefense.Name = "attackerMgDefense";
             this.attackerMgDefense.Size = new System.Drawing.Size(103, 21);
-            this.attackerMgDefense.TabIndex = 23;
+            this.attackerMgDefense.TabIndex = 12;
             this.attackerMgDefense.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackerMgDefense.Value = new decimal(new int[] {
             2,
@@ -202,7 +202,7 @@
             0});
             this.attackerMgAttack.Name = "attackerMgAttack";
             this.attackerMgAttack.Size = new System.Drawing.Size(103, 21);
-            this.attackerMgAttack.TabIndex = 22;
+            this.attackerMgAttack.TabIndex = 11;
             this.attackerMgAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackerMgAttack.Value = new decimal(new int[] {
             10,
@@ -221,7 +221,7 @@
             0});
             this.attackerDefense.Name = "attackerDefense";
             this.attackerDefense.Size = new System.Drawing.Size(103, 21);
-            this.attackerDefense.TabIndex = 21;
+            this.attackerDefense.TabIndex = 10;
             this.attackerDefense.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackerDefense.ValueChanged += new System.EventHandler(this.calculateTotal);
             // 
@@ -237,7 +237,7 @@
             this.attackerWeapon.Location = new System.Drawing.Point(97, 105);
             this.attackerWeapon.Name = "attackerWeapon";
             this.attackerWeapon.Size = new System.Drawing.Size(103, 21);
-            this.attackerWeapon.TabIndex = 109;
+            this.attackerWeapon.TabIndex = 13;
             this.attackerWeapon.Tag = "";
             this.attackerWeapon.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.attackerWeapon.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
@@ -248,7 +248,7 @@
             this.labelAttackerAccessory.Location = new System.Drawing.Point(0, 149);
             this.labelAttackerAccessory.Name = "labelAttackerAccessory";
             this.labelAttackerAccessory.Size = new System.Drawing.Size(56, 13);
-            this.labelAttackerAccessory.TabIndex = 204;
+            this.labelAttackerAccessory.TabIndex = 7;
             this.labelAttackerAccessory.Text = "Accessory";
             // 
             // attackerAccessory
@@ -263,7 +263,7 @@
             this.attackerAccessory.Location = new System.Drawing.Point(97, 147);
             this.attackerAccessory.Name = "attackerAccessory";
             this.attackerAccessory.Size = new System.Drawing.Size(103, 21);
-            this.attackerAccessory.TabIndex = 111;
+            this.attackerAccessory.TabIndex = 15;
             this.attackerAccessory.Tag = "";
             this.attackerAccessory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.attackerAccessory.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
@@ -280,7 +280,7 @@
             this.attackerArmor.Location = new System.Drawing.Point(97, 126);
             this.attackerArmor.Name = "attackerArmor";
             this.attackerArmor.Size = new System.Drawing.Size(103, 21);
-            this.attackerArmor.TabIndex = 110;
+            this.attackerArmor.TabIndex = 14;
             this.attackerArmor.Tag = "";
             this.attackerArmor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.attackerArmor.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
@@ -291,7 +291,7 @@
             this.labelAttackerWeapon.Location = new System.Drawing.Point(0, 107);
             this.labelAttackerWeapon.Name = "labelAttackerWeapon";
             this.labelAttackerWeapon.Size = new System.Drawing.Size(47, 13);
-            this.labelAttackerWeapon.TabIndex = 202;
+            this.labelAttackerWeapon.TabIndex = 5;
             this.labelAttackerWeapon.Text = "Weapon";
             // 
             // labelAttackerArmor
@@ -300,7 +300,7 @@
             this.labelAttackerArmor.Location = new System.Drawing.Point(0, 128);
             this.labelAttackerArmor.Name = "labelAttackerArmor";
             this.labelAttackerArmor.Size = new System.Drawing.Size(36, 13);
-            this.labelAttackerArmor.TabIndex = 203;
+            this.labelAttackerArmor.TabIndex = 6;
             this.labelAttackerArmor.Text = "Armor";
             // 
             // label13
@@ -309,7 +309,7 @@
             this.label13.Location = new System.Drawing.Point(0, 2);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(20, 13);
-            this.label13.TabIndex = 16;
+            this.label13.TabIndex = 0;
             this.label13.Text = "HP";
             // 
             // attackerHP
@@ -322,7 +322,7 @@
             0});
             this.attackerHP.Name = "attackerHP";
             this.attackerHP.Size = new System.Drawing.Size(103, 21);
-            this.attackerHP.TabIndex = 20;
+            this.attackerHP.TabIndex = 8;
             this.attackerHP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackerHP.Value = new decimal(new int[] {
             20,
@@ -345,7 +345,7 @@
             this.attackerStatus.MultiColumn = true;
             this.attackerStatus.Name = "attackerStatus";
             this.attackerStatus.Size = new System.Drawing.Size(200, 36);
-            this.attackerStatus.TabIndex = 263;
+            this.attackerStatus.TabIndex = 1;
             this.attackerStatus.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
             // 
             // label14
@@ -354,7 +354,7 @@
             this.label14.Location = new System.Drawing.Point(0, 2);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(20, 13);
-            this.label14.TabIndex = 16;
+            this.label14.TabIndex = 0;
             this.label14.Text = "HP";
             // 
             // label2
@@ -363,7 +363,7 @@
             this.label2.Location = new System.Drawing.Point(0, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 16;
+            this.label2.TabIndex = 1;
             this.label2.Text = "Attack";
             // 
             // targetWeapon
@@ -378,7 +378,7 @@
             this.targetWeapon.Location = new System.Drawing.Point(99, 105);
             this.targetWeapon.Name = "targetWeapon";
             this.targetWeapon.Size = new System.Drawing.Size(101, 21);
-            this.targetWeapon.TabIndex = 109;
+            this.targetWeapon.TabIndex = 13;
             this.targetWeapon.Tag = "";
             this.targetWeapon.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.targetWeapon.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
@@ -393,7 +393,7 @@
             0});
             this.targetDefense.Name = "targetDefense";
             this.targetDefense.Size = new System.Drawing.Size(101, 21);
-            this.targetDefense.TabIndex = 21;
+            this.targetDefense.TabIndex = 7;
             this.targetDefense.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.targetDefense.Value = new decimal(new int[] {
             8,
@@ -408,7 +408,7 @@
             this.labelTargetAccessory.Location = new System.Drawing.Point(0, 150);
             this.labelTargetAccessory.Name = "labelTargetAccessory";
             this.labelTargetAccessory.Size = new System.Drawing.Size(56, 13);
-            this.labelTargetAccessory.TabIndex = 204;
+            this.labelTargetAccessory.TabIndex = 12;
             this.labelTargetAccessory.Text = "Accessory";
             // 
             // targetMgAttack
@@ -421,7 +421,7 @@
             0});
             this.targetMgAttack.Name = "targetMgAttack";
             this.targetMgAttack.Size = new System.Drawing.Size(101, 21);
-            this.targetMgAttack.TabIndex = 22;
+            this.targetMgAttack.TabIndex = 8;
             this.targetMgAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.targetMgAttack.ValueChanged += new System.EventHandler(this.calculateTotal);
             // 
@@ -437,7 +437,7 @@
             this.targetAccessory.Location = new System.Drawing.Point(99, 147);
             this.targetAccessory.Name = "targetAccessory";
             this.targetAccessory.Size = new System.Drawing.Size(101, 21);
-            this.targetAccessory.TabIndex = 111;
+            this.targetAccessory.TabIndex = 15;
             this.targetAccessory.Tag = "";
             this.targetAccessory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.targetAccessory.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
@@ -452,7 +452,7 @@
             0});
             this.targetMgDefense.Name = "targetMgDefense";
             this.targetMgDefense.Size = new System.Drawing.Size(101, 21);
-            this.targetMgDefense.TabIndex = 23;
+            this.targetMgDefense.TabIndex = 9;
             this.targetMgDefense.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.targetMgDefense.Value = new decimal(new int[] {
             1,
@@ -471,7 +471,7 @@
             0});
             this.targetHP.Name = "targetHP";
             this.targetHP.Size = new System.Drawing.Size(101, 21);
-            this.targetHP.TabIndex = 20;
+            this.targetHP.TabIndex = 5;
             this.targetHP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.targetHP.Value = new decimal(new int[] {
             10,
@@ -492,7 +492,7 @@
             this.targetArmor.Location = new System.Drawing.Point(99, 126);
             this.targetArmor.Name = "targetArmor";
             this.targetArmor.Size = new System.Drawing.Size(101, 21);
-            this.targetArmor.TabIndex = 110;
+            this.targetArmor.TabIndex = 14;
             this.targetArmor.Tag = "";
             this.targetArmor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.targetArmor.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
@@ -507,7 +507,7 @@
             0});
             this.targetAttack.Name = "targetAttack";
             this.targetAttack.Size = new System.Drawing.Size(101, 21);
-            this.targetAttack.TabIndex = 20;
+            this.targetAttack.TabIndex = 6;
             this.targetAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.targetAttack.Value = new decimal(new int[] {
             1,
@@ -522,7 +522,7 @@
             this.labelTargetWeapon.Location = new System.Drawing.Point(0, 108);
             this.labelTargetWeapon.Name = "labelTargetWeapon";
             this.labelTargetWeapon.Size = new System.Drawing.Size(47, 13);
-            this.labelTargetWeapon.TabIndex = 202;
+            this.labelTargetWeapon.TabIndex = 10;
             this.labelTargetWeapon.Text = "Weapon";
             // 
             // label5
@@ -531,7 +531,7 @@
             this.label5.Location = new System.Drawing.Point(0, 44);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 17;
+            this.label5.TabIndex = 2;
             this.label5.Text = "Defense";
             // 
             // labelTargetArmor
@@ -540,7 +540,7 @@
             this.labelTargetArmor.Location = new System.Drawing.Point(0, 129);
             this.labelTargetArmor.Name = "labelTargetArmor";
             this.labelTargetArmor.Size = new System.Drawing.Size(36, 13);
-            this.labelTargetArmor.TabIndex = 203;
+            this.labelTargetArmor.TabIndex = 11;
             this.labelTargetArmor.Text = "Armor";
             // 
             // label7
@@ -549,7 +549,7 @@
             this.label7.Location = new System.Drawing.Point(0, 65);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(59, 13);
-            this.label7.TabIndex = 18;
+            this.label7.TabIndex = 3;
             this.label7.Text = "Mg. Attack";
             // 
             // label8
@@ -558,7 +558,7 @@
             this.label8.Location = new System.Drawing.Point(0, 86);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 13);
-            this.label8.TabIndex = 19;
+            this.label8.TabIndex = 4;
             this.label8.Text = "Mg. Defense";
             // 
             // targetStatus
@@ -575,7 +575,7 @@
             this.targetStatus.MultiColumn = true;
             this.targetStatus.Name = "targetStatus";
             this.targetStatus.Size = new System.Drawing.Size(200, 36);
-            this.targetStatus.TabIndex = 263;
+            this.targetStatus.TabIndex = 1;
             this.targetStatus.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
             // 
             // targetDefensePosition
@@ -584,7 +584,7 @@
             this.targetDefensePosition.Location = new System.Drawing.Point(6, 278);
             this.targetDefensePosition.Name = "targetDefensePosition";
             this.targetDefensePosition.Size = new System.Drawing.Size(137, 17);
-            this.targetDefensePosition.TabIndex = 265;
+            this.targetDefensePosition.TabIndex = 3;
             this.targetDefensePosition.Text = "Defense position active";
             this.targetDefensePosition.UseVisualStyleBackColor = true;
             this.targetDefensePosition.Visible = false;
@@ -597,7 +597,7 @@
             this.attackerTypeAlly.Location = new System.Drawing.Point(9, 17);
             this.attackerTypeAlly.Name = "attackerTypeAlly";
             this.attackerTypeAlly.Size = new System.Drawing.Size(41, 17);
-            this.attackerTypeAlly.TabIndex = 264;
+            this.attackerTypeAlly.TabIndex = 0;
             this.attackerTypeAlly.TabStop = true;
             this.attackerTypeAlly.Text = "Ally";
             this.attackerTypeAlly.UseVisualStyleBackColor = false;
@@ -609,7 +609,7 @@
             this.attackerTypeMonster.Location = new System.Drawing.Point(102, 17);
             this.attackerTypeMonster.Name = "attackerTypeMonster";
             this.attackerTypeMonster.Size = new System.Drawing.Size(63, 17);
-            this.attackerTypeMonster.TabIndex = 264;
+            this.attackerTypeMonster.TabIndex = 1;
             this.attackerTypeMonster.Text = "Monster";
             this.attackerTypeMonster.UseVisualStyleBackColor = false;
             this.attackerTypeMonster.CheckedChanged += new System.EventHandler(this.attackerType_CheckedChanged);
@@ -626,7 +626,7 @@
             this.attackerName.Location = new System.Drawing.Point(0, 0);
             this.attackerName.Name = "attackerName";
             this.attackerName.Size = new System.Drawing.Size(200, 21);
-            this.attackerName.TabIndex = 109;
+            this.attackerName.TabIndex = 0;
             this.attackerName.Tag = "";
             this.attackerName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.attackerName_DrawItem);
             this.attackerName.SelectedIndexChanged += new System.EventHandler(this.loadProperties);
@@ -646,7 +646,7 @@
             0});
             this.attackerLevel.Name = "attackerLevel";
             this.attackerLevel.Size = new System.Drawing.Size(103, 21);
-            this.attackerLevel.TabIndex = 20;
+            this.attackerLevel.TabIndex = 3;
             this.attackerLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackerLevel.Value = new decimal(new int[] {
             1,
@@ -661,7 +661,7 @@
             this.label9.Location = new System.Drawing.Point(0, 30);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(32, 13);
-            this.label9.TabIndex = 16;
+            this.label9.TabIndex = 1;
             this.label9.Text = "Level";
             // 
             // attackerBonus
@@ -677,7 +677,7 @@
             this.attackerBonus.Location = new System.Drawing.Point(97, 48);
             this.attackerBonus.Name = "attackerBonus";
             this.attackerBonus.Size = new System.Drawing.Size(103, 21);
-            this.attackerBonus.TabIndex = 109;
+            this.attackerBonus.TabIndex = 4;
             this.attackerBonus.Tag = "";
             this.attackerBonus.SelectedIndexChanged += new System.EventHandler(this.loadProperties);
             // 
@@ -687,7 +687,7 @@
             this.label10.Location = new System.Drawing.Point(0, 51);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(80, 13);
-            this.label10.TabIndex = 16;
+            this.label10.TabIndex = 2;
             this.label10.Text = "Level-up bonus";
             // 
             // targetTypeAlly
@@ -696,7 +696,7 @@
             this.targetTypeAlly.Location = new System.Drawing.Point(9, 17);
             this.targetTypeAlly.Name = "targetTypeAlly";
             this.targetTypeAlly.Size = new System.Drawing.Size(41, 17);
-            this.targetTypeAlly.TabIndex = 264;
+            this.targetTypeAlly.TabIndex = 0;
             this.targetTypeAlly.Text = "Ally";
             this.targetTypeAlly.UseVisualStyleBackColor = false;
             this.targetTypeAlly.CheckedChanged += new System.EventHandler(this.attackerType_CheckedChanged);
@@ -708,7 +708,7 @@
             this.targetTypeMonster.Location = new System.Drawing.Point(101, 17);
             this.targetTypeMonster.Name = "targetTypeMonster";
             this.targetTypeMonster.Size = new System.Drawing.Size(63, 17);
-            this.targetTypeMonster.TabIndex = 264;
+            this.targetTypeMonster.TabIndex = 1;
             this.targetTypeMonster.TabStop = true;
             this.targetTypeMonster.Text = "Monster";
             this.targetTypeMonster.UseVisualStyleBackColor = false;
@@ -726,7 +726,7 @@
             this.targetName.Location = new System.Drawing.Point(0, 0);
             this.targetName.Name = "targetName";
             this.targetName.Size = new System.Drawing.Size(200, 21);
-            this.targetName.TabIndex = 109;
+            this.targetName.TabIndex = 0;
             this.targetName.Tag = "";
             this.targetName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.targetName_DrawItem);
             this.targetName.SelectedIndexChanged += new System.EventHandler(this.loadProperties);
@@ -737,7 +737,7 @@
             this.singleAttack.Name = "singleAttack";
             this.singleAttack.ReadOnly = true;
             this.singleAttack.Size = new System.Drawing.Size(111, 21);
-            this.singleAttack.TabIndex = 270;
+            this.singleAttack.TabIndex = 1;
             // 
             // targetWeakness
             // 
@@ -753,7 +753,7 @@
             this.targetWeakness.MultiColumn = true;
             this.targetWeakness.Name = "targetWeakness";
             this.targetWeakness.Size = new System.Drawing.Size(200, 36);
-            this.targetWeakness.TabIndex = 263;
+            this.targetWeakness.TabIndex = 2;
             this.targetWeakness.SelectedIndexChanged += new System.EventHandler(this.calculateTotal);
             // 
             // label17
@@ -762,7 +762,7 @@
             this.label17.Location = new System.Drawing.Point(8, 15);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(79, 13);
-            this.label17.TabIndex = 273;
+            this.label17.TabIndex = 0;
             this.label17.Text = "Physical Attack";
             // 
             // groupBox1
@@ -773,7 +773,7 @@
             this.groupBox1.Location = new System.Drawing.Point(210, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(212, 115);
-            this.groupBox1.TabIndex = 275;
+            this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Attacker Level";
             // 
@@ -787,7 +787,7 @@
             this.panelAttackerProperties.Location = new System.Drawing.Point(6, 40);
             this.panelAttackerProperties.Name = "panelAttackerProperties";
             this.panelAttackerProperties.Size = new System.Drawing.Size(200, 69);
-            this.panelAttackerProperties.TabIndex = 280;
+            this.panelAttackerProperties.TabIndex = 2;
             // 
             // timedAttackL2
             // 
@@ -795,7 +795,7 @@
             this.timedAttackL2.Location = new System.Drawing.Point(8, 253);
             this.timedAttackL2.Name = "timedAttackL2";
             this.timedAttackL2.Size = new System.Drawing.Size(128, 17);
-            this.timedAttackL2.TabIndex = 265;
+            this.timedAttackL2.TabIndex = 3;
             this.timedAttackL2.Text = "Perfectly timed attack";
             this.timedAttackL2.UseVisualStyleBackColor = true;
             this.timedAttackL2.CheckedChanged += new System.EventHandler(this.calculateTotal);
@@ -806,7 +806,7 @@
             this.timedAttackL1.Location = new System.Drawing.Point(8, 236);
             this.timedAttackL1.Name = "timedAttackL1";
             this.timedAttackL1.Size = new System.Drawing.Size(88, 17);
-            this.timedAttackL1.TabIndex = 265;
+            this.timedAttackL1.TabIndex = 2;
             this.timedAttackL1.Text = "Timed attack";
             this.timedAttackL1.UseVisualStyleBackColor = true;
             this.timedAttackL1.CheckedChanged += new System.EventHandler(this.calculateTotal);
@@ -819,7 +819,7 @@
             this.groupBox2.Location = new System.Drawing.Point(488, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(212, 115);
-            this.groupBox2.TabIndex = 276;
+            this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Target Status";
             // 
@@ -833,7 +833,7 @@
             this.panelTargetProperties.Location = new System.Drawing.Point(6, 40);
             this.panelTargetProperties.Name = "panelTargetProperties";
             this.panelTargetProperties.Size = new System.Drawing.Size(200, 21);
-            this.panelTargetProperties.TabIndex = 268;
+            this.panelTargetProperties.TabIndex = 2;
             // 
             // targetBonus
             // 
@@ -848,7 +848,7 @@
             this.targetBonus.Location = new System.Drawing.Point(97, 48);
             this.targetBonus.Name = "targetBonus";
             this.targetBonus.Size = new System.Drawing.Size(103, 21);
-            this.targetBonus.TabIndex = 109;
+            this.targetBonus.TabIndex = 4;
             this.targetBonus.Tag = "";
             this.targetBonus.SelectedIndexChanged += new System.EventHandler(this.loadProperties);
             // 
@@ -858,7 +858,7 @@
             this.label11.Location = new System.Drawing.Point(0, 50);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(80, 13);
-            this.label11.TabIndex = 16;
+            this.label11.TabIndex = 3;
             this.label11.Text = "Level-up bonus";
             // 
             // label12
@@ -867,7 +867,7 @@
             this.label12.Location = new System.Drawing.Point(0, 29);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(32, 13);
-            this.label12.TabIndex = 16;
+            this.label12.TabIndex = 1;
             this.label12.Text = "Level";
             // 
             // targetLevel
@@ -885,7 +885,7 @@
             0});
             this.targetLevel.Name = "targetLevel";
             this.targetLevel.Size = new System.Drawing.Size(103, 21);
-            this.targetLevel.TabIndex = 20;
+            this.targetLevel.TabIndex = 2;
             this.targetLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.targetLevel.Value = new decimal(new int[] {
             1,
@@ -899,7 +899,7 @@
             this.buttonSwitch.Location = new System.Drawing.Point(428, 23);
             this.buttonSwitch.Name = "buttonSwitch";
             this.buttonSwitch.Size = new System.Drawing.Size(54, 23);
-            this.buttonSwitch.TabIndex = 277;
+            this.buttonSwitch.TabIndex = 5;
             this.buttonSwitch.Text = "<< >>";
             this.buttonSwitch.UseVisualStyleBackColor = true;
             this.buttonSwitch.Click += new System.EventHandler(this.buttonSwitch_Click);
@@ -913,7 +913,7 @@
             this.groupBox3.Location = new System.Drawing.Point(210, 133);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(212, 301);
-            this.groupBox3.TabIndex = 278;
+            this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Attacker Status";
             // 
@@ -938,7 +938,7 @@
             this.panelAttackerStats.Location = new System.Drawing.Point(6, 20);
             this.panelAttackerStats.Name = "panelAttackerStats";
             this.panelAttackerStats.Size = new System.Drawing.Size(200, 168);
-            this.panelAttackerStats.TabIndex = 280;
+            this.panelAttackerStats.TabIndex = 0;
             // 
             // groupBox4
             // 
@@ -949,7 +949,7 @@
             this.groupBox4.Location = new System.Drawing.Point(488, 133);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(212, 301);
-            this.groupBox4.TabIndex = 279;
+            this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Target Status";
             // 
@@ -974,7 +974,7 @@
             this.panelTargetStats.Location = new System.Drawing.Point(6, 20);
             this.panelTargetStats.Name = "panelTargetStats";
             this.panelTargetStats.Size = new System.Drawing.Size(200, 105);
-            this.panelTargetStats.TabIndex = 205;
+            this.panelTargetStats.TabIndex = 0;
             // 
             // listView1
             // 
@@ -988,7 +988,7 @@
             this.listView1.Location = new System.Drawing.Point(3, 39);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(201, 671);
-            this.listView1.TabIndex = 274;
+            this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);

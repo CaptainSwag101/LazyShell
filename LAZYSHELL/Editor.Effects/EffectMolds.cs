@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
@@ -480,7 +481,8 @@ namespace LAZYSHELL
         }
         private void pictureBoxE_Mold_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
+            e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
             if (showBG.Checked)
                 e.Graphics.FillRectangle(
                     new SolidBrush(Color.FromArgb(animation.PaletteSet.Palettes[effect.PaletteIndex][0])),
@@ -507,6 +509,7 @@ namespace LAZYSHELL
                 overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxE_Mold.Size, new Size(16, 16), zoom, true);
             if (select.Checked && overlay.Select != null)
             {
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
                 if (e_moldShowGrid.Checked)
                     overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, zoom, Color.Yellow);
                 else

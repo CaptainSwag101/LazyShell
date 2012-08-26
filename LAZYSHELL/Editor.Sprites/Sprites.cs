@@ -541,7 +541,9 @@ namespace LAZYSHELL
         }
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements(animations, (int)animationPacket.Value, "IMPORT SPRITE ANIMATIONS...").ShowDialog();
+            IOElements ioelements = new IOElements(animations, (int)animationPacket.Value, "IMPORT SPRITE ANIMATIONS...");
+            if (ioelements.ShowDialog() == DialogResult.Cancel)
+                return;
             foreach (Animation sm in animations)
                 sm.Assemble();
             RefreshSpritesEditor();

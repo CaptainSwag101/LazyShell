@@ -13,7 +13,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         private static string[] AnimationScriptCommands = new string[]
         {
             "Current object = sprite: \"",			// 0x00
-            "AMEM $32 = coords: ",			// 0x01
+            "AMEM $32 = ",			// 0x01
             "",			// 0x02
             "Current sprite: \"",			// 0x03
             "Pause script, resume after ",			// 0x04
@@ -23,7 +23,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Shift current sprite, ",			// 0x08
             "Jump to address $",			// 0x09
             "{NOOP}",			// 0x0A
-            "AMEM $40 = coords: ",			// 0x0B
+            "AMEM $40 = ",			// 0x0B
             "Shift current sprite to coords @ AMEM $40, ",			// 0x0C
             "",			// 0x0D
             "",			// 0x0E
@@ -170,9 +170,9 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "",			// 0x92
             "",			// 0x93
             "",			// 0x94
-            "",			// 0x95
-            "",			// 0x96
-            "",			// 0x97
+            "Begin bonus message display",			// 0x95
+            "Display bonus message: ",			// 0x96
+            "Pause script until bonus message finished",			// 0x97
             "",			// 0x98
             "",			// 0x99
             "",			// 0x9A
@@ -318,9 +318,9 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             {
                 case 0x01:
                 case 0x0B:
-                    sb.Append("X=" + (short)Bits.GetShort(asc.AnimationData, 2) + ",");
-                    sb.Append("Y=" + (short)Bits.GetShort(asc.AnimationData, 4) + ",");
-                    sb.Append("Z=" + (short)Bits.GetShort(asc.AnimationData, 6) + ", offset @ ");
+                    sb.Append("(X: " + (short)Bits.GetShort(asc.AnimationData, 2) + ", ");
+                    sb.Append("Y: " + (short)Bits.GetShort(asc.AnimationData, 4) + ", ");
+                    sb.Append("Z: " + (short)Bits.GetShort(asc.AnimationData, 6) + ") offset @ ");
                     switch ((asc.AnimationData[1] & 0xF0) >> 4)
                     {
                         case 0: sb.Append("absolute coords"); break;
@@ -331,8 +331,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     break;
                 case 0x08:
                     sb.Append("acceleration = " + Bits.GetShort(asc.AnimationData, 6) + ", ");
-                    sb.Append("start val = " + Bits.GetShort(asc.AnimationData, 2) + ", ");
-                    sb.Append("end val = " + Bits.GetShort(asc.AnimationData, 4) + ", ");
+                    sb.Append("start val = " + (short)Bits.GetShort(asc.AnimationData, 2) + ", ");
+                    sb.Append("end val = " + (short)Bits.GetShort(asc.AnimationData, 4) + ", ");
                     sb.Append("apply to axis: ");
                     sb.Append(GetBits((byte)(asc.Option & 0x07), new string[] { "Z", "Y", "X" }, 3));
                     break;
@@ -631,6 +631,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                                 "..." + "\", type = ");
                             sb.Append("spell dialogue"); break;
                     }
+                    break;
+                case 0x96:
+                    sb.Append("\"" + Model.BonusMessages[asc.AnimationData[2]].Text + "\"");
+                    sb.Append(" (X: " + (sbyte)asc.AnimationData[3] + ", Y: " + (sbyte)asc.AnimationData[4] + ")");
                     break;
                 case 0x43:
                     sb.Append((asc.Option & 0x0F) + ", infinite playback = ");

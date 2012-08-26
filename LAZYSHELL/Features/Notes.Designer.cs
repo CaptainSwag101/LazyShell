@@ -50,8 +50,8 @@
             this.addressBit = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
             this.elementIndexes = new LAZYSHELL.NewListView();
-            this.index = new System.Windows.Forms.ColumnHeader();
-            this.label = new System.Windows.Forms.ColumnHeader();
+            this.index = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonBrowse = new System.Windows.Forms.Button();
@@ -113,7 +113,7 @@
             this.elementType.Location = new System.Drawing.Point(6, 6);
             this.elementType.Name = "elementType";
             this.elementType.Size = new System.Drawing.Size(336, 21);
-            this.elementType.TabIndex = 2;
+            this.elementType.TabIndex = 0;
             this.elementType.SelectedIndexChanged += new System.EventHandler(this.elementType_SelectedIndexChanged);
             // 
             // indexDescription
@@ -124,7 +124,7 @@
             this.indexDescription.Location = new System.Drawing.Point(6, 100);
             this.indexDescription.Name = "indexDescription";
             this.indexDescription.Size = new System.Drawing.Size(336, 321);
-            this.indexDescription.TabIndex = 2;
+            this.indexDescription.TabIndex = 5;
             this.indexDescription.Text = "";
             this.indexDescription.TextChanged += new System.EventHandler(this.indexDescription_TextChanged);
             // 
@@ -135,7 +135,7 @@
             this.indexLabel.Location = new System.Drawing.Point(6, 60);
             this.indexLabel.Name = "indexLabel";
             this.indexLabel.Size = new System.Drawing.Size(336, 21);
-            this.indexLabel.TabIndex = 1;
+            this.indexLabel.TabIndex = 2;
             this.indexLabel.TextChanged += new System.EventHandler(this.indexLabel_TextChanged);
             // 
             // buttonMoveUp
@@ -144,7 +144,7 @@
             this.buttonMoveUp.Location = new System.Drawing.Point(171, 324);
             this.buttonMoveUp.Name = "buttonMoveUp";
             this.buttonMoveUp.Size = new System.Drawing.Size(165, 23);
-            this.buttonMoveUp.TabIndex = 4;
+            this.buttonMoveUp.TabIndex = 2;
             this.buttonMoveUp.Text = "MOVE UP";
             this.buttonMoveUp.UseVisualStyleBackColor = true;
             this.buttonMoveUp.Click += new System.EventHandler(this.buttonMoveUp_Click);
@@ -155,7 +155,7 @@
             this.buttonMoveDown.Location = new System.Drawing.Point(171, 348);
             this.buttonMoveDown.Name = "buttonMoveDown";
             this.buttonMoveDown.Size = new System.Drawing.Size(165, 23);
-            this.buttonMoveDown.TabIndex = 5;
+            this.buttonMoveDown.TabIndex = 4;
             this.buttonMoveDown.Text = "MOVE DOWN";
             this.buttonMoveDown.UseVisualStyleBackColor = true;
             this.buttonMoveDown.Click += new System.EventHandler(this.buttonMoveDown_Click);
@@ -166,7 +166,7 @@
             this.buttonDelete.Location = new System.Drawing.Point(0, 348);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(165, 23);
-            this.buttonDelete.TabIndex = 6;
+            this.buttonDelete.TabIndex = 3;
             this.buttonDelete.Text = "DELETE";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
@@ -176,7 +176,7 @@
             this.indexNumber.Location = new System.Drawing.Point(84, 0);
             this.indexNumber.Name = "indexNumber";
             this.indexNumber.Size = new System.Drawing.Size(130, 21);
-            this.indexNumber.TabIndex = 0;
+            this.indexNumber.TabIndex = 1;
             this.indexNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.indexNumber.ValueChanged += new System.EventHandler(this.indexNumber_ValueChanged);
             // 
@@ -186,7 +186,7 @@
             this.label1.Location = new System.Drawing.Point(0, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 8;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Index number:";
             // 
             // label2
@@ -196,7 +196,7 @@
             this.label2.Location = new System.Drawing.Point(275, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
-            this.label2.TabIndex = 8;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Index Label:";
             // 
             // label3
@@ -206,7 +206,7 @@
             this.label3.Location = new System.Drawing.Point(247, 84);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 13);
-            this.label3.TabIndex = 8;
+            this.label3.TabIndex = 4;
             this.label3.Text = "Index Description:";
             // 
             // buttonAdd
@@ -215,7 +215,7 @@
             this.buttonAdd.Location = new System.Drawing.Point(0, 324);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(165, 23);
-            this.buttonAdd.TabIndex = 4;
+            this.buttonAdd.TabIndex = 1;
             this.buttonAdd.Text = "ADD";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
@@ -226,7 +226,7 @@
             this.buttonLoad.Location = new System.Drawing.Point(171, 377);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(165, 23);
-            this.buttonLoad.TabIndex = 6;
+            this.buttonLoad.TabIndex = 5;
             this.buttonLoad.Text = "LOAD INTO EDITOR";
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
@@ -246,7 +246,7 @@
             this.groupBox1.Location = new System.Drawing.Point(348, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(348, 427);
-            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Index Properties";
             // 
@@ -268,7 +268,7 @@
             this.panelAddressBit.Location = new System.Drawing.Point(6, 20);
             this.panelAddressBit.Name = "panelAddressBit";
             this.panelAddressBit.Size = new System.Drawing.Size(215, 21);
-            this.panelAddressBit.TabIndex = 0;
+            this.panelAddressBit.TabIndex = 1;
             this.panelAddressBit.Visible = false;
             // 
             // label5
@@ -277,7 +277,7 @@
             this.label5.Location = new System.Drawing.Point(0, 4);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 13);
-            this.label5.TabIndex = 8;
+            this.label5.TabIndex = 0;
             this.label5.Text = "Address:";
             // 
             // address
@@ -296,7 +296,7 @@
             0});
             this.address.Name = "address";
             this.address.Size = new System.Drawing.Size(76, 21);
-            this.address.TabIndex = 7;
+            this.address.TabIndex = 1;
             this.address.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.address.Value = new decimal(new int[] {
             28672,
@@ -311,7 +311,7 @@
             this.label4.Location = new System.Drawing.Point(138, 4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(23, 13);
-            this.label4.TabIndex = 8;
+            this.label4.TabIndex = 2;
             this.label4.Text = "Bit:";
             // 
             // addressBit
@@ -324,7 +324,7 @@
             0});
             this.addressBit.Name = "addressBit";
             this.addressBit.Size = new System.Drawing.Size(47, 21);
-            this.addressBit.TabIndex = 7;
+            this.addressBit.TabIndex = 3;
             this.addressBit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.addressBit.ValueChanged += new System.EventHandler(this.addressBit_ValueChanged);
             // 
@@ -341,7 +341,7 @@
             this.panel1.Location = new System.Drawing.Point(6, 33);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(336, 400);
-            this.panel1.TabIndex = 3;
+            this.panel1.TabIndex = 1;
             // 
             // elementIndexes
             // 
@@ -357,7 +357,7 @@
             this.elementIndexes.MultiSelect = false;
             this.elementIndexes.Name = "elementIndexes";
             this.elementIndexes.Size = new System.Drawing.Size(336, 317);
-            this.elementIndexes.TabIndex = 275;
+            this.elementIndexes.TabIndex = 0;
             this.elementIndexes.UseCompatibleStateImageBehavior = false;
             this.elementIndexes.View = System.Windows.Forms.View.Details;
             this.elementIndexes.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.elementIndexes_ColumnClick);
@@ -382,7 +382,7 @@
             this.buttonOK.Location = new System.Drawing.Point(566, 539);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 5;
+            this.buttonOK.TabIndex = 4;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -393,7 +393,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(647, 539);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 6;
+            this.buttonCancel.TabIndex = 5;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -404,7 +404,7 @@
             this.buttonBrowse.Location = new System.Drawing.Point(647, 39);
             this.buttonBrowse.Name = "buttonBrowse";
             this.buttonBrowse.Size = new System.Drawing.Size(75, 23);
-            this.buttonBrowse.TabIndex = 1;
+            this.buttonBrowse.TabIndex = 2;
             this.buttonBrowse.Text = "Browse...";
             this.buttonBrowse.UseVisualStyleBackColor = true;
             this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
@@ -417,7 +417,7 @@
             this.notesFile.Name = "notesFile";
             this.notesFile.ReadOnly = true;
             this.notesFile.Size = new System.Drawing.Size(629, 21);
-            this.notesFile.TabIndex = 0;
+            this.notesFile.TabIndex = 1;
             // 
             // generalNotes
             // 
@@ -480,7 +480,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(734, 25);
-            this.toolStrip1.TabIndex = 16;
+            this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // newButton

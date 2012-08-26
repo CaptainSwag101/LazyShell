@@ -29,7 +29,7 @@ namespace LAZYSHELL
         private GraphicEditor stageGraphicEditor;
         private PaletteEditor spritePaletteEditor;
         private GraphicEditor spriteGraphicEditor;
-        private Previewer.Previewer previewer;
+        private Previewer previewer;
         private TilemapEditor tilemapEditor;
         private TilesetEditor tilesetEditor;
         public MinecartData MinecartData;
@@ -187,8 +187,8 @@ namespace LAZYSHELL
             else
             {
                 paletteSet = Model.MinecartSSPaletteSet;
-                tileset = new Tileset(Model.MinecartSSTileset, Model.MinecartSSGraphics, paletteSet, 16, 16, "side");
-                bgtileset = new Tileset(Model.MinecartSSBGTileset, Model.MinecartSSGraphics, paletteSet, 32, 16, "side");
+                tileset = new Tileset(Model.MinecartSSTileset, Model.MinecartSSGraphics, paletteSet, 16, 16, TilesetType.SideScrolling);
+                bgtileset = new Tileset(Model.MinecartSSBGTileset, Model.MinecartSSGraphics, paletteSet, 32, 16, TilesetType.SideScrolling);
                 tilemap = new SideTilemap(Model.MinecartSSTilemap, null, tileset, paletteSet);
                 //
                 if (Index == 2)
@@ -468,11 +468,11 @@ namespace LAZYSHELL
         {
             if (previewer == null)
             {
-                previewer = new LAZYSHELL.Previewer.Previewer(Index, 5);
+                previewer = new Previewer(Index, PreviewType.MineCart);
                 previewer.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                previewer.Reload(Index, 5);
+                previewer.Reload(Index, PreviewType.MineCart);
         }
         //
         public void Assemble()

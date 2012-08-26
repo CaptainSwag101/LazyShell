@@ -681,5 +681,48 @@
     <Setting Name="LastMineCart" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="KeystrokesBonus" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;G&lt;/string&gt;
+  &lt;string&gt;H&lt;/string&gt;
+  &lt;string&gt;E&lt;/string&gt;
+  &lt;string&gt;F&lt;/string&gt;
+  &lt;string&gt;C&lt;/string&gt;
+  &lt;string&gt;D&lt;/string&gt;
+  &lt;string&gt;A&lt;/string&gt;
+  &lt;string&gt;B&lt;/string&gt;
+  &lt;string&gt;I&lt;/string&gt;
+  &lt;string&gt;J&lt;/string&gt;
+  &lt;string&gt;K&lt;/string&gt;
+  &lt;string&gt;L&lt;/string&gt;
+  &lt;string&gt;M&lt;/string&gt;
+  &lt;string&gt;N&lt;/string&gt;
+  &lt;string&gt;O&lt;/string&gt;
+  &lt;string&gt;P&lt;/string&gt;
+  &lt;string&gt;W&lt;/string&gt;
+  &lt;string&gt;X&lt;/string&gt;
+  &lt;string&gt;U&lt;/string&gt;
+  &lt;string&gt;V&lt;/string&gt;
+  &lt;string&gt;S&lt;/string&gt;
+  &lt;string&gt;T&lt;/string&gt;
+  &lt;string&gt;Q&lt;/string&gt;
+  &lt;string&gt;R&lt;/string&gt;
+  &lt;string&gt;Y&lt;/string&gt;
+  &lt;string&gt;Z&lt;/string&gt;
+  &lt;string&gt;!&lt;/string&gt;
+  &lt;string&gt;?&lt;/string&gt;
+  &lt;string&gt;.&lt;/string&gt;
+  &lt;string&gt;*&lt;/string&gt;
+  &lt;string&gt;@&lt;/string&gt;
+  &lt;string /&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="LastSPC" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastSoundType" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

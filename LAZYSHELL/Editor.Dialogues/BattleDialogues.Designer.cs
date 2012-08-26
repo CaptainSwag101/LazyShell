@@ -35,6 +35,8 @@
             this.battleDialogueNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.searchBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchButton = new System.Windows.Forms.ToolStripButton();
+            this.bonusTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.bonusPreview = new System.Windows.Forms.ToolStripLabel();
             this.pictureBoxBattleDialogue = new System.Windows.Forms.PictureBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.pageUp = new System.Windows.Forms.ToolStripButton();
@@ -59,20 +61,22 @@
             this.openPalettes = new System.Windows.Forms.ToolStripMenuItem();
             this.openPaletteMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBattleDialogue)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.toolStrip3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // battleDialogueTextBox
             // 
             this.battleDialogueTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.battleDialogueTextBox.Location = new System.Drawing.Point(0, 107);
+            this.battleDialogueTextBox.Location = new System.Drawing.Point(0, 57);
             this.battleDialogueTextBox.Name = "battleDialogueTextBox";
-            this.battleDialogueTextBox.Size = new System.Drawing.Size(369, 115);
-            this.battleDialogueTextBox.TabIndex = 1;
+            this.battleDialogueTextBox.Size = new System.Drawing.Size(592, 115);
+            this.battleDialogueTextBox.TabIndex = 3;
             this.battleDialogueTextBox.Text = "";
             this.battleDialogueTextBox.TextChanged += new System.EventHandler(this.battleDialogueTextBox_TextChanged);
             this.battleDialogueTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.battleDialogueTextBox_KeyDown);
@@ -85,12 +89,14 @@
             this.battleDlgType,
             this.battleDialogueNum,
             this.searchBox,
-            this.searchButton});
+            this.searchButton,
+            this.bonusTextBox,
+            this.bonusPreview});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(393, 25);
-            this.toolStrip1.TabIndex = 360;
+            this.toolStrip1.Size = new System.Drawing.Size(616, 25);
+            this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // battleDlgType
@@ -99,7 +105,8 @@
             this.battleDlgType.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.battleDlgType.Items.AddRange(new object[] {
             "Battle Dialogues",
-            "Battle Messages"});
+            "Battle Messages",
+            "Flower Bonus Messages"});
             this.battleDlgType.Name = "battleDlgType";
             this.battleDlgType.Size = new System.Drawing.Size(151, 25);
             this.battleDlgType.SelectedIndexChanged += new System.EventHandler(this.battleDlgType_SelectedIndexChanged);
@@ -109,7 +116,7 @@
             this.battleDialogueNum.AutoSize = false;
             this.battleDialogueNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.battleDialogueNum.Hexadecimal = false;
-            this.battleDialogueNum.Location = new System.Drawing.Point(160, 2);
+            this.battleDialogueNum.Location = new System.Drawing.Point(162, 2);
             this.battleDialogueNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -145,13 +152,31 @@
             this.searchButton.Size = new System.Drawing.Size(23, 22);
             this.searchButton.Text = "Search For Dialogue";
             // 
+            // bonusTextBox
+            // 
+            this.bonusTextBox.MaxLength = 16;
+            this.bonusTextBox.Name = "bonusTextBox";
+            this.bonusTextBox.Size = new System.Drawing.Size(145, 25);
+            this.bonusTextBox.Visible = false;
+            this.bonusTextBox.TextChanged += new System.EventHandler(this.bonusTextBox_TextChanged);
+            // 
+            // bonusPreview
+            // 
+            this.bonusPreview.AutoSize = false;
+            this.bonusPreview.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.bonusPreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.bonusPreview.Margin = new System.Windows.Forms.Padding(4, 1, 0, 2);
+            this.bonusPreview.Name = "bonusPreview";
+            this.bonusPreview.Size = new System.Drawing.Size(128, 8);
+            this.bonusPreview.Paint += new System.Windows.Forms.PaintEventHandler(this.bonusPreview_Paint);
+            // 
             // pictureBoxBattleDialogue
             // 
             this.pictureBoxBattleDialogue.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.pictureBoxBattleDialogue.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBoxBattleDialogue.Location = new System.Drawing.Point(0, 50);
+            this.pictureBoxBattleDialogue.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxBattleDialogue.Name = "pictureBoxBattleDialogue";
-            this.pictureBoxBattleDialogue.Size = new System.Drawing.Size(393, 32);
+            this.pictureBoxBattleDialogue.Size = new System.Drawing.Size(616, 32);
             this.pictureBoxBattleDialogue.TabIndex = 520;
             this.pictureBoxBattleDialogue.TabStop = false;
             this.pictureBoxBattleDialogue.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxBattleDialogue_Paint);
@@ -169,11 +194,11 @@
             this.textView,
             this.toolStripSeparator4,
             this.availableBytes});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 82);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 32);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(393, 25);
-            this.toolStrip2.TabIndex = 521;
+            this.toolStrip2.Size = new System.Drawing.Size(616, 25);
+            this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // pageUp
@@ -203,14 +228,14 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // byteOrTextView
+            // textView
             // 
             this.textView.CheckOnClick = true;
             this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
             this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.textView.Name = "byteOrTextView";
+            this.textView.Name = "textView";
             this.textView.Size = new System.Drawing.Size(23, 22);
             this.textView.Text = "Text View";
             this.textView.Click += new System.EventHandler(this.textView_Click);
@@ -297,8 +322,8 @@
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip4.Size = new System.Drawing.Size(393, 25);
-            this.toolStrip4.TabIndex = 538;
+            this.toolStrip4.Size = new System.Drawing.Size(616, 25);
+            this.toolStrip4.TabIndex = 0;
             this.toolStrip4.Text = "toolStrip4";
             // 
             // reset
@@ -401,23 +426,32 @@
             this.pause60f,
             this.pauseA,
             this.pauseFrames});
-            this.toolStrip3.Location = new System.Drawing.Point(369, 107);
+            this.toolStrip3.Location = new System.Drawing.Point(592, 57);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(24, 115);
-            this.toolStrip3.TabIndex = 539;
+            this.toolStrip3.TabIndex = 4;
             this.toolStrip3.Text = "toolStrip3";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.battleDialogueTextBox);
+            this.panel1.Controls.Add(this.toolStrip3);
+            this.panel1.Controls.Add(this.toolStrip2);
+            this.panel1.Controls.Add(this.pictureBoxBattleDialogue);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 50);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(616, 172);
+            this.panel1.TabIndex = 2;
             // 
             // BattleDialogues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 222);
+            this.ClientSize = new System.Drawing.Size(616, 222);
             this.ControlBox = false;
-            this.Controls.Add(this.battleDialogueTextBox);
-            this.Controls.Add(this.toolStrip3);
-            this.Controls.Add(this.toolStrip2);
-            this.Controls.Add(this.pictureBoxBattleDialogue);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -431,6 +465,8 @@
             this.toolStrip4.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -468,5 +504,8 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem openPalettes;
         private System.Windows.Forms.ToolStripMenuItem openPaletteMenu;
+        private System.Windows.Forms.ToolStripTextBox bonusTextBox;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripLabel bonusPreview;
     }
 }

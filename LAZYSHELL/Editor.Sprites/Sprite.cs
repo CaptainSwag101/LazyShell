@@ -31,6 +31,19 @@ namespace LAZYSHELL
             paletteIndex = (byte)((data[offset] & 0x0E) >> 1); offset++;
             animationPacket = Bits.GetShort(data, offset);
         }
+        public int GraphicOffset
+        {
+            get
+            {
+                int offset = graphicPalettePacket * 4 + 0x251800;
+                int bank = (int)(((data[offset] & 0x0F) << 16) + 0x280000);
+                return (int)((Bits.GetShort(data, offset) & 0xFFF0) + bank);
+            }
+        }
+        public byte[] Graphics
+        {
+            get { return Bits.GetByteArray(data, GraphicOffset, 0x4000); }
+        }
         /// <summary>
         /// Creates a pixel array of the sprite.
         /// </summary>
@@ -38,30 +51,24 @@ namespace LAZYSHELL
         /// <param name="byFacing">Create the pixels by facing index.</param>
         /// <param name="moldIndex">The index of the mold (ignored if byMold == false).</param>
         /// <param name="facingIndex">The index of the facing (ignored if byFacing == false)</param>
+        /// <param name="palette">If want to use a particular palette.</param>
         /// <param name="mirror">Mirror the sprite pixels.</param>
         /// <param name="crop">Crop the sprite pixels to their edges.</param>
         /// <returns></returns>
-        public int[] GetPixels(bool byMold, bool byFacing, int moldIndex, int facingIndex, bool mirror, bool crop, ref Size size)
+        public int[] GetPixels(bool byMold, bool byFacing, int moldIndex, int facingIndex, int[] palette, bool mirror, bool crop, ref Size size)
         {
             Mold tMold;
-            int offset = this.index * 4 + 0x250000;
-            int graphicPalettePacket = Bits.GetShort(data, offset) & 0x1FF; offset++;
-            int graphicPalettePacketShift = (data[offset] & 0x0E) >> 1;
-
-            // set graphics
-            offset = graphicPalettePacket * 4 + 0x251800;
-            int bank = (int)(((data[offset] & 0x0F) << 16) + 0x280000);
-            int graphicOffset = (int)((Bits.GetShort(data, offset) & 0xFFF0) + bank); offset += 2;
 
             // set palette to use
-            int[] palette = Palette;
+            if (palette == null)
+                palette = Palette;
             //
             int animationNum = Bits.GetShort(data, this.index * 4 + 0x250002);
             int animationOffset = Bits.Get24Bit(data, 0x252000 + (animationNum * 3)) - 0xC00000;
             int animationLength = Bits.GetShort(data, animationOffset);
 
             byte[] sm = Bits.GetByteArray(data, animationOffset, animationLength);
-            offset = Bits.GetShort(sm, 2);
+            int offset = Bits.GetShort(sm, 2);
             if (byFacing)
                 switch (facingIndex)
                 {
@@ -85,7 +92,7 @@ namespace LAZYSHELL
 
             foreach (Mold.Tile t in tMold.Tiles)
             {
-                t.Set8x8Tiles(Bits.GetByteArray(data, graphicOffset, 0x4000), palette, tMold.Gridplane);
+                t.Set8x8Tiles(Graphics, palette, tMold.Gridplane);
             }
 
             int[] pixels = tMold.MoldPixels();
@@ -156,15 +163,34 @@ namespace LAZYSHELL
             size = new Size(imageWidth, imageHeight);
             return pixels;
         }
+        public int[] GetPixels(bool byMold, bool byFacing, int moldIndex, int facingIndex, bool mirror, bool crop, ref Size size)
+        {
+            return GetPixels(byMold, byFacing, moldIndex, facingIndex, null, mirror, crop, ref size);
+        }
         public int[] GetPixels(bool byMold, bool byFacing, int moldIndex, int facingIndex, bool mirror, bool crop)
         {
             Size size = new Size(0, 0);
-            return GetPixels(byMold, byFacing, moldIndex, facingIndex, mirror, crop, ref size);
+            return GetPixels(byMold, byFacing, moldIndex, facingIndex, null, mirror, crop, ref size);
         }
         public int[] GetPixels()
         {
             Size size = new Size(0, 0);
-            return GetPixels(false, false, 0, 0, false, false, ref size);
+            return GetPixels(false, false, 0, 0, null, false, false, ref size);
+        }
+        public int[] GetTilesetPixels()
+        {
+            int offset = graphicPalettePacket * 4 + 0x251800;
+            int bank = (int)(((data[offset] & 0x0F) << 16) + 0x280000);
+            int graphicOffset = (int)((Bits.GetShort(data, offset) & 0xFFF0) + bank); offset += 2;
+            //
+            byte[] graphics = Bits.GetByteArray(data, graphicOffset, 0x4000);
+            int[] palette = Palette;
+            Animation animation = Model.Animations[animationPacket];
+            Mold mold = animation.Molds[0];
+            foreach (Mold.Tile tile in mold.Tiles)
+                tile.Set8x8Tiles(graphics, palette, mold.Gridplane);
+            //
+            return animation.TilesetPixels();
         }
         public int[] Palette
         {

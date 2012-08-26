@@ -46,7 +46,7 @@
             this.fromIndex.Location = new System.Drawing.Point(48, 52);
             this.fromIndex.Name = "fromIndex";
             this.fromIndex.Size = new System.Drawing.Size(79, 21);
-            this.fromIndex.TabIndex = 0;
+            this.fromIndex.TabIndex = 3;
             this.fromIndex.ValueChanged += new System.EventHandler(this.fromDialogue_ValueChanged);
             // 
             // toIndex
@@ -55,7 +55,7 @@
             this.toIndex.Location = new System.Drawing.Point(155, 52);
             this.toIndex.Name = "toIndex";
             this.toIndex.Size = new System.Drawing.Size(80, 21);
-            this.toIndex.TabIndex = 1;
+            this.toIndex.TabIndex = 5;
             this.toIndex.Value = new decimal(new int[] {
             100,
             0,
@@ -78,7 +78,7 @@
             this.label2.Location = new System.Drawing.Point(133, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 13);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 4;
             this.label2.Text = "to";
             // 
             // buttonOK
@@ -86,7 +86,7 @@
             this.buttonOK.Location = new System.Drawing.Point(79, 78);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 4;
+            this.buttonOK.TabIndex = 6;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -96,7 +96,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(160, 78);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 4;
+            this.buttonCancel.TabIndex = 7;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -108,7 +108,7 @@
             this.radioButton1.Location = new System.Drawing.Point(12, 12);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(88, 17);
-            this.radioButton1.TabIndex = 5;
+            this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Clear current";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -120,7 +120,7 @@
             this.radioButton2.Location = new System.Drawing.Point(12, 29);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(112, 17);
-            this.radioButton2.TabIndex = 6;
+            this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Clear within range";
             this.radioButton2.UseVisualStyleBackColor = true;

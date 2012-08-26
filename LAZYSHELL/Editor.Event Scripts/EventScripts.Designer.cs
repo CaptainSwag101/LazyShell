@@ -166,7 +166,7 @@
             this.evtNameB.Location = new System.Drawing.Point(86, 40);
             this.evtNameB.Name = "evtNameB";
             this.evtNameB.Size = new System.Drawing.Size(141, 21);
-            this.evtNameB.TabIndex = 1;
+            this.evtNameB.TabIndex = 4;
             this.evtNameB.SelectedIndexChanged += new System.EventHandler(this.evtNameB_SelectedIndexChanged);
             // 
             // evtNumD
@@ -180,7 +180,7 @@
             0});
             this.evtNumD.Name = "evtNumD";
             this.evtNumD.Size = new System.Drawing.Size(49, 21);
-            this.evtNumD.TabIndex = 23;
+            this.evtNumD.TabIndex = 9;
             this.evtNumD.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // evtNameA
@@ -256,7 +256,7 @@
             0});
             this.evtNumC.Name = "evtNumC";
             this.evtNumC.Size = new System.Drawing.Size(49, 21);
-            this.evtNumC.TabIndex = 22;
+            this.evtNumC.TabIndex = 7;
             this.evtNumC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // evtNumB
@@ -270,7 +270,7 @@
             0});
             this.evtNumB.Name = "evtNumB";
             this.evtNumB.Size = new System.Drawing.Size(49, 21);
-            this.evtNumB.TabIndex = 21;
+            this.evtNumB.TabIndex = 5;
             this.evtNumB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.evtNumB.ValueChanged += new System.EventHandler(this.evtNumB_ValueChanged);
             // 
@@ -280,7 +280,7 @@
             this.labelEvtA.Location = new System.Drawing.Point(6, 23);
             this.labelEvtA.Name = "labelEvtA";
             this.labelEvtA.Size = new System.Drawing.Size(19, 13);
-            this.labelEvtA.TabIndex = 397;
+            this.labelEvtA.TabIndex = 0;
             this.labelEvtA.Text = "...";
             // 
             // evtNumA
@@ -294,7 +294,7 @@
             0});
             this.evtNumA.Name = "evtNumA";
             this.evtNumA.Size = new System.Drawing.Size(49, 21);
-            this.evtNumA.TabIndex = 19;
+            this.evtNumA.TabIndex = 2;
             this.evtNumA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.evtNumA.ValueChanged += new System.EventHandler(this.evtNumA_ValueChanged);
             // 
@@ -304,7 +304,7 @@
             this.labelEvtD.Location = new System.Drawing.Point(138, 65);
             this.labelEvtD.Name = "labelEvtD";
             this.labelEvtD.Size = new System.Drawing.Size(19, 13);
-            this.labelEvtD.TabIndex = 400;
+            this.labelEvtD.TabIndex = 8;
             this.labelEvtD.Text = "...";
             // 
             // labelEvtC
@@ -313,7 +313,7 @@
             this.labelEvtC.Location = new System.Drawing.Point(6, 65);
             this.labelEvtC.Name = "labelEvtC";
             this.labelEvtC.Size = new System.Drawing.Size(19, 13);
-            this.labelEvtC.TabIndex = 400;
+            this.labelEvtC.TabIndex = 6;
             this.labelEvtC.Text = "...";
             // 
             // labelEvtB
@@ -322,7 +322,7 @@
             this.labelEvtB.Location = new System.Drawing.Point(6, 44);
             this.labelEvtB.Name = "labelEvtB";
             this.labelEvtB.Size = new System.Drawing.Size(19, 13);
-            this.labelEvtB.TabIndex = 400;
+            this.labelEvtB.TabIndex = 3;
             this.labelEvtB.Text = "...";
             // 
             // evtNumF
@@ -336,7 +336,7 @@
             0});
             this.evtNumF.Name = "evtNumF";
             this.evtNumF.Size = new System.Drawing.Size(49, 21);
-            this.evtNumF.TabIndex = 26;
+            this.evtNumF.TabIndex = 3;
             this.evtNumF.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // evtEffects
@@ -349,7 +349,7 @@
             this.evtEffects.MultiColumn = true;
             this.evtEffects.Name = "evtEffects";
             this.evtEffects.Size = new System.Drawing.Size(270, 52);
-            this.evtEffects.TabIndex = 24;
+            this.evtEffects.TabIndex = 0;
             this.evtEffects.SelectedIndexChanged += new System.EventHandler(this.evtEffects_SelectedIndexChanged);
             // 
             // labelEvtF
@@ -358,7 +358,7 @@
             this.labelEvtF.Location = new System.Drawing.Point(138, 22);
             this.labelEvtF.Name = "labelEvtF";
             this.labelEvtF.Size = new System.Drawing.Size(19, 13);
-            this.labelEvtF.TabIndex = 418;
+            this.labelEvtF.TabIndex = 2;
             this.labelEvtF.Text = "...";
             // 
             // labelEvtE
@@ -367,7 +367,7 @@
             this.labelEvtE.Location = new System.Drawing.Point(6, 22);
             this.labelEvtE.Name = "labelEvtE";
             this.labelEvtE.Size = new System.Drawing.Size(19, 13);
-            this.labelEvtE.TabIndex = 417;
+            this.labelEvtE.TabIndex = 0;
             this.labelEvtE.Text = "...";
             // 
             // evtNumE
@@ -381,7 +381,7 @@
             0});
             this.evtNumE.Name = "evtNumE";
             this.evtNumE.Size = new System.Drawing.Size(49, 21);
-            this.evtNumE.TabIndex = 25;
+            this.evtNumE.TabIndex = 1;
             this.evtNumE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // buttonInsertEvent
@@ -391,7 +391,7 @@
             this.buttonInsertEvent.Location = new System.Drawing.Point(3, 5);
             this.buttonInsertEvent.Name = "buttonInsertEvent";
             this.buttonInsertEvent.Size = new System.Drawing.Size(135, 19);
-            this.buttonInsertEvent.TabIndex = 27;
+            this.buttonInsertEvent.TabIndex = 0;
             this.buttonInsertEvent.Text = "INSERT COMMAND";
             this.buttonInsertEvent.UseCompatibleTextRendering = true;
             this.buttonInsertEvent.UseVisualStyleBackColor = false;
@@ -404,7 +404,7 @@
             this.buttonApplyEvent.Location = new System.Drawing.Point(144, 5);
             this.buttonApplyEvent.Name = "buttonApplyEvent";
             this.buttonApplyEvent.Size = new System.Drawing.Size(135, 19);
-            this.buttonApplyEvent.TabIndex = 28;
+            this.buttonApplyEvent.TabIndex = 1;
             this.buttonApplyEvent.Text = "APPLY CHANGES";
             this.buttonApplyEvent.UseCompatibleTextRendering = true;
             this.buttonApplyEvent.UseVisualStyleBackColor = false;
@@ -420,7 +420,7 @@
             this.EventScriptTree.Location = new System.Drawing.Point(0, 50);
             this.EventScriptTree.Name = "EventScriptTree";
             this.EventScriptTree.Size = new System.Drawing.Size(710, 611);
-            this.EventScriptTree.TabIndex = 3;
+            this.EventScriptTree.TabIndex = 2;
             this.EventScriptTree.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.EventScriptTree_AfterCheck);
             this.EventScriptTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.EventScriptTree_AfterSelect);
             this.EventScriptTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.EventScriptTree_NodeMouseClick);
@@ -434,7 +434,7 @@
             this.panel8.Location = new System.Drawing.Point(710, 50);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(282, 636);
-            this.panel8.TabIndex = 554;
+            this.panel8.TabIndex = 3;
             // 
             // panel22
             // 
@@ -451,7 +451,7 @@
             this.panel22.Location = new System.Drawing.Point(0, 0);
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(282, 636);
-            this.panel22.TabIndex = 393;
+            this.panel22.TabIndex = 0;
             // 
             // labelTitleA
             // 
@@ -469,7 +469,7 @@
             this.labelTitleA.Location = new System.Drawing.Point(0, 393);
             this.labelTitleA.Name = "labelTitleA";
             this.labelTitleA.Size = new System.Drawing.Size(282, 89);
-            this.labelTitleA.TabIndex = 565;
+            this.labelTitleA.TabIndex = 4;
             this.labelTitleA.TabStop = false;
             // 
             // button1
@@ -478,7 +478,7 @@
             this.button1.Location = new System.Drawing.Point(215, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(66, 21);
-            this.button1.TabIndex = 414;
+            this.button1.TabIndex = 2;
             this.button1.Text = "ACTION";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.button1.Visible = false;
@@ -493,7 +493,7 @@
             this.commands.Location = new System.Drawing.Point(0, 24);
             this.commands.Name = "commands";
             this.commands.Size = new System.Drawing.Size(282, 363);
-            this.commands.TabIndex = 15;
+            this.commands.TabIndex = 3;
             this.commands.SelectedIndexChanged += new System.EventHandler(this.commands_SelectedIndexChanged);
             // 
             // categories_es
@@ -520,7 +520,7 @@
             this.categories_es.Location = new System.Drawing.Point(94, 0);
             this.categories_es.Name = "categories_es";
             this.categories_es.Size = new System.Drawing.Size(119, 21);
-            this.categories_es.TabIndex = 565;
+            this.categories_es.TabIndex = 1;
             this.categories_es.SelectedIndexChanged += new System.EventHandler(this.categories_es_SelectedIndexChanged);
             // 
             // labelCommands
@@ -529,7 +529,7 @@
             this.labelCommands.Location = new System.Drawing.Point(6, 4);
             this.labelCommands.Name = "labelCommands";
             this.labelCommands.Size = new System.Drawing.Size(82, 13);
-            this.labelCommands.TabIndex = 413;
+            this.labelCommands.TabIndex = 0;
             this.labelCommands.Text = "Select category";
             // 
             // labelTitleB
@@ -539,7 +539,7 @@
             this.labelTitleB.Location = new System.Drawing.Point(0, 482);
             this.labelTitleB.Name = "labelTitleB";
             this.labelTitleB.Size = new System.Drawing.Size(282, 78);
-            this.labelTitleB.TabIndex = 566;
+            this.labelTitleB.TabIndex = 5;
             this.labelTitleB.TabStop = false;
             // 
             // labelTitleC
@@ -552,7 +552,7 @@
             this.labelTitleC.Location = new System.Drawing.Point(0, 560);
             this.labelTitleC.Name = "labelTitleC";
             this.labelTitleC.Size = new System.Drawing.Size(282, 47);
-            this.labelTitleC.TabIndex = 567;
+            this.labelTitleC.TabIndex = 6;
             this.labelTitleC.TabStop = false;
             // 
             // panel1
@@ -563,7 +563,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 607);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(282, 29);
-            this.panel1.TabIndex = 565;
+            this.panel1.TabIndex = 7;
             // 
             // categories_aq
             // 
@@ -615,7 +615,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(992, 25);
-            this.toolStrip1.TabIndex = 560;
+            this.toolStrip1.TabIndex = 1;
             // 
             // eventName
             // 
@@ -794,7 +794,7 @@
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip4.Size = new System.Drawing.Size(992, 25);
-            this.toolStrip4.TabIndex = 561;
+            this.toolStrip4.TabIndex = 0;
             this.toolStrip4.Text = "toolStrip4";
             // 
             // save
@@ -1004,12 +1004,12 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(192, 26);
             // 
             // addThisToNotesDatabaseToolStripMenuItem
             // 
             this.addThisToNotesDatabaseToolStripMenuItem.Name = "addThisToNotesDatabaseToolStripMenuItem";
-            this.addThisToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.addThisToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.addThisToNotesDatabaseToolStripMenuItem.Text = "Add this to notes database...";
             // 
             // contextMenuStripGoto
@@ -1018,13 +1018,14 @@
             this.goToToolStripMenuItem});
             this.contextMenuStripGoto.Name = "contextMenuStripGoto";
             this.contextMenuStripGoto.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStripGoto.ShowImageMargin = false;
-            this.contextMenuStripGoto.Size = new System.Drawing.Size(43, 26);
+            this.contextMenuStripGoto.Size = new System.Drawing.Size(153, 48);
             // 
             // goToToolStripMenuItem
             // 
+            this.goToToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources._goto;
+            this.goToToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
-            this.goToToolStripMenuItem.Size = new System.Drawing.Size(42, 22);
+            this.goToToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             // 
             // toolStrip2
             // 
@@ -1051,7 +1052,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(710, 25);
-            this.toolStrip2.TabIndex = 564;
+            this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // EvtScrMoveUp

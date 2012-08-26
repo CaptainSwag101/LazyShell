@@ -76,8 +76,8 @@ namespace LAZYSHELL
             this.byte3.AutoSize = true;
             this.byte3.Location = new System.Drawing.Point(6, 66);
             this.byte3.Name = "byte3";
-            this.byte3.Size = new System.Drawing.Size(166, 17);
-            this.byte3.TabIndex = 386;
+            this.byte3.Size = new System.Drawing.Size(161, 17);
+            this.byte3.TabIndex = 4;
             this.byte3.Text = "Sprite indexing in main buffer";
             this.byte3.UseVisualStyleBackColor = false;
             this.byte3.CheckedChanged += new System.EventHandler(this.byte3_CheckedChanged);
@@ -98,7 +98,7 @@ namespace LAZYSHELL
             this.byte2a.Location = new System.Drawing.Point(128, 18);
             this.byte2a.Name = "byte2a";
             this.byte2a.Size = new System.Drawing.Size(124, 21);
-            this.byte2a.TabIndex = 370;
+            this.byte2a.TabIndex = 1;
             this.byte2a.SelectedIndexChanged += new System.EventHandler(this.byte2a_SelectedIndexChanged);
             // 
             // byte3a
@@ -117,7 +117,7 @@ namespace LAZYSHELL
             this.byte3a.Location = new System.Drawing.Point(128, 18);
             this.byte3a.Name = "byte3a";
             this.byte3a.Size = new System.Drawing.Size(124, 21);
-            this.byte3a.TabIndex = 370;
+            this.byte3a.TabIndex = 1;
             this.byte3a.SelectedIndexChanged += new System.EventHandler(this.byte3a_SelectedIndexChanged);
             // 
             // byte2b
@@ -135,7 +135,7 @@ namespace LAZYSHELL
             this.byte2b.Location = new System.Drawing.Point(128, 39);
             this.byte2b.Name = "byte2b";
             this.byte2b.Size = new System.Drawing.Size(124, 21);
-            this.byte2b.TabIndex = 370;
+            this.byte2b.TabIndex = 3;
             this.byte2b.SelectedIndexChanged += new System.EventHandler(this.byte2b_SelectedIndexChanged);
             // 
             // byte3b
@@ -153,7 +153,7 @@ namespace LAZYSHELL
             this.byte3b.Location = new System.Drawing.Point(128, 39);
             this.byte3b.Name = "byte3b";
             this.byte3b.Size = new System.Drawing.Size(124, 21);
-            this.byte3b.TabIndex = 370;
+            this.byte3b.TabIndex = 3;
             this.byte3b.SelectedIndexChanged += new System.EventHandler(this.byte3b_SelectedIndexChanged);
             // 
             // extraSpriteBuffer
@@ -167,7 +167,7 @@ namespace LAZYSHELL
             0});
             this.extraSpriteBuffer.Name = "extraSpriteBuffer";
             this.extraSpriteBuffer.Size = new System.Drawing.Size(113, 21);
-            this.extraSpriteBuffer.TabIndex = 388;
+            this.extraSpriteBuffer.TabIndex = 4;
             this.extraSpriteBuffer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.extraSpriteBuffer.ValueChanged += new System.EventHandler(this.extraSpriteBuffer_ValueChanged);
             // 
@@ -181,7 +181,7 @@ namespace LAZYSHELL
             0});
             this.allyCount.Name = "allyCount";
             this.allyCount.Size = new System.Drawing.Size(113, 21);
-            this.allyCount.TabIndex = 388;
+            this.allyCount.TabIndex = 1;
             this.allyCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.allyCount.ValueChanged += new System.EventHandler(this.allyCount_ValueChanged);
             // 
@@ -191,7 +191,7 @@ namespace LAZYSHELL
             this.buttonCancel.Location = new System.Drawing.Point(201, 454);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(63, 23);
-            this.buttonCancel.TabIndex = 392;
+            this.buttonCancel.TabIndex = 10;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -211,7 +211,7 @@ namespace LAZYSHELL
             this.byte4a.Location = new System.Drawing.Point(128, 18);
             this.byte4a.Name = "byte4a";
             this.byte4a.Size = new System.Drawing.Size(124, 21);
-            this.byte4a.TabIndex = 370;
+            this.byte4a.TabIndex = 1;
             this.byte4a.SelectedIndexChanged += new System.EventHandler(this.byte4a_SelectedIndexChanged);
             // 
             // byte4b
@@ -229,7 +229,7 @@ namespace LAZYSHELL
             this.byte4b.Location = new System.Drawing.Point(128, 39);
             this.byte4b.Name = "byte4b";
             this.byte4b.Size = new System.Drawing.Size(124, 21);
-            this.byte4b.TabIndex = 370;
+            this.byte4b.TabIndex = 3;
             this.byte4b.SelectedIndexChanged += new System.EventHandler(this.byte4b_SelectedIndexChanged);
             // 
             // groupBox1
@@ -242,7 +242,7 @@ namespace LAZYSHELL
             this.groupBox1.Location = new System.Drawing.Point(12, 324);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(258, 87);
-            this.groupBox1.TabIndex = 501;
+            this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Clone Buffer C";
             // 
@@ -252,7 +252,7 @@ namespace LAZYSHELL
             this.label9.Location = new System.Drawing.Point(6, 42);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(114, 13);
-            this.label9.TabIndex = 507;
+            this.label9.TabIndex = 2;
             this.label9.Text = "Use main buffer space";
             // 
             // byte4
@@ -260,8 +260,8 @@ namespace LAZYSHELL
             this.byte4.AutoSize = true;
             this.byte4.Location = new System.Drawing.Point(6, 66);
             this.byte4.Name = "byte4";
-            this.byte4.Size = new System.Drawing.Size(166, 17);
-            this.byte4.TabIndex = 502;
+            this.byte4.Size = new System.Drawing.Size(161, 17);
+            this.byte4.TabIndex = 4;
             this.byte4.Text = "Sprite indexing in main buffer";
             this.byte4.UseVisualStyleBackColor = true;
             this.byte4.CheckedChanged += new System.EventHandler(this.byte4_CheckedChanged);
@@ -272,7 +272,7 @@ namespace LAZYSHELL
             this.label8.Location = new System.Drawing.Point(6, 21);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(62, 13);
-            this.label8.TabIndex = 507;
+            this.label8.TabIndex = 0;
             this.label8.Text = "Buffer type";
             // 
             // groupBox2
@@ -285,7 +285,7 @@ namespace LAZYSHELL
             this.groupBox2.Location = new System.Drawing.Point(12, 138);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(258, 87);
-            this.groupBox2.TabIndex = 502;
+            this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Clone Buffer A";
             // 
@@ -295,7 +295,7 @@ namespace LAZYSHELL
             this.label5.Location = new System.Drawing.Point(6, 42);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(114, 13);
-            this.label5.TabIndex = 507;
+            this.label5.TabIndex = 2;
             this.label5.Text = "Use main buffer space";
             // 
             // label4
@@ -304,7 +304,7 @@ namespace LAZYSHELL
             this.label4.Location = new System.Drawing.Point(6, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 13);
-            this.label4.TabIndex = 507;
+            this.label4.TabIndex = 0;
             this.label4.Text = "Buffer type";
             // 
             // byte2
@@ -312,8 +312,8 @@ namespace LAZYSHELL
             this.byte2.AutoSize = true;
             this.byte2.Location = new System.Drawing.Point(6, 66);
             this.byte2.Name = "byte2";
-            this.byte2.Size = new System.Drawing.Size(166, 17);
-            this.byte2.TabIndex = 386;
+            this.byte2.Size = new System.Drawing.Size(161, 17);
+            this.byte2.TabIndex = 4;
             this.byte2.Text = "Sprite indexing in main buffer";
             this.byte2.UseVisualStyleBackColor = false;
             this.byte2.CheckedChanged += new System.EventHandler(this.byte2_CheckedChanged);
@@ -328,7 +328,7 @@ namespace LAZYSHELL
             this.groupBox3.Location = new System.Drawing.Point(12, 231);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(258, 87);
-            this.groupBox3.TabIndex = 503;
+            this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Clone Buffer B";
             // 
@@ -338,7 +338,7 @@ namespace LAZYSHELL
             this.label7.Location = new System.Drawing.Point(6, 42);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(114, 13);
-            this.label7.TabIndex = 507;
+            this.label7.TabIndex = 2;
             this.label7.Text = "Use main buffer space";
             // 
             // label6
@@ -347,7 +347,7 @@ namespace LAZYSHELL
             this.label6.Location = new System.Drawing.Point(6, 21);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(62, 13);
-            this.label6.TabIndex = 507;
+            this.label6.TabIndex = 0;
             this.label6.Text = "Buffer type";
             // 
             // label3
@@ -356,7 +356,7 @@ namespace LAZYSHELL
             this.label3.Location = new System.Drawing.Point(6, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(108, 13);
-            this.label3.TabIndex = 507;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Ally sprite buffer size";
             // 
             // label2
@@ -365,7 +365,7 @@ namespace LAZYSHELL
             this.label2.Location = new System.Drawing.Point(6, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(117, 13);
-            this.label2.TabIndex = 507;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Extra sprite buffer size";
             // 
             // noWaterPalettes
@@ -374,7 +374,7 @@ namespace LAZYSHELL
             this.noWaterPalettes.Location = new System.Drawing.Point(12, 423);
             this.noWaterPalettes.Name = "noWaterPalettes";
             this.noWaterPalettes.Size = new System.Drawing.Size(245, 17);
-            this.noWaterPalettes.TabIndex = 386;
+            this.noWaterPalettes.TabIndex = 6;
             this.noWaterPalettes.Text = "8-row palette buffer (no underwater allowed)";
             this.noWaterPalettes.UseVisualStyleBackColor = false;
             this.noWaterPalettes.CheckedChanged += new System.EventHandler(this.noWaterPalettes_CheckedChanged);
@@ -384,8 +384,8 @@ namespace LAZYSHELL
             this.extraSprites.AutoSize = true;
             this.extraSprites.Location = new System.Drawing.Point(6, 48);
             this.extraSprites.Name = "extraSprites";
-            this.extraSprites.Size = new System.Drawing.Size(246, 17);
-            this.extraSprites.TabIndex = 386;
+            this.extraSprites.Size = new System.Drawing.Size(232, 17);
+            this.extraSprites.TabIndex = 2;
             this.extraSprites.Text = "Extra sprite buffer (clouds, level-up text, etc)";
             this.extraSprites.UseVisualStyleBackColor = false;
             this.extraSprites.CheckedChanged += new System.EventHandler(this.extraSprites_CheckedChanged);
@@ -396,7 +396,7 @@ namespace LAZYSHELL
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 506;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Partition #";
             // 
             // partitionNum
@@ -409,7 +409,7 @@ namespace LAZYSHELL
             0});
             this.partitionNum.Name = "partitionNum";
             this.partitionNum.Size = new System.Drawing.Size(58, 21);
-            this.partitionNum.TabIndex = 505;
+            this.partitionNum.TabIndex = 1;
             this.partitionNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.partitionNum.ValueChanged += new System.EventHandler(this.partitionNum_ValueChanged);
             // 
@@ -419,7 +419,7 @@ namespace LAZYSHELL
             this.buttonOK.Location = new System.Drawing.Point(132, 454);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(63, 23);
-            this.buttonOK.TabIndex = 392;
+            this.buttonOK.TabIndex = 9;
             this.buttonOK.Text = "OK";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -440,7 +440,7 @@ namespace LAZYSHELL
             this.panel1.Location = new System.Drawing.Point(276, 33);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(132, 260);
-            this.panel1.TabIndex = 508;
+            this.panel1.TabIndex = 8;
             // 
             // label10
             // 
@@ -452,7 +452,7 @@ namespace LAZYSHELL
             this.label10.Name = "label10";
             this.label10.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.label10.Size = new System.Drawing.Size(132, 23);
-            this.label10.TabIndex = 509;
+            this.label10.TabIndex = 7;
             this.label10.Text = "VRAM PREVIEW";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -466,7 +466,7 @@ namespace LAZYSHELL
             this.groupBox4.Location = new System.Drawing.Point(12, 34);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(258, 98);
-            this.groupBox4.TabIndex = 510;
+            this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Main Buffer";
             // 

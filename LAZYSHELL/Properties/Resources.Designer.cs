@@ -67,6 +67,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _goto {
+            get {
+                object obj = ResourceManager.GetObject("goto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _transparent {
             get {
                 object obj = ResourceManager.GetObject("_transparent", resourceCulture);
@@ -361,6 +368,20 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap drumsOff {
+            get {
+                object obj = ResourceManager.GetObject("drumsOff", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap drumsOn {
+            get {
+                object obj = ResourceManager.GetObject("drumsOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap duplicate_small {
             get {
                 object obj = ResourceManager.GetObject("duplicate_small", resourceCulture);
@@ -417,6 +438,27 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap exportBinary {
+            get {
+                object obj = ResourceManager.GetObject("exportBinary", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap exportImage {
+            get {
+                object obj = ResourceManager.GetObject("exportImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap exportText {
+            get {
+                object obj = ResourceManager.GetObject("exportText", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap fieldBase {
             get {
                 object obj = ResourceManager.GetObject("fieldBase", resourceCulture);
@@ -434,6 +476,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap fill_small {
             get {
                 object obj = ResourceManager.GetObject("fill_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap firstSection {
+            get {
+                object obj = ResourceManager.GetObject("firstSection", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -515,9 +564,37 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap importBinary {
+            get {
+                object obj = ResourceManager.GetObject("importBinary", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap importImage {
+            get {
+                object obj = ResourceManager.GetObject("importImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap importText {
+            get {
+                object obj = ResourceManager.GetObject("importText", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap insertIntoText {
             get {
                 object obj = ResourceManager.GetObject("insertIntoText", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap instrument {
+            get {
+                object obj = ResourceManager.GetObject("instrument", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -539,6 +616,27 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap label {
             get {
                 object obj = ResourceManager.GetObject("label", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap loop {
+            get {
+                object obj = ResourceManager.GetObject("loop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap loopEnd {
+            get {
+                object obj = ResourceManager.GetObject("loopEnd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap loopInf {
+            get {
+                object obj = ResourceManager.GetObject("loopInf", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -704,6 +802,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap metronome {
+            get {
+                object obj = ResourceManager.GetObject("metronome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap minimizeAll {
             get {
                 object obj = ResourceManager.GetObject("minimizeAll", resourceCulture);
@@ -767,9 +872,100 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap note {
+            get {
+                object obj = ResourceManager.GetObject("note", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap note16th {
+            get {
+                object obj = ResourceManager.GetObject("note16th", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap note16thDotted {
+            get {
+                object obj = ResourceManager.GetObject("note16thDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap note32nd {
+            get {
+                object obj = ResourceManager.GetObject("note32nd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap note32ndDotted {
+            get {
+                object obj = ResourceManager.GetObject("note32ndDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap note64th {
+            get {
+                object obj = ResourceManager.GetObject("note64th", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap note8th {
+            get {
+                object obj = ResourceManager.GetObject("note8th", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap note8th_32nd {
+            get {
+                object obj = ResourceManager.GetObject("note8th+32nd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap note8thDotted {
+            get {
+                object obj = ResourceManager.GetObject("note8thDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap noteDotted {
+            get {
+                object obj = ResourceManager.GetObject("noteDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap noteHalf {
+            get {
+                object obj = ResourceManager.GetObject("noteHalf", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap noteHalfDotted {
+            get {
+                object obj = ResourceManager.GetObject("noteHalfDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap notepad {
             get {
                 object obj = ResourceManager.GetObject("notepad", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap noteWhole {
+            get {
+                object obj = ResourceManager.GetObject("noteWhole", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -784,6 +980,27 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap numerize {
             get {
                 object obj = ResourceManager.GetObject("numerize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap octaveDown {
+            get {
+                object obj = ResourceManager.GetObject("octaveDown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap octaveSet {
+            get {
+                object obj = ResourceManager.GetObject("octaveSet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap octaveUp {
+            get {
+                object obj = ResourceManager.GetObject("octaveUp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -921,6 +1138,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap openSamples {
+            get {
+                object obj = ResourceManager.GetObject("openSamples", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap openSequences {
             get {
                 object obj = ResourceManager.GetObject("openSequences", resourceCulture);
@@ -931,6 +1155,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap openShops {
             get {
                 object obj = ResourceManager.GetObject("openShops", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap openSPCs {
+            get {
+                object obj = ResourceManager.GetObject("openSPCs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1026,6 +1257,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap portamento {
+            get {
+                object obj = ResourceManager.GetObject("portamento", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap preview {
             get {
                 object obj = ResourceManager.GetObject("preview", resourceCulture);
@@ -1089,9 +1327,121 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap rest {
+            get {
+                object obj = ResourceManager.GetObject("rest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rest16th {
+            get {
+                object obj = ResourceManager.GetObject("rest16th", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rest16thDotted {
+            get {
+                object obj = ResourceManager.GetObject("rest16thDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rest32nd {
+            get {
+                object obj = ResourceManager.GetObject("rest32nd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rest32ndDotted {
+            get {
+                object obj = ResourceManager.GetObject("rest32ndDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rest64th {
+            get {
+                object obj = ResourceManager.GetObject("rest64th", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rest64thDotted {
+            get {
+                object obj = ResourceManager.GetObject("rest64thDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rest8th {
+            get {
+                object obj = ResourceManager.GetObject("rest8th", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rest8th_32nd {
+            get {
+                object obj = ResourceManager.GetObject("rest8th+32nd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rest8thDotted {
+            get {
+                object obj = ResourceManager.GetObject("rest8thDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap restDotted {
+            get {
+                object obj = ResourceManager.GetObject("restDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap restHalf {
+            get {
+                object obj = ResourceManager.GetObject("restHalf", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap restHalfDotted {
+            get {
+                object obj = ResourceManager.GetObject("restHalfDotted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap restoreAll {
             get {
                 object obj = ResourceManager.GetObject("restoreAll", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap restWhole {
+            get {
+                object obj = ResourceManager.GetObject("restWhole", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap reverbOff {
+            get {
+                object obj = ResourceManager.GetObject("reverbOff", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap reverbOn {
+            get {
+                object obj = ResourceManager.GetObject("reverbOn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1159,6 +1509,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap sharp {
+            get {
+                object obj = ResourceManager.GetObject("sharp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap showMain {
             get {
                 object obj = ResourceManager.GetObject("showMain", resourceCulture);
@@ -1169,6 +1526,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap signature {
             get {
                 object obj = ResourceManager.GetObject("signature", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap silence {
+            get {
+                object obj = ResourceManager.GetObject("silence", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1190,6 +1554,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap spaceAnalyzer {
             get {
                 object obj = ResourceManager.GetObject("spaceAnalyzer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap speakerBalance {
+            get {
+                object obj = ResourceManager.GetObject("speakerBalance", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1222,6 +1593,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap stave {
+            get {
+                object obj = ResourceManager.GetObject("stave", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap stop {
             get {
                 object obj = ResourceManager.GetObject("stop", resourceCulture);
@@ -1246,6 +1624,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap template_small {
             get {
                 object obj = ResourceManager.GetObject("template_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap terminate {
+            get {
+                object obj = ResourceManager.GetObject("terminate", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1285,6 +1670,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap tremolo {
+            get {
+                object obj = ResourceManager.GetObject("tremolo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap undo_small {
             get {
                 object obj = ResourceManager.GetObject("undo_small", resourceCulture);
@@ -1302,6 +1694,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap update {
             get {
                 object obj = ResourceManager.GetObject("update", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap volume {
+            get {
+                object obj = ResourceManager.GetObject("volume", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

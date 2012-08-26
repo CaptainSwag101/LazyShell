@@ -39,7 +39,7 @@ namespace LAZYSHELL
             this.loadingWhat.Name = "loadingWhat";
             this.loadingWhat.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.loadingWhat.Size = new System.Drawing.Size(321, 23);
-            this.loadingWhat.TabIndex = 388;
+            this.loadingWhat.TabIndex = 0;
             this.loadingWhat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // progressBar1
@@ -50,7 +50,7 @@ namespace LAZYSHELL
             this.progressBar1.Size = new System.Drawing.Size(402, 20);
             this.progressBar1.Step = 1;
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 0;
+            this.progressBar1.TabIndex = 2;
             // 
             // buttonCancel
             // 
@@ -58,7 +58,7 @@ namespace LAZYSHELL
             this.buttonCancel.Location = new System.Drawing.Point(339, 12);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 390;
+            this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);

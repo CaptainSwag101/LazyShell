@@ -53,6 +53,7 @@ namespace LAZYSHELL
             Settings.Default.Keystrokes[0x20] = "\x20";
             Settings.Default.KeystrokesMenu[0x20] = "\x20";
             Settings.Default.KeystrokesDesc[0x20] = "\x20";
+            Settings.Default.KeystrokesBonus[0x1F] = "\x20";
 
             FindDuplicateDialoguePointers();
             FindWithinDialogues();
@@ -107,7 +108,8 @@ namespace LAZYSHELL
             //
             new History(this);
             Checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
-                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, Model.NumeralGraphics);
+                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle,
+                Model.NumeralGraphics, Model.BattleMenuGraphics, Model.BonusMessages);
         }
         // tooltips
         private void SetToolTips(ToolTip toolTip1)
@@ -643,7 +645,8 @@ namespace LAZYSHELL
                 MessageBox.Show("The dialogue in bank 3 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
-                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, Model.NumeralGraphics);
+                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, 
+                Model.NumeralGraphics, Model.BattleMenuGraphics, Model.BonusMessages);
         }
         #endregion
         #region Event Handlers
@@ -651,7 +654,8 @@ namespace LAZYSHELL
         private void Dialogues_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
-                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, Model.NumeralGraphics) == Checksum)
+                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle,
+                Model.NumeralGraphics, Model.BattleMenuGraphics, Model.BonusMessages) == Checksum)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Dialogues have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -674,6 +678,9 @@ namespace LAZYSHELL
                 Model.FontPaletteMenu = null;
                 Model.NumeralGraphics = null;
                 Model.NumeralPaletteSet = null;
+                Model.BattleMenuGraphics = null;
+                Model.BattleMenuPalette = null;
+                Model.BonusMessages = null;
             }
             else if (result == DialogResult.Cancel)
             {
@@ -1048,11 +1055,11 @@ namespace LAZYSHELL
                     int index = Convert.ToInt32(line.Substring(1, 4), 10);
                     line = line.Remove(0, 7);
                     if (this.byteView)
-                        if (!line.EndsWith("[0]") && !line.EndsWith("[6]")) 
+                        if (!line.EndsWith("[0]") && !line.EndsWith("[6]"))
                             line += "[0]";
-                    else
-                        if (!line.EndsWith("[endInput]") && !line.EndsWith("[end]"))
-                            line += "[endInput]";
+                        else
+                            if (!line.EndsWith("[endInput]") && !line.EndsWith("[end]"))
+                                line += "[endInput]";
                     dialogues[index].SetDialogue(line, line.EndsWith("[0]") || line.EndsWith("[6]"));
                     dialogues[index].Data = Model.Data;
                     progressBar.PerformStep("IMPORTING DIALOGUE #" + index.ToString("d4"));

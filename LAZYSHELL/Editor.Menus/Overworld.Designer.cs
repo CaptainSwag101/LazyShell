@@ -95,7 +95,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(780, 25);
-            this.toolStrip1.TabIndex = 556;
+            this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripLabel1
@@ -236,15 +236,15 @@
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importBGToolStripMenuItem,
             this.importFGToolStripMenuItem});
-            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.importImage;
             this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(26, 22);
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(27, 22);
             // 
             // importBGToolStripMenuItem
             // 
-            this.importBGToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importBGToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importBGToolStripMenuItem.Image")));
             this.importBGToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importBGToolStripMenuItem.Name = "importBGToolStripMenuItem";
             this.importBGToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
@@ -253,7 +253,7 @@
             // 
             // importFGToolStripMenuItem
             // 
-            this.importFGToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importFGToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importFGToolStripMenuItem.Image")));
             this.importFGToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importFGToolStripMenuItem.Name = "importFGToolStripMenuItem";
             this.importFGToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
@@ -289,20 +289,23 @@
             this.importImageToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(131, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(156, 70);
             // 
             // saveImageAsToolStripMenuItem
             // 
+            this.saveImageAsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImageAsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveImageAsToolStripMenuItem.Name = "saveImageAsToolStripMenuItem";
-            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveImageAsToolStripMenuItem.Text = "Save image as...";
             this.saveImageAsToolStripMenuItem.Click += new System.EventHandler(this.saveImageAsToolStripMenuItem_Click);
             // 
             // importImageToolStripMenuItem
             // 
+            this.importImageToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importImage;
+            this.importImageToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importImageToolStripMenuItem.Name = "importImageToolStripMenuItem";
-            this.importImageToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.importImageToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.importImageToolStripMenuItem.Text = "Import image...";
             this.importImageToolStripMenuItem.Click += new System.EventHandler(this.importImageToolStripMenuItem_Click);
             // 
@@ -315,7 +318,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 25);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(780, 260);
-            this.panel3.TabIndex = 560;
+            this.panel3.TabIndex = 1;
             // 
             // panel4
             // 
@@ -326,7 +329,7 @@
             this.panel4.Location = new System.Drawing.Point(520, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(260, 260);
-            this.panel4.TabIndex = 561;
+            this.panel4.TabIndex = 2;
             // 
             // pictureBoxPreview
             // 
@@ -349,7 +352,7 @@
             this.panel2.Location = new System.Drawing.Point(260, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(260, 260);
-            this.panel2.TabIndex = 560;
+            this.panel2.TabIndex = 1;
             // 
             // pictureBoxFG
             // 
@@ -371,7 +374,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(260, 260);
-            this.panel1.TabIndex = 561;
+            this.panel1.TabIndex = 0;
             // 
             // pictureBoxBG
             // 
@@ -399,7 +402,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(780, 25);
-            this.toolStrip2.TabIndex = 565;
+            this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripLabel2

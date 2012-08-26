@@ -50,7 +50,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(792, 322);
-            this.panel1.TabIndex = 558;
+            this.panel1.TabIndex = 1;
             // 
             // toolStrip2
             // 
@@ -68,7 +68,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(792, 25);
-            this.toolStrip2.TabIndex = 558;
+            this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // save
@@ -79,6 +79,7 @@
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(23, 22);
             this.save.ToolTipText = "Save";
+            this.save.Click += new System.EventHandler(this.save_Click);
             // 
             // toolStripSeparator1
             // 

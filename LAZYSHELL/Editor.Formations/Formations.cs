@@ -14,7 +14,16 @@ namespace LAZYSHELL
         #region Variables
         private bool updating = false;
         private bool waitBothCoords = false;
-        private int overFM = 0;
+        private int mouseOverMonster = -1;
+        private int mouseDownMonster = -1;
+        private string mouseOverObject;
+        private string mouseDownObject;
+        private Point mouseDownPosition = new Point(-1, -1);
+        private Point mousePosition;
+        private bool mouseWithinSameBounds = false;
+        private bool move = false;
+        private List<SelectedObject> selectedObjects;
+        private Overlay overlay;
         private int diffX, diffY;
         private Bitmap formationBGImage;
         private Battlefield[] battlefields { get { return Model.Battlefields; } }
@@ -37,32 +46,20 @@ namespace LAZYSHELL
         private Bitmap[] portraits;
         private CheckBox[] use = new CheckBox[8];
         private CheckBox[] hide = new CheckBox[8];
+        private NumericUpDown[] bytes = new NumericUpDown[8];
+        private ComboBox[] names = new ComboBox[8];
+        private NumericUpDown[] coordX = new NumericUpDown[8];
+        private NumericUpDown[] coordY = new NumericUpDown[8];
+        private int selectedMonster = -1;
         #endregion
         // Constructor
         public Formations()
         {
+            this.overlay = new Overlay();
             Model.MonsterNames = new DDlistName(monsters);
             Model.MonsterNames.SortAlpha();
             InitializeComponent();
-            for (int i = 0; i < 8; i++)
-            {
-                use[i] = new CheckBox();
-                use[i].AutoSize = true;
-                use[i].Location = new Point(261, i * 21 + 23);
-                use[i].Name = "use" + i;
-                use[i].Text = "Use";
-                use[i].Tag = i;
-                use[i].CheckedChanged += new EventHandler(use_CheckedChanged);
-                groupBox1.Controls.Add(use[i]);
-                hide[i] = new CheckBox();
-                hide[i].AutoSize = true;
-                hide[i].Location = new Point(307, i * 21 + 23);
-                hide[i].Name = "hide" + i;
-                hide[i].Text = "Hide";
-                hide[i].Tag = i;
-                hide[i].CheckedChanged += new EventHandler(hide_CheckedChanged);
-                groupBox1.Controls.Add(hide[i]);
-            }
+            SetControls();
             searchWindow = new Search(formationNum, nameTextBox, searchFormationNames, formationNameList.Items);
             InitializeStrings();
             this.formationNameList.SelectedIndex = 0;
@@ -70,6 +67,83 @@ namespace LAZYSHELL
             RefreshFormations();
         }
         // functions
+        private void SetControls()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                bytes[i] = new NumericUpDown();
+                bytes[i].Location = new Point(6, i * 21 + 20);
+                bytes[i].Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+                bytes[i].Name = "bytes" + i;
+                bytes[i].Size = new Size(44, 21);
+                bytes[i].TabIndex = 0;
+                bytes[i].Tag = i;
+                bytes[i].TextAlign = HorizontalAlignment.Right;
+                bytes[i].Enter += new EventHandler(monster_Enter);
+                bytes[i].ValueChanged += new System.EventHandler(bytes_ValueChanged);
+                groupBox1.Controls.Add(bytes[i]);
+                //
+                names[i] = new ComboBox();
+                names[i].BackColor = SystemColors.ControlDarkDark;
+                names[i].DrawMode = DrawMode.OwnerDrawFixed;
+                names[i].DropDownHeight = 317;
+                names[i].DropDownStyle = ComboBoxStyle.DropDownList;
+                names[i].DropDownWidth = 142;
+                names[i].IntegralHeight = false;
+                names[i].ItemHeight = 15;
+                names[i].Location = new Point(50, i * 21 + 20);
+                names[i].Name = "names" + i;
+                names[i].Size = new Size(118, 21);
+                names[i].Tag = i;
+                names[i].DrawItem += new DrawItemEventHandler(this.monsterName_DrawItem);
+                names[i].Enter += new EventHandler(monster_Enter);
+                names[i].SelectedIndexChanged += new EventHandler(names_SelectedIndexChanged);
+                groupBox1.Controls.Add(names[i]);
+                //
+                coordX[i] = new NumericUpDown();
+                coordX[i].Location = new Point(168, i * 21 + 20);
+                coordX[i].Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+                coordX[i].Name = "coordX" + i;
+                coordX[i].Size = new Size(44, 21);
+                coordX[i].Tag = i;
+                coordX[i].TextAlign = HorizontalAlignment.Right;
+                coordX[i].Enter += new EventHandler(monster_Enter);
+                coordX[i].ValueChanged += new EventHandler(coordX_ValueChanged);
+                groupBox1.Controls.Add(coordX[i]);
+                //
+                coordY[i] = new NumericUpDown();
+                coordY[i].Location = new Point(214, i * 21 + 20);
+                coordY[i].Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+                coordY[i].Name = "coordY" + i;
+                coordY[i].Size = new Size(44, 21);
+                coordY[i].Tag = i;
+                coordY[i].TextAlign = HorizontalAlignment.Right;
+                coordY[i].Enter += new EventHandler(monster_Enter);
+                coordY[i].ValueChanged += new EventHandler(coordY_ValueChanged);
+                groupBox1.Controls.Add(coordY[i]);
+                //
+                use[i] = new CheckBox();
+                use[i].AutoSize = true;
+                use[i].Location = new Point(261, i * 21 + 23);
+                use[i].Name = "use" + i;
+                use[i].Text = "Use";
+                use[i].Tag = i;
+                use[i].Enter += new EventHandler(monster_Enter);
+                use[i].CheckedChanged += new EventHandler(use_CheckedChanged);
+                groupBox1.Controls.Add(use[i]);
+                //
+                hide[i] = new CheckBox();
+                hide[i].AutoSize = true;
+                hide[i].Location = new Point(307, i * 21 + 23);
+                hide[i].Name = "hide" + i;
+                hide[i].Text = "Hide";
+                hide[i].Tag = i;
+                hide[i].Enter += new EventHandler(monster_Enter);
+                hide[i].CheckedChanged += new EventHandler(hide_CheckedChanged);
+                groupBox1.Controls.Add(hide[i]);
+            }
+        }
+
         public void SetToolTips(ToolTip toolTip1)
         {
             // FORMATIONS
@@ -85,71 +159,6 @@ namespace LAZYSHELL
                 "formation is chosen when a battle is called through either\n" +
                 "an event script or through the property of an NPC in a\n" +
                 "level.";
-
-            toolTip1.SetToolTip(this.formationByte1,
-                "The 1st monster in the formation by #.");
-            toolTip1.SetToolTip(this.formationName1,
-                "The 1st monster in the formation by name.");
-            toolTip1.SetToolTip(this.formationCoordX1,
-                "The 1st monster's X coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationCoordY1,
-                "The 1st monster's Y coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationByte2,
-                "The 2nd monster in the formation by #.");
-            toolTip1.SetToolTip(this.formationName2,
-                "The 2nd monster in the formation by name.");
-            toolTip1.SetToolTip(this.formationCoordX2,
-                "The 2nd monster's X coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationCoordY2,
-                "The 2nd monster's Y coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationByte3,
-                "The 3rd monster in the formation by #.");
-            toolTip1.SetToolTip(this.formationName3,
-                "The 3rd monster in the formation by name.");
-            toolTip1.SetToolTip(this.formationCoordX3,
-                "The 3rd monster's X coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationCoordY3,
-                "The 3rd monster's Y coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationByte4,
-                "The 4th monster in the formation by #.");
-            toolTip1.SetToolTip(this.formationName4,
-                "The 4th monster in the formation by name.");
-            toolTip1.SetToolTip(this.formationCoordX4,
-                "The 4th monster's X coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationCoordY4,
-                "The 4th monster's Y coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationByte5,
-                "The 5th monster in the formation by #.");
-            toolTip1.SetToolTip(this.formationName5,
-                "The 5th monster in the formation by name.");
-            toolTip1.SetToolTip(this.formationCoordX5,
-                "The 5th monster's X coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationCoordY5,
-                "The 5th monster's Y coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationByte6,
-                "The 6th monster in the formation by #.");
-            toolTip1.SetToolTip(this.formationName6,
-                "The 6th monster in the formation by name.");
-            toolTip1.SetToolTip(this.formationCoordX6,
-                "The 6th monster's X coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationCoordY6,
-                "The 6th monster's Y coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationByte7,
-                "The 7th monster in the formation by #.");
-            toolTip1.SetToolTip(this.formationName7,
-                "The 7th monster in the formation by name.");
-            toolTip1.SetToolTip(this.formationCoordX7,
-                "The 7th monster's X coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationCoordY7,
-                "The 7th monster's Y coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationByte8,
-                "The 8th monster in the formation by #.");
-            toolTip1.SetToolTip(this.formationName8,
-                "The 8th monster in the formation by name.");
-            toolTip1.SetToolTip(this.formationCoordX8,
-                "The 8th monster's X coordinate in the formation.");
-            toolTip1.SetToolTip(this.formationCoordY8,
-                "The 8th monster's Y coordinate in the formation.");
 
             toolTip1.SetToolTip(this.formationBattleEvent,
                 "The battle event sequence that plays at the start of the\n" +
@@ -200,33 +209,11 @@ namespace LAZYSHELL
             this.formationNameList.Items.Clear();
             this.formationNameList.Items.AddRange(Lists.Numerize(formations));
             this.formationNameList.SelectedIndex = Index;
-            this.formationName1.Items.AddRange(Model.MonsterNames.Names);
-            this.formationName2.Items.AddRange(Model.MonsterNames.Names);
-            this.formationName3.Items.AddRange(Model.MonsterNames.Names);
-            this.formationName4.Items.AddRange(Model.MonsterNames.Names);
-            this.formationName5.Items.AddRange(Model.MonsterNames.Names);
-            this.formationName6.Items.AddRange(Model.MonsterNames.Names);
-            this.formationName7.Items.AddRange(Model.MonsterNames.Names);
-            this.formationName8.Items.AddRange(Model.MonsterNames.Names);
+            foreach (ComboBox name in names)
+                name.Items.AddRange(Model.MonsterNames.Names);
             this.battlefieldName.Items.AddRange(Lists.BattlefieldNames);
             this.formationBattleEvent.Items.AddRange(Lists.Numerize(Lists.BattleEventNames));
             this.musicTrack.Items.AddRange(Lists.MusicNames);
-            this.formationCoordX1.Tag = 0;
-            this.formationCoordX2.Tag = 1;
-            this.formationCoordX3.Tag = 2;
-            this.formationCoordX4.Tag = 3;
-            this.formationCoordX5.Tag = 4;
-            this.formationCoordX6.Tag = 5;
-            this.formationCoordX7.Tag = 6;
-            this.formationCoordX8.Tag = 7;
-            this.formationCoordY1.Tag = 0;
-            this.formationCoordY2.Tag = 1;
-            this.formationCoordY3.Tag = 2;
-            this.formationCoordY4.Tag = 3;
-            this.formationCoordY5.Tag = 4;
-            this.formationCoordY6.Tag = 5;
-            this.formationCoordY7.Tag = 6;
-            this.formationCoordY8.Tag = 7;
             updating = false;
         }
         public void RefreshFormations()
@@ -235,46 +222,21 @@ namespace LAZYSHELL
             if (updating) return;
             updating = true;
             this.formationNameList.SelectedIndex = Index;
-            this.formationByte1.Value = formation.FormationMonster[0];
-            this.formationByte2.Value = formation.FormationMonster[1];
-            this.formationByte3.Value = formation.FormationMonster[2];
-            this.formationByte4.Value = formation.FormationMonster[3];
-            this.formationByte5.Value = formation.FormationMonster[4];
-            this.formationByte6.Value = formation.FormationMonster[5];
-            this.formationByte7.Value = formation.FormationMonster[6];
-            this.formationByte8.Value = formation.FormationMonster[7];
-            this.formationName1.SelectedIndex = monsterNames.GetIndexFromNum(formation.FormationMonster[0]);
-            this.formationName2.SelectedIndex = monsterNames.GetIndexFromNum(formation.FormationMonster[1]);
-            this.formationName3.SelectedIndex = monsterNames.GetIndexFromNum(formation.FormationMonster[2]);
-            this.formationName4.SelectedIndex = monsterNames.GetIndexFromNum(formation.FormationMonster[3]);
-            this.formationName5.SelectedIndex = monsterNames.GetIndexFromNum(formation.FormationMonster[4]);
-            this.formationName6.SelectedIndex = monsterNames.GetIndexFromNum(formation.FormationMonster[5]);
-            this.formationName7.SelectedIndex = monsterNames.GetIndexFromNum(formation.FormationMonster[6]);
-            this.formationName8.SelectedIndex = monsterNames.GetIndexFromNum(formation.FormationMonster[7]);
-            this.formationCoordX1.Value = formation.FormationCoordX[0];
-            this.formationCoordX2.Value = formation.FormationCoordX[1];
-            this.formationCoordX3.Value = formation.FormationCoordX[2];
-            this.formationCoordX4.Value = formation.FormationCoordX[3];
-            this.formationCoordX5.Value = formation.FormationCoordX[4];
-            this.formationCoordX6.Value = formation.FormationCoordX[5];
-            this.formationCoordX7.Value = formation.FormationCoordX[6];
-            this.formationCoordX8.Value = formation.FormationCoordX[7];
-            this.formationCoordY1.Value = formation.FormationCoordY[0];
-            this.formationCoordY2.Value = formation.FormationCoordY[1];
-            this.formationCoordY3.Value = formation.FormationCoordY[2];
-            this.formationCoordY4.Value = formation.FormationCoordY[3];
-            this.formationCoordY5.Value = formation.FormationCoordY[4];
-            this.formationCoordY6.Value = formation.FormationCoordY[5];
-            this.formationCoordY7.Value = formation.FormationCoordY[6];
-            this.formationCoordY8.Value = formation.FormationCoordY[7];
+            for (int i = 0; i < 8; i++)
+            {
+                bytes[i].Value = formation.Monster[i];
+                names[i].SelectedIndex = monsterNames.GetIndexFromNum(formation.Monster[i]);
+                coordX[i].Value = formation.X[i];
+                coordY[i].Value = formation.Y[i];
+            }
             this.formationMusic.SelectedIndex = formation.FormationMusic;
             this.formationBattleEvent.SelectedIndex = formation.FormationBattleEvent;
             this.formationUnknown.Value = formation.FormationUnknown;
             this.formationCantRun.Checked = formation.FormationCantRun;
             for (int i = 0; i < 8; i++)
             {
-                this.use[i].Checked = formation.FormationUse[i];
-                this.hide[i].Checked = formation.FormationHide[i];
+                this.use[i].Checked = formation.Use[i];
+                this.hide[i].Checked = formation.Hide[i];
             }
             this.musicTrack.Enabled = formationMusic.SelectedIndex != 8;
             if (formationMusic.SelectedIndex != 8)
@@ -292,9 +254,9 @@ namespace LAZYSHELL
             shadowImages = new List<Bitmap>();
             for (int i = 0; i < 8; i++)
             {
-                int[] pixels = Model.Monsters[formation.FormationMonster[i]].Pixels();
+                int[] pixels = Model.Monsters[formation.Monster[i]].Pixels();
                 monsterImages.Add(Do.PixelsToImage(pixels, 256, 256));
-                pixels = Model.Monsters[formation.FormationMonster[i]].Shadow();
+                pixels = Model.Monsters[formation.Monster[i]].Shadow();
                 shadowImages.Add(Do.PixelsToImage(pixels, 16, 16));
             }
             formation.PixelIndexes = null;
@@ -340,8 +302,50 @@ namespace LAZYSHELL
                 statImages[i] = Do.PixelsToImage(pixels, 128, 24);
                 //
                 palette = Model.Sprites[Model.NPCProperties[i].Sprite].Palette;
-                pixels = Model.Sprites[i + 40].GetPixels(true, false, 0, 0, true, false);
+                pixels = Model.Sprites[i + 40].GetPixels(true, false, 0, 0, palette, true, false, ref size);
                 portraits[i] = Do.PixelsToImage(pixels, 256, 256);
+            }
+        }
+        private void MoveMonster(int a, int b)
+        {
+            byte x = formation.X[a];
+            byte y = formation.Y[a];
+            byte monster = formation.Monster[a];
+            bool use = formation.Use[a];
+            bool hide = formation.Hide[a];
+            //
+            this.coordX[a].Value = formation.X[b];
+            this.coordY[a].Value = formation.Y[b];
+            this.bytes[a].Value = formation.Monster[b];
+            this.use[a].Checked = formation.Use[b];
+            this.hide[a].Checked = formation.Hide[b];
+            //
+            this.coordX[b].Value = x;
+            this.coordY[b].Value = y;
+            this.bytes[b].Value = monster;
+            this.use[b].Checked = use;
+            this.hide[b].Checked = hide;
+            //
+            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
+        }
+        private void Drag()
+        {
+            if (overlay.Select == null)
+                return;
+            selectedObjects = new List<SelectedObject>();
+            for (int y = overlay.Select.Y; y < overlay.Select.Terminal.Y; y++)
+            {
+                for (int x = overlay.Select.X; x < overlay.Select.Terminal.X; x++)
+                {
+                    if (y < 0 || y >= 256 ||
+                        x < 0 || x >= 256)
+                        continue;
+                    int index = this.formation.PixelIndexes[y * 256 + x];
+                    if (index != -1)
+                        selectedObjects.Add(new SelectedObject(index,
+                            (int)coordX[index].Value - mousePosition.X,
+                            (int)coordY[index].Value - mousePosition.Y));
+                }
             }
         }
         #region Event Handlers
@@ -356,173 +360,93 @@ namespace LAZYSHELL
             RefreshFormations();
             Settings.Default.LastFormation = Index;
         }
-        private void formationByte1_ValueChanged(object sender, EventArgs e)
+        private void monster_Enter(object sender, EventArgs e)
+        {
+            selectedMonster = (int)((Control)sender).Tag;
+        }
+        private void moveUp_Click(object sender, EventArgs e)
+        {
+            if (selectedMonster < 0)
+            {
+                MessageBox.Show("Must select a monster property before moving.");
+                return;
+            }
+            if (selectedMonster == 0)
+                return;
+            MoveMonster(selectedMonster, selectedMonster - 1);
+            selectedMonster--;
+        }
+        private void moveDown_Click(object sender, EventArgs e)
+        {
+            if (selectedMonster < 0)
+            {
+                MessageBox.Show("Must select a monster property before moving.");
+                return;
+            }
+            if (selectedMonster == 7)
+                return;
+            MoveMonster(selectedMonster, selectedMonster + 1);
+            selectedMonster++;
+        }
+        private void bytes_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
 
-            this.formation.FormationMonster[0] = (byte)this.formationByte1.Value;
-            this.formationName1.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte1.Value);
+            int index = (int)((NumericUpDown)sender).Tag;
+            this.formation.Monster[index] = (byte)bytes[index].Value;
+            this.names[index].SelectedIndex = this.monsterNames.GetIndexFromNum((byte)bytes[index].Value);
             this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
 
             RefreshMonsterImages();
         }
-        private void formationByte2_ValueChanged(object sender, EventArgs e)
+        private void names_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
 
-            this.formation.FormationMonster[1] = (byte)this.formationByte2.Value;
-            this.formationName2.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte2.Value);
-            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
-
-            RefreshMonsterImages();
-        }
-        private void formationByte3_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationMonster[2] = (byte)this.formationByte3.Value;
-            this.formationName3.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte3.Value);
-            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
-
-            RefreshMonsterImages();
-        }
-        private void formationByte4_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationMonster[3] = (byte)this.formationByte4.Value;
-            this.formationName4.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte4.Value);
-            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
-
-            RefreshMonsterImages();
-        }
-        private void formationByte5_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationMonster[4] = (byte)this.formationByte5.Value;
-            this.formationName5.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte5.Value);
-            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
-
-            RefreshMonsterImages();
-        }
-        private void formationByte6_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationMonster[5] = (byte)this.formationByte6.Value;
-            this.formationName6.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte6.Value);
-            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
-
-            RefreshMonsterImages();
-        }
-        private void formationByte7_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationMonster[6] = (byte)this.formationByte7.Value;
-            this.formationName7.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte7.Value);
-            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
-
-            RefreshMonsterImages();
-        }
-        private void formationByte8_ValueChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formation.FormationMonster[7] = (byte)this.formationByte8.Value;
-            this.formationName8.SelectedIndex = this.monsterNames.GetIndexFromNum((byte)formationByte8.Value);
-            this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
-
-            RefreshMonsterImages();
+            int index = (int)((ComboBox)sender).Tag;
+            this.bytes[index].Value = this.monsterNames.GetNumFromIndex(this.names[index].SelectedIndex);
         }
         private void monsterName_DrawItem(object sender, DrawItemEventArgs e)
         {
             Do.DrawName(sender, e, new MenuTextPreview(), monsterNames, fontMenu, palette, true, Model.MenuBG_);
         }
-        private void formationName1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formationByte1.Value = this.monsterNames.GetNumFromIndex(this.formationName1.SelectedIndex);
-        }
-        private void formationName2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formationByte2.Value = this.monsterNames.GetNumFromIndex(this.formationName2.SelectedIndex);
-        }
-        private void formationName3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formationByte3.Value = this.monsterNames.GetNumFromIndex(this.formationName3.SelectedIndex);
-        }
-        private void formationName4_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formationByte4.Value = this.monsterNames.GetNumFromIndex(this.formationName4.SelectedIndex);
-        }
-        private void formationName5_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formationByte5.Value = this.monsterNames.GetNumFromIndex(this.formationName5.SelectedIndex);
-        }
-        private void formationName6_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formationByte6.Value = this.monsterNames.GetNumFromIndex(this.formationName6.SelectedIndex);
-        }
-        private void formationName7_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formationByte7.Value = this.monsterNames.GetNumFromIndex(this.formationName7.SelectedIndex);
-        }
-        private void formationName8_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (updating) return;
-
-            this.formationByte8.Value = this.monsterNames.GetNumFromIndex(this.formationName8.SelectedIndex);
-        }
-        private void formationCoordX_ValueChanged(object sender, EventArgs e)
+        private void coordX_ValueChanged(object sender, EventArgs e)
         {
             if (updating)
                 return;
-            NumericUpDown x = (NumericUpDown)sender;
-            this.formation.FormationCoordX[(int)x.Tag] = (byte)x.Value;
+
+            int index = (int)((NumericUpDown)sender).Tag;
+            this.formation.X[index] = (byte)coordX[index].Value;
             if (waitBothCoords)
                 return;
+            formation.PixelIndexes = null;
             pictureBoxFormation.Invalidate();
         }
-        private void formationCoordY_ValueChanged(object sender, EventArgs e)
+        private void coordY_ValueChanged(object sender, EventArgs e)
         {
             if (updating)
                 return;
-            NumericUpDown y = (NumericUpDown)sender;
-            this.formation.FormationCoordY[(int)y.Tag] = (byte)y.Value;
+
+            int index = (int)((NumericUpDown)sender).Tag;
+            this.formation.Y[index] = (byte)coordY[index].Value;
             if (waitBothCoords)
                 return;
+            formation.PixelIndexes = null;
             pictureBoxFormation.Invalidate();
         }
         //
         private void use_CheckedChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            CheckBox use = (CheckBox)sender;
-            int index = (int)use.Tag;
-            this.formation.FormationUse[index] = use.Checked;
+            int index = (int)((CheckBox)sender).Tag;
+            this.formation.Use[index] = use[index].Checked;
             pictureBoxFormation.Invalidate();
         }
         private void hide_CheckedChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            CheckBox hide = (CheckBox)sender;
-            int index = (int)hide.Tag;
-            this.formation.FormationHide[index] = hide.Checked;
+            int index = (int)((CheckBox)sender).Tag;
+            this.formation.Hide[index] = hide[index].Checked;
             pictureBoxFormation.Invalidate();
         }
         private void formationMusic_SelectedIndexChanged(object sender, EventArgs e)
@@ -567,6 +491,11 @@ namespace LAZYSHELL
         {
             pictureBoxFormation.Invalidate();
         }
+        private void select_Click(object sender, EventArgs e)
+        {
+            pictureBoxFormation.Cursor = select.Checked ? Cursors.Cross : Cursors.Arrow;
+            pictureBoxFormation.Invalidate();
+        }
         private void formationBattleEvent_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
@@ -582,28 +511,103 @@ namespace LAZYSHELL
         //
         private void pictureBoxFormation_MouseDown(object sender, MouseEventArgs e)
         {
+            mouseDownMonster = -1;
+            mouseDownPosition = new Point(-1, -1);
+            mouseDownObject = null;
+            //
             int x = e.X; int y = e.Y;
-            switch (overFM)
+            #region Selecting
+            if (select.Checked)
             {
-                case 1: diffX = (int)(x - formationCoordX1.Value); diffY = (int)(y - formationCoordY1.Value); break;
-                case 2: diffX = (int)(x - formationCoordX2.Value); diffY = (int)(y - formationCoordY2.Value); break;
-                case 3: diffX = (int)(x - formationCoordX3.Value); diffY = (int)(y - formationCoordY3.Value); break;
-                case 4: diffX = (int)(x - formationCoordX4.Value); diffY = (int)(y - formationCoordY4.Value); break;
-                case 5: diffX = (int)(x - formationCoordX5.Value); diffY = (int)(y - formationCoordY5.Value); break;
-                case 6: diffX = (int)(x - formationCoordX6.Value); diffY = (int)(y - formationCoordY6.Value); break;
-                case 7: diffX = (int)(x - formationCoordX7.Value); diffY = (int)(y - formationCoordY7.Value); break;
-                case 8: diffX = (int)(x - formationCoordX8.Value); diffY = (int)(y - formationCoordY8.Value); break;
+                // if we're not inside a current selection to move it, create a new selection
+                if (mouseOverObject != "selection")
+                {
+                    selectedObjects = null;
+                    overlay.Select = new Overlay.Selection(1, x, y, 1, 1);
+                }
+                // otherwise, start dragging current selection
+                else if (mouseOverObject == "selection")
+                {
+                    mouseDownObject = "selection";
+                    mouseDownPosition = overlay.Select.MousePosition(x, y);
+                    if (!move)    // only do this if the current selection has not been initially moved
+                    {
+                        move = true;
+                        Drag();
+                    }
+                }
+                return;
+            }
+            #endregion
+            // dragging
+            if (e.Button == MouseButtons.Left)
+            {
+                if (mouseOverMonster < 0 || mouseOverMonster > 7)
+                    return;
+                mouseDownMonster = mouseOverMonster;
+                diffX = (int)(x - coordX[mouseDownMonster].Value);
+                diffY = (int)(y - coordY[mouseDownMonster].Value);
             }
         }
         private void pictureBoxFormation_MouseMove(object sender, MouseEventArgs e)
         {
-            labelCoords.Text = "(x: " + e.X + ", y: " + e.Y + ")";
-            int x = e.X - diffX; int y = e.Y - diffY;
-            x = Math.Min(255, Math.Max(0, x));
-            y = Math.Min(255, Math.Max(0, y));
+            int x = Math.Min(255, Math.Max(0, e.X));
+            int y = Math.Min(255, Math.Max(0, e.Y));
+            labelCoords.Text = "(x: " + x + ", y: " + y + ")";
             //
+            mouseWithinSameBounds = mousePosition == new Point(x, y);
+            mousePosition = new Point(x, y);
+            mouseOverMonster = -1;
+            mouseOverObject = null;
+            //
+            #region Selecting
+            if (select.Checked)
+            {
+                // if making a new selection
+                if (e.Button == MouseButtons.Left && mouseDownObject == null && overlay.Select != null)
+                {
+                    // cancel if within same bounds as last call
+                    if (overlay.Select.Final == new Point(x, y))
+                        return;
+                    // otherwise, set the lower right edge of the selection
+                    overlay.Select.Final = new Point(
+                        Math.Min(x, 256),
+                        Math.Min(y, 256));
+                }
+                // if dragging the current selection
+                else if (e.Button == MouseButtons.Left && mouseDownObject == "selection" && !mouseWithinSameBounds)
+                {
+                    overlay.Select.Location = new Point(
+                        x - mouseDownPosition.X,
+                        y - mouseDownPosition.Y);
+                    foreach (SelectedObject selectedObject in selectedObjects)
+                    {
+                        int index = selectedObject.Index;
+                        coordX[index].Value = (byte)(x + selectedObject.DiffX);
+                        coordY[index].Value = (byte)(y + selectedObject.DiffY);
+                    }
+                    pictureBoxFormation.Invalidate();
+                    return;
+                }
+                // if mouse not clicked and within the current selection
+                else if (e.Button == MouseButtons.None && overlay.Select != null && overlay.Select.MouseWithin(x, y))
+                {
+                    mouseOverObject = "selection";
+                    pictureBoxFormation.Cursor = Cursors.SizeAll;
+                }
+                else
+                    pictureBoxFormation.Cursor = Cursors.Cross;
+                pictureBoxFormation.Invalidate();
+                return;
+            }
+            #endregion
+            #region Dragging
             if (e.Button == MouseButtons.Left)
             {
+                x = e.X - diffX;
+                y = e.Y - diffY;
+                x = Math.Min(255, Math.Max(0, x));
+                y = Math.Min(255, Math.Max(0, y));
                 if (snapIsometricLeft.Checked && snapIsometricRight.Checked)
                 {
                     x = x / 16 * 16;
@@ -661,48 +665,14 @@ namespace LAZYSHELL
                 x = Math.Min(255, Math.Max(0, x));
                 y = Math.Min(255, Math.Max(0, y));
                 //
-                switch (overFM)
+                if (mouseDownMonster >= 0 && mouseDownMonster <= 7)
                 {
-                    case 1:
-                        if (formationCoordX1.Value != x && formationCoordY1.Value != y) waitBothCoords = true;
-                        formationCoordX1.Value = x;
-                        waitBothCoords = false;
-                        formationCoordY1.Value = y; break;
-                    case 2:
-                        if (formationCoordX2.Value != x && formationCoordY2.Value != y) waitBothCoords = true;
-                        formationCoordX2.Value = x;
-                        waitBothCoords = false;
-                        formationCoordY2.Value = y; break;
-                    case 3:
-                        if (formationCoordX3.Value != x && formationCoordY3.Value != y) waitBothCoords = true;
-                        formationCoordX3.Value = x;
-                        waitBothCoords = false;
-                        formationCoordY3.Value = y; break;
-                    case 4:
-                        if (formationCoordX4.Value != x && formationCoordY4.Value != y) waitBothCoords = true;
-                        formationCoordX4.Value = x;
-                        waitBothCoords = false;
-                        formationCoordY4.Value = y; break;
-                    case 5:
-                        if (formationCoordX5.Value != x && formationCoordY5.Value != y) waitBothCoords = true;
-                        formationCoordX5.Value = x;
-                        waitBothCoords = false;
-                        formationCoordY5.Value = y; break;
-                    case 6:
-                        if (formationCoordX6.Value != x && formationCoordY6.Value != y) waitBothCoords = true;
-                        formationCoordX6.Value = x;
-                        waitBothCoords = false;
-                        formationCoordY6.Value = y; break;
-                    case 7:
-                        if (formationCoordX7.Value != x && formationCoordY7.Value != y) waitBothCoords = true;
-                        formationCoordX7.Value = x;
-                        waitBothCoords = false;
-                        formationCoordY7.Value = y; break;
-                    case 8:
-                        if (formationCoordX8.Value != x && formationCoordY8.Value != y) waitBothCoords = true;
-                        formationCoordX8.Value = x;
-                        waitBothCoords = false;
-                        formationCoordY8.Value = y; break;
+                    if (coordX[mouseDownMonster].Value != x &&
+                        coordY[mouseDownMonster].Value != y)
+                        waitBothCoords = true;
+                    coordX[mouseDownMonster].Value = x;
+                    waitBothCoords = false;
+                    coordY[mouseDownMonster].Value = y;
                 }
             }
             else
@@ -710,22 +680,26 @@ namespace LAZYSHELL
                 for (int i = 0; i < 8; i++)
                 {
                     if (e.X > 0 && e.X < 256 && e.Y > 0 && e.Y < 256 &&
-                        this.formation.PixelIndexes[e.Y * 256 + e.X] == (int)(i + 1))
+                        this.formation.PixelIndexes[e.Y * 256 + e.X] == i)
                     {
                         pictureBoxFormation.Cursor = Cursors.Hand;
-                        overFM = i + 1;
+                        mouseOverMonster = i;
                         break;
                     }
                     else
                     {
                         pictureBoxFormation.Cursor = Cursors.Arrow;
-                        overFM = 0;
+                        mouseOverMonster = -1;
                     }
                 }
             }
+            #endregion
         }
         private void pictureBoxFormation_MouseUp(object sender, MouseEventArgs e)
         {
+            move = false;
+            mouseDownPosition = new Point(-1, -1);
+            mouseDownObject = null;
             formation.PixelIndexes = null;
             pictureBoxFormation.Invalidate();
         }
@@ -738,20 +712,20 @@ namespace LAZYSHELL
             byte[] items = new byte[8];
             for (byte i = 0; i < 8; i++)
                 items[i] = i;
-            byte[] keys = Bits.Copy(formation.FormationCoordY);
+            byte[] keys = Bits.Copy(formation.Y);
             Array.Sort(keys, items);
             for (int a = 0; a < 8; a++)
             {
                 int i = items[a];
-                if (!formation.FormationUse[i]) continue;
-                int elevation = monsters[formation.FormationMonster[i]].Elevation * 16;
-                int x = formation.FormationCoordX[i] - 8;
-                int y = formation.FormationCoordY[i] + 14;
+                if (!formation.Use[i]) continue;
+                int elevation = monsters[formation.Monster[i]].Elevation * 16;
+                int x = formation.X[i] - 8;
+                int y = formation.Y[i] + 14;
                 if (elevation > 0)
                     e.Graphics.DrawImage(shadowImages[i], x, y);
                 //
-                x = formation.FormationCoordX[i] - 128;
-                y = formation.FormationCoordY[i] - 96 - elevation - 1;
+                x = formation.X[i] - 128;
+                y = formation.Y[i] - 96 - elevation - 1;
                 e.Graphics.DrawImage(monsterImages[i], x, y);
             }
             if (toggleAllies.Checked)
@@ -770,7 +744,35 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(portraits[2], 44 - 128, 58 - 96 - 1);
                 e.Graphics.DrawImage(portraits[3], 68 - 128, 34 - 96 - 1);
             }
+            if (select.Checked && overlay.Select != null)
+            {
+                if (isometricGrid.Checked || snapIsometricLeft.Checked || snapIsometricRight.Checked)
+                    overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, 1, Color.Yellow);
+                else
+                    overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, 1);
+            }
         }
         #endregion
+        private class SelectedObject
+        {
+            /// <summary>
+            ///  The X difference from where mouse was clicked
+            /// </summary>
+            public int DiffX;
+            /// <summary>
+            ///  The Y difference from where mouse was clicked
+            /// </summary>
+            public int DiffY;
+            /// <summary>
+            ///  The index of the selected object
+            /// </summary>
+            public int Index;
+            public SelectedObject(int index, int diffX, int diffY)
+            {
+                this.Index = index;
+                this.DiffX = diffX;
+                this.DiffY = diffY;
+            }
+        }
     }
 }

@@ -118,6 +118,25 @@ namespace LAZYSHELL
             }
             return ret;
         }
+        public static byte[] GetByteArray(byte[] data, int offset)
+        {
+            byte[] toGet = new byte[data.Length - offset];
+
+            try
+            {
+                for (int i = 0; i < data.Length && i < toGet.Length; i++)
+                {
+                    toGet[i] = data[offset + i];
+                }
+                return toGet;
+            }
+
+            catch
+            {
+                MessageBox.Show("Error Getting byte[] at " + offset + "\ndata size: " + data.Length + "\nsubarray size: " + toGet.Length + "\nPlease report this", "LAZY SHELL");
+                throw new Exception();
+            }
+        }
         public static byte[] GetByteArray(byte[] data, int offset, int size)
         {
             byte[] toGet = new byte[size];

@@ -74,7 +74,7 @@
             this.richTextBox.Location = new System.Drawing.Point(0, 25);
             this.richTextBox.Name = "richTextBox";
             this.richTextBox.Size = new System.Drawing.Size(507, 447);
-            this.richTextBox.TabIndex = 2;
+            this.richTextBox.TabIndex = 1;
             this.richTextBox.Text = "";
             this.richTextBox.Visible = false;
             this.richTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Search_KeyDown);
@@ -93,7 +93,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(507, 25);
-            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // matchCase

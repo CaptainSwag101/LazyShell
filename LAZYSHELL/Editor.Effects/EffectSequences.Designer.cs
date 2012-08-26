@@ -128,7 +128,7 @@
             this.panelSequence.Location = new System.Drawing.Point(78, 50);
             this.panelSequence.Name = "panelSequence";
             this.panelSequence.Size = new System.Drawing.Size(308, 287);
-            this.panelSequence.TabIndex = 441;
+            this.panelSequence.TabIndex = 4;
             this.panelSequence.SizeChanged += new System.EventHandler(this.panelSequence_SizeChanged);
             // 
             // toolStrip1
@@ -149,7 +149,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(308, 25);
-            this.toolStrip1.TabIndex = 397;
+            this.toolStrip1.TabIndex = 2;
             // 
             // toolStripLabel2
             // 
@@ -231,7 +231,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(386, 25);
-            this.toolStrip2.TabIndex = 442;
+            this.toolStrip2.TabIndex = 0;
             // 
             // newFrame
             // 
@@ -307,7 +307,7 @@
             this.frames.Location = new System.Drawing.Point(0, 0);
             this.frames.Name = "frames";
             this.frames.Size = new System.Drawing.Size(104, 104);
-            this.frames.TabIndex = 443;
+            this.frames.TabIndex = 0;
             // 
             // PlaybackSequence
             // 
@@ -325,7 +325,7 @@
             this.listBoxFrames.Location = new System.Drawing.Point(0, 25);
             this.listBoxFrames.Name = "listBoxFrames";
             this.listBoxFrames.Size = new System.Drawing.Size(78, 312);
-            this.listBoxFrames.TabIndex = 444;
+            this.listBoxFrames.TabIndex = 1;
             this.listBoxFrames.SelectedIndexChanged += new System.EventHandler(this.listBoxFrames_SelectedIndexChanged);
             // 
             // panelFrames
@@ -337,7 +337,7 @@
             this.panelFrames.Location = new System.Drawing.Point(78, 50);
             this.panelFrames.Name = "panelFrames";
             this.panelFrames.Size = new System.Drawing.Size(308, 287);
-            this.panelFrames.TabIndex = 0;
+            this.panelFrames.TabIndex = 3;
             this.panelFrames.SizeChanged += new System.EventHandler(this.panelFrames_SizeChanged);
             // 
             // EffectSequences

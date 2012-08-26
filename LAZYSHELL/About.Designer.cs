@@ -48,8 +48,8 @@ namespace LAZYSHELL
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(469, 324);
-            this.panel1.TabIndex = 311;
+            this.panel1.Size = new System.Drawing.Size(469, 332);
+            this.panel1.TabIndex = 0;
             // 
             // panel2
             // 
@@ -60,8 +60,8 @@ namespace LAZYSHELL
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 56);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(465, 264);
-            this.panel2.TabIndex = 315;
+            this.panel2.Size = new System.Drawing.Size(465, 272);
+            this.panel2.TabIndex = 0;
             // 
             // richTextBox1
             // 
@@ -72,8 +72,8 @@ namespace LAZYSHELL
             this.richTextBox1.Location = new System.Drawing.Point(65, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(394, 252);
-            this.richTextBox1.TabIndex = 316;
+            this.richTextBox1.Size = new System.Drawing.Size(394, 260);
+            this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
             // 
@@ -94,10 +94,10 @@ namespace LAZYSHELL
             this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(0, 324);
+            this.button1.Location = new System.Drawing.Point(0, 332);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(469, 23);
-            this.button1.TabIndex = 316;
+            this.button1.TabIndex = 1;
             this.button1.Text = "CLOSE WINDOW";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -106,7 +106,7 @@ namespace LAZYSHELL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 347);
+            this.ClientSize = new System.Drawing.Size(469, 355);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

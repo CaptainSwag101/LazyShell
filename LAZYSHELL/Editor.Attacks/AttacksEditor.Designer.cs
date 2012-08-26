@@ -66,7 +66,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(626, 509);
-            this.panel1.TabIndex = 0;
+            this.panel1.TabIndex = 1;
             // 
             // saveShortcut
             // 
@@ -96,7 +96,7 @@
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(626, 25);
-            this.toolStrip3.TabIndex = 447;
+            this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // save
@@ -191,7 +191,7 @@
             this.resetSpellToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetSpellToolStripMenuItem.Image")));
             this.resetSpellToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetSpellToolStripMenuItem.Name = "resetSpellToolStripMenuItem";
-            this.resetSpellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetSpellToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.resetSpellToolStripMenuItem.Text = "Reset spell";
             this.resetSpellToolStripMenuItem.Click += new System.EventHandler(this.resetSpellToolStripMenuItem_Click);
             // 
@@ -200,7 +200,7 @@
             this.resetAttackToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetAttackToolStripMenuItem.Image")));
             this.resetAttackToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetAttackToolStripMenuItem.Name = "resetAttackToolStripMenuItem";
-            this.resetAttackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetAttackToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.resetAttackToolStripMenuItem.Text = "Reset attack";
             this.resetAttackToolStripMenuItem.Click += new System.EventHandler(this.resetAttackToolStripMenuItem_Click);
             // 
@@ -221,7 +221,7 @@
             this.clearSpellsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearSpellsToolStripMenuItem.Image")));
             this.clearSpellsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearSpellsToolStripMenuItem.Name = "clearSpellsToolStripMenuItem";
-            this.clearSpellsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearSpellsToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.clearSpellsToolStripMenuItem.Text = "Clear Spells...";
             this.clearSpellsToolStripMenuItem.Click += new System.EventHandler(this.clearSpellsToolStripMenuItem_Click);
             // 
@@ -230,7 +230,7 @@
             this.clearAttacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearAttacksToolStripMenuItem.Image")));
             this.clearAttacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearAttacksToolStripMenuItem.Name = "clearAttacksToolStripMenuItem";
-            this.clearAttacksToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearAttacksToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.clearAttacksToolStripMenuItem.Text = "Clear Attacks...";
             this.clearAttacksToolStripMenuItem.Click += new System.EventHandler(this.clearAttacksToolStripMenuItem_Click);
             // 

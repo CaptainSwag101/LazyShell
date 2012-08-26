@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
@@ -28,7 +29,7 @@ namespace LAZYSHELL
         {
             get
             {
-                if (battleDlgType.SelectedIndex == 0)
+                if (type == 0)
                     return Model.BattleDialogues;
                 else
                     return Model.BattleMessages;
@@ -38,14 +39,14 @@ namespace LAZYSHELL
         {
             get
             {
-                if (battleDlgType.SelectedIndex == 0)
+                if (type == 0)
                     return Model.BattleDialogues[index];
                 else
                     return Model.BattleMessages[index];
             }
             set
             {
-                if (battleDlgType.SelectedIndex == 0)
+                if (type == 0)
                     Model.BattleDialogues[index] = value;
                 else
                     Model.BattleMessages[index] = value;
@@ -59,6 +60,7 @@ namespace LAZYSHELL
         private int index { get { return (int)battleDialogueNum.Value; } set { battleDialogueNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
         private int mouseDownTile = 0;
+        private int type { get { return battleDlgType.SelectedIndex; } set { battleDlgType.SelectedIndex = value; } }
         // editors
         private TileEditor tileEditor;
         public GraphicEditor graphicEditor;
@@ -81,7 +83,7 @@ namespace LAZYSHELL
             LoadTileEditor();
             // controls
             updating = true;
-            battleDlgType.SelectedIndex = 0;
+            type = 0;
             search = new Search(battleDialogueNum, searchBox, searchButton, dialogues);
             RefreshBattleDialogue();
             updating = false;
@@ -118,7 +120,7 @@ namespace LAZYSHELL
         {
             updating = true;
             this.index = (int)this.battleDialogueNum.Value;
-            if (battleDlgType.SelectedIndex == 0)
+            if (type == 0)
             {
                 this.battleDialogueTextBox.Text = Model.BattleDialogues[index].GetText(byteView);
                 this.battleDialogueTextBox.SelectionStart = Model.BattleDialogues[index].GetCaretPosition(byteView);
@@ -195,7 +197,7 @@ namespace LAZYSHELL
         private void CalculateFreeSpace()
         {
             int used = 0; int size;
-            if (battleDlgType.SelectedIndex == 0)
+            if (type == 0)
             {
                 size = (0x92d1 - 0x6754) + (0x2aa9 - 0x260a) + (0xbfff - 0xbc58);/*(0xffff - 0xf400) USED FOR BATTLE SCRIPTS NOW*/
                 for (int i = 0; i < Model.BattleDialogues.Length - 1; i++)
@@ -246,7 +248,7 @@ namespace LAZYSHELL
             toInsert.CopyTo(0, newText, battleDialogueTextBox.SelectionStart, toInsert.Length);
             battleDialogueTextBox.Text.CopyTo(battleDialogueTextBox.SelectionStart, newText, battleDialogueTextBox.SelectionStart + toInsert.Length, this.battleDialogueTextBox.Text.Length - this.battleDialogueTextBox.SelectionStart);
 
-            if (battleDlgType.SelectedIndex == 0)
+            if (type == 0)
             {
                 Model.BattleDialogues[index].SetCaretPosition(this.battleDialogueTextBox.SelectionStart + toInsert.Length, byteView);
                 Model.BattleDialogues[index].SetText(new string(newText), byteView);
@@ -285,6 +287,10 @@ namespace LAZYSHELL
             }
             else
                 MessageBox.Show("Battle Message exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
+            //
+            int offset = 0xF975;
+            for (i = 0; i < Model.BonusMessages.Length; i++)
+                Model.BonusMessages[i].Assemble(ref offset);
         }
         // editors
         public void LoadPaletteEditor()
@@ -366,8 +372,16 @@ namespace LAZYSHELL
         private void battleDialogueNum_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            textPreview.Reset();
-            RefreshBattleDialogue();
+            if (type < 2)
+            {
+                textPreview.Reset();
+                RefreshBattleDialogue();
+            }
+            else
+            {
+                bonusTextBox.Text = Model.BonusMessages[index].Text;
+                bonusPreview.Invalidate();
+            }
         }
         private void battleDialogueTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -384,12 +398,50 @@ namespace LAZYSHELL
             if (updating) return;
             updating = true;
             index = 0;
-            battleDialogueNum.Maximum = battleDlgType.SelectedIndex == 0 ? 255 : 45;
-            search.Names = dialogues;
-            search.LoadSearch();
+            if (type == 0)
+                battleDialogueNum.Maximum = 255;
+            else if (type == 1)
+                battleDialogueNum.Maximum = 45;
+            else
+                battleDialogueNum.Maximum = 6;
+            panel1.Visible = type < 2;
+            searchBox.Visible = type < 2;
+            if (type == 2 && searchButton.Checked)
+                searchButton.PerformClick();
+            searchButton.Visible = type < 2;
+            bonusTextBox.Visible = type == 2;
+            bonusPreview.Visible = type == 2;
             updating = false;
-            textPreview.Reset();
-            RefreshBattleDialogue();
+            if (type < 2)
+            {
+                search.Names = dialogues;
+                search.LoadSearch();
+                textPreview.Reset();
+                RefreshBattleDialogue();
+            }
+            else
+            {
+                bonusTextBox.Text = Model.BonusMessages[index].Text;
+            }
+        }
+        private void bonusTextBox_TextChanged(object sender, EventArgs e)
+        {
+            Model.BonusMessages[index].Text = bonusTextBox.Text;
+        }
+        private void bonusPreview_Paint(object sender, PaintEventArgs e)
+        {
+            int x = 0;
+            string text = Model.BonusMessages[this.index].Text;
+            int[] table = Model.Sprites[520].GetTilesetPixels();
+            foreach (char letter in text)
+            {
+                int index = Settings.Default.KeystrokesBonus.IndexOf(letter.ToString());
+                if (index < 0 || index > 31)
+                    continue;
+                int[] pixels = Do.GetPixelRegion(table, 128, 16, 8, 8, index % 16 * 8, index / 16 * 8);
+                e.Graphics.DrawImage(Do.PixelsToImage(pixels, 8, 8), x * 8, 0);
+                x++;
+            }
         }
         private void pictureBoxBattleDialogue_Paint(object sender, PaintEventArgs e)
         {
@@ -418,7 +470,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current battle dialogue. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            if (battleDlgType.SelectedIndex == 0)
+            if (type == 0)
                 dialogue = new BattleDialogue(Model.Data, index, 0x396554, 0x390000);
             else
                 dialogue = new BattleDialogue(Model.Data, index, 0x3A26F1, 0x3A0000);
@@ -506,5 +558,33 @@ namespace LAZYSHELL
             ((Form)sender).Hide();
         }
         #endregion
+    }
+    [Serializable()]
+    public class BonusMessage
+    {
+        public string Text;
+        public int Index;
+        public BonusMessage(int index)
+        {
+            this.Index = index;
+            int offset = 0x020000 + Bits.GetShort(Model.Data, index * 2 + 0x02F967);
+            int length = Model.Data[offset++];
+            this.Text = "";
+            for (int i = 0; i < length; i++)
+                this.Text += Settings.Default.KeystrokesBonus[Model.Data[offset++]];
+        }
+        public void Assemble(ref int offset)
+        {
+            Bits.SetShort(Model.Data, Index * 2 + 0x02F967, offset);
+            Model.Data[0x020000 + offset++] = (byte)Text.Length;
+            foreach (char letter in Text)
+            {
+                int index = Settings.Default.KeystrokesBonus.IndexOf(letter.ToString());
+                if (index >= 0 || index <= 31)
+                    Model.Data[0x020000 + offset++] = (byte)index;
+                else
+                    Model.Data[0x020000 + offset++] = 0x1F;
+            }
+        }
     }
 }

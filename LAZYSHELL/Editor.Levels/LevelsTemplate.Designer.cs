@@ -69,7 +69,7 @@
             this.templateExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.templateExport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.templateExport.Name = "templateExport";
-            this.templateExport.Size = new System.Drawing.Size(47, 22);
+            this.templateExport.Size = new System.Drawing.Size(49, 22);
             this.templateExport.Text = "Save";
             this.templateExport.ToolTipText = "Save template(s)";
             this.templateExport.Click += new System.EventHandler(this.templateExport_Click);
@@ -114,8 +114,8 @@
             this.templatesLoaded.FormattingEnabled = true;
             this.templatesLoaded.Location = new System.Drawing.Point(0, 25);
             this.templatesLoaded.Name = "templatesLoaded";
-            this.templatesLoaded.Size = new System.Drawing.Size(274, 147);
-            this.templatesLoaded.TabIndex = 501;
+            this.templatesLoaded.Size = new System.Drawing.Size(270, 147);
+            this.templatesLoaded.TabIndex = 1;
             this.templatesLoaded.SelectedIndexChanged += new System.EventHandler(this.templatesLoaded_SelectedIndexChanged);
             // 
             // panel114
@@ -127,8 +127,8 @@
             this.panel114.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel114.Location = new System.Drawing.Point(0, 197);
             this.panel114.Name = "panel114";
-            this.panel114.Size = new System.Drawing.Size(274, 366);
-            this.panel114.TabIndex = 498;
+            this.panel114.Size = new System.Drawing.Size(270, 362);
+            this.panel114.TabIndex = 3;
             // 
             // pictureBoxTemplate
             // 
@@ -153,8 +153,8 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(274, 25);
-            this.toolStrip3.TabIndex = 503;
+            this.toolStrip3.Size = new System.Drawing.Size(270, 25);
+            this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // templateTransfer
@@ -191,8 +191,8 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 172);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(274, 25);
-            this.toolStrip1.TabIndex = 504;
+            this.toolStrip1.Size = new System.Drawing.Size(270, 25);
+            this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // templateRename
@@ -211,7 +211,6 @@
             // 
             // templateRenameText
             // 
-            this.templateRenameText.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.templateRenameText.Name = "templateRenameText";
             this.templateRenameText.Size = new System.Drawing.Size(150, 25);
             this.templateRenameText.TextChanged += new System.EventHandler(this.templateRenameText_TextChanged);
@@ -225,7 +224,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 563);
+            this.ClientSize = new System.Drawing.Size(270, 559);
             this.ControlBox = false;
             this.Controls.Add(this.panel114);
             this.Controls.Add(this.toolStrip1);

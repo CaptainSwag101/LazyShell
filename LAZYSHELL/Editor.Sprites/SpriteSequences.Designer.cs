@@ -57,6 +57,8 @@
             this.infinitePlayback = new LAZYSHELL.ToolStripCheckBox();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.newFrame = new System.Windows.Forms.ToolStripButton();
+            this.copy = new System.Windows.Forms.ToolStripButton();
+            this.paste = new System.Windows.Forms.ToolStripButton();
             this.deleteFrame = new System.Windows.Forms.ToolStripButton();
             this.duplicateFrame = new System.Windows.Forms.ToolStripButton();
             this.reverseFrames = new System.Windows.Forms.ToolStripButton();
@@ -151,7 +153,7 @@
             this.frames.Location = new System.Drawing.Point(0, 0);
             this.frames.Name = "frames";
             this.frames.Size = new System.Drawing.Size(264, 264);
-            this.frames.TabIndex = 18;
+            this.frames.TabIndex = 0;
             // 
             // sequences
             // 
@@ -161,7 +163,7 @@
             this.sequences.Location = new System.Drawing.Point(0, 25);
             this.sequences.Name = "sequences";
             this.sequences.Size = new System.Drawing.Size(78, 334);
-            this.sequences.TabIndex = 19;
+            this.sequences.TabIndex = 1;
             this.sequences.SelectedIndexChanged += new System.EventHandler(this.sequences_SelectedIndexChanged);
             // 
             // toolStrip2
@@ -181,7 +183,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(668, 25);
-            this.toolStrip2.TabIndex = 443;
+            this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // newSequence
@@ -274,7 +276,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(512, 25);
-            this.toolStrip1.TabIndex = 444;
+            this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripLabel2
@@ -360,6 +362,8 @@
             this.toolStrip3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newFrame,
+            this.copy,
+            this.paste,
             this.deleteFrame,
             this.duplicateFrame,
             this.reverseFrames,
@@ -370,7 +374,7 @@
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(590, 25);
-            this.toolStrip3.TabIndex = 445;
+            this.toolStrip3.TabIndex = 2;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // newFrame
@@ -383,6 +387,26 @@
             this.newFrame.ToolTipText = "New Frame";
             this.newFrame.Click += new System.EventHandler(this.newFrame_Click);
             // 
+            // copy
+            // 
+            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.copy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.copy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.copy.Name = "copy";
+            this.copy.Size = new System.Drawing.Size(23, 22);
+            this.copy.ToolTipText = "Copy Frame(s)";
+            this.copy.Click += new System.EventHandler(this.copy_Click);
+            // 
+            // paste
+            // 
+            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.paste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.paste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.paste.Name = "paste";
+            this.paste.Size = new System.Drawing.Size(23, 22);
+            this.paste.ToolTipText = "Paste Frame(s)";
+            this.paste.Click += new System.EventHandler(this.paste_Click);
+            // 
             // deleteFrame
             // 
             this.deleteFrame.Image = global::LAZYSHELL.Properties.Resources.delete_small;
@@ -390,7 +414,7 @@
             this.deleteFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteFrame.Name = "deleteFrame";
             this.deleteFrame.Size = new System.Drawing.Size(23, 22);
-            this.deleteFrame.ToolTipText = "Delete Frame";
+            this.deleteFrame.ToolTipText = "Delete Frame(s)";
             this.deleteFrame.Click += new System.EventHandler(this.deleteFrame_Click);
             // 
             // duplicateFrame
@@ -456,8 +480,9 @@
             this.listBoxFrames.IntegralHeight = false;
             this.listBoxFrames.Location = new System.Drawing.Point(78, 50);
             this.listBoxFrames.Name = "listBoxFrames";
+            this.listBoxFrames.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxFrames.Size = new System.Drawing.Size(78, 309);
-            this.listBoxFrames.TabIndex = 446;
+            this.listBoxFrames.TabIndex = 3;
             this.listBoxFrames.SelectedIndexChanged += new System.EventHandler(this.listBoxFrames_SelectedIndexChanged);
             // 
             // panelFrames
@@ -469,7 +494,7 @@
             this.panelFrames.Location = new System.Drawing.Point(156, 75);
             this.panelFrames.Name = "panelFrames";
             this.panelFrames.Size = new System.Drawing.Size(512, 284);
-            this.panelFrames.TabIndex = 447;
+            this.panelFrames.TabIndex = 5;
             this.panelFrames.SizeChanged += new System.EventHandler(this.panelFrames_SizeChanged);
             // 
             // SpriteSequences
@@ -541,5 +566,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private ToolStripCheckBox sequenceActive;
         private System.Windows.Forms.ToolStripButton newSequence;
+        private System.Windows.Forms.ToolStripButton copy;
+        private System.Windows.Forms.ToolStripButton paste;
     }
 }

@@ -56,7 +56,7 @@
             this.oneImageDefault.Checked = true;
             this.oneImageDefault.Location = new System.Drawing.Point(11, 26);
             this.oneImageDefault.Name = "oneImageDefault";
-            this.oneImageDefault.Size = new System.Drawing.Size(351, 17);
+            this.oneImageDefault.Size = new System.Drawing.Size(342, 17);
             this.oneImageDefault.TabIndex = 0;
             this.oneImageDefault.TabStop = true;
             this.oneImageDefault.Text = "One image per mold, default size (all tilemap molds will be 256x256!)";
@@ -67,8 +67,8 @@
             this.oneSpriteSheet.AutoSize = true;
             this.oneSpriteSheet.Location = new System.Drawing.Point(11, 60);
             this.oneSpriteSheet.Name = "oneSpriteSheet";
-            this.oneSpriteSheet.Size = new System.Drawing.Size(331, 17);
-            this.oneSpriteSheet.TabIndex = 1;
+            this.oneSpriteSheet.Size = new System.Drawing.Size(322, 17);
+            this.oneSpriteSheet.TabIndex = 2;
             this.oneSpriteSheet.Text = "One sprite sheet image per sprite, molds cropped to pixel edges";
             this.oneSpriteSheet.UseVisualStyleBackColor = true;
             this.oneSpriteSheet.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
@@ -78,8 +78,8 @@
             this.oneImageCropped.AutoSize = true;
             this.oneImageCropped.Location = new System.Drawing.Point(11, 43);
             this.oneImageCropped.Name = "oneImageCropped";
-            this.oneImageCropped.Size = new System.Drawing.Size(236, 17);
-            this.oneImageCropped.TabIndex = 2;
+            this.oneImageCropped.Size = new System.Drawing.Size(232, 17);
+            this.oneImageCropped.TabIndex = 1;
             this.oneImageCropped.Text = "One image per mold, cropped to pixel edges";
             this.oneImageCropped.UseVisualStyleBackColor = true;
             // 
@@ -88,7 +88,7 @@
             this.ok_button.Location = new System.Drawing.Point(226, 205);
             this.ok_button.Name = "ok_button";
             this.ok_button.Size = new System.Drawing.Size(75, 23);
-            this.ok_button.TabIndex = 3;
+            this.ok_button.TabIndex = 7;
             this.ok_button.Text = "OK";
             this.ok_button.UseVisualStyleBackColor = true;
             this.ok_button.Click += new System.EventHandler(this.ok_button_Click);
@@ -98,7 +98,7 @@
             this.cancel_button.Location = new System.Drawing.Point(307, 205);
             this.cancel_button.Name = "cancel_button";
             this.cancel_button.Size = new System.Drawing.Size(75, 23);
-            this.cancel_button.TabIndex = 4;
+            this.cancel_button.TabIndex = 8;
             this.cancel_button.Text = "Cancel";
             this.cancel_button.UseVisualStyleBackColor = true;
             this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
@@ -124,7 +124,7 @@
             0});
             this.maximumWidth.Name = "maximumWidth";
             this.maximumWidth.Size = new System.Drawing.Size(62, 21);
-            this.maximumWidth.TabIndex = 6;
+            this.maximumWidth.TabIndex = 4;
             this.maximumWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.maximumWidth.Value = new decimal(new int[] {
             512,
@@ -138,7 +138,7 @@
             this.label2.Location = new System.Drawing.Point(28, 87);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(140, 13);
-            this.label2.TabIndex = 8;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Maximum sprite sheet width";
             // 
             // groupBox1
@@ -151,7 +151,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 85);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(370, 114);
-            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "How would you like to export all images?";
             // 
@@ -161,7 +161,7 @@
             this.range.Location = new System.Drawing.Point(12, 29);
             this.range.Name = "range";
             this.range.Size = new System.Drawing.Size(269, 17);
-            this.range.TabIndex = 15;
+            this.range.TabIndex = 1;
             this.range.TabStop = true;
             this.range.Text = "Export sprite mold images within sprite index range";
             this.range.UseVisualStyleBackColor = true;
@@ -174,7 +174,7 @@
             this.current.Location = new System.Drawing.Point(12, 12);
             this.current.Name = "current";
             this.current.Size = new System.Drawing.Size(186, 17);
-            this.current.TabIndex = 14;
+            this.current.TabIndex = 0;
             this.current.TabStop = true;
             this.current.Text = "Export current sprite mold images";
             this.current.UseVisualStyleBackColor = true;
@@ -185,7 +185,7 @@
             this.label3.Location = new System.Drawing.Point(133, 54);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 13);
-            this.label3.TabIndex = 13;
+            this.label3.TabIndex = 4;
             this.label3.Text = "to";
             // 
             // label4
@@ -194,7 +194,7 @@
             this.label4.Location = new System.Drawing.Point(12, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
-            this.label4.TabIndex = 12;
+            this.label4.TabIndex = 2;
             this.label4.Text = "From";
             // 
             // toIndex
@@ -208,7 +208,7 @@
             0});
             this.toIndex.Name = "toIndex";
             this.toIndex.Size = new System.Drawing.Size(80, 21);
-            this.toIndex.TabIndex = 11;
+            this.toIndex.TabIndex = 5;
             this.toIndex.Value = new decimal(new int[] {
             1023,
             0,
@@ -219,10 +219,14 @@
             // 
             this.fromIndex.Enabled = false;
             this.fromIndex.Location = new System.Drawing.Point(48, 52);
-            this.fromIndex.Maximum = 1023;
+            this.fromIndex.Maximum = new decimal(new int[] {
+            1023,
+            0,
+            0,
+            0});
             this.fromIndex.Name = "fromIndex";
             this.fromIndex.Size = new System.Drawing.Size(79, 21);
-            this.fromIndex.TabIndex = 10;
+            this.fromIndex.TabIndex = 3;
             // 
             // ExportImages
             // 

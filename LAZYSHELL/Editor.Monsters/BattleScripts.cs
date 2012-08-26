@@ -38,7 +38,7 @@ namespace LAZYSHELL
         private ArrayList copiedCmds;
         private TreeNode selectedNode;
         private TreeNode editedBatNode;
-        Previewer.Previewer bp;
+        Previewer bp;
         //
         private Monster[] monsters { get { return Model.Monsters; } set { Model.Monsters = value; } }
         private Monster monster { get { return monsters[index]; } set { monsters[index] = value; } }
@@ -83,6 +83,7 @@ namespace LAZYSHELL
             this.monsterTargetArrowY.Value = monster.CursorY;
             monsterImage = new Bitmap(monster.Image);
             pictureBoxMonster.Invalidate();
+            //
             Cursor.Current = Cursors.Arrow;
         }
         public void RefreshBattleScriptsEditor()
@@ -2242,9 +2243,9 @@ namespace LAZYSHELL
         private void battlePreview_Click(object sender, EventArgs e)
         {
             if (bp == null || !bp.Visible)
-                bp = new Previewer.Previewer(index, 3);
+                bp = new Previewer(index, PreviewType.Battle);
             else
-                bp.Reload(index, 3);
+                bp.Reload(index, PreviewType.Battle);
             bp.Show();
             bp.BringToFront();
         }

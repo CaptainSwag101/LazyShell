@@ -33,11 +33,11 @@ namespace LAZYSHELL
 
         #endregion
         #region Accessors
-        public byte[] FormationMonster { get { return this.formationMonster; } set { this.formationMonster = value; } }
-        public byte[] FormationCoordX { get { return this.formationCoordX; } set { this.formationCoordX = value; } }
-        public byte[] FormationCoordY { get { return this.formationCoordY; } set { this.formationCoordY = value; } }
-        public bool[] FormationUse { get { return this.formationUse; } set { this.formationUse = value; } }
-        public bool[] FormationHide { get { return this.formationHide; } set { this.formationHide = value; } }
+        public byte[] Monster { get { return this.formationMonster; } set { this.formationMonster = value; } }
+        public byte[] X { get { return this.formationCoordX; } set { this.formationCoordX = value; } }
+        public byte[] Y { get { return this.formationCoordY; } set { this.formationCoordY = value; } }
+        public bool[] Use { get { return this.formationUse; } set { this.formationUse = value; } }
+        public bool[] Hide { get { return this.formationHide; } set { this.formationHide = value; } }
         public int[][] FormationMonstersPixels { get { return this.formationMonstersPixels; } set { this.formationMonstersPixels = value; } }
         public byte FormationMusic { get { return this.formationMusic; } set { this.formationMusic = value; } }
         public byte FormationBattleEvent { get { return this.formationBattleEvent; } set { this.formationBattleEvent = value; } }
@@ -58,6 +58,7 @@ namespace LAZYSHELL
         private void SetPixelIndexes()
         {
             pixelIndexes = new int[256 * 256];
+            Bits.Fill(pixelIndexes, -1);
             int[] order = new int[8];
             for (int i = 0; i < 8; i++)
                 order[i] = i;
@@ -81,7 +82,7 @@ namespace LAZYSHELL
                             if ((monster[y * 256 + x] & 0xFF000000) != 0)
                             {
                                 if (x_ > 0 && x_ < 256 && y_ > 0 && y_ < 256)
-                                    pixelIndexes[(y_ - 1) * 256 + x_] = i + 1;
+                                    pixelIndexes[(y_ - 1) * 256 + x_] = i;
                             }
                         }
                     }

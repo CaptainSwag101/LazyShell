@@ -262,17 +262,7 @@ namespace LAZYSHELL
             int flowerBonusOffset = index + 0x39BB44;
 
             // Byte 1
-            temp = data[flowerBonusOffset];
-            switch (temp & 0x0F)							// FLOWER BONUS
-            {
-                case 0x01: flowerBonus = 0; break;		// [radiobutton] attack Up
-                case 0x02: flowerBonus = 1; break;		// [radiobutton] defense Up
-                case 0x03: flowerBonus = 2; break;		// [radiobutton] hp Max
-                case 0x04: flowerBonus = 3; break;		// [radiobutton] Once Again
-                case 0x05: flowerBonus = 4; break;		// [radiobutton] Lucky
-                default: flowerBonus = 0; break;
-            }
-
+            flowerBonus = (byte)(data[flowerBonusOffset] & 0x0F);
             flowerOdds = (byte)Math.Min(10, (temp & 0xF0) >> 4);			// Odds			[numericUpDown]
 
             int deathAnimationOffset = index * 2 + 0x350202;
@@ -391,7 +381,7 @@ namespace LAZYSHELL
             int flowerBonusOffset = index + 0x39BB44;
 
             // Byte 1
-            Bits.SetByte(data, flowerBonusOffset, (byte)((flowerBonus + 1) + (flowerOdds << 4)));
+            Bits.SetByte(data, flowerBonusOffset, (byte)(flowerBonus + (flowerOdds << 4)));
 
             int deathAnimationOffset = index * 2 + 0x350202;
 

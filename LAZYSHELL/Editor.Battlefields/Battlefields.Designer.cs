@@ -127,7 +127,7 @@
             panel444.Location = new System.Drawing.Point(24, 0);
             panel444.Name = "panel444";
             panel444.Size = new System.Drawing.Size(516, 516);
-            panel444.TabIndex = 176;
+            panel444.TabIndex = 1;
             // 
             // pictureBoxBattlefield
             // 
@@ -163,72 +163,87 @@
             this.importTilesetToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 192);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(159, 214);
             // 
             // cutToolStripMenuItem
             // 
+            this.cutToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.cut_small;
+            this.cutToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.buttonEditCut_Click);
             // 
             // copyToolStripMenuItem
             // 
+            this.copyToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.copyToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.buttonEditCopy_Click);
             // 
             // pasteToolStripMenuItem
             // 
+            this.pasteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.pasteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.buttonEditPaste_Click);
             // 
             // deleteToolStripMenuItem
             // 
+            this.deleteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.deleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.buttonEditDelete_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(155, 6);
             // 
             // mirrorToolStripMenuItem
             // 
+            this.mirrorToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.mirror_small;
+            this.mirrorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
-            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.mirrorToolStripMenuItem.Text = "Mirror";
             this.mirrorToolStripMenuItem.Click += new System.EventHandler(this.mirrorToolStripMenuItem_Click);
             // 
             // invertToolStripMenuItem
             // 
+            this.invertToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.flip_small;
+            this.invertToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            this.invertToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(155, 6);
             // 
             // saveImageToolStripMenuItem
             // 
+            this.saveImageToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImageToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.saveImageToolStripMenuItem.Text = "Save Image As...";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
             // importTilesetToolStripMenuItem
             // 
+            this.importTilesetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importTilesetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importTilesetToolStripMenuItem.Name = "importTilesetToolStripMenuItem";
-            this.importTilesetToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.importTilesetToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.importTilesetToolStripMenuItem.Text = "Import tileset...";
             this.importTilesetToolStripMenuItem.Click += new System.EventHandler(this.importTilesetToolStripMenuItem_Click);
             // 
@@ -280,7 +295,7 @@
             0});
             this.battlefieldPaletteSetNum.Name = "battlefieldPaletteSetNum";
             this.battlefieldPaletteSetNum.Size = new System.Drawing.Size(50, 21);
-            this.battlefieldPaletteSetNum.TabIndex = 189;
+            this.battlefieldPaletteSetNum.TabIndex = 17;
             this.battlefieldPaletteSetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.battlefieldPaletteSetNum.ValueChanged += new System.EventHandler(this.battlefieldPaletteSetNum_ValueChanged);
             // 
@@ -290,7 +305,7 @@
             this.label97.Location = new System.Drawing.Point(6, 44);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(54, 13);
-            this.label97.TabIndex = 171;
+            this.label97.TabIndex = 3;
             this.label97.Text = "GFX Set 2";
             // 
             // label102
@@ -298,8 +313,8 @@
             this.label102.AutoSize = true;
             this.label102.Location = new System.Drawing.Point(254, 23);
             this.label102.Name = "label102";
-            this.label102.Size = new System.Drawing.Size(62, 16);
-            this.label102.TabIndex = 190;
+            this.label102.Size = new System.Drawing.Size(60, 13);
+            this.label102.TabIndex = 15;
             this.label102.Text = "Palette Set";
             // 
             // battlefieldPaletteSetName
@@ -369,7 +384,7 @@
             this.battlefieldPaletteSetName.Location = new System.Drawing.Point(322, 20);
             this.battlefieldPaletteSetName.Name = "battlefieldPaletteSetName";
             this.battlefieldPaletteSetName.Size = new System.Drawing.Size(132, 21);
-            this.battlefieldPaletteSetName.TabIndex = 158;
+            this.battlefieldPaletteSetName.TabIndex = 16;
             this.battlefieldPaletteSetName.SelectedIndexChanged += new System.EventHandler(this.battlefieldPaletteSetName_SelectedIndexChanged);
             // 
             // battlefieldGFXSet4Num
@@ -382,7 +397,7 @@
             0});
             this.battlefieldGFXSet4Num.Name = "battlefieldGFXSet4Num";
             this.battlefieldGFXSet4Num.Size = new System.Drawing.Size(50, 21);
-            this.battlefieldGFXSet4Num.TabIndex = 183;
+            this.battlefieldGFXSet4Num.TabIndex = 11;
             this.battlefieldGFXSet4Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.battlefieldGFXSet4Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet4Num_ValueChanged);
             // 
@@ -396,7 +411,7 @@
             0});
             this.battlefieldGFXSet5Num.Name = "battlefieldGFXSet5Num";
             this.battlefieldGFXSet5Num.Size = new System.Drawing.Size(50, 21);
-            this.battlefieldGFXSet5Num.TabIndex = 185;
+            this.battlefieldGFXSet5Num.TabIndex = 14;
             this.battlefieldGFXSet5Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.battlefieldGFXSet5Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet5Num_ValueChanged);
             // 
@@ -406,7 +421,7 @@
             this.label98.Location = new System.Drawing.Point(6, 65);
             this.label98.Name = "label98";
             this.label98.Size = new System.Drawing.Size(54, 13);
-            this.label98.TabIndex = 172;
+            this.label98.TabIndex = 6;
             this.label98.Text = "GFX Set 3";
             // 
             // battlefieldGFXSet3Num
@@ -419,7 +434,7 @@
             0});
             this.battlefieldGFXSet3Num.Name = "battlefieldGFXSet3Num";
             this.battlefieldGFXSet3Num.Size = new System.Drawing.Size(50, 21);
-            this.battlefieldGFXSet3Num.TabIndex = 181;
+            this.battlefieldGFXSet3Num.TabIndex = 8;
             this.battlefieldGFXSet3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.battlefieldGFXSet3Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet3Num_ValueChanged);
             // 
@@ -432,7 +447,7 @@
             this.battlefieldGFXSet1Name.Location = new System.Drawing.Point(70, 20);
             this.battlefieldGFXSet1Name.Name = "battlefieldGFXSet1Name";
             this.battlefieldGFXSet1Name.Size = new System.Drawing.Size(128, 21);
-            this.battlefieldGFXSet1Name.TabIndex = 118;
+            this.battlefieldGFXSet1Name.TabIndex = 1;
             this.battlefieldGFXSet1Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet1Name_SelectedIndexChanged);
             // 
             // label99
@@ -441,7 +456,7 @@
             this.label99.Location = new System.Drawing.Point(6, 86);
             this.label99.Name = "label99";
             this.label99.Size = new System.Drawing.Size(54, 13);
-            this.label99.TabIndex = 173;
+            this.label99.TabIndex = 9;
             this.label99.Text = "GFX Set 4";
             // 
             // battlefieldGFXSet3Name
@@ -453,7 +468,7 @@
             this.battlefieldGFXSet3Name.Location = new System.Drawing.Point(70, 62);
             this.battlefieldGFXSet3Name.Name = "battlefieldGFXSet3Name";
             this.battlefieldGFXSet3Name.Size = new System.Drawing.Size(128, 21);
-            this.battlefieldGFXSet3Name.TabIndex = 120;
+            this.battlefieldGFXSet3Name.TabIndex = 7;
             this.battlefieldGFXSet3Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet3Name_SelectedIndexChanged);
             // 
             // battlefieldGFXSet2Num
@@ -466,7 +481,7 @@
             0});
             this.battlefieldGFXSet2Num.Name = "battlefieldGFXSet2Num";
             this.battlefieldGFXSet2Num.Size = new System.Drawing.Size(50, 21);
-            this.battlefieldGFXSet2Num.TabIndex = 179;
+            this.battlefieldGFXSet2Num.TabIndex = 5;
             this.battlefieldGFXSet2Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.battlefieldGFXSet2Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet2Num_ValueChanged);
             // 
@@ -479,7 +494,7 @@
             this.battlefieldGFXSet5Name.Location = new System.Drawing.Point(70, 104);
             this.battlefieldGFXSet5Name.Name = "battlefieldGFXSet5Name";
             this.battlefieldGFXSet5Name.Size = new System.Drawing.Size(128, 21);
-            this.battlefieldGFXSet5Name.TabIndex = 122;
+            this.battlefieldGFXSet5Name.TabIndex = 13;
             this.battlefieldGFXSet5Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet5Name_SelectedIndexChanged);
             // 
             // label100
@@ -488,7 +503,7 @@
             this.label100.Location = new System.Drawing.Point(6, 107);
             this.label100.Name = "label100";
             this.label100.Size = new System.Drawing.Size(54, 13);
-            this.label100.TabIndex = 174;
+            this.label100.TabIndex = 12;
             this.label100.Text = "GFX Set 5";
             // 
             // battlefieldGFXSet2Name
@@ -500,7 +515,7 @@
             this.battlefieldGFXSet2Name.Location = new System.Drawing.Point(70, 41);
             this.battlefieldGFXSet2Name.Name = "battlefieldGFXSet2Name";
             this.battlefieldGFXSet2Name.Size = new System.Drawing.Size(128, 21);
-            this.battlefieldGFXSet2Name.TabIndex = 119;
+            this.battlefieldGFXSet2Name.TabIndex = 4;
             this.battlefieldGFXSet2Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet2Name_SelectedIndexChanged);
             // 
             // battlefieldGFXSet1Num
@@ -513,7 +528,7 @@
             0});
             this.battlefieldGFXSet1Num.Name = "battlefieldGFXSet1Num";
             this.battlefieldGFXSet1Num.Size = new System.Drawing.Size(50, 21);
-            this.battlefieldGFXSet1Num.TabIndex = 177;
+            this.battlefieldGFXSet1Num.TabIndex = 2;
             this.battlefieldGFXSet1Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.battlefieldGFXSet1Num.ValueChanged += new System.EventHandler(this.battlefieldGFXSet1Num_ValueChanged);
             // 
@@ -526,7 +541,7 @@
             this.battlefieldGFXSet4Name.Location = new System.Drawing.Point(70, 83);
             this.battlefieldGFXSet4Name.Name = "battlefieldGFXSet4Name";
             this.battlefieldGFXSet4Name.Size = new System.Drawing.Size(128, 21);
-            this.battlefieldGFXSet4Name.TabIndex = 121;
+            this.battlefieldGFXSet4Name.TabIndex = 10;
             this.battlefieldGFXSet4Name.SelectedIndexChanged += new System.EventHandler(this.battlefieldGFXSet4Name_SelectedIndexChanged);
             // 
             // label69
@@ -535,7 +550,7 @@
             this.label69.Location = new System.Drawing.Point(6, 23);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(54, 13);
-            this.label69.TabIndex = 170;
+            this.label69.TabIndex = 0;
             this.label69.Text = "GFX Set 1";
             // 
             // battlefieldTilesetNum
@@ -548,7 +563,7 @@
             0});
             this.battlefieldTilesetNum.Name = "battlefieldTilesetNum";
             this.battlefieldTilesetNum.Size = new System.Drawing.Size(50, 21);
-            this.battlefieldTilesetNum.TabIndex = 187;
+            this.battlefieldTilesetNum.TabIndex = 20;
             this.battlefieldTilesetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.battlefieldTilesetNum.ValueChanged += new System.EventHandler(this.battlefieldTilesetNum_ValueChanged);
             // 
@@ -557,8 +572,8 @@
             this.label101.AutoSize = true;
             this.label101.Location = new System.Drawing.Point(254, 44);
             this.label101.Name = "label101";
-            this.label101.Size = new System.Drawing.Size(40, 16);
-            this.label101.TabIndex = 185;
+            this.label101.Size = new System.Drawing.Size(38, 13);
+            this.label101.TabIndex = 18;
             this.label101.Text = "Tileset";
             // 
             // battlefieldTilesetName
@@ -632,7 +647,7 @@
             this.battlefieldTilesetName.Location = new System.Drawing.Point(322, 41);
             this.battlefieldTilesetName.Name = "battlefieldTilesetName";
             this.battlefieldTilesetName.Size = new System.Drawing.Size(132, 21);
-            this.battlefieldTilesetName.TabIndex = 129;
+            this.battlefieldTilesetName.TabIndex = 19;
             this.battlefieldTilesetName.SelectedIndexChanged += new System.EventHandler(this.battlefieldTilesetName_SelectedIndexChanged);
             // 
             // panelBattlefieldTileset
@@ -644,7 +659,7 @@
             this.panelBattlefieldTileset.Location = new System.Drawing.Point(0, 50);
             this.panelBattlefieldTileset.Name = "panelBattlefieldTileset";
             this.panelBattlefieldTileset.Size = new System.Drawing.Size(540, 516);
-            this.panelBattlefieldTileset.TabIndex = 442;
+            this.panelBattlefieldTileset.TabIndex = 2;
             // 
             // toolStrip2
             // 
@@ -663,7 +678,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(24, 516);
-            this.toolStrip2.TabIndex = 193;
+            this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // buttonEditSelect
@@ -775,7 +790,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(540, 25);
-            this.toolStrip1.TabIndex = 444;
+            this.toolStrip1.TabIndex = 1;
             // 
             // toolStripSeparator2
             // 
@@ -857,7 +872,7 @@
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(540, 25);
-            this.toolStrip3.TabIndex = 445;
+            this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // save
@@ -914,7 +929,7 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.ToolTipText = "Clear";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.toolStripButton1.Click += new System.EventHandler(this.clear_Click);
             // 
             // toolStripSeparator12
             // 
@@ -971,7 +986,7 @@
             this.groupBox1.Location = new System.Drawing.Point(24, 572);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(515, 131);
-            this.groupBox1.TabIndex = 446;
+            this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Battlefield Properties";
             // 

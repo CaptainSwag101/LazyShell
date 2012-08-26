@@ -45,7 +45,7 @@ namespace LAZYSHELL
             new History(this);
             //
             Checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
-                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers);
+                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, overworld.CursorSprites);
         }
         private void RefreshMenuText()
         {
@@ -107,7 +107,7 @@ namespace LAZYSHELL
             //Bits.SetShort(Model.Data, 0x3EF600, 0x344F);
             overworld.Assemble();
             Checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
-                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers);
+                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, overworld.CursorSprites);
         }
         //
         private void save_Click(object sender, EventArgs e)
@@ -117,7 +117,7 @@ namespace LAZYSHELL
         private void MenusEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
-                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers) == Checksum)
+                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, overworld.CursorSprites) == Checksum)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Menus have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",

@@ -118,87 +118,104 @@
             this.importImageToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip2.ShowImageMargin = false;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(134, 258);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(159, 236);
             this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
             // 
             // cutToolStripMenuItem2
             // 
+            this.cutToolStripMenuItem2.Image = global::LAZYSHELL.Properties.Resources.cut_small;
+            this.cutToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cutToolStripMenuItem2.Name = "cutToolStripMenuItem2";
-            this.cutToolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
+            this.cutToolStripMenuItem2.Size = new System.Drawing.Size(158, 22);
             this.cutToolStripMenuItem2.Text = "Cut";
             this.cutToolStripMenuItem2.Click += new System.EventHandler(this.buttonEditCut_Click);
             // 
             // copyToolStripMenuItem2
             // 
+            this.copyToolStripMenuItem2.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.copyToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.copyToolStripMenuItem2.Name = "copyToolStripMenuItem2";
-            this.copyToolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
+            this.copyToolStripMenuItem2.Size = new System.Drawing.Size(158, 22);
             this.copyToolStripMenuItem2.Text = "Copy";
             this.copyToolStripMenuItem2.Click += new System.EventHandler(this.buttonEditCopy_Click);
             // 
             // pasteToolStripMenuItem2
             // 
+            this.pasteToolStripMenuItem2.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.pasteToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pasteToolStripMenuItem2.Name = "pasteToolStripMenuItem2";
-            this.pasteToolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
+            this.pasteToolStripMenuItem2.Size = new System.Drawing.Size(158, 22);
             this.pasteToolStripMenuItem2.Text = "Paste";
             this.pasteToolStripMenuItem2.Click += new System.EventHandler(this.buttonEditPaste_Click);
             // 
             // deleteToolStripMenuItem2
             // 
+            this.deleteToolStripMenuItem2.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.deleteToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.deleteToolStripMenuItem2.Name = "deleteToolStripMenuItem2";
-            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
+            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(158, 22);
             this.deleteToolStripMenuItem2.Text = "Delete";
             this.deleteToolStripMenuItem2.Click += new System.EventHandler(this.buttonEditDelete_Click);
             // 
             // toolStripSeparator27
             // 
             this.toolStripSeparator27.Name = "toolStripSeparator27";
-            this.toolStripSeparator27.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator27.Size = new System.Drawing.Size(155, 6);
             // 
             // priority1SetToolStripMenuItem
             // 
+            this.priority1SetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.priority1SetToolStripMenuItem.Name = "priority1SetToolStripMenuItem";
-            this.priority1SetToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.priority1SetToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.priority1SetToolStripMenuItem.Text = "Priority 1 set";
             this.priority1SetToolStripMenuItem.Click += new System.EventHandler(this.priority1SetToolStripMenuItem_Click);
             // 
             // priority1ClearToolStripMenuItem
             // 
+            this.priority1ClearToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.priority1ClearToolStripMenuItem.Name = "priority1ClearToolStripMenuItem";
-            this.priority1ClearToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.priority1ClearToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.priority1ClearToolStripMenuItem.Text = "Priority 1 clear";
             this.priority1ClearToolStripMenuItem.Click += new System.EventHandler(this.priority1ClearToolStripMenuItem_Click);
             // 
             // mirrorToolStripMenuItem
             // 
+            this.mirrorToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.mirror_small;
+            this.mirrorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
-            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.mirrorToolStripMenuItem.Text = "Mirror";
             this.mirrorToolStripMenuItem.Click += new System.EventHandler(this.mirrorToolStripMenuItem_Click);
             // 
             // invertToolStripMenuItem
             // 
+            this.invertToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.flip_small;
+            this.invertToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            this.invertToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
             // toolStripSeparator25
             // 
             this.toolStripSeparator25.Name = "toolStripSeparator25";
-            this.toolStripSeparator25.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator25.Size = new System.Drawing.Size(155, 6);
             // 
             // saveImageAsToolStripMenuItem
             // 
+            this.saveImageAsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImageAsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveImageAsToolStripMenuItem.Name = "saveImageAsToolStripMenuItem";
-            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.saveImageAsToolStripMenuItem.Text = "Save Image As...";
             this.saveImageAsToolStripMenuItem.Click += new System.EventHandler(this.saveImageAsToolStripMenuItem_Click);
             // 
             // importImageToolStripMenuItem
             // 
+            this.importImageToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importImage;
+            this.importImageToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importImageToolStripMenuItem.Name = "importImageToolStripMenuItem";
-            this.importImageToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.importImageToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.importImageToolStripMenuItem.Text = "Import Image...";
             this.importImageToolStripMenuItem.Click += new System.EventHandler(this.importImageToolStripMenuItem_Click);
             // 
@@ -225,7 +242,7 @@
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(8, 0, 1, 0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(272, 25);
-            this.toolStrip1.TabIndex = 443;
+            this.toolStrip1.TabIndex = 0;
             // 
             // buttonToggleTileEditor
             // 
@@ -374,8 +391,8 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 46);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(272, 539);
-            this.tabControl1.TabIndex = 444;
+            this.tabControl1.Size = new System.Drawing.Size(272, 547);
+            this.tabControl1.TabIndex = 2;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             this.tabControl1.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Deselecting);
@@ -387,7 +404,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(264, 512);
+            this.tabPage1.Size = new System.Drawing.Size(264, 520);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "LAYER 1";
             // 
@@ -398,7 +415,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 23);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(260, 516);
+            this.tabPage2.Size = new System.Drawing.Size(260, 520);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "LAYER 2";
             // 
@@ -429,7 +446,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 23);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(260, 516);
+            this.tabPage3.Size = new System.Drawing.Size(260, 520);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "LAYER 3";
             // 
@@ -463,7 +480,7 @@
             this.lockEditing.Name = "lockEditing";
             this.lockEditing.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.lockEditing.Size = new System.Drawing.Size(117, 26);
-            this.lockEditing.TabIndex = 445;
+            this.lockEditing.TabIndex = 0;
             this.lockEditing.Text = "Lock tileset editing";
             this.lockEditing.UseVisualStyleBackColor = true;
             this.lockEditing.CheckedChanged += new System.EventHandler(this.lockEditing_CheckedChanged);
@@ -474,10 +491,10 @@
             this.panel1.Controls.Add(this.autoUpdate);
             this.panel1.Controls.Add(this.lockEditing);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 585);
+            this.panel1.Location = new System.Drawing.Point(0, 593);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(272, 26);
-            this.panel1.TabIndex = 446;
+            this.panel1.TabIndex = 3;
             // 
             // buttonUpdate
             // 
@@ -485,7 +502,7 @@
             this.buttonUpdate.Location = new System.Drawing.Point(203, 0);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(69, 26);
-            this.buttonUpdate.TabIndex = 447;
+            this.buttonUpdate.TabIndex = 2;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
@@ -497,7 +514,7 @@
             this.autoUpdate.Location = new System.Drawing.Point(117, 0);
             this.autoUpdate.Name = "autoUpdate";
             this.autoUpdate.Size = new System.Drawing.Size(86, 26);
-            this.autoUpdate.TabIndex = 446;
+            this.autoUpdate.TabIndex = 1;
             this.autoUpdate.Text = "Auto update";
             this.autoUpdate.UseVisualStyleBackColor = true;
             // 
@@ -508,7 +525,7 @@
             this.labelTileIndex.Location = new System.Drawing.Point(0, 25);
             this.labelTileIndex.Name = "labelTileIndex";
             this.labelTileIndex.Size = new System.Drawing.Size(272, 21);
-            this.labelTileIndex.TabIndex = 2;
+            this.labelTileIndex.TabIndex = 1;
             this.labelTileIndex.Text = "Tile index: 0 ($00)";
             this.labelTileIndex.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -516,7 +533,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 611);
+            this.ClientSize = new System.Drawing.Size(272, 619);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);

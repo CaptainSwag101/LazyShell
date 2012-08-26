@@ -795,5 +795,75 @@ namespace LAZYSHELL.Properties {
                 this["LastMineCart"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>G</string>
+  <string>H</string>
+  <string>E</string>
+  <string>F</string>
+  <string>C</string>
+  <string>D</string>
+  <string>A</string>
+  <string>B</string>
+  <string>I</string>
+  <string>J</string>
+  <string>K</string>
+  <string>L</string>
+  <string>M</string>
+  <string>N</string>
+  <string>O</string>
+  <string>P</string>
+  <string>W</string>
+  <string>X</string>
+  <string>U</string>
+  <string>V</string>
+  <string>S</string>
+  <string>T</string>
+  <string>Q</string>
+  <string>R</string>
+  <string>Y</string>
+  <string>Z</string>
+  <string>!</string>
+  <string>?</string>
+  <string>.</string>
+  <string>*</string>
+  <string>@</string>
+  <string />
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection KeystrokesBonus {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["KeystrokesBonus"]));
+            }
+            set {
+                this["KeystrokesBonus"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastSPC {
+            get {
+                return ((int)(this["LastSPC"]));
+            }
+            set {
+                this["LastSPC"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastSoundType {
+            get {
+                return ((int)(this["LastSoundType"]));
+            }
+            set {
+                this["LastSoundType"] = value;
+            }
+        }
     }
 }

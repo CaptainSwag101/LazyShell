@@ -91,7 +91,7 @@
             this.levelUpSpellLearned.Location = new System.Drawing.Point(6, 20);
             this.levelUpSpellLearned.Name = "levelUpSpellLearned";
             this.levelUpSpellLearned.Size = new System.Drawing.Size(148, 21);
-            this.levelUpSpellLearned.TabIndex = 109;
+            this.levelUpSpellLearned.TabIndex = 0;
             this.levelUpSpellLearned.Tag = "";
             this.levelUpSpellLearned.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.levelUpSpellLearned_DrawItem);
             this.levelUpSpellLearned.SelectedIndexChanged += new System.EventHandler(this.levelUpSpellLearned_SelectedIndexChanged);
@@ -102,7 +102,7 @@
             this.label137.Location = new System.Drawing.Point(6, 85);
             this.label137.Name = "label137";
             this.label137.Size = new System.Drawing.Size(67, 13);
-            this.label137.TabIndex = 248;
+            this.label137.TabIndex = 6;
             this.label137.Text = "Mg. Attack+";
             // 
             // hpPlusBonus
@@ -115,7 +115,7 @@
             0});
             this.hpPlusBonus.Name = "hpPlusBonus";
             this.hpPlusBonus.Size = new System.Drawing.Size(66, 21);
-            this.hpPlusBonus.TabIndex = 188;
+            this.hpPlusBonus.TabIndex = 1;
             this.hpPlusBonus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.hpPlusBonus.ValueChanged += new System.EventHandler(this.hpPlusBonus_ValueChanged);
             // 
@@ -125,7 +125,7 @@
             this.label113.Location = new System.Drawing.Point(6, 106);
             this.label113.Name = "label113";
             this.label113.Size = new System.Drawing.Size(76, 13);
-            this.label113.TabIndex = 247;
+            this.label113.TabIndex = 8;
             this.label113.Text = "Mg. Defense+";
             // 
             // defensePlusBonus
@@ -138,7 +138,7 @@
             0});
             this.defensePlusBonus.Name = "defensePlusBonus";
             this.defensePlusBonus.Size = new System.Drawing.Size(66, 21);
-            this.defensePlusBonus.TabIndex = 190;
+            this.defensePlusBonus.TabIndex = 5;
             this.defensePlusBonus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.defensePlusBonus.ValueChanged += new System.EventHandler(this.defensePlusBonus_ValueChanged);
             // 
@@ -152,7 +152,7 @@
             0});
             this.attackPlusBonus.Name = "attackPlusBonus";
             this.attackPlusBonus.Size = new System.Drawing.Size(66, 21);
-            this.attackPlusBonus.TabIndex = 189;
+            this.attackPlusBonus.TabIndex = 3;
             this.attackPlusBonus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackPlusBonus.ValueChanged += new System.EventHandler(this.attackPlusBonus_ValueChanged);
             // 
@@ -162,7 +162,7 @@
             this.label114.Location = new System.Drawing.Point(6, 64);
             this.label114.Name = "label114";
             this.label114.Size = new System.Drawing.Size(55, 13);
-            this.label114.TabIndex = 246;
+            this.label114.TabIndex = 4;
             this.label114.Text = "Defense+";
             // 
             // label116
@@ -171,7 +171,7 @@
             this.label116.Location = new System.Drawing.Point(6, 22);
             this.label116.Name = "label116";
             this.label116.Size = new System.Drawing.Size(28, 13);
-            this.label116.TabIndex = 244;
+            this.label116.TabIndex = 0;
             this.label116.Text = "HP+";
             // 
             // mgDefensePlusBonus
@@ -184,7 +184,7 @@
             0});
             this.mgDefensePlusBonus.Name = "mgDefensePlusBonus";
             this.mgDefensePlusBonus.Size = new System.Drawing.Size(66, 21);
-            this.mgDefensePlusBonus.TabIndex = 192;
+            this.mgDefensePlusBonus.TabIndex = 9;
             this.mgDefensePlusBonus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mgDefensePlusBonus.ValueChanged += new System.EventHandler(this.mgDefensePlusBonus_ValueChanged);
             // 
@@ -198,7 +198,7 @@
             0});
             this.mgAttackPlusBonus.Name = "mgAttackPlusBonus";
             this.mgAttackPlusBonus.Size = new System.Drawing.Size(66, 21);
-            this.mgAttackPlusBonus.TabIndex = 191;
+            this.mgAttackPlusBonus.TabIndex = 7;
             this.mgAttackPlusBonus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mgAttackPlusBonus.ValueChanged += new System.EventHandler(this.mgAttackPlusBonus_ValueChanged);
             // 
@@ -208,7 +208,7 @@
             this.label115.Location = new System.Drawing.Point(6, 43);
             this.label115.Name = "label115";
             this.label115.Size = new System.Drawing.Size(46, 13);
-            this.label115.TabIndex = 245;
+            this.label115.TabIndex = 2;
             this.label115.Text = "Attack+";
             // 
             // hpPlus
@@ -221,7 +221,7 @@
             0});
             this.hpPlus.Name = "hpPlus";
             this.hpPlus.Size = new System.Drawing.Size(66, 21);
-            this.hpPlus.TabIndex = 183;
+            this.hpPlus.TabIndex = 1;
             this.hpPlus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.hpPlus.ValueChanged += new System.EventHandler(this.hpPlus_ValueChanged);
             // 
@@ -235,7 +235,7 @@
             0});
             this.attackPlus.Name = "attackPlus";
             this.attackPlus.Size = new System.Drawing.Size(66, 21);
-            this.attackPlus.TabIndex = 184;
+            this.attackPlus.TabIndex = 3;
             this.attackPlus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackPlus.ValueChanged += new System.EventHandler(this.attackPlus_ValueChanged);
             // 
@@ -245,7 +245,7 @@
             this.label122.Location = new System.Drawing.Point(6, 22);
             this.label122.Name = "label122";
             this.label122.Size = new System.Drawing.Size(28, 13);
-            this.label122.TabIndex = 146;
+            this.label122.TabIndex = 0;
             this.label122.Text = "HP+";
             // 
             // label121
@@ -254,7 +254,7 @@
             this.label121.Location = new System.Drawing.Point(6, 43);
             this.label121.Name = "label121";
             this.label121.Size = new System.Drawing.Size(46, 13);
-            this.label121.TabIndex = 147;
+            this.label121.TabIndex = 2;
             this.label121.Text = "Attack+";
             // 
             // mgAttackPlus
@@ -267,7 +267,7 @@
             0});
             this.mgAttackPlus.Name = "mgAttackPlus";
             this.mgAttackPlus.Size = new System.Drawing.Size(66, 21);
-            this.mgAttackPlus.TabIndex = 186;
+            this.mgAttackPlus.TabIndex = 7;
             this.mgAttackPlus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mgAttackPlus.ValueChanged += new System.EventHandler(this.mgAttackPlus_ValueChanged);
             // 
@@ -277,7 +277,7 @@
             this.label120.Location = new System.Drawing.Point(6, 64);
             this.label120.Name = "label120";
             this.label120.Size = new System.Drawing.Size(55, 13);
-            this.label120.TabIndex = 148;
+            this.label120.TabIndex = 4;
             this.label120.Text = "Defense+";
             // 
             // label117
@@ -286,7 +286,7 @@
             this.label117.Location = new System.Drawing.Point(6, 85);
             this.label117.Name = "label117";
             this.label117.Size = new System.Drawing.Size(67, 13);
-            this.label117.TabIndex = 150;
+            this.label117.TabIndex = 6;
             this.label117.Text = "Mg. Attack+";
             // 
             // defensePlus
@@ -299,7 +299,7 @@
             0});
             this.defensePlus.Name = "defensePlus";
             this.defensePlus.Size = new System.Drawing.Size(66, 21);
-            this.defensePlus.TabIndex = 185;
+            this.defensePlus.TabIndex = 5;
             this.defensePlus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.defensePlus.ValueChanged += new System.EventHandler(this.defensePlus_ValueChanged);
             // 
@@ -313,7 +313,7 @@
             0});
             this.mgDefensePlus.Name = "mgDefensePlus";
             this.mgDefensePlus.Size = new System.Drawing.Size(66, 21);
-            this.mgDefensePlus.TabIndex = 187;
+            this.mgDefensePlus.TabIndex = 9;
             this.mgDefensePlus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mgDefensePlus.ValueChanged += new System.EventHandler(this.mgDefensePlus_ValueChanged);
             // 
@@ -323,7 +323,7 @@
             this.label118.Location = new System.Drawing.Point(6, 106);
             this.label118.Name = "label118";
             this.label118.Size = new System.Drawing.Size(76, 13);
-            this.label118.TabIndex = 149;
+            this.label118.TabIndex = 8;
             this.label118.Text = "Mg. Defense+";
             // 
             // expNeeded
@@ -336,7 +336,7 @@
             0});
             this.expNeeded.Name = "expNeeded";
             this.expNeeded.Size = new System.Drawing.Size(77, 21);
-            this.expNeeded.TabIndex = 182;
+            this.expNeeded.TabIndex = 1;
             this.expNeeded.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.expNeeded.ValueChanged += new System.EventHandler(this.expNeeded_ValueChanged);
             // 
@@ -346,7 +346,7 @@
             this.label124.Location = new System.Drawing.Point(6, 22);
             this.label124.Name = "label124";
             this.label124.Size = new System.Drawing.Size(60, 13);
-            this.label124.TabIndex = 231;
+            this.label124.TabIndex = 0;
             this.label124.Text = "Experience";
             // 
             // toolStrip1
@@ -360,7 +360,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(166, 25);
-            this.toolStrip1.TabIndex = 473;
+            this.toolStrip1.TabIndex = 0;
             // 
             // characterName
             // 
@@ -370,7 +370,7 @@
             this.characterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.characterName.DropDownWidth = 120;
             this.characterName.ItemHeight = 15;
-            this.characterName.Location = new System.Drawing.Point(9, 1);
+            this.characterName.Location = new System.Drawing.Point(7, 1);
             this.characterName.Name = "characterName";
             this.characterName.SelectedIndex = -1;
             this.characterName.SelectedItem = null;
@@ -404,7 +404,7 @@
             0});
             this.levelNum.Name = "levelNum";
             this.levelNum.Size = new System.Drawing.Size(61, 21);
-            this.levelNum.TabIndex = 182;
+            this.levelNum.TabIndex = 2;
             this.levelNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.levelNum.Value = new decimal(new int[] {
             2,
@@ -419,7 +419,7 @@
             this.label1.Location = new System.Drawing.Point(6, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 231;
+            this.label1.TabIndex = 1;
             this.label1.Text = "Level #";
             // 
             // groupBox1
@@ -437,7 +437,7 @@
             this.groupBox1.Location = new System.Drawing.Point(3, 109);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(160, 131);
-            this.groupBox1.TabIndex = 474;
+            this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Level-up Status Increments";
             // 
@@ -448,7 +448,7 @@
             this.groupBox2.Location = new System.Drawing.Point(3, 55);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(160, 48);
-            this.groupBox2.TabIndex = 475;
+            this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Level-up Experience Needed";
             // 
@@ -467,7 +467,7 @@
             this.groupBox3.Location = new System.Drawing.Point(3, 246);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(160, 131);
-            this.groupBox3.TabIndex = 476;
+            this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Level-up Bonus Increments";
             // 
@@ -477,7 +477,7 @@
             this.groupBox4.Location = new System.Drawing.Point(3, 383);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(160, 47);
-            this.groupBox4.TabIndex = 477;
+            this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Level-up learned spell";
             // 

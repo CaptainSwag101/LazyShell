@@ -47,7 +47,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(476, 286);
-            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
             // 
@@ -57,7 +57,7 @@
             this.close.Location = new System.Drawing.Point(372, 41);
             this.close.Name = "close";
             this.close.Size = new System.Drawing.Size(116, 23);
-            this.close.TabIndex = 1;
+            this.close.TabIndex = 2;
             this.close.Text = "Close application";
             this.close.UseVisualStyleBackColor = true;
             this.close.Click += new System.EventHandler(this.close_Click);
@@ -67,7 +67,7 @@
             this.label1.Location = new System.Drawing.Point(60, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(296, 79);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 0;
             this.label1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.label1_LinkClicked);
             // 
             // ignoreError
@@ -86,7 +86,7 @@
             this.copyContents.Location = new System.Drawing.Point(12, 99);
             this.copyContents.Name = "copyContents";
             this.copyContents.Size = new System.Drawing.Size(195, 23);
-            this.copyContents.TabIndex = 1;
+            this.copyContents.TabIndex = 3;
             this.copyContents.Text = "Copy contents to clipboard";
             this.copyContents.UseVisualStyleBackColor = true;
             this.copyContents.Click += new System.EventHandler(this.copyContents_Click);

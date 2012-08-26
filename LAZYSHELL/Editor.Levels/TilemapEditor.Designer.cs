@@ -133,8 +133,8 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(8, 0, 1, 0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(836, 25);
-            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Size = new System.Drawing.Size(832, 25);
+            this.toolStrip1.TabIndex = 0;
             // 
             // toggleCartGrid
             // 
@@ -438,47 +438,56 @@
             this.objectFunctionToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(185, 130);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // findInTileset
             // 
+            this.findInTileset.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.findInTileset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.findInTileset.Name = "findInTileset";
-            this.findInTileset.Size = new System.Drawing.Size(157, 22);
+            this.findInTileset.Size = new System.Drawing.Size(184, 24);
             this.findInTileset.Text = "Find in tileset";
             this.findInTileset.Click += new System.EventHandler(this.findInTileset_Click);
             // 
             // createTileModToolStripMenuItem
             // 
+            this.createTileModToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.buttonTileMods;
+            this.createTileModToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.createTileModToolStripMenuItem.Name = "createTileModToolStripMenuItem";
-            this.createTileModToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.createTileModToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.createTileModToolStripMenuItem.Text = "Create tile mod";
             this.createTileModToolStripMenuItem.Click += new System.EventHandler(this.createTileModToolStripMenuItem_Click);
             // 
             // toolStripSeparator24
             // 
             this.toolStripSeparator24.Name = "toolStripSeparator24";
-            this.toolStripSeparator24.Size = new System.Drawing.Size(154, 6);
+            this.toolStripSeparator24.Size = new System.Drawing.Size(181, 6);
             // 
             // saveImageToolStripMenuItem
             // 
+            this.saveImageToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImageToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.saveImageToolStripMenuItem.Text = "Save image as...";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
             // exportToBattlefieldToolStripMenuItem
             // 
+            this.exportToBattlefieldToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.exportToBattlefieldToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportToBattlefieldToolStripMenuItem.Name = "exportToBattlefieldToolStripMenuItem";
-            this.exportToBattlefieldToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.exportToBattlefieldToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.exportToBattlefieldToolStripMenuItem.Text = "Export to battlefield...";
             this.exportToBattlefieldToolStripMenuItem.Click += new System.EventHandler(this.exportToBattlefieldToolStripMenuItem_Click);
             // 
             // objectFunctionToolStripMenuItem
             // 
+            this.objectFunctionToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources._goto;
+            this.objectFunctionToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.objectFunctionToolStripMenuItem.Name = "objectFunctionToolStripMenuItem";
-            this.objectFunctionToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.objectFunctionToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.objectFunctionToolStripMenuItem.Visible = false;
             this.objectFunctionToolStripMenuItem.Click += new System.EventHandler(this.objectFunctionToolStripMenuItem_Click);
             // 
@@ -491,7 +500,7 @@
             this.panelOpacity.Location = new System.Drawing.Point(210, 25);
             this.panelOpacity.Name = "panelOpacity";
             this.panelOpacity.Size = new System.Drawing.Size(248, 21);
-            this.panelOpacity.TabIndex = 447;
+            this.panelOpacity.TabIndex = 1;
             this.panelOpacity.Visible = false;
             // 
             // overlayOpacity
@@ -503,7 +512,7 @@
             this.overlayOpacity.Maximum = 100;
             this.overlayOpacity.Name = "overlayOpacity";
             this.overlayOpacity.Size = new System.Drawing.Size(200, 17);
-            this.overlayOpacity.TabIndex = 443;
+            this.overlayOpacity.TabIndex = 1;
             this.overlayOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
             this.overlayOpacity.Value = 100;
             this.overlayOpacity.ValueChanged += new System.EventHandler(this.overlayOpacity_ValueChanged);
@@ -517,7 +526,7 @@
             this.labelOverlayOpacity.Name = "labelOverlayOpacity";
             this.labelOverlayOpacity.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.labelOverlayOpacity.Size = new System.Drawing.Size(44, 17);
-            this.labelOverlayOpacity.TabIndex = 444;
+            this.labelOverlayOpacity.TabIndex = 0;
             this.labelOverlayOpacity.Text = "100%";
             this.labelOverlayOpacity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -527,11 +536,11 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTileCoords.BackColor = System.Drawing.SystemColors.Control;
             this.labelTileCoords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelTileCoords.Location = new System.Drawing.Point(29, 629);
+            this.labelTileCoords.Location = new System.Drawing.Point(29, 625);
             this.labelTileCoords.Name = "labelTileCoords";
             this.labelTileCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.labelTileCoords.Size = new System.Drawing.Size(807, 24);
-            this.labelTileCoords.TabIndex = 194;
+            this.labelTileCoords.Size = new System.Drawing.Size(803, 24);
+            this.labelTileCoords.TabIndex = 4;
             this.labelTileCoords.Text = "(x: 0, y: 0)  Tile  |  (x: 0, y: 0) Isometric  |  (x: 0, y: 0) Pixel";
             this.labelTileCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -566,8 +575,8 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 25);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(26, 628);
-            this.toolStrip2.TabIndex = 505;
+            this.toolStrip2.Size = new System.Drawing.Size(26, 624);
+            this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // editAllLayers
@@ -787,8 +796,8 @@
             this.panelLevelPicture.Controls.Add(this.pictureBoxLevel);
             this.panelLevelPicture.Location = new System.Drawing.Point(29, 31);
             this.panelLevelPicture.Name = "panelLevelPicture";
-            this.panelLevelPicture.Size = new System.Drawing.Size(803, 597);
-            this.panelLevelPicture.TabIndex = 192;
+            this.panelLevelPicture.Size = new System.Drawing.Size(799, 593);
+            this.panelLevelPicture.TabIndex = 3;
             this.panelLevelPicture.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panelLevelPicture_Scroll);
             // 
             // pictureBoxLevel
@@ -814,7 +823,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 653);
+            this.ClientSize = new System.Drawing.Size(832, 649);
             this.ControlBox = false;
             this.Controls.Add(this.labelTileCoords);
             this.Controls.Add(this.panelOpacity);

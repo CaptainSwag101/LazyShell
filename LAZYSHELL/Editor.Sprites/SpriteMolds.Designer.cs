@@ -58,8 +58,8 @@
             this.invert = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.adjustCoords = new System.Windows.Forms.ToolStripButton();
-            this.moldZoomIn = new System.Windows.Forms.ToolStripButton();
-            this.moldZoomOut = new System.Windows.Forms.ToolStripButton();
+            this.zoomIn = new System.Windows.Forms.ToolStripButton();
+            this.zoomOut = new System.Windows.Forms.ToolStripButton();
             this.showMoldPixelGrid = new System.Windows.Forms.ToolStripButton();
             this.listBoxMolds = new System.Windows.Forms.ListBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -96,7 +96,6 @@
             this.moldTileXCoord = new System.Windows.Forms.NumericUpDown();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBoxTileset = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.showGrid = new System.Windows.Forms.ToolStripButton();
             this.toggleZoomBox_TS = new System.Windows.Forms.ToolStripButton();
@@ -141,85 +140,100 @@
             this.saveImageAsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 242);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(159, 242);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // cutToolStripMenuItem
             // 
+            this.cutToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.cut_small;
+            this.cutToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cut_Click);
             // 
             // copyToolStripMenuItem
             // 
+            this.copyToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.copyToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copy_Click);
             // 
             // pasteToolStripMenuItem
             // 
+            this.pasteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.pasteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
+            this.deleteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.deleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.delete_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(155, 6);
             // 
             // mirrorToolStripMenuItem
             // 
+            this.mirrorToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.mirror_small;
+            this.mirrorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
-            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.mirrorToolStripMenuItem.Text = "Mirror";
             this.mirrorToolStripMenuItem.Click += new System.EventHandler(this.mirror_Click);
             // 
             // invertToolStripMenuItem
             // 
+            this.invertToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.flip_small;
+            this.invertToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            this.invertToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invert_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(155, 6);
             // 
             // bringToFrontToolStripMenuItem
             // 
+            this.bringToFrontToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
-            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.bringToFrontToolStripMenuItem.Text = "Bring to Front";
             this.bringToFrontToolStripMenuItem.Click += new System.EventHandler(this.bringToFrontToolStripMenuItem_Click);
             // 
             // sendToBackToolStripMenuItem
             // 
+            this.sendToBackToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.sendToBackToolStripMenuItem.Name = "sendToBackToolStripMenuItem";
-            this.sendToBackToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.sendToBackToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.sendToBackToolStripMenuItem.Text = "Send to Back";
             this.sendToBackToolStripMenuItem.Click += new System.EventHandler(this.sendToBackToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(155, 6);
             // 
             // saveImageAsToolStripMenuItem
             // 
+            this.saveImageAsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImageAsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveImageAsToolStripMenuItem.Name = "saveImageAsToolStripMenuItem";
-            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.saveImageAsToolStripMenuItem.Text = "Save Image As...";
             this.saveImageAsToolStripMenuItem.Click += new System.EventHandler(this.saveImageAsToolStripMenuItem_Click);
             // 
@@ -246,7 +260,7 @@
             this.toolStrip4.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip4.Size = new System.Drawing.Size(23, 284);
-            this.toolStrip4.TabIndex = 51;
+            this.toolStrip4.TabIndex = 2;
             this.toolStrip4.TabStop = true;
             this.toolStrip4.Text = "toolStrip1";
             // 
@@ -389,29 +403,29 @@
             this.adjustCoords.Text = "Adjust all tile coords";
             this.adjustCoords.Click += new System.EventHandler(this.adjustCoords_Click);
             // 
-            // moldZoomIn
+            // zoomIn
             // 
-            this.moldZoomIn.CheckOnClick = true;
-            this.moldZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.moldZoomIn.Image = global::LAZYSHELL.Properties.Resources.zoomin_small;
-            this.moldZoomIn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.moldZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.moldZoomIn.Name = "moldZoomIn";
-            this.moldZoomIn.Size = new System.Drawing.Size(23, 22);
-            this.moldZoomIn.Text = "Zoom In";
-            this.moldZoomIn.Click += new System.EventHandler(this.moldZoomIn_Click);
+            this.zoomIn.CheckOnClick = true;
+            this.zoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.zoomIn.Image = global::LAZYSHELL.Properties.Resources.zoomin_small;
+            this.zoomIn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.zoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.zoomIn.Name = "zoomIn";
+            this.zoomIn.Size = new System.Drawing.Size(23, 22);
+            this.zoomIn.Text = "Zoom In";
+            this.zoomIn.Click += new System.EventHandler(this.zoomIn_Click);
             // 
-            // moldZoomOut
+            // zoomOut
             // 
-            this.moldZoomOut.CheckOnClick = true;
-            this.moldZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.moldZoomOut.Image = global::LAZYSHELL.Properties.Resources.zoomout_small;
-            this.moldZoomOut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.moldZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.moldZoomOut.Name = "moldZoomOut";
-            this.moldZoomOut.Size = new System.Drawing.Size(23, 22);
-            this.moldZoomOut.Text = "Zoom Out";
-            this.moldZoomOut.Click += new System.EventHandler(this.moldZoomOut_Click);
+            this.zoomOut.CheckOnClick = true;
+            this.zoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.zoomOut.Image = global::LAZYSHELL.Properties.Resources.zoomout_small;
+            this.zoomOut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.zoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.zoomOut.Name = "zoomOut";
+            this.zoomOut.Size = new System.Drawing.Size(23, 22);
+            this.zoomOut.Text = "Zoom Out";
+            this.zoomOut.Click += new System.EventHandler(this.zoomOut_Click);
             // 
             // showMoldPixelGrid
             // 
@@ -443,21 +457,24 @@
             this.exportToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip2.ShowImageMargin = false;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(134, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(159, 48);
             this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
             // 
             // importToolStripMenuItem
             // 
+            this.importToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importImage;
+            this.importToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.importToolStripMenuItem.Text = "Import Image...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
+            this.exportToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.exportToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.exportToolStripMenuItem.Text = "Save Image As...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
@@ -477,8 +494,8 @@
             this.showMoldPixelGrid,
             this.showBG,
             this.toolStripSeparator3,
-            this.moldZoomIn,
-            this.moldZoomOut,
+            this.zoomIn,
+            this.zoomOut,
             this.toggleZoomBox,
             this.coordinatorButton,
             this.toolStripSeparator7,
@@ -487,13 +504,13 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(665, 25);
-            this.toolStrip1.TabIndex = 519;
+            this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // importIntoTilemap
             // 
             this.importIntoTilemap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.importIntoTilemap.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importIntoTilemap.Image = global::LAZYSHELL.Properties.Resources.importImage;
             this.importIntoTilemap.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importIntoTilemap.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.importIntoTilemap.Name = "importIntoTilemap";
@@ -626,7 +643,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(78, 284);
-            this.panel1.TabIndex = 520;
+            this.panel1.TabIndex = 1;
             // 
             // labelCoords
             // 
@@ -637,7 +654,7 @@
             this.labelCoords.Name = "labelCoords";
             this.labelCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
             this.labelCoords.Size = new System.Drawing.Size(416, 24);
-            this.labelCoords.TabIndex = 522;
+            this.labelCoords.TabIndex = 4;
             this.labelCoords.Text = "(x: 0, y: 0) Pixel";
             this.labelCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -653,7 +670,7 @@
             this.panelMoldImage.Location = new System.Drawing.Point(101, 25);
             this.panelMoldImage.Name = "panelMoldImage";
             this.panelMoldImage.Size = new System.Drawing.Size(416, 260);
-            this.panelMoldImage.TabIndex = 517;
+            this.panelMoldImage.TabIndex = 3;
             // 
             // pictureBoxMold
             // 
@@ -675,13 +692,12 @@
             this.panelTileset.Controls.Add(this.panel4);
             this.panelTileset.Controls.Add(this.panel3);
             this.panelTileset.Controls.Add(this.panel2);
-            this.panelTileset.Controls.Add(this.label2);
             this.panelTileset.Controls.Add(this.toolStrip2);
             this.panelTileset.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelTileset.Location = new System.Drawing.Point(517, 25);
             this.panelTileset.Name = "panelTileset";
             this.panelTileset.Size = new System.Drawing.Size(148, 284);
-            this.panelTileset.TabIndex = 41;
+            this.panelTileset.TabIndex = 5;
             // 
             // panel4
             // 
@@ -693,7 +709,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 227);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(148, 57);
-            this.panel4.TabIndex = 426;
+            this.panel4.TabIndex = 3;
             // 
             // moldTileProperties
             // 
@@ -709,7 +725,7 @@
             this.moldTileProperties.MultiColumn = true;
             this.moldTileProperties.Name = "moldTileProperties";
             this.moldTileProperties.Size = new System.Drawing.Size(148, 36);
-            this.moldTileProperties.TabIndex = 46;
+            this.moldTileProperties.TabIndex = 0;
             this.moldTileProperties.SelectedIndexChanged += new System.EventHandler(this.moldTileProperties_SelectedIndexChanged);
             // 
             // label1
@@ -720,7 +736,7 @@
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.label1.Size = new System.Drawing.Size(89, 21);
-            this.label1.TabIndex = 425;
+            this.label1.TabIndex = 1;
             this.label1.Text = "Subtile";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -734,7 +750,7 @@
             0});
             this.subtile.Name = "subtile";
             this.subtile.Size = new System.Drawing.Size(59, 21);
-            this.subtile.TabIndex = 424;
+            this.subtile.TabIndex = 2;
             this.subtile.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.subtile.ValueChanged += new System.EventHandler(this.subtile_ValueChanged);
             // 
@@ -748,7 +764,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 206);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(148, 21);
-            this.panel3.TabIndex = 425;
+            this.panel3.TabIndex = 2;
             // 
             // moldTileYCoord
             // 
@@ -760,7 +776,7 @@
             0});
             this.moldTileYCoord.Name = "moldTileYCoord";
             this.moldTileYCoord.Size = new System.Drawing.Size(59, 21);
-            this.moldTileYCoord.TabIndex = 48;
+            this.moldTileYCoord.TabIndex = 2;
             this.moldTileYCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.moldTileYCoord.ValueChanged += new System.EventHandler(this.moldTileYCoord_ValueChanged);
             // 
@@ -772,7 +788,7 @@
             this.label13.Name = "label13";
             this.label13.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.label13.Size = new System.Drawing.Size(30, 21);
-            this.label13.TabIndex = 423;
+            this.label13.TabIndex = 0;
             this.label13.Text = "Size";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -786,7 +802,7 @@
             0});
             this.moldTileXCoord.Name = "moldTileXCoord";
             this.moldTileXCoord.Size = new System.Drawing.Size(59, 21);
-            this.moldTileXCoord.TabIndex = 47;
+            this.moldTileXCoord.TabIndex = 1;
             this.moldTileXCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.moldTileXCoord.ValueChanged += new System.EventHandler(this.moldTileXCoord_ValueChanged);
             // 
@@ -800,7 +816,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 25);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(148, 181);
-            this.panel2.TabIndex = 424;
+            this.panel2.TabIndex = 1;
             // 
             // pictureBoxTileset
             // 
@@ -818,14 +834,6 @@
             this.pictureBoxTileset.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseMove);
             this.pictureBoxTileset.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 272);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 13);
-            this.label2.TabIndex = 427;
-            // 
             // toolStrip2
             // 
             this.toolStrip2.BackColor = System.Drawing.SystemColors.Control;
@@ -842,7 +850,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(148, 25);
-            this.toolStrip2.TabIndex = 43;
+            this.toolStrip2.TabIndex = 0;
             // 
             // showGrid
             // 
@@ -891,16 +899,16 @@
             this.newTile.Image = global::LAZYSHELL.Properties.Resources.new_small;
             this.newTile.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newTile.Name = "newTile";
-            this.newTile.Size = new System.Drawing.Size(152, 22);
+            this.newTile.Size = new System.Drawing.Size(151, 22);
             this.newTile.Text = "New Tile";
             this.newTile.Click += new System.EventHandler(this.newTile_Click);
             // 
             // importTile
             // 
-            this.importTile.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importTile.Image = global::LAZYSHELL.Properties.Resources.importImage;
             this.importTile.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importTile.Name = "importTile";
-            this.importTile.Size = new System.Drawing.Size(152, 22);
+            this.importTile.Size = new System.Drawing.Size(151, 22);
             this.importTile.Text = "Import Tile(s)...";
             this.importTile.Click += new System.EventHandler(this.importTile_Click);
             // 
@@ -971,8 +979,8 @@
         private LAZYSHELL.NewPanel panelMoldImage;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton showMoldPixelGrid;
-        private System.Windows.Forms.ToolStripButton moldZoomIn;
-        private System.Windows.Forms.ToolStripButton moldZoomOut;
+        private System.Windows.Forms.ToolStripButton zoomIn;
+        private System.Windows.Forms.ToolStripButton zoomOut;
         private LAZYSHELL.NewPictureBox pictureBoxMold;
         private System.Windows.Forms.ListBox listBoxMolds;
         private LAZYSHELL.NewPanel panelTileset;
@@ -1040,7 +1048,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripButton adjustCoords;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem newTile;
         private System.Windows.Forms.ToolStripMenuItem importTile;

@@ -12,20 +12,53 @@ namespace LAZYSHELL
     public partial class NewMessageBox : Form
     {
         public Button Button1 { get { return button1; } set { button1 = value; } }
-        public NewMessageBox(string title, string description, string contents, string fontfamily)
-        {
-            InitializeComponent();
-            this.Text = title;
-            this.label1.Text = description;
-            this.richTextBox1.Text = contents;
-            if (fontfamily != "")
-                richTextBox1.Font = new Font(fontfamily, 8.25F);
-        }
         public NewMessageBox(string title, string description, string contents)
         {
             InitializeComponent();
             this.Text = title;
+            Bitmap icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath).ToBitmap();
+            this.pictureBox1.Image = icon;
             this.label1.Text = description;
+            this.richTextBox1.Text = contents;
+        }
+        public NewMessageBox(string title, string description, string contents, string fontFamily)
+        {
+            InitializeComponent();
+            this.Text = title;
+            Bitmap icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath).ToBitmap();
+            this.pictureBox1.Image = icon;
+            this.label1.Text = description;
+            this.richTextBox1.Text = contents;
+            if (fontFamily != "")
+                richTextBox1.Font = new Font(fontFamily, 8.25F);
+        }
+        public NewMessageBox(string title, string description, string contents, string fontFamily, MessageIcon messageIcon)
+        {
+            InitializeComponent();
+            this.Text = title;
+            Bitmap icon;
+            switch (messageIcon)
+            {
+                case MessageIcon.None:
+                    icon = new Bitmap(32, 32);
+                    break;
+                case MessageIcon.Error:
+                    icon = SystemIcons.Error.ToBitmap();
+                    break;
+                case MessageIcon.Info:
+                    icon = SystemIcons.Information.ToBitmap();
+                    break;
+                case MessageIcon.Warning:
+                    icon = SystemIcons.Warning.ToBitmap();
+                    break;
+                default:
+                    icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath).ToBitmap();
+                    break;
+            }
+            this.pictureBox1.Image = icon;
+            this.label1.Text = description;
+            if (fontFamily != "")
+                this.richTextBox1.Font = new Font(fontFamily, 8.25F);
             this.richTextBox1.Text = contents;
         }
         private void buttonOK_Click(object sender, EventArgs e)
@@ -76,6 +109,10 @@ namespace LAZYSHELL
         public static void Show(string title, string description, string contents, string fontfamily)
         {
             new NewMessageBox(title, description, contents, fontfamily).ShowDialog();
+        }
+        public static void Show(string title, string description, string contents, MessageIcon messageIcon)
+        {
+            new NewMessageBox(title, description, contents, "", messageIcon).ShowDialog();
         }
     }
 }

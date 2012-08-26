@@ -123,32 +123,46 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="importTilesetsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAYAAAA/I0V3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAABVSURBVDhPY2DADv4DhWEYhxJM4aGuCdn9xLIZ/qMDpJDD
-        JYfQhKwYnQ3TDRVHtQmbRmTrsGoCKSDJeegmYngIYSBmQGBTjNdP+DQgOZ1Mm/AFNTY5ADjTXrA7MBeq
-        AAAAAElFTkSuQmCC
+        R0lGODlhDgAQAIMAAAAAAEJCQv///////////////////////////////////////////////wAAAP//
+        /yH/C05FVFNDQVBFMi4wAwEBAAAh+QQDAAAOACwAAAAADgAQAAAITgABCBxIsKCAgwgTHhQoIEDDgw4f
+        CmDosOLDiBQlRsQIQKHHiR01XlzY0aJJkhBTWgT5UWHBlwQdyJwpcKZNmTAB3MRZcCfNgT5t1rwZEAA7
 </value>
   </data>
   <data name="importTilemapsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAYAAAA/I0V3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAABVSURBVDhPY2DADv4DhWEYhxJM4aGuCdn9xLIZ/qMDpJDD
-        JYfQhKwYnQ3TDRVHtQmbRmTrsGoCKSDJeegmYngIYSBmQGBTjNdP+DQgOZ1Mm/AFNTY5ADjTXrA7MBeq
-        AAAAAElFTkSuQmCC
+        R0lGODlhDgAQAIMAAAAAAEJCQv///////////////////////////////////////////////wAAAP//
+        /yH/C05FVFNDQVBFMi4wAwEBAAAh+QQDAAAOACwAAAAADgAQAAAITgABCBxIsKCAgwgTHhQoIEDDgw4f
+        CmDosOLDiBQlRsQIQKHHiR01XlzY0aJJkhBTWgT5UWHBlwQdyJwpcKZNmTAB3MRZcCfNgT5t1rwZEAA7
+</value>
+  </data>
+  <data name="toolStripDropDownButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAYAAAAmlE46AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABdSURBVDhPY2BgYPhPJmb4TyqAWgTR6OTkhEIji6Gz8WpE
+        NwjGBxlCHRtJ8SeKjbj8hM3v1PEj2TaS5UdyUw5QH1YAjy9cCpDFCaVbvGbg0kyMxRg5hihNMEV4/QgA
+        Bau4hlzR1O8AAAAASUVORK5CYII=
 </value>
   </data>
   <data name="exportTilesetsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAYAAAA/I0V3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAABFSURBVDhPY2DADf7jkcMqBdIAw0TpRdZAlEZsGojSCHIO
-        QefhMx2XHMN/dIBsEw65kaEJI2SQBKCBhBkQtNOElgIIRjYA7LZuoF48umkAAAAASUVORK5CYII=
+        R0lGODlhDgAQAIMAAAAAAEJCQv///////////////////////////////////////////////wAAAP//
+        /yH/C05FVFNDQVBFMi4wAwEBAAAh+QQDAAAOACwAAAAADgAQAAAITAAdCBwIAMDAgwcLFkSYUOFChg4d
+        MiRoEGHEiw4FaNzIUWNBjQFACggZUsBHkiNTlvyYUmVLlh07nmxZciUAlyhtuqTp8WZMmRgxBgQAOw==
 </value>
   </data>
   <data name="exportTilemapsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAYAAAA/I0V3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAABFSURBVDhPY2DADf7jkcMqBdIAw0TpRdZAlEZsGojSCHIO
-        QefhMx2XHMN/dIBsEw65kaEJI2SQBKCBhBkQtNOElgIIRjYA7LZuoF48umkAAAAASUVORK5CYII=
+        R0lGODlhDgAQAIMAAAAAAEJCQv///////////////////////////////////////////////wAAAP//
+        /yH/C05FVFNDQVBFMi4wAwEBAAAh+QQDAAAOACwAAAAADgAQAAAITAAdCBwIAMDAgwcLFkSYUOFChg4d
+        MiRoEGHEiw4FaNzIUWNBjQFACggZUsBHkiNTlvyYUmVLlh07nmxZciUAlyhtuqTp8WZMmRgxBgQAOw==
+</value>
+  </data>
+  <data name="toolStripDropDownButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAYAAAAmlE46AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABfSURBVDhPY2DADf4DpUCYJADTRJJmdE1EacaliSjNMD8R
+        VEzIFpxO/08qgIU2XJ+TkxMGGyaGLIeiEV0BLj7IZOrYSIo/8ToVZBA2P2M4lWw/Ygs9omwky49Qz5KU
+        ggDdZLiGXNlWgQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

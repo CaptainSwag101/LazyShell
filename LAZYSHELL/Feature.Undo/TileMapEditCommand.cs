@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace LAZYSHELL.Undo
 {
-    class TileMapEditCommand : Command
+    class TilemapEditCommand : Command
     {
         private Levels updater;
         private Tilemap tilemap;
@@ -18,7 +18,7 @@ namespace LAZYSHELL.Undo
         private bool pasting;
         private bool transparent;
         private bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
-        public TileMapEditCommand(Levels updater, Tilemap tilemap, int layer, Point topLeft, Point bottomRight, int[][] changes, bool pasting, bool transparent, bool allLayers)
+        public TilemapEditCommand(Levels updater, Tilemap tilemap, int layer, Point topLeft, Point bottomRight, int[][] changes, bool pasting, bool transparent, bool allLayers)
         {
             if (updater != null)
                 state = State.Instance;

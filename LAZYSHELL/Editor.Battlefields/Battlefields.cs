@@ -896,7 +896,7 @@ namespace LAZYSHELL
         {
             new IOElements(this, index, "EXPORT BATTLEFIELDS...").ShowDialog();
         }
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void clear_Click(object sender, EventArgs e)
         {
             ClearElements clearElements = new ClearElements(null, index, "CLEAR BATTLEFIELD TILESETS...");
             clearElements.ShowDialog();

@@ -13,6 +13,7 @@ namespace LAZYSHELL
 {
     public static class Model
     {
+        public static int HighestOctave = 0;
         private static Program program;
         public static Program Program { get { return program; } set { program = value; } }
         private static byte[] data;
@@ -80,20 +81,50 @@ namespace LAZYSHELL
             }
             set { audioSamples = value; }
         }
-        private static SPC[] spcs;
-        public static SPC[] SPCs
+        private static SPCTrack[] spcs;
+        public static SPCTrack[] SPCs
         {
             get
             {
                 if (spcs == null)
                 {
-                    spcs = new SPC[73];
+                    spcs = new SPCTrack[74];
                     for (int i = 0; i < spcs.Length; i++)
-                        spcs[i] = new SPC(data, i);
+                        spcs[i] = new SPCTrack(data, i);
                 }
                 return spcs;
             }
             set { spcs = value; }
+        }
+        private static SPCSound[] soundsEvent;
+        public static SPCSound[] SPCEvent
+        {
+            get
+            {
+                if (soundsEvent == null)
+                {
+                    soundsEvent = new SPCSound[163];
+                    for (int i = 0; i < soundsEvent.Length; i++)
+                        soundsEvent[i] = new SPCSound(i, 0);
+                }
+                return soundsEvent;
+            }
+            set { soundsEvent = value; }
+        }
+        private static SPCSound[] soundsBattle;
+        public static SPCSound[] SPCBattle
+        {
+            get
+            {
+                if (soundsBattle == null)
+                {
+                    soundsBattle = new SPCSound[211];
+                    for (int i = 0; i < soundsBattle.Length; i++)
+                        soundsBattle[i] = new SPCSound(i, 1);
+                }
+                return soundsBattle;
+            }
+            set { soundsBattle = value; }
         }
         #endregion
         #region Battlefields
@@ -269,6 +300,24 @@ namespace LAZYSHELL
             }
             set { dialogueTables = value; }
         }
+        private static BonusMessage[] bonusMessages;
+        public static BonusMessage[] BonusMessages
+        {
+            get
+            {
+                if (bonusMessages == null)
+                {
+                    bonusMessages = new BonusMessage[7];
+                    for (int i = 0; i < bonusMessages.Length; i++)
+                        bonusMessages[i] = new BonusMessage(i);
+                }
+                return bonusMessages;
+            }
+            set
+            {
+                bonusMessages = value;
+            }
+        }
         #endregion
         #region Effects
         private static Effect[] effects;
@@ -311,12 +360,14 @@ namespace LAZYSHELL
         private static FontCharacter[] fontDescription;
         private static FontCharacter[] fontTriangle;
         private static FontCharacter[] fontBattleMenu;
+        private static FontCharacter[] fontFlowerBonus;
         private static PaletteSet fontPaletteDialogue;
         private static PaletteSet fontPaletteBattle;
         private static PaletteSet fontPaletteMenu;
         private static byte[] numeralGraphics;
         private static PaletteSet numeralPaletteSet;
         private static byte[] battleMenuGraphics;
+        private static byte[] bonusFontGraphics;
         private static PaletteSet battleMenuPalette;
         public static FontCharacter[] FontDialogue
         {
@@ -432,11 +483,23 @@ namespace LAZYSHELL
                 {
                     battleMenuGraphics = new byte[0x800];
                     Buffer.BlockCopy(data, 0x1F200, battleMenuGraphics, 0, 0x600);
-                    Buffer.BlockCopy(data, 0x1ED00, battleMenuGraphics, 0x600, 0x200);
+                    Buffer.BlockCopy(data, 0x1ED00, battleMenuGraphics, 0x600, 0x140);
                 }
                 return battleMenuGraphics;
             }
             set { battleMenuGraphics = value; }
+        }
+        public static byte[] BonusFontGraphics
+        {
+            get
+            {
+                if (bonusFontGraphics == null)
+                {
+                    bonusFontGraphics = Bits.GetByteArray(Sprites[520].Graphics, 0, 0x400);
+                }
+                return bonusFontGraphics;
+            }
+            set { bonusFontGraphics = value; }
         }
         public static PaletteSet BattleMenuPalette
         {
@@ -461,6 +524,20 @@ namespace LAZYSHELL
                 return fontBattleMenu;
             }
             set { fontBattleMenu = value; }
+        }
+        public static FontCharacter[] FontFlowerBonus
+        {
+            get
+            {
+                if (fontFlowerBonus == null)
+                {
+                    fontFlowerBonus = new FontCharacter[32];
+                    for (int i = 0; i < fontFlowerBonus.Length; i++)
+                        fontFlowerBonus[i] = new FontCharacter(BonusFontGraphics, i, 5);
+                }
+                return fontFlowerBonus;
+            }
+            set { fontFlowerBonus = value; }
         }
         #endregion
         #region Levels
@@ -2251,9 +2328,12 @@ namespace LAZYSHELL
             dummy = BattleDialogueTilesetImage;
             dummy = BattleEvents;
             dummy = Battlefields;
+            dummy = BattleMenuGraphics;
+            dummy = BattleMenuPalette;
             dummy = BattleMessages;
             dummy = BattleScripts;
             dummy = BehaviorAnimations;
+            dummy = BonusMessages;
             dummy = Characters;
             dummy = DialogueGraphics;
             dummy = Dialogues;
@@ -2327,6 +2407,9 @@ namespace LAZYSHELL
             dummy = PrioritySets;
             dummy = Shops;
             dummy = Slots;
+            dummy = SPCEvent;
+            dummy = SPCBattle;
+            dummy = SPCs;
             dummy = SpellAnimAllies;
             dummy = SpellAnimMonsters;
             dummy = SpellNames;
@@ -2366,8 +2449,11 @@ namespace LAZYSHELL
             battleEvents = null;
             battlefields = null;
             battleMessages = null;
+            battleMenuGraphics = null;
+            battleMenuPalette = null;
             battleScripts = null;
             behaviorAnimations = null;
+            bonusMessages = null;
             characters = null;
             dialogueGraphics = null;
             dialogues = null;
@@ -2441,6 +2527,9 @@ namespace LAZYSHELL
             prioritySets = null;
             shops = null;
             slots = null;
+            soundsEvent = null;
+            soundsBattle = null;
+            spcs = null;
             spellAnimAllies = null;
             spellAnimMonsters = null;
             spellNames = null;

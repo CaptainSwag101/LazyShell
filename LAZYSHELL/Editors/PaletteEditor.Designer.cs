@@ -190,7 +190,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(260, 276);
-            this.tabControl1.TabIndex = 521;
+            this.tabControl1.TabIndex = 7;
             // 
             // tabPage1
             // 
@@ -212,7 +212,7 @@
             this.groupBox7.Location = new System.Drawing.Point(0, 175);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(252, 75);
-            this.groupBox7.TabIndex = 20;
+            this.groupBox7.TabIndex = 2;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Equalize RGB";
             // 
@@ -245,7 +245,7 @@
             this.equateGreensB.Location = new System.Drawing.Point(0, 16);
             this.equateGreensB.Name = "equateGreensB";
             this.equateGreensB.Size = new System.Drawing.Size(59, 17);
-            this.equateGreensB.TabIndex = 0;
+            this.equateGreensB.TabIndex = 1;
             this.equateGreensB.Text = "Greens";
             this.equateGreensB.UseVisualStyleBackColor = true;
             this.equateGreensB.Click += new System.EventHandler(this.equateGreensB_CheckedChanged);
@@ -256,7 +256,7 @@
             this.equateBluesB.Location = new System.Drawing.Point(0, 32);
             this.equateBluesB.Name = "equateBluesB";
             this.equateBluesB.Size = new System.Drawing.Size(50, 17);
-            this.equateBluesB.TabIndex = 0;
+            this.equateBluesB.TabIndex = 2;
             this.equateBluesB.Text = "Blues";
             this.equateBluesB.UseVisualStyleBackColor = true;
             this.equateBluesB.Click += new System.EventHandler(this.equateBluesB_CheckedChanged);
@@ -290,7 +290,7 @@
             this.equateGreensA.Location = new System.Drawing.Point(0, 16);
             this.equateGreensA.Name = "equateGreensA";
             this.equateGreensA.Size = new System.Drawing.Size(59, 17);
-            this.equateGreensA.TabIndex = 0;
+            this.equateGreensA.TabIndex = 1;
             this.equateGreensA.Text = "Greens";
             this.equateGreensA.UseVisualStyleBackColor = true;
             this.equateGreensA.Click += new System.EventHandler(this.equateGreensA_CheckedChanged);
@@ -301,7 +301,7 @@
             this.equateBluesA.Location = new System.Drawing.Point(0, 32);
             this.equateBluesA.Name = "equateBluesA";
             this.equateBluesA.Size = new System.Drawing.Size(50, 17);
-            this.equateBluesA.TabIndex = 0;
+            this.equateBluesA.TabIndex = 2;
             this.equateBluesA.Text = "Blues";
             this.equateBluesA.UseVisualStyleBackColor = true;
             this.equateBluesA.Click += new System.EventHandler(this.equateBluesA_CheckedChanged);
@@ -312,7 +312,7 @@
             this.label10.Location = new System.Drawing.Point(122, 19);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(42, 13);
-            this.label10.TabIndex = 19;
+            this.label10.TabIndex = 1;
             this.label10.Text = "Equals:";
             // 
             // label11
@@ -321,7 +321,7 @@
             this.label11.Location = new System.Drawing.Point(6, 19);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(30, 13);
-            this.label11.TabIndex = 19;
+            this.label11.TabIndex = 0;
             this.label11.Text = "This:";
             // 
             // groupBox6
@@ -366,7 +366,7 @@
             this.switchGreensA.Location = new System.Drawing.Point(0, 16);
             this.switchGreensA.Name = "switchGreensA";
             this.switchGreensA.Size = new System.Drawing.Size(59, 17);
-            this.switchGreensA.TabIndex = 0;
+            this.switchGreensA.TabIndex = 1;
             this.switchGreensA.Text = "Greens";
             this.switchGreensA.UseVisualStyleBackColor = true;
             this.switchGreensA.Click += new System.EventHandler(this.switchGreensA_CheckedChanged);
@@ -377,7 +377,7 @@
             this.switchBluesA.Location = new System.Drawing.Point(0, 32);
             this.switchBluesA.Name = "switchBluesA";
             this.switchBluesA.Size = new System.Drawing.Size(50, 17);
-            this.switchBluesA.TabIndex = 0;
+            this.switchBluesA.TabIndex = 2;
             this.switchBluesA.Text = "Blues";
             this.switchBluesA.UseVisualStyleBackColor = true;
             this.switchBluesA.Click += new System.EventHandler(this.switchBluesA_CheckedChanged);
@@ -411,7 +411,7 @@
             this.switchGreensB.Location = new System.Drawing.Point(0, 16);
             this.switchGreensB.Name = "switchGreensB";
             this.switchGreensB.Size = new System.Drawing.Size(59, 17);
-            this.switchGreensB.TabIndex = 0;
+            this.switchGreensB.TabIndex = 1;
             this.switchGreensB.Text = "Greens";
             this.switchGreensB.UseVisualStyleBackColor = true;
             this.switchGreensB.Click += new System.EventHandler(this.switchGreensB_CheckedChanged);
@@ -422,7 +422,7 @@
             this.switchBluesB.Location = new System.Drawing.Point(0, 32);
             this.switchBluesB.Name = "switchBluesB";
             this.switchBluesB.Size = new System.Drawing.Size(50, 17);
-            this.switchBluesB.TabIndex = 0;
+            this.switchBluesB.TabIndex = 2;
             this.switchBluesB.Text = "Blues";
             this.switchBluesB.UseVisualStyleBackColor = true;
             this.switchBluesB.Click += new System.EventHandler(this.switchBluesB_CheckedChanged);
@@ -433,7 +433,7 @@
             this.label9.Location = new System.Drawing.Point(131, 19);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(33, 13);
-            this.label9.TabIndex = 19;
+            this.label9.TabIndex = 1;
             this.label9.Text = "With:";
             // 
             // label8
@@ -442,7 +442,7 @@
             this.label8.Location = new System.Drawing.Point(6, 19);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 13);
-            this.label8.TabIndex = 19;
+            this.label8.TabIndex = 0;
             this.label8.Text = "Switch:";
             // 
             // groupBox5
@@ -459,7 +459,7 @@
             this.groupBox5.Location = new System.Drawing.Point(0, 0);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(252, 89);
-            this.groupBox5.TabIndex = 1;
+            this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Color Levels";
             // 
@@ -473,7 +473,7 @@
             -2147483648});
             this.levelsReds.Name = "levelsReds";
             this.levelsReds.Size = new System.Drawing.Size(41, 21);
-            this.levelsReds.TabIndex = 10;
+            this.levelsReds.TabIndex = 1;
             this.levelsReds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.levelsReds.ValueChanged += new System.EventHandler(this.levelsReds_ValueChanged);
             // 
@@ -483,7 +483,7 @@
             this.label6.Location = new System.Drawing.Point(6, 64);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 13);
-            this.label6.TabIndex = 19;
+            this.label6.TabIndex = 6;
             this.label6.Text = "Blues";
             // 
             // label4
@@ -492,7 +492,7 @@
             this.label4.Location = new System.Drawing.Point(6, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
-            this.label4.TabIndex = 19;
+            this.label4.TabIndex = 0;
             this.label4.Text = "Reds";
             // 
             // levelsBlues
@@ -505,7 +505,7 @@
             -2147483648});
             this.levelsBlues.Name = "levelsBlues";
             this.levelsBlues.Size = new System.Drawing.Size(41, 21);
-            this.levelsBlues.TabIndex = 12;
+            this.levelsBlues.TabIndex = 7;
             this.levelsBlues.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.levelsBlues.ValueChanged += new System.EventHandler(this.levelsBlues_ValueChanged);
             // 
@@ -519,7 +519,7 @@
             this.levelsGreensBar.Name = "levelsGreensBar";
             this.levelsGreensBar.Size = new System.Drawing.Size(151, 20);
             this.levelsGreensBar.SmallChange = 8;
-            this.levelsGreensBar.TabIndex = 17;
+            this.levelsGreensBar.TabIndex = 5;
             this.levelsGreensBar.TickFrequency = 8;
             this.levelsGreensBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.levelsGreensBar.Scroll += new System.EventHandler(this.levelsGreensBar_Scroll);
@@ -534,7 +534,7 @@
             -2147483648});
             this.levelsGreens.Name = "levelsGreens";
             this.levelsGreens.Size = new System.Drawing.Size(41, 21);
-            this.levelsGreens.TabIndex = 11;
+            this.levelsGreens.TabIndex = 4;
             this.levelsGreens.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.levelsGreens.ValueChanged += new System.EventHandler(this.levelsGreens_ValueChanged);
             // 
@@ -544,7 +544,7 @@
             this.label5.Location = new System.Drawing.Point(6, 43);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 13);
-            this.label5.TabIndex = 19;
+            this.label5.TabIndex = 3;
             this.label5.Text = "Greens";
             // 
             // levelsRedsBar
@@ -557,7 +557,7 @@
             this.levelsRedsBar.Name = "levelsRedsBar";
             this.levelsRedsBar.Size = new System.Drawing.Size(151, 20);
             this.levelsRedsBar.SmallChange = 8;
-            this.levelsRedsBar.TabIndex = 16;
+            this.levelsRedsBar.TabIndex = 2;
             this.levelsRedsBar.TickFrequency = 8;
             this.levelsRedsBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.levelsRedsBar.Scroll += new System.EventHandler(this.levelsRedsBar_Scroll);
@@ -572,7 +572,7 @@
             this.levelsBluesBar.Name = "levelsBluesBar";
             this.levelsBluesBar.Size = new System.Drawing.Size(151, 20);
             this.levelsBluesBar.SmallChange = 8;
-            this.levelsBluesBar.TabIndex = 18;
+            this.levelsBluesBar.TabIndex = 8;
             this.levelsBluesBar.TickFrequency = 8;
             this.levelsBluesBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.levelsBluesBar.Scroll += new System.EventHandler(this.levelsBluesBar_Scroll);
@@ -602,7 +602,7 @@
             this.groupBox4.Location = new System.Drawing.Point(0, 183);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(252, 67);
-            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             // 
             // pictureBox1
@@ -626,7 +626,7 @@
             this.colorizeHueBar.Name = "colorizeHueBar";
             this.colorizeHueBar.Size = new System.Drawing.Size(189, 20);
             this.colorizeHueBar.SmallChange = 8;
-            this.colorizeHueBar.TabIndex = 23;
+            this.colorizeHueBar.TabIndex = 2;
             this.colorizeHueBar.TickFrequency = 8;
             this.colorizeHueBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.colorizeHueBar.Value = 128;
@@ -642,7 +642,7 @@
             this.colorizeSaturationBar.Name = "colorizeSaturationBar";
             this.colorizeSaturationBar.Size = new System.Drawing.Size(189, 20);
             this.colorizeSaturationBar.SmallChange = 8;
-            this.colorizeSaturationBar.TabIndex = 535;
+            this.colorizeSaturationBar.TabIndex = 4;
             this.colorizeSaturationBar.TickFrequency = 8;
             this.colorizeSaturationBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.colorizeSaturationBar.Value = 128;
@@ -654,7 +654,7 @@
             this.colorizeApply.Location = new System.Drawing.Point(6, 0);
             this.colorizeApply.Name = "colorizeApply";
             this.colorizeApply.Size = new System.Drawing.Size(63, 17);
-            this.colorizeApply.TabIndex = 533;
+            this.colorizeApply.TabIndex = 0;
             this.colorizeApply.Text = "Colorize";
             this.colorizeApply.UseVisualStyleBackColor = false;
             this.colorizeApply.CheckedChanged += new System.EventHandler(this.colorizeApply_CheckedChanged);
@@ -670,7 +670,7 @@
             0});
             this.colorizeHue.Name = "colorizeHue";
             this.colorizeHue.Size = new System.Drawing.Size(50, 21);
-            this.colorizeHue.TabIndex = 20;
+            this.colorizeHue.TabIndex = 1;
             this.colorizeHue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.colorizeHue.Value = new decimal(new int[] {
             128,
@@ -690,7 +690,7 @@
             0});
             this.colorizeSaturation.Name = "colorizeSaturation";
             this.colorizeSaturation.Size = new System.Drawing.Size(50, 21);
-            this.colorizeSaturation.TabIndex = 534;
+            this.colorizeSaturation.TabIndex = 3;
             this.colorizeSaturation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.colorizeSaturation.Value = new decimal(new int[] {
             128,
@@ -707,7 +707,7 @@
             this.groupBox3.Location = new System.Drawing.Point(0, 130);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(252, 47);
-            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             // 
             // thresholdApply
@@ -716,7 +716,7 @@
             this.thresholdApply.Location = new System.Drawing.Point(6, 0);
             this.thresholdApply.Name = "thresholdApply";
             this.thresholdApply.Size = new System.Drawing.Size(73, 17);
-            this.thresholdApply.TabIndex = 533;
+            this.thresholdApply.TabIndex = 0;
             this.thresholdApply.Text = "Threshold";
             this.thresholdApply.UseVisualStyleBackColor = false;
             this.thresholdApply.Click += new System.EventHandler(this.thresholdApply_CheckedChanged);
@@ -737,7 +737,7 @@
             0});
             this.threshold.Name = "threshold";
             this.threshold.Size = new System.Drawing.Size(50, 21);
-            this.threshold.TabIndex = 20;
+            this.threshold.TabIndex = 1;
             this.threshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.threshold.Value = new decimal(new int[] {
             128,
@@ -757,7 +757,7 @@
             this.trackBarThreshold.Name = "trackBarThreshold";
             this.trackBarThreshold.Size = new System.Drawing.Size(189, 20);
             this.trackBarThreshold.SmallChange = 8;
-            this.trackBarThreshold.TabIndex = 23;
+            this.trackBarThreshold.TabIndex = 2;
             this.trackBarThreshold.TickFrequency = 8;
             this.trackBarThreshold.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBarThreshold.Value = 128;
@@ -770,7 +770,7 @@
             this.groupBox2.Location = new System.Drawing.Point(0, 79);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(252, 47);
-            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Contrast";
             // 
@@ -784,7 +784,7 @@
             -2147483648});
             this.contrast.Name = "contrast";
             this.contrast.Size = new System.Drawing.Size(50, 21);
-            this.contrast.TabIndex = 20;
+            this.contrast.TabIndex = 0;
             this.contrast.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.contrast.ValueChanged += new System.EventHandler(this.contrast_ValueChanged);
             // 
@@ -798,7 +798,7 @@
             this.trackBarContrast.Name = "trackBarContrast";
             this.trackBarContrast.Size = new System.Drawing.Size(189, 20);
             this.trackBarContrast.SmallChange = 8;
-            this.trackBarContrast.TabIndex = 23;
+            this.trackBarContrast.TabIndex = 1;
             this.trackBarContrast.TickFrequency = 8;
             this.trackBarContrast.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBarContrast.Scroll += new System.EventHandler(this.trackBarContrast_Scroll);
@@ -810,7 +810,7 @@
             this.groupBox1.Location = new System.Drawing.Point(0, 26);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(252, 47);
-            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Brightness";
             // 
@@ -829,7 +829,7 @@
             -2147483648});
             this.brightness.Name = "brightness";
             this.brightness.Size = new System.Drawing.Size(50, 21);
-            this.brightness.TabIndex = 20;
+            this.brightness.TabIndex = 0;
             this.brightness.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.brightness.ValueChanged += new System.EventHandler(this.brightness_ValueChanged);
             // 
@@ -843,7 +843,7 @@
             this.trackBarBrightness.Name = "trackBarBrightness";
             this.trackBarBrightness.Size = new System.Drawing.Size(189, 20);
             this.trackBarBrightness.SmallChange = 8;
-            this.trackBarBrightness.TabIndex = 22;
+            this.trackBarBrightness.TabIndex = 1;
             this.trackBarBrightness.TickFrequency = 8;
             this.trackBarBrightness.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBarBrightness.Scroll += new System.EventHandler(this.trackBarBrightness_Scroll);
@@ -863,8 +863,8 @@
             this.negative.AutoSize = true;
             this.negative.Location = new System.Drawing.Point(88, 6);
             this.negative.Name = "negative";
-            this.negative.Size = new System.Drawing.Size(101, 17);
-            this.negative.TabIndex = 0;
+            this.negative.Size = new System.Drawing.Size(102, 17);
+            this.negative.TabIndex = 1;
             this.negative.Text = "Negative Image";
             this.negative.Click += new System.EventHandler(this.negative_CheckedChanged);
             // 
@@ -874,7 +874,7 @@
             this.currentHTML.MaxLength = 6;
             this.currentHTML.Name = "currentHTML";
             this.currentHTML.Size = new System.Drawing.Size(113, 21);
-            this.currentHTML.TabIndex = 6;
+            this.currentHTML.TabIndex = 10;
             this.currentHTML.TextChanged += new System.EventHandler(this.currentHTML_TextChanged);
             // 
             // pictureBoxColorMap
@@ -897,7 +897,7 @@
             this.buttonSetToColor.Location = new System.Drawing.Point(351, 165);
             this.buttonSetToColor.Name = "buttonSetToColor";
             this.buttonSetToColor.Size = new System.Drawing.Size(75, 23);
-            this.buttonSetToColor.TabIndex = 524;
+            this.buttonSetToColor.TabIndex = 8;
             this.buttonSetToColor.Text = "Set To Color";
             this.buttonSetToColor.Click += new System.EventHandler(this.buttonSetToColor_Click);
             // 
@@ -916,7 +916,7 @@
             this.label13.Location = new System.Drawing.Point(6, 88);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(37, 13);
-            this.label13.TabIndex = 19;
+            this.label13.TabIndex = 9;
             this.label13.Text = "HTML:";
             // 
             // label3
@@ -925,7 +925,7 @@
             this.label3.Location = new System.Drawing.Point(6, 64);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(13, 13);
-            this.label3.TabIndex = 19;
+            this.label3.TabIndex = 6;
             this.label3.Text = "B";
             // 
             // currentBlue
@@ -943,7 +943,7 @@
             0});
             this.currentBlue.Name = "currentBlue";
             this.currentBlue.Size = new System.Drawing.Size(42, 21);
-            this.currentBlue.TabIndex = 2;
+            this.currentBlue.TabIndex = 7;
             this.currentBlue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.currentBlue.ValueChanged += new System.EventHandler(this.currentBlue_ValueChanged);
             // 
@@ -962,7 +962,7 @@
             0});
             this.currentGreen.Name = "currentGreen";
             this.currentGreen.Size = new System.Drawing.Size(42, 21);
-            this.currentGreen.TabIndex = 1;
+            this.currentGreen.TabIndex = 4;
             this.currentGreen.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.currentGreen.ValueChanged += new System.EventHandler(this.currentGreen_ValueChanged);
             // 
@@ -972,7 +972,7 @@
             this.label1.Location = new System.Drawing.Point(6, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(14, 13);
-            this.label1.TabIndex = 19;
+            this.label1.TabIndex = 0;
             this.label1.Text = "R";
             // 
             // label2
@@ -981,7 +981,7 @@
             this.label2.Location = new System.Drawing.Point(6, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(14, 13);
-            this.label2.TabIndex = 19;
+            this.label2.TabIndex = 3;
             this.label2.Text = "G";
             // 
             // currentRed
@@ -999,7 +999,7 @@
             0});
             this.currentRed.Name = "currentRed";
             this.currentRed.Size = new System.Drawing.Size(42, 21);
-            this.currentRed.TabIndex = 0;
+            this.currentRed.TabIndex = 1;
             this.currentRed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.currentRed.ValueChanged += new System.EventHandler(this.currentRed_ValueChanged);
             // 
@@ -1018,7 +1018,7 @@
             this.buttonOK.Location = new System.Drawing.Point(231, 389);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 524;
+            this.buttonOK.TabIndex = 13;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -1029,7 +1029,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(312, 389);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 525;
+            this.buttonCancel.TabIndex = 14;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -1040,7 +1040,7 @@
             this.buttonReset.Location = new System.Drawing.Point(393, 389);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
-            this.buttonReset.TabIndex = 525;
+            this.buttonReset.TabIndex = 15;
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
@@ -1053,7 +1053,7 @@
             this.panel13.Location = new System.Drawing.Point(432, 153);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(36, 36);
-            this.panel13.TabIndex = 530;
+            this.panel13.TabIndex = 9;
             // 
             // panel9
             // 
@@ -1062,7 +1062,7 @@
             this.panel9.Location = new System.Drawing.Point(220, 35);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(52, 52);
-            this.panel9.TabIndex = 525;
+            this.panel9.TabIndex = 4;
             // 
             // panel11
             // 
@@ -1072,7 +1072,7 @@
             this.panel11.Location = new System.Drawing.Point(278, 195);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(190, 190);
-            this.panel11.TabIndex = 528;
+            this.panel11.TabIndex = 10;
             // 
             // trackBar3
             // 
@@ -1083,7 +1083,7 @@
             this.trackBar3.Name = "trackBar3";
             this.trackBar3.Size = new System.Drawing.Size(113, 20);
             this.trackBar3.SmallChange = 8;
-            this.trackBar3.TabIndex = 5;
+            this.trackBar3.TabIndex = 8;
             this.trackBar3.TickFrequency = 8;
             this.trackBar3.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar3.ValueChanged += new System.EventHandler(this.currentBlue_ValueChanged);
@@ -1097,7 +1097,7 @@
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(113, 20);
             this.trackBar2.SmallChange = 8;
-            this.trackBar2.TabIndex = 4;
+            this.trackBar2.TabIndex = 5;
             this.trackBar2.TickFrequency = 8;
             this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar2.ValueChanged += new System.EventHandler(this.currentGreen_ValueChanged);
@@ -1111,7 +1111,7 @@
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(113, 20);
             this.trackBar1.SmallChange = 8;
-            this.trackBar1.TabIndex = 3;
+            this.trackBar1.TabIndex = 2;
             this.trackBar1.TickFrequency = 8;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.ValueChanged += new System.EventHandler(this.currentRed_ValueChanged);
@@ -1123,7 +1123,7 @@
             this.panel7.Location = new System.Drawing.Point(24, 35);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(132, 68);
-            this.panel7.TabIndex = 524;
+            this.panel7.TabIndex = 2;
             // 
             // contextMenuStrip3
             // 
@@ -1132,19 +1132,22 @@
             this.exportPaletteSetToolStripMenuItem});
             this.contextMenuStrip3.Name = "contextMenuStrip3";
             this.contextMenuStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip3.ShowImageMargin = false;
-            this.contextMenuStrip3.Size = new System.Drawing.Size(149, 48);
+            this.contextMenuStrip3.Size = new System.Drawing.Size(174, 48);
             // 
             // importPaletteSetToolStripMenuItem
             // 
+            this.importPaletteSetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importPaletteSetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importPaletteSetToolStripMenuItem.Name = "importPaletteSetToolStripMenuItem";
-            this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.importPaletteSetToolStripMenuItem.Text = "Import palette set...";
             // 
             // exportPaletteSetToolStripMenuItem
             // 
+            this.exportPaletteSetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.exportPaletteSetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportPaletteSetToolStripMenuItem.Name = "exportPaletteSetToolStripMenuItem";
-            this.exportPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.exportPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.exportPaletteSetToolStripMenuItem.Text = "Export palette set...";
             // 
             // autoUpdate
@@ -1156,7 +1159,7 @@
             this.autoUpdate.Location = new System.Drawing.Point(93, 395);
             this.autoUpdate.Name = "autoUpdate";
             this.autoUpdate.Size = new System.Drawing.Size(87, 17);
-            this.autoUpdate.TabIndex = 531;
+            this.autoUpdate.TabIndex = 12;
             this.autoUpdate.Text = "Auto-update";
             this.autoUpdate.UseVisualStyleBackColor = false;
             // 
@@ -1166,7 +1169,7 @@
             this.buttonUpdate.Location = new System.Drawing.Point(12, 389);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
-            this.buttonUpdate.TabIndex = 532;
+            this.buttonUpdate.TabIndex = 11;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
@@ -1182,7 +1185,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(49, 25);
-            this.toolStrip1.TabIndex = 533;
+            this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // importPaletteSet
@@ -1215,7 +1218,7 @@
             this.alwaysOnTop.Location = new System.Drawing.Point(374, 12);
             this.alwaysOnTop.Name = "alwaysOnTop";
             this.alwaysOnTop.Size = new System.Drawing.Size(94, 17);
-            this.alwaysOnTop.TabIndex = 538;
+            this.alwaysOnTop.TabIndex = 5;
             this.alwaysOnTop.Text = "Always on top";
             this.alwaysOnTop.UseVisualStyleBackColor = true;
             this.alwaysOnTop.CheckedChanged += new System.EventHandler(this.alwaysOnTop_CheckedChanged);
@@ -1225,7 +1228,7 @@
             this.invertSelectedCols.Location = new System.Drawing.Point(19, 24);
             this.invertSelectedCols.Name = "invertSelectedCols";
             this.invertSelectedCols.Size = new System.Drawing.Size(6, 6);
-            this.invertSelectedCols.TabIndex = 539;
+            this.invertSelectedCols.TabIndex = 0;
             this.toolTip1.SetToolTip(this.invertSelectedCols, "Invert checked columns");
             this.invertSelectedCols.UseVisualStyleBackColor = true;
             this.invertSelectedCols.Click += new System.EventHandler(this.invertSelectedCols_CheckedChanged);
@@ -1235,7 +1238,7 @@
             this.invertSelectedRows.Location = new System.Drawing.Point(13, 30);
             this.invertSelectedRows.Name = "invertSelectedRows";
             this.invertSelectedRows.Size = new System.Drawing.Size(6, 6);
-            this.invertSelectedRows.TabIndex = 539;
+            this.invertSelectedRows.TabIndex = 1;
             this.toolTip1.SetToolTip(this.invertSelectedRows, "Invert checked rows");
             this.invertSelectedRows.UseVisualStyleBackColor = true;
             this.invertSelectedRows.Click += new System.EventHandler(this.invertSelectedRows_CheckedChanged);
@@ -1256,7 +1259,7 @@
             this.groupBox8.Location = new System.Drawing.Point(280, 30);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(188, 113);
-            this.groupBox8.TabIndex = 1;
+            this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Color Levels";
             // 

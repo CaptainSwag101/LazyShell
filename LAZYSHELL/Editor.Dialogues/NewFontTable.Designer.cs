@@ -74,7 +74,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(314, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(318, 25);
             this.toolStrip3.TabIndex = 0;
             this.toolStrip3.TabStop = true;
             this.toolStrip3.Text = "toolStrip3";
@@ -93,7 +93,7 @@
             // fontSize
             // 
             this.fontSize.Hexadecimal = false;
-            this.fontSize.Location = new System.Drawing.Point(191, 3);
+            this.fontSize.Location = new System.Drawing.Point(189, 3);
             this.fontSize.Maximum = new decimal(new int[] {
             20,
             0,
@@ -105,7 +105,7 @@
             0,
             0});
             this.fontSize.Name = "fontSize";
-            this.fontSize.Size = new System.Drawing.Size(35, 22);
+            this.fontSize.Size = new System.Drawing.Size(39, 22);
             this.fontSize.Text = "8";
             this.fontSize.Value = new decimal(new int[] {
             8,
@@ -184,7 +184,7 @@
             // 
             this.characterHeight.AutoSize = false;
             this.characterHeight.Hexadecimal = false;
-            this.characterHeight.Location = new System.Drawing.Point(132, 3);
+            this.characterHeight.Location = new System.Drawing.Point(130, 3);
             this.characterHeight.Maximum = new decimal(new int[] {
             24,
             0,
@@ -208,7 +208,6 @@
             // panel65
             // 
             this.panel65.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel65.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel65.Controls.Add(this.generateFontTableImage);
             this.panel65.Controls.Add(this.toolStrip2);
             this.panel65.Controls.Add(this.toolStrip1);
@@ -216,18 +215,18 @@
             this.panel65.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel65.Location = new System.Drawing.Point(0, 25);
             this.panel65.Name = "panel65";
-            this.panel65.Size = new System.Drawing.Size(314, 196);
-            this.panel65.TabIndex = 8;
+            this.panel65.Size = new System.Drawing.Size(318, 200);
+            this.panel65.TabIndex = 1;
             // 
             // generateFontTableImage
             // 
             this.generateFontTableImage.BackColor = System.Drawing.SystemColors.Control;
             this.generateFontTableImage.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.generateFontTableImage.FlatAppearance.BorderSize = 0;
-            this.generateFontTableImage.Location = new System.Drawing.Point(128, 169);
+            this.generateFontTableImage.Location = new System.Drawing.Point(132, 177);
             this.generateFontTableImage.Name = "generateFontTableImage";
-            this.generateFontTableImage.Size = new System.Drawing.Size(182, 23);
-            this.generateFontTableImage.TabIndex = 65;
+            this.generateFontTableImage.Size = new System.Drawing.Size(186, 23);
+            this.generateFontTableImage.TabIndex = 3;
             this.generateFontTableImage.Text = "Generate Image";
             this.generateFontTableImage.UseVisualStyleBackColor = false;
             this.generateFontTableImage.Click += new System.EventHandler(this.generateFontTableImage_Click);
@@ -243,11 +242,11 @@
             this.toolStripSeparator2,
             this.toolStripLabel1,
             this.characterHeight});
-            this.toolStrip2.Location = new System.Drawing.Point(128, 25);
+            this.toolStrip2.Location = new System.Drawing.Point(132, 25);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(182, 25);
-            this.toolStrip2.TabIndex = 568;
+            this.toolStrip2.Size = new System.Drawing.Size(186, 25);
+            this.toolStrip2.TabIndex = 3;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripLabel2
@@ -260,7 +259,7 @@
             // 
             this.padding.AutoSize = false;
             this.padding.Hexadecimal = false;
-            this.padding.Location = new System.Drawing.Point(36, 3);
+            this.padding.Location = new System.Drawing.Point(34, 3);
             this.padding.Maximum = new decimal(new int[] {
             16,
             0,
@@ -297,11 +296,11 @@
             this.resetTable,
             this.toolStripSeparator1,
             this.autoSetWidths});
-            this.toolStrip1.Location = new System.Drawing.Point(128, 0);
+            this.toolStrip1.Location = new System.Drawing.Point(132, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(182, 25);
-            this.toolStrip1.TabIndex = 567;
+            this.toolStrip1.Size = new System.Drawing.Size(186, 25);
+            this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // shiftTableUp
@@ -367,25 +366,26 @@
             // panel71
             // 
             this.panel71.BackColor = System.Drawing.SystemColors.Control;
+            this.panel71.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel71.Controls.Add(this.fontTable);
             this.panel71.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel71.Location = new System.Drawing.Point(0, 0);
             this.panel71.Name = "panel71";
-            this.panel71.Size = new System.Drawing.Size(128, 192);
-            this.panel71.TabIndex = 525;
+            this.panel71.Size = new System.Drawing.Size(132, 200);
+            this.panel71.TabIndex = 1;
             // 
             // fontTable
             // 
             this.fontTable.Location = new System.Drawing.Point(0, 0);
             this.fontTable.Name = "fontTable";
             this.fontTable.Size = new System.Drawing.Size(128, 192);
-            this.fontTable.TabIndex = 523;
+            this.fontTable.TabIndex = 0;
             // 
             // NewFontTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 221);
+            this.ClientSize = new System.Drawing.Size(318, 225);
             this.Controls.Add(this.panel65);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

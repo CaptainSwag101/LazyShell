@@ -65,7 +65,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(202, 25);
-            this.toolStrip1.TabIndex = 472;
+            this.toolStrip1.TabIndex = 0;
             // 
             // attackName
             // 
@@ -119,7 +119,7 @@
             this.attackAtkType.Location = new System.Drawing.Point(6, 20);
             this.attackAtkType.Name = "attackAtkType";
             this.attackAtkType.Size = new System.Drawing.Size(184, 68);
-            this.attackAtkType.TabIndex = 127;
+            this.attackAtkType.TabIndex = 0;
             this.attackAtkType.SelectedIndexChanged += new System.EventHandler(this.attackAtkType_SelectedIndexChanged);
             // 
             // attackStatusUp
@@ -133,7 +133,7 @@
             this.attackStatusUp.Location = new System.Drawing.Point(6, 20);
             this.attackStatusUp.Name = "attackStatusUp";
             this.attackStatusUp.Size = new System.Drawing.Size(184, 68);
-            this.attackStatusUp.TabIndex = 126;
+            this.attackStatusUp.TabIndex = 0;
             this.attackStatusUp.SelectedIndexChanged += new System.EventHandler(this.attackStatusUp_SelectedIndexChanged);
             // 
             // attackStatusEffect
@@ -151,7 +151,7 @@
             this.attackStatusEffect.Location = new System.Drawing.Point(6, 20);
             this.attackStatusEffect.Name = "attackStatusEffect";
             this.attackStatusEffect.Size = new System.Drawing.Size(184, 116);
-            this.attackStatusEffect.TabIndex = 125;
+            this.attackStatusEffect.TabIndex = 0;
             this.attackStatusEffect.SelectedIndexChanged += new System.EventHandler(this.attackStatusEffect_SelectedIndexChanged);
             // 
             // attackAtkLevel
@@ -164,7 +164,7 @@
             0});
             this.attackAtkLevel.Name = "attackAtkLevel";
             this.attackAtkLevel.Size = new System.Drawing.Size(109, 21);
-            this.attackAtkLevel.TabIndex = 124;
+            this.attackAtkLevel.TabIndex = 3;
             this.attackAtkLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackAtkLevel.ValueChanged += new System.EventHandler(this.attackAtkLevel_ValueChanged);
             // 
@@ -173,7 +173,7 @@
             this.attackHitRate.Location = new System.Drawing.Point(81, 21);
             this.attackHitRate.Name = "attackHitRate";
             this.attackHitRate.Size = new System.Drawing.Size(109, 21);
-            this.attackHitRate.TabIndex = 123;
+            this.attackHitRate.TabIndex = 1;
             this.attackHitRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.attackHitRate.ValueChanged += new System.EventHandler(this.attackHitRate_ValueChanged);
             // 
@@ -183,7 +183,7 @@
             this.label57.Location = new System.Drawing.Point(9, 44);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(66, 13);
-            this.label57.TabIndex = 182;
+            this.label57.TabIndex = 2;
             this.label57.Text = "Attack Level";
             // 
             // label58
@@ -192,7 +192,7 @@
             this.label58.Location = new System.Drawing.Point(9, 23);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(57, 13);
-            this.label58.TabIndex = 181;
+            this.label58.TabIndex = 0;
             this.label58.Text = "Hit Rate%";
             // 
             // toolStrip2
@@ -204,7 +204,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(202, 25);
-            this.toolStrip2.TabIndex = 477;
+            this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // textBoxAttackName
@@ -223,7 +223,7 @@
             this.groupBox1.Location = new System.Drawing.Point(3, 53);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(196, 70);
-            this.groupBox1.TabIndex = 478;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Attack Power";
             // 
@@ -233,7 +233,7 @@
             this.groupBox2.Location = new System.Drawing.Point(3, 129);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(196, 141);
-            this.groupBox2.TabIndex = 479;
+            this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Effect Inflict";
             // 
@@ -243,7 +243,7 @@
             this.groupBox3.Location = new System.Drawing.Point(3, 276);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(196, 94);
-            this.groupBox3.TabIndex = 480;
+            this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Status Up";
             // 
@@ -253,7 +253,7 @@
             this.groupBox4.Location = new System.Drawing.Point(3, 376);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(196, 95);
-            this.groupBox4.TabIndex = 481;
+            this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Attack Type";
             // 

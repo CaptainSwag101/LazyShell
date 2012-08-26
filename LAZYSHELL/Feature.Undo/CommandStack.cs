@@ -35,7 +35,7 @@ namespace LAZYSHELL.Undo
         }
         public void SetTilemaps(Tilemap tilemap)
         {
-            foreach (TileMapEditCommand command in commands)
+            foreach (TilemapEditCommand command in commands)
                 if (command != null)
                     command.Tilemap = tilemap;
         }

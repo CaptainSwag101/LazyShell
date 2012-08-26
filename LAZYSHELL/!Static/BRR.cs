@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace LAZYSHELL
@@ -15,8 +16,14 @@ namespace LAZYSHELL
         static byte[] BRRBuffer;
         static double resample_var;
         static char resample_type;
+        //static SecondaryBuffer sound;
+        static Thread playback;
         // decoder functions
-        public static byte[] Decode(byte[] inBrr, int rate)
+        public static byte[] BRRToWAV(byte[] inBrr, int rate)
+        {
+            return BRRToWAV(inBrr, rate, 0);
+        }
+        public static byte[] BRRToWAV(byte[] inBrr, int rate, int loopStart)
         {
             if (inBrr == null)
                 inBrr = new byte[9];
@@ -24,11 +31,11 @@ namespace LAZYSHELL
             short[] samples = new short[0];
             byte[] BRR = new byte[9];
             int size = (int)inBrr.Length;
-            if (size % 9 != 0)
-            {
-                MessageBox.Show("Error : BRR file isn't a multiple of 9 bytes or is too big.");
-                return null;
-            }
+            //if (size % 9 != 0)
+            //{
+            //    MessageBox.Show("Error : BRR file isn't a multiple of 9 bytes or is too big.");
+            //    return null;
+            //}
             int blockamount = size / 9;
             int offset = 0;
             size = 0;
@@ -38,6 +45,12 @@ namespace LAZYSHELL
                 samples = append(samples, DecodeBRR(BRR));	//Append 16 BRR samples to existing array
                 size += 16;
             }
+            //
+            int position = loopStart / 9 * 16;
+            if (position >= size)
+                position = 0;
+            size -= position;
+            //
             byte[] outWav = new byte[(size << 1) + 44];
             offset = 0;
             Bits.SetCharArray(outWav, offset, "RIFF".ToCharArray()); offset += 4;
@@ -52,7 +65,8 @@ namespace LAZYSHELL
             Bits.SetShort(outWav, offset, 16); offset += 2;
             Bits.SetCharArray(outWav, offset, "data".ToCharArray()); offset += 4;
             Bits.Set32Bit(outWav, offset, size << 1); offset += 4;
-            for (int i = 0; i < size; i++)
+            //
+            for (int i = position; i < size + position; i++)
             {
                 Bits.SetShort(outWav, offset, samples[i]);
                 offset += 2;
@@ -443,6 +457,47 @@ namespace LAZYSHELL
             }
             return output;
         }
+        // playback
+        //public static void Play(Device device, byte[] wav, bool looping)
+        //{
+        //    if (sound != null && sound.Status.Playing)
+        //        sound.Stop();
+        //    BufferDescription description = new BufferDescription();
+        //    description.ControlEffects = false;
+        //    MemoryStream stream1 = new MemoryStream(wav);
+        //    sound = new SecondaryBuffer(stream1, description, device);
+        //    if (looping)
+        //        sound.Play(0, BufferPlayFlags.Looping);
+        //    else
+        //        sound.Play(0, BufferPlayFlags.Default);
+        //}
+        //public static void Play(Device device, byte[] wav, int loopStart)
+        //{
+        //    if (sound != null && sound.Status.Playing)
+        //        sound.Stop();
+        //    BufferDescription description = new BufferDescription();
+        //    description.ControlEffects = false;
+        //    MemoryStream stream1 = new MemoryStream(wav);
+        //    sound = new SecondaryBuffer(stream1, description, device);
+        //    playback = new Thread(() => Play(loopStart / 9 * 32));
+        //    playback.Start();
+        //}
+        //private static void Play(int loopStart)
+        //{
+        //Start:
+        //    sound.Play(0, BufferPlayFlags.Default);
+        //    sound.SetCurrentPosition(loopStart);
+        //    while (sound.Status.Playing)
+        //        Thread.Sleep(0);
+        //    goto Start;
+        //}
+        //public static void Stop(Device device)
+        //{
+        //    if (sound != null)
+        //    {
+        //        sound.Stop();
+        //    }
+        //}
         static readonly int[] gauss = new int[]
         {
             0x000, 0x000, 0x000, 0x000, 0x000, 0x000, 0x000, 0x000,

@@ -111,7 +111,7 @@ namespace LAZYSHELL
             this.panel4.Location = new System.Drawing.Point(0, 25);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(583, 79);
-            this.panel4.TabIndex = 317;
+            this.panel4.TabIndex = 1;
             // 
             // panel1
             // 
@@ -121,7 +121,7 @@ namespace LAZYSHELL
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(579, 50);
-            this.panel1.TabIndex = 332;
+            this.panel1.TabIndex = 1;
             // 
             // romInfo
             // 
@@ -133,7 +133,7 @@ namespace LAZYSHELL
             this.romInfo.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.romInfo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.romInfo.Size = new System.Drawing.Size(485, 50);
-            this.romInfo.TabIndex = 4;
+            this.romInfo.TabIndex = 1;
             this.romInfo.Text = "";
             this.romInfo.WordWrap = false;
             // 
@@ -147,7 +147,7 @@ namespace LAZYSHELL
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(2);
             this.label1.Size = new System.Drawing.Size(94, 50);
-            this.label1.TabIndex = 331;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Rom Name\nHeader\nChecksum\nGamecode";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -166,7 +166,7 @@ namespace LAZYSHELL
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(579, 25);
             this.toolStrip1.Stretch = true;
-            this.toolStrip1.TabIndex = 328;
+            this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.SizeChanged += new System.EventHandler(this.toolStrip1_SizeChanged);
             // 
@@ -233,7 +233,7 @@ namespace LAZYSHELL
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(96, 489);
-            this.toolStrip2.TabIndex = 329;
+            this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // openAllies
@@ -285,7 +285,7 @@ namespace LAZYSHELL
             this.openAudio.Size = new System.Drawing.Size(94, 22);
             this.openAudio.Text = "Audio";
             this.openAudio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openAudio.ToolTipText = "Edit audio samples and import / export to and from .WAV files";
+            this.openAudio.ToolTipText = "Edit audio samples and SPC instruments and tracks";
             this.openAudio.Click += new System.EventHandler(this.openAudio_Click);
             // 
             // openBattlefields
@@ -503,7 +503,7 @@ namespace LAZYSHELL
             this.panel2.Location = new System.Drawing.Point(96, 129);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(487, 464);
-            this.panel2.TabIndex = 333;
+            this.panel2.TabIndex = 4;
             // 
             // toolStrip4
             // 
@@ -527,7 +527,7 @@ namespace LAZYSHELL
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip4.Size = new System.Drawing.Size(583, 25);
-            this.toolStrip4.TabIndex = 334;
+            this.toolStrip4.TabIndex = 0;
             this.toolStrip4.Text = "toolStrip4";
             // 
             // recentFiles
@@ -687,7 +687,7 @@ namespace LAZYSHELL
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(487, 25);
-            this.toolStrip3.TabIndex = 335;
+            this.toolStrip3.TabIndex = 3;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // openAll

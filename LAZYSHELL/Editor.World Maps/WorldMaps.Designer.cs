@@ -181,7 +181,7 @@
             this.mapPointName.Font = this.worldMapName.Font;
             this.mapPointName.ForeColor = this.worldMapName.ForeColor;
             this.mapPointName.ItemHeight = 15;
-            this.mapPointName.Location = new System.Drawing.Point(9, 2);
+            this.mapPointName.Location = new System.Drawing.Point(7, 2);
             this.mapPointName.Name = "mapPointName";
             this.mapPointName.SelectedIndex = -1;
             this.mapPointName.SelectedItem = null;
@@ -217,7 +217,7 @@
             this.mapPointNum.Font = this.worldMapName.Font;
             this.mapPointNum.ForeColor = this.worldMapName.ForeColor;
             this.mapPointNum.Hexadecimal = false;
-            this.mapPointNum.Location = new System.Drawing.Point(271, 24);
+            this.mapPointNum.Location = new System.Drawing.Point(199, 2);
             this.mapPointNum.Maximum = new decimal(new int[] {
             55,
             0,
@@ -246,7 +246,7 @@
             this.enableNorthPath.Location = new System.Drawing.Point(6, 83);
             this.enableNorthPath.Name = "enableNorthPath";
             this.enableNorthPath.Size = new System.Drawing.Size(47, 20);
-            this.enableNorthPath.TabIndex = 89;
+            this.enableNorthPath.TabIndex = 12;
             this.enableNorthPath.Text = "NORTH";
             this.enableNorthPath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.enableNorthPath.UseCompatibleTextRendering = true;
@@ -261,7 +261,7 @@
             this.enableWestPath.Location = new System.Drawing.Point(6, 62);
             this.enableWestPath.Name = "enableWestPath";
             this.enableWestPath.Size = new System.Drawing.Size(47, 20);
-            this.enableWestPath.TabIndex = 88;
+            this.enableWestPath.TabIndex = 8;
             this.enableWestPath.Text = "WEST";
             this.enableWestPath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.enableWestPath.UseCompatibleTextRendering = true;
@@ -276,7 +276,7 @@
             this.enableSouthPath.Location = new System.Drawing.Point(6, 41);
             this.enableSouthPath.Name = "enableSouthPath";
             this.enableSouthPath.Size = new System.Drawing.Size(47, 20);
-            this.enableSouthPath.TabIndex = 87;
+            this.enableSouthPath.TabIndex = 4;
             this.enableSouthPath.Text = "SOUTH";
             this.enableSouthPath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.enableSouthPath.UseCompatibleTextRendering = true;
@@ -291,7 +291,7 @@
             this.enableEastPath.Location = new System.Drawing.Point(6, 20);
             this.enableEastPath.Name = "enableEastPath";
             this.enableEastPath.Size = new System.Drawing.Size(47, 20);
-            this.enableEastPath.TabIndex = 86;
+            this.enableEastPath.TabIndex = 0;
             this.enableEastPath.Text = "EAST";
             this.enableEastPath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.enableEastPath.UseCompatibleTextRendering = true;
@@ -314,7 +314,7 @@
             0});
             this.toSouthCheckAddress.Name = "toSouthCheckAddress";
             this.toSouthCheckAddress.Size = new System.Drawing.Size(50, 21);
-            this.toSouthCheckAddress.TabIndex = 94;
+            this.toSouthCheckAddress.TabIndex = 6;
             this.toSouthCheckAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toSouthCheckAddress.Value = new decimal(new int[] {
             28741,
@@ -339,7 +339,7 @@
             0});
             this.toWestCheckAddress.Name = "toWestCheckAddress";
             this.toWestCheckAddress.Size = new System.Drawing.Size(50, 21);
-            this.toWestCheckAddress.TabIndex = 97;
+            this.toWestCheckAddress.TabIndex = 10;
             this.toWestCheckAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toWestCheckAddress.Value = new decimal(new int[] {
             28741,
@@ -364,7 +364,7 @@
             0});
             this.toNorthCheckAddress.Name = "toNorthCheckAddress";
             this.toNorthCheckAddress.Size = new System.Drawing.Size(50, 21);
-            this.toNorthCheckAddress.TabIndex = 100;
+            this.toNorthCheckAddress.TabIndex = 14;
             this.toNorthCheckAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toNorthCheckAddress.Value = new decimal(new int[] {
             28741,
@@ -389,7 +389,7 @@
             0});
             this.toEastCheckAddress.Name = "toEastCheckAddress";
             this.toEastCheckAddress.Size = new System.Drawing.Size(50, 21);
-            this.toEastCheckAddress.TabIndex = 91;
+            this.toEastCheckAddress.TabIndex = 2;
             this.toEastCheckAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toEastCheckAddress.Value = new decimal(new int[] {
             28741,
@@ -411,7 +411,7 @@
             this.toEastPoint.Location = new System.Drawing.Point(55, 20);
             this.toEastPoint.Name = "toEastPoint";
             this.toEastPoint.Size = new System.Drawing.Size(119, 21);
-            this.toEastPoint.TabIndex = 400;
+            this.toEastPoint.TabIndex = 1;
             this.toEastPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
             this.toEastPoint.SelectedIndexChanged += new System.EventHandler(this.toEastPoint_SelectedIndexChanged);
             // 
@@ -425,7 +425,7 @@
             0});
             this.toEastCheckBit.Name = "toEastCheckBit";
             this.toEastCheckBit.Size = new System.Drawing.Size(37, 21);
-            this.toEastCheckBit.TabIndex = 92;
+            this.toEastCheckBit.TabIndex = 3;
             this.toEastCheckBit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toEastCheckBit.ValueChanged += new System.EventHandler(this.toEastCheckBit_ValueChanged);
             // 
@@ -442,7 +442,7 @@
             this.toWestPoint.Location = new System.Drawing.Point(55, 62);
             this.toWestPoint.Name = "toWestPoint";
             this.toWestPoint.Size = new System.Drawing.Size(119, 21);
-            this.toWestPoint.TabIndex = 400;
+            this.toWestPoint.TabIndex = 9;
             this.toWestPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
             this.toWestPoint.SelectedIndexChanged += new System.EventHandler(this.toWestPoint_SelectedIndexChanged);
             // 
@@ -456,7 +456,7 @@
             0});
             this.toWestCheckBit.Name = "toWestCheckBit";
             this.toWestCheckBit.Size = new System.Drawing.Size(37, 21);
-            this.toWestCheckBit.TabIndex = 98;
+            this.toWestCheckBit.TabIndex = 11;
             this.toWestCheckBit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toWestCheckBit.ValueChanged += new System.EventHandler(this.toWestCheckBit_ValueChanged);
             // 
@@ -473,7 +473,7 @@
             this.toSouthPoint.Location = new System.Drawing.Point(55, 41);
             this.toSouthPoint.Name = "toSouthPoint";
             this.toSouthPoint.Size = new System.Drawing.Size(119, 21);
-            this.toSouthPoint.TabIndex = 400;
+            this.toSouthPoint.TabIndex = 5;
             this.toSouthPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
             this.toSouthPoint.SelectedIndexChanged += new System.EventHandler(this.toSouthPoint_SelectedIndexChanged);
             // 
@@ -487,7 +487,7 @@
             0});
             this.toSouthCheckBit.Name = "toSouthCheckBit";
             this.toSouthCheckBit.Size = new System.Drawing.Size(37, 21);
-            this.toSouthCheckBit.TabIndex = 95;
+            this.toSouthCheckBit.TabIndex = 7;
             this.toSouthCheckBit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toSouthCheckBit.ValueChanged += new System.EventHandler(this.toSouthCheckBit_ValueChanged);
             // 
@@ -501,7 +501,7 @@
             0});
             this.toNorthCheckBit.Name = "toNorthCheckBit";
             this.toNorthCheckBit.Size = new System.Drawing.Size(37, 21);
-            this.toNorthCheckBit.TabIndex = 101;
+            this.toNorthCheckBit.TabIndex = 15;
             this.toNorthCheckBit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toNorthCheckBit.ValueChanged += new System.EventHandler(this.toNorthCheckBit_ValueChanged);
             // 
@@ -518,7 +518,7 @@
             this.toNorthPoint.Location = new System.Drawing.Point(55, 83);
             this.toNorthPoint.Name = "toNorthPoint";
             this.toNorthPoint.Size = new System.Drawing.Size(119, 21);
-            this.toNorthPoint.TabIndex = 400;
+            this.toNorthPoint.TabIndex = 13;
             this.toNorthPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
             this.toNorthPoint.SelectedIndexChanged += new System.EventHandler(this.toNorthPoint_SelectedIndexChanged);
             // 
@@ -531,7 +531,7 @@
             this.leadToMapPoint.Location = new System.Drawing.Point(135, 13);
             this.leadToMapPoint.Name = "leadToMapPoint";
             this.leadToMapPoint.Size = new System.Drawing.Size(126, 21);
-            this.leadToMapPoint.TabIndex = 81;
+            this.leadToMapPoint.TabIndex = 0;
             this.leadToMapPoint.Text = "LOCATION";
             this.leadToMapPoint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.leadToMapPoint.UseCompatibleTextRendering = true;
@@ -544,7 +544,7 @@
             this.label55.Location = new System.Drawing.Point(6, 62);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(96, 13);
-            this.label55.TabIndex = 490;
+            this.label55.TabIndex = 4;
             this.label55.Text = "lead to destination";
             // 
             // label56
@@ -553,7 +553,7 @@
             this.label56.Location = new System.Drawing.Point(6, 83);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(118, 13);
-            this.label56.TabIndex = 489;
+            this.label56.TabIndex = 6;
             this.label56.Text = "else lead to destination";
             // 
             // whichPointCheckAddress
@@ -572,7 +572,7 @@
             0});
             this.whichPointCheckAddress.Name = "whichPointCheckAddress";
             this.whichPointCheckAddress.Size = new System.Drawing.Size(74, 21);
-            this.whichPointCheckAddress.TabIndex = 82;
+            this.whichPointCheckAddress.TabIndex = 2;
             this.whichPointCheckAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.whichPointCheckAddress.Value = new decimal(new int[] {
             28741,
@@ -591,7 +591,7 @@
             0});
             this.whichPointCheckBit.Name = "whichPointCheckBit";
             this.whichPointCheckBit.Size = new System.Drawing.Size(52, 21);
-            this.whichPointCheckBit.TabIndex = 83;
+            this.whichPointCheckBit.TabIndex = 3;
             this.whichPointCheckBit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.whichPointCheckBit.ValueChanged += new System.EventHandler(this.whichPointCheckBit_ValueChanged);
             // 
@@ -601,7 +601,7 @@
             this.label52.Location = new System.Drawing.Point(6, 41);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(89, 13);
-            this.label52.TabIndex = 502;
+            this.label52.TabIndex = 1;
             this.label52.Text = "If memory bit set";
             // 
             // panel17
@@ -612,7 +612,7 @@
             this.panel17.Location = new System.Drawing.Point(135, 59);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(126, 21);
-            this.panel17.TabIndex = 84;
+            this.panel17.TabIndex = 5;
             // 
             // runEvent
             // 
@@ -624,7 +624,7 @@
             0});
             this.runEvent.Name = "runEvent";
             this.runEvent.Size = new System.Drawing.Size(74, 21);
-            this.runEvent.TabIndex = 401;
+            this.runEvent.TabIndex = 0;
             this.runEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.runEvent.ValueChanged += new System.EventHandler(this.runEvent_ValueChanged);
             // 
@@ -637,7 +637,7 @@
             this.runEventEdit.Location = new System.Drawing.Point(73, 0);
             this.runEventEdit.Name = "runEventEdit";
             this.runEventEdit.Size = new System.Drawing.Size(51, 21);
-            this.runEventEdit.TabIndex = 556;
+            this.runEventEdit.TabIndex = 1;
             this.runEventEdit.Text = "EDIT";
             this.runEventEdit.UseCompatibleTextRendering = true;
             this.runEventEdit.UseVisualStyleBackColor = false;
@@ -656,7 +656,7 @@
             this.goMapPointA.Location = new System.Drawing.Point(0, 0);
             this.goMapPointA.Name = "goMapPointA";
             this.goMapPointA.Size = new System.Drawing.Size(126, 21);
-            this.goMapPointA.TabIndex = 400;
+            this.goMapPointA.TabIndex = 2;
             this.goMapPointA.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
             this.goMapPointA.SelectedIndexChanged += new System.EventHandler(this.goMapPointA_SelectedIndexChanged);
             // 
@@ -673,7 +673,7 @@
             this.goMapPointB.Location = new System.Drawing.Point(135, 80);
             this.goMapPointB.Name = "goMapPointB";
             this.goMapPointB.Size = new System.Drawing.Size(126, 21);
-            this.goMapPointB.TabIndex = 400;
+            this.goMapPointB.TabIndex = 7;
             this.goMapPointB.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
             this.goMapPointB.SelectedIndexChanged += new System.EventHandler(this.goMapPointB_SelectedIndexChanged);
             // 
@@ -692,7 +692,7 @@
             -2147483648});
             this.worldMapYCoord.Name = "worldMapYCoord";
             this.worldMapYCoord.Size = new System.Drawing.Size(47, 21);
-            this.worldMapYCoord.TabIndex = 73;
+            this.worldMapYCoord.TabIndex = 6;
             this.worldMapYCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.worldMapYCoord.ValueChanged += new System.EventHandler(this.worldMapYCoord_ValueChanged);
             // 
@@ -703,7 +703,7 @@
             this.label46.Location = new System.Drawing.Point(6, 21);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(52, 13);
-            this.label46.TabIndex = 471;
+            this.label46.TabIndex = 0;
             this.label46.Text = "Locations";
             // 
             // label21
@@ -713,7 +713,7 @@
             this.label21.Location = new System.Drawing.Point(6, 63);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(34, 13);
-            this.label21.TabIndex = 471;
+            this.label21.TabIndex = 4;
             this.label21.Text = "(X, Y)";
             // 
             // worldMapTileset
@@ -726,7 +726,7 @@
             0});
             this.worldMapTileset.Name = "worldMapTileset";
             this.worldMapTileset.Size = new System.Drawing.Size(94, 21);
-            this.worldMapTileset.TabIndex = 72;
+            this.worldMapTileset.TabIndex = 3;
             this.worldMapTileset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.worldMapTileset.ValueChanged += new System.EventHandler(this.worldMapTileset_ValueChanged);
             // 
@@ -737,7 +737,7 @@
             this.label12.Location = new System.Drawing.Point(6, 42);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(38, 13);
-            this.label12.TabIndex = 471;
+            this.label12.TabIndex = 2;
             this.label12.Text = "Tileset";
             // 
             // worldMapXCoord
@@ -755,7 +755,7 @@
             -2147483648});
             this.worldMapXCoord.Name = "worldMapXCoord";
             this.worldMapXCoord.Size = new System.Drawing.Size(47, 21);
-            this.worldMapXCoord.TabIndex = 71;
+            this.worldMapXCoord.TabIndex = 5;
             this.worldMapXCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.worldMapXCoord.ValueChanged += new System.EventHandler(this.worldMapXCoord_ValueChanged);
             // 
@@ -769,7 +769,7 @@
             0});
             this.pointCount.Name = "pointCount";
             this.pointCount.Size = new System.Drawing.Size(94, 21);
-            this.pointCount.TabIndex = 70;
+            this.pointCount.TabIndex = 1;
             this.pointCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.pointCount.ValueChanged += new System.EventHandler(this.pointCount_ValueChanged);
             // 
@@ -781,7 +781,7 @@
             this.panel26.Location = new System.Drawing.Point(27, 53);
             this.panel26.Name = "panel26";
             this.panel26.Size = new System.Drawing.Size(260, 260);
-            this.panel26.TabIndex = 69;
+            this.panel26.TabIndex = 3;
             // 
             // pictureBoxTileset
             // 
@@ -815,65 +815,78 @@
             this.saveImageToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 170);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(159, 192);
             // 
             // cutToolStripMenuItem
             // 
+            this.cutToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.cut_small;
+            this.cutToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.buttonEditCut_Click);
             // 
             // copyToolStripMenuItem
             // 
+            this.copyToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.copyToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.buttonEditCopy_Click);
             // 
             // pasteToolStripMenuItem
             // 
+            this.pasteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.pasteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.buttonEditPaste_Click);
             // 
             // deleteToolStripMenuItem
             // 
+            this.deleteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.deleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.buttonEditDelete_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(155, 6);
             // 
             // mirrorToolStripMenuItem
             // 
+            this.mirrorToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.mirror_small;
+            this.mirrorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
-            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.mirrorToolStripMenuItem.Text = "Mirror";
             this.mirrorToolStripMenuItem.Click += new System.EventHandler(this.mirrorToolStripMenuItem_Click);
             // 
             // invertToolStripMenuItem
             // 
+            this.invertToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.flip_small;
+            this.invertToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            this.invertToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(155, 6);
             // 
             // saveImageToolStripMenuItem
             // 
+            this.saveImageToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImageToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.saveImageToolStripMenuItem.Text = "Save Image As...";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
@@ -895,7 +908,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(24, 361);
-            this.toolStrip2.TabIndex = 552;
+            this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // buttonEditSelect
@@ -998,7 +1011,7 @@
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip5.Size = new System.Drawing.Size(261, 25);
-            this.toolStrip5.TabIndex = 547;
+            this.toolStrip5.TabIndex = 1;
             // 
             // textBoxMapPoint
             // 
@@ -1029,7 +1042,7 @@
             0});
             this.mapPointYCoord.Name = "mapPointYCoord";
             this.mapPointYCoord.Size = new System.Drawing.Size(52, 21);
-            this.mapPointYCoord.TabIndex = 78;
+            this.mapPointYCoord.TabIndex = 4;
             this.mapPointYCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapPointYCoord.ValueChanged += new System.EventHandler(this.mapPointYCoord_ValueChanged);
             // 
@@ -1039,7 +1052,7 @@
             this.label59.Location = new System.Drawing.Point(6, 93);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(116, 13);
-            this.label59.TabIndex = 521;
+            this.label59.TabIndex = 5;
             this.label59.Text = "Show if memory bit set";
             // 
             // label45
@@ -1048,7 +1061,7 @@
             this.label45.Location = new System.Drawing.Point(6, 72);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(64, 13);
-            this.label45.TabIndex = 501;
+            this.label45.TabIndex = 2;
             this.label45.Text = "(X, Y) coord";
             // 
             // showCheckAddress
@@ -1067,7 +1080,7 @@
             0});
             this.showCheckAddress.Name = "showCheckAddress";
             this.showCheckAddress.Size = new System.Drawing.Size(74, 21);
-            this.showCheckAddress.TabIndex = 79;
+            this.showCheckAddress.TabIndex = 6;
             this.showCheckAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.showCheckAddress.Value = new decimal(new int[] {
             28741,
@@ -1086,7 +1099,7 @@
             0});
             this.showCheckBit.Name = "showCheckBit";
             this.showCheckBit.Size = new System.Drawing.Size(52, 21);
-            this.showCheckBit.TabIndex = 80;
+            this.showCheckBit.TabIndex = 7;
             this.showCheckBit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.showCheckBit.ValueChanged += new System.EventHandler(this.showCheckBit_ValueChanged);
             // 
@@ -1100,7 +1113,7 @@
             0});
             this.mapPointXCoord.Name = "mapPointXCoord";
             this.mapPointXCoord.Size = new System.Drawing.Size(74, 21);
-            this.mapPointXCoord.TabIndex = 77;
+            this.mapPointXCoord.TabIndex = 3;
             this.mapPointXCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapPointXCoord.ValueChanged += new System.EventHandler(this.mapPointXCoord_ValueChanged);
             // 
@@ -1115,7 +1128,7 @@
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip4.Size = new System.Drawing.Size(261, 25);
-            this.toolStrip4.TabIndex = 546;
+            this.toolStrip4.TabIndex = 0;
             // 
             // toolStrip3
             // 
@@ -1137,7 +1150,7 @@
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(565, 25);
-            this.toolStrip3.TabIndex = 550;
+            this.toolStrip3.TabIndex = 0;
             // 
             // save
             // 
@@ -1283,7 +1296,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(565, 25);
-            this.toolStrip1.TabIndex = 551;
+            this.toolStrip1.TabIndex = 1;
             // 
             // toolStripSeparator3
             // 
@@ -1442,7 +1455,7 @@
             this.groupBox1.Location = new System.Drawing.Point(27, 319);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(169, 87);
-            this.groupBox1.TabIndex = 553;
+            this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Map Properties";
             // 
@@ -1467,7 +1480,7 @@
             this.groupBox2.Location = new System.Drawing.Point(293, 296);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(267, 110);
-            this.groupBox2.TabIndex = 554;
+            this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Open path if memory bit set";
             // 
@@ -1484,7 +1497,7 @@
             this.groupBox3.Location = new System.Drawing.Point(293, 179);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(267, 107);
-            this.groupBox3.TabIndex = 555;
+            this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Destination";
             // 
@@ -1501,7 +1514,7 @@
             this.groupBox4.Location = new System.Drawing.Point(293, 53);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(267, 118);
-            this.groupBox4.TabIndex = 556;
+            this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Map Point Properties";
             // 

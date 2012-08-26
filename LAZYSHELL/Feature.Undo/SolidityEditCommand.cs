@@ -14,7 +14,6 @@ namespace LAZYSHELL.Undo
         private Point topLeft, bottomRight, tempStart;
         private byte[] changes;
         private bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
-
         public SolidityEditCommand(
             Levels updater,
             Tilemap tilemap,
@@ -48,7 +47,6 @@ namespace LAZYSHELL.Undo
 
             Execute();
         }
-
         public void Execute()
         {
             byte temp = 0;

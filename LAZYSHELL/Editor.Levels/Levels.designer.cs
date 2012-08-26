@@ -40,7 +40,7 @@ namespace LAZYSHELL
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Levels));
             this.levelNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.levelName = new System.Windows.Forms.ToolStripComboBox();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.npcMapHeader = new System.Windows.Forms.NumericUpDown();
             this.openPartitions = new System.Windows.Forms.Button();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
@@ -97,7 +97,7 @@ namespace LAZYSHELL
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
             this.overlapCoordZPlusHalf = new System.Windows.Forms.CheckBox();
@@ -120,7 +120,7 @@ namespace LAZYSHELL
             this.overlapsBytesLeft = new System.Windows.Forms.ToolStripLabel();
             this.panelOverlapTileset = new System.Windows.Forms.Panel();
             this.pictureBoxOverlaps = new System.Windows.Forms.PictureBox();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.eventFace = new System.Windows.Forms.ComboBox();
@@ -188,7 +188,7 @@ namespace LAZYSHELL
             this.exitsBytesLeft = new System.Windows.Forms.ToolStripLabel();
             this.label61 = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.mapPaletteSetName = new System.Windows.Forms.ComboBox();
             this.mapPaletteSetNum = new System.Windows.Forms.NumericUpDown();
@@ -234,7 +234,7 @@ namespace LAZYSHELL
             this.mapGFXSet4Name = new System.Windows.Forms.ComboBox();
             this.mapGFXSet3Name = new System.Windows.Forms.ComboBox();
             this.mapGFXSet2Num = new System.Windows.Forms.NumericUpDown();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.layerOBJEffects = new System.Windows.Forms.ComboBox();
             this.layerL3Effects = new System.Windows.Forms.ComboBox();
@@ -298,7 +298,7 @@ namespace LAZYSHELL
             this.layerSubscreenL2 = new System.Windows.Forms.CheckBox();
             this.layerMainscreenL3 = new System.Windows.Forms.CheckBox();
             this.layerColorMathL2 = new System.Windows.Forms.CheckBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
             this.tileModsBytesLeft = new System.Windows.Forms.Label();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
@@ -348,7 +348,6 @@ namespace LAZYSHELL
             this.solidModsPaste = new System.Windows.Forms.ToolStripButton();
             this.solidModsDuplicate = new System.Windows.Forms.ToolStripButton();
             this.label68 = new System.Windows.Forms.Label();
-            this.panel45 = new System.Windows.Forms.Panel();
             this.toolStripLevel = new System.Windows.Forms.ToolStrip();
             this.navigateBck = new System.Windows.Forms.ToolStripButton();
             this.navigateFwd = new System.Windows.Forms.ToolStripButton();
@@ -436,7 +435,7 @@ namespace LAZYSHELL
             this.help = new System.Windows.Forms.ToolStripButton();
             this.baseConversion = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.tabPage8.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.npcMapHeader)).BeginInit();
             this.groupBox14.SuspendLayout();
             this.groupBox15.SuspendLayout();
@@ -455,7 +454,7 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.npcPropertyC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapNum)).BeginInit();
             this.contextMenuStrip4.SuspendLayout();
-            this.tabPage10.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox19.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.overlapType)).BeginInit();
@@ -465,7 +464,7 @@ namespace LAZYSHELL
             this.toolStrip4.SuspendLayout();
             this.panelOverlapTileset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOverlaps)).BeginInit();
-            this.tabPage9.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventLength)).BeginInit();
@@ -488,7 +487,7 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.exitHeight)).BeginInit();
             this.toolStrip5.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteSetNum)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -508,7 +507,7 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet3Num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet1Num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet2Num)).BeginInit();
-            this.tabPage3.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -525,7 +524,7 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.layerMaskLowY)).BeginInit();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layerPrioritySet)).BeginInit();
-            this.tabPage1.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.panel8.SuspendLayout();
             this.groupBox21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tileModsY)).BeginInit();
@@ -550,7 +549,7 @@ namespace LAZYSHELL
             this.levelNum.AutoSize = false;
             this.levelNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.levelNum.Hexadecimal = false;
-            this.levelNum.Location = new System.Drawing.Point(211, 2);
+            this.levelNum.Location = new System.Drawing.Point(209, 2);
             this.levelNum.Maximum = new decimal(new int[] {
             509,
             0,
@@ -584,24 +583,24 @@ namespace LAZYSHELL
             this.levelName.Size = new System.Drawing.Size(200, 21);
             this.levelName.SelectedIndexChanged += new System.EventHandler(this.levelName_SelectedIndexChanged);
             // 
-            // tabPage8
+            // tabPage3
             // 
-            this.tabPage8.Controls.Add(this.npcMapHeader);
-            this.tabPage8.Controls.Add(this.openPartitions);
-            this.tabPage8.Controls.Add(this.groupBox14);
-            this.tabPage8.Controls.Add(this.groupBox15);
-            this.tabPage8.Controls.Add(this.toolStrip3);
-            this.tabPage8.Controls.Add(this.groupBox13);
-            this.tabPage8.Controls.Add(this.groupBox12);
-            this.tabPage8.Controls.Add(this.npcsBytesLeft);
-            this.tabPage8.Controls.Add(this.npcObjectTree);
-            this.tabPage8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage8.Location = new System.Drawing.Point(4, 22);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(260, 640);
-            this.tabPage8.TabIndex = 2;
-            this.tabPage8.Text = "NPCS";
-            this.tabPage8.UseVisualStyleBackColor = true;
+            this.tabPage3.Controls.Add(this.npcMapHeader);
+            this.tabPage3.Controls.Add(this.openPartitions);
+            this.tabPage3.Controls.Add(this.groupBox14);
+            this.tabPage3.Controls.Add(this.groupBox15);
+            this.tabPage3.Controls.Add(this.toolStrip3);
+            this.tabPage3.Controls.Add(this.groupBox13);
+            this.tabPage3.Controls.Add(this.groupBox12);
+            this.tabPage3.Controls.Add(this.npcsBytesLeft);
+            this.tabPage3.Controls.Add(this.npcObjectTree);
+            this.tabPage3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(260, 640);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "NPCS";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // npcMapHeader
             // 
@@ -613,7 +612,7 @@ namespace LAZYSHELL
             0});
             this.npcMapHeader.Name = "npcMapHeader";
             this.npcMapHeader.Size = new System.Drawing.Size(51, 21);
-            this.npcMapHeader.TabIndex = 89;
+            this.npcMapHeader.TabIndex = 4;
             this.npcMapHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcMapHeader.ValueChanged += new System.EventHandler(this.npcMapHeader_ValueChanged);
             // 
@@ -625,7 +624,7 @@ namespace LAZYSHELL
             this.openPartitions.Location = new System.Drawing.Point(132, 28);
             this.openPartitions.Name = "openPartitions";
             this.openPartitions.Size = new System.Drawing.Size(67, 20);
-            this.openPartitions.TabIndex = 100;
+            this.openPartitions.TabIndex = 3;
             this.openPartitions.Text = "Partition";
             this.openPartitions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolTip1.SetToolTip(this.openPartitions, "Edit NPC event...");
@@ -639,7 +638,7 @@ namespace LAZYSHELL
             this.groupBox14.Location = new System.Drawing.Point(0, 460);
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.Size = new System.Drawing.Size(260, 158);
-            this.groupBox14.TabIndex = 9;
+            this.groupBox14.TabIndex = 8;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Other Properties";
             // 
@@ -667,7 +666,7 @@ namespace LAZYSHELL
             this.npcAttributes.MultiColumn = true;
             this.npcAttributes.Name = "npcAttributes";
             this.npcAttributes.Size = new System.Drawing.Size(248, 132);
-            this.npcAttributes.TabIndex = 487;
+            this.npcAttributes.TabIndex = 0;
             this.npcAttributes.SelectedIndexChanged += new System.EventHandler(this.npcAttributes_SelectedIndexChanged);
             // 
             // groupBox15
@@ -676,7 +675,7 @@ namespace LAZYSHELL
             this.groupBox15.Location = new System.Drawing.Point(128, 307);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.Size = new System.Drawing.Size(132, 47);
-            this.groupBox15.TabIndex = 499;
+            this.groupBox15.TabIndex = 6;
             this.groupBox15.TabStop = false;
             this.groupBox15.Text = "After Battle";
             // 
@@ -694,7 +693,7 @@ namespace LAZYSHELL
             this.npcAfterBattle.Location = new System.Drawing.Point(6, 20);
             this.npcAfterBattle.Name = "npcAfterBattle";
             this.npcAfterBattle.Size = new System.Drawing.Size(120, 21);
-            this.npcAfterBattle.TabIndex = 205;
+            this.npcAfterBattle.TabIndex = 0;
             this.npcAfterBattle.SelectedIndexChanged += new System.EventHandler(this.npcAfterBattle_SelectedIndexChanged);
             // 
             // toolStrip3
@@ -715,7 +714,7 @@ namespace LAZYSHELL
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(260, 25);
-            this.toolStrip3.TabIndex = 486;
+            this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // npcInsertObject
@@ -824,7 +823,7 @@ namespace LAZYSHELL
             this.groupBox13.Location = new System.Drawing.Point(128, 360);
             this.groupBox13.Name = "groupBox13";
             this.groupBox13.Size = new System.Drawing.Size(132, 94);
-            this.groupBox13.TabIndex = 8;
+            this.groupBox13.TabIndex = 7;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Isometric Coordinates";
             // 
@@ -843,7 +842,7 @@ namespace LAZYSHELL
             this.npcFace.Location = new System.Drawing.Point(50, 66);
             this.npcFace.Name = "npcFace";
             this.npcFace.Size = new System.Drawing.Size(75, 21);
-            this.npcFace.TabIndex = 193;
+            this.npcFace.TabIndex = 7;
             this.npcFace.SelectedIndexChanged += new System.EventHandler(this.npcRadialPosition_SelectedIndexChanged);
             // 
             // npcX
@@ -856,7 +855,7 @@ namespace LAZYSHELL
             0});
             this.npcX.Name = "npcX";
             this.npcX.Size = new System.Drawing.Size(45, 21);
-            this.npcX.TabIndex = 108;
+            this.npcX.TabIndex = 1;
             this.npcX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcX.ValueChanged += new System.EventHandler(this.npcXCoord_ValueChanged);
             // 
@@ -866,7 +865,7 @@ namespace LAZYSHELL
             this.label29.Location = new System.Drawing.Point(6, 22);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(23, 13);
-            this.label29.TabIndex = 463;
+            this.label29.TabIndex = 0;
             this.label29.Text = "X,Y";
             // 
             // npcY
@@ -879,7 +878,7 @@ namespace LAZYSHELL
             0});
             this.npcY.Name = "npcY";
             this.npcY.Size = new System.Drawing.Size(45, 21);
-            this.npcY.TabIndex = 109;
+            this.npcY.TabIndex = 2;
             this.npcY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcY.ValueChanged += new System.EventHandler(this.npcYCoord_ValueChanged);
             // 
@@ -893,7 +892,7 @@ namespace LAZYSHELL
             this.npcZ_half.Location = new System.Drawing.Point(81, 41);
             this.npcZ_half.Name = "npcZ_half";
             this.npcZ_half.Size = new System.Drawing.Size(43, 20);
-            this.npcZ_half.TabIndex = 111;
+            this.npcZ_half.TabIndex = 5;
             this.npcZ_half.Text = "+1/2";
             this.npcZ_half.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.npcZ_half.UseCompatibleTextRendering = true;
@@ -906,7 +905,7 @@ namespace LAZYSHELL
             this.label30.Location = new System.Drawing.Point(6, 69);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(38, 13);
-            this.label30.TabIndex = 467;
+            this.label30.TabIndex = 6;
             this.label30.Text = "Facing";
             // 
             // npcZ
@@ -919,7 +918,7 @@ namespace LAZYSHELL
             0});
             this.npcZ.Name = "npcZ";
             this.npcZ.Size = new System.Drawing.Size(45, 21);
-            this.npcZ.TabIndex = 110;
+            this.npcZ.TabIndex = 4;
             this.npcZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcZ.ValueChanged += new System.EventHandler(this.npcZCoord_ValueChanged);
             // 
@@ -929,7 +928,7 @@ namespace LAZYSHELL
             this.label56.Location = new System.Drawing.Point(6, 44);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(13, 13);
-            this.label56.TabIndex = 466;
+            this.label56.TabIndex = 3;
             this.label56.Text = "Z";
             // 
             // groupBox12
@@ -956,7 +955,7 @@ namespace LAZYSHELL
             this.groupBox12.Location = new System.Drawing.Point(128, 56);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(132, 245);
-            this.groupBox12.TabIndex = 7;
+            this.groupBox12.TabIndex = 5;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "NPC Properties";
             // 
@@ -968,7 +967,7 @@ namespace LAZYSHELL
             this.findNPCNum.Location = new System.Drawing.Point(6, 68);
             this.findNPCNum.Name = "findNPCNum";
             this.findNPCNum.Size = new System.Drawing.Size(65, 21);
-            this.findNPCNum.TabIndex = 478;
+            this.findNPCNum.TabIndex = 4;
             this.findNPCNum.Text = "NPC #";
             this.findNPCNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolTip1.SetToolTip(this.findNPCNum, "Edit NPC event...");
@@ -985,7 +984,7 @@ namespace LAZYSHELL
             this.npcVisible.Location = new System.Drawing.Point(6, 220);
             this.npcVisible.Name = "npcVisible";
             this.npcVisible.Size = new System.Drawing.Size(120, 18);
-            this.npcVisible.TabIndex = 104;
+            this.npcVisible.TabIndex = 18;
             this.npcVisible.Text = "SHOW NPC";
             this.npcVisible.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.npcVisible.UseCompatibleTextRendering = true;
@@ -1002,7 +1001,7 @@ namespace LAZYSHELL
             0});
             this.npcID.Name = "npcID";
             this.npcID.Size = new System.Drawing.Size(53, 21);
-            this.npcID.TabIndex = 98;
+            this.npcID.TabIndex = 5;
             this.npcID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcID.ValueChanged += new System.EventHandler(this.npcID_ValueChanged);
             // 
@@ -1029,7 +1028,7 @@ namespace LAZYSHELL
             this.npcEngageTrigger.Location = new System.Drawing.Point(53, 41);
             this.npcEngageTrigger.Name = "npcEngageTrigger";
             this.npcEngageTrigger.Size = new System.Drawing.Size(73, 21);
-            this.npcEngageTrigger.TabIndex = 205;
+            this.npcEngageTrigger.TabIndex = 3;
             this.npcEngageTrigger.SelectedIndexChanged += new System.EventHandler(this.npcEngageTrigger_SelectedIndexChanged);
             // 
             // npcMovement
@@ -1042,7 +1041,7 @@ namespace LAZYSHELL
             0});
             this.npcMovement.Name = "npcMovement";
             this.npcMovement.Size = new System.Drawing.Size(53, 21);
-            this.npcMovement.TabIndex = 102;
+            this.npcMovement.TabIndex = 9;
             this.npcMovement.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcMovement.ValueChanged += new System.EventHandler(this.npcMovement_ValueChanged);
             // 
@@ -1052,7 +1051,7 @@ namespace LAZYSHELL
             this.label4.Location = new System.Drawing.Point(6, 44);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 207;
+            this.label4.TabIndex = 2;
             this.label4.Text = "Trigger";
             // 
             // npcSpeedPlus
@@ -1065,7 +1064,7 @@ namespace LAZYSHELL
             0});
             this.npcSpeedPlus.Name = "npcSpeedPlus";
             this.npcSpeedPlus.Size = new System.Drawing.Size(53, 21);
-            this.npcSpeedPlus.TabIndex = 103;
+            this.npcSpeedPlus.TabIndex = 11;
             this.npcSpeedPlus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcSpeedPlus.ValueChanged += new System.EventHandler(this.npcSpeedPlus_ValueChanged);
             // 
@@ -1075,7 +1074,7 @@ namespace LAZYSHELL
             this.label3.Location = new System.Drawing.Point(6, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
-            this.label3.TabIndex = 207;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Type";
             // 
             // npcPropertyA
@@ -1088,7 +1087,7 @@ namespace LAZYSHELL
             0});
             this.npcPropertyA.Name = "npcPropertyA";
             this.npcPropertyA.Size = new System.Drawing.Size(53, 21);
-            this.npcPropertyA.TabIndex = 105;
+            this.npcPropertyA.TabIndex = 13;
             this.npcPropertyA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcPropertyA.ValueChanged += new System.EventHandler(this.npcPropertyA_ValueChanged);
             // 
@@ -1102,7 +1101,7 @@ namespace LAZYSHELL
             0});
             this.npcEventORPack.Name = "npcEventORPack";
             this.npcEventORPack.Size = new System.Drawing.Size(53, 21);
-            this.npcEventORPack.TabIndex = 100;
+            this.npcEventORPack.TabIndex = 7;
             this.npcEventORPack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcEventORPack.ValueChanged += new System.EventHandler(this.npcEventORPack_ValueChanged);
             // 
@@ -1112,7 +1111,7 @@ namespace LAZYSHELL
             this.label104.Location = new System.Drawing.Point(6, 155);
             this.label104.Name = "label104";
             this.label104.Size = new System.Drawing.Size(19, 13);
-            this.label104.TabIndex = 469;
+            this.label104.TabIndex = 12;
             this.label104.Text = "...";
             // 
             // npcPropertyB
@@ -1125,7 +1124,7 @@ namespace LAZYSHELL
             0});
             this.npcPropertyB.Name = "npcPropertyB";
             this.npcPropertyB.Size = new System.Drawing.Size(53, 21);
-            this.npcPropertyB.TabIndex = 106;
+            this.npcPropertyB.TabIndex = 15;
             this.npcPropertyB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcPropertyB.ValueChanged += new System.EventHandler(this.npcPropertyB_ValueChanged);
             // 
@@ -1139,7 +1138,7 @@ namespace LAZYSHELL
             this.npcEngageType.Location = new System.Drawing.Point(53, 20);
             this.npcEngageType.Name = "npcEngageType";
             this.npcEngageType.Size = new System.Drawing.Size(73, 21);
-            this.npcEngageType.TabIndex = 206;
+            this.npcEngageType.TabIndex = 1;
             this.npcEngageType.SelectedIndexChanged += new System.EventHandler(this.npcEngageType_SelectedIndexChanged);
             // 
             // label31
@@ -1148,7 +1147,7 @@ namespace LAZYSHELL
             this.label31.Location = new System.Drawing.Point(6, 175);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(19, 13);
-            this.label31.TabIndex = 473;
+            this.label31.TabIndex = 14;
             this.label31.Text = "...";
             // 
             // label54
@@ -1157,7 +1156,7 @@ namespace LAZYSHELL
             this.label54.Location = new System.Drawing.Point(6, 135);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(48, 13);
-            this.label54.TabIndex = 460;
+            this.label54.TabIndex = 10;
             this.label54.Text = "Speed +";
             // 
             // npcPropertyC
@@ -1170,7 +1169,7 @@ namespace LAZYSHELL
             0});
             this.npcPropertyC.Name = "npcPropertyC";
             this.npcPropertyC.Size = new System.Drawing.Size(53, 21);
-            this.npcPropertyC.TabIndex = 107;
+            this.npcPropertyC.TabIndex = 17;
             this.npcPropertyC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcPropertyC.ValueChanged += new System.EventHandler(this.npcPropertyC_ValueChanged);
             // 
@@ -1182,7 +1181,7 @@ namespace LAZYSHELL
             this.buttonGotoA.Location = new System.Drawing.Point(6, 89);
             this.buttonGotoA.Name = "buttonGotoA";
             this.buttonGotoA.Size = new System.Drawing.Size(65, 21);
-            this.buttonGotoA.TabIndex = 99;
+            this.buttonGotoA.TabIndex = 6;
             this.buttonGotoA.Text = "Event #";
             this.buttonGotoA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolTip1.SetToolTip(this.buttonGotoA, "Edit NPC event...");
@@ -1196,7 +1195,7 @@ namespace LAZYSHELL
             this.label116.Location = new System.Drawing.Point(6, 197);
             this.label116.Name = "label116";
             this.label116.Size = new System.Drawing.Size(56, 13);
-            this.label116.TabIndex = 472;
+            this.label116.TabIndex = 16;
             this.label116.Text = "Action #+";
             // 
             // buttonGotoB
@@ -1207,7 +1206,7 @@ namespace LAZYSHELL
             this.buttonGotoB.Location = new System.Drawing.Point(6, 110);
             this.buttonGotoB.Name = "buttonGotoB";
             this.buttonGotoB.Size = new System.Drawing.Size(65, 21);
-            this.buttonGotoB.TabIndex = 101;
+            this.buttonGotoB.TabIndex = 8;
             this.buttonGotoB.Text = "Action #";
             this.buttonGotoB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolTip1.SetToolTip(this.buttonGotoB, "Edit NPC action...");
@@ -1224,7 +1223,7 @@ namespace LAZYSHELL
             this.npcsBytesLeft.Name = "npcsBytesLeft";
             this.npcsBytesLeft.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.npcsBytesLeft.Size = new System.Drawing.Size(126, 21);
-            this.npcsBytesLeft.TabIndex = 498;
+            this.npcsBytesLeft.TabIndex = 1;
             this.npcsBytesLeft.Text = "bytes left";
             this.npcsBytesLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -1237,7 +1236,7 @@ namespace LAZYSHELL
             this.npcObjectTree.ShowPlusMinus = false;
             this.npcObjectTree.ShowRootLines = false;
             this.npcObjectTree.Size = new System.Drawing.Size(126, 403);
-            this.npcObjectTree.TabIndex = 91;
+            this.npcObjectTree.TabIndex = 2;
             this.npcObjectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.npcObjectTree_AfterSelect);
             // 
             // mapNum
@@ -1250,7 +1249,7 @@ namespace LAZYSHELL
             0});
             this.mapNum.Name = "mapNum";
             this.mapNum.Size = new System.Drawing.Size(49, 21);
-            this.mapNum.TabIndex = 50;
+            this.mapNum.TabIndex = 1;
             this.mapNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapNum.ValueChanged += new System.EventHandler(this.mapNum_ValueChanged);
             // 
@@ -1260,7 +1259,7 @@ namespace LAZYSHELL
             this.label33.Location = new System.Drawing.Point(6, 9);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(38, 13);
-            this.label33.TabIndex = 15;
+            this.label33.TabIndex = 0;
             this.label33.Text = "Map #";
             // 
             // contextMenuStrip4
@@ -1270,12 +1269,12 @@ namespace LAZYSHELL
             this.contextMenuStrip4.Name = "contextMenuStrip4";
             this.contextMenuStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip4.ShowImageMargin = false;
-            this.contextMenuStrip4.Size = new System.Drawing.Size(226, 26);
+            this.contextMenuStrip4.Size = new System.Drawing.Size(217, 48);
             // 
             // addThisLevelToNotesDatabaseToolStripMenuItem
             // 
             this.addThisLevelToNotesDatabaseToolStripMenuItem.Name = "addThisLevelToNotesDatabaseToolStripMenuItem";
-            this.addThisLevelToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.addThisLevelToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.addThisLevelToNotesDatabaseToolStripMenuItem.Text = "Add this level to notes database...";
             this.addThisLevelToNotesDatabaseToolStripMenuItem.Click += new System.EventHandler(this.addThisLevelToNotesDatabaseToolStripMenuItem_Click);
             // 
@@ -1285,7 +1284,7 @@ namespace LAZYSHELL
             this.label19.Location = new System.Drawing.Point(6, 106);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 13);
-            this.label19.TabIndex = 9;
+            this.label19.TabIndex = 12;
             this.label19.Text = "GFX Set 5";
             // 
             // label18
@@ -1294,7 +1293,7 @@ namespace LAZYSHELL
             this.label18.Location = new System.Drawing.Point(6, 85);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(54, 13);
-            this.label18.TabIndex = 8;
+            this.label18.TabIndex = 9;
             this.label18.Text = "GFX Set 4";
             // 
             // label17
@@ -1303,7 +1302,7 @@ namespace LAZYSHELL
             this.label17.Location = new System.Drawing.Point(6, 64);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(54, 13);
-            this.label17.TabIndex = 7;
+            this.label17.TabIndex = 6;
             this.label17.Text = "GFX Set 3";
             // 
             // label16
@@ -1312,7 +1311,7 @@ namespace LAZYSHELL
             this.label16.Location = new System.Drawing.Point(6, 43);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(54, 13);
-            this.label16.TabIndex = 6;
+            this.label16.TabIndex = 3;
             this.label16.Text = "GFX Set 2";
             // 
             // label2
@@ -1321,20 +1320,20 @@ namespace LAZYSHELL
             this.label2.Location = new System.Drawing.Point(6, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
-            this.label2.TabIndex = 5;
+            this.label2.TabIndex = 0;
             this.label2.Text = "GFX Set 1";
             // 
-            // tabPage10
+            // tabPage5
             // 
-            this.tabPage10.Controls.Add(this.panel1);
-            this.tabPage10.Controls.Add(this.panelOverlapTileset);
-            this.tabPage10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage10.Location = new System.Drawing.Point(4, 22);
-            this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(260, 640);
-            this.tabPage10.TabIndex = 4;
-            this.tabPage10.Text = "OVERLAP";
-            this.tabPage10.UseVisualStyleBackColor = true;
+            this.tabPage5.Controls.Add(this.panel1);
+            this.tabPage5.Controls.Add(this.panelOverlapTileset);
+            this.tabPage5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(260, 640);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "OVERLAP";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -1346,7 +1345,7 @@ namespace LAZYSHELL
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(260, 220);
-            this.panel1.TabIndex = 496;
+            this.panel1.TabIndex = 0;
             // 
             // groupBox19
             // 
@@ -1361,7 +1360,7 @@ namespace LAZYSHELL
             this.groupBox19.Location = new System.Drawing.Point(127, 28);
             this.groupBox19.Name = "groupBox19";
             this.groupBox19.Size = new System.Drawing.Size(133, 94);
-            this.groupBox19.TabIndex = 7;
+            this.groupBox19.TabIndex = 2;
             this.groupBox19.TabStop = false;
             this.groupBox19.Text = "Tile Properties";
             // 
@@ -1374,7 +1373,7 @@ namespace LAZYSHELL
             this.overlapCoordZPlusHalf.Location = new System.Drawing.Point(83, 67);
             this.overlapCoordZPlusHalf.Name = "overlapCoordZPlusHalf";
             this.overlapCoordZPlusHalf.Size = new System.Drawing.Size(43, 21);
-            this.overlapCoordZPlusHalf.TabIndex = 493;
+            this.overlapCoordZPlusHalf.TabIndex = 7;
             this.overlapCoordZPlusHalf.Text = "+1/2";
             this.overlapCoordZPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.overlapCoordZPlusHalf.UseCompatibleTextRendering = true;
@@ -1387,7 +1386,7 @@ namespace LAZYSHELL
             this.label109.Location = new System.Drawing.Point(6, 22);
             this.label109.Name = "label109";
             this.label109.Size = new System.Drawing.Size(34, 13);
-            this.label109.TabIndex = 489;
+            this.label109.TabIndex = 0;
             this.label109.Text = "Tile #";
             // 
             // overlapType
@@ -1400,7 +1399,7 @@ namespace LAZYSHELL
             0});
             this.overlapType.Name = "overlapType";
             this.overlapType.Size = new System.Drawing.Size(81, 21);
-            this.overlapType.TabIndex = 492;
+            this.overlapType.TabIndex = 1;
             this.overlapType.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.overlapType.ValueChanged += new System.EventHandler(this.overlapType_ValueChanged);
             // 
@@ -1414,7 +1413,7 @@ namespace LAZYSHELL
             0});
             this.overlapX.Name = "overlapX";
             this.overlapX.Size = new System.Drawing.Size(45, 21);
-            this.overlapX.TabIndex = 486;
+            this.overlapX.TabIndex = 3;
             this.overlapX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.overlapX.ValueChanged += new System.EventHandler(this.overlapCoordX_ValueChanged);
             // 
@@ -1428,7 +1427,7 @@ namespace LAZYSHELL
             0});
             this.overlapY.Name = "overlapY";
             this.overlapY.Size = new System.Drawing.Size(45, 21);
-            this.overlapY.TabIndex = 487;
+            this.overlapY.TabIndex = 4;
             this.overlapY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.overlapY.ValueChanged += new System.EventHandler(this.overlapCoordY_ValueChanged);
             // 
@@ -1438,7 +1437,7 @@ namespace LAZYSHELL
             this.label103.Location = new System.Drawing.Point(6, 47);
             this.label103.Name = "label103";
             this.label103.Size = new System.Drawing.Size(23, 13);
-            this.label103.TabIndex = 489;
+            this.label103.TabIndex = 2;
             this.label103.Text = "X,Y";
             // 
             // overlapZ
@@ -1451,7 +1450,7 @@ namespace LAZYSHELL
             0});
             this.overlapZ.Name = "overlapZ";
             this.overlapZ.Size = new System.Drawing.Size(45, 21);
-            this.overlapZ.TabIndex = 488;
+            this.overlapZ.TabIndex = 6;
             this.overlapZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.overlapZ.ValueChanged += new System.EventHandler(this.overlapCoordZ_ValueChanged);
             // 
@@ -1461,7 +1460,7 @@ namespace LAZYSHELL
             this.label107.Location = new System.Drawing.Point(6, 68);
             this.label107.Name = "label107";
             this.label107.Size = new System.Drawing.Size(13, 13);
-            this.label107.TabIndex = 491;
+            this.label107.TabIndex = 5;
             this.label107.Text = "Z";
             // 
             // overlapFieldTree
@@ -1473,7 +1472,7 @@ namespace LAZYSHELL
             this.overlapFieldTree.Name = "overlapFieldTree";
             this.overlapFieldTree.ShowRootLines = false;
             this.overlapFieldTree.Size = new System.Drawing.Size(125, 195);
-            this.overlapFieldTree.TabIndex = 456;
+            this.overlapFieldTree.TabIndex = 1;
             this.overlapFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.overlapFieldTree_AfterSelect);
             // 
             // overlapUnknownBits
@@ -1491,7 +1490,7 @@ namespace LAZYSHELL
             this.overlapUnknownBits.Location = new System.Drawing.Point(127, 128);
             this.overlapUnknownBits.Name = "overlapUnknownBits";
             this.overlapUnknownBits.Size = new System.Drawing.Size(133, 91);
-            this.overlapUnknownBits.TabIndex = 123;
+            this.overlapUnknownBits.TabIndex = 3;
             this.overlapUnknownBits.SelectedIndexChanged += new System.EventHandler(this.overlapUnknownBits_SelectedIndexChanged);
             // 
             // toolStrip4
@@ -1511,7 +1510,7 @@ namespace LAZYSHELL
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip4.Size = new System.Drawing.Size(260, 25);
-            this.toolStrip4.TabIndex = 496;
+            this.toolStrip4.TabIndex = 0;
             this.toolStrip4.Text = "toolStrip4";
             // 
             // overlapFieldInsert
@@ -1589,7 +1588,7 @@ namespace LAZYSHELL
             this.panelOverlapTileset.Location = new System.Drawing.Point(0, 220);
             this.panelOverlapTileset.Name = "panelOverlapTileset";
             this.panelOverlapTileset.Size = new System.Drawing.Size(260, 420);
-            this.panelOverlapTileset.TabIndex = 505;
+            this.panelOverlapTileset.TabIndex = 1;
             this.panelOverlapTileset.Visible = false;
             // 
             // pictureBoxOverlaps
@@ -1605,17 +1604,17 @@ namespace LAZYSHELL
             this.pictureBoxOverlaps.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxOverlaps_Paint);
             this.pictureBoxOverlaps.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOverlaps_MouseDown);
             // 
-            // tabPage9
+            // tabPage4
             // 
-            this.tabPage9.Controls.Add(this.panel2);
-            this.tabPage9.Controls.Add(this.panel52);
-            this.tabPage9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage9.Location = new System.Drawing.Point(4, 22);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(260, 640);
-            this.tabPage9.TabIndex = 3;
-            this.tabPage9.Text = "FIELD";
-            this.tabPage9.UseVisualStyleBackColor = true;
+            this.tabPage4.Controls.Add(this.panel2);
+            this.tabPage4.Controls.Add(this.panel52);
+            this.tabPage4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(260, 640);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "FIELD";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -1628,7 +1627,7 @@ namespace LAZYSHELL
             this.panel2.Location = new System.Drawing.Point(0, 388);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(260, 252);
-            this.panel2.TabIndex = 498;
+            this.panel2.TabIndex = 1;
             // 
             // groupBox18
             // 
@@ -1650,7 +1649,7 @@ namespace LAZYSHELL
             this.groupBox18.Location = new System.Drawing.Point(127, 47);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Size = new System.Drawing.Size(133, 187);
-            this.groupBox18.TabIndex = 7;
+            this.groupBox18.TabIndex = 3;
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "Exit Properties";
             // 
@@ -1664,7 +1663,7 @@ namespace LAZYSHELL
             this.eventFace.Location = new System.Drawing.Point(52, 132);
             this.eventFace.Name = "eventFace";
             this.eventFace.Size = new System.Drawing.Size(75, 21);
-            this.eventFace.TabIndex = 211;
+            this.eventFace.TabIndex = 12;
             this.eventFace.SelectedIndexChanged += new System.EventHandler(this.eventsFieldRadialPosition_SelectedIndexChanged);
             // 
             // eventsWidthYPlusHalf
@@ -1677,7 +1676,7 @@ namespace LAZYSHELL
             this.eventsWidthYPlusHalf.Location = new System.Drawing.Point(69, 159);
             this.eventsWidthYPlusHalf.Name = "eventsWidthYPlusHalf";
             this.eventsWidthYPlusHalf.Size = new System.Drawing.Size(58, 21);
-            this.eventsWidthYPlusHalf.TabIndex = 157;
+            this.eventsWidthYPlusHalf.TabIndex = 14;
             this.eventsWidthYPlusHalf.Text = "135°+½";
             this.eventsWidthYPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.eventsWidthYPlusHalf.UseCompatibleTextRendering = true;
@@ -1692,7 +1691,7 @@ namespace LAZYSHELL
             this.buttonGotoD.Location = new System.Drawing.Point(6, 20);
             this.buttonGotoD.Name = "buttonGotoD";
             this.buttonGotoD.Size = new System.Drawing.Size(58, 21);
-            this.buttonGotoD.TabIndex = 492;
+            this.buttonGotoD.TabIndex = 0;
             this.buttonGotoD.Text = "Event #";
             this.buttonGotoD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolTip1.SetToolTip(this.buttonGotoD, "Edit event field event...");
@@ -1710,7 +1709,7 @@ namespace LAZYSHELL
             this.eventsWidthXPlusHalf.Location = new System.Drawing.Point(6, 159);
             this.eventsWidthXPlusHalf.Name = "eventsWidthXPlusHalf";
             this.eventsWidthXPlusHalf.Size = new System.Drawing.Size(58, 21);
-            this.eventsWidthXPlusHalf.TabIndex = 156;
+            this.eventsWidthXPlusHalf.TabIndex = 13;
             this.eventsWidthXPlusHalf.Text = "45°+½";
             this.eventsWidthXPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.eventsWidthXPlusHalf.UseCompatibleTextRendering = true;
@@ -1732,7 +1731,7 @@ namespace LAZYSHELL
             0});
             this.eventLength.Name = "eventLength";
             this.eventLength.Size = new System.Drawing.Size(75, 21);
-            this.eventLength.TabIndex = 153;
+            this.eventLength.TabIndex = 8;
             this.eventLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.eventLength.Value = new decimal(new int[] {
             1,
@@ -1747,7 +1746,7 @@ namespace LAZYSHELL
             this.label137.Location = new System.Drawing.Point(6, 137);
             this.label137.Name = "label137";
             this.label137.Size = new System.Drawing.Size(38, 13);
-            this.label137.TabIndex = 489;
+            this.label137.TabIndex = 11;
             this.label137.Text = "Facing";
             // 
             // eventY
@@ -1760,7 +1759,7 @@ namespace LAZYSHELL
             0});
             this.eventY.Name = "eventY";
             this.eventY.Size = new System.Drawing.Size(45, 21);
-            this.eventY.TabIndex = 151;
+            this.eventY.TabIndex = 4;
             this.eventY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.eventY.ValueChanged += new System.EventHandler(this.eventsFieldYCoord_ValueChanged);
             // 
@@ -1770,7 +1769,7 @@ namespace LAZYSHELL
             this.label127.Location = new System.Drawing.Point(6, 49);
             this.label127.Name = "label127";
             this.label127.Size = new System.Drawing.Size(23, 13);
-            this.label127.TabIndex = 473;
+            this.label127.TabIndex = 2;
             this.label127.Text = "X,Y";
             // 
             // label135
@@ -1779,7 +1778,7 @@ namespace LAZYSHELL
             this.label135.Location = new System.Drawing.Point(6, 116);
             this.label135.Name = "label135";
             this.label135.Size = new System.Drawing.Size(38, 13);
-            this.label135.TabIndex = 484;
+            this.label135.TabIndex = 9;
             this.label135.Text = "Height";
             // 
             // label133
@@ -1788,7 +1787,7 @@ namespace LAZYSHELL
             this.label133.Location = new System.Drawing.Point(6, 70);
             this.label133.Name = "label133";
             this.label133.Size = new System.Drawing.Size(13, 13);
-            this.label133.TabIndex = 486;
+            this.label133.TabIndex = 5;
             this.label133.Text = "Z";
             // 
             // eventX
@@ -1801,7 +1800,7 @@ namespace LAZYSHELL
             0});
             this.eventX.Name = "eventX";
             this.eventX.Size = new System.Drawing.Size(45, 21);
-            this.eventX.TabIndex = 150;
+            this.eventX.TabIndex = 3;
             this.eventX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.eventX.ValueChanged += new System.EventHandler(this.eventsFieldXCoord_ValueChanged);
             // 
@@ -1815,7 +1814,7 @@ namespace LAZYSHELL
             0});
             this.eventZ.Name = "eventZ";
             this.eventZ.Size = new System.Drawing.Size(45, 21);
-            this.eventZ.TabIndex = 152;
+            this.eventZ.TabIndex = 6;
             this.eventZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.eventZ.ValueChanged += new System.EventHandler(this.eventsFieldZCoord_ValueChanged);
             // 
@@ -1825,7 +1824,7 @@ namespace LAZYSHELL
             this.label131.Location = new System.Drawing.Point(6, 95);
             this.label131.Name = "label131";
             this.label131.Size = new System.Drawing.Size(40, 13);
-            this.label131.TabIndex = 471;
+            this.label131.TabIndex = 7;
             this.label131.Text = "Length";
             // 
             // eventEvent
@@ -1838,7 +1837,7 @@ namespace LAZYSHELL
             0});
             this.eventEvent.Name = "eventEvent";
             this.eventEvent.Size = new System.Drawing.Size(61, 21);
-            this.eventEvent.TabIndex = 149;
+            this.eventEvent.TabIndex = 1;
             this.eventEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.eventEvent.ValueChanged += new System.EventHandler(this.eventsRunEvent_ValueChanged);
             // 
@@ -1852,7 +1851,7 @@ namespace LAZYSHELL
             0});
             this.eventHeight.Name = "eventHeight";
             this.eventHeight.Size = new System.Drawing.Size(75, 21);
-            this.eventHeight.TabIndex = 154;
+            this.eventHeight.TabIndex = 10;
             this.eventHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.eventHeight.ValueChanged += new System.EventHandler(this.eventsFieldHeight_ValueChanged);
             // 
@@ -1865,7 +1864,7 @@ namespace LAZYSHELL
             this.eventsList.Name = "eventsList";
             this.eventsList.ShowRootLines = false;
             this.eventsList.Size = new System.Drawing.Size(125, 208);
-            this.eventsList.TabIndex = 146;
+            this.eventsList.TabIndex = 2;
             this.eventsList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.eventsFieldTree_AfterSelect);
             // 
             // toolStrip6
@@ -1884,7 +1883,7 @@ namespace LAZYSHELL
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip6.Size = new System.Drawing.Size(260, 25);
-            this.toolStrip6.TabIndex = 497;
+            this.toolStrip6.TabIndex = 1;
             this.toolStrip6.Text = "toolStrip6";
             // 
             // eventsInsertField
@@ -1963,7 +1962,7 @@ namespace LAZYSHELL
             this.label63.Name = "label63";
             this.label63.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label63.Size = new System.Drawing.Size(260, 19);
-            this.label63.TabIndex = 456;
+            this.label63.TabIndex = 0;
             this.label63.Text = "EVENT FIELDS";
             this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -1991,7 +1990,7 @@ namespace LAZYSHELL
             this.exitsFieldTree.Name = "exitsFieldTree";
             this.exitsFieldTree.ShowRootLines = false;
             this.exitsFieldTree.Size = new System.Drawing.Size(125, 344);
-            this.exitsFieldTree.TabIndex = 127;
+            this.exitsFieldTree.TabIndex = 2;
             this.exitsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.exitsFieldTree_AfterSelect);
             // 
             // groupBox17
@@ -2007,7 +2006,7 @@ namespace LAZYSHELL
             this.groupBox17.Location = new System.Drawing.Point(127, 292);
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.Size = new System.Drawing.Size(133, 93);
-            this.groupBox17.TabIndex = 7;
+            this.groupBox17.TabIndex = 4;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "Coordinates";
             // 
@@ -2027,7 +2026,7 @@ namespace LAZYSHELL
             this.exitDestFace.Location = new System.Drawing.Point(49, 66);
             this.exitDestFace.Name = "exitDestFace";
             this.exitDestFace.Size = new System.Drawing.Size(78, 21);
-            this.exitDestFace.TabIndex = 210;
+            this.exitDestFace.TabIndex = 7;
             this.exitDestFace.SelectedIndexChanged += new System.EventHandler(this.exitsMarioRadialPosition_SelectedIndexChanged);
             // 
             // marioZCoordPlusHalf
@@ -2040,7 +2039,7 @@ namespace LAZYSHELL
             this.marioZCoordPlusHalf.Location = new System.Drawing.Point(83, 42);
             this.marioZCoordPlusHalf.Name = "marioZCoordPlusHalf";
             this.marioZCoordPlusHalf.Size = new System.Drawing.Size(43, 20);
-            this.marioZCoordPlusHalf.TabIndex = 142;
+            this.marioZCoordPlusHalf.TabIndex = 5;
             this.marioZCoordPlusHalf.Text = "+1/2";
             this.marioZCoordPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.marioZCoordPlusHalf.UseCompatibleTextRendering = true;
@@ -2053,7 +2052,7 @@ namespace LAZYSHELL
             this.label59.Location = new System.Drawing.Point(6, 22);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(23, 13);
-            this.label59.TabIndex = 474;
+            this.label59.TabIndex = 0;
             this.label59.Text = "X,Y";
             // 
             // exitDestY
@@ -2066,7 +2065,7 @@ namespace LAZYSHELL
             0});
             this.exitDestY.Name = "exitDestY";
             this.exitDestY.Size = new System.Drawing.Size(45, 21);
-            this.exitDestY.TabIndex = 139;
+            this.exitDestY.TabIndex = 2;
             this.exitDestY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitDestY.ValueChanged += new System.EventHandler(this.exitsMarioYCoord_ValueChanged);
             // 
@@ -2076,7 +2075,7 @@ namespace LAZYSHELL
             this.label124.Location = new System.Drawing.Point(6, 68);
             this.label124.Name = "label124";
             this.label124.Size = new System.Drawing.Size(38, 13);
-            this.label124.TabIndex = 488;
+            this.label124.TabIndex = 6;
             this.label124.Text = "Facing";
             // 
             // label122
@@ -2085,7 +2084,7 @@ namespace LAZYSHELL
             this.label122.Location = new System.Drawing.Point(6, 43);
             this.label122.Name = "label122";
             this.label122.Size = new System.Drawing.Size(13, 13);
-            this.label122.TabIndex = 487;
+            this.label122.TabIndex = 3;
             this.label122.Text = "Z";
             // 
             // exitDestX
@@ -2098,7 +2097,7 @@ namespace LAZYSHELL
             0});
             this.exitDestX.Name = "exitDestX";
             this.exitDestX.Size = new System.Drawing.Size(45, 21);
-            this.exitDestX.TabIndex = 138;
+            this.exitDestX.TabIndex = 1;
             this.exitDestX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitDestX.ValueChanged += new System.EventHandler(this.exitsMarioXCoord_ValueChanged);
             // 
@@ -2112,7 +2111,7 @@ namespace LAZYSHELL
             0});
             this.exitDestZ.Name = "exitDestZ";
             this.exitDestZ.Size = new System.Drawing.Size(45, 21);
-            this.exitDestZ.TabIndex = 140;
+            this.exitDestZ.TabIndex = 4;
             this.exitDestZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitDestZ.ValueChanged += new System.EventHandler(this.exitsMarioZCoord_ValueChanged);
             // 
@@ -2124,7 +2123,7 @@ namespace LAZYSHELL
             this.panel68.Location = new System.Drawing.Point(119, 608);
             this.panel68.Name = "panel68";
             this.panel68.Size = new System.Drawing.Size(121, 61);
-            this.panel68.TabIndex = 493;
+            this.panel68.TabIndex = 0;
             // 
             // groupBox16
             // 
@@ -2148,7 +2147,7 @@ namespace LAZYSHELL
             this.groupBox16.Location = new System.Drawing.Point(127, 47);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Size = new System.Drawing.Size(133, 239);
-            this.groupBox16.TabIndex = 7;
+            this.groupBox16.TabIndex = 3;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "Destination Properties";
             // 
@@ -2162,7 +2161,7 @@ namespace LAZYSHELL
             this.exits135LengthPlusHalf.Location = new System.Drawing.Point(69, 211);
             this.exits135LengthPlusHalf.Name = "exits135LengthPlusHalf";
             this.exits135LengthPlusHalf.Size = new System.Drawing.Size(58, 21);
-            this.exits135LengthPlusHalf.TabIndex = 138;
+            this.exits135LengthPlusHalf.TabIndex = 16;
             this.exits135LengthPlusHalf.Text = "135°+½";
             this.exits135LengthPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.exits135LengthPlusHalf.UseCompatibleTextRendering = true;
@@ -2179,7 +2178,7 @@ namespace LAZYSHELL
             this.exitFace.Location = new System.Drawing.Point(50, 184);
             this.exitFace.Name = "exitFace";
             this.exitFace.Size = new System.Drawing.Size(77, 21);
-            this.exitFace.TabIndex = 212;
+            this.exitFace.TabIndex = 14;
             this.exitFace.SelectedIndexChanged += new System.EventHandler(this.exitsFace_SelectedIndexChanged);
             // 
             // exits45LengthPlusHalf
@@ -2192,7 +2191,7 @@ namespace LAZYSHELL
             this.exits45LengthPlusHalf.Location = new System.Drawing.Point(6, 211);
             this.exits45LengthPlusHalf.Name = "exits45LengthPlusHalf";
             this.exits45LengthPlusHalf.Size = new System.Drawing.Size(58, 21);
-            this.exits45LengthPlusHalf.TabIndex = 137;
+            this.exits45LengthPlusHalf.TabIndex = 15;
             this.exits45LengthPlusHalf.Text = "45°+½";
             this.exits45LengthPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.exits45LengthPlusHalf.UseCompatibleTextRendering = true;
@@ -2205,7 +2204,7 @@ namespace LAZYSHELL
             this.label119.Location = new System.Drawing.Point(6, 99);
             this.label119.Name = "label119";
             this.label119.Size = new System.Drawing.Size(23, 13);
-            this.label119.TabIndex = 472;
+            this.label119.TabIndex = 4;
             this.label119.Text = "X,Y";
             // 
             // exitType
@@ -2218,7 +2217,7 @@ namespace LAZYSHELL
             this.exitType.Location = new System.Drawing.Point(50, 71);
             this.exitType.Name = "exitType";
             this.exitType.Size = new System.Drawing.Size(77, 21);
-            this.exitType.TabIndex = 197;
+            this.exitType.TabIndex = 3;
             this.exitType.SelectedIndexChanged += new System.EventHandler(this.exitsType_SelectedIndexChanged);
             // 
             // exitLength
@@ -2236,7 +2235,7 @@ namespace LAZYSHELL
             0});
             this.exitLength.Name = "exitLength";
             this.exitLength.Size = new System.Drawing.Size(77, 21);
-            this.exitLength.TabIndex = 134;
+            this.exitLength.TabIndex = 10;
             this.exitLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitLength.Value = new decimal(new int[] {
             1,
@@ -2255,7 +2254,7 @@ namespace LAZYSHELL
             0});
             this.exitZ.Name = "exitZ";
             this.exitZ.Size = new System.Drawing.Size(45, 21);
-            this.exitZ.TabIndex = 133;
+            this.exitZ.TabIndex = 8;
             this.exitZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitZ.ValueChanged += new System.EventHandler(this.exitsZ_ValueChanged);
             // 
@@ -2270,7 +2269,7 @@ namespace LAZYSHELL
             this.exitDest.Location = new System.Drawing.Point(6, 20);
             this.exitDest.Name = "exitDest";
             this.exitDest.Size = new System.Drawing.Size(121, 21);
-            this.exitDest.TabIndex = 196;
+            this.exitDest.TabIndex = 0;
             this.exitDest.SelectedIndexChanged += new System.EventHandler(this.exitsDestination_SelectedIndexChanged);
             // 
             // exitY
@@ -2283,7 +2282,7 @@ namespace LAZYSHELL
             0});
             this.exitY.Name = "exitY";
             this.exitY.Size = new System.Drawing.Size(45, 21);
-            this.exitY.TabIndex = 132;
+            this.exitY.TabIndex = 6;
             this.exitY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitY.ValueChanged += new System.EventHandler(this.exitsY_ValueChanged);
             // 
@@ -2296,7 +2295,7 @@ namespace LAZYSHELL
             this.exitsShowMessage.Location = new System.Drawing.Point(6, 45);
             this.exitsShowMessage.Name = "exitsShowMessage";
             this.exitsShowMessage.Size = new System.Drawing.Size(121, 21);
-            this.exitsShowMessage.TabIndex = 129;
+            this.exitsShowMessage.TabIndex = 1;
             this.exitsShowMessage.Text = "SHOW MESSAGE";
             this.exitsShowMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.exitsShowMessage.UseCompatibleTextRendering = true;
@@ -2313,7 +2312,7 @@ namespace LAZYSHELL
             0});
             this.exitX.Name = "exitX";
             this.exitX.Size = new System.Drawing.Size(45, 21);
-            this.exitX.TabIndex = 131;
+            this.exitX.TabIndex = 5;
             this.exitX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitX.ValueChanged += new System.EventHandler(this.exitsX_ValueChanged);
             // 
@@ -2327,7 +2326,7 @@ namespace LAZYSHELL
             0});
             this.exitHeight.Name = "exitHeight";
             this.exitHeight.Size = new System.Drawing.Size(77, 21);
-            this.exitHeight.TabIndex = 135;
+            this.exitHeight.TabIndex = 12;
             this.exitHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitHeight.ValueChanged += new System.EventHandler(this.exitsFieldHeight_ValueChanged);
             // 
@@ -2337,7 +2336,7 @@ namespace LAZYSHELL
             this.label37.Location = new System.Drawing.Point(6, 74);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(31, 13);
-            this.label37.TabIndex = 458;
+            this.label37.TabIndex = 2;
             this.label37.Text = "Type";
             // 
             // label105
@@ -2346,7 +2345,7 @@ namespace LAZYSHELL
             this.label105.Location = new System.Drawing.Point(6, 145);
             this.label105.Name = "label105";
             this.label105.Size = new System.Drawing.Size(40, 13);
-            this.label105.TabIndex = 470;
+            this.label105.TabIndex = 9;
             this.label105.Text = "Length";
             // 
             // label47
@@ -2355,7 +2354,7 @@ namespace LAZYSHELL
             this.label47.Location = new System.Drawing.Point(6, 187);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(38, 13);
-            this.label47.TabIndex = 490;
+            this.label47.TabIndex = 13;
             this.label47.Text = "Facing";
             // 
             // label120
@@ -2364,7 +2363,7 @@ namespace LAZYSHELL
             this.label120.Location = new System.Drawing.Point(6, 166);
             this.label120.Name = "label120";
             this.label120.Size = new System.Drawing.Size(38, 13);
-            this.label120.TabIndex = 483;
+            this.label120.TabIndex = 11;
             this.label120.Text = "Height";
             // 
             // label57
@@ -2373,7 +2372,7 @@ namespace LAZYSHELL
             this.label57.Location = new System.Drawing.Point(6, 120);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(13, 13);
-            this.label57.TabIndex = 485;
+            this.label57.TabIndex = 7;
             this.label57.Text = "Z";
             // 
             // toolStrip5
@@ -2392,7 +2391,7 @@ namespace LAZYSHELL
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip5.Size = new System.Drawing.Size(260, 25);
-            this.toolStrip5.TabIndex = 496;
+            this.toolStrip5.TabIndex = 1;
             this.toolStrip5.Text = "toolStrip5";
             // 
             // exitsInsertField
@@ -2471,18 +2470,18 @@ namespace LAZYSHELL
             this.label61.Name = "label61";
             this.label61.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label61.Size = new System.Drawing.Size(260, 19);
-            this.label61.TabIndex = 453;
+            this.label61.TabIndex = 0;
             this.label61.Text = "EXIT FIELDS";
             this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.tabPage4);
-            this.tabControl.Controls.Add(this.tabPage3);
-            this.tabControl.Controls.Add(this.tabPage8);
-            this.tabControl.Controls.Add(this.tabPage9);
-            this.tabControl.Controls.Add(this.tabPage10);
             this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage3);
+            this.tabControl.Controls.Add(this.tabPage4);
+            this.tabControl.Controls.Add(this.tabPage5);
+            this.tabControl.Controls.Add(this.tabPage6);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Left;
             this.tabControl.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl.ItemSize = new System.Drawing.Size(44, 18);
@@ -2491,24 +2490,24 @@ namespace LAZYSHELL
             this.tabControl.Padding = new System.Drawing.Point(5, 4);
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(268, 666);
-            this.tabControl.TabIndex = 6;
+            this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
-            // tabPage4
+            // tabPage1
             // 
-            this.tabPage4.Controls.Add(this.groupBox4);
-            this.tabPage4.Controls.Add(this.groupBox3);
-            this.tabPage4.Controls.Add(this.mapNum);
-            this.tabPage4.Controls.Add(this.groupBox2);
-            this.tabPage4.Controls.Add(this.label33);
-            this.tabPage4.Controls.Add(this.groupBox1);
-            this.tabPage4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(260, 640);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "MAPS";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Controls.Add(this.mapNum);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.label33);
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(260, 640);
+            this.tabPage1.TabIndex = 1;
+            this.tabPage1.Text = "MAPS";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -2518,7 +2517,7 @@ namespace LAZYSHELL
             this.groupBox4.Location = new System.Drawing.Point(0, 456);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(260, 48);
-            this.groupBox4.TabIndex = 443;
+            this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Palettes";
             // 
@@ -2528,15 +2527,15 @@ namespace LAZYSHELL
             this.mapPaletteSetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapPaletteSetName.DropDownWidth = 200;
             this.mapPaletteSetName.IntegralHeight = false;
-            this.mapPaletteSetName.Location = new System.Drawing.Point(123, 21);
+            this.mapPaletteSetName.Location = new System.Drawing.Point(127, 21);
             this.mapPaletteSetName.Name = "mapPaletteSetName";
-            this.mapPaletteSetName.Size = new System.Drawing.Size(131, 21);
-            this.mapPaletteSetName.TabIndex = 158;
+            this.mapPaletteSetName.Size = new System.Drawing.Size(127, 21);
+            this.mapPaletteSetName.TabIndex = 2;
             this.mapPaletteSetName.SelectedIndexChanged += new System.EventHandler(this.mapPaletteSetName_SelectedIndexChanged);
             // 
             // mapPaletteSetNum
             // 
-            this.mapPaletteSetNum.Location = new System.Drawing.Point(72, 21);
+            this.mapPaletteSetNum.Location = new System.Drawing.Point(76, 21);
             this.mapPaletteSetNum.Maximum = new decimal(new int[] {
             93,
             0,
@@ -2544,7 +2543,7 @@ namespace LAZYSHELL
             0});
             this.mapPaletteSetNum.Name = "mapPaletteSetNum";
             this.mapPaletteSetNum.Size = new System.Drawing.Size(51, 21);
-            this.mapPaletteSetNum.TabIndex = 80;
+            this.mapPaletteSetNum.TabIndex = 1;
             this.mapPaletteSetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapPaletteSetNum.ValueChanged += new System.EventHandler(this.mapPaletteSetNum_ValueChanged);
             // 
@@ -2554,7 +2553,7 @@ namespace LAZYSHELL
             this.label46.Location = new System.Drawing.Point(6, 23);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(60, 13);
-            this.label46.TabIndex = 157;
+            this.label46.TabIndex = 0;
             this.label46.Text = "Palette Set";
             // 
             // groupBox3
@@ -2578,7 +2577,7 @@ namespace LAZYSHELL
             this.groupBox3.Location = new System.Drawing.Point(0, 290);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(260, 160);
-            this.groupBox3.TabIndex = 144;
+            this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Tilemaps";
             // 
@@ -2655,7 +2654,7 @@ namespace LAZYSHELL
             this.mapBattlefieldName.Location = new System.Drawing.Point(127, 130);
             this.mapBattlefieldName.Name = "mapBattlefieldName";
             this.mapBattlefieldName.Size = new System.Drawing.Size(127, 21);
-            this.mapBattlefieldName.TabIndex = 144;
+            this.mapBattlefieldName.TabIndex = 15;
             this.mapBattlefieldName.SelectedIndexChanged += new System.EventHandler(this.mapBattlefieldName_SelectedIndexChanged);
             // 
             // mapSetL3Priority
@@ -2667,7 +2666,7 @@ namespace LAZYSHELL
             this.mapSetL3Priority.Location = new System.Drawing.Point(127, 86);
             this.mapSetL3Priority.Name = "mapSetL3Priority";
             this.mapSetL3Priority.Size = new System.Drawing.Size(127, 21);
-            this.mapSetL3Priority.TabIndex = 69;
+            this.mapSetL3Priority.TabIndex = 9;
             this.mapSetL3Priority.Text = "L3 PRIORITY 1";
             this.mapSetL3Priority.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.mapSetL3Priority.UseCompatibleTextRendering = true;
@@ -2684,7 +2683,7 @@ namespace LAZYSHELL
             0});
             this.mapTilemapL1Num.Name = "mapTilemapL1Num";
             this.mapTilemapL1Num.Size = new System.Drawing.Size(51, 21);
-            this.mapTilemapL1Num.TabIndex = 70;
+            this.mapTilemapL1Num.TabIndex = 1;
             this.mapTilemapL1Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapTilemapL1Num.ValueChanged += new System.EventHandler(this.mapTilemapL1Num_ValueChanged);
             // 
@@ -2697,7 +2696,7 @@ namespace LAZYSHELL
             this.mapPhysicalMapName.Location = new System.Drawing.Point(127, 109);
             this.mapPhysicalMapName.Name = "mapPhysicalMapName";
             this.mapPhysicalMapName.Size = new System.Drawing.Size(127, 21);
-            this.mapPhysicalMapName.TabIndex = 143;
+            this.mapPhysicalMapName.TabIndex = 12;
             this.mapPhysicalMapName.SelectedIndexChanged += new System.EventHandler(this.mapPhysicalMapName_SelectedIndexChanged);
             // 
             // label43
@@ -2706,7 +2705,7 @@ namespace LAZYSHELL
             this.label43.Location = new System.Drawing.Point(6, 23);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(57, 13);
-            this.label43.TabIndex = 132;
+            this.label43.TabIndex = 0;
             this.label43.Text = "L1 Tilemap";
             // 
             // mapTilemapL2Num
@@ -2719,7 +2718,7 @@ namespace LAZYSHELL
             0});
             this.mapTilemapL2Num.Name = "mapTilemapL2Num";
             this.mapTilemapL2Num.Size = new System.Drawing.Size(51, 21);
-            this.mapTilemapL2Num.TabIndex = 72;
+            this.mapTilemapL2Num.TabIndex = 4;
             this.mapTilemapL2Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapTilemapL2Num.ValueChanged += new System.EventHandler(this.mapTilemapL2Num_ValueChanged);
             // 
@@ -2729,7 +2728,7 @@ namespace LAZYSHELL
             this.label42.Location = new System.Drawing.Point(6, 44);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(57, 13);
-            this.label42.TabIndex = 136;
+            this.label42.TabIndex = 3;
             this.label42.Text = "L2 Tilemap";
             // 
             // mapTilemapL3Name
@@ -2741,7 +2740,7 @@ namespace LAZYSHELL
             this.mapTilemapL3Name.Location = new System.Drawing.Point(127, 63);
             this.mapTilemapL3Name.Name = "mapTilemapL3Name";
             this.mapTilemapL3Name.Size = new System.Drawing.Size(127, 21);
-            this.mapTilemapL3Name.TabIndex = 140;
+            this.mapTilemapL3Name.TabIndex = 8;
             this.mapTilemapL3Name.SelectedIndexChanged += new System.EventHandler(this.mapTilemapL3Name_SelectedIndexChanged);
             // 
             // mapTilemapL2Name
@@ -2753,7 +2752,7 @@ namespace LAZYSHELL
             this.mapTilemapL2Name.Location = new System.Drawing.Point(127, 42);
             this.mapTilemapL2Name.Name = "mapTilemapL2Name";
             this.mapTilemapL2Name.Size = new System.Drawing.Size(127, 21);
-            this.mapTilemapL2Name.TabIndex = 139;
+            this.mapTilemapL2Name.TabIndex = 5;
             this.mapTilemapL2Name.SelectedIndexChanged += new System.EventHandler(this.mapTilemapL2Name_SelectedIndexChanged);
             // 
             // label41
@@ -2762,7 +2761,7 @@ namespace LAZYSHELL
             this.label41.Location = new System.Drawing.Point(6, 65);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(57, 13);
-            this.label41.TabIndex = 137;
+            this.label41.TabIndex = 6;
             this.label41.Text = "L3 Tilemap";
             // 
             // mapTilemapL1Name
@@ -2774,7 +2773,7 @@ namespace LAZYSHELL
             this.mapTilemapL1Name.Location = new System.Drawing.Point(127, 21);
             this.mapTilemapL1Name.Name = "mapTilemapL1Name";
             this.mapTilemapL1Name.Size = new System.Drawing.Size(127, 21);
-            this.mapTilemapL1Name.TabIndex = 138;
+            this.mapTilemapL1Name.TabIndex = 2;
             this.mapTilemapL1Name.SelectedIndexChanged += new System.EventHandler(this.mapTilemapL1Name_SelectedIndexChanged);
             // 
             // mapTilemapL3Num
@@ -2787,7 +2786,7 @@ namespace LAZYSHELL
             0});
             this.mapTilemapL3Num.Name = "mapTilemapL3Num";
             this.mapTilemapL3Num.Size = new System.Drawing.Size(51, 21);
-            this.mapTilemapL3Num.TabIndex = 74;
+            this.mapTilemapL3Num.TabIndex = 7;
             this.mapTilemapL3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapTilemapL3Num.ValueChanged += new System.EventHandler(this.mapTilemapL3Num_ValueChanged);
             // 
@@ -2797,7 +2796,7 @@ namespace LAZYSHELL
             this.label45.Location = new System.Drawing.Point(6, 111);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(64, 13);
-            this.label45.TabIndex = 152;
+            this.label45.TabIndex = 10;
             this.label45.Text = "Solidity Map";
             // 
             // mapBattlefieldNum
@@ -2810,7 +2809,7 @@ namespace LAZYSHELL
             0});
             this.mapBattlefieldNum.Name = "mapBattlefieldNum";
             this.mapBattlefieldNum.Size = new System.Drawing.Size(51, 21);
-            this.mapBattlefieldNum.TabIndex = 78;
+            this.mapBattlefieldNum.TabIndex = 14;
             this.mapBattlefieldNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapBattlefieldNum.ValueChanged += new System.EventHandler(this.mapBattlefieldNum_ValueChanged);
             // 
@@ -2824,7 +2823,7 @@ namespace LAZYSHELL
             0});
             this.mapPhysicalMapNum.Name = "mapPhysicalMapNum";
             this.mapPhysicalMapNum.Size = new System.Drawing.Size(51, 21);
-            this.mapPhysicalMapNum.TabIndex = 76;
+            this.mapPhysicalMapNum.TabIndex = 11;
             this.mapPhysicalMapNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapPhysicalMapNum.ValueChanged += new System.EventHandler(this.mapPhysicalMapNum_ValueChanged);
             // 
@@ -2834,7 +2833,7 @@ namespace LAZYSHELL
             this.label76.Location = new System.Drawing.Point(6, 132);
             this.label76.Name = "label76";
             this.label76.Size = new System.Drawing.Size(55, 13);
-            this.label76.TabIndex = 155;
+            this.label76.TabIndex = 13;
             this.label76.Text = "Battlefield";
             // 
             // groupBox2
@@ -2851,7 +2850,7 @@ namespace LAZYSHELL
             this.groupBox2.Location = new System.Drawing.Point(0, 193);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(260, 91);
-            this.groupBox2.TabIndex = 143;
+            this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tilesets";
             // 
@@ -2860,10 +2859,10 @@ namespace LAZYSHELL
             this.mapTilesetL3Name.DropDownHeight = 200;
             this.mapTilesetL3Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapTilesetL3Name.IntegralHeight = false;
-            this.mapTilesetL3Name.Location = new System.Drawing.Point(117, 63);
+            this.mapTilesetL3Name.Location = new System.Drawing.Point(127, 63);
             this.mapTilesetL3Name.Name = "mapTilesetL3Name";
-            this.mapTilesetL3Name.Size = new System.Drawing.Size(137, 21);
-            this.mapTilesetL3Name.TabIndex = 131;
+            this.mapTilesetL3Name.Size = new System.Drawing.Size(127, 21);
+            this.mapTilesetL3Name.TabIndex = 8;
             this.mapTilesetL3Name.SelectedIndexChanged += new System.EventHandler(this.mapTilesetL3Name_SelectedIndexChanged);
             // 
             // label40
@@ -2872,7 +2871,7 @@ namespace LAZYSHELL
             this.label40.Location = new System.Drawing.Point(8, 65);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(52, 13);
-            this.label40.TabIndex = 128;
+            this.label40.TabIndex = 6;
             this.label40.Text = "L3 Tileset";
             // 
             // mapTilesetL2Name
@@ -2881,10 +2880,10 @@ namespace LAZYSHELL
             this.mapTilesetL2Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapTilesetL2Name.DropDownWidth = 200;
             this.mapTilesetL2Name.IntegralHeight = false;
-            this.mapTilesetL2Name.Location = new System.Drawing.Point(117, 42);
+            this.mapTilesetL2Name.Location = new System.Drawing.Point(127, 42);
             this.mapTilesetL2Name.Name = "mapTilesetL2Name";
-            this.mapTilesetL2Name.Size = new System.Drawing.Size(137, 21);
-            this.mapTilesetL2Name.TabIndex = 130;
+            this.mapTilesetL2Name.Size = new System.Drawing.Size(127, 21);
+            this.mapTilesetL2Name.TabIndex = 5;
             this.mapTilesetL2Name.SelectedIndexChanged += new System.EventHandler(this.mapTilesetL2Name_SelectedIndexChanged);
             // 
             // label35
@@ -2893,7 +2892,7 @@ namespace LAZYSHELL
             this.label35.Location = new System.Drawing.Point(8, 44);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(52, 13);
-            this.label35.TabIndex = 127;
+            this.label35.TabIndex = 3;
             this.label35.Text = "L2 Tileset";
             // 
             // mapTilesetL1Name
@@ -2902,15 +2901,15 @@ namespace LAZYSHELL
             this.mapTilesetL1Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapTilesetL1Name.DropDownWidth = 200;
             this.mapTilesetL1Name.IntegralHeight = false;
-            this.mapTilesetL1Name.Location = new System.Drawing.Point(117, 21);
+            this.mapTilesetL1Name.Location = new System.Drawing.Point(127, 21);
             this.mapTilesetL1Name.Name = "mapTilesetL1Name";
-            this.mapTilesetL1Name.Size = new System.Drawing.Size(137, 21);
-            this.mapTilesetL1Name.TabIndex = 129;
+            this.mapTilesetL1Name.Size = new System.Drawing.Size(127, 21);
+            this.mapTilesetL1Name.TabIndex = 0;
             this.mapTilesetL1Name.SelectedIndexChanged += new System.EventHandler(this.mapTilesetL1Name_SelectedIndexChanged);
             // 
             // mapTilesetL3Num
             // 
-            this.mapTilesetL3Num.Location = new System.Drawing.Point(66, 63);
+            this.mapTilesetL3Num.Location = new System.Drawing.Point(76, 63);
             this.mapTilesetL3Num.Maximum = new decimal(new int[] {
             31,
             0,
@@ -2918,7 +2917,7 @@ namespace LAZYSHELL
             0});
             this.mapTilesetL3Num.Name = "mapTilesetL3Num";
             this.mapTilesetL3Num.Size = new System.Drawing.Size(51, 21);
-            this.mapTilesetL3Num.TabIndex = 67;
+            this.mapTilesetL3Num.TabIndex = 7;
             this.mapTilesetL3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapTilesetL3Num.ValueChanged += new System.EventHandler(this.mapTilesetL3Num_ValueChanged);
             // 
@@ -2928,12 +2927,12 @@ namespace LAZYSHELL
             this.label34.Location = new System.Drawing.Point(8, 23);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(52, 13);
-            this.label34.TabIndex = 123;
+            this.label34.TabIndex = 1;
             this.label34.Text = "L1 Tileset";
             // 
             // mapTilesetL1Num
             // 
-            this.mapTilesetL1Num.Location = new System.Drawing.Point(66, 21);
+            this.mapTilesetL1Num.Location = new System.Drawing.Point(76, 21);
             this.mapTilesetL1Num.Maximum = new decimal(new int[] {
             92,
             0,
@@ -2941,13 +2940,13 @@ namespace LAZYSHELL
             0});
             this.mapTilesetL1Num.Name = "mapTilesetL1Num";
             this.mapTilesetL1Num.Size = new System.Drawing.Size(51, 21);
-            this.mapTilesetL1Num.TabIndex = 63;
+            this.mapTilesetL1Num.TabIndex = 2;
             this.mapTilesetL1Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapTilesetL1Num.ValueChanged += new System.EventHandler(this.mapTilesetL1Num_ValueChanged);
             // 
             // mapTilesetL2Num
             // 
-            this.mapTilesetL2Num.Location = new System.Drawing.Point(66, 42);
+            this.mapTilesetL2Num.Location = new System.Drawing.Point(76, 42);
             this.mapTilesetL2Num.Maximum = new decimal(new int[] {
             92,
             0,
@@ -2955,7 +2954,7 @@ namespace LAZYSHELL
             0});
             this.mapTilesetL2Num.Name = "mapTilesetL2Num";
             this.mapTilesetL2Num.Size = new System.Drawing.Size(51, 21);
-            this.mapTilesetL2Num.TabIndex = 65;
+            this.mapTilesetL2Num.TabIndex = 4;
             this.mapTilesetL2Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapTilesetL2Num.ValueChanged += new System.EventHandler(this.mapTilesetL2Num_ValueChanged);
             // 
@@ -2982,7 +2981,7 @@ namespace LAZYSHELL
             this.groupBox1.Location = new System.Drawing.Point(0, 34);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(260, 153);
-            this.groupBox1.TabIndex = 142;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Graphic Sets";
             // 
@@ -3021,15 +3020,15 @@ namespace LAZYSHELL
             "Smithy Pad",
             "Smithy 2",
             "{NONE}"});
-            this.mapGFXSetL3Name.Location = new System.Drawing.Point(122, 125);
+            this.mapGFXSetL3Name.Location = new System.Drawing.Point(127, 125);
             this.mapGFXSetL3Name.Name = "mapGFXSetL3Name";
-            this.mapGFXSetL3Name.Size = new System.Drawing.Size(132, 21);
-            this.mapGFXSetL3Name.TabIndex = 141;
+            this.mapGFXSetL3Name.Size = new System.Drawing.Size(127, 21);
+            this.mapGFXSetL3Name.TabIndex = 17;
             this.mapGFXSetL3Name.SelectedIndexChanged += new System.EventHandler(this.mapGFXSetL3Name_SelectedIndexChanged);
             // 
             // mapGFXSet4Num
             // 
-            this.mapGFXSet4Num.Location = new System.Drawing.Point(71, 83);
+            this.mapGFXSet4Num.Location = new System.Drawing.Point(76, 83);
             this.mapGFXSet4Num.Maximum = new decimal(new int[] {
             199,
             0,
@@ -3037,7 +3036,7 @@ namespace LAZYSHELL
             0});
             this.mapGFXSet4Num.Name = "mapGFXSet4Num";
             this.mapGFXSet4Num.Size = new System.Drawing.Size(51, 21);
-            this.mapGFXSet4Num.TabIndex = 57;
+            this.mapGFXSet4Num.TabIndex = 10;
             this.mapGFXSet4Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapGFXSet4Num.ValueChanged += new System.EventHandler(this.mapGFXSet4Num_ValueChanged);
             // 
@@ -3047,12 +3046,12 @@ namespace LAZYSHELL
             this.label44.Location = new System.Drawing.Point(6, 127);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(59, 13);
-            this.label44.TabIndex = 35;
+            this.label44.TabIndex = 15;
             this.label44.Text = "L3 GFX Set";
             // 
             // mapGFXSetL3Num
             // 
-            this.mapGFXSetL3Num.Location = new System.Drawing.Point(71, 125);
+            this.mapGFXSetL3Num.Location = new System.Drawing.Point(76, 125);
             this.mapGFXSetL3Num.Maximum = new decimal(new int[] {
             28,
             0,
@@ -3060,7 +3059,7 @@ namespace LAZYSHELL
             0});
             this.mapGFXSetL3Num.Name = "mapGFXSetL3Num";
             this.mapGFXSetL3Num.Size = new System.Drawing.Size(51, 21);
-            this.mapGFXSetL3Num.TabIndex = 61;
+            this.mapGFXSetL3Num.TabIndex = 16;
             this.mapGFXSetL3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapGFXSetL3Num.ValueChanged += new System.EventHandler(this.mapGFXSetL3Num_ValueChanged);
             // 
@@ -3070,15 +3069,15 @@ namespace LAZYSHELL
             this.mapGFXSet5Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapGFXSet5Name.DropDownWidth = 197;
             this.mapGFXSet5Name.IntegralHeight = false;
-            this.mapGFXSet5Name.Location = new System.Drawing.Point(122, 104);
+            this.mapGFXSet5Name.Location = new System.Drawing.Point(127, 104);
             this.mapGFXSet5Name.Name = "mapGFXSet5Name";
-            this.mapGFXSet5Name.Size = new System.Drawing.Size(132, 21);
-            this.mapGFXSet5Name.TabIndex = 122;
+            this.mapGFXSet5Name.Size = new System.Drawing.Size(127, 21);
+            this.mapGFXSet5Name.TabIndex = 14;
             this.mapGFXSet5Name.SelectedIndexChanged += new System.EventHandler(this.mapGFXSet5Name_SelectedIndexChanged);
             // 
             // mapGFXSet5Num
             // 
-            this.mapGFXSet5Num.Location = new System.Drawing.Point(71, 104);
+            this.mapGFXSet5Num.Location = new System.Drawing.Point(76, 104);
             this.mapGFXSet5Num.Maximum = new decimal(new int[] {
             199,
             0,
@@ -3086,13 +3085,13 @@ namespace LAZYSHELL
             0});
             this.mapGFXSet5Num.Name = "mapGFXSet5Num";
             this.mapGFXSet5Num.Size = new System.Drawing.Size(51, 21);
-            this.mapGFXSet5Num.TabIndex = 59;
+            this.mapGFXSet5Num.TabIndex = 13;
             this.mapGFXSet5Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapGFXSet5Num.ValueChanged += new System.EventHandler(this.mapGFXSet5Num_ValueChanged);
             // 
             // mapGFXSet3Num
             // 
-            this.mapGFXSet3Num.Location = new System.Drawing.Point(71, 62);
+            this.mapGFXSet3Num.Location = new System.Drawing.Point(76, 62);
             this.mapGFXSet3Num.Maximum = new decimal(new int[] {
             199,
             0,
@@ -3100,13 +3099,13 @@ namespace LAZYSHELL
             0});
             this.mapGFXSet3Num.Name = "mapGFXSet3Num";
             this.mapGFXSet3Num.Size = new System.Drawing.Size(51, 21);
-            this.mapGFXSet3Num.TabIndex = 55;
+            this.mapGFXSet3Num.TabIndex = 7;
             this.mapGFXSet3Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapGFXSet3Num.ValueChanged += new System.EventHandler(this.mapGFXSet3Num_ValueChanged);
             // 
             // mapGFXSet1Num
             // 
-            this.mapGFXSet1Num.Location = new System.Drawing.Point(71, 20);
+            this.mapGFXSet1Num.Location = new System.Drawing.Point(76, 20);
             this.mapGFXSet1Num.Maximum = new decimal(new int[] {
             199,
             0,
@@ -3114,7 +3113,7 @@ namespace LAZYSHELL
             0});
             this.mapGFXSet1Num.Name = "mapGFXSet1Num";
             this.mapGFXSet1Num.Size = new System.Drawing.Size(51, 21);
-            this.mapGFXSet1Num.TabIndex = 51;
+            this.mapGFXSet1Num.TabIndex = 1;
             this.mapGFXSet1Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapGFXSet1Num.ValueChanged += new System.EventHandler(this.mapGFXSet1Num_ValueChanged);
             // 
@@ -3124,10 +3123,10 @@ namespace LAZYSHELL
             this.mapGFXSet1Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapGFXSet1Name.DropDownWidth = 200;
             this.mapGFXSet1Name.IntegralHeight = false;
-            this.mapGFXSet1Name.Location = new System.Drawing.Point(122, 20);
+            this.mapGFXSet1Name.Location = new System.Drawing.Point(127, 20);
             this.mapGFXSet1Name.Name = "mapGFXSet1Name";
-            this.mapGFXSet1Name.Size = new System.Drawing.Size(132, 21);
-            this.mapGFXSet1Name.TabIndex = 118;
+            this.mapGFXSet1Name.Size = new System.Drawing.Size(127, 21);
+            this.mapGFXSet1Name.TabIndex = 2;
             this.mapGFXSet1Name.SelectedIndexChanged += new System.EventHandler(this.mapGFXSet1Name_SelectedIndexChanged);
             // 
             // mapGFXSet2Name
@@ -3136,10 +3135,10 @@ namespace LAZYSHELL
             this.mapGFXSet2Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapGFXSet2Name.DropDownWidth = 197;
             this.mapGFXSet2Name.IntegralHeight = false;
-            this.mapGFXSet2Name.Location = new System.Drawing.Point(122, 41);
+            this.mapGFXSet2Name.Location = new System.Drawing.Point(127, 41);
             this.mapGFXSet2Name.Name = "mapGFXSet2Name";
-            this.mapGFXSet2Name.Size = new System.Drawing.Size(132, 21);
-            this.mapGFXSet2Name.TabIndex = 119;
+            this.mapGFXSet2Name.Size = new System.Drawing.Size(127, 21);
+            this.mapGFXSet2Name.TabIndex = 5;
             this.mapGFXSet2Name.SelectedIndexChanged += new System.EventHandler(this.mapGFXSet2Name_SelectedIndexChanged);
             // 
             // mapGFXSet4Name
@@ -3148,10 +3147,10 @@ namespace LAZYSHELL
             this.mapGFXSet4Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapGFXSet4Name.DropDownWidth = 197;
             this.mapGFXSet4Name.IntegralHeight = false;
-            this.mapGFXSet4Name.Location = new System.Drawing.Point(122, 83);
+            this.mapGFXSet4Name.Location = new System.Drawing.Point(127, 83);
             this.mapGFXSet4Name.Name = "mapGFXSet4Name";
-            this.mapGFXSet4Name.Size = new System.Drawing.Size(132, 21);
-            this.mapGFXSet4Name.TabIndex = 121;
+            this.mapGFXSet4Name.Size = new System.Drawing.Size(127, 21);
+            this.mapGFXSet4Name.TabIndex = 11;
             this.mapGFXSet4Name.SelectedIndexChanged += new System.EventHandler(this.mapGFXSet4Name_SelectedIndexChanged);
             // 
             // mapGFXSet3Name
@@ -3160,15 +3159,15 @@ namespace LAZYSHELL
             this.mapGFXSet3Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapGFXSet3Name.DropDownWidth = 197;
             this.mapGFXSet3Name.IntegralHeight = false;
-            this.mapGFXSet3Name.Location = new System.Drawing.Point(122, 62);
+            this.mapGFXSet3Name.Location = new System.Drawing.Point(127, 62);
             this.mapGFXSet3Name.Name = "mapGFXSet3Name";
-            this.mapGFXSet3Name.Size = new System.Drawing.Size(132, 21);
-            this.mapGFXSet3Name.TabIndex = 120;
+            this.mapGFXSet3Name.Size = new System.Drawing.Size(127, 21);
+            this.mapGFXSet3Name.TabIndex = 8;
             this.mapGFXSet3Name.SelectedIndexChanged += new System.EventHandler(this.mapGFXSet3Name_SelectedIndexChanged);
             // 
             // mapGFXSet2Num
             // 
-            this.mapGFXSet2Num.Location = new System.Drawing.Point(71, 41);
+            this.mapGFXSet2Num.Location = new System.Drawing.Point(76, 41);
             this.mapGFXSet2Num.Maximum = new decimal(new int[] {
             199,
             0,
@@ -3176,28 +3175,28 @@ namespace LAZYSHELL
             0});
             this.mapGFXSet2Num.Name = "mapGFXSet2Num";
             this.mapGFXSet2Num.Size = new System.Drawing.Size(51, 21);
-            this.mapGFXSet2Num.TabIndex = 53;
+            this.mapGFXSet2Num.TabIndex = 4;
             this.mapGFXSet2Num.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mapGFXSet2Num.ValueChanged += new System.EventHandler(this.mapGFXSet2Num_ValueChanged);
             // 
-            // tabPage3
+            // tabPage2
             // 
-            this.tabPage3.Controls.Add(this.groupBox11);
-            this.tabPage3.Controls.Add(this.label53);
-            this.tabPage3.Controls.Add(this.groupBox10);
-            this.tabPage3.Controls.Add(this.groupBox9);
-            this.tabPage3.Controls.Add(this.groupBox8);
-            this.tabPage3.Controls.Add(this.groupBox7);
-            this.tabPage3.Controls.Add(this.groupBox6);
-            this.tabPage3.Controls.Add(this.layerMessageBox);
-            this.tabPage3.Controls.Add(this.groupBox5);
-            this.tabPage3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(260, 640);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "LAYER";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage2.Controls.Add(this.groupBox11);
+            this.tabPage2.Controls.Add(this.label53);
+            this.tabPage2.Controls.Add(this.groupBox10);
+            this.tabPage2.Controls.Add(this.groupBox9);
+            this.tabPage2.Controls.Add(this.groupBox8);
+            this.tabPage2.Controls.Add(this.groupBox7);
+            this.tabPage2.Controls.Add(this.groupBox6);
+            this.tabPage2.Controls.Add(this.layerMessageBox);
+            this.tabPage2.Controls.Add(this.groupBox5);
+            this.tabPage2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(260, 640);
+            this.tabPage2.TabIndex = 0;
+            this.tabPage2.Text = "LAYER";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox11
             // 
@@ -3209,7 +3208,7 @@ namespace LAZYSHELL
             this.groupBox11.Location = new System.Drawing.Point(0, 570);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(260, 70);
-            this.groupBox11.TabIndex = 13;
+            this.groupBox11.TabIndex = 8;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Layer Animation Effects";
             // 
@@ -3248,7 +3247,7 @@ namespace LAZYSHELL
             this.layerOBJEffects.Location = new System.Drawing.Point(52, 41);
             this.layerOBJEffects.Name = "layerOBJEffects";
             this.layerOBJEffects.Size = new System.Drawing.Size(102, 21);
-            this.layerOBJEffects.TabIndex = 119;
+            this.layerOBJEffects.TabIndex = 4;
             this.layerOBJEffects.SelectedIndexChanged += new System.EventHandler(this.layerOBJEffects_SelectedIndexChanged);
             // 
             // layerL3Effects
@@ -3284,7 +3283,7 @@ namespace LAZYSHELL
             this.layerL3Effects.Location = new System.Drawing.Point(52, 20);
             this.layerL3Effects.Name = "layerL3Effects";
             this.layerL3Effects.Size = new System.Drawing.Size(102, 21);
-            this.layerL3Effects.TabIndex = 119;
+            this.layerL3Effects.TabIndex = 1;
             this.layerL3Effects.SelectedIndexChanged += new System.EventHandler(this.layerL3Effects_SelectedIndexChanged);
             // 
             // label38
@@ -3293,7 +3292,7 @@ namespace LAZYSHELL
             this.label38.Location = new System.Drawing.Point(6, 44);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(40, 13);
-            this.label38.TabIndex = 190;
+            this.label38.TabIndex = 3;
             this.label38.Text = "Sprites";
             // 
             // layerWaveEffect
@@ -3305,7 +3304,7 @@ namespace LAZYSHELL
             this.layerWaveEffect.Location = new System.Drawing.Point(157, 20);
             this.layerWaveEffect.Name = "layerWaveEffect";
             this.layerWaveEffect.Size = new System.Drawing.Size(96, 21);
-            this.layerWaveEffect.TabIndex = 47;
+            this.layerWaveEffect.TabIndex = 2;
             this.layerWaveEffect.Text = "RIPPLING WATER";
             this.layerWaveEffect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerWaveEffect.UseCompatibleTextRendering = true;
@@ -3318,7 +3317,7 @@ namespace LAZYSHELL
             this.label39.Location = new System.Drawing.Point(6, 24);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(18, 13);
-            this.label39.TabIndex = 189;
+            this.label39.TabIndex = 0;
             this.label39.Text = "L3";
             // 
             // label53
@@ -3327,7 +3326,7 @@ namespace LAZYSHELL
             this.label53.Location = new System.Drawing.Point(6, 9);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(49, 13);
-            this.label53.TabIndex = 137;
+            this.label53.TabIndex = 0;
             this.label53.Text = "Message";
             // 
             // groupBox10
@@ -3344,7 +3343,7 @@ namespace LAZYSHELL
             this.groupBox10.Location = new System.Drawing.Point(0, 469);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(260, 95);
-            this.groupBox10.TabIndex = 12;
+            this.groupBox10.TabIndex = 7;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Layer Auto-scrolling";
             // 
@@ -3362,7 +3361,7 @@ namespace LAZYSHELL
             this.layerL3ScrollSpeed.Location = new System.Drawing.Point(181, 68);
             this.layerL3ScrollSpeed.Name = "layerL3ScrollSpeed";
             this.layerL3ScrollSpeed.Size = new System.Drawing.Size(73, 21);
-            this.layerL3ScrollSpeed.TabIndex = 64;
+            this.layerL3ScrollSpeed.TabIndex = 8;
             this.layerL3ScrollSpeed.SelectedIndexChanged += new System.EventHandler(this.layerL3ScrollSpeed_SelectedIndexChanged);
             // 
             // label83
@@ -3371,7 +3370,7 @@ namespace LAZYSHELL
             this.label83.Location = new System.Drawing.Point(6, 71);
             this.label83.Name = "label83";
             this.label83.Size = new System.Drawing.Size(97, 13);
-            this.label83.TabIndex = 79;
+            this.label83.TabIndex = 6;
             this.label83.Text = "L3 Direction/Speed";
             // 
             // layerInfiniteAutoscroll
@@ -3383,7 +3382,7 @@ namespace LAZYSHELL
             this.layerInfiniteAutoscroll.Location = new System.Drawing.Point(6, 20);
             this.layerInfiniteAutoscroll.Name = "layerInfiniteAutoscroll";
             this.layerInfiniteAutoscroll.Size = new System.Drawing.Size(97, 21);
-            this.layerInfiniteAutoscroll.TabIndex = 40;
+            this.layerInfiniteAutoscroll.TabIndex = 0;
             this.layerInfiniteAutoscroll.Text = "INFINITE";
             this.layerInfiniteAutoscroll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerInfiniteAutoscroll.UseCompatibleTextRendering = true;
@@ -3399,7 +3398,7 @@ namespace LAZYSHELL
             this.layerL2ScrollShift.Location = new System.Drawing.Point(109, 20);
             this.layerL2ScrollShift.Name = "layerL2ScrollShift";
             this.layerL2ScrollShift.Size = new System.Drawing.Size(72, 21);
-            this.layerL2ScrollShift.TabIndex = 41;
+            this.layerL2ScrollShift.TabIndex = 1;
             this.layerL2ScrollShift.Text = "L2 SHIFT";
             this.layerL2ScrollShift.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerL2ScrollShift.UseCompatibleTextRendering = true;
@@ -3415,7 +3414,7 @@ namespace LAZYSHELL
             this.layerL3ScrollShift.Location = new System.Drawing.Point(182, 20);
             this.layerL3ScrollShift.Name = "layerL3ScrollShift";
             this.layerL3ScrollShift.Size = new System.Drawing.Size(72, 21);
-            this.layerL3ScrollShift.TabIndex = 42;
+            this.layerL3ScrollShift.TabIndex = 2;
             this.layerL3ScrollShift.Text = "L3 SHIFT";
             this.layerL3ScrollShift.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerL3ScrollShift.UseCompatibleTextRendering = true;
@@ -3428,7 +3427,7 @@ namespace LAZYSHELL
             this.label85.Location = new System.Drawing.Point(6, 50);
             this.label85.Name = "label85";
             this.label85.Size = new System.Drawing.Size(97, 13);
-            this.label85.TabIndex = 76;
+            this.label85.TabIndex = 3;
             this.label85.Text = "L2 Direction/Speed";
             // 
             // layerL3ScrollDirection
@@ -3446,7 +3445,7 @@ namespace LAZYSHELL
             this.layerL3ScrollDirection.Location = new System.Drawing.Point(109, 68);
             this.layerL3ScrollDirection.Name = "layerL3ScrollDirection";
             this.layerL3ScrollDirection.Size = new System.Drawing.Size(72, 21);
-            this.layerL3ScrollDirection.TabIndex = 64;
+            this.layerL3ScrollDirection.TabIndex = 7;
             this.layerL3ScrollDirection.SelectedIndexChanged += new System.EventHandler(this.layerL3ScrollDirection_SelectedIndexChanged);
             // 
             // layerL2ScrollSpeed
@@ -3463,7 +3462,7 @@ namespace LAZYSHELL
             this.layerL2ScrollSpeed.Location = new System.Drawing.Point(181, 47);
             this.layerL2ScrollSpeed.Name = "layerL2ScrollSpeed";
             this.layerL2ScrollSpeed.Size = new System.Drawing.Size(73, 21);
-            this.layerL2ScrollSpeed.TabIndex = 64;
+            this.layerL2ScrollSpeed.TabIndex = 5;
             this.layerL2ScrollSpeed.SelectedIndexChanged += new System.EventHandler(this.layerL2ScrollSpeed_SelectedIndexChanged);
             // 
             // layerL2ScrollDirection
@@ -3482,7 +3481,7 @@ namespace LAZYSHELL
             this.layerL2ScrollDirection.Location = new System.Drawing.Point(109, 47);
             this.layerL2ScrollDirection.Name = "layerL2ScrollDirection";
             this.layerL2ScrollDirection.Size = new System.Drawing.Size(72, 21);
-            this.layerL2ScrollDirection.TabIndex = 64;
+            this.layerL2ScrollDirection.TabIndex = 4;
             this.layerL2ScrollDirection.SelectedIndexChanged += new System.EventHandler(this.layerL2ScrollDirection_SelectedIndexChanged);
             // 
             // groupBox9
@@ -3496,7 +3495,7 @@ namespace LAZYSHELL
             this.groupBox9.Location = new System.Drawing.Point(0, 395);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(260, 68);
-            this.groupBox9.TabIndex = 11;
+            this.groupBox9.TabIndex = 6;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Layer Scrolling Synchronization";
             // 
@@ -3511,7 +3510,7 @@ namespace LAZYSHELL
             this.layerL3HSync.Location = new System.Drawing.Point(180, 41);
             this.layerL3HSync.Name = "layerL3HSync";
             this.layerL3HSync.Size = new System.Drawing.Size(74, 21);
-            this.layerL3HSync.TabIndex = 64;
+            this.layerL3HSync.TabIndex = 5;
             this.layerL3HSync.SelectedIndexChanged += new System.EventHandler(this.layerL3HSync_SelectedIndexChanged);
             // 
             // layerL3VSync
@@ -3525,7 +3524,7 @@ namespace LAZYSHELL
             this.layerL3VSync.Location = new System.Drawing.Point(107, 41);
             this.layerL3VSync.Name = "layerL3VSync";
             this.layerL3VSync.Size = new System.Drawing.Size(73, 21);
-            this.layerL3VSync.TabIndex = 64;
+            this.layerL3VSync.TabIndex = 4;
             this.layerL3VSync.SelectedIndexChanged += new System.EventHandler(this.layerL3VSync_SelectedIndexChanged);
             // 
             // layerL2HSync
@@ -3539,7 +3538,7 @@ namespace LAZYSHELL
             this.layerL2HSync.Location = new System.Drawing.Point(180, 20);
             this.layerL2HSync.Name = "layerL2HSync";
             this.layerL2HSync.Size = new System.Drawing.Size(74, 21);
-            this.layerL2HSync.TabIndex = 64;
+            this.layerL2HSync.TabIndex = 2;
             this.layerL2HSync.SelectedIndexChanged += new System.EventHandler(this.layerL2HSync_SelectedIndexChanged);
             // 
             // layerL2VSync
@@ -3553,7 +3552,7 @@ namespace LAZYSHELL
             this.layerL2VSync.Location = new System.Drawing.Point(107, 20);
             this.layerL2VSync.Name = "layerL2VSync";
             this.layerL2VSync.Size = new System.Drawing.Size(73, 21);
-            this.layerL2VSync.TabIndex = 64;
+            this.layerL2VSync.TabIndex = 1;
             this.layerL2VSync.SelectedIndexChanged += new System.EventHandler(this.layerL2VSync_SelectedIndexChanged);
             // 
             // label12
@@ -3562,7 +3561,7 @@ namespace LAZYSHELL
             this.label12.Location = new System.Drawing.Point(6, 23);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(95, 13);
-            this.label12.TabIndex = 181;
+            this.label12.TabIndex = 0;
             this.label12.Text = "L2 Vert/Horiz Sync";
             // 
             // label11
@@ -3571,7 +3570,7 @@ namespace LAZYSHELL
             this.label11.Location = new System.Drawing.Point(6, 43);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 13);
-            this.label11.TabIndex = 183;
+            this.label11.TabIndex = 3;
             this.label11.Text = "L3 Vert/Horiz Sync";
             // 
             // groupBox8
@@ -3580,7 +3579,7 @@ namespace LAZYSHELL
             this.groupBox8.Location = new System.Drawing.Point(0, 326);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(260, 63);
-            this.groupBox8.TabIndex = 10;
+            this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Layer Scrolling Wrap";
             // 
@@ -3601,7 +3600,7 @@ namespace LAZYSHELL
             this.layerScrollWrapping.MultiColumn = true;
             this.layerScrollWrapping.Name = "layerScrollWrapping";
             this.layerScrollWrapping.Size = new System.Drawing.Size(248, 36);
-            this.layerScrollWrapping.TabIndex = 35;
+            this.layerScrollWrapping.TabIndex = 0;
             this.layerScrollWrapping.SelectedIndexChanged += new System.EventHandler(this.layerScrollWrapping_SelectedIndexChanged);
             // 
             // groupBox7
@@ -3615,7 +3614,7 @@ namespace LAZYSHELL
             this.groupBox7.Location = new System.Drawing.Point(0, 272);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(260, 48);
-            this.groupBox7.TabIndex = 9;
+            this.groupBox7.TabIndex = 4;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Layer -(X,Y) Shifting";
             // 
@@ -3630,7 +3629,7 @@ namespace LAZYSHELL
             0});
             this.layerL2LeftShift.Name = "layerL2LeftShift";
             this.layerL2LeftShift.Size = new System.Drawing.Size(44, 21);
-            this.layerL2LeftShift.TabIndex = 31;
+            this.layerL2LeftShift.TabIndex = 1;
             this.layerL2LeftShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.layerL2LeftShift.ValueChanged += new System.EventHandler(this.layerL2LeftShift_ValueChanged);
             // 
@@ -3644,7 +3643,7 @@ namespace LAZYSHELL
             0});
             this.layerL2UpShift.Name = "layerL2UpShift";
             this.layerL2UpShift.Size = new System.Drawing.Size(44, 21);
-            this.layerL2UpShift.TabIndex = 33;
+            this.layerL2UpShift.TabIndex = 2;
             this.layerL2UpShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.layerL2UpShift.ValueChanged += new System.EventHandler(this.layerL2UpShift_ValueChanged);
             // 
@@ -3658,7 +3657,7 @@ namespace LAZYSHELL
             0});
             this.layerL3LeftShift.Name = "layerL3LeftShift";
             this.layerL3LeftShift.Size = new System.Drawing.Size(44, 21);
-            this.layerL3LeftShift.TabIndex = 32;
+            this.layerL3LeftShift.TabIndex = 4;
             this.layerL3LeftShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.layerL3LeftShift.ValueChanged += new System.EventHandler(this.layerL3LeftShift_ValueChanged);
             // 
@@ -3668,7 +3667,7 @@ namespace LAZYSHELL
             this.label1.Location = new System.Drawing.Point(124, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 13);
-            this.label1.TabIndex = 82;
+            this.label1.TabIndex = 3;
             this.label1.Text = "L3";
             // 
             // label23
@@ -3677,7 +3676,7 @@ namespace LAZYSHELL
             this.label23.Location = new System.Drawing.Point(6, 24);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(18, 13);
-            this.label23.TabIndex = 82;
+            this.label23.TabIndex = 0;
             this.label23.Text = "L2";
             // 
             // layerL3UpShift
@@ -3690,7 +3689,7 @@ namespace LAZYSHELL
             0});
             this.layerL3UpShift.Name = "layerL3UpShift";
             this.layerL3UpShift.Size = new System.Drawing.Size(44, 21);
-            this.layerL3UpShift.TabIndex = 34;
+            this.layerL3UpShift.TabIndex = 5;
             this.layerL3UpShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.layerL3UpShift.ValueChanged += new System.EventHandler(this.layerL3UpShift_ValueChanged);
             // 
@@ -3704,7 +3703,7 @@ namespace LAZYSHELL
             this.groupBox6.Location = new System.Drawing.Point(0, 178);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(260, 88);
-            this.groupBox6.TabIndex = 8;
+            this.groupBox6.TabIndex = 3;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Layer Mask Edges";
             // 
@@ -3718,7 +3717,7 @@ namespace LAZYSHELL
             0});
             this.layerMaskHighX.Name = "layerMaskHighX";
             this.layerMaskHighX.Size = new System.Drawing.Size(44, 21);
-            this.layerMaskHighX.TabIndex = 27;
+            this.layerMaskHighX.TabIndex = 2;
             this.layerMaskHighX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.layerMaskHighX.ValueChanged += new System.EventHandler(this.layerMaskHighX_ValueChanged);
             // 
@@ -3731,7 +3730,7 @@ namespace LAZYSHELL
             this.layerLockMask.Location = new System.Drawing.Point(142, 40);
             this.layerLockMask.Name = "layerLockMask";
             this.layerLockMask.Size = new System.Drawing.Size(112, 21);
-            this.layerLockMask.TabIndex = 26;
+            this.layerLockMask.TabIndex = 4;
             this.layerLockMask.Text = "LOCK SCROLLING";
             this.layerLockMask.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerLockMask.UseCompatibleTextRendering = true;
@@ -3748,7 +3747,7 @@ namespace LAZYSHELL
             0});
             this.layerMaskHighY.Name = "layerMaskHighY";
             this.layerMaskHighY.Size = new System.Drawing.Size(41, 21);
-            this.layerMaskHighY.TabIndex = 28;
+            this.layerMaskHighY.TabIndex = 3;
             this.layerMaskHighY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.layerMaskHighY.ValueChanged += new System.EventHandler(this.layerMaskHighY_ValueChanged);
             // 
@@ -3762,7 +3761,7 @@ namespace LAZYSHELL
             0});
             this.layerMaskLowX.Name = "layerMaskLowX";
             this.layerMaskLowX.Size = new System.Drawing.Size(44, 21);
-            this.layerMaskLowX.TabIndex = 29;
+            this.layerMaskLowX.TabIndex = 1;
             this.layerMaskLowX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.layerMaskLowX.ValueChanged += new System.EventHandler(this.layerMaskLowX_ValueChanged);
             // 
@@ -3776,7 +3775,7 @@ namespace LAZYSHELL
             0});
             this.layerMaskLowY.Name = "layerMaskLowY";
             this.layerMaskLowY.Size = new System.Drawing.Size(41, 21);
-            this.layerMaskLowY.TabIndex = 30;
+            this.layerMaskLowY.TabIndex = 0;
             this.layerMaskLowY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.layerMaskLowY.ValueChanged += new System.EventHandler(this.layerMaskLowY_ValueChanged);
             // 
@@ -3790,7 +3789,7 @@ namespace LAZYSHELL
             this.layerMessageBox.Location = new System.Drawing.Point(61, 6);
             this.layerMessageBox.Name = "layerMessageBox";
             this.layerMessageBox.Size = new System.Drawing.Size(194, 21);
-            this.layerMessageBox.TabIndex = 119;
+            this.layerMessageBox.TabIndex = 1;
             this.layerMessageBox.SelectedIndexChanged += new System.EventHandler(this.layerMessageBox_SelectedIndexChanged);
             // 
             // groupBox5
@@ -3820,7 +3819,7 @@ namespace LAZYSHELL
             this.groupBox5.Location = new System.Drawing.Point(0, 33);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(260, 139);
-            this.groupBox5.TabIndex = 7;
+            this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Layer Priorities";
             // 
@@ -3834,7 +3833,7 @@ namespace LAZYSHELL
             this.layerColorMathMode.Location = new System.Drawing.Point(183, 112);
             this.layerColorMathMode.Name = "layerColorMathMode";
             this.layerColorMathMode.Size = new System.Drawing.Size(71, 21);
-            this.layerColorMathMode.TabIndex = 119;
+            this.layerColorMathMode.TabIndex = 21;
             this.layerColorMathMode.SelectedIndexChanged += new System.EventHandler(this.layerColorMathMode_SelectedIndexChanged);
             // 
             // layerColorMathIntensity
@@ -3847,7 +3846,7 @@ namespace LAZYSHELL
             this.layerColorMathIntensity.Location = new System.Drawing.Point(72, 112);
             this.layerColorMathIntensity.Name = "layerColorMathIntensity";
             this.layerColorMathIntensity.Size = new System.Drawing.Size(66, 21);
-            this.layerColorMathIntensity.TabIndex = 119;
+            this.layerColorMathIntensity.TabIndex = 19;
             this.layerColorMathIntensity.SelectedIndexChanged += new System.EventHandler(this.layerColorMathIntensity_SelectedIndexChanged);
             // 
             // label32
@@ -3856,7 +3855,7 @@ namespace LAZYSHELL
             this.label32.Location = new System.Drawing.Point(6, 22);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(60, 13);
-            this.label32.TabIndex = 137;
+            this.label32.TabIndex = 0;
             this.label32.Text = "Priority Set";
             // 
             // label96
@@ -3865,7 +3864,7 @@ namespace LAZYSHELL
             this.label96.Location = new System.Drawing.Point(144, 115);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(33, 13);
-            this.label96.TabIndex = 177;
+            this.label96.TabIndex = 20;
             this.label96.Text = "Mode";
             // 
             // label22
@@ -3874,7 +3873,7 @@ namespace LAZYSHELL
             this.label22.Location = new System.Drawing.Point(6, 88);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(59, 13);
-            this.label22.TabIndex = 176;
+            this.label22.TabIndex = 12;
             this.label22.Text = "Color Math";
             // 
             // label95
@@ -3883,7 +3882,7 @@ namespace LAZYSHELL
             this.label95.Location = new System.Drawing.Point(6, 115);
             this.label95.Name = "label95";
             this.label95.Size = new System.Drawing.Size(50, 13);
-            this.label95.TabIndex = 178;
+            this.label95.TabIndex = 18;
             this.label95.Text = "Intensity";
             // 
             // label20
@@ -3892,7 +3891,7 @@ namespace LAZYSHELL
             this.label20.Location = new System.Drawing.Point(6, 48);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(61, 13);
-            this.label20.TabIndex = 123;
+            this.label20.TabIndex = 2;
             this.label20.Text = "Mainscreen";
             // 
             // label21
@@ -3901,7 +3900,7 @@ namespace LAZYSHELL
             this.label21.Location = new System.Drawing.Point(6, 68);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(57, 13);
-            this.label21.TabIndex = 138;
+            this.label21.TabIndex = 7;
             this.label21.Text = "Subscreen";
             // 
             // layerColorMathBG
@@ -3913,7 +3912,7 @@ namespace LAZYSHELL
             this.layerColorMathBG.Location = new System.Drawing.Point(217, 87);
             this.layerColorMathBG.Name = "layerColorMathBG";
             this.layerColorMathBG.Size = new System.Drawing.Size(35, 21);
-            this.layerColorMathBG.TabIndex = 24;
+            this.layerColorMathBG.TabIndex = 17;
             this.layerColorMathBG.Text = "BG";
             this.layerColorMathBG.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerColorMathBG.UseCompatibleTextRendering = true;
@@ -3930,7 +3929,7 @@ namespace LAZYSHELL
             0});
             this.layerPrioritySet.Name = "layerPrioritySet";
             this.layerPrioritySet.Size = new System.Drawing.Size(71, 21);
-            this.layerPrioritySet.TabIndex = 8;
+            this.layerPrioritySet.TabIndex = 1;
             this.layerPrioritySet.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.layerPrioritySet.ValueChanged += new System.EventHandler(this.layerPrioritySet_ValueChanged);
             // 
@@ -3943,7 +3942,7 @@ namespace LAZYSHELL
             this.layerColorMathNPC.Location = new System.Drawing.Point(181, 87);
             this.layerColorMathNPC.Name = "layerColorMathNPC";
             this.layerColorMathNPC.Size = new System.Drawing.Size(35, 21);
-            this.layerColorMathNPC.TabIndex = 23;
+            this.layerColorMathNPC.TabIndex = 16;
             this.layerColorMathNPC.Text = "NPC";
             this.layerColorMathNPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerColorMathNPC.UseCompatibleTextRendering = true;
@@ -3959,7 +3958,7 @@ namespace LAZYSHELL
             this.layerMainscreenL1.Location = new System.Drawing.Point(73, 45);
             this.layerMainscreenL1.Name = "layerMainscreenL1";
             this.layerMainscreenL1.Size = new System.Drawing.Size(35, 21);
-            this.layerMainscreenL1.TabIndex = 10;
+            this.layerMainscreenL1.TabIndex = 3;
             this.layerMainscreenL1.Text = "L1";
             this.layerMainscreenL1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerMainscreenL1.UseCompatibleTextRendering = true;
@@ -3975,7 +3974,7 @@ namespace LAZYSHELL
             this.layerSubscreenNPC.Location = new System.Drawing.Point(181, 66);
             this.layerSubscreenNPC.Name = "layerSubscreenNPC";
             this.layerSubscreenNPC.Size = new System.Drawing.Size(35, 21);
-            this.layerSubscreenNPC.TabIndex = 18;
+            this.layerSubscreenNPC.TabIndex = 11;
             this.layerSubscreenNPC.Text = "NPC";
             this.layerSubscreenNPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerSubscreenNPC.UseCompatibleTextRendering = true;
@@ -3991,7 +3990,7 @@ namespace LAZYSHELL
             this.layerSubscreenL1.Location = new System.Drawing.Point(73, 66);
             this.layerSubscreenL1.Name = "layerSubscreenL1";
             this.layerSubscreenL1.Size = new System.Drawing.Size(35, 21);
-            this.layerSubscreenL1.TabIndex = 15;
+            this.layerSubscreenL1.TabIndex = 8;
             this.layerSubscreenL1.Text = "L1";
             this.layerSubscreenL1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerSubscreenL1.UseCompatibleTextRendering = true;
@@ -4007,7 +4006,7 @@ namespace LAZYSHELL
             this.layerMainscreenNPC.Location = new System.Drawing.Point(181, 45);
             this.layerMainscreenNPC.Name = "layerMainscreenNPC";
             this.layerMainscreenNPC.Size = new System.Drawing.Size(35, 21);
-            this.layerMainscreenNPC.TabIndex = 13;
+            this.layerMainscreenNPC.TabIndex = 6;
             this.layerMainscreenNPC.Text = "NPC";
             this.layerMainscreenNPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerMainscreenNPC.UseCompatibleTextRendering = true;
@@ -4023,7 +4022,7 @@ namespace LAZYSHELL
             this.layerColorMathL1.Location = new System.Drawing.Point(73, 87);
             this.layerColorMathL1.Name = "layerColorMathL1";
             this.layerColorMathL1.Size = new System.Drawing.Size(35, 21);
-            this.layerColorMathL1.TabIndex = 20;
+            this.layerColorMathL1.TabIndex = 13;
             this.layerColorMathL1.Text = "L1";
             this.layerColorMathL1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerColorMathL1.UseCompatibleTextRendering = true;
@@ -4039,7 +4038,7 @@ namespace LAZYSHELL
             this.layerColorMathL3.Location = new System.Drawing.Point(145, 87);
             this.layerColorMathL3.Name = "layerColorMathL3";
             this.layerColorMathL3.Size = new System.Drawing.Size(35, 21);
-            this.layerColorMathL3.TabIndex = 22;
+            this.layerColorMathL3.TabIndex = 15;
             this.layerColorMathL3.Text = "L3";
             this.layerColorMathL3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerColorMathL3.UseCompatibleTextRendering = true;
@@ -4055,7 +4054,7 @@ namespace LAZYSHELL
             this.layerMainscreenL2.Location = new System.Drawing.Point(109, 45);
             this.layerMainscreenL2.Name = "layerMainscreenL2";
             this.layerMainscreenL2.Size = new System.Drawing.Size(35, 21);
-            this.layerMainscreenL2.TabIndex = 11;
+            this.layerMainscreenL2.TabIndex = 4;
             this.layerMainscreenL2.Text = "L2";
             this.layerMainscreenL2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerMainscreenL2.UseCompatibleTextRendering = true;
@@ -4071,7 +4070,7 @@ namespace LAZYSHELL
             this.layerSubscreenL3.Location = new System.Drawing.Point(145, 66);
             this.layerSubscreenL3.Name = "layerSubscreenL3";
             this.layerSubscreenL3.Size = new System.Drawing.Size(35, 21);
-            this.layerSubscreenL3.TabIndex = 17;
+            this.layerSubscreenL3.TabIndex = 10;
             this.layerSubscreenL3.Text = "L3";
             this.layerSubscreenL3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerSubscreenL3.UseCompatibleTextRendering = true;
@@ -4087,7 +4086,7 @@ namespace LAZYSHELL
             this.layerSubscreenL2.Location = new System.Drawing.Point(109, 66);
             this.layerSubscreenL2.Name = "layerSubscreenL2";
             this.layerSubscreenL2.Size = new System.Drawing.Size(35, 21);
-            this.layerSubscreenL2.TabIndex = 16;
+            this.layerSubscreenL2.TabIndex = 9;
             this.layerSubscreenL2.Text = "L2";
             this.layerSubscreenL2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerSubscreenL2.UseCompatibleTextRendering = true;
@@ -4103,7 +4102,7 @@ namespace LAZYSHELL
             this.layerMainscreenL3.Location = new System.Drawing.Point(145, 45);
             this.layerMainscreenL3.Name = "layerMainscreenL3";
             this.layerMainscreenL3.Size = new System.Drawing.Size(35, 21);
-            this.layerMainscreenL3.TabIndex = 12;
+            this.layerMainscreenL3.TabIndex = 5;
             this.layerMainscreenL3.Text = "L3";
             this.layerMainscreenL3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerMainscreenL3.UseCompatibleTextRendering = true;
@@ -4119,23 +4118,23 @@ namespace LAZYSHELL
             this.layerColorMathL2.Location = new System.Drawing.Point(109, 87);
             this.layerColorMathL2.Name = "layerColorMathL2";
             this.layerColorMathL2.Size = new System.Drawing.Size(35, 21);
-            this.layerColorMathL2.TabIndex = 21;
+            this.layerColorMathL2.TabIndex = 14;
             this.layerColorMathL2.Text = "L2";
             this.layerColorMathL2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.layerColorMathL2.UseCompatibleTextRendering = true;
             this.layerColorMathL2.UseVisualStyleBackColor = false;
             this.layerColorMathL2.CheckedChanged += new System.EventHandler(this.layerColorMathL2_CheckedChanged);
             // 
-            // tabPage1
+            // tabPage6
             // 
-            this.tabPage1.Controls.Add(this.panel8);
-            this.tabPage1.Controls.Add(this.panel27);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(260, 640);
-            this.tabPage1.TabIndex = 5;
-            this.tabPage1.Text = "MODS";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage6.Controls.Add(this.panel8);
+            this.tabPage6.Controls.Add(this.panel27);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(260, 640);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "MODS";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // panel8
             // 
@@ -4150,7 +4149,7 @@ namespace LAZYSHELL
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(260, 300);
-            this.panel8.TabIndex = 1;
+            this.panel8.TabIndex = 0;
             // 
             // tileModsBytesLeft
             // 
@@ -4162,7 +4161,7 @@ namespace LAZYSHELL
             this.tileModsBytesLeft.Name = "tileModsBytesLeft";
             this.tileModsBytesLeft.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.tileModsBytesLeft.Size = new System.Drawing.Size(135, 21);
-            this.tileModsBytesLeft.TabIndex = 500;
+            this.tileModsBytesLeft.TabIndex = 3;
             this.tileModsBytesLeft.Text = "bytes left";
             this.tileModsBytesLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -4180,7 +4179,7 @@ namespace LAZYSHELL
             this.groupBox21.Location = new System.Drawing.Point(127, 68);
             this.groupBox21.Name = "groupBox21";
             this.groupBox21.Size = new System.Drawing.Size(133, 184);
-            this.groupBox21.TabIndex = 7;
+            this.groupBox21.TabIndex = 4;
             this.groupBox21.TabStop = false;
             this.groupBox21.Text = "Coordinates";
             // 
@@ -4196,7 +4195,7 @@ namespace LAZYSHELL
             this.tileModsLayers.Location = new System.Drawing.Point(6, 110);
             this.tileModsLayers.Name = "tileModsLayers";
             this.tileModsLayers.Size = new System.Drawing.Size(121, 68);
-            this.tileModsLayers.TabIndex = 489;
+            this.tileModsLayers.TabIndex = 8;
             this.tileModsLayers.SelectedIndexChanged += new System.EventHandler(this.tileModsLayers_SelectedIndexChanged);
             // 
             // label26
@@ -4205,7 +4204,7 @@ namespace LAZYSHELL
             this.label26.Location = new System.Drawing.Point(6, 22);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(45, 13);
-            this.label26.TabIndex = 474;
+            this.label26.TabIndex = 0;
             this.label26.Text = "X Coord";
             // 
             // tileModsY
@@ -4218,7 +4217,7 @@ namespace LAZYSHELL
             0});
             this.tileModsY.Name = "tileModsY";
             this.tileModsY.Size = new System.Drawing.Size(72, 21);
-            this.tileModsY.TabIndex = 139;
+            this.tileModsY.TabIndex = 3;
             this.tileModsY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tileModsY.ValueChanged += new System.EventHandler(this.tileModsY_ValueChanged);
             // 
@@ -4228,7 +4227,7 @@ namespace LAZYSHELL
             this.label50.Location = new System.Drawing.Point(6, 85);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(38, 13);
-            this.label50.TabIndex = 488;
+            this.label50.TabIndex = 6;
             this.label50.Text = "Height";
             // 
             // tileModsX
@@ -4241,7 +4240,7 @@ namespace LAZYSHELL
             0});
             this.tileModsX.Name = "tileModsX";
             this.tileModsX.Size = new System.Drawing.Size(72, 21);
-            this.tileModsX.TabIndex = 138;
+            this.tileModsX.TabIndex = 1;
             this.tileModsX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tileModsX.ValueChanged += new System.EventHandler(this.tileModsX_ValueChanged);
             // 
@@ -4260,7 +4259,7 @@ namespace LAZYSHELL
             0});
             this.tileModsHeight.Name = "tileModsHeight";
             this.tileModsHeight.Size = new System.Drawing.Size(72, 21);
-            this.tileModsHeight.TabIndex = 140;
+            this.tileModsHeight.TabIndex = 7;
             this.tileModsHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tileModsHeight.Value = new decimal(new int[] {
             1,
@@ -4275,7 +4274,7 @@ namespace LAZYSHELL
             this.label36.Location = new System.Drawing.Point(6, 64);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(40, 13);
-            this.label36.TabIndex = 487;
+            this.label36.TabIndex = 4;
             this.label36.Text = "Length";
             // 
             // tileModsWidth
@@ -4293,7 +4292,7 @@ namespace LAZYSHELL
             0});
             this.tileModsWidth.Name = "tileModsWidth";
             this.tileModsWidth.Size = new System.Drawing.Size(72, 21);
-            this.tileModsWidth.TabIndex = 140;
+            this.tileModsWidth.TabIndex = 5;
             this.tileModsWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tileModsWidth.Value = new decimal(new int[] {
             1,
@@ -4308,7 +4307,7 @@ namespace LAZYSHELL
             this.label27.Location = new System.Drawing.Point(6, 43);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(45, 13);
-            this.label27.TabIndex = 476;
+            this.label27.TabIndex = 2;
             this.label27.Text = "Y Coord";
             // 
             // tileModsFieldTree
@@ -4320,7 +4319,7 @@ namespace LAZYSHELL
             this.tileModsFieldTree.Name = "tileModsFieldTree";
             this.tileModsFieldTree.ShowRootLines = false;
             this.tileModsFieldTree.Size = new System.Drawing.Size(125, 256);
-            this.tileModsFieldTree.TabIndex = 127;
+            this.tileModsFieldTree.TabIndex = 2;
             this.tileModsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tileModsFieldTree_AfterSelect);
             // 
             // toolStrip7
@@ -4342,7 +4341,7 @@ namespace LAZYSHELL
             this.toolStrip7.Name = "toolStrip7";
             this.toolStrip7.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip7.Size = new System.Drawing.Size(260, 25);
-            this.toolStrip7.TabIndex = 496;
+            this.toolStrip7.TabIndex = 1;
             this.toolStrip7.Text = "toolStrip7";
             // 
             // tileModsInsertField
@@ -4452,7 +4451,7 @@ namespace LAZYSHELL
             this.label69.Name = "label69";
             this.label69.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label69.Size = new System.Drawing.Size(260, 19);
-            this.label69.TabIndex = 499;
+            this.label69.TabIndex = 0;
             this.label69.Text = "TILEMAP MODS";
             this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -4464,7 +4463,7 @@ namespace LAZYSHELL
             this.panel55.Location = new System.Drawing.Point(119, 608);
             this.panel55.Name = "panel55";
             this.panel55.Size = new System.Drawing.Size(121, 124);
-            this.panel55.TabIndex = 493;
+            this.panel55.TabIndex = 5;
             // 
             // panel27
             // 
@@ -4473,13 +4472,12 @@ namespace LAZYSHELL
             this.panel27.Controls.Add(this.solidModsFieldTree);
             this.panel27.Controls.Add(this.toolStrip8);
             this.panel27.Controls.Add(this.label68);
-            this.panel27.Controls.Add(this.panel45);
             this.panel27.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel27.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel27.Location = new System.Drawing.Point(0, 300);
             this.panel27.Name = "panel27";
             this.panel27.Size = new System.Drawing.Size(260, 340);
-            this.panel27.TabIndex = 2;
+            this.panel27.TabIndex = 1;
             // 
             // groupBox20
             // 
@@ -4494,7 +4492,7 @@ namespace LAZYSHELL
             this.groupBox20.Location = new System.Drawing.Point(127, 68);
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.Size = new System.Drawing.Size(133, 110);
-            this.groupBox20.TabIndex = 7;
+            this.groupBox20.TabIndex = 4;
             this.groupBox20.TabStop = false;
             this.groupBox20.Text = "Coordinates";
             // 
@@ -4504,7 +4502,7 @@ namespace LAZYSHELL
             this.label14.Location = new System.Drawing.Point(6, 22);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(45, 13);
-            this.label14.TabIndex = 474;
+            this.label14.TabIndex = 0;
             this.label14.Text = "X Coord";
             // 
             // solidModsY
@@ -4517,7 +4515,7 @@ namespace LAZYSHELL
             0});
             this.solidModsY.Name = "solidModsY";
             this.solidModsY.Size = new System.Drawing.Size(70, 21);
-            this.solidModsY.TabIndex = 139;
+            this.solidModsY.TabIndex = 3;
             this.solidModsY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.solidModsY.ValueChanged += new System.EventHandler(this.solidModsY_ValueChanged);
             // 
@@ -4527,7 +4525,7 @@ namespace LAZYSHELL
             this.label67.Location = new System.Drawing.Point(6, 85);
             this.label67.Name = "label67";
             this.label67.Size = new System.Drawing.Size(38, 13);
-            this.label67.TabIndex = 488;
+            this.label67.TabIndex = 6;
             this.label67.Text = "Height";
             // 
             // label51
@@ -4536,7 +4534,7 @@ namespace LAZYSHELL
             this.label51.Location = new System.Drawing.Point(6, 43);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(45, 13);
-            this.label51.TabIndex = 476;
+            this.label51.TabIndex = 2;
             this.label51.Text = "Y Coord";
             // 
             // label64
@@ -4545,7 +4543,7 @@ namespace LAZYSHELL
             this.label64.Location = new System.Drawing.Point(6, 64);
             this.label64.Name = "label64";
             this.label64.Size = new System.Drawing.Size(40, 13);
-            this.label64.TabIndex = 487;
+            this.label64.TabIndex = 4;
             this.label64.Text = "Length";
             // 
             // solidModsX
@@ -4558,7 +4556,7 @@ namespace LAZYSHELL
             0});
             this.solidModsX.Name = "solidModsX";
             this.solidModsX.Size = new System.Drawing.Size(70, 21);
-            this.solidModsX.TabIndex = 138;
+            this.solidModsX.TabIndex = 1;
             this.solidModsX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.solidModsX.ValueChanged += new System.EventHandler(this.solidModsX_ValueChanged);
             // 
@@ -4577,7 +4575,7 @@ namespace LAZYSHELL
             0});
             this.solidModsWidth.Name = "solidModsWidth";
             this.solidModsWidth.Size = new System.Drawing.Size(70, 21);
-            this.solidModsWidth.TabIndex = 140;
+            this.solidModsWidth.TabIndex = 5;
             this.solidModsWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.solidModsWidth.Value = new decimal(new int[] {
             1,
@@ -4601,7 +4599,7 @@ namespace LAZYSHELL
             0});
             this.solidModsHeight.Name = "solidModsHeight";
             this.solidModsHeight.Size = new System.Drawing.Size(70, 21);
-            this.solidModsHeight.TabIndex = 140;
+            this.solidModsHeight.TabIndex = 7;
             this.solidModsHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.solidModsHeight.Value = new decimal(new int[] {
             1,
@@ -4620,7 +4618,7 @@ namespace LAZYSHELL
             this.solidModsBytesLeft.Name = "solidModsBytesLeft";
             this.solidModsBytesLeft.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.solidModsBytesLeft.Size = new System.Drawing.Size(135, 21);
-            this.solidModsBytesLeft.TabIndex = 501;
+            this.solidModsBytesLeft.TabIndex = 3;
             this.solidModsBytesLeft.Text = "bytes left";
             this.solidModsBytesLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -4633,7 +4631,7 @@ namespace LAZYSHELL
             this.solidModsFieldTree.Name = "solidModsFieldTree";
             this.solidModsFieldTree.ShowRootLines = false;
             this.solidModsFieldTree.Size = new System.Drawing.Size(125, 296);
-            this.solidModsFieldTree.TabIndex = 127;
+            this.solidModsFieldTree.TabIndex = 2;
             this.solidModsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.solidModsFieldTree_AfterSelect);
             // 
             // toolStrip8
@@ -4654,7 +4652,7 @@ namespace LAZYSHELL
             this.toolStrip8.Name = "toolStrip8";
             this.toolStrip8.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip8.Size = new System.Drawing.Size(260, 25);
-            this.toolStrip8.TabIndex = 496;
+            this.toolStrip8.TabIndex = 1;
             this.toolStrip8.Text = "toolStrip8";
             // 
             // solidModsInsert
@@ -4753,19 +4751,9 @@ namespace LAZYSHELL
             this.label68.Name = "label68";
             this.label68.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label68.Size = new System.Drawing.Size(260, 19);
-            this.label68.TabIndex = 498;
+            this.label68.TabIndex = 0;
             this.label68.Text = "SOLIDITY MAP MODS";
             this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel45
-            // 
-            this.panel45.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel45.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
-            this.panel45.Location = new System.Drawing.Point(119, 608);
-            this.panel45.Name = "panel45";
-            this.panel45.Size = new System.Drawing.Size(121, 164);
-            this.panel45.TabIndex = 493;
             // 
             // toolStripLevel
             // 
@@ -4793,7 +4781,7 @@ namespace LAZYSHELL
             this.toolStripLevel.Name = "toolStripLevel";
             this.toolStripLevel.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStripLevel.Size = new System.Drawing.Size(1020, 25);
-            this.toolStripLevel.TabIndex = 2;
+            this.toolStripLevel.TabIndex = 1;
             // 
             // navigateBck
             // 
@@ -4896,7 +4884,7 @@ namespace LAZYSHELL
             this.eventExit.AutoSize = false;
             this.eventExit.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventExit.Hexadecimal = false;
-            this.eventExit.Location = new System.Drawing.Point(580, 2);
+            this.eventExit.Location = new System.Drawing.Point(578, 2);
             this.eventExit.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -5078,7 +5066,7 @@ namespace LAZYSHELL
             this.panelLevels.Location = new System.Drawing.Point(0, 50);
             this.panelLevels.Name = "panelLevels";
             this.panelLevels.Size = new System.Drawing.Size(1020, 670);
-            this.panelLevels.TabIndex = 506;
+            this.panelLevels.TabIndex = 2;
             // 
             // toolStripToggle
             // 
@@ -5111,7 +5099,7 @@ namespace LAZYSHELL
             this.toolStripToggle.Name = "toolStripToggle";
             this.toolStripToggle.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStripToggle.Size = new System.Drawing.Size(1020, 25);
-            this.toolStripToggle.TabIndex = 507;
+            this.toolStripToggle.TabIndex = 0;
             this.toolStripToggle.Text = "toolStrip2";
             // 
             // save
@@ -5155,7 +5143,7 @@ namespace LAZYSHELL
             // 
             // importArchitectureToolStripMenuItem
             // 
-            this.importArchitectureToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importArchitectureToolStripMenuItem.Image")));
+            this.importArchitectureToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importBinary;
             this.importArchitectureToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importArchitectureToolStripMenuItem.Name = "importArchitectureToolStripMenuItem";
             this.importArchitectureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
@@ -5169,7 +5157,7 @@ namespace LAZYSHELL
             // 
             // arraysToolStripMenuItem1
             // 
-            this.arraysToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("arraysToolStripMenuItem1.Image")));
+            this.arraysToolStripMenuItem1.Image = global::LAZYSHELL.Properties.Resources.importBinary;
             this.arraysToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.arraysToolStripMenuItem1.Name = "arraysToolStripMenuItem1";
             this.arraysToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
@@ -5178,7 +5166,7 @@ namespace LAZYSHELL
             // 
             // graphicSetsToolStripMenuItem1
             // 
-            this.graphicSetsToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("graphicSetsToolStripMenuItem1.Image")));
+            this.graphicSetsToolStripMenuItem1.Image = global::LAZYSHELL.Properties.Resources.importBinary;
             this.graphicSetsToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.graphicSetsToolStripMenuItem1.Name = "graphicSetsToolStripMenuItem1";
             this.graphicSetsToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
@@ -5214,7 +5202,7 @@ namespace LAZYSHELL
             // 
             // exportArchitectureToolStripMenuItem
             // 
-            this.exportArchitectureToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportArchitectureToolStripMenuItem.Image")));
+            this.exportArchitectureToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
             this.exportArchitectureToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportArchitectureToolStripMenuItem.Name = "exportArchitectureToolStripMenuItem";
             this.exportArchitectureToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
@@ -5228,7 +5216,7 @@ namespace LAZYSHELL
             // 
             // arraysToolStripMenuItem
             // 
-            this.arraysToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("arraysToolStripMenuItem.Image")));
+            this.arraysToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
             this.arraysToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.arraysToolStripMenuItem.Name = "arraysToolStripMenuItem";
             this.arraysToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
@@ -5237,7 +5225,7 @@ namespace LAZYSHELL
             // 
             // graphicSetsToolStripMenuItem
             // 
-            this.graphicSetsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("graphicSetsToolStripMenuItem.Image")));
+            this.graphicSetsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
             this.graphicSetsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.graphicSetsToolStripMenuItem.Name = "graphicSetsToolStripMenuItem";
             this.graphicSetsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
@@ -5246,7 +5234,7 @@ namespace LAZYSHELL
             // 
             // exportLevelImagesToolStripMenuItem1
             // 
-            this.exportLevelImagesToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("exportLevelImagesToolStripMenuItem1.Image")));
+            this.exportLevelImagesToolStripMenuItem1.Image = global::LAZYSHELL.Properties.Resources.exportImage;
             this.exportLevelImagesToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportLevelImagesToolStripMenuItem1.Name = "exportLevelImagesToolStripMenuItem1";
             this.exportLevelImagesToolStripMenuItem1.Size = new System.Drawing.Size(182, 22);
@@ -5260,7 +5248,7 @@ namespace LAZYSHELL
             // 
             // dumpTextToolStripMenuItem
             // 
-            this.dumpTextToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.notepad;
+            this.dumpTextToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportText;
             this.dumpTextToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpTextToolStripMenuItem.Name = "dumpTextToolStripMenuItem";
             this.dumpTextToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
@@ -5635,8 +5623,8 @@ namespace LAZYSHELL
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Levels_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Levels_FormClosed);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Levels_KeyDown);
-            this.tabPage8.ResumeLayout(false);
-            this.tabPage8.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.npcMapHeader)).EndInit();
             this.groupBox14.ResumeLayout(false);
             this.groupBox15.ResumeLayout(false);
@@ -5658,7 +5646,7 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.npcPropertyC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapNum)).EndInit();
             this.contextMenuStrip4.ResumeLayout(false);
-            this.tabPage10.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox19.ResumeLayout(false);
@@ -5671,7 +5659,7 @@ namespace LAZYSHELL
             this.toolStrip4.PerformLayout();
             this.panelOverlapTileset.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOverlaps)).EndInit();
-            this.tabPage9.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox18.ResumeLayout(false);
@@ -5701,8 +5689,8 @@ namespace LAZYSHELL
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
             this.tabControl.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapPaletteSetNum)).EndInit();
@@ -5726,8 +5714,8 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet3Num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet1Num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapGFXSet2Num)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -5749,7 +5737,7 @@ namespace LAZYSHELL
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layerPrioritySet)).EndInit();
-            this.tabPage1.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.groupBox21.ResumeLayout(false);
@@ -5967,11 +5955,11 @@ namespace LAZYSHELL
         private Panel panel52;
         private Panel panel68;
         private TabControl tabControl;
-        private TabPage tabPage10;
+        private TabPage tabPage5;
+        private TabPage tabPage2;
+        private TabPage tabPage1;
         private TabPage tabPage3;
         private TabPage tabPage4;
-        private TabPage tabPage8;
-        private TabPage tabPage9;
         private ToolStrip toolStripLevel;
         private ToolStripButton levelPreviewToolStripButton;
         private ToolStripButton openGraphicEditor;
@@ -6064,7 +6052,7 @@ namespace LAZYSHELL
         private ToolStripButton overlapFieldCopy;
         private ToolStripButton overlapFieldPaste;
         private ToolStripButton overlapFieldDuplicate;
-        private TabPage tabPage1;
+        private TabPage tabPage6;
         private Panel panel8;
         private TreeView tileModsFieldTree;
         private ToolStrip toolStrip7;
@@ -6081,7 +6069,6 @@ namespace LAZYSHELL
         private Label label51;
         private Label label64;
         private Label label67;
-        private Panel panel45;
         private Label label68;
         private Label label69;
         private NumericUpDown solidModsY;

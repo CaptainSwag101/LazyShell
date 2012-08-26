@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Lazy Shell, Version 3.11.1
+    <value>Lazy Shell, Version 3.12.0
 Copyright © 2007-2012  giangurgolo &amp; Omega
 
 Created by Omega &amp; giangurgolo
@@ -128,6 +128,7 @@ Home Page:   http://home.comcast.net/~giangurgolo/smrpg/
 Main Contributors and Supporters:
 ElementalPowerStar -  notable donator, principle bug-finder, positive feedback
 Yakibomb - principle bug-finder and tester, positive feedback
+Ryan H. - donator, supporter
 
 Special Thanks:
 Bregalad - source code for BRR encoding and decoding

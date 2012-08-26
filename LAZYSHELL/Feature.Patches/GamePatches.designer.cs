@@ -42,6 +42,7 @@ namespace LAZYSHELL.Patches
             this.GameHackLabel = new System.Windows.Forms.Label();
             this.AssemblyHackLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.clock = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePictureBox)).BeginInit();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +64,7 @@ namespace LAZYSHELL.Patches
             this.PatchListBox.Location = new System.Drawing.Point(12, 12);
             this.PatchListBox.Name = "PatchListBox";
             this.PatchListBox.Size = new System.Drawing.Size(147, 270);
-            this.PatchListBox.TabIndex = 3;
+            this.PatchListBox.TabIndex = 0;
             this.PatchListBox.SelectedIndexChanged += new System.EventHandler(this.PatchListBox_SelectedIndexChanged);
             // 
             // AuthorLabel
@@ -88,7 +89,7 @@ namespace LAZYSHELL.Patches
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.ReadOnly = true;
             this.DescriptionTextBox.Size = new System.Drawing.Size(300, 270);
-            this.DescriptionTextBox.TabIndex = 6;
+            this.DescriptionTextBox.TabIndex = 2;
             this.DescriptionTextBox.Text = "";
             this.DescriptionTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.DescriptionTextBox_LinkClicked);
             // 
@@ -110,10 +111,11 @@ namespace LAZYSHELL.Patches
             // 
             // applyButton
             // 
+            this.applyButton.Enabled = false;
             this.applyButton.Location = new System.Drawing.Point(12, 285);
             this.applyButton.Name = "applyButton";
             this.applyButton.Size = new System.Drawing.Size(147, 21);
-            this.applyButton.TabIndex = 391;
+            this.applyButton.TabIndex = 1;
             this.applyButton.Text = "APPLY PATCH";
             this.applyButton.UseCompatibleTextRendering = true;
             this.applyButton.UseVisualStyleBackColor = false;
@@ -128,7 +130,7 @@ namespace LAZYSHELL.Patches
             this.downloadingLabel.Location = new System.Drawing.Point(165, 285);
             this.downloadingLabel.Name = "downloadingLabel";
             this.downloadingLabel.Size = new System.Drawing.Size(300, 21);
-            this.downloadingLabel.TabIndex = 396;
+            this.downloadingLabel.TabIndex = 3;
             this.downloadingLabel.Text = "              ...INITIALIZING...              ";
             this.downloadingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -139,7 +141,7 @@ namespace LAZYSHELL.Patches
             this.FreshRomLabel.Location = new System.Drawing.Point(471, 285);
             this.FreshRomLabel.Name = "FreshRomLabel";
             this.FreshRomLabel.Size = new System.Drawing.Size(260, 21);
-            this.FreshRomLabel.TabIndex = 395;
+            this.FreshRomLabel.TabIndex = 7;
             this.FreshRomLabel.Text = "This hack must be applied to a fresh rom";
             this.FreshRomLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -150,7 +152,7 @@ namespace LAZYSHELL.Patches
             this.GameHackLabel.Location = new System.Drawing.Point(471, 264);
             this.GameHackLabel.Name = "GameHackLabel";
             this.GameHackLabel.Size = new System.Drawing.Size(260, 21);
-            this.GameHackLabel.TabIndex = 394;
+            this.GameHackLabel.TabIndex = 6;
             this.GameHackLabel.Text = "Game Hack";
             this.GameHackLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -162,7 +164,7 @@ namespace LAZYSHELL.Patches
             this.AssemblyHackLabel.Location = new System.Drawing.Point(471, 243);
             this.AssemblyHackLabel.Name = "AssemblyHackLabel";
             this.AssemblyHackLabel.Size = new System.Drawing.Size(260, 21);
-            this.AssemblyHackLabel.TabIndex = 393;
+            this.AssemblyHackLabel.TabIndex = 5;
             this.AssemblyHackLabel.Text = "Assembly Hack";
             this.AssemblyHackLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -173,7 +175,15 @@ namespace LAZYSHELL.Patches
             this.panel3.Location = new System.Drawing.Point(471, 12);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(260, 228);
-            this.panel3.TabIndex = 396;
+            this.panel3.TabIndex = 4;
+            // 
+            // clock
+            // 
+            this.clock.WorkerReportsProgress = true;
+            this.clock.WorkerSupportsCancellation = true;
+            this.clock.DoWork += new System.ComponentModel.DoWorkEventHandler(this.clock_DoWork);
+            this.clock.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.clock_ProgressChanged);
+            this.clock.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.clock_RunWorkerCompleted);
             // 
             // GamePatches
             // 
@@ -199,6 +209,7 @@ namespace LAZYSHELL.Patches
             this.MaximizeBox = false;
             this.Name = "GamePatches";
             this.Text = "PATCHES - Lazy Shell";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GamePatches_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.ImagePictureBox)).EndInit();
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -221,5 +232,6 @@ namespace LAZYSHELL.Patches
         private System.Windows.Forms.Label GameHackLabel;
         private System.Windows.Forms.Label downloadingLabel;
         private System.Windows.Forms.Panel panel3;
+        private System.ComponentModel.BackgroundWorker clock;
     }
 }

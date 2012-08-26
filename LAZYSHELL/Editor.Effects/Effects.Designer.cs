@@ -119,7 +119,7 @@
             0});
             this.yNegShift.Name = "yNegShift";
             this.yNegShift.Size = new System.Drawing.Size(39, 21);
-            this.yNegShift.TabIndex = 395;
+            this.yNegShift.TabIndex = 7;
             this.yNegShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.yNegShift.ValueChanged += new System.EventHandler(this.yNegShift_ValueChanged);
             // 
@@ -129,7 +129,7 @@
             this.label96.Location = new System.Drawing.Point(10, 150);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(31, 13);
-            this.label96.TabIndex = 396;
+            this.label96.TabIndex = 5;
             this.label96.Text = "(X,Y)";
             // 
             // xNegShift
@@ -142,7 +142,7 @@
             0});
             this.xNegShift.Name = "xNegShift";
             this.xNegShift.Size = new System.Drawing.Size(39, 21);
-            this.xNegShift.TabIndex = 395;
+            this.xNegShift.TabIndex = 6;
             this.xNegShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.xNegShift.ValueChanged += new System.EventHandler(this.xNegShift_ValueChanged);
             // 
@@ -156,7 +156,7 @@
             0});
             this.e_paletteIndex.Name = "e_paletteIndex";
             this.e_paletteIndex.Size = new System.Drawing.Size(49, 21);
-            this.e_paletteIndex.TabIndex = 4;
+            this.e_paletteIndex.TabIndex = 3;
             this.e_paletteIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_paletteIndex.ValueChanged += new System.EventHandler(this.e_paletteIndex_ValueChanged);
             // 
@@ -166,7 +166,7 @@
             this.label7.Location = new System.Drawing.Point(112, 8);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 13);
-            this.label7.TabIndex = 394;
+            this.label7.TabIndex = 2;
             this.label7.Text = "Palette";
             // 
             // e_codec
@@ -179,7 +179,7 @@
             this.e_codec.Location = new System.Drawing.Point(79, 82);
             this.e_codec.Name = "e_codec";
             this.e_codec.Size = new System.Drawing.Size(62, 21);
-            this.e_codec.TabIndex = 41;
+            this.e_codec.TabIndex = 6;
             this.e_codec.SelectedIndexChanged += new System.EventHandler(this.e_codec_SelectedIndexChanged);
             // 
             // e_availableBytes
@@ -192,7 +192,7 @@
             this.e_availableBytes.Name = "e_availableBytes";
             this.e_availableBytes.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.e_availableBytes.Size = new System.Drawing.Size(203, 20);
-            this.e_availableBytes.TabIndex = 451;
+            this.e_availableBytes.TabIndex = 0;
             this.e_availableBytes.Text = "0 bytes free";
             this.e_availableBytes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -216,7 +216,7 @@
             0});
             this.e_paletteSetSize.Name = "e_paletteSetSize";
             this.e_paletteSetSize.Size = new System.Drawing.Size(62, 21);
-            this.e_paletteSetSize.TabIndex = 16;
+            this.e_paletteSetSize.TabIndex = 2;
             this.e_paletteSetSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_paletteSetSize.Value = new decimal(new int[] {
             32,
@@ -231,7 +231,7 @@
             this.label107.Location = new System.Drawing.Point(6, 42);
             this.label107.Name = "label107";
             this.label107.Size = new System.Drawing.Size(63, 13);
-            this.label107.TabIndex = 394;
+            this.label107.TabIndex = 1;
             this.label107.Text = "Palette Size";
             // 
             // imageNum
@@ -244,7 +244,7 @@
             0});
             this.imageNum.Name = "imageNum";
             this.imageNum.Size = new System.Drawing.Size(49, 21);
-            this.imageNum.TabIndex = 3;
+            this.imageNum.TabIndex = 1;
             this.imageNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.imageNum.ValueChanged += new System.EventHandler(this.imageNum_ValueChanged);
             // 
@@ -254,7 +254,7 @@
             this.label90.Location = new System.Drawing.Point(6, 84);
             this.label90.Name = "label90";
             this.label90.Size = new System.Drawing.Size(58, 13);
-            this.label90.TabIndex = 394;
+            this.label90.TabIndex = 5;
             this.label90.Text = "BPP Codec";
             // 
             // e_graphicSetSize
@@ -277,7 +277,7 @@
             0});
             this.e_graphicSetSize.Name = "e_graphicSetSize";
             this.e_graphicSetSize.Size = new System.Drawing.Size(62, 21);
-            this.e_graphicSetSize.TabIndex = 16;
+            this.e_graphicSetSize.TabIndex = 4;
             this.e_graphicSetSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.e_graphicSetSize.Value = new decimal(new int[] {
             16,
@@ -292,7 +292,7 @@
             this.label2.Location = new System.Drawing.Point(10, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 394;
+            this.label2.TabIndex = 0;
             this.label2.Text = "Image";
             // 
             // label89
@@ -301,7 +301,7 @@
             this.label89.Location = new System.Drawing.Point(6, 63);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(65, 13);
-            this.label89.TabIndex = 394;
+            this.label89.TabIndex = 3;
             this.label89.Text = "Graphic Size";
             // 
             // toolStrip2
@@ -321,7 +321,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(1015, 25);
-            this.toolStrip2.TabIndex = 2;
+            this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // save
@@ -434,7 +434,7 @@
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(1015, 25);
-            this.toolStrip3.TabIndex = 3;
+            this.toolStrip3.TabIndex = 1;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // name
@@ -537,7 +537,7 @@
             this.panelEffects.Location = new System.Drawing.Point(0, 50);
             this.panelEffects.Name = "panelEffects";
             this.panelEffects.Size = new System.Drawing.Size(1015, 684);
-            this.panelEffects.TabIndex = 520;
+            this.panelEffects.TabIndex = 2;
             // 
             // panel2
             // 
@@ -554,7 +554,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(221, 680);
-            this.panel2.TabIndex = 520;
+            this.panel2.TabIndex = 0;
             this.panel2.SizeChanged += new System.EventHandler(this.panel2_SizeChanged);
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -570,7 +570,7 @@
             this.groupBox1.Location = new System.Drawing.Point(3, 33);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(215, 109);
-            this.groupBox1.TabIndex = 520;
+            this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Image Properties";
             // 

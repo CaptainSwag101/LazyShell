@@ -118,7 +118,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.elements.CheckBoxes = true;
-            this.elements.Location = new System.Drawing.Point(12, 69);
+            this.elements.Location = new System.Drawing.Point(12, 41);
             this.elements.Name = "elements";
             treeNode1.Name = "Audio";
             treeNode1.Text = "Audio";
@@ -209,18 +209,18 @@
             treeNode32,
             treeNode40,
             treeNode41});
-            this.elements.Size = new System.Drawing.Size(333, 491);
-            this.elements.TabIndex = 0;
+            this.elements.Size = new System.Drawing.Size(333, 519);
+            this.elements.TabIndex = 2;
             this.elements.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.elements_AfterCheck);
             // 
             // browseFreshRom
             // 
             this.browseFreshRom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.browseFreshRom.Location = new System.Drawing.Point(270, 40);
+            this.browseFreshRom.Location = new System.Drawing.Point(318, 14);
             this.browseFreshRom.Name = "browseFreshRom";
-            this.browseFreshRom.Size = new System.Drawing.Size(75, 23);
+            this.browseFreshRom.Size = new System.Drawing.Size(27, 23);
             this.browseFreshRom.TabIndex = 1;
-            this.browseFreshRom.Text = "Browse...";
+            this.browseFreshRom.Text = "...";
             this.browseFreshRom.UseVisualStyleBackColor = true;
             this.browseFreshRom.Click += new System.EventHandler(this.browseFreshRom_Click);
             // 
@@ -231,8 +231,8 @@
             this.freshRomTextBox.Location = new System.Drawing.Point(12, 14);
             this.freshRomTextBox.Name = "freshRomTextBox";
             this.freshRomTextBox.ReadOnly = true;
-            this.freshRomTextBox.Size = new System.Drawing.Size(333, 21);
-            this.freshRomTextBox.TabIndex = 2;
+            this.freshRomTextBox.Size = new System.Drawing.Size(300, 21);
+            this.freshRomTextBox.TabIndex = 0;
             // 
             // buttonOK
             // 

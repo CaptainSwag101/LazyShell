@@ -357,18 +357,18 @@ namespace LAZYSHELL
                 }
             }
             #endregion
-            #region Samples
+            #region Audio
             if (this.Text == "EXPORT SAMPLES...")
             {
                 if (radioButtonCurrent.Checked)
-                    Do.Export(BRR.Decode(Model.AudioSamples[currentIndex].Sample, (int)args[0]),
+                    Do.Export(BRR.BRRToWAV(Model.AudioSamples[currentIndex].Sample, (int)args[0]),
                         "sample." + currentIndex.ToString("d3") + ".wav", fullPath);
                 else
                 {
                     byte[][] samples = new byte[Model.AudioSamples.Length][];
                     int i = 0;
                     foreach (BRRSample s in Model.AudioSamples)
-                        samples[i++] = BRR.Decode(s.Sample, (int)args[0]);
+                        samples[i++] = BRR.BRRToWAV(s.Sample, (int)args[0]);
                     Do.Export(samples,
                         fullPath + "\\" + Model.GetFileNameWithoutPath() + " - Samples\\" + "sample",
                         "SAMPLE", true);
@@ -407,6 +407,57 @@ namespace LAZYSHELL
                     int i = 0;
                     foreach (BRRSample sample in Model.AudioSamples)
                         sample.Sample = BRR.Encode(samples[i++]);
+                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+                return;
+            }
+            if (this.Text == "EXPORT SPCS...")
+            {
+                if (radioButtonCurrent.Checked)
+                    Do.Export(Model.SPCs[currentIndex], null, textBoxCurrent.Text);
+                else
+                    Do.Export(Model.SPCs, fullPath + "\\" + Model.GetFileNameWithoutPath() + " - SPCs\\" + "spc", "SPC", true);
+                return;
+            }
+            if (this.Text == "IMPORT SPCS...")
+            {
+                if (radioButtonCurrent.Checked)
+                {
+                    SPCTrack spc = new SPCTrack();
+                    try
+                    {
+                        spc = (SPCTrack)Do.Import(spc, fullPath);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("File not an SPC data file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
+                    spc.Data = Model.Data;
+                    spc.CreateCommands();
+                    Model.SPCs[currentIndex] = spc;
+                }
+                else
+                {
+                    SPCTrack[] spcs = new SPCTrack[Model.SPCs.Length];
+                    for (int i = 0; i < spcs.Length; i++)
+                        spcs[i] = new SPCTrack();
+                    try
+                    {
+                        Do.Import(spcs, fullPath + "\\" + "spc", "SPC", true);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("One or more files not an SPC data file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
+                    for (int i = 0; i < spcs.Length; i++)
+                    {
+                        Model.SPCs[i] = spcs[i];
+                        Model.SPCs[i].Data = Model.Data;
+                        Model.SPCs[i].CreateCommands();
+                    }
                 }
                 this.DialogResult = DialogResult.OK;
                 this.Close();

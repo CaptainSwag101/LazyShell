@@ -107,7 +107,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 326);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(835, 308);
-            this.panel1.TabIndex = 0;
+            this.panel1.TabIndex = 2;
             // 
             // toolStrip1
             // 
@@ -130,7 +130,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(835, 25);
-            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // levelName
@@ -354,7 +354,7 @@
             this.railColorKey.Location = new System.Drawing.Point(0, 634);
             this.railColorKey.Name = "railColorKey";
             this.railColorKey.Size = new System.Drawing.Size(835, 21);
-            this.railColorKey.TabIndex = 0;
+            this.railColorKey.TabIndex = 3;
             this.railColorKey.Text = "[RAIL COLOR KEY]  GREEN = normal speed | RED = must slow down | BLUE = enter next" +
                 " stage | AQUA = unused, same as blue";
             this.railColorKey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -369,7 +369,7 @@
             this.panelScreens.Location = new System.Drawing.Point(0, 25);
             this.panelScreens.Name = "panelScreens";
             this.panelScreens.Size = new System.Drawing.Size(835, 301);
-            this.panelScreens.TabIndex = 2;
+            this.panelScreens.TabIndex = 1;
             this.panelScreens.Visible = false;
             // 
             // screens
@@ -382,7 +382,7 @@
             this.screens.Location = new System.Drawing.Point(0, 25);
             this.screens.Name = "screens";
             this.screens.Size = new System.Drawing.Size(694, 276);
-            this.screens.TabIndex = 4;
+            this.screens.TabIndex = 1;
             this.screens.Scroll += new System.Windows.Forms.ScrollEventHandler(this.screens_Scroll);
             // 
             // pictureBoxScreens
@@ -415,7 +415,7 @@
             this.panelObjects.Location = new System.Drawing.Point(694, 25);
             this.panelObjects.Name = "panelObjects";
             this.panelObjects.Size = new System.Drawing.Size(141, 276);
-            this.panelObjects.TabIndex = 7;
+            this.panelObjects.TabIndex = 2;
             this.panelObjects.Visible = false;
             // 
             // objectType
@@ -429,7 +429,7 @@
             this.objectType.Location = new System.Drawing.Point(42, 213);
             this.objectType.Name = "objectType";
             this.objectType.Size = new System.Drawing.Size(99, 21);
-            this.objectType.TabIndex = 428;
+            this.objectType.TabIndex = 3;
             this.objectType.SelectedIndexChanged += new System.EventHandler(this.objectType_SelectedIndexChanged);
             // 
             // label2
@@ -440,7 +440,7 @@
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label2.Size = new System.Drawing.Size(41, 21);
-            this.label2.TabIndex = 427;
+            this.label2.TabIndex = 2;
             this.label2.Text = "Type";
             // 
             // label3
@@ -451,7 +451,7 @@
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label3.Size = new System.Drawing.Size(41, 21);
-            this.label3.TabIndex = 427;
+            this.label3.TabIndex = 6;
             this.label3.Text = "X,Y";
             // 
             // objectY
@@ -464,7 +464,7 @@
             0});
             this.objectY.Name = "objectY";
             this.objectY.Size = new System.Drawing.Size(51, 21);
-            this.objectY.TabIndex = 426;
+            this.objectY.TabIndex = 8;
             this.objectY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.objectY.ValueChanged += new System.EventHandler(this.objectY_ValueChanged);
             // 
@@ -483,7 +483,7 @@
             0});
             this.objectX.Name = "objectX";
             this.objectX.Size = new System.Drawing.Size(51, 21);
-            this.objectX.TabIndex = 426;
+            this.objectX.TabIndex = 7;
             this.objectX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.objectX.Value = new decimal(new int[] {
             256,
@@ -500,7 +500,7 @@
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label1.Size = new System.Drawing.Size(41, 21);
-            this.label1.TabIndex = 427;
+            this.label1.TabIndex = 4;
             this.label1.Text = "Count";
             // 
             // rowSize
@@ -513,7 +513,7 @@
             0});
             this.rowSize.Name = "rowSize";
             this.rowSize.Size = new System.Drawing.Size(99, 21);
-            this.rowSize.TabIndex = 426;
+            this.rowSize.TabIndex = 5;
             this.rowSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.rowSize.ValueChanged += new System.EventHandler(this.rowSize_ValueChanged);
             // 
@@ -525,7 +525,7 @@
             this.listBoxObjects.Location = new System.Drawing.Point(0, 25);
             this.listBoxObjects.Name = "listBoxObjects";
             this.listBoxObjects.Size = new System.Drawing.Size(141, 188);
-            this.listBoxObjects.TabIndex = 7;
+            this.listBoxObjects.TabIndex = 1;
             this.listBoxObjects.SelectedIndexChanged += new System.EventHandler(this.listBoxObjects_SelectedIndexChanged);
             // 
             // toolStrip3
@@ -542,7 +542,7 @@
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(141, 25);
-            this.toolStrip3.TabIndex = 429;
+            this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // newObject
@@ -625,7 +625,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(835, 25);
-            this.toolStrip2.TabIndex = 5;
+            this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripLabel2

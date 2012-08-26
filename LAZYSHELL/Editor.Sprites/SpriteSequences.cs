@@ -57,6 +57,16 @@ namespace LAZYSHELL
                     picture.Invalidate();
             }
         }
+        private List<int> indexes
+        {
+            get
+            {
+                List<int> array = new List<int>();
+                foreach (int indice in listBoxFrames.SelectedIndices)
+                    array.Add(indice);
+                return array;
+            }
+        }
         private List<Bitmap> sequenceImages = new List<Bitmap>();
         private Bitmap sequenceImage;
         private Bitmap frameImage;
@@ -65,6 +75,7 @@ namespace LAZYSHELL
         private ArrayList skip = new ArrayList();
         private int width = 256;
         private int height = 256;
+        private List<Sequence.Frame> copiedFrames;
         // special controls
         #endregion
         #region Functions
@@ -133,25 +144,12 @@ namespace LAZYSHELL
                 "and a duration, creating an animation that can be played \n" +
                 "back in the image to the right.");
 
-            this.newSequence.ToolTipText =
-                "Insert a new sequence after the currently selected \n" +
-                "sequence.";
-
-            this.deleteSequence.ToolTipText =
-                "Delete the currently selected sequence.";
-
             toolTip1.SetToolTip(this.listBoxFrames,
                 "The collection of frames used by the currently selected \n" +
                 "sequence at the left. Each frame is assigned a mold from \n" +
                 "the selection of molds under \"MOLDS\" and a duration, \n" +
                 "creating an animation that can be played back in the image \n" +
                 "to the right.");
-
-            this.newFrame.ToolTipText =
-                "Insert a new frame after the currently selected frame.";
-
-            this.deleteFrame.ToolTipText =
-                "Delete the currently selected frame.";
 
             this.frameMold.ToolTipText =
                 "The mold used by the currently selected frame. This value \n" +
@@ -162,12 +160,6 @@ namespace LAZYSHELL
                 "the frame will pause before the next frame starts. This \n" +
                 "value refers to the # of frames based on a 60-frames-per-\n" +
                 "second unit.";
-
-            this.moveFrameBack.ToolTipText =
-                "Move the currently selected frame back.";
-
-            this.moveFrameFoward.ToolTipText =
-                "Move the currently selected frame forward.";
         }
         private void RefreshSequence()
         {
@@ -236,7 +228,7 @@ namespace LAZYSHELL
             else
             {
                 frameMold.Enabled = false; frameMold.Value = 0;
-                duration.Enabled = false; duration.Value = 0;
+                duration.Enabled = false; duration.Value = 1;
                 sequenceImage = null;
             }
             updating = false;
@@ -349,7 +341,7 @@ namespace LAZYSHELL
                 Point point = new Point((frame.Width - (int)size.Width) / 2, (frame.Height - (int)size.Height) / 2);
                 Do.DrawString(e.Graphics, point, "(INVALID MOLD INDEX)", Color.Black, Color.Red, font);
             }
-            if (this.index == index)
+            if (this.indexes.Contains(index))
             {
                 e.Graphics.DrawRectangle(
                     new Pen(new SolidBrush(Color.Red)),
@@ -369,6 +361,13 @@ namespace LAZYSHELL
             PictureBox frame = (PictureBox)sender;
             frame.Focus();
             index = (int)frame.Tag;
+            if ((Control.ModifierKeys & Keys.Control) == 0) // multi-select if Ctrl pressed
+            {
+                updating = true;
+                listBoxFrames.ClearSelected();
+                listBoxFrames.SelectedIndex = index;
+                updating = false;
+            }
             if (panelFrames.HorizontalScroll.Visible)
                 panelFrames.HorizontalScroll.Value = index * (this.width + 4);
         }
@@ -376,9 +375,20 @@ namespace LAZYSHELL
         {
             if (PlaybackSequence.IsBusy) return;
             if (e.KeyData == Keys.Right || e.KeyData == Keys.Down)
+            {
                 index++;
+                updating = true;
+                listBoxFrames.ClearSelected();
+                listBoxFrames.SelectedIndex = index;
+            }
             if (e.KeyData == Keys.Left || e.KeyData == Keys.Up)
+            {
                 index--;
+                updating = true;
+                listBoxFrames.ClearSelected();
+                listBoxFrames.SelectedIndex = index;
+            }
+            updating = false;
             if (panelFrames.HorizontalScroll.Visible)
                 panelFrames.HorizontalScroll.Value = index * (this.width + 4);
         }
@@ -436,10 +446,18 @@ namespace LAZYSHELL
         private void back_Click(object sender, EventArgs e)
         {
             index--;
+            updating = true;
+            listBoxFrames.ClearSelected();
+            listBoxFrames.SelectedIndex = index;
+            updating = false;
         }
         private void foward_Click(object sender, EventArgs e)
         {
             index++;
+            updating = true;
+            listBoxFrames.ClearSelected();
+            listBoxFrames.SelectedIndex = index;
+            updating = false;
         }
         private void PlaybackSequence_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -593,9 +611,17 @@ namespace LAZYSHELL
             toolStrip1.Enabled = duplicateFrame.Enabled = deleteFrame.Enabled =
                 moveFrameBack.Enabled = moveFrameFoward.Enabled = reverseFrames.Enabled = true;
         }
-        private void duplicateFrame_Click(object sender, EventArgs e)
+        private void copy_Click(object sender, EventArgs e)
         {
-            if (sequence.Frames.Count == 256)
+            if (listBoxFrames.SelectedIndices.Count == 0)
+                return;
+            copiedFrames = new List<Sequence.Frame>();
+            foreach (int indice in listBoxFrames.SelectedIndices)
+                copiedFrames.Add(sequence.Frames[indice].Copy());
+        }
+        private void paste_Click(object sender, EventArgs e)
+        {
+            if (sequence.Frames.Count + copiedFrames.Count >= 256)
             {
                 MessageBox.Show("Sequences cannot contain more than 256 frames total.", "LAZY SHELL",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -606,28 +632,41 @@ namespace LAZYSHELL
                 index = this.index + 1;
             else
                 index = this.index;
-            sequence.Frames.Insert(index, this.frame.Copy());
+            foreach (Sequence.Frame frame in copiedFrames)
+                sequence.Frames.Insert(index++, frame);
+            index -= copiedFrames.Count;
+            //
             DrawFrames();
             RefreshFrame();
             SetSequenceFrameImages();
-            this.index = index;
+            foreach (Sequence.Frame frame in copiedFrames)
+                listBoxFrames.SetSelected(index++, true);
             // update free space
             animation.Assemble();
             spritesEditor.CalculateFreeSpace();
             toolStrip1.Enabled = duplicateFrame.Enabled = deleteFrame.Enabled =
                 moveFrameBack.Enabled = moveFrameFoward.Enabled = reverseFrames.Enabled = true;
         }
+        private void duplicateFrame_Click(object sender, EventArgs e)
+        {
+            copy_Click(null, null);
+            paste_Click(null, null);
+        }
         private void deleteFrame_Click(object sender, EventArgs e)
         {
-            int index = this.index;
-            sequence.Frames.RemoveAt(index);
-            frames.Controls.RemoveAt(index);
-            sequenceImages.RemoveAt(index);
-            listBoxFrames.Items.RemoveAt(index);
+            List<int> indexes = this.indexes;
+            for (int i = indexes.Count - 1; i >= 0; i--)
+            {
+                sequence.Frames.RemoveAt(indexes[i]);
+                frames.Controls.RemoveAt(indexes[i]);
+                sequenceImages.RemoveAt(indexes[i]);
+                listBoxFrames.Items.RemoveAt(indexes[i]);
+            }
             if (index >= sequence.Frames.Count && sequence.Frames.Count != 0)
-                this.index = index - 1;
+                this.index = sequence.Frames.Count - 1;
             else if (sequence.Frames.Count != 0)
                 this.index = index;
+            //
             RefreshFrame();
             RealignFrames();
             // update free space
@@ -639,21 +678,31 @@ namespace LAZYSHELL
         }
         private void moveFrameBack_Click(object sender, EventArgs e)
         {
-            if (this.index == 0) return;
-            int index = this.index - 1;
-            sequence.Frames.Reverse(index, 2);
-            sequenceImages.Reverse(index, 2);
+            if (this.indexes[0] == 0)
+                return;
+            List<int> indexes = this.indexes;
+            for (int i = 0; i < indexes.Count; i++)
+            {
+                listBoxFrames.SetSelected(indexes[i], false);
+                listBoxFrames.SetSelected(indexes[i] - 1, true);
+                sequence.Frames.Reverse(indexes[i] - 1, 2);
+                sequenceImages.Reverse(indexes[i] - 1, 2);
+            }
             RealignFrames();
-            this.index--;
         }
         private void moveFrameFoward_Click(object sender, EventArgs e)
         {
-            if (this.index == sequence.Frames.Count - 1) return;
-            int index = this.index;
-            sequence.Frames.Reverse(index, 2);
-            sequenceImages.Reverse(index, 2);
+            if (this.indexes[this.indexes.Count - 1] >= listBoxFrames.Items.Count - 1)
+                return;
+            List<int> indexes = this.indexes;
+            for (int i = indexes.Count - 1; i >= 0; i--)
+            {
+                listBoxFrames.SetSelected(indexes[i], false);
+                listBoxFrames.SetSelected(indexes[i] + 1, true);
+                sequence.Frames.Reverse(indexes[i], 2);
+                sequenceImages.Reverse(indexes[i], 2);
+            }
             RealignFrames();
-            this.index++;
         }
         private void reverseFrames_Click(object sender, EventArgs e)
         {

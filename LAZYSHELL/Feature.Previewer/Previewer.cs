@@ -10,7 +10,7 @@ using System.Collections;
 using LAZYSHELL.Properties;
 using LAZYSHELL.ScriptsEditor;
 
-namespace LAZYSHELL.Previewer
+namespace LAZYSHELL
 {
     public partial class Previewer : Form
     {
@@ -22,20 +22,13 @@ namespace LAZYSHELL.Previewer
         private int selectNum;
         private ArrayList eventTriggers;
         private bool snes9x;
-        private int behavior;
+        private PreviewType behavior;
         private bool updating = false;
         private int category;
         private int index;
+        private bool automatic = false;
+        private byte[] soundFX;
         //
-        private enum Behaviors
-        {
-            EventPreviewer,
-            LevelPreviewer,
-            ActionPreviewer,
-            BattlePreviewer,
-            AnimationPreviewer,
-            MineCartPreviewer
-        }
         private byte[] maxStats = new byte[]
         {
             0x1E,0xE7,0x03,0xE7,0x03,0xFF,0xFF,0xFF,0xFF,0xFF,0x0F,0x27,0x21,0x45,0x51,0x00,0x3F,0x00,0x00,0x00,
@@ -53,7 +46,7 @@ namespace LAZYSHELL.Previewer
         private static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
         #endregion
         // Constructor
-        public Previewer(int num, int behaviour)
+        public Previewer(int num, PreviewType behaviour)
         {
             this.selectNum = num;
             this.eventTriggers = new ArrayList();
@@ -84,7 +77,7 @@ namespace LAZYSHELL.Previewer
 
             this.selectNum = index;
             this.eventTriggers = new ArrayList();
-            this.behavior = 4;
+            this.behavior = PreviewType.Animation;
             InitializeComponent();
             InitializePreviewer();
             this.emulator = GetEmulator();
@@ -101,7 +94,33 @@ namespace LAZYSHELL.Previewer
                 }
             }
         }
-        public void Reload(int num, int behaviour)
+        public Previewer(int index, bool automatic, PreviewType behavior) // SPC Previewer
+        {
+            this.index = index;
+
+            this.selectNum = index;
+            this.eventTriggers = new ArrayList();
+            this.behavior = behavior;
+            this.automatic = automatic;
+            InitializeComponent();
+            InitializePreviewer();
+            this.emulator = GetEmulator();
+            if (index == 0)
+                this.selectNumericUpDown_ValueChanged(null, null);
+            UpdateGUI();
+            if (settings.PreviewFirstTime)
+            {
+                DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews. Doing so will yield unpredictable results.\n\nDo you understand?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    settings.PreviewFirstTime = false;
+                    settings.Save();
+                }
+            }
+            if (automatic)
+                launchButton_Click(null, null);
+        }
+        public void Reload(int num, PreviewType behaviour)
         {
             if (this.selectNum == num && this.behavior == behaviour)
                 return;
@@ -112,7 +131,7 @@ namespace LAZYSHELL.Previewer
             InitializePreviewer();
 
             this.emulator = GetEmulator();
-            if (num == 0)
+            if (this.selectNumericUpDown.Value == selectNum)
                 this.selectNumericUpDown_ValueChanged(null, null);
             UpdateGUI();
 
@@ -133,7 +152,7 @@ namespace LAZYSHELL.Previewer
 
             this.selectNum = index;
             this.eventTriggers = new ArrayList();
-            this.behavior = 4;
+            this.behavior = PreviewType.Animation;
             InitializePreviewer();
             this.emulator = GetEmulator();
             if (index == 0)
@@ -149,6 +168,31 @@ namespace LAZYSHELL.Previewer
                 }
             }
         }
+        public void Reload(int index, bool automatic, PreviewType behavior)
+        {
+            this.index = index;
+
+            this.selectNum = index;
+            this.eventTriggers = new ArrayList();
+            this.behavior = behavior;
+            this.automatic = automatic;
+            InitializePreviewer();
+            this.emulator = GetEmulator();
+            if (index == 0)
+                this.selectNumericUpDown_ValueChanged(null, null);
+            UpdateGUI();
+            if (settings.PreviewFirstTime)
+            {
+                DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews. Doing so will yield unpredictable results.\n\nDo you understand?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    settings.PreviewFirstTime = false;
+                    settings.Save();
+                }
+            }
+            if (automatic)
+                launchButton_Click(null, null);
+        }
         #region Functions
         private void InitializePreviewer()
         {
@@ -156,49 +200,56 @@ namespace LAZYSHELL.Previewer
             this.zsnesArgs.Text = settings.PreviewArguments;
             this.dynamicROMPath.Checked = settings.PreviewDynamicRomName;
             this.level.Value = settings.PreviewLevel;
-            if (behavior == (int)Behaviors.EventPreviewer)
+            if (behavior == PreviewType.Event)
             {
                 this.Text = "PREVIEW EVENT - Lazy Shell";
                 this.label1.Text = "Event #";
                 this.selectNumericUpDown.Maximum = 4095;
-                this.groupBox2.Visible = false;
+                this.groupBox2.Enabled = false;
             }
-            else if (behavior == (int)Behaviors.LevelPreviewer)
+            else if (behavior == PreviewType.Level)
             {
                 this.Text = "PREVIEW LEVEL - Lazy Shell";
                 this.label1.Text = "Level #";
                 this.selectNumericUpDown.Maximum = 511;
-                this.groupBox2.Visible = false;
+                this.groupBox2.Enabled = false;
             }
-            else if (behavior == (int)Behaviors.MineCartPreviewer)
+            else if (behavior == PreviewType.MineCart)
             {
                 this.Text = "PREVIEW MINE CART - Lazy Shell";
                 this.selectNumericUpDown.Enabled = false;
-                this.groupBox1.Visible = false;
-                this.groupBox2.Visible = false;
+                this.groupBox1.Enabled = false;
+                this.groupBox2.Enabled = false;
             }
-            else if (behavior == (int)Behaviors.ActionPreviewer)
+            else if (behavior == PreviewType.Action)
             {
                 this.Text = "PREVIEW ACTION - Lazy Shell";
                 this.label1.Text = "Action #";
                 this.selectNumericUpDown.Maximum = 1023;
-                this.groupBox2.Visible = false;
+                this.groupBox2.Enabled = false;
             }
-            else if (behavior == (int)Behaviors.BattlePreviewer)
+            else if (behavior == PreviewType.Battle)
             {
                 this.Text = "PREVIEW BATTLE - Lazy Shell";
                 this.label1.Text = "Monster #";
                 this.selectNumericUpDown.Maximum = 255;
 
-                this.groupBox1.Visible = false;
+                this.groupBox1.Enabled = false;
                 this.groupBox2.Enabled = true;
 
                 this.battleBGListBox.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
-                this.battleBGListBox.Visible = true;
+                this.battleBGListBox.Enabled = true;
                 this.battleBGListBox.Enabled = true;
                 this.battleBGListBox.SelectedIndex = settings.PreviewBattlefield;
             }
-            else if (behavior == (int)Behaviors.AnimationPreviewer)
+            else if (behavior == PreviewType.SPCBattle ||
+                behavior == PreviewType.SPCEvent ||
+                behavior == PreviewType.SPCTrack)
+            {
+                groupBox1.Enabled = false;
+                groupBox2.Enabled = false;
+            }
+            else if (behavior == PreviewType.Animation)
             {
                 this.Text = "PREVIEW ANIMATION - Lazy Shell";
                 this.label1.Text = "Monster #";
@@ -253,9 +304,8 @@ namespace LAZYSHELL.Previewer
                     bs.CommandIndex = 0;
                 }
             Finish:
-                this.groupBox1.Visible = false;
+                this.groupBox1.Enabled = false;
                 this.battleBGListBox.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
-                this.battleBGListBox.Visible = true;
                 this.battleBGListBox.Enabled = true;
                 this.battleBGListBox.SelectedIndex = settings.PreviewBattlefield;
             }
@@ -341,7 +391,7 @@ namespace LAZYSHELL.Previewer
             for (int i = 0; i < eventTriggers.Count; i++)
             {
                 ent = (Entrance)eventTriggers[i];
-                if (this.behavior == (int)Behaviors.EventPreviewer)
+                if (this.behavior == PreviewType.Event)
                 {
                     if (ent.Flag)
                         this.eventListBox.Items.Add(
@@ -356,7 +406,7 @@ namespace LAZYSHELL.Previewer
                             " z:" + ent.CoordZ.ToString() +
                             ") " + Lists.Numerize(settings.LevelNames, ent.LevelNum));
                 }
-                else if (this.behavior == (int)Behaviors.LevelPreviewer)
+                else if (this.behavior == PreviewType.Level)
                 {
                     this.eventListBox.Items.Add(
                         "(x:" + ent.CoordX.ToString() +
@@ -364,11 +414,11 @@ namespace LAZYSHELL.Previewer
                         " z:" + ent.CoordZ.ToString() +
                         ") " + Lists.Numerize(settings.LevelNames, ent.Source));
                 }
-                else if (this.behavior == (int)Behaviors.MineCartPreviewer)
+                else if (this.behavior == PreviewType.MineCart)
                 {
 
                 }
-                else if (this.behavior == (int)Behaviors.ActionPreviewer)
+                else if (this.behavior == PreviewType.Action)
                 {
                     if (ent.Flag)
                         this.eventListBox.Items.Add(
@@ -385,14 +435,14 @@ namespace LAZYSHELL.Previewer
                             " z:" + ent.CoordZ.ToString() +
                             ") " + Lists.Numerize(settings.LevelNames, ent.LevelNum));
                 }
-                else if (this.behavior == (int)Behaviors.BattlePreviewer)
+                else if (this.behavior == PreviewType.Battle)
                 {
                     this.eventListBox.Items.Add(ent.msg);
                 }
             }
             if (this.eventListBox.Items.Count > 0)
             {
-                if (this.behavior == (int)Behaviors.BattlePreviewer && this.eventListBox.Items.Count > 1)
+                if (this.behavior == PreviewType.Battle && this.eventListBox.Items.Count > 1)
                     this.eventListBox.SelectedIndex = 1;
                 else
                     this.eventListBox.SelectedIndex = 0;
@@ -437,18 +487,28 @@ namespace LAZYSHELL.Previewer
             Model.EditTileSets.CopyTo(editTileSets, 0);
             Model.EditTileMaps.CopyTo(editTileMaps, 0);
             Model.EditSolidityMaps.CopyTo(editSolidityMaps, 0);
-            if (!((this.behavior == (int)Behaviors.EventPreviewer || this.behavior == (int)Behaviors.ActionPreviewer) &&
+            if (!((this.behavior == PreviewType.Event || this.behavior == PreviewType.Action) &&
                 this.eventListBox.SelectedIndex < 0 || this.eventListBox.SelectedIndex >= this.eventTriggers.Count))
             {
-                if (this.behavior == (int)Behaviors.BattlePreviewer)
+                if (this.behavior == PreviewType.Battle)
                     Model.Program.Monsters.Assemble();
-                if (this.behavior == (int)Behaviors.EventPreviewer ||
-                    this.behavior == (int)Behaviors.ActionPreviewer)
+                if (this.behavior == PreviewType.Event ||
+                    this.behavior == PreviewType.Action)
                     Model.Program.EventScripts.Assemble();
-                if (this.behavior == (int)Behaviors.LevelPreviewer)
+                if (this.behavior == PreviewType.Level)
                     Model.Program.Levels.Assemble();
-                if (this.behavior == (int)Behaviors.MineCartPreviewer)
+                if (this.behavior == PreviewType.MineCart)
                     Model.Program.MiniGames.Assemble();
+                if (this.behavior == PreviewType.SPCTrack ||
+                    this.behavior == PreviewType.SPCEvent ||
+                    this.behavior == PreviewType.SPCBattle)
+                {
+                    Model.Program.Audio.Assemble(false);
+                    if (this.behavior == PreviewType.SPCEvent)
+                        soundFX = Bits.GetByteArray(Model.Data, 0x042826, 0x1600);
+                    else if (this.behavior == PreviewType.SPCBattle)
+                        soundFX = Bits.GetByteArray(Model.Data, 0x043E26, 0x1600);
+                }
                 PrepareImage();
                 // Backup filename
                 string fileNameBackup = Model.FileName;
@@ -584,8 +644,11 @@ namespace LAZYSHELL.Previewer
                     }
                 }
                 // if previewing item, add item to inventory
-                if (behavior == (int)Behaviors.AnimationPreviewer && category == 4)
+                if (behavior == PreviewType.Animation && category == 4)
                     state[snes9x ? 0x30509 : 0x20495] = (byte)index;
+                if (behavior == PreviewType.SPCEvent ||
+                    behavior == PreviewType.SPCBattle)
+                    Buffer.BlockCopy(soundFX, 0, state, snes9x ? 0x5BDA4 : 0x33C13, 0x1600);
 
                 offset = snes9x ? 0x53C9D : 0x41533;
 
@@ -621,9 +684,9 @@ namespace LAZYSHELL.Previewer
             Entrance ent = new Entrance();
             int index = this.eventListBox.SelectedIndex;
 
-            if ((this.behavior == (int)Behaviors.EventPreviewer ||
-                this.behavior == (int)Behaviors.ActionPreviewer ||
-                this.behavior == (int)Behaviors.BattlePreviewer) &&
+            if ((this.behavior == PreviewType.Event ||
+                this.behavior == PreviewType.Action ||
+                this.behavior == PreviewType.Battle) &&
                 index < 0 || index >= this.eventTriggers.Count)
             {
                 this.eventchoice = false;
@@ -644,9 +707,9 @@ namespace LAZYSHELL.Previewer
                 storage.DestFace = 7;
                 storage.ShowMessage = false;
             }
-            if (this.behavior == (int)Behaviors.LevelPreviewer)
+            if (this.behavior == PreviewType.Level)
                 storage.Destination = Math.Min((ushort)509, (ushort)this.selectNumericUpDown.Value);
-            else if (this.behavior == (int)Behaviors.EventPreviewer || this.behavior == (int)Behaviors.ActionPreviewer)
+            else if (this.behavior == PreviewType.Event || this.behavior == PreviewType.Action)
                 storage.Destination = ent.LevelNum;
             storage.ExitType = 0;
             storage.Y = 10;
@@ -655,21 +718,22 @@ namespace LAZYSHELL.Previewer
             storage.DestZ = (byte)this.adjustZNumericUpDown.Value;
 
             ushort save = Model.Levels[storage.Destination].LevelEvents.EntranceEvent;
+            byte saveMusic = Model.Levels[0].LevelEvents.Music;
             Model.Levels[storage.Destination].LevelEvents.EntranceEvent = 0;
-            if (this.behavior == (int)Behaviors.BattlePreviewer)
+            if (this.behavior == PreviewType.Battle)
             {
                 PrepareBattlePack(ent.Source);
                 byte[] eventData = new byte[] { 0x4A, 0x00, 0x00, 0x00, 0xFE };
                 eventData[3] = (byte)this.battleBGListBox.SelectedIndex;
                 eventData.CopyTo(Model.Data, 0x1E0C00);
             }
-            else if (this.behavior == (int)Behaviors.LevelPreviewer)
+            else if (this.behavior == PreviewType.Level)
             {
                 byte[] command = new byte[] { 0xD0, 0, 0 };
                 Bits.SetShort(command, 1, save);
                 command.CopyTo(Model.Data, 0x1E0C00);
             }
-            else if (this.behavior == (int)Behaviors.MineCartPreviewer)
+            else if (this.behavior == PreviewType.MineCart)
             {
                 byte[] eventData = new byte[] { 0xFD, 0x4E };
                 eventData.CopyTo(Model.Data, 0x1E0C00);
@@ -681,7 +745,7 @@ namespace LAZYSHELL.Previewer
                     case 3: Model.Data[0x0393EA] = 4; break;
                 }
             }
-            else if (this.behavior == (int)Behaviors.AnimationPreviewer)
+            else if (this.behavior == PreviewType.Animation)
             {
                 int monsterNum = (int)selectNumericUpDown.Value;
                 PrepareBattlePack(0xFFFF);
@@ -702,11 +766,24 @@ namespace LAZYSHELL.Previewer
                         new byte[] { (byte)this.index, 0xEC, 0xFF, 0xFF }.CopyTo(Model.Data, offset);
                 }
             }
+            else if (this.behavior == PreviewType.SPCTrack)
+                Model.Levels[storage.Destination].LevelEvents.Music = (byte)this.index;
+            else if (this.behavior == PreviewType.SPCEvent)
+            {
+                Model.Levels[storage.Destination].LevelEvents.Music = 53;
+                new byte[] { 0x9C, (byte)this.index }.CopyTo(Model.Data, 0x1E0C00);
+            }
+            else if (this.behavior == PreviewType.SPCBattle)
+            {
+                Model.Levels[0].LevelEvents.Music = 53;
+                new byte[] { 0x9C, (byte)this.index }.CopyTo(Model.Data, 0x1E0C00);
+            }
             else
                 new byte[] { 0x70, 0xFE }.CopyTo(Model.Data, 0x1E0C00);
 
             SaveLevelExitEvents();
             Model.Levels[storage.Destination].LevelEvents.EntranceEvent = save;
+            Model.Levels[storage.Destination].LevelEvents.Music = saveMusic;
 
             storage.Assemble(0x3166);
             this.eventchoice = true;
@@ -718,43 +795,43 @@ namespace LAZYSHELL.Previewer
             {
                 int formationIndex = 4;
 
-                byte monster1 = Model.Formations[formationIndex].FormationMonster[0];
-                byte xcoord = Model.Formations[formationIndex].FormationCoordX[0];
-                byte ycoord = Model.Formations[formationIndex].FormationCoordY[0];
-                Model.Formations[formationIndex].FormationCoordX[0] = 167;
-                Model.Formations[formationIndex].FormationCoordY[0] = 135;
-                Model.Formations[formationIndex].FormationMonster[0] = (byte)this.selectNumericUpDown.Value;
+                byte monster1 = Model.Formations[formationIndex].Monster[0];
+                byte xcoord = Model.Formations[formationIndex].X[0];
+                byte ycoord = Model.Formations[formationIndex].Y[0];
+                Model.Formations[formationIndex].X[0] = 167;
+                Model.Formations[formationIndex].Y[0] = 135;
+                Model.Formations[formationIndex].Monster[0] = (byte)this.selectNumericUpDown.Value;
                 bool[] uses = new bool[8];
-                uses[0] = Model.Formations[formationIndex].FormationUse[0];
-                uses[1] = Model.Formations[formationIndex].FormationUse[1];
-                uses[2] = Model.Formations[formationIndex].FormationUse[2];
-                uses[3] = Model.Formations[formationIndex].FormationUse[3];
-                uses[4] = Model.Formations[formationIndex].FormationUse[4];
-                uses[5] = Model.Formations[formationIndex].FormationUse[5];
-                uses[6] = Model.Formations[formationIndex].FormationUse[6];
-                uses[7] = Model.Formations[formationIndex].FormationUse[7];
-                Model.Formations[formationIndex].FormationUse[0] = true;
-                Model.Formations[formationIndex].FormationUse[1] = false;
-                Model.Formations[formationIndex].FormationUse[2] = false;
-                Model.Formations[formationIndex].FormationUse[3] = false;
-                Model.Formations[formationIndex].FormationUse[4] = false;
-                Model.Formations[formationIndex].FormationUse[5] = false;
-                Model.Formations[formationIndex].FormationUse[6] = false;
-                Model.Formations[formationIndex].FormationUse[7] = false;
+                uses[0] = Model.Formations[formationIndex].Use[0];
+                uses[1] = Model.Formations[formationIndex].Use[1];
+                uses[2] = Model.Formations[formationIndex].Use[2];
+                uses[3] = Model.Formations[formationIndex].Use[3];
+                uses[4] = Model.Formations[formationIndex].Use[4];
+                uses[5] = Model.Formations[formationIndex].Use[5];
+                uses[6] = Model.Formations[formationIndex].Use[6];
+                uses[7] = Model.Formations[formationIndex].Use[7];
+                Model.Formations[formationIndex].Use[0] = true;
+                Model.Formations[formationIndex].Use[1] = false;
+                Model.Formations[formationIndex].Use[2] = false;
+                Model.Formations[formationIndex].Use[3] = false;
+                Model.Formations[formationIndex].Use[4] = false;
+                Model.Formations[formationIndex].Use[5] = false;
+                Model.Formations[formationIndex].Use[6] = false;
+                Model.Formations[formationIndex].Use[7] = false;
 
                 Model.Formations[formationIndex].Assemble();
 
-                Model.Formations[formationIndex].FormationMonster[0] = monster1;
-                Model.Formations[formationIndex].FormationCoordX[0] = xcoord;
-                Model.Formations[formationIndex].FormationCoordY[0] = ycoord;
-                Model.Formations[formationIndex].FormationUse[0] = uses[0];
-                Model.Formations[formationIndex].FormationUse[1] = uses[1];
-                Model.Formations[formationIndex].FormationUse[2] = uses[2];
-                Model.Formations[formationIndex].FormationUse[3] = uses[3];
-                Model.Formations[formationIndex].FormationUse[4] = uses[4];
-                Model.Formations[formationIndex].FormationUse[5] = uses[5];
-                Model.Formations[formationIndex].FormationUse[6] = uses[6];
-                Model.Formations[formationIndex].FormationUse[7] = uses[7];
+                Model.Formations[formationIndex].Monster[0] = monster1;
+                Model.Formations[formationIndex].X[0] = xcoord;
+                Model.Formations[formationIndex].Y[0] = ycoord;
+                Model.Formations[formationIndex].Use[0] = uses[0];
+                Model.Formations[formationIndex].Use[1] = uses[1];
+                Model.Formations[formationIndex].Use[2] = uses[2];
+                Model.Formations[formationIndex].Use[3] = uses[3];
+                Model.Formations[formationIndex].Use[4] = uses[4];
+                Model.Formations[formationIndex].Use[5] = uses[5];
+                Model.Formations[formationIndex].Use[6] = uses[6];
+                Model.Formations[formationIndex].Use[7] = uses[7];
                 formationNum = formationIndex;
             }
 
@@ -908,21 +985,21 @@ namespace LAZYSHELL.Previewer
         }
         private bool ScanFormation(int monsterNum, Formation sfm)
         {
-            if (sfm.FormationMonster[0] == monsterNum && sfm.FormationUse[0])
+            if (sfm.Monster[0] == monsterNum && sfm.Use[0])
                 return true;
-            else if (sfm.FormationMonster[1] == monsterNum && sfm.FormationUse[1])
+            else if (sfm.Monster[1] == monsterNum && sfm.Use[1])
                 return true;
-            else if (sfm.FormationMonster[2] == monsterNum && sfm.FormationUse[2])
+            else if (sfm.Monster[2] == monsterNum && sfm.Use[2])
                 return true;
-            else if (sfm.FormationMonster[3] == monsterNum && sfm.FormationUse[3])
+            else if (sfm.Monster[3] == monsterNum && sfm.Use[3])
                 return true;
-            else if (sfm.FormationMonster[4] == monsterNum && sfm.FormationUse[4])
+            else if (sfm.Monster[4] == monsterNum && sfm.Use[4])
                 return true;
-            else if (sfm.FormationMonster[5] == monsterNum && sfm.FormationUse[5])
+            else if (sfm.Monster[5] == monsterNum && sfm.Use[5])
                 return true;
-            else if (sfm.FormationMonster[6] == monsterNum && sfm.FormationUse[6])
+            else if (sfm.Monster[6] == monsterNum && sfm.Use[6])
                 return true;
-            else if (sfm.FormationMonster[7] == monsterNum && sfm.FormationUse[7])
+            else if (sfm.Monster[7] == monsterNum && sfm.Use[7])
                 return true;
             return false;
         }
@@ -984,15 +1061,13 @@ namespace LAZYSHELL.Previewer
         }
         private void changeEmuButton_Click(object sender, EventArgs e)
         {
-            string path = SelectFile("exe files (*.exe)|*.exe|All files (*.*)|*.*", "C:\\", "Select Emulator");
-
+            string path = SelectFile("exe files (*.exe)|*.exe|All files (*.*)|*.*", settings.LastDirectory, "Select Emulator");
             if (path == null || !path.EndsWith(".exe"))
                 return;
-
             FileInfo fi = new FileInfo(path);
-
             if (fi.Exists)
             {
+                settings.LastDirectory = Path.GetDirectoryName(path);
                 this.emulatorPath = path;
                 this.emulator = true;
                 settings.ZSNESPath = this.emulatorPath;
@@ -1016,19 +1091,19 @@ namespace LAZYSHELL.Previewer
         private void selectNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             this.selectNum = (int)selectNumericUpDown.Value;
-            if (this.behavior == (int)Behaviors.EventPreviewer)
+            if (this.behavior == PreviewType.Event)
                 ScanForEvents();
-            else if (this.behavior == (int)Behaviors.LevelPreviewer)
+            else if (this.behavior == PreviewType.Level)
             {
                 this.eventTriggers.Clear();
                 ScanForEntrancesToLevel((int)selectNumericUpDown.Value);
             }
-            else if (this.behavior == (int)Behaviors.ActionPreviewer)
+            else if (this.behavior == PreviewType.Action)
             {
                 this.eventTriggers.Clear();
                 ScanForActionReferences((int)selectNumericUpDown.Value);
             }
-            else if (this.behavior == (int)Behaviors.BattlePreviewer)
+            else if (this.behavior == PreviewType.Battle)
             {
                 this.eventTriggers.Clear();
                 ScanFormationsForMonster((int)this.selectNumericUpDown.Value);

@@ -1,6 +1,6 @@
 LAZY SHELL - Super Mario RPG Editor
-Version: 3.11.1
-Date: August 12, 2012
+Version: 3.12.0
+Date: August 26, 2012
 Home Page: http://home.comcast.net/~giangurgolo/smrpg/
 Written by giangurgolo and Omega
 
@@ -64,12 +64,15 @@ font table based upon manual editing or a supportive font installed
 on the OS.
 
 In the World Maps editor World maps, world map palettes, and the 
-locations that appear on world maps can be modified.
+locations that appear on world maps can be modified. The logo banner
+graphics and palettes can be modified as well.
 
-The Audio editor can export, import, clear, and playback the audio
-samples used by the ROM's SPC engine. Importing/exporting features
-are limited to .wav files, which can be edited in a third party 
-freeware application such as Audacity.
+The Audio editor can export, import, clear, and playback the audio 
+samples used by the SPC engine. The .wav files can be edited in a third 
+party program such as Audacity. SPC data can be edited in a variety of 
+ways, allowing the user to create entirely new pieces of music. 
+Instruments can be changed as well as well as the raw SPC track data, 
+which can even import custom scripts from a text document.
 
 The mini-games editor so far can modify the minecart mini game maps
 for all four stages and the objects in the same manner as levels. The
@@ -128,12 +131,11 @@ ______________________________________________________________________
 UNSUPPORTED FEATURES
 ______________________________________________________________________
 
-Lazy Shell can NOT edit raw SPC music/sfx data, the new game intro 
-sequence and graphics, the end credits graphics, or battle and end 
-credits fonts. It cannot make any changes to 65c816 assembly code in 
-the ROM image (with the exception of defense timing). Additionally, 
-ROM expansion is also not supported by the application due to the 
-complications of the SA-1 chip in the game's engine.
+Lazy Shell can NOT edit the new game intro sequence and graphics, the 
+end credits graphics, or end credits fonts. It cannot make any changes 
+to 65c816 assembly code in the ROM image (with some small exceptions). 
+Additionally, ROM expansion is also not supported by the application due 
+to the complications of the SA-1 chip in the game's engine.
 
 ______________________________________________________________________
 
@@ -143,16 +145,49 @@ ______________________________________________________________________
 Before using the previewer, do the following:
 
 1. Make sure all editor files are in the same folder.
-2. Move the emulators into the same folder as the editor files.
-3. Configure the emulators to read and save into the same folder that
-   the emulators and the editor files are in.
+2. Configure the emulator's save-state folder to read/write to the same 
+   folder as any loaded ROM. ZSNES by default already does this, and so 
+   does Snes9x v1.43. However, later versions of Snes9x will by default 
+   read/write to a "Save" folder created within the emulator's main folder, 
+   and if not changed it will fail to load the preview save state.
 
 Choose either the SNES9X or ZSNES emulator file to use when opening the
 previewer. ZSNES will automatically load the generated save state when 
 the emulator is loaded from the previewer, but for SNES9X the F1 key 
 must be pressed manually to load the generated save state. If the
-emulator has problems loading the save state, make sure the 3 steps
+emulator has problems loading the save state, make sure the 2 steps
 above have been completed.
+
+The latest version of ZSNES (v1.51 as of this release) is supported. 
+Snes9x v1.43 and/or its derivatives (rerecord, Geiger's debugger, etc.) 
+are preferred and should work.
+
+______________________________________________________________________
+
+USING THE AUDIO EDITOR
+______________________________________________________________________
+
+TIPS: follow these steps to successfully import a .WAV file of your 
+choosing. Say you have a .WAV file, "MyWavFile.wav", that you wish to 
+replace one of the samples in this audio editor with. Here are the steps 
+you need to take: 
+
+1. Download and install Audacity, a good free audio editing program.
+     http://audacity.sourceforge.net/download/
+2. In the Lazy Shell audio editor, export any sample to a file named "OldSample.wav".
+3. Open "MyWavFile.wav" into Audacity.
+4. While in Audacity, copy the audio data (Ctrl+A, Ctrl+C). Close Audacity.
+5. Open "OldSample.wav" into Audacity.
+6. While in Audacity, paste the copied audio data over the old data (Ctrl+A, Ctrl+V).
+7. Export to a .WAV file named "NewSample.wav".
+8. In the Lazy Shell audio editor, import "NewSample.wav".
+MAKE SURE THE SELECTED Hz SAMPLE RATE IS THE SAME AS THE IMPORTED .WAV FILE.
+
+The reason this is the only way to do it is because by using the same 
+exported file ("OldSample.wav") with the modified WAV data from 
+"MyWavFile.wav", it retains some obscure data from "OldSample.wav" in 
+"NewSample.wav" which is necessary to have in order to successfully 
+import a .WAV file. 
 
 ______________________________________________________________________
 
@@ -456,11 +491,24 @@ AUDIO EDITOR
 ¯¯¯¯¯¯¯¯¯¯¯¯
 Q: Is there any way to add music to a SMRPG Rom?
 A: Not in Lazy Shell; you can only modify the audio samples used by
-   the music SPCs.
+   the music SPCs and the SPC instruments and tracks, not add new ones.
 
 Q: Can I add sound effects?
 A: Sound effects are also SPCs that use audio samples. Therefore the
    answer is no, like the above question.
+   
+Q: I changed the instrument but it's muted in-game!
+A: If the instrument is included among the percussives, you'll have to
+   change the instrument index for the percussive as well.
+   
+Q: I modified some sound effects, but I can't hear any changes.
+A: If you're loading from a save state outside of Lazy Shell, then the
+   audio memory contained in the save state won't have the changes you
+   made. This is because during sound effect playback the data is read
+   from the memory instead of directly from the ROM, and all sound effect
+   data is stored to memory when the ROM starts. The previewer, though,
+   will let you hear the changes since the modified data is stored into 
+   the preview save state's audio memory.
 ________________
 DIALOGUES EDITOR
 ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯

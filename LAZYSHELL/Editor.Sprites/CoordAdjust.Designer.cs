@@ -78,7 +78,7 @@
             this.buttonOK.Location = new System.Drawing.Point(12, 62);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 2;
+            this.buttonOK.TabIndex = 3;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -89,7 +89,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(93, 62);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 3;
+            this.buttonCancel.TabIndex = 4;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -101,7 +101,7 @@
             this.applyToAll.Location = new System.Drawing.Point(12, 39);
             this.applyToAll.Name = "applyToAll";
             this.applyToAll.Size = new System.Drawing.Size(109, 17);
-            this.applyToAll.TabIndex = 4;
+            this.applyToAll.TabIndex = 2;
             this.applyToAll.Text = "Apply to all molds";
             this.applyToAll.UseVisualStyleBackColor = true;
             this.applyToAll.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CoordAdjust_KeyDown);

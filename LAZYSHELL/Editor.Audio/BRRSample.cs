@@ -15,6 +15,11 @@ namespace LAZYSHELL
         public override int Index { get { return index; } set { index = value; } }
         private byte[] sample;
         public byte[] Sample { get { return sample; } set { sample = value; } }
+        private int loopStart;
+        public int LoopStart { get { return loopStart; } set { loopStart = value; } }
+        private int relativeVolume;
+        private int relativeFrequency;
+        public int RelativeFrequency { get { return relativeFrequency; } set { relativeFrequency = value; } }
         public int Length
         {
             get
@@ -33,6 +38,23 @@ namespace LAZYSHELL
             offset -= 0xC00000;
             int size = Bits.GetShort(data, offset); offset += 2;
             sample = Bits.GetByteArray(data, offset, size);
+            loopStart = Bits.GetShort(data, index * 2 + 0x04248F);
+            relativeVolume = (short)Bits.GetShort(data, index * 2 + 0x042577);
+            relativeFrequency = (short)Bits.GetShort(data, index * 2 + 0x04265F);
+        }
+        public byte[] GetLoop()
+        {
+            if (sample == null || loopStart >= sample.Length)
+                return sample;
+            List<byte> loop = new List<byte>();
+            int i = loopStart;
+            for (; i < sample.Length; i++)
+            {
+                loop.Add(sample[i]);
+            }
+            while (i < sample.Length && loop.Count % 9 != 0)
+                loop.Add(sample[i++]);
+            return loop.ToArray();
         }
         public override void Clear()
         {

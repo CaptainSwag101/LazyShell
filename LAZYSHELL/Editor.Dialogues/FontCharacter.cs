@@ -50,6 +50,7 @@ namespace LAZYSHELL
                     graphics = Bits.GetByteArray(data, index * 0x20 + 0x3DFA00, 0x20);
                     break;
                 case 4: // battle menu font
+                case 5: // flower bonus font
                     width = 8; maxWidth = 8; height = 8;
                     graphics = Bits.GetByteArray(data, index * 0x20, 0x20);
                     break;

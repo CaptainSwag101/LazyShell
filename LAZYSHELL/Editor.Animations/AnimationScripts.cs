@@ -59,7 +59,7 @@ namespace LAZYSHELL
         private ToolTipLabel toolTipLabel;
         private byte[] animationBank, battleBank;
         private bool updatingAnimations = false;
-        Previewer.Previewer ap;
+        Previewer ap;
         #endregion
         // constructor
         public AnimationScripts()
@@ -653,6 +653,22 @@ namespace LAZYSHELL
                     aniNameA.SelectedIndex = asc.Option & 3;
                     aniNumC.Value = asc.AnimationData[2];
                     break;
+                case 0x96:
+                    aniTitleA.Text = "Display bonus message...";
+                    aniLabelA.Text = "Message";
+                    aniLabelC.Text = "X";
+                    aniLabelD.Text = "Y";
+                    foreach (BonusMessage message in Model.BonusMessages)
+                        aniNameA.Items.Add(message.Text);
+                    aniNameA.Enabled = true;
+                    aniNumC.Enabled = true;
+                    aniNumD.Enabled = true;
+                    aniNumC.Maximum = 127; aniNumC.Minimum = -128;
+                    aniNumD.Maximum = 127; aniNumD.Minimum = -128;
+                    aniNameA.SelectedIndex = asc.AnimationData[2];
+                    aniNumC.Value = (sbyte)asc.AnimationData[3];
+                    aniNumD.Value = (sbyte)asc.AnimationData[4];
+                    break;
                 case 0x7E:
                     aniTitleA.Text = "Fade out object...";
                     aniLabelC.Text = "Duration";
@@ -958,6 +974,11 @@ namespace LAZYSHELL
                 case 0x7A:
                     asc.Option = (byte)aniNameA.SelectedIndex;
                     asc.AnimationData[2] = (byte)aniNumC.Value;
+                    break;
+                case 0x96:
+                    asc.AnimationData[2] = (byte)aniNameA.SelectedIndex;
+                    asc.AnimationData[3] = (byte)((sbyte)aniNumC.Value);
+                    asc.AnimationData[4] = (byte)((sbyte)aniNumD.Value);
                     break;
                 case 0x85:
                     asc.Option = (byte)(aniNameA.SelectedIndex << 1);
@@ -1287,7 +1308,7 @@ namespace LAZYSHELL
         private void previewer_Click(object sender, EventArgs e)
         {
             if (ap == null || !ap.Visible)
-                ap = new Previewer.Previewer(animationCategory.SelectedIndex, (int)animationNum.Value, true);
+                ap = new Previewer(animationCategory.SelectedIndex, (int)animationNum.Value, true);
             else
                 ap.Reload(animationCategory.SelectedIndex, (int)animationNum.Value, true);
             ap.Show();
@@ -1352,7 +1373,7 @@ namespace LAZYSHELL
         private void AnimationScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(Bits.GetByteArray(Model.Data, 0x350000, 0x10000), Bits.GetByteArray(Model.Data, 0x3A6000, 0xA000)) == this.checksum)
-                return;
+                goto Close;
             DialogResult result = MessageBox.Show("Animations have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
@@ -1376,6 +1397,9 @@ namespace LAZYSHELL
                 e.Cancel = true;
                 return;
             }
+        Close:
+            if (ap != null)
+                ap.Close();
         }
         private void save_Click(object sender, System.EventArgs e)
         {

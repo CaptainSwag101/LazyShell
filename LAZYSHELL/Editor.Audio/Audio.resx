@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -120,25 +120,6 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>116, 17</value>
-  </metadata>
-  <data name="label1.Text" xml:space="preserve">
-    <value>TIPS: follow these steps to successfully import a .WAV file of your choosing. Say you have a .WAV file, "MyWavFile.wav", that you wish to replace one of the samples in this audio editor with. Here are the steps you need to take.
-
-1. Download and install Audacity, a good free audio editing program.
-     http://audacity.sourceforge.net/download/
-2. In the Lazy Shell audio editor, export any sample to a file named "OldSample.wav".
-3. Open "MyWavFile.wav" into Audacity.
-4. While in Audacity, copy the audio data (Ctrl+A, Ctrl+C). Close Audacity.
-5. Open "OldSample.wav" into Audacity.
-6. While in Audacity, paste the copied audio data over the old data (Ctrl+A, Ctrl+V).
-7. Export to a .WAV file named "NewSample.wav".
-8. In the Lazy Shell audio editor, import "NewSample.wav".
-MAKE SURE THE SELECTED Hz SAMPLE RATE IS THE SAME AS THE IMPORTED .WAV FILE.
-
-The reason this is the only way to do it is because by using the same exported file ("OldSample.wav") with the modified WAV data from "MyWavFile.wav", it retains some obscure data from "OldSample.wav" in "NewSample.wav" which is necessary to have in order to successfully import a .WAV file.</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

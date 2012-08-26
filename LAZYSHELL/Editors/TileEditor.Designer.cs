@@ -61,7 +61,7 @@
             this.buttonOK.Location = new System.Drawing.Point(12, 217);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 5;
+            this.buttonOK.TabIndex = 7;
             this.buttonOK.Text = "OK";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -71,7 +71,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(93, 217);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 6;
+            this.buttonCancel.TabIndex = 8;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -81,7 +81,7 @@
             this.buttonReset.Location = new System.Drawing.Point(174, 217);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
-            this.buttonReset.TabIndex = 6;
+            this.buttonReset.TabIndex = 9;
             this.buttonReset.Text = "Reset";
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
@@ -91,7 +91,7 @@
             this.buttonInvertTile.Location = new System.Drawing.Point(174, 40);
             this.buttonInvertTile.Name = "buttonInvertTile";
             this.buttonInvertTile.Size = new System.Drawing.Size(75, 23);
-            this.buttonInvertTile.TabIndex = 500;
+            this.buttonInvertTile.TabIndex = 4;
             this.buttonInvertTile.Text = "Invert";
             this.buttonInvertTile.Click += new System.EventHandler(this.buttonInvertTile_Click);
             // 
@@ -101,7 +101,7 @@
             this.buttonMirrorTile.Location = new System.Drawing.Point(174, 12);
             this.buttonMirrorTile.Name = "buttonMirrorTile";
             this.buttonMirrorTile.Size = new System.Drawing.Size(75, 23);
-            this.buttonMirrorTile.TabIndex = 499;
+            this.buttonMirrorTile.TabIndex = 3;
             this.buttonMirrorTile.Text = "Mirror";
             this.buttonMirrorTile.Click += new System.EventHandler(this.buttonMirrorTile_Click);
             // 
@@ -111,7 +111,7 @@
             this.label141.Location = new System.Drawing.Point(6, 22);
             this.label141.Name = "label141";
             this.label141.Size = new System.Drawing.Size(35, 13);
-            this.label141.TabIndex = 442;
+            this.label141.TabIndex = 0;
             this.label141.Text = "Index";
             // 
             // label142
@@ -120,7 +120,7 @@
             this.label142.Location = new System.Drawing.Point(6, 43);
             this.label142.Name = "label142";
             this.label142.Size = new System.Drawing.Size(41, 13);
-            this.label142.TabIndex = 444;
+            this.label142.TabIndex = 2;
             this.label142.Text = "Palette";
             // 
             // subtileStatus
@@ -140,29 +140,29 @@
             // 
             // subtileIndex
             // 
-            this.subtileIndex.Location = new System.Drawing.Point(53, 20);
+            this.subtileIndex.Location = new System.Drawing.Point(74, 20);
             this.subtileIndex.Maximum = new decimal(new int[] {
             1023,
             0,
             0,
             0});
             this.subtileIndex.Name = "subtileIndex";
-            this.subtileIndex.Size = new System.Drawing.Size(83, 21);
-            this.subtileIndex.TabIndex = 2;
+            this.subtileIndex.Size = new System.Drawing.Size(62, 21);
+            this.subtileIndex.TabIndex = 1;
             this.subtileIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.subtileIndex.ValueChanged += new System.EventHandler(this.tile8x8Tile_ValueChanged);
             // 
             // subtilePalette
             // 
-            this.subtilePalette.Location = new System.Drawing.Point(53, 41);
+            this.subtilePalette.Location = new System.Drawing.Point(74, 41);
             this.subtilePalette.Maximum = new decimal(new int[] {
             7,
             0,
             0,
             0});
             this.subtilePalette.Name = "subtilePalette";
-            this.subtilePalette.Size = new System.Drawing.Size(83, 21);
-            this.subtilePalette.TabIndex = 441;
+            this.subtilePalette.Size = new System.Drawing.Size(62, 21);
+            this.subtilePalette.TabIndex = 3;
             this.subtilePalette.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.subtilePalette.ValueChanged += new System.EventHandler(this.tilePalette_ValueChanged);
             // 
@@ -173,7 +173,7 @@
             this.panel111.Location = new System.Drawing.Point(12, 12);
             this.panel111.Name = "panel111";
             this.panel111.Size = new System.Drawing.Size(68, 68);
-            this.panel111.TabIndex = 497;
+            this.panel111.TabIndex = 0;
             // 
             // pictureBoxTile
             // 
@@ -203,14 +203,14 @@
             this.panel1.Location = new System.Drawing.Point(86, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(68, 68);
-            this.panel1.TabIndex = 498;
+            this.panel1.TabIndex = 1;
             // 
             // buttonUpdate
             // 
             this.buttonUpdate.Location = new System.Drawing.Point(174, 188);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
-            this.buttonUpdate.TabIndex = 538;
+            this.buttonUpdate.TabIndex = 6;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
@@ -223,8 +223,8 @@
             this.autoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoUpdate.Location = new System.Drawing.Point(170, 165);
             this.autoUpdate.Name = "autoUpdate";
-            this.autoUpdate.Size = new System.Drawing.Size(91, 17);
-            this.autoUpdate.TabIndex = 537;
+            this.autoUpdate.Size = new System.Drawing.Size(87, 17);
+            this.autoUpdate.TabIndex = 5;
             this.autoUpdate.Text = "Auto-update";
             this.autoUpdate.UseVisualStyleBackColor = false;
             // 
@@ -238,7 +238,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 86);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(142, 125);
-            this.groupBox1.TabIndex = 539;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Subtile Properties";
             // 

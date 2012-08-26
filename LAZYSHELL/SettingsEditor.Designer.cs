@@ -76,14 +76,14 @@
             this.customDirectoryTextBox.Name = "customDirectoryTextBox";
             this.customDirectoryTextBox.ReadOnly = true;
             this.customDirectoryTextBox.Size = new System.Drawing.Size(272, 21);
-            this.customDirectoryTextBox.TabIndex = 1;
+            this.customDirectoryTextBox.TabIndex = 2;
             // 
             // buttonDefault
             // 
             this.buttonDefault.Location = new System.Drawing.Point(12, 223);
             this.buttonDefault.Name = "buttonDefault";
             this.buttonDefault.Size = new System.Drawing.Size(75, 23);
-            this.buttonDefault.TabIndex = 2;
+            this.buttonDefault.TabIndex = 7;
             this.buttonDefault.Text = "Default...";
             this.buttonDefault.UseVisualStyleBackColor = true;
             this.buttonDefault.Click += new System.EventHandler(this.buttonDefault_Click);
@@ -93,7 +93,7 @@
             this.buttonApply.Location = new System.Drawing.Point(371, 223);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(75, 23);
-            this.buttonApply.TabIndex = 2;
+            this.buttonApply.TabIndex = 10;
             this.buttonApply.Text = "Apply";
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
@@ -103,8 +103,8 @@
             this.visualThemeSystem.AutoSize = true;
             this.visualThemeSystem.Location = new System.Drawing.Point(6, 20);
             this.visualThemeSystem.Name = "visualThemeSystem";
-            this.visualThemeSystem.Size = new System.Drawing.Size(60, 17);
-            this.visualThemeSystem.TabIndex = 4;
+            this.visualThemeSystem.Size = new System.Drawing.Size(59, 17);
+            this.visualThemeSystem.TabIndex = 0;
             this.visualThemeSystem.TabStop = true;
             this.visualThemeSystem.Text = "System";
             this.visualThemeSystem.UseVisualStyleBackColor = true;
@@ -114,8 +114,8 @@
             this.visualThemeStandard.AutoSize = true;
             this.visualThemeStandard.Location = new System.Drawing.Point(6, 37);
             this.visualThemeStandard.Name = "visualThemeStandard";
-            this.visualThemeStandard.Size = new System.Drawing.Size(69, 17);
-            this.visualThemeStandard.TabIndex = 4;
+            this.visualThemeStandard.Size = new System.Drawing.Size(68, 17);
+            this.visualThemeStandard.TabIndex = 1;
             this.visualThemeStandard.TabStop = true;
             this.visualThemeStandard.Text = "Standard";
             this.visualThemeStandard.UseVisualStyleBackColor = true;
@@ -130,7 +130,7 @@
             0});
             this.undoStackSize.Name = "undoStackSize";
             this.undoStackSize.Size = new System.Drawing.Size(55, 21);
-            this.undoStackSize.TabIndex = 5;
+            this.undoStackSize.TabIndex = 6;
             this.undoStackSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // patchHTTPServer
@@ -138,7 +138,7 @@
             this.patchHTTPServer.Location = new System.Drawing.Point(209, 154);
             this.patchHTTPServer.Name = "patchHTTPServer";
             this.patchHTTPServer.Size = new System.Drawing.Size(237, 21);
-            this.patchHTTPServer.TabIndex = 1;
+            this.patchHTTPServer.TabIndex = 4;
             // 
             // label2
             // 
@@ -155,7 +155,7 @@
             this.label3.Location = new System.Drawing.Point(107, 177);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 13);
-            this.label3.TabIndex = 3;
+            this.label3.TabIndex = 5;
             this.label3.Text = "Undo stack size";
             // 
             // groupBox1
@@ -165,7 +165,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 154);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(87, 63);
-            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Visual Theme";
             // 
@@ -178,7 +178,7 @@
             this.groupBox2.Location = new System.Drawing.Point(12, 86);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(434, 62);
-            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Back-up ROM location";
             // 
@@ -187,8 +187,8 @@
             this.romDirectory.AutoSize = true;
             this.romDirectory.Location = new System.Drawing.Point(6, 20);
             this.romDirectory.Name = "romDirectory";
-            this.romDirectory.Size = new System.Drawing.Size(94, 17);
-            this.romDirectory.TabIndex = 4;
+            this.romDirectory.Size = new System.Drawing.Size(93, 17);
+            this.romDirectory.TabIndex = 0;
             this.romDirectory.TabStop = true;
             this.romDirectory.Text = "ROM directory";
             this.romDirectory.UseVisualStyleBackColor = true;
@@ -198,8 +198,8 @@
             this.customDirectory.AutoSize = true;
             this.customDirectory.Location = new System.Drawing.Point(6, 37);
             this.customDirectory.Name = "customDirectory";
-            this.customDirectory.Size = new System.Drawing.Size(111, 17);
-            this.customDirectory.TabIndex = 4;
+            this.customDirectory.Size = new System.Drawing.Size(106, 17);
+            this.customDirectory.TabIndex = 1;
             this.customDirectory.TabStop = true;
             this.customDirectory.Text = "Custom directory:";
             this.customDirectory.UseVisualStyleBackColor = true;
@@ -209,7 +209,7 @@
             this.buttonCustomDirectory.Location = new System.Drawing.Point(401, 35);
             this.buttonCustomDirectory.Name = "buttonCustomDirectory";
             this.buttonCustomDirectory.Size = new System.Drawing.Size(27, 21);
-            this.buttonCustomDirectory.TabIndex = 2;
+            this.buttonCustomDirectory.TabIndex = 3;
             this.buttonCustomDirectory.Text = "...";
             this.buttonCustomDirectory.UseVisualStyleBackColor = true;
             this.buttonCustomDirectory.Click += new System.EventHandler(this.buttonCustomDirectory_Click);
@@ -219,7 +219,7 @@
             this.buttonClose.Location = new System.Drawing.Point(290, 223);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonClose.TabIndex = 2;
+            this.buttonClose.TabIndex = 9;
             this.buttonClose.Text = "Cancel";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
@@ -229,7 +229,7 @@
             this.buttonOK.Location = new System.Drawing.Point(209, 223);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 2;
+            this.buttonOK.TabIndex = 8;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);

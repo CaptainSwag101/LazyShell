@@ -70,7 +70,7 @@
             this.shopDiscounts.Location = new System.Drawing.Point(6, 20);
             this.shopDiscounts.Name = "shopDiscounts";
             this.shopDiscounts.Size = new System.Drawing.Size(173, 68);
-            this.shopDiscounts.TabIndex = 177;
+            this.shopDiscounts.TabIndex = 0;
             this.shopDiscounts.SelectedIndexChanged += new System.EventHandler(this.shopDiscounts_SelectedIndexChanged);
             // 
             // shopBuyOptions
@@ -84,7 +84,7 @@
             this.shopBuyOptions.Location = new System.Drawing.Point(6, 20);
             this.shopBuyOptions.Name = "shopBuyOptions";
             this.shopBuyOptions.Size = new System.Drawing.Size(173, 68);
-            this.shopBuyOptions.TabIndex = 176;
+            this.shopBuyOptions.TabIndex = 0;
             this.shopBuyOptions.SelectedIndexChanged += new System.EventHandler(this.shopBuyOptions_SelectedIndexChanged);
             // 
             // shopItem14
@@ -98,7 +98,7 @@
             this.shopItem14.Location = new System.Drawing.Point(6, 293);
             this.shopItem14.Name = "shopItem14";
             this.shopItem14.Size = new System.Drawing.Size(173, 21);
-            this.shopItem14.TabIndex = 433;
+            this.shopItem14.TabIndex = 13;
             this.shopItem14.Tag = "";
             this.shopItem14.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem14.SelectedIndexChanged += new System.EventHandler(this.shopItem14_SelectedIndexChanged);
@@ -115,7 +115,7 @@
             this.shopItem13.Location = new System.Drawing.Point(6, 272);
             this.shopItem13.Name = "shopItem13";
             this.shopItem13.Size = new System.Drawing.Size(173, 21);
-            this.shopItem13.TabIndex = 434;
+            this.shopItem13.TabIndex = 12;
             this.shopItem13.Tag = "";
             this.shopItem13.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem13.SelectedIndexChanged += new System.EventHandler(this.shopItem13_SelectedIndexChanged);
@@ -132,7 +132,7 @@
             this.shopItem15.Location = new System.Drawing.Point(6, 314);
             this.shopItem15.Name = "shopItem15";
             this.shopItem15.Size = new System.Drawing.Size(173, 21);
-            this.shopItem15.TabIndex = 435;
+            this.shopItem15.TabIndex = 14;
             this.shopItem15.Tag = "";
             this.shopItem15.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem15.SelectedIndexChanged += new System.EventHandler(this.shopItem15_SelectedIndexChanged);
@@ -149,7 +149,7 @@
             this.shopItem12.Location = new System.Drawing.Point(6, 251);
             this.shopItem12.Name = "shopItem12";
             this.shopItem12.Size = new System.Drawing.Size(173, 21);
-            this.shopItem12.TabIndex = 431;
+            this.shopItem12.TabIndex = 11;
             this.shopItem12.Tag = "";
             this.shopItem12.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem12.SelectedIndexChanged += new System.EventHandler(this.shopItem12_SelectedIndexChanged);
@@ -166,7 +166,7 @@
             this.shopItem11.Location = new System.Drawing.Point(6, 230);
             this.shopItem11.Name = "shopItem11";
             this.shopItem11.Size = new System.Drawing.Size(173, 21);
-            this.shopItem11.TabIndex = 432;
+            this.shopItem11.TabIndex = 10;
             this.shopItem11.Tag = "";
             this.shopItem11.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem11.SelectedIndexChanged += new System.EventHandler(this.shopItem11_SelectedIndexChanged);
@@ -183,7 +183,7 @@
             this.shopItem10.Location = new System.Drawing.Point(6, 209);
             this.shopItem10.Name = "shopItem10";
             this.shopItem10.Size = new System.Drawing.Size(173, 21);
-            this.shopItem10.TabIndex = 429;
+            this.shopItem10.TabIndex = 9;
             this.shopItem10.Tag = "";
             this.shopItem10.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem10.SelectedIndexChanged += new System.EventHandler(this.shopItem10_SelectedIndexChanged);
@@ -200,7 +200,7 @@
             this.shopItem9.Location = new System.Drawing.Point(6, 188);
             this.shopItem9.Name = "shopItem9";
             this.shopItem9.Size = new System.Drawing.Size(173, 21);
-            this.shopItem9.TabIndex = 430;
+            this.shopItem9.TabIndex = 8;
             this.shopItem9.Tag = "";
             this.shopItem9.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem9.SelectedIndexChanged += new System.EventHandler(this.shopItem9_SelectedIndexChanged);
@@ -217,7 +217,7 @@
             this.shopItem8.Location = new System.Drawing.Point(6, 167);
             this.shopItem8.Name = "shopItem8";
             this.shopItem8.Size = new System.Drawing.Size(173, 21);
-            this.shopItem8.TabIndex = 427;
+            this.shopItem8.TabIndex = 7;
             this.shopItem8.Tag = "";
             this.shopItem8.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem8.SelectedIndexChanged += new System.EventHandler(this.shopItem8_SelectedIndexChanged);
@@ -234,7 +234,7 @@
             this.shopItem7.Location = new System.Drawing.Point(6, 146);
             this.shopItem7.Name = "shopItem7";
             this.shopItem7.Size = new System.Drawing.Size(173, 21);
-            this.shopItem7.TabIndex = 428;
+            this.shopItem7.TabIndex = 6;
             this.shopItem7.Tag = "";
             this.shopItem7.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem7.SelectedIndexChanged += new System.EventHandler(this.shopItem7_SelectedIndexChanged);
@@ -251,7 +251,7 @@
             this.shopItem6.Location = new System.Drawing.Point(6, 125);
             this.shopItem6.Name = "shopItem6";
             this.shopItem6.Size = new System.Drawing.Size(173, 21);
-            this.shopItem6.TabIndex = 425;
+            this.shopItem6.TabIndex = 5;
             this.shopItem6.Tag = "";
             this.shopItem6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem6.SelectedIndexChanged += new System.EventHandler(this.shopItem6_SelectedIndexChanged);
@@ -268,7 +268,7 @@
             this.shopItem5.Location = new System.Drawing.Point(6, 104);
             this.shopItem5.Name = "shopItem5";
             this.shopItem5.Size = new System.Drawing.Size(173, 21);
-            this.shopItem5.TabIndex = 426;
+            this.shopItem5.TabIndex = 4;
             this.shopItem5.Tag = "";
             this.shopItem5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem5.SelectedIndexChanged += new System.EventHandler(this.shopItem5_SelectedIndexChanged);
@@ -285,7 +285,7 @@
             this.shopItem4.Location = new System.Drawing.Point(6, 83);
             this.shopItem4.Name = "shopItem4";
             this.shopItem4.Size = new System.Drawing.Size(173, 21);
-            this.shopItem4.TabIndex = 423;
+            this.shopItem4.TabIndex = 3;
             this.shopItem4.Tag = "";
             this.shopItem4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem4.SelectedIndexChanged += new System.EventHandler(this.shopItem4_SelectedIndexChanged);
@@ -302,7 +302,7 @@
             this.shopItem3.Location = new System.Drawing.Point(6, 62);
             this.shopItem3.Name = "shopItem3";
             this.shopItem3.Size = new System.Drawing.Size(173, 21);
-            this.shopItem3.TabIndex = 424;
+            this.shopItem3.TabIndex = 2;
             this.shopItem3.Tag = "";
             this.shopItem3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem3.SelectedIndexChanged += new System.EventHandler(this.shopItem3_SelectedIndexChanged);
@@ -319,7 +319,7 @@
             this.shopItem2.Location = new System.Drawing.Point(6, 41);
             this.shopItem2.Name = "shopItem2";
             this.shopItem2.Size = new System.Drawing.Size(173, 21);
-            this.shopItem2.TabIndex = 421;
+            this.shopItem2.TabIndex = 1;
             this.shopItem2.Tag = "";
             this.shopItem2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem2.SelectedIndexChanged += new System.EventHandler(this.shopItem2_SelectedIndexChanged);
@@ -336,7 +336,7 @@
             this.shopItem1.Location = new System.Drawing.Point(6, 20);
             this.shopItem1.Name = "shopItem1";
             this.shopItem1.Size = new System.Drawing.Size(173, 21);
-            this.shopItem1.TabIndex = 422;
+            this.shopItem1.TabIndex = 0;
             this.shopItem1.Tag = "";
             this.shopItem1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.shopItem1.SelectedIndexChanged += new System.EventHandler(this.shopItem1_SelectedIndexChanged);
@@ -353,7 +353,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(191, 45);
-            this.toolStrip1.TabIndex = 472;
+            this.toolStrip1.TabIndex = 0;
             // 
             // shopName
             // 
@@ -382,7 +382,7 @@
             this.moveUp.Location = new System.Drawing.Point(3, 393);
             this.moveUp.Name = "moveUp";
             this.moveUp.Size = new System.Drawing.Size(90, 23);
-            this.moveUp.TabIndex = 539;
+            this.moveUp.TabIndex = 2;
             this.moveUp.Text = "MOVE UP";
             this.moveUp.UseVisualStyleBackColor = true;
             this.moveUp.Click += new System.EventHandler(this.moveUp_Click);
@@ -392,7 +392,7 @@
             this.moveDown.Location = new System.Drawing.Point(98, 393);
             this.moveDown.Name = "moveDown";
             this.moveDown.Size = new System.Drawing.Size(90, 23);
-            this.moveDown.TabIndex = 539;
+            this.moveDown.TabIndex = 3;
             this.moveDown.Text = "MOVE DOWN";
             this.moveDown.UseVisualStyleBackColor = true;
             this.moveDown.Click += new System.EventHandler(this.moveDown_Click);
@@ -417,7 +417,7 @@
             this.groupBox1.Location = new System.Drawing.Point(3, 46);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(185, 341);
-            this.groupBox1.TabIndex = 540;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Shop Items";
             // 
@@ -427,7 +427,7 @@
             this.groupBox2.Location = new System.Drawing.Point(3, 422);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(185, 94);
-            this.groupBox2.TabIndex = 541;
+            this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Shop Options";
             // 
@@ -437,7 +437,7 @@
             this.groupBox3.Location = new System.Drawing.Point(3, 522);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(185, 94);
-            this.groupBox3.TabIndex = 542;
+            this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Purchase Discounts";
             // 

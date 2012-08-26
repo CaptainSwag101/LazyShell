@@ -47,7 +47,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(87, 286);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 6;
+            this.buttonCancel.TabIndex = 8;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -57,7 +57,7 @@
             this.buttonOK.Location = new System.Drawing.Point(6, 286);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 5;
+            this.buttonOK.TabIndex = 7;
             this.buttonOK.Text = "Apply";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -80,7 +80,7 @@
             this.checkedListBox1.Location = new System.Drawing.Point(6, 60);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(156, 164);
-            this.checkedListBox1.TabIndex = 7;
+            this.checkedListBox1.TabIndex = 2;
             // 
             // percentControl
             // 
@@ -97,7 +97,7 @@
             -2147483648});
             this.percentControl.Name = "percentControl";
             this.percentControl.Size = new System.Drawing.Size(106, 21);
-            this.percentControl.TabIndex = 8;
+            this.percentControl.TabIndex = 6;
             // 
             // label1
             // 
@@ -105,7 +105,7 @@
             this.label1.Location = new System.Drawing.Point(6, 261);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 9;
+            this.label1.TabIndex = 5;
             this.label1.Text = "Percent";
             // 
             // selectAll
@@ -113,7 +113,7 @@
             this.selectAll.Location = new System.Drawing.Point(6, 230);
             this.selectAll.Name = "selectAll";
             this.selectAll.Size = new System.Drawing.Size(75, 23);
-            this.selectAll.TabIndex = 5;
+            this.selectAll.TabIndex = 3;
             this.selectAll.Text = "Select All";
             this.selectAll.UseVisualStyleBackColor = true;
             this.selectAll.Click += new System.EventHandler(this.selectAll_Click);
@@ -123,7 +123,7 @@
             this.deselectAll.Location = new System.Drawing.Point(87, 230);
             this.deselectAll.Name = "deselectAll";
             this.deselectAll.Size = new System.Drawing.Size(75, 23);
-            this.deselectAll.TabIndex = 5;
+            this.deselectAll.TabIndex = 4;
             this.deselectAll.Text = "Deselect All";
             this.deselectAll.UseVisualStyleBackColor = true;
             this.deselectAll.Click += new System.EventHandler(this.deselectAll_Click);
@@ -142,7 +142,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(168, 315);
-            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Adjust all monster stats";
             // 
@@ -151,8 +151,8 @@
             this.adjustAll.AutoSize = true;
             this.adjustAll.Location = new System.Drawing.Point(9, 37);
             this.adjustAll.Name = "adjustAll";
-            this.adjustAll.Size = new System.Drawing.Size(83, 17);
-            this.adjustAll.TabIndex = 10;
+            this.adjustAll.Size = new System.Drawing.Size(81, 17);
+            this.adjustAll.TabIndex = 1;
             this.adjustAll.Text = "All monsters";
             this.adjustAll.UseVisualStyleBackColor = true;
             // 
@@ -162,8 +162,8 @@
             this.adjustCurrent.Checked = true;
             this.adjustCurrent.Location = new System.Drawing.Point(9, 20);
             this.adjustCurrent.Name = "adjustCurrent";
-            this.adjustCurrent.Size = new System.Drawing.Size(104, 17);
-            this.adjustCurrent.TabIndex = 10;
+            this.adjustCurrent.Size = new System.Drawing.Size(99, 17);
+            this.adjustCurrent.TabIndex = 0;
             this.adjustCurrent.TabStop = true;
             this.adjustCurrent.Text = "Current monster";
             this.adjustCurrent.UseVisualStyleBackColor = true;

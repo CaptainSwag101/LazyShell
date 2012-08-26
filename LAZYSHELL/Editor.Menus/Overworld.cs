@@ -82,13 +82,13 @@ namespace LAZYSHELL
         private bool editTileset;
         private Bitmap[] allyImages;
         private Bitmap[] cursorImages;
-        private CursorSprite[] cursorSprites;
+        public CursorSprite[] CursorSprites;
         private CursorSprite cursorSprite
         {
             get
-            { return cursorSprites[cursorName.SelectedIndex]; }
+            { return CursorSprites[cursorName.SelectedIndex]; }
             set
-            { cursorSprites[cursorName.SelectedIndex] = value; }
+            { CursorSprites[cursorName.SelectedIndex] = value; }
         }
         private Settings settings = Settings.Default;
         public PictureBox Picture { get { return pictureBoxPreview; } set { pictureBoxPreview = value; } }
@@ -116,9 +116,9 @@ namespace LAZYSHELL
             this.music.SelectedIndex = Model.Data[0x03462D];
             //
             cursorSpriteNum.Items.AddRange(Lists.Resize(Lists.Numerize(3, Lists.SpriteNames), 256));
-            cursorSprites = new CursorSprite[5];
-            for (int i = 0; i < cursorSprites.Length; i++)
-                cursorSprites[i] = new CursorSprite(i);
+            CursorSprites = new CursorSprite[5];
+            for (int i = 0; i < CursorSprites.Length; i++)
+                CursorSprites[i] = new CursorSprite(i);
             cursorName.SelectedIndex = 0;
             //
             updating = true;
@@ -139,9 +139,9 @@ namespace LAZYSHELL
             this.music.SelectedIndex = Model.Data[0x03462D];
             //
             cursorSpriteNum.Items.AddRange(Lists.Resize(Lists.Numerize(3, Lists.SpriteNames), 256));
-            cursorSprites = new CursorSprite[5];
-            for (int i = 0; i < cursorSprites.Length; i++)
-                cursorSprites[i] = new CursorSprite(i);
+            CursorSprites = new CursorSprite[5];
+            for (int i = 0; i < CursorSprites.Length; i++)
+                CursorSprites[i] = new CursorSprite(i);
             cursorName.SelectedIndex = 0;
             //
             updating = true;
@@ -168,10 +168,14 @@ namespace LAZYSHELL
             importFGToolStripMenuItem.Text = index == 0 ? "Import Foreground" : "Import Frame";
             openPalettesFG.Text = index == 0 ? "Foreground Palettes" : "Frame Palette";
             openGraphicsFG.Text = index == 0 ? "Foreground Graphics" : "Frame Graphics";
-            LoadBGGraphicEditor();
-            LoadFGGraphicEditor();
-            LoadBGPaletteEditor();
-            LoadFGPaletteEditor();
+            if (bgGraphicEditor != null)
+                LoadBGGraphicEditor();
+            if (fgGraphicEditor != null)
+                LoadFGGraphicEditor();
+            if (bgPaletteEditor != null)
+                LoadBGPaletteEditor();
+            if (fgPaletteEditor != null)
+                LoadFGPaletteEditor();
             SetBackgroundImage();
             SetForegroundImage();
             SetPreviewImage();
@@ -188,7 +192,7 @@ namespace LAZYSHELL
             int moldIndex = 0;
             if (sequence != null && sequence.Frames.Count >= 0)
                 moldIndex = sequence.Frames[0].Mold;
-            int[] pixels = sprite.GetPixels(true, false, moldIndex, 0, false, true, ref size);
+            int[] pixels = sprite.GetPixels(true, false, moldIndex, 0, null, false, true, ref size);
             cursorImage = Do.PixelsToImage(pixels, size.Width, size.Height);
         }
         private void SetCursorImages()
@@ -751,8 +755,8 @@ namespace LAZYSHELL
             Model.Compress(Model.GameSelectPalettes, 0x3EB50F, 0x200, 0x3EB624 - 0x3EB50F, "Game select palettes");
             Model.Compress(Model.GameSelectSpeakers, 0x3EB624, 0x600, 0x3EB94A - 0x3EB624, "Game select speakers");
             //
-            for (int i = 0; i < cursorSprites.Length; i++)
-                cursorSprites[i].Assemble();
+            for (int i = 0; i < CursorSprites.Length; i++)
+                CursorSprites[i].Assemble();
             //
             Model.GameSelectPaletteSet.Assemble();
             Model.GameSelectBGPalette.Assemble();
@@ -784,7 +788,8 @@ namespace LAZYSHELL
             // store compressed data (starting at start of data)
             Buffer.BlockCopy(dst, 0x4C, Model.Data, 0x3E004C, dst.Length - 0x4C);
             //
-            checksum = Do.GenerateChecksum(Model.FontPaletteMenu, Model.MenuFrameGraphics, Model.MenuBGPalette, Model.MenuBGGraphics);
+            checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
+                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, CursorSprites);
         }
         public new void Close()
         {
@@ -962,7 +967,7 @@ namespace LAZYSHELL
                     Do.DrawText("30          ", 71, 72, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText("240/240     ", 63, 84, e.Graphics, pre, Model.FontMenu, pal);
                     //
-                    Do.DrawText(Model.Characters[3].ToString(), 39, 108, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.Characters[4].ToString(), 39, 108, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText(Model.MenuTexts[31].ToString(), 39, 120, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText(Model.MenuTexts[12].ToString(), 39, 132, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText("30          ", 71, 120, e.Graphics, pre, Model.FontMenu, pal);
@@ -1048,7 +1053,7 @@ namespace LAZYSHELL
                         Do.DrawText("30          ", 191, 72, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText("211/211     ", 183, 84, e.Graphics, pre, Model.FontMenu, pal);
                         //
-                        Do.DrawText(Model.Characters[4].ToString(), 159, 108, e.Graphics, pre, Model.FontMenu, pal);
+                        Do.DrawText(Model.Characters[3].ToString(), 159, 108, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText(Model.MenuTexts[31].ToString(), 159, 120, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText(Model.MenuTexts[12].ToString(), 159, 132, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText("30          ", 191, 120, e.Graphics, pre, Model.FontMenu, pal);
@@ -1196,7 +1201,8 @@ namespace LAZYSHELL
             ((Form)sender).Hide();
         }
         #endregion
-        private class CursorSprite
+        [Serializable()]
+        public class CursorSprite
         {
             private int index;
             public int Sprite;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
@@ -42,6 +43,8 @@ namespace LAZYSHELL
         // check variables
         private int mouseOverSubtile;
         private string mouseOverControl;
+        private bool mouseEnter = false;
+        public Point mousePosition;
         private int currentPixel = 0;
         private int currentColor = 0;
         private int currentColorBack = 0;
@@ -196,8 +199,8 @@ namespace LAZYSHELL
 
             Rectangle rsrc = new Rectangle(0, 0, graphicsImage.Width, graphicsImage.Height);
             Rectangle rdst = new Rectangle(0, 0, graphicsImage.Width * zoom, graphicsImage.Height * zoom);
-            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
+            e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
             if (e.ClipRectangle.Size != new Size(1 * zoom, 1 * zoom))
                 e.Graphics.DrawImage(graphicsImage, rdst, rsrc, GraphicsUnit.Pixel);
 
@@ -206,6 +209,9 @@ namespace LAZYSHELL
                 overlay.DrawCartesianGrid(e.Graphics, Color.DarkRed, s, new Size(1, 1), zoom, false);
             if (graphicShowGrid.Checked)
                 overlay.DrawCartesianGrid(e.Graphics, Color.Gray, s, new Size(8, 8), zoom, true);
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
+            if (zoom > 1 && mouseEnter && e.ClipRectangle.Size != new Size(1 * zoom, 1 * zoom))
+                overlay.DrawHoverBox(e.Graphics, mousePosition, zoom, false);
         }
         private void pictureBoxGraphicSet_MouseDown(object sender, MouseEventArgs e)
         {
@@ -257,6 +263,7 @@ namespace LAZYSHELL
             int x = e.X; int y = e.Y;
             mouseOverControl = pictureBoxGraphicSet.Name;
             mouseOverSubtile = (y / (8 * zoom)) * size.Width + (x / (8 * zoom)); // Calculate tile number
+            mousePosition = new Point(x / zoom, y / zoom);
             coordsLabel.Text = "subtile " + (mouseOverSubtile + index).ToString("d4");
 
             string action = "";
@@ -278,12 +285,14 @@ namespace LAZYSHELL
                 colorBack = currentColor;
             }
 
+            Graphics g = pictureBoxGraphicSet.CreateGraphics();
             color = Do.EditPixelBPP(
                 graphics, this.offset, paletteSet.Palettes[currentPalette],
-                pictureBoxGraphicSet.CreateGraphics(), zoom, action,
-                x, y, 0, color, colorBack, size.Width, size.Height, format);
+                g, zoom, action, x, y, 0, color, colorBack, size.Width, size.Height, format);
             if (action == "erase")
                 pictureBoxGraphicSet.Invalidate(new Rectangle(x / zoom * zoom, y / zoom * zoom, 1 * zoom, 1 * zoom));
+            if (action == "")
+                pictureBoxGraphicSet.Invalidate();
 
             currentPixel = (x / zoom) + (y / zoom);
             if (action == "select" && e.Button == MouseButtons.Left)
@@ -303,9 +312,15 @@ namespace LAZYSHELL
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
         }
+        private void pictureBoxGraphicSet_MouseEnter(object sender, EventArgs e)
+        {
+            mouseEnter = true;
+        }
         private void pictureBoxGraphicSet_MouseLeave(object sender, EventArgs e)
         {
+            mouseEnter = false;
             coordsLabel.Text = "";
+            pictureBoxGraphicSet.Invalidate();
         }
         private void pictureBoxColor_Paint(object sender, PaintEventArgs e)
         {

@@ -57,7 +57,7 @@
             this.panel67.Location = new System.Drawing.Point(0, 21);
             this.panel67.Name = "panel67";
             this.panel67.Size = new System.Drawing.Size(260, 604);
-            this.panel67.TabIndex = 547;
+            this.panel67.TabIndex = 1;
             // 
             // pictureBoxTitle
             // 
@@ -78,7 +78,7 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(260, 21);
-            this.label1.TabIndex = 553;
+            this.label1.TabIndex = 0;
             this.label1.Text = "  MAIN TITLE PREVIEW";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -94,7 +94,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(538, 25);
-            this.toolStrip1.TabIndex = 551;
+            this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // save
@@ -180,7 +180,7 @@
             this.panel1.Location = new System.Drawing.Point(278, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(260, 625);
-            this.panel1.TabIndex = 554;
+            this.panel1.TabIndex = 2;
             // 
             // panel2
             // 
@@ -190,7 +190,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 25);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(278, 625);
-            this.panel2.TabIndex = 555;
+            this.panel2.TabIndex = 1;
             // 
             // Title
             // 

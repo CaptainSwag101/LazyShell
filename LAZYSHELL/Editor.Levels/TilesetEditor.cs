@@ -715,7 +715,7 @@ namespace LAZYSHELL
             priority1ClearToolStripMenuItem.Enabled = !lockEditing.Checked;
             mirrorToolStripMenuItem.Enabled = !lockEditing.Checked;
             invertToolStripMenuItem.Enabled = !lockEditing.Checked;
-            importImageToolStripMenuItem.Visible = tileset.Type == "title";
+            importImageToolStripMenuItem.Visible = tileset.Type == TilesetType.Title;
         }
         private void priority1SetToolStripMenuItem_Click(object sender, EventArgs e)
         {

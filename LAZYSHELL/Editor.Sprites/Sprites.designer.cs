@@ -113,7 +113,7 @@ namespace LAZYSHELL
             // 
             this.number.AutoSize = false;
             this.number.Hexadecimal = false;
-            this.number.Location = new System.Drawing.Point(225, 2);
+            this.number.Location = new System.Drawing.Point(223, 2);
             this.number.Maximum = new decimal(new int[] {
             1023,
             0,
@@ -189,7 +189,7 @@ namespace LAZYSHELL
             this.characterNumLabel.Name = "characterNumLabel";
             this.characterNumLabel.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.characterNumLabel.Size = new System.Drawing.Size(100, 18);
-            this.characterNumLabel.TabIndex = 526;
+            this.characterNumLabel.TabIndex = 5;
             this.characterNumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.characterNumLabel.Visible = false;
             // 
@@ -219,7 +219,7 @@ namespace LAZYSHELL
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(221, 680);
-            this.panel1.TabIndex = 516;
+            this.panel1.TabIndex = 0;
             this.panel1.SizeChanged += new System.EventHandler(this.panel1_SizeChanged);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -233,7 +233,7 @@ namespace LAZYSHELL
             0});
             this.paletteIndex.Name = "paletteIndex";
             this.paletteIndex.Size = new System.Drawing.Size(49, 21);
-            this.paletteIndex.TabIndex = 4;
+            this.paletteIndex.TabIndex = 3;
             this.paletteIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.paletteIndex.ValueChanged += new System.EventHandler(this.paletteIndex_ValueChanged);
             // 
@@ -243,7 +243,7 @@ namespace LAZYSHELL
             this.label71.Location = new System.Drawing.Point(10, 10);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(37, 13);
-            this.label71.TabIndex = 394;
+            this.label71.TabIndex = 0;
             this.label71.Text = "Image";
             // 
             // label73
@@ -252,7 +252,7 @@ namespace LAZYSHELL
             this.label73.Location = new System.Drawing.Point(112, 10);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(41, 13);
-            this.label73.TabIndex = 394;
+            this.label73.TabIndex = 2;
             this.label73.Text = "Palette";
             // 
             // groupBox2
@@ -264,7 +264,7 @@ namespace LAZYSHELL
             this.groupBox2.Location = new System.Drawing.Point(3, 33);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(215, 69);
-            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Image Properties";
             // 
@@ -274,7 +274,7 @@ namespace LAZYSHELL
             this.label23.Location = new System.Drawing.Point(6, 22);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(60, 13);
-            this.label23.TabIndex = 394;
+            this.label23.TabIndex = 0;
             this.label23.Text = "Palette Set";
             // 
             // paletteOffset
@@ -287,7 +287,7 @@ namespace LAZYSHELL
             0});
             this.paletteOffset.Name = "paletteOffset";
             this.paletteOffset.Size = new System.Drawing.Size(83, 21);
-            this.paletteOffset.TabIndex = 8;
+            this.paletteOffset.TabIndex = 1;
             this.paletteOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.paletteOffset.ValueChanged += new System.EventHandler(this.paletteOffset_ValueChanged);
             // 
@@ -312,7 +312,7 @@ namespace LAZYSHELL
             0});
             this.graphicOffset.Name = "graphicOffset";
             this.graphicOffset.Size = new System.Drawing.Size(83, 21);
-            this.graphicOffset.TabIndex = 16;
+            this.graphicOffset.TabIndex = 3;
             this.graphicOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.graphicOffset.Value = new decimal(new int[] {
             2621440,
@@ -327,7 +327,7 @@ namespace LAZYSHELL
             this.label9.Location = new System.Drawing.Point(6, 43);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(81, 13);
-            this.label9.TabIndex = 394;
+            this.label9.TabIndex = 2;
             this.label9.Text = "BPP GFX Offset";
             // 
             // label72
@@ -337,7 +337,7 @@ namespace LAZYSHELL
             this.label72.Name = "label72";
             this.label72.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.label72.Size = new System.Drawing.Size(56, 16);
-            this.label72.TabIndex = 394;
+            this.label72.TabIndex = 5;
             this.label72.Text = "Animation";
             // 
             // groupBox1
@@ -348,7 +348,7 @@ namespace LAZYSHELL
             this.groupBox1.Location = new System.Drawing.Point(3, 139);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(215, 67);
-            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Animation Properties";
             // 
@@ -358,7 +358,7 @@ namespace LAZYSHELL
             this.label18.Location = new System.Drawing.Point(6, 43);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(57, 13);
-            this.label18.TabIndex = 394;
+            this.label18.TabIndex = 1;
             this.label18.Text = "VRAM Size";
             // 
             // animationAvailableBytes
@@ -371,7 +371,7 @@ namespace LAZYSHELL
             this.animationAvailableBytes.Name = "animationAvailableBytes";
             this.animationAvailableBytes.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.animationAvailableBytes.Size = new System.Drawing.Size(203, 20);
-            this.animationAvailableBytes.TabIndex = 451;
+            this.animationAvailableBytes.TabIndex = 0;
             this.animationAvailableBytes.Text = "0 bytes free";
             this.animationAvailableBytes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -395,7 +395,7 @@ namespace LAZYSHELL
             0});
             this.animationVRAM.Name = "animationVRAM";
             this.animationVRAM.Size = new System.Drawing.Size(60, 21);
-            this.animationVRAM.TabIndex = 6;
+            this.animationVRAM.TabIndex = 2;
             this.animationVRAM.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.animationVRAM.Value = new decimal(new int[] {
             2048,
@@ -414,7 +414,7 @@ namespace LAZYSHELL
             0});
             this.imageNum.Name = "imageNum";
             this.imageNum.Size = new System.Drawing.Size(49, 21);
-            this.imageNum.TabIndex = 3;
+            this.imageNum.TabIndex = 1;
             this.imageNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.imageNum.ValueChanged += new System.EventHandler(this.imageNum_ValueChanged);
             // 
@@ -428,7 +428,7 @@ namespace LAZYSHELL
             0});
             this.animationPacket.Name = "animationPacket";
             this.animationPacket.Size = new System.Drawing.Size(49, 21);
-            this.animationPacket.TabIndex = 5;
+            this.animationPacket.TabIndex = 6;
             this.animationPacket.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.animationPacket.ValueChanged += new System.EventHandler(this.animationPacket_ValueChanged);
             // 
@@ -450,7 +450,7 @@ namespace LAZYSHELL
             this.labelToolTip.Location = new System.Drawing.Point(185, 0);
             this.labelToolTip.Name = "labelToolTip";
             this.labelToolTip.Size = new System.Drawing.Size(2, 15);
-            this.labelToolTip.TabIndex = 514;
+            this.labelToolTip.TabIndex = 3;
             this.labelToolTip.Visible = false;
             // 
             // labelConvertor
@@ -462,7 +462,7 @@ namespace LAZYSHELL
             this.labelConvertor.Location = new System.Drawing.Point(210, 0);
             this.labelConvertor.Name = "labelConvertor";
             this.labelConvertor.Size = new System.Drawing.Size(2, 15);
-            this.labelConvertor.TabIndex = 518;
+            this.labelConvertor.TabIndex = 4;
             this.labelConvertor.Visible = false;
             // 
             // toolStrip2
@@ -483,7 +483,7 @@ namespace LAZYSHELL
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(1015, 25);
-            this.toolStrip2.TabIndex = 527;
+            this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // save
@@ -534,7 +534,7 @@ namespace LAZYSHELL
             // 
             // allMoldImagesToolStripMenuItem
             // 
-            this.allMoldImagesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("allMoldImagesToolStripMenuItem.Image")));
+            this.allMoldImagesToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
             this.allMoldImagesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.allMoldImagesToolStripMenuItem.Name = "allMoldImagesToolStripMenuItem";
             this.allMoldImagesToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
@@ -616,7 +616,7 @@ namespace LAZYSHELL
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(1015, 25);
-            this.toolStrip3.TabIndex = 529;
+            this.toolStrip3.TabIndex = 1;
             // 
             // name
             // 

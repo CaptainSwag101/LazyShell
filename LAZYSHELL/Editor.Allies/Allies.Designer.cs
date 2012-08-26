@@ -80,10 +80,10 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label157 = new System.Windows.Forms.Label();
-            this.label159 = new System.Windows.Forms.Label();
-            this.label160 = new System.Windows.Forms.Label();
             this.label158 = new System.Windows.Forms.Label();
+            this.label160 = new System.Windows.Forms.Label();
+            this.label159 = new System.Windows.Forms.Label();
+            this.label157 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.startingMgAttack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startingMgDefense)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startingExperience)).BeginInit();
@@ -116,7 +116,7 @@
             this.label188.Location = new System.Drawing.Point(9, 22);
             this.label188.Name = "label188";
             this.label188.Size = new System.Drawing.Size(32, 13);
-            this.label188.TabIndex = 102;
+            this.label188.TabIndex = 0;
             this.label188.Text = "Level";
             // 
             // label132
@@ -125,7 +125,7 @@
             this.label132.Location = new System.Drawing.Point(9, 232);
             this.label132.Name = "label132";
             this.label132.Size = new System.Drawing.Size(60, 13);
-            this.label132.TabIndex = 104;
+            this.label132.TabIndex = 21;
             this.label132.Text = "Experience";
             // 
             // startingMgAttack
@@ -138,7 +138,7 @@
             0});
             this.startingMgAttack.Name = "startingMgAttack";
             this.startingMgAttack.Size = new System.Drawing.Size(117, 21);
-            this.startingMgAttack.TabIndex = 196;
+            this.startingMgAttack.TabIndex = 10;
             this.startingMgAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingMgAttack.ValueChanged += new System.EventHandler(this.startingMgAttack_ValueChanged);
             // 
@@ -152,7 +152,7 @@
             0});
             this.startingMgDefense.Name = "startingMgDefense";
             this.startingMgDefense.Size = new System.Drawing.Size(117, 21);
-            this.startingMgDefense.TabIndex = 197;
+            this.startingMgDefense.TabIndex = 12;
             this.startingMgDefense.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingMgDefense.ValueChanged += new System.EventHandler(this.startingMgDefense_ValueChanged);
             // 
@@ -166,7 +166,7 @@
             0});
             this.startingExperience.Name = "startingExperience";
             this.startingExperience.Size = new System.Drawing.Size(117, 21);
-            this.startingExperience.TabIndex = 202;
+            this.startingExperience.TabIndex = 22;
             this.startingExperience.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingExperience.ValueChanged += new System.EventHandler(this.startingExperience_ValueChanged);
             // 
@@ -180,7 +180,7 @@
             0});
             this.startingDefense.Name = "startingDefense";
             this.startingDefense.Size = new System.Drawing.Size(117, 21);
-            this.startingDefense.TabIndex = 195;
+            this.startingDefense.TabIndex = 8;
             this.startingDefense.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingDefense.ValueChanged += new System.EventHandler(this.startingDefense_ValueChanged);
             // 
@@ -190,7 +190,7 @@
             this.label128.Location = new System.Drawing.Point(9, 43);
             this.label128.Name = "label128";
             this.label128.Size = new System.Drawing.Size(20, 13);
-            this.label128.TabIndex = 98;
+            this.label128.TabIndex = 2;
             this.label128.Text = "HP";
             // 
             // startingCurrentHP
@@ -203,7 +203,7 @@
             0});
             this.startingCurrentHP.Name = "startingCurrentHP";
             this.startingCurrentHP.Size = new System.Drawing.Size(58, 21);
-            this.startingCurrentHP.TabIndex = 203;
+            this.startingCurrentHP.TabIndex = 3;
             this.startingCurrentHP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingCurrentHP.ValueChanged += new System.EventHandler(this.startingCurrentHP_ValueChanged);
             // 
@@ -217,7 +217,7 @@
             0});
             this.startingAttack.Name = "startingAttack";
             this.startingAttack.Size = new System.Drawing.Size(117, 21);
-            this.startingAttack.TabIndex = 194;
+            this.startingAttack.TabIndex = 6;
             this.startingAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingAttack.ValueChanged += new System.EventHandler(this.startingAttack_ValueChanged);
             // 
@@ -231,7 +231,7 @@
             0});
             this.startingMaximumHP.Name = "startingMaximumHP";
             this.startingMaximumHP.Size = new System.Drawing.Size(59, 21);
-            this.startingMaximumHP.TabIndex = 204;
+            this.startingMaximumHP.TabIndex = 4;
             this.startingMaximumHP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingMaximumHP.ValueChanged += new System.EventHandler(this.startingMaximumHP_ValueChanged);
             // 
@@ -245,7 +245,7 @@
             0});
             this.startingLevel.Name = "startingLevel";
             this.startingLevel.Size = new System.Drawing.Size(117, 21);
-            this.startingLevel.TabIndex = 193;
+            this.startingLevel.TabIndex = 1;
             this.startingLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingLevel.Value = new decimal(new int[] {
             2,
@@ -260,7 +260,7 @@
             this.label131.Location = new System.Drawing.Point(9, 148);
             this.label131.Name = "label131";
             this.label131.Size = new System.Drawing.Size(37, 13);
-            this.label131.TabIndex = 100;
+            this.label131.TabIndex = 13;
             this.label131.Text = "Speed";
             // 
             // startingWeapon
@@ -276,7 +276,7 @@
             this.startingWeapon.Location = new System.Drawing.Point(98, 167);
             this.startingWeapon.Name = "startingWeapon";
             this.startingWeapon.Size = new System.Drawing.Size(117, 21);
-            this.startingWeapon.TabIndex = 109;
+            this.startingWeapon.TabIndex = 16;
             this.startingWeapon.Tag = "";
             this.startingWeapon.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.startingWeapon.SelectedIndexChanged += new System.EventHandler(this.startingWeapon_SelectedIndexChanged);
@@ -287,7 +287,7 @@
             this.label133.Location = new System.Drawing.Point(9, 211);
             this.label133.Name = "label133";
             this.label133.Size = new System.Drawing.Size(56, 13);
-            this.label133.TabIndex = 111;
+            this.label133.TabIndex = 19;
             this.label133.Text = "Accessory";
             // 
             // startingAccessory
@@ -303,7 +303,7 @@
             this.startingAccessory.Location = new System.Drawing.Point(98, 209);
             this.startingAccessory.Name = "startingAccessory";
             this.startingAccessory.Size = new System.Drawing.Size(117, 21);
-            this.startingAccessory.TabIndex = 111;
+            this.startingAccessory.TabIndex = 20;
             this.startingAccessory.Tag = "";
             this.startingAccessory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.startingAccessory.SelectedIndexChanged += new System.EventHandler(this.startingAccessory_SelectedIndexChanged);
@@ -321,7 +321,7 @@
             this.startingArmor.Location = new System.Drawing.Point(98, 188);
             this.startingArmor.Name = "startingArmor";
             this.startingArmor.Size = new System.Drawing.Size(117, 21);
-            this.startingArmor.TabIndex = 110;
+            this.startingArmor.TabIndex = 18;
             this.startingArmor.Tag = "";
             this.startingArmor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.startingArmor.SelectedIndexChanged += new System.EventHandler(this.startingArmor_SelectedIndexChanged);
@@ -336,7 +336,7 @@
             0});
             this.startingSpeed.Name = "startingSpeed";
             this.startingSpeed.Size = new System.Drawing.Size(117, 21);
-            this.startingSpeed.TabIndex = 198;
+            this.startingSpeed.TabIndex = 14;
             this.startingSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingSpeed.ValueChanged += new System.EventHandler(this.startingSpeed_ValueChanged);
             // 
@@ -346,7 +346,7 @@
             this.label138.Location = new System.Drawing.Point(9, 106);
             this.label138.Name = "label138";
             this.label138.Size = new System.Drawing.Size(68, 13);
-            this.label138.TabIndex = 105;
+            this.label138.TabIndex = 9;
             this.label138.Text = "Magic Attack";
             // 
             // label125
@@ -355,7 +355,7 @@
             this.label125.Location = new System.Drawing.Point(9, 127);
             this.label125.Name = "label125";
             this.label125.Size = new System.Drawing.Size(77, 13);
-            this.label125.TabIndex = 103;
+            this.label125.TabIndex = 11;
             this.label125.Text = "Magic Defense";
             // 
             // label127
@@ -364,7 +364,7 @@
             this.label127.Location = new System.Drawing.Point(9, 85);
             this.label127.Name = "label127";
             this.label127.Size = new System.Drawing.Size(47, 13);
-            this.label127.TabIndex = 102;
+            this.label127.TabIndex = 7;
             this.label127.Text = "Defense";
             // 
             // label90
@@ -373,7 +373,7 @@
             this.label90.Location = new System.Drawing.Point(9, 64);
             this.label90.Name = "label90";
             this.label90.Size = new System.Drawing.Size(38, 13);
-            this.label90.TabIndex = 102;
+            this.label90.TabIndex = 5;
             this.label90.Text = "Attack";
             // 
             // label135
@@ -382,7 +382,7 @@
             this.label135.Location = new System.Drawing.Point(9, 169);
             this.label135.Name = "label135";
             this.label135.Size = new System.Drawing.Size(47, 13);
-            this.label135.TabIndex = 109;
+            this.label135.TabIndex = 15;
             this.label135.Text = "Weapon";
             // 
             // label134
@@ -391,7 +391,7 @@
             this.label134.Location = new System.Drawing.Point(9, 190);
             this.label134.Name = "label134";
             this.label134.Size = new System.Drawing.Size(36, 13);
-            this.label134.TabIndex = 110;
+            this.label134.TabIndex = 17;
             this.label134.Text = "Armor";
             // 
             // label92
@@ -400,7 +400,7 @@
             this.label92.Location = new System.Drawing.Point(10, 296);
             this.label92.Name = "label92";
             this.label92.Size = new System.Drawing.Size(87, 13);
-            this.label92.TabIndex = 329;
+            this.label92.TabIndex = 3;
             this.label92.Text = "Inventory Slot #";
             // 
             // startingEquipment
@@ -416,7 +416,7 @@
             this.startingEquipment.Location = new System.Drawing.Point(80, 64);
             this.startingEquipment.Name = "startingEquipment";
             this.startingEquipment.Size = new System.Drawing.Size(135, 21);
-            this.startingEquipment.TabIndex = 324;
+            this.startingEquipment.TabIndex = 5;
             this.startingEquipment.Tag = "";
             this.startingEquipment.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.startingEquipment.SelectedIndexChanged += new System.EventHandler(this.startingEquipment_SelectedIndexChanged);
@@ -434,7 +434,7 @@
             this.startingSpecialItem.Location = new System.Drawing.Point(80, 43);
             this.startingSpecialItem.Name = "startingSpecialItem";
             this.startingSpecialItem.Size = new System.Drawing.Size(135, 21);
-            this.startingSpecialItem.TabIndex = 323;
+            this.startingSpecialItem.TabIndex = 3;
             this.startingSpecialItem.Tag = "";
             this.startingSpecialItem.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.startingSpecialItem.SelectedIndexChanged += new System.EventHandler(this.startingSpecialItem_SelectedIndexChanged);
@@ -452,7 +452,7 @@
             this.startingItem.Location = new System.Drawing.Point(80, 22);
             this.startingItem.Name = "startingItem";
             this.startingItem.Size = new System.Drawing.Size(135, 21);
-            this.startingItem.TabIndex = 322;
+            this.startingItem.TabIndex = 1;
             this.startingItem.Tag = "";
             this.startingItem.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
             this.startingItem.SelectedIndexChanged += new System.EventHandler(this.startingItem_SelectedIndexChanged);
@@ -463,7 +463,7 @@
             this.label84.Location = new System.Drawing.Point(6, 25);
             this.label84.Name = "label84";
             this.label84.Size = new System.Drawing.Size(29, 13);
-            this.label84.TabIndex = 326;
+            this.label84.TabIndex = 0;
             this.label84.Text = "Item";
             // 
             // label88
@@ -472,7 +472,7 @@
             this.label88.Location = new System.Drawing.Point(6, 46);
             this.label88.Name = "label88";
             this.label88.Size = new System.Drawing.Size(68, 13);
-            this.label88.TabIndex = 327;
+            this.label88.TabIndex = 2;
             this.label88.Text = "Special Item ";
             // 
             // label162
@@ -481,7 +481,7 @@
             this.label162.Location = new System.Drawing.Point(6, 67);
             this.label162.Name = "label162";
             this.label162.Size = new System.Drawing.Size(57, 13);
-            this.label162.TabIndex = 328;
+            this.label162.TabIndex = 4;
             this.label162.Text = "Equipment";
             // 
             // slotNum
@@ -494,7 +494,7 @@
             0});
             this.slotNum.Name = "slotNum";
             this.slotNum.Size = new System.Drawing.Size(58, 21);
-            this.slotNum.TabIndex = 210;
+            this.slotNum.TabIndex = 4;
             this.slotNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.slotNum.ValueChanged += new System.EventHandler(this.slotNum_ValueChanged);
             // 
@@ -504,7 +504,7 @@
             this.label163.Location = new System.Drawing.Point(6, 23);
             this.label163.Name = "label163";
             this.label163.Size = new System.Drawing.Size(33, 13);
-            this.label163.TabIndex = 329;
+            this.label163.TabIndex = 0;
             this.label163.Text = "Coins";
             // 
             // startingMaximumFP
@@ -517,7 +517,7 @@
             0});
             this.startingMaximumFP.Name = "startingMaximumFP";
             this.startingMaximumFP.Size = new System.Drawing.Size(46, 21);
-            this.startingMaximumFP.TabIndex = 209;
+            this.startingMaximumFP.TabIndex = 6;
             this.startingMaximumFP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingMaximumFP.ValueChanged += new System.EventHandler(this.startingMaximumFP_ValueChanged);
             // 
@@ -531,7 +531,7 @@
             0});
             this.startingCurrentFP.Name = "startingCurrentFP";
             this.startingCurrentFP.Size = new System.Drawing.Size(46, 21);
-            this.startingCurrentFP.TabIndex = 208;
+            this.startingCurrentFP.TabIndex = 5;
             this.startingCurrentFP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingCurrentFP.ValueChanged += new System.EventHandler(this.startingCurrentFP_ValueChanged);
             // 
@@ -545,7 +545,7 @@
             0});
             this.startingFrogCoins.Name = "startingFrogCoins";
             this.startingFrogCoins.Size = new System.Drawing.Size(46, 21);
-            this.startingFrogCoins.TabIndex = 207;
+            this.startingFrogCoins.TabIndex = 3;
             this.startingFrogCoins.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingFrogCoins.ValueChanged += new System.EventHandler(this.startingFrogCoins_ValueChanged);
             // 
@@ -559,7 +559,7 @@
             0});
             this.startingCoins.Name = "startingCoins";
             this.startingCoins.Size = new System.Drawing.Size(46, 21);
-            this.startingCoins.TabIndex = 206;
+            this.startingCoins.TabIndex = 1;
             this.startingCoins.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.startingCoins.ValueChanged += new System.EventHandler(this.startingCoins_ValueChanged);
             // 
@@ -569,7 +569,7 @@
             this.label165.Location = new System.Drawing.Point(6, 86);
             this.label165.Name = "label165";
             this.label165.Size = new System.Drawing.Size(19, 13);
-            this.label165.TabIndex = 331;
+            this.label165.TabIndex = 4;
             this.label165.Text = "FP";
             // 
             // label164
@@ -578,7 +578,7 @@
             this.label164.Location = new System.Drawing.Point(6, 44);
             this.label164.Name = "label164";
             this.label164.Size = new System.Drawing.Size(58, 13);
-            this.label164.TabIndex = 330;
+            this.label164.TabIndex = 2;
             this.label164.Text = "Frog Coins";
             // 
             // toolStrip1
@@ -593,7 +593,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(506, 25);
-            this.toolStrip1.TabIndex = 472;
+            this.toolStrip1.TabIndex = 0;
             // 
             // characterName
             // 
@@ -639,7 +639,7 @@
             0});
             this.lvl2TimingEnd.Name = "lvl2TimingEnd";
             this.lvl2TimingEnd.Size = new System.Drawing.Size(45, 21);
-            this.lvl2TimingEnd.TabIndex = 566;
+            this.lvl2TimingEnd.TabIndex = 5;
             this.lvl2TimingEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lvl2TimingEnd.ValueChanged += new System.EventHandler(this.lvl2TimingEnd_ValueChanged);
             // 
@@ -653,7 +653,7 @@
             0});
             this.lvl2TimingStart.Name = "lvl2TimingStart";
             this.lvl2TimingStart.Size = new System.Drawing.Size(45, 21);
-            this.lvl2TimingStart.TabIndex = 564;
+            this.lvl2TimingStart.TabIndex = 3;
             this.lvl2TimingStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lvl2TimingStart.ValueChanged += new System.EventHandler(this.lvl2TimingStart_ValueChanged);
             // 
@@ -667,7 +667,7 @@
             0});
             this.lvl1TimingStart.Name = "lvl1TimingStart";
             this.lvl1TimingStart.Size = new System.Drawing.Size(45, 21);
-            this.lvl1TimingStart.TabIndex = 562;
+            this.lvl1TimingStart.TabIndex = 1;
             this.lvl1TimingStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lvl1TimingStart.ValueChanged += new System.EventHandler(this.lvl1TimingStart_ValueChanged);
             // 
@@ -681,7 +681,7 @@
             0});
             this.lvl1TimingEnd.Name = "lvl1TimingEnd";
             this.lvl1TimingEnd.Size = new System.Drawing.Size(45, 21);
-            this.lvl1TimingEnd.TabIndex = 568;
+            this.lvl1TimingEnd.TabIndex = 7;
             this.lvl1TimingEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lvl1TimingEnd.ValueChanged += new System.EventHandler(this.lvl1TimingEnd_ValueChanged);
             // 
@@ -695,7 +695,7 @@
             this.startingMagic.MultiColumn = true;
             this.startingMagic.Name = "startingMagic";
             this.startingMagic.Size = new System.Drawing.Size(258, 260);
-            this.startingMagic.TabIndex = 205;
+            this.startingMagic.TabIndex = 0;
             this.startingMagic.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.startingMagic_DrawItem);
             this.startingMagic.SelectedIndexChanged += new System.EventHandler(this.startingMagic_SelectedIndexChanged);
             // 
@@ -711,7 +711,7 @@
             this.groupBox1.Location = new System.Drawing.Point(231, 320);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(129, 111);
-            this.groupBox1.TabIndex = 574;
+            this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New Game Status";
             // 
@@ -743,7 +743,7 @@
             this.groupBox3.Location = new System.Drawing.Point(4, 28);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(221, 257);
-            this.groupBox3.TabIndex = 330;
+            this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "New Game Ally Status";
             // 
@@ -753,7 +753,7 @@
             this.groupBox4.Location = new System.Drawing.Point(231, 28);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(270, 286);
-            this.groupBox4.TabIndex = 576;
+            this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "New Game Ally Spells";
             // 
@@ -768,7 +768,7 @@
             this.groupBox5.Location = new System.Drawing.Point(4, 320);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(221, 111);
-            this.groupBox5.TabIndex = 330;
+            this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Inventory Slot Items";
             // 
@@ -785,36 +785,9 @@
             this.groupBox2.Location = new System.Drawing.Point(366, 320);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(135, 111);
-            this.groupBox2.TabIndex = 577;
+            this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Defense Timing";
-            // 
-            // label157
-            // 
-            this.label157.AutoSize = true;
-            this.label157.Location = new System.Drawing.Point(6, 86);
-            this.label157.Name = "label157";
-            this.label157.Size = new System.Drawing.Size(67, 13);
-            this.label157.TabIndex = 561;
-            this.label157.Text = "1/2 dmg end";
-            // 
-            // label159
-            // 
-            this.label159.AutoSize = true;
-            this.label159.Location = new System.Drawing.Point(6, 65);
-            this.label159.Name = "label159";
-            this.label159.Size = new System.Drawing.Size(57, 13);
-            this.label159.TabIndex = 560;
-            this.label159.Text = "0 dmg end";
-            // 
-            // label160
-            // 
-            this.label160.AutoSize = true;
-            this.label160.Location = new System.Drawing.Point(6, 44);
-            this.label160.Name = "label160";
-            this.label160.Size = new System.Drawing.Size(62, 13);
-            this.label160.TabIndex = 559;
-            this.label160.Text = "0 dmg start";
             // 
             // label158
             // 
@@ -822,8 +795,35 @@
             this.label158.Location = new System.Drawing.Point(6, 23);
             this.label158.Name = "label158";
             this.label158.Size = new System.Drawing.Size(72, 13);
-            this.label158.TabIndex = 558;
+            this.label158.TabIndex = 0;
             this.label158.Text = "1/2 dmg start";
+            // 
+            // label160
+            // 
+            this.label160.AutoSize = true;
+            this.label160.Location = new System.Drawing.Point(6, 44);
+            this.label160.Name = "label160";
+            this.label160.Size = new System.Drawing.Size(62, 13);
+            this.label160.TabIndex = 2;
+            this.label160.Text = "0 dmg start";
+            // 
+            // label159
+            // 
+            this.label159.AutoSize = true;
+            this.label159.Location = new System.Drawing.Point(6, 65);
+            this.label159.Name = "label159";
+            this.label159.Size = new System.Drawing.Size(57, 13);
+            this.label159.TabIndex = 4;
+            this.label159.Text = "0 dmg end";
+            // 
+            // label157
+            // 
+            this.label157.AutoSize = true;
+            this.label157.Location = new System.Drawing.Point(6, 86);
+            this.label157.Name = "label157";
+            this.label157.Size = new System.Drawing.Size(67, 13);
+            this.label157.TabIndex = 6;
+            this.label157.Text = "1/2 dmg end";
             // 
             // Allies
             // 

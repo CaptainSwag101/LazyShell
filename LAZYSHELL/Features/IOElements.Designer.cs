@@ -54,7 +54,7 @@
             this.radioButtonAll.Location = new System.Drawing.Point(12, 64);
             this.radioButtonAll.Name = "radioButtonAll";
             this.radioButtonAll.Size = new System.Drawing.Size(364, 17);
-            this.radioButtonAll.TabIndex = 1;
+            this.radioButtonAll.TabIndex = 3;
             this.radioButtonAll.TabStop = true;
             this.radioButtonAll.Text = "All indexes as directory of files...";
             this.radioButtonAll.UseVisualStyleBackColor = true;
@@ -66,7 +66,7 @@
             this.buttonOK.Location = new System.Drawing.Point(301, 113);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 2;
+            this.buttonOK.TabIndex = 6;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -76,7 +76,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(382, 113);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 3;
+            this.buttonCancel.TabIndex = 7;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -86,27 +86,27 @@
             this.textBoxCurrent.Location = new System.Drawing.Point(12, 35);
             this.textBoxCurrent.Name = "textBoxCurrent";
             this.textBoxCurrent.ReadOnly = true;
-            this.textBoxCurrent.Size = new System.Drawing.Size(445, 21);
-            this.textBoxCurrent.TabIndex = 4;
+            this.textBoxCurrent.Size = new System.Drawing.Size(412, 21);
+            this.textBoxCurrent.TabIndex = 2;
             // 
             // browseCurrent
             // 
-            this.browseCurrent.Location = new System.Drawing.Point(382, 9);
+            this.browseCurrent.Location = new System.Drawing.Point(430, 35);
             this.browseCurrent.Name = "browseCurrent";
-            this.browseCurrent.Size = new System.Drawing.Size(75, 23);
-            this.browseCurrent.TabIndex = 5;
-            this.browseCurrent.Text = "Browse...";
+            this.browseCurrent.Size = new System.Drawing.Size(27, 23);
+            this.browseCurrent.TabIndex = 1;
+            this.browseCurrent.Text = "...";
             this.browseCurrent.UseVisualStyleBackColor = true;
             this.browseCurrent.Click += new System.EventHandler(this.browseCurrent_Click);
             // 
             // browseAll
             // 
             this.browseAll.Enabled = false;
-            this.browseAll.Location = new System.Drawing.Point(382, 61);
+            this.browseAll.Location = new System.Drawing.Point(430, 87);
             this.browseAll.Name = "browseAll";
-            this.browseAll.Size = new System.Drawing.Size(75, 23);
-            this.browseAll.TabIndex = 7;
-            this.browseAll.Text = "Browse...";
+            this.browseAll.Size = new System.Drawing.Size(27, 23);
+            this.browseAll.TabIndex = 4;
+            this.browseAll.Text = "...";
             this.browseAll.UseVisualStyleBackColor = true;
             this.browseAll.Click += new System.EventHandler(this.browseAll_Click);
             // 
@@ -116,8 +116,8 @@
             this.textBoxAll.Location = new System.Drawing.Point(12, 87);
             this.textBoxAll.Name = "textBoxAll";
             this.textBoxAll.ReadOnly = true;
-            this.textBoxAll.Size = new System.Drawing.Size(445, 21);
-            this.textBoxAll.TabIndex = 6;
+            this.textBoxAll.Size = new System.Drawing.Size(412, 21);
+            this.textBoxAll.TabIndex = 5;
             // 
             // IOElements
             // 

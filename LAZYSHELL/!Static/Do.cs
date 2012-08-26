@@ -17,7 +17,6 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
-using LAZYSHELL.Previewer;
 using LAZYSHELL.ScriptsEditor;
 using LAZYSHELL.ScriptsEditor.Commands;
 
@@ -2332,7 +2331,7 @@ namespace LAZYSHELL
                 if (image.Height % 8 != 0)
                     height += 8;
                 // if to be tilemap, add another 8 if needed
-                if (width > 32 || height > 32)
+                if (alwaysTilemap || width > 32 || height > 32)
                 {
                     if (width % 16 != 0)
                         width += 8;
@@ -4502,12 +4501,14 @@ namespace LAZYSHELL
                     return false;
             return true;
         }
-        public static void Play(SoundPlayer soundPlayer, byte[] wav, int rate)
+        public static void Play(SoundPlayer soundPlayer, byte[] wav, bool looping)
         {
             if (wav == null) return;
-            Stream s = new MemoryStream(wav);
-            soundPlayer.Stream = s;
-            soundPlayer.Play();
+            soundPlayer.Stream = new MemoryStream(wav);
+            if (looping)
+                soundPlayer.PlayLooping();
+            else
+                soundPlayer.Play();
         }
         public static bool Contains(List<HexEditor.Change> items, int offset)
         {
@@ -4588,6 +4589,18 @@ namespace LAZYSHELL
                         }
                         continue;
                     }
+                    //else if (OBJECT.GetType() == typeof(SPC[]))
+                    //{
+                    //    foreach (SPC spc in (SPC[])OBJECT)
+                    //    {
+                    //        if (spc.SPCData == null)
+                    //            continue;
+                    //        bytes = spc.SPCData;
+                    //        for (int i = 0; i < bytes.Length; i++)
+                    //            check += (byte)(bytes[i] * i + bytes[i]);
+                    //    }
+                    //    continue;
+                    //}
                     else
                     {
                         ms = new MemoryStream();
