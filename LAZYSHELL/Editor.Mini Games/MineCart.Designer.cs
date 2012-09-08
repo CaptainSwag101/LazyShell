@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MineCart));
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.levelName = new System.Windows.Forms.ToolStripComboBox();
@@ -164,7 +163,7 @@
             // 
             // resetAllObjectsToolStripMenuItem
             // 
-            this.resetAllObjectsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetAllObjectsToolStripMenuItem.Image")));
+            this.resetAllObjectsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetAllObjectsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetAllObjectsToolStripMenuItem.Name = "resetAllObjectsToolStripMenuItem";
             this.resetAllObjectsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
@@ -173,7 +172,7 @@
             // 
             // resetCurrentTilesetToolStripMenuItem
             // 
-            this.resetCurrentTilesetToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetCurrentTilesetToolStripMenuItem.Image")));
+            this.resetCurrentTilesetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetCurrentTilesetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetCurrentTilesetToolStripMenuItem.Name = "resetCurrentTilesetToolStripMenuItem";
             this.resetCurrentTilesetToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
@@ -182,7 +181,7 @@
             // 
             // resetCurrentTilemapToolStripMenuItem
             // 
-            this.resetCurrentTilemapToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetCurrentTilemapToolStripMenuItem.Image")));
+            this.resetCurrentTilemapToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetCurrentTilemapToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetCurrentTilemapToolStripMenuItem.Name = "resetCurrentTilemapToolStripMenuItem";
             this.resetCurrentTilemapToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
@@ -204,6 +203,11 @@
             // 
             this.startX.AutoSize = false;
             this.startX.Hexadecimal = false;
+            this.startX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.startX.Location = new System.Drawing.Point(322, 4);
             this.startX.Maximum = new decimal(new int[] {
             1023,
@@ -228,6 +232,11 @@
             // 
             this.startY.AutoSize = false;
             this.startY.Hexadecimal = false;
+            this.startY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.startY.Location = new System.Drawing.Point(382, 4);
             this.startY.Maximum = new decimal(new int[] {
             1023,
@@ -290,19 +299,19 @@
             // 
             // stagePalettesMenuItem
             // 
-            this.stagePalettesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stagePalettesMenuItem.Image")));
+            this.stagePalettesMenuItem.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.stagePalettesMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.stagePalettesMenuItem.Name = "stagePalettesMenuItem";
-            this.stagePalettesMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.stagePalettesMenuItem.Size = new System.Drawing.Size(154, 24);
             this.stagePalettesMenuItem.Text = "Stage Palettes";
             this.stagePalettesMenuItem.Click += new System.EventHandler(this.stagePalettesMenuItem_Click);
             // 
             // spritePalettesMenuItem
             // 
-            this.spritePalettesMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("spritePalettesMenuItem.Image")));
+            this.spritePalettesMenuItem.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.spritePalettesMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.spritePalettesMenuItem.Name = "spritePalettesMenuItem";
-            this.spritePalettesMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.spritePalettesMenuItem.Size = new System.Drawing.Size(154, 24);
             this.spritePalettesMenuItem.Text = "Sprite Palettes";
             this.spritePalettesMenuItem.Click += new System.EventHandler(this.spritePalettesMenuItem_Click);
             // 
@@ -320,19 +329,19 @@
             // 
             // stageGraphicsToolStripMenuItem
             // 
-            this.stageGraphicsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stageGraphicsToolStripMenuItem.Image")));
+            this.stageGraphicsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.stageGraphicsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.stageGraphicsToolStripMenuItem.Name = "stageGraphicsToolStripMenuItem";
-            this.stageGraphicsToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
+            this.stageGraphicsToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
             this.stageGraphicsToolStripMenuItem.Text = "Stage Graphics";
             this.stageGraphicsToolStripMenuItem.Click += new System.EventHandler(this.stageGraphicsToolStripMenuItem_Click);
             // 
             // spriteGraphicsToolStripMenuItem
             // 
-            this.spriteGraphicsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("spriteGraphicsToolStripMenuItem.Image")));
+            this.spriteGraphicsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.spriteGraphicsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.spriteGraphicsToolStripMenuItem.Name = "spriteGraphicsToolStripMenuItem";
-            this.spriteGraphicsToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
+            this.spriteGraphicsToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
             this.spriteGraphicsToolStripMenuItem.Text = "Sprite Graphics";
             this.spriteGraphicsToolStripMenuItem.Click += new System.EventHandler(this.spriteGraphicsToolStripMenuItem_Click);
             // 
@@ -638,6 +647,11 @@
             // 
             this.screenWidth.AutoSize = false;
             this.screenWidth.Hexadecimal = false;
+            this.screenWidth.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.screenWidth.Location = new System.Drawing.Point(54, 4);
             this.screenWidth.Maximum = new decimal(new int[] {
             8192,
@@ -686,6 +700,11 @@
             // 
             this.screenL1Number.AutoSize = false;
             this.screenL1Number.Hexadecimal = false;
+            this.screenL1Number.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.screenL1Number.Location = new System.Drawing.Point(209, 4);
             this.screenL1Number.Maximum = new decimal(new int[] {
             15,
@@ -717,6 +736,11 @@
             // 
             this.screenL2Number.AutoSize = false;
             this.screenL2Number.Hexadecimal = false;
+            this.screenL2Number.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.screenL2Number.Location = new System.Drawing.Point(335, 4);
             this.screenL2Number.Maximum = new decimal(new int[] {
             15,

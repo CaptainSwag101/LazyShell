@@ -35,24 +35,40 @@
             this.panel60 = new System.Windows.Forms.Panel();
             this.dialogueTextBox = new System.Windows.Forms.RichTextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.newLine = new System.Windows.Forms.ToolStripButton();
+            this.newLineA = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.newPage = new System.Windows.Forms.ToolStripButton();
+            this.newPageA = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.endString = new System.Windows.Forms.ToolStripButton();
+            this.endStringA = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.option = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.pause60f = new System.Windows.Forms.ToolStripButton();
+            this.pauseA = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.pageUp = new System.Windows.Forms.ToolStripButton();
+            this.pageDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.synchronizeDupes = new System.Windows.Forms.ToolStripButton();
+            this.textView = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.freeBytes = new System.Windows.Forms.ToolStripLabel();
             this.panel69 = new System.Windows.Forms.Panel();
+            this.pictureBoxDialogue = new System.Windows.Forms.PictureBox();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.textBoxSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.search = new System.Windows.Forms.ToolStripButton();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.pauseFrameNum = new LAZYSHELL.ToolStripNumericUpDown();
+            this.pauseFramesInsert = new System.Windows.Forms.ToolStripButton();
             this.toolStrip6 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.variables = new System.Windows.Forms.ToolStripComboBox();
+            this.variablesInsert = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
@@ -71,27 +87,8 @@
             this.dct14 = new System.Windows.Forms.TextBox();
             this.dct13 = new System.Windows.Forms.TextBox();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.newLine = new System.Windows.Forms.ToolStripButton();
-            this.newLineA = new System.Windows.Forms.ToolStripButton();
-            this.newPage = new System.Windows.Forms.ToolStripButton();
-            this.newPageA = new System.Windows.Forms.ToolStripButton();
-            this.endString = new System.Windows.Forms.ToolStripButton();
-            this.endStringA = new System.Windows.Forms.ToolStripButton();
-            this.pause60f = new System.Windows.Forms.ToolStripButton();
-            this.pauseA = new System.Windows.Forms.ToolStripButton();
-            this.pageUp = new System.Windows.Forms.ToolStripButton();
-            this.pageDown = new System.Windows.Forms.ToolStripButton();
-            this.synchronizeDupes = new System.Windows.Forms.ToolStripButton();
-            this.textView = new System.Windows.Forms.ToolStripButton();
-            this.pictureBoxDialogue = new System.Windows.Forms.PictureBox();
-            this.search = new System.Windows.Forms.ToolStripButton();
-            this.pauseFramesInsert = new System.Windows.Forms.ToolStripButton();
-            this.variablesInsert = new System.Windows.Forms.ToolStripButton();
             this.save = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.import = new System.Windows.Forms.ToolStripDropDownButton();
             this.importDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importBattleDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,28 +99,36 @@
             this.clear = new System.Windows.Forms.ToolStripDropDownButton();
             this.clearDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearBattleDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.helpTips = new System.Windows.Forms.ToolStripButton();
             this.showDecHex = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.showDialogues = new System.Windows.Forms.ToolStripButton();
             this.showBattleDialogues = new System.Windows.Forms.ToolStripButton();
             this.showFonts = new System.Windows.Forms.ToolStripButton();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel60.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel69.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialogue)).BeginInit();
             this.toolStrip5.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.toolStrip6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip7.SuspendLayout();
             this.toolStrip3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialogue)).BeginInit();
             this.SuspendLayout();
             // 
             // dialogueNum
             // 
             this.dialogueNum.AutoSize = false;
             this.dialogueNum.Hexadecimal = false;
+            this.dialogueNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.dialogueNum.Location = new System.Drawing.Point(7, 2);
             this.dialogueNum.Maximum = new decimal(new int[] {
             4095,
@@ -213,15 +218,81 @@
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
+            // newLine
+            // 
+            this.newLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newLine.Image = global::LAZYSHELL.Properties.Resources.newLine;
+            this.newLine.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.newLine.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newLine.Name = "newLine";
+            this.newLine.Size = new System.Drawing.Size(21, 16);
+            this.newLine.Text = "New Line";
+            this.newLine.Click += new System.EventHandler(this.newLine_Click);
+            // 
+            // newLineA
+            // 
+            this.newLineA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newLineA.Image = global::LAZYSHELL.Properties.Resources.newLineA;
+            this.newLineA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.newLineA.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newLineA.Name = "newLineA";
+            this.newLineA.Size = new System.Drawing.Size(21, 16);
+            this.newLineA.Text = "New Line, wait for input";
+            this.newLineA.Click += new System.EventHandler(this.newLineA_Click);
+            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(21, 6);
             // 
+            // newPage
+            // 
+            this.newPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newPage.Image = global::LAZYSHELL.Properties.Resources.pageBreak;
+            this.newPage.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.newPage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newPage.Name = "newPage";
+            this.newPage.Size = new System.Drawing.Size(21, 19);
+            this.newPage.Text = "New Page";
+            this.newPage.Click += new System.EventHandler(this.newPage_Click);
+            // 
+            // newPageA
+            // 
+            this.newPageA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newPageA.Image = global::LAZYSHELL.Properties.Resources.pageBreakA;
+            this.newPageA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.newPageA.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newPageA.Name = "newPageA";
+            this.newPageA.Size = new System.Drawing.Size(21, 19);
+            this.newPageA.Text = "New Page, wait for input";
+            this.newPageA.Click += new System.EventHandler(this.newPageA_Click);
+            // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(21, 6);
+            // 
+            // endString
+            // 
+            this.endString.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.endString.Image = global::LAZYSHELL.Properties.Resources.endString;
+            this.endString.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.endString.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.endString.Name = "endString";
+            this.endString.Size = new System.Drawing.Size(21, 15);
+            this.endString.Text = "End String";
+            this.endString.Click += new System.EventHandler(this.endString_Click);
+            // 
+            // endStringA
+            // 
+            this.endStringA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.endStringA.Image = global::LAZYSHELL.Properties.Resources.endStringA;
+            this.endStringA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.endStringA.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.endStringA.Name = "endStringA";
+            this.endStringA.Size = new System.Drawing.Size(21, 15);
+            this.endStringA.Text = "End String, wait for input";
+            this.endStringA.Click += new System.EventHandler(this.endStringA_Click);
             // 
             // toolStripSeparator9
             // 
@@ -243,6 +314,28 @@
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(21, 6);
             // 
+            // pause60f
+            // 
+            this.pause60f.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pause60f.Image = global::LAZYSHELL.Properties.Resources.pause60f;
+            this.pause60f.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pause60f.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pause60f.Name = "pause60f";
+            this.pause60f.Size = new System.Drawing.Size(21, 19);
+            this.pause60f.Text = "Pause 1 second";
+            this.pause60f.Click += new System.EventHandler(this.pause60f_Click);
+            // 
+            // pauseA
+            // 
+            this.pauseA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pauseA.Image = global::LAZYSHELL.Properties.Resources.pauseA;
+            this.pauseA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pauseA.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pauseA.Name = "pauseA";
+            this.pauseA.Size = new System.Drawing.Size(21, 19);
+            this.pauseA.Text = "Pause, wait for input";
+            this.pauseA.Click += new System.EventHandler(this.pauseA_Click);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -261,10 +354,57 @@
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // pageUp
+            // 
+            this.pageUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pageUp.Image = global::LAZYSHELL.Properties.Resources.pageUp;
+            this.pageUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pageUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pageUp.Name = "pageUp";
+            this.pageUp.Size = new System.Drawing.Size(23, 22);
+            this.pageUp.ToolTipText = "Back 1 Page";
+            this.pageUp.Click += new System.EventHandler(this.pageUp_Click);
+            // 
+            // pageDown
+            // 
+            this.pageDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pageDown.Image = global::LAZYSHELL.Properties.Resources.pageDown;
+            this.pageDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pageDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pageDown.Name = "pageDown";
+            this.pageDown.Size = new System.Drawing.Size(23, 22);
+            this.pageDown.ToolTipText = "Foward 1 Page";
+            this.pageDown.Click += new System.EventHandler(this.pageDown_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // synchronizeDupes
+            // 
+            this.synchronizeDupes.Checked = true;
+            this.synchronizeDupes.CheckOnClick = true;
+            this.synchronizeDupes.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.synchronizeDupes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.synchronizeDupes.Image = global::LAZYSHELL.Properties.Resources.synchronize;
+            this.synchronizeDupes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.synchronizeDupes.Name = "synchronizeDupes";
+            this.synchronizeDupes.Size = new System.Drawing.Size(23, 22);
+            this.synchronizeDupes.ToolTipText = "Synchronize Duplicates";
+            this.synchronizeDupes.CheckedChanged += new System.EventHandler(this.synchronizeDupes_CheckedChanged);
+            // 
+            // textView
+            // 
+            this.textView.CheckOnClick = true;
+            this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
+            this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.textView.Name = "textView";
+            this.textView.Size = new System.Drawing.Size(23, 22);
+            this.textView.Text = "Text View";
+            this.textView.Click += new System.EventHandler(this.textView_Click);
             // 
             // toolStripSeparator2
             // 
@@ -286,6 +426,16 @@
             this.panel69.Size = new System.Drawing.Size(244, 56);
             this.panel69.TabIndex = 1;
             // 
+            // pictureBoxDialogue
+            // 
+            this.pictureBoxDialogue.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBoxDialogue.Location = new System.Drawing.Point(-8, 0);
+            this.pictureBoxDialogue.Name = "pictureBoxDialogue";
+            this.pictureBoxDialogue.Size = new System.Drawing.Size(256, 56);
+            this.pictureBoxDialogue.TabIndex = 521;
+            this.pictureBoxDialogue.TabStop = false;
+            this.pictureBoxDialogue.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxDialogue_Paint);
+            // 
             // toolStrip5
             // 
             this.toolStrip5.CanOverflow = false;
@@ -304,6 +454,16 @@
             // 
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(145, 25);
+            // 
+            // search
+            // 
+            this.search.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.search.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.search.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.search.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.search.Name = "search";
+            this.search.Size = new System.Drawing.Size(23, 22);
+            this.search.Text = "Search For Dialogue";
             // 
             // toolStrip4
             // 
@@ -334,7 +494,12 @@
             // 
             this.pauseFrameNum.AutoSize = false;
             this.pauseFrameNum.Hexadecimal = false;
-            this.pauseFrameNum.Location = new System.Drawing.Point(94, 2);
+            this.pauseFrameNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.pauseFrameNum.Location = new System.Drawing.Point(94, 3);
             this.pauseFrameNum.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.pauseFrameNum.Maximum = new decimal(new int[] {
             255,
@@ -354,6 +519,17 @@
             0,
             0,
             0});
+            // 
+            // pauseFramesInsert
+            // 
+            this.pauseFramesInsert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pauseFramesInsert.Image = global::LAZYSHELL.Properties.Resources.insertIntoText;
+            this.pauseFramesInsert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pauseFramesInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pauseFramesInsert.Name = "pauseFramesInsert";
+            this.pauseFramesInsert.Size = new System.Drawing.Size(23, 22);
+            this.pauseFramesInsert.Text = "Insert into text";
+            this.pauseFramesInsert.Click += new System.EventHandler(this.pauseFramesInsert_Click);
             // 
             // toolStrip6
             // 
@@ -393,6 +569,17 @@
             "Game slot\'s name"});
             this.variables.Name = "variables";
             this.variables.Size = new System.Drawing.Size(120, 25);
+            // 
+            // variablesInsert
+            // 
+            this.variablesInsert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.variablesInsert.Image = global::LAZYSHELL.Properties.Resources.insertIntoText;
+            this.variablesInsert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.variablesInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.variablesInsert.Name = "variablesInsert";
+            this.variablesInsert.Size = new System.Drawing.Size(23, 22);
+            this.variablesInsert.Text = "Insert into text";
+            this.variablesInsert.Click += new System.EventHandler(this.variablesInsert_Click);
             // 
             // panel1
             // 
@@ -573,203 +760,6 @@
             this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.Active = false;
-            this.toolTip1.IsBalloon = true;
-            // 
-            // newLine
-            // 
-            this.newLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newLine.Image = global::LAZYSHELL.Properties.Resources.newLine;
-            this.newLine.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.newLine.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newLine.Name = "newLine";
-            this.newLine.Size = new System.Drawing.Size(21, 16);
-            this.newLine.Text = "New Line";
-            this.newLine.Click += new System.EventHandler(this.newLine_Click);
-            // 
-            // newLineA
-            // 
-            this.newLineA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newLineA.Image = global::LAZYSHELL.Properties.Resources.newLineA;
-            this.newLineA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.newLineA.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newLineA.Name = "newLineA";
-            this.newLineA.Size = new System.Drawing.Size(21, 16);
-            this.newLineA.Text = "New Line, wait for input";
-            this.newLineA.Click += new System.EventHandler(this.newLineA_Click);
-            // 
-            // newPage
-            // 
-            this.newPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newPage.Image = global::LAZYSHELL.Properties.Resources.pageBreak;
-            this.newPage.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.newPage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newPage.Name = "newPage";
-            this.newPage.Size = new System.Drawing.Size(21, 19);
-            this.newPage.Text = "New Page";
-            this.newPage.Click += new System.EventHandler(this.newPage_Click);
-            // 
-            // newPageA
-            // 
-            this.newPageA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newPageA.Image = global::LAZYSHELL.Properties.Resources.pageBreakA;
-            this.newPageA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.newPageA.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newPageA.Name = "newPageA";
-            this.newPageA.Size = new System.Drawing.Size(21, 19);
-            this.newPageA.Text = "New Page, wait for input";
-            this.newPageA.Click += new System.EventHandler(this.newPageA_Click);
-            // 
-            // endString
-            // 
-            this.endString.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.endString.Image = global::LAZYSHELL.Properties.Resources.endString;
-            this.endString.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.endString.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.endString.Name = "endString";
-            this.endString.Size = new System.Drawing.Size(21, 15);
-            this.endString.Text = "End String";
-            this.endString.Click += new System.EventHandler(this.endString_Click);
-            // 
-            // endStringA
-            // 
-            this.endStringA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.endStringA.Image = global::LAZYSHELL.Properties.Resources.endStringA;
-            this.endStringA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.endStringA.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.endStringA.Name = "endStringA";
-            this.endStringA.Size = new System.Drawing.Size(21, 15);
-            this.endStringA.Text = "End String, wait for input";
-            this.endStringA.Click += new System.EventHandler(this.endStringA_Click);
-            // 
-            // pause60f
-            // 
-            this.pause60f.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pause60f.Image = global::LAZYSHELL.Properties.Resources.pause60f;
-            this.pause60f.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pause60f.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pause60f.Name = "pause60f";
-            this.pause60f.Size = new System.Drawing.Size(21, 19);
-            this.pause60f.Text = "Pause 1 second";
-            this.pause60f.Click += new System.EventHandler(this.pause60f_Click);
-            // 
-            // pauseA
-            // 
-            this.pauseA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pauseA.Image = global::LAZYSHELL.Properties.Resources.pauseA;
-            this.pauseA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pauseA.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pauseA.Name = "pauseA";
-            this.pauseA.Size = new System.Drawing.Size(21, 19);
-            this.pauseA.Text = "Pause, wait for input";
-            this.pauseA.Click += new System.EventHandler(this.pauseA_Click);
-            // 
-            // pageUp
-            // 
-            this.pageUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pageUp.Image = global::LAZYSHELL.Properties.Resources.pageUp;
-            this.pageUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pageUp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pageUp.Name = "pageUp";
-            this.pageUp.Size = new System.Drawing.Size(23, 22);
-            this.pageUp.ToolTipText = "Back 1 Page";
-            this.pageUp.Click += new System.EventHandler(this.pageUp_Click);
-            // 
-            // pageDown
-            // 
-            this.pageDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pageDown.Image = global::LAZYSHELL.Properties.Resources.pageDown;
-            this.pageDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pageDown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pageDown.Name = "pageDown";
-            this.pageDown.Size = new System.Drawing.Size(23, 22);
-            this.pageDown.ToolTipText = "Foward 1 Page";
-            this.pageDown.Click += new System.EventHandler(this.pageDown_Click);
-            // 
-            // synchronizeDupes
-            // 
-            this.synchronizeDupes.Checked = true;
-            this.synchronizeDupes.CheckOnClick = true;
-            this.synchronizeDupes.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.synchronizeDupes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.synchronizeDupes.Image = global::LAZYSHELL.Properties.Resources.synchronize;
-            this.synchronizeDupes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.synchronizeDupes.Name = "synchronizeDupes";
-            this.synchronizeDupes.Size = new System.Drawing.Size(23, 22);
-            this.synchronizeDupes.ToolTipText = "Synchronize Duplicates";
-            this.synchronizeDupes.CheckedChanged += new System.EventHandler(this.synchronizeDupes_CheckedChanged);
-            // 
-            // textView
-            // 
-            this.textView.CheckOnClick = true;
-            this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
-            this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.textView.Name = "textView";
-            this.textView.Size = new System.Drawing.Size(23, 22);
-            this.textView.Text = "Text View";
-            this.textView.Click += new System.EventHandler(this.textView_Click);
-            // 
-            // pictureBoxDialogue
-            // 
-            this.pictureBoxDialogue.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
-            this.pictureBoxDialogue.Location = new System.Drawing.Point(-8, 0);
-            this.pictureBoxDialogue.Name = "pictureBoxDialogue";
-            this.pictureBoxDialogue.Size = new System.Drawing.Size(256, 56);
-            this.pictureBoxDialogue.TabIndex = 521;
-            this.pictureBoxDialogue.TabStop = false;
-            this.pictureBoxDialogue.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxDialogue_Paint);
-            // 
-            // search
-            // 
-            this.search.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.search.Image = global::LAZYSHELL.Properties.Resources.search;
-            this.search.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.search.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.search.Name = "search";
-            this.search.Size = new System.Drawing.Size(23, 22);
-            this.search.Text = "Search For Dialogue";
-            // 
-            // pauseFramesInsert
-            // 
-            this.pauseFramesInsert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pauseFramesInsert.Image = global::LAZYSHELL.Properties.Resources.insertIntoText;
-            this.pauseFramesInsert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pauseFramesInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pauseFramesInsert.Name = "pauseFramesInsert";
-            this.pauseFramesInsert.Size = new System.Drawing.Size(23, 22);
-            this.pauseFramesInsert.Text = "Insert into text";
-            this.pauseFramesInsert.Click += new System.EventHandler(this.pauseFramesInsert_Click);
-            // 
-            // variablesInsert
-            // 
-            this.variablesInsert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.variablesInsert.Image = global::LAZYSHELL.Properties.Resources.insertIntoText;
-            this.variablesInsert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.variablesInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.variablesInsert.Name = "variablesInsert";
-            this.variablesInsert.Size = new System.Drawing.Size(23, 22);
-            this.variablesInsert.Text = "Insert into text";
-            this.variablesInsert.Click += new System.EventHandler(this.variablesInsert_Click);
-            // 
             // save
             // 
             this.save.Image = global::LAZYSHELL.Properties.Resources.save_small;
@@ -779,6 +769,11 @@
             this.save.Size = new System.Drawing.Size(23, 22);
             this.save.ToolTipText = "Save";
             this.save.Click += new System.EventHandler(this.save_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // import
             // 
@@ -797,7 +792,7 @@
             this.importDialoguesToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importText;
             this.importDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importDialoguesToolStripMenuItem.Name = "importDialoguesToolStripMenuItem";
-            this.importDialoguesToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.importDialoguesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.importDialoguesToolStripMenuItem.Text = "Import Dialogues...";
             this.importDialoguesToolStripMenuItem.Click += new System.EventHandler(this.importDialoguesToolStripMenuItem_Click);
             // 
@@ -806,7 +801,7 @@
             this.importBattleDialoguesToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importText;
             this.importBattleDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importBattleDialoguesToolStripMenuItem.Name = "importBattleDialoguesToolStripMenuItem";
-            this.importBattleDialoguesToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.importBattleDialoguesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.importBattleDialoguesToolStripMenuItem.Text = "Import Battle Dialogues...";
             this.importBattleDialoguesToolStripMenuItem.Click += new System.EventHandler(this.importBattleDialoguesToolStripMenuItem_Click);
             // 
@@ -827,7 +822,7 @@
             this.exportDialoguesToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportText;
             this.exportDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportDialoguesToolStripMenuItem.Name = "exportDialoguesToolStripMenuItem";
-            this.exportDialoguesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.exportDialoguesToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
             this.exportDialoguesToolStripMenuItem.Text = "Export Dialogues...";
             this.exportDialoguesToolStripMenuItem.Click += new System.EventHandler(this.exportDialoguesToolStripMenuItem_Click);
             // 
@@ -836,7 +831,7 @@
             this.exportBattleDialoguesToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportText;
             this.exportBattleDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportBattleDialoguesToolStripMenuItem.Name = "exportBattleDialoguesToolStripMenuItem";
-            this.exportBattleDialoguesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.exportBattleDialoguesToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
             this.exportBattleDialoguesToolStripMenuItem.Text = "Export Battle Dialogues...";
             this.exportBattleDialoguesToolStripMenuItem.Click += new System.EventHandler(this.exportBattleDialoguesToolStripMenuItem_Click);
             // 
@@ -865,7 +860,7 @@
             // 
             // clearDialoguesToolStripMenuItem
             // 
-            this.clearDialoguesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearDialoguesToolStripMenuItem.Image")));
+            this.clearDialoguesToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clearDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearDialoguesToolStripMenuItem.Name = "clearDialoguesToolStripMenuItem";
             this.clearDialoguesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
@@ -874,12 +869,17 @@
             // 
             // clearBattleDialoguesToolStripMenuItem
             // 
-            this.clearBattleDialoguesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearBattleDialoguesToolStripMenuItem.Image")));
+            this.clearBattleDialoguesToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clearBattleDialoguesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearBattleDialoguesToolStripMenuItem.Name = "clearBattleDialoguesToolStripMenuItem";
             this.clearBattleDialoguesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.clearBattleDialoguesToolStripMenuItem.Text = "Clear Battle Dialogues...";
             this.clearBattleDialoguesToolStripMenuItem.Click += new System.EventHandler(this.clearBattleDialoguesToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
             // 
             // helpTips
             // 
@@ -900,6 +900,11 @@
             this.showDecHex.Name = "showDecHex";
             this.showDecHex.Size = new System.Drawing.Size(23, 22);
             this.showDecHex.ToolTipText = "Show Base Conversion";
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
             // 
             // showDialogues
             // 
@@ -940,6 +945,11 @@
             this.showFonts.ToolTipText = "Fonts";
             this.showFonts.Click += new System.EventHandler(this.showFonts_Click);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.Active = false;
+            this.toolTip1.IsBalloon = true;
+            // 
             // Dialogues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -949,7 +959,7 @@
             this.Controls.Add(this.panel60);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Dialogues";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -963,6 +973,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel69.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialogue)).EndInit();
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
@@ -975,7 +986,6 @@
             this.toolStrip7.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialogue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

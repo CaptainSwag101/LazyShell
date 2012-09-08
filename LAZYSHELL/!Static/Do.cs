@@ -2299,8 +2299,8 @@ namespace LAZYSHELL
             }
             return temp;
         }
-        public static void ImagesToMolds(List<Mold> molds, List<Mold.Tile> uniqueTiles, Bitmap[] images, ref int[] palette, ref byte[] graphics,
-            int startingIndex, bool replaceMolds, bool replacePalette, string type, bool alwaysTilemap)
+        public static void ImagesToMolds(List<Mold> molds, List<Mold.Tile> uniqueTiles, Bitmap[] images, ref int[] palette,
+            ref byte[] graphics, int startingIndex, bool replaceMolds, bool replacePalette, string type, bool alwaysTilemap)
         {
             Bitmap sheet = CombineImages(images, 128, 512, 8, true);
             int[] pixels = ImageToPixels(sheet);
@@ -3321,6 +3321,14 @@ namespace LAZYSHELL
         public static void Colorize(int[] src, double h, double s)
         {
             Colorize(src, h, s, 0.0, 255);
+        }
+        public static Bitmap Fill(Bitmap image, Color fill)
+        {
+            int[] pixels = ImageToPixels(image);
+            for (int i = 0; i < pixels.Length; i++)
+                if (pixels[i] >> 24 != 0)
+                    pixels[i] = fill.ToArgb();
+            return PixelsToImage(pixels, image.Width, image.Height);
         }
         public static Color HSLtoRGBColor(double h, double s, double l)
         {

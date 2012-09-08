@@ -14,7 +14,7 @@ namespace LAZYSHELL
         public byte delayTime;
         public byte decayFactor;
         public byte echo;
-        private List<SPCScriptCommand>[] channels;
+        private List<SPCCommand>[] channels;
         private List<Note>[] notes;
         private bool[] activeChannels;
         //
@@ -23,7 +23,7 @@ namespace LAZYSHELL
         public override byte[] Data { get { return data; } set { data = value; } }
         public override SampleIndex[] Samples { get { return null; } set { } }
         public override List<Percussives> Percussives { get { return null; } set { } }
-        public override List<SPCScriptCommand>[] Channels { get { return channels; } set { channels = value; } }
+        public override List<SPCCommand>[] Channels { get { return channels; } set { channels = value; } }
         public override List<Note>[] Notes { get { return notes; } set { notes = value; } }
         public override bool[] ActiveChannels { get { return activeChannels; } set { activeChannels = value; } }
         public override byte DelayTime { get { return delayTime; } set { delayTime = value; } }
@@ -43,9 +43,10 @@ namespace LAZYSHELL
                 offset = index * 4 + 0x043E26;
             //
             activeChannels = new bool[2];
-            channels = new List<SPCScriptCommand>[2];
+            channels = new List<SPCCommand>[2];
             for (int i = 0; i < 2; i++)
             {
+                channels[i] = new List<SPCCommand>();
                 int soundOffset = Bits.GetShort(Model.Data, offset);
                 offset += 2;
                 if (soundOffset == 0)
@@ -58,7 +59,6 @@ namespace LAZYSHELL
                     soundOffset = soundOffset - 0x3400 + 0x042C26;
                 else
                     soundOffset = soundOffset - 0x3400 + 0x044226;
-                channels[i] = new List<SPCScriptCommand>();
                 int length = 0;
                 do
                 {
@@ -66,7 +66,7 @@ namespace LAZYSHELL
                     int opcode = data[soundOffset];
                     length = SPCScriptEnums.SPCScriptLengths[opcode];
                     byte[] commandData = Bits.GetByteArray(data, soundOffset, length);
-                    channels[i].Add(new SPCScriptCommand(commandData, this, i));
+                    channels[i].Add(new SPCCommand(commandData, this, i));
                 }
                 while (data[soundOffset] != 0xD0 && data[soundOffset] != 0xCD && data[soundOffset] != 0xCE);
             }
@@ -81,20 +81,22 @@ namespace LAZYSHELL
         {
             // first make sure each channel ends with a termination command
             for (int i = 0; i < 2; i++)
-                if (channels[i] != null)
+            {
+                if (channels[i] != null && channels[i].Count > 0)
                 {
-                    SPCScriptCommand lastSSC = channels[i][channels[i].Count - 1];
+                    SPCCommand lastSSC = channels[i][channels[i].Count - 1];
                     if (lastSSC.Opcode != 0xD0 && lastSSC.Opcode != 0xCD && lastSSC.Opcode != 0xCE)
-                        channels[i].Add(new SPCScriptCommand(new byte[] { 0xD0 }, this, 0));
+                        channels[i].Add(new SPCCommand(new byte[] { 0xD0 }, this, 0));
                 }
+            }
             //
             int channelSize1 = 0;
             int channelSize2 = 0;
             if (channels[0] != null && activeChannels[0])
-                foreach (SPCScriptCommand ssc in channels[0])
+                foreach (SPCCommand ssc in channels[0])
                     channelSize1 += ssc.Length;
             if (channels[1] != null && activeChannels[1])
-                foreach (SPCScriptCommand ssc in channels[1])
+                foreach (SPCCommand ssc in channels[1])
                     channelSize2 += ssc.Length;
             //
             int offsetStart1 = offset;
@@ -141,13 +143,13 @@ namespace LAZYSHELL
                     Bits.SetShort(data, index * 4 + 0x043E26 + 2, offsetStart2 - 0x044226 + 0x3400);
             }
             if (channels[0] != null && activeChannels[0])
-                foreach (SPCScriptCommand ssc in channels[0])
+                foreach (SPCCommand ssc in channels[0])
                 {
                     Bits.SetByteArray(data, offsetStart1, ssc.CommandData);
                     offsetStart1 += ssc.Length;
                 }
             if (channels[1] != null && activeChannels[1])
-                foreach (SPCScriptCommand ssc in channels[1])
+                foreach (SPCCommand ssc in channels[1])
                 {
                     Bits.SetByteArray(data, offsetStart2, ssc.CommandData);
                     offsetStart2 += ssc.Length;
@@ -162,20 +164,22 @@ namespace LAZYSHELL
             int length = 0;
             // first make sure each channel ends with a termination command
             for (int i = 0; i < 2; i++)
-                if (channels[i] != null)
+            {
+                if (channels[i] != null && channels[i].Count > 0)
                 {
-                    SPCScriptCommand lastSSC = channels[i][channels[i].Count - 1];
+                    SPCCommand lastSSC = channels[i][channels[i].Count - 1];
                     if (lastSSC.Opcode != 0xD0 && lastSSC.Opcode != 0xCD && lastSSC.Opcode != 0xCE)
                         length++;
                 }
+            }
             //
             int channelSize1 = 0;
             int channelSize2 = 0;
             if (channels[0] != null && activeChannels[0])
-                foreach (SPCScriptCommand ssc in channels[0])
+                foreach (SPCCommand ssc in channels[0])
                     channelSize1 += ssc.Length;
             if (channels[1] != null && activeChannels[1])
-                foreach (SPCScriptCommand ssc in channels[1])
+                foreach (SPCCommand ssc in channels[1])
                     channelSize2 += ssc.Length;
             //
             bool channel2in1 = true;
@@ -201,7 +205,9 @@ namespace LAZYSHELL
         public override void Clear()
         {
             activeChannels = new bool[2];
-            channels = new List<SPCScriptCommand>[2];
+            channels = new List<SPCCommand>[2];
+            channels[0] = new List<SPCCommand>();
+            channels[1] = new List<SPCCommand>();
         }
     }
 }

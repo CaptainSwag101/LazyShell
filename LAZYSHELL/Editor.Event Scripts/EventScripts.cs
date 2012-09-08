@@ -1331,6 +1331,22 @@ namespace LAZYSHELL
                                 for (int i = 1, j = 0; j < 8; i *= 2, j++)
                                     evtEffects.SetItemChecked(j, (esc.EventData[2] & i) == i);
                                 break;
+                            case 0x96:
+                            case 0x97:
+                                labelTitleA.Text = "If audio memory $69 ";
+                                if (esc.Opcode == 0x96)
+                                    labelTitleA.Text += "greater than or equal to...";
+                                else
+                                    labelTitleA.Text += "is equal to...";
+                                labelEvtC.Text = "value";
+                                evtNumC.Enabled = true;
+                                evtNumC.Value = esc.EventData[2];
+                                labelEvtD.Text = "jump to";
+                                evtNumD.Enabled = true;
+                                evtNumD.Maximum = 0xFFFF;
+                                evtNumD.Hexadecimal = true;
+                                evtNumD.Value = Bits.GetShort(esc.EventData, 3);
+                                break;
                             case 0x9C:
                                 labelTitleA.Text = "Playback start, sound...";
                                 labelEvtA.Text = "sound";
@@ -1971,6 +1987,11 @@ namespace LAZYSHELL
                             case 0x94:
                                 for (int i = 0; i < 8; i++)
                                     Bits.SetBit(esc.EventData, 2, i, evtEffects.GetItemChecked(i));
+                                break;
+                            case 0x96:
+                            case 0x97:
+                                esc.EventData[2] = (byte)evtNumC.Value;
+                                Bits.SetShort(esc.EventData, 3, (ushort)evtNumD.Value);
                                 break;
                             case 0x9C:
                                 esc.EventData[2] = (byte)evtNameA.SelectedIndex;

@@ -126,19 +126,19 @@
             // 
             // openPalettes
             // 
-            this.openPalettes.Image = ((System.Drawing.Image)(resources.GetObject("openPalettes.Image")));
+            this.openPalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.openPalettes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openPalettes.Name = "openPalettes";
-            this.openPalettes.Size = new System.Drawing.Size(146, 24);
+            this.openPalettes.Size = new System.Drawing.Size(154, 24);
             this.openPalettes.Text = "Title Palettes";
             this.openPalettes.Click += new System.EventHandler(this.openPalettes_Click);
             // 
             // openSpritePalettes
             // 
-            this.openSpritePalettes.Image = ((System.Drawing.Image)(resources.GetObject("openSpritePalettes.Image")));
+            this.openSpritePalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.openSpritePalettes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openSpritePalettes.Name = "openSpritePalettes";
-            this.openSpritePalettes.Size = new System.Drawing.Size(146, 24);
+            this.openSpritePalettes.Size = new System.Drawing.Size(154, 24);
             this.openSpritePalettes.Text = "Sprite Palettes";
             this.openSpritePalettes.Click += new System.EventHandler(this.openSpritePalettes_Click);
             // 
@@ -156,19 +156,19 @@
             // 
             // openGraphics
             // 
-            this.openGraphics.Image = ((System.Drawing.Image)(resources.GetObject("openGraphics.Image")));
+            this.openGraphics.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.openGraphics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openGraphics.Name = "openGraphics";
-            this.openGraphics.Size = new System.Drawing.Size(148, 24);
+            this.openGraphics.Size = new System.Drawing.Size(154, 24);
             this.openGraphics.Text = "Title Graphics";
             this.openGraphics.Click += new System.EventHandler(this.openGraphics_Click);
             // 
             // openSpriteGraphics
             // 
-            this.openSpriteGraphics.Image = ((System.Drawing.Image)(resources.GetObject("openSpriteGraphics.Image")));
+            this.openSpriteGraphics.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.openSpriteGraphics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openSpriteGraphics.Name = "openSpriteGraphics";
-            this.openSpriteGraphics.Size = new System.Drawing.Size(148, 24);
+            this.openSpriteGraphics.Size = new System.Drawing.Size(154, 24);
             this.openSpriteGraphics.Text = "Sprite Graphics";
             this.openSpriteGraphics.Click += new System.EventHandler(this.openSpriteGraphics_Click);
             // 
@@ -201,7 +201,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Title";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

@@ -138,6 +138,7 @@ namespace LAZYSHELL
             bool replaceMolds = true;
             bool alwaysTilemap = true;
             int startingIndex = 0;
+            // if yes, start writing new graphics to location of highest used tile index
             if (MessageBox.Show("Replace current " + type + " with imported image(s)?", "LAZY SHELL",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
@@ -162,9 +163,27 @@ namespace LAZYSHELL
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            // tag tiles with corresponding unique tiles indexes (only if tileset import)
+            if (type == "tileset")
+                foreach (Mold mold in molds)
+                    foreach (Mold.Tile tile in mold.Tiles)
+                        for (int a = 0; a < animation.UniqueTiles.Count; a++)
+                            if (Bits.Compare(tile.SubTiles, animation.UniqueTiles[a].SubTiles))
+                            { tile.Tag = a; break; }
+            Do.ImagesToMolds(molds, animation.UniqueTiles, imports, ref palette, ref graphics,
+                startingIndex, replaceMolds, replacePalette, type, alwaysTilemap);
+            // transfer new unique tiles to mold tiles based on tagged indexes (only if tileset import)
+            if (type == "tileset")
+                foreach (Mold mold in molds)
+                    for (int i = 0; i < mold.Tiles.Count; i++)
+                        if (mold.Tiles[i].Tag != null && (int)mold.Tiles[i].Tag < animation.UniqueTiles.Count)
+                        {
+                            // keep the original coords
+                            byte x = mold.Tiles[i].X; byte y = mold.Tiles[i].Y;
+                            mold.Tiles[i] = animation.UniqueTiles[(int)mold.Tiles[i].Tag].Copy();
+                            mold.Tiles[i].X = x; mold.Tiles[i].Y = y;
+                        }
             //
-            Do.ImagesToMolds(molds, animation.UniqueTiles, imports, ref palette, ref graphics, startingIndex,
-                replaceMolds, replacePalette, type, alwaysTilemap);
             for (int i = 0; i < palette.Length; i++)
             {
                 paletteSet.Reds[i] = Color.FromArgb(palette[i]).R;
@@ -579,15 +598,15 @@ namespace LAZYSHELL
         private Cursor GetCursor()
         {
             if (draw.Checked)
-                return new Cursor(GetType(), "CursorDraw.cur");
+                return NewCursors.Draw;
             if (erase.Checked)
-                return new Cursor(GetType(), "CursorErase.cur");
+                return NewCursors.Erase;
             if (select.Checked)
                 return Cursors.Cross;
             if (zoomIn.Checked)
-                return new Cursor(GetType(), "CursorZoomIn.cur");
+                return NewCursors.ZoomIn;
             if (zoomOut.Checked)
-                return new Cursor(GetType(), "CursorZoomOut.cur");
+                return NewCursors.ZoomOut;
             return Cursors.Arrow;
         }
         #endregion
@@ -1139,7 +1158,7 @@ namespace LAZYSHELL
             zoomOut.Checked = false;
             selectedTiles = null;
             overlay.Select = null;
-            pictureBoxMold.Cursor = erase.Checked ? new Cursor(GetType(), "CursorErase.cur") : Cursors.Arrow;
+            pictureBoxMold.Cursor = erase.Checked ? NewCursors.Erase : Cursors.Arrow;
             pictureBoxMold.Invalidate();
         }
         private void draw_Click(object sender, EventArgs e)
@@ -1148,7 +1167,7 @@ namespace LAZYSHELL
             zoomIn.Checked = false;
             zoomOut.Checked = false;
             overlay.Select = null;
-            pictureBoxMold.Cursor = draw.Checked ? new Cursor(GetType(), "CursorDraw.cur") : Cursors.Arrow;
+            pictureBoxMold.Cursor = draw.Checked ? NewCursors.Draw : Cursors.Arrow;
             pictureBoxMold.Invalidate();
         }
         private void cut_Click(object sender, EventArgs e)
@@ -1303,7 +1322,7 @@ namespace LAZYSHELL
             zoomOut.Checked = false;
             selectedTiles = null;
             overlay.Select = null;
-            pictureBoxMold.Cursor = zoomIn.Checked ? new Cursor(GetType(), "CursorZoomIn.cur") : Cursors.Arrow;
+            pictureBoxMold.Cursor = zoomIn.Checked ? NewCursors.ZoomIn : Cursors.Arrow;
         }
         private void zoomOut_Click(object sender, EventArgs e)
         {
@@ -1311,7 +1330,7 @@ namespace LAZYSHELL
             zoomIn.Checked = false;
             selectedTiles = null;
             overlay.Select = null;
-            pictureBoxMold.Cursor = zoomOut.Checked ? new Cursor(GetType(), "CursorZoomOut.cur") : Cursors.Arrow;
+            pictureBoxMold.Cursor = zoomOut.Checked ? NewCursors.ZoomOut : Cursors.Arrow;
         }
         private void toggleZoomBox_Click(object sender, EventArgs e)
         {

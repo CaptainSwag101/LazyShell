@@ -983,7 +983,7 @@
             // 
             // goToToolStripMenuItem
             // 
-            this.goToToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources._goto;
+            this.goToToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.jumpTo;
             this.goToToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
             this.goToToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
@@ -1017,7 +1017,7 @@
             this.Controls.Add(this.panel28);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

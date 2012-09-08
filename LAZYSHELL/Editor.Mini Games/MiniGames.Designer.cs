@@ -89,7 +89,7 @@
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importTilesetsToolStripMenuItem,
             this.importTilemapsToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.importBinary;
             this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -97,7 +97,7 @@
             // 
             // importTilesetsToolStripMenuItem
             // 
-            this.importTilesetsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importTilesetsToolStripMenuItem.Image")));
+            this.importTilesetsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importBinary;
             this.importTilesetsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importTilesetsToolStripMenuItem.Name = "importTilesetsToolStripMenuItem";
             this.importTilesetsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
@@ -106,7 +106,7 @@
             // 
             // importTilemapsToolStripMenuItem
             // 
-            this.importTilemapsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importTilemapsToolStripMenuItem.Image")));
+            this.importTilemapsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importBinary;
             this.importTilemapsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importTilemapsToolStripMenuItem.Name = "importTilemapsToolStripMenuItem";
             this.importTilemapsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
@@ -119,7 +119,7 @@
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportTilesetsToolStripMenuItem,
             this.exportTilemapsToolStripMenuItem});
-            this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
+            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
             this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
@@ -127,7 +127,7 @@
             // 
             // exportTilesetsToolStripMenuItem
             // 
-            this.exportTilesetsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportTilesetsToolStripMenuItem.Image")));
+            this.exportTilesetsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
             this.exportTilesetsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportTilesetsToolStripMenuItem.Name = "exportTilesetsToolStripMenuItem";
             this.exportTilesetsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
@@ -136,7 +136,7 @@
             // 
             // exportTilemapsToolStripMenuItem
             // 
-            this.exportTilemapsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportTilemapsToolStripMenuItem.Image")));
+            this.exportTilemapsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
             this.exportTilemapsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportTilemapsToolStripMenuItem.Name = "exportTilemapsToolStripMenuItem";
             this.exportTilemapsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
@@ -151,7 +151,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "MiniGames";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

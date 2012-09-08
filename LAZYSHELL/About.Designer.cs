@@ -48,7 +48,7 @@ namespace LAZYSHELL
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(469, 332);
+            this.panel1.Size = new System.Drawing.Size(469, 345);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -60,7 +60,7 @@ namespace LAZYSHELL
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 56);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(465, 272);
+            this.panel2.Size = new System.Drawing.Size(465, 285);
             this.panel2.TabIndex = 0;
             // 
             // richTextBox1
@@ -72,16 +72,16 @@ namespace LAZYSHELL
             this.richTextBox1.Location = new System.Drawing.Point(65, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(394, 260);
+            this.richTextBox1.Size = new System.Drawing.Size(394, 273);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackgroundImage = global::LAZYSHELL.Properties.Resources.title_stats_bg;
+            this.pictureBox2.BackgroundImage = global::LAZYSHELL.Properties.Resources.TITLE_BG;
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox2.Image = global::LAZYSHELL.Properties.Resources.title_smodrpg;
+            this.pictureBox2.Image = global::LAZYSHELL.Properties.Resources.TITLE_FG;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(465, 56);
@@ -94,7 +94,7 @@ namespace LAZYSHELL
             this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(0, 332);
+            this.button1.Location = new System.Drawing.Point(0, 345);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(469, 23);
             this.button1.TabIndex = 1;
@@ -106,7 +106,7 @@ namespace LAZYSHELL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 355);
+            this.ClientSize = new System.Drawing.Size(469, 368);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

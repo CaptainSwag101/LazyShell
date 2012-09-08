@@ -450,5 +450,6 @@ namespace LAZYSHELL
             characterName_SelectedIndexChanged(null, null);
         }
         #endregion
+
     }
 }

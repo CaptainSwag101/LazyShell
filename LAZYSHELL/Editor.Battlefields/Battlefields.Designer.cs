@@ -91,7 +91,7 @@
             this.import = new System.Windows.Forms.ToolStripButton();
             this.export = new System.Windows.Forms.ToolStripButton();
             this.reset = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.clear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.enableHelpTips = new System.Windows.Forms.ToolStripButton();
             this.showDecHex = new System.Windows.Forms.ToolStripButton();
@@ -240,7 +240,7 @@
             // 
             // importTilesetToolStripMenuItem
             // 
-            this.importTilesetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importTilesetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.importTilesetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importTilesetToolStripMenuItem.Name = "importTilesetToolStripMenuItem";
             this.importTilesetToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
@@ -864,7 +864,7 @@
             this.import,
             this.export,
             this.reset,
-            this.toolStripButton1,
+            this.clear,
             this.toolStripSeparator12,
             this.enableHelpTips,
             this.showDecHex});
@@ -892,7 +892,7 @@
             // 
             // import
             // 
-            this.import.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
@@ -902,7 +902,7 @@
             // 
             // export
             // 
-            this.export.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
@@ -923,13 +923,13 @@
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.Image = global::LAZYSHELL.Properties.Resources.clear_small;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.ToolTipText = "Clear";
-            this.toolStripButton1.Click += new System.EventHandler(this.clear_Click);
+            this.clear.Image = global::LAZYSHELL.Properties.Resources.clear_small;
+            this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(23, 22);
+            this.clear.ToolTipText = "Clear";
+            this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
             // toolStripSeparator12
             // 
@@ -1000,7 +1000,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Battlefields";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -1081,7 +1081,7 @@
         private System.Windows.Forms.ToolStripButton import;
         private System.Windows.Forms.ToolStripButton export;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton clear;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem saveImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;

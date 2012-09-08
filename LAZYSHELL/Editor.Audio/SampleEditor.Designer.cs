@@ -32,8 +32,12 @@
             this.sampleName = new System.Windows.Forms.ToolStripComboBox();
             this.sampleNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.import = new System.Windows.Forms.ToolStripButton();
-            this.export = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.import = new System.Windows.Forms.ToolStripMenuItem();
+            this.importBRR = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.export = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportBRR = new System.Windows.Forms.ToolStripMenuItem();
             this.clear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.play = new System.Windows.Forms.ToolStripButton();
@@ -47,24 +51,25 @@
             this.rateManualValue = new System.Windows.Forms.NumericUpDown();
             this.rateFixed = new System.Windows.Forms.RadioButton();
             this.rateManual = new System.Windows.Forms.RadioButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rateManualValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sampleName,
             this.sampleNum,
             this.toolStripSeparator4,
-            this.import,
-            this.export,
+            this.toolStripDropDownButton1,
+            this.toolStripDropDownButton2,
             this.clear,
             this.toolStripSeparator2,
             this.play,
@@ -90,7 +95,13 @@
             // sampleNum
             // 
             this.sampleNum.AutoSize = false;
+            this.sampleNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleNum.Hexadecimal = false;
+            this.sampleNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.sampleNum.Location = new System.Drawing.Point(209, 2);
             this.sampleNum.Maximum = new decimal(new int[] {
             115,
@@ -117,25 +128,65 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.import,
+            this.importBRR});
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.importWAV;
+            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(27, 22);
+            // 
             // import
             // 
-            this.import.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.import.Image = global::LAZYSHELL.Properties.Resources.importWAV;
             this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
-            this.import.Size = new System.Drawing.Size(23, 22);
-            this.import.ToolTipText = "Import";
+            this.import.Size = new System.Drawing.Size(152, 22);
+            this.import.Text = "Import WAV...";
             this.import.Click += new System.EventHandler(this.import_Click);
+            // 
+            // importBRR
+            // 
+            this.importBRR.Image = global::LAZYSHELL.Properties.Resources.importBinary;
+            this.importBRR.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.importBRR.Name = "importBRR";
+            this.importBRR.Size = new System.Drawing.Size(152, 22);
+            this.importBRR.Text = "Import BRR...";
+            this.importBRR.Click += new System.EventHandler(this.importBRR_Click);
+            // 
+            // toolStripDropDownButton2
+            // 
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.export,
+            this.exportBRR});
+            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.exportWAV;
+            this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(27, 22);
             // 
             // export
             // 
-            this.export.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.export.Image = global::LAZYSHELL.Properties.Resources.exportWAV;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(23, 22);
-            this.export.ToolTipText = "Export";
+            this.export.Size = new System.Drawing.Size(152, 22);
+            this.export.Text = "Export WAV...";
             this.export.Click += new System.EventHandler(this.export_Click);
+            // 
+            // exportBRR
+            // 
+            this.exportBRR.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
+            this.exportBRR.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exportBRR.Name = "exportBRR";
+            this.exportBRR.Size = new System.Drawing.Size(152, 22);
+            this.exportBRR.Text = "Export BRR...";
+            this.exportBRR.Click += new System.EventHandler(this.exportBRR_Click);
             // 
             // clear
             // 
@@ -204,7 +255,6 @@
             // infiniteLoop
             // 
             this.infiniteLoop.Checked = false;
-            this.infiniteLoop.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.infiniteLoop.Name = "infiniteLoop";
             this.infiniteLoop.Size = new System.Drawing.Size(85, 22);
             this.infiniteLoop.Text = "Infinite loop";
@@ -290,6 +340,16 @@
             this.rateManual.UseVisualStyleBackColor = true;
             this.rateManual.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
             // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(104, 25);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(633, 115);
+            this.panel2.TabIndex = 2;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
@@ -301,16 +361,6 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.SizeChanged += new System.EventHandler(this.pictureBox1_SizeChanged);
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(104, 25);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(633, 115);
-            this.panel2.TabIndex = 2;
             // 
             // backgroundWorker1
             // 
@@ -336,8 +386,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rateManualValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,8 +402,6 @@
         private System.Windows.Forms.ToolStripButton pause;
         private System.Windows.Forms.ToolStripButton back;
         private System.Windows.Forms.ToolStripButton foward;
-        private System.Windows.Forms.ToolStripButton import;
-        private System.Windows.Forms.ToolStripButton export;
         private System.Windows.Forms.ToolStripButton clear;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -367,5 +415,11 @@
         private System.Windows.Forms.RadioButton rateFixed;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private ToolStripCheckBox infiniteLoop;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem import;
+        private System.Windows.Forms.ToolStripMenuItem importBRR;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem export;
+        private System.Windows.Forms.ToolStripMenuItem exportBRR;
     }
 }

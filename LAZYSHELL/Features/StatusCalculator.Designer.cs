@@ -1025,7 +1025,7 @@
             this.Controls.Add(this.label17);
             this.Controls.Add(this.singleAttack);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "StatusCalculator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

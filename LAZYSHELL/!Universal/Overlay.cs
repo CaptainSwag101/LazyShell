@@ -192,7 +192,15 @@ namespace LAZYSHELL
         public Overlay()
         {
         }
+        public void DrawCartesianGrid(Graphics g, Color c, Size s, Size u, bool dashed, int offset)
+        {
+            DrawCartesianGrid(g, c, s, u, 1, dashed, offset);
+        }
         public void DrawCartesianGrid(Graphics g, Color c, Size s, Size u, int z, bool dashed)
+        {
+            DrawCartesianGrid(g, c, s, u, z, dashed, 0);
+        }
+        public void DrawCartesianGrid(Graphics g, Color c, Size s, Size u, int z, bool dashed, int offset)
         {
             c = Color.FromArgb(alpha, c);
             Pen p = new Pen(new SolidBrush(c));
@@ -200,9 +208,9 @@ namespace LAZYSHELL
                 p.DashPattern = new float[] { 1, 1 };
             Point h = new Point();
             Point v = new Point();
-            for (h.Y = z * u.Height; h.Y < s.Height; h.Y += z * u.Height)
+            for (h.Y = z * u.Height + offset; h.Y < s.Height + offset; h.Y += z * u.Height)
                 g.DrawLine(p, h, new Point(h.X + s.Width, h.Y));
-            for (v.X = z * u.Width; v.X < s.Width; v.X += z * u.Width)
+            for (v.X = z * u.Width + offset; v.X < s.Width + offset; v.X += z * u.Width)
                 g.DrawLine(p, v, new Point(v.X, v.Y + s.Height));
         }
         public void DrawIsometricGrid(Graphics g, Color c, Size s, Size u, int z)
@@ -228,12 +236,12 @@ namespace LAZYSHELL
             if (r.Bottom >= 1024 * z)
                 r.Height = (1024 - 1) * z;
             g.FillRectangle(b, r);
-            Pen pen = new Pen(Color.Orange);
-            g.DrawRectangle(pen, r);
+            g.DrawRectangle(Pens.Orange, r);
         }
         public void DrawBoundaries(Graphics g, Point location, int z)
         {
-            Pen pen = new Pen(SystemColors.ControlDark); pen.Width = z; pen.Alignment = PenAlignment.Inset;
+            Pen pen = new Pen(SystemColors.ControlDark); 
+            pen.Width = z; pen.Alignment = PenAlignment.Inset;
             location.X = location.X / 16 * 16;
             location.Y = location.Y / 16 * 16;
             g.FillRectangle(new SolidBrush(Color.FromArgb(50, 0, 0, 0)), location.X * z, location.Y * z, 256 * z, 224 * z);
@@ -278,7 +286,7 @@ namespace LAZYSHELL
             {
                 r.Width--;
                 r.Height--;
-                g.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), r);
+                g.DrawRectangle(Pens.Red, r);
             }
         }
         // exits

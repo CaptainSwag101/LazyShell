@@ -412,7 +412,7 @@ namespace LAZYSHELL.Properties {
             "g>\r\n  <string>&lt;</string>\r\n  <string>&gt;</string>\r\n  <string />\r\n  <string>#<" +
             "/string>\r\n  <string>+</string>\r\n  <string>×</string>\r\n  <string>%</string>\r\n  <s" +
             "tring />\r\n  <string />\r\n  <string />\r\n  <string>*</string>\r\n  <string>\'</string>" +
-            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n</ArrayOfString>")]
+            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection KeystrokesMenu {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["KeystrokesMenu"]));

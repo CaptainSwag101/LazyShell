@@ -184,7 +184,7 @@
             // 
             // importToolStripMenuItem
             // 
-            this.importToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importImage;
             this.importToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
             this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -193,7 +193,7 @@
             // 
             // exportToolStripMenuItem
             // 
-            this.exportToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.exportToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
             this.exportToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -582,7 +582,7 @@
             this.Controls.Add(this.buttonCancel);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.MinimizeBox = false;
             this.Name = "GraphicEditor";
             this.ShowIcon = false;

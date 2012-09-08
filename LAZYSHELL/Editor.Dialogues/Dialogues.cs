@@ -171,30 +171,19 @@ namespace LAZYSHELL
 
             for (int i = 0; i < text.Length; i++)
             {
-                if (text[i] == '[' && preview == false) // Open bracket when we have already had an open bracket
-                    fail = true;
-
+                // Open bracket when we have already had an open bracket
+                fail = text[i] == '[' && preview == false;
                 if (text[i] == '[') // Open Bracket
                 {
                     preview = false;
-                    i++;
-                    temp = i;
-
-                    while (temp < text.Length && text[temp] != ']')
-                    {
-                        if (byteView)
-                        {
-                            if (!(text[temp] >= '0' && text[temp] <= '9'))
-                                fail = true;
-                        }
-                        temp++;
-                    }
+                    for (temp = ++i; temp < text.Length && text[temp] != ']'; temp++)
+                        if (byteView && !(text[temp] >= '0' && text[temp] <= '9'))
+                            fail = true;
                 }
                 else if (preview == false && text[i] == ']') // Close bracket after open bracket
                     preview = true;
                 else if (preview == true && valid == true)
                     valid = textHelper.IsValidChar(text[i]);
-
                 if (i < text.Length && text[i] == '\n')
                 {
                     int tempSel = dialogueTextBox.SelectionStart;
@@ -645,7 +634,7 @@ namespace LAZYSHELL
                 MessageBox.Show("The dialogue in bank 3 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Checksum = Do.GenerateChecksum(dialogues, dialogueTables, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
-                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle, 
+                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle,
                 Model.NumeralGraphics, Model.BattleMenuGraphics, Model.BonusMessages);
         }
         #endregion
@@ -1055,11 +1044,13 @@ namespace LAZYSHELL
                     int index = Convert.ToInt32(line.Substring(1, 4), 10);
                     line = line.Remove(0, 7);
                     if (this.byteView)
+                    {
                         if (!line.EndsWith("[0]") && !line.EndsWith("[6]"))
                             line += "[0]";
-                        else
-                            if (!line.EndsWith("[endInput]") && !line.EndsWith("[end]"))
-                                line += "[endInput]";
+                    }
+                    else
+                        if (!line.EndsWith("[endInput]") && !line.EndsWith("[end]"))
+                            line += "[endInput]";
                     dialogues[index].SetDialogue(line, line.EndsWith("[0]") || line.EndsWith("[6]"));
                     dialogues[index].Data = Model.Data;
                     progressBar.PerformStep("IMPORTING DIALOGUE #" + index.ToString("d4"));

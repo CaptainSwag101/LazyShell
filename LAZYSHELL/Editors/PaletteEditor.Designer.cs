@@ -1136,7 +1136,7 @@
             // 
             // importPaletteSetToolStripMenuItem
             // 
-            this.importPaletteSetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importPaletteSetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.importPaletteSetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importPaletteSetToolStripMenuItem.Name = "importPaletteSetToolStripMenuItem";
             this.importPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
@@ -1144,7 +1144,7 @@
             // 
             // exportPaletteSetToolStripMenuItem
             // 
-            this.exportPaletteSetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.exportPaletteSetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportPaletteSetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportPaletteSetToolStripMenuItem.Name = "exportPaletteSetToolStripMenuItem";
             this.exportPaletteSetToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
@@ -1191,7 +1191,7 @@
             // importPaletteSet
             // 
             this.importPaletteSet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.importPaletteSet.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.importPaletteSet.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.importPaletteSet.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importPaletteSet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.importPaletteSet.Name = "importPaletteSet";
@@ -1202,7 +1202,7 @@
             // exportPaletteSet
             // 
             this.exportPaletteSet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.exportPaletteSet.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.exportPaletteSet.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportPaletteSet.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportPaletteSet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.exportPaletteSet.Name = "exportPaletteSet";
@@ -1286,7 +1286,7 @@
             this.Controls.Add(this.buttonCancel);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PaletteEditor";

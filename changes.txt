@@ -1,5 +1,38 @@
 Major changes/additions are indicated by ***
 
+v3.13.0 (2012-09-07)
+--------------------------------------
+Additions:
+*Several new icons added for context menus and toolstrips
+*Audio: score maker for SPC editor
+*Audio: copy, paste, duplicate track commands
+*Audio: import MML format documents/files
+*Audio: documentation and added support for almost all commands
+*Audio: score viewer now more versatile, accurate, ornamented
+*Audio: channel track viewer shows icons for more commands
+*Audio: option to export/import samples in raw BRR format
+*Events: two new commands for reading audio memory
+
+Changes:
+*Application filesize 800kb smaller b/c removed all local resources
+*Attacks: icon shouldn't be changeable for attacks past index 63
+*Audio: moved score view to the left, interactive with channel tracks
+*Sprites: imported tileset image now synchronized with current mold tiles
+
+Fixes:
+*Audio: mouseOverChannel was minimized to 2 and not 1 for non-SPCs
+*Audio: clearing spc was disabling percussives groupbox and checkboxes
+*Audio: channel checkboxes 2-7 shouldn't be visible for SFX
+*Audio: importing not closing import dialog window
+*Audio: beat note names not entirely accurate, ie. triplets
+*Audio: not resetting SPC data length when assembling SPC data
+*Audio: base pitch should have been C, not A
+*Dialogues: keystrokes for menu font table lost final index
+*Dialogues: importing bad b/c of conditional braces not in right place
+*Effects: not clearing selection after changing size
+*Effects: crash when drawing tile group beyond mold boundaries
+
+
 v3.12.0 (2012-08-26)
 --------------------------------------
 Additions:

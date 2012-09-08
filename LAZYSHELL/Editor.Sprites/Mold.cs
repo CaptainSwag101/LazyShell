@@ -435,6 +435,7 @@ namespace LAZYSHELL
         [Serializable()]
         public class Tile
         {
+            public object Tag;
             private Point mouseDownPosition;
             public Point MouseDownPosition { get { return mouseDownPosition; } set { mouseDownPosition = value; } }
             private bool addedToBuffer;
@@ -813,6 +814,12 @@ namespace LAZYSHELL
                 copy.YMinusOne = yMinusOne;
                 copy.YPlusOne = yPlusOne;
                 return copy;
+            }
+            public bool CompareSubtiles(Tile source)
+            {
+                if (Bits.Compare(subTiles, source.SubTiles)) 
+                    return true;
+                return false;
             }
         }
         public Mold New(bool gridplane)

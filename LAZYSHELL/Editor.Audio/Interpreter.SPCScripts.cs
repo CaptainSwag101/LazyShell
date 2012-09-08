@@ -225,65 +225,65 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Noise on, channels = ",			// 0xC8
             "Noise on, all channels",			// 0xC9
             "Noise off",			// 0xCA
-            "Noise on",			// 0xCB
-            "",			// 0xCC
+            "Frequency mode on",			// 0xCB
+            "Frequency mode off",			// 0xCC
             "Play sound (new channel) = ",			// 0xCD
             "Play sound (this channel) = ",			// 0xCE
             "Transpose 1/16 pitch = ",			// 0xCF
 			
             "Terminate script",			// 0xD0
             "Beat duration = ",			// 0xD1
-            "",			// 0xD2
+            "Audio memory $69 = ",			// 0xD2
             "",			// 0xD3
             "Begin repeat, count = ",			// 0xD4
             "End repeat (reset octave)",			// 0xD5
             "Repeat ending start",			// 0xD6
             "Begin infinite repeat",			// 0xD7
-            "",			// 0xD8
-            "",			// 0xD9
-            "",			// 0xDA
-            "",			// 0xDB
-            "Echo, decay ratio : 24 = ",			// 0xDC
-            "",			// 0xDD
-            "Instrument = ",			// 0xDE
-            "",			// 0xDF
+            "ADSR reset",			// 0xD8
+            "ADSR attack = ",			// 0xD9
+            "ADSR decay = ",			// 0xDA
+            "ADSR sustain = ",			// 0xDB
+            "ADSR release = ",			// 0xDC
+            "Sample length = ",			// 0xDD
+            "Sample = ",			// 0xDE
+            "Noise transpose, pitch = ",			// 0xDF
 			
-            "Staccato = ",			// 0xE0
+            "Sample fadeout = ",			// 0xE0
             "",			// 0xE1
             "Volume = ",			// 0xE2
-            "",			// 0xE3
+            "Volume shift, amount = ",			// 0xE3
             "Volume slide, duration = ",			// 0xE4
             "Portamento, duration = ",			// 0xE5
-            "",			// 0xE6
+            "Portamento looping",			// 0xE6
             "Speaker balance = ",			// 0xE7
-            "Speaker balance shift, duration = ",			// 0xE8
-            "Speaker balance pansweep, duration = ",			// 0xE9
+            "Pansweep, duration = ",			// 0xE8
+            "Pansweep loop, duration = ",			// 0xE9
             "",			// 0xEA
             "",			// 0xEB
-            "Transpose 1/4 pitch 1 = ",			// 0xEC
-            "Transpose 1/4 pitch 2 = ",			// 0xED
-            "Drum mode on",			// 0xEE
-            "Drum mode off",			// 0xEF
+            "Transpose 1/4 pitch from 0 = ",			// 0xEC
+            "Transpose 1/4 pitch = ",			// 0xED
+            "Percussion mode on",			// 0xEE
+            "Percussion mode off",			// 0xEF
 			
-            "Tremolo, rate = ",			// 0xF0
-            "Vibrato, rate = ",			// 0xF1
+            "Tremolo, amplitude = ",			// 0xF0
+            "Vibrato, amplitude = ",			// 0xF1
             "Beat duration, change = ",			// 0xF2
             "Vibrato off",			// 0xF3
-            "",			// 0xF4
+            "Growling, roughness = ",			// 0xF4
             "",			// 0xF5
             "Portamento on, length = ",			// 0xF6
-            "",			// 0xF7
+            "Growling off",			// 0xF7
             "Dizziness on",			// 0xF8
             "Dizziness off",			// 0xF9
             "Reverb on",			// 0xFA
             "Reverb off",			// 0xFB
-            "Reverb, delay time = ",			// 0xFC
+            "Reverb, delay = ",			// 0xFC
             "",			// 0xFD
             "",			// 0xFE
             ""				// 0xFF
         };
         #endregion
-        public string InterpretSPCCommand(SPCScriptCommand ssc)
+        public string InterpretSPCCommand(SPCCommand ssc)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -292,59 +292,80 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             {
                 case 0xCD:
                 case 0xCE:
-                    sb.Append(Lists.Numerize(Lists.SoundNames[ssc.Option], ssc.Option, 3));
+                    sb.Append(Lists.Numerize(Lists.SoundNames[ssc.Param1], ssc.Param1, 3));
                     break;
                 case 0xC6:
                 case 0xC8:
-                case 0xCF:
                 case 0xD1:
                 case 0xD4:
+                case 0xD9:
+                case 0xDA:
+                case 0xDB:
                 case 0xDC:
+                case 0xDD:
                 case 0xE0:
                 case 0xE2:
-                case 0xEC:
-                case 0xED:
+                case 0xE7:
                 case 0xF6:
-                    sb.Append(ssc.Option);
+                    sb.Append(ssc.Param1);
                     break;
                 case 0xDE:
-                    sb.Append(Lists.Numerize(Lists.SampleNames[ssc.Option], ssc.Option, 3));
+                    sb.Append(Lists.Numerize(Lists.SampleNames[ssc.Param1], ssc.Param1, 3));
+                    break;
+                case 0xDF:
+                    if (!Bits.GetBit(ssc.Param1, 4))
+                        sb.Append(ssc.Param1 & 0x0F);
+                    else
+                        sb.Append(-((ssc.Param1 ^ 0x1F) + 1));
+                    sb.Append(", VOXCON = " + (ssc.Param2 >> 5));
+                    break;
+                case 0xE3:
+                    sb.Append((sbyte)ssc.Param1);
                     break;
                 case 0xE4:
+                    sb.Append(ssc.Param1 + ", volume = ");
+                    sb.Append((sbyte)ssc.Param2);
+                    break;
                 case 0xE5:
-                    sb.Append(ssc.Option + ", level = ");
-                    sb.Append((sbyte)ssc.CommandData[2]);
+                    sb.Append(ssc.Param1 + ", pitch = ");
+                    sb.Append((sbyte)ssc.Param2);
                     break;
                 case 0xE8:
-                    sb.Append(ssc.Option + ", balance = " + ssc.CommandData[2]);
+                    sb.Append(ssc.Param1 + ", end balance = " + ssc.Param2);
                     break;
                 case 0xE9:
-                    sb.Append(ssc.Option + ", speed = " + ssc.CommandData[2]);
+                    sb.Append(ssc.Param1 + ", intensity = " + ssc.Param2);
                     break;
                 case 0xF0:
                 case 0xF1:
-                    sb.Append(ssc.Option + ", extent = ");
+                    sb.Append(ssc.Param1 + ", wavelength = ");
                     if (ssc.Opcode == 0xF1)
                     {
-                        sb.Append(ssc.CommandData[2] + ", start time = ");
-                        sb.Append(ssc.CommandData[3]);
+                        sb.Append(ssc.Param2 + ", delay = ");
+                        sb.Append(ssc.Param3);
                     }
                     else
-                        sb.Append(ssc.CommandData[2]);
+                        sb.Append(ssc.Param2);
                     break;
-                case 0xE7:
+                case 0xCF:
+                case 0xEC:
+                case 0xED:
                 case 0xF2:
-                    sb.Append((sbyte)ssc.Option);
+                    sb.Append((sbyte)ssc.Param1);
+                    break;
+                case 0xF4:
+                    sb.Append(ssc.Param1 + ", wavelength = ");
+                    sb.Append(ssc.Param2);
                     break;
                 case 0xFC:
-                    sb.Append(ssc.Option + ", decay ratio = ");
-                    sb.Append(ssc.CommandData[2] + ", echo volume = ");
-                    sb.Append(ssc.CommandData[3]);
+                    sb.Append(ssc.Param1 + ", decay = ");
+                    sb.Append(ssc.Param2 + ", echo = ");
+                    sb.Append(ssc.Param3);
                     break;
                 default:
                     if (ssc.Opcode < 0xC4)
                     {
-                        Note note = new Note(ssc, 0, false);
+                        Note note = new Note(ssc);
                         sb.Append(note.ToString());
                     }
                     else if (sb.Length == 0)

@@ -144,14 +144,14 @@ namespace LAZYSHELL
         public void SetToolTips(ToolTip toolTip1)
         {
             // Fonts
-            this.fontType.ToolTipText =
-                "Select the font type to edit.\n\n" +
-                "\"Menu\" font is used in the overworld menu.\n" +
-                "\"Dialogue\" font is used in overworld and battle dialogue.\n" +
-                "\"Description\" font is used in item and spell descriptions in \n" +
-                "the overworld menu.\n" +
-                "\"Triangles\" are the option triangles used in overworld \n" +
-                "dialogue (as seen in button in the dialogue editor).";
+            //this.fontType.ToolTipText =
+            //    "Select the font type to edit.\n\n" +
+            //    "\"Menu\" font is used in the overworld menu.\n" +
+            //    "\"Dialogue\" font is used in overworld and battle dialogue.\n" +
+            //    "\"Description\" font is used in item and spell descriptions in \n" +
+            //    "the overworld menu.\n" +
+            //    "\"Triangles\" are the option triangles used in overworld \n" +
+            //    "dialogue (as seen in button in the dialogue editor).";
 
             this.fontWidth.ToolTipText =
                 "The width of the character, in pixels, as drawn in-game.";
@@ -503,7 +503,7 @@ namespace LAZYSHELL
                 case 4: s = new Size(8, 8); break;
             }
             if (showGrid.Checked && FontType != 3)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, new Size(fontTableImage.Width, fontTableImage.Height), s, 1, true);
+                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, fontTableImage.Size, s, true, -1);
         }
         private void pictureBoxFontTable_MouseClick(object sender, MouseEventArgs e)
         {
@@ -734,7 +734,7 @@ namespace LAZYSHELL
             fontEditZoomIn.Checked = false;
             fontEditZoomOut.Checked = false;
             edit = fontEditDraw.Checked ? 1 : 0;
-            pictureBoxFontCharacter.Cursor = edit == 1 ? new Cursor(GetType(), "CursorDraw.cur") : Cursors.Arrow;
+            pictureBoxFontCharacter.Cursor = edit == 1 ? NewCursors.Draw : Cursors.Arrow;
         }
         private void fontEditErase_Click(object sender, EventArgs e)
         {
@@ -744,7 +744,7 @@ namespace LAZYSHELL
             fontEditZoomIn.Checked = false;
             fontEditZoomOut.Checked = false;
             edit = fontEditErase.Checked ? 2 : 0;
-            pictureBoxFontCharacter.Cursor = edit == 2 ? new Cursor(GetType(), "CursorErase.cur") : Cursors.Arrow;
+            pictureBoxFontCharacter.Cursor = edit == 2 ? NewCursors.Erase : Cursors.Arrow;
         }
         private void fontEditChoose_Click(object sender, EventArgs e)
         {
@@ -754,7 +754,7 @@ namespace LAZYSHELL
             fontEditZoomIn.Checked = false;
             fontEditZoomOut.Checked = false;
             edit = fontEditChoose.Checked ? 3 : 0;
-            pictureBoxFontCharacter.Cursor = edit == 3 ? new Cursor(GetType(), "CursorDropper.cur") : Cursors.Arrow;
+            pictureBoxFontCharacter.Cursor = edit == 3 ? NewCursors.Dropper : Cursors.Arrow;
         }
         private void fontEditFill_Click(object sender, EventArgs e)
         {
@@ -764,7 +764,7 @@ namespace LAZYSHELL
             fontEditZoomIn.Checked = false;
             fontEditZoomOut.Checked = false;
             edit = fontEditFill.Checked ? 4 : 0;
-            pictureBoxFontCharacter.Cursor = edit == 4 ? new Cursor(GetType(), "CursorFill.cur") : Cursors.Arrow;
+            pictureBoxFontCharacter.Cursor = edit == 4 ? NewCursors.Fill : Cursors.Arrow;
         }
         private void fontEditZoomIn_Click(object sender, EventArgs e)
         {
@@ -840,9 +840,11 @@ namespace LAZYSHELL
                 {
                     case 0:
                         Do.CopyOverFontTable(graphicBlock, font, new Size(import.Width / 8, import.Height / 12), palette);
+                        font[0].Width = 4;
                         break;
                     case 1:
                         Do.CopyOverFontTable(graphicBlock, font, new Size(import.Width / 16, import.Height / 12), palette);
+                        font[0].Width = 4;
                         break;
                 }
             }
@@ -879,6 +881,7 @@ namespace LAZYSHELL
                 br.Close();
             }
             fs.Close();
+            InitializeFontCharacter();
             SetFontPaletteImage();
             SetFontTableImage();
             SetFontCharacterImage();

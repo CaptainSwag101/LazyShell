@@ -45,6 +45,7 @@ namespace LAZYSHELL
             this.spellFPCost.Value = spell.FPCost;
             this.spellMagPower.Value = spell.MagicPower;
             this.spellHitRate.Value = spell.HitRate;
+            this.spellNameIcon.Visible = index < 64;
             this.spellNameIcon.SelectedIndex = (int)(spell.Name[0] - 0x20);
             this.spellNameIcon.Invalidate();
             if (index < 64)

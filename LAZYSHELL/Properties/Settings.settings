@@ -433,6 +433,7 @@
   &lt;string /&gt;
   &lt;string /&gt;
   &lt;string /&gt;
+  &lt;string /&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="KeystrokesDesc" Type="System.Collections.Specialized.StringCollection" Scope="User">

@@ -117,64 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="PlaybackSequence.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>143, 17</value>
-  </metadata>
-  <metadata name="contextMenuStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>470, 17</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>286, 17</value>
-  </metadata>
-  <metadata name="toolTip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>378, 17</value>
-  </metadata>
-  <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>615, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="animationsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAYAAAA/I0V3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAABFSURBVDhPY2DADf7jkcMqBdIAw0TpRdZAlEZsGojSCHIO
-        QefhMx2XHMN/dIBsEw65kaEJI2SQBKCBhBkQtNOElgIIRjYA7LZuoF48umkAAAAASUVORK5CYII=
-</value>
+  <data name="PlaybackSequence.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>143, 17</value>
   </data>
-  <metadata name="toolStrip3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="contextMenuStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>470, 17</value>
+  </data>
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>286, 17</value>
+  </data>
+  <data name="toolTip2.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>378, 17</value>
+  </data>
+  <data name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>615, 17</value>
+  </data>
+  <data name="toolStrip3.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>714, 17</value>
-  </metadata>
-  <metadata name="toolTip3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="toolTip3.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 54</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
     <value>65</value>
-  </metadata>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA
-        AAAAAAAALSQgAC4lIAAvJiEAMiohADQqIgA1KyIAOjMlAD86KgBAOykAQzsoAEM7KQBFPioARD4rAExN
-        NABOQD0AUEI/AFJRMgBVVjUAU1o4AFZbOQBWXDgAWV04AFViOwBUZDwAXWc9AFNoPgBUaD0AW2k+AFxs
-        PgBWSkQAXFFJAGhcWQBsXlwAWnNCAF5wQABYc0QAWnJEAFl1RQBad0oAXnpIAF5+SgBkYUkAYHBDAGBz
-        QwBlcUEAYn9GAGZ8RgBhf0gAZX1JAGhuUABcX3oAdm55AH11cABig0oAZIFKAGWDSgBig08AY4ZOAGSI
-        TQBnik8AZIdQAGeQUQBlkFMAZ5BSAGiSUwBok1QAaJRUAGmVVQBll1kAb5heAHmfagCBmWsAgJ9sAISg
-        cwBpbZEAAAD/AJGFgwCYioEAmZOKAJ6YjQCknpcAqaecALKlnwCwrLMAvbOwAMi+twC3wKcAzcjCANbK
-        wADN2cUA3tbSAOPf3QDo4dwA5uPjAOvl5ADm6eAA7O3pAPLt6gD18ewA9fHvAPf59QD6+fcA/Pv7AP//
-        /wAAgP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQDyE1AAAAAAAAAAAASzRVX2RiW1NOAAAAAAAAM1Rn
-        YVJQT1FYZlYAAAAATV5oYDIOCAcCAx9cXQAAAGhoZUgxKxQJCgQBHmMAAABXWko9PDcXFREMBgVZAAAA
-        ADk/J0U7GCwZEg0LAAAAAAAlJDopGiI4LxMWKgAAAAAAAEJEQ0EbLh0jLQAAAAAAAAAAQD4oJjYwHAAA
-        AAAAAAAAAAAAR0ZJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPwfAADwBwAA4AMAAMABAACAAAAAgAAAAIAAAADAAQAAwAEAAOAD
-        AADwBwAA+A8AAP4/AAD//wAA//8AAP//AAA=
-</value>
   </data>
 </root>

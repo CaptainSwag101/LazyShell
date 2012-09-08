@@ -8,7 +8,7 @@ namespace LAZYSHELL
     public abstract class SPC : Element
     {
         public override abstract int Index { get; set; }
-        public abstract List<SPCScriptCommand>[] Channels { get; set; }
+        public abstract List<SPCCommand>[] Channels { get; set; }
         public abstract bool[] ActiveChannels { get; set; }
         public abstract SampleIndex[] Samples { get; set; }
         public abstract List<Percussives> Percussives { get; set; }

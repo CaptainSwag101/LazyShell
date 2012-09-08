@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -181,6 +182,34 @@ namespace LAZYSHELL
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
+        }
+    }
+    public class NewForm : Form
+    {
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            //base.OnPaint(e);
+        }
+    }
+    public class NewGroupBox : GroupBox
+    {
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Pen border = new Pen(SystemColors.ControlText);
+            border.Width = 2; border.Alignment = PenAlignment.Inset;
+            Brush fillHeader = new SolidBrush(SystemColors.ControlDarkDark);
+            Brush fillBody = new SolidBrush(SystemColors.ControlDark);
+            Rectangle header = new Rectangle(0, 0, this.Width, 18);
+            Rectangle body = new Rectangle(0, 16, this.Width, this.Height - 16);
+            e.Graphics.FillRectangle(fillBody, body);
+            e.Graphics.FillRectangle(fillHeader, header);
+            e.Graphics.DrawRectangle(border, body);
+            e.Graphics.DrawRectangle(border, header);
+            //
+            Brush foreColor = new SolidBrush(SystemColors.Control);
+            Font font = new Font(this.Font.FontFamily, this.Font.Size - 1, FontStyle.Bold);
+            string text = this.Text.ToUpper();
+            e.Graphics.DrawString(text, font, foreColor, 2, 2);
         }
     }
 }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BattleDialogues));
             this.battleDialogueTextBox = new System.Windows.Forms.RichTextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.battleDlgType = new System.Windows.Forms.ToolStripComboBox();
@@ -116,7 +115,12 @@
             this.battleDialogueNum.AutoSize = false;
             this.battleDialogueNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.battleDialogueNum.Hexadecimal = false;
-            this.battleDialogueNum.Location = new System.Drawing.Point(162, 2);
+            this.battleDialogueNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.battleDialogueNum.Location = new System.Drawing.Point(160, 2);
             this.battleDialogueNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -401,7 +405,7 @@
             // 
             // openPalettes
             // 
-            this.openPalettes.Image = ((System.Drawing.Image)(resources.GetObject("openPalettes.Image")));
+            this.openPalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.openPalettes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openPalettes.Name = "openPalettes";
             this.openPalettes.Size = new System.Drawing.Size(179, 24);
@@ -410,7 +414,7 @@
             // 
             // openPaletteMenu
             // 
-            this.openPaletteMenu.Image = ((System.Drawing.Image)(resources.GetObject("openPaletteMenu.Image")));
+            this.openPaletteMenu.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.openPaletteMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openPaletteMenu.Name = "openPaletteMenu";
             this.openPaletteMenu.Size = new System.Drawing.Size(179, 24);

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Lazy Shell, Version 3.12.0
+    <value>Lazy Shell, Version 3.13.0
 Copyright © 2007-2012  giangurgolo &amp; Omega
 
 Created by Omega &amp; giangurgolo
@@ -131,11 +131,12 @@ Yakibomb - principle bug-finder and tester, positive feedback
 Ryan H. - donator, supporter
 
 Special Thanks:
+Alex Farber - MRU list manager
 Bregalad - source code for BRR encoding and decoding
+CrispyYoshi - feedback, beta testing, documentation for audio editor
 FuSoYa - for permission to use Lunar Compress.dll
 KP9000 - beta testing, discovered many bugs with pre-release version
 MathOnNapkins - helped with some coding
-Alex Farber - MRU list manager
 spel werdz rite - original resolution for running program under a 64-bit OS
 romhacking community - various feedback</value>
   </data>

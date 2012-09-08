@@ -4,6 +4,30 @@ using System.Text;
 
 namespace LAZYSHELL
 {
+    // Audio
+    public enum Pitch
+    {
+        C, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B, Rest, Hold, None
+    }
+    public enum Accidental
+    {
+        None, Flat, Natural, Sharp
+    }
+    public enum Key
+    {
+        CMajor, GMajor, DMajor, AMajor, EMajor, BMajor, FsMajor, CsMajor, // Sharps
+        FMajor, BbMajor, EbMajor, AbMajor, DbMajor, GbMajor, CbMajor, // Flats
+        AMinor, EMinor, BMinor, FsMinor, CsMinor, GsMinor, DsMinor, AsMinor, // Sharps
+        DMinor, GMinor, CMinor, FMinor, BbMinor, EbMinor, AbMinor // Flats
+    }
+    public enum NativeSPC
+    {
+        SMRPG,
+        SMWLevel,
+        SMWOverworld,
+        Custom
+    }
+    //
     public enum PreviewType
     {
         Event,
@@ -30,6 +54,10 @@ namespace LAZYSHELL
     public enum TilemapType
     {
         Level, Mod, Template, None
+    }
+    public enum SPCType
+    {
+        SPCTrack, EventSFX, BattleSFX
     }
     public enum ScriptEnum_Option
     {

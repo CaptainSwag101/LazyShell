@@ -90,7 +90,7 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.AutoSize = false;
-            this.toolStripLabel1.Image = global::LAZYSHELL.Properties.Resources._goto;
+            this.toolStripLabel1.Image = global::LAZYSHELL.Properties.Resources.jumpTo;
             this.toolStripLabel1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(22, 22);
@@ -434,7 +434,7 @@
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Name = "HexEditor";
             this.Text = "HEX EDITOR - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HexViewer_FormClosing);

@@ -1,6 +1,6 @@
 LAZY SHELL - Super Mario RPG Editor
-Version: 3.12.0
-Date: August 26, 2012
+Version: 3.13.0
+Date: September 7, 2012
 Home Page: http://home.comcast.net/~giangurgolo/smrpg/
 Written by giangurgolo and Omega
 
@@ -509,6 +509,15 @@ A: If you're loading from a save state outside of Lazy Shell, then the
    data is stored to memory when the ROM starts. The previewer, though,
    will let you hear the changes since the modified data is stored into 
    the preview save state's audio memory.
+   
+Q: I imported an MML script but the channels are out of sync.
+A: Sometimes you must delete the first rests contained in the last 7
+   channels.
+   
+Q: How do I transfer my work in the score writer to the SPC?
+A: Export the staffs as scripts, then import the scripts into each of 
+   the individual channels. You'll have to manually add non-note
+   commands in the track editor, like beat durations, volumes, etc.
 ________________
 DIALOGUES EDITOR
 ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯

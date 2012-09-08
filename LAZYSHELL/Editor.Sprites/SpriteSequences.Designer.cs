@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpriteSequences));
             this.frameMold = new LAZYSHELL.ToolStripNumericUpDown();
             this.duration = new LAZYSHELL.ToolStripNumericUpDown();
             this.panelSequence = new System.Windows.Forms.Panel();
@@ -80,6 +79,11 @@
             // 
             this.frameMold.AutoSize = false;
             this.frameMold.Hexadecimal = false;
+            this.frameMold.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.frameMold.Location = new System.Drawing.Point(36, 4);
             this.frameMold.Maximum = new decimal(new int[] {
             31,
@@ -105,6 +109,11 @@
             // 
             this.duration.AutoSize = false;
             this.duration.Hexadecimal = false;
+            this.duration.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.duration.Location = new System.Drawing.Point(140, 4);
             this.duration.Maximum = new decimal(new int[] {
             255,
@@ -139,7 +148,7 @@
             // 
             // pictureBoxSequence
             // 
-            this.pictureBoxSequence.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxSequence.BackgroundImage")));
+            this.pictureBoxSequence.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.pictureBoxSequence.Location = new System.Drawing.Point(21, 0);
             this.pictureBoxSequence.Name = "pictureBoxSequence";
             this.pictureBoxSequence.Size = new System.Drawing.Size(256, 256);

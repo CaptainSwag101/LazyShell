@@ -112,10 +112,10 @@
             this.toggleL2,
             this.toggleL3,
             this.toggleBG,
+            this.toggleP1,
             this.toggleTileMods,
             this.toggleSolid,
             this.toggleSolidMods,
-            this.toggleP1,
             this.toolStripSeparator14,
             this.toggleMushrooms,
             this.toggleRails,
@@ -133,7 +133,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(8, 0, 1, 0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(832, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(836, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // toggleCartGrid
@@ -257,11 +257,11 @@
             // toggleP1
             // 
             this.toggleP1.CheckOnClick = true;
+            this.toggleP1.Image = global::LAZYSHELL.Properties.Resources.priority1ON;
             this.toggleP1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toggleP1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toggleP1.Name = "toggleP1";
             this.toggleP1.Size = new System.Drawing.Size(23, 22);
-            this.toggleP1.Text = "P1";
             this.toggleP1.ToolTipText = "Priority 1";
             this.toggleP1.Click += new System.EventHandler(this.buttonToggleP1_Click);
             // 
@@ -475,7 +475,7 @@
             // 
             // exportToBattlefieldToolStripMenuItem
             // 
-            this.exportToBattlefieldToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.exportToBattlefieldToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportToBattlefieldToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportToBattlefieldToolStripMenuItem.Name = "exportToBattlefieldToolStripMenuItem";
             this.exportToBattlefieldToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
@@ -484,7 +484,7 @@
             // 
             // objectFunctionToolStripMenuItem
             // 
-            this.objectFunctionToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources._goto;
+            this.objectFunctionToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.jumpTo;
             this.objectFunctionToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.objectFunctionToolStripMenuItem.Name = "objectFunctionToolStripMenuItem";
             this.objectFunctionToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
@@ -536,10 +536,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTileCoords.BackColor = System.Drawing.SystemColors.Control;
             this.labelTileCoords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelTileCoords.Location = new System.Drawing.Point(29, 625);
+            this.labelTileCoords.Location = new System.Drawing.Point(29, 629);
             this.labelTileCoords.Name = "labelTileCoords";
             this.labelTileCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.labelTileCoords.Size = new System.Drawing.Size(803, 24);
+            this.labelTileCoords.Size = new System.Drawing.Size(807, 24);
             this.labelTileCoords.TabIndex = 4;
             this.labelTileCoords.Text = "(x: 0, y: 0)  Tile  |  (x: 0, y: 0) Isometric  |  (x: 0, y: 0) Pixel";
             this.labelTileCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -575,7 +575,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 25);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(26, 624);
+            this.toolStrip2.Size = new System.Drawing.Size(26, 628);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -796,7 +796,7 @@
             this.panelLevelPicture.Controls.Add(this.pictureBoxLevel);
             this.panelLevelPicture.Location = new System.Drawing.Point(29, 31);
             this.panelLevelPicture.Name = "panelLevelPicture";
-            this.panelLevelPicture.Size = new System.Drawing.Size(799, 593);
+            this.panelLevelPicture.Size = new System.Drawing.Size(803, 597);
             this.panelLevelPicture.TabIndex = 3;
             this.panelLevelPicture.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panelLevelPicture_Scroll);
             // 
@@ -823,7 +823,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 649);
+            this.ClientSize = new System.Drawing.Size(836, 653);
             this.ControlBox = false;
             this.Controls.Add(this.labelTileCoords);
             this.Controls.Add(this.panelOpacity);
@@ -832,7 +832,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TilemapEditor";

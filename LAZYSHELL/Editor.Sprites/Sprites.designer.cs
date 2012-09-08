@@ -113,6 +113,11 @@ namespace LAZYSHELL
             // 
             this.number.AutoSize = false;
             this.number.Hexadecimal = false;
+            this.number.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.number.Location = new System.Drawing.Point(223, 2);
             this.number.Maximum = new decimal(new int[] {
             1023,
@@ -503,7 +508,7 @@ namespace LAZYSHELL
             // 
             // import
             // 
-            this.import.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
@@ -516,16 +521,16 @@ namespace LAZYSHELL
             this.export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.animationsToolStripMenuItem,
             this.allMoldImagesToolStripMenuItem});
-            this.export.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(26, 22);
+            this.export.Size = new System.Drawing.Size(27, 22);
             this.export.ToolTipText = "Export";
             // 
             // animationsToolStripMenuItem
             // 
-            this.animationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("animationsToolStripMenuItem.Image")));
+            this.animationsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.animationsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.animationsToolStripMenuItem.Name = "animationsToolStripMenuItem";
             this.animationsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
@@ -726,7 +731,7 @@ namespace LAZYSHELL
             this.Controls.Add(this.characterNumLabel);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Sprites";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

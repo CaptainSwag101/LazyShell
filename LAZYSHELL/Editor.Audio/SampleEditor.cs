@@ -82,7 +82,7 @@ namespace LAZYSHELL
                 points.Add(new Point(x, y));
                 offset += 2;
             }
-            g.DrawLines(new Pen(Color.Lime), points.ToArray());
+            g.DrawLines(Pens.Lime, points.ToArray());
         }
         public void Assemble()
         {
@@ -188,13 +188,23 @@ namespace LAZYSHELL
         //
         private void import_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])Model.AudioSamples, Index, "IMPORT SAMPLES...").ShowDialog();
+            new IOElements((Element[])Model.AudioSamples, Index, "IMPORT SAMPLE WAVs...").ShowDialog();
+            wav = BRR.BRRToWAV(audioSample.Sample, sampleRate);
+            pictureBox1.Invalidate();
+        }
+        private void importBRR_Click(object sender, EventArgs e)
+        {
+            new IOElements((Element[])Model.AudioSamples, Index, "IMPORT SAMPLE BRRs...").ShowDialog();
             wav = BRR.BRRToWAV(audioSample.Sample, sampleRate);
             pictureBox1.Invalidate();
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])Model.AudioSamples, Index, "EXPORT SAMPLES...", sampleRate).ShowDialog();
+            new IOElements((Element[])Model.AudioSamples, Index, "EXPORT SAMPLE WAVs...", sampleRate).ShowDialog();
+        }
+        private void exportBRR_Click(object sender, EventArgs e)
+        {
+            new IOElements((Element[])Model.AudioSamples, Index, "EXPORT SAMPLE BRRs...", sampleRate).ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {

@@ -99,16 +99,16 @@
             this.import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importFormationsToolStripMenuItem,
             this.importPacksToolStripMenuItem});
-            this.import.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
-            this.import.Size = new System.Drawing.Size(26, 22);
+            this.import.Size = new System.Drawing.Size(27, 22);
             this.import.ToolTipText = "Import";
             // 
             // importFormationsToolStripMenuItem
             // 
-            this.importFormationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importFormationsToolStripMenuItem.Image")));
+            this.importFormationsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.importFormationsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importFormationsToolStripMenuItem.Name = "importFormationsToolStripMenuItem";
             this.importFormationsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
@@ -117,7 +117,7 @@
             // 
             // importPacksToolStripMenuItem
             // 
-            this.importPacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importPacksToolStripMenuItem.Image")));
+            this.importPacksToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.importPacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importPacksToolStripMenuItem.Name = "importPacksToolStripMenuItem";
             this.importPacksToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
@@ -129,16 +129,16 @@
             this.export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportFormationsToolStripMenuItem,
             this.exportPacksToolStripMenuItem});
-            this.export.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(26, 22);
+            this.export.Size = new System.Drawing.Size(27, 22);
             this.export.ToolTipText = "Export";
             // 
             // exportFormationsToolStripMenuItem
             // 
-            this.exportFormationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportFormationsToolStripMenuItem.Image")));
+            this.exportFormationsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportFormationsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportFormationsToolStripMenuItem.Name = "exportFormationsToolStripMenuItem";
             this.exportFormationsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
@@ -147,7 +147,7 @@
             // 
             // exportPacksToolStripMenuItem
             // 
-            this.exportPacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportPacksToolStripMenuItem.Image")));
+            this.exportPacksToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportPacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportPacksToolStripMenuItem.Name = "exportPacksToolStripMenuItem";
             this.exportPacksToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
@@ -168,19 +168,19 @@
             // 
             // resetFormationToolStripMenuItem
             // 
-            this.resetFormationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetFormationToolStripMenuItem.Image")));
+            this.resetFormationToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetFormationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetFormationToolStripMenuItem.Name = "resetFormationToolStripMenuItem";
-            this.resetFormationToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.resetFormationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetFormationToolStripMenuItem.Text = "Reset formation";
             this.resetFormationToolStripMenuItem.Click += new System.EventHandler(this.resetFormationToolStripMenuItem_Click);
             // 
             // resetPackToolStripMenuItem
             // 
-            this.resetPackToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetPackToolStripMenuItem.Image")));
+            this.resetPackToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetPackToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetPackToolStripMenuItem.Name = "resetPackToolStripMenuItem";
-            this.resetPackToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.resetPackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetPackToolStripMenuItem.Text = "Reset pack";
             this.resetPackToolStripMenuItem.Click += new System.EventHandler(this.resetPackToolStripMenuItem_Click);
             // 
@@ -198,7 +198,7 @@
             // 
             // clearFormationsToolStripMenuItem
             // 
-            this.clearFormationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearFormationsToolStripMenuItem.Image")));
+            this.clearFormationsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clearFormationsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearFormationsToolStripMenuItem.Name = "clearFormationsToolStripMenuItem";
             this.clearFormationsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
@@ -207,7 +207,7 @@
             // 
             // clearPacksToolStripMenuItem
             // 
-            this.clearPacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearPacksToolStripMenuItem.Image")));
+            this.clearPacksToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clearPacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearPacksToolStripMenuItem.Name = "clearPacksToolStripMenuItem";
             this.clearPacksToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
@@ -292,7 +292,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "FormationsEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

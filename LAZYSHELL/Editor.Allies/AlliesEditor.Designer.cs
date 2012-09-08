@@ -86,7 +86,7 @@
             // 
             // import
             // 
-            this.import.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
@@ -96,7 +96,7 @@
             // 
             // export
             // 
-            this.export.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
@@ -194,7 +194,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "AlliesEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

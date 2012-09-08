@@ -443,8 +443,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "UNKCMD 0xFD Option 0x93",			// 0x93
             "Set inactive sound channels: ",			// 0x94
             "UNKCMD 0xFD Option 0x95",			// 0x95
-            "UNKCMD 0xFD Option 0x96",			// 0x96
-            "UNKCMD 0xFD Option 0x97",			// 0x97
+            "If audio memory $69 >= ",			// 0x96
+            "If audio memory $69 = ",			// 0x97
             "UNKCMD 0xFD Option 0x98",			// 0x98
             "UNKCMD 0xFD Option 0x99",			// 0x99
             "UNKCMD 0xFD Option 0x9A",			// 0x9A
@@ -1161,6 +1161,11 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     break;
                 case 0x94:
                     sb.Append(GetBits(esc.EventData[2], null, 8));
+                    break;
+                case 0x96:
+                case 0x97:
+                    sb.Append(esc.EventData[2] + ", jump to $");
+                    sb.Append(Bits.GetShort(esc.EventData, 3).ToString("X4"));
                     break;
                 case 0x9D:
                     sb.Append(Lists.Numerize(Lists.SoundNames, esc.EventData[2]) + ", speaker balance: " +

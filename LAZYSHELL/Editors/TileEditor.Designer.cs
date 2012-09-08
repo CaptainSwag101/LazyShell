@@ -177,7 +177,7 @@
             // 
             // pictureBoxTile
             // 
-            this.pictureBoxTile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxTile.BackgroundImage")));
+            this.pictureBoxTile.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.pictureBoxTile.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxTile.Name = "pictureBoxTile";
             this.pictureBoxTile.Size = new System.Drawing.Size(64, 64);
@@ -188,7 +188,7 @@
             // 
             // pictureBoxSubtile
             // 
-            this.pictureBoxSubtile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxSubtile.BackgroundImage")));
+            this.pictureBoxSubtile.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.pictureBoxSubtile.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxSubtile.Name = "pictureBoxSubtile";
             this.pictureBoxSubtile.Size = new System.Drawing.Size(64, 64);
@@ -259,7 +259,7 @@
             this.Controls.Add(this.buttonOK);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TileEditor";

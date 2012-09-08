@@ -1,43 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
-using System.Windows.Forms;
+using LAZYSHELL.ScriptsEditor.Commands;
 
 namespace LAZYSHELL
 {
-    public partial class SPCCommand : Form
+    [Serializable()]
+    public class SPCCommand
     {
-        public int Opcode;
-        public SPCCommand()
+        private byte[] commandData; public byte[] CommandData { get { return this.commandData; } set { this.commandData = value; } }
+        public int Length { get { return commandData.Length; } }
+        public byte Opcode
         {
-            InitializeComponent();
-            comboBox1.Items.AddRange(Lists.SPCCommands);
+            get
+            {
+                if (this.Length > 0)
+                    return this.commandData[0];
+                else
+                    return 0;
+            }
+            set { this.commandData[0] = value; }
         }
-        private void buttonOK_Click(object sender, EventArgs e)
+        public byte Param1
         {
-            if (comboBox1.SelectedIndex == -1)
-                return;
-            if (comboBox1.SelectedIndex == 0)
-                this.Opcode = 0;
-            else
-                this.Opcode = comboBox1.SelectedIndex + 0xC3;
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            get
+            {
+                if (this.Length > 1)
+                    return this.commandData[1];
+                else
+                    return 0;
+            }
+            set { this.commandData[1] = value; }
         }
-        private void buttonCancel_Click(object sender, EventArgs e)
+        public byte Param2
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            get
+            {
+                if (this.Length > 2)
+                    return this.commandData[2];
+                else
+                    return 0;
+            }
+            set { this.commandData[2] = value; }
         }
-        private void SPCCommand_KeyDown(object sender, KeyEventArgs e)
+        public byte Param3
         {
-            if (e.KeyData == Keys.Enter)
-                buttonOK.PerformClick();
-            else if (e.KeyData == Keys.Escape)
-                buttonCancel.PerformClick();
+            get
+            {
+                if (this.Length > 3)
+                    return this.commandData[3];
+                else
+                    return 0;
+            }
+            set { this.commandData[3] = value; }
+        }
+        private List<SPCCommand> commands = new List<SPCCommand>();
+        public List<SPCCommand> Commands { get { return this.commands; } set { this.commands = value; } }
+        private SPC spc;
+        private int channel; public int Channel { get { return this.channel; } set { this.channel = value; } }
+        //
+        public SPCCommand(byte[] commandData, SPC spc, int channel)
+        {
+            this.spc = spc;
+            this.commandData = commandData;
+            this.channel = channel;
+        }
+        public SPCCommand Copy()
+        {
+            return new SPCCommand(Bits.Copy(commandData), this.spc, this.channel);
+        }
+        public override string ToString()
+        {
+            return Interpreter.Instance.InterpretSPCCommand(this);
         }
     }
 }

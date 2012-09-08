@@ -17,7 +17,6 @@ namespace LAZYSHELL
         static double resample_var;
         static char resample_type;
         //static SecondaryBuffer sound;
-        static Thread playback;
         // decoder functions
         public static byte[] BRRToWAV(byte[] inBrr, int rate)
         {

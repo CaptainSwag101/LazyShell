@@ -239,11 +239,118 @@ namespace LAZYSHELL
             };
         #endregion
         #region Audio
+        public static int[] SMWSamples = new int[]{
+            82, 65, 104,78, 89, 66, 23, 96, 100,56,
+            18, 65, 109,39, 101,17, 38, 113,65, 0,
+            0,  51, 52, 53, 67, 67, 51, 51, 51, 0
+        };
+        public static int[] SMWPercussives = new int[]{
+            -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+            0, -1,1, -1,-1,-1,-1,-1,-1,-1,
+            -1,2, 3, 4, 5, 6, 7, 8, -1,-1
+        };
+        public static int[] SMWOctaveLimits = new int[]{
+            5,6,6,6,4,5,6,5,5,5,
+            4,6,6,5,5,6,6,6,4,4,
+            4,4,4,4,4,4,4,4,4,4
+        };
+        public static bool[] SMRPGPercussives = new bool[]
+        {
+            false,false,false,false,false,false,false,false,false,false,
+            false,false,false,false,false,false,false,false,true, false,
+            false,false,false,false,false,true, true, false,false,false,
+            false,false,true, true, true, true, false,false,false,false,
+            false,false,true, true, false,true, true, true, false,false,
+            false,true, true, true, true, false,false,false,false,false,
+            true, true, true, false,false,false,false,true, true, true, 
+            false,false,true, true, false,true, true, true, false,true, 
+            true, true, false,false,true, false,false,false,false,false,
+            false,true, false,false,false,false,false,true, true, true, 
+            false,false,false,false,false,false,true, true, true, true, 
+            false,false,false,false,true, false
+        };
+        public static int[] SMRPGtoSMWSamples = new int[]{
+          /*0   1   2   3   4   5   6   7   8   9*/
+            29, 29, 29, 29, 29, 29, 29, 29, 29, 29,  // 0
+            29, 29, 29, 29, 29, 29, 29, 15, 10, 0,   // 10
+            8,  6,  0,  6,  6,  26, 25, 0,  0,  6,   // 20
+            0,  11, 15, 23, 2,  22, 22, 26, 16, 13,  // 30
+            13, 9,  10, 10, 6,  26, 28, 12, 29, 0,   // 40
+            11, 27, 23, 23, 26, 3,  9,  9,  29, 1,   // 50
+            10, 10, 12, 11, 2,  1,  5,  24, 26, 10,  // 60
+            8,  1,  23, 10, 13, 23, 12, 12, 3,  10,  // 70
+            0,  25, 0,  6,  23, 0,  29, 9,  4,  4,   // 80
+            10, 12, 8,  16, 6,  0,  7,  23, 23, 25,  // 90
+            8,  14, 11, 2,  2,  2,  29, 12, 12, 12,  // 100
+            17, 29, 29, 17, 30, 5
+        };
+        public static string[] SPCCommands = new string[]
+        {
+            "Note",
+            "Note, duration = ",
+            "Octave up",
+            "Octave down",
+            "Octave = ",
+            "Slur next note",
+            "Noise on, channels = ",
+            "Noise on, all channels",
+            "Noise off",
+            "Frequency mode on",
+            "Frequency mode off",
+            "Play sound effect = ",
+            "Play sound effect = ",
+            "Transpose 1/16 pitch = ",
+            "Terminate script",
+            "Beat duration = ",
+            "Audio memory $69 = ",
+            "{D3-xx}",
+            "Begin repeat",
+            "End repeat",
+            "Repeat ending start",
+            "Begin infinite repeat",
+            "ADSR reset",
+            "ADSR attack = ",
+            "ADSR decay = ",
+            "ADSR sustain = ",
+            "ADSR release = ",
+            "Sample length = ",
+            "Sample = ",
+            "Noise transpose, pitch = ",
+            "Sample fadeout = ",
+            "{E1-xx}",
+            "Volume = ",
+            "Volume shift, amount = ",
+            "Volume slide, duration = ",
+            "Portamento, duration = ",
+            "Portamento looping",
+            "Speaker balance = ",
+            "Pansweep, duration = ",
+            "Pansweep loop, duration = ",
+            "{EA}",
+            "{EB}",
+            "Transpose 1/4 pitch from 0 = ",
+            "Transpose 1/4 pitch = ",
+            "Percussion mode on",
+            "Percussion mode off",
+            "Tremolo = ",
+            "Vibrato = ",
+            "Beat duration, change = ",
+            "Vibrato off",
+            "Growling, roughness = ",
+            "{F5}",
+            "Portamento on = ",
+            "Growling off",
+            "Dizziness on",
+            "Dizziness off",
+            "Reverb on",
+            "Reverb off",
+            "Reverb = ",
+            "{FD}",
+            "{FE}",
+            "{FF}"
+        };
         public static string[] Pitches = new string[]
         {
-            "A0",
-            "A#0",
-            "B0",
             "C0",
             "C#0",
             "D0",
@@ -253,9 +360,9 @@ namespace LAZYSHELL
             "F#0",
             "G0",
             "G#0",
-            "A1",
-            "A#1",
-            "B1",
+            "A0",
+            "A#0",
+            "B0",
             "C1",
             "C#1",
             "D1",
@@ -265,9 +372,9 @@ namespace LAZYSHELL
             "F#1",
             "G1",
             "G#1",
-            "A2",
-            "A#2",
-            "B2",
+            "A1",
+            "A#1",
+            "B1",
             "C2",
             "C#2",
             "D2",
@@ -277,9 +384,9 @@ namespace LAZYSHELL
             "F#2",
             "G2",
             "G#2",
-            "A3",
-            "A#3",
-            "B3",
+            "A2",
+            "A#2",
+            "B2",
             "C3",
             "C#3",
             "D3",
@@ -289,9 +396,9 @@ namespace LAZYSHELL
             "F#3",
             "G3",
             "G#3",
-            "A4",
-            "A#4",
-            "B4",
+            "A3",
+            "A#3",
+            "B3",
             "C4",
             "C#4",
             "D4",
@@ -301,9 +408,9 @@ namespace LAZYSHELL
             "F#4",
             "G4",
             "G#4",
-            "A5",
-            "A#5",
-            "B5",
+            "A4",
+            "A#4",
+            "B4",
             "C5",
             "C#5",
             "D5",
@@ -313,9 +420,9 @@ namespace LAZYSHELL
             "F#5",
             "G5",
             "G#5",
-            "A6",
-            "A#6",
-            "B6",
+            "A5",
+            "A#5",
+            "B5",
             "C6",
             "C#6",
             "D6",
@@ -325,9 +432,9 @@ namespace LAZYSHELL
             "F#6",
             "G6",
             "G#6",
-            "A7",
-            "A#7",
-            "B7",
+            "A6",
+            "A#6",
+            "B6",
             "C7",
             "C#7",
             "D7",
@@ -337,9 +444,9 @@ namespace LAZYSHELL
             "F#7",
             "G7",
             "G#7",
-            "A8",
-            "A#8",
-            "B8",
+            "A7",
+            "A#7",
+            "B7",
             "C8",
             "C#8",
             "D8",
@@ -348,71 +455,10 @@ namespace LAZYSHELL
             "F8",
             "F#8",
             "G8",
-            "G#8"
-        };
-        public static string[] SPCCommands = new string[]
-        {
-            "Note",
-            "Octave up",
-            "Octave down",
-            "Octave = ",
-            "Slur next note",
-            "Noise on, channels = ",
-            "Noise on, all channels",
-            "Noise off",
-            "Noise on",
-            "{CC}",
-            "Play sound effect = ",
-            "Play sound effect = ",
-            "Transpose 1/16 pitch = ",
-            "Terminate script",
-            "Beat duration = ",
-            "{D2-xx}",
-            "{D3-xx}",
-            "Begin repeat",
-            "End repeat",
-            "Repeat ending start",
-            "Start infinite loop",
-            "{D8}",
-            "{D9-xx}",
-            "{DA-xx}",
-            "{DB-xx}",
-            "Echo, decay ratio : 24 = ",
-            "{DD-xx}",
-            "Instrument = ",
-            "{DF-xx}",
-            "Staccato = ",
-            "{E1-xx}",
-            "Volume = ",
-            "{E3-xx}",
-            "Volume slide = ",
-            "Portamento = ",
-            "{E6}",
-            "Speaker balance = ",
-            "Speaker balance shift = ",
-            "Speaker balance pansweep = ",
-            "{EA}",
-            "{EB}",
-            "Transpose 1/4 pitch 1 = ",
-            "Transpose 1/4 pitch 2 = ",
-            "Drum mode on",
-            "Drum mode off",
-            "Tremolo = ",
-            "Vibrato = ",
-            "Beat duration, change = ",
-            "Vibrato off",
-            "{F4-xx-xx}",
-            "{F5}",
-            "Portamento on = ",
-            "{F7}",
-            "Dizziness on",
-            "Dizziness off",
-            "Reverb on",
-            "Reverb off",
-            "Reverb = ",
-            "{FD}",
-            "{FE}",
-            "{FF}"
+            "G#8",
+            "A8",
+            "A#8",
+            "B8"
         };
         public static string[] SampleNames = new string[]
         {
@@ -447,7 +493,7 @@ namespace LAZYSHELL
             "Bassoon",
             "Tuba",
             "Flute",
-            "Strings",
+            "String Section 1",
             "DJ scratch",
             "Tambourine",
             "Bell",
@@ -497,7 +543,7 @@ namespace LAZYSHELL
             "Xylophone",
             "Drum",
             "Pea Whistle",
-            "Cow Bell",
+            "Cowbell",
             "Recorder",
             "French Horn",
             "Open Hi-Hat",
@@ -518,10 +564,10 @@ namespace LAZYSHELL
             "Agogo",
             "Acoustic Bass Guitar",
             "Fretless Bass",
-            "Violin",
+            "String Section 2",
             "Bell",
+            "Glockenspiel",
             "Vibraphone",
-            "Bells",
             "Seashore",
             "Dry Tom",
             "Tap",
@@ -3859,7 +3905,7 @@ namespace LAZYSHELL
             new int[]{0,0,0,0,0x4D,0x4E,0x4F,0x66,0x67,0xF8},
             new int[0x06],
             new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x30,0x31},
-            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0x94,0x9C,0xA4,0xA5},
+            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0x94,0x96,0x97,0x9C,0xA4,0xA5},
             new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0xB6,0xB7},
             new int[]
             {
@@ -4471,6 +4517,8 @@ namespace LAZYSHELL
                     /********FD OPTIONS********/
 
                     "Set inactive sound channels...",        // 0x94
+                    "If audio mem $69 >= ...",        // 0x96
+                    "If audio mem $69 =...",        // 0x97
                     "Playback start, sound (sync)...",             // 0x9C
                     "Playback, slow down track",			// 0xA4
                     "Playback, speed up track to normal"			// 0xA5

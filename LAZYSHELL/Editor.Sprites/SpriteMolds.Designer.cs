@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpriteMolds));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -209,6 +208,7 @@
             // 
             // bringToFrontToolStripMenuItem
             // 
+            this.bringToFrontToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.moveToFront;
             this.bringToFrontToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
             this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
@@ -217,6 +217,7 @@
             // 
             // sendToBackToolStripMenuItem
             // 
+            this.sendToBackToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.sendToBack;
             this.sendToBackToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.sendToBackToolStripMenuItem.Name = "sendToBackToolStripMenuItem";
             this.sendToBackToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
@@ -674,7 +675,7 @@
             // 
             // pictureBoxMold
             // 
-            this.pictureBoxMold.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxMold.BackgroundImage")));
+            this.pictureBoxMold.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.pictureBoxMold.ContextMenuStrip = this.contextMenuStrip1;
             this.pictureBoxMold.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxMold.Name = "pictureBoxMold";

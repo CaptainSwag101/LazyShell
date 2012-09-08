@@ -231,7 +231,7 @@
             this.Controls.Add(this.templatesLoaded);
             this.Controls.Add(this.toolStrip3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LevelsTemplate";

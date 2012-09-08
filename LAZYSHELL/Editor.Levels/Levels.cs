@@ -2087,7 +2087,7 @@ namespace LAZYSHELL
         private void changeLevelName_Click(object sender, EventArgs e)
         {
             toolStripTextBox1.Visible = changeLevelName.Checked;
-            toolStripButton1.Visible = changeLevelName.Checked;
+            reset.Visible = changeLevelName.Checked;
             if (toolStripTextBox1.Visible)
             {
                 toolStripTextBox1.Focus();
@@ -2111,7 +2111,7 @@ namespace LAZYSHELL
             {
                 changeLevelName.Checked = false;
                 toolStripTextBox1.Visible = false;
-                toolStripButton1.Visible = false;
+                reset.Visible = false;
             }
         }
         private void toolStripButton1_Click(object sender, EventArgs e)

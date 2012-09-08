@@ -2164,7 +2164,7 @@ namespace LAZYSHELL
             state.Draw = buttonEditDraw.Checked;
             Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (buttonEditDraw.Checked)
-                this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorDraw.cur");
+                this.pictureBoxLevel.Cursor = NewCursors.Draw;
             else if (!buttonEditDraw.Checked)
                 this.pictureBoxLevel.Cursor = Cursors.Arrow;
             PasteClear();
@@ -2194,7 +2194,7 @@ namespace LAZYSHELL
             state.Erase = buttonEditErase.Checked;
             Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (state.Erase)
-                this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorErase.cur");
+                this.pictureBoxLevel.Cursor = NewCursors.Erase;
             else if (!state.Erase)
                 this.pictureBoxLevel.Cursor = Cursors.Arrow;
 
@@ -2206,7 +2206,7 @@ namespace LAZYSHELL
             state.Dropper = buttonEditDropper.Checked;
             Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (state.Dropper)
-                this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorDropper.cur");
+                this.pictureBoxLevel.Cursor = NewCursors.Dropper;
             else if (!state.Dropper)
                 this.pictureBoxLevel.Cursor = Cursors.Arrow;
 
@@ -2218,7 +2218,7 @@ namespace LAZYSHELL
             state.Fill = buttonEditFill.Checked;
             Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (state.Fill)
-                this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorFill.cur");
+                this.pictureBoxLevel.Cursor = NewCursors.Fill;
             else if (!state.Fill)
                 this.pictureBoxLevel.Cursor = Cursors.Arrow;
 
@@ -2230,7 +2230,7 @@ namespace LAZYSHELL
             state.Template = buttonEditTemplate.Checked;
             Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (buttonEditTemplate.Checked)
-                this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorTemplate.cur");
+                this.pictureBoxLevel.Cursor = NewCursors.Template;
             else if (!buttonEditTemplate.Checked)
                 this.pictureBoxLevel.Cursor = Cursors.Arrow;
 
@@ -2276,7 +2276,7 @@ namespace LAZYSHELL
         {
             Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (buttonZoomIn.Checked)
-                this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorZoomIn.cur");
+                this.pictureBoxLevel.Cursor = NewCursors.ZoomIn;
             else if (!buttonZoomIn.Checked)
                 this.pictureBoxLevel.Cursor = Cursors.Arrow;
         }
@@ -2284,7 +2284,7 @@ namespace LAZYSHELL
         {
             Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             if (buttonZoomOut.Checked)
-                this.pictureBoxLevel.Cursor = new Cursor(GetType(), "CursorZoomOut.cur");
+                this.pictureBoxLevel.Cursor = NewCursors.ZoomOut;
             else if (!buttonZoomOut.Checked)
                 this.pictureBoxLevel.Cursor = Cursors.Arrow;
         }

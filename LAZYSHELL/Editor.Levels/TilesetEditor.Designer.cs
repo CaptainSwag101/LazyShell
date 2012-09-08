@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TilesetEditor));
-            this.pictureBoxTilesetL1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +59,7 @@
             this.buttonEditRedo = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pictureBoxTilesetL1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pictureBoxTilesetL2 = new System.Windows.Forms.PictureBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -69,37 +69,17 @@
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.autoUpdate = new System.Windows.Forms.CheckBox();
             this.labelTileIndex = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL1)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL2)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL3)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pictureBoxTilesetL1
-            // 
-            this.pictureBoxTilesetL1.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
-            this.pictureBoxTilesetL1.ContextMenuStrip = this.contextMenuStrip2;
-            this.pictureBoxTilesetL1.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.pictureBoxTilesetL1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxTilesetL1.Name = "pictureBoxTilesetL1";
-            this.pictureBoxTilesetL1.Size = new System.Drawing.Size(256, 512);
-            this.pictureBoxTilesetL1.TabIndex = 1;
-            this.pictureBoxTilesetL1.TabStop = false;
-            this.pictureBoxTilesetL1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTileset_Paint);
-            this.pictureBoxTilesetL1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseClick);
-            this.pictureBoxTilesetL1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDoubleClick);
-            this.pictureBoxTilesetL1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
-            this.pictureBoxTilesetL1.MouseEnter += new System.EventHandler(this.pictureBoxTileset_MouseEnter);
-            this.pictureBoxTilesetL1.MouseLeave += new System.EventHandler(this.pictureBoxTileset_MouseLeave);
-            this.pictureBoxTilesetL1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseMove);
-            this.pictureBoxTilesetL1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
-            this.pictureBoxTilesetL1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxTileset_PreviewKeyDown);
             // 
             // contextMenuStrip2
             // 
@@ -118,7 +98,7 @@
             this.importImageToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(159, 236);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(159, 258);
             this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
             // 
             // cutToolStripMenuItem2
@@ -164,6 +144,7 @@
             // 
             // priority1SetToolStripMenuItem
             // 
+            this.priority1SetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.priority1ON;
             this.priority1SetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.priority1SetToolStripMenuItem.Name = "priority1SetToolStripMenuItem";
             this.priority1SetToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
@@ -172,6 +153,7 @@
             // 
             // priority1ClearToolStripMenuItem
             // 
+            this.priority1ClearToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.priority1OFF;
             this.priority1ClearToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.priority1ClearToolStripMenuItem.Name = "priority1ClearToolStripMenuItem";
             this.priority1ClearToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
@@ -287,11 +269,11 @@
             // buttonToggleP1
             // 
             this.buttonToggleP1.CheckOnClick = true;
+            this.buttonToggleP1.Image = global::LAZYSHELL.Properties.Resources.priority1ON;
             this.buttonToggleP1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonToggleP1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonToggleP1.Name = "buttonToggleP1";
             this.buttonToggleP1.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleP1.Text = "P1";
             this.buttonToggleP1.ToolTipText = "Highlight Priority 1";
             this.buttonToggleP1.Click += new System.EventHandler(this.buttonToggleP1_Click);
             // 
@@ -408,6 +390,26 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "LAYER 1";
             // 
+            // pictureBoxTilesetL1
+            // 
+            this.pictureBoxTilesetL1.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBoxTilesetL1.ContextMenuStrip = this.contextMenuStrip2;
+            this.pictureBoxTilesetL1.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.pictureBoxTilesetL1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxTilesetL1.Name = "pictureBoxTilesetL1";
+            this.pictureBoxTilesetL1.Size = new System.Drawing.Size(256, 512);
+            this.pictureBoxTilesetL1.TabIndex = 1;
+            this.pictureBoxTilesetL1.TabStop = false;
+            this.pictureBoxTilesetL1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTileset_Paint);
+            this.pictureBoxTilesetL1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseClick);
+            this.pictureBoxTilesetL1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDoubleClick);
+            this.pictureBoxTilesetL1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
+            this.pictureBoxTilesetL1.MouseEnter += new System.EventHandler(this.pictureBoxTileset_MouseEnter);
+            this.pictureBoxTilesetL1.MouseLeave += new System.EventHandler(this.pictureBoxTileset_MouseLeave);
+            this.pictureBoxTilesetL1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseMove);
+            this.pictureBoxTilesetL1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseUp);
+            this.pictureBoxTilesetL1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxTileset_PreviewKeyDown);
+            // 
             // tabPage2
             // 
             this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -415,7 +417,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 23);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(260, 520);
+            this.tabPage2.Size = new System.Drawing.Size(264, 520);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "LAYER 2";
             // 
@@ -446,7 +448,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 23);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(260, 520);
+            this.tabPage3.Size = new System.Drawing.Size(264, 520);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "LAYER 3";
             // 
@@ -541,18 +543,18 @@
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TilesetEditor";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL1)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTilesetL2)).EndInit();
             this.tabPage3.ResumeLayout(false);

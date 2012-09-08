@@ -224,6 +224,7 @@ namespace LAZYSHELL
         public decimal Maximum { get { return NumericUpDownControl.Maximum; } set { NumericUpDownControl.Maximum = value; } }
         public decimal Minimum { get { return NumericUpDownControl.Minimum; } set { NumericUpDownControl.Minimum = value; } }
         public decimal Value { get { return NumericUpDownControl.Value; } set { NumericUpDownControl.Value = value; } }
+        public decimal Increment { get { return NumericUpDownControl.Increment; } set { NumericUpDownControl.Increment = value; } }
         protected override void OnSubscribeControlEvents(Control c)
         {
             base.OnSubscribeControlEvents(c);

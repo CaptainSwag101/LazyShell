@@ -119,16 +119,16 @@
             this.import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importSpellsToolStripMenuItem,
             this.importAttacksToolStripMenuItem});
-            this.import.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
-            this.import.Size = new System.Drawing.Size(26, 22);
+            this.import.Size = new System.Drawing.Size(27, 22);
             this.import.ToolTipText = "Import";
             // 
             // importSpellsToolStripMenuItem
             // 
-            this.importSpellsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importSpellsToolStripMenuItem.Image")));
+            this.importSpellsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.importSpellsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importSpellsToolStripMenuItem.Name = "importSpellsToolStripMenuItem";
             this.importSpellsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
@@ -137,7 +137,7 @@
             // 
             // importAttacksToolStripMenuItem
             // 
-            this.importAttacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importAttacksToolStripMenuItem.Image")));
+            this.importAttacksToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.importAttacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importAttacksToolStripMenuItem.Name = "importAttacksToolStripMenuItem";
             this.importAttacksToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
@@ -149,16 +149,16 @@
             this.export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportSpellsToolStripMenuItem,
             this.exportAttacksToolStripMenuItem});
-            this.export.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(26, 22);
+            this.export.Size = new System.Drawing.Size(27, 22);
             this.export.ToolTipText = "Export";
             // 
             // exportSpellsToolStripMenuItem
             // 
-            this.exportSpellsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportSpellsToolStripMenuItem.Image")));
+            this.exportSpellsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportSpellsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportSpellsToolStripMenuItem.Name = "exportSpellsToolStripMenuItem";
             this.exportSpellsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
@@ -167,7 +167,7 @@
             // 
             // exportAttacksToolStripMenuItem
             // 
-            this.exportAttacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportAttacksToolStripMenuItem.Image")));
+            this.exportAttacksToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportAttacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportAttacksToolStripMenuItem.Name = "exportAttacksToolStripMenuItem";
             this.exportAttacksToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
@@ -188,19 +188,19 @@
             // 
             // resetSpellToolStripMenuItem
             // 
-            this.resetSpellToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetSpellToolStripMenuItem.Image")));
+            this.resetSpellToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetSpellToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetSpellToolStripMenuItem.Name = "resetSpellToolStripMenuItem";
-            this.resetSpellToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.resetSpellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetSpellToolStripMenuItem.Text = "Reset spell";
             this.resetSpellToolStripMenuItem.Click += new System.EventHandler(this.resetSpellToolStripMenuItem_Click);
             // 
             // resetAttackToolStripMenuItem
             // 
-            this.resetAttackToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetAttackToolStripMenuItem.Image")));
+            this.resetAttackToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetAttackToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetAttackToolStripMenuItem.Name = "resetAttackToolStripMenuItem";
-            this.resetAttackToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.resetAttackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetAttackToolStripMenuItem.Text = "Reset attack";
             this.resetAttackToolStripMenuItem.Click += new System.EventHandler(this.resetAttackToolStripMenuItem_Click);
             // 
@@ -218,19 +218,19 @@
             // 
             // clearSpellsToolStripMenuItem
             // 
-            this.clearSpellsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearSpellsToolStripMenuItem.Image")));
+            this.clearSpellsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clearSpellsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearSpellsToolStripMenuItem.Name = "clearSpellsToolStripMenuItem";
-            this.clearSpellsToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.clearSpellsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearSpellsToolStripMenuItem.Text = "Clear Spells...";
             this.clearSpellsToolStripMenuItem.Click += new System.EventHandler(this.clearSpellsToolStripMenuItem_Click);
             // 
             // clearAttacksToolStripMenuItem
             // 
-            this.clearAttacksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearAttacksToolStripMenuItem.Image")));
+            this.clearAttacksToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clearAttacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearAttacksToolStripMenuItem.Name = "clearAttacksToolStripMenuItem";
-            this.clearAttacksToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.clearAttacksToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearAttacksToolStripMenuItem.Text = "Clear Attacks...";
             this.clearAttacksToolStripMenuItem.Click += new System.EventHandler(this.clearAttacksToolStripMenuItem_Click);
             // 
@@ -315,7 +315,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "AttacksEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

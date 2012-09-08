@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Overworld));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.menuName = new System.Windows.Forms.ToolStripComboBox();
@@ -196,7 +195,7 @@
             // 
             // openGraphicsBG
             // 
-            this.openGraphicsBG.Image = ((System.Drawing.Image)(resources.GetObject("openGraphicsBG.Image")));
+            this.openGraphicsBG.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.openGraphicsBG.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openGraphicsBG.Name = "openGraphicsBG";
             this.openGraphicsBG.Size = new System.Drawing.Size(183, 24);
@@ -205,7 +204,7 @@
             // 
             // openGraphicsFG
             // 
-            this.openGraphicsFG.Image = ((System.Drawing.Image)(resources.GetObject("openGraphicsFG.Image")));
+            this.openGraphicsFG.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.openGraphicsFG.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openGraphicsFG.Name = "openGraphicsFG";
             this.openGraphicsFG.Size = new System.Drawing.Size(183, 24);
@@ -244,7 +243,7 @@
             // 
             // importBGToolStripMenuItem
             // 
-            this.importBGToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importBGToolStripMenuItem.Image")));
+            this.importBGToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importImage;
             this.importBGToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importBGToolStripMenuItem.Name = "importBGToolStripMenuItem";
             this.importBGToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
@@ -253,7 +252,7 @@
             // 
             // importFGToolStripMenuItem
             // 
-            this.importFGToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importFGToolStripMenuItem.Image")));
+            this.importFGToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importImage;
             this.importFGToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importFGToolStripMenuItem.Name = "importFGToolStripMenuItem";
             this.importFGToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
@@ -447,6 +446,11 @@
             this.cursorSequence.AutoSize = false;
             this.cursorSequence.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cursorSequence.Hexadecimal = false;
+            this.cursorSequence.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.cursorSequence.Location = new System.Drawing.Point(599, 1);
             this.cursorSequence.Maximum = new decimal(new int[] {
             16,

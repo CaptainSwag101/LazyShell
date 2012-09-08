@@ -69,13 +69,18 @@ namespace LAZYSHELL
         private void browseCurrent_Click(object sender, EventArgs e)
         {
             TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
-            string name = this.Text.ToLower().Substring(7, this.Text.Length - 7 - 4);
+            string name = this.Text.ToLower().Substring(7, this.Text.Length - 7 - 4).Replace(" ", "");
             string ext = ".dat";
             string filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
-            if (name == "sample")
+            if (name == "samplewav")
             {
                 ext = ".wav";
-                filter = "Wav files (*.wav)|*.wav|All files (*.*)|*.*";
+                filter = "WAV files (*.wav)|*.wav|All files (*.*)|*.*";
+            }
+            else if (name == "samplebrr")
+            {
+                ext = ".brr";
+                filter = "BRR files (*.brr)|*.brr|All files (*.*)|*.*";
             }
             if (this.Text.Substring(0, 6) == "EXPORT")
             {
@@ -358,11 +363,65 @@ namespace LAZYSHELL
             }
             #endregion
             #region Audio
-            if (this.Text == "EXPORT SAMPLES...")
+            if (this.Text == "EXPORT SAMPLE BRRs...")
+            {
+                if (radioButtonCurrent.Checked)
+                    Do.Export(Model.AudioSamples[currentIndex].Sample, 
+                        "sampleBRR." + currentIndex.ToString("d3") + ".brr", fullPath);
+                else
+                {
+                    byte[][] samples = new byte[Model.AudioSamples.Length][];
+                    int i = 0;
+                    foreach (BRRSample s in Model.AudioSamples)
+                        samples[i++] = s.Sample;
+                    Do.Export(samples,
+                        fullPath + "\\" + Model.GetFileNameWithoutPath() + " - BRR Samples\\" + "sampleBRR",
+                        "BRR SAMPLE", true);
+                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+                return;
+            }
+            if (this.Text == "IMPORT SAMPLE BRRs...")
+            {
+                if (radioButtonCurrent.Checked)
+                {
+                    try
+                    {
+                        byte[] sample = (byte[])Do.Import(new byte[1], fullPath);
+                        Model.AudioSamples[currentIndex].Sample = sample;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error importing .brr file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
+                }
+                else
+                {
+                    byte[][] samples = new byte[Model.AudioSamples.Length][];
+                    try
+                    {
+                        Do.Import(samples, fullPath + "\\" + "sampleBRR", "BRR SAMPLE", true);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error importing .brr file(s).", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
+                    int i = 0;
+                    foreach (BRRSample sample in Model.AudioSamples)
+                        sample.Sample = samples[i++];
+                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+                return;
+            }
+            if (this.Text == "EXPORT SAMPLE WAVs...")
             {
                 if (radioButtonCurrent.Checked)
                     Do.Export(BRR.BRRToWAV(Model.AudioSamples[currentIndex].Sample, (int)args[0]),
-                        "sample." + currentIndex.ToString("d3") + ".wav", fullPath);
+                        "sampleWAV." + currentIndex.ToString("d3") + ".wav", fullPath);
                 else
                 {
                     byte[][] samples = new byte[Model.AudioSamples.Length][];
@@ -370,14 +429,14 @@ namespace LAZYSHELL
                     foreach (BRRSample s in Model.AudioSamples)
                         samples[i++] = BRR.BRRToWAV(s.Sample, (int)args[0]);
                     Do.Export(samples,
-                        fullPath + "\\" + Model.GetFileNameWithoutPath() + " - Samples\\" + "sample",
+                        fullPath + "\\" + Model.GetFileNameWithoutPath() + " - WAV Samples\\" + "sampleWAV",
                         "SAMPLE", true);
                 }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
                 return;
             }
-            if (this.Text == "IMPORT SAMPLES...")
+            if (this.Text == "IMPORT SAMPLE WAVs...")
             {
                 if (radioButtonCurrent.Checked)
                 {
@@ -388,7 +447,7 @@ namespace LAZYSHELL
                     }
                     catch
                     {
-                        MessageBox.Show("Error encoding .wav file(s).", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        MessageBox.Show("Error encoding .wav file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
                 }
@@ -397,7 +456,7 @@ namespace LAZYSHELL
                     byte[][] samples = new byte[Model.AudioSamples.Length][];
                     try
                     {
-                        Do.Import(samples, fullPath + "\\" + "sample", "SAMPLE", true);
+                        Do.Import(samples, fullPath + "\\" + "sampleWAV", "WAV SAMPLE", true);
                     }
                     catch
                     {
@@ -412,15 +471,17 @@ namespace LAZYSHELL
                 this.Close();
                 return;
             }
-            if (this.Text == "EXPORT SPCS...")
+            if (this.Text == "EXPORT SPCs...")
             {
                 if (radioButtonCurrent.Checked)
                     Do.Export(Model.SPCs[currentIndex], null, textBoxCurrent.Text);
                 else
                     Do.Export(Model.SPCs, fullPath + "\\" + Model.GetFileNameWithoutPath() + " - SPCs\\" + "spc", "SPC", true);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
                 return;
             }
-            if (this.Text == "IMPORT SPCS...")
+            if (this.Text == "IMPORT SPCs...")
             {
                 if (radioButtonCurrent.Checked)
                 {

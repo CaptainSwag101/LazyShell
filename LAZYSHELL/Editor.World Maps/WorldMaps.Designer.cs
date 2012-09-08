@@ -217,6 +217,11 @@
             this.mapPointNum.Font = this.worldMapName.Font;
             this.mapPointNum.ForeColor = this.worldMapName.ForeColor;
             this.mapPointNum.Hexadecimal = false;
+            this.mapPointNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.mapPointNum.Location = new System.Drawing.Point(199, 2);
             this.mapPointNum.Maximum = new decimal(new int[] {
             55,
@@ -1169,7 +1174,7 @@
             // 
             // import
             // 
-            this.import.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
@@ -1179,7 +1184,7 @@
             // 
             // export
             // 
-            this.export.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
@@ -1201,7 +1206,7 @@
             // 
             // resetWorldMapToolStripMenuItem
             // 
-            this.resetWorldMapToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetWorldMapToolStripMenuItem.Image")));
+            this.resetWorldMapToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetWorldMapToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetWorldMapToolStripMenuItem.Name = "resetWorldMapToolStripMenuItem";
             this.resetWorldMapToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
@@ -1210,7 +1215,7 @@
             // 
             // resetMapPointToolStripMenuItem
             // 
-            this.resetMapPointToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetMapPointToolStripMenuItem.Image")));
+            this.resetMapPointToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetMapPointToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetMapPointToolStripMenuItem.Name = "resetMapPointToolStripMenuItem";
             this.resetMapPointToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
@@ -1375,7 +1380,7 @@
             // 
             // worldMapGraphicsToolStripMenuItem
             // 
-            this.worldMapGraphicsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("worldMapGraphicsToolStripMenuItem.Image")));
+            this.worldMapGraphicsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.worldMapGraphicsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.worldMapGraphicsToolStripMenuItem.Name = "worldMapGraphicsToolStripMenuItem";
             this.worldMapGraphicsToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
@@ -1384,7 +1389,7 @@
             // 
             // worldMapLogoBannerToolStripMenuItem
             // 
-            this.worldMapLogoBannerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("worldMapLogoBannerToolStripMenuItem.Image")));
+            this.worldMapLogoBannerToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.worldMapLogoBannerToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.worldMapLogoBannerToolStripMenuItem.Name = "worldMapLogoBannerToolStripMenuItem";
             this.worldMapLogoBannerToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
@@ -1532,7 +1537,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Name = "WorldMaps";
             this.Text = "WORLD MAPS - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WorldMaps_FormClosing);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace LAZYSHELL
@@ -208,6 +209,58 @@ namespace LAZYSHELL
                 (data[offset + 2] << 16) +
                 (data[offset + 1] << 8) +
                 data[offset];
+        }
+        public static int GetByte(ref string text)
+        {
+            string number = "";
+            if (text.StartsWith("$"))
+                text = text.Remove(0, 1);
+            number = text.Substring(0, 2);
+            text = text.Remove(0, 2);
+            return Convert.ToInt32(number, 16);
+        }
+        public static int GetShort(ref string text)
+        {
+            string number = "";
+            if (text.StartsWith("$"))
+                text = text.Remove(0, 1);
+            number += text.Substring(0, 2);
+            text = text.Remove(0, 2);
+            if (text.StartsWith("$"))
+                text = text.Remove(0, 1);
+            number += text.Substring(0, 2);
+            text = text.Remove(0, 2);
+            return Convert.ToInt16(number, 16);
+        }
+        public static int GetInt32(ref string text)
+        {
+            // find first occurence of number
+            string number = "";
+            int index = 0;
+            string pattern = "[0-9\\-]";
+            while (index < text.Length)
+                if (Regex.IsMatch(text[index].ToString(), pattern))
+                    break;
+                else
+                    index++;
+            while (index < text.Length && Regex.IsMatch(text[index].ToString(), pattern))
+            {
+                number += text[index].ToString();
+                index++;
+            }
+            text = text.Remove(0, index);
+            return Convert.ToInt32(number, 10);
+        }
+        public static int GetInt32(ref string text, int start)
+        {
+            int index = start;
+            string number = "";
+            while (index < text.Length && Regex.IsMatch(text[index].ToString(), "[0-9]"))
+            {
+                number += text[index].ToString();
+                index++;
+            }
+            return Convert.ToInt32(number, 10);
         }
         // set functions
         public static void SetByte(byte[] data, int offset, byte set)
@@ -431,6 +484,19 @@ namespace LAZYSHELL
             return true;
         }
         public static bool Compare(int[] a, int[] b)
+        {
+            if (a.Length != b.Length)
+                return false;
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] != b[i])
+                    return false;
+            }
+
+            return true;
+        }
+        public static bool Compare(ushort[] a, ushort[] b)
         {
             if (a.Length != b.Length)
                 return false;

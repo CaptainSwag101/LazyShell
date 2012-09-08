@@ -635,6 +635,11 @@
             this.eventNum.AutoSize = false;
             this.eventNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventNum.Hexadecimal = false;
+            this.eventNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.eventNum.Location = new System.Drawing.Point(209, 1);
             this.eventNum.Maximum = new decimal(new int[] {
             255,
@@ -817,16 +822,16 @@
             this.import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importEventScriptsToolStripMenuItem,
             this.importActionScriptsToolStripMenuItem});
-            this.import.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
-            this.import.Size = new System.Drawing.Size(26, 22);
+            this.import.Size = new System.Drawing.Size(27, 22);
             this.import.ToolTipText = "Import";
             // 
             // importEventScriptsToolStripMenuItem
             // 
-            this.importEventScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importEventScriptsToolStripMenuItem.Image")));
+            this.importEventScriptsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.importEventScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importEventScriptsToolStripMenuItem.Name = "importEventScriptsToolStripMenuItem";
             this.importEventScriptsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
@@ -835,7 +840,7 @@
             // 
             // importActionScriptsToolStripMenuItem
             // 
-            this.importActionScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importActionScriptsToolStripMenuItem.Image")));
+            this.importActionScriptsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.importActionScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importActionScriptsToolStripMenuItem.Name = "importActionScriptsToolStripMenuItem";
             this.importActionScriptsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
@@ -850,28 +855,28 @@
             this.toolStripSeparator1,
             this.dumpEventScriptTextToolStripMenuItem,
             this.dumpActionScriptTextToolStripMenuItem});
-            this.export.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(26, 22);
+            this.export.Size = new System.Drawing.Size(27, 22);
             this.export.ToolTipText = "Export";
             // 
             // exportEventScriptsToolStripMenuItem
             // 
-            this.exportEventScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportEventScriptsToolStripMenuItem.Image")));
+            this.exportEventScriptsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportEventScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportEventScriptsToolStripMenuItem.Name = "exportEventScriptsToolStripMenuItem";
-            this.exportEventScriptsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.exportEventScriptsToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
             this.exportEventScriptsToolStripMenuItem.Text = "Export Event Scripts...";
             this.exportEventScriptsToolStripMenuItem.Click += new System.EventHandler(this.exportEventScriptsToolStripMenuItem_Click);
             // 
             // exportActionScriptsToolStripMenuItem
             // 
-            this.exportActionScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportActionScriptsToolStripMenuItem.Image")));
+            this.exportActionScriptsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportActionScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportActionScriptsToolStripMenuItem.Name = "exportActionScriptsToolStripMenuItem";
-            this.exportActionScriptsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.exportActionScriptsToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
             this.exportActionScriptsToolStripMenuItem.Text = "Export Action Scripts...";
             this.exportActionScriptsToolStripMenuItem.Click += new System.EventHandler(this.exportActionScriptsToolStripMenuItem_Click);
             // 
@@ -882,19 +887,19 @@
             // 
             // dumpEventScriptTextToolStripMenuItem
             // 
-            this.dumpEventScriptTextToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dumpEventScriptTextToolStripMenuItem.Image")));
+            this.dumpEventScriptTextToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportText;
             this.dumpEventScriptTextToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpEventScriptTextToolStripMenuItem.Name = "dumpEventScriptTextToolStripMenuItem";
-            this.dumpEventScriptTextToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.dumpEventScriptTextToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
             this.dumpEventScriptTextToolStripMenuItem.Text = "Dump Event Script Text...";
             this.dumpEventScriptTextToolStripMenuItem.Click += new System.EventHandler(this.dumpEventScriptTextToolStripMenuItem_Click);
             // 
             // dumpActionScriptTextToolStripMenuItem
             // 
-            this.dumpActionScriptTextToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dumpActionScriptTextToolStripMenuItem.Image")));
+            this.dumpActionScriptTextToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportText;
             this.dumpActionScriptTextToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpActionScriptTextToolStripMenuItem.Name = "dumpActionScriptTextToolStripMenuItem";
-            this.dumpActionScriptTextToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.dumpActionScriptTextToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
             this.dumpActionScriptTextToolStripMenuItem.Text = "Dump Action Script Text...";
             this.dumpActionScriptTextToolStripMenuItem.Click += new System.EventHandler(this.dumpActionScriptTextToolStripMenuItem_Click);
             // 
@@ -923,7 +928,6 @@
             // 
             // clearEventScriptsToolStripMenuItem
             // 
-            this.clearEventScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearEventScriptsToolStripMenuItem.Image")));
             this.clearEventScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearEventScriptsToolStripMenuItem.Name = "clearEventScriptsToolStripMenuItem";
             this.clearEventScriptsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
@@ -932,7 +936,6 @@
             // 
             // clearActionScriptsToolStripMenuItem
             // 
-            this.clearActionScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearActionScriptsToolStripMenuItem.Image")));
             this.clearActionScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearActionScriptsToolStripMenuItem.Name = "clearActionScriptsToolStripMenuItem";
             this.clearActionScriptsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
@@ -1022,7 +1025,7 @@
             // 
             // goToToolStripMenuItem
             // 
-            this.goToToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources._goto;
+            this.goToToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.jumpTo;
             this.goToToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
             this.goToToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -1169,7 +1172,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip4);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "EventScripts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

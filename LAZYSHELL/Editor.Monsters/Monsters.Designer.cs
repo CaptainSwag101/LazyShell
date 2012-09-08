@@ -108,18 +108,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.MonsterPsychopath = new System.Windows.Forms.RichTextBox();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.newLine = new System.Windows.Forms.ToolStripButton();
-            this.endString = new System.Windows.Forms.ToolStripButton();
-            this.pause60f = new System.Windows.Forms.ToolStripButton();
-            this.pauseFrames = new System.Windows.Forms.ToolStripButton();
-            this.pauseA = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.pageUp = new System.Windows.Forms.ToolStripButton();
-            this.pageDown = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.textView = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.freeBytes = new System.Windows.Forms.ToolStripLabel();
             this.pictureBoxPsychopath = new System.Windows.Forms.PictureBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -130,6 +119,17 @@
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.newLine = new System.Windows.Forms.ToolStripButton();
+            this.endString = new System.Windows.Forms.ToolStripButton();
+            this.pause60f = new System.Windows.Forms.ToolStripButton();
+            this.pauseFrames = new System.Windows.Forms.ToolStripButton();
+            this.pauseA = new System.Windows.Forms.ToolStripButton();
+            this.pageUp = new System.Windows.Forms.ToolStripButton();
+            this.pageDown = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.textView = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.freeBytes = new System.Windows.Forms.ToolStripLabel();
             this.panel14 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.MonsterValElevation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MonsterFlowerOdds)).BeginInit();
@@ -148,8 +148,6 @@
             this.toolStrip4.SuspendLayout();
             this.panel13.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.toolStrip3.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPsychopath)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -696,6 +694,11 @@
             // 
             this.monsterNum.AutoSize = false;
             this.monsterNum.Hexadecimal = false;
+            this.monsterNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.monsterNum.Location = new System.Drawing.Point(181, 2);
             this.monsterNum.Maximum = new decimal(new int[] {
             255,
@@ -774,15 +777,15 @@
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.import,
             this.importBattleScriptsToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.import_small;
+            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(26, 22);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(27, 22);
             // 
             // import
             // 
-            this.import.Image = ((System.Drawing.Image)(resources.GetObject("import.Image")));
+            this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(192, 22);
@@ -791,7 +794,7 @@
             // 
             // importBattleScriptsToolStripMenuItem
             // 
-            this.importBattleScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importBattleScriptsToolStripMenuItem.Image")));
+            this.importBattleScriptsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importData;
             this.importBattleScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importBattleScriptsToolStripMenuItem.Name = "importBattleScriptsToolStripMenuItem";
             this.importBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
@@ -804,15 +807,15 @@
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.export,
             this.exportBattleScriptsToolStripMenuItem});
-            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.export_small;
+            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(26, 22);
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(27, 22);
             // 
             // export
             // 
-            this.export.Image = ((System.Drawing.Image)(resources.GetObject("export.Image")));
+            this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(190, 22);
@@ -821,7 +824,7 @@
             // 
             // exportBattleScriptsToolStripMenuItem
             // 
-            this.exportBattleScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportBattleScriptsToolStripMenuItem.Image")));
+            this.exportBattleScriptsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportBattleScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportBattleScriptsToolStripMenuItem.Name = "exportBattleScriptsToolStripMenuItem";
             this.exportBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
@@ -842,7 +845,7 @@
             // 
             // resetCurrentMonsterToolStripMenuItem
             // 
-            this.resetCurrentMonsterToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetCurrentMonsterToolStripMenuItem.Image")));
+            this.resetCurrentMonsterToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetCurrentMonsterToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetCurrentMonsterToolStripMenuItem.Name = "resetCurrentMonsterToolStripMenuItem";
             this.resetCurrentMonsterToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
@@ -851,7 +854,7 @@
             // 
             // resetCurrentBattleScriptToolStripMenuItem
             // 
-            this.resetCurrentBattleScriptToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetCurrentBattleScriptToolStripMenuItem.Image")));
+            this.resetCurrentBattleScriptToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetCurrentBattleScriptToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetCurrentBattleScriptToolStripMenuItem.Name = "resetCurrentBattleScriptToolStripMenuItem";
             this.resetCurrentBattleScriptToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
@@ -872,7 +875,7 @@
             // 
             // clear
             // 
-            this.clear.Image = ((System.Drawing.Image)(resources.GetObject("clear.Image")));
+            this.clear.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(184, 22);
@@ -881,7 +884,7 @@
             // 
             // clearBattleScriptsToolStripMenuItem
             // 
-            this.clearBattleScriptsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearBattleScriptsToolStripMenuItem.Image")));
+            this.clearBattleScriptsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clearBattleScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearBattleScriptsToolStripMenuItem.Name = "clearBattleScriptsToolStripMenuItem";
             this.clearBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
@@ -1139,7 +1142,7 @@
             this.MonsterPsychopath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MonsterPsychopath.Location = new System.Drawing.Point(3, 74);
             this.MonsterPsychopath.Name = "MonsterPsychopath";
-            this.MonsterPsychopath.Size = new System.Drawing.Size(347, 111);
+            this.MonsterPsychopath.Size = new System.Drawing.Size(345, 111);
             this.MonsterPsychopath.TabIndex = 1;
             this.MonsterPsychopath.Text = "";
             this.MonsterPsychopath.TextChanged += new System.EventHandler(this.MonsterPsychopath_TextChanged);
@@ -1150,142 +1153,23 @@
             this.toolStrip3.CanOverflow = false;
             this.toolStrip3.Dock = System.Windows.Forms.DockStyle.Right;
             this.toolStrip3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newLine,
-            this.endString,
-            this.pause60f,
-            this.pauseFrames,
-            this.pauseA});
-            this.toolStrip3.Location = new System.Drawing.Point(350, 74);
+            this.toolStrip3.Location = new System.Drawing.Point(348, 74);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(24, 111);
+            this.toolStrip3.Size = new System.Drawing.Size(26, 111);
             this.toolStrip3.TabIndex = 2;
             this.toolStrip3.Text = "toolStrip3";
-            // 
-            // newLine
-            // 
-            this.newLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newLine.Image = global::LAZYSHELL.Properties.Resources.newLine;
-            this.newLine.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.newLine.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newLine.Name = "newLine";
-            this.newLine.Size = new System.Drawing.Size(21, 16);
-            this.newLine.Text = "New Line";
-            this.newLine.Click += new System.EventHandler(this.newLine_Click);
-            // 
-            // endString
-            // 
-            this.endString.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.endString.Image = global::LAZYSHELL.Properties.Resources.endString;
-            this.endString.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.endString.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.endString.Name = "endString";
-            this.endString.Size = new System.Drawing.Size(21, 15);
-            this.endString.Text = "End String";
-            this.endString.Click += new System.EventHandler(this.endString_Click);
-            // 
-            // pause60f
-            // 
-            this.pause60f.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pause60f.Image = global::LAZYSHELL.Properties.Resources.pause60f;
-            this.pause60f.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pause60f.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pause60f.Name = "pause60f";
-            this.pause60f.Size = new System.Drawing.Size(21, 19);
-            this.pause60f.Text = "Pause 1 second";
-            this.pause60f.Click += new System.EventHandler(this.pause60f_Click);
-            // 
-            // pauseFrames
-            // 
-            this.pauseFrames.CheckOnClick = true;
-            this.pauseFrames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pauseFrames.Image = global::LAZYSHELL.Properties.Resources.pauseFrames;
-            this.pauseFrames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pauseFrames.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pauseFrames.Name = "pauseFrames";
-            this.pauseFrames.Size = new System.Drawing.Size(21, 19);
-            this.pauseFrames.Text = "Pause for # of frames";
-            this.pauseFrames.Click += new System.EventHandler(this.pauseFrames_Click);
-            // 
-            // pauseA
-            // 
-            this.pauseA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pauseA.Image = global::LAZYSHELL.Properties.Resources.pauseA;
-            this.pauseA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pauseA.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pauseA.Name = "pauseA";
-            this.pauseA.Size = new System.Drawing.Size(21, 19);
-            this.pauseA.Text = "Pause, wait for input";
-            this.pauseA.Click += new System.EventHandler(this.pauseA_Click);
             // 
             // toolStrip2
             // 
             this.toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pageUp,
-            this.pageDown,
-            this.toolStripSeparator1,
-            this.textView,
-            this.toolStripSeparator8,
-            this.freeBytes});
             this.toolStrip2.Location = new System.Drawing.Point(3, 49);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(371, 25);
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
-            // 
-            // pageUp
-            // 
-            this.pageUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pageUp.Image = global::LAZYSHELL.Properties.Resources.pageUp;
-            this.pageUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pageUp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pageUp.Name = "pageUp";
-            this.pageUp.Size = new System.Drawing.Size(23, 22);
-            this.pageUp.ToolTipText = "Back 1 Page";
-            this.pageUp.Click += new System.EventHandler(this.pageUp_Click);
-            // 
-            // pageDown
-            // 
-            this.pageDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pageDown.Image = global::LAZYSHELL.Properties.Resources.pageDown;
-            this.pageDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pageDown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pageDown.Name = "pageDown";
-            this.pageDown.Size = new System.Drawing.Size(23, 22);
-            this.pageDown.ToolTipText = "Foward 1 Page";
-            this.pageDown.Click += new System.EventHandler(this.pageDown_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // textView
-            // 
-            this.textView.CheckOnClick = true;
-            this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
-            this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.textView.Name = "textView";
-            this.textView.Size = new System.Drawing.Size(23, 22);
-            this.textView.Text = "Text View";
-            this.textView.Click += new System.EventHandler(this.byteOrTextView_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
-            // 
-            // freeBytes
-            // 
-            this.freeBytes.Name = "freeBytes";
-            this.freeBytes.Size = new System.Drawing.Size(78, 22);
-            this.freeBytes.Text = "characters left";
             // 
             // pictureBoxPsychopath
             // 
@@ -1428,6 +1312,112 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Vital Status";
             // 
+            // newLine
+            // 
+            this.newLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newLine.Image = global::LAZYSHELL.Properties.Resources.newLine;
+            this.newLine.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.newLine.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newLine.Name = "newLine";
+            this.newLine.Size = new System.Drawing.Size(21, 16);
+            this.newLine.Text = "New Line";
+            this.newLine.Click += new System.EventHandler(this.newLine_Click);
+            // 
+            // endString
+            // 
+            this.endString.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.endString.Image = global::LAZYSHELL.Properties.Resources.endString;
+            this.endString.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.endString.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.endString.Name = "endString";
+            this.endString.Size = new System.Drawing.Size(21, 15);
+            this.endString.Text = "End String";
+            this.endString.Click += new System.EventHandler(this.endString_Click);
+            // 
+            // pause60f
+            // 
+            this.pause60f.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pause60f.Image = global::LAZYSHELL.Properties.Resources.pause60f;
+            this.pause60f.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pause60f.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pause60f.Name = "pause60f";
+            this.pause60f.Size = new System.Drawing.Size(21, 19);
+            this.pause60f.Text = "Pause 1 second";
+            this.pause60f.Click += new System.EventHandler(this.pause60f_Click);
+            // 
+            // pauseFrames
+            // 
+            this.pauseFrames.CheckOnClick = true;
+            this.pauseFrames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pauseFrames.Image = global::LAZYSHELL.Properties.Resources.pauseFrames;
+            this.pauseFrames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pauseFrames.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pauseFrames.Name = "pauseFrames";
+            this.pauseFrames.Size = new System.Drawing.Size(21, 19);
+            this.pauseFrames.Text = "Pause for # of frames";
+            this.pauseFrames.Click += new System.EventHandler(this.pauseFrames_Click);
+            // 
+            // pauseA
+            // 
+            this.pauseA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pauseA.Image = global::LAZYSHELL.Properties.Resources.pauseA;
+            this.pauseA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pauseA.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pauseA.Name = "pauseA";
+            this.pauseA.Size = new System.Drawing.Size(21, 19);
+            this.pauseA.Text = "Pause, wait for input";
+            this.pauseA.Click += new System.EventHandler(this.pauseA_Click);
+            // 
+            // pageUp
+            // 
+            this.pageUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pageUp.Image = global::LAZYSHELL.Properties.Resources.pageUp;
+            this.pageUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pageUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pageUp.Name = "pageUp";
+            this.pageUp.Size = new System.Drawing.Size(23, 22);
+            this.pageUp.ToolTipText = "Back 1 Page";
+            this.pageUp.Click += new System.EventHandler(this.pageUp_Click);
+            // 
+            // pageDown
+            // 
+            this.pageDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pageDown.Image = global::LAZYSHELL.Properties.Resources.pageDown;
+            this.pageDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pageDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pageDown.Name = "pageDown";
+            this.pageDown.Size = new System.Drawing.Size(23, 22);
+            this.pageDown.ToolTipText = "Foward 1 Page";
+            this.pageDown.Click += new System.EventHandler(this.pageDown_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // textView
+            // 
+            this.textView.CheckOnClick = true;
+            this.textView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
+            this.textView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.textView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.textView.Name = "textView";
+            this.textView.Size = new System.Drawing.Size(23, 22);
+            this.textView.Text = "Text View";
+            this.textView.Click += new System.EventHandler(this.byteOrTextView_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
+            // freeBytes
+            // 
+            this.freeBytes.Name = "freeBytes";
+            this.freeBytes.Size = new System.Drawing.Size(78, 22);
+            this.freeBytes.Text = "characters left";
+            // 
             // panel14
             // 
             this.panel14.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -1448,7 +1438,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip4);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Monsters";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -1474,10 +1464,6 @@
             this.panel13.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPsychopath)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();

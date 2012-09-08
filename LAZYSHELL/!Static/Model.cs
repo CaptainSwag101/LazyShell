@@ -13,7 +13,7 @@ namespace LAZYSHELL
 {
     public static class Model
     {
-        public static int HighestOctave = 0;
+        public static List<int> Durations = new List<int>();
         private static Program program;
         public static Program Program { get { return program; } set { program = value; } }
         private static byte[] data;

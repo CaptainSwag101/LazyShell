@@ -551,7 +551,7 @@
             // 
             this.alwaysOnTop.CheckOnClick = true;
             this.alwaysOnTop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.alwaysOnTop.Image = global::LAZYSHELL.Properties.Resources.alwaysOnTop;
+            this.alwaysOnTop.Image = global::LAZYSHELL.Properties.Resources.moveToFront;
             this.alwaysOnTop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.alwaysOnTop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.alwaysOnTop.Name = "alwaysOnTop";
@@ -571,7 +571,7 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Name = "Notes";
             this.Text = "NOTES - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Notes_FormClosing);

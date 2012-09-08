@@ -448,7 +448,7 @@ namespace LAZYSHELL
             subtileFill.Checked = false;
             graphicZoomOut.Checked = false;
             if (graphicZoomIn.Checked)
-                pictureBoxGraphicSet.Cursor = new Cursor(GetType(), "CursorZoomIn.cur");
+                pictureBoxGraphicSet.Cursor = NewCursors.ZoomIn;
             else
                 pictureBoxGraphicSet.Cursor = System.Windows.Forms.Cursors.Arrow;
 
@@ -465,7 +465,7 @@ namespace LAZYSHELL
             subtileFill.Checked = false;
             graphicZoomIn.Checked = false;
             if (graphicZoomOut.Checked)
-                pictureBoxGraphicSet.Cursor = new Cursor(GetType(), "CursorZoomOut.cur");
+                pictureBoxGraphicSet.Cursor = NewCursors.ZoomOut;
             else
                 pictureBoxGraphicSet.Cursor = System.Windows.Forms.Cursors.Arrow;
 

@@ -18,7 +18,7 @@ namespace LAZYSHELL
         private byte decayFactor;
         private byte echo;
         [NonSerialized()]
-        private List<SPCScriptCommand>[] channels;
+        private List<SPCCommand>[] channels;
         [NonSerialized()]
         private List<Note>[] notes;
         private bool[] activeChannels;
@@ -28,7 +28,7 @@ namespace LAZYSHELL
         public override int Index { get { return index; } set { index = value; } }
         public override SampleIndex[] Samples { get { return samples; } set { samples = value; } }
         public override List<Percussives> Percussives { get { return percussives; } set { percussives = value; } }
-        public override List<SPCScriptCommand>[] Channels { get { return channels; } set { channels = value; } }
+        public override List<SPCCommand>[] Channels { get { return channels; } set { channels = value; } }
         public override List<Note>[] Notes { get { return notes; } set { notes = value; } }
         public override bool[] ActiveChannels { get { return activeChannels; } set { activeChannels = value; } }
         public override byte DelayTime { get { return delayTime; } set { delayTime = value; } }
@@ -69,10 +69,12 @@ namespace LAZYSHELL
             offset++;
             // now disassemble the scripts for each channel
             activeChannels = new bool[8];
-            channels = new List<SPCScriptCommand>[8];
+            channels = new List<SPCCommand>[8];
             for (int i = 0; i < 8; i++)
             {
+                channels[i] = new List<SPCCommand>();
                 int spcOffset = Bits.GetShort(spcData, offset);
+                offset += 2;
                 if (spcOffset == 0)
                 {
                     activeChannels[i] = false;
@@ -80,8 +82,6 @@ namespace LAZYSHELL
                 }
                 activeChannels[i] = true;
                 spcOffset -= 0x2000;
-                offset += 2;
-                channels[i] = new List<SPCScriptCommand>();
                 int length = 0;
                 do
                 {
@@ -89,9 +89,7 @@ namespace LAZYSHELL
                     int opcode = spcData[spcOffset];
                     length = SPCScriptEnums.SPCScriptLengths[opcode];
                     byte[] commandData = Bits.GetByteArray(spcData, spcOffset, length);
-                    channels[i].Add(new SPCScriptCommand(commandData, this, i));
-                    if (commandData[0] == 0xD6)
-                        commandData[0] = 0xD6;
+                    channels[i].Add(new SPCCommand(commandData, this, i));
                 }
                 while (spcData[spcOffset] != 0xD0 && spcData[spcOffset] != 0xCE);
             }
@@ -99,81 +97,195 @@ namespace LAZYSHELL
         public override void CreateNotes()
         {
             notes = new List<Note>[8];
-            for (int i = 0; i < notes.Length; i++)
+            for (int c = 0; c < notes.Length; c++)
             {
-                if (channels[i] == null)
+                if (channels[c] == null)
                     continue;
-                notes[i] = new List<Note>();
-                int index = 0;
-                int octave = 0;
+                notes[c] = new List<Note>();
+                int i = 0;
+                int thisOctave = 6;
+                int sample = 0;
                 bool percussive = false;
-                while (index < channels[i].Count)
+                while (i < channels[c].Count)
                 {
-                    SPCScriptCommand ssc = channels[i][index++];
+                    SPCCommand ssc = channels[c][i++];
                     switch (ssc.Opcode)
                     {
-                        case 0xC4: octave++; break;
-                        case 0xC5: octave--; break;
-                        case 0xC6: octave = ssc.Option; break;
+                        case 0xC4: thisOctave++; break;
+                        case 0xC5: thisOctave--; break;
+                        case 0xC6: thisOctave = ssc.Param1; break;
                         case 0xD4:
-                            SequenceLoop(i, ref index, index, ssc.Option, ref octave, ref percussive);
+                            SequenceLoop(c, ref i, i, ssc.Param1, ref thisOctave, ref percussive, ref sample);
                             break;
-                        case 0xD5:
-                            break;
-                        case 0xEE: percussive = true; break;
-                        case 0xEF: percussive = false; break;
+                        case 0xD5: break;
+                        case 0xDE: sample = ssc.Param1; goto default;
+                        case 0xEE: percussive = true; goto default;
+                        case 0xEF: percussive = false; goto default;
                         default:
-                            if (ssc.Opcode < 0xC4)
-                                notes[i].Add(new Note(ssc, octave, percussive));
-                            if (octave > Model.HighestOctave)
-                                Model.HighestOctave = octave;
+                            if (ssc.Opcode < 0xC4 || ssc.Opcode == 0xD7 || ssc.Opcode == 0xDE || ssc.Opcode == 0xEE || ssc.Opcode == 0xEF)
+                                notes[c].Add(new Note(ssc, thisOctave, percussive, sample));
                             break;
                     }
                 }
             }
         }
-        private void SequenceLoop(int channel, ref int index, int start, int count, ref int octave_, ref bool percussive)
+        private void SequenceLoop(int c, ref int i, int start, int count, ref int octave, ref bool percussive, ref int sample)
         {
-            int octave = octave_;
-            while (count > 0 && index < channels[channel].Count)
+            int end = i;
+            int thisOctave = octave;
+            while (count > 0 && i < channels[c].Count)
             {
-                SPCScriptCommand ssc = channels[channel][index++];
+                SPCCommand ssc = channels[c][i++];
                 // if at last repeat, and first section begins, skip the rest
                 if (ssc.Opcode == 0xD6 && count == 1)
                 {
-                    while (index < channels[channel].Count && channels[channel][index].Opcode != 0xD5)
-                        index++;
+                    while (i < channels[c].Count && i < end)
+                        i++;
                     break;
                 }
                 switch (ssc.Opcode)
                 {
-                    case 0xC4: octave++; break;
-                    case 0xC5: octave--; break;
-                    case 0xC6: octave = ssc.Option; break;
+                    case 0xC4: thisOctave++; break;
+                    case 0xC5: thisOctave--; break;
+                    case 0xC6: thisOctave = ssc.Param1; break;
                     case 0xD4:
-                        SequenceLoop(channel, ref index, index, ssc.Option, ref octave, ref percussive);
+                        SequenceLoop(c, ref i, i, ssc.Param1, ref thisOctave, ref percussive, ref sample);
                         break;
                     case 0xD5:
+                        end = i;
                         count--;
                         if (count > 0)
                         {
-                            index = start;
-                            octave = octave_;
+                            i = start;
+                            thisOctave = octave;
                         }
                         break;
-                    case 0xD6:
-                        break;
-                    case 0xEE: percussive = true; break;
-                    case 0xFA: percussive = false; break;
+                    case 0xD6: break;
+                    case 0xDE: sample = ssc.Param1; goto default;
+                    case 0xEE: percussive = true; goto default;
+                    case 0xEF: percussive = false; goto default;
                     default:
-                        if (ssc.Opcode < 0xC4)
-                            notes[channel].Add(new Note(ssc, octave, percussive));
-                        if (octave > Model.HighestOctave)
-                            Model.HighestOctave = octave;
+                        if (ssc.Opcode < 0xC4 || ssc.Opcode == 0xD7 || ssc.Opcode == 0xDE || ssc.Opcode == 0xEE || ssc.Opcode == 0xEF)
+                            notes[c].Add(new Note(ssc, thisOctave, percussive, sample));
                         break;
                 }
             }
-            octave_ = octave;
+            octave = thisOctave;
+        }
+        public List<SPCCommand>[] DecompToMML(NativeSPC nativeFormat)
+        {
+            List<SPCCommand>[] commands = new List<SPCCommand>[8];
+            for (int c = 0; c < commands.Length; c++)
+            {
+                if (channels[c] == null)
+                    continue;
+                commands[c] = new List<SPCCommand>();
+                int i = 0;
+                int thisOctave = 6;
+                int sample = 0;
+                bool percussive = false;
+                while (i < channels[c].Count)
+                {
+                    int maxOctave = 6;
+                    if (nativeFormat == NativeSPC.SMWLevel ||
+                        nativeFormat == NativeSPC.SMWOverworld)
+                        maxOctave = Lists.SMWOctaveLimits[Lists.SMRPGtoSMWSamples[sample]];
+                    SPCCommand ssc = channels[c][i++].Copy();
+                    switch (ssc.Opcode)
+                    {
+                        case 0xC4: thisOctave++;
+                            if (thisOctave > maxOctave) thisOctave = maxOctave;
+                            else goto default;
+                            break;
+                        case 0xC5: thisOctave--;
+                            if (thisOctave < 1) thisOctave = 1;
+                            else goto default;
+                            break;
+                        case 0xC6:
+                            if (ssc.Param1 < 1) ssc.Param1 = 1;
+                            if (ssc.Param1 > maxOctave) ssc.Param1 = (byte)maxOctave;
+                            thisOctave = ssc.Param1;
+                            goto default;
+                        case 0xD4:
+                            //commands[c].Add(ssc);
+                            commands[c].Add(new SPCCommand(new byte[] { 0xC6, (byte)thisOctave }, this, c));
+                            DecompToMMLLoop(ref commands, nativeFormat, c, ref i, i, ssc.Param1, false, ref thisOctave, ref percussive, ref sample);
+                            break;
+                        case 0xD5: break;
+                        case 0xDE: sample = ssc.Param1; goto default;
+                        case 0xEE: percussive = true; goto default;
+                        case 0xEF: percussive = false; goto default;
+                        default:
+                            thisOctave = Math.Max(1, Math.Min(6, thisOctave));
+                            commands[c].Add(ssc); break;
+                    }
+                }
+            }
+            return commands;
+        }
+        private void DecompToMMLLoop(ref List<SPCCommand>[] commands, NativeSPC nativeFormat, int c, ref int i,
+            int start, int count, bool nested, ref int octave, ref bool percussive, ref int sample)
+        {
+            int end = i;
+            int thisOctave = octave;
+            while (count > 0 && i < channels[c].Count)
+            {
+                int maxOctave = 6;
+                if (nativeFormat == NativeSPC.SMWLevel ||
+                    nativeFormat == NativeSPC.SMWOverworld)
+                    maxOctave = Lists.SMWOctaveLimits[Lists.SMRPGtoSMWSamples[sample]];
+                SPCCommand ssc = channels[c][i++].Copy();
+                // if at last repeat, and first section begins, skip the rest
+                if (ssc.Opcode == 0xD6 && count == 1)
+                {
+                    while (i < channels[c].Count && i < end)
+                        i++;
+                    break;
+                }
+                switch (ssc.Opcode)
+                {
+                    case 0xC4: thisOctave++;
+                        if (thisOctave > maxOctave) thisOctave = maxOctave;
+                        else goto default;
+                        break;
+                    case 0xC5: thisOctave--;
+                        if (thisOctave < 1) thisOctave = 1;
+                        else goto default;
+                        break;
+                    case 0xC6:
+                        if (ssc.Param1 < 1) ssc.Param1 = 1;
+                        if (ssc.Param1 > maxOctave) ssc.Param1 = (byte)maxOctave;
+                        thisOctave = ssc.Param1;
+                        goto default;
+                    case 0xD4:
+                        commands[c].Add(new SPCCommand(new byte[] { 0xC6, (byte)thisOctave }, this, c));
+                        DecompToMMLLoop(ref commands, nativeFormat, c, ref i, i, ssc.Param1, true, ref thisOctave, ref percussive, ref sample);
+                        break;
+                    case 0xD5:
+                        end = i;
+                        count--;
+                        if (nested && count > 0)
+                        {
+                            i = start;
+                            thisOctave = octave;
+                        }
+                        else if (!nested)
+                        {
+                            commands[c].Add(ssc);
+                            octave = thisOctave;
+                            return;
+                        }
+                        break;
+                    case 0xD6: break;
+                    case 0xDE: sample = ssc.Param1; goto default;
+                    case 0xEE: percussive = true; goto default;
+                    case 0xEF: percussive = false; goto default;
+                    default:
+                        thisOctave = Math.Max(1, Math.Min(6, thisOctave));
+                        commands[c].Add(ssc); break;
+                }
+            }
+            octave = thisOctave;
         }
         public override void Assemble()
         {
@@ -207,7 +319,7 @@ namespace LAZYSHELL
             int offset = 0;
             foreach (Percussives percussive in percussives)
             {
-                spcData[offset++] = percussive.PitchIndex;
+                spcData[offset++] = (byte)percussive.PitchIndex;
                 spcData[offset++] = percussive.Sample;
                 spcData[offset++] = percussive.Pitch;
                 spcData[offset++] = percussive.Volume;
@@ -218,8 +330,9 @@ namespace LAZYSHELL
             int length = spcOffset;
             for (int i = 0; i < channels.Length; i++)
                 if (activeChannels[i] && channels[i] != null)
-                    foreach (SPCScriptCommand ssc in channels[i])
+                    foreach (SPCCommand ssc in channels[i])
                         length += ssc.Length;
+            this.Length = length;
             Array.Resize<byte>(ref spcData, length);
             for (int i = 0; i < 8; i++)
             {
@@ -230,7 +343,7 @@ namespace LAZYSHELL
                 offset += 2;
                 if (!activeChannels[i] || channels[i] == null)
                     continue;
-                foreach (SPCScriptCommand ssc in channels[i])
+                foreach (SPCCommand ssc in channels[i])
                 {
                     Bits.SetByteArray(spcData, spcOffset, ssc.CommandData);
                     spcOffset += ssc.Length;
@@ -248,7 +361,9 @@ namespace LAZYSHELL
             spcData[0] = 0xFF; // terminates percussive list
             percussives = new List<Percussives>();
             activeChannels = new bool[8];
-            channels = new List<SPCScriptCommand>[8];
+            channels = new List<SPCCommand>[8];
+            for (int i = 0; i < 8; i++)
+                channels[i] = new List<SPCCommand>();
         }
     }
     [Serializable()]
@@ -267,14 +382,14 @@ namespace LAZYSHELL
     [Serializable()]
     public class Percussives
     {
-        public byte PitchIndex;
+        public Pitch PitchIndex;
         public byte Sample;
         public byte Pitch;
         public byte Volume;
         public byte Balance;
         public Percussives(byte pitchIndex, byte sample, byte pitch, byte volume, byte balance)
         {
-            PitchIndex = pitchIndex;
+            PitchIndex = (Pitch)pitchIndex;
             Sample = sample;
             Pitch = pitch;
             Volume = volume;
@@ -284,26 +399,40 @@ namespace LAZYSHELL
     [Serializable()]
     public class Note
     {
-        public bool Hold { get { return Pitch == 12; } }
-        public bool Stop { get { return Pitch == 13; } }
+        public SPCCommand Command;
+        public Pitch Pitch { get { return (Pitch)(Command.Opcode % 14); } }
+        public int Beat { get { return Command.Opcode / 14; } }
+        public int Octave; // max is 8 (9 octaves)
+        public bool Percussive;
+        public int Ticks
+        {
+            get
+            {
+                if (Command.Opcode < 0xB6)
+                    return Model.Data[Beat + 0x042304];
+                else if (Command.Opcode < 0xC4)
+                    return Command.Param1;
+                else
+                    return 0;
+            }
+        }
+        public bool Hold { get { return Pitch == Pitch.Hold; } }
+        public bool Rest { get { return Pitch == Pitch.Rest; } }
         public bool Sharp
         {
             get
             {
                 switch (Pitch)
                 {
-                    case 1: return true;
-                    case 4: return true;
-                    case 6: return true;
-                    case 9: return true;
-                    case 11: return true;
+                    case Pitch.As: return true;
+                    case Pitch.Cs: return true;
+                    case Pitch.Ds: return true;
+                    case Pitch.Fs: return true;
+                    case Pitch.Gs: return true;
                     default: return false;
                 }
             }
         }
-        public int Pitch;
-        public int Octave; // max is 8 (9 octaves)
-        public bool Percussive;
         public int Y
         {
             get
@@ -311,67 +440,150 @@ namespace LAZYSHELL
                 int y = 0;
                 switch (Pitch)
                 {
-                    case 0: // C
-                    case 1: y = 12; break; // C#
-                    case 2: // D
-                    case 3: y = 8; break; // D#
-                    case 4: y = 4; break; // E
-                    case 5: // F
-                    case 6: y = 0; break; // F# (middle line)
-                    case 7: // G
-                    case 8: y = -4; break; // G
-                    case 9: // A
-                    case 10: y = -8; break; // A#
-                    case 11: y = -12; break; // B
+                    case Pitch.C:  // C
+                    case Pitch.Cs: y = -8; break; // C#
+                    case Pitch.D:  // D
+                    case Pitch.Ds: y = -12; break; // D#
+                    case Pitch.E: y = -16; break; // E
+                    case Pitch.F: // F
+                    case Pitch.Fs: y = -20; break; // F#
+                    case Pitch.G: // G
+                    case Pitch.Gs: y = -24; break; // G#
+                    case Pitch.A: // A
+                    case Pitch.As: y = -28; break; // A#
+                    case Pitch.B: y = -32; break; // B
                     default: y = 0; break; // silence/pause
                 }
                 // 4 is the middle octave
-                int octave = Octave - 5;
-                y = -(octave * 28) + y;
+                if (!Percussive)
+                {
+                    int octave = Octave - 5;
+                    y = -(octave * 28) + y;
+                }
                 return y;
             }
         }
-        public int Beat;
-        public int Duration;
-        public Note(SPCScriptCommand ssc, int octave, bool percussive)
+        public int Line
         {
-            this.Pitch = ssc.Opcode % 14;
-            this.Beat = ssc.Opcode / 14;
-            if (ssc.Opcode < 0xB6)
-                this.Duration = Model.Data[this.Beat + 0x042304];
-            else
-                this.Duration = ssc.Option;
-            this.Octave = octave;
-            this.Percussive = percussive;
+            get
+            {
+                int line = 0;
+                switch (Pitch)
+                {
+                    case Pitch.C:  // C
+                    case Pitch.Cs: line = 0; break; // C#
+                    case Pitch.D:  // D
+                    case Pitch.Ds: line = 1; break; // D#
+                    case Pitch.E: line = 2; break; // E
+                    case Pitch.F: // F
+                    case Pitch.Fs: line = 3; break; // F# (middle line)
+                    case Pitch.G: // G
+                    case Pitch.Gs: line = 4; break; // G#
+                    case Pitch.A: // A
+                    case Pitch.As: line = 5; break; // A#
+                    case Pitch.B: line = 6; break; // B
+                    default: line = 0; break; // silence/pause
+                }
+                return line;
+            }
         }
-        public override string ToString()
+        /// <summary>
+        /// Returns what accidentals need to be SHOWN based on a given key signature. Thus, only non-black keys are checked.
+        /// </summary>
+        /// <param name="key">The key signature.</param>
+        /// <returns></returns>
+        public Accidental GetAccidental(Key key)
+        {
+            switch (Pitch)
+            {
+                case Pitch.A:
+                    if (key >= Key.BMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
+                    if (key >= Key.GsMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
+                    if (key >= Key.EbMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
+                    if (key >= Key.CMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, minor
+                    break;
+                case Pitch.B:
+                    if (key == Key.CsMajor || key == Key.AsMinor) return Accidental.Sharp; // Sharps, major, minor
+                    if (key >= Key.FMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
+                    if (key >= Key.DMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, minor
+                    break;
+                case Pitch.C:
+                    if (key >= Key.DMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
+                    if (key >= Key.BMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
+                    if (key >= Key.GbMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
+                    if (key >= Key.EbMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, minor
+                    break;
+                case Pitch.D:
+                    if (key >= Key.EMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
+                    if (key >= Key.CsMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
+                    if (key >= Key.AbMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
+                    if (key >= Key.FMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, minor
+                    break;
+                case Pitch.E:
+                    if (key >= Key.FsMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
+                    if (key >= Key.DsMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
+                    if (key >= Key.BbMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
+                    if (key >= Key.DMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, minor
+                    break;
+                case Pitch.F:
+                    if (key >= Key.GMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
+                    if (key >= Key.EMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
+                    if (key == Key.CbMajor || key == Key.AbMinor) return Accidental.Flat; // Flats, major, minor
+                    break;
+                case Pitch.G:
+                    if (key >= Key.AMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
+                    if (key >= Key.FsMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
+                    if (key >= Key.DbMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
+                    if (key >= Key.BbMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, major
+                    break;
+            }
+            return Accidental.Natural; // Natural
+        }
+        public int Sample;
+        public Note(SPCCommand command, int octave, bool percussive, int sample)
+        {
+            this.Command = command;
+            this.Octave = percussive ? 5 : octave;
+            this.Percussive = percussive;
+            this.Sample = sample;
+        }
+        public Note(SPCCommand command)
+        {
+            this.Command = command;
+            this.Octave = 6;
+            this.Percussive = false;
+            this.Sample = 0;
+        }
+        public string ToString(bool showOctave)
         {
             string description = "";
             if (Hold)
-                description += "Note stop, ";
-            else if (Stop)
                 description += "Note hold, ";
+            else if (Rest)
+                description += "Note rest, ";
             else
             {
                 description += "Note play: ";
                 switch (Pitch)
                 {
-                    case 0:
-                    case 1: description += "A"; break;
-                    case 2: description += "B"; break;
-                    case 3:
-                    case 4: description += "C"; break;
-                    case 5:
-                    case 6: description += "D"; break;
-                    case 7: description += "E"; break;
-                    case 8:
-                    case 9: description += "F"; break;
-                    case 10:
-                    case 11: description += "G"; break;
+                    case Pitch.A:
+                    case Pitch.As: description += "A"; break;
+                    case Pitch.B: description += "B"; break;
+                    case Pitch.C:
+                    case Pitch.Cs: description += "C"; break;
+                    case Pitch.D:
+                    case Pitch.Ds: description += "D"; break;
+                    case Pitch.E: description += "E"; break;
+                    case Pitch.F:
+                    case Pitch.Fs: description += "F"; break;
+                    case Pitch.G:
+                    case Pitch.Gs: description += "G"; break;
                     default: description += "?"; break; // silence/pause
                 }
                 if (Sharp)
                     description += "#";
+                if (showOctave)
+                    description += Octave;
                 description += ", ";
             }
             switch (Beat)
@@ -382,16 +594,20 @@ namespace LAZYSHELL
                 case 3: description += "beat: quarter."; break;
                 case 4: description += "beat: quarter"; break;
                 case 5: description += "beat: 8th."; break;
-                case 6: description += "beat: 8th+32nd"; break;
+                case 6: description += "beat: triplet quarter"; break;
                 case 7: description += "beat: 8th"; break;
-                case 8: description += "beat: 16th."; break;
+                case 8: description += "beat: triplet 8th"; break;
                 case 9: description += "beat: 16th"; break;
-                case 10: description += "beat: 32nd."; break;
+                case 10: description += "beat: triplet 16th"; break;
                 case 11: description += "beat: 32nd"; break;
                 case 12: description += "beat: 64th"; break;
-                default: description += "duration: " + Duration; break;
+                default: description += "duration: " + Ticks; break;
             }
             return description;
+        }
+        public override string ToString()
+        {
+            return ToString(false);
         }
     }
 }

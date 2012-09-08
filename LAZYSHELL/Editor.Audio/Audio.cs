@@ -18,6 +18,7 @@ namespace LAZYSHELL
         public Audio()
         {
             InitializeComponent();
+            Do.AddShortcut(toolStrip1, Keys.Control | Keys.S, new EventHandler(save_Click));
             // create editors
             spcEditor = new SPCEditor();
             spcEditor.TopLevel = false;

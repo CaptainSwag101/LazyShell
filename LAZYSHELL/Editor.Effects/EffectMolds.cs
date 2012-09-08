@@ -180,17 +180,20 @@ namespace LAZYSHELL
             // cancel if no selection in the tileset is made
             if (overlay.SelectTS == null) return;
             // check to see if overwriting same tile(s)
+            bool noChange = true;
             for (int y_ = 0; y_ < overlay.SelectTS.Height / 16; y_++)
             {
                 for (int x_ = 0; x_ < overlay.SelectTS.Width / 16; x_++)
                 {
                     int index = ((overlay.SelectTS.Y / 16) + y_) * 8 + (overlay.SelectTS.X / 16) + x_;
-                    int map = (y + y_) * (width / 16) + x + x_;
+                    int indexInMold = (y + y_) * (width / 16) + x + x_;
                     // cancel if overwriting same tile(s)
-                    if (mold.Mold[map] == index)
-                        return;
+                    if (indexInMold < mold.Mold.Length && mold.Mold[indexInMold] != index)
+                        noChange = false;
                 }
             }
+            if (noChange)
+                return;
             commandStack.Push(new TilemapCommand(
                 mold.Mold, width / 16, height / 16, selectedTiles.BYTE_copy, x, y,
                 overlay.SelectTS.Width / 16, overlay.SelectTS.Height / 16));
@@ -770,6 +773,7 @@ namespace LAZYSHELL
         private void e_tileSetSize_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
+            overlay.SelectTS = null;
             if (animation.Codec == 0)
                 e_tileSetSize.Value = (int)e_tileSetSize.Value & 0xFFE0;
             else
@@ -783,6 +787,7 @@ namespace LAZYSHELL
         private void e_moldWidth_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
+            PasteClear();
             int width = animation.Width;
             animation.Width = (byte)e_moldWidth.Value;
             for (int i = 0; i < molds.Count; i++)
@@ -813,6 +818,7 @@ namespace LAZYSHELL
         private void e_moldHeight_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
+            PasteClear();
             animation.Height = (byte)e_moldHeight.Value;
             SetTilemapImage();
             if (sequences != null)
@@ -917,7 +923,7 @@ namespace LAZYSHELL
             e_moldZoomIn.Checked = false;
             e_moldZoomOut.Checked = false;
             if (draw.Checked)
-                this.pictureBoxE_Mold.Cursor = new Cursor(GetType(), "CursorDraw.cur");
+                this.pictureBoxE_Mold.Cursor = NewCursors.Draw;
             else if (!draw.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
             PasteClear();
@@ -929,7 +935,7 @@ namespace LAZYSHELL
             e_moldZoomIn.Checked = false;
             e_moldZoomOut.Checked = false;
             if (erase.Checked)
-                this.pictureBoxE_Mold.Cursor = new Cursor(GetType(), "CursorErase.cur");
+                this.pictureBoxE_Mold.Cursor = NewCursors.Erase;
             else if (!erase.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
             PasteClear();
@@ -995,7 +1001,7 @@ namespace LAZYSHELL
             Do.ResetToolStripButtons(toolStrip6, (ToolStripButton)sender);
             e_moldZoomOut.Checked = false;
             if (e_moldZoomIn.Checked)
-                this.pictureBoxE_Mold.Cursor = new Cursor(GetType(), "CursorZoomIn.cur");
+                this.pictureBoxE_Mold.Cursor = NewCursors.ZoomIn;
             else if (!e_moldZoomIn.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
             PasteClear();
@@ -1006,7 +1012,7 @@ namespace LAZYSHELL
             Do.ResetToolStripButtons(toolStrip6, (ToolStripButton)sender);
             e_moldZoomIn.Checked = false;
             if (e_moldZoomOut.Checked)
-                this.pictureBoxE_Mold.Cursor = new Cursor(GetType(), "CursorZoomOut.cur");
+                this.pictureBoxE_Mold.Cursor = NewCursors.ZoomOut;
             else if (!e_moldZoomOut.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
             PasteClear();

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EffectMolds));
             this.e_moldWidth = new LAZYSHELL.ToolStripNumericUpDown();
             this.e_moldHeight = new LAZYSHELL.ToolStripNumericUpDown();
             this.panelMoldImage = new LAZYSHELL.NewPanel();
@@ -102,6 +101,11 @@
             // 
             this.e_moldWidth.AutoSize = false;
             this.e_moldWidth.Hexadecimal = false;
+            this.e_moldWidth.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.e_moldWidth.Location = new System.Drawing.Point(136, 4);
             this.e_moldWidth.Maximum = new decimal(new int[] {
             16,
@@ -127,6 +131,11 @@
             // 
             this.e_moldHeight.AutoSize = false;
             this.e_moldHeight.Hexadecimal = false;
+            this.e_moldHeight.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.e_moldHeight.Location = new System.Drawing.Point(176, 4);
             this.e_moldHeight.Maximum = new decimal(new int[] {
             16,
@@ -511,7 +520,7 @@
             // 
             // pictureBoxEffectTileset
             // 
-            this.pictureBoxEffectTileset.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxEffectTileset.BackgroundImage")));
+            this.pictureBoxEffectTileset.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.pictureBoxEffectTileset.ContextMenuStrip = this.contextMenuStrip2;
             this.pictureBoxEffectTileset.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBoxEffectTileset.Dock = System.Windows.Forms.DockStyle.Top;
