@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class Title : Form
+    public partial class MainTitle : Form
     {
         #region Variables
 
@@ -30,10 +30,11 @@ namespace LAZYSHELL
         private TilesetEditor tilesetEditor;
         #endregion
         #region Functions
-        public Title()
+        public MainTitle()
         {
             InitializeComponent();
             Do.AddShortcut(toolStrip1, Keys.Control | Keys.S, new EventHandler(save_Click));
+            Do.AddShortcut(toolStrip1, Keys.F1, helpTips);
             pictureBoxTitle.Invalidate();
             LoadTilesetEditor();
             //LoadPaletteEditor();
@@ -48,6 +49,7 @@ namespace LAZYSHELL
             tilesetEditor.Show();
             SetTilesetImages();
             //
+            new ToolTipLabel(this, null, helpTips);
             GC.Collect();
             new History(this);
             //

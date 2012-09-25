@@ -79,36 +79,6 @@ namespace LAZYSHELL
                 (panelSequence.Width / 2) - (pictureBoxSequence.Width / 2),
                 (panelSequence.Height / 2) - (pictureBoxSequence.Height / 2));
         }
-        public void SetToolTips(ToolTip toolTip1)
-        {
-            toolTip1.SetToolTip(this.listBoxFrames,
-                "The collection of frames used by the spell effect animation. \n" +
-                "Each frame is assigned a mold from the selection of molds \n" +
-                "under \"MOLDS\" and a duration, creating an animation that \n" +
-                "can be played back in the image to the right.");
-
-            this.newFrame.ToolTipText =
-                "Insert a new frame after the currently selected frame.";
-
-            this.deleteFrame.ToolTipText =
-                "Delete the currently selected frame.";
-
-            this.frameMold.ToolTipText =
-                "The mold used by the currently selected frame. This value \n" +
-                "is based on the collection of molds under \"MOLDS\".";
-
-            this.duration.ToolTipText =
-                "The duration of the currently selected frame, or how long \n" +
-                "the frame will pause before the next frame starts. This \n" +
-                "value refers to the # of frames based on a 60-frames-per-\n" +
-                "second unit.";
-
-            this.moveFrameBack.ToolTipText =
-                "Move the currently selected frame back.";
-
-            this.moveFrameFoward.ToolTipText =
-                "Move the currently selected frame forward.";
-        }
         private void InitializeFrames()
         {
             updating = true;

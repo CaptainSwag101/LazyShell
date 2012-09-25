@@ -25,10 +25,6 @@ namespace LAZYSHELL
         // functions
         private void Initialize()
         {
-            InitTileMaps();
-        }
-        private void InitTileMaps()
-        {
             ProgressBar pBar = new ProgressBar(Model.Data, "CALCULATING...", 428);
             pBar.Show();
 

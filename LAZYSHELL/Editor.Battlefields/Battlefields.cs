@@ -79,10 +79,9 @@ namespace LAZYSHELL
             this.overlay = new Overlay();
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
-            Do.AddShortcut(toolStrip3, Keys.F1, enableHelpTips);
-            Do.AddShortcut(toolStrip3, Keys.F2, showDecHex);
+            Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
             toolTip1.InitialDelay = 0;
-            SetToolTips(toolTip1);
             this.battlefieldName.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
             this.battlefieldGFXSet1Name.Items.AddRange(Lists.Numerize(Lists.GraphicSetNames)); battlefieldGFXSet1Name.Items.Add("{NONE}");
             this.battlefieldGFXSet2Name.Items.AddRange(Lists.Numerize(Lists.GraphicSetNames)); battlefieldGFXSet2Name.Items.Add("{NONE}");
@@ -93,7 +92,7 @@ namespace LAZYSHELL
             LoadPaletteEditor();
             LoadGraphicEditor();
             LoadTileEditor();
-            new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             new History(this);
             if (settings.RememberLastIndex)
                 index = settings.LastBattlefield;
@@ -390,79 +389,6 @@ namespace LAZYSHELL
             PasteFinal(buffer);
             tileset.DrawTileset(tileset.TileSetLayer, tileset.TileSet);
             SetBattlefieldImage();
-        }
-        // tooltips
-        private void SetToolTips(ToolTip toolTip1)
-        {
-            // Battlefields
-            this.battlefieldNum.ToolTipText =
-                "Select the battlefield to edit by name.\n" +
-                "A battlefield is simply a background image used in a battle. \n" +
-                "More technically, it is a tileset and NOT a tilemap as in the \n" +
-                "levels. It has nothing to do with the currently selected \n" +
-                "level.";
-
-            this.battlefieldName.ToolTipText =
-                "Select the battlefield to edit by #.\n" +
-                "A battlefield is simply a background image used in a battle. \n" +
-                "More technically, it is a tileset and NOT a tilemap as in the \n" +
-                "levels. It has nothing to do with the currently selected \n" +
-                "level.";
-
-            this.toolTip1.SetToolTip(this.battlefieldGFXSet1Num,
-                "The 1st graphic set in the current battlefield.\n\n" +
-                "A graphic set is a loosely organized collection of 4bpp or \n" +
-                "2bpp 8x8 tiles that are read from and organized into 16x16 \n" +
-                "tiles by a tileset. They are essentially the raw graphics used \n" +
-                "by a battlefield.");
-            this.toolTip1.SetToolTip(this.battlefieldGFXSet1Name, this.toolTip1.GetToolTip(this.battlefieldGFXSet1Num));
-
-            this.toolTip1.SetToolTip(this.battlefieldGFXSet2Num,
-                "The 2nd graphic set in the current battlefield.\n\n" +
-                "A graphic set is a loosely organized collection of 4bpp or \n" +
-                "2bpp 8x8 tiles that are read from and organized into 16x16 \n" +
-                "tiles by a tileset. They are essentially the raw graphics used \n" +
-                "by a battlefield.");
-            this.toolTip1.SetToolTip(this.battlefieldGFXSet2Name, this.toolTip1.GetToolTip(this.battlefieldGFXSet2Num));
-
-            this.toolTip1.SetToolTip(this.battlefieldGFXSet3Num,
-                "The 3rd graphic set in the current battlefield.\n\n" +
-                "A graphic set is a loosely organized collection of 4bpp or \n" +
-                "2bpp 8x8 tiles that are read from and organized into 16x16 \n" +
-                "tiles by a tileset. They are essentially the raw graphics used \n" +
-                "by a battlefield.");
-            this.toolTip1.SetToolTip(this.battlefieldGFXSet3Name, this.toolTip1.GetToolTip(this.battlefieldGFXSet3Num));
-
-            this.toolTip1.SetToolTip(this.battlefieldGFXSet4Num,
-                "The 4th graphic set in the current battlefield.\n\n" +
-                "A graphic set is a loosely organized collection of 4bpp or \n" +
-                "2bpp 8x8 tiles that are read from and organized into 16x16 \n" +
-                "tiles by a tileset. They are essentially the raw graphics used \n" +
-                "by a battlefield.");
-            this.toolTip1.SetToolTip(this.battlefieldGFXSet4Name, this.toolTip1.GetToolTip(this.battlefieldGFXSet4Num));
-
-            this.toolTip1.SetToolTip(this.battlefieldGFXSet5Num,
-                "The 5th graphic set in the current battlefield.\n\n" +
-                "A graphic set is a loosely organized collection of 4bpp or \n" +
-                "2bpp 8x8 tiles that are read from and organized into 16x16 \n" +
-                "tiles by a tileset. They are essentially the raw graphics used \n" +
-                "by a battlefield.");
-            this.toolTip1.SetToolTip(this.battlefieldGFXSet5Name, this.toolTip1.GetToolTip(this.battlefieldGFXSet5Num));
-
-            this.toolTip1.SetToolTip(this.battlefieldTilesetNum,
-                "The tileset used by the current battlefield.\n\n" +
-                "A tileset is a set of 16x16 tiles (drawn using the graphic \n" +
-                "sets) which comprise what is essentially the map of tiles of \n" +
-                "which the final battlefield image is drawn. Note that tilesets \n" +
-                "do not contain any raw graphics, and are merely each a \n" +
-                "series of indexes in which 8x8 tiles are arranged.");
-            this.toolTip1.SetToolTip(this.battlefieldTilesetName, this.toolTip1.GetToolTip(this.battlefieldTilesetNum));
-
-            this.toolTip1.SetToolTip(this.battlefieldPaletteSetNum,
-                "The palette set is a set of 7 palettes that comprise all of the \n" +
-                "colors that the battlefield image uses. In the image below, \n" +
-                "each row is a palette, thus 7 rows of palettes.");
-            this.toolTip1.SetToolTip(this.battlefieldPaletteSetName, this.toolTip1.GetToolTip(this.battlefieldPaletteSetNum));
         }
         #endregion
         #region Event Handlers

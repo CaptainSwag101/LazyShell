@@ -64,6 +64,11 @@
             // 
             this.frameMold.AutoSize = false;
             this.frameMold.Hexadecimal = false;
+            this.frameMold.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.frameMold.Location = new System.Drawing.Point(36, 4);
             this.frameMold.Maximum = new decimal(new int[] {
             31,
@@ -89,6 +94,11 @@
             // 
             this.duration.AutoSize = false;
             this.duration.Hexadecimal = false;
+            this.duration.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.duration.Location = new System.Drawing.Point(140, 4);
             this.duration.Maximum = new decimal(new int[] {
             255,
@@ -203,7 +213,7 @@
             this.back.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(23, 22);
-            this.back.Text = "Back 1 frame";
+            this.back.Text = "Select Previous Frame";
             this.back.Click += new System.EventHandler(this.back_Click);
             // 
             // foward
@@ -214,7 +224,7 @@
             this.foward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.foward.Name = "foward";
             this.foward.Size = new System.Drawing.Size(23, 22);
-            this.foward.Text = "Foward 1 frame";
+            this.foward.Text = "Select Next Frame";
             this.foward.Click += new System.EventHandler(this.foward_Click);
             // 
             // toolStrip2
@@ -287,7 +297,7 @@
             this.moveFrameBack.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFrameBack.Name = "moveFrameBack";
             this.moveFrameBack.Size = new System.Drawing.Size(23, 22);
-            this.moveFrameBack.Text = "Shift Back";
+            this.moveFrameBack.Text = "Move Frame Back";
             this.moveFrameBack.Click += new System.EventHandler(this.moveFrameBack_Click);
             // 
             // moveFrameFoward
@@ -298,7 +308,7 @@
             this.moveFrameFoward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFrameFoward.Name = "moveFrameFoward";
             this.moveFrameFoward.Size = new System.Drawing.Size(23, 22);
-            this.moveFrameFoward.Text = "Shift Foward";
+            this.moveFrameFoward.Text = "Move Frame Forward";
             this.moveFrameFoward.Click += new System.EventHandler(this.moveFrameFoward_Click);
             // 
             // frames

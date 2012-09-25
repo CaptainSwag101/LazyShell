@@ -70,10 +70,10 @@ namespace LAZYSHELL
             settings.Keystrokes[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
-            Do.AddShortcut(toolStrip4, Keys.F2, showDecHex);
+            Do.AddShortcut(toolStrip4, Keys.F2, baseConvertor);
             InitializeEventScriptsEditor();
             searchWindow = new Search(eventNum, searchLabelsText, searchLabels, settings.EventLabels);
-            new ToolTipLabel(this, toolTip1, showDecHex, null);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             new History(this);
             disableNavigate = true;
             if (settings.RememberLastIndex)
@@ -2036,9 +2036,10 @@ namespace LAZYSHELL
         }
         private string[] DialogueNames()
         {
-            String[] names = new String[Model.Dialogues.Length];
+            string[] tables = Model.DTEStr(true);
+            string[] names = new string[Model.Dialogues.Length];
             for (int i = 0; i < Model.Dialogues.Length; i++)
-                names[i] = Model.Dialogues[i].GetDialogueStub(true);
+                names[i] = Model.Dialogues[i].GetDialogueStub(true, tables);
             return names;
         }
         // Editing
@@ -2104,8 +2105,8 @@ namespace LAZYSHELL
         private void UpdateEventScriptsFreeSpace()
         {
             int left = CalculateEventScriptsLength();
-            this.EvtScrLabel3.Text = " " + left.ToString() + " bytes left ";
-            this.EvtScrLabel3.BackColor = left < 0 ? Color.Red : SystemColors.Control;
+            this.labelBytesLeft.Text = " " + left.ToString() + " bytes left ";
+            this.labelBytesLeft.BackColor = left < 0 ? Color.Red : SystemColors.Control;
         }
         private int CalculateEventScriptsLength()
         {
@@ -2361,6 +2362,10 @@ namespace LAZYSHELL
         {
             if (e.KeyData != Keys.Enter)
                 return;
+            gotoAddrButton.PerformClick();
+        }
+        private void gotoAddrButton_Click(object sender, EventArgs e)
+        {
             int input = 0;
             try
             {
@@ -2567,6 +2572,7 @@ namespace LAZYSHELL
             goToToolStripMenuItem.Click -= goToDialogue_Click;
             goToToolStripMenuItem.Click -= goToEvent_Click;
             goToToolStripMenuItem.Click -= goToOffset_Click;
+            goToToolStripMenuItem.Click -= goToAction_Click;
             goToToolStripMenuItem.Click -= addMemoryToNotesDatabase_Click;
             goToToolStripMenuItem.Click -= addMemoryToNotesDatabase_Click;
             if (EventScriptTree.SelectedNode.Tag.GetType() == typeof(EventScriptCommand))
@@ -3636,6 +3642,10 @@ namespace LAZYSHELL
             type = 1;
             disableNavigate = false;
             eventNum.Value = num;
+        }
+        private void toggleLabel_Click(object sender, EventArgs e)
+        {
+            eventLabel.Visible = toggleLabel.Checked;
         }
         #endregion
     }

@@ -326,7 +326,24 @@ namespace LAZYSHELL.Properties {
             "tring>&lt;</string>\r\n  <string>&gt;</string>\r\n  <string />\r\n  <string>#</string>" +
             "\r\n  <string>+</string>\r\n  <string>×</string>\r\n  <string>%</string>\r\n  <string />" +
             "\r\n  <string />\r\n  <string />\r\n  <string>*</string>\r\n  <string>\'</string>\r\n  <str" +
-            "ing>&amp;</string>\r\n  <string />\r\n  <string />\r\n  <string />\r\n</ArrayOfString>")]
+            "ing>&amp;</string>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
+            "tring />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n" +
+            "  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string " +
+            "/>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <str" +
+            "ing />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  " +
+            "<string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />" +
+            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <strin" +
+            "g />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
+            "tring />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n" +
+            "  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string " +
+            "/>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <str" +
+            "ing />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  " +
+            "<string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />" +
+            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <strin" +
+            "g />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
+            "tring />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n" +
+            "  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string " +
+            "/>\r\n  <string />\r\n  <string />\r\n  <string />\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection Keystrokes {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["Keystrokes"]));
@@ -412,7 +429,24 @@ namespace LAZYSHELL.Properties {
             "g>\r\n  <string>&lt;</string>\r\n  <string>&gt;</string>\r\n  <string />\r\n  <string>#<" +
             "/string>\r\n  <string>+</string>\r\n  <string>×</string>\r\n  <string>%</string>\r\n  <s" +
             "tring />\r\n  <string />\r\n  <string />\r\n  <string>*</string>\r\n  <string>\'</string>" +
-            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n</ArrayOfString>")]
+            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <strin" +
+            "g />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
+            "tring />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n" +
+            "  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string " +
+            "/>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <str" +
+            "ing />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  " +
+            "<string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />" +
+            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <strin" +
+            "g />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
+            "tring />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n" +
+            "  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string " +
+            "/>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <str" +
+            "ing />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  " +
+            "<string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />" +
+            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <strin" +
+            "g />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
+            "tring />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n" +
+            "  <string />\r\n  <string />\r\n  <string />\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection KeystrokesMenu {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["KeystrokesMenu"]));
@@ -461,8 +495,24 @@ namespace LAZYSHELL.Properties {
             "<string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />" +
             "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <strin" +
             "g />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
-            "tring>&amp;</string>\r\n  <string />\r\n  <string />\r\n  <string />\r\n</ArrayOfString>" +
-            "")]
+            "tring>&amp;</string>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  " +
+            "<string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />" +
+            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <strin" +
+            "g />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
+            "tring />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n" +
+            "  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string " +
+            "/>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <str" +
+            "ing />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  " +
+            "<string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />" +
+            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <strin" +
+            "g />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <s" +
+            "tring />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n" +
+            "  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string " +
+            "/>\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <str" +
+            "ing />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  " +
+            "<string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />" +
+            "\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <string />\r\n  <strin" +
+            "g />\r\n  <string />\r\n  <string />\r\n  <string />\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection KeystrokesDesc {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["KeystrokesDesc"]));

@@ -16,6 +16,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 using LAZYSHELL.Properties;
 using LAZYSHELL.ScriptsEditor;
 using LAZYSHELL.ScriptsEditor.Commands;
@@ -29,7 +30,6 @@ namespace LAZYSHELL
     {
         private static ProgressBar ProgressBar;
         private static Stopwatch StopWatch;
-        public static Bitmap ScreenImage;
         #region Drawing
         /// <summary>
         /// Applys a palette to a pixel array.
@@ -343,7 +343,7 @@ namespace LAZYSHELL
             int o = 0;
             switch (fontCharacters[0].FontType)
             {
-                case 0: // menu
+                case FontType.Menu: // menu
                     for (int y = 0; y < size.Height; y++)
                     {
                         if (y != 0 && y % 2 == 0) o += 0x100;
@@ -367,7 +367,7 @@ namespace LAZYSHELL
                         o ^= 8;
                     }
                     break;
-                case 1: // dialogue
+                case FontType.Dialogue: // dialogue
                     for (int y = 0; y < size.Height; y++)
                     {
                         if (y != 0 && y % 2 == 0) o += 0x100;
@@ -399,7 +399,7 @@ namespace LAZYSHELL
                         o ^= 8;
                     }
                     break;
-                case 2: // description
+                case FontType.Description: // description
                     src.CopyTo(temp, 0);
                     break;
             }
@@ -407,14 +407,14 @@ namespace LAZYSHELL
             byte[] character;
             for (int i = 0; i * fontCharacters[0].Graphics.Length < temp.Length && i < temp.Length; i++)
             {
-                if (fontCharacters[i].FontType == 1 && (i == 59 || i == 61))    // skip [ and ]
+                if (fontCharacters[i].FontType == FontType.Dialogue && (i == 59 || i == 61))    // skip [ and ]
                     continue;
                 character = Bits.GetByteArray(temp, i * fontCharacters[i].Graphics.Length, fontCharacters[i].Graphics.Length);
                 CopyOverBPPGraphics(
                     character, fontCharacters[i].Graphics,
                     new Rectangle(0, 0, fontCharacters[i].MaxWidth, fontCharacters[i].Height),
                     fontCharacters[i].MaxWidth / 8, 0, 0x10);
-                if (fontCharacters[i].FontType != 3)
+                if (fontCharacters[i].FontType != FontType.Triangles)
                     fontCharacters[i].Width = (byte)(fontCharacters[i].GetRightMostPixel(palette) + 1);
             }
         }
@@ -3733,6 +3733,66 @@ namespace LAZYSHELL
             }
             return sb.ToString();
         }
+        public static string WordWrap(string text, int width)
+        {
+            return WordWrap(text, width, 0);
+        }
+        public static string WordWrap(string text, int width, int indent)
+        {
+            int pos, next;
+            string pad = String.Empty.PadLeft(indent, ' ');
+            StringBuilder sb = new StringBuilder();
+            // Lucidity check
+            if (width < 1)
+                return text;
+            // Parse each line of text
+            for (pos = 0; pos < text.Length; pos = next)
+            {
+                // Find end of line
+                int eol = text.IndexOf(Environment.NewLine, pos);
+                if (eol == -1)
+                    next = eol = text.Length;
+                else
+                    next = eol + Environment.NewLine.Length;
+                // Copy this line of text, breaking into smaller lines as needed
+                if (eol > pos)
+                {
+                    do
+                    {
+                        int len = eol - pos;
+                        if (len > width)
+                            len = BreakLine(text, pos, width);
+                        sb.Append(text, pos, len);
+                        sb.Append(Environment.NewLine + pad);
+                        // Trim whitespace following break
+                        pos += len;
+                        while (pos < eol && Char.IsWhiteSpace(text[pos]))
+                            pos++;
+                    }
+                    while (eol > pos);
+                }
+                else
+                    sb.Append(Environment.NewLine + pad); // Empty line
+            }
+            // Removes extra line
+            sb.Remove(sb.Length - indent - Environment.NewLine.Length, indent + Environment.NewLine.Length);
+            return sb.ToString();
+        }
+        private static int BreakLine(string text, int pos, int max)
+        {
+            // Find last whitespace in line
+            int i = max;
+            while (i >= 0 && !Char.IsWhiteSpace(text[pos + i]))
+                i--;
+            // If no whitespace found, break at maximum length
+            if (i < 0)
+                return max;
+            // Find start of whitespace
+            while (i >= 0 && Char.IsWhiteSpace(text[pos + i]))
+                i--;
+            // Return length of text before whitespace
+            return i + 1;
+        }
         #endregion
         #region Data Managing
         private static BackgroundWorker Export_Worker;
@@ -4125,6 +4185,10 @@ namespace LAZYSHELL
             shortcut.Visible = false;
             shortcut.Click += eventHandler;
             toolStrip.Items.Add(shortcut);
+            //ToolStripMenuItem screencap = new ToolStripMenuItem();
+            //screencap.ShortcutKeys = Keys.F3;
+            //screencap.Visible = false;
+            //screencap.Click += CaptureScreen_Click;
         }
         public static void AddShortcut(ToolStrip toolStrip, Keys keys, ToolStripButton checkable)
         {
@@ -4488,6 +4552,34 @@ namespace LAZYSHELL
             }
             return text;
         }
+        public static int GetStringHeight(string text, int containerWidth, Font font)
+        {
+            int height = 0;
+
+            return height;
+        }
+        //
+        private const int SW_SHOWNOACTIVATE = 4;
+        private const int HWND_TOPMOST = -1;
+        private const uint SWP_NOACTIVATE = 0x0010;
+        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
+        private static extern bool SetWindowPos(
+             int hWnd,           // window handle
+             int hWndInsertAfter,    // placement-order handle
+             int X,          // horizontal position
+             int Y,          // vertical position
+             int cx,         // width
+             int cy,         // height
+             uint uFlags);       // window positioning flags
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        public static void ShowInactiveTopmost(Form frm)
+        {
+            ShowWindow(frm.Handle, SW_SHOWNOACTIVATE);
+            SetWindowPos(frm.Handle.ToInt32(), HWND_TOPMOST,
+            frm.Left, frm.Top, frm.Width, frm.Height,
+            SWP_NOACTIVATE);
+        }
         #endregion
         #region LAZYSHELL Functions
         public static bool Compare(Subtile subtileA, Subtile subtileB)
@@ -4730,6 +4822,37 @@ namespace LAZYSHELL
                     results += "Mismatched index: " + i + "\r\n";
             }
             NewMessage.Show("MISMATCHED INDEXES", "Found the following mismatched indexes", results);
+        }
+        public static void CaptureScreens(Form form)
+        {
+            Rectangle bounds = form.Bounds;
+            Bitmap screen = new Bitmap(bounds.Width, bounds.Height);
+            Graphics graphics = Graphics.FromImage(screen);
+            graphics.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+            screen.Save(form.Name + "_100%.png", ImageFormat.Png);
+            int newWidth, newHeight;
+            Bitmap resized;
+            // 75%
+            newWidth = (int)((double)bounds.Width / 1.5);
+            newHeight = (int)((double)bounds.Height / 1.5);
+            resized = new Bitmap(newWidth, newHeight);
+            graphics = Graphics.FromImage(resized);
+            graphics.DrawImage(screen, 0, 0, newWidth, newHeight);
+            resized.Save(form.Name + "_75%.png", ImageFormat.Png);
+            // half
+            newWidth = bounds.Width / 2;
+            newHeight = bounds.Height / 2;
+            resized = new Bitmap(newWidth, newHeight);
+            graphics = Graphics.FromImage(resized);
+            graphics.DrawImage(screen, 0, 0, newWidth, newHeight);
+            resized.Save(form.Name + "_50%.png", ImageFormat.Png);
+            //// 150 pixels high
+            //newWidth = (int)(150.0 / (double)bounds.Height * (double)bounds.Width);
+            //newHeight = 150;
+            //resized = new Bitmap(newWidth, newHeight);
+            //graphics = Graphics.FromImage(resized);
+            //graphics.DrawImage(screen, 0, 0, newWidth, newHeight);
+            //resized.Save(form.Name + "_" + newHeight + ".png", ImageFormat.Png);
         }
         #endregion
         #region Math Functions

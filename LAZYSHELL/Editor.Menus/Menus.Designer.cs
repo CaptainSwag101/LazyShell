@@ -1,6 +1,6 @@
 ﻿namespace LAZYSHELL
 {
-    partial class Overworld
+    partial class Menus
     {
         /// <summary>
         /// Required designer variable.
@@ -288,7 +288,7 @@
             this.importImageToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(156, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(156, 48);
             // 
             // saveImageAsToolStripMenuItem
             // 
@@ -472,7 +472,7 @@
             0});
             this.cursorSequence.ValueChanged += new System.EventHandler(this.cursorSequence_ValueChanged);
             // 
-            // Overworld
+            // Menus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -482,7 +482,7 @@
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "Overworld";
+            this.Name = "Menus";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);

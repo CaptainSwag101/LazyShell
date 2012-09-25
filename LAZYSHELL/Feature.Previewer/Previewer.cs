@@ -69,6 +69,9 @@ namespace LAZYSHELL
                     settings.Save();
                 }
             }
+            Do.AddShortcut(toolStrip1, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip1, Keys.F2, baseConvertor);
+            new ToolTipLabel(this, baseConvertor, helpTips);
         }
         public Previewer(int category, int index, bool automatic)
         {
@@ -93,6 +96,9 @@ namespace LAZYSHELL
                     settings.Save();
                 }
             }
+            Do.AddShortcut(toolStrip1, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip1, Keys.F2, baseConvertor);
+            new ToolTipLabel(this, baseConvertor, helpTips);
         }
         public Previewer(int index, bool automatic, PreviewType behavior) // SPC Previewer
         {
@@ -117,6 +123,9 @@ namespace LAZYSHELL
                     settings.Save();
                 }
             }
+            Do.AddShortcut(toolStrip1, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip1, Keys.F2, baseConvertor);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             if (automatic)
                 launchButton_Click(null, null);
         }
@@ -131,7 +140,7 @@ namespace LAZYSHELL
             InitializePreviewer();
 
             this.emulator = GetEmulator();
-            if (this.selectNumericUpDown.Value == selectNum)
+            if (this.selectIndex.Value == selectNum)
                 this.selectNumericUpDown_ValueChanged(null, null);
             UpdateGUI();
 
@@ -204,20 +213,20 @@ namespace LAZYSHELL
             {
                 this.Text = "PREVIEW EVENT - Lazy Shell";
                 this.label1.Text = "Event #";
-                this.selectNumericUpDown.Maximum = 4095;
+                this.selectIndex.Maximum = 4095;
                 this.groupBox2.Enabled = false;
             }
             else if (behavior == PreviewType.Level)
             {
                 this.Text = "PREVIEW LEVEL - Lazy Shell";
                 this.label1.Text = "Level #";
-                this.selectNumericUpDown.Maximum = 511;
+                this.selectIndex.Maximum = 511;
                 this.groupBox2.Enabled = false;
             }
             else if (behavior == PreviewType.MineCart)
             {
                 this.Text = "PREVIEW MINE CART - Lazy Shell";
-                this.selectNumericUpDown.Enabled = false;
+                this.selectIndex.Enabled = false;
                 this.groupBox1.Enabled = false;
                 this.groupBox2.Enabled = false;
             }
@@ -225,22 +234,22 @@ namespace LAZYSHELL
             {
                 this.Text = "PREVIEW ACTION - Lazy Shell";
                 this.label1.Text = "Action #";
-                this.selectNumericUpDown.Maximum = 1023;
+                this.selectIndex.Maximum = 1023;
                 this.groupBox2.Enabled = false;
             }
             else if (behavior == PreviewType.Battle)
             {
                 this.Text = "PREVIEW BATTLE - Lazy Shell";
                 this.label1.Text = "Monster #";
-                this.selectNumericUpDown.Maximum = 255;
+                this.selectIndex.Maximum = 255;
 
                 this.groupBox1.Enabled = false;
                 this.groupBox2.Enabled = true;
 
-                this.battleBGListBox.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
-                this.battleBGListBox.Enabled = true;
-                this.battleBGListBox.Enabled = true;
-                this.battleBGListBox.SelectedIndex = settings.PreviewBattlefield;
+                this.battleBG.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
+                this.battleBG.Enabled = true;
+                this.battleBG.Enabled = true;
+                this.battleBG.SelectedIndex = settings.PreviewBattlefield;
             }
             else if (behavior == PreviewType.SPCBattle ||
                 behavior == PreviewType.SPCEvent ||
@@ -253,13 +262,13 @@ namespace LAZYSHELL
             {
                 this.Text = "PREVIEW ANIMATION - Lazy Shell";
                 this.label1.Text = "Monster #";
-                this.selectNumericUpDown.Maximum = 255;
+                this.selectIndex.Maximum = 255;
                 if (category == 1)
                     index += 64;
                 else if (category == 4)
                 {
                     index += 96;
-                    this.selectNumericUpDown.Value = 0;
+                    this.selectIndex.Value = 0;
                     goto Finish;
                 }
                 foreach (BattleScript bs in Model.BattleScripts)
@@ -272,13 +281,13 @@ namespace LAZYSHELL
                             case 1:
                                 if (command[0] == 0xEF && command[1] == index)
                                 {
-                                    this.selectNumericUpDown.Value = bs.Index;
+                                    this.selectIndex.Value = bs.Index;
                                     bs.CommandIndex = 0;
                                     goto Finish;
                                 }
                                 if (command[0] == 0xF0 && (command[1] == index || command[2] == index || command[3] == index))
                                 {
-                                    this.selectNumericUpDown.Value = bs.Index;
+                                    this.selectIndex.Value = bs.Index;
                                     bs.CommandIndex = 0;
                                     goto Finish;
                                 }
@@ -286,13 +295,13 @@ namespace LAZYSHELL
                             case 2:
                                 if (command[0] < 0xE0 && command[0] == index)
                                 {
-                                    this.selectNumericUpDown.Value = bs.Index;
+                                    this.selectIndex.Value = bs.Index;
                                     bs.CommandIndex = 0;
                                     goto Finish;
                                 }
                                 if (command[0] == 0xE0 && (command[1] == index || command[2] == index || command[3] == index))
                                 {
-                                    this.selectNumericUpDown.Value = bs.Index;
+                                    this.selectIndex.Value = bs.Index;
                                     bs.CommandIndex = 0;
                                     goto Finish;
                                 }
@@ -305,9 +314,9 @@ namespace LAZYSHELL
                 }
             Finish:
                 this.groupBox1.Enabled = false;
-                this.battleBGListBox.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
-                this.battleBGListBox.Enabled = true;
-                this.battleBGListBox.SelectedIndex = settings.PreviewBattlefield;
+                this.battleBG.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
+                this.battleBG.Enabled = true;
+                this.battleBG.SelectedIndex = settings.PreviewBattlefield;
             }
             // ally stats
             this.allyName.Items.Clear();
@@ -384,7 +393,7 @@ namespace LAZYSHELL
         {
             this.emuPathTextBox.Text = this.emulatorPath;
             this.romPathTextBox.Text = this.romPath;
-            this.selectNumericUpDown.Value = this.selectNum;
+            this.selectIndex.Value = this.selectNum;
             this.eventListBox.Items.Clear();
             Entrance ent;
 
@@ -708,14 +717,14 @@ namespace LAZYSHELL
                 storage.ShowMessage = false;
             }
             if (this.behavior == PreviewType.Level)
-                storage.Destination = Math.Min((ushort)509, (ushort)this.selectNumericUpDown.Value);
+                storage.Destination = Math.Min((ushort)509, (ushort)this.selectIndex.Value);
             else if (this.behavior == PreviewType.Event || this.behavior == PreviewType.Action)
                 storage.Destination = ent.LevelNum;
             storage.ExitType = 0;
             storage.Y = 10;
-            storage.DestX = (byte)this.adjustXNumericUpDown.Value;
-            storage.DestY = (byte)this.adjustYNumericUpDown.Value;
-            storage.DestZ = (byte)this.adjustZNumericUpDown.Value;
+            storage.DestX = (byte)this.adjustX.Value;
+            storage.DestY = (byte)this.adjustY.Value;
+            storage.DestZ = (byte)this.adjustZ.Value;
 
             ushort save = Model.Levels[storage.Destination].LevelEvents.EntranceEvent;
             byte saveMusic = Model.Levels[0].LevelEvents.Music;
@@ -724,7 +733,7 @@ namespace LAZYSHELL
             {
                 PrepareBattlePack(ent.Source);
                 byte[] eventData = new byte[] { 0x4A, 0x00, 0x00, 0x00, 0xFE };
-                eventData[3] = (byte)this.battleBGListBox.SelectedIndex;
+                eventData[3] = (byte)this.battleBG.SelectedIndex;
                 eventData.CopyTo(Model.Data, 0x1E0C00);
             }
             else if (this.behavior == PreviewType.Level)
@@ -747,10 +756,10 @@ namespace LAZYSHELL
             }
             else if (this.behavior == PreviewType.Animation)
             {
-                int monsterNum = (int)selectNumericUpDown.Value;
+                int monsterNum = (int)selectIndex.Value;
                 PrepareBattlePack(0xFFFF);
                 byte[] eventData = new byte[] { 0x4A, 0x00, 0x00, 0x00, 0xFE };
-                eventData[3] = (byte)this.battleBGListBox.SelectedIndex;
+                eventData[3] = (byte)this.battleBG.SelectedIndex;
                 eventData.CopyTo(Model.Data, 0x1E0C00);
                 if (category == 1 || category == 2)
                 {
@@ -800,7 +809,7 @@ namespace LAZYSHELL
                 byte ycoord = Model.Formations[formationIndex].Y[0];
                 Model.Formations[formationIndex].X[0] = 167;
                 Model.Formations[formationIndex].Y[0] = 135;
-                Model.Formations[formationIndex].Monster[0] = (byte)this.selectNumericUpDown.Value;
+                Model.Formations[formationIndex].Monster[0] = (byte)this.selectIndex.Value;
                 bool[] uses = new bool[8];
                 uses[0] = Model.Formations[formationIndex].Use[0];
                 uses[1] = Model.Formations[formationIndex].Use[1];
@@ -1084,29 +1093,29 @@ namespace LAZYSHELL
                 return;
 
             // Set the XYZ values
-            this.adjustXNumericUpDown.Value = ((Entrance)eventTriggers[index]).CoordX;
-            this.adjustYNumericUpDown.Value = ((Entrance)eventTriggers[index]).CoordY;
-            this.adjustZNumericUpDown.Value = ((Entrance)eventTriggers[index]).CoordZ;
+            this.adjustX.Value = ((Entrance)eventTriggers[index]).CoordX;
+            this.adjustY.Value = ((Entrance)eventTriggers[index]).CoordY;
+            this.adjustZ.Value = ((Entrance)eventTriggers[index]).CoordZ;
         }
         private void selectNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            this.selectNum = (int)selectNumericUpDown.Value;
+            this.selectNum = (int)selectIndex.Value;
             if (this.behavior == PreviewType.Event)
                 ScanForEvents();
             else if (this.behavior == PreviewType.Level)
             {
                 this.eventTriggers.Clear();
-                ScanForEntrancesToLevel((int)selectNumericUpDown.Value);
+                ScanForEntrancesToLevel((int)selectIndex.Value);
             }
             else if (this.behavior == PreviewType.Action)
             {
                 this.eventTriggers.Clear();
-                ScanForActionReferences((int)selectNumericUpDown.Value);
+                ScanForActionReferences((int)selectIndex.Value);
             }
             else if (this.behavior == PreviewType.Battle)
             {
                 this.eventTriggers.Clear();
-                ScanFormationsForMonster((int)this.selectNumericUpDown.Value);
+                ScanFormationsForMonster((int)this.selectIndex.Value);
             }
             UpdateGUI();
         }
@@ -1114,7 +1123,7 @@ namespace LAZYSHELL
         {
             if (updating || initializing)
                 return;
-            settings.PreviewBattlefield = battleBGListBox.SelectedIndex;
+            settings.PreviewBattlefield = battleBG.SelectedIndex;
             settings.Save();
         }
         //

@@ -4,16 +4,20 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
+using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 using Microsoft.Win32;
 using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Form1 : Form, IMRUClient
+    public partial class Editor : Form, IMRUClient
     {
         #region Variables
 
@@ -33,22 +37,8 @@ namespace LAZYSHELL
         public Panel Panel2 { get { return panel2; } set { panel2 = value; } }
         #endregion
         // Constructor
-        public Form1(ProgramController controls)
+        public Editor(ProgramController controls)
         {
-            if (!settings.FirstLoad)
-                MessageBox.Show(
-                    "If this is your first time using Lazy Shell, please take the time to read the following advice:\n\n" +
-                    "1. When plannning a hack project, the wisest thing to do is to make sure you have the back-up option enabled in the settings. Click the cog icon and check either \"Create Back-up ROM on Load\" or \"Create Back-up ROM on Save\" to enable it. I often hear about users throwing in the towel when the application corrupts the ROM, never having bothered to use the back-up feature.\n\n" +
-                    "2. If you receive an error prompt, please follow the directions in the prompt window and copy ALL of the contents of the error message and post them to the given link in the window. Unless you do this, there is little hope of the bug ever being fixed unless someone else encounters it and posts it to the link. Keep in mind, I do read bug reports and I do attempt to fix the reported bugs, so your post will not be a waste of time.\n\n" +
-                    "3. If the unfortunate occasion might arise that the application actually does corrupt your ROM, you can try resetting the corrupted elements by importing those specific elements from a fresh SMRPG ROM. Click the button \"Import elements from another ROM\" (a down-arrow over a small white box), select a fresh ROM, and check the elements you want to import.\n\n" +
-                    "Should you encounter any issues, errors, problems, or irritations using the application, please post them to the following link:\n\n" +
-                    "http://acmlm.kafuka.org/board/thread.php?id=7005\n\n" +
-                    "Press Ctrl+Ins to copy the contents of this message box to the clipboard.\n\n" +
-                    "Thank you for using the program.",
-                    "LAZY SHELL",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            settings.FirstLoad = true;
-
             this.AppControl = controls;
             //notes = Notes.Instance;
 
@@ -75,6 +65,9 @@ namespace LAZYSHELL
             }
             new History(this);
             Do.AddHistory("LOADED LAZY SHELL APPLICATION");
+            if (!settings.FirstLoad)
+                Help.CreateHelp(Model.LAZYSHELL_xml, true);
+            settings.FirstLoad = true;
         }
         #region Function
         public static void GuiMain(ProgramController AppControl)
@@ -83,7 +76,7 @@ namespace LAZYSHELL
             //Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1(AppControl));
+            Application.Run(new Editor(AppControl));
         }
         // Loading
         private void Open(string filename)
@@ -419,6 +412,40 @@ namespace LAZYSHELL
             Form about = new About(this);
             about.ShowDialog(this);
         }
+        private void help_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Open the help database as a navigable web page?\n\n" +
+                "Selecting \"No\" will open the help file as a raw text file.",
+                "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Cancel)
+                return;
+            XmlDocument LAZYSHELL_xml = Model.LAZYSHELL_xml;
+            if (result == DialogResult.No)
+            {
+                Help.CreateHelp(LAZYSHELL_xml, false);
+                return;
+            }
+            XmlNodeList icons = LAZYSHELL_xml.SelectNodes(".//*[@icon != '']");
+            if (!Directory.Exists("help"))
+                Directory.CreateDirectory("help");
+            if (!Directory.Exists("help//icons"))
+                Directory.CreateDirectory("help//icons");
+            File.WriteAllText("help//LAZYSHELL_xml.xml", Resources.LAZYSHELL_xml);
+            File.WriteAllText("help//LAZYSHELL_xsl.xsl", Resources.LAZYSHELL_xsl);
+            File.WriteAllText("help//LAZYSHELL_css.css", Resources.LAZYSHELL_css);
+            foreach (XmlNode icon in icons)
+            {
+                string path = icon.Attributes["icon"].Value;
+                string file = Path.GetFileName(path);
+                string name = Path.GetFileNameWithoutExtension(path);
+                Bitmap image = (Bitmap)Resources.ResourceManager.GetObject(name);
+                if (image == null)
+                    continue;
+                image.Save("help//icons//" + file);
+            }
+            Process.Start("help\\LAZYSHELL_xml.xml");
+        }
         // other
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -543,23 +570,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You are about to open all 15 editor windows.\n\nAre you sure you want to do this?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 return;
-            openAllies_Click(null, null);
-            openAnimations_Click(null, null);
-            openAttacks_Click(null, null);
-            openBattlefields_Click(null, null);
-            //openBattleScripts_Click(null, null);
-            openDialogues_Click(null, null);
-            openEffects_Click(null, null);
-            openEventScripts_Click(null, null);
-            openFormations_Click(null, null);
-            openItems_Click(null, null);
-            openLevels_Click(null, null);
-            openMainTitle_Click(null, null);
-            openMenus_Click(null, null);
-            openMiniGames_Click(null, null);
-            openMonsters_Click(null, null);
-            openSprites_Click(null, null);
-            openWorldMaps_Click(null, null);
+            AppControl.OpenAll();
         }
         private void closeAll_Click(object sender, EventArgs e)
         {

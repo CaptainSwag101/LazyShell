@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HexEditor));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.gotoAddress = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.searchValues = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.baseConvDec = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.baseConvHex = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.fillWith = new System.Windows.Forms.ToolStripTextBox();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.info_sel = new System.Windows.Forms.Label();
@@ -41,24 +46,19 @@
             this.info_offset = new System.Windows.Forms.Label();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.richTextBox2 = new LAZYSHELL.NewRichTextBox();
-            this.richTextBox3 = new LAZYSHELL.NewRichTextBox();
+            this.currentROMData = new LAZYSHELL.NewRichTextBox();
+            this.originalROMData = new LAZYSHELL.NewRichTextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.viewCurrent = new System.Windows.Forms.ToolStripButton();
+            this.viewOriginal = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.copy = new System.Windows.Forms.ToolStripButton();
             this.paste = new System.Windows.Forms.ToolStripButton();
             this.undo = new System.Windows.Forms.ToolStripButton();
             this.redo = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.richTextBox1 = new LAZYSHELL.NewRichTextBox();
-            this.viewCurrent = new System.Windows.Forms.ToolStripButton();
-            this.viewOriginal = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.fillWith = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.baseConvDec = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-            this.baseConvHex = new System.Windows.Forms.ToolStripTextBox();
+            this.ROMOffsets = new LAZYSHELL.NewRichTextBox();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -123,6 +123,60 @@
             this.searchValues.Size = new System.Drawing.Size(132, 25);
             this.searchValues.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchValues_KeyDown);
             // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.AutoSize = false;
+            this.toolStripLabel4.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.toolStripLabel4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(22, 22);
+            this.toolStripLabel4.ToolTipText = "Decimal <-> Hex";
+            // 
+            // baseConvDec
+            // 
+            this.baseConvDec.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.baseConvDec.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.baseConvDec.MaxLength = 10;
+            this.baseConvDec.Name = "baseConvDec";
+            this.baseConvDec.Size = new System.Drawing.Size(70, 25);
+            this.baseConvDec.TextChanged += new System.EventHandler(this.baseConvDec_TextChanged);
+            // 
+            // toolStripLabel5
+            // 
+            this.toolStripLabel5.AutoSize = false;
+            this.toolStripLabel5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripLabel5.Name = "toolStripLabel5";
+            this.toolStripLabel5.Size = new System.Drawing.Size(22, 22);
+            this.toolStripLabel5.Text = "$";
+            this.toolStripLabel5.ToolTipText = "Hexadecimal";
+            // 
+            // baseConvHex
+            // 
+            this.baseConvHex.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.baseConvHex.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.baseConvHex.MaxLength = 8;
+            this.baseConvHex.Name = "baseConvHex";
+            this.baseConvHex.Size = new System.Drawing.Size(70, 25);
+            this.baseConvHex.TextChanged += new System.EventHandler(this.baseConvHex_TextChanged);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.AutoSize = false;
+            this.toolStripLabel3.Image = global::LAZYSHELL.Properties.Resources.fill_small;
+            this.toolStripLabel3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(22, 22);
+            this.toolStripLabel3.ToolTipText = "Fill Selection";
+            // 
+            // fillWith
+            // 
+            this.fillWith.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.fillWith.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fillWith.MaxLength = 2;
+            this.fillWith.Name = "fillWith";
+            this.fillWith.Size = new System.Drawing.Size(30, 25);
+            this.fillWith.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fillWith_KeyDown);
+            // 
             // save
             // 
             this.save.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -131,7 +185,7 @@
             this.save.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(23, 22);
-            this.save.Text = "Save changes";
+            this.save.Text = "Save";
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
             // panel1
@@ -192,64 +246,64 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.richTextBox2);
-            this.panel2.Controls.Add(this.richTextBox3);
+            this.panel2.Controls.Add(this.currentROMData);
+            this.panel2.Controls.Add(this.originalROMData);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(63, 50);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(425, 485);
             this.panel2.TabIndex = 3;
             // 
-            // richTextBox2
+            // currentROMData
             // 
-            this.richTextBox2.BackColor = System.Drawing.Color.White;
-            this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.ForeColor = System.Drawing.Color.DarkBlue;
-            this.richTextBox2.HideSelection = false;
-            this.richTextBox2.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBox2.Size = new System.Drawing.Size(425, 485);
-            this.richTextBox2.TabIndex = 0;
-            this.richTextBox2.Text = "";
-            this.richTextBox2.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
-            this.richTextBox2.SizeChanged += new System.EventHandler(this.richTextBox_SizeChanged);
-            this.richTextBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyDown);
-            this.richTextBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyUp);
-            this.richTextBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseDown);
-            this.richTextBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseUp);
-            this.richTextBox2.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseWheel);
-            this.richTextBox2.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.richTextBox_PreviewKeyDown);
+            this.currentROMData.BackColor = System.Drawing.Color.White;
+            this.currentROMData.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.currentROMData.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.currentROMData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.currentROMData.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentROMData.ForeColor = System.Drawing.Color.DarkBlue;
+            this.currentROMData.HideSelection = false;
+            this.currentROMData.Location = new System.Drawing.Point(0, 0);
+            this.currentROMData.Name = "currentROMData";
+            this.currentROMData.ReadOnly = true;
+            this.currentROMData.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.currentROMData.Size = new System.Drawing.Size(425, 485);
+            this.currentROMData.TabIndex = 0;
+            this.currentROMData.Text = "";
+            this.currentROMData.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
+            this.currentROMData.SizeChanged += new System.EventHandler(this.richTextBox_SizeChanged);
+            this.currentROMData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyDown);
+            this.currentROMData.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyUp);
+            this.currentROMData.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseDown);
+            this.currentROMData.MouseUp += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseUp);
+            this.currentROMData.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseWheel);
+            this.currentROMData.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.richTextBox_PreviewKeyDown);
             // 
-            // richTextBox3
+            // originalROMData
             // 
-            this.richTextBox3.BackColor = System.Drawing.Color.White;
-            this.richTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox3.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.richTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox3.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox3.ForeColor = System.Drawing.Color.DarkBlue;
-            this.richTextBox3.HideSelection = false;
-            this.richTextBox3.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBox3.Size = new System.Drawing.Size(425, 485);
-            this.richTextBox3.TabIndex = 6;
-            this.richTextBox3.Text = "";
-            this.richTextBox3.Visible = false;
-            this.richTextBox3.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
-            this.richTextBox3.SizeChanged += new System.EventHandler(this.richTextBox_SizeChanged);
-            this.richTextBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyDown);
-            this.richTextBox3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyUp);
-            this.richTextBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseDown);
-            this.richTextBox3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseUp);
-            this.richTextBox3.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseWheel);
-            this.richTextBox3.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.richTextBox_PreviewKeyDown);
+            this.originalROMData.BackColor = System.Drawing.Color.White;
+            this.originalROMData.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.originalROMData.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.originalROMData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.originalROMData.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.originalROMData.ForeColor = System.Drawing.Color.DarkBlue;
+            this.originalROMData.HideSelection = false;
+            this.originalROMData.Location = new System.Drawing.Point(0, 0);
+            this.originalROMData.Name = "originalROMData";
+            this.originalROMData.ReadOnly = true;
+            this.originalROMData.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.originalROMData.Size = new System.Drawing.Size(425, 485);
+            this.originalROMData.TabIndex = 6;
+            this.originalROMData.Text = "";
+            this.originalROMData.Visible = false;
+            this.originalROMData.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
+            this.originalROMData.SizeChanged += new System.EventHandler(this.richTextBox_SizeChanged);
+            this.originalROMData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyDown);
+            this.originalROMData.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyUp);
+            this.originalROMData.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseDown);
+            this.originalROMData.MouseUp += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseUp);
+            this.originalROMData.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.richTextBox_MouseWheel);
+            this.originalROMData.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.richTextBox_PreviewKeyDown);
             // 
             // toolStrip2
             // 
@@ -259,6 +313,7 @@
             this.viewOriginal,
             this.toolStripSeparator3,
             this.save,
+            this.helpTips,
             this.toolStripSeparator2,
             this.copy,
             this.paste,
@@ -270,6 +325,44 @@
             this.toolStrip2.Size = new System.Drawing.Size(505, 25);
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
+            // 
+            // viewCurrent
+            // 
+            this.viewCurrent.Checked = true;
+            this.viewCurrent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.viewCurrent.Image = global::LAZYSHELL.Properties.Resources.cartridge;
+            this.viewCurrent.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.viewCurrent.Name = "viewCurrent";
+            this.viewCurrent.Size = new System.Drawing.Size(91, 22);
+            this.viewCurrent.Text = "Current ROM";
+            this.viewCurrent.ToolTipText = "Current ROM";
+            this.viewCurrent.Click += new System.EventHandler(this.viewCurrent_Click);
+            // 
+            // viewOriginal
+            // 
+            this.viewOriginal.Image = global::LAZYSHELL.Properties.Resources.cartridge;
+            this.viewOriginal.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.viewOriginal.Name = "viewOriginal";
+            this.viewOriginal.Size = new System.Drawing.Size(92, 22);
+            this.viewOriginal.Text = "Original ROM";
+            this.viewOriginal.ToolTipText = "Original ROM";
+            this.viewOriginal.Click += new System.EventHandler(this.viewOriginal_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.AutoSize = false;
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(8, 25);
+            // 
+            // helpTips
+            // 
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.Text = "Help Tips";
             // 
             // toolStripSeparator2
             // 
@@ -320,106 +413,24 @@
             this.redo.Text = "Redo";
             this.redo.Click += new System.EventHandler(this.redo_Click);
             // 
-            // toolStripSeparator3
+            // ROMOffsets
             // 
-            this.toolStripSeparator3.AutoSize = false;
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(8, 25);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.richTextBox1.Enabled = false;
-            this.richTextBox1.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(0, 50);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBox1.Size = new System.Drawing.Size(63, 485);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.SizeChanged += new System.EventHandler(this.richTextBox_SizeChanged);
-            this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyDown);
-            this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyUp);
-            this.richTextBox1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.richTextBox_PreviewKeyDown);
-            // 
-            // viewCurrent
-            // 
-            this.viewCurrent.Checked = true;
-            this.viewCurrent.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.viewCurrent.Image = global::LAZYSHELL.Properties.Resources.cartridge;
-            this.viewCurrent.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.viewCurrent.Name = "viewCurrent";
-            this.viewCurrent.Size = new System.Drawing.Size(91, 22);
-            this.viewCurrent.Text = "Current ROM";
-            this.viewCurrent.ToolTipText = "Current ROM";
-            this.viewCurrent.Click += new System.EventHandler(this.viewCurrent_Click);
-            // 
-            // viewOriginal
-            // 
-            this.viewOriginal.Image = global::LAZYSHELL.Properties.Resources.cartridge;
-            this.viewOriginal.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.viewOriginal.Name = "viewOriginal";
-            this.viewOriginal.Size = new System.Drawing.Size(92, 22);
-            this.viewOriginal.Text = "Original ROM";
-            this.viewOriginal.ToolTipText = "Original ROM";
-            this.viewOriginal.Click += new System.EventHandler(this.viewOriginal_Click);
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.AutoSize = false;
-            this.toolStripLabel3.Image = global::LAZYSHELL.Properties.Resources.fill_small;
-            this.toolStripLabel3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(22, 22);
-            this.toolStripLabel3.ToolTipText = "Fill selection with";
-            // 
-            // fillWith
-            // 
-            this.fillWith.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.fillWith.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fillWith.MaxLength = 2;
-            this.fillWith.Name = "fillWith";
-            this.fillWith.Size = new System.Drawing.Size(30, 25);
-            this.fillWith.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fillWith_KeyDown);
-            // 
-            // toolStripLabel4
-            // 
-            this.toolStripLabel4.AutoSize = false;
-            this.toolStripLabel4.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.toolStripLabel4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(22, 22);
-            this.toolStripLabel4.ToolTipText = "Base conversion";
-            // 
-            // baseConvDec
-            // 
-            this.baseConvDec.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.baseConvDec.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.baseConvDec.MaxLength = 10;
-            this.baseConvDec.Name = "baseConvDec";
-            this.baseConvDec.Size = new System.Drawing.Size(70, 25);
-            this.baseConvDec.TextChanged += new System.EventHandler(this.baseConvDec_TextChanged);
-            // 
-            // toolStripLabel5
-            // 
-            this.toolStripLabel5.AutoSize = false;
-            this.toolStripLabel5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(22, 22);
-            this.toolStripLabel5.Text = "$";
-            this.toolStripLabel5.ToolTipText = "Hexadecimal";
-            // 
-            // baseConvHex
-            // 
-            this.baseConvHex.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.baseConvHex.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.baseConvHex.MaxLength = 8;
-            this.baseConvHex.Name = "baseConvHex";
-            this.baseConvHex.Size = new System.Drawing.Size(70, 25);
-            this.baseConvHex.TextChanged += new System.EventHandler(this.baseConvHex_TextChanged);
+            this.ROMOffsets.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ROMOffsets.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.ROMOffsets.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ROMOffsets.Enabled = false;
+            this.ROMOffsets.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ROMOffsets.Location = new System.Drawing.Point(0, 50);
+            this.ROMOffsets.Name = "ROMOffsets";
+            this.ROMOffsets.ReadOnly = true;
+            this.ROMOffsets.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.ROMOffsets.Size = new System.Drawing.Size(63, 485);
+            this.ROMOffsets.TabIndex = 2;
+            this.ROMOffsets.Text = "";
+            this.ROMOffsets.SizeChanged += new System.EventHandler(this.richTextBox_SizeChanged);
+            this.ROMOffsets.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyDown);
+            this.ROMOffsets.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox_KeyUp);
+            this.ROMOffsets.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.richTextBox_PreviewKeyDown);
             // 
             // HexEditor
             // 
@@ -428,7 +439,7 @@
             this.ClientSize = new System.Drawing.Size(505, 550);
             this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.ROMOffsets);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.panel1);
@@ -454,9 +465,9 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripTextBox gotoAddress;
-        private LAZYSHELL.NewRichTextBox richTextBox1;
-        private LAZYSHELL.NewRichTextBox richTextBox2;
-        private LAZYSHELL.NewRichTextBox richTextBox3;
+        private LAZYSHELL.NewRichTextBox ROMOffsets;
+        private LAZYSHELL.NewRichTextBox currentROMData;
+        private LAZYSHELL.NewRichTextBox originalROMData;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label info_value;
         private System.Windows.Forms.Label info_offset;
@@ -481,5 +492,6 @@
         private System.Windows.Forms.ToolStripTextBox baseConvHex;
         private System.Windows.Forms.ToolStripButton viewCurrent;
         private System.Windows.Forms.ToolStripButton viewOriginal;
+        private System.Windows.Forms.ToolStripButton helpTips;
     }
 }

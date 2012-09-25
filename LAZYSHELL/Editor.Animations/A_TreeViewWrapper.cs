@@ -192,6 +192,14 @@ namespace LAZYSHELL.ScriptsEditor
             p.X = 0;
             Do.SetTreeViewScrollPos(treeView, p);
         }
+        public void ExpandAll()
+        {
+            this.treeView.ExpandAll();
+        }
+        public void CollapseAll()
+        {
+            this.treeView.CollapseAll();
+        }
         public void SetSelectedNode(int internalOffset)
         {
             foreach (TreeNode tn in this.treeView.Nodes)

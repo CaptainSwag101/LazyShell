@@ -1361,8 +1361,8 @@ namespace LAZYSHELL
         private void UpdateBattleScriptsFreeSpace()
         {
             int bytesLeft = CalculateBattleScriptsLength();
-            this.BatScrLabel3.Text = " " + bytesLeft.ToString() + " bytes left";
-            this.BatScrLabel3.BackColor = bytesLeft < 0 ? Color.Red : SystemColors.Control;
+            this.labelBytesLeft.Text = " " + bytesLeft.ToString() + " bytes left";
+            this.labelBytesLeft.BackColor = bytesLeft < 0 ? Color.Red : SystemColors.Control;
         }
         private int CalculateBattleScriptsLength()
         {
@@ -1533,7 +1533,7 @@ namespace LAZYSHELL
         {
             BattleScriptCommand bsc = (BattleScriptCommand)e.Node.Tag;
 
-            toolStripTextBox1.Text = BitConverter.ToString(bsc.CommandData);
+            hexText.Text = BitConverter.ToString(bsc.CommandData);
         }
         private void BattleScriptTree_MouseDoubleClick(object sender, MouseEventArgs e)
         {

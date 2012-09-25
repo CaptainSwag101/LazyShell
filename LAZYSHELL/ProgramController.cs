@@ -222,6 +222,10 @@ namespace LAZYSHELL
         {
             App.Undock();
         }
+        public void OpenAll()
+        {
+            App.OpenAll();
+        }
         public void MinimizeAll()
         {
             App.MinimizeAll();

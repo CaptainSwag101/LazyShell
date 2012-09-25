@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraphicEditor));
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBoxColor = new System.Windows.Forms.PictureBox();
             this.panelImageGraphics = new System.Windows.Forms.Panel();
@@ -72,6 +71,8 @@
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.autoUpdate = new System.Windows.Forms.CheckBox();
             this.alwaysOnTop = new System.Windows.Forms.CheckBox();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).BeginInit();
             this.panelImageGraphics.SuspendLayout();
@@ -109,7 +110,6 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelImageGraphics.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panelImageGraphics.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelImageGraphics.Controls.Add(this.contiguous);
             this.panelImageGraphics.Controls.Add(this.panel109);
             this.panelImageGraphics.Controls.Add(this.sizeLabel);
@@ -127,7 +127,7 @@
             this.contiguous.Checked = true;
             this.contiguous.CheckState = System.Windows.Forms.CheckState.Checked;
             this.contiguous.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.contiguous.Location = new System.Drawing.Point(3, 25);
+            this.contiguous.Location = new System.Drawing.Point(5, 28);
             this.contiguous.Name = "contiguous";
             this.contiguous.Size = new System.Drawing.Size(80, 17);
             this.contiguous.TabIndex = 2;
@@ -142,10 +142,11 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel109.AutoScroll = true;
             this.panel109.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel109.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel109.Controls.Add(this.pictureBoxGraphicSet);
-            this.panel109.Location = new System.Drawing.Point(0, 43);
+            this.panel109.Location = new System.Drawing.Point(0, 46);
             this.panel109.Name = "panel109";
-            this.panel109.Size = new System.Drawing.Size(414, 402);
+            this.panel109.Size = new System.Drawing.Size(418, 404);
             this.panel109.TabIndex = 3;
             this.panel109.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel109_Scroll);
             this.panel109.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel109_MouseDown);
@@ -179,7 +180,7 @@
             this.applyBorderToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
             this.contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip.Size = new System.Drawing.Size(153, 142);
+            this.contextMenuStrip.Size = new System.Drawing.Size(142, 120);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // importToolStripMenuItem
@@ -187,7 +188,7 @@
             this.importToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importImage;
             this.importToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.importToolStripMenuItem.Text = "Import...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
@@ -196,7 +197,7 @@
             this.exportToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
             this.exportToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
@@ -205,21 +206,21 @@
             this.saveImageToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
             this.saveImageToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.saveImageToolStripMenuItem.Text = "Save image...";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
             // toolStripSeparator36
             // 
             this.toolStripSeparator36.Name = "toolStripSeparator36";
-            this.toolStripSeparator36.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator36.Size = new System.Drawing.Size(138, 6);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clearToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
@@ -227,28 +228,30 @@
             // 
             this.applyBorderToolStripMenuItem.Enabled = false;
             this.applyBorderToolStripMenuItem.Name = "applyBorderToolStripMenuItem";
-            this.applyBorderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.applyBorderToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.applyBorderToolStripMenuItem.Text = "Apply border";
             // 
             // sizeLabel
             // 
             this.sizeLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.sizeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.sizeLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.sizeLabel.Location = new System.Drawing.Point(0, 446);
+            this.sizeLabel.Location = new System.Drawing.Point(0, 450);
             this.sizeLabel.Name = "sizeLabel";
             this.sizeLabel.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.sizeLabel.Size = new System.Drawing.Size(414, 17);
+            this.sizeLabel.Size = new System.Drawing.Size(418, 17);
             this.sizeLabel.TabIndex = 4;
             this.sizeLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // coordsLabel
             // 
             this.coordsLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.coordsLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.coordsLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.coordsLabel.Location = new System.Drawing.Point(0, 25);
             this.coordsLabel.Name = "coordsLabel";
             this.coordsLabel.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.coordsLabel.Size = new System.Drawing.Size(414, 17);
+            this.coordsLabel.Size = new System.Drawing.Size(418, 21);
             this.coordsLabel.TabIndex = 1;
             this.coordsLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -257,6 +260,8 @@
             this.toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip2.CanOverflow = false;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpTips,
+            this.toolStripSeparator2,
             this.graphicShowGrid,
             this.graphicShowPixelGrid,
             this.toolStripSeparator33,
@@ -277,7 +282,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(414, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(418, 25);
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.TabStop = true;
             this.toolStrip2.Text = "toolStrip2";
@@ -291,7 +296,7 @@
             this.graphicShowGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.graphicShowGrid.Name = "graphicShowGrid";
             this.graphicShowGrid.Size = new System.Drawing.Size(23, 22);
-            this.graphicShowGrid.Text = "Grid";
+            this.graphicShowGrid.Text = "Tile Grid";
             this.graphicShowGrid.Click += new System.EventHandler(this.graphicShowGrid_Click);
             // 
             // graphicShowPixelGrid
@@ -345,7 +350,7 @@
             this.subtileDropper.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.subtileDropper.Name = "subtileDropper";
             this.subtileDropper.Size = new System.Drawing.Size(23, 22);
-            this.subtileDropper.Text = "Choose Color";
+            this.subtileDropper.Text = "Dropper";
             this.subtileDropper.Click += new System.EventHandler(this.subtileDropper_Click);
             // 
             // subtileReplaceColor
@@ -357,7 +362,7 @@
             this.subtileReplaceColor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.subtileReplaceColor.Name = "subtileReplaceColor";
             this.subtileReplaceColor.Size = new System.Drawing.Size(23, 22);
-            this.subtileReplaceColor.Text = "Color Replacer";
+            this.subtileReplaceColor.Text = "Color Replace";
             this.subtileReplaceColor.Click += new System.EventHandler(this.subtileReplaceColor_Click);
             // 
             // subtileFill
@@ -565,6 +570,21 @@
             this.alwaysOnTop.UseVisualStyleBackColor = true;
             this.alwaysOnTop.CheckedChanged += new System.EventHandler(this.alwaysOnTop_CheckedChanged);
             // 
+            // helpTips
+            // 
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.Text = "Help Tips";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // GraphicEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -652,6 +672,8 @@
         private System.Windows.Forms.CheckBox autoUpdate;
         private System.Windows.Forms.CheckBox alwaysOnTop;
         private System.Windows.Forms.ToolStripButton subtileReplaceColor;
+        private System.Windows.Forms.ToolStripButton helpTips;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
     }
 }

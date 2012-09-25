@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BattleScripts));
             this.panel28 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBoxMonster = new System.Windows.Forms.PictureBox();
@@ -89,10 +88,10 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.battlePreview = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.BatScrLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.labelBytesLeft = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.label1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.hexText = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -151,7 +150,7 @@
             this.pictureBoxMonster.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pictureBoxMonster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBoxMonster.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBoxMonster.Location = new System.Drawing.Point(3, 17);
+            this.pictureBoxMonster.Location = new System.Drawing.Point(3, 16);
             this.pictureBoxMonster.Name = "pictureBoxMonster";
             this.pictureBoxMonster.Size = new System.Drawing.Size(256, 256);
             this.pictureBoxMonster.TabIndex = 220;
@@ -910,11 +909,11 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // BatScrLabel3
+            // labelBytesLeft
             // 
-            this.BatScrLabel3.Name = "BatScrLabel3";
-            this.BatScrLabel3.Size = new System.Drawing.Size(52, 22);
-            this.BatScrLabel3.Text = "bytes left";
+            this.labelBytesLeft.Name = "labelBytesLeft";
+            this.labelBytesLeft.Size = new System.Drawing.Size(52, 22);
+            this.labelBytesLeft.Text = "bytes left";
             // 
             // toolStripSeparator7
             // 
@@ -927,14 +926,14 @@
             this.label1.Size = new System.Drawing.Size(29, 22);
             this.label1.Text = "HEX:";
             // 
-            // toolStripTextBox1
+            // hexText
             // 
-            this.toolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.ReadOnly = true;
-            this.toolStripTextBox1.Size = new System.Drawing.Size(70, 25);
-            this.toolStripTextBox1.Text = "00-00-00-00";
+            this.hexText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.hexText.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hexText.Name = "hexText";
+            this.hexText.ReadOnly = true;
+            this.hexText.Size = new System.Drawing.Size(70, 25);
+            this.hexText.Text = "00-00-00-00";
             // 
             // toolStripSeparator2
             // 
@@ -963,10 +962,10 @@
             this.toolStripSeparator6,
             this.battlePreview,
             this.toolStripSeparator1,
-            this.BatScrLabel3,
+            this.labelBytesLeft,
             this.toolStripSeparator7,
             this.label1,
-            this.toolStripTextBox1});
+            this.hexText});
             this.toolStrip2.Location = new System.Drawing.Point(0, 620);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -1105,12 +1104,12 @@
         private System.Windows.Forms.ToolStripButton BatScrCollapseAll;
         private System.Windows.Forms.ToolStripButton battlePreview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripLabel BatScrLabel3;
+        private System.Windows.Forms.ToolStripLabel labelBytesLeft;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel label1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.ToolStripTextBox hexText;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStrip toolStrip2;

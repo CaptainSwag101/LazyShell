@@ -213,7 +213,9 @@ namespace LAZYSHELL
         public static int GetByte(ref string text)
         {
             string number = "";
-            if (text.StartsWith("$"))
+            while (text.StartsWith("\n"))
+                text = text.Remove(0, 1);
+            while (text.StartsWith("$"))
                 text = text.Remove(0, 1);
             number = text.Substring(0, 2);
             text = text.Remove(0, 2);

@@ -212,4 +212,26 @@ namespace LAZYSHELL
             e.Graphics.DrawString(text, font, foreColor, 2, 2);
         }
     }
+    public class NewProgressBar : System.Windows.Forms.ProgressBar
+    {
+        public NewProgressBar()
+        {
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+            this.Text = this.Name;
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            // draw progress fill
+            SolidBrush foreColor = new SolidBrush(this.ForeColor);
+            int width = (int)((double)this.Value / (double)this.Maximum * (double)this.Width);
+            e.Graphics.FillRectangle(foreColor, 0, 0, width, this.Height);
+            // draw text string
+            SizeF sizeF = e.Graphics.MeasureString(this.Text, this.Font);
+            PointF pointF = new PointF(this.Width / 2 - (sizeF.Width / 2), this.Height / 2 - (sizeF.Height / 2));
+            foreColor = new SolidBrush(SystemColors.ControlText);
+            Font font = new Font(this.Parent.Font.FontFamily, 7F, FontStyle.Bold);
+            e.Graphics.DrawString(this.Text, font, foreColor, pointF);
+        }
+    }
 }

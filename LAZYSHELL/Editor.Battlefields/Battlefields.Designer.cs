@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Panel panel444;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Battlefields));
             this.pictureBoxBattlefield = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,8 +92,8 @@
             this.reset = new System.Windows.Forms.ToolStripButton();
             this.clear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.enableHelpTips = new System.Windows.Forms.ToolStripButton();
-            this.showDecHex = new System.Windows.Forms.ToolStripButton();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             panel444 = new System.Windows.Forms.Panel();
@@ -252,6 +251,11 @@
             this.battlefieldNum.AutoSize = false;
             this.battlefieldNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.battlefieldNum.Hexadecimal = false;
+            this.battlefieldNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.battlefieldNum.Location = new System.Drawing.Point(284, 2);
             this.battlefieldNum.Maximum = new decimal(new int[] {
             63,
@@ -866,8 +870,8 @@
             this.reset,
             this.clear,
             this.toolStripSeparator12,
-            this.enableHelpTips,
-            this.showDecHex});
+            this.helpTips,
+            this.baseConvertor});
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -921,7 +925,7 @@
             this.reset.ToolTipText = "Reset";
             this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
-            // toolStripButton1
+            // clear
             // 
             this.clear.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -936,25 +940,25 @@
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
             // 
-            // enableHelpTips
+            // helpTips
             // 
-            this.enableHelpTips.CheckOnClick = true;
-            this.enableHelpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
-            this.enableHelpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.enableHelpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.enableHelpTips.Name = "enableHelpTips";
-            this.enableHelpTips.Size = new System.Drawing.Size(23, 22);
-            this.enableHelpTips.ToolTipText = "Show Help Tips";
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.ToolTipText = "Help Tips";
             // 
-            // showDecHex
+            // baseConvertor
             // 
-            this.showDecHex.CheckOnClick = true;
-            this.showDecHex.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.showDecHex.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showDecHex.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showDecHex.Name = "showDecHex";
-            this.showDecHex.Size = new System.Drawing.Size(23, 22);
-            this.showDecHex.ToolTipText = "Show Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.ToolTipText = "Base Convertor";
             // 
             // toolTip1
             // 
@@ -1001,6 +1005,7 @@
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Battlefields";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -1094,8 +1099,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private ToolStripNumericUpDown battlefieldNum;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripButton enableHelpTips;
-        private System.Windows.Forms.ToolStripButton showDecHex;
+        private System.Windows.Forms.ToolStripButton helpTips;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem importTilesetToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton reset;

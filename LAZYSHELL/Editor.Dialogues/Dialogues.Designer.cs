@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dialogues));
             this.dialogueNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.panelDialogues = new System.Windows.Forms.Panel();
             this.panel60 = new System.Windows.Forms.Panel();
@@ -52,7 +51,7 @@
             this.pageUp = new System.Windows.Forms.ToolStripButton();
             this.pageDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.synchronizeDupes = new System.Windows.Forms.ToolStripButton();
+            this.syncDupes = new System.Windows.Forms.ToolStripButton();
             this.textView = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.freeBytes = new System.Windows.Forms.ToolStripLabel();
@@ -70,10 +69,11 @@
             this.variables = new System.Windows.Forms.ToolStripComboBox();
             this.variablesInsert = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.freeTableBytes = new System.Windows.Forms.ToolStripLabel();
-            this.dctApply = new System.Windows.Forms.Button();
             this.dct19 = new System.Windows.Forms.TextBox();
             this.dct18 = new System.Windows.Forms.TextBox();
             this.dct17 = new System.Windows.Forms.TextBox();
@@ -95,18 +95,19 @@
             this.export = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportBattleDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reset = new System.Windows.Forms.ToolStripButton();
             this.clear = new System.Windows.Forms.ToolStripDropDownButton();
             this.clearDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearBattleDialoguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reset = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.helpTips = new System.Windows.Forms.ToolStripButton();
-            this.showDecHex = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.showDialogues = new System.Windows.Forms.ToolStripButton();
             this.showBattleDialogues = new System.Windows.Forms.ToolStripButton();
             this.showFonts = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.encodeDialogues = new System.ComponentModel.BackgroundWorker();
             this.panel60.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -159,7 +160,7 @@
             this.panelDialogues.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelDialogues.Location = new System.Drawing.Point(244, 25);
             this.panelDialogues.Name = "panelDialogues";
-            this.panelDialogues.Size = new System.Drawing.Size(516, 615);
+            this.panelDialogues.Size = new System.Drawing.Size(426, 615);
             this.panelDialogues.TabIndex = 2;
             // 
             // panel60
@@ -343,7 +344,7 @@
             this.pageUp,
             this.pageDown,
             this.toolStripSeparator1,
-            this.synchronizeDupes,
+            this.syncDupes,
             this.textView,
             this.toolStripSeparator2,
             this.freeBytes});
@@ -381,18 +382,18 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // synchronizeDupes
+            // syncDupes
             // 
-            this.synchronizeDupes.Checked = true;
-            this.synchronizeDupes.CheckOnClick = true;
-            this.synchronizeDupes.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.synchronizeDupes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.synchronizeDupes.Image = global::LAZYSHELL.Properties.Resources.synchronize;
-            this.synchronizeDupes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.synchronizeDupes.Name = "synchronizeDupes";
-            this.synchronizeDupes.Size = new System.Drawing.Size(23, 22);
-            this.synchronizeDupes.ToolTipText = "Synchronize Duplicates";
-            this.synchronizeDupes.CheckedChanged += new System.EventHandler(this.synchronizeDupes_CheckedChanged);
+            this.syncDupes.Checked = true;
+            this.syncDupes.CheckOnClick = true;
+            this.syncDupes.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.syncDupes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.syncDupes.Image = global::LAZYSHELL.Properties.Resources.synchronize;
+            this.syncDupes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.syncDupes.Name = "syncDupes";
+            this.syncDupes.Size = new System.Drawing.Size(23, 22);
+            this.syncDupes.ToolTipText = "Synchronize Duplicates";
+            this.syncDupes.CheckedChanged += new System.EventHandler(this.syncDupes_CheckedChanged);
             // 
             // textView
             // 
@@ -583,8 +584,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.progressBar1);
             this.panel1.Controls.Add(this.toolStrip7);
-            this.panel1.Controls.Add(this.dctApply);
             this.panel1.Controls.Add(this.dct19);
             this.panel1.Controls.Add(this.dct18);
             this.panel1.Controls.Add(this.dct17);
@@ -602,6 +604,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(244, 178);
             this.panel1.TabIndex = 7;
+            this.panel1.Leave += new System.EventHandler(this.panel1_Leave);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(122, 159);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 15;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar1.Location = new System.Drawing.Point(0, 153);
+            this.progressBar1.Maximum = 4096;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(244, 25);
+            this.progressBar1.Step = 16;
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 14;
             // 
             // toolStrip7
             // 
@@ -629,17 +651,6 @@
             this.freeTableBytes.Size = new System.Drawing.Size(88, 22);
             this.freeTableBytes.Text = "(characters left)";
             // 
-            // dctApply
-            // 
-            this.dctApply.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dctApply.Location = new System.Drawing.Point(0, 155);
-            this.dctApply.Name = "dctApply";
-            this.dctApply.Size = new System.Drawing.Size(244, 23);
-            this.dctApply.TabIndex = 13;
-            this.dctApply.Text = "APPLY CHANGES";
-            this.dctApply.UseVisualStyleBackColor = false;
-            this.dctApply.Click += new System.EventHandler(this.dctApply_Click);
-            // 
             // dct19
             // 
             this.dct19.Location = new System.Drawing.Point(122, 131);
@@ -647,6 +658,7 @@
             this.dct19.Size = new System.Drawing.Size(122, 21);
             this.dct19.TabIndex = 12;
             this.dct19.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct19.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct18
             // 
@@ -655,6 +667,7 @@
             this.dct18.Size = new System.Drawing.Size(122, 21);
             this.dct18.TabIndex = 11;
             this.dct18.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct18.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct17
             // 
@@ -663,6 +676,7 @@
             this.dct17.Size = new System.Drawing.Size(122, 21);
             this.dct17.TabIndex = 10;
             this.dct17.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct17.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct16
             // 
@@ -671,6 +685,7 @@
             this.dct16.Size = new System.Drawing.Size(122, 21);
             this.dct16.TabIndex = 9;
             this.dct16.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct16.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct0E
             // 
@@ -679,6 +694,7 @@
             this.dct0E.Size = new System.Drawing.Size(122, 21);
             this.dct0E.TabIndex = 1;
             this.dct0E.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct0E.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct11
             // 
@@ -687,6 +703,7 @@
             this.dct11.Size = new System.Drawing.Size(122, 21);
             this.dct11.TabIndex = 4;
             this.dct11.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct11.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct10
             // 
@@ -695,6 +712,7 @@
             this.dct10.Size = new System.Drawing.Size(122, 21);
             this.dct10.TabIndex = 3;
             this.dct10.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct10.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct0F
             // 
@@ -703,6 +721,7 @@
             this.dct0F.Size = new System.Drawing.Size(122, 21);
             this.dct0F.TabIndex = 2;
             this.dct0F.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct0F.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct12
             // 
@@ -711,6 +730,7 @@
             this.dct12.Size = new System.Drawing.Size(122, 21);
             this.dct12.TabIndex = 5;
             this.dct12.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct12.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct15
             // 
@@ -719,6 +739,7 @@
             this.dct15.Size = new System.Drawing.Size(122, 21);
             this.dct15.TabIndex = 8;
             this.dct15.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct15.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct14
             // 
@@ -727,6 +748,7 @@
             this.dct14.Size = new System.Drawing.Size(122, 21);
             this.dct14.TabIndex = 7;
             this.dct14.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct14.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // dct13
             // 
@@ -735,6 +757,7 @@
             this.dct13.Size = new System.Drawing.Size(122, 21);
             this.dct13.TabIndex = 6;
             this.dct13.TextChanged += new System.EventHandler(this.dct_TextChanged);
+            this.dct13.Leave += new System.EventHandler(this.dct_Leave);
             // 
             // toolStrip3
             // 
@@ -744,11 +767,11 @@
             this.toolStripSeparator4,
             this.import,
             this.export,
-            this.reset,
             this.clear,
+            this.reset,
             this.toolStripSeparator12,
             this.helpTips,
-            this.showDecHex,
+            this.baseConvertor,
             this.toolStripSeparator10,
             this.showDialogues,
             this.showBattleDialogues,
@@ -756,7 +779,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(760, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(670, 25);
             this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -785,7 +808,6 @@
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(29, 22);
-            this.import.ToolTipText = "Import";
             // 
             // importDialoguesToolStripMenuItem
             // 
@@ -815,7 +837,6 @@
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(29, 22);
-            this.export.ToolTipText = "Export";
             // 
             // exportDialoguesToolStripMenuItem
             // 
@@ -835,17 +856,6 @@
             this.exportBattleDialoguesToolStripMenuItem.Text = "Export Battle Dialogues...";
             this.exportBattleDialoguesToolStripMenuItem.Click += new System.EventHandler(this.exportBattleDialoguesToolStripMenuItem_Click);
             // 
-            // reset
-            // 
-            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(23, 22);
-            this.reset.Text = "Reset";
-            this.reset.Click += new System.EventHandler(this.reset_Click);
-            // 
             // clear
             // 
             this.clear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -855,8 +865,7 @@
             this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(26, 22);
-            this.clear.ToolTipText = "Clear";
+            this.clear.Size = new System.Drawing.Size(28, 22);
             // 
             // clearDialoguesToolStripMenuItem
             // 
@@ -876,6 +885,17 @@
             this.clearBattleDialoguesToolStripMenuItem.Text = "Clear Battle Dialogues...";
             this.clearBattleDialoguesToolStripMenuItem.Click += new System.EventHandler(this.clearBattleDialoguesToolStripMenuItem_Click);
             // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.Text = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
@@ -889,17 +909,17 @@
             this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.helpTips.Name = "helpTips";
             this.helpTips.Size = new System.Drawing.Size(23, 22);
-            this.helpTips.ToolTipText = "Show Help Tips";
+            this.helpTips.ToolTipText = "Help Tips";
             // 
-            // showDecHex
+            // baseConvertor
             // 
-            this.showDecHex.CheckOnClick = true;
-            this.showDecHex.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.showDecHex.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showDecHex.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showDecHex.Name = "showDecHex";
-            this.showDecHex.Size = new System.Drawing.Size(23, 22);
-            this.showDecHex.ToolTipText = "Show Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.ToolTipText = "Base Convertor";
             // 
             // toolStripSeparator10
             // 
@@ -950,16 +970,25 @@
             this.toolTip1.Active = false;
             this.toolTip1.IsBalloon = true;
             // 
+            // encodeDialogues
+            // 
+            this.encodeDialogues.WorkerReportsProgress = true;
+            this.encodeDialogues.WorkerSupportsCancellation = true;
+            this.encodeDialogues.DoWork += new System.ComponentModel.DoWorkEventHandler(this.encodeDialogues_DoWork);
+            this.encodeDialogues.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.encodeDialogues_ProgressChanged);
+            this.encodeDialogues.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.encodeDialogues_RunWorkerCompleted);
+            // 
             // Dialogues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 640);
+            this.ClientSize = new System.Drawing.Size(670, 640);
             this.Controls.Add(this.panelDialogues);
             this.Controls.Add(this.panel60);
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Dialogues";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -1050,7 +1079,7 @@
         private System.Windows.Forms.ToolStripMenuItem clearBattleDialoguesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripButton helpTips;
-        private System.Windows.Forms.ToolStripButton showDecHex;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox dct17;
         private System.Windows.Forms.TextBox dct16;
@@ -1062,13 +1091,15 @@
         private System.Windows.Forms.TextBox dct15;
         private System.Windows.Forms.TextBox dct14;
         private System.Windows.Forms.TextBox dct13;
-        private System.Windows.Forms.Button dctApply;
         private System.Windows.Forms.ToolStrip toolStrip7;
         private System.Windows.Forms.ToolStripLabel freeTableBytes;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private System.Windows.Forms.ToolStripButton reset;
-        private System.Windows.Forms.ToolStripButton synchronizeDupes;
+        private System.Windows.Forms.ToolStripButton syncDupes;
         private System.Windows.Forms.TextBox dct19;
         private System.Windows.Forms.TextBox dct18;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label1;
+        private System.ComponentModel.BackgroundWorker encodeDialogues;
     }
 }

@@ -295,7 +295,7 @@
   <data name="keys_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dialog\keys_save.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mapPoint" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="location" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Toggle\mapPoint.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="drumsOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -610,9 +610,6 @@
   <data name="rest8thDotted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Music\rest8thDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mainMiniGames" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\mainMiniGames.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="pauseFrames" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dialog\pauseFrames.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -674,7 +671,7 @@
     <value>..\Resources\Editor\openBattleDialogues.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="scoreWriter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Music\stave.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\scoreWriter.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="clefG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Music\clefG.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -695,7 +692,7 @@
     <value>..\Resources\Music\reverbOn.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="scoreView" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Music\score.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\scoreView.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="signature" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\signature.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -703,8 +700,8 @@
   <data name="exportImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\exportImage.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="openAudio" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Editor\openAudio.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mainAudio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\mainAudio.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rest64th" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Music\rest64th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -878,115 +875,144 @@
     <value>..\Resources\LAZYSHELL_icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CursorDraw" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CursorDraw.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Cursors\CursorDraw.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CursorDropper" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CursorDropper.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Cursors\CursorDropper.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CursorErase" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CursorErase.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Cursors\CursorErase.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CursorFill" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CursorFill.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Cursors\CursorFill.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CursorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CursorTemplate.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Cursors\CursorTemplate.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CursorZoomIn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CursorZoomIn.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Cursors\CursorZoomIn.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CursorZoomOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CursorZoomOut.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Cursors\CursorZoomOut.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="npcAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\npcAdd.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Data\npcAdd.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="npcClone" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\npcClone.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Data\npcClone.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="npcRemove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\npcRemove.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Data\npcRemove.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="note16thDotted" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\note16thdotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\note16thdotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="note32ndDotted" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\note32ndDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\note32ndDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rest16thDotted" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rest16thDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\rest16thDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rest32ndDotted" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rest32ndDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\rest32ndDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="note64thTriplet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\note64thTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\note64thTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rest64thTriplet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rest64thTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\rest64thTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="note32ndTriplet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\note32ndTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\note32ndTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rest32ndTriplet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rest32ndTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\rest32ndTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteHalfTriplet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteHalfTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteHalfTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="restHalfTriplet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\restHalfTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\restHalfTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="noteEmpty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteEmpty.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteEmpty.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteEmptyDotted" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteEmptyDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteEmptyDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteEmptyTriplet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteEmptyTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteEmptyTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteHead" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteHead.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteHead.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteHeadDotted" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteHeadDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteHeadDotted.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteHeadPercussion" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteHeadPercussion.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteHeadPercussion.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteHeadTriplet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteHeadTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteHeadTriplet.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteStemDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteStemDown.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteStemDown.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteStemDown16th" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteStemDown16th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteStemDown16th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteStemDown32nd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteStemDown32nd.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteStemDown32nd.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteStemDown64th" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteStemDown64th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteStemDown64th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteStemDown8th" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteStemDown8th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteStemDown8th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteStemUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteStemUp.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteStemUp.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteStemUp16th" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteStemUp16th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteStemUp16th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteStemUp32nd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteStemUp32nd.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteStemUp32nd.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteStemUp64th" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteStemUp64th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteStemUp64th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noteStemUp8th" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noteStemUp8th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Music\noteStemUp8th.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tieOver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Music\tieOver.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tieUnder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Music\tieUnder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LAZYSHELL_xml" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help\LAZYSHELL_xml.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="invalid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\invalid.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\warning.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LAZYSHELL_xsl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help\LAZYSHELL_xsl.xsl;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="LAZYSHELL_css" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help\LAZYSHELL_css.css;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="mainMiniGames" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\mainMiniGames.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="camera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data\camera.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="main" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Editor\main.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

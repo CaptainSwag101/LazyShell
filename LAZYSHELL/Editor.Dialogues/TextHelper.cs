@@ -13,8 +13,7 @@ namespace LAZYSHELL
         static TextHelper instance = null;
         static readonly object padlock = new object();
         private bool error = false; public bool Error { get { return this.error; } }
-        private Settings settings = Settings.Default;
-        private DialogueTable[] tables { get { return Model.DialogueTables; } }
+        private StringCollection keystrokes = Settings.Default.Keystrokes;
 
         TextHelper()
         {
@@ -50,25 +49,27 @@ namespace LAZYSHELL
         private const string code1A = "memItem"; // SURROUNDED BY {   }
         private const string code1C = "memNum..."; // no idea
 
-        public char[] DecodeText(char[] decode, bool byteView, bool table)
+        public char[] DecodeText(char[] decode, bool byteView, string[] tables)
         {
             ArrayList arrayList = new ArrayList();
             bool lastBrace = true;
-
             for (int i = 0; i < decode.Length; i++) // For every character of text
             {
+                // skip if out of bounds
+                if (decode[i] >= keystrokes.Count)
+                    continue;
                 // if a table
-                if (!table && decode[i] >= 0x0E && decode[i] <= 0x19)
+                if (tables != null && decode[i] >= 0x0E && decode[i] <= 0x19)
                 {
-                    AddCharsToArrayList(arrayList, tables[decode[i] - 0x0E].GetDialogue(byteView).ToCharArray());
+                    AddCharsToArrayList(arrayList, tables[decode[i] - 0x0E].ToCharArray());
                     continue;
                 }
                 #region BYTE VIEW
                 if (byteView) // We are decoding to numbers
                 {
-                    if (settings.Keystrokes[decode[i]] == "") // Is encoded character
+                    if (keystrokes[decode[i]] == "") // Is encoded character
                     {
-                        switch ((byte)decode[i]) // Since the byte is encoded, it musts coorespond to one of these cases
+                        switch ((byte)decode[i]) // Since the byte is encoded, it musts correspond to one of these cases
                         // All case numbers are for decoding to text for the plain text
                         {
                             case 0x08: AddCharsToArrayList(arrayList, code08.ToCharArray()); break;
@@ -78,7 +79,7 @@ namespace LAZYSHELL
                                 if (decode.Length > i + 1)
                                 {
                                     i++;
-                                    for (int j = 0; j < decode[i]; j++)
+                                    for (int a = 0; a < decode[i]; a++)
                                         arrayList.Add(' ');
                                 }
                                 break;
@@ -86,13 +87,10 @@ namespace LAZYSHELL
                             case 0x1C: goto case 0xFF;
                             case 0xFF:
                                 string tem = ((byte)decode[i]).ToString();
-
                                 char[] dec = tem.ToCharArray();
                                 arrayList.Add('[');
-                                for (int z = 0; z < dec.Length; z++)
-                                {
-                                    arrayList.Add(dec[z]);
-                                }
+                                for (int a = 0; a < dec.Length; a++)
+                                    arrayList.Add(dec[a]);
                                 arrayList.Add(']');
                                 if (decode.Length > i + 1)
                                 {
@@ -102,25 +100,22 @@ namespace LAZYSHELL
                                 break;
                             default:
                                 string temp = ((byte)decode[i]).ToString();
-
                                 char[] decoded = temp.ToCharArray();
                                 arrayList.Add('[');
-                                for (int z = 0; z < decoded.Length; z++)
-                                {
-                                    arrayList.Add(decoded[z]);
-                                }
+                                for (int a = 0; a < decoded.Length; a++)
+                                    arrayList.Add(decoded[a]);
                                 arrayList.Add(']');
                                 break;
                         }
                     }
                     else // Not encoded character
-                        arrayList.Add(Convert.ToChar(settings.Keystrokes[decode[i]]));
+                        arrayList.Add(Convert.ToChar(keystrokes[decode[i]]));
                 }
                 #endregion
                 #region TEXT VIEW
                 else // We are decoding to words
                 {
-                    if (settings.Keystrokes[decode[i]] == "") // Current byte is encoded
+                    if (keystrokes[decode[i]] == "") // Current byte is encoded
                     {
                         lastBrace = true;
                         switch ((byte)decode[i])
@@ -189,7 +184,6 @@ namespace LAZYSHELL
                                 arrayList.Add(' ');
                                 i++;
                                 string tem = ((byte)decode[i]).ToString();
-
                                 char[] dec = tem.ToCharArray();
                                 for (int z = 0; z < dec.Length; z++)
                                 {
@@ -208,7 +202,6 @@ namespace LAZYSHELL
                                 arrayList.Add(' ');
                                 i++;
                                 string te = ((byte)decode[i]).ToString();
-
                                 char[] de = te.ToCharArray();
                                 for (int z = 0; z < de.Length; z++)
                                 {
@@ -226,7 +219,7 @@ namespace LAZYSHELL
                             arrayList.Add(']');
                     }
                     else
-                        arrayList.Add(Convert.ToChar(settings.Keystrokes[decode[i]]));
+                        arrayList.Add(Convert.ToChar(keystrokes[decode[i]]));
                 }
                 #endregion
             }
@@ -236,24 +229,23 @@ namespace LAZYSHELL
 
             return decodedStr;
         }
-        public char[] EncodeText(char[] array, bool byteView, bool table)
+        public char[] EncodeText(char[] array, bool byteView, string[] tables)
         {
             bool openQuote = true;
             ArrayList arrayList = new ArrayList();
             char[] backup = array;
-
             for (int i = 0; i < array.Length; i++)
             {
                 // first see if substring of a table
-                if (!table)
+                if (tables != null)
                 {
                     bool cont = false;
                     for (int a = 0; a < 12; a++)
                     {
-                        if (SearchForSubstring(array, i, tables[a].GetDialogue(byteView)))
+                        if (tables[a].Length > 0 && SearchForSubstring(array, i, tables[a]))
                         {
                             arrayList.Add((char)(a + 0x0E));
-                            i += tables[a].DialogueLen - 1;
+                            i += tables[a].Length - 1;
                             cont = true;
                             break;
                         }
@@ -341,7 +333,7 @@ namespace LAZYSHELL
                         }
                     }
                     else
-                        arrayList.Add(StringIndex(settings.Keystrokes, array[i]));
+                        arrayList.Add(StringIndex(keystrokes, array[i]));
                 }
                 #endregion
                 #region TEXT VIEW
@@ -489,7 +481,7 @@ namespace LAZYSHELL
                         }
                     }
                     else
-                        arrayList.Add(StringIndex(settings.Keystrokes, array[i]));
+                        arrayList.Add(StringIndex(keystrokes, array[i]));
                 }
                 #endregion
             }
@@ -548,7 +540,7 @@ namespace LAZYSHELL
             if (toTest >= '\x00' && toTest <= '\x1C') return true;
             if (toTest >= '\x20' && toTest <= '\x5A') return true;
             if (toTest >= '\x5C' && toTest <= '\x9F') return true;
-            foreach (string temp in settings.Keystrokes)
+            foreach (string temp in keystrokes)
                 if (temp != "" && Convert.ToChar(temp) == toTest) return true;
             return false;
         }

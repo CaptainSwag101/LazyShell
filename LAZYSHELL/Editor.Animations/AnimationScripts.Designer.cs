@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnimationScripts));
             this.panelAniControls = new System.Windows.Forms.Panel();
             this.applyAnimation = new System.Windows.Forms.Button();
             this.aniTitleB = new System.Windows.Forms.GroupBox();
@@ -54,17 +53,18 @@
             this.animationScriptTree = new LAZYSHELL.NewTreeView();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.export = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.showDecHex = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.animationCategory = new LAZYSHELL.ToolStripComboBox();
             this.animationName = new LAZYSHELL.ToolStripComboBox();
             this.animationNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.aniMoveUp = new System.Windows.Forms.ToolStripButton();
             this.aniMoveDown = new System.Windows.Forms.ToolStripButton();
+            this.expandAll = new System.Windows.Forms.ToolStripButton();
+            this.collapseAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -86,7 +86,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.aniNumB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aniNumA)).BeginInit();
             this.toolStrip4.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,9 +98,9 @@
             this.panelAniControls.Controls.Add(this.aniTitleA);
             this.panelAniControls.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelAniControls.Enabled = false;
-            this.panelAniControls.Location = new System.Drawing.Point(738, 50);
+            this.panelAniControls.Location = new System.Drawing.Point(468, 25);
             this.panelAniControls.Name = "panelAniControls";
-            this.panelAniControls.Size = new System.Drawing.Size(282, 560);
+            this.panelAniControls.Size = new System.Drawing.Size(282, 585);
             this.panelAniControls.TabIndex = 3;
             // 
             // applyAnimation
@@ -374,26 +373,28 @@
             this.animationScriptTree.HideSelection = false;
             this.animationScriptTree.HotTracking = true;
             this.animationScriptTree.ItemHeight = 16;
-            this.animationScriptTree.Location = new System.Drawing.Point(0, 50);
+            this.animationScriptTree.Location = new System.Drawing.Point(0, 25);
             this.animationScriptTree.Name = "animationScriptTree";
-            this.animationScriptTree.Size = new System.Drawing.Size(738, 560);
+            this.animationScriptTree.Size = new System.Drawing.Size(468, 585);
             this.animationScriptTree.TabIndex = 2;
             this.animationScriptTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.animationScriptTree_AfterSelect);
             this.animationScriptTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.animationScriptTree_KeyDown);
             // 
             // toolStrip4
             // 
-            this.toolStrip4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.save,
-            this.toolStripSeparator3,
             this.export,
-            this.toolStripSeparator4,
-            this.showDecHex});
+            this.helpTips,
+            this.baseConvertor,
+            this.toolStripSeparator3,
+            this.animationCategory,
+            this.animationName,
+            this.animationNum});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip4.Size = new System.Drawing.Size(1020, 25);
+            this.toolStrip4.Size = new System.Drawing.Size(750, 25);
             this.toolStrip4.TabIndex = 0;
             this.toolStrip4.Text = "toolStrip4";
             // 
@@ -407,11 +408,6 @@
             this.save.ToolTipText = "Save";
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
             // export
             // 
             this.export.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -423,45 +419,43 @@
             this.export.ToolTipText = "Dump Animation Text";
             this.export.Click += new System.EventHandler(this.export_Click);
             // 
-            // toolStripSeparator4
+            // helpTips
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.ToolTipText = "Help Tips";
             // 
-            // showDecHex
+            // baseConvertor
             // 
-            this.showDecHex.CheckOnClick = true;
-            this.showDecHex.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.showDecHex.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showDecHex.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showDecHex.Name = "showDecHex";
-            this.showDecHex.Size = new System.Drawing.Size(23, 22);
-            this.showDecHex.ToolTipText = "Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.ToolTipText = "Base Convertor";
             // 
-            // toolStrip1
+            // toolStripSeparator3
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.animationCategory,
-            this.animationName,
-            this.animationNum});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(1020, 25);
-            this.toolStrip1.TabIndex = 1;
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // animationCategory
             // 
             this.animationCategory.DrawMode = System.Windows.Forms.DrawMode.Normal;
             this.animationCategory.DropDownHeight = 106;
             this.animationCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.animationCategory.DropDownWidth = 200;
+            this.animationCategory.DropDownWidth = 160;
             this.animationCategory.ItemHeight = 13;
-            this.animationCategory.Location = new System.Drawing.Point(7, 1);
+            this.animationCategory.Location = new System.Drawing.Point(105, 1);
             this.animationCategory.Name = "animationCategory";
             this.animationCategory.SelectedIndex = -1;
             this.animationCategory.SelectedItem = null;
-            this.animationCategory.Size = new System.Drawing.Size(200, 22);
+            this.animationCategory.Size = new System.Drawing.Size(160, 22);
             this.animationCategory.SelectedIndexChanged += new System.EventHandler(this.animationCategory_SelectedIndexChanged);
             // 
             // animationName
@@ -472,7 +466,7 @@
             this.animationName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.animationName.DropDownWidth = 300;
             this.animationName.ItemHeight = 15;
-            this.animationName.Location = new System.Drawing.Point(207, 1);
+            this.animationName.Location = new System.Drawing.Point(265, 1);
             this.animationName.Name = "animationName";
             this.animationName.SelectedIndex = -1;
             this.animationName.SelectedItem = null;
@@ -484,7 +478,12 @@
             // 
             this.animationNum.AutoSize = false;
             this.animationNum.Hexadecimal = false;
-            this.animationNum.Location = new System.Drawing.Point(367, 2);
+            this.animationNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.animationNum.Location = new System.Drawing.Point(425, 2);
             this.animationNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -512,6 +511,8 @@
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aniMoveUp,
             this.aniMoveDown,
+            this.expandAll,
+            this.collapseAll,
             this.toolStripSeparator1,
             this.toolStripLabel1,
             this.toolStripSeparator2,
@@ -522,7 +523,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 610);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(1020, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(750, 25);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -545,6 +546,28 @@
             this.aniMoveDown.Name = "aniMoveDown";
             this.aniMoveDown.Size = new System.Drawing.Size(23, 22);
             this.aniMoveDown.Click += new System.EventHandler(this.aniMoveDown_Click);
+            // 
+            // expandAll
+            // 
+            this.expandAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.expandAll.Image = global::LAZYSHELL.Properties.Resources.expandAll;
+            this.expandAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.expandAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.expandAll.Name = "expandAll";
+            this.expandAll.Size = new System.Drawing.Size(23, 22);
+            this.expandAll.Text = "Expand Command Tree";
+            this.expandAll.Click += new System.EventHandler(this.expandAll_Click);
+            // 
+            // collapseAll
+            // 
+            this.collapseAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.collapseAll.Image = global::LAZYSHELL.Properties.Resources.collapseAll;
+            this.collapseAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.collapseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.collapseAll.Name = "collapseAll";
+            this.collapseAll.Size = new System.Drawing.Size(23, 22);
+            this.collapseAll.Text = "Collapse Command Tree";
+            this.collapseAll.Click += new System.EventHandler(this.collapseAll_Click);
             // 
             // toolStripSeparator1
             // 
@@ -617,16 +640,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 635);
+            this.ClientSize = new System.Drawing.Size(750, 635);
             this.Controls.Add(this.labelConvertor);
             this.Controls.Add(this.animationScriptTree);
             this.Controls.Add(this.panelAniControls);
             this.Controls.Add(this.toolStrip2);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip4);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "AnimationScripts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -649,8 +672,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.aniNumA)).EndInit();
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -680,7 +701,6 @@
         private LAZYSHELL.NewTreeView animationScriptTree;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton save;
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private LAZYSHELL.ToolStripComboBox animationCategory;
         private LAZYSHELL.ToolStripComboBox animationName;
         private ToolStripNumericUpDown animationNum;
@@ -693,10 +713,8 @@
         private System.Windows.Forms.ToolStripButton emptyAnimationMods;
         private System.Windows.Forms.ToolStripButton applyAnimationMods;
         private System.Windows.Forms.Label labelConvertor;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton showDecHex;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolStripButton export;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton previewer;
@@ -704,5 +722,9 @@
         private System.Windows.Forms.GroupBox aniTitleC;
         private System.Windows.Forms.GroupBox label1;
         private System.Windows.Forms.GroupBox aniTitleA;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton expandAll;
+        private System.Windows.Forms.ToolStripButton collapseAll;
+        private System.Windows.Forms.ToolStripButton helpTips;
     }
 }

@@ -44,22 +44,21 @@ namespace LAZYSHELL
             InitializeComponent();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip4, Keys.F1, helpTips);
-            Do.AddShortcut(toolStrip4, Keys.F2, baseConversion);
+            Do.AddShortcut(toolStrip4, Keys.F2, baseConvertor);
             // create editors
             battleScriptsEditor = new BattleScripts(this);
             battleScriptsEditor.TopLevel = false;
             battleScriptsEditor.Dock = DockStyle.Fill;
             //battleScriptsEditor.SetToolTips(toolTip1);
             hackingToolsWindow = new HackingTools(new Function(RefreshMonsterTab), monsterNum);
-            panel14.Controls.Add(battleScriptsEditor);
+            panel1.Controls.Add(battleScriptsEditor);
             battleScriptsEditor.BringToFront();
             battleScriptsEditor.Visible = true;
 
             toolTip1.InitialDelay = 0;
             InitializeStrings();
             RefreshMonsterTab();
-            SetToolTips(toolTip1);
-            new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             new History(this);
             //
             if (settings.RememberLastIndex)
@@ -181,143 +180,6 @@ namespace LAZYSHELL
             pictureBoxPsychopath.BackColor = Color.FromArgb(fontPaletteDialogue[0]);
             pictureBoxPsychopath.Invalidate();
             MonsterPsychopath_TextChanged(null, null);
-        }
-        private void SetToolTips(ToolTip toolTip1)
-        {
-            this.monsterName.ToolTipText =
-                "Select the monster to edit by name. These are all\n" +
-                "exclusively in-battle properties.";
-            this.monsterNum.ToolTipText =
-                "Set the monster to edit by #. These are all exclusively in-\n" +
-                "battle properties.";
-            this.monsterNameText.ToolTipText =
-                "The monster\'s displayed name when targetted.";
-
-            toolTip1.SetToolTip(this.MonsterValHP,
-                "The monster\'s total hit points.");
-            toolTip1.SetToolTip(this.MonsterValFP,
-                "The monster\'s total flower points.");
-            toolTip1.SetToolTip(this.MonsterValAtk,
-                "The monster\'s attack power, ie. the base damage caused\n" +
-                "by the monster\'s non-magic-based attacks.");
-            toolTip1.SetToolTip(this.MonsterValDef,
-                "The monster\'s defense power, ie. the amount subtracted\n" +
-                "from the base damage of a non-magic-based attack on the\n" +
-                "monster.");
-            toolTip1.SetToolTip(this.MonsterValMgAtk,
-                "The monster\'s magic attack power, ie. the base damage\n" +
-                "caused by the monster\'s magic-based attacks.");
-            toolTip1.SetToolTip(this.MonsterValMgDef,
-                "The monster\'s magic defense power, ie. the amount\n" +
-                "subtracted from the base damage of a non-magic-based\n" +
-                "attack on the monster.");
-            toolTip1.SetToolTip(this.MonsterValSpeed,
-                "The monster\'s speed, ie. the monster will have its turn\n" +
-                "before anyone else with a lower speed.");
-            toolTip1.SetToolTip(this.MonsterValEvd,
-                "The monster\'s evade percent, ie. the probability out of 100\n" +
-                "a non-magic-based attack on the monster will miss. An\n" +
-                "evade% of 100 causes all non-magic-based attacks on the\n" +
-                "monster to miss. An evade% of 0 causes all non-magic-\n" +
-                "based attacks on the monster to hit. An evade% of 50 is a\n" +
-                "50/50 equal chance that a non-magic-based attack on the\n" +
-                "monster will miss or hit.");
-            toolTip1.SetToolTip(this.MonsterValMgEvd,
-                "The monster\'s magic evade percent, ie. the probability out\n" +
-                "of 100 a magic-based attack on the monster will miss. An\n" +
-                "evade% of 100 causes all magic-based attacks on the\n" +
-                "monster to miss. An evade% of 0 causes all magic-based\n" +
-                "attacks on the monster to hit. An evade of 50 is a 50/50\n" +
-                "equal chance that a magic-based attack on the monster will\n" +
-                "miss or hit.");
-
-            toolTip1.SetToolTip(this.MonsterValExp,
-                "The total experience gained from the monster when it is\n" +
-                "defeated. This is divided evenly among all active party\n" +
-                "members, ex. 500 experience points will be divided among\n" +
-                "5 active party members as 100 points each.");
-            toolTip1.SetToolTip(this.MonsterValCoins,
-                "The total coins gained from the monster when it is\n" +
-                "defeated.");
-            toolTip1.SetToolTip(this.ItemWinA,
-                "The item that has only a 5% chance of being won. If the\n" +
-                "5% and 25% items are the same, then there is a 100%\n" +
-                "chance of the item being won, ie. it is always rewarded.");
-            toolTip1.SetToolTip(this.ItemWinB,
-                "The item that has a 25% chance of being won. If the 5%\n" +
-                "and 25% items are the same, then there is a 100% chance\n" +
-                "of the item being won, ie. it is always rewarded.");
-            toolTip1.SetToolTip(this.MonsterYoshiCookie,
-                "The item rewarded from the successful use of a Yoshi\n" +
-                "Cookie on the monster. The probability of a successful use\n" +
-                "is determined by the \"Morph Success\" (see below).");
-
-            toolTip1.SetToolTip(this.MonsterMorphSuccess,
-                "The success rate of the Yoshi Cookie, Lamb's Lure and\n" +
-                "Sheep Attack items. 100% success rate means the item\n" +
-                "always works on the monster, 0% means the item never\n" +
-                "works on the monster.");
-            toolTip1.SetToolTip(this.MonsterCoinSize,
-                "The coin that shows when the monster is defeated. This\n" +
-                "property is ignored if the \"Sprite Behavior\" includes a \"fade-\n" +
-                "out death\".");
-            toolTip1.SetToolTip(this.MonsterEntranceStyle,
-                "The behavior of the monster's initial animated entrance into\n" +
-                "battle. Although it is hardly noticeable, this might offset the\n" +
-                "exact initial coordinates of the monster in the formation by\n" +
-                "a couple of pixels.");
-            toolTip1.SetToolTip(this.MonsterBehavior,
-                "The various behaviors of the monster's sprite in battle.\n" +
-                "These include the sprite animations for the monster's\n" +
-                "death, its floating status, its common attack and defense\n" +
-                "animations, and more.");
-            toolTip1.SetToolTip(this.MonsterSoundStrike,
-                "The sound that plays when the monster does a common\n" +
-                "physical attack. Usually, but not always used.");
-            toolTip1.SetToolTip(this.MonsterSoundOther,
-                "The optional sound that can be used for less common\n" +
-                "physical attacks. These options are categorized by specific\n" +
-                "monsters, due to their limited usage among all monsters.");
-            toolTip1.SetToolTip(this.MonsterValElevation,
-                "The number of 16-pixel units a monster is raised above the\n" +
-                "ground.");
-
-            toolTip1.SetToolTip(this.MonsterEffectsNullify,
-                "The effects that will have no effect if an effect-based\n" +
-                "attack is used on the monster, eg. Poison Gas (Poison),\n" +
-                "Terrorize (Fear), Bad Mushroom (Poison), etc.");
-            toolTip1.SetToolTip(this.MonsterElementsWeakness,
-                "The elements that will double the damage done to the\n" +
-                "monster by an element-based attack. These refer to magic-\n" +
-                "based attacks or items, such as Snowy (Ice) or Fire Bomb\n" +
-                "(Fire), eg. Fire Bomb will normally do 120 damage, but if\n" +
-                "used on a monster with a weakness for Fire it will double it\n" +
-                "to 240.");
-            toolTip1.SetToolTip(this.MonsterElementsNullify,
-                "The elements that will have no effect if an element-based\n" +
-                "attack is used on the monster, eg. Ice Bomb and Snowy will\n" +
-                "have no effect on a monster with a nullification of Ice.");
-            toolTip1.SetToolTip(this.MonsterProperties,
-                "\"Invincible\" will nullify all damage done to the monster, ie.\n" +
-                "all attacks, spells and items used on the monster will yield 0\n" +
-                "damage.\n\n" +
-                "\"Mortality Protection\" will nullify all instant-death attacks\n" +
-                "such as Yoshi Cookie, Lamb's Lure, Geno Whirl, etc.\n\n" +
-                "\"Disable Auto-Death\" is for battle-script purposes. If\n" +
-                "checked, the monster will not be removed or set as\n" +
-                "defeated until manually removed through a battle-script\n" +
-                "command.\n\n" +
-                "\"Share palette\" is only used by the four crystals and its\n" +
-                "actual purpose is unknown.");
-            toolTip1.SetToolTip(this.MonsterFlowerBonus,
-                "The Flower Bonus rewarded when the monster is defeated,\n" +
-                "based on the odds.");
-            toolTip1.SetToolTip(this.MonsterFlowerOdds,
-                "The ratio to 15 that the Flower Bonus will be rewarded\n" +
-                "when the monster is defeated. A value of 0 completely\n" +
-                "disables the flower bonus and a value of 15 indicates a\n" +
-                "100% success rate.");
-
         }
         public void Assemble()
         {
@@ -692,7 +554,10 @@ namespace LAZYSHELL
         }
         private void pauseFrames_Click(object sender, EventArgs e)
         {
-
+            if (byteView)
+                InsertIntoText("[3]");
+            else
+                InsertIntoText("[delayInput]");
         }
         //
         private void panel13_Paint(object sender, PaintEventArgs e)

@@ -25,22 +25,20 @@ namespace LAZYSHELL
             settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
-            Do.AddShortcut(toolStrip3, Keys.F1, enableHelpTips);
-            Do.AddShortcut(toolStrip3, Keys.F2, showDecHex);
+            Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
             // create editors
             formationsEditor = new Formations();
             packsEditor = new FormationPacks(formationsEditor);
             packsEditor.TopLevel = false;
             packsEditor.Dock = DockStyle.Top;
-            packsEditor.SetToolTips(toolTip1);
             panel1.Controls.Add(packsEditor);
             packsEditor.Visible = true;
             formationsEditor.TopLevel = false;
             formationsEditor.Dock = DockStyle.Top;
-            formationsEditor.SetToolTips(toolTip1);
             panel1.Controls.Add(formationsEditor);
             formationsEditor.Visible = true;
-            new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             //
             new History(this);
             if (settings.RememberLastIndex)

@@ -34,20 +34,20 @@
             this.soundType = new System.Windows.Forms.ToolStripComboBox();
             this.trackName = new System.Windows.Forms.ToolStripComboBox();
             this.trackNum = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.importTrack = new System.Windows.Forms.ToolStripMenuItem();
+            this.import = new System.Windows.Forms.ToolStripDropDownButton();
+            this.importSPC = new System.Windows.Forms.ToolStripMenuItem();
             this.importMML = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.exportTrack = new System.Windows.Forms.ToolStripMenuItem();
+            this.export = new System.Windows.Forms.ToolStripDropDownButton();
+            this.exportSPC = new System.Windows.Forms.ToolStripMenuItem();
             this.exportMML = new System.Windows.Forms.ToolStripMenuItem();
             this.clear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.reset = new System.Windows.Forms.ToolStripButton();
-            this.hexViewer = new System.Windows.Forms.ToolStripButton();
+            this.hexEditor = new System.Windows.Forms.ToolStripButton();
             this.openPreviewer = new System.Windows.Forms.ToolStripButton();
-            this.previewAuto = new LAZYSHELL.ToolStripCheckBox();
+            this.autoLaunch = new LAZYSHELL.ToolStripCheckBox();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.scoreView = new System.Windows.Forms.ToolStripButton();
+            this.scoreViewer = new System.Windows.Forms.ToolStripButton();
             this.scoreWriter = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.freeSpace = new System.Windows.Forms.ToolStripLabel();
@@ -84,6 +84,8 @@
             this.clearChannel = new System.Windows.Forms.ToolStripMenuItem();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.findCommandText = new System.Windows.Forms.ToolStripTextBox();
+            this.findCommand = new System.Windows.Forms.ToolStripButton();
             this.labelCommand = new System.Windows.Forms.ToolStripLabel();
             this.labelBits = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
@@ -118,8 +120,6 @@
             this.noteLengthName = new System.Windows.Forms.ComboBox();
             this.noteLengthByte = new System.Windows.Forms.NumericUpDown();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.findCommandText = new System.Windows.Forms.ToolStripTextBox();
-            this.findCommand = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBoxSV = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -130,18 +130,12 @@
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
             this.staffHeightSV = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
             this.timeBeatsSV = new LAZYSHELL.ToolStripNumericUpDown();
             this.timeValueSV = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
             this.noteSpacingSV = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.showRests = new LAZYSHELL.ToolStripCheckBox();
-            this.singleChannelNum = new System.Windows.Forms.NumericUpDown();
-            this.singleChannel = new System.Windows.Forms.RadioButton();
-            this.allChannels = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBoxRV = new System.Windows.Forms.GroupBox();
@@ -182,6 +176,8 @@
             this.wRest16thT = new System.Windows.Forms.ToolStripButton();
             this.wRest32nd = new System.Windows.Forms.ToolStripButton();
             this.wRest64th = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
+            this.wTie = new System.Windows.Forms.ToolStripButton();
             this.wToolStrip1 = new System.Windows.Forms.ToolStrip();
             this.saveScoreFile = new System.Windows.Forms.ToolStripButton();
             this.openScoreFile = new System.Windows.Forms.ToolStripButton();
@@ -193,17 +189,16 @@
             this.wStaffDelete = new System.Windows.Forms.ToolStripButton();
             this.wStaffMoveUp = new System.Windows.Forms.ToolStripButton();
             this.wStaffMoveDown = new System.Windows.Forms.ToolStripButton();
+            this.undo = new System.Windows.Forms.ToolStripButton();
+            this.redo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.staffHeightSW = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.timeBeatsSW = new LAZYSHELL.ToolStripNumericUpDown();
             this.timeValueSW = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.noteSpacingSW = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.clef = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
@@ -261,7 +256,6 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scoreViewPicture)).BeginInit();
             this.toolStrip5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.singleChannelNum)).BeginInit();
             this.groupBoxRV.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -279,16 +273,16 @@
             this.soundType,
             this.trackName,
             this.trackNum,
-            this.toolStripDropDownButton4,
-            this.toolStripDropDownButton3,
+            this.import,
+            this.export,
             this.clear,
             this.toolStripSeparator5,
             this.reset,
-            this.hexViewer,
+            this.hexEditor,
             this.openPreviewer,
-            this.previewAuto,
+            this.autoLaunch,
             this.toolStripSeparator9,
-            this.scoreView,
+            this.scoreViewer,
             this.scoreWriter,
             this.toolStripSeparator4,
             this.freeSpace});
@@ -352,26 +346,26 @@
             0});
             this.trackNum.ValueChanged += new System.EventHandler(this.trackNum_ValueChanged);
             // 
-            // toolStripDropDownButton4
+            // import
             // 
-            this.toolStripDropDownButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importTrack,
+            this.import.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importSPC,
             this.importMML});
-            this.toolStripDropDownButton4.Image = global::LAZYSHELL.Properties.Resources.importData;
-            this.toolStripDropDownButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
-            this.toolStripDropDownButton4.Size = new System.Drawing.Size(27, 22);
+            this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
+            this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.import.Name = "import";
+            this.import.Size = new System.Drawing.Size(27, 22);
             // 
-            // importTrack
+            // importSPC
             // 
-            this.importTrack.Image = global::LAZYSHELL.Properties.Resources.importData;
-            this.importTrack.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.importTrack.Name = "importTrack";
-            this.importTrack.Size = new System.Drawing.Size(141, 24);
-            this.importTrack.Text = "Import SPC...";
-            this.importTrack.Click += new System.EventHandler(this.importTrack_Click);
+            this.importSPC.Image = global::LAZYSHELL.Properties.Resources.importData;
+            this.importSPC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.importSPC.Name = "importSPC";
+            this.importSPC.Size = new System.Drawing.Size(141, 24);
+            this.importSPC.Text = "Import SPC...";
+            this.importSPC.Click += new System.EventHandler(this.importTrack_Click);
             // 
             // importMML
             // 
@@ -382,26 +376,26 @@
             this.importMML.Text = "Import MML...";
             this.importMML.Click += new System.EventHandler(this.importMML_Click);
             // 
-            // toolStripDropDownButton3
+            // export
             // 
-            this.toolStripDropDownButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportTrack,
+            this.export.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportSPC,
             this.exportMML});
-            this.toolStripDropDownButton3.Image = global::LAZYSHELL.Properties.Resources.exportData;
-            this.toolStripDropDownButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
-            this.toolStripDropDownButton3.Size = new System.Drawing.Size(27, 22);
+            this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
+            this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.export.Name = "export";
+            this.export.Size = new System.Drawing.Size(27, 22);
             // 
-            // exportTrack
+            // exportSPC
             // 
-            this.exportTrack.Image = global::LAZYSHELL.Properties.Resources.exportData;
-            this.exportTrack.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.exportTrack.Name = "exportTrack";
-            this.exportTrack.Size = new System.Drawing.Size(139, 24);
-            this.exportTrack.Text = "Export SPC...";
-            this.exportTrack.Click += new System.EventHandler(this.exportTrack_Click);
+            this.exportSPC.Image = global::LAZYSHELL.Properties.Resources.exportData;
+            this.exportSPC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exportSPC.Name = "exportSPC";
+            this.exportSPC.Size = new System.Drawing.Size(139, 24);
+            this.exportSPC.Text = "Export SPC...";
+            this.exportSPC.Click += new System.EventHandler(this.exportTrack_Click);
             // 
             // exportMML
             // 
@@ -439,16 +433,16 @@
             this.reset.Text = "Reset SPC";
             this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
-            // hexViewer
+            // hexEditor
             // 
-            this.hexViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.hexViewer.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
-            this.hexViewer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.hexViewer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.hexViewer.Name = "hexViewer";
-            this.hexViewer.Size = new System.Drawing.Size(23, 22);
-            this.hexViewer.Text = "Hex Editor";
-            this.hexViewer.Click += new System.EventHandler(this.hexViewer_Click);
+            this.hexEditor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hexEditor.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
+            this.hexEditor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.hexEditor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.hexEditor.Name = "hexEditor";
+            this.hexEditor.Size = new System.Drawing.Size(23, 22);
+            this.hexEditor.Text = "Hex Editor";
+            this.hexEditor.Click += new System.EventHandler(this.hexViewer_Click);
             // 
             // openPreviewer
             // 
@@ -461,29 +455,31 @@
             this.openPreviewer.Text = "Preview SPC";
             this.openPreviewer.Click += new System.EventHandler(this.openPreviewer_Click);
             // 
-            // previewAuto
+            // autoLaunch
             // 
-            this.previewAuto.Checked = true;
-            this.previewAuto.Name = "previewAuto";
-            this.previewAuto.Size = new System.Drawing.Size(84, 22);
-            this.previewAuto.Text = "Auto-launch";
+            this.autoLaunch.Checked = true;
+            this.autoLaunch.Margin = new System.Windows.Forms.Padding(2, 2, 0, 0);
+            this.autoLaunch.Name = "autoLaunch";
+            this.autoLaunch.Padding = new System.Windows.Forms.Padding(4, 0, 0, 4);
+            this.autoLaunch.Size = new System.Drawing.Size(88, 23);
+            this.autoLaunch.Text = "Auto-launch";
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
             // 
-            // scoreView
+            // scoreViewer
             // 
-            this.scoreView.CheckOnClick = true;
-            this.scoreView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.scoreView.Image = global::LAZYSHELL.Properties.Resources.scoreView;
-            this.scoreView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.scoreView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.scoreView.Name = "scoreView";
-            this.scoreView.Size = new System.Drawing.Size(23, 22);
-            this.scoreView.Text = "Score View";
-            this.scoreView.Click += new System.EventHandler(this.scoreView_Click);
+            this.scoreViewer.CheckOnClick = true;
+            this.scoreViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.scoreViewer.Image = global::LAZYSHELL.Properties.Resources.scoreView;
+            this.scoreViewer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.scoreViewer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.scoreViewer.Name = "scoreViewer";
+            this.scoreViewer.Size = new System.Drawing.Size(23, 22);
+            this.scoreViewer.Text = "Score Viewer";
+            this.scoreViewer.Click += new System.EventHandler(this.scoreView_Click);
             // 
             // scoreWriter
             // 
@@ -574,7 +570,7 @@
             -2147483648});
             this.echo.Name = "echo";
             this.echo.Size = new System.Drawing.Size(50, 21);
-            this.echo.TabIndex = 6;
+            this.echo.TabIndex = 5;
             this.echo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.echo.ValueChanged += new System.EventHandler(this.echo_ValueChanged);
             // 
@@ -606,7 +602,7 @@
             this.groupBoxPR.Location = new System.Drawing.Point(270, 97);
             this.groupBoxPR.Name = "groupBoxPR";
             this.groupBoxPR.Size = new System.Drawing.Size(266, 376);
-            this.groupBoxPR.TabIndex = 3;
+            this.groupBoxPR.TabIndex = 2;
             this.groupBoxPR.TabStop = false;
             this.groupBoxPR.Text = "Percussives";
             // 
@@ -620,7 +616,7 @@
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(260, 25);
-            this.toolStrip3.TabIndex = 12;
+            this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // newPercussive
@@ -651,7 +647,7 @@
             this.label8.Location = new System.Drawing.Point(135, 186);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(63, 13);
-            this.label8.TabIndex = 9;
+            this.label8.TabIndex = 10;
             this.label8.Text = "Sp. Balance";
             // 
             // label7
@@ -660,7 +656,7 @@
             this.label7.Location = new System.Drawing.Point(135, 164);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 13);
-            this.label7.TabIndex = 7;
+            this.label7.TabIndex = 8;
             this.label7.Text = "Volume";
             // 
             // label4
@@ -669,7 +665,7 @@
             this.label4.Location = new System.Drawing.Point(135, 85);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
-            this.label4.TabIndex = 3;
+            this.label4.TabIndex = 4;
             this.label4.Text = "Instrument";
             // 
             // percussiveName
@@ -680,7 +676,7 @@
             this.percussiveName.Location = new System.Drawing.Point(134, 101);
             this.percussiveName.Name = "percussiveName";
             this.percussiveName.Size = new System.Drawing.Size(126, 21);
-            this.percussiveName.TabIndex = 4;
+            this.percussiveName.TabIndex = 5;
             this.percussiveName.SelectedIndexChanged += new System.EventHandler(this.percussiveName_SelectedIndexChanged);
             // 
             // label6
@@ -689,7 +685,7 @@
             this.label6.Location = new System.Drawing.Point(135, 142);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(30, 13);
-            this.label6.TabIndex = 5;
+            this.label6.TabIndex = 6;
             this.label6.Text = "Pitch";
             // 
             // label5
@@ -698,7 +694,7 @@
             this.label5.Location = new System.Drawing.Point(135, 47);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 13);
-            this.label5.TabIndex = 1;
+            this.label5.TabIndex = 2;
             this.label5.Text = "Pitch Index";
             // 
             // percussiveBalance
@@ -711,7 +707,7 @@
             0});
             this.percussiveBalance.Name = "percussiveBalance";
             this.percussiveBalance.Size = new System.Drawing.Size(58, 21);
-            this.percussiveBalance.TabIndex = 10;
+            this.percussiveBalance.TabIndex = 11;
             this.percussiveBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.percussiveBalance.ValueChanged += new System.EventHandler(this.percussiveBalance_ValueChanged);
             // 
@@ -725,7 +721,7 @@
             0});
             this.percussiveVolume.Name = "percussiveVolume";
             this.percussiveVolume.Size = new System.Drawing.Size(58, 21);
-            this.percussiveVolume.TabIndex = 8;
+            this.percussiveVolume.TabIndex = 9;
             this.percussiveVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.percussiveVolume.ValueChanged += new System.EventHandler(this.percussiveVolume_ValueChanged);
             // 
@@ -735,7 +731,7 @@
             this.percussives.Location = new System.Drawing.Point(6, 45);
             this.percussives.Name = "percussives";
             this.percussives.Size = new System.Drawing.Size(123, 160);
-            this.percussives.TabIndex = 0;
+            this.percussives.TabIndex = 1;
             this.percussives.SelectedIndexChanged += new System.EventHandler(this.percussives_SelectedIndexChanged);
             // 
             // percussivePitch
@@ -745,7 +741,7 @@
             this.percussivePitch.Location = new System.Drawing.Point(202, 139);
             this.percussivePitch.Name = "percussivePitch";
             this.percussivePitch.Size = new System.Drawing.Size(58, 21);
-            this.percussivePitch.TabIndex = 11;
+            this.percussivePitch.TabIndex = 7;
             this.percussivePitch.SelectedIndexChanged += new System.EventHandler(this.percussivePitch_SelectedIndexChanged);
             // 
             // percussivePitchIndex
@@ -768,7 +764,7 @@
             this.percussivePitchIndex.Location = new System.Drawing.Point(202, 45);
             this.percussivePitchIndex.Name = "percussivePitchIndex";
             this.percussivePitchIndex.Size = new System.Drawing.Size(58, 21);
-            this.percussivePitchIndex.TabIndex = 11;
+            this.percussivePitchIndex.TabIndex = 3;
             this.percussivePitchIndex.SelectedIndexChanged += new System.EventHandler(this.percussivePitchIndex_SelectedIndexChanged);
             // 
             // groupBoxI
@@ -780,7 +776,7 @@
             this.groupBoxI.Location = new System.Drawing.Point(0, 0);
             this.groupBoxI.Name = "groupBoxI";
             this.groupBoxI.Size = new System.Drawing.Size(264, 473);
-            this.groupBoxI.TabIndex = 1;
+            this.groupBoxI.TabIndex = 0;
             this.groupBoxI.TabStop = false;
             this.groupBoxI.Text = "Instruments";
             // 
@@ -795,7 +791,7 @@
             this.groupBoxCT.Location = new System.Drawing.Point(542, 0);
             this.groupBoxCT.Name = "groupBoxCT";
             this.groupBoxCT.Size = new System.Drawing.Size(371, 473);
-            this.groupBoxCT.TabIndex = 4;
+            this.groupBoxCT.TabIndex = 3;
             this.groupBoxCT.TabStop = false;
             this.groupBoxCT.Text = "Channel Tracks";
             // 
@@ -811,7 +807,7 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(30, 3, 3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(343, 320);
-            this.panel1.TabIndex = 0;
+            this.panel1.TabIndex = 1;
             // 
             // channelTracks
             // 
@@ -890,6 +886,8 @@
             this.toolStrip4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findCommandText,
+            this.findCommand,
             this.labelCommand,
             this.toolStripSeparator1,
             this.labelBits,
@@ -899,7 +897,29 @@
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip4.Size = new System.Drawing.Size(365, 25);
-            this.toolStrip4.TabIndex = 3;
+            this.toolStrip4.TabIndex = 2;
+            // 
+            // findCommandText
+            // 
+            this.findCommandText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.findCommandText.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.findCommandText.MaxLength = 2;
+            this.findCommandText.Name = "findCommandText";
+            this.findCommandText.Size = new System.Drawing.Size(30, 25);
+            this.findCommandText.Visible = false;
+            this.findCommandText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.findCommandText_KeyDown);
+            // 
+            // findCommand
+            // 
+            this.findCommand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.findCommand.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.findCommand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.findCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.findCommand.Name = "findCommand";
+            this.findCommand.Size = new System.Drawing.Size(23, 22);
+            this.findCommand.Text = "Find command";
+            this.findCommand.Visible = false;
+            this.findCommand.Click += new System.EventHandler(this.findCommand_Click);
             // 
             // labelCommand
             // 
@@ -941,7 +961,7 @@
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(365, 25);
-            this.toolStrip2.TabIndex = 1;
+            this.toolStrip2.TabIndex = 0;
             // 
             // newCommands
             // 
@@ -1058,7 +1078,7 @@
             this.panelParameters.Location = new System.Drawing.Point(0, 0);
             this.panelParameters.Name = "panelParameters";
             this.panelParameters.Size = new System.Drawing.Size(365, 83);
-            this.panelParameters.TabIndex = 1;
+            this.panelParameters.TabIndex = 0;
             // 
             // labelOpcode1
             // 
@@ -1066,7 +1086,7 @@
             this.labelOpcode1.Location = new System.Drawing.Point(6, 9);
             this.labelOpcode1.Name = "labelOpcode1";
             this.labelOpcode1.Size = new System.Drawing.Size(44, 13);
-            this.labelOpcode1.TabIndex = 20;
+            this.labelOpcode1.TabIndex = 0;
             this.labelOpcode1.Text = "Opcode";
             // 
             // labelParameter3
@@ -1075,7 +1095,7 @@
             this.labelParameter3.Location = new System.Drawing.Point(121, 59);
             this.labelParameter3.Name = "labelParameter3";
             this.labelParameter3.Size = new System.Drawing.Size(66, 13);
-            this.labelParameter3.TabIndex = 21;
+            this.labelParameter3.TabIndex = 6;
             this.labelParameter3.Text = "Parameter 3";
             // 
             // labelParameter2
@@ -1084,7 +1104,7 @@
             this.labelParameter2.Location = new System.Drawing.Point(121, 34);
             this.labelParameter2.Name = "labelParameter2";
             this.labelParameter2.Size = new System.Drawing.Size(66, 13);
-            this.labelParameter2.TabIndex = 21;
+            this.labelParameter2.TabIndex = 4;
             this.labelParameter2.Text = "Parameter 2";
             // 
             // parameterByte3
@@ -1098,7 +1118,7 @@
             0});
             this.parameterByte3.Name = "parameterByte3";
             this.parameterByte3.Size = new System.Drawing.Size(124, 21);
-            this.parameterByte3.TabIndex = 3;
+            this.parameterByte3.TabIndex = 7;
             this.parameterByte3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.parameterByte3.ValueChanged += new System.EventHandler(this.parameterByte3_ValueChanged);
             // 
@@ -1108,7 +1128,7 @@
             this.labelParameter1.Location = new System.Drawing.Point(121, 9);
             this.labelParameter1.Name = "labelParameter1";
             this.labelParameter1.Size = new System.Drawing.Size(66, 13);
-            this.labelParameter1.TabIndex = 20;
+            this.labelParameter1.TabIndex = 2;
             this.labelParameter1.Text = "Parameter 1";
             // 
             // opcodeByte1
@@ -1122,7 +1142,7 @@
             0});
             this.opcodeByte1.Name = "opcodeByte1";
             this.opcodeByte1.Size = new System.Drawing.Size(50, 21);
-            this.opcodeByte1.TabIndex = 0;
+            this.opcodeByte1.TabIndex = 1;
             this.opcodeByte1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.opcodeByte1.ValueChanged += new System.EventHandler(this.opcodeByte1_ValueChanged);
             // 
@@ -1137,7 +1157,7 @@
             0});
             this.parameterByte2.Name = "parameterByte2";
             this.parameterByte2.Size = new System.Drawing.Size(124, 21);
-            this.parameterByte2.TabIndex = 2;
+            this.parameterByte2.TabIndex = 5;
             this.parameterByte2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.parameterByte2.ValueChanged += new System.EventHandler(this.parameterByte2_ValueChanged);
             // 
@@ -1152,7 +1172,7 @@
             0});
             this.parameterByte1.Name = "parameterByte1";
             this.parameterByte1.Size = new System.Drawing.Size(124, 21);
-            this.parameterByte1.TabIndex = 1;
+            this.parameterByte1.TabIndex = 3;
             this.parameterByte1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.parameterByte1.ValueChanged += new System.EventHandler(this.parameterByte1_ValueChanged);
             // 
@@ -1238,7 +1258,7 @@
             "A#",
             "B",
             "Rest",
-            "Hold"});
+            "Tie"});
             this.noteNames.Location = new System.Drawing.Point(46, 6);
             this.noteNames.Name = "noteNames";
             this.noteNames.Size = new System.Drawing.Size(61, 21);
@@ -1287,26 +1307,6 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // findCommandText
-            // 
-            this.findCommandText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.findCommandText.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.findCommandText.MaxLength = 2;
-            this.findCommandText.Name = "findCommandText";
-            this.findCommandText.Size = new System.Drawing.Size(30, 25);
-            this.findCommandText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.findCommandText_KeyDown);
-            // 
-            // findCommand
-            // 
-            this.findCommand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.findCommand.Image = global::LAZYSHELL.Properties.Resources.search;
-            this.findCommand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.findCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.findCommand.Name = "findCommand";
-            this.findCommand.Size = new System.Drawing.Size(23, 22);
-            this.findCommand.Text = "Find command";
-            this.findCommand.Click += new System.EventHandler(this.findCommand_Click);
             // 
             // toolStripSeparator2
             // 
@@ -1396,20 +1396,17 @@
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel6,
             this.staffHeightSV,
-            this.toolStripSeparator19,
             this.toolStripLabel7,
             this.timeBeatsSV,
             this.timeValueSV,
-            this.toolStripSeparator20,
             this.toolStripLabel8,
             this.noteSpacingSV,
-            this.toolStripSeparator21,
             this.showRests});
             this.toolStrip5.Location = new System.Drawing.Point(3, 17);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip5.Size = new System.Drawing.Size(530, 25);
-            this.toolStrip5.TabIndex = 18;
+            this.toolStrip5.TabIndex = 0;
             this.toolStrip5.Text = "toolStrip5";
             // 
             // toolStripLabel6
@@ -1449,16 +1446,11 @@
             0});
             this.staffHeightSV.ValueChanged += new System.EventHandler(this.staffHeightChannel_ValueChanged);
             // 
-            // toolStripSeparator19
-            // 
-            this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripLabel7
             // 
             this.toolStripLabel7.Name = "toolStripLabel7";
-            this.toolStripLabel7.Size = new System.Drawing.Size(30, 22);
-            this.toolStripLabel7.Text = "Time";
+            this.toolStripLabel7.Size = new System.Drawing.Size(33, 22);
+            this.toolStripLabel7.Text = " Time";
             // 
             // timeBeatsSV
             // 
@@ -1470,7 +1462,7 @@
             0,
             0,
             0});
-            this.timeBeatsSV.Location = new System.Drawing.Point(153, 2);
+            this.timeBeatsSV.Location = new System.Drawing.Point(150, 2);
             this.timeBeatsSV.Maximum = new decimal(new int[] {
             64,
             0,
@@ -1501,7 +1493,7 @@
             0,
             0,
             0});
-            this.timeValueSV.Location = new System.Drawing.Point(193, 2);
+            this.timeValueSV.Location = new System.Drawing.Point(190, 2);
             this.timeValueSV.Maximum = new decimal(new int[] {
             64,
             0,
@@ -1522,16 +1514,11 @@
             0});
             this.timeValueSV.ValueChanged += new System.EventHandler(this.time_ValueChanged);
             // 
-            // toolStripSeparator20
-            // 
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripLabel8
             // 
             this.toolStripLabel8.Name = "toolStripLabel8";
-            this.toolStripLabel8.Size = new System.Drawing.Size(84, 22);
-            this.toolStripLabel8.Text = "Note Spacing %";
+            this.toolStripLabel8.Size = new System.Drawing.Size(87, 22);
+            this.toolStripLabel8.Text = " Note Spacing %";
             // 
             // noteSpacingSV
             // 
@@ -1543,7 +1530,7 @@
             0,
             0,
             0});
-            this.noteSpacingSV.Location = new System.Drawing.Point(323, 2);
+            this.noteSpacingSV.Location = new System.Drawing.Point(317, 2);
             this.noteSpacingSV.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1564,60 +1551,15 @@
             0});
             this.noteSpacingSV.ValueChanged += new System.EventHandler(this.noteSpacing_ValueChanged);
             // 
-            // toolStripSeparator21
-            // 
-            this.toolStripSeparator21.Name = "toolStripSeparator21";
-            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 25);
-            // 
             // showRests
             // 
             this.showRests.Checked = true;
+            this.showRests.Margin = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.showRests.Name = "showRests";
-            this.showRests.Size = new System.Drawing.Size(80, 22);
+            this.showRests.Padding = new System.Windows.Forms.Padding(4, 0, 0, 4);
+            this.showRests.Size = new System.Drawing.Size(84, 23);
             this.showRests.Text = "Show Rests";
             this.showRests.CheckedChanged += new System.EventHandler(this.showRests_CheckedChanged);
-            // 
-            // singleChannelNum
-            // 
-            this.singleChannelNum.Enabled = false;
-            this.singleChannelNum.Location = new System.Drawing.Point(273, 501);
-            this.singleChannelNum.Maximum = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-            this.singleChannelNum.Name = "singleChannelNum";
-            this.singleChannelNum.Size = new System.Drawing.Size(47, 21);
-            this.singleChannelNum.TabIndex = 2;
-            this.singleChannelNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.singleChannelNum.Visible = false;
-            this.singleChannelNum.ValueChanged += new System.EventHandler(this.singleChannelNum_ValueChanged);
-            // 
-            // singleChannel
-            // 
-            this.singleChannel.AutoSize = true;
-            this.singleChannel.Location = new System.Drawing.Point(177, 501);
-            this.singleChannel.Name = "singleChannel";
-            this.singleChannel.Size = new System.Drawing.Size(100, 17);
-            this.singleChannel.TabIndex = 1;
-            this.singleChannel.Text = "Single channel: ";
-            this.singleChannel.UseVisualStyleBackColor = true;
-            this.singleChannel.Visible = false;
-            this.singleChannel.CheckedChanged += new System.EventHandler(this.singleChannel_CheckedChanged);
-            // 
-            // allChannels
-            // 
-            this.allChannels.AutoSize = true;
-            this.allChannels.Checked = true;
-            this.allChannels.Location = new System.Drawing.Point(94, 501);
-            this.allChannels.Name = "allChannels";
-            this.allChannels.Size = new System.Drawing.Size(81, 17);
-            this.allChannels.TabIndex = 0;
-            this.allChannels.TabStop = true;
-            this.allChannels.Text = "All channels";
-            this.allChannels.UseVisualStyleBackColor = true;
-            this.allChannels.Visible = false;
-            this.allChannels.CheckedChanged += new System.EventHandler(this.allChannels_CheckedChanged);
             // 
             // label9
             // 
@@ -1625,7 +1567,7 @@
             this.label9.Location = new System.Drawing.Point(6, 66);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(67, 13);
-            this.label9.TabIndex = 5;
+            this.label9.TabIndex = 4;
             this.label9.Text = "Echo Volume";
             // 
             // label10
@@ -1649,7 +1591,7 @@
             this.groupBoxRV.Location = new System.Drawing.Point(270, 0);
             this.groupBoxRV.Name = "groupBoxRV";
             this.groupBoxRV.Size = new System.Drawing.Size(266, 91);
-            this.groupBoxRV.TabIndex = 2;
+            this.groupBoxRV.TabIndex = 1;
             this.groupBoxRV.TabStop = false;
             this.groupBoxRV.Text = "Reverberation";
             // 
@@ -1688,7 +1630,7 @@
             this.panel4.Location = new System.Drawing.Point(3, 67);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(907, 387);
-            this.panel4.TabIndex = 1;
+            this.panel4.TabIndex = 2;
             // 
             // scoreWriterPicture
             // 
@@ -1749,12 +1691,14 @@
             this.wRest16th,
             this.wRest16thT,
             this.wRest32nd,
-            this.wRest64th});
+            this.wRest64th,
+            this.toolStripSeparator22,
+            this.wTie});
             this.wToolStrip2.Location = new System.Drawing.Point(3, 42);
             this.wToolStrip2.Name = "wToolStrip2";
             this.wToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.wToolStrip2.Size = new System.Drawing.Size(907, 25);
-            this.wToolStrip2.TabIndex = 2;
+            this.wToolStrip2.TabIndex = 1;
             // 
             // wErase
             // 
@@ -2081,6 +2025,22 @@
             this.wRest64th.Text = "64th Rest";
             this.wRest64th.Click += new System.EventHandler(this.writer_Click);
             // 
+            // toolStripSeparator22
+            // 
+            this.toolStripSeparator22.Name = "toolStripSeparator22";
+            this.toolStripSeparator22.Size = new System.Drawing.Size(6, 25);
+            // 
+            // wTie
+            // 
+            this.wTie.CheckOnClick = true;
+            this.wTie.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wTie.Image = ((System.Drawing.Image)(resources.GetObject("wTie.Image")));
+            this.wTie.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wTie.Name = "wTie";
+            this.wTie.Size = new System.Drawing.Size(23, 22);
+            this.wTie.Text = "Tie";
+            this.wTie.Click += new System.EventHandler(this.wTie_Click);
+            // 
             // wToolStrip1
             // 
             this.wToolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2093,17 +2053,16 @@
             this.wStaffDelete,
             this.wStaffMoveUp,
             this.wStaffMoveDown,
+            this.undo,
+            this.redo,
             this.toolStripSeparator11,
             this.toolStripLabel3,
             this.staffHeightSW,
-            this.toolStripSeparator17,
             this.toolStripLabel4,
             this.timeBeatsSW,
             this.timeValueSW,
-            this.toolStripSeparator8,
             this.toolStripLabel5,
             this.noteSpacingSW,
-            this.toolStripSeparator18,
             this.toolStripLabel1,
             this.clef,
             this.toolStripSeparator14,
@@ -2217,6 +2176,30 @@
             this.wStaffMoveDown.Text = "Move Staff Down";
             this.wStaffMoveDown.Click += new System.EventHandler(this.wStaffMoveDown_Click);
             // 
+            // undo
+            // 
+            this.undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.undo.Enabled = false;
+            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo_small;
+            this.undo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.undo.Name = "undo";
+            this.undo.Size = new System.Drawing.Size(23, 22);
+            this.undo.Text = "Undo";
+            this.undo.Click += new System.EventHandler(this.undo_Click);
+            // 
+            // redo
+            // 
+            this.redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.redo.Enabled = false;
+            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo_small;
+            this.redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.redo.Name = "redo";
+            this.redo.Size = new System.Drawing.Size(23, 22);
+            this.redo.Text = "Redo";
+            this.redo.Click += new System.EventHandler(this.redo_Click);
+            // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
@@ -2238,7 +2221,7 @@
             0,
             0,
             0});
-            this.staffHeightSW.Location = new System.Drawing.Point(251, 2);
+            this.staffHeightSW.Location = new System.Drawing.Point(297, 2);
             this.staffHeightSW.Maximum = new decimal(new int[] {
             512,
             0,
@@ -2259,16 +2242,11 @@
             0});
             this.staffHeightSW.ValueChanged += new System.EventHandler(this.staffHeight_ValueChanged);
             // 
-            // toolStripSeparator17
-            // 
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripLabel4
             // 
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(30, 22);
-            this.toolStripLabel4.Text = "Time";
+            this.toolStripLabel4.Size = new System.Drawing.Size(33, 22);
+            this.toolStripLabel4.Text = " Time";
             // 
             // timeBeatsSW
             // 
@@ -2280,7 +2258,7 @@
             0,
             0,
             0});
-            this.timeBeatsSW.Location = new System.Drawing.Point(337, 2);
+            this.timeBeatsSW.Location = new System.Drawing.Point(380, 2);
             this.timeBeatsSW.Maximum = new decimal(new int[] {
             64,
             0,
@@ -2311,7 +2289,7 @@
             0,
             0,
             0});
-            this.timeValueSW.Location = new System.Drawing.Point(377, 2);
+            this.timeValueSW.Location = new System.Drawing.Point(420, 2);
             this.timeValueSW.Maximum = new decimal(new int[] {
             64,
             0,
@@ -2332,16 +2310,11 @@
             0});
             this.timeValueSW.ValueChanged += new System.EventHandler(this.time_ValueChanged);
             // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripLabel5
             // 
             this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(84, 22);
-            this.toolStripLabel5.Text = "Note Spacing %";
+            this.toolStripLabel5.Size = new System.Drawing.Size(87, 22);
+            this.toolStripLabel5.Text = " Note Spacing %";
             // 
             // noteSpacingSW
             // 
@@ -2353,7 +2326,7 @@
             0,
             0,
             0});
-            this.noteSpacingSW.Location = new System.Drawing.Point(507, 2);
+            this.noteSpacingSW.Location = new System.Drawing.Point(547, 2);
             this.noteSpacingSW.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -2374,17 +2347,12 @@
             0});
             this.noteSpacingSW.ValueChanged += new System.EventHandler(this.noteSpacingSW_ValueChanged);
             // 
-            // toolStripSeparator18
-            // 
-            this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Enabled = false;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(25, 22);
-            this.toolStripLabel1.Text = "Clef";
+            this.toolStripLabel1.Size = new System.Drawing.Size(28, 22);
+            this.toolStripLabel1.Text = " Clef";
             // 
             // clef
             // 
@@ -2670,11 +2638,11 @@
             this.panelSPC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelSPC.Controls.Add(this.groupBoxSV);
             this.panelSPC.Controls.Add(this.groupBoxI);
             this.panelSPC.Controls.Add(this.groupBoxRV);
             this.panelSPC.Controls.Add(this.groupBoxPR);
             this.panelSPC.Controls.Add(this.groupBoxCT);
+            this.panelSPC.Controls.Add(this.groupBoxSV);
             this.panelSPC.Location = new System.Drawing.Point(12, 28);
             this.panelSPC.Name = "panelSPC";
             this.panelSPC.Size = new System.Drawing.Size(913, 473);
@@ -2734,9 +2702,6 @@
             this.ClientSize = new System.Drawing.Size(937, 513);
             this.ControlBox = false;
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.singleChannelNum);
-            this.Controls.Add(this.allChannels);
-            this.Controls.Add(this.singleChannel);
             this.Controls.Add(this.panelSPC);
             this.Controls.Add(this.groupBox6);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2781,7 +2746,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.scoreViewPicture)).EndInit();
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.singleChannelNum)).EndInit();
             this.groupBoxRV.ResumeLayout(false);
             this.groupBoxRV.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -2822,7 +2786,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ToolStripButton hexViewer;
+        private System.Windows.Forms.ToolStripButton hexEditor;
         private System.Windows.Forms.GroupBox groupBoxCT;
         private System.Windows.Forms.Label labelParameter2;
         private System.Windows.Forms.Label labelParameter1;
@@ -2836,17 +2800,14 @@
         private System.Windows.Forms.ToolStripComboBox soundType;
         private System.Windows.Forms.Label labelOpcode1;
         private System.Windows.Forms.NumericUpDown opcodeByte1;
-        private ToolStripCheckBox previewAuto;
+        private ToolStripCheckBox autoLaunch;
         private System.Windows.Forms.GroupBox groupBoxSV;
-        private System.Windows.Forms.NumericUpDown singleChannelNum;
-        private System.Windows.Forms.RadioButton singleChannel;
-        private System.Windows.Forms.RadioButton allChannels;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox scoreViewPicture;
         private System.Windows.Forms.HScrollBar hScrollBar2;
         private System.Windows.Forms.Label labelStaffItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton scoreView;
+        private System.Windows.Forms.ToolStripButton scoreViewer;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
@@ -2906,7 +2867,6 @@
         private System.Windows.Forms.ToolStripButton wNote16thT;
         private System.Windows.Forms.ToolStripButton wNote32nd;
         private System.Windows.Forms.ToolStripButton wNote64th;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripButton wRestWhole;
         private System.Windows.Forms.ToolStripButton wRestHalfD;
         private System.Windows.Forms.ToolStripButton wRestHalf;
@@ -2970,11 +2930,11 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem exportSPCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportMMLToolStripMenuItem;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton4;
-        private System.Windows.Forms.ToolStripMenuItem importTrack;
+        private System.Windows.Forms.ToolStripDropDownButton import;
+        private System.Windows.Forms.ToolStripMenuItem importSPC;
         private System.Windows.Forms.ToolStripMenuItem importMML;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
-        private System.Windows.Forms.ToolStripMenuItem exportTrack;
+        private System.Windows.Forms.ToolStripDropDownButton export;
+        private System.Windows.Forms.ToolStripMenuItem exportSPC;
         private System.Windows.Forms.ToolStripMenuItem exportMML;
         private System.Windows.Forms.ToolStripComboBox newCommands;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
@@ -2983,10 +2943,8 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private ToolStripNumericUpDown timeBeatsSW;
         private ToolStripNumericUpDown timeValueSW;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
         private ToolStripNumericUpDown noteSpacingSW;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton5;
         private System.Windows.Forms.ToolStripMenuItem exportScoreFiles;
         private System.Windows.Forms.ToolStripMenuItem exportStaffsMML;
@@ -2999,9 +2957,10 @@
         private ToolStripNumericUpDown timeValueSV;
         private System.Windows.Forms.ToolStripLabel toolStripLabel8;
         private ToolStripNumericUpDown noteSpacingSV;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private ToolStripCheckBox showRests;
+        private System.Windows.Forms.ToolStripButton undo;
+        private System.Windows.Forms.ToolStripButton redo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
+        private System.Windows.Forms.ToolStripButton wTie;
     }
 }

@@ -19,6 +19,7 @@ namespace LAZYSHELL
         {
             InitializeComponent();
             Do.AddShortcut(toolStrip1, Keys.Control | Keys.S, new EventHandler(save_Click));
+            Do.AddShortcut(toolStrip1, Keys.F1, helpTips);
             // create editors
             spcEditor = new SPCEditor();
             spcEditor.TopLevel = false;
@@ -33,6 +34,7 @@ namespace LAZYSHELL
             //sampleEditor.SetToolTips(toolTip1);
             panel1.Controls.Add(sampleEditor);
             sampleEditor.Visible = true;
+            new ToolTipLabel(this, null, helpTips);
             new History(this);
             if (Settings.Default.RememberLastIndex)
             {

@@ -74,7 +74,7 @@ namespace LAZYSHELL
                 bytes[i] = new NumericUpDown();
                 bytes[i].Location = new Point(6, i * 21 + 20);
                 bytes[i].Maximum = new decimal(new int[] { 255, 0, 0, 0 });
-                bytes[i].Name = "bytes" + i;
+                bytes[i].Name = "bytes";
                 bytes[i].Size = new Size(44, 21);
                 bytes[i].TabIndex = 0;
                 bytes[i].Tag = i;
@@ -92,7 +92,7 @@ namespace LAZYSHELL
                 names[i].IntegralHeight = false;
                 names[i].ItemHeight = 15;
                 names[i].Location = new Point(50, i * 21 + 20);
-                names[i].Name = "names" + i;
+                names[i].Name = "names";
                 names[i].Size = new Size(118, 21);
                 names[i].Tag = i;
                 names[i].DrawItem += new DrawItemEventHandler(this.monsterName_DrawItem);
@@ -103,7 +103,7 @@ namespace LAZYSHELL
                 coordX[i] = new NumericUpDown();
                 coordX[i].Location = new Point(168, i * 21 + 20);
                 coordX[i].Maximum = new decimal(new int[] { 255, 0, 0, 0 });
-                coordX[i].Name = "coordX" + i;
+                coordX[i].Name = "coordX";
                 coordX[i].Size = new Size(44, 21);
                 coordX[i].Tag = i;
                 coordX[i].TextAlign = HorizontalAlignment.Right;
@@ -114,7 +114,7 @@ namespace LAZYSHELL
                 coordY[i] = new NumericUpDown();
                 coordY[i].Location = new Point(214, i * 21 + 20);
                 coordY[i].Maximum = new decimal(new int[] { 255, 0, 0, 0 });
-                coordY[i].Name = "coordY" + i;
+                coordY[i].Name = "coordY";
                 coordY[i].Size = new Size(44, 21);
                 coordY[i].Tag = i;
                 coordY[i].TextAlign = HorizontalAlignment.Right;
@@ -125,7 +125,7 @@ namespace LAZYSHELL
                 use[i] = new CheckBox();
                 use[i].AutoSize = true;
                 use[i].Location = new Point(261, i * 21 + 23);
-                use[i].Name = "use" + i;
+                use[i].Name = "use";
                 use[i].Text = "Use";
                 use[i].Tag = i;
                 use[i].Enter += new EventHandler(monster_Enter);
@@ -135,7 +135,7 @@ namespace LAZYSHELL
                 hide[i] = new CheckBox();
                 hide[i].AutoSize = true;
                 hide[i].Location = new Point(307, i * 21 + 23);
-                hide[i].Name = "hide" + i;
+                hide[i].Name = "hide";
                 hide[i].Text = "Hide";
                 hide[i].Tag = i;
                 hide[i].Enter += new EventHandler(monster_Enter);
@@ -144,65 +144,6 @@ namespace LAZYSHELL
             }
         }
 
-        public void SetToolTips(ToolTip toolTip1)
-        {
-            // FORMATIONS
-            this.formationNameList.ToolTipText =
-                "Select the formation to edit.\n\n" +
-                "A formation is a set of monsters encountered in battle. A\n" +
-                "formation is chosen when a battle is called through either\n" +
-                "an event script or through the property of an NPC in a\n" +
-                "level.";
-            this.formationNum.ToolTipText =
-                "Select the formation to edit by #.\n\n" +
-                "A formation is a set of monsters encountered in battle. A\n" +
-                "formation is chosen when a battle is called through either\n" +
-                "an event script or through the property of an NPC in a\n" +
-                "level.";
-
-            toolTip1.SetToolTip(this.formationBattleEvent,
-                "The battle event sequence that plays at the start of the\n" +
-                "battle. These can be edited in the animations editor.");
-            toolTip1.SetToolTip(this.formationUnknown,
-                "Unknown formation property; it is recommended to leave it\n" +
-                "alone. Only the Bowser, Kinlink formation has this value set\n" +
-                "by default.");
-            toolTip1.SetToolTip(this.formationMusic,
-                "The music assigned to the formation that plays in battle.\n\n" +
-                "The music can be selected from 8 indexes or set to\n" +
-                "{CURRENT}, which continues to play the current music\n" +
-                "track in the overworld when the battle begins. To edit the\n" +
-                "actual track that is assigned to the index, change the\n" +
-                "\"Music Track\" property to the right.");
-            toolTip1.SetToolTip(this.musicTrack,
-                "The music track assigned to the currently selected \"INDEX\"\n" +
-                "to the left. Note that changing this value will affect the music\n" +
-                "for all formations that use the same \"INDEX\" as the currently\n" +
-                "selected formation.");
-            toolTip1.SetToolTip(this.formationCantRun,
-                "If checked, it is impossible to run away from the formation\n" +
-                "in battle.");
-            for (int i = 0; i < 8; i++)
-            {
-                toolTip1.SetToolTip(use[i],
-                    "The monsters enabled in the formation. This must be\n" +
-                    "checked for a monster that is to have any presence in the\n" +
-                    "battle at all.\n\n" +
-                    "it is not recommended to have more than 6\n" +
-                    "monsters enabled in one formation, due to VRAM capacity.");
-                toolTip1.SetToolTip(hide[i],
-                    "The monsters not present in the formation at the start of\n" +
-                    "the battle. Monsters with this property checked can be\n" +
-                    "later called to battle through the battle-script.");
-            }
-
-            toolTip1.SetToolTip(this.pictureBoxFormation,
-                "Click and drag the monsters in the formation.");
-            this.battlefieldName.ToolTipText =
-                "Select the background to preview the formation in. This is\n" +
-                "only for preview purposes; changing this will have no effect\n" +
-                "on the ROM.";
-        }
         private void InitializeStrings()
         {
             updating = true;

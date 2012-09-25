@@ -67,16 +67,6 @@ namespace LAZYSHELL
             this.settings.Keystrokes[0x20] = "\x20";
             this.settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
-            toolTipLabel = new ToolTipLabel(this, toolTip1, showDecHex, null);
-            for (int i = 0; i < 9; i++)
-            {
-                ToolStripNumericUpDown numUpDown = new ToolStripNumericUpDown();
-                numUpDown.Hexadecimal = true;
-                numUpDown.Maximum = 255;
-                numUpDown.MouseMove += new MouseEventHandler(toolTipLabel.ControlMouseMove);
-                numUpDown.Width = 40;
-                toolStrip2.Items.Insert(i + 4, numUpDown);
-            }
             this.animationCategory.Items.AddRange(new object[] {
             "Monster Behaviors",
             "Monster Spells",
@@ -87,7 +77,18 @@ namespace LAZYSHELL
             "Weapons",
             "Battle Events"});
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
-            Do.AddShortcut(toolStrip4, Keys.F2, showDecHex);
+            Do.AddShortcut(toolStrip4, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip4, Keys.F2, baseConvertor);
+            toolTipLabel = new ToolTipLabel(this, baseConvertor, helpTips);
+            for (int i = 0; i < 9; i++)
+            {
+                ToolStripNumericUpDown numUpDown = new ToolStripNumericUpDown();
+                numUpDown.Hexadecimal = true;
+                numUpDown.Maximum = 255;
+                numUpDown.MouseMove += new MouseEventHandler(toolTipLabel.ControlMouseMove);
+                numUpDown.Width = 40;
+                toolStrip2.Items.Insert(i + 6, numUpDown);
+            }
             InitializeAnimationScriptsEditor();
             new History(this);
             //
@@ -1055,6 +1056,9 @@ namespace LAZYSHELL
 
             updatingAnimations = false;
         }
+        private void UpdateCommandData()
+        {
+        }
 
         public void Assemble()
         {
@@ -1199,7 +1203,7 @@ namespace LAZYSHELL
             asc = (AnimationScriptCommand)e.Node.Tag;
 
             ToolStripNumericUpDown numUpDown;
-            int i = 4;
+            int i = 6;
             for (int a = 0; a < asc.AnimationData.Length && a < 9; a++, i++)
             {
                 numUpDown = (ToolStripNumericUpDown)toolStrip2.Items[i];
@@ -1245,6 +1249,16 @@ namespace LAZYSHELL
         {
             a_treeViewWrapper.MoveUp(asc);
         }
+        private void expandAll_Click(object sender, EventArgs e)
+        {
+            a_treeViewWrapper.ExpandAll();
+            UpdateCommandData();
+        }
+        private void collapseAll_Click(object sender, EventArgs e)
+        {
+            a_treeViewWrapper.CollapseAll();
+            UpdateCommandData();
+        }
         private void applyAnimationMods_Click(object sender, EventArgs e)
         {
             Point p = Do.GetTreeViewScrollPos(animationScriptTree);
@@ -1261,7 +1275,7 @@ namespace LAZYSHELL
                     if (!item.Visible || item.GetType() != typeof(ToolStripNumericUpDown))
                         continue;
                     ToolStripNumericUpDown numUpDown = (ToolStripNumericUpDown)item;
-                    int index = toolStrip2.Items.IndexOf(numUpDown) - 4;
+                    int index = toolStrip2.Items.IndexOf(numUpDown) - 6;
                     // set the new value for the command
                     asc.AnimationData[index] = (byte)numUpDown.Value;
                     Model.Data[asc.InternalOffset + index] = (byte)numUpDown.Value;

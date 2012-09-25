@@ -228,6 +228,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap camera {
+            get {
+                object obj = ResourceManager.GetObject("camera", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap cartridge {
             get {
                 object obj = ResourceManager.GetObject("cartridge", resourceCulture);
@@ -669,6 +676,13 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap invalid {
+            get {
+                object obj = ResourceManager.GetObject("invalid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap jumpTo {
             get {
                 object obj = ResourceManager.GetObject("jumpTo", resourceCulture);
@@ -697,6 +711,52 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to a:link, a:visited
+        ///{
+        ///	color: inherit;
+        ///	text-decoration: none;
+        ///}
+        ///a:hover, a:active
+        ///{
+        ///	text-decoration: underline;
+        ///}
+        ///body
+        ///{
+        ///	background-color: #404040;
+        ///	font: 8pt &quot;Tahoma&quot;;
+        ///	margin: 0;
+        ///	width: 100%;
+        ///}
+        ///div.editor_box
+        ///{
+        ///	background-color: #d4d0c8;
+        ///	border: 2px solid #d4d0c8;
+        ///	height: 600px;
+        ///	margin: 0;
+        ///	overflow: auto;
+        ///	padding: 2px;
+        ///	vertical-align: top;
+        ///	width: 430px;
+        ///}
+        ///div.editor
+        ///{
+        ///	left: 160px;
+        ///	margin: 0;
+        ///	padding: 0;
+        ///	position: absolute;
+        ///	top: 50px;
+        ///}
+        ///div.entry
+        ///{
+        ///	backg [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LAZYSHELL_css {
+            get {
+                return ResourceManager.GetString("LAZYSHELL_css", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Icon LAZYSHELL_icon {
             get {
                 object obj = ResourceManager.GetObject("LAZYSHELL_icon", resourceCulture);
@@ -704,10 +764,59 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;LAZYSHELL_xsl.xsl&quot;?&gt;
+        ///&lt;LAZYSHELL form=&quot;Editor&quot; icon=&quot;icons/main.gif&quot; title=&quot;LAZY SHELL - Super Mario RPG Editor&quot;&gt;
+        ///  &lt;properties version=&quot;3.14.0&quot; date=&quot;Sep. 22, 2012&quot; homepage=&quot;http://home.comcast.net/~giangurgolo/smrpg/&quot; author=&quot;giangurgolo and Omega&quot; /&gt;
+        ///  &lt;disclaimer&gt;
+        ///    &lt;header&gt;Disclaimer&lt;/header&gt;
+        ///    &lt;introduction&gt;If this is your first time using Lazy Shell, please take the time to read the following advice:&lt;/introduction [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LAZYSHELL_xml {
+            get {
+                return ResourceManager.GetString("LAZYSHELL_xml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:msxsl=&quot;urn:schemas-microsoft-com:xslt&quot;&gt;
+        ///  &lt;xsl:output method=&quot;html&quot; doctype-system=&quot;about:legacy-compat&quot; /&gt;
+        ///  &lt;xsl:template match=&quot;/&quot;&gt;
+        ///    &lt;html&gt;
+        ///      &lt;head&gt;
+        ///        &lt;link href=&quot;LAZYSHELL_css.css&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot;  /&gt;
+        ///        &lt;script type=&quot;text/javascript&quot;&gt;
+        ///          &lt;![CDATA[
+        ///            var z = 0;
+        ///            function ShowHide(editor, faq) {
+        ///               [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LAZYSHELL_xsl {
+            get {
+                return ResourceManager.GetString("LAZYSHELL_xsl", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap location {
+            get {
+                object obj = ResourceManager.GetObject("location", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static byte[] Lunar_Compress {
             get {
                 object obj = ResourceManager.GetObject("Lunar_Compress", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap main {
+            get {
+                object obj = ResourceManager.GetObject("main", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -728,6 +837,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap mainAttacks {
             get {
                 object obj = ResourceManager.GetObject("mainAttacks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap mainAudio {
+            get {
+                object obj = ResourceManager.GetObject("mainAudio", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -847,13 +963,6 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap mapBanner {
             get {
                 object obj = ResourceManager.GetObject("mapBanner", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap mapPoint {
-            get {
-                object obj = ResourceManager.GetObject("mapPoint", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1288,13 +1397,6 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap openAttacks {
             get {
                 object obj = ResourceManager.GetObject("openAttacks", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap openAudio {
-            get {
-                object obj = ResourceManager.GetObject("openAudio", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1992,6 +2094,20 @@ namespace LAZYSHELL.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap tieOver {
+            get {
+                object obj = ResourceManager.GetObject("tieOver", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tieUnder {
+            get {
+                object obj = ResourceManager.GetObject("tieUnder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap TITLE_BG {
             get {
                 object obj = ResourceManager.GetObject("TITLE_BG", resourceCulture);
@@ -2051,6 +2167,13 @@ namespace LAZYSHELL.Properties {
         internal static System.Drawing.Bitmap volume {
             get {
                 object obj = ResourceManager.GetObject("volume", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap warning {
+            get {
+                object obj = ResourceManager.GetObject("warning", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

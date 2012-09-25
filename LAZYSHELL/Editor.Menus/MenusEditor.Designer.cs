@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenusEditor));
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.menuTextName = new System.Windows.Forms.ToolStripComboBox();
@@ -57,6 +57,7 @@
             this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.save,
+            this.helpTips,
             this.toolStripSeparator1,
             this.toolStripLabel1,
             this.menuTextName,
@@ -80,6 +81,17 @@
             this.save.Size = new System.Drawing.Size(23, 22);
             this.save.ToolTipText = "Save";
             this.save.Click += new System.EventHandler(this.save_Click);
+            // 
+            // helpTips
+            // 
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.Text = "Help Tips";
             // 
             // toolStripSeparator1
             // 
@@ -106,7 +118,12 @@
             this.menuTextNum.AutoSize = false;
             this.menuTextNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuTextNum.Hexadecimal = false;
-            this.menuTextNum.Location = new System.Drawing.Point(276, 1);
+            this.menuTextNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.menuTextNum.Location = new System.Drawing.Point(299, 1);
             this.menuTextNum.Maximum = new decimal(new int[] {
             117,
             0,
@@ -161,6 +178,7 @@
             this.Controls.Add(this.toolStrip2);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "MenusEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -185,5 +203,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripButton save;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton helpTips;
     }
 }

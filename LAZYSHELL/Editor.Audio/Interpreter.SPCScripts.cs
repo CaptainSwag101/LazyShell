@@ -227,8 +227,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Noise off",			// 0xCA
             "Frequency mode on",			// 0xCB
             "Frequency mode off",			// 0xCC
-            "Play sound (new channel) = ",			// 0xCD
-            "Play sound (this channel) = ",			// 0xCE
+            "Play channel 0 of sound = ",			// 0xCD
+            "Play channel 1 of sound = ",			// 0xCE
             "Transpose 1/16 pitch = ",			// 0xCF
 			
             "Terminate script",			// 0xD0
@@ -292,7 +292,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             {
                 case 0xCD:
                 case 0xCE:
-                    sb.Append(Lists.Numerize(Lists.SoundNames[ssc.Param1], ssc.Param1, 3));
+                    if (ssc.Type < 2)
+                        sb.Append(Lists.Numerize(Lists.SoundNames[ssc.Param1], ssc.Param1, 3));
+                    else
+                        sb.Append(Lists.Numerize(Lists.BattleSoundNames[ssc.Param1], ssc.Param1, 3));
                     break;
                 case 0xC6:
                 case 0xC8:

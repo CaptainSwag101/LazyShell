@@ -66,7 +66,7 @@ namespace LAZYSHELL
                 checkBox.Appearance = Appearance.Button;
                 checkBox.AutoSize = false;
                 checkBox.Checked = true;
-                checkBox.Location = new Point(12, i * 8 + 37);
+                checkBox.Location = new Point(12, i * 8 + 43);
                 checkBox.Size = new Size(8, 8);
                 this.rows.Add(checkBox);
                 this.Controls.Add(checkBox);
@@ -78,7 +78,7 @@ namespace LAZYSHELL
                 checkBox.Appearance = Appearance.Button;
                 checkBox.AutoSize = false;
                 checkBox.Checked = true;
-                checkBox.Location = new Point(i * 8 + 26, 23);
+                checkBox.Location = new Point(i * 8 + 26, 29);
                 checkBox.Size = new Size(8, 8);
                 this.cols.Add(checkBox);
                 this.Controls.Add(checkBox);
@@ -86,12 +86,16 @@ namespace LAZYSHELL
 
             this.pictureBoxPalette.Height = Math.Min((count * 8) - (start * 8), max * 8);
             this.panel7.Height = Math.Min((count * 8 + 4) - (start * 8), max * 8 + 4);
-            this.Height = Math.Max(446, 446 + panel7.Height - 68);
+            this.Height = Math.Max(446, 446 + panel7.Height - 60);
 
             InitializeColor();
             SetColorMapImage();
             SetPaletteImage();
             this.BringToFront();
+
+            Do.AddShortcut(toolStrip2, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip2, Keys.F2, baseConvertor);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             new History(this);
         }
         public void Reload(Delegate update, PaletteSet paletteSet, int count, int start, int max)
@@ -118,7 +122,7 @@ namespace LAZYSHELL
                         checkBox.Checked = this.rows[i].Checked;
                     else
                         checkBox.Checked = true;
-                    checkBox.Location = new Point(12, i * 8 + 37);
+                    checkBox.Location = new Point(12, i * 8 + 43);
                     checkBox.Size = new Size(8, 8);
                     rows_temp.Add(checkBox);
                     this.Controls.Add(checkBox);
@@ -129,7 +133,7 @@ namespace LAZYSHELL
             //
             this.pictureBoxPalette.Height = Math.Min((count * 8) - (start * 8), max * 8);
             this.panel7.Height = Math.Min((count * 8 + 4) - (start * 8), max * 8 + 4);
-            this.Height = Math.Max(446, 446 + panel7.Height - 68);
+            this.Height = Math.Max(446, 446 + panel7.Height - 60);
 
             InitializeColor();
             SetColorMapImage();

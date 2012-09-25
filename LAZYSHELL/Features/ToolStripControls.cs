@@ -223,6 +223,7 @@ namespace LAZYSHELL
         public Point Location { get { return NumericUpDownControl.Location; } set { NumericUpDownControl.Location = value; } }
         public decimal Maximum { get { return NumericUpDownControl.Maximum; } set { NumericUpDownControl.Maximum = value; } }
         public decimal Minimum { get { return NumericUpDownControl.Minimum; } set { NumericUpDownControl.Minimum = value; } }
+        public new string Name { get { return NumericUpDownControl.Name; } set { NumericUpDownControl.Name = value; } }
         public decimal Value { get { return NumericUpDownControl.Value; } set { NumericUpDownControl.Value = value; } }
         public decimal Increment { get { return NumericUpDownControl.Increment; } set { NumericUpDownControl.Increment = value; } }
         protected override void OnSubscribeControlEvents(Control c)
@@ -269,6 +270,7 @@ namespace LAZYSHELL
         public ToolStripCheckBox()
             : base(new CheckBox())
         {
+            this.Padding = new Padding(4, 0, 0, 4);
         }
         private CheckBox CheckBoxControl
         {

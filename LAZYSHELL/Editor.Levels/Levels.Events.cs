@@ -61,7 +61,7 @@ namespace LAZYSHELL
                 this.eventsWidthXPlusHalf.Enabled = true;
                 this.eventsWidthYPlusHalf.Enabled = true;
 
-                this.buttonGotoD.Enabled = true;
+                this.eventGotoA.Enabled = true;
             }
             else
             {
@@ -88,7 +88,7 @@ namespace LAZYSHELL
                 this.eventsWidthXPlusHalf.Checked = false;
                 this.eventsWidthYPlusHalf.Checked = false;
 
-                this.buttonGotoD.Enabled = false;
+                this.eventGotoA.Enabled = false;
             }
 
             eventsBytesLeft.Text = CalculateFreeEventSpace() + " bytes left";
@@ -125,7 +125,7 @@ namespace LAZYSHELL
                 this.eventsWidthXPlusHalf.Enabled = true;
                 this.eventsWidthYPlusHalf.Enabled = true;
 
-                this.buttonGotoD.Enabled = true;
+                this.eventGotoA.Enabled = true;
             }
             else
             {
@@ -152,7 +152,7 @@ namespace LAZYSHELL
                 this.eventsWidthXPlusHalf.Checked = false;
                 this.eventsWidthYPlusHalf.Checked = false;
 
-                this.buttonGotoD.Enabled = false;
+                this.eventGotoA.Enabled = false;
             }
             eventsBytesLeft.Text = CalculateFreeEventSpace() + " bytes left";
             eventsBytesLeft.BackColor = CalculateFreeEventSpace() >= 0 ? SystemColors.Control : Color.Red;

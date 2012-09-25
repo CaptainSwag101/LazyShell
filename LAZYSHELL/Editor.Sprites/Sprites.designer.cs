@@ -37,7 +37,6 @@ namespace LAZYSHELL
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sprites));
             this.number = new LAZYSHELL.ToolStripNumericUpDown();
             this.PlaybackSequence = new System.ComponentModel.BackgroundWorker();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +47,7 @@ namespace LAZYSHELL
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addThisToNotesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.characterNumLabel = new System.Windows.Forms.Label();
-            this.panelSprites = new System.Windows.Forms.Panel();
+            this.panelMolds = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.paletteIndex = new System.Windows.Forms.NumericUpDown();
             this.label71 = new System.Windows.Forms.Label();
@@ -67,8 +66,6 @@ namespace LAZYSHELL
             this.animationPacket = new System.Windows.Forms.NumericUpDown();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-            this.labelToolTip = new System.Windows.Forms.Label();
-            this.labelConvertor = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
@@ -79,9 +76,9 @@ namespace LAZYSHELL
             this.reset = new System.Windows.Forms.ToolStripButton();
             this.clear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.enableHelpTips = new System.Windows.Forms.ToolStripButton();
-            this.showDecHex = new System.Windows.Forms.ToolStripButton();
-            this.hexViewer = new System.Windows.Forms.ToolStripButton();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
+            this.hexEditor = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.name = new System.Windows.Forms.ToolStripComboBox();
             this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
@@ -94,8 +91,8 @@ namespace LAZYSHELL
             this.openPalettes = new System.Windows.Forms.ToolStripButton();
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
             this.toolTip3 = new System.Windows.Forms.ToolTip(this.components);
+            this.panelSequences = new System.Windows.Forms.Panel();
             this.contextMenuStrip2.SuspendLayout();
-            this.panelSprites.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -198,16 +195,15 @@ namespace LAZYSHELL
             this.characterNumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.characterNumLabel.Visible = false;
             // 
-            // panelSprites
+            // panelMolds
             // 
-            this.panelSprites.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelSprites.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelSprites.Controls.Add(this.panel1);
-            this.panelSprites.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSprites.Location = new System.Drawing.Point(0, 50);
-            this.panelSprites.Name = "panelSprites";
-            this.panelSprites.Size = new System.Drawing.Size(1015, 684);
-            this.panelSprites.TabIndex = 2;
+            this.panelMolds.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelMolds.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelMolds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMolds.Location = new System.Drawing.Point(221, 50);
+            this.panelMolds.Name = "panelMolds";
+            this.panelMolds.Size = new System.Drawing.Size(571, 319);
+            this.panelMolds.TabIndex = 2;
             // 
             // panel1
             // 
@@ -221,12 +217,10 @@ namespace LAZYSHELL
             this.panel1.Controls.Add(this.imageNum);
             this.panel1.Controls.Add(this.animationPacket);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 50);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(221, 680);
+            this.panel1.Size = new System.Drawing.Size(221, 319);
             this.panel1.TabIndex = 0;
-            this.panel1.SizeChanged += new System.EventHandler(this.panel1_SizeChanged);
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // paletteIndex
             // 
@@ -447,29 +441,6 @@ namespace LAZYSHELL
             this.toolTip2.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Warning;
             this.toolTip2.ToolTipTitle = "WARNING";
             // 
-            // labelToolTip
-            // 
-            this.labelToolTip.AutoSize = true;
-            this.labelToolTip.BackColor = System.Drawing.SystemColors.Info;
-            this.labelToolTip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelToolTip.Location = new System.Drawing.Point(185, 0);
-            this.labelToolTip.Name = "labelToolTip";
-            this.labelToolTip.Size = new System.Drawing.Size(2, 15);
-            this.labelToolTip.TabIndex = 3;
-            this.labelToolTip.Visible = false;
-            // 
-            // labelConvertor
-            // 
-            this.labelConvertor.AutoSize = true;
-            this.labelConvertor.BackColor = System.Drawing.Color.White;
-            this.labelConvertor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelConvertor.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelConvertor.Location = new System.Drawing.Point(210, 0);
-            this.labelConvertor.Name = "labelConvertor";
-            this.labelConvertor.Size = new System.Drawing.Size(2, 15);
-            this.labelConvertor.TabIndex = 4;
-            this.labelConvertor.Visible = false;
-            // 
             // toolStrip2
             // 
             this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -481,13 +452,13 @@ namespace LAZYSHELL
             this.reset,
             this.clear,
             this.toolStripSeparator12,
-            this.enableHelpTips,
-            this.showDecHex,
-            this.hexViewer});
+            this.helpTips,
+            this.baseConvertor,
+            this.hexEditor});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(1015, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(792, 25);
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -526,7 +497,6 @@ namespace LAZYSHELL
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(27, 22);
-            this.export.ToolTipText = "Export";
             // 
             // animationsToolStripMenuItem
             // 
@@ -572,36 +542,36 @@ namespace LAZYSHELL
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
             // 
-            // enableHelpTips
+            // helpTips
             // 
-            this.enableHelpTips.CheckOnClick = true;
-            this.enableHelpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
-            this.enableHelpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.enableHelpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.enableHelpTips.Name = "enableHelpTips";
-            this.enableHelpTips.Size = new System.Drawing.Size(23, 22);
-            this.enableHelpTips.ToolTipText = "Show Help Tips";
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.ToolTipText = "Help Tips";
             // 
-            // showDecHex
+            // baseConvertor
             // 
-            this.showDecHex.CheckOnClick = true;
-            this.showDecHex.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.showDecHex.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showDecHex.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showDecHex.Name = "showDecHex";
-            this.showDecHex.Size = new System.Drawing.Size(23, 22);
-            this.showDecHex.ToolTipText = "Show Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.ToolTipText = "Base Convertor";
             // 
-            // hexViewer
+            // hexEditor
             // 
-            this.hexViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.hexViewer.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
-            this.hexViewer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.hexViewer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.hexViewer.Name = "hexViewer";
-            this.hexViewer.Size = new System.Drawing.Size(23, 22);
-            this.hexViewer.Text = "Open Hex Editor";
-            this.hexViewer.Click += new System.EventHandler(this.hexViewer_Click);
+            this.hexEditor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hexEditor.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
+            this.hexEditor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.hexEditor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.hexEditor.Name = "hexEditor";
+            this.hexEditor.Size = new System.Drawing.Size(23, 22);
+            this.hexEditor.Text = "Hex Editor";
+            this.hexEditor.Click += new System.EventHandler(this.hexViewer_Click);
             // 
             // toolStrip3
             // 
@@ -620,7 +590,7 @@ namespace LAZYSHELL
             this.toolStrip3.Location = new System.Drawing.Point(0, 25);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(1015, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(792, 25);
             this.toolStrip3.TabIndex = 1;
             // 
             // name
@@ -718,27 +688,37 @@ namespace LAZYSHELL
             // 
             this.toolTip3.Active = false;
             // 
+            // panelSequences
+            // 
+            this.panelSequences.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelSequences.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelSequences.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelSequences.Location = new System.Drawing.Point(0, 369);
+            this.panelSequences.Name = "panelSequences";
+            this.panelSequences.Size = new System.Drawing.Size(792, 370);
+            this.panelSequences.TabIndex = 6;
+            // 
             // Sprites
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1015, 734);
-            this.Controls.Add(this.panelSprites);
+            this.ClientSize = new System.Drawing.Size(792, 739);
+            this.Controls.Add(this.panelMolds);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.toolStrip2);
-            this.Controls.Add(this.labelConvertor);
-            this.Controls.Add(this.labelToolTip);
             this.Controls.Add(this.characterNumLabel);
+            this.Controls.Add(this.panelSequences);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Sprites";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SPRITES - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Sprites_FormClosing);
             this.contextMenuStrip2.ResumeLayout(false);
-            this.panelSprites.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).EndInit();
@@ -782,11 +762,9 @@ namespace LAZYSHELL
         private NumericUpDown paletteIndex;
         private NumericUpDown imageNum;
         private ToolTip toolTip1;
-        private Panel panelSprites;
+        private Panel panelMolds;
         private ToolTip toolTip2;
         private Label characterNumLabel;
-        private Label labelToolTip;
-        private Label labelConvertor;
         private ContextMenuStrip contextMenuStrip2;
         private ToolStripMenuItem addThisToNotesDatabaseToolStripMenuItem;
         private ToolStrip toolStrip2;
@@ -807,17 +785,18 @@ namespace LAZYSHELL
         private ToolStripButton openSequences;
         private Panel panel1;
         private ToolStripSeparator toolStripSeparator12;
-        private ToolStripButton enableHelpTips;
-        private ToolStripButton showDecHex;
+        private ToolStripButton helpTips;
+        private ToolStripButton baseConvertor;
         private ToolStripDropDownButton export;
         private ToolStripMenuItem allMoldImagesToolStripMenuItem;
         private ToolStripMenuItem animationsToolStripMenuItem;
         private ToolStripNumericUpDown number;
         private ToolTip toolTip3;
-        private ToolStripButton hexViewer;
+        private ToolStripButton hexEditor;
         private ToolStripButton reset;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
+        private Panel panelSequences;
     }
 }
 

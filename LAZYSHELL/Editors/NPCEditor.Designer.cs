@@ -28,7 +28,6 @@ namespace LAZYSHELL
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NPCEditor));
             this.spritePictureBox = new System.Windows.Forms.PictureBox();
             this.unknownBits = new System.Windows.Forms.CheckedListBox();
             this.layerPriority = new System.Windows.Forms.CheckedListBox();
@@ -41,7 +40,7 @@ namespace LAZYSHELL
             this.height = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.shadow = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.searchResults = new System.Windows.Forms.ListBox();
@@ -57,11 +56,11 @@ namespace LAZYSHELL
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.byte1a = new System.Windows.Forms.ComboBox();
+            this.vramStore = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cannotClone = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.byte1b = new System.Windows.Forms.NumericUpDown();
+            this.vramSize = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.showShadow = new System.Windows.Forms.CheckBox();
@@ -80,7 +79,7 @@ namespace LAZYSHELL
             this.panel2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.byte1b)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vramSize)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -243,16 +242,16 @@ namespace LAZYSHELL
             this.buttonOK.UseVisualStyleBackColor = false;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // buttonCancel
+            // buttonClose
             // 
-            this.buttonCancel.FlatAppearance.BorderSize = 0;
-            this.buttonCancel.Location = new System.Drawing.Point(181, 522);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 8;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = false;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.buttonClose.FlatAppearance.BorderSize = 0;
+            this.buttonClose.Location = new System.Drawing.Point(181, 522);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.TabIndex = 8;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = false;
+            this.buttonClose.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // shadow
             // 
@@ -314,6 +313,11 @@ namespace LAZYSHELL
             this.npcNum.AutoSize = false;
             this.npcNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.npcNum.Hexadecimal = false;
+            this.npcNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.npcNum.Location = new System.Drawing.Point(49, 2);
             this.npcNum.Maximum = new decimal(new int[] {
             511,
@@ -380,6 +384,11 @@ namespace LAZYSHELL
             // 
             this.spriteNum.AutoSize = false;
             this.spriteNum.Hexadecimal = false;
+            this.spriteNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.spriteNum.Location = new System.Drawing.Point(167, 2);
             this.spriteNum.Maximum = new decimal(new int[] {
             1023,
@@ -417,7 +426,7 @@ namespace LAZYSHELL
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Controls.Add(this.groupBox1);
-            this.panel2.Controls.Add(this.buttonCancel);
+            this.panel2.Controls.Add(this.buttonClose);
             this.panel2.Controls.Add(this.buttonReset);
             this.panel2.Controls.Add(this.buttonOK);
             this.panel2.Controls.Add(this.toolStrip2);
@@ -441,11 +450,11 @@ namespace LAZYSHELL
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.byte1a);
+            this.groupBox3.Controls.Add(this.vramStore);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.cannotClone);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.byte1b);
+            this.groupBox3.Controls.Add(this.vramSize);
             this.groupBox3.Location = new System.Drawing.Point(140, 277);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(120, 96);
@@ -453,12 +462,12 @@ namespace LAZYSHELL
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "VRAM Buffer";
             // 
-            // byte1a
+            // vramStore
             // 
-            this.byte1a.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.byte1a.DropDownWidth = 100;
-            this.byte1a.IntegralHeight = false;
-            this.byte1a.Items.AddRange(new object[] {
+            this.vramStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.vramStore.DropDownWidth = 100;
+            this.vramStore.IntegralHeight = false;
+            this.vramStore.Items.AddRange(new object[] {
             "SW/SE, NW/NE",
             "SW/SE, NW/NE, S",
             "SW/SE",
@@ -467,10 +476,10 @@ namespace LAZYSHELL
             "____",
             "____",
             "all directions"});
-            this.byte1a.Location = new System.Drawing.Point(45, 21);
-            this.byte1a.Name = "byte1a";
-            this.byte1a.Size = new System.Drawing.Size(69, 21);
-            this.byte1a.TabIndex = 1;
+            this.vramStore.Location = new System.Drawing.Point(45, 21);
+            this.vramStore.Name = "vramStore";
+            this.vramStore.Size = new System.Drawing.Size(69, 21);
+            this.vramStore.TabIndex = 1;
             // 
             // label11
             // 
@@ -504,18 +513,18 @@ namespace LAZYSHELL
             this.label12.TabIndex = 2;
             this.label12.Text = "Size";
             // 
-            // byte1b
+            // vramSize
             // 
-            this.byte1b.Location = new System.Drawing.Point(45, 42);
-            this.byte1b.Maximum = new decimal(new int[] {
+            this.vramSize.Location = new System.Drawing.Point(45, 42);
+            this.vramSize.Maximum = new decimal(new int[] {
             7,
             0,
             0,
             0});
-            this.byte1b.Name = "byte1b";
-            this.byte1b.Size = new System.Drawing.Size(69, 21);
-            this.byte1b.TabIndex = 3;
-            this.byte1b.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.vramSize.Name = "vramSize";
+            this.vramSize.Size = new System.Drawing.Size(69, 21);
+            this.vramSize.TabIndex = 3;
+            this.vramSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox2
             // 
@@ -651,7 +660,7 @@ namespace LAZYSHELL
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.byte1b)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vramSize)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -678,7 +687,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.NumericUpDown height;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.ComboBox shadow;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ListBox searchResults;
@@ -698,9 +707,9 @@ namespace LAZYSHELL
         private System.Windows.Forms.CheckBox cannotClone;
         private System.Windows.Forms.CheckBox showShadow;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.NumericUpDown byte1b;
+        private System.Windows.Forms.NumericUpDown vramSize;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox byte1a;
+        private System.Windows.Forms.ComboBox vramStore;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;

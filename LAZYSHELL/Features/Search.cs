@@ -51,6 +51,7 @@ namespace LAZYSHELL
             this.searchField = searchField;
             this.searchButton = searchButton;
             InitializeProperties();
+            LoadSearch();
             this.function = new Function(LoadSearch);
             this.function.DynamicInvoke();
         }

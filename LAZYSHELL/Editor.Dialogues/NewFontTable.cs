@@ -15,7 +15,7 @@ namespace LAZYSHELL
         
         private Fonts fontsEditor;
         private FontCharacter[] font { get { return fontsEditor.FontCharacters; } }
-        private int fontType { get { return fontsEditor.FontType; } }
+        private FontType fontType { get { return fontsEditor.FontType; } }
         private int[] palette { get { return fontsEditor.Palette; } }
         // new font table variables
         private FontFamily[] ff = FontFamily.Families;
@@ -68,44 +68,6 @@ namespace LAZYSHELL
         {
             InitializeNewFontTable();
         }
-        public void SetToolTips(ToolTip toolTip1)
-        {
-            this.fontFamily.ToolTipText =
-                "Select a system-installed font to use in the new font table.";
-
-            this.fontSize.ToolTipText =
-                "Set the size of the font to use in the new font table.";
-
-            this.characterHeight.ToolTipText =
-                "Set the height of all characters in the new font table.";
-
-            this.shiftTableUp.ToolTipText =
-                "Move the new font table up 1 pixel.";
-
-            this.shiftTableDown.ToolTipText =
-                "Move the new font table down 1 pixel.";
-
-            this.shiftTableLeft.ToolTipText =
-                "Move the new font table left 1 pixel.";
-
-            this.shiftTableRight.ToolTipText =
-                "Move the new font table right 1 pixel.";
-
-            this.resetTable.ToolTipText =
-                "Reset the new font table's position.";
-
-            this.autoSetWidths.ToolTipText =
-                "The width of each character will be automatically set based \n" +
-                "on a used pixel at the farthest right.";
-
-            this.padding.ToolTipText =
-                "This value will be added to the automatically set width of \n" +
-                "each character in the newly created font table.";
-
-            toolTip1.SetToolTip(this.generateFontTableImage,
-                "Generate the font table to an image and set as the new \n" +
-                "font table in the \"FONT GRAPHICS\".");
-        }
         private void InitializeNewFontTable()
         {
             fontTable.Visible = false;
@@ -126,9 +88,9 @@ namespace LAZYSHELL
             fontTable.ForeColor = Color.FromArgb(palette[1]);
             switch (fontType)
             {
-                case 0:
-                case 2: s.Width = 16; s.Height = 8; break;
-                case 1: s.Width = 8; s.Height = 16; break;
+                case FontType.Menu:
+                case FontType.Description: s.Width = 16; s.Height = 8; break;
+                case FontType.Dialogue: s.Width = 8; s.Height = 16; break;
             }
             RichTextBox rtb;
             for (int y = s.Height - 1; y >= 0; y--)
@@ -300,14 +262,14 @@ namespace LAZYSHELL
                 graphicBlock, new Size(import.Width / 8, import.Height / 8), palette, 0x10);
             switch (fontType)
             {
-                case 0:
+                case FontType.Menu:
                     Do.CopyOverFontTable(graphicBlock, font, new Size(import.Width / 8, import.Height / 12), palette);
                     break;
-                case 1:
+                case FontType.Dialogue:
                     Do.CopyOverFontTable(graphicBlock, font, new Size(import.Width / 16, import.Height / 12), palette);
                     break;
-                case 2:
-                case 3:
+                case FontType.Description:
+                case FontType.Triangles:
                     Do.CopyOverFontTable(graphicBlock, font, new Size(import.Width / 8, import.Height / 8), palette);
                     break;
             }

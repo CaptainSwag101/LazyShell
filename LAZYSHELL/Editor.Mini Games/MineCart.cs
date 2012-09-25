@@ -325,10 +325,14 @@ namespace LAZYSHELL
         }
         public void CloseEditors()
         {
-            spritePaletteEditor.Close();
-            spriteGraphicEditor.Close();
-            stageGraphicEditor.Close();
-            stagePaletteEditor.Close();
+            if (spritePaletteEditor.Visible)
+                spritePaletteEditor.Close();
+            if (spriteGraphicEditor.Visible)
+                spriteGraphicEditor.Close();
+            if (stageGraphicEditor.Visible)
+                stageGraphicEditor.Close();
+            if (stagePaletteEditor.Visible)
+                stagePaletteEditor.Close();
             spritePaletteEditor.Dispose();
             spriteGraphicEditor.Dispose();
             stageGraphicEditor.Dispose();
@@ -543,42 +547,6 @@ namespace LAZYSHELL
             if (updating) return;
             RefreshLevel();
             settings.LastMineCart = levelName.SelectedIndex;
-        }
-        private void resetAllObjectsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Doing this will erase all changes to the object data for all stages since the last save, including mushrooms, coins, and screens. Continue?",
-                "LAZY SHELL", MessageBoxButtons.YesNo) != DialogResult.Yes)
-                return;
-            Model.MinecartObjects = null;
-            MinecartData = new MinecartData(Model.MinecartObjects);
-            RefreshLevel();
-        }
-        private void resetCurrentTilesetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Doing this will erase all changes to the tileset since the last save. Continue?",
-                "LAZY SHELL", MessageBoxButtons.YesNo) != DialogResult.Yes)
-                return;
-            if (Index < 2)
-            {
-                Model.MinecartM7TilesetSubtiles = null;
-                Model.MinecartM7TilesetPalettes = null;
-            }
-            else
-                Model.MinecartSSTileset = null;
-            RefreshLevel();
-        }
-        private void resetCurrentTilemapToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Doing this will erase all changes to the tilemap since the last save. Continue?",
-                "LAZY SHELL", MessageBoxButtons.YesNo) != DialogResult.Yes)
-                return;
-            if (Index == 0)
-                Model.MinecartM7TilemapA = null;
-            else if (Index == 1)
-                Model.MinecartM7TilemapB = null;
-            else
-                Model.MinecartSSTilemap = null;
-            RefreshLevel();
         }
         private void music_SelectedIndexChanged(object sender, EventArgs e)
         {

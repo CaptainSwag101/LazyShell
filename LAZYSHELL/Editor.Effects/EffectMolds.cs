@@ -118,33 +118,6 @@ namespace LAZYSHELL
             pictureBoxE_Mold.Size = new Size(tilemapImage.Width * zoom, tilemapImage.Height * zoom);
             pictureBoxE_Mold.Invalidate();
         }
-        public void SetToolTips(ToolTip toolTip1)
-        {
-            this.e_moldWidth.ToolTipText =
-                "The width of all spell effect animation molds, in 16x16 tiles.";
-
-            this.e_moldHeight.ToolTipText =
-                "The height of all spell effect animation molds, in 16x16 tiles.";
-
-            toolTip1.SetToolTip(this.e_tileSetSize,
-                "The size of the tileset in hexadecimal bytes. The total \n" +
-                "number of tiles in the spell effect image's tileset equals the \n" +
-                "size (in hexadecimal) divided by 8.");
-
-            toolTip1.SetToolTip(this.e_molds,
-                "The collection of molds used by the spell effect's animation. \n" +
-                "A spell effect animation's mold is a set of tiles arranged in a \n" +
-                "sequence, from left to right and top to bottom in rows \n" +
-                "(much like how text wraps to the next line in your typical \n" +
-                "text editor). The number of tiles in a row is the value set \n" +
-                "for the \"Width\" property above.");
-
-            this.newMold.ToolTipText =
-                "Insert a new mold after the currently selected mold.";
-
-            this.deleteMold.ToolTipText =
-                "Delete the currently selected mold.";
-        }
         // editors
         public void LoadTileEditor()
         {

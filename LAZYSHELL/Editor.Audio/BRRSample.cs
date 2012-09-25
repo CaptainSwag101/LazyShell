@@ -17,9 +17,10 @@ namespace LAZYSHELL
         public byte[] Sample { get { return sample; } set { sample = value; } }
         private int loopStart;
         public int LoopStart { get { return loopStart; } set { loopStart = value; } }
-        private int relativeVolume;
-        private int relativeFrequency;
-        public int RelativeFrequency { get { return relativeFrequency; } set { relativeFrequency = value; } }
+        private short relGain;
+        public short RelGain { get { return relGain; } set { relGain = value; } }
+        public short relFreq;
+        public short RelFreq { get { return relFreq; } set { relFreq = value; } }
         public int Length
         {
             get
@@ -39,8 +40,8 @@ namespace LAZYSHELL
             int size = Bits.GetShort(data, offset); offset += 2;
             sample = Bits.GetByteArray(data, offset, size);
             loopStart = Bits.GetShort(data, index * 2 + 0x04248F);
-            relativeVolume = (short)Bits.GetShort(data, index * 2 + 0x042577);
-            relativeFrequency = (short)Bits.GetShort(data, index * 2 + 0x04265F);
+            relGain = (short)Bits.GetShort(data, index * 2 + 0x042577);
+            relFreq = (short)Bits.GetShort(data, index * 2 + 0x04265F);
         }
         public byte[] GetLoop()
         {
@@ -72,6 +73,10 @@ namespace LAZYSHELL
             Bits.SetShort(data, offset, sample.Length); offset += 2;
             Bits.SetByteArray(data, offset, sample);
             offset += sample.Length;
+            //
+            Bits.SetShort(data, index * 2 + 0x04248F, loopStart);
+            Bits.SetShort(data, index * 2 + 0x042577, relGain);
+            Bits.SetShort(data, index * 2 + 0x04265F, relFreq);
         }
     }
 }

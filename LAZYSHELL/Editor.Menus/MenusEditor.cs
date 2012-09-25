@@ -13,7 +13,7 @@ namespace LAZYSHELL
     public partial class MenusEditor : Form
     {
         public long Checksum;
-        private Overworld overworld; public Overworld Overworld { get { return overworld; } set { overworld = value; } }
+        private Menus menus; public Menus Menus { get { return menus; } set { menus = value; } }
         private Settings settings = Settings.Default;
         private TextHelperReduced textHelper = TextHelperReduced.Instance;
         public int Index { get { return menuTextName.SelectedIndex; } set { menuTextName.SelectedIndex = value; } }
@@ -33,19 +33,20 @@ namespace LAZYSHELL
                 this.menuTextName.Items.Add(Model.MenuTexts[i].GetMenuString(textView.Checked));
             this.Index = 0;
             //
-            overworld.TopLevel = false;
-            overworld.Dock = DockStyle.Fill;
+            menus.TopLevel = false;
+            menus.Dock = DockStyle.Fill;
             //overworld.SetToolTips(toolTip1);
-            panel1.Controls.Add(overworld);
-            overworld.BringToFront();
+            panel1.Controls.Add(menus);
+            menus.BringToFront();
             //openMenus.Checked = true;
-            overworld.Visible = true;
+            menus.Visible = true;
+            new ToolTipLabel(this, null, helpTips);
             //
             GC.Collect();
             new History(this);
             //
             Checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
-                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, overworld.CursorSprites);
+                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, menus.CursorSprites);
         }
         private void RefreshMenuText()
         {
@@ -56,10 +57,10 @@ namespace LAZYSHELL
         }
         private void LoadOverworldEditor()
         {
-            if (overworld == null)
-                overworld = new Overworld(this);
+            if (menus == null)
+                menus = new Menus(this);
             else
-                overworld.Reload(this);
+                menus.Reload(this);
         }
         private int CalculateFreeSpace()
         {
@@ -105,9 +106,9 @@ namespace LAZYSHELL
             }
             Bits.SetByteArray(Model.Data, 0x3EF000, temp);
             //Bits.SetShort(Model.Data, 0x3EF600, 0x344F);
-            overworld.Assemble();
+            menus.Assemble();
             Checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
-                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, overworld.CursorSprites);
+                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, menus.CursorSprites);
         }
         //
         private void save_Click(object sender, EventArgs e)
@@ -117,7 +118,7 @@ namespace LAZYSHELL
         private void MenusEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
-                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, overworld.CursorSprites) == Checksum)
+                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, menus.CursorSprites) == Checksum)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Menus have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -147,7 +148,7 @@ namespace LAZYSHELL
                 return;
             }
         Close:
-            overworld.Close();
+            menus.Close();
         }
         private void menuTextNum_ValueChanged(object sender, EventArgs e)
         {
@@ -204,7 +205,7 @@ namespace LAZYSHELL
                 updating = false;
             }
             CalculateFreeSpace();
-            overworld.Picture.Invalidate();
+            menus.Picture.Invalidate();
         }
         private void textView_CheckedChanged(object sender, EventArgs e)
         {

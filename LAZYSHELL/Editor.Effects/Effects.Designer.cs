@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Effects));
             this.number = new LAZYSHELL.ToolStripNumericUpDown();
             this.yNegShift = new System.Windows.Forms.NumericUpDown();
             this.label96 = new System.Windows.Forms.Label();
@@ -54,8 +53,8 @@
             this.clear = new System.Windows.Forms.ToolStripButton();
             this.cullAnimations = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.enableHelpTips = new System.Windows.Forms.ToolStripButton();
-            this.showDecHex = new System.Windows.Forms.ToolStripButton();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.name = new System.Windows.Forms.ToolStripComboBox();
             this.searchText = new System.Windows.Forms.ToolStripTextBox();
@@ -67,10 +66,11 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.openPalettes = new System.Windows.Forms.ToolStripButton();
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
-            this.panelEffects = new System.Windows.Forms.Panel();
+            this.panelMolds = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.panelSequences = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.yNegShift)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xNegShift)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e_paletteIndex)).BeginInit();
@@ -79,7 +79,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.e_graphicSetSize)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.toolStrip3.SuspendLayout();
-            this.panelEffects.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -88,6 +87,11 @@
             // 
             this.number.AutoSize = false;
             this.number.Hexadecimal = false;
+            this.number.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.number.Location = new System.Drawing.Point(223, 2);
             this.number.Maximum = new decimal(new int[] {
             127,
@@ -315,12 +319,12 @@
             this.clear,
             this.cullAnimations,
             this.toolStripSeparator12,
-            this.enableHelpTips,
-            this.showDecHex});
+            this.helpTips,
+            this.baseConvertor});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(1015, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(792, 25);
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -396,25 +400,25 @@
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
             // 
-            // enableHelpTips
+            // helpTips
             // 
-            this.enableHelpTips.CheckOnClick = true;
-            this.enableHelpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
-            this.enableHelpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.enableHelpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.enableHelpTips.Name = "enableHelpTips";
-            this.enableHelpTips.Size = new System.Drawing.Size(23, 22);
-            this.enableHelpTips.ToolTipText = "Show Help Tips";
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.ToolTipText = "Help Tips";
             // 
-            // showDecHex
+            // baseConvertor
             // 
-            this.showDecHex.CheckOnClick = true;
-            this.showDecHex.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.showDecHex.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showDecHex.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showDecHex.Name = "showDecHex";
-            this.showDecHex.Size = new System.Drawing.Size(23, 22);
-            this.showDecHex.ToolTipText = "Show Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.ToolTipText = "Base Convertor";
             // 
             // toolStrip3
             // 
@@ -433,7 +437,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 25);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(1015, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(792, 25);
             this.toolStrip3.TabIndex = 1;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -528,16 +532,15 @@
             this.openGraphics.ToolTipText = "BPP Graphics";
             this.openGraphics.Click += new System.EventHandler(this.openGraphics_Click);
             // 
-            // panelEffects
+            // panelMolds
             // 
-            this.panelEffects.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelEffects.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelEffects.Controls.Add(this.panel2);
-            this.panelEffects.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelEffects.Location = new System.Drawing.Point(0, 50);
-            this.panelEffects.Name = "panelEffects";
-            this.panelEffects.Size = new System.Drawing.Size(1015, 684);
-            this.panelEffects.TabIndex = 2;
+            this.panelMolds.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelMolds.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelMolds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMolds.Location = new System.Drawing.Point(221, 50);
+            this.panelMolds.Name = "panelMolds";
+            this.panelMolds.Size = new System.Drawing.Size(571, 319);
+            this.panelMolds.TabIndex = 2;
             // 
             // panel2
             // 
@@ -551,12 +554,10 @@
             this.panel2.Controls.Add(this.imageNum);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Location = new System.Drawing.Point(0, 50);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(221, 680);
+            this.panel2.Size = new System.Drawing.Size(221, 319);
             this.panel2.TabIndex = 0;
-            this.panel2.SizeChanged += new System.EventHandler(this.panel2_SizeChanged);
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // groupBox1
             // 
@@ -578,16 +579,29 @@
             // 
             this.toolTip1.Active = false;
             // 
+            // panelSequences
+            // 
+            this.panelSequences.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelSequences.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelSequences.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelSequences.Location = new System.Drawing.Point(0, 369);
+            this.panelSequences.Name = "panelSequences";
+            this.panelSequences.Size = new System.Drawing.Size(792, 370);
+            this.panelSequences.TabIndex = 3;
+            // 
             // Effects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1015, 734);
-            this.Controls.Add(this.panelEffects);
+            this.ClientSize = new System.Drawing.Size(792, 739);
+            this.Controls.Add(this.panelMolds);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.toolStrip2);
+            this.Controls.Add(this.panelSequences);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Effects";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -603,7 +617,6 @@
             this.toolStrip2.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
-            this.panelEffects.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -643,18 +656,19 @@
         private System.Windows.Forms.ToolStripButton openSequences;
         private System.Windows.Forms.ToolStripButton openMolds;
         private System.Windows.Forms.ToolStripTextBox searchText;
-        private System.Windows.Forms.Panel panelEffects;
+        private System.Windows.Forms.Panel panelMolds;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripButton showMain;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton clear;
         private ToolStripNumericUpDown number;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripButton enableHelpTips;
-        private System.Windows.Forms.ToolStripButton showDecHex;
+        private System.Windows.Forms.ToolStripButton helpTips;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.ToolStripButton cullAnimations;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel panelSequences;
     }
 }

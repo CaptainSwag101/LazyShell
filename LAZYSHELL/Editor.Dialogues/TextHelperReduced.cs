@@ -42,11 +42,14 @@ namespace LAZYSHELL
 
         public char[] DecodeText(char[] decode, bool byteView, int textType, StringCollection keystrokes)
         {
+            int count = keystrokes.Count - 1;
             ArrayList arrayList = new ArrayList();
             bool lastBrace = true;
-
             for (int i = 0; i < decode.Length; i++) // For every character of text
             {
+                // skip if out of bounds
+                if (decode[i] >= keystrokes.Count)
+                    continue;
                 if (byteView) // We are decoding to numbers
                 {
                     if (keystrokes[decode[i]] == "") // Is encoded character
@@ -72,7 +75,6 @@ namespace LAZYSHELL
                                 break;
                             default:
                                 string temp = ((byte)decode[i]).ToString();
-
                                 char[] decoded = temp.ToCharArray();
                                 arrayList.Add('[');
                                 for (int z = 0; z < decoded.Length; z++)

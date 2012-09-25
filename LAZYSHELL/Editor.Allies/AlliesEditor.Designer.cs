@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlliesEditor));
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -38,7 +37,7 @@
             this.clear = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpTips = new System.Windows.Forms.ToolStripButton();
-            this.baseConversion = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.showNewGameStats = new System.Windows.Forms.ToolStripButton();
             this.showLevelUps = new System.Windows.Forms.ToolStripButton();
@@ -58,7 +57,7 @@
             this.clear,
             this.toolStripSeparator1,
             this.helpTips,
-            this.baseConversion,
+            this.baseConvertor,
             this.toolStripSeparator2,
             this.showNewGameStats,
             this.showLevelUps});
@@ -128,18 +127,18 @@
             this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.helpTips.Name = "helpTips";
             this.helpTips.Size = new System.Drawing.Size(23, 22);
-            this.helpTips.Text = "Show Help Tips";
+            this.helpTips.Text = "Help Tips";
             // 
-            // baseConversion
+            // baseConvertor
             // 
-            this.baseConversion.CheckOnClick = true;
-            this.baseConversion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.baseConversion.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.baseConversion.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.baseConversion.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.baseConversion.Name = "baseConversion";
-            this.baseConversion.Size = new System.Drawing.Size(23, 22);
-            this.baseConversion.Text = "Show Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.Text = "Base Convertor";
             // 
             // toolStripSeparator2
             // 
@@ -195,6 +194,7 @@
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "AlliesEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -220,7 +220,7 @@
         private System.Windows.Forms.ToolStripButton showLevelUps;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripButton helpTips;
-        private System.Windows.Forms.ToolStripButton baseConversion;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolTip toolTip1;
     }

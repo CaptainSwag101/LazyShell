@@ -6,7 +6,7 @@ using System.Text;
 namespace LAZYSHELL
 {
     [Serializable()]
-    public class MapPoint
+    public class Location
     {
         [NonSerialized()]
         private byte[] data;
@@ -19,15 +19,15 @@ namespace LAZYSHELL
         private byte showCheckBit; public byte ShowCheckBit { get { return showCheckBit; } set { showCheckBit = value; } }
         private ushort showCheckAddress; public ushort ShowCheckAddress { get { return showCheckAddress; } set { showCheckAddress = value; } }
 
-        private bool goMapPoint; public bool GoMapPoint { get { return goMapPoint; } set { goMapPoint = value; } }
+        private bool goLocation; public bool GoLocation { get { return goLocation; } set { goLocation = value; } }
 
         private ushort runEvent; public ushort RunEvent { get { return runEvent; } set { runEvent = value; } }
 
-        private byte whichPointCheckBit; public byte WhichPointCheckBit { get { return whichPointCheckBit; } set { whichPointCheckBit = value; } }
-        private ushort whichPointCheckAddress; public ushort WhichPointCheckAddress { get { return whichPointCheckAddress; } set { whichPointCheckAddress = value; } }
+        private byte whichLocationCheckBit; public byte WhichLocationCheckBit { get { return whichLocationCheckBit; } set { whichLocationCheckBit = value; } }
+        private ushort whichLocationCheckAddress; public ushort WhichLocationCheckAddress { get { return whichLocationCheckAddress; } set { whichLocationCheckAddress = value; } }
 
-        private byte goMapPointA; public byte GoMapPointA { get { return goMapPointA; } set { goMapPointA = value; } }
-        private byte goMapPointB; public byte GoMapPointB { get { return goMapPointB; } set { goMapPointB = value; } }
+        private byte goLocationA; public byte GoLocationA { get { return goLocationA; } set { goLocationA = value; } }
+        private byte goLocationB; public byte GoLocationB { get { return goLocationB; } set { goLocationB = value; } }
 
         private bool toEastEnabled; public bool ToEastEnabled { get { return toEastEnabled; } set { toEastEnabled = value; } }
         private bool toSouthEnabled; public bool ToSouthEnabled { get { return toSouthEnabled; } set { toSouthEnabled = value; } }
@@ -42,19 +42,19 @@ namespace LAZYSHELL
         private ushort toSouthCheckAddress; public ushort ToSouthCheckAddress { get { return toSouthCheckAddress; } set { toSouthCheckAddress = value; } }
         private ushort toWestCheckAddress; public ushort ToWestCheckAddress { get { return toWestCheckAddress; } set { toWestCheckAddress = value; } }
         private ushort toNorthCheckAddress; public ushort ToNorthCheckAddress { get { return toNorthCheckAddress; } set { toNorthCheckAddress = value; } }
-        private byte toEastPoint; public byte ToEastPoint { get { return toEastPoint; } set { toEastPoint = value; } }
-        private byte toSouthPoint; public byte ToSouthPoint { get { return toSouthPoint; } set { toSouthPoint = value; } }
-        private byte toWestPoint; public byte ToWestPoint { get { return toWestPoint; } set { toWestPoint = value; } }
-        private byte toNorthPoint; public byte ToNorthPoint { get { return toNorthPoint; } set { toNorthPoint = value; } }
+        private byte toEastLocation; public byte ToEastLocation { get { return toEastLocation; } set { toEastLocation = value; } }
+        private byte toSouthLocation; public byte ToSouthLocation { get { return toSouthLocation; } set { toSouthLocation = value; } }
+        private byte toWestLocation; public byte ToWestLocation { get { return toWestLocation; } set { toWestLocation = value; } }
+        private byte toNorthLocation; public byte ToNorthLocation { get { return toNorthLocation; } set { toNorthLocation = value; } }
 
-        public MapPoint(byte[] data, int mapPointNum)
+        public Location(byte[] data, int index)
         {
             this.data = data;
-            this.index = mapPointNum;
+            this.index = index;
 
-            InitializeMapPoint(data);
+            InitializeLocation(data);
         }
-        private void InitializeMapPoint(byte[] data)
+        private void InitializeLocation(byte[] data)
         {
             int offset = index * 16 + 0x3EF830;
 
@@ -64,19 +64,19 @@ namespace LAZYSHELL
             showCheckBit = (byte)(data[offset] & 0x07);
             showCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset++;
 
-            goMapPoint = (data[offset] & 0x40) == 0x40; offset++;
+            goLocation = (data[offset] & 0x40) == 0x40; offset++;
 
-            if (!goMapPoint)
+            if (!goLocation)
             {
                 runEvent = Bits.GetShort(data, offset);
                 offset += 4;
             }
             else
             {
-                whichPointCheckBit = (byte)(data[offset] & 0x07);
-                whichPointCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset += 2;
-                goMapPointA = data[offset]; offset++;
-                goMapPointB = data[offset]; offset++;
+                whichLocationCheckBit = (byte)(data[offset] & 0x07);
+                whichLocationCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset += 2;
+                goLocationA = data[offset]; offset++;
+                goLocationB = data[offset]; offset++;
             }
 
             if (Bits.GetShort(data, offset) == 0xFFFF)
@@ -90,7 +90,7 @@ namespace LAZYSHELL
                 toEastEnabled = true;
                 toEastCheckBit = (byte)(data[offset] & 0x07);
                 toEastCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset++;
-                toEastPoint = (byte)(data[offset] >> 1); offset++;
+                toEastLocation = (byte)(data[offset] >> 1); offset++;
             }
 
             if (Bits.GetShort(data, offset) == 0xFFFF)
@@ -104,7 +104,7 @@ namespace LAZYSHELL
                 toSouthEnabled = true;
                 toSouthCheckBit = (byte)(data[offset] & 0x07);
                 toSouthCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset++;
-                toSouthPoint = (byte)(data[offset] >> 1); offset++;
+                toSouthLocation = (byte)(data[offset] >> 1); offset++;
             }
 
             if (Bits.GetShort(data, offset) == 0xFFFF)
@@ -118,7 +118,7 @@ namespace LAZYSHELL
                 toWestEnabled = true;
                 toWestCheckBit = (byte)(data[offset] & 0x07);
                 toWestCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset++;
-                toWestPoint = (byte)(data[offset] >> 1); offset++;
+                toWestLocation = (byte)(data[offset] >> 1); offset++;
             }
 
             if (Bits.GetShort(data, offset) == 0xFFFF)
@@ -132,7 +132,7 @@ namespace LAZYSHELL
                 toNorthEnabled = true;
                 toNorthCheckBit = (byte)(data[offset] & 0x07);
                 toNorthCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset++;
-                toNorthPoint = (byte)(data[offset] >> 1);
+                toNorthLocation = (byte)(data[offset] >> 1);
             }
 
             int pointer = Bits.GetShort(data, index * 2 + 0x3EFD00);
@@ -158,19 +158,19 @@ namespace LAZYSHELL
             Bits.SetShort(data, offset, (ushort)((showCheckAddress - 0x7045) << 3));
             data[offset] |= showCheckBit; offset++;
 
-            Bits.SetBit(data, offset, 6, goMapPoint); offset++;
+            Bits.SetBit(data, offset, 6, goLocation); offset++;
 
-            if (!goMapPoint)
+            if (!goLocation)
             {
                 Bits.SetShort(data, offset, runEvent); offset += 2;
                 Bits.SetShort(data, offset, 0xFFFF); offset += 2;
             }
             else
             {
-                Bits.SetShort(data, offset, (ushort)((whichPointCheckAddress - 0x7045) << 3));
-                data[offset] |= whichPointCheckBit; offset += 2;
-                data[offset] = goMapPointA; offset++;
-                data[offset] = goMapPointB; offset++;
+                Bits.SetShort(data, offset, (ushort)((whichLocationCheckAddress - 0x7045) << 3));
+                data[offset] |= whichLocationCheckBit; offset += 2;
+                data[offset] = goLocationA; offset++;
+                data[offset] = goLocationB; offset++;
             }
 
             if (!toEastEnabled)
@@ -182,7 +182,7 @@ namespace LAZYSHELL
             {
                 Bits.SetShort(data, offset, (ushort)((toEastCheckAddress - 0x7045) << 3));
                 data[offset] |= toEastCheckBit; offset++;
-                data[offset] |= (byte)(toEastPoint << 1); offset++;
+                data[offset] |= (byte)(toEastLocation << 1); offset++;
             }
 
             if (!toSouthEnabled)
@@ -194,7 +194,7 @@ namespace LAZYSHELL
             {
                 Bits.SetShort(data, offset, (ushort)((toSouthCheckAddress - 0x7045) << 3));
                 data[offset] |= toSouthCheckBit; offset++;
-                data[offset] |= (byte)(toSouthPoint << 1); offset++;
+                data[offset] |= (byte)(toSouthLocation << 1); offset++;
             }
 
             if (!toWestEnabled)
@@ -206,7 +206,7 @@ namespace LAZYSHELL
             {
                 Bits.SetShort(data, offset, (ushort)((toWestCheckAddress - 0x7045) << 3));
                 data[offset] |= toWestCheckBit; offset++;
-                data[offset] |= (byte)(toWestPoint << 1); offset++;
+                data[offset] |= (byte)(toWestLocation << 1); offset++;
             }
 
             if (!toNorthEnabled)
@@ -218,7 +218,7 @@ namespace LAZYSHELL
             {
                 Bits.SetShort(data, offset, (ushort)((toNorthCheckAddress - 0x7045) << 3));
                 data[offset] |= toNorthCheckBit; offset++;
-                data[offset] |= (byte)(toNorthPoint << 1); offset++;
+                data[offset] |= (byte)(toNorthLocation << 1); offset++;
             }
         }
         public void Clear()
@@ -227,12 +227,12 @@ namespace LAZYSHELL
             y = 0;
             showCheckBit = 0;
             showCheckAddress = 0x7045;
-            goMapPoint = false;
+            goLocation = false;
             runEvent = 0;
-            whichPointCheckAddress = 0x7045;
-            whichPointCheckBit = 0;
-            goMapPointA = 0;
-            goMapPointB = 0;
+            whichLocationCheckAddress = 0x7045;
+            whichLocationCheckBit = 0;
+            goLocationA = 0;
+            goLocationB = 0;
             toEastEnabled = false;
             toSouthEnabled = false;
             toWestEnabled = false;

@@ -47,9 +47,9 @@ namespace LAZYSHELL
             DelayTime = data[offset++];
             DecayFactor = data[offset++];
             Echo = data[offset++];
-            samples = new SampleIndex[19];
+            samples = new SampleIndex[20];
             int i = 0;
-            while (data[offset] != 0xFF && i < 19)
+            while (data[offset] != 0xFF && i < 20)
                 samples[i++] = new SampleIndex(data[offset++], data[offset++]);
             offset++;
             Length = Bits.GetShort(data, offset); offset += 2;
@@ -317,6 +317,7 @@ namespace LAZYSHELL
         public void AssembleSPCData()
         {
             int offset = 0;
+            spcData = new byte[percussives.Count * 5 + 1];
             foreach (Percussives percussive in percussives)
             {
                 spcData[offset++] = (byte)percussive.PitchIndex;
@@ -355,7 +356,7 @@ namespace LAZYSHELL
             delayTime = 0;
             decayFactor = 0;
             echo = 0;
-            samples = new SampleIndex[19];
+            samples = new SampleIndex[20];
             //
             spcData = new byte[17]; // 16 for 8 channel pointers
             spcData[0] = 0xFF; // terminates percussive list
@@ -401,7 +402,7 @@ namespace LAZYSHELL
     {
         public SPCCommand Command;
         public Pitch Pitch { get { return (Pitch)(Command.Opcode % 14); } }
-        public int Beat { get { return Command.Opcode / 14; } }
+        public Beat Beat { get { return (Beat)(Command.Opcode / 14); } }
         public int Octave; // max is 8 (9 octaves)
         public bool Percussive;
         public int Ticks
@@ -409,14 +410,14 @@ namespace LAZYSHELL
             get
             {
                 if (Command.Opcode < 0xB6)
-                    return Model.Data[Beat + 0x042304];
+                    return Model.Data[(int)Beat + 0x042304];
                 else if (Command.Opcode < 0xC4)
                     return Command.Param1;
                 else
                     return 0;
             }
         }
-        public bool Hold { get { return Pitch == Pitch.Hold; } }
+        public bool Tie { get { return Pitch == Pitch.Tie; } }
         public bool Rest { get { return Pitch == Pitch.Rest; } }
         public bool Sharp
         {
@@ -557,8 +558,8 @@ namespace LAZYSHELL
         public string ToString(bool showOctave)
         {
             string description = "";
-            if (Hold)
-                description += "Note hold, ";
+            if (Tie)
+                description += "Note tie, ";
             else if (Rest)
                 description += "Note rest, ";
             else
@@ -588,19 +589,19 @@ namespace LAZYSHELL
             }
             switch (Beat)
             {
-                case 0: description += "beat: whole"; break;
-                case 1: description += "beat: half."; break;
-                case 2: description += "beat: half"; break;
-                case 3: description += "beat: quarter."; break;
-                case 4: description += "beat: quarter"; break;
-                case 5: description += "beat: 8th."; break;
-                case 6: description += "beat: triplet quarter"; break;
-                case 7: description += "beat: 8th"; break;
-                case 8: description += "beat: triplet 8th"; break;
-                case 9: description += "beat: 16th"; break;
-                case 10: description += "beat: triplet 16th"; break;
-                case 11: description += "beat: 32nd"; break;
-                case 12: description += "beat: 64th"; break;
+                case Beat.Whole: description += "beat: whole"; break;
+                case Beat.HalfDotted: description += "beat: half."; break;
+                case Beat.Half: description += "beat: half"; break;
+                case Beat.QuarterDotted: description += "beat: quarter."; break;
+                case Beat.Quarter: description += "beat: quarter"; break;
+                case Beat.EighthDotted: description += "beat: 8th."; break;
+                case Beat.QuarterTriplet: description += "beat: triplet quarter"; break;
+                case Beat.Eighth: description += "beat: 8th"; break;
+                case Beat.EighthTriplet: description += "beat: triplet 8th"; break;
+                case Beat.Sixteenth: description += "beat: 16th"; break;
+                case Beat.SixteenthTriplet: description += "beat: triplet 16th"; break;
+                case Beat.ThirtySecond: description += "beat: 32nd"; break;
+                case Beat.SixtyFourth: description += "beat: 64th"; break;
                 default: description += "duration: " + Ticks; break;
             }
             return description;

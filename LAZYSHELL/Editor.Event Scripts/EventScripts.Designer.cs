@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EventScripts));
             this.evtNameB = new System.Windows.Forms.ComboBox();
             this.evtNumD = new System.Windows.Forms.NumericUpDown();
             this.evtNameA = new System.Windows.Forms.ComboBox();
@@ -64,16 +63,14 @@
             this.eventNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.navigateBck = new System.Windows.Forms.ToolStripButton();
             this.navigateFwd = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.gotoAddr = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.eventLabel = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.searchLabelsText = new System.Windows.Forms.ToolStripTextBox();
+            this.toggleLabel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.gotoAddrButton = new System.Windows.Forms.ToolStripButton();
+            this.gotoAddr = new System.Windows.Forms.ToolStripTextBox();
             this.searchLabels = new System.Windows.Forms.ToolStripButton();
-            this.EvtScrLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.searchLabelsText = new System.Windows.Forms.ToolStripTextBox();
+            this.labelBytesLeft = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.label1 = new System.Windows.Forms.ToolStripLabel();
             this.eventHexText = new System.Windows.Forms.ToolStripTextBox();
@@ -91,16 +88,15 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.dumpEventScriptTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpActionScriptTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reset = new System.Windows.Forms.ToolStripButton();
             this.clear = new System.Windows.Forms.ToolStripDropDownButton();
             this.clearEventScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearActionScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reset = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.enableHelpTips = new System.Windows.Forms.ToolStripButton();
-            this.showDecHex = new System.Windows.Forms.ToolStripButton();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
+            this.hexEditor = new System.Windows.Forms.ToolStripButton();
             this.autoPointerUpdate = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.hexViewer = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addThisToNotesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -419,7 +415,7 @@
             this.EventScriptTree.HotTracking = true;
             this.EventScriptTree.Location = new System.Drawing.Point(0, 50);
             this.EventScriptTree.Name = "EventScriptTree";
-            this.EventScriptTree.Size = new System.Drawing.Size(710, 611);
+            this.EventScriptTree.Size = new System.Drawing.Size(510, 598);
             this.EventScriptTree.TabIndex = 2;
             this.EventScriptTree.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.EventScriptTree_AfterCheck);
             this.EventScriptTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.EventScriptTree_AfterSelect);
@@ -431,9 +427,9 @@
             // 
             this.panel8.Controls.Add(this.panel22);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(710, 50);
+            this.panel8.Location = new System.Drawing.Point(510, 50);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(282, 636);
+            this.panel8.Size = new System.Drawing.Size(282, 623);
             this.panel8.TabIndex = 3;
             // 
             // panel22
@@ -450,7 +446,7 @@
             this.panel22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel22.Location = new System.Drawing.Point(0, 0);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(282, 636);
+            this.panel22.Size = new System.Drawing.Size(282, 623);
             this.panel22.TabIndex = 0;
             // 
             // labelTitleA
@@ -466,7 +462,7 @@
             this.labelTitleA.Controls.Add(this.labelEvtB);
             this.labelTitleA.Controls.Add(this.labelEvtC);
             this.labelTitleA.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelTitleA.Location = new System.Drawing.Point(0, 393);
+            this.labelTitleA.Location = new System.Drawing.Point(0, 380);
             this.labelTitleA.Name = "labelTitleA";
             this.labelTitleA.Size = new System.Drawing.Size(282, 89);
             this.labelTitleA.TabIndex = 4;
@@ -492,7 +488,7 @@
             this.commands.IntegralHeight = false;
             this.commands.Location = new System.Drawing.Point(0, 24);
             this.commands.Name = "commands";
-            this.commands.Size = new System.Drawing.Size(282, 363);
+            this.commands.Size = new System.Drawing.Size(282, 350);
             this.commands.TabIndex = 3;
             this.commands.SelectedIndexChanged += new System.EventHandler(this.commands_SelectedIndexChanged);
             // 
@@ -536,7 +532,7 @@
             // 
             this.labelTitleB.Controls.Add(this.evtEffects);
             this.labelTitleB.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelTitleB.Location = new System.Drawing.Point(0, 482);
+            this.labelTitleB.Location = new System.Drawing.Point(0, 469);
             this.labelTitleB.Name = "labelTitleB";
             this.labelTitleB.Size = new System.Drawing.Size(282, 78);
             this.labelTitleB.TabIndex = 5;
@@ -549,7 +545,7 @@
             this.labelTitleC.Controls.Add(this.evtNumF);
             this.labelTitleC.Controls.Add(this.labelEvtF);
             this.labelTitleC.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelTitleC.Location = new System.Drawing.Point(0, 560);
+            this.labelTitleC.Location = new System.Drawing.Point(0, 547);
             this.labelTitleC.Name = "labelTitleC";
             this.labelTitleC.Size = new System.Drawing.Size(282, 47);
             this.labelTitleC.TabIndex = 6;
@@ -560,7 +556,7 @@
             this.panel1.Controls.Add(this.buttonInsertEvent);
             this.panel1.Controls.Add(this.buttonApplyEvent);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 607);
+            this.panel1.Location = new System.Drawing.Point(0, 594);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(282, 29);
             this.panel1.TabIndex = 7;
@@ -602,19 +598,17 @@
             this.eventNum,
             this.navigateBck,
             this.navigateFwd,
-            this.toolStripSeparator10,
-            this.toolStripLabel1,
-            this.gotoAddr,
-            this.toolStripSeparator7,
-            this.toolStripButton1,
             this.eventLabel,
-            this.toolStripSeparator8,
-            this.searchLabelsText,
-            this.searchLabels});
+            this.toggleLabel,
+            this.toolStripSeparator7,
+            this.gotoAddrButton,
+            this.gotoAddr,
+            this.searchLabels,
+            this.searchLabelsText});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(992, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(792, 25);
             this.toolStrip1.TabIndex = 1;
             // 
             // eventName
@@ -627,7 +621,7 @@
             "Event Scripts",
             "Action Scripts"});
             this.eventName.Name = "eventName";
-            this.eventName.Size = new System.Drawing.Size(200, 25);
+            this.eventName.Size = new System.Drawing.Size(100, 25);
             this.eventName.SelectedIndexChanged += new System.EventHandler(this.eventName_SelectedIndexChanged);
             // 
             // eventNum
@@ -640,7 +634,7 @@
             0,
             0,
             0});
-            this.eventNum.Location = new System.Drawing.Point(209, 1);
+            this.eventNum.Location = new System.Drawing.Point(109, 1);
             this.eventNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -652,7 +646,7 @@
             0,
             0});
             this.eventNum.Name = "eventNum";
-            this.eventNum.Size = new System.Drawing.Size(60, 22);
+            this.eventNum.Size = new System.Drawing.Size(55, 22);
             this.eventNum.Text = "0";
             this.eventNum.Value = new decimal(new int[] {
             0,
@@ -685,53 +679,48 @@
             this.navigateFwd.ToolTipText = "Navigate Forward";
             this.navigateFwd.Click += new System.EventHandler(this.navigateFwd_Click);
             // 
-            // toolStripSeparator10
+            // eventLabel
             // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
+            this.eventLabel.Name = "eventLabel";
+            this.eventLabel.Size = new System.Drawing.Size(100, 25);
+            this.eventLabel.Visible = false;
+            this.eventLabel.TextChanged += new System.EventHandler(this.eventLabel_TextChanged);
             // 
-            // toolStripLabel1
+            // toggleLabel
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(73, 22);
-            this.toolStripLabel1.Text = " GOTO ADDR:";
-            // 
-            // gotoAddr
-            // 
-            this.gotoAddr.MaxLength = 6;
-            this.gotoAddr.Name = "gotoAddr";
-            this.gotoAddr.Size = new System.Drawing.Size(60, 25);
-            this.gotoAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gotoAddr_KeyDown);
+            this.toggleLabel.CheckOnClick = true;
+            this.toggleLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toggleLabel.Image = global::LAZYSHELL.Properties.Resources.label;
+            this.toggleLabel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toggleLabel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleLabel.Name = "toggleLabel";
+            this.toggleLabel.Size = new System.Drawing.Size(23, 22);
+            this.toggleLabel.ToolTipText = "Script Label";
+            this.toggleLabel.Click += new System.EventHandler(this.toggleLabel_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton1
+            // gotoAddrButton
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::LAZYSHELL.Properties.Resources.label;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.gotoAddrButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.gotoAddrButton.Image = global::LAZYSHELL.Properties.Resources.jumpTo;
+            this.gotoAddrButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.gotoAddrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.gotoAddrButton.Name = "gotoAddrButton";
+            this.gotoAddrButton.Size = new System.Drawing.Size(23, 22);
+            this.gotoAddrButton.ToolTipText = "Goto Address";
+            this.gotoAddrButton.Click += new System.EventHandler(this.gotoAddrButton_Click);
             // 
-            // eventLabel
+            // gotoAddr
             // 
-            this.eventLabel.Name = "eventLabel";
-            this.eventLabel.Size = new System.Drawing.Size(200, 25);
-            this.eventLabel.TextChanged += new System.EventHandler(this.eventLabel_TextChanged);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
-            // 
-            // searchLabelsText
-            // 
-            this.searchLabelsText.Name = "searchLabelsText";
-            this.searchLabelsText.Size = new System.Drawing.Size(200, 25);
+            this.gotoAddr.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gotoAddr.MaxLength = 6;
+            this.gotoAddr.Name = "gotoAddr";
+            this.gotoAddr.Size = new System.Drawing.Size(60, 25);
+            this.gotoAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gotoAddr_KeyDown);
             // 
             // searchLabels
             // 
@@ -743,11 +732,16 @@
             this.searchLabels.Size = new System.Drawing.Size(23, 22);
             this.searchLabels.Text = "Find script";
             // 
-            // EvtScrLabel3
+            // searchLabelsText
             // 
-            this.EvtScrLabel3.Name = "EvtScrLabel3";
-            this.EvtScrLabel3.Size = new System.Drawing.Size(52, 22);
-            this.EvtScrLabel3.Text = "bytes left";
+            this.searchLabelsText.Name = "searchLabelsText";
+            this.searchLabelsText.Size = new System.Drawing.Size(100, 25);
+            // 
+            // labelBytesLeft
+            // 
+            this.labelBytesLeft.Name = "labelBytesLeft";
+            this.labelBytesLeft.Size = new System.Drawing.Size(52, 22);
+            this.labelBytesLeft.Text = "bytes left";
             // 
             // toolStripSeparator3
             // 
@@ -766,7 +760,7 @@
             this.eventHexText.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventHexText.Name = "eventHexText";
             this.eventHexText.ReadOnly = true;
-            this.eventHexText.Size = new System.Drawing.Size(200, 25);
+            this.eventHexText.Size = new System.Drawing.Size(150, 25);
             // 
             // toolStripSeparator6
             // 
@@ -787,18 +781,17 @@
             this.toolStripSeparator4,
             this.import,
             this.export,
-            this.reset,
             this.clear,
+            this.reset,
             this.toolStripSeparator2,
-            this.enableHelpTips,
-            this.showDecHex,
-            this.autoPointerUpdate,
-            this.toolStripSeparator9,
-            this.hexViewer});
+            this.helpTips,
+            this.baseConvertor,
+            this.hexEditor,
+            this.autoPointerUpdate});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip4.Size = new System.Drawing.Size(992, 25);
+            this.toolStrip4.Size = new System.Drawing.Size(792, 25);
             this.toolStrip4.TabIndex = 0;
             this.toolStrip4.Text = "toolStrip4";
             // 
@@ -827,7 +820,6 @@
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(27, 22);
-            this.import.ToolTipText = "Import";
             // 
             // importEventScriptsToolStripMenuItem
             // 
@@ -860,7 +852,6 @@
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(27, 22);
-            this.export.ToolTipText = "Export";
             // 
             // exportEventScriptsToolStripMenuItem
             // 
@@ -903,6 +894,35 @@
             this.dumpActionScriptTextToolStripMenuItem.Text = "Dump Action Script Text...";
             this.dumpActionScriptTextToolStripMenuItem.Click += new System.EventHandler(this.dumpActionScriptTextToolStripMenuItem_Click);
             // 
+            // clear
+            // 
+            this.clear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearEventScriptsToolStripMenuItem,
+            this.clearActionScriptsToolStripMenuItem});
+            this.clear.Image = global::LAZYSHELL.Properties.Resources.clear_small;
+            this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(28, 22);
+            // 
+            // clearEventScriptsToolStripMenuItem
+            // 
+            this.clearEventScriptsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
+            this.clearEventScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.clearEventScriptsToolStripMenuItem.Name = "clearEventScriptsToolStripMenuItem";
+            this.clearEventScriptsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.clearEventScriptsToolStripMenuItem.Text = "Clear Event Scripts...";
+            this.clearEventScriptsToolStripMenuItem.Click += new System.EventHandler(this.clearEventScriptsToolStripMenuItem_Click);
+            // 
+            // clearActionScriptsToolStripMenuItem
+            // 
+            this.clearActionScriptsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
+            this.clearActionScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.clearActionScriptsToolStripMenuItem.Name = "clearActionScriptsToolStripMenuItem";
+            this.clearActionScriptsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.clearActionScriptsToolStripMenuItem.Text = "Clear Action Scripts...";
+            this.clearActionScriptsToolStripMenuItem.Click += new System.EventHandler(this.clearActionScriptsToolStripMenuItem_Click);
+            // 
             // reset
             // 
             this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -914,58 +934,41 @@
             this.reset.ToolTipText = "Reset";
             this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
-            // clear
-            // 
-            this.clear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearEventScriptsToolStripMenuItem,
-            this.clearActionScriptsToolStripMenuItem});
-            this.clear.Image = global::LAZYSHELL.Properties.Resources.clear_small;
-            this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(26, 22);
-            this.clear.ToolTipText = "Clear";
-            // 
-            // clearEventScriptsToolStripMenuItem
-            // 
-            this.clearEventScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.clearEventScriptsToolStripMenuItem.Name = "clearEventScriptsToolStripMenuItem";
-            this.clearEventScriptsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.clearEventScriptsToolStripMenuItem.Text = "Clear Event Scripts...";
-            this.clearEventScriptsToolStripMenuItem.Click += new System.EventHandler(this.clearEventScriptsToolStripMenuItem_Click);
-            // 
-            // clearActionScriptsToolStripMenuItem
-            // 
-            this.clearActionScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.clearActionScriptsToolStripMenuItem.Name = "clearActionScriptsToolStripMenuItem";
-            this.clearActionScriptsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.clearActionScriptsToolStripMenuItem.Text = "Clear Action Scripts...";
-            this.clearActionScriptsToolStripMenuItem.Click += new System.EventHandler(this.clearActionScriptsToolStripMenuItem_Click);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // enableHelpTips
+            // helpTips
             // 
-            this.enableHelpTips.CheckOnClick = true;
-            this.enableHelpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
-            this.enableHelpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.enableHelpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.enableHelpTips.Name = "enableHelpTips";
-            this.enableHelpTips.Size = new System.Drawing.Size(23, 22);
-            this.enableHelpTips.ToolTipText = "Help Tips";
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.ToolTipText = "Help Tips";
             // 
-            // showDecHex
+            // baseConvertor
             // 
-            this.showDecHex.CheckOnClick = true;
-            this.showDecHex.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.showDecHex.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showDecHex.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showDecHex.Name = "showDecHex";
-            this.showDecHex.Size = new System.Drawing.Size(23, 22);
-            this.showDecHex.ToolTipText = "Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.ToolTipText = "Base Convertor";
+            // 
+            // hexEditor
+            // 
+            this.hexEditor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hexEditor.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
+            this.hexEditor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.hexEditor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.hexEditor.Name = "hexEditor";
+            this.hexEditor.Size = new System.Drawing.Size(23, 22);
+            this.hexEditor.Text = "Hex Editor";
+            this.hexEditor.Click += new System.EventHandler(this.hexViewer_Click);
             // 
             // autoPointerUpdate
             // 
@@ -978,22 +981,6 @@
             this.autoPointerUpdate.Name = "autoPointerUpdate";
             this.autoPointerUpdate.Size = new System.Drawing.Size(23, 22);
             this.autoPointerUpdate.ToolTipText = "Auto Pointer Update";
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
-            // 
-            // hexViewer
-            // 
-            this.hexViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.hexViewer.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
-            this.hexViewer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.hexViewer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.hexViewer.Name = "hexViewer";
-            this.hexViewer.Size = new System.Drawing.Size(23, 22);
-            this.hexViewer.Text = "Edit event raw hex data";
-            this.hexViewer.Click += new System.EventHandler(this.hexViewer_Click);
             // 
             // toolStripSeparator12
             // 
@@ -1021,14 +1008,14 @@
             this.goToToolStripMenuItem});
             this.contextMenuStripGoto.Name = "contextMenuStripGoto";
             this.contextMenuStripGoto.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStripGoto.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStripGoto.Size = new System.Drawing.Size(68, 26);
             // 
             // goToToolStripMenuItem
             // 
             this.goToToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.jumpTo;
             this.goToToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
-            this.goToToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.goToToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
             // toolStrip2
             // 
@@ -1047,14 +1034,14 @@
             this.toolStripSeparator6,
             this.EventPreview,
             this.toolStripSeparator12,
-            this.EvtScrLabel3,
+            this.labelBytesLeft,
             this.toolStripSeparator3,
             this.label1,
             this.eventHexText});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 661);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 648);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(710, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(510, 25);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -1165,7 +1152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 686);
+            this.ClientSize = new System.Drawing.Size(792, 673);
             this.Controls.Add(this.EventScriptTree);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.panel8);
@@ -1173,6 +1160,7 @@
             this.Controls.Add(this.toolStrip4);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "EventScripts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -1240,7 +1228,7 @@
         private System.Windows.Forms.ToolStripButton EvtScrMoveDown;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton EventPreview;
-        private System.Windows.Forms.ToolStripLabel EvtScrLabel3;
+        private System.Windows.Forms.ToolStripLabel labelBytesLeft;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel label1;
         private System.Windows.Forms.ToolStrip toolStrip4;
@@ -1251,11 +1239,10 @@
         private System.Windows.Forms.ToolStripDropDownButton clear;
         private System.Windows.Forms.ToolStripComboBox eventName;
         private ToolStripNumericUpDown eventNum;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toggleLabel;
         private System.Windows.Forms.ToolStripTextBox eventLabel;
         private System.Windows.Forms.ToolStripButton searchLabels;
         private System.Windows.Forms.ListBox commands;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripTextBox searchLabelsText;
         private System.Windows.Forms.ToolStripTextBox eventHexText;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -1263,8 +1250,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStripGoto;
         private System.Windows.Forms.ToolStripMenuItem goToToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripButton enableHelpTips;
-        private System.Windows.Forms.ToolStripButton showDecHex;
+        private System.Windows.Forms.ToolStripButton helpTips;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolStripButton autoPointerUpdate;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -1278,16 +1265,12 @@
         private System.Windows.Forms.ToolStripMenuItem clearEventScriptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearActionScriptsToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripButton hexViewer;
+        private System.Windows.Forms.ToolStripButton hexEditor;
         private System.Windows.Forms.CheckBox button1;
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.ToolStripButton navigateBck;
         private System.Windows.Forms.ToolStripButton navigateFwd;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripTextBox gotoAddr;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.GroupBox labelTitleA;
         private System.Windows.Forms.GroupBox labelTitleB;
         private System.Windows.Forms.GroupBox labelTitleC;
@@ -1295,5 +1278,7 @@
         private System.Windows.Forms.ComboBox categories_es;
         private System.Windows.Forms.Label labelCommands;
         private System.Windows.Forms.ComboBox categories_aq;
+        private System.Windows.Forms.ToolStripButton gotoAddrButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     }
 }

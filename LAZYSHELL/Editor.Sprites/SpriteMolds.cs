@@ -104,28 +104,6 @@ namespace LAZYSHELL
             }
             RefreshMold();
         }
-        public void SetToolTips(ToolTip toolTip1)
-        {
-            toolTip1.SetToolTip(this.listBoxMolds,
-                "The collection of molds used by the sprite's animation. A \n" +
-                "mold is a set of tiles arranged either dynamically or in a \n" +
-                "predefined grid to create a complete image that can be \n" +
-                "used by an animation sequence.");
-
-            this.newMold.ToolTipText =
-                "Insert a new mold after the currently selected mold.";
-
-            this.deleteMold.ToolTipText =
-                "Delete the currently selected mold.";
-
-            toolTip1.SetToolTip(this.moldTileXCoord,
-                "The absolute X coordinate of the 16x16 tile.\n" +
-                "Only used by \"Tilemap\" format.");
-
-            toolTip1.SetToolTip(this.moldTileYCoord,
-                "The absolute Y coordinate of the 16x16 tile.\n" +
-                "Only used by \"Tilemap\" format.");
-        }
         private void ImportImages(string type)
         {
             Bitmap[] imports = new Bitmap[1]; imports = (Bitmap[])Do.Import(imports);

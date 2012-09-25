@@ -16,7 +16,7 @@ namespace LAZYSHELL
         public NumericUpDown NpcYCoord { get { return npcY; } set { npcY = value; } }
         public TreeView NpcObjectTree { get { return npcObjectTree; } set { npcObjectTree = value; } }
         private NPCEditor findNPCNumber;
-        private SpritePartitions sp;
+        private SpritePartitions partitionBrowser;
         #endregion
         #region Methods
         private void InitializeNPCProperties()
@@ -85,7 +85,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "NPC #+";
                         this.label31.Text = "Event #+";
-                        this.buttonGotoA.Text = "Event #";
+                        this.npcGotoA.Text = "Event #";
                         this.label116.Text = "Action #+";
                         this.npcPropertyA.Maximum = 7;
                         this.npcPropertyB.Maximum = 7;
@@ -96,7 +96,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "$70A7 = ";
                         this.label31.Text = "{N/A}";
-                        this.buttonGotoA.Text = "Event #";
+                        this.npcGotoA.Text = "Event #";
                         this.label116.Text = "{N/A}";
                         this.npcPropertyA.Maximum = 255;
                         this.npcPropertyB.Enabled = false;
@@ -107,7 +107,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "Action #+";
                         this.label31.Text = "Pack #+";
-                        this.buttonGotoA.Text = "Pack #";
+                        this.npcGotoA.Text = "Pack #";
                         this.label116.Text = "{N/A}";
                         this.npcPropertyA.Maximum = 15;
                         this.npcPropertyB.Maximum = 15;
@@ -118,8 +118,8 @@ namespace LAZYSHELL
                     this.npcPropertyB.Value = npcs.InstancePropertyB;
                     this.npcPropertyC.Value = npcs.InstancePropertyC;
 
-                    this.buttonGotoA.Enabled = false;
-                    this.buttonGotoB.Enabled = false;
+                    this.npcGotoA.Enabled = false;
+                    this.npcGotoB.Enabled = false;
                 }
                 else // there is only one root npc
                 {
@@ -185,7 +185,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "NPC #+";
                         this.label31.Text = "Event #+";
-                        this.buttonGotoA.Text = "Event #";
+                        this.npcGotoA.Text = "Event #";
                         this.label116.Text = "Action #+";
                         this.npcPropertyA.Maximum = 7;
                         this.npcPropertyB.Maximum = 7;
@@ -196,7 +196,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "$70A7 = ";
                         this.label31.Text = "{N/A}";
-                        this.buttonGotoA.Text = "Event #";
+                        this.npcGotoA.Text = "Event #";
                         this.label116.Text = "{N/A}";
                         this.npcPropertyA.Maximum = 255;
                         this.npcPropertyB.Enabled = false;
@@ -207,7 +207,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "Action #+";
                         this.label31.Text = "Pack #+";
-                        this.buttonGotoA.Text = "Pack #";
+                        this.npcGotoA.Text = "Pack #";
                         this.label116.Text = "{N/A}";
                         this.npcPropertyA.Maximum = 15;
                         this.npcPropertyB.Maximum = 15;
@@ -219,8 +219,8 @@ namespace LAZYSHELL
                     this.npcPropertyC.Value = npcs.PropertyC;
                     this.npcEventORPack.Value = npcs.EventORpack;
 
-                    this.buttonGotoA.Enabled = true;
-                    this.buttonGotoB.Enabled = true;
+                    this.npcGotoA.Enabled = true;
+                    this.npcGotoB.Enabled = true;
                 }
             }
             else // there are no npcs
@@ -272,15 +272,15 @@ namespace LAZYSHELL
 
                 this.label104.Text = "";
                 this.label31.Text = "";
-                this.buttonGotoA.Text = "";
+                this.npcGotoA.Text = "";
                 this.label116.Text = "";
                 this.npcPropertyA.Value = 0;
                 this.npcPropertyB.Value = 0;
                 this.npcPropertyC.Value = 0;
                 this.npcEventORPack.Value = 0;
 
-                this.buttonGotoA.Enabled = false;
-                this.buttonGotoB.Enabled = false;
+                this.npcGotoA.Enabled = false;
+                this.npcGotoB.Enabled = false;
             }
 
             npcsBytesLeft.Text = CalculateFreeNPCSpace() + " bytes left";
@@ -337,7 +337,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "NPC #+";
                         this.label31.Text = "Event #+";
-                        this.buttonGotoA.Text = "Event #";
+                        this.npcGotoA.Text = "Event #";
                         this.label116.Text = "Action #+";
                         this.npcPropertyA.Maximum = 7;
                         this.npcPropertyB.Maximum = 7;
@@ -348,7 +348,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "$70A7 = ";
                         this.label31.Text = "{N/A}";
-                        this.buttonGotoA.Text = "Event #";
+                        this.npcGotoA.Text = "Event #";
                         this.label116.Text = "{N/A}";
                         this.npcPropertyA.Maximum = 255;
                         this.npcPropertyB.Enabled = false;
@@ -359,7 +359,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "Action #+";
                         this.label31.Text = "Pack #+";
-                        this.buttonGotoA.Text = "Pack #";
+                        this.npcGotoA.Text = "Pack #";
                         this.label116.Text = "{N/A}";
                         this.npcPropertyA.Maximum = 15;
                         this.npcPropertyB.Maximum = 15;
@@ -370,8 +370,8 @@ namespace LAZYSHELL
                     this.npcPropertyB.Value = npcs.InstancePropertyB;
                     this.npcPropertyC.Value = npcs.InstancePropertyC;
 
-                    this.buttonGotoA.Enabled = false;
-                    this.buttonGotoB.Enabled = false;
+                    this.npcGotoA.Enabled = false;
+                    this.npcGotoB.Enabled = false;
                 }
                 else // there is only one root npc
                 {
@@ -437,7 +437,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "NPC #+";
                         this.label31.Text = "Event #+";
-                        this.buttonGotoA.Text = "Event #";
+                        this.npcGotoA.Text = "Event #";
                         this.label116.Text = "Action #+";
                         this.npcPropertyA.Maximum = 7;
                         this.npcPropertyB.Maximum = 7;
@@ -448,7 +448,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "$70A7 = ";
                         this.label31.Text = "{N/A}";
-                        this.buttonGotoA.Text = "Event #";
+                        this.npcGotoA.Text = "Event #";
                         this.label116.Text = "{N/A}";
                         this.npcPropertyA.Maximum = 255;
                         this.npcPropertyB.Enabled = false;
@@ -459,7 +459,7 @@ namespace LAZYSHELL
                     {
                         this.label104.Text = "Action #+";
                         this.label31.Text = "Pack #+";
-                        this.buttonGotoA.Text = "Pack #";
+                        this.npcGotoA.Text = "Pack #";
                         this.label116.Text = "{N/A}";
                         this.npcPropertyA.Maximum = 15;
                         this.npcPropertyB.Maximum = 15;
@@ -471,8 +471,8 @@ namespace LAZYSHELL
                     this.npcPropertyB.Value = npcs.PropertyB;
                     this.npcPropertyC.Value = npcs.PropertyC;
 
-                    this.buttonGotoA.Enabled = true;
-                    this.buttonGotoB.Enabled = true;
+                    this.npcGotoA.Enabled = true;
+                    this.npcGotoB.Enabled = true;
                 }
             }
             else // there are no npcs
@@ -523,15 +523,15 @@ namespace LAZYSHELL
 
                 this.label104.Text = "";
                 this.label31.Text = "";
-                this.buttonGotoA.Text = "";
+                this.npcGotoA.Text = "";
                 this.label116.Text = "";
                 this.npcPropertyA.Value = 0;
                 this.npcPropertyB.Value = 0;
                 this.npcPropertyC.Value = 0;
                 this.npcEventORPack.Value = 0;
 
-                this.buttonGotoA.Enabled = false;
-                this.buttonGotoB.Enabled = false;
+                this.npcGotoA.Enabled = false;
+                this.npcGotoB.Enabled = false;
             }
 
             npcsBytesLeft.Text = CalculateFreeNPCSpace() + " bytes left";
@@ -855,14 +855,15 @@ namespace LAZYSHELL
         //
         private void openPartitions_Click(object sender, System.EventArgs e)
         {
-            if (sp != null && sp.Visible)
+            if (partitionBrowser != null && partitionBrowser.Visible)
             {
-                sp.Reload((int)npcs.MapHeader);
-                sp.BringToFront();
+                partitionBrowser.Reload((int)npcs.MapHeader);
+                partitionBrowser.BringToFront();
             }
             else
-                sp = new SpritePartitions(this, npcSpritePartitions, (int)npcs.MapHeader);
-            sp.Show();
+                partitionBrowser = new SpritePartitions(this, npcSpritePartitions, (int)npcs.MapHeader);
+            new ToolTipLabel(partitionBrowser, baseConvertor, helpTips);
+            partitionBrowser.Show();
         }
         private void findNPCNum_Click(object sender, EventArgs e)
         {
@@ -878,7 +879,7 @@ namespace LAZYSHELL
             {
                 this.label104.Text = "NPC #+";  //propertyA
                 this.label31.Text = "Event #+"; //propertyB
-                this.buttonGotoA.Text = "Event #"; //eventorpack
+                this.npcGotoA.Text = "Event #"; //eventorpack
                 this.label116.Text = "Action #+";//propertyC
                 this.npcPropertyA.Maximum = 7;
                 this.npcPropertyA.Enabled = true;
@@ -892,7 +893,7 @@ namespace LAZYSHELL
             {
                 this.label104.Text = "$70A7 = "; //propertyA
                 this.label31.Text = "{N/A}"; //propertyB
-                this.buttonGotoA.Text = "Event #"; //eventorpack
+                this.npcGotoA.Text = "Event #"; //eventorpack
                 this.label116.Text = "{N/A}";   //propertyC
                 this.npcPropertyA.Maximum = 255;
                 this.npcPropertyA.Enabled = true;
@@ -905,7 +906,7 @@ namespace LAZYSHELL
             {
                 this.label104.Text = "Action #+";   //propertyA
                 this.label31.Text = "Pack #+";      //propertyB
-                this.buttonGotoA.Text = "Pack #";      //eventorpack
+                this.npcGotoA.Text = "Pack #";      //eventorpack
                 this.label116.Text = "{N/A}";       //propertyC
                 this.npcPropertyA.Maximum = 15;
                 this.npcPropertyA.Enabled = true;

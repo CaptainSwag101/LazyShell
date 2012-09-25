@@ -58,64 +58,6 @@ namespace LAZYSHELL
             this.attackAtkType.SetItemChecked(3, attacks[index].NoDamageB);
             updating = false;
         }
-        public void SetToolTips(ToolTip toolTip1)
-        {
-            // ATTACKS
-            this.attackNum.ToolTipText =
-                "Select the attack to edit by #. These are all exclusively in-\n" +
-                "battle monster attacks. Many monster attacks have no\n" +
-                "name, and even if given one it will not be displayed\n" +
-                "because the attack animation code does not enable it.";
-            this.attackName.ToolTipText =
-                "Select the attack to edit by name. These are all exclusively\n" +
-                "in-battle monster attacks. Many monster attacks have no\n" +
-                "name, and even if given one it will not be displayed\n" +
-                "because the attack animation code does not enable it.";
-            this.textBoxAttackName.ToolTipText =
-                "The attack's name displayed at the top of the screen when\n" +
-                "executed by the monster. Many monster attacks have no\n" +
-                "name, and even if given one it will not be displayed\n" +
-                "because the attack animation code does not enable it.";
-            toolTip1.SetToolTip(this.attackHitRate,
-                "The attack's hit rate percent, ie. the probability out of 100\n" +
-                "the attack will hit its target.");
-            toolTip1.SetToolTip(this.attackAtkLevel,
-                "The attack level multiplies the base damage of the attack\n" +
-                "(ie. the monster's attack power) by a number.\n\n" +
-                "An attack level of 0 will yield base damage.\n" +
-                "An attack level of 1 will multiply the base damage by 1.5.\n" +
-                "An attack level of 2 will multiply the base damage by 2.\n" +
-                "An attack level of 3 will multiply the base damage by 4.\n" +
-                "An attack level of 4 will multiply the base damage by 8.\n" +
-                "An attack level of 5 will multiply the base damage by 16.\n" +
-                "An attack level of 6 will multiply the base damage by 32.\n" +
-                "An attack level of 7 will multiply the base damage by 64.\n\n" +
-                "Example: if the monster's attack power is 6, and the attack\n" +
-                "level of the attack is 7, then the damage will be increased\n" +
-                "to 384 (ie. 6 x 64).");
-            toolTip1.SetToolTip(this.attackStatusEffect,
-                "The effect inflicted on a target, eg. S'crow Bell inflicts\n" +
-                "Scarecrow on a target, Thornet inflicts Poison, etc.");
-            toolTip1.SetToolTip(this.attackStatusUp,
-                "The status of a target is raised by 50%.\n\n" +
-                "Example: Valor Up by default raises the target's Defense\n" +
-                "and Magic Defense power by 50% (eg. if the magic\n" +
-                "defense and/or defense power of the target is 100, then it\n" +
-                "becomes 150). Vigor up! by default raises the Magic Attack\n" +
-                "and Attack power by 50%.");
-            toolTip1.SetToolTip(this.attackAtkType,
-                "\"9999 Damage\" will kill the target in one strike, if the attack\n" +
-                "does not miss.\n\n" +
-                "\"No damage\" will yield 0 damage to the target (both \"No\n" +
-                "damage\" properties are exactly the same, but different\n" +
-                "bits).\n\n" +
-                "\"Hide Battle Numerals\" will hide the total damage (ie. the\n" +
-                "numbers shown after an attack). This is generally used by\n" +
-                "attacks that cause 0 damage and are only effect-based\n" +
-                "attacks such as S'crow Bell or \"9999 damage\" enabled\n" +
-                "attacks such as Scythe, to avoid a redundant \"0\" or \"9999\"\n" +
-                "appearing.");
-        }
         #region Event Handlers
         private void attackNum_ValueChanged(object sender, EventArgs e)
         {

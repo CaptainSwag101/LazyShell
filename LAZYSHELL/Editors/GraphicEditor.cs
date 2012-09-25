@@ -140,6 +140,8 @@ namespace LAZYSHELL
             pictureBoxColor.Invalidate();
             pictureBoxColorBack.Invalidate();
             this.BringToFront();
+            Do.AddShortcut(toolStrip2, Keys.F1, helpTips);
+            new ToolTipLabel(this, null, helpTips);
             new History(this);
         }
         private void SetGraphicSetImage()
@@ -378,7 +380,7 @@ namespace LAZYSHELL
                     graphics, new Size(import.Width / 8, import.Height / 8), paletteSet.Palettes[currentPalette], format);
                 Do.CopyOverBPPGraphics(graphics, this.graphics,
                     new Rectangle(mouseOverSubtile % 16, mouseOverSubtile / 16, import.Width / 8, import.Height / 8),
-                    16, this.offset, format);
+                    size.Width, this.offset, format);
             }
             else
             {
@@ -495,7 +497,7 @@ namespace LAZYSHELL
             if (!subtileDraw.Checked)
                 pictureBoxGraphicSet.Cursor = Cursors.Arrow;
             else
-                pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorDraw.cur");
+                pictureBoxGraphicSet.Cursor = NewCursors.Draw;
         }
         private void subtileErase_Click(object sender, EventArgs e)
         {
@@ -510,7 +512,7 @@ namespace LAZYSHELL
             if (!subtileErase.Checked)
                 pictureBoxGraphicSet.Cursor = Cursors.Arrow;
             else
-                pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorErase.cur");
+                pictureBoxGraphicSet.Cursor = NewCursors.Erase;
         }
         private void subtileDropper_Click(object sender, EventArgs e)
         {
@@ -525,7 +527,7 @@ namespace LAZYSHELL
             if (!subtileDropper.Checked)
                 pictureBoxGraphicSet.Cursor = Cursors.Arrow;
             else
-                pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorDropper.cur");
+                pictureBoxGraphicSet.Cursor = NewCursors.Dropper;
         }
         private void subtileReplaceColor_Click(object sender, EventArgs e)
         {
@@ -540,7 +542,7 @@ namespace LAZYSHELL
             if (!subtileReplaceColor.Checked)
                 pictureBoxGraphicSet.Cursor = Cursors.Arrow;
             else
-                pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorDraw.cur");
+                pictureBoxGraphicSet.Cursor = NewCursors.Draw;
         }
         private void subtileFill_Click(object sender, EventArgs e)
         {
@@ -555,7 +557,7 @@ namespace LAZYSHELL
             if (!subtileFill.Checked)
                 pictureBoxGraphicSet.Cursor = Cursors.Arrow;
             else
-                pictureBoxGraphicSet.Cursor = new System.Windows.Forms.Cursor(GetType(), "CursorFill.cur");
+                pictureBoxGraphicSet.Cursor = NewCursors.Fill;
         }
         private void widthDecrease_Click(object sender, EventArgs e)
         {

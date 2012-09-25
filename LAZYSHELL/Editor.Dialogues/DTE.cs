@@ -9,7 +9,7 @@ using System.Drawing;
 namespace LAZYSHELL
 {
     [Serializable()]
-    public class DialogueTable : Element
+    public class DTE : Element
     {
         [NonSerialized()]
         private byte[] data;
@@ -17,33 +17,30 @@ namespace LAZYSHELL
         public override int Index { get { return index; } set { index = value; } }
         private int index;
         private char[] dialogue;
-        private int dialogueOffset;
-        private int dialoguePtr;
-        private ushort[] dialoguePointer = new ushort[8];
+        private int offset;
+        private int pointer;
         private bool error = false;
-        private int caretPositionByteView;
-        private int caretPositionTextView;
+        private int caretPosByteView;
+        private int caretPosTextView;
         [NonSerialized()]
         private TextHelper textHelper;
-
-        private int duplicateDialogues; public int DuplicateDialogues { get { return duplicateDialogues; } set { duplicateDialogues = value; } }
-        private int withinDialogues; public int WithinDialogues { get { return withinDialogues; } set { withinDialogues = value; } }
-        private int withinDialoguesLocation; public int WithinDialoguesLocation { get { return withinDialoguesLocation; } set { withinDialoguesLocation = value; } }
-
-        /*****************************************************************************
-         * Get Methods
-         * **************************************************************************/
-        public char[] RawDialogue { get { return dialogue; } }
+        private int duplicateOfDialogue;
+        private int withinDialogue;
+        private int indexInDialogue;
+        public int DuplicateOfDialogue { get { return duplicateOfDialogue; } set { duplicateOfDialogue = value; } }
+        public int WithinDialogue { get { return withinDialogue; } set { withinDialogue = value; } }
+        public int IndexInDialogue { get { return indexInDialogue; } set { indexInDialogue = value; } }
+        public char[] Dialogue { get { return dialogue; } }
         public string GetDialogue(bool byteView)
         {
             if (!error)
-                return new string(textHelper.DecodeText(dialogue, byteView, true));
+                return new string(textHelper.DecodeText(dialogue, byteView, null));
             else
                 return new string(dialogue);
         }
-        public int DialogueLen { get { return dialogue.Length; } }
-        public int DialogueOffset { get { return dialogueOffset; } set { dialogueOffset = value; } }
-        public int DialoguePtr
+        public int Length { get { return dialogue.Length; } }
+        public int Offset { get { return offset; } set { offset = value; } }
+        public int Pointer
         {
             get
             {
@@ -53,36 +50,31 @@ namespace LAZYSHELL
         public int GetCaretPosition(bool byteView)
         {
             if (byteView)
-                return caretPositionByteView;
+                return caretPosByteView;
             else
-                return caretPositionTextView;
+                return caretPosTextView;
         }
-        /*****************************************************************************
-         * Set Methods
-         * **************************************************************************/
         public bool SetDialogue(string value, bool byteView)
         {
-            this.dialogue = textHelper.EncodeText(value.ToCharArray(), byteView, true);
+            this.dialogue = textHelper.EncodeText(value.ToCharArray(), byteView, null);
             this.error = textHelper.Error;
             return !error;
         }
         public void SetCaretPosition(int value, bool byteView)
         {
             if (byteView)
-                this.caretPositionByteView = value;
+                this.caretPosByteView = value;
             else
-                this.caretPositionTextView = value;
+                this.caretPosTextView = value;
         }
-
         // Constructor
-        public DialogueTable(byte[] data, int dialogueNum)
+        public DTE(byte[] data, int dialogueNum)
         {
             this.data = data;
             this.index = dialogueNum;
             this.textHelper = TextHelper.Instance;
             InitializeDialogue(data);
         }
-
         // Dissasembler
         private void InitializeDialogue(byte[] data)
         {
@@ -92,22 +84,20 @@ namespace LAZYSHELL
         {
             return SaveDialogue(offset);
         }
-        private ushort SaveDialogue(ushort offset)
+        private ushort SaveDialogue(ushort pointer)
         {
-            int dlgOffset = 0;
-            char[] raw;
-            Bits.SetShort(data, 0x249000 + index * 2, offset);
-            dlgOffset = offset + 0x249100;
-            raw = new char[dialogue.Length + 1]; dialogue.CopyTo(raw, 0);
-            Bits.SetCharArray(data, dlgOffset, raw);
+            Bits.SetShort(data, 0x249000 + index * 2, pointer);
+            int offset = pointer + 0x249100;
+            char[] raw = new char[dialogue.Length + 1]; dialogue.CopyTo(raw, 0);
+            Bits.SetCharArray(data, offset, raw);
             return (ushort)raw.Length;
         }
         private char[] GetDialogue(byte[] data)
         {
-            dialoguePtr = Bits.GetShort(data, 0x249000 + index * 2); // from pointer table
-            dialogueOffset = dialoguePtr + 0x249100;
+            this.pointer = Bits.GetShort(data, 0x249000 + index * 2); // from pointer table
+            this.offset = pointer + 0x249100;
 
-            int count = dialogueOffset;
+            int count = this.offset;
             int len = 0;
             byte ptr = 0x01;
             while (ptr != 0x00 && ptr != 0x06)
@@ -124,7 +114,7 @@ namespace LAZYSHELL
             len--;
             char[] dialogue = new char[len];
             for (int i = 0; i < len; i++)
-                dialogue[i] = (char)data[dialogueOffset + i];
+                dialogue[i] = (char)data[this.offset + i];
             return dialogue;
         }
 

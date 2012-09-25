@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TileEditor));
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
@@ -46,6 +45,9 @@
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.autoUpdate = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.subtileIndex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subtilePalette)).BeginInit();
             this.panel111.SuspendLayout();
@@ -53,12 +55,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSubtile)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
             this.buttonOK.FlatAppearance.BorderSize = 0;
-            this.buttonOK.Location = new System.Drawing.Point(12, 217);
+            this.buttonOK.Location = new System.Drawing.Point(12, 237);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 7;
@@ -67,8 +70,9 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.FlatAppearance.BorderSize = 0;
-            this.buttonCancel.Location = new System.Drawing.Point(93, 217);
+            this.buttonCancel.Location = new System.Drawing.Point(93, 237);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 8;
@@ -78,7 +82,7 @@
             // buttonReset
             // 
             this.buttonReset.FlatAppearance.BorderSize = 0;
-            this.buttonReset.Location = new System.Drawing.Point(174, 217);
+            this.buttonReset.Location = new System.Drawing.Point(174, 237);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 9;
@@ -88,7 +92,7 @@
             // buttonInvertTile
             // 
             this.buttonInvertTile.FlatAppearance.BorderSize = 2;
-            this.buttonInvertTile.Location = new System.Drawing.Point(174, 40);
+            this.buttonInvertTile.Location = new System.Drawing.Point(174, 60);
             this.buttonInvertTile.Name = "buttonInvertTile";
             this.buttonInvertTile.Size = new System.Drawing.Size(75, 23);
             this.buttonInvertTile.TabIndex = 4;
@@ -98,7 +102,7 @@
             // buttonMirrorTile
             // 
             this.buttonMirrorTile.FlatAppearance.BorderSize = 2;
-            this.buttonMirrorTile.Location = new System.Drawing.Point(174, 12);
+            this.buttonMirrorTile.Location = new System.Drawing.Point(174, 32);
             this.buttonMirrorTile.Name = "buttonMirrorTile";
             this.buttonMirrorTile.Size = new System.Drawing.Size(75, 23);
             this.buttonMirrorTile.TabIndex = 3;
@@ -170,7 +174,7 @@
             // 
             this.panel111.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel111.Controls.Add(this.pictureBoxTile);
-            this.panel111.Location = new System.Drawing.Point(12, 12);
+            this.panel111.Location = new System.Drawing.Point(12, 32);
             this.panel111.Name = "panel111";
             this.panel111.Size = new System.Drawing.Size(68, 68);
             this.panel111.TabIndex = 0;
@@ -200,14 +204,14 @@
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.pictureBoxSubtile);
-            this.panel1.Location = new System.Drawing.Point(86, 12);
+            this.panel1.Location = new System.Drawing.Point(86, 32);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(68, 68);
             this.panel1.TabIndex = 1;
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(174, 188);
+            this.buttonUpdate.Location = new System.Drawing.Point(174, 208);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdate.TabIndex = 6;
@@ -221,7 +225,7 @@
             this.autoUpdate.BackColor = System.Drawing.SystemColors.Control;
             this.autoUpdate.Checked = true;
             this.autoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.autoUpdate.Location = new System.Drawing.Point(170, 165);
+            this.autoUpdate.Location = new System.Drawing.Point(170, 185);
             this.autoUpdate.Name = "autoUpdate";
             this.autoUpdate.Size = new System.Drawing.Size(87, 17);
             this.autoUpdate.TabIndex = 5;
@@ -235,18 +239,53 @@
             this.groupBox1.Controls.Add(this.subtileStatus);
             this.groupBox1.Controls.Add(this.subtileIndex);
             this.groupBox1.Controls.Add(this.subtilePalette);
-            this.groupBox1.Location = new System.Drawing.Point(12, 86);
+            this.groupBox1.Location = new System.Drawing.Point(12, 106);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(142, 125);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Subtile Properties";
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.baseConvertor,
+            this.helpTips});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(261, 25);
+            this.toolStrip1.TabIndex = 10;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // baseConvertor
+            // 
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.Text = "Base Convertor";
+            // 
+            // helpTips
+            // 
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.Text = "Help Tips";
+            // 
             // TileEditor
             // 
+            this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(261, 252);
+            this.CancelButton = this.buttonCancel;
+            this.ClientSize = new System.Drawing.Size(261, 272);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.autoUpdate);
@@ -276,6 +315,8 @@
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,5 +341,8 @@
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.CheckBox autoUpdate;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
+        private System.Windows.Forms.ToolStripButton helpTips;
     }
 }

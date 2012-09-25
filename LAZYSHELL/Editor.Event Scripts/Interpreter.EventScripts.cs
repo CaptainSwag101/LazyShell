@@ -717,7 +717,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     sb.Append((Bits.GetShort(esc.EventData, 1) & 0xFFF).ToString());
                     break;
                 case 0x4B:
-                    sb.Append(Model.MapPoints[esc.Option].ToString());
+                    sb.Append(Model.Locations[esc.Option].ToString());
                     break;
                 case 0x4C:
                 case 0x4F:
@@ -758,10 +758,9 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     b = (esc.EventData[2] & 0x20) == 0x20 ? ", closable = true" : ", closable = false";
                     c = (esc.EventData[3] & 0x80) == 0x80 ? ", paper BG = true" : ", paper BG = false";
                     d = (esc.EventData[3] & 0x40) == 0x40 ? ", multi-line = true" : ", multi-line = false";
-                    sb.Append("[" + (Bits.GetShort(esc.EventData, 1) & 0xFFF).ToString() + "] \"" +
-                        Model.Dialogues[Bits.GetShort(esc.EventData, 1) & 0xFFF].GetDialogueStub(true) + "\"" +
-                        a + b + c + d +
-                        ", align above obj: " + ObjectNames[esc.EventData[3] & 0x3F]);
+                    sb.Append("[" + (Bits.GetShort(esc.EventData, 1) & 0xFFF).ToString() + "] \"");
+                    sb.Append(Model.Dialogues[Bits.GetShort(esc.EventData, 1) & 0xFFF].GetDialogueStub(true, Model.DTEStr(true)));
+                    sb.Append("\"" + a + b + c + d + ", align above obj: " + ObjectNames[esc.EventData[3] & 0x3F]);
                     break;
                 case 0x61:
                     a = (esc.Option & 0x80) == 0x80 ? ", sync = false" : ", sync = true";
@@ -779,9 +778,9 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                         case 2: b = ", duration: normal"; break;
                         default: b = ", duration: forever"; break;
                     }
-                    sb.Append("[" + (Bits.GetShort(esc.EventData, 1) & 0xFFF).ToString() + "] \"" +
-                        Model.Dialogues[Bits.GetShort(esc.EventData, 1) & 0xFFF].GetDialogueStub(true) + "\"" +
-                        a + b);
+                    sb.Append("[" + (Bits.GetShort(esc.EventData, 1) & 0xFFF).ToString() + "] \"");
+                    sb.Append(Model.Dialogues[Bits.GetShort(esc.EventData, 1) & 0xFFF].GetDialogueStub(true, Model.DTEStr(true)));
+                    sb.Append("\"" + a + b);
                     break;
                 case 0x63:
                     a = (esc.Option & 0x80) == 0x80 ? "sync = false" : "sync = true";

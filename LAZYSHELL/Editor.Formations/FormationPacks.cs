@@ -33,33 +33,6 @@ namespace LAZYSHELL
             RefreshFormationPacks();
         }
         // functions
-        public void SetToolTips(ToolTip toolTip1)
-        {
-            // FORMATION PACKS
-            this.packNum.ToolTipText =
-                "Set the formation pack to edit by #.\n\n" +
-                "A pack is a set of three formations to either randomly or\n" +
-                "selectively choose from when a battle is called, through an\n" +
-                "event script or through an the property of an NPC in a level.";
-            toolTip1.SetToolTip(this.packFormation1,
-                "The 1st formation in the pack.");
-            toolTip1.SetToolTip(this.packFormation2,
-                "The 2nd formation in the pack.");
-            toolTip1.SetToolTip(this.packFormation3,
-                "The 3rd formation in the pack.");
-            toolTip1.SetToolTip(this.packFormationButton1,
-                "Load the 1st formation into the formation editor.");
-            toolTip1.SetToolTip(this.packFormationButton2,
-                "Load the 2nd formation into the formation editor.");
-            toolTip1.SetToolTip(this.packFormationButton3,
-                "Load the 3rd formation into the formation editor.");
-            toolTip1.SetToolTip(this.richTextBox2,
-                "The list of monsters in the 1st formation.");
-            toolTip1.SetToolTip(this.richTextBox3,
-                "The list of monsters in the 2nd formation.");
-            toolTip1.SetToolTip(this.richTextBox4,
-                "The list of monsters in the 3rd formation.");
-        }
         public void RefreshFormationPacks()
         {
             if (updating) return;

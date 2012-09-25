@@ -32,21 +32,28 @@
             this.sampleName = new System.Windows.Forms.ToolStripComboBox();
             this.sampleNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.import = new System.Windows.Forms.ToolStripMenuItem();
+            this.import = new System.Windows.Forms.ToolStripDropDownButton();
+            this.importWAV = new System.Windows.Forms.ToolStripMenuItem();
             this.importBRR = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.export = new System.Windows.Forms.ToolStripMenuItem();
+            this.export = new System.Windows.Forms.ToolStripDropDownButton();
+            this.exportWAV = new System.Windows.Forms.ToolStripMenuItem();
             this.exportBRR = new System.Windows.Forms.ToolStripMenuItem();
             this.clear = new System.Windows.Forms.ToolStripButton();
+            this.reset = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.play = new System.Windows.Forms.ToolStripButton();
-            this.pause = new System.Windows.Forms.ToolStripButton();
+            this.stop = new System.Windows.Forms.ToolStripButton();
             this.back = new System.Windows.Forms.ToolStripButton();
             this.foward = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.infiniteLoop = new LAZYSHELL.ToolStripCheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.loopStart = new System.Windows.Forms.NumericUpDown();
+            this.relGain = new System.Windows.Forms.NumericUpDown();
+            this.relFreq = new System.Windows.Forms.NumericUpDown();
             this.sampleRateName = new System.Windows.Forms.ComboBox();
             this.rateManualValue = new System.Windows.Forms.NumericUpDown();
             this.rateFixed = new System.Windows.Forms.RadioButton();
@@ -54,11 +61,16 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.loopStart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.relGain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.relFreq)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rateManualValue)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -68,12 +80,13 @@
             this.sampleName,
             this.sampleNum,
             this.toolStripSeparator4,
-            this.toolStripDropDownButton1,
-            this.toolStripDropDownButton2,
+            this.import,
+            this.export,
             this.clear,
+            this.reset,
             this.toolStripSeparator2,
             this.play,
-            this.pause,
+            this.stop,
             this.back,
             this.foward,
             this.toolStripSeparator1,
@@ -128,63 +141,63 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.import,
-            this.importBRR});
-            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.importWAV;
-            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(27, 22);
-            // 
             // import
             // 
+            this.import.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importWAV,
+            this.importBRR});
             this.import.Image = global::LAZYSHELL.Properties.Resources.importWAV;
             this.import.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
-            this.import.Size = new System.Drawing.Size(152, 22);
-            this.import.Text = "Import WAV...";
-            this.import.Click += new System.EventHandler(this.import_Click);
+            this.import.Size = new System.Drawing.Size(27, 22);
+            // 
+            // importWAV
+            // 
+            this.importWAV.Image = global::LAZYSHELL.Properties.Resources.importWAV;
+            this.importWAV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.importWAV.Name = "importWAV";
+            this.importWAV.Size = new System.Drawing.Size(141, 22);
+            this.importWAV.Text = "Import WAV...";
+            this.importWAV.Click += new System.EventHandler(this.import_Click);
             // 
             // importBRR
             // 
             this.importBRR.Image = global::LAZYSHELL.Properties.Resources.importBinary;
             this.importBRR.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importBRR.Name = "importBRR";
-            this.importBRR.Size = new System.Drawing.Size(152, 22);
+            this.importBRR.Size = new System.Drawing.Size(141, 22);
             this.importBRR.Text = "Import BRR...";
             this.importBRR.Click += new System.EventHandler(this.importBRR_Click);
             // 
-            // toolStripDropDownButton2
-            // 
-            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.export,
-            this.exportBRR});
-            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.exportWAV;
-            this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(27, 22);
-            // 
             // export
             // 
+            this.export.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportWAV,
+            this.exportBRR});
             this.export.Image = global::LAZYSHELL.Properties.Resources.exportWAV;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(152, 22);
-            this.export.Text = "Export WAV...";
-            this.export.Click += new System.EventHandler(this.export_Click);
+            this.export.Size = new System.Drawing.Size(27, 22);
+            // 
+            // exportWAV
+            // 
+            this.exportWAV.Image = global::LAZYSHELL.Properties.Resources.exportWAV;
+            this.exportWAV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exportWAV.Name = "exportWAV";
+            this.exportWAV.Size = new System.Drawing.Size(139, 22);
+            this.exportWAV.Text = "Export WAV...";
+            this.exportWAV.Click += new System.EventHandler(this.export_Click);
             // 
             // exportBRR
             // 
             this.exportBRR.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
             this.exportBRR.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportBRR.Name = "exportBRR";
-            this.exportBRR.Size = new System.Drawing.Size(152, 22);
+            this.exportBRR.Size = new System.Drawing.Size(139, 22);
             this.exportBRR.Text = "Export BRR...";
             this.exportBRR.Click += new System.EventHandler(this.exportBRR_Click);
             // 
@@ -197,6 +210,17 @@
             this.clear.Size = new System.Drawing.Size(23, 22);
             this.clear.ToolTipText = "Clear";
             this.clear.Click += new System.EventHandler(this.clear_Click);
+            // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.Text = "toolStripButton1";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // toolStripSeparator2
             // 
@@ -214,16 +238,16 @@
             this.play.Text = "Play";
             this.play.Click += new System.EventHandler(this.play_Click);
             // 
-            // pause
+            // stop
             // 
-            this.pause.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pause.Image = global::LAZYSHELL.Properties.Resources.stop;
-            this.pause.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.pause.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pause.Name = "pause";
-            this.pause.Size = new System.Drawing.Size(23, 22);
-            this.pause.Text = "Stop";
-            this.pause.Click += new System.EventHandler(this.pause_Click);
+            this.stop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.stop.Image = global::LAZYSHELL.Properties.Resources.stop;
+            this.stop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.stop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stop.Name = "stop";
+            this.stop.Size = new System.Drawing.Size(23, 22);
+            this.stop.Text = "Stop";
+            this.stop.Click += new System.EventHandler(this.pause_Click);
             // 
             // back
             // 
@@ -256,26 +280,109 @@
             // 
             this.infiniteLoop.Checked = false;
             this.infiniteLoop.Name = "infiniteLoop";
-            this.infiniteLoop.Size = new System.Drawing.Size(85, 22);
+            this.infiniteLoop.Padding = new System.Windows.Forms.Padding(4, 0, 0, 4);
+            this.infiniteLoop.Size = new System.Drawing.Size(89, 22);
             this.infiniteLoop.Text = "Infinite loop";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.sampleRateName);
-            this.groupBox1.Controls.Add(this.rateManualValue);
-            this.groupBox1.Controls.Add(this.rateFixed);
-            this.groupBox1.Controls.Add(this.rateManual);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.loopStart);
+            this.groupBox1.Controls.Add(this.relGain);
+            this.groupBox1.Controls.Add(this.relFreq);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox1.Location = new System.Drawing.Point(0, 25);
+            this.groupBox1.Location = new System.Drawing.Point(91, 25);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(104, 115);
-            this.groupBox1.TabIndex = 1;
+            this.groupBox1.Size = new System.Drawing.Size(138, 115);
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Sample Rate";
+            this.groupBox1.Text = "Properties";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Loop Start";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 46);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Rel. Gain";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 24);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Rel. Freq.";
+            // 
+            // loopStart
+            // 
+            this.loopStart.Location = new System.Drawing.Point(69, 64);
+            this.loopStart.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.loopStart.Name = "loopStart";
+            this.loopStart.Size = new System.Drawing.Size(63, 21);
+            this.loopStart.TabIndex = 5;
+            this.loopStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.loopStart.ValueChanged += new System.EventHandler(this.loopStart_ValueChanged);
+            // 
+            // relGain
+            // 
+            this.relGain.Location = new System.Drawing.Point(69, 42);
+            this.relGain.Maximum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            0});
+            this.relGain.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
+            this.relGain.Name = "relGain";
+            this.relGain.Size = new System.Drawing.Size(63, 21);
+            this.relGain.TabIndex = 3;
+            this.relGain.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.relGain.ValueChanged += new System.EventHandler(this.relGain_ValueChanged);
+            // 
+            // relFreq
+            // 
+            this.relFreq.Location = new System.Drawing.Point(69, 20);
+            this.relFreq.Maximum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            0});
+            this.relFreq.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
+            this.relFreq.Name = "relFreq";
+            this.relFreq.Size = new System.Drawing.Size(63, 21);
+            this.relFreq.TabIndex = 1;
+            this.relFreq.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.relFreq.ValueChanged += new System.EventHandler(this.relFreq_ValueChanged);
             // 
             // sampleRateName
             // 
             this.sampleRateName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sampleRateName.Enabled = false;
             this.sampleRateName.FormattingEnabled = true;
             this.sampleRateName.Items.AddRange(new object[] {
             "1000 Hz",
@@ -288,27 +395,21 @@
             "128000 Hz"});
             this.sampleRateName.Location = new System.Drawing.Point(6, 41);
             this.sampleRateName.Name = "sampleRateName";
-            this.sampleRateName.Size = new System.Drawing.Size(92, 21);
-            this.sampleRateName.TabIndex = 7;
+            this.sampleRateName.Size = new System.Drawing.Size(79, 21);
+            this.sampleRateName.TabIndex = 1;
             this.sampleRateName.SelectedIndexChanged += new System.EventHandler(this.sampleRateName_SelectedIndexChanged);
             // 
             // rateManualValue
             // 
-            this.rateManualValue.Enabled = false;
             this.rateManualValue.Location = new System.Drawing.Point(6, 88);
             this.rateManualValue.Maximum = new decimal(new int[] {
             128000,
             0,
             0,
             0});
-            this.rateManualValue.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
             this.rateManualValue.Name = "rateManualValue";
-            this.rateManualValue.Size = new System.Drawing.Size(92, 21);
-            this.rateManualValue.TabIndex = 6;
+            this.rateManualValue.Size = new System.Drawing.Size(79, 21);
+            this.rateManualValue.TabIndex = 3;
             this.rateManualValue.Value = new decimal(new int[] {
             32000,
             0,
@@ -319,12 +420,10 @@
             // rateFixed
             // 
             this.rateFixed.AutoSize = true;
-            this.rateFixed.Checked = true;
             this.rateFixed.Location = new System.Drawing.Point(6, 20);
             this.rateFixed.Name = "rateFixed";
             this.rateFixed.Size = new System.Drawing.Size(79, 17);
-            this.rateFixed.TabIndex = 5;
-            this.rateFixed.TabStop = true;
+            this.rateFixed.TabIndex = 0;
             this.rateFixed.Text = "Fixed Rate:";
             this.rateFixed.UseVisualStyleBackColor = true;
             this.rateFixed.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
@@ -332,10 +431,12 @@
             // rateManual
             // 
             this.rateManual.AutoSize = true;
+            this.rateManual.Checked = true;
             this.rateManual.Location = new System.Drawing.Point(6, 68);
             this.rateManual.Name = "rateManual";
             this.rateManual.Size = new System.Drawing.Size(54, 17);
-            this.rateManual.TabIndex = 5;
+            this.rateManual.TabIndex = 2;
+            this.rateManual.TabStop = true;
             this.rateManual.Text = "Other:";
             this.rateManual.UseVisualStyleBackColor = true;
             this.rateManual.CheckedChanged += new System.EventHandler(this.sampleRate_CheckedChanged);
@@ -345,10 +446,10 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(104, 25);
+            this.panel2.Location = new System.Drawing.Point(229, 25);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(633, 115);
-            this.panel2.TabIndex = 2;
+            this.panel2.Size = new System.Drawing.Size(508, 115);
+            this.panel2.TabIndex = 3;
             // 
             // pictureBox1
             // 
@@ -356,7 +457,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(629, 111);
+            this.pictureBox1.Size = new System.Drawing.Size(504, 111);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.SizeChanged += new System.EventHandler(this.pictureBox1_SizeChanged);
@@ -370,6 +471,21 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rateFixed);
+            this.groupBox2.Controls.Add(this.rateManual);
+            this.groupBox2.Controls.Add(this.sampleRateName);
+            this.groupBox2.Controls.Add(this.rateManualValue);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox2.Location = new System.Drawing.Point(0, 25);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(91, 115);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Rate";
+            this.groupBox2.Visible = false;
+            // 
             // SampleEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,6 +494,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SampleEditor";
@@ -385,9 +502,14 @@
             this.toolStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.loopStart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.relGain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.relFreq)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rateManualValue)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -399,7 +521,7 @@
         private ToolStripNumericUpDown sampleNum;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton play;
-        private System.Windows.Forms.ToolStripButton pause;
+        private System.Windows.Forms.ToolStripButton stop;
         private System.Windows.Forms.ToolStripButton back;
         private System.Windows.Forms.ToolStripButton foward;
         private System.Windows.Forms.ToolStripButton clear;
@@ -415,11 +537,19 @@
         private System.Windows.Forms.RadioButton rateFixed;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private ToolStripCheckBox infiniteLoop;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem import;
+        private System.Windows.Forms.ToolStripDropDownButton import;
+        private System.Windows.Forms.ToolStripMenuItem importWAV;
         private System.Windows.Forms.ToolStripMenuItem importBRR;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
-        private System.Windows.Forms.ToolStripMenuItem export;
+        private System.Windows.Forms.ToolStripDropDownButton export;
+        private System.Windows.Forms.ToolStripMenuItem exportWAV;
         private System.Windows.Forms.ToolStripMenuItem exportBRR;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown loopStart;
+        private System.Windows.Forms.NumericUpDown relGain;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ToolStripButton reset;
+        private System.Windows.Forms.NumericUpDown relFreq;
+        private System.Windows.Forms.Label label4;
     }
 }

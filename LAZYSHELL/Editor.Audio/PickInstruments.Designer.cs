@@ -48,7 +48,7 @@
             this.buttonOK.Location = new System.Drawing.Point(88, 480);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 0;
+            this.buttonOK.TabIndex = 2;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -59,7 +59,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(169, 480);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 0;
+            this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -69,7 +69,7 @@
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(209, 42);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Please associate the following instrument indexes found in the MML file to a nati" +
                 "ve SMRPG instrument sample.";
             // 
@@ -89,7 +89,7 @@
             this.label2.Location = new System.Drawing.Point(67, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 13);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 1;
             this.label2.Text = "Set to Instrument";
             // 
             // label3
@@ -98,7 +98,7 @@
             this.label3.Location = new System.Drawing.Point(6, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 3;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Index";
             // 
             // groupBox1
@@ -115,7 +115,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 54);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(232, 420);
-            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Found Instrument Indexes";
             // 
@@ -129,7 +129,7 @@
             this.templateGame.Location = new System.Drawing.Point(75, 364);
             this.templateGame.Name = "templateGame";
             this.templateGame.Size = new System.Drawing.Size(151, 21);
-            this.templateGame.TabIndex = 5;
+            this.templateGame.TabIndex = 4;
             // 
             // setAllInstrument
             // 
@@ -140,7 +140,7 @@
             this.setAllInstrument.Location = new System.Drawing.Point(75, 393);
             this.setAllInstrument.Name = "setAllInstrument";
             this.setAllInstrument.Size = new System.Drawing.Size(151, 21);
-            this.setAllInstrument.TabIndex = 5;
+            this.setAllInstrument.TabIndex = 6;
             // 
             // template
             // 
@@ -148,7 +148,7 @@
             this.template.Location = new System.Drawing.Point(6, 362);
             this.template.Name = "template";
             this.template.Size = new System.Drawing.Size(63, 23);
-            this.template.TabIndex = 4;
+            this.template.TabIndex = 3;
             this.template.Text = "Template:";
             this.template.UseVisualStyleBackColor = true;
             this.template.Click += new System.EventHandler(this.template_Click);
@@ -159,7 +159,7 @@
             this.setAllTo.Location = new System.Drawing.Point(6, 391);
             this.setAllTo.Name = "setAllTo";
             this.setAllTo.Size = new System.Drawing.Size(63, 23);
-            this.setAllTo.TabIndex = 4;
+            this.setAllTo.TabIndex = 5;
             this.setAllTo.Text = "Set all to:";
             this.setAllTo.UseVisualStyleBackColor = true;
             this.setAllTo.Click += new System.EventHandler(this.setAllTo_Click);

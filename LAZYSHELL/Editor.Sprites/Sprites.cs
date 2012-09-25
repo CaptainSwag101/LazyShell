@@ -73,8 +73,8 @@ namespace LAZYSHELL
         {
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
-            Do.AddShortcut(toolStrip3, Keys.F1, enableHelpTips);
-            Do.AddShortcut(toolStrip3, Keys.F2, showDecHex);
+            Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
             toolTip1.InitialDelay = 0;
             searchWindow = new Search(number, nameTextBox, searchEffectNames, name.Items);
             // set data
@@ -85,8 +85,6 @@ namespace LAZYSHELL
             this.images = Model.GraphicPalettes;
             this.overlay = new Overlay();
             graphics = image.Graphics(spriteGraphics);
-            // tooltips
-            SetToolTips();
             // controls
             updating = true;
             name.Items.AddRange(Lists.Numerize(Lists.SpriteNames));
@@ -105,19 +103,17 @@ namespace LAZYSHELL
             // editors
             molds.TopLevel = false;
             molds.Dock = DockStyle.Fill;
-            molds.SetToolTips(toolTip1);
-            panelSprites.Controls.Add(molds);
+            panelMolds.Controls.Add(molds);
             molds.BringToFront();
             openMolds.Checked = true;
             molds.Visible = true;
             sequences.TopLevel = false;
-            sequences.Dock = DockStyle.Bottom;
-            sequences.SetToolTips(toolTip1);
-            panelSprites.Controls.Add(sequences);
+            sequences.Dock = DockStyle.Fill;
+            panelSequences.Controls.Add(sequences);
             sequences.SendToBack();
             openSequences.Checked = true;
             sequences.Visible = true;
-            new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             //
             new History(this);
             checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
@@ -249,10 +245,10 @@ namespace LAZYSHELL
         public void EnableOnPlayback(bool enable)
         {
             foreach (Control control in this.Controls)
-                if (control != panelSprites)
+                if (control != panelSequences)
                     control.Enabled = enable;
                 else
-                    foreach (Control parent in panelSprites.Controls)
+                    foreach (Control parent in panelSequences.Controls)
                         if (parent != sequences)
                             parent.Enabled = enable;
                         else
@@ -265,46 +261,6 @@ namespace LAZYSHELL
                                             item.Enabled = enable;
         }
         // tooltips
-        private void SetToolTips()
-        {
-            // Sprites
-            this.name.ToolTipText =
-                "Select the sprite to edit by name. The name is based on a \n" +
-                "label assigned by the editor.";
-
-            this.toolTip1.SetToolTip(this.imageNum,
-                "The image # of the currently selected sprite refers to the \n" +
-                "set of properties that designate the raw graphics and \n" +
-                "palette set to use.\n\n" +
-                "Anything in the \"IMAGE PALETTE...\" and \"IMAGE \n" +
-                "GRAPHICS...\" panels are part of the sprite's image.");
-
-            this.toolTip1.SetToolTip(this.paletteIndex,
-                "The index of the palette in the palette set the sprite uses. \n" +
-                "This is mostly used for individual sprites that use the same \n" +
-                "image (thus, the same palette set) but have a different \n" +
-                "individual palette, such as the Sky Troopa and Malakoopa.");
-
-            this.toolTip1.SetToolTip(this.paletteOffset,
-                "The palette # the sprite's image's palette set begins at.");
-
-            this.toolTip1.SetToolTip(this.graphicOffset,
-                "The offset in the ROM (in hexadecimal) that the sprite's \n" +
-                "image's raw graphics begin. Increments by 0x20 because \n" +
-                "4bpp 8x8 tiles are 0x20 bytes each.");
-
-            this.toolTip1.SetToolTip(this.animationPacket,
-                "The animation # of the currently selected sprite refers to \n" +
-                "the set of properties that designate the sequences and \n" +
-                "molds to assign to the sprite.\n\n" +
-                "Anything in the \"ANIMATION SEQUENCES...\" and \n" +
-                "\"ANIMATION MOLDS...\" are part of the sprite's animation.");
-
-            this.toolTip1.SetToolTip(this.animationVRAM,
-                "Larger VRAM values will allow more space for the sprite's \n" +
-                "raw graphics to be stored. Generally, the larger sprites \n" +
-                "such as Culex use larger values.");
-        }
         // editors
         public void LoadPaletteEditor()
         {
@@ -497,14 +453,6 @@ namespace LAZYSHELL
             if (updating) return;
             animation.VramAllocation = (ushort)animationVRAM.Value;
             molds.SetAvailableVRAM();
-        }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder3D(e.Graphics, panel1.ClientRectangle, Border3DStyle.Raised, Border3DSide.All);
-        }
-        private void panel1_SizeChanged(object sender, EventArgs e)
-        {
-            panel1.Invalidate();
         }
         // editors
         private void showMain_Click(object sender, EventArgs e)

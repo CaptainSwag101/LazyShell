@@ -458,7 +458,7 @@
             this.exportToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(159, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(159, 70);
             this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
             // 
             // importToolStripMenuItem
@@ -467,7 +467,7 @@
             this.importToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
             this.importToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.importToolStripMenuItem.Text = "Import Image...";
+            this.importToolStripMenuItem.Text = "Import Tileset...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
@@ -516,7 +516,7 @@
             this.importIntoTilemap.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.importIntoTilemap.Name = "importIntoTilemap";
             this.importIntoTilemap.Size = new System.Drawing.Size(23, 22);
-            this.importIntoTilemap.ToolTipText = "Import Image(s)";
+            this.importIntoTilemap.ToolTipText = "Import Mold(s)";
             this.importIntoTilemap.Click += new System.EventHandler(this.importIntoTilemap_Click);
             // 
             // toolStripSeparator10
@@ -567,7 +567,7 @@
             this.moveMoldBack.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveMoldBack.Name = "moveMoldBack";
             this.moveMoldBack.Size = new System.Drawing.Size(23, 22);
-            this.moveMoldBack.Text = "Shift Back";
+            this.moveMoldBack.Text = "Move Mold Back";
             this.moveMoldBack.Click += new System.EventHandler(this.moveMoldBack_Click);
             // 
             // moveMoldFoward
@@ -578,7 +578,7 @@
             this.moveMoldFoward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveMoldFoward.Name = "moveMoldFoward";
             this.moveMoldFoward.Size = new System.Drawing.Size(23, 22);
-            this.moveMoldFoward.Text = "Shift Foward";
+            this.moveMoldFoward.Text = "Move Mold Forward";
             this.moveMoldFoward.Click += new System.EventHandler(this.moveMoldFoward_Click);
             // 
             // toolStripSeparator2
@@ -862,7 +862,7 @@
             this.showGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.showGrid.Name = "showGrid";
             this.showGrid.Size = new System.Drawing.Size(23, 22);
-            this.showGrid.Text = "Show / hide grid";
+            this.showGrid.Text = "Tile Grid";
             this.showGrid.Click += new System.EventHandler(this.showGrid_Click);
             // 
             // toggleZoomBox_TS

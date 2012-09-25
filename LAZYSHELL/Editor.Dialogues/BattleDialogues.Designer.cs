@@ -54,10 +54,11 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toggleText = new System.Windows.Forms.ToolStripButton();
             this.grid = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.openTileEditor = new System.Windows.Forms.ToolStripButton();
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.openPalettes = new System.Windows.Forms.ToolStripMenuItem();
+            this.openPaletteDialogue = new System.Windows.Forms.ToolStripMenuItem();
             this.openPaletteMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -74,7 +75,7 @@
             this.battleDialogueTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.battleDialogueTextBox.Location = new System.Drawing.Point(0, 57);
             this.battleDialogueTextBox.Name = "battleDialogueTextBox";
-            this.battleDialogueTextBox.Size = new System.Drawing.Size(592, 115);
+            this.battleDialogueTextBox.Size = new System.Drawing.Size(592, 124);
             this.battleDialogueTextBox.TabIndex = 3;
             this.battleDialogueTextBox.Text = "";
             this.battleDialogueTextBox.TextChanged += new System.EventHandler(this.battleDialogueTextBox_TextChanged);
@@ -262,7 +263,7 @@
             this.newLine.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newLine.Name = "newLine";
-            this.newLine.Size = new System.Drawing.Size(21, 16);
+            this.newLine.Size = new System.Drawing.Size(21, 20);
             this.newLine.Text = "New Line";
             this.newLine.Click += new System.EventHandler(this.newLine_Click);
             // 
@@ -273,7 +274,7 @@
             this.endString.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.endString.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.endString.Name = "endString";
-            this.endString.Size = new System.Drawing.Size(21, 15);
+            this.endString.Size = new System.Drawing.Size(21, 20);
             this.endString.Text = "End String";
             this.endString.Click += new System.EventHandler(this.endString_Click);
             // 
@@ -284,7 +285,7 @@
             this.pause60f.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pause60f.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pause60f.Name = "pause60f";
-            this.pause60f.Size = new System.Drawing.Size(21, 19);
+            this.pause60f.Size = new System.Drawing.Size(21, 20);
             this.pause60f.Text = "Pause 1 second";
             this.pause60f.Click += new System.EventHandler(this.pause60f_Click);
             // 
@@ -295,7 +296,7 @@
             this.pauseA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pauseA.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pauseA.Name = "pauseA";
-            this.pauseA.Size = new System.Drawing.Size(21, 19);
+            this.pauseA.Size = new System.Drawing.Size(21, 20);
             this.pauseA.Text = "Pause, wait for input";
             this.pauseA.Click += new System.EventHandler(this.pauseA_Click);
             // 
@@ -307,7 +308,7 @@
             this.pauseFrames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pauseFrames.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pauseFrames.Name = "pauseFrames";
-            this.pauseFrames.Size = new System.Drawing.Size(21, 19);
+            this.pauseFrames.Size = new System.Drawing.Size(21, 20);
             this.pauseFrames.Text = "Pause for # of frames";
             this.pauseFrames.Click += new System.EventHandler(this.pauseFrames_Click);
             // 
@@ -320,6 +321,7 @@
             this.toolStripSeparator2,
             this.toggleText,
             this.grid,
+            this.toolStripSeparator3,
             this.openTileEditor,
             this.openGraphics,
             this.toolStripDropDownButton1});
@@ -371,6 +373,11 @@
             this.grid.ToolTipText = "Show/Hide Grid";
             this.grid.Click += new System.EventHandler(this.grid_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // openTileEditor
             // 
             this.openTileEditor.Image = global::LAZYSHELL.Properties.Resources.openTileEditor;
@@ -395,7 +402,7 @@
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openPalettes,
+            this.openPaletteDialogue,
             this.openPaletteMenu});
             this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -403,14 +410,14 @@
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(31, 22);
             // 
-            // openPalettes
+            // openPaletteDialogue
             // 
-            this.openPalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
-            this.openPalettes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openPalettes.Name = "openPalettes";
-            this.openPalettes.Size = new System.Drawing.Size(179, 24);
-            this.openPalettes.Text = "Dialogue Font Palette";
-            this.openPalettes.Click += new System.EventHandler(this.openPalettes_Click);
+            this.openPaletteDialogue.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.openPaletteDialogue.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openPaletteDialogue.Name = "openPaletteDialogue";
+            this.openPaletteDialogue.Size = new System.Drawing.Size(179, 24);
+            this.openPaletteDialogue.Text = "Dialogue Font Palette";
+            this.openPaletteDialogue.Click += new System.EventHandler(this.openPalettes_Click);
             // 
             // openPaletteMenu
             // 
@@ -433,7 +440,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(592, 57);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(24, 115);
+            this.toolStrip3.Size = new System.Drawing.Size(24, 124);
             this.toolStrip3.TabIndex = 4;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -446,14 +453,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 50);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(616, 172);
+            this.panel1.Size = new System.Drawing.Size(616, 181);
             this.panel1.TabIndex = 2;
             // 
             // BattleDialogues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(616, 222);
+            this.ClientSize = new System.Drawing.Size(616, 231);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
@@ -506,10 +513,11 @@
         private System.Windows.Forms.ToolStripButton grid;
         private System.Windows.Forms.ToolStripButton toggleText;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem openPalettes;
+        private System.Windows.Forms.ToolStripMenuItem openPaletteDialogue;
         private System.Windows.Forms.ToolStripMenuItem openPaletteMenu;
         private System.Windows.Forms.ToolStripTextBox bonusTextBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripLabel bonusPreview;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }

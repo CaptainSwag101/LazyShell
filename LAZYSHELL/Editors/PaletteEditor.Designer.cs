@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaletteEditor));
             this.pictureBoxPalette = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -67,10 +66,10 @@
             this.levelsBluesBar = new System.Windows.Forms.TrackBar();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.colorizeApply = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.colorizeHueBar = new System.Windows.Forms.TrackBar();
             this.colorizeSaturationBar = new System.Windows.Forms.TrackBar();
-            this.colorizeApply = new System.Windows.Forms.CheckBox();
             this.colorizeHue = new System.Windows.Forms.NumericUpDown();
             this.colorizeSaturation = new System.Windows.Forms.NumericUpDown();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -103,6 +102,7 @@
             this.panel13 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.alwaysOnTop = new System.Windows.Forms.CheckBox();
             this.trackBar3 = new System.Windows.Forms.TrackBar();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -112,14 +112,16 @@
             this.exportPaletteSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoUpdate = new System.Windows.Forms.CheckBox();
             this.buttonUpdate = new System.Windows.Forms.Button();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.importPaletteSet = new System.Windows.Forms.ToolStripButton();
             this.exportPaletteSet = new System.Windows.Forms.ToolStripButton();
-            this.alwaysOnTop = new System.Windows.Forms.CheckBox();
             this.invertSelectedCols = new System.Windows.Forms.Button();
             this.invertSelectedRows = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPalette)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -166,8 +168,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panel7.SuspendLayout();
             this.contextMenuStrip3.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxPalette
@@ -186,7 +188,7 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 109);
+            this.tabControl1.Location = new System.Drawing.Point(12, 125);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(260, 276);
@@ -593,10 +595,10 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.colorizeApply);
             this.groupBox4.Controls.Add(this.pictureBox1);
             this.groupBox4.Controls.Add(this.colorizeHueBar);
             this.groupBox4.Controls.Add(this.colorizeSaturationBar);
-            this.groupBox4.Controls.Add(this.colorizeApply);
             this.groupBox4.Controls.Add(this.colorizeHue);
             this.groupBox4.Controls.Add(this.colorizeSaturation);
             this.groupBox4.Location = new System.Drawing.Point(0, 183);
@@ -604,6 +606,17 @@
             this.groupBox4.Size = new System.Drawing.Size(252, 67);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
+            // 
+            // colorizeApply
+            // 
+            this.colorizeApply.AutoSize = true;
+            this.colorizeApply.Location = new System.Drawing.Point(6, 0);
+            this.colorizeApply.Name = "colorizeApply";
+            this.colorizeApply.Size = new System.Drawing.Size(64, 17);
+            this.colorizeApply.TabIndex = 0;
+            this.colorizeApply.Text = "Colorize";
+            this.colorizeApply.UseVisualStyleBackColor = false;
+            this.colorizeApply.CheckedChanged += new System.EventHandler(this.colorizeApply_CheckedChanged);
             // 
             // pictureBox1
             // 
@@ -647,17 +660,6 @@
             this.colorizeSaturationBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.colorizeSaturationBar.Value = 128;
             this.colorizeSaturationBar.Scroll += new System.EventHandler(this.colorizeSaturationBar_Scroll);
-            // 
-            // colorizeApply
-            // 
-            this.colorizeApply.AutoSize = true;
-            this.colorizeApply.Location = new System.Drawing.Point(6, 0);
-            this.colorizeApply.Name = "colorizeApply";
-            this.colorizeApply.Size = new System.Drawing.Size(63, 17);
-            this.colorizeApply.TabIndex = 0;
-            this.colorizeApply.Text = "Colorize";
-            this.colorizeApply.UseVisualStyleBackColor = false;
-            this.colorizeApply.CheckedChanged += new System.EventHandler(this.colorizeApply_CheckedChanged);
             // 
             // colorizeHue
             // 
@@ -894,7 +896,7 @@
             // 
             this.buttonSetToColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonSetToColor.FlatAppearance.BorderSize = 2;
-            this.buttonSetToColor.Location = new System.Drawing.Point(351, 165);
+            this.buttonSetToColor.Location = new System.Drawing.Point(351, 181);
             this.buttonSetToColor.Name = "buttonSetToColor";
             this.buttonSetToColor.Size = new System.Drawing.Size(75, 23);
             this.buttonSetToColor.TabIndex = 8;
@@ -1015,7 +1017,7 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonOK.Location = new System.Drawing.Point(231, 389);
+            this.buttonOK.Location = new System.Drawing.Point(231, 405);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 13;
@@ -1026,7 +1028,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonCancel.Location = new System.Drawing.Point(312, 389);
+            this.buttonCancel.Location = new System.Drawing.Point(312, 405);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 14;
@@ -1037,7 +1039,7 @@
             // buttonReset
             // 
             this.buttonReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonReset.Location = new System.Drawing.Point(393, 389);
+            this.buttonReset.Location = new System.Drawing.Point(393, 405);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 15;
@@ -1050,7 +1052,7 @@
             this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel13.Controls.Add(this.pictureBoxSwatchColor);
-            this.panel13.Location = new System.Drawing.Point(432, 153);
+            this.panel13.Location = new System.Drawing.Point(432, 169);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(36, 36);
             this.panel13.TabIndex = 9;
@@ -1059,7 +1061,7 @@
             // 
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel9.Controls.Add(this.pictureBoxCurrentColor);
-            this.panel9.Location = new System.Drawing.Point(220, 35);
+            this.panel9.Location = new System.Drawing.Point(220, 41);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(52, 52);
             this.panel9.TabIndex = 4;
@@ -1069,10 +1071,24 @@
             this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel11.Controls.Add(this.pictureBoxColorMap);
-            this.panel11.Location = new System.Drawing.Point(278, 195);
+            this.panel11.Location = new System.Drawing.Point(278, 211);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(190, 190);
             this.panel11.TabIndex = 10;
+            // 
+            // alwaysOnTop
+            // 
+            this.alwaysOnTop.AutoSize = true;
+            this.alwaysOnTop.Checked = true;
+            this.alwaysOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.alwaysOnTop.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.alwaysOnTop.Location = new System.Drawing.Point(378, 3);
+            this.alwaysOnTop.Name = "alwaysOnTop";
+            this.alwaysOnTop.Size = new System.Drawing.Size(94, 15);
+            this.alwaysOnTop.TabIndex = 5;
+            this.alwaysOnTop.Text = "Always on top";
+            this.alwaysOnTop.UseVisualStyleBackColor = true;
+            this.alwaysOnTop.CheckedChanged += new System.EventHandler(this.alwaysOnTop_CheckedChanged);
             // 
             // trackBar3
             // 
@@ -1120,7 +1136,7 @@
             // 
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel7.Controls.Add(this.pictureBoxPalette);
-            this.panel7.Location = new System.Drawing.Point(24, 35);
+            this.panel7.Location = new System.Drawing.Point(24, 41);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(132, 68);
             this.panel7.TabIndex = 2;
@@ -1156,7 +1172,7 @@
             this.autoUpdate.AutoSize = true;
             this.autoUpdate.Checked = true;
             this.autoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.autoUpdate.Location = new System.Drawing.Point(93, 395);
+            this.autoUpdate.Location = new System.Drawing.Point(93, 411);
             this.autoUpdate.Name = "autoUpdate";
             this.autoUpdate.Size = new System.Drawing.Size(87, 17);
             this.autoUpdate.TabIndex = 12;
@@ -1166,27 +1182,13 @@
             // buttonUpdate
             // 
             this.buttonUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonUpdate.Location = new System.Drawing.Point(12, 389);
+            this.buttonUpdate.Location = new System.Drawing.Point(12, 405);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdate.TabIndex = 11;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importPaletteSet,
-            this.exportPaletteSet});
-            this.toolStrip1.Location = new System.Drawing.Point(163, 37);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(49, 25);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // importPaletteSet
             // 
@@ -1195,8 +1197,8 @@
             this.importPaletteSet.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.importPaletteSet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.importPaletteSet.Name = "importPaletteSet";
-            this.importPaletteSet.Size = new System.Drawing.Size(23, 22);
-            this.importPaletteSet.Text = "Import palette set";
+            this.importPaletteSet.Size = new System.Drawing.Size(23, 20);
+            this.importPaletteSet.Text = "Import";
             this.importPaletteSet.Click += new System.EventHandler(this.importPaletteSetToolStripMenuItem_Click);
             // 
             // exportPaletteSet
@@ -1206,26 +1208,13 @@
             this.exportPaletteSet.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportPaletteSet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.exportPaletteSet.Name = "exportPaletteSet";
-            this.exportPaletteSet.Size = new System.Drawing.Size(23, 22);
-            this.exportPaletteSet.Text = "Export palette set";
+            this.exportPaletteSet.Size = new System.Drawing.Size(23, 20);
+            this.exportPaletteSet.Text = "Export";
             this.exportPaletteSet.Click += new System.EventHandler(this.exportPaletteSetToolStripMenuItem_Click);
-            // 
-            // alwaysOnTop
-            // 
-            this.alwaysOnTop.AutoSize = true;
-            this.alwaysOnTop.Checked = true;
-            this.alwaysOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.alwaysOnTop.Location = new System.Drawing.Point(374, 12);
-            this.alwaysOnTop.Name = "alwaysOnTop";
-            this.alwaysOnTop.Size = new System.Drawing.Size(94, 17);
-            this.alwaysOnTop.TabIndex = 5;
-            this.alwaysOnTop.Text = "Always on top";
-            this.alwaysOnTop.UseVisualStyleBackColor = true;
-            this.alwaysOnTop.CheckedChanged += new System.EventHandler(this.alwaysOnTop_CheckedChanged);
             // 
             // invertSelectedCols
             // 
-            this.invertSelectedCols.Location = new System.Drawing.Point(19, 24);
+            this.invertSelectedCols.Location = new System.Drawing.Point(19, 30);
             this.invertSelectedCols.Name = "invertSelectedCols";
             this.invertSelectedCols.Size = new System.Drawing.Size(6, 6);
             this.invertSelectedCols.TabIndex = 0;
@@ -1235,7 +1224,7 @@
             // 
             // invertSelectedRows
             // 
-            this.invertSelectedRows.Location = new System.Drawing.Point(13, 30);
+            this.invertSelectedRows.Location = new System.Drawing.Point(13, 36);
             this.invertSelectedRows.Name = "invertSelectedRows";
             this.invertSelectedRows.Size = new System.Drawing.Size(6, 6);
             this.invertSelectedRows.TabIndex = 1;
@@ -1256,36 +1245,77 @@
             this.groupBox8.Controls.Add(this.currentBlue);
             this.groupBox8.Controls.Add(this.label3);
             this.groupBox8.Controls.Add(this.currentRed);
-            this.groupBox8.Location = new System.Drawing.Point(280, 30);
+            this.groupBox8.Location = new System.Drawing.Point(280, 34);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(188, 113);
             this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Color Levels";
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.AutoSize = false;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importPaletteSet,
+            this.exportPaletteSet,
+            this.toolStripSeparator1,
+            this.baseConvertor,
+            this.helpTips});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip2.Size = new System.Drawing.Size(480, 23);
+            this.toolStrip2.TabIndex = 16;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 23);
+            // 
+            // baseConvertor
+            // 
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 20);
+            this.baseConvertor.Text = "Base Convertor";
+            // 
+            // helpTips
+            // 
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 20);
+            this.helpTips.Text = "Help Tips";
+            // 
             // PaletteEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 424);
+            this.ClientSize = new System.Drawing.Size(480, 440);
+            this.Controls.Add(this.alwaysOnTop);
+            this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.invertSelectedRows);
             this.Controls.Add(this.invertSelectedCols);
-            this.Controls.Add(this.alwaysOnTop);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.autoUpdate);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel13);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.panel9);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.buttonSetToColor);
+            this.Controls.Add(this.panel9);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.buttonCancel);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1351,10 +1381,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.panel7.ResumeLayout(false);
             this.contextMenuStrip3.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1427,7 +1457,6 @@
         private System.Windows.Forms.CheckBox thresholdApply;
         private System.Windows.Forms.CheckBox autoUpdate;
         private System.Windows.Forms.Button buttonUpdate;
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton importPaletteSet;
         private System.Windows.Forms.ToolStripButton exportPaletteSet;
         private System.Windows.Forms.NumericUpDown colorizeSaturation;
@@ -1452,6 +1481,10 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
+        private System.Windows.Forms.ToolStripButton helpTips;
 
     }
 }

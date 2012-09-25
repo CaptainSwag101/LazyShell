@@ -116,39 +116,6 @@ namespace LAZYSHELL
             this.shopDiscounts.SetItemChecked(3, shop.Discount50);
             updating = false;
         }
-        public void SetToolTips(ToolTip toolTip1)
-        {
-            //Shops
-            this.shopName.ToolTipText =
-                "The shop to edit by label.\n" +
-                "These shop \"names\" are simply labels used to identify the \n" +
-                "shops. The user may change the label.";
-            this.shopLabel.ToolTipText =
-                "The currently selected shop's label. Use this to label / \n" +
-                "identify a shop. This is not read from anywhere in the ROM \n" +
-                "and is exclusively part of the editor. Changing this will have \n" +
-                "no effect on the game.";
-            toolTip1.SetToolTip(this.shopBuyOptions,
-                "\"Buy with Frog Coins, one product each\" is used, for \n" +
-                "example, by the \"Frog Disciple\" in Seaside Town. Only one \n" +
-                "of each product can be bought with Frog Coins only.\n\n" +
-                "\"Buy with Frog Coins\" is the same as above, only the \n" +
-                "product(s) can be bought as many times as afforded. The \n" +
-                "\"Frog Coin Emporium\" uses this property.\n\n" +
-                "\"Buy only, no selling\" is obvious: only buying is allowed in \n" +
-                "the shop, and items cannot be sold. Both of these \n" +
-                "properties are exactly the same, there is no difference \n" +
-                "(they are merely two separate bits that each have the \n" +
-                "same property).");
-            toolTip1.SetToolTip(this.shopDiscounts,
-                "These will lower the prices of the items being sold, \n" +
-                "according to their \"Coin Value\". For example, a Juice Bar \n" +
-                "has a discount of 50%, which means the KeroKeroCola it \n" +
-                "sells (which is normally 400 coins) is 50% less than 400 \n" +
-                "coins, ie. 200 coins.\n" +
-                "These can be combined, ie. if 50% and 25% are both \n" +
-                "checked, then the discount is 75%.");
-        }
         #region Event Handlers
         private void shopName_SelectedIndexChanged(object sender, EventArgs e)
         {

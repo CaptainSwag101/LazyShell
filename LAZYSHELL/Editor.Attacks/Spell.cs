@@ -77,7 +77,7 @@ namespace LAZYSHELL
 
         public bool SetDescription(string value, bool byteView)
         {
-            this.description = textHelperReduced.EncodeText(value.ToCharArray(), byteView, 1, Settings.Default.KeystrokesMenu);
+            this.description = textHelperReduced.EncodeText(value.ToCharArray(), byteView, 1, Settings.Default.KeystrokesDesc);
             this.descriptionError = textHelperReduced.Error;
 
             return !descriptionError;
@@ -85,7 +85,7 @@ namespace LAZYSHELL
         public string GetDescription(bool byteView)
         {
             if (!descriptionError)
-                return new string(textHelperReduced.DecodeText(description, byteView, 1, Settings.Default.KeystrokesMenu));
+                return new string(textHelperReduced.DecodeText(description, byteView, 1, Settings.Default.KeystrokesDesc));
             else
                 return new string(description);
         }

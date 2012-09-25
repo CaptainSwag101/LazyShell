@@ -82,9 +82,9 @@ namespace LAZYSHELL
             this.label31 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.npcPropertyC = new System.Windows.Forms.NumericUpDown();
-            this.buttonGotoA = new System.Windows.Forms.Button();
+            this.npcGotoA = new System.Windows.Forms.Button();
             this.label116 = new System.Windows.Forms.Label();
-            this.buttonGotoB = new System.Windows.Forms.Button();
+            this.npcGotoB = new System.Windows.Forms.Button();
             this.npcsBytesLeft = new System.Windows.Forms.Label();
             this.npcObjectTree = new System.Windows.Forms.TreeView();
             this.mapNum = new System.Windows.Forms.NumericUpDown();
@@ -124,7 +124,7 @@ namespace LAZYSHELL
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.eventFace = new System.Windows.Forms.ComboBox();
             this.eventsWidthYPlusHalf = new System.Windows.Forms.CheckBox();
-            this.buttonGotoD = new System.Windows.Forms.Button();
+            this.eventGotoA = new System.Windows.Forms.Button();
             this.eventsWidthXPlusHalf = new System.Windows.Forms.CheckBox();
             this.eventLength = new System.Windows.Forms.NumericUpDown();
             this.label137 = new System.Windows.Forms.Label();
@@ -350,17 +350,15 @@ namespace LAZYSHELL
             this.toolStripLevel = new System.Windows.Forms.ToolStrip();
             this.navigateBck = new System.Windows.Forms.ToolStripButton();
             this.navigateFwd = new System.Windows.Forms.ToolStripButton();
+            this.changeLevelName = new System.Windows.Forms.ToolStripButton();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.reset = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchLevelNames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.changeLevelName = new System.Windows.Forms.ToolStripButton();
-            this.reset = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonGotoC = new System.Windows.Forms.ToolStripButton();
+            this.levelGotoEvent = new System.Windows.Forms.ToolStripButton();
             this.eventExit = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.eventMusic = new System.Windows.Forms.ToolStripComboBox();
             this.hexEditor = new System.Windows.Forms.ToolStripButton();
@@ -431,8 +429,8 @@ namespace LAZYSHELL
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.levelInfo = new LAZYSHELL.ToolStripListView();
-            this.help = new System.Windows.Forms.ToolStripButton();
-            this.baseConversion = new System.Windows.Forms.ToolStripButton();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.npcMapHeader)).BeginInit();
@@ -953,9 +951,9 @@ namespace LAZYSHELL
             this.groupBox12.Controls.Add(this.label31);
             this.groupBox12.Controls.Add(this.label54);
             this.groupBox12.Controls.Add(this.npcPropertyC);
-            this.groupBox12.Controls.Add(this.buttonGotoA);
+            this.groupBox12.Controls.Add(this.npcGotoA);
             this.groupBox12.Controls.Add(this.label116);
-            this.groupBox12.Controls.Add(this.buttonGotoB);
+            this.groupBox12.Controls.Add(this.npcGotoB);
             this.groupBox12.Location = new System.Drawing.Point(128, 56);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(132, 245);
@@ -1177,21 +1175,21 @@ namespace LAZYSHELL
             this.npcPropertyC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.npcPropertyC.ValueChanged += new System.EventHandler(this.npcPropertyC_ValueChanged);
             // 
-            // buttonGotoA
+            // npcGotoA
             // 
-            this.buttonGotoA.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonGotoA.FlatAppearance.BorderSize = 0;
-            this.buttonGotoA.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGotoA.Location = new System.Drawing.Point(6, 89);
-            this.buttonGotoA.Name = "buttonGotoA";
-            this.buttonGotoA.Size = new System.Drawing.Size(65, 21);
-            this.buttonGotoA.TabIndex = 6;
-            this.buttonGotoA.Text = "Event #";
-            this.buttonGotoA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.buttonGotoA, "Edit NPC event...");
-            this.buttonGotoA.UseCompatibleTextRendering = true;
-            this.buttonGotoA.UseVisualStyleBackColor = false;
-            this.buttonGotoA.Click += new System.EventHandler(this.buttonGotoA_Click);
+            this.npcGotoA.BackColor = System.Drawing.SystemColors.Control;
+            this.npcGotoA.FlatAppearance.BorderSize = 0;
+            this.npcGotoA.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.npcGotoA.Location = new System.Drawing.Point(6, 89);
+            this.npcGotoA.Name = "npcGotoA";
+            this.npcGotoA.Size = new System.Drawing.Size(65, 21);
+            this.npcGotoA.TabIndex = 6;
+            this.npcGotoA.Text = "Event #";
+            this.npcGotoA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.npcGotoA, "Edit NPC event...");
+            this.npcGotoA.UseCompatibleTextRendering = true;
+            this.npcGotoA.UseVisualStyleBackColor = false;
+            this.npcGotoA.Click += new System.EventHandler(this.buttonGotoA_Click);
             // 
             // label116
             // 
@@ -1202,21 +1200,21 @@ namespace LAZYSHELL
             this.label116.TabIndex = 16;
             this.label116.Text = "Action #+";
             // 
-            // buttonGotoB
+            // npcGotoB
             // 
-            this.buttonGotoB.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonGotoB.FlatAppearance.BorderSize = 0;
-            this.buttonGotoB.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGotoB.Location = new System.Drawing.Point(6, 110);
-            this.buttonGotoB.Name = "buttonGotoB";
-            this.buttonGotoB.Size = new System.Drawing.Size(65, 21);
-            this.buttonGotoB.TabIndex = 8;
-            this.buttonGotoB.Text = "Action #";
-            this.buttonGotoB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.buttonGotoB, "Edit NPC action...");
-            this.buttonGotoB.UseCompatibleTextRendering = true;
-            this.buttonGotoB.UseVisualStyleBackColor = false;
-            this.buttonGotoB.Click += new System.EventHandler(this.buttonGotoB_Click);
+            this.npcGotoB.BackColor = System.Drawing.SystemColors.Control;
+            this.npcGotoB.FlatAppearance.BorderSize = 0;
+            this.npcGotoB.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.npcGotoB.Location = new System.Drawing.Point(6, 110);
+            this.npcGotoB.Name = "npcGotoB";
+            this.npcGotoB.Size = new System.Drawing.Size(65, 21);
+            this.npcGotoB.TabIndex = 8;
+            this.npcGotoB.Text = "Action #";
+            this.npcGotoB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.npcGotoB, "Edit NPC action...");
+            this.npcGotoB.UseCompatibleTextRendering = true;
+            this.npcGotoB.UseVisualStyleBackColor = false;
+            this.npcGotoB.Click += new System.EventHandler(this.buttonGotoB_Click);
             // 
             // npcsBytesLeft
             // 
@@ -1637,7 +1635,7 @@ namespace LAZYSHELL
             // 
             this.groupBox18.Controls.Add(this.eventFace);
             this.groupBox18.Controls.Add(this.eventsWidthYPlusHalf);
-            this.groupBox18.Controls.Add(this.buttonGotoD);
+            this.groupBox18.Controls.Add(this.eventGotoA);
             this.groupBox18.Controls.Add(this.eventsWidthXPlusHalf);
             this.groupBox18.Controls.Add(this.eventLength);
             this.groupBox18.Controls.Add(this.label137);
@@ -1687,21 +1685,21 @@ namespace LAZYSHELL
             this.eventsWidthYPlusHalf.UseVisualStyleBackColor = false;
             this.eventsWidthYPlusHalf.CheckedChanged += new System.EventHandler(this.eventsWidthYPlusHalf_CheckedChanged);
             // 
-            // buttonGotoD
+            // eventGotoA
             // 
-            this.buttonGotoD.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonGotoD.FlatAppearance.BorderSize = 0;
-            this.buttonGotoD.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGotoD.Location = new System.Drawing.Point(6, 20);
-            this.buttonGotoD.Name = "buttonGotoD";
-            this.buttonGotoD.Size = new System.Drawing.Size(58, 21);
-            this.buttonGotoD.TabIndex = 0;
-            this.buttonGotoD.Text = "Event #";
-            this.buttonGotoD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.buttonGotoD, "Edit event field event...");
-            this.buttonGotoD.UseCompatibleTextRendering = true;
-            this.buttonGotoD.UseVisualStyleBackColor = false;
-            this.buttonGotoD.Click += new System.EventHandler(this.buttonGotoD_Click);
+            this.eventGotoA.BackColor = System.Drawing.SystemColors.Control;
+            this.eventGotoA.FlatAppearance.BorderSize = 0;
+            this.eventGotoA.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eventGotoA.Location = new System.Drawing.Point(6, 20);
+            this.eventGotoA.Name = "eventGotoA";
+            this.eventGotoA.Size = new System.Drawing.Size(58, 21);
+            this.eventGotoA.TabIndex = 0;
+            this.eventGotoA.Text = "Event #";
+            this.eventGotoA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.eventGotoA, "Edit event field event...");
+            this.eventGotoA.UseCompatibleTextRendering = true;
+            this.eventGotoA.UseVisualStyleBackColor = false;
+            this.eventGotoA.Click += new System.EventHandler(this.buttonGotoD_Click);
             // 
             // eventsWidthXPlusHalf
             // 
@@ -4768,17 +4766,15 @@ namespace LAZYSHELL
             this.levelNum,
             this.navigateBck,
             this.navigateFwd,
+            this.changeLevelName,
+            this.toolStripTextBox1,
+            this.reset,
             this.toolStripSeparator17,
             this.nameTextBox,
             this.searchLevelNames,
             this.toolStripSeparator7,
-            this.toolStripTextBox1,
-            this.changeLevelName,
-            this.reset,
-            this.toolStripSeparator21,
-            this.buttonGotoC,
+            this.levelGotoEvent,
             this.eventExit,
-            this.toolStripSeparator16,
             this.toolStripLabel2,
             this.eventMusic});
             this.toolStripLevel.Location = new System.Drawing.Point(0, 25);
@@ -4811,6 +4807,37 @@ namespace LAZYSHELL
             this.navigateFwd.ToolTipText = "Navigate Forward";
             this.navigateFwd.Click += new System.EventHandler(this.navigateFwd_Click);
             // 
+            // changeLevelName
+            // 
+            this.changeLevelName.CheckOnClick = true;
+            this.changeLevelName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.changeLevelName.Image = global::LAZYSHELL.Properties.Resources.label;
+            this.changeLevelName.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.changeLevelName.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.changeLevelName.Name = "changeLevelName";
+            this.changeLevelName.Size = new System.Drawing.Size(23, 22);
+            this.changeLevelName.Text = "Edit level name";
+            this.changeLevelName.Click += new System.EventHandler(this.changeLevelName_Click);
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(145, 25);
+            this.toolStripTextBox1.Visible = false;
+            this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
+            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
+            // 
+            // reset
+            // 
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.ToolTipText = "Reset";
+            this.reset.Visible = false;
+            this.reset.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
@@ -4836,51 +4863,15 @@ namespace LAZYSHELL
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripTextBox1
+            // levelGotoEvent
             // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(145, 25);
-            this.toolStripTextBox1.Visible = false;
-            this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
-            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
-            // 
-            // changeLevelName
-            // 
-            this.changeLevelName.CheckOnClick = true;
-            this.changeLevelName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.changeLevelName.Image = global::LAZYSHELL.Properties.Resources.label;
-            this.changeLevelName.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.changeLevelName.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.changeLevelName.Name = "changeLevelName";
-            this.changeLevelName.Size = new System.Drawing.Size(23, 22);
-            this.changeLevelName.Text = "Edit level name";
-            this.changeLevelName.Click += new System.EventHandler(this.changeLevelName_Click);
-            // 
-            // reset
-            // 
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(23, 22);
-            this.reset.ToolTipText = "Reset";
-            this.reset.Visible = false;
-            this.reset.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripSeparator21
-            // 
-            this.toolStripSeparator21.Name = "toolStripSeparator21";
-            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 25);
-            // 
-            // buttonGotoC
-            // 
-            this.buttonGotoC.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.buttonGotoC.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonGotoC.Name = "buttonGotoC";
-            this.buttonGotoC.Size = new System.Drawing.Size(52, 22);
-            this.buttonGotoC.Text = "EVENT #";
-            this.buttonGotoC.ToolTipText = "Click to edit event";
-            this.buttonGotoC.Click += new System.EventHandler(this.buttonGotoC_Click);
+            this.levelGotoEvent.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.levelGotoEvent.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.levelGotoEvent.Name = "levelGotoEvent";
+            this.levelGotoEvent.Size = new System.Drawing.Size(52, 22);
+            this.levelGotoEvent.Text = "EVENT #";
+            this.levelGotoEvent.ToolTipText = "Click to edit event";
+            this.levelGotoEvent.Click += new System.EventHandler(this.buttonGotoC_Click);
             // 
             // eventExit
             // 
@@ -4892,7 +4883,7 @@ namespace LAZYSHELL
             0,
             0,
             0});
-            this.eventExit.Location = new System.Drawing.Point(578, 2);
+            this.eventExit.Location = new System.Drawing.Point(742, 2);
             this.eventExit.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -4913,16 +4904,11 @@ namespace LAZYSHELL
             0});
             this.eventExit.ValueChanged += new System.EventHandler(this.eventsExitEvent_ValueChanged);
             // 
-            // toolStripSeparator16
-            // 
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(39, 22);
-            this.toolStripLabel2.Text = "MUSIC";
+            this.toolStripLabel2.Size = new System.Drawing.Size(42, 22);
+            this.toolStripLabel2.Text = " MUSIC";
             // 
             // eventMusic
             // 
@@ -5088,8 +5074,8 @@ namespace LAZYSHELL
             this.clear,
             this.toolStripSeparator6,
             this.toolStripDropDownButton2,
-            this.help,
-            this.baseConversion,
+            this.helpTips,
+            this.baseConvertor,
             this.hexEditor,
             this.toolStripSeparator15,
             this.propertiesButton,
@@ -5138,7 +5124,6 @@ namespace LAZYSHELL
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(27, 22);
-            this.import.ToolTipText = "Import";
             // 
             // allToolStripMenuItem
             // 
@@ -5197,7 +5182,6 @@ namespace LAZYSHELL
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(27, 22);
-            this.export.ToolTipText = "Export";
             // 
             // toolStripMenuItem1
             // 
@@ -5447,7 +5431,6 @@ namespace LAZYSHELL
             this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(28, 22);
-            this.clear.ToolTipText = "Clear";
             // 
             // clearLevelDataAll
             // 
@@ -5578,7 +5561,7 @@ namespace LAZYSHELL
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             this.toolStripDropDownButton2.Size = new System.Drawing.Size(27, 22);
-            this.toolStripDropDownButton2.ToolTipText = "Level info";
+            this.toolStripDropDownButton2.ToolTipText = "Level Offsets";
             // 
             // levelInfo
             // 
@@ -5587,25 +5570,25 @@ namespace LAZYSHELL
             this.levelInfo.Size = new System.Drawing.Size(140, 160);
             this.levelInfo.View = System.Windows.Forms.View.Details;
             // 
-            // help
+            // helpTips
             // 
-            this.help.CheckOnClick = true;
-            this.help.Image = global::LAZYSHELL.Properties.Resources.help_small;
-            this.help.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.help.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.help.Name = "help";
-            this.help.Size = new System.Drawing.Size(23, 22);
-            this.help.ToolTipText = "Help Tips";
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.ToolTipText = "Help Tips";
             // 
-            // baseConversion
+            // baseConvertor
             // 
-            this.baseConversion.CheckOnClick = true;
-            this.baseConversion.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.baseConversion.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.baseConversion.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.baseConversion.Name = "baseConversion";
-            this.baseConversion.Size = new System.Drawing.Size(23, 22);
-            this.baseConversion.ToolTipText = "Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.ToolTipText = "Base Convertor";
             // 
             // toolStripSeparator15
             // 
@@ -5778,9 +5761,9 @@ namespace LAZYSHELL
 
         #endregion
 
-        private Button buttonGotoA;
-        private Button buttonGotoB;
-        private Button buttonGotoD;
+        private Button npcGotoA;
+        private Button npcGotoB;
+        private Button eventGotoA;
         private CheckBox eventsWidthXPlusHalf;
         private CheckBox eventsWidthYPlusHalf;
         private CheckBox exits135LengthPlusHalf;
@@ -6023,8 +6006,8 @@ namespace LAZYSHELL
         private ToolStripDropDownButton export;
         private ToolStripDropDownButton clear;
         private ToolStripButton spaceAnalyzer;
-        private ToolStripButton help;
-        private ToolStripButton baseConversion;
+        private ToolStripButton helpTips;
+        private ToolStripButton baseConvertor;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton propertiesButton;
@@ -6106,11 +6089,10 @@ namespace LAZYSHELL
         private ToolStripButton solidModsMoveUp;
         private ToolStripButton solidModsMoveDown;
         private ToolStripSeparator toolStripSeparator14;
-        private ToolStripSeparator toolStripSeparator16;
         private ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripComboBox eventMusic;
         private ToolStripSeparator toolStripSeparator15;
-        private ToolStripButton buttonGotoC;
+        private ToolStripButton levelGotoEvent;
         private ToolStripNumericUpDown eventExit;
         private Label npcsBytesLeft;
         private ToolStripSeparator toolStripSeparator18;
@@ -6124,7 +6106,6 @@ namespace LAZYSHELL
         private ToolStripSeparator toolStripSeparator19;
         private ToolStripLabel exitsBytesLeft;
         private ToolStripSeparator toolStripSeparator7;
-        private ToolStripSeparator toolStripSeparator21;
         private ToolStripDropDownButton toolStripDropDownButton1;
         private ToolStripMenuItem resetLevelMapToolStripMenuItem;
         private ToolStripMenuItem resetNPCDataToolStripMenuItem;

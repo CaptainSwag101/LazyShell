@@ -10,11 +10,11 @@ namespace LAZYSHELL
     {
         #region Variables
         // main
-        private bool updatingMapPoints;
-        private MapPoint[] mapPoints { get { return Model.MapPoints; } set { Model.MapPoints = value; } }
-        private MapPoint mapPoint { get { return mapPoints[index_l]; } set { mapPoints[index_l] = value; } }
+        private bool updatingLocations;
+        private Location[] locations { get { return Model.Locations; } set { Model.Locations = value; } }
+        private Location location { get { return locations[index_l]; } set { locations[index_l] = value; } }
         private int index_l;
-        public int Index_l { get { return (int)mapPointNum.Value; } set { mapPointNum.Value = value; } }
+        public int Index_l { get { return (int)locationNum.Value; } set { locationNum.Value = value; } }
         private PaletteSet[] fontPalettes = new PaletteSet[3];
         private FontCharacter[] fontDialogue = new FontCharacter[128];
         private BattleDialoguePreview drawName = new BattleDialoguePreview();
@@ -23,48 +23,48 @@ namespace LAZYSHELL
         #region Methods
 
         // initialize properties
-        private void InitializeMapPointEditor()
+        private void InitializeLocationsEditor()
         {
-            updatingMapPoints = true;
+            updatingLocations = true;
 
             index_l = 0;
-            this.mapPointNum.Value = 0;
+            this.locationNum.Value = 0;
 
-            for (int i = 0; i < mapPoints.Length; i++)
-                mapPointName.Items.Add(new string(mapPoints[i].Name));
+            for (int i = 0; i < locations.Length; i++)
+                locationName.Items.Add(new string(locations[i].Name));
 
-            RefreshMapPointEditor();
+            RefreshLocationEditor();
 
-            updatingMapPoints = false;
+            updatingLocations = false;
         }
-        private void RefreshMapPointEditor()
+        private void RefreshLocationEditor()
         {
-            updatingMapPoints = true;
+            updatingLocations = true;
 
-            SetMapPointNames();
+            SetLocationNames();
 
-            mapPointName.SelectedIndex = index_l = (int)mapPointNum.Value;
+            locationName.SelectedIndex = index_l = (int)locationNum.Value;
 
-            this.mapPointXCoord.Value = mapPoint.X;
-            this.mapPointYCoord.Value = mapPoint.Y;
-            this.showCheckBit.Value = mapPoint.ShowCheckBit;
-            this.showCheckAddress.Value = mapPoint.ShowCheckAddress;
-            this.leadToMapPoint.Checked = mapPoint.GoMapPoint;
+            this.locationXCoord.Value = location.X;
+            this.locationYCoord.Value = location.Y;
+            this.showCheckBit.Value = location.ShowCheckBit;
+            this.showCheckAddress.Value = location.ShowCheckAddress;
+            this.leadToLocation.Checked = location.GoLocation;
 
-            if (mapPoint.GoMapPoint)
+            if (location.GoLocation)
             {
                 label52.Text = "If memory bit set";
                 label55.Text = "lead to destination";
                 label56.Text = "else lead to destination";
                 whichPointCheckAddress.Enabled = true;
                 whichPointCheckBit.Enabled = true;
-                goMapPointA.BringToFront();
-                goMapPointA.Enabled = true;
-                goMapPointB.Enabled = true;
-                whichPointCheckAddress.Value = mapPoint.WhichPointCheckAddress;
-                whichPointCheckBit.Value = mapPoint.WhichPointCheckBit;
-                goMapPointA.SelectedIndex = mapPoint.GoMapPointA;
-                goMapPointB.SelectedIndex = mapPoint.GoMapPointB;
+                goLocationA.BringToFront();
+                goLocationA.Enabled = true;
+                goLocationB.Enabled = true;
+                whichPointCheckAddress.Value = location.WhichLocationCheckAddress;
+                whichPointCheckBit.Value = location.WhichLocationCheckBit;
+                goLocationA.SelectedIndex = location.GoLocationA;
+                goLocationB.SelectedIndex = location.GoLocationB;
             }
             else
             {
@@ -75,20 +75,20 @@ namespace LAZYSHELL
                 label56.Text = "";
                 whichPointCheckAddress.Enabled = false;
                 whichPointCheckBit.Enabled = false;
-                goMapPointA.Enabled = false;
-                goMapPointB.Enabled = false;
-                runEvent.Value = mapPoint.RunEvent;
+                goLocationA.Enabled = false;
+                goLocationB.Enabled = false;
+                runEvent.Value = location.RunEvent;
             }
 
-            enableEastPath.Checked = mapPoint.ToEastEnabled;
-            if (mapPoint.ToEastEnabled)
+            enableEastPath.Checked = location.ToEastEnabled;
+            if (location.ToEastEnabled)
             {
                 toEastPoint.Enabled = true;
                 toEastCheckAddress.Enabled = true;
                 toEastCheckBit.Enabled = true;
-                toEastPoint.SelectedIndex = mapPoint.ToEastPoint;
-                toEastCheckAddress.Value = mapPoint.ToEastCheckAddress;
-                toEastCheckBit.Value = mapPoint.ToEastCheckBit;
+                toEastPoint.SelectedIndex = location.ToEastLocation;
+                toEastCheckAddress.Value = location.ToEastCheckAddress;
+                toEastCheckBit.Value = location.ToEastCheckBit;
             }
             else
             {
@@ -97,15 +97,15 @@ namespace LAZYSHELL
                 toEastCheckBit.Enabled = false;
             }
 
-            enableSouthPath.Checked = mapPoint.ToSouthEnabled;
-            if (mapPoint.ToSouthEnabled)
+            enableSouthPath.Checked = location.ToSouthEnabled;
+            if (location.ToSouthEnabled)
             {
                 toSouthPoint.Enabled = true;
                 toSouthCheckAddress.Enabled = true;
                 toSouthCheckBit.Enabled = true;
-                toSouthPoint.SelectedIndex = mapPoint.ToSouthPoint;
-                toSouthCheckAddress.Value = mapPoint.ToSouthCheckAddress;
-                toSouthCheckBit.Value = mapPoint.ToSouthCheckBit;
+                toSouthPoint.SelectedIndex = location.ToSouthLocation;
+                toSouthCheckAddress.Value = location.ToSouthCheckAddress;
+                toSouthCheckBit.Value = location.ToSouthCheckBit;
             }
             else
             {
@@ -114,15 +114,15 @@ namespace LAZYSHELL
                 toSouthCheckBit.Enabled = false;
             }
 
-            enableWestPath.Checked = mapPoint.ToWestEnabled;
-            if (mapPoint.ToWestEnabled)
+            enableWestPath.Checked = location.ToWestEnabled;
+            if (location.ToWestEnabled)
             {
                 toWestPoint.Enabled = true;
                 toWestCheckAddress.Enabled = true;
                 toWestCheckBit.Enabled = true;
-                toWestPoint.SelectedIndex = mapPoint.ToWestPoint;
-                toWestCheckAddress.Value = mapPoint.ToWestCheckAddress;
-                toWestCheckBit.Value = mapPoint.ToWestCheckBit;
+                toWestPoint.SelectedIndex = location.ToWestLocation;
+                toWestCheckAddress.Value = location.ToWestCheckAddress;
+                toWestCheckBit.Value = location.ToWestCheckBit;
             }
             else
             {
@@ -131,15 +131,15 @@ namespace LAZYSHELL
                 toWestCheckBit.Enabled = false;
             }
 
-            enableNorthPath.Checked = mapPoint.ToNorthEnabled;
-            if (mapPoint.ToNorthEnabled)
+            enableNorthPath.Checked = location.ToNorthEnabled;
+            if (location.ToNorthEnabled)
             {
                 toNorthPoint.Enabled = true;
                 toNorthCheckAddress.Enabled = true;
                 toNorthCheckBit.Enabled = true;
-                toNorthPoint.SelectedIndex = mapPoint.ToNorthPoint;
-                toNorthCheckAddress.Value = mapPoint.ToNorthCheckAddress;
-                toNorthCheckBit.Value = mapPoint.ToNorthCheckBit;
+                toNorthPoint.SelectedIndex = location.ToNorthLocation;
+                toNorthCheckAddress.Value = location.ToNorthCheckAddress;
+                toNorthCheckBit.Value = location.ToNorthCheckBit;
             }
             else
             {
@@ -148,36 +148,36 @@ namespace LAZYSHELL
                 toNorthCheckBit.Enabled = false;
             }
 
-            textBoxMapPoint.Text = Do.RawToASCII(mapPoint.Name, settings.Keystrokes);
+            textBoxLocation.Text = Do.RawToASCII(location.Name, settings.Keystrokes);
 
-            updatingMapPoints = false;
+            updatingLocations = false;
         }
 
         // name editing
-        private void SetMapPointNames()
+        private void SetLocationNames()
         {
-            goMapPointA.Items.Clear();
-            goMapPointB.Items.Clear();
+            goLocationA.Items.Clear();
+            goLocationB.Items.Clear();
             toEastPoint.Items.Clear();
             toSouthPoint.Items.Clear();
             toWestPoint.Items.Clear();
             toNorthPoint.Items.Clear();
 
-            if (mapPoint.GoMapPoint)
+            if (location.GoLocation)
             {
-                for (int i = 0; i < mapPoints.Length; i++)
-                    goMapPointA.Items.Add(new string(mapPoints[i].Name));
-                for (int i = 0; i < mapPoints.Length; i++)
-                    goMapPointB.Items.Add(new string(mapPoints[i].Name));
+                for (int i = 0; i < locations.Length; i++)
+                    goLocationA.Items.Add(new string(locations[i].Name));
+                for (int i = 0; i < locations.Length; i++)
+                    goLocationB.Items.Add(new string(locations[i].Name));
             }
-            for (int i = 0; i < mapPoints.Length; i++)
-                toEastPoint.Items.Add(new string(mapPoints[i].Name));
-            for (int i = 0; i < mapPoints.Length; i++)
-                toSouthPoint.Items.Add(new string(mapPoints[i].Name));
-            for (int i = 0; i < mapPoints.Length; i++)
-                toWestPoint.Items.Add(new string(mapPoints[i].Name));
-            for (int i = 0; i < mapPoints.Length; i++)
-                toNorthPoint.Items.Add(new string(mapPoints[i].Name));
+            for (int i = 0; i < locations.Length; i++)
+                toEastPoint.Items.Add(new string(locations[i].Name));
+            for (int i = 0; i < locations.Length; i++)
+                toSouthPoint.Items.Add(new string(locations[i].Name));
+            for (int i = 0; i < locations.Length; i++)
+                toWestPoint.Items.Add(new string(locations[i].Name));
+            for (int i = 0; i < locations.Length; i++)
+                toNorthPoint.Items.Add(new string(locations[i].Name));
         }
         private bool CompareString(byte[] stringA, byte[] stringB, int loc)
         {
@@ -199,31 +199,31 @@ namespace LAZYSHELL
             return arr;
         }
 
-        private void AssembleAllMapPointTexts()
+        private void AssembleLocationTexts()
         {
             char[][] pointNames = new char[56][];
             char[] tempB;
             int[] duplicates = new int[56];   // the point it is a duplicate of
-            int[] locations = new int[56];    // the location within the point it is a duplicate of
+            int[] levels = new int[56];    // the location within the point it is a duplicate of
             bool[] isdup = new bool[56];      // if is a duplicate of something
             // set duplicates
-            for (int i = 0; i < mapPoints.Length; i++)
+            for (int i = 0; i < locations.Length; i++)
             {
-                pointNames[i] = mapPoints[i].Name;   // the name we'll be comparing everything to
+                pointNames[i] = locations[i].Name;   // the name we'll be comparing everything to
                 if (!isdup[i])
                 {
-                    for (int a = 0; a < mapPoints.Length; a++)
+                    for (int a = 0; a < locations.Length; a++)
                     {
                         if (a != i && !isdup[a])  // last condition checks if it already has duplicate
                         {
-                            tempB = mapPoints[a].Name;   // the name that might be a duplicate of tempA
+                            tempB = locations[a].Name;   // the name that might be a duplicate of tempA
                             for (int b = 0; b < pointNames[i].Length; b++)
                             {
                                 if (tempB.Length == pointNames[i].Length - b)
                                 {
                                     if (Bits.Compare(pointNames[i], tempB, b, 0)) // if tempB is a duplicate of tempA at location b of tempA
                                     {
-                                        locations[a] = b;
+                                        levels[a] = b;
                                         duplicates[a] = i;
                                         isdup[a] = true;
                                         break;
@@ -243,7 +243,7 @@ namespace LAZYSHELL
             int dOffset = 0x3EFD80;
             ushort pointer = 0;
             // set all of the ones that aren't duplicates first (so we'll have pointers to use)
-            for (int i = 0; i < mapPoints.Length; i++)
+            for (int i = 0; i < locations.Length; i++)
             {
                 if (!isdup[i])
                 {
@@ -253,18 +253,18 @@ namespace LAZYSHELL
                     dOffset += pointNames[i].Length;
                     pointer += (ushort)pointNames[i].Length;
                     Model.Data[dOffset] = 6; dOffset++; pointer++;
-                    if (i != mapPoints.Length - 1 && !isdup[i + 1] && dOffset > 0x3EFF1F)
+                    if (i != locations.Length - 1 && !isdup[i + 1] && dOffset > 0x3EFF1F)
                         MessageBox.Show("The total compressed size of all map point names is too large. Some data might not have been saved correctly. Please reduce the length of one or more map point names.", "LAZY SHELL");
                 }
             }
             // set duplicates
             pOffset = 0x3EFD00;
             pointer = 0;
-            for (int i = 0; i < mapPoints.Length; i++)
+            for (int i = 0; i < locations.Length; i++)
             {
                 if (isdup[i])
                 {
-                    pointers[i] = (ushort)(pointers[duplicates[i]] + locations[i]);
+                    pointers[i] = (ushort)(pointers[duplicates[i]] + levels[i]);
                     Bits.SetShort(Model.Data, i * 2 + pOffset, pointers[i]);
                 }
             }
@@ -273,39 +273,39 @@ namespace LAZYSHELL
         #endregion
         #region Eventhandlers
 
-        private void mapPointNum_ValueChanged(object sender, EventArgs e)
+        private void locationNum_ValueChanged(object sender, EventArgs e)
         {
-            if (mapPointName.SelectedIndex == mapPointNum.Value)
+            if (locationName.SelectedIndex == locationNum.Value)
             {
-                if (!updatingMapPoints)
+                if (!updatingLocations)
                 {
-                    RefreshMapPointEditor();
-                    SetWorldMapPointsImage();
+                    RefreshLocationEditor();
+                    SetLocationsImage();
                 }
             }
             else
-                mapPointName.SelectedIndex = index_l = (int)mapPointNum.Value;
+                locationName.SelectedIndex = index_l = (int)locationNum.Value;
         }
-        private void mapPointName_SelectedIndexChanged(object sender, EventArgs e)
+        private void locationName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (mapPointNum.Value == (int)mapPointName.SelectedIndex)
+            if (locationNum.Value == (int)locationName.SelectedIndex)
             {
-                if (!updatingMapPoints)
+                if (!updatingLocations)
                 {
-                    RefreshMapPointEditor();
-                    SetWorldMapPointsImage();
+                    RefreshLocationEditor();
+                    SetLocationsImage();
                 }
             }
             else
-                mapPointNum.Value = index_l = mapPointName.SelectedIndex;
+                locationNum.Value = index_l = locationName.SelectedIndex;
         }
-        private void mapPointName_DrawItem(object sender, DrawItemEventArgs e)
+        private void locationName_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0 || e.Index > 55)
                 return;
 
             // set the pixels
-            int[] temp = drawName.GetPreview(fontDialogue, fontPalettes[2].Palettes[0], mapPoints[e.Index].Name, false);
+            int[] temp = drawName.GetPreview(fontDialogue, fontPalettes[2].Palettes[0], locations[e.Index].Name, false);
             int[] pixels = new int[256 * 32];
 
             for (int y = 2, c = 10; c < 32; y++, c++)
@@ -326,43 +326,41 @@ namespace LAZYSHELL
             e.Graphics.DrawImage(new Bitmap(icon), new Point(e.Bounds.X, e.Bounds.Y));
             e.DrawFocusRectangle();
         }
-        private void textBoxMapPoint_TextChanged(object sender, EventArgs e)
+        private void textBoxLocation_TextChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.Name = Do.ASCIIToRaw(textBoxMapPoint.Text, settings.Keystrokes, textBoxMapPoint.Text.Length);
+            location.Name = Do.ASCIIToRaw(textBoxLocation.Text, settings.Keystrokes, textBoxLocation.Text.Length);
 
-            updatingMapPoints = true;
-            //mapPointName.Items.RemoveAt(index_l);
-            //mapPointName.Items.Insert(index_l, textBoxMapPoint.Text);
-            mapPointName.Text = textBoxMapPoint.Text;
-            mapPointName.Invalidate();
-            updatingMapPoints = false;
+            updatingLocations = true;
+            locationName.Text = textBoxLocation.Text;
+            locationName.Invalidate();
+            updatingLocations = false;
 
             // check total length
             char[][] pointNames = new char[56][];
             char[] tempB;
             int[] duplicates = new int[56];   // the point it is a duplicate of
-            int[] locations = new int[56];    // the location within the point it is a duplicate of
+            int[] levels = new int[56];    // the location within the point it is a duplicate of
             bool[] isdup = new bool[56];      // if is a duplicate of something
             // set duplicates
-            for (int i = 0; i < mapPoints.Length; i++)
+            for (int i = 0; i < locations.Length; i++)
             {
-                pointNames[i] = mapPoints[i].Name;   // the name we'll be comparing everything to
+                pointNames[i] = locations[i].Name;   // the name we'll be comparing everything to
                 if (!isdup[i])
                 {
-                    for (int a = 0; a < mapPoints.Length; a++)
+                    for (int a = 0; a < locations.Length; a++)
                     {
                         if (a != i && !isdup[a])  // last condition checks if it already has duplicate
                         {
-                            tempB = mapPoints[a].Name;   // the name that might be a duplicate of tempA
+                            tempB = locations[a].Name;   // the name that might be a duplicate of tempA
                             for (int b = 0; b < pointNames[i].Length; b++)
                             {
                                 if (tempB.Length == pointNames[i].Length - b)
                                 {
                                     if (Bits.Compare(pointNames[i], tempB, b, 0)) // if tempB is a duplicate of tempA at location b of tempA
                                     {
-                                        locations[a] = b;
+                                        levels[a] = b;
                                         duplicates[a] = i;
                                         isdup[a] = true;
                                         break;
@@ -380,7 +378,7 @@ namespace LAZYSHELL
             int dOffset = 0x3EFD80;
             ushort pointer = 0;
             // set all of the ones that aren't duplicates first (so we'll have pointers to use)
-            for (int i = 0; i < mapPoints.Length; i++)
+            for (int i = 0; i < locations.Length; i++)
             {
                 if (!isdup[i])
                 {
@@ -388,7 +386,7 @@ namespace LAZYSHELL
                     dOffset += pointNames[i].Length;
                     pointer += (ushort)pointNames[i].Length;
                     dOffset++; pointer++;
-                    if (i != mapPoints.Length - 1 && !isdup[i + 1] && dOffset > 0x3EFF1F)
+                    if (i != locations.Length - 1 && !isdup[i + 1] && dOffset > 0x3EFF1F)
                         break;
                 }
             }
@@ -398,21 +396,21 @@ namespace LAZYSHELL
             //
             SetWorldMapTextImage();
         }
-        private void mapPointXCoord_ValueChanged(object sender, EventArgs e)
+        private void locationXCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.X = (byte)mapPointXCoord.Value;
+            location.X = (byte)locationXCoord.Value;
 
             if (updating) return;
 
             pictureBoxTileset.Invalidate();
         }
-        private void mapPointYCoord_ValueChanged(object sender, EventArgs e)
+        private void locationYCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.Y = (byte)mapPointYCoord.Value;
+            location.Y = (byte)locationYCoord.Value;
 
             if (updating) return;
 
@@ -420,41 +418,41 @@ namespace LAZYSHELL
         }
         private void showCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ShowCheckAddress = (ushort)showCheckAddress.Value;
+            location.ShowCheckAddress = (ushort)showCheckAddress.Value;
         }
         private void showCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ShowCheckBit = (byte)showCheckBit.Value;
+            location.ShowCheckBit = (byte)showCheckBit.Value;
         }
-        private void leadToMapPoint_CheckedChanged(object sender, EventArgs e)
+        private void leadToLocation_CheckedChanged(object sender, EventArgs e)
         {
-            leadToMapPoint.ForeColor = leadToMapPoint.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingMapPoints) return;
+            leadToLocation.ForeColor = leadToLocation.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
+            if (updatingLocations) return;
 
-            mapPoint.GoMapPoint = leadToMapPoint.Checked;
-            goMapPointA.Items.Clear();
-            goMapPointB.Items.Clear();
-            if (mapPoint.GoMapPoint)
+            location.GoLocation = leadToLocation.Checked;
+            goLocationA.Items.Clear();
+            goLocationB.Items.Clear();
+            if (location.GoLocation)
             {
-                for (int i = 0; i < mapPoints.Length; i++)
+                for (int i = 0; i < locations.Length; i++)
                 {
-                    goMapPointA.Items.Add(mapPoints[i].Name);
-                    goMapPointB.Items.Add(mapPoints[i].Name);
+                    goLocationA.Items.Add(locations[i].Name);
+                    goLocationB.Items.Add(locations[i].Name);
                 }
                 whichPointCheckAddress.Enabled = true;
                 whichPointCheckBit.Enabled = true;
                 label52.Text = "If memory bit set";
                 label55.Text = "lead to destination";
                 label56.Text = "else lead to destination";
-                goMapPointA.Enabled = true;
-                goMapPointB.Enabled = true;
-                goMapPointA.BringToFront();
-                goMapPointA.SelectedIndex = mapPoint.GoMapPointA;
-                goMapPointB.SelectedIndex = mapPoint.GoMapPointB;
+                goLocationA.Enabled = true;
+                goLocationB.Enabled = true;
+                goLocationA.BringToFront();
+                goLocationA.SelectedIndex = location.GoLocationA;
+                goLocationB.SelectedIndex = location.GoLocationB;
             }
             else
             {
@@ -465,36 +463,36 @@ namespace LAZYSHELL
                 label56.Text = "";
                 whichPointCheckAddress.Enabled = false;
                 whichPointCheckBit.Enabled = false;
-                goMapPointA.Enabled = false;
-                goMapPointB.Enabled = false;
-                runEvent.Value = mapPoint.RunEvent;
+                goLocationA.Enabled = false;
+                goLocationB.Enabled = false;
+                runEvent.Value = location.RunEvent;
             }
         }
         private void whichPointCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.WhichPointCheckAddress = (ushort)whichPointCheckAddress.Value;
+            location.WhichLocationCheckAddress = (ushort)whichPointCheckAddress.Value;
         }
         private void whichPointCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.WhichPointCheckBit = (byte)whichPointCheckBit.Value;
+            location.WhichLocationCheckBit = (byte)whichPointCheckBit.Value;
         }
-        private void goMapPointA_SelectedIndexChanged(object sender, EventArgs e)
+        private void goLocationA_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            if (mapPoint.GoMapPoint)
-                mapPoint.GoMapPointA = (byte)goMapPointA.SelectedIndex;
+            if (location.GoLocation)
+                location.GoLocationA = (byte)goLocationA.SelectedIndex;
         }
         private void runEvent_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            if (!mapPoint.GoMapPoint)
-                mapPoint.RunEvent = (ushort)runEvent.Value;
+            if (!location.GoLocation)
+                location.RunEvent = (ushort)runEvent.Value;
         }
         private void runEventEdit_Click(object sender, EventArgs e)
         {
@@ -505,90 +503,90 @@ namespace LAZYSHELL
             Model.Program.EventScripts.EventNum.Value = runEvent.Value;
             Model.Program.EventScripts.BringToFront();
         }
-        private void goMapPointB_SelectedIndexChanged(object sender, EventArgs e)
+        private void goLocationB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.GoMapPointB = (byte)goMapPointB.SelectedIndex;
+            location.GoLocationB = (byte)goLocationB.SelectedIndex;
         }
         private void toEastPoint_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToEastPoint = (byte)toEastPoint.SelectedIndex;
+            location.ToEastLocation = (byte)toEastPoint.SelectedIndex;
         }
         private void toSouthPoint_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToSouthPoint = (byte)toSouthPoint.SelectedIndex;
+            location.ToSouthLocation = (byte)toSouthPoint.SelectedIndex;
         }
         private void toWestPoint_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToWestPoint = (byte)toWestPoint.SelectedIndex;
+            location.ToWestLocation = (byte)toWestPoint.SelectedIndex;
         }
         private void toNorthPoint_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToNorthPoint = (byte)toNorthPoint.SelectedIndex;
+            location.ToNorthLocation = (byte)toNorthPoint.SelectedIndex;
         }
         private void toEastCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToEastCheckAddress = (ushort)toEastCheckAddress.Value;
+            location.ToEastCheckAddress = (ushort)toEastCheckAddress.Value;
         }
         private void toSouthCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToSouthCheckAddress = (ushort)toSouthCheckAddress.Value;
+            location.ToSouthCheckAddress = (ushort)toSouthCheckAddress.Value;
         }
         private void toWestCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToWestCheckAddress = (ushort)toWestCheckAddress.Value;
+            location.ToWestCheckAddress = (ushort)toWestCheckAddress.Value;
         }
         private void toNorthCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToNorthCheckAddress = (ushort)toNorthCheckAddress.Value;
+            location.ToNorthCheckAddress = (ushort)toNorthCheckAddress.Value;
         }
         private void toEastCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToEastCheckBit = (byte)toEastCheckBit.Value;
+            location.ToEastCheckBit = (byte)toEastCheckBit.Value;
         }
         private void toSouthCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToSouthCheckBit = (byte)toSouthCheckBit.Value;
+            location.ToSouthCheckBit = (byte)toSouthCheckBit.Value;
         }
         private void toWestCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToWestCheckBit = (byte)toWestCheckBit.Value;
+            location.ToWestCheckBit = (byte)toWestCheckBit.Value;
         }
         private void toNorthCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToNorthCheckBit = (byte)toNorthCheckBit.Value;
+            location.ToNorthCheckBit = (byte)toNorthCheckBit.Value;
         }
         private void enableEastPath_CheckedChanged(object sender, EventArgs e)
         {
             enableEastPath.ForeColor = enableEastPath.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToEastEnabled = enableEastPath.Checked;
+            location.ToEastEnabled = enableEastPath.Checked;
 
             toEastPoint.Enabled = enableEastPath.Checked;
             toEastCheckAddress.Enabled = enableEastPath.Checked;
@@ -597,9 +595,9 @@ namespace LAZYSHELL
         private void enableSouthPath_CheckedChanged(object sender, EventArgs e)
         {
             enableSouthPath.ForeColor = enableSouthPath.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToSouthEnabled = enableSouthPath.Checked;
+            location.ToSouthEnabled = enableSouthPath.Checked;
 
             toSouthPoint.Enabled = enableSouthPath.Checked;
             toSouthCheckAddress.Enabled = enableSouthPath.Checked;
@@ -608,9 +606,9 @@ namespace LAZYSHELL
         private void enableWestPath_CheckedChanged(object sender, EventArgs e)
         {
             enableWestPath.ForeColor = enableWestPath.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToWestEnabled = enableWestPath.Checked;
+            location.ToWestEnabled = enableWestPath.Checked;
 
             toWestPoint.Enabled = enableWestPath.Checked;
             toWestCheckAddress.Enabled = enableWestPath.Checked;
@@ -619,9 +617,9 @@ namespace LAZYSHELL
         private void enableNorthPath_CheckedChanged(object sender, EventArgs e)
         {
             enableNorthPath.ForeColor = enableNorthPath.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingMapPoints) return;
+            if (updatingLocations) return;
 
-            mapPoint.ToNorthEnabled = enableNorthPath.Checked;
+            location.ToNorthEnabled = enableNorthPath.Checked;
 
             toNorthPoint.Enabled = enableNorthPath.Checked;
             toNorthCheckAddress.Enabled = enableNorthPath.Checked;

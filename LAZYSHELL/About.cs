@@ -10,9 +10,9 @@ namespace LAZYSHELL
 {
     public partial class About : Form
     {
-        private Form1 form1;
+        private Editor form1;
         // constructor
-        public About(Form1 form1)
+        public About(Editor form1)
         {
             this.form1 = form1;
             InitializeComponent();

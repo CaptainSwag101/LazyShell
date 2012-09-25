@@ -7,11 +7,46 @@ namespace LAZYSHELL
     // Audio
     public enum Pitch
     {
-        C, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B, Rest, Hold, None
+        C, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B, Rest, Tie, NULL
+    }
+    public enum MenuType
+    {
+        GameSelect, OverworldMain, OverworldItem, OverworldStatus,
+        OverworldSpecial, OverworldEquip, OverworldSpecialItem,
+        OverworldSwitch, Shop, ShopBuy, ShopSellItems, ShopSellWeapons
+    }
+    public enum EventCategory
+    {
+        Objects, Joypad, PartyMembers, Inventory,
+        Battle, Levels, Menus, Dialogues,
+        Events, JumpTo, ScreenEffects, AudioPlayback,
+        Memory, Memory7000, PauseScript, Return
+    }
+    public enum ActionCategory
+    {
+        Properties, Palette, SpriteSequence, SpriteAnimation,
+        Shift1xStep, ShiftIsometric, Shift1pxUnit, FaceDirection,
+        ShiftToCoords, AudioPlayback, Memory, Memory700C,
+        JumpTo, ObjectMemory, PauseScript, Return
+    }
+    public enum EventObjects
+    {
+        ActionQueue, FreezeAllObjects, UnfreezeAllObjects,
+        IfObjectPresent, IfMarioOnTop, IfDistanceBetween,
+        IfDistanceBetweenZEQ, IfMarioInAir, CreateNPCatObject,
+        CreateNPCatMario, IfMarioOnTopAnyObject, SetObjPresence,
+        SetObjEventTrigger, SetObjMem70A8PresenceTrue, SetObjMem70A8PresentFalse,
+        SetObjMem70A8EventTriggerTrue, SetObjMem70A8EventTriggerFalse,
+        IfObjectInLevel, RememberLastObject, IfRunningAction, IfUnderwater,
+        IfInAir, CreateNPCatMarioEvent, MarioGlows
     }
     public enum Accidental
     {
         None, Flat, Natural, Sharp
+    }
+    public enum FontType
+    {
+        Menu, Dialogue, Description, Triangles, BattleMenu, FlowerBonus
     }
     public enum Key
     {
@@ -19,6 +54,23 @@ namespace LAZYSHELL
         FMajor, BbMajor, EbMajor, AbMajor, DbMajor, GbMajor, CbMajor, // Flats
         AMinor, EMinor, BMinor, FsMinor, CsMinor, GsMinor, DsMinor, AsMinor, // Sharps
         DMinor, GMinor, CMinor, FMinor, BbMinor, EbMinor, AbMinor // Flats
+    }
+    public enum Beat
+    {
+        Whole, 
+        HalfDotted, 
+        Half, 
+        QuarterDotted, 
+        Quarter, 
+        EighthDotted, 
+        QuarterTriplet, 
+        Eighth, 
+        EighthTriplet, 
+        Sixteenth, 
+        SixteenthTriplet, 
+        ThirtySecond, 
+        SixtyFourth,
+        NULL
     }
     public enum NativeSPC
     {

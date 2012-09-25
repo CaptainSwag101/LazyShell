@@ -85,5 +85,8 @@ namespace LAZYSHELL
         public static Bitmap drumsOn = Resources.drumsOn;
         public static Bitmap drumsOff = Resources.drumsOff;
         public static Bitmap vibrato = Resources.vibrato;
+        //
+        public static Bitmap tieOver = Resources.tieOver;
+        public static Bitmap tieUnder = Resources.tieUnder;
     }
 }

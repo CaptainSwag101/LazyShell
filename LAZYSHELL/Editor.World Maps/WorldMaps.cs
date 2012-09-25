@@ -30,11 +30,11 @@ namespace LAZYSHELL
         private Tileset logoTileset;
         private Overlay overlay = new Overlay();
         private Bitmap tilesetImage;
-        private Bitmap mapPointImage;
-        private Bitmap mapPointImage_S;
+        private Bitmap locationImage;
+        private Bitmap locationImage_S;
         private Bitmap marioImage;
         private Bitmap logoImage;
-        private Bitmap mapPointText;
+        private Bitmap locationText;
         private Settings settings = Settings.Default;
         // mouse
         private int zoom = 1;
@@ -58,7 +58,7 @@ namespace LAZYSHELL
         private CopyBuffer copiedTiles;
         private CommandStack commandStack = new CommandStack();
         // old
-        private ArrayList[] worldMapPoints;
+        private ArrayList[] worldMapLocations;
         private int[] pointActivePixels;
         private int diffX, diffY;
         #endregion
@@ -71,26 +71,25 @@ namespace LAZYSHELL
             fontPalettes[1] = new PaletteSet(Model.Data, 0, 0x3E2D55, 2, 16, 32);
             fontPalettes[2] = new PaletteSet(Model.Data, 0, 0x01EF40, 2, 16, 32);
             for (int i = 0; i < fontDialogue.Length; i++)
-                fontDialogue[i] = new FontCharacter(Model.Data, i, 1);
+                fontDialogue[i] = new FontCharacter(Model.Data, i, FontType.Dialogue);
             InitializeComponent();
             this.music.Items.AddRange(Lists.Numerize(Lists.MusicNames));
             this.music.SelectedIndex = Model.Data[0x037DCF];
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
-            Do.AddShortcut(toolStrip3, Keys.F2, baseConversion);
+            Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
             toolTip1.InitialDelay = 0;
-            SetToolTips(toolTip1);
-            InitializeMapPointEditor();
+            InitializeLocationsEditor();
             worldMapName.SelectedIndex = 0;
             //LoadPaletteEditor();
             //LoadGraphicEditor();
             //LoadLogoPaletteEditor();
             //LoadLogoGraphicEditor();
             LoadTileEditor();
-            new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             new History(this);
             checksum = Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
-                Model.WorldMapSprites, Model.WorldMapTilesets, Model.MapPoints);
+                Model.WorldMapSprites, Model.WorldMapTilesets, Model.Locations);
         }
         private void RefreshWorldMap()
         {
@@ -102,13 +101,13 @@ namespace LAZYSHELL
             this.worldMapXCoord.Value = worldMap.X;
             this.worldMapYCoord.Value = worldMap.Y;
 
-            AddWorldMapPoints();
-            MapPoint temp;
-            if (worldMapPoints[index] != null &&
-                worldMapPoints[index].Count > 0)
+            AddLocations();
+            Location temp;
+            if (worldMapLocations[index] != null &&
+                worldMapLocations[index].Count > 0)
             {
-                temp = (MapPoint)worldMapPoints[index][0];
-                mapPointNum.Value = temp.Index;
+                temp = (Location)worldMapLocations[index][0];
+                locationNum.Value = temp.Index;
             }
             else
                 MessageBox.Show("There are not enough map points left to add to the current world map.\nTry reducing the amount of points used by earlier world maps.", "LAZY SHELL");
@@ -117,8 +116,8 @@ namespace LAZYSHELL
             logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, TilesetType.WorldMapLogo);
 
             SetWorldMapImage();
-            SetWorldMapPointsImage();
-            SetWorldMapBannerImage();
+            SetLocationsImage();
+            SetBannerImage();
 
             updating = false;
 
@@ -126,182 +125,6 @@ namespace LAZYSHELL
             Cursor.Current = Cursors.Arrow;
         }
         // tooltips
-        private void SetToolTips(ToolTip toolTip1)
-        {
-            // World maps
-
-            this.worldMapName.ToolTipText =
-                "Select the world map to edit. There are 8 maps total.\n\n" +
-                "The map may appear disoriented in correlation with the map \n" +
-                "points, because the game engine stretches the map.";
-
-            this.showMapPoints.ToolTipText =
-                "Show or hide the locations in the image below. If the lo- \n" +
-                "cations are shown, they can be clicked to edit them in the \n" +
-                "\"LOCATIONS\" panel below.";
-
-            toolTip1.SetToolTip(this.pointCount,
-                "The total # of locations that the current map uses. The \n" +
-                "collection of locations used by the map is based on the \n" +
-                "locations used by the earlier maps.\n\n" +
-                "Map #0, for example, by default uses 7 locations total, and \n" +
-                "since it is the first map that means it will use locations #0 - 6 \n" +
-                "(as seen in the \"LOCATIONS\" editor panel). Map #1 uses 6 \n" +
-                "locations, and because the last location in Map #0 is location #6, \n" +
-                "then Map #1's locations will be locations #7 - 12 (ie. 6 total, \n" +
-                "starting at #7).");
-
-            toolTip1.SetToolTip(this.worldMapTileset,
-                "The tileset, or the actual image used by the map.\n\n" +
-                "To edit a tile in the tileset, click on the tile in the image \n" +
-                "above to edit it in the \"WORLD MAP TILE EDITOR\" panel to \n" +
-                "the right.");
-
-            toolTip1.SetToolTip(this.worldMapXCoord,
-                "The negative X coordinate shift of the map.");
-
-            toolTip1.SetToolTip(this.worldMapYCoord,
-                "The negative Y coordinate shift of the map.");
-
-
-            // Map points
-
-            this.mapPointNum.ToolTipText =
-                "Select the location to edit by #. If the location is in the \n" +
-                "currently selected world map, then it will be highlighted in \n" +
-                "the map.";
-
-            this.mapPointName.ToolTipText =
-                "Select the location to edit by name. If the location is in \n" +
-                "the currently selected world map, then it will be highlighted \n" +
-                "in the map.";
-
-            this.textBoxMapPoint.ToolTipText =
-                "Edit the location's name, as it appears at the bottom of \n" +
-                "the screen when the Mario sprite is over the location.";
-
-            toolTip1.SetToolTip(this.mapPointXCoord,
-                "The absolute X coordinate of the location.");
-
-            toolTip1.SetToolTip(this.mapPointYCoord,
-                "The absolute Y coordinate of the location.");
-
-            toolTip1.SetToolTip(this.showCheckAddress,
-                "If the bit (under \"BIT SET\") of this memory address is set, \n" +
-                "then the location is enabled / visible in-game.\n\n" +
-                "Example: by default location #9 (Mushroom Way) is not \n" +
-                "enabled or visible until bit 2 of memory address $7065 is \n" +
-                "set. This bit is set at the end of event script #1396.\n\n" +
-                "These bits are always set in an event script.");
-
-            toolTip1.SetToolTip(this.showCheckBit,
-                "If this bit of a memory address (under \"IF MEMORY\") is set, \n" +
-                "then the location is enabled / visible in-game.\n\n" +
-                "Example: by default location #9 (Mushroom Way) is not \n" +
-                "enabled or visible until bit 2 of memory address $7065 is \n" +
-                "set. This bit is set at the end of event script #1396.\n\n" +
-                "These bits are always set in an event script.");
-
-            toolTip1.SetToolTip(this.leadToMapPoint,
-                "If this is enabled, the destination will be another location \n" +
-                "(typically a location in different one of the 8 maps). If not \n" +
-                "enabled, then an event (Run Event) will be triggered.");
-
-            toolTip1.SetToolTip(this.whichPointCheckAddress,
-                "If the bit (at the right) of this memory address is set, then \n" +
-                "the location will lead to the first destination (next to \"lead to \n" +
-                "destionation\"), otherwise it will lead to the second one.\n" +
-                "This is ignored if \"LOCATION\" is disabled.");
-
-            toolTip1.SetToolTip(this.whichPointCheckBit,
-                "If this bit of the memory address (at the left) is set, then \n" +
-                "the location will lead to the first destination (next to \"lead to \n" +
-                "destionation\"), otherwise it will lead to the second one.\n" +
-                "This is ignored if \"LOCATION\" is disabled.");
-
-            toolTip1.SetToolTip(this.runEvent,
-                "The event to run when entering the map point.\n" +
-                "This is ignored if \"LOCATION\" is disabled.");
-
-            toolTip1.SetToolTip(this.runEventEdit,
-                "Edit the assigned event # in the Events editor.");
-
-            toolTip1.SetToolTip(this.goMapPointA,
-                "The destination the location leads to.");
-
-            toolTip1.SetToolTip(this.goMapPointB,
-                "The alternate destination the location leads to, if a \n" +
-                "memory's bit is not set.\n" +
-                "This is ignored if \"LOCATION\" is disabled.");
-
-            toolTip1.SetToolTip(this.enableEastPath,
-                "Enable the eastern path of the location, or the path to \n" +
-                "the location the Mario sprite moves to when RIGHT is pressed \n" +
-                "on the d-pad.");
-
-            toolTip1.SetToolTip(this.enableSouthPath,
-                "Enable the southern path of the location, or the path to \n" +
-                "the location the Mario sprite moves to when DOWN is pressed \n" +
-                "on the d-pad.");
-
-            toolTip1.SetToolTip(this.enableWestPath,
-                "Enable the western path of the location, or the path to \n" +
-                "the location the Mario sprite moves to when LEFT is pressed \n" +
-                "on the d-pad.");
-
-            toolTip1.SetToolTip(this.enableNorthPath,
-                "Enable the northern path of the location, or the path to \n" +
-                "the location the Mario sprite moves to when UP is pressed on \n" +
-                "the d-pad.");
-
-            toolTip1.SetToolTip(this.toEastPoint,
-                "The location the eastern path leads to, or the location the \n" +
-                "Mario sprite moves to when RIGHT is pressed on the d-pad.");
-
-            toolTip1.SetToolTip(this.toSouthPoint,
-                "The location the southern path leads to, or the location the \n" +
-                "Mario sprite moves to when DOWN is pressed on the d-pad.");
-
-            toolTip1.SetToolTip(this.toWestPoint,
-                "The location the western path leads to, or the location the \n" +
-                "Mario sprite moves to when LEFT is pressed on the d-pad.");
-
-            toolTip1.SetToolTip(this.toNorthPoint,
-                "The location the northern path leads to, or the location the \n" +
-                "Mario sprite moves to when UP is pressed on the d-pad.");
-
-            toolTip1.SetToolTip(this.toEastCheckAddress,
-                "If the bit (at the right) of this memory address is set, then \n" +
-                "the eastern path will be open.");
-
-            toolTip1.SetToolTip(this.toSouthCheckAddress,
-                "If the bit (at the right) of this memory address is set, then \n" +
-                "the southern path will be open.");
-
-            toolTip1.SetToolTip(this.toWestCheckAddress,
-                "If the bit (at the right) of this memory address is set, then \n" +
-                "the western path will be open.");
-
-            toolTip1.SetToolTip(this.toNorthCheckAddress,
-                "If the bit (at the right) of this memory address is set, then \n" +
-                "the northern path will be open.");
-
-            toolTip1.SetToolTip(this.toEastCheckBit,
-                "If this bit of the memory address (to the left) is set, then \n" +
-                "the eastern path will be open.");
-
-            toolTip1.SetToolTip(this.toSouthCheckBit,
-                "If this bit of the memory address (to the left) is set, then \n" +
-                "the southern path will be open.");
-
-            toolTip1.SetToolTip(this.toWestCheckBit,
-                "If this bit of the memory address (to the left) is set, then \n" +
-                "the western path will be open.");
-
-            toolTip1.SetToolTip(this.toNorthCheckBit,
-                "If this bit of the memory address (to the left) is set, then \n" +
-                "the northern path will be open.");
-        }
         public void Assemble()
         {
             Model.Data[0x037DCF] = (byte)this.music.SelectedIndex;
@@ -348,20 +171,20 @@ namespace LAZYSHELL
             palettes.Assemble(Model.WorldMapPalettes, 0);
             Model.Compress(Model.WorldMapPalettes, 0x3E988C, 0x100, 0xD4, "Palette set");
 
-            foreach (MapPoint mp in mapPoints)
+            foreach (Location mp in locations)
                 mp.Assemble();
-            AssembleAllMapPointTexts();
+            AssembleLocationTexts();
             checksum = Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
-                Model.WorldMapSprites, Model.WorldMapTilesets, Model.MapPoints);
+                Model.WorldMapSprites, Model.WorldMapTilesets, Model.Locations);
         }
-        private void AddWorldMapPoints()
+        private void AddLocations()
         {
-            worldMapPoints = new ArrayList[worldMaps.Length];
-            for (int i = 0, b = 0; i < mapPoints.Length && b < worldMaps.Length; b++)
+            worldMapLocations = new ArrayList[worldMaps.Length];
+            for (int i = 0, b = 0; i < locations.Length && b < worldMaps.Length; b++)
             {
-                worldMapPoints[b] = new ArrayList();
-                for (int a = 0; i < mapPoints.Length && a < worldMaps[b].PointCount; a++, i++)
-                    worldMapPoints[b].Add(mapPoints[i]);
+                worldMapLocations[b] = new ArrayList();
+                for (int a = 0; i < locations.Length && a < worldMaps[b].PointCount; a++, i++)
+                    worldMapLocations[b].Add(locations[i]);
             }
         }
         private void SetWorldMapImage()
@@ -371,12 +194,12 @@ namespace LAZYSHELL
             pictureBoxTileset.BackColor = Color.FromArgb(palettes.Reds[0], palettes.Greens[0], palettes.Blues[0]);
             pictureBoxTileset.Invalidate();
         }
-        private void SetWorldMapPointsImage()
+        private void SetLocationsImage()
         {
-            SetActiveMapPoints();
+            SetActiveLocations();
             SetWorldMapTextImage();
         }
-        private void SetWorldMapBannerImage()
+        private void SetBannerImage()
         {
             int[] pixels = Do.TilesetToPixels(logoTileset.Tileset_Tiles, 16, 16, 0, false);
             logoImage = new Bitmap(Do.PixelsToImage(pixels, 256, 256));
@@ -384,21 +207,21 @@ namespace LAZYSHELL
         }
         private void SetWorldMapTextImage()
         {
-            int[] pixels = drawName.GetPreview(fontDialogue, Model.FontPaletteDialogue.Palettes[1], mapPoints[index_l].Name, false);
+            int[] pixels = drawName.GetPreview(fontDialogue, Model.FontPaletteDialogue.Palettes[1], locations[index_l].Name, false);
             int[] cropped;
             Rectangle region = Do.Crop(pixels, out cropped, 256, 32, true, false, true, false);
-            mapPointText = new Bitmap(Do.PixelsToImage(cropped, region.Width, region.Height));
+            locationText = new Bitmap(Do.PixelsToImage(cropped, region.Width, region.Height));
             pictureBoxTileset.Invalidate();
         }
         // drawing
-        private void SetActiveMapPoints()
+        private void SetActiveLocations()
         {
             pointActivePixels = new int[256 * 256];
             int[] point = Do.GetPixelRegion(Model.WorldMapSprites, 0x20, GetPointPalette(), 16, 0, 1, 2, 1, 0);
-            MapPoint temp;
+            Location temp;
             for (int i = 0; i < worldMap.PointCount; i++)
             {
-                temp = (MapPoint)worldMapPoints[index][i];
+                temp = (Location)worldMapLocations[index][i];
                 for (int y = 0; y < 8; y++)
                 {
                     for (int x = 0; x < 16; x++)
@@ -413,7 +236,7 @@ namespace LAZYSHELL
                 }
             }
         }
-        private int[] GetMapPointPixels(bool hilite)
+        private int[] GetLocationPixels(bool hilite)
         {
             int[] pixels = Do.GetPixelRegion(Model.WorldMapSprites, 0x20, GetPointPalette(), 16, 0, 1, 2, 1, 0);
             if (hilite)
@@ -544,14 +367,14 @@ namespace LAZYSHELL
         private void LogoPaletteUpdate()
         {
             logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, TilesetType.WorldMapLogo);
-            SetWorldMapBannerImage();
+            SetBannerImage();
             LoadLogoGraphicEditor();
             checksum--;
         }
         private void LogoGraphicUpdate()
         {
             logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, TilesetType.WorldMapLogo);
-            SetWorldMapBannerImage();
+            SetBannerImage();
             checksum--;
         }
         // Editing
@@ -695,7 +518,7 @@ namespace LAZYSHELL
         private void WorldMaps_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
-                Model.WorldMapSprites, Model.WorldMapTilesets, Model.MapPoints) == checksum)
+                Model.WorldMapSprites, Model.WorldMapTilesets, Model.Locations) == checksum)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "World Maps have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -704,7 +527,7 @@ namespace LAZYSHELL
                 Assemble();
             else if (result == DialogResult.No)
             {
-                Model.MapPoints = null;
+                Model.Locations = null;
                 Model.WorldMapGraphics = null;
                 Model.WorldMapPalettes = null;
                 Model.WorldMaps = null;
@@ -745,10 +568,10 @@ namespace LAZYSHELL
         {
             RefreshWorldMap();
         }
-        private void showMapPoints_Click(object sender, EventArgs e)
+        private void showLocations_Click(object sender, EventArgs e)
         {
-            toolStrip2.Enabled = !showMapPoints.Checked || !showBanner.Checked;
-            if (showMapPoints.Checked)
+            toolStrip2.Enabled = !showLocations.Checked || !showBanner.Checked;
+            if (showLocations.Checked)
             {
                 buttonEditSelect.Checked = false;
                 if (draggedTiles != null)
@@ -762,8 +585,8 @@ namespace LAZYSHELL
         }
         private void showBanner_Click(object sender, EventArgs e)
         {
-            toolStrip2.Enabled = !showMapPoints.Checked || !showBanner.Checked;
-            if (showMapPoints.Checked)
+            toolStrip2.Enabled = !showLocations.Checked || !showBanner.Checked;
+            if (showLocations.Checked)
             {
                 buttonEditSelect.Checked = false;
                 if (draggedTiles != null)
@@ -780,8 +603,8 @@ namespace LAZYSHELL
             if (updating) return;
 
             worldMap.PointCount = (byte)pointCount.Value;
-            AddWorldMapPoints();
-            SetWorldMapPointsImage();
+            AddLocations();
+            SetLocationsImage();
         }
         private void worldMapTileset_ValueChanged(object sender, EventArgs e)
         {
@@ -810,7 +633,7 @@ namespace LAZYSHELL
             if (tilesetImage == null) return;
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             Rectangle rdst = new Rectangle(0, 0, 256, 256);
-            if (showMapPoints.Checked || showBanner.Checked)
+            if (showLocations.Checked || showBanner.Checked)
             {
                 double third = 100.0 / 3.0;
                 rdst.Y -= 8;
@@ -830,31 +653,30 @@ namespace LAZYSHELL
 
             if (tilesetImage != null)
                 e.Graphics.DrawImage(tilesetImage, rdst, 0, 0, 256, 256, GraphicsUnit.Pixel);
-            if (showMapPoints.Checked)
+            if (showLocations.Checked)
             {
-                foreach (MapPoint mapPoint in worldMapPoints[index])
+                foreach (Location location in worldMapLocations[index])
                 {
-                    if (mapPointImage == null)
-                        mapPointImage = new Bitmap(Do.PixelsToImage(GetMapPointPixels(false), 16, 8));
-                    if (mapPointImage_S == null)
-                        mapPointImage_S = new Bitmap(Do.PixelsToImage(GetMapPointPixels(true), 16, 8));
+                    if (locationImage == null)
+                        locationImage = new Bitmap(Do.PixelsToImage(GetLocationPixels(false), 16, 8));
+                    if (locationImage_S == null)
+                        locationImage_S = new Bitmap(Do.PixelsToImage(GetLocationPixels(true), 16, 8));
                     if (marioImage == null)
                         marioImage = new Bitmap(Do.PixelsToImage(GetMarioPixels(), 16, 32));
-                    if (mapPoint.Index == mapPointNum.Value)
+                    if (location.Index == locationNum.Value)
                     {
-                        e.Graphics.DrawImage(mapPointImage_S, mapPoint.X, mapPoint.Y);
-                        //e.Graphics.DrawImage(marioImage, mapPoint.X, mapPoint.Y - 24);
+                        e.Graphics.DrawImage(locationImage_S, location.X, location.Y);
                     }
                     else
-                        e.Graphics.DrawImage(mapPointImage, mapPoint.X, mapPoint.Y);
+                        e.Graphics.DrawImage(locationImage, location.X, location.Y);
                 }
             }
             if (showBanner.Checked)
             {
                 if (logoImage != null)
                     e.Graphics.DrawImage(logoImage, 0, -8);
-                if (mapPointText != null)
-                    e.Graphics.DrawImage(mapPointText, 128 - (mapPointText.Width / 2), 182);
+                if (locationText != null)
+                    e.Graphics.DrawImage(locationText, 128 - (locationText.Width / 2), 182);
             }
             if (moving && selection != null)
             {
@@ -877,7 +699,7 @@ namespace LAZYSHELL
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-            if (mouseEnter && !showMapPoints.Checked && !showBanner.Checked)
+            if (mouseEnter && !showLocations.Checked && !showBanner.Checked)
                 DrawHoverBox(e.Graphics);
 
             if (buttonToggleCartGrid.Checked)
@@ -930,15 +752,15 @@ namespace LAZYSHELL
                     }
                 }
             }
-            else if (showMapPoints.Checked)
+            else if (showLocations.Checked)
             {
                 if (pointActivePixels[y * 256 + x] != 0)
                 {
-                    mapPointNum.Value = pointActivePixels[y * 256 + x] - 1;
-                    diffX = (int)(x - mapPointXCoord.Value);
-                    diffY = (int)(y - mapPointYCoord.Value);
+                    locationNum.Value = pointActivePixels[y * 256 + x] - 1;
+                    diffX = (int)(x - locationXCoord.Value);
+                    diffY = (int)(y - locationYCoord.Value);
                     mouseDownObject = "location";
-                    SetWorldMapPointsImage();
+                    SetLocationsImage();
                 }
                 else
                 {
@@ -978,7 +800,7 @@ namespace LAZYSHELL
                 else
                     pictureBoxTileset.Cursor = Cursors.Cross;
             }
-            else if (showMapPoints.Checked)
+            else if (showLocations.Checked)
             {
                 if (e.Button == MouseButtons.Left)
                 {
@@ -986,8 +808,8 @@ namespace LAZYSHELL
                     {
                         x = Math.Max(0, Math.Min(e.X - diffX, pictureBoxTileset.Width));
                         y = Math.Max(0, Math.Min(e.Y - diffY, pictureBoxTileset.Height));
-                        mapPointXCoord.Value = Math.Min(255, x);
-                        mapPointYCoord.Value = Math.Min(255, y);
+                        locationXCoord.Value = Math.Min(255, x);
+                        locationYCoord.Value = Math.Min(255, y);
                     }
                     if (mouseDownObject == "tileset")
                     {
@@ -1009,7 +831,7 @@ namespace LAZYSHELL
         }
         private void pictureBoxTileset_MouseUp(object sender, MouseEventArgs e)
         {
-            SetWorldMapPointsImage();
+            SetLocationsImage();
         }
         private void pictureBoxTileset_MouseClick(object sender, MouseEventArgs e)
         {
@@ -1168,15 +990,15 @@ namespace LAZYSHELL
             worldMap = new WorldMap(Model.Data, index);
             RefreshWorldMap();
         }
-        private void resetMapPointToolStripMenuItem_Click(object sender, EventArgs e)
+        private void resetLocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current map point. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            mapPoint = new MapPoint(Model.Data, index_l);
-            AddWorldMapPoints();
-            RefreshMapPointEditor();
-            SetWorldMapPointsImage();
+            location = new Location(Model.Data, index_l);
+            AddLocations();
+            RefreshLocationEditor();
+            SetLocationsImage();
         }
         // context menu strip
         private void mirrorToolStripMenuItem_Click(object sender, EventArgs e)

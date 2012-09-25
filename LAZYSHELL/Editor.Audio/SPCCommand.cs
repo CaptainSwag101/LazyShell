@@ -54,6 +54,16 @@ namespace LAZYSHELL
             }
             set { this.commandData[3] = value; }
         }
+        public int Type
+        {
+            get
+            {
+                if (spc.GetType() == typeof(SPCTrack))
+                    return 0;
+                else
+                    return ((SPCSound)spc).Type + 1;
+            }
+        }
         private List<SPCCommand> commands = new List<SPCCommand>();
         public List<SPCCommand> Commands { get { return this.commands; } set { this.commands = value; } }
         private SPC spc;

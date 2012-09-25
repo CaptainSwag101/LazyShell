@@ -28,24 +28,22 @@ namespace LAZYSHELL
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Previewer));
             this.emuPathLabel = new System.Windows.Forms.Label();
             this.eventListBox = new System.Windows.Forms.ListBox();
             this.launchButton = new System.Windows.Forms.Button();
             this.romLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.selectNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.selectIndex = new System.Windows.Forms.NumericUpDown();
             this.cancelButton = new System.Windows.Forms.Button();
             this.emuPathTextBox = new System.Windows.Forms.TextBox();
             this.romPathTextBox = new System.Windows.Forms.TextBox();
             this.zsnesArgs = new System.Windows.Forms.TextBox();
             this.linkLabelZSNES = new System.Windows.Forms.LinkLabel();
-            this.adjustXNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.adjustYNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.adjustZNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.adjustX = new System.Windows.Forms.NumericUpDown();
+            this.adjustY = new System.Windows.Forms.NumericUpDown();
+            this.adjustZ = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.battleBGListBox = new System.Windows.Forms.ComboBox();
+            this.battleBG = new System.Windows.Forms.ComboBox();
             this.snes9xArgs = new System.Windows.Forms.TextBox();
             this.linkLabelSNES9X = new System.Windows.Forms.LinkLabel();
             this.alliesInParty = new System.Windows.Forms.CheckedListBox();
@@ -70,10 +68,15 @@ namespace LAZYSHELL
             this.defaultSNES9X = new System.Windows.Forms.Button();
             this.defaultZSNES = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.selectNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.adjustXNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.adjustYNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.adjustZNumericUpDown)).BeginInit();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
+            ((System.ComponentModel.ISupportInitialize)(this.selectIndex)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adjustX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adjustY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adjustZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.level)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -81,12 +84,15 @@ namespace LAZYSHELL
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // emuPathLabel
             // 
             this.emuPathLabel.AutoSize = true;
-            this.emuPathLabel.Location = new System.Drawing.Point(6, 23);
+            this.emuPathLabel.Location = new System.Drawing.Point(6, 21);
             this.emuPathLabel.Name = "emuPathLabel";
             this.emuPathLabel.Size = new System.Drawing.Size(78, 13);
             this.emuPathLabel.TabIndex = 0;
@@ -99,7 +105,7 @@ namespace LAZYSHELL
             this.eventListBox.IntegralHeight = false;
             this.eventListBox.Location = new System.Drawing.Point(3, 17);
             this.eventListBox.Name = "eventListBox";
-            this.eventListBox.Size = new System.Drawing.Size(642, 451);
+            this.eventListBox.Size = new System.Drawing.Size(412, 346);
             this.eventListBox.TabIndex = 0;
             this.eventListBox.SelectedIndexChanged += new System.EventHandler(this.eventListBox_SelectedIndexChanged);
             // 
@@ -107,9 +113,9 @@ namespace LAZYSHELL
             // 
             this.launchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.launchButton.FlatAppearance.BorderSize = 0;
-            this.launchButton.Location = new System.Drawing.Point(654, 558);
+            this.launchButton.Location = new System.Drawing.Point(6, 341);
             this.launchButton.Name = "launchButton";
-            this.launchButton.Size = new System.Drawing.Size(75, 23);
+            this.launchButton.Size = new System.Drawing.Size(81, 23);
             this.launchButton.TabIndex = 8;
             this.launchButton.Text = "Launch";
             this.launchButton.Click += new System.EventHandler(this.launchButton_Click);
@@ -117,7 +123,7 @@ namespace LAZYSHELL
             // romLabel
             // 
             this.romLabel.AutoSize = true;
-            this.romLabel.Location = new System.Drawing.Point(6, 44);
+            this.romLabel.Location = new System.Drawing.Point(6, 42);
             this.romLabel.Name = "romLabel";
             this.romLabel.Size = new System.Drawing.Size(57, 13);
             this.romLabel.TabIndex = 3;
@@ -126,32 +132,33 @@ namespace LAZYSHELL
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(657, 118);
+            this.label1.Location = new System.Drawing.Point(6, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 2;
+            this.label1.Text = "Index";
             // 
-            // selectNumericUpDown
+            // selectIndex
             // 
-            this.selectNumericUpDown.Location = new System.Drawing.Point(746, 116);
-            this.selectNumericUpDown.Maximum = new decimal(new int[] {
+            this.selectIndex.Location = new System.Drawing.Point(84, 12);
+            this.selectIndex.Maximum = new decimal(new int[] {
             4095,
             0,
             0,
             0});
-            this.selectNumericUpDown.Name = "selectNumericUpDown";
-            this.selectNumericUpDown.Size = new System.Drawing.Size(56, 21);
-            this.selectNumericUpDown.TabIndex = 3;
-            this.selectNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.selectNumericUpDown.ValueChanged += new System.EventHandler(this.selectNumericUpDown_ValueChanged);
+            this.selectIndex.Name = "selectIndex";
+            this.selectIndex.Size = new System.Drawing.Size(84, 21);
+            this.selectIndex.TabIndex = 3;
+            this.selectIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.selectIndex.ValueChanged += new System.EventHandler(this.selectNumericUpDown_ValueChanged);
             // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Location = new System.Drawing.Point(733, 558);
+            this.cancelButton.Location = new System.Drawing.Point(89, 341);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(78, 23);
             this.cancelButton.TabIndex = 9;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -160,137 +167,129 @@ namespace LAZYSHELL
             // 
             this.emuPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.emuPathTextBox.Location = new System.Drawing.Point(136, 20);
+            this.emuPathTextBox.Location = new System.Drawing.Point(89, 18);
             this.emuPathTextBox.Name = "emuPathTextBox";
             this.emuPathTextBox.ReadOnly = true;
-            this.emuPathTextBox.Size = new System.Drawing.Size(591, 21);
+            this.emuPathTextBox.Size = new System.Drawing.Size(433, 21);
             this.emuPathTextBox.TabIndex = 1;
             // 
             // romPathTextBox
             // 
             this.romPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.romPathTextBox.Location = new System.Drawing.Point(136, 41);
+            this.romPathTextBox.Location = new System.Drawing.Point(89, 39);
             this.romPathTextBox.Name = "romPathTextBox";
             this.romPathTextBox.ReadOnly = true;
-            this.romPathTextBox.Size = new System.Drawing.Size(591, 21);
+            this.romPathTextBox.Size = new System.Drawing.Size(433, 21);
             this.romPathTextBox.TabIndex = 4;
             // 
             // zsnesArgs
             // 
             this.zsnesArgs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.zsnesArgs.Location = new System.Drawing.Point(136, 83);
+            this.zsnesArgs.Location = new System.Drawing.Point(89, 81);
             this.zsnesArgs.Name = "zsnesArgs";
-            this.zsnesArgs.Size = new System.Drawing.Size(591, 21);
+            this.zsnesArgs.Size = new System.Drawing.Size(433, 21);
             this.zsnesArgs.TabIndex = 10;
             // 
             // linkLabelZSNES
             // 
             this.linkLabelZSNES.AutoSize = true;
-            this.linkLabelZSNES.Location = new System.Drawing.Point(6, 86);
+            this.linkLabelZSNES.Location = new System.Drawing.Point(6, 84);
             this.linkLabelZSNES.Name = "linkLabelZSNES";
-            this.linkLabelZSNES.Size = new System.Drawing.Size(124, 13);
+            this.linkLabelZSNES.Size = new System.Drawing.Size(77, 13);
             this.linkLabelZSNES.TabIndex = 9;
             this.linkLabelZSNES.TabStop = true;
             this.linkLabelZSNES.Tag = "";
-            this.linkLabelZSNES.Text = "ZSNESW Cmd-Line Args:";
+            this.linkLabelZSNES.Text = "ZSNESW Args:";
             this.linkLabelZSNES.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelZSNES_LinkClicked);
             // 
-            // adjustXNumericUpDown
+            // adjustX
             // 
-            this.adjustXNumericUpDown.Location = new System.Drawing.Point(35, 20);
-            this.adjustXNumericUpDown.Maximum = new decimal(new int[] {
+            this.adjustX.Location = new System.Drawing.Point(41, 20);
+            this.adjustX.Maximum = new decimal(new int[] {
             63,
             0,
             0,
             0});
-            this.adjustXNumericUpDown.Name = "adjustXNumericUpDown";
-            this.adjustXNumericUpDown.Size = new System.Drawing.Size(57, 21);
-            this.adjustXNumericUpDown.TabIndex = 1;
-            this.adjustXNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.adjustX.Name = "adjustX";
+            this.adjustX.Size = new System.Drawing.Size(43, 21);
+            this.adjustX.TabIndex = 1;
+            this.adjustX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // adjustYNumericUpDown
+            // adjustY
             // 
-            this.adjustYNumericUpDown.Location = new System.Drawing.Point(92, 20);
-            this.adjustYNumericUpDown.Maximum = new decimal(new int[] {
+            this.adjustY.Location = new System.Drawing.Point(84, 20);
+            this.adjustY.Maximum = new decimal(new int[] {
             127,
             0,
             0,
             0});
-            this.adjustYNumericUpDown.Name = "adjustYNumericUpDown";
-            this.adjustYNumericUpDown.Size = new System.Drawing.Size(56, 21);
-            this.adjustYNumericUpDown.TabIndex = 2;
-            this.adjustYNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.adjustY.Name = "adjustY";
+            this.adjustY.Size = new System.Drawing.Size(42, 21);
+            this.adjustY.TabIndex = 2;
+            this.adjustY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // adjustZNumericUpDown
+            // adjustZ
             // 
-            this.adjustZNumericUpDown.Location = new System.Drawing.Point(35, 41);
-            this.adjustZNumericUpDown.Maximum = new decimal(new int[] {
+            this.adjustZ.Location = new System.Drawing.Point(126, 20);
+            this.adjustZ.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
-            this.adjustZNumericUpDown.Name = "adjustZNumericUpDown";
-            this.adjustZNumericUpDown.Size = new System.Drawing.Size(57, 21);
-            this.adjustZNumericUpDown.TabIndex = 4;
-            this.adjustZNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.adjustZ.Name = "adjustZ";
+            this.adjustZ.Size = new System.Drawing.Size(42, 21);
+            this.adjustZ.TabIndex = 4;
+            this.adjustZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 22);
+            this.label5.Location = new System.Drawing.Point(6, 23);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(23, 13);
+            this.label5.Size = new System.Drawing.Size(33, 13);
             this.label5.TabIndex = 0;
-            this.label5.Text = "X,Y";
+            this.label5.Text = "X,Y,Z";
             // 
-            // label7
+            // battleBG
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 43);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(13, 13);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Z";
-            // 
-            // battleBGListBox
-            // 
-            this.battleBGListBox.DropDownHeight = 392;
-            this.battleBGListBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.battleBGListBox.DropDownWidth = 220;
-            this.battleBGListBox.FormattingEnabled = true;
-            this.battleBGListBox.IntegralHeight = false;
-            this.battleBGListBox.Location = new System.Drawing.Point(6, 20);
-            this.battleBGListBox.Name = "battleBGListBox";
-            this.battleBGListBox.Size = new System.Drawing.Size(142, 21);
-            this.battleBGListBox.TabIndex = 0;
-            this.battleBGListBox.SelectedIndexChanged += new System.EventHandler(this.battleBGListBox_SelectedIndexChanged);
+            this.battleBG.DropDownHeight = 392;
+            this.battleBG.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.battleBG.DropDownWidth = 220;
+            this.battleBG.FormattingEnabled = true;
+            this.battleBG.IntegralHeight = false;
+            this.battleBG.Location = new System.Drawing.Point(6, 20);
+            this.battleBG.Name = "battleBG";
+            this.battleBG.Size = new System.Drawing.Size(162, 21);
+            this.battleBG.TabIndex = 0;
+            this.battleBG.SelectedIndexChanged += new System.EventHandler(this.battleBGListBox_SelectedIndexChanged);
             // 
             // snes9xArgs
             // 
             this.snes9xArgs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.snes9xArgs.Location = new System.Drawing.Point(136, 62);
+            this.snes9xArgs.Location = new System.Drawing.Point(89, 60);
             this.snes9xArgs.Name = "snes9xArgs";
-            this.snes9xArgs.Size = new System.Drawing.Size(591, 21);
+            this.snes9xArgs.Size = new System.Drawing.Size(433, 21);
             this.snes9xArgs.TabIndex = 7;
             // 
             // linkLabelSNES9X
             // 
             this.linkLabelSNES9X.AutoSize = true;
-            this.linkLabelSNES9X.Location = new System.Drawing.Point(6, 65);
+            this.linkLabelSNES9X.Location = new System.Drawing.Point(6, 63);
             this.linkLabelSNES9X.Name = "linkLabelSNES9X";
-            this.linkLabelSNES9X.Size = new System.Drawing.Size(120, 13);
+            this.linkLabelSNES9X.Size = new System.Drawing.Size(73, 13);
             this.linkLabelSNES9X.TabIndex = 6;
             this.linkLabelSNES9X.TabStop = true;
             this.linkLabelSNES9X.Tag = "";
-            this.linkLabelSNES9X.Text = "SNES9X Cmd-Line Args:";
+            this.linkLabelSNES9X.Text = "SNES9X Args:";
             this.linkLabelSNES9X.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelSNES9X_LinkClicked);
             // 
             // alliesInParty
             // 
             this.alliesInParty.CheckOnClick = true;
+            this.alliesInParty.ColumnWidth = 78;
             this.alliesInParty.FormattingEnabled = true;
             this.alliesInParty.Items.AddRange(new object[] {
             "Toadstool",
@@ -298,14 +297,15 @@ namespace LAZYSHELL
             "Geno",
             "Mallow"});
             this.alliesInParty.Location = new System.Drawing.Point(6, 20);
+            this.alliesInParty.MultiColumn = true;
             this.alliesInParty.Name = "alliesInParty";
-            this.alliesInParty.Size = new System.Drawing.Size(142, 68);
+            this.alliesInParty.Size = new System.Drawing.Size(162, 36);
             this.alliesInParty.TabIndex = 0;
             this.alliesInParty.SelectedIndexChanged += new System.EventHandler(this.alliesInParty_SelectedIndexChanged);
             // 
             // level
             // 
-            this.level.Location = new System.Drawing.Point(68, 47);
+            this.level.Location = new System.Drawing.Point(129, 20);
             this.level.Maximum = new decimal(new int[] {
             30,
             0,
@@ -317,7 +317,7 @@ namespace LAZYSHELL
             0,
             0});
             this.level.Name = "level";
-            this.level.Size = new System.Drawing.Size(80, 21);
+            this.level.Size = new System.Drawing.Size(39, 21);
             this.level.TabIndex = 2;
             this.level.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.level.Value = new decimal(new int[] {
@@ -330,23 +330,23 @@ namespace LAZYSHELL
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 49);
+            this.label3.Location = new System.Drawing.Point(109, 23);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.Size = new System.Drawing.Size(18, 13);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Level";
+            this.label3.Text = "LV";
             // 
             // maxOutStats
             // 
             this.maxOutStats.Appearance = System.Windows.Forms.Appearance.Button;
+            this.maxOutStats.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.maxOutStats.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.maxOutStats.Location = new System.Drawing.Point(6, 134);
+            this.maxOutStats.Location = new System.Drawing.Point(6, 113);
             this.maxOutStats.Name = "maxOutStats";
-            this.maxOutStats.Size = new System.Drawing.Size(142, 21);
+            this.maxOutStats.Size = new System.Drawing.Size(81, 23);
             this.maxOutStats.TabIndex = 9;
-            this.maxOutStats.Text = "MAX OUT STATS";
+            this.maxOutStats.Text = "MAX STATS";
             this.maxOutStats.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.maxOutStats.UseCompatibleTextRendering = true;
             this.maxOutStats.UseVisualStyleBackColor = false;
             this.maxOutStats.CheckedChanged += new System.EventHandler(this.maxOutStats_CheckedChanged);
             // 
@@ -360,9 +360,9 @@ namespace LAZYSHELL
             this.allyWeapon.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.allyWeapon.IntegralHeight = false;
             this.allyWeapon.ItemHeight = 15;
-            this.allyWeapon.Location = new System.Drawing.Point(68, 68);
+            this.allyWeapon.Location = new System.Drawing.Point(67, 45);
             this.allyWeapon.Name = "allyWeapon";
-            this.allyWeapon.Size = new System.Drawing.Size(80, 21);
+            this.allyWeapon.Size = new System.Drawing.Size(101, 21);
             this.allyWeapon.TabIndex = 4;
             this.allyWeapon.Tag = "";
             this.allyWeapon.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
@@ -371,7 +371,7 @@ namespace LAZYSHELL
             // label133
             // 
             this.label133.AutoSize = true;
-            this.label133.Location = new System.Drawing.Point(6, 113);
+            this.label133.Location = new System.Drawing.Point(5, 90);
             this.label133.Name = "label133";
             this.label133.Size = new System.Drawing.Size(56, 13);
             this.label133.TabIndex = 7;
@@ -387,9 +387,9 @@ namespace LAZYSHELL
             this.allyAccessory.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.allyAccessory.IntegralHeight = false;
             this.allyAccessory.ItemHeight = 15;
-            this.allyAccessory.Location = new System.Drawing.Point(68, 110);
+            this.allyAccessory.Location = new System.Drawing.Point(67, 87);
             this.allyAccessory.Name = "allyAccessory";
-            this.allyAccessory.Size = new System.Drawing.Size(80, 21);
+            this.allyAccessory.Size = new System.Drawing.Size(101, 21);
             this.allyAccessory.TabIndex = 8;
             this.allyAccessory.Tag = "";
             this.allyAccessory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
@@ -405,9 +405,9 @@ namespace LAZYSHELL
             this.allyArmor.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.allyArmor.IntegralHeight = false;
             this.allyArmor.ItemHeight = 15;
-            this.allyArmor.Location = new System.Drawing.Point(68, 89);
+            this.allyArmor.Location = new System.Drawing.Point(67, 66);
             this.allyArmor.Name = "allyArmor";
-            this.allyArmor.Size = new System.Drawing.Size(80, 21);
+            this.allyArmor.Size = new System.Drawing.Size(101, 21);
             this.allyArmor.TabIndex = 6;
             this.allyArmor.Tag = "";
             this.allyArmor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
@@ -416,7 +416,7 @@ namespace LAZYSHELL
             // label135
             // 
             this.label135.AutoSize = true;
-            this.label135.Location = new System.Drawing.Point(6, 71);
+            this.label135.Location = new System.Drawing.Point(5, 48);
             this.label135.Name = "label135";
             this.label135.Size = new System.Drawing.Size(47, 13);
             this.label135.TabIndex = 3;
@@ -425,7 +425,7 @@ namespace LAZYSHELL
             // label134
             // 
             this.label134.AutoSize = true;
-            this.label134.Location = new System.Drawing.Point(6, 92);
+            this.label134.Location = new System.Drawing.Point(5, 69);
             this.label134.Name = "label134";
             this.label134.Size = new System.Drawing.Size(36, 13);
             this.label134.TabIndex = 5;
@@ -437,13 +437,12 @@ namespace LAZYSHELL
             this.allyName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.allyName.DropDownHeight = 317;
             this.allyName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.allyName.DropDownWidth = 150;
             this.allyName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.allyName.IntegralHeight = false;
             this.allyName.ItemHeight = 15;
             this.allyName.Location = new System.Drawing.Point(6, 20);
             this.allyName.Name = "allyName";
-            this.allyName.Size = new System.Drawing.Size(142, 21);
+            this.allyName.Size = new System.Drawing.Size(99, 21);
             this.allyName.TabIndex = 0;
             this.allyName.Tag = "";
             this.allyName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.allyName_DrawItem);
@@ -452,34 +451,36 @@ namespace LAZYSHELL
             // reset
             // 
             this.reset.FlatAppearance.BorderSize = 0;
-            this.reset.Location = new System.Drawing.Point(6, 156);
+            this.reset.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reset.Location = new System.Drawing.Point(89, 113);
             this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(142, 23);
+            this.reset.Size = new System.Drawing.Size(78, 23);
             this.reset.TabIndex = 10;
-            this.reset.Text = "Reset all equipment";
+            this.reset.Text = "RESET";
             this.reset.UseVisualStyleBackColor = false;
             this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.adjustXNumericUpDown);
+            this.groupBox1.Controls.Add(this.adjustX);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.adjustYNumericUpDown);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.adjustZNumericUpDown);
-            this.groupBox1.Location = new System.Drawing.Point(654, 143);
+            this.groupBox1.Controls.Add(this.adjustY);
+            this.groupBox1.Controls.Add(this.adjustZ);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(0, 39);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(154, 67);
+            this.groupBox1.Size = new System.Drawing.Size(174, 47);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mario\'s Coordinates";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.battleBGListBox);
-            this.groupBox2.Location = new System.Drawing.Point(654, 216);
+            this.groupBox2.Controls.Add(this.battleBG);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox2.Location = new System.Drawing.Point(0, 86);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(154, 47);
+            this.groupBox2.Size = new System.Drawing.Size(174, 47);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Battlefield";
@@ -487,9 +488,10 @@ namespace LAZYSHELL
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.alliesInParty);
-            this.groupBox3.Location = new System.Drawing.Point(654, 269);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(0, 133);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(154, 94);
+            this.groupBox3.Size = new System.Drawing.Size(174, 62);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Allies in Party";
@@ -507,9 +509,10 @@ namespace LAZYSHELL
             this.groupBox4.Controls.Add(this.level);
             this.groupBox4.Controls.Add(this.label135);
             this.groupBox4.Controls.Add(this.label134);
-            this.groupBox4.Location = new System.Drawing.Point(654, 369);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox4.Location = new System.Drawing.Point(0, 195);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(154, 185);
+            this.groupBox4.Size = new System.Drawing.Size(174, 143);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Ally Status";
@@ -529,9 +532,9 @@ namespace LAZYSHELL
             this.groupBox5.Controls.Add(this.linkLabelSNES9X);
             this.groupBox5.Controls.Add(this.emuPathTextBox);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(0, 0);
+            this.groupBox5.Location = new System.Drawing.Point(0, 25);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(809, 110);
+            this.groupBox5.Size = new System.Drawing.Size(592, 108);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Emulator Properties";
@@ -539,9 +542,10 @@ namespace LAZYSHELL
             // changeEmuButton
             // 
             this.changeEmuButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.changeEmuButton.Location = new System.Drawing.Point(733, 20);
+            this.changeEmuButton.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changeEmuButton.Location = new System.Drawing.Point(524, 18);
             this.changeEmuButton.Name = "changeEmuButton";
-            this.changeEmuButton.Size = new System.Drawing.Size(70, 21);
+            this.changeEmuButton.Size = new System.Drawing.Size(62, 21);
             this.changeEmuButton.TabIndex = 2;
             this.changeEmuButton.Text = "...";
             this.changeEmuButton.UseCompatibleTextRendering = true;
@@ -552,10 +556,11 @@ namespace LAZYSHELL
             // 
             this.dynamicROMPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dynamicROMPath.Appearance = System.Windows.Forms.Appearance.Button;
+            this.dynamicROMPath.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dynamicROMPath.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.dynamicROMPath.Location = new System.Drawing.Point(733, 41);
+            this.dynamicROMPath.Location = new System.Drawing.Point(524, 39);
             this.dynamicROMPath.Name = "dynamicROMPath";
-            this.dynamicROMPath.Size = new System.Drawing.Size(70, 21);
+            this.dynamicROMPath.Size = new System.Drawing.Size(62, 21);
             this.dynamicROMPath.TabIndex = 5;
             this.dynamicROMPath.Text = "DYNAMIC";
             this.dynamicROMPath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -566,9 +571,10 @@ namespace LAZYSHELL
             // defaultSNES9X
             // 
             this.defaultSNES9X.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.defaultSNES9X.Location = new System.Drawing.Point(733, 62);
+            this.defaultSNES9X.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defaultSNES9X.Location = new System.Drawing.Point(524, 60);
             this.defaultSNES9X.Name = "defaultSNES9X";
-            this.defaultSNES9X.Size = new System.Drawing.Size(70, 21);
+            this.defaultSNES9X.Size = new System.Drawing.Size(62, 21);
             this.defaultSNES9X.TabIndex = 8;
             this.defaultSNES9X.Text = "DEFAULT";
             this.defaultSNES9X.UseCompatibleTextRendering = true;
@@ -578,9 +584,10 @@ namespace LAZYSHELL
             // defaultZSNES
             // 
             this.defaultZSNES.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.defaultZSNES.Location = new System.Drawing.Point(733, 83);
+            this.defaultZSNES.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defaultZSNES.Location = new System.Drawing.Point(524, 81);
             this.defaultZSNES.Name = "defaultZSNES";
-            this.defaultZSNES.Size = new System.Drawing.Size(70, 21);
+            this.defaultZSNES.Size = new System.Drawing.Size(62, 21);
             this.defaultZSNES.TabIndex = 11;
             this.defaultZSNES.Text = "DEFAULT";
             this.defaultZSNES.UseCompatibleTextRendering = true;
@@ -590,37 +597,89 @@ namespace LAZYSHELL
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.eventListBox);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox6.Location = new System.Drawing.Point(0, 110);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox6.Location = new System.Drawing.Point(0, 133);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(648, 471);
+            this.groupBox6.Size = new System.Drawing.Size(418, 366);
             this.groupBox6.TabIndex = 1;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Source of Entrance";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label1);
+            this.groupBox7.Controls.Add(this.selectIndex);
+            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox7.Location = new System.Drawing.Point(0, 0);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(174, 39);
+            this.groupBox7.TabIndex = 1;
+            this.groupBox7.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.groupBox4);
+            this.panel1.Controls.Add(this.groupBox3);
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.launchButton);
+            this.panel1.Controls.Add(this.cancelButton);
+            this.panel1.Controls.Add(this.groupBox7);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(418, 133);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(174, 366);
+            this.panel1.TabIndex = 1;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.baseConvertor,
+            this.helpTips});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(592, 25);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // baseConvertor
+            // 
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.Text = "Base Convertor";
+            // 
+            // helpTips
+            // 
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.Text = "Help Tips";
             // 
             // Previewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 581);
+            this.ClientSize = new System.Drawing.Size(592, 499);
             this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.selectNumericUpDown);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.launchButton);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Name = "Previewer";
             this.Text = "PREVIEWER - Lazy Shell";
-            ((System.ComponentModel.ISupportInitialize)(this.selectNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.adjustXNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.adjustYNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.adjustZNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectIndex)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adjustX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adjustY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adjustZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.level)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -631,6 +690,11 @@ namespace LAZYSHELL
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -643,18 +707,17 @@ namespace LAZYSHELL
         private System.Windows.Forms.Button launchButton;
         private System.Windows.Forms.Label romLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown selectNumericUpDown;
+        private System.Windows.Forms.NumericUpDown selectIndex;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.TextBox emuPathTextBox;
         private System.Windows.Forms.TextBox romPathTextBox;
         private System.Windows.Forms.TextBox zsnesArgs;
         private System.Windows.Forms.LinkLabel linkLabelZSNES;
-        private System.Windows.Forms.NumericUpDown adjustXNumericUpDown;
-        private System.Windows.Forms.NumericUpDown adjustYNumericUpDown;
-        private System.Windows.Forms.NumericUpDown adjustZNumericUpDown;
+        private System.Windows.Forms.NumericUpDown adjustX;
+        private System.Windows.Forms.NumericUpDown adjustY;
+        private System.Windows.Forms.NumericUpDown adjustZ;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox battleBGListBox;
+        private System.Windows.Forms.ComboBox battleBG;
         private System.Windows.Forms.TextBox snes9xArgs;
         private System.Windows.Forms.LinkLabel linkLabelSNES9X;
         private System.Windows.Forms.CheckedListBox alliesInParty;
@@ -679,5 +742,10 @@ namespace LAZYSHELL
         private System.Windows.Forms.Button defaultSNES9X;
         private System.Windows.Forms.Button defaultZSNES;
         private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
+        private System.Windows.Forms.ToolStripButton helpTips;
     }
 }

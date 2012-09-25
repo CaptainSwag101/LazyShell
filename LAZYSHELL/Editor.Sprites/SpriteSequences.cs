@@ -10,6 +10,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
@@ -70,11 +71,10 @@ namespace LAZYSHELL
         private List<Bitmap> sequenceImages = new List<Bitmap>();
         private Bitmap sequenceImage;
         private Bitmap frameImage;
+        private Rectangle bounds;
         private int duration_temp = 0;
         private Sequence sequence_temp = null;
         private ArrayList skip = new ArrayList();
-        private int width = 256;
-        private int height = 256;
         private List<Sequence.Frame> copiedFrames;
         // special controls
         #endregion
@@ -135,32 +135,6 @@ namespace LAZYSHELL
             index = 0;
             updating = false;
         }
-        public void SetToolTips(ToolTip toolTip1)
-        {
-            toolTip1.SetToolTip(this.sequences,
-                "The collection of sequences used by the sprite's animation.\n\n" +
-                "A sequence is a collection of frames, where each frame is \n" +
-                "assigned a mold from the selection of molds under \"MOLDS\" \n" +
-                "and a duration, creating an animation that can be played \n" +
-                "back in the image to the right.");
-
-            toolTip1.SetToolTip(this.listBoxFrames,
-                "The collection of frames used by the currently selected \n" +
-                "sequence at the left. Each frame is assigned a mold from \n" +
-                "the selection of molds under \"MOLDS\" and a duration, \n" +
-                "creating an animation that can be played back in the image \n" +
-                "to the right.");
-
-            this.frameMold.ToolTipText =
-                "The mold used by the currently selected frame. This value \n" +
-                "is based on the collection of molds under \"MOLDS\".";
-
-            this.duration.ToolTipText =
-                "The duration of the currently selected frame, or how long \n" +
-                "the frame will pause before the next frame starts. This \n" +
-                "value refers to the # of frames based on a 60-frames-per-\n" +
-                "second unit.";
-        }
         private void RefreshSequence()
         {
             if (PlaybackSequence.IsBusy)
@@ -201,6 +175,7 @@ namespace LAZYSHELL
         {
             updating = true;
             panelFrames.AutoScrollPosition = new Point(0, 0);
+            SetSequenceFrameImages();
             DrawFrames();
             if (sequence.Frames.Count == 0)
                 toolStrip1.Enabled = false;
@@ -212,7 +187,6 @@ namespace LAZYSHELL
                 this.duration.Value = frame.Duration;
             }
             updating = false;
-            SetSequenceFrameImages();
         }
         private void RefreshFrame()
         {
@@ -223,7 +197,7 @@ namespace LAZYSHELL
                 this.duration.Enabled = true;
                 this.frameMold.Value = frame.Mold;
                 this.duration.Value = frame.Duration;
-                //this.panelFrames.AutoScrollPosition = new Point(index * ((this.width / 2) + 4), 0);
+                //this.panelFrames.AutoScrollPosition = new Point(index * ((frameBounds.Width / 2) + 4), 0);
             }
             else
             {
@@ -231,8 +205,8 @@ namespace LAZYSHELL
                 duration.Enabled = false; duration.Value = 1;
                 sequenceImage = null;
             }
-            updating = false;
             SetSequenceFrameImage();
+            updating = false;
         }
         private void DrawFrames()
         {
@@ -240,15 +214,16 @@ namespace LAZYSHELL
             this.frames.Controls.Clear();
             this.listBoxFrames.BeginUpdate();
             this.listBoxFrames.Items.Clear();
-            frames.Width = sequence.Frames.Count * (this.width + 4) + Screen.PrimaryScreen.WorkingArea.Width;
+            frames.Width = sequence.Frames.Count * (bounds.Width + 4) + Screen.PrimaryScreen.WorkingArea.Width;
             for (int i = 0; i < sequence.Frames.Count; i++)
             {
                 PictureBox frame = new PictureBox();
                 frame.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
                 frame.BorderStyle = BorderStyle.None;
-                frame.Location = new Point(i * (this.width + 4) + 4, 4);
+                frame.Location = new Point(i * (this.bounds.Width + 4) + 4, 
+                    (this.frames.Height / 2) - (this.bounds.Height / 2));
                 frame.Name = "frame" + i;
-                frame.Size = new Size(this.width, this.height);
+                frame.Size = new Size(bounds.Width, bounds.Height);
                 frame.Tag = i;
                 frame.MouseDown += new MouseEventHandler(frame_MouseDown);
                 frame.Paint += new PaintEventHandler(frame_Paint);
@@ -268,7 +243,7 @@ namespace LAZYSHELL
                 listBoxFrames.Items[i] = "Frame " + i;
                 i++;
             }
-            frames.Width = sequence.Frames.Count * (this.width + 4) + Screen.PrimaryScreen.WorkingArea.Width;
+            frames.Width = sequence.Frames.Count * (bounds.Width + 4) + Screen.PrimaryScreen.WorkingArea.Width;
         }
         public void InvalidateImages()
         {
@@ -278,23 +253,34 @@ namespace LAZYSHELL
         }
         public void SetSequenceFrameImages()
         {
-            sequenceImages.Clear();
+            this.bounds = new Rectangle(256, 256, 0, 0);
+            this.sequenceImages.Clear();
             int i = 0;
             foreach (Sequence.Frame frame in sequence.Frames)
             {
                 if (frame.Mold < animation.Molds.Count)
                 {
-                    int[] pixels = (animation.Molds[frame.Mold]).MoldPixels();
-                    frameImage = new Bitmap(Do.PixelsToImage(pixels, 256, 256));
-                    sequenceImages.Add(new Bitmap(frameImage));
+                    int[] pixels = animation.Molds[frame.Mold].MoldPixels();
+                    this.frameImage = new Bitmap(Do.PixelsToImage(pixels, 256, 256));
+                    this.sequenceImages.Add(new Bitmap(frameImage));
+                    Rectangle bounds = Do.Crop(pixels, 256, 256);
+                    if (bounds.X - 2 < this.bounds.X - 2)
+                        this.bounds.X = bounds.X - 2;
+                    if (bounds.Y - 2 < this.bounds.Y - 2)
+                        this.bounds.Y = bounds.Y - 2;
+                    if (bounds.Width + 4 > this.bounds.Width + 4)
+                        this.bounds.Width = bounds.Width + 4;
+                    if (bounds.Height + 4 > this.bounds.Height + 4)
+                        this.bounds.Height = bounds.Height + 4;
                 }
                 else
                 {
                     //MessageBox.Show("Mold for frame #" + i.ToString() + " is not valid. Change to lower value.", "LAZY SHELL");
-                    sequenceImages.Add(new Bitmap(256, 256));
+                    this.sequenceImages.Add(new Bitmap(20, 20));
                 }
                 i++;
             }
+            pictureBoxSequence.Size = this.bounds.Size;
             SetSequenceFrameImage();
         }
         public void SetSequenceFrameImage()
@@ -302,7 +288,7 @@ namespace LAZYSHELL
             if (index < sequenceImages.Count)
                 sequenceImage = new Bitmap((Bitmap)sequenceImages[index]);
             else
-                sequenceImage = new Bitmap(256, 256);
+                sequenceImage = new Bitmap(20, 20);
             foreach (PictureBox picture in frames.Controls)
                 picture.Invalidate();
             pictureBoxSequence.Invalidate();
@@ -316,7 +302,7 @@ namespace LAZYSHELL
             if (molds.ShowBG)
                 e.Graphics.Clear(Color.FromArgb(palette[0]));
             if (sequenceImage != null)
-                e.Graphics.DrawImage(sequenceImage, 0, 0);
+                e.Graphics.DrawImage(sequenceImage, -bounds.X, -bounds.Y, 256, 256);
         }
         private void frame_Paint(object sender, PaintEventArgs e)
         {
@@ -326,33 +312,31 @@ namespace LAZYSHELL
             int index = (int)frame.Tag;
             if (molds.ShowBG)
                 e.Graphics.Clear(Color.FromArgb(palette[0]));
-            Rectangle dst = new Rectangle(0, 0, 256, 256);
-            Rectangle src;
             if (sequence.Frames[index].Mold < animation.Molds.Count)
             {
-                src = new Rectangle(0, 0, 256, 256);
                 if (index < sequenceImages.Count)
-                    e.Graphics.DrawImage(sequenceImages[index], dst, src, GraphicsUnit.Pixel);
+                    e.Graphics.DrawImage(sequenceImages[index], -bounds.X, -bounds.Y, 256, 256);
             }
             else
             {
-                Font font = new Font("Tahoma", 10F, FontStyle.Bold);
-                SizeF size = e.Graphics.MeasureString("(INVALID MOLD INDEX)", font, new PointF(0, 0), StringFormat.GenericDefault);
-                Point point = new Point((frame.Width - (int)size.Width) / 2, (frame.Height - (int)size.Height) / 2);
-                Do.DrawString(e.Graphics, point, "(INVALID MOLD INDEX)", Color.Black, Color.Red, font);
+                e.Graphics.DrawImage(Resources.warning, 2, 2);
+                //Font font = new Font("Tahoma", 10F, FontStyle.Bold);
+                //SizeF size = e.Graphics.MeasureString("(INVALID MOLD INDEX)", font, new PointF(0, 0), StringFormat.GenericDefault);
+                //Point point = new Point((frame.Width - (int)size.Width) / 2, (frame.Height - (int)size.Height) / 2);
+                //Do.DrawString(e.Graphics, point, "(INVALID MOLD INDEX)", Color.Black, Color.Red, font);
             }
             if (this.indexes.Contains(index))
             {
                 e.Graphics.DrawRectangle(
                     new Pen(new SolidBrush(Color.Red)),
-                    new Rectangle(0, 0, this.width - 1, this.height - 1));
+                    new Rectangle(0, 0, bounds.Width - 1, bounds.Height - 1));
                 frame.Focus();
             }
             else
             {
                 e.Graphics.DrawRectangle(
                     new Pen(new SolidBrush(SystemColors.ControlDark)),
-                    new Rectangle(0, 0, this.width - 1, this.height - 1));
+                    new Rectangle(0, 0, bounds.Width - 1, bounds.Height - 1));
             }
         }
         private void frame_MouseDown(object sender, MouseEventArgs e)
@@ -369,7 +353,8 @@ namespace LAZYSHELL
                 updating = false;
             }
             if (panelFrames.HorizontalScroll.Visible)
-                panelFrames.HorizontalScroll.Value = index * (this.width + 4);
+                panelFrames.HorizontalScroll.Value = index * (bounds.Width + 4);
+            panelFrames.Focus();
         }
         private void frame_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -390,11 +375,11 @@ namespace LAZYSHELL
             }
             updating = false;
             if (panelFrames.HorizontalScroll.Visible)
-                panelFrames.HorizontalScroll.Value = index * (this.width + 4);
+                panelFrames.HorizontalScroll.Value = index * (bounds.Width + 4);
         }
         private void panelFrames_SizeChanged(object sender, EventArgs e)
         {
-            frames.Width = sequence.Frames.Count * (this.width + 4) + Screen.PrimaryScreen.WorkingArea.Width;
+            frames.Width = sequence.Frames.Count * (bounds.Width + 4) + Screen.PrimaryScreen.WorkingArea.Width;
         }
         private void panelSequence_SizeChanged(object sender, EventArgs e)
         {
@@ -409,7 +394,7 @@ namespace LAZYSHELL
             if (updating) return;
             index = listBoxFrames.SelectedIndex;
             if (panelFrames.HorizontalScroll.Visible)
-                panelFrames.HorizontalScroll.Value = index * (this.width + 4);
+                panelFrames.HorizontalScroll.Value = index * (bounds.Width + 4);
         }
         private void sequences_SelectedIndexChanged(object sender, EventArgs e)
         {

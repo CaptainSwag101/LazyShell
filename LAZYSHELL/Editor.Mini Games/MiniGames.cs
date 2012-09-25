@@ -26,6 +26,7 @@ namespace LAZYSHELL
             minecart.BringToFront();
             //openMenus.Checked = true;
             minecart.Visible = true;
+            new ToolTipLabel(this, null, helpTips);
             //
             GC.Collect();
             new History(this);
@@ -120,6 +121,42 @@ namespace LAZYSHELL
         Close:
             minecart.CloseEditors();
             LAZYSHELL.Properties.Settings.Default.Save();
+        }
+        private void resetAllObjectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Doing this will erase all changes to the object data for all stages since the last save, including mushrooms, coins, and screens. Continue?",
+                "LAZY SHELL", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                return;
+            Model.MinecartObjects = null;
+            minecart.MinecartData = new MinecartData(Model.MinecartObjects);
+            minecart.RefreshLevel();
+        }
+        private void resetCurrentTilesetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Doing this will erase all changes to the tileset since the last save. Continue?",
+                "LAZY SHELL", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                return;
+            if (minecart.Index < 2)
+            {
+                Model.MinecartM7TilesetSubtiles = null;
+                Model.MinecartM7TilesetPalettes = null;
+            }
+            else
+                Model.MinecartSSTileset = null;
+            minecart.RefreshLevel();
+        }
+        private void resetCurrentTilemapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Doing this will erase all changes to the tilemap since the last save. Continue?",
+                "LAZY SHELL", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                return;
+            if (minecart.Index == 0)
+                Model.MinecartM7TilemapA = null;
+            else if (minecart.Index == 1)
+                Model.MinecartM7TilemapB = null;
+            else
+                Model.MinecartSSTilemap = null;
+            minecart.RefreshLevel();
         }
     }
 }

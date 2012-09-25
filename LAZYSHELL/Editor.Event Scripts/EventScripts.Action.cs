@@ -1060,8 +1060,8 @@ namespace LAZYSHELL
         private void UpdateActionScriptsFreeSpace()
         {
             int left = CalculateActionScriptsLength();
-            this.EvtScrLabel3.Text = " " + left.ToString() + " bytes left ";
-            this.EvtScrLabel3.BackColor = left < 0 ? Color.Red : SystemColors.Control;
+            this.labelBytesLeft.Text = " " + left.ToString() + " bytes left ";
+            this.labelBytesLeft.BackColor = left < 0 ? Color.Red : SystemColors.Control;
         }
         private int CalculateActionScriptsLength()
         {

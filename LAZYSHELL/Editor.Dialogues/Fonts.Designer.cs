@@ -60,6 +60,7 @@
             this.showGrid = new System.Windows.Forms.ToolStripButton();
             this.showBG = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.pictureBoxFontTable = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,6 +69,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.insertIntoTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertIntoBattleDialogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.indexLabel = new System.Windows.Forms.Label();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
             this.fontType = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -82,7 +84,6 @@
             this.openNewFontTable = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.reset = new System.Windows.Forms.ToolStripButton();
-            this.indexLabel = new System.Windows.Forms.Label();
             this.panel30.SuspendLayout();
             this.panel25.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -92,6 +93,7 @@
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFontTable)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip7.SuspendLayout();
@@ -102,6 +104,11 @@
             this.fontWidth.AutoSize = false;
             this.fontWidth.BackColor = System.Drawing.SystemColors.Window;
             this.fontWidth.Hexadecimal = false;
+            this.fontWidth.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.fontWidth.Location = new System.Drawing.Point(40, 3);
             this.fontWidth.Maximum = new decimal(new int[] {
             16,
@@ -438,13 +445,26 @@
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.pictureBoxFontTable);
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.indexLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(132, 290);
             this.panel1.TabIndex = 1;
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.pictureBoxFontTable);
+            this.panel4.Location = new System.Drawing.Point(0, 23);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(132, 267);
+            this.panel4.TabIndex = 448;
             // 
             // pictureBoxFontTable
             // 
@@ -455,7 +475,7 @@
             this.pictureBoxFontTable.TabIndex = 447;
             this.pictureBoxFontTable.TabStop = false;
             this.pictureBoxFontTable.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxFontTable_Paint);
-            this.pictureBoxFontTable.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontTable_MouseClick);
+            this.pictureBoxFontTable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontTable_MouseDown);
             this.pictureBoxFontTable.MouseEnter += new System.EventHandler(this.pictureBoxFontTable_MouseEnter);
             this.pictureBoxFontTable.MouseLeave += new System.EventHandler(this.pictureBoxFontTable_MouseLeave);
             this.pictureBoxFontTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontTable_MouseMove);
@@ -471,7 +491,7 @@
             this.insertIntoBattleDialogueToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 120);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // importToolStripMenuItem
@@ -523,6 +543,16 @@
             this.insertIntoBattleDialogueToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.insertIntoBattleDialogueToolStripMenuItem.Text = "Insert into battle dialogue";
             this.insertIntoBattleDialogueToolStripMenuItem.Click += new System.EventHandler(this.insertIntoBattleDialogueToolStripMenuItem_Click);
+            // 
+            // indexLabel
+            // 
+            this.indexLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.indexLabel.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.indexLabel.Location = new System.Drawing.Point(0, 0);
+            this.indexLabel.Name = "indexLabel";
+            this.indexLabel.Size = new System.Drawing.Size(132, 23);
+            this.indexLabel.TabIndex = 449;
+            this.indexLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // toolStrip7
             // 
@@ -665,25 +695,12 @@
             this.reset.Text = "Reset";
             this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
-            // indexLabel
-            // 
-            this.indexLabel.BackColor = System.Drawing.SystemColors.Info;
-            this.indexLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.indexLabel.Location = new System.Drawing.Point(0, 0);
-            this.indexLabel.Name = "indexLabel";
-            this.indexLabel.Padding = new System.Windows.Forms.Padding(2, 1, 0, 2);
-            this.indexLabel.Size = new System.Drawing.Size(100, 18);
-            this.indexLabel.TabIndex = 1;
-            this.indexLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.indexLabel.Visible = false;
-            // 
             // Fonts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(416, 315);
             this.ControlBox = false;
-            this.Controls.Add(this.indexLabel);
             this.Controls.Add(this.panel30);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -701,6 +718,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFontTable)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip7.ResumeLayout(false);
@@ -755,7 +773,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem insertIntoTextToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveImageAsToolStripMenuItem;
-        private System.Windows.Forms.Label indexLabel;
         private System.Windows.Forms.ToolStripButton fontEditFill;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripButton reset;
@@ -765,5 +782,7 @@
         private System.Windows.Forms.ToolStripMenuItem numeralPalettesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem battleMenuGraphicsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem battleMenuPalettesToolStripMenuItem;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label indexLabel;
     }
 }

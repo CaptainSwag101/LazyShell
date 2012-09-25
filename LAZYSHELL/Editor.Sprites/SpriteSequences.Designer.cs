@@ -238,7 +238,7 @@
             this.moveSequenceBack.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveSequenceBack.Name = "moveSequenceBack";
             this.moveSequenceBack.Size = new System.Drawing.Size(23, 22);
-            this.moveSequenceBack.Text = "Shift Back";
+            this.moveSequenceBack.Text = "Move Sequence Back";
             this.moveSequenceBack.Click += new System.EventHandler(this.moveSequenceBack_Click);
             // 
             // moveSeqeuenceFoward
@@ -249,7 +249,7 @@
             this.moveSeqeuenceFoward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveSeqeuenceFoward.Name = "moveSeqeuenceFoward";
             this.moveSeqeuenceFoward.Size = new System.Drawing.Size(23, 22);
-            this.moveSeqeuenceFoward.Text = "Shift Foward";
+            this.moveSeqeuenceFoward.Text = "Move Sequence Forward";
             this.moveSeqeuenceFoward.Click += new System.EventHandler(this.moveSeqeuenceFoward_Click);
             // 
             // toolStripSeparator6
@@ -261,7 +261,8 @@
             // 
             this.sequenceActive.Checked = false;
             this.sequenceActive.Name = "sequenceActive";
-            this.sequenceActive.Size = new System.Drawing.Size(56, 22);
+            this.sequenceActive.Padding = new System.Windows.Forms.Padding(4, 0, 0, 4);
+            this.sequenceActive.Size = new System.Drawing.Size(60, 22);
             this.sequenceActive.Text = "Active";
             this.sequenceActive.CheckedChanged += new System.EventHandler(this.sequenceActive_CheckedChanged);
             // 
@@ -340,7 +341,7 @@
             this.back.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(23, 22);
-            this.back.Text = "Back 1 frame";
+            this.back.Text = "Select Previous Frame";
             this.back.Click += new System.EventHandler(this.back_Click);
             // 
             // foward
@@ -351,7 +352,7 @@
             this.foward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.foward.Name = "foward";
             this.foward.Size = new System.Drawing.Size(23, 22);
-            this.foward.Text = "Foward 1 frame";
+            this.foward.Text = "Select Next Frame";
             this.foward.Click += new System.EventHandler(this.foward_Click);
             // 
             // toolStripSeparator5
@@ -363,7 +364,8 @@
             // 
             this.infinitePlayback.Checked = true;
             this.infinitePlayback.Name = "infinitePlayback";
-            this.infinitePlayback.Size = new System.Drawing.Size(109, 22);
+            this.infinitePlayback.Padding = new System.Windows.Forms.Padding(4, 0, 0, 4);
+            this.infinitePlayback.Size = new System.Drawing.Size(113, 22);
             this.infinitePlayback.Text = "Infinite Playback";
             // 
             // toolStrip3
@@ -460,7 +462,7 @@
             this.moveFrameBack.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFrameBack.Name = "moveFrameBack";
             this.moveFrameBack.Size = new System.Drawing.Size(23, 22);
-            this.moveFrameBack.Text = "Shift Back";
+            this.moveFrameBack.Text = "Move Frame(s) Back";
             this.moveFrameBack.Click += new System.EventHandler(this.moveFrameBack_Click);
             // 
             // moveFrameFoward
@@ -471,7 +473,7 @@
             this.moveFrameFoward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFrameFoward.Name = "moveFrameFoward";
             this.moveFrameFoward.Size = new System.Drawing.Size(23, 22);
-            this.moveFrameFoward.Text = "Shift Foward";
+            this.moveFrameFoward.Text = "Move Frame(s) Forward";
             this.moveFrameFoward.Click += new System.EventHandler(this.moveFrameFoward_Click);
             // 
             // PlaybackSequence

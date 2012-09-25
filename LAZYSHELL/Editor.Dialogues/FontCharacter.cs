@@ -12,7 +12,7 @@ namespace LAZYSHELL
         private byte[] data;
 
         private int index; public int Index { get { return index; } }
-        private int fontType; public int FontType { get { return fontType; } }
+        private FontType fontType; public FontType FontType { get { return fontType; } }
 
         private byte width; public byte Width { get { return width; } set { width = value; } }
         private byte height; public byte Height { get { return height; } }
@@ -20,7 +20,7 @@ namespace LAZYSHELL
 
         private byte maxWidth; public byte MaxWidth { get { return maxWidth; } }
 
-        public FontCharacter(byte[] data, int fontNum, int fontType)
+        public FontCharacter(byte[] data, int fontNum, FontType fontType)
         {
             this.data = data;
             this.index = fontNum;
@@ -32,25 +32,25 @@ namespace LAZYSHELL
         {
             switch (fontType)
             {
-                case 0: // menu font
+                case FontType.Menu: // menu font
                     width = (byte)data[index + 0x249300]; maxWidth = 8; height = 12;
                     graphics = Bits.GetByteArray(data, index * 0x18 + 0x249400, 0x18);
                     break;
-                case 1: // dialogue font
+                case FontType.Dialogue: // dialogue font
                     width = (byte)data[index + 0x249280]; maxWidth = 16; height = 12;
                     graphics = Bits.GetByteArray(data, index * 0x30 + 0x37C000, 0x30);
                     break;
-                case 2: // description font
+                case FontType.Description: // description font
                     width = (byte)data[index + 0x249380]; maxWidth = 8; height = 8;
                     graphics = Bits.GetByteArray(data, index * 0x10 + 0x37D800, 0x10);
                     break;
-                case 3: // triangles
+                case FontType.Triangles: // triangles
                     if (index < 7) { width = maxWidth = 8; height = 16; }
                     else { width = maxWidth = 16; height = 8; }
                     graphics = Bits.GetByteArray(data, index * 0x20 + 0x3DFA00, 0x20);
                     break;
-                case 4: // battle menu font
-                case 5: // flower bonus font
+                case FontType.BattleMenu: // battle menu font
+                case FontType.FlowerBonus: // flower bonus font
                     width = 8; maxWidth = 8; height = 8;
                     graphics = Bits.GetByteArray(data, index * 0x20, 0x20);
                     break;
@@ -60,7 +60,7 @@ namespace LAZYSHELL
         {
             int offset = 0;
             int[] pixels = new int[maxWidth * height];
-            if (fontType < 4)
+            if ((int)fontType < 4)
             {
                 byte b1, b2, t1, t2, col = 0;
                 for (int a = 0; a < maxWidth / 8; a++)
@@ -75,7 +75,7 @@ namespace LAZYSHELL
                             t2 = (byte)((b2 >> z) & 1);
                             if (t2 * 2 + t1 != 0)
                             {
-                                if (fontType != 3)
+                                if (fontType != FontType.Triangles)
                                     pixels[(i * maxWidth) + col] = palette[(t2 * 2) + t1];
                                 else
                                     pixels[(i * maxWidth) + col] = palette[(t2 * 2) + t1 + 4];
@@ -207,8 +207,8 @@ namespace LAZYSHELL
                     int offsetB = rowB * 2;
                     switch (FontType)
                     {
-                        case 0:
-                        case 2:
+                        case FontType.Menu:
+                        case FontType.Description:
                             bool tempM = Bits.GetBit(Graphics, offsetA, bitA);
                             bool tempN = Bits.GetBit(Graphics, offsetA + 1, bitA);
                             Bits.SetBit(Graphics, offsetA, bitA, Bits.GetBit(Graphics, offsetB, bitB));
@@ -216,11 +216,11 @@ namespace LAZYSHELL
                             Bits.SetBit(Graphics, offsetB, bitB, tempM);
                             Bits.SetBit(Graphics, offsetB + 1, bitB, tempN);
                             break;
-                        case 1:
+                        case FontType.Dialogue:
                             offsetA += colA >= 8 ? 24 : 0;
                             offsetB += colB >= 8 ? 24 : 0;
                             goto case 0;
-                        case 3:
+                        case FontType.Triangles:
                             offsetA += colA >= 8 ? 16 : 0;
                             offsetB += colB >= 8 ? 16 : 0;
                             goto case 0;
@@ -248,8 +248,8 @@ namespace LAZYSHELL
                     int offsetB = rowB * 2;
                     switch (FontType)
                     {
-                        case 0:
-                        case 2:
+                        case FontType.Menu:
+                        case FontType.Description:
                             bool tempM = Bits.GetBit(Graphics, offsetA, bitA);
                             bool tempN = Bits.GetBit(Graphics, offsetA + 1, bitA);
                             Bits.SetBit(Graphics, offsetA, bitA, Bits.GetBit(Graphics, offsetB, bitB));
@@ -257,11 +257,11 @@ namespace LAZYSHELL
                             Bits.SetBit(Graphics, offsetB, bitB, tempM);
                             Bits.SetBit(Graphics, offsetB + 1, bitB, tempN);
                             break;
-                        case 1:
+                        case FontType.Dialogue:
                             offsetA += colA >= 8 ? 24 : 0;
                             offsetB += colB >= 8 ? 24 : 0;
                             goto case 0;
-                        case 3:
+                        case FontType.Triangles:
                             offsetA += colA >= 8 ? 16 : 0;
                             offsetB += colB >= 8 ? 16 : 0;
                             goto case 0;
@@ -273,22 +273,22 @@ namespace LAZYSHELL
         {
             switch (fontType)
             {
-                case 0: // menu font
+                case FontType.Menu: // menu font
                     data[index + 0x249300] = width;
                     Bits.SetByteArray(data, index * 0x18 + 0x249400, graphics);
                     break;
-                case 1: // dialogue font
+                case FontType.Dialogue: // dialogue font
                     data[index + 0x249280] = width;
                     Bits.SetByteArray(data, index * 0x30 + 0x37C000, graphics);
                     break;
-                case 2: // description font
+                case FontType.Description: // description font
                     data[index + 0x249380] = width;
                     Bits.SetByteArray(data, index * 0x10 + 0x37D800, graphics);
                     break;
-                case 3: // triangles
+                case FontType.Triangles: // triangles
                     Bits.SetByteArray(data, index * 0x20 + 0x3DFA00, graphics);
                     break;
-                case 4: // battle menu font
+                case FontType.BattleMenu: // battle menu font
                     Bits.SetByteArray(data, index * 0x20, graphics);
                     break;
             }

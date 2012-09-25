@@ -55,11 +55,10 @@ namespace LAZYSHELL
             // set data
             InitializeComponent();
             Do.AddShortcut(toolStrip2, Keys.Control | Keys.S, new EventHandler(save_Click));
-            Do.AddShortcut(toolStrip2, Keys.F1, enableHelpTips);
-            Do.AddShortcut(toolStrip2, Keys.F2, showDecHex);
+            Do.AddShortcut(toolStrip2, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip2, Keys.F2, baseConvertor);
             // tooltips
             toolTip1.InitialDelay = 0;
-            SetToolTips(toolTip1);
             searchWindow = new Search(number, searchText, searchEffectNames, name.Items);
             // set control values
             updating = true;
@@ -77,19 +76,17 @@ namespace LAZYSHELL
             // create editors
             molds.TopLevel = false;
             molds.Dock = DockStyle.Fill;
-            molds.SetToolTips(toolTip1);
-            panelEffects.Controls.Add(molds);
+            panelMolds.Controls.Add(molds);
             molds.BringToFront();
             openMolds.Checked = true;
             molds.Visible = true;
             sequences.TopLevel = false;
-            sequences.Dock = DockStyle.Bottom;
-            sequences.SetToolTips(toolTip1);
-            panelEffects.Controls.Add(sequences);
+            sequences.Dock = DockStyle.Fill;
+            panelSequences.Controls.Add(sequences);
             sequences.SendToBack();
             openSequences.Checked = true;
             sequences.Visible = true;
-            new ToolTipLabel(this, toolTip1, showDecHex, enableHelpTips);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             //
             new History(this);
             if (settings.RememberLastIndex)
@@ -174,10 +171,10 @@ namespace LAZYSHELL
         public void EnableOnPlayback(bool enable)
         {
             foreach (Control control in this.Controls)
-                if (control != panelEffects)
+                if (control != panelSequences)
                     control.Enabled = enable;
                 else
-                    foreach (Control parent in panelEffects.Controls)
+                    foreach (Control parent in panelSequences.Controls)
                         if (parent != sequences)
                             parent.Enabled = enable;
                         else
@@ -188,65 +185,6 @@ namespace LAZYSHELL
                                     foreach (ToolStripItem item in ((ToolStrip)child).Items)
                                         if (item.Name != "pause")
                                             item.Enabled = enable;
-        }
-        // tooltips
-        private void SetToolTips(ToolTip toolTip1)
-        {
-            // Spell effects
-
-            this.number.ToolTipText =
-                "Select the spell effect to edit by #.\n\n" +
-                "A spell effect is not the entire spell animation itself, but an \n" +
-                "animation sequence used in spell animations. Spell \n" +
-                "animations can use more than one different spell effect, for \n" +
-                "example, the \"Boulder\" spell uses spell effect 26 (boulder) \n" +
-                "and 53 (black flash).";
-
-            this.name.ToolTipText =
-                "Select the spell effect to edit by name.\n\n" +
-                "A spell effect is not the entire spell animation itself, but an \n" +
-                "animation sequence used in spell animations. Spell \n" +
-                "animations can use more than one different spell effect, for \n" +
-                "example, the \"Boulder\" spell uses spell effect 26 (boulder) \n" +
-                "and 53 (black flash).";
-
-            toolTip1.SetToolTip(this.imageNum,
-                "The image # of the currently selected spell effect refers to \n" +
-                "the set of properties that designate the raw graphics and \n" +
-                "palette set to use.\n\n" +
-                "Anything in the \"IMAGE PALETTE...\", \"IMAGE \n" +
-                "GRAPHICS...\" and \"IMAGE TILESET\" panels are part of the \n" +
-                "spell effect's image.");
-
-            toolTip1.SetToolTip(this.e_paletteIndex,
-                "The index of the palette in the palette set the spell effect \n" +
-                "uses. This is mostly used for individual spell effects that use \n" +
-                "the same image (thus, the same palette set) but have a \n" +
-                "different individual palette, such as the star rain and black \n" +
-                "star rain.");
-
-            toolTip1.SetToolTip(this.xNegShift,
-                "The X shift is the number of pixels to shift the spell effect \n" +
-                "animation to the left.");
-
-            toolTip1.SetToolTip(this.yNegShift,
-                "The Y shift is the number of pixels to shift the spell effect \n" +
-                "animation up.");
-
-            toolTip1.SetToolTip(this.e_paletteSetSize,
-                "The size of the palette in bytes. The total number of \n" +
-                "palettes in the spell effect image's palette set equals the \n" +
-                "size divided by 32.");
-
-            toolTip1.SetToolTip(this.e_graphicSetSize,
-                "The size of the raw graphics in bytes (hexadecimal). Every \n" +
-                "0x20 bytes is one or two 8x8 tiles.");
-
-            toolTip1.SetToolTip(this.e_codec,
-                "The codec refers to how the graphics are read by the game \n" +
-                "engine. 4bpp uses up to 16 colors total, while 2bpp only \n" +
-                "uses 4 colors total.");
-
         }
         // editors
         public void LoadPaletteEditor()
@@ -352,14 +290,6 @@ namespace LAZYSHELL
         {
             if (updating) return;
             number.Value = name.SelectedIndex;
-        }
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder3D(e.Graphics, panel2.ClientRectangle, Border3DStyle.Raised, Border3DSide.All);
-        }
-        private void panel2_SizeChanged(object sender, EventArgs e)
-        {
-            panel2.Invalidate();
         }
         // basic
         private void e_paletteIndex_ValueChanged(object sender, EventArgs e)

@@ -60,8 +60,8 @@ namespace LAZYSHELL
             this.shadow.SelectedIndex = npcProperty.Shadow;
             this.cannotClone.Checked = npcProperty.ActiveVRAM;
 
-            this.byte1a.SelectedIndex = npcProperty.Byte1a;
-            this.byte1b.Value = npcProperty.Byte1b;
+            this.vramStore.SelectedIndex = npcProperty.Byte1a;
+            this.vramSize.Value = npcProperty.Byte1b;
 
             this.unknownBits.SetItemChecked(0, npcProperty.B2b0);
             this.unknownBits.SetItemChecked(1, npcProperty.B2b1);
@@ -210,8 +210,8 @@ namespace LAZYSHELL
             npcProperty.ShowShadow = showShadow.Checked;
             npcProperty.Shadow = (byte)shadow.SelectedIndex;
             npcProperty.ActiveVRAM = cannotClone.Checked;
-            npcProperty.Byte1a = (byte)byte1a.SelectedIndex;
-            npcProperty.Byte1b = (byte)byte1b.Value;
+            npcProperty.Byte1a = (byte)vramStore.SelectedIndex;
+            npcProperty.Byte1b = (byte)vramSize.Value;
             npcProperty.B2b0 = unknownBits.GetItemChecked(0);
             npcProperty.B2b1 = unknownBits.GetItemChecked(1);
             npcProperty.B2b2 = unknownBits.GetItemChecked(2);

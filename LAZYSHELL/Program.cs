@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Threading;
 using LAZYSHELL.Properties;
@@ -25,7 +27,7 @@ namespace LAZYSHELL
         private FormationsEditor formations; public FormationsEditor Formations { get { return formations; } }
         private ItemsEditor items; public ItemsEditor Items { get { return items; } }
         private Levels levels; public Levels Levels { get { return levels; } }
-        private Title mainTitle; public Title MainTitle { get { return mainTitle; } }
+        private MainTitle mainTitle; public MainTitle MainTitle { get { return mainTitle; } }
         private MenusEditor menus; public MenusEditor Menus { get { return menus; } }
         private MiniGames miniGames; public MiniGames MiniGames { get { return miniGames; } }
         private Monsters monsters; public Monsters Monsters { get { return monsters; } }
@@ -34,19 +36,19 @@ namespace LAZYSHELL
         private WorldMaps worldMaps; public WorldMaps WorldMaps { get { return worldMaps; } }
         private GamePatches patches;
         private Notes notes; public Notes Notes { get { return notes; } }
-        private Form1 form1
+        private Editor form1
         {
             get
             {
                 if (Application.OpenForms.Count == 0)
                     return null;
-                return (Form1)Application.OpenForms[0];
+                return (Editor)Application.OpenForms[0];
             }
             set
             {
                 if (Application.OpenForms.Count == 0)
                     return;
-                Form1 main = (Form1)Application.OpenForms[0];
+                Editor main = (Editor)Application.OpenForms[0];
                 main = value;
             }
         }
@@ -69,7 +71,7 @@ namespace LAZYSHELL
         {
             Model.Program = this;
             ProgramController controls = new ProgramController(this);
-            Form1.GuiMain(controls);
+            Editor.GuiMain(controls);
         }
         #region File Managing
         public bool OpenRomFile()
@@ -87,7 +89,7 @@ namespace LAZYSHELL
             if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
             {
                 filename = openFileDialog1.FileName;
-                Model.FileName=filename;
+                Model.FileName = filename;
                 if (Model.ReadRom())
                 {
                     settings.LastRomPath = Model.GetPathWithoutFileName();
@@ -101,7 +103,7 @@ namespace LAZYSHELL
         }
         public bool OpenRomFile(string filename)
         {
-            Model.FileName=filename;
+            Model.FileName = filename;
             if (Model.ReadRom())
             {
                 settings.LastRomPath = Model.GetPathWithoutFileName();
@@ -129,7 +131,7 @@ namespace LAZYSHELL
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Model.FileName=saveFileDialog1.FileName;
+                Model.FileName = saveFileDialog1.FileName;
                 // Assemble all changes
                 Assemble();
                 if (Model.WriteRom())
@@ -178,6 +180,26 @@ namespace LAZYSHELL
         }
         #endregion
         #region Create Editor Windows
+        public void ScreencapHotkeys()
+        {
+            if (allies == null || !allies.Visible) allies = new AlliesEditor();
+            if (animations == null || !animations.Visible) animations = new AnimationScripts();
+            if (attacks == null || !attacks.Visible) attacks = new AttacksEditor();
+            if (audio == null || !audio.Visible) audio = new Audio();
+            if (battlefields == null || !battlefields.Visible) battlefields = new Battlefields();
+            if (dialogues == null || !dialogues.Visible) dialogues = new Dialogues();
+            if (effects == null || !effects.Visible) effects = new Effects();
+            if (eventScripts == null || !eventScripts.Visible) eventScripts = new EventScripts();
+            if (formations == null || !formations.Visible) formations = new FormationsEditor();
+            if (items == null || !items.Visible) items = new ItemsEditor();
+            if (levels == null || !levels.Visible) levels = new Levels();
+            if (monsters == null || !monsters.Visible) monsters = new Monsters();
+            if (mainTitle == null || !mainTitle.Visible) mainTitle = new MainTitle();
+            if (menus == null || !menus.Visible) menus = new MenusEditor();
+            if (miniGames == null || !miniGames.Visible) miniGames = new MiniGames();
+            if (sprites == null || !sprites.Visible) sprites = new Sprites();
+            if (worldMaps == null || !worldMaps.Visible) worldMaps = new WorldMaps();
+        }
         public void CreateAlliesWindow()
         {
             if (allies == null || !allies.Visible)
@@ -188,6 +210,7 @@ namespace LAZYSHELL
                 else allies.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            allies.KeyDown += new KeyEventHandler(editor_KeyDown);
             allies.BringToFront();
         }
         public void CreateAnimationsWindow()
@@ -200,6 +223,7 @@ namespace LAZYSHELL
                 else animations.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            animations.KeyDown += new KeyEventHandler(editor_KeyDown);
             animations.BringToFront();
         }
         public void CreateAttacksWindow()
@@ -212,6 +236,7 @@ namespace LAZYSHELL
                 else attacks.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            attacks.KeyDown += new KeyEventHandler(editor_KeyDown);
             attacks.BringToFront();
         }
         public void CreateAudioWindow()
@@ -224,6 +249,7 @@ namespace LAZYSHELL
                 else audio.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            audio.KeyDown += new KeyEventHandler(editor_KeyDown);
             audio.BringToFront();
         }
         public void CreateBattlefieldsWindow()
@@ -236,6 +262,7 @@ namespace LAZYSHELL
                 else battlefields.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            battlefields.KeyDown += new KeyEventHandler(editor_KeyDown);
             battlefields.BringToFront();
         }
         public void CreateDialoguesWindow()
@@ -248,6 +275,7 @@ namespace LAZYSHELL
                 else dialogues.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            dialogues.KeyDown += new KeyEventHandler(editor_KeyDown);
             dialogues.BringToFront();
         }
         public void CreateEffectsWindow()
@@ -260,6 +288,7 @@ namespace LAZYSHELL
                 else effects.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            effects.KeyDown += new KeyEventHandler(editor_KeyDown);
             effects.BringToFront();
         }
         public void CreateEventScriptsWindow()
@@ -272,6 +301,7 @@ namespace LAZYSHELL
                 else eventScripts.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            eventScripts.KeyDown += new KeyEventHandler(editor_KeyDown);
             eventScripts.BringToFront();
         }
         public void CreateFormationsWindow()
@@ -284,6 +314,7 @@ namespace LAZYSHELL
                 else formations.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            formations.KeyDown += new KeyEventHandler(editor_KeyDown);
             formations.BringToFront();
         }
         public void CreateItemsWindow()
@@ -296,6 +327,7 @@ namespace LAZYSHELL
                 else items.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            items.KeyDown += new KeyEventHandler(editor_KeyDown);
             items.BringToFront();
         }
         public void CreateLevelsWindow()
@@ -308,6 +340,7 @@ namespace LAZYSHELL
                 else levels.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            levels.KeyDown += new KeyEventHandler(editor_KeyDown);
             levels.BringToFront();
         }
         public void CreateMonstersWindow()
@@ -320,6 +353,7 @@ namespace LAZYSHELL
                 else monsters.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            monsters.KeyDown += new KeyEventHandler(editor_KeyDown);
             monsters.BringToFront();
         }
         public void CreateMainTitleWindow()
@@ -327,11 +361,12 @@ namespace LAZYSHELL
             if (mainTitle == null || !mainTitle.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                mainTitle = new Title();
+                mainTitle = new MainTitle();
                 if (dockEditors) Do.AddControl(form1.Panel2, mainTitle);
                 else mainTitle.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            mainTitle.KeyDown += new KeyEventHandler(editor_KeyDown);
             mainTitle.BringToFront();
         }
         public void CreateMenusWindow()
@@ -344,6 +379,7 @@ namespace LAZYSHELL
                 else menus.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            menus.KeyDown += new KeyEventHandler(editor_KeyDown);
             menus.BringToFront();
         }
         public void CreateMiniGamesWindow()
@@ -356,6 +392,7 @@ namespace LAZYSHELL
                 else miniGames.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            miniGames.KeyDown += new KeyEventHandler(editor_KeyDown);
             miniGames.BringToFront();
         }
         public void CreateSpritesWindow()
@@ -368,6 +405,7 @@ namespace LAZYSHELL
                 else sprites.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            sprites.KeyDown += new KeyEventHandler(editor_KeyDown);
             sprites.BringToFront();
         }
         public void CreateWorldMapsWindow()
@@ -380,6 +418,7 @@ namespace LAZYSHELL
                 else worldMaps.Show();
                 Cursor.Current = Cursors.Arrow;
             }
+            worldMaps.KeyDown += new KeyEventHandler(editor_KeyDown);
             worldMaps.BringToFront();
         }
         public void CreatePatchesWindow()
@@ -424,6 +463,8 @@ namespace LAZYSHELL
                 Do.AddControl(form1.Panel2, animations);
             if (attacks != null && attacks.Visible)
                 Do.AddControl(form1.Panel2, attacks);
+            if (audio != null && audio.Visible)
+                Do.AddControl(form1.Panel2, audio);
             if (battlefields != null && battlefields.Visible)
                 Do.AddControl(form1.Panel2, battlefields);
             if (dialogues != null && dialogues.Visible)
@@ -459,6 +500,8 @@ namespace LAZYSHELL
                 Do.RemoveControl(animations);
             if (attacks != null && attacks.Visible)
                 Do.RemoveControl(attacks);
+            if (audio != null && audio.Visible)
+                Do.RemoveControl(audio);
             if (battlefields != null && battlefields.Visible)
                 Do.RemoveControl(battlefields);
             if (dialogues != null && dialogues.Visible)
@@ -486,6 +529,26 @@ namespace LAZYSHELL
             if (worldMaps != null && worldMaps.Visible)
                 Do.RemoveControl(worldMaps);
         }
+        public void OpenAll()
+        {
+            CreateAlliesWindow();
+            CreateAnimationsWindow();
+            CreateAttacksWindow();
+            CreateAudioWindow();
+            CreateBattlefieldsWindow();
+            CreateDialoguesWindow();
+            CreateEffectsWindow();
+            CreateEventScriptsWindow();
+            CreateFormationsWindow();
+            CreateItemsWindow();
+            CreateLevelsWindow();
+            CreateMainTitleWindow();
+            CreateMenusWindow();
+            CreateMiniGamesWindow();
+            CreateMonstersWindow();
+            CreateSpritesWindow();
+            CreateWorldMapsWindow();
+        }
         public void MinimizeAll()
         {
             if (allies != null && allies.Visible)
@@ -494,6 +557,8 @@ namespace LAZYSHELL
                 animations.WindowState = FormWindowState.Minimized;
             if (attacks != null && attacks.Visible)
                 attacks.WindowState = FormWindowState.Minimized;
+            if (audio != null && audio.Visible)
+                audio.WindowState = FormWindowState.Minimized;
             if (battlefields != null && battlefields.Visible)
                 battlefields.WindowState = FormWindowState.Minimized;
             if (dialogues != null && dialogues.Visible)
@@ -529,6 +594,8 @@ namespace LAZYSHELL
                 animations.WindowState = FormWindowState.Normal;
             if (attacks != null && attacks.Visible)
                 attacks.WindowState = FormWindowState.Normal;
+            if (audio != null && audio.Visible)
+                audio.WindowState = FormWindowState.Normal;
             if (battlefields != null && battlefields.Visible)
                 battlefields.WindowState = FormWindowState.Normal;
             if (dialogues != null && dialogues.Visible)
@@ -564,6 +631,8 @@ namespace LAZYSHELL
                 animations.Close();
             if (attacks != null && attacks.Visible)
                 attacks.Close();
+            if (audio != null && audio.Visible)
+                audio.Close();
             if (battlefields != null && battlefields.Visible)
                 battlefields.Close();
             if (dialogues != null && dialogues.Visible)
@@ -616,6 +685,12 @@ namespace LAZYSHELL
         public void ClearAll()
         {
             Model.ClearModel();
+        }
+        private void editor_KeyDown(object sender, KeyEventArgs e)
+        {
+            Form editor = (Form)sender;
+            if (e.KeyData == Keys.F3)
+                Do.CaptureScreens(editor);
         }
         #endregion
     }

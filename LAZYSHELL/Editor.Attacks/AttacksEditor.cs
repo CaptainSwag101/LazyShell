@@ -25,22 +25,20 @@ namespace LAZYSHELL
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
-            Do.AddShortcut(toolStrip3, Keys.F2, baseConversion);
+            Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
             this.toolTip1.InitialDelay = 0;
             // create editors
             attacksEditor = new Attacks();
             attacksEditor.TopLevel = false;
             attacksEditor.Dock = DockStyle.Left;
-            attacksEditor.SetToolTips(toolTip1);
             panel1.Controls.Add(attacksEditor);
             attacksEditor.Visible = true;
             spellsEditor = new Spells();
             spellsEditor.TopLevel = false;
             spellsEditor.Dock = DockStyle.Left;
-            spellsEditor.SetToolTips(toolTip1);
             panel1.Controls.Add(spellsEditor);
             spellsEditor.Visible = true;
-            new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             new History(this);
             //
             if (settings.RememberLastIndex)

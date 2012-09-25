@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
@@ -13,7 +14,7 @@ namespace LAZYSHELL
     public partial class AlliesEditor : Form
     {
         // variables
-        
+
         private long checksum;
         private Settings settings = Settings.Default;
         private Allies alliesEditor;
@@ -28,22 +29,20 @@ namespace LAZYSHELL
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
-            Do.AddShortcut(toolStrip3, Keys.F2, baseConversion);
+            Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
             this.toolTip1.InitialDelay = 0;
             // create editors
             levelUpsEditor = new LevelUps();
             levelUpsEditor.TopLevel = false;
             levelUpsEditor.Dock = DockStyle.Left;
-            levelUpsEditor.SetToolTips(toolTip1);
             panel1.Controls.Add(levelUpsEditor);
             levelUpsEditor.Visible = true;
             alliesEditor = new Allies();
             alliesEditor.TopLevel = false;
             alliesEditor.Dock = DockStyle.Left;
-            alliesEditor.SetToolTips(toolTip1);
             panel1.Controls.Add(alliesEditor);
             alliesEditor.Visible = true;
-            new ToolTipLabel(this, toolTip1, baseConversion, helpTips);
+            new ToolTipLabel(this, baseConvertor, helpTips);
             new History(this);
         }
         // functions

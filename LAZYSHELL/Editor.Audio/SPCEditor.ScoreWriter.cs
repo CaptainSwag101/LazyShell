@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
 using LAZYSHELL.ScriptsEditor.Commands;
+using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
@@ -20,7 +21,7 @@ namespace LAZYSHELL
         List<Staff> staffs = new List<Staff>();
         ToolStripButton insertObject;
         private int mouseOverStaff = -1;
-        private Pitch mouseOverPitch = Pitch.None;
+        private Pitch mouseOverPitch = Pitch.NULL;
         private int mouseOverLine = -1;
         private int mouseOverOctave = -1;
         private int mouseDownStaff = -1;
@@ -144,13 +145,108 @@ namespace LAZYSHELL
             }
             return channels;
         }
+        private Bitmap GetStem(int ticks, int pitch, bool hilite)
+        {
+            Bitmap stem = null;
+            if (ticks >= 192) { }
+            else if (ticks >= 144) { stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
+            else if (ticks >= 96) { stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
+            else if (ticks >= 72) { stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
+            else if (ticks >= 64) { stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
+            else if (ticks >= 48) { stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
+            else if (ticks >= 36) { stem = pitch >= 59 ? Icons.noteStemDown8th : Icons.noteStemUp8th; }
+            else if (ticks >= 32) { stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
+            else if (ticks >= 24) { stem = pitch >= 59 ? Icons.noteStemDown8th : Icons.noteStemUp8th; }
+            else if (ticks >= 18) { stem = pitch >= 59 ? Icons.noteStemDown16th : Icons.noteStemUp16th; }
+            else if (ticks >= 16) { stem = pitch >= 59 ? Icons.noteStemDown8th : Icons.noteStemUp8th; }
+            else if (ticks >= 12) { stem = stem = pitch >= 59 ? Icons.noteStemDown16th : Icons.noteStemUp16th; }
+            else if (ticks >= 9) { stem = pitch >= 59 ? Icons.noteStemDown32nd : Icons.noteStemUp32nd; }
+            else if (ticks >= 8) { stem = pitch >= 59 ? Icons.noteStemDown16th : Icons.noteStemUp16th; }
+            else if (ticks >= 6) { stem = pitch >= 59 ? Icons.noteStemDown32nd : Icons.noteStemUp32nd; }
+            else if (ticks >= 4) { stem = pitch >= 59 ? Icons.noteStemDown32nd : Icons.noteStemUp32nd; }
+            else if (ticks >= 3) { stem = pitch >= 59 ? Icons.noteStemDown64th : Icons.noteStemUp64th; }
+            else if (ticks >= 2) { stem = pitch >= 59 ? Icons.noteStemDown64th : Icons.noteStemUp64th; }
+            else if (ticks >= 1) { stem = Icons.note64th; }
+            else { stem = Icons.note64th; }
+            if (hilite && stem != null)
+                stem = Do.Fill(stem, Color.Red);
+            return stem;
+        }
+        private Bitmap GetHead(int ticks, int pitch, bool hilite)
+        {
+            Bitmap head;
+            if (ticks >= 192) { head = Icons.noteEmpty; }
+            else if (ticks >= 144) { head = Icons.noteEmptyDotted; }
+            else if (ticks >= 96) { head = Icons.noteEmpty; }
+            else if (ticks >= 72) { head = Icons.noteHeadDotted; }
+            else if (ticks >= 64) { head = Icons.noteEmptyTriplet; }
+            else if (ticks >= 48) { head = Icons.noteHead; }
+            else if (ticks >= 36) { head = Icons.noteHeadDotted; }
+            else if (ticks >= 32) { head = Icons.noteHeadTriplet; }
+            else if (ticks >= 24) { head = Icons.noteHead; }
+            else if (ticks >= 18) { head = Icons.noteHeadDotted; }
+            else if (ticks >= 16) { head = Icons.noteHeadTriplet; }
+            else if (ticks >= 12) { head = Icons.noteHead; }
+            else if (ticks >= 9) { head = Icons.noteHeadDotted; }
+            else if (ticks >= 8) { head = Icons.noteHeadTriplet; }
+            else if (ticks >= 6) { head = Icons.noteHead; }
+            else if (ticks >= 4) { head = Icons.noteHeadTriplet; }
+            else if (ticks >= 3) { head = Icons.noteHead; }
+            else if (ticks >= 2) { head = Icons.noteHeadTriplet; }
+            else if (ticks >= 1) { head = Icons.noteHead; }
+            else { head = Icons.noteHead; }
+            if (hilite)
+                head = Do.Fill(head, Color.Red);
+            return head;
+        }
+        private Bitmap GetRest(int ticks, bool hilite)
+        {
+            Bitmap rest;
+            if (ticks >= 192) { rest = Icons.restWhole; }
+            else if (ticks >= 144) { rest = Icons.restHalfDotted; }
+            else if (ticks >= 96) { rest = Icons.restHalf; }
+            else if (ticks >= 72) { rest = Icons.restQuarterDotted; }
+            else if (ticks >= 64) { rest = Icons.restHalfTriplet; }
+            else if (ticks >= 48) { rest = Icons.restQuarter; }
+            else if (ticks >= 36) { rest = Icons.rest8thDotted; }
+            else if (ticks >= 32) { rest = Icons.restQuarterTriplet; }
+            else if (ticks >= 24) { rest = Icons.rest8th; }
+            else if (ticks >= 18) { rest = Icons.rest16thDotted; }
+            else if (ticks >= 16) { rest = Icons.rest8thTriplet; }
+            else if (ticks >= 12) { rest = Icons.rest16th; }
+            else if (ticks >= 9) { rest = Icons.rest32ndDotted; }
+            else if (ticks >= 8) { rest = Icons.rest16thTriplet; }
+            else if (ticks >= 6) { rest = Icons.rest32nd; }
+            else if (ticks >= 4) { rest = Icons.rest32ndTriplet; }
+            else if (ticks >= 3) { rest = Icons.rest64th; }
+            else if (ticks >= 2) { rest = Icons.rest64thTriplet; }
+            else if (ticks >= 1) { rest = Icons.rest64th; }
+            else { rest = Icons.rest64th; }
+            if (hilite)
+                rest = Do.Fill(rest, Color.Red);
+            return rest;
+        }
+        private int GetStaffWidth(int staffIndex)
+        {
+            int staffWidth = 0;
+            if (scoreWriter.Checked)
+                foreach (object item in staffs[staffIndex].Notes)
+                {
+                    if (item.GetType() == typeof(Note))
+                        staffWidth += (int)((double)noteSpacing / 100.0 * ((Note)item).Ticks);
+                }
+            else
+                foreach (Note note in spc.Notes[staffIndex])
+                    staffWidth += (int)((double)noteSpacing / 100.0 * note.Ticks);
+            return staffWidth;
+        }
         private int DrawNote(Graphics g, Note note, int x, int staffHeight, int clef, int staffIndex)
         {
-            return DrawNote(g, note, x, staffHeight, clef, staffIndex, false, 0);
+            return DrawNote(g, note, null, null, x, staffHeight, clef, staffIndex, false);
         }
-        private int DrawNote(Graphics g, Note note, int x, int staffHeight, int clef, int staffIndex, bool hilite, int hold)
+        private int DrawNote(Graphics g, Note note, Note lastNote, Note lastItem,
+            int x, int staffHeight, int clef, int staffIndex, bool hilite)
         {
-            int pitch = note.Octave * 12 + (int)note.Pitch;
             int y = staffIndex * staffHeight;
             int middle = staffHeight / 2;
             int yCoord = y + middle;
@@ -159,47 +255,23 @@ namespace LAZYSHELL
             else if (clef == 1) clefOffset = 4;
             Bitmap stem = null;
             Bitmap head = null;
-            if (!note.Rest && !note.Hold)
+            Bitmap rest = null;
+            if (!note.Rest && !note.Tie)
             {
-                int ticks = note.Ticks + hold;
-                yCoord = y + middle + note.Y + clefOffset - 4;
-                if (ticks >= 192) { head = Icons.noteEmpty; }
-                else if (ticks >= 144) { head = Icons.noteEmpty; }
-                else if (ticks >= 96) { head = Icons.noteEmpty; stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
-                else if (ticks >= 72) { head = Icons.noteHeadDotted; stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
-                else if (ticks >= 64) { head = Icons.noteEmptyTriplet; stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
-                else if (ticks >= 48) { head = Icons.noteHead; stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
-                else if (ticks >= 36) { head = Icons.noteHeadDotted; stem = pitch >= 59 ? Icons.noteStemDown8th : Icons.noteStemUp8th; }
-                else if (ticks >= 32) { head = Icons.noteHeadTriplet; stem = pitch >= 59 ? Icons.noteStemDown : Icons.noteStemUp; }
-                else if (ticks >= 24) { head = Icons.noteHead; stem = pitch >= 59 ? Icons.noteStemDown8th : Icons.noteStemUp8th; }
-                else if (ticks >= 18) { head = Icons.noteHeadDotted; stem = pitch >= 59 ? Icons.noteStemDown16th : Icons.noteStemUp16th; }
-                else if (ticks >= 16) { head = Icons.noteHeadTriplet; stem = pitch >= 59 ? Icons.noteStemDown8th : Icons.noteStemUp8th; }
-                else if (ticks >= 12) { head = Icons.noteHead; stem = stem = pitch >= 59 ? Icons.noteStemDown16th : Icons.noteStemUp16th; }
-                else if (ticks >= 9) { head = Icons.noteHeadDotted; stem = pitch >= 59 ? Icons.noteStemDown32nd : Icons.noteStemUp32nd; }
-                else if (ticks >= 8) { head = Icons.noteHeadTriplet; stem = pitch >= 59 ? Icons.noteStemDown16th : Icons.noteStemUp16th; }
-                else if (ticks >= 6) { head = Icons.noteHead; stem = pitch >= 59 ? Icons.noteStemDown32nd : Icons.noteStemUp32nd; }
-                else if (ticks >= 4) { head = Icons.noteHeadTriplet; stem = pitch >= 59 ? Icons.noteStemDown32nd : Icons.noteStemUp32nd; }
-                else if (ticks >= 3) { head = Icons.noteHead; stem = pitch >= 59 ? Icons.noteStemDown64th : Icons.noteStemUp64th; }
-                else if (ticks >= 2) { head = Icons.noteHeadTriplet; stem = pitch >= 59 ? Icons.noteStemDown64th : Icons.noteStemUp64th; }
-                else if (ticks >= 1) { head = Icons.noteHead; stem = Icons.note64th; }
-                else { head = Icons.noteHead; stem = Icons.note64th; }
-                Bitmap sharp = Icons.sharp;
+                int pitch = note.Octave * 12 + (int)note.Pitch;
+                int ticks = note.Ticks;
+                yCoord = y + middle + note.Y + clefOffset - 5;
                 if (!note.Percussive)
                 {
-                    if (hilite)
-                    {
-                        head = Do.Fill(head, Color.Red);
-                        if (stem != null)
-                            stem = Do.Fill(stem, Color.Red);
-                        sharp = Do.Fill(sharp, Color.Red);
-                    }
+                    head = GetHead(ticks, pitch, hilite);
+                    stem = GetStem(ticks, pitch, hilite);
                     // draw extra lines
                     DrawOutsideLines(g, Pens.Gray, x + 7, y, middle, clef, note.Octave, note.Pitch, note.Line);
                     if (stem != null)
                         g.DrawImage(stem, x, pitch < 59 ? yCoord : yCoord + 12);
                     g.DrawImage(head, x, yCoord);
                     if (note.Sharp)
-                        g.DrawImage(sharp, x - 2, yCoord + 4);
+                        g.DrawImage(hilite ? Do.Fill(Icons.sharp, Color.Red) : Icons.sharp, x - 2, yCoord + 4);
                 }
                 else
                     g.DrawImage(hilite ? Do.Fill(Icons.notePercussion, Color.Red) : Icons.notePercussion, x, yCoord);
@@ -207,42 +279,62 @@ namespace LAZYSHELL
             else if (note.Rest)
             {
                 int ticks = note.Ticks;
-                yCoord = y + middle + clefOffset - 4;
-                if (ticks >= 192) { head = Icons.restWhole; }
-                else if (ticks >= 144) { head = Icons.restHalfDotted; }
-                else if (ticks >= 96) { head = Icons.restHalf; }
-                else if (ticks >= 72) { head = Icons.restQuarterDotted; }
-                else if (ticks >= 64) { head = Icons.restHalfTriplet; }
-                else if (ticks >= 48) { head = Icons.restQuarter; }
-                else if (ticks >= 36) { head = Icons.rest8thDotted; }
-                else if (ticks >= 32) { head = Icons.restQuarterTriplet; }
-                else if (ticks >= 24) { head = Icons.rest8th; }
-                else if (ticks >= 18) { head = Icons.rest16thDotted; }
-                else if (ticks >= 16) { head = Icons.rest8thTriplet; }
-                else if (ticks >= 12) { head = Icons.rest16th; }
-                else if (ticks >= 9) { head = Icons.rest32ndDotted; }
-                else if (ticks >= 8) { head = Icons.rest16thTriplet; }
-                else if (ticks >= 6) { head = Icons.rest32nd; }
-                else if (ticks >= 4) { head = Icons.rest32ndTriplet; }
-                else if (ticks >= 3) { head = Icons.rest64th; }
-                else if (ticks >= 2) { head = Icons.rest64thTriplet; }
-                else if (ticks >= 1) { head = Icons.rest64th; }
-                else { head = Icons.rest64th; }
-                if (hilite) head = Do.Fill(head, Color.Red);
+                yCoord = y + middle + clefOffset - 5;
+                rest = GetRest(ticks, hilite);
                 if (!scoreWriter.Checked && showRests.Checked)
-                    g.DrawImage(head, x, yCoord);
+                    g.DrawImage(rest, x, yCoord);
                 else if (scoreWriter.Checked)
+                    g.DrawImage(rest, x, yCoord);
+            }
+            else if (note.Tie && lastNote != null && lastItem != null)
+            {
+                int pitch = lastNote.Octave * 12 + (int)lastNote.Pitch;
+                int ticks = note.Ticks;
+                yCoord = y + middle + lastNote.Y + clefOffset - 5;
+                if (!lastNote.Percussive)
+                {
+                    head = GetHead(ticks, pitch, hilite);
+                    stem = GetStem(ticks, pitch, hilite);
+                    Bitmap sharp = Icons.sharp;
+                    // draw extra lines
+                    DrawOutsideLines(g, Pens.Gray, x + 7, y, middle, clef, lastNote.Octave, lastNote.Pitch, lastNote.Line);
+                    if (stem != null)
+                        g.DrawImage(stem, x, pitch < 59 ? yCoord : yCoord + 12);
                     g.DrawImage(head, x, yCoord);
+                    if (lastNote.Sharp)
+                        g.DrawImage(hilite ? Do.Fill(Icons.sharp, Color.Red) : Icons.sharp, x - 2, yCoord + 4);
+                }
+                else
+                    g.DrawImage(hilite ? Do.Fill(Icons.notePercussion, Color.Red) : Icons.notePercussion, x, yCoord);
+                // draw tie
+                Rectangle src = new Rectangle(0, 0, 16, 16);
+                Rectangle dst = new Rectangle(x - lastItem.Ticks + 8, pitch < 59 ? yCoord + 8 : yCoord + 2, lastItem.Ticks, 16);
+                Bitmap tie = pitch < 59 ? Icons.tieUnder : Icons.tieOver;
+                g.DrawImage(tie, dst, src, GraphicsUnit.Pixel);
             }
             return yCoord;
         }
-        private void DrawBarsLines(Graphics g, int clef, int staffIndex, int xOffset, bool drawClefs)
+        private void DrawBarsLines(Graphics g, int clef, int staffIndex, int xOffset, bool drawClefs, int staffWidth)
         {
+            // set variables
             int width = (int)g.ClipBounds.Width;
             int height = staffHeight;
             int x = xOffset;
             int y = staffIndex * height;
-            Pen pen = new Pen(Color.Gray); pen.DashStyle = DashStyle.Dot;
+            Pen pen = new Pen(Color.Gray);
+            int middle = height / 2;
+            int measureTop = (staffIndex * height) + (height / 2) - 16;
+            int measureLength = (int)((double)timeBeats / (double)timeValue * 192.0);
+            measureLength = (int)((double)noteSpacing / 100.0 * (double)measureLength);
+            if (staffWidth % measureLength == 0)
+                staffWidth = staffWidth / measureLength * measureLength;
+            else
+                staffWidth = staffWidth / measureLength * measureLength + measureLength;
+            int measureLeft = measureLength + 64 + xOffset;
+            int maxWidth = Math.Max(staffWidth + xOffset + 64 + 8, measureLeft + 8);
+            // draw dotted separators
+            pen.DashStyle = DashStyle.Dot;
+            pen.Alignment = PenAlignment.Center;
             g.DrawLine(pen,
                 0, staffIndex * height + 4,
                 width, staffIndex * height + 4);
@@ -250,17 +342,33 @@ namespace LAZYSHELL
                 0, staffIndex * height + height - 4,
                 width, staffIndex * height + height - 4);
             pen.DashStyle = DashStyle.Solid;
-            int middle = height / 2;
-            g.DrawLine(pen, 0, y + middle - 16, width, y + middle - 16);
-            g.DrawLine(pen, 0, y + middle - 8, width, y + middle - 8);
-            g.DrawLine(pen, 0, y + middle, width, y + middle);
-            g.DrawLine(pen, 0, y + middle + 8, width, y + middle + 8);
-            g.DrawLine(pen, 0, y + middle + 16, width, y + middle + 16);
-            // draw bars
-            pen.Width = 6;
+            // draw ledger lines
+            g.DrawLine(pen, 0, y + middle - 16, maxWidth, y + middle - 16);
+            g.DrawLine(pen, 0, y + middle - 8, maxWidth, y + middle - 8);
+            g.DrawLine(pen, 0, y + middle, maxWidth, y + middle);
+            g.DrawLine(pen, 0, y + middle + 8, maxWidth, y + middle + 8);
+            g.DrawLine(pen, 0, y + middle + 16, maxWidth, y + middle + 16);
+            // draw start bars
+            pen.Width = 4;
             g.DrawLine(pen, x, y + middle - 16, x, y + middle + 16);
             pen.Width = 1;
-            g.DrawLine(pen, x + 8, y + middle - 16, x + 8, y + middle + 16);
+            g.DrawLine(pen, x + 6, y + middle - 16, x + 6, y + middle + 16);
+            // draw measure bar lines
+            while (measureLeft < width)
+            {
+                if (measureLeft - xOffset - 64 >= staffWidth)
+                {
+                    // draw end bars
+                    pen.Width = 1; g.DrawLine(pen, measureLeft, measureTop, measureLeft, measureTop + 32);
+                    pen.Width = 4; g.DrawLine(pen, measureLeft + 6, measureTop, measureLeft + 6, measureTop + 32);
+                    break;
+                }
+                else
+                {
+                    g.DrawLine(Pens.Gray, measureLeft, measureTop, measureLeft, measureTop + 32);
+                    measureLeft += measureLength;
+                }
+            }
             // draw clefs
             if (drawClefs)
             {
@@ -269,16 +377,7 @@ namespace LAZYSHELL
                 else if (clef == 1)
                     g.DrawImage(clefF, x + 16, y + middle - 24);
             }
-            // draw time sig and measure bar lines
-            int measureTop = (staffIndex * height) + (height / 2) - 16;
-            int measureLength = (int)((double)timeBeats / (double)timeValue * 192.0);
-            measureLength = (int)((double)noteSpacing / 100.0 * measureLength);
-            int measureLeft = measureLength + 64 + xOffset;
-            while (measureLeft < width)
-            {
-                g.DrawLine(Pens.Gray, measureLeft, measureTop, measureLeft, measureTop + 32);
-                measureLeft += measureLength;
-            }
+            // draw time sig
             Font font = new Font("Times New Roman", 18, FontStyle.Bold);
             if (timeBeats >= 10)
                 g.DrawString(timeBeats.ToString(), font, Brushes.Black, 40 + xOffset - 6, measureTop - 4);
@@ -288,6 +387,16 @@ namespace LAZYSHELL
                 g.DrawString(timeValue.ToString(), font, Brushes.Black, 40 + xOffset - 6, measureTop + 12);
             else
                 g.DrawString(timeValue.ToString(), font, Brushes.Black, 40 + xOffset, measureTop + 12);
+        }
+        private void DrawEndBars(Graphics g, int staffIndex, int xOffset)
+        {
+            int height = staffHeight;
+            int x = xOffset;
+            int y = staffIndex * height;
+            int middle = height / 2;
+            Pen pen = new Pen(Color.Gray, 1); pen.Alignment = PenAlignment.Outset;
+            g.DrawLine(pen, x, y + middle - 16, x, y + middle + 16); pen.Width = 4;
+            g.DrawLine(pen, x + 6, y + middle - 16, x + 6, y + middle + 16);
         }
         private void DrawOutsideLines(
             Graphics g, Pen pen, int x, int y, int middle,
@@ -378,7 +487,8 @@ namespace LAZYSHELL
                     item != insertObject &&
                     item != wSharp &&
                     item != wNatural &&
-                    item != wFlat)
+                    item != wFlat &&
+                    item != wTie)
                     ((ToolStripButton)item).Checked = false;
             if (insertObject.Checked)
             {
@@ -419,9 +529,14 @@ namespace LAZYSHELL
                 wFlat.Checked = false;
             }
         }
+        private void wTie_Click(object sender, EventArgs e)
+        {
+
+        }
         //
         private void scoreWriterPicture_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
             int staffIndex = 0;
             foreach (Staff staff in staffs)
             {
@@ -433,11 +548,14 @@ namespace LAZYSHELL
                 if (staffIndex == mouseDownStaff)
                     e.Graphics.FillRectangle(brush, 0, y + 4, scoreWriterPicture.Width, staffHeight - 8);
                 // draw staff ledger lines
-                DrawBarsLines(e.Graphics, staff.Clef, staffIndex, -hScrollBar3.Value, true);
+                DrawBarsLines(e.Graphics, staff.Clef, staffIndex, -hScrollBar3.Value, true, GetStaffWidth(staffIndex));
                 // draw notes
                 int indexNotes = 0;
-                foreach (object item in staff.Notes)
+                Note lastNote = null; // the last previous note, with a pitch
+                Note lastItem = null; // the last previous note
+                for (int i = 0; i < staff.Notes.Count; i++)
                 {
+                    object item = staff.Notes[i];
                     if (item.GetType() != typeof(Note))
                     {
                         indexNotes++;
@@ -447,14 +565,21 @@ namespace LAZYSHELL
                     if (x < -32 || x - 32 > scoreWriterPicture.Width)
                     {
                         x += (int)((double)noteSpacingSW.Value / 100.0 * note.Ticks);
+                        if (!note.Rest && !note.Tie)
+                            lastNote = note;
+                        lastItem = note;
                         indexNotes++;
                         continue;
                     }
-                    DrawNote(e.Graphics, note, x, staffHeight, staff.Clef, staffIndex);
-                    if (mouseEnter && indexNotes == mouseOverNote &&
-                        staffIndex == mouseOverStaff && staffIndex == mouseDownStaff)
-                        e.Graphics.DrawImage(insert, x - 8, mousePosition.Y);
+                    bool hilite = mouseEnter && indexNotes == mouseOverNote &&
+                        staffIndex == mouseOverChannel && staffIndex == mouseDownChannel;
+                    DrawNote(e.Graphics, note, lastNote, lastItem, x, staffHeight, staff.Clef, staffIndex, hilite);
+                    //if (hilite)
+                    //    e.Graphics.DrawImage(insert, x - 8, mousePosition.Y);
                     x += (int)((double)noteSpacingSW.Value / 100.0 * note.Ticks);
+                    if (!note.Rest && !note.Tie)
+                        lastNote = note;
+                    lastItem = note;
                     indexNotes++;
                 }
                 // draw extra lines beyond normal lines, if mouse over it
@@ -495,49 +620,62 @@ namespace LAZYSHELL
             if (insertObject == null)
                 return;
             //
-            int beat = 0;
+            Beat beat = Beat.NULL;
             byte opcode = 0;
             Note note;
             SPCCommand ssc;
             switch (insertObject.Name)
             {
-                case "wNoteWhole": beat = 0; goto case "Note";
-                case "wNoteHalfD": beat = 1; goto case "Note";
-                case "wNoteHalf": beat = 2; goto case "Note";
-                case "wNoteQuarterD": beat = 3; goto case "Note";
-                case "wNoteQuarter": beat = 4; goto case "Note";
-                case "wNote8thD": beat = 5; goto case "Note";
-                case "wNoteQuarterT": beat = 6; goto case "Note";
-                case "wNote8th": beat = 7; goto case "Note";
-                case "wNote8thT": beat = 8; goto case "Note";
-                case "wNote16th": beat = 9; goto case "Note";
-                case "wNote16thT": beat = 10; goto case "Note";
-                case "wNote32nd": beat = 11; goto case "Note";
-                case "wNote64th": beat = 12; goto case "Note";
+                case "wNoteWhole": beat = Beat.Whole; goto case "Note";
+                case "wNoteHalfD": beat = Beat.HalfDotted; goto case "Note";
+                case "wNoteHalf": beat = Beat.Half; goto case "Note";
+                case "wNoteQuarterD": beat = Beat.QuarterDotted; goto case "Note";
+                case "wNoteQuarter": beat = Beat.Quarter; goto case "Note";
+                case "wNote8thD": beat = Beat.EighthDotted; goto case "Note";
+                case "wNoteQuarterT": beat = Beat.QuarterTriplet; goto case "Note";
+                case "wNote8th": beat = Beat.Eighth; goto case "Note";
+                case "wNote8thT": beat = Beat.EighthTriplet; goto case "Note";
+                case "wNote16th": beat = Beat.Sixteenth; goto case "Note";
+                case "wNote16thT": beat = Beat.SixteenthTriplet; goto case "Note";
+                case "wNote32nd": beat = Beat.ThirtySecond; goto case "Note";
+                case "wNote64th": beat = Beat.SixtyFourth; goto case "Note";
                 case "Note":
-                    opcode = (byte)(beat * 14 + mouseOverPitch);
+                    if (wTie.Checked) goto case "Tie";
+                    opcode = (byte)((int)beat * 14 + mouseOverPitch);
                     ssc = new SPCCommand(new byte[] { opcode }, spc, mouseOverStaff);
                     note = new Note(ssc, mouseOverOctave, false, 0);
-                    staffs[mouseOverStaff].Notes.Insert(mouseDownNote, note);
+                    commandStack.Push(new ScoreEditCommand(ScoreEdit.InsertNote, staffs[mouseOverStaff].Notes, mouseDownNote, note));
                     break;
-                case "wRestWhole": beat = 0; goto case "Rest";
-                case "wRestHalfD": beat = 1; goto case "Rest";
-                case "wRestHalf": beat = 2; goto case "Rest";
-                case "wRestQuarterD": beat = 3; goto case "Rest";
-                case "wRestQuarter": beat = 4; goto case "Rest";
-                case "wRest8thD": beat = 5; goto case "Rest";
-                case "wRestQuarterT": beat = 6; goto case "Rest";
-                case "wRest8th": beat = 7; goto case "Rest";
-                case "wRest8thT": beat = 8; goto case "Rest";
-                case "wRest16th": beat = 9; goto case "Rest";
-                case "wRest16thT": beat = 10; goto case "Rest";
-                case "wRest32nd": beat = 11; goto case "Rest";
-                case "wRest64th": beat = 12; goto case "Rest";
+                case "wRestWhole": beat = Beat.Whole; goto case "Rest";
+                case "wRestHalfD": beat = Beat.HalfDotted; goto case "Rest";
+                case "wRestHalf": beat = Beat.Half; goto case "Rest";
+                case "wRestQuarterD": beat = Beat.QuarterDotted; goto case "Rest";
+                case "wRestQuarter": beat = Beat.Quarter; goto case "Rest";
+                case "wRest8thD": beat = Beat.EighthDotted; goto case "Rest";
+                case "wRestQuarterT": beat = Beat.QuarterTriplet; goto case "Rest";
+                case "wRest8th": beat = Beat.Eighth; goto case "Rest";
+                case "wRest8thT": beat = Beat.EighthTriplet; goto case "Rest";
+                case "wRest16th": beat = Beat.Sixteenth; goto case "Rest";
+                case "wRest16thT": beat = Beat.SixteenthTriplet; goto case "Rest";
+                case "wRest32nd": beat = Beat.ThirtySecond; goto case "Rest";
+                case "wRest64th": beat = Beat.SixtyFourth; goto case "Rest";
                 case "Rest":
-                    opcode = (byte)(beat * 14 + 12);
+                    if (wTie.Checked) goto case "Tie";
+                    opcode = (byte)((int)beat * 14 + 12);
                     ssc = new SPCCommand(new byte[] { opcode }, spc, mouseOverStaff);
                     note = new Note(ssc, mouseOverOctave, false, 0);
-                    staffs[mouseOverStaff].Notes.Insert(mouseDownNote, note);
+                    commandStack.Push(new ScoreEditCommand(ScoreEdit.InsertNote, staffs[mouseOverStaff].Notes, mouseDownNote, note));
+                    break;
+                case "Tie":
+                    if (mouseDownNote == 0)
+                    {
+                        MessageBox.Show("Cannot put a tied note at the beginning of the staff.", "LAZY SHELL");
+                        return;
+                    }
+                    opcode = (byte)((int)beat * 14 + 13);
+                    ssc = new SPCCommand(new byte[] { opcode }, spc, mouseOverStaff);
+                    note = new Note(ssc, mouseOverOctave, false, 0);
+                    commandStack.Push(new ScoreEditCommand(ScoreEdit.InsertNote, staffs[mouseOverStaff].Notes, mouseDownNote, note));
                     break;
             }
             SetScrollBars();
@@ -558,7 +696,7 @@ namespace LAZYSHELL
             int y = Math.Max(e.Y, 0);
             mousePosition = new Point(x, y);
             mouseOverNote = -1;
-            mouseOverPitch = Pitch.None;
+            mouseOverPitch = Pitch.NULL;
             mouseOverStaff = -1;
             if (staffs.Count == 0 || y / staffHeight >= staffs.Count)
             {
@@ -596,12 +734,17 @@ namespace LAZYSHELL
                 case 4: mouseOverPitch = Pitch.G; labelNote.Text = "G"; break; // E
                 case 5: mouseOverPitch = Pitch.A; labelNote.Text = "A"; break; // F, F#
                 case 6: mouseOverPitch = Pitch.B; labelNote.Text = "B"; break; // G, G#
-                default: mouseOverPitch = Pitch.None; labelNote.Text = ""; break;
+                default: mouseOverPitch = Pitch.NULL; labelNote.Text = ""; break;
             }
             if (wSharp.Checked)
                 mouseOverPitch++;
             // 7 lines per octave, so 28 (7 * 4), offset by 52
             mouseOverOctave = line / 7;
+            if (mouseOverPitch == Pitch.Rest)
+            {
+                mouseOverPitch = Pitch.C;
+                mouseOverOctave++;
+            }
             if (mouseOverStaff == mouseDownStaff)
                 labelNote.Text += mouseOverOctave.ToString();
             else
@@ -759,13 +902,15 @@ namespace LAZYSHELL
                 return;
             else if (Type != 0 && staffs.Count == 2)
                 return;
-            staffs.Add(new Staff());
+            commandStack.Push(new ScoreEditCommand(ScoreEdit.AddStaff, staffs, staffs.Count, new Staff()));
             if (staffs.Count == 1)
             {
                 mouseDownStaff = 0;
                 wStaffDelete.Enabled = true;
                 wStaffMoveDown.Enabled = true;
                 wStaffMoveUp.Enabled = true;
+                undo.Enabled = true;
+                redo.Enabled = true;
                 RefreshStaff();
             }
             scoreWriterPicture.Invalidate();
@@ -774,7 +919,7 @@ namespace LAZYSHELL
         {
             if (mouseDownStaff == -1)
                 return;
-            staffs.RemoveAt(mouseDownStaff);
+            commandStack.Push(new ScoreEditCommand(ScoreEdit.DeleteStaff, staffs, mouseDownStaff, staffs[mouseDownStaff]));
             wStaffDelete.Enabled = staffs.Count != 0;
             wStaffMoveDown.Enabled = staffs.Count != 0;
             wStaffMoveUp.Enabled = staffs.Count != 0;
@@ -799,6 +944,30 @@ namespace LAZYSHELL
                 return;
             staffs.Reverse(mouseDownStaff, 2);
             mouseDownStaff++;
+            scoreWriterPicture.Invalidate();
+        }
+        private void undo_Click(object sender, EventArgs e)
+        {
+            commandStack.UndoCommand();
+            SetScrollBars();
+            wStaffDelete.Enabled = staffs.Count != 0;
+            wStaffMoveDown.Enabled = staffs.Count != 0;
+            wStaffMoveUp.Enabled = staffs.Count != 0;
+            if (staffs.Count > 0)
+                mouseDownStaff = 0;
+            RefreshStaff();
+            scoreWriterPicture.Invalidate();
+        }
+        private void redo_Click(object sender, EventArgs e)
+        {
+            commandStack.RedoCommand();
+            SetScrollBars();
+            wStaffDelete.Enabled = staffs.Count != 0;
+            wStaffMoveDown.Enabled = staffs.Count != 0;
+            wStaffMoveUp.Enabled = staffs.Count != 0;
+            if (staffs.Count > 0)
+                mouseDownStaff = 0;
+            RefreshStaff();
             scoreWriterPicture.Invalidate();
         }
         private void clef_SelectedIndexChanged(object sender, EventArgs e)

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AttacksEditor));
             this.panel1 = new System.Windows.Forms.Panel();
             this.saveShortcut = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
@@ -41,7 +40,7 @@
             this.export = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportSpellsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAttacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.reset = new System.Windows.Forms.ToolStripDropDownButton();
             this.resetSpellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetAttackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clear = new System.Windows.Forms.ToolStripDropDownButton();
@@ -49,7 +48,7 @@
             this.clearAttacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.helpTips = new System.Windows.Forms.ToolStripButton();
-            this.baseConversion = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.damageCalculator = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showSpells = new System.Windows.Forms.ToolStripButton();
@@ -83,11 +82,11 @@
             this.toolStripSeparator4,
             this.import,
             this.export,
-            this.toolStripDropDownButton1,
+            this.reset,
             this.clear,
             this.toolStripSeparator2,
             this.helpTips,
-            this.baseConversion,
+            this.baseConvertor,
             this.damageCalculator,
             this.toolStripSeparator1,
             this.showSpells,
@@ -124,7 +123,6 @@
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(27, 22);
-            this.import.ToolTipText = "Import";
             // 
             // importSpellsToolStripMenuItem
             // 
@@ -154,7 +152,6 @@
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(27, 22);
-            this.export.ToolTipText = "Export";
             // 
             // exportSpellsToolStripMenuItem
             // 
@@ -174,24 +171,24 @@
             this.exportAttacksToolStripMenuItem.Text = "Export Attacks...";
             this.exportAttacksToolStripMenuItem.Click += new System.EventHandler(this.exportAttacksToolStripMenuItem_Click);
             // 
-            // toolStripDropDownButton1
+            // reset
             // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resetSpellToolStripMenuItem,
             this.resetAttackToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(27, 22);
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(27, 22);
             // 
             // resetSpellToolStripMenuItem
             // 
             this.resetSpellToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetSpellToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetSpellToolStripMenuItem.Name = "resetSpellToolStripMenuItem";
-            this.resetSpellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetSpellToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.resetSpellToolStripMenuItem.Text = "Reset spell";
             this.resetSpellToolStripMenuItem.Click += new System.EventHandler(this.resetSpellToolStripMenuItem_Click);
             // 
@@ -200,7 +197,7 @@
             this.resetAttackToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetAttackToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetAttackToolStripMenuItem.Name = "resetAttackToolStripMenuItem";
-            this.resetAttackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetAttackToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.resetAttackToolStripMenuItem.Text = "Reset attack";
             this.resetAttackToolStripMenuItem.Click += new System.EventHandler(this.resetAttackToolStripMenuItem_Click);
             // 
@@ -213,15 +210,14 @@
             this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(26, 22);
-            this.clear.ToolTipText = "Clear";
+            this.clear.Size = new System.Drawing.Size(28, 22);
             // 
             // clearSpellsToolStripMenuItem
             // 
             this.clearSpellsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clearSpellsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearSpellsToolStripMenuItem.Name = "clearSpellsToolStripMenuItem";
-            this.clearSpellsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearSpellsToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.clearSpellsToolStripMenuItem.Text = "Clear Spells...";
             this.clearSpellsToolStripMenuItem.Click += new System.EventHandler(this.clearSpellsToolStripMenuItem_Click);
             // 
@@ -230,7 +226,7 @@
             this.clearAttacksToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.clear_small;
             this.clearAttacksToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clearAttacksToolStripMenuItem.Name = "clearAttacksToolStripMenuItem";
-            this.clearAttacksToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearAttacksToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.clearAttacksToolStripMenuItem.Text = "Clear Attacks...";
             this.clearAttacksToolStripMenuItem.Click += new System.EventHandler(this.clearAttacksToolStripMenuItem_Click);
             // 
@@ -248,18 +244,18 @@
             this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.helpTips.Name = "helpTips";
             this.helpTips.Size = new System.Drawing.Size(23, 22);
-            this.helpTips.Text = "Show Help Tips";
+            this.helpTips.Text = "Help Tips";
             // 
-            // baseConversion
+            // baseConvertor
             // 
-            this.baseConversion.CheckOnClick = true;
-            this.baseConversion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.baseConversion.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.baseConversion.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.baseConversion.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.baseConversion.Name = "baseConversion";
-            this.baseConversion.Size = new System.Drawing.Size(23, 22);
-            this.baseConversion.Text = "Show Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.Text = "Base Convertor";
             // 
             // damageCalculator
             // 
@@ -316,6 +312,7 @@
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "AttacksEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -348,11 +345,11 @@
         private System.Windows.Forms.ToolStripMenuItem clearAttacksToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton helpTips;
-        private System.Windows.Forms.ToolStripButton baseConversion;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem saveShortcut;
         private System.Windows.Forms.ToolStripButton damageCalculator;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripDropDownButton reset;
         private System.Windows.Forms.ToolStripMenuItem resetSpellToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetAttackToolStripMenuItem;
     }

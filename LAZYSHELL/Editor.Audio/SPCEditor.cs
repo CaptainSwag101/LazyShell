@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
 using LAZYSHELL.ScriptsEditor.Commands;
+using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
@@ -36,6 +37,7 @@ namespace LAZYSHELL
         private NumericUpDown[] volumes;
         private CheckBox[] activeChannels;
         private CheckBox[] activeInstruments;
+        private CommandStack commandStack;
         #endregion
         public SPCEditor()
         {
@@ -43,11 +45,14 @@ namespace LAZYSHELL
             //
             updating = true;
             //
+            this.commandStack = new CommandStack();
+            Do.AddShortcut(wToolStrip1, Keys.Control | Keys.Z, new EventHandler(undo_Click));
+            Do.AddShortcut(wToolStrip1, Keys.Control | Keys.Y, new EventHandler(redo_Click));
             newCommands.Items.AddRange(Lists.SPCCommands);
             percussivePitch.Items.AddRange(Lists.Pitches);
-            sampleIndexes = new ComboBox[19];
-            volumes = new NumericUpDown[19];
-            activeInstruments = new CheckBox[19];
+            sampleIndexes = new ComboBox[20];
+            volumes = new NumericUpDown[20];
+            activeInstruments = new CheckBox[20];
             for (int i = 0; i < sampleIndexes.Length; i++)
             {
                 sampleIndexes[i] = new ComboBox();
@@ -127,8 +132,8 @@ namespace LAZYSHELL
         {
             updating = true;
             //
-            importTrack.Enabled = Index != 0 || Type != 0;
-            exportTrack.Enabled = Index != 0 || Type != 0;
+            importSPC.Enabled = Index != 0 || Type != 0;
+            exportSPC.Enabled = Index != 0 || Type != 0;
             importMML.Enabled = Index != 0 && Type == 0;
             exportMML.Enabled = Index != 0 && Type == 0;
             clear.Enabled = Index != 0 || Type != 0;
@@ -360,7 +365,10 @@ namespace LAZYSHELL
                         labelParameter1.Text = "Sound";
                         opcodeByte1.Value = mouseDownSSC.Opcode;
                         parameterName1.Enabled = true;
-                        parameterName1.Items.AddRange(Lists.Numerize(Lists.SoundNames));
+                        if (Type < 2)
+                            parameterName1.Items.AddRange(Lists.Numerize(Lists.SoundNames));
+                        else
+                            parameterName1.Items.AddRange(Lists.Numerize(Lists.BattleSoundNames));
                         parameterName1.SelectedIndex = mouseDownSSC.Param1;
                         parameterName1.BringToFront();
                         break;
@@ -432,7 +440,10 @@ namespace LAZYSHELL
                         parameterByte1.Maximum = 31;
                         parameterByte1.Value = mouseDownSSC.Param1;
                         break;
-                    case 0xE2: labelParameter1.Text = "Volume = "; goto case 0xF6;
+                    case 0xE2:
+                        labelParameter1.Text = "Volume = ";
+                        parameterByte1.Maximum = 127;
+                        goto case 0xF6;
                     case 0xE3:
                         labelParameter1.Text = "Amount = ";
                         opcodeByte1.Value = mouseDownSSC.Opcode;
@@ -670,8 +681,8 @@ namespace LAZYSHELL
                     if (line.StartsWith("Note "))
                     {
                         line = line.Remove(0, 5); // remove "Note "
-                        int beat = -1;
-                        int pitch = 0;
+                        Beat beat = Beat.NULL;
+                        Pitch pitch = Pitch.C;
                         int duration = 0;
                         // see if it's a note to play
                         if (line.StartsWith("play: "))
@@ -679,20 +690,20 @@ namespace LAZYSHELL
                             line = line.Remove(0, 6); // remove "play: "
                             bool Ab = line.StartsWith("Ab");
                             // Find pitch based on letter key
-                            if (line.StartsWith("Ab")) { pitch = 11; line = line.Remove(0, 2); }
-                            else if (line.StartsWith("A#") || line.StartsWith("Bb")) { pitch = 1; line = line.Remove(0, 2); }
-                            else if (line.StartsWith("A")) { pitch = 0; line = line.Remove(0, 1); }
-                            else if (line.StartsWith("B") || line.StartsWith("Cb")) { pitch = 2; line = line.Remove(0, 1); }
-                            else if (line.StartsWith("C#") || line.StartsWith("Db")) { pitch = 4; line = line.Remove(0, 2); }
-                            else if (line.StartsWith("C")) { pitch = 3; line = line.Remove(0, 1); }
-                            else if (line.StartsWith("D#") || line.StartsWith("Eb")) { pitch = 6; line = line.Remove(0, 2); }
-                            else if (line.StartsWith("D")) { pitch = 5; line = line.Remove(0, 1); }
-                            else if (line.StartsWith("E#")) { pitch = 8; line = line.Remove(0, 2); }
-                            else if (line.StartsWith("E") || line.StartsWith("Fb")) { pitch = 7; line = line.Remove(0, 1); }
-                            else if (line.StartsWith("F#") || line.StartsWith("Gb")) { pitch = 9; line = line.Remove(0, 2); }
-                            else if (line.StartsWith("F")) { pitch = 8; line = line.Remove(0, 1); }
-                            else if (line.StartsWith("G#")) { pitch = 11; line = line.Remove(0, 2); }
-                            else if (line.StartsWith("G")) { pitch = 10; line = line.Remove(0, 1); }
+                            if (line.StartsWith("Ab")) { pitch = Pitch.Gs; line = line.Remove(0, 2); }
+                            else if (line.StartsWith("A#") || line.StartsWith("Bb")) { pitch = Pitch.As; line = line.Remove(0, 2); }
+                            else if (line.StartsWith("A")) { pitch = Pitch.A; line = line.Remove(0, 1); }
+                            else if (line.StartsWith("B") || line.StartsWith("Cb")) { pitch = Pitch.B; line = line.Remove(0, 1); }
+                            else if (line.StartsWith("C#") || line.StartsWith("Db")) { pitch = Pitch.Cs; line = line.Remove(0, 2); }
+                            else if (line.StartsWith("C")) { pitch = Pitch.C; line = line.Remove(0, 1); }
+                            else if (line.StartsWith("D#") || line.StartsWith("Eb")) { pitch = Pitch.Ds; line = line.Remove(0, 2); }
+                            else if (line.StartsWith("D")) { pitch = Pitch.D; line = line.Remove(0, 1); }
+                            else if (line.StartsWith("E#")) { pitch = Pitch.F; line = line.Remove(0, 2); }
+                            else if (line.StartsWith("E") || line.StartsWith("Fb")) { pitch = Pitch.E; line = line.Remove(0, 1); }
+                            else if (line.StartsWith("F#") || line.StartsWith("Gb")) { pitch = Pitch.Fs; line = line.Remove(0, 2); }
+                            else if (line.StartsWith("F")) { pitch = Pitch.F; line = line.Remove(0, 1); }
+                            else if (line.StartsWith("G#")) { pitch = Pitch.Gs; line = line.Remove(0, 2); }
+                            else if (line.StartsWith("G")) { pitch = Pitch.G; line = line.Remove(0, 1); }
                             // Check if octave set in note (only 9 octaves)
                             if (Regex.IsMatch(line[0].ToString(), "[0-8]"))
                             {
@@ -737,13 +748,13 @@ namespace LAZYSHELL
                         }
                         else if (line.StartsWith("rest, "))
                         {
-                            pitch = 12;
+                            pitch = Pitch.Rest;
                             line = line.Remove(0, 6); // remove "rest, "
                         }
-                        else if (line.StartsWith("hold, "))
+                        else if (line.StartsWith("tie, "))
                         {
-                            pitch = 13;
-                            line = line.Remove(0, 6); // remove "hold, "
+                            pitch = Pitch.Tie;
+                            line = line.Remove(0, 5); // remove "tie, "
                         }
                         // now check if beat or fixed duration
                         if (line.StartsWith("beat: "))
@@ -751,19 +762,19 @@ namespace LAZYSHELL
                             line = line.Remove(0, 6);
                             switch (line)
                             {
-                                case "whole": beat = 0; break;
-                                case "half.": beat = 1; break;
-                                case "half": beat = 2; break;
-                                case "quarter.": beat = 3; break;
-                                case "quarter": beat = 4; break;
-                                case "8th.": beat = 5; break;
-                                case "triplet quarter": beat = 6; break;
-                                case "8th": beat = 7; break;
-                                case "triplet 8th": beat = 8; break;
-                                case "16th": beat = 9; break;
-                                case "triplet 16th": beat = 10; break;
-                                case "32nd": beat = 11; break;
-                                case "64th": beat = 12; break;
+                                case "whole": beat = Beat.Whole; break;
+                                case "half.": beat = Beat.HalfDotted; break;
+                                case "half": beat = Beat.Half; break;
+                                case "quarter.": beat = Beat.QuarterDotted; break;
+                                case "quarter": beat = Beat.Quarter; break;
+                                case "8th.": beat = Beat.EighthDotted; break;
+                                case "triplet quarter": beat = Beat.QuarterTriplet; break;
+                                case "8th": beat = Beat.Eighth; break;
+                                case "triplet 8th": beat = Beat.EighthTriplet; break;
+                                case "16th": beat = Beat.Sixteenth; break;
+                                case "triplet 16th": beat = Beat.SixteenthTriplet; break;
+                                case "32nd": beat = Beat.ThirtySecond; break;
+                                case "64th": beat = Beat.SixtyFourth; break;
                                 default: break;
                             }
                         }
@@ -774,15 +785,15 @@ namespace LAZYSHELL
                             // check if duration a standard beat length
                             for (int i = 0; i < 13; i++)
                                 if (duration == Model.Data[0x042304 + i])
-                                    beat = i;
+                                    beat = (Beat)i;
                         }
-                        if (beat == -1)
+                        if (beat == Beat.NULL)
                         {
-                            opcode = 0xB6 + pitch;
+                            opcode = 0xB6 + (int)pitch;
                             parameter1 = duration;
                         }
                         else
-                            opcode = beat * 14 + pitch;
+                            opcode = (int)beat * 14 + (int)pitch;
                     }
                     #endregion
                     #region Commands
@@ -971,6 +982,7 @@ namespace LAZYSHELL
             int currentNestedLoop = -1; // the current nested loop
             int setTicks = -1;
             int lastTicks = -1;
+            int octave = 4;
             // percussive variables
             Pitch pitchIndex = 0;
             bool percussiveMode = false;
@@ -1025,7 +1037,7 @@ namespace LAZYSHELL
                     }
                     if (Regex.IsMatch(script[0].ToString(), "[a-g]") || script.StartsWith("r") || script.StartsWith("^"))
                     {
-                        int beat = -1;
+                        Beat beat = Beat.NULL;
                         int ticks = -1;
                         bool Cb = false;
                         Pitch pitch = Pitch.A;
@@ -1053,9 +1065,9 @@ namespace LAZYSHELL
                             pitch = Pitch.Rest;
                             script = script.Remove(0, 1);
                         }
-                        else if (script.StartsWith("^")) // Hold
+                        else if (script.StartsWith("^")) // Tie
                         {
-                            pitch = Pitch.Hold;
+                            pitch = Pitch.Tie;
                             script = script.Remove(0, 1);
                         }
                         if (percussiveMode)
@@ -1065,9 +1077,9 @@ namespace LAZYSHELL
                         {
                             script = script.Remove(0, 1);
                             ticks = Bits.GetInt32(ref script);
-                            if (ticks == 144) beat = 1;
-                            if (ticks == 72) beat = 3;
-                            if (ticks == 36) beat = 5;
+                            if (ticks == 144) beat = Beat.HalfDotted;
+                            if (ticks == 72) beat = Beat.QuarterDotted;
+                            if (ticks == 36) beat = Beat.EighthDotted;
                         }
                         else if (Regex.IsMatch(script[0].ToString(), "[0-9]"))
                             ticks = 192 / Bits.GetInt32(ref script);
@@ -1075,25 +1087,25 @@ namespace LAZYSHELL
                             ticks = setTicks;
                         if (triplet && ticks == 3) ticks = 2;
                         else if (triplet && ticks == 6) ticks = 4;
-                        else if (triplet && ticks == 12) beat = 10;
-                        else if (triplet && ticks == 24) beat = 8;
-                        else if (triplet && ticks == 48) beat = 6;
+                        else if (triplet && ticks == 12) beat = Beat.SixteenthTriplet;
+                        else if (triplet && ticks == 24) beat = Beat.EighthTriplet;
+                        else if (triplet && ticks == 48) beat = Beat.QuarterTriplet;
                         else if (triplet && ticks == 96) ticks = 64;
-                        else if (ticks == 3) beat = 12;
-                        else if (ticks == 6) beat = 11;
-                        else if (ticks == 8) beat = 10;
-                        else if (ticks == 12) beat = 9;
-                        else if (ticks == 16) beat = 8;
-                        else if (ticks == 24) beat = 7;
-                        else if (ticks == 32) beat = 6;
-                        else if (ticks == 36) beat = 5;
-                        else if (ticks == 48) beat = 4;
-                        else if (ticks == 72) beat = 3;
-                        else if (ticks == 96) beat = 2;
-                        else if (ticks == 144) beat = 1;
-                        else if (ticks == 192) beat = 0;
-                        if (beat != -1)
-                            opcode = beat * 14 + (int)pitch;
+                        else if (ticks == 3) beat = Beat.SixtyFourth;
+                        else if (ticks == 6) beat = Beat.ThirtySecond;
+                        else if (ticks == 8) beat = Beat.SixteenthTriplet;
+                        else if (ticks == 12) beat = Beat.Sixteenth;
+                        else if (ticks == 16) beat = Beat.EighthTriplet;
+                        else if (ticks == 24) beat = Beat.Eighth;
+                        else if (ticks == 32) beat = Beat.QuarterTriplet;
+                        else if (ticks == 36) beat = Beat.EighthDotted;
+                        else if (ticks == 48) beat = Beat.Quarter;
+                        else if (ticks == 72) beat = Beat.QuarterDotted;
+                        else if (ticks == 96) beat = Beat.Half;
+                        else if (ticks == 144) beat = Beat.HalfDotted;
+                        else if (ticks == 192) beat = Beat.Whole;
+                        if (beat != Beat.NULL)
+                            opcode = (int)beat * 14 + (int)pitch;
                         else if (ticks != -1)
                         {
                             opcode = 0xB6 + (int)pitch;
@@ -1122,8 +1134,8 @@ namespace LAZYSHELL
                     else if (script.StartsWith("{")) { triplet = true; script = script.Remove(0, 1); continue; }
                     else if (script.StartsWith("}")) { triplet = false; script = script.Remove(0, 1); continue; }
                     else if (script.StartsWith("/")) { script = script.Remove(0, 1); opcode = 0xD7; }
-                    else if (script.StartsWith("<")) { script = script.Remove(0, 1); opcode = 0xC5; }
-                    else if (script.StartsWith(">")) { script = script.Remove(0, 1); opcode = 0xC4; }
+                    else if (script.StartsWith("<")) { script = script.Remove(0, 1); opcode = 0xC5; octave--; }
+                    else if (script.StartsWith(">")) { script = script.Remove(0, 1); opcode = 0xC4; octave++; }
                     else if (script.StartsWith("?")) { script = script.Remove(0, 1); opcode = 0xD0; }
                     else if (script.StartsWith("w"))
                     {
@@ -1141,7 +1153,7 @@ namespace LAZYSHELL
                     else if (script.StartsWith("o"))
                     {
                         script = script.Remove(0, 1);
-                        opcode = 0xC6; parameter1 = Bits.GetInt32(ref script);
+                        opcode = 0xC6; parameter1 = octave = Bits.GetInt32(ref script);
                     }
                     else if (script.StartsWith("t"))
                     {
@@ -1363,7 +1375,8 @@ namespace LAZYSHELL
                         opcode = 0xE5;
                         Bits.GetByte(ref script); // skip first value, SMRPG doesn't support
                         parameter1 = Bits.GetByte(ref script);
-                        parameter2 = Bits.GetByte(ref script) & 12;
+                        parameter2 = Bits.GetByte(ref script) - 0x80 + 12;
+                        parameter2 = parameter2 - (octave * 12 + (int)lastPitch);
                     }
                     else if (script.StartsWith("$DE")) // vibrato
                     {
@@ -1389,6 +1402,7 @@ namespace LAZYSHELL
                         script = script.Remove(0, 3);
                         parameter1 = Bits.GetByte(ref script);
                         parameter2 = Bits.GetByte(ref script); // final balance, not supported
+                        continue;
                     }
                     else if (script.StartsWith("$E2")) // tempo
                     {
@@ -1409,6 +1423,7 @@ namespace LAZYSHELL
                     {
                         script = script.Remove(0, 3);
                         parameter1 = Bits.GetByte(ref script);
+                        continue;
                     }
                     else if (script.StartsWith("$E5")) // tremolo or sample switch
                     {
@@ -1416,6 +1431,7 @@ namespace LAZYSHELL
                         int param1 = Bits.GetByte(ref script);
                         if (param1 < 0x80)
                         {
+                            opcode = 0xF0;
                             parameter3 = param1; // delay, not supported
                             parameter2 = Bits.GetByte(ref script); // wavelength
                             parameter1 = Bits.GetByte(ref script); // amplitude
@@ -1424,6 +1440,7 @@ namespace LAZYSHELL
                         {
                             opcode = 0xDE;
                             parameter1 = param1 & 0x7F; // sample
+                            parameter2 = Bits.GetByte(ref script);
                         }
                     }
                     else if (script.StartsWith("$E6")) // tremolo off
@@ -1486,17 +1503,20 @@ namespace LAZYSHELL
                         {
                             parameter2 = Bits.GetByte(ref script);
                             parameter3 = Bits.GetByte(ref script);
+                            continue; // not supported
                         }
                         else if (parameter1 == 0x81)
                         {
-                            parameter2 = Bits.GetByte(ref script);
+                            opcode = 0xED;
+                            parameter2 = (sbyte)Bits.GetByte(ref script) * 4;
                         }
                         else if (parameter1 == 0x82)
                         {
                             int param1 = Bits.GetShort(ref script);
                             int param2 = Bits.GetShort(ref script);
-                            while (param2-- > 0)
+                            while (param2-- >= 0)
                                 Bits.GetByte(ref script);
+                            continue; // not supported
                         }
                         else if (parameter1 == 0x83)
                         {
@@ -1504,6 +1524,7 @@ namespace LAZYSHELL
                             int param2 = Bits.GetShort(ref script);
                             while (param2-- > 0)
                                 Bits.GetByte(ref script);
+                            continue; // not supported
                         }
                         else
                         {
@@ -1512,8 +1533,8 @@ namespace LAZYSHELL
                             //channels[channel].Add(new SPCScriptCommand(new byte[] { 0xDA, (byte)(parameter2 >> 5) }, spc, channel));
                             //channels[channel].Add(new SPCScriptCommand(new byte[] { 0xDB, (byte)(parameter2 >> 5) }, spc, channel));
                             //channels[channel].Add(new SPCScriptCommand(new byte[] { 0xDC, (byte)(parameter2 & 0x1F) }, spc, channel));
+                            continue;
                         }
-                        continue;
                     }
                     else if (script.StartsWith("$EE")) // channel tuning
                     {
@@ -1577,7 +1598,7 @@ namespace LAZYSHELL
                 }
                 catch (Exception ex)
                 {
-                    error += "Error reading line #" + lineNumber + " (\"" + temp + "\"). " + ex.Message + "\n";
+                    error += "Error reading line #" + lineNumber + " (\"" + script + "\"). " + ex.Message + "\n";
                 }
                 lineNumber++;
             }
@@ -1639,7 +1660,7 @@ namespace LAZYSHELL
             }
             if (globalVol == -1)
                 globalVol = 100;
-            for (int i = 0; i < 19; i++)
+            for (int i = 0; i < 20; i++)
             {
                 if (i < newInstruments.Count)
                 {
@@ -1795,25 +1816,25 @@ namespace LAZYSHELL
                                     case Pitch.G: script += "g"; break;
                                     case Pitch.Gs: script += "g+"; break;
                                     case Pitch.Rest: script += "r"; break;
-                                    case Pitch.Hold: script += "^"; break;
+                                    case Pitch.Tie: script += "^"; break;
                                     default: script += "r"; break;
                                 }
                                 if (ssc.Opcode < 0xB6)
                                     switch (note.Beat)
                                     {
-                                        case 0: script += "1"; break;
-                                        case 1: script += "2."; break; // dotted half
-                                        case 2: script += "2"; break;
-                                        case 3: script += "4."; break; // dotted quarter
-                                        case 4: script += "4"; break;
-                                        case 5: script += "8."; break; // dotted 8th
-                                        case 6: script += "6"; break; // quarter triplet
-                                        case 7: script += "8"; break;
-                                        case 8: script += "12"; break; // 8th triplet
-                                        case 9: script += "16"; break;
-                                        case 10: script += "24"; break; // 16th triplet
-                                        case 11: script += "32"; break;
-                                        case 12: script += "64"; break;
+                                        case Beat.Whole: script += "1"; break;
+                                        case Beat.HalfDotted: script += "2."; break; // dotted half
+                                        case Beat.Half: script += "2"; break;
+                                        case Beat.QuarterDotted: script += "4."; break; // dotted quarter
+                                        case Beat.Quarter: script += "4"; break;
+                                        case Beat.EighthDotted: script += "8."; break; // dotted 8th
+                                        case Beat.QuarterTriplet: script += "6"; break; // quarter triplet
+                                        case Beat.Eighth: script += "8"; break;
+                                        case Beat.EighthTriplet: script += "12"; break; // 8th triplet
+                                        case Beat.Sixteenth: script += "16"; break;
+                                        case Beat.SixteenthTriplet: script += "24"; break; // 16th triplet
+                                        case Beat.ThirtySecond: script += "32"; break;
+                                        case Beat.SixtyFourth: script += "64"; break;
                                         default: break;
                                     }
                                 else
@@ -1925,25 +1946,25 @@ namespace LAZYSHELL
                                 case Pitch.G: script += "g"; break;
                                 case Pitch.Gs: script += "g+"; break;
                                 case Pitch.Rest: script += "r"; break;
-                                case Pitch.Hold: script += "^"; break;
+                                case Pitch.Tie: script += "^"; break;
                                 default: script += "r"; break;
                             }
                             if (ssc.Opcode < 0xB6)
                                 switch (note.Beat)
                                 {
-                                    case 0: script += "1"; break;
-                                    case 1: script += "2^4"; break; // dotted half
-                                    case 2: script += "2"; break;
-                                    case 3: script += "4^8"; break; // dotted quarter
-                                    case 4: script += "4"; break;
-                                    case 5: script += "8^16"; break; // dotted 8th
-                                    case 6: script += "6"; break; // quarter triplet
-                                    case 7: script += "8"; break;
-                                    case 8: script += "12"; break; // 8th triplet
-                                    case 9: script += "16"; break;
-                                    case 10: script += "24"; break; // 16th triplet
-                                    case 11: script += "32"; break;
-                                    case 12: script += "64"; break;
+                                    case Beat.Whole: script += "1"; break;
+                                    case Beat.HalfDotted: script += "2^4"; break; // dotted half
+                                    case Beat.Half: script += "2"; break;
+                                    case Beat.QuarterDotted: script += "4^8"; break; // dotted quarter
+                                    case Beat.Quarter: script += "4"; break;
+                                    case Beat.EighthDotted: script += "8^16"; break; // dotted 8th
+                                    case Beat.QuarterTriplet: script += "6"; break; // quarter triplet
+                                    case Beat.Eighth: script += "8"; break;
+                                    case Beat.EighthTriplet: script += "12"; break; // 8th triplet
+                                    case Beat.Sixteenth: script += "16"; break;
+                                    case Beat.SixteenthTriplet: script += "24"; break; // 16th triplet
+                                    case Beat.ThirtySecond: script += "32"; break;
+                                    case Beat.SixtyFourth: script += "64"; break;
                                     default: break;
                                 }
                             else
@@ -1962,7 +1983,7 @@ namespace LAZYSHELL
             foreach (Note note in spc.Notes[mouseOverChannel])
             {
                 // skip if not a note, rest, or tie
-                if (note.Command.Opcode < 0xC4 && !note.Hold && (!note.Rest || showRests.Checked))
+                if (note.Command.Opcode < 0xC4 && (!note.Rest || showRests.Checked))
                     if (x >= x_ && x <= x_ + 16)
                         break;
                 x_ += (int)((double)noteSpacing / 100.0 * note.Ticks);
@@ -1995,7 +2016,7 @@ namespace LAZYSHELL
         }
         private void ResizePanels()
         {
-            if (scoreView.Checked)
+            if (scoreViewer.Checked)
             {
                 groupBoxSV.Width = (int)(0.50 * (double)panelSPC.Width);
                 groupBoxCT.Width = (int)(0.50 * (double)panelSPC.Width - 6.0);
@@ -2241,12 +2262,12 @@ namespace LAZYSHELL
             if (previewer != null && previewer.Visible)
                 previewer.Close();
             if (Type == 0)
-                previewer = new Previewer(Index, previewAuto.Checked, PreviewType.SPCTrack);
+                previewer = new Previewer(Index, autoLaunch.Checked, PreviewType.SPCTrack);
             else if (Type == 1)
-                previewer = new Previewer(Index, previewAuto.Checked, PreviewType.SPCEvent);
+                previewer = new Previewer(Index, autoLaunch.Checked, PreviewType.SPCEvent);
             else if (Type == 2)
-                previewer = new Previewer(Index, previewAuto.Checked, PreviewType.SPCBattle);
-            if (!previewAuto.Checked)
+                previewer = new Previewer(Index, autoLaunch.Checked, PreviewType.SPCBattle);
+            if (!autoLaunch.Checked)
                 previewer.Show();
         }
         // Track editor, picture
@@ -2304,50 +2325,21 @@ namespace LAZYSHELL
                             {
                                 Bitmap image;
                                 Note note = new Note(ssc);
-                                if (!note.Rest && !note.Hold)
+                                if (!note.Rest && !note.Tie)
                                 {
-                                    switch (note.Beat)
-                                    {
-                                        case 0: image = Icons.noteWhole; break;
-                                        case 1: image = Icons.noteHalfDotted; break;
-                                        case 2: image = Icons.noteHalf; break;
-                                        case 3: image = Icons.noteQuarterDotted; break;
-                                        case 4: image = Icons.noteQuarter; break;
-                                        case 5: image = Icons.note8thDotted; break;
-                                        case 6: image = Icons.noteQuarterTriplet; break;
-                                        case 7: image = Icons.note8th; break;
-                                        case 8: image = Icons.note8thTriplet; break;
-                                        case 9: image = Icons.note16th; break;
-                                        case 10: image = Icons.note16thTriplet; break;
-                                        case 11: image = Icons.note32nd; break;
-                                        case 12: image = Icons.note64th; break;
-                                        default: image = Icons.noteQuarter; break;
-                                    }
-                                    e.Graphics.DrawImage(image, x, y);
+                                    Bitmap stem = GetStem(note.Ticks, 0, false);
+                                    Bitmap head = GetHead(note.Ticks, 0, false);
+                                    if (stem != null)
+                                        e.Graphics.DrawImage(stem, x, y);
+                                    e.Graphics.DrawImage(head, x, y);
                                 }
                                 else if (note.Rest)
                                 {
-                                    switch (note.Beat)
-                                    {
-                                        case 0: image = Icons.restWhole; break;
-                                        case 1: image = Icons.restHalfDotted; break;
-                                        case 2: image = Icons.restHalf; break;
-                                        case 3: image = Icons.restQuarterDotted; break;
-                                        case 4: image = Icons.restQuarter; break;
-                                        case 5: image = Icons.rest8thDotted; break;
-                                        case 6: image = Icons.restQuarterTriplet; break;
-                                        case 7: image = Icons.rest8th; break;
-                                        case 8: image = Icons.rest8thTriplet; break;
-                                        case 9: image = Icons.rest16th; break;
-                                        case 10: image = Icons.rest16thTriplet; break;
-                                        case 11: image = Icons.rest32nd; break;
-                                        case 12: image = Icons.rest64th; break;
-                                        default: image = Icons.restQuarter; break;
-                                    }
+                                    image = GetRest(note.Ticks, false);
                                     e.Graphics.DrawImage(image, x, y);
                                 }
-                                else if (note.Hold)
-                                    e.Graphics.DrawString("...", font, brush, x - 4, y + 2);
+                                else if (note.Tie)
+                                    e.Graphics.DrawImage(Icons.tieOver, x, y, 16, 16);
                             }
                             else
                                 e.Graphics.DrawString(ssc.Opcode.ToString("X2"), font, brush, x, y + 2);
@@ -2733,19 +2725,10 @@ namespace LAZYSHELL
         {
             if (Index == 0 || Type != 0)
                 return;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
             int staffIndex = 0;
             int staffHeight = (int)staffHeightSV.Value;
             int max = spc.Channels.Length;
-            if (allChannels.Checked)
-            {
-                staffIndex = 0;
-                max = spc.Channels.Length;
-            }
-            else
-            {
-                staffIndex = (int)singleChannelNum.Value;
-                max = (int)(singleChannelNum.Value + 1);
-            }
             if (spc.Notes == null)
                 return;
             for (; staffIndex < max; staffIndex++)
@@ -2765,18 +2748,24 @@ namespace LAZYSHELL
                     e.Graphics.FillRectangle(brush, 0, y + 4, scoreWriterPicture.Width, staffHeight - 8);
                 }
                 // draw staff ledger lines
-                DrawBarsLines(e.Graphics, 0, staffIndex, -hScrollBar2.Value, true);
+                DrawBarsLines(e.Graphics, 0, staffIndex, -hScrollBar2.Value, true, GetStaffWidth(staffIndex));
                 // draw notes
                 if (spc.Notes[staffIndex] == null)
                     continue;
                 int indexNotes = 0;
+                Note lastNote = null; // the last previous note, with a pitch
+                Note lastItem = null; // the last previous note
                 //
-                foreach (Note note in spc.Notes[staffIndex])
+                for (int n = 0; n < spc.Notes[staffIndex].Count; n++)
                 {
+                    Note note = spc.Notes[staffIndex][n];
                     //
                     if (x < -32 || x - 32 > scoreViewPicture.Width)
                     {
                         x += (int)((double)noteSpacingSV.Value / 100.0 * note.Ticks);
+                        if (!note.Rest && !note.Tie)
+                            lastNote = note;
+                        lastItem = note;
                         indexNotes++;
                         continue;
                     }
@@ -2794,15 +2783,14 @@ namespace LAZYSHELL
                         default:
                             bool hilite = mouseEnter && indexNotes == mouseOverNote &&
                                 staffIndex == mouseOverChannel && staffIndex == mouseDownChannel;
-                            int hold = 0;
-                            if (indexNotes + 1 < spc.Notes[staffIndex].Count &&
-                                spc.Notes[staffIndex][indexNotes + 1].Hold)
-                                hold = spc.Notes[staffIndex][indexNotes + 1].Ticks;
-                            int yCoord = DrawNote(e.Graphics, note, (int)x, staffHeight, 0, staffIndex, hilite, hold);
+                            int yCoord = DrawNote(e.Graphics, note, lastNote, lastItem, (int)x, staffHeight, 0, staffIndex, hilite);
                             break;
                     }
                     //
                     x += (int)((double)noteSpacingSV.Value / 100.0 * note.Ticks);
+                    if (!note.Rest && !note.Tie)
+                        lastNote = note;
+                    lastItem = note;
                     indexNotes++;
                 }
             }
@@ -2815,7 +2803,7 @@ namespace LAZYSHELL
             int y = Math.Max(e.Y, 0);
             mousePosition = new Point(x, y);
             mouseOverNote = -1;
-            mouseOverPitch = Pitch.None;
+            mouseOverPitch = Pitch.NULL;
             mouseOverChannel = -1;
             mouseOverSSC = null;
             x = Math.Max(x + hScrollBar2.Value, 0);
@@ -2843,7 +2831,7 @@ namespace LAZYSHELL
                 Note note = spc.Notes[mouseOverChannel][mouseOverNote];
                 mouseOverSSC = note.Command;
                 labelStaffItem.Text += note.ToString(true);
-                if (note.Percussive && !note.Rest && !note.Hold)
+                if (note.Percussive && !note.Rest && !note.Tie)
                 {
                     Percussives percussive = spc.Percussives.Find(
                         delegate(Percussives p) { return p.PitchIndex == note.Pitch; });
@@ -2936,23 +2924,13 @@ namespace LAZYSHELL
         {
             scoreViewPicture.Invalidate();
         }
-        private void allChannels_CheckedChanged(object sender, EventArgs e)
-        {
-            singleChannelNum.Enabled = singleChannel.Checked;
-            scoreViewPicture.Invalidate();
-        }
-        private void singleChannel_CheckedChanged(object sender, EventArgs e)
-        {
-            singleChannelNum.Enabled = singleChannel.Checked;
-            scoreViewPicture.Invalidate();
-        }
         private void singleChannelNum_ValueChanged(object sender, EventArgs e)
         {
             scoreViewPicture.Invalidate();
         }
         private void scoreView_Click(object sender, EventArgs e)
         {
-            if (scoreView.Checked)
+            if (scoreViewer.Checked)
             {
                 groupBoxI.Visible = false;
                 groupBoxRV.Visible = false;
@@ -2970,7 +2948,7 @@ namespace LAZYSHELL
             }
             mouseOverNote = -1;
             mouseDownNote = -1;
-            mouseOverPitch = Pitch.None;
+            mouseOverPitch = Pitch.NULL;
             ResizePanels();
         }
         private void panelSPC_SizeChanged(object sender, EventArgs e)

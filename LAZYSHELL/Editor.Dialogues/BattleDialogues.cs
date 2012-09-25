@@ -101,21 +101,6 @@ namespace LAZYSHELL
             tileEditor.Dispose();
             graphicEditor.Dispose();
         }
-        public void SetToolTips(ToolTip toolTip1)
-        {
-            this.battleDialogueNum.ToolTipText =
-                "Select the battle dialogue to edit by #.\n\n" +
-                "Battle dialogues only appear in battles and must be \n" +
-                "triggered by a battle script command to be shown.";
-
-            toolTip1.SetToolTip(this.battleDialogueTextBox,
-                "Edit the current battle dialogue. Insert commands using the \n" +
-                "list to the right.\n\n" +
-                "To insert symbols, type the character # of the symbol \n" +
-                "between []. The character # can be found by moving the \n" +
-                "mouse over the font character in the font table image in \n" +
-                "the \"FONT GRAPHICS\" panel.");
-        }
         public void RefreshBattleDialogue()
         {
             updating = true;

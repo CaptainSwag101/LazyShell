@@ -22,9 +22,9 @@ namespace LAZYSHELL
         private byte[] current_unmodified;
         private byte[] current;
         private byte[] original;
-        private int selection { get { return richTextBox.SelectionStart / 3 + offset; } }
+        private int selection { get { return ROMData.SelectionStart / 3 + offset; } }
         private bool updating = false;
-        private bool atLowerNibble { get { return richTextBox.SelectionStart % 3 == 1; } }
+        private bool atLowerNibble { get { return ROMData.SelectionStart % 3 == 1; } }
         private bool atUpperNibble = false;
         private int end { get { return ((line_count - 1) * 16 + 15) * 3; } }
         private int offset; public int Offset { get { return offset; } set { offset = value; } }
@@ -35,14 +35,14 @@ namespace LAZYSHELL
         {
             get
             {
-                return (richTextBox1.Height - 5) / 15;
+                return (ROMOffsets.Height - 5) / 15;
             }
         }
         private int line
         {
             get
             {
-                return richTextBox.SelectionStart / (16 * 3);
+                return ROMData.SelectionStart / (16 * 3);
             }
         }
         private int byte_count
@@ -52,18 +52,18 @@ namespace LAZYSHELL
                 return line_count * 16;
             }
         }
-        private NewRichTextBox richTextBox
+        private NewRichTextBox ROMData
         {
             get
             {
-                return richTextBox2.Visible ? richTextBox2 : richTextBox3;
+                return currentROMData.Visible ? currentROMData : originalROMData;
             }
             set
             {
-                if (richTextBox2.Visible)
-                    richTextBox2 = value;
+                if (currentROMData.Visible)
+                    currentROMData = value;
                 else
-                    richTextBox3 = value;
+                    originalROMData = value;
             }
         }
         private int selectionStart;
@@ -71,10 +71,6 @@ namespace LAZYSHELL
         private int selectionLength;
         private bool isMovingUpDown;
         #endregion
-        #region Functions
-        public HexEditor()
-        {
-        }
         public HexEditor(byte[] current, byte[] original)
         {
             this.current_unmodified = current;
@@ -82,7 +78,10 @@ namespace LAZYSHELL
             this.original = original;
             InitializeComponent();
             RefreshHexEditor();
+            Do.AddShortcut(toolStrip2, Keys.F1, helpTips);
+            new ToolTipLabel(this, null, helpTips);
         }
+        #region Functions
         public void ClearMemory()
         {
             oldProperties.Clear();
@@ -127,16 +126,16 @@ namespace LAZYSHELL
                 }
             }
             //
-            richTextBox1.BeginUpdate();
-            richTextBox1.Text = offsets;
-            richTextBox1.EndUpdate();
+            ROMOffsets.BeginUpdate();
+            ROMOffsets.Text = offsets;
+            ROMOffsets.EndUpdate();
             //
-            richTextBox.BeginUpdate();
-            richTextBox2.Text = bytes2;
-            richTextBox3.Text = bytes3;
-            richTextBox2.SelectionStart = 0;
-            richTextBox2.SelectionLength = richTextBox2.Text.Length;
-            richTextBox2.SelectionColor = Color.DarkBlue;
+            ROMData.BeginUpdate();
+            currentROMData.Text = bytes2;
+            originalROMData.Text = bytes3;
+            currentROMData.SelectionStart = 0;
+            currentROMData.SelectionLength = currentROMData.Text.Length;
+            currentROMData.SelectionColor = Color.DarkBlue;
             for (int offsetCounter = offset & 0xFFFFF0, i = 0; i < line_count * 16; i++)
             {
                 // first set the length of the changed offsets, to colorize all at once (b/c faster)
@@ -164,15 +163,15 @@ namespace LAZYSHELL
                 }
                 if (changedLength > 0)
                 {
-                    richTextBox2.SelectionStart = changedStart;
-                    richTextBox2.SelectionLength = changedLength;
-                    richTextBox2.SelectionColor = change.Color;
+                    currentROMData.SelectionStart = changedStart;
+                    currentROMData.SelectionLength = changedLength;
+                    currentROMData.SelectionColor = change.Color;
                 }
             }
-            richTextBox2.SelectionStart = richTextBox3.SelectionStart = selectionStart;
-            richTextBox2.SelectionLength = richTextBox3.SelectionLength = selectionLength;
-            richTextBox.Focus();
-            richTextBox.EndUpdate();
+            currentROMData.SelectionStart = originalROMData.SelectionStart = selectionStart;
+            currentROMData.SelectionLength = originalROMData.SelectionLength = selectionLength;
+            ROMData.Focus();
+            ROMData.EndUpdate();
             //
             UpdateInformationLabels();
             updating = false;
@@ -180,15 +179,15 @@ namespace LAZYSHELL
         private void UpdateInformationLabels()
         {
             info_offset.Text = "Offset: " + selection.ToString("X6");
-            if (richTextBox.SelectionLength / 3 == 3)
+            if (ROMData.SelectionLength / 3 == 3)
                 info_value.Text = "Value: " + Bits.Get24Bit(data, selection).ToString();
-            else if (richTextBox.SelectionLength / 3 == 2)
+            else if (ROMData.SelectionLength / 3 == 2)
                 info_value.Text = "Value: " + Bits.GetShort(data, selection).ToString();
-            else if (richTextBox.SelectionLength / 3 <= 1)
+            else if (ROMData.SelectionLength / 3 <= 1)
                 info_value.Text = "Value: " + data[selection].ToString();
             else
                 info_value.Text = "Value: ";
-            int sel = richTextBox.SelectionLength / 3;
+            int sel = ROMData.SelectionLength / 3;
             info_sel.Text = "Sel: 0x" + sel.ToString("X") + " (" + sel.ToString() + ") bytes";
         }
         #endregion
@@ -202,17 +201,17 @@ namespace LAZYSHELL
         {
             if (updating) return;
             updating = true;
-            richTextBox.BeginUpdate();
-            if (richTextBox.SelectionStart / 3 + offset >= data.Length)
-                richTextBox.SelectionStart = end;
-            else if (richTextBox.SelectionStart % 3 == 2 && !atUpperNibble &&
-                richTextBox.SelectionStart / 3 + offset + 1 < data.Length)
-                richTextBox.SelectionStart++;
-            else if (richTextBox.SelectionStart % 3 == 2 && atUpperNibble)
-                richTextBox.SelectionStart--;
-            atUpperNibble = richTextBox.SelectionStart % 3 == 0;
+            ROMData.BeginUpdate();
+            if (ROMData.SelectionStart / 3 + offset >= data.Length)
+                ROMData.SelectionStart = end;
+            else if (ROMData.SelectionStart % 3 == 2 && !atUpperNibble &&
+                ROMData.SelectionStart / 3 + offset + 1 < data.Length)
+                ROMData.SelectionStart++;
+            else if (ROMData.SelectionStart % 3 == 2 && atUpperNibble)
+                ROMData.SelectionStart--;
+            atUpperNibble = ROMData.SelectionStart % 3 == 0;
             UpdateInformationLabels();
-            richTextBox.EndUpdate();
+            ROMData.EndUpdate();
             updating = false;
         }
         private void richTextBox_MouseDown(object sender, MouseEventArgs e)
@@ -221,8 +220,8 @@ namespace LAZYSHELL
         }
         private void richTextBox_MouseUp(object sender, MouseEventArgs e)
         {
-            selectionStart = richTextBox.SelectionStart;
-            selectionLength = richTextBox.SelectionLength;
+            selectionStart = ROMData.SelectionStart;
+            selectionLength = ROMData.SelectionLength;
         }
         private void richTextBox_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -237,11 +236,11 @@ namespace LAZYSHELL
         }
         private void richTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            int column = richTextBox.SelectionStart / 3;
+            int column = ROMData.SelectionStart / 3;
             if (!isMovingUpDown)
             {
-                selectionStart = richTextBox.SelectionStart;
-                selectionLength = richTextBox.SelectionLength;
+                selectionStart = ROMData.SelectionStart;
+                selectionLength = ROMData.SelectionLength;
             }
             switch (e.KeyData)
             {
@@ -308,7 +307,7 @@ namespace LAZYSHELL
                     }
                     if (value > 15)
                         break;
-                    if (!richTextBox2.Visible)
+                    if (!currentROMData.Visible)
                     {
                         MessageBox.Show("Changing the original ROM's data is not allowed.");
                         break;
@@ -320,14 +319,14 @@ namespace LAZYSHELL
                         current[offset + column] &= 0x0F;
                         current[offset + column] |= value;
                         RefreshHexEditor();
-                        richTextBox2.SelectionStart = selectionStart + 1;
+                        currentROMData.SelectionStart = selectionStart + 1;
                     }
                     else
                     {
                         current[offset + column] &= 0xF0;
                         current[offset + column] |= value;
                         RefreshHexEditor();
-                        richTextBox2.SelectionStart = selectionStart + 2;
+                        currentROMData.SelectionStart = selectionStart + 2;
                     }
                     break;
             }
@@ -335,7 +334,7 @@ namespace LAZYSHELL
         private void richTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (isMovingUpDown)
-                richTextBox.SelectionStart = selectionStart;
+                ROMData.SelectionStart = selectionStart;
             isMovingUpDown = false;
         }
         private void richTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -357,13 +356,13 @@ namespace LAZYSHELL
         }
         private void copy_Click(object sender, EventArgs e)
         {
-            if (richTextBox.SelectionLength < 3) return;
-            int column = richTextBox.SelectionStart / 3;
-            clipboard = Bits.GetByteArray(data, offset + column, richTextBox.SelectionLength / 3);
+            if (ROMData.SelectionLength < 3) return;
+            int column = ROMData.SelectionStart / 3;
+            clipboard = Bits.GetByteArray(data, offset + column, ROMData.SelectionLength / 3);
         }
         private void paste_Click(object sender, EventArgs e)
         {
-            int column = richTextBox.SelectionStart / 3;
+            int column = ROMData.SelectionStart / 3;
             if (offset + column + clipboard.Length >= 0x400000)
                 return;
 
@@ -407,13 +406,13 @@ namespace LAZYSHELL
         private void fillWith_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData != Keys.Enter) return;
-            if (richTextBox2.SelectionLength < 3) return;
-            int column = richTextBox.SelectionStart / 3;
+            if (currentROMData.SelectionLength < 3) return;
+            int column = ROMData.SelectionStart / 3;
             byte value;
             try
             {
                 value = Convert.ToByte(fillWith.Text, 16);
-                byte[] values = new byte[richTextBox2.SelectionLength / 3];
+                byte[] values = new byte[currentROMData.SelectionLength / 3];
                 Bits.Fill(values, value);
                 oldProperties.Add(new Change(offset + column,
                     Bits.GetByteArray(current, offset + column, values.Length), Color.Red));
@@ -460,24 +459,24 @@ namespace LAZYSHELL
         private void viewCurrent_Click(object sender, EventArgs e)
         {
             viewOriginal.Checked = false;
-            richTextBox2.Show();
-            richTextBox3.Hide();
+            currentROMData.Show();
+            originalROMData.Hide();
             viewCurrent.Checked = true;
             RefreshHexEditor();
-            richTextBox.Focus();
-            richTextBox.SelectionStart = selectionStart;
-            richTextBox.SelectionLength = selectionLength;
+            ROMData.Focus();
+            ROMData.SelectionStart = selectionStart;
+            ROMData.SelectionLength = selectionLength;
         }
         private void viewOriginal_Click(object sender, EventArgs e)
         {
             viewCurrent.Checked = false;
-            richTextBox3.Show();
-            richTextBox2.Hide();
+            originalROMData.Show();
+            currentROMData.Hide();
             viewOriginal.Checked = true;
             RefreshHexEditor();
-            richTextBox.Focus();
-            richTextBox.SelectionStart = selectionStart;
-            richTextBox.SelectionLength = selectionLength;
+            ROMData.Focus();
+            ROMData.SelectionStart = selectionStart;
+            ROMData.SelectionLength = selectionLength;
         }
         private void gotoAddress_KeyDown(object sender, KeyEventArgs e)
         {
@@ -510,7 +509,7 @@ namespace LAZYSHELL
             finally
             {
                 RefreshHexEditor();
-                richTextBox.Focus();
+                ROMData.Focus();
             }
         }
         private void searchValues_KeyDown(object sender, KeyEventArgs e)
@@ -531,7 +530,7 @@ namespace LAZYSHELL
                 int offset, foundAt;
 
                 offset = this.offset;
-                foundAt = Bits.Find(data, values, richTextBox.SelectionStart / 3 + richTextBox.SelectionLength + offset);
+                foundAt = Bits.Find(data, values, ROMData.SelectionStart / 3 + ROMData.SelectionLength + offset);
                 if (foundAt != -1)
                 {
                     this.offset = foundAt & 0xFFFFF0;

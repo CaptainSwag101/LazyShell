@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms; // remove later
 using System.IO;
 using System.Security.Cryptography;
+using System.Xml;
 using LAZYSHELL.ScriptsEditor;
 using LAZYSHELL.DataStructures;
 using LAZYSHELL.Properties;
@@ -24,6 +25,19 @@ namespace LAZYSHELL
         }
         private static HexEditor hexViewer;
         public static HexEditor HexViewer { get { return hexViewer; } set { hexViewer = value; } }
+        private static XmlDocument lazyshell_help;
+        public static XmlDocument LAZYSHELL_xml
+        {
+            get
+            {
+                if (lazyshell_help == null)
+                {
+                    lazyshell_help = new XmlDocument();
+                    lazyshell_help.LoadXml(Resources.LAZYSHELL_xml);
+                }
+                return lazyshell_help;
+            }
+        }
         // For Rom Signature
         private static bool locked = false;
         private static bool published = false;
@@ -284,21 +298,28 @@ namespace LAZYSHELL
                 temp[i] = new Dialogue(data, i);
             return temp;
         }
-        private static DialogueTable[] dialogueTables;
-        public static DialogueTable[] DialogueTables
+        private static DTE[] dte;
+        public static DTE[] DTE
         {
             get
             {
-                if (dialogueTables == null)
+                if (dte == null)
                 {
                     // create dialogues
-                    dialogueTables = new DialogueTable[12];
-                    for (int i = 0; i < dialogueTables.Length; i++)
-                        dialogueTables[i] = new DialogueTable(data, i);
+                    dte = new DTE[12];
+                    for (int i = 0; i < dte.Length; i++)
+                        dte[i] = new DTE(data, i);
                 }
-                return dialogueTables;
+                return dte;
             }
-            set { dialogueTables = value; }
+            set { dte = value; }
+        }
+        public static string[] DTEStr(bool byteView)
+        {
+            string[] tables = new string[DTE.Length];
+            for (int i = 0; i < tables.Length; i++)
+                tables[i] = DTE[i].GetDialogue(byteView);
+            return tables;
         }
         private static BonusMessage[] bonusMessages;
         public static BonusMessage[] BonusMessages
@@ -377,7 +398,7 @@ namespace LAZYSHELL
                 {
                     fontDialogue = new FontCharacter[128];
                     for (int i = 0; i < fontDialogue.Length; i++)
-                        fontDialogue[i] = new FontCharacter(data, i, 1);
+                        fontDialogue[i] = new FontCharacter(data, i, FontType.Dialogue);
                 }
                 return fontDialogue;
             }
@@ -405,7 +426,7 @@ namespace LAZYSHELL
                 {
                     fontDescription = new FontCharacter[128];
                     for (int i = 0; i < fontDescription.Length; i++)
-                        fontDescription[i] = new FontCharacter(data, i, 2);
+                        fontDescription[i] = new FontCharacter(data, i, FontType.Description);
                 }
                 return fontDescription;
             }
@@ -419,7 +440,7 @@ namespace LAZYSHELL
                 {
                     fontTriangle = new FontCharacter[14];
                     for (int i = 0; i < fontTriangle.Length; i++)
-                        fontTriangle[i] = new FontCharacter(data, i, 3);
+                        fontTriangle[i] = new FontCharacter(data, i, FontType.Triangles);
                 }
                 return fontTriangle;
             }
@@ -519,7 +540,7 @@ namespace LAZYSHELL
                 {
                     fontBattleMenu = new FontCharacter[64];
                     for (int i = 0; i < fontBattleMenu.Length; i++)
-                        fontBattleMenu[i] = new FontCharacter(BattleMenuGraphics, i, 4);
+                        fontBattleMenu[i] = new FontCharacter(BattleMenuGraphics, i, FontType.BattleMenu);
                 }
                 return fontBattleMenu;
             }
@@ -533,7 +554,7 @@ namespace LAZYSHELL
                 {
                     fontFlowerBonus = new FontCharacter[32];
                     for (int i = 0; i < fontFlowerBonus.Length; i++)
-                        fontFlowerBonus[i] = new FontCharacter(BonusFontGraphics, i, 5);
+                        fontFlowerBonus[i] = new FontCharacter(BonusFontGraphics, i, FontType.FlowerBonus);
                 }
                 return fontFlowerBonus;
             }
@@ -1679,7 +1700,7 @@ namespace LAZYSHELL
         #endregion
         #region World Maps
         private static WorldMap[] worldMaps;
-        private static MapPoint[] mapPoints;
+        private static Location[] locations;
         private static PaletteSet palettes;
         private static byte[] worldMapGraphics;
         private static byte[] worldMapPalettes;
@@ -1702,19 +1723,19 @@ namespace LAZYSHELL
             }
             set { worldMaps = value; }
         }
-        public static MapPoint[] MapPoints
+        public static Location[] Locations
         {
             get
             {
-                if (mapPoints == null)
+                if (locations == null)
                 {
-                    mapPoints = new MapPoint[56];
-                    for (int i = 0; i < mapPoints.Length; i++)
-                        mapPoints[i] = new MapPoint(data, i);
+                    locations = new Location[56];
+                    for (int i = 0; i < locations.Length; i++)
+                        locations[i] = new Location(data, i);
                 }
-                return mapPoints;
+                return locations;
             }
-            set { mapPoints = value; }
+            set { locations = value; }
         }
         public static PaletteSet Palettes
         {
@@ -2362,7 +2383,7 @@ namespace LAZYSHELL
             dummy = Items;
             dummy = LevelMaps;
             dummy = Levels;
-            dummy = MapPoints;
+            dummy = Locations;
             dummy = MenuBG;
             dummy = MenuBGPalette;
             dummy = ShopBGPalette;
@@ -2457,7 +2478,7 @@ namespace LAZYSHELL
             characters = null;
             dialogueGraphics = null;
             dialogues = null;
-            dialogueTables = null;
+            dte = null;
             e_animations = null;
             effects = null;
             entranceAnimations = null;
@@ -2483,7 +2504,7 @@ namespace LAZYSHELL
             items = null;
             levelMaps = null;
             levels = null;
-            mapPoints = null;
+            locations = null;
             menuBG = null;
             menuBGPalette = null;
             shopBGPalette = null;

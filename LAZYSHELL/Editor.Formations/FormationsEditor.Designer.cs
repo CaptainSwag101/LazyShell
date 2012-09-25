@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormationsEditor));
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -46,8 +45,8 @@
             this.clearFormationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearPacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.enableHelpTips = new System.Windows.Forms.ToolStripButton();
-            this.showDecHex = new System.Windows.Forms.ToolStripButton();
+            this.helpTips = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showFormations = new System.Windows.Forms.ToolStripButton();
             this.showPacks = new System.Windows.Forms.ToolStripButton();
@@ -67,8 +66,8 @@
             this.toolStripDropDownButton1,
             this.clear,
             this.toolStripSeparator12,
-            this.enableHelpTips,
-            this.showDecHex,
+            this.helpTips,
+            this.baseConvertor,
             this.toolStripSeparator1,
             this.showFormations,
             this.showPacks});
@@ -104,7 +103,6 @@
             this.import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(27, 22);
-            this.import.ToolTipText = "Import";
             // 
             // importFormationsToolStripMenuItem
             // 
@@ -134,7 +132,6 @@
             this.export.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(27, 22);
-            this.export.ToolTipText = "Export";
             // 
             // exportFormationsToolStripMenuItem
             // 
@@ -171,7 +168,7 @@
             this.resetFormationToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetFormationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetFormationToolStripMenuItem.Name = "resetFormationToolStripMenuItem";
-            this.resetFormationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetFormationToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.resetFormationToolStripMenuItem.Text = "Reset formation";
             this.resetFormationToolStripMenuItem.Click += new System.EventHandler(this.resetFormationToolStripMenuItem_Click);
             // 
@@ -180,7 +177,7 @@
             this.resetPackToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.resetPackToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetPackToolStripMenuItem.Name = "resetPackToolStripMenuItem";
-            this.resetPackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetPackToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.resetPackToolStripMenuItem.Text = "Reset pack";
             this.resetPackToolStripMenuItem.Click += new System.EventHandler(this.resetPackToolStripMenuItem_Click);
             // 
@@ -193,8 +190,7 @@
             this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(26, 22);
-            this.clear.ToolTipText = "Clear";
+            this.clear.Size = new System.Drawing.Size(28, 22);
             // 
             // clearFormationsToolStripMenuItem
             // 
@@ -219,25 +215,25 @@
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
             // 
-            // enableHelpTips
+            // helpTips
             // 
-            this.enableHelpTips.CheckOnClick = true;
-            this.enableHelpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
-            this.enableHelpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.enableHelpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.enableHelpTips.Name = "enableHelpTips";
-            this.enableHelpTips.Size = new System.Drawing.Size(23, 22);
-            this.enableHelpTips.ToolTipText = "Show Help Tips";
+            this.helpTips.CheckOnClick = true;
+            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpTips.Name = "helpTips";
+            this.helpTips.Size = new System.Drawing.Size(23, 22);
+            this.helpTips.ToolTipText = "Help Tips";
             // 
-            // showDecHex
+            // baseConvertor
             // 
-            this.showDecHex.CheckOnClick = true;
-            this.showDecHex.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.showDecHex.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showDecHex.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showDecHex.Name = "showDecHex";
-            this.showDecHex.Size = new System.Drawing.Size(23, 22);
-            this.showDecHex.ToolTipText = "Show Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.ToolTipText = "Base Convertor";
             // 
             // toolStripSeparator1
             // 
@@ -293,6 +289,7 @@
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "FormationsEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -325,8 +322,8 @@
         private System.Windows.Forms.ToolStripMenuItem clearPacksToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripButton enableHelpTips;
-        private System.Windows.Forms.ToolStripButton showDecHex;
+        private System.Windows.Forms.ToolStripButton helpTips;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem resetFormationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetPackToolStripMenuItem;

@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorldMaps));
-            this.mapPointName = new LAZYSHELL.ToolStripComboBox();
+            this.locationName = new LAZYSHELL.ToolStripComboBox();
             this.worldMapName = new System.Windows.Forms.ToolStripComboBox();
-            this.mapPointNum = new LAZYSHELL.ToolStripNumericUpDown();
+            this.locationNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.enableNorthPath = new System.Windows.Forms.CheckBox();
             this.enableWestPath = new System.Windows.Forms.CheckBox();
             this.enableSouthPath = new System.Windows.Forms.CheckBox();
@@ -49,7 +48,7 @@
             this.toSouthCheckBit = new System.Windows.Forms.NumericUpDown();
             this.toNorthCheckBit = new System.Windows.Forms.NumericUpDown();
             this.toNorthPoint = new System.Windows.Forms.ComboBox();
-            this.leadToMapPoint = new System.Windows.Forms.CheckBox();
+            this.leadToLocation = new System.Windows.Forms.CheckBox();
             this.label55 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.whichPointCheckAddress = new System.Windows.Forms.NumericUpDown();
@@ -58,8 +57,8 @@
             this.panel17 = new System.Windows.Forms.Panel();
             this.runEvent = new System.Windows.Forms.NumericUpDown();
             this.runEventEdit = new System.Windows.Forms.Button();
-            this.goMapPointA = new System.Windows.Forms.ComboBox();
-            this.goMapPointB = new System.Windows.Forms.ComboBox();
+            this.goLocationA = new System.Windows.Forms.ComboBox();
+            this.goLocationB = new System.Windows.Forms.ComboBox();
             this.worldMapYCoord = new System.Windows.Forms.NumericUpDown();
             this.label46 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -90,34 +89,34 @@
             this.buttonEditUndo = new System.Windows.Forms.ToolStripButton();
             this.buttonEditRedo = new System.Windows.Forms.ToolStripButton();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-            this.textBoxMapPoint = new System.Windows.Forms.ToolStripTextBox();
+            this.textBoxLocation = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.nameFreeSpace = new System.Windows.Forms.ToolStripLabel();
-            this.mapPointYCoord = new System.Windows.Forms.NumericUpDown();
+            this.locationYCoord = new System.Windows.Forms.NumericUpDown();
             this.label59 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.showCheckAddress = new System.Windows.Forms.NumericUpDown();
             this.showCheckBit = new System.Windows.Forms.NumericUpDown();
-            this.mapPointXCoord = new System.Windows.Forms.NumericUpDown();
+            this.locationXCoord = new System.Windows.Forms.NumericUpDown();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.import = new System.Windows.Forms.ToolStripButton();
             this.export = new System.Windows.Forms.ToolStripButton();
+            this.clear = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.resetWorldMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetMapPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clear = new System.Windows.Forms.ToolStripButton();
+            this.resetLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.helpTips = new System.Windows.Forms.ToolStripButton();
-            this.baseConversion = new System.Windows.Forms.ToolStripButton();
+            this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.music = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.showMapPoints = new System.Windows.Forms.ToolStripButton();
+            this.showLocations = new System.Windows.Forms.ToolStripButton();
             this.showBanner = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -157,10 +156,10 @@
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.toolStrip5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mapPointYCoord)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationYCoord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.showCheckAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.showCheckBit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mapPointXCoord)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationXCoord)).BeginInit();
             this.toolStrip4.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -170,24 +169,24 @@
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // mapPointName
+            // locationName
             // 
-            this.mapPointName.AutoSize = false;
-            this.mapPointName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.mapPointName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.mapPointName.DropDownHeight = 453;
-            this.mapPointName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapPointName.DropDownWidth = 170;
-            this.mapPointName.Font = this.worldMapName.Font;
-            this.mapPointName.ForeColor = this.worldMapName.ForeColor;
-            this.mapPointName.ItemHeight = 15;
-            this.mapPointName.Location = new System.Drawing.Point(7, 2);
-            this.mapPointName.Name = "mapPointName";
-            this.mapPointName.SelectedIndex = -1;
-            this.mapPointName.SelectedItem = null;
-            this.mapPointName.Size = new System.Drawing.Size(192, 21);
-            this.mapPointName.SelectedIndexChanged += new System.EventHandler(this.mapPointName_SelectedIndexChanged);
-            this.mapPointName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
+            this.locationName.AutoSize = false;
+            this.locationName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.locationName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.locationName.DropDownHeight = 453;
+            this.locationName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.locationName.DropDownWidth = 170;
+            this.locationName.Font = this.worldMapName.Font;
+            this.locationName.ForeColor = this.worldMapName.ForeColor;
+            this.locationName.ItemHeight = 15;
+            this.locationName.Location = new System.Drawing.Point(7, 2);
+            this.locationName.Name = "locationName";
+            this.locationName.SelectedIndex = -1;
+            this.locationName.SelectedItem = null;
+            this.locationName.Size = new System.Drawing.Size(192, 21);
+            this.locationName.SelectedIndexChanged += new System.EventHandler(this.locationName_SelectedIndexChanged);
+            this.locationName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.locationName_DrawItem);
             // 
             // worldMapName
             // 
@@ -210,38 +209,38 @@
             this.worldMapName.Size = new System.Drawing.Size(150, 25);
             this.worldMapName.SelectedIndexChanged += new System.EventHandler(this.worldMapName_SelectedIndexChanged);
             // 
-            // mapPointNum
+            // locationNum
             // 
-            this.mapPointNum.AutoSize = false;
-            this.mapPointNum.BackColor = this.worldMapName.BackColor;
-            this.mapPointNum.Font = this.worldMapName.Font;
-            this.mapPointNum.ForeColor = this.worldMapName.ForeColor;
-            this.mapPointNum.Hexadecimal = false;
-            this.mapPointNum.Increment = new decimal(new int[] {
+            this.locationNum.AutoSize = false;
+            this.locationNum.BackColor = this.worldMapName.BackColor;
+            this.locationNum.Font = this.worldMapName.Font;
+            this.locationNum.ForeColor = this.worldMapName.ForeColor;
+            this.locationNum.Hexadecimal = false;
+            this.locationNum.Increment = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.mapPointNum.Location = new System.Drawing.Point(199, 2);
-            this.mapPointNum.Maximum = new decimal(new int[] {
+            this.locationNum.Location = new System.Drawing.Point(199, 2);
+            this.locationNum.Maximum = new decimal(new int[] {
             55,
             0,
             0,
             0});
-            this.mapPointNum.Minimum = new decimal(new int[] {
+            this.locationNum.Minimum = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.mapPointNum.Name = "mapPointNum";
-            this.mapPointNum.Size = new System.Drawing.Size(60, 17);
-            this.mapPointNum.Text = "0";
-            this.mapPointNum.Value = new decimal(new int[] {
+            this.locationNum.Name = "locationNum";
+            this.locationNum.Size = new System.Drawing.Size(60, 17);
+            this.locationNum.Text = "0";
+            this.locationNum.Value = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.mapPointNum.ValueChanged += new System.EventHandler(this.mapPointNum_ValueChanged);
+            this.locationNum.ValueChanged += new System.EventHandler(this.locationNum_ValueChanged);
             // 
             // enableNorthPath
             // 
@@ -417,7 +416,7 @@
             this.toEastPoint.Name = "toEastPoint";
             this.toEastPoint.Size = new System.Drawing.Size(119, 21);
             this.toEastPoint.TabIndex = 1;
-            this.toEastPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
+            this.toEastPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.locationName_DrawItem);
             this.toEastPoint.SelectedIndexChanged += new System.EventHandler(this.toEastPoint_SelectedIndexChanged);
             // 
             // toEastCheckBit
@@ -448,7 +447,7 @@
             this.toWestPoint.Name = "toWestPoint";
             this.toWestPoint.Size = new System.Drawing.Size(119, 21);
             this.toWestPoint.TabIndex = 9;
-            this.toWestPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
+            this.toWestPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.locationName_DrawItem);
             this.toWestPoint.SelectedIndexChanged += new System.EventHandler(this.toWestPoint_SelectedIndexChanged);
             // 
             // toWestCheckBit
@@ -479,7 +478,7 @@
             this.toSouthPoint.Name = "toSouthPoint";
             this.toSouthPoint.Size = new System.Drawing.Size(119, 21);
             this.toSouthPoint.TabIndex = 5;
-            this.toSouthPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
+            this.toSouthPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.locationName_DrawItem);
             this.toSouthPoint.SelectedIndexChanged += new System.EventHandler(this.toSouthPoint_SelectedIndexChanged);
             // 
             // toSouthCheckBit
@@ -524,24 +523,24 @@
             this.toNorthPoint.Name = "toNorthPoint";
             this.toNorthPoint.Size = new System.Drawing.Size(119, 21);
             this.toNorthPoint.TabIndex = 13;
-            this.toNorthPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
+            this.toNorthPoint.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.locationName_DrawItem);
             this.toNorthPoint.SelectedIndexChanged += new System.EventHandler(this.toNorthPoint_SelectedIndexChanged);
             // 
-            // leadToMapPoint
+            // leadToLocation
             // 
-            this.leadToMapPoint.Appearance = System.Windows.Forms.Appearance.Button;
-            this.leadToMapPoint.BackColor = System.Drawing.SystemColors.Control;
-            this.leadToMapPoint.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.leadToMapPoint.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.leadToMapPoint.Location = new System.Drawing.Point(135, 13);
-            this.leadToMapPoint.Name = "leadToMapPoint";
-            this.leadToMapPoint.Size = new System.Drawing.Size(126, 21);
-            this.leadToMapPoint.TabIndex = 0;
-            this.leadToMapPoint.Text = "LOCATION";
-            this.leadToMapPoint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.leadToMapPoint.UseCompatibleTextRendering = true;
-            this.leadToMapPoint.UseVisualStyleBackColor = false;
-            this.leadToMapPoint.CheckedChanged += new System.EventHandler(this.leadToMapPoint_CheckedChanged);
+            this.leadToLocation.Appearance = System.Windows.Forms.Appearance.Button;
+            this.leadToLocation.BackColor = System.Drawing.SystemColors.Control;
+            this.leadToLocation.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.leadToLocation.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.leadToLocation.Location = new System.Drawing.Point(135, 13);
+            this.leadToLocation.Name = "leadToLocation";
+            this.leadToLocation.Size = new System.Drawing.Size(126, 21);
+            this.leadToLocation.TabIndex = 0;
+            this.leadToLocation.Text = "LOCATION";
+            this.leadToLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.leadToLocation.UseCompatibleTextRendering = true;
+            this.leadToLocation.UseVisualStyleBackColor = false;
+            this.leadToLocation.CheckedChanged += new System.EventHandler(this.leadToLocation_CheckedChanged);
             // 
             // label55
             // 
@@ -613,7 +612,7 @@
             // 
             this.panel17.Controls.Add(this.runEvent);
             this.panel17.Controls.Add(this.runEventEdit);
-            this.panel17.Controls.Add(this.goMapPointA);
+            this.panel17.Controls.Add(this.goLocationA);
             this.panel17.Location = new System.Drawing.Point(135, 59);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(126, 21);
@@ -648,39 +647,39 @@
             this.runEventEdit.UseVisualStyleBackColor = false;
             this.runEventEdit.Click += new System.EventHandler(this.runEventEdit_Click);
             // 
-            // goMapPointA
+            // goLocationA
             // 
-            this.goMapPointA.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.goMapPointA.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.goMapPointA.DropDownHeight = 340;
-            this.goMapPointA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.goMapPointA.DropDownWidth = 158;
-            this.goMapPointA.FormattingEnabled = true;
-            this.goMapPointA.IntegralHeight = false;
-            this.goMapPointA.ItemHeight = 15;
-            this.goMapPointA.Location = new System.Drawing.Point(0, 0);
-            this.goMapPointA.Name = "goMapPointA";
-            this.goMapPointA.Size = new System.Drawing.Size(126, 21);
-            this.goMapPointA.TabIndex = 2;
-            this.goMapPointA.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
-            this.goMapPointA.SelectedIndexChanged += new System.EventHandler(this.goMapPointA_SelectedIndexChanged);
+            this.goLocationA.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.goLocationA.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.goLocationA.DropDownHeight = 340;
+            this.goLocationA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.goLocationA.DropDownWidth = 158;
+            this.goLocationA.FormattingEnabled = true;
+            this.goLocationA.IntegralHeight = false;
+            this.goLocationA.ItemHeight = 15;
+            this.goLocationA.Location = new System.Drawing.Point(0, 0);
+            this.goLocationA.Name = "goLocationA";
+            this.goLocationA.Size = new System.Drawing.Size(126, 21);
+            this.goLocationA.TabIndex = 2;
+            this.goLocationA.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.locationName_DrawItem);
+            this.goLocationA.SelectedIndexChanged += new System.EventHandler(this.goLocationA_SelectedIndexChanged);
             // 
-            // goMapPointB
+            // goLocationB
             // 
-            this.goMapPointB.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.goMapPointB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.goMapPointB.DropDownHeight = 333;
-            this.goMapPointB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.goMapPointB.DropDownWidth = 158;
-            this.goMapPointB.FormattingEnabled = true;
-            this.goMapPointB.IntegralHeight = false;
-            this.goMapPointB.ItemHeight = 15;
-            this.goMapPointB.Location = new System.Drawing.Point(135, 80);
-            this.goMapPointB.Name = "goMapPointB";
-            this.goMapPointB.Size = new System.Drawing.Size(126, 21);
-            this.goMapPointB.TabIndex = 7;
-            this.goMapPointB.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mapPointName_DrawItem);
-            this.goMapPointB.SelectedIndexChanged += new System.EventHandler(this.goMapPointB_SelectedIndexChanged);
+            this.goLocationB.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.goLocationB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.goLocationB.DropDownHeight = 333;
+            this.goLocationB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.goLocationB.DropDownWidth = 158;
+            this.goLocationB.FormattingEnabled = true;
+            this.goLocationB.IntegralHeight = false;
+            this.goLocationB.ItemHeight = 15;
+            this.goLocationB.Location = new System.Drawing.Point(135, 80);
+            this.goLocationB.Name = "goLocationB";
+            this.goLocationB.Size = new System.Drawing.Size(126, 21);
+            this.goLocationB.TabIndex = 7;
+            this.goLocationB.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.locationName_DrawItem);
+            this.goLocationB.SelectedIndexChanged += new System.EventHandler(this.goLocationB_SelectedIndexChanged);
             // 
             // worldMapYCoord
             // 
@@ -1009,7 +1008,7 @@
             // toolStrip5
             // 
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.textBoxMapPoint,
+            this.textBoxLocation,
             this.toolStripSeparator9,
             this.nameFreeSpace});
             this.toolStrip5.Location = new System.Drawing.Point(3, 42);
@@ -1018,12 +1017,12 @@
             this.toolStrip5.Size = new System.Drawing.Size(261, 25);
             this.toolStrip5.TabIndex = 1;
             // 
-            // textBoxMapPoint
+            // textBoxLocation
             // 
-            this.textBoxMapPoint.Margin = new System.Windows.Forms.Padding(0);
-            this.textBoxMapPoint.Name = "textBoxMapPoint";
-            this.textBoxMapPoint.Size = new System.Drawing.Size(124, 25);
-            this.textBoxMapPoint.TextChanged += new System.EventHandler(this.textBoxMapPoint_TextChanged);
+            this.textBoxLocation.Margin = new System.Windows.Forms.Padding(0);
+            this.textBoxLocation.Name = "textBoxLocation";
+            this.textBoxLocation.Size = new System.Drawing.Size(124, 25);
+            this.textBoxLocation.TextChanged += new System.EventHandler(this.textBoxLocation_TextChanged);
             // 
             // toolStripSeparator9
             // 
@@ -1037,19 +1036,19 @@
             this.nameFreeSpace.Size = new System.Drawing.Size(88, 22);
             this.nameFreeSpace.Text = "0 characters left";
             // 
-            // mapPointYCoord
+            // locationYCoord
             // 
-            this.mapPointYCoord.Location = new System.Drawing.Point(209, 70);
-            this.mapPointYCoord.Maximum = new decimal(new int[] {
+            this.locationYCoord.Location = new System.Drawing.Point(209, 70);
+            this.locationYCoord.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.mapPointYCoord.Name = "mapPointYCoord";
-            this.mapPointYCoord.Size = new System.Drawing.Size(52, 21);
-            this.mapPointYCoord.TabIndex = 4;
-            this.mapPointYCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapPointYCoord.ValueChanged += new System.EventHandler(this.mapPointYCoord_ValueChanged);
+            this.locationYCoord.Name = "locationYCoord";
+            this.locationYCoord.Size = new System.Drawing.Size(52, 21);
+            this.locationYCoord.TabIndex = 4;
+            this.locationYCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.locationYCoord.ValueChanged += new System.EventHandler(this.locationYCoord_ValueChanged);
             // 
             // label59
             // 
@@ -1108,27 +1107,27 @@
             this.showCheckBit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.showCheckBit.ValueChanged += new System.EventHandler(this.showCheckBit_ValueChanged);
             // 
-            // mapPointXCoord
+            // locationXCoord
             // 
-            this.mapPointXCoord.Location = new System.Drawing.Point(135, 70);
-            this.mapPointXCoord.Maximum = new decimal(new int[] {
+            this.locationXCoord.Location = new System.Drawing.Point(135, 70);
+            this.locationXCoord.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.mapPointXCoord.Name = "mapPointXCoord";
-            this.mapPointXCoord.Size = new System.Drawing.Size(74, 21);
-            this.mapPointXCoord.TabIndex = 3;
-            this.mapPointXCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.mapPointXCoord.ValueChanged += new System.EventHandler(this.mapPointXCoord_ValueChanged);
+            this.locationXCoord.Name = "locationXCoord";
+            this.locationXCoord.Size = new System.Drawing.Size(74, 21);
+            this.locationXCoord.TabIndex = 3;
+            this.locationXCoord.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.locationXCoord.ValueChanged += new System.EventHandler(this.locationXCoord_ValueChanged);
             // 
             // toolStrip4
             // 
             this.toolStrip4.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip4.CanOverflow = false;
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mapPointName,
-            this.mapPointNum});
+            this.locationName,
+            this.locationNum});
             this.toolStrip4.Location = new System.Drawing.Point(3, 17);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -1143,11 +1142,11 @@
             this.toolStripSeparator4,
             this.import,
             this.export,
-            this.toolStripDropDownButton1,
             this.clear,
+            this.toolStripDropDownButton1,
             this.toolStripSeparator8,
             this.helpTips,
-            this.baseConversion,
+            this.baseConvertor,
             this.toolStripSeparator10,
             this.toolStripLabel1,
             this.music});
@@ -1192,12 +1191,22 @@
             this.export.ToolTipText = "Export";
             this.export.Click += new System.EventHandler(this.export_Click);
             // 
+            // clear
+            // 
+            this.clear.Image = global::LAZYSHELL.Properties.Resources.clear_small;
+            this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(23, 22);
+            this.clear.ToolTipText = "Clear";
+            this.clear.Click += new System.EventHandler(this.clear_Click);
+            // 
             // toolStripDropDownButton1
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resetWorldMapToolStripMenuItem,
-            this.resetMapPointToolStripMenuItem});
+            this.resetLocationToolStripMenuItem});
             this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.reset;
             this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -1213,24 +1222,14 @@
             this.resetWorldMapToolStripMenuItem.Text = "Reset world map";
             this.resetWorldMapToolStripMenuItem.Click += new System.EventHandler(this.resetWorldMapToolStripMenuItem_Click);
             // 
-            // resetMapPointToolStripMenuItem
+            // resetLocationToolStripMenuItem
             // 
-            this.resetMapPointToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.resetMapPointToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.resetMapPointToolStripMenuItem.Name = "resetMapPointToolStripMenuItem";
-            this.resetMapPointToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.resetMapPointToolStripMenuItem.Text = "Reset map point";
-            this.resetMapPointToolStripMenuItem.Click += new System.EventHandler(this.resetMapPointToolStripMenuItem_Click);
-            // 
-            // clear
-            // 
-            this.clear.Image = global::LAZYSHELL.Properties.Resources.clear_small;
-            this.clear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(23, 22);
-            this.clear.ToolTipText = "Clear";
-            this.clear.Click += new System.EventHandler(this.clear_Click);
+            this.resetLocationToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.resetLocationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.resetLocationToolStripMenuItem.Name = "resetLocationToolStripMenuItem";
+            this.resetLocationToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.resetLocationToolStripMenuItem.Text = "Reset map point";
+            this.resetLocationToolStripMenuItem.Click += new System.EventHandler(this.resetLocationToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
@@ -1246,18 +1245,18 @@
             this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.helpTips.Name = "helpTips";
             this.helpTips.Size = new System.Drawing.Size(23, 22);
-            this.helpTips.Text = "Show Help Tips";
+            this.helpTips.Text = "Help Tips";
             // 
-            // baseConversion
+            // baseConvertor
             // 
-            this.baseConversion.CheckOnClick = true;
-            this.baseConversion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.baseConversion.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
-            this.baseConversion.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.baseConversion.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.baseConversion.Name = "baseConversion";
-            this.baseConversion.Size = new System.Drawing.Size(23, 22);
-            this.baseConversion.Text = "Show Base Conversion";
+            this.baseConvertor.CheckOnClick = true;
+            this.baseConvertor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.baseConvertor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.baseConvertor.Name = "baseConvertor";
+            this.baseConvertor.Size = new System.Drawing.Size(23, 22);
+            this.baseConvertor.Text = "Base Convertor";
             // 
             // toolStripSeparator10
             // 
@@ -1288,7 +1287,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.worldMapName,
             this.toolStripSeparator3,
-            this.showMapPoints,
+            this.showLocations,
             this.showBanner,
             this.toolStripSeparator2,
             this.toolStripDropDownButton2,
@@ -1308,16 +1307,16 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
-            // showMapPoints
+            // showLocations
             // 
-            this.showMapPoints.CheckOnClick = true;
-            this.showMapPoints.Image = global::LAZYSHELL.Properties.Resources.mapPoint;
-            this.showMapPoints.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showMapPoints.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showMapPoints.Name = "showMapPoints";
-            this.showMapPoints.Size = new System.Drawing.Size(23, 22);
-            this.showMapPoints.ToolTipText = "Show Locations";
-            this.showMapPoints.Click += new System.EventHandler(this.showMapPoints_Click);
+            this.showLocations.CheckOnClick = true;
+            this.showLocations.Image = global::LAZYSHELL.Properties.Resources.location;
+            this.showLocations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showLocations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.showLocations.Name = "showLocations";
+            this.showLocations.Size = new System.Drawing.Size(23, 22);
+            this.showLocations.ToolTipText = "Show Locations";
+            this.showLocations.Click += new System.EventHandler(this.showLocations_Click);
             // 
             // showBanner
             // 
@@ -1429,7 +1428,7 @@
             this.buttonToggleCartGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonToggleCartGrid.Name = "buttonToggleCartGrid";
             this.buttonToggleCartGrid.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleCartGrid.ToolTipText = "Show / Hide Grid";
+            this.buttonToggleCartGrid.ToolTipText = "Tile Grid";
             this.buttonToggleCartGrid.Click += new System.EventHandler(this.buttonToggleCartGrid_Click);
             // 
             // buttonToggleBG
@@ -1441,7 +1440,6 @@
             this.buttonToggleBG.Name = "buttonToggleBG";
             this.buttonToggleBG.Size = new System.Drawing.Size(23, 22);
             this.buttonToggleBG.Text = "BG";
-            this.buttonToggleBG.ToolTipText = "Show / Hide Background Color";
             this.buttonToggleBG.Click += new System.EventHandler(this.buttonToggleBG_Click);
             // 
             // toolTip1
@@ -1491,11 +1489,11 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.leadToMapPoint);
+            this.groupBox3.Controls.Add(this.leadToLocation);
             this.groupBox3.Controls.Add(this.label52);
             this.groupBox3.Controls.Add(this.panel17);
             this.groupBox3.Controls.Add(this.whichPointCheckBit);
-            this.groupBox3.Controls.Add(this.goMapPointB);
+            this.groupBox3.Controls.Add(this.goLocationB);
             this.groupBox3.Controls.Add(this.whichPointCheckAddress);
             this.groupBox3.Controls.Add(this.label56);
             this.groupBox3.Controls.Add(this.label55);
@@ -1508,20 +1506,20 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.mapPointYCoord);
+            this.groupBox4.Controls.Add(this.locationYCoord);
             this.groupBox4.Controls.Add(this.toolStrip5);
             this.groupBox4.Controls.Add(this.showCheckAddress);
             this.groupBox4.Controls.Add(this.label59);
             this.groupBox4.Controls.Add(this.showCheckBit);
             this.groupBox4.Controls.Add(this.toolStrip4);
-            this.groupBox4.Controls.Add(this.mapPointXCoord);
+            this.groupBox4.Controls.Add(this.locationXCoord);
             this.groupBox4.Controls.Add(this.label45);
             this.groupBox4.Location = new System.Drawing.Point(293, 53);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(267, 118);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Map Point Properties";
+            this.groupBox4.Text = "Location Properties";
             // 
             // WorldMaps
             // 
@@ -1538,6 +1536,7 @@
             this.Controls.Add(this.toolStrip3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.KeyPreview = true;
             this.Name = "WorldMaps";
             this.Text = "WORLD MAPS - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WorldMaps_FormClosing);
@@ -1564,10 +1563,10 @@
             this.toolStrip2.PerformLayout();
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mapPointYCoord)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationYCoord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.showCheckAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.showCheckBit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mapPointXCoord)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationXCoord)).EndInit();
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
@@ -1604,7 +1603,7 @@
         private System.Windows.Forms.NumericUpDown toSouthCheckBit;
         private System.Windows.Forms.NumericUpDown toNorthCheckBit;
         private System.Windows.Forms.ComboBox toNorthPoint;
-        private System.Windows.Forms.CheckBox leadToMapPoint;
+        private System.Windows.Forms.CheckBox leadToLocation;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.NumericUpDown whichPointCheckAddress;
@@ -1613,8 +1612,8 @@
         private System.Windows.Forms.Panel panel17;
         private System.Windows.Forms.Button runEventEdit;
         private System.Windows.Forms.NumericUpDown runEvent;
-        private System.Windows.Forms.ComboBox goMapPointA;
-        private System.Windows.Forms.ComboBox goMapPointB;
+        private System.Windows.Forms.ComboBox goLocationA;
+        private System.Windows.Forms.ComboBox goLocationB;
         private System.Windows.Forms.Panel panel26;
         private System.Windows.Forms.PictureBox pictureBoxTileset;
         private System.Windows.Forms.NumericUpDown worldMapYCoord;
@@ -1627,9 +1626,9 @@
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.NumericUpDown showCheckAddress;
         private System.Windows.Forms.NumericUpDown showCheckBit;
-        private System.Windows.Forms.NumericUpDown mapPointYCoord;
+        private System.Windows.Forms.NumericUpDown locationYCoord;
         private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.NumericUpDown mapPointXCoord;
+        private System.Windows.Forms.NumericUpDown locationXCoord;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton save;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -1639,7 +1638,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripComboBox worldMapName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton showMapPoints;
+        private System.Windows.Forms.ToolStripButton showLocations;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton openTileEditor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -1666,17 +1665,17 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem saveImageToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip4;
-        private System.Windows.Forms.ToolStripTextBox textBoxMapPoint;
-        private LAZYSHELL.ToolStripComboBox mapPointName;
-        private ToolStripNumericUpDown mapPointNum;
+        private System.Windows.Forms.ToolStripTextBox textBoxLocation;
+        private LAZYSHELL.ToolStripComboBox locationName;
+        private ToolStripNumericUpDown locationNum;
         private System.Windows.Forms.ToolStrip toolStrip5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripButton helpTips;
-        private System.Windows.Forms.ToolStripButton baseConversion;
+        private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem resetWorldMapToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem resetMapPointToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetLocationToolStripMenuItem;
         private System.Windows.Forms.ToolStripLabel nameFreeSpace;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripComboBox music;

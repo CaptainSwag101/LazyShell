@@ -10,29 +10,39 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Overworld : Form
+    public partial class Menus : Form
     {
         #region Variables
         private long checksum { get { return menusEditor.Checksum; } set { menusEditor.Checksum = value; } }
         // main
         private delegate void Function();
-        private int index { get { return menuName.SelectedIndex; } set { menuName.SelectedIndex = value; } }
+        private MenuType index
+        {
+            get
+            {
+                return (MenuType)menuName.SelectedIndex;
+            }
+            set
+            {
+                menuName.SelectedIndex = (int)value;
+            }
+        }
         private PaletteSet bgPaletteSet
         {
             get
             {
-                if (index == 0)
+                if (index == MenuType.GameSelect)
                     return Model.GameSelectBGPalette;
-                else if (index < 8)
+                else if (index < MenuType.Shop)
                     return Model.MenuBGPalette;
                 else
                     return Model.ShopBGPalette;
             }
             set
             {
-                if (index == 0)
+                if (index == MenuType.GameSelect)
                     Model.GameSelectBGPalette = value;
-                else if (index < 8)
+                else if (index < MenuType.Shop)
                     Model.MenuBGPalette = value;
                 else
                     Model.ShopBGPalette = value;
@@ -42,14 +52,14 @@ namespace LAZYSHELL
         {
             get
             {
-                if (index == 0)
+                if (index == MenuType.GameSelect)
                     return Model.GameSelectPaletteSet;
                 else
                     return Model.FontPaletteMenu;
             }
             set
             {
-                if (index == 0)
+                if (index == MenuType.GameSelect)
                     Model.GameSelectPaletteSet = value;
                 else
                     Model.FontPaletteMenu = value;
@@ -59,14 +69,14 @@ namespace LAZYSHELL
         {
             get
             {
-                if (index == 0)
+                if (index == MenuType.GameSelect)
                     return Model.GameSelectGraphics;
                 else
                     return Model.MenuFrameGraphics;
             }
             set
             {
-                if (index == 0)
+                if (index == MenuType.GameSelect)
                     Model.GameSelectGraphics = value;
                 else
                     Model.MenuFrameGraphics = value;
@@ -108,7 +118,7 @@ namespace LAZYSHELL
         private PaletteEditor speakersPaletteEditor;
         private GraphicEditor speakersGraphicEditor;
         #endregion
-        public Overworld(MenusEditor menusEditor)
+        public Menus(MenusEditor menusEditor)
         {
             this.menusEditor = menusEditor;
             InitializeComponent();
@@ -122,7 +132,7 @@ namespace LAZYSHELL
             cursorName.SelectedIndex = 0;
             //
             updating = true;
-            index = 0;
+            index = MenuType.GameSelect;
             updating = false;
             //
             SetAllyImages();
@@ -145,7 +155,7 @@ namespace LAZYSHELL
             cursorName.SelectedIndex = 0;
             //
             updating = true;
-            index = 0;
+            index = MenuType.GameSelect;
             updating = false;
             //
             SetAllyImages();
@@ -161,13 +171,13 @@ namespace LAZYSHELL
         #region Functions
         private void RefreshMenu()
         {
-            toolStrip2.Visible = index == 0;
-            music.Visible = index == 0;
-            labelMusic.Visible = index == 0;
-            toolStripSeparator2.Visible = index == 0;
-            importFGToolStripMenuItem.Text = index == 0 ? "Import Foreground" : "Import Frame";
-            openPalettesFG.Text = index == 0 ? "Foreground Palettes" : "Frame Palette";
-            openGraphicsFG.Text = index == 0 ? "Foreground Graphics" : "Frame Graphics";
+            toolStrip2.Visible = index == MenuType.GameSelect;
+            music.Visible = index == MenuType.GameSelect;
+            labelMusic.Visible = index == MenuType.GameSelect;
+            toolStripSeparator2.Visible = index == MenuType.GameSelect;
+            importFGToolStripMenuItem.Text = index == MenuType.GameSelect ? "Import Foreground" : "Import Frame";
+            openPalettesFG.Text = index == MenuType.GameSelect ? "Foreground Palettes" : "Frame Palette";
+            openGraphicsFG.Text = index == MenuType.GameSelect ? "Foreground Graphics" : "Frame Graphics";
             if (bgGraphicEditor != null)
                 LoadBGGraphicEditor();
             if (fgGraphicEditor != null)
@@ -232,9 +242,9 @@ namespace LAZYSHELL
         }
         private void SetBackgroundImage()
         {
-            if (index == 0)
+            if (index == MenuType.GameSelect)
                 bgImage = Model.GameBG;
-            else if (index < 8)
+            else if (index < MenuType.Shop)
                 bgImage = Model.MenuBG;
             else
                 bgImage = Model.ShopBG;
@@ -242,7 +252,7 @@ namespace LAZYSHELL
         }
         private void SetForegroundImage()
         {
-            if (index == 0)
+            if (index == MenuType.GameSelect)
             {
                 Tile[] tileset = new MenuTileset(fgPaletteSet, Model.GameSelectTileset, fgGraphics).Tileset;
                 int[] pixels = Do.TilesetToPixels(tileset, 16, 16, 0, false);
@@ -268,13 +278,13 @@ namespace LAZYSHELL
         }
         private void SetPreviewImage()
         {
-            if (index == 0)
+            if (index == MenuType.GameSelect)
             {
                 pictureBoxPreview.Invalidate();
                 return;
             }
             int[] bgPixels;
-            if (index < 8)
+            if (index < MenuType.Shop)
                 bgPixels = Do.ImageToPixels(Model.MenuBG);
             else
                 bgPixels = Do.ImageToPixels(Model.ShopBG);
@@ -290,7 +300,7 @@ namespace LAZYSHELL
                         new Rectangle(144, 127, 12, 11)
                     };
                     break;
-                case 2: frames = new Rectangle[] // Overworld - Items
+                case MenuType.OverworldItem: frames = new Rectangle[] // Overworld - Items
                     {
                         new Rectangle(8, 7, 15, 6),
                         new Rectangle(8, 55, 15, 6),
@@ -300,7 +310,7 @@ namespace LAZYSHELL
                         new Rectangle(128, 7, 17, 25)
                     };
                     break;
-                case 3: frames = new Rectangle[] // Overworld - status
+                case MenuType.OverworldStatus: frames = new Rectangle[] // Overworld - status
                     {
                         new Rectangle(8, 7, 15, 6),
                         new Rectangle(8, 55, 15, 6),
@@ -308,7 +318,7 @@ namespace LAZYSHELL
                         new Rectangle(128, 7, 15, 25)
                     };
                     break;
-                case 4: frames = new Rectangle[] // Overworld - special
+                case MenuType.OverworldSpecial: frames = new Rectangle[] // Overworld - special
                     {
                         new Rectangle(8, 7, 15, 6),
                         new Rectangle(8, 55, 15, 6),
@@ -318,7 +328,7 @@ namespace LAZYSHELL
                         new Rectangle(128, 127, 15, 11)
                     };
                     break;
-                case 5: frames = new Rectangle[] // Overworld - equip
+                case MenuType.OverworldEquip: frames = new Rectangle[] // Overworld - equip
                     {
                         new Rectangle(0, 7, 17, 6),
                         new Rectangle(0, 55, 17, 6),
@@ -327,13 +337,13 @@ namespace LAZYSHELL
                         new Rectangle(136, 7, 17, 25)
                     };
                     break;
-                case 6: frames = new Rectangle[] // Overworld - special item
+                case MenuType.OverworldSpecialItem: frames = new Rectangle[] // Overworld - special item
                     {
                         new Rectangle(8, 39, 30, 14),
                         new Rectangle(64, 151, 16, 6)
                     };
                     break;
-                case 7: frames = new Rectangle[] // Overworld - switch
+                case MenuType.OverworldSwitch: frames = new Rectangle[] // Overworld - switch
                     {
                         new Rectangle(8, 7, 15, 6),
                         new Rectangle(8, 55, 15, 6),
@@ -343,27 +353,27 @@ namespace LAZYSHELL
                         new Rectangle(136, 159, 13, 6)
                     };
                     break;
-                case 8: frames = new Rectangle[] // Shop
+                case MenuType.Shop: frames = new Rectangle[] // Shop
                     {
                         new Rectangle(8, 7, 15, 8),
                         new Rectangle(8, 79, 15, 3),
                         new Rectangle(128, 7, 15, 26)
                     };
                     break;
-                case 9: frames = new Rectangle[] // Shop - buy
+                case MenuType.ShopBuy: frames = new Rectangle[] // Shop - buy
                     {
                         new Rectangle(8, 7, 15, 15),
                         new Rectangle(8, 127, 15, 8),
                         new Rectangle(128, 7, 15, 25)
                     };
                     break;
-                case 10: frames = new Rectangle[] // Shop - sell items
+                case MenuType.ShopSellItems: frames = new Rectangle[] // Shop - sell items
                     {
                         new Rectangle(8, 7, 15, 15),
                         new Rectangle(128, 7, 17, 25)
                     };
                     break;
-                case 11: frames = new Rectangle[] // Shop - sell weapons
+                case MenuType.ShopSellWeapons: frames = new Rectangle[] // Shop - sell weapons
                     {
                         new Rectangle(8, 7, 15, 15),
                         new Rectangle(8, 127, 15, 8),
@@ -388,7 +398,7 @@ namespace LAZYSHELL
                     textObjects.Add(new TextObject(111, 47, 136));
                     textObjects.Add(new TextObject(112, 47, 176));
                     break;
-                case 8:
+                case MenuType.Shop:
                     textObjects.Add(new TextObject(76, 23, 12));
                     textObjects.Add(new TextObject(77, 23, 24));
                     textObjects.Add(new TextObject(78, 23, 36));
@@ -397,19 +407,19 @@ namespace LAZYSHELL
                     textObjects.Add(new TextObject(27, 23, 84));
                     textObjects.Add(new TextObject(32, 23, 192));
                     break;
-                case 9:
+                case MenuType.ShopBuy:
                     textObjects.Add(new TextObject(76, 15, 12));
                     textObjects.Add(new TextObject(80, 15, 72));
                     textObjects.Add(new TextObject(27, 15, 96));
                     textObjects.Add(new TextObject(79, 15, 108));
                     break;
-                case 10:
+                case MenuType.ShopSellItems:
                     textObjects.Add(new TextObject(77, 15, 12));
                     textObjects.Add(new TextObject(80, 15, 72));
                     textObjects.Add(new TextObject(27, 15, 96));
                     textObjects.Add(new TextObject(79, 15, 108));
                     break;
-                case 11:
+                case MenuType.ShopSellWeapons:
                     textObjects.Add(new TextObject(78, 15, 12));
                     textObjects.Add(new TextObject(80, 15, 72));
                     textObjects.Add(new TextObject(27, 15, 96));
@@ -422,7 +432,7 @@ namespace LAZYSHELL
                     textObjects.Add(new TextObject(12, 39, 84));
                     textObjects.Add(new TextObject(31, 39, 120));
                     textObjects.Add(new TextObject(12, 39, 132));
-                    if (index == 1) // Overworld - main
+                    if (index == MenuType.OverworldMain) // Overworld - main
                     {
                         textObjects.Add(new TextObject(1, 143, 12));
                         textObjects.Add(new TextObject(3, 143, 24));
@@ -438,11 +448,11 @@ namespace LAZYSHELL
                         textObjects.Add(new TextObject(27, 151, 156));
                         textObjects.Add(new TextObject(56, 151, 180));
                     }
-                    else if (index == 2) // Overworld - items
+                    else if (index == MenuType.OverworldItem) // Overworld - items
                     {
                         textObjects.Add(new TextObject(55, 15, 156));
                     }
-                    else if (index == 3) // Overworld - status
+                    else if (index == MenuType.OverworldStatus) // Overworld - status
                     {
                         textObjects.Add(new TextObject(19, 168, 12));
                         textObjects.Add(new TextObject(15, 160, 48));
@@ -451,11 +461,11 @@ namespace LAZYSHELL
                         textObjects.Add(new TextObject(18, 135, 120));
                         textObjects.Add(new TextObject(14, 135, 156));
                     }
-                    else if (index == 4) // Overworld - special
+                    else if (index == MenuType.OverworldSpecial) // Overworld - special
                     {
                         textObjects.Add(new TextObject(55, 135, 108));
                     }
-                    else if (index == 7) // Overworld - switch
+                    else if (index == MenuType.OverworldSwitch) // Overworld - switch
                     {
                         textObjects.Add(new TextObject(31, 159, 72));
                         textObjects.Add(new TextObject(12, 159, 84));
@@ -496,7 +506,7 @@ namespace LAZYSHELL
         {
             if (fgPaletteEditor == null)
             {
-                if (index == 0)
+                if (index == MenuType.GameSelect)
                     fgPaletteEditor = new PaletteEditor(new Function(FGPaletteUpdate), fgPaletteSet, 16, 1, 5);
                 else
                     fgPaletteEditor = new PaletteEditor(new Function(FGPaletteUpdate), fgPaletteSet, 1, 0, 1);
@@ -504,7 +514,7 @@ namespace LAZYSHELL
             }
             else
             {
-                if (index == 0)
+                if (index == MenuType.GameSelect)
                     fgPaletteEditor.Reload(new Function(FGPaletteUpdate), fgPaletteSet, 16, 1, 5);
                 else
                     fgPaletteEditor.Reload(new Function(FGPaletteUpdate), fgPaletteSet, 1, 0, 1);
@@ -515,12 +525,12 @@ namespace LAZYSHELL
             if (fgGraphicEditor == null)
             {
                 fgGraphicEditor = new GraphicEditor(new Function(FGGraphicUpdate),
-                    fgGraphics, fgGraphics.Length, 0, fgPaletteSet, 0, (byte)(index == 0 ? 0x20 : 0x10));
+                    fgGraphics, fgGraphics.Length, 0, fgPaletteSet, 0, (byte)(index == MenuType.GameSelect ? 0x20 : 0x10));
                 fgGraphicEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
                 fgGraphicEditor.Reload(new Function(FGGraphicUpdate),
-                    fgGraphics, fgGraphics.Length, 0, fgPaletteSet, 0, (byte)(index == 0 ? 0x20 : 0x10));
+                    fgGraphics, fgGraphics.Length, 0, fgPaletteSet, 0, (byte)(index == MenuType.GameSelect ? 0x20 : 0x10));
         }
         private void LoadCursorsPaletteEditor()
         {
@@ -664,7 +674,7 @@ namespace LAZYSHELL
         }
         private void ImportForeground(Bitmap import)
         {
-            if (index == 0)
+            if (index == MenuType.GameSelect)
             {
                 if (import.Width > 256 || import.Height > 256)
                 {
@@ -849,7 +859,7 @@ namespace LAZYSHELL
         }
         private void pictureBoxPreview_Paint(object sender, PaintEventArgs e)
         {
-            if (index != 0 && previewImage != null)
+            if (index != MenuType.GameSelect && previewImage != null)
                 e.Graphics.DrawImage(previewImage, 0, 0);
             int[] pal = Model.FontPaletteMenu.Palette;
             MenuTextPreview pre = new MenuTextPreview();
@@ -876,7 +886,7 @@ namespace LAZYSHELL
                         SetCursorImage();
                     e.Graphics.DrawImage(cursorImage, 28, 55);
                     break;
-                case 5: // Overworld - equip
+                case MenuType.OverworldEquip: // Overworld - equip
                     if (allyImages != null)
                     {
                         e.Graphics.DrawImage(allyImages[0], 16 - 128, 12 - 96 - 1);
@@ -902,11 +912,11 @@ namespace LAZYSHELL
                         e.Graphics.DrawImage(cursorImages[4], 60, 141);
                     }
                     break;
-                case 6: // Overworld - special item
+                case MenuType.OverworldSpecialItem: // Overworld - special item
                     if (cursorImages != null)
                         e.Graphics.DrawImage(cursorImages[0], 0, 49);
                     break;
-                case 8: // Shop
+                case MenuType.Shop: // Shop
                     Do.DrawText(Model.MenuTexts[76].ToString(), 23, 12, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText(Model.MenuTexts[77].ToString(), 23, 24, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText(Model.MenuTexts[78].ToString(), 23, 36, e.Graphics, pre, Model.FontMenu, pal);
@@ -917,7 +927,7 @@ namespace LAZYSHELL
                     Do.DrawText("999", 87, 84, e.Graphics, pre, Model.FontMenu, pal);
                     e.Graphics.DrawImage(cursorImages[0], 4, 13);
                     break;
-                case 9: // Shop - Buy
+                case MenuType.ShopBuy: // Shop - Buy
                     Do.DrawText(Model.MenuTexts[76].ToString(), 15, 12, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText(Model.MenuTexts[80].ToString(), 15, 72, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText("999", 95, 72, e.Graphics, pre, Model.FontMenu, pal);
@@ -927,7 +937,7 @@ namespace LAZYSHELL
                     Do.DrawText("99", 103, 108, e.Graphics, pre, Model.FontMenu, pal);
                     e.Graphics.DrawImage(cursorImages[0], 116, 13);
                     break;
-                case 10: // Shop - Sell Items
+                case MenuType.ShopSellItems: // Shop - Sell Items
                     Do.DrawText(Model.MenuTexts[77].ToString(), 15, 12, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText(Model.MenuTexts[80].ToString(), 15, 72, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText("999", 95, 72, e.Graphics, pre, Model.FontMenu, pal);
@@ -937,7 +947,7 @@ namespace LAZYSHELL
                     Do.DrawText("99", 103, 108, e.Graphics, pre, Model.FontMenu, pal);
                     e.Graphics.DrawImage(cursorImages[0], 116, 13);
                     break;
-                case 11: // Shop - Sell Weapons
+                case MenuType.ShopSellWeapons: // Shop - Sell Weapons
                     Do.DrawText(Model.MenuTexts[78].ToString(), 15, 12, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText(Model.MenuTexts[80].ToString(), 15, 72, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText("999", 95, 72, e.Graphics, pre, Model.FontMenu, pal);
@@ -973,7 +983,7 @@ namespace LAZYSHELL
                     Do.DrawText("30          ", 71, 120, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText("195/195     ", 63, 132, e.Graphics, pre, Model.FontMenu, pal);
                     //
-                    if (index == 1) // Overworld - main
+                    if (index == MenuType.OverworldMain) // Overworld - main
                     {
                         Do.DrawText(Model.MenuTexts[1].ToString(), 143, 12, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText(Model.MenuTexts[3].ToString(), 143, 24, e.Graphics, pre, Model.FontMenu, pal);
@@ -995,7 +1005,7 @@ namespace LAZYSHELL
                         if (cursorImages != null)
                             e.Graphics.DrawImage(cursorImages[0], 124, 13);
                     }
-                    else if (index == 2) // Overworld - items
+                    else if (index == MenuType.OverworldItem) // Overworld - items
                     {
                         Do.DrawText(Model.MenuTexts[55].ToString(), 15, 156, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText("99/99       ", 79, 156, e.Graphics, pre, Model.FontMenu, pal);
@@ -1005,7 +1015,7 @@ namespace LAZYSHELL
                             e.Graphics.DrawImage(cursorImages[1], 232, 191);
                         }
                     }
-                    else if (index == 3) // Overworld - status
+                    else if (index == MenuType.OverworldStatus) // Overworld - status
                     {
                         Do.DrawText(Model.MenuTexts[19].ToString(), 168, 12, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText(Model.MenuTexts[15].ToString(), 160, 48, e.Graphics, pre, Model.FontMenu, pal);
@@ -1026,7 +1036,7 @@ namespace LAZYSHELL
                         if (cursorImages != null)
                             e.Graphics.DrawImage(cursorImages[0], 4, 23);
                     }
-                    else if (index == 4) // Overworld - special
+                    else if (index == MenuType.OverworldSpecial) // Overworld - special
                     {
                         Do.DrawText(Model.MenuTexts[55].ToString(), 135, 108, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText("99/99       ", 200, 108, e.Graphics, pre, Model.FontMenu, pal);
@@ -1039,7 +1049,7 @@ namespace LAZYSHELL
                         if (cursorImages != null)
                             e.Graphics.DrawImage(cursorImages[0], 4, 23);
                     }
-                    else if (index == 7) // Overworld - switch
+                    else if (index == MenuType.OverworldSwitch) // Overworld - switch
                     {
                         if (allyImages != null)
                         {

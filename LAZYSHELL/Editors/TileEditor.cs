@@ -41,6 +41,9 @@ namespace LAZYSHELL
             this.format = format;
             InitializeTile();
             subtileStatus.Enabled = !disableattr;
+            Do.AddShortcut(toolStrip1, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip1, Keys.F2, baseConvertor);
+            new ToolTipLabel(this, baseConvertor, helpTips);
         }
         public TileEditor(Delegate update, Tile tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {
@@ -51,6 +54,9 @@ namespace LAZYSHELL
             this.paletteSet = paletteSet;
             this.format = format;
             InitializeTile();
+            Do.AddShortcut(toolStrip1, Keys.F1, helpTips);
+            Do.AddShortcut(toolStrip1, Keys.F2, baseConvertor);
+            new ToolTipLabel(this, baseConvertor, helpTips);
         }
         public void Reload(Delegate update, Tile tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {

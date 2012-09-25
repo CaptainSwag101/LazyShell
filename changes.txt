@@ -1,5 +1,34 @@
 Major changes/additions are indicated by ***
 
+v3.14.0 (2012-09-24)
+--------------------------------------
+Additions:
+***NEW Help Database in XML format create***
+*Animations: expand/collapse all nodes in treeview
+*Audio: undo/redo for score writer
+*Audio: now shows ties for hold notes for score viewer/writer
+
+Changes:
+*Updated import elements from another ROM to newer interface
+*Updated help tooltips, now uses XML in resources
+*Dialogues: font table's letter index label now fixed below
+*Dialogues: importing, encoding dialogues now 5x faster
+*Sprites: sequence frames and playback are now cropped
+
+Fixes:
+*Graphics editor wasn't importing images relative to user-adjusted width
+*Forgot to set cursors to NewCursors class, graphics editor crashed
+*Keystrokes should have had 256 indexes to prevent out of bounds crash
+*Audio: score writer was writing rests for B# and not C
+*Audio: play SFX command not loading correct lists for battle/event SFX
+*Audio: crash if import MML into cleared SPC
+*Dialogues: not writing pointers to DTE correctly when saving
+*Dialogues: applying DTE changes not decoding from *old* DTE to new DTE
+*Monsters: psychopath buttons disappeared off toolstrip
+*Monsters: pause frames button not doing anything
+*Spells: spell descriptions not using description keystrokes table
+
+
 v3.13.0 (2012-09-07)
 --------------------------------------
 Additions:

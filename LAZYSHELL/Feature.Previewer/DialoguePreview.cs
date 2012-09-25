@@ -12,7 +12,7 @@ namespace LAZYSHELL
         private FontCharacter[] fontTriangles;
         private int[] palette;
         private int[] palette_t;
-        private DialogueTable[] tables { get { return Model.DialogueTables; } }
+        private DTE[] tables { get { return Model.DTE; } }
         private Point p;
         private int next = 0;
         private bool drawPageBreak;
@@ -146,7 +146,7 @@ namespace LAZYSHELL
             {
                 if (dlg[i] >= 0x0E && dlg[i] <= 0x19)
                 {
-                    n.AddRange(tables[dlg[i] - 0x0E].RawDialogue);
+                    n.AddRange(tables[dlg[i] - 0x0E].Dialogue);
                     continue;
                 }
                 switch ((byte)dlg[i])

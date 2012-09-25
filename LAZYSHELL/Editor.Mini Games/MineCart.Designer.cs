@@ -31,10 +31,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.levelName = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.resetAllObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetCurrentTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetCurrentTilemapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.startX = new LAZYSHELL.ToolStripNumericUpDown();
@@ -113,7 +109,6 @@
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.levelName,
-            this.toolStripDropDownButton3,
             this.toolStripSeparator1,
             this.toolStripLabel5,
             this.startX,
@@ -147,47 +142,6 @@
             this.levelName.Size = new System.Drawing.Size(214, 25);
             this.levelName.SelectedIndexChanged += new System.EventHandler(this.levelName_SelectedIndexChanged);
             // 
-            // toolStripDropDownButton3
-            // 
-            this.toolStripDropDownButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resetAllObjectsToolStripMenuItem,
-            this.resetCurrentTilesetToolStripMenuItem,
-            this.resetCurrentTilemapToolStripMenuItem});
-            this.toolStripDropDownButton3.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.toolStripDropDownButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
-            this.toolStripDropDownButton3.Size = new System.Drawing.Size(27, 22);
-            this.toolStripDropDownButton3.Text = "toolStripDropDownButton3";
-            // 
-            // resetAllObjectsToolStripMenuItem
-            // 
-            this.resetAllObjectsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.resetAllObjectsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.resetAllObjectsToolStripMenuItem.Name = "resetAllObjectsToolStripMenuItem";
-            this.resetAllObjectsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.resetAllObjectsToolStripMenuItem.Text = "Reset all objects";
-            this.resetAllObjectsToolStripMenuItem.Click += new System.EventHandler(this.resetAllObjectsToolStripMenuItem_Click);
-            // 
-            // resetCurrentTilesetToolStripMenuItem
-            // 
-            this.resetCurrentTilesetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.resetCurrentTilesetToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.resetCurrentTilesetToolStripMenuItem.Name = "resetCurrentTilesetToolStripMenuItem";
-            this.resetCurrentTilesetToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.resetCurrentTilesetToolStripMenuItem.Text = "Reset current tileset";
-            this.resetCurrentTilesetToolStripMenuItem.Click += new System.EventHandler(this.resetCurrentTilesetToolStripMenuItem_Click);
-            // 
-            // resetCurrentTilemapToolStripMenuItem
-            // 
-            this.resetCurrentTilemapToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.resetCurrentTilemapToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.resetCurrentTilemapToolStripMenuItem.Name = "resetCurrentTilemapToolStripMenuItem";
-            this.resetCurrentTilemapToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.resetCurrentTilemapToolStripMenuItem.Text = "Reset current tilemap";
-            this.resetCurrentTilemapToolStripMenuItem.Click += new System.EventHandler(this.resetCurrentTilemapToolStripMenuItem_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -208,7 +162,7 @@
             0,
             0,
             0});
-            this.startX.Location = new System.Drawing.Point(322, 4);
+            this.startX.Location = new System.Drawing.Point(295, 4);
             this.startX.Maximum = new decimal(new int[] {
             1023,
             0,
@@ -237,7 +191,7 @@
             0,
             0,
             0});
-            this.startY.Location = new System.Drawing.Point(382, 4);
+            this.startY.Location = new System.Drawing.Point(355, 4);
             this.startY.Maximum = new decimal(new int[] {
             1023,
             0,
@@ -302,7 +256,7 @@
             this.stagePalettesMenuItem.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.stagePalettesMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.stagePalettesMenuItem.Name = "stagePalettesMenuItem";
-            this.stagePalettesMenuItem.Size = new System.Drawing.Size(154, 24);
+            this.stagePalettesMenuItem.Size = new System.Drawing.Size(146, 24);
             this.stagePalettesMenuItem.Text = "Stage Palettes";
             this.stagePalettesMenuItem.Click += new System.EventHandler(this.stagePalettesMenuItem_Click);
             // 
@@ -311,7 +265,7 @@
             this.spritePalettesMenuItem.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.spritePalettesMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.spritePalettesMenuItem.Name = "spritePalettesMenuItem";
-            this.spritePalettesMenuItem.Size = new System.Drawing.Size(154, 24);
+            this.spritePalettesMenuItem.Size = new System.Drawing.Size(146, 24);
             this.spritePalettesMenuItem.Text = "Sprite Palettes";
             this.spritePalettesMenuItem.Click += new System.EventHandler(this.spritePalettesMenuItem_Click);
             // 
@@ -332,7 +286,7 @@
             this.stageGraphicsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.stageGraphicsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.stageGraphicsToolStripMenuItem.Name = "stageGraphicsToolStripMenuItem";
-            this.stageGraphicsToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
+            this.stageGraphicsToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.stageGraphicsToolStripMenuItem.Text = "Stage Graphics";
             this.stageGraphicsToolStripMenuItem.Click += new System.EventHandler(this.stageGraphicsToolStripMenuItem_Click);
             // 
@@ -341,7 +295,7 @@
             this.spriteGraphicsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.spriteGraphicsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.spriteGraphicsToolStripMenuItem.Name = "spriteGraphicsToolStripMenuItem";
-            this.spriteGraphicsToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
+            this.spriteGraphicsToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.spriteGraphicsToolStripMenuItem.Text = "Sprite Graphics";
             this.spriteGraphicsToolStripMenuItem.Click += new System.EventHandler(this.spriteGraphicsToolStripMenuItem_Click);
             // 
@@ -810,7 +764,7 @@
             this.moveScreenBack.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveScreenBack.Name = "moveScreenBack";
             this.moveScreenBack.Size = new System.Drawing.Size(23, 22);
-            this.moveScreenBack.Text = "Shift Back";
+            this.moveScreenBack.Text = "Move Screen Back";
             this.moveScreenBack.Click += new System.EventHandler(this.moveScreenBack_Click);
             // 
             // moveScreenFoward
@@ -821,7 +775,7 @@
             this.moveScreenFoward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveScreenFoward.Name = "moveScreenFoward";
             this.moveScreenFoward.Size = new System.Drawing.Size(23, 22);
-            this.moveScreenFoward.Text = "Shift Foward";
+            this.moveScreenFoward.Text = "Move Screen Forward";
             this.moveScreenFoward.Click += new System.EventHandler(this.moveScreenFoward_Click);
             // 
             // MineCart
@@ -906,10 +860,6 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem stageGraphicsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spriteGraphicsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
-        private System.Windows.Forms.ToolStripMenuItem resetAllObjectsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem resetCurrentTilesetToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem resetCurrentTilemapToolStripMenuItem;
         private System.Windows.Forms.Label railColorKey;
         private System.Windows.Forms.ToolStripButton previewButton;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;

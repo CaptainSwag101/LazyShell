@@ -1,6 +1,6 @@
 namespace LAZYSHELL
 {
-    partial class Form1
+    partial class Editor
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@ namespace LAZYSHELL
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -76,6 +75,7 @@ namespace LAZYSHELL
             this.showROMInfo = new System.Windows.Forms.ToolStripButton();
             this.hexViewer = new System.Windows.Forms.ToolStripButton();
             this.info = new System.Windows.Forms.ToolStripButton();
+            this.help = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.openAll = new System.Windows.Forms.ToolStripButton();
             this.closeAll = new System.Windows.Forms.ToolStripButton();
@@ -277,7 +277,7 @@ namespace LAZYSHELL
             // 
             // openAudio
             // 
-            this.openAudio.Image = global::LAZYSHELL.Properties.Resources.openAudio;
+            this.openAudio.Image = global::LAZYSHELL.Properties.Resources.mainAudio;
             this.openAudio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openAudio.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -522,7 +522,8 @@ namespace LAZYSHELL
             this.history,
             this.showROMInfo,
             this.hexViewer,
-            this.info});
+            this.info,
+            this.help});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -669,6 +670,17 @@ namespace LAZYSHELL
             this.info.ToolTipText = "About";
             this.info.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // help
+            // 
+            this.help.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.help.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.help.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.help.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.help.Name = "help";
+            this.help.Size = new System.Drawing.Size(23, 22);
+            this.help.Text = "Open Help Window";
+            this.help.Click += new System.EventHandler(this.help_Click);
+            // 
             // toolStrip3
             // 
             this.toolStrip3.Enabled = false;
@@ -783,7 +795,7 @@ namespace LAZYSHELL
             this.clearModel.Text = "Clear Editor Memory";
             this.clearModel.Click += new System.EventHandler(this.clearModel_Click);
             // 
-            // Form1
+            // Editor
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -797,7 +809,7 @@ namespace LAZYSHELL
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
-            this.Name = "Form1";
+            this.Name = "Editor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "LAZY SHELL - Super Mario RPG Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -878,6 +890,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton history;
         private System.Windows.Forms.ToolStripButton openMenus;
         private System.Windows.Forms.ToolStripButton openMiniGames;
+        private System.Windows.Forms.ToolStripButton help;
     }
 }
 
